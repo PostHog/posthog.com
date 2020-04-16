@@ -1,0 +1,36 @@
+[
+  {
+    "entry": "Docs",
+    "name": "Docs",
+    "child_entries": [
+      "Get Started",
+      "Guide"
+    ]
+  },
+  {
+    "entry": "Get Started",
+    "name": "Get Started",
+    "items": [
+      "docs/get-started/introduction",
+      "docs/get-started/quick-start"
+    ]
+  },
+  {
+    "entry": "Guide",
+    "name": "Guide",
+    "items": [
+      "docs/guide/anchor",
+      "docs/guide/contents",
+      "docs/guide/menu-items",
+      "docs/guide/sidebar"
+    ]
+  },
+  {
+    "entry": "Blog",
+    "name": "Blog",
+    "items": [
+      "blog/first-blog",
+      "blog/second-blog"
+    ]
+  }
+]
