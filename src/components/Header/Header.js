@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby';
 import Menu from '../Menu';
+import logo from "../../images/posthog-logo-no-text.png";
 import { getMenuState } from '../../store/selectors';
 import { connect } from 'react-redux';
 
@@ -8,7 +9,6 @@ class Header extends Component {
 
   render() {
     const { 
-      siteTitle,
       sidebarDocked,
       menuOpen,
       nMenuItem,
@@ -22,14 +22,13 @@ class Header extends Component {
           width: "100%",
           height: (menuOpen && !sidebarDocked) ? nMenuItem*32 + 50 : 55,
           marginBottom: 20,
-          background: 'cornflowerblue',
+          background: '#fff',
         }}
       >
         <div
           style={{
             margin: '0 auto',
-            maxWidth: 1360,
-            padding: '15px 18px',
+            padding: '15px 80px',
             whiteSpace: 'nowrap',
           }}
         >
@@ -37,17 +36,16 @@ class Header extends Component {
             float: 'left',
             marginBottom: '10px',
           }}>
-            <h1 style={{ margin: 0, fontSize: "1.25rem" }}>
-              <Link
+          <h1>
+            <Link id="logo"
                 to="/"
                 style={{
-                  color: 'white',
+                  //color: '#FFF',
                   textDecoration: 'none',
                 }}
-              >
-                {siteTitle}
-              </Link>
-            </h1>
+              ><img alt="logo" src={logo} id="logo-image" />PostHog
+            </Link>
+          </h1>
           </div>
           <Menu sidebarDocked={sidebarDocked}/>
         </div>

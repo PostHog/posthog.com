@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Markdown Starter',
+    title: 'PostHog',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -44,7 +44,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icon: 'src/images/posthog-logo-no-text.png', // This path is relative to the root of the site.
       },
     },
     {

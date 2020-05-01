@@ -32,5 +32,67 @@
       "blog/first-blog",
       "blog/second-blog"
     ]
+  },
+  {
+    "entry":"Company",
+    "name":"Company",
+    "items":[
+      "careers",
+      "features",
+      "pricing",
+      "terms"
+    ],
+    "child_entries":[
+      "Handbook"
+    ]
+  },
+  {
+    "entry":"Handbook",
+    "name":"Handbook",
+    "items":[
+      "handbook/using-the-handbook",
+      "handbook/communication",
+      "handbook/contact",
+      "handbook/culture",
+      "handbook/posthog-array",
+      "handbook/security",
+      "handbook/side-gigs",
+      "handbook/spending-money",
+      "handbook/story",
+      "handbook/team",
+      "handbook/time-off",
+      "handbook/values"
+    ],
+    "child_entries":[
+      "Engineering",
+      "Growth",
+      "Strategy"
+    ]
+  },
+  {
+    "entry":"Growth",
+    "name":"Growth",
+    "items":[
+      "handbook/what-is-product-led-growth"
+    ]
+  },
+  {
+    "entry":"Engineering",
+    "name":"Engineering",
+    "items":[
+      "handbook/development-process",
+      "handbook/how-to-qa",
+      "handbook/release-new-version"
+    ]
+  },
+  {
+    "entry":"Strategy",
+    "name":"Strategy",
+    "items":[
+      "handbook/strategy",
+      "handbook/business-model",
+      "handbook/investors",
+      "handbook/investor-updates"
+    ]
   }
 ]

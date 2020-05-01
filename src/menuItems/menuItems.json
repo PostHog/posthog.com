@@ -3,8 +3,28 @@
     "name": "Docs",
     "link":  "/docs/get-started/introduction"
   },
+  { 
+    "name": "Product",
+    "link":  "/product"
+  },
   {
-    "name": "Blog",
+    "name": "Resources",
     "link": "/blog"
+  },
+  {
+  	"name":"Install",
+  	"link":"/install"
+  },
+  { 
+    "name": "Free Trial",
+    "link":  "/free-trial"
+  },
+  { 
+    "name": "Support",
+    "link":  "/support"
+  },
+  { 
+    "name": "Login",
+    "link":  "https://app.posthog.com/login"
   }
 ]

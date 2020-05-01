@@ -6,7 +6,6 @@ import { onChangeMenuState } from '../../actions/layout'
 import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors';
 
-
 class Menu extends Component {
   onChangeMenuState = (nItem) => {
     this.props.onChangeMenuState(nItem)
@@ -47,7 +46,7 @@ class Menu extends Component {
                     <p style={{ margin:0, fontSize: "1rem" }}>
                       <Link
                         to={item.link}
-                        style={{ color: 'white', textDecoration: 'none' }}
+                        style={{ color: 'black', textDecoration: 'none' }}
                       >
                         {item.name}
                       </Link>

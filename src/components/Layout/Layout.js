@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import './Layout.css'
 import ResponsiveSidebar from '../ResponsiveSidebar';
 import Container from '../Container';
@@ -55,7 +56,7 @@ class Layout extends Component {
                 >
                   <html lang="en" />
                 </Helmet>
-                <AntdLayout>
+                <AntdLayout style={{ minHeight: '100vh', height: "100%", marginTop: 64, position: 'relative' }}>
                   <AntdLayout.Header
                     style={{
                       position: 'fixed',
@@ -74,7 +75,7 @@ class Layout extends Component {
                     </Row>
                   </AntdLayout.Header>
                   {(!matches && onPostPage) ?
-                    <AntdLayout>
+                    <AntdLayout >
                       {!sidebarHide && 
                         <AntdLayout.Sider>
                           <ResponsiveSidebar/>
@@ -82,12 +83,14 @@ class Layout extends Component {
                       }
                       <AntdLayout.Content
                         style={{
-                          position: "absolute",
+                          position: "relative",
                           left: "20%",
                           right: "15%",
+
+                        minHeight: '100vh'
                         }}
                       >
-                        <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                        <Container sidebarDocked={!matches} onPostPage={onPostPage} style={{position:'relative'}}>
                           {children}
                         </Container>
                       </AntdLayout.Content>
@@ -100,16 +103,18 @@ class Layout extends Component {
                     :
                     <AntdLayout.Content
                       style={{
-                        position: "absolute",
+                        position: "relative",
                         left: 0,
                         right: 0,
                       }}
                     >
-                      <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                      <Container sidebarDocked={!matches} onPostPage={onPostPage} style={{position:'relative'}}>
                         {children}
                       </Container>
+                      
                     </AntdLayout.Content>
-                  }
+                  }     
+                  <Footer/>         
                 </AntdLayout>
               </>)
             }

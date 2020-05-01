@@ -16,7 +16,7 @@ class Container extends Component {
     return (
         <div
           style={{
-            position: "absolute",
+            position: "relative",
             top: (!sidebarDocked && onPostPage) ? 
               (menuOpen ? nMenuItem*32 + 90 : 95): (menuOpen ? nMenuItem*32 + 75 : 80),
             left: 0,
@@ -27,7 +27,7 @@ class Container extends Component {
         >
           <div
             style={{
-              margin: '0 auto',
+              margin: (onPostPage) ? 0: '0 auto',
               maxWidth: 960,
               padding: '0px 1.0875rem 1.45rem',
               paddingTop: (!sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)) ? 20 : 0,

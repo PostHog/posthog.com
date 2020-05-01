@@ -622,3 +622,61 @@ pre tt:after {
     font-size: 100%;
   }
 } */
+
+
+/* CUSTOM */
+
+.gutter-box {
+  padding: 8px 0;
+  background: #00a0e9;
+}
+
+.medium-row{
+  height:400px;
+}
+
+.medium-row h2{
+  margin-top:100px;
+}
+
+#logo {
+  padding-left: 40px;
+  overflow: hidden;
+  color: rgba(0,0,0,.85);
+  font-size: 18px;
+  //font-family: Avenir,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji,sans-serif;
+  line-height: 64px;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-variant: tabular-nums;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+
+#logo img {
+    position: relative;
+    top: 10px;
+    height: 32px;
+    margin-right: 16px;
+    vertical-align:middle;
+}
+
+.large-header {
+  font-size:48px;
+  margin-top:100px;
+}
+
+.footer-links{
+  list-style-type: none;
+  margin-top:20px;
+  line-height:1em;
+  text-align:left;
+}
+
+.footer-links-header{
+  font-weight:bold;
+}
+
+.footer-message{
+  text-align: left;
+}
