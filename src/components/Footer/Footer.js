@@ -2,72 +2,85 @@ import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import { Row, Col } from 'antd'
 
-class Footer extends Component {
+const FooterListItem = props => (
+  <div className="footer-li">
+    {props.to ? (
+      <Row>
+        <Link to={props.to}>{props.children}</Link>
+      </Row>
+    ) : (
+      props.children
+    )}
+  </div>
+)
 
+class Footer extends Component {
   render() {
-    
     return (
       <div className="footer-universal">
         <Row gutter={[24, 8]}>
-        <Col span={6} className="gutter-row" align="middle">
-        </Col>
-        <Col span={16} className="gutter-row">
-
-          <Col span={4} className="gutter-row">
-          	<span className="footer-links-header">Why PostHog</span>
-      		<ul className="footer-links">
-      			<li><Link to="/product-features">Features</Link></li>
-      			<li><Link to="/pricing">Pricing</Link></li>
-      			<li>Services</li>
-      			<li>FAQ</li>
-      		</ul>
+          <Col span={6} className="gutter-row" align="middle"></Col>
+          <Col span={16} className="gutter-row">
+            <Col span={4} className="gutter-row">
+              <span className="footer-links-header">Why PostHog</span>
+              <FooterListItem to="/product-features">Features</FooterListItem>
+              <FooterListItem to="/pricing">Pricing</FooterListItem>
+              <FooterListItem>Services</FooterListItem>
+              <FooterListItem>FAQ</FooterListItem>
+            </Col>
+            <Col span={4} className="gutter-row">
+              <span className="footer-links-header">Resources</span>
+              <FooterListItem>Quick Start</FooterListItem>
+              <FooterListItem to="/docs">Docs</FooterListItem>
+              <FooterListItem to="/blog">Blog</FooterListItem>
+              <FooterListItem>Newsletter</FooterListItem>
+            </Col>
+            <Col span={4} className="gutter-row">
+              <span className="footer-links-header">Community</span>
+              <FooterListItem>
+                <a href="https://github.com/PostHog/posthog/graphs/contributors">
+                  Contributors
+                </a>
+              </FooterListItem>
+              <FooterListItem>
+                <a href="https://github.com/posthog/posthog">Source code</a>
+              </FooterListItem>
+              <FooterListItem>
+                <a href="https://github.com/posthog">Explore repositories</a>
+              </FooterListItem>
+              <FooterListItem to="/handbook/roadmap">Roadmap</FooterListItem>
+              <FooterListItem>
+                <a href="https://github.com/PostHog/posthog/blob/master/CONTRIBUTING.md">
+                  Contribute
+                </a>
+              </FooterListItem>
+              <FooterListItem>
+                <a href="https://github.com/PostHog/posthog/issues">Issues</a>
+              </FooterListItem>
+            </Col>
+            <Col span={4} className="gutter-row">
+              <span className="footer-links-header">Support</span>
+              <FooterListItem>Get help</FooterListItem>
+              <FooterListItem>Contact sales</FooterListItem>
+              <FooterListItem>Contact support</FooterListItem>
+              <FooterListItem>Status</FooterListItem>
+            </Col>
+            <Col span={4} className="gutter-row">
+              <span className="footer-links-header">Company</span>
+              <FooterListItem to="/handbook/story">About</FooterListItem>
+              <FooterListItem to="/handbook">Handbook</FooterListItem>
+              <FooterListItem to="/careers">Careers</FooterListItem>
+              <FooterListItem to="/handbook/investors">
+                Investors
+              </FooterListItem>
+              <FooterListItem>Media</FooterListItem>
+            </Col>
+            <Col span={4} className="gutter-row" align="middle"></Col>
           </Col>
-          <Col span={4} className="gutter-row">
-          	<span className="footer-links-header">Resources</span>
-      		<ul className="footer-links">
-      			<li>Quick start</li>
-      			<li><Link to="/docs">Docs</Link></li>
-      			<li><Link to="/blog">Blog</Link></li>
-      			<li>Newsletter</li>
-      		</ul>
-          </Col>
-          <Col span={4} className="gutter-row">
-          	<span className="footer-links-header">Community</span>
-      		<ul className="footer-links">
-      			<li><a href="https://github.com/PostHog/posthog/graphs/contributors">Contributors</a></li>
-      			<li><a href="https://github.com/posthog/posthog">Source code</a></li>
-      			<li><a href="https://github.com/posthog">Explore repositories</a></li>
-      			<li><Link to="/handbook/roadmap">Roadmap</Link></li>
-      			<li><a href="https://github.com/PostHog/posthog/blob/master/CONTRIBUTING.md">Contribute</a></li>
-      			<li><a href="https://github.com/PostHog/posthog/issues">Issues</a></li>
-      		</ul>
-          </Col>
-          <Col span={4} className="gutter-row">
-          	<span className="footer-links-header">Support</span>
-      		<ul className="footer-links">
-      			<li>Get help</li>
-      			<li>Contact sales</li>
-      			<li>Contact support</li>
-      			<li>Status</li>
-      		</ul>
-          </Col>
-          <Col span={4} className="gutter-row">
-          	<span className="footer-links-header">Company</span>
-      		<ul className="footer-links">
-      			<li><Link to="/handbook/story">About</Link></li>
-      			<li><Link to="/handbook">Handbook</Link></li>
-      			<li><Link to="/careers">Careers</Link></li>
-      			<li><Link to="/handbook/investors">Investors</Link></li>
-      			<li>Media</li>
-      		</ul>
-          </Col>
-        <Col span={4} className="gutter-row" align="middle">
-        </Col>
-        </Col>
-      </Row>
+        </Row>
       </div>
     )
   }
 }
 
-export default (Footer);
+export default Footer
