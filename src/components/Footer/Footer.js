@@ -16,8 +16,8 @@ class Footer extends Component {
           <Col span={4} className="gutter-row">
           	<span className="footer-links-header">Why PostHog</span>
       		<ul className="footer-links">
-      			<li><Link to="/handbook/features">Features</Link></li>
-      			<li><Link to="/handbook/pricing">Pricing</Link></li>
+      			<li><Link to="/product-features">Features</Link></li>
+      			<li><Link to="/pricing">Pricing</Link></li>
       			<li>Services</li>
       			<li>FAQ</li>
       		</ul>

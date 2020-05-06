@@ -706,6 +706,7 @@ pre tt:after {
 .hover-shadow{
   padding:10px;
   border-radius:4px;
+  transition: 0.15s ease-in-out all;
 }
 
 .hover-shadow:hover{
