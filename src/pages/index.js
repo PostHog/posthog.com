@@ -179,7 +179,7 @@ const IndexPage = () => {
           </Col>
           
           <Col span={24} align="middle">
-            <p>... or start a <Link to="https://app.posthog.com/signup">free trial</Link> with PostHog SaaS.</p>
+            <p>... or start a <a href="https://app.posthog.com/signup">free trial</a> with PostHog SaaS.</p>
           </Col>
       </Row>
       <Row gutter={[24, 8]}>

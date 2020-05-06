@@ -6,7 +6,7 @@ showTitle: true
 
 We are currently looking for beta customers for the Growth and Ultimate editions. Email sales@posthog.com to discuss an upgrade.
 
-|Category|Feature|Status|Notes|Free Edition|Growth Edition|Ultimate Edition|
+<!-- |Category|Feature|Status|Notes|Free Edition|Growth Edition|Ultimate Edition|
 |--- |--- |--- |--- |--- |--- |--- |
 |Product/website tracking|Retroactive JS event capture|✔||✔|✔|✔|
 ||Python client|✔||✔|✔|✔|
@@ -41,4 +41,4 @@ We are currently looking for beta customers for the Growth and Ultimate editions
 ||Email support|✔|||✔|✔|
 ||Private chat / Slack support|✔|||✔|✔|
 ||Slack community|✔||✔|✔|✔|
-||Phone support|✔||||✔|
+||Phone support|✔||||✔| -->
