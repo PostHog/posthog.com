@@ -1,3 +1,9 @@
+---
+title: Cohorts
+sidebar: Docs
+showTitle: true
+---
+
 Cohorts are PostHog's way of letting you easily create a list of users who have something in common.
 
 You can use the cohorts to:

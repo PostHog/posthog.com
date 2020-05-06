@@ -66,7 +66,7 @@ PostHog wish to build an exceptional company. We will focus on adoption as our c
 
 What we will build:
 
-* [Roadmap](https://docs.posthog.com/#/roadmap)
+* [Roadmap](/handbook/roadmap)
 
 Making money:
 

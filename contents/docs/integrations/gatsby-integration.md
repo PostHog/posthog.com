@@ -1,4 +1,8 @@
-# Gatsby
+---
+title: Gatsby Integration
+sidebar: Docs
+showTitle: true
+---
 
 ?> This is a community contributed plugin
 

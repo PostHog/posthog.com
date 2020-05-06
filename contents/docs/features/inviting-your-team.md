@@ -1,3 +1,9 @@
+---
+title: Inviting your team
+sidebar: Docs
+showTitle: true
+---
+
 It is very easy to invite members of your team so they can view Dashboards, create Actions and Trend Graphs.
 
 ## Inviting a new team member

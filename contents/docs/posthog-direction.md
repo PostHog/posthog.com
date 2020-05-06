@@ -1,3 +1,9 @@
+---
+title: PostHog Direction
+sidebar: Docs
+showTitle: true
+---
+
 ## Story
 
 James started as a developer, then used to run a multi-million dollar monthly online marketing budget. Tim ran R&D, has deep development experience, and used to work with James. Tim can build stuff fast.

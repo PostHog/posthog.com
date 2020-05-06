@@ -1,3 +1,9 @@
+---
+title: Sessions
+sidebar: Docs
+showTitle: true
+---
+
 Sessions help you understand product usage by uncovering the amount of time users spend on your app or website.
 
 This is useful as it gives you an engagement statistic of how long the average usage time of your app or website is along with the distribution of usage across certain time frames.

@@ -1,4 +1,8 @@
-# Python Integration
+---
+title: Python Integration
+sidebar: Docs
+showTitle: true
+---
 
 [Click here for the Posthog-Python library](https://github.com/posthog/posthog-python). This is an optional library you can install if you're working with Python. This page of the docs refers specifically to the Posthog-Python library.
 

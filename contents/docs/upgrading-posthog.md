@@ -1,4 +1,8 @@
-# Upgrading PostHog
+---
+title: Upgrading PostHog
+sidebar: Docs
+showTitle: true
+---
 
 We want to make sure upgrading PostHog is as smooth as possible. We use Django's standard migrations to make sure any database migrations are atomic, easy to roll back and generally safe to run.
 

@@ -1,4 +1,8 @@
-# Contributing to PostHog
+---
+title: Contributing to PostHog
+sidebar: Docs
+showTitle: true
+---
 
 We love contributions to PostHog, big or small.
 
@@ -10,7 +14,6 @@ Bug reports help us make PostHog better for everyone. When you create a big, the
 Please search within our issues before raising a new one to make sure you're not raising a duplicate.
 
 !> If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
-
 
 # Writing code 
 

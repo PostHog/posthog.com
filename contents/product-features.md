@@ -1,17 +1,12 @@
 ---
-title: Features
+title: Product Features
 sidebar: Company
 showTitle: true
 ---
 
-Click the below for a walk through of the product functionality:
-
-[![PostHog demo](_media/posthog-demo.png)](https://youtu.be/vGy9gzMAAes-Y?t=35s "PostHog Demo Video")
-
-There is a detailed table of the functionality on the [pricing](/pricing) page.
+Watch a [walk through video](https://youtu.be/vGy9gzMAAes-Y?t=35s) through of the product functionality:
 
 Below is a table of PostHog features and how this compares with the functionality in common alternatives.
-
 
 |  Feature 	|   PostHog	| Amplitude  	|  Mixpanel 	| Heap  	|
 |:-:	|:-:	|:-:	|:-:	|:-:	|
@@ -22,15 +17,15 @@ Below is a table of PostHog features and how this compares with the functionalit
 |   In-App Events Tracking	|   ✔	|   ✔	|   ✔	|   ✔	|
 |   Conversion Tracking	|   ✔	|   ✔	|   ✔	|   ✔	|
 |   Dashboard	|   ✔	|   ✔	|   ✔	|   ✔	|
-|   Data Visualisation	|  ✔\* 	|   ✔	|   ✔	|   	|
+|   Data Visualisation	|  ✔ 	|   ✔	|   ✔	|   	|
 |   Cohort Analysis	|   ✔\*	|   ✔	|   ✔	|   ✔	|
-|   Funnel Analysis	|   ✔\*	|   ✔	|   ✔	|   ✔	|
+|   Funnel Analysis	|   ✔	|   ✔	|   ✔	|   ✔	|
 |   Push Notifications	|   	|   ✔	|   ✔	|   ✔	|
 |   Retention Tracking	|   ✔	|   ✔	|   ✔	|   ✔	|
 |   User Engagement Tracking	|  ✔\* 	|   ✔	|   ✔	|   ✔	|
 |   Revenue Tracking	|   	|   ✔	|   ✔	|   ✔	|
-|   Data Import	|  ✔\* 	|   ✔	|   ✔	|   	|
-|   Data Export	|  ✔\* 	|   ✔	|   ✔	|   	|
+|   Data Import	|  ✔ 	|   ✔	|   ✔	|   	|
+|   Data Export	|  ✔ 	|   ✔	|   ✔	|   	|
 |   External Integrations	|   ✔\*	|   ✔	|   ✔	|   ✔	|
 |   Keyword (UTM) Tracking	|   ✔	|   ✔	|   ✔	|   ✔	|
 |   Email Link Tracking	|   	|   	|   ✔	|   	|

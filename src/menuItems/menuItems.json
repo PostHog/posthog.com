@@ -1,11 +1,11 @@
 [
   { 
     "name": "Docs",
-    "link":  "/docs/get-started/introduction"
+    "link":  "/docs"
   },
   { 
     "name": "Product",
-    "link":  "/product"
+    "link":  "/product-features"
   },
   {
     "name": "Resources",

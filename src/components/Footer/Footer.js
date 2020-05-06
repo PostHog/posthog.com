@@ -7,18 +7,7 @@ class Footer extends Component {
   render() {
     
     return (
-      <div
-        style={{
-          background: 'black',
-          color:'white',
-          position: 'relative',
-          left: 0,
-          width: '100%',
-          top: '100%',
-          paddingTop: 20,
-          paddingBottom: 80,
-        }}
-      >
+      <div className="footer-universal">
         <Row gutter={[24, 8]}>
         <Col span={6} className="gutter-row" align="middle">
         </Col>
@@ -27,9 +16,8 @@ class Footer extends Component {
           <Col span={4} className="gutter-row">
           	<span className="footer-links-header">Why PostHog</span>
       		<ul className="footer-links">
-      			<li>Product</li>
-      			<li>Features</li>
-      			<li>Pricing</li>
+      			<li><Link to="/handbook/features">Features</Link></li>
+      			<li><Link to="/handbook/pricing">Pricing</Link></li>
       			<li>Services</li>
       			<li>FAQ</li>
       		</ul>
@@ -49,7 +37,7 @@ class Footer extends Component {
       			<li><a href="https://github.com/PostHog/posthog/graphs/contributors">Contributors</a></li>
       			<li><a href="https://github.com/posthog/posthog">Source code</a></li>
       			<li><a href="https://github.com/posthog">Explore repositories</a></li>
-      			<li>Roadmap</li>
+      			<li><Link to="/handbook/roadmap">Roadmap</Link></li>
       			<li><a href="https://github.com/PostHog/posthog/blob/master/CONTRIBUTING.md">Contribute</a></li>
       			<li><a href="https://github.com/PostHog/posthog/issues">Issues</a></li>
       		</ul>

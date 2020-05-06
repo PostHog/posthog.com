@@ -1,4 +1,8 @@
-# JS integration
+---
+title: JS Integration
+sidebar: Docs
+showTitle: true
+---
 
 NB. You can just use a [snippet](/Snippet-installation) to start capturing events with our JS.
 

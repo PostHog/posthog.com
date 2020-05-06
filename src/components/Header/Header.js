@@ -22,7 +22,7 @@ class Header extends Component {
           width: "100%",
           height: (menuOpen && !sidebarDocked) ? nMenuItem*32 + 50 : 55,
           marginBottom: 20,
-          background: '#fff',
+          background: '#fff'
         }}
       >
         <div
@@ -35,6 +35,8 @@ class Header extends Component {
           <div style={{
             float: 'left',
             marginBottom: '10px',
+            position: 'relative',
+            top: -18
           }}>
           <h1>
             <Link id="logo"

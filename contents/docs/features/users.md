@@ -1,3 +1,9 @@
+---
+title: Users
+sidebar: Docs
+showTitle: true
+---
+
 PostHog tracks user behaviour, whether or not the User is logged in and identifiable.
 
 A short video on Users can be found here: https://youtu.be/8_SsZW1v56Q

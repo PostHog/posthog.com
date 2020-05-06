@@ -1,4 +1,8 @@
-# PostHog Ruby Integration
+---
+title: Ruby Integration
+sidebar: Docs
+showTitle: true
+---
 
 This is an optional library you can install if you're working with Ruby. This page of the docs refers specifically to the Posthog-Ruby library.
 

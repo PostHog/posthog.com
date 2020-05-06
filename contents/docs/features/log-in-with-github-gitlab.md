@@ -1,4 +1,8 @@
-# Log in with GitHub/GitLab
+---
+title: Login with GitHub or GitLab
+sidebar: Docs
+showTitle: true
+---
 
 If you want to make it really easy for your users to log in, you can add one-click login with GitHub or GitLab.
 
@@ -6,7 +10,7 @@ If you want to make it really easy for your users to log in, you can add one-cli
 
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
 
-?> If you want to have this application as part of an organisation, you'll need to go to your organisation's settings -> OAuth apps -> New OAuth App.
+?> If you want to have this application as part of an organisation, you'll need to go to your organization's settings -> OAuth apps -> New OAuth App.
 
 2. Register your application
     - `Homepage URL` needs to be the url of your PostHog instance

@@ -1,3 +1,9 @@
+---
+title: Funnels
+sidebar: Docs
+showTitle: true
+---
+
 If you need your users to carry out a series of actions in a row, funnels are a way of working out where users are dropping off.
 
 There are many valuable use cases for this data:

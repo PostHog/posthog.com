@@ -1,3 +1,9 @@
+---
+title: Features
+sidebar: Docs
+showTitle: true
+---
+
 NB email sales@posthog.com if you wish to be upgraded.
 
 You can watch a short demo video showcasing our current feature set here: https://youtu.be/vGy9gzMAAes

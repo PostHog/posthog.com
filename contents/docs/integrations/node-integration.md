@@ -1,4 +1,8 @@
-# PostHog NodeJS
+---
+title: NodeJS Integration
+sidebar: Docs
+showTitle: true
+---
 
 Official PostHog NodeJS library to capture and send events to any PostHog instance (including posthog.com).
 

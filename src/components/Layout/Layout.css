@@ -635,8 +635,13 @@ pre tt:after {
   height:400px;
 }
 
+.header-row{
+  margin-top:96px;
+  margin-bottom:48px;
+}
+
 .medium-row h2{
-  margin-top:100px;
+  margin-top:96;
 }
 
 #logo {
@@ -666,6 +671,18 @@ pre tt:after {
   margin-top:100px;
 }
 
+.footer-universal{
+  background: #000;
+  color: #FFF;
+  position: 'relative';
+  left: 0px;
+  width: '100%';
+  top: '100%';
+  margin-top:100px;
+  padding-top: 20px;
+  padding-bottom: 80px;
+}
+
 .footer-links{
   list-style-type: none;
   margin-top:20px;
@@ -679,4 +696,9 @@ pre tt:after {
 
 .footer-message{
   text-align: left;
+}
+
+.shadow{
+  -webkit-box-shadow: 0 8px 20px rgba(143,168,191,.35);
+  box-shadow: 0 8px 20px rgba(143,168,191,.35);
 }

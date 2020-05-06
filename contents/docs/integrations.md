@@ -1,4 +1,8 @@
-# Integrations
+---
+title: Integrations
+sidebar: Docs
+showTitle: true
+---
 
 PostHog provides a bunch of libraries to send events from your app to your PostHog instance.
 

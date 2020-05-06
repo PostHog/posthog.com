@@ -1,4 +1,8 @@
-# PostHog Android integration
+---
+title: Android Integration
+sidebar: Docs
+showTitle: true
+---
 
 [Click here](https://github.com/PostHog/posthog-android) for the PostHog Android library. This is the official PostHog Android library 
 to capture and send events to any PostHog instance (including posthog.com).

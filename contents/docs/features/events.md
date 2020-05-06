@@ -1,3 +1,9 @@
+---
+title: Events
+sidebar: Docs
+showTitle: true
+---
+
 The most critical thing that PostHog does is to capture Events from your website or application. For example, if a user clicks a button, or visits a URL – those are Events.
 
 ## Live events

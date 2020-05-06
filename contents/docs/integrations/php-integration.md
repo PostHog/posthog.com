@@ -1,4 +1,8 @@
-# PostHog PHP integration
+---
+title: PHP Integration
+sidebar: Docs
+showTitle: true
+---
 
 [Click here](https://github.com/PostHog/posthog-php) for the Posthog-PHP library. This is the official PostHog PHP library to capture and send events to any PostHog instance (including posthog.com).
 

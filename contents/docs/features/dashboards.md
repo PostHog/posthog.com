@@ -1,3 +1,9 @@
+---
+title: Dashboards
+sidebar: Docs
+showTitle: true
+---
+
 You can create dashboard panels to display information you are collecting with PostHog. It will be the first thing you see when you log on to allow you to easily access the most important performance metrics in your product.
 
 Dashboard panels can be created in two ways:

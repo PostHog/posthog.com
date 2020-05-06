@@ -1,4 +1,8 @@
-# PostHog Documentation
+---
+title: PostHog Documentation
+sidebar: Docs
+showTitle: true
+---
 
 These docs explain how to use PostHog.
 
@@ -20,7 +24,7 @@ Note: If you want us to host it for you, or if you are a larger customer / would
 
 There are four steps to follow next:
 
-1. [Deployment](/deployment)
-2. [Snippet installation](/snippet-installation)
-3. [Actions configuration](/features/actions)
-4. [Optional: user data integration](/integrations)
+1. [Deployment](/docs/deployment)
+2. [Snippet installation](/docs/snippet-installation)
+3. [Actions configuration](/docs/features/actions)
+4. [Optional: user data integration](/docs/integrations)

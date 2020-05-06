@@ -1,4 +1,8 @@
-# PostHog Go integration
+---
+title: Go Integration
+sidebar: Docs
+showTitle: true
+---
 
 [Click here](https://github.com/PostHog/posthog-go) for the Posthog-Go library. This is the official PostHog Go library to capture and send events to any PostHog instance (including posthog.com).
 

@@ -1,3 +1,9 @@
+---
+title: Trends
+sidebar: Docs
+showTitle: true
+---
+
 Trends are a very powerful way to visualize how actions or events are varying over time.
 
 These are useful for monitoring which parts of your products are being used repeatedly, how usage is changing as well as the engagement levels of your users.

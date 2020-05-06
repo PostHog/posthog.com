@@ -1,3 +1,9 @@
+---
+title: Data model
+sidebar: Docs
+showTitle: true
+---
+
 
 ## Event (posthog_event)
 | Property | Type | Description |

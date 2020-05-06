@@ -1,3 +1,9 @@
+---
+title: User behavior
+sidebar: Docs
+showTitle: true
+---
+
 Tracking how users interact with your application is really important. It means you can understand:
 
 * The kinds of users that like your product

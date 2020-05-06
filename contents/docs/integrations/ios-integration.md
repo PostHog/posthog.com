@@ -1,4 +1,8 @@
-# PostHog iOS integration
+---
+title: iOS Integration
+sidebar: Docs
+showTitle: true
+---
 
 [Click here](https://github.com/PostHog/posthog-ios) for the Posthog-iOS library. This is the official PostHog iOS library 
 to capture and send events to any PostHog instance (including posthog.com).

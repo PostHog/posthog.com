@@ -1,3 +1,9 @@
+---
+title: Product direction
+sidebar: Docs
+showTitle: true
+---
+
 ## Features
 
 To see what we’re working on, and what the software does, visit the feature list.

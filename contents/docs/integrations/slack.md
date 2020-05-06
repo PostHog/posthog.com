@@ -1,4 +1,8 @@
-# Slack Integration
+---
+title: Slack Integration
+sidebar: Docs
+showTitle: true
+---
 
 1. Go to https://api.slack.com/apps?new_app=1 and create a new app. Call it "PostHog" and connect it to the workspace of your choice.
 Feel free to use [this image](https://user-images.githubusercontent.com/53387/78905411-3ad92a00-7a7e-11ea-82e2-ba53e44ec4e3.png) as the app's logo.

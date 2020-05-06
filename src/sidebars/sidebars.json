@@ -2,9 +2,83 @@
   {
     "entry": "Docs",
     "name": "Docs",
-    "child_entries": [
-      "Get Started",
-      "Guide"
+    "child_entries":[
+      "Deployment",
+      "Integrations",
+      "Features",
+      "Contributing",
+      "Architecture"
+    ]
+  },
+  {
+    "entry":"Contributing",
+    "name":"Contributing",
+    "items": [
+      "docs/contributing",
+      "docs/developing-locally"
+    ]
+  },
+  {
+    "entry":"Deployment",
+    "name":"Deployment",
+    "items": [
+      "docs/deployment",
+      "docs/scaling-posthog",
+      "docs/upgrading-posthog",
+      "docs/scaling-posthog",
+      "docs/snippet-installation"
+    ]
+  },
+  {
+    "entry":"Architecture",
+    "name":"Architecture",
+    "items": [
+      "docs/data-model"
+    ]
+  },
+  {
+    "entry":"Features",
+    "name":"Features",
+    "items":[
+      "docs/features/actions",
+      "docs/features/cohorts",
+      "docs/features/dashboards",
+      "docs/features/events",
+      "docs/features/funnels",
+      "docs/features/inviting-your-team",
+      "docs/features/live-actions",
+      "docs/features/log-in-with-github-gitlab",
+      "docs/features/paths",
+      "docs/features/sessions",
+      "docs/features/trends",
+      "docs/features/users"
+    ]
+  },
+  {
+    "entry":"Integrations",
+    "name":"Integrations",
+    "items": [
+      "docs/integrations",
+      "docs/integrations/android-integration",
+      "docs/integrations/api",
+      "docs/integrations/go-integration",
+      "docs/integrations/ios-integration",
+      "docs/integrations/js-integration",
+      "docs/integrations/node-integration",
+      "docs/integrations/php-integration",
+      "docs/integrations/python-integration",
+      "docs/integrations/ruby-integration"
+    ],
+    "child_entries":[
+      "Community"
+    ]
+  },
+  {
+    "entry":"Community",
+    "name":"Community",
+    "items":[
+      "docs/integrations/community",
+      "docs/integrations/gatsby-integration"
     ]
   },
   {
@@ -38,7 +112,7 @@
     "name":"Company",
     "items":[
       "careers",
-      "features",
+      "product-features",
       "pricing",
       "terms"
     ],
@@ -92,7 +166,8 @@
       "handbook/strategy",
       "handbook/business-model",
       "handbook/investors",
-      "handbook/investor-updates"
+      "handbook/investor-updates",
+      "handbook/roadmap"
     ]
   }
 ]

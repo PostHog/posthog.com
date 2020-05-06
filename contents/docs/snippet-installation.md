@@ -1,3 +1,9 @@
+---
+title: Snippet installation
+sidebar: Docs
+showTitle: true
+---
+
 The easiest way to get going is to add a JavaScript snippet to your application.
 
 ## Finding the snippet

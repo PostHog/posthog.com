@@ -1,3 +1,9 @@
+---
+title: Paths
+sidebar: Docs
+showTitle: true
+---
+
 Paths are PostHog's way of letting you, inspect free form how traffic is flowing through your application. A path can be comprised of any action (such as pageviews, or button clicks, or a combination of both).
 
 The kind of ways Paths can be helpful are as follows:

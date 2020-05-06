@@ -1,4 +1,8 @@
-# PostHog Roadmap
+---
+title: Roadmap
+sidebar: Company
+showTitle: true
+---
 
 ## Themes
 

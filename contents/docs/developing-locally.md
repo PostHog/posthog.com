@@ -1,3 +1,9 @@
+---
+title: Developing locally
+sidebar: Docs
+showTitle: true
+---
+
 # Developing locally
 
 ## Using Docker

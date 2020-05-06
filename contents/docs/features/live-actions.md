@@ -1,3 +1,9 @@
+---
+title: Live actions
+sidebar: Docs
+showTitle: true
+---
+
 PostHog provides a simple list of all the Actions that are taking place in real time.
 
 Get a sense in real time of how your Users are interacting with your site.

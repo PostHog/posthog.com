@@ -1,4 +1,8 @@
-# Scaling PostHog
+---
+title: Scaling PostHog
+sidebar: Docs
+showTitle: true
+---
 
 PostHog is pretty good at handling large volumes of data, and for most products or websites, you'll never have to worry about scaling. We've seen volumes of **1 million events/day** on Heroku's cheapest standard tier Dyno with no problems.
 
