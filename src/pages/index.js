@@ -87,38 +87,58 @@ const IndexPage = () => {
           <Row gutter={[24,24]} className="gutter-row">
             <Col span={2} className="gutter-row"></Col>
             <Col span={4} className="gutter-row">
-              <img alt="Python" src={stackPython} />
+              <Link to="/docs/integrations/python-integration">
+                <img alt="Python" className="hover-shadow" src={stackPython} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="Android" src={stackAndroid} />
+              <Link to="/docs/integrations/android-integration">
+                <img alt="Android" className="hover-shadow" src={stackAndroid} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="iOS" src={stackIos} />
+              <Link to="/docs/integrations/ios-integration">
+                <img alt="iOS" className="hover-shadow" src={stackIos} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="Node" src={stackNode} />
+              <Link to="/docs/integrations/node-integration">
+                <img alt="Node" className="hover-shadow" src={stackNode} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="PHP" src={stackPhp} />
+              <Link to="/docs/integrations/php-integration">
+                <img alt="PHP" className="hover-shadow" src={stackPhp} />
+              </Link>
             </Col>
             <Col span={2} className="gutter-row"></Col>
           </Row>
           <Row gutter={[24,24]} className="gutter-row">
             <Col span={2} className="gutter-row"></Col>
             <Col span={4} className="gutter-row">
-              <img alt="Ruby" src={stackRuby} />
+              <Link to="/docs/integrations/ruby-integration">
+                <img alt="Ruby" className="hover-shadow" src={stackRuby} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="Gatsby" src={stackGatsby} />
+              <Link to="/docs/integrations/gatsby-integration">
+                <img alt="Gatsby" className="hover-shadow" src={stackGatsby} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="Javascript" src={stackJavascript} />
+              <Link to="/docs/integrations/js-integration">
+                <img alt="Javascript" className="hover-shadow" src={stackJavascript} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="Go" src={stackGo} />
+              <Link to="/docs/integrations/go-integration">
+                <img alt="Go" className="hover-shadow" src={stackGo} />
+              </Link>
             </Col>
             <Col span={4} className="gutter-row">
-              <img alt="API" src={stackApi} />
+              <Link to="/docs/integrations/api">
+                <img alt="API" className="hover-shadow" src={stackApi} />
+              </Link>
             </Col>
             <Col span={2} className="gutter-row"></Col>
           </Row>
@@ -146,16 +166,16 @@ const IndexPage = () => {
             <h2>Install now, free</h2>
           </Col>
           <Col span={6} align="middle">
-            <img alt="Deploy on Heroku" src={installHeroku} />
+            <img alt="Deploy on Heroku" className="hover-shadow" src={installHeroku} />
           </Col>
           <Col span={6} align="middle">
-            <img alt="Deploy on Docker" src={installDocker} />
+            <img alt="Deploy on Docker" className="hover-shadow" src={installDocker} />
           </Col>
           <Col span={6} align="middle">
-            <img alt="Deploy on AWS" src={installAws} />
+            <img alt="Deploy on AWS" className="hover-shadow" src={installAws} />
           </Col>
           <Col span={6} align="middle">
-            <img alt="Deploy on Kubernetes" src={installKubernetes} />
+            <img alt="Deploy on Kubernetes" className="hover-shadow" src={installKubernetes} />
           </Col>
           
           <Col span={24} align="middle">
@@ -167,16 +187,16 @@ const IndexPage = () => {
           <h2>Join the community</h2>
         </Col>
       </Row>
-      <Row gutter={[24, 8]}>
-        <Col span={8} className="gutter-row" align="middle">
+      <Row span={21} gutter={[24, 8]}>
+        <Col span={8} className="gutter-row hover-shadow" align="middle">
           <img alt="GitHub" src={communityGithub} />
           <h3>GitHub</h3>
         </Col>
-        <Col span={8} className="gutter-row" align="middle">
+        <Col span={8} className="gutter-row hover-shadow" align="middle">
           <img alt="Slack" src={communitySlack} />
           <h3>Slack</h3>
         </Col>
-        <Col span={8} className="gutter-row" align="middle">
+        <Col span={8} className="gutter-row hover-shadow" align="middle">
           <img alt="Roadmap" src={communityRoadmap} />
           <h3>Roadmap</h3>
         </Col>
