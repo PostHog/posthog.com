@@ -1,45 +1,18 @@
+# PostHog.com
+
+This is the new company website / docs and handbook.
+
 # Gatsby Markdown Starter
 
-Boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [gatsby-default-starter](https://github.com/gatsbyjs/gatsby-starter-default).
+This is based on [gatsby-markdown-starter], itself a boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [gatsby-default-starter](https://github.com/gatsbyjs/gatsby-starter-default).
 
-[live demo](https://cvluca.github.io/gatsby-starter-markdown)
-
-## Features
-* Responsive Web Design
-* Sidebar
-* Anchor
-
-## TODO
-* Footer
-* Search Funtionality
-* More examples
-
-## Plugins
-* gatsby-image
-* gatsby-plugin-manifest
-* gatsby-plugin-offline
-* gatsby-plugin-react-helmet
-* gatsby-plugin-sharp
-* gatsby-remark-images
-* gatsby-remark-autolink-headers
-* gatsby-remark-katex
-* gatsby-source-filesystem
-* gatsby-transformer-json
-* gatsby-transformer-remark
-* gatsby-transformer-sharp
+See a [live demo](https://cvluca.github.io/gatsby-starter-markdown)
 
 ## Quick Start
 
-1.  **Create a Gatsby site.**
-
-    Use the Gatsby CLI to create a new site, specifying the default starter.
-
-    ```sh
-    gatsby new gatsby-starter-markdown https://github.com/cvluca/gatsby-starter-markdown
-    ```
 1.  **Start developing.**
 
-    Navigate into your new site’s directory and start it up.
+    Clone the repo then navigate into your new site’s directory and start it up.
 
     ```sh
     cd gatsby-starter-markdown/
