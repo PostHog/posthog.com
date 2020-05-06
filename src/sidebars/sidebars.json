@@ -23,7 +23,6 @@
     "name":"Deployment",
     "items": [
       "docs/deployment",
-      "docs/scaling-posthog",
       "docs/upgrading-posthog",
       "docs/scaling-posthog",
       "docs/snippet-installation"
