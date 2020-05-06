@@ -103,8 +103,19 @@
     "entry": "Blog",
     "name": "Blog",
     "items": [
-      "blog/first-blog",
-      "blog/second-blog"
+      "blog/the-posthog-array-1-3-0",
+      "blog/the-posthog-array-1-2-0",
+      "blog/the-posthog-array-1-1-0",
+      "blog/the-posthog-array-1-0-11",
+      "blog/the-posthog-array-1-0-10",
+      "blog/the-posthog-array-1-0-9",
+      "blog/the-posthog-array-1-0-8",
+      "blog/the-posthog-array-1",
+      "blog/after-the-hn-launch",
+      "blog/pivot-to-posthog",
+      "blog/moving-to-sf",
+      "blog/the-yc-interview",
+      "blog/before-yc"
     ]
   },
   {
