@@ -6,7 +6,7 @@ class ResponsiveAnchor extends Component {
     return (
       <div style={{
         position: "fixed",
-        top: 80,
+        top: 160,
         left: "85%",
         right: 10,
         bottom: 0,
