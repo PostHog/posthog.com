@@ -1,6 +1,6 @@
 ---
 title: Newsletter
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 
