@@ -19,6 +19,7 @@ class Footer extends Component {
     return (
       <div className="footer-universal">
         <Row gutter={[24, 8]}>
+
           <Col span={6} className="gutter-row" align="middle"></Col>
           <Col span={16} className="gutter-row">
             <Col span={4} className="gutter-row">
@@ -26,7 +27,7 @@ class Footer extends Component {
               <FooterListItem to="/product-features">Features</FooterListItem>
               <FooterListItem to="/pricing">Pricing</FooterListItem>
               <FooterListItem>Services</FooterListItem>
-              <FooterListItem>FAQ</FooterListItem>
+              <FooterListItem to="/faq">FAQ</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Resources</span>
