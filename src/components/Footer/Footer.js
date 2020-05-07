@@ -34,7 +34,7 @@ class Footer extends Component {
               <FooterListItem>Quick Start</FooterListItem>
               <FooterListItem to="/docs">Docs</FooterListItem>
               <FooterListItem to="/blog">Blog</FooterListItem>
-              <FooterListItem>Newsletter</FooterListItem>
+              <FooterListItem to="/newsletter">Newsletter</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Community</span>
