@@ -19,7 +19,7 @@ class Footer extends Component {
       			<li><Link to="/product-features">Features</Link></li>
       			<li><Link to="/pricing">Pricing</Link></li>
       			<li>Services</li>
-      			<li>FAQ</li>
+      			<li><Link to="/faq">FAQ</Link></li>
       		</ul>
           </Col>
           <Col span={4} className="gutter-row">
