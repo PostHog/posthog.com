@@ -1,6 +1,6 @@
 ---
 title: Careers
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 ## First ever engineer (Remote)

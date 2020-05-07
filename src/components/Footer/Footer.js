@@ -74,6 +74,7 @@ class Footer extends Component {
                 Investors
               </FooterListItem>
               <FooterListItem>Media</FooterListItem>
+              <FooterListItem to="/terms">Terms</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row" align="middle"></Col>
           </Col>

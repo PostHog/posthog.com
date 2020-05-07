@@ -1,6 +1,6 @@
 ---
 title: Services
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 

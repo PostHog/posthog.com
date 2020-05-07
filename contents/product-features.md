@@ -1,6 +1,6 @@
 ---
 title: Product Features
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 

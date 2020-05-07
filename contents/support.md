@@ -1,6 +1,6 @@
 ---
 title: Support
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 

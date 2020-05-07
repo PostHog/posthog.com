@@ -1,6 +1,6 @@
 ---
 title: Status
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 
