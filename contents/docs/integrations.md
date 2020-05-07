@@ -10,18 +10,18 @@ We have [event autocapture](/docs/features/events#autocapture-event-tracking) fo
 
 ## Receiving user/event data into PostHog
 
-* [JS](/integrations/js-integration)
-* [Node](/integrations/node-integration)
-* [Python](/integrations/python-integration)
-* [Ruby](/integrations/ruby-integration)
-* [PHP](/integrations/php-integration)
-* [Go](/integrations/go-integration)
-* [iOS](/integrations/ios-integration)
-* [Android](/integrations/android-integration)
-* [API](/integrations/api)
-* [Community](/integrations/community)
-    * [Gatsby](/integrations/gatsby)
+* [JS](/docs/integrations/js-integration)
+* [Node](/docs/integrations/node-integration)
+* [Python](/docs/integrations/python-integration)
+* [Ruby](/docs/integrations/ruby-integration)
+* [PHP](/docs/integrations/php-integration)
+* [Go](/docs/integrations/go-integration)
+* [iOS](/docs/integrations/ios-integration)
+* [Android](/docs/integrations/android-integration)
+* [API](/docs/integrations/api)
+* [Community](/docs/integrations/community)
+    * [Gatsby](/docs/integrations/gatsby)
 
 ## Sending data to other systems
 
-* [Slack](/integrations/slack)
+* [Slack](/docs/integrations/slack)
