@@ -679,8 +679,9 @@ pre tt:after {
   width: '100%';
   top: '100%';
   margin-top:100px;
-  padding-top: 20px;
+  padding-top: 40px;
   padding-bottom: 80px;
+  height: 50vh;
 }
 
 .footer-links{
@@ -692,10 +693,17 @@ pre tt:after {
 
 .footer-links-header{
   font-weight:bold;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .footer-message{
   text-align: left;
+}
+
+.footer-li {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .shadow{
