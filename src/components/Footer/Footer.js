@@ -31,7 +31,7 @@ class Footer extends Component {
             </Col>
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Resources</span>
-              <FooterListItem>Quick Start</FooterListItem>
+              <FooterListItem to="/docs/deployment">Quick Start</FooterListItem>
               <FooterListItem to="/docs">Docs</FooterListItem>
               <FooterListItem to="/blog">Blog</FooterListItem>
               <FooterListItem to="/newsletter">Newsletter</FooterListItem>
