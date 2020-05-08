@@ -1,6 +1,6 @@
 ---
 title: FAQ
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 

@@ -26,15 +26,15 @@ class Footer extends Component {
               <span className="footer-links-header">Why PostHog</span>
               <FooterListItem to="/product-features">Features</FooterListItem>
               <FooterListItem to="/pricing">Pricing</FooterListItem>
-              <FooterListItem>Services</FooterListItem>
+              <FooterListItem to="/services">Services</FooterListItem>
               <FooterListItem to="/faq">FAQ</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Resources</span>
-              <FooterListItem>Quick Start</FooterListItem>
+              <FooterListItem to="/docs/deployment">Quick Start</FooterListItem>
               <FooterListItem to="/docs">Docs</FooterListItem>
               <FooterListItem to="/blog">Blog</FooterListItem>
-              <FooterListItem>Newsletter</FooterListItem>
+              <FooterListItem to="/newsletter">Newsletter</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Community</span>
@@ -61,20 +61,18 @@ class Footer extends Component {
             </Col>
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Support</span>
-              <FooterListItem>Get help</FooterListItem>
-              <FooterListItem>Contact sales</FooterListItem>
-              <FooterListItem>Contact support</FooterListItem>
-              <FooterListItem>Status</FooterListItem>
+              <FooterListItem to="/support">Contact support</FooterListItem>
+              <FooterListItem><a href="mailto:sales@posthog.com">Contact sales</a></FooterListItem>
+              <FooterListItem to="/status">Status</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Company</span>
               <FooterListItem to="/handbook/story">About</FooterListItem>
               <FooterListItem to="/handbook">Handbook</FooterListItem>
               <FooterListItem to="/careers">Careers</FooterListItem>
-              <FooterListItem to="/handbook/investors">
-                Investors
-              </FooterListItem>
+              <FooterListItem to="/handbook/investors">Investors</FooterListItem>
               <FooterListItem>Media</FooterListItem>
+              <FooterListItem to="/terms">Terms</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row" align="middle"></Col>
           </Col>
