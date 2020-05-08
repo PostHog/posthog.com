@@ -26,6 +26,7 @@ class Menu extends Component {
                 node {
                   name
                   link
+                  a
                 }
               }
             }
@@ -44,12 +45,20 @@ class Menu extends Component {
                     key={menuItems.indexOf(item)}
                   >
                     <p style={{ margin:0, fontSize: "1rem" }}>
+                    {item.a? <a
+                        href={item.a}
+                        style={{ color: 'black', textDecoration: 'none' }}
+                      >
+                        {item.name}
+                        </a>
+                    :
                       <Link
                         to={item.link}
                         style={{ color: 'black', textDecoration: 'none' }}
                       >
                         {item.name}
-                      </Link>
+                        </Link>
+                    }                      
                     </p>
                   </div>
                 )

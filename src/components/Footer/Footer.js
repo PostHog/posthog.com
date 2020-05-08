@@ -62,7 +62,7 @@ class Footer extends Component {
             <Col span={4} className="gutter-row">
               <span className="footer-links-header">Support</span>
               <FooterListItem to="/support">Contact support</FooterListItem>
-              <FooterListItem>Contact sales</FooterListItem>
+              <FooterListItem><a href="mailto:sales@posthog.com">Contact sales</a></FooterListItem>
               <FooterListItem to="/status">Status</FooterListItem>
             </Col>
             <Col span={4} className="gutter-row">
@@ -70,9 +70,7 @@ class Footer extends Component {
               <FooterListItem to="/handbook/story">About</FooterListItem>
               <FooterListItem to="/handbook">Handbook</FooterListItem>
               <FooterListItem to="/careers">Careers</FooterListItem>
-              <FooterListItem to="/handbook/investors">
-                Investors
-              </FooterListItem>
+              <FooterListItem to="/handbook/investors">Investors</FooterListItem>
               <FooterListItem>Media</FooterListItem>
               <FooterListItem to="/terms">Terms</FooterListItem>
             </Col>

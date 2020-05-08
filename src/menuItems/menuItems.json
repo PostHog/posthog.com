@@ -25,6 +25,6 @@
   },
   { 
     "name": "Login",
-    "link":  "https://app.posthog.com/login"
+    "a":  "https://app.posthog.com/login"
   }
 ]
