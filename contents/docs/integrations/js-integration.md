@@ -67,7 +67,7 @@ We recommend putting PostHog both on your homepage and your application if appli
 
 This allows you to send more context than the basic event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may have.
 
-```js
+```javascript
 posthog.capture('[event-name]', {property1: 'value', property2: 'another value'});
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: Install PostHog
+title: Install
 sidebar: null
 showTitle: true
 ---
