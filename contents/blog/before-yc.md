@@ -11,7 +11,7 @@ I'm [James](https://twitter.com/james406), and I work with [Tim](https://twitter
 
 This is us (I'm on the right), just after we got now-redundant, pre-pivot swag:
 
-<img src="https://posthog.com/wp-content/uploads/2020/02/BF7AD8F0-68F4-4371-8CBA-161F098552BE-1536x1536.jpg" width="50%" class="shadow" />
+![James and Tim](../images/02/IMG_4294-scaled.jpg)
 
 We quit our jobs around August 2019, and put the last $8K of salary into a business bank account. We had both saved enough money to live on for at least 12 months without any income.
 
@@ -21,8 +21,7 @@ Our product was 'a sales territory management platform, that uses predictive ana
 
 Tim built the product and I started doing customer calls from the cheapest Airbnbs I could find around Lake Geneva, cafés in Venice and a hut in an olive grove in Tuscany:
 
-<img src="https://posthog.com/wp-content/uploads/2020/02/IMG_3338-1536x1152.jpg" width="50%" class="shadow" />
-
+![Olive groves in Tuscany](../images/02/IMG_3338-scaled.jpg)
 
 Not only did I have slow wifi, but the idea was complicated and people didn't get it. We had just two customers start using it, and that's only because they were already our friends. One of those two was happy paying $200 MRR for it, but then his company pivoted. We ended up bringing Aaron on board as our first employee the following January.
 

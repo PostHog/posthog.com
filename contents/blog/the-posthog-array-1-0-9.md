@@ -17,7 +17,7 @@ First our updates and new features.
 
 ### Stickiness
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/stickiness-gif.gif" width="100%" class="shadow" />
+![stickiness](../images/03/stickiness-gif.gif)
 
 Last week we made a lot of changes to actions but one important change missed the release.
 
@@ -27,7 +27,7 @@ Stickiness lets you view an action as it is repeated by unique users on a daily 
 
 ### New Funnel Builder
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/newfunnel.gif" width="100%" class="shadow" />
+![new funnel builder](../images/03/newfunnel.gif)
 
 Tim spent a lot of work on funnels – we thought it was so useful in our previous product we included it in the very first PostHog release.
 
@@ -39,11 +39,11 @@ This is three small changes grouped together following on from our Actions vs Ev
 
 We are aiming to make events very intuitive so firstly we have changed the wording around event property filters and made it clear that you can use dropdowns in events
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/Posthog-5-1024x482.png" width="100%" class="shadow" />
+![](../images/03/Posthog-5.png)
 
 and most importantly we added 'isnot' and 'does not contain' to property filters making this much more powerful.
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/isnotdoesnotcontain.gif" width="100%" class="shadow" />
+![](../images/03/isnotdoesnotcontain.gif)
 
 ## Performance updates
 

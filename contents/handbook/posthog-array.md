@@ -11,7 +11,7 @@ This section of the Handbook will guide you through generating the PostHog Array
 
 ## 1. What has happened since the last release?
 
-As part of releasing a new version you will need to figure out what has been [updated in the new release.](https://handbook.posthog.com/#/dev/development-process/release-new-version)
+As part of releasing a new version you will need to figure out what has been [updated in the new release.](release-new-version)
 
 - `git log --pretty=format:%s [old-version]..head` will give you the pull requests that are new, you will need to split them into 4 categories:
 
@@ -30,10 +30,10 @@ Create a new post in the WP PostHog domain, the title is always The PostHog Arra
 
 The image needs to be available for commercial use without attribution, [unsplash](https://unsplash.com/) is a good place to use.
 
-The first section should always include links to the PostHog docs regarding [upgrading.](https://docs.posthog.com/#/upgrading-posthog)
+The first section should always include links to the PostHog docs regarding [upgrading.](/docs/upgrading-posthog)
 
 The sections are as follows, images and gifs are preferable in all PostHog updates and some performance updates:
-- PostHog Updates
+- Release notes
 - Performance updates
 - Favorite issue
 - PR of the week

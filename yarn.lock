@@ -6310,10 +6310,10 @@ gatsby-cli@^2.11.9:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-cli@^2.12.14:
-  version "2.12.14"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.14.tgz#e058967e695fb5f44fe7d0589cb730de86b13be0"
-  integrity sha512-g+GthKDND9558TbELa5fvkGMJWrQPc2JmB77m2h6+XryfqnQFvDKE7kc1m2LSy4JaajTAm3vFUwkcj7Lb5Epgg==
+gatsby-cli@^2.12.15:
+  version "2.12.15"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.15.tgz#6bf58f9fe9ed5331dc371d7ec3358f7fc8f30b9b"
+  integrity sha512-lt3Umooa61evuttRB32K+kW1H5AQVtXXdgCPCJleILjyLjefhaQnkF2kAm04DOtACH1oG03cGdEbk0+Th3y5gQ==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.9.6"
@@ -6331,8 +6331,8 @@ gatsby-cli@^2.12.14:
     fs-exists-cached "^1.0.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.2.1"
-    gatsby-recipes "^0.1.13"
-    gatsby-telemetry "^1.3.2"
+    gatsby-recipes "^0.1.14"
+    gatsby-telemetry "^1.3.3"
     hosted-git-info "^3.0.4"
     is-valid-path "^0.1.1"
     lodash "^4.17.15"
@@ -6558,10 +6558,10 @@ gatsby-recipes@^0.0.6:
     ws "^7.2.3"
     xstate "^4.8.0"
 
-gatsby-recipes@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.13.tgz#32b9927cb3b819169f5dfe334ab13d8063c2ac76"
-  integrity sha512-5bE3ZTOu74t8NdnvmeLqclwxs+i2+pYRJh/LUkWzH3xe7KmSZI6GGUoYca9oW2DTGWwJXu9T/1ZY/7zMKE7eHw==
+gatsby-recipes@^0.1.14:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.14.tgz#3f6a5775e403cdbe9b52221c70f9feda5da340d1"
+  integrity sha512-raYrJXKGCAZ1mqfoa8V2gX8jhxX9K+Mwmp3vSUo+hOwFU1FfEjpRyrncvtL841lv4zI13MQ59aLe6dMehS3jIw==
   dependencies:
     "@babel/core" "^7.9.6"
     "@babel/generator" "^7.9.6"
@@ -6589,7 +6589,7 @@ gatsby-recipes@^0.1.13:
     express-graphql "^0.9.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.2.1"
-    gatsby-telemetry "^1.3.2"
+    gatsby-telemetry "^1.3.3"
     glob "^7.1.6"
     graphql "^14.6.0"
     graphql-compose "^6.3.8"
@@ -6635,6 +6635,20 @@ gatsby-remark-autolink-headers@^2.1.10:
     github-slugger "^1.3.0"
     lodash "^4.17.15"
     mdast-util-to-string "^1.1.0"
+    unist-util-visit "^1.4.1"
+
+gatsby-remark-copy-linked-files@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-copy-linked-files/-/gatsby-remark-copy-linked-files-2.3.2.tgz#56cda0f16e2be111f61c97047e6a1b014e53f2aa"
+  integrity sha512-LzOfHSqL1zCjSR078NwTlbkwz1lUlVciD+c7VI7WpjVwJY0GVtwEZOimvDlHnNWRWPqYHjRgL1GlY0utsi+r4g==
+  dependencies:
+    "@babel/runtime" "^7.9.6"
+    cheerio "^1.0.0-rc.3"
+    fs-extra "^8.1.0"
+    is-relative-url "^3.0.0"
+    lodash "^4.17.15"
+    path-is-inside "^1.0.2"
+    probe-image-size "^4.1.1"
     unist-util-visit "^1.4.1"
 
 gatsby-remark-images@^3.1.22:
@@ -6716,10 +6730,10 @@ gatsby-telemetry@^1.2.4:
     stack-utils "1.0.2"
     uuid "3.4.0"
 
-gatsby-telemetry@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.3.2.tgz#6f3cc86f489920eea095e4c00df16a2e2a8fd11b"
-  integrity sha512-tIdmUBLk6qt5xVJKiEebBHo7GNiE6BoPfR5kKSlZfzsoJRCUr0eJ2uGkzKO8s5iuGyxQq1zC6J9VKIpZW/dPxA==
+gatsby-telemetry@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.3.3.tgz#3a7e3cd6a33b7701d032c3d94091e3cfd0f1a386"
+  integrity sha512-D9dGRXx3n3xHjmtLbg6+19HV5fnyBLJbKhzvfDt89x1sofxCMvwXnyFTIcE4Xg2ybemr0CU2jFwg7Bcy4B9QjA==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.9.6"

@@ -15,7 +15,7 @@ Like what you see and self-hosting? [Update](/docs/upgrading-posthog) your insta
 
 ### [PostHog Android Library](https://docs.posthog.com/#/integrations/android-integration)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/android-events.gif" width="100%" class="shadow" />
+![](../images/04/android-events.gif)
 
 In addition to the work Marius put into the iOS integration, this week you can also capture events in your Android app and send them to PostHog. Like the iOS library you can automatically captures screen changes, and you can capture events as per usual
 
@@ -23,7 +23,7 @@ Check out our [Android docs](/docs/integrations/android-integration) on how to i
 
 ### [Gatsby Plugin](https://docs.posthog.com/#/integrations/gatsby)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/gatsbyplugin.gif" width="100%" class="shadow" />
+![](../images/04/gatsbyplugin.gif)
 
 This week also sees the first community contributed plugin – thank you [Ritesh Kadmawala](https://github.com/kgritesh/gatsby-plugin-posthog-analytics/).
 
@@ -31,7 +31,7 @@ It’s now very easy in Gatsby’s words to “make your blazing fast site even 
 
 ### [URL Wildcards](https://github.com/PostHog/posthog/pull/653)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Posthog-19-e1588157571429.png" width="100%" class="shadow" />
+![](../images/04/Posthog-19-e1588157571429.png)
 
 A user came to Tim with a problem, due to the nature of their site pages could be the same but have different url/paths – wildcards felt like an easy way of overcoming this so Tim merged this pr.
 
@@ -39,7 +39,7 @@ You can now use % as a wildcard when setting up an action.
 
 ### [Further updates to Trends design](https://github.com/PostHog/posthog/pull/648)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Posthog-21-e1588171341976.png" width="100%" class="shadow" />
+![](../images/04/Posthog-21-e1588171341976.png)
 
 As you’ll see below we have continued with our AntD implementation but this comes with also considering how to improve the Trends page as we now [default to Trends](https://github.com/PostHog/posthog/pull/656) when you login.
 
@@ -47,7 +47,7 @@ Moving the bar to the left allows users to easily engage with the Trends graphs 
 
 ### [Trends Hints](https://github.com/PostHog/posthog/pull/632)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Fullscreen_4_29_20__12_09_PM-e1588158606164.png" width="100%" class="shadow" />
+![](../images/04/Fullscreen_4_29_20__12_09_PM-e1588158606164.png)
 
 Eric mentioned when we added the stickiness explanation in Trends it was one of the most transformative updates in that release as he had to check the docs to remind himself of what he was measuring.
 
@@ -55,7 +55,7 @@ After a customer interview Aaron and Tim realized this was true for trends in ge
 
 ### [Sort events table by timestamp](https://github.com/PostHog/posthog/pull/626)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/timestampreverse.gif" width="100%" class="shadow" />
+![](../images/04/timestampreverse.gif)
 
 This is another PR this week that we have the community to thank for, [solnsubuga](https://github.com/solnsubuga) felt that clicking the table header for the timestamp should sort the events in reverse order, and we agreed.
 
