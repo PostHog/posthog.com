@@ -22,7 +22,7 @@ This would mean **marketing** to your potential user base so they could become a
 
 It would look something like this:
 
-![Sales Funnel](https://posthog.com/wp-content/uploads/2020/04/Sales-funnel-1.png)
+![Sales Funnel](../images/04/Sales-funnel-1.png)
 
 This approach means to grow, you can focus on getting more potential users into the top of the funnel or getting a greater percentage of prospects through the various stages.
 
@@ -36,7 +36,7 @@ Ultimately this model can lead to cognitive bias - it leads to a single result a
 
 Product led growth reimagines the user lifecycle as a circle with users at the center. 
 
-![Sales flywheel](https://posthog.com/wp-content/uploads/2020/04/Events_Log-1-1.png)
+![Sales flywheel](../images/04/Events_Log-1-1.png)
 
 Growth tactics will tend to work regardless of whether you follow the old fashioned way or a circular user lifecycle. However because your actions don’t aim to just move a user in a single direction and take into account continuous operation you can reduce friction in your onboarding process, and increase the speed at which you grow. 
 
@@ -60,7 +60,7 @@ And by repeating this process you will increase user acquisition as retained use
 
 ## Airtable is excellent at Understanding / Attracting / Acquiring Users 
 
-![Airtable logo](https://posthog.com/wp-content/uploads/2020/04/airtable.png)
+![Airtable logo](../images/04/airtable.png)
 
 The first segment is attracting new users of your product - in doing so you need to understand why they use your product - ideally not “people use my product because x” but identifying the root causes of this.
 
@@ -80,7 +80,7 @@ With this understanding Airtable could build features that would encourage more 
 
 ### 1. No code
 
-![Drag n drop](https://posthog.com/wp-content/uploads/2020/04/airtablednd.gif)
+![Drag n drop](../images/04/airtablednd.gif)
 
 Airtable was founded in 2012 but didn't launch it's first database till winter 2015, that's because it was very important that Airtable could be used without writing a single line of code. 
 
@@ -97,7 +97,7 @@ We don't have clear data on how many users adopted Airtable from their launch in
 
 ### 2. iOS at launch
 
-![iOS Airtable](https://posthog.com/wp-content/uploads/2020/04/airtable-ios-e1587742106987.png)
+![iOS Airtable](../images/04/airtable-ios-e1587742106987.png)
 
 Given the user that Airtable wanted to reach out to (and the time they were prepared to put in to get it right) it was just as important to allow users to access Airtable in mobile as well as desktop versions. 
 
@@ -107,7 +107,7 @@ The decision to launch with mobile is understandable given Airtable's knowledge 
 
 ### 3. Product customization > pre-built templates
 
-![Kanban airtable](https://posthog.com/wp-content/uploads/2020/04/kanban-airtable.gif)
+![Kanban airtable](../images/04/kanban-airtable.gif)
 
 A standard product led growth tactic is to get your own users to encourage their friends or colleagues to begin using your product, think Dropbox's referal program or shared folders.
 
@@ -121,7 +121,7 @@ Airtable users in effect determined the product roadmap and Airtable knew how to
 
 ### 4. API Builder & Zapier Integration
 
-![API Zapier](https://posthog.com/wp-content/uploads/2020/04/airtablezapier.png)
+![API Zapier](../images/04/airtablezapier.png)
 
 If a product led growth mindset focuses on users having the easiest onboarding experience, integrations tend to come at the top of a growth engineers focus. If our product integrates with other apps people will naturally use our app more? 
 
@@ -145,7 +145,7 @@ Airtable wasn't taking functionality to help their own growth - this integration
 
 ### 5. Airtable Universe 
 
-![airtable universe](https://posthog.com/wp-content/uploads/2020/04/airtable-universe-e1587986405828.png)
+![airtable universe](../images/04/airtable-universe-e1587986405828.png)
 
 This feature came along a little later than the others in 2017 as Airtable's primary learning resource center, you could think of it as part community showcase, part docs, part training program. It takes product customization to another level.
 
@@ -168,7 +168,7 @@ And it got reveneue to jump 400% in 2018 to $20 million mostly via word of mouth
 
 ## Zoom is excellent at Communicating / Engaging / Activating Users 
 
-![Zoom logo](https://posthog.com/wp-content/uploads/2020/04/zoom-logo.png)
+![Zoom logo](../images/04/zoom-logo.png)
 
 Once you understand the value of your own product - how do you communicate this to your own users? 
 
@@ -180,7 +180,7 @@ In our old model this would be done in sales demonstrations, relying on a sales 
 
 For the most part this requires some sort of free trial / demo / freemium model so that users can test that value themselves. Zoom’s method was very successful because (as might become apparent with these examples) it attracted and in turn activated users - this was done through letting any users host a 40 minute meeting or less free - analytics suggested 45 minutes was the ideal meeting time.
 
-![zoom example](https://posthog.com/wp-content/uploads/2020/04/zoomexample.jpg)
+![zoom example](../images/04/zoomexample.jpg)
 
 The underrated part of this is that the freemium offering is very simple - ensuring customers understand what a paid version would include without limiting their ability to solve the initial problem is key to removing friction. 
 
@@ -190,7 +190,7 @@ Zoom had 3 millions meeting participants in 2013 - this was 30 million in 2014 a
 
 ## Typeform is excellent at Delivering / Delighting / Retaining Users
 
-![Typeform logo](https://posthog.com/wp-content/uploads/2020/04/typeform-logo-e1586796641495.png)
+![Typeform logo](../images/04/typeform-logo-e1586796641495.png)
 
 To keep the momentum of the wheel model - retaining the energy put into attracting and engaging your users to your product now must deliver on the promises you made when attracting them. 
 
@@ -207,7 +207,7 @@ But with a focus on delighting users and making the product speak for itself Typ
 *“We were much more differentiated in the early days because everyone was just doing the plain vanilla forms. 
 These companies doing feedback as...data collection will always be very focused only on the analysis of data, the actual collection through the form was just a means to an end. No company ever thought of actually making that into a great experience.”*
 
-![typeform gif](https://posthog.com/wp-content/uploads/2020/04/typeform-example.gif)
+![typeform gif](../images/04/typeform-example.gif)
 
 Virality isn’t enough - the continued focus on developing something that will delight your users is key too.
  

@@ -17,19 +17,19 @@ We’ve made a lot of exciting new features this week (to update, please see htt
 
 ### Filtering action trends graphs
 
-![](images/03/Action-trend-filter-gif.gif)
+![](../images/03/Action-trend-filter-gif.gif)
 
 This is a more intuitive way of filtering action trends. You can also look at both the total and DAUs with this update.
 
 ### Exact/contains matching for URLs in actions
 
-![](images/03/image-2.png)
+![](../images/03/image-2.png)
 
 This does exactly what it says on the tin, it will allow you to be able to specify specific pages to track in your app/website.
 
 ### Filtering paths by date
 
-![](images/03/Path-by-date-gif.gif)
+![](../images/03/Path-by-date-gif.gif)
 
 We got a lot of requests for this update – paths are super interesting but if you’re making changes to your website based on your findings you should be able to then refine your paths by date.
 
@@ -37,7 +37,7 @@ and lastly…
 
 ### Graphs show numbers
 
-![](images/03/image-1.png)
+![](../images/03/image-1.png)
 
 We took way too long to realize this was much simpler than guessing the number on the Y axis.
 

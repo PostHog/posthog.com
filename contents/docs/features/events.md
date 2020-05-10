@@ -10,17 +10,17 @@ The most critical thing that PostHog does is to capture Events from your website
 
 Go to ‘Events’ in the left hand navigation:
 
-![left hand navigation - events selected](https://posthog.com/wp-content/uploads/2020/03/Posthog-15.png)
+![left hand navigation - events selected](../../images/03/Posthog-15.png)
 
 You will see a live feed of Events as they are happening.
 
-![live feed of events](https://posthog.com/wp-content/uploads/2020/02/Screenshot-2020-02-09-at-18.05.28.png)
+![live feed of events](../../images/02/Screenshot-2020-02-09-at-18.05.28.png)
 
 ## Event properties
 
 You can view the Event properties by clicking on the items in the ‘Event’ column:
 
-![event properties](https://posthog.com/wp-content/uploads/2020/02/Screenshot-2020-02-09-at-18.06.41.png)
+![event properties](../../images/02/Screenshot-2020-02-09-at-18.06.41.png)
 
 You can also click the ‘Person’ to view a full list of the Event history of that User.
 
@@ -33,13 +33,13 @@ You can choose to view just the events at a particular Path. The quickest way to
 
 Alternatively, you can filter the Events:
 
-![event filtering](https://posthog.com/wp-content/uploads/2020/03/Posthog-11.png)
+![event filtering](../../images/03/Posthog-11.png)
 
 You can have one or more filters.
 
 These refine the view to show just Events with a selected property:
 
-![Event property filtering](https://posthog.com/wp-content/uploads/2020/02/Screenshot-2020-02-09-at-18.09.29.png)
+![Event property filtering](../../images/02/Screenshot-2020-02-09-at-18.09.29.png)
 
 ## Autocapture event tracking
 
@@ -57,7 +57,7 @@ There are two ways of passing data to PostHog – the API or through the JS snip
 
 ### API
 
-Our API documentation is available here.
+Our API documentation is available [here](/docs/integrations/api).
 
 ### JS snippet
 

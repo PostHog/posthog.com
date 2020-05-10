@@ -161,7 +161,7 @@ With the next step up, 2-3x hobby-dev instances and standard-0 postgres ($64/mon
 
 If running costs are a concern, AWS is likely to be a cheaper option, especially if you can commit to buy reserved instances for a year. This does come at the cost of ease-of-deployment.
 
-If you've deployed on AWS, let us know how and how much you're spending roughly so we can improve this guide. Submit a PR to the [docs repo](https://github.com/PostHog/docs) :-).
+If you've deployed on AWS, let us know how and how much you're spending roughly so we can improve this guide. Submit a PR to the [docs repo](https://github.com/PostHog/posthog.com) :-).
 
 
 # SMTP credentials

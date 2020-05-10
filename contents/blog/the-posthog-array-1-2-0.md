@@ -15,7 +15,7 @@ Like what you see and self-hosting? [Update](/docs/upgrading-posthog) your insta
 
 ### [PostHog iOS Library](https://docs.posthog.com/#/integrations/ios-integration)
 
-![](images/04/ioslibrary1.gif)
+![](../images/04/ioslibrary1.gif)
 
 You can now capture events in your iOS app and send them to PostHog. It automatically captures screen changes, and you can capture events as per usual
 
@@ -25,7 +25,7 @@ See our [iOS docs](/docs/integrations/ios-integration) for how to install it on 
 
 ### [Session Information](https://github.com/PostHog/posthog/pull/586)
 
-![](images/04/Sessions.gif)
+![](../images/04/Sessions.gif)
 
 You can now see exactly how much time people are spending on your app using sessions. There’s two modes: “Average session length”, which shows you how long sessions are and how many, and “distribution” which makes it super easy to spot whether sessions are uniformly distributed or whether there are outliers.
 
@@ -33,7 +33,7 @@ So far engagement metrics have focused on repeated actions or the volume of page
 
 ### [Filtering funnels by properties](https://github.com/PostHog/posthog/pull/628)
 
-![](images/04/funnel-properties.gif)
+![](../images/04/funnel-properties.gif)
 
 In addition to the [changes](https://github.com/PostHog/posthog/pull/506) last [week](https://github.com/PostHog/posthog/pull/561) on funnels so that they work like /trends you can also apply properties to your funnels to narrow down conversion metrics by anything you like.
 

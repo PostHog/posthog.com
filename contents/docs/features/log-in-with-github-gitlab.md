@@ -10,7 +10,7 @@ If you want to make it really easy for your users to log in, you can add one-cli
 
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
 
-?> If you want to have this application as part of an organisation, you'll need to go to your organization's settings -> OAuth apps -> New OAuth App.
+> If you want to have this application as part of an organisation, you'll need to go to your organization's settings -> OAuth apps -> New OAuth App.
 
 2. Register your application
     - `Homepage URL` needs to be the url of your PostHog instance
@@ -22,7 +22,7 @@ If you want to make it really easy for your users to log in, you can add one-cli
 
 5. When logging in, or signing up to a team you can now log in using PostHog!
 
-!> We don't support logging in with GitHub when setting up PostHog for the very first time.
+> We don't support logging in with GitHub when setting up PostHog for the very first time.
 
 # GitLab
 
@@ -36,4 +36,4 @@ If you want to make it really easy for your users to log in, you can add one-cli
 
 4. Add those two settings as `SOCIAL_AUTH_GITLAB_KEY` and `SOCIAL_AUTH_GITHUB_SECRET`. If you're hosting GitLab yourself you'll also need to add `SOCIAL_AUTH_GITLAB_API_URL`, which is the full URL to your GitLab instance.
 
-!> We don't support logging in with GitLab when setting up PostHog for the very first time.
+> We don't support logging in with GitLab when setting up PostHog for the very first time.
