@@ -165,19 +165,26 @@ const IndexPage = () => {
           <Col span={24} className="header-row" align="middle">    
             <h2>Install now, free</h2>
           </Col>
-          <Col span={6} align="middle">
-            <img alt="Deploy on Heroku" className="hover-shadow" src={installHeroku} />
-          </Col>
-          <Col span={6} align="middle">
-            <img alt="Deploy on Docker" className="hover-shadow" src={installDocker} />
-          </Col>
-          <Col span={6} align="middle">
-            <img alt="Deploy on AWS" className="hover-shadow" src={installAws} />
-          </Col>
-          <Col span={6} align="middle">
-            <img alt="Deploy on Kubernetes" className="hover-shadow" src={installKubernetes} />
-          </Col>
-          
+          <a href="https://heroku.com/deploy?template=https://github.com/posthog/posthog">
+            <Col span={6} align="middle">
+              <img alt="Deploy on Heroku" className="hover-shadow" src={installHeroku} />
+            </Col>
+          </a>
+          <Link to="docs/deployment#docker">
+            <Col span={6} align="middle">
+              <img alt="Deploy on Docker" className="hover-shadow" src={installDocker} />
+            </Col>
+          </Link>
+          <Link to="docs/deployment">
+            <Col span={6} align="middle">
+              <img alt="Deploy on AWS" className="hover-shadow" src={installAws} />
+            </Col>
+          </Link>
+          <Link to="docs/deployment#helm-charts-and-kubernetes">
+            <Col span={6} align="middle">
+              <img alt="Deploy on Kubernetes" className="hover-shadow" src={installKubernetes} />
+            </Col>
+          </Link>
           <Col span={24} align="middle">
             <p>... or start a <a href="https://app.posthog.com/signup">free trial</a> with PostHog SaaS.</p>
           </Col>
@@ -188,24 +195,32 @@ const IndexPage = () => {
         </Col>
       </Row>
       <Row span={21} gutter={[24, 8]}>
-        <Col span={8} className="gutter-row hover-shadow" align="middle">
-          <img alt="GitHub" src={communityGithub} />
-          <h3>GitHub</h3>
-        </Col>
-        <Col span={8} className="gutter-row hover-shadow" align="middle">
-          <img alt="Slack" src={communitySlack} />
-          <h3>Slack</h3>
-        </Col>
-        <Col span={8} className="gutter-row hover-shadow" align="middle">
-          <img alt="Roadmap" src={communityRoadmap} />
-          <h3>Roadmap</h3>
-        </Col>
+        <a href="https://github.com/posthog/posthog">
+          <Col span={8} className="gutter-row hover-shadow" align="middle">
+            <img alt="GitHub" src={communityGithub} />
+            <h3>GitHub</h3>
+          </Col>
+        </a>
+        <a href="https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ">
+          <Col span={8} className="gutter-row hover-shadow" align="middle">
+            <img alt="Slack" src={communitySlack} />
+            <h3>Slack</h3>
+          </Col>
+        </a>
+        <Link to="handbook/roadmap">
+          <Col span={8} className="gutter-row hover-shadow" align="middle">
+            <img alt="Roadmap" src={communityRoadmap} />
+            <h3>Roadmap</h3>
+          </Col>
+        </Link>
       </Row>
       <Row gutter={[24, 24]}>
         <Col span={24} className="gutter-row header-row" align="middle">
           <h2>What's new?</h2>
-          <p>1.1.0</p>
-          <Button type="information" size="large">Release notes</Button>
+          <p>Version 1.4.0</p>
+          <Link to="blog/the-posthog-array-1-4-0">
+            <Button type="information" size="large">Release notes</Button>
+          </Link>
         </Col>
       </Row>
     </Layout>
