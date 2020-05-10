@@ -39,14 +39,14 @@ const IndexPage = () => {
       </Row>
       <Row gutter={[24, 8]}>
         <Col span={5} className="gutter-row">
-          <Link to="https://app.posthog.com/signup">
+          <a href="https://app.posthog.com/signup">
             <Button type="primary" size="large" icon="right-circle" style={{marginRight: 10}}>Try Hosted, Free</Button>
-          </Link>
+          </a>
         </Col>
         <Col span={5} className="gutter-row">
-          <Link to="https://github.com/posthog/posthog">
+          <a href="https://github.com/posthog/posthog">
             <Button type="secondary" size="large">Self-Managed</Button>
-          </Link>
+          </a>
         </Col>
       </Row>
       <Row gutter={[24, 24]}>
@@ -203,7 +203,7 @@ const IndexPage = () => {
       </Row>
       <Row gutter={[24, 24]}>
         <Col span={24} className="gutter-row header-row" align="middle">
-          <h2>What's new</h2>
+          <h2>What's new?</h2>
           <p>1.1.0</p>
           <Button type="information" size="large">Release notes</Button>
         </Col>
