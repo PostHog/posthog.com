@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-?> If you don't want to host PostHog yourself, you can [sign up for an account instead](https://app.posthog.com/signup) and let us do the hosting for you.
+> If you don't want to host PostHog yourself, you can [sign up for an account instead](https://app.posthog.com/signup) and let us do the hosting for you.
 
 # One-line docker preview
 
@@ -14,7 +14,7 @@ docker run -t -i --rm --publish 8000:8000 -v postgres:/var/lib/postgresql postho
 
 This image has everything you need to try out PostHog locally! It will set up a server on http://127.0.0.1:8000.
 
-!> The preview image is not meant for production.
+> The preview image is not meant for production.
 
 # Deploy to Heroku
 
@@ -34,7 +34,7 @@ We have [three types of images](https://hub.docker.com/r/posthog/posthog):
  - `posthog/posthog:preview`, which is used for the preview image
  - `posthog/posthog:release-[version number]`, so you can pin a specific version.
 
-?> We recommend using `posthog/posthog:latest`, so you always have the latest features and security updates
+> We recommend using `posthog/posthog:latest`, so you always have the latest features and security updates
 
 ## Using Docker Compose 
 
@@ -147,7 +147,7 @@ TRUST_ALL_PROXIES=True
 
 !> When using `TRUST_ALL_PROXIES`, make sure your proxy (like nginx) is setting X-Forwarded-For, like in the example above. If not, it would still be possible to spoof your IP address
 
-?> If you're on Heroku, you are behind a proxy so you'll need to add `IS_BEHIND_PROXY=True`. Heroku automatically overrides X-Forwarded-For, so you can use `TRUST_ALL_PROXIES=True`.
+> If you're on Heroku, you are behind a proxy so you'll need to add `IS_BEHIND_PROXY=True`. Heroku automatically overrides X-Forwarded-For, so you can use `TRUST_ALL_PROXIES=True`.
 
 # How much will running PostHog cost me?
 

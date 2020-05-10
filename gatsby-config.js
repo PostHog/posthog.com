@@ -51,6 +51,12 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+            {
+            resolve: `gatsby-remark-copy-linked-files`,
+            options: {
+              destinationDir: `images`,
+            },
+          },
           `gatsby-remark-katex`,
           {
             resolve: `gatsby-remark-autolink-headers`,

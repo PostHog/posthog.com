@@ -17,7 +17,7 @@ First our updates and new features.
 
 ### [PostHog integrates with Slack](/docs/integrations/slack)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Slack_____slackupdates___PostHog.png" width="100%" class="shadow" />
+![](images/04/Slack_____slackupdates___PostHog.png)
 
 This update allows you to send push notifications to Slack when an Action is triggered. Our docs show you how you can [integrate Slack](/docs/integrations/slack) with your own PostHog instance.
 
@@ -39,9 +39,9 @@ Now you have a simpler way of using PostHog where you can act on your insights q
 
 ### [New design system](https://github.com/PostHog/posthog/pull/530)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Posthog-6-e1586882580994.png" width="25%" class="shadow" />
+![](images/04/Posthog-6-e1586882580994.png)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Posthog-10.png" width="25%" class="shadow" />
+![](images/04/Posthog-10.png)
 
 It had been mentioned that PostHog looked <strike>like it was designed by developers</strike> *functional* and that perhaps PostHog could be beautiful as well. 
 
@@ -49,7 +49,7 @@ Eric used [Ant Design](https://ant.design/) for this and began with adding the b
 
 ### [Adding time intervals to Trends](https://github.com/PostHog/posthog/pull/504)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/time-intervals.gif" width="100%" class="shadow" />
+![](images/04/time-intervals.gif)
 
 A user told Tim that whilst Trends worked great, measuring performance on a daily basis limited the ability to work out trends for high volume events that might take place over a single day. Could we create options to change the time intervals to hours as well as days?
 
@@ -57,7 +57,7 @@ We went one further as you can now can build trend graphs across minutes, hours,
 
 ### [Dotted lines to represent data yet to be determined](https://github.com/PostHog/posthog/pull/578)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/dotted-lines.png" width="100%" class="shadow" />
+![](images/04/dotted-lines.png)
 
 Aaron had to mentally remind himself when looking at PostHog stats each day that 9:30am in London meant well over half of PostHog users were yet to wake up – we felt that other users would have this issue so added dotted lines to make the distinction between collected and collecting data. 
 
@@ -65,7 +65,7 @@ This is tied to the below update where we want PostHog to feel intuitive so you 
 
 ### [X axis starts at 0](https://github.com/PostHog/posthog/pull/563)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Posthog-7-1024x502.png" width="100%" class="shadow" />
+![](images/04/Posthog-7.png)
 
 James was slightly worried that it looked like usage would drop dramatically to nothing. 
 
@@ -73,7 +73,7 @@ Luckily a contributor noticed that we didn’t always start the X axis at 0 to s
 
 ### [Adding DAUs as a default dashboard](https://github.com/PostHog/posthog/pull/559)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/Posthog-8-1024x421.png" width="100%" class="shadow" />
+![](images/04/Posthog-8.png)
 
 Daily active users (DAUs) are a quick and insightful way to measure engagement with your site or app. 
 
@@ -83,13 +83,13 @@ Note: this is *only* on new deployments.
 
 ### [Paths are prettier](https://github.com/PostHog/posthog/pull/542)
 
-<img src="https://user-images.githubusercontent.com/1727427/79004996-d1c0e780-7b4d-11ea-824f-bff7251c7beb.png" width="100%" class="shadow" />
+![](https://user-images.githubusercontent.com/1727427/79004996-d1c0e780-7b4d-11ea-824f-bff7251c7beb.png)
 
 This is a small change but will be important for future versions as we want to make [paths](https://github.com/PostHog/posthog/issues/448) [powerful](https://github.com/PostHog/posthog/issues/568). For now we have updated the way urls are rendered so they don’t cover the whole screen depending on screen size.
 
 ### [UX Improvements to saving Actions](https://github.com/PostHog/posthog/pull/497)
 
-<img src="https://posthog.com/wp-content/uploads/2020/04/save-actions-ux.gif" width="100%" class="shadow" />
+![](images/04/save-actions-ux.gif)
 
 We added conditional autofocus and disabling the save button if no changes have been made. 
 

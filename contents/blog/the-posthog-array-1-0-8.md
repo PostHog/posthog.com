@@ -21,27 +21,26 @@ Nb. The following is for pre 1.0.8.
 
 ### Multiple users 
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/inviteteamgif.gif" width="100%" class="shadow" />
+![multiple PostHog users](images/03/inviteteamgif.gif)
 
 We hadn’t built multiple users as initially this would have been in our paid version but after much internal discussion at PostHogHQ we realized this was not in line with our wish to make our MIT license as generous as possible or provide obstacles to adoption, as such you can have unlimited users!
 
 ### Multiple domains in one instance
 
-<img src="https://user-images.githubusercontent.com/53387/75904121-eae5c280-5e42-11ea-9ee6-5755c81d7610.gif" width="100%" class="shadow" />
-
-<img src="https://user-images.githubusercontent.com/53387/75904124-ed481c80-5e42-11ea-84b3-3e5ddc301d38.gif" width="100%" class="shadow" />
+![multiple domains one](https://user-images.githubusercontent.com/53387/75904121-eae5c280-5e42-11ea-9ee6-5755c81d7610.gif)
+![multiple domains two](https://user-images.githubusercontent.com/53387/75904124-ed481c80-5e42-11ea-84b3-3e5ddc301d38.gif)
 
 Plenty of our users have several side projects they would like to use PostHog for or have multiple domains they would like to see activity for in one place – with this change this is now easy.
 
 ### Adding info to actions
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/actiontrendscss.gif" width="100%" class="shadow" />
+![adding info to actions](images/03/actiontrendscss.gif)
 
 James was trying to set the right action for a Trend graph when he couldn’t work out which action was which so we broke actions down by type, (autocapture, event and pageview) as well as exposing the selectors.
 
 ### Updating PostHog
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/changelogtoolbar.gif" width="100%" class="shadow" />
+![updating PostHog](images/03/changelogtoolbar.gif)
 
 We now have our changelog live on GitHub and a helpful reminder as to whether we are up to date. 
 
@@ -64,19 +63,19 @@ Big L for us on that one so these changes should stop this from happening.
 
 Firstly we have nested Actions within events.
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/Posthog-3.png" width="25%" class="shadow" />
+![nested actions within events](images/03/Posthog-3.png)
 
 ### Updated Actions Creation
 
 This focuses on making actions easier to set. 
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/newtoolbar.gif" width="100%" class="shadow" />
+![updated actions creation](images/03/newtoolbar.gif)
 
 The “New action” button allows users to create any action with one click – whether it be matching a url for a specific page view or using our toolbar to select front-end elements from your site directly.
 
 ### Delete user data
 
-<img src="https://posthog.com/wp-content/uploads/2020/03/Posthog-4.png" width="50%" class="shadow" />
+![deleting user data](images/03/Posthog-4.png)
 
 When viewing an individual user you are now able to delete data on this person (should they ask you to, for example as this relates to GDPR).
 
@@ -128,6 +127,6 @@ Here is what we thought was cool and interesting in the last week:
 
 ## PostHog news
 
-As we come to the end of YC the gang is starting to break up. We have gone from an online [only demo day](https://news.ycombinator.com/item?id=22506013) to now just preparing slides. We’re a bit sad that we won’t get to present (well maybe only James is) but it drives home what an intense 3 months this has been! 
+As we come to the end of YC, the gang is starting to break up. We have gone from an online [only demo day](https://news.ycombinator.com/item?id=22506013) to now just preparing slides. We’re a bit sad that we won’t get to present (well maybe only James is) but it drives home what an intense 3 months this has been! 
 
 Tim and James have headed back to Europe (in advance of travel ban) and we can test out our remote ethos, we have found Gitlab to be [helpful](https://about.gitlab.com/company/culture/all-remote/guide/). We always aimed to be remote post YC but now we are just one of many companies doing this as we see Covid-19 take effect.
