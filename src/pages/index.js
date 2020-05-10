@@ -81,68 +81,69 @@ const IndexPage = () => {
           <p>PostHog provides a full product analytics UX. Analyze trends, funnels, retention and cohorts.</p>
         </Col>
       </Row>
-      <Row gutter={[24, 24]} className="gutter-row">  
-        <Col span={24} className="gutter-row" align="middle">
+      <Row className="gutter-row" justify="center" align="middle">  
+        <Col span={24} className="gutter-row" justify="center" align="middle">
           <h2 align="middle" className="icons-header header-row">Designed for your stack</h2>
-          <Row gutter={[24,24]} className="gutter-row">
-            <Col span={2} className="gutter-row"></Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/python-integration">
-                <img alt="Python" className="hover-shadow" src={stackPython} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/android-integration">
-                <img alt="Android" className="hover-shadow" src={stackAndroid} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/ios-integration">
-                <img alt="iOS" className="hover-shadow" src={stackIos} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/node-integration">
-                <img alt="Node" className="hover-shadow" src={stackNode} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/php-integration">
-                <img alt="PHP" className="hover-shadow" src={stackPhp} />
-              </Link>
-            </Col>
-            <Col span={2} className="gutter-row"></Col>
-          </Row>
-          <Row gutter={[24,24]} className="gutter-row">
-            <Col span={2} className="gutter-row"></Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/ruby-integration">
-                <img alt="Ruby" className="hover-shadow" src={stackRuby} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/gatsby-integration">
-                <img alt="Gatsby" className="hover-shadow" src={stackGatsby} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/js-integration">
-                <img alt="Javascript" className="hover-shadow" src={stackJavascript} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/go-integration">
-                <img alt="Go" className="hover-shadow" src={stackGo} />
-              </Link>
-            </Col>
-            <Col span={4} className="gutter-row">
-              <Link to="/docs/integrations/api">
-                <img alt="API" className="hover-shadow" src={stackApi} />
-              </Link>
-            </Col>
-            <Col span={2} className="gutter-row"></Col>
-          </Row>
         </Col>
+      </Row>
+      <Row justify="center">
+        <Col xs={0} sm={0} md={2} lg={2} xl={2} align="middle" className="column100height"></Col>
+        
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/python-integration">
+            <img alt="Python" className="hover-shadow" src={stackPython} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/php-integration">
+            <img alt="PHP" className="hover-shadow" src={stackPhp} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/android-integration">
+            <img alt="Android" className="hover-shadow" src={stackAndroid} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/ios-integration">
+            <img alt="iOS" className="hover-shadow" src={stackIos} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/node-integration">
+            <img alt="Node" className="hover-shadow" src={stackNode} />
+          </Link>
+        </Col>
+        <Col xs={0} sm={0} md={2} lg={2} xl={2} align="middle" className="column100height">&nbsp;</Col>
+        <Col xs={0} sm={0} md={2} lg={2} xl={2} align="middle" className="column100height">&nbsp;</Col>
+        <Col xs={0} sm={0} md={2} lg={2} xl={2} align="middle" className="column100height">&nbsp;</Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/ruby-integration">
+            <img alt="Ruby" className="hover-shadow" src={stackRuby} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/gatsby-integration">
+            <img alt="Gatsby" className="hover-shadow" src={stackGatsby} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/js-integration">
+            <img alt="Javascript" className="hover-shadow" src={stackJavascript} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/go-integration">
+            <img alt="Go" className="hover-shadow" src={stackGo} />
+          </Link>
+        </Col>
+        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
+          <Link to="/docs/integrations/api">
+            <img alt="API" className="hover-shadow" src={stackApi} />
+          </Link>
+        </Col>
+        <Col xs={0} sm={0} md={2} lg={2} xl={2} align="middle" className="column100height">&nbsp;</Col>
+        
       </Row>
       <Row gutter={[24, 8]}>
         <Col span={24} className="header-row" align="middle">
@@ -214,7 +215,7 @@ const IndexPage = () => {
           </Col>
         </Link>
       </Row>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[24, 96]}>
         <Col span={24} className="gutter-row header-row" align="middle">
           <h2>What's new?</h2>
           <p>Version 1.4.0</p>
