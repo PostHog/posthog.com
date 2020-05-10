@@ -1,12 +1,8 @@
-# PostHog.com
+# WIP: PostHog.com
 
 This is the new company website / docs and handbook.
 
-# Gatsby Markdown Starter
-
-This is based on [gatsby-markdown-starter], itself a boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [gatsby-default-starter](https://github.com/gatsbyjs/gatsby-starter-default).
-
-See a [live demo](https://cvluca.github.io/gatsby-starter-markdown)
+This is based on gatsby-markdown-starter, itself a boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [gatsby-default-starter](https://github.com/gatsbyjs/gatsby-starter-default).
 
 ## Quick Start
 
@@ -15,7 +11,7 @@ See a [live demo](https://cvluca.github.io/gatsby-starter-markdown)
     Clone the repo then navigate into your new site’s directory and start it up.
 
     ```sh
-    cd gatsby-starter-markdown/
+    cd posthog.com/
     gatsby develop
     ```
 
