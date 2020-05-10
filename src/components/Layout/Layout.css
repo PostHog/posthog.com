@@ -715,10 +715,15 @@ pre tt:after {
   padding:10px;
   border-radius:4px;
   transition: 0.15s ease-in-out all;
+  height:100px;
 }
 
 .hover-shadow:hover{
   -webkit-box-shadow: 0 8px 20px rgba(143,168,191,.35);
   box-shadow: 0 8px 20px rgba(143,168,191,.35);
   cursor: pointer;
+}
+
+.column100height{
+  height:100px;
 }
