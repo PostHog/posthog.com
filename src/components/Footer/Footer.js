@@ -18,25 +18,25 @@ class Footer extends Component {
   render() {
     return (
       <div className="footer-universal">
-        <Row gutter={[24, 8]}>
-
-          <Col span={6} className="gutter-row" align="middle"></Col>
-          <Col span={16} className="gutter-row">
-            <Col span={4} className="gutter-row">
-              <span className="footer-links-header">Why PostHog</span>
+        <Row gutter={[24, 8]} justify="space-around">
+          <Col xs={0} sm={0} md={0} lg={6} xl={6} className="gutter-row">
+          </Col>
+          <Col xs={24} sm={24} md={24} lg={16} xl={16} className="gutter-row">
+            <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
+              <span className="footer-links-header" justify="space-around">Why PostHog</span>
               <FooterListItem to="/product-features">Features</FooterListItem>
               <FooterListItem to="/pricing">Pricing</FooterListItem>
               <FooterListItem to="/services">Services</FooterListItem>
               <FooterListItem to="/faq">FAQ</FooterListItem>
             </Col>
-            <Col span={4} className="gutter-row">
+            <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Resources</span>
               <FooterListItem to="/docs/deployment">Quick Start</FooterListItem>
               <FooterListItem to="/docs">Docs</FooterListItem>
               <FooterListItem to="/blog">Blog</FooterListItem>
               <FooterListItem to="/newsletter">Newsletter</FooterListItem>
             </Col>
-            <Col span={4} className="gutter-row">
+            <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Community</span>
               <FooterListItem>
                 <a href="https://github.com/PostHog/posthog/graphs/contributors">
@@ -59,13 +59,13 @@ class Footer extends Component {
                 <a href="https://github.com/PostHog/posthog/issues">Issues</a>
               </FooterListItem>
             </Col>
-            <Col span={4} className="gutter-row">
+            <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Support</span>
               <FooterListItem to="/support">Contact support</FooterListItem>
               <FooterListItem><a href="mailto:sales@posthog.com">Contact sales</a></FooterListItem>
               <FooterListItem to="/status">Status</FooterListItem>
             </Col>
-            <Col span={4} className="gutter-row">
+            <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Company</span>
               <FooterListItem to="/handbook/story">About</FooterListItem>
               <FooterListItem to="/handbook">Handbook</FooterListItem>
@@ -74,7 +74,8 @@ class Footer extends Component {
               <FooterListItem>Media</FooterListItem>
               <FooterListItem to="/terms">Terms</FooterListItem>
             </Col>
-            <Col span={4} className="gutter-row" align="middle"></Col>
+          </Col>
+          <Col xs={0} sm={0} md={0} lg={4} xl={4} className="gutter-row">
           </Col>
         </Row>
       </div>
