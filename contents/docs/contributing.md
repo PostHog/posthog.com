@@ -23,6 +23,8 @@ We maintain [a list of good first issues](https://github.com/PostHog/posthog/iss
 
 Outside of tickets, if there are small improvements to layout, text or functionality, feel free to raise a PR directly.
 
+Alternatively, you can also [update PostHog's documentation](/../updating-documentation).
+
 If you're planning to work on a bigger feature, and it's not in the list of issues, please raise an issue first so we can check whether that feature makes sense for PostHog as a whole.
 
 ## Testing

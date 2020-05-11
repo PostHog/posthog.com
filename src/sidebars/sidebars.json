@@ -15,7 +15,8 @@
     "name":"Contributing",
     "items": [
       "docs/contributing",
-      "docs/developing-locally"
+      "docs/developing-locally",
+      "updating-documentation"
     ]
   },
   {
