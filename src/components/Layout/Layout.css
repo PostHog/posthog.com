@@ -722,6 +722,7 @@ pre tt:after {
   -webkit-box-shadow: 0 8px 20px rgba(143,168,191,.35);
   box-shadow: 0 8px 20px rgba(143,168,191,.35);
   cursor: pointer;
+  color:#1890ff;
 }
 
 .column100height{
@@ -731,4 +732,8 @@ pre tt:after {
 .spacer-row{
   margin-top:100px;
   margin-bottom:100px;
+}
+
+.icon-100{
+  font-size:85px;
 }
