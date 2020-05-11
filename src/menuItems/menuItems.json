@@ -13,11 +13,11 @@
   },
   {
   	"name":"Install",
-  	"link":"/install"
+  	"link":"/docs/deployment"
   },
   { 
     "name": "Free Trial",
-    "link":  "/free-trial"
+    "link":  "/trial"
   },
   { 
     "name": "Support",
