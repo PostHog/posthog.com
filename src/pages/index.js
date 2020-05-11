@@ -159,7 +159,7 @@ const IndexPage = () => {
         </Col>
         <Col span={8} className="gutter-row" align="middle">
           <h3>Support</h3>
-          <p>PostHog can manage your deployment for you. All the benefits of sel-hosting with the reliability and scalability of the cloud.</p>
+          <p>PostHog can manage your deployment on your infrastructure. All the benefits of self-hosting with the reliability and scalability of the cloud.</p>
         </Col>
       </Row>
       <Row gutter={[24, 24]} justify="center">
