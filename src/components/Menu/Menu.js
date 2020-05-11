@@ -71,7 +71,7 @@ class Menu extends Component {
                   position: 'fixed',
                   right: 10,
                   top: 12,
-                  color: 'white',
+                  color: 'cornflowerblue',
                 }}
                 type='link'
                 onClick={() => {this.onChangeMenuState(menuItems.length)}}
@@ -86,7 +86,7 @@ class Menu extends Component {
                   <List.Item
                     style={{
                       listStyle: 'none',
-                      marginLeft: '-20px',
+                      marginLeft: '-20px'
                     }}
                     key={menuItems.indexOf(item)}
                   >
@@ -94,7 +94,7 @@ class Menu extends Component {
                       title={
                         <Link
                           to={item.link}
-                          style={{ color: 'white', textDecoration: 'none' }}
+                          style={{ color: 'black', textDecoration: 'none' }}
                           onClick={() => {this.onChangeMenuState(menuItems.length)}}
                         >
                           {item.name}
