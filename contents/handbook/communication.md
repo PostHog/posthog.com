@@ -1,6 +1,6 @@
 ---
 title: Communication
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

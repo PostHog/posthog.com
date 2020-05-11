@@ -1,6 +1,6 @@
 ---
 title: Investors
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 PostHog are proud to have many world-class investors.

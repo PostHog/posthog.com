@@ -1,6 +1,6 @@
 ---
 title: Time off
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

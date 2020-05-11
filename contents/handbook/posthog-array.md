@@ -1,6 +1,6 @@
 ---
 title: PostHog Array
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 The PostHog Array is our release newsletter and blog post, it serves 2 purposes

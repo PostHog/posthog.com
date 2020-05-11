@@ -1,6 +1,6 @@
 ---
 title: Pricing
-sidebar: Company
+sidebar: null
 showTitle: true
 ---
 

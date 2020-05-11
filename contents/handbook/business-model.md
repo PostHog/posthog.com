@@ -1,6 +1,6 @@
 ---
 title: Business model
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 PostHog is a for profit company that balances the need to improve the open source code of PostHog with the need to add source-available features in order to generate income. We will build an open core business model.

@@ -1,6 +1,6 @@
 ---
 title: Culture
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 ## Remote first

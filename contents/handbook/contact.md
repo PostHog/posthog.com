@@ -1,6 +1,6 @@
 ---
 title: Contact
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

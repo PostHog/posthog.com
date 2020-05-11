@@ -1,6 +1,6 @@
 ---
 title: Values
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

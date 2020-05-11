@@ -1,6 +1,6 @@
 ---
 title: Side gigs
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

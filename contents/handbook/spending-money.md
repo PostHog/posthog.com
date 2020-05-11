@@ -1,6 +1,6 @@
 ---
 title: Spending money
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 
@@ -10,7 +10,7 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 Please just spend company money like it's your own.
 
-If it's a trivial expense, just buy it. We'll provide you with a company card with a $500/month spending limit for this reason.
+If it's a trivial expense, just buy it. We'll provide you with a company card with a \$1,000/month spending limit for this reason.
 
 If it's a larger expense and doesn't fit into the items here, please **raise a policy suggestion for it as a pull request** in this doc, so we can document our decision making into our policy rather than making everything case by case.
 
@@ -18,7 +18,7 @@ If it's a larger expense and doesn't fit into the items here, please **raise a p
 
 Just do it.
 
-This means expenses that are under $75 one off or under $20/month recurring that we can cancel easily.
+This means expenses that are under \$75 one off or under \$20/month recurring that we can cancel easily.
 
 Make sure you keep copies for all receipts. We *cannot* pay you back for anything without a receipt.
 
@@ -48,7 +48,7 @@ If you are realistically going to do most of your work at home, it is more ratio
 
 For monitors, we suggest you pick one that supports 4K. This means you'll get a higher resolution than a standard HD monitor, thus can fit more content onto the screen.
 
-We would expect to spend ~$250 to $300 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most laptops.
+We would expect to spend \$250 to \$300 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most laptops.
 
 #### Keyboard, mouse and laptop stand
 
@@ -66,13 +66,13 @@ If you do not, please suggest something to us. We aren't yet at the stage where 
 
 For example, if you would like a standing desk, buy  one you consider to be good value.
 
-We would expect to spend ~$50-$200 on a desk, and around the same for a chair.
+We would expect to spend \$50-\$200 on a desk, and around the same for a chair.
 
 ### Headphones
 
 If you need to work in a noisy environment and don't already have a noise cancelling headphones with a microphone, feel free to buy a pair.
 
-We would expect to spend ~$200 on noise cancelling headphones.
+We would expect to spend \$200 on noise cancelling headphones.
 
 ## Software
 

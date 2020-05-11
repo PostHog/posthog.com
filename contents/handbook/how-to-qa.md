@@ -1,6 +1,6 @@
 ---
 title: How to QA
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

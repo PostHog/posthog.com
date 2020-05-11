@@ -1,6 +1,6 @@
 ---
 title: Team
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 
@@ -14,12 +14,20 @@ After that, he moved to Arachnys, where he ended up becoming the VP Sales. He ra
 
 ## Tim Glaser, Co-Founder and CTO
 
-## Aaron Tanner, VP Community
+Tim has been coding for cash since he was 11, and full time since he was 16!
 
-Aaron met James and Tim at Arachnys where he joined as Arachnys' earliest salesperson. He worked with them for 4 years before he left to join a record label that got 2 UK chart No.1s
+Tim met James at Arachnys where he was responsible for Research and Development.
 
-This circuitous route meant he has acted as an online marketer, product manager and as a salesperson/leader all of which go into growing and supporting PostHog's community.
+Fun fact: Tim is actually Dutch, despite sounding British.
 
-## Marius Andra, Engineer
+## Marius Andra, Software Engineer
 
-## Eric Duong, Engineer
+Marius released an analytics library on Hacker News a few weeks before PostHog launched. The very first recruiting email from PostHog went to him, and he said yes!
+
+Marius is incredibly fast and holds the PostHog world record for the number of languages used in a week. He also runs [Kea](https://github.com/keajs/kea), which is used by PostHog for React state management.
+
+## Eric Duong, Software Engineer
+
+Eric is a former entrepreneur and organized massive scale community cooking sessions, and recently graduated in mathematics from [Yale](https://yale.edu).
+
+We were so impressed by how proactive he is, and the quality of the design of [his previous startup](https://magical.app), that we couldn't help ourselves but get him on board!

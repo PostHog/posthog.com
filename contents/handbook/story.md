@@ -1,10 +1,11 @@
 ---
 title: Story
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 
 ## How PostHog started
+
 PostHog was founded by James and Tim on January 23rd, 2020.
 
 We both started working on a startup in August 2019.

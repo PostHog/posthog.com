@@ -1,6 +1,6 @@
 ---
 title: Working with investors
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 PostHog brings investors on as partners.

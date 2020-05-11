@@ -1,6 +1,6 @@
 ---
 title: What is product led growth
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

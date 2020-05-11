@@ -1,6 +1,6 @@
 ---
 title: Security
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

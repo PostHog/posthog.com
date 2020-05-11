@@ -1,6 +1,6 @@
 ---
 title: Releasing a new version
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 

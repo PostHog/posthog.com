@@ -1,6 +1,6 @@
 ---
 title: Strategy
-sidebar: Company
+sidebar: Handbook
 showTitle: true
 ---
 
@@ -55,7 +55,7 @@ Product analytics tools already have product-market fit. We believe that develop
 
 Situation:
 
-* We will have around $2.8M in cash.
+* We will have around $3M in cash.
 * If the world goes into a significant recession, a capital intensive business may become a lot harder to fuel as LPs withdraw from VCs.
 * We need to get to a series A without raising further money.
 
