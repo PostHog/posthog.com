@@ -43,8 +43,8 @@ Only bugfixes are allowed to be merged into this branch (and thus put on product
   
 Once a new docker image has been built for the new version, open the [charts](https://github.com/PostHog/charts) repo and make the changes:
 
-1. Edit the two versions in [Chart.yaml](https://github.com/PostHog/charts/blob/master/posthog/Chart.yaml)
-2. Change the docker tag in [values.yaml](https://github.com/PostHog/charts/blob/master/posthog/values.yaml#L6)
+1. Edit the two versions in [Chart.yaml](https://github.com/PostHog/charts/blob/master/charts/posthog/Chart.yaml): bump the chart `version` patch number and set `appVersion` to the latest version.
+2. Change the docker tag in [values.yaml](https://github.com/PostHog/charts/blob/master/charts/posthog/values.yaml#L6) to point to the latest version.
 3. `git commit -m 'Bump PostHog app version to 1.0.XX, release chart version 1.0.YY'`
 4. `git tag -a 1.0.YY -m "Version 1.0.YY"`
 5. `git push && git push origin head --tags`
