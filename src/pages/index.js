@@ -38,12 +38,12 @@ const IndexPage = () => {
         </Col>
       </Row>
       <Row gutter={[24, 8]}>
-        <Col xs={10} sm={8} md={6} lg={5} xl={5} className="gutter-row">
+        <Col xs={7} sm={6} md={5} lg={4} xl={4} className="gutter-row">
           <a href="https://app.posthog.com/signup">
-            <Button type="primary" size="large" icon="right-circle" style={{marginRight: 10}}>Try Hosted, Free</Button>
+            <Button type="primary" size="large" icon="right-circle" style={{marginRight: 10}}>Try Hosted</Button>
           </a>
         </Col>
-        <Col xs={10} sm={8} md={6} lg={5} xl={5} className="gutter-row">
+        <Col xs={7} sm={6} md={5} lg={4} xl={4} className="gutter-row">
           <a href="https://github.com/posthog/posthog">
             <Button type="secondary" size="large">Self-Managed</Button>
           </a>
