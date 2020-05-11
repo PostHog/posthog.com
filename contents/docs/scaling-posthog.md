@@ -10,20 +10,17 @@ In that example, the database grew about 200mb a day. That means Heroku's cheape
 
 However, if you do start going beyond these numbers there are things you can do to scale up.
 
-## Splitting the app from the tracking
+## Multiple web servers and workers
 
-Due to the way some of the models are set up, we sometimes have to load in large amounts of data into memory to do certain queries. On smaller machines (<=1GB RAM) this can cause not only the query to slow down, but also the insert of new events (and sometimes even dropping them).
+One easy way of scaling is to add more web servers (or dynos on Heroku) or workers. It's worth having a look at load and RAM metrics for your specific instance to see which one is struggling. PostHog can handle many web servers and workers working in tandem.
 
-If you notice this happening, it can be worth setting up 2 identical PostHog deployments, both pointing at the same database. You can then use 1 of them for your analytics, and one for insertions. We use this setup on our hosted offering.
+## Bigger database hardware
 
-## Bigger hardware
-
-If you're doing lots of queries over large numbers of events, it might make sense to scale up your machines, specifically RAM. This is probably the cheapest and most effective way of speeding up workload.
+If you're doing lots of queries over large numbers of events, it might make sense to scale up your database machine, specifically RAM. This is probably the cheapest and most effective way of speeding up workload.
 
 Please also let us know specific queries that are slowing you down, as we're always trying to optimize this.
 
 ## Integration with data lakes
 
 If volume of data starts to become a problem to a point where you can't scale Postgres any further, we offer integrations with various databases designed to hold huge volumes of data. This is part of our enterprise offering, and we'd love to work with you to set this up.
-
 
