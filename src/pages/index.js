@@ -4,6 +4,7 @@ import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import { Link } from "gatsby"
 import trends from "../images/trends.png";
+import Img from "gatsby-image"
 import stackAndroid from "../images/stack-android.png";
 import stackPython from "../images/stack-python.png";
 import stackIos from "../images/stack-ios.png";
@@ -21,8 +22,7 @@ import installKubernetes from "../images/install-kubernetes.png";
 import communityGithub from "../images/community-github.png";
 import communitySlack from "../images/community-slack.png";
 import communityRoadmap from "../images/community-roadmap.png";
-
-import { Row, Col } from 'antd';
+import { Row, Col, Icon } from 'antd';
 
 const IndexPage = () => {
   return (
@@ -38,12 +38,12 @@ const IndexPage = () => {
         </Col>
       </Row>
       <Row gutter={[24, 8]}>
-        <Col xs={10} sm={8} md={6} lg={5} xl={5} className="gutter-row">
+        <Col xs={7} sm={6} md={5} lg={4} xl={4} className="gutter-row">
           <a href="https://app.posthog.com/signup">
-            <Button type="primary" size="large" icon="right-circle" style={{marginRight: 10}}>Try Hosted, Free</Button>
+            <Button type="primary" size="large" icon="right-circle" style={{marginRight: 10}}>Try Hosted</Button>
           </a>
         </Col>
-        <Col xs={10} sm={8} md={6} lg={5} xl={5} className="gutter-row">
+        <Col xs={7} sm={6} md={5} lg={4} xl={4} className="gutter-row">
           <a href="https://github.com/posthog/posthog">
             <Button type="secondary" size="large">Self-Managed</Button>
           </a>
@@ -159,30 +159,30 @@ const IndexPage = () => {
         </Col>
         <Col span={8} className="gutter-row" align="middle">
           <h3>Support</h3>
-          <p>PostHog can manage your deployment for you. All the benefits of sel-hosting with the reliability and scalability of the cloud.</p>
+          <p>PostHog can manage your deployment on your infrastructure. All the benefits of self-hosting with the reliability and scalability of the cloud.</p>
         </Col>
       </Row>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[24, 24]} justify="center">
           <Col span={24} className="header-row" align="middle">    
             <h2>Install now, free</h2>
           </Col>
           <a href="https://heroku.com/deploy?template=https://github.com/posthog/posthog">
-            <Col span={6} align="middle">
+            <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on Heroku" className="hover-shadow" src={installHeroku} />
             </Col>
           </a>
           <Link to="docs/deployment#docker">
-            <Col span={6} align="middle">
+            <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on Docker" className="hover-shadow" src={installDocker} />
             </Col>
           </Link>
           <Link to="docs/deployment">
-            <Col span={6} align="middle">
+            <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on AWS" className="hover-shadow" src={installAws} />
             </Col>
           </Link>
           <Link to="docs/deployment#helm-charts-and-kubernetes">
-            <Col span={6} align="middle">
+            <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on Kubernetes" className="hover-shadow" src={installKubernetes} />
             </Col>
           </Link>
@@ -190,30 +190,29 @@ const IndexPage = () => {
             <p>... or start a <a href="https://app.posthog.com/signup">free trial</a> with PostHog SaaS.</p>
           </Col>
       </Row>
-      <Row gutter={[24, 8]}>
-        <Col span={24} className="gutter-row header-row" align="middle">
+      <Row gutter={[24, 24]}>
+        <Col span={24} className="header-row" align="middle">
           <h2>Join the community</h2>
         </Col>
       </Row>
-      <Row span={21} gutter={[24, 8]}>
+      <Row span={21} gutter={[24, 24]}>
+        <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
         <a href="https://github.com/posthog/posthog">
-          <Col span={8} className="gutter-row hover-shadow" align="middle">
-            <img alt="GitHub" src={communityGithub} />
-            <h3>GitHub</h3>
+          <Col xs={8} sm={8} md={6} lg={6} xl={6} align="middle">
+            <img alt="GitHub" src={communityGithub} className="hover-shadow" />
           </Col>
         </a>
         <a href="https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ">
-          <Col span={8} className="gutter-row hover-shadow" align="middle">
-            <img alt="Slack" src={communitySlack} />
-            <h3>Slack</h3>
+          <Col xs={8} sm={8} md={6} lg={6} xl={6} align="middle">
+            <img alt="Slack" src={communitySlack} className="hover-shadow" />
           </Col>
         </a>
         <Link to="handbook/roadmap">
-          <Col span={8} className="gutter-row hover-shadow" align="middle">
-            <img alt="Roadmap" src={communityRoadmap} />
-            <h3>Roadmap</h3>
+          <Col xs={8} sm={8} md={6} lg={6} xl={6} align="middle">
+            <Icon type="project" theme="filled" className="hover-shadow icon-100" />
           </Col>
         </Link>
+        <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
       </Row>
       <Row gutter={[24, 96]}>
         <Col span={24} className="gutter-row header-row" align="middle">
