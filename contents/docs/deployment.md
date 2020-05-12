@@ -86,22 +86,30 @@ For an in depth how-to on CloudFormations check out the [AWS Docs](https://docs.
 The gist is this:
 
 1. Grab YAML Configs from [here](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml)
+2. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
+3. Click **Create Stack -> With New Resources (standard)**
+4. Select Upload a template and link to your newly downloaded YAML config
+5. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
+6. Review the rest of the config wizard pages
+7. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD a month
+8. If you are ready, click **Create Stack**!
+9. Once deployment completes look under **Options** for the Publicly facing ELB Host
 
-1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
+10. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 
-1. Click **Create Stack -> With New Resources (standard)**
+11. Click **Create Stack -> With New Resources (standard)**
 
-1. Select Upload a template and link to your newly downloaded YAML config
+12. Select Upload a template and link to your newly downloaded YAML config
 
-1. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
+13. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
 
-1. Review the rest of the config wizard pages
+14. Review the rest of the config wizard pages
 
-1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about \$27 USD a month
+15. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about \$27 USD a month
 
-1. If you are ready, click **Create Stack**!
+16. If you are ready, click **Create Stack**!
 
-1. Once deployment completes look under **Options** for the Publicly facing ELB Host
+17. Once deployment completes look under **Options** for the Publicly facing ELB Host
 
 **⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
 
