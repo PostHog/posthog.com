@@ -51,9 +51,25 @@ You need to make sure your proxy server is sending X-Forwarded-For headers. For 
     }
 ```
 
+### Apache2 config
+
+You need the `proxy` `proxy_http` and `proxy_html` modules enabled. 
+To do this, run `sudo a2enmod proxy proxy_http proxy_html`.
+
+Make sure SSL is enabled, and include the `X-Forwarded-Proto` header so that posthog knows it.
+
+```apache2
+<VirtualHost *:443>
+    ProxyPass / http://0.0.0.0:8000/
+    RequestHeader set X-Forwarded-Proto expr=%{REQUEST_SCHEME}
+    
+    # ... SSL & other config here
+</VirtualHost>
+```
+
 ### Infinite redirect
 
-Some users have reported getting infinite redirects running behind a proxy. You can set the `DISABLE_SECURE_SSL_REDIRECT` variable to make PostHog run using http.
+Some users have reported getting infinite redirects running behind a proxy. Make sure the `X-Forwarded-Proto` header is set to `https` if you have https enabled. Alternatively, you can set the `DISABLE_SECURE_SSL_REDIRECT` variable to make PostHog run using http.
 
 ## Secret key
 
