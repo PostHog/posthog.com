@@ -15,7 +15,6 @@ class Menu extends Component {
 
   render() {
     const { sidebarDocked, menuOpen } = this.props
-    console.log(this.props.location)
     return (
       <StaticQuery
         query={graphql`
