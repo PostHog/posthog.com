@@ -100,7 +100,7 @@ For an in depth how-to on CloudFormations check out the [AWS Docs](https://docs.
 The gist is this:
 1. Grab YAML Configs from [here](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml)
 2. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
-3. Click Create **Stack -> With New Resources (standard)**
+3. Click **Create Stack -> With New Resources (standard)**
 4. Select Upload a template and link to your newly downloaded YAML config
 5. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
 6. Review the rest of the config wizard pages
