@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { graphql, StaticQuery, Link } from "gatsby"
-import { connect } from "react-redux"
-import { getSidebarState } from '../../store/selectors';
+import { graphql, StaticQuery, Link } from 'gatsby'
+import { connect } from 'react-redux'
+import { getSidebarState } from '../../store/selectors'
 import {
   onSetSidebarOpen,
   onSetSidebarContentStructure,
-  onSidebarContentExpanded
+  onSidebarContentExpanded,
 } from '../../actions/layout'
 import Menu from 'antd/lib/menu'
 import 'antd/lib/menu/style/css'
@@ -13,13 +13,12 @@ import './SidebarContents.css'
 
 const SubMenu = Menu.SubMenu
 
-
 class SidebarContents extends Component {
   onSetSidebarOpen = () => {
     this.props.onSetSidebarOpen(false)
   }
 
-  onChangeExpandedKeys = (keys) => {
+  onChangeExpandedKeys = keys => {
     this.props.onSidebarContentExpanded(keys)
   }
 
@@ -30,7 +29,7 @@ class SidebarContents extends Component {
       entry,
       selectedEntry,
       contentTree,
-      contentDir
+      contentDir,
     } = this.props.sidebar
 
     return (
@@ -67,11 +66,13 @@ class SidebarContents extends Component {
           let tree = null
           let defaultOpenKeys = []
 
-
           const convertToTree = (entry, parent) => {
             const rootEntry = getEntry(entry)
-            const child_dir = rootEntry.child_entries ?
-              rootEntry.child_entries.map(item => convertToTree(item, rootEntry.id)) : null
+            const child_dir = rootEntry.child_entries
+              ? rootEntry.child_entries.map(item =>
+                  convertToTree(item, rootEntry.id)
+                )
+              : null
             let children = itemToNode(rootEntry)
             if (children && child_dir) children = children.concat(child_dir)
             else if (children === null) children = child_dir
@@ -79,41 +80,41 @@ class SidebarContents extends Component {
               key: rootEntry.id,
               title: rootEntry.name,
               children: children,
-              parent: parent
+              parent: parent,
             }
             dir.push(node)
             return node
           }
 
-          const getEntry = (entry) => {
+          const getEntry = entry => {
             for (let item in entries) {
               if (entries[item].name === entry) return entries[item]
             }
             return null
           }
-          const getNode = (key) => {
+          const getNode = key => {
             for (let item in dir) {
               if (dir[item].key === key) return dir[item]
             }
             return null
           }
 
-          const itemToNode = (entry) => {
+          const itemToNode = entry => {
             if (entry.items == null) return null
             return entry.items.map(item => {
-              return getPage("/" + item, entry.id)
+              return getPage('/' + item, entry.id)
             })
           }
 
           const getPage = (path, parent) => {
             for (let item in pages) {
               if (pages[item].fields.slug === path) {
-                const node = ({
+                const node = {
                   path: pages[item].fields.slug,
                   key: pages[item].id,
                   title: pages[item].frontmatter.title,
-                  parent: parent
-                })
+                  parent: parent,
+                }
                 dir.push(node)
                 return node
               }
@@ -121,7 +122,7 @@ class SidebarContents extends Component {
             return null
           }
 
-          const addOpenKeys = (key) => {
+          const addOpenKeys = key => {
             if (key && key !== selectedKey) defaultOpenKeys.push(key)
             const parent = getNode(key)
             if (parent) addOpenKeys(parent.parent)
@@ -144,15 +145,19 @@ class SidebarContents extends Component {
                 if (item.path) {
                   return (
                     <Menu.Item key={item.key}>
-                      <Link to={item.path} onClick={this.onSetSidebarOpen}>{item.title}</Link>
+                      <Link to={item.path} onClick={this.onSetSidebarOpen}>
+                        {item.title}
+                      </Link>
                     </Menu.Item>
                   )
                 }
                 return (
-                  <SubMenu 
+                  <SubMenu
                     key={item.key}
-                    title={<span style={{fontWeight:750}}
-                  >{item.title}</span>}>
+                    title={
+                      <span style={{ fontWeight: 750 }}>{item.title}</span>
+                    }
+                  >
                     {loop(item)}
                   </SubMenu>
                 )
@@ -160,7 +165,7 @@ class SidebarContents extends Component {
             }
           }
           return (
-            <Menu 
+            <Menu
               mode="inline"
               defaultOpenKeys={defaultOpenKeys}
               selectedKeys={selectedKeys}
@@ -176,7 +181,7 @@ class SidebarContents extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     sidebar: getSidebarState(state),
   }
@@ -185,7 +190,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   onSetSidebarOpen,
   onSetSidebarContentStructure,
-  onSidebarContentExpanded
+  onSidebarContentExpanded,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (SidebarContents)
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarContents)

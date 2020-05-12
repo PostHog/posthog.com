@@ -4,19 +4,18 @@ import Button from 'antd/lib/button'
 import { connect } from 'react-redux'
 import { onChangeMenuState } from '../../actions/layout'
 import List from 'antd/lib/list'
-import { getMenuState } from '../../store/selectors';
+import { getMenuState } from '../../store/selectors'
+import { Menu as AntMenu } from 'antd'
+import { CloseOutlined } from '@ant-design/icons'
 
 class Menu extends Component {
-  onChangeMenuState = (nItem) => {
+  onChangeMenuState = nItem => {
     this.props.onChangeMenuState(nItem)
   }
 
   render() {
-    const { 
-      sidebarDocked,
-      menuOpen,
-    } = this.props
-
+    const { sidebarDocked, menuOpen } = this.props
+    console.log(this.props.location)
     return (
       <StaticQuery
         query={graphql`
@@ -35,80 +34,109 @@ class Menu extends Component {
         render={data => {
           const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
           return (
-            <div>
-            {sidebarDocked &&
-            <div>
-              {menuItems.reverse().map(item => {
-                return (
-                  <div 
-                    style={{ marginLeft: "2em", float: "right" }}
-                    key={menuItems.indexOf(item)}
-                  >
-                    <p style={{ margin:0, fontSize: "1rem" }}>
-                    {item.a? <a
-                        href={item.a}
-                        style={{ color: 'black', textDecoration: 'none' }}
+            <div style={{ marginRight: 20 }}>
+              {sidebarDocked && (
+                <AntMenu
+                  mode="horizontal"
+                  style={{
+                    borderBottomWidth: 0,
+                  }}
+                  selectedKeys={menuItems.map(menuItem => {
+                    if (window.location.pathname === menuItem.link)
+                      return menuItem.link
+                  })}
+                >
+                  {menuItems.reverse().map(item => {
+                    return (
+                      <AntMenu.Item
+                        style={{
+                          marginLeft: '2em',
+                          float: 'right',
+                        }}
+                        key={item.link}
                       >
-                        {item.name}
-                        </a>
-                    :
-                      <Link
-                        to={item.link}
-                        style={{ color: 'black', textDecoration: 'none' }}
-                      >
-                        {item.name}
-                        </Link>
-                    }                      
-                    </p>
+                        {item.a ? (
+                          <a href={item.a} style={{ color: 'black' }}>
+                            {item.name}
+                          </a>
+                        ) : (
+                          <Link to={item.link} style={{ color: 'black' }}>
+                            {item.name}
+                          </Link>
+                        )}
+                      </AntMenu.Item>
+                    )
+                  })}
+                </AntMenu>
+              )}
+              {!sidebarDocked && (
+                <Button
+                  style={{
+                    color: 'cornflowerblue',
+                  }}
+                  type="link"
+                  onClick={() => {
+                    this.onChangeMenuState(menuItems.length)
+                  }}
+                  icon="menu"
+                />
+              )}
+              {menuOpen && !sidebarDocked && (
+                <div
+                  style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    height: '100vh',
+                    width: '100vw',
+                    backgroundColor: 'white',
+                    zIndex: 100,
+                    paddingLeft: '10vw',
+                    paddingRight: '10vw',
+                    paddingTop: '5vh',
+                  }}
+                >
+                  <div>
+                    <CloseOutlined
+                      style={{ float: 'right', fontSize: '30px' }}
+                      onClick={() => {
+                        this.onChangeMenuState(menuItems.length)
+                      }}
+                    ></CloseOutlined>
                   </div>
-                )
-              })}
-            </div>
-            }
-            {!sidebarDocked &&
-              <Button 
-                style={{
-                  position: 'fixed',
-                  right: 10,
-                  top: 12,
-                  color: 'cornflowerblue',
-                }}
-                type='link'
-                onClick={() => {this.onChangeMenuState(menuItems.length)}}
-                icon="menu"
-              />
-            }
-            {menuOpen && !sidebarDocked &&
-              <List
-                itemLayout="horizontal"
-                dataSource={menuItems}
-                renderItem={item => (
-                  <List.Item
+                  <List
+                    itemLayout="horizontal"
+                    dataSource={menuItems}
+                    renderItem={item => (
+                      <List.Item
+                        style={{
+                          listStyle: 'none',
+                          marginTop: '5vh',
+                        }}
+                        key={menuItems.indexOf(item)}
+                      >
+                        <List.Item.Meta
+                          title={
+                            <Link
+                              to={item.link}
+                              style={{ color: 'black', textDecoration: 'none' }}
+                              onClick={() => {
+                                this.onChangeMenuState(menuItems.length)
+                              }}
+                            >
+                              {item.name}
+                            </Link>
+                          }
+                        />
+                      </List.Item>
+                    )}
                     style={{
-                      listStyle: 'none',
-                      marginLeft: '-20px'
+                      width: '100%',
+                      float: 'left',
                     }}
-                    key={menuItems.indexOf(item)}
-                  >
-                    <List.Item.Meta
-                      title={
-                        <Link
-                          to={item.link}
-                          style={{ color: 'black', textDecoration: 'none' }}
-                          onClick={() => {this.onChangeMenuState(menuItems.length)}}
-                        >
-                          {item.name}
-                        </Link>
-                      }
-                    />
-                  </List.Item>
-                )}
-                style={{
-                  width: '100%',
-                  float: 'left',
-                }}
-              />
-            }
+                  />
+                </div>
+              )}
             </div>
           )
         }}
@@ -117,7 +145,7 @@ class Menu extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     menuOpen: getMenuState(state).open,
   }
@@ -128,4 +156,4 @@ const mapDispatchToProps = {
 }
 
 // export default Menu
-export default connect(mapStateToProps, mapDispatchToProps) (Menu)
+export default connect(mapStateToProps, mapDispatchToProps)(Menu)
