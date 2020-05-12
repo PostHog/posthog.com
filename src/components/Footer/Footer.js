@@ -71,7 +71,7 @@ class Footer extends Component {
               <FooterListItem to="/handbook">Handbook</FooterListItem>
               <FooterListItem to="/careers">Careers</FooterListItem>
               <FooterListItem to="/handbook/investors">Investors</FooterListItem>
-              <FooterListItem>Media</FooterListItem>
+              <FooterListItem to="/media">Media</FooterListItem>
               <FooterListItem to="/terms">Terms</FooterListItem>
             </Col>
           </Col>
