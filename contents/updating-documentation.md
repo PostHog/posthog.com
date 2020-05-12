@@ -60,7 +60,7 @@ To include an image in a markdown file, you can now use nice local references, i
 ![Twin Peaks](../../images/02/IMG_4294-scaled.jpg)
 ```
 
-Notice the extra ```.../```.
+Notice the extra ```../```.
 
 For most images, this plugin will automatically generate a range of sizes to optimize for the device and they'll even have a blurry low filesize loading image created to hold the place. Pretty cool.
 

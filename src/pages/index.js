@@ -167,7 +167,7 @@ const IndexPage = () => {
           <Col span={24} className="header-row" align="middle">    
             <h2>Install now, free</h2>
           </Col>
-          <a href="https://heroku.com/deploy?template=https://github.com/posthog/posthog">
+          <a href="/docs/deployment">
             <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on Heroku" className="hover-shadow" src={installHeroku} />
             </Col>
@@ -177,7 +177,7 @@ const IndexPage = () => {
               <img alt="Deploy on Docker" className="hover-shadow" src={installDocker} />
             </Col>
           </Link>
-          <Link to="docs/deployment">
+          <Link to="docs/deployment#aws-ecs-fargate">
             <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on AWS" className="hover-shadow" src={installAws} />
             </Col>
