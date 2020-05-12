@@ -251,6 +251,7 @@ h2 {
   text-rendering: optimizeLegibility;
   font-size: 1.62671rem;
   line-height: 1.1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 }
 h3 {
   margin-left: 0;
@@ -259,7 +260,7 @@ h3 {
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
-  padding-top: 0;
+  padding-top: 1rem;
   margin-bottom: 1.45rem;
   color: inherit;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -592,13 +593,13 @@ td:last-child {
 }
 tt,
 code {
-  background-color: hsla(0, 0%, 0%, 0.04);
+  background-color: #f8f8f8;
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;
-  padding: 0;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+  margin: 0 2px;
+  padding: 3px 5px;
+  white-space: pre-wrap;
 }
 pre code {
   background: none;
@@ -737,3 +738,20 @@ pre tt:after {
 .icon-100{
   font-size:85px;
 }
+
+.post-toc-anchor {
+  margin-left: -24px;
+  margin-right: 8px;
+  opacity: 0
+}
+h1:hover .post-toc-anchor,
+h2:hover .post-toc-anchor,
+h3:hover .post-toc-anchor,
+h4:hover .post-toc-anchor,
+h5:hover .post-toc-anchor,
+h6:hover .post-toc-anchor
+{
+  opacity: 1
+}
+
+a.middle { display: block; text-align: center }

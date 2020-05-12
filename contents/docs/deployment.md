@@ -1,29 +1,13 @@
 ---
-title: Deployment
+title: Deploy PostHog
 sidebar: Docs
 showTitle: true
 ---
 
-> If you don't want to host or manage PostHog yourself, you can [sign up for an account instead](https://app.posthog.com/signup) and let us do the hosting for you, or we can provide [paid support](/services) to manage the deployment on your infrastructure.
-
-## Quick start
-
-If you would like to self-host the software, it is easiest to use Heroku to deploy - just click the button below to get started.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
-
-Although the software will work on their free tier, we recommemd using the `hobby-dev` Postgres Dyno for low volumes of events.
-
-# Overview
-
-PostHog can be installed in most cloud providers. To get the best experience from PostHog, you need to balance performance, reliability, ease of administration (backups, upgrades and troubleshooting), and cost of hosting.
-
-There are many ways you can deploy:
-
-1. Heroku. Slightly higher hosting cost but very easy to try out the software. Recommended for small companies or beginners.
-1. Docker. A dockerized container for a very quick build of the PostHog complete application and the components it depends on, like Postgres, and Redis. Recommended for anyone comfortable with Docker that wants a lower hosting cost than Heroku.
-1. PostHog helm chart. The cloud native Helm chart for installing PostHog and all its components on Kubernetes. Recommended for high scale users.
-1. Source. Complete flexibility, auditability and easy customization. Recommended for those that want to customize or develop the platform heavily.
+||||
+| :-- | :-: | --- | --- | --- |
+| [![](../../src/images/install-heroku.png)](#heroku) | [![](../../src/images/install-docker.png)](#docker-compose) | [![](../../src/images/install-kubernetes.png)](#helm-chart-kubernetes-installation) | [![](../../src/images/install-aws.png)](#aws-ecs-fargate) | [![](../../src/images/community-github.png)](#source-installation)
+| <a href="#heroku" class="middle">Heroku</a> | <a href="#docker-compose" class="middle">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle">AWS</a> | <a href="#source-installation" class="middle">Source</a> |
 
 ## Heroku
 
@@ -35,7 +19,7 @@ We recommend getting at the very least a `hobby-dev` Postgres and Dyno for low v
 
 See our instructions on [upgrading PostHog](/upgrading-PostHog) on Heroku to the latest version.
 
-## Docker installation
+## Docker images
 
 We have [three types of images](https://hub.docker.com/r/posthog/posthog):
 
@@ -45,7 +29,7 @@ We have [three types of images](https://hub.docker.com/r/posthog/posthog):
 
 > We recommend using `posthog/posthog:latest`, so you always have the latest features and security updates
 
-### Docker installation: Using Docker Compose 
+## Docker Compose 
 
 1. [Install Docker](https://docs.docker.com/installation/ubuntulinux/)
 2. [Install Docker Compose](https://docs.docker.com/compose/install/)
@@ -64,7 +48,7 @@ If you're running locally:
 
 If you run your Postgres database somewhere else (like RDS, or just a different server) you can set the DATABASE_URL property, and remove `services -> db` and `depends_on: - db` from your docker-compose file.
 
-### Docker installation: one line preview
+### Docker one line preview
 
 If you would like to run the software locally, you can use a Docker preview. This is *not* meant for production use.
 
@@ -91,6 +75,33 @@ helm install posthog posthog/posthog
 See the [README](https://github.com/PostHog/charts/blob/master/charts/posthog/README.md) or 
 [`values.yaml`](https://github.com/PostHog/charts/blob/master/charts/posthog/values.yaml)
 for configuration options.
+
+## AWS ECS Fargate
+We maintain a CloudFormation [config](https://github.com/fuziontech/posthog/blob/master/deployment/aws/ecs/combined.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. For the container hosting we use fargate so that you only pay for what you need.
+
+For an in depth how-to on CloudFormations check out the [AWS Docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html)
+
+The gist is this:
+
+1. Grab YAML Configs from [here](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml)
+
+1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
+
+1. Click **Create Stack -> With New Resources (standard)**
+
+1. Select Upload a template and link to your newly downloaded YAML config
+
+1. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
+
+1. Review the rest of the config wizard pages
+
+1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~$27 USD a month
+
+1. If you are ready, click **Create Stack**!
+
+1. Once deployment completes look under **Options** for the Publicly facing ELB Host
+
+**⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
 
 ## Source installation
 

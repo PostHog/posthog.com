@@ -24,12 +24,13 @@
     "name":"Deployment",
     "items": [
       "docs/deployment",
-      "docs/upgrading-posthog",
-      "docs/scaling-posthog",
-      "docs/snippet-installation",
+      "docs/deployment/scaling-posthog",
       "docs/deployment/securing-posthog",
+      "docs/deployment/running-behind-proxy",
+      "docs/deployment/upgrading-posthog",
       "docs/deployment/hosting-costs",
-      "docs/deployment/smtp-credentials"
+      "docs/deployment/smtp-credentials",
+      "docs/deployment/snippet-installation"
     ]
   },
   {

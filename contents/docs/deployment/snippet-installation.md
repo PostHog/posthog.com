@@ -12,11 +12,11 @@ To find the snippet, login at app.posthog.com
 
 Now, go to ‘Setup’ in the left hand navigation:
 
-![Left hand navigation](../images/02/Screenshot-2020-02-09-at-21.16.41.png)
+![Left hand navigation](../../images/02/Screenshot-2020-02-09-at-21.16.41.png)
 
 Enter the domain of your application then press ‘Save url’.
 
-![Select domain image](../images/02/Screenshot-2020-02-09-at-21.17.37.png)
+![Select domain image](../../images/02/Screenshot-2020-02-09-at-21.17.37.png)
 
 ## Adding the snippet to your application or website
 
@@ -32,11 +32,11 @@ We recommend putting PostHog both on your homepage and your application if appli
 
 PostHog can also support tracking across multiple urls and domains. In Setup you can select '+ Add Another URL'
 
-![Select urls](../images/03/Posthog-14.png)
+![Select urls](../../images/03/Posthog-14.png)
 
 You can then enter multiple urls that you would like to track activity for.
 
-![setup multiple urls](../images/03/setupmultipleurls.gif)
+![setup multiple urls](../../images/03/setupmultipleurls.gif)
 
 ## Verify events tracking
 
@@ -46,11 +46,11 @@ Now, visit a URL of your application. Then go back to PostHog.
 
 Click ‘Events’ in the left hand navigation:
 
-![Left hand navigation, events selected](../images/02/Screenshot-2020-02-09-at-21.18.55.png)
+![Left hand navigation, events selected](../../images/02/Screenshot-2020-02-09-at-21.18.55.png)
 
 You should be able to see a list of events, when they took place and the path containing the URL you visited.
 
-![Events list](../images/02/Screenshot-2020-02-09-at-21.20.20.png)
+![Events list](../../images/02/Screenshot-2020-02-09-at-21.20.20.png)
 
 You should be able to see a list of events, when they took place and the path containing the URL you visited.
 
