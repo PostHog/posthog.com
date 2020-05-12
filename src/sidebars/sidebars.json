@@ -153,11 +153,21 @@
   {
     "entry":"Handbook",
     "name":"Handbook",
-    "items":[
+    "child_entries":[
+      "People",
+      "Engineering",
+      "Growth",
+      "Strategy"
+    ]
+  },
+  {
+    "entry":"People",
+    "name":"People",
+    "items":
+    [
       "handbook/communication",
-      "handbook/contact",
       "handbook/culture",
-      "handbook/posthog-array",
+      "handbook/onboarding",
       "handbook/security",
       "handbook/side-gigs",
       "handbook/spending-money",
@@ -165,18 +175,14 @@
       "handbook/team",
       "handbook/time-off",
       "handbook/values"
-    ],
-    "child_entries":[
-      "Engineering",
-      "Growth",
-      "Strategy"
     ]
   },
   {
     "entry":"Growth",
     "name":"Growth",
     "items":[
-      "handbook/what-is-product-led-growth"
+      "handbook/what-is-product-led-growth",
+      "handbook/posthog-array"
     ]
   },
   {
