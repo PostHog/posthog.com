@@ -3,7 +3,8 @@ import Layout from '../components/Layout'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import { Link } from "gatsby"
-import trends from "../images/trends.png";
+import trends from "../images/product-screenshots/product-trends.png";
+import dashboards from "../images/product-screenshots/dashboards.png";
 import Img from "gatsby-image"
 import stackAndroid from "../images/stack-android.png";
 import stackPython from "../images/stack-python.png";
@@ -73,7 +74,7 @@ const IndexPage = () => {
       <Row gutter={[48, 24]}>
         <Col span={12} className="gutter-row">
           <p>
-            <img alt="trends" src={trends} className="shadow" />
+            <img alt="trends" src={dashboards} className="shadow" />
           </p>
         </Col>
         <Col span={12} className="gutter-row">
