@@ -10,6 +10,11 @@ import {
   onSetSidebarHide,
 } from '../actions/layout'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
+import { MDXProvider } from "@mdx-js/react"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { Card } from 'antd'
+
+let shortcodes = { Card };
 
 function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -20,8 +25,8 @@ function Template({
   onSetAnchorHide,
   onSetSidebarHide
 }) {
-  const { markdownRemark } = data // data.markdownRemark holds our post data
-  const { frontmatter, html, id } = markdownRemark
+  const { mdx } = data // data.markdownRemark holds our post data
+  const { frontmatter, body, id } = mdx
 
   const hideAnchor = (frontmatter.hideAnchor === null) ? false : frontmatter.hideAnchor
   const hideSidebar = (frontmatter.sidebar === null) ? true : false
@@ -37,10 +42,9 @@ function Template({
     <div className="blog-post-container">
       <div className="blog-post">
         { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <MDXProvider components={shortcodes}>
+          <MDXRenderer>{body}</MDXRenderer>
+        </MDXProvider>
       </div>
     </div>
     </Layout>
@@ -65,12 +69,12 @@ export default connect(mapStateToProps, mapDispatchToProps) (Template)
 
 export const pageQuery = graphql`
   query($path: String!) {
-    markdownRemark(fields: { slug: { eq: $path} }) {
+    mdx(fields: { slug: { eq: $path} }) {
       fields {
         slug
       }
       id
-      html
+      body
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title

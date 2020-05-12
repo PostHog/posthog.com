@@ -5,7 +5,7 @@ import PostCard from '../components/PostCard';
 
 const BlogPage = ({
   data: {
-    allMarkdownRemark: { edges },
+    allMdx: { edges },
   },
 }) => {
   const posts = edges
@@ -22,7 +22,7 @@ export default BlogPage
 
 export const pageQuery = graphql`
   query($path: String!) {
-    allMarkdownRemark(
+    allMdx(
       sort: { order: DESC, fields: [frontmatter___date] }
       filter: { frontmatter: { rootPage: {eq: $path }}}
     ) {

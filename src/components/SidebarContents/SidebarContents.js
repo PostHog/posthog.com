@@ -37,7 +37,7 @@ class SidebarContents extends Component {
       <StaticQuery
         query={graphql`
           query sidebarContentQuery {
-            allMarkdownRemark(sort: { order: ASC, fields: [fields___slug] }) {
+            allMdx {
               nodes {
                 fields {
                   slug
@@ -61,7 +61,7 @@ class SidebarContents extends Component {
         `}
         render={data => {
           const entries = data.allSidebarsJson.nodes
-          const pages = data.allMarkdownRemark.nodes
+          const pages = data.allMdx.nodes
           const selectedKeys = [selectedKey]
           let dir = []
           let tree = null
@@ -141,6 +141,7 @@ class SidebarContents extends Component {
           const loop = root => {
             if (root.children) {
               return root.children.map(item => {
+                if(!item) return null
                 if (item.path) {
                   return (
                     <Menu.Item key={item.key}>
