@@ -26,7 +26,10 @@
       "docs/deployment",
       "docs/upgrading-posthog",
       "docs/scaling-posthog",
-      "docs/snippet-installation"
+      "docs/snippet-installation",
+      "docs/deployment/securing-posthog",
+      "docs/deployment/hosting-costs",
+      "docs/deployment/smtp-credentials"
     ]
   },
   {
