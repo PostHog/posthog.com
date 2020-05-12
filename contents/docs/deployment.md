@@ -92,6 +92,25 @@ See the [README](https://github.com/PostHog/charts/blob/master/charts/posthog/RE
 [`values.yaml`](https://github.com/PostHog/charts/blob/master/charts/posthog/values.yaml)
 for configuration options.
 
+## AWS ECS Fargate
+We maintain a CloudFormation [config](https://github.com/fuziontech/posthog/blob/master/deployment/aws/ecs/combined.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. For the container hosting we use fargate so that you only pay for what you need.
+
+For an in depth how-to on CloudFormations check out the [AWS Docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html)
+
+The gist is this:
+1. Grab YAML Configs from [here](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml)
+2. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
+3. Click Create **Stack -> With New Resources (standard)**
+4. Select Upload a template and link to your newly downloaded YAML config
+5. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
+6. Review the rest of the config wizard pages
+7. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~$27 USD a month
+8. If you are ready, click **Create Stack**!
+9. Once deployment completes look under **Options** for the Publicly facing ELB Host
+
+**⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
+
+
 ## Source installation
 
 1. Make sure you have Python >= 3.7 and pip installed
