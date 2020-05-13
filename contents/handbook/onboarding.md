@@ -36,7 +36,7 @@ At PostHog, we have a culture of treating team members as partners. This means i
 	* Equity Plan: Stock Plan
 	* Quantity: the volume of options.
 		* There are 10,000,000 shares in the company in total
-		* If the employee is due ie 0.5%, then the amount is (0.5)/100) X 10,000,000 
+		* If the employee is due ie 0.5%, then the amount is ((0.5)/100) X 10,000,000 
 	* Exercise Price: based on latest 409a valuation
 	* Vesting Schedule: 1/48 monthly, 25% vest at 1 year cliff
 	* Vesting Start Date: same as start date of employment
@@ -46,9 +46,11 @@ At PostHog, we have a culture of treating team members as partners. This means i
 * Create a copy of the [employee offer letter](https://drive.google.com/drive/u/0/folders/1vDgWksBtt5cg_BZVFV2eWrD56OmZpKTQ)
 * Complete the blank fields 
 * Where it says "you will be granted an option to purchase ____ shares" in section (2), put in the quantity of options in the Pulley step above.
+* Where it says [Stock Plan] insert the current stock plan, which is the "2020 Stock Plan"
 * Where it says "This offer, if not accepted, will expire at the close of business on _______", it is generally best practice to give the prospective employee 3 working days.
 	* This number isn't larger so it's possible to move on if the candidate rejects us!
-* Where it says "We look forward to having you join us no later than ____________", choose a start date, which should be the same as the 'Anticipated Star Date' on page 4 (which you should pre-fill.
+	* Write dates as "18th May 2020" to avoid confusion
+* Where it says "We look forward to having you join us no later than ____________", choose a start date, which should be the same as the 'Anticipated Start Date' on page 4 (which you should pre-fill).
 	* Pro tip: check to make sure you'll be working that day/week.
 * When done, email to James who will store it in a legal folder
 
@@ -56,6 +58,8 @@ At PostHog, we have a culture of treating team members as partners. This means i
 
 * Create a copy of the [employee confidentiality letter](https://drive.google.com/open?id=19yXodJzE8D2j-aCbNjexsCAGVF1lJfMZ)
 * Complete the blank fields
+* Where it says "effective date" use the start date
+	* Write dates as "18th May 2020" to avoid confusion
 * Make sure you send as a PDF
 * When done, email to James who will store it in a legal folder
 
