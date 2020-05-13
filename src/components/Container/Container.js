@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getMenuState, isSidebarHide, isAnchorHide } from '../../store/selectors';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {
+  getMenuState,
+  isSidebarHide,
+  isAnchorHide,
+} from '../../store/selectors'
 
 class Container extends Component {
   render() {
@@ -11,36 +15,38 @@ class Container extends Component {
       nMenuItem,
       sidebarHide,
       anchorHide,
-    } = this.props;
+    } = this.props
 
     return (
+      <div
+        style={{
+          position: 'relative',
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflow: 'visible',
+        }}
+      >
         <div
           style={{
-            position: "relative",
-            top: (!sidebarDocked && onPostPage) ? 
-              (menuOpen ? nMenuItem*32 + 90 : 95): (menuOpen ? nMenuItem*32 + 75 : 80),
-            left: 0,
-            right: 0,
-            bottom: 0,
-            overflow: "visible"
+            margin: onPostPage ? 0 : '0 auto',
+            maxWidth: 960,
+            padding: '0px 1.0875rem 1.45rem',
+            paddingTop:
+              !sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)
+                ? 20
+                : 0,
           }}
         >
-          <div
-            style={{
-              margin: (onPostPage) ? 0: '0 auto',
-              maxWidth: 960,
-              padding: '0px 1.0875rem 1.45rem',
-              paddingTop: (!sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)) ? 20 : 0,
-            }}
-          >
-            {this.props.children}
-          </div>
+          {this.props.children}
         </div>
+      </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     menuOpen: getMenuState(state).open,
     nMenuItem: getMenuState(state).nItem,
@@ -49,4 +55,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps) (Container);
+export default connect(mapStateToProps)(Container)

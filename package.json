@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Luca(Wei) Chen <wei@cvluca.com>",
   "dependencies": {
+    "@ant-design/icons": "^4.1.0",
     "antd": "^3.23.2",
     "eslint-plugin-flowtype": "^2.50.3",
     "gatsby": "^2.15.15",
