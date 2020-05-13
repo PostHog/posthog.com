@@ -61,7 +61,7 @@ const PricingPage = () => (
 		        <Card title="Free" bordered={false}>
 					<h4>$0/month</h4>
 					<li>Unlimited users</li>
-					<li>5,000 events / month</li>
+					<li>5,000 events/month</li>
 					<li>3 months data history</li>
 					<li>Community support</li>
 					<p>
