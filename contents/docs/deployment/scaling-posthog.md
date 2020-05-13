@@ -10,6 +10,24 @@ In that example, the database grew about 200mb a day. That means Heroku's cheape
 
 However, if you do start going beyond these numbers there are things you can do to scale up.
 
+## Handling Higher Volume with Partitions
+
+Posthog utilizes partitioned tables on Postgres 12 to reorganize the tables that store events. We recommend using the partitioned setup when your deployment's queries are timing out or getting noticeably slow. The partition function below applies event/timestamp partitioning to the event table meaning the table will be partitioned per event and each event table will be partitioned per week (this is for technical clarity only as this shouldn't affect how you interact with the client). The command allows you to specify which events to explicitly create partitions for. If none are specified, the table will only be partitioned by timestamp per week. We recommend you specify a few high volume events.
+
+**To setup:** 
+
+No event, only by week: `python manage.py partition`
+
+With '$pageview' event partition: `python manage.py partition --element '$pageview'`
+
+With multiple event partition: `python manage.py partition --element '$pageview' --element '$autocapture'`
+
+**To reverse the partitions:**
+
+Should any problem arise with partitions, we provide a reversal function that will return the partitioned table to its original configuration:
+
+`python manage.py partition --reverse`
+
 ## Multiple web servers and workers
 
 One easy way of scaling is to add more web servers (or dynos on Heroku) or workers. It's worth having a look at load and RAM metrics for your specific instance to see which one is struggling. PostHog can handle many web servers and workers working in tandem.
