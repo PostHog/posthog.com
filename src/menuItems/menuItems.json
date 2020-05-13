@@ -7,6 +7,10 @@
     "name": "Product",
     "link":  "/product-features"
   },
+  { 
+    "name": "Pricing",
+    "link":  "/pricing"
+  },
   {
     "name": "Resources",
     "link": "/blog"
