@@ -45,7 +45,7 @@ const IndexPage = () => {
           </a>
         </Col>
         <Col xs={7} sm={6} md={5} lg={4} xl={4} className="gutter-row">
-          <a href="https://github.com/posthog/posthog">
+          <a href="/docs/deployment">
             <Button type="secondary" size="large">Self-Managed</Button>
           </a>
         </Col>
