@@ -95,7 +95,7 @@ The gist is this:
 
 1. Review the rest of the config wizard pages
 
-1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~$27 USD a month
+1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about \$27 USD a month
 
 1. If you are ready, click **Create Stack**!
 
