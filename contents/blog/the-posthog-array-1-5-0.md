@@ -7,10 +7,9 @@ showTitle: true
 hideAnchor: true
 ---
 
-Another week, another PostHog Array. We're steadily working towards parity with other tools. This weeks highlights include a new website, multiple dashboards, a sleek new design and breaking down by cohorts.
+Another week, another PostHog Array. We're steadily working towards parity with other tools. This week's highlights include a new website, multiple dashboards, a sleek new design and breaking down by cohorts.
 
-
-[Click here for instructions](/docs/upgrading-posthog) on how to update.
+[Click here for instructions](/docs/deployment/upgrading-posthog) on how to update.
 
 ## Release notes
 
@@ -18,7 +17,7 @@ Another week, another PostHog Array. We're steadily working towards parity with 
 
 ![](../images/05/multiple-dashboards.png)
 
-It's now possible to have multiple dashboards. This can help you organise your graphs and let people have their own personal dashboards. You can also pin important dashboards so they're easily accesible to anyone in your organization.
+It's now possible to have multiple dashboards. This can help you organize your graphs and let people have their own personal dashboards. You can also pin important dashboards so they're easily accesible to anyone in your organization.
 
 In the next release, you'll even be able to resize, re-order and pick your own color for graphs.
 
@@ -28,18 +27,19 @@ In the next release, you'll even be able to resize, re-order and pick your own c
 
 PostHog has a new home! With improved design and super simple instructions on how to get started with PostHog. Our docs and handbook are also integrated for easy access, and the whole thing is run on Gatsby, because we <3 other open source projects.
 
+This makes it easier for the community to propose changes at the [website repo](https://github.com/posthog/posthog.com).
+
 ### [Dark-er mode](https://github.com/PostHog/posthog/pull/740)
 
 ![](../images/05/dark-sidebar.png)
 
-PostHog is now a little bit prettier, with a sleek dark sidebar.
+PostHog is now a lot prettier, with a sleek dark sidebar.
 
 ### [Break down by cohort](https://github.com/PostHog/posthog/pull/690)
 
 ![](../images/05/breakdown-cohort.png)
 
 You were already able to create cohorts, but now you can use them in trends to find out exactly what your users are doing and how certain groups compare to others.
-
 
 ## Bug fixes and performance improvements
 

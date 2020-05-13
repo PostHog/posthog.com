@@ -9,7 +9,7 @@ hideAnchor: true
 
 We’re in the thick of our release schedule this week!
 
-Like what you see and self-hosting? [Update](/docs/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog) your instance.
 
 First our updates and new features.
 

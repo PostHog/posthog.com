@@ -11,7 +11,7 @@ Welcome to our second PostHog Array which comes with a new naming convention.
 
 We’re going to be doing weekly tagged releases from now on so the PostHog Array will reflect our most recent version.
 
-Like what you see and self-hosting? [Update](/docs/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog) your instance.
 
 First our updates and new features.
 
