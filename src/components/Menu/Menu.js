@@ -114,19 +114,36 @@ class Menu extends Component {
                         }}
                         key={menuItems.indexOf(item)}
                       >
-                        <List.Item.Meta
-                          title={
-                            <Link
-                              to={item.link}
-                              style={{ color: 'black', textDecoration: 'none' }}
-                              onClick={() => {
-                                this.onChangeMenuState(menuItems.length)
-                              }}
-                            >
-                              {item.name}
-                            </Link>
-                          }
-                        />
+                        {item.a?
+                          <List.Item.Meta
+                            title={                            
+                              <a
+                                href={item.a}
+                                style={{ color: 'black', textDecoration: 'none' }}
+                                onClick={() => {
+                                  this.onChangeMenuState(menuItems.length)
+                                }}
+                              >
+                                {item.name}
+                              </a>                            
+                            }
+                          />
+                        : 
+                          <List.Item.Meta
+                            title={                            
+                              <Link
+                                to={item.link}
+                                style={{ color: 'black', textDecoration: 'none' }}
+                                onClick={() => {
+                                  this.onChangeMenuState(menuItems.length)
+                                }}
+                              >
+                                {item.name}
+                              </Link>                            
+                            }
+                          />
+                        }
+                        
                       </List.Item>
                     )}
                     style={{
