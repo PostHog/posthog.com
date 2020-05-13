@@ -167,11 +167,11 @@ const IndexPage = () => {
           <Col span={24} className="header-row" align="middle">    
             <h2>Install now, free</h2>
           </Col>
-          <a href="/docs/deployment">
+          <Link to="/docs/deployment">
             <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on Heroku" className="hover-shadow" src={installHeroku} />
             </Col>
-          </a>
+          </Link>
           <Link to="docs/deployment#docker">
             <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
               <img alt="Deploy on Docker" className="hover-shadow" src={installDocker} />
