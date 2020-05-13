@@ -41,8 +41,12 @@ class Menu extends Component {
                     borderBottomWidth: 0,
                   }}
                   selectedKeys={menuItems.map(menuItem => {
-                    if (window.location.pathname === menuItem.link)
-                      return menuItem.link
+                    try {
+                        if (window.location.pathname === menuItem.link)
+                        return menuItem.link
+                      } catch (e) {
+                        console.log(e)
+                    }
                   })}
                 >
                   {menuItems.reverse().map(item => {
