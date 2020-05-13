@@ -22,7 +22,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { children, onPostPage, sidebarHide, anchorHide } = this.props
+    const { children, onPostPage, sidebarHide, anchorHide, className } = this.props
 
     return (
       <StaticQuery
@@ -95,6 +95,7 @@ class Layout extends Component {
                           <Container
                             sidebarDocked={!matches}
                             onPostPage={onPostPage}
+                            className={className}
                             style={{ position: 'relative' }}
                           >
                             {children}
@@ -117,6 +118,7 @@ class Layout extends Component {
                         <Container
                           sidebarDocked={!matches}
                           onPostPage={onPostPage}
+                          className={className}
                           style={{ position: 'relative' }}
                         >
                           {children}
@@ -137,6 +139,7 @@ class Layout extends Component {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string
 }
 
 const mapStateToProps = state => {

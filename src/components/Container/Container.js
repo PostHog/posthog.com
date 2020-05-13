@@ -15,10 +15,12 @@ class Container extends Component {
       nMenuItem,
       sidebarHide,
       anchorHide,
+      className
     } = this.props
 
     return (
       <div
+        className={className}
         style={{
           position: 'relative',
           top: 20,

@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
+import './index.css'
 import { Link } from "gatsby"
 import trends from "../images/product-screenshots/product-trends.png";
 import dashboards from "../images/product-screenshots/dashboards.png";
@@ -27,7 +28,7 @@ import { Row, Col, Icon } from 'antd';
 
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout className='index-page'>
       <Row gutter={[24, 8]}>
         <Col span={24} className="gutter-row">
           <h2 className="large-header">Understand your users.<br />Build a better product.</h2>
