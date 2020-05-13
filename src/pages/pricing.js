@@ -108,6 +108,189 @@ const PricingPage = () => (
     <Row className="spacer-row">
 
     </Row>
+	<h2>Feature comparison</h2>
+	<table>
+<thead>
+<tr>
+<th align="center">Feature</th>
+<th align="center">PostHog</th>
+<th align="center">Amplitude</th>
+<th align="center">Mixpanel</th>
+<th align="center">Heap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Self Hosted</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Managed Hosting</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Autocapture</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">API</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">In-App Events Tracking</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Conversion Tracking</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Dashboard</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Data Visualisation</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Cohort Analysis</td>
+<td align="center">✔*</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Funnel Analysis</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Push Notifications</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Retention Tracking</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">User Engagement Tracking</td>
+<td align="center">✔*</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Revenue Tracking</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Data Import</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Data Export</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">External Integrations</td>
+<td align="center">✔*</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Keyword (UTM) Tracking</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Email Link Tracking</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Multi-Site</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Multi User</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">A/B Testing</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Direct SQL Access</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center">Full Data History</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+* These features are still in active development. <a href='https://github.com/posthog/posthog/issues'>See our repository to follow along.</a>
   </Layout>
 )
 

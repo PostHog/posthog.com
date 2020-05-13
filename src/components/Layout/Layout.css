@@ -251,7 +251,6 @@ h2 {
   text-rendering: optimizeLegibility;
   font-size: 1.62671rem;
   line-height: 1.1;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 }
 h3 {
   margin-left: 0;
@@ -673,7 +672,7 @@ pre tt:after {
 }
 
 .footer-universal{
-  background: #000;
+  background: #29252C;
   color: #FFF;
   position: 'relative';
   left: 0px;
@@ -685,6 +684,9 @@ pre tt:after {
   height: 100%;
 }
 
+.footer-universal a {
+  color: #fff;
+}
 .footer-links{
   list-style-type: none;
   margin-top:20px;
@@ -743,6 +745,9 @@ pre tt:after {
   margin-left: -24px;
   margin-right: 8px;
   opacity: 0
+}
+.blog-post h2 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 }
 h1:hover .post-toc-anchor,
 h2:hover .post-toc-anchor,
