@@ -142,6 +142,17 @@ module.exports = {
       },
     },
     `gatsby-plugin-remove-trailing-slashes`,
+    {
+      resolve: `gatsby-plugin-posthog-analytics`,
+      options: {
+        // Specify the API key for your Posthog Project (required)
+        apiKey: "sTMFPsFhdP1Ssg",
+        // Puts tracking script in the head instead of the body (optional, default: true)
+        head: true,
+	     // Enable posthog analytics tracking during development (optional, default: false)
+	      isEnabledDevMode: true
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

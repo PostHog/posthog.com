@@ -6467,6 +6467,13 @@ gatsby-plugin-page-creator@^2.2.2:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
+gatsby-plugin-posthog-analytics@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-posthog-analytics/-/gatsby-plugin-posthog-analytics-0.0.1.tgz#ebb16552cd679fda76469b76ff5e0fcea9d6d8ad"
+  integrity sha512-vZXebvuyYB2iHqY6A50LxOHOWd2hClhKUeFtLU+t1JUJCzaYrn2LtvZnyfMadtjjv0n1FpEzyvren2VS/mq8oA==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+
 gatsby-plugin-react-helmet@^3.1.7:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-react-helmet/-/gatsby-plugin-react-helmet-3.2.3.tgz#d3b130429e66a70120dbb3dfe90748a0047a219e"
