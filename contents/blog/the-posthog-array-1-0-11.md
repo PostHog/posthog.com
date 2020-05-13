@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-Like what you see and self-hosting? [Update](/docs/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog) your instance.
 
 First our updates and new features.
 

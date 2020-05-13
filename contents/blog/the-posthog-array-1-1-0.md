@@ -9,7 +9,7 @@ hideAnchor: true
 
 Major update time (hence the change to 1.*1*.0) - push-based integrations have been introduced!
 
-Like what you see and self-hosting? [Update](/docs/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog) your instance.
 
 First our updates and new features.
 

@@ -9,7 +9,7 @@ hideAnchor: true
 
 Another shiny new integration - PostHog now plays nicely with Android!
 
-Like what you see and self-hosting? [Update](/docs/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog) your instance.
 
 ## Release notes
 
