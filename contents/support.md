@@ -26,6 +26,6 @@ For urgent isses, we have a [community Slack](https://join.slack.com/t/posthogus
 
 Email [hey@posthog.com](mailto:hey@posthog.com) with any miscellaneous questions that don't fit into the above.
 
-# Sales enquiries
+## Sales enquiries
 
 Interested in PostHog's team providing support? We can help you manage your deployment. Email [sales@posthog.com](mailto:sales@posthog.com).
