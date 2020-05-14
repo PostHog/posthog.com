@@ -1,8 +1,8 @@
-# WIP: PostHog.com
+# PostHog.com - docs, website and handbook
 
 This is the new company website / docs and handbook.
 
-This is based on gatsby-markdown-starter, itself a boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [gatsby-default-starter](https://github.com/gatsbyjs/gatsby-starter-default).
+Please feel free to suggest any changes - see our contributing guide.
 
 ## Quick Start
 
@@ -12,6 +12,7 @@ This is based on gatsby-markdown-starter, itself a boilerplate for markdown-base
 
     ```sh
     cd posthog.com/
+    yarn install
     gatsby develop
     ```
 
