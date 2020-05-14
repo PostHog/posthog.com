@@ -12,7 +12,9 @@ However, if you do start going beyond these numbers there are things you can do 
 
 ## Handling Higher Volume with Partitions
 
-Posthog utilizes partitioned tables on Postgres 12 to reorganize the tables that store events. We recommend using the partitioned setup when your deployment's queries are timing out or getting noticeably slow. The partition function below applies event/timestamp partitioning to the event table meaning the table will be partitioned per event and each event table will be partitioned per week (this is for technical clarity only as this shouldn't affect how you interact with the client). The command allows you to specify which events to explicitly create partitions for. If none are specified, the table will only be partitioned by timestamp per week. We recommend you specify a few high volume events.
+Posthog utilizes partitioned tables on Postgres 12 to reorganize the tables that store events. We recommend using the partitioned setup when your deployment's queries are timing out or getting noticeably slow. The partition function below applies event/timestamp partitioning to the event table meaning the table will be partitioned per event and each event table will be partitioned per week (Partitioning events doesn't change how you use PostHog. It'll only speed things up). 
+
+The command allows you to specify which events to explicitly create partitions for. If none are specified, the table will only be partitioned by timestamp per week. If any single event has > million events a week, it's worth partitioning on that event. Any events that aren't partitioned get put together in a default bucket for that week. For instance, if you're using posthog-js or the snippet, it's worth partitioning on `$pageview` and `$autocapture`, as they tend to be high volume events
 
 **To setup:** 
 
