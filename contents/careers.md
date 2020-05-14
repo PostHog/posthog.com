@@ -21,7 +21,30 @@ In reality, as one of our first hires you'll have a large hand in shaping this, 
 * Prefer making things transparent and public
 * No need for crazy hours. Work hard when you're working.
 
+## Our backers
+
+We're young, but we're already [backed](/handbook/investors) by many of the best investors in the world. This includes YCombinator, Solomon Hykes (ex-founder/CEO Docker), David Cramer (Founder/CEO Sentry), Adam Goldstein (Founder Hipmunk). See [the rest](/handbook/investors)!
+
 # Open roles
+
+## Designer / UX
+
+### Your role
+
+We are looking for someone that can help us rebrand and polish our website and docs. Initially, this would mean making our website and documentation much cooler. We also need ot keep things consistent with our product itself.
+
+Adorable hedgehogs, cool dev focussed stuff. What's not to like?
+
+We're open for ideas here - either you are more a designer than a UX person and the objective is to produce .ai or Figma files for the UX that we can then convert, or if you're happy using React and can write the components yourself, that's also cool (and a plus, but not necessary).
+
+It is a major positive if you've worked with making technical documentation better before. We aim to get our docs to the same standard or higher than Stripe.
+
+### Hiring process
+
+* Please send us links to some of your previous work and a cover letter
+* You'll meet our CEO James over Zoom
+* We'll pay you normal contracting rates for anywhere between 1-5 days to do some work with us. That'll give you a chance to learn how we'd work with you, and for us to see how you work.
+* We make a decision with you.
 
 ## Dev-ops / backend engineer
 
@@ -35,12 +58,9 @@ We're looking for people who are proactive and are ridiculously quick at shippin
 
 * You'll have a 30 minute phone-call with our CTO Tim
 * You'll meet our CEO James
-* We'll pay you a normal contracting rates for anywhere between 1-5 days to do some work on PostHog. This will give you a chance to learn how we'd work with you, and for us to see how you work. You'll also end up with some open-source contributions.
+* We'll pay you normal contracting rates for anywhere between 1-5 days to do some work on PostHog. This will give you a chance to learn how we'd work with you, and for us to see how you work. You'll also end up with some open-source contributions.
 * We make a decision.
 
-### Our backers
-
-We're young, but we're already [backed](/handbook/investors) by many of the best investors in the world. This includes YCombinator, Solomon Hykes (ex-founder/CEO Docker), David Cramer (Founder/CEO Sentry), Adam Goldstein (Founder Hipmunk). See [the rest](/handbook/investors)!
 
 ### How to apply
 
