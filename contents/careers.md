@@ -46,6 +46,14 @@ It is a major positive if you've worked with making technical documentation bett
 * We'll pay you normal contracting rates for anywhere between 1-5 days to do some work with us. That'll give you a chance to learn how we'd work with you, and for us to see how you work.
 * We make a decision with you.
 
+### How to apply
+
+Email a thoughtful cover letter to [james@posthog.com](mailto:james@posthog.com). A good cover letter includes:
+
+* What makes you a great designer or UX person
+* A few relevant links or examples of previous design work
+* What you like/dislike about PostHog
+
 ## Dev-ops / backend engineer
 
 ### Your role
@@ -60,7 +68,6 @@ We're looking for people who are proactive and are ridiculously quick at shippin
 * You'll meet our CEO James
 * We'll pay you normal contracting rates for anywhere between 1-5 days to do some work on PostHog. This will give you a chance to learn how we'd work with you, and for us to see how you work. You'll also end up with some open-source contributions.
 * We make a decision.
-
 
 ### How to apply
 
