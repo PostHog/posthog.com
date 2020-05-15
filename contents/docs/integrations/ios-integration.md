@@ -58,8 +58,8 @@ let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY")
 // self-hosted
 let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY", host: "http://app.posthog.com")
 
-configuration.captureApplicationLifecycleEvents = YES; // Record certain application events automatically!
-configuration.recordScreenViews = YES; // Record screen views automatically!
+configuration.captureApplicationLifecycleEvents = true; // Record certain application events automatically!
+configuration.recordScreenViews = true; // Record screen views automatically!
 
 PHGPostHog.setup(with: configuration)
 let posthog = PHGPostHog.shared()
