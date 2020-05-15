@@ -53,7 +53,7 @@ configuration.recordScreenViews = YES; // Record screen views automatically!
 import PostHog
 
 // on posthog.com
-let config = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY")
+let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY")
 
 // self-hosted
 let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY", host: "http://app.posthog.com")
