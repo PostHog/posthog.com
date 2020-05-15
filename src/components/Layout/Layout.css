@@ -749,6 +749,11 @@ pre tt:after {
 .blog-post h2 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 }
+.blog-post p > img {
+  margin: 0 auto;
+  width: 65%;
+  display: block;
+}
 h1:hover .post-toc-anchor,
 h2:hover .post-toc-anchor,
 h3:hover .post-toc-anchor,

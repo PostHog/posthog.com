@@ -74,7 +74,8 @@
       "docs/integrations/ruby-integration"
     ],
     "child_entries":[
-      "Community"
+      "Community",
+      "Sending Data Out"
     ]
   },
   {
@@ -83,6 +84,14 @@
     "items":[
       "docs/integrations/community",
       "docs/integrations/gatsby-integration"
+    ]
+  },
+  {
+    "entry":"Sending Data Out",
+    "name":"Sending Data Out",
+    "items":[
+      "docs/integrations/slack",
+      "docs/integrations/microsoft-teams"
     ]
   },
   {
