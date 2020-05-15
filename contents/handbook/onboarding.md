@@ -20,6 +20,7 @@ At PostHog, we have a culture of treating team members as partners. This means i
 - [ ] Add team member to the internal company Slack
 - [ ] Add team member to PostHog Users Slack
 - [ ] Add team member to PostHog organization in GitHub
+- [ ] Add team member to 1password
 - [ ] Check that the team member has access to the holidays calendar, and is invited to the daily standups
 - [ ] Send team member a link to the [Handbook](/handbook)
 - [ ] Manager to book a weekly 1:1 with the team member
