@@ -35,11 +35,11 @@ We expect all backend code to have corresponding tests. You can run the tests by
 ### Frontend
 We use [cypress](https://www.cypress.io/) for functional frontend tests. Cypress is used to mock user interface interactions on a demo instance. We've currently targeted test coverage for the most used areas of posthog and are working to increase coverage. 
 
-We follow the given, when, then framework. Each test should provide a given (initial setup for the flow or feature being tested), when (an action performed), and then (an assertion that verifies resulting behavior). To keep our components flexible and easily maintainable within tests, we use a `dataattr` pattern where we add a page-unique identifier prop to react components for testing purposes. Then, to identify an element in a cypress tests we use `cy.get('[dataattr=some-identifier]')...`. 
+We follow the given, when, then framework. Each test should provide a given (initial setup for the flow or feature being tested), when (an action performed), and then (an assertion that verifies resulting behavior). To keep our components flexible and easily maintainable within tests, we use a `data-attr` pattern where we add a page-unique identifier prop to react components for testing purposes. Then, to identify an element in a cypress tests we use `cy.get('[dataattr=some-identifier]')...`. 
 
 #### Cypress usage for local development
 
-1. Ensure that you either `yarn install` or `yarn add cypress --dev` in the root directory
+1. Ensure that you either `yarn install` in the root directory
 2. Have a locally running instance at `localhost:8000`
 3. Run `yarn run cypress open`. This will open the cypress test runner which organizes the tests that are written inside the `cypress/integration` directory.
 4. Click on any of the testing files. Cypress will open an automated browser that runs the file. 
