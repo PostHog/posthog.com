@@ -101,6 +101,8 @@ You can make this call on every page view to make sure this information is up-to
 posthog.people.set({email: 'john@gmail.com'});
 ```
 
+*Note: you can call this function at any point, but it'll only be sent after the `posthog.identify` call*
+
 ## One-page apps and pageviews
 This JS snippet automatically sends pageview events whenever it gets loaded. If you have a one-page app that means it'll only send a pageview once, when your app loads.
 
