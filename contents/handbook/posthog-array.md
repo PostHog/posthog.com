@@ -15,7 +15,7 @@ As part of releasing a new version you will need to figure out what has been [up
 
 - `git log --pretty=format:%s [old-version]..head` will give you the pull requests that are new, you will need to split them into 4 categories:
 
-- PostHog Updates
+- Release notes
 	- Updates that fit this category are front-end changes that introduce new or updated functionality and new libraries or integrations (including community ones).
 - Performance Updates
 	- Updates that fit this category will be back-end changes that have improved performance (this could be speed or logic, performance is somewhat subjective) and select bug fixes that can be considered impactful to PostHog UX.
@@ -26,10 +26,23 @@ As part of releasing a new version you will need to figure out what has been [up
 
 ## 2. Write the PostHog Array
 
-Create a new post in the WP PostHog domain, the title is always The PostHog Array followed by the version number. Categrorize this as the Weekly Update. The featured image should be a high quality image of a (cute) Hedgehog with a width of 2000 pixels.
+### How to write
 
-The image needs to be available for commercial use without attribution, [unsplash](https://unsplash.com/) is a good place to use.
+* Run ```git clone https://github.com/posthog/posthog.com```
+* Create a branch for the new post ```git checkout -b posthog_array_VERSION```
+* Run ```cd posthog.com/contents/blog```
+* Run ```touch the-posthog-array-[NEW VERSION].md```
+* You now need to edit the file you just created above, with content as per the instructions below. It's easiest to copy a previous week and delete out the content to get the formatting right (of images and the header).
+* When it's saved, you need to add the post link to ```src/sidebars.json```, in order that it appears in the navigation
+* Run ```gatsby develop``` from the root folder to check the formatting works, and visit ```localhost:8000``` in your browser
+* If everything looks good, create a commit and message with ```git add .``` then ```git commit -m "your message"```
+* Now it's time to push the branch to GitHub. Run ```git push origin posthog_array_VERSION```
+* Go to GitHub and create a pull request to merge the branch you just made with master. Request James H as the reviewer.
 
+
+There is more information on [updating our documentation](../updating-documentation), if you are wondering how to use images correctly.
+
+### Content
 The first section should always include links to the PostHog docs regarding [upgrading.](/docs/upgrading-posthog)
 
 The sections are as follows, images and gifs are preferable in all PostHog updates and some performance updates:
@@ -50,7 +63,8 @@ PostHog news can cover any news about PostHog the company or any of its employee
 
 ## 3. Distributing the PostHog Array
 
-Check with Tim that the new version has been released and Docker images have been built and publish.
+Check with Tim that the new version has been released and Docker images have been built and published.
 
-Copy the content into our Mailchimp campaign and send to subscribers as well as posting on Twitter and Linkedin and HN
+Copy the content into our Mailchimp campaign and send to subscribers as well as posting on Twitter and Linkedin and HN.
 
+You will should find a high quality hedgehog image (2,000px wide) for the above. The image needs to be available for commercial use without attribution, [unsplash](https://unsplash.com/) is a good place to use.
