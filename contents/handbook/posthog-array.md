@@ -34,6 +34,7 @@ As part of releasing a new version you will need to figure out what has been [up
 * Run ```touch the-posthog-array-[NEW VERSION].md```
 * You now need to edit the file you just created above, with content as per the instructions below. It's easiest to copy a previous week and delete out the content to get the formatting right (of images and the header).
 * When it's saved, you need to add the post link to ```src/sidebars.json```, in order that it appears in the navigation
+* You also need to update the link on the homepage "what's new" section. go to ```src/pages/index.js``` to edit this.
 * Run ```gatsby develop``` from the root folder to check the formatting works, and visit ```localhost:8000``` in your browser
 * If everything looks good, create a commit and message with ```git add .``` then ```git commit -m "your message"```
 * Now it's time to push the branch to GitHub. Run ```git push origin posthog_array_VERSION```
