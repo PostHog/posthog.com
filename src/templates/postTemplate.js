@@ -9,6 +9,7 @@ import {
   onSetAnchorHide,
   onSetSidebarHide,
 } from '../actions/layout'
+import { DocsFooter } from '../components/footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 
 function Template({
@@ -42,6 +43,7 @@ function Template({
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
+      {frontmatter.sidebar === 'Docs' && <DocsFooter filename={markdownRemark.fields.slug + '.md'} title={frontmatter.title} />}
     </div>
     </Layout>
   )
