@@ -40,9 +40,8 @@ We follow the given, when, then framework. Each test should provide a given (ini
 #### Cypress usage for local development
 
 1. Ensure that you either `yarn install` in the root directory
-2. Have a locally running instance at `localhost:8000`
-3. Run `yarn run cypress open`. This will open the cypress test runner which organizes the tests that are written inside the `cypress/integration` directory.
-4. Click on any of the testing files. Cypress will open an automated browser that runs the file. 
+2. Run `./bin/frontend-test-runner`. This will open the cypress test runner which organizes the tests that are written inside the `cypress/integration` directory.
+3. Click on any of the testing files. Cypress will open an automated browser that runs the file. 
 
 This is a quick start guide for using cypress in our environment. Any further questions regarding how to use cypress can be answered with cypress [docs](https://docs.cypress.io/). 
 
