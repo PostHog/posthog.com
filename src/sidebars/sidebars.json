@@ -203,8 +203,9 @@
     "name":"Engineering",
     "items":[
       "handbook/development-process",
-      "handbook/how-to-qa",
-      "handbook/release-new-version"
+      "handbook/engineering/how-to-qa",
+      "handbook/engineering/release-new-version",
+      "handbook/engineering/onboarding-customer"
     ]
   },
   {

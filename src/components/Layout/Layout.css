@@ -747,7 +747,8 @@ pre tt:after {
   opacity: 0
 }
 .blog-post h2 {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
 }
 .docs-footer {
   margin-top: 2rem;
