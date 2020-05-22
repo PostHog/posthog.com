@@ -13,7 +13,7 @@ import trends from "../images/product-screenshots/product-trends.png";
 import benHorowitz from "../images/ben-horowitz.jpg";
 import michaelSeibel from "../images/michael-seibel.jpg";
 import paulGraham from "../images/paul-graham.jpg";
-import { Col, Row, Form, Input, Select, Card, List, Tabs } from 'antd';
+import { Col, Row, Form, Input, Select, Card, Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -29,17 +29,25 @@ function callback(key) {
   console.log(key);
 }
 
-const form = document.querySelector('form');
-
-function submitForm(e){
+function submitForm(e, form){
   // Capture the form data
     e.preventDefault();
     let data = {};
+    // Array.from(form).map(input => (data[input.id] = input.value));
+
+    data['form'] = 'startup deal application';
+    data['firstName'] = document.getElementById('firstName').value;
+    data['lastName'] = document.getElementById('lastName').value;
+    data['email'] = document.getElementById('email').value;
+    data['company'] = document.getElementById('company').value;
+    data['accelerator'] = document.getElementById('accelerator').value;
+    data['deal'] = document.getElementById('deal').value;
+
     console.log('Sending: ', JSON.stringify(data));
 
     // Create the AJAX request
     var xhr = new XMLHttpRequest();
-    xhr.open(form.method, "https://8qyzxcmhxf.execute-api.us-east-1.amazonaws.com/Prod/submitForm", true);
+    xhr.open("POST", "https://8qyzxcmhxf.execute-api.us-east-1.amazonaws.com/Prod/submitForm", true);
     xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
@@ -211,42 +219,49 @@ const StartupsPage = () => {
       			  <Form.Item
       			    label="First Name"
       			    name="firstName"
-                id="firstName"
       			    rules={[{ required: true, message: 'Please input your first name!' }]}
       			  >
-      			    <Input />
+      			    <Input 
+                  id="firstName"
+                  required
+                />
       			  </Form.Item>
       			  <Form.Item
       			    label="Last Name"
       			    name="lastName"
-                id="lastName"
       			    rules={[{ required: true, message: 'Please input your last name!' }]}
       			  >
-      			    <Input />
+      			    <Input 
+                  id="lastName"
+                  required
+                />
       			  </Form.Item>
               <Form.Item
                 label="Email"
                 name="email"
-                id="email"
                 rules={[{ required: true, message: 'Please input your email!' }]}
               >
-                <Input />
+                <Input 
+                  id="email"
+                  required
+                />
               </Form.Item>
       			  <Form.Item
       			    label="Company"
       			    name="company"
-                id="company"
       			    rules={[{ required: true, message: 'Please input your company!' }]}
       			  >
-      			    <Input />
+      			    <Input 
+                  id="company"
+                  required
+                />
       			  </Form.Item>
       			  <Form.Item
       			    label="Accelerator"
       			    name="accelerator"
-                id="accelerator"
       			    rules={[{ required: true, message: 'Please provide an accelerator program!' }]}
       			  >
-      			    <Select defaultValue="None" placeholder="Select a option and change input text above" style={{width:"100%"}}>
+      			    <Select defaultValue="None" placeholder="Select a option and change input text above" style={{width:"100%"}} id="accelerator">
       			      <Option value="None">None</Option>
       			      <Option value="YCombinator">YCombinator</Option>
       			      <Option value="TechStars">TechStars</Option>
@@ -255,10 +270,9 @@ const StartupsPage = () => {
               <Form.Item
                 label="Deal"
                 name="deal"
-                id="deal"
                 rules={[{ required: true, message: 'Please select which deal you would like' }]}
               >
-                <Select defaultValue="Unsure" placeholder="Select a option and change input text above" style={{width:"100%"}}>
+                <Select defaultValue="Unsure" placeholder="Select a option and change input text above" style={{width:"100%"}} id="deal">
                   <Option value="selfManaged">1: Supported Self-Deployed</Option>
                   <Option value="saas">2: SaaS/Hosted</Option>
                 </Select>
