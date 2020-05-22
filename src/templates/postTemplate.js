@@ -9,7 +9,7 @@ import {
   onSetAnchorHide,
   onSetSidebarHide,
 } from '../actions/layout'
-import { DocsFooter } from '../Components/footer/DocsFooter'
+import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 
 function Template({
