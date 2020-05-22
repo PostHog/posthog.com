@@ -33,7 +33,7 @@ Flip it around and ask them to share their screen.
 
 0. If they haven't setup PostHog yet, walk them through and help them install the snippet on their website (and anywhere else necessary)
 1. Based on your questions in section 1, set up relevant dashboards for them.
-  - DAU's are already there, but they might want a /trends view split out by different pages. Have them add that to default dashboard
+  - DAUs are already there, but they might want a /trends view split out by different pages. Have them add that to default dashboard
   - Have them create an action for a click on their CTA on the home page
   - Create a funnel with two steps: pageviews and the CTA action 
 1. (Optional) if they have an app, help them set up `identify` calls correctly
