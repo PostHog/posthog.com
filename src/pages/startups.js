@@ -13,7 +13,7 @@ import trends from "../images/product-screenshots/product-trends.png";
 import benHorowitz from "../images/ben-horowitz.jpg";
 import michaelSeibel from "../images/michael-seibel.jpg";
 import paulGraham from "../images/paul-graham.jpg";
-import { Col, Row, Form, Input, Select, Card, Tabs } from 'antd';
+import { Col, Row, Form, Input, Card, Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -48,7 +48,14 @@ function submitForm(e){
   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   xhr.send(JSON.stringify(data));
 
-  window.location.href="/application-received"
+  xhr.onloadend = response => {
+    if (response.target.status === 200) {
+      window.location.href="/application-received";
+    } else {
+      alert('error, please email hey@posthog.com');
+      console.error(JSON.parse(response.target.response).message);
+    }
+  };
 }
 
 
