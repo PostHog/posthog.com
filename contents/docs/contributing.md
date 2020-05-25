@@ -7,17 +7,17 @@ showTitle: true
 We love contributions to PostHog, big or small.
 
 
-# Reporting bugs or issues
+## Reporting bugs or issues
 
 Bug reports help us make PostHog better for everyone. When you create a big, the description will automatically be filled with a template that makes is very clear what we'd like you to add.
 
 Please search within our issues before raising a new one to make sure you're not raising a duplicate.
 
-!> If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
+*Important:* If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
 
-# Writing code 
+## Writing code 
 
-## Deciding what to work on
+### Deciding what to work on
 
 We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to PostHog. You can also pick up any other open tickets, though they may be more or less scoped.
 
@@ -27,12 +27,16 @@ Alternatively, you can also [update PostHog's documentation](/../updating-docume
 
 If you're planning to work on a bigger feature, and it's not in the list of issues, please raise an issue first so we can check whether that feature makes sense for PostHog as a whole.
 
-## Testing
+### Setting up your local environment
 
-### Backend
+[See this doc for more](/../developing-locally)
+
+### Testing
+
+#### Backend
 We expect all backend code to have corresponding tests. You can run the tests by running `bin/tests`. To specify a specific test (rather than running all tests) you can run `bin/tests posthog.api.test.test_action` for example.
 
-### Frontend
+#### Frontend
 We use [cypress](https://www.cypress.io/) for functional frontend tests. Cypress is used to mock user interface interactions on a demo instance. We've currently targeted test coverage for the most used areas of posthog and are working to increase coverage. 
 
 We follow the given, when, then framework. Each test should provide a given (initial setup for the flow or feature being tested), when (an action performed), and then (an assertion that verifies resulting behavior). To keep our components flexible and easily maintainable within tests, we use a `data-attr` pattern where we add a page-unique identifier prop to react components for testing purposes. Then, to identify an element in a cypress tests we use `cy.get('[dataattr=some-identifier]')...`. 
