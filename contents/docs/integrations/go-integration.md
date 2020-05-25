@@ -26,6 +26,23 @@ func main() {
 }
 ```
 
+### Self Hosted Version
+```go
+package main
+
+import (
+    "os"
+    "github.com/posthog/posthog-go"
+)
+
+func main() {
+    client := posthog.NewWithConfig(os.Getenv("POSTHOG_API_KEY"), posthog.Config{Endpoint:"https://your.posthog.endpoint"})
+    defer client.Close()
+
+    // run commands
+}
+```
+
 ## Making calls
 
 ### Capture
