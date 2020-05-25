@@ -71,6 +71,7 @@
       "docs/integrations/node-integration",
       "docs/integrations/php-integration",
       "docs/integrations/python-integration",
+      "docs/integrations/react-native-integration",
       "docs/integrations/ruby-integration"
     ],
     "child_entries":[
@@ -125,6 +126,7 @@
     "entry":"Releases",
     "name":"Releases",
     "items":[
+      "blog/the-posthog-array-1-6-0",
       "blog/the-posthog-array-1-5-0",
       "blog/the-posthog-array-1-4-0",
       "blog/the-posthog-array-1-3-0",
@@ -201,8 +203,9 @@
     "name":"Engineering",
     "items":[
       "handbook/development-process",
-      "handbook/how-to-qa",
-      "handbook/release-new-version"
+      "handbook/engineering/how-to-qa",
+      "handbook/engineering/release-new-version",
+      "handbook/engineering/onboarding-customer"
     ]
   },
   {
