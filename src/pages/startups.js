@@ -24,36 +24,31 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 4, span: 16 },
 };
-const { Option } = Select;
+
+var data = {};
+
 function callback(key) {
   console.log(key);
 }
 
-function submitForm(e, form){
-  // Capture the form data
-    e.preventDefault();
-    let data = {};
-    // Array.from(form).map(input => (data[input.id] = input.value));
+function submitForm(e){
+  e.preventDefault();
+  
+  data['form'] = 'startup deal application';
+  data['firstName'] = document.getElementById('firstName').value;
+  data['lastName'] = document.getElementById('lastName').value;
+  data['email'] = document.getElementById('email').value;
+  data['company'] = document.getElementById('company').value;
+  data['accelerator'] = document.getElementById('accelerator').value;
+  data['deal'] = document.getElementById('deal').value;
 
-    data['form'] = 'startup deal application';
-    data['firstName'] = document.getElementById('firstName').value;
-    data['lastName'] = document.getElementById('lastName').value;
-    data['email'] = document.getElementById('email').value;
-    data['company'] = document.getElementById('company').value;
-    data['accelerator'] = document.getElementById('accelerator').value;
-    data['deal'] = document.getElementById('deal').value;
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://8qyzxcmhxf.execute-api.us-east-1.amazonaws.com/Prod/submitForm", true);
+  xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
+  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  xhr.send(JSON.stringify(data));
 
-    console.log('Sending: ', JSON.stringify(data));
-
-    // Create the AJAX request
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://8qyzxcmhxf.execute-api.us-east-1.amazonaws.com/Prod/submitForm", true);
-    xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-    // Send the collected data as JSON
-    xhr.send(JSON.stringify(data));
-
+  window.location.href="/application-received"
 }
 
 
@@ -244,6 +239,7 @@ const StartupsPage = () => {
                 <Input 
                   id="email"
                   required
+                  type="email"
                 />
               </Form.Item>
       			  <Form.Item
@@ -261,21 +257,20 @@ const StartupsPage = () => {
       			    name="accelerator"
       			    rules={[{ required: true, message: 'Please provide an accelerator program!' }]}
       			  >
-      			    <Select defaultValue="None" placeholder="Select a option and change input text above" style={{width:"100%"}} id="accelerator">
-      			      <Option value="None">None</Option>
-      			      <Option value="YCombinator">YCombinator</Option>
-      			      <Option value="TechStars">TechStars</Option>
-      			    </Select>			    
+      			    <Input 
+                  id="accelerator"
+                  required
+                />			    
       			  </Form.Item>
               <Form.Item
                 label="Deal"
                 name="deal"
                 rules={[{ required: true, message: 'Please select which deal you would like' }]}
               >
-                <Select defaultValue="Unsure" placeholder="Select a option and change input text above" style={{width:"100%"}} id="deal">
-                  <Option value="selfManaged">1: Supported Self-Deployed</Option>
-                  <Option value="saas">2: SaaS/Hosted</Option>
-                </Select>
+                <Input 
+                  id="deal"
+                  required
+                />
               </Form.Item>
       			  <Form.Item {...tailLayout}>
       			    <Button type="primary" htmlType="submit">
