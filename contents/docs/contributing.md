@@ -29,7 +29,7 @@ If you're planning to work on a bigger feature, and it's not in the list of issu
 
 ### Setting up your local environment
 
-[See this doc for more](/../developing-locally)
+[See this doc for more](/docs/developing-locally)
 
 ### Testing
 
