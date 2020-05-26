@@ -10,6 +10,20 @@ PostHog has an API available on all tiers of pricing and for every whatever.
 
 Authentication is via Basic Auth using your own username and password. We suggest creating a new user within your team specifically for this.
 
+With curl:
+```bash
+curl -u username:password https://posthog.example.com/api/person/
+```
+
+As a header
+```bash
+AUTH=$(echo -ne "username:password" | base64 --wrap 0)
+
+curl \
+  --header "Authorization: Basic $AUTH" \
+  https://posthog.example.com/api/person/
+```
+
 *Important!*: The API key in the Setup page is write only and public. You can not use that for any of these endpoints.
 
 ## /user
