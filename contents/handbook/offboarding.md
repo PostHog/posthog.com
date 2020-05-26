@@ -70,3 +70,4 @@ In the case of voluntary offboarding, the team member is offered the chance to s
 - [ ] Remove team member from the internal company Slack
 - [ ] Remove team member from PostHog Users Slack
 - [ ] Remove team member from 1password
+- [ ] Remove team member from app.posthog.com
