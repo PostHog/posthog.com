@@ -24,7 +24,7 @@ function Template({
   onSetSidebarHide
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
-  const { frontmatter, html, id } = markdownRemark
+  const { frontmatter, html, excerpt, id } = markdownRemark
 
   const hideAnchor = (frontmatter.hideAnchor === null) ? false : frontmatter.hideAnchor
   const hideSidebar = (frontmatter.sidebar === null) ? true : false
@@ -38,8 +38,8 @@ function Template({
   return (
     <Layout onPostPage={true}>
     <SEO
-      title={frontmatter.title}
-      description={frontmatter.description || 'nothing'}
+      title={frontmatter.title + ' - PostHog docs'}
+      description={frontmatter.description || excerpt}
       pathname={markdownRemark.fields.slug}
       article
     />
@@ -81,6 +81,7 @@ export const pageQuery = graphql`
       }
       id
       html
+      excerpt(pruneLength: 150)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
