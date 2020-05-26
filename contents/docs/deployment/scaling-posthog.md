@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog is pretty good at handling large volumes of data, and for most products or websites, you'll never have to worry about scaling. We've seen volumes of **1 million events/day** on Heroku's cheapest standard tier Dyno with no problems.
+PostHog is pretty good at handling large volumes of data, and for most products or websites, you'll never have to worry about scaling. We've seen volumes of **5 million events/day** and hundreds of requests a second on Heroku's cheapest standard tier Dyno with no problems.
 
-In that example, the database grew about 200mb a day. That means Heroku's cheapest standard database is able to hold about a years' worth of data.
+In that example, the database grew about 500mb a day. That means Heroku's cheapest standard database is able to hold about a years' worth of data.
 
 However, if you do start going beyond these numbers there are things you can do to scale up.
 
