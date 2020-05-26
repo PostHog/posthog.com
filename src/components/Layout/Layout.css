@@ -545,6 +545,7 @@ code {
   font-size: 0.85rem;
   line-height: 1.45rem;
 }
+code[class*="language-"] { margin:0; padding: 0}
 kbd {
   font-size: 0.85rem;
   line-height: 1.45rem;
