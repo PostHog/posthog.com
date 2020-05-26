@@ -20,7 +20,7 @@ In the case of involuntary offboarding, we are unlikely to communicate any reaso
 
 In this case, the employee chooses to leave.
 
-We generally ask for 1 month of notice. We are happy to discuss moving this date around if the company and you can mutually benefit.
+We ask for 1 month of notice by default, and for you to work that notice period. This is so we have some time to find someone to hire and to enable a handover.
 
 ## Involuntary offboarding
 
