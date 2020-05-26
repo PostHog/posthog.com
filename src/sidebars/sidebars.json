@@ -6,6 +6,7 @@
       "Deployment",
       "Integrations",
       "Features",
+      "API",
       "Contributing",
       "Architecture"
     ]
@@ -56,6 +57,17 @@
       "docs/features/sessions",
       "docs/features/trends",
       "docs/features/users"
+    ]
+  },
+  {
+    "entry":"API",
+    "name":"API",
+    "items":[
+      "docs/api/api",
+      "docs/api/events",
+      "docs/api/people",
+      "docs/api/trends",
+      "docs/api/user"
     ]
   },
   {
