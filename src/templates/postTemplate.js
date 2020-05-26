@@ -13,6 +13,10 @@ import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 import SEO from '../components/seo';
 
+function addIndex (url) {
+  const indexUrls = ['/docs', '/handbook']
+  return `${url}${indexUrls.includes(url) ? '/index' : ''}`
+}
 
 function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -51,7 +55,7 @@ function Template({
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
-      {frontmatter.sidebar === 'Docs' && <DocsFooter filename={markdownRemark.fields.slug + '.md'} title={frontmatter.title} />}
+      {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
     </div>
     </Layout>
   )
