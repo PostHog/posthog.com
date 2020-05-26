@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+This is the dedicated events API, designed to help you push events into PostHog. We also provide a [general API](/docs/api/api).
+
 ## Sending events
 
 To send events to PostHog, you can use any of our libraries OR any Mixpanel library by changing the api_host setting to `https://[your-instance].herokuapp.com/capture/`.

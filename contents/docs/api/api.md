@@ -4,7 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog has an API available on all tiers of pricing and for every whatever.
+This section of our docs explains how to pull or push data from our API.
+
+If you are looking to push event or user data into PostHog instead of using a tracking snippet or a language specific library, there is a simple guide in the [dedicated events API](/docs/integrations/api) section.
+
+PostHog has an API available on all tiers of pricing and for every self-hosted version.
 
 ## Authentication
 
