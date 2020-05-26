@@ -60,8 +60,6 @@ Body:
 
 ## Reading data from PostHog
 
-PostHog provides a very comprehensive API. This is being documented at present.
-
-In the meantime, you can view all the calls by using the app's front end in the browser and viewing the Network events.
+We have another set of APIs to read/modify anything in PostHog. See [api documentation.](/docs/api/api)
 
 Also, feel free to reach out in [PostHog Users Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) if you'd like help with the API.
