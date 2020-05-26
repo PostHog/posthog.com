@@ -2,9 +2,14 @@ import React from 'react'
 import { graphql, Link } from "gatsby"
 import Layout from '../components/Layout'
 import { Row, Col, Button, Icon } from 'antd';
+import SEO from '../components/seo';
 
 const TrialPage = () => (
   <Layout>
+  <SEO
+      title='PostHog Trial'
+      description='Get started, for free.'
+    />
     <Row gutter={[24, 24]}>
       <Col span={24} align="middle">
         <h1>Try PostHog - free for 30 days</h1>

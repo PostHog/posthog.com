@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, Link } from "gatsby"
 import Layout from '../components/Layout'
 import { Row, Col, Button, Tabs, Card } from 'antd';
+import SEO from '../components/seo';
 
 const { TabPane } = Tabs;
 
@@ -11,6 +12,10 @@ function callback(key) {
 
 const PricingPage = () => (
   <Layout>
+  	<SEO
+      title='PostHog Pricing'
+      description='Find out how much it costs to use PostHog'
+    />
     <Row gutter={[24, 24]}>
     <Col span={24} align="middle">
         <h1>Pricing</h1>

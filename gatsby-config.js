@@ -1,6 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: 'PostHog',
+    title: "PostHog",
+    titleTemplate: "%s",
+    description:
+      "Understand your users. Build a better product.",
+    url: "https://.posthog.com", // No trailing slash allowed!
+    image: "/cropped-Frame-1-192x192.png", // Path to your image you placed in the 'static' folder
+    twitterUsername: "@posthoghq",
   },
   plugins: [
     'gatsby-plugin-react-helmet',
