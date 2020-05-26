@@ -14,6 +14,7 @@ import benHorowitz from "../images/ben-horowitz.jpg";
 import michaelSeibel from "../images/michael-seibel.jpg";
 import paulGraham from "../images/paul-graham.jpg";
 import { Col, Row, Form, Input, Card, Tabs } from 'antd';
+import SEO from '../components/seo';
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -64,6 +65,10 @@ const StartupsPage = () => {
 
   return (
     <Layout className='index-page'>
+    <SEO
+      title='PostHog for Startups'
+      description='We offer a special deal - startups get going for free.'
+    />
       <Row gutter={[24, 8]}>
         <Col span={24} className="gutter-row">
           <h2 className="large-header">Find product market fit.<br />Completely free.</h2>

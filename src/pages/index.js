@@ -25,10 +25,15 @@ import communityGithub from "../images/community-github.png";
 import communitySlack from "../images/community-slack.png";
 import communityRoadmap from "../images/community-roadmap.png";
 import { Row, Col, Icon } from 'antd';
+import SEO from '../components/seo';
 
 const IndexPage = () => {
   return (
     <Layout className='index-page'>
+    <SEO
+      title='PostHog - open source product analytics'
+      description='Understand your users. Build a better product'
+    />
       <Row gutter={[24, 8]}>
         <Col span={24} className="gutter-row">
           <h2 className="large-header">Understand your users.<br />Build a better product.</h2>

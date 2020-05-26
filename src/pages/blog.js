@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from "gatsby"
 import Layout from '../components/Layout'
 import PostCard from '../components/PostCard';
+import SEO from '../components/seo';
 
 const BlogPage = ({
   data: {
@@ -13,6 +14,10 @@ const BlogPage = ({
     .map(edge => <PostCard key={edge.node.id} post={edge.node} />)
   return (
     <Layout>
+    <SEO
+      title='PostHog Blog'
+      description='What we are up to, every week.'
+    />
       <div>{posts}</div>
     </Layout>
   )

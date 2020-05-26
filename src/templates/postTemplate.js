@@ -11,6 +11,8 @@ import {
 } from '../actions/layout'
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
+import SEO from '../components/seo';
+
 
 function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -35,6 +37,12 @@ function Template({
 
   return (
     <Layout onPostPage={true}>
+    <SEO
+      title={frontmatter.title}
+      description={frontmatter.description || 'nothing'}
+      pathname={markdownRemark.fields.slug}
+      article
+    />
     <div className="blog-post-container">
       <div className="blog-post">
         { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
