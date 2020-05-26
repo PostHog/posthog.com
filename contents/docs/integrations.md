@@ -21,7 +21,7 @@ We have [event autocapture](/docs/features/events#autocapture-event-tracking) fo
 * [React Native](/docs/integrations/react-native-integration)
 * [API](/docs/integrations/api)
 * [Community](/docs/integrations/community)
-    * [Gatsby](/docs/integrations/gatsby)
+    * [Gatsby](/docs/integrations/gatsby-integration)
 
 ## Sending data to other systems
 
