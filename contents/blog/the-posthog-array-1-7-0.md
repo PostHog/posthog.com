@@ -71,7 +71,7 @@ You [used to](https://github.com/PostHog/posthog/issues/764) have to enter your 
 
 ## Bug fixes and performance improvements
 
-* Developing PostHog is now a bit less tedious. We [halved the time](https://github.com/PostHog/posthog/pull/826) it takes to install dependencies for tests in GitHub actions.
+* Developing PostHog is now a bit less tedious. We [halved the time](https://github.com/PostHog/posthog/pull/826) it takes to install python dependencies for any deployment.
 * We've written [a lot of front end tests](https://github.com/PostHog/posthog/pull/802), as well as a [regression test](https://github.com/PostHog/posthog/pull/819) for single step funnels, where there was a bug - [now fixed](https://github.com/PostHog/posthog/pull/817).
 * We neatened dashboard items so they're [closer together](https://github.com/PostHog/posthog/pull/846) in the navigation.
 * We [improved our Sentry setup](https://github.com/PostHog/posthog/pull/842)
