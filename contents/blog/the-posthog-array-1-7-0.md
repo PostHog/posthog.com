@@ -17,7 +17,7 @@ Self hosting and want to upgrade? [Update your PostHog](/docs/deployment/upgradi
 
 We've been on a real push the last few weeks to provide libraries for those writing for mobile devices.
 
-We now support Android, iOS and - finally - [React Native](/docs/integrations/react-native-integration)!
+We now support [Android](/docs/integrations/android-integration), [iOS](/docs/integrations/ios-integration) and - finally - [React Native](/docs/integrations/react-native-integration)!
 
 As always, calls are non-blocking and fast with this library. It batches requests and flushes asynchronously. We'd use emojis at this point, if that were our style.
 
@@ -25,7 +25,7 @@ As always, calls are non-blocking and fast with this library. It batches request
 
 We benefited from many discounts as a startup ourselves. Now it's time for us to do the same.
 
-The details are [available here](/startups). We'll provide a more generous free hosting tier (up to 20 million events per month) or a supported self deployment. You must have raised less than $5M and are under 3 years old.
+The details are [available here](/startups). We'll provide a more generous free hosting tier (up to 20 million events per month) or a supported self deployment. You must have raised less than $5M and you have to be under 3 years old.
 
 Tell your friends, or apply yourself.
 
