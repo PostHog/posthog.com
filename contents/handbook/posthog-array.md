@@ -24,6 +24,8 @@ As part of releasing a new version you will need to figure out what has been [up
 - Non Changelog updates
 	- Updates that serve no impact on PostHog, examples include the PR to update the Changelog, or bump version prs
 
+If there are any new integration libraries - these won't appear above (since they go into their own repos). You need to double check if we built support for any new languages by looking or asking :)
+
 ## 2. Write the PostHog Array
 
 ### How to write
