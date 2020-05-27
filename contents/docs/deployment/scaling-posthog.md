@@ -20,7 +20,11 @@ The command allows you to specify which events to explicitly create partitions f
 
 If any single event has > million events a week, it's worth partitioning on that event. Any events that aren't partitioned get put together in a default bucket for that week. For instance, if you're using posthog-js or the snippet, it's worth partitioning on `$pageview` and `$autocapture`, as they tend to be high volume events
 
-**To setup:** 
+### Creating partitioins 
+
+*Note:* It's possible to create partitions while the site is running, but you might run into locking or memory issues. It's recommended to take your app temporarily offline (maintenance mode in Heroku) while creating the partitions.
+
+*Note:* Partitions were introduced in PostHog 1.6.0.
 
 No event, only by week: `python manage.py partition`
 
@@ -28,7 +32,7 @@ With '$pageview' event partition: `python manage.py partition --element '$pagevi
 
 With multiple event partition: `python manage.py partition --element '$pageview' --element '$autocapture'`
 
-**To reverse the partitions:**
+### To reverse the partitions
 
 Should any problem arise with partitions, we provide a reversal function that will return the partitioned table to its original configuration:
 
