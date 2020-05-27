@@ -7,11 +7,19 @@ showTitle: true
 hideAnchor: true
 ---
 
-This week's update brings time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.
+This week's update brings a React Native integration, time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.
 
 Self hosting and want to upgrade? [Update your PostHog](/docs/deployment/upgrading-posthog).
 
 ## Release notes
+
+### [Reactive Native](https://github.com/PostHog/posthog-react-native)
+
+We've been on a real push the last few weeks to provide libraries for those writing for mobile devices.
+
+We now support Android, iOS and - finally - [React Native](/docs/integrations/react-native-integration)!
+
+As always, calls are non-blocking and fast with this library. It batches requests and flushes asynchronously. We'd use emojis at this point, if that were our style.
 
 ### [PostHog for Startups Launched](/startups)
 
