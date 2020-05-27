@@ -74,9 +74,9 @@ You [used to](https://github.com/PostHog/posthog/issues/764) have to enter your 
 * Developing PostHog is now a bit less tedious. We [halved the time](https://github.com/PostHog/posthog/pull/826) it takes to install python dependencies for any deployment.
 * We've written [a lot of front end tests](https://github.com/PostHog/posthog/pull/802), as well as a [regression test](https://github.com/PostHog/posthog/pull/819) for single step funnels, where there was a bug - [now fixed](https://github.com/PostHog/posthog/pull/817).
 * We neatened dashboard items so they're [closer together](https://github.com/PostHog/posthog/pull/846) in the navigation.
-* We [improved our Sentry setup](https://github.com/PostHog/posthog/pull/842)
-* Marius [fixed the way tables display](https://github.com/PostHog/posthog/pull/838) when they're on a dashboard
-* Eric [slayed a bug](https://github.com/PostHog/posthog/pull/832) when the People page wouldn't load with entity specific filters applied
+* We [improved our Sentry setup](https://github.com/PostHog/posthog/pull/842).
+* Marius [fixed the way tables display](https://github.com/PostHog/posthog/pull/838) when they're on a dashboard.
+* Eric [slayed a bug](https://github.com/PostHog/posthog/pull/832) when the People page wouldn't load with entity specific filters applied.
 * We've had several users with very high scale pushing the limits of redis. We have more work to do here, but we've [improved the way we handle filled up servers](https://github.com/PostHog/posthog/pull/825).
 * A little [header spring cleaning](https://github.com/PostHog/posthog/pull/831).
 * We [fixed a bug](https://github.com/PostHog/posthog/pull/835) with suggestions loading, and another with [EditAppUrls null check](https://github.com/PostHog/posthog/pull/829).
@@ -93,8 +93,8 @@ We also have a few backlog bugs to tackle - we will work through these.
 ## Weekly round up
 
 * Get away from the screen - try Wired's [recommended board games](https://www.wired.co.uk/article/best-board-games-2020). Included since they criticize Monopoly.
-* Make a new [open source best friend](https://github.com/olivia-ai/olivia), powered by a neural network
-* Get reading [free programming books](https://github.com/EbookFoundation/free-programming-books)
+* Make a new [open source best friend](https://github.com/olivia-ai/olivia), powered by a neural network.
+* Get reading [free programming books](https://github.com/EbookFoundation/free-programming-books).
 * Also - [don't miss the rocket launch](https://www.kennedyspacecenter.com/launches-and-events/events-calendar/see-a-rocket-launch) later today!
 
 ## PostHog news
