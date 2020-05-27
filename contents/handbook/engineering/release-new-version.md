@@ -26,19 +26,16 @@ Only bugfixes are allowed to be merged into this branch (and thus put on product
   - `git checkout release-[version]`
   - `git log --pretty=format:%s [old-version]..head`
 - [ ] Write up the PostHog array [blogpost](posthog-array) 
-- [ ] Write up the changes into `CHANGELOG.md`
-  - Create a pull request
+- [ ] Copy from PostHog Array and write up the changes into `CHANGELOG.md`
+  - `git add CHANGELOG.md`
+  - `git commit -m "Changelog version 1.7.0"`
 - [ ] Update the `VERSION` in `posthog/settings.py`
   - `git checkout release-[version]`
   - `git add posthog/settings.py`
   - `git commit -m "Bump version [version]"`
 - [ ] Tag the version
-  - `git commit -a [version] -m "Version [version]"`
+  - `git tag -a [version] -m "Version [version]"`
   - `git push origin head --tags`
-- [ ] Update settings.py in [posthog-production](http://github.com/posthog/posthog-production)
-  - `git add settings.py`
-  - `git commit -m "Bump version [version]"`
-  - `git push origin head`
 
   
 Once a new docker image has been built for the new version, open the [charts](https://github.com/PostHog/charts) repo and make the changes:
