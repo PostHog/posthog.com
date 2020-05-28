@@ -88,18 +88,18 @@ A couple of "rules":
 * We don't _have_ to hire all the people we have money for. In fact, we should find ways of achieving our roadmap with the fewest people possible in the given timeframe.
 
 At the moment, our team is heavily weighted towards frontend/backend development. We're currently lacking:
-* Deep experience with DevOps and the various cloud providers
+<strike>* Deep experience with DevOps and the various cloud providers
   * We need this because we want to be able to deploy PostHog on as many platforms as possible + support
 * Experience scaling systems to 100s of requests/sec
-* Experience scaling Postgres to terabytes
+* Experience scaling Postgres to terabytes</strike>
 * Great visual/UX designer
 * Marketing/growth
   * This should come later as we will be changing the product around too much to 'optimize' it yet.
 
-We could also use more firepower to deliver features faster, though we should be careful with hiring more generalists early on. We could end up needing too much co-ordination. The priority should be a devops/backend scaling generalist.
+We could also use more firepower to deliver features faster, though we should be careful with hiring more generalists early on. We could end up needing too much co-ordination. <strike>The priority should be a devops/backend scaling generalist.</strike>
 
 ### The plan:
-* 2020 Q2: Hire 1 devops-generalist, total of 4 engineers (including Tim, so not full engineer)
+* <strike>2020 Q2: Hire 1 devops-generalist, total of 4 engineers (including Tim, so not full engineer)</strike>
 * 2020 Q3: Hire 1 engineer, total 5 engineers
 * 2020 Q4: Hire 1 engineer, one designer, total 6 engineers 1 designer
 * 2021 Q1: Hire 1 engineer, total 7 engineers 1 designer
@@ -109,8 +109,9 @@ We could also use more firepower to deliver features faster, though we should be
 
 ### The roles
 
-*DevOps generalist*
+*DevOps generalist - now hired!*
 *(order of priority*)
+<strike>
 * Write docs on how to deploy PostHog on each cloud provider (and different variations, like EC2, ECS)
 * Support clients' deployment, especially those with high scale
 * Get us listed as 'deploy to X' on as many hosting/cloud providers as possible
@@ -120,6 +121,7 @@ We could also use more firepower to deliver features faster, though we should be
 * Support our own deployment of PostHog
 * CI/CD pipeline setup/maintenance 
 * Write automated managed deployments on AWS/GCP etc
+</strike>
 
 *Generalist*
 * Write features/fix bugs using Django/React
