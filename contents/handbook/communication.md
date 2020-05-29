@@ -6,30 +6,15 @@ showTitle: true
 
 ## Introduction
 
-We're an all-remote company that allows people to work from almost anywhere in the world. We hire great people regardless of where they live, but with team members across several countries, it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
+We're an all-remote company that allows people to work from almost anywhere in the world. With team members across several countries, it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
 
 To accomplish this, we use **asynchronous communication as a starting point** and stay as open and transparent as we can by communicating through public issues, merge requests and (minimally) Slack.
-
-We also place an emphasis on ensuring that conclusions of offline conversations are written down.
-
-When we go **back and forth three times,** we jump on a synchronous video call.
-
-We communicate respectfully and professionally at all times.
 
 ## Effective & Responsible Communication Guidelines
 
 1. **Assume Positive Intent.** Always being with a position of positivity and grace.
-1. **Kindness Matters.** You are looking at a screen, but you are really talking to a person. If you wouldn't say it to a person's face, don't send it to them in a text message.
-1. **Express Your Thoughts.** We live in different locations and often have very different perspectives. We want to know your thoughts, opinions, and feelings on things.
-1. **Own It.** If you say it or type it, own it. If it hurts the company or an individual, even unintentionally, we encourage you to look at things from other points of view and apologize easily.
-1. **Be a Role Model of our Values.**
+1. **Form An Opinion.** We live in different locations and often have very different perspectives. We want to know your thoughts, opinions, and feelings on things.
 1. **Feedback is Essential.** Help everyone up their game, in a direct but constructive way.
-1. **Don't Underestimate a 1:1.** Asynchronous communication (e.g., via text) is helpful and necessary. In some cases (e.g., to clarify misunderstandings) it can be much more effective to jump on a Zoom video call.
-1. **Always Adhere to our Anti-Harassment Policy and Code of Conduct.** Everyone should be comfortable in their work environment.
-
-## Everyone is a Moderator
-
-If you see something that concerns you in Slack, Issues, Merge Requests, Video, Emails or any other forum, we encourage you to respectfully say something directly to the individual in a 1:1 format. If you are not comfortable reaching out to the individual directly, please reach out to your direct manager or People Business Partner to discuss.
 
 ## External communication
 
@@ -42,8 +27,7 @@ There are 8 key practices to consider during any meeting. They are the following
 1. Adapt to Audience Tone - Before going into the business portion of your meeting, evaluate first the tone of the audience. Adapt your tone accordingly in order to appeal to various types of personalities.
 1. Mid-call - Half-way through the meeting, check in with your audience. Ask them what their thoughts are on the progression of this meeting and if what you're presenting is on the right track. This helps both you and the audience by re-aligning expectations and making sure the meeting is going the right direction. 
 1. Pre-Close Summary - 10 Minutes (1-hour meetings) or 5 minutes (30 minute meetings) prior to ending the call, ask the audience to build out an agenda for the next step or meeting. This helps to secure next steps and to ensure there are no balls dropped.
-1. Post Meeting Action - Immediately write down notes and next steps and input into proper directory (Google Drive, Salesforce, etc.).
-1. Two Block Rule - For in person meetings with external parties you should wait until you're more than two blocks from the meeting before discussing the results of the meeting. Nobody wants to hear themselves being discussed in the bathroom.
+1. Post Meeting Action - Immediately write down notes and next steps and input into proper directory (Google Drive, Hubspot, etc.).
 
 ## Everything starts with a Merge Request
 
@@ -55,18 +39,15 @@ It's best practice to start a discussion where possible with a Merge Request (MR
 1. Not every solution will solve the problem at hand. Keep discussions focused by **defining the problem first** and **explaining your rationale** behind the Minimal Viable Change (MVC) proposed in the MR.
 1. Be proactive and consistent with communication on discussions that have external stakeholders such as customers. It's important to keep communication flowing to keep everyone up to date. MRs can appear stale if there aren't recent discussions and no clear definition on when another update will be provided, based on feedback. This leaves those subscribed in the dark, causing unnecessary surprise if something ends up delayed and suddenly jumps to the next milestone. It is important that MRs are closed in a timely manner through approving or rejecting the open requests.
 1. Have a **bias for action** and don't aim for consensus. Every MR is a proposal, if an MRs author isn't responsive take ownership of it and complete it. Some improvement is better than none.
-1. **Cross link** issues or other MRs with related conversations. And when approving or rejecting the MR, include reason or response from ZenDesk. Put the link at the top of each MR's description with a short mention of the relationship (Report, Dependency, etc.) and use one as the central one and ideally close the alternate if duplicate.
+1. **Cross link** issues or other MRs with related conversations. Put the link at the top of each MR's description with a short mention of the relationship (Report, Dependency, etc.) and use one as the central one and ideally close the alternate if duplicate.
 1. If submitting a change for a feature, **update the description with the final conclusions** (Why an MR was rejected or why it was approved). This makes it much easier to see the current state of an issue for everyone involved in the implementation and prevents confusion and discussion later on.
-1. Submit the **smallest** item of work that makes sense. When proposing a change, submit the smallest reasonable commit, put suggestions for other enhancements in separate issues/MRs and link them. If you're new to PostHog and are writing documentation or instructions, submit your first merge request for at most 20 lines.
+1. Submit the **smallest** item of work that makes sense. When proposing a change, submit the smallest reasonable commit, put suggestions for other enhancements in separate issues/MRs and link them.
 1. Do not leave MRs open for a long time. MRs should be **actionable** -- stakeholders should have a clear understanding of what changed and what they are ultimately approving or rejecting.
 1. Make a conscious effort to **prioritize** your work. The priority of items depends on multiple factors: Is someone waiting for the answer? What is the impact if you delay it? How many people does it affect, etc.?
 1. When submitting a MVC, **ask for feedback** from your peers. For example, if you're a designer and you propose a design, ping a fellow designer to review your work. If they suggest changes, you get the opportunity to improve your design and propose an alternative MR. This promotes collaboration and advances everyone's skills.
 1. Respond to comments within a **threaded discussion**. If there isn't a discussion thread yet, you can use the reply to comment button from the comments to create one. This will prevent comments from containing many interweaves discussions with responses that are hard to follow.
-1. If your comment or answer contains separate topics, write separate comments for each, so others can address topics independently using the Reply to comment button.
-1. Even when something is not done, share it internally so people can comment early and prevent rework.
 1. Create a **Work In Progress (WIP)** merge request to prevent an accidental early merge. Only use WIP when merging it would **make things worse**, which should rarely be the case when contributing to the handbook. Most merge requests that are in progress don't make things worse, in this case don't use WIP, if someone merges it earlier than you expected just create a new merge request for additional items. Never ask someone to do a final review or merge something that still have WIP status, at that point you should be convinced it is good enough to go out.
 1. If any follow up actions are required on the issue after the merge request is merged (like reporting back to any customers or writing documentation), avoid auto closing the issue.
-1. If a project requires multiple approvals to accept your MR, feel free to assign multiple reviewers concurrently. This way the earliest available reviewer can start right away rather than being blocked by the preceding reviewer.
 
 ## Issues
 
@@ -124,9 +105,6 @@ Slack is to be used for informal communication only. Only 90 days of activity wi
 #### Are my direct messages and private channel conversations completely private?
 
 In short, no. We fundamentally have access to them, despite not actively doing so.
-Slack is the business-provided internal communications tool to use for collaboration and connecting with team members.
-Please keep [PostHog values](/handbook/values/) in mind when communicating directly with other team members.
-If you have a confidential personal issue that you do not feel comfortable discussing via a business-provided internal communications tool, it is recommended to use a personal form of communication such as a text message or phone call.
 
 ## Google Docs
 
@@ -232,8 +210,7 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 
 ## Writing Style Guidelines
 
-1. {: #american-english} At PostHog, we use American English as the standard written language.
+1. At PostHog, we use American English as the standard written language.
 1. Do not create links like "here" or "click here". All links should have relevant anchor text that describes what they link to. Using meaningful links is important to both search engine crawlers (SEO) and people with accessibility issues.
-This guidance should be followed in all places links are provided, whether in the handbook, website, GoogleDocs, or any other content.
-1. Do not use acronyms when you can avoid them. Acronyms have the effect of excluding people from the conversation if they are not familiar with a particular term. Example: instead of `MR`, write `merge request (MR)`.
-    1. If acronyms are used, expand them at least once in the conversation or document and define them in the document using [Kramdown abbreviation syntax](https://kramdown.gettalong.org/syntax.html#abbreviations). Alternatively, link to the definition.
+This guidance should be followed in all places links are provided, whether in the handbook, website, Google Docs, or any other content.
+1. Do not use acronyms when you can avoid them. Acronyms have the effect of excluding people from the conversation if they are not familiar with a particular term.
