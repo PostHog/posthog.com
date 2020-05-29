@@ -1,3 +1,9 @@
+---
+title: How to QA
+sidebar: Handbook
+showTitle: true
+---
+
 Setting up SSL locally can be useful if you're trying to debug issues.
 
 1. Create key

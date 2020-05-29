@@ -219,7 +219,8 @@
       "handbook/development-process",
       "handbook/engineering/how-to-qa",
       "handbook/engineering/release-new-version",
-      "handbook/engineering/onboarding-customer"
+      "handbook/engineering/onboarding-customer",
+      "handbook/engineering/setup-ssl-locally"
     ]
   },
   {
