@@ -44,3 +44,13 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
          }
      }
 ```
+
+5. Add the following command to start nginx
+```bash
+nginx -p /usr/local/etc/nginx/ -c /usr/local/etc/nginx/nginx.conf
+```
+
+6. You can stop the nginx server with
+```bash
+nginx -p /usr/local/etc/nginx/ -c /usr/local/etc/nginx/nginx.conf -s stop
+```
