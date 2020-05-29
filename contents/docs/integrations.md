@@ -6,7 +6,11 @@ showTitle: true
 
 PostHog provides many libraries to send events from your app to your PostHog instance.
 
-We have [event autocapture](/docs/features/events#autocapture-event-tracking) for front end events, but you can use these libraries and the API to enrich the user data, or to send data to other systems.
+## Autocapture
+
+All our libraries are similar, except for the JS library which has [event autocapture](/docs/features/events#autocapture-event-tracking).
+
+All libraries can send custom events, update user properties, identify users and so on.
 
 ## Receiving user/event data into PostHog
 
