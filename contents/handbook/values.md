@@ -24,7 +24,7 @@ Everyone should help everyone else raise their game.
 
 ## Iteration
 
-If given a choice, go live.
+If given a choice, go live. If you can't go live, reduce the task size so you can.
 
 * We are small, and can only win based on speed and agility.
 * Going live forces a level of completion, on which you can build.
