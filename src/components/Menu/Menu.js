@@ -46,6 +46,7 @@ class Menu extends Component {
                         return menuItem.link
                       } catch (e) {
                         console.log(e)
+                        return ''
                     }
                   })}
                 >
