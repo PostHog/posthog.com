@@ -40,7 +40,7 @@ class Menu extends Component {
                   style={{
                     borderBottomWidth: 0,
                   }}
-                  selectedKeys={menuItems.map(menuItem => {
+                  selectedKeys={typeof window !== 'undefined' && menuItems.map(menuItem => {
                     try {
                         if (window.location.pathname === menuItem.link)
                         return menuItem.link

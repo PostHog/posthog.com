@@ -164,22 +164,10 @@
     ]
   },
   {
-    "entry":"Company",
-    "name":"Company",
-    "items":[
-      "careers",
-      "product-features",
-      "pricing",
-      "terms"
-    ],
-    "child_entries":[
-      "Handbook"
-    ]
-  },
-  {
     "entry":"Handbook",
     "name":"Handbook",
     "child_entries":[
+      "Company",
       "People",
       "Engineering",
       "Growth",
@@ -187,36 +175,43 @@
     ]
   },
   {
+    "entry":"Company",
+    "name":"Company",
+    "items":
+    [
+      "handbook/company/communication",
+      "handbook/company/culture",
+      "handbook/company/security",
+      "handbook/company/story",
+      "handbook/company/team",
+      "handbook/company/values"
+    ]
+  },
+  {
     "entry":"People",
     "name":"People",
     "items":
     [
-      "handbook/communication",
-      "handbook/culture",
-      "handbook/onboarding",
-      "handbook/offboarding",
-      "handbook/security",
-      "handbook/side-gigs",
-      "handbook/spending-money",
-      "handbook/story",
-      "handbook/team",
-      "handbook/time-off",
-      "handbook/values"
+      "handbook/people/onboarding",
+      "handbook/people/offboarding",
+      "handbook/people/side-gigs",
+      "handbook/people/spending-money",
+      "handbook/people/time-off"
     ]
   },
   {
     "entry":"Growth",
     "name":"Growth",
     "items":[
-      "handbook/what-is-product-led-growth",
-      "handbook/posthog-array"
+      "handbook/growth/what-is-product-led-growth",
+      "handbook/growth/posthog-array"
     ]
   },
   {
     "entry":"Engineering",
     "name":"Engineering",
     "items":[
-      "handbook/development-process",
+      "handbook/engineering/development-process",
       "handbook/engineering/how-to-qa",
       "handbook/engineering/release-new-version",
       "handbook/engineering/onboarding-customer",
@@ -227,11 +222,11 @@
     "entry":"Strategy",
     "name":"Strategy",
     "items":[
-      "handbook/strategy",
-      "handbook/business-model",
-      "handbook/investors",
-      "handbook/investor-updates",
-      "handbook/roadmap"
+      "handbook/strategy/strategy",
+      "handbook/strategy/business-model",
+      "handbook/strategy/investors",
+      "handbook/strategy/investor-updates",
+      "handbook/strategy/roadmap"
     ]
   }
 ]

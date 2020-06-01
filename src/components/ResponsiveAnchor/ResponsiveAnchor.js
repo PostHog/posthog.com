@@ -11,6 +11,7 @@ class ResponsiveAnchor extends Component {
         right: 10,
         bottom: 0,
         overflow: "auto",
+        height: '100%'
       }} >
         <div style={{
           position: "absolute",

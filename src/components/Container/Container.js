@@ -21,21 +21,13 @@ class Container extends Component {
     return (
       <div
         className={className}
-        style={{
-          position: 'relative',
-          top: 20,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          overflow: 'visible',
-        }}
       >
         <div
           style={{
             margin: onPostPage ? 0 : '0 auto',
             maxWidth: 960,
             padding: '0px 1.0875rem 1.45rem',
-            paddingTop:
+            marginTop:
               !sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)
                 ? 20
                 : 0,

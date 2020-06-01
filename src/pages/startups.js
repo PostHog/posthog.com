@@ -7,6 +7,7 @@ import 'antd/lib/select/style/css'
 import 'antd/lib/list/style/css'
 import 'antd/lib/form/style/css'
 import 'antd/lib/card/style/css'
+import 'antd/lib/layout/style/css'
 import './index.css'
 import { Link } from "gatsby"
 import trends from "../images/product-screenshots/product-trends.png";

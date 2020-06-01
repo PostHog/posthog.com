@@ -166,6 +166,8 @@ class SidebarContents extends Component {
               selectedKeys={selectedKeys}
               inlineIndent={12}
               onOpenChange={this.onChangeExpandedKeys}
+              style={{height: '100%'}}
+              theme='light'
             >
               {loop(tree)}
             </Menu>
