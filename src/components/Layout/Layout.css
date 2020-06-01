@@ -675,7 +675,7 @@ pre tt:after {
 .footer-universal{
   background: #29252C;
   color: #FFF;
-  position: 'relative';
+  position: relative;
   left: 0px;
   width: '100%';
   top: '100%';

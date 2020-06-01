@@ -38,7 +38,7 @@ class Layout extends Component {
         render={data => {
           return (
             <MediaQuery maxWidth={1000}>
-              {matches => (
+              {screenIsWide => (
                 <>
                   <Helmet
                     title={data.site.siteMetadata.title}
@@ -50,63 +50,64 @@ class Layout extends Component {
                     <html lang="en" />
                   </Helmet>
                   <AntdLayout
-                    style={{
-                      minHeight: '100vh',
-                      height: '100%',
-                      marginTop: 64,
-                      position: 'relative',
-                    }}
+                    // style={{
+                    //   minHeight: '100vh',
+                    //   height: '100%',
+                    //   marginTop: 64,
+                    //   position: 'relative',
+                    // }}
+                    style={{background: '#fff'}}
+                    theme="light"
                   >
                     <AntdLayout.Header
-                      style={{
-                        position: 'fixed',
-                        top: 0,
-                        width: '100%',
-                        zIndex: 100,
-                      }}
+                      // style={{
+                      //   position: 'fixed',
+                      //   top: 0,
+                      //   width: '100%',
+                      //   zIndex: 100,
+                      // }}
+                      style={{background: '#fff'}}
+                      theme="light"
                     >
                       <Header
                         siteTitle={data.site.siteMetadata.title}
-                        sidebarDocked={!matches}
+                        sidebarDocked={!screenIsWide}
+                        theme="light"
                       />
-                      {matches && onPostPage && (!anchorHide || !sidebarHide) && (
+                      {screenIsWide && onPostPage && (!anchorHide || !sidebarHide) && (
                         <Col>
                           {' '}
                           <ResponsiveTopBar />{' '}
                         </Col>
                       )}
                     </AntdLayout.Header>
-                    {!matches && onPostPage ? (
-                      <AntdLayout>
-                        {!sidebarHide && (
-                          <AntdLayout.Sider>
-                            <ResponsiveSidebar />
-                          </AntdLayout.Sider>
-                        )}
-                        <AntdLayout.Content
-                          style={{
-                            position: 'relative',
-                            left: '20%',
-                            right: '15%',
-
-                            minHeight: '100vh',
-                          }}
-                        >
-                          <Container
-                            sidebarDocked={!matches}
-                            onPostPage={onPostPage}
-                            className={className}
-                            style={{ position: 'relative' }}
+                    {!screenIsWide && onPostPage ? (
+                      <AntdLayout.Content>
+                        <AntdLayout theme="light" style={{background: '#fff'}}>
+                          {!sidebarHide && (
+                            <AntdLayout.Sider width={200} theme="light">
+                              <ResponsiveSidebar />
+                            </AntdLayout.Sider>
+                          )}
+                          <AntdLayout.Content
+                          style={{minHeight: 280, padding: '3rem 0% 0 10%'}}
                           >
-                            {children}
-                          </Container>
-                        </AntdLayout.Content>
-                        {!anchorHide && (
-                          <AntdLayout.Sider>
-                            <ResponsiveAnchor />
-                          </AntdLayout.Sider>
-                        )}
-                      </AntdLayout>
+                            <Container
+                              sidebarDocked={!screenIsWide}
+                              onPostPage={onPostPage}
+                              className={className}
+                              style={{ position: 'relative' }}
+                            >
+                              {children}
+                            </Container>
+                          </AntdLayout.Content>
+                          {!anchorHide && (
+                            <AntdLayout.Sider theme="light" style={{height: '100%'}}>
+                              <ResponsiveAnchor />
+                            </AntdLayout.Sider>
+                          )}
+                        </AntdLayout>
+                      </AntdLayout.Content>
                     ) : (
                       <AntdLayout.Content
                         style={{
@@ -116,7 +117,7 @@ class Layout extends Component {
                         }}
                       >
                         <Container
-                          sidebarDocked={!matches}
+                          sidebarDocked={!screenIsWide}
                           onPostPage={onPostPage}
                           className={className}
                           style={{ position: 'relative' }}
