@@ -50,22 +50,10 @@ class Layout extends Component {
                     <html lang="en" />
                   </Helmet>
                   <AntdLayout
-                    // style={{
-                    //   minHeight: '100vh',
-                    //   height: '100%',
-                    //   marginTop: 64,
-                    //   position: 'relative',
-                    // }}
                     style={{background: '#fff'}}
                     theme="light"
                   >
                     <AntdLayout.Header
-                      // style={{
-                      //   position: 'fixed',
-                      //   top: 0,
-                      //   width: '100%',
-                      //   zIndex: 100,
-                      // }}
                       style={{background: '#fff'}}
                       theme="light"
                     >
