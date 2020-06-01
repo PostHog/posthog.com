@@ -164,19 +164,6 @@
     ]
   },
   {
-    "entry":"Company",
-    "name":"Company",
-    "items":[
-      "careers",
-      "product-features",
-      "pricing",
-      "terms"
-    ],
-    "child_entries":[
-      "Handbook"
-    ]
-  },
-  {
     "entry":"Handbook",
     "name":"Handbook",
     "child_entries":[
