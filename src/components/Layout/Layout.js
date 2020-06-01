@@ -38,7 +38,7 @@ class Layout extends Component {
         render={data => {
           return (
             <MediaQuery maxWidth={1000}>
-              {screenIsWide => (
+              {screenIsSmall => (
                 <>
                   <Helmet
                     title={data.site.siteMetadata.title}
@@ -59,17 +59,17 @@ class Layout extends Component {
                     >
                       <Header
                         siteTitle={data.site.siteMetadata.title}
-                        sidebarDocked={!screenIsWide}
+                        sidebarDocked={!screenIsSmall}
                         theme="light"
                       />
-                      {screenIsWide && onPostPage && (!anchorHide || !sidebarHide) && (
+                      {screenIsSmall && onPostPage && (!anchorHide || !sidebarHide) && (
                         <Col>
                           {' '}
                           <ResponsiveTopBar />{' '}
                         </Col>
                       )}
                     </AntdLayout.Header>
-                    {!screenIsWide && onPostPage ? (
+                    {!screenIsSmall && onPostPage ? (
                       <AntdLayout.Content>
                         <AntdLayout theme="light" style={{background: '#fff'}}>
                           {!sidebarHide && (
@@ -81,7 +81,7 @@ class Layout extends Component {
                           style={{minHeight: 280, padding: '3rem 0% 0 10%'}}
                           >
                             <Container
-                              sidebarDocked={!screenIsWide}
+                              sidebarDocked={!screenIsSmall}
                               onPostPage={onPostPage}
                               className={className}
                               style={{ position: 'relative' }}
@@ -102,10 +102,11 @@ class Layout extends Component {
                           position: 'relative',
                           left: 0,
                           right: 0,
+                          marginTop: 50,
                         }}
                       >
                         <Container
-                          sidebarDocked={!screenIsWide}
+                          sidebarDocked={!screenIsSmall}
                           onPostPage={onPostPage}
                           className={className}
                           style={{ position: 'relative' }}

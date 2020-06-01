@@ -36,9 +36,6 @@ class ResponsiveTopBar extends Component {
 
     return (
       <div
-        style={{
-          height: 20,
-        }}
       >
       <div
         style={{
@@ -46,14 +43,13 @@ class ResponsiveTopBar extends Component {
           width: "100%",
           height: 40,
           background: 'aliceblue',
-          marginTop: '-20px',
+          lineHeight: '40px'
         }}
       >
         {!anchorOpen && !sidebarHide &&
           <div style={{
             position: "absolute",
             left: 8,
-            top: 4
           }}>
             {sidebarOpen ?
               <Button icon="close" onClick={this.onSetSidebarClose} /> :
@@ -64,7 +60,6 @@ class ResponsiveTopBar extends Component {
           <div style={{
             position: "absolute",
             right: 8,
-            top: 4
           }}>
             {anchorOpen ?
               <Button icon="close" onClick={this.onSetAnchorClose} /> :
@@ -76,11 +71,12 @@ class ResponsiveTopBar extends Component {
       {sidebarOpen &&
         <div style={{
           position: "fixed",
-          top: menuOpen ? nMenuItem*32 + 90 : 95,
+          top: menuOpen ? nMenuItem*32 + 90 : 105,
           left: 0,
           right: 0,
           bottom: 0,
           backgroundColor: 'white',
+          zIndex: 9999
         }}>
           <div style={{
             position: "absolute",
@@ -100,7 +96,7 @@ class ResponsiveTopBar extends Component {
       {anchorOpen &&
         <div style={{
           position: "fixed",
-          top: menuOpen ? nMenuItem*32 + 90 : 95,
+          top: menuOpen ? nMenuItem*32 + 90 : 105,
           left: 0,
           right: 0,
           bottom: 0,
@@ -108,6 +104,7 @@ class ResponsiveTopBar extends Component {
           backgroundColor: 'white',
           WebkitOverflowScrolling: "touch",
           transition: "left .3s ease-out, right .3s ease-out",
+          zIndex: 99999
         }}>
           <TableOfContents offsetTop={95} affix={false}/>
         </div>
