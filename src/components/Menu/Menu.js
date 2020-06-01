@@ -56,7 +56,7 @@ class Menu extends Component {
                           marginLeft: '2em',
                           float: 'right',
                         }}
-                        key={item.link}
+                        key={item.link || item.a}
                       >
                         {item.a ? (
                           <a href={item.a} style={{ color: 'black' }}>
@@ -110,6 +110,7 @@ class Menu extends Component {
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}
+                    rowKey={item => item.a || item.link}
                     renderItem={item => (
                       <List.Item
                         style={{
@@ -129,12 +130,12 @@ class Menu extends Component {
                                 }}
                               >
                                 {item.name}
-                              </a>                            
+                              </a>
                             }
                           />
                         : 
                           <List.Item.Meta
-                            title={                            
+                            title={
                               <Link
                                 to={item.link}
                                 style={{ color: 'black', textDecoration: 'none' }}
