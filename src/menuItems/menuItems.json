@@ -16,8 +16,8 @@
     "link":  "/trial"
   },
   { 
-    "name": "Support",
-    "link":  "/support"
+    "name": "GitHub",
+    "a":  "https://github.com/PostHog/posthog"
   },
   { 
     "name": "Login",
