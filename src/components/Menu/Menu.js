@@ -42,7 +42,7 @@ class Menu extends Component {
                   }}
                   selectedKeys={menuItems.map(menuItem => {
                     try {
-                        if (window.location.pathname === menuItem.link)
+                        if (window && window.location.pathname === menuItem.link)
                         return menuItem.link
                       } catch (e) {
                         console.log(e)
