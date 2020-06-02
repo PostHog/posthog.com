@@ -77,6 +77,8 @@ The candidate will be invited to the team's standups and can pick up work like a
 
 There will be a written catchup over Slack or via Zoom about the candidate with all people involved during the hiring. A yes/no decision will be made and then communicated to the candidate. 
 
+In case of a rejection, it's important to clearly outline why that decision was made. Highlight what went well, but also mention specific points of improvement. Make sure to leave the door open for the future so they can apply again in 12-18 months time.
+
 ### After
 
 To give an employee an offer letter and to do the rest of the onboarding, see [onboarding](/handbook/people/onboarding).
