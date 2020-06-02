@@ -59,7 +59,7 @@ I tend to split it up into the following sections
 
 ### Interview with James
 
--
+This is to allow both PostHog and the candidate assess cultural fit, and to dig into any concerns that Tim may have had in the first interview. I am looking for proactivity, directness, strong communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
 
 ### Interview with someone from the team
 
