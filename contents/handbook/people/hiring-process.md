@@ -15,7 +15,7 @@ At the moment, we're not so worried about having a clearly defined job spec. Pos
 
 See [our strategy](/handbook/strategy/strategy) to find out how many people we should be hiring at any time, and at what pace.
 
-## Advertising the job
+## Advertizing the job
 
 There are a couple of places that are worth posting to:
 
