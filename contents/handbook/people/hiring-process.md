@@ -38,6 +38,8 @@ The stages of interviewing are:
 - 3 days of contracting work
 - Decision
 
+We track the stage the candidate is at [in this spreadsheet](https://docs.google.com/spreadsheets/d/1iiOj3t-8TfJDG0ZUuZbc0u_Ex72-ds6G75kppr6Igck/edit?usp=sharing).
+
 ### Application
 
 It's worth reading applications and resume carefully. For current roles, the things we look for are
