@@ -105,7 +105,7 @@ Lets get started:
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 2. Click **Create Stack -> With New Resources (standard)**
-3. Select template source as `Amazon S3 URL` and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
+3. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
 4. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
 5. Review the rest of the config wizard pages
 6. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD a month
@@ -120,14 +120,14 @@ To update follow these steps:
 
 1. Open up your AWS console to [ECS management page](https://console.aws.amazon.com/ecs/)
 2. Make sure you have your Region set to the correct region.
-3. In the navigation pane, choose `Clusters`.
-4. On the `Clusters` page, select the name of the cluster running PostHog
+3. In the navigation pane, choose **Clusters**.
+4. On the **Clusters** page, select the name of the cluster running PostHog
 5. On the cluster page select the services tab
-6. Check the box to the left of the PostHog service and click `Update` button above
-7. On the `Configure service` page, PostHog's service information is already pre-populated. You **MUST** check `Force new deployment` to instruct ECS to pull a new container from the Docker repository. From there make any relevant changes to the configuration if you want to. If all that is needed is an update proceed to `Next Step`
-8. Review the `Configure deployments` page and then proceed to `Next Step`
-9. Review the `Configure networks` configs and then proceed to `Next Step`
-10. Click `Update Services` to 🚢 the newest version of PostHog to your ECS cluster!
+6. Check the box to the left of the PostHog service and click **Update** button above
+7. On the **Configure service** page, PostHog's service information is already pre-populated. You **MUST** check **Force new deployment** to instruct ECS to pull a new container from the Docker repository. From there make any relevant changes to the configuration if you want to. If all that is needed is an update proceed to **Next Step**
+8. Review the **Configure deployments** page and then proceed to **Next Step**
+9. Review the **Configure networks** configs and then proceed to **Next Step**
+10. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
 
 You can find more details on Amazon's docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html)
 
