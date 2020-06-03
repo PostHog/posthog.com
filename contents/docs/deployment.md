@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-|                                                     |                                                             |                                                                                     |
-| :-------------------------------------------------- | :---------------------------------------------------------: | ----------------------------------------------------------------------------------- |
+||||
+| :-- | :-: | --- | --- | --- |
 | [![](../../src/images/install-heroku.png)](#heroku) | [![](../../src/images/install-docker.png)](#docker-compose) | [![](../../src/images/install-kubernetes.png)](#helm-chart-kubernetes-installation) | [![](../../src/images/install-aws.png)](#aws-ecs-fargate) | [![](../../src/images/community-github.png)](#source-installation) |
 | <a href="#heroku" class="middle">Heroku</a>         |     <a href="#docker-compose" class="middle">Docker</a>     | <a href="#helm-chart-kubernetes-installation" class="middle">Kubernetes</a>         | <a href="#aws-ecs-fargate" class="middle">AWS</a> | <a href="#source-installation" class="middle">Source</a> |
 
