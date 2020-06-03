@@ -224,8 +224,8 @@ const IndexPage = () => {
       <Row gutter={[24, 96]}>
         <Col span={24} className="gutter-row header-row" align="middle">
           <h2>What's new?</h2>
-          <p>Version 1.7.0</p>
-          <Link to="blog/the-posthog-array-1-7-0">
+          <p>Version 1.8.0</p>
+          <Link to="blog/the-posthog-array-1-8-0">
             <Button type="information" size="large">Release notes</Button>
           </Link>
         </Col>
