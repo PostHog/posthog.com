@@ -89,7 +89,7 @@ Lets get started:
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 2. Click **Create Stack -> With New Resources (standard)**
-3. Select template source as `Amazon S3 URL` and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
+3. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
 4. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
 5. Review the rest of the config wizard pages
 6. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD a month
