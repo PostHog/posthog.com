@@ -1,13 +1,13 @@
 ---
 date: 2020-06-02
-title: How we raised $3M
+title: How we raised $3M for an open source project
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 ---
 
-Open source projects have long battled with how to finance themselves. We're lucky to have significant funding and wanted to share what we did to help other cool projects take off.
+Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.
 
 For those who've not met us before, PostHog provide open source product analytics. We went through the YCombinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised $3.025M since we started in January, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
 
@@ -23,7 +23,7 @@ So, what are your options for building a company around the project?
 
 ## Venture Capital (VC)
 
-VC means revenue won't bottleneck your growth. That's pretty much the advantage. Depending very heavily on the firm, you may get a lot of support with meeting early customers, hiring and your strategy.
+VC means revenue won't bottleneck your growth. That's pretty much the advantage. Depending very heavily on the firm, you may get a lot of support with meeting early customers, hiring, free VC swag and your strategy.
 
 We felt personally the challenge of managing accelerated growth would be a lot more stimulating, and that has certainly been the case so far!
 
@@ -145,7 +145,9 @@ We used [Clerky](https://clerky.com). It generates all the legal paperwork you n
 
 ## The process
 
-Fundraising involves dozens or hundreds of meetings. You will find yourself brought to your administrative knees if you do not run an organized process!
+Fundraising involves dozens or hundreds of meetings. Seriously.
+
+You will find yourself brought to your administrative knees if you do not run an organized process!
 
 ### Get meetings
 
@@ -169,13 +171,21 @@ The portfolio itself can also be useful. Are there any similar companies you cou
 
 So, the meeting will start. It should feel like you are driving this - you made it happen, after all.
 
-Start by introducing yourself and having the investor do the same. There's some basic information that you should find out every time, if you can't work it out online beforehand. For example, do they follow on (you'll need that info later), what sort of cheque size they prefer to work with, and if they are a firm rather than an angel, do they have an ownership requirement, and are they comfortable leading a round. 
+Start by introducing yourself, give the company one-liner, and have the investor do the same.
+
+There's some basic information that you should find out every time, if you can't work it out online beforehand. For example, do they follow on (you'll need that info later), what sort of cheque size they prefer to work with, and if they are a firm rather than an angel, do they have an ownership requirement, and are they comfortable leading a round. 
 
 Later in the discussion, you should make sure to find out how they make decisions - angels may decide on the call, seed firms will often decide after another 2-3 calls with a couple of partners involved, multi stage firms may require a full partner meeting. Just get a sense of how long it normally takes too - some can make a decision in day, others take weeks or months.
 
-You'll probably get asked where you're at in the process. 
+You'll probably get asked where you're at in the process. This is where it's helpful if you've a couple of angels early on - they will help you set a price and will demonstrate some momentum at least. Angels are a lot friendlier and many are willing to back companies that are just starting to raise. However, you should, even at that stage, have a least a point of view on how much money 
+
+How do you value your company? There are plenty of [good guides](https://medium.com/the-mission/state-of-seed-investing-in-2018-25eb28ac0e93#:~:text=%F0%9F%92%A5%20Seed%20deal%20sizes%20and,it%20hovered%20around%20%241M.) out there. It's key to note that *you* set the price - you'll get feed
 
 We used the [YC seed deck](https://blog.ycombinator.com/intro-to-the-yc-seed-deck/). Some people get really into the quality and design. Ours was black and white with a logo copy pasted onto the front. I think we can get away with that as we're an engineering-focussed company and not in B2C. We didn't present the slides in the meeting, but we'd send them afterwards - we used this approach to structure how we talked about ourselves - there were a (tiny) handful of main points we wanted to make.
+
+In the meeting itself, ask the investor's opinions - it is a brilliant way to get advice on strategy and your company from people that can pattern match against hundreds of others. Not all investors will give the same advice, particularly for open source where the business models are somewhat more nascent. Some will tell you to focus on revenue, others will push towards adoption, others will do something between the two.
+
+You can do this positively to work out what to focus on "what would you want us to achieve with this round", or to help improve your pitch "what do you see as our biggest risk / what would stop you from investing in us".
 
 ### Follow up
 
@@ -195,15 +205,17 @@ If you close an investor, it is a _really_ good idea to make sure you then get i
 
 # Raising from a different country
 
-The reason we chose to raise in the US and to correct a US company, even as UK residents, was that we believed it would give us the best swing for the fences.
+The reason we chose to raise in the US and to correct a US company, even as UK residents, was that we believed it would give us the best swing for the fences. We'd be amongst the highest concentration of founders of companies both big and small in order to learn as quickly as possible.
 
-Not all, but the majority of UK investors we spoke with, felt the valuation was too high. I'd hazard a guess that we'd have \$5M post money valuation in the UK (which would have meant we'd have needed to raise a lot less), whereas we ended up raising at \$15M post. We can see why investors can be more risk averse - they can get into more companies if each company has a lower price. However, from the company's perspective, more money means you have more resource to hit a homerun, which is what has to happen for the majority of VCs to be successful. There is some [interesting albeit old data](https://tomtunguz.com/seed-followon-rates/) on how raising more money increases your chance of success later (although perhaps this is correlation not causation), but only up to a certain point.
+It became clear, the same is true - at least for us - on the VC side. Not all, but the majority of UK investors we spoke with, felt the valuation was too high. I'd hazard a guess that we'd have \$5M post money valuation in the UK (which would have meant we'd have needed to raise a lot less), whereas we ended up raising at \$15M post. We can see why investors can be more risk averse - they can get into more companies if each company has a lower price. However, from the company's perspective, more money means you have more resource to hit a homerun, which is what has to happen for the majority of VCs to be successful. There is some [interesting albeit old data](https://tomtunguz.com/seed-followon-rates/) on how raising more money increases your chance of success later (although perhaps this is correlation not causation), but only up to a certain point.
 
 # The paperwork you'll need
 
-If you're raising money in the US, we'd recommend you have a US parent company. You can "flip" your existing company to have a US parent - this cost us $10k, which was a frustrating expense, but a necessary one that was far outweighed by raising in a more competitive market.
+If you're raising money in the US, we'd recommend you have a US parent company. You can "flip" your existing company to have a US parent - this cost us $10k, which was a frustrating expense, but a necessary one that was far outweighed in financial terms by raising in a more competitive market.
 
-Once the company was incorporated, we raised our entire round on [SAFEs](https://www.ycombinator.com/documents/). These allow investors to invest without you having to create a priced round which costs a minimum of \$25K, unless you use the [Series Seed](https://www.seriesseed.com/) paperwork. SAFEs are very quick to sign, with no legal work needed. We set a cap with investors. We started off with a \$12M post money cap, meaning that the first \$200K or so that we raised guaranteed those investors that if our eventual priced round went over \$12M valuation, they'd get a lower price as a reward for investing early thus getting a higher fraction of the company for the same money. After starting with angel investors on this basis, we decided fundraising was going well so we increased the cap to \$15M. We were originally going to increase it to \$20M, enabling us to raise more, but we felt given the economic uncertainty as covid hit that we should take the money as fast as possible. It's important to note that the downside of SAFEs is that if you have a down round at the next phase of fundraising, you'll get very diluted (if if the price is lower than the cap).
+Once the company was incorporated (which we had to do to get YC's \$150k initial investment in), we raised our entire round on [SAFEs](https://www.ycombinator.com/documents/). SAFEs allow investors to invest without you having to create a priced round which costs usually a minimum of \$25K or so, unless you use the [Series Seed](https://www.seriesseed.com/) paperwork. They are quick to sign, with no legal work needed.
+
+We set a cap with investors. We started off with a \$12M post money cap, meaning that the first \$200K or so that we raised guaranteed those investors that if our eventual priced round went over \$12M valuation, they'd get a lower price as a reward for investing early thus getting a higher fraction of the company for the same money. After starting with angel investors on this basis, we decided fundraising was going well so we increased the cap to \$15M. We were originally going to increase it to \$20M, enabling us to raise more, but we felt given the economic uncertainty as covid hit that we should take the money as fast as possible. It's important to note that the downside of SAFEs is that if you have a down round at the next phase of fundraising, you'll get very diluted (if if the price is lower than the cap).
 
 We're no affiliation other than friends, but in order to model how much of the company you're selling during this process, we used [Pulley](https://pulley.com). You put in all the SAFEs and you can model out a series A to check how much you've sold. [Sam Altman's advice](https://blog.ycombinator.com/dilution/) is to try to give up no more than 10-15% in a seed round and 15-25% in your A round.. although "it's far more important not to run out of money than almost anything else". We used [Clerky](https://www.clerky.com/) to generate the SAFEs and to send them for electronic signature.
 
