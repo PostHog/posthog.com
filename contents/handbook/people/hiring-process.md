@@ -57,6 +57,12 @@ I tend to split it up into the following sections
 - Talk about the candidate, dig into any questions I have from their CV
 - Talk about the hiring process and ask about expected compensation
 
+Hiring questions I like to ask
+- Tell me about a project you started from scratch
+- What was the hardest technical thing you've done in the last month?
+- What did you do on your very best day at work?
+- Tell me about a project that you led that failed. Why did it fail and what did you learn?
+
 ### Interview with James
 
 This is to allow both PostHog and the candidate assess cultural fit, and to dig into any concerns that Tim may have had in the first interview. I am looking for proactivity, directness, strong communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
