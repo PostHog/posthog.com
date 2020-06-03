@@ -1,5 +1,5 @@
 ---
-title: How to QA
+title: Setup SSL locally
 sidebar: Handbook
 showTitle: true
 ---
@@ -40,8 +40,15 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
          ssl_session_timeout  5m;
          ssl_ciphers          HIGH:!aNULL:!MD5;
          location / {
-                 proxy_pass http://backend;
+            proxy_pass http://backend;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+            proxy_set_header X-Forwarded-Proto $scheme;
          }
+         location /static/ {
+            proxy_pass http://127.0.0.1:8234/static/;
+        }
      }
 ```
 
@@ -53,4 +60,9 @@ nginx -p /usr/local/etc/nginx/ -c /usr/local/etc/nginx/nginx.conf
 6. You can stop the nginx server with
 ```bash
 nginx -p /usr/local/etc/nginx/ -c /usr/local/etc/nginx/nginx.conf -s stop
+```
+
+7. To run local development, use
+```bash
+bin/start-http
 ```
