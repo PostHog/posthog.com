@@ -79,24 +79,22 @@ for configuration options.
 
 ## AWS ECS Fargate
 
-We maintain a CloudFormation [config](https://github.com/fuziontech/posthog/blob/master/deployment/aws/ecs/combined.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. For the container hosting we use fargate so that you only pay for what you need.
+We maintain a CloudFormation [config](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. This is the script that we will be referencing from S3 later. For the container rumtime we use fargate so that you only pay for what you need.
 
 For an in depth how-to on CloudFormations check out the [AWS Docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html)
-
-If you are curious what the code and configs look like check it out [here](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml)
 
 Lets get started:
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
-2. Click **Create Stack -> With New Resources (standard)**
-3. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
-4. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
-5. Review the rest of the config wizard pages
-6. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD a month
-7. If you are ready, click **Create Stack**!
-8. Once deployment completes look under **Options** for the Publicly facing ELB Host
+1. Click **Create Stack -> With New Resources (standard)**
+1. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
+1. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
+1. Review the rest of the config wizard pages
+1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD a month
+1. If you are ready, click **Create Stack**!
+1. Once deployment completes look under **Options** for the Publicly facing ELB Host
 
-# **⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
+**⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
 
 ## Source installation
 

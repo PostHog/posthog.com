@@ -32,15 +32,15 @@ If you've pinned a version, see [CHANGELOG.md](https://github.com/PostHog/postho
 To update follow these steps:
 
 1. Open up your AWS console to [ECS management page](https://console.aws.amazon.com/ecs/)
-2. Make sure you have your Region set to the correct region.
-3. In the navigation pane, choose **Clusters**.
-4. On the **Clusters** page, select the name of the cluster running PostHog
-5. On the cluster page select the services tab
-6. Check the box to the left of the PostHog service and click **Update** button above
-7. On the **Configure service** page, PostHog's service information is already pre-populated. You **MUST** check **Force new deployment** to instruct ECS to pull a new container from the Docker repository. From there make any relevant changes to the configuration if you want to. If all that is needed is an update proceed to **Next Step**
-8. Review the **Configure deployments** page and then proceed to **Next Step**
-9. Review the **Configure networks** configs and then proceed to **Next Step**
-10. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
+1. Make sure you have your Region set to the correct region.
+1. In the navigation pane, choose **Clusters**.
+1. On the **Clusters** page, select the name of the cluster running PostHog
+1. On the cluster page select the services tab
+1. Check the box to the left of the PostHog service and click **Update** button above
+1. On the **Configure service** page, PostHog's service information is already pre-populated. You **MUST** check **Force new deployment** to instruct ECS to pull a new container from the Docker repository. From there make any relevant changes to the configuration if you want to. If all that is needed is an update proceed to **Next Step**
+1. Review the **Configure deployments** page and then proceed to **Next Step**
+1. Review the **Configure networks** configs and then proceed to **Next Step**
+1. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
 
 You can find more details on Amazon's docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html)
 
