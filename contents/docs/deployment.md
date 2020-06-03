@@ -114,23 +114,6 @@ Lets get started:
 
 **⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
 
-### Updating deployment on ECS Fargate
-
-To update follow these steps:
-
-1. Open up your AWS console to [ECS management page](https://console.aws.amazon.com/ecs/)
-2. Make sure you have your Region set to the correct region.
-3. In the navigation pane, choose **Clusters**.
-4. On the **Clusters** page, select the name of the cluster running PostHog
-5. On the cluster page select the services tab
-6. Check the box to the left of the PostHog service and click **Update** button above
-7. On the **Configure service** page, PostHog's service information is already pre-populated. You **MUST** check **Force new deployment** to instruct ECS to pull a new container from the Docker repository. From there make any relevant changes to the configuration if you want to. If all that is needed is an update proceed to **Next Step**
-8. Review the **Configure deployments** page and then proceed to **Next Step**
-9. Review the **Configure networks** configs and then proceed to **Next Step**
-10. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
-
-You can find more details on Amazon's docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html)
-
 ## Source installation
 
 1. Make sure you have Python >= 3.7 and pip installed
