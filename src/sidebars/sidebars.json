@@ -138,6 +138,7 @@
     "entry":"Releases",
     "name":"Releases",
     "items":[
+      "blog/the-posthog-array-1-8-0",
       "blog/the-posthog-array-1-7-0",
       "blog/the-posthog-array-1-6-0",
       "blog/the-posthog-array-1-5-0",
