@@ -157,7 +157,6 @@
     "entry":"Blog",
     "name":"Blog Posts",
     "items": [
-      "blog/raising-3m-for-os",
       "blog/after-the-hn-launch",
       "blog/pivot-to-posthog",
       "blog/moving-to-sf",
