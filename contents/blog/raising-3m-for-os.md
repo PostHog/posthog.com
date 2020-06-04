@@ -19,7 +19,7 @@ Many projects don't ever want to become businesses - if it's just a hobby and yo
 
 We felt building a company around the project at the same time would let us build something really ambitious, so we did that.
 
-So, what are your options for building a company around the project?
+So, what are your options for funding?
 
 ## Venture Capital (VC)
 
@@ -33,67 +33,71 @@ VC hype begets a bigger team, begets results (hopefully), begets hype:
 
 ![VC Hype Cycle](../images/vc-hype-cycle.jpg)
 
-Especially early, VC is buying into your potential value. This makes sense - if the company that forms around your project has a 1% chance of being worth $1Bn or more, it is rational for people to take that bet if the price is right. Open source companies really can make it big - it's a post for another time, but we believe that open source will eat SaaS's lunch in many product categories.
+Especially early on, VC is buying into your potential value. This makes sense - if the company that forms around your project has a 1% chance of being worth $1Bn or more, it is rational for people to take that bet if the price is right. Open source companies really can make it big - it's a post for another time, but we believe that open source will eat SaaS's lunch in many product categories.
 
-The way to pitch open source to VCs is that it is easier to get into production, and there is less of a sense of vendor lock in, which puts off many developers from trying out a new SaaS product. SaaS may be "less work" to manage, but there's probably no reason you can't also provide your own product, hosted. The end result is that your open source repo could get used at huge companies. They probably have needs your free product can't deliver (uptime, better features, support), which you can make money from, to invest back into the project.
+The way to pitch open source to VCs is that it is easier to get into production, and there is less of a sense of vendor lock in, which puts off many developers from trying out a new SaaS product. SaaS may be "less work" to manage, but there's probably no reason you can't also provide your own product, hosted. The end result is that your open source repo could get used at huge companies. They probably have needs your free product can't deliver (uptime, better features, support), which you can make money from meeting (through providing services, hosting or premium features), to invest back into the project.
 
 The downside of this VC route is that you risk hype<>reality disonance!
 
 If you can't achieve results with the money you raised, whilst increasing your burn rate, you are at the mercy of those funding you if you will survive. Not cool, but you took this route!
 
-You also have investors, who have given you lots of money. Don't fall in love with them - you must prioritize your own team then users then customers, in that order. Do that, and your investors will take care of themselves.
+You also have investors, who have given you lots of money. Don't fall in love with them - you must prioritize your own team and their performance, then users then customers, in that order. Do that, with a good strategy, and your investors will take care of themselves.
 
-Oh, and you can't pay yourself a huge dividend if you succeed as a way of taking money out of the company, although it might become possible to sell some shares later if you're rocketing (perhaps to help you keep taking risk), and in the short run, you can now probably afford to pay yourself something - hoorah. Going for VC means you are committing to an exit or a failure - you can't really change your mind later that you want to take things more steadily.
+Oh, and you can't pay yourself a huge dividend if you succeed as a way of taking money out of the company, although it might become possible to sell some shares later if you're rocketing (perhaps to help you keep taking risk), and in the short run, you can now probably afford to pay yourself something - hoorah for being able to work on open source full time! Going for VC means you are committing to an exit or a failure - you can't really change your mind later that you want to take things more steadily.
 
-Turning your project into a VC backed company means you will have to spend a lot more time dealing with people. Investors, a larger team, probably more customers, and probably a larger community if you succeed in growing. Depending on your personality, this might be a good or a bad thing. If you built it in the first place for the fun of building, you should think hard about this. If you find the concept of treating the company itself as your product not just the repo, then you'll enjoy it!
+Turning your project into a VC backed company means you will have to spend a lot more time dealing with people.
 
-PostHog chose the VC route. We wanted to build a company as a way of being really ambitious with what we can do with product analytics.
+Investors, a larger team, probably more customers, and probably a larger community. Depending on your personality, this might be a good or a bad thing. If you built the project in the first place for the fun of building, you should think hard about this. If you find the concept of treating the company itself as your product not just the repo, then you'll enjoy it!
 
-When we're 80, we think we want to have taken a couple of big swings with our careers even if we don't own the whole pie. On the product side, we can build something open source that will outlast us if we get it wrong, and regardless of the out come, the skills and lessons it will give us will help us in our future lives.
+PostHog chose the VC route. We wanted to build a company as a way of being really ambitious with what we can do with product analytics. We want to help every developer have a better understanding of the impact of their work.
+
+Personally, when we're 80, we think we want to have taken a couple of big swings with our careers even if we don't own the whole pie. On the product side, we can build something open source that will outlast us if we get it wrong, and regardless of the outcome, the skills and lessons it will give us will help us in our future lives.
 
 ## Bootstrapping
 
 By this we mean getting real customers to pay you money, to reinvest into the project's development, and fuelling (or not) your own growth at whatever pace you see fit.
 
-Basecamp have a great [philosophy](https://basecamp.com/books/calm) on this. 
+Basecamp have a great [philosophy](https://basecamp.com/books/calm) on this.
 
 You get complete control this way. That might make it easier to do the "right thing", or to be more creative in what you build since you won't have to be disrupting or creating a multi billion dollar market as a constraint. However, the financial pressure of payroll in the early days might make it tough to optimize for long run decisions. You need to feed yourself somehow!
 
-Humans get tired and hungry. Giving up would be the major risk.
+Humans get tired and hungry. Not giving up is what we saw as the major challenge of this way of working.
 
 We felt this was a similarly high level of risk to inflating your burn rate above your revenue that comes from VC, especially with open source where you'll have to manage to build a free product first, then a paid version (unless you go down the hosted = paid route).
 
 ## Donations
 
-If it's a side project and you have no need to support yourself, you can use Patreon or similar to ask donations.
+If it's a side project and you have no need to support yourself, you can use [Patreon](https://www.patreon.com/) or similar to ask for donations from your fans.
 
-The fundamental problem with this is there's not a strong incentive for companies to donate money, and even if they do, the amount is typically a fraction of what they would spend on actual software. That means it will be very hard to support yourself to go fulltime, let alone to grow a team to go even further with the project.
+The fundamental problem with this is there's not a strong incentive for companies to donate money, and even if they do, the amount is typically a fraction of what they would spend on paid software. That means it will be very hard to support yourself to go fulltime, let alone to grow a team to go even further with the project.
 
-However, this could be a cool way to start before doing bootstrapping or VC in the future.
+However, this could be a cool way to start before doing bootstrapping or VC in the future. There are good reasons for keeping some things as a side project or hobby - you can be more creative, and just build things for the fun of it.
 
 From this point on, we're going to explain how we raised venture capital in this post.
 
 # Converting an Open Source project into a business
 
-This is probably a contraversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
+This is a contraversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
 
 ## Product<>Community versus Product<>Market fit
 
 We'd advocate that the best way to build a really ambitious, fundable open source project is to get something to ubiquity before anything else.
 
-In SaaS, there is a lot of advice to charge even before you have a product. It is almost becoming a standard approach. You somehow have to jump to product<>market fit in one leap to achieve this - you need to have a product concept that is so strong people will pay upfront. That means getting to product<>market fit is incredibly hard since there are too many variables to know how to solve the puzzle except through trial and error. However, when you get there, making money is easy.
+In SaaS, there is a lot of advice to charge money even before you have a product. It is almost becoming a standard approach. You somehow have to jump to product<>market fit in one leap to achieve this - you need to have a product concept that is so strong people will pay upfront. That means getting to product<>market fit is incredibly hard since there are too many variables to know how to solve the puzzle except through trial and error. However, when you get there, making money is easy.
 
-Open source creates a different route. You need to (i) build something useful THEN (ii) work out how to make money. You'll get much, much more feedback from open source - it's an approach that is more developer-friendly and thus will tend to get you a lot more growth and adoption if you are getting close to something useful. That makes it a lot easier to at least build something useful for a community (product<>community fit).
+Open source creates a different route. You need to (i) build something useful THEN (ii) work out how to make money. You'll get much, much more feedback from open source - it's an approach that is more developer-friendly and thus will tend to get you a lot more growth and adoption if you are getting close to something useful. That makes it a lot easier to build something useful for a community.
 
-However, making money is harder. You will need to do that to sustain and grow the project. You need to have faith that once you've built something useful, you'll be able to work that out. We get one or two paid enquiries per week inbound. We speak to these people to try to understand what they'd need and if they'd then pay for it. That said, we still ourselves have work to do on making our own community and free product stronger before worrying about revenue. 
+However, making money is harder. You will need to do that to sustain and grow the project. You need to have faith that once you've built something useful, you'll be able to work this out. PostHog, even at our current scale, get one or two paid enquiries per week inbound. We speak to these people to try to understand what they'd need and if they'd then pay for it. Most run off - we're still learning! That said, we still ourselves have work to do on making our own community and free product stronger before worrying about revenue.
 
 The good news is that inbound interest is much, much easier to close, and you don't have to waste time sending hundreds of cold emails to generate it - you can focus on the free product.
 
-This can definitely go wrong - you can accidentally make the free product so good there's nowhere to go money-wise, so just have a rough plan. VCs asked about this, but the ones that invested generally just have the belief that product<>market fit is easy once you get product<>community fit.
+This can definitely go wrong - you could run out of cash before you reach product<>market fit. You might accidentally build a free product that has no viable commercial route. You may find that the market you are building for is too small for VCs to be able to invest into it.
+
+When we raised money, VCs asked about the commercial side, but the ones that invested generally just have the belief that product<>market fit is easy once you get product<>community fit. We were upfront about our paid version - we don't know how it would work yet, but we have a plan for how we'd approach it.
  
 ## Making money
 
-You'll need some way of making money, at some point. Hopefully after product<>community fit.
+You'll need some way of making money, at some point. That'll come after product<>community fit.
 
 There are three popular ways of doing this, either:
 
@@ -104,25 +108,27 @@ There are three popular ways of doing this, either:
 
 There are probably other ways (Ads? Although yuck) that we haven't thought of.
 
-A services approach is pretty simple although if it's the only plan in the long run, it'll make generating a high valuation tough, so raising money will be more painful. The reason for that is services are low margin - you're having you and your team sell your time rather than a scalable product that you can build once then distribute.
+A services approach is pretty simple although if it's the only plan in the long run, it'll make generating a high valuation tough, so raising money will be more painful. That's because services are low margin - selling time rather than a scalable product doesn't improve your returns as you get bigger.
 
-By hosted, we mean charging customers for the hosted version of the open source product. The risk is that a [cloud provider decides to compete](https://www.fastcompany.com/90290754/aws-launches-mongodb-competitor-amid-criticism-over-amazons-in-house-products) with your hosted version. There is licensing to prevent this, although it may make you technically "not" open source, which will harm adoption. Lots of developers can use MIT license software in big enterprises, but they can't use licenses that prevent commercial use. The huge advantage of charging for hosted use is that you don't have to build anything beyond your basic product, and that means all your attention that goes into your open source community will help the paid version too.
+By hosted, we mean charging customers for the hosted version of the open source product. The risk is that a [cloud provider decides to compete](https://www.fastcompany.com/90290754/aws-launches-mongodb-competitor-amid-criticism-over-amazons-in-house-products) with your hosted version. There is licensing to prevent this, although it will make you technically "not" open source, which may harm adoption and the fit with the community. Lots of developers can use MIT license software in big enterprises, but they can't use licenses that prevent commercial use without some form of approval from their company (if they work at a big company).
 
-Open core is the model of choice for PostHog in the long run. We made a hosted version too just to see if we could passively make some money (although we haven't actually built a payment flow yet...!), and it turned out around 60% of our users go for that route to try it out.
+The upside of charging for hosted use is that you don't have to build anything beyond your basic product, and that means all your attention that goes into your free version will help the paid version's growth too.
+
+Open core is the model of choice for PostHog in the long run. We made a hosted version in the short run just to see if we could passively make some money to help control our burn rate (although a payment flow is on the todo list still...!), and it turned out around 60% of our users go for that route to try it out. We think that's a great sign.
 
 For open core, you first build a Community Edition open source product and focus on being really helpful to everyone who is willing to try it out or contribute.
 
-Do a really good job of that and you'll get random emails from folks at bigger companies who need more support or extra features. You can then build a "source available" version that you charge monthly for, for those people. The downside is you have to build premium features that you can't put into the open source version - and it's important to be really upfront with the community about what is free versus paid... since that may put some developers off from doing pull requests, for example.
+Do a really good job of that and you'll get random emails from folks at bigger companies who need more support or extra features. You can then build a "source available" version that you charge monthly for, for those people with premium functionality. The disadvantage is you have to build premium features that you can't put into the open source version - and it's important to be really upfront with the community about what is free versus paid... since that may put some developers off from doing pull requests, for example.
 
 # How long it took
 
 * August 2019: Tim and I quit our jobs.
-* January 4th 2020: We started the YC batch, and that meant receiving our first $150K investment from YC. We worked on a different idea to start with but soon [pivoted](/blog/pivot-to-posthog).
+* January 4th 2020: We started the YC W20 batch, and that meant receiving our first $150K investment from YC. We worked on a different idea to start with but soon [pivoted](/blog/pivot-to-posthog).
 * January 23rd 2020: We wrote the first line of code for PostHog
 * February 14th: We did a mini launch for a few YC companies to get early feedback
 * February 21st: PostHog [launched on HackerNews](https://news.ycombinator.com/item?id=22376732)
 * March 6th: Day 1 of fundraising and first cheque ($10K!)
-* March 12th: Left San Francisco due to covid and started working fully remote from the UK. We had around \$350K total investment (including the YC money) at this point. Everything seemed to slow down at this point for 3 weeks. Our bank balance was $205K this day.
+* March 12th: Left San Francisco due to covid and started working fully remote from the UK. Everything seemed to slow down at this point for 3 weeks. Our bank balance was $205K this day.
 * March 16th: Demo day. 
 * March 31st: Balance: $530K.
 * April 24th: Balance: $719K
@@ -148,7 +154,7 @@ However, after a couple more weeks, it felt like the VCs had become used to this
 
 # "You're too early"
 
-It sounds obvious, but many of the most succesful open source companies start off with a really popular open source project. The implication is that you're going to have to build something that gets popular first, then monetizes later, in most cases.
+It sounds obvious, but many of the most succesful open source companies start off with a really popular open source project. The implication is that you're going to have to build something that gets popular first, then monetize later, in most cases.
 
 From a fundraising perspective, this means you can either be raising (i) off the back of lots of revenue, which seems unlikely or (ii) from a ton of growth of the project.
 
