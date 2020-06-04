@@ -318,6 +318,6 @@ More hand holding is probably better if you have less experience or you need som
 
 # Thanks for reading
 
-We hope this post was useful. If you would like to follow our journey, add yourself to our newsletter.
+We hope this post was useful. If you would like to follow our journey, add yourself to [our newsletter](/newsletter).
 
 Better yet, [use PostHog](/) yourself (free), or [star our repo](https://github.com/posthog/posthog).
