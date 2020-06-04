@@ -192,7 +192,7 @@ This was handy to store more context than is possible in as spreadsheet.
 
 The format was a single long document, with more detailed notes that I stored as a private repo. I just had 5-10 bullet points about each person I was meeting and their firm, that I would generate during the [planning process](#plan-the-meeting).
 
-### Captable management
+### Captable management
 
 We used [Pulley](https://pulley.com/) for this. [Captable.io](https://captable.io/) is a well known alternative. 
 
