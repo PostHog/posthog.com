@@ -23,7 +23,7 @@ So, what are your options for building a company around the project?
 
 ## Venture Capital (VC)
 
-VC means revenue won't bottleneck your project's growth (usage or features), if you spend the money wisely. That's pretty much the advantage. You will obviously have to build a company around the project so you have a way of making money at least in the long run.
+VC means you have way, way more cash to fuel your project's growth, if you spend the money wisely. That's pretty much the advantage. You will obviously have to build a company around the project so you have a way of making money at least in the long run.
 
 Depending very heavily on the firm, you may get a lot of support with meeting early customers to generate revenue later on, hiring, free VC swag and your strategy. You can always ask the partners and founders from their portfolio to get a sense of what working with them is like.
 
@@ -35,13 +35,13 @@ VC hype begets a bigger team, begets results (hopefully), begets hype:
 
 Especially early, VC is buying into your potential value. This makes sense - if the company that forms around your project has a 1% chance of being worth $1Bn or more, it is rational for people to take that bet if the price is right. Open source companies really can make it big - it's a post for another time, but we believe that open source will eat SaaS's lunch in many product categories.
 
-Simply speaking, it is easier to get into production, and there is less of a sense of vendor lock in, which puts of many developers from trying out a new SaaS product. The end result is that your open source repo could get used at huge companies. They probably have needs your free product can't deliver (uptime, better features, support), which you can make money from, to invest back into the project.
+The way to pitch open source to VCs is that it is easier to get into production, and there is less of a sense of vendor lock in, which puts off many developers from trying out a new SaaS product. SaaS may be "less work" to manage, but there's probably no reason you can't also provide your own product, hosted. The end result is that your open source repo could get used at huge companies. They probably have needs your free product can't deliver (uptime, better features, support), which you can make money from, to invest back into the project.
 
 The downside of this VC route is that you risk hype<>reality disonance!
 
 If you can't achieve results with the money you raised, whilst increasing your burn rate, you are at the mercy of those funding you if you will survive. Not cool, but you took this route!
 
-You also have investors, who have given you lots of money. It's important not to fall in love with them for this reason and to forget to prioritize the team and users then customers, hopefully in that order. Do that, and your investors will be very happy :)
+You also have investors, who have given you lots of money. Don't fall in love with them - you must prioritize your own team then users then customers, in that order. Do that, and your investors will take care of themselves.
 
 Oh, and you can't pay yourself a huge dividend if you succeed as a way of taking money out of the company, although it might become possible to sell some shares later if you're rocketing (perhaps to help you keep taking risk), and in the short run, you can now probably afford to pay yourself something - hoorah. Going for VC means you are committing to an exit or a failure - you can't really change your mind later that you want to take things more steadily.
 
