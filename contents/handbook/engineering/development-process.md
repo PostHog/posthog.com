@@ -15,7 +15,7 @@ If we have 0 process, we will release quickly but everything will be broken.
 There are 3 places that work comes from.
 
 - Issues/bugs (raised by the community or us)
-- [Roadmap](/roadmap)
+- [Roadmap](/handbook/strategy/roadmap)
 - "This should be better"
 
 

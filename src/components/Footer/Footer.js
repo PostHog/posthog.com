@@ -49,7 +49,7 @@ class Footer extends Component {
               <FooterListItem>
                 <a href="https://github.com/posthog">Explore repositories</a>
               </FooterListItem>
-              <FooterListItem to="/handbook/roadmap">Roadmap</FooterListItem>
+              <FooterListItem to="/handbook/strategy/roadmap">Roadmap</FooterListItem>
               <FooterListItem>
                 <a href="https://github.com/PostHog/posthog/blob/master/CONTRIBUTING.md">
                   Contribute
