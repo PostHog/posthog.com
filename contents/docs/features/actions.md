@@ -20,11 +20,11 @@ You can watch our tutorial videos on Actions here:
 
 Actions 
 
-[![Actions video](http://img.youtube.com/vi/7RcVfsXHG58/0.jpg)](http://www.youtube.com/watch?v=7RcVfsXHG58)
+[![Actions video](https://img.youtube.com/vi/7RcVfsXHG58/0.jpg)](https://www.youtube.com/watch?v=7RcVfsXHG58)
 
 Action Toolbar 
 
-[![Actions Toolbar](http://img.youtube.com/vi/NezwIa_PihU/0.jpg)](http://www.youtube.com/watch?v=NezwIa_PihU)
+[![Actions Toolbar](https://img.youtube.com/vi/NezwIa_PihU/0.jpg)](https://www.youtube.com/watch?v=NezwIa_PihU)
 
 ## Creating a new action 
 
