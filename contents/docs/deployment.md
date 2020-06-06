@@ -23,17 +23,18 @@ See our instructions on [upgrading PostHog](/upgrading-PostHog) on Heroku to the
 
 We have [three types of images](https://hub.docker.com/r/posthog/posthog):
 
- - `posthog/posthog:latest`, which builds straight of master
- - `posthog/posthog:preview`, which is used for the preview image
- - `posthog/posthog:release-[version number]`, so you can pin a specific version.
+- `posthog/posthog:latest`, which builds straight of master
+- `posthog/posthog:preview`, which is used for the preview image
+- `posthog/posthog:release-[version number]`, so you can pin a specific version.
 
 > We recommend using `posthog/posthog:latest`, so you always have the latest features and security updates
 
-## Docker Compose 
+## Docker Compose
 
 1. [Install Docker](https://docs.docker.com/installation/ubuntulinux/)
 2. [Install Docker Compose](https://docs.docker.com/compose/install/)
 3. Run the following:
+
 ```bash
 sudo apt-get install git
 git clone https://github.com/posthog/posthog.git
@@ -50,7 +51,7 @@ If you run your Postgres database somewhere else (like RDS, or just a different 
 
 ### Docker one line preview
 
-If you would like to run the software locally, you can use a Docker preview. This is *not* meant for production use.
+If you would like to run the software locally, you can use a Docker preview. This is _not_ meant for production use.
 
 Copy the following into your terminal:
 
@@ -72,33 +73,25 @@ helm repo update
 helm install posthog posthog/posthog
 ```
 
-See the [README](https://github.com/PostHog/charts/blob/master/charts/posthog/README.md) or 
+See the [README](https://github.com/PostHog/charts/blob/master/charts/posthog/README.md) or
 [`values.yaml`](https://github.com/PostHog/charts/blob/master/charts/posthog/values.yaml)
 for configuration options.
 
 ## AWS ECS Fargate
-We maintain a CloudFormation [config](https://github.com/fuziontech/posthog/blob/master/deployment/aws/ecs/combined.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. For the container hosting we use fargate so that you only pay for what you need.
+
+We maintain a CloudFormation [config](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. This is the script that we will be referencing from S3 later. For the container rumtime we use fargate so that you only pay for what you need.
 
 For an in depth how-to on CloudFormations check out the [AWS Docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html)
 
-The gist is this:
-
-1. Grab YAML Configs from [here](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml)
+Lets get started:
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
-
 1. Click **Create Stack -> With New Resources (standard)**
-
-1. Select Upload a template and link to your newly downloaded YAML config
-
+1. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
 1. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviours or setup SMTP configs as described below
-
 1. Review the rest of the config wizard pages
-
-1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about \$27 USD a month
-
+1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD a month
 1. If you are ready, click **Create Stack**!
-
 1. Once deployment completes look under **Options** for the Publicly facing ELB Host
 
 **⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
@@ -109,6 +102,7 @@ The gist is this:
 2. [Install Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
 3. Have a Postgres and Redis server running
 4. Run the following:
+
 ```bash
 git clone https://github.com/posthog/posthog.git
 yarn build
@@ -118,8 +112,11 @@ export REDIS_URL=''
 python manage.py runserver
 python manage.py collectstatic
 ```
+
 5. To start the server and worker, run
+
 ```bash
 ./bin/docker-server & ./bin/docker-worker
 ```
+
 Although it's optional, it's a good idea to use something like [Supervisor](https://github.com/Supervisor/supervisor) to keep this command running
