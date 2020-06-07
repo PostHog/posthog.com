@@ -50,6 +50,8 @@ It's worth reading applications and resume carefully. For current roles, the thi
 - Communication. Do they have spelling errors in their cover letter? What does their online presence look like?
   - More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
 
+As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate.
+
 ### Interview with Tim
 
 I tend to split it up into the following sections
