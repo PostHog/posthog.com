@@ -59,7 +59,7 @@ Situation:
 * If the world goes into a significant recession, a capital intensive business may become a lot harder to fuel as LPs withdraw from VCs.
 * We need to get to a series A without raising further money.
 
-PostHog wish to build an exceptional company. We will focus on adoption as our core metric.
+PostHog wish to build an exceptional company. We will focus on adoption (DAUs) as our core metric.
 
 * This will lead to a more impressive Series A story - we can have an order of magnitude more usage, with many impressive logos.
 * Adoption first, then finding customers from those users will be more efficient than dealing with non-inbound demand. 
@@ -83,8 +83,8 @@ Now that we've raised our seed, we have the money to comfortably hire about 8 re
 
 A couple of "rules":
 * Tim and James should remain [working managers](https://m.signalvnoise.com/this-is-why-we-have-working-managers-at-basecamp-and-why-microsoft-and-apple-stumbled-when-they/).
-  * That means hiring [managers of one](https://signalvnoise.com/posts/1430-hire-managers-of-one), see also our [hiring criteria](https://github.com/PostHog/handbook/issues/5).
-* We are too small for tiered management, and will be until after we raise a Series A.
+  * That means hiring [managers of one](https://signalvnoise.com/posts/1430-hire-managers-of-one), see also our [hiring process](/handbook/people/hiring-process).
+* We are too small for tiered management, and will be until after we raise a Series A. We view moving into management as a lateral move - it is not a promotion, but is instead a different skillset.
 * We don't _have_ to hire all the people we have money for. In fact, we should find ways of achieving our roadmap with the fewest people possible in the given timeframe.
 
 At the moment, our team is heavily weighted towards frontend/backend development. We're currently lacking:
