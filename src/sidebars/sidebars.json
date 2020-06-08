@@ -96,7 +96,8 @@
     "name":"Community",
     "items":[
       "docs/integrations/community",
-      "docs/integrations/gatsby-integration"
+      "docs/integrations/gatsby-integration",
+      "docs/integrations/elixir-integration"
     ]
   },
   {
