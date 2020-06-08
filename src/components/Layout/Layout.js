@@ -71,7 +71,7 @@ class Layout extends Component {
                     </AntdLayout.Header>
                     {!screenIsSmall && onPostPage ? (
                       <AntdLayout.Content>
-                        <AntdLayout theme="light" style={{background: '#fff'}}>
+                        <AntdLayout theme="light" style={{background: '#fff', display: 'flex'}}>
                           {!sidebarHide && (
                             <AntdLayout.Sider width={200} theme="light">
                               <ResponsiveSidebar />
