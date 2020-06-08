@@ -26,6 +26,7 @@ All libraries can send custom events, update user properties, identify users and
 * [API](/docs/integrations/api)
 * [Community](/docs/integrations/community)
     * [Gatsby](/docs/integrations/gatsby-integration)
+    * [Elixir](/docs/integrations/elixir-integration)
 
 ## Sending data to other systems
 
