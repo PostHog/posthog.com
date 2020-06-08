@@ -14,13 +14,23 @@ If it's a trivial expense, just buy it. We'll provide you with a company card wi
 
 If it's a larger expense and doesn't fit into the items here, please **raise a policy suggestion for it as a pull request** in this doc, so we can document our decision making into our policy rather than making everything case by case.
 
+Make sure you *keep copies for all receipts*. We *cannot* pay you back for anything without a receipt. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
+
 ## Trivial expenses
 
 Just do it.
 
 This means expenses that are under \$75 one off or under \$20/month recurring that we can cancel easily.
 
-Make sure you keep copies for all receipts. We *cannot* pay you back for anything without a receipt.
+## Saving receipts
+
+This applies to both company card and personal card spending. You should default to using your company card in nearly all cases - it has no transaction fees.
+
+PostHog uses [Expensify](https://expensify.com) for receipt collection. You will have been given an account as part of your onboarding.
+
+It's a good idea to download the app so you can take photos of receipts as you make purchases.
+
+_Important_ if you need reimbursement for a receipt, you must tag the expense as such (for example, if you have to buy something on your company card) as being reimbursable. Please do not mark things you've purchased on a company card as reimbursable (since the company has already paid for them)!
 
 ## Making larger purchases
 

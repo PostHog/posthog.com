@@ -27,6 +27,7 @@ At PostHog, we have a culture of treating team members as partners. This means i
 - [ ] For the first week, book extra sessions as appropriate to provide extra help
 - [ ] Send team member a physical company card
 - [ ] Send team member a virtual company card
+- [ ] Add team member to Expensify
 - [ ] Team member to purchase any necessary equipment as per the [spending money](/handbook/spending-money) guidelines
 
 ### Adding employees to Pulley
