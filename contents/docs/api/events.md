@@ -17,12 +17,12 @@ This endpoint has pagination. See [pagination](/docs/api/api#pagination) for mor
 
 ```plaintext
 GET /event
-GET /event/?properties=[{"key":"email","connector":"icontains","value":"@gmail.com"}]
+GET /event/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com"}]
 ```
 
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `properties` | Array of Properties | no | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br><br>For each property, you can specify:<br>- `key` Key of the property<br>- `value` Value you want to filter on<br>- `type` Either `person` or `event`<br>- `connector`, any of: <br>-- `exact`/empty<br>--`is_not`<br>--`icontains`<br>--`not_icontains`<br>--`gt`<br>--`lt`<br>--`is_set` |
+| `properties` | Array of Properties | no | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br><br>For each property, you can specify:<br>- `key` Key of the property<br>- `value` Value you want to filter on<br>- `type` Either `person` or `event`<br>- `operator`, any of: <br>-- `exact`/empty<br>--`is_not`<br>--`icontains`<br>--`not_icontains`<br>--`gt`<br>--`lt`<br>--`is_set` |
 
 Example request:
 
