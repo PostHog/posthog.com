@@ -8,7 +8,7 @@ showTitle: true
 
 PostHog is open-source, developer-friendly product analytics.
 
-We had the most succesful b2b software HackerNews launch since 2012, we've got over 2K stars on our repo right now, hundreds of users and deployments at large companies.
+We had the most succesful b2b software HackerNews launch since 2012, we've got over 2.4K stars on our repo right now, thousands of users and deployments at large companies.
 
 This is a super exciting time to be joining PostHog. We're growing like crazy and we need your help.
 
@@ -17,17 +17,18 @@ This is a super exciting time to be joining PostHog. We're growing like crazy an
 In reality, as one of our first hires you'll have a large hand in shaping this, but some keywords:
 
 * Remote first
-* "Write things down"
+* Strong written communication -- most of our communication happens over GitHub 
 * Prefer making things transparent and public
 * No need for crazy hours. Work hard when you're working.
 
 ## Our backers
 
-We're young, but we're already [backed](/handbook/investors) by many of the best investors in the world. This includes YCombinator, Solomon Hykes (ex-founder/CEO Docker), David Cramer (Founder/CEO Sentry), Adam Goldstein (Founder Hipmunk). See [the rest](/handbook/investors)!
+We're young, but we're already [backed](/handbook/strategy/investors) by many of the best investors in the world. This includes YCombinator, Solomon Hykes (ex-founder/CEO Docker), David Cramer (Founder/CEO Sentry), Adam Goldstein (Founder Hipmunk). See [the rest](/handbook/strategy/investors)!
 
 # Open roles
 
 ## UX (design focussed)
+
 
 ### Objectives
 
@@ -41,7 +42,7 @@ The next step, would be to ensure consistency with the product itself. Ongoingly
 
 Sidenote: adorable hedgehogs, cool dev focussed stuff. What's not to like?
 
-We're open for ideas here - either you are more a designer than a UX person and the objective is to produce .ai or Figma files for the UX that we can then convert, or if you're happy using React and can write the components yourself, event better (although not necessary). Tell us how you'd approach it.
+We're open for ideas here - either you are more a designer than a UX person and the objective is to produce .ai or Figma files for the UX that we can then convert. If you're happy using React and can write the components yourself, even better (although not necessary). Tell us how you'd approach it.
 
 Another major positive although not a must have is if you've worked with technical documentation before.
 
@@ -100,7 +101,7 @@ We've also had great success with using technically-oriented blog posts to gener
 
 Are you a developer/ex-developer who has found a love of writing?
 
-It's a pre-requisite that you have experience in producing engaging technical content, with an software engineering audience in mind.
+It's a pre-requisite that you have experience in producing engaging technical content, with a software engineering audience in mind.
 
 The tone we are looking for is detail oriented, friendly and concise.
 
