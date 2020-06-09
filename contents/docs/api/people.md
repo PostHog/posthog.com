@@ -15,8 +15,9 @@ This endpoint has pagination. See [pagination](/docs/api/api#pagination) for mor
 
 ```plaintext
 GET /person
-GET /person/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com"}]
+GET /person/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com","type":"person"}]
 GET /person/?id=214882,492810,18240
+GET /person/by_distinct_id/?distinct_id=0xbG68iGeFo5brk
 ```
 
 | Attribute | Type | Required | Description |
