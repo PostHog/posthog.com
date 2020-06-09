@@ -6,7 +6,7 @@ showTitle: true
 
 ## A bit about us
 
-PostHog is open-source, developer-friendly product analytics.
+PostHog provides open-source, developer-friendly product analytics.
 
 We had the most succesful b2b software HackerNews launch since 2012, we've got over 2K stars on our repo right now, hundreds of users and deployments at large companies.
 
@@ -35,7 +35,7 @@ PostHog is focussed on growth. The quality of our design is a key signal as to t
 
 We are looking for someone who can take ownership of this area.
 
-The starting point would be working with the team and a logo designer to take a rebrand from idea and implementing it onto our website and docs.
+The starting point would be working with the team and a brand designer to take a rebrand from idea and implementing it onto our website and docs.
 
 The next step, would be to ensure consistency with the product itself. Ongoingly, we would like graphic design work around our blog posts, newsletter and internal pages. We also constantly are building new features and input on their design would be very valuable.
 
