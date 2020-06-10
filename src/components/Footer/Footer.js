@@ -67,7 +67,7 @@ class Footer extends Component {
             </Col>
             <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Company</span>
-              <FooterListItem to="/handbook/story">About</FooterListItem>
+              <FooterListItem to="/handbook/company/story">About</FooterListItem>
               <FooterListItem to="/handbook">Handbook</FooterListItem>
               <FooterListItem to="/careers">Careers</FooterListItem>
               <FooterListItem to="/handbook/strategy/investors">Investors</FooterListItem>

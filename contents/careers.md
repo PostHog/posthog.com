@@ -27,7 +27,7 @@ We're young, but we're already [backed](/handbook/strategy/investors) by many of
 
 # Open roles
 
-## UX (design focussed)
+## UI
 
 
 ### Objectives
@@ -58,7 +58,7 @@ Another major positive although not a must have is if you've worked with technic
 
 Email a thoughtful cover letter to [james@posthog.com](mailto:james@posthog.com). A good cover letter includes:
 
-* What makes you a great designer or UX person
+* What makes you a great designer or UI person
 * A few links or examples of previous design work
 * What you like/dislike about PostHog
 * How you found us
