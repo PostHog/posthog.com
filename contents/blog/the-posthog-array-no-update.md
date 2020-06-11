@@ -1,17 +1,18 @@
 ---
 date: 2020-06-10
-title: Array 1.8.0 extra
+title: No update
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 ---
 
-We are working on a huge user-facing feature but felt pushing it out in a rush to make an update wouldn't be wise. We decided against releasing an update this time around for that reason, but there are still plenty of fun things to check out.
+We are working on some very cool features at the moment, but we're not ready to release those yet, so no update this week. Curious?
 
 If you'd like to preview what we're up to, check out the [PostHog <strike>coolbar</strike> toolbar](https://github.com/PostHog/posthog/issues/870).
 
-That doesn't mean there wasn't plenty of cool stuff this week...
+We're also pleased to say there are a bunch of new things in the PostHog unvierse this week... from new languages supported to instructions on raising millions of dollars in funding.
+
 ## Shiny new things
 
 ### [Elixir integration](../docs/integrations/elixir-integration)
@@ -32,9 +33,9 @@ Now, it's possible to deploy PostHog onto AWS with 3 clicks. Zero if you use [vi
 
 If you head to the AWS marketplace, you'll see it right there ready to deploy.
 
-### [How we raised $3M for our open source project](../blog/raising-3m-for-os)
+### Blog: [How we raised $3M for our open source project](../blog/raising-3m-for-os)
 
-Most fundraising announcements involve a lot of high level statements. We thought it would be more helpful if we did the _exact opposite_ and provided information on how we raised the money to encourage other open source projects to at least consider the same route.
+Most fundraising announcements involve a lot of high level statements. We thought it would be more helpful if we did the _exact opposite_ and provided information on [how we raised the money](../blog/raising-3m-for-os) to encourage other open source projects to at least consider the same route.
 
 Yes, [James H](https://github.com/jamesefhawkins) really did 200 Zoom calls. And, yes, most of those were after midnight.
 
