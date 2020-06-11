@@ -9,25 +9,15 @@ hideAnchor: true
 
 ## Moving fast is easy. Moving fast with confidence is hard.
 
-If you've been keeping track of the array blog posts you know that we prioritize shipping things fast and often. Just as important to us is being sure that we are not going to break things unneccesarily for our users as we add new features and speedups. What we have found that works really well is nothing terribly novel by itself: a solid foundation of unit tests, end to end tests (integration tests), and CI/CD that for automation and gatekeeper keeping master clean.
+If you've been keeping track of [The Array](/blog) release posts you know that we prioritize shipping things fast and often. Just as important to us is being sure that we are not going to break things unneccesarily for our users as we add new features and speedups.
+
+What we have found that works really well is nothing terribly novel by itself: a solid foundation of unit tests, end to end tests (integration tests), and CI/CD that for automation and gatekeeper keeping master clean.
 
 ### Unit & Integration tests
 
-In our Django codebase you'll find good bit of [Django tests](https://github.com/PostHog/posthog/tree/master/posthog/test) that help keep us honest as we hack away at the backend of Posthog that keeps track of all the 1's and 0's that our customers depend on for making product decisions. These are our frontline defenders that let us know that something might be up before we even get to the point of creating a PR.
+In our Django codebase you'll find good number of [Django tests](https://github.com/PostHog/posthog/tree/master/posthog/test) that help keep us honest as we hack away at the backend of Posthog that keeps track of all the 1's and 0's that our customers depend on for making product decisions. These are our frontline defenders that let us know that something might be up before we even get to the point of creating a PR.
 
 For this we do lean heavily on the standard Django test runner.
-
-#### Running Django tests locally
-
-```bash
-python manage.py test
-```
-
-#### Or if you are more into Docker for dev
-
-```bash
-docker-compose -f docker-compose.dev.yml run web python manage.py test
-```
 
 If you are interested in learning more on testing with Django check out Django's great [docs](https://docs.djangoproject.com/en/3.0/topics/testing/) on testing.
 
@@ -35,9 +25,9 @@ These tests only get you so far though. You know that the backend is going to be
 
 ### Enter Cypress
 
-According to Cypress's Github [repo](https://github.com/cypress-io/cypress) it is a **Fast, easy and reliable testing for anything that runs in a browse**. What does that mean exactly though?
+According to Cypress's Github [repo](https://github.com/cypress-io/cypress) it is a **fast, easy and reliable testing for anything that runs in a browser**. What does that mean exactly though?
 
-That means you can programmatically interact with your application by querying the DOM and running actions against the elements that are selected. You can see that in a few of our [Cypress test definitions](https://github.com/PostHog/posthog/tree/master/cypress/integration)
+It lets you programmatically interact with your application by querying the DOM and running actions against any selected elements. You can see that in a few of our [Cypress test definitions](https://github.com/PostHog/posthog/tree/master/cypress/integration)
 
 #### Example of our integration test for our Funnel user experience:
 
@@ -86,21 +76,21 @@ I personally love this syntax. It feels super readible to me and reminds me a bi
 
 ### Github Actions
 
-So that's all well and cool, but what about making sure that in a fit of intense focus and momentum we don't inadvertantly push a breaking change to master? We need someone or something to act as a gatekeeper to keep us from from shooting ourselves in the foot. We need CI.
+So that's all well and cool, but what about making sure that in a fit of intense focus and momentum we don't inadvertently push a breaking change to master? We need someone or something to act as a gatekeeper to keep us from from shooting ourselves in the foot. We need CI.
 
-We could use Travis, or Jekins, or CircleCI...but as you may have noticed we keep almost everything about PostHog in Github, from our product roadmap, issues, this blog, everything is in Github. So it made sense to us to keep our CI in Github if we could and decided to give Github Actions a test. So far, we have loved it.
+We could use Travis, or Jekins, or CircleCI...but as you may have noticed we keep almost everything about PostHog in Github, from our product roadmap, issues, this blog, everything is in Github. So it made sense to us to keep our CI in Github if we could. We decided to give Github Actions a test. So far, we have loved it.
 
-[Github actions](https://github.com/features/actions) are basically a workflow you can trigger off events that occure on your Github repo. We trigger ours off the creation of a pull request. We also require that our actions all return 👍 before you can merge your PR into master. Thus, we keep master clean.
+[Github actions](https://github.com/features/actions) are basically a workflow you can trigger from events that occure on your Github repo. We trigger ours on the creation of a pull request. We also require that our actions all return 👍&nbsp;&nbsp;before you can merge your PR into master. Thus, we keep master clean.
 
-To make sure that things are only imporoving with our modifications we first re-run our Django unit and integration tests just to make sure that our customers final environment things are still going to behave as expected and that there was nothing unique about your dev environment that could have fooled the tests into a false sense of awesome. You can check out how we set this up here [Django github actions](https://github.com/PostHog/posthog/blob/master/.github/workflows/pythonapp.yml)
+To make sure that things are only improving with our modifications, we first re-run our Django unit and integration tests just to make sure that in our customers final environment things are still going to behave as expected. We need to be sure that there was nothing unique about your dev environment that could have fooled the tests into a false sense of awesome. You can check out how we set this up here [Django github actions](https://github.com/PostHog/posthog/blob/master/.github/workflows/pythonapp.yml)
 
 The second round of poking we do with our app is we hit it with Cypress tests that we discussed earlier. These boot up our app and click through workflows just as a user would, asserting along the way that things look and behave as we would expect. You can check out how we've setup our [Cypress action here](https://github.com/PostHog/posthog/blob/master/.github/workflows/e2e.yml)
 
 ### Caching
 
-We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser...this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? Thats where we ended up using one of the best features of Github Actions: the [cache step](https://github.com/actions/cache)
+We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser...this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? Thats where we ended up using one of the best features of Github Actions: the [cache step](https://github.com/actions/cache).
 
-Using the cache step we can cache the results of pulling python dependencies or javascript dependencies. This is a solid chunk of time if you have ever messed around with watching yarn sort out the deps for a large frontend project. Check it out:
+Using the cache step we can cache the results of pulling python dependencies or javascript dependencies. This saves a chunk of time if you have ever messed around with watching yarn sort out the deps for a large frontend project. Check it out:
 
 #### How we manage caching the cache for pip:
 
@@ -120,7 +110,7 @@ Using the cache step we can cache the results of pulling python dependencies or 
     python -m pip install psycopg2-binary --no-cache-dir --compile
 ```
 
-Note that there is no `if` block to determin whether to use the cache or not when we pip install the dependencies. This is because pip is smart enough to use the rehydrated cache if it sees it, if it doesnt see it it will just go out to the internet to grab what it needs.
+Note that there is no if block to determine whether to use the cache or not when we `pip install` the dependencies. This is because pip is smart enough to use the rehydrated cache if it sees it, if it doesnt see it it will just go out to the internet to grab what it needs.
 
 Yarn is a bit more involved only because we grab the location of the cache directory first and use that output as an input to the caching step
 
@@ -144,7 +134,7 @@ Yarn is a bit more involved only because we grab the location of the cache direc
     if: steps.yarn-dep-cache.outputs.cache-hit != 'true'
 ```
 
-That last line with the `if` block tells github to not run `yarn install` if the cache exists. This saves us a ton of time if nothing has changed
+That last line with the `if` block tells GitHub to not run `yarn install` if the cache exists. This saves us a ton of time if nothing has changed
 
 On top of that, let's say you are making changes to only the API. There's no reason why you should be rebuiling the frontend each time the tests are run. So we go ahead and cache that between runs as well.
 
@@ -165,7 +155,7 @@ On top of that, let's say you are making changes to only the API. There's no rea
     if: steps.yarn-build-cache.outputs.cache-hit != 'true'
 ```
 
-By now you are catching on that `if` the cache exists we can skip building the frontend altogether since it's been rehydrated from the last run. **Nifty!**
+Now you are catching `if` the cache exists so we can skip building the frontend altogether since it's been rehydrated from the last run. **Nifty!**
 
 ### Throw more computers at it!
 
@@ -199,13 +189,17 @@ matrix:
 
 Depending on the count of tests and the frequency you are running your suite this might cost you some money having to upgrade your account on [Cypress.io](https://cypress.io) but their free tier is pretty generous and they do have OSS plans that are free.
 
-This all has cut the time it takes for Github to stamp our pull requests from >10 minutes to ~5 minutes and that's with our relatively small set of tests. As we grow functionality within PostHog all of this will only become more important so that we don't end up with a 30 minute end to end test blocking you from landing that really killer new feature. Sweet.
+This all has cut the time it takes for Github to stamp our pull requests from >10 minutes to \~5 minutes and that's with our relatively small set of tests.
+
+As we grow functionality within PostHog all of this will only become more important so that we don't end up with a 30 minute end to end test blocking you from landing that really killer new feature. Sweet.
 
 ### 👀 at errors
 
-The final bit here is what happens if the tests are failing? If this is all happening in a browser up in the cloud how do we capture what went wrong? Kind of need that to figure out how to fix it. Luckily, again, Cypress and Github actions has a solution: [artifacts](https://github.com/actions/upload-artifact).
+The final bit here is what happens if the tests are failing?
 
-Artifacts allow us to take the screenshots that cypress takes when things go wrong, zip them up, and make them available on the dashboard for the actions that are being run.
+If this is all happening in a browser up in the cloud how do we capture what went wrong? We need that to figure out how to fix it. Luckily, again, Cypress and Github actions has a solution: [artifacts](https://github.com/actions/upload-artifact).
+
+Artifacts allow us to take the screenshots that Cypress takes when things go wrong, zip them up, and make them available on the dashboard for the actions that are being run.
 
 #### Capturing Cypress screenshots
 
@@ -218,13 +212,15 @@ Artifacts allow us to take the screenshots that cypress takes when things go wro
   if: ${{ failure() }}
 ```
 
-As you can probably tell by the `if` block here we only upload the artifacts if there is a problem since we already know what the app will look like when things go right...hopefully 😜
+As you can tell by the `if` block here, we only upload the artifacts if there is a problem. That's because we already know what the app will look like when things go right...hopefully 😜
 
 ### Roadmap
 
 There is one thing that we don't capture in our current test suite: **Performance!**
 
-We have customers who upload hundreds of telemetry events a second. If we introduce a regression that dings performance this could cause an outage for them where they lose data which is arguably worse than a regression on the frontend. Our plan here use github actions to standup an instance of our infrastructure and hammer it with sythentic event telemetry and compare that against a baseline from prior performance tests. If the test runtime changes materially we will block the pull request from being merged in to guard master from having a potentially breaking change. Stay tuned for a post on automated performance testing.
+We have customers who upload hundreds of telemetry events a second. If we introduce a regression that dings performance this could cause an outage for them where they lose data which is arguably worse than a regression on the frontend.
+
+Our plan here use GitHub actions to standup an instance of our infrastructure and hammer it with sythentic event telemetry and compare that against a baseline from prior performance tests. If the test runtime changes materially we will block the pull request from being merged in to guard master from having a potentially breaking change. Stay tuned for a post on automated performance testing.
 
 ##### The pitch™
 
