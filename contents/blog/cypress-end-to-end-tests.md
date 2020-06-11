@@ -228,6 +228,6 @@ We have customers who upload hundreds of telemetry events a second. If we introd
 
 ##### The pitch™
 
-Hey! You made it this far. If you see yourself working on challenging issues at a high paced startup we are looking for people like you!
+Hey! You made it this far. If you see yourself working on challenging issues at a high paced startup with a really rad group of people. You are in luck! We are looking for people like you!
 
-Check out our [careers](/careers) page and give us a shout
+Check out our [careers](/careers) page and give us a shout!
