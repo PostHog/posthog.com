@@ -64,6 +64,7 @@
     "name":"API",
     "items":[
       "docs/api/api",
+      "docs/api/elements",
       "docs/api/events",
       "docs/api/people",
       "docs/api/trends",
