@@ -23,7 +23,7 @@ In your app, set your api key **before** making any calls.
 ```ruby
 posthog = PostHog::Client.new({
   api_key: "my_key",
-  host: "https://posthog.[your-domain].com", # You can remove this line if you're using app.posthog.com
+  api_host: "https://posthog.[your-domain].com", # You can remove this line if you're using app.posthog.com
   on_error: Proc.new { |status, msg| print msg }
 })
 ```
