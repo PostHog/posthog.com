@@ -32,7 +32,14 @@ At PostHog, we have a culture of treating team members as partners. This means i
 - [ ] Add team member to Expensify
 - [ ] Team member to purchase any necessary equipment as per the [spending money](/handbook/spending-money) guidelines
 
-### Adding employees to Pulley
+### Adding team members to Deel
+
+* Choose the last day of the month to make payments for ongoing work, else choose something appropriate for a short term contract
+* Select a notice period of 30 days
+* Select for the contractor to upload necessary compliance documents
+* Select for the contractor to be potentially allocated equity in the future if this is the case
+
+### Adding team members to Pulley
 
 * Stakeholders > Add a Stakeholder
 * Fill out name, type (individual) and relationship (employee)
