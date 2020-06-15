@@ -15,6 +15,7 @@ At PostHog, we have a culture of treating team members as partners. This means i
 - [ ] To set up as an employee, complete and email [employee offer letter](https://drive.google.com/drive/u/0/folders/1vDgWksBtt5cg_BZVFV2eWrD56OmZpKTQ) as a *PDF*
 - [ ] To set up as an employee, complete and email [employee confidentiality letter](https://drive.google.com/open?id=19yXodJzE8D2j-aCbNjexsCAGVF1lJfMZ) as a *PDF*
 - [ ] To set up as an employee, email the signed offer letter to [legal](mailto:legal@posthog.com)
+- [ ] Send the team member the [emergency contact details form](https://docs.google.com/forms/d/e/1FAIpQLScsgTDFCwHN2hrOnv52hc4qK22SBDCmhWADV-Li-qfM9sJgag/viewform?usp=sf_link)
 - [ ] Send team member a copy of this page
 - [ ] Create GSuite account for the team member
 - [ ] Add team member to any relevant Google Groups
