@@ -132,7 +132,8 @@
     "child_entries":
     [
       "Releases",
-      "Blog Posts"
+      "Company",
+      "Engineering"
     ]
   },
   {
@@ -156,7 +157,7 @@
   },
   {
     "entry":"Blog",
-    "name":"Blog Posts",
+    "name":"Company",
     "items": [
       "blog/raising-3m-for-os",
       "blog/after-the-hn-launch",
@@ -164,6 +165,13 @@
       "blog/moving-to-sf",
       "blog/the-yc-interview",
       "blog/before-yc"
+    ]
+  },
+  {
+    "entry":"EngineeringBlog",
+    "name":"Engineering",
+    "items": [
+      "blog/cypress-end-to-end-tests"
     ]
   },
   {
