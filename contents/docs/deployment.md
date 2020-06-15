@@ -79,7 +79,7 @@ for configuration options.
 
 ## AWS ECS Fargate
 
-We maintain a CloudFormation [config](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. This is the script that we will be referencing from S3 later. For the container rumtime we use fargate so that you only pay for what you need.
+We maintain a CloudFormation [config](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml) for deploying Posthog with Redis and Postgres to a stack on AWS. This is the script that we will be referencing from S3 later. For the container runtime we use fargate so that you only pay for what you need.
 
 For an in depth how-to on CloudFormations check out the [AWS Docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html)
 
