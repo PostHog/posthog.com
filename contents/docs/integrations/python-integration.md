@@ -53,10 +53,17 @@ A `capture` call requires
 
 Optionally you can submit
 - `properties`, which can be a dict with any information you'd like to add
+- `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time.
 
 For example:
 ```python
 posthog.capture('distinct id', 'movie played', {'movie_id': '123', 'category': 'romcom'})
+```
+
+or
+
+```python
+posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc())
 ```
 
 ### Identify
