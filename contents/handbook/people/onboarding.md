@@ -6,14 +6,15 @@ showTitle: true
 
 Doing a great job of welcoming a new member of the PostHog team is really important.
 
-## US Employee Checklist
+## US Team Member Checklist
 
 At PostHog, we have a culture of treating team members as partners. This means it is the new person's responsibility to ensure they go through this process properly!
 
-- [ ] Add the new employee to [Pulley](https://pulley.com)
-- [ ] Complete and email [employee offer letter](https://drive.google.com/drive/u/0/folders/1vDgWksBtt5cg_BZVFV2eWrD56OmZpKTQ) as a *PDF*
-- [ ] Complete and email [employee confidentiality letter](https://drive.google.com/open?id=19yXodJzE8D2j-aCbNjexsCAGVF1lJfMZ) as a *PDF*
-- [ ] Email the signed offer letter to [legal](mailto:legal@posthog.com)
+- [ ] Add the new team member to [Pulley](https://pulley.com)
+- [ ] To set up as a contractor, use [Deel](https://letsdeel.com). Choose 'Create a contract' and select fixed. Follow the instructions. This contract will cover pay, notice period, confidentiality and IP assignment.
+- [ ] To set up as an employee, complete and email [employee offer letter](https://drive.google.com/drive/u/0/folders/1vDgWksBtt5cg_BZVFV2eWrD56OmZpKTQ) as a *PDF*
+- [ ] To set up as an employee, complete and email [employee confidentiality letter](https://drive.google.com/open?id=19yXodJzE8D2j-aCbNjexsCAGVF1lJfMZ) as a *PDF*
+- [ ] To set up as an employee, email the signed offer letter to [legal](mailto:legal@posthog.com)
 - [ ] Send team member a copy of this page
 - [ ] Create GSuite account for the team member
 - [ ] Add team member to any relevant Google Groups
