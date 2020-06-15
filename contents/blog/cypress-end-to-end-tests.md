@@ -29,6 +29,21 @@ According to Cypress's Github [repo](https://github.com/cypress-io/cypress) it i
 
 It lets you programmatically interact with your application by querying the DOM and running actions against any selected elements. You can see that in a few of our [Cypress test definitions](https://github.com/PostHog/posthog/tree/master/cypress/integration)
 
+### Tracking the elements
+
+To keep our tested elements clear, manageable, and reusable upon refactor, we take advantage of the element attributes that html and react specifically recognize. Cypress has an amazing built in inspector on their test-runner that allows you to identify elements that you would like to add tests to.
+
+While the tool works great, we found that occasionally the heavily nested components and classes would create selectors that were inflexible.
+
+With the data-attr tag, we just need to keep track of the tag when updating/changing the components we're using without needing to rely on the inspector to find the precise selector for the test!
+
+```
+<LineGraph
+  data-attr="trend-line-graph"
+  ...
+/>
+```
+&nbsp;
 #### Example of our integration test for our Funnel user experience:
 
 ```js
@@ -73,6 +88,7 @@ describe('Funnels', () => {
 ```
 
 I personally love this syntax. It feels super readible to me and reminds me a bit of the best parts of jQuery.
+
 
 ### Github Actions
 
