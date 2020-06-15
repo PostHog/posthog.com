@@ -1,6 +1,6 @@
 ---
 date: 2020-06-10
-title: Merge with Confidence
+title: Setting up super fast Cypress tests on GitHub Actions
 rootPage: /blog
 sidebar: Blog
 showTitle: true
