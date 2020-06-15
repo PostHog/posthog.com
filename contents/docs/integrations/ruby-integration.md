@@ -107,7 +107,7 @@ posthog.capture({
     distinct_id: 'distinct id',
     event: '$pageview',
     properties: {
-        $current_url: 'https://example.com'
+        '$current_url': 'https://example.com'
     }
 })
 ```
