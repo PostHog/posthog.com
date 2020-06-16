@@ -27,39 +27,36 @@ We're young, but we're already [backed](/handbook/strategy/investors) by many of
 
 # Open roles
 
-## UI
+## Front end developer
 
 
 ### Objectives
 
-PostHog is focussed on growth. The quality of our design is a key signal as to the quality of our product when developers are evaluating its potential use, thus greatly influences this.
+PostHog is focussed on growth. The quality of our front end design and interaction is a key signal as to the quality of our product when developers are evaluating its potential use.
 
-We are looking for someone who can take ownership of this area.
+We are looking for someone who can take ownership of two key areas:
 
-The starting point would be working with the team and a brand designer to take a rebrand from idea and implementing it onto our website and docs.
+* Work with our designer to create a beautiful new, re-branded website and a best-in-class docs experience.
+* Then, improve the UX of our product. You'd be working closely with our engineering team.
 
-The next step, would be to ensure consistency with the product itself. Ongoingly, we would like graphic design work around our blog posts, newsletter and internal pages. We also constantly are building new features and input on their design would be very valuable.
+When we say ownership, we really mean it - we are looking for someone proactive and comfortable with autonomy.
 
-Sidenote: adorable hedgehogs, cool dev focussed stuff. What's not to like?
-
-We're open for ideas here - either you are more a designer than a UX person and the objective is to produce .ai or Figma files for the UX that we can then convert. If you're happy using React and can write the components yourself, even better (although not necessary). Tell us how you'd approach it.
-
-Another major positive although not a must have is if you've worked with technical documentation before.
+Sidenote: adorable hedgehogs, cool dev focussed stuff, remote first and open source. What's not to like?
 
 ### Hiring process
 
-* Please send us links to some of your previous work and a cover letter
+* Please send us links to some of your previous work if possible and a (short!) cover letter
 * You'll meet our CEO James over Zoom
 * You'll meet our CTO Tim over Zoom
-* We'll pay you normal contracting rates for anywhere between 1-5 days to do some work with us. That'll give you a chance to learn how we'd work with you, and for us to see how you work.
-* We make a decision with you.
+* We'll pay you normal contracting rates for anywhere between 1-5 days to do some work with us. That'll give you a chance to learn how we'd work with you, and for us to see how you work
+* We make a decision with you
 
 ### How to apply
 
 Email a thoughtful cover letter to [james@posthog.com](mailto:james@posthog.com). A good cover letter includes:
 
-* What makes you a great designer or UI person
-* A few links or examples of previous design work
+* Why you are passionate about front end development
+* A few links or examples of previous work if available
 * What you like/dislike about PostHog
 * How you found us
 
