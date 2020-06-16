@@ -31,3 +31,4 @@ All libraries can send custom events, update user properties, identify users and
 ## Sending data to other systems
 
 * [Slack](/docs/integrations/slack)
+* [Microsoft Teams](/docs/integrations/microsoft-teams)
