@@ -36,7 +36,7 @@ Only bugfixes are allowed to be merged into this branch (and thus put on product
   - `git commit -m "Bump version [version]"`
 - [ ] Tag the version
   - `git tag -a [version] -m "Version [version]"`
-  - `git push origin head --tags`
+  - `git push origin release-[version] --tags`
 
   
 Once a new docker image has been built (see [Docker Hub](https://hub.docker.com), password in 1pass) for the new version, open the [charts](https://github.com/PostHog/charts) repo and make the changes:
