@@ -62,10 +62,10 @@ Porter allows you to develop remotely without having to run or setup Docker on y
 ```bash
 git clone https://github.com/PostHog/posthog.git
 cd posthog
-
 porter init
+...
 (choose the posthog container)
-
+...
 porter logs
 ```
 
