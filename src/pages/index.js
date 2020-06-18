@@ -27,7 +27,7 @@ import communityRoadmap from '../images/community-roadmap.png'
 import { Row, Col, Icon } from 'antd'
 import SEO from '../components/seo'
 
-const IndexPage = () => {
+function IndexPage() {
   return (
     <Layout className="index-page">
       <SEO
@@ -49,25 +49,21 @@ const IndexPage = () => {
         </Col>
       </Row>
       <Row gutter={[24, 8]}>
-        <Col xs={7} sm={6} md={5} lg={4} xl={4} className="gutter-row">
-          <a href="https://app.posthog.com/signup">
-            <Button
-              type="primary"
-              size="large"
-              icon="right-circle"
-              style={{ marginRight: 10 }}
-            >
-              Try Hosted
-            </Button>
-          </a>
-        </Col>
-        <Col xs={7} sm={6} md={5} lg={4} xl={4} className="gutter-row">
-          <a href="/docs/deployment">
-            <Button type="secondary" size="large">
-              Self-Managed
-            </Button>
-          </a>
-        </Col>
+        <a href="/trial">
+          <Button
+            type="primary"
+            size="large"
+            icon="right-circle"
+            style={{ marginLeft: 10, marginRight: 10 }}
+          >
+            Get Started for Free
+          </Button>
+        </a>
+        <a href="/docs/deployment">
+          <Button type="secondary" size="large">
+            Request Demo
+          </Button>
+        </a>
       </Row>
       <Row gutter={[24, 24]}>
         <Col span={24} className="gutter-row header-row" align="middle">
