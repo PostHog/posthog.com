@@ -44,8 +44,29 @@ If at any point, you get "command not found: nvm", you need to install nvm, then
 
 Run `./bin/start-frontend`
 
-
-## Running backend tests
+### Running backend tests
 
 Run `./bin/tests`
 
+## Using Porter
+Porter allows you to develop remotely without having to run or setup Docker on your local machine. It runs the same Docker containers in the cloud and lets you develop directly inside the remotely hosted container while still using your favorite local tools. 
+
+### Get Started with 1-click
+
+<a target="_blank" href="http://api.getporter.dev/account/login?redirect=https://dashboard.getporter.dev/auth/check?initialize=posthog"><img src="https://storage.googleapis.com/porter-asssets/porter-develop.svg" width="170px" /></a>
+
+### Installing the Porter CLI
+1. `npm install -g porter-cli` (yarn is not supported at the moment) 
+2. After installation, log in through the Porter CLI via `porter login`.
+3. Clone the PostHog repository into your local folder and initialize:
+```bash
+git clone https://github.com/PostHog/posthog.git
+cd posthog
+
+porter init
+(choose the posthog container)
+
+porter logs
+```
+
+4. Once you confirm that everything has been compiled successfully from the logs, start syncing the folder via `porter sync`.
