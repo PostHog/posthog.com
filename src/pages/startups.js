@@ -136,7 +136,7 @@ export function StartupForm({ title, startup = true, subtitle, onSubmit }) {
         )}
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
-            Submit Application
+            Submit
           </Button>
         </Form.Item>
       </Form>

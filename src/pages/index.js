@@ -57,7 +57,7 @@ function IndexPage() {
             Get Started for Free
           </Button>
         </a>
-        <a href="/docs/deployment">
+        <a href="/request_demo">
           <Button type="secondary" size="large">
             Request Demo
           </Button>
