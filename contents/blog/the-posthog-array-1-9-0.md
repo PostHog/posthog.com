@@ -7,44 +7,19 @@ showTitle: true
 hideAnchor: true
 ---
 
-So, you waited two weeks. We have quite the show for today...
+First, learn [how PostHog raised $3M for our open source project](/blog/raising-3m-for-os). We could not have done it without this community - thank you for all your issues, feedback, usage and support!
 
-Inspect element for user data, a shiny new user sessions view, and see a ton of bug fixes and improvements to our testing. This Array is almost emoji-worthy.
+So, what have we been doing with the money?
 
-If you're self hosting and want these features - [update your PostHog](/docs/deployment/upgrading-posthog).
+Since last time - AWS marketplace deployment, docusaurus integration, much better testing, a shiny new user sessions view, and see a ton of bug fixes and improvements to our testing. This Array is almost emoji-worthy. Almost.
+
+If you're self hosting and desire these features - [update your PostHog](/docs/deployment/upgrading-posthog).
 
 ## Release notes
 
-### [PostHog Toolbar](https://github.com/PostHog/posthog/pull/896)
-
-We built inspect element, for user data.
-
-Marius, legendary PostHog engineer, will take you for a spin on one of his favorite sites:
-
-![PostHog button](https://user-images.githubusercontent.com/53387/84773211-61669480-afdc-11ea-8b80-7fadb4f42b92.gif)
-
-Or view it as a sidebar instead:
-
-![PostHog toolbar](https://user-images.githubusercontent.com/53387/84773358-9541ba00-afdc-11ea-9f6d-2f831b196fd2.gif)
-
-A few important points:
-
-* The toolbar needs to be enabled by each user that wants access
-* and, of course, it only appears for _logged in_ PostHog users
-
-Why did we build it?
-
-We want to give you the option to bring usage data into your natural workflow, rather than having to hop out to the app and losing the context of your website.
-
-This makes it easier to get a real sense of what your users are doing. Where they're quitting the site, or the features they like.
-
-From the toolbar, you can seamlessly create new actions, which can then help you create more powerful dashboards on the fly.
-
-Best of all? This is just the start...
-
 ### [Sessions view](https://github.com/PostHog/posthog/pull/926)
 
-As if the toolbar weren't enough, we kept getting requests to group events by user session, and we're proud to announce this is now merged:
+We kept getting requests to group events by user session, so we listened! We're proud to announce this is now merged:
 
 ![sessions overview](../images/sessions-overview.png)
 
@@ -56,13 +31,45 @@ This should really help with debugging, or just trying to get a detailed view of
 
 Want to try it? Find Sessions under the Events menu on the left hand navigation.
 
+### Far better testing
+
+We put a huge amount of work into our tooling this week - to get an overview, see [our blog post on Cypress end-to-end tests](/blog/cypress-end-toe-end-tests).
+
+What's new? We:
+
+* [Fixed Cypress tests](https://github.com/PostHog/posthog/pull/1015)
+* Enabled [running cypress in parallel](https://github.com/PostHog/posthog/pull/959), which saved a minute.
+* [Fixed cypress linting errors and sped up tests further](https://github.com/PostHog/posthog/pull/865)
+* [Cached PostHog's yarn builds](https://github.com/PostHog/posthog/pull/927), which took e2e tests down by around 30%.
+* Finally, we now [wait for PostHog to start serving requests](https://github.com/PostHog/posthog/pull/920) rather than the 60 second sleep when running Cypress.
+
+### [Docusaurus integration](https://posthog.com/docs/integrations/docusaurus-integration)
+
+If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](https://posthog.com/docs/integrations/docusaurus-integration) for that!
+
+### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
+
+![PostHog on AWS Marketplace](../images/aws-posthog-marketplace.jpg)
+
+You can now install PostHog in just a click or two via AWS' marketplace.
+
+This is just as easy as Heroku and fractionally less expensive!
+
+### [Develop PostHog with Porter](https://posthog.com/docs/developing-locally#using-porter)
+
+This was an amazing PR to receive - you can now developer PostHog in the cloud, using Porter. Thank you to [Porter's team](https://getporter.dev/) for doing the work here. 
+
+### [Management command for millions of events](https://github.com/PostHog/posthog/pull/475)
+
+It's a delight to see another community PR. Thank you [Bhavish](https://github.com/bhavish-agarwal)!
+
+This feature means you can test your PostHog setup at scale. No more guesswork if your server setup is correct.
+
 ## Bug fixes and performance improvements
 
-* A whole world of front end test improvement: [fixed Cypress tests](https://github.com/PostHog/posthog/pull/1015), we enabled[running cypress in parallel](https://github.com/PostHog/posthog/pull/959), which saved a minute. We [fixed some cypress linting errors and sped up tests](https://github.com/PostHog/posthog/pull/865) . We [cached PostHog's yarn builds](https://github.com/PostHog/posthog/pull/927), which took e2e tests down by around 30%. Finally, we now [wait for PostHog to start serving requests](https://github.com/PostHog/posthog/pull/920) rather than the 60 second sleep when running cypress. If you're interested in tooling - you should read our [blog post on Cypress](/blog/cypress-end-to-end-tests).
+* We worked hard on improving caching to speed things up. We [fixed cache refreshing](https://github.com/PostHog/posthog/pull/1035) in a few areas, we made a few [caching adjustments](https://github.com/PostHog/posthog/pull/1023) to fix [#1022](https://github.com/PostHog/posthog/issues/1022). Finally, we now use [redis to cache results](https://github.com/PostHog/posthog/pull/972).
 * Save time! You can now [create actions from the trends page](https://github.com/PostHog/posthog/pull/990).
 * [Upgrade to posthog-js 1.2.0 to support dynamic params](https://github.com/PostHog/posthog/pull/957).
-* There is now a new [management command for creating bulk events](https://github.com/PostHog/posthog/pull/475) - thank you [Bhavish](https://github.com/bhavish-agarwal)!
-* We worked hard on improving caching to speed things up. We [fixed cache refreshing](https://github.com/PostHog/posthog/pull/1035) in a few areas, we made a few [caching adjustments](https://github.com/PostHog/posthog/pull/1023) to fix [#1022](https://github.com/PostHog/posthog/issues/1022). Finally, we now use [redis to cache results](https://github.com/PostHog/posthog/pull/972).
 * We fixed long href inserts - the href [can now go up to 2048 characters](https://github.com/PostHog/posthog/pull/1027) before truncation. Someone must have had some funky urls going on...
 * [We prevented intermittent issues with yarn build](https://github.com/PostHog/posthog/pull/1026)
 * We [fixed a bug](https://github.com/PostHog/posthog/pull/1021) that caused cohorts to fail when actions were deleted
@@ -84,7 +91,6 @@ Want to try it? Find Sessions under the Events menu on the left hand navigation.
 * We [sped up the events endpoint](https://github.com/PostHog/posthog/pull/903) by just hitting the current week's partitions
 * We solved a problem [with temporary tokens](https://github.com/PostHog/posthog/pull/909)
 * We added [webpack HMR](https://github.com/PostHog/posthog/pull/878) and hashes to chunk filenames. (#878)
-
 
 ## Favorite issue
 
