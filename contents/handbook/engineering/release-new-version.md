@@ -25,7 +25,8 @@ Only bugfixes are allowed to be merged into this branch (and thus put on product
 - [ ] Figure out what's updated in this release
   - `git checkout release-[version]`
   - `git log --pretty=format:%s [old-version]..head`
-- [ ] Write up the PostHog array [blogpost](posthog-array) 
+- [ ] Write up the PostHog array [blogpost](posthog-array)
+
 - [ ] Copy from PostHog Array and write up the changes into `CHANGELOG.md`
   - `git add CHANGELOG.md`
   - `git commit -m "Changelog version 1.7.0"`
@@ -38,7 +39,7 @@ Only bugfixes are allowed to be merged into this branch (and thus put on product
   - `git push origin head --tags`
 
   
-Once a new docker image has been built for the new version, open the [charts](https://github.com/PostHog/charts) repo and make the changes:
+Once a new docker image has been built (see [Docker Hub](https://hub.docker.com), password in 1pass) for the new version, open the [charts](https://github.com/PostHog/charts) repo and make the changes:
 
 1. Edit the **two** files [Chart.yaml](https://github.com/PostHog/charts/blob/master/charts/posthog/Chart.yaml) and [ChartV3.yaml](https://github.com/PostHog/charts/blob/master/charts/posthog/ChartV3.yaml), in both: 
   - Bump `appVersion` to the latest app version (same number as on the docker image).
