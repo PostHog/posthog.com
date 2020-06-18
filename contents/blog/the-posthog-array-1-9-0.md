@@ -9,7 +9,7 @@ hideAnchor: true
 
 So, you waited two weeks. We have quite the show for today...
 
-Inspect element for user data, a shiny new user sessions view, and see a ton of bug fixes and improvements to our testing. This Array is almost emoji-worthy.
+Inspect element for user data, a shiny new user sessions view, and a ton of bug fixes and improvements to our testing. This Array is almost emoji-worthy.
 
 If you're self hosting and want these features - [update your PostHog](/docs/deployment/upgrading-posthog).
 
