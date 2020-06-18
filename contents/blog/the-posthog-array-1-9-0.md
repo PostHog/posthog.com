@@ -65,6 +65,12 @@ It's a delight to see another community PR. Thank you [Bhavish](https://github.c
 
 This feature means you can test your PostHog setup at scale. No more guesswork if your server setup is correct.
 
+### [Set properties to anonymous users](https://github.com/PostHog/posthog-js/pull/43)
+
+You were already able to set properties on users you had previously identified, but now you can even set properties if the user is anonymous.
+
+This is especially useful for doing a/b testing. Make sure you upgrade posthog-js if you're using it via npm. If you're using the snippet this should automatically work.
+
 ## Bug fixes and performance improvements
 
 * We worked hard on improving caching to speed things up. We [fixed cache refreshing](https://github.com/PostHog/posthog/pull/1035) in a few areas, we made a few [caching adjustments](https://github.com/PostHog/posthog/pull/1023) to fix [#1022](https://github.com/PostHog/posthog/issues/1022). Finally, we now use [redis to cache results](https://github.com/PostHog/posthog/pull/972).
