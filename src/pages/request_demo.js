@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import { StartupForm } from './startups'
+import { Col, Row } from 'antd'
 
 function submitForm(e) {
   e.preventDefault()
@@ -36,6 +37,7 @@ const RequestDemoPage = () => {
     <Layout>
       <StartupForm
         title="Request Demo"
+        subtitle="Request a demo to get on a call with one of us! We will do a quick product tour to help you get an in deptch review of the product. Afterwards, we'll anwer any questions you might have and help you get started!"
         startup={false}
         onSubmit={submitForm}
       ></StartupForm>

@@ -64,10 +64,11 @@ function submitForm(e) {
   }
 }
 
-export function StartupForm({ title, startup = true, onSubmit }) {
+export function StartupForm({ title, startup = true, subtitle, onSubmit }) {
   return [
     <Col className="header-row" align="middle" key="startup-form-1">
       <h2 id="apply_section">{title}</h2>
+      {subtitle && <p className="subtitle">{subtitle}</p>}
     </Col>,
     <Col align="middle" key="startup-form-2">
       <Form
