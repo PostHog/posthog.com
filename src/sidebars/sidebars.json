@@ -97,6 +97,7 @@
     "name":"Community",
     "items":[
       "docs/integrations/community",
+      "docs/integrations/docusaurus-integration",
       "docs/integrations/gatsby-integration",
       "docs/integrations/elixir-integration"
     ]
