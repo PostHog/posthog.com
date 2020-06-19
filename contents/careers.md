@@ -33,7 +33,7 @@ This includes YCombinator, Solomon Hykes (ex-founder/CEO Docker), David Cramer (
 
 ## Website designer (3-6 month contract)
 
-### Objectives
+### About the role
 
 PostHog launched in February 2020 with a very simple product. It immediately took off!
 
@@ -45,7 +45,13 @@ If you would like to work with our graphic designer to create a beautiful new, r
 
 When we say ownership, we really mean it - we are looking for someone proactive and comfortable with autonomy.
 
-Sidenote: geometric hedgehogs meet 1980s office chic. Have a look at some of our early ideas.
+Sidenote: geometric hedgehogs meet 1980s office chic. Have a look at some of our [early ideas](https://github.com/PostHog/posthog.com/issues/128).
+
+### What we're looking for
+
+You need to be extremely confident with advanced CSS, creating responsive layouts, and are confident you can produce a best-in-class design. Experience with javascript is a plus but not critical. You must be confident working indepently to edit [this very website](https://github.com/PostHog/posthog.com)!
+
+Attention to detail and a pixel perfect approach are important. Good enough for this work = best-in-class.
 
 ### Hiring process
 
