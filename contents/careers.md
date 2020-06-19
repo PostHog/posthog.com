@@ -12,6 +12,8 @@ We had the most succesful b2b software HackerNews launch since 2012, we've got o
 
 This is a super exciting time to be joining PostHog. We're growing like crazy and we need your help.
 
+We are _fully-remote_, and actively are seeking a diverse and multinational team.
+
 ## Our culture
 
 In reality, as one of our first hires you'll have a large hand in shaping this, but some keywords:
@@ -23,41 +25,42 @@ In reality, as one of our first hires you'll have a large hand in shaping this, 
 
 ## Our backers
 
-We're young, but we're already [backed](/handbook/strategy/investors) by many of the best investors in the world. This includes YCombinator, Solomon Hykes (ex-founder/CEO Docker), David Cramer (Founder/CEO Sentry), Adam Goldstein (Founder Hipmunk). See [the rest](/handbook/strategy/investors)!
+We're young, but we're already [backed](/handbook/strategy/investors) by many of the best investors in the world and have millions of dollars in funding.
+
+This includes YCombinator, Solomon Hykes (ex-founder/CEO Docker), David Cramer (Founder/CEO Sentry), Adam Goldstein (Founder Hipmunk). See [the rest](/handbook/strategy/investors)!
 
 # Open roles
 
-## Front end developer
-
+## Website designer (3-6 month contract)
 
 ### Objectives
 
-PostHog is focussed on growth. The quality of our front end design and interaction is a key signal as to the quality of our product when developers are evaluating its potential use.
+PostHog launched in February 2020 with a very simple product. It immediately took off!
 
-We are looking for someone who can take ownership of two key areas:
+We are now focussing heavily on improving the quality of our design and branding.
 
-* Work with our designer to create a beautiful new, re-branded website and a best-in-class docs experience.
-* Then, improve the UX of our product. You'd be working closely with our engineering team.
+We are looking for someone to work with us on overhauling our website and documentation, which is a critical part of our growth.
+
+If you would like to work with our graphic designer to create a beautiful new, re-branded website and a best-in-class docs experience, please get in touch.
 
 When we say ownership, we really mean it - we are looking for someone proactive and comfortable with autonomy.
 
-Sidenote: adorable hedgehogs, cool dev focussed stuff, remote first and open source. What's not to like?
+Sidenote: geometric hedgehogs meet 1980s office chic. Have a look at some of our early ideas.
 
 ### Hiring process
 
-* Please send us links to some of your previous work if possible and a (short!) cover letter
+* Please send some links to james@posthog.com with your best work
 * You'll meet our CEO James over Zoom
 * You'll meet our CTO Tim over Zoom
-* We'll pay you normal contracting rates for anywhere between 1-5 days to do some work with us. That'll give you a chance to learn how we'd work with you, and for us to see how you work
-* We make a decision with you
+* We'll pay you normal contracting rates for anywhere between 1-5 days to do some work with us. That'll give you a chance to learn how we'd work with you, and for us to see how you work.
+* We make a decision with you. We'd then move you onto a longer term relationship. 
 
 ### How to apply
 
 Email a thoughtful cover letter to [james@posthog.com](mailto:james@posthog.com). A good cover letter includes:
 
-* Why you are passionate about front end development
-* A few links or examples of previous work if available
-* What you like/dislike about PostHog
+* Links to your best web design work
+* Why you'd be excited to work with us
 * How you found us
 
 ## Full stack engineer
