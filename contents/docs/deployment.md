@@ -73,6 +73,10 @@ helm repo update
 helm install posthog posthog/posthog
 ```
 
+**NOTE - If while installing this chart helm hangs try increasing the memory of your nodes**
+
+As a baseline we suggest having at least 4gb of memory per node
+
 See the [README](https://github.com/PostHog/charts/blob/master/charts/posthog/README.md) or
 [`values.yaml`](https://github.com/PostHog/charts/blob/master/charts/posthog/values.yaml)
 for configuration options.
