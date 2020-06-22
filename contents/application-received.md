@@ -1,10 +1,10 @@
 ---
-title: Request received
+title: Application received
 sidebar: null
 showTitle: true
 ---
 
-Thank you for submitting your request.
+Thank you for submitting your application.
 
 We're really excited to work with start ups around the world.
 
@@ -12,7 +12,7 @@ We're really excited to work with start ups around the world.
 
 If you aren't already, you may immediately start using PostHog.
 
-We will email you within 48 hours to confirm your request is accepted.
+We will email you within 48 hours to confirm your application is accepted.
 
 ## Get started
 

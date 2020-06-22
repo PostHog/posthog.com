@@ -1,7 +1,6 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import { StartupForm } from './startups'
-import { Col, Row } from 'antd'
 
 function submitForm(e) {
   e.preventDefault()
@@ -24,7 +23,7 @@ function submitForm(e) {
 
   xhr.onloadend = response => {
     if (response.target.status === 200) {
-      window.location.href = '/application-received'
+      window.location.href = '/request-received'
     } else {
       alert('error, please email hey@posthog.com')
       console.error(JSON.parse(response.target.response).message)
