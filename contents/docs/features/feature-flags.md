@@ -16,8 +16,6 @@ Think of a descriptive name and select how you want to roll out your feature.
 
 ## Implementing the feature flag
 
-**Important:** At the moment, feature flags are only supported in combination with our posthog-js library.
-
 When you create a feature flag, we'll show you an example snippet. It'll look something like this:
 
 ```js
@@ -26,7 +24,7 @@ if(posthog.isFeatureEnabled('new-beta-feature')) {
 }
 ```
 
-What you do between that if statement is up to you. You might change the css of a button, hide an entire section or move things around.j
+What you do between that if statement is up to you. You might change the css of a button, hide an entire section or move things around.
 
 Behind the scenes, every time a user loads a page we call an endpoint to get the feature flags that apply to that user. We store those flags as a cookie. This means that for most pageviews the feature flags will be available immediately, *except* the very first time a user visits your site.
 
@@ -40,6 +38,8 @@ posthog.onFeatureFlag(function() {
     }
 })
 ```
+
+**Note:** At the moment, feature flags are only supported in combination with our posthog-js library.
 
 **Note:** To avoid "posthog has no attribute isFeatureEnabled" errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
 
