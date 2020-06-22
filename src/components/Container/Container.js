@@ -11,17 +11,13 @@ class Container extends Component {
     const {
       sidebarDocked,
       onPostPage,
-      menuOpen,
-      nMenuItem,
       sidebarHide,
       anchorHide,
-      className
+      className,
     } = this.props
 
     return (
-      <div
-        className={className}
-      >
+      <div className={className}>
         <div
           style={{
             margin: onPostPage ? 0 : '0 auto',

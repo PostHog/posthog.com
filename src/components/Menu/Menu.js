@@ -40,14 +40,18 @@ class Menu extends Component {
                   style={{
                     borderBottomWidth: 0,
                   }}
-                  selectedKeys={typeof window !== 'undefined' && menuItems.map(menuItem => {
-                    try {
+                  selectedKeys={
+                    typeof window !== 'undefined' &&
+                    menuItems.map(menuItem => {
+                      try {
                         if (window.location.pathname === menuItem.link)
-                        return menuItem.link
+                          return menuItem.link
                       } catch (e) {
                         console.log(e)
-                    }
-                  })}
+                      }
+                      return []
+                    })
+                  }
                 >
                   {menuItems.reverse().map(item => {
                     return (
@@ -119,12 +123,15 @@ class Menu extends Component {
                         }}
                         key={menuItems.indexOf(item)}
                       >
-                        {item.a?
+                        {item.a ? (
                           <List.Item.Meta
-                            title={                            
+                            title={
                               <a
                                 href={item.a}
-                                style={{ color: 'black', textDecoration: 'none' }}
+                                style={{
+                                  color: 'black',
+                                  textDecoration: 'none',
+                                }}
                                 onClick={() => {
                                   this.onChangeMenuState(menuItems.length)
                                 }}
@@ -133,22 +140,24 @@ class Menu extends Component {
                               </a>
                             }
                           />
-                        : 
+                        ) : (
                           <List.Item.Meta
                             title={
                               <Link
                                 to={item.link}
-                                style={{ color: 'black', textDecoration: 'none' }}
+                                style={{
+                                  color: 'black',
+                                  textDecoration: 'none',
+                                }}
                                 onClick={() => {
                                   this.onChangeMenuState(menuItems.length)
                                 }}
                               >
                                 {item.name}
-                              </Link>                            
+                              </Link>
                             }
                           />
-                        }
-                        
+                        )}
                       </List.Item>
                     )}
                     style={{

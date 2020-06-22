@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 class Header extends Component {
   render() {
-    const { sidebarDocked, menuOpen, nMenuItem } = this.props
+    const { sidebarDocked } = this.props
 
     return (
       <div
