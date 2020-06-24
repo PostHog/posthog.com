@@ -9,7 +9,7 @@ showTitle: true
 | Property | Type | Description |
 | --- | --- | --- |
 | **team_id** | ForeignKey(Team) | Link to the team |
-| **event** | CharField | Name of the event.<br>There are default events that have special meaning withing PostHog:<br>- `$pageview` captures a pageview<br>- `$autocapture` anything that was captured automatically by posthog-js. Includes clicks, changes to input and submissions of forms. Probably requires Elements to be created.<br>- `$identify`, which is used in the backend to set Person properties<br>- `$create_alias`, which creates an alias between a previous distinct_id and the current one |
+| **event** | CharField | Name of the event.<br>There are default events that have special meaning within PostHog:<br>- `$pageview` captures a pageview<br>- `$autocapture` anything that was captured automatically by posthog-js. Includes clicks, changes to input and submissions of forms. Probably requires Elements to be created.<br>- `$identify`, which is used in the backend to set Person properties<br>- `$create_alias`, which creates an alias between a previous distinct_id and the current one |
 | **distinct_id** | CharField | The unique or anonymous id of the user that triggered the event.<br>NOTE: migration `0024` adds indexes to this, which is necessary for /paths to work reasonably quickly |
 | **properties** | JSONField | Any key: value pairs in a dict.<br>- `$current_url` - we use this in a couple of places (like /paths, /events) as the url the user was visiting at that time. |
 | **timestamp** | DateTimeField | Defaults to timezone.now if not set |
