@@ -22,7 +22,7 @@ All libraries can send custom events, update user properties, identify users and
 - [Go](/docs/integrations/go-integration)
 - [iOS](/docs/integrations/ios-integration)
 - [Android](/docs/integrations/android-integration)
-- [Android](/docs/integrations/flutter-integration)
+- [Flutter](/docs/integrations/flutter-integration)
 - [React Native](/docs/integrations/react-native-integration)
 - [API](/docs/integrations/api)
 - [Community](/docs/integrations/community)
