@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/flutter-posthog) for the flutter-posthog library. This is the official PostHog Flutter library
+[Click here](https://github.com/PostHog/posthog-flutter) for the posthog-flutter library. This is the official PostHog Flutter library
 to capture and send events to any PostHog instance (including posthog.com).
 
 This library uses an internal queue to make calls non-blocking and fast. It also batches requests and flushes asynchronously,
@@ -12,11 +12,11 @@ making it perfect to use in any part of your mobile app.
 
 ## Installation
 
-PostHog is available through [pub](https://pub.dev/packages/flutter_posthog).
+PostHog is available through [pub](https://pub.dev/packages/posthog_flutter).
 
 ## Usage
 
-To use this plugin, add `flutter_posthog` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+To use this plugin, add `posthog_flutter` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 ### Supported methods
 
@@ -39,7 +39,7 @@ To use this plugin, add `flutter_posthog` as a [dependency in your pubspec.yaml 
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_posthog/flutter_posthog.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -90,7 +90,7 @@ Remember that the application lifecycle events won't have any special context se
 #### AndroidManifest.xml
 
 ```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.posthog.flutter_posthog_example">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.posthog.posthog_flutter_example">
     <application>
         <activity>
             [...]
@@ -149,8 +149,8 @@ For more informations please check: https://posthog.com/docs/integrations/js-int
 
 ## Issues
 
-Please file any issues, bugs, or feature requests in the [GitHub repo](https://github.com/posthog/flutter-posthog/issues/new).
+Please file any issues, bugs, or feature requests in the [GitHub repo](https://github.com/posthog/posthog-flutter/issues/new).
 
 ## Contributing
 
-If you wish to contribute a change to this repo, please send a [pull request](https://github.com/posthog/flutter-posthog/pulls).
+If you wish to contribute a change to this repo, please send a [pull request](https://github.com/posthog/posthog-flutter/pulls).
