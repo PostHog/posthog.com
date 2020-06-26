@@ -8,20 +8,22 @@ Hello! We've created some brand assets that mean you don't have to negotiate leg
 
 ## PostHog Logos
 
-### Shadows
+### Big logo
 
-![PostHog Logo Shadows](/images/logos/Only_Logo_Colored_Shadows.png)
+![PostHog Big logo](/images/logos/posthog-logo-800x155.svg)
 
-### Flat
+### Small logo
 
-![PostHog Logo Flat](/images/logos/Only_Logo_Colored_Flat.png)
+![PostHog Small logo](/images/logos/posthog-logo-150x29.svg)
 
-### Line - blue
+### Icon - color
 
-![PostHog Logo Line Blue](/images/logos/Only_Logo_Line_Version_Blue.png)
+![PostHog Icon color](/images/logos/posthog-icon-color.svg)
 
-### Line - white
+### Icon - black
 
-NB. This is hard to see, but it's there! ;)
+![PostHog Icon black](/images/logos/posthog-icon-black.svg)
 
-![PostHog Logo Line White](/images/logos/Only_Logo_Line_Version_White.png)
+### Icon - white
+
+![PostHog Icon white](/images/logos/posthog-icon-white.svg)
