@@ -50,7 +50,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/posthog-logo-no-text.png', // This path is relative to the root of the site.
+        icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
       },
     },
     {
