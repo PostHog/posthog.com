@@ -6,10 +6,15 @@ showTitle: true
 
 Setting up SSL locally can be useful if you're trying to debug issues.
 
+0. Update openssl if "openssl version" tells you "LibreSSL" or something like that.
+
+In case "brew install openssl" and "brew link openssl" don't work well, just use 
+"/usr/local/opt/openssl/bin/openssl" at the command in the next step.
+
 1. Create key
 ```
 openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
-  -keyout example.key -out example.crt -subj "/CN=secure.posthog.dev" \
+  -keyout localhost.key -out localhost.crt -subj "/CN=secure.posthog.dev" \
   -addext "subjectAltName=DNS:secure.posthog.dev,IP:10.0.0.1"
 ```
 2. Trust the key for Chrome/Safari
@@ -20,7 +25,7 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 ```
 127.0.0.1 secure.posthog.dev
 ```
-4. Install nginx and add the following config
+4. Install nginx (`brew install nginx`) and add the following config in `/usr/local/etc/nginx/nginx.conf`
 ```nginx
      upstream backend {
          server 127.0.0.1:8000;
