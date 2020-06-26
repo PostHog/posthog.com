@@ -84,6 +84,7 @@
       "docs/integrations/node-integration",
       "docs/integrations/php-integration",
       "docs/integrations/python-integration",
+      "docs/integrations/flutter-integration",
       "docs/integrations/react-native-integration",
       "docs/integrations/ruby-integration"
     ],
