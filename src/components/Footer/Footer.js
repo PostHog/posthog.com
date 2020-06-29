@@ -73,6 +73,7 @@ class Footer extends Component {
               <FooterListItem to="/handbook/strategy/investors">Investors</FooterListItem>
               <FooterListItem to="/media">Media</FooterListItem>
               <FooterListItem to="/terms">Terms</FooterListItem>
+              <FooterListItem to="/privacy">Privacy</FooterListItem>
             </Col>
           </Col>
           <Col xs={0} sm={0} md={0} lg={4} xl={4} className="gutter-row">

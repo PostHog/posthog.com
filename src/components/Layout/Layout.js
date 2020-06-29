@@ -11,7 +11,6 @@ import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import MediaQuery from 'react-responsive'
 import { default as AntdLayout } from 'antd/lib/layout'
-import Row from 'antd/lib/row'
 import Col from 'antd/lib/col'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
@@ -22,7 +21,13 @@ class Layout extends Component {
   }
 
   render() {
-    const { children, onPostPage, sidebarHide, anchorHide, className } = this.props
+    const {
+      children,
+      onPostPage,
+      sidebarHide,
+      anchorHide,
+      className,
+    } = this.props
 
     return (
       <StaticQuery
@@ -49,12 +54,9 @@ class Layout extends Component {
                   >
                     <html lang="en" />
                   </Helmet>
-                  <AntdLayout
-                    style={{background: '#fff'}}
-                    theme="light"
-                  >
+                  <AntdLayout style={{ background: '#fff' }} theme="light">
                     <AntdLayout.Header
-                      style={{background: '#fff'}}
+                      style={{ background: '#fff' }}
                       theme="light"
                     >
                       <Header
@@ -62,23 +64,32 @@ class Layout extends Component {
                         sidebarDocked={!screenIsSmall}
                         theme="light"
                       />
-                      {screenIsSmall && onPostPage && (!anchorHide || !sidebarHide) && (
-                        <Col>
-                          {' '}
-                          <ResponsiveTopBar />{' '}
-                        </Col>
-                      )}
+                      {screenIsSmall &&
+                        onPostPage &&
+                        (!anchorHide || !sidebarHide) && (
+                          <Col>
+                            {' '}
+                            <ResponsiveTopBar />{' '}
+                          </Col>
+                        )}
                     </AntdLayout.Header>
                     {!screenIsSmall && onPostPage ? (
                       <AntdLayout.Content>
-                        <AntdLayout theme="light" style={{background: '#fff', display: 'flex', flexDirection: 'row'}}>
+                        <AntdLayout
+                          theme="light"
+                          style={{
+                            background: '#fff',
+                            display: 'flex',
+                            flexDirection: 'row',
+                          }}
+                        >
                           {!sidebarHide && (
                             <AntdLayout.Sider width={200} theme="light">
                               <ResponsiveSidebar />
                             </AntdLayout.Sider>
                           )}
                           <AntdLayout.Content
-                          style={{minHeight: 280, padding: '3rem 0% 0 10%'}}
+                            style={{ minHeight: 280, padding: '3rem 0% 0 10%' }}
                           >
                             <Container
                               sidebarDocked={!screenIsSmall}
@@ -90,7 +101,10 @@ class Layout extends Component {
                             </Container>
                           </AntdLayout.Content>
                           {!anchorHide && (
-                            <AntdLayout.Sider theme="light" style={{height: '100%'}}>
+                            <AntdLayout.Sider
+                              theme="light"
+                              style={{ height: '100%' }}
+                            >
                               <ResponsiveAnchor />
                             </AntdLayout.Sider>
                           )}
@@ -129,7 +143,7 @@ class Layout extends Component {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 }
 
 const mapStateToProps = state => {

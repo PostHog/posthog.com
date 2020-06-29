@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import Menu from '../Menu'
-import logo from '../../images/posthog-logo-no-text.png'
+import logo from '../../images/posthog-logo-150x29.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
 
 class Header extends Component {
   render() {
-    const { sidebarDocked, menuOpen, nMenuItem } = this.props
+    const { sidebarDocked } = this.props
 
     return (
       <div
@@ -28,7 +28,7 @@ class Header extends Component {
           }}
         >
           <img alt="logo" src={logo} id="logo-image" />
-          PostHog
+          
         </Link>
         <Menu sidebarDocked={sidebarDocked} />
       </div>
