@@ -17,7 +17,7 @@ Heroku is the quickest way to get a production PostHog environment up-and-runnin
 
 We recommend getting at the very least a `hobby-dev` Postgres and Dyno for low volumes of events. If you run on the 'free' tier it will work, but there will be a big lag each time you visit the app if your site hasn't been visited for a while.
 
-See our instructions on [upgrading PostHog](/upgrading-PostHog) on Heroku to the latest version.
+See our instructions on [upgrading PostHog](/docs/deployment/upgrading-posthog) on Heroku to the latest version.
 
 ## Docker images
 
