@@ -25,6 +25,6 @@ Note: If you want us to host it for you, or if you are a larger customer / would
 There are four steps to follow next:
 
 1. [Deployment](/docs/deployment)
-2. [Snippet installation](/docs/snippet-installation)
+2. [Snippet installation](/docs/deployment/snippet-installation)
 3. [Actions configuration](/docs/features/actions)
 4. [Optional: user data integration](/docs/integrations)
