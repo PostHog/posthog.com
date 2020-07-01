@@ -17,6 +17,8 @@ On top of that (yep, there is more), we have a better retention view, deployment
 
 If you're self hosting and desire these features - [update your PostHog](/docs/deployment/upgrading-posthog).
 
+Please also update your `posthog-js` version to at least `1.2.4` if you have it installed via NPM. If you're using the snippet, you're good to go!  
+
 ## Release notes
 
 ### Toolbar
