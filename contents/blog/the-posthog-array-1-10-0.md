@@ -69,6 +69,10 @@ In the long run, we intend on improving the connection between feature flags and
 
 Learn more about [how to use feature flags](/docs/features/feature-flags), and please give us any [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) for these that you would like to see in a future edition.
 
+### Flutter Integration
+
+You asked for it and now [it's here](https://posthog.com/docs/integrations/flutter-integration)!
+
 ### Retention page
 
 PostHog already had stickiness, but now there is a table that demonstrates perhaps more clearly how your users are coming back (or not!)
