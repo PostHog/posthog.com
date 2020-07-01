@@ -144,8 +144,8 @@ Another thing we fixed in `posthog-js` this week! It was actually fixed a fortni
 
 We are hungry for your feedback this week.
 
-Feature flags and the toolbar (and bringing those together one day) could really propel the product forward - please raise bugs, ask for more features, and let us know what you think!
+Feature flags and the toolbar (and bringing those together one day) could really propel the product forward - please raise bugs, ask for more features, and [let us know](https://github.com/PostHog/posthog/issues) what you think!
 
 ### Open roles
 
-Full stack or growth engineers - we want you!
+Full stack or growth engineers - [we want you!](https://posthog.com/careers)
