@@ -23,29 +23,35 @@ If you're self hosting and desire these features - [update your PostHog](/docs/d
 
 It's like inspect element, but for user data.
 
+![inspect](../images/casts/inspect.gif)
+
 Easily see the ranking of which parts of the page your users are interacting with the most:
 
-![heatmaps](../images/posthog-toolbar-heatmap.gif)
+![heatmap](../images/casts/heatmap.gif)
 
 We learned a ton about our product and website within minutes of trying this out.
-
-#### Fair warning!
-
-The toolbar is now in public beta! There's still [a lot of work](https://github.com/PostHog/posthog/projects/7) to be done. Many things may break and you could have a bumpy ride. Yet having experienced the value this toolbar already unlocks, we couldn't wait any longer! We just *had to* get it out the door and into your hands!
-
-That said, please try it out and raise all issues that you find [here](https://github.com/PostHog/posthog/issues/1129)!
 
 #### How to use it:
 
 Step 1 - go to your setup page, and switch it on:
 
-![setting up toolbar](https://user-images.githubusercontent.com/53387/85580832-5c3cc180-b63c-11ea-8f5a-8800bac518fd.png)
+![setup](../images/casts/setup.gif)
 
 This little buddy will appear over your website, only if you are logged into PostHog (it will NOT appear for your regular visitors...):
 
-![toolbar icon](../images/posthog-icon-toolbar.jpg)
+![authenticate](../images/casts/authenticate.gif)
 
 Hover over him to get started!
+
+![toolbar dance](../images/casts/dance.gif)
+
+#### Fair warning! (It's BETA! Really!)
+
+The toolbar is now in public beta! No, not "gmail beta", *real* BETA! There's still a lot of work to be done ([follow along here!](https://github.com/PostHog/posthog/projects/7)). It **will** feel like a bumpy ride on an unpolished road, *especially* when you click the mysterious "dock" icon! 👀
+
+However, as we already found so much value in using this toolbar ourselves, we felt it was ready to share with you all! 
+
+When you're trying it out, please raise all issues that you find [here](https://github.com/PostHog/posthog/issues/1129)!
 
 ### Feature flags
 
