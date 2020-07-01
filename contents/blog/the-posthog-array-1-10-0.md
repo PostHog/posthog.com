@@ -131,7 +131,9 @@ By popular demand, you can now filter the events table by the event name. Happy 
 
 ## Favorite issue
 
+### ["Host" and "Path name" event properties are not set for some events.](https://github.com/PostHog/posthog/issues/1119)
 
+Another thing we fixed in `posthog-js` this week! It was actually fixed a fortnight ago, yet we forgot to push it out! Oops! 🙈
 
 ## Weekly round up
 
