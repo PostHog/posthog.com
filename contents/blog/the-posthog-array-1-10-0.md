@@ -116,22 +116,22 @@ By popular demand, you can now filter the events table by the event name. Happy 
 * We now let you [break down users by their properties](https://github.com/PostHog/posthog/pull/1070) (it wasn't working before!)
 * We [sped up the people page](https://github.com/PostHog/posthog/pull/1056) - pro tip: don't load stuff you don't need!
 * We [disabled batching in the snippet](https://github.com/PostHog/posthog/pull/1049), since this helps prevent data loss
-* Fix moving from sessions to trends (#1039)
-* Fix person properties being selected (#1040)
-* Automatically select hourly if today/yesterday (#1057)
-* 1052 replace today with 24 hours (#1054)
-* 1041 paginate people modal (#1042)
-* Copy array.js.map as well to better debug errors (#1047)
-* Show upgrade warning if using a really old browser (#1046)
-* Add black (#1043)
-* Fix Typo (#1032)
-* Fix force refresh for cache (#1035)
-* Fix failing tests (#1036)
-* Closes #975 add prroperties to person and fix pagination (#976)
-* Fix texts too long (#1029)
-* Add free pairing session to contributing guide (#1028)
-* chore: clean the configs for release-drafter (#1088)
-* chore: Automate the creation of the change log (#1080)
+* We [fixed a bug on the trends page when moving to sessions](https://github.com/PostHog/posthog/pull/1039)
+* We [fixed another bug with person properties being selected](https://github.com/PostHog/posthog/pull/1040)
+* The trends page now [automatically select hourly](https://github.com/PostHog/posthog/pull/1057) if the date is set to today/yesterday
+* We added a date filter for [the last 24 hours](https://github.com/PostHog/posthog/pull/1054)
+* There's now [pagination in the people modal](https://github.com/PostHog/posthog/pull/1042) that pops up when you click a point in the trend graph
+* We [included array.js.map](https://github.com/PostHog/posthog/pull/1047) in the build to help better debug errors 
+* We added a [warning message](https://github.com/PostHog/posthog/pull/1046) if using a really old browser that doesn't support `Object.entries`
+* [Add black](https://github.com/PostHog/posthog/pull/1043)
+* [Fixed a typo](https://github.com/PostHog/posthog/pull/1032)
+* Struggled with the hardest problem in computer science ([caching](https://github.com/PostHog/posthog/pull/1035))
+* Struggled with the second hardest problem in computer science ([failing tests](https://github.com/PostHog/posthog/pull/1036))
+* We added support for [querying properties on the person API](https://github.com/PostHog/posthog/pull/976)
+* Fix texts taking [too long](https://github.com/PostHog/posthog/pull/1029)
+* [Add free pairing session to contributing guide](https://github.com/PostHog/posthog/pull/1028)
+* Random chore: [Clean the configs for release-drafter](https://github.com/PostHog/posthog/pull/1088)
+* Random chore: [Automate the creation of the change log](https://github.com/PostHog/posthog/pull/1080)
 
 ## Favorite issue
 
