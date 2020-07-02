@@ -111,27 +111,25 @@ By popular demand, you can now filter the events table by the event name. Happy 
 ## Bug fixes and performance improvements
 
 * We are now more privacy friendly - you can [discard IP address data](https://github.com/PostHog/posthog/pull/1081)
+* Added the offer of a [free pairing session](https://github.com/PostHog/posthog/pull/1028) to the contributing guide - ask us!!
 * We fixed a bug with [the start times for the session view](https://github.com/PostHog/posthog/pull/1077)
 * We [improved the ./bin/test command](https://github.com/PostHog/posthog/pull/1074)
 * We now let you [break down users by their properties](https://github.com/PostHog/posthog/pull/1070) (it wasn't working before!)
 * We [sped up the people page](https://github.com/PostHog/posthog/pull/1056) - pro tip: don't load stuff you don't need!
 * We [disabled batching in the snippet](https://github.com/PostHog/posthog/pull/1049), since this helps prevent data loss
-* Fix moving from sessions to trends (#1039)
-* Fix person properties being selected (#1040)
-* Automatically select hourly if today/yesterday (#1057)
-* 1052 replace today with 24 hours (#1054)
-* 1041 paginate people modal (#1042)
-* Copy array.js.map as well to better debug errors (#1047)
-* Show upgrade warning if using a really old browser (#1046)
-* Add black (#1043)
-* Fix Typo (#1032)
-* Fix force refresh for cache (#1035)
-* Fix failing tests (#1036)
-* Closes #975 add prroperties to person and fix pagination (#976)
-* Fix texts too long (#1029)
-* Add free pairing session to contributing guide (#1028)
-* chore: clean the configs for release-drafter (#1088)
-* chore: Automate the creation of the change log (#1080)
+* Fixed a weird bug with [moving from sessions to trends](https://github.com/PostHog/posthog/pull/1039)
+* Fixed [person properties being selected](https://github.com/PostHog/posthog/pull/1040), which was causing some issues with the stats.
+* We now [automatically select hourly](https://github.com/PostHog/posthog/pull/1057) if you're looking at data from just today or yesterday - it was weird otherwise!
+* We turned [today into the last 24 hours](https://github.com/PostHog/posthog/pull/1054) - you can now think of yourself as Jack Bauer
+* The people modal now [has pagination](https://github.com/PostHog/posthog/pull/1042)
+* We [now copy array.js.map](https://github.com/PostHog/posthog/pull/1047) as well as everything else to better debug errors
+* We now [show a warning for old browsers](https://github.com/PostHog/posthog/pull/1046), and feel bad for those in big enterprises that must use them!
+* [Black now added](https://github.com/PostHog/posthog/pull/1043) to post commit hooks, so we don't get crazy all-file reformatting
+* Fixed an issue with [force refreshes for cache](https://github.com/PostHog/posthog/pull/1035) in certain places
+* We [fixed a failing test problem](https://github.com/PostHog/posthog/pull/1036) with team_id
+* Improved [person properties and pagination](https://github.com/PostHog/posthog/pull/976)
+* Solved [a Sentry error](https://github.com/PostHog/posthog/pull/1029) with overly long text
+* We [cleaned the configs for release-drafter](https://github.com/PostHog/posthog/pull/1088)
 
 ## Favorite issue
 
