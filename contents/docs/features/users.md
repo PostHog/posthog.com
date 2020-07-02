@@ -16,7 +16,7 @@ Go to the ‘Users’ list in the left hand navigation:
 
 You will see a list of users, something like this:
 
-![User list](../../images/02/Screenshot-2020-02-09-at-13.47.06-1024x196.png)
+![User list](../../images/02/Screenshot-2020-02-09-at-13.47.06.png)
 
 The first user has had no identifying information pushed to their profile in PostHog. That is why a string appears.
 
@@ -26,7 +26,7 @@ The second user has had their email address passed to PostHog.
 
 Clicking on an individual user brings up their entire event history:
 
-![User history](../../images/02/Screenshot-2020-02-09-at-13.51.03-1024x292.png)
+![User history](../../images/02/Screenshot-2020-02-09-at-13.51.03.png)
 
 You can go even deeper by inspecting each event individually. Click on the event to bring up the event properties. This shows you the following information:
 
