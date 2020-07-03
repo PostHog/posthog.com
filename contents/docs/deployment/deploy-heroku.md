@@ -36,4 +36,4 @@ If you've never heard of Heroku or what it does, feel free to check out [this do
 
 By default, we install a `hobby-dev` Postgres and Redis add-on to the app - these can be found in the **Manage App** screen under *Installed add-ons*.
 
-Since this is the free tier, there may be significant lag if you visit the app after your site has not been visited for a while. To avoid this, you can upgrade up from the free teir.
+Since `hobby-dev` is the free tier, there may be significant lag if you visit the app after your site has not been visited for a while. To avoid this, you can upgrade up from the free teir.
