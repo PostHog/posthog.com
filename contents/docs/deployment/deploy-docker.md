@@ -19,7 +19,9 @@ We currently have [three types of images](https://hub.docker.com/r/posthog/posth
 ## Step By Step Installation
 
 1. [Install Docker](https://docs.docker.com/installation/ubuntulinux/)
+
 2. [Install Docker Compose](https://docs.docker.com/compose/install/)
+
 3. Run the following:
 
 ```bash

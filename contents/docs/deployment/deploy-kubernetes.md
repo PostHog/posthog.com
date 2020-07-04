@@ -18,7 +18,8 @@ In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) depl
 
 ## Step By Step Installation
 
-1. Ensure you meet the prerequisites above
+1. Ensure you meet the prerequisites above.
+
 2. Run the following:
 
 > _NOTE: If helm hangs while installing, try **increasing the memory** of your nodes_
@@ -148,7 +149,7 @@ $ helm install -f my-values.yaml my-release .
 
 By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. The other options (`postgresql.postgresqlDatabase`, `postgresql.postgresqlUsername` and `postgresql.postgresqlPort`) may also want changing from their default values.
 
-To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See https://github.com/helm/charts/tree/master/stable/postgresql#upgrade for more detail.
+To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [this doc](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
 
 ### Redis
 
