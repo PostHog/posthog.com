@@ -33,9 +33,9 @@ helm install posthog posthog/posthog
 
 ## Configuration
 
-The following table lists the configurable parameters of the PostHog helmchart and their default values.
+The following table lists the configurable parameters of the PostHog helm chart and their default values.
 
-Dependent charts can also have values overwritten. Preface values with postgresql.*
+Dependent charts can also have values overwritten. Preface values with Postgresql.*
 
 Parameter                                            | Description                                                                                                | Default
 :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- | :---------------------------------------------------

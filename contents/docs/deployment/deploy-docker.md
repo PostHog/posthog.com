@@ -38,7 +38,7 @@ If you're running locally:
 - Make sure to **add** `DEBUG=1` as an environment variable - this will prevent an infinite loop of SSL redirects.
 - PostHog assumes you want to use SSL and will redirect you to `https://...`. To avoid this, set `DISABLE_SECURE_SSL_REDIRECT=1`
 
-- With these two reccomendations you're new `docker-compose` statement will look like this:
+- With these two recommendations you're new `docker-compose` statement will look like this:
 
 ```bash
 docker-compose up -d -e DEBUG=1 DISABLE_SECURE_SSL_REDIRECT=1
