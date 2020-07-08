@@ -3,9 +3,10 @@ import { useLocation } from '@reach/router'
 import { Link } from 'gatsby'
 import queryString from 'query-string'
 import Layout from '../components/Layout'
-import { Row, Col, Button, Card } from 'antd'
+import { Row, Col, Button, Card, Collapse } from 'antd'
 import SEO from '../components/seo'
 import './pricing.css'
+import 'antd/lib/collapse/style/css'
 import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgRocket from '../images/rocket.svg'
@@ -15,6 +16,7 @@ const PricingPage = () => {
   const [state, setState] = useState({ planOptions: 'cloud' })
   const comparisonRef = useRef()
   const location = useLocation()
+  const { Panel } = Collapse
   const plans = {
     cloud: [
       {
@@ -122,6 +124,28 @@ const PricingPage = () => {
       },
     ],
   }
+  const faqs = [
+    {
+      q: 'What happens when I reach the maximum number of events in my plan?',
+      a:
+        'We will let you know when you are close to the maximum number of events and prompt you to upgrade to a different plan. We will not stop collecting events but we might limit your ability to consult your data or run analytics until the next billing period.',
+    },
+    {
+      q: 'Is there a free trial on paid plans?',
+      a:
+        'You can get a 30-day free trial on our Growth plan. Our Enterprise plan does not offer a free trial because it has the same features as the Growth plan.',
+    },
+    {
+      q: 'What happens after the data retention period elapses?',
+      a:
+        'On the cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the self-managed plans, you control your data retention and what happens to your data afterwards.',
+    },
+    {
+      q: 'Can I switch between the cloud and self-managed plans?',
+      a:
+        'We are working hard to enable a bridge that allows data transfer between self-managed instances and cloud instances. This will be possible in the coming months.',
+    },
+  ]
 
   const setOptionFromQS = () => {
     // On load, set the correct plan options (if applicable)
@@ -357,6 +381,21 @@ const PricingPage = () => {
             </div>
           </Col>
         </Row>
+      </Row>
+
+      <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
+        <Col span={24}>
+          <h2>Frequently asked questions</h2>
+        </Col>
+        <Col span={24} className="p-faqs">
+          <Collapse bordered={false}>
+            {faqs.map((faq, i) => (
+              <Panel header={faq.q} key={i}>
+                {faq.a}
+              </Panel>
+            ))}
+          </Collapse>
+        </Col>
       </Row>
 
       <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>

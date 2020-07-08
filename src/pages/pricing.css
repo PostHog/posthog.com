@@ -187,3 +187,11 @@
   margin-bottom: 0;
   padding-right: 8px;
 }
+
+.p-faqs .ant-collapse-header {
+  font-weight: 500;
+}
+
+.p-faqs .ant-collapse {
+  background-color: transparent;
+}
