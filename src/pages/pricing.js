@@ -28,7 +28,7 @@ const PricingPage = () => {
         callToAction: 'Create free account',
         callToActionDest: {
           type: 'url',
-          value: 'https://app.posthog.com/signup',
+          value: 'https://app.posthog.com/signup?plan=free',
         },
         benefits: [
           'Capture up to <b>5,000 events/month</b>',
@@ -48,7 +48,7 @@ const PricingPage = () => {
         callToAction: 'Start my 30-day free trial',
         callToActionDest: {
           type: 'url',
-          value: 'https://app.posthog.com/signup',
+          value: 'https://app.posthog.com/signup?plan=growth',
         },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Free, plus:</span>',
@@ -340,7 +340,7 @@ const PricingPage = () => {
                 </li>
               </ul>
               <div className="p-comparison-btn">
-                <a href="https://app.posthog.com/signup">
+                <a href="https://app.posthog.com/signup?plan=growth">
                   <Button type="primary" size="large">
                     Start my 30-day free trial
                   </Button>
@@ -401,7 +401,7 @@ const PricingPage = () => {
       <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
         <Col span={24} align="middle">
           <h2 className="p-text-primary">Ready to get started?</h2>
-          <a href="https://app.posthog.com/signup">
+          <a href="https://app.posthog.com/signup?plan=free">
             <Button type="primary" size="large">
               Create my free account
             </Button>
