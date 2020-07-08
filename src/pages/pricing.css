@@ -1,3 +1,7 @@
+.p-margin-top {
+  margin-top: 16px;
+}
+
 .p-title {
   font-size: 64px;
   font-weight: 500;
@@ -101,4 +105,45 @@
 
 .p-segment label input {
   visibility: hidden;
+}
+
+.p-features-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.p-features-link img {
+  padding-left: 6px;
+  margin-bottom: 0;
+}
+
+.p-startup-card {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.p-startup-card div {
+  display: flex;
+  align-items: center;
+}
+
+.p-startup-card div img {
+  margin-bottom: 0;
+}
+
+.p-startup-card div.p-main {
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.p-startup-card div.p-main span,
+.p-startup-card div.p-main h4 {
+  text-align: left;
 }
