@@ -38,3 +38,32 @@ If you've never heard of Heroku or what it does, feel free to check out [this do
 By default, we install a `hobby-dev` Postgres and Redis add-on to the app - these can be found in the **Manage App** screen under *Installed add-ons*.
 
 Since `hobby-dev` is the free tier, there may be significant lag if you visit the app after your site has not been visited for a while. To avoid this, you can upgrade up from the free tier.
+
+## Upgrading Heroku
+
+```bash
+git clone https://github.com/PostHog/posthog.git
+cd posthog
+git remote add heroku https://git.heroku.com/[your-heroku-posthog-app-name].git
+git push -f heroku master
+```
+
+### Upgrading from before 1.0.11?
+
+PostHog is now using Redis with a worker to process events and other background tasks. If you're getting a `REDIS_URL is required` error or seeing a `Configuration Error` in the interface, you'll need to setup a redis server and run the worker process.
+
+A new Heroku Redis addon should be enabled automatically with the free plan. We recommend to switch to at least the first paid plan (premium-0) to enable [persistence](https://devcenter.heroku.com/articles/heroku-redis#persistence) and protect yourself against data loss. You will also see a new dyno type `worker`, which may or may not be deployed automatically. You will need to deploy at least one `worker` dyno for the background tasks to work.
+
+### Upgrading from before 3 March 2020?
+
+If you last updated PostHog before 3 March 2020, AND you have a lot of events, there is one migration (0027) that might take a long time.
+
+To avoid this, _before_ you migrate, run `python manage.py migrate_elementgroup` to pre-migrate elements across.
+
+If you only have a few thousand events, you probably don't need to worry about this.
+
+## Reach Out!
+
+If you need help on any of the above, feel free to create an issue on [our repo](https://github.com/PostHog/posthog), or [join our Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) where a member of our team can assist you! Chances are that if you have a problem or question, someone else does too - so please don't hesitate to create a new issue or ask us a question :)
+
+Likewise, if you see a way to better our product or our documentation, feel free to checkout our [contributing docs](/docs/contributing); we would love for you to be a part of our open-source family!

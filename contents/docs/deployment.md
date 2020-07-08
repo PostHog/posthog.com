@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Getting a shiny, running production environment of PostHog is probably one the first things you want to do! Lucky for you, our platform is incredibly easy and affordable to host with any provider. Below, we have several guides outlining how to set up hosting on a variety of different services; the quickest way we recommend is our [one-click Heroku deployment](/docs/deployment/deploy-heroku), but feel free to host on whatever platform best fits your needs best.
+Getting a shiny, running production environment of PostHog is probably one the first things you want to do! Lucky for you, our platform is incredibly easy and affordable to host with any provider. Below, we have several guides outlining how to set up hosting on a variety of different services step-by-step; the quickest way we recommend is our [one-click Heroku deployment](/docs/deployment/deploy-heroku), but feel free to host on whatever platform best fits your needs best.
 
 ||||
 | :-- | :-: | --- | --- | --- |

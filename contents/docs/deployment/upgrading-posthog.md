@@ -8,7 +8,7 @@ We want to make sure upgrading PostHog is as smooth as possible. We use Django's
 
 Because some data migrations require touching the Events table which can get very large for some instances, some migrations are a little more involved. We will explicitly mention this in the change log and on this page. We aim to minimise these types of migrations as much as possible, and their frequency will decrease over time. Every time, we will make sure there is a management command you can run in parallel, so you can minimise the amount of downtime to seconds.
 
-If you need help, feel free to create an issue, or [join our Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ).
+If you need help, feel free to create an issue on [our repo](https://github.com/PostHog/posthog), or [join our Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) where a member of our team can assist you! Chances are that if you have a problem or question, someone else does too - so please don't be hesitant to create a new issue or ask us any questions you may have :).
 
 ## Heroku
 
@@ -69,7 +69,7 @@ If you're using a docker-compose file, either pull the latest version from maste
       - redis:redis
 ```
 
-## Upgrading from before 3 March 2020?
+### Upgrading from before 3 March 2020?
 
 If you last updated PostHog before 3 March 2020, AND you have a lot of events, there is one migration (0027) that might take a long time.
 
