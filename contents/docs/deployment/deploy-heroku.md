@@ -68,9 +68,3 @@ If you last updated PostHog before 3 March 2020, AND you have a lot of events, t
 To avoid this, _before_ you migrate, run `python manage.py migrate_elementgroup` to pre-migrate elements across.
 
 If you only have a few thousand events, you probably don't need to worry about this.
-
-## Reach Out!
-
-If you need help on any of the above, feel free to create an issue on [our repo](https://github.com/PostHog/posthog), or [join our Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) where a member of our team can assist you! Chances are that if you have a problem or question, someone else does too - so please don't hesitate to create a new issue or ask us a question :)
-
-Likewise, if you see a way to better our product or our documentation, feel free to checkout our [contributing docs](/docs/contributing); we would love for you to be a part of our open-source family!
