@@ -1,0 +1,70 @@
+.p-title {
+  font-size: 64px;
+  font-weight: 500;
+}
+.p-text-primary {
+  color: #2542b9 !important;
+}
+
+.p-plan {
+  height: 100%;
+}
+
+.p-plan-title {
+  font-size: 36px;
+  font-weight: 500;
+  color: #595959;
+}
+
+.p-plan-price {
+  font-size: 32px;
+  font-weight: 500;
+  color: #000;
+}
+
+.p-plan-price span {
+  display: block;
+  font-size: 20px;
+}
+
+.p-plan-description {
+  color: #595959;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.p-plan-benefits {
+  padding-top: 16px;
+  color: #000;
+}
+
+.p-plan-benefits span {
+  display: block;
+  padding-bottom: 16px;
+}
+
+.p-plan-benefit-lg {
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 0 !important;
+}
+
+.p-plan-popular-badge {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  width: 80%;
+  height: 48px;
+  background: #2542b9;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
