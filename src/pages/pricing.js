@@ -41,6 +41,10 @@ const PricingPage = () => {
         priceDetail: '/month',
         description: 'Ideal for scaling companies with higher usage',
         callToAction: 'Start my 30-day free trial',
+        callToActionDest: {
+          type: 'url',
+          value: 'https://app.posthog.com/signup',
+        },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Free, plus:</span>',
           'Up to <b>500,000 events/month</b>',
@@ -55,6 +59,11 @@ const PricingPage = () => {
         priceDetail: 'contact us',
         description: 'Ideal for large companies with millions of users',
         callToAction: 'Contact sales',
+        callToActionDest: {
+          type: 'url',
+          value:
+            'mailto:sales@posthog.com?subject=Enquiry%20about%20enterprise%20plan',
+        },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Growth, plus:</span>',
           'Capture <b>unlimited</b> events',
@@ -83,7 +92,7 @@ const PricingPage = () => {
           '<b>Unlimited</b> tracked users',
           '<b>Unlimited</b> team members',
           '<b>Unlimited</b> data retention',
-          'Free updates for life (our code is open source)',
+          'Free updates for life (our code is <a href="https://github.com/posthog/posthog" target="_blank">open source</a>)',
           'Community support',
         ],
       },
@@ -95,6 +104,11 @@ const PricingPage = () => {
         description:
           'Ideal for companies with large volumes that do not want the hassle of managing a tech infrastructure',
         callToAction: 'Contact sales',
+        callToActionDest: {
+          type: 'url',
+          value:
+            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-managed%20supported%20plan',
+        },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Community, plus:</span>',
           'PostHog deploys and maintains everything (in your own infrastructure)',
