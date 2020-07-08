@@ -1,5 +1,5 @@
-.p-margin-top {
-  margin-top: 16px;
+.p-text-center {
+  text-align: center;
 }
 
 .p-title {
@@ -10,7 +10,7 @@
   color: #2542b9 !important;
 }
 
-.p-plan {
+.p-full-height {
   height: 100%;
 }
 
@@ -146,4 +146,44 @@
 .p-startup-card div.p-main span,
 .p-startup-card div.p-main h4 {
   text-align: left;
+}
+
+.p-comparison-list {
+  margin-left: 0;
+  margin-top: 16px;
+  padding-bottom: 16px;
+}
+
+.p-comparison-list li {
+  list-style: none;
+  line-height: 1.5;
+  margin-bottom: 2em;
+}
+
+.p-comparison-list li:before {
+  content: '';
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  background-image: url('../images/check.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-left: 18px;
+}
+
+.p-comparison-btn {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.p-title-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.p-title-with-icon img {
+  margin-bottom: 0;
+  padding-right: 8px;
 }

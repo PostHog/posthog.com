@@ -6,6 +6,8 @@ import Layout from '../components/Layout'
 import { Row, Col, Button, Card } from 'antd'
 import SEO from '../components/seo'
 import './pricing.css'
+import imgCloud from '../images/cloud.svg'
+import imgBuilding from '../images/building.svg'
 
 const PricingPage = () => {
   const [state, setState] = useState({ planOptions: 'cloud' })
@@ -211,7 +213,7 @@ const PricingPage = () => {
             {plan.popular && (
               <div className="p-plan-popular-badge">POPULAR</div>
             )}
-            <Card className="p-plan">
+            <Card className="p-full-height">
               <h3
                 className={
                   (plan.popular ? 'p-text-primary ' : '') + 'p-plan-title'
@@ -298,9 +300,73 @@ const PricingPage = () => {
             which options to choose.
           </p>
         </Col>
+        <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
+          <Col md={12} sm={24}>
+            <div className="p-full-height">
+              <h4 className="p-text-primary p-title-with-icon">
+                <img src={imgCloud} alt="" style={{ paddingRight: 0 }} />
+                Cloud
+              </h4>
+              <ul className="p-comparison-list">
+                <li>
+                  Recommended if you want to get <b>started right now</b>. Start
+                  capturing events in under 5 minutes.
+                </li>
+                <li>
+                  You don’t own or want to own your own technical
+                  infrastructure.
+                  <b>We’ll handle everything for you.</b>
+                </li>
+                <li>You want an out-of-the-box secure solution.</li>
+                <li>
+                  You want to get automatic updates to all the latest features.
+                </li>
+              </ul>
+              <div className="p-comparison-btn">
+                <a href="https://app.posthog.com/signup">
+                  <Button type="primary" size="large">
+                    Start my 30-day free trial
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </Col>
+          <Col md={12} sm={24}>
+            <div className="p-full-height">
+              <h4 className="p-text-primary p-title-with-icon">
+                <img src={imgBuilding} alt="" /> Self-managed
+              </h4>
+              <ul className="p-comparison-list">
+                <li>
+                  Recommended if you have large volumes of events or users (in
+                  the tens of millions).
+                </li>
+                <li>
+                  If you have heavy compliance requirements on privacy or data
+                  handling (e.g. HIPAA, SOC2).
+                </li>
+                <li>
+                  If your team has technical expertise and/or already manages
+                  your own cloud infrastructure.
+                </li>
+                <li>
+                  You are concerned with browser privacy features, ad blockers
+                  or third-party cookie blockers.
+                </li>
+              </ul>
+              <div className="p-comparison-btn">
+                <Link to="/docs/deploy">
+                  <Button type="primary" size="large">
+                    Start deployment
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Row>
 
-      <Row gutter={[24, 24]} style={{ marginTop: '48px' }}>
+      <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
         <Col span={24} align="middle">
           <h2 className="p-text-primary">Ready to get started?</h2>
           <a href="https://app.posthog.com/signup">
