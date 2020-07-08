@@ -6,7 +6,14 @@ Please feel free to suggest any changes - see our contributing guide.
 
 ## Quick Start
 
-1.  **Start developing.**
+1. **Pre-installation**
+
+    Install [Node](https://nodejs.org/en/download/) and [GatsbyJS](https://www.gatsbyjs.org). GatsbyJS needs to be installed globally (see command below).
+    ```sh
+    npm install -g gatsby-cli
+    ```
+
+1.  **Start developing**
 
     Clone the repo then navigate into your new site’s directory and start it up.
 
