@@ -6,6 +6,7 @@
   font-size: 64px;
   font-weight: 500;
 }
+
 .p-text-primary {
   color: #2542b9 !important;
 }
@@ -194,4 +195,32 @@
 
 .p-faqs .ant-collapse {
   background-color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+  .p-title {
+    font-size: 40px;
+  }
+
+  .p-startup-card {
+    display: block;
+  }
+
+  .p-startup-card div {
+    display: block;
+  }
+
+  .p-startup-card div.p-main {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .p-startup-card div.p-main span,
+  .p-startup-card div.p-main h4 {
+    text-align: center;
+  }
+
+  .p-comparison-btn {
+    margin-bottom: 16px;
+  }
 }
