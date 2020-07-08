@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'gatsby'
+import React, { useState, useRef, useEffect } from 'react'
+import { useLocation } from '@reach/router'
+import { Link, navigate } from 'gatsby'
+import queryString from 'query-string'
 import Layout from '../components/Layout'
 import 'antd/lib/radio/style/css'
 import { Row, Col, Button, Card } from 'antd'
@@ -8,6 +10,8 @@ import './pricing.css'
 
 const PricingPage = () => {
   const [state, setState] = useState({ planOptions: 'cloud' })
+  const comparisonRef = useRef()
+  const location = useLocation()
   const plans = {
     cloud: [
       {
@@ -17,6 +21,10 @@ const PricingPage = () => {
         priceDetail: 'forever',
         description: 'Ideal if you’re just getting started with your product',
         callToAction: 'Create free account',
+        callToActionDest: {
+          type: 'url',
+          value: 'https://app.posthog.com/signup',
+        },
         benefits: [
           'Capture up to <b>5,000 events/month</b>',
           '<b>All analytics features</b>',
@@ -65,6 +73,10 @@ const PricingPage = () => {
           'Ideal if your team has technical expertise and handles large volumes of users or events',
         callToAction: 'Start deployment',
         callToActionType: 'primary',
+        callToActionDest: {
+          type: 'gatsbyLink',
+          value: '/docs/deployment',
+        },
         benefits: [
           'Capture <b>unlimited</b> events',
           '<b>All analytics features</b>',
@@ -94,9 +106,30 @@ const PricingPage = () => {
     ],
   }
 
+  useEffect(() => {
+    // On load, set the correct plan options (if applicable)
+    const { o } = queryString.parse(location.search)
+    if (o && o in plans) setState({ ...state, planOptions: o })
+  }, [])
+
   const handleSegmentChange = event => {
+    const newOption = event.target.value
+    const pushUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?o=${newOption}`
+    window.history.pushState({ path: pushUrl }, '', pushUrl)
     setState({ ...state, planOptions: event.target.value })
   }
+
+  const CTAButton = props => (
+    <Button
+      type={
+        props.plan.callToActionType ||
+        (props.plan.popular ? 'primary' : 'default')
+      }
+      size="large"
+    >
+      {props.plan.callToAction}
+    </Button>
+  )
 
   return (
     <Layout>
@@ -114,30 +147,52 @@ const PricingPage = () => {
 
       <Row gutter={[24, 24]}>
         <Col span={24} align="middle">
-          <div
-            className="p-segment"
-            onChange={event => handleSegmentChange(event)}
-          >
+          <div className="p-segment">
             <label className={state.planOptions === 'cloud' ? 'active' : ''}>
               <input
                 type="radio"
                 value="cloud"
                 name="planOptions"
-                defaultChecked
+                checked={state.planOptions === 'cloud'}
+                onChange={event => handleSegmentChange(event)}
               />{' '}
               Cloud
             </label>
             <label
               className={state.planOptions === 'self-managed' ? 'active' : ''}
             >
-              <input type="radio" value="self-managed" name="planOptions" />{' '}
+              <input
+                type="radio"
+                value="self-managed"
+                name="planOptions"
+                checked={state.planOptions === 'self-managed'}
+                onChange={event => handleSegmentChange(event)}
+              />{' '}
               Self-managed
             </label>
+          </div>
+          <div style={{ paddingTop: '16px' }}>
+            <a
+              href="#comparison"
+              onClick={event => {
+                event.preventDefault()
+                comparisonRef.current.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start',
+                })
+              }}
+            >
+              What is the difference?
+            </a>
           </div>
         </Col>
       </Row>
 
-      <Row gutter={[24, 36]} type="flex" style={{ justifyContent: 'center' }}>
+      <Row
+        gutter={[24, 36]}
+        type="flex"
+        style={{ justifyContent: 'center', marginTop: '32px' }}
+      >
         {plans[state.planOptions].map(plan => (
           <Col md={8} sm={24} align="middle" key={plan.title}>
             {plan.popular && (
@@ -156,15 +211,17 @@ const PricingPage = () => {
                 <span className="p-text-primary">{plan.priceDetail}</span>
               </div>
               <div className="p-plan-description">{plan.description}</div>
-              <Button
-                type={
-                  plan.callToActionType ||
-                  (plan.popular ? 'primary' : 'default')
-                }
-                size="large"
-              >
-                {plan.callToAction}
-              </Button>
+              {plan.callToActionDest?.type === 'gatsbyLink' && (
+                <Link to={plan.callToActionDest?.value}>
+                  <CTAButton plan={plan} />
+                </Link>
+              )}
+              {plan.callToActionDest?.type !== 'gatsbyLink' && (
+                <a href={plan.callToActionDest?.value}>
+                  <CTAButton plan={plan} />
+                </a>
+              )}
+
               <div className="p-plan-benefits">
                 {plan.benefits.map(benefit => (
                   <span
@@ -176,6 +233,10 @@ const PricingPage = () => {
             </Card>
           </Col>
         ))}
+      </Row>
+      <Row gutter={[24, 24]}>
+        <div ref={comparisonRef} id="comparison"></div>
+        Cloud vs. Self-managed
       </Row>
     </Layout>
   )
