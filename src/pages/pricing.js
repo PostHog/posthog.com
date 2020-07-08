@@ -8,6 +8,8 @@ import SEO from '../components/seo'
 import './pricing.css'
 import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
+import imgRocket from '../images/rocket.svg'
+import imgChevronRight from '../images/chevron-right.svg'
 
 const PricingPage = () => {
   const [state, setState] = useState({ planOptions: 'cloud' })
@@ -121,11 +123,13 @@ const PricingPage = () => {
     ],
   }
 
-  useEffect(() => {
+  const setOptionFromQS = () => {
     // On load, set the correct plan options (if applicable)
     const { o } = queryString.parse(location.search)
     if (o && o in plans) setState({ ...state, planOptions: o })
-  }, [])
+  }
+
+  useEffect(setOptionFromQS, [])
 
   const handleSegmentChange = event => {
     const newOption = event.target.value
@@ -252,14 +256,8 @@ const PricingPage = () => {
           All prices in US Dollars (USD), excluding taxes
         </Col>
         <Col span={24} align="middle">
-          <Link to="/docs/features">
-            <a href="#" className="p-features-link">
-              Full features details{' '}
-              <img
-                alt=""
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEuMjUiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxNCAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyLjI2NjUgMTEuNzI5M0wzLjkxNTgyIDIwLjA4QzMuNTEzMDggMjAuNDgyNyAyLjg2MDEyIDIwLjQ4MjcgMi40NTc0MiAyMC4wOEwxLjQ4MzQ1IDE5LjEwNkMxLjA4MTM5IDE4LjcwMzkgMS4wODA2MSAxOC4wNTIzIDEuNDgxNzMgMTcuNjQ5M0w4LjA5OTgyIDExLjAwMDFMMS40ODE3MyA0LjM1MDg4QzEuMDgwNjEgMy45NDc4OCAxLjA4MTM5IDMuMjk2MjUgMS40ODM0NSAyLjg5NDJMMi40NTc0MiAxLjkyMDIyQzIuODYwMTcgMS41MTc0OCAzLjUxMzEyIDEuNTE3NDggMy45MTU4MiAxLjkyMDIyTDEyLjI2NjUgMTAuMjcwOUMxMi42NjkyIDEwLjY3MzYgMTIuNjY5MiAxMS4zMjY2IDEyLjI2NjUgMTEuNzI5M1oiIGZpbGw9IiMxODkwRkYiLz4KPC9zdmc+"
-              />
-            </a>
+          <Link to="/docs/features" className="p-features-link">
+            Full features details <img alt="" src={imgChevronRight} />
           </Link>
         </Col>
       </Row>
@@ -267,12 +265,9 @@ const PricingPage = () => {
         <Col span={24} align="middle">
           <Card className="p-startup-card">
             <div>
-              <img
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDkiIGhlaWdodD0iNDkiIHZpZXdCb3g9IjAgMCA0OSA0OSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwKSI+CjxwYXRoIGQ9Ik00OC4zNDE2IDEuODI3MzNDNDguMjI3NyAxLjI5Nzk3IDQ3LjcwNDQgMC43NzQ1OTcgNDcuMTczMyAwLjY2MDk1QzQ0LjA5MiAwIDQxLjY3OTQgMCAzOS4yNzczIDBDMjkuMzk3NiAwIDIzLjQ3MyA1LjI4MzExIDE5LjA0OTkgMTIuMjVIOS4wNzYyN0M3LjUxMTc1IDEyLjI1MTUgNS42NzMzOSAxMy4zODY1IDQuOTcxODggMTQuNzg0NkwwLjI0MDc1MyAyNC4yNDEzQzAuMDk0NTQ0MyAyNC41NjM4IDAuMDEyNzYxMSAyNC45MTE4IDAgMjUuMjY1NkMwLjAwMDIxOTk4OSAyNS44NzQ4IDAuMjQyMzU5IDI2LjQ1OSAwLjY3MzE3OSAyNi44ODk3QzEuMTA0IDI3LjMyMDQgMS42ODgyMyAyNy41NjI0IDIuMjk3NDMgMjcuNTYyNUgxMi4yMzI0TDEwLjA4MTUgMjkuNzEyOEM4Ljk5MzgzIDMwLjgwMDEgOC44Mzc3NiAzMi44IDEwLjA4MTUgMzQuMDQzNEwxNC45NTMyIDM4LjkxNTNDMTYuMDIwOSAzOS45ODYgMTguMDMwNyA0MC4xNzQ0IDE5LjI4NjQgMzguOTE1M0wyMS40MzczIDM2Ljc2NVY0Ni43MDMxQzIxLjQzNzUgNDcuMzEyMyAyMS42Nzk2IDQ3Ljg5NjUgMjIuMTEwNSA0OC4zMjcyQzIyLjU0MTMgNDguNzU3OSAyMy4xMjU1IDQ4Ljk5OTkgMjMuNzM0NyA0OUMyNC4wODg2IDQ4Ljk4NjkgMjQuNDM2NyA0OC45MDUxIDI0Ljc1OTQgNDguNzU5MkwzNC4yMDggNDQuMDMyNEMzNS42MDggNDMuMzM0MSAzNi43NDQ5IDQxLjQ5NjMgMzYuNzQ0OSAzOS45MzA2VjI5LjkzNTZDNDMuNjkyNyAyNS41MDM0IDQ4Ljk5ODIgMTkuNTYwOCA0OC45OTgyIDkuNzMzMzFDNDkuMDA3MiA3LjMyMTI5IDQ5LjAwNzIgNC45MDkyNyA0OC4zNDE2IDEuODI3MzNaTTM2Ljc1MzkgMTYuMDc4MUMzNS45OTY4IDE2LjA3NzkgMzUuMjU2NyAxNS44NTMzIDM0LjYyNzMgMTUuNDMyNUMzMy45OTc5IDE1LjAxMTggMzMuNTA3NCAxNC40MTM4IDMzLjIxNzggMTMuNzE0M0MzMi45MjgyIDEzLjAxNDggMzIuODUyNSAxMi4yNDUxIDMzLjAwMDMgMTEuNTAyNkMzMy4xNDgxIDEwLjc2MDEgMzMuNTEyOCAxMC4wNzgxIDM0LjA0ODIgOS41NDI3OEMzNC41ODM2IDkuMDA3NSAzNS4yNjU3IDguNjQzIDM2LjAwODMgOC40OTUzNkMzNi43NTA5IDguMzQ3NzMgMzcuNTIwNSA4LjQyMzU5IDM4LjIyIDguNzEzMzZDMzguOTE5NCA5LjAwMzEzIDM5LjUxNzIgOS40OTM3OSAzOS45Mzc4IDEwLjEyMzNDNDAuMzU4NCAxMC43NTI4IDQwLjU4MjkgMTEuNDkyOSA0MC41ODI5IDEyLjI1QzQwLjU4MjMgMTMuMjY1MyA0MC4xNzg3IDE0LjIzODggMzkuNDYwNyAxNC45NTY2QzM4Ljc0MjcgMTUuNjc0NCAzNy43NjkxIDE2LjA3NzggMzYuNzUzOSAxNi4wNzgxWiIgZmlsbD0iI0Y1NEUwMCIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwIj4KPHJlY3Qgd2lkdGg9IjQ5IiBoZWlnaHQ9IjQ5IiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo="
-                alt=""
-              />
+              <img src={imgRocket} alt="" />
             </div>
-            <div class="p-main">
+            <div className="p-main">
               <h4>Are you a startup?</h4>
               <span>
                 We got your back! Find product-market fit,{' '}
@@ -282,9 +277,7 @@ const PricingPage = () => {
             </div>
             <div>
               <Link to="/startups">
-                <Button type="primary" size="middle">
-                  Learn more
-                </Button>
+                <Button type="primary">Learn more</Button>
               </Link>
             </div>
           </Card>
