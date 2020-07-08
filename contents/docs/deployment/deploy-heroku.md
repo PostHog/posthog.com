@@ -37,15 +37,6 @@ If you've never heard of Heroku or what it does, feel free to check out [this do
 
 By default, we install a `hobby-dev` Postgres and Redis add-on to the app - these can be found in the **Manage App** screen under **Installed add-ons**.
 
-### Upgrading From Free Tier
-
-Since `hobby-dev` is the free tier, there may be significant lag if you visit the app after your site has not been visited for a while.
-
-To avoid this, you can upgrade up from the free tier; this can be done through the same **Manage App** screen by clicking on the *Configure Add-ons* link by the **Installed add-ons** section. Once in the add-ons screen:
-
-- To upgrade your Redis plan, **click on the button** to the right of both the `Heroku Postgres` and `Heroku Redis` add-on (it looks like an up and down symbol you'd see by an elevator). From here, click on `Modify Plan` and pick your desired one!
-- To upgrade your Postgres plan, the process is a bit more complex. Check out this [doc](https://devcenter.heroku.com/articles/updating-heroku-postgres-databases) by Heroku that outlines the process step-by-step.
-
 ## Upgrading Heroku
 
 ```bash
@@ -54,6 +45,19 @@ cd posthog
 git remote add heroku https://git.heroku.com/[your-heroku-posthog-app-name].git
 git push -f heroku master
 ```
+
+### Upgrading From Free Tier Add-ons
+
+Since `hobby-dev` is the free tier, there may be significant lag if you visit the app after your site has not been visited for a while.
+
+To avoid this, you can upgrade up from the free tier; this can be done through the same **Manage App** screen by clicking on the *Configure Add-ons* link by the **Installed add-ons** section. Once in the add-ons screen:
+
+- To upgrade your Redis plan, **click on the button** to the right of both the `Heroku Postgres` and `Heroku Redis` add-on (it looks like an up and down symbol you'd see by an elevator). From here, click on `Modify Plan` and pick your desired one!
+- To upgrade your Postgres plan, the process is a bit more complex. Check out this [doc](https://devcenter.heroku.com/articles/updating-heroku-postgres-databases) by Heroku that outlines the process step-by-step.
+
+### Upgrading Dyno Type
+
+Upgrading your app's dynos to larger types will provide you *much more memory and GPU resources*. To do this, navigate back to the **Manage App** screen and click on the *Configure Dynos* link by the **Dyno Formation** section. Once here, clicking on the **Change Dyno Type** button will prompt you to choose your desired tier!
 
 ### Upgrading from before 1.0.11?
 
