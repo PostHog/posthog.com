@@ -68,3 +68,38 @@
   align-items: center;
   justify-content: center;
 }
+
+.p-segment {
+  max-width: 100%;
+  width: 360px;
+  height: 40px;
+  background: #ececec;
+  border-radius: 2px;
+  margin-bottom: 32px;
+  display: flex;
+}
+
+.p-segment label {
+  display: inline-block;
+  flex-grow: 1;
+  flex-basis: 0;
+  height: 100%;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #595959;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+.p-segment label.active {
+  background-color: #2542b9;
+  color: #fff;
+}
+
+.p-segment label input {
+  visibility: hidden;
+}
