@@ -285,16 +285,18 @@ const PricingPage = () => {
           </Link>
         </Col>
       </Row>
+      <br />
       <Row gutter={[24, 24]}>
         <Col span={24} align="middle">
           <Card className="p-startup-card">
+            <div>
             <div>
               <img src={imgRocket} alt="" />
             </div>
             <div className="p-main">
               <h4>Are you a startup?</h4>
               <span>
-                We got your back! Find product-market fit,{' '}
+                We've got your back! Find product-market fit,{' '}
                 <b>completely free</b> with a tool that does the legwork for
                 you.
               </span>
@@ -303,6 +305,7 @@ const PricingPage = () => {
               <Link to="/startups">
                 <Button type="primary">Learn more</Button>
               </Link>
+            </div>
             </div>
           </Card>
         </Col>
