@@ -121,13 +121,16 @@
 }
 
 .p-startup-card {
-  margin-top: 32px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+}
+.p-startup-card .ant-card-body > div{
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.p-startup-card div {
+.p-startup-card .ant-card-body > div div {
   display: flex;
   align-items: center;
 }
