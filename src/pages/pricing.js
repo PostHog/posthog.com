@@ -79,7 +79,7 @@ const PricingPage = () => {
     ],
     'self-managed': [
       {
-        title: 'Community',
+        title: 'Open Source',
         popular: false,
         price: '$0',
         priceDetail: 'forever',
@@ -312,9 +312,8 @@ const PricingPage = () => {
           <div ref={comparisonRef} id="comparison"></div>
           <h2>Cloud vs. self-managed</h2>
           <p>
-            It is very important that you select the option that is{' '}
-            <b>right for you</b>, below you will find some recommendations on
-            which options to choose.
+            Cloud or self-managed? We'd love to help you find the option that's{' '}
+            <b>right for you</b>.
           </p>
         </Col>
         <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
