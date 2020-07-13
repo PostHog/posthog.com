@@ -25,6 +25,7 @@ docker-compose -f docker-compose.dev.yml up
 9. Install dev requirements `pip install -r requirements/dev.txt`
 10. Run migrations `DEBUG=1 python3 manage.py migrate`
 11. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
+*NOTE: The first time you run this comment you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
 
 Now open [http://localhost:8000](http://localhost:8000) to see the app.
 
