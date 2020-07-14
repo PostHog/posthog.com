@@ -1,11 +1,20 @@
 import React from 'react'
-import Layout from '../components/Layout'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import './index.css'
 import { Link } from 'gatsby'
-import trends from '../images/product-screenshots/product-trends.png'
-import dashboards from '../images/product-screenshots/dashboards.png'
+import posthogComputerRetro4 from '../images/posthog-computer-retro-4.png'
+import hogflix1 from '../images/hogflix-1.png'
+import dashboards1 from '../images/dashboards-1.png'
+import funnels1 from '../images/funnels-1.png'
+import featureFlags1 from '../images/feature-flags-1.png'
+import threeComputers1 from '../images/three-computers-1.png'
+import enterprise01 from '../images/enterprise-01.png'
+import enterprise02 from '../images/enterprise-02.png'
+import enterprise03 from '../images/enterprise-03.png'
+import installNowFree1 from '../images/install-now-free-1.svg'
+import shelfLower1 from '../images/shelf-lower-1.svg'
+import shelf2 from '../images/shelf-2.svg'
 import stackAndroid from '../images/stack-android.png'
 import stackPython from '../images/stack-python.png'
 import stackIos from '../images/stack-ios.png'
@@ -16,275 +25,412 @@ import stackGatsby from '../images/stack-gatsby.png'
 import stackJavascript from '../images/stack-javascript.png'
 import stackGo from '../images/stack-go.png'
 import stackApi from '../images/stack-api.png'
-import installHeroku from '../images/install-heroku.png'
-import installDocker from '../images/install-docker.png'
-import installAws from '../images/install-aws.png'
-import installKubernetes from '../images/install-kubernetes.png'
+import installHeroku from '../images/install-heroku.svg'
+import installDocker from '../images/install-docker.svg'
+import installAws from '../images/install-aws.svg'
+import installKubernetes from '../images/install-kubernetes.svg'
 import communityGithub from '../images/community-github.png'
 import communitySlack from '../images/community-slack.png'
 import { Row, Col, Icon } from 'antd'
 import SEO from '../components/seo'
+import Layout from '../components/Layout'
+import { RightCircleFilled, LeftCircleFilled } from '@ant-design/icons';
+
 
 function IndexPage() {
   return (
-    <Layout className="index-page">
+    <Layout containerStyle={{maxWidth: "auto", padding: 0}} className="index-page">
+      <div style={{maxWidth: 960, padding: '0px 1.0875rem 1.45rem', margin: '0 auto'}}>
       <SEO
         title="PostHog - open source product analytics"
         description="Understand your users. Build a better product"
       />
-      <Row gutter={[24, 8]}>
-        <Col span={24} className="gutter-row">
-          <h2 className="large-header">
-            Understand your users.
+      <Row>
+        <Col span={24}>
+          <div className="firstSpace"></div>
+        </Col>
+      </Row>
+      
+      <Row align="top">
+        <Col xs={24} sm={18} md={12} lg={12} xl={12} className="gutter-row">
+          <h1 className="largeHeader" align="top">
+            Understand <br className="hiddenHeadBreak"/>your users.
             <br />
             Build a better product.
-          </h2>
+          </h1>
+          <p>Join 1,000 companies using PostHog.</p>      
+            <a href="/trial">
+              <Button
+                type="primary"
+                size="large"
+                icon="right-circle"
+              >
+                Get Started for Free
+              </Button>
+            </a>
+            {' '}
+            <a href="/request_demo">
+              <Button type="secondary" size="large">
+                Request Demo
+              </Button>
+            </a>
+            <div className="secondSpace"></div>
+            <h2 className="yellowHead">Open source product analytics</h2>
+            <p>
+              PostHog provides a full product analytics UX. Analyze trends, funnels, retention and cohorts.
+            </p>
+        </Col>
+        <Col xs={0} sm={0} md={12} lg={12} xl={12} className="gutter-row">
+          <img alt="posthog-computer-retro-4" loading="lazy" src={posthogComputerRetro4}/>
         </Col>
       </Row>
-      <Row gutter={[16, 8]}>
-        <Col span={16} className="gutter-row">
-          <p>Join 1,000 companies using PostHog.</p>
+      <Row>
+        <Col span={24}>
+        <div className="thirdSpace"></div>
         </Col>
       </Row>
-      <Row gutter={[24, 8]}>
-        <a href="/trial">
-          <Button
-            type="primary"
-            size="large"
-            icon="right-circle"
-            style={{ marginLeft: 10, marginRight: 10 }}
-          >
-            Get Started for Free
-          </Button>
-        </a>
-        <a href="/request_demo">
-          <Button type="secondary" size="large">
-            Request Demo
-          </Button>
-        </a>
+      
+      {/*01 - It all starts with event autocapture*/}
+      <Row gutter={24} justify="space-between">
+        <Col xs={0} sm={0} md={11} lg={11} xl={11}>
+          <img alt="hogflix-1" loading="lazy" src={hogflix1}/>
+        </Col>
+        <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
+        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+          <br/>
+          <br/>
+          <h2 className="yellowHead">01</h2>
+        </Col>
+        <Col xs={17} sm={17} md={9} lg={9} xl={9}>
+          <br/>
+          <br/>
+          <h3>It all starts with event autocapture</h3>
+          <hr className="yellowLine"/>
+          <br/>
+          <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
+        </Col>
+        <Col xs={3} sm={3} md={0} lg={0} xl={0}></Col>
       </Row>
-      <Row gutter={[24, 24]}>
-        <Col span={24} className="gutter-row header-row" align="middle">
-          <h2>Open source product analytics</h2>
-        </Col>
-      </Row>
-      <Row gutter={[48, 24]}>
-        <Col span={12} className="gutter-row">
-          <h3>Understand users and events</h3>
-          <p>
-            PostHog autocaptures events and user behavior in your mobile or web
-            app.
-          </p>
-        </Col>
-        <Col span={12} className="gutter-row">
-          <p>
-            <img alt="trends" src={trends} className="shadow" />
-          </p>
-        </Col>
-      </Row>
-      <Row gutter={[24, 24]}>
-        <Col span={24} className="gutter-row header-row" align="middle">
-          <h2>Self-hosted available, with full underlying data access.</h2>
-        </Col>
-      </Row>
-      <Row gutter={[48, 24]}>
-        <Col span={12} className="gutter-row">
-          <p>
-            <img alt="trends" src={dashboards} className="shadow" />
-          </p>
-        </Col>
-        <Col span={12} className="gutter-row">
-          <h3>Full product analytics UX</h3>
-          <p>
-            PostHog provides a full product analytics UX. Analyze trends,
-            funnels, retention and cohorts.
-          </p>
-        </Col>
-      </Row>
-      <Row className="gutter-row" justify="center" align="middle">
-        <Col span={24} className="gutter-row" justify="center" align="middle">
-          <h2 align="middle" className="icons-header header-row">
-            Designed for your stack
-          </h2>
-        </Col>
-      </Row>
-      <Row justify="center">
-        <Col
-          xs={0}
-          sm={0}
-          md={2}
-          lg={2}
-          xl={2}
-          align="middle"
-          className="column100height"
-        ></Col>
 
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/python-integration">
-            <img alt="Python" className="hover-shadow" src={stackPython} />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/php-integration">
-            <img alt="PHP" className="hover-shadow" src={stackPhp} />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/android-integration">
-            <img alt="Android" className="hover-shadow" src={stackAndroid} />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/ios-integration">
-            <img alt="iOS" className="hover-shadow" src={stackIos} />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/node-integration">
-            <img alt="Node" className="hover-shadow" src={stackNode} />
-          </Link>
-        </Col>
-        <Col
-          xs={0}
-          sm={0}
-          md={2}
-          lg={2}
-          xl={2}
-          align="middle"
-          className="column100height"
-        >
-          &nbsp;
-        </Col>
-        <Col
-          xs={0}
-          sm={0}
-          md={2}
-          lg={2}
-          xl={2}
-          align="middle"
-          className="column100height"
-        >
-          &nbsp;
-        </Col>
-        <Col
-          xs={0}
-          sm={0}
-          md={2}
-          lg={2}
-          xl={2}
-          align="middle"
-          className="column100height"
-        >
-          &nbsp;
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/ruby-integration">
-            <img alt="Ruby" className="hover-shadow" src={stackRuby} />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/gatsby-integration">
-            <img alt="Gatsby" className="hover-shadow" src={stackGatsby} />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/js-integration">
-            <img
-              alt="Javascript"
-              className="hover-shadow"
-              src={stackJavascript}
-            />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/go-integration">
-            <img alt="Go" className="hover-shadow" src={stackGo} />
-          </Link>
-        </Col>
-        <Col xs={8} sm={8} md={4} lg={4} xl={4} align="middle">
-          <Link to="/docs/integrations/api">
-            <img alt="API" className="hover-shadow" src={stackApi} />
-          </Link>
-        </Col>
-        <Col
-          xs={0}
-          sm={0}
-          md={2}
-          lg={2}
-          xl={2}
-          align="middle"
-          className="column100height"
-        >
-          &nbsp;
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
         </Col>
       </Row>
+      
+      {/*02 - Understand how traffic really flows through your app*/}
+      <Row gutter={24} justify="space-between">
+        <Col xs={0} sm={0} md={4} lg={4} xl={4}>
+        </Col>
+        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+          <h2 className="redHead">02</h2>
+        </Col>
+        <Col xs={20} sm={20} md={14} lg={14} xl={14}>
+          <h3>Understand how traffic really flows through your app</h3>
+          <hr className="redLine"/>
+        </Col>
+        <Col xs={0} sm={0} md={3} lg={3} xl={3}>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={0} sm={0} md={2} lg={2} xl={2}>
+        </Col>
+        <Col xs={0} sm={0} md={20} lg={20} xl={20}>
+          <img alt="funnels-1" loading="lazy" src={funnels1}/>
+        </Col>
+        <Col xs={0} sm={0} md={2} lg={2} xl={2}>
+        </Col>
+      </Row>
+      
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
+        </Col>
+      </Row>
+      
+      {/*03 - Understand how traffic really flows through your app*/}
+      <Row gutter={24} justify="space-between">
+        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+          <h2 className="blueHead">03</h2>
+        </Col>
+        <Col xs={18} sm={18} md={9} lg={9} xl={9}>
+          <h3>Visualise product trends and retention</h3>
+          <hr className="blueLine"/>
+          <p>Some explaination here about event autocapture, how the code is imput in once and then ready to go?</p>
+        </Col>
+        <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
+        <Col xs={0} sm={0} md={10} lg={10} xl={10}>
+          <img alt="dashboards-1" src={dashboards1}/>
+        </Col>
+        <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
+      </Row>
+
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
+        </Col>
+      </Row>
+
+      {/*04 - Improve conversion rates*/}
+      <Row gutter={24} justify="space-between">
+        <Col xs={0} sm={0} md={5} lg={5} xl={5}></Col>
+        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+          <h2 className="yellowHead">04</h2>
+        </Col>
+        <Col xs={20} sm={20} md={12} lg={12} xl={12}>
+          <h3>Improve conversion rates</h3>
+          <hr className="yellowLine"/>
+        </Col>
+        <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
+      </Row>
+      <Row justify="space-between" gutter={48}>
+        <Col span={24}>
+        <img alt="three-computers-1" loading="lazy" src={threeComputers1}/>
+        </Col>
+      </Row>
+
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
+        </Col>
+      </Row>
+      
+      {/*05 - Use feature flags to test new ideas*/}
+      <Row gutter={24} justify="space-between">
+        <Col xs={0} sm={0} md={12} lg={12} xl={12}>
+          <img alt="feature-flags-1" loading="lazy" src={featureFlags1}/>
+        </Col>
+        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+          <br/>
+          <br/>
+          <h2 className="redHead">05</h2>
+        </Col>
+        <Col xs={20} sm={20} md={9} lg={9} xl={9}>
+          <br/>
+          <br/>
+          <h3>Use feature flags to test new ideas</h3>
+          <hr className="redLine"/>
+          <br/>
+          <p>Some explaination here about event autocapture, how the code is imput in once and then ready to go?</p>
+        </Col>
+      </Row>
+      
+      <Row className="gutter-row" justify="center" align="middle">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Col span={24} className="gutter-row" justify="center" align="middle">
+          <h3 align="middle" className="icons-header header-row">
+            Designed for your stack
+          </h3>
+        </Col>
+      </Row>
+      <div className="yourStack">
+        <Row className="gutter-row" gutter={24} justify="space-between" align="middle">
+          <Col span={4} offset={2} align="middle">
+            <Link to="/docs/integrations/python-integration">
+              <img alt="Python" className="imageShow" loading="lazy" src={stackPython} />
+            </Link>
+          </Col>
+          <Col span={4} align="middle">
+            <Link to="/docs/integrations/php-integration">
+              <img alt="PHP" className="imageShow" loading="lazy" src={stackPhp} />
+            </Link>
+          </Col>
+          <Col span={4} align="middle">
+            <Link to="/docs/integrations/android-integration">
+              <img alt="Android" className="imageShow" loading="lazy" src={stackAndroid} />
+            </Link>
+          </Col>
+          <Col span={4} align="middle">
+            <Link to="/docs/integrations/ios-integration">
+              <img alt="iOS" className="imageShow" loading="lazy" src={stackIos} />
+            </Link>
+          </Col>
+          <Col span={4} align="middle">
+            <Link to="/docs/integrations/node-integration">
+              <img alt="Node" className="imageShow" loading="lazy" src={stackNode} />
+            </Link>
+          </Col>
+          <Col span={22} offset={1}>
+            <img alt="shelf-2" className="imageShow" loading="lazy" src={shelf2}/>
+          </Col>
+        </Row>
+        <Row className="gutter-row" gutter={24} justify="space between" align="bottom">
+          <br/>
+          <br/>
+          <Col span={4} offset={2} align="middle">
+            <Link to="/docs/integrations/ruby-integration">
+              <img alt="Ruby" className="imageShow" loading="lazy" src={stackRuby} />
+            </Link>
+          </Col>
+          <Col span={4}align="middle">
+            <Link to="/docs/integrations/gatsby-integration">
+              <img alt="Gatsby" className="imageShow" loading="lazy" src={stackGatsby} />
+            </Link>
+          </Col>
+          <Col span={4} align="middle">
+            <Link to="/docs/integrations/js-integration">
+              <img alt="Javascript" className="imageShow" loading="lazy" src={stackJavascript}/>
+            </Link>
+          </Col>
+          <Col span={4} align="middle">
+            <Link to="/docs/integrations/go-integration">
+              <img alt="Go" className="imageShow" loading="lazy" src={stackGo} />
+            </Link>
+          </Col>
+          <Col span={4} align="middle">
+            <Link to="/docs/integrations/api">
+              <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
+            </Link>
+          </Col>
+          <Col span={22} offset={1} >
+            <img alt="shelf-lower-1" className="imageShow" loading="lazy" src={shelfLower1}/>
+          </Col>
+        </Row>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
+        </Col>
+      </Row>
+      </div>
+      <Row>
+        <Col span={24}>
+          <div className="lightBlueBreak"></div>
+        </Col>
+      </Row>
+      <div style={{maxWidth: 960, padding: '0px 1.0875rem 1.45rem', margin: "0 auto"}}>
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
+        </Col>
+      </Row>
+
       <Row gutter={[24, 8]}>
-        <Col span={24} className="header-row" align="middle">
+        <Col span={24} align="middle">
           <h2>PostHog for Enterprise</h2>
-        </Col>
-        <Col span={8} className="gutter-row" align="middle">
-          <h3>Self-managed</h3>
-          <p>
-            PostHog can be deployed in your cloud, for painless adoption and
-            onboarding.
-          </p>
-        </Col>
-        <Col span={8} className="gutter-row" align="middle">
-          <h3>Unlimited volume</h3>
-          <p>
-            PostHog is built to scale. That includes our open core pricing
-            model.
-          </p>
-        </Col>
-        <Col span={8} className="gutter-row" align="middle">
-          <h3>Support</h3>
-          <p>
-            PostHog can manage your deployment on your infrastructure. All the
-            benefits of self-hosting with the reliability and scalability of the
-            cloud.
-          </p>
+          <br/>
         </Col>
       </Row>
-      <Row gutter={[24, 24]} justify="center">
-        <Col span={24} className="header-row" align="middle">
-          <h2>Install now, free</h2>
+      <Row gutter={24}>
+        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+          <Row gutter={24}>
+            <Col xs={10} sm={10} md={24} lg={24} xl={24}>
+              <img alt="enterprise-01" loading="lazy" src={enterprise01} className="imageShow"/>
+              <br/>
+            </Col>
+            <Col xs={14} sm={14} md={24} lg={24} xl={24}>
+            <h4>Self-managed</h4>
+            <br/>
+            <hr className="blueLine2"/>
+            <p>
+              PostHog can be deployed in your cloud, for painless adoption and
+              onboarding.
+            </p>
+            <br/>
+            </Col>
+          </Row>
         </Col>
-        <Link to="/docs/deployment">
-          <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
-            <img
-              alt="Deploy on Heroku"
-              className="hover-shadow"
-              src={installHeroku}
-            />
-          </Col>
-        </Link>
-        <Link to="docs/deployment#docker">
-          <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
-            <img
-              alt="Deploy on Docker"
-              className="hover-shadow"
-              src={installDocker}
-            />
-          </Col>
-        </Link>
-        <Link to="docs/deployment#aws-ecs-fargate">
-          <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
-            <img
-              alt="Deploy on AWS"
-              className="hover-shadow"
-              src={installAws}
-            />
-          </Col>
-        </Link>
-        <Link to="docs/deployment#helm-charts-and-kubernetes">
-          <Col xs={12} sm={12} md={6} lg={6} xl={6} align="middle">
-            <img
-              alt="Deploy on Kubernetes"
-              className="hover-shadow"
-              src={installKubernetes}
-            />
-          </Col>
-        </Link>
+        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+          <Row gutter={24}>
+            <Col xs={10} sm={10} md={24} lg={24} xl={24}>
+              <img alt="enterprise-02" loading="lazy" src={enterprise02} className="imageShow"/>
+              <br/>
+            </Col>
+            <Col xs={14} sm={14} md={24} lg={24} xl={24}>
+              <h4>Unlimited volume</h4>
+              <br/>
+              <hr className="redLine2"/>
+              <p>
+                PostHog is built to scale. That includes our open core pricing
+                model.
+              </p>
+              <br/>
+            </Col>
+          </Row>`
+        </Col>
+        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+          <Row gutter={24}>
+            <Col xs={10} sm={10} md={24} lg={24} xl={24}>
+              <img alt="enterprise-03" loading="lazy" src={enterprise03} className="imageShow"/>
+              <br/>
+            </Col>
+            <Col xs={14} sm={14} md={24} lg={24} xl={24}>
+              <h4>Support</h4>
+              <br/>
+              <hr className="yellowLine2"/>
+              <p>
+                PostHog can manage your deployment on your infrastructure. All the
+                benefits of self-hosting with the reliability and scalability of the
+                cloud.
+              </p>
+              <br/>
+            </Col>
+          </Row>`
+        </Col>
+      </Row>
+      <Row gutter={[24,8]}>
+        <Col span={22} offset={1}>
+          <div className="installNow">
+            <div className="installNowImg">
+              <Link to="/docs/deployment">
+                <div className="heroku">
+                  <img
+                    alt="Deploy on Heroku"
+                    src={installHeroku}
+                  />
+                </div>
+              </Link>
+              <Link to="/docs/deployment#docker">
+                <div className="docker">
+                  <img
+                    alt="Deploy on Docker"
+                    src={installDocker}
+                  />
+                </div>
+              </Link>
+              <Link to="docs/deployment#aws-ecs-fargate">
+                <div className="aws">
+                  <img
+                    alt="Deploy on AWS"
+                    src={installAws}
+                  />
+                </div>
+              </Link>
+              <Link to="docs/deployment#helm-charts-and-kubernetes">
+                <div className="kubernetes">
+                  <img
+                    alt="Deploy on Kubernetes"
+                    src={installKubernetes}
+                  />
+                </div>
+              </Link>
+            </div>
+            <img alt="install-now-free-1" loading="lazy" src={installNowFree1} className="imageShow"/>
+          </div>
+        </Col>
+      </Row>
+
+      <Row gutter={[24, 24]} justify="center">
         <Col span={24} align="middle">
           <p>
             ... or start a{' '}
@@ -293,6 +439,13 @@ function IndexPage() {
           </p>
         </Col>
       </Row>
+      </div>
+      <Row>
+        <Col span={24}>
+          <div className="darkBreak"></div>
+        </Col>
+      </Row>
+      <div style={{maxWidth: 960, padding: '0px 1.0875rem 1.45rem', margin: "0 auto"}}>
       <Row gutter={[24, 24]}>
         <Col span={24} className="header-row" align="middle">
           <h2>Join the community</h2>
@@ -332,6 +485,7 @@ function IndexPage() {
           </Link>
         </Col>
       </Row>
+      </div>
     </Layout>
   )
 }

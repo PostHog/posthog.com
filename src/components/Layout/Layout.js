@@ -27,6 +27,7 @@ class Layout extends Component {
       sidebarHide,
       anchorHide,
       className,
+      containerStyle={}
     } = this.props
 
     return (
@@ -96,6 +97,7 @@ class Layout extends Component {
                               onPostPage={onPostPage}
                               className={className}
                               style={{ position: 'relative' }}
+                              containerStyle={containerStyle}
                             >
                               {children}
                             </Container>
@@ -124,6 +126,7 @@ class Layout extends Component {
                           onPostPage={onPostPage}
                           className={className}
                           style={{ position: 'relative' }}
+                          containerStyle={containerStyle}
                         >
                           {children}
                         </Container>
@@ -144,6 +147,7 @@ class Layout extends Component {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  containerStyle: PropTypes.object,
 }
 
 const mapStateToProps = state => {
