@@ -6,25 +6,26 @@ import { Link } from 'gatsby'
 import posthogComputerRetro4 from '../images/posthog-computer-retro-4.png'
 import hogflix1 from '../images/hogflix-1.png'
 import dashboards1 from '../images/dashboards-1.png'
-import funnels1 from '../images/funnels-1.png'
+import funnels1 from '../images/funnels-1.svg'
 import featureFlags1 from '../images/feature-flags-1.png'
 import threeComputers1 from '../images/three-computers-1.png'
 import enterprise01 from '../images/enterprise-01.png'
 import enterprise02 from '../images/enterprise-02.png'
 import enterprise03 from '../images/enterprise-03.png'
+import selfHostedData1 from '../images/self-hosted-data-1.svg'
 import installNowFree1 from '../images/install-now-free-1.svg'
 import shelfLower1 from '../images/shelf-lower-1.svg'
 import shelf2 from '../images/shelf-2.svg'
-import stackAndroid from '../images/stack-android.png'
-import stackPython from '../images/stack-python.png'
-import stackIos from '../images/stack-ios.png'
-import stackNode from '../images/stack-node.png'
-import stackPhp from '../images/stack-php.png'
-import stackRuby from '../images/stack-ruby.png'
-import stackGatsby from '../images/stack-gatsby.png'
-import stackJavascript from '../images/stack-javascript.png'
-import stackGo from '../images/stack-go.png'
-import stackApi from '../images/stack-api.png'
+import stackAndroid from '../images/stack-android.svg'
+import stackPython from '../images/stack-python.svg'
+import stackIos from '../images/stack-ios.svg'
+import stackNode from '../images/stack-node.svg'
+import stackPhp from '../images/stack-php.svg'
+import stackRuby from '../images/stack-ruby.svg'
+import stackGatsby from '../images/stack-gatsby.svg'
+import stackJavascript from '../images/stack-javascript.svg'
+import stackGo from '../images/stack-go.svg'
+import stackApi from '../images/stack-api.svg'
 import installHeroku from '../images/install-heroku.svg'
 import installDocker from '../images/install-docker.svg'
 import installAws from '../images/install-aws.svg'
@@ -121,25 +122,19 @@ function IndexPage() {
       
       {/*02 - Understand how traffic really flows through your app*/}
       <Row gutter={24} justify="space-between">
-        <Col xs={0} sm={0} md={4} lg={4} xl={4}>
-        </Col>
+        <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
         <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-          <h2 className="redHead">02</h2>
-        </Col>
+          <h2 className="redHead">02</h2></Col>
         <Col xs={20} sm={20} md={14} lg={14} xl={14}>
           <h3>Understand how traffic really flows through your app</h3>
-          <hr className="redLine"/>
-        </Col>
-        <Col xs={0} sm={0} md={3} lg={3} xl={3}>
-        </Col>
+          <hr className="redLine"/></Col>          
+        <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
       </Row>
       <Row>
-        <Col xs={0} sm={0} md={2} lg={2} xl={2}>
-        </Col>
-        <Col xs={0} sm={0} md={20} lg={20} xl={20}>
+        <Col xs={0} sm={0} md={24} lg={24} xl={24}>
+          <br/>
+          <br/>
           <img alt="funnels-1" loading="lazy" src={funnels1}/>
-        </Col>
-        <Col xs={0} sm={0} md={2} lg={2} xl={2}>
         </Col>
       </Row>
       
@@ -156,9 +151,9 @@ function IndexPage() {
           <h2 className="blueHead">03</h2>
         </Col>
         <Col xs={18} sm={18} md={9} lg={9} xl={9}>
-          <h3>Visualise product trends and retention</h3>
+          <h3>Visualize product trends and retention</h3>
           <hr className="blueLine"/>
-          <p>Some explaination here about event autocapture, how the code is imput in once and then ready to go?</p>
+          <p>Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
         </Col>
         <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
         <Col xs={0} sm={0} md={10} lg={10} xl={10}>
@@ -215,7 +210,7 @@ function IndexPage() {
           <h3>Use feature flags to test new ideas</h3>
           <hr className="redLine"/>
           <br/>
-          <p>Some explaination here about event autocapture, how the code is imput in once and then ready to go?</p>
+          <p>Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
         </Col>
       </Row>
       
@@ -234,90 +229,90 @@ function IndexPage() {
         </Col>
       </Row>
       <div className="yourStack">
-        <Row className="gutter-row" gutter={24} justify="space-between" align="middle">
-          <Col span={4} offset={2} align="middle">
+        <Row justify="space-between" align="bottom">
+          <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/python-integration">
               <img alt="Python" className="imageShow" loading="lazy" src={stackPython} />
             </Link>
           </Col>
-          <Col span={4} align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/php-integration">
               <img alt="PHP" className="imageShow" loading="lazy" src={stackPhp} />
             </Link>
           </Col>
-          <Col span={4} align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/android-integration">
               <img alt="Android" className="imageShow" loading="lazy" src={stackAndroid} />
             </Link>
           </Col>
-          <Col span={4} align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/ios-integration">
               <img alt="iOS" className="imageShow" loading="lazy" src={stackIos} />
             </Link>
           </Col>
-          <Col span={4} align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/node-integration">
               <img alt="Node" className="imageShow" loading="lazy" src={stackNode} />
             </Link>
           </Col>
-          <Col span={22} offset={1}>
+          <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
+        </Row>
+        <Row justify="space-between" align="top">
+          <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <img alt="shelf-2" className="imageShow" loading="lazy" src={shelf2}/>
           </Col>
+          <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
         </Row>
-        <Row className="gutter-row" gutter={24} justify="space between" align="bottom">
-          <br/>
-          <br/>
-          <Col span={4} offset={2} align="middle">
+        <br/>
+        <br/>
+
+        <Row justify="space-between" align="bottom">
+          <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/ruby-integration">
               <img alt="Ruby" className="imageShow" loading="lazy" src={stackRuby} />
             </Link>
           </Col>
-          <Col span={4}align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/gatsby-integration">
               <img alt="Gatsby" className="imageShow" loading="lazy" src={stackGatsby} />
             </Link>
           </Col>
-          <Col span={4} align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/js-integration">
               <img alt="Javascript" className="imageShow" loading="lazy" src={stackJavascript}/>
             </Link>
           </Col>
-          <Col span={4} align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/go-integration">
               <img alt="Go" className="imageShow" loading="lazy" src={stackGo} />
             </Link>
           </Col>
-          <Col span={4} align="middle">
+          <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/api">
               <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
             </Link>
           </Col>
-          <Col span={22} offset={1} >
+          <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
+        </Row>
+        <Row justify="space-between" align="top">
+          <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <img alt="shelf-lower-1" className="imageShow" loading="lazy" src={shelfLower1}/>
           </Col>
+          <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
         </Row>
       </div>
-      
-      
-      
-      
-      
-      
-      
-      
+
       {/*component space */}
       <Row>
         <Col span={24}>
         <div className="componentSpace"></div>
         </Col>
       </Row>
-      </div>
-      <Row>
-        <Col span={24}>
-          <div className="lightBlueBreak"></div>
-        </Col>
-      </Row>
-      <div style={{maxWidth: 960, padding: '0px 1.0875rem 1.45rem', margin: "0 auto"}}>
+      
       {/*component space */}
       <Row>
         <Col span={24}>
@@ -325,6 +320,7 @@ function IndexPage() {
         </Col>
       </Row>
 
+    {/* posthog for enterprise */}
       <Row gutter={[24, 8]}>
         <Col span={24} align="middle">
           <h2>PostHog for Enterprise</h2>
@@ -388,8 +384,37 @@ function IndexPage() {
           </Row>`
         </Col>
       </Row>
+
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
+        </Col>
+      </Row>
+
+      {/* self-hosted full data*/}
+      <Row gutter={24}>
+        <Col xs={24} sm={24} md={14} lg={14} xl={14}>
+          <h3>Self host available, <br/> with full underlying data access</h3>
+          <br/>
+          <hr className="blueLine"/>
+        </Col>
+        <Col xs={0} sm={0} md={10} lg={10} xl={10}>
+          <img alt="self-hosted-data-1" loading="lazy" src={selfHostedData1}/>
+        </Col>
+      </Row>
+      
+      {/*component space */}
+      <Row>
+        <Col span={24}>
+        <div className="componentSpace"></div>
+        </Col>
+      </Row>
+
+      {/* Install now, free*/}
       <Row gutter={[24,8]}>
-        <Col span={22} offset={1}>
+        <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
+        <Col xs={24} sm={24} md={22} lg={22} xl={22}>
           <div className="installNow">
             <div className="installNowImg">
               <Link to="/docs/deployment">
@@ -428,6 +453,7 @@ function IndexPage() {
             <img alt="install-now-free-1" loading="lazy" src={installNowFree1} className="imageShow"/>
           </div>
         </Col>
+        <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
       </Row>
 
       <Row gutter={[24, 24]} justify="center">

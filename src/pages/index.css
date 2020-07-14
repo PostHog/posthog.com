@@ -2,8 +2,12 @@
     border-bottom: none;
 }
 
+img {
+    margin-bottom: 0;
+}
+
 .firstSpace {
-    margin-top: 6rem;
+    margin-top: 8rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -29,7 +33,7 @@
 }
 
 .thirdSpace {
-    margin-top: 12rem;
+    margin-top: 10rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -39,7 +43,7 @@
   }
 
 .componentSpace {
-    margin-top: 6rem;
+    margin-top: 8rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -171,11 +175,11 @@ h3 {
     border-radius: 12px;
     border: 1.375px solid #35416B;
     background-color: #FFFFFF;
+
 }
 
-.installNowImg img:hover{
-    background-color: #FFFFFF;
-    opacity: 50%;
+.installNowImg img:hover {
+    opacity: 70%
 }
 
 .heroku {
@@ -192,7 +196,6 @@ h3 {
 
 .docker {
     left: calc((100% - 24px) * 0.3392 + 12px);
-    /* rgab(0, 0, 0, 0.1) */
 }
 
 .docker img {
