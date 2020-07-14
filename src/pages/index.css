@@ -173,7 +173,7 @@ h3 {
     width: calc((100% - 24px) * 0.135);
     top: calc((100% - 8px) * 0.4535 + 4px);
     border-radius: 12px;
-    border: 1.375px solid #35416B;
+    border: 1.5px solid #35416B;
     background-color: #FFFFFF;
 
 }
@@ -232,6 +232,21 @@ h3 {
     vertical-align: bottom;
 }
 
+.hover-shadow{
+    border-radius: 18%;
+    transition: 0.15s ease-in-out all;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 0px
+  }
+
+  .hover-shadow:hover{
+    -webkit-box-shadow: 0 8px 20px rgba(143,168,191,.35);
+    box-shadow: 0 8px 20px rgba(143,168,191,.35);
+    cursor: pointer;
+    color:#1890ff;
+  }
 .subtitle {
     font-size: 16px;
 }

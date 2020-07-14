@@ -32,6 +32,9 @@ import installAws from '../images/install-aws.svg'
 import installKubernetes from '../images/install-kubernetes.svg'
 import communityGithub from '../images/community-github.png'
 import communitySlack from '../images/community-slack.png'
+import githubButton1 from '../images/github-button-1.svg'
+import slackButton1 from '../images/slack-button-1.svg'
+import roadmapButton1 from '../images/roadmap-button-1.svg'
 import { Row, Col, Icon } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
@@ -395,6 +398,7 @@ function IndexPage() {
       {/* self-hosted full data*/}
       <Row gutter={24}>
         <Col xs={24} sm={24} md={14} lg={14} xl={14}>
+          <div className="secondSpace"></div>
           <h3>Self host available, <br/> with full underlying data access</h3>
           <br/>
           <hr className="blueLine"/>
@@ -477,32 +481,28 @@ function IndexPage() {
           <h2>Join the community</h2>
         </Col>
       </Row>
-      <Row span={21} gutter={[24, 24]}>
+      <Row gutter={24} justify="spaceBetween">
+      <Col xs={8} sm={8} md={6} lg={6} xl={6}>
+          <a href="https://github.com/posthog/posthog">
+            <img alt="GitHub" src={githubButton1} loading="lazy" className="hover-shadow imageShow" />
+          </a>
+        </Col>
         <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
-        <a href="https://github.com/posthog/posthog">
-          <Col xs={8} sm={8} md={6} lg={6} xl={6} align="middle">
-            <img alt="GitHub" src={communityGithub} className="hover-shadow" />
-          </Col>
-        </a>
-        <a href="https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ">
-          <Col xs={8} sm={8} md={6} lg={6} xl={6} align="middle">
-            <img alt="Slack" src={communitySlack} className="hover-shadow" />
-          </Col>
-        </a>
-        <Link to="/handbook/strategy/roadmap">
-          <Col xs={8} sm={8} md={6} lg={6} xl={6} align="middle">
-            <Icon
-              type="project"
-              theme="filled"
-              className="hover-shadow icon-100"
-            />
-          </Col>
-        </Link>
+        <Col xs={8} sm={8} md={6} lg={6} xl={6}>
+          <a href="https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ">
+            <img alt="Slack" src={slackButton1} loading="lazy" className="hover-shadow imageShow" />
+          </a>
+        </Col>
         <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
+        <Col xs={8} sm={8} md={6} lg={6} xl={6}>
+          <Link to="/handbook/strategy/roadmap">
+            <img alt="RoadMap" src={roadmapButton1} loading="lazy" className="hover-shadow imageShow"/>
+          </Link>
+        </Col>
       </Row>
       <Row gutter={[24, 96]}>
-        <Col span={24} className="gutter-row header-row" align="middle">
-          <h2>What's new?</h2>
+        <Col span={24} className="gutter-row header-row" >
+          <h2 className="yellowHead">What's new?</h2>
           <p>Version 1.10.1</p>
           <Link to="blog/the-posthog-array-1-10-0">
             <Button type="information" size="large">
