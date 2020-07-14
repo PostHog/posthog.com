@@ -223,6 +223,7 @@
     "entry":"Growth",
     "name":"Growth",
     "items":[
+      "handbook/growth/sales",
       "handbook/growth/what-is-product-led-growth",
       "handbook/growth/posthog-array"
     ]

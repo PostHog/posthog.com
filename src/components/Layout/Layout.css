@@ -757,6 +757,7 @@ h6:hover .post-toc-anchor
 
 a.middle { display: block; text-align: center }
 
+
 .ant-btn-primary { 
   background-color: #2542B9 !important;
   border-color: #2542B9 !important;
@@ -766,3 +767,7 @@ a.middle { display: block; text-align: center }
   border-color: #2542B9 !important;
   color: #2542B9 !important;
 }
+
+.task-list-item { list-style: none; margin-left: -1.45rem; }
+.task-list-item > input { margin-right: 0.25rem; }
+.task-list-item ul li { margin-left: 0;}
