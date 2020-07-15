@@ -33,3 +33,4 @@ All libraries can send custom events, update user properties, identify users and
 
 - [Slack](/docs/integrations/slack)
 - [Microsoft Teams](/docs/integrations/microsoft-teams)
+- [Message Formatting](/docs/integrations/message-formatting)

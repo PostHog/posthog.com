@@ -110,6 +110,7 @@
     "items":[
       "docs/integrations/slack",
       "docs/integrations/microsoft-teams"
+      "docs/integrations/message-formatting"
     ]
   },
   {
