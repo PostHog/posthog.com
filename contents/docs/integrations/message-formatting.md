@@ -36,4 +36,4 @@ By default, the message format is
 - `device_id`: ID of user's device.
 - `screen_width`: width of user's screen.
 - `screen_height`: height of user's screen.
-- `initial_referrer`: user's previously visited HREF (`$direct` for direct visits).
+- `initial_referrer`: domain user visited before Event (`$direct` for direct visits).
