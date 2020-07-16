@@ -772,3 +772,7 @@ h6:hover .post-toc-anchor
 }
 
 a.middle { display: block; text-align: center }
+
+.task-list-item { list-style: none; margin-left: -1.45rem; }
+.task-list-item > input { margin-right: 0.25rem; }
+.task-list-item ul li { margin-left: 0;}

@@ -22,7 +22,7 @@ In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) depl
 
 2. Run the following:
 
-> _NOTE: If helm hangs while installing, try **increasing the memory** of your nodes_
+> _NOTE: If helm hangs while installing, try **increasing the memory** of your nodes._
 > As a baseline, we suggest having at least *4gb of memory per node*
 
 ```shell script

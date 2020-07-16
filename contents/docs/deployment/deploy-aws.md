@@ -59,11 +59,3 @@ To update follow these steps:
 1. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
 
 You can find more details on Amazon's docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html)
-
-### Upgrading from before 3 March 2020?
-
-If you last updated PostHog before 3 March 2020, AND you have a lot of events, there is one migration (0027) that might take a long time.
-
-To avoid this, _before_ you migrate, run `python manage.py migrate_elementgroup` to pre-migrate elements across.
-
-If you only have a few thousand events, you probably don't need to worry about this.

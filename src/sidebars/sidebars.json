@@ -55,7 +55,6 @@
       "docs/features/events",
       "docs/features/feature-flags",
       "docs/features/funnels",
-      "docs/features/feature-flags",
       "docs/features/inviting-your-team",
       "docs/features/live-actions",
       "docs/features/log-in-with-github-gitlab",
@@ -228,6 +227,7 @@
     "entry":"Growth",
     "name":"Growth",
     "items":[
+      "handbook/growth/sales",
       "handbook/growth/what-is-product-led-growth",
       "handbook/growth/posthog-array"
     ]
