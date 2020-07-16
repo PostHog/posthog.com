@@ -76,7 +76,7 @@ function IndexPage() {
               </Button>
             </a>
             <div className="secondSpace"></div>
-            <h2 className="yellowHead">Open source product analytics</h2>
+            <h2 className="yellowText">Open source product analytics</h2>
             <p>
               PostHog provides a full product analytics UX. Analyze trends, funnels, retention and cohorts.
             </p>
