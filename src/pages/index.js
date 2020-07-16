@@ -3,15 +3,15 @@ import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import './index.css'
 import { Link } from 'gatsby'
-import posthogComputerRetro4 from '../images/posthog-computer-retro-4.png'
-import hogflix1 from '../images/hogflix-1.png'
-import dashboards1 from '../images/dashboards-1.png'
+import posthogComputerRetro from '../images/posthog-computer-retro.svg'
+import hogflix1 from '../images/hogflix-1.svg'
+import dashboards1 from '../images/dashboards-1.svg'
 import funnels1 from '../images/funnels-1.svg'
-import featureFlags1 from '../images/feature-flags-1.png'
-import threeComputers1 from '../images/three-computers-1.png'
-import enterprise01 from '../images/enterprise-01.png'
-import enterprise02 from '../images/enterprise-02.png'
-import enterprise03 from '../images/enterprise-03.png'
+import featureFlags1 from '../images/feature-flags-1.svg'
+import threeComputers from '../images/three-computers.svg'
+import enterprise01 from '../images/enterprise-01.svg'
+import enterprise02 from '../images/enterprise-02.svg'
+import enterprise03 from '../images/enterprise-03.svg'
 import selfHostedData1 from '../images/self-hosted-data-1.svg'
 import installNowFree1 from '../images/install-now-free-1.svg'
 import shelfLower1 from '../images/shelf-lower-1.svg'
@@ -30,15 +30,12 @@ import installHeroku from '../images/install-heroku.svg'
 import installDocker from '../images/install-docker.svg'
 import installAws from '../images/install-aws.svg'
 import installKubernetes from '../images/install-kubernetes.svg'
-import communityGithub from '../images/community-github.png'
-import communitySlack from '../images/community-slack.png'
 import githubButton1 from '../images/github-button-1.svg'
 import slackButton1 from '../images/slack-button-1.svg'
 import roadmapButton1 from '../images/roadmap-button-1.svg'
-import { Row, Col, Icon } from 'antd'
+import { Row, Col } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
-import { RightCircleFilled, LeftCircleFilled } from '@ant-design/icons';
 
 
 function IndexPage() {
@@ -55,7 +52,7 @@ function IndexPage() {
         </Col>
       </Row>
       
-      <Row align="top">
+      <Row align="top" style={{marginBottom: '12rem'}}>
         <Col xs={24} sm={18} md={12} lg={12} xl={12} className="gutter-row">
           <h1 className="largeHeader" align="top">
             Understand <br className="hiddenHeadBreak"/>your users.
@@ -85,145 +82,110 @@ function IndexPage() {
             </p>
         </Col>
         <Col xs={0} sm={0} md={12} lg={12} xl={12} className="gutter-row">
-          <img alt="posthog-computer-retro-4" loading="lazy" src={posthogComputerRetro4}/>
-        </Col>
-      </Row>
-      <Row>
-        <Col span={24}>
-        <div className="thirdSpace"></div>
+          <img alt="posthog-computer-retro" loading="lazy" src={posthogComputerRetro}/>
         </Col>
       </Row>
       
       {/*01 - It all starts with event autocapture*/}
-      <Row justify="space-between">
-        <Col xs={0} sm={0} md={11} lg={11} xl={11}>
-          <img alt="hogflix-1" loading="lazy" src={hogflix1}/>
-        </Col>
-        <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
-        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-          <br/>
-          <br/>
-          <h2 className="yellowHead numberHead">01</h2>
-        </Col>
-        <Col xs={17} sm={17} md={9} lg={9} xl={9}>
-          <br/>
-          <br/>
-          <h2>It all starts with event autocapture</h2>
-          <hr className="yellowLine"/>
-          <br/>
-          <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
-        </Col>
-        <Col xs={3} sm={3} md={0} lg={0} xl={0}></Col>
-      </Row>
+      <div className="redBackground">
+        <Row justify="space-between">
+          <Col xs={0} sm={0} md={12} lg={12} xl={12}>
+            <img alt="hogflix-1" loading="lazy" src={hogflix1} />
+          </Col>
+          <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
+          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+            <h2 className="yellowText numberHead">01</h2>
+          </Col>
+          <Col xs={17} sm={17} md={8} lg={8} xl={8}>
+            <h2 className="blueText">It all starts with event autocapture</h2>
+            <hr className="yellowLine"/>
+            <br/>
+            <p className="blueText">PostHog autocaptures events and user behavior in your mobile or web app.</p>
+          </Col>
+          <Col xs={3} sm={3} md={0} lg={0} xl={0}></Col>
+        </Row>
+      </div>
 
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
-      
       {/*02 - Understand how traffic really flows through your app*/}
-      <Row justify="space-between" align="middle">
-        <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
-        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-          <h2 className="redHead numberHead">02</h2></Col>
-        <Col xs={20} sm={20} md={14} lg={14} xl={14}>
-          <h2>Understand how traffic really flows through your app</h2>
-          <hr className="redLine"/></Col>          
-        <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
-      </Row>
-      <Row>
-        <Col xs={0} sm={0} md={24} lg={24} xl={24}>
-          <br/>
-          <br/>
-          <img alt="funnels-1" loading="lazy" src={funnels1}/>
-        </Col>
-      </Row>
-      
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
+      <div className="whiteBackground">
+        <Row justify="space-between">
+          <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
+          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+            <h2 className="redHead numberHead">02</h2></Col>
+          <Col xs={20} sm={20} md={14} lg={14} xl={14}>
+            <h2>Understand how traffic really flows through your app</h2>
+            <hr className="redLine"/></Col>          
+          <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
+        </Row>
+        <Row>
+          <Col xs={0} sm={0} md={24} lg={24} xl={24}>
+            <br/>
+            <br/>
+            <img alt="funnels-1" loading="lazy" src={funnels1}/>
+          </Col>
+        </Row>
+      </div>
       
       {/*03 - Understand how traffic really flows through your app*/}
-      <Row justify="space-between">
-        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-          <h2 className="blueHead numberHead">03</h2>
-        </Col>
-        <Col xs={18} sm={18} md={9} lg={9} xl={9}>
-          <h2>Visualize product trends and retention</h2>
-          <hr className="blueLine"/>
-          <p>Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
-        </Col>
-        <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
-        <Col xs={0} sm={0} md={10} lg={10} xl={10}>
-          <img alt="dashboards-1" src={dashboards1}/>
-        </Col>
-        <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
-      </Row>
-
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
+      <div className="blueBackground">
+        <Row justify="space-between">
+          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+            <h2 className="blueText numberHead">03</h2>
+          </Col>
+          <Col xs={18} sm={18} md={9} lg={9} xl={9}>
+            <h2 className="whiteHead">Visualize product trends and retention</h2>
+            <hr className="blueLine"/>
+            <p className="whiteHead">Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
+          </Col>
+          <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
+          <Col xs={0} sm={0} md={11} lg={11} xl={11}>
+            <img alt="dashboards-1" src={dashboards1}/>
+          </Col>
+          <Col xs={2} sm={2} md={0} lg={0} xl={0}></Col>
+        </Row>
+      </div>
 
       {/*04 - Improve conversion rates*/}
-      <Row gutter={24} justify="space-between">
-        <Col xs={0} sm={0} md={5} lg={5} xl={5}></Col>
-        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-          <h2 className="yellowHead numberHead">04</h2>
-        </Col>
-        <Col xs={20} sm={20} md={12} lg={12} xl={12}>
-          <h2>Improve conversion rates</h2>
-          <hr className="yellowLine"/>
-        </Col>
-        <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
-      </Row>
-      <Row justify="space-between">
-        <Col span={24}>
-        <img alt="three-computers-1" loading="lazy" src={threeComputers1}/>
-        </Col>
-      </Row>
-
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
+      <div className="whiteBackground">
+        <Row>
+          <Col xs={0} sm={0} md={5} lg={5} xl={5}></Col>
+          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+            <h2 className="yellowText numberHead">04</h2>
+          </Col>
+          <Col xs={20} sm={20} md={12} lg={12} xl={12}>
+            <h2>Improve conversion rates</h2>
+            <hr className="yellowLine"/>
+          </Col>
+          <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
+        </Row>
+        <Row justify="space-between">
+          <Col span={24}>
+          <img alt="three-computers-1" loading="lazy" src={threeComputers}/>
+          </Col>
+        </Row>
+      </div>
       
       {/*05 - Use feature flags to test new ideas*/}
-      <Row justify="space-between">
-        <Col xs={0} sm={0} md={12} lg={12} xl={12}>
-          <img alt="feature-flags-1" loading="lazy" src={featureFlags1}/>
-        </Col>
-        <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-          <br/>
-          <br/>
-          <h2 className="redHead numberHead">05</h2>
-        </Col>
-        <Col xs={20} sm={20} md={9} lg={9} xl={9}>
-          <br/>
-          <br/>
-          <h2>Use feature flags to test new ideas</h2>
-          <hr className="redLine"/>
-          <br/>
-          <p>Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
-        </Col>
-      </Row>
-      
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
+      <div className="yellowBackground">
+        <Row justify="space-between">
+          <Col xs={0} sm={0} md={12} lg={12} xl={12}>
+            <img alt="feature-flags-1" loading="lazy" src={featureFlags1}/>
+          </Col>
+          <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
+          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
+            <h2 style={{marginTop: '1rem'}} className="redText numberHead">05</h2>
+          </Col>
+          <Col xs={20} sm={20} md={8} lg={8} xl={8}>
+            <h2 style={{marginTop: '1rem'}}>Use feature flags <br/>to test new ideas</h2>
+            <hr className="redLine"/>
+            <br/>
+            <p>Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
+          </Col>
+        </Row>
+      </div>
 
+      {/*Designed for your Stack */}
+      <div className="whiteBackground">
       <Row className="gutter-row" justify="center" align="middle">
         <Col span={24} className="gutter-row" justify="center" align="middle">
           <h3 align="middle">
@@ -232,7 +194,7 @@ function IndexPage() {
         </Col>
       </Row>
       <div className="yourStack" align="bottom">
-        <Row justify="space-between" align="bottom" style={{padding: '0px'}}>
+        <Row justify="space-between" align="bottom">
           <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
           <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/python-integration">
@@ -272,7 +234,7 @@ function IndexPage() {
         <br/>
         <br/>
       <div className="yourStack" align="bottom">
-        <Row justify="space-between" align="bottom" style={{padding: '0px'}}>
+        <Row justify="space-between" align="bottom">
           <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
           <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
             <Link to="/docs/integrations/ruby-integration">
@@ -309,15 +271,10 @@ function IndexPage() {
           </Col>
           <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
         </Row>
-
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
+    </div>
 
     {/* posthog for enterprise */}
+    <div className="redBackground">
       <Row>
         <Col span={24} align="middle">
           <h3>PostHog for Enterprise</h3>
@@ -386,18 +343,12 @@ function IndexPage() {
           </Row>`
         </Col>
       </Row>
-
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
+    </div>
 
       {/* self-hosted full data*/}
-      <Row>
+      <Row style={{marginTop: '4rem'}}>
         <Col xs={24} sm={24} md={14} lg={14} xl={14}>
-          <h3>Self host available, <br/> with full underlying data access</h3>
+          <h3 style={{marginTop: '6rem'}}>Self host available, <br/> with full underlying data access</h3>
           <br/>
           <hr className="blueLine"/>
         </Col>
@@ -405,16 +356,9 @@ function IndexPage() {
           <img alt="self-hosted-data-1" loading="lazy" src={selfHostedData1}/>
         </Col>
       </Row>
-      
-      {/*component space */}
-      <Row>
-        <Col span={24}>
-        <div className="componentSpace"></div>
-        </Col>
-      </Row>
 
       {/* Install now, free*/}
-      <Row>
+      <Row style={{marginTop: '4rem'}}>
         <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
         <Col xs={24} sm={24} md={22} lg={22} xl={22}>
           <div className="installNow">
@@ -467,13 +411,8 @@ function IndexPage() {
           </p>
         </Col>
       </Row>
-    </div>
-      <Row>
-        <Col span={24}>
-          <div className="darkBreak"></div>
-        </Col>
-      </Row>
-      <div style={{maxWidth: 960, padding: '0px 1.0875rem 1.45rem', paddingBottom: '0', margin: "0 auto"}}>
+
+      {/*join the community*/}
       <Row>
         <Col span={24} className="header-row" align="middle">
           <h2>Join the community</h2>
