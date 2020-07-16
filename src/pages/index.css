@@ -2,6 +2,30 @@
     border-bottom: none;
 }
 
+.ant-btn-primary { 
+  background-color: #2542B9 !important;
+  border-color: #2542B9 !important;
+}
+
+.ant-btn-primary:hover { 
+    opacity: 70%;
+  }
+
+.ant-btn-secondary {
+  border-color: #2542B9 !important;
+  color: #2542B9 !important;
+}
+
+.ant-btn-secondary:hover {
+    opacity: 70%;
+  }
+
+.indexContainer .ant-row {
+    max-width: 960px;
+    padding: 0px 1.0875rem 1.45rem;
+    margin: 0 auto;
+}
+
 img {
     margin-bottom: 0;
 }
@@ -66,13 +90,10 @@ img {
 }
 
 h2 {
-    font-weight: 500;
-    font-size: 1.5rem;
+    color: #595959;
 }
 
 h3 {
-    font-weight: 500;
-    font-size: 2rem;
     color: #595959;
 }
 
@@ -86,6 +107,10 @@ h3 {
 
 .blueHead {
     color: #2542B9;
+}
+
+.numberHead {
+    font-size: 1.38316rem;
 }
 
 .yellowLine {
@@ -159,6 +184,9 @@ h3 {
    
 }
 
+.yourStack img:hover {
+    opacity: 70%;
+}
 
 .installNow img {
     width: 100%;

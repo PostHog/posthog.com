@@ -757,12 +757,3 @@ h6:hover .post-toc-anchor
 
 a.middle { display: block; text-align: center }
 
-.ant-btn-primary { 
-  background-color: #2542B9 !important;
-  border-color: #2542B9 !important;
-}
-
-.ant-btn-secondary {
-  border-color: #2542B9 !important;
-  color: #2542B9 !important;
-}
