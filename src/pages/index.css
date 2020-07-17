@@ -1,4 +1,4 @@
-.index-page h1, .index-page h2 {
+.indexPage h1, .indexPage h2 {
     border-bottom: none;
 }
 
@@ -38,25 +38,31 @@
 
 .redBackground {
     background-color: rgba(249,97,50,.2);
-    margin: 2rem 0;
-    padding-top: 4rem;
+    margin: 0;
+    padding: 4rem 0 0;
 }
 
 .blueBackground {
     background-color: rgba(53,65,107,.2);
-    margin: 2rem 0;
+    margin: 0;
     padding: 4rem 0 1.45rem;
 }
 
 .yellowBackground {
     background-color: rgba(247,165,1,.2);
-    margin: 2rem 0;
-    padding: 4rem 0 1.45rem;
+    margin: 0;
+    padding: 4rem 0 0;
 }
 
 .whiteBackground {
-    margin: 2rem 0;
-    padding: 2rem 0 1.45rem;
+    margin: 0;
+    padding: 4rem 0;
+}
+
+@media screen and (max-width: 768px) {
+    .whiteBackground {
+        padding: 4rem 0 0;
+    }
 }
 
 img {
@@ -125,10 +131,6 @@ h3 {
 
 .blueText {
     color: #353F6F;
-}
-
-.whiteHead {
-    color: #FFFFFF;
 }
 
 .numberHead {

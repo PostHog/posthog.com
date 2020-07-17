@@ -40,7 +40,7 @@ import Layout from '../components/Layout'
 
 function IndexPage() {
   return (
-    <Layout containerStyle={{maxWidth: "auto", padding: 0}} className="index-page">
+    <Layout containerStyle={{maxWidth: "auto", padding: 0}} className="indexPage">
       <div className="indexContainer">
       <SEO
         title="PostHog - open source product analytics"
@@ -109,19 +109,22 @@ function IndexPage() {
       {/*02 - Understand how traffic really flows through your app*/}
       <div className="whiteBackground">
         <Row justify="space-between">
-          <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
+          <Col xs={0} sm={0} md={2} lg={2} xl={2}></Col>
           <Col xs={4} sm={4} md={3} lg={3} xl={3}>
             <h2 className="redHead numberHead">02</h2></Col>
-          <Col xs={20} sm={20} md={14} lg={14} xl={14}>
+          <Col xs={20} sm={20} md={19} lg={19} xl={19}>
             <h2>Understand how traffic really flows through your app</h2>
             <hr className="redLine"/></Col>          
-          <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
+        </Row>
+        <Row justify="space-between">
+          <Col xs={4} sm={4} md={5} lg={5} xl={5}></Col>
+          <Col xs={20} sm={20} md={19} lg={19} xl={19}>
+            <p>Know the pageviews and actions of every user in your app or on your website.</p>
+          </Col>
         </Row>
         <Row>
           <Col xs={0} sm={0} md={24} lg={24} xl={24}>
-            <br/>
-            <br/>
-            <img alt="funnels-1" loading="lazy" src={funnels1}/>
+            <img alt="funnels-1" loading="lazy" src={funnels1} style={{paddingTop: '2rem'}}/>
           </Col>
         </Row>
       </div>
@@ -133,9 +136,9 @@ function IndexPage() {
             <h2 className="blueText numberHead">03</h2>
           </Col>
           <Col xs={18} sm={18} md={9} lg={9} xl={9}>
-            <h2 className="whiteHead">Visualize product trends and retention</h2>
+            <h2>Visualize product trends and retention</h2>
             <hr className="blueLine"/>
-            <p className="whiteHead">Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
+            <p>Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
           </Col>
           <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
           <Col xs={0} sm={0} md={11} lg={11} xl={11}>
@@ -157,10 +160,14 @@ function IndexPage() {
             <hr className="yellowLine"/>
           </Col>
           <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
+          <Col xs={4} sm={4} md={8} lg={8} xl={8}></Col>
+          <Col xs={20} sm={20} md={12} lg={12} xl={12}>
+            <p>Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.</p>
+          </Col>
         </Row>
         <Row justify="space-between">
           <Col span={24}>
-          <img alt="three-computers-1" loading="lazy" src={threeComputers}/>
+          <img alt="three-computers-1" loading="lazy" src={threeComputers} style={{paddingTop: '2rem'}}/>
           </Col>
         </Row>
       </div>
@@ -176,10 +183,10 @@ function IndexPage() {
             <h2 style={{marginTop: '1rem'}} className="redText numberHead">05</h2>
           </Col>
           <Col xs={20} sm={20} md={8} lg={8} xl={8}>
-            <h2 style={{marginTop: '1rem'}}>Use feature flags <br/>to test new ideas</h2>
+            <h2 style={{marginTop: '1rem'}} className="blueText">Use feature flags <br/>to test new ideas</h2>
             <hr className="redLine"/>
             <br/>
-            <p>Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
+            <p className="blueText">Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
           </Col>
         </Row>
       </div>
@@ -290,7 +297,7 @@ function IndexPage() {
               <br/>
             </Col>
             <Col xs={1} sm={1} md={0} lg={0} xl={0}></Col>
-            <Col xs={14} sm={14} md={24} lg={24} xl={24}>
+            <Col xs={14} sm={14} md={24} lg={24} xl={24} style={{padding: '0 5%'}}>
             <h4>Self-managed</h4>
             <br/>
             <hr className="blueLine2"/>
@@ -310,7 +317,7 @@ function IndexPage() {
               <br/>
             </Col>
             <Col xs={1} sm={1} md={0} lg={0} xl={0}></Col>
-            <Col xs={14} sm={14} md={24} lg={24} xl={24}>
+            <Col xs={14} sm={14} md={24} lg={24} xl={24} style={{padding: '0 6%'}}>
               <h4>Unlimited volume</h4>
               <br/>
               <hr className="redLine2"/>
@@ -330,7 +337,7 @@ function IndexPage() {
               <br/>
             </Col>
             <Col xs={1} sm={1} md={0} lg={0} xl={0}></Col>
-            <Col xs={14} sm={14} md={24} lg={24} xl={24}>
+            <Col xs={14} sm={14} md={24} lg={24} xl={24} style={{padding: '0 6%'}}>
               <h4>Support</h4>
               <br/>
               <hr className="yellowLine2"/>
