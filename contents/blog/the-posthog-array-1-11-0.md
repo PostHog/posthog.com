@@ -8,12 +8,11 @@ hideAnchor: true
 ---
 
 
-
 Annotations, filtering all functionality by cohorts, retention table filtering and many, many bugfixes. It's all in this PostHog update.
 
 If you're self hosting and want these features - [update your PostHog](/docs/deployment/upgrading-posthog).
 
-Please also update your `posthog-js` version to at least `1.2.4` if you have it installed via NPM. If you're using the snippet, you're good to go!  
+Please also update your `posthog-js` version to at least `1.3.4` if you have it installed via NPM. If you're using the snippet, you're good to go!  
 
 ## Release notes
 
@@ -25,15 +24,22 @@ Digging through git commits to find out what changed to make the graphs go hay-w
 
 ### Cohort filters
 
+![](../images/cohort-filter.png)
+
 Anywhere you can filter, you can now filter on cohorts as well. The first contribution by our newest member of the team, Michael!
 
 ### Retention table filtering
+
+
+![](../images/retention-filter.png)
 
 We added retention the retention table last week but we're not done with it yet. This week [Kacppian](https://github.com/Kacppian), a fervent contributor, added filtering, which combined with the cohort filtering is very powerful.
 
 We'll be adding more improvements in the next release!
 
 ### Many toolbar fixes.
+
+![heatmap](../images/casts/heatmap.gif)
 
 As we talked about last week, we've opened the toolbar for beta access. The toolbar will give you things like heatmaps and stats, right on your own website.
 
@@ -48,8 +54,6 @@ Thanks for [the feedback on our feedback ticket](https://github.com/PostHog/post
 * Moves total to the bottom of the pie chart to fix z-index issues [readability while developing](https://github.com/PostHog/posthog/pull/1179)
 * Fix an issue with [filtering on the event type](https://github.com/PostHog/posthog/pull/1168)
 * Add Typescript to the [PostHog frontend codebase](https://github.com/PostHog/posthog/pull/1157)
-Dashboard API Tests (#1153)
-fix deleting dashboard (#1152)
 * Fix the ability to [delete dashboards](https://github.com/PostHog/posthog/pull/1152)
 * Add support [for LZ-String compression](https://github.com/PostHog/posthog/pull/1058)
 * [Use Black for Python formatting](https://github.com/PostHog/posthog/pull/1136)
