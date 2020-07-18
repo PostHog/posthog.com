@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Official PostHog NodeJS library to capture and send events to any PostHog instance (including posthog.com).
+Official PostHog NodeJS Library to capture and send events to any PostHog instance (including posthog.com).
 
 This library uses an internal queue to make calls non-blocking and fast. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
