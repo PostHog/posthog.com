@@ -14,6 +14,7 @@ class Container extends Component {
       sidebarHide,
       anchorHide,
       className,
+      containerStyle={}
     } = this.props
 
     return (
@@ -27,6 +28,7 @@ class Container extends Component {
               !sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)
                 ? 20
                 : 0,
+            ...containerStyle
           }}
         >
           {this.props.children}
