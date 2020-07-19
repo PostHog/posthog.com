@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/posthog/posthog-python) for the Posthog Python Library. This is an optional library you can install if you're working with Python. This page of the Docs refers specifically to the Posthog Python library.
+[Click here](https://github.com/posthog/posthog-python) for the Posthog Python Library. This is an optional library you can install if you're working with Python. 
 
-Official PostHog Python library to capture and send events to any PostHog instance (including PostHog.com).
+This page of the Docs refers specifically to the Official PostHog Python Library to capture and send events to any PostHog instance (including posthog.com).
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
@@ -27,7 +27,7 @@ posthog.api_key = 'YOUR API KEY'
 posthog.host = 'https://posthog.[your domain].com'
 ```
 
-> **Note:** We do not recommend having the API key in plaintext. Setting it as an environment variable would be best.
+> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
 You can find your key in the /setup page in PostHog.
 
@@ -74,7 +74,7 @@ like segment users by these properties.
 
 An `identify` call requires:
 - `distinct id` which uniquely identifies your user
-- `properties` with a dict with any key: value pairs 
+- `properties` with a dict with any key:value pairs 
 
 For example:
 ```python
