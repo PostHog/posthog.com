@@ -47,7 +47,7 @@ Dashboards can be customized to suit your preferences.
 
 ### Dashboard Options
 
-By clickiing on the three dots on the top right corner of each Dashboard, you are able to access Dashboard options. Here, you can:
+By clicking on the three dots on the top right corner of each Dashboard, you are able to access Dashboard options. Here, you can:
 
 * 'View Graph': Takes you to the appropriate page in PostHog where the Dashboard is derived from
 * 'Rename': Give your dashboard any name you like
