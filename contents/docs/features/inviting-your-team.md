@@ -6,7 +6,7 @@ showTitle: true
 
 It is very easy to invite members of your team so they can view Dashboards, create Actions and Trend Graphs.
 
-## Inviting a new team member
+## Inviting a New Team Member
 
 Go to "Invite Your Team' box at the bottom left of the left hand navigation:
 
