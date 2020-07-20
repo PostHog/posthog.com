@@ -65,5 +65,13 @@ We can go even further with PostHog – to see which users were in this funnel, 
 
 From here, it’s easy to click an individual user, to see their entire Events history – all you have to do is click the provided link.
 
+## Important Note on Funnels
 
+It is important to note that funnels calculate the drop off percentage between steps based on unique users *only*.
+
+This means "action chains" are not calculated individually, but rather compiled based on a user's entire set of actions.
+
+For example, if User X did Step 1 of a certain funnel 5 times, but then only did Step 2 a single time, this will still be shown as 100% conversion between the steps, instead of 20%. 
+
+This happens because the conversion on that step for the user was 100%, even if the *individual conversion per action* was not.
 
