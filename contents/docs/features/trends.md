@@ -12,12 +12,12 @@ You can watch our two-minute Trends training videos here:
 <br>
 
 
-### Video: Setting up Trends Graph
+##### Video: Setting up Trends Graph
 <br>
 
 [![](http://img.youtube.com/vi/q39B-QAFZUI/0.jpg)](http://www.youtube.com/watch?v=q39B-QAFZUI)
 
-### Video: Filtering and Breakdown Trend Graphs
+##### Video: Filtering and Breakdown Trend Graphs
 <br>
 
 [![](http://img.youtube.com/vi/8IsCrLOpRCw/0.jpg)](http://www.youtube.com/watch?v=8IsCrLOpRCw) 
