@@ -167,7 +167,7 @@ class SidebarContents extends Component {
               inlineIndent={12}
               onOpenChange={this.onChangeExpandedKeys}
               style={{height: '100%'}}
-              theme='light'
+              theme='dark'
             >
               {loop(tree)}
             </Menu>

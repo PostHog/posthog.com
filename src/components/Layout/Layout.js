@@ -15,6 +15,7 @@ import Col from 'antd/lib/col'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
 
+
 class Layout extends Component {
   setPostPageState = state => {
     this.props.setPostPageState(state)
@@ -57,7 +58,7 @@ class Layout extends Component {
                   </Helmet>
                   <AntdLayout style={{ background: '#fff' }} theme="light">
                     <AntdLayout.Header
-                      style={{ background: '#fff' }}
+                      style={{ background: '#fff', padding: 0 }}
                       theme="light"
                     >
                       <Header
@@ -85,8 +86,8 @@ class Layout extends Component {
                           }}
                         >
                           {!sidebarHide && (
-                            <AntdLayout.Sider width={200} theme="light">
-                              <ResponsiveSidebar />
+                            <AntdLayout.Sider width={'20vw'} theme="dark">
+                              <ResponsiveSidebar style={{border: 'none'}}/>
                             </AntdLayout.Sider>
                           )}
                           <AntdLayout.Content

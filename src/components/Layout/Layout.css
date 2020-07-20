@@ -33,7 +33,7 @@ audio:not([controls]) {
   height: 0;
 }
 progress {
-  vertical-align: baseline;
+  vertical-align: fseline;
 }
 [hidden],
 template {
@@ -331,6 +331,7 @@ ul {
   margin-bottom: 1.45rem;
   list-style-position: outside;
   list-style-image: none;
+  background-color: #C4C4C4;
 }
 ol {
   margin-left: 1.45rem;
@@ -656,14 +657,39 @@ pre tt:after {
     vertical-align:middle;
 }
 
+header {
+  margin: 0;
+  padding: 0;
+}
+
+#logo {
+  margin: 0;
+  padding: 0;
+}
+
+.ant-layout-sider-children {
+  background-color: #C4C4C4;
+  color: #454545;
+}
+
+.ant-layout-sider-children li {
+  background-color: #C4C4C4;
+  color: #454545;
+}
+
+.ant-menu-submenu-title {
+  background-color: #C4C4C4;
+  color: #454545;
+}
+
 .footer-universal{
-  background: #29252C;
+  background: #353F6F;
   color: #FFF;
   position: relative;
   left: 0px;
   width: '100%';
   top: '100%';
-  margin-top:100px;
+  margin-top:0;
   padding-top: 40px;
   padding-bottom: 80px;
   height: 100%;

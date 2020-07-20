@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import Menu from '../Menu'
-import logo from '../../images/posthog-logo-150x29.svg'
+import logo from '../../images/posthog-logo-dark-grey.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
 
@@ -16,7 +16,8 @@ class Header extends Component {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          backgroundColor: 'white',
+          backgroundColor: '#fff',
+          padding: 0
         }}
       >
         <Link
@@ -27,7 +28,9 @@ class Header extends Component {
             textDecoration: 'none',
           }}
         >
-          <img alt="logo" src={logo} id="logo-image" />
+          <div style={{width: '20vw', backgroundColor: '#C4C4C4'}}>
+          <img alt="logo" src={logo} id="logo-image" style={{margin: '0 10%'}}/>
+          </div>
           
         </Link>
         <Menu sidebarDocked={sidebarDocked} />

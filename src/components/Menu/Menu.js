@@ -63,11 +63,11 @@ class Menu extends Component {
                         key={item.link || item.a}
                       >
                         {item.a ? (
-                          <a href={item.a} style={{ color: 'black' }}>
+                          <a href={item.a} style={{ color: '#595959' }}>
                             {item.name}
                           </a>
                         ) : (
-                          <Link to={item.link} style={{ color: 'black' }}>
+                          <Link to={item.link} style={{ color: '#595959' }}>
                             {item.name}
                           </Link>
                         )}
