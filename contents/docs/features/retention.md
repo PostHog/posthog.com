@@ -13,7 +13,7 @@ PostHog provides a Retention table to show you how many users return on subseque
 
 ## Accessing Retention Table
 
-1. Click 'Users' on the sidebar to reveal a dropdown menu.
+1. Click 'People' on the sidebar to reveal a dropdown menu.
 2. Click 'Retention'
 
 ## Uses
