@@ -26,6 +26,7 @@
     "items": [
       "docs/deployment",
       "docs/deployment/deploy-heroku",
+      "docs/deployment/deploy-digital-ocean",
       "docs/deployment/deploy-docker",
       "docs/deployment/deploy-kubernetes",
       "docs/deployment/deploy-aws",
