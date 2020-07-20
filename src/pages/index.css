@@ -10,7 +10,7 @@
 .ant-btn-primary:hover { 
     background-color: #353F6F;
     border-color: #353F6F;
-    opacity: 80% !important;
+    opacity: 0.8 !important;
   }
 
 .ant-btn-secondary {
@@ -21,7 +21,7 @@
 .ant-btn-secondary:hover {
     border-color: #353F6F;
     color: #353F6F;
-    opacity: 80% !important;
+    opacity: 0.8 !important;
   }
 
 .indexContainer .ant-row {
@@ -198,7 +198,7 @@ h3 {
 }
 
 .yourStack img:hover {
-    opacity: 70% !important;
+    opacity: 0.7 !important;
 }
 
 .installNow img {
@@ -220,7 +220,7 @@ h3 {
 }
 
 .installNowImg img:hover {
-    opacity: 70% !important;
+    opacity: 0.7 !important;
 }
 
 .heroku {
