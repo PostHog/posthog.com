@@ -56,6 +56,15 @@ PostHog does lots of things to make sure it doesn't capture any sensitive data f
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
 ```
+<br>
+
+#### Important Note on Autocapture
+
+While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
+
+As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
+
+If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/features/actions).
 
 ## Website vs App
 
