@@ -1,7 +1,306 @@
-.index-page h1, .index-page h2 {
+.indexPage h1, .indexPage h2 {
     border-bottom: none;
 }
 
+.ant-btn-primary { 
+  background-color: #353F6F;
+  border-color: #353F6F;
+}
+
+.ant-btn-primary:hover { 
+    background-color: #353F6F;
+    border-color: #353F6F;
+    opacity: 0.8;
+  }
+
+.ant-btn-secondary {
+  border-color: #353F6F;
+  color: #353F6F;
+}
+
+.ant-btn-secondary:hover {
+    border-color: #353F6F;
+    color: #353F6F;
+    opacity: 0.8;
+  }
+
+.indexContainer .ant-row {
+    max-width: 960px;
+    padding: 0 1.0875rem 0;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .indexContainer .ant-row {
+        padding-bottom: 1.45rem;
+    }
+}
+
+.redBackground {
+    background-color: rgba(249,97,50,.2);
+    margin: 0;
+    padding: 4rem 0 0;
+}
+
+.blueBackground {
+    background-color: rgba(53,65,107,.2);
+    margin: 0;
+    padding: 4rem 0 1.45rem;
+}
+
+.yellowBackground {
+    background-color: rgba(247,165,1,.2);
+    margin: 0;
+    padding: 4rem 0 0;
+}
+
+.whiteBackground {
+    margin: 0;
+    padding: 4rem 0;
+}
+
+@media screen and (max-width: 768px) {
+    .whiteBackground {
+        padding: 4rem 0 0;
+    }
+}
+
+img {
+    margin-bottom: 0;
+}
+
+.firstSpace {
+    margin-top: 8rem;
+}
+
+@media screen and (max-width: 768px) {
+    .firstSpace {
+        margin-top: 1rem;
+    }
+}
+
+.secondSpace {
+    margin-top: 4rem;
+}
+
+@media screen and (max-width: 768px) {
+    .secondSpace {
+        margin-top: 2rem;
+    }
+}
+
+.componentSpace {
+    margin-top: 4rem;
+    padding: 0px 1.0875rem 1.45rem;
+}
+
+@media screen and (max-width: 576px) {
+    .componentSpace{
+        padding: 0px;
+    }
+  }
+
+.largeHeader {
+    /*font-size: 44px;*/
+    font-weight: bold;
+    line-height: 54px;
+    color: #353F6F;
+}
+
+@media screen and (min-width: 576px) {
+    .hiddenHeadBreak {
+        display: none;
+    }
+}
+
+h2 {
+    color: #595959;
+}
+
+h3 {
+    color: #595959;
+}
+
+.yellowText {
+    color: #F9BD2B;
+}
+
+.redText {
+    color: #F54E00;
+}
+
+.blueText {
+    color: #353F6F;
+}
+
+.numberHead {
+    font-size: 1.38316rem;
+}
+
+.yellowLine {
+    width: 4rem;
+    height: 0px;
+    border: .2rem;
+    border-style: solid;
+    border-color:#F9BD2B;
+}
+
+.redLine {
+    width: 4rem;
+    height: 0px;
+    border: .2rem;
+    border-style: solid;
+    border-color:#F54E00;
+}
+
+.blueLine {
+    width: 4rem;
+    height: 0px;
+    border: .2rem;
+    border-style: solid;
+    border-color:#353F6F;
+}
+
+.yellowLine2 {
+    height: 0px;
+    width: 2rem;
+    border: .1rem;
+    border-style: solid;
+    border-color:#F9BD2B;
+}
+
+.redLine2 {
+    height: 0px;
+    width: 2rem;
+    border: .1rem;
+    border-style: solid;
+    border-color:#F54E00;
+}
+
+.blueLine2 {
+    height: 0px;
+    width: 2rem;
+    border: .1rem;
+    border-style: solid;
+    border-color:#353F6F;
+}
+
+@media screen and (max-width: 768px) {
+    img {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .imageShow {
+        display: grid;
+    }
+}
+.lightBlueBreak {
+    background: #1d4aff;
+    opacity: 0.07;
+    height: 10rem;
+}
+
+.darkBreak {
+    background: #C4C4C4;
+    height: 10rem;
+   
+}
+
+.yourStack img:hover {
+    opacity: 0.7;
+}
+
+.installNow img {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.installNowImg div{
+    position: absolute;
+    height: calc((100% - 8px) * 0.3378);
+    width: calc((100% - 24px) * 0.135);
+    top: calc((100% - 8px) * 0.4535 + 4px);
+    border-radius: 12px;
+    border: 1.5px solid #35416B;
+    background-color: #FFFFFF;
+
+}
+
+.installNowImg img:hover {
+    opacity: 0.7;
+}
+
+.heroku {
+    left: calc((100% - 24px) * 0.1422 + 12px);
+}
+
+.heroku img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+    vertical-align: middle;
+}
+
+.docker {
+    left: calc((100% - 24px) * 0.3392 + 12px);
+}
+
+.docker img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+}
+
+.aws {
+    left: calc((100% - 24px) * 0.5355 + 12px);
+}
+
+.aws img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+    margin-top: 30%;
+}
+
+.kubernetes {
+    left: calc((100% - 24px) * 0.7299 + 12px);
+}
+
+.kubernetes img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+}
+
+.yourStack img {
+    vertical-align: bottom;
+}
+
+.hover-shadow{
+    border-radius: 18%;
+    transition: 0.15s ease-in-out all;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 0px
+  }
+
+  .hover-shadow:hover{
+    -webkit-box-shadow: 0 8px 20px rgba(143,168,191,.35);
+    box-shadow: 0 8px 20px rgba(143,168,191,.35);
+    cursor: pointer;
+    color:#1890ff;
+  }
 .subtitle {
     font-size: 16px;
 }
+
+
