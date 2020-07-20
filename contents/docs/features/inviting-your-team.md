@@ -1,5 +1,5 @@
 ---
-title: Inviting your team
+title: Inviting Your Team
 sidebar: Docs
 showTitle: true
 ---
