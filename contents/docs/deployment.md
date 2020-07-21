@@ -6,8 +6,8 @@ showTitle: true
 
 ||||
 | :-- | :-: | --- | --- | --- |
-| [![](../../src/images/install-heroku.png)](#heroku) | [![](../../src/images/install-docker.png)](#docker-compose) | [![](../../src/images/install-kubernetes.png)](#helm-chart-kubernetes-installation) | [![](../../src/images/install-aws.png)](#aws-ecs-fargate) | [![](../../src/images/community-github.png)](#source-installation)
-| <a href="#heroku" class="middle">Heroku</a> | <a href="#docker-compose" class="middle">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle">AWS</a> | <a href="#source-installation" class="middle">Source</a> |
+| [![](../../src/images/install-heroku.png)](#heroku) | [![](../../src/images/install-docker.png)](#docker-compose) | [![](../../src/images/install-kubernetes.png)](#helm-chart-kubernetes-installation) | [![](../../src/images/install-aws.png)](#aws-ecs-fargate) | [![](../../src/images/install-linode.svg)](#linode) | [![](../../src/images/community-github.png)](#source-installation)
+| <a href="#heroku" class="middle">Heroku</a> | <a href="#docker-compose" class="middle">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle">AWS</a> |  <a href="#linode" class="middle">Linode</a> | <a href="#source-installation" class="middle">Source</a> |
 
 ## Heroku
 
@@ -99,6 +99,19 @@ Lets get started:
 1. Once deployment completes look under **Options** for the Publicly facing ELB Host
 
 **⚠️ You should review all of the parameters in the config and also you should _definitely_ setup for TLS. Once you have TLS setup for your ELB you should disable insecure access via HTTP by removing the evironment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploy the updated Task definition revision.**
+
+## Linode Installation
+
+We have a Linode StackScript available, which deploys and installs PostHog on any Linode running Ubuntu/Debian.
+
+1. Visit your Linode Dashboard and navigate to StackScripts.
+1. Click `Create New StackScript`.
+1. You may assign it any label (e.g. `PostHog`).
+1. Under `Target Images` you may select any version of Ubuntu or Debian (although we recommend using Ubuntu 20.04 LTS).
+1. Copy the contents of our [StackScript.sh](https://github.com/PostHog/deployment/tree/master/linode) into `Script`.
+1. Click `Save`.
+1. Click on your newly created PostHog StackScript and click `Deploy New Linode`.
+1. Once your Linode is created, you should be able to visit the server address in a web browser and see a working PostHog instance.
 
 ## Source installation
 
