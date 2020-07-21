@@ -22,7 +22,7 @@ It is dangerous to assume that because something is obvious to you, it will also
 
 **Use American English**
 
-PostHog is an American company. As a result, while our Documentation is only in one language, we would prefer to keep it consistent by using American spelling for words.
+PostHog is a a global company, with a team distributed across the world. As a result, to keep our communication consistent, we decided to use American spelling for our Documentation.
 
 **Use the Oxford comma for lists** 
 
