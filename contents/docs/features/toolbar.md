@@ -16,7 +16,7 @@ When enabled, the Toolbar will appear on your website (only for you, of course!)
 
 ## Uses
 
-Out Toolbar is a versatile feature that allows for:
+Our Toolbar is a versatile feature that allows for:
 <br>
 
 ### Inspecting Elements
