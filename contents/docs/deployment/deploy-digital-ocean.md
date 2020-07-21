@@ -41,7 +41,7 @@ If quick start did not work for you, do the following after logging in:
 
 <br>
 
-## Droplet Setup
+## Docker Install: Server Setup
 
 Once your droplet is up and running, SSH into it using the IP provided in your dashboard, like so:
 
