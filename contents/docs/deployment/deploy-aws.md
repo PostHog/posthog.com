@@ -12,7 +12,7 @@ Likewise, we maintain a CloudFormation [config](https://github.com/PostHog/deplo
 
 > If you're new to CloudFormations and want to learn more and how to use them, check out these [AWS Docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html).
 
-## Step By Step Installation
+## CloudFormation Install (Recommended)
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 
@@ -59,3 +59,25 @@ To update follow these steps:
 1. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
 
 You can find more details on Amazon's docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html)
+
+## AWS Marketplace Quick Install
+
+PostHog can be found on the AWS Marketplace. To deploy it, you just need to access the page and follow the steps to configure your instance.
+
+Here's a short step by step tutorial:
+
+0. Ensure you're logged in to AWS 
+1. Visit the [PostHog page on the AWS Marketplace](https://aws.amazon.com/marketplace/pp/B089QN5DZM?qid=1595331182232&sr=0-1&ref_=srh_res_product_title) and click 'Continue to Subscribe'
+2. You will be prompted with a page to review your subscription. The subscription to PostHog via AWS Marketplace is **free**, so the only thing you'll need to pay for are the AWS Resources you use with your PostHog instance.
+3. Once your subscription is ready, you should receive an email about it. You can then view all your subscriptions on the [Your Software page](https://aws.amazon.com/marketplace/library/)
+4. From the 'Your Software' page, you should now see PostHog. Click 'Launch Instance' on it. 
+5. This will prompt you with the configuration steps before you launch. You should fill this according to your preferences. Regarding the Instance Type, we recommend a config with about the following specs for a medium volume instance:
+    - 4GB of RAM
+    - 2 CPUs
+    - 50GB of storage
+
+However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. AWS suggests EC2 by default, which has a free tier available. This might be suitable for users not expecting to do heavy load analytics yet, as well as those with little website traffic. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
+6. Finish the configuration steps according to your personal preferences. Setting up security groups is probably a good idea.
+7. Launch the instance and you're all set!
+
+<br>
