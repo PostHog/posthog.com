@@ -110,9 +110,14 @@ However, this will vary based on the volume you're expecting. If you're expectin
 ```bash
 ssh ubuntu@<YOUR_IP>
 ```
-1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
-2. Install [Docker Compose](https://docs.docker.com/compose/install/)
-3. [Setup Docker to run without `sudo`](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+
+If you downloaded a new key during the creation of the Virtual Machine, you may need to run:
+```bash
+ssh -i path/to/your/key.pem <username>@<YOUR_IP>
+```
+1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
+2. Then install [Docker Compose](https://docs.docker.com/compose/install/)
+3. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
 4. Install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git
