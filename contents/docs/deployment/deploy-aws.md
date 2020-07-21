@@ -126,9 +126,8 @@ git clone https://github.com/posthog/posthog.git && cd posthog
 docker-compose up -d
 ```
 7. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
-<br>
+8. (Optional) Consider using something like [Supervisor](http://supervisord.org/introduction.html) to monitor the process
 
-> **Note:** You can run `docker-compose` without the `-d` flag if you want it to run on the current shell while printing logs. The `-d` flag instructs Docker Compose to run in dettached mode i.e. in the background.
 <br>
 
 ## Important Points

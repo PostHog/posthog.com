@@ -18,7 +18,12 @@ We currently have [three types of images](https://hub.docker.com/r/posthog/posth
 
 ## Step By Step Installation
 
-1. [Install Docker](https://docs.docker.com/installation/ubuntulinux/)
+If you are deploying with Docker on AWS or Digital Ocean, you can check our individual specific tutorials instead of following this generic tutorial.
+
+- [Docker Deployment on AWS](/docs/deployment/deploy-digital-ocean)
+- [Docker Deployment on Digital Ocean]
+
+1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 
 2. [Install Docker Compose](https://docs.docker.com/compose/install/)
 

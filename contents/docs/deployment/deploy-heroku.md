@@ -12,7 +12,7 @@ If you've never heard of Heroku or what it does, feel free to check out [this do
 
 ## Prerequisites
 
-- A [Heroku](https://signup.heroku.com/) account set up and verified *(it's free, don't worry :))*.
+- A [Heroku](https://signup.heroku.com/) account set up and verified *(it's free, don't worry :D)*.
     > _Although the deployment is free, ensure that your **credit card information** is entered in your profile. If not, the initial build will fail and prompt you to do so._
 
 ## Step By Step Installation

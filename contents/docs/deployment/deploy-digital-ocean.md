@@ -13,7 +13,7 @@ showTitle: true
 
 ### Deploying to Digital Ocean
 
-To deploy on Digital Ocean, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
+To deploy on Digital Ocean, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
 <br>
 
 ## Docker Install: Droplet Setup
@@ -104,10 +104,8 @@ git clone https://github.com/posthog/posthog.git && cd posthog
 docker-compose up -d
 ```
 3. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
+4. (Optional) Consider using something like [Supervisor](http://supervisord.org/introduction.html) to monitor the process
 
-<br>
-
-> **Note:** You can run `docker-compose` without the `-d` flag if you want it to run on the current shell while printing logs. The `-d` flag instructs Docker Compose to run in dettached mode i.e. in the background.
 <br>
 
 ## Important Points
