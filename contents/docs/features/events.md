@@ -56,6 +56,8 @@ The other advantage is that you won’t lose data. If you change your product a 
 
 While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
 
+Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags. 
+
 As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
 
 If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/features/actions).
