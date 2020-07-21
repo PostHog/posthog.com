@@ -20,8 +20,8 @@ We currently have [three types of images](https://hub.docker.com/r/posthog/posth
 
 If you are deploying with Docker on AWS or Digital Ocean, you can check our individual specific tutorials instead of following this generic tutorial.
 
-- [Docker Deployment on AWS](/docs/deployment/deploy-digital-ocean)
-- [Docker Deployment on Digital Ocean]
+- [Docker Deployment on AWS](/docs/deployment/deploy-aws)
+- [Docker Deployment on Digital Ocean](/docs/deployment/deploy-digital-ocean)
 
 1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 
