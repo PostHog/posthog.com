@@ -11,7 +11,7 @@ showTitle: true
 [Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running. 
 <br>
 
-## Deploying to Digital Ocean
+### Deploying to Digital Ocean
 
 To deploy on Digital Ocean, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
 <br>
@@ -79,7 +79,7 @@ sudo ls -la /root
 
 You're all set!
 
-###### Running Docker Without Sudo
+###### Running Docker Without Root Priviledges (Sudo)
 
 As it currently stands, we can only run Docker on the new user by using `sudo`. This is not necessarily a good idea. To allow Docker to run without `sudo` on a non-root user, check out [this tutorial by Docker](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
 
@@ -112,7 +112,7 @@ docker-compose up -d
 
 ## Important Points
 
-#### Never, Ever, Run PostHog Without TLS/SSL
+#### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
 PostHog needs to run on HTTPS because:
  
  a) It will fail<br>
@@ -133,14 +133,25 @@ sudo ufw status
 You can read [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04) for more information.
 <br>
 
+## Upgrading Docker on Digital Ocean
+
+See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
+<br>
 
 ## Useful Tutorials
 <br>
 
-#### Setting Up SSL on Digital Ocean with [NGINX](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04) or [Apache](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04)
-<br>
+#### - Setting Up SSL on Digital Ocean with [NGINX](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04) or [Apache](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04)
 
-#### [How to Add Domains to Digital Ocean Projects](https://www.digitalocean.com/docs/networking/dns/how-to/add-domains/)
+#### - [How to Add Domains to Digital Ocean Projects](https://www.digitalocean.com/docs/networking/dns/how-to/add-domains/)
+
+#### - [Suggested NGINX Configuration for PostHog](/docs/deployment/running-behind-proxy)
+
+#### - [Securing PostHog](/docs/deployment/securing-posthog)
+
+#### - [Scaling PostHog](/docs/deployment/scaling-posthog)
+
+
 
 
 

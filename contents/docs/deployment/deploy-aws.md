@@ -59,6 +59,8 @@ To update follow these steps:
 1. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
 
 You can find more details on Amazon's docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html)
+<br>
+
 
 ## AWS Marketplace Quick Install
 
@@ -81,3 +83,96 @@ However, this will vary based on the volume you're expecting. If you're expectin
 7. Launch the instance and you're all set!
 
 <br>
+
+## AWS Deployment with Docker
+
+If instead of using our CloudFormation config or AWS Marketplace app you would rather go through the deployment yourself, here's how to do it. We'll be using Docker for this tutorial but you could also [deploy from source](/docs/deployment/deploy-source) if you wanted to.
+
+#### EC2 Setup
+
+0. Ensure you're logged in to AWS 
+1. Access your [AWS EC2 Dashboard](https://console.aws.amazon.com/ec2/v2/home)
+2. Click the 'Launch Instance' button 
+3. Select your AMI. For this tutorial, we'll be using the _Ubuntu Server 18.04 LTS (HVM)_
+4. You will be prompted with a page to choose your instance type. We recommend a config with about the following specs for a medium volume instance:
+    - 4GB of RAM
+    - 2 CPUs
+    - 50GB of storage
+
+However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. EC2 has a free tier available and this might be suitable for users not expecting to do heavy load analytics yet, as well as those with little website traffic. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
+
+5. Click 'Review and Launch'
+6. Once your instance is live, you should get a notification. That means you're ready to move on to the next tutorial.
+
+#### Docker Installation
+
+0. SSH into your EC2 instance by using the IP provided on your console instead of `<YOUR_IP>`. On a terminal, this should look something like this:
+```bash
+ssh ubuntu@<YOUR_IP>
+```
+1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
+2. Install [Docker Compose](https://docs.docker.com/compose/install/)
+3. [Setup Docker to run without `sudo`](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+4. Install `git`:
+```bash
+sudo apt-get update && sudo apt-get install git
+```
+5. To clone the PostHog repository and enter the new directory, run: 
+```bash
+git clone https://github.com/posthog/posthog.git && cd posthog
+```
+6. Then, to run PostHog, do:
+```bash
+docker-compose up -d
+```
+7. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
+<br>
+
+> **Note:** You can run `docker-compose` without the `-d` flag if you want it to run on the current shell while printing logs. The `-d` flag instructs Docker Compose to run in dettached mode i.e. in the background.
+<br>
+
+## Important Points
+
+#### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
+PostHog needs to run on HTTPS because:
+ 
+ a) It will fail<br>
+ b) It is a **grave security concern and potentially illegal**
+
+#### Check Your Firewall/Security Group if You Cannot Connect to a Port
+
+If you are unable to connect to a certain port, this might be due to the firewall or security group settings for your droplet.
+
+##### Firewal Issues
+
+Generally, this is a matter of running:
+
+```bash
+sudo ufw allow <PORT> && sudo ufw reload
+```
+To check that the changes were applied, run: 
+```bash
+sudo ufw status
+```
+
+You can read [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04) for more information.
+
+##### Security Group Issues
+
+Here's a [good AWS Tutorial](https://aws.amazon.com/premiumsupport/knowledge-center/connect-http-https-ec2/) about this.
+
+<br>
+
+## Upgrading Docker on AWS
+
+See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
+<br>
+
+## Useful Tutorials
+<br>
+
+#### - [Suggested NGINX Configuration for PostHog](/docs/deployment/running-behind-proxy)
+
+#### - [Securing PostHog](/docs/deployment/securing-posthog)
+
+#### - [Scaling PostHog](/docs/deployment/scaling-posthog)
