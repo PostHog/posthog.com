@@ -12,7 +12,7 @@ The kind of ways Paths can be helpful are as follows:
 * Understand where traffic is quitting your application
 * Understand which parts of your application people are actually using
 
-We provide a visual representation of the paths taken by users on your product, so that you can easily identify these trends.
+We provide a visual representation of the paths taken by users on your product, so that you can easily identify these patterns.
 
 ## Viewing Paths
 
@@ -24,7 +24,7 @@ There is no set up in the PostHog UX needed for paths - they appear automaticall
 
 ## Filters
 
-In order to determine trends between groups of users who, at least in theory, may behave similarly, our Paths functionality also provides filtering. This way, you can visualize the overall paths taken by all your users, or sort them according to any filter you would prefer, including our built-in filters for OS, Browser, Time, IP, among many others.
+In order to determine patterns between groups of users who, at least in theory, may behave similarly, our Paths functionality also provides filtering. This way, you can visualize the overall paths taken by all your users, or sort them according to any filter you would prefer, including our built-in filters for OS, Browser, Time, IP, among many others.
 
 To use filters, just access your 'Paths' page on PostHog and you should be able to see a 'New Filter' option at the top of the page.
 

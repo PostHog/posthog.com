@@ -68,6 +68,7 @@ Choosing this option will open the following page where you can create your desi
 
 It is possible for an action to match multiple events. To do this, click ‘Add another match group’ when you are creating your action (see picture above).
 
+Actions with multiple events operate as **OR** operations. That means that an action like _"Clicked Read More Button" OR "Clicked More Information Button"_ will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
 
 ## Action Types
 
@@ -84,6 +85,11 @@ Page views can match urls containing a string or match exactly.
 #### Frontend Element
 
 Frontend Elements are actions based on some element on your website, such as a button or an input. The easiest way to select them is with the 'Inspect element on your site' functionality described above. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
+
+Our [Autocapture](/docs/features/integrations/js-integration#autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
+
+Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/features/integrations/js-integration#autocapture) for more details.
+
 <br>
 
 #### Custom Event
