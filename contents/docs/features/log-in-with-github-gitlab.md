@@ -6,7 +6,7 @@ showTitle: true
 
 If you want to make it really easy for your users to log in, you can add one-click login with GitHub or GitLab.
 
-# GitHub
+## GitHub
 
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
 
@@ -24,7 +24,7 @@ If you want to make it really easy for your users to log in, you can add one-cli
 
 > We don't support logging in with GitHub when setting up PostHog for the very first time.
 
-# GitLab
+## GitLab
 
 1. Go to `settings -> applications` in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>click here for GitLab.com</a>)
 
