@@ -1,6 +1,6 @@
 # PostHog.com - Docs, Website, and Handbook
 
-This is the repository for the new PostHog website, which includes our Docs and Handbook.
+This is the repository for the PostHog website, which includes our Docs and Handbook.
 
 Please feel free to suggest any changes. See our [contributing guide](CONTRIBUTING.md) for more information.
 
