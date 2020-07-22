@@ -1,5 +1,5 @@
 ---
-title: Live actions
+title: Live Actions
 sidebar: Docs
 showTitle: true
 ---
@@ -10,9 +10,9 @@ Get a sense in real time of how your Users are interacting with your site.
 
 This is a useful area for debugging.
 
-## Live Actions log
+## Live Actions Log
 
-To view this area, go to ‘Live actions’ in the left hand navigation:
+To view this area, go to ‘Live actions’ in the left-hand navigation:
 
 ![Left hand navigation - live actions selected](../../images/02/Screenshot-2020-02-09-at-16.32.37.png)
 
@@ -20,7 +20,7 @@ You will see a list of every action in real time.
 
 ![Actions log](../../images/02/Screenshot-2020-02-09-at-17.00.13.png)
 
-## Action filtering
+## Action Filtering
 
 It’s also possible to filter actions by the properties of the underlying events.
 

@@ -8,7 +8,7 @@ Getting a shiny, running production environment of PostHog is probably one the f
 
 ||||
 | :-- | :-: | --- | --- | --- |
-| [![](../../src/images/install-heroku.png)](/docs/deployment/deploy-heroku) | [![](../../src/images/install-docker.png)](/docs/deployment/deploy-docker) | [![](../../src/images/install-kubernetes.png)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/install-aws.png)](/docs/deployment/deploy-aws) | [![](../../src/images/community-github.png)](/docs/deployment/deploy-source)
+| [![](../../src/images/install-heroku.png)](/docs/deployment/deploy-heroku) | [![](../../src/images/install-docker.png)](/docs/deployment/deploy-docker) | [![](../../src/images/install-kubernetes.png)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/install-aws.png)](/docs/deployment/deploy-aws) | [![](../../src/images/github-logo.png)](/docs/deployment/deploy-source)
 | <a href="#heroku" class="middle">Heroku</a> | <a href="#docker-compose" class="middle">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle">AWS</a> | <a href="#source-installation" class="middle">Source</a> |
 
 ## **In this section:**
