@@ -1,19 +1,19 @@
-# PostHog.com - docs, website and handbook
+# PostHog.com - Docs, Website, and Handbook
 
-This is the new company website / docs and handbook.
+This is the repository for the PostHog website, which includes our Docs and Handbook.
 
-Please feel free to suggest any changes - see our contributing guide.
+Please feel free to suggest any changes. See our [contributing guide](CONTRIBUTING.md) for more information.
 
 ## Quick Start
 
-1. **Pre-installation**
+1. **Pre-Installation**
 
     Install [Node](https://nodejs.org/en/download/) and [GatsbyJS](https://www.gatsbyjs.org). GatsbyJS needs to be installed globally (see command below).
     ```sh
     npm install -g gatsby-cli
     ```
 
-1.  **Start developing**
+1.  **Start Developing**
 
     Clone the repo then navigate into your new site’s directory and start it up.
 
@@ -23,7 +23,7 @@ Please feel free to suggest any changes - see our contributing guide.
     gatsby develop
     ```
 
-1.  **Open the source code and start editing!**
+1.  **Open the Source Code and Start Editing!**
 
     Your site is now running at `http://localhost:8000`!
     
