@@ -1,5 +1,5 @@
 ---
-title: Deploying to Google Computing Services
+title: Deploying to Google Cloud
 sidebar: Docs
 showTitle: true
 ---

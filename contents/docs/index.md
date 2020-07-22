@@ -4,23 +4,23 @@ sidebar: Docs
 showTitle: true
 ---
 
-These docs explain how to use PostHog.
+<br>
+
+These Docs explain how to deploy, use, and contribute to PostHog.
 
 ## Philosophy
 
-We believe the era of 3rd party product analytics software will eventually come to end.
+We believe the era of third-party product analytics software will eventually come to end.
 
-We strongly believe 3rd party analytics don't work anymore in a world of Cookie laws, GDPR, CCPA and lots of other 4 letter acronyms. There should be an alternative to sending all of your customer's personal information and usage data to 3rd parties.
+In our view, third-party analytics does not work anymore in a world of Cookie Laws, GDPR, CCPA, and many other four-letter acronyms. There should be an alternative to sending all of your customers' personal information and usage data to third-parties like Google.
 
-PostHog gives you full control over all your customer's data, while being able to do powerful analytics.
+PostHog gives you full control over all the data from your users, while being able to do powerful analytics.
 
-We see lots of larger companies who can't send their data to 3rd party tracking services for cost or privacy reasons. They end up with a complex data pipeline into a data lake and then an analytics platform on top. Data analysts end up being the only people who understand it.
+We have seen multiple larger companies who cannot send their data to third-party tracking services for cost or privacy reasons. As a result, they end up with a complex data pipeline into a data lake with an analytics platform on top. Data analysts end up being the only people who understand it.
 
-We solve that - we let every person in the company have easy access to product analytics that they can understand and use independently, even at massive scale, and without sending data to 3rd parties.
+PostHog solves that. We let every person in the company have easy access to product analytics that they can understand and use independently, even at a massive scale, all without sending data to third-parties.
 
-## Getting started
-
-Note: If you want us to host it for you, or if you are a larger customer / would like premium features and want to get in touch, email sales@posthog.com (we can provide more support, user permissions, a/b testing, db integrations, audit logs, etc)
+## Getting Started
 
 There are four steps to follow next:
 
@@ -28,3 +28,7 @@ There are four steps to follow next:
 2. [Snippet installation](/docs/deployment/snippet-installation)
 3. [Actions configuration](/docs/features/actions)
 4. [Optional: user data integration](/docs/integrations)
+
+<br>
+
+**Note:** If you want us to host PostHog for you, are a larger customer, or would like access to premium features, feel free to get in touch with us via email at *sales@posthog.com*. On top of our main features, we are also able to provide personalized support, user permissions, A/B testing, database integrations, audit logs, among other features.
