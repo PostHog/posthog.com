@@ -2,7 +2,7 @@
 
 This is the repository for the PostHog website, which includes our Docs and Handbook.
 
-Please feel free to suggest any changes. See our [contributing guide](CONTRIBUTING.md) for more information.
+Please feel free to suggest any changes. See our [contributing guide](https://github.com/PostHog/posthog.com/blob/master/CONTRIBUTING.MD) for more information.
 
 ## Quick Start
 
