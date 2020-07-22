@@ -34,7 +34,9 @@ Example: Write "Redis server", not "redis server".
 
 **Capitalize acronyms**
 
-Example: Write "URLs", not "urls". Generally, try to avoid acronyms unless they're so common, it's weird not to. ie Hyper Text Transfer Protocol is a weird way to say HTTP.
+Example: Write "URLs", not "urls". 
+
+On another note, try to avoid acronyms unless they're so common that it's weird not to. For example, Hyper Text Transfer Protocol is a weird way to say HTTP.
 
 **Capitalize every word in a title (except for prepositions)**
 
