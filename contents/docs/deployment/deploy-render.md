@@ -30,6 +30,6 @@ Every service on Render includes:
 
 2. Follow the prompts to create an account if you haven't already and approve the creation of your Posthog services.
 
-    `Note: Because Posthog requires a higher tier plan, you will be asked to add a card. Charges for services will not be incurred until your free trial has expired.`
+    `Note: Because Posthog requires a higher tier plan, you will be asked to add a card. You won't be charged for your services until your trial ends.`
 
 3. That's it! Once your deploy has completed, you will be able to access your Posthog instance by going to the URL found on the service dashboard. 
