@@ -22,7 +22,7 @@ It is dangerous to assume that because something is obvious to you, it will also
 
 **Use American English**
 
-PostHog is a a global company, with a team distributed across the world. As a result, to keep our communication consistent, we decided to use American spelling for our Documentation.
+PostHog is a a global company, with a team distributed across the world. As a result, to keep our communication consistent, we use American spelling for our Documentation.
 
 **Use the Oxford comma for lists** 
 
@@ -34,7 +34,7 @@ Example: Write "Redis server", not "redis server".
 
 **Capitalize acronyms**
 
-Example: Write "URLs", not "urls".
+Example: Write "URLs", not "urls". Generally, try to avoid acronyms unless they're so common, it's weird not to. ie Hyper Text Transfer Protocol is a weird way to say HTTP.
 
 **Capitalize every word in a title (except for prepositions)**
 
