@@ -1,34 +1,34 @@
 ---
-title: Deploying to Microsoft Azure
+title: Deploying to Google Computing Services
 sidebar: Docs
 showTitle: true
 ---
 <br>
 
 
-## Why Azure
+## Why Google Computing Services
 
-[Microsoft Azure](https://azure.microsoft.com/) is one of the most well-established Cloud Providers. It offers a comprehensive dashboard with simple configuration, as well as an extensive Free Trial.
+[Google Computing Services](https://cloud.google.com/), also known as GCS or Google Cloud, is one of the most well-established Cloud Providers. GCS has a rather intuitive integrated dashboard, as well as an extensive Free Trial.
 <br>
 
-### Deploying to Azure
+### Deploying to GCS
 
-To deploy on Azure, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
+To deploy on Google Cloud, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
 <br>
 
 ## Docker Install: Virtual Machine Setup
 
-The first thing you'll need is a [Microsoft Azure account](https://azure.microsoft.com/en-gb/free/). Once you have that up and running, you're good to go!
+The first thing you'll need is a [GCS Account](https://console.cloud.google.com/freetrial). Once you have that up and running, you're good to go!
 <br>
 
 ### Step-By-Step
 
-1. Access your [Dashboard](https://portal.azure.com/#home)
-2. Click 'Virtual Machine' if it is available on the main screen. Otherwise, click 'Create a Resource' > 'Compute' > 'Virtual Machine'
-3. On the 'Virtual Machine' page, click 'Add' on the top right if you were not automatically taken to the creation page
-4. Set up your desired configuration. We'll be using the 'Ubuntu Server 18.04 LTS' image for this tutorial. 
+1. Access your [Console](https://console.cloud.google.com/)
+2. On the left-hand sidebar, head over to 'Compute' and hover over 'Compute Engine'. This should bring up a submenu where you can click 'VM Instances' at the top.
+3. On the 'VM Instances' page, click 'Create'
+4. Set up your desired configuration. We'll be using the 'Ubuntu 18.04' boot disk for this tutorial. The default on GCS is Debian, and you can change that by clicking 'Change' uder the 'Boot disk' section. 
 
-You may also want to enable ports 22, 80, and 443, for SSH, HTTP Traffic, and HTTPS Traffic respectively. It is recommended to set security preferences and allowed IPs for these ports. For this tutorial, you will also need the 'username' you create at this stage, so take note of that.
+You will also want to allow HTTP and HTTPS Traffic. It is recommended to set security preferences and allowed IPs for these ports. 
 
 Finally, for the server specifications, we recommend a config with about the following specs for a medium volume instance:
     - 4GB of RAM
@@ -37,19 +37,13 @@ Finally, for the server specifications, we recommend a config with about the fol
 
 However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
 
-5. Click 'Review + create' once you're done with the configuration steps
+5. Click 'Create' at the bottom once you're done with the configuration steps
 6. Once your instance is live, that means you're ready to move on to the next tutorial.
 
 #### Docker Installation
 
-0. SSH into your Virtual Machine by using the IP provided as a resource on your Virtual Machine Console. Use that IP instead of `<YOUR_IP>`, and run the following command on a terminal: 
-```bash
-ssh <username>@<YOUR_IP>
-```
-If you downloaded a new key during the creation of the Virtual Machine, you may need to run:
-```bash
-ssh -i path/to/your/key.pem <username>@<YOUR_IP>
-```
+On the page for your instance, you can choose how to access it. Clicking SSH will take you to a virtual terminal in your browser where you can interact with the virtual machine. However, you may want to SSH in from your own terminal. In this case, you need to follow [this tutorial](https://cloud.google.com/compute/docs/instances/connecting-advanced#provide-key) to provide you Public Key to the VM Instace.
+
 1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 2. Then install [Docker Compose](https://docs.docker.com/compose/install/)
 3. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
@@ -80,9 +74,9 @@ PostHog needs to run on HTTPS because:
 
 #### Check Your Firewall/Security Group if You Cannot Connect to a Port
 
-If you are unable to connect to a certain port, this might be due to the firewall or security group settings for your VM.
+If you are unable to connect to a certain port, this might be due to the firewall or security group settings for your VM Instance.
 
-##### Firewal Issues
+##### UFW Firewal Issues
 
 Generally, this is a matter of running:
 
@@ -96,9 +90,9 @@ sudo ufw status
 
 You can read [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04) for more information.
 
-##### Security Group Issues
+##### VPC Firewall Issues
 
-Here's a [good Azure Tutorial](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/nsg-quickstart-portal) about this.
+Here's a [good GCS Tutorial](https://cloud.google.com/vpc/docs/firewalls) about this.
 
 <br>
 

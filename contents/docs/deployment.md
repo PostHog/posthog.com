@@ -16,6 +16,7 @@ Getting a shiny, running production environment of PostHog is probably one the f
 - [Deploying to Heroku (easiest!)](/docs/deployment/deploy-heroku)
 - [Deploying to AWS](/docs/deployment/deploy-aws)
 - [Deploying to Digital Ocean](/docs/deployment/deploy-digital-ocean)
+- [Deploying to GCS](/docs/deployment/deploy-gcs)
 - [Deploying to Microsoft Azure](/docs/deployment/deploy-azure)
 - [Deploying with Docker](/docs/deployment/deploy-docker)
 - [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)

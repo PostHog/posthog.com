@@ -145,7 +145,7 @@ PostHog needs to run on HTTPS because:
 
 #### Check Your Firewall/Security Group if You Cannot Connect to a Port
 
-If you are unable to connect to a certain port, this might be due to the firewall or security group settings for your droplet.
+If you are unable to connect to a certain port, this might be due to the firewall or security group settings for your EC2 Instance.
 
 ##### Firewal Issues
 
