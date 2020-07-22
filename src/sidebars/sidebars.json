@@ -25,6 +25,7 @@
     "name":"Deployment",
     "items": [
       "docs/deployment",
+      "docs/deployment/deploy-render",
       "docs/deployment/deploy-heroku",
       "docs/deployment/deploy-docker",
       "docs/deployment/deploy-kubernetes",
