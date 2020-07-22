@@ -1,11 +1,13 @@
 ---
 date: 2020-07-22
-title: PostHog available on Segment!
+title: PostHog is Now Available on Segment!
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 ---
+
+We're happy to 
 
 Today, we're announcing that PostHog is available as a destination on Segment.
 Segment allows you to integrate event tracking in your app once, and then send those events to a wide variety of sources.
