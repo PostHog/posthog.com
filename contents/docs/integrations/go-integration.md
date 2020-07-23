@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-go) for the Posthog-Go library. This is the official PostHog Go library to capture and send events to any PostHog instance (including posthog.com).
+[Click here](https://github.com/PostHog/posthog-go) for the Posthog-Go Library. This is the official PostHog Go library to capture and send events to any PostHog instance (including posthog.com).
 
-This library uses an internal queue to make calls non-blocking and fast. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
+This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Usage
 
@@ -19,6 +19,7 @@ import (
 )
 
 func main() {
+    // Fetches POSTHOG_API_KEY from your environment variables. Make sure you have it set.
     client := posthog.New(os.Getenv("POSTHOG_API_KEY"))
     defer client.Close()
 
@@ -43,19 +44,19 @@ func main() {
 }
 ```
 
-## Making calls
+## Making Calls
 
 ### Capture
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve, or find out where people are giving up.
 
-A `capture` call requires
+A `capture` call requires:
 
 * `distinct id` which uniquely identifies your user
-* `event name` to make sure
-  * We recommend using [noun] [verb], like `movie played` or `movie updated` to easily identify what your events mean later on.
+* `event name` to specify the event
+  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
-Optionally you can submit
+Optionally you can submit:
 
 * `properties`, which can be an array with any information you'd like to add
 
@@ -72,12 +73,13 @@ client.Enqueue(posthog.Capture{
 
 ## Identify
 
-Identify lets you add metadata on your users so you can more easily identify who they are in PostHog, and even do things like segment users by these properties.
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+like segment users by these properties.
 
-An identify call requires
+An identify call requires:
 
 * `distinct id` which uniquely identifies your user
-* `properties` with a dict with any key: value pairs
+* `properties` with a dictionary of any key:value pairs you'd like to add
 
 For example:
 
@@ -94,7 +96,7 @@ The most obvious place to make this call is whenever a user signs up, or when th
 
 ### Alias
 
-To marry up whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
+To connect whatever a user does before they sign up or login with what they do after, you need to make an alias call. This will allow you to answer questions like "Which marketing channels lead to users churning after a month?" or "What do users do on our website before signing up?"
 
 In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
 
@@ -115,9 +117,9 @@ client.Enqueue(posthog.Alias{
   Alias: "user:12345"
 })
 ```
-### Sending page views
+### Sending Page Views
 
-If you're aiming for a full back-end implementation of PostHog, you can send page views from your backend
+If you're aiming for a full back-end implementation of PostHog, you can send page views from your backend, like so:
 
 ```go
 client.Enqueue(posthog.Capture{
@@ -128,6 +130,6 @@ client.Enqueue(posthog.Capture{
 })
 ```
 
-## Thank you
+## Thank You
 
-This library is largely based on the analytics-go package.
+This library is largely based on the `analytics-go` package.
