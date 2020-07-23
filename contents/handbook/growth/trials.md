@@ -51,8 +51,6 @@ The purpose of this call is to get the client as close to up and running as poss
 * If they have a web based app, we ought to be able to get autocapture up and running.
 * If they are on iOS or Android, getting at least some events coming in is a good goal to aim for, as it's then considerably less effort to get from there to more events coming in!
 
-#### Attendees
-
 If ahead of the call, the client has already installed everything succesfully, it can be to make sure the dashboards are working properly to help track the metrics needed.
 
 Otherwise, and most frequently, this call will be used to deploy PostHog using screensharing and to get events from the client's app sending into PostHog.
