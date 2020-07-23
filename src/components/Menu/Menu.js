@@ -33,25 +33,13 @@ class Menu extends Component {
         render={data => {
           const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
           return (
-            <div style={{ marginRight: 20 }}>
+            <div className="headerItems" style={{ marginRight: 20 }}>
               {sidebarDocked && (
                 <AntMenu
                   mode="horizontal"
                   style={{
                     borderBottomWidth: 0,
                   }}
-                  selectedKeys={
-                    typeof window !== 'undefined' &&
-                    menuItems.map(menuItem => {
-                      try {
-                        if (window.location.pathname === menuItem.link)
-                          return menuItem.link
-                      } catch (e) {
-                        console.log(e)
-                      }
-                      return []
-                    })
-                  }
                 >
                   {menuItems.reverse().map(item => {
                     return (
@@ -59,6 +47,7 @@ class Menu extends Component {
                         style={{
                           marginLeft: '2em',
                           float: 'right',
+                          marginBottom: 'calc(1.45rem / 2)'
                         }}
                         key={item.link || item.a}
                       >
@@ -79,7 +68,7 @@ class Menu extends Component {
               {!sidebarDocked && (
                 <Button
                   style={{
-                    color: 'cornflowerblue',
+                    color: 'red',
                   }}
                   type="link"
                   onClick={() => {

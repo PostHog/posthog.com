@@ -33,6 +33,7 @@ class SidebarContents extends Component {
       contentDir
     } = this.props.sidebar
 
+
     return (
       <StaticQuery
         query={graphql`
@@ -144,7 +145,7 @@ class SidebarContents extends Component {
                 if (item.path) {
                   return (
                     <Menu.Item key={item.key}>
-                      <Link to={item.path} onClick={this.onSetSidebarOpen}>{item.title}</Link>
+                      <Link to={item.path} onClick={this.onSetSidebarOpen} style={{float: 'left'}}>{item.title}</Link>
                     </Menu.Item>
                   )
                 }
@@ -163,11 +164,11 @@ class SidebarContents extends Component {
             <Menu 
               mode="inline"
               defaultOpenKeys={defaultOpenKeys}
-              selectedKeys={selectedKeys}
+              selectedKeys={[selectedKey]}
               inlineIndent={12}
               onOpenChange={this.onChangeExpandedKeys}
-              style={{height: '100%'}}
-              theme='dark'
+              style={{height: '100%', backgroundColor: '#F9F9F9'}}
+              theme='light'
             >
               {loop(tree)}
             </Menu>
