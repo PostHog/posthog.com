@@ -8,8 +8,8 @@ Getting a shiny, running production environment of PostHog is probably one the f
 
 ||||
 | :-- | :-: | --- | --- | --- |
-| [![](../../src/images/install-heroku.png)](/docs/deployment/deploy-heroku) | [![](../../src/images/install-docker.png)](/docs/deployment/deploy-docker) | [![](../../src/images/install-kubernetes.png)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/install-aws.png)](/docs/deployment/deploy-aws) | [![](../../src/images/community-github.png)](/docs/deployment/deploy-source)
-| <a href="#heroku" class="middle">Heroku</a> | <a href="#docker-compose" class="middle">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle">AWS</a> | <a href="#source-installation" class="middle">Source</a> |
+| [![](../../src/images/install-heroku.svg)](/docs/deployment/deploy-heroku) | [![](../../src/images/install-docker.svg)](/docs/deployment/deploy-docker) | [![](../../src/images/install-kubernetes.svg)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/install-aws.svg)](/docs/deployment/deploy-aws) | [![](../../src/images/community-github.svg)](/docs/deployment/deploy-source)
+| <a href="#heroku" class="middle yellow">Heroku</a> | <a href="#docker-compose" class="middle blue">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle red">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle yellow">AWS</a> | <a href="#source-installation" class="middle blue">Source</a> |
 
 ## **In this section:**
 

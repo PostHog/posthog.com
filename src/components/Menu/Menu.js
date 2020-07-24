@@ -44,6 +44,7 @@ class Menu extends Component {
                   {menuItems.reverse().map(item => {
                     return (
                       <AntMenu.Item
+                        className="headerKey"
                         style={{
                           marginLeft: '2em',
                           float: 'right',

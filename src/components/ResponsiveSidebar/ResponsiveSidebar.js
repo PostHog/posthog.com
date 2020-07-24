@@ -19,7 +19,7 @@ class ResponsiveSidebar extends Component {
       }} >           
         <div style={{
           marginLeft: 10,
-          marginRight: 'auto',
+          marginRight: 10,
         }}>
           <Link
             id="logo"
@@ -29,7 +29,7 @@ class ResponsiveSidebar extends Component {
             }}
           >
 
-              <img alt='logo' src={logo} id='logo-image' style={{width: 160, height: 'auto', top: 0, left: 40, marginTop: 17, marginBottom: 80}}/>
+              <img alt='logo' src={logo} id='logo-image' style={{width: 160, height: 'auto', top: 0, left: 40, marginTop: 14, marginBottom: 80}}/>
           </Link>
           <SidebarContents/>
         </div>

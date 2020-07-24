@@ -27,9 +27,10 @@ class Header extends Component {
           style={{
             //color: '#FFF',
             textDecoration: 'none',
+            verticalAlign: 'center'
           }}
         >
-          <img alt="logo" src={logo} id="logo-image" style={{top: 0, left: 0}}/>
+          <img alt="logo" src={logo} id="logo-image" />
           
         </Link>)}
         <Menu sidebarDocked={sidebarDocked} />

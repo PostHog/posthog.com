@@ -144,13 +144,14 @@ class SidebarContents extends Component {
               return root.children.map(item => {
                 if (item.path) {
                   return (
-                    <Menu.Item key={item.key}>
-                      <Link to={item.path} onClick={this.onSetSidebarOpen} style={{float: 'left'}}>{item.title}</Link>
+                    <Menu.Item key={item.key} className="keySelected">
+                      <Link className="keySelectedLink"to={item.path} onClick={this.onSetSidebarOpen} style={{float: 'left'}}>{item.title}</Link>
                     </Menu.Item>
                   )
                 }
                 return (
                   <SubMenu 
+                    className="submenuSelected"
                     key={item.key}
                     title={<span style={{fontWeight:750}}
                   >{item.title}</span>}>
