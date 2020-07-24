@@ -8,13 +8,13 @@ This is the dedicated events API, designed to help you push events into PostHog.
 
 ## Sending events
 
-To send events to PostHog, you can use any of our libraries OR any Mixpanel library by changing the api_host setting to `https://[your-instance].herokuapp.com/capture/`.
+To send events to PostHog, you can use any of our libraries **or** any Mixpanel library by changing the api_host setting to `https://[your-instance].herokuapp.com/capture/`.
 
 If you'd prefer to do the requests yourself, you can send events in the following format
 
 ## Single event
 
-Note: Timestamp is optional. If not set, it'll automatically be set to the current time.
+**Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
 ```
 POST https://[your-instance].herokuapp.com/capture/
@@ -34,9 +34,9 @@ Body:
 
 ## Batch events
 
-You can send multiple events in one go with the batch api
+You can send multiple events in one go with the Batch API.
 
-Note: Timestamp is optional. If not set, it'll automatically be set to the current time.
+**Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
 ```
 POST https://[your-instance].herokuapp.com/capture/
@@ -62,6 +62,6 @@ Body:
 
 ## Reading data from PostHog
 
-We have another set of APIs to read/modify anything in PostHog. See [api documentation.](/docs/api/api)
+We have another set of APIs to read/modify anything in PostHog. See our [API documentation](/docs/api/api) for more information.
 
-Also, feel free to reach out in [PostHog Users Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) if you'd like help with the API.
+Also, feel free to reach out in the [PostHog Users Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) if you'd like help with the API.
