@@ -28,7 +28,7 @@ We have a Linode StackScript available, which deploys and installs PostHog on an
 1. Navigate to your PostHog installation and click **Launch Console**.
 1. Once launched, enter your login information which may be as user: `root`.
 1. Run the PostHog **StackScript** in your home `~` directory.
-```
-./StackScript
-```
+    ```bash
+    ./StackScript
+    ```
 1. Exit Console and your instance should be updated to the latest PostHog release.
