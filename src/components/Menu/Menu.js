@@ -68,7 +68,7 @@ class Menu extends Component {
               {!sidebarDocked && (
                 <Button
                   style={{
-                    color: 'red',
+                    color: 'cornflowerblue',
                   }}
                   type="link"
                   onClick={() => {

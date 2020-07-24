@@ -19,7 +19,7 @@ class Header extends Component {
           backgroundColor: '#fff',
         }}>
         {!sidebarHide && onPostPage ? (
-        <div style={{position: 'relative', height: 40, width: 100, top: 0}}/>
+        <div style={{height: 64, top: 0}}>{' '}</div>
         ) : (
           <Link
           id="logo"
