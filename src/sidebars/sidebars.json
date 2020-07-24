@@ -94,7 +94,6 @@
       "docs/integrations/flutter-integration",
       "docs/integrations/react-native-integration",
       "docs/integrations/ruby-integration",
-      "docs/integrations/segment-integration"
     ],
     "child_entries":[
       "Community",
@@ -185,7 +184,6 @@
     "entry":"Engineering Blog",
     "name":"Engineering Blog",
     "items": [
-      "blog/posthog-segment-integration",
       "blog/cypress-end-to-end-tests"
     ]
   },
