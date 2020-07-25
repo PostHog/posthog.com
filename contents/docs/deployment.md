@@ -4,7 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-Getting a shiny, running production environment of PostHog is probably one the first things you want to do! Lucky for you, our platform is incredibly easy and affordable to host with any provider. Below, we have several guides outlining how to set up hosting on a variety of different services step-by-step; the quickest way we recommend is our [one-click Heroku deployment](/docs/deployment/deploy-heroku), but feel free to host on whatever platform best fits your needs best.
+<br>
+
+Getting a shiny, running production environment of PostHog is probably one the first things you want to do! 
+
+Lucky for you, our platform is incredibly easy to use and affordable to host with any provider. Below, we have several step-by-step guides outlining how to set up hosting on a variety of different services. The quickest way and our recommended option is the [One-Click Heroku Deployment](/docs/deployment/deploy-heroku), but feel free to host on whatever platform fits your needs best.
 
 |||||
 | :-- | --- | --- | --- | --- | --- |
@@ -15,10 +19,13 @@ Getting a shiny, running production environment of PostHog is probably one the f
 
 - [Deploying to Heroku (easiest!)](/docs/deployment/deploy-heroku)
 - [Deploying to AWS](/docs/deployment/deploy-aws)
-- [Deploying to Docker](/docs/deployment/deploy-docker)
-- [Deploying to Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
+- [Deploying to Digital Ocean](/docs/deployment/deploy-digital-ocean)
+- [Deploying to GCS](/docs/deployment/deploy-gcs)
+- [Deploying to Microsoft Azure](/docs/deployment/deploy-azure)
+- [Deploying with Docker](/docs/deployment/deploy-docker)
+- [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
+- [Deploying from Source](/docs/deployment/deploy-source)
 - [Deploying to Linode](/docs/deployment/deploy-linode)
-- [Deploying to Source](/docs/deployment/deploy-source)
 - [Scaling PostHog](/docs/deployment/scaling-posthog)
 - [Securing PostHog](/docs/deployment/securing-posthog)
 - [Running Behind Proxy](/docs/deployment/running-behind-proxy)

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you want to be able to send password reset emails from your instance, you need to set SMPTP credentials as env variables:
+If you want to be able to send password reset emails from your instance, you need to set the following SMTP Credentials as environment variables:
 
 ```yaml
 EMAIL_HOST: [smtp server]
