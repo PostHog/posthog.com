@@ -82,7 +82,7 @@ PostHog needs to run on HTTPS because:
 
 If you are unable to connect to a certain port, this might be due to the firewall or security group settings for your VM.
 
-##### Firewal Issues
+##### Firewall Issues
 
 Generally, this is a matter of running:
 
