@@ -69,7 +69,10 @@ class Layout extends Component {
 
                       <AntdLayout theme="light" style={{ background: '#ffffff' }}>
                         <AntdLayout.Header
-                        style={{ background: '#fff' }}
+                        style={{ 
+                          background: onPostPage && screenIsSmall ? '#F9F9F9' : '#fff', 
+                          padding: screenIsSmall ? 0 : 'auto', 
+                          borderBottom: onPostPage && screenIsSmall ? '6px solid #C4C4C4' : 'none'}}
                         theme="light"
                         >
                           <Header
@@ -77,6 +80,7 @@ class Layout extends Component {
                           sidebarDocked={!screenIsSmall}
                           sidebarHide={sidebarHide}
                           onPostPage={onPostPage}
+                          screenIsSmall={screenIsSmall}
                           theme="light"
                           />  
                           {screenIsSmall &&

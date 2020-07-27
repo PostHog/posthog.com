@@ -70,6 +70,7 @@ class Menu extends Component {
                 <Button
                   style={{
                     color: 'cornflowerblue',
+                    
                   }}
                   type="link"
                   onClick={() => {
@@ -85,17 +86,23 @@ class Menu extends Component {
                     top: 0,
                     left: 0,
                     height: '100vh',
-                    width: '100vw',
-                    backgroundColor: 'white',
+                    width: '100%',
+                    //backgroundColor: 'white',
                     zIndex: 100,
-                    paddingLeft: '10vw',
-                    paddingRight: '10vw',
-                    paddingTop: '5vh',
+                    paddingLeft: 0,
+                    paddingRight: 0,
+                    paddingTop: '5vh'
                   }}
                 >
                   <div>
                     <CloseOutlined
-                      style={{ float: 'right', fontSize: '30px' }}
+                      style={{ 
+                        float: 'right', 
+                        fontSize: '30px', 
+                        paddingLeft: '10vw', 
+                        paddingRight: '10vw', 
+                        marginTop: '5vh'
+                      }}
                       onClick={() => {
                         this.onChangeMenuState(menuItems.length)
                       }}
@@ -109,7 +116,8 @@ class Menu extends Component {
                       <List.Item
                         style={{
                           listStyle: 'none',
-                          marginTop: '5vh',
+                          padding: '3vh 10vw',
+                          margin: 0
                         }}
                         key={menuItems.indexOf(item)}
                       >
