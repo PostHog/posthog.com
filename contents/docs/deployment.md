@@ -6,11 +6,7 @@ showTitle: true
 
 <br>
 
-||||
-| :-- | :-: | --- | --- | --- |
-| [![](../../src/images/install-heroku.svg)](/docs/deployment/deploy-heroku) | [![](../../src/images/install-docker.svg)](/docs/deployment/deploy-docker) | [![](../../src/images/install-kubernetes.svg)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/install-aws.svg)](/docs/deployment/deploy-aws) | [![](../../src/images/community-github.svg)](/docs/deployment/deploy-source)
-| <a href="#heroku" class="middle yellow">Heroku</a> | <a href="#docker-compose" class="middle blue">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle red">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle yellow">AWS</a> | <a href="#source-installation" class="middle blue">Source</a> |
-=======
+
 Getting a shiny, running production environment of PostHog is probably one the first things you want to do! 
 
 Lucky for you, our platform is incredibly easy to use and affordable to host with any provider. Below, we have several step-by-step guides outlining how to set up hosting on a variety of different services. The quickest way and our recommended option is the [One-Click Heroku Deployment](/docs/deployment/deploy-heroku), but feel free to host on whatever platform fits your needs best.
