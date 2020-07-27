@@ -4,13 +4,17 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog provides many libraries to send events from your app to your PostHog instance.
+PostHog provides multiple libraries to send events from your app to your PostHog instance.
+
+We have put a significant effort into providing as many of these libraries as possible, in order to make your experience better.
+
+Our goal is for users to be able to integrate PostHog with their language and framework of choosing, without having to adapt their stack.
 
 ## Autocapture
 
-All our libraries are similar, except for the JS library which has [event autocapture](/docs/features/events#autocapture-event-tracking).
+All of our libraries are similar, except for the JavaScript library which has [event autocapture](/docs/features/events#autocapture-event-tracking).
 
-All libraries can send custom events, update user properties, identify users and so on.
+They can all be used to send custom events, update user properties, identify users, as well as provide support for various other PostHog features.
 
 ## Receiving user/event data into PostHog
 
@@ -29,7 +33,7 @@ All libraries can send custom events, update user properties, identify users and
   - [Gatsby](/docs/integrations/gatsby-integration)
   - [Elixir](/docs/integrations/elixir-integration)
 
-## Sending data to other systems
+## Sending Data to Other Systems
 
 - [Slack](/docs/integrations/slack)
 - [Microsoft Teams](/docs/integrations/microsoft-teams)

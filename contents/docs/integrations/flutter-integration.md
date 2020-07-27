@@ -4,15 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-flutter) for the posthog-flutter library. This is the official PostHog Flutter library
-to capture and send events to any PostHog instance (including posthog.com).
+[Click here](https://github.com/PostHog/posthog-flutter) for the posthog-flutter library. This is an optional library you can install if you're working with Flutter. 
 
-This library uses an internal queue to make calls non-blocking and fast. It also batches requests and flushes asynchronously,
+This page of the Docs refers specifically to the Official PostHog Flutter Library to capture and send events to any PostHog instance (including posthog.com).
+
+This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously,
 making it perfect to use in any part of your mobile app.
 
 ## Installation
 
-PostHog is available through [pub](https://pub.dev/packages/posthog_flutter).
+PostHog is available for install via [Pub](https://pub.dev/packages/posthog_flutter).
 
 ## Usage
 
@@ -33,7 +34,7 @@ To use this plugin, add `posthog_flutter` as a [dependency in your pubspec.yaml 
 | `debug`          | X\*     | X   | X   |
 | `setContext`     | X       | X   |     |
 
-\* Debugging must be set as a configuration parameter in `AndroidManifest.xml` (see below). The official posthog library does not offer the debug method for Android.
+\* Debugging must be set as a configuration parameter in `AndroidManifest.xml` (see below). The Official PostHog Library does not offer the debug method for Android.
 
 ### Example
 
@@ -80,10 +81,11 @@ class MyApp extends StatelessWidget {
 
 ## Installation
 
-Setup your Android, iOS and/or web sources as described at Posthog.com and generate your api keys.
+Setup your Android, iOS, and/or web sources as described at Posthog.com and generate your API keys.
 
-Set your Posthog api key and change the automatic event tracking (only for Android and iOS) on if you wish the library to take care of it for you.
-Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self hosted instance of Posthog you will need to have the public hostname or ip for your instance as well.
+Set your Posthog API key and change the automatic event tracking (only for Android and iOS) on if you wish the library to take care of it for you.
+
+Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self-hosted instance of Posthog you will need to have the public hostname or IP for your instance as well.
 
 ### Android
 
@@ -149,8 +151,8 @@ For more informations please check: https://posthog.com/docs/integrations/js-int
 
 ## Issues
 
-Please file any issues, bugs, or feature requests in the [GitHub repo](https://github.com/posthog/posthog-flutter/issues/new).
+Please file any issues, bugs, or feature requests in our [GitHub repository](https://github.com/posthog/posthog-flutter/issues/new).
 
 ## Contributing
 
-If you wish to contribute a change to this repo, please send a [pull request](https://github.com/posthog/posthog-flutter/pulls).
+If you wish to contribute a change to this repo, please send a [Pull Request](https://github.com/posthog/posthog-flutter/pulls).

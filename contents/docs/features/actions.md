@@ -16,101 +16,105 @@ For example, a typical action might be one of the following:
 * ‘Pricing page – viewed’
 * ‘Watch movie – clicked’
 
-You can watch our tutorial videos on Actions here:
+You can watch our **old** tutorial videos on Actions [here](https://www.youtube.com/watch?v=7RcVfsXHG58) and [here](https://www.youtube.com/watch?v=NezwIa_PihU). However, please note that our functionality and UI has significantly changed since then. As a step by step tutorial, the videos may be out of date, but they could be helpful for understanding the concepts.
 
-Actions 
+## Accessing Actions
 
-[![Actions video](https://img.youtube.com/vi/7RcVfsXHG58/0.jpg)](https://www.youtube.com/watch?v=7RcVfsXHG58)
-
-Action Toolbar 
-
-[![Actions Toolbar](https://img.youtube.com/vi/NezwIa_PihU/0.jpg)](https://www.youtube.com/watch?v=NezwIa_PihU)
-
-## Creating a new action 
-
-To get started with Actions, go to the 'Events' section in the left hand navigation which will open up 'Actions:
+To access the Actions page, go to the 'Events' section on the left-hand navigation sidebar which will open up a submenu including 'Actions':
 
 ![](../../images/03/Posthog-17.png)
+<br>
 
-## Creating front end Actions
+## Creating Frontend Actions
+<br>
 
 ### Pre-Requisites
 
-Before creating an Action, you must have provided the domain you will be using PostHog on. This should be the root domain where your application is hosted, ie http://example.com. Do this by visiting Setup > Setup your PostHog account.
+Before creating an Action, you must have provided the domain you will be using PostHog on. This should be the root domain where your application is hosted e.g. http://example.com. Do this by visiting 'Setup' > 'Setup your PostHog account'.
+<br>
 
-### Getting started
+### Getting Started
 
-The simplest way to create a front-end based Action is to visit your application, and to use PostHog’s toolbar to tag the elements that are relevant.
+The simplest way to create a frontend-based Action is to visit your application, and to use PostHog’s toolbar to tag the elements that are relevant.
 
-To create a new Action, click 'New Action' button at the top right of the Actions page:
+To create a new Action, click the blue 'New Action' button on the above the table on the Actions page:
 
-![](../../images/03/Posthog-18.png)
+![](../../images/actions-page.png)
 
-This will open a the New Action page with the 3 types of Actions you can record:
+This will open the following page:
 
-* Frontend Element
-* Custom Event
-* Page view
+![](../../images/create-action.png)
+<br>
 
-![](../../images/03/Posthog-19.png)
+Here, you have a choice of two options:
+
+#### Inspect element on your site
+
+This will open the domain you provided to PostHog so that you can select an element with our Inspect tool and create an action from this.
+
+> **Note:** Our [Toolbar](/docs/features/toolbar) is making this significantly easier.
+
+#### From event or pageview
+
+Alternatively you can create an event based on `pageview` or an existing [event](/docs/features/events) on your website.
+
+Choosing this option will open the following page where you can create your desired Action:
+
+![](../../images/action-from-event.png)
+<br>
+
+ 
+#### Note: Actions Containing Multiple Events 
+
+It is possible for an action to match multiple events. To do this, click ‘Add another match group’ when you are creating your action (see picture above).
+
+Actions with multiple events operate as **OR** operations. That means that an action like _"Clicked Read More Button" OR "Clicked More Information Button"_ will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
+
+## Action Types
+
+As shown above, there 3 types of Actions you can record:
+
+#### Page View
 
 Page views can match urls containing a string or match exactly.
 
 ![](../../images/03/Posthog-20.png)
+<br>
+
+
+#### Frontend Element
+
+Frontend Elements are actions based on some element on your website, such as a button or an input. The easiest way to select them is with the 'Inspect element on your site' functionality described above. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
+
+Our [Autocapture](/docs/features/integrations/js-integration#autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
+
+Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/features/integrations/js-integration#autocapture) for more details.
+
+<br>
+
+#### Custom Event
 
 Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/Integrations).
+<br>
 
-Frontend Elements can be selected directly on your site, click 'Select element on site'.
+## New: Labelling Events with the Toolbar
 
-![toolbar pop up](../../images/03/Posthog-21.png)
+The easiest way to create new actions and label events is by using our [Toolbar](/docs/features/toolbar).
+<br> 
 
-This will pop open the domain you provided in Setup.
-
-You will see a PostHog toolbar pop up on the right hand side:
-
-![PostHog Toolbar](../../images/02/Screenshot-2020-02-09-at-14.48.17.png)
-
-
-## Labelling events with the toolbar
-
-In this example, we may want to track users clicking ‘Sign up!’ to our example movie streaming website, HogFlix.
-
-Use the toolbar to create a name for the Action. Pro-tip: the best convention for this is ‘Object – Verb’, but it’s up to you.
-
-Next, click ‘Inspect element’ to tag the element on the page that you want to grab events relating to. Your application screen will be highlighted in blue.
-
-Now, move your mouse over the element in question. You’ll see PostHog highlight the element you are hovering over, and the toolbar will populate with the relevant fields as you move the mouse around.
-
-![PostHog toolbar in action](../../images/02/Screenshot-2020-02-09-at-14.51.31.png)
-
-## Example - labelling a sign up Action
-
-In this example, we may want to track users clicking ‘Sign up!’ to our example movie streaming website, HogFlix.
-
-Use the toolbar to create a name for the Action. Pro-tip: the best convention for this is ‘Object – Verb’, but it’s up to you.
-
-Next, click ‘Inspect element’ to tag the element on the page that you want to grab events relating to. Your application screen will be highlighted in blue.
-
-Now, move your mouse over the element in question. You’ll see PostHog highlight the element you are hovering over, and the toolbar will populate with the relevant fields as you move the mouse around.
-
-## Identification fields
+## Identification Fields
 
 There are three identification fields that you can use for most elements:
 
-* Text – the text on the element, if applicable
-* Selector – the type of element it is
-* Only match if URL contains – the URL where this action needs to take place. 
+* Text: The text on the element, if applicable
+* Selector: The type of element it is
+* Only match if URL contains: The URL where this action needs to take place. 
  
-You can have 1 or more identification fields selected. Having multiple fields selected is an AND statement, so all of them will need to match an event for it to count as the Action.
+You can have 1 or more identification fields selected. Having multiple fields selected is an **AND** statement, so all of them will need to match an event for it to count as the Action.
 
-### Identification field example use
+### Identification Field: Example Uses
 
 * If you have buttons across your site, all saying ‘Sign Up’, you can track ALL of them, site-wide, as the same action, by choosing’Text’:’Sign Up’ and not matching the URL.
 * If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
 * If you have multiple sign up buttons on the same page, all with the same text and you want to track events relating to just one of them, you can use ‘Selector’. If they are technically the same element type AND have the same classes, then you need to add a new class to the button you wish to track separately, and use this to identify it.
- 
-## Actions containing multiple Events 
 
-It is possible for Action to match multiple events. To do this, click ‘Add another match group’ here:
-
-![PostHog toolbar - adding another match group](../../images/02/Screenshot-2020-02-09-at-15.04.51.png)

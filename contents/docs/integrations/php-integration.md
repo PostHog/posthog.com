@@ -4,31 +4,33 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-php) for the Posthog-PHP library. This is the official PostHog PHP library to capture and send events to any PostHog instance (including posthog.com).
+[Click here](https://github.com/PostHog/posthog-php) for the Posthog-PHP library. This is an optional library you can install if you're working with PHP. 
 
-This library uses an internal queue to make calls non-blocking and fast. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
+This page of the Docs refers specifically to the Official PostHog PHP Library to capture and send events to any PostHog instance (including posthog.com).
+
+This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation
 
-Add the following to composer.json
-```
+Add the following to composer.json:
+```json
 {
     "require": {
         "posthog/posthog-php": "1.0.*"
     }
 }
 ```
-And then install the dependencies:
+And then install the dependencies with the command: `php composer.phar install`
 
-`php composer.phar install`
-
-In your app, set your api key before making any calls.
+In your app, set your API key before making any calls.
 
 ```php
 PostHog::init("YOUR_API_KEY",
   array('host' => 'https://posthog.[your-domain].com') // You can remove this line if you're using app.posthog.com
 );
 ```
+
+> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
 You can find your key in the /setup page in PostHog.
 
@@ -38,18 +40,16 @@ You can find your key in the /setup page in PostHog.
 
 Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
 
-A `capture` call requires
+A `capture` call requires:
+ - `distinct id` which uniquely identifies your user
+ - `event name` to specify the event
+  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
-* `distinct id` which uniquely identifies your user
-* `event name` to make sure
-  * We recommend using [noun] [verb], like `movie played` or `movie updated` to easily identify what your events mean later on.
-
-Optionally you can submit
-
-* `properties`, which can be an array with any information you'd like to add
+Optionally you can submit:
+- `properties`, which is an array with any information you'd like to add
 
 For example:
-```
+```php
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => 'movie played',
@@ -63,12 +63,13 @@ PostHog::capture(array(
 
 ## Identify
 
-Identify lets you add metadata on your users so you can more easily identify who they are in PostHog, and even do things like segment users by these properties.
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+like segment users by these properties.
 
-An identify call requires
+An `identify` call requires:
+- `distinct id` which uniquely identifies your user
+- `properties` with a dict with any key: value pairs 
 
-* `distinct id` which uniquely identifies your user
-* `properties` with a dict with any key: value pairs
 
 For example:
 
@@ -86,7 +87,7 @@ The most obvious place to make this call is whenever a user signs up, or when th
 
 ### Alias
 
-To marry up whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
+To connect whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
 
 In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
 
@@ -94,8 +95,7 @@ The same concept applies for when a user logs in.
 
 If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
 
-An alias call requires
-
+An alias call requires:
 * `distinct id` the current unique id
 * `alias` the unique ID of the user before
 
@@ -108,7 +108,7 @@ PostHog::alias(array(
 ));
 ```
 
-### Sending page views
+### Sending Page Views
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
@@ -123,14 +123,14 @@ PostHog::capture(array(
 ```
 
 ## Development
-### How to release
+### How to Release
 
 1. Run `VERSION=X.Y.Z make release` (where X.Y.Z is the new version).
 
 That's it! Composer will pick up the new tag and you can see the latest version at [https://packagist.org/packages/posthog/posthog-php](https://packagist.org/packages/posthog/posthog-php).
 
-You might need to install git-extras for this to work.
+> **Note:** You might need to install `git-extras` for this to work.
 
-## Thank you
+## Thank You
 
-This library is largely based on the analytics-php package.
+This library is largely based on the `analytics-php` package.

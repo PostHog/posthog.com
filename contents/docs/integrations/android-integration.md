@@ -4,17 +4,18 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-android) for the PostHog Android library. This is the official PostHog Android library 
+[Click here](https://github.com/PostHog/posthog-android) for the PostHog Android library. This is the official PostHog Android Library 
 to capture and send events to any PostHog instance (including posthog.com).
 
-This library uses an internal queue to make calls non-blocking and fast. It also batches requests and flushes asynchronously, 
+This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, 
 making it perfect to use in any part of your mobile app.
 
 ## Installation
 
 The best way to install the PostHog Android library is with a build system like 
-Gradle. This ensures you can easily upgrade to the latest versions. Just add
-the `posthog` module to your `build.gradle`:
+Gradle. This ensures you can easily upgrade to the latest versions. 
+
+All you need to do is add the `posthog` module to your `build.gradle`:
 
 ```shell script
 dependencies {
@@ -55,13 +56,13 @@ public class SampleApp extends Application {
 When you start tracking events with PostHog, each user gets an anonymous ID that is used to identify them in the system.
 In order to link this anonymous user with someone from your database, use the `identify` call. 
 
-Identify lets you add metadata on your users so you can more easily identify who they are in PostHog, and even do things 
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
 
 An identify call requires:
 
 * `distinctId` which uniquely identifies your user in your database
-* `userProperties` with a dictionary with key: value pairs
+* `userProperties` with a dictionary of key:value pairs
 
 ```java
 PostHog.with(this)
@@ -77,14 +78,14 @@ When you call `identify`, all previously tracked anonymous events will be linked
 ### Capture
 
 Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find 
-patterns in usage, work out which features to improve or where people are giving up.
+patterns in usage, work out which features to improve, or find out where people are giving up.
 
 A `capture` call requires:
 
 * `event` to specify the event name
-  * We recommend using [noun] [verb], like `movie played` or `movie updated` to easily identify what your events mean later on.
+  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
-Optionally you can submit
+Optionally you can submit:
 
 * `properties`, which can be an array with any information you'd like to add
 
@@ -100,10 +101,10 @@ PostHog.with(this)
 ### Flush
 
 You can set the number of events in the configuration that should queue before flushing. 
-Setting this to `1` will send events immediately and will use more battery. It's set to `20` by default.
+Setting this to `1` will send events immediately and will use more battery. The default value for this is `20`.
 
 You can also configure the flush interval. By default we flush all events after `30` seconds,
-no matter how many events have gathered.
+no matter how many events have been gathered.
 
 ```java
 PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
@@ -145,7 +146,7 @@ PostHog.with(this)
 
 ```
 
-## All Configuration options
+## All Configuration Options
 
 When creating the PostHog client, there are many options you can set:
 
@@ -172,6 +173,6 @@ PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
     .build();
 ```
 
-## Thank you
+## Thank You
 
-This library is largely based on the analytics-android package.
+This library is largely based on the `analytics-android` package.
