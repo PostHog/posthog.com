@@ -14,7 +14,16 @@ import { default as AntdLayout } from 'antd/lib/layout'
 import Col from 'antd/lib/col'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
+import { withPrefix } from "gatsby-link"
 
+const isBlogPage = 
+({location }) => {
+  if (location.pathname === withPrefix ("/blog")){
+    return true
+  } else {
+    return false
+  }
+}
 
 class Layout extends Component {
   setPostPageState = state => {
@@ -29,7 +38,8 @@ class Layout extends Component {
       anchorHide,
       className,
       containerStyle={},
-      expandedKeys
+      expandedKeys,
+      isBlogPage
     } = this.props
 
     return (
@@ -81,6 +91,7 @@ class Layout extends Component {
                           sidebarHide={sidebarHide}
                           onPostPage={onPostPage}
                           screenIsSmall={screenIsSmall}
+                          isBlogPage={isBlogPage}
                           theme="light"
                           />  
                           {screenIsSmall &&

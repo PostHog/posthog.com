@@ -18,7 +18,7 @@ const BlogPage = ({
       title='PostHog Blog'
       description='What we are up to, every week.'
     />
-      <div>{posts}</div>
+      <div className="blogPages">{posts}</div>
     </Layout>
   )
 }

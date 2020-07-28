@@ -835,21 +835,21 @@ a.ant-anchor-link-title:hover {
   opacity: 0
 }
 
-.blog-post h2 {
+.docsPages h2 {
   color: #1D4AFF;
   padding-top: 2rem;
   padding-bottom: .45rem;
   left: 0;
 }
 
-.blog-post h3 {
+.docsPages h3 {
   color: #000000;
   padding-top: 2rem;
   padding-bottom: 1.45rem;
   left: 0;
 }
 
-.blog-post hr {
+.docsPages hr {
   width: 4rem;
   height: 0;
   margin-bottom: 2rem;
@@ -864,7 +864,7 @@ a.ant-anchor-link-title:hover {
   padding: 1rem 2rem;
 }
 
-.blog-post p > img {
+.docsPages p > img {
   margin: 0 auto;
   width: 65%;
   display: block;

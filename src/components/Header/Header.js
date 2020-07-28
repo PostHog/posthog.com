@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import Menu from '../Menu'
 import logo from '../../images/posthog-logo-150x29.svg'
+import blogBackground from '../../images/blog-background.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
 
+
 class Header extends Component {
   render() {
-    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall } = this.props
+    const { sidebarDocked, onPostPage, screenIsSmall, isBlogPage } = this.props
 
     return (
       <div
@@ -15,10 +17,13 @@ class Header extends Component {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'space-between'
-          //backgroundColor: '#fff'
+          justifyContent: 'space-between',
         }}>
-        {!onPostPage ? (
+        {isBlogPage ? (
+          <img alt='blog-background' src={blogBackground}/>
+        ):(
+          <div/>
+        )}
           <Link
           id="logo"
           to="/"
