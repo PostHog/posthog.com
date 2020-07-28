@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-@import url('/static/GoshaSans-Regular.ttf');
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  src: url(https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wXiWtFCc.woff2);
+}
+
+/*Gosha Sans*/
+@font-face {
+  font-family: 'Gosha Sans';
+  src: local('Gosha Sans'), local('Gosha-Sans'), url('/GoshaSans-Regular.ttf');
+}
 
 
 html {
@@ -234,7 +243,7 @@ h1 {
   padding-top: 0;
   margin-bottom: 2rem;
   color: inherit;
-  font-weight: bolder;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
   line-height: 1.1;
