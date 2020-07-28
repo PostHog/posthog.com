@@ -7,7 +7,7 @@
 /*Gosha Sans*/
 @font-face {
   font-family: 'Gosha Sans';
-  src: local('Gosha Sans'), local('Gosha-Sans'), url('/GoshaSans-Regular.ttf');
+  src: url('/GoshaSans-Regular.ttf');
 }
 
 
@@ -213,7 +213,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: lato, georgia, serif !important;
+  font-family: lato, sans-serif !important;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -247,7 +247,7 @@ h1 {
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
   line-height: 1.1;
-  font-family: 'Gosha Sans';
+  font-family: 'Gosha Sans', lato, sans-serif;
 }
 
 h2 {
@@ -722,6 +722,10 @@ aside {
 .ant-menu-submenu-title:hover {
   color: #1D4AFF!important;
   font-weight: lighter!important;
+}
+
+.ant-menu-inline ul {
+  background-color: #F9F9F9 !important;
 }
 
 .submenuSelected i::before{
