@@ -834,12 +834,30 @@ a.ant-anchor-link-title:hover {
   margin-right: 8px;
   opacity: 0
 }
+
 .blog-post h2 {
+  color: #1D4AFF;
   padding-top: 2rem;
-  padding-bottom: 1.45rem;
-  border-bottom: 4px solid #F7A501;
+  padding-bottom: .45rem;
   left: 0;
 }
+
+.blog-post h3 {
+  color: #000000;
+  padding-top: 2rem;
+  padding-bottom: 1.45rem;
+  left: 0;
+}
+
+.blog-post hr {
+  width: 4rem;
+  height: 0;
+  margin-bottom: 2rem;
+  border: .2rem;
+  border-style: solid;
+  border-color:#1D4AFF;
+}
+
 .docs-footer {
   margin-top: 2rem;
   background: rgb(41, 37, 44, 0.1);
