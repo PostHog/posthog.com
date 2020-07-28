@@ -6,16 +6,18 @@ showTitle: true
 
 <br>
 
+
 Getting a shiny, running production environment of PostHog is probably one the first things you want to do! 
 
 Lucky for you, our platform is incredibly easy to use and affordable to host with any provider. Below, we have several step-by-step guides outlining how to set up hosting on a variety of different services. The quickest way and our recommended option is the [One-Click Heroku Deployment](/docs/deployment/deploy-heroku), but feel free to host on whatever platform fits your needs best.
 
 |||||
-| :-- | --- | --- | --- | --- | --- |
-| [![](../../src/images/install-heroku.png)](/docs/deployment/deploy-heroku) | [![](../../src/images/install-docker.png)](/docs/deployment/deploy-docker) | [![](../../src/images/install-kubernetes.png)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/install-aws.png)](/docs/deployment/deploy-aws) |  [![](../../src/images/install-linode.svg)](/docs/deployment/deploy-linode) | [![](../../src/images/github-logo.png)](/docs/deployment/deploy-source) |
-| <a href="#heroku" class="middle">Heroku</a> | <a href="#docker-compose" class="middle">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle">AWS</a> |  <a href="#linode" class="middle">Linode</a> | <a href="#source-installation" class="middle">Source</a> |
+| :-- | --- | --- | --- | --- |
+| [![](../../src/images/deploy-heroku.svg)](/docs/deployment/deploy-heroku) | [![](../../src/images/deploy-docker.svg)](/docs/deployment/deploy-docker) | [![](../../src/images/deploy-kubernetes.svg)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/deploy-aws.svg)](/docs/deployment/deploy-aws) | [![](../../src/images/deploy-source.svg)](/docs/deployment/deploy-source) |
+| <a href="#heroku" class="middle yellow">Heroku</a> | <a href="#docker-compose" class="middle blue">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle red">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle yellow">AWS</a> | <a href="#source-installation" class="middle blue">Source</a> |
 
-## **In this section:**
+## **In This Section:**
+
 
 - [Deploying to Heroku (easiest!)](/docs/deployment/deploy-heroku)
 - [Deploying to AWS](/docs/deployment/deploy-aws)
