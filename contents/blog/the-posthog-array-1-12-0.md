@@ -54,9 +54,9 @@ Regex master? Put those skills to use on any property with regex filtering
 
 ### Retention Table Improvements
 
-Previously the retention table was hardcoded to only recognize the `$pageview` event as a retention event. Now, you can select any action or event to measure retention on.
+Previously the retention table was hardcoded only to recognize the `$pageview` event as a retention event. Now, you can select any action or event to measure retention on.
 
-Clicking on any section in the retention table will tell you exactly what users fall in that item.
+Clicking on any section in the retention table will tell you exactly which users fall in that item.
 
 
 ## Bug Fixes and Performance Improvements
@@ -97,8 +97,8 @@ Clicking on any section in the retention table will tell you exactly what users 
 
 ## PostHog news
 
-We launched [a new version of our website!](https://posthog.com) Lottie and Ben have done an amazing job getting this live. We decided to go with a 80's-addidas-retro-snes look, combined with hedgehogs.
+We launched [a new version of our website!](https://posthog.com) Lottie and Ben have done an amazing job getting this live. We decided to go with a 80's-Adidas-retro-SNES look, combined with hedgehogs... obviously.
 
 ### Open roles
 
-Full stack or growth engineers - [we want you!](https://posthog.com/careers)
+Full stack or growth engineers - [we want you!](https://posthog.com/careers). We have *just* filled the technical writer role too, you can already see the docs getting a makeover! More on that next time.
