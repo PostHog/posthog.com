@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-@import url('/GoshaSans-Regular.ttf');
 
+@font-face {
+  font-family: 'Gosha Sans';
+  src: url('/GoshaSans-Regular.ttf') format('truetype');
+}
 
 html {
   font-family: lato !important;
