@@ -20,7 +20,7 @@ const PricingPage = () => {
   const plans = {
     cloud: [
       {
-        title: 'Free',
+        title: 'Hobby',
         popular: false,
         price: '$0',
         priceDetail: 'forever',
@@ -74,6 +74,8 @@ const PricingPage = () => {
           'Capture <b>unlimited</b> events',
           '<b>Unlimited</b> data retention',
           'Dedicated support',
+          'SSO/SAML',
+          'Export to data lakes'
         ],
       },
     ],
@@ -120,6 +122,8 @@ const PricingPage = () => {
           'Uptime and scalability SLAs',
           'Custom databases and integrations',
           'Dedicated support',
+          'SSO/SAML',
+          'Export to data lakes'
         ],
       },
     ],
