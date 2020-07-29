@@ -20,14 +20,17 @@ Please also update your `posthog-js` version to at least `1.3.5` if you have it 
 
 ### Shared Dashboards
 
+![](../images/shared-dashboard.png)
+
 Dashboard on a TV in your office? Want to have a public stats page? Share a dashboard with someone who doesn't have a PostHog account? You can now publicly share a dashboard. Just click "Share Dashboard" and enable sharing. You'll get a link that's publicly accesible.
 
 Changed your mind? You can always disable sharing.
 
 ### Aggregate Functions
 
-Want to know the average revenue per user? Want to know the lowest browser version anyone is using? You can now do Max, Min and Avg calculations on any event property and graph them in trends!
-* Aggregate functions on Trends (closes #1193) [](https://github.com/PostHog/posthog/pull/1217)
+![](../images/aggregate.png)
+
+Want to know the average revenue per user? Want to know the lowest browser version anyone is using? You can now do Sum, Max, Min and Avg calculations on any event property and graph them in trends!
 
 ### Global Annotations
 
@@ -39,9 +42,13 @@ As part of this, you can now also manage, add and delete annotations from a cent
 
 ### Funnel Step Time 
 
+![](../images/funnel-step-time.png)
+
 You can now see how long it takes users on average to get through steps in a funnel.
 
 ### Regex Filtering
+
+![](../images/regex.png)
 
 Regex master? Put those skills to use on any property with regex filtering
 
@@ -80,15 +87,17 @@ Clicking on any section in the retention table will tell you exactly what users 
 
 ## Favorite issue
 
-### 
+### [Funnel step re-ordering](https://github.com/PostHog/posthog/pull/1245)
 
 ## Weekly round up
 
+- [pointerpointer.com](https://pointerpointer.com/)
+- [del.icio.us](https://del.icio.us) will be back
 
 
 ## PostHog news
 
-
+We launched [a new version of our website!](https://posthog.com). Lottie and Ben have done an amazing job getting this live. We decided to go with a 80's-addidas-retro-snes look, combined with hedgehogs.
 
 ### Open roles
 
