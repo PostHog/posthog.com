@@ -32,17 +32,19 @@ class Header extends Component {
             textDecoration: 'none',
             verticalAlign: 'center'
           }}>
-          {screenIsSmall ? (<img alt="logo" src={logo} id="logo-image" style={{
-            display: 'flex',
-            top: 0,
-            left: 8
-          }} />
+          {!onPostPage && (
+            screenIsSmall ? (
+            <img alt="logo" src={logo} id="logo-image" style={{
+              display: 'flex',
+              top: 0,
+              left: 8
+            }} />
           ) : (
             <img alt="logo" src={logo} id="logo-image"/>
-          )}
+          ))
+          }
           </Link>
-        ) : (
-          screenIsSmall ? (
+        {screenIsSmall ? (
             <Link
           id="logo"
           to="/"
@@ -59,7 +61,7 @@ class Header extends Component {
           </Link>
           ) : (
           <div style={{height: 64, width: 0}}></div>
-        ))}
+        )}
         <Menu sidebarDocked={sidebarDocked} />
       </div>
     )
