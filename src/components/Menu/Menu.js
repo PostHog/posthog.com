@@ -39,6 +39,7 @@ class Menu extends Component {
                   mode="horizontal"
                   style={{
                     borderBottomWidth: 0,
+                    background: isBlogPage && 'none'
                   }}
                 >
                   {menuItems.reverse().map(item => {

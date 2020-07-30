@@ -70,7 +70,7 @@ class Layout extends Component {
                         <div></div>
                       )}
 
-                      <AntdLayout theme="light" style={{ background: '#fff'}}>
+                      <AntdLayout theme="light">
                         <AntdLayout.Header
                         style={{ 
                           backgroundColor: screenIsSmall ? '#F9F9F9' : '#fff', 
@@ -97,7 +97,15 @@ class Layout extends Component {
                                 <ResponsiveTopBar />
                             )}
                           {isBlogPage && !screenIsSmall &&
-                          <div style={{position: 'absolute', backgroundColor: 'blue', height: '10vh', top: '45vh', width: 'calc(100% - 40vw)', color: 'white', paddingLeft: 'calc((100% - 300px) * 0.1 - 50px + 1.0875rem)'}}>
+                          <div style={{
+                            position: 'absolute', 
+                            backgroundColor: 'blue', 
+                            height: '10vh', 
+                            top: '45vh', 
+                            width: 'calc(100% - 40vw)', 
+                            color: 'white', 
+                            paddingLeft: 'calc((100% - 300px) * 0.1 - 50px + 1.0875rem)'}}>
+
                             <h1 align="left" style={{
                               position: 'static', 
                               color: 'white',  
