@@ -38,6 +38,9 @@ class Header extends Component {
             }} />
           </Link>
           ) : (
+            onPostPage ? (
+              <div style={{height: 64}}/>
+            ) : (
               <Link
               id="logo"
               to="/"
@@ -46,12 +49,9 @@ class Header extends Component {
                 textDecoration: 'none',
                 verticalAlign: 'center'
               }}>
-                <img alt="logo" src={logo} id="logo-image" style={{
-                  display: 'flex',
-                  top: 0,
-                  left: 8
-                }} />
-              </Link>
+                <img alt="logo" src={logo} id="logo-image"/>
+                  </Link>
+            )
           )}
         <Menu sidebarDocked={sidebarDocked} />
       </div>
