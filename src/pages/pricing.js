@@ -44,7 +44,7 @@ const PricingPage = () => {
         popular: true,
         price: '$29',
         priceDetail: '/month',
-        description: 'Ideal for scaling companies with higher usage',
+        description: 'Ideal for companies with more usage',
         callToAction: 'Start my 30-day free trial',
         callToActionDest: {
           type: 'url',
@@ -117,7 +117,7 @@ const PricingPage = () => {
             'mailto:sales@posthog.com?subject=Enquiry%20about%20self-managed%20supported%20plan',
         },
         benefits: [
-          '<span class="p-plan-benefit-lg">Everything in Community, plus:</span>',
+          '<span class="p-plan-benefit-lg">Everything in Open Source, plus:</span>',
           'PostHog deploys and maintains everything (in your own infrastructure)',
           'Uptime and scalability SLAs',
           'Custom databases and integrations',
