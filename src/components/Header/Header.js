@@ -19,31 +19,9 @@ class Header extends Component {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        {isBlogPage ? (
+        {isBlogPage && (
           <img alt='blog-background' src={blogBackground}/>
-        ):(
-          <div/>
         )}
-          <Link
-          id="logo"
-          to="/"
-          style={{
-            //color: '#FFF',
-            textDecoration: 'none',
-            verticalAlign: 'center'
-          }}>
-          {!onPostPage && (
-            screenIsSmall ? (
-            <img alt="logo" src={logo} id="logo-image" style={{
-              display: 'flex',
-              top: 0,
-              left: 8
-            }} />
-          ) : (
-            <img alt="logo" src={logo} id="logo-image"/>
-          ))
-          }
-          </Link>
         {screenIsSmall ? (
             <Link
           id="logo"
@@ -60,8 +38,21 @@ class Header extends Component {
             }} />
           </Link>
           ) : (
-          <div style={{height: 64, width: 0}}></div>
-        )}
+              <Link
+              id="logo"
+              to="/"
+              style={{
+                //color: '#FFF',
+                textDecoration: 'none',
+                verticalAlign: 'center'
+              }}>
+                <img alt="logo" src={logo} id="logo-image" style={{
+                  display: 'flex',
+                  top: 0,
+                  left: 8
+                }} />
+              </Link>
+          )}
         <Menu sidebarDocked={sidebarDocked} />
       </div>
     )
