@@ -33,6 +33,7 @@ class SidebarContents extends Component {
       contentDir
     } = this.props.sidebar
 
+
     return (
       <StaticQuery
         query={graphql`
@@ -143,13 +144,14 @@ class SidebarContents extends Component {
               return root.children.map(item => {
                 if (item.path) {
                   return (
-                    <Menu.Item key={item.key}>
-                      <Link to={item.path} onClick={this.onSetSidebarOpen}>{item.title}</Link>
+                    <Menu.Item key={item.key} className="keySelected">
+                      <Link className="keySelectedLink"to={item.path} onClick={this.onSetSidebarOpen} style={{float: 'left'}}>{item.title}</Link>
                     </Menu.Item>
                   )
                 }
                 return (
                   <SubMenu 
+                    className="submenuSelected"
                     key={item.key}
                     title={<span style={{fontWeight:750}}
                   >{item.title}</span>}>
@@ -163,10 +165,10 @@ class SidebarContents extends Component {
             <Menu 
               mode="inline"
               defaultOpenKeys={defaultOpenKeys}
-              selectedKeys={selectedKeys}
+              selectedKeys={[selectedKey]}
               inlineIndent={12}
               onOpenChange={this.onChangeExpandedKeys}
-              style={{height: '100%'}}
+              style={{height: '100%', backgroundColor: '#F9F9F9'}}
               theme='light'
             >
               {loop(tree)}

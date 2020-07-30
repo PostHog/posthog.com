@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+@font-face {
+  font-family: 'Gosha Sans';
+  src: url('/GoshaSans-Regular.ttf') format('truetype');
+}
+
 html {
   font-family: lato !important;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
 body {
   margin: 0;
 }
@@ -33,7 +39,7 @@ audio:not([controls]) {
   height: 0;
 }
 progress {
-  vertical-align: baseline;
+  vertical-align: fseline;
 }
 [hidden],
 template {
@@ -42,6 +48,7 @@ template {
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  color: #1D4AFF; 
 }
 a:active,
 a:hover {
@@ -228,13 +235,15 @@ h1 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 2rem;
   color: inherit;
-  font-weight: bold;
+  font-weight: bolder;
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
   line-height: 1.1;
+  font-family: 'Gosha Sans';
 }
+
 h2 {
   margin-left: 0;
   margin-right: 0;
@@ -331,6 +340,7 @@ ul {
   margin-bottom: 1.45rem;
   list-style-position: outside;
   list-style-image: none;
+  background-color: #ffffff;
 }
 ol {
   margin-left: 1.45rem;
@@ -392,7 +402,7 @@ pre {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 2rem!important;
   font-size: 0.85rem;
   line-height: 1.42;
   background: hsla(0, 0%, 0%, 0.04);
@@ -635,6 +645,7 @@ pre tt:after {
   margin-top:96;
 }
 
+
 #logo {
   padding-left: 40px;
   overflow: hidden;
@@ -653,20 +664,115 @@ pre tt:after {
     top: 10px;
     height: 32px;
     margin-right: 16px;
-    vertical-align:middle;
+    vertical-align: middle;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+}
+
+.headerItems {
+  margin-right: 20px;
+}
+
+
+#logo {
+  margin: 0;
+  padding: 0;
 }
 
 .footer-universal{
-  background: #29252C;
+  background: #353F6F;
   color: #FFF;
   position: relative;
   left: 0px;
   width: '100%';
   top: '100%';
-  margin-top:100px;
+  margin-top:0;
   padding-top: 40px;
   padding-bottom: 80px;
   height: 100%;
+}
+
+aside {
+  background-color: #F9F9F9;
+  border-right: 8px solid #C4C4C4;
+}
+
+.ant-layout-sider-children ul {
+  background-color: #F9F9F9 !important;
+  border: none;
+}
+
+.headerItems li.ant-menu-item-selected {
+  border-bottom: 2px solid #1D4AFF!important;
+}
+
+.headerItems li.ant-menu-item-active {
+  border-bottom: 2px solid #1D4AFF!important;
+}
+
+.ant-menu-submenu-title:hover {
+  color: #1D4AFF!important;
+  font-weight: lighter!important;
+}
+
+.submenuSelected i::before{
+  background: #454545!important;
+}
+
+.ant-menu-submenu-active i::before{
+  background: #1D4AFF!important;
+}
+
+.submenuSelected i::after{
+  background: #454545!important;
+}
+
+.ant-menu-submenu-active i::after{
+  background: #1D4AFF!important;
+}
+
+.ant-menu-submenu-selected.submenuSelected span {
+  color: #1D4AFF!important;
+  font-weight: bolder!important;
+}
+
+.ant-menu-item a:hover {
+  color: #1D4AFF!important;
+}
+
+.ant-menu .ant-menu-item-selected.keySelected {
+  background-color: #ECEFF1!important;
+}
+
+.ant-menu .ant-menu-item-selected.keySelected a {
+  color: #1D4AFF;
+}
+
+.keySelected.ant-menu-item-selected::after {
+  border-right-color: #F54E00!important;
+}
+
+.rightBar {
+  border: none;
+}
+
+.rightBar div {
+  background-color: #fff
+}
+
+a.ant-anchor-link-title:hover {
+  color: #1D4AFF;
+}
+
+.ant-anchor-link-active a {
+  color: #1D4AFF !important;
+}
+
+.ant-anchor-ink span {
+  border-color: #1D4AFF !important;
 }
 
 .footer-universal a {
@@ -731,15 +837,36 @@ pre tt:after {
   margin-right: 8px;
   opacity: 0
 }
+
 .blog-post h2 {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 2rem;
+  color: #1D4AFF;
+  padding-top: 2rem;
+  padding-bottom: .45rem;
+  left: 0;
 }
+
+.blog-post h3 {
+  color: #000000;
+  padding-top: 2rem;
+  padding-bottom: 1.45rem;
+  left: 0;
+}
+
+.blog-post hr {
+  width: 4rem;
+  height: 0;
+  margin-bottom: 2rem;
+  border: .2rem;
+  border-style: solid;
+  border-color:#1D4AFF;
+}
+
 .docs-footer {
   margin-top: 2rem;
   background: rgb(41, 37, 44, 0.1);
   padding: 1rem 2rem;
 }
+
 .blog-post p > img {
   margin: 0 auto;
   width: 65%;
@@ -757,3 +884,22 @@ h6:hover .post-toc-anchor
 
 a.middle { display: block; text-align: center }
 
+.blue {
+  color: #1D4AFF;
+}
+
+.red {
+  color: #F96132!important;
+}
+
+.yellow {
+  color: #F7A501;
+}
+
+table td {
+  border: none;
+}
+
+table th {
+  border: none;
+}

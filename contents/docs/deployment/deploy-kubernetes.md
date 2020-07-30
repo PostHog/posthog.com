@@ -1,14 +1,17 @@
 ---
-title: Deploying to Helm Chart (Kubernetes)
+title: Deploying with Helm Chart (Kubernetes)
 sidebar: Docs
 showTitle: true
 ---
 
 ## Why Helm Charts
 
-Helm allows us to efficiently manage Kubernetes applications - they help us define, install, and upgrade nearly every Kubernetes application!
+Helm is the package manager for Kubernetes, which allows us to efficiently manage Kubernetes applications. 
 
-In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) deployment on a [Kubernetes](http://kubernetes.io) cluster using [Helm](https://helm.sh). We also optionally package [PostgreSQL](https://github.com/kubernetes/charts/tree/master/stable/postgresql) and [Redis](https://github.com/kubernetes/charts/tree/master/stable/redis) - these are required for PostHog. You can read more about this in the [packages](#packages) section.
+Helm Charts are the "packages" in the Helm world. They help us define, install, and upgrade nearly every Kubernetes application!
+
+In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) deployment on a [Kubernetes](http://kubernetes.io) cluster using [Helm](https://helm.sh). We also optionally package [PostgreSQL](https://github.com/kubernetes/charts/tree/master/stable/postgresql) and [Redis](https://github.com/kubernetes/charts/tree/master/stable/redis) - these are required for PostHog. You can read more about this in the [Packages](#packages) section.
+
 
 ## Prerequisites
 
@@ -22,8 +25,8 @@ In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) depl
 
 2. Run the following:
 
-> _NOTE: If helm hangs while installing, try **increasing the memory** of your nodes._
-> As a baseline, we suggest having at least *4gb of memory per node*
+> _NOTE: If Helm hangs while installing, try **increasing the memory** of your nodes._
+> _As a baseline, we suggest having at least **4gb of memory per node**._
 
 ```shell script
 helm repo add posthog https://posthog.github.io/charts/
@@ -33,9 +36,9 @@ helm install posthog posthog/posthog
 
 ## Configuration
 
-The following table lists the configurable parameters of the PostHog helm chart and their default values.
+The following table lists the configurable parameters of the PostHog Helm Chart and their default values.
 
-Dependent charts can also have values overwritten. Preface values with Postgresql.*
+Dependent charts can also have values overwritten. Preface values with PostgreSQL.
 
 Parameter                                            | Description                                                                                                | Default
 :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- | :---------------------------------------------------
@@ -147,16 +150,18 @@ $ helm install -f my-values.yaml my-release .
 
 ### PostgresSQL
 
-By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. The other options (`postgresql.postgresqlDatabase`, `postgresql.postgresqlUsername` and `postgresql.postgresqlPort`) may also want changing from their default values.
+By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. 
 
-To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [this doc](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
+The other options (`postgresql.postgresqlDatabase`, `postgresql.postgresqlUsername` and `postgresql.postgresqlPort`) may also need changes from their default values.
+
+To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where the password will be overwritten with randomly generated passwords otherwise. See [this doc](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more details.
 
 ### Redis
 
-By default, Redis is installed as part of the chart. To use an external Redis server/cluster set `redis.enabled` to `false` and then set `redis.host`. If your redis cluster uses password define it with `redis.password`, otherwise just omit it. Check the table above for more configuration options.
+By default, Redis is installed as part of the chart. To use an external Redis server/cluster set `redis.enabled` to `false` and then set `redis.host`. If your Redis cluster uses a password, you should define it with `redis.password`, otherwise just omit it. Check the table above for more configuration options.
 
-To avoid issues when upgrading this chart, provide `redis.password` for subsequent upgrades. Otherwise the redis pods will get recreated on every update, potentially incurring some downtime.
+To avoid issues when upgrading this chart, provide `redis.password` for subsequent upgrades. If you do not, the Redis pods will get recreated on every update, potentially incurring some downtime.
 
 ### Ingress
 
-This chart provides support for Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.enabled` to true and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
+This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.enabled` to true and choose an `ingress.hostname` for the URL. You should then be able to access the installation using that address.
