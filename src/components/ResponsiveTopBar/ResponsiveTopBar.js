@@ -71,7 +71,7 @@ class ResponsiveTopBar extends Component {
       {sidebarOpen &&
         <div style={{
           marginTop: '2vh',
-          position: "fixed",
+          position: "absolute",
           top: menuOpen ? nMenuItem*32 + 90 : 105,
           left: 0,
           right: 0,
@@ -81,7 +81,7 @@ class ResponsiveTopBar extends Component {
           width: '100%'
         }}>
           <div style={{
-            position: "relative",
+            position: "absolute",
             top: 0,
             bottom: 0,
             left: 0,
@@ -97,7 +97,7 @@ class ResponsiveTopBar extends Component {
       }
       {anchorOpen &&
         <div style={{
-          position: "fixed",
+          position: "absolute",
           top: menuOpen ? nMenuItem*32 + 90 : 105,
           left: 0,
           right: 0,
