@@ -14,7 +14,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { sidebarDocked, menuOpen } = this.props
+    const { sidebarDocked, menuOpen, isBlogPage } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -53,11 +53,11 @@ class Menu extends Component {
                         key={item.link || item.a}
                       >
                         {item.a ? (
-                          <a href={item.a} style={{ color: '#595959' }}>
+                          <a href={item.a} style={{ color: isBlogPage ? '#FFFFFF' : '#595959' }}>
                             {item.name}
                           </a>
                         ) : (
-                          <Link to={item.link} style={{ color: '#595959' }}>
+                          <Link to={item.link} style={{ color: isBlogPage ? '#FFFFFF' : '#595959'}}>
                             {item.name}
                           </Link>
                         )}

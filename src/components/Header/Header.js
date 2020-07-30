@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 class Header extends Component {
   render() {
-    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall } = this.props
+    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
 
     return (
       <div
@@ -15,8 +15,8 @@ class Header extends Component {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'space-between'
-          //backgroundColor: '#fff'
+          justifyContent: 'space-between',
+          background: 'none'
         }}>
         {!onPostPage ? (
           <Link
@@ -55,9 +55,11 @@ class Header extends Component {
           ) : (
           <div style={{height: 64, width: 0}}></div>
         ))}
-        <Menu sidebarDocked={sidebarDocked} />
+        <Menu 
+        sidebarDocked={sidebarDocked}
+        isBlogPage={isBlogPage} />
       </div>
-    )
+)
   }
 }
 

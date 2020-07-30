@@ -676,6 +676,10 @@ header {
   margin-right: 20px;
 }
 
+.headerItems ul {
+  background: none!important;
+}
+
 
 #logo {
   margin: 0;
@@ -838,21 +842,22 @@ a.ant-anchor-link-title:hover {
   opacity: 0
 }
 
-.blog-post h2 {
-  color: #1D4AFF;
+.postPage h2 {
+  color: #000000;
   padding-top: 2rem;
   padding-bottom: .45rem;
   left: 0;
+  border-bottom: 2px solid #000000;
 }
 
-.blog-post h3 {
+.postPage h3 {
   color: #000000;
   padding-top: 2rem;
   padding-bottom: 1.45rem;
   left: 0;
 }
 
-.blog-post hr {
+.postPage hr {
   width: 4rem;
   height: 0;
   margin-bottom: 2rem;
@@ -861,13 +866,21 @@ a.ant-anchor-link-title:hover {
   border-color:#1D4AFF;
 }
 
+.postPage a {
+  color:#1D4AFF 
+}
+
+.postPage a:hover {
+  color:#577BFB
+}
+
 .docs-footer {
   margin-top: 2rem;
   background: rgb(41, 37, 44, 0.1);
   padding: 1rem 2rem;
 }
 
-.blog-post p > img {
+.postPage p > img {
   margin: 0 auto;
   width: 65%;
   display: block;

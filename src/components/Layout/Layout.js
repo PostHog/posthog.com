@@ -14,6 +14,7 @@ import { default as AntdLayout } from 'antd/lib/layout'
 import Col from 'antd/lib/col'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
+import blogBackground from '../../images/blog-background.svg'
 
 
 class Layout extends Component {
@@ -29,7 +30,9 @@ class Layout extends Component {
       anchorHide,
       className,
       containerStyle={},
-      expandedKeys
+      expandedKeys,
+      isBlogPage,
+      pageTitle
     } = this.props
 
     return (
@@ -60,19 +63,23 @@ class Layout extends Component {
                   <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                     {!screenIsSmall && onPostPage ? (
                       !sidebarHide && (
-                      <AntdLayout.Sider width="300"theme="light" style={{backgroundColor: '#F9F9F9'}} >
+                      <AntdLayout.Sider width="300" theme="light" style={{backgroundColor: '#F9F9F9'}} >
                         <ResponsiveSidebar style={{border: 'none'}}/>
                         </AntdLayout.Sider>
                       )):(
                         <div></div>
                       )}
 
-                      <AntdLayout theme="light" style={{ background: '#ffffff' }}>
+                      <AntdLayout theme="light" style={{ background: '#fff'}}>
                         <AntdLayout.Header
                         style={{ 
-                          background: onPostPage && screenIsSmall ? '#F9F9F9' : '#fff', 
-                          padding: screenIsSmall ? 0 : 'auto', 
-                          borderBottom: onPostPage && screenIsSmall ? '6px solid #C4C4C4' : 'none'}}
+                          backgroundColor: screenIsSmall ? '#F9F9F9' : '#fff', 
+                          backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
+                          backgroundSize: 'cover',
+                          height: !screenIsSmall && isBlogPage && '60vh',
+                          borderBottom: onPostPage && screenIsSmall && '6px solid #C4C4C4',
+                          padding: screenIsSmall && 0,
+                        }}
                         theme="light"
                         >
                           <Header
@@ -81,6 +88,7 @@ class Layout extends Component {
                           sidebarHide={sidebarHide}
                           onPostPage={onPostPage}
                           screenIsSmall={screenIsSmall}
+                          isBlogPage={isBlogPage}
                           theme="light"
                           />  
                           {screenIsSmall &&
@@ -88,6 +96,18 @@ class Layout extends Component {
                             (!anchorHide || !sidebarHide) && (
                                 <ResponsiveTopBar />
                             )}
+                          {isBlogPage && !screenIsSmall &&
+                          <div style={{position: 'absolute', backgroundColor: 'blue', height: '10vh', top: '45vh', width: 'calc(100% - 40vw)', color: 'white', paddingLeft: 'calc((100% - 300px) * 0.1 - 50px + 1.0875rem)'}}>
+                            <h1 align="left" style={{
+                              position: 'static', 
+                              color: 'white',  
+                              paddingLeft: 'calc((100% - 300px) * 0.1 - 50px + 1.0875rem)',
+                              fontSize: '2.75vw'
+                            }} >
+                              {pageTitle}
+                            </h1>
+                          </div>
+                          }
                         </AntdLayout.Header>
 
                       {/* content */}

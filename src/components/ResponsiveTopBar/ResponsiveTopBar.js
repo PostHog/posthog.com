@@ -67,7 +67,6 @@ class ResponsiveTopBar extends Component {
               <Button icon="ellipsis" onClick={this.onSetAnchorOpen} />
             }
           </div>*/}
-        }
       </div>
       {sidebarOpen &&
         <div style={{

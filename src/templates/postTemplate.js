@@ -12,6 +12,7 @@ import {
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 import SEO from '../components/seo';
+import MediaQuery from 'react-responsive'
 
 function addIndex (url) {
   const indexUrls = ['/docs', '/handbook']
@@ -40,20 +41,30 @@ function Template({
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
   return (
-    <Layout onPostPage={true}>
+    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} pageTitle={frontmatter.title}>
     <SEO
       title={frontmatter.title + ' - PostHog docs'}
       description={frontmatter.description || excerpt}
       pathname={markdownRemark.fields.slug}
       article
     />
-    <div className="blog-post-container">
-      <div className="blog-post">
-        { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+    <div className="postPageContainer">
+      <div className="postPage">
+        { frontmatter.showTitle && 
+          <MediaQuery maxWidth={1000}>
+            {screenIsSmall => (
+              screenIsSmall ? (
+                <h1 align="center">{frontmatter.title}</h1>
+                ) : (
+                  frontmatter.sidebar !== 'Blog' && (
+                    <h1 align="center">{frontmatter.title}</h1>
+                  )
+                ))}
+          </MediaQuery>}
+          <div
+            className="postPageContent"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
       </div>
       {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
     </div>
