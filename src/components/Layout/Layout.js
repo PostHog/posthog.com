@@ -75,8 +75,8 @@ class Layout extends Component {
                         style={{ 
                           backgroundColor: screenIsSmall ? '#F9F9F9' : '#fff', 
                           backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
-                          backgroundSize: 'cover',
-                          height: !screenIsSmall && isBlogPage && '60vh',
+                          backgroundSize: '80vw',
+                          height: !screenIsSmall && isBlogPage && '45vh',
                           borderBottom: onPostPage && screenIsSmall && '6px solid #C4C4C4',
                           padding: screenIsSmall && 0,
                         }}
@@ -100,9 +100,10 @@ class Layout extends Component {
                           <div style={{
                             position: 'absolute',  
                             height: '10vh', 
-                            top: '45vh', 
+                            top: '30vh', 
                             width: 'calc(100% - 40vw)', 
                             color: 'white', 
+                            verticalAlign: 'bottom',
                             paddingLeft: 'calc((100% - 300px) * 0.1 - 50px + 1.0875rem)'}}>
 
                             <h1 align="left" style={{
