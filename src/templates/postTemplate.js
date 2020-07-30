@@ -48,8 +48,8 @@ function Template({
       pathname={markdownRemark.fields.slug}
       article
     />
-    <div className="postPageContainer">
-      <div className="postPage">
+    <div className="blog-post-container">
+      <div className="blog-post">
         { frontmatter.showTitle && 
           <MediaQuery maxWidth={1000}>
             {screenIsSmall => (
@@ -62,7 +62,7 @@ function Template({
                 ))}
           </MediaQuery>}
           <div
-            className="postPageContent"
+            className="blog-post-content"
             dangerouslySetInnerHTML={{ __html: html }}
           />
       </div>

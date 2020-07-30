@@ -98,8 +98,7 @@ class Layout extends Component {
                             )}
                           {isBlogPage && !screenIsSmall &&
                           <div style={{
-                            position: 'absolute', 
-                            backgroundColor: 'blue', 
+                            position: 'absolute',  
                             height: '10vh', 
                             top: '45vh', 
                             width: 'calc(100% - 40vw)', 
@@ -110,7 +109,6 @@ class Layout extends Component {
                               position: 'static', 
                               color: 'white',  
                               paddingLeft: 'calc((100% - 300px) * 0.1 - 50px + 1.0875rem)',
-                              fontSize: '2.75vw'
                             }} >
                               {pageTitle}
                             </h1>
