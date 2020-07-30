@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-A topic that strikes fear into the hearts of many working on open source projects - telemetry. So much so, I was a little nervous about writing this piece!
+A topic that strikes fear into the hearts of many working on open source projects - tracking your users. We think this more complex choice than "tracking is wrong", so this is our thought process on this issue.
 
 ## A framework for considering what is ethical
 
