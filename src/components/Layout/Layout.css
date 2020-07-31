@@ -239,8 +239,8 @@ h1 {
   color: inherit;
   font-weight: bolder;
   text-rendering: optimizeLegibility;
-  font-size: 2.25rem;
-  line-height: 1.1;
+  font-size: 2.66667rem;
+  line-height: 1.5;
   font-family: 'Gosha Sans';
 }
 
@@ -254,10 +254,12 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: bold;
+  font-weight: 300!important;
   text-rendering: optimizeLegibility;
-  font-size: 1.62671rem;
-  line-height: 1.1;
+  font-size: 2rem;
+  line-height: 1.5;
+  font-family: 'Helvetica Neue';
+  font-style: normal;
 }
 h3 {
   margin-left: 0;
@@ -269,10 +271,12 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: bold;
+  font-weight: 300!important;
   text-rendering: optimizeLegibility;
-  font-size: 1.38316rem;
-  line-height: 1.1;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  font-family: 'Helvetica Neue';
+  font-style: normal;
 }
 h4 {
   margin-left: 0;
@@ -284,10 +288,12 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: bold;
+  font-weight: 300;
   text-rendering: optimizeLegibility;
   font-size: 1rem;
-  line-height: 1.1;
+  line-height: 1.5;
+  font-family: 'Helvetica Neue';
+  font-style: normal;
 }
 h5 {
   margin-left: 0;
@@ -299,10 +305,11 @@ h5 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: bold;
+  font-weight: 300;
   text-rendering: optimizeLegibility;
-  font-size: 0.85028rem;
-  line-height: 1.1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-family: 'Helvetica Neue'
 }
 h6 {
   margin-left: 0;
@@ -314,10 +321,11 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: bold;
+  font-weight: 300;
   text-rendering: optimizeLegibility;
   font-size: 0.78405rem;
-  line-height: 1.1;
+  line-height: 1.5;
+  font-family: 'Helvetica Neue'
 }
 hgroup {
   margin-left: 0;
@@ -847,12 +855,12 @@ a.ant-anchor-link-title:hover {
   opacity: 0
 }
 
-.postPage h2 {
+.blog-post h2 {
   color: #000000;
   padding-top: 2rem;
   padding-bottom: .45rem;
   left: 0;
-  border-bottom: 2px solid #000000;
+  border-bottom: 1px solid #000000;
 }
 
 .postPage h3 {
@@ -862,7 +870,14 @@ a.ant-anchor-link-title:hover {
   left: 0;
 }
 
-.postPage hr {
+.blog-post h2 + h3 {
+  color: #000000;
+  padding-top: .2rem;
+  padding-bottom: 1.45rem;
+  left: 0;
+}
+
+.blog-post hr {
   width: 4rem;
   height: 0;
   margin-bottom: 2rem;
@@ -871,12 +886,12 @@ a.ant-anchor-link-title:hover {
   border-color:#1D4AFF;
 }
 
-.postPage a {
-  color:#1D4AFF 
+.blog-post a {
+  color: #1D4AFF;
 }
 
-.postPage a:hover {
-  color:#577BFB
+.blog-post a:hover {
+  color: #577BFB;
 }
 
 .docs-footer {
@@ -885,7 +900,15 @@ a.ant-anchor-link-title:hover {
   padding: 1rem 2rem;
 }
 
-.postPage p > img {
+.docs-footer a {
+  color: #1D4AFF;
+}
+
+.docs-footer a:hover {
+  color: #577BFB;
+}
+
+.blog-post p > img {
   margin: 0 auto;
   width: 65%;
   display: block;
