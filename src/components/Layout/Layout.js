@@ -48,7 +48,7 @@ class Layout extends Component {
         `}
         render={data => {
           return (
-            <MediaQuery maxWidth={1000}>
+            <MediaQuery maxWidth={1076}>
               {screenIsSmall => (
                 <>
                   <Helmet
@@ -99,19 +99,19 @@ class Layout extends Component {
                             )}
                           {isBlogPage && !screenIsSmall &&
                           <div style={{
-                            position: 'absolute',
-                            height: '10vh', 
-                            top: '30vh', 
-                            width: 'calc(100% - 40vw)', 
+                            position: 'relative',
+                            height: '100%', 
+                            top: '-64px',
+                            width: '80%', 
                             color: 'white', 
                             verticalAlign: 'bottom',
-                            paddingLeft: 'calc((100% - 300px) * 0.1 - 50px + 1.0875rem)'}}
+                            left: 'calc((100% - 50px) * 0.1 - 1.0875rem)'}}
                             >
 
                             <h1 align="left" style={{
-                              position: 'absolute', 
-                              verticalAlign: 'bottom',
+                              position: 'absolute',
                               color: 'white',  
+                              bottom: 0
                               
                             }} >
                               {pageTitle}

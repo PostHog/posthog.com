@@ -51,7 +51,7 @@ function Template({
     <div className="blog-post-container">
       <div className="blog-post">
         { frontmatter.showTitle && 
-          <MediaQuery maxWidth={1000}>
+          <MediaQuery maxWidth={1076}>
             {screenIsSmall => (
               screenIsSmall ? (
                 <h1 align="center">{frontmatter.title}</h1>
