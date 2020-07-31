@@ -76,7 +76,7 @@ class Layout extends Component {
                           backgroundColor: screenIsSmall ? '#F9F9F9' : '#fff', 
                           backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
-                          backgroundSize: 'auto',
+                          backgroundSize: 'cover',
                           height: !screenIsSmall && isBlogPage && '45vh',
                           borderBottom: onPostPage && screenIsSmall && '6px solid #C4C4C4',
                           padding: screenIsSmall && 0,
