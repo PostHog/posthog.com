@@ -709,6 +709,11 @@ aside {
   border: none;
 }
 
+ul.ant-menu-sub {
+  background-color: #F9F9F9 !important;
+  border: none;
+}
+
 .headerItems li.ant-menu-item-selected {
   border-bottom: 2px solid #1D4AFF!important;
 }
