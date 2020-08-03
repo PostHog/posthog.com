@@ -7,6 +7,8 @@ import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
+import Search from '../SearchContainer/SearchContainer'
+import { Input } from 'antd';
 
 class Menu extends Component {
   onChangeMenuState = nItem => {
@@ -64,6 +66,11 @@ class Menu extends Component {
                       </AntMenu.Item>
                     )
                   })}
+                  <Search 
+                    placeholder="input search text"
+                    onSearch={value => console.log(value)}
+                    style={{ width: 200 }}
+                  />
                 </AntMenu>
               )}
               {!sidebarDocked && (

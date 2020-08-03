@@ -14,6 +14,7 @@ import { default as AntdLayout } from 'antd/lib/layout'
 import Col from 'antd/lib/col'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
+import { Input } from 'antd';
 
 
 class Layout extends Component {
