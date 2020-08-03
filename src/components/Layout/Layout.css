@@ -207,7 +207,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: lato, georgia, serif !important;
+  font-family: "Helvetica Neue", georgia, serif !important;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
