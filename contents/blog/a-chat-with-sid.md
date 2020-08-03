@@ -62,9 +62,9 @@ Many investors told us that it's one thing for a developer to install your softw
 
 In fact, we asked [GitHub's CTO](https://twitter.com/jasoncwarner) the same question. "The most effective way to sell me something is if I have 100 developers asking for it". Great!
 
-### Was there much spend on marketing early on? Was this effective? Or was it more word of mouth driven?
+### Approach to marketing
 
-There was no focus on marketing for the first 100K users - this all came from adoption of the Community Edition. This has now changed significantly, however, "you have raised money earlier than us so perhaps should do both at once, I'm not anti marketing".
+There was no significant spend on marketing for the first 100K users - this all came from adoption of the Community Edition. This has now changed significantly, however, "you have raised money earlier than us so perhaps should do both at once, I'm not anti marketing".
 
 ## Culture
 
