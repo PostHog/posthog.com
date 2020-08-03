@@ -53,7 +53,7 @@ Things we do not care about during review
 
 ## 6. QA
 
-See [How to QA](/dev/development-process/how-to-qa)
+See [How to QA](/handbook/engineering/how-to-qa)
 
 ## 7. Merging
 
@@ -61,29 +61,14 @@ Merge anytime. Friday afternoon? Merge.
 
 Our testing, reviewing and building process should be good enough we're comfortable merging any time.
 
-
 ## How to test
 
-### Backend
-At the moment, we have strong tests on the backend. We expect every backend function to have tests, and to be typed. Running `bin/tests` will run both tests and type-checking.
-
-To run a specific subset of tests
-```bash
-bin/tests posthog.api.test.test_action
-```
-
-You can also pass failfast
-```bash
-bin/tests --failfast
-```
-
-### Frontend
-At the moment we do not have good frontend tests. This is something we want, but haven't gotten round to.
-
+[How to test](/docs/contributing#testing)
 
 ## How to QA
-[How to QA](/dev/development-process/how-to-qa)
 
+[How to QA](/handbook/engineering/how-to-qa)
 
 ## How to release a new version 
-[Release new version](/dev/development-process/release-new-version)
+
+[Release new version](/handbook/engineering/release-new-version)
