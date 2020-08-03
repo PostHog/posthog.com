@@ -41,7 +41,7 @@ Furthermore, to ensure we can support the needs of our diverse team well, we off
 
 As the builders of an open-source product, we believe it is only right that we be as transparent as possible as a company.
 
-And this isn't just a meaningless corporate statement! Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and this website hosts a [comprehensive handbook](/handbook) explaining anything from how we hire and pay employees to how we email investors!
+And this isn't just a meaningless corporate statement. Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and this website hosts a [comprehensive handbook](/handbook) explaining anything from how we hire and pay employees to how we email investors!
 
 We're committed to much more than just public code.
 
