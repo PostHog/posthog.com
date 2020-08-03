@@ -62,9 +62,9 @@ Merge anytime. Friday afternoon? Merge.
 Our testing, reviewing and building process should be good enough we're comfortable merging any time.
 
 
-# How to test
+## How to test
 
-## Backend
+### Backend
 At the moment, we have strong tests on the backend. We expect every backend function to have tests, and to be typed. Running `bin/tests` will run both tests and type-checking.
 
 To run a specific subset of tests
@@ -81,9 +81,9 @@ bin/tests --failfast
 At the moment we do not have good frontend tests. This is something we want, but haven't gotten round to.
 
 
-# How to QA
+## How to QA
 [How to QA](/dev/development-process/how-to-qa)
 
 
-# How to release a new version 
+## How to release a new version 
 [Release new version](/dev/development-process/release-new-version)
