@@ -63,7 +63,9 @@ class Footer extends Component {
               <span className="footer-links-header">Support</span>
               <FooterListItem to="/support">Support</FooterListItem>
               <FooterListItem><a href="mailto:sales@posthog.com">Contact sales</a></FooterListItem>
-              <FooterListItem to="/status">Status</FooterListItem>
+              <Row>
+                <a href="http://status.posthog.com">Status</a>
+              </Row>
             </Col>
             <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Company</span>
