@@ -2,7 +2,8 @@
 
 @font-face {
   font-family: 'Gosha Sans';
-  src: url('/GoshaSans-Regular.ttf') format('truetype');
+  src: url('/fonts/GoshaSans-Bold.woff') format('woff');
+  src: url('/fonts/GoshaSans-Bold.woff2') format('woff2');
 }
 
 html {
