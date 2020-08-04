@@ -101,8 +101,8 @@ class Layout extends Component {
                           {isBlogPage && !screenIsSmall &&
                           <div style={{
                             position: 'relative',
-                            height: '100%', 
-                            top: '-64px',
+                            height: 'calc(100% - 64px)', 
+                            top: 0,
                             width: '80%', 
                             color: 'white', 
                             verticalAlign: 'bottom',

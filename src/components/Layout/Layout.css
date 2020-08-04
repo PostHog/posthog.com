@@ -893,6 +893,10 @@ a.ant-anchor-link-title:hover {
   color: #577BFB;
 }
 
+.ant-layout {
+  background-color: white!important;
+}
+
 .docs-footer {
   margin-top: 2rem;
   background: rgb(41, 37, 44, 0.1);
