@@ -61,25 +61,26 @@ class Layout extends Component {
                     <html lang="en" />
                   </Helmet>
                   <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
-                    {!screenIsSmall && onPostPage ? (
-                      !sidebarHide && (
+                    {!screenIsSmall && onPostPage && (
+                      !sidebarHide && !isBlogPage && (
                       <AntdLayout.Sider width="300" theme="light" style={{backgroundColor: '#F9F9F9'}} >
                         <ResponsiveSidebar style={{border: 'none'}}/>
                         </AntdLayout.Sider>
-                      )):(
-                        <div></div>
-                      )}
+                      ))}
 
                       <AntdLayout theme="light">
                         <AntdLayout.Header
+                        className="menuHeader"
                         style={{ 
                           backgroundColor: screenIsSmall ? '#F9F9F9' : '#fff', 
                           backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
                           backgroundSize: 'cover',
-                          height: !screenIsSmall && isBlogPage && '45vh',
+                          height: !screenIsSmall && isBlogPage && 400,
+                          maxHeight: !screenIsSmall && isBlogPage && '45vh',
                           borderBottom: onPostPage && screenIsSmall && '6px solid #C4C4C4',
                           padding: screenIsSmall && 0,
+                          marginBottom: isBlogPage && '2rem'
                         }}
                         theme="light"
                         >
@@ -105,7 +106,7 @@ class Layout extends Component {
                             width: '80%', 
                             color: 'white', 
                             verticalAlign: 'bottom',
-                            left: 'calc((100% - 50px) * 0.1 - 1.0875rem)'}}
+                            left: 'calc((100% - 960px) * 0.5 + 2.175rem)'}}
                             >
 
                             <h1 align="left" style={{
@@ -122,6 +123,33 @@ class Layout extends Component {
 
                       {/* content */}
                       {!screenIsSmall && onPostPage ? (
+                        isBlogPage ? (
+                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%", align: 'center'}}>
+                          <AntdLayout.Content style={{ minHeight: 280, margin: '0 auto', padding: '0px 1.0875rem 1.45rem', maxWidth: 960}}>
+                            <Container
+                              sidebarDocked={!screenIsSmall}
+                              onPostPage={onPostPage}
+                              className={className}
+                              style={{ position: 'relative' }}
+                              containerStyle={containerStyle}
+                            >
+                              {children}
+                            </Container>
+                          </AntdLayout.Content>
+                          
+                          {/* Sidebar right */}
+                          {!anchorHide && (
+                            <AntdLayout.Sider
+                              theme="light"
+                              style={{ height: '100%', backgroundColor: '#fff' }}
+                              className="rightBar"
+                              
+                            >
+                              <ResponsiveAnchor />
+                            </AntdLayout.Sider>
+                          )}
+                        </AntdLayout>
+                        ) : (
                         <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                           <AntdLayout.Content style={{ minHeight: 280, padding: '3rem 0% 0 10%', width: '100%' }}>
                             <Container
@@ -147,7 +175,7 @@ class Layout extends Component {
                             </AntdLayout.Sider>
                           )}
                         </AntdLayout>
-                      ) : (
+                        )) : (
                         <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                           <AntdLayout.Content
                             style={{
