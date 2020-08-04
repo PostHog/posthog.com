@@ -21,7 +21,7 @@ Think of a descriptive name and select how you want to roll out your feature.
 When you create a feature flag, we'll show you an example snippet. It'll look something like this:
 
 ```js
-if(posthog.isFeatureEnabled('new-beta-feature')) {
+if(posthog.isFeatureEnableds('new-beta-feature')) {
     // do something
 }
 ```
