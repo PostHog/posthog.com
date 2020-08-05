@@ -3,8 +3,9 @@ import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import './index.css'
 import { Link } from 'gatsby'
-import posthogComputerRetro from '../images/posthog-computer-retro.svg'
-import hogflix1 from '../images/hogflix-1.svg'
+import landingPageBackground from '../images/landing-page-background.svg'
+import computerDashboard4 from '../images/computer-dashboard-4.svg'
+import autocapture1 from '../images/autocapture-1.svg'
 import dashboards1 from '../images/dashboards-1.svg'
 import funnels1 from '../images/funnels-1.svg'
 import featureFlags1 from '../images/feature-flags-1.svg'
@@ -40,71 +41,61 @@ import Layout from '../components/Layout'
 
 function IndexPage() {
   return (
-    <Layout containerStyle={{maxWidth: "auto", padding: 0}} className="indexPage">
-      <div className="indexContainer">
+    <div className="indexContainer" style={{backgroundImage: `url(${landingPageBackground})`}}>
+    <Layout containerStyle={{maxWidth: "auto", padding: 0}} >
       <SEO
         title="PostHog - open source product analytics"
         description="Understand your users. Build a better product"
       />
       <Row>
-        <Col span={24}>
-          <div className="firstSpace"></div>
+        <Col span={22} offset={2}>
+          <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>
         </Col>
       </Row>
-      
-      <Row align="top" style={{marginBottom: '12rem'}}>
-        <Col xs={24} sm={18} md={12} lg={12} xl={12} className="gutter-row">
-          <h1 className="largeHeader" align="top">
-            Understand <br className="hiddenHeadBreak"/>your users.
-            <br />
-            Build a better product.
-          </h1>
+      <Row>
+        <Col span={8} offset={2}>
           <p>Join 1,000 companies using PostHog.</p>      
-            <a href="/trial">
-              <Button
-                type="primary"
-                size="large"
-                icon="right-circle"
-              >
-                Get Started for Free
-              </Button>
-            </a>
-            {' '}
-            <a href="/request_demo">
-              <Button type="secondary" size="large">
-                Request Demo
-              </Button>
-            </a>
-            <div className="secondSpace"></div>
-            <h2 className="yellowText">Open source product analytics</h2>
-            <p>
-              PostHog provides a full product analytics UX. Analyze trends, funnels, retention and cohorts.
-            </p>
+          <a href="/trial">
+            <Button
+              type="primary"
+              size="large"
+              icon="right-circle"
+            >
+              Get Started for Free
+            </Button>
+          </a>
+          {' '}
+          <a href="/request_demo">
+            <Button type="secondary" size="large" style={{align: 'right'}}>
+              Request Demo
+            </Button>
+          </a>
+          <div className="understandUsers">
+            <h2 align="top">
+              Understand your users.
+              <br />
+              Build a better product.
+            </h2>
+            <hr className="blueLine"/>
+            <p className="understandUsersText">Capture, store and visualize your product data all on your own infrastructure.</p>
+            <p className="understandUsersText">Eliminate the need for a complex pipeline, data lake and visualization tools.</p>
+          </div>
         </Col>
-        <Col xs={0} sm={0} md={12} lg={12} xl={12} className="gutter-row">
-          <img alt="posthog-computer-retro" loading="lazy" src={posthogComputerRetro}/>
+        <Col span={14}>
+          <img alt="computer-dashboard-4" loading="lazy" src={computerDashboard4} style={{width: '100%'}}/>
         </Col>
       </Row>
       
       {/*01 - It all starts with event autocapture*/}
-      <div className="redBackground">
-        <Row justify="space-between">
-          <Col xs={0} sm={0} md={12} lg={12} xl={12}>
-            <img alt="hogflix-1" loading="lazy" src={hogflix1} />
-          </Col>
-          <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
-          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-            <h2 className="yellowText numberHead">01</h2>
-          </Col>
-          <Col xs={17} sm={17} md={8} lg={8} xl={8}>
-            <h2 className="blueText">It all starts with event autocapture</h2>
-            <hr className="yellowLine"/>
-            <br/>
-            <p className="blueText">PostHog autocaptures events and user behavior in your mobile or web app.</p>
-          </Col>
-          <Col xs={3} sm={3} md={0} lg={0} xl={0}></Col>
-        </Row>
+      <div className="autocaptureWrapper" style={{backgroundImage: `url(${autocapture1})`}}>
+        <div className="autocapture">
+            <Row justify="space-between">
+            <Col span={24}>
+            </Col>
+          </Row>
+        </div>
       </div>
+       
 
       {/*02 - Understand how traffic really flows through your app*/}
       <div className="whiteBackground">
@@ -453,8 +444,8 @@ function IndexPage() {
           </Link>
         </Col>
       </Row>
-      </div>
     </Layout>
+    </div>
   )
 }
 

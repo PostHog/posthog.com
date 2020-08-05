@@ -239,8 +239,8 @@ h1 {
   color: inherit;
   font-weight: bolder;
   text-rendering: optimizeLegibility;
-  font-size: 2.66667rem;
-  line-height: 1.5;
+  font-size: 64px;
+  line-height: 150%;
   font-family: 'Gosha Sans';
 }
 
@@ -254,9 +254,9 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300!important;
+  font-weight: 400!important;
   text-rendering: optimizeLegibility;
-  font-size: 2rem;
+  font-size: 48px;
   line-height: 1.5;
   font-family: 'Helvetica Neue';
   font-style: normal;
@@ -273,7 +273,7 @@ h3 {
   color: inherit;
   font-weight: 300!important;
   text-rendering: optimizeLegibility;
-  font-size: 1.25rem;
+  font-size: 36px;
   line-height: 1.5;
   font-family: 'Helvetica Neue';
   font-style: normal;
@@ -391,6 +391,9 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 figure {
   margin-left: 0;

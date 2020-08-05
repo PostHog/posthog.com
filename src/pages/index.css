@@ -2,32 +2,69 @@
     border-bottom: none;
 }
 
+.indexContainer {
+    position: relative;
+    margin: 0;
+    height: auto;
+    max-height: 60vh;
+    width: 100%;
+    background-size: cover;
+}
+
+.ant-row {
+    background: none;
+    margin: auto 0;
+    padding: auto 0;
+}
+
+.ant-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.ant-layout {
+    background: none!important;
+}
+
+.ant-menu { 
+    background: none!important;
+}
+
 .ant-btn-primary { 
-  background-color: #353F6F;
-  border-color: #353F6F;
+  background-color: #1D4AFF;
+  border-color: #1D4AFF;
 }
 
 .ant-btn-primary:hover { 
-    background-color: #353F6F;
-    border-color: #353F6F;
-    opacity: 0.8;
+    background-color: #577BFB;
+    border-color: #577BFB;
   }
 
 .ant-btn-secondary {
-  border-color: #353F6F;
-  color: #353F6F;
+  border-color: #1D4AFF;
+  color: #1D4AFF;
+  background-color: #FFFFFF;
 }
 
 .ant-btn-secondary:hover {
-    border-color: #353F6F;
-    color: #353F6F;
-    opacity: 0.8;
+    border-color: #577BFB;
+    color: #577BFB;
   }
 
-.indexContainer .ant-row {
-    max-width: 960px;
-    padding: 0 1.0875rem 0;
-    margin: 0 auto;
+.understandUsers {
+    position: inherit;
+    top: 15vh;
+}
+
+.understandUsersText {
+    color: #35416B;
+}
+
+.autocaptureWrapper {
+    position: relative;
+    height: 43.194444444vw;
+    width: 100%;
+    background-size: contain;
 }
 
 @media screen and (max-width: 768px) {
@@ -98,23 +135,6 @@ img {
     .componentSpace{
         padding: 0px;
     }
-  }
-
-.largeHeader {
-    font-family: 'lato';
-    font-weight: bold;
-    line-height: 54px;
-    color: #353F6F;
-}
-
-@media screen and (min-width: 576px) {
-    .hiddenHeadBreak {
-        display: none;
-    }
-}
-
-h2 {
-    color: #595959;
 }
 
 h3 {
@@ -138,27 +158,30 @@ h3 {
 }
 
 .yellowLine {
-    width: 4rem;
+    width: 118px;
     height: 0px;
     border: .2rem;
     border-style: solid;
+    border-radius: 10px;
     border-color:#F9BD2B;
 }
 
 .redLine {
-    width: 4rem;
+    width: 118px;
     height: 0px;
     border: .2rem;
     border-style: solid;
+    border-radius: 10px;
     border-color:#F54E00;
 }
 
 .blueLine {
-    width: 4rem;
+    width: 118px;
     height: 0px;
     border: .2rem;
     border-style: solid;
-    border-color:#353F6F;
+    border-radius: 10px;
+    border-color: #1D4AFF;
 }
 
 .yellowLine2 {

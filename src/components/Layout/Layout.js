@@ -57,7 +57,7 @@ class Layout extends Component {
                   >
                     <html lang="en" />
                   </Helmet>
-                  <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
+                  <AntdLayout theme="light" style={{ width: "100%"}}>
                     {!screenIsSmall && onPostPage ? (
                       !sidebarHide && (
                       <AntdLayout.Sider width="300"theme="light" style={{backgroundColor: '#F9F9F9'}} >
@@ -67,10 +67,10 @@ class Layout extends Component {
                         <div></div>
                       )}
 
-                      <AntdLayout theme="light" style={{ background: '#ffffff' }}>
+                      <AntdLayout theme="light">
                         <AntdLayout.Header
                         style={{ 
-                          background: onPostPage && screenIsSmall ? '#F9F9F9' : '#fff', 
+                          background: onPostPage && screenIsSmall ? '#F9F9F9' : 'none', 
                           padding: screenIsSmall ? 0 : 'auto', 
                           borderBottom: onPostPage && screenIsSmall ? '6px solid #C4C4C4' : 'none'}}
                         theme="light"
@@ -92,7 +92,7 @@ class Layout extends Component {
 
                       {/* content */}
                       {!screenIsSmall && onPostPage ? (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
+                        <AntdLayout theme="light" style={{ width: "100%"}}>
                           <AntdLayout.Content style={{ minHeight: 280, padding: '3rem 0% 0 10%', width: '100%' }}>
                             <Container
                               sidebarDocked={!screenIsSmall}
@@ -109,7 +109,7 @@ class Layout extends Component {
                           {!anchorHide && (
                             <AntdLayout.Sider
                               theme="light"
-                              style={{ height: '100%', backgroundColor: '#fff' }}
+                              style={{ height: '100%' }}
                               className="rightBar"
                               
                             >
@@ -118,7 +118,7 @@ class Layout extends Component {
                           )}
                         </AntdLayout>
                       ) : (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
+                        <AntdLayout theme="light" style={{ width: "100%"}}>
                           <AntdLayout.Content
                             style={{
                               position: 'relative',
