@@ -7,7 +7,12 @@ showTitle: true
 Setting up HTTPS locally can be useful if you're trying to debug hard
 to replicate issues (e.g cross domain cookies, etc).
 
-There are two ways you can get HTTPS locally: ngrok or with nginx and a local certificate. The easiest is to use ngrok.
+There are two ways you can get HTTPS locally: 
+
+1. ngrok 
+2. NGINX and a local certificate. 
+
+The easiest option is to use ngrok.
 
 ## Set up SSL via ngrok
 
