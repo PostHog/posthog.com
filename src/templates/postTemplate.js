@@ -40,18 +40,18 @@ function Template({
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
   return (
-    <Layout onPostPage={true}>
+    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'}>
     <SEO
       title={frontmatter.title + ' - PostHog docs'}
       description={frontmatter.description || excerpt}
       pathname={markdownRemark.fields.slug}
       article
     />
-    <div className="blog-post-container">
-      <div className="blog-post">
+    <div className="docsPagesContainer">
+      <div className="docsPages">
         { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
         <div
-          className="blog-post-content"
+          className="docsPagesContent"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
