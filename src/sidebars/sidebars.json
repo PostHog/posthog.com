@@ -26,12 +26,12 @@
     "items": [
       "docs/deployment",
       "docs/deployment/deploy-heroku",
+      "docs/deployment/deploy-aws",
       "docs/deployment/deploy-azure",
       "docs/deployment/deploy-digital-ocean",
       "docs/deployment/deploy-docker",
       "docs/deployment/deploy-gcs",
       "docs/deployment/deploy-kubernetes",
-      "docs/deployment/deploy-aws",
       "docs/deployment/deploy-source",
       "docs/deployment/scaling-posthog",
       "docs/deployment/securing-posthog",

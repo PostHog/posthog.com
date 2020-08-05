@@ -30,11 +30,11 @@ When logged in, click 'Create Docker Droplet' on [this page](https://marketplace
 If quick start did not work for you, do the following after logging in:
 
 1. Create a new project using the left-hand sidebar on your dashboard
-2. Give the project any name you prefer
-3. Navigate to your project and click on 'Create Droplet'
-4. Look for a Select the 'Marketplace' option on the top right
-5. Select the 'Docker' option
-6. Follow the steps and define the settings to create the droplet 
+1. Give the project any name you prefer
+1. Navigate to your project and click on 'Create Droplet'
+1. Look for a Select the 'Marketplace' option on the top right
+1. Select the 'Docker' option
+1. Follow the steps and define the settings to create the droplet 
    -  The $20.00 droplet configuration should be good for most purposes. It has 4GB of RAM, 2 CPUs, 80GB of storage, and 4TB of transfer. However, if your volume is expected to be low, you should be able to safely pick to a lighter option. Alternatively, if you know your volume will be extremely high out of the gate, you might want to consider a more expensive option.
 
 > **Note**: You may also create your droplet with a plain Ubuntu distribution (or any other distro) without a one-click app. However, the 'Docker' app ships with the Docker engine and Docker Compose by default on Ubuntu 18.04, which can save you a **lot of time** when setting up.
@@ -99,12 +99,26 @@ sudo apt-get update && sudo apt-get install git
 ```bash
 git clone https://github.com/posthog/posthog.git && cd posthog
 ```
-2. Then, to run PostHog, do:
+1. You'll then need to generate a `SECRET_KEY` that is unique to your instance. 
+
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deployment/securing-posthog).**
+
+    First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+
+    Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
+
+    Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+
+    This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
+
+    ```
+    SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
+    ```
+1. Then, to run PostHog, do:
 ```bash
 docker-compose up -d
 ```
-3. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
-4. (Optional) Consider using something like [Supervisor](http://supervisord.org/introduction.html) to monitor the process
+1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
 <br>
 
