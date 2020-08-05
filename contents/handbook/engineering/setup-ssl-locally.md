@@ -47,9 +47,9 @@ ngrok http 8000
 
 Do what you need with the returned URL!
 
-5. Tips & Tricks
+**Tips & Tricks**
 
-If testing the toolbar, make sure to add the ngrok urls to the list on the /setup page.
+If you're testing the Toolbar, make sure to add the ngrok urls to the list on the /setup page.
 
 ![Permitted domains](../../images/engineering/toolbar-permitted-ngrok.png)
 
