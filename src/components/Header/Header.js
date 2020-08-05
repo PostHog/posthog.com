@@ -5,10 +5,10 @@ import logo from '../../images/posthog-logo-150x29.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
 
+
 class Header extends Component {
   render() {
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
-
     return (
       <div
         style={{
