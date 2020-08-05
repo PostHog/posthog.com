@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  src: url(https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wXiWtFCc.woff2);
+}
 
+/*Gosha Sans*/
 @font-face {
   font-family: 'Gosha Sans';
-  src: url('/GoshaSans-Regular.ttf') format('truetype');
+  src: url('/fonts/GoshaSans-Bold.woff') format('woff');
+  src: url('/fonts/GoshaSans-Bold.woff2') format('woff2');
 }
 
 html {
@@ -207,7 +213,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: lato, georgia, serif !important;
+  font-family: "Helvetica Neue", georgia, serif !important;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -237,7 +243,7 @@ h1 {
   padding-top: 0;
   margin-bottom: 2rem;
   color: inherit;
-  font-weight: bolder;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2.66667rem;
   line-height: 1.5;
@@ -383,6 +389,7 @@ dd {
   margin-bottom: 1.45rem;
 }
 p {
+  font-size: .85rem;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -735,6 +742,10 @@ ul.ant-menu-sub {
   font-weight: lighter!important;
 }
 
+.ant-menu-inline ul {
+  background-color: #F9F9F9 !important;
+}
+
 .submenuSelected i::before{
   background: #454545!important;
 }
@@ -857,23 +868,29 @@ a.ant-anchor-link-title:hover {
 
 .blog-post h2 {
   color: #000000;
-  padding-top: 2rem;
-  padding-bottom: .45rem;
+  margin-top: 2rem;
+  margin-bottom: .45rem;
   left: 0;
   border-bottom: 1px solid #000000;
 }
 
-.postPage h3 {
+.docsPages h3 {
   color: #000000;
-  padding-top: 2rem;
-  padding-bottom: 1.45rem;
+  margin-top: 2rem;
+  margin-bottom: 1.45rem;
   left: 0;
 }
 
 .blog-post h2 + h3 {
   color: #000000;
-  padding-top: .2rem;
-  padding-bottom: 1.45rem;
+  margin-top: .2rem;
+  margin-bottom: 1.45rem;
+  left: 0;
+}
+
+.blog-post p + h2 {
+  margin-top: 2rem !important;
+  margin-bottom: 1.45rem;
   left: 0;
 }
 
@@ -911,11 +928,12 @@ a.ant-anchor-link-title:hover {
   color: #577BFB;
 }
 
-.blog-post p > img {
-  margin: 0 auto;
+.blog-post p > span {
+  margin: 1.45rem auto;
   width: 65%;
   display: block;
 }
+
 h1:hover .post-toc-anchor,
 h2:hover .post-toc-anchor,
 h3:hover .post-toc-anchor,

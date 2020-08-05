@@ -26,7 +26,7 @@ Body:
     "properties": {
         "distinct_id": "[your users' distinct id]",
         "key1": "value1",
-        "key2": "value2",
+        "key2": "value2"
     },
     "timestamp": "[optional timestamp in ISO 8601 format]"
 }
@@ -50,7 +50,7 @@ Body:
             "properties": {
                 "distinct_id": "[your users' distinct id]",
                 "key1": "value1",
-                "key2": "value2",
+                "key2": "value2"
             },
             "timestamp": "[optional timestamp in ISO 8601 format]"
         },

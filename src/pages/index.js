@@ -366,8 +366,7 @@ function IndexPage() {
 
       {/* Install now, free*/}
       <Row style={{marginTop: '4rem'}}>
-        <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
-        <Col xs={24} sm={24} md={22} lg={22} xl={22}>
+        <Col span={24}>
           <div className="installNow">
             <div className="installNowImg">
               <Link to="/docs/deployment">
@@ -406,7 +405,6 @@ function IndexPage() {
             <img alt="install-now-free-1" loading="lazy" src={installNowFree1} className="imageShow"/>
           </div>
         </Col>
-        <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
       </Row>
 
       <Row justify="center">

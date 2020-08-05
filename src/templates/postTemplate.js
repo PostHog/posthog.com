@@ -41,30 +41,20 @@ function Template({
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
   return (
-    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} pageTitle={frontmatter.title}>
+    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'}>
     <SEO
       title={frontmatter.title + ' - PostHog docs'}
       description={frontmatter.description || excerpt}
       pathname={markdownRemark.fields.slug}
       article
     />
-    <div className="blog-post-container">
-      <div className="blog-post">
-        { frontmatter.showTitle && 
-          <MediaQuery maxWidth={1076}>
-            {screenIsSmall => (
-              screenIsSmall ? (
-                <h1 align="center">{frontmatter.title}</h1>
-                ) : (
-                  frontmatter.sidebar !== 'Blog' && (
-                    <h1 align="center">{frontmatter.title}</h1>
-                  )
-                ))}
-          </MediaQuery>}
-          <div
-            className="blog-post-content"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+    <div className="docsPagesContainer">
+      <div className="docsPages">
+        { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
+        <div
+          className="docsPagesContent"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
       {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
     </div>

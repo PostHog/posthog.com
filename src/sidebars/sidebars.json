@@ -207,12 +207,12 @@
     "name":"Company",
     "items":
     [
-      "handbook/company/communication",
-      "handbook/company/culture",
-      "handbook/company/security",
       "handbook/company/story",
-      "handbook/company/team",
-      "handbook/company/values"
+      "handbook/company/culture",
+      "handbook/company/values",
+      "handbook/company/communication",
+      "handbook/company/security",
+      "handbook/company/team"
     ]
   },
   {
@@ -220,13 +220,14 @@
     "name":"People",
     "items":
     [
-      "handbook/people/onboarding",
-      "handbook/people/offboarding",
+      "handbook/people/hiring-process",
       "handbook/people/compensation",
-      "handbook/people/side-gigs",
-      "handbook/people/spending-money",
       "handbook/people/time-off",
-      "handbook/people/hiring-process"
+      "handbook/people/spending-money",
+      "handbook/people/side-gigs",
+      "handbook/people/training",
+      "handbook/people/onboarding",
+      "handbook/people/offboarding"
     ]
   },
   {
@@ -255,9 +256,9 @@
     "items":[
       "handbook/strategy/strategy",
       "handbook/strategy/business-model",
+      "handbook/strategy/roadmap",
       "handbook/strategy/investors",
-      "handbook/strategy/investor-updates",
-      "handbook/strategy/roadmap"
+      "handbook/strategy/investor-updates"
     ]
   }
 ]

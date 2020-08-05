@@ -124,3 +124,7 @@ If you live in the US, a particularly good way to use this budget is to cover th
 If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill.
 
 At PostHog's current stage, a fancy coffee shop is encouraged, a fancy lunch or dinner is not.
+
+## Training
+
+We have a separate section on spending money on [training](/handbook/people/training) (which covers books and conferences).

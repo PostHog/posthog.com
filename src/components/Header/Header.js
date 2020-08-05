@@ -6,6 +6,7 @@ import whiteLogo from '../../images/posthog-logo-white.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
 
+
 class Header extends Component {
   render() {
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
@@ -19,7 +20,7 @@ class Header extends Component {
           justifyContent: 'space-between',
           background: 'none'
         }}>
-        {!onPostPage ? (
+        {sidebarHide || !onPostPage ? (
           <Link
           id="logo"
           to="/"
