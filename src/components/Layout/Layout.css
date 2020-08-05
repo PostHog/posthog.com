@@ -1,8 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  src: url(https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wXiWtFCc.woff2);
+}
 
+/*Gosha Sans*/
 @font-face {
   font-family: 'Gosha Sans';
-  src: url('/GoshaSans-Regular.ttf') format('truetype');
+  src: url('/GoshaSans-Regular.ttf');
 }
 
 html {
@@ -207,7 +212,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: lato, georgia, serif !important;
+  font-family: lato, sans-serif !important;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -237,7 +242,7 @@ h1 {
   padding-top: 0;
   margin-bottom: 2rem;
   color: inherit;
-  font-weight: bolder;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2.66667rem;
   line-height: 1.5;
@@ -726,6 +731,10 @@ aside {
   font-weight: lighter!important;
 }
 
+.ant-menu-inline ul {
+  background-color: #F9F9F9 !important;
+}
+
 .submenuSelected i::before{
   background: #454545!important;
 }
@@ -854,7 +863,7 @@ a.ant-anchor-link-title:hover {
   border-bottom: 1px solid #000000;
 }
 
-.blog-post h3 {
+.docsPages h3 {
   color: #000000;
   padding-top: 2rem;
   padding-bottom: 1.45rem;

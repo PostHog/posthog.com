@@ -33,7 +33,7 @@ Behind the scenes, every time a user loads a page we call an endpoint to get the
 To combat that, there's a callback you can use to wait for the flags to come in:
 
 ```js
-posthog.onFeatureFlag(function() {
+posthog.onFeatureFlags(function() {
     // feature flags are guaranteed to be available at this point
     if(posthog.isFeatureEnabled('new-beta-feature')) {
         // do something
