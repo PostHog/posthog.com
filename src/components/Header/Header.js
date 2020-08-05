@@ -8,8 +8,7 @@ import { connect } from 'react-redux'
 
 class Header extends Component {
   render() {
-    const { sidebarDocked, onPostPage, screenIsSmall, isBlogPage } = this.props
-
+    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
     return (
       <div
         style={{
@@ -17,8 +16,29 @@ class Header extends Component {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          background: 'none'
         }}>
-        {screenIsSmall ? (
+        {sidebarHide || !onPostPage ? (
+          <Link
+          id="logo"
+          to="/"
+          style={{
+            //color: '#FFF',
+            textDecoration: 'none',
+            verticalAlign: 'center'
+          }}>
+          {screenIsSmall ? (
+          <img alt="logo" src={logo} id="logo-image" style={{
+            display: 'flex',
+            top: 0,
+            left: 8
+          }} />
+          ) : (
+            <img alt="logo" src={logo} id="logo-image"/>
+          )}
+          </Link>
+        ) : (
+          screenIsSmall ? (
             <Link
           id="logo"
           to="/"
@@ -34,24 +54,13 @@ class Header extends Component {
             }} />
           </Link>
           ) : (
-            onPostPage ? (
-              <div style={{height: 64}}/>
-            ) : (
-              <Link
-              id="logo"
-              to="/"
-              style={{
-                //color: '#FFF',
-                textDecoration: 'none',
-                verticalAlign: 'center'
-              }}>
-                <img alt="logo" src={logo} id="logo-image"/>
-                  </Link>
-            )
-          )}
-        <Menu sidebarDocked={sidebarDocked} />
+          <div style={{height: 64, width: 0}}></div>
+        ))}
+        <Menu 
+        sidebarDocked={sidebarDocked}
+        isBlogPage={isBlogPage} />
       </div>
-    )
+)
   }
 }
 

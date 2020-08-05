@@ -7,7 +7,8 @@
 /*Gosha Sans*/
 @font-face {
   font-family: 'Gosha Sans';
-  src: url('/GoshaSans-Regular.ttf');
+  src: url('/fonts/GoshaSans-Bold.woff') format('woff');
+  src: url('/fonts/GoshaSans-Bold.woff2') format('woff2');
 }
 
 html {
@@ -212,7 +213,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: lato, sans-serif !important;
+  font-family: "Helvetica Neue", georgia, serif !important;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -388,6 +389,7 @@ dd {
   margin-bottom: 1.45rem;
 }
 p {
+  font-size: .85rem;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -857,23 +859,29 @@ a.ant-anchor-link-title:hover {
 
 .blog-post h2 {
   color: #000000;
-  padding-top: 2rem;
-  padding-bottom: .45rem;
+  margin-top: 2rem;
+  margin-bottom: .45rem;
   left: 0;
   border-bottom: 1px solid #000000;
 }
 
 .docsPages h3 {
   color: #000000;
-  padding-top: 2rem;
-  padding-bottom: 1.45rem;
+  margin-top: 2rem;
+  margin-bottom: 1.45rem;
   left: 0;
 }
 
 .blog-post h2 + h3 {
   color: #000000;
-  padding-top: .2rem;
-  padding-bottom: 1.45rem;
+  margin-top: .2rem;
+  margin-bottom: 1.45rem;
+  left: 0;
+}
+
+.blog-post p + h2 {
+  margin-top: 2rem !important;
+  margin-bottom: 1.45rem;
   left: 0;
 }
 
@@ -908,11 +916,12 @@ a.ant-anchor-link-title:hover {
   color: #577BFB;
 }
 
-.blog-post p > img {
-  margin: 0 auto;
+.blog-post p > span {
+  margin: 1.45rem auto;
   width: 65%;
   display: block;
 }
+
 h1:hover .post-toc-anchor,
 h2:hover .post-toc-anchor,
 h3:hover .post-toc-anchor,
