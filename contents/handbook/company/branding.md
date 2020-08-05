@@ -188,15 +188,22 @@ On top of the color blocks (or on iTs own) you could also use the halftone grey 
 
 ## Menus and Sidebars 
 
-Most of the menus on PostHog will be in tones of grey with pops of colour for clicked pages. The most common menu featured on the bottom of the website page holds 5 sections for users to navigate the website. This menu is Mid grey (#BEBEBE), 315px H x W of screen. 
+Most of the menus on PostHog will be in tones of grey with pops of colour for clicked pages. The most common menu featured on the bottom of the website page holds 5 sections for users to navigate the website. This menu is Mid grey (#BEBEBE), and its size is  315px in height, while occupuying the entire length of the screen in width.
 
 Within the block are the 5 categories: Why PostHog, Resources, Community, Support, Company.
-Extra Large Text, Helvetica Neue, medium, size 20px, line height 35, colour black, opacity 100%
 
-Underneath these 5 categories are the sub sections. 
-Normal Text, Helvetica Neue, regular, size 16px, line height 25, colour black, opacity 100%
+This uses 'Extra Large Text', as defined in the 'Fonts' section.
 
-Side Menus, found on pages such as Docs, are to be a Light Grey (#F0F0F0) 430px wide. The text and drop down options should be fixed so that even when reading the consumer can still have quick access to other areas within the site. The text in this sidebar should be Extra Large Text, Helvetica Neue, medium, size 20px, line height 35, colour black, opacity 100%, with a spacing of 60px between each category. The arrows that accompany the categories will be in Figma - they are a simple vector and the stroke needs to be 2.
-When you click on a drop down menu, the text and arrow turn Blue (#1D4AFF) to indicate that it has been clicked. The subcategories text should be Normal Text, Helvetica Neue, medium, size 16px, line height 25, colour black, opacity 100%, with a spacing of 30px between each option. When a subcategory is clicked- this should also turn Blue, along with the Category text and arrow. 
+Underneath these 5 categories are the sub sections, which use 'Normal Text', as defined in the 'Fonts' section.
 
-The last menu is the navigation menu that can be found in Docs, this uses Small Text, Helvetica Neue, regular, size 12px, line height 20, colour black, opacity 30%, and is found on the far right, side of the screen. Along side the text on the left is a line with a small circle to indicate which part of the doc you are in. Alike the text the line is black with opacity 30%, and the stroke is 3, while the circle is 12x12px (white fill) with an inside stroke of 3 (orange). Depending on what section of the text you are reading, or clicked on the text will turn orange and the circle will be aligned with that selected text. 
+Side Menus, found on pages such as Docs, are to be a Light Grey (#F0F0F0) and 430px wide. The text and drop down options should be fixed so that even when reading the consumer can still have quick access to other areas within the site. 
+
+The text in this sidebar should be Extra Large Text. The arrows that accompany the categories will be in Figma - they are a simple vector and the stroke needs to be 2.
+
+When you click on a dropdown menu, the text and arrow turn Blue (#1D4AFF) to indicate that they have been clicked. The subcategories text should be Normal Text. When a subcategory is clicked this should also turn Blue, along with the Category text and arrow. 
+
+The last menu is the navigation menu that can be found in Docs. This uses Small Text. 
+
+Alongside the text on the left is a line with a small circle to indicate the part of the document you are in. Like the text, the line is black with an opacity of 30%. The stroke is 3, while the circle is 12x12px (white fill) with an inside stroke of 3 (orange). 
+
+Depending on what section of the text you are reading, the text will turn orange and the circle will be aligned with that selected text. 
