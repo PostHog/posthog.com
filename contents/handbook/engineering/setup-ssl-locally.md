@@ -11,6 +11,8 @@ There are two ways you can get HTTPS locally: ngrok or with nginx and a local ce
 
 ## Set up SSL via ngrok
 
+0. Make sure you [have ngrok installed](https://ngrok.com/download)
+
 1. Start ngrok tunnel to 8234 (webpack dev server). This will give you a tunnel URL such as https://68f83839843a.ngrok.io
 
 ```sh
@@ -28,7 +30,7 @@ export JS_URL=https://68f83839843a.ngrok.io
 yarn start
 ```
 
-3. Copy the URL to `JS_URL` and start the django server
+3. Copy the URL to `JS_URL` and start the Django server
 
 ```sh
 export DEBUG=1
@@ -37,7 +39,7 @@ export JS_URL=https://68f83839843a.ngrok.io
 python manage.py runserver
 ```
 
-4. Start a ngrok tunnel to 8000 (django)
+4. Start a ngrok tunnel to 8000 (Django)
 
 ```
 ngrok http 8000
@@ -47,7 +49,7 @@ Do what you need with the returned URL!
 
 5. Tips & Tricks
 
-If testing the toolbar, make sure to add whatever ngrok urls to the list in /setup.
+If testing the toolbar, make sure to add the ngrok urls to the list on the /setup page.
 
 ![Permitted domains](../../images/engineering/toolbar-permitted-ngrok.png)
 
@@ -56,7 +58,7 @@ Also, watch out, network requests can be slow through ngrok:
 
 ![Network slow with ngrok](../../images/engineering/ngrok-slow.gif)
 
-## Set up SSL via nginx and a local certificate
+## Set up SSL via NGINX and a local certificate
 
 0. Update openssl if "openssl version" tells you "LibreSSL" or something like that.
 
