@@ -12,30 +12,7 @@ PostHog has an API available on all tiers of pricing and for every self-hosted v
 
 ## Authentication
 
-
-### Username & Password
-
-Authentication can be done using your own username and password. We suggest creating a new user within your team specifically for this.
-
-With `curl`:
-```bash
-curl -u username:password https://posthog.example.com/api/person/
-```
-
-As a header:
-```bash
-AUTH=$(echo -ne "username:password" | base64 --wrap 0)
-
-curl \
-  --header "Authorization: Basic $AUTH" \
-  https://posthog.example.com/api/person/
-```
-
-**Important:** The key under 'API key' in the Setup page is write-only and public. You cannot use that for any of these endpoints.
-
-<br>
-
-### Personal API keys
+### Personal API Keys (Recommended)
 
 Personal API keys allow full access to your account, just like e-mail address and password, but you can create any number of them and each one can invalidated any moment. This makes for greater control for you and improved security of stored data.
 
@@ -77,6 +54,30 @@ curl \
 --header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
 https://posthog.example.com/api/person/
 ```
+<br>
+
+### Username & Password
+
+**Important:** While you can still use this type of authentication, it is more secure to make use of a Personal API Key.
+
+Authentication can be done using your own username and password. We suggest creating a new user within your team specifically for this.
+
+With `curl`:
+```bash
+curl -u username:password https://posthog.example.com/api/person/
+```
+
+As a header:
+```bash
+AUTH=$(echo -ne "username:password" | base64 --wrap 0)
+
+curl \
+  --header "Authorization: Basic $AUTH" \
+  https://posthog.example.com/api/person/
+```
+
+**Important:** The key under 'API key' in the Setup page is write-only and public. You cannot use that for any of these endpoints.
+
 <br>
 
 ## /user
