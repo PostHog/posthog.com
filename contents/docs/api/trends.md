@@ -7,8 +7,7 @@ showTitle: true
 
 In PostHog, there is an API endpoint available to do advanced analytics on your data. We use this endpoint for the [Trends page](/docs/features/trends) in PostHog.
 
-## List trends
-
+## List Trends
 
 ```plaintext
 GET /action/trends/?events=[{"id":"$pageview"}]
