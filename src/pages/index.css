@@ -212,8 +212,14 @@ h3 {
     opacity: 0.7;
 }
 
-.installNow img {
+.installNow {
+    height: auto;
     width: 100%;
+}
+
+.installNow img {
+    left: 0;
+    max-width: 100%;
     height: auto;
     padding: 0;
     margin: 0;
@@ -221,13 +227,20 @@ h3 {
 
 .installNowImg div{
     position: absolute;
-    height: calc((100% - 8px) * 0.3378);
-    width: calc((100% - 24px) * 0.135);
-    top: calc((100% - 8px) * 0.4535 + 4px);
-    border-radius: 12px;
+    height: 33.78%;
+    width: 13.5%;
+    top: 45.35%;
+    border-radius: 10%;
     border: 1.5px solid #35416B;
     background-color: #FFFFFF;
+}
 
+@media screen and (max-width: 576px) {
+    .installNowImg div{
+        border-radius: 12px;
+        border: .5px solid #35416B;
+        background-color: #FFFFFF;
+    }
 }
 
 .installNowImg img:hover {
@@ -235,7 +248,7 @@ h3 {
 }
 
 .heroku {
-    left: calc((100% - 24px) * 0.1422 + 12px);
+    left: 14.22%;
 }
 
 .heroku img {
@@ -247,7 +260,7 @@ h3 {
 }
 
 .docker {
-    left: calc((100% - 24px) * 0.3392 + 12px);
+    left: 33.92%;
 }
 
 .docker img {
@@ -258,7 +271,7 @@ h3 {
 }
 
 .aws {
-    left: calc((100% - 24px) * 0.5355 + 12px);
+    left: 53.55%;
 }
 
 .aws img {
@@ -270,7 +283,7 @@ h3 {
 }
 
 .kubernetes {
-    left: calc((100% - 24px) * 0.7299 + 12px);
+    left: 72.99%;
 }
 
 .kubernetes img {

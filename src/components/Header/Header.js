@@ -5,20 +5,20 @@ import logo from '../../images/posthog-logo-150x29.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
 
+
 class Header extends Component {
   render() {
-    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall } = this.props
-
+    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
     return (
       <div
         style={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'space-between'
-          //backgroundColor: '#fff'
+          justifyContent: 'space-between',
+          background: 'none'
         }}>
-        {!onPostPage ? (
+        {sidebarHide || !onPostPage ? (
           <Link
           id="logo"
           to="/"
@@ -27,7 +27,8 @@ class Header extends Component {
             textDecoration: 'none',
             verticalAlign: 'center'
           }}>
-          {screenIsSmall ? (<img alt="logo" src={logo} id="logo-image" style={{
+          {screenIsSmall ? (
+          <img alt="logo" src={logo} id="logo-image" style={{
             display: 'flex',
             top: 0,
             left: 8
@@ -55,9 +56,11 @@ class Header extends Component {
           ) : (
           <div style={{height: 64, width: 0}}></div>
         ))}
-        <Menu sidebarDocked={sidebarDocked} />
+        <Menu 
+        sidebarDocked={sidebarDocked}
+        isBlogPage={isBlogPage} />
       </div>
-    )
+)
   }
 }
 
