@@ -22,19 +22,29 @@ Only bugfixes are allowed to be merged into this branch (and thus put on product
 
 ## Checklist
 
-- [ ] Figure out what's updated in this release
+<input type="checkbox"/> Figure out what's updated in this release
   - `git checkout release-[version]`
   - `git log --pretty=format:%s [old-version]..head`
-- [ ] Write up the PostHog array [blogpost](posthog-array)
 
-- [ ] Copy from PostHog Array and write up the changes into `CHANGELOG.md`
+<br />
+
+<input type="checkbox"/> Write up the PostHog Array [blog post](posthog-array)
+
+<input type="checkbox"/> Copy from PostHog Array and write up the changes into `CHANGELOG.md`
   - `git add CHANGELOG.md`
   - `git commit -m "Changelog version 1.7.0"`
-- [ ] Update the `VERSION` in `posthog/settings.py`
+
+<br />
+
+
+<input type="checkbox"/> Update the `VERSION` in `posthog/settings.py`
   - `git checkout release-[version]`
   - `git add posthog/settings.py`
   - `git commit -m "Bump version [version]"`
-- [ ] Tag the version
+
+<br />
+
+<input type="checkbox"/> Tag the version
   - `git tag -a [version] -m "Version [version]"`
   - `git push origin head --tags`
 
