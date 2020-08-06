@@ -3,6 +3,7 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
 import { connect } from 'react-redux'
 import { onChangeMenuState } from '../../actions/layout'
+import { onSetSidebarOpen } from '../../actions/layout'
 import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
@@ -13,8 +14,12 @@ class Menu extends Component {
     this.props.onChangeMenuState(nItem)
   }
 
+  onSetSidebarClose = () => {
+    this.props.onSetSidebarOpen(false)
+  }
+
   render() {
-    const { sidebarDocked, menuOpen, isBlogPage } = this.props
+    const { sidebarDocked, menuOpen, isBlogPage, sidebarHide } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -70,7 +75,7 @@ class Menu extends Component {
               {!sidebarDocked && (
                 <Button
                   style={{
-                    color: 'cornflowerblue',
+                    color: '#1D4AFF',
                     
                   }}
                   type="link"
@@ -88,7 +93,6 @@ class Menu extends Component {
                     left: 0,
                     height: '100vh',
                     width: '100%',
-                    //backgroundColor: 'white',
                     zIndex: 100,
                     paddingLeft: 0,
                     paddingRight: 0,
@@ -102,7 +106,8 @@ class Menu extends Component {
                         fontSize: '30px', 
                         paddingLeft: '10vw', 
                         paddingRight: '10vw', 
-                        marginTop: '5vh'
+                        marginTop: '5vh',
+                        backgroundColor: 'white',
                       }}
                       onClick={() => {
                         this.onChangeMenuState(menuItems.length)
@@ -162,6 +167,7 @@ class Menu extends Component {
                     style={{
                       width: '100%',
                       float: 'left',
+                      backgroundColor: 'white'
                     }}
                   />
                 </div>
