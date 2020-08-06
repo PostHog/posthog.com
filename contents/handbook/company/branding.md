@@ -13,7 +13,6 @@ Refer to this [Figma Project](https://www.figma.com/file/8iM3Damgbl4PyHq6x8JJbu/
 
 To get access to our various logo formats, check out our [Media page](/media).
 
-However, since you're here, here's a quick cheatsheet of the hexcodes for our logo colors:
 <br>
 
 ## Colors
