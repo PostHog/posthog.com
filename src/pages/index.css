@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Gosha Sans';
+    src: url('/GoshaSans-Regular.ttf') format('truetype');
+  }
+
 .indexPage h1, .indexPage h2 {
     border-bottom: none;
 }
@@ -15,11 +20,6 @@
     background: none;
     margin: auto 0;
     padding: auto 0;
-}
-
-.ant-col {
-    display: flex;
-    flex-direction: column;
 }
 
 .ant-layout {
@@ -52,19 +52,74 @@
   }
 
 .understandUsers {
-    position: inherit;
-    top: 15vh;
+    position: absolute;
+    height: 100%;
+    top: 25vh;
 }
 
 .understandUsersText {
     color: #35416B;
 }
 
+.openSource {
+    margin: 4rem 0 0;
+}
+
 .autocaptureWrapper {
-    position: relative;
+    position: static;
     height: 43.194444444vw;
     width: 100%;
     background-size: contain;
+}
+
+.autocapture{
+    position: relative;
+    top: 25%;
+}
+
+.trafficVisualWrapper {
+    height: 79.027777777vw;
+    width: 100%;
+    background-size: cover;
+}
+
+.traffic {
+    margin-top: 10%;
+}
+
+.trafficText {
+    width: 20vw;
+    color: #35416B;
+}
+
+.visualize {
+    top: 32%
+}
+
+.improveConversion {
+    margin: 10vh 0 20vh;
+}
+
+.improveConversion img {
+    margin: 4rem auto;
+}
+
+.featureFlagsWrapper {
+    height: 39.236111111vw;
+    width: 100%;
+    background-size: contain;
+}
+
+.featureFlags {
+    top: 20%;
+}
+
+.featureFlagsText {
+    width: 30vw;
+}
+
+.designed4Stack {
+    margin-top: 10vh;
 }
 
 @media screen and (max-width: 768px) {
@@ -137,16 +192,12 @@ img {
     }
 }
 
-h3 {
-    color: #595959;
-}
-
 .yellowText {
     color: #F9BD2B;
 }
 
 .redText {
-    color: #F54E00;
+    color: #F96132;
 }
 
 .blueText {
@@ -159,7 +210,6 @@ h3 {
 
 .yellowLine {
     width: 118px;
-    height: 0px;
     border: .2rem;
     border-style: solid;
     border-radius: 10px;
@@ -172,7 +222,7 @@ h3 {
     border: .2rem;
     border-style: solid;
     border-radius: 10px;
-    border-color:#F54E00;
+    border-color: #F96132;
 }
 
 .blueLine {
@@ -197,7 +247,7 @@ h3 {
     width: 2rem;
     border: .1rem;
     border-style: solid;
-    border-color:#F54E00;
+    border-color:#F96132;
 }
 
 .blueLine2 {
@@ -340,3 +390,6 @@ h3 {
 }
 
 
+.gosha {
+    font-family: 'Gosha Sans'
+}

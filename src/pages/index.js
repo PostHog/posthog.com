@@ -6,16 +6,17 @@ import { Link } from 'gatsby'
 import landingPageBackground from '../images/landing-page-background.svg'
 import computerDashboard4 from '../images/computer-dashboard-4.svg'
 import autocapture1 from '../images/autocapture-1.svg'
-import dashboards1 from '../images/dashboards-1.svg'
-import funnels1 from '../images/funnels-1.svg'
-import featureFlags1 from '../images/feature-flags-1.svg'
-import threeComputers from '../images/three-computers.svg'
+import background23 from '../images/background-2-3.svg'
+import improveRetention from '../images/improve-retention.svg'
+import improvePaths from '../images/improve-paths.svg'
+import improveFunnels from '../images/improve-funnels.svg'
+import background5 from '../images/background-5.svg'
 import enterprise01 from '../images/enterprise-01.svg'
 import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
 import selfHostedData1 from '../images/self-hosted-data-1.svg'
 import installNowFree1 from '../images/install-now-free-1.svg'
-import shelfLower1 from '../images/shelf-lower-1.svg'
+import shelf4 from '../images/shelf-4.svg'
 import shelf2 from '../images/shelf-2.svg'
 import stackAndroid from '../images/stack-android.svg'
 import stackPython from '../images/stack-python.svg'
@@ -85,110 +86,111 @@ function IndexPage() {
           <img alt="computer-dashboard-4" loading="lazy" src={computerDashboard4} style={{width: '100%'}}/>
         </Col>
       </Row>
-      
+      <Row className="openSource">
+        <Col span={20} offset={2}>
+          <h2 className="gosha">Open source product analytics</h2>
+        </Col>
+      </Row>
+
       {/*01 - It all starts with event autocapture*/}
       <div className="autocaptureWrapper" style={{backgroundImage: `url(${autocapture1})`}}>
-        <div className="autocapture">
-            <Row justify="space-between">
-            <Col span={24}>
-            </Col>
+            <Row justify="space-between" className="autocapture">
+              <Col span={3} offset={13}>
+                <h1 className="yellowText">01</h1>
+              </Col>
+              <Col span={7}>
+                <h2 className="gosha">It all starts with event autocapture</h2>
+                <br/>
+                <hr className="yellowLine"/>
+                <br/>
+                <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
+              </Col>
           </Row>
-        </div>
       </div>
-       
 
-      {/*02 - Understand how traffic really flows through your app*/}
-      <div className="whiteBackground">
-        <Row justify="space-between">
-          <Col xs={0} sm={0} md={2} lg={2} xl={2}></Col>
-          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-            <h2 className="redHead numberHead">02</h2></Col>
-          <Col xs={20} sm={20} md={19} lg={19} xl={19}>
-            <h2>Understand how traffic really flows through your app</h2>
-            <hr className="redLine"/></Col>          
-        </Row>
-        <Row justify="space-between">
-          <Col xs={4} sm={4} md={5} lg={5} xl={5}></Col>
-          <Col xs={20} sm={20} md={19} lg={19} xl={19}>
-            <p>Know the pageviews and actions of every user in your app or on your website.</p>
+      <div className="trafficVisualWrapper" style={{backgroundImage: `url(${background23})`}}>
+        {/*02 - Understand how traffic really flows through your app*/}
+        <Row justify="space-between" className="traffic">
+          <Col span={3} offset={1}>
+            <h1 className="redText">02</h1>
+          </Col>
+          <Col span={11}>
+            <h2 className="gosha">Understand how traffic really flows through your app</h2>
+            <br/>
+            <hr className="redLine"/>
+            <br/>
+            <p className="trafficText">PostHog autocaptures events and user behavior in your mobile or web app.</p>
           </Col>
         </Row>
-        <Row>
-          <Col xs={0} sm={0} md={24} lg={24} xl={24}>
-            <img alt="funnels-1" loading="lazy" src={funnels1} style={{paddingTop: '2rem'}}/>
+
+        {/*03 - Understand how traffic really flows through your app*/}
+        <Row justify="space-between" className="visualize">
+          <Col span={3} offset={13}>
+            <h1 className="blueText">03</h1>
           </Col>
-        </Row>
-      </div>
-      
-      {/*03 - Understand how traffic really flows through your app*/}
-      <div className="blueBackground">
-        <Row justify="space-between">
-          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-            <h2 className="blueText numberHead">03</h2>
-          </Col>
-          <Col xs={18} sm={18} md={9} lg={9} xl={9}>
-            <h2>Visualize product trends and retention</h2>
+          <Col span={8}>
+            <h2 className="gosha">Visualize product trends and retention</h2>
             <hr className="blueLine"/>
             <p>Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
           </Col>
-          <Col xs={2} sm={2} md={1} lg={1} xl={1}></Col>
-          <Col xs={0} sm={0} md={11} lg={11} xl={11}>
-            <img alt="dashboards-1" src={dashboards1}/>
-          </Col>
-          <Col xs={2} sm={2} md={0} lg={0} xl={0}></Col>
         </Row>
       </div>
+      
+      
 
       {/*04 - Improve conversion rates*/}
-      <div className="whiteBackground">
+      <div className="improveConversion">
         <Row>
-          <Col xs={0} sm={0} md={5} lg={5} xl={5}></Col>
-          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-            <h2 className="yellowText numberHead">04</h2>
+          <Col span={3} offset={6}>
+            <h1 className="yellowText">04</h1>
           </Col>
-          <Col xs={20} sm={20} md={12} lg={12} xl={12}>
-            <h2>Improve conversion rates</h2>
+          <Col span={10}>
+            <h2 className="gosha">Improve conversion rates</h2>
             <hr className="yellowLine"/>
-          </Col>
-          <Col xs={0} sm={0} md={4} lg={4} xl={4}></Col>
-          <Col xs={4} sm={4} md={8} lg={8} xl={8}></Col>
-          <Col xs={20} sm={20} md={12} lg={12} xl={12}>
             <p>Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.</p>
           </Col>
         </Row>
-        <Row justify="space-between">
-          <Col span={24}>
-          <img alt="three-computers-1" loading="lazy" src={threeComputers} style={{paddingTop: '2rem'}}/>
+        <Row justify="space-between" className="improveConversion">
+          <Col span={4} offset={3} align="center">
+            <img alt="improve-retention" loading="lazy" src={improveRetention}/>
+            <br/>
+            <h3>Retention</h3>
+          </Col>
+          <Col span={4} offset={3} align="center">
+            <img alt="improve-paths" loading="lazy" src={improvePaths}/>
+            <br/>
+            <h3>Paths</h3>
+          </Col>
+          <Col span={4} offset={3} align="center">
+            <img alt="improve-funnels" loading="lazy" src={improveFunnels}/>
+            <br/>
+            <h3>Funnels</h3>
           </Col>
         </Row>
       </div>
       
       {/*05 - Use feature flags to test new ideas*/}
-      <div className="yellowBackground">
-        <Row justify="space-between">
-          <Col xs={0} sm={0} md={12} lg={12} xl={12}>
-            <img alt="feature-flags-1" loading="lazy" src={featureFlags1}/>
+      <div className="featureFlagsWrapper" style={{backgroundImage: `url(${background5})`}}> 
+        <Row justify="space-between" className="featureFlags">
+          <Col span={3} offset={2}>
+            <h1 className="redText">05</h1>
           </Col>
-          <Col xs={0} sm={0} md={1} lg={1} xl={1}></Col>
-          <Col xs={4} sm={4} md={3} lg={3} xl={3}>
-            <h2 style={{marginTop: '1rem'}} className="redText numberHead">05</h2>
-          </Col>
-          <Col xs={20} sm={20} md={8} lg={8} xl={8}>
-            <h2 style={{marginTop: '1rem'}} className="blueText">Use feature flags <br/>to test new ideas</h2>
+          <Col span={8}>
+            <h2 className="gosha">Use feature flags <br/>to test new ideas</h2>
             <hr className="redLine"/>
             <br/>
-            <p className="blueText">Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
+            <p className="featureFlagsText">Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
           </Col>
         </Row>
       </div>
 
       {/*Designed for your Stack */}
-      <div className="whiteBackground">
+      <div className="designed4Stack">
       <Row className="gutter-row" justify="center" align="middle">
         <Col span={24} className="gutter-row" justify="center" align="middle">
-          <h3 align="middle">
+          <h2 align="middle" className="gosha">
             Designed for your stack
-          </h3>
+          </h2>
         </Col>
       </Row>
       <div className="yourStack" align="bottom">
@@ -265,14 +267,14 @@ function IndexPage() {
         <Row justify="space-between" align="top">
           <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <img alt="shelf-lower-1" className="imageShow" loading="lazy" src={shelfLower1}/>
+            <img alt="shelf-4" className="imageShow" loading="lazy" src={shelf4}/>
           </Col>
           <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
         </Row>
     </div>
 
     {/* posthog for enterprise */}
-    <div className="redBackground">
+    <div className="posthog4Enterprise">
       <Row>
         <Col span={24} align="middle">
           <h3>PostHog for Enterprise</h3>

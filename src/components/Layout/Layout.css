@@ -271,7 +271,7 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300!important;
+  font-weight: 400!important;
   text-rendering: optimizeLegibility;
   font-size: 36px;
   line-height: 1.5;
@@ -288,7 +288,7 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   font-size: 1rem;
   line-height: 1.5;
@@ -305,7 +305,7 @@ h5 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -321,7 +321,7 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   font-size: 0.78405rem;
   line-height: 1.5;
