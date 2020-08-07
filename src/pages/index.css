@@ -66,7 +66,6 @@
 }
 
 .autocaptureWrapper {
-    position: static;
     height: 43.194444444vw;
     width: 100%;
     background-size: contain;
@@ -93,21 +92,22 @@
 }
 
 .visualize {
-    top: 32%
+    top: 40%
 }
 
 .improveConversion {
-    margin: 10vh 0 20vh;
+    margin: 15vh 0 20vh;
 }
 
 .improveConversion img {
-    margin: 4rem auto;
+    margin: 0 auto 8vh;
 }
 
 .featureFlagsWrapper {
-    height: 39.236111111vw;
+    position: static;
+    height: 40.347222222vw;
     width: 100%;
-    background-size: contain;
+    background-size: cover;
 }
 
 .featureFlags {
@@ -119,77 +119,157 @@
 }
 
 .designed4Stack {
-    margin-top: 10vh;
+    margin: 15vh auto;
 }
 
-@media screen and (max-width: 768px) {
-    .indexContainer .ant-row {
-        padding-bottom: 1.45rem;
-    }
+.posthog4Enterprise {
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.redBackground {
-    background-color: rgba(249,97,50,.2);
+.posthog4Enterprise img {
+    width: 100%;
+    right: 0;
+    height: auto;
+}
+
+.selfHostedData {
+    padding: 0;
+    margin: 5vh auto 0;
+    width: 100%;
+    height: auto;
+}
+
+.selfHostedData img {
+    width: 100%;
+    right: 0;
+    height: auto;
+}
+
+.yourStack img:hover {
+    opacity: 0.7;
+}
+
+.installNow {
+    margin-top: 5vh;
+    height: auto;
+    width: 100%;
+    padding-bottom: 5vh;
+}
+
+.installNow img {
+    left: 0;
+    max-width: 100%;
+    height: auto;
+    padding: 0;
     margin: 0;
-    padding: 4rem 0 0;
 }
 
-.blueBackground {
-    background-color: rgba(53,65,107,.2);
-    margin: 0;
-    padding: 4rem 0 1.45rem;
+.installNowImg div{
+    height: 200px;
+    width: 200px;
 }
 
-.yellowBackground {
-    background-color: rgba(247,165,1,.2);
-    margin: 0;
-    padding: 4rem 0 0;
-}
-
-.whiteBackground {
-    margin: 0;
-    padding: 4rem 0;
-}
-
-@media screen and (max-width: 768px) {
-    .whiteBackground {
-        padding: 4rem 0 0;
-    }
-}
-
-img {
-    margin-bottom: 0;
-}
-
-.firstSpace {
-    margin-top: 8rem;
-}
-
-@media screen and (max-width: 768px) {
-    .firstSpace {
-        margin-top: 1rem;
-    }
-}
-
-.secondSpace {
-    margin-top: 4rem;
-}
-
-@media screen and (max-width: 768px) {
-    .secondSpace {
-        margin-top: 2rem;
-    }
-}
-
-.componentSpace {
-    margin-top: 4rem;
-    padding: 0px 1.0875rem 1.45rem;
+.installNowShelf img {
+    width: 100%;
 }
 
 @media screen and (max-width: 576px) {
-    .componentSpace{
-        padding: 0px;
+    .installNowImg div{
+        border-radius: 12px;
+        border: .5px solid #35416B;
+        background-color: #FFFFFF;
     }
+}
+
+.installNowImg img:hover {
+    opacity: 0.7;
+}
+
+.heroku {
+    left: 14.22%;
+}
+
+.heroku img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+    vertical-align: middle;
+}
+
+.docker {
+    left: 33.92%;
+}
+
+.docker img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+}
+
+.aws {
+    left: 53.55%;
+}
+
+.aws img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+    margin-top: 30%;
+}
+
+.kubernetes {
+    left: 72.99%;
+}
+
+.kubernetes img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 15%;
+}
+
+.yourStack img {
+    vertical-align: bottom;
+}
+
+.whatsNewWrapper {
+    height: 70vw;
+    width: 100%;
+    background-size: cover;
+}
+
+.whatsNew {
+    position: relative;
+    top: 5vh;
+}
+
+.hover-shadow{
+    border-radius: 18%;
+    transition: 0.15s ease-in-out all;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 0px
+  }
+
+  .hover-shadow:hover{
+    -webkit-box-shadow: 0 8px 20px rgba(143,168,191,.35);
+    box-shadow: 0 8px 20px rgba(143,168,191,.35);
+    cursor: pointer;
+    color:#1890ff;
+  }
+.subtitle {
+    font-size: 16px;
+}
+
+.gosha {
+    font-family: 'Gosha Sans'
 }
 
 .yellowText {
@@ -268,128 +348,4 @@ img {
     .imageShow {
         display: grid;
     }
-}
-.lightBlueBreak {
-    background: #1d4aff;
-    opacity: 0.07;
-    height: 10rem;
-}
-
-.darkBreak {
-    background: #C4C4C4;
-    height: 10rem;
-   
-}
-
-.yourStack img:hover {
-    opacity: 0.7;
-}
-
-.installNow {
-    height: auto;
-    width: 100%;
-}
-
-.installNow img {
-    left: 0;
-    max-width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0;
-}
-
-.installNowImg div{
-    position: absolute;
-    height: 33.78%;
-    width: 13.5%;
-    top: 45.35%;
-    border-radius: 10%;
-    border: 1.5px solid #35416B;
-    background-color: #FFFFFF;
-}
-
-@media screen and (max-width: 576px) {
-    .installNowImg div{
-        border-radius: 12px;
-        border: .5px solid #35416B;
-        background-color: #FFFFFF;
-    }
-}
-
-.installNowImg img:hover {
-    opacity: 0.7;
-}
-
-.heroku {
-    left: 14.22%;
-}
-
-.heroku img {
-    width: 70%;
-    height: auto;
-    display: block;
-    margin: 15%;
-    vertical-align: middle;
-}
-
-.docker {
-    left: 33.92%;
-}
-
-.docker img {
-    width: 70%;
-    height: auto;
-    display: block;
-    margin: 15%;
-}
-
-.aws {
-    left: 53.55%;
-}
-
-.aws img {
-    width: 70%;
-    height: auto;
-    display: block;
-    margin: 15%;
-    margin-top: 30%;
-}
-
-.kubernetes {
-    left: 72.99%;
-}
-
-.kubernetes img {
-    width: 70%;
-    height: auto;
-    display: block;
-    margin: 15%;
-}
-
-.yourStack img {
-    vertical-align: bottom;
-}
-
-.hover-shadow{
-    border-radius: 18%;
-    transition: 0.15s ease-in-out all;
-    width: 100%;
-    height: auto;
-    padding: 10px;
-    margin: 0px
-  }
-
-  .hover-shadow:hover{
-    -webkit-box-shadow: 0 8px 20px rgba(143,168,191,.35);
-    box-shadow: 0 8px 20px rgba(143,168,191,.35);
-    cursor: pointer;
-    color:#1890ff;
-  }
-.subtitle {
-    font-size: 16px;
-}
-
-
-.gosha {
-    font-family: 'Gosha Sans'
 }

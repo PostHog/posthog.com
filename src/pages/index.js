@@ -14,7 +14,7 @@ import background5 from '../images/background-5.svg'
 import enterprise01 from '../images/enterprise-01.svg'
 import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
-import selfHostedData1 from '../images/self-hosted-data-1.svg'
+import selfHost from '../images/self-host.svg'
 import installNowFree1 from '../images/install-now-free-1.svg'
 import shelf4 from '../images/shelf-4.svg'
 import shelf2 from '../images/shelf-2.svg'
@@ -35,6 +35,7 @@ import installKubernetes from '../images/install-kubernetes.svg'
 import githubButton1 from '../images/github-button-1.svg'
 import slackButton1 from '../images/slack-button-1.svg'
 import roadmapButton1 from '../images/roadmap-button-1.svg'
+import whatsNew from '../images/whats-new.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
@@ -72,11 +73,11 @@ function IndexPage() {
             </Button>
           </a>
           <div className="understandUsers">
-            <h2 align="top">
+            <h3 align="top">
               Understand your users.
               <br />
               Build a better product.
-            </h2>
+            </h3>
             <hr className="blueLine"/>
             <p className="understandUsersText">Capture, store and visualize your product data all on your own infrastructure.</p>
             <p className="understandUsersText">Eliminate the need for a complex pipeline, data lake and visualization tools.</p>
@@ -154,17 +155,17 @@ function IndexPage() {
           <Col span={4} offset={3} align="center">
             <img alt="improve-retention" loading="lazy" src={improveRetention}/>
             <br/>
-            <h3>Retention</h3>
+            <h4>Retention</h4>
           </Col>
           <Col span={4} offset={3} align="center">
             <img alt="improve-paths" loading="lazy" src={improvePaths}/>
             <br/>
-            <h3>Paths</h3>
+            <h4>Paths</h4>
           </Col>
           <Col span={4} offset={3} align="center">
             <img alt="improve-funnels" loading="lazy" src={improveFunnels}/>
             <br/>
-            <h3>Funnels</h3>
+            <h4>Funnels</h4>
           </Col>
         </Row>
       </div>
@@ -274,15 +275,16 @@ function IndexPage() {
     </div>
 
     {/* posthog for enterprise */}
-    <div className="posthog4Enterprise">
+    
       <Row>
         <Col span={24} align="middle">
-          <h3>PostHog for Enterprise</h3>
+          <h2 className="gosha">PostHog for Enterprise</h2>
           <br/>
         </Col>
       </Row>
+      <div className="posthog4Enterprise" style={{backgroundImage: `url(${landingPageBackground})`}}>
       <Row>
-        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+        <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={3}>
           <Row>
             <Col xs={9} sm={9} md={24} lg={24} xl={24}>
               <img alt="enterprise-01" loading="lazy" src={enterprise01} className="imageShow"/>
@@ -290,7 +292,7 @@ function IndexPage() {
               <br/>
             </Col>
             <Col xs={1} sm={1} md={0} lg={0} xl={0}></Col>
-            <Col xs={14} sm={14} md={24} lg={24} xl={24} style={{padding: '0 5%'}}>
+            <Col xs={14} sm={14} md={24} lg={24} xl={24}>
             <h4>Self-managed</h4>
             <br/>
             <hr className="blueLine2"/>
@@ -302,7 +304,7 @@ function IndexPage() {
             </Col>
           </Row>
         </Col>
-        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+        <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={3}>
           <Row>
             <Col xs={9} sm={9} md={24} lg={24} xl={24}>
               <img alt="enterprise-02" loading="lazy" src={enterprise02} className="imageShow"/>
@@ -322,7 +324,7 @@ function IndexPage() {
             </Col>
           </Row>`
         </Col>
-        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+        <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={3}>
           <Row>
             <Col xs={9} sm={9} md={24} lg={24} xl={24}>
               <img alt="enterprise-03" loading="lazy" src={enterprise03} className="imageShow"/>
@@ -346,22 +348,27 @@ function IndexPage() {
     </div>
 
       {/* self-hosted full data*/}
-      <Row style={{marginTop: '4rem'}}>
-        <Col xs={24} sm={24} md={14} lg={14} xl={14}>
-          <h3 style={{marginTop: '6rem'}}>Self host available, <br/> with full underlying data access</h3>
+      <Row className="selfHostedData">
+        <Col span={8} offset={4}>
+          <h2 className="gosha">Self host available, <br/> with full underlying data access</h2>
           <br/>
           <hr className="blueLine"/>
         </Col>
-        <Col xs={0} sm={0} md={10} lg={10} xl={10}>
-          <img alt="self-hosted-data-1" loading="lazy" src={selfHostedData1}/>
+        <Col span={10} offset={2} align="right">
+          <img alt="self-host" loading="lazy" src={selfHost}/>
         </Col>
       </Row>
 
       {/* Install now, free*/}
-      <Row style={{marginTop: '4rem'}}>
-        <Col span={24}>
-          <div className="installNow">
-            <div className="installNowImg">
+      <div className="installNow" style={{backgroundImage: `url(${landingPageBackground})`}}>
+        <Row>
+          <Col span={24} align="center">
+          <h2 className="gosha">Install now, free</h2>
+          </Col>
+        </Row>
+        <Row>
+          <div className="installNowImg">
+            <Col span={3} offset={3} align="center">
               <Link to="/docs/deployment">
                 <div className="heroku">
                   <img
@@ -370,6 +377,8 @@ function IndexPage() {
                   />
                 </div>
               </Link>
+            </Col>
+            <Col span={3} offset={2}> 
               <Link to="/docs/deployment#docker">
                 <div className="docker">
                   <img
@@ -378,6 +387,8 @@ function IndexPage() {
                   />
                 </div>
               </Link>
+            </Col>
+            <Col span={3} offset={2}>
               <Link to="docs/deployment#aws-ecs-fargate">
                 <div className="aws">
                   <img
@@ -386,6 +397,8 @@ function IndexPage() {
                   />
                 </div>
               </Link>
+            </Col>
+            <Col span={3} offset={2}>
               <Link to="docs/deployment#helm-charts-and-kubernetes">
                 <div className="kubernetes">
                   <img
@@ -394,23 +407,26 @@ function IndexPage() {
                   />
                 </div>
               </Link>
-            </div>
-            <img alt="install-now-free-1" loading="lazy" src={installNowFree1} className="imageShow"/>
-          </div>
-        </Col>
-      </Row>
+            </Col>
 
-      <Row justify="center">
-        <Col span={24} align="middle">
-          <p>
-            ... or start a{' '}
-            <a href="https://app.posthog.com/signup">free trial</a> with PostHog
-            SaaS.
-          </p>
-        </Col>
-      </Row>
+          </div>
+        </Row>
+        <Row className="installNowShelf">
+          <Col span={18} offset={3}>
+            <img alt="shelf-2" loading="lazy" src={shelf2} className="imageShow"/>
+          </Col>
+        </Row>
+      </div>
 
       {/*join the community*/}
+      <Row className="joinCommunity">
+        <Col span={24}>
+
+        </Col>
+      </Row>
+
+
+
       <Row>
         <Col span={24} className="header-row" align="middle">
           <h2>Join the community</h2>
@@ -435,17 +451,21 @@ function IndexPage() {
           </Link>
         </Col>
       </Row>
-      <Row>
-        <Col span={24} className="gutter-row header-row" >
-          <h2 className="yellowHead">What's new?</h2>
-          <p>Version 1.12.0</p>
+      <div className="whatsNewWrapper" style={{backgroundImage: `url(${whatsNew})`}}>
+      <Row className="whatsNew">
+        <Col span={20} offset={4}>
+          <h2 className="blueText gosha">What's new?</h2>
           <Link to="blog/the-posthog-array-1-12-0">
-            <Button type="information" size="large">
-              Release notes
+            <Button type="secondary" size="large">
+              See what's new
             </Button>
           </Link>
+          <br/>
+          <br/>
+          <p>Version 1.12.0</p>
         </Col>
       </Row>
+      </div>
     </Layout>
     </div>
   )
