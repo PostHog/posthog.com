@@ -244,6 +244,35 @@
     background-size: cover;
 }
 
+.joinCommunityWrapper {
+    position: relative;
+    top: 10vh;
+    background-size: length 1331 41.84823441vw;
+    background-repeat: no-repeat;
+    background-position: center top;
+    width: 100%;
+    height: 41.84823441vw;
+    margin: 0;
+}
+
+@media screen and (max-width: 1331px) {
+    .joinCommunityWrapper {
+        position: relative;
+        top: 10vh;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center top;
+        width: 100%;
+        height: 41.84823441vw;
+    }
+}
+
+.github {
+    height: 100px;
+    width: 100px;
+    background-color: yellow;
+}
+
 .whatsNew {
     position: relative;
     top: 5vh;

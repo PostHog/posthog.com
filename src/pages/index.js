@@ -32,6 +32,7 @@ import installHeroku from '../images/install-heroku.svg'
 import installDocker from '../images/install-docker.svg'
 import installAws from '../images/install-aws.svg'
 import installKubernetes from '../images/install-kubernetes.svg'
+import joinCommunity from '../images/join-community.svg'
 import githubButton1 from '../images/github-button-1.svg'
 import slackButton1 from '../images/slack-button-1.svg'
 import roadmapButton1 from '../images/roadmap-button-1.svg'
@@ -419,14 +420,20 @@ function IndexPage() {
       </div>
 
       {/*join the community*/}
-      <Row className="joinCommunity">
-        <Col span={24}>
 
-        </Col>
-      </Row>
+      <div className="joinCommunityWrapper" style={{backgroundImage: `url(${joinCommunity})`}}>
+        <Row>
+          <Col span={6} align="center">
+            <a href="https://github.com/posthog/posthog">
+              <div className="github"></div>
+            </a>
+          </Col>
+
+        </Row>
+      </div>
 
 
-
+{/*
       <Row>
         <Col span={24} className="header-row" align="middle">
           <h2>Join the community</h2>
@@ -434,9 +441,7 @@ function IndexPage() {
       </Row>
       <Row justify="spaceBetween">
       <Col xs={8} sm={8} md={6} lg={6} xl={6}>
-          <a href="https://github.com/posthog/posthog">
-            <img alt="GitHub" src={githubButton1} loading="lazy" className="hover-shadow imageShow" />
-          </a>
+
         </Col>
         <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
         <Col xs={8} sm={8} md={6} lg={6} xl={6}>
@@ -450,7 +455,7 @@ function IndexPage() {
             <img alt="RoadMap" src={roadmapButton1} loading="lazy" className="hover-shadow imageShow"/>
           </Link>
         </Col>
-      </Row>
+</Row>*/}
       <div className="whatsNewWrapper" style={{backgroundImage: `url(${whatsNew})`}}>
       <Row className="whatsNew">
         <Col span={20} offset={4}>
@@ -464,7 +469,7 @@ function IndexPage() {
           <br/>
           <p>Version 1.12.0</p>
         </Col>
-      </Row>
+      </Row> 
       </div>
     </Layout>
     </div>
