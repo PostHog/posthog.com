@@ -37,7 +37,7 @@ docker-compose -f docker-compose.dev.yml up
     If you have problems with this step (TLS/SSL error), then run `~ brew update && brew upgrade` followed by `python3 -m pip install --upgrade pip`, then retry the requirements.txt install.
 9. Install dev requirements: `pip install -r requirements/dev.txt`
 10. Run migrations: `DEBUG=1 python3 manage.py migrate`
-11. Make sure you have yarn installed
+11. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
     On MacOS, this is done with: `brew install yarn`
 
