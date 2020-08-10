@@ -423,10 +423,19 @@ function IndexPage() {
 
       <div className="joinCommunityWrapper" style={{backgroundImage: `url(${joinCommunity})`}}>
         <Row>
-          <Col span={6} align="center">
-            <a href="https://github.com/posthog/posthog">
-              <div className="github"></div>
-            </a>
+          <Col span={24}>
+            <div>
+              <a href="https://github.com/posthog/posthog">
+                <div className="github">github</div>
+              </a>
+              <a href="https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ">
+                <div className="slack">slack</div>
+              </a>
+              <Link to="/handbook/strategy/roadmap">
+                <div className="roadmap">roadmap</div>
+              </Link>
+              <div className="yellowFiller"/>
+            </div>
           </Col>
 
         </Row>

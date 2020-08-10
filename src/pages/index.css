@@ -157,6 +157,7 @@
     height: auto;
     width: 100%;
     padding-bottom: 5vh;
+    background-size: cover
 }
 
 .installNow img {
@@ -247,7 +248,7 @@
 .joinCommunityWrapper {
     position: relative;
     top: 10vh;
-    background-size: length 1331 41.84823441vw;
+    background-size: length 1331 557;
     background-repeat: no-repeat;
     background-position: center top;
     width: 100%;
@@ -267,10 +268,42 @@
     }
 }
 
+.joinCommunity a {
+    width: 100px;
+}
+
 .github {
+    position: absolute;
     height: 100px;
     width: 100px;
     background-color: yellow;
+    top: 0;
+}
+
+.slack {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: yellow;
+    top: 0;
+    left: 150px;
+}
+
+.roadmap {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: yellow;
+    top: 0;
+    left: 300px;
+}
+
+.yellowFiller {
+    position: absolute;
+    height: 557px;
+    width: calc((100% - 1331px) / 2);
+    background-color: #F7A501;
+    right: 0;
 }
 
 .whatsNew {
