@@ -136,5 +136,8 @@ Todo: We will put together content to walk you through the difference with the r
 ## What new features do PostHog have?
 As a way to improve users experience, PostHog has released new features such as [Rentention Tables](https://posthog.com/docs/features/retention) and [Toolbar](https://posthog.com/docs/features/toolbar) which enables you to interact seamlessly with PostHog.
 
-## Can I suggest new features?
-You can suggest new features by adding them as issues in our [Github repo](https://github.com/PostHog/posthog). Search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in new features, so it’s better to have all of it captured on one issue.
+### Can I suggest new features?
+You can suggest new features by adding them as issues in our [Github repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
+
+### I'm having trouble setting up PostHog?
+If you’re having trouble setting up PostHog you can send a messaage to our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ), you can also contact the [PostHog Support](hey@posthog.com). If its a bug you can raise an issue through our [github repo](https://github.com/PostHog/posthog/issues)
