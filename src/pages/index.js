@@ -15,7 +15,6 @@ import enterprise01 from '../images/enterprise-01.svg'
 import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
 import selfHost from '../images/self-host.svg'
-import installNowFree1 from '../images/install-now-free-1.svg'
 import shelf4 from '../images/shelf-4.svg'
 import shelf2 from '../images/shelf-2.svg'
 import stackAndroid from '../images/stack-android.svg'
@@ -33,9 +32,6 @@ import installDocker from '../images/install-docker.svg'
 import installAws from '../images/install-aws.svg'
 import installKubernetes from '../images/install-kubernetes.svg'
 import joinCommunity from '../images/join-community.svg'
-import githubButton1 from '../images/github-button-1.svg'
-import slackButton1 from '../images/slack-button-1.svg'
-import roadmapButton1 from '../images/roadmap-button-1.svg'
 import whatsNew from '../images/whats-new.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
@@ -55,37 +51,44 @@ function IndexPage() {
           <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>
         </Col>
       </Row>
-      <Row>
-        <Col span={8} offset={2}>
-          <p>Join 1,000 companies using PostHog.</p>      
-          <a href="/trial">
-            <Button
-              type="primary"
-              size="large"
-              icon="right-circle"
-            >
-              Get Started for Free
-            </Button>
-          </a>
-          {' '}
-          <a href="/request_demo">
-            <Button type="secondary" size="large" style={{align: 'right'}}>
-              Request Demo
-            </Button>
-          </a>
-          <div className="understandUsers">
-            <h3 align="top">
-              Understand your users.
-              <br />
-              Build a better product.
-            </h3>
-            <hr className="blueLine"/>
-            <p className="understandUsersText">Capture, store and visualize your product data all on your own infrastructure.</p>
-            <p className="understandUsersText">Eliminate the need for a complex pipeline, data lake and visualization tools.</p>
+      <Row className="row1">
+        <Col span={24}>
+        <br className="hiddenBreak"/>
+          <div className="row1Col1">
+            <p>Join 1,000 companies <br className="hiddenBreak"/> using PostHog.</p>
+            <br className="hiddenBreak"/>      
+            <a href="/trial">
+              <Button
+                type="primary"
+                size="large"
+                icon="right-circle"
+              >
+                Get Started for Free
+              </Button>
+            </a>
+            <br className="hiddenBreak"/>
+            <br className="hiddenBreak"/>
+            {' '}
+            <a href="/request_demo">
+              <Button type="secondary" size="large" style={{align: 'right'}}>
+                Request Demo
+              </Button>
+            </a>
+            <div className="understandUsers">
+              <h3 align="top">
+                Understand your users.
+                <br />
+                Build a better product.
+              </h3>
+              <hr className="blueLine"/>
+              <p className="understandUsersText">Capture, store and visualize your product data all on your own infrastructure.</p>
+              <p className="understandUsersText">Eliminate the need for a complex pipeline, data lake and visualization tools.</p>
+            </div>
           </div>
-        </Col>
-        <Col span={14}>
-          <img alt="computer-dashboard-4" loading="lazy" src={computerDashboard4} style={{width: '100%'}}/>
+          <div className="row1Col2" style={{backgroundImage:`url(${computerDashboard4})`}}>
+
+            {/*<img alt="computer-dashboard-4" className="computerDashboard imageShow" loading="lazy" src={computerDashboard4}/>*/}
+          </div>
         </Col>
       </Row>
       <Row className="openSource">
