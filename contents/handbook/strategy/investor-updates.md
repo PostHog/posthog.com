@@ -1,19 +1,22 @@
 ---
-title: Working with investors
+title: Working with Investors
 sidebar: Handbook
 showTitle: true
 ---
+
+<br>
+
 PostHog brings investors on as partners.
 
-There are many value adds from investors:
+There are many is a lot of value added from investors:
 
-* Financing so we can build a better and more ambitious product and to grow faster
+* Financing so we can build a better and more ambitious product, hence growing faster
 * Strategic or tactical advice
 * Connections to valuable finance partners
 * Connections to valuable potential customers
 * Help with hiring a world-class team
 
-# Investor updates
+# Investor Updates
 
 Investor updates are sent on a monthly basis. This keeps news small and actionable, creates discipline, yet isn't so frequent that much time is spent on reporting.
 

@@ -4,40 +4,43 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> PostHog enables product led growth.
+<br>
+
+> PostHog follows the philosophy of product-led growth.
+<br>
 
 ## Where will we compete?
 
-PostHog wish to provide best in class product analytics, by appealing to developer and product teams.
+PostHog aims to provide best-in-class product analytics, by appealing to Engineering and Product teams.
 
-We will target developers, rather than product teams to get implemented. There are a few key aspects to this:
+We will target developers rather than product teams in order to get implemented. There are a few key aspects to this:
 
-* An open course business model
- * We have a zero friction route to adoption in both small, mid size and big companies.
- * We can go for breadth over depth in the product, similar to GitLab, letting the community fill in the gaps.
- * Being open core means we can aim for mass adoption with our free version, without worrying about competition from hosting companies.
+* An open core business model
+  * We have a zero friction route to adoption in both small, medium size, and big companies.
+  * We can go for breadth over depth in the product, similar to GitLab, letting the community fill in the gaps.
+  * Being open core means we can aim for mass adoption with our free version, without worrying about competition from companies offering hosting services.
 * Tighter integration with developers' environments.
- * Integration with git repo (feature flagging) & integration of data into local environment (terminal/localhost)
- * Working with existing databases and pipelines.
- * 1 click / 1 line install into production.
-* Defensive product-team strategy - stay at parity with their features, but don't innovate here.
- * This means execution is much faster.
- * It will prevent most churn due to missing features from major tools that product teams will push for.
+  * Integration with git repo (feature flagging) & integration of data into local environment (terminal/localhost)
+  * Working with existing databases and pipelines.
+  * 1-click / 1-line install into production.
+* Defensive Product team strategy - stay at parity with their features, but don't innovate here.
+  * This means execution is much faster.
+  * It will prevent most churn due to missing features from major tools that product teams will push for.
 
 ## How will we be the best?
 
-* Engineering-led culture. Engineers want to deal with engineers.
-* We will make the company remote-first, to encourage the greatest possible degree of community collaboration.
+* **Engineering-led culture:** Engineers want to deal with engineers.
+* **Remote first:** We will make the company remote-first, to encourage the greatest possible degree of community collaboration.
 
 ## What are our capabilities, and what else is needed to succeed on this path?
 
 * We currently have a strong product for hobbyists or startups. We have enterprise interest but the adoption is weak.
-* We need greater scalability for larger, greater value, enterprise customers to go into production. This will be key for either an adoption or revenue based Series A.
+* We need greater scalability for larger, greater value, enterprise customers to go into production. This will be key for either an adoption or revenue-based Series A.
 * We need a more innovative, developer-specific side to the product for all user types to move forward. This is what will make us truly best in class, and is also a pre-requisite to earn the right to impress teams in enterprises who demand the latest and greatest.
 
 ## What are the systems and metrics that empower our capabilities?
 
-* Adoption: MAUs is something we should focus on. A tiny bit of product work needed to make that happen. Underneath this, we should start to look at the % of deployed:in production - that is our greatest area of drop off.
+* Adoption: MAUs is something we should focus on. A tiny bit of product work needed to make that happen. Underneath this, we should look at the percentage of deployed instances in production - that is our greatest area of drop off.
 * MRR for revenue.
 * Open company handbook - to enable a true remote and community first culture.
 
@@ -70,7 +73,7 @@ What we will build:
 
 Making money:
 
-The first 6-12 months we will focus solely on developer adoption. After that, we'll slowly and carefully start introducing paid features for our enterprise customers. Those will include
+The first 6-12 months we will focus solely on developer adoption. After that, we'll slowly and carefully start introducing paid features for our enterprise customers. Those will include:
 
 * Setting up a self-serve hosted version
 * Building some of the growth/ultimate plan features like experimentation
@@ -83,7 +86,7 @@ Now that we've raised our seed, we have the money to comfortably hire about 8 re
 
 A couple of "rules":
 * Tim and James should remain [working managers](https://m.signalvnoise.com/this-is-why-we-have-working-managers-at-basecamp-and-why-microsoft-and-apple-stumbled-when-they/).
-  * That means hiring [managers of one](https://signalvnoise.com/posts/1430-hire-managers-of-one), see also our [hiring process](/handbook/people/hiring-process).
+  * That means hiring [managers of one](https://signalvnoise.com/posts/1430-hire-managers-of-one), also see our [hiring process](/handbook/people/hiring-process).
 * We are too small for tiered management, and will be until after we raise a Series A. We view moving into management as a lateral move - it is not a promotion, but is instead a different skillset.
 * We don't _have_ to hire all the people we have money for. In fact, we should find ways of achieving our roadmap with the fewest people possible in the given timeframe.
 
@@ -92,7 +95,7 @@ At the moment, our team is heavily weighted towards frontend/backend development
   * We need this because we want to be able to deploy PostHog on as many platforms as possible + support
 * Experience scaling systems to 100s of requests/sec
 * Experience scaling Postgres to terabytes</strike>
-* Great visual/UX designer
+* <strike>Great visual/UX designer</strike>
 * Marketing/growth
   * This should come later as we will be changing the product around too much to 'optimize' it yet.
 
@@ -135,6 +138,7 @@ We could also use more firepower to deliver features faster, though we should be
 * Will likely report to James
 
 *Designer/UX*
+<strike>
 * Create mockups for new features
 * Ongoing design for posthog.com 
 * Improve design/UX on current features
@@ -142,5 +146,7 @@ We could also use more firepower to deliver features faster, though we should be
 * (maybe) create brand guidelines and ensure consistency
 * Misc design of emails, blog posts
 * Might report to James
+</strike>
 
-*note*: We're _not_ going to hire customer support people. The best possible support we can give, while maximising for learning, is by having engineers do the support. It's much better for an engineer to get a bug report -> put a fix live in an hour, rather than having a customer support person 'escalating' a bug and waiting days for a fix. [See discussion.](https://github.com/PostHog/handbook/pull/39#discussion_r415375372)
+
+**Note:** We're _not_ going to hire Customer Support people. The best possible support we can give, while maximising for learning, is by having engineers do the support. It's much better for an engineer to get a bug report -> put a fix live in an hour, rather than having a customer support person 'escalating' a bug and waiting days for a fix. [See discussion.](https://github.com/PostHog/handbook/pull/39#discussion_r415375372)
