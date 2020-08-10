@@ -946,10 +946,14 @@ a.middle { display: block; text-align: center }
   color: #F7A501;
 }
 
-table td {
-  border: none;
+table td, table th {
+  border: 1px solid #E8E8E8;
 }
 
-table th {
-  border: none;
+.table-borders > table > thead > tr > th,
+.table-borders > table > tbody > tr > td
+{
+    border: .1rem !important;
+    border-style: solid !important;
+    border-color: #595959 !important;
 }
