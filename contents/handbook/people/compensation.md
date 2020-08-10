@@ -80,7 +80,7 @@ We do not expect to do any salary raises, adjustments or promotions until July 2
 
 ## Exchange rate
 
-Unless there is a very good reason, you'll be paid in your local currency. This means that you know exactly how much you'll get every month. The rates are from Oando and were taken on *1st August 2020*. In the future we will take the rate for the first of January.
+Unless there is a very good reason, you'll be paid in your local currency. This means that you know exactly how much you'll get every month. The rates are from [Oando](https://www1.oanda.com/currency/converter/) and were taken on *1st August 2020*. In the future we will take the rate for the first of January.
 
 
 | Currency | Multiplier |
