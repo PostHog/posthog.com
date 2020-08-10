@@ -133,5 +133,5 @@ There are multiple open source analytics offerings - Metabase, Matomo, etc. Post
 
 Todo: We will put together content to walk you through the difference with the rest of the open source analytics stack that is available :)
 
-### What new features do PostHog have?
+## What new features do PostHog have?
 As a way to improve users experience, PostHog has released new features such as [Rentention Tables](https://posthog.com/docs/features/retention) and [Toolbar](https://posthog.com/docs/features/toolbar) which enables you to interact seamlessly with PostHog.
