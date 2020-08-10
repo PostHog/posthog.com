@@ -23,7 +23,9 @@ There are very few excpetions to this rule.
         - It doesn’t cause bugs elsewhere.
 
 
-## How to do QA
+## Setting up Heroku Test Environment 
+
+**Note: This is now done automatically.**
 
 1. Go to the pull request you want to QA on. 
 2. Go to the Heroku test environment.
@@ -31,7 +33,7 @@ There are very few excpetions to this rule.
     1. If the environment was already deployed, it should say "This branch was successfully deployed"
     1. If it says ‘This branch was not deployed’ go to the Heroku pipeline and click ‘Create review app’
     1. If the PR was submitted from a fork, you'll need to test the change locally. 
-3. Open the app, and add create a new account
+3. Open the app, create a new account, and start testing!
 
 
 ## Hacking the Test Environment

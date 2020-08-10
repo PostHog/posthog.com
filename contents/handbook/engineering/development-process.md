@@ -1,5 +1,5 @@
 ---
-title: Development process
+title: Development Process
 sidebar: Handbook
 showTitle: true
 ---
