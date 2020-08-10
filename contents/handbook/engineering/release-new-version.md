@@ -12,6 +12,10 @@ Every week we up the 'minor' in `major.minor.patch`. At the moment, we're at ver
 
 Hopefully we will not have to do many patch versions, but if between versions we discover a breaking bug, we will.
 
+## Timeline
+
+Three days before we release, on Monday, we institute a code freeze. We branch master into release-[version] and deploy that to our production environment (app.posthog.com). Only bugfixes are allowed to be merged into this branch (and thus put on production) between Monday and the release going out. This gives us about three days to test if this release has any bugs.
+
 ## Checklist
 
 <input type="checkbox"/> Figure out what's updated in this release
