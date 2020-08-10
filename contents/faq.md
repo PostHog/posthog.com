@@ -135,3 +135,6 @@ Todo: We will put together content to walk you through the difference with the r
 
 ## What new features do PostHog have?
 As a way to improve users experience, PostHog has released new features such as [Rentention Tables](https://posthog.com/docs/features/retention) and [Toolbar](https://posthog.com/docs/features/toolbar) which enables you to interact seamlessly with PostHog.
+
+## Can I suggest new features?
+You can suggest new features by adding them as issues in our [Github repo](https://github.com/PostHog/posthog). Search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in new features, so it’s better to have all of it captured on one issue.
