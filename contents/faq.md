@@ -125,10 +125,13 @@ Active and growing! We have [more than 2K stars](https://github.com/PostHog/post
 
 [Check them out](/docs) for yourself!
 
-## How is this different to the other product analytics tools?
+## How is this different from the other product analytics tools?
 
-PostHog is the only open source product analytics tool. There are plenty of SaaS options (Mixpanel/Amplitude/Heap), but all of them require you sending your data to 3rd parties, and they all charge based on volume. We have written out a [features comparison](/product-features).
+PostHog is the only open source product analytics tool. There are plenty of SaaS options (Mixpanel/Amplitude/Heap), but all of them require you to send your data to 3rd parties, and they all charge based on volume. We have written out a [features comparison](/product-features).
 
 There are multiple open source analytics offerings - Metabase, Matomo, etc. PostHog is the only open source software that gives you (i) full event capture (ii) full identifiable user histories (iii) full product analytics UX.
 
 Todo: We will put together content to walk you through the difference with the rest of the open source analytics stack that is available :)
+
+### What new features do PostHog have?
+As a way to improve users experience, PostHog has released new features such as [Rentention Tables](https://posthog.com/docs/features/retention) and [Toolbar](https://posthog.com/docs/features/toolbar) which enables you to interact seamlessly with PostHog.
