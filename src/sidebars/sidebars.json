@@ -33,6 +33,7 @@
       "docs/deployment/deploy-kubernetes",
       "docs/deployment/deploy-aws",
       "docs/deployment/deploy-source",
+      "docs/deployment/upgrading-posthog",
       "docs/deployment/scaling-posthog",
       "docs/deployment/securing-posthog",
       "docs/deployment/running-behind-proxy",
