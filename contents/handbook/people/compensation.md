@@ -77,3 +77,13 @@ If this represents an increase in pay, _we need to approve this change in advanc
 ## Salary adjustments and raises and promotions
 ​
 We do not expect to do any salary raises, adjustments or promotions until July 2021 outside of role or location based changes. After that, we will run an annual review cycle to evaluate your level of experience.
+
+## Exchange rate
+
+Unless there is a very good reason, you'll be paid in your local currency. This means that you know exactly how much you'll get every month. The rates are from Oando and were taken on *1st August 2020*. In the future we will take the rate for the first of January.
+
+
+| Currency | Multiplier |
+| EUR | 0.844 |
+| PLN | 3.723 |
+| BRL | 5.18 |
