@@ -118,7 +118,7 @@
     "name":"Sending Data Out",
     "items":[
       "docs/integrations/slack",
-      "docs/integrations/microsoft-teams"
+      "docs/integrations/microsoft-teams",
       "docs/integrations/message-formatting"
     ]
   },
