@@ -69,11 +69,3 @@ Example: "We believe this because we believe that..."
 **Avoid `mailto` links**
 
 They're mostly annoying, not helpful.
-
-
-
-
-
-
-
-
