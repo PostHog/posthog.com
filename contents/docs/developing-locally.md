@@ -37,7 +37,11 @@ docker-compose -f docker-compose.dev.yml up
     If you have problems with this step (TLS/SSL error), then run `~ brew update && brew upgrade` followed by `python3 -m pip install --upgrade pip`, then retry the requirements.txt install.
 9. Install dev requirements: `pip install -r requirements/dev.txt`
 10. Run migrations: `DEBUG=1 python3 manage.py migrate`
-11. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
+11. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
+
+    On MacOS, this is done with: `brew install yarn`
+
+12. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
 
     *_Note:_ The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
 
