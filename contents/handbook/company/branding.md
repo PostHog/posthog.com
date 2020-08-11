@@ -3,6 +3,11 @@ title: Branding
 sidebar: Handbook
 showTitle: true
 ---
+
+<br>
+
+> **Note:** This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com following the rebrand. 
+
 ## Resources
 
 #### Figma: PostHog Branding
@@ -206,3 +211,71 @@ The last menu is the navigation menu that can be found in Docs. This uses Small 
 Alongside the text on the left is a line with a small circle to indicate the part of the document you are in. Like the text, the line is black with an opacity of 30%. The stroke is 3, while the circle is 12x12px (white fill) with an inside stroke of 3 (orange). 
 
 Depending on what section of the text you are reading, the text will turn orange and the circle will be aligned with that selected text. 
+
+## Mobile Content
+
+When transforming any desktop page to mobile please use the iPhone 8 frame on Figma. 
+
+### Headers
+
+The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 32 H) and a grey background (375 W x 110 H) in colour #F0F0F0. On the landing page the header is different, but generally the header should be consistent. The landing page header consists of the logo, (206 W x 40.13 H) centred, a menu bar (375 W x 390 H) in grey (#EDEDED) with half tone dots (This image can be found on the Figma file) (375 W x 390 H) laid over the top at 20% passthrough. This gives a subtle halftone effect.
+
+### Text
+
+#### H1
+
+###### Font Specifications 
+
+* Family: Gosha Sans (Regular)
+* Size: 18px
+* Line Height: 30
+* Color: Black
+* Opacity: 100%
+
+#### H2
+
+###### Font Specifications 
+
+* Family: Gosha Sans (Regular)
+* Size: 14px
+* Line Height: 20
+* Color: Black
+* Opacity: 100%
+
+#### H3
+
+###### Font Specifications 
+
+* Family: Gosha Sans (Regular)
+* Size: 12px
+* Line Height: 20
+* Color: Black
+* Opacity: 100%
+
+#### H4
+
+###### Font Specifications 
+
+* Family: Gosha Sans (Regular)
+* Size: 10px
+* Line Height: 20
+* Color: Black
+* Opacity: 100%
+
+### Numbers 
+
+Follows the same principles as the Desktop format, using Statement and Subtle numbers. 
+
+**Statement Numbers** 
+
+Gosha Sans | Regular | Size 20 | Line Height 20 | Color: Yellow, Orange, or Blue | Opacity: 100% 
+
+**Subtle Numbers**
+
+Helvetica Neue | Bold | Size 14 | Line Height 20 | Color: Yellow | Opacity: 100% 
+
+## Shapes and Dividers 
+
+Curved rectangle backgrounds, size (203 W x 170 H), with a curved radius of 20, in either Yellow (#F9BD2B), Orange (#F96132), or Navy (#35416B). These can be overlaid with half tone dots, at 20% pass through. 
+
+Dividers on the mobile format are similar to the desktop version but smaller (70 W x 7 H) and generally orange (#F96132), except for the landing page where they alternate between the three PostHog colours. 
