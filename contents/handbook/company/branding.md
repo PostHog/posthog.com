@@ -181,13 +181,13 @@ To stop the website from looking dull we have employed the use of color and text
 
 The three main colors are Orange (#F54E00) and Yellow (#F9BD2B), with a bit of Navy (#35416B). 
 
-Color blocks can be any size, but they must not fill more than one third of the screen. They must have A curved radius of 100 and usually have illustrations or icons over the top. 
+Color blocks can be any size, but they must not fill more than one third of the screen. They must have a curved radius of 100 and usually have illustrations or icons over the top. 
 
-On top of the color blocks (or on iTs own) you could also use the halftone grey panel on opacity 20%. This gives the page some texture without distracting the USER from the text. 
+On top of the color blocks (or on its own) you could also use the halftone grey panel on opacity 20%. This gives the page some texture without distracting the USER from the text. 
 
 ## Menus and Sidebars 
 
-Most of the menus on PostHog will be in tones of grey with pops of colour for clicked pages. The most common menu featured on the bottom of the website page holds 5 sections for users to navigate the website. This menu is Mid grey (#BEBEBE), and its size is  315px in height, while occupuying the entire length of the screen in width.
+Most of the menus on PostHog will be in tones of grey with pops of color for clicked pages. The most common menu featured on the bottom of the website page holds 5 sections for users to navigate the website. This menu is Mid Grey (#BEBEBE), and its size is  315px in height, while occupying the entire length of the screen in width.
 
 Within the block are the 5 categories: Why PostHog, Resources, Community, Support, Company.
 
