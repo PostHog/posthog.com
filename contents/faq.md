@@ -23,14 +23,16 @@ We track user behavior across your website and applications.
 	* [Trends](/docs/features/trends)
 	* [Funnels](/docs/features/funnels)
 	* [Cohorts](/docs/features/cohorts)
-	* [Retention](/docs/features/trends#trend-segmentation-by-stickiness)
+	* [Trend Stickiness](/docs/features/trends#trend-segmentation-by-stickiness)
+	* [Rentention](https://posthog.com/docs/features/retention)
 	* [User histories](/docs/features/users)
+	* [Feature-rich Toolbar](https://posthog.com/docs/features/toolbar)
 
 ### Does it work with my stack?
 
-PostHog is designed for any web or mobile based website or application.
+PostHog is designed for any web or mobile-based website or application.
 
-* We have front end event capture using a snippet that goes into your ```<head></head>``` tags.
+* We have front end event capture using a snippet that goes inside your HTML ```<head></head>``` tags.
 * For any other events, we have:
 	* [Pre-built libraries](/docs/integrations)
 	* [An API](/docs/integrations/api) for anything else
@@ -45,7 +47,7 @@ Yes. We are in very [active development](https://github.com/PostHog/posthog/grap
 
 ### How popular is the software?
 
-Very. We have thousands of users, over [2K stars](https://github.com/PostHog/posthog/stargazers) on GitHub, even though the project only started in January (!), and [supportive investors](/handbook/investors).
+Very. We have thousands of users, over [2.9k stars](https://github.com/PostHog/posthog/stargazers) on GitHub, even though the project only started in January (!), and [supportive investors](/handbook/investors).
 
 ### Is the software updated regularly?
 
@@ -119,11 +121,11 @@ The cool thing about PostHog is that you can go live into production without hav
 
 ### What's the community like?
 
-Active and growing! We have [more than 2K stars](https://github.com/PostHog/posthog/stargazers) on GitHub. There is a [Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) with daily conversations, and the repo itself has [issues](https://github.com/PostHog/posthog/issues) raised every week.
+Active and growing! We have [more than 2.9k stars](https://github.com/PostHog/posthog/stargazers) on GitHub. There is a [Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) with daily conversations, and the repo itself has [issues](https://github.com/PostHog/posthog/issues) raised every week.
 
 ### What are the docs like?
 
-[Check them out](/docs) for yourself!
+Our Docs are a top priority to us and are updated **daily**. [Check them out](/docs) for yourself!
 
 ## How is this different from the other product analytics tools?
 
