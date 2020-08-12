@@ -74,7 +74,7 @@ There was no significant spend on marketing for the first 100K users - this all 
 
 "Product have the final say. Engineering will have points of view, they need to raise these with Product. You end up with tons of huge meetings if you don't take this approach."
 
-GitLab, like PostHog, have an engineering-focused product. Thus far, our approach has been developers building for developers, with a huge amount of autonomy. So much so
+GitLab, like PostHog, have an engineering-focused product. Thus far, our approach has been developers building for developers, with a huge amount of autonomy. We're in fact the exact opposite.
 
 Whilst we don't agree with this approach, we agree with the clarity. We let individual developers choose what to work on - it's their call, no one else's. That's perhaps a little unconventional.
 
