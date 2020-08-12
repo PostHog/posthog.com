@@ -59,8 +59,8 @@ function IndexPage() {
             <br />
             Build a better product.
           </h1>
-          <p>Join 1,000 companies using PostHog.</p>      
-            <a href="/trial">
+          <p>Join 1,000 companies using PostHog.</p>   
+            <Link to="/trial">
               <Button
                 type="primary"
                 size="large"
@@ -68,13 +68,13 @@ function IndexPage() {
               >
                 Get Started for Free
               </Button>
-            </a>
+              </Link>   
             {' '}
-            <a href="/request_demo">
+            <Link to="/request_demo">
               <Button type="secondary" size="large">
                 Request Demo
               </Button>
-            </a>
+            </Link>
             <div className="secondSpace"></div>
             <h2 className="yellowText">Open source product analytics</h2>
             <p>
