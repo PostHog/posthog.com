@@ -164,6 +164,34 @@ posthog.opt_in_capturing();
 
 **Note:** This method is a suggested way to prevent capturing data from the admin on the page. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also call it directly in your app after an admin logs in. 
 
+
+### Feature Flags
+
+PostHog v1.10.0 introduced [Feature Flags](/docs/features/feature-flags), which allow you to safely deploy and roll back new features.
+
+Here's how you can use them:
+
+- Do something when the feature flags load:
+
+    The argument `callback(flags: string[])` will be called when the feature flags are loaded.
+
+    In case the flags are already loaded, it'll be called immediately. Aditionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
+
+    ```js
+    posthog.onFeatureFlags(callback)
+    ```
+
+
+- Check if a feature is enabled:
+    ```js
+    posthog.isFeatureEnabled('keyword')
+    ```
+
+- Trigger a reload of the feature flags:
+    ```js
+    posthog.reloadFeatureFlags()
+    ```
+
 ## Reset After Logout
 
 If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user. 
