@@ -12,18 +12,21 @@ showTitle: true
 1. The dialog window will present a unique URL that will map to the channel. Make sure that you copy and save the URL—you will need to provide it to the outside service.
 1. Select the Done button. The webhook will be available in the team channel.
 
-[See Microsoft Team's documentation for more info](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel)
+[See the Microsoft Teams Documentation for more info](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel).
 
-## 2. Copy the URL into the PostHog setup page
+## 2. Setup Webhook in Posthog
 
-![](../../images/05/slack-or-teams-webhook.png)
+Copy the Webhook URL into the PostHog Setup page:
 
-## 3. Add to action
+![PostHog Add Webhook](../../images/add-webhook.png)
 
-For each action that should be posted to Teams, select "Post to Slack/Teams when this action is triggered"
+## 3. Add to Action
 
-![image](https://user-images.githubusercontent.com/53387/78897251-2bec7a80-7a72-11ea-9dd5-ac40afe13606.png)
+For each action that should be posted to Teams, select "Post to Slack/Teams when this action is triggered":
 
-## 4. Rejoice for you did good!
+![PostHog Edit Action](../../images/post-action-slack.png)
 
-![](../../images/05/teams-hello.png)
+
+## 4. Celebrate!
+
+![](../../images/mt-message.png)
