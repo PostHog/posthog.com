@@ -30,7 +30,7 @@ We will target developers rather than product teams in order to get implemented.
 ## How will we be the best?
 
 * **Engineering-led culture:** Engineers want to deal with engineers.
-* **Remote first:** We will make the company remote-first, to encourage the greatest possible degree of community collaboration.
+* **All Remote:** PostHog has a 100% remote team, to encourage the greatest possible degree of community collaboration.
 
 ## What are our capabilities, and what else is needed to succeed on this path?
 
@@ -40,7 +40,7 @@ We will target developers rather than product teams in order to get implemented.
 
 ## What are the systems and metrics that empower our capabilities?
 
-* Adoption: MAUs is something we should focus on. A tiny bit of product work needed to make that happen. Underneath this, we should look at the percentage of deployed instances in production - that is our greatest area of drop off.
+* Adoption: MAUs is one important metric we should focus on.
 * MRR for revenue.
 * Open company handbook - to enable a true remote and community first culture.
 
@@ -73,7 +73,7 @@ What we will build:
 
 Making money:
 
-The first 6-12 months we will focus solely on developer adoption. After that, we'll slowly and carefully start introducing paid features for our enterprise customers. Those will include:
+The first 6-12 months we will focus solely on developer adoptionon, whilst setting up the repo structure and a handful of enterprise features to get us into the habit of managing expectations carefully with the community. This way we don't feel like we are focused on revenue **or** growth. The former will come from the latter organically. After that, we'll slowly and carefully start introducing paid features for our enterprise customers. Those will include:
 
 * Setting up a self-serve hosted version
 * Building some of the growth/ultimate plan features like experimentation
