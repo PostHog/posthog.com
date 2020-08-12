@@ -179,6 +179,7 @@
     "entry":"Company Blog",
     "name":"Company Blog",
     "items": [
+      "blog/a-chat-with-sid",
       "blog/raising-3m-for-os",
       "blog/after-the-hn-launch",
       "blog/pivot-to-posthog",
