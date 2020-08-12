@@ -42,7 +42,7 @@ At PostHog, we have a culture of treating team members as partners. This means i
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/spending-money) guidelines <br>
 
 
-### Adding team members to Pulley
+### Adding Team Members to Pulley
 
 <input type="checkbox"/>  Stakeholders > Add a Stakeholder <br>
 <input type="checkbox"/>  Fill out name, type (individual) and relationship (employee) <br>
@@ -57,7 +57,7 @@ At PostHog, we have a culture of treating team members as partners. This means i
 * Vesting Schedule: 1/48 monthly, 25% vest at 1 year cliff
 * Vesting Start Date: same as start date of employment
 
-### Completing the employee offer letter
+### Completing the Employee Offer Letter
 
 <span style="text-decoration: none !important">
 
@@ -80,7 +80,9 @@ At PostHog, we have a culture of treating team members as partners. This means i
 
 </span>
 
-### Completing the employee confidentiality letter
+### Completing the Employee Confidentiality Letter
+
+> **Note:** This may already be included into the employment contract.
 
 <input type="checkbox"/>  Create a copy of the [employee confidentiality letter](https://drive.google.com/open?id=19yXodJzE8D2j-aCbNjexsCAGVF1lJfMZ) <br>
 <input type="checkbox"/>  Complete the blank fields <br>

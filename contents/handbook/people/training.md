@@ -10,9 +10,9 @@ The better you are at your job, the better PostHog is overall!
 
 *Everyone* at PostHog is eligible to buy books to help you in your job.
 
-The reason we think books can be more helpful than just Googling stuff, is the level of quality has to be higher for them to get published.
+The reason we think books can be more helpful than just Googling stuff, is that the level of quality has to be higher for them to get published.
 
-You may buy a couple of books a month without asking permission. As a general rule, spending up to $40/month on books is fine and requires no extra permission.
+You may buy a couple of books a month without asking for permission. As a general rule, spending up to $40/month on books is fine and requires no extra permission.
 
 Books do not have to be tied directly to your area, and they only need be loosely relevant to your work. For example, biographies of leaders can help a manager to learn, and can in fact be more valuable than a tactical book on management. Likewise, if you're an engineer, a book on design can also be particularly valuable for you to read.
 
