@@ -8,7 +8,7 @@ showTitle: true
 
 PostHog brings investors on as partners.
 
-There are many is a lot of value added from investors:
+There is a lot of value added from investors:
 
 * Financing so we can build a better and more ambitious product, hence growing faster
 * Strategic or tactical advice
