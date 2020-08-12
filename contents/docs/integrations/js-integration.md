@@ -162,6 +162,8 @@ Opt a user back in:
 posthog.opt_in_capturing();
 ```
 
+**Note:** This method is a suggested way to prevent capturing data from the admin on the page. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` directly on the developer console. 
+
 ## Reset After Logout
 
 If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user. 
