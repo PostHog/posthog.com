@@ -181,7 +181,6 @@ Here's how you can use them:
     posthog.onFeatureFlags(callback)
     ```
 
-
 - Check if a feature is enabled:
     ```js
     posthog.isFeatureEnabled('keyword')
