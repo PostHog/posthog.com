@@ -6,10 +6,10 @@ showTitle: true
 
 
 In PostHog, there is an API endpoint available to get all information on your own user and team.
-This includes all possible event names, event properties, api key, app urls, current posthog version and more.
+This includes all possible event names, event properties, API key, app URLs, current PostHog version and more.
 
 
-## List current user
+## List Current User
 
 
 ```plaintext
