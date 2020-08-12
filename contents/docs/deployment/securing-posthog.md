@@ -31,6 +31,11 @@ TRUST_ALL_PROXIES=True
 
 > If you're on Heroku, you are behind a proxy by default, so you'll need to add `IS_BEHIND_PROXY=True`. Heroku automatically overrides `X-Forwarded-For`, so you can use `TRUST_ALL_PROXIES=True`.
 
+## Secure Cookies
+
+Starting with PostHog 1.13.0, we introduced a `SECURE_COOKIES` flag. This defaults to "False" when PostHog is running on `localhost` and "True" in production.
+
+**For security reasons, you should always have this set to "True" in production.** However, in some cases, such as while testing your setup, you may need to toggle this flag off. In that case, you can explicitly set `SECURE_COOKIES=False` as an environment variable. But always remember, live data should never be transferred if this flag is off!
 
 
 ## Secret Key
