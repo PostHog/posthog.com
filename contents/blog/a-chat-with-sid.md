@@ -78,8 +78,6 @@ GitLab, like PostHog, have an engineering-focused product. Thus far, our approac
 
 Whilst we don't agree with this approach, we agree with the clarity. We let individual developers choose what to work on - it's their call, no one else's. That's perhaps a little unconventional.
 
-### When did you decide to get people in non-overlapping timezones
-
 ### When did you introduce a management layer? What did you learn from that?
 
 "Once we got past about 10 people. Don't do this too early." 
