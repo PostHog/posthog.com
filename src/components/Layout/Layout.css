@@ -691,6 +691,10 @@ header {
   margin-right: 20px;
 }
 
+.headerItems ul {
+  background: none!important;
+}
+
 
 #logo {
   margin: 0;
@@ -716,6 +720,11 @@ aside {
 }
 
 .ant-layout-sider-children ul {
+  background-color: #F9F9F9 !important;
+  border: none;
+}
+
+ul.ant-menu-sub {
   background-color: #F9F9F9 !important;
   border: none;
 }
@@ -893,13 +902,16 @@ a.ant-anchor-link-title:hover {
   border-style: solid;
   border-color:#1D4AFF;
 }
-
 .blog-post a {
   color: #1D4AFF;
 }
 
 .blog-post a:hover {
   color: #577BFB;
+}
+
+.ant-layout {
+  background-color: white!important;
 }
 
 .docs-footer {

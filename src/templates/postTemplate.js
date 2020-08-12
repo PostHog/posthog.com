@@ -12,6 +12,7 @@ import {
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 import SEO from '../components/seo';
+import MediaQuery from 'react-responsive'
 
 function addIndex (url) {
   const indexUrls = ['/docs', '/handbook']
