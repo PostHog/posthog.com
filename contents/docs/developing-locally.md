@@ -13,22 +13,33 @@ git clone https://github.com/PostHog/posthog
 
 Then start the instance with `docker-compose`:
 
+> 👀 **It may take several minutes to build the system for the first time**. If you see an error message once your app is launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
+
 ```bash
 docker-compose -f docker-compose.dev.yml up
 ```
 
 ## Using virtualenv
 
-1. Make sure you have python 3 installed `python3 --version`
-2. Make sure you have [Redis installed](https://redis.io/download) and running. 
+1. Make sure you have Python 3 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
+2. Make sure you have [Redis installed](https://redis.io/download) and running.
 
-    On MacOS, this is done with: `brew install redis && brew services start redis`
-3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running.
+```bash
+# macOS (Homebrew)
+brew install redis && brew services start redis
+```
+3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running. You may also try [Postgres.app](https://postgresapp.com/), but remember to follow the instructions to add `psql` to your `$PATH` if you do.
 
-    On MacOS, this is done with: `brew install postgresql && brew services start postgresql`
-
+```bash
+# macOS (Homebrew)
+brew install postgresql && brew services start postgresql
+```
  
-4. Create the Database: `createdb posthog`
+4. Create the Postgres database: `createdb posthog` or using the Postgres interactive terminal:
+```
+psql
+CREATE DATABASE posthog;
+```
 5. Navigate into the correct folder (project's root directory): `cd posthog` 
 6. Run `python3 -m venv env` (creates virtual environment in current direction called 'env')
 7. Run `source env/bin/activate` (activates the virtual environment)
@@ -39,7 +50,10 @@ docker-compose -f docker-compose.dev.yml up
 10. Run migrations: `DEBUG=1 python3 manage.py migrate`
 11. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
-    On MacOS, this is done with: `brew install yarn`
+```bash
+# macOS (Homebrew)
+brew install yarn
+```
 
 12. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
 
