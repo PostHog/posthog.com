@@ -965,3 +965,17 @@ table td {
 table th {
   border: none;
 }
+
+#mc_embed_signup{
+  clear:left; 
+  font:14px Helvetica ,Arial,sans-serif; 
+  width:100%;
+}
+
+#mc_embed_signup .button {
+  background-color: #1D4AFF !important;
+}
+
+#mc_embed_signup .button:hover {
+  background-color: #577BFB !important;
+}
