@@ -12,9 +12,9 @@ showTitle: true
 1. The dialog window will present a unique URL that will map to the channel. Make sure that you copy and save the URL—you will need to provide it to the outside service.
 1. Select the Done button. The webhook will be available in the team channel.
 
-[See the Microsoft Teams Documentation for more info](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel).
+[See the Microsoft Teams documentation for more info](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel).
 
-## 2. Setup Webhook in Posthog
+## 2. Setup Webhook in PostHog
 
 Copy the Webhook URL into the PostHog Setup page:
 
