@@ -16,7 +16,7 @@ This is to make sure that people can take time off flexibly, whilst not feeling 
 
 The reason for this policy is that it's table-stakes for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done.
 
-## Permissionless time off
+## Permissionless Time Off
 
 You do not need to "clear" time off with your manager.
 
@@ -24,25 +24,25 @@ We care about your results, not how long you work. Whilst no approval is needed,
 
 When you pick a date(s) to have off, please enter them into the [shared vacation calendar](https://calendar.google.com/calendar?cid=cG9zdGhvZy5jb21fa3Rzb2hjMmZtaWFkbHF2ZWI0bmk0NG1tbzBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ). Remember to set an out of office message on your email.
 
-## Longer breaks
+## Longer Breaks
 
 The same rules as above apply regardless of the vacation length.
 
-## When you should have time time off
+## When You Should Have Time Off
 
-### You are sick
+### You are Sick
 
-If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, just take them.
+If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, then just take them.
 
 Please let your manager know if you need to take off due to illness as far in advance as is possible.
 
 For extended periods of illness, please speak to us so we can work out a plan.
 
-### Jury duty / Bereavements / Voting / Child admin disasters
+### Jury Duty / Bereavements / Voting / Child Admin Disasters
 
 There are lots of situations where life needs to come first. Please let it, just be communicative with us and fit your work around it as you need.
 
-## Parental leave
+## Parental Leave
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of the way you've become a parent - childbirth, adoption or foster care. 
 

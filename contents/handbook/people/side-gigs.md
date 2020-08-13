@@ -4,17 +4,17 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog looks for passion in the people it hires. This often correlates with people who, for example, do speaking or side projects as a hobby. For example, we view pre-existing open source work as a strong qualifier that you're good enough at programming that it's fun to do rather than frustrating and hard!
+PostHog looks for passion in the people it hires. This often correlates with people who, for example, do public speaking or have side projects as a hobby. For example, we view pre-existing open source work as a strong qualifier that you're good enough at programming that it's fun to do rather than frustrating and hard!
 
 These side gigs may sometimes earn you money. Sometimes, you may one day want your side gig to become your main gig.
 
 We have deliberately called them "side gigs", as we are ok with you earning money on the side. We are not ok with this being your main focus and PostHog being just a paycheck. Quite simply, we are too small for PostHog not to be your main motivation.
 
-## Managing time
+## Managing Time
 
 The key distinction to something being a side gig, and thus it being appropriate, is its impact on your work and the amount of time involved.
 
-A few hours a month on a paid side gig is acceptable. >10 hours a week on a paid or open source side gig is a significant amount of extra work which we would expect to start impacting your performance.
+A few hours a month on a paid side gig is acceptable. Over 10 hours a week on a paid or open source side gig is a significant amount of extra work which we would expect to start impacting your performance.
 
 If you are doing paid speaking, make it clear that you work for us, and the exception based on time does not apply - we view this as a great way to get PostHog's name out there.
 
