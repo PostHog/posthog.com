@@ -12,9 +12,9 @@ hideAnchor: true
 
 Quality was the name of the game over the last two weeks.
 
-We've a few user facing tweaks and a mountain of bug fixes and refactoring this week. We're not sure what the collective noun for a bunch of bug fixes and refactoing pull requests - a "virtue" perhaps?
+We have a few user facing tweaks and a mountain of bug fixes and refactoring this week. We're not sure what the collective noun for a bunch of bug fixes and refactoring pull requests is - a "virtue" perhaps?
 
-If you're self hosting and want to upgrade for a better experience with nicer features - [update your PostHog](/docs/deployment/upgrading-posthog).
+If you're self-hosting and want to upgrade for a better experience with nicer features - [update your PostHog](/docs/deployment/upgrading-posthog).
 
 ## Release Notes
 
@@ -22,33 +22,33 @@ If you're self hosting and want to upgrade for a better experience with nicer fe
 
 ![](https://user-images.githubusercontent.com/13127476/88422815-ce7a0080-cdb8-11ea-900e-ae60b36745f7.gif)
 
-We consolidated trends, sessions, funnels, retention and user paths into one page for much faster answers to the questions you may have!
+We consolidated trends, sessions, funnels, retention, and user paths into one page for much faster answers to the questions you may have!
 
 ### [More powerful Slack messages](https://github.com/PostHog/posthog/pull/1219)
 
 ![](https://user-images.githubusercontent.com/4550621/89835642-66bc0780-db65-11ea-9203-f08b154f37b0.png)
 
-PostHog has a feature where Actions can be posted to Slack or Microsoft teams. This helps you notify your team in real time of the user actions that really matter. Just got a new user? Ping your sales team. Did a user try out a new feature? Get an alert!
+PostHog has a feature where Actions can be posted to Slack or Microsoft Teams. This helps you notify your team in real time of the user actions that really matter. Just got a new user? Ping your sales team. Did a user try out a new feature? Get an alert!
 
-The integration used to be very basic - you can now edit the message format in the UX.
+The integration used to be very basic - but now you can edit the message format directly in the UI.
 
 ### [Toolbars for all!](https://github.com/PostHog/posthog/pull/1326)
 
 ![](https://posthog.com/images/3ce1232ef29d0d59b4ac2779d8e97cf8/inspect.gif)
 
-PostHog provides an irrefutably awesome toolbar. This lets you interact with your site or app and understand who is doing what. We've been in beta for a few weeks, interviewing early users - thank you to everyone that took part!
+PostHog provides an irrefutably awesome toolbar. This lets you interact with your site or app and understand who is doing what. We've been in Beta for a few weeks, and spent a lot of time interviewing early users - thank you to everyone that took part!
 
-We've now eliminated many bugs and have improved the UX that this feature will be on by default for all PostHog users on the latest version.
+We have now eliminated many bugs and have improved the UX, so this feature will be on by default for all PostHog users on the latest version.
 
 ### [Better annotations](https://github.com/PostHog/posthog/pull/1331)
 
 ![](https://user-images.githubusercontent.com/13127476/89192699-dda83d80-d572-11ea-9ef1-293ea4498cfe.gif)
 
-You can annotate graphs in PostHog - mention big releases, new features or changes to your UX.
+You can annotate graphs in PostHog - mention big releases, new features, or changes to your UX.
 
 Now, it's quicker and easier to get a quick read on what happened that caused something funky in your graphs.
 
-We've also made all annotations [default to being global](https://github.com/PostHog/posthog/pull/1296). That means if you create an annotation in one graph (or in the annotations page), it is visible across any dashboard graph that covers that date range. No-longer need you fear losing annotations.
+We've also made all annotations [default to being global](https://github.com/PostHog/posthog/pull/1296). That means if you create an annotation in one graph (or in the annotations page), it is visible across any dashboard graph that covers that date range. No need to fear losing your annotations.
 
 ## Bug Fixes and Performance Improvements
 
@@ -60,9 +60,9 @@ We've also made all annotations [default to being global](https://github.com/Pos
 * We fixed a bug where GitHub actions [required packer](https://github.com/PostHog/posthog/pull/1304) to be manually installed.
 * [Cohorts supported](https://github.com/PostHog/posthog/pull/1362) for people merged to a person.
 * [Solved a bug](https://github.com/PostHog/posthog/pull/1386) with the way the current version update message displayed.
-* If you're running in debug mode, it'll be [more obvious](https://github.com/PostHog/posthog/pull/1378)!
+* If you're running in DEBUG mode, it'll be [more obvious](https://github.com/PostHog/posthog/pull/1378)!
 * We [refactored sessions](https://github.com/PostHog/posthog/pull/1307) into a new queries folder.
-* There was a weird issue with the user email search. 'lo, [it's gone](https://github.com/PostHog/posthog/pull/1351).
+* There was a weird issue with the user email search. [That's gone](https://github.com/PostHog/posthog/pull/1351).
 * We squished [two](https://github.com/PostHog/posthog/pull/1330) [bugs](https://github.com/PostHog/posthog/pull/1348) with our stickiness metrics when specific events were filtered.
 * The team page now [looks much nicer](https://github.com/PostHog/posthog/pull/1346).
 * Eric smushed [a bug](https://github.com/PostHog/posthog/pull/1337) with filters.
@@ -82,22 +82,22 @@ We've also made all annotations [default to being global](https://github.com/Pos
 * The experiments tab in the navigation didn't have a highlight. [Now it does](https://github.com/PostHog/posthog/pull/1298). That was weird.
 * We [moved most of the analytics logic](https://github.com/PostHog/posthog/pull/1280) into a `queries` folder. This means it's in one place and in the future will make a ClickHouse integration way easier.
 
-## Favorite issue
+## Favorite Issue
 
 ### [Database candidate testing](https://github.com/PostHog/posthog/issues/1341)
 
 We have had a lot of demand for very high volume deployments. We ran a ton of tests. Results to follow!
 
-## Weekly round up
+## Weekly Round Up
 
 - [What noise does a hedgehog make?](https://www.youtube.com/watch?v=5sgw-achKVM)
 - [Lynx deodorant now offers 'Africa and Marmite'](https://twitter.com/aaronnstuart/status/1272927611031879680)
 
-## PostHog news
+## PostHog News
 
 We're testing out more scalable databases as we've had several teams start using us with 600+ events/second. We are going to build on ClickHouse for our Enterprise version.
 
-On the team side, we welcomed Yakko as a technical writer and developer - you'll see his work in our docs, which are getting a serious overhaul. Paolo has also joined as our first growth engineer. We'll release a blog post explaining what he's up to!
+On the team side, we welcomed Yakko as a Technical Writer and Ceveloper - you'll see his work in our Docs, which are getting a serious overhaul. Paolo has also joined as our first Growth Engineer. We'll release a blog post explaining what he's up to!
 
 Lottie, our legendary designer, is moving to Senegal from Guildford in the UK. She'll start packing soon as she leaves this weekend.
 
