@@ -12,7 +12,7 @@ hideAnchor: true
 
 Quality was the name of the game over the last two weeks.
 
-We have a few user facing tweaks and a mountain of bug fixes and refactoring this week. We're not sure what the collective noun for a bunch of bug fixes and refactoring pull requests is - a "virtue" perhaps?
+We have a few user facing tweaks and a mountain of bug fixes and refactoring this week. We're not sure what the collective noun for a bunch of bug fixes and refactoring pull requests is - a "virtue"?
 
 If you're self-hosting and want to upgrade for a better experience with nicer features - [update your PostHog](/docs/deployment/upgrading-posthog).
 
@@ -24,9 +24,9 @@ If you're self-hosting and want to upgrade for a better experience with nicer fe
 
 We're happy to announce that PostHog is now available as a destination on Segment.
 
-Our friends at Segment have built a platform that works as an integrated data pipeline to facilitate the entire data collection and analysis process for your product.
+Our friends at Segment have built a platform that works as an integrated data pipeline to pull in all your customer data. It's a cool way to combine PostHog with ie Google Analytics or Salesforce data.
 
-If you're already a Segment user, check us out on their [Destination Catalog](https://segment.com/docs/connections/destinations/catalog/). Otherwise, if you're dealing with multiple tools for data collection and analysis, consider using [Segment](https://segment.com/)!
+If you're already a Segment user, check us out on their [Destination Catalog](https://segment.com/docs/connections/destinations/catalog/). Otherwise, if you're dealing with multiple tools for data collection and analysis, consider using [Segment](https://segment.com/)! They have a generous [startup scheme too](https://segment.com/industry/startups/), like us.
 
 
 ### [Quicker access to everything](https://github.com/PostHog/posthog/pull/1265)
