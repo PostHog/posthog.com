@@ -86,7 +86,7 @@ We agree.
 
 ## Don't ask what I did
 
-"Being the pricing genius I am, I charged a [trillion dollar company] $1,500 per annum for 5,000 seats. The insurance to cover the contract was significantly more than the contract itself". Stay humble!
+"Being the pricing genius I am, I charged a (>$100Bn valuation) company $1,500 per annum for 5,000 seats. The insurance to cover the contract was significantly more than the contract itself". Stay humble!
 
 Sid summed up the call perfectly - "don't ask so much about what I did, but ask how I'd approach things now".
 
