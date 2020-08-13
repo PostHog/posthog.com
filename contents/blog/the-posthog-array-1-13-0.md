@@ -24,7 +24,7 @@ If you're self-hosting and want to upgrade for a better experience with nicer fe
 
 We're happy to announce that PostHog is now available as a destination on Segment.
 
-Segment is a platform that works as an integrated data pipeline to facilitate the entire data collection and analysis process for your product.
+Our friends at Segment have built a platform that works as an integrated data pipeline to facilitate the entire data collection and analysis process for your product.
 
 If you're already a Segment user, check us out on their [Destination Catalog](https://segment.com/docs/connections/destinations/catalog/). Otherwise, if you're dealing with multiple tools for data collection and analysis, consider using [Segment](https://segment.com/)!
 
@@ -49,7 +49,7 @@ The integration used to be very basic - but now you can edit the message format 
 
 PostHog provides an irrefutably awesome toolbar. This lets you interact with your site or app and understand who is doing what. We've been in Beta for a few weeks, and spent a lot of time interviewing early users - thank you to everyone that took part!
 
-We have now eliminated many bugs and have improved the UX, so this feature will be on by default for all PostHog users on the latest version.
+We have now eliminated many bugs and improved the UX, so this feature will be on by default for all new PostHog users.
 
 ### [Better annotations](https://github.com/PostHog/posthog/pull/1331)
 
