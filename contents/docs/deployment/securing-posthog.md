@@ -31,7 +31,19 @@ TRUST_ALL_PROXIES=True
 
 > If you're on Heroku, you are behind a proxy by default, so you'll need to add `IS_BEHIND_PROXY=True`. Heroku automatically overrides `X-Forwarded-For`, so you can use `TRUST_ALL_PROXIES=True`.
 
+## Secure Cookies
 
+Starting with PostHog 1.13.0, we introduced a `SECURE_COOKIES` flag. This defaults to "False" when PostHog is running on `DEBUG` or `TEST` mode (generally the case when running locally) and "True" in production (when those modes are not on).
+
+While this defaults to "True" in environments that are not `TEST` or `DEBUG`, you may need to toggle this off for setup or testing purposes in a production instance. However, remember that **secure cookies should always be on when handling live data (i.e. in production).** This flag affects cookies used in Django sessions, CSRF tokens, and Toolbar login. In short, it ensures the security of your PostHog instance, hence it is so important.
+
+As noted multiple times throughout our Docs, PostHog **should always run on HTTPS** (i.e. using TLS/SSL). Thus, if you are running on HTTPS (as you should) and `SECURE_COOKIES` is set to "False", browsers will likely throw warnings about cookies and you might have trouble logging in on some newer versions of Chrome, for example. Additionally, the toolbar login cookie will not work and you will be vulnerable to Man In the Middle (MITM) attacks when you accidentally open your app using HTTP and not HTTPS.
+
+Furthermore, if this flag is set to "True" and you are not running on HTTPS, you will not be able to log in to PostHog, since secure cookies are discarded in an unsafe environment.
+
+For most users, toggling this flag will not be necessary, as PostHog handles most cases appropriately for you. However, if you need to set it manually, you can explicitly set `SECURE_COOKIES=False` or `SECURE_COOKIES=True` as an environment variable. The main use case for this is testing, where you may need secure cookies off while setting up a production environment, or you might want them on when developing locally with HTTPS. 
+
+For more information on Django security features, you can check out [Django's Official Docs](https://docs.djangoproject.com/en/3.1/topics/security/), which discuss secure cookies. 
 
 ## Secret Key
 
