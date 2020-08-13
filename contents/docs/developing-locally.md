@@ -38,7 +38,7 @@ docker-compose -f docker-compose.dev.yml up
  
 4. Create the Postgres database with the command `createdb posthog` on the shell or by using the Postgres interactive terminal:
     ```
-    psql
+    psql -d postgres
     CREATE DATABASE posthog;
     ```
 5. Navigate into the correct folder (project's root directory): `cd posthog` 
