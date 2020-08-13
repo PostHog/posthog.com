@@ -87,7 +87,7 @@ We've also made all annotations [default to being global](https://github.com/Pos
 * Tim eliminated an issue [with cumulative graphs](https://github.com/PostHog/posthog/pull/1328).
 * A Sentry error about breakdown filters is now [brown bread](https://github.com/PostHog/posthog/pull/1321) (dead).
 * We now [return an error](https://github.com/PostHog/posthog/pull/1319) for malformed JSONs to the API.
-* We've [converted the toolbar to TypeScript](https://github.com/PostHog/posthog/pull/1306). That always makes for a ridiculously huge looking pull request. 110 files changed. Noice, noice.
+* We've [converted the toolbar to TypeScript](https://github.com/PostHog/posthog/pull/1306). That always makes for a ridiculously huge pull request. 110 files changed. Noice, noice.
 * We [added a missing migration](https://github.com/PostHog/posthog/pull/1311) for ActionStep URL.
 * [Warnings on running local tests](https://github.com/PostHog/posthog/pull/1308) now don't appear.
 * The experiments tab in the navigation didn't have a highlight. [Now it does](https://github.com/PostHog/posthog/pull/1298). That was weird.
