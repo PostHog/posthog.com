@@ -31,6 +31,9 @@ import installHeroku from '../images/install-heroku.svg'
 import installDocker from '../images/install-docker.svg'
 import installAws from '../images/install-aws.svg'
 import installKubernetes from '../images/install-kubernetes.svg'
+import githubButton from '../images/github-button.svg'
+import slackButton from '../images/slack-button.svg'
+import roadmapButton from '../images/roadmap-button.svg'
 import whatsNew from '../images/whats-new.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
@@ -410,15 +413,22 @@ function IndexPage() {
           <Col span={24}>
             <div>
               <a href="https://github.com/posthog/posthog">
-                <div className="github"/>
+                <div className="github">
+                  <img src={githubButton} className="imageShow"/>
+                </div>
               </a>
               <a href="https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ">
-                <div className="slack"/>
+                <div className="slack">
+                  <img src={slackButton} className="imageShow"/>
+                </div>
               </a>
               <Link to="/handbook/strategy/roadmap">
-                <div className="roadmap"/>
+                <div className="roadmap">
+                  <img src={roadmapButton} className="roadmapImg imageShowx"/>
+                  <div className="yellowFiller" />
+                </div>
+                
               </Link>
-              <div className="yellowFiller"/>
             </div>
           </Col>
 

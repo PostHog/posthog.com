@@ -5,6 +5,8 @@
 
 .indexPage h1, .indexPage h2 {
     border-bottom: none;
+    padding: 0 calc((100vw - 1440px) / 2);
+    width: 1440px;
 }
 
 .indexContainer {
@@ -140,20 +142,21 @@
 
 
 .row1 {
-    height: calc((680/837) * (7/12 * 100vw));
+    height: 726px;
+    max-height: calc((680/837) * (7/12 * 100vw));
     margin-bottom: 100px;
 }
 
 @media screen and (max-width: 1440px) {
     .row1 {
-        height: 680px;
+        height: 726px;
         max-width: 100vw;
     }
 }
 
 @media screen and (max-width: 768px) {
     .row1 {
-        height: calc((680/837) * 80vw + 150px);
+        height: calc((691/854) * 80vw + 150px);
         max-width: 100vw;
         margin-bottom: 0;
     }
@@ -161,8 +164,8 @@
 
 .row1Col1 {
     position: absolute;
-    left: calc(1/12 * 100vw);
-    width: calc(1/3 * 100vw);
+    left: calc(1/12 * 1440px);
+    width: calc(1/3 * 1440px);
     display: flex;
     flex-direction: column;
 }
@@ -186,11 +189,11 @@
 
 .row1Col2 {
     position: absolute;
-    left: calc(5/12 * 100vw);
-    height: calc((680/837) * (7/12 * 100vw));
-    width: calc(7/12 * 100vw);
+    left: calc(5/12 * 1440px);
+    height: 726px;
+    width: calc(100vw - (5/12 * 1440px));
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 1053 726;
 }
 
 @media screen and (max-width: 1440px) {
@@ -198,8 +201,8 @@
         position: absolute;
         left: calc(5/12 * 1440px);
         top: 0;
-        height: 680px;
-        width: calc(100vw - (5/12 * 1440px));
+        height: 691px;
+        width: calc(100vw - (8/12 * 1440px));
         background-size: initial;
     }
 }
@@ -229,9 +232,9 @@
 .understandUsers {
     position: absolute;
     top: 530px;
-    left: calc(1/12 * 100vw)!important;
+    left: calc(1/12 * 1440px)!important;
     bottom: -300px !important;
-    max-width: calc(1/3 * 100vw)!important;
+    max-width: calc(1/3 * 1440px)!important;
     left: 0;
     height: max-content;
 }
@@ -319,6 +322,7 @@
 }
 
 .trafficVisualWrapper {
+    background-image: url();
     position: relative;
     top: 0;
     height: calc((1209/1440) * 100vw);
@@ -578,9 +582,8 @@
 }
 
 .joinCommunityWrapper {
-    background-image: url('../images/join-community.svg');
     position: relative;
-    background-size: 1331 557;
+    background-size:1317 557;
     background-repeat: no-repeat;
     background-position: center top;
     width: auto;
@@ -591,7 +594,7 @@
     .joinCommunityWrapper {
         position: relative;
         top: 10vh;
-        background-size: calc(1331/1440 * 100vw) calc(557/1440 * 100vw);
+        background-size: calc(1317/1440 * 100vw) calc(557/1440 * 100vw);
         background-repeat: no-repeat;
         background-position: center top;
         width: 100vw;
@@ -607,7 +610,7 @@
         background-repeat: no-repeat;
         background-position: center top;
         width: 100vw;
-        height: calc(557/1331 * 100vw);
+        height: calc(557/1317 * 100vw);
     }
 }
 
@@ -615,54 +618,69 @@
     width: 100px;
 }
 
-.yellowFiller {
+.github {
+    background-color: #1D4AFF;
     position: absolute;
     height: 557px;
-    width: calc((100vw - 1331px) / 2);
-    background-color: #F7A501;
-    right: 0;
-    z-index: 1;
-}
-
-.github {
-    background-image: url('../images/github-button.svg');
-    position: absolute;
-    height: 558px;
     width: 666px;
-    left: calc((100vw - 1331px) / 2);
+    left: calc((100vw - 1317px) / 2);
     top: 0;
-    border-radius: 108px
+    border-radius: 108px;
 }
 
 .slack {
-    background-image: url('../images/slack-button.svg');
+    background-color: #F96132;
     position: absolute;
     height: 557px;
     width: 666px;
     top: 0;
-    left: calc((100vw - 1331px) / 2 + 388px);
+    left: calc((100vw - 1317px) / 2 + 388px);
     border-radius: 108px
 }
 
 .roadmap {
-    background-image: url('../images/roadmap-button.svg');
+    background-color: #F7A501;
     position: absolute;
     height: 557px;
     top: 0;
-    left: calc((100vw - 1331px) / 2 + 817px);
-    width: calc(100vw - 817px);
+    left: calc((100vw - 1317px) / 2 + 817px );
+    width: 500px;
     border-radius: 108px;
-    z-index: 5;
 }
 
+.github:hover {
+    background-color: white;
+}
+
+.github img:hover {
+    opacity: .3;
+}
+
+.slack:hover {
+    background-color: white;
+}
+
+.slack img:hover {
+    opacity: .3;
+} 
+
+.roadmap:hover {
+    background-color: white;
+}
+
+.yellowFiller:hover,  
+.yellowFiller:hover ~ .roadmapImg, 
+.roadmap img:hover, 
+.roadmap img:hover ~ .yellowFiller  {
+    opacity: .3;
+}
+
+.roadmap:hover .yellowFiller, .roadmap:hover .roadmapImg{
+    opacity: .3;
+}
+
+
 @media screen and (max-width: 1440px) {
-    .yellowFiller {
-        position: absolute;
-        height: calc(557/1440 * 100vw);
-        width: calc(100vw - (1331/1440 * 100vw));
-        background-color: #F7A501;
-        right: 0;
-    }
     .github {
         left: calc(54.5 / 1440 * 100vw);
         height: calc(557 / 1440 * 100vw);
@@ -678,7 +696,7 @@
     .roadmap{
         left: calc(871.5 / 1440 * 100vw);
         height: calc(557 / 1440 * 100vw);
-        width: calc((1440 - 567) / 1440 * 100vw);
+        width: calc(500 / 1440 * 100vw);
         border-radius: calc(108 / 1440 * 100vw);
     }
 }
@@ -686,35 +704,25 @@
 @media screen and (max-width: 768px) {
     .github {
         left: 0;
-        height: calc(557 / 1331 * 100vw);
-        width: calc(558 / 1331 * 100vw);
-        border-radius: calc(108 / 1331 * 100vw);
+        height: calc(557 / 1317 * 100vw);
+        width: calc(666 / 1317 * 100vw);
+        border-radius: calc(108 / 1317 * 100vw);
     }
     .slack {
-        left: calc(388 / 1331 * 100vw);
-        height: calc(557 / 1331 * 100vw);
-        width: calc(679 / 1331 * 100vw);
-        border-radius: calc(108 / 1331 * 100vw);
+        left: calc(388 / 1317 * 100vw);
+        height: calc(557 / 1317 * 100vw);
+        width: calc(666 / 1317 * 100vw);
+        border-radius: calc(108 / 1317 * 100vw);
     }
     .roadmap{
-        left: calc(817 / 1331 * 100vw);
-        height: calc(557 / 1331 * 100vw);
-        width: calc((1440 - 567) / 1331 * 100vw);
-        border-radius: calc(108 / 1331 * 100vw);
+        left: calc(817 / 1317 * 100vw);
+        height: calc(557 / 1317 * 100vw);
+        width: calc(500 / 1317 * 100vw);
+        border-radius: calc(108 / 1317 * 100vw);
     }
 }
 
-.github:hover {
-    background: #1D4AFF
-}
 
-.slack:hover {
-    background: #F96132;
-} 
-
-.roadmap:hover {
-    background: #F7A501
-}
 
 .whatsNew {
     position: relative;
