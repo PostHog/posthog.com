@@ -35,7 +35,7 @@ TRUST_ALL_PROXIES=True
 
 Starting with PostHog 1.13.0, we introduced a `SECURE_COOKIES` flag. This defaults to "False" when PostHog is running on `DEBUG` or `TEST` mode (generally the case when running locally) and "True" in production (when those modes are not on).
 
-While this defaults to "True" in environments that are not `TEST` or `DEBUG`, you may need to toggle this off for setup or testing purposes in a production instance. However, remember that **secure cookies should always be on when handling live data (i.e. in production).** This flag affects cookies used in Django sessions, CSRF tokens, and Toolbar login. In short, it ensures the security of your users' data, hence it is so important.
+While this defaults to "True" in environments that are not `TEST` or `DEBUG`, you may need to toggle this off for setup or testing purposes in a production instance. However, remember that **secure cookies should always be on when handling live data (i.e. in production).** This flag affects cookies used in Django sessions, CSRF tokens, and Toolbar login. In short, it ensures the security of your PostHog instance, hence it is so important.
 
 As noted multiple times throughout our Docs, PostHog **should always run on HTTPS** (i.e. using TLS/SSL). Thus, if you are running on HTTPS (as you should) and `SECURE_COOKIES` is set to "False", browsers will likely throw warnings about cookies and you might have trouble logging in on some newer versions of Chrome, for example. Additionally, the toolbar login cookie will not work and you will be vulnerable to Man In the Middle (MITM) attacks when you accidentally open your app using HTTP and not HTTPS.
 
