@@ -20,7 +20,7 @@ In the case of involuntary offboarding, we are unlikely to communicate any reaso
 
 In this case, the employee chooses to leave.
 
-We ask for 1 month of notice by default, and for you to work that notice period. This is so we have some time to find someone to hire and to enable a handover.
+We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work that notice period. This is so we have some time to find someone to hire and to enable a handover.
 
 ## Involuntary Offboarding
 
@@ -71,3 +71,4 @@ In the case of voluntary offboarding, the team member is offered the chance to s
 <input type="checkbox"/> Remove team member from PostHog Users Slack <br />
 <input type="checkbox"/> Remove team member from 1password <br />
 <input type="checkbox"/> Remove team member from app.posthog.com <br />
+<input type="checkbox"/> Remove team member from AWS access <br />
