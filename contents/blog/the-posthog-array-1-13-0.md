@@ -18,6 +18,17 @@ If you're self-hosting and want to upgrade for a better experience with nicer fe
 
 ## Release Notes
 
+### [PostHog is Now Available on Segment!](/blog/posthog-segment-integration)
+
+![](../images/posthog-segment.png)
+
+We're happy to announce that PostHog is now available as a destination on Segment.
+
+Segment is a platform that works as an integrated data pipeline to facilitate the entire data collection and analysis process for your product.
+
+If you're already a Segment user, check us out on their [Destination Catalog](https://segment.com/docs/connections/destinations/catalog/). Otherwise, if you're dealing with multiple tools for data collection and analysis, consider using [Segment](https://segment.com/)!
+
+
 ### [Quicker access to everything](https://github.com/PostHog/posthog/pull/1265)
 
 ![](https://user-images.githubusercontent.com/13127476/88422815-ce7a0080-cdb8-11ea-900e-ae60b36745f7.gif)
