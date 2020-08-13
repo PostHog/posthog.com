@@ -6,7 +6,7 @@ showTitle: true
 
 There are many occassions when you will need to spend company money.
 
-PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy and happy.
+PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
 Please just spend company money like it's your own.
 
@@ -16,13 +16,13 @@ If it's a larger expense and doesn't fit into the items here, please **raise a p
 
 Make sure you *keep copies for all receipts*. We *cannot* pay you back for anything without a receipt. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-## Trivial expenses
+## Trivial Expenses
 
 Just do it.
 
 This means expenses that are under \$75 one off or under \$20/month recurring that we can cancel easily.
 
-## Saving receipts
+## Saving Receipts
 
 This applies to both company card and personal card spending. You should default to using your company card in nearly all cases - it has no transaction fees.
 
@@ -30,9 +30,9 @@ PostHog uses [Expensify](https://expensify.com) for receipt collection. You will
 
 It's a good idea to download the app so you can take photos of receipts as you make purchases.
 
-_Important_ if you need reimbursement for a receipt, you must tag the expense as such (for example, if you have to buy something on your company card) as being reimbursable. Please do not mark things you've purchased on a company card as reimbursable (since the company has already paid for them)!
+_Important:_ If you need reimbursement for a receipt, you must tag the expense as such (for example, if you have to buy something on your company card) as being reimbursable. Please do not mark things you've purchased on a company card as reimbursable (since the company has already paid for them)!
 
-## Making larger purchases
+## Making Larger Purchases
 
 If your purchase fits within the policy below, there is no need to ask. We **cannot** pay you back for anything without a receipt.
 
@@ -44,11 +44,11 @@ PostHog is an all-remote company. This means it's important you have an ergonomi
 
 PostHog will provide you with office equipment. Please note that it remains PostHog's property.
 
-### Laptop, monitor and accessories
+### Laptop, Monitor, and Accessories
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you.
 
-Our general laptop of choice is a MacBook Pro. Please look for a recent refurbished model. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier not many.
+Our general laptop of choice is a MacBook Pro. Please look for a recent refurbished model. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
 The main thing to look for is that you have enough RAM. 8GB is (frustratingly!) the minimum you'll realistically need if you're browsing the web, writing code and using Slack.
 
@@ -56,13 +56,13 @@ Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are di
 
 If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-You may be asked if you wanted to purchase applecare, please don't buy this as it's not great value for money.
+You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-For monitors, we suggest you pick one that supports 4K. This means you'll get a higher resolution than a standard HD monitor, thus can fit more content onto the screen.
+For monitors, we suggest you pick one that supports 4K. This means you'll get a higher resolution than a standard HD monitor, and thus can fit more content onto the screen.
 
-We would expect to spend \$250 to \$350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most laptops.
+We would expect to spend \$250 to \$350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
 
-#### Keyboard, mouse and laptop stand
+#### Keyboard, Mouse, and Laptop Stand
 
 We'd encourage you to buy a keyboard, mouse and laptop stand.
 
@@ -70,13 +70,13 @@ Apple refurbished items for keyboards and mice should be what you default to.
 
 [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
 
-### Chairs and desks
+### Chairs and Desks
 
 We find that most people already have a desk and chair that are comfortable.
 
 If you do not, please suggest something to us. We aren't yet at the stage where we can afford the latest and greatest here, but we will aim to be reasonable.
 
-For example, if you would like a standing desk, buy  one you consider to be good value.
+For example, if you would like a standing desk, buy one you consider to be good value.
 
 We would expect to spend \$50-\$200 on a desk, and around the same for a chair.
 
@@ -106,10 +106,10 @@ Individual software is down to personal preference, and we encourage you to shar
 
 ### IDEs
 
-* IDEs range widely in cost. Best in class can cost up to $700. We remain sceptical if a best in class IDE is worth several  days of engineering time. However, we are happy to revisit this policy whenever we reach the sooner of profitability or a Series A.
+* IDEs range widely in cost. Best in class can cost up to $700. We remain sceptical if a best in class IDE is worth several days of engineering time. However, we are happy to revisit this policy whenever we reach the sooner of profitability or a Series A.
 * Before then, if you wish to spend up to $100 on an IDE, that is fine. Visual Studio, VIM and Sublime are the most popular with our team.
 
-## Work space
+## Work Space
 
 We care about you being healthy, happy and productive. 
 
@@ -119,7 +119,7 @@ You can spend up to $200/month to work in cafés or coworking spaces if working 
 
 If you live in the US, a particularly good way to use this budget is to cover the cost of Amex Platinum which provides WeWork access. Outside of the US, you may sign your own agreement or buy day vouchers as needed. We will not cover costs beyond this amount of money.
 
-## Client meetings
+## Client Meetings
 
 If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill.
 

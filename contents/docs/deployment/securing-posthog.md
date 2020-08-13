@@ -40,3 +40,22 @@ Secret keys are used to encrypt cookies and password reset emails, [among other 
 ```bash
 openssl rand -hex 32
 ```
+
+### Secret Key with Docker Compose
+
+When using Docker Compose, you will need to manually update the `docker-compose.yml` file with a secret key that is unique to your instance.
+
+**⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deploymentsecuring-posthog).**
+
+#### Step-By-Step
+
+First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+
+Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
+
+Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+
+This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key,of course):
+```
+SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
+```
