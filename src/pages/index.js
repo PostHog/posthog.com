@@ -277,7 +277,6 @@ function IndexPage() {
       </div>
 
     {/* posthog for enterprise */}
-    
       <Row>
         <Col span={24} align="middle">
           <h2 className="gosha">PostHog for Enterprise</h2>
