@@ -40,6 +40,7 @@ At PostHog, we have a culture of treating team members as partners. This means i
 <input type="checkbox"/>  Send team member a virtual company card <br>
 <input type="checkbox"/>  Add team member to Expensify <br>
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/spending-money) guidelines <br>
+<input type="checkbox"/>  Add the new team member to the 'Team' group in AWS <br>
 
 
 ### Adding Team Members to Pulley
