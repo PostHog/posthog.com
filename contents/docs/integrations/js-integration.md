@@ -17,7 +17,7 @@ The reason this exists is that whilst the default snippet captures every click o
 You can either load the snippet as a script in your HTML:
 ```html
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('[your-token]', {api_host: 'https://[your-instance]'})
 </script>
 ```
@@ -161,6 +161,35 @@ Opt a user back in:
 ```js
 posthog.opt_in_capturing();
 ```
+
+**Note:** This method is a suggested way to prevent capturing data from the admin on the page. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also call it directly in your app after an admin logs in. 
+
+
+### Feature Flags
+
+PostHog v1.10.0 introduced [Feature Flags](/docs/features/feature-flags), which allow you to safely deploy and roll back new features.
+
+Here's how you can use them:
+
+- Do something when the feature flags load:
+
+    The argument `callback(flags: string[])` will be called when the feature flags are loaded.
+
+    In case the flags are already loaded, it'll be called immediately. Aditionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
+
+    ```js
+    posthog.onFeatureFlags(callback)
+    ```
+
+- Check if a feature is enabled:
+    ```js
+    posthog.isFeatureEnabled('keyword')
+    ```
+
+- Trigger a reload of the feature flags:
+    ```js
+    posthog.reloadFeatureFlags()
+    ```
 
 ## Reset After Logout
 

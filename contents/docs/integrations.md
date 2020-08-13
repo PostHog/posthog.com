@@ -37,3 +37,4 @@ They can all be used to send custom events, update user properties, identify use
 
 - [Slack](/docs/integrations/slack)
 - [Microsoft Teams](/docs/integrations/microsoft-teams)
+- [Message Formatting](/docs/integrations/message-formatting)

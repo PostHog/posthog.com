@@ -50,6 +50,7 @@ function IndexPage() {
           <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>
         </Col>
       </Row>
+
       <Row className="row1">
         <Col span={24}>
         <br className="hiddenBreak"/>
