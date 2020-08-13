@@ -4,7 +4,6 @@ import 'antd/lib/button/style/css'
 import './index.css'
 import { Link } from 'gatsby'
 import landingPageBackgroundGrey from '../images/landing-page-background-grey.svg'
-import landingPageBackground from '../images/landing-page-background.svg'
 import computerDashboard4 from '../images/computer-dashboard-4.svg'
 import autocapture1 from '../images/autocapture-1.svg'
 import background23 from '../images/background-2-3.svg'
@@ -32,7 +31,6 @@ import installHeroku from '../images/install-heroku.svg'
 import installDocker from '../images/install-docker.svg'
 import installAws from '../images/install-aws.svg'
 import installKubernetes from '../images/install-kubernetes.svg'
-import joinCommunity from '../images/join-community.svg'
 import whatsNew from '../images/whats-new.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
@@ -285,14 +283,14 @@ function IndexPage() {
           <br/>
         </Col>
       </Row>
-      <div className="posthog4EnterpriseWrapper wrapper" style={{backgroundImage: `url(${landingPageBackground})`}}>
+      <div className="posthog4EnterpriseWrapper wrapper">
       <Row className="posthog4Enterprise">
         <Col xs={0} sm={0} md={2} lg={2} xl={2}/>
         <Col xs={8} sm={8} md={6} lg={6} xl={6}>
           <h4>Self-managed</h4>
           <img alt="enterprise-01" loading="lazy" src={enterprise01} className="imageShow"/>
-          <br/>
-          <hr className="blueLine2"/>
+          <br className="revHiddenBreak"/>
+          <hr className="blueLine2 revHiddenBreak"/>
           <p>
             PostHog can be deployed in your cloud, for painless adoption and
             onboarding.
@@ -303,8 +301,8 @@ function IndexPage() {
         <Col xs={8} sm={8} md={6} lg={6} xl={6}>
           <h4>Unlimited volume</h4>
           <img alt="enterprise-02" loading="lazy" src={enterprise02} className="imageShow"/>
-          <br/>
-          <hr className="redLine2"/>
+          <br className="revHiddenBreak"/>
+          <hr className="redLine2 revHiddenBreak"/>
           <p>
             PostHog is built to scale. That includes our open core pricing
             model.
@@ -315,8 +313,8 @@ function IndexPage() {
         <Col xs={8} sm={8} md={6} lg={6} xl={6}>
           <h4>Support</h4>
           <img alt="enterprise-03" loading="lazy" src={enterprise03} className="imageShow"/>
-          <br/>
-          <hr className="yellowLine2"/>
+          <br className="revHiddenBreak"/>
+          <hr className="yellowLine2 revHiddenBreak"/>
           <p>
             PostHog can manage your deployment on your infrastructure. All the
             benefits of self-hosting with the reliability and scalability of the
@@ -334,12 +332,12 @@ function IndexPage() {
           <hr className="blueLine"/>
         </Col>
         <Col span={10} offset={2} align="right">
-          <img alt="self-host" loading="lazy" src={selfHost}/>
+          <img alt="self-host" loading="lazy" className="imageShow" src={selfHost}/>
         </Col>
       </Row>
 
       {/* Install now, free*/}
-      <div className="installNowWrapper wrapper" style={{backgroundImage: `url(${landingPageBackground})`}}>
+      <div className="installNowWrapper wrapper">
         <Row>
           <Col span={24} align="center">
           <h2 className="gosha">Install now, free</h2>
@@ -357,7 +355,8 @@ function IndexPage() {
                 </div>
               </Link>
             </Col>
-            <Col span={3} offset={2}> 
+            <Col xs={1} sm={1} md={2} lg={2} xl={2} className="noArea"/>
+            <Col xs={4} sm={4} md={3} lg={3} xl={3} align="center"> 
               <Link to="/docs/deployment#docker">
                 <div className="docker">
                   <img
@@ -367,7 +366,8 @@ function IndexPage() {
                 </div>
               </Link>
             </Col>
-            <Col span={3} offset={2}>
+            <Col xs={1} sm={1} md={2} lg={2} xl={2} className="noArea"/>
+            <Col xs={4} sm={4} md={3} lg={3} xl={3} align="center"> 
               <Link to="docs/deployment#aws-ecs-fargate">
                 <div className="aws">
                   <img
@@ -377,7 +377,8 @@ function IndexPage() {
                 </div>
               </Link>
             </Col>
-            <Col span={3} offset={2}>
+            <Col xs={1} sm={1} md={2} lg={2} xl={2} className="noArea"/>
+            <Col xs={4} sm={4} md={3} lg={3} xl={3} align="center"> 
               <Link to="docs/deployment#helm-charts-and-kubernetes">
                 <div className="kubernetes">
                   <img
@@ -391,7 +392,7 @@ function IndexPage() {
           </div>
         </Row>
         <Row className="installNowShelf">
-          <Col span={18} offset={3}>
+          <Col span={20} offset={2}>
             <img alt="shelf-2" loading="lazy" src={shelf2} className="imageShow"/>
           </Col>
         </Row>
@@ -404,18 +405,18 @@ function IndexPage() {
         </Col>
       </Row>
 
-      <div className="joinCommunityWrapper wrapper" style={{backgroundImage: `url(${joinCommunity})`}}>
+      <div className="joinCommunityWrapper wrapper">
         <Row>
           <Col span={24}>
             <div>
               <a href="https://github.com/posthog/posthog">
-                <div className="github">github</div>
+                <div className="github"/>
               </a>
               <a href="https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ">
-                <div className="slack">slack</div>
+                <div className="slack"/>
               </a>
               <Link to="/handbook/strategy/roadmap">
-                <div className="roadmap">roadmap</div>
+                <div className="roadmap"/>
               </Link>
               <div className="yellowFiller"/>
             </div>

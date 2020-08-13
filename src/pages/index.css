@@ -437,27 +437,30 @@
 }
 
 .posthog4EnterpriseWrapper {
+    background-image: url('../images/landing-page-background.svg');
     margin-top: 0;
     width: 100vw;
-    height: auto;
+    height: calc(534/1440 * 100vw);
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .posthog4Enterprise {
-    top: 50px;
+    top: 20px;
     width: 100vw;
 }
 
 @media screen and (max-width: 768px) {
-    .posthog4Enterprise {
-        width: 90vw;
-        left: 5vw;
-        align-items: center;
+    .posthog4EnterpriseWrapper {
+        height: 90vw;
+        width: auto;
     }
-    .posthog4Enterprise .ant-col {
-        width: 28vw;
-        left: 1vw;
+    .posthog4Enterprise h4 {
+        margin: 0 0 0 6vw;
+    }
+    .posthog4Enterprise p {
+        margin: 0 3vw 0 6vw;
+        font-size: 10px;
     }
 }
 
@@ -485,6 +488,7 @@
 }
 
 .installNowWrapper {
+    background-image: url('../images/landing-page-background.svg');
     padding-top: 100px;
     height: auto;
     width: 100%;
@@ -500,29 +504,37 @@
     margin: 0;
 }
 
-.installNowImg div{
-    height: 200px;
-    width: 200px;
+.installNowImg .heroku, .docker, .aws, .kubernetes{
+    left: 0;
+    height: auto;
+    width: 180px;
+}
+
+.installNowImg .aws {
+    height: auto;
+}
+
+@media screen and (max-width: 1440px) {
+    .installNowImg .heroku, .docker, .aws, .kubernetes{
+        height: auto;
+        width: calc(3/24 * 100vw);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .installNowImg .heroku, .docker, .aws, .kubernetes{
+        height: auto;
+        width: calc(1/6 * 100vw);
+    }
 }
 
 .installNowShelf img {
     width: 100%;
-}
-
-@media screen and (max-width: 576px) {
-    .installNowImg div{
-        border-radius: 12px;
-        border: .5px solid #35416B;
-        background-color: #FFFFFF;
-    }
+    top: -100px;
 }
 
 .installNowImg img:hover {
     opacity: 0.7;
-}
-
-.heroku {
-    left: 14.22%;
 }
 
 .heroku img {
@@ -533,19 +545,11 @@
     vertical-align: middle;
 }
 
-.docker {
-    left: 33.92%;
-}
-
 .docker img {
     width: 70%;
     height: auto;
     display: block;
     margin: 15%;
-}
-
-.aws {
-    left: 53.55%;
 }
 
 .aws img {
@@ -554,10 +558,6 @@
     display: block;
     margin: 15%;
     margin-top: 30%;
-}
-
-.kubernetes {
-    left: 72.99%;
 }
 
 .kubernetes img {
@@ -578,23 +578,36 @@
 }
 
 .joinCommunityWrapper {
+    background-image: url('../images/join-community.svg');
     position: relative;
     background-size: 1331 557;
     background-repeat: no-repeat;
     background-position: center top;
-    width: 100%;
-    height: 41.84823441vw;
+    width: auto;
+    height: 557px;
 }
 
-@media screen and (max-width: 1331px) {
+@media screen and (max-width: 1440px) {
     .joinCommunityWrapper {
         position: relative;
         top: 10vh;
-        background-size: contain;
+        background-size: calc(1331/1440 * 100vw) calc(557/1440 * 100vw);
         background-repeat: no-repeat;
         background-position: center top;
-        width: 100%;
-        height: 41.84823441vw;
+        width: 100vw;
+        height: calc(557/1440 * 100vw);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .joinCommunityWrapper {
+        position: relative;
+        top: 10vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+        width: 100vw;
+        height: calc(557/1331 * 100vw);
     }
 }
 
@@ -602,38 +615,105 @@
     width: 100px;
 }
 
-.github {
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    background-color: yellow;
-    top: 0;
-}
-
-.slack {
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    background-color: yellow;
-    top: 0;
-    left: 150px;
-}
-
-.roadmap {
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    background-color: yellow;
-    top: 0;
-    left: 300px;
-}
-
 .yellowFiller {
     position: absolute;
     height: 557px;
-    width: calc((100% - 1331px) / 2);
+    width: calc((100vw - 1331px) / 2);
     background-color: #F7A501;
     right: 0;
+    z-index: 1;
+}
+
+.github {
+    background-image: url('../images/github-button.svg');
+    position: absolute;
+    height: 558px;
+    width: 666px;
+    left: calc((100vw - 1331px) / 2);
+    top: 0;
+    border-radius: 108px
+}
+
+.slack {
+    background-image: url('../images/slack-button.svg');
+    position: absolute;
+    height: 557px;
+    width: 666px;
+    top: 0;
+    left: calc((100vw - 1331px) / 2 + 388px);
+    border-radius: 108px
+}
+
+.roadmap {
+    background-image: url('../images/roadmap-button.svg');
+    position: absolute;
+    height: 557px;
+    top: 0;
+    left: calc((100vw - 1331px) / 2 + 817px);
+    width: calc(100vw - 817px);
+    border-radius: 108px;
+    z-index: 5;
+}
+
+@media screen and (max-width: 1440px) {
+    .yellowFiller {
+        position: absolute;
+        height: calc(557/1440 * 100vw);
+        width: calc(100vw - (1331/1440 * 100vw));
+        background-color: #F7A501;
+        right: 0;
+    }
+    .github {
+        left: calc(54.5 / 1440 * 100vw);
+        height: calc(557 / 1440 * 100vw);
+        width: calc(558 / 1440 * 100vw);
+        border-radius: calc(108 / 1440 * 100vw);
+    }
+    .slack {
+        left: calc(442.5 / 1440 * 100vw);
+        height: calc(557 / 1440 * 100vw);
+        width: calc(679 / 1440 * 100vw);
+        border-radius: calc(108 / 1440 * 100vw);
+    }
+    .roadmap{
+        left: calc(871.5 / 1440 * 100vw);
+        height: calc(557 / 1440 * 100vw);
+        width: calc((1440 - 567) / 1440 * 100vw);
+        border-radius: calc(108 / 1440 * 100vw);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .github {
+        left: 0;
+        height: calc(557 / 1331 * 100vw);
+        width: calc(558 / 1331 * 100vw);
+        border-radius: calc(108 / 1331 * 100vw);
+    }
+    .slack {
+        left: calc(388 / 1331 * 100vw);
+        height: calc(557 / 1331 * 100vw);
+        width: calc(679 / 1331 * 100vw);
+        border-radius: calc(108 / 1331 * 100vw);
+    }
+    .roadmap{
+        left: calc(817 / 1331 * 100vw);
+        height: calc(557 / 1331 * 100vw);
+        width: calc((1440 - 567) / 1331 * 100vw);
+        border-radius: calc(108 / 1331 * 100vw);
+    }
+}
+
+.github:hover {
+    background: #1D4AFF
+}
+
+.slack:hover {
+    background: #F96132;
+} 
+
+.roadmap:hover {
+    background: #F7A501
 }
 
 .whatsNew {
