@@ -126,9 +126,9 @@ This will automatically send the current URL.
 
 ### Super Properties 
 
-Super Properties are properties that are associated with every event by a given user, while also persisting across sessions. Every `capture` call will include these properties i.e. the properties will be passed with any event, be it a `$pageview`, a button click, or anything else. 
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $pageview, an autocaptured button click, or anything else.
 
-They are set using `posthog.register`, which takes a properties object as a parameter. 
+They are set using `posthog.register`, which takes a properties object as a parameter, and they persist across sessions.
 
 For example, take a look at the following call:
 
