@@ -494,7 +494,7 @@ hr {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: calc(1.45rem - 1px);
+  margin-bottom: 10px;
   background: hsla(0, 0%, 0%, 0.2);
   border: none;
   height: 1px;

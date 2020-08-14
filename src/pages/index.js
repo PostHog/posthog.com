@@ -91,19 +91,21 @@ function IndexPage() {
       </Row>
 
       {/*01 - It all starts with event autocapture*/}
-      <div className="autocaptureWrapper wrapper" style={{backgroundImage: `url(${autocapture1})`}}>
-        <Row justify="space-between" className="autocapture">
-          <Col span={3} offset={13}>
-            <h1 className="yellowText">01</h1>
-          </Col>
-          <Col span={7}>
-            <h2 className="gosha">It all starts with event autocapture</h2>
-            <br/>
-            <hr className="yellowLine"/>
-            <br/>
-            <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
-          </Col>
-        </Row>
+      <div className="autocaptureWrapper wrapper">
+        <div className="autocaptureImg">
+          <Row justify="space-between" className="autocapture">
+            <Col span={3} offset={13}>
+              <h1 className="yellowText">01</h1>
+            </Col>
+            <Col span={7}>
+              <h2 className="gosha">It all starts with event autocapture</h2>
+              <br className="revHiddenBreak"/>
+              <hr className="yellowLine"/>
+              <br className="revHiddenBreak"/>
+              <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
+            </Col>
+          </Row>
+        </div>
       </div>
 
       <div className="trafficVisualWrapper wrapper" style={{backgroundImage: `url(${background23})`}}>
@@ -125,11 +127,12 @@ function IndexPage() {
 
         {/*03 - Understand how traffic really flows through your app*/}
         <div className="visualize">
-          <Row justify="space-between">
-            <Col span={3} offset={13}>
+          <Row justify="space-between" className="visualizeText">
+            <Col xs={10} sm={10} md={11} lg={11} xl={11}/>
+            <Col span={3} >
               <h1 className="blueText">03</h1>
             </Col>
-            <Col span={7}>
+            <Col xs={10} sm={10} md={8} lg={8} xl={8}>
               <h2 className="gosha">Visualize product trends and retention</h2>
               <hr className="blueLine"/>
               <p>Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
@@ -143,50 +146,53 @@ function IndexPage() {
       {/*04 - Improve conversion rates*/}
       <div className="improveConversionWrapper wrapper">
         <Row>
-          <Col span={3} offset={6}>
+          <Col xs={3} sm={3} md={6} lg={6} xl={6}/>
+          <Col span={3}>
             <h1 className="yellowText">04</h1>
           </Col>
-          <Col span={10}>
+          <Col xs={16} sm={16} md={10} lg={10} xl={10}>
             <h2 className="gosha">Improve conversion rates</h2>
             <hr className="yellowLine"/>
             <p>Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.</p>
           </Col>
         </Row>
+        <br className="hiddenBreak"/>
         <Row justify="space-between" className="improveConversion">
-          <Col xs={2} sm={2} md={3} lg={3} xl={3}/>
-          <Col xs={6} sm={6} md={4} lg={4} xl={4} align="center">
+          <Col span={6} offset={1} align="center">
             <img alt="improve-retention" loading="lazy" className="imageShow" src={improveRetention}/>
-            <br/>
+            <br className="revHiddenBreak"/>
             <h4>Retention</h4>
           </Col>
-          <Col xs={1} sm={1} md={3} lg={3} xl={3}/>
-          <Col xs={6} sm={6} md={4} lg={4} xl={4} align="center">
+          <Col span={6} offset={2} align="center">
             <img alt="improve-paths" loading="lazy" className="imageShow" src={improvePaths}/>
-            <br/>
+            <br className="revHiddenBreak"/>
             <h4>Paths</h4>
           </Col>
-          <Col xs={1} sm={1} md={3} lg={3} xl={3}/>
-          <Col xs={6} sm={6} md={4} lg={4} xl={4} align="center">
+          <Col span={6} offset={2} align="center">
             <img alt="improve-funnels" loading="lazy" className="imageShow" src={improveFunnels}/>
-            <br/>
+            <br className="revHiddenBreak"/>
             <h4>Funnels</h4>
           </Col>
         </Row>
       </div>
       
       {/*05 - Use feature flags to test new ideas*/}
-      <div className="featureFlagsWrapper wrapper" style={{backgroundImage: `url(${background5})`}}> 
-        <Row justify="space-between" className="featureFlags">
-          <Col span={3} offset={2}>
-            <h1 className="redText">05</h1>
-          </Col>
-          <Col span={8}>
-            <h2 className="gosha">Use feature flags <br/>to test new ideas</h2>
-            <hr className="redLine"/>
-            <br/>
-            <p className="featureFlagsText">Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
-          </Col>
-        </Row>
+      <div className="featureFlagsWrapper wrapper"> 
+        <div className="featureFlags">
+          <Row justify="space-between" >
+            <Col span={3} offset={2}>
+              <h1 className="redText">05</h1>
+            </Col>
+            <Col span={7}>
+              <h2 className="gosha">Use feature flags <br/>to test new ideas</h2>
+              <hr className="redLine"/>
+              <br/>
+              <p className="featureFlagsText">Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
+            </Col>
+            <div className="featureFlagsImg"/>
+          </Row>
+        </div>
+        
       </div>
 
       {/*Designed for your Stack */}
@@ -402,13 +408,12 @@ function IndexPage() {
       </div>
 
       {/*join the community*/}
+      <div className="joinCommunityWrapper wrapper">
       <Row> 
         <Col span={20} offset={2} align="center">
           <h2 className="gosha">Join the community</h2>
         </Col>
       </Row>
-
-      <div className="joinCommunityWrapper wrapper">
         <Row>
           <Col span={24}>
             <div>
@@ -424,14 +429,13 @@ function IndexPage() {
               </a>
               <Link to="/handbook/strategy/roadmap">
                 <div className="roadmap">
-                  <img src={roadmapButton} className="roadmapImg imageShowx"/>
+                  <img src={roadmapButton} className="roadmapImg imageShow"/>
                   <div className="yellowFiller" />
                 </div>
                 
               </Link>
             </div>
           </Col>
-
         </Row>
       </div>
 
