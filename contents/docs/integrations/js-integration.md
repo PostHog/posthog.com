@@ -126,7 +126,11 @@ This will automatically send the current URL.
 
 ### Super Properties 
 
-You can register 'global' properties for a user, that will persist between sessions. Every `capture` call will include these properties. These are not to be confused with the `people.set` call, which stores properties against the User object (rather than against every event).
+Super Properties are properties that are associated with every event by a given user, while also persisting across sessions. Every `capture` call will include these properties i.e. the properties will be passed with any event, be it a `$pageview`, a button click, or anything else. 
+
+They are set using `posthog.register`, which takes a properties object as a parameter. 
+
+For example, take a look at the following call:
 
 ```js
 posthog.register({
@@ -135,7 +139,11 @@ posthog.register({
 })
 ```
 
-If you register a property multiple times, the next event will use the new value of that property. If you want to register a property once (for ad campaign properties for example) you can use `register_once`.
+The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified super property. 
+
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.set`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+
+Furthermore, if you register the same property multiple times, the next event will use the new value of that property. If you want to register a property only once (e.g. for ad campaign properties) you can use `register_once`, like so:
 
 ```js
 posthog.register_once({
