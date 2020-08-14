@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import Menu from '../Menu'
 import logo from '../../images/posthog-logo-150x29.svg'
+import whiteLogo from '../../images/posthog-logo-white.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
 
+
 class Header extends Component {
   render() {
-    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall } = this.props
+    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
 
     return (
       <div
@@ -15,10 +17,10 @@ class Header extends Component {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'space-between'
-          //backgroundColor: '#fff'
+          justifyContent: 'space-between',
+          background: 'none'
         }}>
-        {!onPostPage ? (
+        {sidebarHide || !onPostPage ? (
           <Link
           id="logo"
           to="/"
@@ -27,7 +29,8 @@ class Header extends Component {
             textDecoration: 'none',
             verticalAlign: 'center'
           }}>
-          {screenIsSmall ? (<img alt="logo" src={logo} id="logo-image" style={{
+          {screenIsSmall ? (
+          <img alt="logo" src={logo} id="logo-image" style={{
             display: 'flex',
             top: 0,
             left: 8
@@ -37,27 +40,34 @@ class Header extends Component {
           )}
           </Link>
         ) : (
-          screenIsSmall ? (
-            <Link
-          id="logo"
-          to="/"
-          style={{
-            //color: '#FFF',
-            textDecoration: 'none',
-            verticalAlign: 'center'
-          }}>
-            <img alt="logo" src={logo} id="logo-image" style={{
-              display: 'flex',
-              top: 0,
-              left: 8
-            }} />
-          </Link>
-          ) : (
-          <div style={{height: 64, width: 0}}></div>
-        ))}
-        <Menu sidebarDocked={sidebarDocked} />
+            isBlogPage ? (
+              <Link
+              id="logo"
+              to="/"
+              style={{
+                //color: '#FFF',
+                textDecoration: 'none',
+                verticalAlign: 'center'
+              }}>
+                {screenIsSmall ? (<img alt="logo" src={logo} id="logo-image" style={{
+                  display: 'flex',
+                  top: 0,
+                  left: 8
+                }} />
+                ) : (
+                  <img alt="logo" src={whiteLogo} id="logo-image"/>
+                )}
+              </Link>
+            ) : (
+              <div style={{height: 64, width: 0}}></div>
+          )
+        )}
+        <Menu 
+        sidebarDocked={sidebarDocked}
+        sidebarHide={sidebarHide}
+        isBlogPage={isBlogPage} />
       </div>
-    )
+)
   }
 }
 

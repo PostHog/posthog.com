@@ -5,25 +5,29 @@ showTitle: true
 ---
 
 
-In PostHog, there is an API endpoint available to see all events in your system, and filter.
+In PostHog, there is an API endpoint available to see all events in your system and filter them.
 
-*Important!* While you can technically create new events with this API, it's much easier to [use the dedicated API](/docs/integrations/api) or [any of our libraries](/docs/integrations/api) for that.
+**Important:** While you can technically create new events with this API, it's much easier to [use the dedicated API](/docs/integrations/api) or [any of our libraries](/docs/integrations/api) for that.
 
 ## Pagination
 
-This endpoint has pagination. See [pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for more info.
 
-## List trends
+## List Trends
 
 ```plaintext
 GET /event
 GET /event/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com"}]
 ```
 
+<span class="table-borders">
+
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `properties` | Array of Properties | no | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br><br>For each property, you can specify:<br>- `key` Key of the property<br>- `value` Value you want to filter on<br>- `type` Either `person` or `event`<br>- `operator`, any of: <br>-- `exact`/empty<br>--`is_not`<br>--`icontains`<br>--`not_icontains`<br>--`gt`<br>--`lt`<br>--`is_set` |
 | `event` | String | no | The event you want to filter on, for example `$pageview`. |
+
+</span>
 
 Example request:
 

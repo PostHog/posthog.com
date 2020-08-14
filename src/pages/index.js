@@ -53,6 +53,7 @@ function IndexPage() {
           <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>
         </Col>
       </Row>
+<<<<<<< HEAD
       <Row className="row1">
         <Col span={24}>
         <br className="hiddenBreak"/>
@@ -71,6 +72,37 @@ function IndexPage() {
             </a>
           </div>
           <div className="row1Col2" style={{backgroundImage:`url(${computerDashboard4})`}}/>
+=======
+      
+      <Row align="top" style={{marginBottom: '12rem'}}>
+        <Col xs={24} sm={18} md={12} lg={12} xl={12} className="gutter-row">
+          <h1 className="largeHeader" align="top">
+            Understand <br className="hiddenHeadBreak"/>your users.
+            <br />
+            Build a better product.
+          </h1>
+          <p>Join 1,000 companies using PostHog.</p>   
+            <Link to="/trial">
+              <Button
+                type="primary"
+                size="large"
+                icon="right-circle"
+              >
+                Get Started for Free
+              </Button>
+              </Link>   
+            {' '}
+            <Link to="/request_demo">
+              <Button type="secondary" size="large">
+                Request Demo
+              </Button>
+            </Link>
+            <div className="secondSpace"></div>
+            <h2 className="yellowText">Open source product analytics</h2>
+            <p>
+              PostHog provides a full product analytics UX. Analyze trends, funnels, retention and cohorts.
+            </p>
+>>>>>>> d3d3ae347d4ddffd035c5787c954800437fa20b0
         </Col>
       </Row>
       <div className="understandUsers">
@@ -462,6 +494,7 @@ function IndexPage() {
             <img alt="RoadMap" src={roadmapButton1} loading="lazy" className="hover-shadow imageShow"/>
           </Link>
         </Col>
+<<<<<<< HEAD
 </Row>*/}
       <div className="whatsNewWrapper" style={{backgroundImage: `url(${whatsNew})`}}>
       <Row className="whatsNew">
@@ -470,6 +503,16 @@ function IndexPage() {
           <Link to="blog/the-posthog-array-1-12-0">
             <Button type="secondary" size="large">
               See what's new
+=======
+      </Row>
+      <Row>
+        <Col span={24} className="gutter-row header-row" >
+          <h2 className="yellowHead">What's new?</h2>
+          <p>Version 1.13.0</p>
+          <Link to="blog/the-posthog-array-1-13-0">
+            <Button type="information" size="large">
+              Release notes
+>>>>>>> d3d3ae347d4ddffd035c5787c954800437fa20b0
             </Button>
           </Link>
           <br/>

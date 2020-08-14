@@ -26,13 +26,15 @@
     "items": [
       "docs/deployment",
       "docs/deployment/deploy-heroku",
+      "docs/deployment/deploy-aws",
       "docs/deployment/deploy-azure",
       "docs/deployment/deploy-digital-ocean",
       "docs/deployment/deploy-docker",
       "docs/deployment/deploy-gcs",
       "docs/deployment/deploy-kubernetes",
-      "docs/deployment/deploy-aws",
+      "docs/deployment/deploy-linode",
       "docs/deployment/deploy-source",
+      "docs/deployment/upgrading-posthog",
       "docs/deployment/scaling-posthog",
       "docs/deployment/securing-posthog",
       "docs/deployment/running-behind-proxy",
@@ -118,7 +120,8 @@
     "name":"Sending Data Out",
     "items":[
       "docs/integrations/slack",
-      "docs/integrations/microsoft-teams"
+      "docs/integrations/microsoft-teams",
+      "docs/integrations/message-formatting"
     ]
   },
   {
@@ -153,6 +156,7 @@
     "entry":"Releases",
     "name":"Releases",
     "items":[
+      "blog/the-posthog-array-1-13-0",
       "blog/the-posthog-array-1-12-0",
       "blog/the-posthog-array-1-11-0",
       "blog/the-posthog-array-1-10-0",
@@ -176,6 +180,7 @@
     "entry":"Company Blog",
     "name":"Company Blog",
     "items": [
+      "blog/a-chat-with-sid",
       "blog/raising-3m-for-os",
       "blog/after-the-hn-launch",
       "blog/pivot-to-posthog",
@@ -212,6 +217,7 @@
       "handbook/company/values",
       "handbook/company/communication",
       "handbook/company/security",
+      "handbook/company/branding",
       "handbook/company/team"
     ]
   },
