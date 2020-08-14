@@ -67,7 +67,7 @@ Then, open the `docker-compose.yml` file with the command: `nano docker-compose.
 
 Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
 
-This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key,of course):
+This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
 ```
 SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
 ```
