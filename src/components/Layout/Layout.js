@@ -69,17 +69,10 @@ class Layout extends Component {
                   >
                     <html lang="en" />
                   </Helmet>
-<<<<<<< HEAD
-                  <AntdLayout theme="light" style={{ width: "100%"}}>
-                    {!screenIsSmall && onPostPage ? (
-                      !sidebarHide && (
-                      <AntdLayout.Sider width="300"theme="light" style={{backgroundColor: '#F9F9F9'}} >
-=======
                   <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                     {!screenIsSmall && onPostPage && (
                       !sidebarHide && !isBlogPage && (
                       <AntdLayout.Sider width="300" theme="light" style={{backgroundColor: '#F9F9F9'}} >
->>>>>>> d3d3ae347d4ddffd035c5787c954800437fa20b0
                         <ResponsiveSidebar style={{border: 'none'}}/>
                         </AntdLayout.Sider>
                       ))}
@@ -88,11 +81,6 @@ class Layout extends Component {
                         <AntdLayout.Header
                         className="menuHeader"
                         style={{ 
-<<<<<<< HEAD
-                          background: onPostPage && screenIsSmall ? '#F9F9F9' : 'none', 
-                          padding: screenIsSmall ? 0 : 'auto', 
-                          borderBottom: onPostPage && screenIsSmall ? '6px solid #C4C4C4' : 'none'}}
-=======
                           backgroundColor: screenIsSmall && onPostPage ? '#F9F9F9' : '#fff', 
                           backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
@@ -103,7 +91,6 @@ class Layout extends Component {
                           padding: screenIsSmall && 0,
                           marginBottom: isBlogPage && '2rem'
                         }}
->>>>>>> d3d3ae347d4ddffd035c5787c954800437fa20b0
                         theme="light"
                         >
                           <Header
@@ -145,9 +132,6 @@ class Layout extends Component {
 
                       {/* content */}
                       {!screenIsSmall && onPostPage ? (
-<<<<<<< HEAD
-                        <AntdLayout theme="light" style={{ width: "100%"}}>
-=======
                         isBlogPage ? (
                         <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%", align: 'center'}}>
                           <AntdLayout.Content style={{ minHeight: 280, margin: '0 auto', padding: '0px 1.0875rem 1.45rem', maxWidth: 960}}>
@@ -176,7 +160,6 @@ class Layout extends Component {
                         </AntdLayout>
                         ) : (
                         <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
->>>>>>> d3d3ae347d4ddffd035c5787c954800437fa20b0
                           <AntdLayout.Content style={{ minHeight: 280, padding: '3rem 0% 0 10%', width: '100%' }}>
                             <Container
                               sidebarDocked={!screenIsSmall}
@@ -201,13 +184,8 @@ class Layout extends Component {
                             </AntdLayout.Sider>
                           )}
                         </AntdLayout>
-<<<<<<< HEAD
-                      ) : (
-                        <AntdLayout theme="light" style={{ width: "100%"}}>
-=======
                         )) : (
                         <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
->>>>>>> d3d3ae347d4ddffd035c5787c954800437fa20b0
                           <AntdLayout.Content
                             style={{
                               position: 'relative',

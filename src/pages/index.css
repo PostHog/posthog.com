@@ -529,9 +529,9 @@
         font-size: 10px;
     }
     .posthog4Enterprise img {
-        width: 300px;
+        width: 115px;
         right: 0;
-        height: 300px;
+        height: 115px;
     }
 }
 
@@ -806,7 +806,6 @@
     font-size: 16px;
 }
 
-<<<<<<< HEAD
 .gosha {
     font-family: 'Gosha Sans'
 }
@@ -825,10 +824,6 @@
 
 .numberHead {
     font-size: 1.38316rem;
-=======
-.kbd-keys {
-    background-color: #d3d5dd !important;
->>>>>>> d3d3ae347d4ddffd035c5787c954800437fa20b0
 }
 
 .yellowLine, .redLine, .blueLine {
