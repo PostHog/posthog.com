@@ -71,7 +71,9 @@ Run `./bin/tests`
 
 ### Running Clickhouse locally
 
-Copy the below into a docker-compose.yml file in a new folder
+0. Ensure you have Docker and Docker Compose installed
+1. Create a new directory (not inside `/posthog`!) and enter it
+2. Create a file called `docker-compose.yml` and paste the following snippet into it:
 
 ```yaml
 version: "3"
@@ -93,8 +95,8 @@ services:
       command: ['--host', 'server']
 ```
 
-Then run `docker-compose up -d`. You'll now have a server running on `http://127.0.0.1:8123`
-
+3. Run `docker-compose up -d`. You'll now have a Clickhouse server running on `http://127.0.0.1:8123`
+    
 
 ## Using Porter
 Porter allows you to develop remotely without having to run or setup Docker on your local machine. It runs the same Docker containers in the cloud and lets you develop directly inside the remotely hosted container while still using your favorite local tools. 
