@@ -151,6 +151,8 @@ posthog.register_once({
 })
 ```
 
+Using `register_once` will ensure that if a property is already set, it will not be set again. For example, if the user already has property `"icecream pref": "vanilla"`, calling `posthog.register_once({"icecream pref": "chocolate"})` will **not** update the property.
+
 ### Opt Users Out
 
 PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner). You can:
