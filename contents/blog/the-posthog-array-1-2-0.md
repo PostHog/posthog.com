@@ -13,7 +13,7 @@ Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog)
 
 ## Release notes
 
-### [PostHog iOS Library](https://docs.posthog.com/#/integrations/ios-integration)
+### [PostHog iOS Library](/docs/integrations/ios-integration)
 
 ![](../images/04/ioslibrary1.gif)
 

@@ -13,7 +13,7 @@ Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog)
 
 ## Release notes
 
-### [PostHog Android Library](https://docs.posthog.com/#/integrations/android-integration)
+### [PostHog Android Library](/docs/integrations/android-integration)
 
 ![](../images/04/android-events.gif)
 
