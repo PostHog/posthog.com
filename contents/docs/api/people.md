@@ -5,13 +5,13 @@ showTitle: true
 ---
 
 
-In PostHog, there is an API endpoint available to see all people ("users") in your PostHog instance.
+In PostHog, there is an API endpoint available to see all people (users) in your PostHog instance.
 
 ## Pagination
 
-This endpoint has pagination. See [pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for more info.
 
-## List people
+## List People
 
 ```plaintext
 GET /person
@@ -73,7 +73,7 @@ Example response:
 }
 ```
 
-## Get single person
+## Get a Single Person
 
 ```plaintext
 GET /person/:id

@@ -17,18 +17,30 @@ Then start the instance with `docker-compose`:
 docker-compose -f docker-compose.dev.yml up
 ```
 
+> **It may take several minutes to build the system for the first time**. If you see an error message once your app has launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
+
 ## Using virtualenv
 
-1. Make sure you have python 3 installed `python3 --version`
-2. Make sure you have [Redis installed](https://redis.io/download) and running. 
+1. Make sure you have Python 3 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
+2. Make sure you have [Redis installed](https://redis.io/download) and running.
 
-    On MacOS, this is done with: `brew install redis && brew services start redis`
-3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running.
+    ```bash
+    # macOS (Homebrew)
+    brew install redis && brew services start redis
+    ```
 
-    On MacOS, this is done with: `brew install postgresql && brew services start postgresql`
+3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running. You may also try [Postgres.app](https://postgresapp.com/), but remember to follow the instructions to add `psql` to your `$PATH` if you do.
 
+    ```bash
+    # macOS (Homebrew)
+    brew install postgresql && brew services start postgresql
+    ```
  
-4. Create the Database: `createdb posthog`
+4. Create the Postgres database with the command `createdb posthog` on the shell or by using the Postgres interactive terminal:
+    ```
+    psql -d postgres
+    CREATE DATABASE posthog;
+    ```
 5. Navigate into the correct folder (project's root directory): `cd posthog` 
 6. Run `python3 -m venv env` (creates virtual environment in current direction called 'env')
 7. Run `source env/bin/activate` (activates the virtual environment)
@@ -37,13 +49,22 @@ docker-compose -f docker-compose.dev.yml up
     If you have problems with this step (TLS/SSL error), then run `~ brew update && brew upgrade` followed by `python3 -m pip install --upgrade pip`, then retry the requirements.txt install.
 9. Install dev requirements: `pip install -r requirements/dev.txt`
 10. Run migrations: `DEBUG=1 python3 manage.py migrate`
-11. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
+11. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
+
+    ```bash
+    # macOS (Homebrew)
+    brew install yarn
+    ```
+
+12. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
 
     *_Note:_ The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
 
 Now open [http://localhost:8000](http://localhost:8000) to see the app.
 
-To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it, so you can see some data on dashboard
+To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it, so you can see some data on dashboard.
+
+> **Friendly tip:** Homebrew services can be stopped with `brew services stop <service_name>`
 
 ### Running backend separately (Django)
 

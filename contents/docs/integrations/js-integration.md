@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-**Note:** You can just use a [snippet](/Snippet-installation) to start capturing events with our JS.
+**Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
 
 This page of the Docs refers to our [JS library](https://github.com/PostHog/posthog-js).
 
@@ -126,7 +126,11 @@ This will automatically send the current URL.
 
 ### Super Properties 
 
-You can register 'global' properties for a user, that will persist between sessions. Every `capture` call will include these properties. These are not to be confused with the `people.set` call, which stores properties against the User object (rather than against every event).
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $pageview, an autocaptured button click, or anything else.
+
+They are set using `posthog.register`, which takes a properties object as a parameter, and they persist across sessions.
+
+For example, take a look at the following call:
 
 ```js
 posthog.register({
@@ -135,13 +139,19 @@ posthog.register({
 })
 ```
 
-If you register a property multiple times, the next event will use the new value of that property. If you want to register a property once (for ad campaign properties for example) you can use `register_once`.
+The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified super property. 
+
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.set`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+
+Furthermore, if you register the same property multiple times, the next event will use the new value of that property. If you want to register a property only once (e.g. for ad campaign properties) you can use `register_once`, like so:
 
 ```js
 posthog.register_once({
     "campaign source": "twitter"
 })
 ```
+
+Using `register_once` will ensure that if a property is already set, it will not be set again. For example, if the user already has property `"icecream pref": "vanilla"`, calling `posthog.register_once({"icecream pref": "chocolate"})` will **not** update the property.
 
 ### Opt Users Out
 
@@ -161,6 +171,35 @@ Opt a user back in:
 ```js
 posthog.opt_in_capturing();
 ```
+
+**Note:** This method is a suggested way to prevent capturing data from the admin on the page. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also call it directly in your app after an admin logs in. 
+
+
+### Feature Flags
+
+PostHog v1.10.0 introduced [Feature Flags](/docs/features/feature-flags), which allow you to safely deploy and roll back new features.
+
+Here's how you can use them:
+
+- Do something when the feature flags load:
+
+    The argument `callback(flags: string[])` will be called when the feature flags are loaded.
+
+    In case the flags are already loaded, it'll be called immediately. Aditionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
+
+    ```js
+    posthog.onFeatureFlags(callback)
+    ```
+
+- Check if a feature is enabled:
+    ```js
+    posthog.isFeatureEnabled('keyword')
+    ```
+
+- Trigger a reload of the feature flags:
+    ```js
+    posthog.reloadFeatureFlags()
+    ```
 
 ## Reset After Logout
 

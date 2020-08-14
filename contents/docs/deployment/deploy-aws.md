@@ -16,21 +16,21 @@ Likewise, we maintain a CloudFormation [config](https://github.com/PostHog/deplo
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 
-2. Click **Create Stack -> With New Resources (Standard)**
+1. Click **Create Stack -> With New Resources (Standard)**
 
-3. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
+1. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
 
-4. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviors or setup SMTP configs as described below
+1. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviors or setup SMTP configs as described below
 
-5. Review the rest of the Configuration Wizard pages
+1. Review the rest of the Configuration Wizard pages
 
-6. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
+1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
 
-7. If you are ready, click **Create Stack**!
+1. If you are ready, click **Create Stack**!
 
-8. Once deployment completes look under **Options** for the Publicly facing ELB Host
+1. Once deployment completes look under **Options** for the Publicly facing ELB Host
 
-9. Review all parameters in the config and ensure everything is nominal
+1. Review all parameters in the config and ensure everything is nominal
 
 >_Definitely_ setup for TLS (Transport Layer Security)! Once you have TLS setup for your ELB (Elastic Load Balancing) you should disable insecure access via HTTP by removing the environment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploying the updated Task definition revision.
 
@@ -70,17 +70,17 @@ Here's a short step by step tutorial:
 
 0. Ensure you're logged in to AWS 
 1. Visit the [PostHog page on the AWS Marketplace](https://aws.amazon.com/marketplace/pp/B089QN5DZM?qid=1595331182232&sr=0-1&ref_=srh_res_product_title) and click 'Continue to Subscribe'
-2. You will be prompted with a page to review your subscription. The subscription to PostHog via AWS Marketplace is **free**, so the only thing you'll need to pay for are the AWS Resources you use with your PostHog instance.
-3. Once your subscription is ready, you should receive an email about it. You can then view all your subscriptions on the [Your Software page](https://aws.amazon.com/marketplace/library/)
-4. From the 'Your Software' page, you should now see PostHog. Click 'Launch Instance' on it. 
-5. This will prompt you with the configuration steps before you launch. You should fill this according to your preferences. Regarding the Instance Type, we recommend a config with about the following specs for a medium volume instance:
+1. You will be prompted with a page to review your subscription. The subscription to PostHog via AWS Marketplace is **free**, so the only thing you'll need to pay for are the AWS Resources you use with your PostHog instance.
+1. Once your subscription is ready, you should receive an email about it. You can then view all your subscriptions on the [Your Software page](https://aws.amazon.com/marketplace/library/)
+1. From the 'Your Software' page, you should now see PostHog. Click 'Launch Instance' on it. 
+1. This will prompt you with the configuration steps before you launch. You should fill this according to your preferences. Regarding the Instance Type, we recommend a config with about the following specs for a medium volume instance:
     - 4GB of RAM
     - 2 CPUs
     - 50GB of storage
 
 However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. AWS suggests EC2 by default, which has a free tier available. This might be suitable for users not expecting to do heavy load analytics yet, as well as those with little website traffic. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
-6. Finish the configuration steps according to your personal preferences. Setting up security groups is probably a good idea.
-7. Launch the instance and you're all set!
+1. Finish the configuration steps according to your personal preferences. Setting up security groups is probably a good idea.
+1. Launch the instance and you're all set!
 
 <br>
 
@@ -92,17 +92,17 @@ If instead of using our CloudFormation config or AWS Marketplace app you would r
 
 0. Ensure you're logged in to AWS 
 1. Access your [AWS EC2 Dashboard](https://console.aws.amazon.com/ec2/v2/home)
-2. Click the 'Launch Instance' button 
-3. Select your AMI. For this tutorial, we'll be using the _Ubuntu Server 18.04 LTS (HVM)_
-4. You will be prompted with a page to choose your instance type. We recommend a config with about the following specs for a medium volume instance:
+1. Click the 'Launch Instance' button 
+1. Select your AMI. For this tutorial, we'll be using the _Ubuntu Server 18.04 LTS (HVM)_
+1. You will be prompted with a page to choose your instance type. We recommend a config with about the following specs for a medium volume instance:
     - 4GB of RAM
     - 2 CPUs
     - 50GB of storage
 
 However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. EC2 has a free tier available and this might be suitable for users not expecting to do heavy load analytics yet, as well as those with little website traffic. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
 
-5. Click 'Review and Launch'
-6. Once your instance is live, you should get a notification. That means you're ready to move on to the next tutorial.
+1. Click 'Review and Launch'
+1. Once your instance is live, you should get a notification. That means you're ready to move on to the next tutorial.
 
 #### Docker Installation
 
@@ -116,22 +116,37 @@ If you downloaded a new key during the creation of the Virtual Machine, you may 
 ssh -i path/to/your/key.pem <username>@<YOUR_IP>
 ```
 1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
-2. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-3. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
-4. Install `git`:
+1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
+1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. Install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git
 ```
-5. To clone the PostHog repository and enter the new directory, run: 
+1. To clone the PostHog repository and enter the new directory, run: 
 ```bash
 git clone https://github.com/posthog/posthog.git && cd posthog
 ```
-6. Then, to run PostHog, do:
+1. You'll then need to generate a `SECRET_KEY` that is unique to your instance. 
+
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deployment/securing-posthog).**
+
+    First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+
+    Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
+
+    Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+
+    This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
+
+    ```
+    SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
+    ```
+
+1. Then, to run PostHog, do:
 ```bash
 docker-compose up -d
 ```
-7. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
-8. (Optional) Consider using something like [Supervisor](http://supervisord.org/introduction.html) to monitor the process
+1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
 <br>
 
