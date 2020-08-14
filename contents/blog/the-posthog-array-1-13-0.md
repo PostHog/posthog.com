@@ -114,4 +114,4 @@ Lottie, our legendary designer, is moving to Senegal from Guildford in the UK. S
 
 ### Open roles
 
-Full stack engineers that love hedgehogs - [we want you!](https://posthog.com/careers).
+Full stack engineers that love hedgehogs - [we want you!](https://posthog.com/careers)
