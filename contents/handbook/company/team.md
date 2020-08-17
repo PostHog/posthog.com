@@ -4,13 +4,27 @@ sidebar: Handbook
 showTitle: true
 ---
 
+We are proud to be misfits. Why?
+
+Building an unusually great company starts with an unusual team.
+
+We don't care if you haven't finished (or attended) school, if you were super important at FANG Corp or if you ran a startup that crashed and burned.
+
+What we do care about is your ability to learn, iterate and ship.
+
+That's why we have people from Belgium, Brazil, Connecticut, England, Estonia, the Netherlands, Senegal, San Francisco, amongst others.
+
 ## James Hawkins, Co-Founder and CEO
 
-James spent the first 10 years of his career trying to be a professional cyclist. He used to do web development part time to make some money on the side.
+I spent the first 10 years of my career trying to be a professional cyclist. I used to do web development part time to make some money on the side. I wasn't particularly good at either.
 
-One day, after another big crash, he got offered a full time job - he ended up bootstrapping an online marketing company, spending $MMs on paid ads and building a lot of software to optimize ad spends, to run a call center, and how to distribute data and manage ad spends dynamically.
+I live in Cambridge with Fran (wife), Ruby (daughter), and Wally (cat). Since you're probably wondering, the cat's name is a reference to [WALL-E](https://en.wikipedia.org/wiki/WALL-E) - work for us to find out why.
 
-After that, he moved to Arachnys, where he ended up becoming the VP Sales. He ran a team selling very large deals to big financial institutions.
+After a growing sense of my own mortality combined with a bunch of large crashes put me off continuing with my cycling career, I bootstrapped an online marketing company to several million dollars a year.
+
+I wanted more experience of working in a VC backed startup, so I could work on something really ambitious. I moved to [Arachnys](https://arachnys.com), and somehow wound up as a their VP of Sales for a little over 4 years, where I used to manage a team selling very large enterprise software deals. We learned how to take our sales from an average of $5K/year to over $1M/year.
+
+I started working with Tim on a few ideas that didn't work out in August 2019. We built PostHog during the YCombinator W20 batch, and launched in February. You can work out what I've been up to since by stalking me online.
 
 ## Tim Glaser, Co-Founder and CTO
 
