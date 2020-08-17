@@ -59,9 +59,13 @@ Body:
 }
 ```
 
-Here are some sample curl queries for each event type. Do note that you need to insert your API key into the `api_key` field.
+## Sample Requests
 
-## Alias
+Here are some sample `curl` queries for each event type. Do note that you need to insert your API key into the `api_key` field.
+
+Additionally, if you're self-hosting, you'll have to substitute `https://app.posthog.com/` for the URL of your instance.
+
+### Alias
 
 ```
 curl -v -L --header "Content-Type: application/json" -d ' {
@@ -77,7 +81,7 @@ curl -v -L --header "Content-Type: application/json" -d ' {
 }' https://app.posthog.com/batch/
 ```
 
-## Capture
+### Capture
 
 ```
 curl -v -L --header "Content-Type: application/json" -d '  {
@@ -85,14 +89,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
     "context": {},
-    "distinct_id": "1235",
+    "distinct_id": "1234",
     "type": "capture",
     "event": "$event",
     "messageId": "1234"
 }' https://app.posthog.com/batch/
 ```
 
-## Identify
+### Identify
 
 ```
 curl -v -L --header "Content-Type: application/json" -d ' {
@@ -107,7 +111,7 @@ curl -v -L --header "Content-Type: application/json" -d ' {
 }' https://app.posthog.com/batch/
 ```
 
-## Group
+### Group
 
 ```
 curl -v -L --header "Content-Type: application/json" -d ' {
@@ -123,7 +127,7 @@ curl -v -L --header "Content-Type: application/json" -d ' {
 }' https://app.posthog.com/batch/
 ```
 
-## Page
+### Page
 
 ```
 curl -v -L --header "Content-Type: application/json" -d '  {
@@ -140,7 +144,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
 }' https://app.posthog.com/batch/
 ```
 
-## Screen
+### Screen
 
 ```
 curl -v -L --header "Content-Type: application/json" -d '  {
