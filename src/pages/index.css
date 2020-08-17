@@ -8,13 +8,14 @@
 }
 
 .indexContainer {
+    top: 0;
+    background-image: url('../images/landing-page-background.svg');
     margin: 0;
-    height: auto;
+    height: 590px;
     max-height: 650px;
     width: 100vw!important;
-    background-size: 650px 100vw;
-    object-fit: contain;
-    background-position: top center;
+    background-size: cover;
+    background-position: 0 center;
 }
 
 @media screen and (max-width: 1440px) {
@@ -43,6 +44,10 @@
 }
 
 .ant-layout {
+    background: none!important;
+}
+
+header {
     background: none!important;
 }
 
@@ -144,10 +149,20 @@
 }
 
 .row1 {
+    width: 100vw;
     position: static;
     height: 726px;
     max-height: 726px;
     margin-bottom: 100px;
+}
+
+@media screen and (min-width: 1920px) {
+    .row1 {
+        height: 726px;
+        width: 1920px;
+        max-width: 1920px;
+        margin: 0 calc((100vw - 1920px) / 2);
+    }
 }
 
 @media screen and (max-width: 1440px) {
@@ -167,7 +182,7 @@
 
 .row1Col1 {
     position: absolute;
-    left: calc(1/12 * 1440px);
+    left: calc(1/12 * 100vw);
     width: calc(1/3 * 1440px);
     display: flex;
     flex-direction: column;
@@ -191,21 +206,31 @@
 }
 
 .row1Col2 {
-    position: absolute;
-    left: calc(5/12 * 1440px);
+    background-image: url('../images/computer-dashboard-4.svg');
+    position: relative;
+    left: 50vw;
     height: 726px;
-    width: calc(100vw - (5/12 * 1440px));
+    width: 50vw;
     background-repeat: no-repeat;
-    background-size: calc(1053/726 * 680) 680;
+    background-size: 1053px 726px;
+}
+
+@media screen and (min-width: 1920px) {
+    .row1Col2 {
+        left: 960px;
+        top: 0;
+        height: 726px;
+        width: calc(100vw - 960px - ((100vw - 1920px) / 2));
+    }
 }
 
 @media screen and (max-width: 1440px) {
     .row1Col2 {
         position: absolute;
-        left: calc(5/12 * 1440px);
+        left: 720px;
         top: 0;
         height: 726px;
-        width: calc(100vw - (5/12 * 1440px));
+        width: calc(100vw - 720px);
     }
 }
 
@@ -220,14 +245,32 @@
     }
 }
 
+@media screen and (max-width: 420px) {
+    .row1Col2 {
+        position: absolute;
+        left: calc(0.5 * 420px);
+        width: calc(0.5 * 420px);
+        height: calc((726/1053) * (0.9 * 420px));
+        background-size: cover;
+    }
+}
+
 .understandUsers {
     position: absolute;
     top: 530px;
-    left: calc(1/12 * 1440px)!important;
+    left: calc(1/12 * 100vw)!important;
     bottom: -300px !important;
-    max-width: calc(1/3 * 1440px)!important;
+    max-width: calc(1/3 * 100vw)!important;
     left: 0;
     height: max-content;
+}
+
+@media screen and (min-width: 1920px) {
+    .understandUsers {
+        left: calc(1/12 * 1920px)!important;
+        width: calc(1/3 * 1920px)!important;
+        max-width: calc(1/3 * 1920px)!important;
+    }
 }
 
 @media screen and (max-width: 1440px) {
@@ -277,7 +320,7 @@
 }
 
 .autocaptureWrapper {
-    background-image: url('../images/landing-page-background.svg')!important;
+    background-image: url('../images/landing-page-background-small.svg')!important;
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
@@ -287,35 +330,56 @@
 }
 
 .autocaptureImg { 
+    position: absolute;
     background-image: url('../images/autocapture-1.svg')!important;
     background-repeat: no-repeat;
-    background-size: 733px 557px;
-    background-position: left 65px;
+    background-size: 923px 557px;
+    background-position: -190px 65px;
     height: 622px;
-    width: 100vw;
+    width: calc( 13/24 * 100vw);
+    max-width: 1920px;
 }
 
-.autocapture{
+.autocaptureRow{
     position: relative;
     top: 65px;
 }
+
+@media screen and (min-width: 1920px) {
+    .autocaptureRow {
+        max-width: 1920px;
+        width: 1920px;
+        margin: 0 calc((100vw - 1920px) / 2);
+    }
+    .autocaptureImg {
+        position: absolute;
+        background-image: url('../images/autocapture-1.svg')!important;
+        background-repeat: no-repeat;
+        background-size: 923px 557px;
+        background-position: 0 65px;
+        left: calc((100vw - 1920px) / 2 - 190px);
+        height: 622px;
+        width: calc(13/24 * 1920px + 190px);
+    }
+}
+
 
 @media screen and (max-width: 1440px) {
     .autocaptureWrapper {
         width: 100vw!important;
         height: calc(.43194444444 * 1440px);
-        background-size: 1440px auto;
+        background-size: cover;
         object-fit: contain;
         background-position: center top;
     }
     .autocaptureImg {
-        background-position: left 65px;
+        background-position: -190px 65px;
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1350px) {
     .autocaptureImg {
-        background-position: calc(100vw - 1200px) 65px;
+        background-position: calc(100vw - 1540px) 65px;
     }
 }
 
@@ -335,19 +399,41 @@
         height: 183px;
         width: 100vw;
     }
-    .autocapture{
+    .autocaptureRow{
+        position: relative;
+        top: 0;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .autocaptureWrapper {
+        background-image: url('../images/landing-page-background.svg')!important;
+        background-size: cover;
+        background-position: center 6px;
+        width: 100vw!important;
+        height: calc(183/375 * 100vw);
+        max-height: 183px;
+    }
+    .autocaptureImg {
+        background-image: url('../images/autocapture-1-mobile.svg')!important;
+        background-position: calc(100vw - 420px) top;
+        background-size: 209px 183px;
+        height: 183px;
+        width: 100vw;
+    }
+    .autocaptureRow{
         position: relative;
         top: 0;
     }
 }
 
 .trafficVisualWrapper {
-    background-image: url('../images/visualize-background.svg')!important;
-    background-size: 1440px 810px;
+    background: url('../images/visualize-background.svg') left bottom no-repeat!important;
+    background-size: 1440px 810px, 2000px auto;
     background-position: left bottom;
     background-repeat: no-repeat;
     height: 1209px;
-    width: 1440px;
+    width: 100vw;
     position: relative;
     top: 20px;
 }
@@ -368,29 +454,30 @@
 }
 
 .visualize {
-    /*background-image: url('../images/landing-page-background.svg')!important;*/
+    top: 237px;
     background-position: center bottom;
-    background-size: 100vw 500px;
+    background-size: cover;
     position: relative;
     width: 100vw;
-    height: 687px;
+    height: 450px;
 }
 
 .visualizeText {
-    top: 150px;
+    top: 0;
 }
 
 @media screen and (max-width: 1440px) {
     .trafficVisualWrapper {
-        background-image: url('../images/background-2-3.svg')!important;
+        /*background-image: url('../images/background-2-3.svg')!important;
         background-size: 1440px 1209px;
-        background-position: left top;
-        background-repeat: no-repeat;
+        background-repeat: no-repeat;*/
+        background-position: center bottom;
         height: 1209px;
         width: 100vw;
     }
     .traffic {
-        background-image: none!important;
+        /*background-image: none!important;*/
+        background-position: 565px top;
     }
 
 }
@@ -401,13 +488,13 @@
         height: 520px;
         width: 100vw;
         background-size: 375px 220px;
-        background-position: left 249px;
+        background-position: left 254px;
         background-repeat: no-repeat;
     }
     .traffic {
         background-image: url('../images/traffic-background-mobile.svg')!important;
         background-size: 288px 185px;
-        background-position: right 85px;
+        background-position: right 90px;
         background-repeat: no-repeat;
         height: 270px;
         width: 100vw;
@@ -424,13 +511,40 @@
     }
 }
 
+@media screen and (max-width: 420px) {
+    .trafficVisualWrapper {
+        height: 520px;
+        width: 100vw;
+        background-size: 375px 220px;
+        background-position: center 254px;
+    }
+    .traffic {
+        background-size: 288px 185px;
+        background-position: 132px 90px;
+    }
+    .visualize {
+        height: 250px
+    }
+    .trafficText {
+        width: 40vw;
+    }
+    .visualizeText {
+        top: 70px;
+    }
+}
+
 .improveConversionWrapper {
     position: relative; 
+    margin-bottom: 100px;
 }
 
 .improveConversion {
     width: 768px;
     left: calc((100vw - 768px) / 2)
+}
+
+.improveConversion h4 {
+    font-weight: 400;
 }
 
 .improveConversion img {
@@ -448,15 +562,17 @@
 }
 
 .featureFlagsWrapper {
-    /*background-image: url('../images/landing-page-background.svg');*/
-    height: 581px;
+    background-image: url('../images/landing-page-background.svg');
+    background-size: cover;
+    position: relative;
+    height: 600px;
     width: 100vw;
 }
 
 .featureFlagsImg {
     position: relative;
     background-image: url('../images/background-5.svg');
-    background-size: 687px 581px;
+    background-size: 794px 581px;
     background-position: top left;
     background-repeat: no-repeat;
     height: 581px;
@@ -465,11 +581,24 @@
 }
 
 .featureFlags {
-    top: 20%;
+    position: relative;
+    top: 50px;
 }
 
 .featureFlagsText {
     width: 30vw;
+}
+
+@media screen and (min-width: 1920px) {
+    .featureFlags {
+        width: 1920px;
+        padding: 0 calc((100vw - 1920px) / 2);
+    }
+    .featureFlagsImg {
+        width: calc(687px + ((100vw - 1920px)/2));
+        max-width: 794px;
+        left: calc(1920px - 687px);
+    }
 }
 
 @media screen and (max-width: 1440px) {
@@ -493,14 +622,31 @@
     }
 }
 
-.designed4Stack {
-    position: static;
+.designed4StackWrapper {
+    position: relative;
     top: 0px;
     margin: 100px 0;
 }
 
 .designed4Stack img {
     margin: 0;
+}
+
+.yourStack .ant-col img {
+    width: calc(1/12 * 1440px)!important;
+}
+
+.shelf {
+    width: 720px;
+}
+
+@media screen and (min-width: 1920px) {
+    .yourStack {
+        width: 1920px;
+        max-width: 1920px;
+        padding: calc((100vw - 1920px) / 2);
+    }
+    
 }
 
 .posthog4EnterpriseWrapper {
@@ -514,23 +660,37 @@
 }
 
 .posthog4Enterprise img {
-    width: 300px;
-    right: 0;
-    height: 300px;
+    position: relative;
+    width: calc(1/3 * 75vw);
+    height: calc(1/3 * 75vw);
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.enterpriseHeader {
+    height: 90px;
+    margin-bottom: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
     .posthog4Enterprise h4 {
-        margin: 0 0 0 6vw;
+        margin: 0 0 0 calc(18/113 * (1/3 * 100vw));
     }
     .posthog4Enterprise p {
-        margin: 0 3vw 0 6vw;
+        margin: 0 3vw 0 calc(18/113 * (1/3 * 100vw));
         font-size: 10px;
     }
     .posthog4Enterprise img {
-        width: 115px;
-        right: 0;
-        height: 115px;
+        width: calc(1/3 * 100vw);
+        height: calc(1/3 * 100vw);
+        max-width: 300px;
+        max-height: 300px;
+    }
+    .posthog4EnterpriseWrapper {
+        height: auto;
+    }
+    .enterpriseHeader {
+        height: auto;
     }
 }
 

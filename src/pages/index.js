@@ -3,14 +3,11 @@ import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import './index.css'
 import { Link } from 'gatsby'
-import landingPageBackgroundGrey from '../images/landing-page-background-grey.svg'
-import computerDashboard4 from '../images/computer-dashboard-4.svg'
-import autocapture1 from '../images/autocapture-1.svg'
+import landingPageBackgroundGrey from '../images/landing-page-background-small.svg'
 import background23 from '../images/background-2-3.svg'
 import improveRetention from '../images/improve-retention.svg'
 import improvePaths from '../images/improve-paths.svg'
 import improveFunnels from '../images/improve-funnels.svg'
-import background5 from '../images/background-5.svg'
 import enterprise01 from '../images/enterprise-01.svg'
 import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
@@ -34,7 +31,6 @@ import installKubernetes from '../images/install-kubernetes.svg'
 import githubButton from '../images/github-button.svg'
 import slackButton from '../images/slack-button.svg'
 import roadmapButton from '../images/roadmap-button.svg'
-import whatsNew from '../images/whats-new.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
@@ -42,7 +38,7 @@ import Layout from '../components/Layout'
 
 function IndexPage() {
   return (
-    <div className="indexContainer" style={{backgroundImage: `url(${landingPageBackgroundGrey})`}}>
+    <div className="indexContainer">
     <Layout containerStyle={{maxWidth: "auto", padding: 0}} >
       <SEO
         title="PostHog - open source product analytics"
@@ -70,7 +66,7 @@ function IndexPage() {
               </Button>
             </a>
           </div>
-          <div className="row1Col2" style={{backgroundImage:`url(${computerDashboard4})`}}/>
+          <div className="row1Col2"/>
         </Col>
       </Row>
       <div className="understandUsers">
@@ -92,8 +88,8 @@ function IndexPage() {
 
       {/*01 - It all starts with event autocapture*/}
       <div className="autocaptureWrapper wrapper">
-        <div className="autocaptureImg">
-          <Row justify="space-between" className="autocapture">
+        <div className="autocaptureImg"/>
+          <Row justify="space-between" className="autocaptureRow">
             <Col span={3} offset={13}>
               <h1 className="yellowText">01</h1>
             </Col>
@@ -105,7 +101,6 @@ function IndexPage() {
               <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
             </Col>
           </Row>
-        </div>
       </div>
 
       <div className="trafficVisualWrapper wrapper" style={{backgroundImage: `url(${background23})`}}>
@@ -115,7 +110,7 @@ function IndexPage() {
             <Col span={3} offset={1}>
               <h1 className="redText">02</h1>
             </Col>
-            <Col span={12}>
+            <Col xs={20} sm={12} md={12} lg={12} xl={12}>
               <h2 className="gosha">Understand how traffic really flows through your app</h2>
               <br className="revHiddenBreak"/>
               <hr className="redLine"/>
@@ -128,11 +123,11 @@ function IndexPage() {
         {/*03 - Understand how traffic really flows through your app*/}
         <div className="visualize">
           <Row justify="space-between" className="visualizeText">
-            <Col xs={10} sm={10} md={11} lg={11} xl={11}/>
+            <Col xs={12} sm={10} md={11} lg={11} xl={11}/>
             <Col span={3} >
               <h1 className="blueText">03</h1>
             </Col>
-            <Col xs={10} sm={10} md={8} lg={8} xl={8}>
+            <Col xs={8} sm={10} md={8} lg={8} xl={8}>
               <h2 className="gosha">Visualize product trends and retention</h2>
               <hr className="blueLine"/>
               <p>Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
@@ -196,16 +191,16 @@ function IndexPage() {
       </div>
 
       {/*Designed for your Stack */}
-      <div className="designed4Stack">
-        <Row className="gutter-row" justify="center" align="middle">
+      <div className="designed4StackWrapper">
+        <Row className="gutter-row" justify="center" align="middle" className="designed4Stack">
           <Col span={24} className="gutter-row" justify="center" align="middle">
             <h2 align="middle" className="gosha">
               Designed for your stack
             </h2>
           </Col>
         </Row>
-        <div className="yourStack" align="bottom">
-          <Row justify="space-between" align="bottom">
+        <div className="yourStack" align="bottom" >
+          <Row justify="center" align="bottom">
             <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
             <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
               <Link to="/docs/integrations/python-integration">
@@ -237,15 +232,15 @@ function IndexPage() {
         </div>
           <Row justify="space-between" align="top">
             <Col xs={1} sm={1} md={6} lg={6} xl={6}></Col>
-            <Col xs={22} sm={22} md={12} lg={12} xl={12}>
-              <img alt="shelf-2" className="imageShow" loading="lazy" src={shelf2}/>
+            <Col xs={22} sm={22} md={12} lg={12} xl={12} align="center">
+              <img alt="shelf-2" className="imageShow shelf" loading="lazy" src={shelf2}/>
             </Col>
             <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
           </Row>
           <br/>
           <br/>
         <div className="yourStack" align="bottom">
-          <Row justify="space-between" align="bottom">
+          <Row justify="center" align="bottom">
             <Col xs={2} sm={2} md={7} lg={7} xl={7}></Col>
             <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
               <Link to="/docs/integrations/ruby-integration">
@@ -277,8 +272,8 @@ function IndexPage() {
         </div>
         <Row justify="space-between" align="top">
           <Col xs={1} sm={1} md={6} lg={6} xl={6}></Col>
-          <Col xs={22} sm={22} md={12} lg={12} xl={12}>
-            <img alt="shelf-4" className="imageShow" loading="lazy" src={shelf4}/>
+          <Col xs={22} sm={22} md={12} lg={12} xl={12} align="center">
+            <img alt="shelf-4" className="imageShow shelf" loading="lazy" src={shelf4}/>
           </Col>
           <Col xs={0} sm={0} md={6} lg={6} xl={6}></Col>
         </Row>
@@ -293,13 +288,14 @@ function IndexPage() {
         </Col>
       </Row>
       <div className="posthog4EnterpriseWrapper wrapper">
-      <Row className="posthog4Enterprise">
+      <Row justify="center" align="center" className="posthog4Enterprise">
         <Col xs={0} sm={0} md={2} lg={2} xl={2}/>
         <Col xs={8} sm={8} md={6} lg={6} xl={6}>
-          <h4>Self-managed</h4>
+          <div className="enterpriseHeader">
+            <h4>Self-managed</h4>
+          </div>
           <img alt="enterprise-01" loading="lazy" src={enterprise01} className="imageShow"/>
           <br className="revHiddenBreak"/>
-          <hr className="blueLine2 revHiddenBreak"/>
           <p>
             PostHog can be deployed in your cloud, for painless adoption and
             onboarding.
@@ -308,10 +304,11 @@ function IndexPage() {
         </Col>
         <Col xs={0} sm={0} md={1} lg={1} xl={1}/>
         <Col xs={8} sm={8} md={6} lg={6} xl={6}>
-          <h4>Unlimited volume</h4>
+          <div className="enterpriseHeader">
+            <h4>Unlimited volume</h4>
+          </div>
           <img alt="enterprise-02" loading="lazy" src={enterprise02} className="imageShow"/>
           <br className="revHiddenBreak"/>
-          <hr className="redLine2 revHiddenBreak"/>
           <p>
             PostHog is built to scale. That includes our open core pricing
             model.
@@ -320,10 +317,11 @@ function IndexPage() {
         </Col>
         <Col xs={0} sm={0} md={1} lg={1} xl={1}/>
         <Col xs={8} sm={8} md={6} lg={6} xl={6}>
-          <h4>Support</h4>
+          <div className="enterpriseHeader">
+            <h4>Support</h4>
+          </div>
           <img alt="enterprise-03" loading="lazy" src={enterprise03} className="imageShow"/>
           <br className="revHiddenBreak"/>
-          <hr className="yellowLine2 revHiddenBreak"/>
           <p>
             PostHog can manage your deployment on your infrastructure. All the
             benefits of self-hosting with the reliability and scalability of the
@@ -400,7 +398,7 @@ function IndexPage() {
 
           </div>
         </Row>
-        <Row className="installNowShelf">
+        <Row className="installNowShelf" align="center">
           <Col span={20} offset={2}>
             <img alt="shelf-2" loading="lazy" src={shelf2} className="imageShow"/>
           </Col>
