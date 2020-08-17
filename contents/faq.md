@@ -4,7 +4,9 @@ sidebar: null
 showTitle: true
 ---
 
-## Will this fit what I need?
+# Why PostHog
+
+### Will this fit what I need?
 
 PostHog provides open source product analytics. We are an open source alternative to Mixpanel / Amplitude or Heap.
 
@@ -24,7 +26,7 @@ We track user behavior across your website and applications.
 	* [Funnels](/docs/features/funnels)
 	* [Cohorts](/docs/features/cohorts)
 	* [Trend Stickiness](/docs/features/trends#trend-segmentation-by-stickiness)
-	* [Rentention](https://posthog.com/docs/features/retention)
+	* [Retention](https://posthog.com/docs/features/retention)
 	* [User histories](/docs/features/users)
 	* [Feature-rich Toolbar](https://posthog.com/docs/features/toolbar)
 
@@ -41,9 +43,11 @@ PostHog is designed for any web or mobile-based website or application.
 
 Yes. We support any kind of application.
 
-## Is this supported properly?
+### Is this supported properly?
 
 Yes. We are in very [active development](https://github.com/PostHog/posthog/graphs/commit-activity). PostHog is a [well-funded](/handbook/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub and dozens of PRs being worked on weekly.
+
+# About the Software
 
 ### How popular is the software?
 
@@ -63,7 +67,7 @@ We are currently working on creating some case studies.
 
 If you would like to be featured, please email hey@posthog.com.
 
-## Is this a "top quality" project?
+### Is this a "top quality" project?
 
 Yes, but we would say that!
 
@@ -75,11 +79,13 @@ Whilst there is already room for improvement, the software works well and we use
 
 If you have any [issues or feature requests](https://github.com/PostHog/posthog/issues), we are live on [Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) nearly 24 hours a day during the week to help.
 
-## Is this hard to set up?
+### Is this hard to set up?
 
 No. If you want to just try it out - you can go with the [hosted version](https://app.posthog.com/signup).
 
 If you are at a much higher volume company and need help managing scalability and database sizing, we can offer paid help here.
+ 
+# Deployment
 
 ### How do I deploy?
 
@@ -95,7 +101,7 @@ The software is available from source, on Heroku, as a Docker image or in Kubern
 
 Want to set it up differently? [Raise an issue](https://github.com/PostHog/posthog/issues) in the repo.
 
-## Will this scale?
+### Will this scale?
 
 Yes. We've written out information on [scaling PostHog](/docs/scaling-posthog).
 
@@ -113,21 +119,20 @@ Email [sales@posthog.com](mailto:sales@posthog.com) to talk to us about this.
 
 Yes. You can have full access to [PostHog's code](https://github.com/PostHog/posthog), so it's fully flexible how you run the software.
 
-## Will this make me better at my job?
+### Will this make me better at my job?
 
 If you work at a software company, an understanding of user behavior is critical to driving growth. That's what we can help you with.
 
 The cool thing about PostHog is that you can go live into production without having to send all your user data to a SaaS company.
 
+# Community
+
 ### What's the community like?
 
 Active and growing! We have [more than 2.9k stars](https://github.com/PostHog/posthog/stargazers) on GitHub. There is a [Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) with daily conversations, and the repo itself has [issues](https://github.com/PostHog/posthog/issues) raised every week.
 
-### What are the docs like?
 
-Our Docs are a top priority to us and are updated **daily**. [Check them out](/docs) for yourself!
-
-## How is this different from the other product analytics tools?
+### How is this different from the other product analytics tools?
 
 PostHog is the only open source product analytics tool. There are plenty of SaaS options (Mixpanel/Amplitude/Heap), but all of them require you to send your data to 3rd parties, and they all charge based on volume. We have written out a [features comparison](/product-features).
 
@@ -135,7 +140,20 @@ There are multiple open source analytics offerings - Metabase, Matomo, etc. Post
 
 Todo: We will put together content to walk you through the difference with the rest of the open source analytics stack that is available :)
 
-## What new features do PostHog have?
+# Contributing
+
+### How do I contribute
+
+We love contributions big or small. [See docs for a guide on how to get started](https://posthog.com/docs/contributing).
+Not sure where to start?[Book a free, no-pressure pairing session](mailto:tim@posthog.com?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!) with one of our core contributors.
+
+### What are the docs like?
+
+Our Docs are a top priority to us and are updated **daily**. [Check them out](/docs) for yourself!
+
+# General Questions
+
+### What new features do PostHog have?
 As a way to improve users experience, PostHog has released new features such as [Rentention Tables](https://posthog.com/docs/features/retention) and [Toolbar](https://posthog.com/docs/features/toolbar) which enables you to interact seamlessly with PostHog.
 
 ### Can I suggest new features?
@@ -143,3 +161,7 @@ You can suggest new features by adding them as issues in our [Github repo](https
 
 ### I'm having trouble setting up PostHog?
 If you’re having trouble setting up PostHog you can send a messaage to our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ), you can also contact the [PostHog Support](hey@posthog.com). If its a bug you can raise an issue through our [github repo](https://github.com/PostHog/posthog/issues)
+
+### Are we hiring?
+Yes, come help us make PostHog even better. We're growing like crazy, and we have a ton of open position
+
