@@ -163,5 +163,6 @@ You can suggest new features by adding them as issues in our [Github repo](https
 If you’re having trouble setting up PostHog you can send a messaage to our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ), you can also contact the [PostHog Support](hey@posthog.com). If its a bug you can raise an issue through our [github repo](https://github.com/PostHog/posthog/issues)
 
 ### Are we hiring?
-Yes, come help us make PostHog even better. We're growing like crazy, and we have a ton of open position
+Yes, come help us make PostHog even better. We're growing like crazy, [and we have a ton of open positions](https://posthog.com/careers).
+
 
