@@ -180,6 +180,7 @@
     "entry":"Company Blog",
     "name":"Company Blog",
     "items": [
+      "blog/product-led-growth",
       "blog/a-chat-with-sid",
       "blog/raising-3m-for-os",
       "blog/after-the-hn-launch",
