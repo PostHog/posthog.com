@@ -18,6 +18,11 @@
     background-position: 0 center;
 }
 
+@media screen and (min-width: 1920px) {
+    .indexContainer {
+    }
+}
+
 @media screen and (max-width: 1440px) {
     .indexContainer {
         width: 100vw!important;
@@ -48,15 +53,21 @@
 }
 
 header {
-    background: none!important;
+    background: #fff!important;
 }
 
 .ant-menu { 
-    background: none!important;
+    background: #fff!important;
 }
 
 .wrapper {
     margin: 10px 0;
+}
+
+@media screen and (min-width: 1920px) {
+    .wrapper {
+        padding: 0 calc((100vw - 1920px) / 2);
+    }
 }
 
 .ant-btn-primary { 
@@ -156,30 +167,6 @@ header {
     margin-bottom: 100px;
 }
 
-@media screen and (min-width: 1920px) {
-    .row1 {
-        height: 726px;
-        width: 1920px;
-        max-width: 1920px;
-        margin: 0 calc((100vw - 1920px) / 2);
-    }
-}
-
-@media screen and (max-width: 1440px) {
-    .row1 {
-        height: 726px;
-        max-width: 100vw;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .row1 {
-        height: calc((726/1053) * 768px);
-        max-width: 100vw;
-        margin-bottom: 0;
-    }
-}
-
 .row1Col1 {
     position: absolute;
     left: calc(1/12 * 100vw);
@@ -188,26 +175,9 @@ header {
     flex-direction: column;
 }
 
-@media screen and (max-width: 1440px) {
-    .row1Col1 {
-        position: absolute;
-        left: calc(1/12 * 100vw);
-        width: calc(1/3 * 1440px);
-        max-width: 100vw;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .row1Col1 {
-        position: absolute;
-        left: calc(1/12 * 100vw);
-        width: calc(1/3 * 100vw);
-    }
-}
-
 .row1Col2 {
     background-image: url('../images/computer-dashboard-4.svg');
-    position: relative;
+    position: absolute;
     left: 50vw;
     height: 726px;
     width: 50vw;
@@ -216,15 +186,31 @@ header {
 }
 
 @media screen and (min-width: 1920px) {
+    .row1 {
+        height: 726px;
+        width: 1920px;
+        max-width: 1920px;
+    }
     .row1Col2 {
         left: 960px;
         top: 0;
         height: 726px;
-        width: calc(100vw - 960px - ((100vw - 1920px) / 2));
+        width: calc(960px + ((100vw - 1920px) / 2));
+        margin-right: 0;
     }
 }
 
 @media screen and (max-width: 1440px) {
+    .row1 {
+        height: 726px;
+        max-width: 100vw;
+    }
+    .row1Col1 {
+        position: absolute;
+        left: calc(1/12 * 100vw);
+        width: calc(1/3 * 1440px);
+        max-width: 100vw;
+    }
     .row1Col2 {
         position: absolute;
         left: 720px;
@@ -235,6 +221,16 @@ header {
 }
 
 @media screen and (max-width: 768px) {
+    .row1 {
+        height: calc((726/1053) * 768px);
+        max-width: 100vw;
+        margin-bottom: 0;
+    }
+    .row1Col1 {
+        position: absolute;
+        left: calc(1/12 * 100vw);
+        width: calc(1/3 * 100vw);
+    }
     .row1Col2 {
         position: absolute;
         left: 50vw;
@@ -349,13 +345,8 @@ header {
     .autocaptureRow {
         max-width: 1920px;
         width: 1920px;
-        margin: 0 calc((100vw - 1920px) / 2);
     }
     .autocaptureImg {
-        position: absolute;
-        background-image: url('../images/autocapture-1.svg')!important;
-        background-repeat: no-repeat;
-        background-size: 923px 557px;
         background-position: 0 65px;
         left: calc((100vw - 1920px) / 2 - 190px);
         height: 622px;
@@ -439,13 +430,13 @@ header {
 }
 
 .traffic {
+    position: relative;
     background-image: url('../images/traffic-background.svg')!important;
-    background-size: 875px 522px;
-    background-position: right top;
+    background-size: 1061px 522px;
+    background-position: calc(100vw - 875px) top ;
     background-repeat: no-repeat;
     height: 522px;
     width: 100vw;
-    position: relative; 
 }
 
 .trafficText {
@@ -466,11 +457,21 @@ header {
     top: 0;
 }
 
+@media screen and (min-width: 1920px) {
+    .traffic {
+        width: calc(1920px + ((100vw - 1920px) / 2));
+        background-position: calc(1920px - 875px) top ;
+    }
+    .trafficVisualWrapper {
+        width: 1920px;
+    }
+    .visualize {
+        width: 1920px;
+    }
+}
+
 @media screen and (max-width: 1440px) {
     .trafficVisualWrapper {
-        /*background-image: url('../images/background-2-3.svg')!important;
-        background-size: 1440px 1209px;
-        background-repeat: no-repeat;*/
         background-position: center bottom;
         height: 1209px;
         width: 100vw;
@@ -562,15 +563,16 @@ header {
 }
 
 .featureFlagsWrapper {
-    background-image: url('../images/landing-page-background.svg');
+    background-image: url('../images/landing-page-background-small.svg')!important;
     background-size: cover;
-    position: relative;
+    background-position: top center;
+    background-repeat: no-repeat;
     height: 600px;
     width: 100vw;
 }
 
 .featureFlagsImg {
-    position: relative;
+    position: absolute;
     background-image: url('../images/background-5.svg');
     background-size: 794px 581px;
     background-position: top left;
@@ -592,7 +594,6 @@ header {
 @media screen and (min-width: 1920px) {
     .featureFlags {
         width: 1920px;
-        padding: 0 calc((100vw - 1920px) / 2);
     }
     .featureFlagsImg {
         width: calc(687px + ((100vw - 1920px)/2));
@@ -644,7 +645,6 @@ header {
     .yourStack {
         width: 1920px;
         max-width: 1920px;
-        padding: calc((100vw - 1920px) / 2);
     }
     
 }
@@ -656,7 +656,6 @@ header {
 
 .posthog4Enterprise {
     top: 20px;
-    width: 100vw;
 }
 
 .posthog4Enterprise img {
@@ -694,17 +693,36 @@ header {
     }
 }
 
-.selfHostedData {
-    padding: 0;
-    margin: 5vh auto 0;
-    width: 100%;
-    height: auto;
+.selfHostedDataText {
+    top: 100px;
 }
 
-.selfHostedData img {
-    width: 100%;
-    right: 0;
-    height: auto;
+.selfHostedDataImg {
+    background-image: url('../images/self-host.svg');
+    background-size: cover;
+    width: calc(765/1440 * 100vw);
+    max-width: 765px;
+    height: calc(766/1440 * 100vw);
+    max-height: 766px;
+    left: calc(100vw - 765px);
+}
+
+@media screen and (min-width: 1920px) {
+    .selfHostedDataImg {
+        width: 765px;
+        height: 766px;
+        left: calc(1920px - 765px);
+
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .selfHostedDataImg {
+        width: calc(100vw - 675px);
+        height: 766px;
+        left: calc(1440px - 765px);
+
+    }
 }
 
 .yourStack img:hover {
@@ -712,12 +730,13 @@ header {
 }
 
 .installNowWrapper {
-    background-image: url('../images/landing-page-background.svg');
+    background-image: url('../images/landing-page-background-small.svg');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
     padding-top: 100px;
-    height: auto;
-    width: 100%;
-    padding-bottom: 5vh;
-    background-size: cover
+    height: 620px;
+    width: 100vw;
 }
 
 .installNow img {
