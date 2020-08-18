@@ -213,7 +213,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: "Helvetica Neue", georgia, serif !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
