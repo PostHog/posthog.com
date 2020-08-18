@@ -987,3 +987,28 @@ table th {
 #mc_embed_signup .button:hover {
   background-color: #577BFB !important;
 }
+
+.blog-quote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+  max-width: 80%;
+  margin-left: 5%;
+}
+
+.blog-quote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+.blog-quote > p {
+  display: inline;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+}

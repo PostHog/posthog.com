@@ -7,8 +7,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-
-<!-- ![Segment Banner](../images/plg-header.png) -->
+<!-- ![PLG Banner](../images/plg-header.png) -->
 
 Let's say you are the founder of a new tech startup. 
 
@@ -58,6 +57,7 @@ Nevertheless, the point is that your company does not need to solely focus on on
 
 To understand these traditional growth strategies, it may be useful to think of a funnel:
 
+![HogFlix Example Funnel](../images/hogflix-funnel.png)
 
 With Marketing, the goal is to increase the number of people going through the funnel, whereas Sales should improve the conversion rates from one step to another. 
 
@@ -92,8 +92,10 @@ Don't make a sale if your product is not a good fit for the customer. 
 
 From the first paragraph of PostHog's Handbook Sales page:
 
-<blockquote>
-"Always focus on delivering what the customer needs. Sometimes that will mean sending them to a competitor or turning them down."
+<blockquote class="blog-quote">
+
+Always focus on delivering what the customer needs. Sometimes that will mean sending them to a competitor or turning them down.
+
 </blockquote>
 
 Yes, this is literally an official guideline for doing Sales at PostHog.
@@ -120,8 +122,10 @@ When focusing on the product, you should always be touching base with your users
 
 At PostHog, our methodology is:
 
-<blockquote>
-"If we keep our team first and users second, then our investors will take care of themselves!"
+<blockquote class="blog-quote">
+
+If we keep our team first and users second, then our investors will take care of themselves!
+
 </blockquote>
 
 Users are key and should be a top priority.
