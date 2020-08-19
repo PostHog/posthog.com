@@ -47,17 +47,19 @@ For more information on Django security features, you can check out [Django's Of
 
 ## Secret Key
 
+**Important: PostHog will not work if you do not set your own unique `SECRET_KEY`.**
+
 Secret keys are used to encrypt cookies and password reset emails, [among other things](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key). To generate a secret key, run:
 
 ```bash
 openssl rand -hex 32
 ```
 
+This `SECRET_KEY` must be passed to PostHog as an environment variable. One-click deploys automatically set a secure key for you, but deployments from source and using Docker currently require you to manually set this. 
+
 ### Secret Key with Docker Compose
 
 When using Docker Compose, you will need to manually update the `docker-compose.yml` file with a secret key that is unique to your instance.
-
-**⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deploymentsecuring-posthog).**
 
 #### Step-By-Step
 
