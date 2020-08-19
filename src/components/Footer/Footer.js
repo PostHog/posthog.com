@@ -35,6 +35,7 @@ class Footer extends Component {
               <FooterListItem to="/docs">Docs</FooterListItem>
               <FooterListItem to="/blog">Blog</FooterListItem>
               <FooterListItem to="/newsletter">Newsletter</FooterListItem>
+              <a href="https://merch.posthog.com/collections/all">Merch</a>
             </Col>
             <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Community</span>
