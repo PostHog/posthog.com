@@ -11,13 +11,13 @@ hideAnchor: true
 
 Let's say you are the founder of a new tech startup. 
 
-A few months back, you and a couple of friends (all developers) built an amazing tool and have now received some Seed funding. 
+A few months back, you and a couple of friends (all developers) built an amazing tool and have now received Seed funding. 
 
 As a result, you're under some pressure to grow. You took a few million from some VCs here and there, and they want to see some results.
 
 Since the realization of needing to grow hit you, you've started to lose some sleep. 
 
-Before, you were just a group of friends working your ass off to build an amazing product. Now, you actually have to focus on selling it too.
+Before, you were just a group of friends working your ass off to build an amazing product, with some revenue coming in from your immediate network. Now you actually have to focus on ramping up your sales.
 
 You call in a founders meeting to discuss next steps, and a conclusion is reached: you can't spend all your budget on engineers, which is what you wanted to do. 
 
@@ -90,7 +90,7 @@ At PostHog, we follow a Product-led Growth approach. And we'll tell you, this ha
 
 Don't make a sale if your product is not a good fit for the customer. 
 
-From the first paragraph of PostHog's Handbook Sales page:
+From the first paragraph of [PostHog's Handbook Sales page](/handbook/growth/sales):
 
 <blockquote class="blog-quote">
 
@@ -105,14 +105,14 @@ If you're a software company, PLG might mean opting for more Engineers than Sale
 
 More than with other approaches, you also need to make sure your hires are individuals who understand and are passionate about the product, as well as are proactive in making it better. 
 
-Your Sales people shouldn't cut corners to close a deal, and the Marketing team should focus on highlighting the product you built, not the brand you are. Your brand is the product.
+Your Sales people shouldn't cut corners to close a deal, and the Marketing team should focus on highlighting the product you built.
 
 ### Communication
 Listen to your users on everything.
 
 Built something? Get feedback. New idea? Get feedback. Launched a release? Get feedback.
 
-As one of our core devs put it following interviews with users about a new feature he built: "Your assumptions are mostly wrong. Talk to people to correct them".
+As one of our [core devs](https://twitter.com/mariusandra) put it following interviews with users about a new feature he built: "Your assumptions are mostly wrong. Talk to people to correct them".
 
 When generating growth primarily through Sales or Marketing, the segregation between the people who are building the product and those selling it can lead to diversion between what users want and what is being offered to them.
 
@@ -140,19 +140,28 @@ Later on, however, if you did truly build something great, you may benefit from 
 
 Facebook and Slack are great examples of this. 
 
+| ![Facebook Stock Price](../images/facebook-stock.png) |
+| :---------------------------------------------: |
+| <center> Facebook (FB) Stock Price - Source: [Yahoo Finance](https://finance.yahoo.com/chart/FB)</center>    | 
+
+Facebook, in fact, actually grew fast early on, while following a primarily PLG approach. This goes on to show that it is possible
+to grow fast despite following a Product-led Growth approach, or, perhaps even because of it. When you're an industry disruptor, your product speaks for itself, since it is something new, rather than an improvement on something that already exists. As such, your product can potentially drive your growth even if you don't explicitly follow a PLG strategy.
+
+Tesla is another example of a company that lets its disruptive product do the talking. They reportedly spend a [whopping 0$ on advertising](https://www.forbes.com/sites/johnkoetsier/2019/05/06/tesla-spends-zero-on-ads-heres-where-bmw-toyota-ford-and-porsche-spend-digital-ad-dollars/#4a574ec911d4), yet have a brand that is known worldwide, and a [stock price that seems to just keep on rising](https://finance.yahoo.com/quote/TSLA/). 
+
 ### Revenue 
 Since the initial focus is on building a product rather than selling it, you will likely make less money in the short-run.
 
 With the goal not being to hit a Sales metric, you might be turning down opportunities to generate revenue if they are not perfectly aligned with what you're building.
 
-As such, you need to make sure your team and investors are aligned with this. It should be understood that it's okay to not be making money in the early stages.
+As such, you need to make sure your team and investors are aligned with this. It should be understood that [it's okay to not be making money in the early stages](/blog/raising-3m-for-os).
 
 ## One Size Doesn't Fit All
 Product-Led Growth is not a magic pill. It does have its shortcomings.
 
 Primarily, how can you let your product speak for itself if you can't get anyone to look at it in the first place?
 
-But rather than tell you when Product-led Growth might not work, I'll tell you what aspects can be beneficial to it.
+But rather than tell you when Product-led Growth might not work, let's explore some aspects that may be beneficial to it.
 
 ### Funding
 It's much easier to focus almost exclusively on building a product when you're already well-funded. This is our case at PostHog.
@@ -161,7 +170,7 @@ To build a great product, you need a great team. And to build a great team, you 
 
 Thus, if you're a company without a lot of money in the bank, you might just need to get some Sales done now, simply to fund your operations.
 
-Not having funding shouldn't discourage you from trying a PLG approach, however. It can still work, just look at GitLab. They first raised money after already having 100,000 users and Sid (their CEO), claims they didn't even have a significant marketing budget until then. Wow. 
+Not having funding shouldn't discourage you from trying a PLG approach, however. It can still work, just look at GitLab. They first raised money after already having 100,000 users and Sid (their CEO) [told us](/blog/a-chat-with-sid) they didn't even have a significant marketing budget until then. Wow. 
 
 ### Open Source Software
 Being open source is a great characteristic for companies looking to follow a PLG approach. 
@@ -172,14 +181,12 @@ Additionally, open source software projects by default encourage community parti
 
 As such, you are more involved with your users and can gain better insight into how people feel about your product.
 
-### Diversity
-Having a team with diverse backgrounds can be extremely helpful for executing a growth strategy focused on the product. 
-
-Diversity can come in various forms. One of them is breadth of professional experience, as opposed to depth. Depth refers to extensive experience in a specific field, whereas breadth means experience across fields.
+### Breadth of Experience
+With regards to professional experience, depth refers to extensive experience in a specific field, whereas breadth can be seen as experience across fields.
 
 Depth of experience is an essential characteristic of a world-class team. However, having some focus on breadth can also be beneficial. By having individuals able to cross role descriptions and wear many hats, it becomes easier to ensure that the product is reflected in the mentality of the various teams in an organization.
 
-At PostHog, for example, we have people with Engineering backgrounds handling sales, marketing, content creation, customer support, social media, among other non-technical roles. 
+At PostHog, for example, when we hire Engineers, we look for both depth and breadth. Consequently, we have people with Engineering backgrounds handling sales, marketing, content creation, customer support, social media, among other non-technical roles. 
 
 As a result, we are able to perform non-technical tasks with a technical eye, and ensure our growth strategy converges with a focus on user experience across teams, especially since we are building a developer-focused product.
 
@@ -188,6 +195,8 @@ Product-led Growth is more than just a growth methodology - it's a way of ru
 
 Instead of having teams working on separate goals such as "build a great product" and "sell a great product", the entire company is united under the same goal: "build a great product". From that main goal, everything else is a by-product, or at least a secondary objective. 
 
-This approach has its shortcomings, and is more likely to be a longer process. 
+Ultimately, despite not always being the longer route (see: Facebook), Produt-Led Growth is a long-run strategy. Its goal is to build something great and really solve a problem - having people pay you for that solution comes later. 
 
-But, at a minimum, it's quite a fun goal to work towards, is it not?
+And that's what we're doing at PostHog. 
+
+[Wanna help?](/docs/contributing)

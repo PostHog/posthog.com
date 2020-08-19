@@ -990,12 +990,12 @@ table th {
 
 .blog-quote {
   background: #f9f9f9;
-  border-left: 10px solid #ccc;
   margin: 1.5em 10px;
   padding: 0.5em 10px;
   quotes: "\201C""\201D""\2018""\2019";
   max-width: 80%;
   margin-left: 5%;
+  text-align: center;
 }
 
 .blog-quote:before {
@@ -1006,6 +1006,18 @@ table th {
   margin-right: 0.25em;
   vertical-align: -0.4em;
 }
+
+.blog-quote:after {
+  color: #ccc;
+  content: close-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+  margin-left: 1%;
+}
+
+
 
 .blog-quote > p {
   display: inline;
