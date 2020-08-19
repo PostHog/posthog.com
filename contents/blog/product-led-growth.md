@@ -30,36 +30,23 @@ VC funding or not, all startups will eventually need to get paid for what they d
 Irrespective of how cool your idea is, or how helpful it may be, if you're not getting money in, you can't push it forward. 
 You need customers.
 
-Traditionally, there are two ways to do this: Sales and Marketing.
-
-Let's take a quick look at how they work.
-
-### Sales-led Growth 🤝
-Sales involves actively going after potential customers and getting them on board with your product or service. This can be done in a variety of ways, from cold calls to leveraging leads. 
-
-Essentially, the assumption is that there are people out there who are willing to pay you for what you do, so you need to do your best to find them and get them to pay you.
-
-### Marketing-led Growth 📈
-While often paired up with Sales, and sometimes even used interchangeably, Marketing is, in some ways, the opposite of Sales. 
-
-A Sales strategy generally involves going out and finding the customer, while Marketing is, in many ways, about making sure the customer comes to you.
-
-This involves a wide variety of aspects, from branding, to social media, and, of course, ads. The goal here is that your business is seen. But not just that - it's also about being seen by the right people and seen in a positive light.
-
-With that sorted, the objective is that the customer will come to you, so you won't need to go after them.
-
-### It's Not Black or White
-Sales and Marketing are not mutually exclusive. In fact, they are often paired together. Marketing, for example, is a broad field and is essential for any business. 
-
-Sales, on the other hand, doesn't necessarily need to be an aggressive outbound process. It may also consist of having people trained and ready to close a deal one the customer engages with you via an inbound request. 
-
-Nevertheless, the point is that your company does not need to solely focus on one approach or the other, but it is good to know which strategy you expect to lead your actual growth.
-
-To understand these traditional growth strategies, it may be useful to think of a funnel:
+Traditionally, there are two ways to do this: sales and marketing. They are not mutually exclusive, but one strategy or the other generally takes the lead in generating growth.  To understand them, it's helpful to refer to a funnel:
 
 ![HogFlix Example Funnel](../images/hogflix-funnel.png)
 
-With Marketing, the goal is to increase the number of people going through the funnel, whereas Sales should improve the conversion rates from one step to another. 
+### Marketing-led Growth 📈
+The goal of marketing is to increase the number of people going through the funnel. 
+
+The idea is to make your business be seen. But not just that - it's also about being seen by the right people and seen in a positive light.
+
+This involves a wide variety of aspects, from branding, to social media, and, of course, ads. If this is done well, the customer should come to you, so you won't need to go after them.
+
+### Sales-led Growth 🤝
+Sales, on the other hand, is about improving the conversion between steps of the funnel. 
+
+In some ways, it is the opposite of Marketing, as you will often go after the customer, rather than try to make them come to you. This can be done in a variety of ways, from cold calls to leveraging leads. 
+
+Essentially, the assumption is that there are people out there who are willing to pay for your product, so you need to do your best to find them and get them to pay you.
 
 ## The Underrated Alternative
 
