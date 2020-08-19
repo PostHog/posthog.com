@@ -105,7 +105,7 @@ Want to set it up differently? [Raise an issue](https://github.com/PostHog/posth
 
 ### Will this scale?
 
-Yes. Check out [Scaling PostHog](/docs/scaling-posthog) for more information on this.
+Yes. Check out [Scaling PostHog](docs/configuring-posthog/scaling-posthog) for more information on this.
 
 ### Is there an enterprise offering?
 
