@@ -69,10 +69,10 @@ class Layout extends Component {
                   >
                     <html lang="en" />
                   </Helmet>
-                  <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
+                  <AntdLayout theme="light">
                     {!screenIsSmall && onPostPage && (
                       !sidebarHide && !isBlogPage && (
-                      <AntdLayout.Sider width="300" theme="light" style={{backgroundColor: '#F9F9F9'}} >
+                      <AntdLayout.Sider width="300" theme="light" className="sidebar">
                         <ResponsiveSidebar style={{border: 'none'}}/>
                         </AntdLayout.Sider>
                       ))}
@@ -151,7 +151,7 @@ class Layout extends Component {
                             <AntdLayout.Sider
                               theme="light"
                               style={{ height: '100%', backgroundColor: '#fff' }}
-                              className="rightBar"
+                              className="sidebarRight"
                               
                             >
                               <ResponsiveAnchor />
@@ -177,7 +177,7 @@ class Layout extends Component {
                             <AntdLayout.Sider
                               theme="light"
                               style={{ height: '100%', backgroundColor: '#fff' }}
-                              className="rightBar"
+                              className="sidebarRight"
                               
                             >
                               <ResponsiveAnchor />

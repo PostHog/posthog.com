@@ -633,12 +633,6 @@ pre tt:before,
 pre tt:after {
   content: "";
 }
-/* @media only screen and (max-width: 480px) {
-  html {
-    font-size: 100%;
-  }
-} */
-
 
 /* CUSTOM */
 
@@ -714,12 +708,59 @@ header {
   height: 100%;
 }
 
-aside {
-  background-color: #F9F9F9;
-  border-right: 8px solid #C4C4C4;
+.ant-menu, .ant-menu-submenu, .ant-menu-item {
+  background: initial!important;
+  border: initial!important;
+  color: initial!important;
 }
 
-.ant-layout-sider-children ul {
+.ant-menu-submenu-title span {
+  font-weight: 500!important;
+}
+
+aside.sidebar {
+  background: #F0F0F0;
+  font-weight: 500!important;
+}
+
+.ant-menu-item > a {
+  color: #000000!important;
+}
+
+.ant-menu-submenu-active > div {
+  color: #1D4AFF!important;
+}
+
+.ant-menu-item-active > a {
+  color: #1D4AFF!important;
+}
+
+.ant-menu-submenu-active i::before, .ant-menu-submenu-active i::after {
+  background: #1D4AFF!important;
+}
+
+li.ant-menu-submenu-selected > div {
+  color: #1D4AFF!important;
+}
+
+.sidebarSubmenu > .ant-menu-submenu-selected div {
+  background-color: green!important;
+}
+
+.ant-menu-item::after {
+  border-right: 3px solid #1D4AFF!important;
+}
+
+.ant-menu-item-selected a {
+  color: #1D4AFF!important;
+}
+
+aside.sidebarRight {
+  background: #fff;
+  border: none;
+}
+
+/*.ant-layout-sider-children ul {
   background-color: #F9F9F9 !important;
   border: none;
 }
@@ -754,13 +795,7 @@ ul.ant-menu-sub {
   background: #1D4AFF!important;
 }
 
-.submenuSelected i::after{
-  background: #454545!important;
-}
 
-.ant-menu-submenu-active i::after{
-  background: #1D4AFF!important;
-}
 
 .ant-menu-submenu-selected.submenuSelected span {
   color: #1D4AFF!important;
@@ -781,7 +816,7 @@ ul.ant-menu-sub {
 
 .keySelected.ant-menu-item-selected::after {
   border-right-color: #F54E00!important;
-}
+}*/
 
 .rightBar {
   border: none;
@@ -791,16 +826,12 @@ ul.ant-menu-sub {
   background-color: #fff
 }
 
-a.ant-anchor-link-title:hover {
-  color: #1D4AFF;
+a.ant-anchor-link-title:hover, .ant-anchor-link-active a {
+  color: #1D4AFF!important;
 }
 
-.ant-anchor-link-active a {
-  color: #1D4AFF !important;
-}
-
-.ant-anchor-ink span {
-  border-color: #1D4AFF !important;
+span.ant-anchor-ink-ball {
+  border-color: #1D4AFF;
 }
 
 .footer-universal a {
