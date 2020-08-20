@@ -73,16 +73,15 @@ class Layout extends Component {
                     {!screenIsSmall && onPostPage && (
                       !sidebarHide && !isBlogPage && (
                       <AntdLayout.Sider width="300" theme="light" className="sidebar">
-                        <ResponsiveSidebar style={{border: 'none'}}/>
+                        <ResponsiveSidebar/>
                         </AntdLayout.Sider>
                       ))}
 
                       <AntdLayout theme="light">
                         <AntdLayout.Header
-                        className="menuHeader"
+                        className={"menuHeader " + (isBlogPage ? ("blog-post") : (" "))}
                         style={{ 
                           backgroundColor: screenIsSmall && onPostPage ? '#F9F9F9' : '#fff', 
-                          backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
                           backgroundSize: 'cover',
                           height: !screenIsSmall && isBlogPage && 400,
@@ -159,8 +158,8 @@ class Layout extends Component {
                           )}
                         </AntdLayout>
                         ) : (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
-                          <AntdLayout.Content style={{ minHeight: 280, padding: '3rem 0% 0 10%', width: '100%' }}>
+                        <AntdLayout theme="light">
+                          <AntdLayout.Content>
                             <Container
                               sidebarDocked={!screenIsSmall}
                               onPostPage={onPostPage}
@@ -176,7 +175,6 @@ class Layout extends Component {
                           {!anchorHide && (
                             <AntdLayout.Sider
                               theme="light"
-                              style={{ height: '100%', backgroundColor: '#fff' }}
                               className="sidebarRight"
                               
                             >
@@ -185,14 +183,9 @@ class Layout extends Component {
                           )}
                         </AntdLayout>
                         )) : (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
+                        <AntdLayout theme="light">
                           <AntdLayout.Content
-                            style={{
-                              position: 'relative',
-                              left: 0,
-                              right: 0,
-                              marginTop: 50,
-                            }}
+
                           >
                             <Container
                               sidebarDocked={!screenIsSmall}
