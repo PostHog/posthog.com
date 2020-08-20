@@ -245,9 +245,9 @@ h1 {
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 2.66667rem;
+  font-size: 64px;
   line-height: 1.5;
-  font-family: 'Gosha Sans';
+  font-family: 'Gosha Sans', Helvetica, Arial, sans-serif; ;
 }
 
 h2 {
@@ -260,11 +260,11 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300!important;
+  font-weight: bold!important;
   text-rendering: optimizeLegibility;
-  font-size: 2rem;
+  font-size: 48px;
   line-height: 1.5;
-  font-family: 'Helvetica Neue';
+  font-family: 'Gosha sans', Helvetica, Arial, sans-serif; ;
   font-style: normal;
 }
 h3 {
@@ -277,9 +277,9 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300!important;
+  font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 1.25rem;
+  font-size: 36px;
   line-height: 1.5;
   font-family: 'Helvetica Neue';
   font-style: normal;
@@ -294,9 +294,9 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300;
+  font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 1rem;
+  font-size: 30px;
   line-height: 1.5;
   font-family: 'Helvetica Neue';
   font-style: normal;
@@ -309,9 +309,9 @@ h5 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 24px;
   color: inherit;
-  font-weight: 300;
+  font-weight: normal;
   text-rendering: optimizeLegibility;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -329,7 +329,7 @@ h6 {
   color: inherit;
   font-weight: 300;
   text-rendering: optimizeLegibility;
-  font-size: 0.78405rem;
+  font-size: 20px;
   line-height: 1.5;
   font-family: 'Helvetica Neue'
 }
@@ -389,7 +389,7 @@ dd {
   margin-bottom: 1.45rem;
 }
 p {
-  font-size: .85rem;
+  font-size: 16px;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -946,7 +946,7 @@ table th {
 
 #mc_embed_signup {
   clear:left; 
-  font:14px Helvetica ,Arial,sans-serif; 
+  font:14px Helvetica, Arial, sans-serif; 
   width:100%;
 }
 
