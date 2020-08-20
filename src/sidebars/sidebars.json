@@ -16,6 +16,7 @@
     "entry":"Configuring PostHog",
     "name":"Configuring PostHog",
     "items": [
+      "docs/configuring-posthog",
       "docs/configuring-posthog/environment-variables",
       "docs/configuring-posthog/upgrading-posthog",
       "docs/configuring-posthog/scaling-posthog",

@@ -18,7 +18,6 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 
 ## **In This Section:**
 
-
 - [Deploying to Heroku (easiest!)](/docs/deployment/deploy-heroku)
 - [Deploying to AWS](/docs/deployment/deploy-aws)
 - [Deploying to Digital Ocean](/docs/deployment/deploy-digital-ocean)
@@ -28,10 +27,15 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
 - [Deploying from Source](/docs/deployment/deploy-source)
 - [Deploying to Linode](/docs/deployment/deploy-linode)
+- [Snippet Installation](/docs/deployment/snippet-installation)
+- [Hosting Costs](/docs/deployment/hosting-costs)
+
+
+## **You May Also Be Interested In:**
+
+- [Environment Variables](/docs/configuring-posthog/environment-variables)
 - [Upgrading PostHog](/docs/configuring-posthog/upgrading-posthog)
 - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 - [Running Behind Proxy](/docs/configuring-posthog/running-behind-proxy)
-- [Hosting Costs](/docs/deployment/hosting-costs)
 - [SMTP Credentials](/docs/configuring-posthog/smtp-credentials)
-- [Snippet Installation](/docs/deployment/snippet-installation)

@@ -5,8 +5,11 @@ showTitle: true
 ---
 
 
-When using PostHog, there are various environment variables you can set to configure your instance. Here's a comprehensive list of them:
+When using PostHog, there are various environment variables you can set to configure your instance. Below is a comprehensive list of all of them.
 
+Rows with a missing 'Default Value' usually default to an empty string. This is different from `None`.
+
+Some variables here are default Django variables. This [Django Docs page](https://docs.djangoproject.com/en/2.2/ref/settings/) has more information about them.
 
 <span class="table-borders">
 
@@ -18,6 +21,7 @@ When using PostHog, there are various environment variables you can set to confi
 | `SITE_URL`                 | URL of your PostHog instance.                                                                     | `http://localhost:8000`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, unspecified otherwise. 
 | `SENTRY_DSN`               | Used by Sentry to determine where to send events to. Only used in production.                      | `None`
+| `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
 | `IS_BEHIND_PROXY`          | Specifies if PostHog is running behind a proxy like Apache or NGINX.                              | `False`
 | `ALLOWED_IP_BLOCKS`        | Specifies IP blocks allowed to connect to the PostHog instance.                                  |  
@@ -27,11 +31,24 @@ When using PostHog, there are various environment variables you can set to confi
 | `STATSD_HOST`              | Host of a running StatsD daemon (e.g. 127.0.0.1)                                                  | `None`
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
 | `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | `None`
+| `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing sign up with GitHub                                                       | 
+| `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing sign up with GitHub                                                     | 
+| `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing sign up with GitLab                                                        | 
+| `SOCIAL_AUTH_GITLAB_SECRET`| GitLab secret for allowing sign up with GitLab                                                     | 
+| `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for GitLab authentication. Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
+| `DATABASE_URL`| URL of your PostgreSQL database instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, unspecified otherwise. 
+| `REDIS_URL`| URL of your Redis instance.  | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, unspecified otherwise. 
+| `EMAIL_HOST` | Used for configuring SMTP. Host of your email server.                                                           | `None`
+| `EMAIL_PORT` | Used for configuring SMTP. Port used by your email server in the specified host.                                | `None`
+| `EMAIL_HOST_USER` | Used for configuring SMTP. Username used by the email server.                                              | `None`
+| `EMAIL_HOST_PASSWORD` | Used for configuring SMTP. Password for the specified username used by the email server.               | `None`
+| `EMAIL_USE_TLS` | Used for configuring SMTP. Determines if TLS should be used for the email service. It is recommended that either this or `EMAIL_USE_SSL` be set to `True`.          | `False`
+| `EMAIL_USE_TLS` | Used for configuring SMTP. Determines if SSL should be used for the email service. It is recommended that either this or `EMAIL_USE_TLS` be set to `True`.          | `False`
+| `DEFAULT_FROM_EMAIL` | Determines the email address that should be used to send emails.                                        | `tim@posthog.com`
 
 
 
 
-| `ASYNC_EVENT_ACTION_MAPPING`  |               | `False`
 
 
 
