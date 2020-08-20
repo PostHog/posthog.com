@@ -39,7 +39,7 @@
 
 .topPageWrapper {
     background-image: url('../images/landing-page-background.svg');
-    background-size: 307px 545.78px;
+    background-size: 600px 600px;
     background-repeat: repeat;
     background-position: 0 center;
 }
@@ -563,10 +563,10 @@ header {
 }
 
 .featureFlagsWrapper {
-    background-image: url('../images/landing-page-background-small.svg')!important;
-    background-size: cover;
+    background-image: url('../images/landing-page-background.svg')!important;
+    background-size: 600px 600px;
     background-position: top center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     height: 600px;
     width: 100vw;
 }
@@ -730,10 +730,10 @@ header {
 }
 
 .installNowWrapper {
-    background-image: url('../images/landing-page-background-small.svg');
-    background-size: cover;
+    background-image: url('../images/landing-page-background.svg');
+    background-size: 600px 600px;
     background-position: top center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     padding-top: 100px;
     height: 620px;
     width: 100vw;
