@@ -735,16 +735,13 @@ aside.sidebar {
   color: #1D4AFF!important;
 }
 
-.ant-menu-submenu-active i::before, .ant-menu-submenu-active i::after {
-  background: #1D4AFF!important;
+li.ant-menu-submenu-selected > .ant-menu-submenu-active i::before, 
+li.ant-menu-submenu-selected > .ant-menu-submenu-active i::after {
+  color: #1D4AFF!important;
 }
 
 li.ant-menu-submenu-selected > div {
   color: #1D4AFF!important;
-}
-
-.sidebarSubmenu > .ant-menu-submenu-selected div {
-  background-color: green!important;
 }
 
 .ant-menu-item::after {
@@ -759,64 +756,6 @@ aside.sidebarRight {
   background: #fff;
   border: none;
 }
-
-/*.ant-layout-sider-children ul {
-  background-color: #F9F9F9 !important;
-  border: none;
-}
-
-ul.ant-menu-sub {
-  background-color: #F9F9F9 !important;
-  border: none;
-}
-
-.headerItems li.ant-menu-item-selected {
-  border-bottom: 2px solid #1D4AFF!important;
-}
-
-.headerItems li.ant-menu-item-active {
-  border-bottom: 2px solid #1D4AFF!important;
-}
-
-.ant-menu-submenu-title:hover {
-  color: #1D4AFF!important;
-  font-weight: lighter!important;
-}
-
-.ant-menu-inline ul {
-  background-color: #F9F9F9 !important;
-}
-
-.submenuSelected i::before{
-  background: #454545!important;
-}
-
-.ant-menu-submenu-active i::before{
-  background: #1D4AFF!important;
-}
-
-
-
-.ant-menu-submenu-selected.submenuSelected span {
-  color: #1D4AFF!important;
-  font-weight: bolder!important;
-}
-
-.ant-menu-item a:hover {
-  color: #1D4AFF!important;
-}
-
-.ant-menu .ant-menu-item-selected.keySelected {
-  background-color: #ECEFF1!important;
-}
-
-.ant-menu .ant-menu-item-selected.keySelected a {
-  color: #1D4AFF;
-}
-
-.keySelected.ant-menu-item-selected::after {
-  border-right-color: #F54E00!important;
-}*/
 
 .rightBar {
   border: none;
