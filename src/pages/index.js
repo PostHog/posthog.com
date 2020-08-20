@@ -42,63 +42,65 @@ function IndexPage() {
           title="PostHog - open source product analytics"
           description="Understand your users. Build a better product"
         />
-        <Row>
-          <Col span={22} offset={2}>
-            <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>
-          </Col>
-        </Row>
-        <Row className="row1">
-          <Col span={24}>
-          <br className="hiddenBreak"/>
-            <div className="row1Col1">
-              <p>Join 1,000 companies <br className="hiddenBreak"/> using PostHog.</p>     
-              <br/>
-              <a href="/trial">
-                <Button type="primary" size="large" icon="right-circle" className="getStarted" >
-                  Get Started for Free
-                </Button>
-              </a>
-              <a href="/request_demo">
-                <Button type="secondary" size="large" className="requestDemo">
-                  Request Demo
-                </Button>
-              </a>
-            </div>
-            <div className="row1Col2"/>
-          </Col>
-        </Row>
-        <div className="understandUsers">
-          <h3 align="top">
-            Understand your users.
-            <br />
-            Build a better product.
-          </h3>
-          <hr className="blueLine"/>
-          <p className="understandUsersText">Capture, store and visualize your product data all on your own infrastructure.</p>
-          <p className="understandUsersText">Eliminate the need for a complex pipeline, data lake and visualization tools.</p>
-        </div>
+        <div className="topPageWrapper">
+          <Row>
+            <Col span={22} offset={2}>
+              <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>
+            </Col>
+          </Row>
+          <Row className="row1">
+            <Col span={24}>
+            <br className="hiddenBreak"/>
+              <div className="row1Col1">
+                <p>Join 1,000 companies <br className="hiddenBreak"/> using PostHog.</p>     
+                <br/>
+                <a href="/trial">
+                  <Button type="primary" size="large" icon="right-circle" className="getStarted" >
+                    Get Started for Free
+                  </Button>
+                </a>
+                <a href="/request_demo">
+                  <Button type="secondary" size="large" className="requestDemo">
+                    Request Demo
+                  </Button>
+                </a>
+              </div>
+              <div className="row1Col2"/>
+            </Col>
+          </Row>
+          <div className="understandUsers">
+            <h3 align="top">
+              Understand your users.
+              <br />
+              Build a better product.
+            </h3>
+            <hr className="blueLine"/>
+            <p className="understandUsersText">Capture, store and visualize your product data all on your own infrastructure.</p>
+            <p className="understandUsersText">Eliminate the need for a complex pipeline, data lake and visualization tools.</p>
+          </div>
 
-        <Row className="openSource">
-          <Col span={20} offset={2}>
-            <h2 className="gosha">Open source product analytics</h2>
-          </Col>
-        </Row>
+          <Row className="openSource">
+            <Col span={20} offset={2}>
+              <h2 className="gosha">Open source product analytics</h2>
+            </Col>
+          </Row>
 
-        {/*01 - It all starts with event autocapture*/}
-        <div className="autocaptureWrapper wrapper">
-          <div className="autocaptureImg"/>
-            <Row justify="space-between" className="autocaptureRow">
-              <Col span={3} offset={13}>
-                <h1 className="yellowText">01</h1>
-              </Col>
-              <Col span={7}>
-                <h2 className="gosha">It all starts with event autocapture</h2>
-                <br className="revHiddenBreak"/>
-                <hr className="yellowLine"/>
-                <br className="revHiddenBreak"/>
-                <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
-              </Col>
-            </Row>
+          {/*01 - It all starts with event autocapture*/}
+          <div className="autocaptureWrapper wrapper">
+            <div className="autocaptureImg"/>
+              <Row justify="space-between" className="autocaptureRow">
+                <Col span={3} offset={13}>
+                  <h1 className="yellowText">01</h1>
+                </Col>
+                <Col span={7}>
+                  <h2 className="gosha">It all starts with event autocapture</h2>
+                  <br className="revHiddenBreak"/>
+                  <hr className="yellowLine"/>
+                  <br className="revHiddenBreak"/>
+                  <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
+                </Col>
+              </Row>
+          </div>
         </div>
 
         <div className="trafficVisualWrapper wrapper" style={{backgroundImage: `url(${background23})`}}>

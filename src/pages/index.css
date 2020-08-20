@@ -9,13 +9,10 @@
 
 .indexContainer {
     top: 0;
-    background-image: url('../images/landing-page-background.svg');
     margin: 0;
     height: 590px;
     max-height: 650px;
     width: 100vw!important;
-    background-size: cover;
-    background-position: 0 center;
 }
 
 @media screen and (min-width: 1920px) {
@@ -26,8 +23,8 @@
 @media screen and (max-width: 1440px) {
     .indexContainer {
         width: 100vw!important;
-        background-size: 1440px auto;
-        object-fit: contain;
+        background-size: 543px 410.27px;
+        background-repeat: repeat;
         background-position: top center;
     }
 }
@@ -38,6 +35,13 @@
         background-size: cover;
         max-height: 460px;
     }
+}
+
+.topPageWrapper {
+    background-image: url('../images/landing-page-background.svg');
+    background-size: 307px 545.78px;
+    background-repeat: repeat;
+    background-position: 0 center;
 }
 
 .ant-row {
@@ -316,10 +320,6 @@ header {
 }
 
 .autocaptureWrapper {
-    background-image: url('../images/landing-page-background-small.svg')!important;
-    background-size: cover;
-    background-position: top center;
-    background-repeat: no-repeat;
     position: relative;
     height: 622px;
     width: 100vw; 
