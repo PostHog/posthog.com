@@ -186,4 +186,4 @@ Ultimately, despite not always being the longer route (see: Facebook), Produt-Le
 
 And that's what we're doing at PostHog. 
 
-[Wanna help?](/docs/contributing)
+[Want to help?](/docs/contributing)
