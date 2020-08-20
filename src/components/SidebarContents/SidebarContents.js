@@ -145,13 +145,13 @@ class SidebarContents extends Component {
                 if (item.path) {
                   return (
                     <Menu.Item key={item.key} className="keySelected">
-                      <Link className="keySelectedLink"to={item.path} onClick={this.onSetSidebarOpen} >{item.title}</Link>
+                      <Link className="keySelectedLink"to={item.path} onClick={this.onSetSidebarOpen} style={{float: 'left'}}>{item.title}</Link>
                     </Menu.Item>
                   )
                 }
                 return (
                   <SubMenu 
-                    className="sidebarSubmenu"
+                    className="submenuSelected"
                     key={item.key}
                     title={<span style={{fontWeight:750}}
                   >{item.title}</span>}>
@@ -163,12 +163,12 @@ class SidebarContents extends Component {
           }
           return (
             <Menu 
-              className="sidebar"
               mode="inline"
               defaultOpenKeys={defaultOpenKeys}
               selectedKeys={[selectedKey]}
               inlineIndent={12}
               onOpenChange={this.onChangeExpandedKeys}
+              style={{height: '100%', backgroundColor: '#F9F9F9'}}
               theme='light'
             >
               {loop(tree)}
