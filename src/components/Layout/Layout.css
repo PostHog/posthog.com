@@ -721,12 +721,12 @@ header {
 }
 
 .ant-menu-submenu-title span {
-  font-weight: 500!important;
+  font-weight: 400!important;
 }
 
 aside.sidebar {
   background: #F0F0F0;
-  font-weight: 500!important;
+  font-weight: 400!important;
 }
 
 .ant-menu-item > a {
@@ -741,9 +741,19 @@ aside.sidebar {
   color: #1D4AFF!important;
 }
 
+.ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after {
+  background: #1D4AFF!important;
+}
+
 li.ant-menu-submenu-selected > .ant-menu-submenu-active i::before, 
 li.ant-menu-submenu-selected > .ant-menu-submenu-active i::after {
-  color: #1D4AFF!important;
+  background: #1D4AFF!important;
+}
+
+.ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::before, 
+.ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::after {
+  background: #1D4AFF!important;
 }
 
 li.ant-menu-submenu-selected > div {
