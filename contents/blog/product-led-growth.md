@@ -186,4 +186,4 @@ Ultimately, despite not always being the longer route (see: Facebook), Produt-Le
 
 And that's what we're doing at PostHog. 
 
-[Want to help?](/docs/contributing)
+Like what we're building? We'd appreciate a star on our [GitHub repo](https://github.com/PostHog/posthog).
