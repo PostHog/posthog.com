@@ -55,21 +55,21 @@ sudo apt-get update && sudo apt-get install git
 ```bash
 git clone https://github.com/posthog/posthog.git && cd posthog
 ```
-1. You'll then need to generate a `SECRET_KEY` that is unique to your instance. 
+1. If you want to set a specific `SECRET_KEY` (for example if you are migrating from an older version of PostHog) follow these instructions.
 
     **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deployment/securing-posthog).**
 
-    First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+    Open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
 
-    Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
-
-    Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+    Substitute `"<randomly generated secret key>"` for your desired key.
 
     This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
 
     ```
     SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
     ```
+
+1. Otherwise a secret key will be automatically generated. You should leave `SECRET_KEY` unset in `docker-compose.yml` if you do not wish to use a specific secret key.
 
 1. Then, to run PostHog, do:
 ```bash

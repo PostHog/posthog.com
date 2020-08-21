@@ -47,25 +47,23 @@ For more information on Django security features, you can check out [Django's Of
 
 ## Secret Key
 
-Secret keys are used to encrypt cookies and password reset emails, [among other things](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key). To generate a secret key, run:
+Secret keys are used to encrypt cookies and password reset emails, [among other things](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key).
 
-```bash
-openssl rand -hex 32
-```
+PostHog will automatically generate a secret key into `secret_key.txt` on first boot.
 
 ### Secret Key with Docker Compose
 
-When using Docker Compose, you will need to manually update the `docker-compose.yml` file with a secret key that is unique to your instance.
+When using Docker Compose, you may optionally set the `SECRET_KEY` environment variable. Otherwise the `SECRET_KEY` be automatically generated and set. You may want to do this if migrating to a newer version of PostHog to preserve an old `SECRET_KEY`.
 
-**⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deploymentsecuring-posthog).**
+The `SECRET_KEY` environment variable **always** overrides the secret key generated when PostHog is first run. It is recommended to leave `SECRET_KEY` unset unless absolutely necessary.
 
-#### Step-By-Step
+**⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deployment/securing-posthog).**
 
-First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+#### Step-By-Step to use existing key
 
-Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
+1. Open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
 
-Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+1. Substitute `"<randomly generated secret key>"` for the key you wish to use.
 
 This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
 ```
