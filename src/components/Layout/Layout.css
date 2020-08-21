@@ -1045,8 +1045,6 @@ table th {
   font-size: 20px;
 }
 
-.github-star-btn {
-  float: 'none'; 
-  margin: 0 auto;
-  text-align: center;
+#star-repo-btn {
+  margin-top: 1%;
 }

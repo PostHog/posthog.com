@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import { Row, Col } from 'antd'
-import StarRepoButton from '../StarRepoButton'
 
 const FooterListItem = props => (
   <div className="footer-li">
@@ -81,11 +80,6 @@ class Footer extends Component {
             </Col>
           </Col>
           <Col xs={0} sm={0} md={0} lg={4} xl={4} className="gutter-row">
-          </Col>
-        </Row>
-        <Row>
-          <Col className='github-star-btn'>
-            <StarRepoButton></StarRepoButton>
           </Col>
         </Row>
       </div>
