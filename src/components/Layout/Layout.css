@@ -736,6 +736,10 @@ li > .ant-menu-submenu-title span{
   font-weight: 400!important;
 }
 
+.ant-menu-submenu-selected > .ant-menu-submenu-title span {
+  font-weight: 600!important;
+}
+
 aside.sidebar {
   background: #F0F0F0;
   font-weight: 400!important;
