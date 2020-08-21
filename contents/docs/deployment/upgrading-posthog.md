@@ -18,7 +18,6 @@ Follow these tutorials for upgrading PostHog if you've deployed with any of the 
 - [Heroku](/docs/deployment/deploy-heroku#upgrading-posthog-on-heroku)
 - [AWS Fargate](/docs/deployment/deploy-aws#updating-aws-fargate)
 - [Docker](/docs/deployment/deploy-docker#upgrading-posthog-with-docker)
-- [Linode](/docs/deployment/deploy-linode#updating-your-posthog)
 
 ## Upgrading from before 1.0.11?
 

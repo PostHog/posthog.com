@@ -27,7 +27,6 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [Deploying with Docker](/docs/deployment/deploy-docker)
 - [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
 - [Deploying from Source](/docs/deployment/deploy-source)
-- [Deploying to Linode](/docs/deployment/deploy-linode)
 - [Upgrading PostHog](/docs/deployment/upgrading-posthog)
 - [Scaling PostHog](/docs/deployment/scaling-posthog)
 - [Securing PostHog](/docs/deployment/securing-posthog)

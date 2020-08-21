@@ -99,7 +99,7 @@ There are three options:
 
 ### Can I get it live with my favorite hosting method?
 
-We provide 1-click deployments with Heroku, AWS, and Linode, as well as have tutorials for how to deploy from source, using Docker, and using Kubernetes. Furthermore, we offer detailed deployment instructions for how to deploy on all the main cloud providers. See our [Deployment page](/docs/deployment) for more information.
+We provide 1-click deployments with Heroku and AWS, as well as have tutorials for how to deploy from source, using Docker, and using Kubernetes. Furthermore, we offer detailed deployment instructions for how to deploy on all the main cloud providers. See our [Deployment page](/docs/deployment) for more information.
 
 Want to set it up differently? [Raise an issue](https://github.com/PostHog/posthog/issues) in the repo.
 

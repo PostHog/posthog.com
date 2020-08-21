@@ -32,7 +32,6 @@
       "docs/deployment/deploy-docker",
       "docs/deployment/deploy-gcs",
       "docs/deployment/deploy-kubernetes",
-      "docs/deployment/deploy-linode",
       "docs/deployment/deploy-source",
       "docs/deployment/upgrading-posthog",
       "docs/deployment/scaling-posthog",
