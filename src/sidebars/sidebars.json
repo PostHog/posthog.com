@@ -4,11 +4,25 @@
     "name": "Docs",
     "child_entries":[
       "Deployment",
+      "Configuring PostHog",
       "Integrations",
       "Features",
       "API",
       "Contributing",
       "Architecture"
+    ]
+  },
+  {
+    "entry":"Configuring PostHog",
+    "name":"Configuring PostHog",
+    "items": [
+      "docs/configuring-posthog",
+      "docs/configuring-posthog/environment-variables",
+      "docs/configuring-posthog/upgrading-posthog",
+      "docs/configuring-posthog/scaling-posthog",
+      "docs/configuring-posthog/securing-posthog",
+      "docs/configuring-posthog/running-behind-proxy",
+      "docs/configuring-posthog/smtp-credentials"
     ]
   },
   {
@@ -34,13 +48,8 @@
       "docs/deployment/deploy-kubernetes",
       "docs/deployment/deploy-linode",
       "docs/deployment/deploy-source",
-      "docs/deployment/upgrading-posthog",
-      "docs/deployment/scaling-posthog",
-      "docs/deployment/securing-posthog",
-      "docs/deployment/running-behind-proxy",
-      "docs/deployment/hosting-costs",
-      "docs/deployment/smtp-credentials",
-      "docs/deployment/snippet-installation"
+      "docs/deployment/snippet-installation",
+      "docs/deployment/hosting-costs"
     ]
   },
   {

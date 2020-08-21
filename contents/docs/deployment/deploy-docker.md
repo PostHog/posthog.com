@@ -41,7 +41,7 @@ git clone https://github.com/posthog/posthog.git && cd posthog
 ```
 1. Generate a `SECRET_KEY` that is unique to your instance. 
 
-    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deployment/securing-posthog).**
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/configuring-posthog/securing-posthog).**
 
     First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
 
@@ -95,7 +95,7 @@ docker run -t -i --rm --publish 8000:8000 -v postgres:/var/lib/postgresql postho
 
 Upgrading PostHog with Docker depends on how you've deployed with Docker.
 
-**Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/deployment/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
+**Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/configuring-posthog/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
 
 - For docker-compose, run `docker-compose pull web`
 
