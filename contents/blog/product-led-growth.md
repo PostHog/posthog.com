@@ -59,9 +59,13 @@ However, a new approach has been gaining traction in the past few years, called 
 ### Let your product do the talking
 With Product-led Growth, the idea is that rather than bringing users through an active sales team or aggressive marketing campaigns, you just focus on building your product - and ensure you make it great.
 
-The concept is based on the assumption that if you build something that is useful and works well, the users will eventually come to you as result.
+The concept is based on the assumption that if you build something that is useful and works well, the users will eventually come to you as result... with a little push, of course.
 
 As such, your primary objective should be to make something truly amazing, rather than portray your product as amazing (which is what great Sales and Marketing people can do).
+
+Now, following a PLG approach does not substitute having a Sales or Marketing team. It just means growth is _led_ by the product, and the other teams in the organization operate in alignment with this methodology. 
+
+Additionally, operating a B2B company without a Sales team does become impractical at a large scale. We would know, since our founders used to close software sales deals in the seven figures.
 
 ## The Key is in the DNA
 
@@ -71,7 +75,7 @@ To truly succeed as a business that drives growth primarily through its product,
 
 While Sales and Marketing can often work well as segregated teams that draw from the product but operate independently in practice, focusing on building a product is an organization-wide effort.
 
-As PLGC put it, different teams often operate in different wavelengths, but with Product-Led Growth, you need everyone to converge into one single wavelength: user experience. 
+As [PLGC](https://www.productled.org/foundations/what-is-product-led-growth) put it, different teams often operate in different wavelengths, but with Product-Led Growth, you need everyone to converge into one single wavelength: user experience. 
 
 At PostHog, we follow a Product-led Growth approach. And we'll tell you, this has implications for all areas of the company:
 
