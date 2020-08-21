@@ -9,8 +9,8 @@ const FooterListItem = props => (
         <Link to={props.to}>{props.children}</Link>
       </Row>
     ) : (
-      props.children
-    )}
+        props.children
+      )}
   </div>
 )
 
@@ -18,7 +18,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="footer-universal">
-        <Row gutter={[24, 8]} justify="space-around" style={{margin: 0}}>
+        <Row gutter={[24, 8]} justify="space-around" style={{ margin: 0 }}>
           <Col xs={0} sm={0} md={0} lg={6} xl={6} className="gutter-row">
           </Col>
           <Col xs={24} sm={24} md={24} lg={16} xl={16} className="gutter-row">
