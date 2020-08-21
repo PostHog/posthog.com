@@ -746,7 +746,7 @@ aside.sidebar {
 }
 
 .ant-menu-item > a {
-  color: #000000!important;
+  color: #000000;
 }
 
 .ant-menu-submenu-active > div {
@@ -1045,6 +1045,10 @@ table th {
   font-size: 20px;
 }
 
-#star-repo-btn {
-  margin-top: 1%;
+.star-repo-btn {
+  margin-top: 1% !important;
+}
+
+.login-btn {
+  color: #1D4AFF !important;
 }

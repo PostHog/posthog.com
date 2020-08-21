@@ -51,8 +51,7 @@ class Menu extends Component {
                   {menuItems.reverse().map(item => {
                     return item.name === "star-repo" ? (
                       <AntMenu.Item
-                        className="headerKey"
-                        id="star-repo-btn"
+                        className="headerKey star-repo-btn"
                         style={{
                           marginLeft: '2em',
                           float: 'right',
@@ -64,6 +63,7 @@ class Menu extends Component {
                       </AntMenu.Item>
                     ) : (
                         <AntMenu.Item
+/*                           className={"headerKey" + (item.name === "Login" ? " login-btn" : "")} */   
                           className="headerKey"
                           style={{
                             marginLeft: '2em',
@@ -73,7 +73,7 @@ class Menu extends Component {
                           key={item.link || item.a}
                         >
                           {item.a ? (
-                            <a href={item.a} style={{ color: isBlogPage ? '#FFFFFF' : '#595959' }}>
+                            <a href={item.a} className={item.name === "Login" ? " login-btn" : ""} style={{ color: isBlogPage ? '#FFFFFF' : '#000000' }}>
                               {item.name}
                             </a>
                           ) : (
