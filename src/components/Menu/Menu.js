@@ -58,6 +58,7 @@ class Menu extends Component {
                           float: 'right',
                           marginBottom: 'calc(1.45rem / 2)'
                         }}
+                        key={item.name}
                       >
                         <StarRepoButton></StarRepoButton>
                       </AntMenu.Item>
