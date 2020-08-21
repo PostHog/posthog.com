@@ -720,6 +720,18 @@ header {
   color: initial!important;
 }
 
+li > .ant-menu-submenu-title span{
+  font-size: 20px;
+}
+
+.ant-menu-submenu a {
+  font-size: 16px;
+}
+
+.ant-menu-submenu ul > li .ant-menu-submenu-title span {
+  font-size: 16px;
+}
+
 .ant-menu-submenu-title span {
   font-weight: 400!important;
 }
