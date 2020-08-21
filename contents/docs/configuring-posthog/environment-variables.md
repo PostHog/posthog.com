@@ -15,12 +15,12 @@ Some variables here are default Django variables. This [Django Docs page](https:
 
 | Variable                   | Description                           | Default Value         |
 | :------------------------: | :------------------------------------ | :-------------------: |
-| `DEBUG`                    | Determines if PostHog should run in [DEBUG mode](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-DEBUG). DEBUG is used for testing, never in production.   | `False`
-| `SECRET_KEY`               | [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, passwords, hashes, etc. Required by PostHog | `<randomly generated secret key>`
-| `SECURE_COOKIES`           | Determines if Django should use [secure cookies](https://docs.djangoproject.com/en/2.2/ref/settings/#session-cookie-secure). Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode. `True` otherwise
+| `DEBUG`                    | Determines if PostHog should run in [DEBUG mode](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-DEBUG). You can set this to a truthy value when developing, but disable this in production!  | `False`
+| `SECRET_KEY`               | [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, sessions, hashes, etc. Custom value required in production. | `<randomly generated secret key>`
+| `SECURE_COOKIES`           | Determines if Django should use [secure cookies](https://docs.djangoproject.com/en/2.2/ref/settings/#session-cookie-secure). Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode, else `True`
 | `SITE_URL`                 | URL of your PostHog instance.                                                                     | `http://localhost:8000`
-| `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, unspecified otherwise. 
-| `SENTRY_DSN`               | Used by Sentry to determine where to send events to. Only used in production.                      | `None`
+| `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, else must be specified
+| `SENTRY_DSN`               | Used to integrate with [Sentry](https://sentry.io/welcome/) error and event tracking. Ignored when running tests.  | `None`
 | `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
 | `IS_BEHIND_PROXY`          | Specifies if PostHog is running behind a proxy like Apache or NGINX.                              | `False`
@@ -36,8 +36,8 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing [sign up with GitLab](/docs/features/log-in-with-github-gitlab).                                                        | 
 | `SOCIAL_AUTH_GITLAB_SECRET`| GitLab secret for allowing [sign up with GitLab](/docs/features/log-in-with-github-gitlab).                                                     | 
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for GitLab authentication. Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
-| `DATABASE_URL`| URL of your PostgreSQL database instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, unspecified otherwise. 
-| `REDIS_URL`| URL of your Redis instance.  | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, unspecified otherwise. 
+| `DATABASE_URL`| [Database URL](https://github.com/jacobian/dj-database-url#url-schema) pointing to your PostgreSQL instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, else must be specified
+| `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, else must be specified
 | `EMAIL_HOST` | Used for configuring SMTP. Host of your email server.                                                           | `None`
 | `EMAIL_PORT` | Used for configuring SMTP. Port used by your email server in the specified host.                                | `None`
 | `EMAIL_HOST_USER` | Used for configuring SMTP. Username used by the email server.                                              | `None`
