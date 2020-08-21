@@ -72,7 +72,7 @@ class Menu extends Component {
                   })}
                 </AntMenu>
               )}
-              {!sidebarDocked && (
+              {!sidebarDocked && !menuOpen ? (
                 <Button
                   style={{
                     color: '#1D4AFF',
@@ -83,6 +83,10 @@ class Menu extends Component {
                     this.onChangeMenuState(menuItems.length)
                   }}
                   icon="menu"
+                />
+              ):(
+                <Button
+                icon="close"
                 />
               )}
               {menuOpen && !sidebarDocked && (
