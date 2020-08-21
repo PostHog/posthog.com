@@ -85,39 +85,32 @@ class Menu extends Component {
                   icon="menu"
                 />
               ):(
-                <Button
-                icon="close"
-                />
+                <div>
+                <CloseOutlined
+                  style={{ 
+                    float: 'right', 
+                    fontSize: '30px', 
+                  }}
+                  onClick={() => {
+                    this.onChangeMenuState(menuItems.length)
+                  }}
+                ></CloseOutlined>
+              </div>
               )}
               {menuOpen && !sidebarDocked && (
                 <div
                   style={{
-                    position: 'absolute',
-                    top: 0,
+                    position: 'relative',
+                    top: '64px',
                     left: 0,
-                    height: '100vh',
-                    width: '100%',
-                    zIndex: 100,
+                    height: '100vw',
+                    width: '100vw',
                     paddingLeft: 0,
                     paddingRight: 0,
-                    paddingTop: '5vh'
+                    backgroudColor: '#F0F0F0'
                   }}
                 >
-                  <div>
-                    <CloseOutlined
-                      style={{ 
-                        float: 'right', 
-                        fontSize: '30px', 
-                        paddingLeft: '10vw', 
-                        paddingRight: '10vw', 
-                        marginTop: '5vh',
-                        backgroundColor: 'white',
-                      }}
-                      onClick={() => {
-                        this.onChangeMenuState(menuItems.length)
-                      }}
-                    ></CloseOutlined>
-                  </div>
+                  <div style={{height: '100px'}}/>
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}
@@ -171,7 +164,7 @@ class Menu extends Component {
                     style={{
                       width: '100%',
                       float: 'left',
-                      backgroundColor: 'white'
+                      backgroundColor: '#F0F0F0'
                     }}
                   />
                 </div>
