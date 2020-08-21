@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 
-When using PostHog, there are various environment variables you can set to configure your instance. Below is a comprehensive list of all of them.
+When using PostHog, there are various environment variables you can set to configure your instance. Below is a comprehensive list of all of them. However, for general use, you most likely do not have to worry about the vast majority of these.
 
 Rows with a missing 'Default Value' usually default to an empty string. This is different from `None`.
 
@@ -15,9 +15,9 @@ Some variables here are default Django variables. This [Django Docs page](https:
 
 | Variable                   | Description                           | Default Value         |
 | :------------------------: | :------------------------------------ | :-------------------: |
-| `DEBUG`                    | Determines if PostHog should run in DEBUG mode. DEBUG is used for testing, never in production.   | `False`
-| `SECRET_KEY`               | Used by Django for cryptography. Helps secure cookies, passwords, hashes, etc. Required by PostHog | `<randomly generated secret key>`
-| `SECURE_COOKIES`           | Determines if Django should use secure cookies. Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode. `True` otherwise
+| `DEBUG`                    | Determines if PostHog should run in [DEBUG mode](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-DEBUG). DEBUG is used for testing, never in production.   | `False`
+| `SECRET_KEY`               | [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, passwords, hashes, etc. Required by PostHog | `<randomly generated secret key>`
+| `SECURE_COOKIES`           | Determines if Django should use [secure cookies](https://docs.djangoproject.com/en/2.2/ref/settings/#session-cookie-secure). Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode. `True` otherwise
 | `SITE_URL`                 | URL of your PostHog instance.                                                                     | `http://localhost:8000`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, unspecified otherwise. 
 | `SENTRY_DSN`               | Used by Sentry to determine where to send events to. Only used in production.                      | `None`
@@ -31,10 +31,10 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `STATSD_HOST`              | Host of a running StatsD daemon (e.g. 127.0.0.1)                                                  | `None`
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
 | `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | `None`
-| `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing sign up with GitHub                                                       | 
-| `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing sign up with GitHub                                                     | 
-| `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing sign up with GitLab                                                        | 
-| `SOCIAL_AUTH_GITLAB_SECRET`| GitLab secret for allowing sign up with GitLab                                                     | 
+| `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing [sign up with GitHub](/docs/features/log-in-with-github-gitlab).                                                      | 
+| `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing [sign up with GitHub](/docs/features/log-in-with-github-gitlab).                                                     | 
+| `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing [sign up with GitLab](/docs/features/log-in-with-github-gitlab).                                                        | 
+| `SOCIAL_AUTH_GITLAB_SECRET`| GitLab secret for allowing [sign up with GitLab](/docs/features/log-in-with-github-gitlab).                                                     | 
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for GitLab authentication. Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
 | `DATABASE_URL`| URL of your PostgreSQL database instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, unspecified otherwise. 
 | `REDIS_URL`| URL of your Redis instance.  | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, unspecified otherwise. 
