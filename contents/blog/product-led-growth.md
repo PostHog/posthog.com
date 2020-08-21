@@ -9,6 +9,8 @@ hideAnchor: true
 
 <!-- ![PLG Banner](../images/plg-header.png) -->
 
+You will need sales, but do you need a sales team to achieve revenue?
+
 Let's say you are the founder of a new tech startup. 
 
 A few months back, you and a couple of friends (all developers) built an amazing tool and have now received Seed funding. 
@@ -21,7 +23,7 @@ Before, you were just a group of friends working your ass off to build an amazin
 
 You call in a founders meeting to discuss next steps, and a conclusion is reached: you can't spend all your budget on engineers, which is what you wanted to do. 
 
-Instead, you need to hire some Sales people. Or some Marketing people. Or both. Whoever can get you some users that pay for your product. Or do you?
+Instead, you need to hire some Sales people. Or some Marketing people. Or both. Whoever can get you some users that pay for your product. Or do you? Could you invest in engineering instead to drive more revenue, and perhaps building a better company along the way?
 
 ## Getting People to Pay You
 
@@ -157,7 +159,7 @@ To build a great product, you need a great team. And to build a great team, you 
 
 Thus, if you're a company without a lot of money in the bank, you might just need to get some Sales done now, simply to fund your operations.
 
-Not having funding shouldn't discourage you from trying a PLG approach, however. It can still work, just look at GitLab. They first raised money after already having 100,000 users and Sid (their CEO) [told us](/blog/a-chat-with-sid) they didn't even have a significant marketing budget until then. Wow. 
+Not having funding shouldn't discourage you from trying a PLG approach, however. It can still work, just look at GitLab. They first raised money after already having 100,000 users and Sid (their CEO) [told us](/blog/a-chat-with-sid) they didn't even have a significant marketing budget until then. Wow.
 
 ### Open Source Software
 Being open source is a great characteristic for companies looking to follow a PLG approach. 
