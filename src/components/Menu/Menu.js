@@ -146,6 +146,7 @@ class Menu extends Component {
                             title={
                               <a
                                 href={item.a}
+                                className={item.name === "Login" ? " login-btn" : ""}
                                 style={{
                                   color: 'black',
                                   textDecoration: 'none',
