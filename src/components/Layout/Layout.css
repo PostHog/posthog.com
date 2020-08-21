@@ -721,15 +721,15 @@ header {
 }
 
 li > .ant-menu-submenu-title span{
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .ant-menu-submenu a {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .ant-menu-submenu ul > li .ant-menu-submenu-title span {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .ant-menu-submenu-title span {
