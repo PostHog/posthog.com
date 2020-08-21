@@ -423,7 +423,7 @@ function IndexPage() {
           <h2>Join the community</h2>
         </Col>
       </Row>
-      <Row justify="spaceBetween">
+      <Row justify="space-between">
       <Col xs={8} sm={8} md={6} lg={6} xl={6}>
           <a href="https://github.com/posthog/posthog">
             <img alt="GitHub" src={githubButton1} loading="lazy" className="hover-shadow imageShow" />
