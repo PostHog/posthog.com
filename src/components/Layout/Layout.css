@@ -1039,10 +1039,14 @@ table th {
   margin-left: 1%;
 }
 
-
-
 .blog-quote > p {
   display: inline;
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;
+}
+
+.github-star-btn {
+  float: 'none'; 
+  margin: 0 auto;
+  text-align: center;
 }
