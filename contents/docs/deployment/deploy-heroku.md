@@ -33,6 +33,27 @@ If you've never heard of Heroku or what it does, feel free to check out [this pa
 
     - Within the **Manage App** screen, simply click **Open App** on the top right to start your PostHog environment.
 
+### Secret Key
+
+A unique `SECRET_KEY` is essential for the security of your PostHog instance. When using Heroku 1-click deploy, Heroku automatically generates and sets this for you.
+
+However, if you want to set your own key, you can do so as follows:
+
+1. Generate the key and copy it:
+
+    ```bash
+    openssl rand -hex 32
+    ```
+
+2. Set the key on your instance, by running the following command with your key and Heroku app name:
+
+    ```bash
+    heroku config:set SECRET_KEY="<your secret key>" --app <your app name>
+    ```
+
+
+
+
 ## Add-Ons
 
 By default, we install a `hobby-dev` Postgres and Redis add-on to the app - these can be found in the **Manage App** screen under **Installed add-ons**.
