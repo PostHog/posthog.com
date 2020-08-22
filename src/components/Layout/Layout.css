@@ -1052,3 +1052,8 @@ table th {
 .login-btn {
   color: #1D4AFF !important;
 }
+
+.login-btn:hover {
+  color: #577BFB !important;
+}
+
