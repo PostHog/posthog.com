@@ -63,7 +63,6 @@ class Menu extends Component {
                       </AntMenu.Item>
                     ) : (
                         <AntMenu.Item
-/*                           className={"headerKey" + (item.name === "Login" ? " login-btn" : "")} */   
                           className="headerKey"
                           style={{
                             marginLeft: '2em',
@@ -73,7 +72,7 @@ class Menu extends Component {
                           key={item.link || item.a}
                         >
                           {item.a ? (
-                            <a href={item.a} className={item.name === "Login" ? " login-btn" : ""} style={{ color: isBlogPage ? '#FFFFFF' : '#000000' }}>
+                            <a href={item.a} className={item.name === "Login" && !isBlogPage ? " login-btn" : ""} style={{ color: isBlogPage ? '#FFFFFF' : '#000000' }}>
                               {item.name}
                             </a>
                           ) : (
