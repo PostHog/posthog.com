@@ -10,7 +10,7 @@ As we are a small (but growing!) startup, we've kept compensation super simple. 
 
 SF Benchmark x Cost of Living x Experience Factor
 
-NB. We apply a _floor_ to the Cost Of Living of 0.625.
+NB. We apply a _floor_ to the Cost of Living of 0.625.
 
 As a general philosophy, we aim to pay at least in the top 25% of market for any given role. That objective coupled with an all-remote team and open source approach makes us able to hire many of the best people in the world. We think the fastest possible shipping comes from a leaner, stronger team, and our pay structure allows us to do that.
 
@@ -28,11 +28,11 @@ We will not adjust your pay downwards for existing team members if this ratio ch
 
 ## Cost of Living
 ​
-We use Cost Of Living numbers provided by [Numbeo](https://www.numbeo.com/cost-of-living/in/San-Francisco). To get your local Cost Of Living rate, compare your city with San Francisco.
+We use Cost Of Living numbers provided by [Numbeo](https://www.numbeo.com/cost-of-living/in/San-Francisco). To get your local Cost of Living rate, compare your city with San Francisco.
 ​
 In this example, the calculation for London, UK would be \$5,953/\$8,365 = 0.71. Then, \$160,000 x 0.71 = \$113,600.
 
-We apply a floor to the Cost of Living. This is because it turns out that market rates for many roles do not linearly reflect Cost Of Living, and running the above formula in lower Cost Of Living areas often resulted in a below market rate figure. However, we do not wish to use local market rate for roles since the data is too granular to be statistically meaningful (we'd need a benchmark for every role in every geography - for more niche roles, this just wouldn't be possible).
+We apply a floor to the Cost of Living. This is because it turns out that market rates for many roles do not linearly reflect Cost of Living, and running the above formula in lower Cost of Living areas often resulted in a below market rate figure. However, we do not wish to use local market rate for roles since the data is too granular to be statistically meaningful (we'd need a benchmark for every role in every geography - for more niche roles, this just wouldn't be possible).
 
 The Cost of Living floor means we may pay above the top 25% of market in certain locations. This sounds like it would harm our capital efficiency - however, in reality, this affects low Cost of Living areas, so the effect is nowhere near as pronounced when compared to, for example, paying the highest rates in San Francisco. This also means in many locations we should have an easier time recruiting the absolute best candidates.
 ​
@@ -45,7 +45,7 @@ The Cost of Living floor means we may pay above the top 25% of market in certain
 | Mid | 0.8 |
 | 2-5 years | 0.6 |
 | 0-2 years | 0.5 |
-​
+
 Taking the previous example, a mid-level engineer in London would make \$113,600 x 0.8 = \$90,880.  
 
 More experience does not correlate with increased importance. Seniority is *not* a title - we don't believe in having a huge hierarchy of roles, as each person at our stage needs to feel like the owner of the company that they are.
@@ -66,11 +66,11 @@ If this represents an increase in pay, _we need to approve this change in advanc
 ​
 ## Nomading
 ​
-If you plan on spending > 4 months/year in a place different from your home base, that will be adjusted in the Cost Of Living after 4 months.
+If you plan on spending >4 months/year in a place different from your home base, that will be adjusted in the Cost Of Living after 4 months.
 
-For a trip with many destinations over a period of more than 4 months, the Cost Of Living will be located along the various places you intend to stay, averaged by the amount of time spent. If the resulting figure is below the Cost Of Living floor, we'd increase it to that figure.
+For a trip with many destinations over a period of more than 4 months, the Cost of Living will be located along the various places you intend to stay, averaged by the amount of time spent. If the resulting figure is below the Cost of Living floor, we'd increase it to that figure.
 ​
-For example, if you spend half your time in London and half your time in Bali (where COL is \$2,283), your COL factor will be ((\$5,953/\$8,365)+(\33,000,000Rp/118,370,527Rp))/2 = 0.495. That would then be increased to 0.625 (because of the Cost Of Living floor).
+For example, if you spend half your time in London and half your time in Bali (where CoL is \$2,283), your CoL factor will be ((\$5,953/\$8,365)+(\33,000,000Rp/118,370,527Rp))/2 = 0.495. That would then be increased to 0.625 (because of the Cost of Living floor).
 ​
 If this represents an increase in pay, _we need to approve this change in advance_ - we cannot guarantee it is always possible, as our budgets may or may not allow it.
 
@@ -85,7 +85,7 @@ Unless there is a very good reason, you'll be paid in your local currency. This 
 <span class="table-borders">
 
 | Currency | Multiplier |
-| :-------:| :---------:|
+| --- | --- |
 | EUR | 0.89 |
 | PLN | 3.79 |
 | GBP | 0.758 |
