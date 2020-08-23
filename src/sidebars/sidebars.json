@@ -97,6 +97,7 @@
     "name":"Integrations",
     "items": [
       "docs/integrations",
+      "docs/integrations/segment-integration",
       "docs/integrations/android-integration",
       "docs/integrations/api",
       "docs/integrations/go-integration",
