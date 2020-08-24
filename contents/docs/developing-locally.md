@@ -67,7 +67,7 @@ Run `./bin/start-frontend`
 
 Run `./bin/tests`
 
-<br>
+<br />
 
 ### Running Clickhouse locally
 
@@ -96,6 +96,8 @@ services:
 ```
 
 3. Run `docker-compose up -d`. You'll now have a Clickhouse server running on `http://127.0.0.1:8123`
+
+For more information on how to interface with the database, visit the [Clickhouse Docs](https://clickhouse.tech/docs/en/interfaces/).
     
 
 ## Using Porter
