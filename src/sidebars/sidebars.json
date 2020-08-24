@@ -31,6 +31,8 @@
     "items": [
       "docs/contributing",
       "docs/developing-locally",
+      "docs/stack",
+      "docs/project-structure",
       "updating-documentation"
     ]
   },
