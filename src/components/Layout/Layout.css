@@ -642,12 +642,6 @@ pre tt:after {
   }
 } 
 
-@media screen and (max-width: 768px) {
-  main.ant-layout-content {
-    background-color: #F96132;
-  }
-}
-
 /* antd componentes custom styling */
 
 main.ant-layout-content {
@@ -673,7 +667,6 @@ main.ant-layout-content {
 .medium-row h2{
   margin-top:96;
 }
-
 
 #logo {
   padding-left: 40px;
@@ -713,6 +706,12 @@ header {
 #logo {
   margin: 0;
   padding: 0;
+}
+
+.redTopbar {
+  height: 150px;
+  width: 100%;
+  background-color: #F96132;
 }
 
 .footer-universal{

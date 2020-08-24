@@ -35,25 +35,10 @@ class ResponsiveTopBar extends Component {
     } = this.props
 
     return (
-      <div
-        style={{
-          width: '100%',
-          height: '100px',
-          backgroundColor: '#F9F9F9',
-        }}
-      >
-      <div
-        style={{
-          position: "absolute",
-          top: 'auto',
-          width: "100%",
-          height: 40,
-          lineHeight: '40px'
-        }}
-      >
+      <div className="redTopbar">
         {!anchorOpen && !sidebarHide &&
           <div style={{
-            position: "absolute",
+            position: "relative",
             margin: 8
           }}>
             {sidebarOpen ?
@@ -72,7 +57,6 @@ class ResponsiveTopBar extends Component {
               <Button icon="ellipsis" onClick={this.onSetAnchorOpen} />
             }
           </div>*/}
-      </div>
       {sidebarOpen &&
         <div style={{
           marginTop: '2vh',
