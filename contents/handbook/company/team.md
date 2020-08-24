@@ -70,9 +70,12 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 ## Michael Matloka, Software Engineer
 
-Started tinkering with software in middle school thanks to XDA, and never stopped. Passionate about quality products and open source, now working on both at the same time at PostHog. 
+Got into software by tinkering with bada OS – if anyone even remembers that! – and just never stopped (though I did move to Android soon and later became an iOS fan).
 
-Primarily Python and ES/TS, though that's just implementation details. In free time, [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), and [photography](https://unsplash.com/@twixes) aficionado.
+Before graduating from high school here in Poland – and having some open-source projects under my belt, including [a Discord bot with thousands of users that became my gateway to Python](https://github.com/Twixes/somsiad) – I decided that the most interesting way to grow and meet some great people along the way will be to work on a quality product commercially. 
+
+Happy to report that I ended up joining PostHog, where open-source software, a quality product and great people all mix freely!
+In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), [photography](https://unsplash.com/@twixes) and [cinema](https://www.nowehoryzonty.pl/index.do?lang=en). Decidedly a fan of precipitation and overcast weather, I have a secret plan to move to the Nordics or the UK one day.
 
 ## Paolo Damico, Growth Engineer
 
