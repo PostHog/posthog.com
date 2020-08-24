@@ -32,20 +32,18 @@ There are three options:
 1. Use the `Authorization` header and `Bearer` authentication, like so:
     ```JavaScript
     const headers = {
-        Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`,
-        ...
+        Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`
     }
     ```
 2. Put the key in request body, like so:
     ```JavaScript
     const body = {
-        personal_api_key: POSTHOG_PERSONAL_API_KEY,
-        ...
+        personal_api_key: POSTHOG_PERSONAL_API_KEY
     }
     ```
 3. Put the key in query string, like so:
     ```JavaScript
-    fetch(`https://example.posthog.com/api/user/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`)
+    const url = `https://posthog.example.com/api/user/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
     ```
 
 Any one of these works, but only the value encountered first (in the order above) will be used for authenticaition!
@@ -62,9 +60,9 @@ https://posthog.example.com/api/person/
 
 ### Username & Password (deprecated)
 
-Authentication can also be done using your own username and password. We suggest creating a new user within your team specifically for this.
-
 **Important:** While you can still use this type of authentication, it's significantly more secure to use personal API keys, as described above.
+
+Authentication can also be done using your own username and password. We suggest creating a new user within your team specifically for this.
 
 With `curl`:
 ```bash
@@ -80,7 +78,7 @@ curl \
   https://posthog.example.com/api/person/
 ```
 
-**Important:** The key under "API key" in the Setup page is write-only and public. You cannot use that for any of these endpoints.
+**Important:** The key under "API key" in the Setup page is write-only and public. You cannot use it for any of these endpoints.
 
 <br>
 
@@ -104,4 +102,4 @@ Sometimes requests are paginated. If that's the case, it'll be in the following 
 }
 ```
 
-In such cases you can just call the "next" URL to get the following set of results.
+In such cases just call the "next" URL to get the following set of results.
