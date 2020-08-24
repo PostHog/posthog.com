@@ -1,5 +1,5 @@
 ---
-title: API
+title: API Overview
 sidebar: Docs
 showTitle: true
 ---
@@ -12,7 +12,59 @@ PostHog has an API available on all tiers of pricing and for every self-hosted v
 
 ## Authentication
 
-Authentication is done via Basic Auth using your own username and password. We suggest creating a new user within your team specifically for this.
+### Personal API Keys (recommended)
+
+Personal API keys allow full access to your account, just like e-mail address and password, but you can create any number of them and each one can invalidated individually at any moment. This makes for greater control for you and improved security of stored data.
+
+#### How to Obtain a Personal API key
+
+1. Select 'Setup' on the left sidebar.
+2. Find the Personal API Keys section.
+3. Click "+ Create a Personal API Key".
+4. Give your new key a label – it's just for you, usually to describe the key's purpose.
+5. Click "Create Key".
+6. There you go! At the top of the list you should now be seeing your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page. No worries if you forget to copy though – you can delete and create keys as much as you want.
+
+#### How to Use a Personal API key
+
+There are three options:
+
+1. Use the `Authorization` header and `Bearer` authentication, like so:
+    ```JavaScript
+    const headers = {
+        Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`,
+        ...
+    }
+    ```
+2. Put the key in request body, like so:
+    ```JavaScript
+    const body = {
+        personal_api_key: POSTHOG_PERSONAL_API_KEY,
+        ...
+    }
+    ```
+3. Put the key in query string, like so:
+    ```JavaScript
+    fetch(`https://example.posthog.com/api/user/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`)
+    ```
+
+Any one of these works, but only the value encountered first (in the order above) will be used for authenticaition!
+
+#### cURL example
+```bash
+POSTHOG_PERSONAL_API_KEY=qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
+
+curl \
+--header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+https://posthog.example.com/api/person/
+```
+<br>
+
+### Username & Password (deprecated)
+
+Authentication can also be done using your own username and password. We suggest creating a new user within your team specifically for this.
+
+**Important:** While you can still use this type of authentication, it's significantly more secure to use personal API keys, as described above.
 
 With `curl`:
 ```bash
@@ -28,11 +80,15 @@ curl \
   https://posthog.example.com/api/person/
 ```
 
-**Important:** The API key in the Setup page is write-only and public. You cannot use that for any of these endpoints.
+**Important:** The key under "API key" in the Setup page is write-only and public. You cannot use that for any of these endpoints.
 
-## /user
+<br>
 
-The [user endpoint](./user) gives you a lot of useful information about the possible event names and properties you can use throughout the rest of the API. 
+## `/user/`
+
+The [`/user/` endpoint](./user) gives you a lot of useful information about the possible event names and properties you can use throughout the rest of the API. 
+
+<br>
 
 ## Pagination
 
@@ -48,4 +104,4 @@ Sometimes requests are paginated. If that's the case, it'll be in the following 
 }
 ```
 
-In those cases, you can just call the "next" url to get the following set of results.
+In such cases you can just call the "next" URL to get the following set of results.
