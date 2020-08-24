@@ -636,6 +636,13 @@ pre tt:after {
 
 /* CUSTOM */
 
+@media screen and (min-width: 1076px) {
+  .closeButton {
+    display: none!important;
+  }
+}
+
+
 main.ant-layout-content {
   min-height: 280px; 
   padding: 3rem 0% 0px 10%; 

@@ -44,7 +44,6 @@ class Menu extends Component {
                   mode="horizontal"
                   style={{
                     borderBottomWidth: 0,
-                    background: isBlogPage && 'none'
                   }}
                 >
                   {menuItems.reverse().map(item => {
@@ -86,9 +85,11 @@ class Menu extends Component {
                 />
               ):(
                 <div>
-                <CloseOutlined
+                <CloseOutlined 
+                className="closeButton"
                   style={{ 
-                    float: 'right', 
+                    float: 'right',
+                    margin: '16px 20px',
                     fontSize: '30px', 
                   }}
                   onClick={() => {
@@ -101,13 +102,13 @@ class Menu extends Component {
                 <div
                   style={{
                     position: 'relative',
-                    top: '64px',
+                    marginTop: '64px',
                     left: 0,
                     height: '100vw',
                     width: '100vw',
                     paddingLeft: 0,
                     paddingRight: 0,
-                    backgroudColor: '#F0F0F0'
+                    backgroudColor: 'red'
                   }}
                 >
                   <div style={{height: '100px'}}/>

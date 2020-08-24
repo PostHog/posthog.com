@@ -81,12 +81,10 @@ class Layout extends Component {
                         <AntdLayout.Header
                         className={"menuHeader " + (isBlogPage ? ("blog-post") : (" "))}
                         style={{ 
-                          backgroundColor: screenIsSmall && onPostPage ? '#F9F9F9' : '#fff', 
+                          backgroundColor: screenIsSmall && onPostPage ? '#F0F0F0' : '#fff', 
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
                           backgroundSize: 'cover',
                           height: 'auto',
-                          /*maxHeight: !screenIsSmall && isBlogPage && '45vh',*/
-                          borderBottom: onPostPage && screenIsSmall && '6px solid #C4C4C4',
                           padding: screenIsSmall && 0,
                           marginBottom: isBlogPage && '2rem'
                         }}

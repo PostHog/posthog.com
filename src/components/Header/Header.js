@@ -20,54 +20,35 @@ class Header extends Component {
           justifyContent: 'space-between',
           background: 'none'
         }}>
-        {sidebarHide || !onPostPage ? (
-          <Link
-          id="logo"
-          to="/"
-          style={{
-            //color: '#FFF',
-            textDecoration: 'none',
-            verticalAlign: 'center'
-          }}>
           {screenIsSmall ? (
-          <img alt="logo" src={logo} id="logo-image" style={{
-            display: 'flex',
-            top: 0,
-            left: 8
-          }} />
-          ) : (
+          <Link
+            id="logo"
+            to="/"
+            style={{
+              //color: '#FFF',
+              textDecoration: 'none',
+              verticalAlign: 'center'
+            }}>
             <img alt="logo" src={logo} id="logo-image"/>
-          )}
           </Link>
-        ) : (
-            isBlogPage ? (
-              <Link
-              id="logo"
-              to="/"
-              style={{
-                //color: '#FFF',
-                textDecoration: 'none',
-                verticalAlign: 'center'
-              }}>
-                {screenIsSmall ? (<img alt="logo" src={logo} id="logo-image" style={{
-                  display: 'flex',
-                  top: 0,
-                  left: 8
-                }} />
-                ) : (
-                  <img alt="logo" src={whiteLogo} id="logo-image"/>
-                )}
-              </Link>
-            ) : (
-              <div style={{height: 64, width: 0}}></div>
-          )
-        )}
+          ) : (
+            <Link
+            id="logo"
+            to="/"
+            style={{
+              //color: '#FFF',
+              textDecoration: 'none',
+              verticalAlign: 'center'
+            }}>
+            <img alt="logo" src={logo} id="logo-image"/>
+          </Link>
+          )}
         <Menu 
         sidebarDocked={sidebarDocked}
         sidebarHide={sidebarHide}
         isBlogPage={isBlogPage} />
       </div>
-)
+    )
   }
 }
 

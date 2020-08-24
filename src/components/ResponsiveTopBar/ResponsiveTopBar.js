@@ -39,7 +39,8 @@ class ResponsiveTopBar extends Component {
       >
       <div
         style={{
-          position: "static",
+          position: "absolute",
+          top: 'auto',
           width: "100%",
           height: 40,
           lineHeight: '40px'
