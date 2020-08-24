@@ -36,14 +36,14 @@ import roadmapButton1 from '../images/roadmap-button-1.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
-import indexCSS from './index.css'
+import indexCSS from 'raw-loader!./index.css';
 
 
 function IndexPage() {
   return (
     <Layout containerStyle={{maxWidth: "auto", padding: 0}} className="indexPage">
-      <Helmet title={seo.title} titleTemplate={titleTemplate}>
-        <link rel="stylesheet" src={indexCSS} />
+      <Helmet>
+        <style>{indexCSS}</style>
       </Helmet>
       <div className="indexContainer">
       <SEO

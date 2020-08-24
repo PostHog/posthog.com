@@ -36,6 +36,11 @@ class ResponsiveTopBar extends Component {
 
     return (
       <div
+        style={{
+          width: '100%',
+          height: '100px',
+          backgroundColor: '#F9F9F9',
+        }}
       >
       <div
         style={{

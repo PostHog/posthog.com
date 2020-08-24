@@ -637,11 +637,18 @@ pre tt:after {
 /* CUSTOM */
 
 @media screen and (min-width: 1076px) {
-  .closeButton {
+  .closeButton { /*Very quick fix, clean this up*/
     display: none!important;
+  }
+} 
+
+@media screen and (max-width: 768px) {
+  main.ant-layout-content {
+    background-color: #F96132;
   }
 }
 
+/* antd componentes custom styling */
 
 main.ant-layout-content {
   min-height: 280px; 

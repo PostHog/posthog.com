@@ -131,7 +131,7 @@ class Layout extends Component {
                       {!screenIsSmall && onPostPage ? (
                         isBlogPage ? (
                         <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%", align: 'center'}}>
-                          <AntdLayout.Content style={{ minHeight: 280, margin: '0 auto', padding: '0px 1.0875rem 1.45rem', maxWidth: 960}}>
+                          <AntdLayout.Content className="layoutContent">
                             <Container
                               sidebarDocked={!screenIsSmall}
                               onPostPage={onPostPage}
