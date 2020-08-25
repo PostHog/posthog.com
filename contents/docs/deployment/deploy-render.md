@@ -6,21 +6,9 @@ showTitle: true
 
 ## Why Render
 
-You can use Render's one-click deploy button to get Posthog up and running in minutes!
+You can use Render's one-click deploy button to get PostHog up and running quickly without an extensive setup.
 
-[Render](https://render.com) is a modern cloud platform to build and run all your apps and websites with free SSL, a global CDN, private networks and auto deploys from Git.
-
-Every service on Render includes:
-- No limits on simultaneous connections or connection duration.
-- No forced restarts.
-- Full support for Docker containers.
-- Automatic [pull request previews](https://render.com/docs/pull-request-previews).
-- Infrastructure as Code with [`render.yaml`](https://render.com/docs/infrastructure-as-code).
-- [Fully managed PostgreSQL](https://render.com/docs/databases).
-- [Private networking](https://render.com/docs/private-services), load balancing, and service discovery.
-- HTTP health checks and [zero downtime deploys](https://render.com/docs/zero-downtime-deploys).
-- Free, unlimited [custom domains](https://render.com/docs/custom-domains) and [teams](https://render.com/docs/teams).
-- Persistent storage with [Render Disks](https://render.com/docs/disks).
+[Render](https://render.com) is a cloud platform to build and run apps and websites with free SSL, a global CDN, private networks, and automatic deploys with Git.
 
 ## Step By Step Installation
 
@@ -28,8 +16,6 @@ Every service on Render includes:
 
 1. Click Deploy to Render above.
 
-2. Follow the prompts to create an account if you haven't already and approve the creation of your Posthog services.
+2. Follow the prompts to create an account (if you don't have one already) and approve the creation of your PostHog services. You may need to add credit card details, but PostHog can be deployed for free within their trial period. Check [Render's pricing](https://render.com/pricing) for more information.
 
-    `Note: Because Posthog requires a higher tier plan, you will be asked to add a card. You won't be charged for your services until your trial ends.`
-
-3. That's it! Once your deploy has completed, you will be able to access your Posthog instance by going to the URL found on the service dashboard. 
+3. Once your deploy has completed, you will be able to access your PostHog instance by going to the URL found on the service dashboard. 

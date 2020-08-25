@@ -41,7 +41,6 @@
     "name":"Deployment",
     "items": [
       "docs/deployment",
-      "docs/deployment/deploy-render",
       "docs/deployment/deploy-heroku",
       "docs/deployment/deploy-aws",
       "docs/deployment/deploy-azure",
@@ -50,6 +49,7 @@
       "docs/deployment/deploy-gcs",
       "docs/deployment/deploy-kubernetes",
       "docs/deployment/deploy-linode",
+      "docs/deployment/deploy-render",
       "docs/deployment/deploy-source",
       "docs/deployment/snippet-installation",
       "docs/deployment/hosting-costs"
