@@ -1,8 +1,24 @@
 {
-  "name": "gatsby-starter-markdown",
-  "description": "Gatsby markdown starter",
+  "name": "posthog.com",
+  "description": "Official PostHog website.",
   "version": "1.0.0",
-  "author": "Luca(Wei) Chen <wei@cvluca.com>",
+  "author": "PostHog",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PostHog/posthog.com"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "yarn run develop",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "antd": "^3.23.2",
@@ -35,26 +51,10 @@
     "react-responsive": "^6.1.2",
     "typescript": "^3.6.3"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "yarn run develop",
-    "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
-  },
   "devDependencies": {
     "gatsby-plugin-remove-trailing-slashes": "^2.1.6",
     "gh-pages": "^2.1.1",
     "mem": "^5.1.1",
     "prettier": "^1.18.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cvluca/gatsby-starter-markdown"
   }
 }
