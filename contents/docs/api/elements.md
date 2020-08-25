@@ -82,8 +82,7 @@ Example response:
                 "order": 0
             }
         ]
-    },
-    ...
+    }
 ]
 ```
 

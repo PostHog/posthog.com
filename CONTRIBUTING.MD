@@ -16,7 +16,7 @@ If you want to speak to us before doing lots of work, just email _hey@posthog.co
 
 Spotted a typo? Not got time or unsure how to fix it yourself? Raise an issue so we can spot it!
 
-... or pick up and fix an issue if you want to do a Pull Request.
+…or pick up and fix an issue if you want to do a Pull Request.
 
 ## New Content
 

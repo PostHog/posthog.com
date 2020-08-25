@@ -59,7 +59,7 @@ However, a new approach has been gaining traction in the past few years, called 
 ### Let your product do the talking
 With Product-led Growth, the idea is that rather than bringing users through an active sales team or aggressive marketing campaigns, you just focus on building your product - and ensure you make it great.
 
-The concept is based on the assumption that if you build something that is useful and works well, the users will eventually come to you as result... with a little push, of course.
+The concept is based on the assumption that if you build something that is useful and works well, the users will eventually come to you as result… with a little push, of course.
 
 As such, your primary objective should be to make something truly amazing, rather than portray your product as amazing (which is what great Sales and Marketing people can do).
 
