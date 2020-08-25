@@ -3,7 +3,7 @@ module.exports = {
     title: 'PostHog',
     titleTemplate: '%s',
     description:
-      'Open-source product analytics built for developers. Automate the collection of every event on your website or app, with no need to send data to 3rd parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
+      'Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
     url: 'https://posthog.com', // No trailing slash allowed!
     image: '/cropped-Frame-1-192x192.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@PostHogHQ',
