@@ -39,7 +39,7 @@ Step 1 - go to your setup page, and switch it on:
 
 ![setup](../images/casts/setup.gif)
 
-This little buddy will appear over your website, only if you are logged into PostHog (it will NOT appear for your regular visitors...):
+This little buddy will appear over your website, only if you are logged into PostHog (it will NOT appear for your regular visitors…):
 
 ![authenticate](../images/casts/authenticate.gif)
 

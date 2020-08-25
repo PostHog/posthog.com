@@ -1,12 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: "PostHog",
-    titleTemplate: "%s",
+    title: 'PostHog',
+    titleTemplate: '%s',
     description:
-      "Understand your users. Build a better product.",
-    url: "https://.posthog.com", // No trailing slash allowed!
-    image: "/cropped-Frame-1-192x192.png", // Path to your image you placed in the 'static' folder
-    twitterUsername: "@posthoghq",
+      'Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
+    url: 'https://posthog.com', // No trailing slash allowed!
+    image: '/cropped-Frame-1-192x192.png', // Path to your image you placed in the 'static' folder
+    twitterUsername: '@PostHogHQ',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -57,7 +57,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-            {
+          {
             resolve: `gatsby-remark-copy-linked-files`,
             options: {
               destinationDir: `images`,
@@ -80,8 +80,8 @@ module.exports = {
             },
           },
           {
-          resolve: `gatsby-remark-prismjs`,
-          options: {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
               // Class prefix for <pre> tags containing syntax highlighting;
               // defaults to 'language-' (e.g. <pre class="language-js">).
               // If your site loads Prism into the browser at runtime,
@@ -89,7 +89,7 @@ module.exports = {
               // you may use this to prevent Prism from re-processing syntax.
               // This is an uncommon use-case though;
               // If you're unsure, it's best to use the default value.
-              classPrefix: "language-",
+              classPrefix: 'language-',
               // This is used to allow setting a language for inline code
               // (i.e. single backticks) by creating a separator.
               // This separator is a string and will do no white-space
@@ -97,7 +97,7 @@ module.exports = {
               // A suggested value for English speakers is the non-ascii
               // character '›'.
               inlineCodeMarker: null,
-              // This lets you set up language aliases.  For example,
+              // This lets you set up language aliases. For example,
               // setting this to '{ sh: "bash" }' will let you use
               // the language "sh" which will highlight using the
               // bash highlighter.
@@ -113,37 +113,19 @@ module.exports = {
               // If setting this to true, the parser won't handle and highlight inline
               // code used in markdown i.e. single backtick code like `this`.
               noInlineHighlight: true,
-              // This adds a new language definition to Prism or extend an already
-              // existing language definition. More details on this option can be
-              // found under the header "Add new language definition or extend an
-              // existing language" below.
-              languageExtensions: [
-                {
-                  language: "superscript",
-                  extend: "javascript",
-                  definition: {
-                    superscript_types: /(SuperType)/,
-                  },
-                  insertBefore: {
-                    function: {
-                      superscript_keywords: /(superif|superelse)/,
-                    },
-                  },
-                },
-              ],
               // Customize the prompt used in shell output
               // Values below are default
               prompt: {
-                user: "root",
-                host: "localhost",
+                user: 'root',
+                host: 'localhost',
                 global: false,
               },
               // By default the HTML entities <>&'" are escaped.
               // Add additional HTML escapes by providing a mapping
               // of HTML entities and their escape value IE: { '}': '&#123;' }
               escapeEntities: {},
-            }
-          }
+            },
+          },
         ],
       },
     },
@@ -152,11 +134,11 @@ module.exports = {
       resolve: `gatsby-plugin-posthog-analytics`,
       options: {
         // Specify the API key for your Posthog Project (required)
-        apiKey: "sTMFPsFhdP1Ssg",
+        apiKey: 'sTMFPsFhdP1Ssg',
         // Puts tracking script in the head instead of the body (optional, default: true)
         head: true,
-	     // Enable posthog analytics tracking during development (optional, default: false)
-	      isEnabledDevMode: true
+        // Enable posthog analytics tracking during development (optional, default: false)
+        isEnabledDevMode: true,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
