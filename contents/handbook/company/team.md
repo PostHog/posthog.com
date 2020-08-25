@@ -116,4 +116,4 @@ For the past three years, I developed a nice habit of writing about my projects,
 
 When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain. 
 
-Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime.
+Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime. If that means anything. 
