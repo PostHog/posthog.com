@@ -58,12 +58,12 @@
     "mem": "^5.1.1",
     "prettier": "^2.1.0"
   },
-  "husky": {
+  "//husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged": {
+  "//lint-staged": {
     "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
   }
 }
