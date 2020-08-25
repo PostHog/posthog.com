@@ -14,7 +14,7 @@ This library uses an internal queue to make calls fast and non-blocking. It also
 
 Run either the `yarn` or `npm` program to add it to your project:
 
-```shell script
+```bash
 npm install posthog-node --save
 yarn add posthog-node
 ```

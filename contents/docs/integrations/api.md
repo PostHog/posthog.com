@@ -59,6 +59,108 @@ Body:
 }
 ```
 
+## Sample Requests
+
+Here are some sample `curl` queries for each event type. Do note that you need to insert your API key into the `api_key` field.
+
+Additionally, if you're self-hosting, you'll have to substitute `https://app.posthog.com/` for the URL of your instance.
+
+### Alias
+
+```
+curl -v -L --header "Content-Type: application/json" -d ' {
+    "api_key": "<INSERT YOUR API KEY>",
+    "properties": {
+        "distinct_id": "123",
+        "alias": "456"
+    },
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "context": "{}",
+    "type": "alias",
+    "event": "$create_alias"
+}' https://app.posthog.com/batch/
+```
+
+### Capture
+
+```
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<INSERT YOUR API KEY>",
+    "properties": {},
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "context": {},
+    "distinct_id": "1234",
+    "type": "capture",
+    "event": "$event",
+    "messageId": "1234"
+}' https://app.posthog.com/batch/
+```
+
+### Identify
+
+```
+curl -v -L --header "Content-Type: application/json" -d ' {
+    "api_key": "<INSERT YOUR API KEY>",
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "context": {},
+    "type": "screen",
+    "distinct_id": "1234",
+    "$set": {},
+    "event": "$identify",
+    "messageId": "123"
+}' https://app.posthog.com/batch/
+```
+
+### Group
+
+```
+curl -v -L --header "Content-Type: application/json" -d ' {
+    "api_key": "<INSERT YOUR API KEY>",
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "groupId": "123",
+    "context": {},
+    "distinct_id": "1234",
+    "traits": {},
+    "type": "group",
+    "event": "$group",
+    "messageId": "123"
+}' https://app.posthog.com/batch/
+```
+
+### Page
+
+```
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<INSERT YOUR API KEY>",
+    "properties": {},
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "category": "some category",
+    "context": {},
+    "distinct_id": "1234",
+    "type": "page",
+    "event": "$page",
+    "name": "a page",
+    "messageId": "123"
+}' https://app.posthog.com/batch/
+```
+
+### Screen
+
+```
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<INSERT YOUR API KEY>",
+    "properties": {},
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "category": "some category",
+    "context": {},
+    "distinct_id": "1234",
+    "type": "screen",
+    "event": "$screen",
+    "name": "a page",
+    "messageId": "123"
+}' https://app.posthog.com/batch/
+```
+
 
 ## Reading data from PostHog
 

@@ -30,7 +30,7 @@ github "posthog/posthog-ios"
 
 ### With Objective-C
 
-```objective-c
+```objectivec
 #import <PostHog/PHGPostHog.h>
 #import <PostHog/PHGPostHogConfiguration.h>
 
@@ -82,7 +82,7 @@ An identify call requires:
 
 For example:
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] identify:@"distinct_id_from_your_database"
                           properties:@{ @"name": @"Peter Griffin",
@@ -115,7 +115,7 @@ Optionally you can submit:
 
 For example:
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
 ```
@@ -130,13 +130,13 @@ posthog.capture("Signed Up", properties: ["plan": "Pro++"])
 You can set the number of events in the configuration that should queue before flushing. 
 Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
 
-```objective-c
+```objectivec
 configuration.flushAt = 1;
 ```
 
 You can also manually flush the queue:
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] capture:@"Logged Out"];
 [[PHGPostHog sharedPostHog] flush]
@@ -152,7 +152,7 @@ posthog.flush()
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] reset]
 ```
@@ -168,7 +168,7 @@ With `configuration.recordScreenViews` set as `YES`, PostHog will try to record 
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
 ```
@@ -182,7 +182,7 @@ posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
 
 The `configuration` element contains several other settings you can toggle:
 
-```objective-c
+```objectivec
 /**
  * Whether the posthog client should use location services.
  * If `YES` and the host app hasn't asked for permission to use location services then the user will be  

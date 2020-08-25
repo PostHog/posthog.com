@@ -46,7 +46,7 @@ showTitle: true
 
 The ```sidebar```&nbsp;is the sidebar menu that will attach. You can see a list of available sidebars in ```/src/sidebars/sidebars.json```. You can choose not to have a sidebar by setting this to ```null```.
 
-The ```showTitle```&nbsp;should always be set to `true`.
+The ```bashowTitle```&nbsp;should always be set to `true`.
 
 #### Images / GIFs
 

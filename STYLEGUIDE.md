@@ -64,7 +64,7 @@ Examples: `API_KEY`, `distinct_id`, `reset()`.
 
 **Avoid repetition of terms**
 
-Example: "We believe this because we believe that..."
+Example: "We believe this because we believe …"
 
 **Avoid `mailto` links**
 

@@ -17,7 +17,7 @@ Gradle. This ensures you can easily upgrade to the latest versions.
 
 All you need to do is add the `posthog` module to your `build.gradle`:
 
-```shell script
+```bash
 dependencies {
   implementation 'com.posthog.android:posthog:1.+'
 }

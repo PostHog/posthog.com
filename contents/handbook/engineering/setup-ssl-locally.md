@@ -20,7 +20,7 @@ The easiest option is to use ngrok.
 
 1. Start ngrok tunnel to 8234 (webpack dev server). This will give you a tunnel URL such as https://68f83839843a.ngrok.io
 
-```sh
+```bash
 ngrok http 8234
 ```
 
@@ -28,7 +28,7 @@ ngrok http 8234
 
 2. Copy the URL to `JS_URL` and start webpack
 
-```sh
+```bash
 export WEBPACK_HOT_RELOAD_HOST=0.0.0.0
 export LOCAL_HTTPS=1
 export JS_URL=https://68f83839843a.ngrok.io
@@ -37,7 +37,7 @@ yarn start
 
 3. Copy the URL to `JS_URL` and start the Django server
 
-```sh
+```bash
 export DEBUG=1
 export LOCAL_HTTPS=1
 export JS_URL=https://68f83839843a.ngrok.io
