@@ -608,7 +608,6 @@ td:last-child {
 }
 tt,
 code {
-  background-color: #f8f8f8;
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;
@@ -616,29 +615,15 @@ code {
   padding: 3px 5px;
   white-space: pre-wrap;
 }
+
+tt {
+  background-color: #f8f8f8;
+}
+
 pre code {
   background: none;
   line-height: 1.42;
 }
-code:before,
-code:after,
-tt:before,
-tt:after {
-  letter-spacing: -0.2em;
-  content: " ";
-}
-pre code:before,
-pre code:after,
-pre tt:before,
-pre tt:after {
-  content: "";
-}
-/* @media only screen and (max-width: 480px) {
-  html {
-    font-size: 100%;
-  }
-} */
-
 
 /* CUSTOM */
 
@@ -1055,5 +1040,10 @@ table th {
 
 .login-btn:hover {
   color: #577BFB !important;
+}
+
+code {
+  background-color: rgba(41,37,44,.1);
+  font-size: 14px !important;
 }
 

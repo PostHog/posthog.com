@@ -9,7 +9,7 @@ Please feel free to suggest any changes. See our [contributing guide](https://gi
 1. **Pre-Installation**
 
     Install [Node](https://nodejs.org/en/download/) and [GatsbyJS](https://www.gatsbyjs.org). GatsbyJS needs to be installed globally (see command below).
-    ```sh
+    ```bash
     npm install -g gatsby-cli
     ```
 
@@ -17,7 +17,7 @@ Please feel free to suggest any changes. See our [contributing guide](https://gi
 
     Clone the repo then navigate into your new site’s directory and start it up.
 
-    ```sh
+    ```bash
     cd posthog.com/
     yarn install
     gatsby develop
