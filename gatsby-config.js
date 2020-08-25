@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   siteMetadata: {
     title: 'PostHog',
     titleTemplate: '%s',
