@@ -22,7 +22,7 @@ Personal API keys allow full access to your account, just like e-mail address an
 2. Navigate to the 'Personal API Keys' section.
 3. Click "+ Create a Personal API Key".
 4. Give your new key a label – it's just for you, usually to describe the key's purpose.
-5. Click 'reate Key'.
+5. Click 'Create Key'.
 6. There you go! At the top of the list you should now be seeing your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page. But don't worry if you forget to copy it – you can delete and create keys as much as you want.
 
 #### How to Use a Personal API key
