@@ -147,7 +147,6 @@ class Layout extends Component {
                               theme="light"
                               style={{ height: '100%', backgroundColor: '#fff' }}
                               className="sidebarRight"
-                              
                             >
                               <ResponsiveAnchor />
                             </AntdLayout.Sider>
