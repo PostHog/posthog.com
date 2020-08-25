@@ -205,7 +205,7 @@ But with a focus on delighting users and making the product speak for itself Typ
 [The CEO himself focused on the "unique experience" of the user](https://saasclub.io/podcast/typeform-a-case-study-in-product-led-saas-growth-with-david-okuniev-230/)
 
 *“We were much more differentiated in the early days because everyone was just doing the plain vanilla forms. 
-These companies doing feedback as…data collection will always be very focused only on the analysis of data, the actual collection through the form was just a means to an end. No company ever thought of actually making that into a great experience.”*
+These companies doing feedback as… data collection will always be very focused only on the analysis of data, the actual collection through the form was just a means to an end. No company ever thought of actually making that into a great experience.”*
 
 ![typeform gif](../images/04/typeform-example.gif)
 
