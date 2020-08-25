@@ -6,31 +6,36 @@ showTitle: true
 
 
 In PostHog, there is an API endpoint available to fetch the DOM elements captured by the autocapture functionality.
-The most interesting usecase for this is to be able to get all elements we have for a specific page, and how often that element has been interacted with
+The most interesting usecase for this is to be able to get all elements we have for a specific page, and how often that element has been interacted with.
 
 ## Pagination
 
-This endpoint has pagination. See [pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for more info.
 
-## Element stats
+## Element Stats
 
-/stats gives you an aggregate count of the number of events for each element. Internally we use this in the toolbar to show you a heatmap.
+`/stats` gives you an aggregate count of the number of events for each element. Internally we use this in the toolbar to show you a heatmap.
 
-```plaintext
+```shell
 GET /element/stats/
 GET /element/stats/?properties=[{"key":"$browser","value":"Chrome"}]
 GET /element/stats/?properties=[{"key":"$browser","value":"Chrome"}]&date_from=-2d
 ```
 
+<span class="table-borders">
+
+
 | Attribute | Type | Required | Description |
-| --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| --- | --- | --- | ------------------------------------------------------------------------------ |
 | `properties` | Array of Properties | no | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br><br>For each property, you can specify:<br>- `key` Key of the property<br>- `value` Value you want to filter on<br>- `type` Either `person` or `event`<br>- `operator`, any of: <br>-- `exact`/empty<br>--`is_not`<br>--`icontains`<br>--`not_icontains`<br>--`gt`<br>--`lt`<br>--`is_set` |
 | `date_from` | Date or Relative Date | no | Date from which to filter events from. Can be an iso date: `2020-06-18`, or a relative date. <br>Some examples of relative dates:<br>- `-2mStart` the start of the month, 2 months ago<br>- `-1y` one year ago<br>- `-1wEnd` the end of the last week.
 | `date_to` | Date or Relative Date | no | Date from which to filter events to. Can be an iso date: `2020-06-18`, or a relative date. <br>Some examples of relative dates:<br>- `-2mStart` the start of the month, 2 months ago<br>- `-1y` one year ago<br>- `-1wEnd` the end of the last week.
 
+</span>
+
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/elements/stats/
 ```
 
@@ -77,26 +82,29 @@ Example response:
                 "order": 0
             }
         ]
-    },
-    ...
+    }
 ]
 ```
 
-## Element stats
+## Elements
 
-Lists all elements
+Lists all elements.
 
-```plaintext
+```shell
 GET /element/
 ```
 
+<span class="table-borders">
+
 | Attribute | Type | Required | Description |
-| --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :---: | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `properties` | Array of Properties | no | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br><br>For each property, you can specify:<br>- `key` Key of the property<br>- `value` Value you want to filter on<br>- `type` Either `person` or `event`<br>- `operator`, any of: <br>-- `exact`/empty<br>--`is_not`<br>--`icontains`<br>--`not_icontains`<br>--`gt`<br>--`lt`<br>--`is_set` |
+
+</span>
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/elements/
 ```
 

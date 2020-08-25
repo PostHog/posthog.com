@@ -1,5 +1,5 @@
 ---
-title: Running behind proxy
+title: Running Behind a Proxy
 sidebar: Docs
 showTitle: true
 ---
@@ -7,11 +7,11 @@ showTitle: true
 
 If you're running PostHog behind a proxy, there are a few more things you need to do to make sure PostHog (specifically the toolbar, which runs on your own site) works.
 
-Make sure you have the `IS_BEHIND_PROXY` environment variable set to true
+Above all, make sure you have the `IS_BEHIND_PROXY` environment variable set to `True`.
 
-### NGINX config
+### NGINX Config (Suggested)
 
-You need to make sure your proxy server is sending X-Forwarded-For headers. For NGINX, that config should look something like:
+You need to make sure your proxy server is sending `X-Forwarded-For` headers. For NGINX, that config should look something like this:
 
 ```nginx
     location / {
@@ -23,22 +23,21 @@ You need to make sure your proxy server is sending X-Forwarded-For headers. For 
     }
 ```
 
-### Apache2 config
+### Apache2 Config
 
 You need the `proxy` `proxy_http` and `proxy_html` modules enabled. 
 To do this, run `sudo a2enmod proxy proxy_http proxy_html`.
 
-Make sure SSL is enabled, and include the `X-Forwarded-Proto` header so that posthog knows it.
+Make sure SSL is enabled, and include the `X-Forwarded-Proto` header so that PostHog knows it.
 
-```apache2
+```apacheconf
 <VirtualHost *:443>
     ProxyPass / http://0.0.0.0:8000/
     RequestHeader set X-Forwarded-Proto expr=%{REQUEST_SCHEME}
-    
-    # ... SSL & other config here
+    # SSL & other config here
 </VirtualHost>
 ```
 
-### Infinite redirect
+### Infinite Redirect
 
-Some users have reported getting infinite redirects running behind a proxy. Make sure the `X-Forwarded-Proto` header is set to `https` if you have https enabled. Alternatively, you can set the `DISABLE_SECURE_SSL_REDIRECT` variable to make PostHog run using http.
+Some users have reported getting infinite redirects when running behind a proxy. Make sure the `X-Forwarded-Proto` header is set to `https` if you have HTTPS enabled. Alternatively, you can set the `DISABLE_SECURE_SSL_REDIRECT` variable to make PostHog run using HTTP.

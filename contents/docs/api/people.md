@@ -5,29 +5,32 @@ showTitle: true
 ---
 
 
-In PostHog, there is an API endpoint available to see all people ("users") in your PostHog instance.
+In PostHog, there is an API endpoint available to see all people (users) in your PostHog instance.
 
 ## Pagination
 
-This endpoint has pagination. See [pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for more info.
 
-## List people
+## List People
 
-```plaintext
+```shell
 GET /person
 GET /person/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com","type":"person"}]
 GET /person/?id=214882,492810,18240
 GET /person/by_distinct_id/?distinct_id=0xbG68iGeFo5brk
 ```
+<span class="table-borders">
 
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `properties` | Array of Properties | no | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br><br>For each property, you can specify:<br>- `key` Key of the property<br>- `value` Value you want to filter on<br>- `type` Either `person` or `event`<br>- `operator`, any of: <br>-- `exact`/empty<br>--`is_not`<br>--`icontains`<br>--`not_icontains`<br>--`gt`<br>--`lt`<br>--`is_set` |
 | `id` | Comma separated ids | no | Get multiple people by id.
 
+</span>
+
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/person/
 ```
 
@@ -70,19 +73,23 @@ Example response:
 }
 ```
 
-## Get single person
+## Get a Single Person
 
-```plaintext
+```shell
 GET /person/:id
 ```
 
+<span class="table-borders">
+
 | Attribute | Type | Required | Description |
-| --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id` | Integer | yes | ID of the user
+| :---: | :---: | :---: | :---:|
+| `id` | Integer | yes | ID of the user |
+
+</span>
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/person/2296750/
 ```
 

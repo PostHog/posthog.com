@@ -8,11 +8,11 @@ showTitle: true
 
 Heroku is currently the **quickest** way to get a production PostHog environment up and running!
 
-If you've never heard of Heroku or what it does, feel free to check out [this doc](https://www.heroku.com/about) that provides a quick gist of the product.
+If you've never heard of Heroku or what it does, feel free to check out [this page](https://www.heroku.com/about) that provides a quick gist of the product.
 
 ## Prerequisites
 
-- A [Heroku](https://signup.heroku.com/) account set up and verified *(it's free, don't worry :))*.
+- A [Heroku](https://signup.heroku.com/) account set up and verified *(it's free, don't worry :D)*.
     > _Although the deployment is free, ensure that your **credit card information** is entered in your profile. If not, the initial build will fail and prompt you to do so._
 
 ## Step By Step Installation
@@ -33,6 +33,27 @@ If you've never heard of Heroku or what it does, feel free to check out [this do
 
     - Within the **Manage App** screen, simply click **Open App** on the top right to start your PostHog environment.
 
+### Secret Key
+
+A unique `SECRET_KEY` is essential for the security of your PostHog instance. When using Heroku 1-click deploy, Heroku automatically generates and sets this for you.
+
+However, if you want to set your own key, you can do so as follows:
+
+1. Generate the key and copy it:
+
+    ```bash
+    openssl rand -hex 32
+    ```
+
+2. Set the key on your instance, by running the following command with your key and Heroku app name:
+
+    ```bash
+    heroku config:set SECRET_KEY="<your secret key>" --app <your app name>
+    ```
+
+
+
+
 ## Add-Ons
 
 By default, we install a `hobby-dev` Postgres and Redis add-on to the app - these can be found in the **Manage App** screen under **Installed add-ons**.
@@ -45,16 +66,16 @@ Heroku provides **10k** rows for free on **Postgres**, which you will hit fairly
 
 Similarly, you might also want to **upgrade your Redis** instance if you have a larger PostHog deployment:
 
-1. navigate back to the **Manage App** screen.
+1. Navigate back to the **Manage App** screen.
 
-1. click on the *Configure Add-ons* link by the **Installed add-ons** section.
+1. Click on the *Configure Add-ons* link by the **Installed add-ons** section.
 
-1. click on the button to the right of both the `Heroku Postgres` and `Heroku Redis` add-on.
+1. Click on the button to the right of both the `Heroku Postgres` and `Heroku Redis` add-on.
     - _it looks like an up and down symbol you'd see by an elevator._
 
-1. click on `Modify Plan` and pick your desired one!
+1. Click on `Modify Plan` and pick your desired one!
 
-## Upgrading Heroku
+## Upgrading PostHog on Heroku
 
 ```bash
 git clone https://github.com/PostHog/posthog.git
@@ -69,23 +90,23 @@ By default, Heroku uses a hobby-dev dyno, which sleeps if there hasn't been any 
 
 To avoid this, we strongly recommend upgrading to at least a "Hobby" dyno:
 
-1. navigate back to the **Manage App** screen.
+1. Navigate back to the **Manage App** screen.
 
-1. click on the *Configure Dynos* link by the **Dyno Formation** section.
+1. Click on the *Configure Dynos* link by the **Dyno Formation** section.
 
-1. click on the **Change Dyno Type** button.
+1. Click on the **Change Dyno Type** button.
 
-1. choose your desired tier!
+1. Choose your desired tier!
 
 ### Upgrading from before 1.0.11?
 
-PostHog is now using Redis with a worker to process events and other background tasks. If you're getting a `REDIS_URL is required` error or seeing a `Configuration Error` in the interface, you'll need to setup a redis server and run the worker process.
+PostHog is now using Redis with a worker to process events and other background tasks. If you're getting a `REDIS_URL is required` error or seeing a `Configuration Error` in the interface, you'll need to setup a Redis server and run the worker process.
 
-A new Heroku Redis addon should be enabled automatically with the free plan. We recommend to switch to at least the first paid plan (premium-0) to enable [persistence](https://devcenter.heroku.com/articles/heroku-redis#persistence) and protect yourself against data loss. You will also see a new dyno type `worker`, which may or may not be deployed automatically. You will need to deploy at least one `worker` dyno for the background tasks to work.
+A new Heroku Redis addon should be enabled automatically with the free plan. We recommend to switch to at least the first paid plan (premium-0) to enable [persistence](https://devcenter.heroku.com/articles/heroku-redis#persistence) and protect yourself against data loss. You will also see a new dyno type called `worker`, which may or may not be deployed automatically. You will need to deploy at least one `worker` dyno for the background tasks to work.
 
 ### Upgrading from before 3 March 2020?
 
-If you last updated PostHog before 3 March 2020, AND you have a lot of events, there is one migration (0027) that might take a long time.
+If you last updated PostHog before 3 March 2020 **AND** you have a lot of events, there is one migration (0027) that might take a long time.
 
 To avoid this, _before_ you migrate, run `python manage.py migrate_elementgroup` to pre-migrate elements across.
 

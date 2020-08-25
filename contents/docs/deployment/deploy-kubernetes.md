@@ -1,14 +1,17 @@
 ---
-title: Deploying to Helm Chart (Kubernetes)
+title: Deploying with Helm Chart (Kubernetes)
 sidebar: Docs
 showTitle: true
 ---
 
 ## Why Helm Charts
 
-Helm allows us to efficiently manage Kubernetes applications - they help us define, install, and upgrade nearly every Kubernetes application!
+Helm is the package manager for Kubernetes, which allows us to efficiently manage Kubernetes applications. 
 
-In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) deployment on a [Kubernetes](http://kubernetes.io) cluster using [Helm](https://helm.sh). We also optionally package [PostgreSQL](https://github.com/kubernetes/charts/tree/master/stable/postgresql) and [Redis](https://github.com/kubernetes/charts/tree/master/stable/redis) - these are required for PostHog. You can read more about this in the [packages](#packages) section.
+Helm Charts are the "packages" in the Helm world. They help us define, install, and upgrade nearly every Kubernetes application!
+
+In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) deployment on a [Kubernetes](http://kubernetes.io) cluster using [Helm](https://helm.sh). We also optionally package [PostgreSQL](https://github.com/kubernetes/charts/tree/master/stable/postgresql) and [Redis](https://github.com/kubernetes/charts/tree/master/stable/redis) - these are required for PostHog. You can read more about this in the [Packages](#packages) section.
+
 
 ## Prerequisites
 
@@ -22,10 +25,10 @@ In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) depl
 
 2. Run the following:
 
-> _NOTE: If helm hangs while installing, try **increasing the memory** of your nodes._
-> As a baseline, we suggest having at least *4gb of memory per node*
+> _NOTE: If Helm hangs while installing, try **increasing the memory** of your nodes._
+> _As a baseline, we suggest having at least **4gb of memory per node**._
 
-```shell script
+```bash
 helm repo add posthog https://posthog.github.io/charts/
 helm repo update
 helm install posthog posthog/posthog
@@ -33,13 +36,15 @@ helm install posthog posthog/posthog
 
 ## Configuration
 
-The following table lists the configurable parameters of the PostHog helm chart and their default values.
+The following table lists the configurable parameters of the PostHog Helm Chart and their default values.
 
-Dependent charts can also have values overwritten. Preface values with Postgresql.*
+Dependent charts can also have values overwritten. Preface values with PostgreSQL.
 
-Parameter                                            | Description                                                                                                | Default
-:--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- | :---------------------------------------------------
-`image.repository`                                   | PostHog image                                                                                              | `posthog/posthog`
+<span class="table-borders">
+
+| Parameter                                            | Description | Default |
+:------------------------------------- | :----- | :-------------------------- |
+`image.repository`                                   | PostHog image                                                                                      | `posthog/posthog`
 `image.tag`                                          | PostHog image tag                                                                                          | `latest`
 `image.pullPolicy`                                   | Image pull policy                                                                                          | `Always`
 `image.imagePullSecrets`                             | Specify image pull secrets                                                                                 | `[]`
@@ -47,8 +52,8 @@ Parameter                                            | Description              
 `web.podAnnotations`                                 | Web pod annotations                                                                                        | `{}`
 `web.podLabels`                                      | Web pod extra labels                                                                                       | `{}`
 `web.replicacount`                                   | Amount of web pods to run                                                                                  | `1`
-`web.resources.limits`                               | Web resource limits                                                                                        | `{cpu: 500m, memory: 500Mi}`
-`web.resources.requests`                             | Web resource requests                                                                                      | `{cpu: 300m, memory: 300Mi}`
+`web.resources.limits`                               | Web resource limits                                                                                     | `{cpu: 500m, memory: 500Mi}`
+`web.resources.requests`                             | Web resource requests                                                                                   | `{cpu: 300m, memory: 300Mi}`
 `web.env`                                            | Additional web environment variables                                                                       | `[]`
 `web.nodeSelector`                                   | Node labels for web pod assignment                                                                         | `{}`
 `web.affinity`                                       | Affinity settings for web pod assignment                                                                   | `{}`
@@ -71,9 +76,9 @@ Parameter                                            | Description              
 `web.hpa.maxpods`                                    | Max pods for the web HorizontalPodAutoscaler                                                               | `10`
 `email.from_email`                                   | Emails are sent are from                                                                                   | `tim@posthog.com`
 `email.host`                                         | SMTP host for sending email                                                                                | `smtp`
-`email.port`                                         | SMTP port                                                                                                  | `578`
-`email.user`                                         | SMTP user                                                                                                  | `nil`
-`email.password`                                     | SMTP password                                                                                              | `nil`
+`email.port`                                         | SMTP port                                                                                         | `578`
+`email.user`                                         | SMTP user                                                                                          | `nil`
+`email.password`                                     | SMTP password                                                                                      | `nil`
 `email.use_tls`                                      | SMTP TLS for security                                                                                      | `false`
 `email.use_ssl`                                      | SMTP SSL for security                                                                                      | `false`
 `email.existingSecret`                               | SMTP password from an existing secret                                                                      | `nil`
@@ -127,11 +132,14 @@ Parameter                                            | Description              
 `serviceAccount.create`                              | Configures if a ServiceAccount with this name should be created                                            | `true`
 `serviceAccount.annotations`                         | Configures annotation for the ServiceAccount                                                               | `{}`
 
+
+</span>
+
 Dependent charts can also have values overwritten. Preface values with "postgresql."
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
-```console
+```bash
 $ helm install \
   --set persistence.enabled=false,email.host=email \
   my-release .
@@ -139,7 +147,7 @@ $ helm install \
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
-```console
+```bash
 $ helm install -f my-values.yaml my-release .
 ```
 
@@ -147,16 +155,18 @@ $ helm install -f my-values.yaml my-release .
 
 ### PostgresSQL
 
-By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. The other options (`postgresql.postgresqlDatabase`, `postgresql.postgresqlUsername` and `postgresql.postgresqlPort`) may also want changing from their default values.
+By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. 
 
-To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [this doc](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
+The other options (`postgresql.postgresqlDatabase`, `postgresql.postgresqlUsername` and `postgresql.postgresqlPort`) may also need changes from their default values.
+
+To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where the password will be overwritten with randomly generated passwords otherwise. See [this doc](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more details.
 
 ### Redis
 
-By default, Redis is installed as part of the chart. To use an external Redis server/cluster set `redis.enabled` to `false` and then set `redis.host`. If your redis cluster uses password define it with `redis.password`, otherwise just omit it. Check the table above for more configuration options.
+By default, Redis is installed as part of the chart. To use an external Redis server/cluster set `redis.enabled` to `false` and then set `redis.host`. If your Redis cluster uses a password, you should define it with `redis.password`, otherwise just omit it. Check the table above for more configuration options.
 
-To avoid issues when upgrading this chart, provide `redis.password` for subsequent upgrades. Otherwise the redis pods will get recreated on every update, potentially incurring some downtime.
+To avoid issues when upgrading this chart, provide `redis.password` for subsequent upgrades. If you do not, the Redis pods will get recreated on every update, potentially incurring some downtime.
 
 ### Ingress
 
-This chart provides support for Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.enabled` to true and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
+This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.enabled` to true and choose an `ingress.hostname` for the URL. You should then be able to access the installation using that address.

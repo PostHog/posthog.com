@@ -39,24 +39,24 @@ class ResponsiveTopBar extends Component {
       >
       <div
         style={{
-          position: "absolute",
+          position: "static",
           width: "100%",
           height: 40,
-          background: 'aliceblue',
           lineHeight: '40px'
         }}
       >
         {!anchorOpen && !sidebarHide &&
           <div style={{
             position: "absolute",
-            left: 8,
+            margin: 8
           }}>
             {sidebarOpen ?
               <Button icon="close" onClick={this.onSetSidebarClose} /> :
               <Button icon="bars" onClick={this.onSetSidebarOpen} />
             }
           </div>}
-        {!sidebarOpen && !anchorHide &&
+
+        {/*{!sidebarOpen && !anchorHide &&
           <div style={{
             position: "absolute",
             right: 8,
@@ -65,18 +65,19 @@ class ResponsiveTopBar extends Component {
               <Button icon="close" onClick={this.onSetAnchorClose} /> :
               <Button icon="ellipsis" onClick={this.onSetAnchorOpen} />
             }
-          </div>
-        }
+          </div>*/}
       </div>
       {sidebarOpen &&
         <div style={{
-          position: "fixed",
+          marginTop: '2vh',
+          position: "absolute",
           top: menuOpen ? nMenuItem*32 + 90 : 105,
           left: 0,
           right: 0,
           bottom: 0,
           backgroundColor: 'white',
-          zIndex: 9999
+          zIndex: 9999,
+          width: '100%'
         }}>
           <div style={{
             position: "absolute",
@@ -95,7 +96,7 @@ class ResponsiveTopBar extends Component {
       }
       {anchorOpen &&
         <div style={{
-          position: "fixed",
+          position: "absolute",
           top: menuOpen ? nMenuItem*32 + 90 : 105,
           left: 0,
           right: 0,

@@ -1,16 +1,19 @@
 ---
-title: Development process
+title: Development Process
 sidebar: Handbook
 showTitle: true
 ---
 
-Any process is a balance between speed and control. If we have a huge process that requires lots of QA and 10 approvals, we will never make mistakes because we will never release anything.
+> _**Note:** This guide is aimed at people who work for PostHog. If you want to contribute, [see our Contributing Guide](/docs/contributing)._
 
-If we have 0 process, we will release quickly but everything will be broken.
+<br>
 
-!> This guide is aimed at people who work for PostHog. If you want to contribute, [see our contributing guide](https://docs.posthog.com/#/contributing).
+Any process is a balance between speed and control. If we have a long process that requires extensive QA and 10 approvals, we will never make mistakes because we will never release anything.
 
-## 1. How to decide what to build
+However, if we have no checks in place, we will release quickly but everything will be broken.
+
+
+## 1. How to Decide What to Build
 
 There are 3 places that work comes from.
 
@@ -19,15 +22,15 @@ There are 3 places that work comes from.
 - "This should be better"
 
 
-## 2. Sizing a task
+## 2. Sizing a Task
 
-When picking up a task, it should be do-able in a day, including code review and QA. If it's not, you need to break it down into smaller chunks until it is. Tasks of this size are easy to test, easy to deploy, won't often cause merge conflicts and should still deliver some kind of value.
+When picking up a task, it should be doable in a day, including code review and QA. If it's not, you need to break it down into smaller chunks until it is. Tasks of this size are easy to test, easy to deploy, won't often cause merge conflicts and should still deliver some kind of value.
 
 Even if you're contributing, this is helpful as it means you'll be able to contribute to PostHog faster.
 
-## 3. Writing code
+## 3. Writing Code
 
-We're big fans of TDD. We've tried to create test infrastructure that helps you rather than annoys you. If that isn't the case, please raise an issue! Keeping tests is a high priority to keep developer productivity high.
+We're big fans of Test Driven Development (TDD). We've tried to create test infrastructure that helps you rather than annoys you. If that isn't the case, please raise an issue! Keeping tests on point is a high priority to keep developer productivity high.
 
 Other than that, you know what to do in this section.
 
@@ -39,7 +42,7 @@ To make sure our issues are linked correctly to the PRs, you can tag the issue i
 git commit -m "Closes #289 add posthog logo to website"
 ```
 
-## 5. Code review
+## 5. Code Review
 
 When we review a PR, we'll look at the following things:
 - Does the PR actually solve the issue?
@@ -48,42 +51,29 @@ When we review a PR, we'll look at the following things:
 - Are there tests and do they test the right things?
 - Are there any security flaws?
 
-Things we do not care about during review
+Things we do not care about during review:
 - Syntax. If we're arguing about syntax, that means we should install a code formatter
 
-## 6. QA
+## 6. Quality Assurance
 
-See [How to QA](/dev/development-process/how-to-qa)
+All our PRs go through a QA process by at least another member.
+
+See: [How to QA](/handbook/engineering/how-to-qa).
 
 ## 7. Merging
 
 Merge anytime. Friday afternoon? Merge.
 
-Our testing, reviewing and building process should be good enough we're comfortable merging any time.
+Our testing, reviewing and building process should be good enough that we're comfortable merging any time.
 
+## How to Test
 
-# How to test
+See: [How to test](/docs/contributing#testing).
 
-## Backend
-At the moment, we have strong tests on the backend. We expect every backend function to have tests, and to be typed. Running `bin/tests` will run both tests and type-checking.
+## How to QA
 
-To run a specific subset of tests
-```bash
-bin/tests posthog.api.test.test_action
-```
+See: [How to QA](/handbook/engineering/how-to-qa).
 
-You can also pass failfast
-```bash
-bin/tests --failfast
-```
+## How to release a new version 
 
-### Frontend
-At the moment we do not have good frontend tests. This is something we want, but haven't gotten round to.
-
-
-# How to QA
-[How to QA](/dev/development-process/how-to-qa)
-
-
-# How to release a new version 
-[Release new version](/dev/development-process/release-new-version)
+See: [Release new version](/handbook/engineering/release-new-version).

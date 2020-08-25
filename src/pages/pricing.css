@@ -5,6 +5,7 @@
 .p-title {
   font-size: 64px;
   font-weight: 500;
+  font-family: lato;
 }
 
 .p-text-primary {
@@ -19,6 +20,7 @@
   font-size: 36px;
   font-weight: 500;
   color: #595959;
+  margin-top: 15px;
 }
 
 .p-plan-price {
@@ -106,6 +108,8 @@
 
 .p-segment label input {
   visibility: hidden;
+  width: 0;
+  height: 0;
 }
 
 .p-features-link {

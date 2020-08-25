@@ -4,10 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-ios) for the Posthog-iOS library. This is the official PostHog iOS library 
+[Click here](https://github.com/PostHog/posthog-ios) for the Posthog-iOS Library. This is the official PostHog iOS library 
 to capture and send events to any PostHog instance (including posthog.com).
 
-This library uses an internal queue to make calls non-blocking and fast. It also batches requests and flushes asynchronously, 
+This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, 
 making it perfect to use in any part of your mobile app.
 
 ## Installation
@@ -30,7 +30,7 @@ github "posthog/posthog-ios"
 
 ### With Objective-C
 
-```objective-c
+```objectivec
 #import <PostHog/PHGPostHog.h>
 #import <PostHog/PHGPostHogConfiguration.h>
 
@@ -65,24 +65,24 @@ PHGPostHog.setup(with: configuration)
 let posthog = PHGPostHog.shared()
 ```
 
-## Making calls
+## Making Calls
 
 ### Identify
 
 When you start tracking events with PostHog, each user gets an anonymous ID that is used to identify them in the system.
 In order to link this anonymous user with someone from your database, use the `identify` call. 
 
-Identify lets you add metadata on your users so you can more easily identify who they are in PostHog, and even do things 
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
 
 An identify call requires:
 
 * `distinct_id` which uniquely identifies your user in your database
-* `properties` with a dictionary with key: value pairs
+* `properties` with a dictionary of key:value pairs
 
 For example:
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] identify:@"distinct_id_from_your_database"
                           properties:@{ @"name": @"Peter Griffin",
@@ -102,20 +102,20 @@ When you call `identify`, all previously tracked anonymous events will be linked
 ### Capture
 
 Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find 
-patterns in usage, work out which features to improve or where people are giving up.
+patterns in usage, work out which features to improve, or find out where people are giving up.
 
 A `capture` call requires:
 
 * `event name` to specify the event
   * We recommend using [noun] [verb], like `movie played` or `movie updated` to easily identify what your events mean later on.
 
-Optionally you can submit
+Optionally you can submit:
 
 * `properties`, which can be an array with any information you'd like to add
 
 For example:
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
 ```
@@ -128,15 +128,15 @@ posthog.capture("Signed Up", properties: ["plan": "Pro++"])
 ### Flush
 
 You can set the number of events in the configuration that should queue before flushing. 
-Setting this to `1` will send events immediately and will use more battery. It's set to `20` by default.
+Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
 
-```objective-c
+```objectivec
 configuration.flushAt = 1;
 ```
 
 You can also manually flush the queue:
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] capture:@"Logged Out"];
 [[PHGPostHog sharedPostHog] flush]
@@ -152,7 +152,7 @@ posthog.flush()
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] reset]
 ```
@@ -168,7 +168,7 @@ With `configuration.recordScreenViews` set as `YES`, PostHog will try to record 
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
-```objective-c
+```objectivec
 // in objective-c
 [[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
 ```
@@ -180,9 +180,9 @@ posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
 
 ## All Configuration options
 
-The `configuration` element contains several other things you can toggle:
+The `configuration` element contains several other settings you can toggle:
 
-```objective-c
+```objectivec
 /**
  * Whether the posthog client should use location services.
  * If `YES` and the host app hasn't asked for permission to use location services then the user will be  
@@ -255,6 +255,6 @@ configuration.capturePushNotifications = NO;
 configuration.captureDeepLinks = NO;
 ``` 
 
-## Thank you
+## Thank You
 
-This library is largely based on the analytics-ios package.
+This library is largely based on the `analytics-ios` package.
