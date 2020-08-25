@@ -76,6 +76,7 @@ class Menu extends Component {
               )}
               {!sidebarDocked && !menuOpen ? (
                 <Button
+                className="dropdownMenuButton"
                   style={{
                     position: 'relative',
                     fontSize: 32,

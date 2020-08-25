@@ -50,7 +50,11 @@ function Template({
     />
     <div className="docsPagesContainer">
       <div className="docsPages">
-        { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
+      <MediaQuery maxWidth={1076}>
+        {screenIsSmall => ( 
+          !screenIsSmall &&
+            frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> 
+        )}</MediaQuery>
         <div
           className="docsPagesContent"
           dangerouslySetInnerHTML={{ __html: html }}

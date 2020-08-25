@@ -698,7 +698,7 @@ header {
 }
 
 .headerItems {
-  margin-right: 20px;
+
 }
 
 .headerItems ul {
@@ -714,6 +714,10 @@ header {
 .dropdownMenu {
   background-color: #ffffff!important;
   height: 100vh!important;
+}
+
+.dropdownMenuButton {
+  color: #000000!important;
 }
 
 .redTopbar {
@@ -787,6 +791,7 @@ header {
 aside.sidebar {
   background: #F0F0F0;
   font-weight: 400!important;
+  border-right: 10px solid #F96132;
 }
 
 .ant-menu-item > a {

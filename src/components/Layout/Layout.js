@@ -79,7 +79,7 @@ class Layout extends Component {
 
                       <AntdLayout theme="light">
                         <AntdLayout.Header
-                        className={"menuHeader " + (isBlogPage && "blogPost")}
+                        className={"menuHeader " + (isBlogPage && "blogPost") + (onPostPage)}
                         style={{ 
                           backgroundColor: screenIsSmall && onPostPage ? '#F0F0F0' : '#fff', 
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
