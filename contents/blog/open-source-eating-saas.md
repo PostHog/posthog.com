@@ -75,4 +75,4 @@ However, the advantages above won't all apply if you're building something that 
 
 If you have a system that would only have interactions with non-technical users (whether day-to-day use or implementation), then you might be out of luck.
 
-However, even though the points presented here may not apply to your business, there are still various other benefits to being open source, so don't drop the idea just yet.
+However, even though the points presented here may not apply to your business, there are still various other benefits to being open source, so maybe don't drop the idea just yet.
