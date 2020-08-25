@@ -9,13 +9,15 @@ import TableOfContents from '../TableOfContents';
 
 const getCurrentSidebar = () => {
   let pathSections = window.location.pathname.split('/')
-  return pathSections.length > 2 ? parseSidebarName(window.location.pathname.split('/')[2]) : "PostHog Docs"
+  return pathSections.length > 3 ? parseSidebarName(window.location.pathname.split('/')[2]) : "PostHog Docs"
 }
 
 const parseSidebarName = (sidebarPath) => {
     const regex = /(^|\s)\S/g
-    return sidebarPath === "api" ? "API" : sidebarPath.replace('-', ' ').replace(regex, letter => letter.toUpperCase())
+    return sidebarPath === "api" ? "API" : sidebarPath.replace(/-/g, ' ').replace(regex, letter => letter.toUpperCase())
 }
+
+const isDocsPage = () => {return window.location.pathname.split('/')[1] === "docs"}
 
 class ResponsiveTopBar extends Component {
   onSetSidebarOpen = () => {
@@ -49,7 +51,7 @@ class ResponsiveTopBar extends Component {
       <div className="redTopbar">
         <div className="redTopbarText">
           <h2 style={{color: 'white'}}>{pageTitle}</h2>
-            <p>{getCurrentSidebar()}</p>
+            {isDocsPage() && <p>{getCurrentSidebar()}</p>}
         </div>
         {!anchorOpen && !sidebarHide &&
           <div>
