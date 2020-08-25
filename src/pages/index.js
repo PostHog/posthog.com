@@ -43,7 +43,7 @@ function IndexPage() {
       <div className="indexContainer">
         <SEO
           title="PostHog – Open-Source Product Analytics"
-          description="Open-source product analytics built for developers. Automate the collection of every event on your website or app, with no need to send data to 3rd parties. Quickly deploy on your own infrastructure, with full access to the underlying data."
+          description="Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data."
         />
         <Row>
           <Col span={24}>
