@@ -42,7 +42,7 @@ function IndexPage() {
           title="PostHog - open source product analytics"
           description="Understand your users. Build a better product"
         />
-        <div className="topPageWrapper">
+        <div className="topPageWrapper wrapper">
           <Row>
             <Col span={22} offset={2}>
               <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>

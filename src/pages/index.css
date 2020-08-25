@@ -7,49 +7,24 @@
     border-bottom: none;
 }
 
-.indexContainer {
-    top: 0;
-    margin: 0;
-    height: 590px;
-    max-height: 650px;
-    width: 100vw!important;
-}
-
-@media screen and (min-width: 1920px) {
-    .indexContainer {
-    }
-}
-
-@media screen and (max-width: 1440px) {
-    .indexContainer {
-        width: 100vw!important;
-        background-size: 543px 410.27px;
-        background-repeat: repeat;
-        background-position: top center;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .indexContainer {
-        width: 100vw!important;
-        background-size: cover;
-        max-height: 460px;
-    }
-}
-
-.topPageWrapper {
-    background-image: url('../images/landing-page-background.svg');
-    background-size: 600px 600px;
-    background-repeat: repeat;
-    background-position: 0 center;
-}
-
 .ant-row {
     height: auto;
     background: none;
     margin: 0;
     padding: 0;
     position: relative;
+    max-width: 1920px
+}
+
+@media screen and (min-width: 1920px) {
+    .ant-row {
+        width: 1920px;
+        margin: 0 calc((100vw - 1920px) / 2);
+    }
+}
+
+main {
+    margin-top: 0!important;
 }
 
 .ant-layout {
@@ -65,13 +40,41 @@ header {
 }
 
 .wrapper {
-    margin: 10px 0;
 }
 
-@media screen and (min-width: 1920px) {
-    .wrapper {
-        padding: 0 calc((100vw - 1920px) / 2);
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 18px;
+        line-height: 20px;
     }
+    h2 {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    h2.gosha {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    h3 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    h4 {
+        font-size: 12px;
+        line-height: 20px;
+    }
+    p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+}
+
+.topPageWrapper {
+    background-image: url('../images/landing-page-background.svg');
+    background-size: 600px 600px;
+    background-repeat: repeat;
+    background-position: top center;
+    top: 0;
 }
 
 .ant-btn-primary { 
@@ -133,33 +136,6 @@ header {
     }
     i.anticon.anticon-right-circle {
         display: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    h1 {
-        font-size: 18px;
-        line-height: 20px;
-    }
-    h2 {
-        font-size: 16px;
-        line-height: 20px;
-    }
-    h2.gosha {
-        font-size: 14px;
-        line-height: 20px;
-    }
-    h3 {
-        font-size: 14px;
-        line-height: 20px;
-    }
-    h4 {
-        font-size: 12px;
-        line-height: 20px;
-    }
-    p {
-        font-size: 12px;
-        line-height: 20px;
     }
 }
 
@@ -477,7 +453,6 @@ header {
         width: 100vw;
     }
     .traffic {
-        /*background-image: none!important;*/
         background-position: 565px top;
     }
 
@@ -757,13 +732,6 @@ header {
     height: auto;
 }
 
-@media screen and (max-width: 1440px) {
-    .installNowImg .heroku, .docker, .aws, .kubernetes{
-        height: auto;
-        width: calc(3/24 * 100vw);
-    }
-}
-
 @media screen and (max-width: 768px) {
     .installNowImg .heroku, .docker, .aws, .kubernetes{
         height: auto;
@@ -826,16 +794,6 @@ header {
     background-position: center top;
     width: auto;
     height: calc( 577/1440 * 100vw + 72px);
-}
-
-@media screen and (max-width: 1440px) {
-    .joinCommunityWrapper {
-        position: relative;
-        background-size: calc(1317/1440 * 100vw) calc(557/1440 * 100vw);
-        background-repeat: no-repeat;
-        background-position: center top;
-        width: 100vw;
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -935,28 +893,6 @@ header {
         border-radius: calc(108 / 1440 * 100vw);
     }
 }
-
-/*@media screen and (max-width: 768px) {
-    .github {
-        left: 0;
-        height: calc(557 / 1317 * 100vw);
-        width: calc(666 / 1317 * 100vw);
-        border-radius: calc(108 / 1317 * 100vw);
-    }
-    .slack {
-        left: calc(388 / 1317 * 100vw);
-        height: calc(557 / 1317 * 100vw);
-        width: calc(666 / 1317 * 100vw);
-        border-radius: calc(108 / 1317 * 100vw);
-    }
-    .roadmap{
-        left: calc(817 / 1317 * 100vw);
-        height: calc(557 / 1317 * 100vw);
-        width: calc(500 / 1317 * 100vw);
-        border-radius: calc(108 / 1317 * 100vw);
-    }
-}*/
-
 
 
 .whatsNew {
