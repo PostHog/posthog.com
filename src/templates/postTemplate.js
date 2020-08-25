@@ -14,7 +14,7 @@ import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 import SEO from '../components/seo';
 import MediaQuery from 'react-responsive'
 
-function addIndex (url) {
+const addIndex = (url) => {
   const indexUrls = ['/docs', '/handbook']
   return `${url}${indexUrls.includes(url) ? '/index' : ''}`
 }
@@ -43,7 +43,7 @@ function Template({
   return (
     <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} pageTitle={frontmatter.title}>
     <SEO
-      title={frontmatter.title + ' - PostHog docs'}
+      title={frontmatter.title + ' - PostHog Docs'}
       description={frontmatter.description || excerpt}
       pathname={markdownRemark.fields.slug}
       article

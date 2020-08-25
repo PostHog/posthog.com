@@ -11,20 +11,8 @@ import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import MediaQuery from 'react-responsive'
 import { default as AntdLayout } from 'antd/lib/layout'
-import Col from 'antd/lib/col'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
-import blogBackground from '../../images/blog-background.svg'
-import { withPrefix } from "gatsby-link"
-
-const isBlogPage = 
-({location }) => {
-  if (location.pathname === withPrefix ("/blog")){
-    return true
-  } else {
-    return false
-  }
-}
 
 class Layout extends Component {
   setPostPageState = state => {
