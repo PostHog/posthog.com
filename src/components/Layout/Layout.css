@@ -608,7 +608,6 @@ td:last-child {
 }
 tt,
 code {
-  background-color: #f8f8f8;
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;
@@ -616,6 +615,11 @@ code {
   padding: 3px 5px;
   white-space: pre-wrap;
 }
+
+tt {
+  background-color: #f8f8f8;
+}
+
 pre code {
   background: none;
   line-height: 1.42;
@@ -1057,3 +1061,11 @@ table th {
   color: #577BFB !important;
 }
 
+code {
+  background-color: #eeeeee;
+}
+
+code::before, code::after {
+  white-space: pre;
+
+}

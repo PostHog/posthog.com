@@ -10,4 +10,4 @@ export const wrapRootElement = wrapWithProvider
 
 
 // gatsby-browser.js
-require('prismjs/themes/prism.css')
+require('prismjs/themes/prism-okaidia.css')
