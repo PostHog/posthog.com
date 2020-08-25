@@ -669,7 +669,8 @@ main.ant-layout-content {
 }
 
 #logo {
-  padding-left: 40px;
+  position: relative;
+  left: 28px;
   overflow: hidden;
   color: rgba(0,0,0,.85);
   font-size: 18px;
@@ -682,16 +683,18 @@ main.ant-layout-content {
 
 
 #logo img {
-    position: relative;
-    top: 10px;
-    height: 32px;
-    margin-right: 16px;
-    vertical-align: middle;
+  width: auto;
+  position: relative;
+  top: 10px;
+  height: 32px;
+  margin-right: 16px;
+  vertical-align: middle;
 }
 
 header {
   margin: 0;
   padding: 0;
+  height: auto;
 }
 
 .headerItems {
@@ -708,10 +711,54 @@ header {
   padding: 0;
 }
 
+.dropdownMenu {
+  background-color: #ffffff!important;
+  height: 100vh!important;
+}
+
 .redTopbar {
-  height: 150px;
+  min-height: 150px;
+  height: 100%;
   width: 100%;
   background-color: #F96132;
+}
+
+.redTopbarButton {
+  height: 60px!important;
+  width: 60px!important;
+  font-size: 30px!important;
+  color: #FFFFFF!important;
+  position: relative!important;
+  left: 84vw!important;
+  top: -24px!important;
+}
+
+.redTopbarText {
+  position: relative;
+  left: 10vw;
+  width: 70vw;
+  top: 50px;
+}
+
+.redTopbarText h2 {
+  font-size: 20px;
+  margin: 0 0 20px;
+  line-height: 20px;
+}
+
+.redTopbarText p {
+  margin: 0;
+  line-height: 20px;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.mobileSidebarMenu {
+  position: relative;
+  left: 18px;
+  width: calc(100vw - 18px);
+  background-color: #ffffff;
+  height: auto;
 }
 
 .footer-universal{
@@ -898,25 +945,26 @@ span.ant-anchor-ink-ball {
   color: #8FA6FC;
 }
 
-.blog-post h2 + h3 {
+.blogPost h2 + h3 {
   color: #000000;
   margin-top: .2rem;
   margin-bottom: 1.45rem;
   left: 0;
 }
 
-.blog-post p + h2 {
+.blogPost p + h2 {
   margin-top: 2rem !important;
   margin-bottom: 1.45rem;
   left: 0;
 }
 
-header.blog-post {
+header.blogPost {
   background-image: url('../../images/blog-background.svg');
+  height: 200px;
 }
 
 
-.blog-post hr {
+.blogPost hr {
   width: 4rem;
   height: 0;
   margin-bottom: 2rem;
@@ -924,11 +972,11 @@ header.blog-post {
   border-style: solid;
   border-color:#1D4AFF;
 }
-.blog-post a {
+.blogPost a {
   color: #1D4AFF;
 }
 
-.blog-post a:hover {
+.blogPost a:hover {
   color: #577BFB;
 }
 

@@ -79,7 +79,7 @@ class Layout extends Component {
 
                       <AntdLayout theme="light">
                         <AntdLayout.Header
-                        className={"menuHeader " + (isBlogPage ? ("blog-post") : (" "))}
+                        className={"menuHeader " + (isBlogPage && "blogPost")}
                         style={{ 
                           backgroundColor: screenIsSmall && onPostPage ? '#F0F0F0' : '#fff', 
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
@@ -102,25 +102,23 @@ class Layout extends Component {
                           {screenIsSmall &&
                             onPostPage &&
                             (!anchorHide || !sidebarHide) && (
-                                <ResponsiveTopBar />
+                                <ResponsiveTopBar pageTitle={pageTitle}/>
                             )}
                           {isBlogPage && !screenIsSmall &&
                           <div style={{
                             position: 'relative',
                             height: 'calc(100% - 64px)', 
-                            top: 0,
+                            top: 64,
                             width: '80%', 
                             color: 'white', 
                             verticalAlign: 'bottom',
                             left: 'calc((100% - 960px) * 0.5 + 2.175rem)'}}
                             >
-
                             <h1 align="left" style={{
                               position: 'absolute',
                               color: 'white',  
-                              bottom: 0
-                              
-                            }} >
+                              bottom: 0 
+                            }}>
                               {pageTitle}
                             </h1>
                           </div>

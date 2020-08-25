@@ -16,32 +16,31 @@ class Header extends Component {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'center',
+          verticalAlign: screenIsSmall ? 'center' : 'top',
           justifyContent: 'space-between',
           background: 'none'
         }}>
           {screenIsSmall ? (
           <Link
             id="logo"
-            to="/"
-            style={{
-              //color: '#FFF',
-              textDecoration: 'none',
-              verticalAlign: 'center'
-            }}>
+            to="/">
             <img alt="logo" src={logo} id="logo-image"/>
           </Link>
           ) : (
+            (isBlogPage || !onPostPage) ? (
             <Link
             id="logo"
-            to="/"
-            style={{
-              //color: '#FFF',
-              textDecoration: 'none',
-              verticalAlign: 'center'
-            }}>
-            <img alt="logo" src={logo} id="logo-image"/>
+            to="/">
+              {isBlogPage ? (
+                <img alt="logo" src={whiteLogo} id="logo-image"/>
+              ):(
+                <img alt="logo" src={logo} id="logo-image"/>
+              )}
+            
           </Link>
+            ) : (
+              <div/>
+            )
           )}
         <Menu 
         sidebarDocked={sidebarDocked}

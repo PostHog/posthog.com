@@ -32,18 +32,20 @@ class ResponsiveTopBar extends Component {
       nMenuItem,
       sidebarHide,
       anchorHide,
+      pageTitle,
     } = this.props
 
     return (
       <div className="redTopbar">
+        <div className="redTopbarText">
+          <h2 style={{color: 'white'}}>{pageTitle}</h2>
+          <p>hello world!</p>
+        </div>
         {!anchorOpen && !sidebarHide &&
-          <div style={{
-            position: "relative",
-            margin: 8
-          }}>
+          <div>
             {sidebarOpen ?
-              <Button icon="close" onClick={this.onSetSidebarClose} /> :
-              <Button icon="bars" onClick={this.onSetSidebarOpen} />
+              <Button className="redTopbarButton" icon="up" type="link" onClick={this.onSetSidebarClose} /> :
+              <Button className="redTopbarButton" icon="down" type="link" onClick={this.onSetSidebarOpen} />
             }
           </div>}
 
@@ -58,30 +60,8 @@ class ResponsiveTopBar extends Component {
             }
           </div>*/}
       {sidebarOpen &&
-        <div style={{
-          marginTop: '2vh',
-          position: "absolute",
-          top: menuOpen ? nMenuItem*32 + 90 : 105,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'white',
-          zIndex: 9999,
-          width: '100%'
-        }}>
-          <div style={{
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            overflowY: "auto",
-            WebkitOverflowScrolling: "touch",
-            transition: "left .3s ease-out, right .3s ease-out",
-            overscrollBehaviorY: 'contain',
-          }}>
+        <div className="mobileSidebarMenu">
             <SidebarContents/>
-          </div>
         </div>
       }
       {anchorOpen &&

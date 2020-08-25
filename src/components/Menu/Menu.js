@@ -38,7 +38,10 @@ class Menu extends Component {
         render={data => {
           const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
           return (
-            <div className="headerItems" style={{ marginRight: 20 }}>
+            <div className="headerItems" style={{ 
+              position: 'relative',
+              top: 0, 
+              background: 'none'}}>
               {sidebarDocked && (
                 <AntMenu
                   mode="horizontal"
@@ -74,8 +77,11 @@ class Menu extends Component {
               {!sidebarDocked && !menuOpen ? (
                 <Button
                   style={{
-                    color: '#1D4AFF',
-                    
+                    position: 'relative',
+                    fontSize: 32,
+                    width: 60,
+                    height: 60,
+                    top: 4,
                   }}
                   type="link"
                   onClick={() => {
@@ -83,44 +89,49 @@ class Menu extends Component {
                   }}
                   icon="menu"
                 />
-              ):(
-                <div>
+              ) : (
                 <CloseOutlined 
                 className="closeButton"
                   style={{ 
+                    position: 'relative',
+                    fontSize: 32,
+                    height: 60,
+                    width: 60,
                     float: 'right',
-                    margin: '16px 20px',
-                    fontSize: '30px', 
+                    right: 0,
+                    top: 4,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                   }}
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length)
                   }}
-                ></CloseOutlined>
-              </div>
+                />
               )}
               {menuOpen && !sidebarDocked && (
                 <div
                   style={{
-                    position: 'relative',
-                    marginTop: '64px',
-                    left: 0,
-                    height: '100vw',
+                    position: 'absolute',
+                    top: 64,
+                    height: '100vh',
                     width: '100vw',
-                    paddingLeft: 0,
-                    paddingRight: 0,
-                    backgroudColor: 'red'
+                    float: 'right',
+                    right: 0,
+                    zIndex: 1
                   }}
                 >
-                  <div style={{height: '100px'}}/>
                   <List
+                    className="dropdownMenu"
                     itemLayout="horizontal"
                     dataSource={menuItems}
                     rowKey={item => item.a || item.link}
                     renderItem={item => (
                       <List.Item
                         style={{
+                          lineHeight: 54,
                           listStyle: 'none',
-                          padding: '3vh 10vw',
+                          padding: '32px 10vw',
                           margin: 0
                         }}
                         key={menuItems.indexOf(item)}
