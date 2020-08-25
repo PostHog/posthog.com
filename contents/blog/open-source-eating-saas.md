@@ -49,11 +49,11 @@ It's nifty being able to say anyone in the world is welcome to use or modify wha
 
 ## Big companies can use it
 
-Within weeks of launching the project, we had some of the world's biggest companies using (or trying to use, and giving feedback on what went wrong!) our code.
+Within weeks of launching the project, we had some of the world's biggest companies using our code (or trying to use it, and giving feedback on what went wrong!).
 
-If you've ever tried to sell software to huge organizations, it's typical to spend 1 to 12 months going through information security processes. Often these are due to concerns with sending data to your infrastructure.
+If you've ever tried to sell software to huge organizations, it's typical to spend 1 to 12 months going through information security processes. Often these are due to concerns with sending data to third-party infrastructure.
 
-Open source means enterprises can inspect the entire codebase and they can self deploy. And you can always just provide your project as a hosted offering too in case that's easier. 
+Open source means enterprises can inspect the entire codebase and self-deploy. And you can always just provide your project as a hosted offering too in case that's easier. 
 
 ## Your users are nicer to you
 
@@ -63,7 +63,7 @@ Open source software builds trust with users. After all, you can see exactly wha
 
 When StartupSchool started using PostHog, a key reason they moved forward was that they were able to fix or fill in the gaps the project had. As we fixed these problems with them and built new stuff, the project got more useful for everyone.
 
-If your SaaS only company has lots of bugs, users have to wait for you to fix stuff. There's no sense they could do it themselves.
+If your SaaS only company has lots of bugs, users have to wait for you to fix stuff. They can't just go out there and fix it themselves, nor help you fix them. 
 
 Open source has a wonderful culture of developers filing bugs so they can alert you to problems you may not have even found yourself, and as a project grows in popularity, many users will start fixing issues in a cool hive-mind like way!
 
@@ -71,4 +71,8 @@ Open source has a wonderful culture of developers filing bugs so they can alert 
 
 If this makes you think "heck, we better open source our thing", great.
 
-However, the advantages above won't all apply if it's something that developers don't care about. If it's a system that would only have interactions (whether day to day use or implementation) with non technical users, then you're out of luck.
+However, the advantages above won't all apply if you're building something that developers don't care about. 
+
+If you have a system that would only have interactions with non-technical users (whether day-to-day use or implementation), then you might be out of luck.
+
+However, even though the points presented here may not apply to your business, there are still various other benefits to being open source, so don't drop the idea just yet.
