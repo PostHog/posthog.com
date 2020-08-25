@@ -52,9 +52,13 @@ These days I live in Belgium and code [state management libraries](https://kea.j
 
 ## Eric Duong, Software Engineer
 
-Eric is a former entrepreneur and organized massive scale community cooking sessions, and recently graduated in mathematics from [Yale](https://yale.edu).
+I recently graduated and while in college I helped cofound a social dining platform. I spent two years trying to get strangers to cook and dine with each other. In reality, it turned into a 2 year stint of teach yourself as much mobile development as you can while simultaneously trying to build a usable platform. My cofounders and I had our fair share of contemplating dropping out of school and becoming a unicorn in 5 years—it didn't work out.
 
-We were so impressed by how proactive he is, and the quality of the design of [his previous startup](https://magical.app), that we couldn't help ourselves but get him on board!
+Somewhere along the way I fell down the bitcoin rabbit hole and after realizing day trading crypto wasn't a feasible nor fulfilling long term goal, I remained fascinated by digital currency. This led me to briefly work with a company building a digital cash transfer system for developing economies. 
+
+I currently work as a generalist around most of Posthog's stack building many of the user-facing features but occasionally pick up backend tasks.
+
+To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage of Posthog's all remote policy to travel and hike as many major mountain treks around the world as possible. Ambitions subject to change as always though.
 
 ## James Greenhill, Software Engineer
 
@@ -106,9 +110,10 @@ Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian
 
 Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD). 
 
-Prior to PostHog, I was a technical consultant for clients big and small, which included a Fortune 500 company. 
-A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of.
+Prior to PostHog, I was a technical consultant for clients big and small, which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space. 
 
 For the past three years, I developed a nice habit of documenting my experience with new projects into articles, and that's led me to a [Medium page](https://medium.com/@yakko.majuri) that has surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am. 
 
 When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain. 
+
+Oh, and I'm also a part of the select group of software developers who have won a dunk contest in their lifetime.
