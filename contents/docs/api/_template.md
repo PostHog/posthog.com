@@ -15,7 +15,7 @@ This endpoint has pagination. See [pagination](/docs/api/api#pagination) for mor
 ## List trends
 
 
-```plaintext
+```shell
 GET /...
 GET /.../?properties=[{"key":"$browser","value":"Chrome"}]
 ```
@@ -27,7 +27,7 @@ GET /.../?properties=[{"key":"$browser","value":"Chrome"}]
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/
 ```
 

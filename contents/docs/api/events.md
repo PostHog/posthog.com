@@ -15,7 +15,7 @@ This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for mor
 
 ## List Trends
 
-```plaintext
+```shell
 GET /event
 GET /event/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com"}]
 ```
@@ -31,7 +31,7 @@ GET /event/?properties=[{"key":"email","operator":"icontains","value":"@gmail.co
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/event/
 ```
 

@@ -9,7 +9,7 @@ In PostHog, there is an API endpoint available to do advanced analytics on your 
 
 ## List Trends
 
-```plaintext
+```shell
 GET /action/trends/?events=[{"id":"$pageview"}]
 GET /action/trends/?events=[{"id":"$pageview"}]&properties=[{"key":"$browser","value":"Chrome"}]
 ```
@@ -27,7 +27,7 @@ GET /action/trends/?events=[{"id":"$pageview"}]&properties=[{"key":"$browser","v
 
 Example request:
 
-```shell
+```bash
 curl https://app.posthog.com/action/trends/?events=[{"id":"$pageview"}]
 ```
 

@@ -16,7 +16,7 @@ This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for mor
 
 `/stats` gives you an aggregate count of the number of events for each element. Internally we use this in the toolbar to show you a heatmap.
 
-```plaintext
+```shell
 GET /element/stats/
 GET /element/stats/?properties=[{"key":"$browser","value":"Chrome"}]
 GET /element/stats/?properties=[{"key":"$browser","value":"Chrome"}]&date_from=-2d
@@ -35,7 +35,7 @@ GET /element/stats/?properties=[{"key":"$browser","value":"Chrome"}]&date_from=-
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/elements/stats/
 ```
 
@@ -91,7 +91,7 @@ Example response:
 
 Lists all elements.
 
-```plaintext
+```shell
 GET /element/
 ```
 
@@ -105,7 +105,7 @@ GET /element/
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/elements/
 ```
 
