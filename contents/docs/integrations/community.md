@@ -1,5 +1,5 @@
 ---
-title: Community integrations
+title: Community Integrations
 sidebar: Docs
 showTitle: true
 ---
