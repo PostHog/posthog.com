@@ -81,7 +81,7 @@ Before graduating from high school here in Poland – and having some open-sourc
 Happy to report that I ended up joining PostHog, where open-source software, a quality product and great people all mix freely!
 In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), [photography](https://unsplash.com/@twixes) and [cinema](https://www.nowehoryzonty.pl/index.do?lang=en). Decidedly a fan of precipitation and overcast weather, I have a secret plan to move to the Nordics or the UK one day.
 
-## Paolo Damico, Growth Engineer
+## Paolo D'Amico, Growth Engineer
 
 I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical. I have 10+ years of experience as a software engineer and product manager.
 
@@ -106,14 +106,14 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 ## Yakko Majuri, Technical Writer and Developer
 
-Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who lived in 5 countries across 4 continents over the past few years.
+Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who has lived in 5 countries across 4 continents.
 
 Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD). 
 
-Prior to PostHog, I was a technical consultant for clients big and small, which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space. 
+Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space. 
 
-For the past three years, I developed a nice habit of documenting my experience with new projects into articles, and that's led me to a [Medium page](https://medium.com/@yakko.majuri) that has surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am. 
+For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://medium.com/@yakko.majuri) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am. 
 
 When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain. 
 
-Oh, and I'm also a part of the select group of software developers who have won a dunk contest in their lifetime.
+Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime.
