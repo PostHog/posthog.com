@@ -13,7 +13,7 @@ This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for mor
 
 ## List People
 
-```plaintext
+```shell
 GET /person
 GET /person/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com","type":"person"}]
 GET /person/?id=214882,492810,18240
@@ -30,7 +30,7 @@ GET /person/by_distinct_id/?distinct_id=0xbG68iGeFo5brk
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/person/
 ```
 
@@ -75,7 +75,7 @@ Example response:
 
 ## Get a Single Person
 
-```plaintext
+```shell
 GET /person/:id
 ```
 
@@ -89,7 +89,7 @@ GET /person/:id
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/person/2296750/
 ```
 

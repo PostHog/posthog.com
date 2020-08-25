@@ -1061,11 +1061,16 @@ table th {
   color: #577BFB !important;
 }
 
+pre[class*="language-"] {
+	font-size: 1em !important;
+}
+
 code {
   background-color: #eeeeee;
+  font-size: 0.9em !important;
 }
 
-code::before, code::after {
+code::before {
   white-space: pre;
-
 }
+
