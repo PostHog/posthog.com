@@ -18,19 +18,19 @@ First make sure you have [CocoaPods](https://cocoapods.org/) installed.
 
 Then add the `posthog-react-native` package to your project:
 
-```shell script
+```bash
 yarn add posthog-react-native
 ```
 
 Then link the native libraries:
 
-```shell script
+```bash
 yarn react-native link
 ```
 
 If you're building for iOS, also make sure you have the latest PostHog iOS Pod installed: 
 
-```shell script
+```bash
 cd ios
 pod install
 cd ..

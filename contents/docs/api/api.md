@@ -103,4 +103,4 @@ Sometimes requests are paginated. If that's the case, it'll be in the following 
 }
 ```
 
-In such cases just call the "next" URL to get the following set of results.
+You can then just call the `"next"` URL to get the next set of results.

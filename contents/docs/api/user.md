@@ -12,14 +12,14 @@ This includes all possible event names, event properties, API key, app URLs, cur
 ## List Current User
 
 
-```plaintext
+```shell
 GET /user
 ```
 
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/user/
 ```
 

@@ -84,8 +84,38 @@ Run `./bin/start-frontend`
 
 Run `./bin/tests`
 
-<br>
+<br />
 
+### Running Clickhouse locally
+
+0. Ensure you have Docker and Docker Compose installed
+1. Create a new directory (not inside `/posthog`!) and enter it
+2. Create a file called `docker-compose.yml` and paste the following snippet into it:
+
+```yaml
+version: "3"
+services:
+    server:
+     image: yandex/clickhouse-server
+     ports:
+     - "8123:8123"
+     - "9000:9000"
+     - "9009:9009"
+     
+     ulimits:
+      nproc: 65535
+      nofile:
+       soft: 262144
+       hard: 262144
+    client:
+      image: yandex/clickhouse-client
+      command: ['--host', 'server']
+```
+
+3. Run `docker-compose up -d`. You'll now have a Clickhouse server running on `http://127.0.0.1:8123`
+
+For more information on how to interface with the database, visit the [Clickhouse Docs](https://clickhouse.tech/docs/en/interfaces/).
+    
 
 ## Using Porter
 Porter allows you to develop remotely without having to run or setup Docker on your local machine. It runs the same Docker containers in the cloud and lets you develop directly inside the remotely hosted container while still using your favorite local tools. 

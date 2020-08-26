@@ -21,6 +21,8 @@ To use this plugin, add `posthog_flutter` as a [dependency in your pubspec.yaml 
 
 ### Supported methods
 
+<span class="table-borders">
+
 | Method           | Android | iOS | Web |
 | ---------------- | ------- | --- | --- |
 | `identify`       | X       | X   | X   |
@@ -33,6 +35,8 @@ To use this plugin, add `posthog_flutter` as a [dependency in your pubspec.yaml 
 | `enable`         | X       | X   |     |
 | `debug`          | X\*     | X   | X   |
 | `setContext`     | X       | X   |     |
+
+</span>
 
 \* Debugging must be set as a configuration parameter in `AndroidManifest.xml` (see below). The Official PostHog Library does not offer the debug method for Android.
 

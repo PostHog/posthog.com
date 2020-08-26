@@ -16,18 +16,17 @@ If you try to access your PostHog instance with a different IP, you will get an 
 
 This restriction does not apply to the endpoints used to send events, like `batch`, `capture` etc.
 
-If you're behind a proxy, you need to either set trusted proxies
+If you're behind a proxy, you need to either set trusted proxies:
 ```bash
 TRUSTED_PROXIES=ip1,ip2
 ```
-
 Or you can implicitly trust all proxies:
 
 ```bash
 TRUST_ALL_PROXIES=True
 ```
 
-> When using `TRUST_ALL_PROXIES`, make sure your proxy (like NGINX) is setting the header `X-Forwarded-For`, like in the example above. If not, it would still be possible to spoof your IP address.
+> When using `TRUST_ALL_PROXIES`, make sure your proxy (like NGINX) is setting the header `X-Forwarded-For` like in the example above. If not, it would still be possible to spoof your IP address.
 
 > If you're on Heroku, you are behind a proxy by default, so you'll need to add `IS_BEHIND_PROXY=True`. Heroku automatically overrides `X-Forwarded-For`, so you can use `TRUST_ALL_PROXIES=True`.
 

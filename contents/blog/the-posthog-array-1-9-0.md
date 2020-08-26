@@ -76,7 +76,7 @@ This is especially useful for doing a/b testing. Make sure you upgrade posthog-j
 * We worked hard on improving caching to speed things up. We [fixed cache refreshing](https://github.com/PostHog/posthog/pull/1035) in a few areas, we made a few [caching adjustments](https://github.com/PostHog/posthog/pull/1023) to fix [#1022](https://github.com/PostHog/posthog/issues/1022). Finally, we now use [redis to cache results](https://github.com/PostHog/posthog/pull/972).
 * Save time! You can now [create actions from the trends page](https://github.com/PostHog/posthog/pull/990).
 * [Upgrade to posthog-js 1.2.0 to support dynamic params](https://github.com/PostHog/posthog/pull/957).
-* We fixed long href inserts - the href [can now go up to 2048 characters](https://github.com/PostHog/posthog/pull/1027) before truncation. Someone must have had some funky urls going on...
+* We fixed long href inserts - the href [can now go up to 2048 characters](https://github.com/PostHog/posthog/pull/1027) before truncation. Someone must have had some funky urls going on…
 * [We prevented intermittent issues with yarn build](https://github.com/PostHog/posthog/pull/1026)
 * We [fixed a bug](https://github.com/PostHog/posthog/pull/1021) that caused cohorts to fail when actions were deleted
 * We [solved a problem](https://github.com/PostHog/posthog/pull/980) with comparing trend sessions distribution
@@ -114,7 +114,7 @@ From our own blog:
 Other cool stuff from around the web:
 
 * [Funding for moonshots](https://apolloprojects.com/) - get your own $3M.
-* [Strandbeest](https://www.strandbeest.com/) - wooden, walking sculptures... they're pretty weird.
+* [Strandbeest](https://www.strandbeest.com/) - wooden, walking sculptures… they're pretty weird.
 
 ## PostHog news
 
