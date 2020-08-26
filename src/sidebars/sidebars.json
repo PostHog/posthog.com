@@ -193,6 +193,7 @@
     "entry":"Company Blog",
     "name":"Company Blog",
     "items": [
+      "blog/open-source-eating-saas",
       "blog/product-led-growth",
       "blog/a-chat-with-sid",
       "blog/raising-3m-for-os",
