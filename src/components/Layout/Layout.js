@@ -28,6 +28,12 @@ const isBlogPage =
 }
 
 class Layout extends Component {
+  componentDidMount() {
+    // Break out of iframe
+    if (window.location !== window.top.location) {
+      window.top.location = window.location;
+    }
+  }
   setPostPageState = state => {
     this.props.setPostPageState(state)
   }
