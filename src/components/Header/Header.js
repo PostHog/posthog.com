@@ -24,7 +24,7 @@ class Header extends Component {
           <Link
             id="logo"
             to="/">
-            <img alt="logo" src={logo} id="logo-image"/>
+            <img alt="logo" src={logo} id="logo-image-header"/>
           </Link>
           ) : (
             (isBlogPage || !onPostPage) ? (
@@ -32,9 +32,9 @@ class Header extends Component {
             id="logo"
             to="/">
               {isBlogPage ? (
-                <img alt="logo" src={whiteLogo} id="logo-image"/>
+                <img alt="logo" src={whiteLogo} id="logo-image-header"/>
               ):(
-                <img alt="logo" src={logo} id="logo-image"/>
+                <img alt="logo" src={logo} id="logo-image-header"/>
               )}
             
           </Link>

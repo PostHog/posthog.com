@@ -112,6 +112,7 @@ class Menu extends Component {
               )}
               {menuOpen && !sidebarDocked && (
                 <div
+                className="dropdownMenuMobile"
                   style={{
                     position: 'absolute',
                     top: 64,

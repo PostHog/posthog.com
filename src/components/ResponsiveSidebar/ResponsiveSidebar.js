@@ -8,28 +8,10 @@ class ResponsiveSidebar extends Component {
     const { expandedKeys } = this.props
 
     return (
-      <div style={{
-        width: '100%',
-        top: 80,
-        left: 10,
-        right: "80%",
-        bottom: 0,
-        zIndex:1, 
-        marginBottom: 10,
-      }} >           
-        <div style={{
-          marginLeft: 10,
-          marginRight: 10,
-        }}>
-          <Link
-            id="logo"
-            to="/"
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-
-              <img alt='logo' src={logo} id='logo-image' style={{width: 160, height: 'auto', top: 10, left: 40, marginTop: 17, marginBottom: 80}}/>
+      <div className="sidebarMenuDesktop">           
+        <div className="sidebarMenuWrapper">
+          <Link id="logo" to="/">
+            <img alt='logo' src={logo} id='logo-image-sidebar'/>
           </Link>
           <SidebarContents/>
         </div>

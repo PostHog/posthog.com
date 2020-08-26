@@ -645,9 +645,14 @@ pre tt:after {
 /* antd componentes custom styling */
 
 main.ant-layout-content {
-  min-height: 280px; 
   padding: 3rem 0% 0px 10%; 
   width: 100%;
+}
+
+@media screen and (max-width: 1076px) {
+  main.ant-layout-content {
+    padding: 0!important;
+  }
 }
 
 .gutter-box {
@@ -670,7 +675,9 @@ main.ant-layout-content {
 
 #logo {
   position: relative;
-  left: 28px;
+  left: 40px;
+  top: 0;
+  height: 40px;
   overflow: hidden;
   color: rgba(0,0,0,.85);
   font-size: 18px;
@@ -681,6 +688,24 @@ main.ant-layout-content {
   text-decoration: none;
 }
 
+@media screen and (max-width: 1076px) {
+  #logo {
+    left: 28px;
+  }
+}
+
+
+#logo-image-sidebar {
+  position: relative;
+  width: 160px; 
+  height: auto;
+  top: 17px;
+  margin-bottom: 80px;
+}
+
+#logo-image-header {
+
+}
 
 #logo img {
   width: auto;
@@ -711,8 +736,13 @@ header {
   padding: 0;
 }
 
+.dropdownMenuMobile {
+  background-color: #ffffff;
+  background-image: url('/images/landing-page-background.svg')!important;
+}
+
 .dropdownMenu {
-  background-color: #ffffff!important;
+  background-image: url('/images/landing-page-background.svg')!important;
   height: 100vh!important;
 }
 
@@ -757,7 +787,19 @@ header {
   font-size: 12px;
 }
 
-.mobileSidebarMenu {
+.sidebarMenuDesktop {
+  width: 100%;
+  top: 80px;
+  left: 10px;
+  z-index: 1; 
+  margin-bottom: 10px;
+}
+
+.sidebarMenuWrapper {
+  margin: 0 10;
+}
+
+.sidebarMenuMobile{
   position: relative;
   left: 18px;
   width: calc(100vw - 18px);

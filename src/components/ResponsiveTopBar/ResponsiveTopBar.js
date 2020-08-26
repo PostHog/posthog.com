@@ -72,7 +72,7 @@ class ResponsiveTopBar extends Component {
             }
           </div>*/}
       {sidebarOpen &&
-        <div className="mobileSidebarMenu">
+        <div className="sidebarMenuMobile">
             <SidebarContents/>
         </div>
       }
