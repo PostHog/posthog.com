@@ -1,19 +1,22 @@
 ---
 date: 2020-08-28
-title: How to Make a Remote Culture Work
+title: Building an All-Remote Company from Scratch
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 ---
 
-![Remote Work Banner](../images/blog/remote-culture/remote-banner.jpg) 
-
-
-<small class="centered-text">Photo by Corinne Kutz</small>
+![Remote Work Banner](../images/posthogers-map.png) 
 
 
 <br />
+
+Many companies are having to adjust to remote work, but what about the ones that started this way from scratch?
+
+PostHog has a team of 12, 10 of whom have never met each other in real life.
+
+What's it like building a company for remote from the first day?
 
 2020 has been a tough year. 
 
