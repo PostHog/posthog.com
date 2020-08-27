@@ -125,7 +125,7 @@ Communication lies at the heart of just about everything concerning remote work.
 
 Since you can't directly see people and talk to them in person, it's essential that you have great communication, both from a perspective of "workplace" wellbeing, as well as productivity. 
 
-Communication is a broad topic, but there are three points that are part of our values which I'd like to briefly expand upon:
+Communication is a broad topic, but here are three points that are particularly important to us:
 
 #### Asynchronous Communication
 If possible, structure your company to use as much asynchronous communication as possible. 
