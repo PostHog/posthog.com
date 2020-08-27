@@ -21,7 +21,7 @@ class NewsletterForm extends React.Component {
                     <form action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" noValidate>
                         <div id="mc_embed_signup_scroll">
                             <label htmlFor="mce-EMAIL">Stay up to date with PostHog</label>
-                            <input type="email" defaultValue name="EMAIL" className="email" id="mce-EMAIL" onChange={this.handleChange} placeholder="email address" value={this.state.email} required />
+                            <input type="email" name="EMAIL" className="email" id="mce-EMAIL" onChange={this.handleChange} placeholder="email address" value={this.state.email} required />
                             {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
                             <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true"><input type="text" name="b_292207b434c26e77b45153b96_97194afa0a" tabIndex={-1} defaultValue /></div>
                             <div className="clear"><input style={{marginLeft: 5}} type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" className="button" />
