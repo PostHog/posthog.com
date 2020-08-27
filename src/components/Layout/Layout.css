@@ -1047,3 +1047,7 @@ code {
   font-size: 14px !important;
 }
 
+.centered-text {
+  display: block;
+  text-align: center;
+}
