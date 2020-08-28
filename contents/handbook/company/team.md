@@ -14,7 +14,7 @@ What we do care about is your ability to learn, iterate, and ship.
 
 That's why we have people from Belgium, Brazil, Connecticut, England, Estonia, the Netherlands, Senegal, San Francisco, amongst others.
 
-![Remote Work Banner](../../images/map.png) 
+![Remote Work Banner](../../images/posthogers-map.png) 
 <br /><small class="centered-text">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
 
 
