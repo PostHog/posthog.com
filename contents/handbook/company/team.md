@@ -8,11 +8,15 @@ We are proud to be misfits. Why?
 
 Building an unusually great company starts with an unusual team.
 
-We don't care if you haven't finished (or attended) school, if you were super important at FANG Corp or if you ran a startup that crashed and burned.
+We don't care if you haven't finished (or attended) school, if you were super important at a FAANG company or if you ran a startup that crashed and burned.
 
-What we do care about is your ability to learn, iterate and ship.
+What we do care about is your ability to learn, iterate, and ship.
 
-That's why we have people from Belgium, Brazil, Connecticut, England, Estonia, the Netherlands, Senegal, San Francisco, amongst others.
+That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. 
+
+![Remote Work Banner](../../images/posthogers-map.png) 
+<br /><small class="centered-text">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
+
 
 ## James Hawkins, Co-Founder and CEO
 
