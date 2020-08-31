@@ -3,20 +3,23 @@ title: Culture
 sidebar: Handbook
 showTitle: true
 ---
-## Remote first
+## All Remote
 
-The team at PostHog work remote first.
+Our [team](/handbook/company/team) is 100% remote, and distributed across over 10 countries.
 
 ### Advantages
 
+* Hiring [amazing people](/handbook/company/team) from a global talent pool
 * This encourages a deeper level of personal thought and [writing things down](/handbook/values#communication)
-* We have an open core business model. This helps the community understand our decision making.
-* It allows uninterrupted work.
-* It makes results clearer, which helps us hold people to account for outcomes not for hours spent in the office.
+* We have an open core business model. This helps the community understand our decision-making.
+* It allows for uninterrupted work.
+* It makes results clearer, which helps us hold people to account for outcomes rather than hours spent in the office.
+
+<br />
 
 ## Everyone is a moderator
 
-Everything we do is open to everyone else to edit.
+Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook.
 
 ### Advantages
 
