@@ -189,6 +189,10 @@ PostHog.enable() // opt in
 PostHog.disable() // opt out
 ```
 
+This is the suggested way to prevent capturing data from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in. 
+
+If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/features/cohorts).
+
 ### Sending screen views
 
 With `recordScreenViews`, PostHog will try to record all screen changes automatically.
