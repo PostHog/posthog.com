@@ -178,8 +178,6 @@ Opt a user back in:
 posthog.opt_in_capturing();
 ```
 
-**Note:** This method is a suggested way to prevent capturing data from the admin on the page, as well as . A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also call it directly in your app after an admin logs in. 
-
 
 ### Feature Flags
 
