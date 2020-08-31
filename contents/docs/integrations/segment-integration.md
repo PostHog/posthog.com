@@ -6,7 +6,7 @@ showTitle: true
 
 Segment allows you to easily manage data and integrations with services across your Growth, Product, and Marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
 
-## Can PostHog with Segment do everything PostHog does by itself?
+#### Can PostHog with Segment do everything PostHog does by itself?
 
 We are **big fans** of Segment, and many in our team use it now or have used it in the past. However, it comes with some limitations for PostHog. 
 
@@ -16,7 +16,7 @@ Laslty, Segment is also more easily blocked by ad-blockers. To get around these 
 
 ## Getting Started with Segment
 
-Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, either [self-hosted](/docs/deployment/deploying-posthog) or using [PostHog Cloud](https://app.posthog.com/signup).
+Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, either [self-hosted](/docs/deployment) or using [PostHog Cloud](https://app.posthog.com/signup).
 
 1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment.
 1. Grab the PostHog API key from the /setup page in PostHog.
