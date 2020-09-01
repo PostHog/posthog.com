@@ -1048,6 +1048,6 @@ code {
 }
 
 .centered-text {
-  display: block;
+  display: block; 
   text-align: center;
 }
