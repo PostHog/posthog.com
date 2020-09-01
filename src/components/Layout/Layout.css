@@ -1051,3 +1051,22 @@ code {
   display: block; 
   text-align: center;
 }
+
+.note-block {
+  background: #eeeeee;
+  padding-left: 10px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 5px;
+}
+
+/* .note-block:before {
+  color: #dddddd;
+  content: "&nbsp;";
+}
+
+.note-block:after {
+  color: #dddddd;
+  content: "&nbsp;";
+} */

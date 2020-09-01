@@ -4,6 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
+<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/api).</span><br />
 
 In PostHog, there is an API endpoint available to fetch the DOM elements captured by the autocapture functionality.
 The most interesting usecase for this is to be able to get all elements we have for a specific page, and how often that element has been interacted with.

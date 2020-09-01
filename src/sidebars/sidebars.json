@@ -88,6 +88,7 @@
     "name":"API",
     "items":[
       "docs/api/api",
+      "docs/api/post-only-endpoints",
       "docs/api/elements",
       "docs/api/events",
       "docs/api/people",
@@ -102,7 +103,6 @@
       "docs/integrations",
       "docs/integrations/segment-integration",
       "docs/integrations/android-integration",
-      "docs/integrations/api",
       "docs/integrations/go-integration",
       "docs/integrations/ios-integration",
       "docs/integrations/js-integration",

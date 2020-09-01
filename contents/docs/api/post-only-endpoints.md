@@ -1,23 +1,55 @@
 ---
-title: API
+title: POST-Only Public Endpoints
 sidebar: Docs
 showTitle: true
 ---
 
-This is the dedicated events API, designed to help you push events into PostHog. We also provide a [general API](/docs/api/api).
+As explained in our [API Overview](/docs/api/api-overview) page, PostHog provides two different APIs. 
+
+This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrations/js-integration). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance. 
+
+**Note:** For this API, you should use your 'Team API Key' from the `/setup` page in PostHog. This is the same key used in your frontend snippet.
+
+## Feature Flags
+
+PostHog offers support for [feature flags](/docs/features/feature-flags), and you can use our APIs to create and make use of feature flags. However, it is important to note that while creating a feature flag is a private action that only your team should be able to perform, checking if a feature flag is active is not. 
+
+As such, to create feature flags, you will need to use [this endpoint](/docs/api/feature-flags). However, to check if a feature flag is enabled, you can use the following endpoint:
+
+#### /decide
+
+`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript integration's](/docs/integrations/js-integration) methods for feature flags.
+
+To get the feature flags that are enabled for a given user, you will need to perform the following request:
+
+```shell
+POST https://[your-instance].com/decide/
+Content-Type: application/json
+Body:
+{
+    "api_key": "[your api key in /setup]",
+    "event": "[event name]",
+    "properties": {
+        "distinct_id": "[your users' distinct id]",
+        "key1": "value1",
+        "key2": "value2"
+    },
+    "timestamp": "[optional timestamp in ISO 8601 format]"
+}
+```
 
 ## Sending events
 
-To send events to PostHog, you can use any of our libraries **or** any Mixpanel library by changing the api_host setting to `https://[your-instance].herokuapp.com/capture/`.
+To send events to PostHog, you can use any of [our libraries](/docs/integrations) **or** any Mixpanel library by changing the `api_host` setting to the address of your instance. 
 
-If you'd prefer to do the requests yourself, you can send events in the following format
+If you'd prefer to do the requests yourself, you can send events in the following format:
 
 ## Single event
 
 **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
-```
-POST https://[your-instance].herokuapp.com/capture/
+```shell
+POST https://[your-instance].com/capture/
 Content-Type: application/json
 Body:
 {
@@ -38,8 +70,8 @@ You can send multiple events in one go with the Batch API.
 
 **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
-```
-POST https://[your-instance].herokuapp.com/capture/
+```bash
+POST https://[your-instance].com/capture/
 Content-Type: application/json
 Body:
 {
@@ -67,8 +99,8 @@ Additionally, if you're self-hosting, you'll have to substitute `https://app.pos
 
 ### Alias
 
-```
-curl -v -L --header "Content-Type: application/json" -d ' {
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<INSERT YOUR API KEY>",
     "properties": {
         "distinct_id": "123",
@@ -83,8 +115,8 @@ curl -v -L --header "Content-Type: application/json" -d ' {
 
 ### Capture
 
-```
-curl -v -L --header "Content-Type: application/json" -d '  {
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<INSERT YOUR API KEY>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
@@ -98,8 +130,8 @@ curl -v -L --header "Content-Type: application/json" -d '  {
 
 ### Identify
 
-```
-curl -v -L --header "Content-Type: application/json" -d ' {
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<INSERT YOUR API KEY>",
     "timestamp": "2020-08-16 09:03:11.913767",
     "context": {},
@@ -113,8 +145,8 @@ curl -v -L --header "Content-Type: application/json" -d ' {
 
 ### Group
 
-```
-curl -v -L --header "Content-Type: application/json" -d ' {
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<INSERT YOUR API KEY>",
     "timestamp": "2020-08-16 09:03:11.913767",
     "groupId": "123",
@@ -129,8 +161,8 @@ curl -v -L --header "Content-Type: application/json" -d ' {
 
 ### Page
 
-```
-curl -v -L --header "Content-Type: application/json" -d '  {
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<INSERT YOUR API KEY>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
@@ -146,8 +178,8 @@ curl -v -L --header "Content-Type: application/json" -d '  {
 
 ### Screen
 
-```
-curl -v -L --header "Content-Type: application/json" -d '  {
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<INSERT YOUR API KEY>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",

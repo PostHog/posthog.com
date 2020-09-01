@@ -268,7 +268,7 @@ function IndexPage() {
                 </Link>
               </Col>
               <Col xs={4} sm={4} md={2} lg={2} xl={2} align="middle">
-                <Link to="/docs/integrations/api">
+                <Link to="/docs/api/api">
                   <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
                 </Link>
               </Col>
