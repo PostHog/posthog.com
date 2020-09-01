@@ -1,5 +1,5 @@
 ---
-date: 2020-08-17
+date: 2020-08-25
 title: Open source is eating SaaS
 rootPage: /blog
 sidebar: Blog
