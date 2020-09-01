@@ -157,9 +157,9 @@ Using `register_once` will ensure that if a property is already set, it will not
 
 PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner). 
 
-This is also the suggested way to prevent capturing data from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in. 
+This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in. 
 
-If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/features/cohorts).
+If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/features/cohorts#differentiating-team-vs-users-traffic).
 
 With PostHog, you can:
 

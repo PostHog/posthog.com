@@ -8,7 +8,7 @@ hideAnchor: true
 ---
 
 ![Remote Work Banner](../images/posthogers-map.png) 
-<br /><small class="centered-text">The [PostHog Team](/handbook/company/team) around the world.</small>
+<br /><small class="centered">The [PostHog Team](/handbook/company/team) around the world.</small>
 
 
 <br />
@@ -120,7 +120,7 @@ It all comes down to trust. We hire people we believe in and give them autonomy 
 ![Remote Work Banner](../images/blog/remote-culture/ship.jpg) 
 
 
-<small class="centered-text">Photo by Shaah Shahidh
+<small class="centered">Photo by Shaah Shahidh
 </small>
 
 

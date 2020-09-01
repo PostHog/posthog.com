@@ -20,20 +20,31 @@ A short video on Cohorts can be found here: https://youtu.be/8_SsZW1v56Q
 
 ## Creating a New Cohort
 
-Go to 'People' in the left hand navigation.
-<br>
+Go to 'People' in the left hand navigation:
+<br /><br />
 
 ![left hand navigation for cohorts](../../images/cohorts-nav.png)
 
+<br /><br />
+
 Then click '+ New Cohort' on the top left:
 
+<br /><br />
+
 ![+ new cohort button](../../images/new-cohort.png)
+
+<br />
+
 
 ## Cohort Settings
 
 There are three key settings for a cohort: 'action', 'property', and 'New group'. See below:
 
+<br />
+
 ![Three key cohort settings](../../images/cohort-opts.png)
+
+<br />
 
 #### Group Users by Actions
 
@@ -43,8 +54,11 @@ You can group users who have performed certain [actions](/features/actions). You
 
 You can also group users who have a certain property in common. Commonly, this used to combine users at a certain team, or from a certain marketing campaign via their UTM tags, or whatever other static property you need:
 
-![user cohorts - properties menu](https://posthog-static-files.s3.us-east-2.amazonaws.com/Documentation-Assets/Screenshot+2020-02-27+at+15.58.24.png)
-<br>
+<br />
+
+<span class='centered'>![user cohorts - properties menu](https://posthog-static-files.s3.us-east-2.amazonaws.com/Documentation-Assets/Screenshot+2020-02-27+at+15.58.24.png)</span>
+
+<br />
 
 #### Group Users According to Multiple Conditions
 
@@ -58,10 +72,30 @@ You may only want users who have performed a certain action within a certain tim
 
 On setting the cohort to 'user has *action*', you will be presented with the following:
 
-![cohort - user action date range selection](https://posthog-static-files.s3.us-east-2.amazonaws.com/Documentation-Assets/Screenshot+2020-02-27+at+15.59.50.png)
+<br />
+
+
+<span class='centered'>![cohort - user action date range selection](https://posthog-static-files.s3.us-east-2.amazonaws.com/Documentation-Assets/Screenshot+2020-02-27+at+15.59.50.png)</span>
+
+<br />
+
 
 We are working to [expand the power of this filter](https://github.com/PostHog/posthog/issues/199).
+
+<br />
+
 
 ## Viewing Users in a Cohort
 
 Go to 'People' > 'Cohorts' in the left-hand navigation (as shown in the beginning of this page) and select the cohort you want to view by clicking it, and you'll be presented with a list
+
+<br />
+
+## Differentiating Team vs. Users Traffic
+From the initial setup, [PostHog is tracking various events](/docs/integrations/js-integration#autocapture) from all users. However, you may want to differentiate between traffic from your team and traffic from your users.
+
+To do so, you can identify your team members in PostHog either through a [`posthog.identify`](/docs/integrations/js-integration#identifying-users) (e.g. by setting an email as the ID) call or by [assocating properties](/docs/integrations/js-integration#sending-user-information) with your team member users (e.g. `is_team = true`). 
+
+With that done, you can then create a cohort of your team and/or a cohort that does not include any of your team members, so that you can continue to gather data on all users, but can differentiate between them when performing your analytics processes.
+
+This is the recommended method for differentiating between team and user traffic if you want to keep receiving events. However, if you wish to stop receiving events on your team altogether, you should consider using [`posthog.opt_out_capturing`](/docs/integrations/js-integration#opt-users-out).
