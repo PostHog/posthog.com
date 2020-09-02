@@ -14,7 +14,7 @@ This page refers to our public endpoints, which use the same API key as the [Pos
 
 PostHog offers support for [feature flags](/docs/features/feature-flags), and you can use our APIs to create and make use of feature flags. However, it is important to note that while creating a feature flag is a private action that only your team should be able to perform, checking if a feature flag is active is not. 
 
-As such, to create feature flags, you will need to use [this endpoint](/docs/api/feature-flags). However, to check if a feature flag is enabled, you can use the following endpoint:
+As such, to create feature flags, you will need to use another endpoint, which we're currently still documenting. However, to check if a feature flag is enabled, you can use the following endpoint:
 
 #### /decide
 
@@ -28,15 +28,43 @@ Content-Type: application/json
 Body:
 {
     "api_key": "[your api key in /setup]",
-    "event": "[event name]",
-    "properties": {
-        "distinct_id": "[your users' distinct id]",
-        "key1": "value1",
-        "key2": "value2"
-    },
-    "timestamp": "[optional timestamp in ISO 8601 format]"
+    "distinct_id": "[your users' distinct id]"
 }
 ```
+
+##### Example Request & Response
+
+**Request**
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<INSERT YOUR API KEY>",
+    "distinct_id": "1234"
+}' https://app.posthog.com/decide/
+```
+
+**Response**
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": [
+    "my-awesome-flag-1",
+    "my-awesome-flag-2"
+  ]
+}
+```
+
+From this reponse, if you are looking to use feature flags in your backend, you will most likely need only the values for the `"featureFlags"` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
+
 
 ## Sending events
 
