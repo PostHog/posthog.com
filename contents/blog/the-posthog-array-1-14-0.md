@@ -73,8 +73,6 @@ You can find more information about this on our ['Securing PostHog' page](/docs/
 
 ## Bug Fixes and Performance Improvements
 
-
-
 * We [disabled our own snippet](https://github.com/PostHog/posthog/pull/1539) on DEBUG instances and [improved tracking](https://github.com/PostHog/posthog/pull/1519)
 * We [started using `django_extensions`](https://github.com/PostHog/posthog/pull/1541)
 * Tim added a test to PRs to [check if our Docker image builds](https://github.com/PostHog/posthog/pull/1515/files)
@@ -83,31 +81,39 @@ You can find more information about this on our ['Securing PostHog' page](/docs/
 * Paolo [made user metrics better](https://github.com/PostHog/posthog/pull/1508)
 * Eric [updated our /insights endpoint](https://github.com/PostHog/posthog/pull/1498)
 * We changed the [color on some tabs](https://github.com/PostHog/posthog/pull/1485) and the [tone on some buttons](https://github.com/PostHog/posthog/commit/35e604e031da43b49da0afb0e7a854ecd93c95b8) to improve our UI
-* We [added tests for our multitenancy environment](https://github.com/PostHog/posthog/pull/1533/)
+* We [fixed](https://github.com/PostHog/posthog/pull/1514) and then [added tests for our multitenancy environment](https://github.com/PostHog/posthog/pull/1533/)
 * Michael [fixed a UI bug on our URL list](https://github.com/PostHog/posthog/pull/1526)
-* We overhauled our README, which was really in need of updating. 
+* We overhauled our README, which was really in need of updating. It now [looks better](https://github.com/PostHog/posthog/pull/1410), [reads better](https://github.com/PostHog/posthog/pull/1492), and has better info about [deployment](https://github.com/PostHog/posthog/pull/1525) and [our Enterprise Edition](https://github.com/PostHog/posthog/pull/1428). 
+* We improved the [command description for `setup_review`](https://github.com/PostHog/posthog/commit/6b209413e9a6ee33b1e21b261ef72593da2b912a)
+* Tim made our [testing of PR environments easier](https://github.com/PostHog/posthog/pull/1496)
+* We made the ['Launch Toolbar' links open on a new page](https://github.com/PostHog/posthog/pull/1524)
+* We [updated our CHANGELOG](https://github.com/PostHog/posthog/pull/1522/files) and bumped versions [here](https://github.com/PostHog/posthog/pull/1421) and [there](https://github.com/PostHog/posthog/pull/1517)(and in a lot of other places)
+* We crushed a bug regarding [rest hooks for Docker images](https://github.com/PostHog/posthog/pull/1516/files)
+* We [improved our syntax highlighting for code snippets](https://github.com/PostHog/posthog/pull/1490)
+* [License issues](https://github.com/PostHog/posthog/pull/1511/files) and [disappearing user paths on Firefox](https://github.com/PostHog/posthog/pull/1513) are now bugs of the past
+* [@J0](https://github.com/J0), a community member, introduced a [feature for disabling link sharing](https://github.com/PostHog/posthog/pull/1475)
+* Michael removed a [useless release drafter action](https://github.com/PostHog/posthog/pull/1476)
+* We had a [small refactor done](https://github.com/PostHog/posthog/pull/1489/files) on PostHog's `head` template 
+* Yakko [fixed our Cypress tests](https://github.com/PostHog/posthog/pull/1486) and made them faster
+* We [allowed Sentry in DEBUG mode](https://github.com/PostHog/posthog/pull/1480)
+* We demolished issues with [Safari's funnels](https://github.com/PostHog/posthog/pull/1477) and [IDs for our CohortPeople class](https://github.com/PostHog/posthog/pull/1478)
+* Paolo set up an [awesome Preflight page](https://github.com/PostHog/posthog/pull/1473)
+* We [upgraded the Sentry SDK](https://github.com/PostHog/posthog/pull/1439)
+* We made our [action for syncing FOSS and non-FOSS repositories beautiful](https://github.com/PostHog/posthog/commit/12eeaf999ec7a1594a971ead5fda6dc82adc3c1a)("using prettier")
+* We set up an [action for syncing our FOSS and main repo](https://github.com/PostHog/posthog/pull/1423) then updated it [again](https://github.com/PostHog/posthog/commit/534c25686e1a9fc261230ef669df557cc69fb293) and [again](https://github.com/PostHog/posthog/commit/e9e6e39c189cdf261f91d56267335170c793e52e)
+* We added [regex and action hints for the Toolbar](https://github.com/PostHog/posthog/pull/1457)
+* We [migrated to `BigInteger` IDs](https://github.com/PostHog/posthog/pull/1471/)
+* We changed the Toolbar heatmap to [display number of clicks instead of page rank](https://github.com/PostHog/posthog/pull/1459)
+* We fixed our [bottom notice warning](https://github.com/PostHog/posthog/pull/1467) for PostHog running on HTTP
+* We set up a [workflow for auto-updating the version](https://github.com/PostHog/posthog/pull/1452/)
+* We [improved the description for DAUs](https://github.com/PostHog/posthog/pull/1454)
+* Michael added a [warning bar for production PostHog instances running on HTTP](https://github.com/PostHog/posthog/pull/1437)
+* Anna [fixed a bug with action deletion](https://github.com/PostHog/posthog/pull/1448/)
+* We fixed [an issue with licensing](https://github.com/PostHog/posthog/pull/1438) and [another one](https://github.com/PostHog/posthog/pull/1450)
+* We [fixed our Docker images](https://github.com/PostHog/posthog/pull/1443) to account for changes in Kea and Django's SECRET_KEY 
+* Marius upgraded us to [use the newest version of Kea Typegen](https://github.com/PostHog/posthog/pull/1427)
+* Eric pulverized a [bug about empty conditions on Trends](https://github.com/PostHog/posthog/pull/1416)
+* We added a [column to denote when actions were created](https://github.com/PostHog/posthog/pull/1415)
+* We [made the Toolbar easy to launch for all users](https://github.com/PostHog/posthog/pull/1345)
 
 
-
-## Favorite Issue
-
-### [Database candidate testing](https://github.com/PostHog/posthog/issues/1341)
-
-We have had a lot of demand for very high volume deployments. We ran a ton of tests. Results to follow!
-
-## Weekly Round Up
-
-- [What noise does a hedgehog make?](https://www.youtube.com/watch?v=5sgw-achKVM)
-- [Lynx deodorant now offers 'Africa and Marmite'](https://twitter.com/aaronnstuart/status/1272927611031879680)
-
-## PostHog News
-
-We're testing out more scalable databases as we've had several teams start using us with 600+ events/second. We are going to build on ClickHouse for our Enterprise version.
-
-On the team side, we welcomed Yakko as a Technical Writer and Developer - you'll see his work in our Docs, which are getting a serious overhaul. Paolo has also joined as our first Growth Engineer. We'll release a blog post explaining what he's up to!
-
-Lottie, our legendary designer, is moving to Senegal from Guildford in the UK. She'll start packing soon as she leaves this weekend.
-
-### Open roles
-
-Full stack engineers that love hedgehogs - [we want you!](https://posthog.com/careers)
