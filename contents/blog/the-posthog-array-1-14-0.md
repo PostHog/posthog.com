@@ -116,4 +116,28 @@ You can find more information about this on our ['Securing PostHog' page](/docs/
 * We added a [column to denote when actions were created](https://github.com/PostHog/posthog/pull/1415)
 * We [made the Toolbar easy to launch for all users](https://github.com/PostHog/posthog/pull/1345)
 
+## Favorite Issue
 
+### [Allow creations and management of multiple teams](https://github.com/PostHog/posthog/issues/1540)
+
+Based on user feedback, we determined that it was essential to allow multiple teams to be managed under the same PostHog account. We're happy to announce we have a PR open for it! Keep an eye out for when it gets merged 👀. 
+
+## Weekly Round Up
+
+- [We offered custom fanny packs](https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A6702530259822157824/) to contributors who submitted PRs over a weekend
+- Lottie, our designer, moved to Dakar, Senegal. She packed the day before.
+- We [launched a merch store](https://merch.posthog.com/) which includes a PostHog shower curtain
+
+## PostHog News
+
+We made a significant progress with our migration to Clickhouse on the Enterprise Edition. Stay tuned for more news about this.
+
+Two of our engineers, Marius and Karl, have welcomed a new member into their families! We wish them and their families all the best. 
+
+Sam Burton has joined us to help with video editing as we venture into YouTube. You can now [hear about why PostHog was built](https://www.youtube.com/watch?v=TIxxIEEvczM) from James, our CEO. 
+
+### Open roles
+
+Are you a Fullstack Engineer? [We want you!](https://posthog.com/careers) 
+
+Bonus points if you can tell us what sound a hedgehog makes.
