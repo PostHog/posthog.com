@@ -71,4 +71,43 @@ Many of our deployments generate and set this key by default, so that you will n
 You can find more information about this on our ['Securing PostHog' page](/docs/configuring-posthog/securing-posthog#secret-key) and should always feel welcome to ask any questions on our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ).
 
 
+## Bug Fixes and Performance Improvements
 
+
+
+* We [disabled our own snippet](https://github.com/PostHog/posthog/pull/1539) on DEBUG instances and [improved tracking](https://github.com/PostHog/posthog/pull/1519)
+* We [started using `django_extensions`](https://github.com/PostHog/posthog/pull/1541)
+* Tim added a test to PRs to [check if our Docker image builds](https://github.com/PostHog/posthog/pull/1515/files)
+* [Michael](https://github.com/PostHog/posthog/pull/1537/files) and [a bot](https://github.com/PostHog/posthog/pull/1527) helped us keep dependencies up-to-date
+* Marius made the Toolbar UX better by [fixing its element detection](https://github.com/PostHog/posthog/pull/1424), [making the info window follow the mouse](https://github.com/PostHog/posthog/pull/1472), and [correcting other minor things](https://github.com/PostHog/posthog/pull/1470)
+* Paolo [made user metrics better](https://github.com/PostHog/posthog/pull/1508)
+* Eric [updated our /insights endpoint](https://github.com/PostHog/posthog/pull/1498)
+* We changed the [color on some tabs](https://github.com/PostHog/posthog/pull/1485) and the [tone on some buttons](https://github.com/PostHog/posthog/commit/35e604e031da43b49da0afb0e7a854ecd93c95b8) to improve our UI
+* We [added tests for our multitenancy environment](https://github.com/PostHog/posthog/pull/1533/)
+* Michael [fixed a UI bug on our URL list](https://github.com/PostHog/posthog/pull/1526)
+* We overhauled our README, which was really in need of updating. 
+
+
+
+## Favorite Issue
+
+### [Database candidate testing](https://github.com/PostHog/posthog/issues/1341)
+
+We have had a lot of demand for very high volume deployments. We ran a ton of tests. Results to follow!
+
+## Weekly Round Up
+
+- [What noise does a hedgehog make?](https://www.youtube.com/watch?v=5sgw-achKVM)
+- [Lynx deodorant now offers 'Africa and Marmite'](https://twitter.com/aaronnstuart/status/1272927611031879680)
+
+## PostHog News
+
+We're testing out more scalable databases as we've had several teams start using us with 600+ events/second. We are going to build on ClickHouse for our Enterprise version.
+
+On the team side, we welcomed Yakko as a Technical Writer and Developer - you'll see his work in our Docs, which are getting a serious overhaul. Paolo has also joined as our first Growth Engineer. We'll release a blog post explaining what he's up to!
+
+Lottie, our legendary designer, is moving to Senegal from Guildford in the UK. She'll start packing soon as she leaves this weekend.
+
+### Open roles
+
+Full stack engineers that love hedgehogs - [we want you!](https://posthog.com/careers)
