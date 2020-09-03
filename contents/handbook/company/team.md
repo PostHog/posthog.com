@@ -50,7 +50,7 @@ I also got into "web development" in 1997 after seeing Netscape at my mother's u
 
 This was followed by years of writing games in C++ and then [writing tutorials](https://web.archive.org/web/20110626030555/http://cone3d.gamedev.net/) about them, coding websites in Perl, PHP, Java and Ruby... and "losing" a decade as the CTO of two failed startups.
 
-On the side I build an [open source database analytics platform](https://github.com/mariusandra/insights)... and when that got on Hacker News, James reached out... and the rest is history.
+On the side I built an [open source database analytics platform](https://github.com/mariusandra/insights)... and when that [got on Hacker News](https://news.ycombinator.com/item?id=22347516), James reached out... and the rest is history.
 
 These days I live in Belgium and code [state management libraries](https://kea.js.org/) in JavaScript for fun. 
 
