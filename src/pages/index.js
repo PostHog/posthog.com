@@ -432,8 +432,8 @@ function IndexPage() {
         <Row>
           <Col span={24} className="gutter-row header-row">
             <h2 className="yellowHead">What's new?</h2>
-            <p>Version 1.13.0</p>
-            <Link to="blog/the-posthog-array-1-13-0">
+            <p>Version 1.14.0</p>
+            <Link to="blog/the-posthog-array-1-14-0">
               <Button type="information" size="large">
                 Release notes
               </Button>
