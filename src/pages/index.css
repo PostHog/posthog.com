@@ -7,20 +7,7 @@
     border-bottom: none;
 }
 
-.row {
-    background: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    max-width: 1920px
-}
 
-@media screen and (min-width: 1440px) {
-    .row {
-        width: 1440px;
-        margin: 0 calc((100vw - 1440px) / 2);
-    }
-}
 
 main {
     margin-top: 0!important;
@@ -42,11 +29,36 @@ header {
     margin: 100px 0 0;
 }
 
+.row {
+    background: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    max-width: 1440px
+}
+
 @media screen and (min-width: 1440px) {
     .wrapper {
         padding: 0 calc((100vw - 1440) / 2);
     }
+    .row {
+        width: 1440px;
+        margin: 0 calc((100vw - 1440px) / 2);
+    }
 }
+
+@media screen and (max-width: 834px) {
+    .wrapper {
+        margin: 40px 0 0;
+    }
+    .row {
+        padding: 0 10vw;
+    }
+    .number {
+        width: 52px;
+    }
+}
+
 
 h1 {
     font-size: 56px;
@@ -68,10 +80,10 @@ p {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 834px) {
     h1 {
-        font-size: 18px;
-        line-height: 20px;
+        font-size: 24px;
+        line-height: 40px;
     }
     h2 {
         font-size: 16px;
@@ -90,8 +102,8 @@ p {
         line-height: 20px;
     }
     p {
-        font-size: 12px;
-        line-height: 20px;
+        font-size: 16px;
+        line-height: 32px;
     }
 }
 
@@ -109,21 +121,13 @@ p {
     position: relative;
     text-align: center;
     max-width: 1440px;
-    padding: 60px 0 0;
+    padding: 0 calc(1/8*100vw) 0;
     justify-content: center;
 }
 
-.pageHeader h1{
-    font-size: 56px!important;
-}
-@media screen and (max-width: 1440px) {
-    .pageHeader h1{
-        font-size: calc(100vw/1440 * 56)!important;
-    }
-}
-@media screen and (max-width: 1028px) {
-    .pageHeader h1{
-        font-size: 40px!important;
+@media screen and (min-width: 834px) {
+    .pageHeader h1 {
+        font-size: 56px;
     }
 }
 
@@ -131,20 +135,29 @@ p {
     max-width: 1440px;
     position: relative;
     width: 100vw;
-    height: 726px;
-    max-height: 726px;
+    height: 426px;
     display: flex;
-    flex-direction: column;
-    padding: 0 calc(1/12 * 1440px);
+    flex-direction: row;
+
 }
 
 .topPageCol1 {
-    position: absolute;
-    top: 125px;
-    width: calc(1/4 * 1440px);
-    max-width: 480px;
+    position: relative;
+    width: calc(10/24 * 100vw);
+    max-width: calc(10/24 * 1440px);
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+.joinUsersText {
+    position: relative;
+    width: 330px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .topPageCol1 p {
@@ -156,74 +169,79 @@ p {
 .joinUsersButtons {
     display: flex;
     flex-direction: row;
-    padding: 0px;
     align-items: center;
     justify-content: space-between;
     position: relative;
+    width: 330px;
+    padding: 0;
 }
 
 
 .topPageCol2 {
     background-image: url('../images/computer-dashboard-4.svg');
-    position: absolute;
-    left: calc(5/12 * 1440px);
-    height: 628px;
-    width: calc(100vw - (5/12 * 1440px));
+    position: relative;
+    height: 410px;
+    width: calc(14/24 * 100vw);
+    max-width: calc(14/24 * 1440px);
     background-repeat: no-repeat;
-    background-size: calc(628/726 * 1053px) 628px;
+    background-size: calc(410/726 * 1053px) 410px;
+    background-position: 20px top;
 }
 
-@media screen and (min-width: 1440px) {
-    .topPageCol2 {
-        left: 720px;
-        top: 0;
-        height: 726px;
-        width: calc(720px + ((100vw - 1440px) / 2));
-        margin-right: 0;
+@media screen and (max-width: 834px) {
+    .topPageWrapperMobile {
+        background-image: url('../images/landing-page-background.svg');
+        background-size: 600px 600px;
+        background-repeat: repeat;
+        background-position: top center;
+        height: 1000px;
     }
-}
-
-@media screen and (max-width: 1440px) {
-    .row1 {
-        height: 726px;
-        max-width: 100vw;
+    .topPageWrapper {
+        background: none;
+        height: 380px;
     }
-    .row1Col1 {
-        position: absolute;
-        left: calc(1/12 * 100vw);
-        width: calc(1/3 * 1440px);
-        max-width: 100vw;
+    .pageHeader {
+        margin: 0 calc(1/12*100vw);
+        padding: 40px 0 0;
     }
-}
-
-@media screen and (max-width: 768px) {
     .topPageRow {
-        height: calc((726/1053) * 768px);
+        position: relative;
+        height: 120px;
         max-width: 100vw;
-        margin-bottom: 0;
+        margin: 40px 0 0;
     }
     .topPageCol1 {
-        position: absolute;
-        left: calc(1/12 * 100vw);
-        width: calc(1/3 * 100vw);
-    }
-    .topPageCol2 {
-        position: absolute;
-        left: 50vw;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 70vw;
+        max-width: none;
         top: 0;
-        width: 50vw;
-        height: calc((726/1053) * 90vw);
-        background-size: cover;
+        left: 0;
+        padding: 0;
     }
-}
-
-@media screen and (max-width: 420px) {
+    .joinUsersText{
+        text-align: center;
+        width: 70vw;
+    }
+    .joinUsersText p {
+        width: 70vw; 
+        font-size: 16px;
+        line-height: 32px;
+    }
+    .joinUsersButtons button {
+        font-size: 12px;
+        line-height: 16px;
+        height: 32px;
+        text-align: center;
+    }
+    .joinUsersButtons {
+        height: 40px;
+        justify-content: space-evenly;
+    }
     .topPageCol2 {
-        position: absolute;
-        left: calc(0.5 * 420px);
-        width: calc(0.5 * 420px);
-        height: calc((726/1053) * (0.9 * 420px));
-        background-size: cover;
+        background: none;
+        display: none;
     }
 }
 
@@ -247,6 +265,7 @@ p {
     padding: 8px;
     position: relative;
     top: 0px;
+    text-align: center;
 }
 
 .getStarted:hover { 
@@ -263,6 +282,7 @@ p {
     top: 0px;
     margin: 24px 0;
     align-self: center;
+    text-align: center;
 }
 
 .requestDemo:hover {
@@ -271,7 +291,7 @@ p {
     color: #ffffff;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 834px) {
     .getStarted {
         position: relative; 
         margin: 10% 0;
@@ -283,12 +303,10 @@ p {
     }
     .ant-btn-primary {
         font-size: 12px;
-        width: 145px;
         text-align: center;
     }
     .ant-btn-secondary {
         font-size: 12px;
-        width: 145px;
         text-align: center;
     }
     i.anticon.anticon-right-circle {
@@ -306,10 +324,11 @@ p {
 }
 
 .autocaptureRow{
+    height: 525px;
     display: flex;
     flex-direction: row;
     position: relative;
-    top: 65px;
+    margin-top: 65px;
 }
 
 .autocapture01 {
@@ -330,7 +349,7 @@ p {
     position: absolute;
     background-image: url('../images/autocapture-1.svg')!important;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 621px 413px;
     background-position: left top;
     height: 413px;
     width: 621px;
@@ -347,6 +366,42 @@ p {
     .autocaptureCol {
         left: calc(15/24 * 1440px);
         width: calc(1/4 * 1440px);
+    }
+}
+
+@media screen and (max-width: 834px) {
+    .autocaptureRow {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 15vw;
+        height: 625px;
+    }
+    .autocaptureImg {
+        position: relative;
+        background-position: center top;
+        background-size: 426px 283px;
+        left: 0;
+        top: 0;
+        height: 283px;
+        width: 426px;
+        max-width: 100vw;
+    }
+
+    .autocapture01 {
+        position: relative;
+        left: 0;
+        text-align: center;
+        width: 70vw;
+    }
+    .autocaptureCol {
+        position: relative;
+        left: 0;
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 212px;
+        height: 252px;
     }
 }
 
@@ -413,6 +468,56 @@ p {
     }
 }
 
+@media screen and (max-width: 834px) {
+    .trafficVisualWrapper {
+        height: 1409px;
+    }
+    .trafficRow {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 683px;
+    }
+    .trafficImg {
+        background-image: url('../images/traffic-background-mobile.svg')!important;
+        background-repeat: no-repeat;
+        background-size: 541px 265px;
+        background-position: calc((100vw - 834px) / 2 + 230px) top;
+        position: relative;
+        height: 265px;
+        width: 100vw;
+        order: 1;
+        left: 0;
+        top: 0;
+        margin-bottom: 40px;
+    }
+    .traffic02 {
+        position: relative;
+        order: 2;
+        left: 0;
+        width: 70vw;
+        text-align: center;
+    }
+    .trafficCol {
+        position: relative;
+        order: 3;
+        left: 0;
+        width: 70vw;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        min-height: 155px;
+        max-height: 294px;
+    }
+    .trafficParagraph {
+        text-align: center;
+        width: 80vw;
+    }
+}
+
 /* VISUALIZE TRENDS */
 
 .visualizeRow {
@@ -462,6 +567,50 @@ p {
     }
 }
 
+@media screen and (max-width: 834px) {
+    .visualizeRow {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 794px;
+        top: 0;
+    }
+    .visualizeImg {
+        background-image: url('../images/visualize-background-mobile.svg')!important;
+        background-repeat: no-repeat;
+        background-size: 719px 410px ;
+        background-position: center top;
+        position: relative;
+        height: 410px;
+        width: 100vw;
+        max-width: none;
+        order: 1;
+        left: 0;
+        top: 0;
+        margin-bottom: 20px;
+    }
+    .visualize03 {
+        position: relative;
+        order: 2;
+        left: 0;
+        width: 80vw;
+        text-align: center;
+        top: 0;
+    }
+    .visualizeCol {
+        position: relative;
+        order: 3;
+        left: 0;
+        width: 212px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 332px;
+    }
+}
+
 
 /* IMPROVE CONVERSION */
 
@@ -487,6 +636,10 @@ p {
     position: absolute;
     left: calc(1/4*100vw);
     width: calc(1/12 * 100vw);
+}
+
+.improveConversionHidden {
+    display: none;
 }
 
 .improveConversionCol {
@@ -523,6 +676,52 @@ p {
         width: 720px;
         left: calc(5/24*1440px);
     }
+}
+
+@media screen and (max-width: 834px) {
+    .improveConversionWrapper {
+        height: 654px
+    }
+    .improveConversionHidden {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 227px;
+        width: 100vw;
+    }
+    .improveConversionRow1 {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 212px;
+        height: 794px;
+        top: 0;
+        left: 0;
+    }
+    .improveConversion04 {
+        position: relative;
+        left: 0;
+        width: 80vw;
+        text-align: center;
+        top: 0;
+    }
+    .improveConversionCol {
+        position: relative;
+        left: 0;
+        width: 212px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 332px;
+    }
+    .improveConversionRow2 {
+        display: none;
+    }
+
 }
 
 /* FEATURE FLAGS */
@@ -1161,6 +1360,17 @@ img.whatsNewImg {
     font-size: 16px;
 }
 
+@media screen and (max-width: 834px) {
+    .number h1 {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .col h2 {
+        font-size: 24px;
+        line-height: 40px;
+    }
+}
+
 .gosha {
     font-family: 'Gosha Sans';
     font-weight: bold!important;
@@ -1182,14 +1392,10 @@ img.whatsNewImg {
     color: #35416B
 }
 
-.numberHead {
-    font-size: 1.38316rem;
-}
-
 .yellowLine, .redLine, .blueLine {
     width: 118px;
     height: 0px;
-    border: 5px;
+    border: 6px;
     border-style: solid;
     border-radius: 10px;
 }
@@ -1208,8 +1414,8 @@ img.whatsNewImg {
 
 @media screen and (max-width: 768px) {
     .yellowLine, .redLine, .blueLine {
-        width: 70px;
-        border-width: 3px;
+        width: 96px;
+        border-width: 6px;
     }
 }
 
@@ -1235,19 +1441,6 @@ img.whatsNewImg {
     border: .1rem;
     border-style: solid;
     border-color:#1D4AFF;
-}
-
-@media screen and (max-width: 768px) {
-    img {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .imageShow {
-        display: grid;
-        margin-bottom: 0!important; 
-    }
 }
 
 @media screen and (min-width: 768px) {

@@ -3,6 +3,7 @@ import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import './index.css'
 import { Link } from 'gatsby'
+import improveMobile from '../images/improve-mobile.svg'
 import improveRetention from '../images/improve-retention.svg'
 import improvePaths from '../images/improve-paths.svg'
 import improveFunnels from '../images/improve-funnels.svg'
@@ -44,40 +45,43 @@ function IndexPage() {
           title="PostHog - open source product analytics"
           description="Understand your users. Build a better product"
         />
+      <div className="topPageWrapperMobile">
         <div className="topPageWrapper wrapper">
           <div className="pageHeader row">
-              <h1>A complete product analytics stack, <br/>ready to deploy on your infrastructure.</h1>
+              <h1>A complete product analytics stack, ready to deploy on your infrastructure.</h1>
           </div>
           <div className="topPageRow row">
-            <br className="hiddenBreak"/>
-              <div className="topPageCol1">
-                  <p>Join 1,800 companies <br className="hiddenBreak"/> using PostHog.</p>     
-                  <br/>
-                  <div className="joinUsersButtons">
-                    <a href="/trial">
-                      <Button type="primary" size="large" icon="right-circle" className="getStarted" >
-                        Get Started for Free
-                      </Button>
-                    </a>
-                    <a href="/request_demo">
-                      <Button type="secondary" size="large" className="requestDemo">
-                        Request Demo
-                      </Button>
-                    </a>
-                  </div>
+            <div className="topPageCol1">
+              <div className="joinUsersText">
+                <p>Join 1,800 companies <br className="hiddenBreak"/> using PostHog.</p>     
+                <br/>
               </div>
-              <div className="topPageCol2"/>
+              <div className="joinUsersButtons">
+                <a href="/trial">
+                  <Button type="primary" size="large" icon="right-circle" className="getStarted" >
+                    Get Started for Free
+                  </Button>
+                </a>
+                <a href="/request_demo">
+                  <Button type="secondary" size="large" className="requestDemo">
+                    Request Demo
+                  </Button>
+                </a>
+              </div>
+            </div>
+            <div className="topPageCol2"/>
           </div>
         </div>
-
+        
+        
         {/*01 - It all starts with event autocapture*/}
         <div className="autocaptureWrapper wrapper">
           <div className="autocaptureRow row">
             <div className="autocaptureImg"/>
-              <div className="autocapture01">
+              <div className="autocapture01 number">
                 <h1 className="yellowText">01</h1>
               </div>
-              <div className="autocaptureCol">
+              <div className="autocaptureCol col">
                 <h2 className="gosha">It all starts with event autocapture</h2>
                 <br className="revHiddenBreak"/>
                 <hr className="yellowLine"/>
@@ -85,16 +89,19 @@ function IndexPage() {
                 <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
               </div>
             </div>
+          </div>
         </div>
+
+
 
         <div className="trafficVisualWrapper wrapper">
           {/*02 - Understand how traffic really flows through your app*/}
           <div className="trafficRow row">
             <div className="trafficImg"/>
-            <div className="traffic02">
+            <div className="traffic02 number">
               <h1 className="redText">02</h1>
             </div>
-            <div className="trafficCol">
+            <div className="trafficCol col">
               <h2>Understand how traffic really flows through your app</h2>
               <br className="revHiddenBreak"/>
               <hr className="redLine"/>
@@ -106,10 +113,10 @@ function IndexPage() {
           {/*03 - Understand how traffic really flows through your app*/}
           <div className="visualizeRow row">
             <div className="visualizeImg"/>
-            `<div className="visualize03">
+            <div className="visualize03 number">
               <h1 className="blueText">03</h1>
             </div>
-            <div className="visualizeCol">
+            <div className="visualizeCol col">
               <h2 className="gosha">Visualize product trends and retention</h2>
               <hr className="blueLine"/>
               <p>Powerful analytics to really understand what your users are doing and how to keep them coming back.</p>
@@ -121,11 +128,14 @@ function IndexPage() {
 
         {/*04 - Improve conversion rates*/}
         <div className="improveConversionWrapper wrapper">
+          <div className="improveConversionHidden">
+            <img src={improveMobile} loading="lazy" alt="improve-mobile" className="imageShow" />
+          </div>
           <div className="improveConversionRow1 row">
-            <div className="improveConversion04">
+            <div className="improveConversion04 number">
               <h1 className="yellowText">04</h1>
             </div>
-            <div className="improveConversionCol">
+            <div className="improveConversionCol col">
               <h2 className="gosha">Improve conversion rates</h2>
               <hr className="yellowLine"/>
               <p>Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.</p>
@@ -134,17 +144,17 @@ function IndexPage() {
           <br className="hiddenBreak"/>
           <div className="improveConversionRow2 row">
             <div className="improveConversionElement">
-              <img alt="improve-retention" loading="lazy" className="imageShow" src={improveRetention}/>
+              <img alt="improve-retention" loading="lazy" src={improveRetention}/>
               <br className="revHiddenBreak"/>
               <h4>Retention</h4>
             </div>
             <div className="improveConversionElement">
-              <img alt="improve-paths" loading="lazy" className="imageShow" src={improvePaths}/>
+              <img alt="improve-paths" loading="lazy" src={improvePaths}/>
               <br className="revHiddenBreak"/>
               <h4>Paths</h4>
               </div>
             <div className="improveConversionElement">
-              <img alt="improve-funnels" loading="lazy" className="imageShow" src={improveFunnels}/>
+              <img alt="improve-funnels" loading="lazy" src={improveFunnels}/>
               <br className="revHiddenBreak"/>
               <h4>Funnels</h4>
             </div>
@@ -154,10 +164,10 @@ function IndexPage() {
         {/*05 - Use feature flags to test new ideas*/}
         <div className="featureFlagsWrapper wrapper"> 
           <div className="featureFlagsRow row">
-            <div className="featureFlags05">
+            <div className="featureFlags05 number">
               <h1 className="redText">05</h1>
             </div>
-            <div className="featureFlagsCol">
+            <div className="featureFlagsCol col">
               <h2 className="gosha">Use feature flags <br/>to test new ideas</h2>
               <hr className="redLine"/>
               <br/>
