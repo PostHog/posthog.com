@@ -102,7 +102,7 @@ function IndexPage() {
               <h1 className="redText">02</h1>
             </div>
             <div className="trafficCol col">
-              <h2>Understand how traffic really flows through your app</h2>
+              <h2 className="gosha">Understand how traffic really flows through your app</h2>
               <br className="revHiddenBreak"/>
               <hr className="redLine"/>
               <br className="revHiddenBreak"/>
@@ -171,7 +171,7 @@ function IndexPage() {
               <h2 className="gosha">Use feature flags <br/>to test new ideas</h2>
               <hr className="redLine"/>
               <br/>
-              <p className="featureFlagsText">Continuously release new features without worrying about breaking changes. Test new ideas quickly and roll out to 10%, 20% or 100% of your users.</p>
+              <p className="featureFlagsText">Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.</p>
             </div>
             <div className="featureFlagsImg"/>
           </div>
@@ -184,70 +184,70 @@ function IndexPage() {
               Designed for your stack
             </h2>
           </div>
-          <div className="yourStackLogosRow row" align="bottom">
-            <div className="yourStackLogos">
-              <Link to="/docs/integrations/python-integration">
-                <img alt="Python" className="imageShow" loading="lazy" src={stackPython} />
-              </Link>
-            </div>
-            <div className="yourStackLogos">
-                <Link to="/docs/integrations/php-integration">
-                  <img alt="PHP" className="imageShow" loading="lazy" src={stackPhp} />
+          <div className="yourStackWrapper">
+            <div className="yourStackLogosRow row" align="bottom">
+              <div className="yourStackLogos">
+                <Link to="/docs/integrations/python-integration">
+                  <img alt="Python" className="imageShow" loading="lazy" src={stackPython} />
                 </Link>
+              </div>
+              <div className="yourStackLogos">
+                  <Link to="/docs/integrations/php-integration">
+                    <img alt="PHP" className="imageShow" loading="lazy" src={stackPhp} />
+                  </Link>
+              </div>
+              <div className="yourStackLogos">
+                  <Link to="/docs/integrations/android-integration">
+                    <img alt="Android" className="imageShow" loading="lazy" src={stackAndroid} />
+                  </Link>
+              </div>
+              <div className="yourStackLogos">
+                  <Link to="/docs/integrations/ios-integration">
+                    <img alt="iOS" className="imageShow" loading="lazy" src={stackIos} />
+                  </Link>
+              </div>
+              <div className="yourStackLogos">
+                  <Link to="/docs/integrations/node-integration">
+                    <img alt="Node" className="imageShow" loading="lazy" src={stackNode} />
+                  </Link>
+              </div>
             </div>
-            <div className="yourStackLogos">
-                <Link to="/docs/integrations/android-integration">
-                  <img alt="Android" className="imageShow" loading="lazy" src={stackAndroid} />
+            <div className="yourStackShelfRow row">
+              <div className="yourStackShelf">
+                <img alt="shelf-2" className="imageShow shelf" loading="lazy" src={shelf2}/>
+              </div>
+            </div>
+            <div className="yourStackLogosRow row" align="bottom">
+              <div className="yourStackLogos">
+                <Link to="/docs/integrations/ruby-integration">
+                  <img alt="Ruby" className="imageShow" loading="lazy" src={stackRuby} />
                 </Link>
-            </div>
-            <div className="yourStackLogos">
-                <Link to="/docs/integrations/ios-integration">
-                  <img alt="iOS" className="imageShow" loading="lazy" src={stackIos} />
+              </div>
+              <div className="yourStackLogos">
+                <Link to="/docs/integrations/gatsby-integration">
+                  <img alt="Gatsby" className="imageShow" loading="lazy" src={stackGatsby} />
                 </Link>
-            </div>
-            <div className="yourStackLogos">
-                <Link to="/docs/integrations/node-integration">
-                  <img alt="Node" className="imageShow" loading="lazy" src={stackNode} />
+              </div>
+              <div className="yourStackLogos">
+                <Link to="/docs/integrations/js-integration">
+                  <img alt="Javascript" className="imageShow" loading="lazy" src={stackJavascript}/>
                 </Link>
+              </div>
+              <div className="yourStackLogos">
+                <Link to="/docs/integrations/go-integration">
+                  <img alt="Go" className="imageShow" loading="lazy" src={stackGo} />
+                </Link>
+              </div>
+              <div className="yourStackLogos">
+                <Link to="/docs/integrations/api">
+                  <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="yourStackShelfRow row">
-            <div className="yourStackShelf">
-              <img alt="shelf-2" className="imageShow shelf" loading="lazy" src={shelf2}/>
-            </div>
-          </div>
-            <br/>
-            <br/>
-          <div className="yourStackLogosRow row" align="bottom">
-            <div className="yourStackLogos">
-              <Link to="/docs/integrations/ruby-integration">
-                <img alt="Ruby" className="imageShow" loading="lazy" src={stackRuby} />
-              </Link>
-            </div>
-            <div className="yourStackLogos">
-              <Link to="/docs/integrations/gatsby-integration">
-                <img alt="Gatsby" className="imageShow" loading="lazy" src={stackGatsby} />
-              </Link>
-            </div>
-            <div className="yourStackLogos">
-              <Link to="/docs/integrations/js-integration">
-                <img alt="Javascript" className="imageShow" loading="lazy" src={stackJavascript}/>
-              </Link>
-            </div>
-            <div className="yourStackLogos">
-              <Link to="/docs/integrations/go-integration">
-                <img alt="Go" className="imageShow" loading="lazy" src={stackGo} />
-              </Link>
-            </div>
-            <div className="yourStackLogos">
-              <Link to="/docs/integrations/api">
-                <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
-              </Link>
-            </div>
-          </div>
-          <div className="yourStackShelfRow row">
-            <div className="yourStackShelf">
-              <img alt="shelf-4" className="imageShow shelf" loading="lazy" src={shelf4}/>
+            <div className="yourStackShelfRow row">
+              <div className="yourStackShelf">
+                <img alt="shelf-4" className="imageShow shelf" loading="lazy" src={shelf4}/>
+              </div>
             </div>
           </div>
         </div>
@@ -255,9 +255,8 @@ function IndexPage() {
         {/* self-hosted full data*/}
         <div className="selfHostedDataWrapper wrapper">
           <div className="selfHostedDataRow row">
-            <div span={8} offset={4} className="selfHostedDataCol">
+            <div className="selfHostedDataCol">
               <h2 className="gosha">Self host available, <br/> with full underlying data access</h2>
-              <br/>
               <hr className="blueLine"/>
               <p className="darkBlueText">Huge user base? No problem. Eliminate the data protection risks and costs associated with sending millions of users' data to 3rd parties.</p>
             </div>
@@ -318,6 +317,11 @@ function IndexPage() {
             <div className="coolHedgehog">
               <img src={coolHedgehog}/>
             </div>
+          </div>
+        </div>
+        <div className="buildingIsExpensiveHiddenWrapper wrapper">
+          <div className="buildingIsExpensiveHidden">
+            <h2>“ Building your own analytics solution is expensive, resource-intensive, and difficult to maintain. ”</h2>
           </div>
         </div>
 
@@ -405,9 +409,7 @@ function IndexPage() {
                 </Link>
               </div>
           </div>
-          <div className="installNowShelf" align="center">
-            <img alt="shelf-2" loading="lazy" src={shelf5} className="imageShow"/>
-          </div>
+          <div className="installNowShelf imageShow" />
         </div>
 
         
