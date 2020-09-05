@@ -8,7 +8,7 @@ showTitle: true
 
 In PostHog, there is an API endpoint available to see all events in your system and filter them.
 
-**Important:** While you can technically create new events with this API, it's much easier to [use the dedicated API](/docs/api/api) or [any of our libraries](/docs/api/api) for that.
+**Important:** While you can technically create new events with this API, it is simpler to [use the dedicated event capture API](/docs/api/post-only-endpoints) or [any of our libraries](/docs/integrations) for that.
 
 ## Pagination
 

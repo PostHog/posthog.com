@@ -4,6 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
+<br />
+
+<span class='note-block'>_Update: These endpoints can now be accessed with either your Team API Key or your [Personal Api Key](/docs/api/api)_.</span>
+
+<br />
+
+
 As explained in our [API Overview](/docs/api/api-overview) page, PostHog provides two different APIs. 
 
 This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrations/js-integration). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance. 
