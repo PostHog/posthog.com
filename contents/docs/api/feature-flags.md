@@ -10,12 +10,13 @@ PostHog provides you with an API endpoint to create and update your [feature fla
 
 If you're looking to use feature flags on your application, you can either use our [JavaScript Integration](/docs/integrations/js-integration#feature-flags) our our [dedicated endpoint](/docs/api/post-only-endpoints#feature-flags) for checking if feature flags are enabled for a given user.
 
-## Create/Update Feature Flags
+## Create Feature Flags
 
 ```shell
 POST /feature_flag
-POST /feature_flag/12
 ```
+
+### Data
 
 <span class="table-borders">
 
@@ -27,94 +28,109 @@ POST /feature_flag/12
 | `rollout_percentage` | Integer | No (Default: None) | Percentage of users with the specified filters that ther given flag will apply to. If filters are not specified, this will be a percentage of your total users.  |
 | `filters` | Hash table | No (Default: `{}`) | Properties of users to be matched for a flag to be on. |
 
-
 </span>
 
-Example request:
+### Example Request
 
 ```bash
-curl https://posthog.example.com/api/person/
+curl -i -X POST \
+-H "Host: app.posthog.com" \
+-H "DNT: 1" \
+-H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36" \
+-H "Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryqXQHtL5zR8zjk6lh" \
+-H "Accept: */*" \
+-H "Referer: https://app.posthog.com/" \
+-F "active=true" \
+-F "filter={}" \
+-F "name=My Flag" \
+-F "key=ayo" \
+-F "rollout_percentage=20" \
+-F "personal_api_key=w1O-6ExaX-t44IOUSb-Hx65Jjj4CwOwLlqAxdfo4gvg" \
+-L -v "https://app.posthog.com/api/feature_flag/"
 ```
 
-Example response:
+### Example Response
 
-```json
+```bash
 {
-    "next": "https://posthog.example.com/api/person/?cursor=cD0yMjgxOTA2",
-    "previous": null,
-    "results": [
-        {
-            "id": 2296750,
-            "name": "tim@posthog.com",
-            "distinct_ids": [
-                "h76pUrwsXarWvHjexBr8rHU6_b-yszcWBjJZiTC87C8",
-                "171842424bf55-06b1843bc657b5-396d7507-7e9000-171842424c07d2",
-            ],
-            "properties": {
-                "$os": "Mac OS X",
-                "name": "Tim",
-                "email": "tim@posthog.com",
-                "$browser": "Chrome",
-                "company_name": "test",
-                "$browser_version": 81,
-                "$initial_referrer": "http://127.0.0.1:8081/demo.html",
-                "$initial_referring_domain": "127.0.0.1:8081"
-            },
-            "created_at": "2020-05-19T14:28:58.397533Z"
-        },
-        {
-            "id": 2296684,
-            "name": "1720df7f0d91e-031be0d49f91cb-d373666-2a3000-1720df7f0da30b",
-            "distinct_ids": [
-                "1720df7f0d91e-031be0d49f91cb-d373666-2a3000-1720df7f0da30b"
-            ],
-            "properties": {},
-            "created_at": "2020-05-13T12:17:36.340682Z"
-        },
-    ]
+    "id": 123,
+    "name": "My Flag",
+    "key": "my-flag",
+    "rollout_percentage": 20,
+    "filters": {
+        "properties": [
+            {
+                "key": "ice_cream_preference",
+                "type": "person",
+                "value": "chocolate"
+            }
+        ]
+    },
+    "deleted": false,
+    "active": true,
+    "created_by": {
+        "id": 766,
+        "distinct_id": "4aa16b878667276092ced03c6f434b8932f",
+        "first_name": "John",
+        "email": "john.smith@fakeemail.com"
+    },
+    "created_at": "2020-09-02T18:36:15.993777Z"
 }
 ```
 
-## Get a Single Person
+## Get the Details of a Flag
 
 ```shell
-GET /person/:id
+GET /feature_flag/12
 ```
 
-<span class="table-borders">
+### Data
 
-| Attribute | Type | Required | Description |
-| :---: | :---: | :---: | :---:|
-| `id` | Integer | yes | ID of the user |
+To get the details of a given feature flag, pass its ID directly on the path. No additional form data is required. 
 
-</span>
-
-Example request:
+### Example Request
 
 ```bash
-curl https://posthog.example.com/api/person/2296750/
+curl https://posthog.example.com/api/feature_flag/12
 ```
 
-Example response:
+### Example Response
 
-```json
+```bash
 {
-    "id": 2296750,
-    "name": "tim@posthog.com",
-    "distinct_ids": [
-        "h76pUrwsXarWvHjexBr8rHU6_b-yszcWBjJZiTC87C8",
-        "171842424bf55-06b1843bc657b5-396d7507-7e9000-171842424c07d2",
-    ],
-    "properties": {
-        "$os": "Mac OS X",
-        "name": "Tim",
-        "email": "tim@posthog.com",
-        "$browser": "Chrome",
-        "company_name": "test",
-        "$browser_version": 81,
-        "$initial_referrer": "http://127.0.0.1:8081/demo.html",
-        "$initial_referring_domain": "127.0.0.1:8081"
+    "id": 123,
+    "name": "My Flag",
+    "key": "my-flag",
+    "rollout_percentage": 20,
+    "filters": {
+        "properties": [
+            {
+                "key": "ice_cream_preference",
+                "type": "person",
+                "value": "chocolate"
+            }
+        ]
     },
-    "created_at": "2020-05-19T14:28:58.397533Z"
+    "deleted": false,
+    "active": true,
+    "created_by": {
+        "id": 766,
+        "distinct_id": "4aa16b878667276092ced03c6f434b8932f",
+        "first_name": "John",
+        "email": "john.smith@fakeemail.com"
+    },
+    "created_at": "2020-09-02T18:36:15.993777Z"
 }
 ```
+
+## Update the Details of a Flag
+
+```shell
+PATCH /feature_flag/12
+```
+
+### Data 
+
+Passing the ID of the flag directly in the path, include any values from the table shown under 'Create Feature Flags' that you wish to update.
+
+
