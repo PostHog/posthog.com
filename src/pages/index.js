@@ -308,7 +308,7 @@ function IndexPage() {
           <div className="buildingIsExpensiveRow row">
             <div className="buildingIsExpensiveText">
               <div className="buildingIsExpensiveText1">
-                <h1>“</h1>
+                <h1>“ </h1>
               </div>
               <div className="buildingIsExpensiveText2">
                 <h2>Building your own analytics solution <br/>is expensive, resource-intensive, and <br/>difficult to maintain.</h2><h1>”</h1>
