@@ -608,7 +608,6 @@ td:last-child {
 }
 tt,
 code {
-  background-color: #f8f8f8;
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;
@@ -616,6 +615,11 @@ code {
   padding: 3px 5px;
   white-space: pre-wrap;
 }
+
+tt {
+  background-color: #f8f8f8;
+}
+
 pre code {
   background: none;
   line-height: 1.42;
@@ -826,18 +830,33 @@ header {
   color: initial!important;
 }
 
+li > .ant-menu-submenu-title span{
+  font-size: 18px;
+}
+
+.ant-menu-submenu a {
+  font-size: 14px;
+}
+
+.ant-menu-submenu ul > li .ant-menu-submenu-title span {
+  font-size: 14px;
+}
+
 .ant-menu-submenu-title span {
   font-weight: 400!important;
+}
+
+.ant-menu-submenu-selected > .ant-menu-submenu-title span {
+  font-weight: 600!important;
 }
 
 aside.sidebar {
   background: #F0F0F0;
   font-weight: 400!important;
-  border-right: 10px solid #F96132;
 }
 
 .ant-menu-item > a {
-  color: #000000!important;
+  color: #000000;
 }
 
 .ant-menu-submenu-active > div {
@@ -878,6 +897,22 @@ li.ant-menu-submenu-selected > div {
 aside.sidebarRight {
   background: #fff;
   border: none;
+}
+
+.rightBar {
+  border: none;
+}
+
+.rightBar div {
+  background-color: #fff
+}
+
+a.ant-anchor-link-title:hover, .ant-anchor-link-active a {
+  color: #1D4AFF!important;
+}
+
+span.ant-anchor-ink-ball {
+  border-color: #1D4AFF;
 }
 
 .rightBar {
@@ -1122,4 +1157,61 @@ table th {
 
 #mc_embed_signup .button:hover {
   background-color: #577BFB !important;
+}
+
+.blog-quote {
+  background: #f9f9f9;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+  max-width: 80%;
+  margin-left: 5%;
+  text-align: center;
+}
+
+.blog-quote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+.blog-quote:after {
+  color: #ccc;
+  content: close-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+  margin-left: 1%;
+}
+
+.blog-quote > p {
+  display: inline;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+}
+
+.star-repo-btn {
+  margin-top: 1% !important;
+}
+
+.login-btn {
+  color: #1D4AFF !important;
+}
+
+.login-btn:hover {
+  color: #577BFB !important;
+}
+
+code {
+  background-color: rgba(41,37,44,.1);
+  font-size: 14px !important;
+}
+
+.centered {
+  display: block; 
+  text-align: center;
 }

@@ -8,6 +8,7 @@ import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
+import StarRepoButton from '../StarRepoButton'
 
 class Menu extends Component {
   onChangeMenuState = nItem => {
@@ -50,27 +51,39 @@ class Menu extends Component {
                   }}
                 >
                   {menuItems.reverse().map(item => {
-                    return (
+                    return item.name === "star-repo" ? (
                       <AntMenu.Item
-                        className="headerKey"
+                        className="headerKey star-repo-btn"
                         style={{
                           marginLeft: '2em',
                           float: 'right',
                           marginBottom: 'calc(1.45rem / 2)'
                         }}
-                        key={item.link || item.a}
+                        key={item.name}
                       >
-                        {item.a ? (
-                          <a href={item.a} style={{ color: isBlogPage ? '#FFFFFF' : '#595959' }}>
-                            {item.name}
-                          </a>
-                        ) : (
-                          <Link to={item.link} style={{ color: isBlogPage ? '#FFFFFF' : '#595959'}}>
-                            {item.name}
-                          </Link>
-                        )}
+                        <StarRepoButton></StarRepoButton>
                       </AntMenu.Item>
-                    )
+                    ) : (
+                        <AntMenu.Item
+                          className="headerKey"
+                          style={{
+                            marginLeft: '2em',
+                            float: 'right',
+                            marginBottom: 'calc(1.45rem / 2)'
+                          }}
+                          key={item.link || item.a}
+                        >
+                          {item.a ? (
+                            <a href={item.a} className={item.name === "Login" && !isBlogPage ? " login-btn" : ""} style={{ color: isBlogPage ? '#FFFFFF' : '#000000' }}>
+                              {item.name}
+                            </a>
+                          ) : (
+                              <Link to={item.link} style={{ color: isBlogPage ? '#FFFFFF' : '#595959' }}>
+                                {item.name}
+                              </Link>
+                            )}
+                        </AntMenu.Item>
+                      )
                   })}
                 </AntMenu>
               )}
@@ -143,6 +156,7 @@ class Menu extends Component {
                             title={
                               <a
                                 href={item.a}
+                                className={item.name === "Login" ? " login-btn" : ""}
                                 style={{
                                   color: 'black',
                                   textDecoration: 'none',
@@ -155,24 +169,30 @@ class Menu extends Component {
                               </a>
                             }
                           />
-                        ) : (
+                        ) : item.name === "star-repo" ? (
                           <List.Item.Meta
                             title={
-                              <Link
-                                to={item.link}
-                                style={{
-                                  color: 'black',
-                                  textDecoration: 'none',
-                                }}
-                                onClick={() => {
-                                  this.onChangeMenuState(menuItems.length)
-                                }}
-                              >
-                                {item.name}
-                              </Link>
+                              <StarRepoButton></StarRepoButton>
                             }
                           />
-                        )}
+                        ) : (
+                              <List.Item.Meta
+                                title={
+                                  <Link
+                                    to={item.link}
+                                    style={{
+                                      color: 'black',
+                                      textDecoration: 'none',
+                                    }}
+                                    onClick={() => {
+                                      this.onChangeMenuState(menuItems.length)
+                                    }}
+                                  >
+                                    {item.name}
+                                  </Link>
+                                }
+                              />
+                            )}
                       </List.Item>
                     )}
                     style={{

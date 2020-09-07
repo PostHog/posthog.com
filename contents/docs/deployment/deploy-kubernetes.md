@@ -28,7 +28,7 @@ In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) depl
 > _NOTE: If Helm hangs while installing, try **increasing the memory** of your nodes._
 > _As a baseline, we suggest having at least **4gb of memory per node**._
 
-```shell script
+```bash
 helm repo add posthog https://posthog.github.io/charts/
 helm repo update
 helm install posthog posthog/posthog
@@ -139,7 +139,7 @@ Dependent charts can also have values overwritten. Preface values with "postgres
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
-```console
+```bash
 $ helm install \
   --set persistence.enabled=false,email.host=email \
   my-release .
@@ -147,7 +147,7 @@ $ helm install \
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
-```console
+```bash
 $ helm install -f my-values.yaml my-release .
 ```
 

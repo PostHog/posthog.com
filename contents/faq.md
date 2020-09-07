@@ -51,7 +51,7 @@ Yes. We are in very [active development](https://github.com/PostHog/posthog/grap
 
 ### How popular is the software?
 
-Very. We have thousands of users, over [2.9k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/investors).
+Very. We have thousands of users, over [3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/investors).
 
 ### Is the software updated regularly?
 
@@ -105,7 +105,7 @@ Want to set it up differently? [Raise an issue](https://github.com/PostHog/posth
 
 ### Will this scale?
 
-Yes. Check out [Scaling PostHog](/docs/scaling-posthog) for more information on this.
+Yes. Check out [Scaling PostHog](docs/configuring-posthog/scaling-posthog) for more information on this.
 
 ### Is there an enterprise offering?
 
@@ -131,7 +131,7 @@ The cool thing about PostHog is that you can go live into production without hav
 
 ### What's the community like?
 
-Active and growing! We have [more than 2.9k stars](https://github.com/PostHog/posthog/stargazers) on GitHub. There is a [Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) with daily conversations, and our repos have [issues](https://github.com/PostHog/posthog/issues) raised every day.
+Active and growing! We have [more than 3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub. There is a [Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) with daily conversations, and our repos have [issues](https://github.com/PostHog/posthog/issues) raised every day.
 
 ### How is this different from the other product analytics tools?
 

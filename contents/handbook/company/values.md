@@ -17,7 +17,7 @@ There is power in writing things down. We see transparency as part of this.
 Everyone should help everyone else raise their game.
 
 * Fatigue sets in when you complete a task. It's easier for outsiders to help those creating the work to raise their game.
-* We are direct about the quality of work. That doesn't always mean polish:
+* We are direct about the quality of work. That doesn't always mean work needs to be completely polished. It also concerns:
   * The speed of a task.
   * The validity of a task in helping the company move forward.
   * The impact of a task.

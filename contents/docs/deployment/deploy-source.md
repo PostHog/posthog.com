@@ -27,19 +27,29 @@ If there is no desire to customize your source, we strongly recommend other depl
 
 ## Step By Step Installation
 
-1. Run the following:
+1. Generate a unique `SECRET_KEY`. This is **essential** for security and PostHog will not work without it. 
+
+    ```bash
+    openssl rand -hex 32
+    ```
+
+    The command above will generate a key. Copy and make a note of it. You should keep this key **secret**, as the name implies.
+    We will also be needing it in the next step.
+
+2. Run the following:
 
     ```bash
     git clone https://github.com/posthog/posthog.git 
     cd posthog && yarn build
     pip install -r requirements.txt
-    export DATABASE_URL=''
-    export REDIS_URL=''
+    export DATABASE_URL='<Your Database URL>'
+    export REDIS_URL='<Your Redis URL'
+    export SECRET_KEY='<Your secret key>'
     python manage.py runserver
     python manage.py collectstatic
     ```
 
-2. To start the server and worker, run:
+3. To start the server and worker, run:
 
     ```bash
     ./bin/docker-server & ./bin/docker-worker

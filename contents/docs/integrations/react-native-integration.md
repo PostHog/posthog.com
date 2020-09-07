@@ -18,19 +18,19 @@ First make sure you have [CocoaPods](https://cocoapods.org/) installed.
 
 Then add the `posthog-react-native` package to your project:
 
-```shell script
+```bash
 yarn add posthog-react-native
 ```
 
 Then link the native libraries:
 
-```shell script
+```bash
 yarn react-native link
 ```
 
 If you're building for iOS, also make sure you have the latest PostHog iOS Pod installed: 
 
-```shell script
+```bash
 cd ios
 pod install
 cd ..
@@ -188,6 +188,10 @@ import PostHog from 'posthog-react-native'
 PostHog.enable() // opt in
 PostHog.disable() // opt out
 ```
+
+This is the suggested way to prevent capturing data from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in. 
+
+If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/features/cohorts#differentiating-team-vs-users-traffic).
 
 ### Sending screen views
 

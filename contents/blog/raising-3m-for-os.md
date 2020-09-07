@@ -114,11 +114,11 @@ By hosted, we mean charging customers for the hosted version of the open source 
 
 The upside of charging for hosted use is that you don't have to build anything beyond your basic product, and that means all your attention that goes into your free version will help the paid version's growth too.
 
-Open core is the model of choice for PostHog in the long run. We made a hosted version in the short run just to see if we could passively make some money to help control our burn rate (although a payment flow is on the todo list still...!), and it turned out around 60% of our users go for that route to try it out. We think that's a great sign.
+Open core is the model of choice for PostHog in the long run. We made a hosted version in the short run just to see if we could passively make some money to help control our burn rate (although a payment flow is on the todo list still…!), and it turned out around 60% of our users go for that route to try it out. We think that's a great sign.
 
 For open core, you first build a Community Edition open source product and focus on being really helpful to everyone who is willing to try it out or contribute.
 
-Do a really good job of that and you'll get random emails from folks at bigger companies who need more support or extra features. You can then build a "source available" version that you charge monthly for, for those people with premium functionality. The disadvantage is you have to build premium features that you can't put into the open source version - and it's important to be really upfront with the community about what is free versus paid... since that may put some developers off from doing pull requests, for example.
+Do a really good job of that and you'll get random emails from folks at bigger companies who need more support or extra features. You can then build a "source available" version that you charge monthly for, for those people with premium functionality. The disadvantage is you have to build premium features that you can't put into the open source version - and it's important to be really upfront with the community about what is free versus paid… since that may put some developers off from doing pull requests, for example.
 
 # How long it took
 
@@ -304,9 +304,9 @@ We set a cap with investors. We started off with a \$12M post money cap, meaning
 
 It's important to note that the downside of SAFEs is that if you have a down round at the next phase of fundraising, you'll get very diluted (if if the price is lower than the cap).
 
-We've no affiliation other than being friends, but in order to model how much of the company you're selling during this process, we used [Pulley](https://pulley.com). You put in all the SAFEs and you can model out a series A to check how much you've sold. [Sam Altman's advice](https://blog.ycombinator.com/dilution/) is to try to give up no more than 10-15% in a seed round and 15-25% in your A round... although "it's far more important not to run out of money than almost anything else". We used [Clerky](https://www.clerky.com/) to generate the SAFEs and to send them for electronic signature.
+We've no affiliation other than being friends, but in order to model how much of the company you're selling during this process, we used [Pulley](https://pulley.com). You put in all the SAFEs and you can model out a series A to check how much you've sold. [Sam Altman's advice](https://blog.ycombinator.com/dilution/) is to try to give up no more than 10-15% in a seed round and 15-25% in your A round… although "it's far more important not to run out of money than almost anything else". We used [Clerky](https://www.clerky.com/) to generate the SAFEs and to send them for electronic signature.
 
-If you have traction or a great vision, the world is what you make of it in fundraising. If you act meek and ask investors to make up the price, you'll land very low. Go in high and you'll polarize people - which is what you need... a definite yes or definite no! Just be careful if you set the bar too high, you will want to jump over it in the next round.
+If you have traction or a great vision, the world is what you make of it in fundraising. If you act meek and ask investors to make up the price, you'll land very low. Go in high and you'll polarize people - which is what you need… a definite yes or definite no! Just be careful if you set the bar too high, you will want to jump over it in the next round.
 
 # Getting the first cheque
 
