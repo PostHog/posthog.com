@@ -118,6 +118,8 @@ services:
 
 For more information on how to interface with the database, visit the [Clickhouse Docs](https://clickhouse.tech/docs/en/interfaces/).
     
+4. Run migrations: `python manage.py migrate_clickhouse`
+5. Set environment variable: `PRIMARY_DB=clickhouse`
 
 ## Using Porter
 Porter allows you to develop remotely without having to run or setup Docker on your local machine. It runs the same Docker containers in the cloud and lets you develop directly inside the remotely hosted container while still using your favorite local tools. 
