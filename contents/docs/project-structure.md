@@ -136,6 +136,11 @@ And after making your own migrations or running `git pull` after new migrations,
 python manage.py migrate
 ```
 
+To create boilerplate for clickhouse migrations use 
+```
+python manage.py create_ch_migration --name <name of migration>
+```
+
 #### models
 
 Subdirectory for the models ([Django ORM](https://docs.djangoproject.com/en/3.1/topics/db/models/database)). Interactions with our database are handled by these models. 
