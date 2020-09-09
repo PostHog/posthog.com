@@ -93,7 +93,8 @@
       "docs/api/events",
       "docs/api/people",
       "docs/api/trends",
-      "docs/api/user"
+      "docs/api/user",
+      "docs/api/feature-flags"
     ]
   },
   {
