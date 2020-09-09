@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
-import './index.css'
 import { Link } from 'gatsby'
 import posthogComputerRetro from '../images/posthog-computer-retro.svg'
 import hogflix1 from '../images/hogflix-1.svg'
@@ -36,10 +35,15 @@ import roadmapButton1 from '../images/roadmap-button-1.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
+import indexCSS from 'raw-loader!./index.css';
+import Helmet from 'react-helmet'
 
 function IndexPage() {
   return (
-    <Layout containerStyle={{ maxWidth: 'auto', padding: 0 }} className="indexPage">
+    <Layout containerStyle={{maxWidth: "auto", padding: 0}} className="indexPage">
+      <Helmet >
+        <style>{indexCSS}</style>
+      </Helmet>
       <div className="indexContainer">
         <SEO
           title="PostHog – Open-Source Product Analytics"

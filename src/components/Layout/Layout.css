@@ -247,7 +247,7 @@ h1 {
   text-rendering: optimizeLegibility;
   font-size: 2.66667rem;
   line-height: 1.5;
-  font-family: 'Gosha Sans';
+  font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
 
 h2 {
@@ -260,11 +260,11 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300!important;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2rem;
   line-height: 1.5;
-  font-family: 'Helvetica Neue';
+  font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
   font-style: normal;
 }
 h3 {
@@ -277,11 +277,11 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300!important;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.25rem;
   line-height: 1.5;
-  font-family: 'Helvetica Neue';
+  font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
   font-style: normal;
 }
 h4 {
@@ -294,7 +294,7 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1rem;
   line-height: 1.5;
@@ -626,7 +626,6 @@ pre code {
 }
 
 /* CUSTOM */
-
 .gutter-box {
   padding: 8px 0;
   background: #00a0e9;
@@ -672,6 +671,43 @@ header {
   padding: 0;
 }
 
+.menuHeader {
+  background-color: #ffffff!important;
+}
+
+.blogHeader {
+  background-color: #90A4AE!important;
+  background-size: cover;
+  height: 240px!important;
+  margin-bottom: 30px;
+}
+
+.menuHeaderWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+}
+
+.menuHeaderWrapper.noLogo{
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 1076px) {
+  .docsHeader {
+    background-color: #f9f9f9;
+    border-bottom: 6px solid #C4C4C4;
+    padding: 0;
+  }
+  .blogHeader {
+    background-image: none!important;
+    height: 64px;
+    border: none!important;
+    padding: 0;
+  }
+}
+
 .headerItems {
   margin-right: 20px;
 }
@@ -680,8 +716,18 @@ header {
   background: none!important;
 }
 
+.headerKey a {
+  color: #000000;
+}
+
+.sideBar {
+  background-color: #f9f9f9!important;
+}
+
 
 #logo {
+  height: 30px;
+  width: 150px;
   margin: 0;
   padding: 0;
 }
@@ -874,15 +920,15 @@ a.ant-anchor-link-title:hover {
 }
 
 .blog-post h2 {
-  color: #000000;
+  color: #000000!important;
   margin-top: 2rem;
   margin-bottom: .45rem;
   left: 0;
   border-bottom: 1px solid #000000;
 }
 
-.docsPages h3 {
-  color: #000000;
+.docsPages h2, .docsPages h3 {
+  color: #000000!important;
   margin-top: 2rem;
   margin-bottom: 1.45rem;
   left: 0;
@@ -893,6 +939,14 @@ a.ant-anchor-link-title:hover {
   margin-top: .2rem;
   margin-bottom: 1.45rem;
   left: 0;
+}
+
+.docsPages a {
+  color: #1D4AFF!important;
+}
+
+.docsPages a:hover {
+  color: #577BFB!important;
 }
 
 .blog-post p + h2 {
@@ -909,12 +963,21 @@ a.ant-anchor-link-title:hover {
   border-style: solid;
   border-color:#1D4AFF;
 }
-.blog-post a {
-  color: #1D4AFF;
+
+.blogHeaderTitle {
+  position: relative;
+  height: calc(100% - 64px);
+  top: 0;
+  width: 80%;
+  color: white;
+  vertical-align: bottom;
+  left: calc((100% - 960px) * 0.5 + 2.175rem);
 }
 
-.blog-post a:hover {
-  color: #577BFB;
+.blogHeaderTitle h1 {
+  position: absolute;
+  color: white;
+  bottom: 0
 }
 
 .ant-layout {
@@ -952,6 +1015,52 @@ h6:hover .post-toc-anchor
 }
 
 a.middle { display: block; text-align: center }
+
+.nonDocsLayout {
+  background-color: #ffffff; 
+  width: 100%;
+}
+
+.nonDocsLayout main {
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-top: 50px;
+}
+
+.docsPageLayout {
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.docsPageLayout main {
+  min-height: 280px;
+  padding: 3rem 0% 0 10%; 
+  width: 100%;
+}
+
+@media screen and (max-width: 1076px) {
+  .docsPageLayout main {
+    padding: 3rem 0 0;
+  }
+}
+
+.docsPageLayout main > .container {
+  position: relative;
+}
+
+.blogPageLayout {
+  background-color: #ffffff;
+  width: 100%; 
+  align: center;
+}
+
+.blogPageLayout main {
+  min-height: 280px;
+  margin: 0 auto; 
+  padding: 0px 1.0875rem 1.45rem; 
+  max-width: 960px;
+}
 
 .blue {
   color: #1D4AFF;
@@ -1030,6 +1139,61 @@ table th {
   font-size: 20px;
 }
 
+.headerKey {
+  margin-left: 2em;
+  float: right;
+  margin-bottom: calc(1.45rem / 2);
+}
+
+.mobileHeader {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 100;
+  padding: 5vh 0 0;
+}
+
+.mobileHeaderClose {
+  float: right;
+  font-size: 30px;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  margin-top: 5vh;
+  background-color: #ffffff;
+}
+
+.mobileHeaderItem {
+  text-align: center;
+}
+
+.mobileHeaderItem a, .mobileHeaderItem h4 > span{
+  list-style: none;
+  padding: 3vh 10vw;
+  margin: 0;
+  color: #000000!important;
+}
+
+.mobileHeaderItem .login-btn, .mobileHeaderItem a:hover {
+  color: #1D4AFF!important;
+}
+
+.mobileHeaderItem .login-btn:hover {
+  color: #577BFB!important;
+}
+
+.mobileHeaderList {
+  width: 100%;
+  float: left;
+  background-color: #ffffff;
+}
+
+.mobileSidebar {
+
+}
+
 .star-repo-btn {
   margin-top: 1% !important;
 }
@@ -1040,6 +1204,18 @@ table th {
 
 .login-btn:hover {
   color: #577BFB !important;
+}
+
+.headerItem {
+  color: #595959;
+}
+
+.login-btn.blogPage, .headerItem.blogPage {
+  color: #ffffff !important;
+}
+
+.login-btn.blogPage:hover, .headerItem.blogPage:hover, .headerItem:hover {
+  color: #1D4AFF !important;
 }
 
 code {

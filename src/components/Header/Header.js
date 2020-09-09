@@ -12,35 +12,15 @@ class Header extends Component {
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: 'none'
-        }}>
-        {sidebarHide || !onPostPage ? (
+      <div className={"menuHeaderWrapper " + (!sidebarHide && !screenIsSmall && "noLogo")}>
+        {screenIsSmall ? (
           <Link
           id="logo"
-          to="/"
-          style={{
-            //color: '#FFF',
-            textDecoration: 'none',
-            verticalAlign: 'center'
-          }}>
-          {screenIsSmall ? (
-          <img alt="logo" src={logo} id="logo-image" style={{
-            display: 'flex',
-            top: 0,
-            left: 8
-          }} />
-          ) : (
-            <img alt="logo" src={logo} id="logo-image"/>
-          )}
+          to="/">
+          <img alt="logo" src={logo} id="logo-image" />
           </Link>
         ) : (
-            isBlogPage ? (
+            onPostPage && (isBlogPage ? (
               <Link
               id="logo"
               to="/"
@@ -49,23 +29,25 @@ class Header extends Component {
                 textDecoration: 'none',
                 verticalAlign: 'center'
               }}>
-                {screenIsSmall ? (<img alt="logo" src={logo} id="logo-image" style={{
-                  display: 'flex',
-                  top: 0,
-                  left: 8
-                }} />
-                ) : (
-                  <img alt="logo" src={whiteLogo} id="logo-image"/>
-                )}
+                <img alt="logo" src={whiteLogo} id="logo-image"/>
               </Link>
-            ) : (
-              <div style={{height: 64, width: 0}}></div>
-          )
-        )}
+              ) : (
+                <Link
+              id="logo"
+              to="/"
+              style={{
+                //color: '#FFF',
+                textDecoration: 'none',
+                verticalAlign: 'center'
+              }}>
+                <img alt="logo" src={logo} id="logo-image" />
+              </Link>
+              )))}
         <Menu 
         sidebarDocked={sidebarDocked}
         sidebarHide={sidebarHide}
-        isBlogPage={isBlogPage} />
+        isBlogPage={isBlogPage}
+        screenIsSmall={screenIsSmall} />
       </div>
 )
   }

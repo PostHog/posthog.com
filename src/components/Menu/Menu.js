@@ -20,7 +20,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { sidebarDocked, menuOpen, isBlogPage, sidebarHide } = this.props
+    const { sidebarDocked, menuOpen, isBlogPage, screenIsSmall, sidebarHide } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -41,13 +41,7 @@ class Menu extends Component {
           return (
             <div className="headerItems" style={{ marginRight: 20 }}>
               {sidebarDocked && (
-                <AntMenu
-                  mode="horizontal"
-                  style={{
-                    borderBottomWidth: 0,
-                    background: isBlogPage && 'none'
-                  }}
-                >
+                <AntMenu mode="horizontal">
                   {menuItems.reverse().map(item => {
                     return item.name === "star-repo" ? (
                       <AntMenu.Item
@@ -64,19 +58,14 @@ class Menu extends Component {
                     ) : (
                         <AntMenu.Item
                           className="headerKey"
-                          style={{
-                            marginLeft: '2em',
-                            float: 'right',
-                            marginBottom: 'calc(1.45rem / 2)'
-                          }}
                           key={item.link || item.a}
                         >
                           {item.a ? (
-                            <a href={item.a} className={item.name === "Login" && !isBlogPage ? " login-btn" : ""} style={{ color: isBlogPage ? '#FFFFFF' : '#000000' }}>
+                            <a href={item.a} className={(item.name === "Login" ? " login-btn" : " headerItem") + (isBlogPage && " blogPage")} >
                               {item.name}
                             </a>
                           ) : (
-                              <Link to={item.link} style={{ color: isBlogPage ? '#FFFFFF' : '#595959' }}>
+                              <Link to={item.link} className={"headerItem" + (isBlogPage && " blogPage")} >
                                 {item.name}
                               </Link>
                             )}
@@ -87,10 +76,7 @@ class Menu extends Component {
               )}
               {!sidebarDocked && (
                 <Button
-                  style={{
-                    color: '#1D4AFF',
-
-                  }}
+                  className="headerButton"
                   type="link"
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length)
@@ -100,44 +86,29 @@ class Menu extends Component {
               )}
               {menuOpen && !sidebarDocked && (
                 <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    height: '100vh',
-                    width: '100%',
-                    zIndex: 100,
-                    paddingLeft: 0,
-                    paddingRight: 0,
-                    paddingTop: '5vh'
-                  }}
+                  className="mobileHeader"
                 >
-                  <div>
-                    <CloseOutlined
-                      style={{
-                        float: 'right',
-                        fontSize: '30px',
-                        paddingLeft: '10vw',
-                        paddingRight: '10vw',
-                        marginTop: '5vh',
-                        backgroundColor: 'white',
-                      }}
-                      onClick={() => {
-                        this.onChangeMenuState(menuItems.length)
-                      }}
-                    ></CloseOutlined>
-                  </div>
+                  <CloseOutlined
+                    className="mobileHeaderClose"
+                    style={{
+                      float: 'right',
+                      fontSize: '30px',
+                      paddingLeft: '10vw',
+                      paddingRight: '10vw',
+                      marginTop: '5vh',
+                      backgroundColor: 'white',
+                    }}
+                    onClick={() => {
+                      this.onChangeMenuState(menuItems.length)
+                    }}
+                  />
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}
                     rowKey={item => item.a || item.link}
                     renderItem={item => (
                       <List.Item
-                        style={{
-                          listStyle: 'none',
-                          padding: '3vh 10vw',
-                          margin: 0
-                        }}
+                        className="mobileHeaderItem"
                         key={menuItems.indexOf(item)}
                       >
                         {item.a ? (
@@ -146,10 +117,6 @@ class Menu extends Component {
                               <a
                                 href={item.a}
                                 className={item.name === "Login" ? " login-btn" : ""}
-                                style={{
-                                  color: 'black',
-                                  textDecoration: 'none',
-                                }}
                                 onClick={() => {
                                   this.onChangeMenuState(menuItems.length)
                                 }}
@@ -169,10 +136,6 @@ class Menu extends Component {
                                 title={
                                   <Link
                                     to={item.link}
-                                    style={{
-                                      color: 'black',
-                                      textDecoration: 'none',
-                                    }}
                                     onClick={() => {
                                       this.onChangeMenuState(menuItems.length)
                                     }}
@@ -184,11 +147,7 @@ class Menu extends Component {
                             )}
                       </List.Item>
                     )}
-                    style={{
-                      width: '100%',
-                      float: 'left',
-                      backgroundColor: 'white'
-                    }}
+                    className="mobileHeaderList"
                   />
                 </div>
               )}
