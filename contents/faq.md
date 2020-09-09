@@ -37,7 +37,7 @@ PostHog is designed for any web or mobile-based website or application.
 * We have frontend event capture using a snippet that goes inside your HTML ```<head></head>``` tags.
 * For any other events, we have:
 	* [Pre-built libraries](/docs/integrations)
-	* [An API](/docs/api/api) for anything else
+	* [An API](/docs/api/overview) for anything else
 
 ### Does it work for mobile and web?
 

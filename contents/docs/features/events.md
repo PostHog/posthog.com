@@ -72,7 +72,7 @@ There are two ways of passing data to PostHog – the API or through the JS snip
 
 ### API
 
-Our API documentation is available [here](/docs/api/api).
+Our API documentation is available [here](/docs/api/overview).
 <br>
 
 ### JS Snippet

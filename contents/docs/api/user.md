@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/api).</span><br />
+<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
 
 In PostHog, there is an API endpoint available to get all information on your own user and team.
 This includes all possible event names, event properties, API key, app URLs, current PostHog version and more.

@@ -87,7 +87,7 @@
     "entry":"API",
     "name":"API",
     "items":[
-      "docs/api/api",
+      "docs/api/overview",
       "docs/api/post-only-endpoints",
       "docs/api/elements",
       "docs/api/events",

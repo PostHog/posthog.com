@@ -6,12 +6,12 @@ showTitle: true
 
 <br />
 
-<span class='note-block'>_Update: These endpoints can now be accessed with either your Team API Key or your [Personal Api Key](/docs/api/api)_.</span>
+<span class='note-block'>Update: These endpoints can now be accessed with either your Team API Key or your [Personal API Key](/docs/api/overview).</span>
 
 <br />
 
 
-As explained in our [API Overview](/docs/api/api-overview) page, PostHog provides two different APIs. 
+As explained in our [API Overview](/docs/api/overview-overview) page, PostHog provides two different APIs. 
 
 This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrations/js-integration). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance. 
 
@@ -231,6 +231,6 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ## Reading data from PostHog
 
-We have another set of APIs to read/modify anything in PostHog. See our [API documentation](/docs/api/api) for more information.
+We have another set of APIs to read/modify anything in PostHog. See our [API documentation](/docs/api/overview) for more information.
 
 Also, feel free to reach out in the [PostHog Users Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) if you'd like help with the API.

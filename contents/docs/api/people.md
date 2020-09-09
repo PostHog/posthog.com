@@ -4,13 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/api).</span><br />
+<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
 
 In PostHog, there is an API endpoint available to see all people (users) in your PostHog instance.
 
 ## Pagination
 
-This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [Pagination](/docs/api/overview#pagination) for more info.
 
 ## List People
 

@@ -6,7 +6,7 @@ showTitle: true
 
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
-**Note:** At the moment, feature flags are only implemented in our [JavaScript integration](/docs/integrations/js-integration#feature-flags). We're working to support this feature on all of our libraries, but, for the moment, you can use [our API](/docs/api/api#feature-flags) to implement feature flags in your backend.
+**Note:** At the moment, feature flags are only implemented in our [JavaScript integration](/docs/integrations/js-integration#feature-flags). We're working to support this feature on all of our libraries, but, for the moment, you can use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
 ## Creating Feature Flags
 

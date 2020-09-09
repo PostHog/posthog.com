@@ -56,7 +56,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [Node integration](/docs/integrations/node-integration)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [Go integration](/docs/integrations/go-integration)                | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [PHP integration](/docs/integrations/php-integration)              | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Full REST API](/docs/api/api)                            | <span style="color: #71AA55">**Live**</span> | ✔      | ✔      |
+| [Full REST API](/docs/api/overview)                            | <span style="color: #71AA55">**Live**</span> | ✔      | ✔      |
 
 ### Additional features
 

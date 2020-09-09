@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/api).</span><br />
+<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
 
 PostHog provides you with an API endpoint to create and update your [feature flags](/docs/features/feature-flags). This section refers to that endpoint specifically. 
 
@@ -88,7 +88,7 @@ To get the details of a given feature flag, pass its ID directly on the path. Yo
 
 ```bash
 curl -i \
--H "Authorization: <your_key> Bearer" \
+-H "Authorization: Bearer <your_key>" \
 -L -v "https://[your-instance].com/api/feature_flag/123/"
 ```
 
