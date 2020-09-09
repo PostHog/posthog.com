@@ -1024,7 +1024,9 @@ a.middle { display: block; text-align: center }
   position: relative;
   left: 0;
   right: 0;
-  margin-top: 50px;
+  margin: 0 auto; 
+  padding: 0px 1.0875rem 1.45rem;
+  max-width: 960px;
 }
 
 .docsPageLayout {
