@@ -41,7 +41,7 @@ function Template({
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
   return (
-    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} pageTitle={frontmatter.title}>
+    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} pageTitle={frontmatter.title} >
     <SEO
       title={frontmatter.title + ' - PostHog Docs'}
       description={frontmatter.description || excerpt}

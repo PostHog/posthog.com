@@ -20,7 +20,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { sidebarDocked, menuOpen, isBlogPage, sidebarHide } = this.props
+    const { sidebarDocked, menuOpen, isBlogPage, screenIsSmall, sidebarHide } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -39,38 +39,23 @@ class Menu extends Component {
         render={data => {
           const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
           return (
-            <div className="headerItems" style={{ 
-              position: 'relative',
-              top: 0, 
-              background: 'none'}}>
+            <div className="headerItems">
               {sidebarDocked && (
                 <AntMenu
                   mode="horizontal"
-                  style={{
-                    borderBottomWidth: 0,
-                  }}
+                  className="menuHeaderUl"
                 >
                   {menuItems.reverse().map(item => {
                     return item.name === "star-repo" ? (
                       <AntMenu.Item
                         className="headerKey star-repo-btn"
-                        style={{
-                          marginLeft: '2em',
-                          float: 'right',
-                          marginBottom: 'calc(1.45rem / 2)'
-                        }}
                         key={item.name}
                       >
-                        <StarRepoButton></StarRepoButton>
+                        {!screenIsSmall && <StarRepoButton></StarRepoButton>}
                       </AntMenu.Item>
                     ) : (
                         <AntMenu.Item
                           className="headerKey"
-                          style={{
-                            marginLeft: '2em',
-                            float: 'right',
-                            marginBottom: 'calc(1.45rem / 2)'
-                          }}
                           key={item.link || item.a}
                         >
                           {item.a ? (
@@ -90,13 +75,6 @@ class Menu extends Component {
               {!sidebarDocked && !menuOpen ? (
                 <Button
                 className="dropdownMenuButton"
-                  style={{
-                    position: 'relative',
-                    fontSize: 32,
-                    width: 60,
-                    height: 60,
-                    top: 4,
-                  }}
                   type="link"
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length)
@@ -106,18 +84,6 @@ class Menu extends Component {
               ) : (
                 <CloseOutlined 
                 className="closeButton"
-                  style={{ 
-                    position: 'relative',
-                    fontSize: 32,
-                    height: 60,
-                    width: 60,
-                    float: 'right',
-                    right: 0,
-                    top: 4,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length)
                   }}
@@ -125,16 +91,7 @@ class Menu extends Component {
               )}
               {menuOpen && !sidebarDocked && (
                 <div
-                className="dropdownMenuMobile"
-                  style={{
-                    position: 'absolute',
-                    top: 64,
-                    height: '100vh',
-                    width: '100vw',
-                    float: 'right',
-                    right: 0,
-                    zIndex: 1
-                  }}
+                className={"dropdownMenuMobile " + (menuOpen && "dropdownMenuMobileOpen")}
                 >
                   <List
                     className="dropdownMenu"
@@ -143,12 +100,6 @@ class Menu extends Component {
                     rowKey={item => item.a || item.link}
                     renderItem={item => (
                       <List.Item
-                        style={{
-                          lineHeight: 54,
-                          listStyle: 'none',
-                          padding: '32px 10vw',
-                          margin: 0
-                        }}
                         key={menuItems.indexOf(item)}
                       >
                         {item.a ? (
@@ -157,10 +108,6 @@ class Menu extends Component {
                               <a
                                 href={item.a}
                                 className={item.name === "Login" ? " login-btn" : ""}
-                                style={{
-                                  color: 'black',
-                                  textDecoration: 'none',
-                                }}
                                 onClick={() => {
                                   this.onChangeMenuState(menuItems.length)
                                 }}
@@ -170,7 +117,7 @@ class Menu extends Component {
                             }
                           />
                         ) : item.name === "star-repo" ? (
-                          <List.Item.Meta
+                          <List.Item.Meta 
                             title={
                               <StarRepoButton></StarRepoButton>
                             }
@@ -180,10 +127,6 @@ class Menu extends Component {
                                 title={
                                   <Link
                                     to={item.link}
-                                    style={{
-                                      color: 'black',
-                                      textDecoration: 'none',
-                                    }}
                                     onClick={() => {
                                       this.onChangeMenuState(menuItems.length)
                                     }}
@@ -195,11 +138,6 @@ class Menu extends Component {
                             )}
                       </List.Item>
                     )}
-                    style={{
-                      width: '100%',
-                      float: 'left',
-                      backgroundColor: '#F0F0F0'
-                    }}
                   />
                 </div>
               )}

@@ -54,11 +54,12 @@ template {
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
-  color: #1D4AFF; 
+  color: #1D4AFF!important; 
 }
 a:active,
 a:hover {
   outline-width: 0;
+  color: #000000!important;
 }
 abbr[title] {
   border-bottom: none;
@@ -641,7 +642,7 @@ pre tt:after {
 /* CUSTOM */
 
 @media screen and (min-width: 1076px) {
-  .closeButton { /*Very quick fix, clean this up*/
+  span.closeButton { /*Very quick fix, clean this up*/
     display: none!important;
   }
 } 
@@ -649,8 +650,10 @@ pre tt:after {
 /* antd componentes custom styling */
 
 main.ant-layout-content {
-  padding: 3rem 0% 0px 10%; 
+  padding: 0 54px;
   width: 100%;
+  position: static;
+  height: auto;
 }
 
 @media screen and (max-width: 1076px) {
@@ -679,86 +682,200 @@ main.ant-layout-content {
 
 #logo {
   position: relative;
-  left: 40px;
-  top: 0;
-  height: 40px;
-  overflow: hidden;
-  color: rgba(0,0,0,.85);
-  font-size: 18px;
-  line-height: 64px;
   font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-variant: tabular-nums;
-  white-space: nowrap;
-  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  width: 272px;
+  height: auto;
 }
 
-@media screen and (max-width: 1076px) {
-  #logo {
-    left: 28px;
-  }
+.sidebarLogo {
+  position: relative;
+  height: 169px;
+  width: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 16px;
 }
-
 
 #logo-image-sidebar {
-  position: relative;
-  width: 160px; 
-  height: auto;
-  top: 17px;
-  margin-bottom: 80px;
+  top: 0;
+  margin: 0 0 0 84px;
 }
 
 #logo-image-header {
+  top: 0;
+  margin: 0 0 0 34px;
+}
 
+@media screen and (max-width: 1076px) {
+  #logo-image-sidebar, #logo-image-header {
+    margin: 0;
+  }
+  .sidebarLogo {
+    justify-content: space-between!important;
+  }
 }
 
 #logo img {
-  width: auto;
-  position: relative;
-  top: 10px;
-  height: 32px;
-  margin-right: 16px;
-  vertical-align: middle;
 }
 
 header {
   margin: 0;
   padding: 0;
-  height: auto;
-}
-
-.headerItems {
-
-}
-
-.headerItems ul {
   background: none!important;
 }
 
+.menuHeader {
+  position: relative;
+  background: none!important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 169px!important;
+}
 
-#logo {
-  margin: 0;
-  padding: 0;
+.menuHeaderWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+li.star-repo-btn {
+  height: 28px;
+}
+
+.headerKey > a {
+  font-size: 16px!important;
+}
+
+.docsHeaderWrapper {
+  justify-content: flex-end;
+}
+
+.docsHeader {
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 1076px) {
+  header {
+    height: auto!important;
+  }
+  .menuHeader {
+    min-height: 260px;
+    height: auto!important;
+  }
+  .menuHeaderWrapper {
+    height: 100vh;
+    top: 0;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .docsHeader {
+    display: block;
+    height: 100%;
+    padding: 0!important;
+  }
+  .docsHeaderWrapper {
+    height: 110px!important;
+    padding: 0 20px 0 30px;
+    justify-content: space-between;
+  }
+}
+
+ul.menuHeaderUl {
+  background: none!important;
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuHeaderUl li {
+  margin: 0 14px!important;
+  padding: 0 20px!important;
+  display: flex;
+  vertical-align: center;
 }
 
 .dropdownMenuMobile {
-  background-color: #ffffff;
-  background-image: url('/images/landing-page-background.svg')!important;
+  background-color: #ffffff!important;
+  background-image: url('../../images/landing-page-background.svg')!important;
+  background-size: 600px 600px;
+  background-repeat: repeat;
+  background-position: top center;
+  position: relative;
+  top: 108px;
+  height: calc(100vh - 108px);
+  width: 100vw;
+  left: 0;
+}
+
+.dropdownMenuMobile ul {
+  background: none!important;
+  padding-top: 20px;
+}
+
+.dropdownMenuMobile li {
+  text-align: center;
+  border-bottom: none!important;
+}
+
+.dropdownMenuMobile a {
+  font-size: 20px;
+  line-height: 54px;
+  color: #000000;
+  font-weight: 400;
 }
 
 .dropdownMenu {
-  background-image: url('/images/landing-page-background.svg')!important;
-  height: 100vh!important;
+  height: 600px!important;
 }
+
 
 .dropdownMenuButton {
   color: #000000!important;
+  position: relative;
+  font-size: 32px!important;
+  width: 60px!important;
+  height: 60px!important;
+  top: 4;
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  font-size: 32px;
+  float: right;
+  right: 0;
+  top: 4px;
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
 }
 
 .redTopbar {
-  min-height: 150px;
-  height: 100%;
+  position: relative;
+  height: 148px;
   width: 100%;
   background-color: #F96132;
+}
+
+.redTopbarOpen {
+  height: auto;
 }
 
 .redTopbarButton {
@@ -800,7 +917,7 @@ header {
 }
 
 .sidebarMenuWrapper {
-  margin: 0 10;
+  margin: 0 62px;
 }
 
 .sidebarMenuMobile{
@@ -812,11 +929,12 @@ header {
 }
 
 .footer-universal{
-  background: #353F6F;
-  color: #FFF;
+  background: #BEBEBE;
+  color: #000000;
   position: relative;
   left: 0px;
   width: '100%';
+  max-width: 1920px;
   top: '100%';
   margin-top:0;
   padding-top: 40px;
@@ -828,6 +946,15 @@ header {
   background: initial!important;
   border: initial!important;
   color: initial!important;
+}
+
+@media screen and (max-width: 1028px) {
+  .docsHeader {
+    background-color: #f0f0f0;
+  }
+  .blogPostHeader {
+    background-color: blue;
+  }
 }
 
 li > .ant-menu-submenu-title span{
@@ -853,10 +980,11 @@ li > .ant-menu-submenu-title span{
 aside.sidebar {
   background: #F0F0F0;
   font-weight: 400!important;
+  border-right: 18px solid #F96132
 }
 
 .ant-menu-item > a {
-  color: #000000;
+  color: #000000!important;
 }
 
 .ant-menu-submenu-active > div {
@@ -899,50 +1027,44 @@ aside.sidebarRight {
   border: none;
 }
 
-.rightBar {
+.sidebarRight {
   border: none;
 }
 
-.rightBar div {
+.sidebarRight a{
+  color: #000000!important;
+}
+
+.sidebarRight div {
   background-color: #fff
 }
 
 a.ant-anchor-link-title:hover, .ant-anchor-link-active a {
-  color: #1D4AFF!important;
+  color: #F96132!important;
 }
 
 span.ant-anchor-ink-ball {
-  border-color: #1D4AFF;
+  border-color: #F96132;
 }
 
-.rightBar {
-  border: none;
-}
-
-.rightBar div {
-  background-color: #fff
-}
-
-a.ant-anchor-link-title:hover, .ant-anchor-link-active a {
-  color: #1D4AFF!important;
-}
-
-span.ant-anchor-ink-ball {
-  border-color: #1D4AFF;
-}
-
-.footer-universal a {
-  color: #fff;
-}
 .footer-links{
   list-style-type: none;
   margin-top:20px;
   line-height:1em;
   text-align:left;
+  color: #000000
+}
+
+.footer-universal a {
+  color: #000000!important;
+}
+
+.footer-universal a:hover {
+  color: #f9f9f9!important;
 }
 
 .footer-links-header{
-  font-weight:bold;
+  font-weight: normal;
   font-size: 20px;
   margin-bottom: 10px;
 }
@@ -994,11 +1116,14 @@ span.ant-anchor-ink-ball {
   opacity: 0
 }
 
+.docsPages h1 {
+  text-align: left;
+}
+
 .docsPages h2 {
   color: #000000;
-  margin-top: 2rem;
-  padding-bottom: 1rem;
-  left: 0;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .docsPages h2:before{
@@ -1015,7 +1140,6 @@ span.ant-anchor-ink-ball {
   color: #000000;
   margin-top: 2rem;
   margin-bottom: 1.45rem;
-  left: 0;
 }
 
 
@@ -1032,6 +1156,7 @@ span.ant-anchor-ink-ball {
   margin-top: .2rem;
   margin-bottom: 1.45rem;
   left: 0;
+  padding-bottom: 32px
 }
 
 .blogPost p + h2 {

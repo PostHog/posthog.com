@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import Menu from '../Menu'
-import logo from '../../images/posthog-logo-150x29.svg'
+import logo from '../../images/posthog-logo-lg.svg'
+import smallLogo from '../../images/posthog-logo-150x29.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
@@ -12,19 +13,12 @@ class Header extends Component {
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          verticalAlign: screenIsSmall ? 'center' : 'top',
-          justifyContent: 'space-between',
-          background: 'none'
-        }}>
+      <div className={"menuHeaderWrapper " + (onPostPage && "docsHeaderWrapper ") + (isBlogPage && "blogPostHeaderWrapper")}>
           {screenIsSmall ? (
           <Link
             id="logo"
             to="/">
-            <img alt="logo" src={logo} id="logo-image-header"/>
+            <img alt="logo" src={smallLogo} id="logo-image-header"/>
           </Link>
           ) : (
             (isBlogPage || !onPostPage) ? (
@@ -45,7 +39,8 @@ class Header extends Component {
         <Menu 
         sidebarDocked={sidebarDocked}
         sidebarHide={sidebarHide}
-        isBlogPage={isBlogPage} />
+        isBlogPage={isBlogPage} 
+        screenIsSmall={screenIsSmall}/>
       </div>
     )
   }

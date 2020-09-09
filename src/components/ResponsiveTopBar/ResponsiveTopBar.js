@@ -48,7 +48,7 @@ class ResponsiveTopBar extends Component {
     } = this.props
 
     return (
-      <div className="redTopbar">
+      <div className={"redTopbar " + (sidebarOpen && "redTopbarOpen")}>
         <div className="redTopbarText">
           <h2 style={{color: 'white'}}>{pageTitle}</h2>
             {isDocsPage() && <p>{getCurrentSidebar()}</p>}

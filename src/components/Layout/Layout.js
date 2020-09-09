@@ -41,7 +41,8 @@ class Layout extends Component {
       containerStyle={},
       expandedKeys,
       isBlogPage,
-      pageTitle
+      pageTitle,
+      screenIsSmall
     } = this.props
 
     return (
@@ -72,22 +73,14 @@ class Layout extends Component {
                   <AntdLayout theme="light">
                     {!screenIsSmall && onPostPage && (
                       !sidebarHide && !isBlogPage && (
-                      <AntdLayout.Sider width="300" theme="light" className="sidebar">
+                      <AntdLayout.Sider width="430" theme="light" className="sidebar">
                         <ResponsiveSidebar/>
                         </AntdLayout.Sider>
                       ))}
 
                       <AntdLayout theme="light">
                         <AntdLayout.Header
-                        className={"menuHeader " + (isBlogPage && "blogPost") + (onPostPage)}
-                        style={{ 
-                          backgroundColor: screenIsSmall && onPostPage ? '#F0F0F0' : '#fff', 
-                          backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
-                          backgroundSize: 'cover',
-                          height: 'auto',
-                          padding: screenIsSmall && 0,
-                          marginBottom: isBlogPage && '2rem'
-                        }}
+                        className={"menuHeader " + (onPostPage && "docsHeader ") + (isBlogPage && "blogPostHeader")}
                         theme="light"
                         >
                           <Header
@@ -107,8 +100,6 @@ class Layout extends Component {
                           {isBlogPage && !screenIsSmall &&
                           <div style={{
                             position: 'relative',
-                            height: 'calc(100% - 64px)', 
-                            top: 64,
                             width: '80%', 
                             color: 'white', 
                             verticalAlign: 'bottom',
@@ -134,7 +125,6 @@ class Layout extends Component {
                               sidebarDocked={!screenIsSmall}
                               onPostPage={onPostPage}
                               className={className}
-                              style={{ position: 'relative' }}
                               containerStyle={containerStyle}
                             >
                               {children}
