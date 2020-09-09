@@ -4,11 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
-This section of our Docs explains how to pull or push data from/to our API.
+This section of our Docs explains how to pull or push data from/to our API. PostHog has an API available on all tiers of pricing and for every self-hosted version.
 
-If you're looking to push event or user data into PostHog instead of using a tracking snippet or a language-specific library, there is a simple guide in the [Dedicated Events API](/docs/integrations/api) section.
+Please note that PostHog makes use of two different APIs, serving different purposes and using different mechanisms for authentication. 
 
-PostHog has an API available on all tiers of pricing and for every self-hosted version.
+One API is used for pushing data into PostHog. This uses the 'Team API Key' that is included in the [frontend snippet](/docs/integration/js-integration). This API Key is **public**, and is what we use in our frontend integration to push events into PostHog, as well as to check for feature flags, for instance. 
+
+The other API is more powerful and allows you to perform any action as if you were an authenticated user utilizing the PostHog UI. It is mostly used for getting data out of PostHog, as well as other private actions such as creating a feature flag. This uses a 'Personal API Key' which you need to create manually (instructions [below](#authentication)). This API Key is **private** and you should not make it public nor share it with anyone. It gives you access to all the data held by your PostHog instance, which includes sensitive information.
+
+These API Docs refer mostly to the **private API**, performing authentication as outlined below. The only exception is the [POST-Only Public Endpoints](/docs/api/post-only-endpoints) section. This section explicitly informs you on how to perform authentication. For endpoints in all other sections, authentication is done as described below.
 
 ## Authentication
 
