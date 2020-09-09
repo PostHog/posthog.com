@@ -29,7 +29,7 @@ class ResponsiveSidebar extends Component {
             }}
           >
 
-              <img alt='logo' src={logo} id='logo-image' style={{width: 160, height: 'auto', top: 10, left: 40, marginTop: 17, marginBottom: 80}}/>
+              <img alt='logo' src={logo} id='logo-image-sidebar' style={{width: 160, height: 'auto', top: 10, left: 40, marginTop: 17, marginBottom: 80}}/>
           </Link>
           <SidebarContents/>
         </div>

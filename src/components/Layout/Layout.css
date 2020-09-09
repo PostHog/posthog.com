@@ -659,11 +659,10 @@ pre code {
 
 
 #logo img {
+    vertical-align: top!important;
     position: relative;
-    top: 10px;
     height: 32px;
-    margin-right: 16px;
-    vertical-align: middle;
+    margin: 0;
 }
 
 header {
@@ -726,7 +725,7 @@ header {
 
 
 #logo {
-  height: 30px;
+  height: 32px;
   width: 150px;
   margin: 0;
   padding: 0;
@@ -1016,12 +1015,12 @@ h6:hover .post-toc-anchor
 
 a.middle { display: block; text-align: center }
 
-.nonDocsLayout {
+.notDocsLayout {
   background-color: #ffffff; 
   width: 100%;
 }
 
-.nonDocsLayout main {
+.notDocsLayout main {
   position: relative;
   left: 0;
   right: 0;

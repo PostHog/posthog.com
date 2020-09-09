@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import Menu from '../Menu'
 import logo from '../../images/posthog-logo-150x29.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
-import { getMenuState } from '../../store/selectors'
+import { getMenuState, isSidebarHide } from '../../store/selectors'
 import { connect } from 'react-redux'
 
 
@@ -17,32 +17,16 @@ class Header extends Component {
           <Link
           id="logo"
           to="/">
-          <img alt="logo" src={logo} id="logo-image" />
+          <img alt="logo" src={logo} id="logo-image-header" />
           </Link>
         ) : (
-            onPostPage && (isBlogPage ? (
+            sidebarDocked && !onPostPage || isBlogPage &&(
               <Link
               id="logo"
-              to="/"
-              style={{
-                //color: '#FFF',
-                textDecoration: 'none',
-                verticalAlign: 'center'
-              }}>
-                <img alt="logo" src={whiteLogo} id="logo-image"/>
+              to="/">
+                <img alt="logo" src={whiteLogo} id="logo-image-header"/>
               </Link>
-              ) : (
-                <Link
-              id="logo"
-              to="/"
-              style={{
-                //color: '#FFF',
-                textDecoration: 'none',
-                verticalAlign: 'center'
-              }}>
-                <img alt="logo" src={logo} id="logo-image" />
-              </Link>
-              )))}
+              ))}
         <Menu 
         sidebarDocked={sidebarDocked}
         sidebarHide={sidebarHide}
