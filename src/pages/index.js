@@ -35,7 +35,7 @@ import roadmapButton1 from '../images/roadmap-button-1.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
-import indexCSS from './index.css'
+import indexCSS from '!!raw-loader!./../pages/index.css'
 import Helmet from 'react-helmet'
 
 function IndexPage() {

@@ -39,18 +39,13 @@ class Menu extends Component {
         render={data => {
           const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
           return (
-            <div className="headerItems" style={{ marginRight: 20 }}>
+            <div className="headerItems">
               {sidebarDocked && (
                 <AntMenu mode="horizontal">
                   {menuItems.reverse().map(item => {
                     return item.name === "star-repo" ? (
                       <AntMenu.Item
                         className="headerKey star-repo-btn"
-                        style={{
-                          marginLeft: '2em',
-                          float: 'right',
-                          marginBottom: 'calc(1.45rem / 2)'
-                        }}
                         key={item.name}
                       >
                         <StarRepoButton></StarRepoButton>
@@ -90,14 +85,6 @@ class Menu extends Component {
                 >
                   <CloseOutlined
                     className="mobileHeaderClose"
-                    style={{
-                      float: 'right',
-                      fontSize: '30px',
-                      paddingLeft: '10vw',
-                      paddingRight: '10vw',
-                      marginTop: '5vh',
-                      backgroundColor: 'white',
-                    }}
                     onClick={() => {
                       this.onChangeMenuState(menuItems.length)
                     }}

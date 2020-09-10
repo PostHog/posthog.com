@@ -2,6 +2,10 @@
     border-bottom: none;
 }
 
+#logo img {
+    display: initial;
+}
+
 .ant-btn-primary { 
   background-color: #353F6F;
   border-color: #353F6F;

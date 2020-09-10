@@ -665,6 +665,21 @@ pre code {
     margin: 0;
 }
 
+#logo-image-sidebar {
+
+}
+
+.logoWrapperSidebar {
+  width: 300px;
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
 header {
   margin: 0;
   padding: 0;
@@ -682,6 +697,7 @@ header {
 }
 
 .menuHeaderWrapper {
+  height: 64px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -713,6 +729,14 @@ header {
 
 .headerItems ul {
   background: none!important;
+  display: flex;
+  flex-direction: row-reverse; 
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerKey {
+  margin-left: 20px;
 }
 
 .headerKey a {
@@ -721,6 +745,66 @@ header {
 
 .sideBar {
   background-color: #f9f9f9!important;
+}
+
+.mobileHeader {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 100;
+  padding: 5vh 0 0;
+}
+
+.mobileHeaderClose {
+  float: right;
+  font-size: 30px;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  margin-top: 5vh;
+  background-color: #ffffff;
+}
+
+.mobileHeaderItem {
+  text-align: center;
+}
+
+.mobileHeaderItem a, .mobileHeaderItem h4 > span{
+  list-style: none;
+  padding: 3vh 10vw;
+  margin: 0;
+  color: #000000!important;
+}
+
+.mobileHeaderItem .login-btn, .mobileHeaderItem a:hover {
+  color: #1D4AFF!important;
+}
+
+.mobileHeaderItem .login-btn:hover {
+  color: #577BFB!important;
+}
+
+.mobileHeaderList {
+  width: 100%;
+  float: left;
+  background-color: #ffffff;
+}
+
+@media screen and (max-width: 1076px) {
+  .headerItems ul {
+    flex-direction: column;
+  }
+  .mobileHeaderItem {
+    width: 100vw;
+    border: none!important;
+  }
+  .mobileHeaderItem a {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+  }
 }
 
 
@@ -742,6 +826,10 @@ header {
   padding-top: 40px;
   padding-bottom: 80px;
   height: 100%;
+}
+
+.sidebarWrapper {
+  margin: 0 10px;
 }
 
 .ant-menu, .ant-menu-submenu, .ant-menu-item {
@@ -1030,6 +1118,9 @@ a.middle { display: block; text-align: center }
 .docsPageLayout {
   background-color: #ffffff;
   width: 100%;
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0px 1.0875rem 1.45rem;
 }
 
 .docsPageLayout main {
@@ -1138,63 +1229,37 @@ table th {
   font-size: 20px;
 }
 
-.headerKey {
-  margin-left: 2em;
-  float: right;
-  margin-bottom: calc(1.45rem / 2);
-}
-
-.mobileHeader {
-  background-color: white;
+.mobileSidebarWrapper {
+  margin-top: 20px;
   position: absolute;
-  top: 0;
   left: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 100;
-  padding: 5vh 0 0;
-}
-
-.mobileHeaderClose {
-  float: right;
-  font-size: 30px;
-  padding-left: 10vw;
-  padding-right: 10vw;
-  margin-top: 5vh;
+  right: 0;
+  bottom: 0;
   background-color: #ffffff;
-}
-
-.mobileHeaderItem {
-  text-align: center;
-}
-
-.mobileHeaderItem a, .mobileHeaderItem h4 > span{
-  list-style: none;
-  padding: 3vh 10vw;
-  margin: 0;
-  color: #000000!important;
-}
-
-.mobileHeaderItem .login-btn, .mobileHeaderItem a:hover {
-  color: #1D4AFF!important;
-}
-
-.mobileHeaderItem .login-btn:hover {
-  color: #577BFB!important;
-}
-
-.mobileHeaderList {
+  z-index: 9999;
   width: 100%;
-  float: left;
-  background-color: #ffffff;
 }
 
 .mobileSidebar {
-
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: left .3s ease-out, right .3s ease-out;
+  overscroll-behavior-y: contain;
 }
 
 .star-repo-btn {
-  margin-top: 1% !important;
+  display: flex; 
+  justify-content: center;
+}
+
+.star-repo-btn span {
+  display: flex;
+  align-items: center;
 }
 
 .login-btn {

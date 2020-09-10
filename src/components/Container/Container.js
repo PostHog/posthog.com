@@ -18,16 +18,9 @@ class Container extends Component {
     } = this.props
 
     return (
-      <div className={className}>
+      <div className={className + " " +(onPostPage && " docsContainer")}>
         <div
           style={{
-            margin: onPostPage ? 0 : '0 auto',
-            maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            marginTop:
-              !sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)
-                ? 20
-                : 0,
             ...containerStyle
           }}
         >
