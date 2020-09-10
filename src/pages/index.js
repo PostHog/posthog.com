@@ -35,14 +35,16 @@ import roadmapButton1 from '../images/roadmap-button-1.svg'
 import { Row, Col } from 'antd'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
-import indexCSS from 'raw-loader!./../pages/index.css'
+import indexCSS from './index.css'
 import Helmet from 'react-helmet'
 
 function IndexPage() {
   return (
     <Layout containerStyle={{maxWidth: "auto", padding: 0}} className="indexPage">
-      <Helmet >
-        <style>{indexCSS}</style>
+      <Helmet>
+        <style className="styling">
+          {indexCSS}
+        </style>
       </Helmet>
       <div className="indexContainer">
         <SEO

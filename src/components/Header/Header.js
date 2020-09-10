@@ -12,7 +12,7 @@ class Header extends Component {
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
 
     return (
-      <div className={"menuHeaderWrapper " + (!sidebarHide && !screenIsSmall && "noLogo")}>
+      <div className={"menuHeaderWrapper " + (!sidebarHide && !screenIsSmall && onPostPage && "noLogo")}>
         {screenIsSmall ? (
           <Link
           id="logo"
@@ -20,12 +20,19 @@ class Header extends Component {
           <img alt="logo" src={logo} id="logo-image-header" />
           </Link>
         ) : (
-            sidebarDocked && !onPostPage || isBlogPage &&(
+            isBlogPage ? (
               <Link
               id="logo"
               to="/">
                 <img alt="logo" src={whiteLogo} id="logo-image-header"/>
               </Link>
+              ) : (
+                sidebarDocked && !onPostPage &&
+                <Link
+                  id="logo"
+                  to="/">
+                  <img alt="logo" src={logo} id="logo-image-header" />
+                </Link>
               ))}
         <Menu 
         sidebarDocked={sidebarDocked}
