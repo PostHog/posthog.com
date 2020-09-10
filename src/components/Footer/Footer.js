@@ -9,8 +9,8 @@ const FooterListItem = props => (
         <Link to={props.to}>{props.children}</Link>
       </Row>
     ) : (
-      props.children
-    )}
+        props.children
+      )}
   </div>
 )
 
@@ -18,7 +18,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="footer-universal">
-        <Row gutter={[24, 8]} justify="space-around" style={{margin: 0}}>
+        <Row gutter={[24, 8]} justify="space-around" style={{ margin: 0 }}>
           <Col xs={0} sm={0} md={0} lg={6} xl={6} className="gutter-row">
           </Col>
           <Col xs={24} sm={24} md={24} lg={16} xl={16} className="gutter-row">
@@ -35,6 +35,7 @@ class Footer extends Component {
               <FooterListItem to="/docs">Docs</FooterListItem>
               <FooterListItem to="/blog">Blog</FooterListItem>
               <FooterListItem to="/newsletter">Newsletter</FooterListItem>
+              <a href="https://merch.posthog.com/collections/all">Merch</a>
             </Col>
             <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Community</span>
@@ -63,13 +64,16 @@ class Footer extends Component {
               <span className="footer-links-header">Support</span>
               <FooterListItem to="/support">Support</FooterListItem>
               <FooterListItem><a href="mailto:sales@posthog.com">Contact sales</a></FooterListItem>
-              <FooterListItem to="/status">Status</FooterListItem>
+              <Row>
+                <a href="http://status.posthog.com">Status</a>
+              </Row>
             </Col>
             <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
               <span className="footer-links-header">Company</span>
               <FooterListItem to="/handbook/company/story">About</FooterListItem>
-              <FooterListItem to="/handbook">Handbook</FooterListItem>
+              <FooterListItem to="/handbook/company/team">Team</FooterListItem>
               <FooterListItem to="/careers">Careers</FooterListItem>
+              <FooterListItem to="/handbook">Handbook</FooterListItem>
               <FooterListItem to="/handbook/strategy/investors">Investors</FooterListItem>
               <FooterListItem to="/media">Media</FooterListItem>
               <FooterListItem to="/terms">Terms</FooterListItem>

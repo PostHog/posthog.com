@@ -29,17 +29,37 @@ If you are deploying with Docker on AWS or Digital Ocean, you can check our indi
 
 
 1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
-
-2. [Install Docker Compose](https://docs.docker.com/compose/install/)
-
-3. Run the following:
-
+1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
+1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. Install `git`:
 ```bash
-sudo apt-get install git
-git clone https://github.com/posthog/posthog.git
-cd posthog
+sudo apt-get update && sudo apt-get install git
+```
+1. To clone the PostHog repository and enter the new directory, run: 
+```bash
+git clone https://github.com/posthog/posthog.git && cd posthog
+```
+1. Generate a `SECRET_KEY` that is unique to your instance. 
+
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/configuring-posthog/securing-posthog).**
+
+    First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+
+    Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
+
+    Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+
+    This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
+
+    ```
+    SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
+    ```
+
+1. Then, to run PostHog, do:
+```bash
 docker-compose up -d
 ```
+1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
 ### Local Installation
 
@@ -73,9 +93,11 @@ docker run -t -i --rm --publish 8000:8000 -v postgres:/var/lib/postgresql postho
 
 ## Upgrading PostHog with Docker
 
-Upgrading Docker depends on how you've deployed PostHog with Docker.
+Upgrading PostHog with Docker depends on how you've deployed with Docker.
 
-- If you deployed with docker-compose, run `docker-compose pull web`
+**Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/configuring-posthog/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
+
+- For docker-compose, run `docker-compose pull web`
 
 If you've pinned a version, see [CHANGELOG.md](https://github.com/PostHog/posthog/blob/master/CHANGELOG.md) for the latest version.
 

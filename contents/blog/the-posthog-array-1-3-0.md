@@ -9,11 +9,11 @@ hideAnchor: true
 
 Another shiny new integration - PostHog now plays nicely with Android!
 
-Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
 
 ## Release notes
 
-### [PostHog Android Library](https://docs.posthog.com/#/integrations/android-integration)
+### [PostHog Android Library](/docs/integrations/android-integration)
 
 ![](../images/04/android-events.gif)
 
@@ -21,7 +21,7 @@ In addition to the work Marius put into the iOS integration, this week you can a
 
 Check out our [Android docs](/docs/integrations/android-integration) on how to install it on your app.
 
-### [Gatsby Plugin](https://docs.posthog.com/#/integrations/gatsby)
+### [Gatsby Plugin](/docs/integrations/gatsby-integration)
 
 ![](../images/04/gatsbyplugin.gif)
 

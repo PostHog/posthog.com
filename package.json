@@ -1,8 +1,22 @@
 {
-  "name": "gatsby-starter-markdown",
-  "description": "Gatsby markdown starter",
+  "name": "posthog.com",
+  "description": "Official PostHog website.",
   "version": "1.0.0",
-  "author": "Luca(Wei) Chen <wei@cvluca.com>",
+  "author": "PostHog",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PostHog/posthog.com"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "build": "gatsby build",
+    "start": "gatsby develop",
+    "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "antd": "^3.23.2",
@@ -14,6 +28,7 @@
     "gatsby-plugin-offline": "^2.2.10",
     "gatsby-plugin-posthog-analytics": "^0.0.1",
     "gatsby-plugin-react-helmet": "^3.1.7",
+    "gatsby-plugin-remove-trailing-slashes": "^2.3.11",
     "gatsby-plugin-sharp": "^2.2.22",
     "gatsby-remark-autolink-headers": "^2.1.10",
     "gatsby-remark-copy-linked-files": "^2.3.2",
@@ -24,36 +39,29 @@
     "gatsby-transformer-json": "^2.2.8",
     "gatsby-transformer-remark": "^2.8.7",
     "gatsby-transformer-sharp": "^2.2.14",
-    "katex": "^0.10.2",
-    "prismjs": "^1.20.0",
+    "katex": "^0.12.0",
+    "prismjs": "^1.21.0",
     "query-string": "^6.13.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-github-btn": "^1.2.0",
     "react-helmet": "^5.2.1",
-    "react-redux": "^7.1.1",
+    "react-redux": "^7.2.1",
     "react-responsive": "^6.1.2",
-    "typescript": "^3.6.3"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
-    "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+    "typescript": "^4.0.2"
   },
   "devDependencies": {
-    "gatsby-plugin-remove-trailing-slashes": "^2.1.6",
-    "gh-pages": "^2.1.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.12",
     "mem": "^5.1.1",
-    "prettier": "^1.18.2"
+    "prettier": "^2.1.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cvluca/gatsby-starter-markdown"
+  "//husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "//lint-staged": {
+    "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
   }
 }

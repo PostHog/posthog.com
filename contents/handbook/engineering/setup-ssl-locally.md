@@ -4,7 +4,66 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Setting up SSL locally can be useful if you're trying to debug issues.
+Setting up HTTPS locally can be useful if you're trying to debug hard
+to replicate issues (e.g cross domain cookies, etc).
+
+There are two ways you can get HTTPS locally: 
+
+1. ngrok 
+2. NGINX and a local certificate. 
+
+The easiest option is to use ngrok.
+
+## Set up SSL via ngrok
+
+0. Make sure you [have ngrok installed](https://ngrok.com/download)
+
+1. Start ngrok tunnel to 8234 (webpack dev server). This will give you a tunnel URL such as https://68f83839843a.ngrok.io
+
+```bash
+ngrok http 8234
+```
+
+![Ngrok](../../images/engineering/ngrok-domain.gif)
+
+2. Copy the URL to `JS_URL` and start webpack
+
+```bash
+export WEBPACK_HOT_RELOAD_HOST=0.0.0.0
+export LOCAL_HTTPS=1
+export JS_URL=https://68f83839843a.ngrok.io
+yarn start
+```
+
+3. Copy the URL to `JS_URL` and start the Django server
+
+```bash
+export DEBUG=1
+export LOCAL_HTTPS=1
+export JS_URL=https://68f83839843a.ngrok.io
+python manage.py runserver
+```
+
+4. Start a ngrok tunnel to 8000 (Django)
+
+```
+ngrok http 8000
+```
+
+Do what you need with the returned URL!
+
+**Tips & Tricks**
+
+If you're testing the Toolbar, make sure to add the ngrok urls to the list on the /setup page.
+
+![Permitted domains](../../images/engineering/toolbar-permitted-ngrok.png)
+
+
+Also, watch out, network requests can be slow through ngrok:
+
+![Network slow with ngrok](../../images/engineering/ngrok-slow.gif)
+
+## Set up SSL via NGINX and a local certificate
 
 0. Update openssl if "openssl version" tells you "LibreSSL" or something like that.
 

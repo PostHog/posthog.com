@@ -28,7 +28,7 @@ In this doc, we'll learn how to bootstrap a [PostHog](https://posthog.com/) depl
 > _NOTE: If Helm hangs while installing, try **increasing the memory** of your nodes._
 > _As a baseline, we suggest having at least **4gb of memory per node**._
 
-```shell script
+```bash
 helm repo add posthog https://posthog.github.io/charts/
 helm repo update
 helm install posthog posthog/posthog
@@ -40,9 +40,11 @@ The following table lists the configurable parameters of the PostHog Helm Chart 
 
 Dependent charts can also have values overwritten. Preface values with PostgreSQL.
 
-Parameter                                            | Description                                                                                                | Default
-:--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- | :---------------------------------------------------
-`image.repository`                                   | PostHog image                                                                                              | `posthog/posthog`
+<span class="table-borders">
+
+| Parameter                                            | Description | Default |
+:------------------------------------- | :----- | :-------------------------- |
+`image.repository`                                   | PostHog image                                                                                      | `posthog/posthog`
 `image.tag`                                          | PostHog image tag                                                                                          | `latest`
 `image.pullPolicy`                                   | Image pull policy                                                                                          | `Always`
 `image.imagePullSecrets`                             | Specify image pull secrets                                                                                 | `[]`
@@ -50,8 +52,8 @@ Parameter                                            | Description              
 `web.podAnnotations`                                 | Web pod annotations                                                                                        | `{}`
 `web.podLabels`                                      | Web pod extra labels                                                                                       | `{}`
 `web.replicacount`                                   | Amount of web pods to run                                                                                  | `1`
-`web.resources.limits`                               | Web resource limits                                                                                        | `{cpu: 500m, memory: 500Mi}`
-`web.resources.requests`                             | Web resource requests                                                                                      | `{cpu: 300m, memory: 300Mi}`
+`web.resources.limits`                               | Web resource limits                                                                                     | `{cpu: 500m, memory: 500Mi}`
+`web.resources.requests`                             | Web resource requests                                                                                   | `{cpu: 300m, memory: 300Mi}`
 `web.env`                                            | Additional web environment variables                                                                       | `[]`
 `web.nodeSelector`                                   | Node labels for web pod assignment                                                                         | `{}`
 `web.affinity`                                       | Affinity settings for web pod assignment                                                                   | `{}`
@@ -74,9 +76,9 @@ Parameter                                            | Description              
 `web.hpa.maxpods`                                    | Max pods for the web HorizontalPodAutoscaler                                                               | `10`
 `email.from_email`                                   | Emails are sent are from                                                                                   | `tim@posthog.com`
 `email.host`                                         | SMTP host for sending email                                                                                | `smtp`
-`email.port`                                         | SMTP port                                                                                                  | `578`
-`email.user`                                         | SMTP user                                                                                                  | `nil`
-`email.password`                                     | SMTP password                                                                                              | `nil`
+`email.port`                                         | SMTP port                                                                                         | `578`
+`email.user`                                         | SMTP user                                                                                          | `nil`
+`email.password`                                     | SMTP password                                                                                      | `nil`
 `email.use_tls`                                      | SMTP TLS for security                                                                                      | `false`
 `email.use_ssl`                                      | SMTP SSL for security                                                                                      | `false`
 `email.existingSecret`                               | SMTP password from an existing secret                                                                      | `nil`
@@ -130,11 +132,14 @@ Parameter                                            | Description              
 `serviceAccount.create`                              | Configures if a ServiceAccount with this name should be created                                            | `true`
 `serviceAccount.annotations`                         | Configures annotation for the ServiceAccount                                                               | `{}`
 
+
+</span>
+
 Dependent charts can also have values overwritten. Preface values with "postgresql."
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
-```console
+```bash
 $ helm install \
   --set persistence.enabled=false,email.host=email \
   my-release .
@@ -142,7 +147,7 @@ $ helm install \
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
-```console
+```bash
 $ helm install -f my-values.yaml my-release .
 ```
 

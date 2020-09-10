@@ -4,6 +4,7 @@
     "name": "Docs",
     "child_entries":[
       "Deployment",
+      "Configuring PostHog",
       "Integrations",
       "Features",
       "API",
@@ -12,11 +13,26 @@
     ]
   },
   {
+    "entry":"Configuring PostHog",
+    "name":"Configuring PostHog",
+    "items": [
+      "docs/configuring-posthog",
+      "docs/configuring-posthog/environment-variables",
+      "docs/configuring-posthog/upgrading-posthog",
+      "docs/configuring-posthog/scaling-posthog",
+      "docs/configuring-posthog/securing-posthog",
+      "docs/configuring-posthog/running-behind-proxy",
+      "docs/configuring-posthog/smtp-credentials"
+    ]
+  },
+  {
     "entry":"Contributing",
     "name":"Contributing",
     "items": [
       "docs/contributing",
       "docs/developing-locally",
+      "docs/stack",
+      "docs/project-structure",
       "updating-documentation"
     ]
   },
@@ -26,19 +42,17 @@
     "items": [
       "docs/deployment",
       "docs/deployment/deploy-heroku",
+      "docs/deployment/deploy-aws",
       "docs/deployment/deploy-azure",
       "docs/deployment/deploy-digital-ocean",
       "docs/deployment/deploy-docker",
       "docs/deployment/deploy-gcs",
       "docs/deployment/deploy-kubernetes",
-      "docs/deployment/deploy-aws",
+      "docs/deployment/deploy-linode",
+      "docs/deployment/deploy-render",
       "docs/deployment/deploy-source",
-      "docs/deployment/scaling-posthog",
-      "docs/deployment/securing-posthog",
-      "docs/deployment/running-behind-proxy",
-      "docs/deployment/hosting-costs",
-      "docs/deployment/smtp-credentials",
-      "docs/deployment/snippet-installation"
+      "docs/deployment/snippet-installation",
+      "docs/deployment/hosting-costs"
     ]
   },
   {
@@ -86,6 +100,7 @@
     "name":"Integrations",
     "items": [
       "docs/integrations",
+      "docs/integrations/segment-integration",
       "docs/integrations/android-integration",
       "docs/integrations/api",
       "docs/integrations/go-integration",
@@ -118,7 +133,8 @@
     "name":"Sending Data Out",
     "items":[
       "docs/integrations/slack",
-      "docs/integrations/microsoft-teams"
+      "docs/integrations/microsoft-teams",
+      "docs/integrations/message-formatting"
     ]
   },
   {
@@ -153,6 +169,8 @@
     "entry":"Releases",
     "name":"Releases",
     "items":[
+      "blog/the-posthog-array-1-14-0",
+      "blog/the-posthog-array-1-13-0",
       "blog/the-posthog-array-1-12-0",
       "blog/the-posthog-array-1-11-0",
       "blog/the-posthog-array-1-10-0",
@@ -176,6 +194,9 @@
     "entry":"Company Blog",
     "name":"Company Blog",
     "items": [
+      "blog/open-source-eating-saas",
+      "blog/product-led-growth",
+      "blog/a-chat-with-sid",
       "blog/raising-3m-for-os",
       "blog/after-the-hn-launch",
       "blog/pivot-to-posthog",
@@ -207,12 +228,13 @@
     "name":"Company",
     "items":
     [
-      "handbook/company/communication",
-      "handbook/company/culture",
-      "handbook/company/security",
       "handbook/company/story",
-      "handbook/company/team",
-      "handbook/company/values"
+      "handbook/company/culture",
+      "handbook/company/values",
+      "handbook/company/communication",
+      "handbook/company/security",
+      "handbook/company/branding",
+      "handbook/company/team"
     ]
   },
   {
@@ -220,13 +242,14 @@
     "name":"People",
     "items":
     [
-      "handbook/people/onboarding",
-      "handbook/people/offboarding",
+      "handbook/people/hiring-process",
       "handbook/people/compensation",
-      "handbook/people/side-gigs",
-      "handbook/people/spending-money",
       "handbook/people/time-off",
-      "handbook/people/hiring-process"
+      "handbook/people/spending-money",
+      "handbook/people/side-gigs",
+      "handbook/people/training",
+      "handbook/people/onboarding",
+      "handbook/people/offboarding"
     ]
   },
   {
@@ -255,9 +278,9 @@
     "items":[
       "handbook/strategy/strategy",
       "handbook/strategy/business-model",
+      "handbook/strategy/roadmap",
       "handbook/strategy/investors",
-      "handbook/strategy/investor-updates",
-      "handbook/strategy/roadmap"
+      "handbook/strategy/investor-updates"
     ]
   }
 ]

@@ -133,9 +133,9 @@ Then, anywhere else in your app you can do:
 ```python
 import posthog
 
-def homepage(request):
+def purchase(request):
     # example capture
-    posthog.capture(request.session.session_key, 'page view', ....)
+    posthog.capture(request.session.session_key, 'purchase', ...)
 ```
 
 # Development

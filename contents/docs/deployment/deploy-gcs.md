@@ -24,9 +24,9 @@ The first thing you'll need is a [GCS Account](https://console.cloud.google.com/
 ### Step-By-Step
 
 1. Access your [Console](https://console.cloud.google.com/)
-2. On the left-hand sidebar, head over to 'Compute' and hover over 'Compute Engine'. This should bring up a submenu where you can click 'VM Instances' at the top.
-3. On the 'VM Instances' page, click 'Create'
-4. Set up your desired configuration. We'll be using the 'Ubuntu 18.04' boot disk for this tutorial. The default on GCS is Debian, and you can change that by clicking 'Change' uder the 'Boot disk' section. 
+1. On the left-hand sidebar, head over to 'Compute' and hover over 'Compute Engine'. This should bring up a submenu where you can click 'VM Instances' at the top.
+1. On the 'VM Instances' page, click 'Create'
+1. Set up your desired configuration. We'll be using the 'Ubuntu 18.04' boot disk for this tutorial. The default on GCS is Debian, and you can change that by clicking 'Change' uder the 'Boot disk' section. 
 
 You will also want to allow HTTP and HTTPS Traffic. It is recommended to set security preferences and allowed IPs for these ports. 
 
@@ -37,30 +37,45 @@ Finally, for the server specifications, we recommend a config with about the fol
 
 However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
 
-5. Click 'Create' at the bottom once you're done with the configuration steps
-6. Once your instance is live, that means you're ready to move on to the next tutorial.
+1. Click 'Create' at the bottom once you're done with the configuration steps
+1. Once your instance is live, that means you're ready to move on to the next tutorial.
 
 #### Docker Installation
 
 On the page for your instance, you can choose how to access it. Clicking SSH will take you to a virtual terminal in your browser where you can interact with the virtual machine. However, you may want to SSH in from your own terminal. In this case, you need to follow [this tutorial](https://cloud.google.com/compute/docs/instances/connecting-advanced#provide-key) to provide you Public Key to the VM Instace.
 
 1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
-2. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-3. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
-4. You should already have `git` installed. In that case, skip this step. Otherwise, install `git`:
+1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
+1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. You should already have `git` installed. In that case, skip this step. Otherwise, install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git
 ```
-5. To clone the PostHog repository and enter the new directory, run: 
+1. To clone the PostHog repository and enter the new directory, run: 
 ```bash
 git clone https://github.com/posthog/posthog.git && cd posthog
 ```
-6. Then, to run PostHog, do:
+1. You'll then need to generate a `SECRET_KEY` that is unique to your instance. 
+
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/configuring-posthog/securing-posthog).**
+
+    First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+
+    Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
+
+    Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+
+    This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
+
+    ```
+    SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
+    ```
+
+1. Then, to run PostHog, do:
 ```bash
 docker-compose up -d
 ```
-7. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
-8. (Optional) Consider using something like [Supervisor](http://supervisord.org/introduction.html) to monitor the process
+1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
 <br>
 
@@ -104,9 +119,9 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 ## Useful Tutorials
 <br>
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/deployment/running-behind-proxy)
+#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/deployment/securing-posthog)
+#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/deployment/scaling-posthog)
+#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 

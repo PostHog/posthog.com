@@ -24,21 +24,23 @@ The first thing you'll need is a [Microsoft Azure account](https://azure.microso
 ### Step-By-Step
 
 1. Access your [Dashboard](https://portal.azure.com/#home)
-2. Click 'Virtual Machine' if it is available on the main screen. Otherwise, click 'Create a Resource' > 'Compute' > 'Virtual Machine'
-3. On the 'Virtual Machine' page, click 'Add' on the top right if you were not automatically taken to the creation page
-4. Set up your desired configuration. We'll be using the 'Ubuntu Server 18.04 LTS' image for this tutorial. 
+1. Click 'Virtual Machine' if it is available on the main screen. Otherwise, click 'Create a Resource' > 'Compute' > 'Virtual Machine'
+1. On the 'Virtual Machine' page, click 'Add' on the top right if you were not automatically taken to the creation page
+1. Set up your desired configuration. We'll be using the 'Ubuntu Server 18.04 LTS' image for this tutorial. 
 
-You may also want to enable ports 22, 80, and 443, for SSH, HTTP Traffic, and HTTPS Traffic respectively. It is recommended to set security preferences and allowed IPs for these ports. For this tutorial, you will also need the 'username' you create at this stage, so take note of that.
+    You may also want to enable ports 22, 80, and 443, for SSH, HTTP Traffic, and HTTPS Traffic respectively. It is recommended to set security preferences and allowed IPs for these ports. For this tutorial, you will also need the 'username' you create at this stage, so take note of that.
 
-Finally, for the server specifications, we recommend a config with about the following specs for a medium volume instance:
+    Finally, for the server specifications, we recommend a config with about the following specs for a medium volume instance:
     - 4GB of RAM
     - 2 CPUs
     - 50GB of storage
 
-However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
+    <br>
 
-5. Click 'Review + create' once you're done with the configuration steps
-6. Once your instance is live, that means you're ready to move on to the next tutorial.
+    However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
+
+1. Click 'Review + create' once you're done with the configuration steps
+1. Once your instance is live, that means you're ready to move on to the next tutorial.
 
 #### Docker Installation
 
@@ -51,22 +53,37 @@ If you downloaded a new key during the creation of the Virtual Machine, you may 
 ssh -i path/to/your/key.pem <username>@<YOUR_IP>
 ```
 1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
-2. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-3. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
-4. You should already have `git` installed. In that case, skip this step. Otherwise, install `git`:
+1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
+1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. You should already have `git` installed. In that case, skip this step. Otherwise, install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git
 ```
-5. To clone the PostHog repository and enter the new directory, run: 
+1. To clone the PostHog repository and enter the new directory, run: 
 ```bash
 git clone https://github.com/posthog/posthog.git && cd posthog
 ```
-6. Then, to run PostHog, do:
+1. You'll then need to generate a `SECRET_KEY` that is unique to your instance. 
+
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/configuring-posthog/securing-posthog).**
+
+    First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
+
+    Then, open the `docker-compose.yml` file with the command: `nano docker-compose.yml`
+
+    Lastly, substitute `"<randomly generated secret key>"` for the key you got from the key generation command.
+
+    This means the `SECRET_KEY: "<randomly generated secret key>"` line will end up looking something like this (with your key, of course):
+
+    ```
+    SECRET_KEY: "cd8a182315defa70d995452d9258908ef502da512f52c20eeaa7951d0bb96e75"
+    ```
+
+1. Then, to run PostHog, do:
 ```bash
 docker-compose up -d
 ```
-7. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
-8. (Optional) Consider using something like [Supervisor](http://supervisord.org/introduction.html) to monitor the process
+1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
 <br>
 
@@ -110,9 +127,9 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 ## Useful Tutorials
 <br>
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/deployment/running-behind-proxy)
+#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/deployment/securing-posthog)
+#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/deployment/scaling-posthog)
+#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 
