@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import SidebarContents from "../SidebarContents";
 import logo from '../../images/posthog-logo-150x29.svg'
 import { Link } from 'gatsby'
-import docsearch from 'docsearch.js'
 
 class ResponsiveSidebar extends Component {
-  componentDidMount() {
-    docsearch({apiKey: '45e80dec3e5b55c400663a5cba911c4c', indexName: 'posthog', inputSelector: '#doc-search'})
-  }
   render() {
     const { expandedKeys } = this.props
 
@@ -21,7 +17,6 @@ class ResponsiveSidebar extends Component {
         zIndex:1, 
         marginBottom: 10,
       }} >           
-      <input id="doc-search" />
         <div style={{
           marginLeft: 10,
           marginRight: 10,
