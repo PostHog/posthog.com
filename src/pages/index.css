@@ -115,6 +115,9 @@ p {
         margin-top: 10%;
         margin-left: 1%;
     }
+    body {
+        overflow-x: hidden;
+    }
 }
 
 .topPageWrapper {
