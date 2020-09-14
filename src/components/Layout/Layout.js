@@ -28,7 +28,7 @@ const isBlogPage =
   }
 }
 
-const isFeaturesPage = location.pathname === withPrefix("/product-features")
+
 
 class Layout extends Component {
   setPostPageState = state => {
@@ -73,7 +73,6 @@ class Layout extends Component {
                     ]}
                   >
                     <html lang="en" />
-                    {isFeaturesPage && <style className="featurezzz">{featuresStyling}</style>}
                   </Helmet>
                   <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                     {!screenIsSmall && onPostPage && (
