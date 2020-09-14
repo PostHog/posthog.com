@@ -23,6 +23,11 @@
   margin-top: 15px;
 }
 
+.p-plan-title-wrap {
+  margin-top: -20px;
+  margin-bottom: 7px;
+}
+
 .p-plan-price {
   font-size: 32px;
   font-weight: 500;

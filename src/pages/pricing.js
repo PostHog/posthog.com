@@ -104,12 +104,12 @@ const PricingPage = () => {
         ],
       },
       {
-        title: 'Supported',
-        popular: false,
+        title: 'Enterprise',
+        popular: true,
         price: 'Starts at $2k',
         priceDetail: '/month',
         description:
-          'Ideal for companies with large volumes that do not want the hassle of managing a tech infrastructure',
+          'Ideal for companies need scalability and enterprise features',
         callToAction: 'Contact sales',
         callToActionDest: {
           type: 'url',
@@ -118,14 +118,34 @@ const PricingPage = () => {
         },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Open Source, plus:</span>',
-          'PostHog deploys and maintains everything (in your own infrastructure)',
-          'Uptime and scalability SLAs',
-          'Custom databases and integrations',
+          'Clickhouse database for Petabyte scale',
+          'Integrations with services like Zapier',
+          'Permissioning and multiple projects',
           'Dedicated support',
           'SSO/SAML',
           'Export to data lakes'
         ],
       },
+      {
+        title: 'Supported Enterprise',
+        popular: false,
+        price: 'Starts at $4k',
+        priceDetail: '/month',
+        description:
+          'Ideal for companies that do not want the hassle of managing PostHog, but want to own their data.',
+        callToAction: 'Contact sales',
+        wraps: true,
+        callToActionDest: {
+          type: 'url',
+          value:
+            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-managed%20supported%20plan',
+        },
+        benefits: [
+          '<span class="p-plan-benefit-lg">Everything in Enterprise, plus:</span>',
+          'PostHog deploys and maintains everything (in your own infrastructure)',
+          'Uptime and scalability SLAs',
+        ],
+      }
     ],
   }
   const faqs = [
@@ -248,7 +268,7 @@ const PricingPage = () => {
             <Card className="p-full-height">
               <h3
                 className={
-                  (plan.popular ? 'p-text-primary ' : '') + 'p-plan-title'
+                  (plan.popular ? 'p-text-primary ' : '') + 'p-plan-title ' + (plan.wraps && 'p-plan-title-wrap')
                 }
               >
                 {plan.title}
