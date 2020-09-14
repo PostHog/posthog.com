@@ -16,18 +16,17 @@ If you try to access your PostHog instance with a different IP, you will get an 
 
 This restriction does not apply to the endpoints used to send events, like `batch`, `capture` etc.
 
-If you're behind a proxy, you need to either set trusted proxies
+If you're behind a proxy, you need to either set trusted proxies:
 ```bash
 TRUSTED_PROXIES=ip1,ip2
 ```
-
 Or you can implicitly trust all proxies:
 
 ```bash
 TRUST_ALL_PROXIES=True
 ```
 
-> When using `TRUST_ALL_PROXIES`, make sure your proxy (like NGINX) is setting the header `X-Forwarded-For`, like in the example above. If not, it would still be possible to spoof your IP address.
+> When using `TRUST_ALL_PROXIES`, make sure your proxy (like NGINX) is setting the header `X-Forwarded-For` like in the example above. If not, it would still be possible to spoof your IP address.
 
 > If you're on Heroku, you are behind a proxy by default, so you'll need to add `IS_BEHIND_PROXY=True`. Heroku automatically overrides `X-Forwarded-For`, so you can use `TRUST_ALL_PROXIES=True`.
 
@@ -47,17 +46,19 @@ For more information on Django security features, you can check out [Django's Of
 
 ## Secret Key
 
+**Important: PostHog will not work if you do not set your own unique `SECRET_KEY`.**
+
 Secret keys are used to encrypt cookies and password reset emails, [among other things](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key). To generate a secret key, run:
 
 ```bash
 openssl rand -hex 32
 ```
 
+This `SECRET_KEY` must be passed to PostHog as an environment variable. One-click deploys automatically set a secure key for you, but deployments from source and using Docker currently require you to manually set this. 
+
 ### Secret Key with Docker Compose
 
 When using Docker Compose, you will need to manually update the `docker-compose.yml` file with a secret key that is unique to your instance.
-
-**⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deploymentsecuring-posthog).**
 
 #### Step-By-Step
 

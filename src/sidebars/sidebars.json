@@ -4,6 +4,7 @@
     "name": "Docs",
     "child_entries":[
       "Deployment",
+      "Configuring PostHog",
       "Integrations",
       "Features",
       "API",
@@ -12,11 +13,26 @@
     ]
   },
   {
+    "entry":"Configuring PostHog",
+    "name":"Configuring PostHog",
+    "items": [
+      "docs/configuring-posthog",
+      "docs/configuring-posthog/environment-variables",
+      "docs/configuring-posthog/upgrading-posthog",
+      "docs/configuring-posthog/scaling-posthog",
+      "docs/configuring-posthog/securing-posthog",
+      "docs/configuring-posthog/running-behind-proxy",
+      "docs/configuring-posthog/smtp-credentials"
+    ]
+  },
+  {
     "entry":"Contributing",
     "name":"Contributing",
     "items": [
       "docs/contributing",
       "docs/developing-locally",
+      "docs/stack",
+      "docs/project-structure",
       "updating-documentation"
     ]
   },
@@ -33,14 +49,10 @@
       "docs/deployment/deploy-gcs",
       "docs/deployment/deploy-kubernetes",
       "docs/deployment/deploy-linode",
+      "docs/deployment/deploy-render",
       "docs/deployment/deploy-source",
-      "docs/deployment/upgrading-posthog",
-      "docs/deployment/scaling-posthog",
-      "docs/deployment/securing-posthog",
-      "docs/deployment/running-behind-proxy",
-      "docs/deployment/hosting-costs",
-      "docs/deployment/smtp-credentials",
-      "docs/deployment/snippet-installation"
+      "docs/deployment/snippet-installation",
+      "docs/deployment/hosting-costs"
     ]
   },
   {
@@ -75,12 +87,14 @@
     "entry":"API",
     "name":"API",
     "items":[
-      "docs/api/api",
+      "docs/api/overview",
+      "docs/api/post-only-endpoints",
       "docs/api/elements",
       "docs/api/events",
       "docs/api/people",
       "docs/api/trends",
-      "docs/api/user"
+      "docs/api/user",
+      "docs/api/feature-flags"
     ]
   },
   {
@@ -88,8 +102,8 @@
     "name":"Integrations",
     "items": [
       "docs/integrations",
+      "docs/integrations/segment-integration",
       "docs/integrations/android-integration",
-      "docs/integrations/api",
       "docs/integrations/go-integration",
       "docs/integrations/ios-integration",
       "docs/integrations/js-integration",
@@ -156,6 +170,7 @@
     "entry":"Releases",
     "name":"Releases",
     "items":[
+      "blog/the-posthog-array-1-14-0",
       "blog/the-posthog-array-1-13-0",
       "blog/the-posthog-array-1-12-0",
       "blog/the-posthog-array-1-11-0",
@@ -180,6 +195,8 @@
     "entry":"Company Blog",
     "name":"Company Blog",
     "items": [
+      "blog/open-source-eating-saas",
+      "blog/product-led-growth",
       "blog/a-chat-with-sid",
       "blog/raising-3m-for-os",
       "blog/after-the-hn-launch",
@@ -242,7 +259,8 @@
     "items":[
       "handbook/growth/sales",
       "handbook/growth/trials",
-      "handbook/growth/posthog-array"
+      "handbook/growth/posthog-array",
+      "handbook/growth/releasing-content"
     ]
   },
   {

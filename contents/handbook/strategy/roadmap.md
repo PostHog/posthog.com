@@ -4,39 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Themes
+## Up-to-date roadmap
 
-### 1 - Parity (current phase)
-
-> Create something that helps Product teams do their jobs, so that developers actually want to implement it.
-
-The objective of this phase is to meet the Product Team's typical use cases of product analytics tools, in a way that developers can easily implement.
-
-Whilst we have most of the major features needed, we need to focus on scalability to get a greater amount of B2C / enterprise adoption.
-
-### 2 - Developer-specific Features
-
-> Enable developers to understand the impact of their work.
-
-#### Feature Flags
-
-Integrate with git repos so developers can assess the impact of each Pull Request or feature they build. This will turn us from a "parity" tool to best-in-class.
-
-* Developers understand the impact of each pull request  (i.e. feature) on metrics.
-* Multiple developers can run experiments simultaneously.
-* Helps task-focused developers to focus on getting the company's metrics to improve.
-
-#### Local Environment
-
-Developers usually use an IDE and have a browser open locally whilst they code. We want a very easy way for developers to access usage stats as they work.
-
-* Hovering over elements on the localhost page quickly displays usage info.
-
-#### Analytics Metadata
-
-Developers often have to write complex SQL to create exports of certain user groups. PostHog already provides the ability to create analytics metadata through the front end, such as cohorts of users.
-
-Making this data very accessible through API, and by promoting it in the Cocs, will allow developers to use this data in other tools internally.
+[Click here for an up-to-date roadmap on GitHub](https://github.com/orgs/PostHog/projects/1)
 
 ## Strategy
 

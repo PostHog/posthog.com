@@ -10,7 +10,7 @@ PostHog provides open-source, developer-friendly, and feature-rich product analy
 
 A part of [Y Combinator's](https://www.ycombinator.com/) W20 cohort, we launched in February 2020 and had the most succesful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012.
 
-Our GitHub repo has over over 2.8k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
+Our GitHub repo has over over 3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than a sales team and regular cold calls.
 

@@ -37,7 +37,6 @@ import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
 
-
 function IndexPage() {
   return (
     <div className="indexContainer">

@@ -66,6 +66,8 @@ To see some data on the frontend, you should go to the `http://localhost:8000/de
 
 > **Friendly tip:** Homebrew services can be stopped with `brew services stop <service_name>`
 
+> Please use `test*@posthog.com` (where `*` is a wildcard) when you create local test users.
+
 ### Running backend separately (Django)
 
 Run `DEBUG=1 ./bin/start-backend`
@@ -84,7 +86,40 @@ Run `./bin/start-frontend`
 
 Run `./bin/tests`
 
-<br>
+<br />
+
+### Running Clickhouse locally
+
+0. Ensure you have Docker and Docker Compose installed
+1. Create a new directory (not inside `/posthog`!) and enter it
+2. Create a file called `docker-compose.yml` and paste the following snippet into it:
+
+```yaml
+version: "3"
+services:
+    server:
+     image: yandex/clickhouse-server
+     ports:
+     - "8123:8123"
+     - "9000:9000"
+     - "9009:9009"
+     
+     ulimits:
+      nproc: 65535
+      nofile:
+       soft: 262144
+       hard: 262144
+    client:
+      image: yandex/clickhouse-client
+      command: ['--host', 'server']
+```
+
+3. Run `docker-compose up -d`. You'll now have a Clickhouse server running on `http://127.0.0.1:8123`
+
+For more information on how to interface with the database, visit the [Clickhouse Docs](https://clickhouse.tech/docs/en/interfaces/).
+    
+4. Run migrations: `python manage.py migrate_clickhouse`
+5. Set environment variables: `PRIMARY_DB=clickhouse` and `CLICKHOUSE_SECURE=False`
 
 
 ## Using Porter

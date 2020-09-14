@@ -16,6 +16,7 @@ import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
 import blogBackground from '../../images/blog-background.svg'
 import { withPrefix } from "gatsby-link"
+import NewsletterForm from '../NewsletterForm'
 
 class Layout extends Component {
   setPostPageState = state => {
@@ -200,6 +201,7 @@ class Layout extends Component {
                       </AntdLayout>
                   </AntdLayout>
                   <AntdLayout>
+                  {isBlogPage && (<NewsletterForm />)}
                   <Footer />
                   </AntdLayout>
                 </>

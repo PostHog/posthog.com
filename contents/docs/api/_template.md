@@ -6,16 +6,16 @@ showTitle: true
 
 
 In PostHog, there is an API endpoint available to do XXXXX.
-For more information on XXXX, see [XXXX](/docs/features/...)
+For more information on XXXX, see [XXXX](/docs/features/…)
 
 ## Pagination
 
-This endpoint has pagination. See [pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [pagination](/docs/api/overview#pagination) for more info.
 
 ## List trends
 
 
-```plaintext
+```shell
 GET /...
 GET /.../?properties=[{"key":"$browser","value":"Chrome"}]
 ```
@@ -27,7 +27,7 @@ GET /.../?properties=[{"key":"$browser","value":"Chrome"}]
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/
 ```
 

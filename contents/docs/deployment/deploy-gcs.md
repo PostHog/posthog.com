@@ -57,7 +57,7 @@ git clone https://github.com/posthog/posthog.git && cd posthog
 ```
 1. You'll then need to generate a `SECRET_KEY` that is unique to your instance. 
 
-    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/deployment/securing-posthog).**
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/configuring-posthog/securing-posthog).**
 
     First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
 
@@ -119,9 +119,9 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 ## Useful Tutorials
 <br>
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/deployment/running-behind-proxy)
+#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/deployment/securing-posthog)
+#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/deployment/scaling-posthog)
+#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> _**Note:** This guide is aimed at people who work for PostHog. If you want to contribute, [see our Contributing Guide](https://docs.posthog.com/#/contributing)._
+> _**Note:** This guide is aimed at people who work for PostHog. If you want to contribute, [see our Contributing Guide](/docs/contributing)._
 
 <br>
 

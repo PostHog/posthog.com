@@ -4,12 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
+<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
 
 In PostHog, there is an API endpoint available to do advanced analytics on your data. We use this endpoint for the [Trends page](/docs/features/trends) in PostHog.
 
 ## List Trends
 
-```plaintext
+```shell
 GET /action/trends/?events=[{"id":"$pageview"}]
 GET /action/trends/?events=[{"id":"$pageview"}]&properties=[{"key":"$browser","value":"Chrome"}]
 ```
@@ -27,7 +28,7 @@ GET /action/trends/?events=[{"id":"$pageview"}]&properties=[{"key":"$browser","v
 
 Example request:
 
-```shell
+```bash
 curl https://app.posthog.com/action/trends/?events=[{"id":"$pageview"}]
 ```
 
