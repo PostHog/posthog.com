@@ -115,7 +115,7 @@ p {
         overflow-x: hidden;
     }
     .burger-menu-spacer {
-        height: 4%;
+        height: 24px;
     }
 }
 
@@ -656,7 +656,7 @@ p {
 
 @media screen and (min-width: 834px) and (max-width: 1076px) {
     .burger-menu-spacer {
-        height: 3%;
+        height: 24px;
     }
     .joinUsersButtons {
         left: 0px;
