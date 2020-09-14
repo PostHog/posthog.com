@@ -118,6 +118,9 @@ p {
     body {
         overflow-x: hidden;
     }
+    .burger-menu-spacer {
+        height: 4%;
+    }
 }
 
 .topPageWrapper {
@@ -647,6 +650,18 @@ p {
         height: 212px;
     }
 }
+
+
+@media screen and (min-width: 834px) and (max-width: 1076px) {
+    .burger-menu-spacer {
+        height: 3%;
+    }
+    #logo-image {
+        margin-top: 10%;
+        margin-left: 1%;
+    }
+}
+
 
 
 /* IMPROVE CONVERSION */

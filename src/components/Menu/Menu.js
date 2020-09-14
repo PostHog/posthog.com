@@ -93,7 +93,7 @@ class Menu extends Component {
                     paddingTop: '5vh'
                   }}
                 >
-                  <div style={{height: "4%"}}></div>
+                  <div className="burger-menu-spacer"></div>
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}
