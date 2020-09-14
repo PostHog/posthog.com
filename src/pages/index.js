@@ -184,7 +184,7 @@ function IndexPage() {
                 <h2 className="gosha">Use feature flags <br/>to test new ideas</h2>
                 <hr className="redLine"/>
                 <br/>
-                <p className="featureFlagsText">Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.</p>
+                <p className="featureFlagsText">Roll out new features to a few users first, randomly or based on their previous behavior or profile information.</p>
               </div>
               <div className="featureFlagsImg"/>
             </div>
