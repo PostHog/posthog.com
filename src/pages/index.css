@@ -1818,6 +1818,9 @@ img.whatsNewImg {
         font-size: 24px;
         line-height: 40px;
     }
+    .ph-enterprise-subheader {
+        font-weight: bold;
+    }
 }
 
 .yellowLine2 {

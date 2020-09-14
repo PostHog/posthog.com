@@ -290,6 +290,7 @@ function IndexPage() {
                     <p>Resource-intensive</p>
                     <p>Requires technical knowledge</p>
                     <p>You have to build your own features</p>
+                    <p>Extensive work in addition to your core business</p>
                   </div>
                 </div>
                 <div className="whyPosthogElement">
@@ -321,7 +322,7 @@ function IndexPage() {
             </div>
             <div className="posthog4EnterpriseRow2 row">
               <div className="posthog4EnterpriseRow2Col">
-                <h4>Self-managed</h4>
+                <h4 class="ph-enterprise-subheader">Self-managed</h4>
                 <img alt="enterprise-01" loading="lazy" src={enterprise01} className="imageShow"/>
                 <div className="enterpriseText">
                   <p>
@@ -330,7 +331,7 @@ function IndexPage() {
                 </div>
               </div>
               <div className="posthog4EnterpriseRow2Col">
-                <h4>Unlimited volume</h4>
+                <h4 class="ph-enterprise-subheader">Unlimited volume</h4>
                 <img alt="enterprise-02" loading="lazy" src={enterprise02} className="imageShow"/>
                 <div className="enterpriseText">
                   <p>
@@ -339,7 +340,7 @@ function IndexPage() {
                 </div>
               </div>
               <div className="posthog4EnterpriseRow2Col">
-                <h4>Support</h4>
+                <h4 class="ph-enterprise-subheader">Support</h4>
                 <img alt="enterprise-03" loading="lazy" src={enterprise03} className="imageShow"/>
                 <div className="enterpriseText">
                   <p>
