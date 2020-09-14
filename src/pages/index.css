@@ -111,6 +111,10 @@ p {
         font-size: 16px;
         line-height: 32px;
     }
+    #logo-image {
+        margin-top: 10%;
+        margin-left: 1%;
+    }
 }
 
 .topPageWrapper {
