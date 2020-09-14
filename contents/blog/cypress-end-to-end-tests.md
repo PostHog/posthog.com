@@ -40,7 +40,7 @@ With the data-attr tag, we just need to keep track of the tag when updating/chan
 ```
 <LineGraph
   data-attr="trend-line-graph"
-  ...
+  {...props}
 />
 ```
 &nbsp;
@@ -94,7 +94,7 @@ I personally love this syntax. It feels super readible to me and reminds me a bi
 
 So that's all well and cool, but what about making sure that in a fit of intense focus and momentum we don't inadvertently push a breaking change to master? We need someone or something to act as a gatekeeper to keep us from from shooting ourselves in the foot. We need CI.
 
-We could use Travis, or Jekins, or CircleCI...but as you may have noticed we keep almost everything about PostHog in Github, from our product roadmap, issues, this blog, everything is in Github. So it made sense to us to keep our CI in Github if we could. We decided to give Github Actions a test. So far, we have loved it.
+We could use Travis, or Jekins, or CircleCI… but as you may have noticed we keep almost everything about PostHog in Github, from our product roadmap, issues, this blog, everything is in Github. So it made sense to us to keep our CI in Github if we could. We decided to give Github Actions a test. So far, we have loved it.
 
 [Github actions](https://github.com/features/actions) are basically a workflow you can trigger from events that occure on your Github repo. We trigger ours on the creation of a pull request. We also require that our actions all return 👍&nbsp;&nbsp;before you can merge your PR into master. Thus, we keep master clean.
 
@@ -104,7 +104,7 @@ The second round of poking we do with our app is we hit it with Cypress tests th
 
 ### Caching
 
-We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser...this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? Thats where we ended up using one of the best features of Github Actions: the [cache step](https://github.com/actions/cache).
+We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser… this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? Thats where we ended up using one of the best features of Github Actions: the [cache step](https://github.com/actions/cache).
 
 Using the cache step we can cache the results of pulling python dependencies or javascript dependencies. This saves a chunk of time if you have ever messed around with watching yarn sort out the deps for a large frontend project. Check it out:
 
@@ -228,7 +228,7 @@ Artifacts allow us to take the screenshots that Cypress takes when things go wro
   if: ${{ failure() }}
 ```
 
-As you can tell by the `if` block here, we only upload the artifacts if there is a problem. That's because we already know what the app will look like when things go right...hopefully 😜
+As you can tell by the `if` block here, we only upload the artifacts if there is a problem. That's because we already know what the app will look like when things go right… hopefully 😜
 
 ### Roadmap
 

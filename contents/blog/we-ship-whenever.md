@@ -21,7 +21,7 @@ You can learn more about what people need from what they do rather than what the
 
 ## Shipping more often would be annoying
 
-We find very frequent updates for important software annoying to update constantly... I'm looking at you, various wordpress plugins!
+We find very frequent updates for important software annoying to update constantly… I'm looking at you, various wordpress plugins!
 
 The tradeoff is "is this new bundle of features useful enough to outweigh the time spent upgrading at this point in time". If we have a feature we believe is particularly useful and it was only a week since the last update, we will ship it.
 
@@ -37,7 +37,7 @@ If we set hard deadlines for shipping a huge new feature, we’d be up all night
 
 One rule we try to stick to is one pull request per developer per day. That can sometimes mean a Work In Progress, but it always means something goes into the repo.
 
-Pull Requests that take longer than a day often spiral into weeks - and people like helping... getting visibility into what you’re doing makes that possible. Getting out of a rut starts with accepting that you’re in one!
+Pull Requests that take longer than a day often spiral into weeks - and people like helping… getting visibility into what you’re doing makes that possible. Getting out of a rut starts with accepting that you’re in one!
 
 As we grow and create non technical roles, we'll look to apply this principle there too. You can see this from the way we've rebranded our website if you follow the [posthog.com repo](https://github.com/PostHog/posthog.com).
 

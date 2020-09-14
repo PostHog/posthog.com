@@ -6,7 +6,7 @@ showTitle: true
 
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
-**Note:** At the moment, feature flags are only supported in combination with our `posthog-js` library.
+**Note:** At the moment, feature flags are only implemented in our [JavaScript integration](/docs/integrations/js-integration#feature-flags). We're working to support this feature on all of our libraries, but, for the moment, you can use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
 ## Creating Feature Flags
 
@@ -41,9 +41,9 @@ posthog.onFeatureFlags(function() {
 })
 ```
 
-**Note:** To avoid "posthog has no attribute isFeatureEnabled" errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
+**Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
 
-## Develop locally
+## Develop Locally
 
 To test feature flags locally, you can open your developer tools and override the feature flags given. You will get a warning that you're manually overriding feature flags.
 
@@ -69,9 +69,9 @@ posthog.feature_flags.getFlags()
 
 There are three options for deciding who sees your new feature. You can roll out the feature to:
 
-1. a fixed percentage of users,
-1. a set of users filtered based on their user properties,
-1. or a combination of the two
+1. A fixed percentage of users,
+1. A set of users filtered based on their user properties,
+1. A combination of the two
 
 ### Roll Out to a Percentage of Users
 

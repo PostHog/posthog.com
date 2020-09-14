@@ -6,13 +6,21 @@ showTitle: true
 
 Segment allows you to easily manage data and integrations with services across your Growth, Product, and Marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
 
-**Note:** All Segment sends to PostHog is events you manually send. PostHog isn't able to do autocapture, show the toolbar or create actions on your own site. Segment is also more easily blocked by ad-blockers. To get around these limitations, you can install the PostHog snippet alongside your Segment integration.
+#### Can PostHog with Segment do everything PostHog does by itself?
 
-## Getting started with Segment
+We are **big fans** of Segment, and many in our team use it now or have used it in the past. However, it comes with some limitations for PostHog. 
 
-Make sure you have a [Segment account](https://segment.com/docs/#getting-started) and a PostHog account, either self-hosted or using [PostHog Cloud](https://app.posthog.com/signup).
+The PostHog integration with Segment gives you access to everything our [JS Integration](/docs/integrations/js-integration) can do, with the exception of autocapture. All features for your PostHog instance will be the same, but all Segment sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/features/toolbar). 
 
-1. In the Segment workspace, create a new project and enable PostHog as an integration.
+Laslty, Segment is also more easily blocked by ad-blockers. To get around these limitations, you can install the [PostHog snippet](/docs/integrations/js-integration) alongside your Segment integration.
+
+## Getting Started with Segment
+
+Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, either [self-hosted](/docs/deployment) or using [PostHog Cloud](https://app.posthog.com/signup).
+
+1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment.
 1. Grab the PostHog API key from the /setup page in PostHog.
 1. Use one of Segment's libraries to send events.
-1. See the events come in on PostHog
+1. See the events coming into PostHog
+
+

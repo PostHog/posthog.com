@@ -9,11 +9,11 @@ hideAnchor: true
 
 Big new integration - PostHog now has a library for iOS!
 
-Like what you see and self-hosting? [Update](/docs/deployment/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
 
 ## Release notes
 
-### [PostHog iOS Library](https://docs.posthog.com/#/integrations/ios-integration)
+### [PostHog iOS Library](/docs/integrations/ios-integration)
 
 ![](../images/04/ioslibrary1.gif)
 

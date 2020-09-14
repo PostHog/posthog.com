@@ -16,7 +16,7 @@ All of our libraries are similar, except for the JavaScript library which has [e
 
 They can all be used to send custom events, update user properties, identify users, as well as provide support for various other PostHog features.
 
-## Receiving user/event data into PostHog
+## Sending data into PostHog
 
 - [JS](/docs/integrations/js-integration)
 - [Node](/docs/integrations/node-integration)
@@ -28,7 +28,7 @@ They can all be used to send custom events, update user properties, identify use
 - [Android](/docs/integrations/android-integration)
 - [Flutter](/docs/integrations/flutter-integration)
 - [React Native](/docs/integrations/react-native-integration)
-- [API](/docs/integrations/api)
+- [API](/docs/api/overview)
 - [Community](/docs/integrations/community)
   - [Gatsby](/docs/integrations/gatsby-integration)
   - [Elixir](/docs/integrations/elixir-integration)

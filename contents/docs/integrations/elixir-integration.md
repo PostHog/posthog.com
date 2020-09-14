@@ -1,5 +1,5 @@
 ---
-title: Elixir integration
+title: Elixir Integration
 sidebar: Docs
 showTitle: true
 ---

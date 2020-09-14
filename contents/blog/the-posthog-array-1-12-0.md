@@ -12,7 +12,7 @@ hideAnchor: true
 
 Shared dashboards, global annotations, retention table improvements and a metric ton of bug fixes. This week's PostHog array has it all.
 
-If you're self hosting and want these features - [update your PostHog](/docs/deployment/upgrading-posthog).
+If you're self hosting and want these features - [update your PostHog](/docs/configuring-posthog/upgrading-posthog).
 
 Please also update your `posthog-js` version to at least `1.3.5` if you have it installed via NPM. If you're using the snippet, you're good to go!  
 
@@ -97,7 +97,7 @@ Clicking on any section in the retention table will tell you exactly which users
 
 ## PostHog news
 
-We launched [a new version of our website!](https://posthog.com) Lottie and Ben have done an amazing job getting this live. We decided to go with a 80's-Adidas-retro-SNES look, combined with hedgehogs... obviously.
+We launched [a new version of our website!](https://posthog.com) Lottie and Ben have done an amazing job getting this live. We decided to go with a 80's-Adidas-retro-SNES look, combined with hedgehogs… obviously.
 
 ### Open roles
 

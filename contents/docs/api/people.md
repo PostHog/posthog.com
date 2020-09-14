@@ -4,16 +4,17 @@ sidebar: Docs
 showTitle: true
 ---
 
+<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
 
 In PostHog, there is an API endpoint available to see all people (users) in your PostHog instance.
 
 ## Pagination
 
-This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [Pagination](/docs/api/overview#pagination) for more info.
 
 ## List People
 
-```plaintext
+```shell
 GET /person
 GET /person/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com","type":"person"}]
 GET /person/?id=214882,492810,18240
@@ -30,7 +31,7 @@ GET /person/by_distinct_id/?distinct_id=0xbG68iGeFo5brk
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/person/
 ```
 
@@ -75,7 +76,7 @@ Example response:
 
 ## Get a Single Person
 
-```plaintext
+```shell
 GET /person/:id
 ```
 
@@ -89,7 +90,7 @@ GET /person/:id
 
 Example request:
 
-```shell
+```bash
 curl https://posthog.example.com/api/person/2296750/
 ```
 
@@ -112,6 +113,48 @@ Example response:
         "$browser_version": 81,
         "$initial_referrer": "http://127.0.0.1:8081/demo.html",
         "$initial_referring_domain": "127.0.0.1:8081"
+    },
+    "created_at": "2020-05-19T14:28:58.397533Z"
+}
+```
+
+## Update person
+
+```shell
+PATCH /person/:id
+```
+
+<span class="table-borders">
+
+| Attribute | Type | Required | Description |
+| :---: | :---: | :---: | :---:|
+| `id` | Integer | yes | ID of the user |
+
+</span>
+
+Example request:
+
+```bash
+curl https://posthog.example.com/api/person/2296750/
+{
+    "properties": {
+        "magic_property": "hello"
+    }
+}
+```
+
+Example response:
+
+```json
+{
+    "id": 2296750,
+    "name": "tim@posthog.com",
+    "distinct_ids": [
+        "h76pUrwsXarWvHjexBr8rHU6_b-yszcWBjJZiTC87C8",
+        "171842424bf55-06b1843bc657b5-396d7507-7e9000-171842424c07d2",
+    ],
+    "properties": {
+        "magic_property": "hello"
     },
     "created_at": "2020-05-19T14:28:58.397533Z"
 }
