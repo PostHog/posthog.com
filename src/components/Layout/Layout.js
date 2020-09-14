@@ -17,6 +17,7 @@ import { isSidebarHide, isAnchorHide } from '../../store/selectors'
 import blogBackground from '../../images/blog-background.svg'
 import { withPrefix } from "gatsby-link"
 import NewsletterForm from '../NewsletterForm'
+import featuresStyling from '!!raw-loader!../../pages/features.css'
 
 const isBlogPage = 
 ({location }) => {
@@ -26,6 +27,8 @@ const isBlogPage =
     return false
   }
 }
+
+const isFeaturesPage = location.pathname === withPrefix("/product-features")
 
 class Layout extends Component {
   setPostPageState = state => {
@@ -42,7 +45,8 @@ class Layout extends Component {
       containerStyle={},
       expandedKeys,
       isBlogPage,
-      pageTitle
+      pageTitle,
+      isFeaturesPage
     } = this.props
 
     return (
@@ -69,6 +73,7 @@ class Layout extends Component {
                     ]}
                   >
                     <html lang="en" />
+                    {isFeaturesPage && <style className="featurezzz">{featuresStyling}</style>}
                   </Helmet>
                   <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                     {!screenIsSmall && onPostPage && (
