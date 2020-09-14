@@ -111,10 +111,6 @@ p {
         font-size: 16px;
         line-height: 32px;
     }
-    #logo-image {
-        margin-top: 10%;
-        margin-left: 1%;
-    }
     body {
         overflow-x: hidden;
     }
@@ -159,7 +155,6 @@ p {
     height: 426px;
     display: flex;
     flex-direction: row;
-
 }
 
 .topPageCol1 {
@@ -229,7 +224,6 @@ p {
     
     .featureSection {
         height: 800px !important;
-
     }
 
     .pageHeader {
@@ -270,6 +264,7 @@ p {
     .joinUsersButtons {
         height: 40px;
         justify-content: space-evenly;
+        left: 0px;
     }
     .topPageCol2 {
         background: none;
@@ -649,6 +644,13 @@ p {
         align-items: center;
         height: 212px;
     }
+    .joinUsersButtons {
+        left: 0px;
+    }
+    .topPageCol1 {
+        margin-left: 5%;
+        text-align: center;
+    }
 }
 
 
@@ -656,13 +658,17 @@ p {
     .burger-menu-spacer {
         height: 3%;
     }
+    .joinUsersButtons {
+        left: 0px;
+    }
+}
+
+@media screen and (max-width: 1076px) {
     #logo-image {
         margin-top: 10%;
         margin-left: 1%;
     }
 }
-
-
 
 /* IMPROVE CONVERSION */
 
