@@ -1126,6 +1126,7 @@ p {
     flex-direction: column;
     align-items: center;
     top: 124px;
+    margin-top: 15px;
 }
 
 .startTrialRow {
@@ -1148,6 +1149,7 @@ p {
     width: 330px;
     height: 64px;
     font-size: 24px;
+    
 }
 
 .startTrialRow img {
@@ -1173,12 +1175,12 @@ p {
         width: 310px;
         justify-content: space-between;
         align-items: space-between;
-        padding: 30px 0 0;
     }
     .whyPosthogElementBody {
         position: relative;
         top: 0;
         width: 274px;
+        margin-bottom: 15px;
     }
     .whyPosthogElement h2 {
         position: relative;
@@ -1820,6 +1822,13 @@ img.whatsNewImg {
     }
     .ph-enterprise-subheader {
         font-weight: bold;
+        font-size: 20px !important;
+    }
+    .ph-enterprise-title {
+        padding-top: 30px !important;
+    }
+    #feature-header-01 {
+        margin-top: 20px;
     }
 }
 

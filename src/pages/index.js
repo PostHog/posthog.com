@@ -82,7 +82,7 @@ function IndexPage() {
             <div className="autocaptureRow row">
               <div className="autocaptureImg"/>
                 <div className="autocapture01 number">
-                  <h1 className="yellowText">01</h1>
+                  <h1 className="yellowText" id="feature-header-01">01</h1>
                 </div>
                 <div className="autocaptureCol col">
                   <h2 className="gosha">It all starts with event autocapture</h2>
@@ -280,7 +280,7 @@ function IndexPage() {
           {/* Why posthog */}
           <div className="whyPosthogWrapper wrapper">
             <div className="whyPosthogRow row">
-              <h1>PostHog versus Self Build</h1>
+              <h1>PostHog versus Self-Build</h1>
               <div className="whyPosthogElementsWrapper">
                 <div className="whyPosthogElement">
                   <h2 className="gosha">Data Lake</h2>
@@ -290,7 +290,7 @@ function IndexPage() {
                     <p>Resource-intensive</p>
                     <p>Requires technical knowledge</p>
                     <p>You have to build your own features</p>
-                    <p>Extensive work in addition to your core business</p>
+                    <p>Diverts effort from your core business</p>
                   </div>
                 </div>
                 <div className="whyPosthogElement">
@@ -301,7 +301,7 @@ function IndexPage() {
                       <p>Ready to use immediately</p>
                       <p>Regular updates</p>
                       <p>Feature-rich</p>
-                      <p>Can integrate with a data lake</p>
+                      <p>Can be integrated with a data lake</p>
                     </div>
                 </div>
               </div>
@@ -318,7 +318,7 @@ function IndexPage() {
           
           <div className="posthog4EnterpriseWrapper wrapper redbackground">
             <div className="posthog4EnterpriseRow1 row">
-                <h2 className="gosha">PostHog for Enterprise</h2>
+                <h2 className="gosha ph-enterprise-title">PostHog for Enterprise</h2>
             </div>
             <div className="posthog4EnterpriseRow2 row">
               <div className="posthog4EnterpriseRow2Col">
