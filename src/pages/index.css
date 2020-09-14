@@ -1880,5 +1880,11 @@ div.ant-list.ant-list-split h4 > a {
 
 .burger-menu-spacer {
     height: 6%;
-    max-height: 30px !important;
+    max-height: 30px;
+}
+
+@media screen and (min-height: 1849px) {
+    .burger-menu-spacer {
+        max-height: 15px;
+    }
 }
