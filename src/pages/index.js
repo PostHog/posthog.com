@@ -287,11 +287,9 @@ function IndexPage() {
                   <div className="whyPosthogElementBody">
                     <p>Suitable for scalability</p>
                     <p>You own your own data</p>
-                    <p>Resource intensive</p>
-                    <p>Technical knowledge needed to use daily</p>
-                    <p>You have to update yourself</p>
+                    <p>Resource-intensive</p>
+                    <p>Requires technical knowledge</p>
                     <p>You have to build your own features</p>
-                    <p>Not your business' core competency</p>
                   </div>
                 </div>
                 <div className="whyPosthogElement">
@@ -300,11 +298,9 @@ function IndexPage() {
                       <p>Suitable for scalability</p>
                       <p>You own your own data</p>
                       <p>Ready to use immediately</p>
-                      <p>Self-serve analytics for everyone</p>
                       <p>Regular updates</p>
-                      <p>Feature rich</p>
-                      <p>We don't focus on anything else</p>
-                      <p>Can work with data lake in any case</p>
+                      <p>Feature-rich</p>
+                      <p>Can integrate with a data lake</p>
                     </div>
                 </div>
               </div>
