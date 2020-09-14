@@ -114,9 +114,6 @@ p {
     body {
         overflow-x: hidden;
     }
-    .burger-menu-spacer {
-        height: 24px;
-    }
 }
 
 .topPageWrapper {
@@ -655,9 +652,6 @@ p {
 
 
 @media screen and (min-width: 834px) and (max-width: 1076px) {
-    .burger-menu-spacer {
-        height: 24px;
-    }
     .joinUsersButtons {
         left: 0px;
     }
@@ -1870,4 +1864,9 @@ div.ant-list.ant-list-split h4 > a {
 
 .anticon-close h4 > a {
     color: black !important;
+}
+
+.burger-menu-spacer {
+    height: 6%;
+    max-height: 30px !important;
 }
