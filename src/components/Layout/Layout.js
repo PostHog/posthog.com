@@ -18,15 +18,6 @@ import blogBackground from '../../images/blog-background.svg'
 import { withPrefix } from "gatsby-link"
 import NewsletterForm from '../NewsletterForm'
 
-const isBlogPage = 
-({location }) => {
-  if (location.pathname === withPrefix ("/blog")){
-    return true
-  } else {
-    return false
-  }
-}
-
 class Layout extends Component {
   setPostPageState = state => {
     this.props.setPostPageState(state)
@@ -177,7 +168,7 @@ class Layout extends Component {
                           {!anchorHide && (
                             <AntdLayout.Sider
                               theme="light"
-                              style={{ height: '100%', backgroundColor: '#fff' }}
+                              style={{ height: '100%' }}
                               className="rightBar"
                               
                             >
