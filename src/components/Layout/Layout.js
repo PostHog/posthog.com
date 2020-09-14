@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, prefetchPathname } from 'gatsby'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './Layout.css'
@@ -28,7 +28,13 @@ const isBlogPage =
   }
 }
 
-
+const isFeaturesPage = () => {
+  if (path === '/product-features') {
+    return (<style path={path}>{featuresStyling}</style>)
+  } else {
+    return ''
+  }
+}
 
 class Layout extends Component {
   setPostPageState = state => {
@@ -73,6 +79,7 @@ class Layout extends Component {
                     ]}
                   >
                     <html lang="en" />
+                    {isFeaturesPage}
                   </Helmet>
                   <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                     {!screenIsSmall && onPostPage && (
