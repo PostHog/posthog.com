@@ -3,23 +3,17 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
 import { connect } from 'react-redux'
 import { onChangeMenuState } from '../../actions/layout'
-import { onSetSidebarOpen } from '../../actions/layout'
 import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
-import { CloseOutlined } from '@ant-design/icons'
 
 class Menu extends Component {
   onChangeMenuState = nItem => {
     this.props.onChangeMenuState(nItem)
   }
 
-  onSetSidebarClose = () => {
-    this.props.onSetSidebarOpen(false)
-  }
-
   render() {
-    const { sidebarDocked, menuOpen, isBlogPage, sidebarHide } = this.props
+    const { sidebarDocked, menuOpen, isBlogPage } = this.props
     return (
       <StaticQuery
         query={graphql`
