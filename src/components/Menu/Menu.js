@@ -75,14 +75,14 @@ class Menu extends Component {
               {!sidebarDocked && (
                 <Button
                   style={{
-                    color: '#1D4AFF',
-                    
+                    color: '#FFFFFF',
+                    zIndex: 101
                   }}
                   type="link"
                   onClick={() => {
-                    this.onChangeMenuState(menuItems.length)
+                    this.onChangeMenuState(menuItems.length); console.log(menuItems.length)
                   }}
-                  icon="menu"
+                  icon={menuOpen ? "close" : "menu"}
                 />
               )}
               {menuOpen && !sidebarDocked && (
@@ -99,21 +99,7 @@ class Menu extends Component {
                     paddingTop: '5vh'
                   }}
                 >
-                  <div>
-                    <CloseOutlined
-                      style={{ 
-                        float: 'right', 
-                        fontSize: '30px', 
-                        paddingLeft: '10vw', 
-                        paddingRight: '10vw', 
-                        marginTop: '5vh',
-                        backgroundColor: 'white',
-                      }}
-                      onClick={() => {
-                        this.onChangeMenuState(menuItems.length)
-                      }}
-                    ></CloseOutlined>
-                  </div>
+                  <div style={{height: "4%"}}></div>
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}
@@ -192,3 +178,20 @@ const mapDispatchToProps = {
 
 // export default Menu
 export default connect(mapStateToProps, mapDispatchToProps)(Menu)
+
+
+{/* <div>
+<CloseOutlined
+  style={{ 
+    float: 'right', 
+    fontSize: '30px', 
+    paddingLeft: '10vw', 
+    paddingRight: '10vw', 
+    marginTop: '5vh',
+    backgroundColor: 'white',
+  }}
+  onClick={() => {
+    this.onChangeMenuState(menuItems.length)
+  }}
+></CloseOutlined>
+</div> */}
