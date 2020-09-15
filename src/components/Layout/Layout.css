@@ -1060,3 +1060,22 @@ code {
   padding-bottom: 2px;
   border-radius: 5px;
 }
+
+
+
+/* FEATURES */
+.features.table-borders td, .features.table-borders th {
+  border: 2px solid #ffffff;
+  background-color: grey;
+  border-radius: 20px;
+}
+
+.features.table-borders td:empty {
+  background: none;
+}
+
+
+.features.table-borders td:first-child {
+  background-color: blue!important;
+  border-radius: 0;
+}

@@ -19,23 +19,6 @@ import { withPrefix } from "gatsby-link"
 import NewsletterForm from '../NewsletterForm'
 import featuresStyling from '!!raw-loader!../../pages/features.css'
 
-const isBlogPage = 
-({location }) => {
-  if (location.pathname === withPrefix ("/blog")){
-    return true
-  } else {
-    return false
-  }
-}
-
-const isFeaturesPage = () => {
-  if (path === '/product-features') {
-    return (<style path={path}>{featuresStyling}</style>)
-  } else {
-    return ''
-  }
-}
-
 class Layout extends Component {
   setPostPageState = state => {
     this.props.setPostPageState(state)
@@ -79,7 +62,7 @@ class Layout extends Component {
                     ]}
                   >
                     <html lang="en" />
-                    {isFeaturesPage}
+                    {isFeaturesPage && <style>{featuresStyling}</style>}
                   </Helmet>
                   <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
                     {!screenIsSmall && onPostPage && (

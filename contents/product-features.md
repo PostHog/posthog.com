@@ -8,9 +8,11 @@ Watch a [walk through video](https://youtu.be/vGy9gzMAAes-Y?t=35s) through of th
 
 Below is a table of PostHog features and how this compares with the functionality in common alternatives.
 
+checkout [Self-hosted](/features/self-hosted/)
+
 <br />
 
-<span class='table-borders'>
+<span class='table-borders features'>
 
 |  Feature 	|   PostHog	| Amplitude  	|  Mixpanel 	| Heap  	|
 |:-:	|:-:	|:-:	|:-:	|:-:	|
