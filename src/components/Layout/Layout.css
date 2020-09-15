@@ -679,10 +679,9 @@ header {
   margin-right: 20px;
 }
 
-.headerItems ul {
-  background: none!important;
+.menuHeader {
+  z-index: 200;
 }
-
 
 #logo {
   margin: 0;

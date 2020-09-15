@@ -30,7 +30,7 @@ class Layout extends Component {
       sidebarHide,
       anchorHide,
       className,
-      containerStyle={},
+      containerStyle = {},
       expandedKeys,
       isBlogPage,
       pageTitle
@@ -61,19 +61,19 @@ class Layout extends Component {
                   >
                     <html lang="en" />
                   </Helmet>
-                  <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
+                  <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%" }}>
                     {!screenIsSmall && onPostPage && (
                       !sidebarHide && !isBlogPage && (
-                      <AntdLayout.Sider width="300" theme="light" style={{backgroundColor: '#F9F9F9'}} >
-                        <ResponsiveSidebar style={{border: 'none'}}/>
+                        <AntdLayout.Sider width="300" theme="light" style={{ backgroundColor: '#F9F9F9' }} >
+                          <ResponsiveSidebar style={{ border: 'none' }} />
                         </AntdLayout.Sider>
                       ))}
 
-                      <AntdLayout theme="light">
-                        <AntdLayout.Header
+                    <AntdLayout theme="light">
+                      <AntdLayout.Header
                         className="menuHeader"
-                        style={{ 
-                          backgroundColor: screenIsSmall && onPostPage ? '#F9F9F9' : '#fff', 
+                        style={{
+                          backgroundColor: screenIsSmall && onPostPage ? '#F9F9F9' : '#fff',
                           backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
                           backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
                           backgroundSize: 'cover',
@@ -84,8 +84,8 @@ class Layout extends Component {
                           marginBottom: isBlogPage && '2rem'
                         }}
                         theme="light"
-                        >
-                          <Header
+                      >
+                        <Header
                           siteTitle={data.site.siteMetadata.title}
                           sidebarDocked={!screenIsSmall}
                           sidebarHide={sidebarHide}
@@ -93,116 +93,117 @@ class Layout extends Component {
                           screenIsSmall={screenIsSmall}
                           isBlogPage={isBlogPage}
                           theme="light"
-                          />  
-                          {screenIsSmall &&
-                            onPostPage &&
-                            (!anchorHide || !sidebarHide) && (
-                                <ResponsiveTopBar />
-                            )}
-                          {isBlogPage && !screenIsSmall &&
+                        />
+                        {screenIsSmall &&
+                          onPostPage &&
+                          (!anchorHide || !sidebarHide) && (
+                            <ResponsiveTopBar />
+                          )}
+                        {isBlogPage && !screenIsSmall &&
                           <div style={{
                             position: 'relative',
-                            height: 'calc(100% - 64px)', 
+                            height: 'calc(100% - 64px)',
                             top: 0,
-                            width: '80%', 
-                            color: 'white', 
+                            width: '80%',
+                            color: 'white',
                             verticalAlign: 'bottom',
-                            left: 'calc((100% - 960px) * 0.5 + 2.175rem)'}}
-                            >
+                            left: 'calc((100% - 960px) * 0.5 + 2.175rem)'
+                          }}
+                          >
 
                             <h1 align="left" style={{
                               position: 'absolute',
-                              color: 'white',  
+                              color: 'white',
                               bottom: 0
-                              
+
                             }} >
                               {pageTitle}
                             </h1>
                           </div>
-                          }
-                        </AntdLayout.Header>
+                        }
+                      </AntdLayout.Header>
 
                       {/* content */}
                       {!screenIsSmall && onPostPage ? (
                         isBlogPage ? (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%", align: 'center'}}>
-                          <AntdLayout.Content style={{ minHeight: 280, margin: '0 auto', padding: '0px 1.0875rem 1.45rem', maxWidth: 960}}>
-                            <Container
-                              sidebarDocked={!screenIsSmall}
-                              onPostPage={onPostPage}
-                              className={className}
-                              style={{ position: 'relative' }}
-                              containerStyle={containerStyle}
-                            >
-                              {children}
-                            </Container>
-                          </AntdLayout.Content>
-                          
-                          {/* Sidebar right */}
-                          {!anchorHide && (
-                            <AntdLayout.Sider
-                              theme="light"
-                              style={{ height: '100%', backgroundColor: '#fff' }}
-                              className="rightBar"
-                              
-                            >
-                              <ResponsiveAnchor />
-                            </AntdLayout.Sider>
-                          )}
-                        </AntdLayout>
+                          <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%", align: 'center' }}>
+                            <AntdLayout.Content style={{ minHeight: 280, margin: '0 auto', padding: '0px 1.0875rem 1.45rem', maxWidth: 960 }}>
+                              <Container
+                                sidebarDocked={!screenIsSmall}
+                                onPostPage={onPostPage}
+                                className={className}
+                                style={{ position: 'relative' }}
+                                containerStyle={containerStyle}
+                              >
+                                {children}
+                              </Container>
+                            </AntdLayout.Content>
+
+                            {/* Sidebar right */}
+                            {!anchorHide && (
+                              <AntdLayout.Sider
+                                theme="light"
+                                style={{ height: '100%', backgroundColor: '#fff' }}
+                                className="rightBar"
+
+                              >
+                                <ResponsiveAnchor />
+                              </AntdLayout.Sider>
+                            )}
+                          </AntdLayout>
                         ) : (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
-                          <AntdLayout.Content style={{ minHeight: 280, padding: '3rem 0% 0 10%', width: '100%' }}>
-                            <Container
-                              sidebarDocked={!screenIsSmall}
-                              onPostPage={onPostPage}
-                              className={className}
-                              style={{ position: 'relative' }}
-                              containerStyle={containerStyle}
+                            <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%" }}>
+                              <AntdLayout.Content style={{ minHeight: 280, padding: '3rem 0% 0 10%', width: '100%' }}>
+                                <Container
+                                  sidebarDocked={!screenIsSmall}
+                                  onPostPage={onPostPage}
+                                  className={className}
+                                  style={{ position: 'relative' }}
+                                  containerStyle={containerStyle}
+                                >
+                                  {children}
+                                </Container>
+                              </AntdLayout.Content>
+
+                              {/* Sidebar right */}
+                              {!anchorHide && (
+                                <AntdLayout.Sider
+                                  theme="light"
+                                  style={{ height: '100%' }}
+                                  className="rightBar"
+
+                                >
+                                  <ResponsiveAnchor />
+                                </AntdLayout.Sider>
+                              )}
+                            </AntdLayout>
+                          )) : (
+                          <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%" }}>
+                            <AntdLayout.Content
+                              style={{
+                                position: 'relative',
+                                left: 0,
+                                right: 0,
+                                marginTop: 50,
+                              }}
                             >
-                              {children}
-                            </Container>
-                          </AntdLayout.Content>
-                          
-                          {/* Sidebar right */}
-                          {!anchorHide && (
-                            <AntdLayout.Sider
-                              theme="light"
-                              style={{ height: '100%' }}
-                              className="rightBar"
-                              
-                            >
-                              <ResponsiveAnchor />
-                            </AntdLayout.Sider>
-                          )}
-                        </AntdLayout>
-                        )) : (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
-                          <AntdLayout.Content
-                            style={{
-                              position: 'relative',
-                              left: 0,
-                              right: 0,
-                              marginTop: 50,
-                            }}
-                          >
-                            <Container
-                              sidebarDocked={!screenIsSmall}
-                              onPostPage={onPostPage}
-                              className={className}
-                              style={{ position: 'relative' }}
-                              containerStyle={containerStyle}
-                            >
-                              {children}
-                            </Container>
-                          </AntdLayout.Content>
-                        </AntdLayout>
-                      )}
-                      </AntdLayout>
+                              <Container
+                                sidebarDocked={!screenIsSmall}
+                                onPostPage={onPostPage}
+                                className={className}
+                                style={{ position: 'relative' }}
+                                containerStyle={containerStyle}
+                              >
+                                {children}
+                              </Container>
+                            </AntdLayout.Content>
+                          </AntdLayout>
+                        )}
+                    </AntdLayout>
                   </AntdLayout>
                   <AntdLayout>
-                  {isBlogPage && (<NewsletterForm />)}
-                  <Footer />
+                    {isBlogPage && (<NewsletterForm />)}
+                    <Footer />
                   </AntdLayout>
                 </>
               )}
