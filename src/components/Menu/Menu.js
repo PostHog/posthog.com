@@ -77,12 +77,6 @@ class Menu extends Component {
                 <div
                   className="mobileHeader"
                 >
-                  <CloseOutlined
-                    className="mobileHeaderClose"
-                    onClick={() => {
-                      this.onChangeMenuState(menuItems.length)
-                    }}
-                  />
                   <div className="burger-menu-spacer"></div>
                   <List
                     itemLayout="horizontal"
