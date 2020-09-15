@@ -1072,7 +1072,14 @@ code {
   font-size: 12px !important;
 }
 
-
 .menu-header {
   z-index: 100;
+}
+
+.burger-btn {
+  z-index: 101;
+}
+
+.homepage-burger-btn {
+  color: #FFFFFF !important;
 }

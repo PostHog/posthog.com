@@ -7,6 +7,10 @@ import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
 import StarRepoButton from '../StarRepoButton'
+import { withPrefix } from "gatsby-link"
+
+const isHomePage = () => { console.log(window.location.pathname === withPrefix("")); return window.location.pathname === withPrefix("") }
+
 
 class Menu extends Component {
   onChangeMenuState = nItem => {
@@ -81,13 +85,10 @@ class Menu extends Component {
               )}
               {!sidebarDocked && (
                 <Button
-                  style={{
-                    color: '#FFFFFF',
-                    zIndex: 101
-                  }}
+                  className={isHomePage() ? "burger-btn homepage-burger-btn" : "burger-btn" }
                   type="link"
                   onClick={() => {
-                    this.onChangeMenuState(menuItems.length); console.log(menuItems.length)
+                    this.onChangeMenuState(menuItems.length);
                   }}
                   icon={menuOpen ? "close" : "menu"}
                 />
