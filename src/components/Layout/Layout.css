@@ -245,8 +245,8 @@ h1 {
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 2.66667rem;
-  line-height: 1.5;
+  font-size: 64px;
+  line-height: 150%;
   font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
 
@@ -262,7 +262,7 @@ h2 {
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 2rem;
+  font-size: 48px;
   line-height: 1.5;
   font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
   font-style: normal;
@@ -279,7 +279,7 @@ h3 {
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1.25rem;
+  font-size: 36px;
   line-height: 1.5;
   font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
   font-style: normal;
@@ -296,7 +296,7 @@ h4 {
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1rem;
+  font-size: 30px;
   line-height: 1.5;
   font-family: 'Helvetica Neue';
   font-style: normal;
@@ -311,7 +311,7 @@ h5 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -327,7 +327,7 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 300;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   font-size: 0.78405rem;
   line-height: 1.5;
@@ -398,6 +398,9 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 figure {
   margin-left: 0;
@@ -498,7 +501,7 @@ hr {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: calc(1.45rem - 1px);
+  margin-bottom: 10px;
   background: hsla(0, 0%, 0%, 0.2);
   border: none;
   height: 1px;
@@ -1290,4 +1293,13 @@ code {
 .centered {
   display: block; 
   text-align: center;
+}
+
+.note-block {
+  background: #eeeeee;
+  padding-left: 10px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 5px;
 }

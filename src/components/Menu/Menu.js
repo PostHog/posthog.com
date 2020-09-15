@@ -3,11 +3,9 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
 import { connect } from 'react-redux'
 import { onChangeMenuState } from '../../actions/layout'
-import { onSetSidebarOpen } from '../../actions/layout'
 import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
-import { CloseOutlined } from '@ant-design/icons'
 import StarRepoButton from '../StarRepoButton'
 
 class Menu extends Component {
@@ -15,12 +13,12 @@ class Menu extends Component {
     this.props.onChangeMenuState(nItem)
   }
 
-  onSetSidebarClose = () => {
-    this.props.onSetSidebarOpen(false)
-  }
-
   render() {
+<<<<<<< HEAD
     const { sidebarDocked, menuOpen, isBlogPage, screenIsSmall, sidebarHide } = this.props
+=======
+    const { sidebarDocked, menuOpen, isBlogPage } = this.props
+>>>>>>> master
     return (
       <StaticQuery
         query={graphql`
@@ -71,24 +69,35 @@ class Menu extends Component {
               )}
               {!sidebarDocked && (
                 <Button
+<<<<<<< HEAD
                   className="headerButton"
+=======
+                  style={{
+                    color: '#FFFFFF',
+                    zIndex: 101
+                  }}
+>>>>>>> master
                   type="link"
                   onClick={() => {
-                    this.onChangeMenuState(menuItems.length)
+                    this.onChangeMenuState(menuItems.length); console.log(menuItems.length)
                   }}
-                  icon="menu"
+                  icon={menuOpen ? "close" : "menu"}
                 />
               )}
               {menuOpen && !sidebarDocked && (
                 <div
                   className="mobileHeader"
                 >
+<<<<<<< HEAD
                   <CloseOutlined
                     className="mobileHeaderClose"
                     onClick={() => {
                       this.onChangeMenuState(menuItems.length)
                     }}
                   />
+=======
+                  <div className="burger-menu-spacer"></div>
+>>>>>>> master
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}

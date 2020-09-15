@@ -17,15 +17,6 @@ import { withPrefix } from "gatsby-link"
 import NewsletterForm from '../NewsletterForm'
 import './Layout.css'
 
-const isBlogPage = 
-({location }) => {
-  if (location.pathname === withPrefix ("/blog")){
-    return true
-  } else {
-    return false
-  }
-}
-
 class Layout extends Component {
   setPostPageState = state => {
     this.props.setPostPageState(state)

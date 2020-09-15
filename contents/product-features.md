@@ -8,6 +8,10 @@ Watch a [walk through video](https://youtu.be/vGy9gzMAAes-Y?t=35s) through of th
 
 Below is a table of PostHog features and how this compares with the functionality in common alternatives.
 
+<br />
+
+<span class='table-borders'>
+
 |  Feature 	|   PostHog	| Amplitude  	|  Mixpanel 	| Heap  	|
 |:-:	|:-:	|:-:	|:-:	|:-:	|
 |   Self Hosted	|   ✔	|   	|   	|   	|
@@ -35,5 +39,8 @@ Below is a table of PostHog features and how this compares with the functionalit
 |   Direct SQL Access	|   ✔	|   	|   	|   ✔ 	|
 |   Full Data History	|   ✔	|   	|   	|   	| 
 
+</span>
+
+
 \* Full parity has not been achieved for this feature yet.
-You can follow our progress here: https://github.com/PostHog/posthog/projects/5
+You can follow our progress through our [public roadmap](https://github.com/orgs/PostHog/projects/1).

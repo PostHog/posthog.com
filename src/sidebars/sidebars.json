@@ -87,12 +87,14 @@
     "entry":"API",
     "name":"API",
     "items":[
-      "docs/api/api",
+      "docs/api/overview",
+      "docs/api/post-only-endpoints",
       "docs/api/elements",
       "docs/api/events",
       "docs/api/people",
       "docs/api/trends",
-      "docs/api/user"
+      "docs/api/user",
+      "docs/api/feature-flags"
     ]
   },
   {
@@ -102,7 +104,6 @@
       "docs/integrations",
       "docs/integrations/segment-integration",
       "docs/integrations/android-integration",
-      "docs/integrations/api",
       "docs/integrations/go-integration",
       "docs/integrations/ios-integration",
       "docs/integrations/js-integration",
@@ -258,7 +259,8 @@
     "items":[
       "handbook/growth/sales",
       "handbook/growth/trials",
-      "handbook/growth/posthog-array"
+      "handbook/growth/posthog-array",
+      "handbook/growth/releasing-content"
     ]
   },
   {

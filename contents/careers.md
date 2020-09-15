@@ -12,7 +12,7 @@ A part of [Y Combinator's](https://www.ycombinator.com/) W20 cohort, we launched
 
 Our GitHub repo has over over 3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
-We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than a sales team and regular cold calls.
+We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
 ## Our Culture
 
@@ -33,7 +33,9 @@ Being fully remote means we're able to create a team that is _truly_ diverse.
 
 In our view, a non-traditional team is how we build a special company. We believe diversity leads to the best results and encourage applicants from any background or experience to drop us a note. 
 
-Furthermore, to ensure we can support the needs of our diverse team well, we offer unlimited time off (minimum 20 days!), don't track hours (work hard when you work), and [offer generous parental leave](/handbook/people/time-off#parental-leave) independent of gender. 
+Furthermore, to ensure we can support the needs of our diverse team well, we offer unlimited time off (minimum 25 days!), don't track hours (work hard when you work), and [offer generous parental leave](/handbook/people/time-off#parental-leave) independent of gender. 
+
+As part of our commitment to diversity, we are willing to sponsor visas for those who need them.
 
 ##### Transparency
 
@@ -64,6 +66,18 @@ What we truly care about is how well you can contribute, as well as how good of 
 Following a few calls with our founders and team, if we think you're a good fit, we'll hire you as a contractor for 1-5 days to do some work with us. You will get paid normal contracting rates (i.e. above what your pro rata salary would be per day) and work on some real needs we have at PostHog.
 
 This way, you'll get a chance to see how we work, and we'll get a chance to see how you work in normal working conditions (rather than a stressful timed problem solving interview). And you'll be getting paid what you deserve. 
+
+## Benefits
+
+* [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
+* Health insurance provided or the cost covered depending on jurisdiction
+* [Generous parental leave](/handbook/people/time-off#parental-leave)
+* Visa sponsorship
+* [Training budget](/handbook/people/training#training-budget) (role dependent)
+* $200/month [budget towards coworking or café working](/handbook/people/spending-money#work-space)
+* Carbon offsetting for work travel with [Project Wren](https://projectwren.com/) 
+* Free [books](/handbook/people/training#books)
+
 <br>
 <br>
 
