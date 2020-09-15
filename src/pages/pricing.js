@@ -11,6 +11,10 @@ import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgRocket from '../images/rocket.svg'
 import imgChevronRight from '../images/chevron-right.svg'
+import imgHobby from "../images/plan-hobby.svg"
+import imgStarter from "../images/plan-starter.svg"
+import imgGrowth from "../images/plan-growth.svg"
+import imgEnterprise from "../images/plan-enterprise.svg"
 
 const PricingPage = () => {
   const [state, setState] = useState({ planOptions: 'cloud' })
@@ -21,6 +25,7 @@ const PricingPage = () => {
     cloud: [
       {
         title: 'Hobby',
+        image: imgHobby,
         popular: false,
         price: '$0',
         priceDetail: 'forever',
@@ -41,6 +46,7 @@ const PricingPage = () => {
       },
       {
         title: 'Starter',
+        image: imgStarter,
         popular: true,
         price: '$19',
         priceDetail: '/month',
@@ -63,6 +69,7 @@ const PricingPage = () => {
       },
       {
         title: 'Growth',
+        image: imgGrowth,
         popular: false,
         price: '$99',
         priceDetail: '/month',
@@ -81,6 +88,7 @@ const PricingPage = () => {
       },
       {
         title: 'Enterprise',
+        image: imgEnterprise,
         popular: false,
         price: 'Custom',
         priceDetail: 'contact us',
@@ -288,6 +296,9 @@ const PricingPage = () => {
               <div className="p-plan-popular-badge">POPULAR</div>
             )}
             <Card className="p-full-height">
+              {plan.image && <div style={{marginTop: 16}}>
+                <img src={plan.image} alt="" />  
+              </div>}
               <h3
                 className={
                   (plan.popular ? 'p-text-primary ' : '') + 'p-plan-title ' + (plan.wraps && 'p-plan-title-wrap')
