@@ -1071,3 +1071,12 @@ code {
 {
   font-size: 12px !important;
 }
+
+.burger-btn {
+  z-index: 101;
+}
+
+.homepage-burger-btn {
+  color: #FFFFFF !important;
+}
+
