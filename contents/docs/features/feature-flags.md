@@ -93,4 +93,13 @@ By combining user properties and percentage of users you can determine something
 
 ## De-activating Properties
 
-If the feature has caused a problem (like a huge server load), or you don't need the feature flag anymore, you can disable it instantly and completely. Users won't be getting the flag anymore.
+If the feature has caused a problem (like a huge server load), or you don't need the feature flag anymore, you can disable it instantly and completely. Doing so ensures **no users** will have the flag enabled.
+
+## Feature Flag Persistence
+
+For feature flags that filter by user properties only, a given flag will always be on if a certain user meets all the specified property filters.
+
+However, for flags using a rollout percentage mechanism (either by itself or in combination with user properties), the flag will persist for a given user as long as the rollout percentage and the flag key are not changed. 
+
+As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way. 
+
