@@ -1071,3 +1071,8 @@ code {
 {
   font-size: 12px !important;
 }
+
+
+.menu-header {
+  z-index: 100;
+}
