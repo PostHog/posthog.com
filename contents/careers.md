@@ -69,13 +69,14 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 
 ## Benefits
 
-* Unlimited vacation with a 25 day minimum
-* $200/month allowance towards coworking or café working
-* Visa sponsorship where needed
-* Carbon offsetting for work travel with [Project Wren](https://projectwren.com/) 
+* [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
 * Health insurance provided or the cost covered depending on jurisdiction
-* Generous parental leave
-* Book allowance
+* [Generous parental leave](/handbook/people/time-off#parental-leave)
+* Visa sponsorship
+* [Training budget](/handbook/people/training#training-budget) (role dependent)
+* $200/month [budget towards coworking or café working](/handbook/people/spending-money#work-space)
+* Carbon offsetting for work travel with [Project Wren](https://projectwren.com/) 
+* Free [books](/handbook/people/training#books)
 
 <br>
 <br>
