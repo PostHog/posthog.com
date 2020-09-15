@@ -24,34 +24,56 @@ const PricingPage = () => {
         popular: false,
         price: '$0',
         priceDetail: 'forever',
-        description: 'Ideal if you’re just getting started with your product',
+        description: 'Ideal for just yourself or small side projects',
         callToAction: 'Create free account',
         callToActionDest: {
           type: 'url',
-          value: 'https://app.posthog.com/signup?plan=free',
+          value: 'https://app.posthog.com/signup',
         },
         benefits: [
-          'Capture up to <b>5,000 events/month</b>',
-          '<b>All analytics features</b>',
+          'Capture up to <b>20,000 events/month</b>',
+          '<b>All core analytics features</b>',
           '<b>Unlimited</b> tracked users',
-          '<b>Unlimited</b> team members',
+          '<b>1</b> team member',
           '90 day data retention',
           'Community support',
         ],
       },
       {
-        title: 'Growth',
+        title: 'Starter',
         popular: true,
-        price: '$29',
+        price: '$19',
         priceDetail: '/month',
-        description: 'Ideal for companies with more usage',
-        callToAction: 'Start my 30-day free trial',
+        description: 'Ideal to get your product or website off the ground',
+        callToAction: 'Start my free trial',
+        callToActionDest: {
+          type: 'url',
+          value: 'https://app.posthog.com/signup?plan=starter',
+        },
+        benefits: [
+          '<span class="p-plan-benefit-lg">Everything in Hobby, plus:</span>',
+          'Capture up to <b>200,000 events/month</b>',
+          '<b>Unlimited</b> team members',
+          '<a href="/docs/features/feature-flags" target="blank">Feature flags</a>',
+          '<a href="/docs/features/cohorts" target="blank">User cohorts</a>',
+          '<a href="/docs/features/users#user-history" target="blank">Individual user history</a>',
+          '6 month data retention',
+          'Community support',
+        ],
+      },
+      {
+        title: 'Growth',
+        popular: false,
+        price: '$99',
+        priceDetail: '/month',
+        description: 'Ideal for companies with large volumes',
+        callToAction: 'Start my free trial',
         callToActionDest: {
           type: 'url',
           value: 'https://app.posthog.com/signup?plan=growth',
         },
         benefits: [
-          '<span class="p-plan-benefit-lg">Everything in Free, plus:</span>',
+          '<span class="p-plan-benefit-lg">Everything in Starter, plus:</span>',
           'Up to <b>500,000 events/month</b>',
           '12 month data retention',
           'Email support',
@@ -157,7 +179,7 @@ const PricingPage = () => {
     {
       q: 'Is there a free trial on paid plans?',
       a:
-        'You can get a 30-day free trial on our Growth plan. Our Enterprise plan does not offer a free trial because it has the same features as the Growth plan.',
+        'You can get a 30-day free trial on our Starter and Growth plans. Our Enterprise plan does not offer a free trial because it has the same base features as the Growth plan.',
     },
     {
       q: 'What happens after the data retention period elapses?',
@@ -261,7 +283,7 @@ const PricingPage = () => {
         style={{ justifyContent: 'center', marginTop: '32px' }}
       >
         {plans[state.planOptions].map(plan => (
-          <Col md={8} sm={24} align="middle" key={plan.title}>
+          <Col md={24 / plans[state.planOptions].length} sm={24} align="middle" key={plan.title}>
             {plan.popular && (
               <div className="p-plan-popular-badge">POPULAR</div>
             )}
@@ -366,7 +388,7 @@ const PricingPage = () => {
                 </li>
               </ul>
               <div className="p-comparison-btn">
-                <a href="https://app.posthog.com/signup?plan=growth">
+                <a href="https://app.posthog.com/signup?plan=starter">
                   <Button type="primary" size="large">
                     Start my 30-day free trial
                   </Button>
@@ -427,7 +449,7 @@ const PricingPage = () => {
       <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
         <Col span={24} align="middle">
           <h2 className="p-text-primary">Ready to get started?</h2>
-          <a href="https://app.posthog.com/signup?plan=free">
+          <a href="https://app.posthog.com/signup">
             <Button type="primary" size="large">
               Create my free account
             </Button>
