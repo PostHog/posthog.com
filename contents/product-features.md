@@ -1,6 +1,6 @@
 ---
 title: Product Features
-sidebar: null
+section: product-features
 showTitle: true
 ---
 

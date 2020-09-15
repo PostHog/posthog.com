@@ -2,6 +2,35 @@
     content: 'honhonohon';
 }
 
-h1 {
-    font-size: 30px!important;
-}
+.features.table-borders td, .features.table-borders th {
+    border: none!important;
+    background-color: grey;
+    border-radius: 20px;
+    padding: 10px 0!important;
+    text-align: center;
+    display: block;
+    float: left;
+    margin: 5px 10px;
+    width: 100px;
+  }
+
+  .features.table-borders td:empty {
+    background: none;
+  }
+  
+  .features.table-borders th:first-child {
+    background-color: blue;
+    border-radius: 20px 20px 0 0;
+    margin: 0 !important;
+  }
+  
+  .features.table-borders td:first-child {
+    background-color: blue!important;
+    border-radius: 0;
+    margin: 0 !important;
+  }
+  
+  .features.table-borders tr:last-child td:first-child {
+    background-color: blue!important;
+    border-radius: 0 0 20px 20px;
+  }

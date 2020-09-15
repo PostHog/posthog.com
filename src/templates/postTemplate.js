@@ -41,14 +41,13 @@ function Template({
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
   return (
-    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} isFeaturesPage={frontmatter.sidebar === 'Architecture'}>
+    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} isFeaturesPage={frontmatter.section === 'product-features'}>
     <SEO
       title={frontmatter.title + ' - PostHog docs'}
       description={frontmatter.description || excerpt}
       pathname={markdownRemark.fields.slug}
       article
     />
-    {frontmatter.sidebar !== 'Features' && 
     <div className="docsPagesContainer">
       <div className="docsPages">
         { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
@@ -59,7 +58,6 @@ function Template({
       </div>
       {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
     </div>
-    }
     </Layout>
   )
 }
@@ -95,6 +93,7 @@ export const pageQuery = graphql`
         sidebar
         showTitle
         hideAnchor
+        section
       }
     }
   }

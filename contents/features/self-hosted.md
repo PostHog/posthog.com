@@ -1,7 +1,8 @@
 ---
 title: Self-Hosted
-sidebar: Architecture
+section: product-features
 showTitle: true
+hideAnchor: true
 ---
 
 ## Take control of your data
