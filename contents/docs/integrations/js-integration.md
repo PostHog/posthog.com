@@ -240,7 +240,7 @@ function signup(email) {
 
 When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
 
-There are [33 different options](https://github.com/PostHog/posthog-js/blob/master/src/posthog-core.js#L53), most of which you do not have to ever worry about. 
+There are [33 different options](https://github.com/PostHog/posthog-js/blob/master/src/posthog-core.js#L1120-L1206), most of which you do not have to ever worry about. 
 
 Some of the most relevant options are:
 
