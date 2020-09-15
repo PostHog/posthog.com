@@ -167,7 +167,6 @@ class Menu extends Component {
                     style={{
                       width: '100%',
                       float: 'left',
-                      backgroundColor: 'white'
                     }}
                   />
                 </div>
