@@ -61,10 +61,10 @@ class Layout extends Component {
                   >
                     <html lang="en" />
                   </Helmet>
-                  <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
+                  <AntdLayout theme="light" style={{width: "100%"}}>
                     {!screenIsSmall && onPostPage && (
                       !sidebarHide && !isBlogPage && (
-                      <AntdLayout.Sider width="300" theme="light" style={{backgroundColor: '#F9F9F9'}} >
+                      <AntdLayout.Sider width="300" theme="light">
                         <ResponsiveSidebar style={{border: 'none'}}/>
                         </AntdLayout.Sider>
                       ))}

@@ -708,6 +708,10 @@ header {
   color: initial!important;
 }
 
+.ant-layout-sider-children ul {
+  background-color: #f9f9f9!important;
+}
+
 li > .ant-menu-submenu-title span{
   font-size: 18px;
 }
@@ -728,8 +732,8 @@ li > .ant-menu-submenu-title span{
   font-weight: 600!important;
 }
 
-aside.sidebar {
-  background: #F0F0F0;
+.ant-layout > aside {
+  background: #F9F9F9;
   font-weight: 400!important;
 }
 
