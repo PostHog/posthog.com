@@ -14,11 +14,7 @@ class Menu extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const { sidebarDocked, menuOpen, isBlogPage, screenIsSmall, sidebarHide } = this.props
-=======
     const { sidebarDocked, menuOpen, isBlogPage } = this.props
->>>>>>> master
     return (
       <StaticQuery
         query={graphql`
@@ -69,14 +65,7 @@ class Menu extends Component {
               )}
               {!sidebarDocked && (
                 <Button
-<<<<<<< HEAD
                   className="headerButton"
-=======
-                  style={{
-                    color: '#FFFFFF',
-                    zIndex: 101
-                  }}
->>>>>>> master
                   type="link"
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length); console.log(menuItems.length)
@@ -88,16 +77,13 @@ class Menu extends Component {
                 <div
                   className="mobileHeader"
                 >
-<<<<<<< HEAD
                   <CloseOutlined
                     className="mobileHeaderClose"
                     onClick={() => {
                       this.onChangeMenuState(menuItems.length)
                     }}
                   />
-=======
                   <div className="burger-menu-spacer"></div>
->>>>>>> master
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}

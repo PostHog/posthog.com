@@ -34,7 +34,6 @@ import roadmapButton from '../images/roadmap-button.svg'
 import whatsNewPhone from '../images/whats-new-phone.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
-<<<<<<< HEAD
 import indexCSS from '!!raw-loader!./../pages/index.css'
 import Helmet from 'react-helmet'
 
@@ -47,14 +46,6 @@ function IndexPage() {
         </style>
       </Helmet>
       <div className="indexContainer">
-=======
-import { Helmet } from 'react-helmet'
-
-function IndexPage() {
-  return (
-    <div className="indexContainer">
-      <Layout containerStyle={{maxWidth: "auto", padding: 0}} >
->>>>>>> master
         <SEO
           title="PostHog - Open-Source Product Analytics"
           description="Self-hosted product analytics stack, to deploy on your infrastructure."
