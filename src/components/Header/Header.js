@@ -13,7 +13,9 @@ const isDocsPage = () => { return window.location.pathname.split('/')[1] === "do
 
 class Header extends Component {
   componentDidMount() {
-    docsearch({ apiKey: '45e80dec3e5b55c400663a5cba911c4c', indexName: 'posthog', inputSelector: '#doc-search' })
+    if (isDocsPage()) {
+      docsearch({ apiKey: '45e80dec3e5b55c400663a5cba911c4c', indexName: 'posthog', inputSelector: '#doc-search' })
+    }
   }
   render() {
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
