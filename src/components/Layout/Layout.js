@@ -106,7 +106,6 @@ class Layout extends Component {
                               sidebarDocked={!screenIsSmall}
                               onPostPage={onPostPage}
                               className={className + " container"}
-                              style={{ position: 'relative' }}
                               containerStyle={containerStyle}
                             >
                               {children}
