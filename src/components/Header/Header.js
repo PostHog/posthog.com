@@ -14,6 +14,7 @@ class Header extends Component {
     return (
       <div className={"menuHeaderWrapper " + (!sidebarHide && !screenIsSmall && onPostPage && "noLogo")}>
         {screenIsSmall ? (
+          onPostPage ? (
           <Link
             id="logo"
             to="/"
@@ -21,21 +22,21 @@ class Header extends Component {
             <img alt="logo" src={logo} id="logo-image-header" />
           </Link>
         ) : (
-            isBlogPage ? (
+          <Link
+          id="logo"
+          to="/"
+        >
+          <img alt="logo" src={whiteLogo} id="logo-image-header" />
+        </Link>
+        )) : (
+          isBlogPage || !onPostPage && 
               <Link
                 id="logo"
                 to="/"
               >
                 <img alt="logo" src={whiteLogo} id="logo-image-header" />
               </Link>
-            ) : (
-                <Link
-                  id="logo"
-                  to="/"
-                >
-                  <img alt="logo" src={logo} id="logo-image-header" />
-                </Link>
-              ))}
+            )}
         <Menu
           sidebarDocked={sidebarDocked}
           sidebarHide={sidebarHide}

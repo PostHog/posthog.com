@@ -36,7 +36,7 @@ import whatsNewPhone from '../images/whats-new-phone.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
-import indexCSS from '!!raw-loader!./../pages/index.css'
+//import indexCSS from '!!raw-loader!./../pages/index.css'
 
 function IndexPage() {
   return (
@@ -47,9 +47,7 @@ function IndexPage() {
           description="Self-hosted product analytics stack, to deploy on your infrastructure."
         />
         <Helmet bodyAttributes={{ class: 'homepage' }}>
-          <style className="styling">
-            {indexCSS}
-          </style>
+          {/* <style>{indexCSS}</style> */}
         </Helmet>
         <div className="">
         <div className='topSectionWrapperMobile'>

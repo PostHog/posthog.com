@@ -192,7 +192,7 @@ p {
 
 
 .topPageCol2 {
-    background-image: url('../images/computer-dashboard-4.svg');
+    background-image: url('../images/computer-dashboard-4.svg')!important;
     position: relative;
     height: 410px;
     width: calc(14/24 * 100vw);
