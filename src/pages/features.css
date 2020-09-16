@@ -3,34 +3,82 @@
 }
 
 .features.table-borders td, .features.table-borders th {
-    border: none!important;
-    background-color: grey;
-    border-radius: 20px;
-    padding: 10px 0!important;
-    text-align: center;
-    display: block;
-    float: left;
-    margin: 5px 10px;
-    width: 100px;
-  }
+  border: none!important;
+  background-color: grey;
+  padding: 10px 0!important;
+  text-align: center;
+  color: #ffffff;
+}
 
-  .features.table-borders td:empty {
-    background: none;
-  }
+.features.table-borders th {
+  font-size: 36px;
+  line-height: 60px;
+  height: 140px;
+}
+
+.features.table-borders td {
+  border-radius: 20px;
+  font-size: 24px;
+  line-height: 60px;
+}
+
+.features.table-borders td:empty {
+  background: none!important;
+}
+
+.features.table-borders th:first-child {
+  background-color: #F4F6FF;
+  border-radius: 20px 0 0 0;
+  color: #35416B;
+}
+
+.features.table-borders td:first-child {
+  background-color: #F4F6FF!important;
+  border-radius: 0;
+  color: #35416B;
+}
   
-  .features.table-borders th:first-child {
-    background-color: blue;
-    border-radius: 20px 20px 0 0;
-    margin: 0 !important;
-  }
-  
-  .features.table-borders td:first-child {
-    background-color: blue!important;
-    border-radius: 0;
-    margin: 0 !important;
-  }
-  
-  .features.table-borders tr:last-child td:first-child {
-    background-color: blue!important;
-    border-radius: 0 0 20px 20px;
-  }
+.features.table-borders tr:last-child td:first-child {
+  background-color: #F4F6FF!important;
+  border-radius: 0 0 20px 20px;
+}
+
+.features.table-borders th:nth-child(2) {
+  background-color: #F96132;
+  border-radius: 0;
+  color: #ffffff;
+}
+
+.features.table-borders td:nth-child(2) {
+  background-color: #F96132;
+}
+
+.features.table-borders th:nth-child(3) {
+  background-color: #AABBFF;
+  border-radius: 0;
+  color: #ffffff;
+}
+
+.features.table-borders td:nth-child(3) {
+  background-color: #AABBFF;
+}
+
+.features.table-borders th:nth-child(4) {
+  background-color: #6D8AFF;
+  border-radius: 0;
+  color: #ffffff;
+}
+
+.features.table-borders td:nth-child(4) {
+  background-color: #6D8AFF;
+}
+
+.features.table-borders th:last-child {
+  background-color: #3F65FF;
+  border-radius: 0 20px 0 0;
+  color: #ffffff;
+}
+
+.features.table-borders td:last-child {
+  background-color: #3F65FF;
+}

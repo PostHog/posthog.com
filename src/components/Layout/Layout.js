@@ -171,7 +171,7 @@ class Layout extends Component {
                           {!anchorHide && (
                             <AntdLayout.Sider
                               theme="light"
-                              style={{ height: '100%', backgroundColor: '#fff' }}
+                              style={{ height: '100%' }}
                               className="rightBar"
                               
                             >

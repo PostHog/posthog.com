@@ -3,11 +3,9 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
 import { connect } from 'react-redux'
 import { onChangeMenuState } from '../../actions/layout'
-import { onSetSidebarOpen } from '../../actions/layout'
 import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
-import { CloseOutlined } from '@ant-design/icons'
 import StarRepoButton from '../StarRepoButton'
 
 class Menu extends Component {
@@ -15,12 +13,8 @@ class Menu extends Component {
     this.props.onChangeMenuState(nItem)
   }
 
-  onSetSidebarClose = () => {
-    this.props.onSetSidebarOpen(false)
-  }
-
   render() {
-    const { sidebarDocked, menuOpen, isBlogPage, sidebarHide } = this.props
+    const { sidebarDocked, menuOpen, isBlogPage } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -88,14 +82,14 @@ class Menu extends Component {
               {!sidebarDocked && (
                 <Button
                   style={{
-                    color: '#1D4AFF',
-
+                    color: '#FFFFFF',
+                    zIndex: 101
                   }}
                   type="link"
                   onClick={() => {
-                    this.onChangeMenuState(menuItems.length)
+                    this.onChangeMenuState(menuItems.length); console.log(menuItems.length)
                   }}
-                  icon="menu"
+                  icon={menuOpen ? "close" : "menu"}
                 />
               )}
               {menuOpen && !sidebarDocked && (
@@ -112,21 +106,7 @@ class Menu extends Component {
                     paddingTop: '5vh'
                   }}
                 >
-                  <div>
-                    <CloseOutlined
-                      style={{
-                        float: 'right',
-                        fontSize: '30px',
-                        paddingLeft: '10vw',
-                        paddingRight: '10vw',
-                        marginTop: '5vh',
-                        backgroundColor: 'white',
-                      }}
-                      onClick={() => {
-                        this.onChangeMenuState(menuItems.length)
-                      }}
-                    ></CloseOutlined>
-                  </div>
+                  <div className="burger-menu-spacer"></div>
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}

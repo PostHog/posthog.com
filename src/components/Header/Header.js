@@ -5,11 +5,12 @@ import logo from '../../images/posthog-logo-150x29.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
+import { withPrefix } from "gatsby-link"
 
 
 class Header extends Component {
   render() {
-    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
+    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage, isHomePage } = this.props
 
     return (
       <div
@@ -41,6 +42,7 @@ class Header extends Component {
           </Link>
         ) : (
             isBlogPage ? (
+
               <Link
               id="logo"
               to="/"
@@ -55,7 +57,7 @@ class Header extends Component {
                   left: 8
                 }} />
                 ) : (
-                  <img alt="logo" src={whiteLogo} id="logo-image"/>
+                  <img alt="logo2" src={whiteLogo} id="logo-image"/>
                 )}
               </Link>
             ) : (

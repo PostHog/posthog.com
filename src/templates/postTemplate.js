@@ -43,16 +43,16 @@ function Template({
   return (
     <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} isFeaturesPage={frontmatter.section === 'product-features'}>
     <SEO
-      title={frontmatter.title + ' - PostHog docs'}
+      title={frontmatter.title + (frontmatter.section !== 'product-features' ? ' - PostHog docs' : '')}
       description={frontmatter.description || excerpt}
       pathname={markdownRemark.fields.slug}
       article
     />
-    <div className="docsPagesContainer">
-      <div className="docsPages">
+    <div className={frontmatter.section === 'product-features' ? "featuresPagesContainer" : "docsPagesContainer"}>
+      <div className={frontmatter.section === 'product-features' ? "featuresPages" : "docsPages"}>
         { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
         <div
-          className="docsPagesContent"
+          className={frontmatter.section === 'product-features' ? "featuresPagesContent" : "docsPagesContent"}
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
