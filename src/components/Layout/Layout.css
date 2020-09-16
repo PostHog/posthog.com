@@ -1112,6 +1112,9 @@ a.middle {
 .notDocsLayout {
   background-color: #ffffff; 
   width: 100%;
+  max-width: 960px;
+  align-self: center;  
+  padding: 0px 1.0875rem 1.45rem;
 }
 
 .notDocsLayout main {
@@ -1148,7 +1151,6 @@ a.middle {
 .blogPageLayout {
   background-color: #ffffff;
   width: 100%; 
-  text-align: center;
 }
 
 .blogPageLayout main {

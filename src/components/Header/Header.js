@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 
 class Header extends Component {
   render() {
-    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage, isHomePage } = this.props
+    const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
 
     return (
       <div className={"menuHeaderWrapper " + (!sidebarHide && !screenIsSmall && onPostPage && "noLogo")}>
@@ -29,7 +29,6 @@ class Header extends Component {
                 <img alt="logo" src={whiteLogo} id="logo-image-header" />
               </Link>
             ) : (
-                sidebarDocked && !onPostPage &&
                 <Link
                   id="logo"
                   to="/"
