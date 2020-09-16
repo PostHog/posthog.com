@@ -8,7 +8,7 @@ Watch a [walk through video](https://youtu.be/vGy9gzMAAes-Y?t=35s) through of th
 
 Below is a table of PostHog features and how this compares with the functionality in common alternatives.
 
-checkout [Self-hosted](/features/self-hosted/)
+checkout [Self-hosted](/product-features/self-hosted/)
 
 <br />
 

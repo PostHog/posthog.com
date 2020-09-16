@@ -82,3 +82,16 @@
 .features.table-borders td:last-child {
   background-color: #3F65FF;
 }
+
+/* INTERNAL PAGES */
+
+.head {
+  border-radius: 50px;
+  background-color: #35416B;
+  width: 1271px;
+  height: 505px;
+}
+
+main > div > div {
+  margin: 0!important;
+}
