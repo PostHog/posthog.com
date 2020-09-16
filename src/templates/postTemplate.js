@@ -14,7 +14,7 @@ import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 import SEO from '../components/seo';
 import MediaQuery from 'react-responsive'
 
-function addIndex (url) {
+function addIndex(url) {
   const indexUrls = ['/docs', '/handbook']
   return `${url}${indexUrls.includes(url) ? '/index' : ''}`
 }
@@ -41,23 +41,23 @@ function Template({
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
   return (
-    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'}>
-    <SEO
-      title={frontmatter.title + ' - PostHog docs'}
-      description={frontmatter.description || excerpt}
-      pathname={markdownRemark.fields.slug}
-      article
-    />
-    <div className="docsPagesContainer">
-      <div className="docsPages">
-        { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
-        <div
-          className="docsPagesContent"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} pageTitle={frontmatter.title}>
+      <SEO
+        title={frontmatter.title + ' - PostHog docs'}
+        description={frontmatter.description || excerpt}
+        pathname={markdownRemark.fields.slug}
+        article
+      />
+      <div className="docsPagesContainer">
+        <div className="docsPages">
+          {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && <h1 align="center">{frontmatter.title}</h1>}
+          <div
+            className="docsPagesContent"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </div>
+        {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
       </div>
-      {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
-    </div>
     </Layout>
   )
 }
@@ -76,7 +76,7 @@ const mapDispatchToProps = {
   onSetSidebarHide
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Template)
+export default connect(mapStateToProps, mapDispatchToProps)(Template)
 
 export const pageQuery = graphql`
   query($path: String!) {

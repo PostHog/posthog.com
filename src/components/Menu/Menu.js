@@ -37,24 +37,13 @@ class Menu extends Component {
         render={data => {
           const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
           return (
-            <div className="headerItems" style={{ marginRight: 20 }}>
+            <div className="headerItems">
               {sidebarDocked && (
-                <AntMenu
-                  mode="horizontal"
-                  style={{
-                    borderBottomWidth: 0,
-                    background: isBlogPage && 'none'
-                  }}
-                >
+                <AntMenu mode="horizontal">
                   {menuItems.reverse().map(item => {
                     return item.name === "star-repo" ? (
                       <AntMenu.Item
                         className="headerKey star-repo-btn"
-                        style={{
-                          marginLeft: '2em',
-                          float: 'right',
-                          marginBottom: 'calc(1.45rem / 2)'
-                        }}
                         key={item.name}
                       >
                         <StarRepoButton></StarRepoButton>
@@ -62,20 +51,15 @@ class Menu extends Component {
                     ) : (
                         <AntMenu.Item
                           className="headerKey"
-                          style={{
-                            marginLeft: '2em',
-                            float: 'right',
-                            marginBottom: 'calc(1.45rem / 2)'
-                          }}
                           key={item.link || item.a}
                         >
                           {item.a ? (
-                            <a href={item.a} className={item.name === "Login" && !isBlogPage ? " login-btn" : ""} style={{ color: isBlogPage ? '#FFFFFF' : '#000000' }}>
-                              {item.name}
+                            <a href={item.a} className={(item.name === "Login" ? " login-btn" : " headerItem") + (isBlogPage && " blogPage")} >
+                            {item.name}
                             </a>
                           ) : (
-                              <Link to={item.link} style={{ color: isBlogPage ? '#FFFFFF' : '#595959' }}>
-                                {item.name}
+                            <Link to={item.link} className={"headerItem" + (isBlogPage && " blogPage")} >
+                            {item.name}
                               </Link>
                             )}
                         </AntMenu.Item>
@@ -95,17 +79,7 @@ class Menu extends Component {
               )}
               {menuOpen && !sidebarDocked && (
                 <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    height: '100vh',
-                    width: '100%',
-                    zIndex: 100,
-                    paddingLeft: 0,
-                    paddingRight: 0,
-                    paddingTop: '5vh'
-                  }}
+                  className="mobileHeader"
                 >
                   <div className="burger-menu-spacer"></div>
                   <List
@@ -114,11 +88,7 @@ class Menu extends Component {
                     rowKey={item => item.a || item.link}
                     renderItem={item => (
                       <List.Item
-                        style={{
-                          listStyle: 'none',
-                          padding: '3vh 10vw',
-                          margin: 0
-                        }}
+                        className="mobileHeaderItem"
                         key={menuItems.indexOf(item)}
                       >
                         {item.a ? (
@@ -127,10 +97,6 @@ class Menu extends Component {
                               <a
                                 href={item.a}
                                 className={item.name === "Login" ? " login-btn" : ""}
-                                style={{
-                                  color: 'black',
-                                  textDecoration: 'none',
-                                }}
                                 onClick={() => {
                                   this.onChangeMenuState(menuItems.length)
                                 }}
@@ -150,10 +116,6 @@ class Menu extends Component {
                                 title={
                                   <Link
                                     to={item.link}
-                                    style={{
-                                      color: 'black',
-                                      textDecoration: 'none',
-                                    }}
                                     onClick={() => {
                                       this.onChangeMenuState(menuItems.length)
                                     }}
@@ -165,11 +127,7 @@ class Menu extends Component {
                             )}
                       </List.Item>
                     )}
-                    style={{
-                      width: '100%',
-                      float: 'left',
-                      backgroundColor: 'white'
-                    }}
+                    className="mobileHeaderList"
                   />
                 </div>
               )}

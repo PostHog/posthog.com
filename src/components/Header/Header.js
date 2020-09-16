@@ -5,7 +5,6 @@ import logo from '../../images/posthog-logo-150x29.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
-import { withPrefix } from "gatsby-link"
 
 
 class Header extends Component {
@@ -13,63 +12,39 @@ class Header extends Component {
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage, isHomePage } = this.props
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: 'none'
-        }}>
-        {sidebarHide || !onPostPage ? (
+      <div className={"menuHeaderWrapper " + (!sidebarHide && !screenIsSmall && onPostPage && "noLogo")}>
+        {screenIsSmall ? (
           <Link
-          id="logo"
-          to="/"
-          style={{
-            //color: '#FFF',
-            textDecoration: 'none',
-            verticalAlign: 'center'
-          }}>
-          {screenIsSmall ? (
-          <img alt="logo" src={logo} id="logo-image" style={{
-            display: 'flex',
-            top: 0,
-            left: 8
-          }} />
-          ) : (
-            <img alt="logo" src={logo} id="logo-image"/>
-          )}
+            id="logo"
+            to="/"
+          >
+            <img alt="logo" src={logo} id="logo-image-header" />
           </Link>
         ) : (
             isBlogPage ? (
-
               <Link
-              id="logo"
-              to="/"
-              style={{
-                //color: '#FFF',
-                textDecoration: 'none',
-                verticalAlign: 'center'
-              }}>
-                {screenIsSmall ? (<img alt="logo" src={logo} id="logo-image" style={{
-                  display: 'flex',
-                  top: 0,
-                  left: 8
-                }} />
-                ) : (
-                  <img alt="logo2" src={whiteLogo} id="logo-image"/>
-                )}
+                id="logo"
+                to="/"
+              >
+                <img alt="logo" src={whiteLogo} id="logo-image-header" />
               </Link>
             ) : (
-              <div style={{height: 64, width: 0}}></div>
-          )
-        )}
-        <Menu 
-        sidebarDocked={sidebarDocked}
-        sidebarHide={sidebarHide}
-        isBlogPage={isBlogPage} />
+                sidebarDocked && !onPostPage &&
+                <Link
+                  id="logo"
+                  to="/"
+                >
+                  <img alt="logo" src={logo} id="logo-image-header" />
+                </Link>
+              ))}
+        <Menu
+          sidebarDocked={sidebarDocked}
+          sidebarHide={sidebarHide}
+          isBlogPage={isBlogPage}
+          screenIsSmall={screenIsSmall}
+        />
       </div>
-)
+    )
   }
 }
 
