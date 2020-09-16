@@ -736,6 +736,8 @@ header {
 
 .headerKey {
   margin-left: 20px;
+  float: 'right';
+  margin-bottom: 'calc(1.45rem / 2)';
 }
 
 .headerKey a {
@@ -1169,6 +1171,14 @@ a.middle {
   color: #F7A501;
 }
 
+.white {
+  color: #FFFFFF;
+}
+
+.zambezi {
+  color: #595959;
+}
+
 table td {
   border: none;
 }
@@ -1325,3 +1335,42 @@ code {
 .homepage-burger-btn {
   color: #FFFFFF !important;
 }
+
+.ant-menu-navbar {
+  border-bottom-width: 0;
+}
+
+.ant-menu-navbar-blog {
+  background: none;
+}
+
+#navbar-responsive-wrapper {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  width: 100% !important;
+  z-index: 100 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 5vh !important;
+}
+
+
+.responsive-menu-item {
+  list-style: none;
+  padding: 3vh 10vw !important;
+  margin: 0;
+}
+
+
+.responsive-menu-item-meta {
+  color: 'black';
+  text-decoration: 'none';
+}
+
+.navbar-list {
+  width: 100%;
+  float: left;
+  background-color: 'white';
+} 
