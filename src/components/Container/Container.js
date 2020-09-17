@@ -21,9 +21,6 @@ class Container extends Component {
       <div className={className}>
         <div
           style={{
-            margin: onPostPage ? 0 : '0 auto',
-            maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
             marginTop:
               !sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)
                 ? 20

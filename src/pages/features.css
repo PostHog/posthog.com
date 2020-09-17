@@ -85,15 +85,17 @@
 
 /* INTERNAL PAGES */
 
-.headWrapper {
+.featuresWrapper {
   width: 100%;
 }
 
 .head {
   border-radius: 50px;
   background-color: #35416B;
-  width: 1271px;
+  width: calc(1390/1440 * 100vw);
+  max-width: 1390px;
   height: 505px;
+  margin: 0 25px 40px;
 }
 
 .blue {
@@ -169,9 +171,18 @@ main > div > div {
   color: #3F65FF!important;
 }
 
+@media screen and (min-width: 1440px) {
+  .featuresWrapper {
+    padding: 0 calc((100vw - 1440px) / 2)
+  }
+}
+
 .row {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  width: 100vw;
+  max-width: 1440px;
 }
 
 .row h2 {
@@ -184,9 +195,13 @@ h2.number {
   font-size: 54px;
 }
 
-.rowContents {]
+.rowContents {
   position: relative;
   width: 240px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .rowImg {
@@ -194,5 +209,11 @@ h2.number {
   height: 600px;
   width: 700px;
   background-color: blue;
+}
 
+.head.selfHosted {
+  background-image: url('../images/self-hosted-head.svg')!important;
+  background-size: 495px 459px;
+  background-position: 700px top;
+  background-repeat: no-repeat;
 }
