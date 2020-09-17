@@ -72,7 +72,7 @@ class Menu extends Component {
               )}
               {!sidebarDocked && (
                 <Button
-                  className={isHomePage() ? "burger-btn homepage-burger-btn" : "burger-btn" }
+                  className={(isHomePage() ? "burger-btn homepage-burger-btn" : "burger-btn") + (isBlogPage && " blogpage-burger-btn") }
                   type="link"
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length);

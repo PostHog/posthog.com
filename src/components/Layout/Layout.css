@@ -1354,7 +1354,7 @@ code {
   z-index: 101;
 }
 
-.homepage-burger-btn {
+.homepage-burger-btn, .blogpage-burger-btn {
   color: #FFFFFF !important;
 }
 
