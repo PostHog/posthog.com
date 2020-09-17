@@ -41,20 +41,37 @@ class Footer extends Component {
                         <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
                             <span className="footer-links-header">Community</span>
                             <FooterListItem>
-                                <a href="https://github.com/PostHog/posthog/graphs/contributors">Contributors</a>
+                                <a href="https://github.com/PostHog/posthog/graphs/contributors" target="_blank">
+                                    Contributors
+                                </a>
                             </FooterListItem>
                             <FooterListItem>
-                                <a href="https://github.com/posthog/posthog">Source code</a>
+                                <a href="https://github.com/posthog/posthog" target="_blank">
+                                    Source code
+                                </a>
                             </FooterListItem>
                             <FooterListItem>
-                                <a href="https://github.com/posthog">Explore repositories</a>
-                            </FooterListItem>
-                            <FooterListItem to="/handbook/strategy/roadmap">Roadmap</FooterListItem>
-                            <FooterListItem>
-                                <a href="https://github.com/PostHog/posthog/blob/master/CONTRIBUTING.md">Contribute</a>
+                                <a href="https://github.com/posthog" target="_blank">
+                                    Explore repositories
+                                </a>
                             </FooterListItem>
                             <FooterListItem>
-                                <a href="https://github.com/PostHog/posthog/issues">Issues</a>
+                                <a href="https://github.com/orgs/PostHog/projects/1" target="_blank">
+                                    Roadmap
+                                </a>
+                            </FooterListItem>
+                            <FooterListItem>
+                                <a
+                                    href="https://github.com/PostHog/posthog/blob/master/CONTRIBUTING.md"
+                                    target="_blank"
+                                >
+                                    Contribute
+                                </a>
+                            </FooterListItem>
+                            <FooterListItem>
+                                <a href="https://github.com/PostHog/posthog/issues" target="_blank">
+                                    Issues
+                                </a>
                             </FooterListItem>
                         </Col>
                         <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
@@ -64,7 +81,9 @@ class Footer extends Component {
                                 <a href="mailto:sales@posthog.com">Contact sales</a>
                             </FooterListItem>
                             <Row>
-                                <a href="http://status.posthog.com">Status</a>
+                                <a href="http://status.posthog.com" target="_blank">
+                                    Status
+                                </a>
                             </Row>
                         </Col>
                         <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
