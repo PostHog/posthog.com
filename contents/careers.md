@@ -83,6 +83,34 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 
 # Open Roles
 
+## UX Developer
+
+PostHog is building its first design team.
+
+The role would involve:
+
+* Collaborating with our Designer to make sure we get a cool '80s vibe into our website and docs!
+* Implementing design changes to our website, docs and product.
+* Collaborating with our engineering team to ensure our product is simple and intuitive even to answer complex analytics queries.
+
+The perfect candidate for this role must be as comfortable working with a designer in Figma as they are creating components and working in React. It will involve a lot of rolling up sleeves and getting stuck in.
+
+### Hiring process
+
+* You'll have a 30 minute phone-call with our designer Lottie
+* You'll meet our CEO James, our CTO Tim and one of our developers
+* We'll pay you contracting rates for 3 days to do some work on PostHog. This will give you a chance to learn how we'd work with you, and for us to see how you work. You'll also end up with some open source contributions.
+* We make a decision with you
+
+### How to Apply
+
+Email a thoughtful cover letter to [james@posthog.com](mailto:james@posthog.com). A good cover letter includes:
+
+* What makes you a great early hire for this role
+* Relevant experience/projects you've done (including links if possible)
+* Links to your GitHub / LinkedIn / resume (optional)
+* How you found us
+
 ## Fullstack Engineer
 
 ### Your Role
