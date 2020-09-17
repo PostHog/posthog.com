@@ -721,6 +721,9 @@ header {
     border: none!important;
     padding: 0;
   }
+  .menuHeader {
+    padding: 0 20px!important;
+  }
 }
 
 .headerItems {
@@ -1234,15 +1237,25 @@ table th {
   font-size: 20px;
 }
 
+.sidebarButtonWrapper {
+  position: static; 
+  width: 100vw;
+  height: 40px; 
+  line-height: 40px;
+  padding: 0;
+}
+
+.sidebarButton {
+  position: absolute; 
+  margin: 8px;
+}
+
 .mobileSidebarWrapper {
-  margin-top: 20px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ffffff;
+  position: relative;
+  background-color: #ffffff!important;
   z-index: 9999;
   width: 100%;
+  height: 100vh;
 }
 
 .mobileSidebar {
@@ -1255,6 +1268,11 @@ table th {
   -webkit-overflow-scrolling: touch;
   transition: left .3s ease-out, right .3s ease-out;
   overscroll-behavior-y: contain;
+}
+
+.blogPages {
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .star-repo-btn {

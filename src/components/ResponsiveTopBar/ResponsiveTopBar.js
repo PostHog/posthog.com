@@ -38,10 +38,10 @@ class ResponsiveTopBar extends Component {
       <div>
         <div>
         {!anchorOpen && !sidebarHide &&
-          <div >
+          <div className="sidebarButtonWrapper">
             {sidebarOpen ?
-              <Button icon="close" onClick={this.onSetSidebarClose} /> :
-              <Button icon="bars" onClick={this.onSetSidebarOpen} />
+              <Button className="sidebarButton" icon="close" onClick={this.onSetSidebarClose} /> :
+              <Button className="sidebarButton" icon="bars" onClick={this.onSetSidebarOpen} />
             }
           </div>}
         </div>
@@ -57,7 +57,7 @@ class ResponsiveTopBar extends Component {
           <TableOfContents offsetTop={95} affix={false}/>
         </div>
       }
-
+  
       </div>
     )
   }
