@@ -93,7 +93,6 @@ export const pageQuery = graphql`
         sidebar
         showTitle
         hideAnchor
-        section
       }
     }
   }

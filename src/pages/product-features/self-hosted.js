@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import '../features.css'
 import '../../components/Layout/Layout.css'
 import Layout from '../../components/Layout'
-// import { LeftOutlined, RightOutLined } from '@ant-design/icons'
+import Button from 'antd/lib/button'
 
 
 function ProductFeatures() {
@@ -11,7 +11,7 @@ function ProductFeatures() {
         <Layout>
             <div className="headWrapper">
                 <Link to="/product-features">
-                    {/* <LeftOutlined /> */}
+                    <Button icon="left" />
                     <p>Back to Features</p>
                 </Link>
                 <div className="head">
@@ -19,7 +19,7 @@ function ProductFeatures() {
                 </div>
                 <Link to="/product-features">
                     <p>Next Feature</p>
-                    {/* <RightOutLined /> */}
+                    <Button icon="right" />
                 </Link>
                 
             </div>
