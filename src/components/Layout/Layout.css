@@ -721,8 +721,12 @@ header {
     border: none!important;
     padding: 0;
   }
-  .menuHeader {
-    padding: 0 20px!important;
+  header.menuHeader {
+    width: 100%!important;
+    padding: 0!important;
+  }
+  .menuHeaderWrapper {
+    padding: 0 20px;
   }
 }
 
