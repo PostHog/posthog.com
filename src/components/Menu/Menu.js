@@ -39,7 +39,10 @@ class Menu extends Component {
           return (
             <div className="headerItems">
               {sidebarDocked && (
-                <AntMenu mode="horizontal">
+                <AntMenu
+                  mode="horizontal"
+                  className={"ant-menu-navbar" + (isBlogPage ? "" : "ant-menu-navbar-blog")}
+                >
                   {menuItems.reverse().map(item => {
                     return item.name === "star-repo" ? (
                       <AntMenu.Item
@@ -54,12 +57,12 @@ class Menu extends Component {
                           key={item.link || item.a}
                         >
                           {item.a ? (
-                            <a href={item.a} className={(item.name === "Login" ? " login-btn" : " headerItem") + (isBlogPage && " blogPage")} >
-                            {item.name}
+                            <a href={item.a} className={isBlogPage ? "white " : "zambezi " + (item.name === "Login" && !isBlogPage ? " login-btn" : "")}>
+                              {item.name}
                             </a>
                           ) : (
-                            <Link to={item.link} className={"headerItem" + (isBlogPage && " blogPage")} >
-                            {item.name}
+                              <Link to={item.link} className={isBlogPage ? "white" : "zambezi"}>
+                                {item.name}
                               </Link>
                             )}
                         </AntMenu.Item>
@@ -79,16 +82,17 @@ class Menu extends Component {
               )}
               {menuOpen && !sidebarDocked && (
                 <div
-                  className="mobileHeader"
+                  id="navbar-responsive-wrapper"
                 >
                   <div className="burger-menu-spacer"></div>
                   <List
                     itemLayout="horizontal"
                     dataSource={menuItems}
+                    className="navbar-list"
                     rowKey={item => item.a || item.link}
                     renderItem={item => (
                       <List.Item
-                        className="mobileHeaderItem"
+                        className="responsive-menu-item"
                         key={menuItems.indexOf(item)}
                       >
                         {item.a ? (
@@ -96,7 +100,7 @@ class Menu extends Component {
                             title={
                               <a
                                 href={item.a}
-                                className={item.name === "Login" ? " login-btn" : ""}
+                                className={"responsive-menu-item-meta " + (item.name === "Login" ? " login-btn" : "")}
                                 onClick={() => {
                                   this.onChangeMenuState(menuItems.length)
                                 }}
@@ -116,6 +120,7 @@ class Menu extends Component {
                                 title={
                                   <Link
                                     to={item.link}
+                                    className="responsive-menu-item-meta"
                                     onClick={() => {
                                       this.onChangeMenuState(menuItems.length)
                                     }}
@@ -127,7 +132,6 @@ class Menu extends Component {
                             )}
                       </List.Item>
                     )}
-                    className="mobileHeaderList"
                   />
                 </div>
               )}
