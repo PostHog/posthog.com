@@ -138,20 +138,61 @@ main > div > div {
   width: 160px;
 }
 
+.headNav.top {
+  margin-left: -39px;
+  width: 190px;
+}
+
+.headNav.bottom {
+  width: 160px;
+}
+
 .headNav button {
   border: none!important;
   background: none!important;
   color: #ffffff;
   font-size: 22px;
   line-height: 22px;
-}
-
-.headNav.top {
-  margin-left: -39px;
+  transition: color .3s;
 }
 
 .headNav p {
   margin-bottom: 0!important;
   font-family: 'Gosha Sans', sans-serif;
   font-weight: bold;
+  font-size: 20px!important;
+  line-height: 54px;
+  transition: color .3s;
+}
+
+.headNav:hover p, .headNav:hover button {
+  color: #3F65FF!important;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row h2 {
+  font-family: "Gosha Sans", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+h2.number {
+  color: #F7A501;
+  font-size: 54px;
+}
+
+.rowContents {]
+  position: relative;
+  width: 240px;
+}
+
+.rowImg {
+  position: relative;
+  height: 600px;
+  width: 700px;
+  background-color: blue;
+
 }
