@@ -85,7 +85,7 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 
 ## UX Developer
 
-PostHog is building its first design team.
+PostHog is building its first design team. We are looking for a proactive, fast and passionate UX developer to take our design to a world class level. Our product and website went viral with a basic MVP, and we're determined to be best in class with our UX.
 
 The role would involve:
 
