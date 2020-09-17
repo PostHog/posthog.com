@@ -84,7 +84,7 @@ class Layout extends Component {
                           theme="light"
                           />  
                           {screenIsSmall &&
-                            onPostPage &&
+                            onPostPage && !isBlogPage &&
                             (!anchorHide || !sidebarHide) && (
                                 <ResponsiveTopBar />
                             )}
@@ -98,10 +98,19 @@ class Layout extends Component {
                         </AntdLayout.Header>
 
                       {/* content */}
+
                         <AntdLayout 
                         className={"layout " + (onPostPage ? "docsPageLayout " : "notDocsLayout ") + (isBlogPage && "blogPageLayout")}
                         theme="light">
                           <AntdLayout.Content>
+                          {isBlogPage && screenIsSmall &&
+                          <div>
+                            <h1>
+                              {pageTitle}
+                            </h1>
+                            <br />
+                          </div>
+                          }
                             <Container
                               sidebarDocked={!screenIsSmall}
                               onPostPage={onPostPage}

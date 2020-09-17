@@ -9,7 +9,7 @@ import { Menu as AntMenu } from 'antd'
 import StarRepoButton from '../StarRepoButton'
 import { withPrefix } from "gatsby-link"
 
-const isHomePage = () => { console.log(window.location.pathname === withPrefix("")); return window.location.pathname === withPrefix("") }
+const isHomePage = () => { return window.location.pathname === withPrefix("") }
 
 
 class Menu extends Component {
@@ -72,7 +72,7 @@ class Menu extends Component {
               )}
               {!sidebarDocked && (
                 <Button
-                  className={(isHomePage() ? "burger-btn homepage-burger-btn" : "burger-btn") + (isBlogPage && " blogpage-burger-btn") }
+                  className={(isHomePage() ? "burger-btn homepage-burger-btn" : "burger-btn ") + (isBlogPage && " blogpage-burger-btn") }
                   type="link"
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length);

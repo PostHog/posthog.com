@@ -5,35 +5,39 @@ import logo from '../../images/posthog-logo-150x29.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import { getMenuState } from '../../store/selectors'
 import { connect } from 'react-redux'
+import { withPrefix } from 'gatsby-link'
 
+const isHomePage = () => { return window.location.pathname === withPrefix("") }
+const isDocsPage = () => { return window.location.pathname.split("/")[1] === "docs" }
+const isBlogArticlePage = () => { 
+  const parsedUrl = window.location.pathname.split("/")
+  return parsedUrl[1] === "blog" && parsedUrl.length > 2
+}
 
 class Header extends Component {
+
   render() {
+
     const { sidebarDocked, onPostPage, sidebarHide, screenIsSmall, isBlogPage } = this.props
 
     return (
       <div className={"menuHeaderWrapper " + (!isBlogPage && !sidebarHide && !screenIsSmall && onPostPage && "noLogo")}>
-      {screenIsSmall ? (
-        (onPostPage && !isBlogPage) ? (
-        <Link
-          id="logo"
-          to="/">
-          <img alt="logo" src={logo} id="logo-image-header" />
-        </Link>
-        ) : (
-        <Link
-          id="logo"
-          to="/">
-          <img alt="logo" src={whiteLogo} id="logo-image-header"/>
-        </Link>
-        )):(
-      ((isBlogPage || !onPostPage) && (
+        {/* Desktop Docs pages = (onPostPage && !screenIsSmall) 
+            They already have a logo on the sidebar - skip adding the logo to navbar */}
+        {!(onPostPage && !screenIsSmall && isDocsPage()) && (
           <Link
-          id="logo"
-          to="/">
-            <img alt="logo" src={whiteLogo} id="logo-image-header"/>
+            id="logo"
+            to="/">
+            <img
+              alt="logo"
+              id="logo-image-header"
+              src={
+                (isHomePage() || isBlogArticlePage()) ? whiteLogo : logo
+              }
+            />
+            <h1>{String(isBlogArticlePage())}</h1>
           </Link>
-        )))}
+        )}
         <Menu
           sidebarDocked={sidebarDocked}
           sidebarHide={sidebarHide}
