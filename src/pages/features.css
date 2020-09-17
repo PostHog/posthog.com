@@ -85,6 +85,10 @@
 
 /* INTERNAL PAGES */
 
+.headWrapper {
+  width: 100%;
+}
+
 .head {
   border-radius: 50px;
   background-color: #35416B;
@@ -92,6 +96,45 @@
   height: 505px;
 }
 
+.headContents {
+  position: relative;
+  height: 100%;
+  width: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 100px;
+}
+
+.headContents p, .headContents h1, .headContents h3 {
+  color: #ffffff;
+  
+}
+
 main > div > div {
   margin: 0!important;
+}
+
+.headNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 160px;
+}
+
+.headNav button {
+  border: none!important;
+  background: none!important;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 22px;
+}
+
+.headNav.top {
+  margin-left: -39px;
+}
+
+.headNav p {
+  margin-bottom: 0!important;
 }

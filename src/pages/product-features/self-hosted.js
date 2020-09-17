@@ -10,18 +10,20 @@ function ProductFeatures() {
     return (
         <Layout>
             <div className="headWrapper">
-                <Link to="/product-features">
-                    <Button icon="left" />
-                    <p>Back to Features</p>
-                </Link>
                 <div className="head">
-                    <h1>Self Hosted</h1>
+                    <div className="headContents">
+                        <Link to="/product-features" className="headNav top">
+                            <Button icon="left" />
+                            <p>Back to Features</p>
+                        </Link>
+                        <h1>Self Hosted</h1>
+                        <h3>Powerful analytics on your own infrastructure, with all the features your team needs.</h3>
+                        <Link to="/product-features" className="headNav">
+                            <p>Next Feature</p>
+                            <Button icon="right" />
+                        </Link>
+                    </div>
                 </div>
-                <Link to="/product-features">
-                    <p>Next Feature</p>
-                    <Button icon="right" />
-                </Link>
-                
             </div>
             <div>
                 <h2>Take control of your data</h2>
