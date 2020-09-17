@@ -41,7 +41,7 @@ import { Helmet } from 'react-helmet'
 function IndexPage() {
   return (
     <div className="indexContainer">
-      <Layout containerStyle={{maxWidth: "auto", padding: 0}} >
+      <Layout containerStyle={{maxWidth: "auto", padding: 0}} isHomePage={true}>
         <SEO
           title="PostHog - Open-Source Product Analytics"
           description="Self-hosted product analytics stack, to deploy on your infrastructure."

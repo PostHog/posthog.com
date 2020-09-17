@@ -9,8 +9,6 @@ import { Menu as AntMenu } from 'antd'
 import StarRepoButton from '../StarRepoButton'
 import { withPrefix } from "gatsby-link"
 
-const isHomePage = () => { return window.location.pathname === withPrefix("") }
-
 
 class Menu extends Component {
   onChangeMenuState = nItem => {
@@ -18,7 +16,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { sidebarDocked, menuOpen, isBlogPage } = this.props
+    const { sidebarDocked, menuOpen, isBlogPage, isHomePage } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -72,7 +70,7 @@ class Menu extends Component {
               )}
               {!sidebarDocked && (
                 <Button
-                  className={(isHomePage() ? "burger-btn homepage-burger-btn" : "burger-btn ") + (isBlogPage && " blogpage-burger-btn") }
+                  className={(isHomePage ? "burger-btn homepage-burger-btn" : "burger-btn ") + (isBlogPage && " blogpage-burger-btn") }
                   type="link"
                   onClick={() => {
                     this.onChangeMenuState(menuItems.length);

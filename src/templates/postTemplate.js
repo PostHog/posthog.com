@@ -12,7 +12,7 @@ import {
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 import SEO from '../components/seo';
-import MediaQuery from 'react-responsive'
+import { withPrefix } from "gatsby-link"
 
 function addIndex(url) {
   const indexUrls = ['/docs', '/handbook']
@@ -26,7 +26,8 @@ function Template({
   onSetSidebarContentEntry,
   sidebarEntry,
   onSetAnchorHide,
-  onSetSidebarHide
+  onSetSidebarHide,
+  location
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html, excerpt, id } = markdownRemark
@@ -40,8 +41,20 @@ function Template({
   if (selectedKey !== id) onSidebarContentSelected(id)
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
+  const parsedPathname = location.pathname.split("/")
+  const isDocsPage = parsedPathname[1] === "docs"
+  const isBlogArticlePage = parsedPathname[1] === "blog" && parsedPathname.length > 2
+  
+
   return (
-    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} pageTitle={frontmatter.title}>
+    <Layout 
+      onPostPage={true} 
+      isBlogPage={frontmatter.sidebar === 'Blog'} 
+      pageTitle={frontmatter.title}
+      isHomePage={false}
+      isDocsPage={isDocsPage}
+      isBlogArticlePage={isBlogArticlePage}
+    >
       <SEO
         title={frontmatter.title + ' - PostHog docs'}
         description={frontmatter.description || excerpt}

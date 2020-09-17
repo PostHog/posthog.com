@@ -11,11 +11,8 @@ import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import MediaQuery from 'react-responsive'
 import { default as AntdLayout } from 'antd/lib/layout'
-import Col from 'antd/lib/col'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
-import blogBackground from '../../images/blog-background.svg'
-import { withPrefix } from "gatsby-link"
 import NewsletterForm from '../NewsletterForm'
 
 class Layout extends Component {
@@ -33,7 +30,10 @@ class Layout extends Component {
       containerStyle={},
       expandedKeys,
       isBlogPage,
-      pageTitle
+      pageTitle,
+      isDocsPage,
+      isHomePage,
+      isBlogArticlePage
     } = this.props
 
     return (
@@ -81,6 +81,9 @@ class Layout extends Component {
                           onPostPage={onPostPage}
                           screenIsSmall={screenIsSmall}
                           isBlogPage={isBlogPage}
+                          isHomePage={isHomePage}
+                          isDocsPage={isDocsPage}
+                          isBlogArticlePage={isBlogArticlePage}
                           theme="light"
                           />  
                           {screenIsSmall &&
