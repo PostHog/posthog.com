@@ -10,7 +10,7 @@ function ProductFeatures() {
     return (
         <Layout>
             <div className="headWrapper">
-                <div className="head">
+                <div className="head blue">
                     <div className="headContents">
                         <Link to="/product-features" className="headNav top">
                             <Button icon="left" />
