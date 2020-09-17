@@ -36,16 +36,19 @@ import whatsNewPhone from '../images/whats-new-phone.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
+//import indexCSS from '!!raw-loader!./../pages/index.css'
 
 function IndexPage() {
   return (
     <div className="indexContainer">
-      <Layout containerStyle={{maxWidth: "auto", padding: 0}} >
+      <Layout containerStyle={{maxWidth: "auto", padding: 0}} isHomePage={true}>
         <SEO
           title="PostHog - Open-Source Product Analytics"
           description="Self-hosted product analytics stack, to deploy on your infrastructure."
         />
-        <Helmet bodyAttributes={{ class: 'homepage' }} />
+        <Helmet bodyAttributes={{ class: 'homepage' }}>
+          {/* <style>{indexCSS}</style> */}
+        </Helmet>
         <div className="">
         <div className='topSectionWrapperMobile'>
           <div className="topPageWrapper wrapper">

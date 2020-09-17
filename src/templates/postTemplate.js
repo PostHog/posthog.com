@@ -12,9 +12,9 @@ import {
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 import SEO from '../components/seo';
-import MediaQuery from 'react-responsive'
+import { withPrefix } from "gatsby-link"
 
-function addIndex (url) {
+function addIndex(url) {
   const indexUrls = ['/docs', '/handbook']
   return `${url}${indexUrls.includes(url) ? '/index' : ''}`
 }
@@ -26,7 +26,8 @@ function Template({
   onSetSidebarContentEntry,
   sidebarEntry,
   onSetAnchorHide,
-  onSetSidebarHide
+  onSetSidebarHide,
+  location
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html, excerpt, id } = markdownRemark
@@ -40,24 +41,36 @@ function Template({
   if (selectedKey !== id) onSidebarContentSelected(id)
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
+  const parsedPathname = location.pathname.split("/")
+  const isDocsPage = parsedPathname[1] === "docs"
+  const isBlogArticlePage = parsedPathname[1] === "blog" && parsedPathname.length > 2
+  
+
   return (
-    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'}>
-    <SEO
-      title={frontmatter.title + ' - PostHog docs'}
-      description={frontmatter.description || excerpt}
-      pathname={markdownRemark.fields.slug}
-      article
-    />
-    <div className="docsPagesContainer">
-      <div className="docsPages">
-        { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
-        <div
-          className="docsPagesContent"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+    <Layout 
+      onPostPage={true} 
+      isBlogPage={frontmatter.sidebar === 'Blog'} 
+      pageTitle={frontmatter.title}
+      isHomePage={false}
+      isDocsPage={isDocsPage}
+      isBlogArticlePage={isBlogArticlePage}
+    >
+      <SEO
+        title={frontmatter.title + ' - PostHog docs'}
+        description={frontmatter.description || excerpt}
+        pathname={markdownRemark.fields.slug}
+        article
+      />
+      <div className="docsPagesContainer">
+        <div className="docsPages">
+          {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && <h1 align="center">{frontmatter.title}</h1>}
+          <div
+            className="docsPagesContent"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </div>
+        {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
       </div>
-      {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
-    </div>
     </Layout>
   )
 }
@@ -76,7 +89,7 @@ const mapDispatchToProps = {
   onSetSidebarHide
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Template)
+export default connect(mapStateToProps, mapDispatchToProps)(Template)
 
 export const pageQuery = graphql`
   query($path: String!) {
