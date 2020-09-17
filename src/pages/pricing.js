@@ -5,7 +5,7 @@ import queryString from 'query-string'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Card, Collapse } from 'antd'
 import SEO from '../components/seo'
-import './pricing.css'
+import './styles/pricing.css'
 import 'antd/lib/collapse/style/css'
 import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
@@ -174,7 +174,9 @@ const PricingPage = () => {
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <Row gutter={[24, 24]}>
                 <Col span={24} align="middle">
-                    <h1 className="p-title p-text-primary">Affordable product analytics for everyone</h1>
+                    <h1 className="p-title p-text-primary pricing-header-text">
+                        Affordable product analytics for everyone
+                    </h1>
                 </Col>
             </Row>
 
