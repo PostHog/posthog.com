@@ -11,7 +11,7 @@ import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgRocket from '../images/rocket.svg'
 import imgChevronRight from '../images/chevron-right.svg'
-import { plans, faqs } from './data/pricing-data.js'
+import { plans, faqs } from '../pages-content/pricing-data.js'
 
 const PricingPage = () => {
     const [state, setState] = useState({ planOptions: 'cloud' })
