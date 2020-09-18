@@ -4,7 +4,7 @@ import { getMenuState, isSidebarHide, isAnchorHide } from '../../store/selectors
 
 class Container extends Component {
     render() {
-        const { sidebarDocked, onPostPage, sidebarHide, anchorHide, className, containerStyle = {} } = this.props
+        const { onPostPage, className, containerStyle = {} } = this.props
 
         return (
             <div className={className + ' ' + (onPostPage && ' docs-container')}>

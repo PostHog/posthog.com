@@ -50,7 +50,6 @@ class SidebarContents extends Component {
                 render={(data) => {
                     const entries = data.allSidebarsJson.nodes
                     const pages = data.allMarkdownRemark.nodes
-                    const selectedKeys = [selectedKey]
                     let dir = []
                     let tree = null
                     let defaultOpenKeys = []

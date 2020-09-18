@@ -7,7 +7,6 @@ import List from 'antd/lib/list'
 import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
 import StarRepoButton from '../StarRepoButton'
-import { withPrefix } from 'gatsby-link'
 
 class Menu extends Component {
     onChangeMenuState = (nItem) => {

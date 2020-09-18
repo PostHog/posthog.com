@@ -28,7 +28,6 @@ class Layout extends Component {
             anchorHide,
             className,
             containerStyle = {},
-            expandedKeys,
             isBlogPage,
             pageTitle,
             isDocsPage,
