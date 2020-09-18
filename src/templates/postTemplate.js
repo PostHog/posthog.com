@@ -1,99 +1,114 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/Layout";
+import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../components/Layout'
 import { connect } from 'react-redux'
-import "katex/dist/katex.min.css"
+import 'katex/dist/katex.min.css'
 import {
-  onSidebarContentSelected,
-  onSetSidebarContentEntry,
-  onSetAnchorHide,
-  onSetSidebarHide,
+    onSidebarContentSelected,
+    onSetSidebarContentEntry,
+    onSetAnchorHide,
+    onSetSidebarHide,
 } from '../actions/layout'
 import { DocsFooter } from '../components/Footer/DocsFooter'
-import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
-import SEO from '../components/seo';
-import MediaQuery from 'react-responsive'
+import { getSidebarSelectedKey, getSidebarEntry } from '../store/selectors'
+import SEO from '../components/seo'
+import { withPrefix } from 'gatsby-link'
 
-function addIndex (url) {
-  const indexUrls = ['/docs', '/handbook']
-  return `${url}${indexUrls.includes(url) ? '/index' : ''}`
+function addIndex(url) {
+    const indexUrls = ['/docs', '/handbook']
+    return `${url}${indexUrls.includes(url) ? '/index' : ''}`
 }
 
 function Template({
-  data, // this prop will be injected by the GraphQL query below.
-  onSidebarContentSelected,
-  selectedKey,
-  onSetSidebarContentEntry,
-  sidebarEntry,
-  onSetAnchorHide,
-  onSetSidebarHide
+    data, // this prop will be injected by the GraphQL query below.
+    onSidebarContentSelected,
+    selectedKey,
+    onSetSidebarContentEntry,
+    sidebarEntry,
+    onSetAnchorHide,
+    onSetSidebarHide,
+    location,
 }) {
-  const { markdownRemark } = data // data.markdownRemark holds our post data
-  const { frontmatter, html, excerpt, id } = markdownRemark
+    const { markdownRemark } = data // data.markdownRemark holds our post data
+    const { frontmatter, html, excerpt, id } = markdownRemark
 
-  const hideAnchor = (frontmatter.hideAnchor === null) ? false : frontmatter.hideAnchor
-  const hideSidebar = (frontmatter.sidebar === null) ? true : false
+    const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
+    const hideSidebar = frontmatter.sidebar === null ? true : false
 
-  onSetAnchorHide(hideAnchor)
-  onSetSidebarHide(hideSidebar)
+    onSetAnchorHide(hideAnchor)
+    onSetSidebarHide(hideSidebar)
 
-  if (selectedKey !== id) onSidebarContentSelected(id)
-  if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
+    if (selectedKey !== id) onSidebarContentSelected(id)
+    if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
-  return (
-    <Layout onPostPage={true} isBlogPage={frontmatter.sidebar === 'Blog'} isFeaturesPage={frontmatter.section === 'product-features'}>
-    <SEO
-      title={frontmatter.title + (frontmatter.section !== 'product-features' ? ' - PostHog docs' : '')}
-      description={frontmatter.description || excerpt}
-      pathname={markdownRemark.fields.slug}
-      article
-    />
-    <div className={frontmatter.section === 'product-features' ? "featuresPagesContainer" : "docsPagesContainer"}>
-      <div className={frontmatter.section === 'product-features' ? "featuresPages" : "docsPages"}>
-        { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
-        <div
-          className={frontmatter.section === 'product-features' ? "featuresPagesContent" : "docsPagesContent"}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      </div>
-      {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />}
-    </div>
-    </Layout>
-  )
+    const parsedPathname = location.pathname.split('/')
+    const isDocsPage = parsedPathname[1] === 'docs'
+    const isBlogArticlePage = parsedPathname[1] === 'blog' && parsedPathname.length > 2
+    const isFeaturesPage = parsedPathname[1] === 'product-features'
+
+    return (
+        <Layout
+            onPostPage={true}
+            isBlogPage={frontmatter.sidebar === 'Blog'}
+            pageTitle={frontmatter.title}
+            isHomePage={false}
+            isDocsPage={isDocsPage}
+            isBlogArticlePage={isBlogArticlePage}
+            isFeaturesPage={isFeaturesPage}
+        >
+            <SEO
+                title={frontmatter.title + ' - PostHog docs'}
+                description={frontmatter.description || excerpt}
+                pathname={markdownRemark.fields.slug}
+                article
+            />
+            <div className="docsPagesContainer">
+                <div className="docsPages">
+                    {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
+                        <h1 align="center">{frontmatter.title}</h1>
+                    )}
+                    <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
+                </div>
+                {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && (
+                    <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
+                )}
+            </div>
+        </Layout>
+    )
 }
 
 const mapStateToProps = (state) => {
-  return {
-    selectedKey: getSidebarSelectedKey(state),
-    sidebarEntry: getSidebarEntry(state)
-  }
+    return {
+        selectedKey: getSidebarSelectedKey(state),
+        sidebarEntry: getSidebarEntry(state),
+    }
 }
 
 const mapDispatchToProps = {
-  onSidebarContentSelected,
-  onSetSidebarContentEntry,
-  onSetAnchorHide,
-  onSetSidebarHide
+    onSidebarContentSelected,
+    onSetSidebarContentEntry,
+    onSetAnchorHide,
+    onSetSidebarHide,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Template)
+export default connect(mapStateToProps, mapDispatchToProps)(Template)
 
 export const pageQuery = graphql`
-  query($path: String!) {
-    markdownRemark(fields: { slug: { eq: $path} }) {
-      fields {
-        slug
-      }
-      id
-      html
-      excerpt(pruneLength: 150)
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        title
-        sidebar
-        showTitle
-        hideAnchor
-      }
+    query($path: String!) {
+        markdownRemark(fields: { slug: { eq: $path } }) {
+            fields {
+                slug
+            }
+            id
+            html
+            excerpt(pruneLength: 150)
+            frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                sidebar
+                showTitle
+                hideAnchor
+            }
+        }
     }
-  }
 `

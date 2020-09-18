@@ -1,29 +1,29 @@
 [
-  { 
-    "name": "Docs",
-    "link":  "/docs"
-  },
-  { 
-    "name": "Pricing",
-    "link":  "/pricing"
-  },
-  {
-  	"name":"Install",
-  	"link":"/docs/deployment"
-  },
-  { 
-    "name": "Free Trial",
-    "link":  "/trial"
-  },
-  { 
-    "name": "GitHub",
-    "a":  "https://github.com/PostHog/posthog"
-  },
-  {
-    "name": "star-repo"
-  },
-  { 
-    "name": "Login",
-    "a":  "https://app.posthog.com/login"
-  }
+    {
+        "name": "Docs",
+        "link": "/docs"
+    },
+    {
+        "name": "Pricing",
+        "link": "/pricing"
+    },
+    {
+        "name": "Install",
+        "link": "/docs/deployment"
+    },
+    {
+        "name": "Free Trial",
+        "link": "/trial"
+    },
+    {
+        "name": "GitHub",
+        "a": "https://github.com/PostHog/posthog"
+    },
+    {
+        "name": "star-repo"
+    },
+    {
+        "name": "Login",
+        "a": "https://app.posthog.com/login"
+    }
 ]

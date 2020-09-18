@@ -1,7 +1,3 @@
-.bonjour {
-    content: 'honhonohon';
-}
-
 .features.table-borders td, .features.table-borders th {
   border: none!important;
   background-color: grey;
@@ -85,17 +81,17 @@
 
 /* INTERNAL PAGES */
 
+/* GENERAL */
+
+/* MAIN PAGE + ELEMENTS */
 .featuresWrapper {
   width: 100%;
 }
 
-.head {
-  border-radius: 50px;
-  background-color: #35416B;
-  width: calc(1390/1440 * 100vw);
-  max-width: 1390px;
-  height: 505px;
-  margin: 0 25px 40px;
+@media screen and (min-width: 1440px) {
+  .featuresWrapper {
+    padding: 0 calc((100vw - 1440px) / 2);
+  }
 }
 
 .blue {
@@ -108,6 +104,18 @@
 
 .yellow {
   background-color: #F7A501;
+}
+
+
+/* HEAD */
+
+.head {
+  border-radius: 50px;
+  background-color: #35416B;
+  width: calc(100vw - 50px);
+  max-width: 1390px;
+  height: 505px;
+  margin: 0 25px 40px;
 }
 
 .headContents {
@@ -171,49 +179,138 @@ main > div > div {
   color: #3F65FF!important;
 }
 
-@media screen and (min-width: 1440px) {
-  .featuresWrapper {
-    padding: 0 calc((100vw - 1440px) / 2)
-  }
-}
+/* ROWS */
 
-.row {
+.featuresRow {
+  position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
   width: 100vw;
   max-width: 1440px;
+  height: 700px;
+  margin-bottom: 40px;
 }
 
-.row h2 {
+.featuresRow h2 {
   font-family: "Gosha Sans", Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
 
-h2.number {
+h2.number.row01, h2.number.row03 {
   color: #F7A501;
   font-size: 54px;
+  margin-top: 4px!important;
+  position: absolute;
+  left: calc(3 / 24 * 100vw);
+  width: calc(1 / 12 * 1440px);
 }
 
-.rowContents {
-  position: relative;
-  width: 240px;
+h2.number.row02 {
+  color: #F7A501;
+  font-size: 54px;
+  margin-top: 4px!important;
+  position: absolute;
+  left: calc(15 / 24 * 100vw);
+  width: calc(1 / 12 * 1440px);
+}
+
+.rowContents.row01, .rowContents.row03 {
+  position: absolute;
+  width: calc(6/24 * 100vw);
+  min-width: 284px;
+  max-width: calc(6/24 * 1440px);
+  left: calc(5 / 24 * 100vw);
+  min-height: 700px;
+  height: auto;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+
+.rowContents.row02 {
+  position: absolute;
+  width: calc(6/24 * 100vw);
+  min-width: 284px;
+  max-width: calc(6/24 * 1440px);
+  left: calc(17 / 24 * 100vw);
   height: 600px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  padding-top: 10px;
 }
 
-.rowImg {
-  position: relative;
-  height: 600px;
-  width: 700px;
-  background-color: blue;
+.redLine {
+  width: 118px;
+  border-width: 8px;
+  border-style: solid;
+  border-radius: 0px 10px 0px 0px;
+  margin: 25px 0;
+  border-color: #f96132;
 }
+
+.rowImg.row01, .rowImg.row03 {
+  position: absolute;
+  height: 700px;
+  width: 50vw;
+  left: 50vw;
+  background-position: 100px center;
+}
+
+.rowImg.row02 {
+  position: absolute;
+  height: 700px;
+  width: 720px;
+  left: calc((100vw - 1440px) / 2 + (1 / 24 * 100vw));
+  background-position: right center;
+}
+
+@media screen and (min-width: 1440px) {
+  h2.number.row01, h2.number.row03 {
+    left: calc(3/24 * 1440px);
+  }
+  h2.number.row02 {
+    left: calc(15/24 * 1440px );
+  }
+  .rowContents.row01, .rowContents.row03 {
+    left: calc(5/24 * 1440px);
+  }
+  .rowContents.row02 {
+    left: calc(17/24 * 1440px);
+  }
+  .rowImg.row01, .rowImg.row03 {
+    left: 720px;
+  }
+  .rowImg.row02 {
+    left: calc(1/24 * 1440px);
+  }
+}
+
+/* INDIVIDUAL STYLING */
 
 .head.selfHosted {
   background-image: url('../images/self-hosted-head.svg')!important;
   background-size: 495px 459px;
-  background-position: 700px top;
+  background-position: 820px top;
+  background-repeat: no-repeat;
+}
+
+.rowImg.row01.selfHosted {
+  background-image: url('../images/self-hosted-1.svg')!important;
+  background-size: 686px 547px ;
+  background-repeat: no-repeat;
+}
+
+.rowImg.row02.selfHosted {
+  background-image: url('../images/self-hosted-2.svg')!important;
+  background-size: 671px 584px;
+  background-repeat: no-repeat;
+}
+
+.rowImg.row03.selfHosted {
+  background-image: url('../images/self-hosted-3.svg')!important;
+  background-size: 540px 701px;
   background-repeat: no-repeat;
 }

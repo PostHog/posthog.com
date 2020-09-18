@@ -25,29 +25,32 @@ function ProductFeatures() {
                     </div>
                     <div className="headImg selfHosted"/>
                 </div>
-                <div className="row01 row">
-                    <h2 className="number">01</h2>
+                <div className="row01 featuresRow">
+                    <h2 className="number row01">01</h2>
                     <div className="rowContents row01">
                         <h2>Take control of your data</h2>
+                        <hr className="redLine"/>
                         <p>When you self-host, your data is all yours. This means your users’ data is not sent to any third-party, not even PostHog. The privacy of your users is preserved, and it is easier to comply with legislation such as GDPR and cookie laws.</p>
                     </div>
-                    <div className="rowImg row01"/>
+                    <div className="rowImg row01 selfHosted"/>
                 </div>
-                <div className="row02 row">
-                    <div className="rowImg row02"/>
-                    <h2 className="number">02</h2>
+                <div className="row02 featuresRow">
+                    <div className="rowImg row02 selfHosted"/>
+                    <h2 className="number row02">02</h2>
                     <div className="rowContents row02">
                         <h2>Deploy in your own way</h2>
+                        <hr className="redLine"/>
                         <p>We strive to make our deployment process as simple as possible. As a result, we offer a wide variety of ways to deploy PostHog, so you can pick the one that suits you best. Additionally, it’s up to you where you deploy it! This gives you more freedom and prevents PostHog from disrupting your tech stack.</p>
                     </div>
                 </div>
-                <div className="row03 row">
-                    <h2 className="number">03</h2>
+                <div className="row03 featuresRow">
+                    <h2 className="number row03">03</h2>
                     <div className="rowContents row03">
                         <h2>Perform powerful analytics your entire team can use</h2>
+                        <hr className="redLine"/>
                         <p>PostHog provides self-serve analytics for any Engineer or Product Manager. The interface is simple for any user - no data analysts needed. With PostHog, you have all the benefits of self-building plus the support of a world-class team ensuring you have all the features you need. In addition, by being open source, PostHog ensures that our tool is secure and battle-tested.</p>
                     </div>
-                    <div className="rowImg row03"/>
+                    <div className="rowImg row03 selfHosted"/>
                 </div>
             </div>
                 
