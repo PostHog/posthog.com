@@ -711,54 +711,6 @@ header {
     justify-content: flex-end;
 }
 
-@media screen and (max-width: 1076px) {
-    .docsHeader {
-        background-color: #f9f9f9;
-        border-bottom: 6px solid #c4c4c4;
-        padding: 0;
-    }
-
-    .blogHeader {
-        background-image: none !important;
-        height: 64px;
-        border: none !important;
-        padding: 0;
-    }
-
-    header.menuHeader {
-        width: 100% !important;
-        padding: 0 !important;
-    }
-
-    .menuHeaderWrapper {
-        padding: 0 20px;
-    }
-
-    .blogHeader {
-        background-color: #577bfb !important;
-        height: 64px !important;
-    }
-
-    .docsPageLayout main {
-        padding: 3rem 0 0;
-    }
-
-    .headerItems ul {
-        flex-direction: column;
-    }
-
-    .mobileHeaderItem {
-        width: 100vw;
-        border: none !important;
-    }
-
-    .mobileHeaderItem a {
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 32px;
-    }
-}
-
 .headerItems {
     margin-right: 20px;
 }
@@ -1407,4 +1359,52 @@ code {
     width: 100%;
     float: left;
     background-color: 'white';
+}
+
+@media screen and (max-width: 1076px) {
+    .docsHeader {
+        background-color: #f9f9f9;
+        border-bottom: 6px solid #c4c4c4;
+        padding: 0;
+    }
+
+    .blogHeader {
+        background-image: none !important;
+        height: 64px;
+        border: none !important;
+        padding: 0;
+    }
+
+    header.menuHeader {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .menuHeaderWrapper {
+        padding: 0 20px;
+    }
+
+    .blogHeader {
+        background-color: #577bfb !important;
+        height: 64px !important;
+    }
+
+    .docsPageLayout main {
+        padding: 3rem 0 0;
+    }
+
+    .headerItems ul {
+        flex-direction: column;
+    }
+
+    .mobileHeaderItem {
+        width: 100vw;
+        border: none !important;
+    }
+
+    .mobileHeaderItem a {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 32px;
+    }
 }
