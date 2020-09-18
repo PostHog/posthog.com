@@ -93,9 +93,9 @@ class Menu extends Component {
                                         rowKey={(item) => item.a || item.link}
                                         renderItem={(item) => (
                                             <List.Item className="responsive-menu-item" key={menuItems.indexOf(item)}>
-                                                {item.a ? (
-                                                    <List.Item.Meta
-                                                        title={
+                                                <List.Item.Meta
+                                                    title={
+                                                        item.a ? (
                                                             <a
                                                                 href={item.a}
                                                                 className={
@@ -108,13 +108,9 @@ class Menu extends Component {
                                                             >
                                                                 {item.name}
                                                             </a>
-                                                        }
-                                                    />
-                                                ) : item.name === 'star-repo' ? (
-                                                    <List.Item.Meta title={<StarRepoButton></StarRepoButton>} />
-                                                ) : (
-                                                    <List.Item.Meta
-                                                        title={
+                                                        ) : item.name === 'star-repo' ? (
+                                                            <StarRepoButton></StarRepoButton>
+                                                        ) : (
                                                             <Link
                                                                 to={item.link}
                                                                 className="responsive-menu-item-meta"
@@ -124,9 +120,9 @@ class Menu extends Component {
                                                             >
                                                                 {item.name}
                                                             </Link>
-                                                        }
-                                                    />
-                                                )}
+                                                        )
+                                                    }
+                                                />
                                             </List.Item>
                                         )}
                                     />
