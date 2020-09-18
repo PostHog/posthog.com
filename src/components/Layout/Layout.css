@@ -717,22 +717,45 @@ header {
         border-bottom: 6px solid #c4c4c4;
         padding: 0;
     }
+
     .blogHeader {
         background-image: none !important;
         height: 64px;
         border: none !important;
         padding: 0;
     }
+
     header.menuHeader {
         width: 100% !important;
         padding: 0 !important;
     }
+
     .menuHeaderWrapper {
         padding: 0 20px;
     }
+
     .blogHeader {
         background-color: #577bfb !important;
         height: 64px !important;
+    }
+
+    .docsPageLayout main {
+        padding: 3rem 0 0;
+    }
+
+    .headerItems ul {
+        flex-direction: column;
+    }
+
+    .mobileHeaderItem {
+        width: 100vw;
+        border: none !important;
+    }
+
+    .mobileHeaderItem a {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 32px;
     }
 }
 
@@ -806,21 +829,6 @@ header {
     width: 100%;
     float: left;
     background-color: #ffffff;
-}
-
-@media screen and (max-width: 1076px) {
-    .headerItems ul {
-        flex-direction: column;
-    }
-    .mobileHeaderItem {
-        width: 100vw;
-        border: none !important;
-    }
-    .mobileHeaderItem a {
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 32px;
-    }
 }
 
 #logo {
@@ -1152,12 +1160,6 @@ a.middle {
     min-height: 280px;
     padding: 3rem 0% 0 10%;
     width: 100%;
-}
-
-@media screen and (max-width: 1076px) {
-    .docsPageLayout main {
-        padding: 3rem 0 0;
-    }
 }
 
 .docsPageLayout main > .container {
