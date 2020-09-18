@@ -73,8 +73,6 @@ class TableOfContents extends Component {
         return (
             <Anchor onClick={this.onSetAnchorOpen} offsetTop={offsetTop} affix={affix}>
                 {loop(anchors)}
-                {/* {(anchors.length > 1 && loop(anchors)) ||
-         (anchors.length === 1 && loop(anchors[0].children))} */}
             </Anchor>
         )
     }
