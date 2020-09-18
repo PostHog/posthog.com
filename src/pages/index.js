@@ -272,8 +272,6 @@ function IndexPage() {
                             </h2>
                             <hr className="blueLine" />
                             <p className="darkBlueText">
-                                {' '}
-                                {/* eslint-disable-react/no-unescaped-entities */}
                                 Huge user base? No problem. Eliminate the data protection risks and costs associated
                                 with sending millions of users' data to 3rd parties.
                             </p>
