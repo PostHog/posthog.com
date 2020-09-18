@@ -54,7 +54,8 @@
         "husky": "^4.2.5",
         "lint-staged": "^10.2.12",
         "mem": "^5.1.1",
-        "prettier": "^2.1.0"
+        "prettier": "^2.1.0",
+        "eslint": "^7.9.0"
     },
     "husky": {
         "hooks": {
@@ -62,6 +63,7 @@
         }
     },
     "lint-staged": {
-        "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write"
+        "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
+        "*.{js,ts,tsx}": "eslint"
     }
 }
