@@ -25,7 +25,7 @@ class ResponsiveTopBar extends Component {
     }
 
     render() {
-        const { sidebarOpen, anchorOpen, menuOpen, nMenuItem, sidebarHide, anchorHide } = this.props
+        const { sidebarOpen, anchorOpen, sidebarHide } = this.props
 
         return (
             <div>

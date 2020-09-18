@@ -12,7 +12,6 @@ import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
 import shelf4 from '../images/shelf-4.svg'
 import shelf2 from '../images/shelf-2.svg'
-import shelf5 from '../images/shelf-5.svg'
 import rays from '../images/rays.svg'
 import coolHedgehog from '../images/cool-hedgehog.svg'
 import stackAndroid from '../images/stack-android.svg'
@@ -25,18 +24,9 @@ import stackGatsby from '../images/stack-gatsby.svg'
 import stackJavascript from '../images/stack-javascript.svg'
 import stackGo from '../images/stack-go.svg'
 import stackApi from '../images/stack-api.svg'
-/* import installHeroku from '../images/install-heroku.svg'
-import installDocker from '../images/install-docker.svg'
-import installAws from '../images/install-aws.svg'
-import installKubernetes from '../images/install-kubernetes.svg'
-import githubButton from '../images/github-button.svg'
-import slackButton from '../images/slack-button.svg'
-import roadmapButton from '../images/roadmap-button.svg'
-import whatsNewPhone from '../images/whats-new-phone.svg' */
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
-//import indexCSS from '!!raw-loader!./../pages/index.css'
 
 function IndexPage() {
     return (
@@ -324,7 +314,7 @@ function IndexPage() {
                                     Start my 30-day free trial
                                 </Button>
                             </Link>
-                            <img src={rays} />
+                            <img alt="Sun rays" src={rays} />
                         </div>
                     </div>
                 </div>
@@ -380,7 +370,7 @@ function IndexPage() {
                             </div>
                         </div>
                         <div className="coolHedgehog">
-                            <img src={coolHedgehog} />
+                            <img alt="Cool hedgehog" src={coolHedgehog} />
                         </div>
                     </div>
                 </div>

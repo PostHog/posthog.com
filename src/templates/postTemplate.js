@@ -12,7 +12,6 @@ import {
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from '../store/selectors'
 import SEO from '../components/seo'
-import { withPrefix } from 'gatsby-link'
 
 function addIndex(url) {
     const indexUrls = ['/docs', '/handbook']
