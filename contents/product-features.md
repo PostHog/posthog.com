@@ -4,7 +4,7 @@ sidebar: null
 showTitle: true
 ---
 
-Watch a [walk through video](https://youtu.be/vGy9gzMAAes-Y?t=35s) through of the product functionality:
+To watch a demo video showcasing some of our main features, scroll over to [Features Demo Video](#features-demo-video).
 
 Below is a table of PostHog features and how this compares with the functionality in common alternatives.
 
@@ -44,3 +44,23 @@ Below is a table of PostHog features and how this compares with the functionalit
 
 \* Full parity has not been achieved for this feature yet.
 You can follow our progress through our [public roadmap](https://github.com/orgs/PostHog/projects/1).
+
+<br />
+
+#### Features Demo Video
+
+<br />
+
+<span class="centered">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</span>
+
+<br />
+
+<small class="centered">
+
+_For video notes marking when each feature is showcased, watch the video [on YouTube](https://www.youtube.com/watch?v=aUILrrrlu50)._
+
+</small>

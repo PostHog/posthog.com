@@ -14,4 +14,3 @@ const StarRepoButton = () => (
 )
 
 export default StarRepoButton
-
