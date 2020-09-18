@@ -83,22 +83,22 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 
 # Open Roles
 
-## UX Developer
+## UX Developer/Engineer
 
-PostHog is building its first design team. We are looking for a proactive, fast and passionate UX developer to take our design to a world class level. Our product and website went viral with a basic MVP, and we're determined to be best in class with our UX.
+PostHog is building its first design team. We are looking for a proactive, fast, and passionate UX Developer to take our design to a world class level. Our product and website went viral with a basic MVP, and we're determined to be best-in-class with our UX.
 
 The role would involve:
 
 * Collaborating with our Designer to make sure we get a cool '80s vibe into our website and docs!
-* Implementing design changes to our website, docs and product.
-* Collaborating with our engineering team to ensure our product is simple and intuitive even to answer complex analytics queries.
+* Implementing design changes to our website, docs, and product.
+* Collaborating with our Engineering team to ensure our product is simple and intuitive even to answer complex analytics queries.
 
-The perfect candidate for this role must be as comfortable working with a designer in Figma as they are creating components and working in React. It will involve a lot of rolling up sleeves and getting stuck in.
+The perfect candidate for this role must be as comfortable working with a designer in Figma (where our designer creates components) and working in React. It will involve a lot of rolling up sleeves and getting stuck in.
 
-### Hiring process
+### Hiring Process
 
 * You'll have a 30 minute phone-call with our designer Lottie
-* You'll meet our CEO James, our CTO Tim and one of our developers
+* You'll meet our CEO James, our CTO Tim, and one of our developers
 * We'll pay you contracting rates for 3 days to do some work on PostHog. This will give you a chance to learn how we'd work with you, and for us to see how you work. You'll also end up with some open source contributions.
 * We make a decision with you
 
@@ -108,7 +108,7 @@ Email a thoughtful cover letter to [james@posthog.com](mailto:james@posthog.com)
 
 * What makes you a great early hire for this role
 * Relevant experience/projects you've done (including links if possible)
-* Links to your GitHub / LinkedIn / resume (optional)
+* Links to your GitHub / LinkedIn / Resume (optional)
 * How you found us
 
 ## Fullstack Engineer
