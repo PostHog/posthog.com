@@ -11,10 +11,6 @@ import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgRocket from '../images/rocket.svg'
 import imgChevronRight from '../images/chevron-right.svg'
-import imgHobby from '../images/plan-hobby.svg'
-import imgStarter from '../images/plan-starter.svg'
-import imgGrowth from '../images/plan-growth.svg'
-import imgEnterprise from '../images/plan-enterprise.svg'
 import { plans, faqs } from '../pages-content/pricing-data.js'
 
 const PricingPage = () => {

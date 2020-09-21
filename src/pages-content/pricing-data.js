@@ -1,3 +1,8 @@
+import imgHobby from '../images/plan-hobby.svg'
+import imgStarter from '../images/plan-starter.svg'
+import imgGrowth from '../images/plan-growth.svg'
+import imgEnterprise from '../images/plan-enterprise.svg'
+
 const plans = {
     cloud: [
         {
