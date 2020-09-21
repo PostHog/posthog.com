@@ -53,6 +53,7 @@ function Template({
             isHomePage={false}
             isDocsPage={isDocsPage}
             isBlogArticlePage={isBlogArticlePage}
+            isHandbookPage={isHandbookPage}
         >
             <SEO
                 title={frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')}
