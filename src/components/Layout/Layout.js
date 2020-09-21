@@ -33,6 +33,7 @@ class Layout extends Component {
             isDocsPage,
             isHomePage,
             isBlogArticlePage,
+            isHandbookPage,
         } = this.props
 
         return (
@@ -86,6 +87,7 @@ class Layout extends Component {
                                                     isHomePage={isHomePage}
                                                     isDocsPage={isDocsPage}
                                                     isBlogArticlePage={isBlogArticlePage}
+                                                    isHandbookPage={isHandbookPage}
                                                     theme="light"
                                                 />
                                                 {screenIsSmall &&
