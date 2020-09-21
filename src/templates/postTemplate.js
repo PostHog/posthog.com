@@ -43,6 +43,7 @@ function Template({
     const parsedPathname = location.pathname.split('/')
     const isDocsPage = parsedPathname[1] === 'docs'
     const isBlogArticlePage = parsedPathname[1] === 'blog' && parsedPathname.length > 2
+    const isHandbookPage = parsedPathname[1] === 'handbook'
 
     return (
         <Layout
@@ -54,7 +55,7 @@ function Template({
             isBlogArticlePage={isBlogArticlePage}
         >
             <SEO
-                title={frontmatter.title + ' - PostHog docs'}
+                title={frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')}
                 description={frontmatter.description || excerpt}
                 pathname={markdownRemark.fields.slug}
                 article
