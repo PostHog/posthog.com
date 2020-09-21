@@ -105,10 +105,13 @@
     .featuresWrapper {
         padding: 0 calc((100vw - 1440px) / 2);
     }
+}
+
+@media screen and (max-width: 834px) {
     h1,
     h2 {
-        font-size: 48px !important;
-        line-height: 60px !important;
+        font-size: 40px !important;
+        line-height: 56px !important;
     }
 }
 
@@ -342,11 +345,12 @@ h2.number.row02 {
 @media screen and (max-width: 834px) {
     .featuresRow {
         flex-direction: column;
-        height: 860px;
+        height: 1000px;
         width: 100vw;
         align-items: center !important;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         text-align: center;
+        margin: 100px 0 0;
     }
     .redLine {
         align-self: center;
@@ -356,24 +360,27 @@ h2.number.row02 {
         order: 1;
         left: 0 !important;
         width: 90vw !important;
-        margin: 0 5vw;
+        margin: 0 0 40px;
+        padding-top: 0 !important;
     }
     .rowImg {
         position: relative !important;
         order: 2;
         left: 0 !important;
         width: 350px !important;
-        margin: 0 5vw;
+        margin: 0 0 40px !important ;
         background-position: center top !important;
+        top: 0;
     }
     .rowContents {
         position: relative !important;
         order: 3;
         left: 0 !important;
-        width: 90vw !important;
+        width: 100vw !important;
         margin: 0 5vw;
         min-height: 0 !important;
         height: 300px !important;
+        padding: 0 10px !important;
     }
 }
 
@@ -390,7 +397,6 @@ h2.number.row02 {
 }
 
 .startNowRow {
-    margin-top: 45px;
     position: relative;
     width: 402px;
     max-width: 1440px;
@@ -422,6 +428,23 @@ h2.number.row02 {
 
 .startNowRow img {
     align-self: flex-start;
+}
+
+@media screen and (max-width: 834px) {
+    .startNowRow {
+        left: calc(20 / 834 * 100vw);
+        height: 72px;
+        width: 220px;
+    }
+    .startNowRow img {
+        width: 40px;
+        height: 40px;
+    }
+    .startNowButton {
+        width: 180px;
+        height: 32px;
+        font-size: 14px;
+    }
 }
 
 /* - NEXT FEATURE */
@@ -841,33 +864,33 @@ h2.number.row02 {
 /* - RETENTION */
 
 .head.retention {
-    background-image: url('../images/funnels-head.svg') !important;
-    background-size: 552px 413px;
+    background-image: url('../images/retention-head.svg') !important;
+    background-size: 533px 400px;
     background-position: 700px 40px;
     background-repeat: no-repeat;
 }
 
 .rowImg.row01.retention {
-    background-image: url('../images/trends-1.svg') !important;
-    background-size: 581px 539px;
+    background-image: url('../images/retention-1.svg') !important;
+    background-size: 535px 491px;
     background-repeat: no-repeat;
 }
 
 .rowImg.row02.retention {
-    background-image: url('../images/trends-2.svg') !important;
-    background-size: 503px 603px;
+    background-image: url('../images/retention-2.svg') !important;
+    background-size: 553px 519px;
     background-repeat: no-repeat;
 }
 
 .rowImg.row03.retention {
-    background-image: url('../images/trends-3.svg') !important;
-    background-size: 678px 626px;
+    background-image: url('../images/retention-3.svg') !important;
+    background-size: 673px 606px;
     background-repeat: no-repeat;
 }
 
 .nextFeature.retention {
-    background-image: url('../images/retention-head.svg') !important;
-    background-size: 533px 400px;
+    background-image: url('../images/feature-flags-head.svg') !important;
+    background-size: 553px 383px;
     background-position: 700px center;
     background-repeat: no-repeat;
 }
@@ -877,21 +900,79 @@ h2.number.row02 {
         background-size: 300px auto;
     }
     .rowImg.row01.retention {
-        background-image: url('../images/funnels-1-mobile.svg') !important;
-        background-size: 346px 338px;
-        background-repeat: no-repeat;
-        height: 338px;
-    }
-    .rowImg.row02.retention {
-        background-image: url('../images/funnels-2-mobile.svg') !important;
+        background-image: url('../images/retention-1-mobile.svg') !important;
         background-size: 348px 343px;
         background-repeat: no-repeat;
         height: 343px;
     }
-    .rowImg.row03.retention {
-        background-image: url('../images/funnels-3-mobile.svg') !important;
-        background-size: 342px 339px;
+    .rowImg.row02.retention {
+        background-image: url('../images/retention-2-mobile.svg') !important;
+        background-size: 375px 377px;
         background-repeat: no-repeat;
-        height: 339px;
+        height: 377px;
+    }
+    .rowImg.row03.retention {
+        background-image: url('../images/retention-3-mobile.svg') !important;
+        background-size: 352px 355px;
+        background-repeat: no-repeat;
+        height: 355px;
+    }
+}
+
+/* - FEATURE FLAGS */
+
+.head.featureFlags {
+    background-image: url('../images/feature-flags-head.svg') !important;
+    background-size: 553px 383px;
+    background-position: 700px 40px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row01.featureFlags {
+    background-image: url('../images/feature-flags-1.svg') !important;
+    background-size: 630px 540px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row02.featureFlags {
+    background-image: url('../images/feature-flags-2.svg') !important;
+    background-size: 628px 588px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row03.featureFlags {
+    background-image: url('../images/feature-flags-3.svg') !important;
+    background-size: 551px 643px;
+    background-repeat: no-repeat;
+}
+
+.nextFeature.featureFlags {
+    background-image: url('../images/self-hosted-head.svg') !important;
+    background-size: 495px 459px;
+    background-position: 700px center;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 834px) {
+    .head.featureFlags {
+        background-size: 300px auto;
+    }
+    .rowImg.row01.featureFlags {
+        background-image: url('../images/feature-flags-1-mobile.svg') !important;
+        background-size: 344px 351px;
+        background-repeat: no-repeat;
+        height: 351px;
+    }
+    .rowImg.row02.featureFlags {
+        background-image: url('../images/feature-flags-2-mobile.svg') !important;
+        background-size: 348px 343px;
+        background-repeat: no-repeat;
+        height: 343px;
+    }
+    .rowImg.row03.featureFlags {
+        background-image: url('../images/feature-flags-3-mobile.svg') !important;
+        background-size: 348px 357px;
+        background-repeat: no-repeat;
+        height: 357px;
     }
 }
