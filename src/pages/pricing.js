@@ -81,7 +81,7 @@ const PricingPage = () => {
         },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Starter, plus:</span>',
-          'Up to <b>500,000 events/month</b>',
+          'Up to <b>500,000 events/month</b> included*',
           '12 month data retention',
           'Email support',
         ],
@@ -109,7 +109,7 @@ const PricingPage = () => {
         ],
       },
     ],
-    'self-managed': [
+    'self-hosted': [
       {
         title: 'Open Source',
         popular: false,
@@ -144,7 +144,7 @@ const PricingPage = () => {
         callToActionDest: {
           type: 'url',
           value:
-            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-managed%20supported%20plan',
+            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-hosted%20enterprise%20plan',
         },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Open Source, plus:</span>',
@@ -167,7 +167,7 @@ const PricingPage = () => {
         callToActionDest: {
           type: 'url',
           value:
-            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-managed%20supported%20plan',
+            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-hosted%20supported%20plan',
         },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Enterprise, plus:</span>',
@@ -191,12 +191,12 @@ const PricingPage = () => {
     {
       q: 'What happens after the data retention period elapses?',
       a:
-        'On the cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the self-managed plans, you control your data retention and what happens to your data afterwards.',
+        'On the cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the self-hosted plans, you control your data retention and what happens to your data afterwards.',
     },
     {
-      q: 'Can I switch between the cloud and self-managed plans?',
+      q: 'Can I switch between the cloud and self-hosted plans?',
       a:
-        'We are working hard to enable a bridge that allows data transfer between self-managed instances and cloud instances. This will be possible in the coming months.',
+        'We are working hard to enable a bridge that allows data transfer between self-hosted instances and cloud instances. This will be possible in the coming months.',
     },
   ]
 
@@ -236,7 +236,7 @@ const PricingPage = () => {
       <Row gutter={[24, 24]}>
         <Col span={24} align="middle">
           <h1 className="p-title p-text-primary">
-            Affordable product analytics for everyone
+            Product analytics for everyone
           </h1>
         </Col>
       </Row>
@@ -255,16 +255,16 @@ const PricingPage = () => {
               Cloud
             </label>
             <label
-              className={state.planOptions === 'self-managed' ? 'active' : ''}
+              className={state.planOptions === 'self-hosted' ? 'active' : ''}
             >
               <input
                 type="radio"
-                value="self-managed"
+                value="self-hosted"
                 name="planOptions"
-                checked={state.planOptions === 'self-managed'}
+                checked={state.planOptions === 'self-hosted'}
                 onChange={event => handleSegmentChange(event)}
               />{' '}
-              Self-managed
+              Self-Hosted
             </label>
           </div>
           <div style={{ paddingTop: '16px' }}>
@@ -333,6 +333,9 @@ const PricingPage = () => {
           </Col>
         ))}
         <Col span={24} align="middle">
+          * Events exceeding the threshold will be charged at $0.20 per 1000 events.
+        </Col>
+        <Col span={24} align="middle">
           All prices in US Dollars (USD), excluding taxes
         </Col>
         <Col span={24} align="middle">
@@ -369,9 +372,9 @@ const PricingPage = () => {
       <Row gutter={[24, 24]} style={{ marginTop: '32px' }}>
         <Col span={24}>
           <div ref={comparisonRef} id="comparison"></div>
-          <h2>Cloud vs. self-managed</h2>
+          <h2>Cloud vs. self-hosted</h2>
           <p>
-            Cloud or self-managed? We'd love to help you find the option that's{' '}
+            Cloud or self-hosted? We'd love to help you find the option that's{' '}
             <b>right for you</b>.
           </p>
         </Col>
@@ -409,7 +412,7 @@ const PricingPage = () => {
           <Col md={12} sm={24}>
             <div className="p-full-height">
               <h4 className="p-text-primary p-title-with-icon">
-                <img src={imgBuilding} alt="" /> Self-managed
+                <img src={imgBuilding} alt="" /> self-hosted
               </h4>
               <ul className="p-comparison-list">
                 <li>
