@@ -3,7 +3,7 @@
 }
 
 .p-title {
-  font-size: 64px;
+  font-size: 50px;
   font-weight: 500;
   font-family: lato;
 }
@@ -178,7 +178,7 @@
   display: inline-block;
   height: 14px;
   width: 14px;
-  background-image: url('../images/check.svg');
+  background-image: url('../../images/check.svg');
   background-size: contain;
   background-repeat: no-repeat;
   padding-left: 18px;
@@ -207,6 +207,10 @@
 
 .p-faqs .ant-collapse {
   background-color: transparent;
+}
+
+.pricing-header-text {
+  margin-top: 40px;
 }
 
 @media only screen and (max-width: 767px) {
