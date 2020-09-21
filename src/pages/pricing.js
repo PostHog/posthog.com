@@ -14,7 +14,10 @@ import imgChevronRight from '../images/chevron-right.svg'
 import imgHobby from "../images/plan-hobby.svg"
 import imgStarter from "../images/plan-starter.svg"
 import imgGrowth from "../images/plan-growth.svg"
-import imgEnterprise from "../images/plan-enterprise.svg"
+import imgUltimate from "../images/plan-enterprise.svg"
+import imgOpenSource from "../images/plan-open-source.svg"
+import imgEnterprise1 from "../images/plan-enterprise1.svg"
+import imgEnterprise2 from "../images/plan-enterprise2.svg"
 
 const PricingPage = () => {
   const [state, setState] = useState({ planOptions: 'cloud' })
@@ -82,13 +85,14 @@ const PricingPage = () => {
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Starter, plus:</span>',
           'Up to <b>500,000 events/month</b>',
+          'Further events charged $99/500K',
           '12 month data retention',
           'Email support',
         ],
       },
       {
-        title: 'Enterprise',
-        image: imgEnterprise,
+        title: 'Ultimate',
+        image: imgUltimate,
         popular: false,
         price: 'Custom',
         priceDetail: 'contact us',
@@ -109,33 +113,11 @@ const PricingPage = () => {
         ],
       },
     ],
-    'self-managed': [
-      {
-        title: 'Open Source',
-        popular: false,
-        price: '$0',
-        priceDetail: 'forever',
-        description:
-          'Ideal if your team has technical expertise and handles large volumes of users or events',
-        callToAction: 'Start deployment',
-        callToActionType: 'primary',
-        callToActionDest: {
-          type: 'gatsbyLink',
-          value: '/docs/deployment',
-        },
-        benefits: [
-          'Capture <b>unlimited</b> events',
-          '<b>All analytics features</b>',
-          '<b>Unlimited</b> tracked users',
-          '<b>Unlimited</b> team members',
-          '<b>Unlimited</b> data retention',
-          'Free updates for life (our code is <a href="https://github.com/posthog/posthog" target="_blank">open source</a>)',
-          'Community support',
-        ],
-      },
+    'enterprise': [
       {
         title: 'Enterprise',
-        popular: true,
+        image: imgEnterprise1,
+        popular: false,
         price: 'Starts at $2k',
         priceDetail: '/month',
         description:
@@ -144,7 +126,7 @@ const PricingPage = () => {
         callToActionDest: {
           type: 'url',
           value:
-            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-managed%20supported%20plan',
+            'mailto:sales@posthog.com?subject=Enquiry%20about%20enterprise%20supported%20plan',
         },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Open Source, plus:</span>',
@@ -158,17 +140,18 @@ const PricingPage = () => {
       },
       {
         title: 'Supported Enterprise',
-        popular: false,
-        price: 'Starts at $4k',
-        priceDetail: '/month',
+        image: imgEnterprise2,
+        popular: true,
+        price: 'Custom',
+        priceDetail: 'contact us',
         description:
           'Ideal for companies that do not want the hassle of managing PostHog, but want to own their data.',
         callToAction: 'Contact sales',
-        wraps: true,
+        wraps: false,
         callToActionDest: {
           type: 'url',
           value:
-            'mailto:sales@posthog.com?subject=Enquiry%20about%20self-managed%20supported%20plan',
+            'mailto:sales@posthog.com?subject=Enquiry%20about%20enterprise%20supported%20plan',
         },
         benefits: [
           '<span class="p-plan-benefit-lg">Everything in Enterprise, plus:</span>',
@@ -177,8 +160,39 @@ const PricingPage = () => {
         ],
       }
     ],
+    'open-source': [
+      {
+        title: 'Open source',
+        image: imgOpenSource,
+        popular: true,
+        price: 'Free',
+        priceDetail: '',
+        description:
+          'Ideal for those with smaller traffic volumes, happy to manage their own infrastructure',
+        callToAction: 'Deploy',
+        callToActionDest: {
+          type: 'url',
+          value:
+            'https://posthog.com/docs/deployment',
+        },
+        benefits: [
+          '<span class="p-plan-benefit-lg">Everything in Open Source, plus:</span>',
+          'Clickhouse database for Petabyte scale',
+          'Integrations with services like Zapier',
+          'Permissioning and multiple projects',
+          'Dedicated support',
+          'SSO/SAML',
+          'Export to data lakes'
+        ],
+      }
+    ],
   }
   const faqs = [
+    {
+      q: 'How do I know what my volume is?',
+      a:
+        'We provide a free tier on our Cloud plan. This allows you to quickly get a sense of what your volume is. If you have very high volumes (10s-100s of thousands of users, our enterprise product is probably the most cost effective.'
+    },
     {
       q: 'What happens when I reach the maximum number of events in my plan?',
       a:
@@ -187,17 +201,17 @@ const PricingPage = () => {
     {
       q: 'Is there a free trial on paid plans?',
       a:
-        'You can get a 30-day free trial on our Starter and Growth plans. Our Enterprise plan does not offer a free trial because it has the same base features as the Growth plan.',
+        'You can get a 30-day free trial on our Starter and Growth plans. Our Ultimate plan does not offer a free trial because it has the same base features as the Growth plan.',
     },
     {
       q: 'What happens after the data retention period elapses?',
       a:
-        'On the cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the self-managed plans, you control your data retention and what happens to your data afterwards.',
+        'On the cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the enterprise and open source plans, you control your data retention and what happens to your data afterwards.',
     },
     {
-      q: 'Can I switch between the cloud and self-managed plans?',
+      q: 'Can I switch between the cloud and enterprise plans?',
       a:
-        'We are working hard to enable a bridge that allows data transfer between self-managed instances and cloud instances. This will be possible in the coming months.',
+        'We are working hard to enable a bridge that allows data transfer between cloud instances and enterprise instances. This will be possible in the coming months.',
     },
   ]
 
@@ -236,8 +250,8 @@ const PricingPage = () => {
       />
       <Row gutter={[24, 24]}>
         <Col span={24} align="middle">
-          <h1 className="p-title p-text-primary">
-            Affordable product analytics for everyone
+          <h1>
+            Pricing for your scale
           </h1>
         </Col>
       </Row>
@@ -256,16 +270,28 @@ const PricingPage = () => {
               Cloud
             </label>
             <label
-              className={state.planOptions === 'self-managed' ? 'active' : ''}
+              className={state.planOptions === 'enterprise' ? 'active' : ''}
             >
               <input
                 type="radio"
-                value="self-managed"
+                value="enterprise"
                 name="planOptions"
-                checked={state.planOptions === 'self-managed'}
+                checked={state.planOptions === 'enterprise'}
                 onChange={event => handleSegmentChange(event)}
               />{' '}
-              Self-managed
+              Enterprise
+            </label>
+            <label
+              className={state.planOptions === 'open-source' ? 'active' : ''}
+            >
+              <input
+                type="radio"
+                value="open-source"
+                name="planOptions"
+                checked={state.planOptions === 'open-source'}
+                onChange={event => handleSegmentChange(event)}
+              />{' '}
+              Open source
             </label>
           </div>
           <div style={{ paddingTop: '16px' }}>
@@ -284,7 +310,6 @@ const PricingPage = () => {
           </div>
         </Col>
       </Row>
-
       <Row
         gutter={[24, 36]}
         type="flex"
@@ -370,9 +395,9 @@ const PricingPage = () => {
       <Row gutter={[24, 24]} style={{ marginTop: '32px' }}>
         <Col span={24}>
           <div ref={comparisonRef} id="comparison"></div>
-          <h2>Cloud vs. self-managed</h2>
+          <h2>Cloud vs. Enterprise</h2>
           <p>
-            Cloud or self-managed? We'd love to help you find the option that's{' '}
+            Cloud or Enterprise? We'd love to help you find the option that's{' '}
             <b>right for you</b>.
           </p>
         </Col>
@@ -410,20 +435,19 @@ const PricingPage = () => {
           <Col md={12} sm={24}>
             <div className="p-full-height">
               <h4 className="p-text-primary p-title-with-icon">
-                <img src={imgBuilding} alt="" /> Self-managed
+                <img src={imgBuilding} alt="" /> Enterprise
               </h4>
               <ul className="p-comparison-list">
                 <li>
                   Recommended if you have large volumes of events or users (in
-                  the tens of millions).
+                  the hundreds of thousands or more).
                 </li>
                 <li>
                   If you have heavy compliance requirements on privacy or data
                   handling (e.g. HIPAA, SOC2).
                 </li>
                 <li>
-                  If your team has technical expertise and/or already manages
-                  your own cloud infrastructure.
+                  If you need dedicated support, and want regular touch points with our team to get the best value.
                 </li>
                 <li>
                   You are concerned with browser privacy features, ad blockers
