@@ -1,15 +1,21 @@
 ---
-date: 2020-07-30
-title: The ethics of open source product analytics
+date: 2020-09-21
+title: Should that open source project track you?
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 ---
 
-A topic that strikes fear into the hearts of many working on open source projects - tracking your users. We think this more complex choice than "tracking is wrong", so this is our thought process on this issue.
+Many open source projects now track their usage in some way, shape, or form.
 
-## A framework for considering what is ethical
+So much user tracking is horrible. It's usually buried deep in the legalese of a size 8 terms and conditions policy, and kept intentionally vague.
+
+*All tracking is bad*, many say. We disagree. Done right, it enables more and better software in the world. When it's applied to open source, it often enables more free software for anyone to use.
+
+That said, it is a topic that has to be approached with extreme caution. It is an ethical and business minefield - if you're working on open source, how do you decide what's ok?
+
+## An ethics framework
 
 ### Duty-based ethics
 
@@ -33,55 +39,53 @@ From a utilitarian perspective, we believe that tracking the minimum data possib
 
 From a duty-based perspective, we'd argue that transparency is key to covering intent. Since most people won't assume they're being tracked, that means being upfront in the docs and not relying on people digging through your code.
 
-## Minimizing your tracking
+## Sorting the good from the questionable
 
-### What you track
+First of all, open source is exactly that. That's a big step up from SAAS - you can immediately inspect the code or run it on a computer with no internet connection if needed. However, the precise function of the telemetry has user implications.
 
-The first step is to work out how much, if anything, you really need to track.
+### What is being tracked
+
+The first step is to think about how much, if anything, a project really needs to track.
 
 #### Nothing
 
-Nada, zilch. You've no idea what's going on.
+Nada, zilch. 
 
-If you're building it for fun, for yourself only, or to get better at a particular technology, then we don't think putting extra tracking in makes much sense.
+If an open source project exists for fun, for one person only, or to get better at a particular technology, then we don't think putting extra tracking in makes sense.
 
-In fact, you'll struggle not to get some sense of popularity - issues or GitHub stars, and the basic stats (clones / repo visits) that GitHub provides if that's your preferred place to put code!
+In practice, however, it's pretty much impossible not to track more than you need in this case.
+
+If a project is hosted on GitHub, it automatically provides basic stats (clones / repo visits) provided for all repos.
 
 #### Aggregated tracking
 
-This helps you validate if the concept of your project is valuable - do people install your thing? Do they actually use it at all?
+This helps projects validate if the concept of what they're working on is valuable - do people install it? Do they actually use it at all?
 
-It also means you can get a sense of the setup flow. Can anyone work out how to implement things? At PostHog, early on, we tracked if people were able to get through the setup process. Many didn't, so we've kept tweaking it - and we still have work to do here :)
+It also means they can get a sense of how accessible their software is by looking at how many people work out how to use it. At PostHog, early on, we tracked if people were able to get through the setup process. Many didn't, so we've kept tweaking it - and we still have work to do here :)
 
-Unfortunately, you cannot work out the unique users, which means repeat visitors are likely to skew your statistics and understanding. You could just have one person manically refreshing things!
+With aggregated tracking, a project cannot by definition identify unique users. This means repeat visitors are likely to skew the statistics, and therefore, the understanding of user behavior.
 
 #### Anonymized user tracking
 
-This gives a much stronger signal than the above. It means you'll probably need to start using cookies.
+This gives a much stronger signal than the above. It means you'll probably need to start using cookies or some way of obfuscating the user id from their behavior.
 
-It allows you to see if people who started using the product are coming back, and which parts of the product they're returning too.
+It allows projects to see if people who started using the product are coming back, and which parts of the product they're returning too.
 
 #### Full user tracking
 
-Asking permission and not doing this by default feels like the only acceptable way.
+Asking permission and not doing this by default feels like the only acceptable way from a user perspective.
 
-Tracking the actual users can really help understand the kinds of companies, and it means you can message them to find out more.
+Tracking the actual users can really help understand the kinds of user profiles (ie if they work for big companies, or what kind of job roles they have) that find the software valuable. If a project is part of an open source company, then this is very likely to be of critical importance to them.
 
-If you're building a company around a project, then this is very likely to become important to you.
+Some users are happy to be tracked in return for a great project, but we think in most cases that this is unacceptably invasive by default, and it's important to ask permission up front. Let alone, GDPR, CCPA and those other privacy based laws that are appearing.
 
-Some users are happy to be tracked in return for a great project, but we think this is unacceptable invasive by default and you must ask permission up front. Let alone, GDPR, CCPA and those other privacy based laws that are appearing.
+## It's not just the data, it's how the tracking works too
 
-### How you track it
+An easy step is not to use third party software to do this.
 
-#### First party tracking is easier than ever
+Subtle advert: we built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've full access to the code and database, you can also plugin things like Metabase or your data lake if you need them :) There are some less product focussed, more website-based analytics libraries that are also pretty cool - Matomo or Plausible are definitely worth a look depending on your use case.
 
-An easy step to minimizing the cost to your users of tracking them, is not to use third party software to do this. The great news is that you've several choices here.
-
-Historically, we've seen people setting up a data pipeline, data lake, and some sort of dashboarding tool like Metabase. This means you can manage all of the user data yourself, whilst understanding behavior within your product. That gives you a powerful setup, but it means integrating and setting up several pieces of software that aren't particularly inviting for non technical users.
-
-We built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've full access to the code and database, you can also plugin things like Metabase or your data lake if you need them :) There are some less product focussed, more website-based analytics libraries that are also pretty cool - Matomo or Plausible are definitely worth a look depending on your use case.
-
-There are many third party SAAS tools (Amplitude/Mixpanel/Heap) that help with this use case, but you will need to send data to them to use them.
+There are many third party SAAS tools (Amplitude/Mixpanel/Heap) that can provide tracking, but a project would have to send user data to them to use them, we think hence why they're rarely (ever?) seen in the open source world.
 
 ## How this influenced our approach
 
@@ -89,7 +93,7 @@ It's easy to think the two ethical methods outlined here are contradictory.
 
 For example, being transparent about your use of tracking may reduce adoption, which could harm your ability to build more stuff.
 
-In our case, PostHog usually doesn't know who individual users are since most people opt out of sharing this with us when they install the product. If we did, and those users were at huge corporations, then we'd find it easier to raise more money, to hire more engineers, to build more cool stuff for the world. 
+In our case, PostHog usually doesn't know who individual users are since most people (90%) opt out of sharing this with us when they install the product. If we did, and those users were at huge corporations, then we'd find it easier to raise more money, to hire more engineers, to build more cool stuff for the world. 
 
 However, we knew when we started that PostHog's [open source library](https://github.com/posthog/posthog) would be designed for developers to use.
 
