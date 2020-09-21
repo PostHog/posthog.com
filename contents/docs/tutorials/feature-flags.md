@@ -1,10 +1,19 @@
 ---
-title: Feature Flags
+title: How to Safely Roll Out New Features
 sidebar: Docs
 showTitle: true
 ---
 
-_This is a tutorial about how to set up feature flags with PostHog. For more information on what feature flags are please visit our dedicated [Feature Flags page](/docs/features/feature-flags)._<br />
+![](../../images/tutorials/banners/feature-flags.png)
+
+Rolling out new features in your product can really be a pain.
+
+As a company that is growing fast and [consistently putting out new functionality](/blog/we-ship-whenever), we know this very well. 
+
+You might have great tests and robust CI/CD workflows in place, but there's always the chance that something will go wrong, and that your users may not appreciate the change.
+
+To make this process less painful and safer 
+
 
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
