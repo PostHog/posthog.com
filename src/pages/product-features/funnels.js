@@ -15,16 +15,19 @@ import retentionIcon from '../../images/retention-icon.svg'
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="featuresWrapper selfHosted">
-                <div className="head blue selfHosted">
+            <div className="featuresWrapper funnels">
+                <div className="head blue funnels">
                     <div className="headContents">
                         <Link to="/product-features" className="headNav top">
                             <Button icon="left" />
                             <p>Back to Features</p>
                         </Link>
-                        <h1>Self Hosted</h1>
-                        <h3>Powerful analytics on your own infrastructure, with all the features your team needs.</h3>
-                        <Link to="/product-features/event-autocapture" className="headNav bottom">
+                        <h1>Funnels</h1>
+                        <h3>
+                            Visualize users going through a multi-step process in your app and figure out where they’re
+                            dropping off.
+                        </h3>
+                        <Link to="/product-features/retention" className="headNav bottom">
                             <p>Next Feature</p>
                             <Button icon="right" />
                         </Link>
@@ -33,48 +36,47 @@ function ProductFeatures() {
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>
                     <div className="rowContents row01">
-                        <h2>Take control of your data</h2>
+                        <h2>Visualize user behavior step-by-step</h2>
                         <hr className="redLine" />
                         <p>
-                            When you self-host, your data is all yours. This means your users’ data is not sent to any
-                            third-party, not even PostHog. The privacy of your users is preserved, and it is easier to
-                            comply with legislation such as GDPR and cookie laws.
+                            PostHog funnels offer you a visual representation of the flow of users through specific
+                            areas of your app, such as the sign up process. They allow you to understand what percentage
+                            of users go from one step to another, so you can identify any areas for improvement in
+                            multi-step processes.
                         </p>
                     </div>
-                    <div className="rowImg row01 selfHosted" />
+                    <div className="rowImg row01 funnels" />
                 </div>
                 <div className="row02 featuresRow">
-                    <div className="rowImg row02 selfHosted" />
+                    <div className="rowImg row02 funnels" />
                     <h2 className="number row02">02</h2>
                     <div className="rowContents row02">
-                        <h2>Deploy in your own way</h2>
+                        <h2>Understand where users drop off</h2>
                         <hr className="redLine" />
                         <p>
-                            We strive to make our deployment process as simple as possible. As a result, we offer a wide
-                            variety of ways to deploy PostHog, so you can pick the one that suits you best.
-                            Additionally, it’s up to you where you deploy it! This gives you more freedom and prevents
-                            PostHog from disrupting your tech stack.
+                            Funnels are especially useful for understanding at which step of a process users are
+                            dropping off. They can help you identify points that need attention in order to improve
+                            conversion rates, or simply make the app more friendly to use.
                         </p>
                     </div>
                 </div>
                 <div className="row03 featuresRow">
                     <h2 className="number row03">03</h2>
                     <div className="rowContents row03">
-                        <h2>Perform powerful analytics your entire team can use</h2>
+                        <h2>Improve your app’s UX</h2>
                         <hr className="redLine" />
                         <p>
-                            PostHog provides self-serve analytics for any Engineer or Product Manager. The interface is
-                            simple for any user - no data analysts needed. With PostHog, you have all the benefits of
-                            self-building plus the support of a world-class team ensuring you have all the features you
-                            need. In addition, by being open source, PostHog ensures that our tool is secure and
-                            battle-tested.
+                            In PostHog, you can see an aggregate view of all your users going through a funnel, filter
+                            them by a certain property, or even see each user individually! This makes it easy to
+                            identify accessibility issues, or areas where information might be unclear. With funnels,
+                            you can identify patterns, polish the UX, and improve conversion.
                         </p>
                     </div>
-                    <div className="rowImg row03 selfHosted" />
+                    <div className="rowImg row03 funnels" />
                 </div>
                 <div className="startNowWrapper">
                     <div className="startNowRow">
-                        <Link to="/trial/">
+                        <Link to="/trial">
                             <Button type="primary" className="startNowButton">
                                 Start now
                             </Button>
@@ -82,20 +84,19 @@ function ProductFeatures() {
                         <img src={rays} />
                     </div>
                 </div>
-                <div className="nextFeature selfHosted orange">
-                    <div className="nextFeatureContents selfHosted">
+                <div className="nextFeature funnels orange">
+                    <div className="nextFeatureContents funnels">
                         <Link to="/product-features" className="nextFeatureNav top">
                             <Button icon="left" />
                             <p>Back to Features</p>
                         </Link>
-                        <Link to="/product-features/event-autocapture" className="nextFeatureText">
-                            <h2>Event Autocapture</h2>
+                        <Link to="/product-features/retention" className="nextFeatureText">
+                            <h2>Retention</h2>
                             <p>
-                                Less setup, more analytics. Start capturing relevant data from the moment setup is
-                                complete.
+                                Understand what percentage of users you’re retaining, and who are the ones you’re not.
                             </p>
                         </Link>
-                        <Link to="/product-features/event-autocapture" className="nextFeatureNav bottom">
+                        <Link to="/product-features/retention" className="nextFeatureNav bottom">
                             <p>Next Feature</p>
                             <Button icon="right" />
                         </Link>
@@ -105,23 +106,23 @@ function ProductFeatures() {
                     <h2>Other features</h2>
                     <div className="otherFeatures">
                         <div className="twoOtherFeatures">
-                            <Link to="/product-features/trends">
-                                <img src={trendsIcon} />
-                                <h4>Trends</h4>
-                            </Link>
-                            <Link to="/product-features/funnels">
-                                <img src={funnelsIcon} />
-                                <h4>Funnels</h4>
-                            </Link>
-                        </div>
-                        <div className="twoOtherFeatures">
-                            <Link to="/product-features/retention">
-                                <img src={retentionIcon} />
-                                <h4>Retention</h4>
-                            </Link>
                             <Link to="/product-features/feature-flags">
                                 <img src={featureFlagsIcon} />
                                 <h4>Feature flags</h4>
+                            </Link>
+                            <Link to="/product-features/self-hosted">
+                                <img src={selfHostedIcon} />
+                                <h4>Self hosted</h4>
+                            </Link>
+                        </div>
+                        <div className="twoOtherFeatures">
+                            <Link to="/product-features/event-autocapture">
+                                <img src={eventAutocaptureIcon} />
+                                <h4>Event autocapture</h4>
+                            </Link>
+                            <Link to="/product-features/trends">
+                                <img src={trendsIcon} />
+                                <h4>Retention</h4>
                             </Link>
                         </div>
                     </div>

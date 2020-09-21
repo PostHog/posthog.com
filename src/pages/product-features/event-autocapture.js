@@ -15,16 +15,18 @@ import retentionIcon from '../../images/retention-icon.svg'
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="featuresWrapper selfHosted">
-                <div className="head blue selfHosted">
+            <div className="featuresWrapper eventAutocapture">
+                <div className="head orange eventAutocapture">
                     <div className="headContents">
                         <Link to="/product-features" className="headNav top">
                             <Button icon="left" />
                             <p>Back to Features</p>
                         </Link>
-                        <h1>Self Hosted</h1>
-                        <h3>Powerful analytics on your own infrastructure, with all the features your team needs.</h3>
-                        <Link to="/product-features/event-autocapture" className="headNav bottom">
+                        <h1>Event Autocapture</h1>
+                        <h3>
+                            Less setup, more analytics. Start capturing relevant data from the moment setup is complete.
+                        </h3>
+                        <Link to="/product-features/trends" className="headNav bottom">
                             <p>Next Feature</p>
                             <Button icon="right" />
                         </Link>
@@ -33,44 +35,46 @@ function ProductFeatures() {
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>
                     <div className="rowContents row01">
-                        <h2>Take control of your data</h2>
+                        <h2>Get started with one click</h2>
                         <hr className="redLine" />
                         <p>
-                            When you self-host, your data is all yours. This means your users’ data is not sent to any
-                            third-party, not even PostHog. The privacy of your users is preserved, and it is easier to
-                            comply with legislation such as GDPR and cookie laws.
+                            PostHog starts capturing events from the second the setup is complete - no extra steps
+                            required. We also provide various ways to deploy in just one click, such as{' '}
+                            <Link to="/docs/deployment/deploy-heroku">Heroku</Link>,{' '}
+                            <Link to="/docs/deployment/deploy-heroku">AWS</Link>, and{' '}
+                            <Link to="/docs/deployment/deploy-linode">Linode</Link>. This way, you can go from first
+                            hearing about PostHog to capturing your first event in less than an hour.
                         </p>
                     </div>
-                    <div className="rowImg row01 selfHosted" />
+                    <div className="rowImg row01 eventAutocapture" />
                 </div>
                 <div className="row02 featuresRow">
-                    <div className="rowImg row02 selfHosted" />
+                    <div className="rowImg row02 eventAutocapture" />
                     <h2 className="number row02">02</h2>
                     <div className="rowContents row02">
-                        <h2>Deploy in your own way</h2>
+                        <h2>Don't miss a thing</h2>
                         <hr className="redLine" />
                         <p>
-                            We strive to make our deployment process as simple as possible. As a result, we offer a wide
-                            variety of ways to deploy PostHog, so you can pick the one that suits you best.
-                            Additionally, it’s up to you where you deploy it! This gives you more freedom and prevents
-                            PostHog from disrupting your tech stack.
+                            Event autocapture means you don’t have to worry about missing important events while you
+                            figure out your setup. By default, PostHog captures a wide variety of events that are
+                            important to you, from page views to button clicks. As such, from the moment you deploy,
+                            you’re already gathering useful data!
                         </p>
                     </div>
                 </div>
                 <div className="row03 featuresRow">
                     <h2 className="number row03">03</h2>
                     <div className="rowContents row03">
-                        <h2>Perform powerful analytics your entire team can use</h2>
+                        <h2>Customize as you wish</h2>
                         <hr className="redLine" />
                         <p>
-                            PostHog provides self-serve analytics for any Engineer or Product Manager. The interface is
-                            simple for any user - no data analysts needed. With PostHog, you have all the benefits of
-                            self-building plus the support of a world-class team ensuring you have all the features you
-                            need. In addition, by being open source, PostHog ensures that our tool is secure and
-                            battle-tested.
+                            Event autocapture is a great way to get started, but you might want some added customization
+                            to improve your analytics processes. With PostHog you can set up actions (link to Actions)
+                            for new or already-existing events. This helps you filter through autocaptured events, as
+                            well as create more complex logic that isn’t possible with just autocapture.
                         </p>
                     </div>
-                    <div className="rowImg row03 selfHosted" />
+                    <div className="rowImg row03 eventAutocapture" />
                 </div>
                 <div className="startNowWrapper">
                     <div className="startNowRow">
@@ -82,20 +86,17 @@ function ProductFeatures() {
                         <img src={rays} />
                     </div>
                 </div>
-                <div className="nextFeature selfHosted orange">
-                    <div className="nextFeatureContents selfHosted">
+                <div className="nextFeature eventAutocapture yellow">
+                    <div className="nextFeatureContents eventAutocapture">
                         <Link to="/product-features" className="nextFeatureNav top">
                             <Button icon="left" />
                             <p>Back to Features</p>
                         </Link>
-                        <Link to="/product-features/event-autocapture" className="nextFeatureText">
-                            <h2>Event Autocapture</h2>
-                            <p>
-                                Less setup, more analytics. Start capturing relevant data from the moment setup is
-                                complete.
-                            </p>
+                        <Link to="/product-features/trends" className="nextFeatureText">
+                            <h2>Trends</h2>
+                            <p>Understand what parts of your app are engaging, and what areas still need some work.</p>
                         </Link>
-                        <Link to="/product-features/event-autocapture" className="nextFeatureNav bottom">
+                        <Link to="/product-features/trends" className="nextFeatureNav bottom">
                             <p>Next Feature</p>
                             <Button icon="right" />
                         </Link>
@@ -105,23 +106,23 @@ function ProductFeatures() {
                     <h2>Other features</h2>
                     <div className="otherFeatures">
                         <div className="twoOtherFeatures">
-                            <Link to="/product-features/trends">
-                                <img src={trendsIcon} />
-                                <h4>Trends</h4>
-                            </Link>
                             <Link to="/product-features/funnels">
                                 <img src={funnelsIcon} />
                                 <h4>Funnels</h4>
                             </Link>
-                        </div>
-                        <div className="twoOtherFeatures">
                             <Link to="/product-features/retention">
                                 <img src={retentionIcon} />
                                 <h4>Retention</h4>
                             </Link>
+                        </div>
+                        <div className="twoOtherFeatures">
                             <Link to="/product-features/feature-flags">
                                 <img src={featureFlagsIcon} />
                                 <h4>Feature flags</h4>
+                            </Link>
+                            <Link to="/product-features/self-hosted">
+                                <img src={selfHostedIcon} />
+                                <h4>Self hosted</h4>
                             </Link>
                         </div>
                     </div>

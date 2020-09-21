@@ -71,13 +71,13 @@
 }
 
 .features.table-borders th:last-child {
-    background-color: #3f65ff;
+    background-color: #1d4aff;
     border-radius: 0 20px 0 0;
     color: #ffffff;
 }
 
 .features.table-borders td:last-child {
-    background-color: #3f65ff;
+    background-color: #1d4aff;
 }
 
 /* INTERNAL PAGES */
@@ -125,7 +125,7 @@
 .headContents {
     position: relative;
     height: 100%;
-    width: 620px;
+    width: 510px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -183,7 +183,7 @@ main > div > div {
 
 .headNav:hover p,
 .headNav:hover button {
-    color: #3f65ff !important;
+    color: #1d4aff !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -195,6 +195,7 @@ main > div > div {
         display: flex;
         background-position: center top !important;
         justify-content: center;
+        background-position: center 100px !important;
     }
     .headContents {
         margin-left: 0;
@@ -252,16 +253,16 @@ h2.number.row02 {
     font-size: 54px;
     margin-top: 4px !important;
     position: absolute;
-    left: 50vw;
+    left: calc(13 / 24 * 100vw);
     width: calc(1 / 12 * 1440px);
 }
 
 .rowContents.row01,
 .rowContents.row03 {
     position: absolute;
-    width: calc(6 / 24 * 100vw);
+    width: calc(7 / 24 * 100vw);
     min-width: 284px;
-    max-width: calc(6 / 24 * 1440px);
+    max-width: calc(7 / 24 * 1440px);
     left: calc(5 / 24 * 100vw);
     min-height: 700px;
     height: auto;
@@ -274,9 +275,9 @@ h2.number.row02 {
 
 .rowContents.row02 {
     position: absolute;
-    width: calc(6 / 24 * 100vw);
+    width: calc(7 / 24 * 100vw);
     min-width: 284px;
-    max-width: calc(6 / 24 * 1440px);
+    max-width: calc(7 / 24 * 1440px);
     left: calc(15 / 24 * 100vw);
     height: 600px;
     display: flex;
@@ -320,14 +321,14 @@ h2.number.row02 {
         left: calc(3 / 24 * 1440px);
     }
     h2.number.row02 {
-        left: calc(15 / 24 * 1440px);
+        left: calc(13 / 24 * 1440px);
     }
     .rowContents.row01,
     .rowContents.row03 {
         left: calc(5 / 24 * 1440px);
     }
     .rowContents.row02 {
-        left: calc(17 / 24 * 1440px);
+        left: calc(15 / 24 * 1440px);
     }
     .rowImg.row01,
     .rowImg.row03 {
@@ -408,15 +409,15 @@ h2.number.row02 {
     width: 330px;
     height: 64px;
     font-size: 24px;
-    background-color: #3f65ff;
-    border-color: #3f65ff;
+    background-color: #1d4aff;
+    border-color: #1d4aff;
     color: #ffffff;
 }
 
 .startNowButton:hover {
     background-color: #fff;
-    color: #3f65ff;
-    border-color: #3f65ff;
+    color: #1d4aff;
+    border-color: #1d4aff;
 }
 
 .startNowRow img {
@@ -436,7 +437,7 @@ h2.number.row02 {
 .nextFeatureContents {
     position: relative;
     height: 100%;
-    width: 620px;
+    width: 460px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -490,7 +491,17 @@ h2.number.row02 {
 
 .nextFeatureNav:hover p,
 .nextFeatureNav:hover button {
-    color: #3f65ff !important;
+    color: #1d4aff !important;
+}
+
+.nextFeatureText h2,
+.nextFeatureText p {
+    transition: color 0.3s;
+}
+
+.nextFeatureText:hover h2,
+.nextFeatureText:hover p {
+    color: #1d4aff;
 }
 
 @media screen and (max-width: 834px) {
@@ -501,6 +512,7 @@ h2.number.row02 {
         margin: 0 0 40px;
         display: flex;
         background-position: center 40px !important;
+        background-size: 300px auto !important;
     }
     .nextFeatureContents {
         height: 340px;
@@ -555,12 +567,13 @@ h2.number.row02 {
 .twoOtherFeatures a {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     width: 160px;
     height: 280px;
     border-radius: 20px;
     transition: all 0.3s;
+    text-align: center;
 }
 
 .twoOtherFeatures a > h4 {
@@ -568,7 +581,7 @@ h2.number.row02 {
     font-weight: bold;
     font-size: 24px;
     line-height: 40px;
-    margin-bottom: 0;
+    margin-bottom: 32px;
 }
 
 .twoOtherFeatures a > img {
@@ -592,12 +605,13 @@ h2.number.row02 {
 
 /* INDIVIDUAL STYLING */
 
+/* - SELF HOSTED */
+
 .head.selfHosted {
     background-image: url('../images/self-hosted-head.svg') !important;
     background-size: 495px 459px;
     background-position: 820px top;
     background-repeat: no-repeat;
-    background-color: #35416b;
 }
 
 .rowImg.row01.selfHosted {
@@ -619,11 +633,10 @@ h2.number.row02 {
 }
 
 .nextFeature.selfHosted {
-    background-image: url('../images/self-hosted-next-feature.svg') !important;
+    background-image: url('../images/event-autocapture-head.svg') !important;
     background-size: 560px 336px;
     background-position: 820px center;
     background-repeat: no-repeat;
-    background-color: #f96132;
 }
 
 @media screen and (max-width: 834px) {
@@ -647,5 +660,238 @@ h2.number.row02 {
         background-size: 350px 343px;
         background-repeat: no-repeat;
         height: 343px;
+    }
+}
+
+/* - EVENT AUTOCAPTURE */
+
+.head.eventAutocapture {
+    background-image: url('../images/event-autocapture-head.svg') !important;
+    background-size: 560px 336px;
+    background-position: 700px center;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row01.eventAutocapture {
+    background-image: url('../images/event-autocapture-1.svg') !important;
+    background-size: 637px 626px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row02.eventAutocapture {
+    background-image: url('../images/event-autocapture-2.svg') !important;
+    background-size: 652px 533px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row03.eventAutocapture {
+    background-image: url('../images/event-autocapture-3.svg') !important;
+    background-size: 663px 597px;
+    background-repeat: no-repeat;
+}
+
+.nextFeature.eventAutocapture {
+    background-image: url('../images/trends-head.svg') !important;
+    background-size: 620px 428px;
+    background-position: 700px center;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 834px) {
+    .head.eventAutocapture {
+        background-size: 300px auto;
+        background-position: center 100px !important;
+    }
+    .rowImg.row01.eventAutocapture {
+        background-image: url('../images/event-autocapture-1-mobile.svg') !important;
+        background-size: 375px 364px;
+        background-repeat: no-repeat;
+        height: 364px;
+    }
+    .rowImg.row02.eventAutocapture {
+        background-image: url('../images/event-autocapture-2-mobile.svg') !important;
+        background-size: 358px 340px;
+        background-repeat: no-repeat;
+        height: 340px;
+    }
+    .rowImg.row03.eventAutocapture {
+        background-image: url('../images/event-autocapture-3-mobile.svg') !important;
+        background-size: 350px 341px;
+        background-repeat: no-repeat;
+        height: 341px;
+    }
+}
+
+/* - TRENDS */
+
+.head.trends {
+    background-image: url('../images/trends-head.svg') !important;
+    background-size: 620px 428px;
+    background-position: 700px 40px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row01.trends {
+    background-image: url('../images/trends-1.svg') !important;
+    background-size: 581px 539px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row02.trends {
+    background-image: url('../images/trends-2.svg') !important;
+    background-size: 503px 603px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row03.trends {
+    background-image: url('../images/trends-3.svg') !important;
+    background-size: 678px 626px;
+    background-repeat: no-repeat;
+}
+
+.nextFeature.trends {
+    background-image: url('../images/funnels-head.svg') !important;
+    background-size: 565px 537px;
+    background-position: 700px center;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 834px) {
+    .head.trends {
+        background-size: 300px auto;
+    }
+    .rowImg.row01.trends {
+        background-image: url('../images/trends-1-mobile.svg') !important;
+        background-size: 348px 324px;
+        background-repeat: no-repeat;
+        height: 324px;
+    }
+    .rowImg.row02.trends {
+        background-image: url('../images/trends-2-mobile.svg') !important;
+        background-size: 348px 370px;
+        background-repeat: no-repeat;
+        height: 370px;
+    }
+    .rowImg.row03.trends {
+        background-image: url('../images/trends-3-mobile.svg') !important;
+        background-size: 375px 377px;
+        background-repeat: no-repeat;
+        height: 377px;
+    }
+}
+
+/* - FUNNELS */
+
+.head.funnels {
+    background-image: url('../images/funnels-head.svg') !important;
+    background-size: 552px 413px;
+    background-position: 700px 40px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row01.funnels {
+    background-image: url('../images/trends-1.svg') !important;
+    background-size: 581px 539px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row02.funnels {
+    background-image: url('../images/trends-2.svg') !important;
+    background-size: 503px 603px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row03.funnels {
+    background-image: url('../images/trends-3.svg') !important;
+    background-size: 678px 626px;
+    background-repeat: no-repeat;
+}
+
+.nextFeature.funnels {
+    background-image: url('../images/retention-head.svg') !important;
+    background-size: 533px 400px;
+    background-position: 700px center;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 834px) {
+    .head.funnels {
+        background-size: 300px auto;
+    }
+    .rowImg.row01.funnels {
+        background-image: url('../images/funnels-1-mobile.svg') !important;
+        background-size: 346px 338px;
+        background-repeat: no-repeat;
+        height: 338px;
+    }
+    .rowImg.row02.funnels {
+        background-image: url('../images/funnels-2-mobile.svg') !important;
+        background-size: 348px 343px;
+        background-repeat: no-repeat;
+        height: 343px;
+    }
+    .rowImg.row03.funnels {
+        background-image: url('../images/funnels-3-mobile.svg') !important;
+        background-size: 342px 339px;
+        background-repeat: no-repeat;
+        height: 339px;
+    }
+}
+
+/* - RETENTION */
+
+.head.retention {
+    background-image: url('../images/funnels-head.svg') !important;
+    background-size: 552px 413px;
+    background-position: 700px 40px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row01.retention {
+    background-image: url('../images/trends-1.svg') !important;
+    background-size: 581px 539px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row02.retention {
+    background-image: url('../images/trends-2.svg') !important;
+    background-size: 503px 603px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row03.retention {
+    background-image: url('../images/trends-3.svg') !important;
+    background-size: 678px 626px;
+    background-repeat: no-repeat;
+}
+
+.nextFeature.retention {
+    background-image: url('../images/retention-head.svg') !important;
+    background-size: 533px 400px;
+    background-position: 700px center;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 834px) {
+    .head.retention {
+        background-size: 300px auto;
+    }
+    .rowImg.row01.retention {
+        background-image: url('../images/funnels-1-mobile.svg') !important;
+        background-size: 346px 338px;
+        background-repeat: no-repeat;
+        height: 338px;
+    }
+    .rowImg.row02.retention {
+        background-image: url('../images/funnels-2-mobile.svg') !important;
+        background-size: 348px 343px;
+        background-repeat: no-repeat;
+        height: 343px;
+    }
+    .rowImg.row03.retention {
+        background-image: url('../images/funnels-3-mobile.svg') !important;
+        background-size: 342px 339px;
+        background-repeat: no-repeat;
+        height: 339px;
     }
 }
