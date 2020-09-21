@@ -116,7 +116,7 @@ const PricingPage = () => {
         price: '$0',
         priceDetail: 'forever',
         description:
-          'Ideal if your team has technical expertise and handles large volumes of users or events',
+          'Ideal if your team has technical expertise and handles large volumes of users or events.',
         callToAction: 'Start deployment',
         callToActionType: 'primary',
         callToActionDest: {
@@ -135,11 +135,11 @@ const PricingPage = () => {
       },
       {
         title: 'Enterprise',
-        popular: true,
-        price: 'Starts at $2k',
-        priceDetail: '/month',
+        popular: false,
+        price: 'Custom',
+        priceDetail: 'contact us',
         description:
-          'Ideal for companies need scalability and enterprise features',
+          'Ideal for companies need scalability, enterprise features and custom integrations.',
         callToAction: 'Contact sales',
         callToActionDest: {
           type: 'url',
@@ -157,14 +157,13 @@ const PricingPage = () => {
         ],
       },
       {
-        title: 'Supported Enterprise',
-        popular: false,
-        price: 'Starts at $4k',
-        priceDetail: '/month',
+        title: 'Supported',
+        popular: true,
+        price: 'Custom',
+        priceDetail: 'contact us',
         description:
           'Ideal for companies that do not want the hassle of managing PostHog, but want to own their data.',
         callToAction: 'Contact sales',
-        wraps: true,
         callToActionDest: {
           type: 'url',
           value:
