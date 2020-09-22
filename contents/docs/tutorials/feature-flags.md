@@ -5,12 +5,15 @@ showTitle: true
 ---
 <br />
 
-<small class="note-block centered">_Estimated Reading Time: 8 minutes ☕☕_</small>
+<small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
 
 <br />
 
+<span class="larger-image">
 
 ![](../../images/tutorials/banners/feature-flags.png)
+
+</span>
 
 <br />
 
@@ -24,11 +27,24 @@ To make this process less painful and safer, you can use feature flags.
 
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
-This tutorial will walk you through creating and using a feature flag with PostHog, cover some basic use cases, and answer some of the questions you may have when using them.
+This tutorial will walk you through creating and using a feature flag with PostHog and answer some of the questions you may have when using them.
 
 <span class='centered'>...</span>
 
 _Prefer to watch a video? Check out the [Feature Flags section of our demo video](https://youtu.be/aUILrrrlu50?t=950) for a shorter overview of this functionality._
+
+## Pre-Requisites
+
+To follow this tutorial along, you need to:
+
+1. Have [deployed PostHog](/docs/deployment)
+1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python integration](/docs/integrations/python-integration), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
+
+## Determining a Use Case
+
+Before you create a feature flag, you should have an idea in mind of a feature that you want to only roll out to a subset of your users. If you need help, we have created a [supporting page](/docs/feature-flag-use-cases) with some example use cases for feature flags that you can refer to.
+
+It can also be useful to create your feature flags before working on the functionality, so that you can build the feature with the flag in mind, saving you the time and effort to make sure the feature built is completely encapsulated by the flag.
 
 ## Creating Feature Flags
 
@@ -58,7 +74,7 @@ Used to refer to your flag in your codebase. While the flag name does not affect
 
 <div class='note-block'><b>Pro tip:</b> Make sure you choose a key for your flag that is descriptive and styled consistently with your codebase. Changing a flag key will require you to update your codebase and may harm persistence, so it's best to avoid doing so.</div><br />
 
-**Active**
+**Feature flag is active**
 
 This toggle is an important part of feature flags. It means you can turn feature flags on only when you're ready to do so, or off if something goes wrong. It can be used as a "kill switch" for features.
 
@@ -123,7 +139,7 @@ While this is a trivial example, you can have as much logic as you want being po
 
 ## Advanced Controls
 
-### Loading Flags
+### Ensuring flags are loaded before usage
 
 Every time a user loads a page we send a request in the background to an endpoint to get the feature flags that apply to that user. We store those flags as a cookie. 
 
@@ -140,6 +156,8 @@ posthog.onFeatureFlags(function() {
 })
 ```
 
+### Forcing feature flags to update 
+
 In our JS Integration, the reason we store flags as a cookie is to reduce the load on the server and improve the performance of your app, as it doesn't need to always make an HTTP request, it can simply refer to data stored locally in the browser. 
 
 While this makes your app faster, it means that if your user does something mid-session which causes the flag to turn on for them, this will not be immediately updated. As such, if you expect your app to have scenarios like this _and_ you want flags to update mid-session, you can reload them yourself, by using the `reloadFeatureFlags` function.
@@ -149,57 +167,6 @@ posthog.reloadFeatureFlags()
 ```
 
 Calling this function will force PostHog to hit the endpoint for the updated information, and allows you ensure changes are reflected mid-session.
-
-## Feature Flag Uses
-
-Feature flags are a very powerful piece of functionality that can be used in a wide variety of ways. How you use them will depend on your particular painpoints and internal best practices.
-
-For us, here are some suggestions of use cases that could fit nicely with feature flags:
-
-### A/B Testing
-
-![A/B Testing Example](../../images/tutorials/feature-flags/ab-testing.png)
-
-<br />
-
-In simple terms, A/B testing is a method for determining how to provide the best user experience or meet other product goals by testing how different features perform. 
-
-This could be used to answer questions such as "Do users click a button more often if it is blue or red?" or more complex questions like "How much more time do active users who have signed up for a free trial spend on our blog pages if we add a banner image?".
-
-At PostHog, we're still working to provide built-in specific A/B Testing functionality. However, with feature flags, there's already a lot you can do in this regard.
-
-A great way to do this is by using [Cohorts](/docs/features/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different cohorts. 
-
-Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
-
-![Trends A/B Testing](../../images/tutorials/feature-flags/trends-ab.png)
-
-### Gradual Rollouts
-
-There are many occasions when you might want to roll out a feature to your users slowly. Maybe you only want to enable it for Beta users, or you simply want to give users a transtion period.
-
-Whatever the case may be, feature flags let you easily roll out features in an incremental way, increasing the portion of users that have the feature as fast or slow as you wish. 
-
-### "Master Toggles"
-
-If you have to ship a big piece of functionality, chances are that you'll be doing it across multiple PRs.
-
-As such, rather than attempt to coordinate a merge spree to ensure everything is live at once, you can create a feature flag that wraps all the new logic in all the pull requests. Then, once everything is merged and ready to go, you can simply flip the switch to release it.
-
-Better yet, you can then release it slowly to make sure nothing breaks, and, if it does, you can easily turn it off with one click.
-
-And this brings us to the next example.
-
-### Kill Switches
-
-You don't need feature flags _per se_ to implement kill switches, but having the ability to immediately turn a flag off is a nice add-on to the functionality.
-
-Perhaps your goal all along was to do A/B testing for your UX, but, when something breaks, you can always roll it back safely with minor consequences (if implemented correctly).
-
-
-
-
-
 
 ## Example Code & Playground
 
