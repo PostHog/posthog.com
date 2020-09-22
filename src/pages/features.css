@@ -391,9 +391,16 @@ main > div > div {
     transition: color 0.3s;
 }
 
-.headNav:hover p,
-.headNav:hover button {
-    color: #1d4aff !important;
+.blue .headNav:hover p,
+.blue .headNav:hover button {
+    color: #f7a501 !important;
+}
+
+.yellow .headNav:hover p,
+.yellow .headNav:hover button,
+.orange .headNav:hover p,
+.orange .headNav:hover button {
+    color: #35416b !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -510,10 +517,11 @@ h2.number.row02 {
 .rowImg.row03 {
     position: absolute;
     height: 700px;
-    width: 50vw;
-    max-width: 720px;
-    left: 50vw;
-    background-position: center top;
+    width: calc(100vw - 720px);
+    max-width: 700px;
+    left: 720px;
+    background-position: left top;
+    margin-left: 20px;
 }
 
 .rowImg.row02 {
@@ -547,6 +555,10 @@ h2.number.row02 {
     .rowImg.row02 {
         left: calc(1 / 24 * 1440px);
     }
+}
+
+.featuresRow.row03 {
+    margin-bottom: 0 !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -638,6 +650,9 @@ h2.number.row02 {
 }
 
 @media screen and (max-width: 834px) {
+    .startNowWrapper {
+        height: 200px;
+    }
     .startNowRow {
         left: calc(20 / 834 * 100vw);
         height: 72px;
@@ -719,9 +734,16 @@ h2.number.row02 {
     transition: color 0.3s;
 }
 
-.nextFeatureNav:hover p,
-.nextFeatureNav:hover button {
-    color: #1d4aff !important;
+.blue .nextFeatureNav:hover p,
+.blue .nextFeatureNav:hover button {
+    color: #f7a501 !important;
+}
+
+.orange .nextFeatureNav:hover p,
+.orange .nextFeatureNav:hover button,
+.yellow .nextFeatureNav:hover p,
+.yellow .nextFeatureNav:hover button {
+    color: #35416b !important;
 }
 
 .nextFeatureText h2,
@@ -729,9 +751,16 @@ h2.number.row02 {
     transition: color 0.3s;
 }
 
-.nextFeatureText:hover h2,
-.nextFeatureText:hover p {
-    color: #1d4aff;
+.blue .nextFeatureText:hover h2,
+.blue .nextFeatureText:hover p {
+    color: #f7a501;
+}
+
+.orange .nextFeatureText:hover h2,
+.orange .nextFeatureText:hover p,
+.yellow .nextFeatureText:hover h2,
+.yellow .nextFeatureText:hover p {
+    color: #35416b;
 }
 
 @media screen and (max-width: 834px) {
