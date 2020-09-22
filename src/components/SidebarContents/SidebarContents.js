@@ -10,6 +10,12 @@ import './SidebarContents.css'
 const SubMenu = Menu.SubMenu
 
 class SidebarContents extends Component {
+    componentDidMount() {
+        if (!window.posthog.isFeatureEnabled('launch-tutorials-section')) {
+            document.getElementById('tutorials-sidebar-item').style['display'] = 'none'
+        }
+    }
+
     onSetSidebarOpen = () => {
         this.props.onSetSidebarOpen(false)
     }
@@ -145,6 +151,7 @@ class SidebarContents extends Component {
                                 return (
                                     <SubMenu
                                         className="submenuSelected"
+                                        id={item.title.toLowerCase() + '-sidebar-item'}
                                         key={item.key}
                                         title={<span style={{ fontWeight: 750 }}>{item.title}</span>}
                                     >
