@@ -5,7 +5,7 @@
 .productFeaturesHead {
     width: 100vw;
     background-color: #35416b;
-    padding: 0 25px;
+    padding: 0 70px;
     margin-bottom: 40px;
     height: 522px;
     display: flex;
@@ -36,10 +36,46 @@
     line-height: 60px;
 }
 
+.productFeaturesHeadTextMobile {
+    display: none;
+}
+
 @media screen and (min-width: 1440px) {
     .productFeaturesHead {
         background-position: calc((100vw - 1440px) / 2 + 700px) center;
         padding: 0 calc((100vw - 1440px) / 2 + 25px);
+    }
+}
+
+@media screen and (max-width: 843px) {
+    .productFeaturesHead {
+        background-image: url('../images/features-head-mobile.svg');
+        background-size: 324px 167px;
+        background-position: center center;
+        width: 100vw;
+        height: 207px;
+    }
+    .productFeaturesHeadText {
+        display: none !important;
+    }
+    .productFeaturesHeadTextMobile h1 {
+        font-size: 24px;
+        line-height: 32px;
+        color: #000;
+    }
+    .productFeaturesHeadTextMobile p {
+        font-size: 16px;
+        line-height: 32px;
+        color: #000;
+    }
+    .productFeaturesHeadTextMobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 296px;
+        padding: 0 32px;
+        margin-bottom: 40px;
     }
 }
 
@@ -48,33 +84,35 @@
 .featuresNav {
     position: relative;
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100vw;
+    max-width: 1440px;
+    height: 1000px;
+    margin-bottom: 40px;
+}
+
+.threeFeatures {
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     width: 100vw;
     max-width: 1440px;
-    height: 600px;
 }
 
-.twoFeatures {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 368px;
-}
-
-.twoFeatures a {
+.threeFeatures a {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 125px;
-    height: 220px;
     border-radius: 18px;
     transition: all 0.3s;
     text-align: center;
+    width: 250px;
+    height: 340px;
 }
 
-.twoOtherFeatures a > h4 {
+.threeFeatures a > h4 {
     font-family: 'Gosha sans', Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 20px;
@@ -82,8 +120,29 @@
     margin-bottom: 28px;
 }
 
-.twoOtherFeatures a > img {
+.threeFeatures a > img {
     margin-bottom: 0 !important;
+    height: 292px;
+    width: 232px;
+}
+
+.threeFeatures a:hover {
+    box-shadow: 0 0 5px 5px #f0f0f0;
+}
+
+@media screen and (max-width: 834px) {
+    .featuresNav {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .threeFeatures {
+        flex-direction: column;
+        align-items: center;
+    }
+    .threeFeatures a {
+        width: 140px;
+        height: 280px;
+    }
 }
 
 /* - TABLE */
@@ -180,6 +239,52 @@
 
 .features.table-borders td:last-child {
     background-color: #1d4aff;
+}
+
+.featuresTableText {
+    width: 100vw;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10vw;
+    margin: 40px 0;
+}
+
+.featuresTableText img {
+    margin: 0 20px;
+}
+
+.featuresTableText p {
+    margin: 0 !important;
+}
+
+@media screen and (max-width: 834px) {
+    .features.table-borders table {
+        min-width: 300px;
+        width: calc(100vw - 20px);
+    }
+    .features.table-borders th {
+        min-width: 50px;
+        font-size: 14px;
+    }
+    .features.table-borders th:first-child {
+        min-width: 100px;
+        width: 40vw;
+        height: 60px;
+    }
+    .features.table-borders td {
+        border-radius: 20px;
+        font-size: 16px !important;
+        line-height: 40px !important;
+        margin: 10px 0 !important;
+        min-width: 50px;
+    }
+    .features.table-borders tr > td:first-child {
+        min-width: 100px;
+        width: 40vw;
+    }
 }
 
 /* INTERNAL PAGES */
@@ -454,7 +559,7 @@ h2.number.row02 {
         text-align: center;
         margin: 100px 0 0;
     }
-    .redLine {
+    .rowContents .redLine {
         align-self: center;
     }
     h2.number {

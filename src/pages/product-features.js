@@ -11,6 +11,7 @@ import eventAutocaptureIcon from '../images/event-autocapture-icon.svg'
 import trendsIcon from '../images/trends-icon.svg'
 import funnelsIcon from '../images/funnels-icon.svg'
 import retentionIcon from '../images/retention-icon.svg'
+import asterisk from '../images/asterisk.svg'
 
 function ProductFeatures() {
     return (
@@ -24,29 +25,35 @@ function ProductFeatures() {
                     </p>
                 </div>
             </div>
+            <div className="productFeaturesHeadTextMobile">
+                <h1>Features</h1>
+                <hr className="redLine" />
+                <p>
+                    We know you’re wondering how PostHog compares to other analytics tools, so we have made it easy for
+                    you to check out how featurefull we actually are.
+                </p>
+            </div>
             <div className="featuresWrapper productFeatures">
                 <div className="featuresNav">
-                    <div className="twoFeatures">
+                    <div className="threeFeatures">
+                        <Link to="/product-features/self-hosted">
+                            <img src={selfHostedIcon} />
+                            <h4>Self hosted</h4>
+                        </Link>
+                        <Link to="/product-features/event-autocapture">
+                            <img src={eventAutocaptureIcon} />
+                            <h4>Event autocapture</h4>
+                        </Link>
                         <Link to="/product-features/trends">
                             <img src={trendsIcon} />
                             <h4>Trends</h4>
                         </Link>
+                    </div>
+                    <div className="threeFeatures">
                         <Link to="/product-features/funnels">
                             <img src={funnelsIcon} />
                             <h4>Funnels</h4>
                         </Link>
-                    </div>
-                    <div className="twoFeatures">
-                        <Link to="/product-features/retention">
-                            <img src={retentionIcon} />
-                            <h4>Retention</h4>
-                        </Link>
-                        <Link to="/product-features/feature-flags">
-                            <img src={featureFlagsIcon} />
-                            <h4>Feature flags</h4>
-                        </Link>
-                    </div>
-                    <div className="twoFeatures">
                         <Link to="/product-features/retention">
                             <img src={retentionIcon} />
                             <h4>Retention</h4>
@@ -240,6 +247,13 @@ function ProductFeatures() {
                             </tbody>
                         </table>
                     </span>
+                    <div className="featuresTableText">
+                        <img src={asterisk} />
+                        <p>
+                            Full parity has not been achieved for this feature yet. You can follow our progress{' '}
+                            <Link to="https://github.com/PostHog/posthog/projects/5">here</Link>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </Layout>
