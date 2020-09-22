@@ -1,3 +1,103 @@
+/* FEATURES INDEX */
+
+/* - HEAD */
+
+.productFeaturesHead {
+    width: 100vw;
+    background-color: #35416b;
+    padding: 0 25px;
+    margin-bottom: 40px;
+    height: 522px;
+    display: flex;
+    align-items: center;
+    background-image: url('../images/product-features-head.svg');
+    background-size: 559px 416px;
+    background-position: 700px center;
+    background-repeat: no-repeat;
+}
+
+.productFeaturesHeadText {
+    width: 600px;
+    height: 522px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.productFeaturesHeadText h1 {
+    color: #fff;
+    font-size: 64px;
+    line-height: 100px;
+}
+
+.productFeaturesHeadText p {
+    color: #fff;
+    font-size: 30px;
+    line-height: 60px;
+}
+
+@media screen and (min-width: 1440px) {
+    .productFeaturesHead {
+        background-position: calc((100vw - 1440px) / 2 + 700px) center;
+        padding: 0 calc((100vw - 1440px) / 2 + 25px);
+    }
+}
+
+/* - FEATURES NAVIGATION */
+
+.featuresNav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100vw;
+    max-width: 1440px;
+    height: 600px;
+}
+
+.twoFeatures {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 368px;
+}
+
+.twoFeatures a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 125px;
+    height: 220px;
+    border-radius: 18px;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.twoOtherFeatures a > h4 {
+    font-family: 'Gosha sans', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 36px;
+    margin-bottom: 28px;
+}
+
+.twoOtherFeatures a > img {
+    margin-bottom: 0 !important;
+}
+
+/* - TABLE */
+
+.productFeaturesTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.features.table-borders table {
+    max-width: 840px;
+}
+
 .features.table-borders td,
 .features.table-borders th {
     border: none !important;
@@ -8,15 +108,17 @@
 }
 
 .features.table-borders th {
-    font-size: 36px;
+    font-size: 24px;
     line-height: 60px;
     height: 140px;
 }
 
 .features.table-borders td {
     border-radius: 20px;
-    font-size: 24px;
-    line-height: 60px;
+    font-size: 16px !important;
+    line-height: 40px !important;
+    margin: 10px 0 !important;
+    min-width: 150px;
 }
 
 .features.table-borders td:empty {
