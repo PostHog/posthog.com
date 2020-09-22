@@ -42,7 +42,7 @@ To follow this tutorial along, you need to:
 
 ## Determining a Use Case
 
-Before you create a feature flag, you should have an idea in mind of a feature that you want to only roll out to a subset of your users. If you need help, we have created a [supporting page](/docs/feature-flag-use-cases) with some example use cases for feature flags that you can refer to.
+Before you create a feature flag, you should have an idea in mind of a feature that you want to only roll out to a subset of your users. If you'd like some inspiration to determine a good use case, you can refer to the ['Putting Your Flag to Use'](#putting-your-flag-to-use) section of this tutorial for ideas.
 
 It can also be useful to create your feature flags before working on the functionality, so that you can build the feature with the flag in mind, saving you the time and effort to make sure the feature built is completely encapsulated by the flag.
 
@@ -174,17 +174,23 @@ Feature flags are a very powerful piece of functionality that can be used in a w
 
 Here are some suggestions of use cases that could fit nicely with feature flags:
 
-### Exploring the impact on business metrics
+### Exploring the impact of a feature on business metrics
+
+Perhaps the most useful way to utilize feature flags is to answer relevant questions about your product, especially regarding how you can make it better.
+
+You might be interested in improving conversion, retention, or just making sure you have a good user experience.
+
+To do this, you can do A/B testing with feature flags.
 
 In simple terms, A/B testing is a method for determining how to provide the best user experience or meet other product goals by testing how different features perform. 
 
-This could be used to answer questions such as "Do users click a button more often if it is blue or red?" or more complex questions like "How much more time do active users who have signed up for a free trial spend on our blog pages if we add a banner image?".
+This could be used to answer questions such as "Do users click a button more often if it is blue or red?" or more complex questions like "How does our conversion rate for free trial users becoming paid users change if we double the number of CTAs on the page?".
 
-A great way to do this is by using [Cohorts](/docs/features/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different cohorts. 
+A great way to do this is by using [Cohorts](/docs/features/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different user groups. 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 
-![Trends A/B Testing](../images/tutorials/feature-flags/trends-ab.png)
+![Trends A/B Testing](../../images/tutorials/feature-flags/trends-ab.png)
 
 ### Starting with a few users first
 
