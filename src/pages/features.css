@@ -374,7 +374,7 @@ table.productFeaturesTable {
 
 .features.table-borders tr:last-child td:first-child {
     background-color: #f4f6ff !important;
-    border-radius: 0 0 20px 0;
+    border-radius: 0 0 0 20px;
 }
 
 .features.table-borders th:nth-child(2) {
