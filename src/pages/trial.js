@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Icon } from 'antd'
 import SEO from '../components/seo'
+import './styles/trial.css'
 
 const TrialPage = () => (
     <Layout>
@@ -12,8 +13,8 @@ const TrialPage = () => (
                 <h1>Try PostHog - free for 30 days</h1>
             </Col>
         </Row>
-        <Row gutter={[16, 96]}>
-            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+        <Row gutter={[16, 96]} class="card-row">
+            <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
                 <h2>
                     <Icon type="cloud" theme="filled" /> SaaS / Cloud
                 </h2>
@@ -30,7 +31,7 @@ const TrialPage = () => (
                     </a>
                 </p>
             </Col>
-            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
                 <h2>
                     <Icon type="hdd" theme="filled" /> Self Deploy
                 </h2>

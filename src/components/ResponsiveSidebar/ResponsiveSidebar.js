@@ -5,8 +5,6 @@ import { Link } from 'gatsby'
 
 class ResponsiveSidebar extends Component {
     render() {
-        const { expandedKeys } = this.props
-
         return (
             <div className="sidebarWrapper">
                 <div className="logoWrapperSidebar">

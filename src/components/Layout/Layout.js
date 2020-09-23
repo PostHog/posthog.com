@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql, prefetchPathname } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './Layout.css'
@@ -14,7 +14,6 @@ import { default as AntdLayout } from 'antd/lib/layout'
 import { connect } from 'react-redux'
 import { isSidebarHide, isAnchorHide } from '../../store/selectors'
 import NewsletterForm from '../NewsletterForm'
-import featuresStyling from '!!raw-loader!../../pages/features.css'
 
 class Layout extends Component {
     setPostPageState = (state) => {
@@ -29,13 +28,13 @@ class Layout extends Component {
             anchorHide,
             className,
             containerStyle = {},
-            expandedKeys,
             isBlogPage,
             pageTitle,
             isDocsPage,
             isHomePage,
             isBlogArticlePage,
             isFeaturesPage,
+            isHandbookPage,
         } = this.props
 
         return (
@@ -89,6 +88,7 @@ class Layout extends Component {
                                                     isHomePage={isHomePage}
                                                     isDocsPage={isDocsPage}
                                                     isBlogArticlePage={isBlogArticlePage}
+                                                    isHandbookPage={isHandbookPage}
                                                     theme="light"
                                                 />
                                                 {screenIsSmall &&

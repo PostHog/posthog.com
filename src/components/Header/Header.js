@@ -17,6 +17,7 @@ class Header extends Component {
             isHomePage,
             isBlogArticlePage,
             isDocsPage,
+            isHandbookPage,
         } = this.props
 
         return (
@@ -27,7 +28,7 @@ class Header extends Component {
             >
                 {/* Desktop Docs pages = (onPostPage && !screenIsSmall) 
             They already have a logo on the sidebar - skip adding the logo to navbar */}
-                {!(onPostPage && !screenIsSmall && isDocsPage) && (
+                {!(onPostPage && !screenIsSmall && (isDocsPage || isHandbookPage)) && (
                     <Link id="logo" to="/">
                         <img
                             alt="logo"

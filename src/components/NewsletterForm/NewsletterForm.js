@@ -9,6 +9,8 @@ class NewsletterForm extends React.Component {
     }
 
     handleChange(event) {
+        window.posthog.identify(event.target.value)
+        window.posthog.people.set({ newsletter_subscriber: true })
         this.setState({ email: event.target.value })
     }
 

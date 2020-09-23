@@ -229,6 +229,7 @@
         "entry": "Growth",
         "name": "Growth",
         "items": [
+            "handbook/growth/customer-success",
             "handbook/growth/sales",
             "handbook/growth/trials",
             "handbook/growth/posthog-array",

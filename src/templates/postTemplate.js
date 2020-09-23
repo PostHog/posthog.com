@@ -12,7 +12,6 @@ import {
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import { getSidebarSelectedKey, getSidebarEntry } from '../store/selectors'
 import SEO from '../components/seo'
-import { withPrefix } from 'gatsby-link'
 
 function addIndex(url) {
     const indexUrls = ['/docs', '/handbook']
@@ -45,6 +44,7 @@ function Template({
     const isDocsPage = parsedPathname[1] === 'docs'
     const isBlogArticlePage = parsedPathname[1] === 'blog' && parsedPathname.length > 2
     const isFeaturesPage = parsedPathname[1] === 'product-features'
+    const isHandbookPage = parsedPathname[1] === 'handbook'
 
     return (
         <Layout
@@ -55,9 +55,10 @@ function Template({
             isDocsPage={isDocsPage}
             isBlogArticlePage={isBlogArticlePage}
             isFeaturesPage={isFeaturesPage}
+            isHandbookPage={isHandbookPage}
         >
             <SEO
-                title={frontmatter.title + ' - PostHog docs'}
+                title={frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')}
                 description={frontmatter.description || excerpt}
                 pathname={markdownRemark.fields.slug}
                 article

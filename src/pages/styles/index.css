@@ -17,7 +17,7 @@
 }
 
 .homepage #logo-image {
-    content: url('../images/posthog-logo-white.svg');
+    content: url('../../images/posthog-logo-white.svg');
 }
 
 main {
@@ -112,7 +112,7 @@ p {
 }
 
 .topPageWrapper {
-    /* background-image: url('../images/landing-page-background.svg'); */
+    /* background-image: url('../../images/landing-page-background.svg'); */
     /* background-size: 600px 600px; */
     /* background-repeat: repeat; */
     /* background-position: top center; */
@@ -189,7 +189,7 @@ p {
 }
 
 .topPageCol2 {
-    background-image: url('../images/computer-dashboard-4.svg') !important;
+    background-image: url('../../images/computer-dashboard-4.svg') !important;
     position: relative;
     height: 410px;
     width: calc(14 / 24 * 100vw);
@@ -378,7 +378,7 @@ p {
 .autocaptureImg {
     left: calc((100vw - 1440px) / 2 + (1 / 24 * 100vw));
     position: absolute;
-    background-image: url('../images/retro-autocapture.svg') !important;
+    background-image: url('../../images/retro-autocapture.svg') !important;
     background-repeat: no-repeat;
     background-size: 621px 413px;
     background-position: left top;
@@ -473,7 +473,7 @@ p {
     top: 65px;
     left: 50vw;
     position: absolute;
-    background-image: url('../images/retro-how-traffic-flows.svg') !important;
+    background-image: url('../../images/retro-how-traffic-flows.svg') !important;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left top;
@@ -512,7 +512,7 @@ p {
         height: 683px;
     }
     .trafficImg {
-        background-image: url('../images/traffic-background-mobile.svg') !important;
+        background-image: url('../../images/traffic-background-mobile.svg') !important;
         background-repeat: no-repeat;
         background-size: 541px 265px;
         background-position: calc((100vw - 834px) / 2 + 230px) top;
@@ -574,7 +574,7 @@ p {
 .visualizeImg {
     left: calc((100vw - 1440px) / 2 + (1 / 24 * 100vw));
     position: absolute;
-    background-image: url('../images/retro-product-trends.svg') !important;
+    background-image: url('../../images/retro-product-trends.svg') !important;
     background-repeat: no-repeat;
     background-size: 621px 413px;
     background-position: left top;
@@ -772,7 +772,7 @@ p {
 /* FEATURE FLAGS */
 
 .featureFlagsWrapper {
-    background-image: url('../images/landing-page-background.svg') !important;
+    background-image: url('../../images/landing-page-background.svg') !important;
     background-size: 600px 600px;
     background-position: top center;
     background-repeat: repeat;
@@ -808,7 +808,7 @@ p {
     top: -60px;
     left: calc(50vw);
     position: absolute;
-    background-image: url('../images/retro-feature-flags.svg') !important;
+    background-image: url('../../images/retro-feature-flags.svg') !important;
     background-repeat: no-repeat;
     background-size: 611px 435px;
     background-position: left top;
@@ -977,7 +977,7 @@ p {
 /* SELF-HOSTED DATA */
 
 .selfHostedDataWrapper {
-    /* background-image: url('../images/landing-page-background.svg'); */
+    /* background-image: url('../../images/landing-page-background.svg'); */
     background-color: rgb(247, 165, 1, 0.2);
     /* background-size: 600px 600px; */
     /* background-repeat: repeat; */
@@ -1004,7 +1004,7 @@ p {
 .selfHostedDataImg {
     top: 53px;
     position: absolute;
-    background-image: url('../images/self-host.svg');
+    background-image: url('../../images/self-host.svg');
     background-size: 500px 499px;
     background-repeat: no-repeat;
     width: calc(100vw - 720px);
@@ -1035,7 +1035,7 @@ p {
     }
     .selfHostedDataImg {
         position: relative;
-        background-image: url('../images/self-host-mobile.svg');
+        background-image: url('../../images/self-host-mobile.svg');
         background-size: 219px 228px;
         width: 219px;
         height: 228px;
@@ -1466,7 +1466,7 @@ p {
 
 .installNowShelf {
     position: relative;
-    background-image: url('../images/shelf-5.svg') !important;
+    background-image: url('../../images/shelf-5.svg') !important;
     background-size: 1048px calc(88 / 768 * 1048px);
     background-position: center top;
     background-repeat: no-repeat;
