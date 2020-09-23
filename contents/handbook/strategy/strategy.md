@@ -17,7 +17,7 @@ We believe the best software teams have everyone understanding user behavior, no
 
 We can build something 10x better than our competition by appealing to multiple teams, not just product managers. However, we need a small foothold first.
 
-There are 10s of millions more engineers in the world than product managers, often making de-factor product decisions every day. That is where we are starting. They're the ones building the software after all, and we've seen these are the types of users we retain best.
+There are 10s of millions more engineers in the world than product managers, often making product decisions every day. That is where we are starting. They're the ones building the software after all, and we've seen these are the types of users we retain best.
 
 ## How will we get there
 
