@@ -77,4 +77,4 @@ We have:
 
 * We need to build an upgrade flow to do this
   * Bottlenecked: ClickHouse fully tested
-* QUESTION: should we increase our growth team size so we can do this faster whilst working on the activation / referral flows at the same time?
+* QUESTION: We currently have identified that we need (i) clickhouse done, so we can calculate retention easily (ii) a process for experimentation carried out in practise (iii) a clear view of our funnel as it leads to the behaviors that correlate with retention created. Anything else? should we increase our growth team size so we can do this faster whilst working on the activation / referral flows at the same time
