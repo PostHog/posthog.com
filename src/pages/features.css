@@ -363,6 +363,7 @@ table.productFeaturesTable {
     background-color: #f4f6ff;
     border-radius: 20px 0 0 0;
     color: #35416b;
+    min-width: 230px;
 }
 
 .features.table-borders td:first-child {
@@ -373,7 +374,7 @@ table.productFeaturesTable {
 
 .features.table-borders tr:last-child td:first-child {
     background-color: #f4f6ff !important;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 20px 0;
 }
 
 .features.table-borders th:nth-child(2) {
@@ -387,33 +388,33 @@ table.productFeaturesTable {
 }
 
 .features.table-borders th:nth-child(3) {
-    background-color: #aabbff;
+    background-color: #6d8aff;
     border-radius: 0;
     color: #ffffff;
 }
 
 .features.table-borders td:nth-child(3) {
-    background-color: #aabbff;
+    background-color: #6d8aff;
 }
 
 .features.table-borders th:nth-child(4) {
-    background-color: #6d8aff;
+    background-color: #f7a501;
     border-radius: 0;
     color: #ffffff;
 }
 
 .features.table-borders td:nth-child(4) {
-    background-color: #6d8aff;
+    background-color: #f7a501;
 }
 
 .features.table-borders th:last-child {
-    background-color: #1d4aff;
+    background-color: #7c4286;
     border-radius: 0 20px 0 0;
     color: #ffffff;
 }
 
 .features.table-borders td:last-child {
-    background-color: #1d4aff;
+    background-color: #7c4286;
 }
 
 .featuresTableText {
@@ -707,7 +708,7 @@ h2.number.row02 {
     height: 700px;
     width: calc(700 / 1440 * 100vw);
     max-width: 700px;
-    left: calc((100vw - 1440px) / 2 + (20 / 1440px * 100vw));
+    left: calc((100vw - 1440px) / 2 + (20 / 1440 * 100vw));
     background-position: right center;
 }
 
@@ -832,7 +833,7 @@ h2.number.row02 {
         height: 200px;
     }
     .startNowRow {
-        left: calc(20 / 834 * 100vw);
+        left: calc((20 / 834) * 100vw);
         height: 72px;
         width: 220px;
     }
