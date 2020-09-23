@@ -5,7 +5,7 @@ showTitle: true
 ---
 <br />
 
-<small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
+<small class="note-block centered">_Estimated Reading Time: 6 minutes ☕☕_</small>
 
 <br />
 
@@ -60,7 +60,7 @@ Our toolbar is still in Beta, and there are exciting new features for it on our 
 1. Display user clicks on your website in a visual way
 1. Tell you what element is the most clicked on a given page
 1. Create actions in a simple way
-1. Display all actions you have on a page
+1. Display all actions you have on a page (based on frontend elements)
 
 Our team uses the toolbar daily, mostly to get a quick overview of clicks (and therefore decide what pages need attention) as well as create actions. 
 
@@ -80,7 +80,9 @@ This will prompt you to select the URL you'd like to launch it on (in case you a
 
 ### Step 1: Enabling the heatmap
 
-The heatmap is the most exciting feature of our toolbar. To use it, just hover over the hedgehog, and click on the red fire (🔥) icon. This will enable the heatmap. The process is the same for toggling any functionality on or off. By defalt, you might have actions toggled on. Just click on the green flag icon to toggle that off and reduce noise on the page.
+The heatmap is the most exciting feature of our toolbar. To use it, just hover over the hedgehog, and click on the red fire (🔥) icon. 
+
+The process is the same for toggling any functionality on or off. By defalt, you might have actions toggled on. Just click on the green flag icon to toggle that off and reduce noise on the page.
 
 ![Launch Toolbar](../../images/tutorials/toolbar/toolbar-options.png)
 
@@ -144,7 +146,7 @@ Inner text of the element (if available).
 
 _Selector_
 
-Path to the element on the page. This is the only option you could consider modifying. You could, for example, select elements based on their `data-attr` if the path to the element is too complicated and not sufficiently robust to withstand website changes. 
+Path to the element on the page. If you're not happy with the selector PostHog is using automatically, you could, for example, select elements based on their `id` or `data-attr`. This is useful if the path to the element is too complicated and not sufficiently robust to withstand website changes. 
 
 _URL_
 
@@ -173,3 +175,11 @@ By toggling on 'Actions' (green flag icon), you should have a view of all action
 Here, you can click an element and see all actions that use it. This is a great way of making sure the relevant elements to you have an action associated with them. 
 
 Additionally, by clicking a specific action on an element, you can update or delete it.
+
+## Just the beginning...
+
+That's it! You've now learned to use the main functionalities of our toolbar. 
+
+We would like to note once more that the PostHog Toolbar is in Beta (and we mean it!), so if you do find any issues, please report them to us on [GitHub](https://github.com/PostHog/posthog/issues). 
+
+The toolbar should also be getting new features soon, so stay tuned.
