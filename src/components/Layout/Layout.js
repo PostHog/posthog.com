@@ -62,6 +62,7 @@ class Layout extends Component {
                                         <html lang="en" />
                                     </Helmet>
                                     <AntdLayout theme="light">
+                                        <div id="modal-root"/>
                                         {!screenIsSmall && onPostPage && !sidebarHide && !isBlogPage && (
                                             <AntdLayout.Sider width="300" theme="light" className="sideBar">
                                                 <ResponsiveSidebar />
