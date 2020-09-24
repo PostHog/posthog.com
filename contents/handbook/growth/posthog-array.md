@@ -45,7 +45,7 @@ If there are any new integration libraries - these won't appear above (since the
 * Now it's time to push the branch to GitHub. Run ```git push --set-upstream origin posthog_array_VERSION```.
 * Go to GitHub and create a pull request to merge the branch you just made with master. Request James Hawkins as the reviewer.
 
-Refer to more information on [updating our documentation](../updating-documentation), if you are wondering how to use images correctly.
+Refer to more information on [updating our documentation](/docs/updating-documentation), if you are wondering how to use images correctly.
 
 ### Content
 

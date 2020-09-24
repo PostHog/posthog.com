@@ -3,6 +3,7 @@
         "entry": "Docs",
         "name": "Docs",
         "child_entries": [
+            "Tutorials",
             "Deployment",
             "Configuring PostHog",
             "Integrations",
@@ -33,8 +34,13 @@
             "docs/developing-locally",
             "docs/stack",
             "docs/project-structure",
-            "updating-documentation"
+            "docs/updating-documentation"
         ]
+    },
+    {
+        "entry": "Tutorials",
+        "name": "Tutorials",
+        "items": ["docs/tutorials/feature-flags"]
     },
     {
         "entry": "Deployment",
