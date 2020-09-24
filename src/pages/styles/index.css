@@ -47,6 +47,7 @@ main {
     .row {
         width: 1440px;
         margin: 0 calc((100vw - 1440px) / 2);
+        z-index: 100;
     }
 }
 
@@ -279,10 +280,23 @@ p {
     border: solid 1px !important;
 }
 
+.ant-btn-secondary:focus {
+    background-color: #fff !important;
+    color: #353f6f !important;
+    border-color: #353f6f !important;
+}
+
 .ant-btn-primary:hover {
     background-color: #fff !important;
     color: #353f6f !important;
     border-color: #353f6f !important;
+}
+
+.ant-btn-primary:focus {
+    background-color: #353f6f !important;
+    color: #fff !important;
+    border-color: #fff !important;
+    border: solid 1px !important;
 }
 
 .ant-btn-primary {
@@ -345,6 +359,96 @@ p {
     i.anticon.anticon-right-circle {
         display: none;
     }
+}
+
+/* MODAL */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalContent {
+    position: relative;
+    border: 1px solid #ccc;
+    background: #f4f4f4;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+    width: 680px;
+    height: 496px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.modalCardsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.modalCard {
+    position: relative;
+    width: 280px;
+    height: 340px;
+    background: #ffffff;
+    box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.modalCard:hover {
+    border: 4px solid #1d4aff;
+    padding: 28px;
+}
+
+.modalCard h2 {
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.modalCard h4 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #f96132;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.modalCard p {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+button.modalClose {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #ababab;
+    border-color: #ababab;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+button.modalClose:hover {
+    background-color: #fff;
+    border-color: #1d4aff;
+    color: #1d4aff;
 }
 
 /* AUTOCAPTURE EVENTS */

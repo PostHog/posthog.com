@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'antd/lib/button'
-import Modal from '../components/Modal/Modal'
+import Modal from 'react-modal'
 import 'antd/lib/button/style/css'
 import './styles/index.css'
 import { Link } from 'gatsby'
+import modalSaasCloud from '../images/modal-saas-cloud.svg'
+import modalSelfDeploy from '../images/modal-self-deploy.svg'
 import improveMobile from '../images/improve-mobile.svg'
 import improveRetention from '../images/retro-retention-box.svg'
 import improvePaths from '../images/retro-paths-box.svg'
@@ -30,11 +32,7 @@ import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
 
 function IndexPage() {
-    const modalRef = React.useRef();
-
-    const openModal = () => {
-      modalRef.current.openModal()
-    };
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     return (
         <div className="indexContainer">
@@ -59,20 +57,52 @@ function IndexPage() {
                                         <br />
                                     </div>
                                     <div className="joinUsersButtons">
-                                        {/* <a href="/trial"> */}
-                                            <Button type="secondary" size="large" className="getStarted" onClick={openModal}>
-                                                Get Started for Free
-                                            </Button>
-                                            <Modal ref={modalRef}>
-                                                <h1>Modal Header</h1>
-                                                <p>
-                                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi eligendi esse facere illo in minima nulla quis reiciendis. Eligendi impedit nostrum quam quod reprehenderit, ullam veritatis. Fuga provident quos velit.</span><span>Accusantium ad, alias animi et eum, excepturi explicabo fuga iusto magnam maxime minima molestias nam nemo nostrum pariatur perspiciatis porro quae quibusdam quidem quis repudiandae sed ullam vel, veniam vero.</span><span>Eligendi nulla quasi quibusdam quod saepe suscipit tenetur voluptas voluptate! Accusamus amet, commodi culpa distinctio dolor eveniet expedita hic iure magnam magni mollitia nulla officia quas, reiciendis repellat sapiente, veniam!</span>
-                                                </p>
-                                                <button onClick={() => modalRef.current.close()}>
-                                                Close Modal
-                                                </button>
-                                            </Modal>
-                                        {/* </a> */}
+                                        <Button
+                                            type="secondary"
+                                            size="large"
+                                            className="getStarted"
+                                            onClick={() => setModalIsOpen(true)}
+                                        >
+                                            Get Started for Free
+                                        </Button>
+                                        <Modal
+                                            isOpen={modalIsOpen}
+                                            onRequestClose={() => setModalIsOpen(false)}
+                                            className="modalContent"
+                                            overlayClassName="modalOverlay"
+                                        >
+                                            <h2>Try PostHog - free for 30 days</h2>
+                                            <div className="modalCardsWrapper">
+                                                <Link to="https://app.posthog.com/signup">
+                                                    <div className="modalSaasCloud modalCard">
+                                                        <img src={modalSaasCloud} alt="modal-saas-cloud" />
+                                                        <h2>SaaS/Cloud</h2>
+                                                        <h4>SaaS hosted by PostHog</h4>
+                                                        <p>
+                                                            Select this option if you want to quickly try the PostHog
+                                                            features and don't want to worry about installing it
+                                                            yourself.
+                                                        </p>
+                                                    </div>
+                                                </Link>
+                                                <Link to="/docs/deployment">
+                                                    <div className="modalSelfDeploy modalCard">
+                                                        <img src={modalSelfDeploy} alt="modal-self-deploy " />
+                                                        <h2>Self Deploy</h2>
+                                                        <h4>Host your own instance of PostHog</h4>
+                                                        <p>
+                                                            Select this option if you want to install PostHog on your
+                                                            own infrastructure.
+                                                        </p>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                            <Button
+                                                icon="close"
+                                                onClick={() => setModalIsOpen(false)}
+                                                className="modalClose"
+                                            />
+                                        </Modal>
                                         <a href="/request_demo">
                                             <Button type="primary" size="large" className="requestDemo">
                                                 Request Demo
@@ -84,8 +114,6 @@ function IndexPage() {
                             </div>
                         </div>
                     </div>
-
-                    
 
                     {/*01 - It all starts with event autocapture*/}
                     <div className="autocaptureWrapper wrapper autocapturesizing featureSection">
