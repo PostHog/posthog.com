@@ -250,6 +250,10 @@
     .p-comparison-btn {
         margin-bottom: 16px;
     }
+
+    .plan-card {
+        width: 95% !important;
+    }
 }
 
 @media only screen and (max-width: 1076px) {
