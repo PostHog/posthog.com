@@ -23,6 +23,11 @@
     margin-top: 15px;
 }
 
+.p-plan-title-wrap {
+    margin-top: -20px;
+    margin-bottom: 7px;
+}
+
 .p-plan-price {
     font-size: 32px;
     font-weight: 500;
@@ -74,6 +79,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 400px;
 }
 
 .p-segment {
@@ -208,6 +214,16 @@
     margin-top: 40px;
 }
 
+.pricing-page-container {
+    margin: 0px auto;
+    max-width: 960px;
+    padding: 20px 1.0875rem 1.45rem;
+}
+
+.plan-card {
+    max-width: 600px;
+}
+
 @media only screen and (max-width: 767px) {
     .p-title {
         font-size: 40px;
@@ -233,5 +249,15 @@
 
     .p-comparison-btn {
         margin-bottom: 16px;
+    }
+
+    .plan-card {
+        width: 95% !important;
+    }
+}
+
+@media only screen and (max-width: 1076px) {
+    h3 {
+        font-size: 30px !important;
     }
 }

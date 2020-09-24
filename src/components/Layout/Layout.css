@@ -1407,4 +1407,8 @@ code {
         font-size: 20px;
         line-height: 32px;
     }
+
+    .footer-links-header {
+        font-size: 16px;
+    }
 }
