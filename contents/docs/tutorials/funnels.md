@@ -11,24 +11,43 @@ showTitle: true
 
 <span class="larger-image">
 
-![Toolbar banner image](../../images/tutorials/banners/funnels.png)
+![Funnels Banner Image](../../images/tutorials/banners/funnels.png)
 
 </span>
 
 <br />
 
+For most products, having a user land on your page is just the beginning. 
 
+After all, a pageview isn't worth much if it doesn't lead to anything. 
 
-![Toolbar landing image](../../images/tutorials/funnels/insights-funnel.png)
+You want users to sign up, use the product, pay you. 
 
-How's that for an answer?
+To determine how well you're achieving these goals, you need to look at **conversion**.
 
-This tutorial will walk you through using the PostHog Toolbar to answer some of your analytics questions, as well as show you step-by-step how to create actions with it, so that you can sort through your events and level up your PostHog game. 
+Conversion rates tell you how well (or poorly) you're getting users from one step or action you need them to perform to another. 
 
+For example, after a user visits your landing page, you want them to click a sign up button. Then, you want them to actually complete the signup process.
+
+This process alone raises a lot of important questions for your business metrics, such as:
+
+_"What percentage of users who visit my website actually sign up?"_
+
+To answer those questions, you should really be using funnels.
+
+![Funnel Example](../../images/tutorials/funnels/insights-funnel.png)
+
+Above is a simple example of a PostHog funnel. It was made to answer the question:
+
+_"Out of the PostHog team members who visited the website, how many clicked our 'Star Repo' button?"_
+
+Just like us, you probably have a lot of questions that can be answered with funnels. 
+
+Hence, this tutorial will walk you through creating a funnel step-by-step, while covering some of the use cases and features of PostHog funnels. 
 
 <span class='centered'>...</span>
 
-_Prefer to watch a video? Check out the [Toolbar sections of our demo video](https://youtu.be/aUILrrrlu50?t=48) for a shorter overview of this functionality._
+_Prefer to watch a video? Check out the [Funnels section of our demo video](https://youtu.be/aUILrrrlu50?t=504) for a shorter overview of this functionality._
 
 ## Pre-Requisites
 
