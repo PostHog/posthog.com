@@ -263,7 +263,7 @@ h2 {
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 48px;
-    line-height: 1.5;
+    line-height: 72px;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
@@ -280,7 +280,7 @@ h3 {
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 36px;
-    line-height: 1.5;
+    line-height: 54px;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
@@ -297,7 +297,7 @@ h4 {
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 30px;
-    line-height: 1.5;
+    line-height: 45px;
     font-family: 'Helvetica Neue';
     font-style: normal;
 }
@@ -1416,5 +1416,9 @@ code {
         font-weight: 400;
         font-size: 20px;
         line-height: 32px;
+    }
+
+    .footer-links-header {
+        font-size: 16px;
     }
 }
