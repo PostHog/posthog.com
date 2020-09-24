@@ -6,8 +6,6 @@ import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import featureFlagsIcon from '../../images/feature-flags-icon.svg'
-import selfHostedIcon from '../../images/self-hosted-icon.svg'
-import eventAutocaptureIcon from '../../images/event-autocapture-icon.svg'
 import trendsIcon from '../../images/trends-icon.svg'
 import funnelsIcon from '../../images/funnels-icon.svg'
 import retentionIcon from '../../images/retention-icon.svg'
@@ -23,7 +21,7 @@ function ProductFeatures() {
                             <p>Back to Features</p>
                         </Link>
                         <h1>Self Hosted</h1>
-                        <h3>Powerful analytics on your own infrastructure, with all the features your team needs.</h3>
+                        <p>Powerful analytics on your own infrastructure, with all the features your team needs.</p>
                         <Link to="/product-features/event-autocapture" className="headNav bottom">
                             <p>Next Feature</p>
                             <Button icon="right" />

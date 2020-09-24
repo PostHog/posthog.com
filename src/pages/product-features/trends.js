@@ -8,8 +8,6 @@ import rays from '../../images/rays.svg'
 import featureFlagsIcon from '../../images/feature-flags-icon.svg'
 import selfHostedIcon from '../../images/self-hosted-icon.svg'
 import eventAutocaptureIcon from '../../images/event-autocapture-icon.svg'
-import trendsIcon from '../../images/trends-icon.svg'
-import funnelsIcon from '../../images/funnels-icon.svg'
 import retentionIcon from '../../images/retention-icon.svg'
 
 function ProductFeatures() {
@@ -23,7 +21,7 @@ function ProductFeatures() {
                             <p>Back to Features</p>
                         </Link>
                         <h1>Trends</h1>
-                        <h3>Understand what parts of your app are engaging, and what areas still need some work.</h3>
+                        <p>Understand what parts of your app are engaging, and what areas still need some work.</p>
                         <Link to="/product-features/funnels" className="headNav bottom">
                             <p>Next Feature</p>
                             <Button icon="right" />
