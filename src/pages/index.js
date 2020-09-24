@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from 'antd/lib/button'
+import Modal from '../components/Modal/Modal'
 import 'antd/lib/button/style/css'
 import './styles/index.css'
 import { Link } from 'gatsby'
@@ -29,6 +30,12 @@ import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
 
 function IndexPage() {
+    const modalRef = React.useRef();
+
+    const openModal = () => {
+      modalRef.current.openModal()
+    };
+
     return (
         <div className="indexContainer">
             <Layout containerStyle={{ maxWidth: 'auto', padding: 0 }} isHomePage={true}>
@@ -52,11 +59,14 @@ function IndexPage() {
                                         <br />
                                     </div>
                                     <div className="joinUsersButtons">
-                                        <a href="/trial">
-                                            <Button type="secondary" size="large" className="getStarted">
+                                        {/* <a href="/trial"> */}
+                                            <Button type="secondary" size="large" className="getStarted" onClick={openModal}>
                                                 Get Started for Free
                                             </Button>
-                                        </a>
+                                            <Modal ref={modalRef}>
+                                                <p>some content</p>
+                                            </Modal>
+                                        {/* </a> */}
                                         <a href="/request_demo">
                                             <Button type="primary" size="large" className="requestDemo">
                                                 Request Demo
@@ -68,6 +78,8 @@ function IndexPage() {
                             </div>
                         </div>
                     </div>
+
+                    
 
                     {/*01 - It all starts with event autocapture*/}
                     <div className="autocaptureWrapper wrapper autocapturesizing featureSection">
