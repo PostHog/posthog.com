@@ -2,3 +2,8 @@
     margin-left: 80px !important;
     width: 40% !important;
 }
+
+.spacer-row {
+    display: flex;
+    flex-direction: column;
+}
