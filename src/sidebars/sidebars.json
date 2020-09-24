@@ -40,7 +40,7 @@
     {
         "entry": "Tutorials",
         "name": "Tutorials",
-        "items": ["docs/tutorials/feature-flags"]
+        "items": ["docs/tutorials/feature-flags", "docs/tutorials/toolbar"]
     },
     {
         "entry": "Deployment",
