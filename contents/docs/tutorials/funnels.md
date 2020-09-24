@@ -17,23 +17,9 @@ showTitle: true
 
 <br />
 
-An underlying purpose of analytics is to answer questions by utilizing data.
 
-_"Who's using my website?"_ 
 
-_"What type of people pay for my product?"_
-
-_"Why am I not retaining users?"_
-
-Often times, these questions don't have a simple answer, and, more often than not, just getting _any_ answer to your questions requires a good amount of effort. 
-
-However, there are some questions that have straightforward answers - the difficulty comes in getting that answer across. 
-
-Enter the PostHog Toolbar. 
-
-Consider the question: _"Where are my users clicking?"_
-
-![Toolbar landing image](../../images/tutorials/toolbar/toolbar-landing-page.png)
+![Toolbar landing image](../../images/tutorials/funnels/insights-funnel.png)
 
 How's that for an answer?
 
