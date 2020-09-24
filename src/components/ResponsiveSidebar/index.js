@@ -1,3 +1,3 @@
-import ResponsiveSidebar from './ResponsiveSidebar';
+import ResponsiveSidebar from './ResponsiveSidebar'
 
-export default ResponsiveSidebar;
+export default ResponsiveSidebar

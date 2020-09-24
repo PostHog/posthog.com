@@ -1,0 +1,10 @@
+.ant-layout-content {
+    margin: 0px auto;
+    max-width: 960px;
+    padding: 20px 1.0875rem 1.45rem;
+}
+
+.spacer-row {
+    display: flex;
+    flex-direction: column;
+}
