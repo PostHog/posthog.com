@@ -80,9 +80,7 @@ function IndexPage() {
                                                         </div>
                                                         <h4>Small business or low volumes and don't want hassle?</h4>
                                                         <p>
-                                                            Select this option if you want to quickly try the PostHog
-                                                            features and don't want to worry about installing it
-                                                            yourself. Free trial.
+                                                            This is the simplest way to get started. Create an account.
                                                         </p>
                                                     </div>
                                                 </a>
