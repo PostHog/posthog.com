@@ -11,7 +11,7 @@ const SubMenu = Menu.SubMenu
 
 class SidebarContents extends Component {
     componentDidMount() {
-        if (!window.posthog.isFeatureEnabled('launch-tutorials-section')) {
+        if (!window.posthog?.isFeatureEnabled('launch-tutorials-section')) {
             document.getElementById('tutorials-sidebar-item').style['display'] = 'none'
         }
     }
