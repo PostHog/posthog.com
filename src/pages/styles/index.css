@@ -373,6 +373,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 9000;
 }
 
 .modalContent {
@@ -390,6 +391,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    z-index: 9001;
 }
 
 .modalCardsWrapper {
