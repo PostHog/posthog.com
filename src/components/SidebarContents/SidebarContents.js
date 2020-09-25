@@ -5,18 +5,21 @@ import 'antd/lib/menu/style/css'
 import './SidebarContents.css'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
+import { featureFlagLogic } from '../../logic/featureFlagLogic'
 
 const SubMenu = Menu.SubMenu
 
 function SidebarContents() {
+    const { featureFlags } = useValues(featureFlagLogic)
+
     useEffect(() => {
-        if (!window.posthog.isFeatureEnabled('launch-tutorials-section')) {
-            const tutorials = window.document.getElementById('tutorials-sidebar-item')
-            if (tutorials) {
-                tutorials.style['display'] = 'none'
+        if (!featureFlags['launch-tutorials-section']) {
+            const tutorialsDiv = window.document.getElementById('tutorials-sidebar-item')
+            if (tutorialsDiv) {
+                tutorialsDiv.style.display = 'none'
             }
         }
-    }, [])
+    }, [featureFlags])
 
     const {
         sidebarSelectedKey: selectedKey,
