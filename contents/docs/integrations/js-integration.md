@@ -1,5 +1,5 @@
 ---
-title: JS Integration
+title: JavaScript Integration
 sidebar: Docs
 showTitle: true
 ---
