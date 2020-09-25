@@ -29,20 +29,24 @@ export const featureFlagLogic = kea({
 
     events: ({ actions, cache }) => ({
         afterMount: () => {
-            if (window.posthog) {
-                actions.posthogFound(window.posthog)
-            } else {
-                // check every 300ms if posthog is now there
-                cache.posthogInterval = window.setInterval(() => {
-                    if (window.posthog) {
-                        actions.posthogFound(window.posthog)
-                        window.clearInterval(cache.posthogInterval)
-                    }
-                }, 300)
+            if (typeof window !== 'undefined') {
+                if (window.posthog) {
+                    actions.posthogFound(window.posthog)
+                } else {
+                    // check every 300ms if posthog is now there
+                    cache.posthogInterval = window.setInterval(() => {
+                        if (window.posthog) {
+                            actions.posthogFound(window.posthog)
+                            window.clearInterval(cache.posthogInterval)
+                        }
+                    }, 300)
+                }
             }
         },
         beforeUnmount: () => {
-            window.clearInterval(cache.posthogInterval)
+            if (typeof window !== 'undefined') {
+                window.clearInterval(cache.posthogInterval)
+            }
         },
     }),
 })
