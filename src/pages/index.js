@@ -75,8 +75,10 @@ function IndexPage() {
                                             <div className="modalCardsWrapper">
                                                 <Link to="https://app.posthog.com/signup">
                                                     <div className="modalSaasCloud modalCard">
-                                                        <img src={modalSaasCloud} alt="modal-saas-cloud" />
-                                                        <h2>SaaS/Cloud</h2>
+                                                        <div className="modalCardHeader">
+                                                            <img src={modalSaasCloud} alt="modal-saas-cloud" />
+                                                            <h2>SaaS/Cloud</h2>
+                                                        </div>
                                                         <h4>SaaS hosted by PostHog</h4>
                                                         <p>
                                                             Select this option if you want to quickly try the PostHog
@@ -87,8 +89,10 @@ function IndexPage() {
                                                 </Link>
                                                 <Link to="/docs/deployment">
                                                     <div className="modalSelfDeploy modalCard">
-                                                        <img src={modalSelfDeploy} alt="modal-self-deploy " />
-                                                        <h2>Self Deploy</h2>
+                                                        <div className="modalCardHeader">
+                                                            <img src={modalSelfDeploy} alt="modal-self-deploy " />
+                                                            <h2>Self Deploy</h2>
+                                                        </div>
                                                         <h4>Host your own instance of PostHog</h4>
                                                         <p>
                                                             Select this option if you want to install PostHog on your
