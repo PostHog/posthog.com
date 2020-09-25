@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'antd/lib/button'
+import Modal from 'react-modal'
 import 'antd/lib/button/style/css'
 import './styles/index.css'
 import { Link } from 'gatsby'
+import modalSaasCloud from '../images/modal-saas-cloud.svg'
+import modalSelfDeploy from '../images/modal-self-deploy.svg'
 import improveMobile from '../images/improve-mobile.svg'
 import improveRetention from '../images/retro-retention-box.svg'
 import improvePaths from '../images/retro-paths-box.svg'
@@ -12,7 +15,6 @@ import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
 import shelf4 from '../images/shelf-4.svg'
 import shelf2 from '../images/shelf-2.svg'
-import rays from '../images/rays.svg'
 import coolHedgehog from '../images/cool-hedgehog.svg'
 import stackAndroid from '../images/stack-android.svg'
 import stackPython from '../images/stack-python.svg'
@@ -29,6 +31,8 @@ import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
 
 function IndexPage() {
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+
     return (
         <div className="indexContainer">
             <Layout containerStyle={{ maxWidth: 'auto', padding: 0 }} isHomePage={true}>
@@ -47,16 +51,72 @@ function IndexPage() {
                                 <div className="topPageCol1">
                                     <div className="joinUsersText">
                                         <p>
-                                            Join 1,900 companies <br className="hiddenBreak" /> using PostHog.
+                                            Join 2,100 companies <br className="hiddenBreak" /> using PostHog.
                                         </p>
                                         <br />
                                     </div>
                                     <div className="joinUsersButtons">
-                                        <a href="/trial">
-                                            <Button type="secondary" size="large" className="getStarted">
-                                                Get Started for Free
-                                            </Button>
-                                        </a>
+                                        <Button
+                                            type="secondary"
+                                            size="large"
+                                            className="getStarted"
+                                            onClick={() => setModalIsOpen(true)}
+                                        >
+                                            Get Started for Free
+                                        </Button>
+                                        <Modal
+                                            isOpen={modalIsOpen}
+                                            onRequestClose={() => setModalIsOpen(false)}
+                                            className="modalContent"
+                                            overlayClassName="modalOverlay"
+                                        >
+                                            <h2>Try PostHog - free</h2>
+                                            <div className="modalCardsWrapper">
+                                                <a href="https://app.posthog.com/signup">
+                                                    <div className="modalSaasCloud modalCard">
+                                                        <div className="modalCardHeader">
+                                                            <img src={modalSaasCloud} alt="modal-saas-cloud" />
+                                                            <h2>Cloud</h2>
+                                                        </div>
+                                                        <h4>Small business or low volumes and don't want hassle?</h4>
+                                                        <p>
+                                                            This is the simplest way to get started. Create an account.
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                                <Link to="/docs/deployment">
+                                                    <div className="modalSelfDeploy modalCard">
+                                                        <div className="modalCardHeader">
+                                                            <img src={modalSelfDeploy} alt="modal-self-deploy " />
+                                                            <h2>Open Source</h2>
+                                                        </div>
+                                                        <h4>Want to use our free open source product?</h4>
+                                                        <p>
+                                                            Deploy PostHog Open Source on your own infrastructure. Free
+                                                            forever.
+                                                        </p>
+                                                    </div>
+                                                </Link>
+                                                <a href="mailto:sales@posthog.com">
+                                                    <div className="modalSelfDeploy modalCard">
+                                                        <div className="modalCardHeader">
+                                                            <img src={modalSelfDeploy} alt="modal-self-deploy " />
+                                                            <h2>Enterprise</h2>
+                                                        </div>
+                                                        <h4>10K+ users? Need support?</h4>
+                                                        <p>
+                                                            Managed on your infrastructure with greater scalability and
+                                                            support. Book a pilot.
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <Button
+                                                icon="close"
+                                                onClick={() => setModalIsOpen(false)}
+                                                className="modalClose"
+                                            />
+                                        </Modal>
                                         <a href="/request_demo">
                                             <Button type="primary" size="large" className="requestDemo">
                                                 Request Demo
@@ -309,12 +369,9 @@ function IndexPage() {
                             </div>
                         </div>
                         <div className="startTrialRow">
-                            <Link to="/trial/">
-                                <Button type="primary" className="startTrialButton">
-                                    Start my 30-day free trial
-                                </Button>
-                            </Link>
-                            <img alt="Sun rays" src={rays} />
+                            <Button type="primary" className="startTrialButton" onClick={() => setModalIsOpen(true)}>
+                                Start my 30-day free trial
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -361,11 +418,13 @@ function IndexPage() {
                         <div className="buildingIsExpensiveText">
                             <div className="buildingIsExpensiveText2">
                                 <div className="startTrialRow">
-                                    <Link to="/trial/">
-                                        <Button type="primary" className="startTrialButton">
-                                            Start my 30-day free trial
-                                        </Button>
-                                    </Link>
+                                    <Button
+                                        type="primary"
+                                        className="startTrialButton"
+                                        onClick={() => setModalIsOpen(true)}
+                                    >
+                                        Start my 30-day free trial
+                                    </Button>
                                 </div>
                             </div>
                         </div>

@@ -47,6 +47,7 @@
         "react-dom": "^16.13.1",
         "react-github-btn": "^1.2.0",
         "react-helmet": "^5.2.1",
+        "react-modal": "^3.11.2",
         "react-redux": "^7.2.1",
         "react-responsive": "^6.1.2",
         "reselect": "^4.0.0",
