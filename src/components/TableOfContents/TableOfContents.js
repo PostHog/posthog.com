@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import Anchor from 'antd/lib/anchor'
 import 'antd/lib/anchor/style/css'
-import { onSetAnchorOpen } from '../../actions/layout'
-import { connect } from 'react-redux'
 import './TableOfContents.css'
+import { useActions } from 'kea'
+import { layoutLogic } from '../../logic/layoutLogic'
 
 const { Link } = Anchor
 
@@ -37,49 +37,33 @@ const constructTree = (list) => {
     deleteNode.sort((a, b) => b - a).forEach((index) => list.splice(index, 1))
 }
 
-class TableOfContents extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            anchors: [],
-        }
-    }
+function TableOfContents({ offsetTop, affix }) {
+    const [anchors, setAnchors] = useState([])
 
-    componentDidMount() {
+    useEffect(() => {
         const anchors = document.getElementsByClassName('post-toc-anchor')
-        this.setState({
-            anchors: filterAnchorDetails(anchors),
+        setAnchors(filterAnchorDetails(anchors))
+    }, [])
+
+    const { setAnchorOpen } = useActions(layoutLogic)
+
+    const loop = (data) =>
+        data.map((item) => {
+            if (item.children.length > 0) {
+                return (
+                    <Link href={item.href} title={item.title} key={item.href}>
+                        {loop(item.children)}
+                    </Link>
+                )
+            }
+            return <Link href={item.href} title={item.title} key={item.href} />
         })
-    }
 
-    onSetAnchorOpen = () => {
-        this.props.onSetAnchorOpen(false)
-    }
-
-    render() {
-        const { anchors } = this.state
-        const { offsetTop, affix } = this.props
-        const loop = (data) =>
-            data.map((item) => {
-                if (item.children.length > 0) {
-                    return (
-                        <Link href={item.href} title={item.title} key={item.href}>
-                            {loop(item.children)}
-                        </Link>
-                    )
-                }
-                return <Link href={item.href} title={item.title} key={item.href} />
-            })
-        return (
-            <Anchor onClick={this.onSetAnchorOpen} offsetTop={offsetTop} affix={affix}>
-                {loop(anchors)}
-            </Anchor>
-        )
-    }
+    return (
+        <Anchor onClick={() => setAnchorOpen(false)} offsetTop={offsetTop} affix={affix}>
+            {loop(anchors)}
+        </Anchor>
+    )
 }
 
-const mapDispatchToProps = {
-    onSetAnchorOpen,
-}
-
-export default connect(() => ({}), mapDispatchToProps)(TableOfContents)
+export default TableOfContents
