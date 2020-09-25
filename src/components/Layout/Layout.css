@@ -1368,6 +1368,16 @@ code {
     background-color: 'white';
 }
 
+.right {
+    display: block;
+    text-align: right;
+}
+
+.left {
+    display: block;
+    text-align: left;
+}
+
 @media screen and (max-width: 1076px) {
     .docsHeader {
         background-color: #f9f9f9;
@@ -1413,5 +1423,9 @@ code {
         font-weight: 400;
         font-size: 20px;
         line-height: 32px;
+    }
+
+    .footer-links-header {
+        font-size: 16px;
     }
 }

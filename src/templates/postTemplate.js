@@ -1,17 +1,11 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import { connect } from 'react-redux'
 import 'katex/dist/katex.min.css'
-import {
-    onSidebarContentSelected,
-    onSetSidebarContentEntry,
-    onSetAnchorHide,
-    onSetSidebarHide,
-} from '../actions/layout'
 import { DocsFooter } from '../components/Footer/DocsFooter'
-import { getSidebarSelectedKey, getSidebarEntry } from '../store/selectors'
 import SEO from '../components/seo'
+import { layoutLogic } from '../logic/layoutLogic'
+import { useActions, useValues } from 'kea'
 
 function addIndex(url) {
     const indexUrls = ['/docs', '/handbook']
@@ -20,25 +14,23 @@ function addIndex(url) {
 
 function Template({
     data, // this prop will be injected by the GraphQL query below.
-    onSidebarContentSelected,
-    selectedKey,
-    onSetSidebarContentEntry,
-    sidebarEntry,
-    onSetAnchorHide,
-    onSetSidebarHide,
     location,
 }) {
+    const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
+    const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
+
     const { markdownRemark } = data // data.markdownRemark holds our post data
     const { frontmatter, html, excerpt, id } = markdownRemark
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
 
-    onSetAnchorHide(hideAnchor)
-    onSetSidebarHide(hideSidebar)
+    // TODO: these actions should not be called here!
+    setAnchorHide(hideAnchor)
+    setSidebarHide(hideSidebar)
 
     if (selectedKey !== id) onSidebarContentSelected(id)
-    if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
+    if (sidebarEntry !== frontmatter.sidebar) setSidebarContentEntry(frontmatter.sidebar)
 
     const parsedPathname = location.pathname.split('/')
     const isDocsPage = parsedPathname[1] === 'docs'
@@ -78,21 +70,7 @@ function Template({
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        selectedKey: getSidebarSelectedKey(state),
-        sidebarEntry: getSidebarEntry(state),
-    }
-}
-
-const mapDispatchToProps = {
-    onSidebarContentSelected,
-    onSetSidebarContentEntry,
-    onSetAnchorHide,
-    onSetSidebarHide,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Template)
+export default Template
 
 export const pageQuery = graphql`
     query($path: String!) {
