@@ -14,7 +14,7 @@ const TrialPage = () => (
                     <h1>Try PostHog - free for 30 days</h1>
                 </Col>
             </Row>
-            <Row gutter={[16, 96]} class="card-row">
+            <Row gutter={[16, 96]} className="card-row">
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
                     <h2>
                         <Icon type="cloud" theme="filled" /> SaaS / Cloud
