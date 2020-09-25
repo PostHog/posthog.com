@@ -15,7 +15,6 @@ import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
 import shelf4 from '../images/shelf-4.svg'
 import shelf2 from '../images/shelf-2.svg'
-import rays from '../images/rays.svg'
 import coolHedgehog from '../images/cool-hedgehog.svg'
 import stackAndroid from '../images/stack-android.svg'
 import stackPython from '../images/stack-python.svg'
@@ -52,7 +51,7 @@ function IndexPage() {
                                 <div className="topPageCol1">
                                     <div className="joinUsersText">
                                         <p>
-                                            Join 1,900 companies <br className="hiddenBreak" /> using PostHog.
+                                            Join 2,100 companies <br className="hiddenBreak" /> using PostHog.
                                         </p>
                                         <br />
                                     </div>
@@ -71,35 +70,48 @@ function IndexPage() {
                                             className="modalContent"
                                             overlayClassName="modalOverlay"
                                         >
-                                            <h2>Try PostHog - free for 30 days</h2>
+                                            <h2>Try PostHog - free</h2>
                                             <div className="modalCardsWrapper">
-                                                <Link to="https://app.posthog.com/signup">
+                                                <a href="https://app.posthog.com/signup">
                                                     <div className="modalSaasCloud modalCard">
                                                         <div className="modalCardHeader">
                                                             <img src={modalSaasCloud} alt="modal-saas-cloud" />
-                                                            <h2>SaaS/Cloud</h2>
+                                                            <h2>Cloud</h2>
                                                         </div>
-                                                        <h4>SaaS hosted by PostHog</h4>
+                                                        <h4>Small business or low volumes and don't want hassle?</h4>
                                                         <p>
                                                             Select this option if you want to quickly try the PostHog
                                                             features and don't want to worry about installing it
-                                                            yourself.
+                                                            yourself. Free trial.
                                                         </p>
                                                     </div>
-                                                </Link>
+                                                </a>
                                                 <Link to="/docs/deployment">
                                                     <div className="modalSelfDeploy modalCard">
                                                         <div className="modalCardHeader">
                                                             <img src={modalSelfDeploy} alt="modal-self-deploy " />
-                                                            <h2>Self Deploy</h2>
+                                                            <h2>Open Source</h2>
                                                         </div>
-                                                        <h4>Host your own instance of PostHog</h4>
+                                                        <h4>Want to use our free open source product?</h4>
                                                         <p>
-                                                            Select this option if you want to install PostHog on your
-                                                            own infrastructure.
+                                                            Deploy PostHog Open Source on your own infrastructure. Free
+                                                            forever.
                                                         </p>
                                                     </div>
                                                 </Link>
+                                                <a href="mailto:sales@posthog.com">
+                                                    <div className="modalSelfDeploy modalCard">
+                                                        <div className="modalCardHeader">
+                                                            <img src={modalSelfDeploy} alt="modal-self-deploy " />
+                                                            <h2>Enterprise</h2>
+                                                        </div>
+                                                        <h4>10K+ users? Need support?</h4>
+                                                        <p>
+                                                            Managed on your infrastructure with greater scalability and
+                                                            support. Book a pilot.
+                                                        </p>
+                                                    </div>
+                                                </a>
                                             </div>
                                             <Button
                                                 icon="close"
@@ -359,12 +371,9 @@ function IndexPage() {
                             </div>
                         </div>
                         <div className="startTrialRow">
-                            <Link to="/trial/">
-                                <Button type="primary" className="startTrialButton">
-                                    Start my 30-day free trial
-                                </Button>
-                            </Link>
-                            <img alt="Sun rays" src={rays} />
+                            <Button type="primary" className="startTrialButton" onClick={() => setModalIsOpen(true)}>
+                                Start my 30-day free trial
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -411,11 +420,13 @@ function IndexPage() {
                         <div className="buildingIsExpensiveText">
                             <div className="buildingIsExpensiveText2">
                                 <div className="startTrialRow">
-                                    <Link to="/trial/">
-                                        <Button type="primary" className="startTrialButton">
-                                            Start my 30-day free trial
-                                        </Button>
-                                    </Link>
+                                    <Button
+                                        type="primary"
+                                        className="startTrialButton"
+                                        onClick={() => setModalIsOpen(true)}
+                                    >
+                                        Start my 30-day free trial
+                                    </Button>
                                 </div>
                             </div>
                         </div>

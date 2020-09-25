@@ -384,7 +384,7 @@ p {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     padding: 20px;
-    width: 680px;
+    width: 920px;
     height: 496px;
     display: flex;
     flex-direction: column;
@@ -466,11 +466,11 @@ button.modalClose:hover {
 
 @media screen and (max-width: 834px) {
     .modalContent {
-        height: 565px;
+        height: 820px;
         width: 324px;
     }
     .modalCardsWrapper {
-        height: 450px;
+        height: 700px;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
