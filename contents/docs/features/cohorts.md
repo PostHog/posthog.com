@@ -20,18 +20,13 @@ A short video on Cohorts can be found here: https://youtu.be/8_SsZW1v56Q
 
 ## Creating a New Cohort
 
-Go to 'People' in the left hand navigation:
-<br /><br />
+**Step 1:** Go to 'People' in the left hand navigation:
 
-![left hand navigation for cohorts](../../images/cohorts-nav.png)
+![left hand navigation for cohorts](../../images/features/cohorts/cohorts-page.png)
 
-<br /><br />
+<br />
 
-Then click '+ New Cohort' on the top left:
-
-<br /><br />
-
-![+ new cohort button](../../images/new-cohort.png)
+**Step 2:** Click '+ New Cohort' on the top left.
 
 <br />
 
@@ -42,29 +37,22 @@ There are three key settings for a cohort: 'action', 'property', and 'New group'
 
 <br />
 
-![Three key cohort settings](../../images/cohort-opts.png)
+![Three key cohort settings](../../images/features/cohorts/cohort-options.png)
+
+'New group' adds another group of filters that a user must match to be a part of the cohort, as an `OR` operation. This means that if a user matches _any_ of the groups you add, they will be added to the cohort. 
 
 <br />
 
-#### Group Users by Actions
+**Group Users by Actions**
 
 You can group users who have performed certain [actions](/features/actions). You need to already have configured actions for that to work.
 
-#### Group Users by Property
+**Group Users by Property**
 
-You can also group users who have a certain property in common. Commonly, this used to combine users at a certain team, or from a certain marketing campaign via their UTM tags, or whatever other static property you need:
-
-<br />
-
-<span class='centered'>![user cohorts - properties menu](https://posthog-static-files.s3.us-east-2.amazonaws.com/Documentation-Assets/Screenshot+2020-02-27+at+15.58.24.png)</span>
+You can also group users who have a certain property in common. Commonly, this used to combine users at a certain team, from a certain marketing campaign (via their UTM tags), or whatever other static property you need:
 
 <br />
 
-#### Group Users According to Multiple Conditions
-
-You can add together multiple conditions by using the 'New group' button. This acts as an **AND** function i.e. all conditions must be **true** for the grouping to occur.
-
-<br>
 
 ## Adjusting Time Frames
 
@@ -75,12 +63,12 @@ On setting the cohort to 'user has *action*', you will be presented with the fol
 <br />
 
 
-<span class='centered'>![cohort - user action date range selection](https://posthog-static-files.s3.us-east-2.amazonaws.com/Documentation-Assets/Screenshot+2020-02-27+at+15.59.50.png)</span>
+<span class='centered'>![cohort - user action date range selection](../../images/features/cohorts/cohort-time-frame.png)</span>
 
 <br />
 
 
-We are working to [expand the power of this filter](https://github.com/PostHog/posthog/issues/199).
+Currenly, our time filtering for cohorts has 3 options, but we are working to [expand this functionality](https://github.com/PostHog/posthog/issues/199).
 
 <br />
 
