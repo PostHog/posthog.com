@@ -8,6 +8,14 @@ showTitle: true
 
 Before we do anything else, we must have a thriving community.
 
+## Responding to users
+
+* Everyone is a moderator. That includes you! If you see something unanswered, please answer it if you can, or tag in someone else that is around and can.
+* Be as specific as possible with answers. "This is coming soon" isn't helpful, whereas "Here is a relevant pull request, you can see we are still working on some merge conflicts next, feel free to follow along".
+* Assume good intent. Remember that for every user who raises a problem, it's like that dozens or hundreds of users also had the same problem but didn't take the initiative to ask for help.
+* It's common to get asked for when certain features may be available. Do not promise delivery dates. As a general practise we don't do this at all as it leads to late nights, stress and a harder time prioritizing things sensibly, but do give specific information on progress thus far.
+* If asked for a specific feature and you aren't immediately sure of its impact, ask the user to create a GitHub issue requesting it, and drop them a link to the right place to do this. That way we can canvas opinions in the community better.
+
 ## Tools
 
 We use [orbit](https://app.orbit.love) as a way of pulling all our community data into one place.
