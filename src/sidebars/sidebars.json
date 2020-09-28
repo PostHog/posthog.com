@@ -23,7 +23,8 @@
             "docs/configuring-posthog/scaling-posthog",
             "docs/configuring-posthog/securing-posthog",
             "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/smtp-credentials"
+            "docs/configuring-posthog/smtp-credentials",
+            "docs/configuring-posthog/deleting-data"
         ]
     },
     {
