@@ -1255,6 +1255,7 @@ table th {
 .star-repo-btn {
     display: flex;
     justify-content: center;
+    width: 165px !important;
 }
 
 .star-repo-btn span {
