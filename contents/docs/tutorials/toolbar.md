@@ -49,7 +49,8 @@ _Prefer to watch a video? Check out the [Toolbar sections of our demo video](htt
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. Our Toolbar only works with our [JavaScript Integration](/docs/integrations/js-integration), and requires the PostHog snippet to work. A Segment snippet, for example, will not give you access to the toolbar.
+1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. 
+    * **Note:** Our Toolbar only works with our [JavaScript Integration](/docs/integrations/js-integration), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
 
 ## Why Use the Toolbar
 
@@ -57,12 +58,15 @@ Before we go right into how to use the PostHog Toolbar, it's useful to understan
 
 Our toolbar is still in Beta, and there are exciting new features for it on our roadmap. However, in it's current form, it can:
 
-1. Display user clicks on your website in a visual way
+
+1. Display user clicks on your website/web app in a visual way
 1. Tell you what element is the most clicked on a given page
 1. Create actions in a simple way
 1. Display all actions you have on a page (based on frontend elements)
 
-Our team uses the toolbar daily, mostly to get a quick overview of clicks (and therefore decide what pages need attention) as well as create actions. 
+Our team uses the toolbar daily, mostly to get a quick overview of clicks (and therefore decide what pages need attention) as well as create actions. This helps us to do things like prioritize which parts of our website or product to redesign, as any PostHog user can easily see the potential impact of their work. 
+
+Overall, the toolbar gives valuable context regarding how users are navigating your website or application, helping you design the menus, determine how to display information, and structure your product in a way that steers users towards the actions you would like them to perform.
 
 ## Launching the Toolbar
 
@@ -74,7 +78,7 @@ To launch the toolbar, you can just access your website and it should appear for
 
 This will prompt you to select the URL you'd like to launch it on (in case you are tracking multiple websites). Once you've clicked the desired URL, you will then be taken to a new tab where your website will load with the toolbar enabled.
 
-<div class='note-block'><b>Note:</b> The toolbar is now enabled for all new PostHog users by default, even though it is still in Beta. however, if you are an older user, you might need to enable the toolbar in 'Settings' -> 'Setup'.</div><br />
+<div class='note-block'><b>Note:</b> The toolbar is now enabled for all new PostHog users by default, even though it is still in Beta. However, if you are an user from before our 1.13.0 release, you might need to enable the toolbar in 'Settings' -> 'Setup'.</div><br />
 
 ## Using the Heatmap
 
