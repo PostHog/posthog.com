@@ -26,35 +26,33 @@ If you'd like to watch a video about our Funnels feature, check out our demo vid
 
 For a comprehensive tutorial on how funnels work, what you can use them for, and how to create your own, we highly recommend reading our [Step-By-Step Funnels Tutorial](/docs/tutorials/funnels).
 
-![New funnel button](../../images/tutorials/banners/funnels.png)
+![Tutorial Banner](../../images/tutorials/banners/funnels.png)
+
+<br />
 
 ## Creating a Funnel
 
-To create a funnel, go to ‘Funnels’ in the left hand navigation:
+### Step 1: Navigate to 'Funnels'
 
-![New funnel button](../../images/features/funnels/funnels-page.png)
+Our 'Funnels' feature is located in 'Insights'. After navigating to 'Insights' on the sidebar, click on the 'Funnels' tab to get to this page:
 
-<br>
+![Funnels Page](../../images/tutorials/funnels/funnels-page.png)
 
-### Adding actions or events
+### Step 2: Adding Steps to Your Funnel
 
-Next, create the first in the series of Actions or Events:
+Once you're on the 'Funnels' page, you can then start to create your funnel.
 
-![Select action or event in each funnel step](../../images/04/actionsevetnsfunnels.gif)
-<br>
+Click on the blue 'Add action/event' button and select the action or event you want to use as the starting point for your funnel.
 
-Add more Actions or Events as needed:
+You can then add a filter to that specific action now or a general filter to the entire funnel later on ('Filters' -> 'Add filter'). 
 
-![Add more actions if needed](../../images/04/Posthog-12.png)
-<br>
+It's also worth noting how the PostHog funnels work in terms of what counts as a conversion to the next step. When your funnel is ready, you will have the ability to specify a time range for your funnel, such as "Last 7 days", "Last 48 hours", or a custom range. 
 
-You'll end up with a graph - something like this:
+Then, based on that time range, PostHog will determine conversion based on if the user performed one action after the other _at any point during the time period_. That means that if my time range is set to 2 weeks, a user may perform step 1 on day 2 and step 2 on day 13 and it will still count as a conversion. 
 
-![funnel](../../images/02/Screenshot-2020-02-09-at-20.57.07.png)
-<br>
+### Step 3: Calculating Funnel
 
-The above image demonstrates that whilst there were 11 ‘Sign up’s, there was just one ‘Apply for Beta clicked’.
-<br>
+Once you're satisfied with all the steps you've added, you can then click 'Calculate' to generate the funnel.
 
 ### Filter Funnels by Time
 
