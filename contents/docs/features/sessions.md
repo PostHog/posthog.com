@@ -8,15 +8,15 @@ Sessions help you understand product usage by uncovering the amount of time user
 
 This is useful as it gives you an engagement statistic of how long the average usage time of your app or website is along with the distribution of usage across certain time frames.
 
-## Viewing Sessions
+## Accessing Sessions
 
-Go to 'Trends' in the left hand navigation:
 
-![Left hand navigation - trends highlighted](../../images/04/Posthog-13.png)
+1. Click 'Insights' on the left sidebar
+2. Click the 'Sessions' tab
 
-Select 'Sessions' next to 'Actions & Events'
+![Sessions Page](../../images/features/sessions/sessions-page.png)
 
-![Sessions](../../images/04/Posthog-17.png)
+<br />
 
 You can now see the 'Average Session Length', by default this will be over the last 7 days.
 
@@ -24,15 +24,13 @@ You can now see the 'Average Session Length', by default this will be over the l
 
 Average Session length takes the total number of sessions completed within the selected timeframe and the average duration of those sessions, you can change the interval to a date range by selecting the dropdown next 'Last 7 days' next to 'Add to dashboard'
 
-![Session2](../../images/04/Posthog-20.png)
-
-You can filter average session length by the same properties as you can in 'Trends'
+You can filter average session length by the same properties as you any other feature in 'Insights'.
 
 ### Distribution of Session Lengths
 
 Distribution of session lengths breaks down the total sessions in the selected time frame by a select number of time intervals raning from 0 seconds (in which only 1 event occured during the session) to 1+ hours.
 
-![Distribution of session lengths](../../images/04/Posthog-18.png)
+![Distribution of session lengths](../../images/features/sessions/sessions-distribution.png)
 
 You can filter average session length by the same properties as you can in 'Trends'
 
