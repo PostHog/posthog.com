@@ -12,18 +12,24 @@ These are useful for monitoring which parts of your products are being used repe
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kyGgDbNQto4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Viewing Action Trends
+## Accessing Trends
 
-Go to ’Trends’ in the left hand navigation:
+1. Click 'Insights' on the left sidebar
+2. Click the 'Trends' tab (default)
 
-![Left hand navigation - trends highlighted](../../images/04/Posthog-13.png)
-<br>
+![Trends Page](../../images/features/trends/trends-page.png)
+
+<br />
+
+## Using Trends
 
 Select the actions or events you want to see trends of in the menu:
 
-![Trends, action and event selection](../../images/04/trends-actions-events.gif)
+![Trends Menu](../../images/features/trends/trends-menu.png)
 
 You can now see the trend in these actions over time.
+
+<br />
 
 ![Action trends](../../images/04/Posthog-14.png)
 
@@ -39,9 +45,7 @@ There are a few ways to filter this information.
 - Graphical Display
 - Property
 
-Date range, time intervals, and the graphical display can be changed at the top of the graph:
-
-![Trend filtering](../../images/04/Posthog-15.png)
+Date range, time intervals, and the graphical display can be changed at the top of the graph.
 
 The date range can be selected as an actual date range or common time intervals like the last week or the last 90 days, the graphical display can be displayed as a line chart, table or pie graph. 
 
