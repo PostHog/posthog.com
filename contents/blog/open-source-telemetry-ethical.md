@@ -1,6 +1,6 @@
 ---
-date: 2020-09-21
-title: Should that open source project track you?
+date: 2020-09-29
+title: Should open source projects track you?
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,23 +17,25 @@ That said, it is a topic that has to be approached with extreme caution. It is a
 
 ## An ethics framework
 
+Well, it seems a good starting point is to define what is ethical. It turns out, there are two main approaches, broadly accepted today:
+
 ### Duty-based ethics
 
-Morality is based on duty. That means that the measure of morality isn't the outcome of an act, but is rather based on the intention of the act itself.
+This approach defines morality as being based on duty. That means that the measure of morality isn't the outcome of an act, but is rather based on the *intention* of the act itself.
 
-Stealing a packet of chips to save your child from starving would be considered wrong under duty-based ethics. Lying to save your friend from a murderer? Tut tut.
+Stealing a packet of chips to save your child from starving would be considered wrong under duty-based ethics. Lying to save your friend from a murderer? Those would be considered wrong with this way of thinking.
 
 ### Utilitarian-based ethics
 
-Moral behavior means opting for the greatest common good. An act is moral if it increases the happiness or decreases the misery of the greatest number of people. The results are the measure of moral behavior, not the intent.
+In this case, moral behavior is whatever generates greatest common good. An act is moral if it increases the happiness or decreases the misery of the greatest number of people. The results are the *outcome* of moral behavior, not the intent.
 
 Stealing those chips? Go for it.
 
 ## So, is it ok for open source projects to track users?
 
-Open source projects are zero expectation - they may contain bugs, security risks, or have confusingly outdated documentation. Remember that time you lost hours on a project that just didn't work in the first place?
+Open source projects are based on the concept of "zero expectations". This means they may contain bugs, security risks, or have confusingly outdated documentation. Remember that time you lost hours on a project that just didn't work in the first place?
 
-The fact it's acceptable for open source software not to work is a _great_ thing - it makes it easier for anyone to contribute. Mistakes, or half-baked projects included. You can't have innovation without a lot of people being able to contribute and make mistakes, or give up.
+However, the fact it's acceptable for open source software not to work is a _great_ thing. This makes it easy for anyone to contribute because there are no hurdles from what your work must include or not include - it's up to you. Mistakes, or half-baked projects included. You can't have innovation without a lot of people being able to contribute and make mistakes, or give up.
 
 From a utilitarian perspective, we believe that tracking the minimum data possible to build useful technology, in a way that doesn't share that data with 3rd parties, means that you have the right approach to product analytics in your open source project.
 
@@ -55,7 +57,7 @@ If an open source project exists for fun, for one person only, or to get better 
 
 In practice, however, it's pretty much impossible not to track more than you need in this case.
 
-If a project is hosted on GitHub, it automatically provides basic stats (clones / repo visits) provided for all repos.
+If a project is hosted on GitHub, it automatically provides basic stats (clones / repo visits) for all repos.
 
 #### Aggregated tracking
 
@@ -75,9 +77,9 @@ It allows projects to see if people who started using the product are coming bac
 
 Asking permission and not doing this by default feels like the only acceptable way from a user perspective.
 
-Tracking the actual users can really help understand the kinds of user profiles (ie if they work for big companies, or what kind of job roles they have) that find the software valuable. If a project is part of an open source company, then this is very likely to be of critical importance to them.
+Tracking the actual users can really help understand the kinds of user profiles that find the software valuable. For example, is the project used by those at big companies, or with certain job roles? Those things help inform product decisions. If a project is part of an open source company, then this is very likely to be of critical importance to them. Your project is easier to make more valuable if it's tailored to its users better.
 
-Some users are happy to be tracked in return for a great project, but we think in most cases that this is unacceptably invasive by default, and it's important to ask permission up front. Let alone, GDPR, CCPA and those other privacy based laws that are appearing.
+Some users are happy to be tracked personally in return for a great project, but we think in most cases that this is unacceptably invasive by default, and it's important to ask permission up front. Let alone, GDPR, CCPA and those other privacy based laws that are appearing.
 
 ## It's not just the data, it's how the tracking works too
 
