@@ -58,14 +58,20 @@ Time intervals can be by the minute, hour, day, week or month.
 
 Filtering by property can be selected underneath the actions or events you have selected. 
 
-![Filter by property](../../images/04/filterby-property.gif)
+![Filter by property](../../images/features/trends/trend-filtering.png)
 
-### Filtering Trend graphs by Daily Active Users (DAUs)
+### Filtering Trend graphs by Active Users 
 
-When selecting actions or trends PostHog will display the total count of those actions or events. You also have the option to filter this by daily active users, which will give you a count of unique users who have completed that action/event instead of the total count. 
+When selecting actions or trends PostHog will display the total count of those actions or events. 
 
-![Total or DAU](../../images/04/Posthog-16.png)
+You also have the option to filter this by active users, which will give you a count of unique users who have completed that action/event instead of the total count. 
 
+Click on 'Total Volume' next to the selected event or action to reveal a dropdown menu where you can select 'Active Users', as well as:
+
+* Sum
+* Average
+* Minimum
+* Maximum
 
 ## Trend Segmentation
 
@@ -77,7 +83,6 @@ For example, one of the Event properties is the UTM tags – which allows you as
 
 Another example is that as a product-person, you can see if different devices or different browsers affect usage. Maybe people using your web-based application on mobiles are generally inactive because the interface is hard to use:
 
-![Trend segmentation](../../images/02/Screenshot-2020-02-09-at-17.31.36.png)
 <br>
 
 You can filter the event data too, based on the Event property. This means instead of breaking out more lines or rows in the table, you can just display the exact Action trends you care about when the Event property is something specific.
@@ -86,36 +91,27 @@ You can also use this at the same time as the ‘Breakdown by’ option.
 
 ### Trend Segmentation by Event Property
 
-For example, if you ran a movie streaming service, you could monitor ‘Play button – clicked’ for just one movie at a particular URL:
-
-![trend segmentation by event property](../../images/02/Screenshot-2020-02-09-at-17.35.24.png)
+For example, if you ran a movie streaming service, you could monitor ‘Play button – clicked’ for just one movie at a particular URL.
 
 ### Trend Segmentation by Stickiness
 
 Trend graphs will show numbers by volume as default, it is possible to show this as stickiness. Instead of the total number of times this action had been completed it will chart the graph as the number of consecutive days a unique user has performed that action. This will allow you to optimize for repeatable actions. 
 
-To do this select 'Shown As':
+To do this, select 'Shown As' and click 'Stickiness'.
 
-![stickiness](../../images/03/Posthog-6.png)
+![Trend Stickiness](../../images/features/trends/trend-stickiness.png)
 <br>
 
-And the graph will convert to Stickiness.
+This pairs nicely with [Retention](/docs/features/retention), which is essentially a stickiness metric that is date-specific. In other words, trend stickiness does not care about when an action or event happened, just about what happened on the following days after the first time. Retention, on the other hand, is measured specifically based on when a certain event happened.
 
-![stickiness image 2](../../images/03/Posthog-7.png)
-<br>
-
-This pairs nicely with [Retention](/docs/features/retention), which is essentially stickiness for website visits.
 <br>
 
 ### Trend Segmentation by User
 
-If you chart your Trend Graph as a line chart you can see all the users that have performed that action on that day. This can help you understand the context behind the aggregated data as you can look at the individual users behind it.
+When in trends, you can click on data points to reveal a modal with a table of all the unique users that make up that data. 
 
-Just click on the day you would like to inspect.
+![Segment By User](../../images/features/trends/segment-by-user.png)
 
-![users in trends 1](../../images/04/Fullscreen_4_1_20__5_23_PM_png-2.png)
+This way, you not only have access to the aggregate values, but can always inspect further and determine what users compose each data point.
 
-And the users will load into a table
-
-![users in trends 2](../../images/04/Posthog.png)
 
