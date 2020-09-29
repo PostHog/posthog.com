@@ -10,37 +10,36 @@ A short video on Users can be found [here](https://youtu.be/8_SsZW1v56Q);
 
 ## Viewing User List
 
-Click on 'People' on the left-hand navigation. This will open a submenu containing 'Users', like so:
+Click on 'People' on the left-hand navigation. This will open a submenu containing 'All Users', like so:
 
-![People > All Users](../../images/all-users.png)
+![Users Page](../../images/features/people/people-page.png)
+
 <br>
 
-After clicking on 'All Users', you will see a list of users, something like this:
+If you have added properties to your users, these will also appear here. 
 
-![User list](../../images/02/Screenshot-2020-02-09-at-13.47.06.png)
-<br>
+For instance, if you have set an email, we will display that instead of the randomized Distinct ID:
 
-The first user has had no identifying information pushed to their profile in PostHog. That is why a string appears.
+![User with Email](../../images/features/people/user-email.png)
 
-The second user has had their email address passed to PostHog.
+Clicking the '+' button next to the user will show all of that user's properties. 
 
 ## User History
 
-Clicking on an individual user brings up their entire event history:
+Clicking on an individual user brings up their entire event history, as well as their properties:
 
-![User history](../../images/02/Screenshot-2020-02-09-at-13.51.03.png)
-<br>
+![Person Page](../../images/features/people/person-page.png)
 
-You can go even deeper by inspecting each event individually. Click on the event to bring up the event properties. This shows you the following information:
 
-![Event properties within user history](../../images/event-by-user.png)
-<br>
+<br />
+
+You can go even deeper by inspecting each event individually. Clicking on the event will bring up all the event properties. 
+
+<br />
 
 ## Deleting User Data
 
 You can also delete data on a user with ease. This can be done if you have created data by yourself for testing purposes or if a user asks you to do so.
 
-When in the user history you can select 'Delete all data on this person' this will delete all information on that user permanently.
-
-![Delete user data](../../images/03/Posthog-16.png)
+When in the user history you can select 'Delete all data on this person'. This will delete all information on that user permanently.
 
