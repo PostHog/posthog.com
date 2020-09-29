@@ -12,22 +12,28 @@ There are many valuable use cases for this data:
 * If you need users to come back repeatedly to perform an action, you can see how many “first time” users return.
 * If you are trying to understand where in your marketing funnel that you are getting drop off, funnel analytics will make clear what you need to focus on to grow.
  
-A funnel is a series of Actions.
+A funnel is a series of actions and/or events.
 
-You can watch a two-minute training video on Funnels here:
+## Learning Resources
 
-[![Funnels Training Video](https://img.youtube.com/vi/eaYH-T6zhKI/0.jpg)](http://www.youtube.com/watch?v=eaYH-T6zhKI)
+### Video
+
+If you'd like to watch a video about our Funnels feature, check out our demo video below. It is set to start on the Funnels section:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50?start=515" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Tutorial
+
+For a comprehensive tutorial on how funnels work, what you can use them for, and how to create your own, we highly recommend reading our [Step-By-Step Funnels Tutorial](/docs/tutorials/funnels).
+
+![New funnel button](../../images/tutorials/banners/funnels.png)
 
 ## Creating a Funnel
 
 To create a funnel, go to ‘Funnels’ in the left hand navigation:
 
-![left hand navigation - funnels selected](../../images/04/Posthog-11.png)
-<br>
+![New funnel button](../../images/features/funnels/funnels-page.png)
 
-You’ll be taken to a page showing statistics on any existing funnels you have built, Click ‘New funnel’ to begin:
-
-![New funnel button](../../images/03/Posthog-8.png)
 <br>
 
 ### Adding actions or events
