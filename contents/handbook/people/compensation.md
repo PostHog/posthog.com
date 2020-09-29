@@ -6,8 +6,11 @@ showTitle: true
 ​
 ## How it Works
 
-As we are a small (but growing!) startup, we've kept compensation simple. You can use our below calculator to work out what your salary would be.
-<iframe src="http://127.0.0.1:3000/compensation" style="border: none;width:100%;height:425px"></iframe>
+As we are a small (but growing!) startup, we've kept compensation simple. 
+
+You can use our calculator below to work out what your salary would be.
+
+<iframe src="/compensation" style="border: none; width:100%; height:425px"></iframe>
 
 NB. We apply a _floor_ to the Cost of Living of 0.625.
 
