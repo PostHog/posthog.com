@@ -14,4 +14,6 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 
 ## **In This Section:**
 
-- [How to Safely Roll Out New Features](/docs/tutorial/feature-flags)
+- [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
+- [Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
+- [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
