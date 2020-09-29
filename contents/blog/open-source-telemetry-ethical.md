@@ -69,6 +69,8 @@ With aggregated tracking, a project cannot by definition identify unique users. 
 
 #### Anonymized user tracking
 
+This means not knowing *who* users are, but having a user id against their profile.
+
 This gives a much stronger signal than the above. It means you'll probably need to start using cookies or some way of obfuscating the user id from their behavior.
 
 It allows projects to see if people who started using the product are coming back, and which parts of the product they're returning too.
