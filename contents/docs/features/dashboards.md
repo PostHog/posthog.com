@@ -8,6 +8,10 @@ You can create dashboard panels to display information you are collecting with P
 
 Dashboard panels can be created from any tab in 'Insights', and they can be tables, line charts, funnels, and pie charts.
 
+## Demo Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XUKQvXrE96k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Creating a Dashboard
 
 ![Trends Add to Dashboard](../../images/features/dashboards/add-to-dashboard.png)

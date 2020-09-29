@@ -8,21 +8,9 @@ Trends are a very powerful way to visualize how actions or events are varying ov
 
 These are useful for monitoring which parts of your products are being used repeatedly, how usage is changing as well as the engagement levels of your users.
 
-You can watch our two-minute Trends training videos here:
-<br>
+## Demo Video
 
-
-##### Video: Setting up Trends Graph
-<br>
-
-[![](http://img.youtube.com/vi/q39B-QAFZUI/0.jpg)](http://www.youtube.com/watch?v=q39B-QAFZUI)
-
-##### Video: Filtering and Breakdown Trend Graphs
-<br>
-
-[![](http://img.youtube.com/vi/8IsCrLOpRCw/0.jpg)](http://www.youtube.com/watch?v=8IsCrLOpRCw) 
-
-<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kyGgDbNQto4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Viewing Action Trends
 
