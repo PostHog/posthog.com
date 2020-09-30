@@ -20,4 +20,4 @@ We will email you within 48 hours to confirm your application is accepted.
 
 ## Questions?
 
-Feel free to [reach out](/support), or join [PostHog Users Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ).
+Feel free to [reach out](/support), or join [PostHog Users Slack](/slack).
