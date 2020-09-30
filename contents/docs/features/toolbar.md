@@ -14,6 +14,21 @@ When enabled, the Toolbar will appear on your website (only for you, of course!)
 
 ![inspect](../../images/casts/inspect.gif)
 
+## Learning Resources
+
+### Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LD5TsEs5G-o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Tutorial
+
+[Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
+
+[![Toolbar landing image](../../images/tutorials/banners/toolbar.png)
+](/docs/tutorials/toolbar)
+
+<br />
+
 ## Uses
 
 Our Toolbar is a versatile feature that allows for:

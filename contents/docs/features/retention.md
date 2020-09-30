@@ -8,14 +8,20 @@ PostHog provides a Retention table to show you how many users return on subseque
 <br>
 <br>
 
-![Retention Table](../../images/retention-table.png)
+
+## Video Overview
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VQhlkL6piKI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Accessing Retention
 
 
-## Accessing Retention Table
+1. Click 'Insights' on the left sidebar
+2. Click the 'Retention' tab
 
-1. Click 'People' on the sidebar to reveal a dropdown menu.
-2. Click 'Retention'
-<br>
+![Retention Page](../../images/features/retention/retention-page.png)
+
+<br />
 
 
 ## Understanding the Retention Table
@@ -37,11 +43,9 @@ The remaining columns are the ones displaying retention. Day 0 is the day repres
 
 Now, the following columns will show you how many of the users who visited your webpage on the day marked under 'Cohort' came back and visited **again** on Day X.
 
-Here's the image from above again:
-
 ![Retention Table](../../images/retention-table.png)
 
-Let's work through an example to understand this concept better.
+Let's work through an example using the picture above to understand this concept better.
 
 If I'm looking at the row for "Sun. 12 July", I can see that 3 users visisted the website on that day.
 
