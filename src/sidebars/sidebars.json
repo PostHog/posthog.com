@@ -23,7 +23,8 @@
             "docs/configuring-posthog/scaling-posthog",
             "docs/configuring-posthog/securing-posthog",
             "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/smtp-credentials"
+            "docs/configuring-posthog/smtp-credentials",
+            "docs/configuring-posthog/deleting-data"
         ]
     },
     {
@@ -252,7 +253,9 @@
             "handbook/engineering/how-to-qa",
             "handbook/engineering/release-new-version",
             "handbook/engineering/onboarding-customer",
-            "handbook/engineering/setup-ssl-locally"
+            "handbook/engineering/setup-ssl-locally",
+            "handbook/engineering/ee-setup",
+            "handbook/engineering/common-issues"
         ]
     },
     {
