@@ -257,7 +257,7 @@
 }
 
 @media only screen and (max-width: 1076px) {
-    h3 {
+    .header-3 {
         font-size: 30px !important;
     }
 }
