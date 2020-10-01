@@ -38,7 +38,7 @@ tunnels:
 ngrok start --all
 ```
 
-5. Copy the https URL for the tunnel to 8234 to `JS_URL` and start webpack
+5. Copy the HTTPS URL for the tunnel to port 8234 and set it as the value for the `JS_URL` environment variable. Then, start webpack:
 
 ```bash
 export WEBPACK_HOT_RELOAD_HOST=0.0.0.0
@@ -47,7 +47,7 @@ export JS_URL=https://68f83839843a.ngrok.io
 yarn start
 ```
 
-6. Copy the URL to `JS_URL` and start the Django server
+6. Use the same URL as the value for `JS_URL` again and start the Django server
 
 ```bash
 export DEBUG=1
@@ -56,14 +56,13 @@ export JS_URL=https://68f83839843a.ngrok.io
 python manage.py runserver
 ```
 
-7. Open the https URL for the tunnel to port 8000.
+7. Open the HTTPS URL for the tunnel to port 8000.
 
 **Tips & Tricks**
 
 If you're testing the Toolbar, make sure to add the ngrok urls to the list on the /setup page.
 
 ![Permitted domains](../../images/engineering/toolbar-permitted-ngrok.png)
-
 
 Also, watch out, network requests can be slow through ngrok:
 
