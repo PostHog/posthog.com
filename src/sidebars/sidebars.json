@@ -184,6 +184,7 @@
         "entry": "Company Blog",
         "name": "Company Blog",
         "items": [
+            "blog/hacktoberfest",
             "blog/open-source-telemetry-ethical",
             "blog/open-source-eating-saas",
             "blog/product-led-growth",
