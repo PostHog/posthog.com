@@ -32,7 +32,7 @@ As a result, we have now tagged some good first issues on our [main repo](https:
 
 From the perspective of the Hacktoberfest rules, you are able to contribute to any issue, be it tagged or not. We welcome all contributions and would be happy to help you with your pull request. We nevertheless recommend you try to find an issue tagged with <code class="hacktoberfest">Hacktoberfest</code> or <code class="good-first-issue">good first issue</code> if this is your first time contributing to PostHog. 
 
-Additionally, we also welcome contributions to our Docs, especially our [new tutorials section](/docs/tutorials). These are related to the [repository for this website](https://github.com/PostHog/posthog.com). 
+Additionally, we also welcome contributions to our Docs, especially to our [new tutorials section](https://github.com/PostHog/posthog.com/issues/491). These are related to the [repository for this website](https://github.com/PostHog/posthog.com). 
 
 Finally, we don't want to miss out on the fun. Thus, while you need 4 valid PRs to get an official shirt from Digital Ocean, we are happy to send you some [PostHog merch](https://merch.posthog.com/) if you make _one_ relevant contribution. 
 
