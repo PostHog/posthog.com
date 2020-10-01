@@ -1,5 +1,5 @@
 ---
-date: 2020-07-22
+date: 2020-10-01
 title: PostHog Joins Hacktoberfest 2020
 rootPage: /blog
 sidebar: Blog
@@ -22,7 +22,7 @@ It encourages developers to contribute to public repositories on GitHub via pull
 
 As a company that's extensively dedicated to the open source ecosystem as a whole, it is only fitting that we participate in Hacktoberfest. 
 
-As a result, we have now tagged some good first issues on our [main repo](https://github.com/PostHog/posthog/) with the <code class="hacktoberfest">Hacktoberfest</code> tag, as these should be suitable issues for first-time contributors. We have also made an effort to document those issues better, so that their scope is clearly defined. 
+As a result, we have now [tagged some good first issues](https://github.com/PostHog/posthog/labels/Hacktoberfest) on our [main repo](https://github.com/PostHog/posthog/) with the <code class="hacktoberfest">Hacktoberfest</code> tag, as these should be suitable issues for first-time contributors. We have also made an effort to document those issues better, so that their scope is clearly defined. 
 
 <br />
 
