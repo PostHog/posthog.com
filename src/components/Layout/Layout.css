@@ -692,7 +692,7 @@ header {
 }
 
 .blogHeader {
-    background-color: #90a4ae !important;
+    background-color: #35416b !important;
     background-size: cover;
     height: 240px !important;
     margin-bottom: 30px;
@@ -1143,11 +1143,11 @@ a.middle {
 }
 
 .white {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 .zambezi {
-    color: #595959;
+    color: #595959 !important;
 }
 
 table td {
@@ -1377,6 +1377,15 @@ code {
     height: 50px;
 }
 
+.hacktoberfest {
+    background-color: #fcb80f !important;
+}
+
+.good-first-issue {
+    background-color: #7057ff !important;
+    color: white;
+}
+
 @media screen and (max-width: 1076px) {
     .docsHeader {
         background-color: #f9f9f9;
@@ -1401,7 +1410,6 @@ code {
     }
 
     .blogHeader {
-        background-color: #577bfb !important;
         height: 64px !important;
     }
 
