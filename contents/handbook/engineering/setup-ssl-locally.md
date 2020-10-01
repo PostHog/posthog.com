@@ -16,17 +16,29 @@ The easiest option is to use ngrok.
 
 ## Set up SSL via ngrok
 
-0. Make sure you [have ngrok installed](https://ngrok.com/download)
+1. Make sure you [have ngrok installed](https://ngrok.com/download).
 
-1. Start ngrok tunnel to 8234 (webpack dev server). This will give you a tunnel URL such as https://68f83839843a.ngrok.io
+2. Sign up for an ngrok account (or sign in with Github) and run `ngrok authtoken <TOKEN>`
 
-```bash
-ngrok http 8234
+3. Edit `$HOME/.ngrok2/ngrok.yml` and add the following after the line with `authtoken: <TOKEN>`:
+
+```
+tunnels:
+  django:
+    proto: http
+    addr: 8000
+  webpack:
+    proto: http
+    addr: 8234
 ```
 
-![Ngrok](../../images/engineering/ngrok-domain.gif)
+4. Start ngrok. This will give you tunnel URLs such as https://68f83839843a.ngrok.io
 
-2. Copy the URL to `JS_URL` and start webpack
+```bash
+ngrok start --all
+```
+
+5. Copy the https URL for the tunnel to 8234 to `JS_URL` and start webpack
 
 ```bash
 export WEBPACK_HOT_RELOAD_HOST=0.0.0.0
@@ -35,7 +47,7 @@ export JS_URL=https://68f83839843a.ngrok.io
 yarn start
 ```
 
-3. Copy the URL to `JS_URL` and start the Django server
+6. Copy the URL to `JS_URL` and start the Django server
 
 ```bash
 export DEBUG=1
@@ -44,13 +56,7 @@ export JS_URL=https://68f83839843a.ngrok.io
 python manage.py runserver
 ```
 
-4. Start a ngrok tunnel to 8000 (Django)
-
-```
-ngrok http 8000
-```
-
-Do what you need with the returned URL!
+7. Open the https URL for the tunnel to port 8000.
 
 **Tips & Tricks**
 
