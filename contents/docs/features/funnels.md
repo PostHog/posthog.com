@@ -16,7 +16,7 @@ A funnel is a series of actions and/or events.
 
 ## Learning Resources
 
-### Video
+### Demo Video
 
 If you'd like to watch a video about our Funnels feature, check out our demo video below. It is set to start on the Funnels section:
 

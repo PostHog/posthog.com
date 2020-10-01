@@ -16,7 +16,11 @@ For example, a typical action might be one of the following:
 * ‘Pricing page – viewed’
 * ‘Watch movie – clicked’
 
-You can watch our **old** tutorial videos on Actions [here](https://www.youtube.com/watch?v=7RcVfsXHG58) and [here](https://www.youtube.com/watch?v=NezwIa_PihU). However, please note that our functionality and UI has significantly changed since then. As a step by step tutorial, the videos may be out of date, but they could be helpful for understanding the concepts.
+### Demo Video
+
+If you'd like to watch a video about our Actions feature, check out our demo video below. It is set to start on the Actions section:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50?start=40" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Accessing Actions
 

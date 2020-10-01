@@ -9,7 +9,7 @@ PostHog provides a Retention table to show you how many users return on subseque
 <br>
 
 
-## Video Overview
+## Demo Video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VQhlkL6piKI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
