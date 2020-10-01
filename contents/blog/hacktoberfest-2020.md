@@ -1,5 +1,5 @@
 ---
-date: 2020-07-22
+date: 2020-10-01
 title: PostHog Joins Hacktoberfest 2020
 rootPage: /blog
 sidebar: Blog
