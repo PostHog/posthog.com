@@ -72,6 +72,7 @@
         "name": "Features",
         "items": [
             "docs/features/actions",
+            "docs/features/annotations",
             "docs/features/cohorts",
             "docs/features/dashboards",
             "docs/features/events",
