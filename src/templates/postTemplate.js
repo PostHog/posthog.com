@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/Layout'
 import 'katex/dist/katex.min.css'
 import { DocsFooter } from '../components/Footer/DocsFooter'
@@ -19,8 +20,8 @@ function Template({
     const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
-    const { markdownRemark } = data // data.markdownRemark holds our post data
-    const { frontmatter, html, excerpt, id } = markdownRemark
+    const { mdx } = data // data.mdx holds our post data
+    const { frontmatter, body, excerpt, id } = mdx
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -50,7 +51,7 @@ function Template({
             <SEO
                 title={frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')}
                 description={frontmatter.description || excerpt}
-                pathname={markdownRemark.fields.slug}
+                pathname={mdx.fields.slug}
                 article
             />
             <div className="docsPagesContainer">
@@ -58,10 +59,10 @@ function Template({
                     {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                         <h1 align="center">{frontmatter.title}</h1>
                     )}
-                    <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
+                    <MDXRenderer>{{ body }}</MDXRenderer>
                 </div>
                 {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && (
-                    <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
+                    <DocsFooter filename={`${addIndex(mdx.fields.slug)}.md`} title={frontmatter.title} />
                 )}
             </div>
         </Layout>
@@ -72,12 +73,12 @@ export default Template
 
 export const pageQuery = graphql`
     query($path: String!) {
-        markdownRemark(fields: { slug: { eq: $path } }) {
+        mdx(fields: { slug: { eq: $path } }) {
             fields {
                 slug
             }
             id
-            html
+            body
             excerpt(pruneLength: 150)
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")

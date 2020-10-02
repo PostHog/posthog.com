@@ -9,10 +9,9 @@ import { featureFlagLogic } from '../../logic/featureFlagLogic'
 
 const SubMenu = Menu.SubMenu
 
-
 function SidebarContents() {
     const { featureFlags } = useValues(featureFlagLogic)
-    
+
     useEffect(() => {
         if (!featureFlags['launch-tutorials-section']) {
             const tutorialsDiv = window.document.getElementById('tutorials-sidebar-item')
@@ -37,7 +36,7 @@ function SidebarContents() {
         <StaticQuery
             query={graphql`
                 query sidebarContentQuery {
-                    allMarkdownRemark(sort: { order: ASC, fields: [fields___slug] }) {
+                    allMdx(sort: { order: ASC, fields: [fields___slug] }) {
                         nodes {
                             fields {
                                 slug
@@ -61,7 +60,7 @@ function SidebarContents() {
             `}
             render={(data) => {
                 const entries = data.allSidebarsJson.nodes
-                const pages = data.allMarkdownRemark.nodes
+                const pages = data.allMdx.nodes
                 let dir = []
                 let tree = null
                 let defaultOpenKeys = []
