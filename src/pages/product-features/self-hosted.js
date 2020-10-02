@@ -16,16 +16,8 @@ function ProductFeatures() {
         <Layout>
             <div className="head blue selfHosted">
                 <div className="headContents">
-                    {/* <Link to="/product-features" className="headNav top">
-                        <Button icon="left" />
-                        <p>Back to Features</p>
-                    </Link> */}
                     <h1>Self Hosted</h1>
                     <p>Powerful analytics on your own infrastructure, with all the features your team needs.</p>
-                    {/* <Link to="/product-features/event-autocapture" className="headNav bottom">
-                        <p>Next Feature</p>
-                        <Button icon="right" />
-                    </Link> */}
                 </div>
             </div>
             <div className="featuresWrapper selfHosted">
