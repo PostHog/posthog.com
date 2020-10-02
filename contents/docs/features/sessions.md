@@ -8,8 +8,11 @@ Sessions help you understand product usage by uncovering the amount of time user
 
 This is useful as it gives you an engagement statistic of how long the average usage time of your app or website is along with the distribution of usage across certain time frames.
 
-## Accessing Sessions
+## Demo Video
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LzrKZpMuONs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Accessing Sessions
 
 1. Click 'Insights' on the left sidebar
 2. Click the 'Sessions' tab

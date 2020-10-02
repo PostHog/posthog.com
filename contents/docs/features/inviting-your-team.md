@@ -4,9 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-It is very easy to invite members of your team so they can view Dashboards, create Actions and Trend Graphs.
-
-## Inviting a New Team Member
+It is very easy to invite members to your PostHog team so that they can also be a part of your product analytics processes.
 
 Go to "Invite Your Team' box at the bottom left of the left hand navigation:
 
