@@ -18,15 +18,15 @@ As a general philosophy, we aim to pay at least in the top 25% of market for any
 
 ## SF Benchmark
 ​
-At the moment we do not have many different job roles. We expect everyone to be able to deliver features top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles.
+At the moment we do not have many different job roles. We expect everyone to be able to deliver features top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile so we add a 1.2x multiplier to get to the below numbers.
 
 <span class="table-borders">
 
 | Role | SF Benchmark |
 | --- | --- |
-| Engineer | \$160,000 |
-| Designer | \$107,000 |
-| Technical Writer | \$115,000 |
+| Engineer | \$192,000 |
+| Designer | \$128,400 |
+| Technical Writer | \$138,000 |
 
 </span>
 
@@ -48,10 +48,10 @@ We believe at first increased skill comes from more time spent in the role. Over
 
 Within each level, we believe there's a place to have incremental steps. We define these as follows:
 
-- *Learning*: Recently promoted or new to the role. Needs a lot of guidance from the manager with the majority of tasks to understand requirements and deliverables expected.
-- *Growing*: Understands most of what is expected for deliverables, but needs some guidance with tasks to drive projects to completion.
-- *Thriving*: Understands all aspects of the role, needs limited guidance to drive advanced projects to completion.
-- *Expert*: Understands all aspects of the role, with almost no guidance to drive projects of any complexity to completion and able to demonstrate this consistently. Once a team member becomes an expert within their current level, the next step may be promotion if a role at the next level is needed at the company.
+- *Learning*: Starting to match expectations.
+- *Growing*: Matching expectations.
+- *Thriving*: Exceeding expectations.
+- *Expert*: Exceeding expectations consistently.
 
 ## Options
 ​

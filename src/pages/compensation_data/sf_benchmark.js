@@ -2,9 +2,9 @@
 
 
 const sf_benchmark = {
-    'Engineer': 160000,
-    'Designer': 107000,
-    'Technical Writer': 115000
+    'Engineer': 192000,
+    'Designer': 128400,
+    'Technical Writer': 138000
 }
 
 export default sf_benchmark
