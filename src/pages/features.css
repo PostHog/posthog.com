@@ -95,7 +95,7 @@
     justify-content: space-evenly;
     width: 100vw;
     max-width: 1440px;
-    height: 1000px;
+    height: 800px;
     margin-bottom: 40px;
 }
 
@@ -311,6 +311,10 @@
 
 /* - MOBILE TABLE */
 
+.wrapper {
+    margin-top: 0 !important; /* delete this comment after we fix index.css loading issue */
+}
+
 .wrapper.productFeatures {
     border-radius: 0 0 80px 80px;
     width: 100vw;
@@ -392,7 +396,8 @@
 
 @media screen and (max-width: 834px) {
     .comparisonRow {
-        display: initial;
+        display: flex;
+        flex-direction: row;
     }
     .wrapper.productFeatures {
         border-radius: 0 0 40px 40px;
@@ -473,6 +478,9 @@ table.productFeaturesTable {
 /* - MAIN PAGE + ELEMENTS */
 .featuresWrapper {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .blue {
@@ -504,20 +512,21 @@ table.productFeaturesTable {
 /* - HEAD */
 
 .head {
-    border-radius: 50px;
-    width: calc(100vw - 50px);
-    max-width: 1390px;
-    height: 505px;
-    margin: 0 25px 40px;
+    border-radius: 0 0 50px 50px;
+    width: 100vw;
+    height: 414px;
+    margin: 0 0 40px;
+    padding: 0 calc((100vw - 1440px) / 2 + 150px);
+    background-position: 700px center;
 }
 
 .headContents {
     position: relative;
     height: 100%;
-    width: 510px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-left: 100px;
 }
 
@@ -531,55 +540,16 @@ table.productFeaturesTable {
     font-weight: bold;
 }
 
+.headContents p {
+    font-size: 24px !important;
+    line-height: 40px !important;
+}
+
 main > div > div {
     margin: 0 !important;
 }
 
-.headNav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 160px;
-}
-
-.headNav.top {
-    margin-left: -39px;
-    width: 190px;
-}
-
-.headNav.bottom {
-    width: 160px;
-}
-
-.headNav button {
-    border: none !important;
-    background: none !important;
-    color: #ffffff;
-    font-size: 22px;
-    line-height: 22px;
-    transition: color 0.3s;
-}
-
-.headNav p {
-    margin-bottom: 0 !important;
-    font-family: 'Gosha Sans', sans-serif;
-    font-weight: bold;
-    font-size: 20px !important;
-    line-height: 54px;
-    transition: color 0.3s;
-}
-
-.blue .headNav:hover p,
-.blue .headNav:hover button {
-    color: #f7a501 !important;
-}
-
-.yellow .headNav:hover p,
-.yellow .headNav:hover button,
-.orange .headNav:hover p,
-.orange .headNav:hover button {
-    color: #35416b !important;
+@media screen and (min-width: 1440px) {
 }
 
 @media screen and (max-width: 834px) {
@@ -606,14 +576,6 @@ main > div > div {
     .headContents h3 {
         order: 2;
     }
-    .headNav.bottom {
-        order: 3;
-        align-self: center;
-    }
-    .headNav.top {
-        order: 4;
-        align-self: center;
-    }
 }
 
 /* - ROWS */
@@ -622,10 +584,19 @@ main > div > div {
     position: relative;
     display: flex;
     flex-direction: row;
-    width: 100vw;
+    width: 834px;
     max-width: 1440px;
-    height: 700px;
-    margin-bottom: 40px;
+    height: 480px;
+    margin-bottom: 100px;
+}
+
+.featuresRow.row01,
+.featuresRow.row03 {
+    justify-content: flex-start;
+}
+
+.featuresRow.row02 {
+    justify-content: flex-end;
 }
 
 .featuresRow h2 {
@@ -633,52 +604,23 @@ main > div > div {
     font-weight: bold;
 }
 
-h2.number.row01,
-h2.number.row03 {
+h2.number {
     color: #f7a501;
-    font-size: 54px;
+    font-size: 64px;
     margin-top: 4px !important;
-    position: absolute;
-    left: calc(3 / 24 * 100vw);
-    width: calc(1 / 12 * 1440px);
+    position: relative;
+    width: 82px;
+    margin: 0 56px;
 }
 
-h2.number.row02 {
-    color: #f7a501;
-    font-size: 54px;
-    margin-top: 4px !important;
-    position: absolute;
-    left: calc(13 / 24 * 100vw);
-    width: calc(1 / 12 * 1440px);
-}
-
-.rowContents.row01,
-.rowContents.row03 {
-    position: absolute;
-    width: calc(7 / 24 * 100vw);
-    min-width: 284px;
-    max-width: calc(7 / 24 * 1440px);
-    left: calc(5 / 24 * 100vw);
-    min-height: 700px;
-    height: auto;
-    max-height: 800px;
+.rowContents {
+    position: relative;
+    width: 346px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 10px;
-}
-
-.rowContents.row02 {
-    position: absolute;
-    width: calc(7 / 24 * 100vw);
-    min-width: 284px;
-    max-width: calc(7 / 24 * 1440px);
-    left: calc(15 / 24 * 100vw);
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 10px;
+    left: 0;
 }
 
 .redLine {
@@ -691,52 +633,33 @@ h2.number.row02 {
     border-color: #f96132;
 }
 
-.rowImg.row01,
-.rowImg.row03 {
+.rowImg {
     position: absolute;
     height: 700px;
-    width: calc(100vw - 720px);
-    max-width: 700px;
-    left: 720px;
+    width: 440px;
+    max-width: calc(100vw - 570px);
+    background-size: 400px 400px;
+    background-repeat: no-repeat;
+}
+
+.rowImg.row01,
+.rowImg.row03 {
     background-position: left top;
-    margin-left: 20px;
+    margin-left: 40px;
+    left: 570px;
 }
 
 .rowImg.row02 {
-    position: absolute;
-    height: 700px;
-    width: calc(700 / 1440 * 100vw);
-    max-width: 700px;
-    left: calc((100vw - 1440px) / 2 + (20 / 1440 * 100vw));
-    background-position: right center;
-}
-
-@media screen and (min-width: 1440px) {
-    h2.number.row01,
-    h2.number.row03 {
-        left: calc(3 / 24 * 1440px);
-    }
-    h2.number.row02 {
-        left: calc(13 / 24 * 1440px);
-    }
-    .rowContents.row01,
-    .rowContents.row03 {
-        left: calc(5 / 24 * 1440px);
-    }
-    .rowContents.row02 {
-        left: calc(15 / 24 * 1440px);
-    }
-    .rowImg.row01,
-    .rowImg.row03 {
-        left: 720px;
-    }
-    .rowImg.row02 {
-        left: calc(1 / 24 * 1440px);
-    }
+    background-position: right top;
+    margin-right: 40px;
+    right: 530px;
 }
 
 .featuresRow.row03 {
     margin-bottom: 0 !important;
+}
+
+@media screen and (min-width: 1440px) {
 }
 
 @media screen and (max-width: 834px) {
@@ -979,7 +902,7 @@ h2.number.row02 {
 .otherFeaturesWrapper {
     width: 100vw;
     max-width: 1440px;
-    height: 560px;
+    height: 1380px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -988,9 +911,11 @@ h2.number.row02 {
 
 .otherFeatures {
     width: 834px;
+    height: 1130px;
     padding: 0 25px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -998,34 +923,37 @@ h2.number.row02 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 368px;
+    width: 600px;
 }
 
-.twoOtherFeatures a {
+.otherFeatures a {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 160px;
-    height: 280px;
-    border-radius: 20px;
+    border-radius: 18px;
     transition: all 0.3s;
     text-align: center;
+    width: 250px;
+    height: 340px;
+    background-color: #fff;
 }
 
-.twoOtherFeatures a > h4 {
+.otherFeatures a > h4 {
     font-family: 'Gosha sans', Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 24px;
-    line-height: 40px;
-    margin-bottom: 32px;
+    font-size: 20px;
+    line-height: 36px;
+    margin-bottom: 28px;
 }
 
-.twoOtherFeatures a > img {
+.otherFeatures a > img {
     margin-bottom: 0 !important;
+    height: 292px;
+    width: 232px;
 }
 
-.twoOtherFeatures a:hover {
+.otherFeatures a:hover {
     box-shadow: 0 0 5px 5px #f0f0f0;
 }
 
@@ -1046,27 +974,21 @@ h2.number.row02 {
 
 .head.selfHosted {
     background-image: url('../images/self-hosted-head.svg') !important;
-    background-size: 495px 459px;
-    background-position: 820px top;
+    background-size: 335px 315px;
+    background-position: calc((100vw - 1440px) / 2 + 820px) center;
     background-repeat: no-repeat;
 }
 
 .rowImg.row01.selfHosted {
     background-image: url('../images/self-hosted-1.svg') !important;
-    background-size: 686px 547px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row02.selfHosted {
     background-image: url('../images/self-hosted-2.svg') !important;
-    background-size: 671px 584px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row03.selfHosted {
     background-image: url('../images/self-hosted-3.svg') !important;
-    background-size: 540px 701px;
-    background-repeat: no-repeat;
 }
 
 .nextFeature.selfHosted {
