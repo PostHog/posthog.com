@@ -521,7 +521,7 @@ table.productFeaturesTable {
     height: 414px;
     margin: 0 0 40px;
     padding: 0 calc((100vw - 1440px) / 2 + 150px);
-    background-position: 700px center;
+    background-repeat: no-repeat;
 }
 
 .headContents {
@@ -560,11 +560,11 @@ main > div > div {
     .head {
         border-radius: 0;
         width: 100vw;
-        height: 680px;
+        height: 640px;
         margin: 0 0 40px;
         display: flex;
         justify-content: center;
-        background-position: center 50px !important;
+        background-position: center 80px !important;
     }
     .headContents {
         margin-left: 0;
@@ -579,6 +579,10 @@ main > div > div {
     }
     .headContents h3 {
         order: 2;
+    }
+    .headContents p {
+        font-size: 16px !important;
+        line-height: 32px !important;
     }
 }
 
@@ -722,7 +726,8 @@ h2.number {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 260px;
+    margin-bottom: 40px;
 }
 
 .startNowRow {
@@ -761,7 +766,7 @@ h2.number {
 
 @media screen and (max-width: 834px) {
     .startNowWrapper {
-        height: 200px;
+        height: 100px;
     }
     .startNowRow {
         left: calc((20 / 834) * 100vw);
@@ -819,7 +824,7 @@ h2.number {
     transition: all 0.3s;
     text-align: center;
     width: 250px;
-    height: 340px;
+    height: 360px;
     background-color: #fff;
 }
 
@@ -851,13 +856,9 @@ h2.number {
         width: 100vw;
         align-items: center;
     }
-    /* .otherFeatures {
-        flex-direction: column;
-        align-items: center;
-    } */
     .otherFeatures a {
         width: 140px;
-        height: 280px;
+        height: 260px;
     }
     .otherFeatures img {
         width: 140px;
@@ -872,8 +873,8 @@ h2.number {
 .head.selfHosted {
     background-image: url('../images/self-hosted-head.svg') !important;
     background-size: 335px 315px;
-    background-position: calc((100vw - 1440px) / 2 + 820px) center;
     background-repeat: no-repeat;
+    background-position: 820px center;
 }
 
 .rowImg.row01.selfHosted {
@@ -888,16 +889,9 @@ h2.number {
     background-image: url('../images/self-hosted-3.svg') !important;
 }
 
-.nextFeature.selfHosted {
-    background-image: url('../images/event-autocapture-head.svg') !important;
-    background-size: 560px 336px;
-    background-position: 820px center;
-    background-repeat: no-repeat;
-}
-
 @media screen and (max-width: 834px) {
     .head.selfHosted {
-        background-size: 300px auto;
+        background-size: 260px auto;
     }
     .rowImg.row01.selfHosted {
         background-image: url('../images/self-hosted-1-mobile.svg') !important;
@@ -914,34 +908,20 @@ h2.number {
 
 .head.eventAutocapture {
     background-image: url('../images/event-autocapture-head.svg') !important;
-    background-size: 560px 336px;
-    background-position: 700px center;
-    background-repeat: no-repeat;
+    background-size: 500px auto;
+    background-position: 800px center;
 }
 
 .rowImg.row01.eventAutocapture {
     background-image: url('../images/event-autocapture-1.svg') !important;
-    background-size: 637px 626px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row02.eventAutocapture {
     background-image: url('../images/event-autocapture-2.svg') !important;
-    background-size: 652px 533px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row03.eventAutocapture {
     background-image: url('../images/event-autocapture-3.svg') !important;
-    background-size: 663px 597px;
-    background-repeat: no-repeat;
-}
-
-.nextFeature.eventAutocapture {
-    background-image: url('../images/trends-head.svg') !important;
-    background-size: 620px 428px;
-    background-position: 700px center;
-    background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 834px) {
@@ -951,21 +931,12 @@ h2.number {
     }
     .rowImg.row01.eventAutocapture {
         background-image: url('../images/event-autocapture-1-mobile.svg') !important;
-        background-size: 375px 364px;
-        background-repeat: no-repeat;
-        height: 364px;
     }
     .rowImg.row02.eventAutocapture {
         background-image: url('../images/event-autocapture-2-mobile.svg') !important;
-        background-size: 358px 340px;
-        background-repeat: no-repeat;
-        height: 340px;
     }
     .rowImg.row03.eventAutocapture {
         background-image: url('../images/event-autocapture-3-mobile.svg') !important;
-        background-size: 350px 341px;
-        background-repeat: no-repeat;
-        height: 341px;
     }
 }
 
@@ -973,34 +944,20 @@ h2.number {
 
 .head.trends {
     background-image: url('../images/trends-head.svg') !important;
-    background-size: 620px 428px;
-    background-position: 700px 40px;
-    background-repeat: no-repeat;
+    background-size: 500px calc(500 / 620 * 428px);
+    background-position: 800px center;
 }
 
 .rowImg.row01.trends {
     background-image: url('../images/trends-1.svg') !important;
-    background-size: 581px 539px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row02.trends {
     background-image: url('../images/trends-2.svg') !important;
-    background-size: 503px 603px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row03.trends {
     background-image: url('../images/trends-3.svg') !important;
-    background-size: 678px 626px;
-    background-repeat: no-repeat;
-}
-
-.nextFeature.trends {
-    background-image: url('../images/funnels-head.svg') !important;
-    background-size: 565px 537px;
-    background-position: 700px center;
-    background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 834px) {
@@ -1009,21 +966,12 @@ h2.number {
     }
     .rowImg.row01.trends {
         background-image: url('../images/trends-1-mobile.svg') !important;
-        background-size: 348px 324px;
-        background-repeat: no-repeat;
-        height: 324px;
     }
     .rowImg.row02.trends {
         background-image: url('../images/trends-2-mobile.svg') !important;
-        background-size: 348px 370px;
-        background-repeat: no-repeat;
-        height: 370px;
     }
     .rowImg.row03.trends {
         background-image: url('../images/trends-3-mobile.svg') !important;
-        background-size: 375px 377px;
-        background-repeat: no-repeat;
-        height: 377px;
     }
 }
 
@@ -1031,34 +979,20 @@ h2.number {
 
 .head.funnels {
     background-image: url('../images/funnels-head.svg') !important;
-    background-size: 552px 413px;
-    background-position: 700px 40px;
-    background-repeat: no-repeat;
+    background-size: 500px auto;
+    background-position: 800px center;
 }
 
 .rowImg.row01.funnels {
     background-image: url('../images/trends-1.svg') !important;
-    background-size: 581px 539px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row02.funnels {
     background-image: url('../images/trends-2.svg') !important;
-    background-size: 503px 603px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row03.funnels {
     background-image: url('../images/trends-3.svg') !important;
-    background-size: 678px 626px;
-    background-repeat: no-repeat;
-}
-
-.nextFeature.funnels {
-    background-image: url('../images/retention-head.svg') !important;
-    background-size: 533px 400px;
-    background-position: 700px center;
-    background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 834px) {
@@ -1067,21 +1001,12 @@ h2.number {
     }
     .rowImg.row01.funnels {
         background-image: url('../images/funnels-1-mobile.svg') !important;
-        background-size: 346px 338px;
-        background-repeat: no-repeat;
-        height: 338px;
     }
     .rowImg.row02.funnels {
         background-image: url('../images/funnels-2-mobile.svg') !important;
-        background-size: 348px 343px;
-        background-repeat: no-repeat;
-        height: 343px;
     }
     .rowImg.row03.funnels {
         background-image: url('../images/funnels-3-mobile.svg') !important;
-        background-size: 342px 339px;
-        background-repeat: no-repeat;
-        height: 339px;
     }
 }
 
@@ -1089,34 +1014,20 @@ h2.number {
 
 .head.retention {
     background-image: url('../images/retention-head.svg') !important;
-    background-size: 533px 400px;
-    background-position: 700px 40px;
-    background-repeat: no-repeat;
+    background-size: 500px auto;
+    background-position: 800px center;
 }
 
 .rowImg.row01.retention {
     background-image: url('../images/retention-1.svg') !important;
-    background-size: 535px 491px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row02.retention {
     background-image: url('../images/retention-2.svg') !important;
-    background-size: 553px 519px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row03.retention {
     background-image: url('../images/retention-3.svg') !important;
-    background-size: 673px 606px;
-    background-repeat: no-repeat;
-}
-
-.nextFeature.retention {
-    background-image: url('../images/feature-flags-head.svg') !important;
-    background-size: 553px 383px;
-    background-position: 700px center;
-    background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 834px) {
@@ -1125,21 +1036,12 @@ h2.number {
     }
     .rowImg.row01.retention {
         background-image: url('../images/retention-1-mobile.svg') !important;
-        background-size: 348px 343px;
-        background-repeat: no-repeat;
-        height: 343px;
     }
     .rowImg.row02.retention {
         background-image: url('../images/retention-2-mobile.svg') !important;
-        background-size: 375px 377px;
-        background-repeat: no-repeat;
-        height: 377px;
     }
     .rowImg.row03.retention {
         background-image: url('../images/retention-3-mobile.svg') !important;
-        background-size: 352px 355px;
-        background-repeat: no-repeat;
-        height: 355px;
     }
 }
 
@@ -1147,34 +1049,20 @@ h2.number {
 
 .head.featureFlags {
     background-image: url('../images/feature-flags-head.svg') !important;
-    background-size: 553px 383px;
-    background-position: 700px 40px;
-    background-repeat: no-repeat;
+    background-size: 500px auto;
+    background-position: 800px center;
 }
 
 .rowImg.row01.featureFlags {
     background-image: url('../images/feature-flags-1.svg') !important;
-    background-size: 630px 540px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row02.featureFlags {
     background-image: url('../images/feature-flags-2.svg') !important;
-    background-size: 628px 588px;
-    background-repeat: no-repeat;
 }
 
 .rowImg.row03.featureFlags {
     background-image: url('../images/feature-flags-3.svg') !important;
-    background-size: 551px 643px;
-    background-repeat: no-repeat;
-}
-
-.nextFeature.featureFlags {
-    background-image: url('../images/self-hosted-head.svg') !important;
-    background-size: 495px 459px;
-    background-position: 700px center;
-    background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 834px) {
@@ -1183,21 +1071,12 @@ h2.number {
     }
     .rowImg.row01.featureFlags {
         background-image: url('../images/feature-flags-1-mobile.svg') !important;
-        background-size: 344px 351px;
-        background-repeat: no-repeat;
-        height: 351px;
     }
     .rowImg.row02.featureFlags {
         background-image: url('../images/feature-flags-2-mobile.svg') !important;
-        background-size: 348px 343px;
-        background-repeat: no-repeat;
-        height: 343px;
     }
     .rowImg.row03.featureFlags {
         background-image: url('../images/feature-flags-3-mobile.svg') !important;
-        background-size: 348px 357px;
-        background-repeat: no-repeat;
-        height: 357px;
     }
 }
 

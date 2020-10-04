@@ -6,30 +6,21 @@ import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import featureFlagsIcon from '../../images/feature-flags-icon.svg'
-import selfHostedIcon from '../../images/self-hosted-icon.svg'
+import trendsIcon from '../../images/trends-icon.svg'
 import funnelsIcon from '../../images/funnels-icon.svg'
 import retentionIcon from '../../images/retention-icon.svg'
+import selfHostedIcon from '../../images/self-hosted-icon.svg'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="featuresWrapper eventAutocapture">
-                <div className="head orange eventAutocapture">
-                    <div className="headContents">
-                        <Link to="/product-features" className="headNav top">
-                            <Button icon="left" />
-                            <p>Back to Features</p>
-                        </Link>
-                        <h1>Event Autocapture</h1>
-                        <p>
-                            Less setup, more analytics. Start capturing relevant data from the moment setup is complete.
-                        </p>
-                        <Link to="/product-features/trends" className="headNav bottom">
-                            <p>Next Feature</p>
-                            <Button icon="right" />
-                        </Link>
-                    </div>
+            <div className="head orange eventAutocapture">
+                <div className="headContents">
+                    <h1>Event Autocapture</h1>
+                    <p>Less setup, more analytics. Start capturing relevant data from the moment setup is complete.</p>
                 </div>
+            </div>
+            <div className="featuresWrapper eventAutocapture">
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>
                     <div className="rowContents row01">
@@ -84,45 +75,33 @@ function ProductFeatures() {
                         <img src={rays} />
                     </div>
                 </div>
-                <div className="nextFeature eventAutocapture yellow">
-                    <div className="nextFeatureContents eventAutocapture">
-                        <Link to="/product-features" className="nextFeatureNav top">
-                            <Button icon="left" />
-                            <p>Back to Features</p>
-                        </Link>
-                        <Link to="/product-features/trends" className="nextFeatureText">
-                            <h2>Trends</h2>
-                            <p>Understand what parts of your app are engaging, and what areas still need some work.</p>
-                        </Link>
-                        <Link to="/product-features/trends" className="nextFeatureNav bottom">
-                            <p>Next Feature</p>
-                            <Button icon="right" />
-                        </Link>
-                    </div>
-                </div>
                 <div className="otherFeaturesWrapper">
                     <h2>Other features</h2>
                     <div className="otherFeatures">
                         <div className="twoOtherFeatures">
+                            <Link to="/product-features/trends">
+                                <img src={trendsIcon} />
+                                <h4>Trends</h4>
+                            </Link>
                             <Link to="/product-features/funnels">
                                 <img src={funnelsIcon} />
                                 <h4>Funnels</h4>
                             </Link>
+                        </div>
+                        <div className="twoOtherFeatures">
                             <Link to="/product-features/retention">
                                 <img src={retentionIcon} />
                                 <h4>Retention</h4>
                             </Link>
-                        </div>
-                        <div className="twoOtherFeatures">
                             <Link to="/product-features/feature-flags">
                                 <img src={featureFlagsIcon} />
                                 <h4>Feature flags</h4>
                             </Link>
-                            <Link to="/product-features/self-hosted">
-                                <img src={selfHostedIcon} />
-                                <h4>Self hosted</h4>
-                            </Link>
                         </div>
+                        <Link to="/product-features/self-hosted">
+                            <img src={selfHostedIcon} />
+                            <h4>Self hosted</h4>
+                        </Link>
                     </div>
                 </div>
             </div>

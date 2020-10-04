@@ -5,32 +5,25 @@ import '../../components/Layout/Layout.css'
 import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
-import featureFlagsIcon from '../../images/feature-flags-icon.svg'
-import selfHostedIcon from '../../images/self-hosted-icon.svg'
 import eventAutocaptureIcon from '../../images/event-autocapture-icon.svg'
+import featureFlagsIcon from '../../images/feature-flags-icon.svg'
 import trendsIcon from '../../images/trends-icon.svg'
+import selfHostedIcon from '../../images/self-hosted-icon.svg'
+import retentionIcon from '../../images/retention-icon.svg'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="featuresWrapper funnels">
-                <div className="head blue funnels">
-                    <div className="headContents">
-                        <Link to="/product-features" className="headNav top">
-                            <Button icon="left" />
-                            <p>Back to Features</p>
-                        </Link>
-                        <h1>Funnels</h1>
-                        <p>
-                            Visualize users going through a multi-step process in your app and figure out where they’re
-                            dropping off.
-                        </p>
-                        <Link to="/product-features/retention" className="headNav bottom">
-                            <p>Next Feature</p>
-                            <Button icon="right" />
-                        </Link>
-                    </div>
+            <div className="head blue funnels">
+                <div className="headContents">
+                    <h1>Funnels</h1>
+                    <p>
+                        Visualize users going through a multi-step process in your app and figure out where they’re
+                        dropping off.
+                    </p>
                 </div>
+            </div>
+            <div className="featuresWrapper funnels">
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>
                     <div className="rowContents row01">
@@ -74,7 +67,7 @@ function ProductFeatures() {
                 </div>
                 <div className="startNowWrapper">
                     <div className="startNowRow">
-                        <Link to="/trial">
+                        <Link to="/trial/">
                             <Button type="primary" className="startNowButton">
                                 Start now
                             </Button>
@@ -82,47 +75,33 @@ function ProductFeatures() {
                         <img src={rays} />
                     </div>
                 </div>
-                <div className="nextFeature funnels orange">
-                    <div className="nextFeatureContents funnels">
-                        <Link to="/product-features" className="nextFeatureNav top">
-                            <Button icon="left" />
-                            <p>Back to Features</p>
-                        </Link>
-                        <Link to="/product-features/retention" className="nextFeatureText">
-                            <h2>Retention</h2>
-                            <p>
-                                Understand what percentage of users you’re retaining, and who are the ones you’re not.
-                            </p>
-                        </Link>
-                        <Link to="/product-features/retention" className="nextFeatureNav bottom">
-                            <p>Next Feature</p>
-                            <Button icon="right" />
-                        </Link>
-                    </div>
-                </div>
                 <div className="otherFeaturesWrapper">
                     <h2>Other features</h2>
                     <div className="otherFeatures">
                         <div className="twoOtherFeatures">
+                            <Link to="/product-features/retention">
+                                <img src={retentionIcon} />
+                                <h4>Retention</h4>
+                            </Link>
                             <Link to="/product-features/feature-flags">
                                 <img src={featureFlagsIcon} />
                                 <h4>Feature flags</h4>
                             </Link>
+                        </div>
+                        <div className="twoOtherFeatures">
                             <Link to="/product-features/self-hosted">
                                 <img src={selfHostedIcon} />
                                 <h4>Self hosted</h4>
                             </Link>
-                        </div>
-                        <div className="twoOtherFeatures">
                             <Link to="/product-features/event-autocapture">
                                 <img src={eventAutocaptureIcon} />
-                                <h4>Event autocapture</h4>
-                            </Link>
-                            <Link to="/product-features/trends">
-                                <img src={trendsIcon} />
-                                <h4>Retention</h4>
+                                <h4>Event Autocapture</h4>
                             </Link>
                         </div>
+                        <Link to="/product-features/trends">
+                            <img src={trendsIcon} />
+                            <h4>Trends</h4>
+                        </Link>
                     </div>
                 </div>
             </div>
