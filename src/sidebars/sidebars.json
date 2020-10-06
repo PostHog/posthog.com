@@ -65,7 +65,7 @@
     {
         "entry": "Architecture",
         "name": "Architecture",
-        "items": ["docs/data-model"]
+        "items": ["docs/data-model", "docs/navigation"]
     },
     {
         "entry": "Features",
