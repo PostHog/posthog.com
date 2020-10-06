@@ -338,8 +338,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 </div>
 
-<div class="team-row" markdown="1">
-
 <a href="https://github.com/timgl"><img src="https://avatars1.githubusercontent.com/u/1727427?v=4" title="timgl" class="contributor-faces"></a>
 <a href="https://github.com/jamesefhawkins"><img src="https://avatars3.githubusercontent.com/u/47497682?v=4" title="jamesefhawkins" class="contributor-faces"></a>
 <a href="https://github.com/mariusandra"><img src="https://avatars2.githubusercontent.com/u/53387?v=4" title="mariusandra" class="contributor-faces"></a>
@@ -431,5 +429,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <a href="https://github.com/Jujhar"><img src="https://avatars0.githubusercontent.com/u/5521110?v=4" title="Jujhar" class="contributor-faces"></a>
 <a href="https://github.com/dts"><img src="https://avatars0.githubusercontent.com/u/273856?v=4" title="dts" class="contributor-faces"></a>
 <a href="https://github.com/rushabhnagda11"><img src="https://avatars1.githubusercontent.com/u/3235568?v=4" title="rushabhnagda11" class="contributor-faces"></a>
-
-</div>
