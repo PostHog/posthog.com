@@ -60,6 +60,14 @@ To follow this tutorial along, you need to:
 
 **Note:** It can also be useful to have some [actions](/docs/tutorials/toolbar#creating-actions) set up, but not necessary.
 
+## Playground (Beta)
+
+As a supporting resource for this tutorial, we have created a <a href="https://playground.posthog.com/funnels.html" target="_blank">playground</a> where you can test out the functionality explained here.
+
+It is recommended that you go through the tutorial first to understand the concepts better before seeing the functionality in action.
+
+Please note that the playground is a Beta feature, and we would appreciate [feedback on GitHub](https://github.com/PostHog/posthog.com/issues/491). 
+
 ## When You Should Use Funnels
 
 Funnels are great for when your users should perform actions in succession. That is, if you need your user to do something _and then_ do something else, funnels are a great way to gather insights into that process.
