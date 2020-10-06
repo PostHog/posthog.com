@@ -1456,20 +1456,22 @@ code {
 }
 
 .team-right-text {
-    float: right;
+    display: inline-block;
     width: 50%;
 }
 
 .team-left-image {
-    float: left;
+    display: inline-block;
     width: 40%;
-    padding-top: 100px;
+    vertical-align: top;
+    padding-top: 50px;
 }
 
 .team-right-image {
     display: inline-block;
     width: 40%;
-    margin: auto;
+    vertical-align: top;
+    padding-top: 50px;
 }
 
 .team-center-space {
