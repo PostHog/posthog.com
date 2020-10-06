@@ -1439,6 +1439,10 @@ code {
 
 /* TEAMS PAGE STYLES */
 
+.team-body {
+    background-color: none;
+}
+
 .team-row {
     float: left;
     width: 100%;
@@ -1476,4 +1480,5 @@ code {
 .team-title {
     width: 100%;
     float: left;
+    padding-top: 50px;
 }

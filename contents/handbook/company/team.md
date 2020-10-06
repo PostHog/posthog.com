@@ -4,7 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We are proud to be misfits. Why?
+<!--- Intro Info -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+<h3> We are proud to be misfits. Why? </h3>
 
 Building an unusually great company starts with an unusual team.
 
@@ -12,12 +18,34 @@ We don't care if you haven't finished (or attended) school, if you were super im
 
 What we do care about is your ability to learn, iterate, and ship.
 
-That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. 
+That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places.
 
-![Remote Work Banner](../../images/posthogers-map.png) 
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Remote Work Banner](../../images/team-global.gif)
 <br /><small class="centered">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
 
+</div>
+
+</div>
+
+<!--- Core Team Section -->
+
+<div class="team-title" markdown="1">
+
 ## Core Team
+
+</div>
+
+<!--- James Hawkins Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
 
 ### James Hawkins, Co-Founder and CEO
 
@@ -31,6 +59,32 @@ I wanted more experience of working in a VC backed startup, so I could work on s
 
 I started working with Tim on a few ideas that didn't work out in August 2019. We built PostHog during the YCombinator W20 batch, and launched in February. You can work out what I've been up to since by stalking me online.
 
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+</div>
+
+<!--- Tim Glaser Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-text" markdown="1">
+
 ### Tim Glaser, Co-Founder and CTO
 
 I've been coding since I've been 11, which isn't as long ago as I'd like it to be. Someone first paid me to write code when I was 13 (though I'm sure they regretted it) and [someone else](https://en.wikipedia.org/wiki/Cloud9_IDE) gainfully employed me when I was 16.
@@ -40,6 +94,16 @@ Originally from the Netherlands, though I quickly moved to London (I do not gene
 After four years I thought it was time to go do something else and had lined up a new job. Roughly 37 seconds after it was announced James wanted to "grab a beer." While plying me with alcohol, he convinced me to give up this fancy new job and instead start a startup with him.
 
 In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-shaped ball and watch a lot of Bondi beach in order to perfect my Australian accent.
+
+</div>
+
+</div>
+
+<!--- Marius Andra Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
 
 ### Marius Andra, Software Engineer
 
@@ -53,17 +117,53 @@ This was followed by years of writing games in C++ and then [writing tutorials](
 
 On the side I built an [open source database analytics platform](https://github.com/mariusandra/insights)... and when that [got on Hacker News](https://news.ycombinator.com/item?id=22347516), James reached out... and the rest is history.
 
-These days I live in Belgium and code [state management libraries](https://kea.js.org/) in JavaScript for fun. 
+These days I live in Belgium and code [state management libraries](https://kea.js.org/) in JavaScript for fun.
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+</div>
+
+<!--- Eric Duong Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-text" markdown="1">
 
 ### Eric Duong, Software Engineer
 
 I recently graduated and while in college I helped cofound a social dining platform. I spent two years trying to get strangers to cook and dine with each other. In reality, it turned into a 2 year stint of teach yourself as much mobile development as you can while simultaneously trying to build a usable platform. My cofounders and I had our fair share of contemplating dropping out of school and becoming a unicorn in 5 years—it didn't work out.
 
-Somewhere along the way I fell down the bitcoin rabbit hole and after realizing day trading crypto wasn't a feasible nor fulfilling long term goal, I remained fascinated by digital currency. This led me to briefly work with a company building a digital cash transfer system for developing economies. 
+Somewhere along the way I fell down the bitcoin rabbit hole and after realizing day trading crypto wasn't a feasible nor fulfilling long term goal, I remained fascinated by digital currency. This led me to briefly work with a company building a digital cash transfer system for developing economies.
 
 I currently work as a generalist around most of Posthog's stack building many of the user-facing features but occasionally pick up backend tasks.
 
 To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage of Posthog's all remote policy to travel and hike as many major mountain treks around the world as possible. Ambitions subject to change as always though.
+
+</div>
+
+</div>
+
+<!--- James Greenhill Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
 
 ### James Greenhill, Software Engineer
 
@@ -77,6 +177,32 @@ In my professional life I’ve generally managed mopping up the 1’s and 0’s.
 
 When I’m not out and about in nature you can find me at home with my cat Tesla and Taco our goofball of a Lab Corgi mix.
 
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+</div>
+
+<!--- Michael Matloka Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-text" markdown="1">
+
 ### Michael Matloka, Software Engineer
 
 Got into software by tinkering with bada OS – if anyone even remembers that! – and just never stopped (though I did move to Android soon and later became an iOS fan).
@@ -86,44 +212,132 @@ Before graduating from high school here in Poland – and having some open-sourc
 Happy to report that I ended up joining PostHog, where open-source software, a quality product and great people all mix freely!
 In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), [photography](https://unsplash.com/@twixes) and [cinema](https://www.nowehoryzonty.pl/index.do?lang=en). Decidedly a fan of precipitation and overcast weather, I have a secret plan to move to the Nordics or the UK one day.
 
+</div>
+
+</div>
+
+<!--- Paolo D'Amico Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
 ### Paolo D'Amico, Growth Engineer
 
 I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical. I have 10+ years of experience as a software engineer and product manager.
 
 Prior to joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
 
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+</div>
+
+<!--- Lottie Coxon Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-text" markdown="1">
+
 ### Lottie Coxon, Designer
 
-I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin). 
+I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin).
 
-I spent my youth trying to master fine art, after my teacher said I was awful and that I should try something else. 
-In my stubbornness I decided to prove her wrong, and here I am - a designer. 
+I spent my youth trying to master fine art, after my teacher said I was awful and that I should try something else.
+In my stubbornness I decided to prove her wrong, and here I am - a designer.
 
-I was quite a weird child. I once ran a race with locked legs (Forest Gump style) because I had a dream the night before that I won by doing so. For those who are wondering, no I did not win. But I would rather be the weird child than the boring one. 
+I was quite a weird child. I once ran a race with locked legs (Forest Gump style) because I had a dream the night before that I won by doing so. For those who are wondering, no I did not win. But I would rather be the weird child than the boring one.
 
-I took Graphic Design at university and graduated this summer and instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio on twitter, I was contacted by PostHog a mere 24 hours later. 
+I took Graphic Design at university and graduated this summer and instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio on twitter, I was contacted by PostHog a mere 24 hours later.
 
-I am now their Graphic Designer, and spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly drawing hedgehogs with sunglasses on. 
+I am now their Graphic Designer, and spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly drawing hedgehogs with sunglasses on.
 
-On a side note I have decided to move to Senegal (Africa) to be with my boyfriend George. It’s a bold decision really as I cannot speak French, but I will (try) learn. 
+On a side note I have decided to move to Senegal (Africa) to be with my boyfriend George. It’s a bold decision really as I cannot speak French, but I will (try) learn.
 
 *French accent* C’est la Vie
+
+</div>
+
+</div>
+
+<!--- Yakko Majuri Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
 
 ### Yakko Majuri, Technical Writer and Developer
 
 Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who has lived in 5 countries across 4 continents.
 
-Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD). 
+Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD).
 
-Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space. 
+Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space.
 
-For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://medium.com/@yakko.majuri) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am. 
+For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://medium.com/@yakko.majuri) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am.
 
-When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain. 
+When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain.
 
-Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime. If that means anything. 
+Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime. If that means anything.
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+</div>
+
+<!--- Leah Smith Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team-placeholder.png)
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-text" markdown="1">
+
+### Leah Smith
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+</div>
+
+</div>
+
+<!--- Contributors Section -->
+
+<div class="team-title" markdown="1">
 
 ## Contributors
+
+</div>
+
+<div class="team-row" markdown="1">
 
 <a href="https://github.com/timgl"><img src="https://avatars1.githubusercontent.com/u/1727427?v=4" title="timgl" class="contributor-faces"></a>
 <a href="https://github.com/jamesefhawkins"><img src="https://avatars3.githubusercontent.com/u/47497682?v=4" title="jamesefhawkins" class="contributor-faces"></a>
@@ -194,8 +408,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 <a href="https://github.com/14MR"><img src="https://avatars1.githubusercontent.com/u/5824170?v=4" title="14MR" class="contributor-faces"></a>
 <a href="https://github.com/03difoha"><img src="https://avatars3.githubusercontent.com/u/8876615?v=4" title="03difoha" class="contributor-faces"></a>
 <a href="https://github.com/Kacppian"><img src="https://avatars1.githubusercontent.com/u/14990078?v=4" title="Kacppian" class="contributor-faces"></a>
-<a href="https://github.com/iM
-a"><img src="https://avatars3.githubusercontent.com/u/487897?v=4" title="iMerica" class="contributor-faces"></a>
+<a href="https://github.com/iMa"><img src="https://avatars3.githubusercontent.com/u/487897?v=4" title="iMerica" class="contributor-faces"></a>
 <a href="https://github.com/pedroapfilho"><img src="https://avatars2.githubusercontent.com/u/13142568?v=4" title="pedroapfilho" class="contributor-faces"></a>
 <a href="https://github.com/eLRuLL"><img src="https://avatars3.githubusercontent.com/u/1459486?v=4" title="eLRuLL" class="contributor-faces"></a>
 <a href="https://github.com/samcaspus"><img src="https://avatars0.githubusercontent.com/u/19220113?v=4" title="samcaspus" class="contributor-faces"></a>
@@ -217,3 +430,5 @@ a"><img src="https://avatars3.githubusercontent.com/u/487897?v=4" title="iMerica
 <a href="https://github.com/Jujhar"><img src="https://avatars0.githubusercontent.com/u/5521110?v=4" title="Jujhar" class="contributor-faces"></a>
 <a href="https://github.com/dts"><img src="https://avatars0.githubusercontent.com/u/273856?v=4" title="dts" class="contributor-faces"></a>
 <a href="https://github.com/rushabhnagda11"><img src="https://avatars1.githubusercontent.com/u/3235568?v=4" title="rushabhnagda11" class="contributor-faces"></a>
+
+</div>
