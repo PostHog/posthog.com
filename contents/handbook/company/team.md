@@ -27,7 +27,7 @@ That's why we have people in Belgium, Brazil, the East and West coast of the US,
 
 <div class="team-right-image" markdown="1">
 
-![Remote Work Banner](../../images/team-global.gif)
+![Remote Work Banner](../../images/team/team-global.gif)
 <br /><small class="centered">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
 
 </div>
@@ -66,7 +66,7 @@ I started working with Tim on a few ideas that didn't work out in August 2019. W
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/JamesH.png)
 
 </div>
 
@@ -78,7 +78,7 @@ I started working with Tim on a few ideas that didn't work out in August 2019. W
 
 <div class="team-left-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Tim.png)
 
 </div>
 
@@ -126,7 +126,7 @@ These days I live in Belgium and code [state management libraries](https://kea.j
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Marius.png)
 
 </div>
 
@@ -138,7 +138,7 @@ These days I live in Belgium and code [state management libraries](https://kea.j
 
 <div class="team-left-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/team-placeholder.png)
 
 </div>
 
@@ -184,7 +184,7 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/team-placeholder.png)
 
 </div>
 
@@ -196,7 +196,7 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 <div class="team-left-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Michael.png)
 
 </div>
 
@@ -235,7 +235,7 @@ Prior to joining PostHog, I lead a product team at Grow Mobility, the largest mi
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/team-placeholder.png)
 
 </div>
 
@@ -247,7 +247,7 @@ Prior to joining PostHog, I lead a product team at Grow Mobility, the largest mi
 
 <div class="team-left-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/team-placeholder.png)
 
 </div>
 
@@ -302,7 +302,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Yakko.png)
 
 </div>
 
@@ -314,7 +314,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 <div class="team-left-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Leah.png)
 
 </div>
 
