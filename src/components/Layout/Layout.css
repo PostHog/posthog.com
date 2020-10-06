@@ -1436,3 +1436,44 @@ code {
         font-size: 16px;
     }
 }
+
+/* TEAMS PAGE STYLES */
+
+.team-row {
+    float: left;
+    width: 100%;
+    overflow: auto;
+    white-space: normal;
+}
+
+.team-left-text {
+    display: inline-block;
+    width: 50%;
+}
+
+.team-right-text {
+    float: right;
+    width: 50%;
+}
+
+.team-left-image {
+    float: left;
+    width: 40%;
+    padding-top: 100px;
+}
+
+.team-right-image {
+    display: inline-block;
+    width: 40%;
+    margin: auto;
+}
+
+.team-center-space {
+    display: inline-block;
+    width: 5%;
+}
+
+.team-title {
+    width: 100%;
+    float: left;
+}
