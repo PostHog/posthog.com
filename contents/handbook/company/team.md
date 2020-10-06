@@ -2,6 +2,7 @@
 title: Team
 sidebar: Handbook
 showTitle: true
+hideAnchor: true
 ---
 
 <!--- Intro Info -->
