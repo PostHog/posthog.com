@@ -9,9 +9,10 @@ import { featureFlagLogic } from '../../logic/featureFlagLogic'
 
 const SubMenu = Menu.SubMenu
 
+
 function SidebarContents() {
     const { featureFlags } = useValues(featureFlagLogic)
-
+    
     useEffect(() => {
         if (!featureFlags['launch-tutorials-section']) {
             const tutorialsDiv = window.document.getElementById('tutorials-sidebar-item')

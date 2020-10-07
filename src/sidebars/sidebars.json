@@ -23,7 +23,8 @@
             "docs/configuring-posthog/scaling-posthog",
             "docs/configuring-posthog/securing-posthog",
             "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/smtp-credentials"
+            "docs/configuring-posthog/smtp-credentials",
+            "docs/configuring-posthog/deleting-data"
         ]
     },
     {
@@ -40,7 +41,7 @@
     {
         "entry": "Tutorials",
         "name": "Tutorials",
-        "items": ["docs/tutorials/feature-flags", "docs/tutorials/toolbar"]
+        "items": ["docs/tutorials/feature-flags", "docs/tutorials/toolbar", "docs/tutorials/funnels"]
     },
     {
         "entry": "Deployment",
@@ -71,12 +72,12 @@
         "name": "Features",
         "items": [
             "docs/features/actions",
+            "docs/features/annotations",
             "docs/features/cohorts",
             "docs/features/dashboards",
             "docs/features/events",
             "docs/features/feature-flags",
             "docs/features/funnels",
-            "docs/features/inviting-your-team",
             "docs/features/live-actions",
             "docs/features/log-in-with-github-gitlab",
             "docs/features/paths",
@@ -183,6 +184,8 @@
         "entry": "Company Blog",
         "name": "Company Blog",
         "items": [
+            "blog/hacktoberfest-2020",
+            "blog/open-source-telemetry-ethical",
             "blog/open-source-eating-saas",
             "blog/product-led-growth",
             "blog/a-chat-with-sid",
@@ -235,6 +238,7 @@
         "entry": "Growth",
         "name": "Growth",
         "items": [
+            "handbook/growth/community",
             "handbook/growth/customer-success",
             "handbook/growth/sales",
             "handbook/growth/trials",
@@ -250,7 +254,9 @@
             "handbook/engineering/how-to-qa",
             "handbook/engineering/release-new-version",
             "handbook/engineering/onboarding-customer",
-            "handbook/engineering/setup-ssl-locally"
+            "handbook/engineering/setup-ssl-locally",
+            "handbook/engineering/ee-setup",
+            "handbook/engineering/common-issues"
         ]
     },
     {

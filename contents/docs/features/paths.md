@@ -16,9 +16,9 @@ We provide a visual representation of the paths taken by users on your product, 
 
 ## Viewing Paths
 
-Go to 'Paths' in the left-hand navigation:
+Go to the 'User Paths' tab after visiting 'Insights' in the left-hand navigation:
 
-![Paths - left hand navigation](https://posthog-static-files.s3.us-east-2.amazonaws.com/Documentation-Assets/Screenshot+2020-02-27+at+16.22.49.png)
+![Paths Page](../../images/features/paths/paths-page.png)
 
 There is no set up in the PostHog UX needed for paths - they appear automatically if you are tracking pageviews with our snippet, or pushing page view events.
 

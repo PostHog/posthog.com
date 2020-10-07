@@ -40,6 +40,14 @@ To follow this tutorial along, you need to:
 1. Have [deployed PostHog](/docs/deployment)
 1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python integration](/docs/integrations/python-integration), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
 
+## Playground (Beta)
+
+As a supporting resource for this tutorial, we have created a <a href="https://playground.posthog.com/feature-flags.html" target="_blank">playground</a> where you can test out the functionality explained here.
+
+It is recommended that you go through the tutorial first to understand the concepts better before seeing the functionality in action.
+
+Please note that the playground is a Beta feature, and we would appreciate [feedback on GitHub](https://github.com/PostHog/posthog.com/issues/491). 
+
 ## Determining a Use Case
 
 Before you create a feature flag, you should have an idea in mind of a feature that you want to only roll out to a subset of your users. If you'd like some inspiration to determine a good use case, you can refer to the ['Putting Your Flag to Use'](#putting-your-flag-to-use) section of this tutorial for ideas.
@@ -208,12 +216,11 @@ Better yet, you can then release it slowly to make sure nothing breaks, and, if 
 
 And this brings us to the next example.
 
+<div class="note-block"><b>Fun Fact:</b> We used a PostHog feature flag to release this very tutorial. This was the first tutorial we wrote but didn't want to release a lonely tutorial on the website. We also did not want to have to put all tutorials in one PR, so we wrapped our Tutorials section on the navigation with a feature flag and merged tutorials one by one as they came. Then, when we felt like we were ready to launch, we just toggled the flag on.</div>
+
+
 ### Rollback with peace of mind
 
 You don't need feature flags _per se_ to implement kill switches, but having the ability to immediately turn a flag off is a nice add-on to the functionality.
 
 Perhaps your goal all along was to do A/B testing for your UX, but, when something breaks, you can always roll it back safely with minor consequences (if implemented correctly).
-
-## Example Code & Playground
-
-Coming soon.

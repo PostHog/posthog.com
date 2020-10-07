@@ -6,71 +6,81 @@ showTitle: true
 
 You can create dashboard panels to display information you are collecting with PostHog. It will be the first thing you see when you log on so that you can easily access the most important performance metrics in your product.
 
-Dashboard panels can be created in two ways:
+Dashboard panels can be created from any tab in 'Insights', and they can be tables, line charts, funnels, and pie charts.
 
-* From Action trends
-* From Funnels 
+## Demo Video
 
-This will give you the option to display information in tables, line charts or funnels .
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XUKQvXrE96k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Creating an Action Trend Dashboard
+## Creating a Dashboard
 
-Go to ‘Actions’>’Trends’ in the left-hand navigation:
+![Trends Add to Dashboard](../../images/features/dashboards/add-to-dashboard.png)
 
-![Left hand navigation - trends highlighted](../../images/02/Screenshot-2020-02-09-at-17.24.16.png)
+**Step 1: Navigate to 'Insights' on the left sidebar**
 
-You can now see the trend in these actions over time.
+'Insights' is located just above 'Events' on the navigation.
 
-![Action trends](../../images/02/Posthog-1.png)
+**Step 2: Create a chart, funnel, or table**
 
-Once you have broken down your data by line chart or table you can then simply select "Add to dashboard" and you will then be asked to name your dashboard.
+On any of the tabs available, create a chart you'd like to easily access again in the future.
 
-![Add Graph](../../images/02/Posthog.png)
+**Step 3: Add to Dashboard**
 
-It will then appear on the dashboard home page.
+Click the blue 'Add to Dashboard' button on the top right corner of the card 
 
-![Dashboard home page](../../images/02/Posthog-2.png)
+**Step 4: Configure and save your panel**
 
-## Creating a Funnel Dashboard
+Clicking 'Add to Dashboard should bring up the following modal:
 
-Go to ‘Actions’>’Funnels’ in the left hand navigation:
+![Select Dashboard](../../images/features/dashboards/select-dashboard.png)
 
-![Funnels](../../images/02/Screenshot-2020-02-09-at-20.48.20.png)
+Here you can choose a name for your panel and pick the Dashboard you'd like to display it on (you can also create a new one).
 
-Select the funnel that you wish to display and select "Add to dashboard", once you give this a name it will also appear on the dashboard home page.
+## Editing a Dashboard
 
-![Dashboards home page](../../images/02/Screenshot-2020-02-13-at-23.14.36-1.png)
+With your Dashboard created, you can now view and edit it.
 
-## Customizing Dashboards
+**Step 1: Accessing your dashboard**
 
-Dashboards can be customized to suit your preferences.
+To access your dashboard, loook for it on the left sidebar. If it cannot be found there, click 'Dashboards' and select it from there.
 
-### Dashboard Options
+![Accessing Dashboard](../../images/features/dashboards/dashboard-view.png)
 
-By clicking on the three dots on the top right corner of each Dashboard, you are able to access Dashboard options. Here, you can:
+**Step 2: Editing the Dashboard**
 
-* 'View Graph': Takes you to the appropriate page in PostHog where the Dashboard is derived from
-* 'Rename': Give your dashboard any name you like
-* 'Set Color': Allows you to set a different color for your Dashboard
-* 'Duplicate': Create a replica of the Dashboard
-* 'Delete': Remove the Dashboard
+Once on the dashboard view, there's a lot that you can edit here. 
 
-### Resizing
+![Dashboard Options](../../images/features/dashboards/dashboard-options.png)
 
-To resize Dashboard, hover your mouse over its edges until the cursor becomes an arrow. Then, drag in any direction until the Dashboard is the size you want it to be. That's it!
+Let's go through the main options available in the picture:
 
-### Full Screen
+**Top Right: Dashboard Management**
 
-Want to see everything in full screen? You can find the button to do so button next to 'Lock Dragging' on the top right corner. 
+On the top right you can, in order:
 
-### Rearranging Location
+* "Pin" your dashboard to the navigation
+* Generate a link to share it publicly 
+* Lock it to prevent changes
+* Display the dashboard in full screen
+* Rename and delete the dashboard
 
-Dashboards can be placed anywhere you like on the page. To drag them across the screen, hover your mouse over the top of the Dashboard until the cursor changes to the 'Drag' style. Then, just move them around as you wish.
+**Moving and Resizing Panels**
 
-To prevent accidental dragging, you may click 'Lock Dragging' on the top right corner.
+To resize a panel, all you need to do is take your cursor to the edge of the panel and a little arrow will appear. This will then allow you to resize it as you wish. You can hover your cursor over any edge to do this, except the top one. In the image, this is shown by the red circle.
 
+Additionally, to move a panel, just click on it and hold. Then move your cursor and the panel should move with it.
 
+**Panel Options**
 
+Each panel has two buttons on the top right. The circular arrow is used to refresh the panel, and the clicking the three dots reveals a variety of options. These are:
+
+* View chart/funnel/table: Takes you to the Insights tab where you can update the panel
+* Rename: Give your panel a new name
+* Set color: Change a color that hurts your eyes less 
+* Copy to: Copy the panel to another dashboard
+* Move to: Move the panel to another dashboard 
+* Duplicate: Copy and create a duplicate of the panel on the same dashboard
+* Delete: Get rid of the panel
 
 
 

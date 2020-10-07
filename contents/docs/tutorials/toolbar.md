@@ -58,6 +58,7 @@ Before we go right into how to use the PostHog Toolbar, it's useful to understan
 
 Our toolbar is still in Beta, and there are exciting new features for it on our roadmap. However, in it's current form, it can:
 
+
 1. Display user clicks on your website/web app in a visual way
 1. Tell you what element is the most clicked on a given page
 1. Create actions in a simple way

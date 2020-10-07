@@ -57,7 +57,7 @@ Very. We have thousands of users, over [3k stars](https://github.com/PostHog/pos
 
 Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](docs/upgrading-posthog), and the most recent versions of the software will alert you to new updates within the application.
 
-Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) / [Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) to see our latest features.
+Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) / [Slack](/slack) to see our latest features.
 
 ### How many companies use it / How many well-known companies use it?
 
@@ -77,7 +77,7 @@ We are a well established [YC backed company](https://www.ycombinator.com/compan
 
 Whilst there is already room for improvement, the software works well and we use it ourselves every day.
 
-If you have any [issues or feature requests](https://github.com/PostHog/posthog/issues), we are live on [Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) nearly 24 hours a day during the week to help.
+If you have any [issues or feature requests](https://github.com/PostHog/posthog/issues), we are live on [Slack](/slack) nearly 24 hours a day during the week to help.
 
 ### Is this hard to set up?
 
@@ -131,7 +131,7 @@ The cool thing about PostHog is that you can go live into production without hav
 
 ### What's the community like?
 
-Active and growing! We have [more than 3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub. There is a [Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) with daily conversations, and our repos have [issues](https://github.com/PostHog/posthog/issues) raised every day.
+Active and growing! We have [more than 3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub. There is a [Slack group](/slack) with daily conversations, and our repos have [issues](https://github.com/PostHog/posthog/issues) raised every day.
 
 ### How is this different from the other product analytics tools?
 
@@ -164,7 +164,7 @@ You can suggest new features by adding them as issues in our [Github repo](https
 
 ### I'm having trouble setting up PostHog. What should I do?
 
-If you’re having trouble setting up PostHog you can send a message to our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ), you can also contact [PostHog Support](mailto:hey@posthog.com). If its a bug you can raise an issue through our [GitHub repo](https://github.com/PostHog/posthog/issues).
+If you’re having trouble setting up PostHog you can send a message to our [community Slack group](/slack), you can also contact [PostHog Support](mailto:hey@posthog.com). If its a bug you can raise an issue through our [GitHub repo](https://github.com/PostHog/posthog/issues).
 
 ### Are you hiring?
 

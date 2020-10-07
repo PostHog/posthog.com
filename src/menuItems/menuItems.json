@@ -12,10 +12,6 @@
         "link": "/docs/deployment"
     },
     {
-        "name": "Free Trial",
-        "link": "/trial"
-    },
-    {
         "name": "GitHub",
         "a": "https://github.com/PostHog/posthog"
     },
