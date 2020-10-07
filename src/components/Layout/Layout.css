@@ -1443,6 +1443,11 @@ code {
     background-color: none;
 }
 
+.team-title {
+    width: 100%;
+    float: left;
+    padding-top: 25px;
+}
 .team-row {
     float: left;
     width: 100%;
