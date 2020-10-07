@@ -330,6 +330,31 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 </div>
 
+<!--- Karl Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Karl
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+<a href="#" class="expand-text position-relative" onclick="$('.overflow,.expand-text,.collapse-text').toggle();">Read More</a>
+<span class="overflow" style="display: none;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span>
+<a href="#" class="collapse-text position-relative" style="display: none;" onclick="$('.overflow,.expand-text,.collapse-text').toggle();">Read Less</a>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team/Karl.png)
+
+</div>
+
+</div>
+
 <!--- Contributors Section -->
 
 <div class="team-title" markdown="1">
