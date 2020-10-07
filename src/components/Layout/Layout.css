@@ -1114,6 +1114,13 @@ a.middle {
     width: 100%;
 }
 
+.layout.featuresPageLayout {
+    width: 100vw;
+    max-width: 1440px;
+    padding: 0 25px;
+    margin: 0 calc((100vw - 1440px) / 2);
+}
+
 .docsPageLayout main > .container {
     position: relative;
 }

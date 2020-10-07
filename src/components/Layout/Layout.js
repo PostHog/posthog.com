@@ -24,6 +24,7 @@ function Layout({
     isHandbookPage,
     children,
     className,
+    isFeaturesPage,
     containerStyle = {},
 }) {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
@@ -97,7 +98,8 @@ function Layout({
                                             className={
                                                 'layout ' +
                                                 (onPostPage ? 'docsPageLayout ' : 'notDocsLayout ') +
-                                                (isBlogPage && 'blogPageLayout')
+                                                (isBlogPage && 'blogPageLayout') +
+                                                (isFeaturesPage && ' featuresPageLayout')
                                             }
                                             theme="light"
                                         >

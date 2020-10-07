@@ -35,6 +35,7 @@ function Template({
     const parsedPathname = location.pathname.split('/')
     const isDocsPage = parsedPathname[1] === 'docs'
     const isBlogArticlePage = parsedPathname[1] === 'blog' && parsedPathname.length > 2
+    const isFeaturesPage = parsedPathname[1] === 'product-features'
     const isHandbookPage = parsedPathname[1] === 'handbook'
 
     return (
@@ -45,6 +46,7 @@ function Template({
             isHomePage={false}
             isDocsPage={isDocsPage}
             isBlogArticlePage={isBlogArticlePage}
+            isFeaturesPage={isFeaturesPage}
             isHandbookPage={isHandbookPage}
         >
             <SEO
