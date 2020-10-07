@@ -10,7 +10,7 @@
     height: 522px;
     display: flex;
     align-items: center;
-    background-image: url('../images/product-features-head.svg');
+    background-image: url('../../images/product-features-head.svg');
     background-size: 559px 416px;
     background-position: 700px center;
     background-repeat: no-repeat;
@@ -48,7 +48,7 @@
 
 @media screen and (max-width: 843px) {
     .productFeaturesHead {
-        background-image: url('../images/features-head-mobile.svg');
+        background-image: url('../../images/features-head-mobile.svg');
         background-size: 324px 167px;
         background-position: center 40px;
         width: 100vw;
@@ -871,22 +871,22 @@ h2.number {
 /* - SELF HOSTED */
 
 .head.selfHosted {
-    background-image: url('../images/self-hosted-head.svg') !important;
+    background-image: url('../../images/self-hosted-head.svg') !important;
     background-size: 335px 315px;
     background-repeat: no-repeat;
     background-position: 820px center;
 }
 
 .rowImg.row01.selfHosted {
-    background-image: url('../images/self-hosted-1.svg') !important;
+    background-image: url('../../images/self-hosted-1.svg') !important;
 }
 
 .rowImg.row02.selfHosted {
-    background-image: url('../images/self-hosted-2.svg') !important;
+    background-image: url('../../images/self-hosted-2.svg') !important;
 }
 
 .rowImg.row03.selfHosted {
-    background-image: url('../images/self-hosted-3.svg') !important;
+    background-image: url('../../images/self-hosted-3.svg') !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -894,34 +894,34 @@ h2.number {
         background-size: 260px auto;
     }
     .rowImg.row01.selfHosted {
-        background-image: url('../images/self-hosted-1-mobile.svg') !important;
+        background-image: url('../../images/self-hosted-1-mobile.svg') !important;
     }
     .rowImg.row02.selfHosted {
-        background-image: url('../images/self-hosted-2-mobile.svg') !important;
+        background-image: url('../../images/self-hosted-2-mobile.svg') !important;
     }
     .rowImg.row03.selfHosted {
-        background-image: url('../images/self-hosted-3-mobile.svg') !important;
+        background-image: url('../../images/self-hosted-3-mobile.svg') !important;
     }
 }
 
 /* - EVENT AUTOCAPTURE */
 
 .head.eventAutocapture {
-    background-image: url('../images/event-autocapture-head.svg') !important;
+    background-image: url('../../images/event-autocapture-head.svg') !important;
     background-size: 500px auto;
     background-position: 800px center;
 }
 
 .rowImg.row01.eventAutocapture {
-    background-image: url('../images/event-autocapture-1.svg') !important;
+    background-image: url('../../images/event-autocapture-1.svg') !important;
 }
 
 .rowImg.row02.eventAutocapture {
-    background-image: url('../images/event-autocapture-2.svg') !important;
+    background-image: url('../../images/event-autocapture-2.svg') !important;
 }
 
 .rowImg.row03.eventAutocapture {
-    background-image: url('../images/event-autocapture-3.svg') !important;
+    background-image: url('../../images/event-autocapture-3.svg') !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -930,34 +930,34 @@ h2.number {
         background-position: center 100px !important;
     }
     .rowImg.row01.eventAutocapture {
-        background-image: url('../images/event-autocapture-1-mobile.svg') !important;
+        background-image: url('../../images/event-autocapture-1-mobile.svg') !important;
     }
     .rowImg.row02.eventAutocapture {
-        background-image: url('../images/event-autocapture-2-mobile.svg') !important;
+        background-image: url('../../images/event-autocapture-2-mobile.svg') !important;
     }
     .rowImg.row03.eventAutocapture {
-        background-image: url('../images/event-autocapture-3-mobile.svg') !important;
+        background-image: url('../../images/event-autocapture-3-mobile.svg') !important;
     }
 }
 
 /* - TRENDS */
 
 .head.trends {
-    background-image: url('../images/trends-head.svg') !important;
+    background-image: url('../../images/trends-head.svg') !important;
     background-size: 500px calc(500 / 620 * 428px);
     background-position: 800px center;
 }
 
 .rowImg.row01.trends {
-    background-image: url('../images/trends-1.svg') !important;
+    background-image: url('../../images/trends-1.svg') !important;
 }
 
 .rowImg.row02.trends {
-    background-image: url('../images/trends-2.svg') !important;
+    background-image: url('../../images/trends-2.svg') !important;
 }
 
 .rowImg.row03.trends {
-    background-image: url('../images/trends-3.svg') !important;
+    background-image: url('../../images/trends-3.svg') !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -965,34 +965,34 @@ h2.number {
         background-size: 300px auto;
     }
     .rowImg.row01.trends {
-        background-image: url('../images/trends-1-mobile.svg') !important;
+        background-image: url('../../images/trends-1-mobile.svg') !important;
     }
     .rowImg.row02.trends {
-        background-image: url('../images/trends-2-mobile.svg') !important;
+        background-image: url('../../images/trends-2-mobile.svg') !important;
     }
     .rowImg.row03.trends {
-        background-image: url('../images/trends-3-mobile.svg') !important;
+        background-image: url('../../images/trends-3-mobile.svg') !important;
     }
 }
 
 /* - FUNNELS */
 
 .head.funnels {
-    background-image: url('../images/funnels-head.svg') !important;
+    background-image: url('../../images/funnels-head.svg') !important;
     background-size: 500px auto;
     background-position: 800px center;
 }
 
 .rowImg.row01.funnels {
-    background-image: url('../images/trends-1.svg') !important;
+    background-image: url('../../images/trends-1.svg') !important;
 }
 
 .rowImg.row02.funnels {
-    background-image: url('../images/trends-2.svg') !important;
+    background-image: url('../../images/trends-2.svg') !important;
 }
 
 .rowImg.row03.funnels {
-    background-image: url('../images/trends-3.svg') !important;
+    background-image: url('../../images/trends-3.svg') !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -1000,34 +1000,34 @@ h2.number {
         background-size: 300px auto;
     }
     .rowImg.row01.funnels {
-        background-image: url('../images/funnels-1-mobile.svg') !important;
+        background-image: url('../../images/funnels-1-mobile.svg') !important;
     }
     .rowImg.row02.funnels {
-        background-image: url('../images/funnels-2-mobile.svg') !important;
+        background-image: url('../../images/funnels-2-mobile.svg') !important;
     }
     .rowImg.row03.funnels {
-        background-image: url('../images/funnels-3-mobile.svg') !important;
+        background-image: url('../../images/funnels-3-mobile.svg') !important;
     }
 }
 
 /* - RETENTION */
 
 .head.retention {
-    background-image: url('../images/retention-head.svg') !important;
+    background-image: url('../../images/retention-head.svg') !important;
     background-size: 500px auto;
     background-position: 800px center;
 }
 
 .rowImg.row01.retention {
-    background-image: url('../images/retention-1.svg') !important;
+    background-image: url('../../images/retention-1.svg') !important;
 }
 
 .rowImg.row02.retention {
-    background-image: url('../images/retention-2.svg') !important;
+    background-image: url('../../images/retention-2.svg') !important;
 }
 
 .rowImg.row03.retention {
-    background-image: url('../images/retention-3.svg') !important;
+    background-image: url('../../images/retention-3.svg') !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -1035,34 +1035,34 @@ h2.number {
         background-size: 300px auto;
     }
     .rowImg.row01.retention {
-        background-image: url('../images/retention-1-mobile.svg') !important;
+        background-image: url('../../images/retention-1-mobile.svg') !important;
     }
     .rowImg.row02.retention {
-        background-image: url('../images/retention-2-mobile.svg') !important;
+        background-image: url('../../images/retention-2-mobile.svg') !important;
     }
     .rowImg.row03.retention {
-        background-image: url('../images/retention-3-mobile.svg') !important;
+        background-image: url('../../images/retention-3-mobile.svg') !important;
     }
 }
 
 /* - FEATURE FLAGS */
 
 .head.featureFlags {
-    background-image: url('../images/feature-flags-head.svg') !important;
+    background-image: url('../../images/feature-flags-head.svg') !important;
     background-size: 500px auto;
     background-position: 800px center;
 }
 
 .rowImg.row01.featureFlags {
-    background-image: url('../images/feature-flags-1.svg') !important;
+    background-image: url('../../images/feature-flags-1.svg') !important;
 }
 
 .rowImg.row02.featureFlags {
-    background-image: url('../images/feature-flags-2.svg') !important;
+    background-image: url('../../images/feature-flags-2.svg') !important;
 }
 
 .rowImg.row03.featureFlags {
-    background-image: url('../images/feature-flags-3.svg') !important;
+    background-image: url('../../images/feature-flags-3.svg') !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -1070,13 +1070,13 @@ h2.number {
         background-size: 300px auto;
     }
     .rowImg.row01.featureFlags {
-        background-image: url('../images/feature-flags-1-mobile.svg') !important;
+        background-image: url('../../images/feature-flags-1-mobile.svg') !important;
     }
     .rowImg.row02.featureFlags {
-        background-image: url('../images/feature-flags-2-mobile.svg') !important;
+        background-image: url('../../images/feature-flags-2-mobile.svg') !important;
     }
     .rowImg.row03.featureFlags {
-        background-image: url('../images/feature-flags-3-mobile.svg') !important;
+        background-image: url('../../images/feature-flags-3-mobile.svg') !important;
     }
 }
 
