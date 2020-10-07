@@ -324,7 +324,11 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 ### Leah Smith
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<input type="checkbox" class="read-more-state" id="post-1" />
+
+<p class="read-more-wrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="read-more-target">Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!</span></p>
+
+<label for="post-1" class="read-more-trigger">Read more</label>
 
 </div>
 
@@ -338,10 +342,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Karl
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-<a href="#" class="expand-text position-relative" onclick="$('.overflow,.expand-text,.collapse-text').toggle();">Read More</a>
-<span class="overflow" style="display: none;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span>
-<a href="#" class="collapse-text position-relative" style="display: none;" onclick="$('.overflow,.expand-text,.collapse-text').toggle();">Read Less</a>
+<input type="checkbox" class="read-more-state" id="post-1" />
+
+<p class="read-more-wrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="read-more-target">Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!</span></p>
+
+<label for="post-1" class="read-more-trigger">Read more</label>
 
 </div>
 

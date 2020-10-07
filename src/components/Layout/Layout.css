@@ -1484,3 +1484,41 @@ code {
     float: left;
     padding-top: 50px;
 }
+
+/* "Read more" toggle styles */
+
+.read-more-state {
+    display: none;
+}
+
+.read-more-target {
+    opacity: 0;
+    max-height: 0;
+    font-size: 0;
+    transition: 0.25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+    opacity: 1;
+    font-size: inherit;
+    max-height: 999em;
+}
+
+input.read-more-state ~ label.read-more-trigger:before {
+    content: 'Read more';
+}
+
+input.read-more-state:checked ~ label.read-more-trigger:before {
+    content: 'Read less';
+}
+
+.read-more-trigger {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 0.5em;
+    color: #666;
+    font-size: 0.9em;
+    line-height: 2;
+    border: 1px solid #ddd;
+    border-radius: 0.25em;
+}
