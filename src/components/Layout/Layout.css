@@ -1447,26 +1447,26 @@ code {
     float: left;
     width: 100%;
     overflow: auto;
+    margin-bottom: 25px;
     white-space: normal;
 }
 
-.team-left-text {
-    display: inline-block;
-    width: 50%;
-}
-
+.team-left-text,
 .team-right-text {
     display: inline-block;
     width: 50%;
 }
 
-.team-left-image {
+.team-left-bio,
+.team-right-bio {
     display: inline-block;
-    width: 40%;
-    vertical-align: top;
-    padding-top: 50px;
+    height: 250px;
+    padding-right: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
+.team-left-image,
 .team-right-image {
     display: inline-block;
     width: 40%;
@@ -1477,12 +1477,6 @@ code {
 .team-center-space {
     display: inline-block;
     width: 5%;
-}
-
-.team-title {
-    width: 100%;
-    float: left;
-    padding-top: 50px;
 }
 
 /* "Read more" toggle styles */
@@ -1521,4 +1515,44 @@ input.read-more-state:checked ~ label.read-more-trigger:before {
     line-height: 2;
     border: 1px solid #ddd;
     border-radius: 0.25em;
+}
+
+/* Scroll bar styles */
+
+.scroll-area {
+    height: 400px;
+    width: 45%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.team-left-text-scroll {
+    float: left;
+    padding-right: 25px;
+}
+
+.team-right-text-scroll {
+    display: inline-block;
+    padding-right: 25px;
+}
+
+/* width */
+div::-webkit-scrollbar {
+    width: 10px;
+    margin-left: 20px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+    background: #eceff1;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb {
+    background: #cfd8dc;
+}
+
+/* Handle on hover */
+div::-webkit-scrollbar-thumb:hover {
+    background: #b0bec5;
 }

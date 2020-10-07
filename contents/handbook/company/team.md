@@ -50,6 +50,8 @@ That's why we have people in Belgium, Brazil, the East and West coast of the US,
 
 ### James Hawkins, Co-Founder and CEO
 
+<div class="team-left-bio" markdown="1">
+
 I spent the first 10 years of my career trying to be a professional cyclist. I used to do web development part time to make some money on the side. I wasn't particularly good at either.
 
 I live in Cambridge with Fran (wife), Ruby (daughter), and Wally (cat). Since you're probably wondering, the cat's name is a reference to [WALL-E](https://en.wikipedia.org/wiki/WALL-E) - work for us to find out why.
@@ -59,6 +61,8 @@ After a growing sense of my own mortality combined with a bunch of large crashes
 I wanted more experience of working in a VC backed startup, so I could work on something really ambitious. I moved to [Arachnys](https://arachnys.com), and somehow wound up as a their VP of Sales for a little over 4 years, where I used to manage a team selling very large enterprise software deals. We learned how to take our sales from an average of \$5K/year to over \$1M/year.
 
 I started working with Tim on a few ideas that didn't work out in August 2019. We built PostHog during the YCombinator W20 batch, and launched in February. You can work out what I've been up to since by stalking me online.
+
+</div>
 
 </div>
 
