@@ -8,6 +8,7 @@
             "Configuring PostHog",
             "Integrations",
             "Features",
+            "Plugins",
             "API",
             "Contributing",
             "Architecture"
@@ -26,6 +27,11 @@
             "docs/configuring-posthog/smtp-credentials",
             "docs/configuring-posthog/deleting-data"
         ]
+    },
+    {
+        "entry": "Plugins",
+        "name": "Plugins",
+        "items": ["docs/plugins"]
     },
     {
         "entry": "Contributing",
