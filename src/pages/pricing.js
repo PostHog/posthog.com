@@ -120,6 +120,7 @@ const PricingPage = () => {
                                 )}
                                 <h3
                                     className={
+                                        'header-3' +
                                         (plan.popular ? 'p-text-primary ' : '') +
                                         'p-plan-title ' +
                                         (plan.wraps && 'p-plan-title-wrap')

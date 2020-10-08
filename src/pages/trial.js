@@ -17,9 +17,9 @@ const TrialPage = () => (
             <Row gutter={[16, 96]} className="card-row">
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
                     <h2>
-                        <Icon type="cloud" theme="filled" /> SaaS / Cloud
+                        <Icon type="cloud" theme="filled" /> Cloud
                     </h2>
-                    <h3>SaaS hosted by PostHog.</h3>
+                    <h3>Just create an account.</h3>
                     <p>
                         Select this option if you want to quickly try the PostHog features and don't want to worry about
                         installing it yourself.
@@ -34,10 +34,12 @@ const TrialPage = () => (
                 </Col>
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
                     <h2>
-                        <Icon type="hdd" theme="filled" /> Self Deploy
+                        <Icon type="hdd" theme="filled" /> Open Source
                     </h2>
-                    <h3>Host your own instance of PostHog.</h3>
-                    <p>Select this option if you want to install PostHog on your own infrastructure.</p>
+                    <h3>Host your own instance.</h3>
+                    <p>
+                        Select this option if you want to install our open source platform on your own infrastructure.
+                    </p>
                     <p>
                         <Link to="/docs/deployment">
                             <Button type="primary" size="large">

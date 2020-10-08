@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import './features.css'
+import './styles/features.css'
 import '../components/Layout/Layout.css'
 import Layout from '../components/Layout'
-import Button from 'antd/lib/button'
-import rays from '../images/rays.svg'
 import featureFlagsIcon from '../images/feature-flags-icon.svg'
 import selfHostedIcon from '../images/self-hosted-icon.svg'
 import eventAutocaptureIcon from '../images/event-autocapture-icon.svg'
@@ -33,7 +31,7 @@ function ProductFeatures() {
                     you to check out how featurefull we actually are.
                 </p>
             </div>
-            <div className="wrapper productFeatures blue">
+            <div className="features-wrapper productFeatures blue">
                 <div className="featuresWrapper productFeatures featuresNav">
                     <div className="featuresNav">
                         <div className="threeFeatures">
@@ -99,7 +97,7 @@ function ProductFeatures() {
                         </div>
                     </div>
 
-                    <span class="table-borders features">
+                    <span className="table-borders features">
                         <table>
                             <thead>
                                 <tr>

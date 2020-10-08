@@ -125,6 +125,7 @@
     font-size: 20px;
     line-height: 36px;
     margin-bottom: 28px;
+    color: #000000 !important;
 }
 
 .threeFeatures a > img {
@@ -135,6 +136,10 @@
 
 .threeFeatures a:hover {
     box-shadow: 0 0 5px 5px #f0f0f0;
+}
+
+.threeFeatures a:hover > h4 {
+    color: #000000 !important;
 }
 
 @media screen and (max-width: 834px) {
@@ -834,6 +839,7 @@ h2.number {
     font-size: 20px;
     line-height: 36px;
     margin-bottom: 28px;
+    color: #000000 !important;
 }
 
 .otherFeatures a > img {
@@ -844,6 +850,10 @@ h2.number {
 
 .otherFeatures a:hover {
     box-shadow: 0 0 5px 5px #f0f0f0;
+}
+
+.otherFeatures a:hover > h4 {
+    color: #000000 !important;
 }
 
 @media screen and (max-width: 834px) {

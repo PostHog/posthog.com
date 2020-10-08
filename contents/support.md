@@ -20,7 +20,7 @@ Want to suggest new functionality? [Raise an issue](https://github.com/PostHog/p
 
 ## Community Slack
 
-For urgent isses, we have a [community Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) group.
+For urgent isses, we have a [community Slack](/slack) group.
 
 ## Email
 

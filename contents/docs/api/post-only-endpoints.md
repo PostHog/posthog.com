@@ -233,4 +233,4 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 We have another set of APIs to read/modify anything in PostHog. See our [API documentation](/docs/api/overview) for more information.
 
-Also, feel free to reach out in the [PostHog Users Slack](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) if you'd like help with the API.
+Also, feel free to reach out in the [PostHog Users Slack](/slack) if you'd like help with the API.
