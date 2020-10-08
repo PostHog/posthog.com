@@ -27,7 +27,7 @@ That's why we have people in Belgium, Brazil, the East and West coast of the US,
 
 <div class="team-right-image" markdown="1">
 
-![Remote Work Banner](../../images/team/team-global.gif)
+![Remote work globe animation](../../images/team/team-global.gif)
 <br /><small class="centered">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
 
 </div>
@@ -48,7 +48,7 @@ That's why we have people in Belgium, Brazil, the East and West coast of the US,
 
 <div class="team-left-text" markdown="1">
 
-### James Hawkins, Co-Founder and CEO
+### James Hawkins, Co-Founder & CEO
 
 <div class="team-left-bio" markdown="1">
 
@@ -70,7 +70,7 @@ I started working with Tim on a few ideas that didn't work out in August 2019. W
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/JamesH.png)
+![James Hawkins portrait](../../images/team/JamesH.png)
 
 </div>
 
@@ -80,17 +80,11 @@ I started working with Tim on a few ideas that didn't work out in August 2019. W
 
 <div class="team-row" markdown="1">
 
-<div class="team-left-image" markdown="1">
+<div class="team-left-text" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Tim.png)
+### Tim Glaser, Co-Founder & CTO
 
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-right-text" markdown="1">
-
-### Tim Glaser, Co-Founder and CTO
+<div class="team-left-bio" markdown="1">
 
 I've been coding since I've been 11, which isn't as long ago as I'd like it to be. Someone first paid me to write code when I was 13 (though I'm sure they regretted it) and [someone else](https://en.wikipedia.org/wiki/Cloud9_IDE) gainfully employed me when I was 16.
 
@@ -104,6 +98,16 @@ In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-
 
 </div>
 
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Tim Glaser portrait](../../images/team/Tim.png)
+
+</div>
+
+</div>
+
 <!--- Marius Andra Bio -->
 
 <div class="team-row" markdown="1">
@@ -111,6 +115,8 @@ In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-
 <div class="team-left-text" markdown="1">
 
 ### Marius Andra, Software Engineer
+
+<div class="team-left-bio" markdown="1">
 
 I first got into programming in 1994 when I wanted to make my own computer games... and asked my father for help. He sat me behind a Turbo Basic interpreter, wrote `PRINT "Marius on tubli poiss"` and then left me there. I was 8 years old.
 
@@ -126,11 +132,13 @@ These days I live in Belgium and code [state management libraries](https://kea.j
 
 </div>
 
+</div>
+
 <div class="team-center-space"></div>
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Marius.png)
+![Marius Andra portrait](../../images/team/Marius.png)
 
 </div>
 
@@ -140,17 +148,11 @@ These days I live in Belgium and code [state management libraries](https://kea.j
 
 <div class="team-row" markdown="1">
 
-<div class="team-left-image" markdown="1">
-
-![Placeholder Portrait Image](../../images/team/team-placeholder.png)
-
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-right-text" markdown="1">
+<div class="team-left-text" markdown="1">
 
 ### Eric Duong, Software Engineer
+
+<div class="team-left-bio" markdown="1">
 
 I recently graduated and while in college I helped cofound a social dining platform. I spent two years trying to get strangers to cook and dine with each other. In reality, it turned into a 2 year stint of teach yourself as much mobile development as you can while simultaneously trying to build a usable platform. My cofounders and I had our fair share of contemplating dropping out of school and becoming a unicorn in 5 years—it didn't work out.
 
@@ -164,6 +166,16 @@ To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage
 
 </div>
 
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team/team-placeholder.png)
+
+</div>
+
+</div>
+
 <!--- James Greenhill Bio -->
 
 <div class="team-row" markdown="1">
@@ -171,6 +183,8 @@ To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage
 <div class="team-left-text" markdown="1">
 
 ### James Greenhill, Software Engineer
+
+<div class="team-left-bio" markdown="1">
 
 When I was a kid the first thing I remember wanting to be was a pilot, so naturally here I am knee deep in code and data!
 
@@ -181,6 +195,8 @@ Nowadays I’m spending my free time on a bike finding some new trail up in the 
 In my professional life I’ve generally managed mopping up the 1’s and 0’s. I’ve led data at an [upstart music streaming company](https://en.wikipedia.org/wiki/Grooveshark), and dove way too deep into the depths of the comment section leading data at [Disqus](https://en.wikipedia.org/wiki/Disqus). Kept an eye on a fleet of [Autonomous Ubers](https://en.wikipedia.org/wiki/Uber#Self-driving_car_research). Most recently I combined my interest in bikes with data leading data engineering at [Jump](https://en.wikipedia.org/wiki/Jump_(transportation_company)), still the best micromobility company out there.
 
 When I’m not out and about in nature you can find me at home with my cat Tesla and Taco our goofball of a Lab Corgi mix.
+
+</div>
 
 </div>
 
@@ -198,17 +214,11 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 <div class="team-row" markdown="1">
 
-<div class="team-left-image" markdown="1">
-
-![Placeholder Portrait Image](../../images/team/Michael.png)
-
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-right-text" markdown="1">
+<div class="team-left-text" markdown="1">
 
 ### Michael Matloka, Software Engineer
+
+<div class="team-left-bio" markdown="1">
 
 Got into software by tinkering with bada OS – if anyone even remembers that! – and just never stopped (though I did move to Android soon and later became an iOS fan).
 
@@ -216,6 +226,16 @@ Before graduating from high school here in Poland – and having some open-sourc
 
 Happy to report that I ended up joining PostHog, where open-source software, a quality product and great people all mix freely!
 In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), [photography](https://unsplash.com/@twixes) and [cinema](https://www.nowehoryzonty.pl/index.do?lang=en). Decidedly a fan of precipitation and overcast weather, I have a secret plan to move to the Nordics or the UK one day.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Michael Matloka portrait](../../images/team/Michael.png)
 
 </div>
 
@@ -229,9 +249,13 @@ In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [m
 
 ### Paolo D'Amico, Growth Engineer
 
+<div class="team-left-bio" markdown="1">
+
 I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical. I have 10+ years of experience as a software engineer and product manager.
 
 Prior to joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
+
+</div>
 
 </div>
 
@@ -249,17 +273,11 @@ Prior to joining PostHog, I lead a product team at Grow Mobility, the largest mi
 
 <div class="team-row" markdown="1">
 
-<div class="team-left-image" markdown="1">
-
-![Placeholder Portrait Image](../../images/team/team-placeholder.png)
-
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-right-text" markdown="1">
+<div class="team-left-text" markdown="1">
 
 ### Lottie Coxon, Designer
+
+<div class="team-left-bio" markdown="1">
 
 I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin).
 
@@ -280,6 +298,16 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 </div>
 
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team/team-placeholder.png)
+
+</div>
+
+</div>
+
 <!--- Yakko Majuri Bio -->
 
 <div class="team-row" markdown="1">
@@ -287,6 +315,8 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 <div class="team-left-text" markdown="1">
 
 ### Yakko Majuri, Technical Writer and Developer
+
+<div class="team-left-bio" markdown="1">
 
 Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who has lived in 5 countries across 4 continents.
 
@@ -302,11 +332,13 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 </div>
 
+</div>
+
 <div class="team-center-space"></div>
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Yakko.png)
+![Yakko Majuri portrait](../../images/team/Yakko.png)
 
 </div>
 
@@ -316,23 +348,23 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 <div class="team-row" markdown="1">
 
-<div class="team-left-image" markdown="1">
+<div class="team-left-text" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Leah.png)
+### Leah Smith
+
+<div class="team-left-bio" markdown="1">
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!
+
+</div>
 
 </div>
 
 <div class="team-center-space"></div>
 
-<div class="team-right-text" markdown="1">
+<div class="team-left-image" markdown="1">
 
-### Leah Smith
-
-<input type="checkbox" class="read-more-state" id="post-1" />
-
-<p class="read-more-wrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="read-more-target">Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!</span></p>
-
-<label for="post-1" class="read-more-trigger">Read more</label>
+![Leah Smith portrait](../../images/team/Leah.png)
 
 </div>
 
@@ -346,11 +378,11 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 ### Karl
 
-<input type="checkbox" class="read-more-state" id="post-1" />
+<div class="team-left-bio" markdown="1">
 
-<p class="read-more-wrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="read-more-target">Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!</span></p>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!
 
-<label for="post-1" class="read-more-trigger">Read more</label>
+</div>
 
 </div>
 
@@ -358,7 +390,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Karl.png)
+![Karl portrait](../../images/team/Karl.png)
 
 </div>
 
