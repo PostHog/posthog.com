@@ -1,31 +1,19 @@
 ---
 title: Plugins
+rootPage: /plugins
 sidebar: Docs
 showTitle: true
 ---
 
-Plugins allow any developer to modify how PostHog works.
+Plugins make it much easier to modify how you use PostHog.
 
-**Note:** There are multiple out of the box [integrations](integrations).
+They offer a prepackaged integration into the core PostHog APIs to save you time and energy, with minimal configuration.
 
-## Installing plugins
+You can try out a pre-made plugin to add geolocation data to your events, or to 
 
-You can install a plugin by... 
+## In this section
 
-## Writing plugins
-
-Each plugin is a python module.
-
-They provide two classes:
-
-### Methods
-
-#### Events
-
-#### People
-
-### Code Examples
-
-```
-Hello, World!
-```
+* [What is a plugin?](plugins/what-is-a-plugin)
+* [Using a plugin in your site](plugins/using-a-plugin-on-your-site)
+* [Plugin directory](/plugins)
+* [Creating plugins](plugins/creating-plugins)

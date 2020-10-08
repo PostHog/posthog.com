@@ -33,7 +33,7 @@ function Template({
     if (sidebarEntry !== frontmatter.sidebar) setSidebarContentEntry(frontmatter.sidebar)
 
     const parsedPathname = location.pathname.split('/')
-    const isDocsPage = parsedPathname[1] === 'docs'
+    const isDocsPage = parsedPathname[1] === 'docs' || parsedPathname[1] === 'plugins'
     const isBlogArticlePage = parsedPathname[1] === 'blog' && parsedPathname.length > 2
     const isHandbookPage = parsedPathname[1] === 'handbook'
 

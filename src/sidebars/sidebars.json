@@ -15,6 +15,22 @@
         ]
     },
     {
+        "entry": "Plugins",
+        "name": "Plugins",
+        "items": [
+            "docs/plugins",
+            "docs/plugins/what-is-a-plugin",
+            "docs/plugins/using-a-plugin-on-your-site",
+            "docs/plugins/creating-plugins",
+            "plugins"
+        ]
+    },
+    {
+        "entry": "Plugin Directory",
+        "name": "Plugin Directory",
+        "items": ["plugins/plugin-maxmind", "plugins/plugin-currency-normalization"]
+    },
+    {
         "entry": "Configuring PostHog",
         "name": "Configuring PostHog",
         "items": [

@@ -1038,6 +1038,13 @@ button.modalClose:hover {
     }
 }
 
+/* PLUGINS */
+
+.pluginsWrapper {
+    height: 600px;
+    width: 100vw;
+}
+
 /* DESIGNED FOR YOUR STACK */
 
 .designed4StackWrapper {

@@ -34,6 +34,7 @@ class Footer extends Component {
                             <span className="footer-links-header">Resources</span>
                             <FooterListItem to="/docs/deployment">Quick Start</FooterListItem>
                             <FooterListItem to="/docs">Docs</FooterListItem>
+                            <FooterListItem to="/plugins">Plugin Directory</FooterListItem>
                             <FooterListItem to="/blog">Blog</FooterListItem>
                             <FooterListItem to="/newsletter">Newsletter</FooterListItem>
                             <a href="https://merch.posthog.com/collections/all">Merch</a>

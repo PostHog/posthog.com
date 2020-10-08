@@ -167,7 +167,7 @@ function IndexPage() {
                         </div>
                     </div>
 
-                    {/*01 - It all starts with event autocapture*/}
+                    {/*03 - Trends and retention*/}
                     <div className="autocaptureWrapper wrapper featureSection">
                         <div className="autocaptureRow row">
                             <div className="visualizeImg" />
@@ -226,7 +226,7 @@ function IndexPage() {
                     </div>
                 </div>
 
-                {/*05 - Use feature flags to test new ideas*/}
+                {/*05 - Feature flags*/}
                 <div className="featureFlagsWrapper wrapper featureSection">
                     <div className="featureFlagsRow row">
                         <div className="featureFlags05 number">
@@ -245,6 +245,23 @@ function IndexPage() {
                             </p>
                         </div>
                         <div className="featureFlagsImg" />
+                    </div>
+                </div>
+
+                {/*06 - Plugins*/}
+                <div className="autocaptureWrapper wrapper featureSection">
+                    <div className="autocaptureRow row">
+                        <div className="visualizeImg" />
+                        <div className="visualize03 number">
+                            <h1 className="darkBlueText">06</h1>
+                        </div>
+                        <div className="autocaptureCol col">
+                            <h2 className="gosha">Plugins for complete customization</h2>
+                            <br className="revHiddenBreak" />
+                            <hr className="darkBlueLine" />
+                            <br className="revHiddenBreak" />
+                            <p>No matter what you want to do, build or install a plugin for that.</p>
+                        </div>
                     </div>
                 </div>
 
