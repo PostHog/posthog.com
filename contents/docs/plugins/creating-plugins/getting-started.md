@@ -56,3 +56,7 @@ class MaxmindPlugin(PluginBaseClass):
 
         return event
 ```
+
+This plugin has also been published to PostHog's [plugin directory](/plugins). This was done by adding the repo's URL to [this page](https://github.com/PostHog/plugins/blob/main/plugins.json). When edits to the JSON get merged, the core team will then manually add the plugin to the docs... we'll automate that step one day soon!
+
+We give some [cool merch](https://merch.posthog.com) out to plugin authors. If we've missed you out here, email hey@posthog.com!

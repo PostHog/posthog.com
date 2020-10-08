@@ -31,7 +31,8 @@
         "items": [
             "docs/plugins/creating-plugins",
             "docs/plugins/creating-plugins/getting-started",
-            "docs/plugins/creating-plugins/required-plugin-files"
+            "docs/plugins/creating-plugins/required-plugin-files",
+            "docs/plugins/creating-plugins/publishing-a-plugin"
         ]
     },
     {
