@@ -20,7 +20,7 @@ Welcome to the world of building your first plugin.
 
 An example of a generic plugin is maxmind-plugin.
 
-```
+```python
 from posthog.plugins import PluginBaseClass, PosthogEvent
 import os
 import geoip2.database
