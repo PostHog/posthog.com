@@ -4,22 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-## Using Docker
+## Using virtualenv (recommended)
 
-First clone the repository:
-```bash
-git clone https://github.com/PostHog/posthog
-```
-
-Then start the instance with `docker-compose`:
-
-```bash
-docker-compose -f docker-compose.dev.yml up
-```
-
-> **It may take several minutes to build the system for the first time**. If you see an error message once your app has launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
-
-## Using virtualenv
+This looks like a lot of steps, but is surprisingly simple!
 
 1. Make sure you have Python 3 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
 2. Make sure you have [Redis installed](https://redis.io/download) and running.
@@ -121,6 +108,20 @@ For more information on how to interface with the database, visit the [Clickhous
 4. Run migrations: `python manage.py migrate_clickhouse`
 5. Set environment variables: `PRIMARY_DB=clickhouse` and `CLICKHOUSE_SECURE=False`
 
+## Using Docker
+
+First clone the repository:
+```bash
+git clone https://github.com/PostHog/posthog
+```
+
+Then start the instance with `docker-compose`:
+
+```bash
+docker-compose -f docker-compose.dev.yml up
+```
+
+> **It may take several minutes to build the system for the first time**. If you see an error message once your app has launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
 
 ## Using Porter
 Porter allows you to develop remotely without having to run or setup Docker on your local machine. It runs the same Docker containers in the cloud and lets you develop directly inside the remotely hosted container while still using your favorite local tools. 
