@@ -23,8 +23,10 @@ An example of a generic plugin is maxmind-plugin.
 ```python
 from posthog.plugins import PluginBaseClass, PosthogEvent
 import os
+# we've installed geoip2 in the requirements.txt file too
 import geoip2.database
 
+# MAXMIND_GEOIP_DATABASE is the path to where the database is stored
 geoip_path = os.environ.get("MAXMIND_GEOIP_DATABASE", None)
 
 if geoip_path:
@@ -40,6 +42,7 @@ class MaxmindPlugin(PluginBaseClass):
         if reader and event.ip:
             try:
                 response = reader.city(event.ip)
+                # add a series of properties to the event with location data
                 event.properties['$country_iso'] = response.country.iso_code
                 event.properties['$country_name'] = response.country.name
                 event.properties['$region_iso'] = response.subdivisions.most_specific.iso_code
@@ -48,7 +51,7 @@ class MaxmindPlugin(PluginBaseClass):
                 event.properties['$latitude'] = response.location.latitude
                 event.properties['$longitude'] = response.location.longitude
             except:
-                # ip not in the database
+                # ip not in the database, so there is no cool data to add
                 pass
 
         return event
