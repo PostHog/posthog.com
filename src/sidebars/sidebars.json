@@ -21,8 +21,17 @@
             "docs/plugins",
             "docs/plugins/what-is-a-plugin",
             "docs/plugins/using-a-plugin-on-your-site",
-            "docs/plugins/creating-plugins",
             "plugins"
+        ],
+        "child_entries": ["Creating Plugins"]
+    },
+    {
+        "entry": "Creating Plugins",
+        "name": "Creating Plugins",
+        "items": [
+            "docs/plugins/creating-plugins",
+            "docs/plugins/creating-plugins/getting-started",
+            "docs/plugins/creating-plugins/required-plugin-files"
         ]
     },
     {
