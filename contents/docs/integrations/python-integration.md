@@ -138,6 +138,42 @@ def purchase(request):
     posthog.capture(request.session.session_key, 'purchase', ...)
 ```
 
+# Integrations
+
+## Sentry
+
+Using [sentry in python](https://docs.sentry.io/platforms/python/), you can see links to users person page with the following: 
+
+```python
+from posthog.sentry import update_posthog
+
+sentry_sdk.init(
+    dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
+    before_send=update_posthog
+)
+
+# Also set `posthog_distinct_id` tag
+from sentry_sdk import configure_scope
+
+with configure_scope() as scope:
+    scope.set_tag('posthog_distinct_id', 'some distinct id')
+```
+
+### With django
+
+This can be made automatic in django, by adding the following middleware and settings to `settings.py`
+
+```python
+
+MIDDLEWARE = [
+    "posthog.sentry.django.PosthogDistinctIdMiddleware"
+]
+
+POSTHOG_DJANGO = {
+    "distinct_id": lambda request: request.user and request.user.distinct_id
+}
+```
+
 # Development
 
 ## Naming Confusion
