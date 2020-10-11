@@ -5,6 +5,9 @@ import logo from '../../images/posthog-logo-150x29.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
+/*import docsearch from 'docsearch.js'
+import 'docsearch.js/dist/cdn/docsearch.min.css/'
+import { SearchOutlined } from '@ant-design/icons'*/
 
 function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArticlePage, isDocsPage, isHandbookPage }) {
     const { sidebarHide } = useValues(layoutLogic)
@@ -24,5 +27,32 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
         </div>
     )
 }
+
+/* 
+    componentDidMount() {
+        if ({ isDocsPage }) {
+            docsearch({
+                apiKey: '45e80dec3e5b55c400663a5cba911c4c',
+                indexName: 'posthog',
+                inputSelector: '#doc-search',
+            })
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.js"></script>
+<script>
+  docsearch({
+    // Your apiKey and indexName will be given to you once
+    // we create your config
+    apiKey: '<API_KEY>',
+    indexName: '<INDEX_NAME>',
+    //appId: '<APP_ID>', // Should be only included if you are running DocSearch on your own.
+    // Replace inputSelector with a CSS selector
+    // matching your search input
+    inputSelector: '<YOUR_CSS_SELECTOR>',
+    // Set debug to true to inspect the dropdown
+    debug: false,
+  });
+</script>
+        }
+    }
+*/
 
 export default Header

@@ -28,6 +28,12 @@ function Layout({
     containerStyle = {},
 }) {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
+    const links = [
+        {
+            rel: 'stylesheet',
+            href: 'https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.css',
+        },
+    ]
 
     return (
         <StaticQuery
@@ -51,6 +57,7 @@ function Layout({
                                         { name: 'description', content: 'Sample' },
                                         { name: 'keywords', content: 'sample, something' },
                                     ]}
+                                    links={links}
                                 >
                                     <html lang="en" />
                                 </Helmet>

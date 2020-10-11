@@ -1443,3 +1443,67 @@ code {
         font-size: 16px;
     }
 }
+
+/* DOCSEARCH */
+.docSearchWrapper {
+    height: 32px;
+    width: 270px;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+span.algolia-autocomplete {
+    height: 32px;
+}
+
+#doc-search {
+    position: relative;
+    height: 32px;
+    width: 270px;
+    background-color: #f0f0f0;
+    color: #bebebe;
+    border: none;
+    border-radius: 16px;
+    padding: 0 50px;
+}
+
+#doc-search:focus {
+    outline: none;
+}
+
+.docSearchIcon {
+    position: relative;
+    left: 30px;
+}
+
+/* Main dropdown wrapper */
+.algolia-autocomplete .ds-dropdown-menu {
+    width: 500px;
+}
+
+/* Main category (eg. Getting Started) */
+
+/* Category (eg. Downloads) */
+.algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
+    color: gray;
+}
+
+/* Title (eg. Bootstrap CDN) */
+.algolia-autocomplete .algolia-docsearch-suggestion--title {
+    font-weight: bold;
+    color: black;
+}
+
+/* Description description (eg. Bootstrap currently works...) */
+.algolia-autocomplete .algolia-docsearch-suggestion--text {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+/* Highlighted text */
+.algolia-autocomplete .algolia-docsearch-suggestion--highlight {
+    color: blue;
+}

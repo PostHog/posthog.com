@@ -20,6 +20,7 @@
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
         "antd": "^3.23.2",
+        "docsearch.js": "^2.6.3",
         "eslint-plugin-flowtype": "^2.50.3",
         "gatsby": "^2.15.15",
         "gatsby-cli": "^2.12.15",
