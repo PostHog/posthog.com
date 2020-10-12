@@ -141,7 +141,7 @@ const featuresComparisonData = [
     },
     {
         title: 'A/B Testing',
-        posthog: false,
+        posthog: true,
         amplitude: true,
         mixpanel: true,
         heap: false,

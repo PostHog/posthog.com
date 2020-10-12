@@ -1,4 +1,6 @@
 .features-table-container {
+    border-bottom: 2px solid white;
+
     .mobile-th,
     .mobile-labels {
         display: none;
@@ -13,6 +15,8 @@
         max-width: 840px;
         border-collapse: separate;
         border-spacing: 10px 15px;
+        padding-bottom: 30px;
+        margin-bottom: 0px !important;
     }
 
     .features.table-borders td,
@@ -123,7 +127,6 @@
             border-radius: 20px;
             font-size: 12px !important;
             line-height: 20px !important;
-            margin: 10px 0 !important;
             min-width: 50px;
         }
         .features.table-borders tr > td:first-child {
@@ -155,15 +158,4 @@
             color: #eceaea;
         }
     }
-}
-
-.featuresTableText img {
-    margin: 0 20px;
-    height: 20px;
-}
-
-.featuresTableText p {
-    margin: 0 !important;
-    display: block;
-    text-align: center;
 }
