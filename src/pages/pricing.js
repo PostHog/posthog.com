@@ -168,7 +168,7 @@ const PricingPage = () => {
                 <Row gutter={[24, 24]}>
                     <Col span={24} align="middle">
                         <Card className={pricingStyles.pStartupCard}>
-                            <div>
+                            <div className={pricingStyles.pStartupCardInnerContainer}>
                                 <div>
                                     <img src={imgRocket} alt="" />
                                 </div>

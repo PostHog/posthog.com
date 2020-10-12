@@ -134,13 +134,13 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
-.p-startup-card .ant-card-body > div {
+.p-startup-card-inner-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.p-startup-card .ant-card-body > div div {
+.p-startup-card-inner-container > div {
     display: flex;
     align-items: center;
 }
@@ -149,7 +149,7 @@
     margin-bottom: 0;
 }
 
-.p-startup-card div.p-main {
+.p-main {
     flex-direction: column;
     align-items: flex-start;
     flex-grow: 1;
@@ -157,8 +157,8 @@
     padding-left: 16px;
 }
 
-.p-startup-card div.p-main span,
-.p-startup-card div.p-main h4 {
+.p-main span,
+.p-main h4 {
     text-align: left;
 }
 
