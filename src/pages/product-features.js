@@ -10,27 +10,18 @@ import trendsIcon from '../images/trends-icon.svg'
 import funnelsIcon from '../images/funnels-icon.svg'
 import retentionIcon from '../images/retention-icon.svg'
 import asterisk from '../images/asterisk.svg'
+import PageHeader from '../components/PageHeader'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="productFeaturesHead">
-                <div className="productFeaturesHeadText">
-                    <h1>Features</h1>
-                    <p>
-                        We know you’re wondering how PostHog compares to other analytics tools, so we have made it easy
-                        for you to check out how featurefull we actually are.
-                    </p>
-                </div>
-            </div>
-            <div className="productFeaturesHeadTextMobile">
-                <h1>Features</h1>
-                <hr className="redLine" />
-                <p>
-                    We know you’re wondering how PostHog compares to other analytics tools, so we have made it easy for
-                    you to check out how featurefull we actually are.
-                </p>
-            </div>
+            <PageHeader
+                title="Features"
+                tagline="We know you’re wondering how PostHog compares to other analytics tools, so we have made it easy
+                for you to check out how feature-rich we actually are."
+                styleKey="productFeatures"
+                bgColor="navy"
+            />
             <div className="features-wrapper productFeatures blue">
                 <div className="featuresWrapper productFeatures featuresNav">
                     <div className="featuresNav">
@@ -64,8 +55,9 @@ function ProductFeatures() {
                         </div>
                     </div>
                 </div>
-
-                <div className="productFeaturesTable">
+                <div className="productFeaturesTable bg-navy">
+                    <br />
+                    <br />
                     <h2>Comparison</h2>
 
                     <div className="comparisonRow">

@@ -26,8 +26,8 @@
     font-weight: bold;
 }
 
-.tagline p {
-    font-size: 24px !important;
+.tagline > p {
+    font-size: 20px !important;
     line-height: 40px !important;
 }
 
@@ -69,23 +69,10 @@
     background-position: 820px center;
 }
 
-@media screen and (max-width: 834px) {
-    .selfHosted {
-        background-size: 260px auto;
-    }
-}
-
 .autocapture {
     background-image: url('../../images/event-autocapture-head.svg') !important;
     background-size: 500px auto;
     background-position: 800px center;
-}
-
-@media screen and (max-width: 834px) {
-    .autocapture {
-        background-size: 300px auto;
-        background-position: center 100px !important;
-    }
 }
 
 .trends {
@@ -94,22 +81,10 @@
     background-position: 800px center;
 }
 
-@media screen and (max-width: 834px) {
-    .trends {
-        background-size: 300px auto;
-    }
-}
-
 .funnels {
     background-image: url('../../images/funnels-head.svg') !important;
     background-size: 500px auto;
     background-position: 800px center;
-}
-
-@media screen and (max-width: 834px) {
-    .funnels {
-        background-size: 300px auto;
-    }
 }
 
 .retention {
@@ -118,20 +93,39 @@
     background-position: 800px center;
 }
 
-@media screen and (max-width: 834px) {
-    .retention {
-        background-size: 300px auto;
-    }
-}
-
 .featureFlags {
     background-image: url('../../images/feature-flags-head.svg') !important;
     background-size: 500px auto;
     background-position: 800px center;
 }
 
+.productFeatures {
+    background-image: url('../../images/product-features-head.svg');
+    background-size: 500px auto;
+    background-position: 800px center;
+}
+
 @media screen and (max-width: 834px) {
+    .selfHosted {
+        background-size: 260px auto;
+    }
+    .autocapture {
+        background-size: 300px auto;
+        background-position: center 100px !important;
+    }
+    .trends {
+        background-size: 300px auto;
+    }
+    .funnels {
+        background-size: 300px auto;
+    }
+    .retention {
+        background-size: 300px auto;
+    }
     .featureFlags {
+        background-size: 300px auto;
+    }
+    .productFeatures {
         background-size: 300px auto;
     }
 }
