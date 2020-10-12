@@ -5,11 +5,7 @@ import '../../components/Layout/Layout.css'
 import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
-import featureFlagsIcon from '../../images/feature-flags-icon.svg'
-import funnelsIcon from '../../images/funnels-icon.svg'
-import retentionIcon from '../../images/retention-icon.svg'
-import selfHostedIcon from '../../images/self-hosted-icon.svg'
-import eventAutocaptureIcon from '../../images/event-autocapture-icon.svg'
+import OtherFeaturesBlock from '../../components/OtherFeaturesBlock'
 
 function ProductFeatures() {
     return (
@@ -74,35 +70,7 @@ function ProductFeatures() {
                         <img src={rays} />
                     </div>
                 </div>
-                <div className="otherFeaturesWrapper">
-                    <h2>Other features</h2>
-                    <div className="otherFeatures">
-                        <div className="twoOtherFeatures">
-                            <Link to="/product-features/funnels">
-                                <img src={funnelsIcon} />
-                                <h4>Funnels</h4>
-                            </Link>
-                            <Link to="/product-features/retention">
-                                <img src={retentionIcon} />
-                                <h4>Retention</h4>
-                            </Link>
-                        </div>
-                        <div className="twoOtherFeatures">
-                            <Link to="/product-features/feature-flags">
-                                <img src={featureFlagsIcon} />
-                                <h4>Feature flags</h4>
-                            </Link>
-                            <Link to="/product-features/self-hosted">
-                                <img src={selfHostedIcon} />
-                                <h4>Self hosted</h4>
-                            </Link>
-                        </div>
-                        <Link to="/product-features/event-autocapture">
-                            <img src={eventAutocaptureIcon} />
-                            <h4>Event Autocapture</h4>
-                        </Link>
-                    </div>
-                </div>
+                <OtherFeaturesBlock currentPageKey="trends" />
             </div>
         </Layout>
     )
