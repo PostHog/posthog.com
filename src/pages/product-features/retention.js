@@ -5,8 +5,8 @@ import '../../components/Layout/Layout.css'
 import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
-import OtherFeaturesBlock from '../../components/OtherFeaturesBlock'
-import PageHeader from '../../components/PageHeader'
+import { OtherFeaturesBlock } from '../../components/OtherFeaturesBlock'
+import { PageHeader } from '../../components/PageHeader'
 
 function ProductFeatures() {
     return (
