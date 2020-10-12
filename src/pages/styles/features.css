@@ -480,18 +480,6 @@ table.productFeaturesTable {
     align-items: center;
 }
 
-.blue {
-    background-color: #35416b;
-}
-
-.orange {
-    background-color: #f96132;
-}
-
-.yellow {
-    background-color: #f7a501;
-}
-
 @media screen and (min-width: 1440px) {
     .featuresWrapper {
         padding: 0 calc((100vw - 1440px) / 2);
@@ -513,7 +501,6 @@ table.productFeaturesTable {
 /* - HEAD */
 
 .head {
-    /* border-radius: 0 0 50px 50px; */
     width: 100vw;
     height: 414px;
     margin: 0 0 40px;
@@ -548,9 +535,6 @@ table.productFeaturesTable {
 
 main > div > div {
     margin: 0 !important;
-}
-
-@media screen and (min-width: 1440px) {
 }
 
 @media screen and (max-width: 834px) {

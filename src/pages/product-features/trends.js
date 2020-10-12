@@ -6,16 +6,17 @@ import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import OtherFeaturesBlock from '../../components/OtherFeaturesBlock'
+import PageHeader from '../../components/PageHeader'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="head yellow trends">
-                <div className="headContents">
-                    <h1>Trends</h1>
-                    <p>Understand what parts of your app are engaging, and what areas still need some work.</p>
-                </div>
-            </div>
+            <PageHeader
+                title="Trends"
+                tagline="Understand what parts of your app are engaging, and what areas still need some work."
+                styleKey="trends"
+                bgColor="yellow"
+            />
             <div className="featuresWrapper trends">
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>

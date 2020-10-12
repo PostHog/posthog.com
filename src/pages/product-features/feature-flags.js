@@ -6,19 +6,17 @@ import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import OtherFeaturesBlock from '../../components/OtherFeaturesBlock'
+import PageHeader from '../../components/PageHeader'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="head yellow featureFlags">
-                <div className="headContents">
-                    <h1>Feature flags</h1>
-                    <p>
-                        Release new features slowly to your users, see how they perform, and roll them back if you need
-                        to.
-                    </p>
-                </div>
-            </div>
+            <PageHeader
+                title="Feature Flags"
+                tagline="Release new features slowly to your users, see how they perform, and roll them back if you need to."
+                styleKey="featureFlags"
+                bgColor="yellow"
+            />
             <div className="featuresWrapper featureFlags">
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>

@@ -1138,7 +1138,7 @@ a.middle {
 }
 
 .blue {
-    color: #1d4aff;
+    color: #1d4aff !important;
 }
 
 .red {
@@ -1146,7 +1146,7 @@ a.middle {
 }
 
 .yellow {
-    color: #f7a501;
+    color: #f7a501 !important;
 }
 
 .white {
@@ -1155,6 +1155,34 @@ a.middle {
 
 .zambezi {
     color: #595959 !important;
+}
+
+.navy {
+    color: #35416b !important;
+}
+
+.bg-blue {
+    background-color: #1d4aff !important;
+}
+
+.bg-red {
+    background-color: #f96132 !important;
+}
+
+.bg-yellow {
+    background-color: #f7a501 !important;
+}
+
+.bg-white {
+    background-color: #ffffff !important;
+}
+
+.bg-zambezi {
+    background-color: #595959 !important;
+}
+
+.bg-navy {
+    background-color: #35416b !important;
 }
 
 table td {

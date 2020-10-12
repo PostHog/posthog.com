@@ -6,16 +6,17 @@ import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import OtherFeaturesBlock from '../../components/OtherFeaturesBlock'
+import PageHeader from '../../components/PageHeader'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="head blue selfHosted">
-                <div className="headContents">
-                    <h1>Self Hosted</h1>
-                    <p>Powerful analytics on your own infrastructure, with all the features your team needs.</p>
-                </div>
-            </div>
+            <PageHeader
+                title="Self-Hosted"
+                tagline="Powerful analytics on your own infrastructure, with all the features your team needs."
+                styleKey="selfHosted"
+                bgColor="navy"
+            />
             <div className="featuresWrapper selfHosted">
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>

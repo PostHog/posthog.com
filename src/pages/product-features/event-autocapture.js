@@ -6,16 +6,17 @@ import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import OtherFeaturesBlock from '../../components/OtherFeaturesBlock'
+import PageHeader from '../../components/PageHeader'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="head orange eventAutocapture">
-                <div className="headContents">
-                    <h1>Event Autocapture</h1>
-                    <p>Less setup, more analytics. Start capturing relevant data from the moment setup is complete.</p>
-                </div>
-            </div>
+            <PageHeader
+                title="Event Autocapture"
+                tagline="Less setup, more analytics. Start capturing relevant data from the moment setup is complete."
+                styleKey="autocapture"
+                bgColor="red"
+            />
             <div className="featuresWrapper eventAutocapture">
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>

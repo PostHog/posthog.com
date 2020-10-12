@@ -6,19 +6,17 @@ import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'
 import OtherFeaturesBlock from '../../components/OtherFeaturesBlock'
+import PageHeader from '../../components/PageHeader'
 
 function ProductFeatures() {
     return (
         <Layout>
-            <div className="head blue funnels">
-                <div className="headContents">
-                    <h1>Funnels</h1>
-                    <p>
-                        Visualize users going through a multi-step process in your app and figure out where they’re
-                        dropping off.
-                    </p>
-                </div>
-            </div>
+            <PageHeader
+                title="Funnels"
+                tagline="Visualize users going through a multi-step process in your app and figure out where they’re dropping off."
+                styleKey="funnels"
+                bgColor="navy"
+            />
             <div className="featuresWrapper funnels">
                 <div className="row01 featuresRow">
                     <h2 className="number row01">01</h2>
