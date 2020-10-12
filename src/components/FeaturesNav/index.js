@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import { Link } from 'gatsby'
 import featureFlagsIcon from '../../images/feature-flags-icon.svg'
 import selfHostedIcon from '../../images/self-hosted-icon.svg'
