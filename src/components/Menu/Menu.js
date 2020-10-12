@@ -6,6 +6,7 @@ import { Menu as AntMenu } from 'antd'
 import StarRepoButton from '../StarRepoButton'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
+import { SearchOutlined } from '@ant-design/icons'
 
 function Menu({ isBlogPage, isHomePage, screenIsSmall }) {
     const sidebarDocked = !screenIsSmall
@@ -63,6 +64,10 @@ function Menu({ isBlogPage, isHomePage, screenIsSmall }) {
                                         </AntMenu.Item>
                                     )
                                 })}
+                                <div className="docSearchWrapper">
+                                    <SearchOutlined className="docSearchIcon"></SearchOutlined>
+                                    <input id="doc-search" placeholder="Search..."></input>
+                                </div>
                             </AntMenu>
                         )}
                         {!sidebarDocked && (
