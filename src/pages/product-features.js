@@ -10,7 +10,7 @@ import trendsIcon from '../images/trends-icon.svg'
 import funnelsIcon from '../images/funnels-icon.svg'
 import retentionIcon from '../images/retention-icon.svg'
 import { PageHeader } from '../components/PageHeader'
-import FeaturesComparisonTable from '../components/FeaturesComparisonTable'
+import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 
 function ProductFeatures() {
     return (
