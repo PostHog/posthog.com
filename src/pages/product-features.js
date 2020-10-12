@@ -9,7 +9,6 @@ import eventAutocaptureIcon from '../images/event-autocapture-icon.svg'
 import trendsIcon from '../images/trends-icon.svg'
 import funnelsIcon from '../images/funnels-icon.svg'
 import retentionIcon from '../images/retention-icon.svg'
-import asterisk from '../images/asterisk.svg'
 import { PageHeader } from '../components/PageHeader'
 import FeaturesComparisonTable from '../components/FeaturesComparisonTable'
 
@@ -57,13 +56,6 @@ function ProductFeatures() {
                     </div>
                 </div>
                 <FeaturesComparisonTable />
-            </div>
-            <div className="featuresTableText">
-                <img src={asterisk} />
-                <p>
-                    Full parity has not been achieved for this feature yet. You can follow our progress{' '}
-                    <Link to="https://github.com/PostHog/posthog/projects/5">here</Link>.
-                </p>
             </div>
         </Layout>
     )

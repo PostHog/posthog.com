@@ -1331,6 +1331,13 @@ code {
     text-align: center;
 }
 
+.center {
+    display: block !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 .note-block {
     background: #eeeeee;
     padding-left: 10px;
