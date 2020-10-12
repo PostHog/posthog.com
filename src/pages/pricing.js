@@ -5,14 +5,13 @@ import queryString from 'query-string'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Card, Collapse } from 'antd'
 import SEO from '../components/seo'
-import './styles/pricing.css'
 import 'antd/lib/collapse/style/css'
 import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgRocket from '../images/rocket.svg'
 import imgChevronRight from '../images/chevron-right.svg'
+import pricingStyles from './styles/pricing.module.css'
 
-// Data for plans abstracted to pricing-data.js to reduce noise
 import { plans, faqs } from '../pages-content/pricing-data'
 
 const PricingPage = () => {
@@ -44,7 +43,7 @@ const PricingPage = () => {
 
     return (
         <Layout>
-            <div className="pricing-page-container">
+            <div className={pricingStyles.pricingPageContainer}>
                 <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
                 <Row gutter={[24, 24]}>
                     <Col span={24} align="middle">
@@ -54,8 +53,8 @@ const PricingPage = () => {
 
                 <Row gutter={[24, 24]}>
                     <Col span={24} align="middle">
-                        <div className="p-segment">
-                            <label className={state.planOptions === 'cloud' ? 'active' : ''}>
+                        <div className={pricingStyles.pSegment}>
+                            <label className={state.planOptions === 'cloud' ? pricingStyles.pSegmentLabelActive : ''}>
                                 <input
                                     type="radio"
                                     value="cloud"
@@ -65,7 +64,9 @@ const PricingPage = () => {
                                 />{' '}
                                 Cloud
                             </label>
-                            <label className={state.planOptions === 'enterprise' ? 'active' : ''}>
+                            <label
+                                className={state.planOptions === 'enterprise' ? pricingStyles.pSegmentLabelActive : ''}
+                            >
                                 <input
                                     type="radio"
                                     value="enterprise"
@@ -75,7 +76,9 @@ const PricingPage = () => {
                                 />{' '}
                                 Enterprise
                             </label>
-                            <label className={state.planOptions === 'open-source' ? 'active' : ''}>
+                            <label
+                                className={state.planOptions === 'open-source' ? pricingStyles.pSegmentLabelActive : ''}
+                            >
                                 <input
                                     type="radio"
                                     value="open-source"
@@ -83,7 +86,7 @@ const PricingPage = () => {
                                     checked={state.planOptions === 'open-source'}
                                     onChange={(event) => handleSegmentChange(event)}
                                 />{' '}
-                                Open source
+                                Open Source
                             </label>
                         </div>
                         <div style={{ paddingTop: '16px' }}>
@@ -105,14 +108,14 @@ const PricingPage = () => {
                 <Row gutter={[24, 36]} type="flex" style={{ justifyContent: 'center', marginTop: '32px' }}>
                     {plans[state.planOptions].map((plan) => (
                         <Col
-                            className="plan-card"
+                            className={pricingStyles.planCard}
                             md={24 / plans[state.planOptions].length}
                             sm={24}
                             align="middle"
                             key={plan.title}
                         >
-                            {plan.popular && <div className="p-plan-popular-badge">POPULAR</div>}
-                            <Card className="p-full-height">
+                            {plan.popular && <div className={pricingStyles.pPlanPopularBadge}>POPULAR</div>}
+                            <Card className={pricingStyles.pFullHeight}>
                                 {plan.image && (
                                     <div style={{ marginTop: 16 }}>
                                         <img src={plan.image} alt="" />
@@ -120,19 +123,19 @@ const PricingPage = () => {
                                 )}
                                 <h3
                                     className={
-                                        'header-3' +
-                                        (plan.popular ? 'p-text-primary ' : '') +
-                                        'p-plan-title ' +
-                                        (plan.wraps && 'p-plan-title-wrap')
+                                        `${pricingStyles.header3} ` +
+                                        (plan.popular && `${pricingStyles.pTextPrimary} `) +
+                                        `${pricingStyles.pPlanTitle} ` +
+                                        (plan.wraps ? pricingStyles.pPlanTitleWrap : '')
                                     }
                                 >
                                     {plan.title}
                                 </h3>
-                                <div className="p-plan-price">
+                                <div className={pricingStyles.pPlanPrice}>
                                     {plan.price}
-                                    <span className="p-text-primary">{plan.priceDetail}</span>
+                                    <span className={pricingStyles.pTextPrimary}>{plan.priceDetail}</span>
                                 </div>
-                                <div className="p-plan-description">{plan.description}</div>
+                                <div className={pricingStyles.pPlanDescription}>{plan.description}</div>
                                 {plan.callToActionDest?.type === 'gatsbyLink' && (
                                     <Link to={plan.callToActionDest?.value}>
                                         <CTAButton plan={plan} />
@@ -144,7 +147,7 @@ const PricingPage = () => {
                                     </a>
                                 )}
 
-                                <div className="p-plan-benefits">
+                                <div className={pricingStyles.pPlanBenefits}>
                                     {plan.benefits.map((benefit) => (
                                         <span key={benefit} dangerouslySetInnerHTML={{ __html: benefit }}></span>
                                     ))}
@@ -156,7 +159,7 @@ const PricingPage = () => {
                         All prices in US Dollars (USD), excluding taxes
                     </Col>
                     <Col span={24} align="middle">
-                        <Link to="/docs/features" className="p-features-link">
+                        <Link to="/docs/features" className={pricingStyles.pFeaturesLink}>
                             Full features details <img alt="" src={imgChevronRight} />
                         </Link>
                     </Col>
@@ -164,12 +167,12 @@ const PricingPage = () => {
                 <br />
                 <Row gutter={[24, 24]}>
                     <Col span={24} align="middle">
-                        <Card className="p-startup-card">
+                        <Card className={pricingStyles.pStartupCard}>
                             <div>
                                 <div>
                                     <img src={imgRocket} alt="" />
                                 </div>
-                                <div className="p-main">
+                                <div className={pricingStyles.pMain}>
                                     <h4>Are you a startup?</h4>
                                     <span>
                                         We've got your back! Find product-market fit, <b>completely free</b> with a tool
@@ -195,12 +198,12 @@ const PricingPage = () => {
                     </Col>
                     <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
                         <Col md={12} sm={24}>
-                            <div className="p-full-height">
-                                <h4 className="p-text-primary p-title-with-icon">
+                            <div className={pricingStyles.pFullHeight}>
+                                <h4 className={`${pricingStyles.pTextPrimary} ${pricingStyles.pTitleWithIcon}`}>
                                     <img src={imgCloud} alt="" style={{ paddingRight: 0 }} />
                                     Cloud
                                 </h4>
-                                <ul className="p-comparison-list">
+                                <ul className={pricingStyles.pComparisonList}>
                                     <li>
                                         Recommended if you want to get started <b>right now</b>. Start capturing events
                                         in under 5 minutes.
@@ -212,7 +215,7 @@ const PricingPage = () => {
                                     <li>You want an out-of-the-box secure solution.</li>
                                     <li>You want to get automatic updates with all the latest features.</li>
                                 </ul>
-                                <div className="p-comparison-btn">
+                                <div className={pricingStyles.pComparisonBtn}>
                                     <a href="https://app.posthog.com/signup?plan=starter">
                                         <Button type="primary" size="large">
                                             Start my 30-day free trial
@@ -222,11 +225,11 @@ const PricingPage = () => {
                             </div>
                         </Col>
                         <Col md={12} sm={24}>
-                            <div className="p-full-height">
-                                <h4 className="p-text-primary p-title-with-icon">
+                            <div className={pricingStyles.pFullHeight}>
+                                <h4 className={`${pricingStyles.pTextPrimary} ${pricingStyles.pTitleWithIcon}`}>
                                     <img src={imgBuilding} alt="" /> Enterprise
                                 </h4>
-                                <ul className="p-comparison-list">
+                                <ul className={pricingStyles.pComparisonList}>
                                     <li>Recommended if you have large volumes of events or users ({'>100k'}).</li>
                                     <li>
                                         You have strict compliance requirements on privacy or data handling (e.g. HIPAA,
@@ -241,7 +244,7 @@ const PricingPage = () => {
                                         cookie blockers.
                                     </li>
                                 </ul>
-                                <div className="p-comparison-btn">
+                                <div className={pricingStyles.pComparisonBtn}>
                                     <Link to="/docs/deploy">
                                         <Button type="primary" size="large">
                                             Start deployment
@@ -257,7 +260,7 @@ const PricingPage = () => {
                     <Col span={24}>
                         <h2>Frequently asked questions</h2>
                     </Col>
-                    <Col span={24} className="p-faqs">
+                    <Col span={24} className={pricingStyles.pFaqs}>
                         <Collapse bordered={false}>
                             {faqs.map((faq, i) => (
                                 <Panel header={faq.q} key={i}>
@@ -270,7 +273,7 @@ const PricingPage = () => {
 
                 <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
                     <Col span={24} align="middle">
-                        <h2 className="p-text-primary">Ready to get started?</h2>
+                        <h2 className={pricingStyles.pTextPrimary}>Ready to get started?</h2>
                         <a href="https://app.posthog.com/signup">
                             <Button type="primary" size="large">
                                 Create my free account

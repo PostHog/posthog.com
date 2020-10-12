@@ -3,15 +3,15 @@ import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Icon } from 'antd'
 import SEO from '../components/seo'
-import './styles/trial.css'
+import trialPageStyles from './styles/trial.module.css'
 
 const TrialPage = () => (
     <Layout>
-        <div className="trial-page-container">
+        <div className={trialPageStyles.container}>
             <SEO title="PostHog Trial" description="Get started, for free." />
             <Row gutter={[24, 24]}>
                 <Col span={24} align="middle">
-                    <h1>Try PostHog - free for 30 days</h1>
+                    <h1 className={trialPageStyles.trialHeader}>Try PostHog - free for 30 days</h1>
                 </Col>
             </Row>
             <Row gutter={[16, 96]} className="card-row">
@@ -49,7 +49,7 @@ const TrialPage = () => (
                     </p>
                 </Col>
             </Row>
-            <Row className="spacer-row"></Row>
+            <Row className={trialPageStyles.spacerRow}></Row>
         </div>
     </Layout>
 )
