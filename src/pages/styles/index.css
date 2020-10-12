@@ -510,7 +510,7 @@ button.modalClose:hover {
 
 /* AUTOCAPTURE EVENTS */
 
-.autocaptureWrapper {
+/* .autocaptureWrapper {
     position: relative;
     height: 413px;
     width: 100vw;
@@ -595,7 +595,7 @@ button.modalClose:hover {
         width: 282px;
         height: 252px;
     }
-}
+} */
 
 /* UNDERSTAND TRAFFIC */
 
@@ -1899,12 +1899,11 @@ img.whatsNewImg {
     color: #35416b;
 }
 
-.autocapturesizing {
-    /*background-color: rgba(249,97,50,0.2);*/
+/* .autocapturesizing {
     padding-top: 100px;
     padding-bottom: 477px;
     margin-top: 0px;
-}
+} */
 
 .redbackground {
     background-color: rgba(249, 97, 50, 0.2);
