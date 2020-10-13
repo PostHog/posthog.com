@@ -34,9 +34,11 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
                     <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
                 </Link>
             )}
-            <div className="docSearchWrapper">
-                <input id="doc-search" placeholder="Search..."></input>
-            </div>
+            {isDocsPage && (
+                <div className="docSearchWrapper">
+                    <input id="doc-search" placeholder="Search..."></input>
+                </div>
+            )}
             <Menu isBlogPage={isBlogPage} screenIsSmall={screenIsSmall} isHomePage={isHomePage} />
         </div>
     )
