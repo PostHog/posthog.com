@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.scss'
 
-export const FeaturedSectionTextLeft = ({
+export const FeaturedSectionTextRight = ({
     listItem,
     headerText,
     descriptionText,
@@ -27,9 +27,8 @@ export const FeaturedSectionTextLeft = ({
     }
 
     return (
-        <div className="featured-section-left-wrapper">
+        <div className="featured-section-right-wrapper">
             <div className="fs-wrapper feature-section">
-                {/*02 - Understand how traffic really flows through your app*/}
                 <div className="row">
                     <div className="section-banner-image" style={imageStyle} />
                     <div className="list-item number">
@@ -38,11 +37,11 @@ export const FeaturedSectionTextLeft = ({
                         </h1>
                     </div>
                     <div className="col">
-                        <h2 className="gosha fs-left-header-2">{headerText}</h2>
+                        <h2 className="gosha fs-right-header-2">{headerText}</h2>
                         <br className="revHiddenBreak" />
                         <hr className={styleMap[color][1]} />
                         <br className="revHiddenBreak" />
-                        <p className="fs-left-paragraph">{descriptionText}</p>
+                        <p>{descriptionText}</p>
                     </div>
                 </div>
             </div>

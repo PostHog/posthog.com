@@ -27,10 +27,14 @@ import stackJavascript from '../images/stack-javascript.svg'
 import stackGo from '../images/stack-go.svg'
 import stackApi from '../images/stack-api.svg'
 import retroAutocapture from '../images/retro-autocapture.svg'
+import trafficFlow from '../images/retro-how-traffic-flows.svg'
+import visualizeTrends from '../images/retro-product-trends.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
 import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
+import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSectionTextRight'
+import { SpacerMedium } from '../components/SpacerMedium'
 
 function IndexPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -127,53 +131,34 @@ function IndexPage() {
                         </div>
                     </div>
                 </div>
-
-                {/*01 - It all starts with event autocapture*/}
-                <FeaturedSectionTextLeft
+                <SpacerMedium />
+                <FeaturedSectionTextRight
                     headerText="It all starts with event autocapture"
                     listItem="01"
                     descriptionText="PostHog autocaptures events and user behavior in your mobile or web app."
                     image={retroAutocapture}
                     color="yellow"
                 />
-                <div className="trafficVisualWrapper wrapper featureSection">
-                    {/*02 - Understand how traffic really flows through your app*/}
-                    <div className="trafficRow row">
-                        <div className="trafficImg" />
-                        <div className="traffic02 number">
-                            <h1 className="redText">02</h1>
-                        </div>
-                        <div className="trafficCol col">
-                            <h2 className="gosha">Understand how traffic really flows through your app</h2>
-                            <br className="revHiddenBreak" />
-                            <hr className="redLine" />
-                            <br className="revHiddenBreak" />
-                            <p className="trafficParagraph">
-                                Know the pageviews and actions of every user in your app or on your website.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/*01 - It all starts with event autocapture*/}
-                    <div className="autocaptureWrapper wrapper featureSection">
-                        <div className="autocaptureRow row">
-                            <div className="visualizeImg" />
-                            <div className="visualize03 number">
-                                <h1 className="darkBlueText">03</h1>
-                            </div>
-                            <div className="autocaptureCol col">
-                                <h2 className="gosha">Visualize product trends and retention</h2>
-                                <br className="revHiddenBreak" />
-                                <hr className="darkBlueLine" />
-                                <br className="revHiddenBreak" />
-                                <p>
-                                    Powerful analytics to really understand what your users are doing and how to keep
-                                    them coming back.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <SpacerMedium />
+                <FeaturedSectionTextLeft
+                    headerText="Understand how traffic really flows through your app"
+                    listItem="02"
+                    descriptionText="Know the pageviews and actions of every user in your app or on your website."
+                    image={trafficFlow}
+                    color="red"
+                    imgDesktopHeight="477px"
+                    imgDesktopWidth="50vw"
+                    imgStyle={{ backgroundSize: 'cover' }}
+                />
+                <SpacerMedium />
+                <FeaturedSectionTextRight
+                    headerText="Visualize product trends and retention"
+                    listItem="03"
+                    descriptionText="Powerful analytics to really understand what your users are doing and how to keep
+                    them coming back."
+                    image={visualizeTrends}
+                    color="navy"
+                />
 
                 {/*04 - Improve conversion rates*/}
                 <div className="improveConversionWrapper wrapper bluebg featureSection">
@@ -426,3 +411,25 @@ function IndexPage() {
 }
 
 export default IndexPage
+
+/*
+
+                    <div className="autocaptureWrapper wrapper featureSection">
+                        <div className="autocaptureRow row">
+                            <div className="visualizeImg" />
+                            <div className="visualize03 number">
+                                <h1 className="darkBlueText">03</h1>
+                            </div>
+                            <div className="autocaptureCol col">
+                                <h2 className="gosha">Visualize product trends and retention</h2>
+                                <br className="revHiddenBreak" />
+                                <hr className="darkBlueLine" />
+                                <br className="revHiddenBreak" />
+                                <p>
+                                    Powerful analytics to really understand what your users are doing and how to keep
+                                    them coming back.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+*/

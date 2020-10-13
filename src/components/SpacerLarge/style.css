@@ -1,0 +1,9 @@
+.spacer-large {
+    height: 200px;
+}
+
+@media screen and (max-width: 834px) {
+    .spacer-large {
+        height: 50px;
+    }
+}
