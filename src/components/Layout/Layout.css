@@ -1446,15 +1446,21 @@ code {
 
 /* DOCSEARCH */
 .docSearchWrapper {
-    position: relative;
     height: 32px;
-    width: 270px;
+    width: auto;
     align-self: flex-end;
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
     align-items: center;
-    margin-right: 50px;
+    align-content: center;
+    margin: 0 50px 15px 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .docSearchWrapper {
+        display: block;
+    }
 }
 
 span.algolia-autocomplete {
@@ -1464,30 +1470,28 @@ span.algolia-autocomplete {
 #doc-search {
     position: relative;
     height: 32px;
-    width: 270px;
+    width: auto;
     background-color: #f0f0f0;
     color: gray;
     border: none;
     border-radius: 10px;
     padding: 0 10px;
+    background-image: url('../../images/search-glass.png');
+    background-origin: content-box;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: right center;
+    outline: 0;
 }
 
 #doc-search:focus {
     outline: none;
 }
 
-.docSearchIcon {
-    position: absolute;
-    height: 25px;
-    width: 25px;
-    z-index: 1000;
-    padding: 5px 5px 0 0;
-    opacity: 40%;
-}
-
 /* Main dropdown wrapper */
 .algolia-autocomplete .ds-dropdown-menu {
-    width: 500px;
+    width: auto;
+    max-width: 500px;
 }
 
 /* Main category (eg. Getting Started) */
