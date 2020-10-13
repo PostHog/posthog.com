@@ -34,7 +34,8 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
                     <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
                 </Link>
             )}
-            <div className="docSearchWrapper">
+            {/*sceens >=1150px have search in line with the Menu*/}
+            <div className="docSearchWrapper search-larger-screen">
                 <input id="doc-search" placeholder="Search..."></input>
             </div>
             <Menu isBlogPage={isBlogPage} screenIsSmall={screenIsSmall} isHomePage={isHomePage} />
