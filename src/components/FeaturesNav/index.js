@@ -11,7 +11,7 @@ import './features-nav.scss'
 export const FeaturesNav = () => {
     return (
         <div className="features-nav-container">
-            <div className="featuresNav">
+            <div className="featuresNav center">
                 <div className="threeFeatures">
                     <Link to="/product-features/self-hosted">
                         <img src={selfHostedIcon} />

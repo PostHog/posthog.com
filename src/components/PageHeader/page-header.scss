@@ -99,9 +99,10 @@
         }
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1440px) {
         .head {
-            background-position: 70% center;
+            background-position: calc((100vw - 1440px) / 2 + 700px) center !important;
+            padding: 0 calc((100vw - 1440px) / 2 + 25px) !important;
         }
     }
 }
