@@ -6,7 +6,7 @@
         justify-content: space-evenly;
         width: 100vw;
         max-width: 1440px;
-        height: 800px;
+        height: auto;
         margin-bottom: 40px;
         background-color: #fff;
     }
@@ -55,7 +55,7 @@
             justify-content: space-evenly;
         }
         .threeFeatures {
-            flex-direction: column;
+            /* flex-direction: column; */
             align-items: center;
         }
         .threeFeatures a {
