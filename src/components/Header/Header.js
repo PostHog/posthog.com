@@ -23,14 +23,6 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
         }
     })
 
-    /*if (isDocsPage && window) {
-            docsearch({
-                apiKey: '45e80dec3e5b55c400663a5cba911c4c',
-                indexName: 'posthog',
-                inputSelector: '#doc-search',
-            })
-        }*/
-
     return (
         <div
             className={'menuHeaderWrapper ' + (!isBlogPage && !sidebarHide && !screenIsSmall && onPostPage && 'noLogo')}
@@ -49,32 +41,5 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
         </div>
     )
 }
-
-/* 
-    componentDidMount() {
-        if ({ isDocsPage }) {
-            docsearch({
-                apiKey: '45e80dec3e5b55c400663a5cba911c4c',
-                indexName: 'posthog',
-                inputSelector: '#doc-search',
-            })
-<script src="https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.js"></script>
-<script>
-  docsearch({
-    // Your apiKey and indexName will be given to you once
-    // we create your config
-    apiKey: '<API_KEY>',
-    indexName: '<INDEX_NAME>',
-    //appId: '<APP_ID>', // Should be only included if you are running DocSearch on your own.
-    // Replace inputSelector with a CSS selector
-    // matching your search input
-    inputSelector: '<YOUR_CSS_SELECTOR>',
-    // Set debug to true to inspect the dropdown
-    debug: false,
-  });
-</script>
-        }
-    }
-*/
 
 export default Header
