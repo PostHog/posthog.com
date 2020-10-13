@@ -411,25 +411,3 @@ function IndexPage() {
 }
 
 export default IndexPage
-
-/*
-
-                    <div className="autocaptureWrapper wrapper featureSection">
-                        <div className="autocaptureRow row">
-                            <div className="visualizeImg" />
-                            <div className="visualize03 number">
-                                <h1 className="darkBlueText">03</h1>
-                            </div>
-                            <div className="autocaptureCol col">
-                                <h2 className="gosha">Visualize product trends and retention</h2>
-                                <br className="revHiddenBreak" />
-                                <hr className="darkBlueLine" />
-                                <br className="revHiddenBreak" />
-                                <p>
-                                    Powerful analytics to really understand what your users are doing and how to keep
-                                    them coming back.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-*/
