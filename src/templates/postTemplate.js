@@ -6,6 +6,7 @@ import { DocsFooter } from '../components/Footer/DocsFooter'
 import SEO from '../components/seo'
 import { layoutLogic } from '../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
+import { SearchOutlined } from '@ant-design/icons'
 
 function addIndex(url) {
     const indexUrls = ['/docs', '/handbook']
@@ -57,6 +58,14 @@ function Template({
             />
             <div className="docsPagesContainer">
                 <div className="docsPages">
+                    {isDocsPage && (
+                        <div className="flex-row">
+                            <form className="docSearchWrapper">
+                                <input placeholder="Search our Docs" id="doc-search" />
+                                <SearchOutlined className="docSearchIcon" type="submit" />
+                            </form>
+                        </div>
+                    )}
                     {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                         <h1 align="center">{frontmatter.title}</h1>
                     )}
