@@ -1490,10 +1490,21 @@ span.algolia-autocomplete {
     outline: none;
 }
 
-/* Main dropdown wrapper */
-.algolia-autocomplete .ds-dropdown-menu {
-    width: auto;
-    max-width: 500px;
+/*main dropdown wrapper for small screens
+override external docsearch css file*/
+@media screen and (max-width: 555px) {
+    .algolia-autocomplete .ds-dropdown-menu {
+        min-width: 200px !important;
+        max-width: 300px !important;
+    }
+}
+
+/*main dropdown wrapper for medium-large screens
+override external docsearch css file*/
+@media screen and (min-width: 555px) {
+    .algolia-autocomplete .ds-dropdown-menu {
+        max-width: 500px !important;
+    }
 }
 
 /* Main category (eg. Getting Started) */
