@@ -34,7 +34,7 @@ import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
 import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSectionTextRight'
-import { SpacerMedium } from '../components/SpacerMedium'
+import { Spacer } from '../components/Spacer'
 
 function IndexPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -131,7 +131,7 @@ function IndexPage() {
                         </div>
                     </div>
                 </div>
-                <SpacerMedium />
+                <Spacer />
                 <FeaturedSectionTextRight
                     headerText="It all starts with event autocapture"
                     listItem="01"
@@ -139,7 +139,7 @@ function IndexPage() {
                     image={retroAutocapture}
                     color="yellow"
                 />
-                <SpacerMedium />
+                <Spacer onlyDesktop={true} />
                 <FeaturedSectionTextLeft
                     headerText="Understand how traffic really flows through your app"
                     listItem="02"
@@ -150,7 +150,7 @@ function IndexPage() {
                     imgDesktopWidth="50vw"
                     imgStyle={{ backgroundSize: 'cover' }}
                 />
-                <SpacerMedium />
+                <Spacer onlyDesktop={true} />
                 <FeaturedSectionTextRight
                     headerText="Visualize product trends and retention"
                     listItem="03"

@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import { Spacer } from '../../Spacer'
 
 export const FeaturedSectionTextRight = ({
     listItem,
@@ -9,6 +10,7 @@ export const FeaturedSectionTextRight = ({
     color = 'yellow',
     imgDesktopHeight = '413px',
     imgDesktopWidth = '621px',
+    mobileSpacerHeight = '50px',
     imgStyle = {},
 }) => {
     const styleMap = {
@@ -45,6 +47,7 @@ export const FeaturedSectionTextRight = ({
                     </div>
                 </div>
             </div>
+            <Spacer onlyMobile={true} height={mobileSpacerHeight} />
         </div>
     )
 }

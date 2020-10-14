@@ -1,9 +1,0 @@
-.spacer-small {
-    height: 50px;
-}
-
-@media screen and (max-width: 834px) {
-    .spacer-small {
-        height: 12.5px;
-    }
-}
