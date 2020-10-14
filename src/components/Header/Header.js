@@ -5,7 +5,8 @@ import logo from '../../images/posthog-logo-150x29.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-/*import docsearch from 'docsearch.js'*/
+/*within useEffect to avoid build window error: 
+import docsearch from 'docsearch.js'*/
 import 'docsearch.js/dist/cdn/docsearch.min.css/'
 
 function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArticlePage, isDocsPage, isHandbookPage }) {
