@@ -8,9 +8,9 @@ export const FeaturedSectionTextLeft = ({
     descriptionText,
     image,
     color = 'yellow',
-    imgDesktopHeight = '413px',
-    imgDesktopWidth = '621px',
-    mobileSpacerHeight = '50px',
+    imgDesktopHeight = 413,
+    imgDesktopWidth = 621,
+    mobileSpacerHeight = 50,
     imgStyle = {},
 }) => {
     const styleMap = {

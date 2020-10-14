@@ -8,9 +8,9 @@ export const FeaturedSectionTextRight = ({
     descriptionText,
     image,
     color = 'yellow',
-    imgDesktopHeight = '413px',
-    imgDesktopWidth = '621px',
-    mobileSpacerHeight = '50px',
+    imgDesktopHeight = 413,
+    imgDesktopWidth = 621,
+    mobileSpacerHeight = 50,
     imgStyle = {},
 }) => {
     const styleMap = {
@@ -23,7 +23,9 @@ export const FeaturedSectionTextRight = ({
     const imageStyle = {
         ...imgStyle,
         backgroundImage: `url(${image})`,
-        backgroundSize: imgStyle.backgroundSize ? imgStyle.backgroundSize : `${imgDesktopWidth} ${imgDesktopHeight}`,
+        backgroundSize: imgStyle.backgroundSize
+            ? imgStyle.backgroundSize
+            : `${imgDesktopWidth}px ${imgDesktopHeight}px`,
         height: imgDesktopHeight,
         width: imgDesktopWidth,
     }

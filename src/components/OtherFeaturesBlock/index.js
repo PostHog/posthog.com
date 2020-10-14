@@ -12,7 +12,7 @@ export const OtherFeaturesBlock = ({ currentPageKey }) => {
                 <div className="features">
                     <div className="two-features">
                         {pagesToDisplay.slice(0, 2).map((page) => (
-                            <Link className="feature-link" to={page.href}>
+                            <Link key={page.title.toLowerCase()} className="feature-link" to={page.href}>
                                 <img className="feature-image" src={page.icon} />
                                 <h4 className="header-4">{page.title}</h4>
                             </Link>
@@ -20,7 +20,7 @@ export const OtherFeaturesBlock = ({ currentPageKey }) => {
                     </div>
                     <div className="two-features">
                         {pagesToDisplay.slice(2, 4).map((page) => (
-                            <Link className="feature-link" to={page.href}>
+                            <Link key={page.title.toLowerCase()} className="feature-link" to={page.href}>
                                 <img className="feature-image" src={page.icon} />
                                 <h4 className="header-4">{page.title}</h4>
                             </Link>

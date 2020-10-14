@@ -15,7 +15,6 @@
     "rules": {
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
-        "no-const-assign": "off",
-        "react/jsx-key": "off"
+        "no-const-assign": "off"
     }
 }

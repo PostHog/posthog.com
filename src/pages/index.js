@@ -146,7 +146,7 @@ function IndexPage() {
                     descriptionText="Know the pageviews and actions of every user in your app or on your website."
                     image={trafficFlow}
                     color="red"
-                    imgDesktopHeight="477px"
+                    imgDesktopHeight={477}
                     imgDesktopWidth="50vw"
                     imgStyle={{ backgroundSize: 'cover' }}
                 />
