@@ -22,14 +22,14 @@ docker-compose -f docker-compose.dev.yml up
 ## Using virtualenv
 
 1. Make sure you have Python 3.8 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
-2. Make sure you have [Redis installed](https://redis.io/download) and running. Use version 5.0.9 to match production.
+2. Make sure you have [Redis installed](https://redis.io/download) and running. We recommend using version 5 or higher.
 
     ```bash
     # macOS (Homebrew)
     brew install redis && brew services start redis
     ```
 
-3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running. Use version 11.9 to match production. You may also try [Postgres.app](https://postgresapp.com/), but remember to follow the instructions to add `psql` to your `$PATH` if you do.
+3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running. We recommend using version 11 or higher. You may also try [Postgres.app](https://postgresapp.com/), but remember to follow the instructions to add `psql` to your `$PATH` if you do.
 
     ```bash
     # macOS (Homebrew)
