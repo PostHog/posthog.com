@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
@@ -130,6 +130,11 @@ export function StartupForm({ title, startup = true, subtitle, onSubmit }) {
 }
 
 const StartupsPage = () => {
+    useEffect(() => {
+        if (window) {
+            window.location.href = '/pricing#startup-plan'
+        }
+    }, [])
     return (
         <Layout className="index-page">
             <SEO title="PostHog for Startups" description="We offer a special deal - startups get going for free." />
