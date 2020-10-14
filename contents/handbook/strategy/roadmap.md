@@ -6,9 +6,9 @@ showTitle: true
 
 ## Up-to-date roadmap
 
-[Click here for an up-to-date roadmap on GitHub](https://github.com/orgs/PostHog/projects/1)
+We keep our most up-to-date roadmap on [GitHub](https://github.com/orgs/PostHog/projects/1).
 
-## Strategy
+## General Product Strategy
 
 ### Open Core Business Model
 
@@ -26,7 +26,8 @@ The more PostHog can become part of our customers' infrastructure, the better.
 
 The ways to achieve this are (i) by becoming a data store (ii) by ensuring extensibility through integrating with other tools and (iii) by the breadth of users powered by the tool in the clients that adopt us.
 
-### Data Store
+
+### Data Store
 
 PostHog already generates a large volume of data about customers and their behavior. However, in the market, there are many tools that already capture user data and event data so there seems little point in competing there.
 
@@ -62,4 +63,7 @@ In the product analytics market, all the existing tools are targeted at product 
 
 PostHog started by building features that product teams will need, in a way that is easier for engineers to implement.
 
-This is why we are now focussed on building features specifically for engineers to use.
+This is why we are now focused on building features **specifically for engineers to use**.
+
+
+We also believe that the future of how products, apps and websites are built is with product analytics, not with legacy web analytics (plus there is already great tools out there for traditional web analytics). This is why today we focus on creating the best **product analytics** experience in the market.
