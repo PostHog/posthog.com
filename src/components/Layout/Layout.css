@@ -1445,28 +1445,32 @@ code {
 }
 
 /* DOCSEARCH */
-.docSearchWrapper {
-    height: 32px;
-    width: auto;
-    align-self: flex-end;
+
+.flex-row-reverse {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-start;
+    justify-content: right;
+    align-items: center;
+    height: 60px;
+}
+
+.docSearchWrapper {
+    height: 32px;
+    width: 30%;
+    max-width: 270px;
+    min-width: 150px;
+    background-color: #f0f0f0;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
-    margin: 0 50px 15px 300px;
-}
-
-@media screen and (max-width: 1150px) {
-    .docSearchWrapper.search-larger-screen {
-        display: none;
-    }
-}
-
-@media screen and (min-width: 1150px) {
-    .docSearchWrapper.search-larger-screen {
-        display: block;
-    }
+    margin: 0 10px 30px 0px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    outline: 0;
 }
 
 span.algolia-autocomplete {
@@ -1474,19 +1478,11 @@ span.algolia-autocomplete {
 }
 
 #doc-search {
-    position: relative;
     height: 32px;
-    width: auto;
+    width: 100%;
     background-color: #f0f0f0;
     color: gray;
     border: none;
-    border-radius: 10px;
-    padding: 0 10px;
-    background-image: url('../../images/search-glass.png');
-    background-origin: content-box;
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-position: right center;
     outline: 0;
 }
 
