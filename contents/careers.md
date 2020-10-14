@@ -4,22 +4,31 @@ sidebar: null
 showTitle: true
 ---
 
-## A Bit About Us
+## Why We're Here
 
-PostHog provides open-source, developer-friendly, and feature-rich product analytics.
+PostHog is increasing the number of successful products in the world.
 
-A part of [Y Combinator's](https://www.ycombinator.com/) W20 cohort, we launched in February 2020 and had the most succesful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012.
+We do that by providing a platform for open-source product analytics. This helps software teams understand their user behavior.
+
+The analytics landscape has historically been very fragmented. There are many tools that provide value individually, but integrating the basic features across many verticals provides much more value.
+
+Today, we are focussed on community growth around our open source project. We aim to provide the core features of many tools, that traditionally would all sit in silos. This, coupled with the ability to use the software for free, for life, is making PostHog a no-brainer for every new software project.
+
+We've made a crazy amount of progress to date.
+
+We took party in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most succesful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with just a 4 week old product.
 
 Our GitHub repo has over over 3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
+What does this mean for you? We have a lot of capital, but we're a lean, strong team - so you've the opportunity to have a huge impact.
+
 ## Our Culture
 
-As a young company, our culture is still being polished by our growing team, and, as one of our first hires, you'll 
-play an important role in shaping it. 
+As a young company, our culture is still being polished by our growing team, and, as one of our first hires, you'll play an important role in shaping it. 
 
-However, there are some things we've already established as our core values:
+A few things have already emerged as key:
 
 ##### All Remote
 
@@ -45,7 +54,7 @@ And this isn't just a meaningless corporate statement. Most of our communication
 
 We're committed to much more than just public code.
 
-##### Written Communication
+##### Written communication
 
 We're an all-remote company that allows people to work from almost anywhere in the world. With team members across several countries, it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
 
@@ -57,15 +66,22 @@ Putting things in writing helps us clarify our own ideas, as well as allow other
 
 We're young, but we're already [backed](/handbook/strategy/investors) by many of the best investors in the world and have [raised millions of dollars in funding](/blog/raising-3m-for-os).
 
-This includes YCombinator, Solomon Hykes (Founder of Docker), David Cramer (Founder/CEO of Sentry), Adam Goldstein (Founder of Hipmunk), and [many more](/handbook/strategy/investors)!
+This includes YCombinator, Solomon Hykes (Founder of Docker), David Cramer (Founder/CEO of Sentry), Adam Goldstein (Founder of Hipmunk), and [many more](/handbook/strategy/investors).
 
-## A Fair Hiring Process
+## The Process
 
-What we truly care about is how well you can contribute, as well as how good of a fit you are for the role. As such, the best way to establish this is by getting you to work with us!
+We will schedule 2 to 3 short calls with our founders and team. These will focus on two key areas:
 
-Following a few calls with our founders and team, if we think you're a good fit, we'll hire you as a contractor for 1-5 days to do some work with us. You will get paid normal contracting rates (i.e. above what your pro rata salary would be per day) and work on some real needs we have at PostHog.
+* Ensuring you will be a great cultural fit
+* Aptitude for the role
 
-This way, you'll get a chance to see how we work, and we'll get a chance to see how you work in normal working conditions (rather than a stressful timed problem solving interview). And you'll be getting paid what you deserve. 
+If you succeed with the above, we will set you up with a *PostHog SuperDay*.
+
+This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. You'll need to be fully engaged with a steady supply of tea, coffee and biscuits.
+
+We set you up with a slack channel with several of our core team. We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+
+This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting paid, of course.
 
 ## Benefits
 
@@ -83,6 +99,14 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 
 # Open Roles
 
+## Unspecified
+
+We take exceptional people when they come along, and we really mean that.
+
+If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
+
+We take this applications seriously, and that's why they're listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
+
 ## UX Developer/Engineer
 
 PostHog is building its first design team. We are looking for a proactive, fast, and passionate UX Developer to take our design to a world class level. Our product and website went viral with a basic MVP, and we're determined to be best-in-class with our UX.
@@ -95,22 +119,6 @@ The role would involve:
 
 The perfect candidate for this role must be as comfortable working with a designer in Figma (where our designer creates components) and working in React. It will involve a lot of rolling up sleeves and getting stuck in.
 
-### Hiring Process
-
-* You'll have a 30 minute phone-call with our designer Lottie
-* You'll meet our CEO James, our CTO Tim, and one of our developers
-* We'll pay you contracting rates for 3 days to do some work on PostHog. This will give you a chance to learn how we'd work with you, and for us to see how you work. You'll also end up with some open source contributions.
-* We make a decision with you
-
-### How to Apply
-
-Email a thoughtful cover letter to [james@posthog.com](mailto:james@posthog.com). A good cover letter includes:
-
-* What makes you a great early hire for this role
-* Relevant experience/projects you've done (including links if possible)
-* Links to your GitHub / LinkedIn / Resume (optional)
-* How you found us
-
 ## Fullstack Engineer
 
 ### Your Role
@@ -119,20 +127,20 @@ As an early engineer (we currently have a team of 5 in total), you'll be key to 
 
 We're looking for people who are *proactive* and are *ridiculously quick* at getting new features out, while writing test and generally maintaining a clean codebase.
 
-### Hiring Process
-
-* You'll have a 30 minute phone-call with our CTO Tim
-* You'll meet our CEO James
-* Quick chat with one of the team members
-* We'll pay you normal contracting rates for 3 days to do some work on PostHog. This will give you a chance to learn how we'd work with you, and for us to see how you work. You'll also end up with some open-source contributions.
-* We make a decision with you.
-
-### How to Apply
+# Get Started - Applying
 
 Email a thoughtful cover letter to [tim@posthog.com](mailto:tim@posthog.com). A good cover letter includes:
 
-* What makes you a great early engineer
+* What makes you a great early hire into our first 15 people
+* Something weird you've learned in your career
 * Relevant experience/projects you've done (including links if possible)
-* Links to your GitHub / LinkedIn / resume (optional)
-* What you like/dislike about PostHog
+* Links to your LinkedIn / resume / GitHub (optional)
 * How you found us
+
+# What Is It Like?
+
+Learn more [about the people](/handbook/company/team) you could be working with.
+
+Watch a day in the life of our graphic designer, Lottie!
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xlODCLrZyvM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
