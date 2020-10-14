@@ -49,7 +49,7 @@ Add this if appropriate for the role:
 <input type="checkbox"/>  Add team member to PagerDuty and into on-call rotation. Make sure the alerts work. <br>
 <input type="checkbox"/>  Add team member to Heroku. <br>
 <input type="checkbox"/>  Add team member to AWS. <br>
-<input type="checkbox"/>  Add team member to Grafana, Sentry, and other dev tools in use. <br>
+<input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if any other dev tools in use (then update this list). <br>
 
 
 
