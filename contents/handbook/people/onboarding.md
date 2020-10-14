@@ -42,11 +42,16 @@ At PostHog, we have a culture of treating team members as partners. This means i
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/spending-money) guidelines <br>
 <input type="checkbox"/>  Add the new team member to the 'Team' group in AWS <br>
 
-### Additional access
+### Additional Access
 
 Add this if appropriate for the role:
-<input type="checkbox"/>  Add team member to pagerduty and into on-call rotation. Verify phone number <br>
-<input type="checkbox"/>  Add team member to heroku (deploys) <br>
+
+<input type="checkbox"/>  Add team member to PagerDuty and into on-call rotation. Make sure the alerts work. <br>
+<input type="checkbox"/>  Add team member to Heroku. <br>
+<input type="checkbox"/>  Add team member to AWS. <br>
+<input type="checkbox"/>  Add team member to Grafana, Sentry, and other dev tools in use. <br>
+
+
 
 
 ### Adding Team Members to Pulley
