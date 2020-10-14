@@ -1393,6 +1393,10 @@ code {
     color: white;
 }
 
+.docs-only-layout main {
+    padding-top: 0 !important;
+}
+
 @media screen and (max-width: 1076px) {
     .docsHeader {
         background-color: #f9f9f9;
@@ -1422,6 +1426,10 @@ code {
 
     .docsPageLayout main {
         padding: 3rem 0 0;
+    }
+
+    .docs-only-layout main {
+        padding-top: 0 !important;
     }
 
     .headerItems ul {
