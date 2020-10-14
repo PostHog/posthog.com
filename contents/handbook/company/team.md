@@ -7,7 +7,7 @@ hideAnchor: true
 
 <!--- Intro Info -->
 
-<div class="team-row" markdown="1">
+<div class="team-row intro" markdown="1">
 
 <div class="team-left-text" markdown="1">
 
