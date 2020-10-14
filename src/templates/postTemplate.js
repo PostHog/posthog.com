@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import 'katex/dist/katex.min.css'
@@ -6,6 +6,9 @@ import { DocsFooter } from '../components/Footer/DocsFooter'
 import SEO from '../components/seo'
 import { layoutLogic } from '../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
+/*within useEffect to avoid build window error: 
+import docsearch from 'docsearch.js'*/
+import 'docsearch.js/dist/cdn/docsearch.min.css/'
 import { SearchOutlined } from '@ant-design/icons'
 
 function addIndex(url) {
@@ -39,6 +42,18 @@ function Template({
     const isFeaturesPage = parsedPathname[1] === 'product-features'
     const isHandbookPage = parsedPathname[1] === 'handbook'
 
+    useEffect(() => {
+        if (window && isDocsPage) {
+            import('docsearch.js').then(({ default: docsearch }) => {
+                docsearch({
+                    apiKey: '45e80dec3e5b55c400663a5cba911c4c',
+                    indexName: 'posthog',
+                    inputSelector: '#doc-search',
+                })
+            })
+        }
+    })
+
     return (
         <Layout
             onPostPage={true}
@@ -59,7 +74,7 @@ function Template({
             <div className="docsPagesContainer">
                 <div className="docsPages">
                     {isDocsPage && (
-                        <div className="flex-row">
+                        <div className="flex-row-reverse">
                             <form className="docSearchWrapper">
                                 <input placeholder="Search our Docs" id="doc-search" />
                                 <SearchOutlined className="docSearchIcon" type="submit" />
