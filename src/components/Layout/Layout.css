@@ -1393,6 +1393,10 @@ code {
     color: white;
 }
 
+.docs-only-layout main {
+    padding-top: 0 !important;
+}
+
 @media screen and (max-width: 1076px) {
     .docsHeader {
         background-color: #f9f9f9;
@@ -1424,6 +1428,10 @@ code {
         padding: 3rem 0 0;
     }
 
+    .docs-only-layout main {
+        padding-top: 0 !important;
+    }
+
     .headerItems ul {
         flex-direction: column;
     }
@@ -1442,91 +1450,4 @@ code {
     .footer-links-header {
         font-size: 16px;
     }
-}
-
-/* DOCSEARCH */
-
-.flex-row-reverse {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: right;
-    align-items: center;
-    height: 60px;
-}
-
-.docSearchWrapper {
-    height: 32px;
-    width: 30%;
-    max-width: 270px;
-    min-width: 150px;
-    background-color: #f0f0f0;
-    align-self: flex-end;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: center;
-    margin: 0 10px 30px 0px;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    outline: 0;
-}
-
-span.algolia-autocomplete {
-    height: 32px;
-}
-
-#doc-search {
-    height: 32px;
-    width: 100%;
-    background-color: #f0f0f0;
-    color: gray;
-    border: none;
-    outline: 0;
-}
-
-#doc-search:focus {
-    outline: none;
-}
-
-/*main dropdown wrapper for small screens
-override external docsearch css file*/
-@media screen and (max-width: 555px) {
-    .algolia-autocomplete .ds-dropdown-menu {
-        min-width: 200px !important;
-        max-width: 300px !important;
-    }
-}
-
-/*main dropdown wrapper for medium-large screens
-override external docsearch css file*/
-@media screen and (min-width: 555px) {
-    .algolia-autocomplete .ds-dropdown-menu {
-        max-width: 500px !important;
-    }
-}
-
-/* Main category (eg. Getting Started) */
-
-/* Category (eg. Downloads) */
-.algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
-    color: gray;
-}
-
-/* Title (eg. Bootstrap CDN) */
-.algolia-autocomplete .algolia-docsearch-suggestion--title {
-    font-weight: bold;
-    color: black;
-}
-
-/* Description description (eg. Bootstrap currently works...) */
-.algolia-autocomplete .algolia-docsearch-suggestion--text {
-    font-size: 0.8rem;
-    color: gray;
-}
-
-/* Highlighted text */
-.algolia-autocomplete .algolia-docsearch-suggestion--highlight {
-    color: blue;
 }

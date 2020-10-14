@@ -13,6 +13,7 @@ import { default as AntdLayout } from 'antd/lib/layout'
 import NewsletterForm from '../NewsletterForm'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
+import { DocsSearch } from '../DocsSearch'
 
 function Layout({
     onPostPage,
@@ -99,14 +100,16 @@ function Layout({
                                             )}
                                         </AntdLayout.Header>
 
-                                        {/* content */}
+                                        {isDocsPage && <DocsSearch />}
 
+                                        {/* content */}
                                         <AntdLayout
                                             className={
                                                 'layout ' +
                                                 (onPostPage ? 'docsPageLayout ' : 'notDocsLayout ') +
-                                                (isBlogPage && 'blogPageLayout') +
-                                                (isFeaturesPage && ' featuresPageLayout')
+                                                (isBlogPage ? 'blogPageLayout ' : '') +
+                                                (isFeaturesPage ? 'featuresPageLayout ' : '') +
+                                                (isDocsPage && 'docs-only-layout')
                                             }
                                             theme="light"
                                         >
