@@ -6,13 +6,13 @@ import './SidebarContents.css'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { featureFlagLogic } from '../../logic/featureFlagLogic'
+import { DarkModeToggle } from '../../components/DarkModeToggle'
 
 const SubMenu = Menu.SubMenu
 
-
 function SidebarContents() {
     const { featureFlags } = useValues(featureFlagLogic)
-    
+
     useEffect(() => {
         if (!featureFlags['launch-tutorials-section']) {
             const tutorialsDiv = window.document.getElementById('tutorials-sidebar-item')
@@ -171,17 +171,20 @@ function SidebarContents() {
                     }
                 }
                 return (
-                    <Menu
-                        mode="inline"
-                        defaultOpenKeys={defaultOpenKeys}
-                        selectedKeys={[selectedKey]}
-                        inlineIndent={12}
-                        onOpenChange={onSidebarContentExpanded}
-                        style={{ height: '100%', backgroundColor: '#F9F9F9' }}
-                        theme="light"
-                    >
-                        {loop(tree)}
-                    </Menu>
+                    <span>
+                        <Menu
+                            mode="inline"
+                            defaultOpenKeys={defaultOpenKeys}
+                            selectedKeys={[selectedKey]}
+                            inlineIndent={12}
+                            onOpenChange={onSidebarContentExpanded}
+                            style={{ height: '100%', backgroundColor: '#F9F9F9' }}
+                            theme="light"
+                        >
+                            {loop(tree)}
+                        </Menu>
+                        <DarkModeToggle />
+                    </span>
                 )
             }}
         />
