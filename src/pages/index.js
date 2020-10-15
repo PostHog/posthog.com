@@ -26,9 +26,15 @@ import stackGatsby from '../images/stack-gatsby.svg'
 import stackJavascript from '../images/stack-javascript.svg'
 import stackGo from '../images/stack-go.svg'
 import stackApi from '../images/stack-api.svg'
+import retroAutocapture from '../images/retro-autocapture.svg'
+import trafficFlow from '../images/retro-how-traffic-flows.svg'
+import visualizeTrends from '../images/retro-product-trends.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { Helmet } from 'react-helmet'
+import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
+import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSectionTextRight'
+import { Spacer } from '../components/Spacer'
 
 function IndexPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -41,152 +47,118 @@ function IndexPage() {
                     description="Self-hosted product analytics stack, to deploy on your infrastructure."
                 />
                 <Helmet bodyAttributes={{ class: 'homepage' }}>{/* <style>{indexCSS}</style> */}</Helmet>
-                <div className="">
-                    <div className="topSectionWrapperMobile">
-                        <div className="topPageWrapper wrapper">
-                            <div className="pageHeader row">
-                                <h1>A complete product analytics stack, to deploy on your infrastructure.</h1>
-                            </div>
-                            <div className="topPageRow row">
-                                <div className="topPageCol1">
-                                    <div className="joinUsersText">
-                                        <p>
-                                            Join 2,100 companies <br className="hiddenBreak" /> using PostHog.
-                                        </p>
-                                        <br />
-                                    </div>
-                                    <div className="joinUsersButtons">
-                                        <Button
-                                            type="secondary"
-                                            size="large"
-                                            className="getStarted"
-                                            onClick={() => setModalIsOpen(true)}
-                                        >
-                                            Get Started for Free
-                                        </Button>
-                                        <Modal
-                                            isOpen={modalIsOpen}
-                                            onRequestClose={() => setModalIsOpen(false)}
-                                            className="modalContent"
-                                            overlayClassName="modalOverlay"
-                                        >
-                                            <h2>Try PostHog - free</h2>
-                                            <div className="modalCardsWrapper">
-                                                <a href="https://app.posthog.com/signup">
-                                                    <div className="modalSaasCloud modalCard">
-                                                        <div className="modalCardHeader">
-                                                            <img src={modalSaasCloud} alt="modal-saas-cloud" />
-                                                            <h2>Cloud</h2>
-                                                        </div>
-                                                        <h4>Small business or low volumes and don't want hassle?</h4>
-                                                        <p>
-                                                            This is the simplest way to get started. Create an account.
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                                <Link to="/docs/deployment">
-                                                    <div className="modalSelfDeploy modalCard">
-                                                        <div className="modalCardHeader">
-                                                            <img src={modalSelfDeploy} alt="modal-self-deploy " />
-                                                            <h2>Open Source</h2>
-                                                        </div>
-                                                        <h4>Want to use our free open source product?</h4>
-                                                        <p>
-                                                            Deploy PostHog Open Source on your own infrastructure. Free
-                                                            forever.
-                                                        </p>
-                                                    </div>
-                                                </Link>
-                                                <a href="mailto:sales@posthog.com">
-                                                    <div className="modalSelfDeploy modalCard">
-                                                        <div className="modalCardHeader">
-                                                            <img src={modalSelfDeploy} alt="modal-self-deploy " />
-                                                            <h2>Enterprise</h2>
-                                                        </div>
-                                                        <h4>10K+ users? Need support?</h4>
-                                                        <p>
-                                                            Managed on your infrastructure with greater scalability and
-                                                            support. Book a pilot.
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <Button
-                                                icon="close"
-                                                onClick={() => setModalIsOpen(false)}
-                                                className="modalClose"
-                                            />
-                                        </Modal>
-                                        <a href="/request_demo">
-                                            <Button type="primary" size="large" className="requestDemo">
-                                                Request Demo
-                                            </Button>
-                                        </a>
-                                    </div>
+                <div className="topSectionWrapperMobile">
+                    <div className="topPageWrapper wrapper">
+                        <div className="pageHeader row">
+                            <h1>A complete product analytics stack, to deploy on your infrastructure.</h1>
+                        </div>
+                        <div className="topPageRow row">
+                            <div className="topPageCol1">
+                                <div className="joinUsersText">
+                                    <p>
+                                        Join 2,100 companies <br className="hiddenBreak" /> using PostHog.
+                                    </p>
+                                    <br />
                                 </div>
-                                <div className="topPageCol2" />
+                                <div className="joinUsersButtons">
+                                    <Button
+                                        type="secondary"
+                                        size="large"
+                                        className="getStarted"
+                                        onClick={() => setModalIsOpen(true)}
+                                    >
+                                        Get Started for Free
+                                    </Button>
+                                    <Modal
+                                        isOpen={modalIsOpen}
+                                        onRequestClose={() => setModalIsOpen(false)}
+                                        className="modalContent"
+                                        overlayClassName="modalOverlay"
+                                    >
+                                        <h2>Try PostHog - free</h2>
+                                        <div className="modalCardsWrapper">
+                                            <a href="https://app.posthog.com/signup">
+                                                <div className="modalSaasCloud modalCard">
+                                                    <div className="modalCardHeader">
+                                                        <img src={modalSaasCloud} alt="modal-saas-cloud" />
+                                                        <h2>Cloud</h2>
+                                                    </div>
+                                                    <h4>Small business or low volumes and don't want hassle?</h4>
+                                                    <p>This is the simplest way to get started. Create an account.</p>
+                                                </div>
+                                            </a>
+                                            <Link to="/docs/deployment">
+                                                <div className="modalSelfDeploy modalCard">
+                                                    <div className="modalCardHeader">
+                                                        <img src={modalSelfDeploy} alt="modal-self-deploy " />
+                                                        <h2>Open Source</h2>
+                                                    </div>
+                                                    <h4>Want to use our free open source product?</h4>
+                                                    <p>
+                                                        Deploy PostHog Open Source on your own infrastructure. Free
+                                                        forever.
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                            <a href="mailto:sales@posthog.com">
+                                                <div className="modalSelfDeploy modalCard">
+                                                    <div className="modalCardHeader">
+                                                        <img src={modalSelfDeploy} alt="modal-self-deploy " />
+                                                        <h2>Enterprise</h2>
+                                                    </div>
+                                                    <h4>10K+ users? Need support?</h4>
+                                                    <p>
+                                                        Managed on your infrastructure with greater scalability and
+                                                        support. Book a pilot.
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <Button
+                                            icon="close"
+                                            onClick={() => setModalIsOpen(false)}
+                                            className="modalClose"
+                                        />
+                                    </Modal>
+                                    <a href="/request_demo">
+                                        <Button type="primary" size="large" className="requestDemo">
+                                            Request Demo
+                                        </Button>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    {/*01 - It all starts with event autocapture*/}
-                    <div className="autocaptureWrapper wrapper autocapturesizing featureSection">
-                        <div className="autocaptureRow row">
-                            <div className="autocaptureImg" />
-                            <div className="autocapture01 number">
-                                <h1 className="yellowText" id="feature-header-01">
-                                    01
-                                </h1>
-                            </div>
-                            <div className="autocaptureCol col">
-                                <h2 className="gosha">It all starts with event autocapture</h2>
-                                <br className="revHiddenBreak" />
-                                <hr className="yellowLine" />
-                                <br className="revHiddenBreak" />
-                                <p>PostHog autocaptures events and user behavior in your mobile or web app.</p>
-                            </div>
+                            <div className="topPageCol2" />
                         </div>
                     </div>
                 </div>
-
-                <div className="trafficVisualWrapper wrapper featureSection">
-                    {/*02 - Understand how traffic really flows through your app*/}
-                    <div className="trafficRow row">
-                        <div className="trafficImg" />
-                        <div className="traffic02 number">
-                            <h1 className="redText">02</h1>
-                        </div>
-                        <div className="trafficCol col">
-                            <h2 className="gosha">Understand how traffic really flows through your app</h2>
-                            <br className="revHiddenBreak" />
-                            <hr className="redLine" />
-                            <br className="revHiddenBreak" />
-                            <p className="trafficParagraph">
-                                Know the pageviews and actions of every user in your app or on your website.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/*01 - It all starts with event autocapture*/}
-                    <div className="autocaptureWrapper wrapper featureSection">
-                        <div className="autocaptureRow row">
-                            <div className="visualizeImg" />
-                            <div className="visualize03 number">
-                                <h1 className="darkBlueText">03</h1>
-                            </div>
-                            <div className="autocaptureCol col">
-                                <h2 className="gosha">Visualize product trends and retention</h2>
-                                <br className="revHiddenBreak" />
-                                <hr className="darkBlueLine" />
-                                <br className="revHiddenBreak" />
-                                <p>
-                                    Powerful analytics to really understand what your users are doing and how to keep
-                                    them coming back.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Spacer />
+                <FeaturedSectionTextRight
+                    headerText="It all starts with event autocapture"
+                    listItem="01"
+                    descriptionText="PostHog autocaptures events and user behavior in your mobile or web app."
+                    image={retroAutocapture}
+                    color="yellow"
+                />
+                <Spacer onlyDesktop={true} />
+                <FeaturedSectionTextLeft
+                    headerText="Understand how traffic really flows through your app"
+                    listItem="02"
+                    descriptionText="Know the pageviews and actions of every user in your app or on your website."
+                    image={trafficFlow}
+                    color="red"
+                    imgDesktopHeight={477}
+                    imgDesktopWidth="50vw"
+                    imgStyle={{ backgroundSize: 'cover' }}
+                />
+                <Spacer onlyDesktop={true} />
+                <FeaturedSectionTextRight
+                    headerText="Visualize product trends and retention"
+                    listItem="03"
+                    descriptionText="Powerful analytics to really understand what your users are doing and how to keep
+                    them coming back."
+                    image={visualizeTrends}
+                    color="navy"
+                />
 
                 {/*04 - Improve conversion rates*/}
                 <div className="improveConversionWrapper wrapper bluebg featureSection">
