@@ -47,7 +47,7 @@ We're super excited about this.
 
 Last week we did an internal hackathon and the command palette was one of the awesome projects to come out of it.
 
-Now, when using PostHog, you can press `⌘ + K` (Mac) or `Ctrl + K` (Windows) to reveal a Spotlight or Superhuman-like command palette that lets you navigate around PostHog mouse-less. In addition to navigation, the command palette also has page-specific commands that let you change the time range on charts for example, as well as a way to quickly share feedback with the PostHog team, create an API key, or even do some math with the calculator. 
+Now, when using PostHog, you can press `⌘K` (Mac) or `Ctrl + K` (Windows) to reveal a Spotlight or Superhuman-like command palette that lets you navigate around PostHog mouse-less. In addition to navigation, the command palette also has page-specific commands that let you, for example, change the time range on charts, as well as a way to quickly share feedback with the PostHog team, create an API key, or even do some math with the built-in calculator. 
 
 Eric, Michael, and Paolo got this done in just a few days, and we love it. 
 
@@ -59,7 +59,7 @@ Stay tuned for more exciting features that were built during the hackathon.
 ![Backend Feature Flags Code](../images/blog/array/backend-flags.png)
 
 
-Based on community feedback, we made it easier for feature flags to be integrated into your backend, in addition to our frontend JavaScript implementation.
+Based on community feedback, we made it easier for feature flags to be integrated with your backend, in addition to our frontend JavaScript implementation.
 
 We've added feature flag support to our [Python Integration](https://github.com/PostHog/posthog-python/pull/9), as well as [improved the `/decide` endpoint](https://github.com/PostHog/posthog/pull/1592) used by feature flags to make the API experience better.
 
@@ -86,7 +86,7 @@ source community.
 
 As a result, we have now [tagged some good first issues](https://github.com/PostHog/posthog/labels/Hacktoberfest) on our [main repo](https://github.com/PostHog/posthog/) with the <code class="hacktoberfest">Hacktoberfest</code> tag, as these should be suitable issues for first-time contributors. We have also made an effort to document those issues better, so that their scope is clearly defined. 
 
-By submitting a pull request that gets merged for one of these issues (or any other issues on our [main repo](https://github.com/PostHog/posthog)), we will send you some [PostHog merch](https://merch.posthog.com) and you'll be able to count that contribution towards the 4 PRs you need to get Hacktoberfest shirt.
+By submitting a pull request that gets merged for one of these issues (or any other issues on our [main repo](https://github.com/PostHog/posthog)), we will send you some [PostHog merch](https://merch.posthog.com) and you'll be able to count that contribution towards the 4 PRs you need to get the Hacktoberfest shirt.
 
 ### [User Interviews](calendly.com/posthog-feedback)
 
