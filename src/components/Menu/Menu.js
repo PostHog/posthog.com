@@ -1,214 +1,133 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
-import { connect } from 'react-redux'
-import { onChangeMenuState } from '../../actions/layout'
-import { onSetSidebarOpen } from '../../actions/layout'
 import List from 'antd/lib/list'
-import { getMenuState } from '../../store/selectors'
 import { Menu as AntMenu } from 'antd'
-import { CloseOutlined } from '@ant-design/icons'
 import StarRepoButton from '../StarRepoButton'
+import { layoutLogic } from '../../logic/layoutLogic'
+import { useActions, useValues } from 'kea'
 
-class Menu extends Component {
-  onChangeMenuState = nItem => {
-    this.props.onChangeMenuState(nItem)
-  }
+function Menu({ isBlogPage, isHomePage, screenIsSmall }) {
+    const sidebarDocked = !screenIsSmall
+    const { menuOpen } = useValues(layoutLogic)
+    const { onChangeMenuState } = useActions(layoutLogic)
 
-  onSetSidebarClose = () => {
-    this.props.onSetSidebarOpen(false)
-  }
-
-  render() {
-    const { sidebarDocked, menuOpen, isBlogPage, sidebarHide } = this.props
     return (
-      <StaticQuery
-        query={graphql`
-          query {
-            allMenuItemsJson {
-              edges {
-                node {
-                  name
-                  link
-                  a
+        <StaticQuery
+            query={graphql`
+                query {
+                    allMenuItemsJson {
+                        edges {
+                            node {
+                                name
+                                link
+                                a
+                            }
+                        }
+                    }
                 }
-              }
-            }
-          }
-        `}
-        render={data => {
-          const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
-          return (
-            <div className="headerItems" style={{ marginRight: 20 }}>
-              {sidebarDocked && (
-                <AntMenu
-                  mode="horizontal"
-                  style={{
-                    borderBottomWidth: 0,
-                    background: isBlogPage && 'none'
-                  }}
-                >
-                  {menuItems.reverse().map(item => {
-                    return item.name === "star-repo" ? (
-                      <AntMenu.Item
-                        className="headerKey star-repo-btn"
-                        style={{
-                          marginLeft: '2em',
-                          float: 'right',
-                          marginBottom: 'calc(1.45rem / 2)'
-                        }}
-                        key={item.name}
-                      >
-                        <StarRepoButton></StarRepoButton>
-                      </AntMenu.Item>
-                    ) : (
-                        <AntMenu.Item
-                          className="headerKey"
-                          style={{
-                            marginLeft: '2em',
-                            float: 'right',
-                            marginBottom: 'calc(1.45rem / 2)'
-                          }}
-                          key={item.link || item.a}
-                        >
-                          {item.a ? (
-                            <a href={item.a} className={item.name === "Login" && !isBlogPage ? " login-btn" : ""} style={{ color: isBlogPage ? '#FFFFFF' : '#000000' }}>
-                              {item.name}
-                            </a>
-                          ) : (
-                              <Link to={item.link} style={{ color: isBlogPage ? '#FFFFFF' : '#595959' }}>
-                                {item.name}
-                              </Link>
-                            )}
-                        </AntMenu.Item>
-                      )
-                  })}
-                </AntMenu>
-              )}
-              {!sidebarDocked && (
-                <Button
-                  style={{
-                    color: '#1D4AFF',
-
-                  }}
-                  type="link"
-                  onClick={() => {
-                    this.onChangeMenuState(menuItems.length)
-                  }}
-                  icon="menu"
-                />
-              )}
-              {menuOpen && !sidebarDocked && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    height: '100vh',
-                    width: '100%',
-                    zIndex: 100,
-                    paddingLeft: 0,
-                    paddingRight: 0,
-                    paddingTop: '5vh'
-                  }}
-                >
-                  <div>
-                    <CloseOutlined
-                      style={{
-                        float: 'right',
-                        fontSize: '30px',
-                        paddingLeft: '10vw',
-                        paddingRight: '10vw',
-                        marginTop: '5vh',
-                        backgroundColor: 'white',
-                      }}
-                      onClick={() => {
-                        this.onChangeMenuState(menuItems.length)
-                      }}
-                    ></CloseOutlined>
-                  </div>
-                  <List
-                    itemLayout="horizontal"
-                    dataSource={menuItems}
-                    rowKey={item => item.a || item.link}
-                    renderItem={item => (
-                      <List.Item
-                        style={{
-                          listStyle: 'none',
-                          padding: '3vh 10vw',
-                          margin: 0
-                        }}
-                        key={menuItems.indexOf(item)}
-                      >
-                        {item.a ? (
-                          <List.Item.Meta
-                            title={
-                              <a
-                                href={item.a}
-                                className={item.name === "Login" ? " login-btn" : ""}
-                                style={{
-                                  color: 'black',
-                                  textDecoration: 'none',
-                                }}
-                                onClick={() => {
-                                  this.onChangeMenuState(menuItems.length)
-                                }}
-                              >
-                                {item.name}
-                              </a>
-                            }
-                          />
-                        ) : item.name === "star-repo" ? (
-                          <List.Item.Meta
-                            title={
-                              <StarRepoButton></StarRepoButton>
-                            }
-                          />
-                        ) : (
-                              <List.Item.Meta
-                                title={
-                                  <Link
-                                    to={item.link}
-                                    style={{
-                                      color: 'black',
-                                      textDecoration: 'none',
-                                    }}
-                                    onClick={() => {
-                                      this.onChangeMenuState(menuItems.length)
-                                    }}
-                                  >
-                                    {item.name}
-                                  </Link>
+            `}
+            render={(data) => {
+                const menuItems = data.allMenuItemsJson.edges.map((edge) => edge.node)
+                return (
+                    <div className="headerItems">
+                        {sidebarDocked && (
+                            <AntMenu
+                                mode="horizontal"
+                                className={'ant-menu-navbar' + (isBlogPage ? '' : 'ant-menu-navbar-blog')}
+                            >
+                                {menuItems.reverse().map((item) => {
+                                    return item.name === 'star-repo' ? (
+                                        <AntMenu.Item className="headerKey star-repo-btn" key={item.name}>
+                                            <StarRepoButton></StarRepoButton>
+                                        </AntMenu.Item>
+                                    ) : (
+                                        <AntMenu.Item className="headerKey" key={item.link || item.a}>
+                                            {item.a ? (
+                                                <a
+                                                    href={item.a}
+                                                    className={
+                                                        isBlogPage
+                                                            ? 'white '
+                                                            : 'zambezi ' +
+                                                              (item.name === 'Login' && !isBlogPage ? ' login-btn' : '')
+                                                    }
+                                                >
+                                                    {item.name}
+                                                </a>
+                                            ) : (
+                                                <Link to={item.link} className={isBlogPage ? 'white' : 'zambezi'}>
+                                                    {item.name}
+                                                </Link>
+                                            )}
+                                        </AntMenu.Item>
+                                    )
+                                })}
+                            </AntMenu>
+                        )}
+                        {!sidebarDocked && (
+                            <Button
+                                className={
+                                    (isHomePage ? 'burger-btn homepage-burger-btn' : 'burger-btn ') +
+                                    (isBlogPage && ' blogpage-burger-btn')
                                 }
-                              />
-                            )}
-                      </List.Item>
-                    )}
-                    style={{
-                      width: '100%',
-                      float: 'left',
-                      backgroundColor: 'white'
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-          )
-        }}
-      />
+                                type="link"
+                                onClick={() => {
+                                    onChangeMenuState(menuItems.length)
+                                }}
+                                icon={menuOpen ? 'close' : 'menu'}
+                            />
+                        )}
+                        {menuOpen && !sidebarDocked && (
+                            <div id="navbar-responsive-wrapper">
+                                <div className="burger-menu-spacer"></div>
+                                <List
+                                    itemLayout="horizontal"
+                                    dataSource={menuItems}
+                                    className="navbar-list"
+                                    rowKey={(item) => item.a || item.link}
+                                    renderItem={(item) => (
+                                        <List.Item className="responsive-menu-item" key={menuItems.indexOf(item)}>
+                                            <List.Item.Meta
+                                                title={
+                                                    item.a ? (
+                                                        <a
+                                                            href={item.a}
+                                                            className={
+                                                                'responsive-menu-item-meta ' +
+                                                                (item.name === 'Login' ? ' login-btn' : '')
+                                                            }
+                                                            onClick={() => {
+                                                                onChangeMenuState(menuItems.length)
+                                                            }}
+                                                        >
+                                                            {item.name}
+                                                        </a>
+                                                    ) : item.name === 'star-repo' ? (
+                                                        <StarRepoButton></StarRepoButton>
+                                                    ) : (
+                                                        <Link
+                                                            to={item.link}
+                                                            className="responsive-menu-item-meta"
+                                                            onClick={() => {
+                                                                onChangeMenuState(menuItems.length)
+                                                            }}
+                                                        >
+                                                            {item.name}
+                                                        </Link>
+                                                    )
+                                                }
+                                            />
+                                        </List.Item>
+                                    )}
+                                />
+                            </div>
+                        )}
+                    </div>
+                )
+            }}
+        />
     )
-  }
 }
 
-const mapStateToProps = state => {
-  return {
-    menuOpen: getMenuState(state).open,
-  }
-}
-
-const mapDispatchToProps = {
-  onChangeMenuState,
-}
-
-// export default Menu
-export default connect(mapStateToProps, mapDispatchToProps)(Menu)
+export default Menu

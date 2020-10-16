@@ -6,15 +6,29 @@ showTitle: true
 
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
-**Note:** At the moment, feature flags are only supported in combination with our `posthog-js` library.
+**Note:** Feature Flags are currently available with our [JavaScript](/docs/integrations/js-integration#feature-flags) and [Python](/docs/integrations/python-integration) integrations. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
+
+## Learning Resources
+
+### Tutorial
+
+For a comprehensive step-by-step tutorial on how to use feature flags, check out [How to Safely Roll Out New Features](/docs/tutorials/feature-flags).
+
+![Create feature flags](../../images/tutorials/banners/feature-flags.png)
+
+### Demo Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/a6WEuVncYok" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br />
 
 ## Creating Feature Flags
 
-In the sidebar, go to "Experiments" and click "+ New Feature Flag".
+In the sidebar, go to 'Experiments' and click '+ New Feature Flag'.
 
 Think of a descriptive name and select how you want to roll out your feature.
 
-![Create feature flags](../../images/create-feature-flag.png)
+![Create feature flags](../../images/features/feature-flags/experiments-page.png)
 
 ## Implementing the Feature Flag
 
@@ -41,9 +55,9 @@ posthog.onFeatureFlags(function() {
 })
 ```
 
-**Note:** To avoid "posthog has no attribute isFeatureEnabled" errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
+**Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
 
-## Develop locally
+## Develop Locally
 
 To test feature flags locally, you can open your developer tools and override the feature flags given. You will get a warning that you're manually overriding feature flags.
 
@@ -69,9 +83,9 @@ posthog.feature_flags.getFlags()
 
 There are three options for deciding who sees your new feature. You can roll out the feature to:
 
-1. a fixed percentage of users,
-1. a set of users filtered based on their user properties,
-1. or a combination of the two
+1. A fixed percentage of users,
+1. A set of users filtered based on their user properties,
+1. A combination of the two
 
 ### Roll Out to a Percentage of Users
 
@@ -93,4 +107,13 @@ By combining user properties and percentage of users you can determine something
 
 ## De-activating Properties
 
-If the feature has caused a problem (like a huge server load), or you don't need the feature flag anymore, you can disable it instantly and completely. Users won't be getting the flag anymore.
+If the feature has caused a problem (like a huge server load), or you don't need the feature flag anymore, you can disable it instantly and completely. Doing so ensures **no users** will have the flag enabled.
+
+## Feature Flag Persistence
+
+For feature flags that filter by user properties only, a given flag will always be on if a certain user meets all the specified property filters.
+
+However, for flags using a rollout percentage mechanism (either by itself or in combination with user properties), the flag will persist for a given user as long as the rollout percentage and the flag key are not changed. 
+
+As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way. 
+

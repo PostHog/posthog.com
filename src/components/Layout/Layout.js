@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
@@ -11,229 +10,146 @@ import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import MediaQuery from 'react-responsive'
 import { default as AntdLayout } from 'antd/lib/layout'
-import Col from 'antd/lib/col'
-import { connect } from 'react-redux'
-import { isSidebarHide, isAnchorHide } from '../../store/selectors'
-import blogBackground from '../../images/blog-background.svg'
-import { withPrefix } from "gatsby-link"
 import NewsletterForm from '../NewsletterForm'
+import { useValues } from 'kea'
+import { layoutLogic } from '../../logic/layoutLogic'
+import { DocsSearch } from '../DocsSearch'
 
-const isBlogPage = 
-({location }) => {
-  if (location.pathname === withPrefix ("/blog")){
-    return true
-  } else {
-    return false
-  }
-}
-
-class Layout extends Component {
-  setPostPageState = state => {
-    this.props.setPostPageState(state)
-  }
-
-  render() {
-    const {
-      children,
-      onPostPage,
-      sidebarHide,
-      anchorHide,
-      className,
-      containerStyle={},
-      expandedKeys,
-      isBlogPage,
-      pageTitle
-    } = this.props
+function Layout({
+    onPostPage,
+    isBlogPage,
+    pageTitle,
+    isDocsPage,
+    isHomePage,
+    isBlogArticlePage,
+    isHandbookPage,
+    children,
+    className,
+    isFeaturesPage,
+    containerStyle = {},
+}) {
+    const { sidebarHide, anchorHide } = useValues(layoutLogic)
+    const links = [
+        {
+            rel: 'stylesheet',
+            href: 'https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.css',
+        },
+    ]
 
     return (
-      <StaticQuery
-        query={graphql`
-          query SiteTitleQuery {
-            site {
-              siteMetadata {
-                title
-              }
-            }
-          }
-        `}
-        render={data => {
-          return (
-            <MediaQuery maxWidth={1076}>
-              {screenIsSmall => (
-                <>
-                  <Helmet
-                    title={data.site.siteMetadata.title}
-                    meta={[
-                      { name: 'description', content: 'Sample' },
-                      { name: 'keywords', content: 'sample, something' },
-                    ]}
-                  >
-                    <html lang="en" />
-                  </Helmet>
-                  <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
-                    {!screenIsSmall && onPostPage && (
-                      !sidebarHide && !isBlogPage && (
-                      <AntdLayout.Sider width="300" theme="light" style={{backgroundColor: '#F9F9F9'}} >
-                        <ResponsiveSidebar style={{border: 'none'}}/>
-                        </AntdLayout.Sider>
-                      ))}
+        <StaticQuery
+            query={graphql`
+                query SiteTitleQuery {
+                    site {
+                        siteMetadata {
+                            title
+                        }
+                    }
+                }
+            `}
+            render={(data) => {
+                return (
+                    <MediaQuery maxWidth={1076}>
+                        {(screenIsSmall) => (
+                            <>
+                                <Helmet
+                                    title={data.site.siteMetadata.title}
+                                    meta={[
+                                        { name: 'description', content: 'Sample' },
+                                        { name: 'keywords', content: 'sample, something' },
+                                    ]}
+                                    links={links}
+                                >
+                                    <html lang="en" />
+                                </Helmet>
+                                <AntdLayout theme="light">
+                                    {!screenIsSmall && onPostPage && !sidebarHide && !isBlogPage && (
+                                        <AntdLayout.Sider width="300" theme="light" className="sideBar">
+                                            <ResponsiveSidebar />
+                                        </AntdLayout.Sider>
+                                    )}
 
-                      <AntdLayout theme="light">
-                        <AntdLayout.Header
-                        className="menuHeader"
-                        style={{ 
-                          backgroundColor: screenIsSmall && onPostPage ? '#F9F9F9' : '#fff', 
-                          backgroundImage: isBlogPage && !screenIsSmall && `url(${blogBackground})`,
-                          backgroundPosition: isBlogPage && !screenIsSmall && 'left bottom',
-                          backgroundSize: 'cover',
-                          height: !screenIsSmall && isBlogPage && 400,
-                          maxHeight: !screenIsSmall && isBlogPage && '45vh',
-                          borderBottom: onPostPage && screenIsSmall && '6px solid #C4C4C4',
-                          padding: screenIsSmall && 0,
-                          marginBottom: isBlogPage && '2rem'
-                        }}
-                        theme="light"
-                        >
-                          <Header
-                          siteTitle={data.site.siteMetadata.title}
-                          sidebarDocked={!screenIsSmall}
-                          sidebarHide={sidebarHide}
-                          onPostPage={onPostPage}
-                          screenIsSmall={screenIsSmall}
-                          isBlogPage={isBlogPage}
-                          theme="light"
-                          />  
-                          {screenIsSmall &&
-                            onPostPage &&
-                            (!anchorHide || !sidebarHide) && (
-                                <ResponsiveTopBar />
-                            )}
-                          {isBlogPage && !screenIsSmall &&
-                          <div style={{
-                            position: 'relative',
-                            height: 'calc(100% - 64px)', 
-                            top: 0,
-                            width: '80%', 
-                            color: 'white', 
-                            verticalAlign: 'bottom',
-                            left: 'calc((100% - 960px) * 0.5 + 2.175rem)'}}
-                            >
+                                    <AntdLayout theme="light">
+                                        <AntdLayout.Header
+                                            className={
+                                                'menuHeader ' +
+                                                (onPostPage && 'docsHeader ') +
+                                                (isBlogPage && 'blogHeader')
+                                            }
+                                            theme="light"
+                                        >
+                                            <Header
+                                                siteTitle={data.site.siteMetadata.title}
+                                                onPostPage={onPostPage}
+                                                screenIsSmall={screenIsSmall}
+                                                isBlogPage={isBlogPage}
+                                                isHomePage={isHomePage}
+                                                isDocsPage={isDocsPage}
+                                                isBlogArticlePage={isBlogArticlePage}
+                                                isHandbookPage={isHandbookPage}
+                                                theme="light"
+                                            />
+                                            {screenIsSmall &&
+                                                onPostPage &&
+                                                !isBlogPage &&
+                                                (!anchorHide || !sidebarHide) && <ResponsiveTopBar />}
+                                            {isBlogPage && !screenIsSmall && (
+                                                <div className="blogHeaderTitle">
+                                                    <h1>{pageTitle}</h1>
+                                                </div>
+                                            )}
+                                        </AntdLayout.Header>
 
-                            <h1 align="left" style={{
-                              position: 'absolute',
-                              color: 'white',  
-                              bottom: 0
-                              
-                            }} >
-                              {pageTitle}
-                            </h1>
-                          </div>
-                          }
-                        </AntdLayout.Header>
+                                        {isDocsPage && <DocsSearch />}
 
-                      {/* content */}
-                      {!screenIsSmall && onPostPage ? (
-                        isBlogPage ? (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%", align: 'center'}}>
-                          <AntdLayout.Content style={{ minHeight: 280, margin: '0 auto', padding: '0px 1.0875rem 1.45rem', maxWidth: 960}}>
-                            <Container
-                              sidebarDocked={!screenIsSmall}
-                              onPostPage={onPostPage}
-                              className={className}
-                              style={{ position: 'relative' }}
-                              containerStyle={containerStyle}
-                            >
-                              {children}
-                            </Container>
-                          </AntdLayout.Content>
-                          
-                          {/* Sidebar right */}
-                          {!anchorHide && (
-                            <AntdLayout.Sider
-                              theme="light"
-                              style={{ height: '100%', backgroundColor: '#fff' }}
-                              className="rightBar"
-                              
-                            >
-                              <ResponsiveAnchor />
-                            </AntdLayout.Sider>
-                          )}
-                        </AntdLayout>
-                        ) : (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
-                          <AntdLayout.Content style={{ minHeight: 280, padding: '3rem 0% 0 10%', width: '100%' }}>
-                            <Container
-                              sidebarDocked={!screenIsSmall}
-                              onPostPage={onPostPage}
-                              className={className}
-                              style={{ position: 'relative' }}
-                              containerStyle={containerStyle}
-                            >
-                              {children}
-                            </Container>
-                          </AntdLayout.Content>
-                          
-                          {/* Sidebar right */}
-                          {!anchorHide && (
-                            <AntdLayout.Sider
-                              theme="light"
-                              style={{ height: '100%', backgroundColor: '#fff' }}
-                              className="rightBar"
-                              
-                            >
-                              <ResponsiveAnchor />
-                            </AntdLayout.Sider>
-                          )}
-                        </AntdLayout>
-                        )) : (
-                        <AntdLayout theme="light" style={{ backgroundColor: '#fff', width: "100%"}}>
-                          <AntdLayout.Content
-                            style={{
-                              position: 'relative',
-                              left: 0,
-                              right: 0,
-                              marginTop: 50,
-                            }}
-                          >
-                            <Container
-                              sidebarDocked={!screenIsSmall}
-                              onPostPage={onPostPage}
-                              className={className}
-                              style={{ position: 'relative' }}
-                              containerStyle={containerStyle}
-                            >
-                              {children}
-                            </Container>
-                          </AntdLayout.Content>
-                        </AntdLayout>
-                      )}
-                      </AntdLayout>
-                  </AntdLayout>
-                  <AntdLayout>
-                  {isBlogPage && (<NewsletterForm />)}
-                  <Footer />
-                  </AntdLayout>
-                </>
-              )}
-            </MediaQuery>
-          )
-        }}
-      />
+                                        {/* content */}
+                                        <AntdLayout
+                                            className={
+                                                'layout ' +
+                                                (onPostPage ? 'docsPageLayout ' : 'notDocsLayout ') +
+                                                (isBlogPage ? 'blogPageLayout ' : '') +
+                                                (isFeaturesPage ? 'featuresPageLayout ' : '') +
+                                                (isDocsPage && 'docs-only-layout')
+                                            }
+                                            theme="light"
+                                        >
+                                            <AntdLayout.Content>
+                                                {isBlogPage && screenIsSmall && (
+                                                    <div>
+                                                        <h1>{pageTitle}</h1>
+                                                        <br />
+                                                    </div>
+                                                )}
+                                                <Container
+                                                    sidebarDocked={!screenIsSmall}
+                                                    onPostPage={onPostPage}
+                                                    className={className + ' container'}
+                                                    containerStyle={containerStyle}
+                                                >
+                                                    {children}
+                                                </Container>
+                                            </AntdLayout.Content>
+
+                                            {/* Sidebar right */}
+                                            {onPostPage && !anchorHide && !screenIsSmall && (
+                                                <AntdLayout.Sider theme="light" className="rightBar">
+                                                    <ResponsiveAnchor />
+                                                </AntdLayout.Sider>
+                                            )}
+                                        </AntdLayout>
+                                    </AntdLayout>
+                                </AntdLayout>
+                                <AntdLayout>
+                                    {isBlogPage && <NewsletterForm />}
+                                    <Footer />
+                                </AntdLayout>
+                            </>
+                        )}
+                    </MediaQuery>
+                )
+            }}
+        />
     )
-  }
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  containerStyle: PropTypes.object,
-}
-
-const mapStateToProps = state => {
-  return {
-    sidebarHide: isSidebarHide(state),
-    anchorHide: isAnchorHide(state),
-  }
-}
-
-export default connect(mapStateToProps)(Layout)
+export default Layout

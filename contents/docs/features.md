@@ -56,7 +56,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [Node integration](/docs/integrations/node-integration)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [Go integration](/docs/integrations/go-integration)                | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [PHP integration](/docs/integrations/php-integration)              | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Full REST API](/docs/integrations/api)                            | <span style="color: #71AA55">**Live**</span> | ✔      | ✔      |
+| [Full REST API](/docs/api/overview)                            | <span style="color: #71AA55">**Live**</span> | ✔      | ✔      |
 
 ### Additional features
 
@@ -69,4 +69,19 @@ Below you will find a comprehensive list of all the features that comprise the P
 | User roles                                                       | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
 | Custom databases (e.g. Snowflake / ClickHouse)                   | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
 
-You can watch a short demo video showcasing our current feature set here: https://youtu.be/vGy9gzMAAes
+
+### Features Demo Video
+
+<span class="centered">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</span>
+
+<br />
+
+<small class="centered">
+
+_For video notes marking when each feature is showcased, watch the video [on YouTube](https://www.youtube.com/watch?v=aUILrrrlu50)._
+
+</small>

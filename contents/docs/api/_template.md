@@ -10,7 +10,7 @@ For more information on XXXX, see [XXXX](/docs/features/…)
 
 ## Pagination
 
-This endpoint has pagination. See [pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [pagination](/docs/api/overview#pagination) for more info.
 
 ## List trends
 

@@ -4,41 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Themes
+## Up-to-date roadmap
 
-### 1 - Parity (current phase)
+We keep our most up-to-date roadmap on [GitHub](https://github.com/orgs/PostHog/projects/1).
 
-> Create something that helps Product teams do their jobs, so that developers actually want to implement it.
-
-The objective of this phase is to meet the Product Team's typical use cases of product analytics tools, in a way that developers can easily implement.
-
-Whilst we have most of the major features needed, we need to focus on scalability to get a greater amount of B2C / enterprise adoption.
-
-### 2 - Developer-specific Features
-
-> Enable developers to understand the impact of their work.
-
-#### Feature Flags
-
-Integrate with git repos so developers can assess the impact of each Pull Request or feature they build. This will turn us from a "parity" tool to best-in-class.
-
-* Developers understand the impact of each pull request  (i.e. feature) on metrics.
-* Multiple developers can run experiments simultaneously.
-* Helps task-focused developers to focus on getting the company's metrics to improve.
-
-#### Local Environment
-
-Developers usually use an IDE and have a browser open locally whilst they code. We want a very easy way for developers to access usage stats as they work.
-
-* Hovering over elements on the localhost page quickly displays usage info.
-
-#### Analytics Metadata
-
-Developers often have to write complex SQL to create exports of certain user groups. PostHog already provides the ability to create analytics metadata through the front end, such as cohorts of users.
-
-Making this data very accessible through API, and by promoting it in the Cocs, will allow developers to use this data in other tools internally.
-
-## Strategy
+## General Product Strategy
 
 ### Open Core Business Model
 
@@ -56,7 +26,8 @@ The more PostHog can become part of our customers' infrastructure, the better.
 
 The ways to achieve this are (i) by becoming a data store (ii) by ensuring extensibility through integrating with other tools and (iii) by the breadth of users powered by the tool in the clients that adopt us.
 
-### Data Store
+
+### Data Store
 
 PostHog already generates a large volume of data about customers and their behavior. However, in the market, there are many tools that already capture user data and event data so there seems little point in competing there.
 
@@ -92,4 +63,7 @@ In the product analytics market, all the existing tools are targeted at product 
 
 PostHog started by building features that product teams will need, in a way that is easier for engineers to implement.
 
-This is why we are now focussed on building features specifically for engineers to use.
+This is why we are now focused on building features **specifically for engineers to use**.
+
+
+We also believe that the future of how products, apps and websites are built is with product analytics, not with legacy web analytics (plus there is already great tools out there for traditional web analytics). This is why today we focus on creating the best **product analytics** experience in the market.

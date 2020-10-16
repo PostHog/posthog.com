@@ -1,5 +1,5 @@
 ---
-title: JS Integration
+title: JavaScript Integration
 sidebar: Docs
 showTitle: true
 ---
@@ -155,7 +155,13 @@ Using `register_once` will ensure that if a property is already set, it will not
 
 ### Opt Users Out
 
-PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner). You can:
+PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner). 
+
+This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in. 
+
+If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/features/cohorts#differentiating-team-vs-users-traffic).
+
+With PostHog, you can:
 
 Opt a user out:
 ```js
@@ -171,8 +177,6 @@ Opt a user back in:
 ```js
 posthog.opt_in_capturing();
 ```
-
-**Note:** This method is a suggested way to prevent capturing data from the admin on the page. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also call it directly in your app after an admin logs in. 
 
 
 ### Feature Flags
@@ -232,6 +236,41 @@ function signup(email) {
 }
 ```
 
+## Config
+
+When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
+
+There are [33 different options](https://github.com/PostHog/posthog-js/blob/master/src/posthog-core.js#L1120-L1206), most of which you do not have to ever worry about. 
+
+Some of the most relevant options are:
+
+<span class="table-borders">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | ------------------------- | ------------------------------------------------------- |
+| `api_host` | String | `https://app.posthog.com` | URL of your PostHog instance. |
+| `autocapture` | Boolean | `true` | Determines if PostHog should [autocapture](#autocapture) events. |
+| `loaded` | Function | `function () {}` (no-op) | A function to be called once the PostHog scripts have loaded successfully. |
+| `capture_pageview` | Boolean | `true` | Determines if PostHog should automatically capture pageview events. |
+| <span class="small-text"> `opt_out_capturing_by_default` </span> | Boolean | `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
+| `property_blacklist` | Array | `[]` | A list of properties that should never be sent with `capture` calls. |
+| `xhr_headers` | Object | `{}` | Any additional headers you wish to pass with the XHR requests to the PostHog API. |
+
+<br />
+
+To configure these options, pass them as an object to the `posthog.init` call, like so:
+
+```js
+posthog.init('[your api key]', {
+    api_host: 'https://posthog.[your-domain].com',
+    loaded: function(posthog) { posthog.identify('[user unique id]'); },
+    autocapture: false
+    // ... more options
+});
+```
+
+
+</span>
 
 ## Development
 

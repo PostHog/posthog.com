@@ -15,10 +15,11 @@ What we do care about is your ability to learn, iterate, and ship.
 That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. 
 
 ![Remote Work Banner](../../images/posthogers-map.png) 
-<br /><small class="centered-text">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
+<br /><small class="centered">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
 
+## Core Team
 
-## James Hawkins, Co-Founder and CEO
+### James Hawkins, Co-Founder and CEO
 
 I spent the first 10 years of my career trying to be a professional cyclist. I used to do web development part time to make some money on the side. I wasn't particularly good at either.
 
@@ -30,7 +31,7 @@ I wanted more experience of working in a VC backed startup, so I could work on s
 
 I started working with Tim on a few ideas that didn't work out in August 2019. We built PostHog during the YCombinator W20 batch, and launched in February. You can work out what I've been up to since by stalking me online.
 
-## Tim Glaser, Co-Founder and CTO
+### Tim Glaser, Co-Founder and CTO
 
 I've been coding since I've been 11, which isn't as long ago as I'd like it to be. Someone first paid me to write code when I was 13 (though I'm sure they regretted it) and [someone else](https://en.wikipedia.org/wiki/Cloud9_IDE) gainfully employed me when I was 16.
 
@@ -40,7 +41,7 @@ After four years I thought it was time to go do something else and had lined up 
 
 In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-shaped ball and watch a lot of Bondi beach in order to perfect my Australian accent.
 
-## Marius Andra, Software Engineer
+### Marius Andra, Software Engineer
 
 I first got into programming in 1994 when I wanted to make my own computer games... and asked my father for help. He sat me behind a Turbo Basic interpreter, wrote `PRINT "Marius on tubli poiss"` and then left me there. I was 8 years old.
 
@@ -50,11 +51,11 @@ I also got into "web development" in 1997 after seeing Netscape at my mother's u
 
 This was followed by years of writing games in C++ and then [writing tutorials](https://web.archive.org/web/20110626030555/http://cone3d.gamedev.net/) about them, coding websites in Perl, PHP, Java and Ruby... and "losing" a decade as the CTO of two failed startups.
 
-On the side I build an [open source database analytics platform](https://github.com/mariusandra/insights)... and when that got on Hacker News, James reached out... and the rest is history.
+On the side I built an [open source database analytics platform](https://github.com/mariusandra/insights)... and when that [got on Hacker News](https://news.ycombinator.com/item?id=22347516), James reached out... and the rest is history.
 
 These days I live in Belgium and code [state management libraries](https://kea.js.org/) in JavaScript for fun. 
 
-## Eric Duong, Software Engineer
+### Eric Duong, Software Engineer
 
 I recently graduated and while in college I helped cofound a social dining platform. I spent two years trying to get strangers to cook and dine with each other. In reality, it turned into a 2 year stint of teach yourself as much mobile development as you can while simultaneously trying to build a usable platform. My cofounders and I had our fair share of contemplating dropping out of school and becoming a unicorn in 5 years—it didn't work out.
 
@@ -64,7 +65,7 @@ I currently work as a generalist around most of Posthog's stack building many of
 
 To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage of Posthog's all remote policy to travel and hike as many major mountain treks around the world as possible. Ambitions subject to change as always though.
 
-## James Greenhill, Software Engineer
+### James Greenhill, Software Engineer
 
 When I was a kid the first thing I remember wanting to be was a pilot, so naturally here I am knee deep in code and data!
 
@@ -76,7 +77,7 @@ In my professional life I’ve generally managed mopping up the 1’s and 0’s.
 
 When I’m not out and about in nature you can find me at home with my cat Tesla and Taco our goofball of a Lab Corgi mix.
 
-## Michael Matloka, Software Engineer
+### Michael Matloka, Software Engineer
 
 Got into software by tinkering with bada OS – if anyone even remembers that! – and just never stopped (though I did move to Android soon and later became an iOS fan).
 
@@ -85,13 +86,13 @@ Before graduating from high school here in Poland – and having some open-sourc
 Happy to report that I ended up joining PostHog, where open-source software, a quality product and great people all mix freely!
 In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), [photography](https://unsplash.com/@twixes) and [cinema](https://www.nowehoryzonty.pl/index.do?lang=en). Decidedly a fan of precipitation and overcast weather, I have a secret plan to move to the Nordics or the UK one day.
 
-## Paolo D'Amico, Growth Engineer
+### Paolo D'Amico, Growth Engineer
 
 I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical. I have 10+ years of experience as a software engineer and product manager.
 
 Prior to joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
 
-## Lottie Coxon, Designer
+### Lottie Coxon, Designer
 
 I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin). 
 
@@ -108,7 +109,7 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 *French accent* C’est la Vie
 
-## Yakko Majuri, Technical Writer and Developer
+### Yakko Majuri, Technical Writer and Developer
 
 Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who has lived in 5 countries across 4 continents.
 
@@ -121,3 +122,98 @@ For the past three years, I developed a nice habit of writing about my projects,
 When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain. 
 
 Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime. If that means anything. 
+
+## Contributors
+
+<a href="https://github.com/timgl"><img src="https://avatars1.githubusercontent.com/u/1727427?v=4" title="timgl" class="contributor-faces"></a>
+<a href="https://github.com/jamesefhawkins"><img src="https://avatars3.githubusercontent.com/u/47497682?v=4" title="jamesefhawkins" class="contributor-faces"></a>
+<a href="https://github.com/mariusandra"><img src="https://avatars2.githubusercontent.com/u/53387?v=4" title="mariusandra" class="contributor-faces"></a>
+<a href="https://github.com/EDsCODE"><img src="https://avatars0.githubusercontent.com/u/13127476?v=4" title="EDsCODE" class="contributor-faces"></a>
+<a href="https://github.com/Twixes"><img src="https://avatars3.githubusercontent.com/u/4550621?v=4" title="Twixes" class="contributor-faces"></a>
+<a href="https://github.com/fuziontech"><img src="https://avatars0.githubusercontent.com/u/391319?v=4" title="fuziontech" class="contributor-faces"></a>
+<a href="https://github.com/ungless"><img src="https://avatars2.githubusercontent.com/u/8397061?v=4" title="ungless" class="contributor-faces"></a>
+<a href="https://github.com/berntgl"><img src="https://avatars1.githubusercontent.com/u/55957336?v=4" title="berntgl" class="contributor-faces"></a>
+<a href="https://github.com/lottiecoxon"><img src="https://avatars2.githubusercontent.com/u/65415371?v=4" title="lottiecoxon" class="contributor-faces"></a>
+<a href="https://github.com/yakkomajuri"><img src="https://avatars2.githubusercontent.com/u/38760734?v=4" title="yakkomajuri" class="contributor-faces"></a>
+<a href="https://github.com/paolodamico"><img src="https://avatars1.githubusercontent.com/u/5864173?v=4" title="paolodamico" class="contributor-faces"></a>
+<a href="https://github.com/dar-mehta"><img src="https://avatars3.githubusercontent.com/u/10489943?v=4" title="dar-mehta" class="contributor-faces"></a>
+<a href="https://github.com/bitbreakr"><img src="https://avatars3.githubusercontent.com/u/3123986?v=4" title="bitbreakr" class="contributor-faces"></a>
+<a href="https://github.com/Tannergoods"><img src="https://avatars1.githubusercontent.com/u/60791437?v=4" title="Tannergoods" class="contributor-faces"></a>
+<a href="https://github.com/casio"><img src="https://avatars0.githubusercontent.com/u/29784?v=4" title="casio" class="contributor-faces"></a>
+<a href="https://github.com/andreipopovici"><img src="https://avatars0.githubusercontent.com/u/1143417?v=4" title="andreipopovici" class="contributor-faces"></a>
+<a href="https://github.com/wundo"><img src="https://avatars0.githubusercontent.com/u/113942?v=4" title="wundo" class="contributor-faces"></a>
+<a href="https://github.com/paulanunda"><img src="https://avatars0.githubusercontent.com/u/155981?v=4" title="paulanunda" class="contributor-faces"></a>
+<a href="https://github.com/arosales"><img src="https://avatars3.githubusercontent.com/u/1707853?v=4" title="arosales" class="contributor-faces"></a>
+<a href="https://github.com/ChandanSagar"><img src="https://avatars3.githubusercontent.com/u/27363164?v=4" title="ChandanSagar" class="contributor-faces"></a>
+<a href="https://github.com/wadenick"><img src="https://avatars1.githubusercontent.com/u/9014043?v=4" title="wadenick" class="contributor-faces"></a>
+<a href="https://github.com/jgannondo"><img src="https://avatars0.githubusercontent.com/u/28159071?v=4" title="jgannondo" class="contributor-faces"></a>
+<a href="https://github.com/keladhruv"><img src="https://avatars3.githubusercontent.com/u/30433468?v=4" title="keladhruv" class="contributor-faces"></a>
+<a href="https://github.com/grellyd"><img src="https://avatars1.githubusercontent.com/u/7812612?v=4" title="grellyd" class="contributor-faces"></a>
+<a href="https://github.com/rberrelleza"><img src="https://avatars0.githubusercontent.com/u/475313?v=4" title="rberrelleza" class="contributor-faces"></a>
+<a href="https://github.com/scottcrawford03"><img src="https://avatars1.githubusercontent.com/u/8398867?v=4" title="scottcrawford03" class="contributor-faces"></a>
+<a href="https://github.com/annanay25"><img src="https://avatars2.githubusercontent.com/u/10982987?v=4" title="annanay25" class="contributor-faces"></a>
+<a href="https://github.com/cohix"><img src="https://avatars3.githubusercontent.com/u/5942370?v=4" title="cohix" class="contributor-faces"></a>
+<a href="https://github.com/gouthamve"><img src="https://avatars0.githubusercontent.com/u/7354143?v=4" title="gouthamve" class="contributor-faces"></a>
+<a href="https://github.com/alexellis"><img src="https://avatars1.githubusercontent.com/u/6358735?v=4" title="alexellis" class="contributor-faces"></a>
+<a href="https://github.com/prologic"><img src="https://avatars2.githubusercontent.com/u/1290234?v=4" title="prologic" class="contributor-faces"></a>
+<a href="https://github.com/jgustie"><img src="https://avatars2.githubusercontent.com/u/883981?v=4" title="jgustie" class="contributor-faces"></a>
+<a href="https://github.com/kubemq"><img src="https://avatars0.githubusercontent.com/u/45835100?v=4" title="kubemq" class="contributor-faces"></a>
+<a href="https://github.com/vania-pooh"><img src="https://avatars0.githubusercontent.com/u/829320?v=4" title="vania-pooh" class="contributor-faces"></a>
+<a href="https://github.com/irespaldiza"><img src="https://avatars0.githubusercontent.com/u/11633327?v=4" title="irespaldiza" class="contributor-faces"></a>
+<a href="https://github.com/croomes"><img src="https://avatars0.githubusercontent.com/u/211994?v=4" title="croomes" class="contributor-faces"></a>
+<a href="https://github.com/snormore"><img src="https://avatars1.githubusercontent.com/u/182290?v=4" title="snormore" class="contributor-faces"></a>
+<a href="https://github.com/faik"><img src="https://avatars3.githubusercontent.com/u/43129?v=4" title="faik" class="contributor-faces"></a>
+<a href="https://github.com/aandryashin"><img src="https://avatars1.githubusercontent.com/u/1412461?v=4" title="aandryashin" class="contributor-faces"></a>
+<a href="https://github.com/andrewsomething"><img src="https://avatars0.githubusercontent.com/u/46943?v=4" title="andrewsomething" class="contributor-faces"></a>
+<a href="https://github.com/Ferroin"><img src="https://avatars2.githubusercontent.com/u/905151?v=4" title="Ferroin" class="contributor-faces"></a>
+<a href="https://github.com/cpanato"><img src="https://avatars2.githubusercontent.com/u/4115580?v=4" title="cpanato" class="contributor-faces"></a>
+<a href="https://github.com/cakrit"><img src="https://avatars0.githubusercontent.com/u/43294513?v=4" title="cakrit" class="contributor-faces"></a>
+<a href="https://github.com/dkhenry"><img src="https://avatars2.githubusercontent.com/u/489643?v=4" title="dkhenry" class="contributor-faces"></a>
+<a href="https://github.com/oxplot"><img src="https://avatars1.githubusercontent.com/u/483682?v=4" title="oxplot" class="contributor-faces"></a>
+<a href="https://github.com/marc-barry"><img src="https://avatars1.githubusercontent.com/u/4965634?v=4" title="marc-barry" class="contributor-faces"></a>
+<a href="https://github.com/moabu"><img src="https://avatars3.githubusercontent.com/u/47318409?v=4" title="moabu" class="contributor-faces"></a>
+<a href="https://github.com/nawazdhandala"><img src="https://avatars1.githubusercontent.com/u/2697338?v=4" title="nawazdhandala" class="contributor-faces"></a>
+<a href="https://github.com/ihcsim"><img src="https://avatars1.githubusercontent.com/u/1330522?v=4" title="ihcsim" class="contributor-faces"></a>
+<a href="https://github.com/maclcky132"><img src="https://avatars2.githubusercontent.com/u/55850406?v=4" title="maclcky132" class="contributor-faces"></a>
+<a href="https://github.com/athreyaanand"><img src="https://avatars2.githubusercontent.com/u/31478366?v=4" title="athreyaanand" class="contributor-faces"></a>
+<a href="https://github.com/alexearnshaw"><img src="https://avatars2.githubusercontent.com/u/29064556?v=4" title="alexearnshaw" class="contributor-faces"></a>
+<a href="https://github.com/Algogator"><img src="https://avatars0.githubusercontent.com/u/1433469?v=4" title="Algogator" class="contributor-faces"></a>
+<a href="https://github.com/callumgare"><img src="https://avatars0.githubusercontent.com/u/346340?v=4" title="callumgare" class="contributor-faces"></a>
+<a href="https://github.com/DannyBen"><img src="https://avatars1.githubusercontent.com/u/2405099?v=4" title="DannyBen" class="contributor-faces"></a>
+<a href="https://github.com/Epskampie"><img src="https://avatars0.githubusercontent.com/u/1692043?v=4" title="Epskampie" class="contributor-faces"></a>
+<a href="https://github.com/itsjwala"><img src="https://avatars1.githubusercontent.com/u/24763310?v=4" title="itsjwala" class="contributor-faces"></a>
+<a href="https://github.com/J0"><img src="https://avatars0.githubusercontent.com/u/8011761?v=4" title="J0" class="contributor-faces"></a>
+<a href="https://github.com/hassan11196"><img src="https://avatars3.githubusercontent.com/u/33365802?v=4" title="hassan11196" class="contributor-faces"></a>
+<a href="https://github.com/rasulkireev"><img src="https://avatars2.githubusercontent.com/u/8257474?v=4" title="rasulkireev" class="contributor-faces"></a>
+<a href="https://github.com/sjain07"><img src="https://avatars2.githubusercontent.com/u/2438605?v=4" title="sjain07" class="contributor-faces"></a>
+<a href="https://github.com/bhavish-agarwal"><img src="https://avatars3.githubusercontent.com/u/14195048?v=4" title="bhavish-agarwal" class="contributor-faces"></a>
+<a href="https://github.com/gzog"><img src="https://avatars0.githubusercontent.com/u/1487006?v=4" title="gzog" class="contributor-faces"></a>
+<a href="https://github.com/Tmunayyer"><img src="https://avatars2.githubusercontent.com/u/29887304?v=4" title="Tmunayyer" class="contributor-faces"></a>
+<a href="https://github.com/macobo"><img src="https://avatars0.githubusercontent.com/u/148820?v=4" title="macobo" class="contributor-faces"></a>
+<a href="https://github.com/SanketDG"><img src="https://avatars3.githubusercontent.com/u/8980971?v=4" title="SanketDG" class="contributor-faces"></a>
+<a href="https://github.com/14MR"><img src="https://avatars1.githubusercontent.com/u/5824170?v=4" title="14MR" class="contributor-faces"></a>
+<a href="https://github.com/03difoha"><img src="https://avatars3.githubusercontent.com/u/8876615?v=4" title="03difoha" class="contributor-faces"></a>
+<a href="https://github.com/Kacppian"><img src="https://avatars1.githubusercontent.com/u/14990078?v=4" title="Kacppian" class="contributor-faces"></a>
+<a href="https://github.com/iM
+a"><img src="https://avatars3.githubusercontent.com/u/487897?v=4" title="iMerica" class="contributor-faces"></a>
+<a href="https://github.com/pedroapfilho"><img src="https://avatars2.githubusercontent.com/u/13142568?v=4" title="pedroapfilho" class="contributor-faces"></a>
+<a href="https://github.com/eLRuLL"><img src="https://avatars3.githubusercontent.com/u/1459486?v=4" title="eLRuLL" class="contributor-faces"></a>
+<a href="https://github.com/samcaspus"><img src="https://avatars0.githubusercontent.com/u/19220113?v=4" title="samcaspus" class="contributor-faces"></a>
+<a href="https://github.com/anoopemacs"><img src="https://avatars3.githubusercontent.com/u/12211622?v=4" title="anoopemacs" class="contributor-faces"></a>
+<a href="https://github.com/CaseGuide"><img src="https://avatars2.githubusercontent.com/u/33905722?v=4" title="CaseGuide" class="contributor-faces"></a>
+<a href="https://github.com/budnik"><img src="https://avatars0.githubusercontent.com/u/1160699?v=4" title="budnik" class="contributor-faces"></a>
+<a href="https://github.com/ellie"><img src="https://avatars1.githubusercontent.com/u/53315310?v=4" title="ellie" class="contributor-faces"></a>
+<a href="https://github.com/tirkarthi"><img src="https://avatars3.githubusercontent.com/u/3972343?v=4" title="tirkarthi" class="contributor-faces"></a>
+<a href="https://github.com/mrkurt"><img src="https://avatars1.githubusercontent.com/u/7724?v=4" title="mrkurt" class="contributor-faces"></a>
+<a href="https://github.com/manuelfcreis"><img src="https://avatars1.githubusercontent.com/u/29898180?v=4" title="manuelfcreis" class="contributor-faces"></a>
+<a href="https://github.com/maximmarakov"><img src="https://avatars1.githubusercontent.com/u/36736392?v=4" title="maximmarakov" class="contributor-faces"></a>
+<a href="https://github.com/mikeabrahamsen"><img src="https://avatars2.githubusercontent.com/u/467659?v=4" title="mikeabrahamsen" class="contributor-faces"></a>
+<a href="https://github.com/OriPekelman"><img src="https://avatars1.githubusercontent.com/u/138636?v=4" title="OriPekelman" class="contributor-faces"></a>
+<a href="https://github.com/sac0"><img src="https://avatars2.githubusercontent.com/u/20946852?v=4" title="sac0" class="contributor-faces"></a>
+<a href="https://github.com/sanketsaurav"><img src="https://avatars2.githubusercontent.com/u/881122?v=4" title="sanketsaurav" class="contributor-faces"></a>
+<a href="https://github.com/solnsubuga"><img src="https://avatars3.githubusercontent.com/u/23418080?v=4" title="solnsubuga" class="contributor-faces"></a>
+<a href="https://github.com/anandvenkat4"><img src="https://avatars2.githubusercontent.com/u/3582757?v=4" title="anandvenkat4" class="contributor-faces"></a>
+<a href="https://github.com/abhijitghate"><img src="https://avatars2.githubusercontent.com/u/11834249?v=4" title="abhijitghate" class="contributor-faces"></a>
+<a href="https://github.com/Jujhar"><img src="https://avatars0.githubusercontent.com/u/5521110?v=4" title="Jujhar" class="contributor-faces"></a>
+<a href="https://github.com/dts"><img src="https://avatars0.githubusercontent.com/u/273856?v=4" title="dts" class="contributor-faces"></a>
+<a href="https://github.com/rushabhnagda11"><img src="https://avatars1.githubusercontent.com/u/3235568?v=4" title="rushabhnagda11" class="contributor-faces"></a>

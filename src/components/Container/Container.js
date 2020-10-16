@@ -1,50 +1,17 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {
-  getMenuState,
-  isSidebarHide,
-  isAnchorHide,
-} from '../../store/selectors'
+import React from 'react'
 
-class Container extends Component {
-  render() {
-    const {
-      sidebarDocked,
-      onPostPage,
-      sidebarHide,
-      anchorHide,
-      className,
-      containerStyle={}
-    } = this.props
-
+function Container({ onPostPage, className, containerStyle = {}, children }) {
     return (
-      <div className={className}>
-        <div
-          style={{
-            margin: onPostPage ? 0 : '0 auto',
-            maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            marginTop:
-              !sidebarDocked && onPostPage && (!sidebarHide || !anchorHide)
-                ? 20
-                : 0,
-            ...containerStyle
-          }}
-        >
-          {this.props.children}
+        <div className={className + ' ' + (onPostPage && ' docs-container')}>
+            <div
+                style={{
+                    ...containerStyle,
+                }}
+            >
+                {children}
+            </div>
         </div>
-      </div>
     )
-  }
 }
 
-const mapStateToProps = state => {
-  return {
-    menuOpen: getMenuState(state).open,
-    nMenuItem: getMenuState(state).nItem,
-    sidebarHide: isSidebarHide(state),
-    anchorHide: isAnchorHide(state),
-  }
-}
-
-export default connect(mapStateToProps)(Container)
+export default Container

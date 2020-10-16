@@ -21,15 +21,15 @@ docker-compose -f docker-compose.dev.yml up
 
 ## Using virtualenv
 
-1. Make sure you have Python 3 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
-2. Make sure you have [Redis installed](https://redis.io/download) and running.
+1. Make sure you have Python 3.8 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
+2. Make sure you have [Redis installed](https://redis.io/download) and running. We recommend using version 5 or higher.
 
     ```bash
     # macOS (Homebrew)
     brew install redis && brew services start redis
     ```
 
-3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running. You may also try [Postgres.app](https://postgresapp.com/), but remember to follow the instructions to add `psql` to your `$PATH` if you do.
+3. Make sure you have [PostgreSQL installed](https://www.postgresql.org/download/) and running. We recommend using version 11 or higher. You may also try [Postgres.app](https://postgresapp.com/), but remember to follow the instructions to add `psql` to your `$PATH` if you do.
 
     ```bash
     # macOS (Homebrew)
@@ -40,6 +40,9 @@ docker-compose -f docker-compose.dev.yml up
     ```
     psql -d postgres
     CREATE DATABASE posthog;
+    CREATE DATABASE posthog_e2e_test;
+    CREATE USER posthog WITH ENCRYPTED PASSWORD 'posthog';
+    GRANT ALL PRIVILEGES ON DATABASE posthog, posthog_e2e_test TO posthog;
     ```
 5. Navigate into the correct folder (project's root directory): `cd posthog` 
 6. Run `python3 -m venv env` (creates virtual environment in current direction called 'env')
@@ -118,26 +121,5 @@ services:
 
 For more information on how to interface with the database, visit the [Clickhouse Docs](https://clickhouse.tech/docs/en/interfaces/).
     
-
-## Using Porter
-Porter allows you to develop remotely without having to run or setup Docker on your local machine. It runs the same Docker containers in the cloud and lets you develop directly inside the remotely hosted container while still using your favorite local tools. 
-
-### Get Started with 1-click
-
-<a target="_blank" href="http://api.getporter.dev/account/login?redirect=https://dashboard.getporter.dev/auth/check?initialize=posthog"><img src="https://storage.googleapis.com/porter-asssets/porter-develop.svg" width="170px" /></a>
-
-### Installing the Porter CLI
-1. `npm install -g porter-cli` (yarn is not supported at the moment) 
-2. After installation, log in through the Porter CLI via `porter login`.
-3. Clone the PostHog repository into your local folder and initialize:
-```bash
-git clone https://github.com/PostHog/posthog.git
-cd posthog
-porter init
-...
-(choose the posthog container)
-...
-porter logs
-```
-
-4. Once you confirm that everything has been compiled successfully from the logs, start syncing the folder via `porter sync`.
+4. Run migrations: `python manage.py migrate_clickhouse`
+5. Set environment variables: `PRIMARY_DB=clickhouse` and `CLICKHOUSE_SECURE=False`

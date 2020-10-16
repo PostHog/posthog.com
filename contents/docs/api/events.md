@@ -4,14 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
+<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
 
 In PostHog, there is an API endpoint available to see all events in your system and filter them.
 
-**Important:** While you can technically create new events with this API, it's much easier to [use the dedicated API](/docs/integrations/api) or [any of our libraries](/docs/integrations/api) for that.
+**Important:** To **create events** you should [use the dedicated event capture API](/docs/api/post-only-endpoints) or [one of our libraries](/docs/integrations).
 
 ## Pagination
 
-This endpoint has pagination. See [Pagination](/docs/api/api#pagination) for more info.
+This endpoint has pagination. See [Pagination](/docs/api/overview#pagination) for more info.
 
 ## List Trends
 

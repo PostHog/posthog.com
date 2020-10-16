@@ -4,44 +4,40 @@ sidebar: Docs
 showTitle: true
 ---
 
-The most critical thing that PostHog does is to capture Events from your website or application. For example, if a user clicks a button, or visits a URL – those are Events.
+The most critical thing that PostHog does is to capture events from your website or application. For example, if a user clicks a button or visits a URL – those are events.
+
+## Demo Video
+
+If you'd like to watch a video about our Events feature, check out our demo video below. It is set to start on the Events section:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50?start=13" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Live Events
 
-Go to ‘Events’ in the left hand navigation:
+![Events table](../../images/features/events/live-events.png)
 
-![left hand navigation - events selected](../../images/03/Posthog-15.png)
+To see your live events table, click 'Events' on the left sidebar.
 
-You will see a live feed of Events as they are happening.
+Here you will see a live feed of Events as they are happening. 
 
-![live feed of events](../../images/02/Screenshot-2020-02-09-at-18.05.28.png)
 <br>
 
 ## Event Properties
 
-You can view the Event properties by clicking on the items in the ‘Event’ column:
+You can view the properties of each event by clicking on the items in the ‘Event’ column:
 
-![event properties](../../images/02/Screenshot-2020-02-09-at-18.06.41.png)
+![Events table](../../images/features/events/event-properties.png)
 
-You can also click the ‘Person’ to view a full list of the Event history of that User.
-<br>
+You can also click each person/user to view a their entire event history.
 
-## Events by Path
-
-You can choose to view just the events at a particular Path. The quickest way to do this is to click the Event path item.
 <br>
 
 ## Event Filtering
 
-Alternatively, you can filter the Events:
+You will see in the first pictures on this page that there is a blue 'posthog team' button. That button represents a filter applied to this table.
 
-![event filtering](../../images/03/Posthog-11.png)
+You can filter events by [properties](/docs/integrations/js-integration#sending-user-information) and [Cohorts](/docs/features/cohorts). In the example picture, 'posthog team' is a cohort made up of users with emails that contain "posthog.com" i.e. our team.
 
-You can have one or more filters.
-
-These refine the view to show just Events with a selected property:
-
-![Event property filtering](../../images/02/Screenshot-2020-02-09-at-18.09.29.png)
 <br>
 
 ## Autocapture Event Tracking
@@ -72,7 +68,7 @@ There are two ways of passing data to PostHog – the API or through the JS snip
 
 ### API
 
-Our API documentation is available [here](/docs/integrations/api).
+Our API documentation is available [here](/docs/api/overview).
 <br>
 
 ### JS Snippet

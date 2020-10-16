@@ -1,0 +1,117 @@
+.featured-section-left-wrapper {
+    .fs-wrapper {
+        height: 500px;
+        width: 100vw;
+        position: relative;
+    }
+
+    .row {
+        height: 450px;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        /* background-color: rgba(249,97,50,0.2); */
+    }
+
+    .list-item {
+        position: absolute;
+        left: calc(3 / 24 * 100vw);
+        width: calc(1 / 12 * 100vw);
+    }
+
+    .col {
+        position: absolute;
+        width: calc(7 / 12 * 100vw);
+        max-width: 720px;
+        left: calc(5 / 24 * 100vw);
+    }
+
+    .fs-left-paragraph {
+        width: calc(1 / 5 * 100vw);
+    }
+
+    .section-banner-image {
+        left: 50vw;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: left top;
+    }
+
+    .fs-left-header-2 {
+        max-width: calc(2 / 5 * 100vw);
+    }
+
+    @media screen and (min-width: 1440px) {
+        .section-banner-image {
+            left: calc(720px);
+            width: calc(720px + ((100vw - 1440px) / 2));
+        }
+        .list-item {
+            left: calc(3 / 24 * 1440px);
+            width: calc(1 / 12 * 1440px);
+        }
+        .col {
+            width: 720px;
+            left: calc(5 / 24 * 1440px);
+        }
+        .fs-left-paragraph {
+            width: calc(1 / 5 * 1440px);
+        }
+    }
+
+    @media screen and (min-width: 1680px) {
+        .fs-left-header-2 {
+            max-width: calc(1 / 5 * 100vw);
+        }
+    }
+
+    @media screen and (max-width: 834px) {
+        .fs-wrapper {
+            height: auto;
+        }
+        .row {
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15vw;
+            min-height: 600px;
+            height: auto;
+        }
+        .section-banner-image {
+            position: relative;
+            background-position: center top;
+            background-size: 426px 283px !important;
+            height: 283px !important;
+            width: 426px !important;
+            left: 0;
+            top: 0;
+            max-width: 100vw;
+        }
+
+        .list-item {
+            position: relative;
+            left: 0;
+            text-align: center;
+            width: 70vw;
+        }
+        .col {
+            position: relative;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 282px;
+            height: auto;
+        }
+        .fs-left-paragraph {
+            text-align: center;
+            width: 282px;
+        }
+        .fs-left-header-2 {
+            max-width: calc(3 / 5 * 100vw);
+        }
+        .revHiddenBreak {
+            display: none;
+        }
+    }
+}
