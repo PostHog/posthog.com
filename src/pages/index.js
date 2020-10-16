@@ -52,7 +52,7 @@ function IndexPage() {
                         <div className="pageHeader row">
                             <h1>A complete product analytics stack, to deploy on your infrastructure.</h1>
                         </div>
-                        <Spacer size={25} onlyDesktop={true} />
+                        <Spacer height={25} onlyDesktop={true} />
                         <div className="topPageRow row">
                             <div className="topPageCol1">
                                 <div className="joinUsersText">
