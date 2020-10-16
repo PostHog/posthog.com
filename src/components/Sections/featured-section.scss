@@ -28,12 +28,7 @@
 
     .fs-paragraph {
         font-size: 18px;
-    }
-
-    @media screen and (min-width: 1081px) and (max-width: 1200px) {
-        .fs-paragraph {
-            width: calc(3 / 10 * 100vw) !important;
-        }
+        width: calc(3 / 10 * 100vw) !important;
     }
 
     @media screen and (max-width: 1080px) {
@@ -93,5 +88,34 @@
         .col {
             width: 282px !important;
         }
+        .fs-paragraph {
+            font-size: 16px !important;
+        }
+    }
+
+    @media screen and (min-width: 1600px) and (max-width: 2099px) {
+        .fs-header-2 {
+            width: calc(5 / 20 * 100vw) !important;
+        }
+        .fs-paragraph {
+            width: calc(4 / 20 * 100vw) !important;
+        }
+    }
+
+    @media screen and (min-width: 2100px) {
+        .fs-header-2 {
+            width: calc(3 / 20 * 100vw) !important;
+        }
+        .fs-paragraph {
+            max-width: 450px;
+            width: calc(4 / 20 * 100vw);
+            font-size: 24px !important;
+        }
+    }
+
+    @media screen and (min-width: 1680px) {
+        /*         .fs-left-header-2 {
+            max-width: calc(1 / 5 * 100vw);
+        } */
     }
 }

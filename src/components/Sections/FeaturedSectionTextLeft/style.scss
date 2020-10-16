@@ -38,7 +38,7 @@
             left: calc(5 / 24 * 1440px);
         }
         .fs-left-paragraph {
-            width: calc(1 / 5 * 1440px);
+            width: calc(1 / 5 * 1440px) !important;
         }
     }
 
