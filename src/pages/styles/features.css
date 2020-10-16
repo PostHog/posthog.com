@@ -223,73 +223,6 @@ h2.number {
     }
 }
 
-/* - START NOW BUTTON */
-
-.startNowWrapper {
-    position: relative;
-    width: 100vw;
-    max-width: 1440px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 260px;
-    margin-bottom: 40px;
-}
-
-.startNowRow {
-    position: relative;
-    width: 402px;
-    max-width: 1440px;
-    display: flex;
-    flex-direction: row;
-    align-content: flex-start;
-    align-items: flex-end;
-    height: 130px;
-    padding-left: 0;
-    left: calc(36 / 1440 * 100vw);
-}
-
-.startNowButton {
-    position: relative;
-    align-self: center;
-    width: 330px;
-    height: 64px;
-    font-size: 24px;
-    background-color: #1d4aff;
-    border-color: #1d4aff;
-    color: #ffffff;
-}
-
-.startNowButton:hover {
-    background-color: #fff;
-    color: #1d4aff;
-    border-color: #1d4aff;
-}
-
-.startNowRow img {
-    align-self: flex-start;
-}
-
-@media screen and (max-width: 834px) {
-    .startNowWrapper {
-        height: 100px;
-    }
-    .startNowRow {
-        left: calc((20 / 834) * 100vw);
-        height: 72px;
-        width: 220px;
-    }
-    .startNowRow img {
-        width: 40px;
-        height: 40px;
-    }
-    .startNowButton {
-        width: 180px;
-        height: 32px;
-        font-size: 14px;
-    }
-}
-
 /* INDIVIDUAL STYLING */
 
 /* - SELF HOSTED */
@@ -466,40 +399,5 @@ h2.number {
     }
     .rowImg.row03.retention {
         background-image: url('../../images/retention-3-mobile.svg') !important;
-    }
-}
-
-/* - FEATURE FLAGS */
-
-.head.featureFlags {
-    background-image: url('../../images/feature-flags-head.svg') !important;
-    background-size: 500px auto;
-    background-position: 800px center;
-}
-
-.rowImg.row01.featureFlags {
-    background-image: url('../../images/feature-flags-1.svg') !important;
-}
-
-.rowImg.row02.featureFlags {
-    background-image: url('../../images/feature-flags-2.svg') !important;
-}
-
-.rowImg.row03.featureFlags {
-    background-image: url('../../images/feature-flags-3.svg') !important;
-}
-
-@media screen and (max-width: 834px) {
-    .head.featureFlags {
-        background-size: 300px auto;
-    }
-    .rowImg.row01.featureFlags {
-        background-image: url('../../images/feature-flags-1-mobile.svg') !important;
-    }
-    .rowImg.row02.featureFlags {
-        background-image: url('../../images/feature-flags-2-mobile.svg') !important;
-    }
-    .rowImg.row03.featureFlags {
-        background-image: url('../../images/feature-flags-3-mobile.svg') !important;
     }
 }

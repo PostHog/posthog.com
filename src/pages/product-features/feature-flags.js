@@ -1,10 +1,7 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import '../styles/features.css'
 import '../../components/Layout/Layout.css'
 import Layout from '../../components/Layout'
-import Button from 'antd/lib/button'
-import rays from '../../images/rays.svg'
 import { OtherFeaturesBlock } from '../../components/OtherFeaturesBlock'
 import { PageHeader } from '../../components/PageHeader'
 import { FeaturedSectionTextLeft } from '../../components/Sections/FeaturedSectionTextLeft'
@@ -13,6 +10,7 @@ import { Spacer } from '../../components/Spacer'
 import featureFlagsImg1 from '../../images/feature-flags-1.svg'
 import featureFlagsImg2 from '../../images/feature-flags-2.svg'
 import featureFlagsImg3 from '../../images/feature-flags-3.svg'
+import { StartNowButton } from '../../StartNowButton'
 
 function ProductFeatures() {
     return (
@@ -56,16 +54,8 @@ function ProductFeatures() {
                     image={featureFlagsImg3}
                     color="red"
                 />
-                <div className="startNowWrapper">
-                    <div className="startNowRow">
-                        <Link to="/trial/">
-                            <Button type="primary" className="startNowButton">
-                                Start now
-                            </Button>
-                        </Link>
-                        <img src={rays} />
-                    </div>
-                </div>
+                <Spacer onlyDesktop={true} />
+                <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="feature-flags" />
             </div>
         </Layout>
