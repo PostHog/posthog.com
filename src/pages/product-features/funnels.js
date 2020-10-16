@@ -12,7 +12,7 @@ import funnelsImg2 from '../../images/funnels-2-mobile.svg'
 import funnelsImg3 from '../../images/funnels-3-mobile.svg'
 import { StartNowButton } from '../../StartNowButton'
 
-function ProductFeatures() {
+function FunnelsPage() {
     return (
         <Layout>
             <PageHeader
@@ -62,4 +62,4 @@ function ProductFeatures() {
     )
 }
 
-export default ProductFeatures
+export default FunnelsPage
