@@ -28,9 +28,11 @@ export const FeaturedSectionTextLeft = ({
         width: imgDesktopWidth,
     }
 
+    const wrapperHeight = 450 + (3 * descriptionText.length) / 7
+
     return (
         <div className="featured-section-left-wrapper">
-            <div className="fs-wrapper feature-section">
+            <div className="fs-wrapper feature-section" style={{ height: wrapperHeight }}>
                 {/*02 - Understand how traffic really flows through your app*/}
                 <div className="row">
                     <div className="section-banner-image" style={imageStyle} />
