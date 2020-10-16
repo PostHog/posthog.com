@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
@@ -130,6 +130,11 @@ export function StartupForm({ title, startup = true, subtitle, onSubmit }) {
 }
 
 const StartupsPage = () => {
+    useEffect(() => {
+        if (window) {
+            window.location.href = '/pricing#startup-plan'
+        }
+    }, [])
     return (
         <Layout className="index-page">
             <SEO title="PostHog for Startups" description="We offer a special deal - startups get going for free." />
@@ -147,7 +152,8 @@ const StartupsPage = () => {
                     <p>Customer data is critical to building something people want.</p>
                     <p>
                         We are giving early-stage startups PostHog's premium features for free for up to 12 months -
-                        along with other perks.
+                        along with other perks. <b>Our only ask?</b> Have a quick 30-min call every quarter with us.
+                        Your input will be super helpful to help us improve our product.
                     </p>
                 </Col>
             </Row>
@@ -238,6 +244,10 @@ const StartupsPage = () => {
                                             After 12 months, manage it yourself for free, or have the PostHog team
                                             continue to support your deployment
                                         </li>
+                                        <li>
+                                            <b>Our ask: </b> Have a quick 30-min call with us every quarter to help us
+                                            improve.
+                                        </li>
                                         <p>
                                             <Link to="startups#apply_section">
                                                 <Button type="primary">Apply</Button>
@@ -260,6 +270,10 @@ const StartupsPage = () => {
                                         <li>12 months data history</li>
                                         <li>Community support</li>
                                         <li>After 12 months, we charge based on event volumes</li>
+                                        <li>
+                                            <b>Our ask: </b> Have a quick 30-min call with us every quarter to help us
+                                            improve.
+                                        </li>
                                         <p>
                                             <Link to="startups#apply_section">
                                                 <Button type="primary">Apply</Button>

@@ -15,7 +15,7 @@ export const FeaturesComparisonTable = () => {
             </div>
 
             <span className="table-borders features">
-                <table className="center">
+                <table>
                     <thead>
                         <tr>
                             <th>Feature</th>
@@ -39,7 +39,7 @@ export const FeaturesComparisonTable = () => {
                     </thead>
                     <tbody>
                         {featuresComparisonData.map((feature) => (
-                            <tr>
+                            <tr key={feature.title.toLowerCase()}>
                                 <td>{feature.title}</td>
                                 <td>{feature.posthog ? '✔' : ''}</td>
                                 <td>{feature.amplitude ? '✔' : ''}</td>

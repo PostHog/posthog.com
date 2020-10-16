@@ -26,16 +26,16 @@ Three days before we release, on Monday, we institute a code freeze. We branch m
 
 <input type="checkbox"/> Write up the PostHog Array [blog post](posthog-array)
 
-<input type="checkbox"/> Copy from PostHog Array and write up the changes into `CHANGELOG.md`
+<input type="checkbox"/> Copy from PostHog Array and write up the changes into `CHANGELOG.md` following the structure of the previous release
   - `git add CHANGELOG.md`
   - `git commit -m "Changelog version 1.7.0"`
 
 <br />
 
 
-<input type="checkbox"/> Update the `VERSION` in `posthog/settings.py`
+<input type="checkbox"/> Update the `VERSION` in `posthog/version.py`
   - `git checkout release-[version]`
-  - `git add posthog/settings.py`
+  - `git add posthog/version.py`
   - `git commit -m "Bump version [version]"`
 
 <br />

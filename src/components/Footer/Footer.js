@@ -28,7 +28,7 @@ class Footer extends Component {
                             <FooterListItem to="/product-features">Features</FooterListItem>
                             <FooterListItem to="/pricing">Pricing</FooterListItem>
                             <FooterListItem to="/faq">FAQ</FooterListItem>
-                            <FooterListItem to="/startups">PostHog for Startups</FooterListItem>
+                            <FooterListItem to="/pricing#startup-plan">PostHog for Startups</FooterListItem>
                         </Col>
                         <Col xs={24} sm={24} md={4} lg={4} xl={4} className="gutter-row">
                             <span className="footer-links-header">Resources</span>

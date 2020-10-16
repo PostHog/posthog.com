@@ -165,22 +165,26 @@ const PricingPage = () => {
                     <br />
                     <Row gutter={[24, 24]}>
                         <Col span={24} align="middle">
-                            <Card className="p-startup-card">
+                            <Card className="p-startup-card" id="startup-plan">
                                 <div>
-                                    <div>
-                                        <img src={imgRocket} alt="" />
-                                    </div>
                                     <div className="p-main">
-                                        <h4>Are you a startup?</h4>
-                                        <span>
+                                        <h4>
+                                            <img
+                                                src={imgRocket}
+                                                className="startup-rocket-img"
+                                                style={{ width: 20, marginRight: 10 }}
+                                                alt="rocket"
+                                            />
+                                            Are you a startup?
+                                        </h4>
+                                        <p style={{ maxWidth: '50vw' }}>
                                             We've got your back! Find product-market fit, <b>completely free</b> with a
-                                            tool that does the legwork for you.
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <Link to="/startups">
-                                            <Button type="primary">Learn more</Button>
-                                        </Link>
+                                            tool that does the legwork for you. Try PostHog for free for 12 months with
+                                            a volume of up to 20 million events per month.
+                                        </p>
+                                        <p>
+                                            Contact us at <i>hey@posthog.com</i> for more details.
+                                        </p>
                                     </div>
                                 </div>
                             </Card>

@@ -9,9 +9,9 @@ export const FeaturedSectionTextLeft = ({
     descriptionText,
     image,
     color = 'yellow',
-    imgDesktopHeight = '413px',
-    imgDesktopWidth = '621px',
-    mobileSpacerHeight = '50px',
+    imgDesktopHeight = 413,
+    imgDesktopWidth = 621,
+    mobileSpacerHeight = 50,
     imgStyle = {},
 }) => {
     const styleMap = {
@@ -24,13 +24,12 @@ export const FeaturedSectionTextLeft = ({
     const imageStyle = {
         ...imgStyle,
         backgroundImage: `url(${image})`,
-        backgroundSize: imgStyle.backgroundSize ? imgStyle.backgroundSize : `${imgDesktopWidth} ${imgDesktopHeight}`,
+        backgroundSize: imgStyle.backgroundSize ? imgStyle.backgroundSize : `${imgDesktopWidth}px ${imgDesktopHeight}px`,
         height: imgDesktopHeight,
         width: imgDesktopWidth,
     }
 
-    /*     const wrapperHeight = 450 + (3 * descriptionText.length) / 7
-    style={{ height: wrapperHeight }} */
+
     return (
         <div className="featured-section-left-wrapper featured-section-main">
             <div className="fs-wrapper feature-section">
