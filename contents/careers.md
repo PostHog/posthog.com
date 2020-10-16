@@ -8,21 +8,21 @@ showTitle: true
 
 PostHog is increasing the number of successful products in the world.
 
-We do that by providing a platform for open-source product analytics. This helps software teams understand their user behavior.
+We do that by providing a platform for open-source product analytics. This helps software teams understand user behavior.
 
 The analytics landscape has historically been very fragmented. There are many tools that provide value individually, but integrating the basic features across many verticals provides much more value.
 
-Today, we are focussed on community growth around our open source project. We aim to provide the core features of many tools, that traditionally would all sit in silos. This, coupled with the ability to use the software for free, for life, is making PostHog a no-brainer for every new software project.
+Today, we are focused on community growth around our open source project. We aim to provide the core features of many tools, that traditionally would all sit in silos. This, coupled with the ability to use the software for free, for life, is making PostHog a no-brainer for every new software project.
 
 We've made a crazy amount of progress to date.
 
-We took party in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most succesful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with just a 4 week old product.
+We took party in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most succesful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just 4 weeks old.
 
-Our GitHub repo has over over 3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
+Our GitHub repo has over over 3.2k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
-What does this mean for you? We have a lot of capital, but we're a lean, strong team - so you've the opportunity to have a huge impact.
+What does this mean for you? We have a lot of capital, but we're a lean, strong team - so you've got the opportunity to have a huge impact.
 
 ## Our Culture
 
@@ -77,9 +77,9 @@ We will schedule 2 to 3 short calls with our founders and team. These will focus
 
 If you succeed with the above, we will set you up with a *PostHog SuperDay*.
 
-This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to succeed. You'll need to be fully engaged with a steady supply of tea, coffee and biscuits.
+This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
 
-We set you up with a Slack support channel with several of our core team. We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+We'll set you up with a Slack support channel with several of our core team. We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
 
 This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting paid, of course.
 
@@ -101,11 +101,11 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 
 ## Open Application
 
-We take exceptional people when they come along, and we really mean that. That's why this is before the list of open roles.
+We take exceptional people when they come along, and we really mean that.
 
 If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
 
-We take this applications seriously, and that's why they're listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
+We take this application seriously, and that's why it's listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
 
 ## Front-End Developer
 
@@ -134,7 +134,7 @@ Email a thoughtful cover letter to [tim@posthog.com](mailto:tim@posthog.com). A 
 * What makes you a great early hire into our first 15 people
 * Something weird you've learned in your career
 * Relevant experience/projects you've done (including links if possible)
-* Links to your LinkedIn / resume / GitHub (optional)
+* Links to your LinkedIn / Resume / GitHub (optional)
 * How you found us
 
 # What Is It Like?
