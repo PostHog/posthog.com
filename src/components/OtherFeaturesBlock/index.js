@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import featuresPageData from './features'
 import './other-features.scss'
+import { Spacer } from '../Spacer'
 
 export const OtherFeaturesBlock = ({ currentPageKey }) => {
     const pagesToDisplay = featuresPageData.filter((page) => page.key !== currentPageKey)
@@ -31,6 +32,7 @@ export const OtherFeaturesBlock = ({ currentPageKey }) => {
                         <h4 className="header-4">{pagesToDisplay[4].title}</h4>
                     </Link>
                 </div>
+                <Spacer onlyDesktop={true} />
             </div>
         </div>
     )

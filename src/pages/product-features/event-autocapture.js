@@ -1,12 +1,16 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import '../styles/features.css'
 import '../../components/Layout/Layout.css'
 import Layout from '../../components/Layout'
-import Button from 'antd/lib/button'
-import rays from '../../images/rays.svg'
 import { OtherFeaturesBlock } from '../../components/OtherFeaturesBlock'
 import { PageHeader } from '../../components/PageHeader'
+import { Spacer } from '../../components/Spacer'
+import { FeaturedSectionTextLeft } from '../../components/Sections/FeaturedSectionTextLeft'
+import { FeaturedSectionTextRight } from '../../components/Sections/FeaturedSectionTextRight'
+import autocaptureImg1 from '../../images/event-autocapture-1.svg'
+import autocaptureImg2 from '../../images/event-autocapture-2.svg'
+import autocaptureImg3 from '../../images/event-autocapture-3.svg'
+import { StartNowButton } from '../../StartNowButton'
 
 function ProductFeatures() {
     return (
@@ -17,61 +21,33 @@ function ProductFeatures() {
                 styleKey="autocapture"
                 bgColor="red"
             />
-            <div className="featuresWrapper eventAutocapture">
-                <div className="row01 featuresRow">
-                    <h2 className="number row01">01</h2>
-                    <div className="rowContents row01">
-                        <h2>Get started with one click</h2>
-                        <hr className="redLine" />
-                        <p>
-                            PostHog starts capturing events from the second the setup is complete - no extra steps
-                            required. We also provide various ways to deploy in just one click, such as{' '}
-                            <Link to="/docs/deployment/deploy-heroku">Heroku</Link>,{' '}
-                            <Link to="/docs/deployment/deploy-heroku">AWS</Link>, and{' '}
-                            <Link to="/docs/deployment/deploy-linode">Linode</Link>. This way, you can go from first
-                            hearing about PostHog to capturing your first event in less than an hour.
-                        </p>
-                    </div>
-                    <div className="rowImg row01 eventAutocapture" />
-                </div>
-                <div className="row02 featuresRow">
-                    <div className="rowImg row02 eventAutocapture" />
-                    <h2 className="number row02">02</h2>
-                    <div className="rowContents row02">
-                        <h2>Don't miss a thing</h2>
-                        <hr className="redLine" />
-                        <p>
-                            Event autocapture means you don’t have to worry about missing important events while you
-                            figure out your setup. By default, PostHog captures a wide variety of events that are
-                            important to you, from page views to button clicks. As such, from the moment you deploy,
-                            you’re already gathering useful data!
-                        </p>
-                    </div>
-                </div>
-                <div className="row03 featuresRow">
-                    <h2 className="number row03">03</h2>
-                    <div className="rowContents row03">
-                        <h2>Customize as you wish</h2>
-                        <hr className="redLine" />
-                        <p>
-                            Event autocapture is a great way to get started, but you might want some added customization
-                            to improve your analytics processes. With PostHog you can set up actions (link to Actions)
-                            for new or already-existing events. This helps you filter through autocaptured events, as
-                            well as create more complex logic that isn’t possible with just autocapture.
-                        </p>
-                    </div>
-                    <div className="rowImg row03 eventAutocapture" />
-                </div>
-                <div className="startNowWrapper">
-                    <div className="startNowRow">
-                        <Link to="/trial/">
-                            <Button type="primary" className="startNowButton">
-                                Start now
-                            </Button>
-                        </Link>
-                        <img src={rays} />
-                    </div>
-                </div>
+            <div className="featuresWrapper">
+                <Spacer />
+                <FeaturedSectionTextLeft
+                    headerText="Get started with one click"
+                    listItem="01"
+                    descriptionText={`PostHog starts capturing events from the second the setup is complete - no extra steps required. We also provide various ways to deploy in just one click, such as Heroku, AWS, and Linode. This way, you can go from first hearing about PostHog to capturing your first event in less than an hour.`}
+                    image={autocaptureImg1}
+                    color="red"
+                />
+                <Spacer onlyDesktop={true} />
+                <FeaturedSectionTextRight
+                    headerText="Don't miss a thing"
+                    listItem="02"
+                    descriptionText={`Event autocapture means you don’t have to worry about missing important events while you figure out your setup. By default, PostHog captures a wide variety of events that are important to you, from page views to button clicks. As such, from the moment you deploy, you’re already gathering useful data!`}
+                    image={autocaptureImg2}
+                    color="red"
+                />
+                <Spacer onlyDesktop={true} />
+                <FeaturedSectionTextLeft
+                    headerText="Customize as you wish"
+                    listItem="03"
+                    descriptionText={`Event autocapture is a great way to get started, but you might want some added customization to improve your analytics processes. With PostHog you can set up actions for new or already-existing events. This helps you filter through autocaptured events, as well as create more complex logic that isn’t possible with just autocapture.`}
+                    image={autocaptureImg3}
+                    color="red"
+                />
+                <Spacer onlyDesktop={true} />
+                <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="autocapture" />
             </div>
         </Layout>
