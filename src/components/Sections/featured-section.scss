@@ -30,6 +30,12 @@
         font-size: 18px;
     }
 
+    @media screen and (min-width: 1081px) and (max-width: 1200px) {
+        .fs-paragraph {
+            width: calc(3 / 10 * 100vw) !important;
+        }
+    }
+
     @media screen and (max-width: 1080px) {
         .fs-wrapper {
             height: auto !important;
