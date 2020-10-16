@@ -32,15 +32,15 @@ Jump straight in:
 
 ### Adding TLS/SSL support
 
->_Definitely_ setup for TLS (Transport Layer Security)!
+> You should _definitely_ setup TLS ([Read more](#important-points))!
 
-1. Go to Services > EC2 > Load balancers
+1. Go to 'Services' > 'EC2' > 'Load balancers'
 
-1. Find Public load balancer > Listeners
+1. Navigate to 'Public load balancer' > 'Listeners'
 
-1. Add listener for protocol HTTPS, import or add your SSL certificate
+1. Add a listener for the protocol HTTPS, import or add your SSL certificate
 
-1. After verifying it works, you can insecure access by removing port 80 (http) listener.
+1. After verifying it works, you can disable insecure access by removing the listener for port 80 (HTTP).
 
 ## Updating AWS Fargate
 
