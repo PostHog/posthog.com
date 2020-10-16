@@ -77,9 +77,9 @@ We will schedule 2 to 3 short calls with our founders and team. These will focus
 
 If you succeed with the above, we will set you up with a *PostHog SuperDay*.
 
-This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. You'll need to be fully engaged with a steady supply of tea, coffee and biscuits.
+This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to succeed. You'll need to be fully engaged with a steady supply of tea, coffee and biscuits.
 
-We set you up with a slack channel with several of our core team. We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+We set you up with a Slack support channel with several of our core team. We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
 
 This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting paid, of course.
 
@@ -99,15 +99,15 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 
 # Open Roles
 
-## Unspecified
+## Open Application
 
-We take exceptional people when they come along, and we really mean that.
+We take exceptional people when they come along, and we really mean that. That's why this is before the list of open roles.
 
 If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
 
 We take this applications seriously, and that's why they're listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
 
-## UX Developer/Engineer
+## Front-End Developer
 
 PostHog is building its first design team. We are looking for a proactive, fast, and passionate UX Developer to take our design to a world class level. Our product and website went viral with a basic MVP, and we're determined to be best-in-class with our UX.
 
