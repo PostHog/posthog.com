@@ -48,16 +48,19 @@
         }
     }
 
-    @media screen and (max-width: 834px) {
+    @media screen and (max-width: 1080px) {
         .row {
             min-height: 600px;
         }
         .fs-left-paragraph {
             text-align: center;
-            width: 282px;
+            width: calc(7 / 10 * 100vw) !important;
         }
         .fs-left-header-2 {
             max-width: calc(3 / 5 * 100vw);
         }
+    }
+
+    @media screen and (max-width: 834px) {
     }
 }

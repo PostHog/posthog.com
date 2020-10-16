@@ -23,10 +23,14 @@
     }
 
     .fs-header-2 {
-        max-width: calc(2 / 5 * 100vw) !important;
+        max-width: calc(3 / 10 * 100vw);
     }
 
-    @media screen and (max-width: 834px) {
+    .fs-paragraph {
+        font-size: 18px;
+    }
+
+    @media screen and (max-width: 1080px) {
         .fs-wrapper {
             height: auto !important;
         }
@@ -48,6 +52,7 @@
         }
 
         .list-item {
+            margin-top: 10px;
             position: relative !important;
             left: 0 !important;
             text-align: center !important;
@@ -60,14 +65,27 @@
             flex-direction: column !important;
             align-items: center !important;
             text-align: center !important;
-            width: 282px !important;
             height: auto !important;
+            width: calc(7 / 10 * 100vw) !important;
         }
         .revHiddenBreak {
             display: none !important;
         }
         .fs-header-2 {
+            max-width: 800px !important;
+            width: calc(6 / 10 * 100vw);
+        }
+    }
+
+    @media screen and (max-width: 834px) {
+        .fs-header-2 {
             max-width: calc(3 / 5 * 100vw) !important;
+        }
+        .list-item {
+            margin-top: 0 !important;
+        }
+        .col {
+            width: 282px !important;
         }
     }
 }
