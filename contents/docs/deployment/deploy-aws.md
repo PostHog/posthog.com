@@ -18,7 +18,7 @@ Jump straight in:
 
 [![Launch AWS Stack](../../../src/images/deploy-button-aws.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Posthog&templateURL=https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml)
 
-1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors or setup SMTP configs as described below
+1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors or setup SMTP configs as described below.
 
 1. Review the rest of the Configuration Wizard pages
 
@@ -26,11 +26,21 @@ Jump straight in:
 
 1. If you are ready, click **Create Stack**!
 
-1. Once deployment completes look under **Options** for the Publicly facing ELB Host
+1. Once deployment completes look under **Outputs** for `ExternalUrl`
 
 1. Review all parameters in the config and ensure everything is nominal
 
->_Definitely_ setup for TLS (Transport Layer Security)! Once you have TLS setup for your ELB (Elastic Load Balancing) you should disable insecure access via HTTP by removing the environment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploying the updated Task definition revision.
+### Adding TLS/SSL support
+
+>_Definitely_ setup for TLS (Transport Layer Security)!
+
+1. Go to Services > EC2 > Load balancers
+
+1. Find Public load balancer > Listeners
+
+1. Add listener for protocol HTTPS, import or add your SSL certificate
+
+1. After verifying it works, you can insecure access by removing port 80 (http) listener.
 
 ## Updating AWS Fargate
 
