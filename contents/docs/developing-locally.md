@@ -89,8 +89,6 @@ Run `./bin/start-frontend`
 
 Run `./bin/tests`
 
-<br />
-
 ### Running Clickhouse locally
 
 0. Ensure you have Docker and Docker Compose installed
