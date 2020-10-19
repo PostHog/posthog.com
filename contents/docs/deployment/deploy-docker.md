@@ -63,15 +63,10 @@ docker-compose up -d
 
 ### Local Installation
 
-If you're running locally:
-
-- Make sure to **add** `DEBUG=1` as an environment variable - this will prevent an infinite loop of SSL redirects.
-- PostHog assumes you want to use SSL and will redirect you to `https://...`. To avoid this, set `DISABLE_SECURE_SSL_REDIRECT=1`
-
-- With these two recommendations your new `docker-compose` statement will look like this:
+If you're running locally, use our `docker-compose.dev.yml` file:
 
 ```bash
-docker-compose up -d -e DEBUG=1 DISABLE_SECURE_SSL_REDIRECT=1
+docker-compose -f docker-compose.dev.yml up
 ```
 
 ### External Postgres Database
