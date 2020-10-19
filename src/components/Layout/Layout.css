@@ -459,8 +459,11 @@ blockquote {
     margin-top: 0;
     padding: 20px;
     border-radius: 10px;
-    background-color: #fff6e6;
+    background-color: #fff7ea;
     margin-bottom: 1.45rem;
+}
+.warning-note {
+    background-color: #ffdbd5;
 }
 form {
     margin-left: 0;

@@ -90,7 +90,7 @@ docker run -t -i --rm --publish 8000:8000 -v postgres:/var/lib/postgresql postho
 
 Upgrading PostHog with Docker depends on how you've deployed with Docker.
 
-**Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/configuring-posthog/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
+> **Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/configuring-posthog/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
 
 - For docker-compose, run `docker-compose pull web`
 

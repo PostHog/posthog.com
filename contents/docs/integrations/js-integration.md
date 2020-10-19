@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-**Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
+> **Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
 
 This page of the Docs refers to our [JS library](https://github.com/PostHog/posthog-js).
 
