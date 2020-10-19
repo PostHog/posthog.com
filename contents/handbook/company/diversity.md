@@ -26,14 +26,15 @@ We are always keen to find ways to make the culture at PostHog as inclusive as p
 
 We don't just state that we care - these are some of the things we've implemented so far:
 
-* All remote - so we can hire people from any country in the world. We have people in ~10 countries, with no office.
-* Asynchronous and transparent communication - so people can get the context they need to work effectively across multiple timezones.
-* Unlimited vacation policy with mandatory minimum time off - so you can fit work around your life.
-* Very generous parental leave - so those raising families can do so whilst still working for us.
-* Top of market pay - to reduce financial stress that often comes with working for startups, or prevents many from even applying.
+* [All remote](/handbook/company/team) - so we can hire people from any country in the world. We have people in ~10 countries, with no office.
+* [Asynchronous and transparent communication](/handbook/company/communication) - so people can get the context they need to work effectively across multiple timezones.
+* [Unlimited vacation policy](/handbook/people/time-off/#permissionless-time-off) with mandatory minimum time off - so you can fit work around your life.
+* Very [generous parental leave](/handbook/people/time-off/#parental-leave) - so those raising families can do so whilst still working for us.
+* [Top of market pay](/handbook/people/compensation) - to reduce financial stress that often comes with working for startups, or prevents many from even applying.
 * Proactive recruitment to encourage underrepresented groups of people to apply, so we are meeting with a balanced group of applicants for every role.
-* Anyone can contribute to our handbook - so if we miss something, others can ask for a change in our policy!
-* Paid SuperDay as part of the hiring process - to allow you to see what it's really like working on the team, before starting.
+* Anyone can contribute to [our handbook](/handbook/) - so if we miss something, others can ask for a change in our policy!
+* [Paid SuperDay](/careers#the-process) as part of the hiring process - to allow you to see what it's really like working on the team, before starting.
+* [Training budget](/handbook/people/training#training-budget) for those in roles where we don't have lots of existing experience as a company.
 
 Are you a potential candidate reading this? [Let us know](mailto:careers@posthog.com) how we can do a better job!
 
