@@ -47,6 +47,13 @@ span.algolia-autocomplete {
     padding-right: 50px;
 }
 
+@media screen and (min-width: 1200px) {
+    .algolia-autocomplete .ds-dropdown-menu {
+        min-width: 60vw !important;
+        max-width: 70vw !important;
+    }
+}
+
 @media screen and (max-width: 834px) {
     .docs-search-box {
         margin-top: 10px;
