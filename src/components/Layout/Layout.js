@@ -13,6 +13,7 @@ import { default as AntdLayout } from 'antd/lib/layout'
 import NewsletterForm from '../NewsletterForm'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
+import { DocsSearch } from '../DocsSearch'
 
 function Layout({
     onPostPage,
@@ -24,9 +25,16 @@ function Layout({
     isHandbookPage,
     children,
     className,
+    isFeaturesPage,
     containerStyle = {},
 }) {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
+    const links = [
+        {
+            rel: 'stylesheet',
+            href: 'https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.css',
+        },
+    ]
 
     return (
         <StaticQuery
@@ -50,6 +58,7 @@ function Layout({
                                         { name: 'description', content: 'Sample' },
                                         { name: 'keywords', content: 'sample, something' },
                                     ]}
+                                    links={links}
                                 >
                                     <html lang="en" />
                                 </Helmet>
@@ -91,13 +100,16 @@ function Layout({
                                             )}
                                         </AntdLayout.Header>
 
-                                        {/* content */}
+                                        {isDocsPage && <DocsSearch />}
 
+                                        {/* content */}
                                         <AntdLayout
                                             className={
                                                 'layout ' +
                                                 (onPostPage ? 'docsPageLayout ' : 'notDocsLayout ') +
-                                                (isBlogPage && 'blogPageLayout')
+                                                (isBlogPage ? 'blogPageLayout ' : '') +
+                                                (isFeaturesPage ? 'featuresPageLayout ' : '') +
+                                                (isDocsPage && 'docs-only-layout')
                                             }
                                             theme="light"
                                         >
