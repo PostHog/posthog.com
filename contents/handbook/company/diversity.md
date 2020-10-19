@@ -14,11 +14,9 @@ There are 10s of millions of people working in software development globally, an
 
 ## Diversity as a tactic
 
-We view diversity as a critical tactic to achieve great performance, but not as an objective in its own right. Why?
+We don't explicitly set a target for diversity as a company objective or value. Instead, we view diversity as a tactic like paying people towards the top of marketing, or communicating company goals to set context for our team. Like both of those things, diversity will lead to great performance.
 
-If we were to aim for diversity whilst also aiming for performance, then that would imply diversity is an ethical mission. We view this as a wonderful added benefit but it's not the *fundamental reason* for encouraging diversity at PostHog. Underrepresented great talent is *particularly great talent*, that *any* business should want.
-
-That means building an inclusive culture is a critical component of how we work - just like paying people, or setting company goals. It's like oxygen.
+We view increased inclusion into tech as a wonderful ethical benefit of our policies, but it's not the *fundamental reason* for encouraging diversity at PostHog. Underrepresented great talent is *particularly great talent*, that *any* business should want.
 
 ## An inclusive place to work
 
@@ -35,6 +33,9 @@ We don't just state that we care - these are some of the things we've implemente
 * Anyone can contribute to [our handbook](/handbook/) - so if we miss something, others can ask for a change in our policy!
 * [Paid SuperDay](/careers#the-process) as part of the hiring process - to allow you to see what it's really like working on the team, before starting.
 * [Training budget](/handbook/people/training#training-budget) for those in roles where we don't have lots of existing experience as a company.
+* Life story Fridays (when we have a new team member, we'll ask them to present their life story for an hour on a Friday) - so you have more context on the points of views of others in the team.
+* Sponsored visas for those who need them.
+* Health insurance for those from countries that do not provide this freely.
 
 Are you a potential candidate reading this? [Let us know](mailto:careers@posthog.com) how we can do a better job!
 
