@@ -69,8 +69,6 @@ To see some data on the frontend, you should go to the `http://localhost:8000/de
 
 > **Friendly tip:** Homebrew services can be stopped with `brew services stop <service_name>`
 
-> Please use `test*@posthog.com` (where `*` is a wildcard) when you create local test users.
-
 ### Running backend separately (Django)
 
 Run `DEBUG=1 ./bin/start-backend`
