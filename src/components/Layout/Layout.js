@@ -82,6 +82,7 @@ function Layout({
                                                 (isBlogPage && 'blogHeader')
                                             }
                                             id="menu-header"
+                                            style={{ background: '#ffffff' }}
                                         >
                                             <Header
                                                 siteTitle={data.site.siteMetadata.title}
@@ -135,8 +136,12 @@ function Layout({
 
                                             {/* Sidebar right */}
                                             {onPostPage && !anchorHide && !screenIsSmall && (
-                                                <AntdLayout.Sider className="rightBar" id="right-navbar">
-                                                    <ResponsiveAnchor />
+                                                <AntdLayout.Sider
+                                                    className="rightBar"
+                                                    id="right-navbar"
+                                                    style={{ background: '#ffffff' }}
+                                                >
+                                                    <ResponsiveAnchor style={{ background: '#ffffff' }} />
                                                 </AntdLayout.Sider>
                                             )}
                                         </AntdLayout>

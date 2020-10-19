@@ -687,9 +687,9 @@ header {
     padding: 0;
 }
 
-.menuHeader {
+/* .menuHeader {
     background-color: #ffffff !important;
-}
+} */
 
 .blogHeader {
     background-color: #35416b !important;
@@ -884,14 +884,6 @@ aside.sidebarRight {
     border: none;
 }
 
-.rightBar {
-    border: none;
-}
-
-.rightBar div {
-    background-color: #fff;
-}
-
 a.ant-anchor-link-title:hover,
 .ant-anchor-link-active a {
     color: #1d4aff !important;
@@ -905,10 +897,10 @@ span.ant-anchor-ink-ball {
     border: none;
 }
 
-.rightBar div {
+/* .rightBar div {
     background-color: #fff;
 }
-
+ */
 a.ant-anchor-link-title:hover {
     color: #1d4aff;
 }

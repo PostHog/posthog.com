@@ -19,7 +19,7 @@ export const DarkModeToggle = () => {
         const rightNavElement = doc.getElementById('right-navbar')
         sidebarElement.style['background'] = '#000000'
         headerElement.style['background-color'] = '#000000'
-        rightNavElement.style['background-color'] = '#000000'
+        rightNavElement.style['background'] = '#000000'
     }
 
     return (
