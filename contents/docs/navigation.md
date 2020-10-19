@@ -18,7 +18,7 @@ The main navigation bar contains the following elements (nested elements are fea
 
 ```
 .
-├── Custom Dashboards
+├── Dashboards
 ├── Funnels
 ├── Insights
 │   └── Trends
@@ -26,19 +26,18 @@ The main navigation bar contains the following elements (nested elements are fea
 │   └── Sessions
 ├── Retention
 ├── Feature Flags  
-├── Tags
+├── Actions
+├── Raw Events
 ├── Persons
 ├── Cohorts
-├── Live
-│   └── Live events
-│   └── Live actions
-│   └── Live sessions
 └── Toolbar
 ```
 
 
 ## Secondary navigation
-The top bar is used to aid in some secondary navigation, mainly for configuration or billing settings that don't require continuous acccess. The secondary navigation also allows switching between projects and organizations.
+The top bar is used to aid in some secondary navigation, mainly for configuration or billing settings that don't require continuous acccess. The secondary navigation also allows switching between projects and organizations. The following items are navigated primarily from the secondary navigation:
+- My account settings (e.g. password changing, personal API keys, ...)
+- Organization & billing (cloud only) settings (e.g. invite members, ...)
 
 
 ## Adding navigation items
