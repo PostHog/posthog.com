@@ -179,7 +179,6 @@ function SidebarContents() {
                             inlineIndent={12}
                             onOpenChange={onSidebarContentExpanded}
                             style={{ height: '100%', backgroundColor: '#F9F9F9' }}
-                            theme="light"
                         >
                             {loop(tree)}
                         </Menu>

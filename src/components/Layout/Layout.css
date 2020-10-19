@@ -732,9 +732,9 @@ header {
     color: #000000;
 }
 
-.sideBar {
-    background-color: #f9f9f9 !important;
-}
+/* .sideBar {
+    background: #f9f9f9 !important;
+} */
 
 .mobileHeader {
     background-color: white;

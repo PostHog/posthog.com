@@ -62,21 +62,26 @@ function Layout({
                                 >
                                     <html lang="en" />
                                 </Helmet>
-                                <AntdLayout theme="light">
+                                <AntdLayout>
                                     {!screenIsSmall && onPostPage && !sidebarHide && !isBlogPage && (
-                                        <AntdLayout.Sider width="300" theme="light" className="sideBar">
+                                        <AntdLayout.Sider
+                                            width="300"
+                                            className="sideBar"
+                                            id="docs-sidebar"
+                                            style={{ background: '#f9f9f9' }}
+                                        >
                                             <ResponsiveSidebar />
                                         </AntdLayout.Sider>
                                     )}
 
-                                    <AntdLayout theme="light">
+                                    <AntdLayout>
                                         <AntdLayout.Header
                                             className={
                                                 'menuHeader ' +
                                                 (onPostPage && 'docsHeader ') +
                                                 (isBlogPage && 'blogHeader')
                                             }
-                                            theme="light"
+                                            id="menu-header"
                                         >
                                             <Header
                                                 siteTitle={data.site.siteMetadata.title}
@@ -87,7 +92,6 @@ function Layout({
                                                 isDocsPage={isDocsPage}
                                                 isBlogArticlePage={isBlogArticlePage}
                                                 isHandbookPage={isHandbookPage}
-                                                theme="light"
                                             />
                                             {screenIsSmall &&
                                                 onPostPage &&
@@ -111,7 +115,6 @@ function Layout({
                                                 (isFeaturesPage ? 'featuresPageLayout ' : '') +
                                                 (isDocsPage && 'docs-only-layout')
                                             }
-                                            theme="light"
                                         >
                                             <AntdLayout.Content>
                                                 {isBlogPage && screenIsSmall && (
@@ -132,7 +135,7 @@ function Layout({
 
                                             {/* Sidebar right */}
                                             {onPostPage && !anchorHide && !screenIsSmall && (
-                                                <AntdLayout.Sider theme="light" className="rightBar">
+                                                <AntdLayout.Sider className="rightBar" id="right-navbar">
                                                     <ResponsiveAnchor />
                                                 </AntdLayout.Sider>
                                             )}
