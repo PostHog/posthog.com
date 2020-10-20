@@ -354,7 +354,7 @@ ul {
     margin-bottom: 1.45rem;
     list-style-position: outside;
     list-style-image: none;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
 }
 ol {
     margin-left: 1.45rem;
@@ -986,7 +986,7 @@ a.ant-anchor-link-title:hover {
 
 .docsPages h2,
 .docsPages h3 {
-    color: #000000 !important;
+    color: #000000;
     margin-top: 2rem;
     margin-bottom: 1.45rem;
     left: 0;
@@ -1000,11 +1000,11 @@ a.ant-anchor-link-title:hover {
 }
 
 .docsPages a {
-    color: #1d4aff !important;
+    color: #1d4aff;
 }
 
 .docsPages a:hover {
-    color: #577bfb !important;
+    color: #577bfb;
 }
 
 .blogHeaderTitle {

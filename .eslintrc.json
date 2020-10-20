@@ -10,7 +10,7 @@
         "ecmaVersion": 11,
         "sourceType": "module"
     },
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "plugins": ["react"],
     "rules": {
         "react/no-unescaped-entities": "off",

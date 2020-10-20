@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
-import {handleToggle} from './utils'
+import { handleToggle } from './utils'
 import './style.scss'
-import { ValidInputElement } from 'antd/lib/auto-complete'
 
 export const DarkModeToggle = () => {
     useEffect(() => {
-        if ((window as any)) {
+        if (window) {
             const darkModeToggleElement = window.document.getElementById('toggleSwitch') as HTMLInputElement
             const currentTheme = window.localStorage['currentWebsiteTheme']
             if (!currentTheme) window.localStorage['currentWebsiteTheme'] = 'light'
             darkModeToggleElement.checked = currentTheme === 'light'
-            handleToggle(currentTheme, true)
             darkModeToggleElement.addEventListener('change', () => {
                 handleToggle(window.localStorage['currentWebsiteTheme'])
             })
