@@ -40,7 +40,9 @@ Currently, no two PostHog members live in the same city, not even our co-founder
 
 Being fully remote means we're able to create a team that is _truly_ diverse.
 
-In our view, a non-traditional team is how we build a special company. We believe diversity leads to the best results and encourage applicants from any background or experience to drop us a note. 
+A non-traditional team is how we build a special company. We believe diversity leads to the best results and encourage applicants from any background or experience to drop us a note. 
+
+Learn more about [how we approach diversity](/handbook/company/diversity).
 
 Furthermore, to ensure we can support the needs of our diverse team well, we offer unlimited time off (minimum 25 days!), don't track hours (work hard when you work), and [offer generous parental leave](/handbook/people/time-off#parental-leave) independent of gender. 
 
