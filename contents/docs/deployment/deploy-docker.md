@@ -61,6 +61,28 @@ docker-compose up -d
 ```
 1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
+### Configure docker-compose.yml
+
+You can also go through production-ready `docker-compose.yml` setup using our `docker-compose-config.py` configurator. It will guide you through relevant settings and explain them along the way. How to use it:
+
+1. Install PostHog's Python dependencies.
+```bash
+python3 -m pip install -r requirements.txt
+```
+1. Run the configurator:
+```bash
+python3 ./docker-compose-config.py
+```
+1. Follow instructions and make changes where you see fit – or don't, and stick to default values.
+1. Enjoy PostHog with the new configuration:
+```bash
+docker-compose up -d
+```
+or
+```bash
+docker-compose restart -d
+```
+
 ### Local Installation
 
 If you're running locally:
@@ -81,7 +103,7 @@ If you're running your Postgres database elsewhere (i.e. RDS, or a different ser
 - Set the `DATABASE_URL` property to the location of your database
 - Remove `services -> db` and `depends_on: - db`
 
-### Docker one line preview
+### Docker One-Line Preview
 
 If you would like to run the software locally, you can use a Docker preview. Note that this is **not** meant for production use.
 
