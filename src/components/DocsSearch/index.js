@@ -3,7 +3,7 @@ import { SearchOutlined } from '@ant-design/icons'
 import './style.css'
 import 'docsearch.js/dist/cdn/docsearch.min.css/'
 
-export const DocsSearch = () => {
+export const DocsSearch = ({className = '', backgroundColor = '#ffffff'}) => {
     useEffect(() => {
         if (window) {
             import('docsearch.js').then(({ default: docsearch }) => {
@@ -17,7 +17,7 @@ export const DocsSearch = () => {
     })
 
     return (
-        <div className="docs-search-container">
+        <div className={className} id='docs-search-container' style={{backgroundColor: backgroundColor}}>
             <div className="flex-row-reverse docs-search-box">
                 <form className="docSearchWrapper">
                     <input placeholder="Search our Docs" id="doc-search" />

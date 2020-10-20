@@ -32,6 +32,7 @@
         "gatsby-plugin-remove-trailing-slashes": "^2.3.11",
         "gatsby-plugin-sass": "^2.3.16",
         "gatsby-plugin-sharp": "^2.2.22",
+        "gatsby-plugin-typescript": "^2.4.22",
         "gatsby-remark-autolink-headers": "^2.1.10",
         "gatsby-remark-copy-linked-files": "^2.3.2",
         "gatsby-remark-images": "^3.1.22",

@@ -62,7 +62,7 @@ function Layout({
                                 >
                                     <html lang="en" />
                                 </Helmet>
-                                <AntdLayout>
+                                <AntdLayout id='antd-main-layout-wrapper'>
                                     {!screenIsSmall && onPostPage && !sidebarHide && !isBlogPage && (
                                         <AntdLayout.Sider
                                             width="300"
@@ -74,7 +74,7 @@ function Layout({
                                         </AntdLayout.Sider>
                                     )}
 
-                                    <AntdLayout>
+                                    <AntdLayout id='ant-layout-content-wrapper' style={{background: '#ffffff'}}>
                                         <AntdLayout.Header
                                             className={
                                                 'menuHeader ' +
@@ -116,6 +116,8 @@ function Layout({
                                                 (isFeaturesPage ? 'featuresPageLayout ' : '') +
                                                 (isDocsPage && 'docs-only-layout')
                                             }
+                                            id={onPostPage ? 'docs-content-wrapper' : ''}
+                                            style={{backgroundColor: '#ffffff'}}
                                         >
                                             <AntdLayout.Content>
                                                 {isBlogPage && screenIsSmall && (
@@ -141,7 +143,7 @@ function Layout({
                                                     id="right-navbar"
                                                     style={{ background: '#ffffff' }}
                                                 >
-                                                    <ResponsiveAnchor style={{ background: '#ffffff' }} />
+                                                    <ResponsiveAnchor />
                                                 </AntdLayout.Sider>
                                             )}
                                         </AntdLayout>

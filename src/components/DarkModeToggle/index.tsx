@@ -1,26 +1,21 @@
 import React, { useEffect } from 'react'
+import {handleToggle} from './utils'
 import './style.scss'
+import { ValidInputElement } from 'antd/lib/auto-complete'
 
 export const DarkModeToggle = () => {
     useEffect(() => {
-        if (window) {
-            const doc = window.document
-            const darkModeToggleElement = doc.getElementById('toggleSwitch')
+        if ((window as any)) {
+            const darkModeToggleElement = window.document.getElementById('toggleSwitch') as HTMLInputElement
+            const currentTheme = window.localStorage['currentWebsiteTheme']
+            if (!currentTheme) window.localStorage['currentWebsiteTheme'] = 'light'
+            darkModeToggleElement.checked = currentTheme === 'light'
+            handleToggle(currentTheme, true)
             darkModeToggleElement.addEventListener('change', () => {
-                handleToggle()
+                handleToggle(window.localStorage['currentWebsiteTheme'])
             })
         }
     }, [])
-
-    const handleToggle = () => {
-        const doc = window.document
-        const sidebarElement = doc.getElementById('docs-sidebar')
-        const headerElement = doc.getElementById('menu-header')
-        const rightNavElement = doc.getElementById('right-navbar')
-        sidebarElement.style['background'] = '#000000'
-        headerElement.style['background-color'] = '#000000'
-        rightNavElement.style['background'] = '#000000'
-    }
 
     return (
         <div className="toggle-wrapper">
