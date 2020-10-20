@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import '../featured-section.scss'
 import { Spacer } from '../../Spacer'
 
 export const FeaturedSectionTextLeft = ({
@@ -23,13 +24,14 @@ export const FeaturedSectionTextLeft = ({
     const imageStyle = {
         ...imgStyle,
         backgroundImage: `url(${image})`,
-        backgroundSize: imgStyle.backgroundSize ? imgStyle.backgroundSize : `${imgDesktopWidth} ${imgDesktopHeight}`,
+        backgroundSize: imgStyle.backgroundSize ? imgStyle.backgroundSize : `${imgDesktopWidth}px ${imgDesktopHeight}px`,
         height: imgDesktopHeight,
         width: imgDesktopWidth,
     }
 
+
     return (
-        <div className="featured-section-left-wrapper">
+        <div className="featured-section-left-wrapper featured-section-main">
             <div className="fs-wrapper feature-section">
                 {/*02 - Understand how traffic really flows through your app*/}
                 <div className="row">
@@ -40,11 +42,11 @@ export const FeaturedSectionTextLeft = ({
                         </h1>
                     </div>
                     <div className="col">
-                        <h2 className="gosha fs-left-header-2">{headerText}</h2>
+                        <h2 className="gosha fs-header-2">{headerText}</h2>
                         <br className="revHiddenBreak" />
                         <hr className={styleMap[color][1]} />
                         <br className="revHiddenBreak" />
-                        <p className="fs-left-paragraph">{descriptionText}</p>
+                        <p className="fs-left-paragraph fs-paragraph">{descriptionText}</p>
                     </div>
                 </div>
             </div>
