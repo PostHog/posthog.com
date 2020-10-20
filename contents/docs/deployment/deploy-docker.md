@@ -6,7 +6,7 @@ showTitle: true
 
 ## Why Docker
 
-Through Docker, PostHogers can install specific versions of the app while also having it within a containerized environment.
+Through Docker, PostHoggers can install specific versions of the app while also having it within a containerized environment.
 
 We currently have [three types of images](https://hub.docker.com/r/posthog/posthog):
 
@@ -65,7 +65,7 @@ docker-compose up -d
 
 You can also go through production-ready `docker-compose.yml` setup using our `docker-compose-config.py` configurator. It will guide you through relevant settings and explain them along the way. How to use it:
 
-1. Install PostHog's Python dependencies.
+1. Install PostHog's Python dependencies (preferably in a virtual environment).
 ```bash
 python3 -m pip install -r requirements.txt
 ```
@@ -73,7 +73,7 @@ python3 -m pip install -r requirements.txt
 ```bash
 python3 ./docker-compose-config.py
 ```
-1. Follow instructions and make changes where you see fit – or don't, and stick to default values.
+1. Follow the instructions and make changes where you see fit – or don't, and stick to default values.
 1. Enjoy PostHog with the new configuration:
 ```bash
 docker-compose up -d
