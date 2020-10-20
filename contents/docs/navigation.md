@@ -26,18 +26,26 @@ The main navigation bar contains the following elements (nested elements are fea
 │   └── Sessions
 ├── Retention
 ├── Feature Flags  
-├── Actions
-├── Raw Events
+├── Actions & Events
+├── Sessions
 ├── Persons
 ├── Cohorts
+├── Plugins
+├── Project
 └── Toolbar
 ```
+
+### Transient
+- It might make sense to move plugins in the future to the settings page, but as this is a new feature, we keep it in the main navigation to increase discoverability.
 
 
 ## Secondary navigation
 The top bar is used to aid in some secondary navigation, mainly for configuration or billing settings that don't require continuous acccess. The secondary navigation also allows switching between projects and organizations. The following items are navigated primarily from the secondary navigation:
-- My account settings (e.g. password changing, personal API keys, ...)
+- User account settings (e.g. password changing, personal API keys, ...)
+- Project settings (e.g. ingestion key, permitted domains, toolbar settings, ...)
 - Organization & billing (cloud only) settings (e.g. invite members, ...)
+    - Licenses management (self-hosted only)
+- Instance status page (self-hosted only)
 
 
 ## Adding navigation items
