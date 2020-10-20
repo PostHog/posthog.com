@@ -39,34 +39,38 @@ function Template({
     const isHandbookPage = parsedPathname[1] === 'handbook'
 
     return (
-        <Layout
-            onPostPage={true}
-            isBlogPage={frontmatter.sidebar === 'Blog'}
-            pageTitle={frontmatter.title}
-            isHomePage={false}
-            isDocsPage={isDocsPage}
-            isBlogArticlePage={isBlogArticlePage}
-            isFeaturesPage={isFeaturesPage}
-            isHandbookPage={isHandbookPage}
-        >
-            <SEO
-                title={frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')}
-                description={frontmatter.description || excerpt}
-                pathname={markdownRemark.fields.slug}
-                article
-            />
-            <div className="docsPagesContainer">
-                <div className="docsPages">
-                    {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
-                        <h1 align="center">{frontmatter.title}</h1>
+        <div data-theme="light">
+            <Layout
+                onPostPage={true}
+                isBlogPage={frontmatter.sidebar === 'Blog'}
+                pageTitle={frontmatter.title}
+                isHomePage={false}
+                isDocsPage={isDocsPage}
+                isBlogArticlePage={isBlogArticlePage}
+                isFeaturesPage={isFeaturesPage}
+                isHandbookPage={isHandbookPage}
+            >
+                <SEO
+                    title={
+                        frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
+                    }
+                    description={frontmatter.description || excerpt}
+                    pathname={markdownRemark.fields.slug}
+                    article
+                />
+                <div className="docsPagesContainer">
+                    <div className="docsPages">
+                        {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
+                            <h1 align="center">{frontmatter.title}</h1>
+                        )}
+                        <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
+                    </div>
+                    {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && (
+                        <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
                     )}
-                    <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
                 </div>
-                {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && (
-                    <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
-                )}
-            </div>
-        </Layout>
+            </Layout>
+        </div>
     )
 }
 

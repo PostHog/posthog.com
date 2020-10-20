@@ -1048,7 +1048,7 @@ a.ant-anchor-link-title:hover {
 
 .docs-footer {
     margin-top: 2rem;
-    background: rgb(41, 37, 44, 0.1);
+    background: rgb(41, 37, 44);
     padding: 1rem 2rem;
 }
 
@@ -1476,5 +1476,11 @@ code {
 
     .footer-links-header {
         font-size: 16px;
+    }
+}
+
+[data-theme='test'] {
+    .sideBar {
+        background-color: red !important;
     }
 }

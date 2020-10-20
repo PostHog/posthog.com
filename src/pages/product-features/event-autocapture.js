@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import '../styles/features.css'
-import '../../components/Layout/Layout.css'
 import Layout from '../../components/Layout'
 import Button from 'antd/lib/button'
 import rays from '../../images/rays.svg'

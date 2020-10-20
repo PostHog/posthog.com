@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import './Layout.css'
+import './Layout.scss'
 import ResponsiveSidebar from '../ResponsiveSidebar'
 import Container from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
@@ -69,7 +69,7 @@ function Layout({
                                 >
                                     <html lang="en" />
                                 </Helmet>
-                                <AntdLayout id="antd-main-layout-wrapper">
+                                <AntdLayout id="antd-main-layout-wrapper" data-theme="test">
                                     {!screenIsSmall && onPostPage && !sidebarHide && !isBlogPage && (
                                         <AntdLayout.Sider
                                             width="300"
