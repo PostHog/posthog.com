@@ -1738,9 +1738,9 @@ img.whatsNewImg {
     .redLine,
     .blueLine,
     .darkBlueLine {
-        width: 96px;
-        border-width: 6px;
-        margin: 10px 0;
+        width: 96px !important;
+        border-width: 6px !important;
+        margin: 10px 0 !important;
     }
     .autocapture01 h1,
     .traffic02 h1,

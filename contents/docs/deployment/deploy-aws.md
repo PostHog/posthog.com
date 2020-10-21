@@ -14,25 +14,33 @@ Likewise, we maintain a CloudFormation [config](https://github.com/PostHog/deplo
 
 ## CloudFormation Install (Recommended)
 
-1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
+Jump straight in:
 
-1. Click **Create Stack -> With New Resources (Standard)**
+[![Launch AWS Stack](../../../src/images/deploy-button-aws.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Posthog&templateURL=https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml)
 
-1. Select template source as **Amazon S3 URL** and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
-
-1. Choose a Stack Name and review the Parameters. You will need to update these if you want to modify default behaviors or setup SMTP configs as described below
+1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors or setup SMTP configs as described below.
 
 1. Review the rest of the Configuration Wizard pages
 
-1. On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
+1. (Optional) On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
 
 1. If you are ready, click **Create Stack**!
 
-1. Once deployment completes look under **Options** for the Publicly facing ELB Host
+1. Once deployment completes look under **Outputs** for `ExternalUrl`
 
 1. Review all parameters in the config and ensure everything is nominal
 
->_Definitely_ setup for TLS (Transport Layer Security)! Once you have TLS setup for your ELB (Elastic Load Balancing) you should disable insecure access via HTTP by removing the environment variable `DISABLE_SECURE_SSL_REDIRECT=1` from the Task definition in ECS and deploying the updated Task definition revision.
+### Adding TLS/SSL support
+
+> You should _definitely_ setup TLS ([Read more](#important-points))!
+
+1. Go to 'Services' > 'EC2' > 'Load balancers'
+
+1. Navigate to 'Public load balancer' > 'Listeners'
+
+1. Add a listener for the protocol HTTPS, import or add your SSL certificate
+
+1. After verifying it works, you can disable insecure access by removing the listener for port 80 (HTTP).
 
 ## Updating AWS Fargate
 
