@@ -113,7 +113,7 @@ We take this application seriously, and that's why it's listed above our other r
 
 Our team is proactively looking for the following:
 
-* Front-End Developer
+* [Designer](designer)
 * Full Stack Software Engineer
 
 

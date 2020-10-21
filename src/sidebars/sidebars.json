@@ -239,7 +239,13 @@
     {
         "entry": "Careers",
         "name": "Careers",
-        "items": ["careers", "careers/full-stack-software-engineer", "careers/front-end-developer"]
+        "items": ["careers"],
+        "child_entries": ["Open Roles"]
+    },
+    {
+        "entry": "Open Roles",
+        "name": "Open Roles",
+        "items": ["careers/designer", "careers/full-stack-software-engineer"]
     },
     {
         "entry": "Growth",
