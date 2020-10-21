@@ -236,15 +236,28 @@
         ]
     },
     {
+        "entry": "Careers",
+        "name": "Careers",
+        "items": ["careers", "careers/full-stack-software-engineer", "careers/front-end-developer"]
+    },
+    {
         "entry": "Growth",
         "name": "Growth",
         "items": [
             "handbook/growth/community",
             "handbook/growth/customer-success",
             "handbook/growth/sales",
-            "handbook/growth/trials",
-            "handbook/growth/posthog-array",
-            "handbook/growth/releasing-content"
+            "handbook/growth/trials"
+        ],
+        "child_entries": ["Content"]
+    },
+    {
+        "entry": "Content",
+        "name": "Content",
+        "items": [
+            "handbook/growth/content",
+            "handbook/growth/content/posthog-array",
+            "handbook/growth/content/releasing-content"
         ]
     },
     {
