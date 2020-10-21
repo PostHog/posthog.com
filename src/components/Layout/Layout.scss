@@ -1044,8 +1044,9 @@ a.ant-anchor-link-title:hover {
 
 .docs-footer {
     margin-top: 2rem;
-    background: rgb(41, 37, 44);
+    background: rgb(218, 218, 218);
     padding: 1rem 2rem;
+    border-radius: 10px;
 }
 
 .docs-footer a {
@@ -1475,13 +1476,9 @@ code {
     }
 }
 
-body.light {
+/* body.light {
     #docs-sidebar {
         background-color: rgb(249, 249, 249) !important;
-    }
-
-    #menu-header {
-        background-color: #ffffff !important;
     }
 
     #right-navbar {
@@ -1503,7 +1500,7 @@ body.light {
     #ant-layout-content-wrapper {
         background-color: #ffffff !important;
     }
-}
+} */
 
 body.dark {
     /* Dark mode only available on Desktop at first */
@@ -1581,6 +1578,10 @@ body.dark {
 
         .ant-menu-item-selected > a {
             color: rgb(129, 20, 148) !important;
+        }
+
+        .docs-footer {
+            background: #29252c;
         }
     }
 }
