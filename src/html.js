@@ -15,10 +15,7 @@ export default function HTML(props) {
                     dangerouslySetInnerHTML={{
                         __html: `
               (function() {
-                const parsedPathname = location.pathname.split('/')
-                const isDocsPage = parsedPathname[1] === 'docs'
-                const isHandbookPage = parsedPathname[1] === 'handbook'
-                if (isDocsPage || isHandbookPage) {
+                console.log('I RAN')
                   window.__onThemeChange = function() {};
                   function setTheme(newTheme) {
                     window.__theme = newTheme;
@@ -41,7 +38,6 @@ export default function HTML(props) {
                     window.__setPreferredTheme(e.matches ? 'dark' : 'light')
                   });
                   setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
-                }
               })();
             `,
                     }}

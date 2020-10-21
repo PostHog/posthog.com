@@ -39,7 +39,7 @@ function Template({
     const isHandbookPage = parsedPathname[1] === 'handbook'
 
     return (
-        <div data-theme="light">
+        <div className="post-page-wrapper">
             <Layout
                 onPostPage={true}
                 isBlogPage={frontmatter.sidebar === 'Blog'}
