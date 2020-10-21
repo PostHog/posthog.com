@@ -7,8 +7,8 @@ showTitle: true
 <br>
 
 The PostHog Array is our Newsletter and Blog for new releases. It serves 2 purposes:
-- Letting the community know that a new version has been released and what new features and functionality they can expect if they update.
-- Updating the community on PostHog itself, what we have been doing, what's on our mind, as well as selecting favorite contributions from the community.
+- Letting the community know that a new version has been released and what new features and functionality they can expect if they update. This makes the platform more valuable and builds word of mouth growth.
+- Encouraging users to take part in the community.
 
 This section of the Handbook will guide you through generating the PostHog Array when PostHog is releasing a new version.
 

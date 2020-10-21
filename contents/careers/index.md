@@ -1,6 +1,6 @@
 ---
 title: Careers
-sidebar: null
+sidebar: Careers
 showTitle: true
 ---
 
@@ -22,11 +22,11 @@ Our GitHub repo has over over 3.2k stars (and growing fast), and we already have
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
-What does this mean for you? We have a lot of capital, but we're a lean, strong team - so you've got the opportunity to have a huge impact.
+What does this mean for you? We have a lot of capital, but [we're a lean, strong team](handbook/company/team) - so you've got the opportunity to have a huge impact.
 
 ## Our Culture
 
-As a young company, our culture is still being polished by our growing team, and, as one of our first hires, you'll play an important role in shaping it. 
+As a young company, our culture is still being polished by [our growing team](handbook/company/team), and, as one of our first hires, you'll play an important role in shaping it. 
 
 A few things have already emerged as key:
 
@@ -58,7 +58,7 @@ We're committed to much more than just public code.
 
 ##### Written communication
 
-We're an all-remote company that allows people to work from almost anywhere in the world. With team members across several countries, it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
+We're an all-remote company that allows people to work from almost anywhere in the world. With [team members across many countries](handbook/company/team), it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
 
 To accomplish this, we use asynchronous communication as a starting point and stay as open and transparent as we can by communicating through public issues, pull requests, and (minimally) Slack.
 
@@ -72,7 +72,7 @@ This includes YCombinator, Solomon Hykes (Founder of Docker), David Cramer (Foun
 
 ## The Process
 
-We will schedule 2 to 3 short calls with our founders and team. These will focus on two key areas:
+We will schedule 2 to 3 short calls with our [founders and team](handbook/company/team). These will focus on two key areas:
 
 * Ensuring you will be a great cultural fit
 * Aptitude for the role
@@ -81,7 +81,7 @@ If you succeed with the above, we will set you up with a *PostHog SuperDay*.
 
 This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
 
-We'll set you up with a Slack support channel with several of our core team. We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+We'll set you up with a Slack support channel with several of [our core team](handbook/company/team). We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
 
 This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting paid, of course.
 
@@ -109,25 +109,13 @@ If you do *not* see a specific role listed, that really doesn't mean we won't ha
 
 We take this application seriously, and that's why it's listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
 
-## Front-End Developer
+## Open Roles
 
-PostHog is building its first design team. We are looking for a proactive, fast, and passionate UX Developer to take our design to a world class level. Our product and website went viral with a basic MVP, and we're determined to be best-in-class with our UX.
+Our team is proactively looking for the following:
 
-The role would involve:
+* Front-End Developer
+* Full Stack Software Engineer
 
-* Collaborating with our Designer to make sure we get a cool '80s vibe into our website and docs!
-* Implementing design changes to our website, docs, and product.
-* Collaborating with our Engineering team to ensure our product is simple and intuitive even to answer complex analytics queries.
-
-The perfect candidate for this role must be as comfortable working with a designer in Figma (where our designer creates components) and working in React. It will involve a lot of rolling up sleeves and getting stuck in.
-
-## Fullstack Engineer
-
-### Your Role
-
-As an early engineer (we currently have a team of 5 in total), you'll be key to building a lot of the core functionality of PostHog. We encourage you to take a look at our repo (issues and PRs) to see the types of things you'd be doing.
-
-We're looking for people who are *proactive* and are *ridiculously quick* at getting new features out, while writing test and generally maintaining a clean codebase.
 
 # Get Started - Applying
 
