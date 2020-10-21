@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
@@ -14,7 +14,6 @@ import NewsletterForm from '../NewsletterForm'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { DocsSearch } from '../DocsSearch'
-import { handleToggle } from '../DarkModeToggle/utils'
 
 function Layout({
     onPostPage,
@@ -36,12 +35,6 @@ function Layout({
             href: 'https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.css',
         },
     ]
-
-    useEffect(() => {
-        if (window && isDocsPage) {
-            handleToggle(window.localStorage['currentWebsiteTheme'] === 'dark' ? 'light' : 'dark')
-        }
-    }, [])
 
     return (
         <StaticQuery

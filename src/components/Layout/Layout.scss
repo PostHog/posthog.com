@@ -1479,8 +1479,91 @@ code {
     }
 }
 
-[data-theme='test'] {
-    .sideBar {
-        background-color: red !important;
+body.light {
+    #docs-sidebar {
+        background-color: rgb(249, 249, 249) !important;
+        transition: 1s;
+    }
+
+    #menu-header {
+        background-color: #ffffff !important;
+        transition: 1s;
+    }
+
+    #right-navbar {
+        background-color: #ffffff !important;
+        transition: 1s;
+    }
+
+    .right-bar-inner {
+        background-color: #ffffff !important;
+        transition: 1s;
+    }
+
+    #docs-search-container {
+        background-color: #ffffff !important;
+        transition: 1s;
+    }
+
+    #docs-content-wrapper {
+        background-color: #ffffff !important;
+        transition: 1s;
+    }
+
+    #ant-layout-content-wrapper {
+        background-color: #ffffff !important;
+        transition: 1s;
+    }
+}
+
+body.dark {
+    #docs-sidebar {
+        background-color: rgb(34, 32, 32) !important;
+        transition: 1s;
+    }
+
+    #menu-header {
+        background-color: #18191a !important;
+        transition: 1s;
+    }
+
+    #right-navbar {
+        background-color: #18191a !important;
+        transition: 1s;
+    }
+
+    .right-bar-inner {
+        background-color: #18191a !important;
+        transition: 1s;
+    }
+
+    #docs-search-container {
+        background-color: #18191a !important;
+        transition: 1s;
+    }
+
+    #docs-content-wrapper {
+        background-color: #18191a !important;
+        transition: 1s;
+    }
+
+    #ant-layout-content-wrapper {
+        background-color: #18191a !important;
+        transition: 1s;
+    }
+
+    p {
+        color: rgb(208, 193, 193) !important;
+        transition: 1s;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #ffffff !important;
+        transition: 1s;
     }
 }

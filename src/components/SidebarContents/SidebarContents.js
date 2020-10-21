@@ -1,26 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import Menu from 'antd/lib/menu'
 import 'antd/lib/menu/style/css'
 import './SidebarContents.css'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-import { featureFlagLogic } from '../../logic/featureFlagLogic'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 
 const SubMenu = Menu.SubMenu
 
 function SidebarContents() {
-    const { featureFlags } = useValues(featureFlagLogic)
-
+    const [theme, setTheme] = useState(null)
     useEffect(() => {
-        if (!featureFlags['launch-tutorials-section']) {
-            const tutorialsDiv = window.document.getElementById('tutorials-sidebar-item')
-            if (tutorialsDiv) {
-                tutorialsDiv.style.display = 'none'
-            }
-        }
-    }, [featureFlags])
+        setTheme(window.__theme)
+        window.__onThemeChange = () => setTheme(window.__theme)
+    }, [])
 
     const {
         sidebarSelectedKey: selectedKey,
@@ -182,7 +176,10 @@ function SidebarContents() {
                         >
                             {loop(tree)}
                         </Menu>
-                        <DarkModeToggle />
+                        <DarkModeToggle
+                            checked={theme === 'dark'}
+                            onChange={(e) => window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')}
+                        />
                     </span>
                 )
             }}

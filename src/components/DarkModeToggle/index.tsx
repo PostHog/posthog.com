@@ -1,9 +1,33 @@
-import React, { useEffect } from 'react'
-import { handleToggle } from './utils'
+import React from 'react'
 import './style.scss'
 
-export const DarkModeToggle = () => {
-    useEffect(() => {
+interface DarkModeToggleProps {
+    checked: boolean
+    onChange: () => void
+}
+
+export const DarkModeToggle = ({ checked, onChange }: DarkModeToggleProps) => {
+    return (
+        <div className="toggle-wrapper">
+            <div className="toggle-switch">
+                <input
+                    type="checkbox"
+                    className="toggle-switch-checkbox"
+                    name="toggleSwitch"
+                    id="toggleSwitch"
+                    checked={checked}
+                    onChange={onChange}
+                />
+                <label className="toggle-switch-label" htmlFor="toggleSwitch">
+                    <span className="toggle-switch-inner" />
+                    <span className="toggle-switch-switch" />
+                </label>
+            </div>
+        </div>
+    )
+}
+
+/*     useEffect(() => {
         if (window) {
             const darkModeToggleElement = window.document.getElementById('toggleSwitch') as HTMLInputElement
             const currentTheme = window.localStorage['currentWebsiteTheme']
@@ -13,17 +37,4 @@ export const DarkModeToggle = () => {
                 handleToggle(window.localStorage['currentWebsiteTheme'])
             })
         }
-    }, [])
-
-    return (
-        <div className="toggle-wrapper">
-            <div className="toggle-switch">
-                <input type="checkbox" className="toggle-switch-checkbox" name="toggleSwitch" id="toggleSwitch" />
-                <label className="toggle-switch-label" htmlFor="toggleSwitch">
-                    <span className="toggle-switch-inner" />
-                    <span className="toggle-switch-switch" />
-                </label>
-            </div>
-        </div>
-    )
-}
+    }, []) */
