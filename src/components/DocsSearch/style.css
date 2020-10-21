@@ -8,8 +8,7 @@
 
 .docSearchWrapper {
     height: 32px;
-    /* width: 30%; */
-    max-width: 270px;
+    width: 250px;
     min-width: 150px;
     background-color: #f0f0f0;
     align-self: flex-end;
@@ -31,7 +30,7 @@ span.algolia-autocomplete {
 
 #doc-search {
     height: 32px;
-    width: 100%;
+    width: 200px;
     background-color: #f0f0f0;
     color: gray;
     border: none;
@@ -48,6 +47,13 @@ span.algolia-autocomplete {
     padding-right: 50px;
 }
 
+@media screen and (min-width: 1200px) {
+    .algolia-autocomplete .ds-dropdown-menu {
+        min-width: 60vw !important;
+        max-width: 70vw !important;
+    }
+}
+
 @media screen and (max-width: 834px) {
     .docs-search-box {
         margin-top: 10px;
@@ -59,6 +65,15 @@ span.algolia-autocomplete {
 /*main dropdown wrapper for small screens
 override external docsearch css file*/
 @media screen and (max-width: 555px) {
+    .docSearchWrapper {
+        width: 200px;
+    }
+    #doc-search {
+        width: 150px;
+    }
+    #doc-search {
+        font-size: 12px;
+    }
     .algolia-autocomplete .ds-dropdown-menu {
         min-width: 250px !important;
         max-width: 300px !important;

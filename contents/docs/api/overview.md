@@ -65,7 +65,11 @@ https://posthog.example.com/api/person/
 
 ### Username & Password (Deprecated)
 
+<blockquote class='warning-note'>
+
 **Important:** While you can still use this type of authentication, it's significantly more secure to use personal API keys, as described above.
+
+</blockquote>
 
 Authentication can also be done using your own username and password. We suggest creating a new user within your team specifically for this.
 
@@ -83,7 +87,7 @@ curl \
   https://posthog.example.com/api/person/
 ```
 
-**Important:** The key under "API key" in the Setup page is write-only and public. You cannot use it for any of these endpoints.
+> **Important:** The key under "API key" in the Setup page is write-only and public. You cannot use it for any of these endpoints.
 
 <br />
 

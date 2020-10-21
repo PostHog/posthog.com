@@ -58,7 +58,7 @@ To follow this tutorial along, you need to:
 1. Have [deployed PostHog](/docs/deployment).
 1. Have started receiving events via our [snippet](/docs/integrations/js-integration), one of our [integrations](/docs/integrations), or our [API](/docs/api/overview)
 
-**Note:** It can also be useful to have some [actions](/docs/tutorials/toolbar#creating-actions) set up, but not necessary.
+> **Note:** It can also be useful to have some [actions](/docs/tutorials/toolbar#creating-actions) set up, but not necessary.
 
 ## Playground (Beta)
 
