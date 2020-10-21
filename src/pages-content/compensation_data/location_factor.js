@@ -475,7 +475,7 @@ const location_factor = [
     {
         country: 'United States',
         area: 'San Francisco, California',
-        locationFactor: 0.1,
+        locationFactor: 1.0,
     },
     {
         country: 'United States',

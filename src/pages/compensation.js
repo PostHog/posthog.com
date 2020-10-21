@@ -19,14 +19,15 @@ let formatCur = (val) => formatter.format(val).replace('.00', '')
 const CompensationPage = () => {
     useEffect(() => {
         if (window) {
-            setJob(localStorage.getItem('job'))
-            setRegion(localStorage.getItem('region'))
-            setLevel(localStorage.getItem('level'))
-            setStep(localStorage.getItem('step'))
+            if (localStorage.getItem('job')) setJob(localStorage.getItem('job'))
+            if (localStorage.getItem('country')) setCountry(localStorage.getItem('country'))
+            if (localStorage.getItem('region')) setRegion(localStorage.getItem('region'))
+            if (localStorage.getItem('level')) setLevel(localStorage.getItem('level'))
+            if (localStorage.getItem('step')) setStep(localStorage.getItem('step'))
         }
     }, [])
 
-    const [job, setJob] = useState()
+    const [job, setJob] = useState('Engineer')
     const [country, setCountry] = useState('United States')
     const [region, setRegion] = useState('San Francisco, California')
     const [level, setLevel] = useState('Senior')
