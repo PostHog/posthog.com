@@ -1,9 +1,11 @@
 import React from 'react'
-import './style.css'
+import './style.scss'
 
 export const Spacer = ({ onlyMobile = false, onlyDesktop = false, height = '50px' }) => (
-    <div
-        className={(onlyMobile ? 'mobile-only' : '') + (onlyDesktop ? 'desktop-only' : '')}
-        style={{ height: height }}
-    />
+    <span className="custom-spacer-wrapper">
+        <div
+            className={'custom-spacer ' + (onlyMobile ? 'mobile-only' : '') + (onlyDesktop ? 'desktop-only' : '')}
+            style={{ height: height }}
+        />
+    </span>
 )

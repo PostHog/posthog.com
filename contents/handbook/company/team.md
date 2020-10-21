@@ -12,7 +12,7 @@ We don't care if you haven't finished (or attended) school, if you were super im
 
 What we do care about is your ability to learn, iterate, and ship.
 
-That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. 
+That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. Learn more about [diversity at PostHog](diversity).
 
 ![Remote Work Banner](../../images/posthogers-map.png) 
 <br /><small class="centered">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
