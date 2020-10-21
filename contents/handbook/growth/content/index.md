@@ -20,7 +20,7 @@ Many developers have no idea who we are, and do not have a current need for Post
 
 * Syndicating content about how to make your product successful - being a pundit.
   * New and useful open source libraries to build / understand user behavior
-  * Syndicating content aboout talking to users and how to build a product for engineers
+  * Syndicating content about talking to users and how to help engineers become better at product-thinking
   * Running an engineering team that ships
   * Big new releases in popular libraries that people use to ship with
   * Useful new products that are released
