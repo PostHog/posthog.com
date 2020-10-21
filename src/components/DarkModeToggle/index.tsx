@@ -26,15 +26,3 @@ export const DarkModeToggle = ({ checked, onChange }: DarkModeToggleProps) => {
         </div>
     )
 }
-
-/*     useEffect(() => {
-        if (window) {
-            const darkModeToggleElement = window.document.getElementById('toggleSwitch') as HTMLInputElement
-            const currentTheme = window.localStorage['currentWebsiteTheme']
-            if (!currentTheme) window.localStorage['currentWebsiteTheme'] = 'light'
-            darkModeToggleElement.checked = currentTheme === 'light'
-            darkModeToggleElement.addEventListener('change', () => {
-                handleToggle(window.localStorage['currentWebsiteTheme'])
-            })
-        }
-    }, []) */
