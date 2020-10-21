@@ -1554,12 +1554,33 @@ body.dark {
         }
 
         a {
-            color: rgb(196, 18, 197) !important;
+            color: rgb(196, 18, 197);
         }
 
         .footer-universal {
             color: white !important;
             background-color: #030821 !important;
+        }
+
+        .ant-menu-submenu-selected > .ant-menu-submenu-title span {
+            color: rgb(129, 20, 148) !important;
+        }
+
+        .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::before,
+        .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::after {
+            background: #ac1dff !important;
+        }
+
+        .ant-menu-item::after {
+            border-right: 3px solid #ff1de1 !important;
+        }
+
+        .keySelectedLink {
+            color: rgb(255, 255, 255);
+        }
+
+        .ant-menu-item-selected > a {
+            color: rgb(129, 20, 148) !important;
         }
     }
 }
