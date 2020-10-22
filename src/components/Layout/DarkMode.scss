@@ -20,7 +20,7 @@ body.dark .post-page-wrapper {
         }
 
         .footer-universal a {
-            color: #56555a !important;
+            color: #6e6d72 !important;
         }
 
         .footer-universal a:hover {
@@ -54,6 +54,10 @@ body.dark .post-page-wrapper {
 
         .ant-menu-submenu-selected > .ant-menu-submenu-title span {
             color: #b78aff !important;
+        }
+
+        .ant-menu-submenu-title {
+            color: #f3f3f3;
         }
 
         .ant-menu-submenu-title:hover {
@@ -110,6 +114,22 @@ body.dark .post-page-wrapper {
         .ant-anchor-ink-ball {
             border-color: #ba8fff !important;
             background: #18191a !important;
+        }
+
+        .zambezi {
+            color: #dddddd !important;
+        }
+
+        .zambezi:hover {
+            color: #ba8fff !important;
+        }
+
+        table {
+            td,
+            tr,
+            th {
+                color: #ffffff !important;
+            }
         }
     }
 }
