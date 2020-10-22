@@ -92,7 +92,7 @@ I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical
 
 Prior to joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
 
-### Lottie Coxon, Designer
+### Lottie Coxon, Graphic Designer
 
 I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin). 
 
