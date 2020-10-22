@@ -127,9 +127,9 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 ## Useful Tutorials
 <br>
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
+###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
+###### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
+###### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 

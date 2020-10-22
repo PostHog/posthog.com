@@ -1,0 +1,144 @@
+body.dark .post-page-wrapper {
+    #docs-sidebar {
+        background-color: #0e0e0e !important;
+    }
+
+    #menu-header,
+    .right-bar-inner,
+    #right-navbar,
+    #docs-search-container,
+    #docs-content-wrapper,
+    #docs-content-wrapper,
+    #ant-layout-content-wrapper {
+        background-color: #18191a !important;
+    }
+
+    .footer-universal {
+        color: white !important;
+        background-color: #111213 !important;
+    }
+
+    .footer-universal a {
+        color: #56555a !important;
+    }
+
+    .footer-universal a:hover {
+        color: #a7a5ac !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #ffffff !important;
+    }
+
+    li {
+        color: #ffffff !important;
+    }
+
+    p {
+        color: #d4d4d4 !important;
+    }
+
+    a {
+        color: #ba8fff;
+    }
+
+    .ant-menu-submenu-selected > .ant-menu-submenu-title span {
+        color: #b78aff !important;
+    }
+
+    .ant-menu-submenu-title:hover {
+        color: #b78aff !important;
+    }
+
+    .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::before,
+    .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::after {
+        background: #b78aff !important;
+    }
+
+    .ant-menu-item::after {
+        border-right: 3px solid #b78aff !important;
+    }
+
+    .ant-menu-item:hover {
+        color: #c6a2ff !important;
+    }
+
+    .keySelectedLink {
+        color: rgb(255, 255, 255);
+    }
+
+    .keySelectedLink:hover {
+        color: #bd94fd !important;
+    }
+
+    .ant-menu-item-selected > a {
+        color: #b78aff !important;
+    }
+
+    .docs-footer,
+    .note-block {
+        background: #28292b;
+        color: #ffffff;
+    }
+
+    .ant-anchor-link-active a {
+        color: #ba8fff !important;
+    }
+
+    .ant-anchor-link a {
+        color: #4e4c4c;
+    }
+
+    .ant-anchor-link a:hover {
+        color: #c5a7f7 !important;
+    }
+
+    .ant-anchor-ink::before {
+        background-color: #38343a;
+    }
+
+    .ant-anchor-ink-ball {
+        border-color: #ba8fff !important;
+        background: #18191a !important;
+    }
+
+    #github-star-repo-btn :host() {
+        .btn {
+            color: #ffffff;
+            background-color: #272727 !important;
+            border-color: #c5c9cc;
+            background-image: none !important;
+        }
+    }
+
+    code {
+        background-color: rgb(197 197 197 / 10%) !important;
+    }
+
+    @media screen and (min-width: 1080px) {
+    }
+}
+
+#docs-sidebar,
+#menu-header,
+#right-navbar,
+.right-bar-inner,
+#docs-search-container,
+#docs-content-wrapper,
+#ant-layout-content-wrapper,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+a {
+    transition: 1s;
+}

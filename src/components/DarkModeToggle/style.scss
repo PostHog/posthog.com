@@ -42,10 +42,10 @@
             box-sizing: border-box;
         }
         &:before {
-            content: '🌒';
+            content: '🌙';
             text-transform: uppercase;
             padding-left: 10px;
-            background-color: rgb(52, 233, 112);
+            background-color: #18191a;
             color: #fff;
         }
         .toggle-switch {
@@ -87,10 +87,10 @@
                     box-sizing: border-box;
                 }
                 &:before {
-                    content: '🌒';
+                    content: '🌙';
                     text-transform: uppercase;
                     padding-left: 10px;
-                    background-color: rgb(52, 233, 112);
+                    background-color: #18191a;
                     color: #fff;
                 }
             }
@@ -106,7 +106,7 @@
                 content: '☀️';
                 text-transform: uppercase;
                 padding-right: 10px;
-                background-color: #f90;
+                background-color: #353f6f;
                 color: #fff;
                 text-align: right;
             }
@@ -145,7 +145,7 @@
         content: '☀️';
         text-transform: uppercase;
         padding-right: 10px;
-        background-color: #f90;
+        background-color: #353f6f;
         color: #fff;
         text-align: right;
     }
