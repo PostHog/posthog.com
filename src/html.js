@@ -15,7 +15,6 @@ export default function HTML(props) {
                     dangerouslySetInnerHTML={{
                         __html: `
               (function() {
-                console.log('I RAN')
                   window.__onThemeChange = function() {};
                   function setTheme(newTheme) {
                     window.__theme = newTheme;

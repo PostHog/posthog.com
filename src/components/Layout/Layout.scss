@@ -1470,95 +1470,114 @@ code {
         font-size: 20px;
         line-height: 32px;
     }
+}
 
+@media screen and (max-width: 1250px) {
     .footer-links-header {
         font-size: 16px !important;
     }
 }
 
 body.dark .post-page-wrapper {
-    /* Dark mode only available on Desktop at first */
-    @media screen and (min-width: 1080px) {
-        #docs-sidebar {
-            background-color: rgb(34, 32, 32) !important;
-        }
+    #docs-sidebar {
+        background-color: rgb(34, 32, 32) !important;
+    }
 
-        #menu-header {
-            background-color: #18191a !important;
-        }
+    #menu-header {
+        background-color: #18191a !important;
+    }
 
-        #right-navbar {
-            background-color: #18191a !important;
-        }
+    #right-navbar {
+        background-color: #18191a !important;
+    }
 
-        .right-bar-inner {
-            background-color: #18191a !important;
-        }
+    .right-bar-inner {
+        background-color: #18191a !important;
+    }
 
-        #docs-search-container {
-            background-color: #18191a !important;
-        }
+    #docs-search-container {
+        background-color: #18191a !important;
+    }
 
-        #docs-content-wrapper {
-            background-color: #18191a !important;
-        }
+    #docs-content-wrapper {
+        background-color: #18191a !important;
+    }
 
-        #ant-layout-content-wrapper {
-            background-color: #18191a !important;
-        }
+    #ant-layout-content-wrapper {
+        background-color: #18191a !important;
+    }
 
-        p {
-            color: rgb(208, 193, 193) !important;
-        }
+    p {
+        color: rgb(208, 193, 193) !important;
+    }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            color: #ffffff !important;
-        }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #ffffff !important;
+    }
 
-        li {
-            color: #ffffff !important;
-        }
+    li {
+        color: #ffffff !important;
+    }
 
-        a {
-            color: #ba8fff;
-        }
+    a {
+        color: #ba8fff;
+    }
 
-        .footer-universal {
-            color: white !important;
-            background-color: #030821 !important;
-        }
+    .footer-universal {
+        color: white !important;
+        background-color: #030821 !important;
+    }
 
-        .ant-menu-submenu-selected > .ant-menu-submenu-title span {
-            color: rgb(129, 20, 148) !important;
-        }
+    .ant-menu-submenu-selected > .ant-menu-submenu-title span {
+        color: rgb(129, 20, 148) !important;
+    }
 
-        .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::before,
-        .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::after {
-            background: #ac1dff !important;
-        }
+    .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::before,
+    .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::after {
+        background: #ac1dff !important;
+    }
 
-        .ant-menu-item::after {
-            border-right: 3px solid #ff1de1 !important;
-        }
+    .ant-menu-item::after {
+        border-right: 3px solid #ff1de1 !important;
+    }
 
-        .keySelectedLink {
-            color: rgb(255, 255, 255);
-        }
+    .keySelectedLink {
+        color: rgb(255, 255, 255);
+    }
 
-        .ant-menu-item-selected > a {
-            color: rgb(129, 20, 148) !important;
-        }
+    .ant-menu-item-selected > a {
+        color: rgb(129, 20, 148) !important;
+    }
 
-        .docs-footer,
-        .note-block {
-            background: #29252c;
+    .docs-footer,
+    .note-block {
+        background: #29252c;
+        color: #ffffff;
+    }
+
+    .ant-anchor-link-active a {
+        color: #9554ff !important;
+    }
+
+    .ant-anchor-ink span {
+        border-color: #ffffff !important;
+    }
+
+    #github-star-repo-btn :host() {
+        .btn {
             color: #ffffff;
+            background-color: #272727 !important;
+            border-color: #c5c9cc;
+            background-image: none !important;
         }
+    }
+
+    @media screen and (min-width: 1080px) {
     }
 }
 

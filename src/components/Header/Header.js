@@ -20,7 +20,12 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
                     <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
                 </Link>
             )}
-            <Menu isBlogPage={isBlogPage} screenIsSmall={screenIsSmall} isHomePage={isHomePage} />
+            <Menu
+                isBlogPage={isBlogPage}
+                screenIsSmall={screenIsSmall}
+                isHomePage={isHomePage}
+                isPostPage={onPostPage}
+            />
         </div>
     )
 }

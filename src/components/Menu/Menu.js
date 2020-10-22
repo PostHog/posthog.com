@@ -3,7 +3,7 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
 import List from 'antd/lib/list'
 import { Menu as AntMenu } from 'antd'
-import StarRepoButton from '../StarRepoButton'
+import { StarRepoButton } from '../StarRepoButton'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
 

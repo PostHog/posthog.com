@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './Layout.scss'
-import ResponsiveSidebar from '../ResponsiveSidebar'
+import { ResponsiveSidebar } from '../ResponsiveSidebar'
 import Container from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
@@ -73,7 +73,6 @@ function Layout({
                                             <ResponsiveSidebar />
                                         </AntdLayout.Sider>
                                     )}
-
                                     <AntdLayout id="ant-layout-content-wrapper" style={{ background: '#ffffff' }}>
                                         <AntdLayout.Header
                                             className={
