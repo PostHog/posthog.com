@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import Menu from 'antd/lib/menu'
 import 'antd/lib/menu/style/css'
@@ -10,12 +10,6 @@ import { DarkModeToggle } from '../../components/DarkModeToggle'
 const SubMenu = Menu.SubMenu
 
 function SidebarContents() {
-    const [theme, setTheme] = useState(null)
-    useEffect(() => {
-        setTheme(window.__theme)
-        window.__onThemeChange = () => setTheme(window.__theme)
-    }, [])
-
     const {
         sidebarSelectedKey: selectedKey,
         sidebarExpandedKeys: expandedKeys,
@@ -23,9 +17,17 @@ function SidebarContents() {
         sidebarSelectedEntry: selectedEntry,
         sidebarContentTree: contentTree,
         sidebarContentDir: contentDir,
+        websiteTheme: websiteTheme,
     } = useValues(layoutLogic)
 
-    const { setSidebarOpen, onSidebarContentExpanded, setSidebarContentStructure } = useActions(layoutLogic)
+    const { setSidebarOpen, onSidebarContentExpanded, setSidebarContentStructure, setWebsiteTheme } = useActions(
+        layoutLogic
+    )
+
+    useEffect(() => {
+        setWebsiteTheme(window.__theme)
+        window.__onThemeChange = () => setWebsiteTheme(window.__theme)
+    }, [])
 
     return (
         <StaticQuery
@@ -177,7 +179,7 @@ function SidebarContents() {
                             {loop(tree)}
                         </Menu>
                         <DarkModeToggle
-                            checked={theme === 'dark'}
+                            checked={websiteTheme === 'dark'}
                             onChange={(e) => window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')}
                         />
                     </span>

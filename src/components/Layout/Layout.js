@@ -29,6 +29,7 @@ function Layout({
     containerStyle = {},
 }) {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
+
     const links = [
         {
             rel: 'stylesheet',

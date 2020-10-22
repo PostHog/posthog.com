@@ -1600,6 +1600,11 @@ a {
     transition: 1s;
 }
 
+#star-repo-btn {
+    background-image: none !important;
+    background: red !important;
+}
+
 /* body.light {
     #docs-sidebar {
         background-color: rgb(249, 249, 249) !important;

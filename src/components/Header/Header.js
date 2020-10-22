@@ -24,7 +24,7 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
                 isBlogPage={isBlogPage}
                 screenIsSmall={screenIsSmall}
                 isHomePage={isHomePage}
-                isPostPage={onPostPage}
+                isPostPage={isDocsPage || isHandbookPage}
             />
         </div>
     )
