@@ -29,7 +29,7 @@ function Layout({
     isFeaturesPage,
     containerStyle = {},
 }) {
-    const { sidebarHide, anchorHide } = useValues(layoutLogic)
+    const { sidebarHide, anchorHide, websiteTheme } = useValues(layoutLogic)
 
     const links = [
         {
@@ -106,7 +106,7 @@ function Layout({
                                             )}
                                         </AntdLayout.Header>
 
-                                        {isDocsPage && <DocsSearch />}
+                                        {isDocsPage && <DocsSearch theme={websiteTheme} />}
 
                                         {/* content */}
                                         <AntdLayout
