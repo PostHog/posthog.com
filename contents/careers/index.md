@@ -18,7 +18,7 @@ We've made a crazy amount of progress to date.
 
 We took party in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most succesful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just 4 weeks old.
 
-Our GitHub repo has over over 3.2k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
+Our GitHub repo has over over 3.3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
@@ -113,13 +113,13 @@ We take this application seriously, and that's why it's listed above our other r
 
 Our team is proactively looking for the following:
 
-* Front-End Developer
-* Full Stack Software Engineer
+* [Designer](/careers/designer)
+* [Full Stack Software Engineer](/careers/full-stack-software-engineer)
 
 
 # Get Started - Applying
 
-Email a thoughtful cover letter to [tim@posthog.com](mailto:tim@posthog.com). A good cover letter includes:
+Email a thoughtful cover letter to [careers@posthog.com](mailto:careers@posthog.com). A good cover letter includes:
 
 * What makes you a great early hire into our first 15 people
 * Something weird you've learned in your career

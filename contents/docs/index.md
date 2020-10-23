@@ -31,4 +31,4 @@ There are four steps to follow next:
 
 <br>
 
-**Note:** If you want us to host PostHog for you, are a larger customer, or would like access to premium features, feel free to get in touch with us via email at *sales@posthog.com*. On top of our main features, we are also able to provide personalized support, user permissions, A/B testing, database integrations, audit logs, among other features.
+> **Note:** If you want us to host PostHog for you, are a larger customer, or would like access to premium features, feel free to get in touch with us via email at *sales@posthog.com*. On top of our main features, we are also able to provide personalized support, user permissions, A/B testing, database integrations, audit logs, among other features.

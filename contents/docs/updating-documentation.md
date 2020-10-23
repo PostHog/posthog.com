@@ -62,7 +62,7 @@ To include an image in a markdown file, you can use nice local references, like 
 ![Twin Peaks](../images/02/IMG_4294-scaled.jpg)
 ```
 
-> Note that it may be necessary to change the folder depending on your file structure. For example, if you needed to go up two directories, this *could* be:
+Note that it may be necessary to change the folder depending on your file structure. For example, if you needed to go up two directories, this *could* be:
 
 ```markdown
 ![Twin Peaks](../../images/02/IMG_4294-scaled.jpg)

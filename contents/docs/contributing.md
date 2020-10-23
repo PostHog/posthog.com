@@ -15,7 +15,11 @@ Bug reports help us make PostHog better for everyone. When you create a bug, the
 
 Please search within our issues before raising a new one to make sure you're not raising a duplicate.
 
-**Important:** If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
+<blockquote class='warning-note'>
+
+**Note:** If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
+
+</blockquote>
 
 <br>
 
