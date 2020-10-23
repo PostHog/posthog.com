@@ -1,13 +1,13 @@
 .toggle-wrapper {
     display: inline-block;
     text-align: center;
-    padding-right: 30px;
     margin-top: 10px;
 }
 
 .toggle-switch {
     position: relative;
     width: 75px;
+    margin-top: 10px;
     display: inline-block;
     vertical-align: middle;
     -webkit-user-select: none;
@@ -47,7 +47,7 @@
             content: '🌙';
             text-transform: uppercase;
             padding-left: 10px;
-            background-color: #1e1f20;
+            background-color: #28292b;
             color: #fff;
         }
         .toggle-switch {
@@ -92,7 +92,7 @@
                     content: '🌙';
                     text-transform: uppercase;
                     padding-left: 10px;
-                    background-color: #1e1f20;
+                    background-color: #28292b;
                     color: #fff;
                 }
             }

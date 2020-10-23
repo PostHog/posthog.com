@@ -114,8 +114,8 @@ function Layout({
                                         </AntdLayout.Header>
 
                                         {(isDocsPage || isHandbookPage) && (
-                                            <div style={{ display: 'block', height: 50 }}>
-                                                <div style={{ position: 'absolute', right: 50 }}>
+                                            <div className="post-page-sub-header">
+                                                <div className="post-page-sub-header-inner">
                                                     <DarkModeToggle
                                                         checked={websiteTheme === 'dark'}
                                                         onChange={(e) =>
@@ -123,6 +123,7 @@ function Layout({
                                                                 e.target.checked ? 'dark' : 'light'
                                                             )
                                                         }
+                                                        style={{ paddingRight: isDocsPage ? 5 : 30 }}
                                                     />
                                                     {isDocsPage && <DocsSearch theme={websiteTheme} />}
                                                 </div>

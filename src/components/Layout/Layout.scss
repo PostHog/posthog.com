@@ -355,7 +355,6 @@ ul {
     margin-bottom: 1.45rem;
     list-style-position: outside;
     list-style-image: none;
-    /* background-color: #ffffff; */
 }
 ol {
     margin-left: 1.45rem;
@@ -690,10 +689,6 @@ header {
     padding: 0;
 }
 
-/* .menuHeader {
-    background-color: #ffffff !important;
-} */
-
 .blogHeader {
     background-color: #35416b !important;
     background-size: cover;
@@ -734,10 +729,6 @@ header {
 .headerKey a {
     color: #000000;
 }
-
-/* .sideBar {
-    background: #f9f9f9 !important;
-} */
 
 .mobileHeader {
     background-color: white;
@@ -1041,10 +1032,6 @@ a.ant-anchor-link-title:hover {
     color: #577bfb;
 }
 
-/* .ant-layout {
-    background-color: white !important;
-} */
-
 .docs-footer {
     margin-top: 2rem;
     background: rgb(218, 218, 218);
@@ -1102,7 +1089,7 @@ a.middle {
 
 .docsPageLayout main {
     min-height: 280px;
-    padding: 3rem 0% 0 10%;
+    padding: 2rem 0% 0 10%;
     width: 100%;
 }
 
@@ -1420,18 +1407,32 @@ code {
     color: white;
 }
 
-.docs-only-layout main {
-    padding-top: 0 !important;
-}
-
 li {
     font-size: 16px;
     color: black;
 }
 
+.post-page-sub-header {
+    display: 'block';
+    height: 60px;
+}
+
+.post-page-sub-header-inner {
+    position: absolute !important;
+    right: 50px;
+}
+
 @media screen and (max-width: 1076px) {
     .toggle-wrapper {
         display: none !important;
+    }
+
+    .post-page-sub-header {
+        height: 40px;
+    }
+
+    .post-page-sub-header-inner {
+        right: 10px;
     }
     .docsHeader {
         background-color: #f9f9f9;

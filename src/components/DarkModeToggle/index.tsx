@@ -4,11 +4,12 @@ import './style.scss'
 interface DarkModeToggleProps {
     checked: boolean
     onChange: () => void
+    style: Object
 }
 
-export const DarkModeToggle = ({ checked, onChange }: DarkModeToggleProps) => {
+export const DarkModeToggle = ({ checked, onChange, style }: DarkModeToggleProps) => {
     return (
-        <span className="toggle-wrapper">
+        <span className="toggle-wrapper" style={style}>
             <span className="toggle-switch">
                 <input
                     type="checkbox"
