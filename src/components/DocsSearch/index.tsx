@@ -52,6 +52,7 @@ export const DocsSearch = ({ className = '', backgroundColor = '#ffffff', theme 
             doc.addEventListener('keydown', (e) => {
                 // ⌘K opens bar on Mac and Ctrl + K opens it on everything else
                 if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault()
                     docSearchInputElement.focus()
                     handleSearchBarUsed('shortcut')
                 }
