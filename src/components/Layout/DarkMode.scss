@@ -90,9 +90,14 @@ body.dark .post-page-wrapper {
         }
 
         .docs-footer,
-        .note-block {
+        .note-block,
+        blockquote {
             background: #28292b;
             color: #ffffff;
+        }
+
+        .warning-note {
+            background: #0d0113 !important;
         }
 
         .ant-anchor-link-active a {
