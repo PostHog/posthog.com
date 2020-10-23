@@ -1430,6 +1430,9 @@ li {
 }
 
 @media screen and (max-width: 1076px) {
+    .toggle-wrapper {
+        display: none !important;
+    }
     .docsHeader {
         background-color: #f9f9f9;
         border-bottom: 6px solid #c4c4c4;

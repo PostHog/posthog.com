@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
@@ -12,9 +12,10 @@ import ResponsiveTopBar from '../ResponsiveTopBar'
 import MediaQuery from 'react-responsive'
 import { default as AntdLayout } from 'antd/lib/layout'
 import NewsletterForm from '../NewsletterForm'
-import { useValues } from 'kea'
+import { useValues, useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { DocsSearch } from '../DocsSearch'
+import { DarkModeToggle } from '../../components/DarkModeToggle'
 
 function Layout({
     onPostPage,
@@ -30,6 +31,7 @@ function Layout({
     containerStyle = {},
 }) {
     const { sidebarHide, anchorHide, websiteTheme } = useValues(layoutLogic)
+    const { setWebsiteTheme } = useActions(layoutLogic)
 
     const links = [
         {
@@ -37,6 +39,11 @@ function Layout({
             href: 'https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.css',
         },
     ]
+
+    useEffect(() => {
+        setWebsiteTheme(window.__theme)
+        window.__onThemeChange = () => setWebsiteTheme(window.__theme)
+    }, [])
 
     return (
         <StaticQuery
@@ -106,7 +113,21 @@ function Layout({
                                             )}
                                         </AntdLayout.Header>
 
-                                        {isDocsPage && <DocsSearch theme={websiteTheme} />}
+                                        {(isDocsPage || isHandbookPage) && (
+                                            <div style={{ display: 'block', height: 50 }}>
+                                                <div style={{ position: 'absolute', right: 50 }}>
+                                                    <DarkModeToggle
+                                                        checked={websiteTheme === 'dark'}
+                                                        onChange={(e) =>
+                                                            window.__setPreferredTheme(
+                                                                e.target.checked ? 'dark' : 'light'
+                                                            )
+                                                        }
+                                                    />
+                                                    {isDocsPage && <DocsSearch theme={websiteTheme} />}
+                                                </div>
+                                            </div>
+                                        )}
 
                                         {/* content */}
                                         <AntdLayout
@@ -164,3 +185,27 @@ function Layout({
 }
 
 export default Layout
+
+/* const {
+    sidebarSelectedKey: selectedKey,
+    sidebarExpandedKeys: expandedKeys,
+    sidebarEntry: entry,
+    sidebarSelectedEntry: selectedEntry,
+    sidebarContentTree: contentTree,
+    sidebarContentDir: contentDir,
+    websiteTheme: websiteTheme,
+} = useValues(layoutLogic)
+
+const { setSidebarOpen, onSidebarContentExpanded, setSidebarContentStructure, setWebsiteTheme } = useActions(
+    layoutLogic
+)
+
+useEffect(() => {
+    setWebsiteTheme(window.__theme)
+    window.__onThemeChange = () => setWebsiteTheme(window.__theme)
+}, [])
+
+<DarkModeToggle
+checked={websiteTheme === 'dark'}
+onChange={(e) => window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')}
+/> */

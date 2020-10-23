@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import Menu from 'antd/lib/menu'
 import 'antd/lib/menu/style/css'
 import './SidebarContents.css'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-import { DarkModeToggle } from '../../components/DarkModeToggle'
 
 const SubMenu = Menu.SubMenu
 
@@ -17,17 +16,9 @@ function SidebarContents() {
         sidebarSelectedEntry: selectedEntry,
         sidebarContentTree: contentTree,
         sidebarContentDir: contentDir,
-        websiteTheme: websiteTheme,
     } = useValues(layoutLogic)
 
-    const { setSidebarOpen, onSidebarContentExpanded, setSidebarContentStructure, setWebsiteTheme } = useActions(
-        layoutLogic
-    )
-
-    useEffect(() => {
-        setWebsiteTheme(window.__theme)
-        window.__onThemeChange = () => setWebsiteTheme(window.__theme)
-    }, [])
+    const { setSidebarOpen, onSidebarContentExpanded, setSidebarContentStructure } = useActions(layoutLogic)
 
     return (
         <StaticQuery
@@ -178,10 +169,6 @@ function SidebarContents() {
                         >
                             {loop(tree)}
                         </Menu>
-                        <DarkModeToggle
-                            checked={websiteTheme === 'dark'}
-                            onChange={(e) => window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')}
-                        />
                     </span>
                 )
             }}

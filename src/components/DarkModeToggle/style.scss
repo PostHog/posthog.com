@@ -1,6 +1,8 @@
 .toggle-wrapper {
-    display: block;
+    display: inline-block;
     text-align: center;
+    padding-right: 30px;
+    margin-top: 10px;
 }
 
 .toggle-switch {
@@ -33,9 +35,9 @@
             display: block;
             float: left;
             width: 50%;
-            height: 34px;
+            height: 25px;
             padding: 0;
-            line-height: 34px;
+            line-height: 25px;
             font-size: 14px;
             color: white;
             font-weight: bold;
@@ -78,9 +80,9 @@
                     display: block;
                     float: left;
                     width: 50%;
-                    height: 34px;
+                    height: 25px;
                     padding: 0;
-                    line-height: 34px;
+                    line-height: 25px;
                     font-size: 14px;
                     color: white;
                     font-weight: bold;

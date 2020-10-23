@@ -1,3 +1,7 @@
+#docs-search-container {
+    display: inline-block;
+}
+
 .flex-row-reverse {
     display: flex;
     flex-direction: row-reverse;
@@ -43,7 +47,7 @@ span.algolia-autocomplete {
 .docs-search-box {
     margin-top: 15px;
     margin-right: 25px;
-    padding-right: 50px;
+    /* padding-right: 50px; */
 }
 
 @media screen and (max-width: 834px) {

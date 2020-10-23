@@ -60,17 +60,17 @@ export const DocsSearch = ({ className = '', backgroundColor = '#ffffff', theme 
     }, [])
 
     return (
-        <div
+        <span
             className={className + ` ${theme}`}
             id="docs-search-container"
             style={{ backgroundColor: backgroundColor }}
         >
-            <div className="flex-row-reverse docs-search-box">
+            <span className="flex-row-reverse docs-search-box">
                 <form className="docSearchWrapper" id="doc-search-wrapper">
                     <input placeholder="Search our Docs" id="doc-search" />
                     <SearchOutlined className="docSearchIcon" type="submit" />
                 </form>
-            </div>
-        </div>
+            </span>
+        </span>
     )
 }
