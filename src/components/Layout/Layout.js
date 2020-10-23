@@ -113,7 +113,7 @@ function Layout({
                                             )}
                                         </AntdLayout.Header>
 
-                                        {(isDocsPage || isHandbookPage) && (
+                                        {onPostPage && (
                                             <div className="post-page-sub-header">
                                                 <div className="post-page-sub-header-inner">
                                                     <DarkModeToggle
