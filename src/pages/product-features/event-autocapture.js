@@ -10,7 +10,7 @@ import { FeaturedSectionTextRight } from '../../components/Sections/FeaturedSect
 import autocaptureImg1 from '../../images/event-autocapture-1.svg'
 import autocaptureImg2 from '../../images/event-autocapture-2.svg'
 import autocaptureImg3 from '../../images/event-autocapture-3.svg'
-import { StartNowButton } from '../../StartNowButton'
+import { StartNowButton } from '../../components/StartNowButton'
 
 function ProductFeatures() {
     return (

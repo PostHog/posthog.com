@@ -10,7 +10,7 @@ import { FeaturedSectionTextRight } from '../../components/Sections/FeaturedSect
 import funnelsImg1 from '../../images/funnels-1-mobile.svg'
 import funnelsImg2 from '../../images/funnels-2-mobile.svg'
 import funnelsImg3 from '../../images/funnels-3-mobile.svg'
-import { StartNowButton } from '../../StartNowButton'
+import { StartNowButton } from '../../components/StartNowButton'
 
 function FunnelsPage() {
     return (

@@ -10,7 +10,7 @@ import { Spacer } from '../../components/Spacer'
 import featureFlagsImg1 from '../../images/feature-flags-1.svg'
 import featureFlagsImg2 from '../../images/feature-flags-2.svg'
 import featureFlagsImg3 from '../../images/feature-flags-3.svg'
-import { StartNowButton } from '../../StartNowButton'
+import { StartNowButton } from '../../components/StartNowButton'
 
 function FeatureFlagsPage() {
     return (
