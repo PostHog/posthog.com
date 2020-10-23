@@ -39,9 +39,7 @@ function Menu({ isBlogPage, isHomePage, screenIsSmall, isPostPage }) {
                                 {menuItems.reverse().map((item) => {
                                     return item.name === 'star-repo' ? (
                                         <AntMenu.Item className="headerKey star-repo-btn" key={item.name}>
-                                            <StarRepoButton
-                                                theme={isPostPage ? websiteTheme : 'light'}
-                                            ></StarRepoButton>
+                                            <StarRepoButton theme={isPostPage ? websiteTheme : 'light'} />
                                         </AntMenu.Item>
                                     ) : (
                                         <AntMenu.Item className="headerKey" key={item.link || item.a}>
@@ -106,9 +104,7 @@ function Menu({ isBlogPage, isHomePage, screenIsSmall, isPostPage }) {
                                                             {item.name}
                                                         </a>
                                                     ) : item.name === 'star-repo' ? (
-                                                        <StarRepoButton
-                                                            theme={isPostPage ? websiteTheme : 'light'}
-                                                        ></StarRepoButton>
+                                                        <StarRepoButton theme="light" />
                                                     ) : (
                                                         <Link
                                                             to={item.link}
