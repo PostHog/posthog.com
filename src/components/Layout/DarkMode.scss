@@ -65,7 +65,9 @@ body.dark .post-page-wrapper {
         }
 
         .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::before,
-        .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::after {
+        .ant-menu-submenu-selected.ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow::after,
+        .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+        .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after {
             background: #b78aff !important;
         }
 
@@ -91,7 +93,8 @@ body.dark .post-page-wrapper {
 
         .docs-footer,
         .note-block,
-        blockquote {
+        blockquote,
+        code {
             background: #28292b;
             color: #ffffff;
         }
