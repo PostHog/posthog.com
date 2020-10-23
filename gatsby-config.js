@@ -19,6 +19,7 @@ module.exports = {
                 path: `${__dirname}/src/images`,
             },
         },
+        `gatsby-plugin-mdx`,
         `gatsby-transformer-json`,
         {
             resolve: `gatsby-source-filesystem`,
