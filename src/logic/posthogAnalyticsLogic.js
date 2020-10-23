@@ -1,6 +1,6 @@
 import { kea } from 'kea'
 
-export const featureFlagLogic = kea({
+export const posthogAnalyticsLogic = kea({
     actions: {
         posthogFound: (posthog) => ({ posthog }),
         setFeatureFlags: (featureFlags) => ({ featureFlags }),
@@ -17,6 +17,12 @@ export const featureFlagLogic = kea({
                     }
                     return flags
                 },
+            },
+        ],
+        posthog: [
+            null,
+            {
+                posthogFound: (_, { posthog }) => posthog,
             },
         ],
     },
