@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import './style.scss'
 import 'docsearch.js/dist/cdn/docsearch.min.css/'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { useValues } from 'kea'
 
 interface DocsSearchProps {
     className: string
@@ -10,6 +12,8 @@ interface DocsSearchProps {
 }
 
 export const DocsSearch = ({ className = '', backgroundColor = '#ffffff', theme = 'light' }: DocsSearchProps) => {
+    const { posthog } = useValues(posthogAnalyticsLogic)
+
     useEffect(() => {
         if (window) {
             import('docsearch.js').then(({ default: docsearch }) => {
@@ -22,7 +26,7 @@ export const DocsSearch = ({ className = '', backgroundColor = '#ffffff', theme 
 
             const doc = window.document
             const docSearchBarElement = doc.getElementById('doc-search-wrapper')
-            const docSearchInputElement = doc.getElementById('doc-search')
+            const docSearchInputElement = doc.getElementById('doc-search') as HTMLInputElement
 
             docSearchInputElement.placeholder += window.navigator.platform.includes('Mac') ? ' (⌘K)' : ' (Ctrl + K)'
 
@@ -39,8 +43,8 @@ export const DocsSearch = ({ className = '', backgroundColor = '#ffffff', theme 
                 }
 
                 // Track search bar usage
-                window.posthog.capture('docs_search_used', { is_first_use: isFirstUse, open_method: openMethod })
-                if (isFirstUse) window.posthog.people.set({ used_docs_search: true })
+                posthog?.capture('docs_search_used', { is_first_use: isFirstUse, open_method: openMethod })
+                if (isFirstUse) posthog?.people.set({ used_docs_search: true })
             }
 
             docSearchBarElement.addEventListener('click', () => handleSearchBarUsed('click'))
