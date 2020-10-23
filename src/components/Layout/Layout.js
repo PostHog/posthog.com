@@ -186,27 +186,3 @@ function Layout({
 }
 
 export default Layout
-
-/* const {
-    sidebarSelectedKey: selectedKey,
-    sidebarExpandedKeys: expandedKeys,
-    sidebarEntry: entry,
-    sidebarSelectedEntry: selectedEntry,
-    sidebarContentTree: contentTree,
-    sidebarContentDir: contentDir,
-    websiteTheme: websiteTheme,
-} = useValues(layoutLogic)
-
-const { setSidebarOpen, onSidebarContentExpanded, setSidebarContentStructure, setWebsiteTheme } = useActions(
-    layoutLogic
-)
-
-useEffect(() => {
-    setWebsiteTheme(window.__theme)
-    window.__onThemeChange = () => setWebsiteTheme(window.__theme)
-}, [])
-
-<DarkModeToggle
-checked={websiteTheme === 'dark'}
-onChange={(e) => window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')}
-/> */
