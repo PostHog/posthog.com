@@ -4,35 +4,74 @@ sidebar: Careers
 showTitle: true
 ---
 
-"As soon as I have got flying to perfection, I have got a scheme about a steam engine." - [Ada Lovelace](https://en.wikipedia.org/wiki/Ada_Lovelace)
+"Let me do it. You tell me when you want it and where you want it to land, and I'll do it backwards and tell you when to take off." - [Katherine Johnson](https://www.nasa.gov/content/katherine-johnson-biography)
 
 PostHog exists to increase the number of successful products in the world.
 
 ## Engineering has been everything to us so far
 
-James and Tim founded PostHog in January. They had a bunch of features they wanted to build - not sharing user data to someone else's cloud, autocapturing event data, getting access to underlying data.
+[James](https://twitter.com/james406) and [Tim](https://twitter.com/timgl) founded PostHog in January. They had a bunch of features they wanted to build to understand their own user behavior - not sharing user data to a third party service, autocapturing events, and getting access to underlying data. Things an engineer would care about.
 
 It wasn't until they met [Dalton Caldwell](https://twitter.com/daltonc?lang=en) for a chat that it all clicked - *open source* would be the strategy, everything else would follow.
 
-This means we're a product-led company. We're building a big open source community around a great, totally free, product.
+This means PostHog is a product-led company. We're building a big open source community around a great, totally free, product.
 
-The end result? Releasing new features regularly has been the *only* thing we've had to do to get to thousands of deployments.
+The end result? Releasing new features regularly has been the *only* thing we've had to do to get thousands of deployments. We've raised millions of dollars from the world's best investors but we're still a small, lean team.
 
-## We release fast, it's pretty wild
+PostHog helps improve products built by teams in everything from huge airlines and banks, to indie gamers making it more fun to protect earth from aliens and even underwear startups working on their retention!
 
-We'll only win by staying fast. [Comments like this](https://news.ycombinator.com/item?id=22378393) are what we aim for.
+## The release schedule is wild
+
+We're up against billion dollar companies, and we're catching up. We will overtake them by being faster.
+
+[Comments like this](https://news.ycombinator.com/item?id=22378393) are what we live and die by.
+
+We keep cycles very short. There is a roadmap session every two weeks - each developer suggests what they want to build to have the greatest impact, then they do just that. You choose what you focus on, and you are responsible for tests, user feedback and tracking.
 
 ## The people here are really, really smart
 
-We're all remote, and we pay top of market. Combine those things with working on open source most of the time, and you have a recipe for hiring the best engineering talent in the world.
+Every day we feel lucky to have them here!
 
-That means your team here has a combination of former CTOs and YC founders turned developers, alongside some of the best talent from the world's largest tech companies. We take bets on people with less experience too - we are as willing to hire an 18 year old genius as we are a seasoned veteran. Our team is tiny but we live in 10 different countries. This [diverse group](/handbook/company/diversity) looks [pretty weird](/handbook) on paper, but it's magical.
+We're all remote, and we raised enough to pay top of market. Combine those things with working on open source, and you have a recipe for hiring the best engineering talent in the world.
 
-## We're swamped
+You'd be working with a combination of former CTOs and YC founders all turned developers, alongside some of the best developers from the world's largest tech companies who have the experience to help us handle scalability.
 
-What this means is we're getting a 
-PostHog's engineering culture revolves around autonomy, speed and iteration.
+We take bets on people with less experience too - we are as willing to hire an unproven genius straight out of school as we are a seasoned veteran.
 
-As an early engineer (we currently have a team of 10 in total), you'll be key to building a lot of the core functionality of PostHog. We encourage you to take a look at our repo (issues and PRs) to see the types of things you'd be doing.
+Our team is tiny but we live in 10 different countries. This [diverse group](/handbook/company/diversity) looks [pretty weird](/handbook/company/team) on paper, but it's magical. Apart from the fact [most of them think pineapple belongs on pizza](https://twitter.com/PostHogHQ/status/1319583079648923648). It doesn't.
 
-We're looking for people who are *proactive* and are *ridiculously quick* at getting new features out, while writing test and generally maintaining a clean codebase.
+## Get in early
+
+Would you have rather been in the first 20 or the last 20 people to join Google?
+
+We need engineers who care about users, can ship quickly and thrive under a lot of autonomy. You aren't going to have a product manager dictating what you do, but you are going to need to make intelligent design and priotization decisions with full support from the rest of the team.
+
+## We can't do this without you
+
+Our users do not use PostHog for the most complex querying of user data imaginable. We aren't going to use { machine learning | AI | blockchain } any time soon.
+
+PostHog meets simple use cases across a broad part of product development. That means everything from understanding retention, conversion rates, feature usage, to feature flags and heatmaps. Up next, we have session recording and plugins to expand our breadth even faster.
+
+You would be a key part in us expanding the range of functionality we are offering, or in supporting its use at scale. We'd want you to suggest ideas that you could take from concept to tests and deployment.
+
+In particular, those with a very strong background in Django, architecture and databases (we use Clickhouse and Postgres) are going to have fun here - we have even individual clients doing hundreds of millions of events a day, but we are *truly* open to applications from any engineer that thinks they could deliver exceptional work here.
+
+## Sold? Apply now
+
+We sweated over this ad - we value nothing more than having an excellent team with a great environment to work in. We hope this came through.
+
+Drop us a line - [careers@posthog.com](mailto:careers@posthog.com).
+
+Tell us:
+
+* How you can achieve the above in a few sentences
+* Why you're drawn to us
+* Projects you've worked on (at your work or on the side)
+
+## Not sold? Learn more first
+
+* [How we hire](/careers#the-process)
+* We ask for your best work, and in return [pay generously](/handbook/people/compensation) and have [exceptional benefits](/careers/#benefits)
+* Learn about [the team you'd be working with](/handbook/company/team)
+* Getting hiring right is key to diversity. Learn about [how we think about this](/handbook/company/diversity)
+* Check out [our stack](/docs/stack)
