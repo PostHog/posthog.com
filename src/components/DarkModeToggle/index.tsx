@@ -9,7 +9,7 @@ interface DarkModeToggleProps {
 
 export const DarkModeToggle = ({ checked, onChange, style }: DarkModeToggleProps) => {
     return (
-        <span className="toggle-wrapper" style={style}>
+        <span className="toggle-wrapper" style={style} data-attr="dark-mode-toggle">
             <span className="toggle-switch">
                 <input
                     type="checkbox"
