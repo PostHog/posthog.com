@@ -18,7 +18,7 @@ This means PostHog is a product-led company. We're building a big open source co
 
 The end result? Releasing new features regularly has been the *only* thing we've had to do to get thousands of deployments. We've raised millions of dollars from the world's best investors but we're still a small, lean team.
 
-PostHog helps improve products built by teams in everything from huge airlines and banks, to indie gamers making it more fun to protect earth from aliens and even underwear startups working on their retention!
+PostHog helps power products as diverse as those in airlines and banks, to indie gamers making it more fun to protect earth from aliens to underwear startups working on their retention!
 
 ## The release schedule is wild
 
@@ -26,7 +26,7 @@ We're up against billion dollar companies, and we're catching up. We will overta
 
 [Comments like this](https://news.ycombinator.com/item?id=22378393) are what we live and die by.
 
-We keep cycles very short. There is a roadmap session every two weeks - each developer suggests what they want to build to have the greatest impact, then they do just that. You choose what you focus on, and you are responsible for tests, user feedback and tracking.
+We keep cycles very short. There is a roadmap session, [like this](https://github.com/PostHog/posthog/issues/1870), every two weeks - each developer suggests what they want to build to have the greatest impact, then they do just that. You choose what you focus on, and you are responsible for tests, user feedback and tracking.
 
 ## The people here are really, really smart
 
@@ -42,15 +42,17 @@ Our team is tiny but we live in 10 different countries. This [diverse group](/ha
 
 ## Get in early
 
-Would you have rather been in the first 20 or the last 20 people to join Google?
+Would you have rather been in the first 20 or the last 20 people to join a [FAANG](https://en.wikipedia.org/wiki/Big_Tech) company? The early team we're hiring *right now* are building more than the software - they're building the way the company operates.
 
-We need engineers who care about users, can ship quickly and thrive under a lot of autonomy. You aren't going to have a product manager dictating what you do, but you are going to need to make intelligent design and priotization decisions with full support from the rest of the team.
+We need engineers who care about users, can ship quickly and thrive under a lot of autonomy. You aren't going to have a product manager dictating what you do, but you are going to need to make intelligent design and prioritization decisions with full support from the rest of the team.
 
 ## We can't do this without you
 
-Our users do not use PostHog for the most complex querying of user data imaginable. We aren't going to use { machine learning | AI | blockchain } any time soon.
+Our users do not use PostHog for the most complex querying of user data imaginable. We aren't going to use { machine learning | AI | blockchain } any time soon. 
 
-PostHog meets simple use cases across a broad part of product development. That means everything from understanding retention, conversion rates, feature usage, to feature flags and heatmaps. Up next, we have session recording and plugins to expand our breadth even faster.
+The technical challenge here is designing a highly scalable product right out of the box when deployed on premise, supporting a wide breadth of features that give users super powers, and enabling an ecosystem of contributors and plugins from anyone in the world so PostHog becomes a true platform.
+
+Today, PostHog meets simple use cases across a broad part of product development. That reaches from understanding retention, conversion rates, abd feature usage, to feature flags and heatmaps. Up next, we have session recording and plugins to expand our breadth even faster.
 
 You would be a key part in us expanding the range of functionality we are offering, or in supporting its use at scale. We'd want you to suggest ideas that you could take from concept to tests and deployment.
 
