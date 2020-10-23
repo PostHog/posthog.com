@@ -24,11 +24,12 @@ export const FeaturedSectionTextLeft = ({
     const imageStyle = {
         ...imgStyle,
         backgroundImage: `url(${image})`,
-        backgroundSize: imgStyle.backgroundSize ? imgStyle.backgroundSize : `${imgDesktopWidth}px ${imgDesktopHeight}px`,
+        backgroundSize: imgStyle.backgroundSize
+            ? imgStyle.backgroundSize
+            : `${imgDesktopWidth}px ${imgDesktopHeight}px`,
         height: imgDesktopHeight,
         width: imgDesktopWidth,
     }
-
 
     return (
         <div className="featured-section-left-wrapper featured-section-main">

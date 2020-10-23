@@ -163,13 +163,13 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 
 #### - Setting Up SSL on Digital Ocean with [NGINX](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04) or [Apache](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04)
 
-#### - [How to Add Domains to Digital Ocean Projects](https://www.digitalocean.com/docs/networking/dns/how-to/add-domains/)
+###### - [How to Add Domains to Digital Ocean Projects](https://www.digitalocean.com/docs/networking/dns/how-to/add-domains/)
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
+###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
+###### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
+###### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 
 
 
