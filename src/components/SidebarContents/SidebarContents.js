@@ -2,17 +2,16 @@ import React, { useEffect } from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import Menu from 'antd/lib/menu'
 import 'antd/lib/menu/style/css'
-import './SidebarContents.css'
+import './SidebarContents.scss'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { featureFlagLogic } from '../../logic/featureFlagLogic'
 
 const SubMenu = Menu.SubMenu
 
-
 function SidebarContents() {
     const { featureFlags } = useValues(featureFlagLogic)
-    
+
     useEffect(() => {
         if (!featureFlags['launch-tutorials-section']) {
             const tutorialsDiv = window.document.getElementById('tutorials-sidebar-item')
