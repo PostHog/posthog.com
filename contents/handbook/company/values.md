@@ -4,27 +4,30 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Communication
+## We are open source
 
-There is power in writing things down. We see transparency as part of this.
+We work all remote, from all over the world.
 
-* It creates clear and deep thought.
-* It is usually clearer than a conversation, so everyone can row in the same direction.
-* It is very leveraged as we grow a large community and look to hire people around the world.
+We default to transparency and we share what we're working on, in writing.
 
-## Results
+This means that everyone has more context to help the company achieve its goals.
 
-Everyone should help everyone else raise their game.
+## We haven't built the defining feature yet
 
-* Fatigue sets in when you complete a task. It's easier for outsiders to help those creating the work to raise their game.
-* We are direct about the quality of work. That doesn't always mean work needs to be completely polished. It also concerns:
-  * The speed of a task.
-  * The validity of a task in helping the company move forward.
-  * The impact of a task.
+The stronger we make our product/market fit, then everything else will be easier.
 
-## Iteration
+## Everyone ships
 
-If given a choice, go live. If you can't go live, reduce the task size so you can.
+This has a few meanings.
 
-* We are small, and can only win based on speed and agility.
-* Going live forces a level of completion, on which you can build.
+## Tread on toes
+
+If you need to drop what you're doing and do something else, do it.
+
+PostHog is driven by context-based leadership. We'll explain what we need to achieve, but the reason we hire the best people is that they know what to do.
+
+## Talent compounds
+
+Getting into PostHog is a huge challenge. Once you're here, it stays that way. We are *extremely* demanding of performance.
+
+In return, you get to work with others producing the best work of their careers. We are a team, not a family - we pay top of market and give generous severance.
