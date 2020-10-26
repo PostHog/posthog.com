@@ -33,6 +33,7 @@ import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSectionTextRight'
+import { FeaturedSectionTripleImage } from '../components/Sections/FeaturedSectionTripleImage'
 import { Spacer } from '../components/Spacer'
 
 function IndexPage() {
@@ -161,44 +162,20 @@ function IndexPage() {
                         image={visualizeTrends}
                         color="navy"
                     />
-
-                    {/*04 - Improve conversion rates*/}
-                    <div className="improveConversionWrapper wrapper bluebg featureSection">
-                        <div className="improveConversionHidden">
-                            <img src={improveMobile} loading="lazy" alt="improve-mobile" className="imageShow" />
-                        </div>
-                        <div className="improveConversionRow1 row">
-                            <div className="improveConversion04 number">
-                                <h1 className="yellowText">04</h1>
-                            </div>
-                            <div className="improveConversionCol col">
-                                <h2 className="gosha">Improve conversion rates</h2>
-                                <hr className="yellowLine" />
-                                <p>
-                                    Visualize how users navigate through your app or website, and use metrics to
-                                    understand what needs improvement.
-                                </p>
-                            </div>
-                        </div>
-                        <br className="hiddenBreak" />
-                        <div className="improveConversionRow2 row">
-                            <div className="improveConversionElement">
-                                <img alt="improve-retention" loading="lazy" src={improveRetention} />
-                                <br className="revHiddenBreak" />
-                                <h4>Retention</h4>
-                            </div>
-                            <div className="improveConversionElement">
-                                <img alt="improve-funnels" loading="lazy" src={improveFunnels} />
-                                <br className="revHiddenBreak" />
-                                <h4>Funnels</h4>
-                            </div>
-                            <div className="improveConversionElement">
-                                <img alt="improve-paths" loading="lazy" src={improvePaths} />
-                                <br className="revHiddenBreak" />
-                                <h4>Paths</h4>
-                            </div>
-                        </div>
-                    </div>
+                    <Spacer onlyDesktop={true} />
+                    <FeaturedSectionTripleImage
+                        mobileImg={improveMobile}
+                        img1={improveRetention}
+                        img2={improveFunnels}
+                        img3={improvePaths}
+                        listItem="04"
+                        headerText="Improve conversion rates"
+                        descriptionText={`Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.`}
+                        color="yellow"
+                        title1="Retention"
+                        title2="Funnels"
+                        title3="Paths"
+                    />
 
                     {/*05 - Use feature flags to test new ideas*/}
                     <div className="featureFlagsWrapper wrapper featureSection">
