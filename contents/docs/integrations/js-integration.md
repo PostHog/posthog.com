@@ -205,6 +205,11 @@ Here's how you can use them:
     posthog.reloadFeatureFlags()
     ```
 
+- By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
+    ```js
+    posthog.isFeatureEnabled('keyword', {send_event: false})
+    ```
+
 ## Reset After Logout
 
 If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user. 
