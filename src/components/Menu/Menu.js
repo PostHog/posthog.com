@@ -3,12 +3,12 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
 import List from 'antd/lib/list'
 import { Menu as AntMenu } from 'antd'
-import StarRepoButton from '../StarRepoButton'
+import { StarRepoButton } from '../StarRepoButton'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
 
-function Menu({ isBlogArticlePage, isHomePage }) {
-    const { menuOpen } = useValues(layoutLogic)
+function Menu({ isBlogArticlePage, isHomePage, onPostPage }) {
+    const { menuOpen, websiteTheme } = useValues(layoutLogic)
     const { onChangeMenuState } = useActions(layoutLogic)
 
     return (
@@ -39,7 +39,7 @@ function Menu({ isBlogArticlePage, isHomePage }) {
                             {menuItems.reverse().map((item) => {
                                 return item.name === 'star-repo' ? (
                                     <AntMenu.Item className="headerKey star-repo-btn" key={item.name}>
-                                        <StarRepoButton></StarRepoButton>
+                                        <StarRepoButton theme={onPostPage ? websiteTheme : 'light'} />
                                     </AntMenu.Item>
                                 ) : (
                                     <AntMenu.Item className="headerKey" key={item.link || item.a}>
@@ -104,7 +104,7 @@ function Menu({ isBlogArticlePage, isHomePage }) {
                                                             {item.name}
                                                         </a>
                                                     ) : item.name === 'star-repo' ? (
-                                                        <StarRepoButton></StarRepoButton>
+                                                        <StarRepoButton theme="light" />
                                                     ) : (
                                                         <Link
                                                             to={item.link}

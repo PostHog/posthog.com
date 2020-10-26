@@ -60,7 +60,7 @@ function TableOfContents({ offsetTop, affix }) {
         })
 
     return (
-        <Anchor onClick={() => setAnchorOpen(false)} offsetTop={offsetTop} affix={affix}>
+        <Anchor onClick={() => setAnchorOpen(false)} offsetTop={offsetTop} affix={affix} className="right-bar-inner">
             {loop(anchors)}
         </Anchor>
     )

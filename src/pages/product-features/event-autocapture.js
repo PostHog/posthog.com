@@ -1,6 +1,5 @@
 import React from 'react'
 import '../styles/features.scss'
-import '../../components/Layout/Layout.scss'
 import Layout from '../../components/Layout'
 import { OtherFeaturesBlock } from '../../components/OtherFeaturesBlock'
 import { PageHeader } from '../../components/PageHeader'

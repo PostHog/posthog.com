@@ -38,7 +38,7 @@ Success in this role means it's obvious our website, docs, product and presence 
 
 ## Does this sound like you?
 
-[Drop us a line](mailto:careers@posthog.com).
+Drop us a line at [apply-788d22840fa001@posthog.breezy-mail.com](mailto:apply-788d22840fa001@posthog.breezy-mail.com).
 
 Tell us:
 

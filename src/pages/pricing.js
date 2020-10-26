@@ -247,11 +247,13 @@ const PricingPage = () => {
                                         </li>
                                     </ul>
                                     <div className="p-comparison-btn">
-                                        <Link to="/docs/deploy">
-                                            <Button type="primary" size="large">
-                                                Start deployment
-                                            </Button>
-                                        </Link>
+                                        <Button
+                                            type="primary"
+                                            size="large"
+                                            href="mailto:sales@posthog.com?title=Start enterprise deployment"
+                                        >
+                                            Contact sales
+                                        </Button>
                                     </div>
                                 </div>
                             </Col>

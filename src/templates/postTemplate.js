@@ -19,7 +19,7 @@ function Template({
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
     const { markdownRemark } = data // data.markdownRemark holds our post data
-    const { frontmatter, html, excerpt, id } = markdownRemark
+    const { frontmatter, excerpt, id } = markdownRemark
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -36,32 +36,33 @@ function Template({
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
     return (
-        <Layout
-            onPostPage={true}
-            pageTitle={frontmatter.title}
-            isHomePage={false}
-            isDocsPage={isDocsPage}
-            isBlogArticlePage={isBlogArticlePage}
-            isHandbookPage={isHandbookPage}
-        >
-            <SEO
-                title={frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')}
-                description={frontmatter.description || excerpt}
-                pathname={markdownRemark.fields.slug}
-                article
-            />
-            <div className="docsPagesContainer">
-                <div className="docsPages">
-                    {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
-                        <h1 align="center">{frontmatter.title}</h1>
+        <div className="post-page-wrapper">
+            <Layout
+                onPostPage={true}
+                pageTitle={frontmatter.title}
+                isHomePage={false}
+                isDocsPage={isDocsPage}
+                isBlogArticlePage={isBlogArticlePage}
+                isHandbookPage={isHandbookPage}
+            >
+                <SEO
+                    title={
+                        frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
+                    }
+                    description={frontmatter.description || excerpt}
+                    pathname={markdownRemark.fields.slug}
+                    article
+                />
+                <div className="docsPagesContainer">
+                    <div className="docsPages">
+                        {frontmatter.showTitle && !isBlogArticlePage && <h1 align="center">{frontmatter.title}</h1>}
+                    </div>
+                    {isDocsPage && isHandbookPage && (
+                        <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
                     )}
-                    <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
                 </div>
-                {(frontmatter.sidebar === 'Docs' || frontmatter.sidebar === 'Handbook') && (
-                    <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
-                )}
-            </div>
-        </Layout>
+            </Layout>
+        </div>
     )
 }
 
