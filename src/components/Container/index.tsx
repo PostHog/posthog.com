@@ -3,11 +3,11 @@ import React from 'react'
 interface ContainerProps {
     onPostPage: boolean
     className: string
-    containerStyle?: React.CSSProperties
+    containerStyle?: any
     children: any
 }
 
-function Container({ onPostPage, className, containerStyle = {}, children }: ContainerProps) {
+export const Container = ({ onPostPage, className, containerStyle = {}, children }: ContainerProps) => {
     return (
         <div className={className + ' ' + (onPostPage && ' docs-container')}>
             <div
@@ -20,5 +20,3 @@ function Container({ onPostPage, className, containerStyle = {}, children }: Con
         </div>
     )
 }
-
-export default Container
