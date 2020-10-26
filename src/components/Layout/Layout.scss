@@ -1489,7 +1489,118 @@ li {
         font-size: 16px !important;
     }
 }
+/* TEAM PAGE STYLES */
 
-img {
-    border-radius: 8px;
+.team-body {
+    background-color: none;
+}
+
+.team-title {
+    width: 100%;
+    float: left;
+    padding-top: 25px;
+}
+.team-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    margin-bottom: 25px;
+    white-space: normal;
+    justify-content: center;
+}
+
+/*the globe wraps below the intro text
+for all other rows the portrait image wraps above bio*/
+.team-row.intro {
+    flex-wrap: wrap;
+}
+
+/*split to one column on smaller screens*/
+@media screen and (max-width: 560px) {
+    .team-left-text,
+    .team-right-text {
+        width: 100%;
+    }
+    .team-left-image,
+    .team-right-image {
+        width: 60%;
+    }
+    .team-center-space {
+        display: none;
+    }
+}
+
+/*maintain columns & spacing on larger screens*/
+@media screen and (min-width: 560px) {
+    .team-left-text,
+    .team-right-text {
+        width: 50%;
+    }
+    .team-left-image,
+    .team-right-image {
+        width: 40%;
+    }
+    .team-center-space {
+        width: 5%;
+    }
+}
+
+.team-left-text,
+.team-right-text {
+    min-width: 280px;
+}
+
+.team-left-bio,
+.team-right-bio {
+    height: 250px;
+    padding-right: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.team-left-image,
+.team-right-image {
+    min-width: 200px;
+    vertical-align: top;
+    padding-top: 50px;
+}
+
+/* Team page: scroll bar styles */
+
+.scroll-area {
+    height: 400px;
+    width: 45%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.team-left-text-scroll {
+    float: left;
+    padding-right: 25px;
+}
+
+/* width */
+div::-webkit-scrollbar {
+    width: 10px;
+    margin-left: 20px;
+}
+
+/* track */
+div::-webkit-scrollbar-track {
+    background: #eceff1;
+}
+
+/* handle */
+div::-webkit-scrollbar-thumb {
+    background: #cfd8dc;
+}
+
+/* handle on hover */
+div::-webkit-scrollbar-thumb:hover {
+    background: #b0bec5;
+
+    img {
+        border-radius: 8px;
+    }
 }
