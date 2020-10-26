@@ -15,12 +15,17 @@ function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArtic
         >
             {/* Desktop Docs pages = (onPostPage && !screenIsSmall)
         They already have a logo on the sidebar - skip adding the logo to navbar */}
-            {!(onPostPage && !screenIsSmall && (isDocsPage || isHandbookPage)) && (
+            {!(onPostPage && !screenIsSmall && onPostPage) && (
                 <Link id="logo" to="/">
                     <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
                 </Link>
             )}
-            <Menu isBlogPage={isBlogPage} screenIsSmall={screenIsSmall} isHomePage={isHomePage} />
+            <Menu
+                isBlogPage={isBlogPage}
+                screenIsSmall={screenIsSmall}
+                isHomePage={isHomePage}
+                isPostPage={isDocsPage || isHandbookPage}
+            />
         </div>
     )
 }

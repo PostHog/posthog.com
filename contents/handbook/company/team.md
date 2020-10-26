@@ -19,7 +19,7 @@ We don't care if you haven't finished (or attended) school, if you were super im
 
 What we do care about is your ability to learn, iterate, and ship.
 
-That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places.
+That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. Learn more about [diversity](diversity) at PostHog.
 
 </div>
 
@@ -275,7 +275,7 @@ Before joining PostHog, I lead a product team at Grow Mobility, the largest micr
 
 <div class="team-left-text" markdown="1">
 
-### Lottie Coxon, Designer
+### Lottie Coxon, Graphic Designer
 
 <div class="team-left-bio" markdown="1">
 

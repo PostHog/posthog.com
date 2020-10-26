@@ -6,13 +6,19 @@ showTitle: true
 
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
-**Note:** Feature Flags are currently available with our [JavaScript](/docs/integrations/js-integration#feature-flags) and [Python](/docs/integrations/python-integration) integrations. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
+> **Note:** Feature Flags are currently available with our [JavaScript](/docs/integrations/js-integration#feature-flags) and [Python](/docs/integrations/python-integration) integrations. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
-## Tutorial
+## Learning Resources
+
+### Tutorial
 
 For a comprehensive step-by-step tutorial on how to use feature flags, check out [How to Safely Roll Out New Features](/docs/tutorials/feature-flags).
 
 ![Create feature flags](../../images/tutorials/banners/feature-flags.png)
+
+### Demo Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/a6WEuVncYok" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <br />
 
@@ -49,7 +55,7 @@ posthog.onFeatureFlags(function() {
 })
 ```
 
-**Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
+> **Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
 
 ## Develop Locally
 

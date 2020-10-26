@@ -17,7 +17,7 @@ PostHog is available through [CocoaPods](http://cocoapods.org) and [Carthage](ht
 ### CocoaPods
 
 ```ruby
-pod "PostHog", "~> 1.0"
+pod "PostHog", "~> 1.1"
 ```
 
 ### Carthage
@@ -176,6 +176,40 @@ If you want to manually send a new screen capture event, use the `screen` functi
 ```swift
 // in swift
 posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
+```
+
+## A note about IDFA (identifier for advertisers) collection in iOS 14
+
+Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework might trip the App Store's static analysis, making it a bit unclear if SDK users can confidently say that their apps do not use the IDFA. 
+
+Hence **starting with posthog-ios version 1.1.0** the responsibility to collect the IDFA has been moved out of the PostHog SDK library and into the client app.
+
+To opt in to capturing the IDFA in Objective-C, SDK clients will want to do something like this:
+
+```objective-c
+// At the top of your .m file
+@import AdSupport;  // or #import <AdSupport/ASIdentifierManager.h>
+
+// During PostHog initialization
+PHGPostHogConfiguration` *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"YOUR_API_KEY"];
+configuration.enableAdvertisingCapturing = YES;
+configuration.adSupportBlock = ^{
+    return [[ASIdentifierManager sharedManager].advertisingIdentifier uuidString];
+};
+```
+
+Or in Swift:
+
+```swift
+// At the top of your .swift file
+import AdSupport
+
+// During PostHog initialization
+let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY")
+configuration.enableAdvertisingCapturing = true
+configuration.adSupportBlock = {
+    return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+}
 ```
 
 ## All Configuration options

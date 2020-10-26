@@ -24,10 +24,6 @@ main {
     margin-top: 0 !important;
 }
 
-.ant-layout {
-    background: none !important;
-}
-
 .wrapper {
     margin: 100px 0 0;
 }
@@ -213,9 +209,9 @@ p {
         height: 380px;
     }
 
-    .featureSection {
+    /*     .featureSection {
         height: 800px !important;
-    }
+    } */
 
     .pageHeader {
         margin: 0 calc(1 / 12 * 100vw);
@@ -508,141 +504,6 @@ button.modalClose:hover {
     }
 }
 
-/* AUTOCAPTURE EVENTS */
-
-.autocaptureWrapper {
-    position: relative;
-    height: 413px;
-    width: 100vw;
-}
-
-.autocaptureRow {
-    height: 525px;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    margin-top: 65px;
-}
-
-.autocapture01 {
-    position: absolute;
-    left: calc(13 / 24 * 100vw);
-    width: calc(1 / 12 * 100vw);
-}
-
-.autocaptureCol {
-    position: absolute;
-    width: calc(1 / 4 * 100vw);
-    left: calc(15 / 24 * 100vw);
-}
-
-.autocaptureImg {
-    left: calc((100vw - 1440px) / 2 + (1 / 24 * 100vw));
-    position: absolute;
-    background-image: url('../../images/retro-autocapture.svg') !important;
-    background-repeat: no-repeat;
-    background-size: 621px 413px;
-    background-position: left top;
-    height: 413px;
-    width: 621px;
-}
-
-@media screen and (min-width: 1440px) {
-    .autocaptureImg {
-        left: calc(1 / 24 * 1440px);
-    }
-    .autocapture01 {
-        left: calc(13 / 24 * 1440px);
-        width: calc(1 / 12 * 1440px);
-    }
-    .autocaptureCol {
-        left: calc(15 / 24 * 1440px);
-        width: calc(1 / 4 * 1440px);
-    }
-}
-
-@media screen and (max-width: 834px) {
-    .autocaptureRow {
-        flex-direction: column;
-        align-items: center;
-        margin: 0 15vw;
-        height: 625px;
-    }
-    .autocaptureImg {
-        position: relative;
-        background-position: center top;
-        background-size: 426px 283px;
-        left: 0;
-        top: 0;
-        height: 283px;
-        width: 426px;
-        max-width: 100vw;
-    }
-
-    .autocapture01 {
-        position: relative;
-        left: 0;
-        text-align: center;
-        width: 70vw;
-    }
-    .autocaptureCol {
-        position: relative;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 282px;
-        height: 252px;
-    }
-}
-
-/* UNDERSTAND TRAFFIC */
-
-.trafficVisualWrapper {
-    height: 1074px;
-    width: 100vw;
-    position: relative;
-}
-
-.trafficRow {
-    height: 564px;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    /* background-color: rgba(249,97,50,0.2); */
-}
-
-.traffic02 {
-    position: absolute;
-    left: calc(3 / 24 * 100vw);
-    width: calc(1 / 12 * 100vw);
-}
-
-.trafficCol {
-    position: absolute;
-    width: calc(7 / 12 * 100vw);
-    max-width: 720px;
-    left: calc(5 / 24 * 100vw);
-}
-
-.trafficParagraph {
-    width: calc(1 / 5 * 100vw);
-}
-
-.trafficImg {
-    top: 65px;
-    left: 50vw;
-    position: absolute;
-    background-image: url('../../images/retro-how-traffic-flows.svg') !important;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left top;
-    height: 477px;
-    width: 50vw;
-    max-width: 1015px;
-}
-
 @media screen and (min-width: 1440px) {
     .trafficImg {
         left: calc(720px);
@@ -710,87 +571,7 @@ button.modalClose:hover {
     }
 }
 
-/* VISUALIZE TRENDS */
-
-.visualizeRow {
-    top: 88px;
-    height: 510px;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-}
-
-.visualize03 {
-    position: absolute;
-    left: calc(13 / 24 * 100vw);
-    width: calc(1 / 12 * 100vw);
-}
-
-.visualizeCol {
-    position: absolute;
-    width: calc(7 / 24 * 100vw);
-    left: calc(15 / 24 * 100vw);
-}
-
-.visualizeImg {
-    left: calc((100vw - 1440px) / 2 + (1 / 24 * 100vw));
-    position: absolute;
-    background-image: url('../../images/retro-product-trends.svg') !important;
-    background-repeat: no-repeat;
-    background-size: 621px 413px;
-    background-position: left top;
-    height: 413px;
-    width: 621px;
-}
-
-@media screen and (min-width: 1440px) {
-    .visualizeImg {
-        left: calc(1 / 24 * 1440px);
-    }
-    .visualize03 {
-        left: calc(13 / 24 * 1440px);
-        width: calc(1 / 12 * 1440px);
-    }
-    .visualizeCol {
-        left: calc(15 / 24 * 1440px);
-        width: calc(7 / 24 * 1440px);
-    }
-}
-
 @media screen and (max-width: 834px) {
-    .visualizeRow {
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        height: 704px;
-        top: 0;
-    }
-    .visualizeImg {
-        background-repeat: no-repeat;
-        background-position: center top;
-        background-size: contain;
-        position: relative;
-        left: 0;
-    }
-    .visualize03 {
-        position: relative;
-        left: 0;
-        text-align: center;
-        padding-top: 50px;
-        min-width: 50px;
-    }
-    .visualizeCol {
-        position: relative;
-        order: 3;
-        left: 0;
-        width: 282px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-        height: 212px;
-    }
     .joinUsersButtons {
         left: 0px;
     }
@@ -883,10 +664,10 @@ button.modalClose:hover {
 }
 
 @media screen and (max-width: 834px) {
-    .improveConversionWrapper {
+    /*     .improveConversionWrapper {
         margin-top: 500px;
         margin-bottom: -150px;
-    }
+    } */
 
     .improveConversionHidden {
         position: relative;
@@ -1899,12 +1680,11 @@ img.whatsNewImg {
     color: #35416b;
 }
 
-.autocapturesizing {
-    /*background-color: rgba(249,97,50,0.2);*/
+/* .autocapturesizing {
     padding-top: 100px;
     padding-bottom: 477px;
     margin-top: 0px;
-}
+} */
 
 .redbackground {
     background-color: rgba(249, 97, 50, 0.2);
@@ -1954,9 +1734,9 @@ img.whatsNewImg {
     .redLine,
     .blueLine,
     .darkBlueLine {
-        width: 96px;
-        border-width: 6px;
-        margin: 10px 0;
+        width: 96px !important;
+        border-width: 6px !important;
+        margin: 10px 0 !important;
     }
     .autocapture01 h1,
     .traffic02 h1,

@@ -8,6 +8,10 @@ PostHog tracks user behaviour, whether or not the user is logged in and identifi
 
 A short video on Users can be found [here](https://youtu.be/8_SsZW1v56Q);
 
+## Demo Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GtSSxmOdyk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Viewing User List
 
 Click on 'People' on the left-hand navigation. This will open a submenu containing 'All Users', like so:

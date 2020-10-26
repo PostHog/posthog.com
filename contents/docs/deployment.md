@@ -14,7 +14,6 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 |||||
 | :-- | --- | --- | --- | --- |
 | [![](../../src/images/deploy-heroku.svg)](/docs/deployment/deploy-heroku) | [![](../../src/images/deploy-docker.svg)](/docs/deployment/deploy-docker) | [![](../../src/images/deploy-kubernetes.svg)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/deploy-aws.svg)](/docs/deployment/deploy-aws) | [![](../../src/images/deploy-source.svg)](/docs/deployment/deploy-source) |
-| <a href="#heroku" class="middle yellow">Heroku</a> | <a href="#docker-compose" class="middle blue">Docker</a> | <a href="#helm-chart-kubernetes-installation" class="middle red">Kubernetes</a> | <a href="#aws-ecs-fargate" class="middle yellow">AWS</a> | <a href="#source-installation" class="middle blue">Source</a> |
 
 ## **In This Section:**
 

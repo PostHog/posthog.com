@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-**Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
+> **Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
 
 This page of the Docs refers to our [JS library](https://github.com/PostHog/posthog-js).
 
@@ -203,6 +203,11 @@ Here's how you can use them:
 - Trigger a reload of the feature flags:
     ```js
     posthog.reloadFeatureFlags()
+    ```
+
+- By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
+    ```js
+    posthog.isFeatureEnabled('keyword', {send_event: false})
     ```
 
 ## Reset After Logout

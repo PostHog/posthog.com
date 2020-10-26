@@ -15,7 +15,7 @@ As explained in our [API Overview](/docs/api/overview-overview) page, PostHog pr
 
 This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrations/js-integration). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance. 
 
-**Note:** For this API, you should use your 'Team API Key' from the `/setup` page in PostHog. This is the same key used in your frontend snippet.
+> **Note:** For this API, you should use your 'Team API Key' from the `/setup` page in PostHog. This is the same key used in your frontend snippet.
 
 ## Feature Flags
 
@@ -81,7 +81,7 @@ If you'd prefer to do the requests yourself, you can send events in the followin
 
 ## Single event
 
-**Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
+> **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
 ```shell
 POST https://[your-instance].com/capture/
@@ -103,7 +103,7 @@ Body:
 
 You can send multiple events in one go with the Batch API.
 
-**Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
+> **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
 ```bash
 POST https://[your-instance].com/capture/

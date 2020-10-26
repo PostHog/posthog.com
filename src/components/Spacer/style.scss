@@ -1,0 +1,18 @@
+.custom-spacer-wrapper {
+    .mobile-only {
+        display: none;
+    }
+
+    .custom-spacer {
+        clear: both;
+    }
+
+    @media screen and (max-width: 1080px) {
+        .mobile-only {
+            display: block;
+        }
+        .desktop-only {
+            display: none;
+        }
+    }
+}

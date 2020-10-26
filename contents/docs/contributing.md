@@ -15,7 +15,11 @@ Bug reports help us make PostHog better for everyone. When you create a bug, the
 
 Please search within our issues before raising a new one to make sure you're not raising a duplicate.
 
-**Important:** If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
+<blockquote class='warning-note'>
+
+**Note:** If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
+
+</blockquote>
 
 <br>
 
@@ -50,6 +54,7 @@ We follow the "given, when, then" framework. Each test should provide a given (i
 0. Run `yarn install` in the root directory.
 1. Run `./bin/frontend-test-runner`. This will open the Cypress test runner which organizes the tests that are written inside the `cypress/integration` directory.
 2. Click on any of the testing files. Cypress will open an automated browser that runs the file. 
+3. (Optional) run `npm install -g cypress` to avoid installing Cypress on every run
 
 This is a quick start guide for using Cypress in our environment. Any further questions regarding how to use cypress can be answered on the [Cypress Docs](https://docs.cypress.io/). 
 

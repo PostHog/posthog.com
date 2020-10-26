@@ -6,6 +6,12 @@ showTitle: true
 
 The most critical thing that PostHog does is to capture events from your website or application. For example, if a user clicks a button or visits a URL – those are events.
 
+## Demo Video
+
+If you'd like to watch a video about our Events feature, check out our demo video below. It is set to start on the Events section:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50?start=13" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Live Events
 
 ![Events table](../../images/features/events/live-events.png)
