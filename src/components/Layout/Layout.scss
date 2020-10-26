@@ -709,10 +709,6 @@ header {
     background: none;
 }
 
-.menuHeaderWrapper.noLogo {
-    justify-content: flex-end;
-}
-
 .headerItems {
     margin-right: 20px;
 }
@@ -1439,7 +1435,26 @@ li {
     color: black;
 }
 
+@media screen and (min-width: 1076px) {
+    .display-mobile {
+        display: none !important;
+    }
+    .menuHeaderWrapper.noLogo {
+        justify-content: flex-end;
+    }
+}
+
 @media screen and (max-width: 1076px) {
+    .display-desktop {
+        display: none !important;
+    }
+    .display-mobile {
+        display: unset;
+    }
+    .menuHeaderWrapper.noLogo {
+        justify-content: space-between;
+    }
+
     .docsHeader {
         background-color: #f9f9f9;
         border-bottom: 6px solid #c4c4c4;

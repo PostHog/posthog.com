@@ -6,21 +6,15 @@ import whiteLogo from '../../images/posthog-logo-white.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
-function Header({ onPostPage, screenIsSmall, isBlogPage, isHomePage, isBlogArticlePage, isDocsPage, isHandbookPage }) {
+function Header({ onPostPage, isBlogPage, isHomePage, isBlogArticlePage }) {
     const { sidebarHide } = useValues(layoutLogic)
 
     return (
-        <div
-            className={'menuHeaderWrapper ' + (!isBlogPage && !sidebarHide && !screenIsSmall && onPostPage && 'noLogo')}
-        >
-            {/* Desktop Docs pages = (onPostPage && !screenIsSmall)
-        They already have a logo on the sidebar - skip adding the logo to navbar */}
-            {!(onPostPage && !screenIsSmall && (isDocsPage || isHandbookPage)) && (
-                <Link id="logo" to="/">
-                    <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
-                </Link>
-            )}
-            <Menu isBlogPage={isBlogPage} screenIsSmall={screenIsSmall} isHomePage={isHomePage} />
+        <div className={'menuHeaderWrapper ' + (!isBlogPage && !sidebarHide && onPostPage && 'noLogo ')}>
+            <Link id="logo" to="/" className={onPostPage ? 'display-mobile ' : ''}>
+                <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
+            </Link>
+            <Menu isBlogPage={isBlogPage} isHomePage={isHomePage} />
         </div>
     )
 }
