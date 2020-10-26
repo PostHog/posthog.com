@@ -151,15 +151,6 @@ const plans = {
                 type: 'url',
                 value: 'https://posthog.com/docs/deployment',
             },
-            benefits: [
-                '<span class="p-plan-benefit-lg">Everything in Open Source, plus:</span>',
-                'Clickhouse database for Petabyte scale',
-                'Integrations with services like Zapier',
-                'Permissioning and multiple projects',
-                'Dedicated support',
-                'SSO/SAML',
-                'Export to data lakes',
-            ],
         },
     ],
 }
