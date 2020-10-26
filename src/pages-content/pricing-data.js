@@ -151,6 +151,15 @@ const plans = {
                 type: 'url',
                 value: 'https://posthog.com/docs/deployment',
             },
+            benefits: [
+                'Advanced analytics',
+                '<a href="/docs/features/feature-flags" target="blank">Feature flags</a>',
+                '<a href="/docs/features/cohorts" target="blank">User cohorts</a>',
+                '<a href="/docs/features/users#user-history" target="blank">Individual user history</a>',
+                'Libraries for all major languages and frameworks',
+                'Integrations with Slack, Teams and Discord',
+                'Community support',
+            ],
         },
     ],
 }
