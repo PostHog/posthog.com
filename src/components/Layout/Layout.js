@@ -16,7 +16,6 @@ import { DocsSearch } from '../DocsSearch'
 
 function Layout({
     onPostPage,
-    isBlogPage,
     pageTitle,
     isDocsPage,
     isHomePage,
@@ -24,7 +23,6 @@ function Layout({
     isHandbookPage,
     children,
     className,
-    isFeaturesPage,
     containerStyle = {},
 }) {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
@@ -60,7 +58,7 @@ function Layout({
                             <html lang="en" />
                         </Helmet>
                         <AntdLayout theme="light">
-                            {onPostPage && !sidebarHide && !isBlogPage && (
+                            {onPostPage && !sidebarHide && !isBlogArticlePage && (
                                 <AntdLayout.Sider width="300" theme="light" className="sideBar display-desktop">
                                     <ResponsiveSidebar />
                                 </AntdLayout.Sider>
@@ -69,26 +67,27 @@ function Layout({
                             <AntdLayout theme="light">
                                 <AntdLayout.Header
                                     className={
-                                        'menuHeader ' + (onPostPage && 'docsHeader ') + (isBlogPage && 'blogHeader')
+                                        'menuHeader ' +
+                                        (onPostPage && 'docsHeader ') +
+                                        (isBlogArticlePage && 'blogHeader')
                                     }
                                     theme="light"
                                 >
                                     <Header
                                         siteTitle={data.site.siteMetadata.title}
                                         onPostPage={onPostPage}
-                                        isBlogPage={isBlogPage}
                                         isHomePage={isHomePage}
                                         isDocsPage={isDocsPage}
                                         isBlogArticlePage={isBlogArticlePage}
                                         isHandbookPage={isHandbookPage}
                                         theme="light"
                                     />
-                                    {onPostPage && !isBlogPage && (!anchorHide || !sidebarHide) && (
+                                    {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                                         <span className="display-mobile">
                                             <ResponsiveTopBar />
                                         </span>
                                     )}
-                                    {isBlogPage && (
+                                    {isBlogArticlePage && (
                                         <div className="blogHeaderTitle display-desktop">
                                             <h1>{pageTitle}</h1>
                                         </div>
@@ -102,14 +101,13 @@ function Layout({
                                     className={
                                         'layout ' +
                                         (onPostPage ? 'docsPageLayout ' : 'notDocsLayout ') +
-                                        (isBlogPage ? 'blogPageLayout ' : '') +
-                                        (isFeaturesPage ? 'featuresPageLayout ' : '') +
+                                        (isBlogArticlePage ? 'blogPageLayout ' : '') +
                                         (isDocsPage && 'docs-only-layout')
                                     }
                                     theme="light"
                                 >
                                     <AntdLayout.Content>
-                                        {isBlogPage && (
+                                        {isBlogArticlePage && (
                                             <div className="display-mobile">
                                                 <h1>{pageTitle}</h1>
                                                 <br />
@@ -134,7 +132,7 @@ function Layout({
                             </AntdLayout>
                         </AntdLayout>
                         <AntdLayout>
-                            {isBlogPage && <NewsletterForm />}
+                            {isBlogArticlePage && <NewsletterForm />}
                             <Footer />
                         </AntdLayout>
                     </>

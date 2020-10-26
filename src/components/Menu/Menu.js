@@ -7,7 +7,7 @@ import StarRepoButton from '../StarRepoButton'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
 
-function Menu({ isBlogPage, isHomePage }) {
+function Menu({ isBlogArticlePage, isHomePage }) {
     const { menuOpen } = useValues(layoutLogic)
     const { onChangeMenuState } = useActions(layoutLogic)
 
@@ -32,7 +32,9 @@ function Menu({ isBlogPage, isHomePage }) {
                     <div className="headerItems">
                         <AntMenu
                             mode="horizontal"
-                            className={'ant-menu-navbar display-desktop ' + (isBlogPage ? '' : 'ant-menu-navbar-blog')}
+                            className={
+                                'ant-menu-navbar display-desktop ' + (isBlogArticlePage ? '' : 'ant-menu-navbar-blog')
+                            }
                         >
                             {menuItems.reverse().map((item) => {
                                 return item.name === 'star-repo' ? (
@@ -45,16 +47,18 @@ function Menu({ isBlogPage, isHomePage }) {
                                             <a
                                                 href={item.a}
                                                 className={
-                                                    isBlogPage
+                                                    isBlogArticlePage
                                                         ? 'white '
                                                         : 'zambezi ' +
-                                                          (item.name === 'Login' && !isBlogPage ? ' login-btn' : '')
+                                                          (item.name === 'Login' && !isBlogArticlePage
+                                                              ? ' login-btn'
+                                                              : '')
                                                 }
                                             >
                                                 {item.name}
                                             </a>
                                         ) : (
-                                            <Link to={item.link} className={isBlogPage ? 'white' : 'zambezi'}>
+                                            <Link to={item.link} className={isBlogArticlePage ? 'white' : 'zambezi'}>
                                                 {item.name}
                                             </Link>
                                         )}
@@ -66,7 +70,7 @@ function Menu({ isBlogPage, isHomePage }) {
                             className={
                                 'display-mobile ' +
                                 (isHomePage ? 'burger-btn homepage-burger-btn' : 'burger-btn ') +
-                                (isBlogPage && ' blogpage-burger-btn')
+                                (isBlogArticlePage && ' blogpage-burger-btn')
                             }
                             type="link"
                             onClick={() => {

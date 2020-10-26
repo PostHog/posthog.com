@@ -14,7 +14,6 @@ function addIndex(url) {
 
 function Template({
     data, // this prop will be injected by the GraphQL query below.
-    location,
 }) {
     const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
@@ -32,21 +31,17 @@ function Template({
     if (selectedKey !== id) onSidebarContentSelected(id)
     if (sidebarEntry !== frontmatter.sidebar) setSidebarContentEntry(frontmatter.sidebar)
 
-    const parsedPathname = location.pathname.split('/')
-    const isDocsPage = parsedPathname[1] === 'docs'
-    const isBlogArticlePage = parsedPathname[1] === 'blog' && parsedPathname.length > 2
-    const isFeaturesPage = parsedPathname[1] === 'product-features'
-    const isHandbookPage = parsedPathname[1] === 'handbook'
+    const isDocsPage = frontmatter.sidebar === 'Docs'
+    const isBlogArticlePage = frontmatter.sidebar === 'Blog'
+    const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
     return (
         <Layout
             onPostPage={true}
-            isBlogPage={frontmatter.sidebar === 'Blog'}
             pageTitle={frontmatter.title}
             isHomePage={false}
             isDocsPage={isDocsPage}
             isBlogArticlePage={isBlogArticlePage}
-            isFeaturesPage={isFeaturesPage}
             isHandbookPage={isHandbookPage}
         >
             <SEO
