@@ -1,3 +1,7 @@
+#docs-search-container {
+    display: inline-block;
+}
+
 .flex-row-reverse {
     display: flex;
     flex-direction: row-reverse;
@@ -8,9 +12,8 @@
 
 .docSearchWrapper {
     height: 32px;
-    width: 250px;
+    max-width: 270px;
     min-width: 150px;
-    background-color: #f0f0f0;
     align-self: flex-end;
     display: flex;
     flex-direction: row;
@@ -30,9 +33,7 @@ span.algolia-autocomplete {
 
 #doc-search {
     height: 32px;
-    width: 200px;
-    background-color: #f0f0f0;
-    color: gray;
+    width: 100%;
     border: none;
     outline: 0;
 }
@@ -44,14 +45,6 @@ span.algolia-autocomplete {
 .docs-search-box {
     margin-top: 15px;
     margin-right: 25px;
-    padding-right: 50px;
-}
-
-@media screen and (min-width: 1200px) {
-    .algolia-autocomplete .ds-dropdown-menu {
-        min-width: 60vw !important;
-        max-width: 70vw !important;
-    }
 }
 
 @media screen and (max-width: 834px) {
@@ -65,15 +58,6 @@ span.algolia-autocomplete {
 /*main dropdown wrapper for small screens
 override external docsearch css file*/
 @media screen and (max-width: 555px) {
-    .docSearchWrapper {
-        width: 200px;
-    }
-    #doc-search {
-        width: 150px;
-    }
-    #doc-search {
-        font-size: 12px;
-    }
     .algolia-autocomplete .ds-dropdown-menu {
         min-width: 250px !important;
         max-width: 300px !important;
@@ -91,23 +75,74 @@ override external docsearch css file*/
 /* Main category (eg. Getting Started) */
 
 /* Category (eg. Downloads) */
-.algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
-    color: gray;
+
+#docs-search-container {
+    .algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
+        color: gray;
+    }
+
+    /* Title (eg. Bootstrap CDN) */
+    .algolia-autocomplete .algolia-docsearch-suggestion--title {
+        font-weight: bold;
+        color: black;
+    }
+
+    /* Description description (eg. Bootstrap currently works...) */
+    .algolia-autocomplete .algolia-docsearch-suggestion--text {
+        font-size: 0.8rem;
+        color: gray;
+    }
+
+    /* Highlighted text */
+    .algolia-autocomplete .algolia-docsearch-suggestion--highlight {
+        color: blue;
+    }
+
+    #doc-search {
+        background-color: #f0f0f0;
+        color: gray;
+    }
+
+    .docSearchWrapper {
+        background-color: #f0f0f0;
+    }
 }
 
-/* Title (eg. Bootstrap CDN) */
-.algolia-autocomplete .algolia-docsearch-suggestion--title {
-    font-weight: bold;
-    color: black;
-}
+#docs-search-container.dark {
+    @media screen and (min-width: 1080px) {
+        .algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
+            color: gray;
+        }
 
-/* Description description (eg. Bootstrap currently works...) */
-.algolia-autocomplete .algolia-docsearch-suggestion--text {
-    font-size: 0.8rem;
-    color: gray;
-}
+        /* Title (eg. Bootstrap CDN) */
+        .algolia-autocomplete .algolia-docsearch-suggestion--title {
+            font-weight: bold;
+            color: black;
+        }
 
-/* Highlighted text */
-.algolia-autocomplete .algolia-docsearch-suggestion--highlight {
-    color: blue;
+        /* Description description (eg. Bootstrap currently works...) */
+        .algolia-autocomplete .algolia-docsearch-suggestion--text {
+            font-size: 0.8rem;
+            color: gray;
+        }
+
+        /* Highlighted text */
+        .algolia-autocomplete .algolia-docsearch-suggestion--highlight {
+            color: blue;
+        }
+
+        #doc-search {
+            background-color: #3d3f41;
+            color: gray;
+        }
+
+        .docSearchWrapper {
+            background-color: #3d3f41;
+        }
+
+        svg,
+        input {
+            color: rgb(221, 221, 221) !important;
+        }
+    }
 }
