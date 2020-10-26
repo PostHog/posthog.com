@@ -4,30 +4,42 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## We are open source
+We think of the company as a product, not just the software we're building. This is what we *currently* value in how we operate.
 
-We work all remote, from all over the world.
+##We are open source
 
-We default to transparency and we share what we're working on, in writing.
+Building a huge community around a free-for-life product is key to [PostHog's strategy](/handbook/strategy/strategy).
 
-This means that everyone has more context to help the company achieve its goals.
+We default to transparency with everything we work on. That means we make public our handbook, our roadmap, how we pay or even fire people, what the strategy is and who we have raised money from.
 
-## We haven't built the defining feature yet
+This enables the strongest community growth possible. It causes the core team to raise the bar on their work, it provides the context needed for people to work across multiple timezones and it enables a deep work heavy and meeting-light culture. It creates trust.
 
-The stronger we make our product/market fit, then everything else will be easier.
+##We haven't built the defining feature yet
 
-## Everyone ships
+We will *not* stop innovating.
 
-This has a few meanings.
+The more valuable we make our product, the better every team in the company will perform. That means more features, more polish, fewer bugs, and pushing for as much ambition as possible.
 
-## Tread on toes
+You learn faster by getting what you're working on into the real world. We expect you to ship new designs, features or whatever is needed for your role in tiny chunks, frequently, and often a little before you feel ready. Iteration is a *huge deal* to us.
 
-If you need to drop what you're doing and do something else, do it.
+##Everyone codes
+
+... although this doesn't mean everyone has to be a developer, and not everyone needs experience in this before they join.
+
+Our platform is built for developers, and we use GitHub to build a large community of technical users. Being able to do the basics of shipping, no matter your role helps understand the people we're building for and it helps empower teams outside of engineering with greater context.
+
+Whether you're a designer or you're in operations, we will encourage and help you to be able to make basic changes to our website and docs.
+
+##Tread on toes
 
 PostHog is driven by context-based leadership. We'll explain what we need to achieve, but the reason we hire the best people is that they know what to do.
 
-## Talent compounds
+We expect you to pick out the very most important thing you can think of, and work on that. It is *not* ok to follow orders blindly. We judge your performance based on the results you deliver overall. You'll make a lot of mistakes along the way, but what matters is that you're making mistakes quickly, iterating and getting better over time.
+
+Likewise, we don't expect you to watch your colleagues fail - it is a basic part of working at PostHog that you provide direct feedback to those around you.
+
+##Talent compounds
 
 Getting into PostHog is a huge challenge. Once you're here, it stays that way. We are *extremely* demanding of performance.
 
-In return, you get to work with others producing the best work of their careers. We are a team, not a family - we pay top of market and give generous severance.
+In return, you get to work with others producing the best work of their careers. We are a team, not a family - we pay top of market, and give direct feedback and generous severance.
