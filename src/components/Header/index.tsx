@@ -6,7 +6,13 @@ import whiteLogo from '../../images/posthog-logo-white.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
-function Header({ onPostPage, isBlogArticlePage, isHomePage }) {
+interface HeaderProps {
+    onPostPage: boolean
+    isBlogArticlePage: boolean
+    isHomePage: boolean
+}
+
+export const Header = ({ onPostPage, isBlogArticlePage, isHomePage }: HeaderProps) => {
     const { sidebarHide } = useValues(layoutLogic)
 
     return (
@@ -19,4 +25,3 @@ function Header({ onPostPage, isBlogArticlePage, isHomePage }) {
     )
 }
 
-export default Header

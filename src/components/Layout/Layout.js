@@ -1,7 +1,6 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import Header from '../Header/Header'
+import { Header } from '../Header'
 import Footer from '../Footer/Footer'
 import './Layout.scss'
 import ResponsiveSidebar from '../ResponsiveSidebar'
@@ -26,12 +25,6 @@ function Layout({
     containerStyle = {},
 }) {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
-    const links = [
-        {
-            rel: 'stylesheet',
-            href: 'https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.css',
-        },
-    ]
 
     return (
         <StaticQuery
@@ -47,16 +40,6 @@ function Layout({
             render={(data) => {
                 return (
                     <>
-                        <Helmet
-                            title={data.site.siteMetadata.title}
-                            meta={[
-                                { name: 'description', content: 'Sample' },
-                                { name: 'keywords', content: 'sample, something' },
-                            ]}
-                            links={links}
-                        >
-                            <html lang="en" />
-                        </Helmet>
                         <AntdLayout theme="light">
                             {onPostPage && !sidebarHide && !isBlogArticlePage && (
                                 <AntdLayout.Sider width="300" theme="light" className="sideBar display-desktop">
