@@ -596,7 +596,13 @@ button.modalClose:hover {
 
 /* FEATURE FLAGS */
 
-.featureFlagsWrapper {
+@media screen and (min-width: 1080px) {
+    .fs-feature-flags-wrapper {
+        padding-top: 70px;
+        background-image: url('../../images/landing-page-background.svg') !important;
+    }
+}
+/* .featureFlagsWrapper {
     background-image: url('../../images/landing-page-background.svg') !important;
     background-size: 600px 600px;
     background-position: top center;
@@ -653,7 +659,7 @@ button.modalClose:hover {
     .featureFlagsCol {
         left: calc(5 / 24 * 1440px);
     }
-}
+} */
 
 @media screen and (max-width: 834px) {
     .featureFlagsWrapper {

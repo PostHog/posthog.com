@@ -29,6 +29,7 @@ import stackApi from '../images/stack-api.svg'
 import retroAutocapture from '../images/retro-autocapture.svg'
 import trafficFlow from '../images/retro-how-traffic-flows.svg'
 import visualizeTrends from '../images/retro-product-trends.svg'
+import retroFlagsImg from '../images/retro-feature-flags.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
@@ -176,27 +177,16 @@ function IndexPage() {
                         title2="Funnels"
                         title3="Paths"
                     />
-
-                    {/*05 - Use feature flags to test new ideas*/}
-                    <div className="featureFlagsWrapper wrapper featureSection">
-                        <div className="featureFlagsRow row">
-                            <div className="featureFlags05 number">
-                                <h1 className="redText">05</h1>
-                            </div>
-                            <div className="featureFlagsCol col">
-                                <h2 className="gosha">
-                                    Use feature flags <br />
-                                    to test new ideas
-                                </h2>
-                                <hr className="redLine" />
-                                <br />
-                                <p className="featureFlagsText">
-                                    Roll out new features to a few users first, randomly or based on their previous
-                                    behavior or profile information.
-                                </p>
-                            </div>
-                            <div className="featureFlagsImg" />
-                        </div>
+                    <Spacer />
+                    <Spacer onlyDesktop={true} />
+                    <div className="fs-feature-flags-wrapper">
+                        <FeaturedSectionTextLeft
+                            headerText="Use feature flags to test new ideas"
+                            listItem="05"
+                            descriptionText="Roll out new features to a few users first, randomly or based on their previous behavior or profile information."
+                            image={retroFlagsImg}
+                            color="red"
+                        />
                     </div>
 
                     {/*Designed for your Stack */}
