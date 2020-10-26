@@ -170,7 +170,7 @@ To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Eric.png)
 
 </div>
 
@@ -204,7 +204,7 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/JamesG.png)
 
 </div>
 
@@ -253,7 +253,7 @@ In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [m
 
 I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical. I have 10+ years of experience as a software engineer and product manager.
 
-Prior to joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
+Before joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
 
 </div>
 
@@ -263,7 +263,7 @@ Prior to joining PostHog, I lead a product team at Grow Mobility, the largest mi
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Paolo.png)
 
 </div>
 
@@ -302,7 +302,7 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/team-placeholder.png)
+![Placeholder Portrait Image](../../images/team/Lottie.png)
 
 </div>
 
@@ -350,11 +350,15 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 <div class="team-left-text" markdown="1">
 
-### Leah Smith
+### Leah Smith, Operations
 
 <div class="team-left-bio" markdown="1">
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!
+Hello / aka Kia Ora where I am from.
+
+You’ve may never heard of where I grew up, or heard of it but dont know where it is and that's ok, because half the time we aren't put on the map.. However I am from New Zealand and moved aboard after Christmas in 2019 by myself!
+
+Let me sum up your questions/assumptions about NZ… Yes, we are next to Australia. No, we aren't the same country; we are a different country. No, we can't take a boat to Australia for the weekend. Yes, we have to take a plane as it takes a minimum of at least 3 1/2hrs to get to the nearest part in Aus. Yes [the pavlova is from NZ](https://en.wikipedia.org/wiki/Pavlova_(cake))!
 
 </div>
 
@@ -376,11 +380,17 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero fuga facilis ve
 
 <div class="team-left-text" markdown="1">
 
-### Karl
+### Karl-Aksel Puulmann, Software Engineer
 
 <div class="team-left-bio" markdown="1">
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero fuga facilis vel consectetur quos sapiente deleniti eveniet dolores tempore eos deserunt officia quis ab? Excepturi vero tempore minus beatae voluptatem!
+I spent my childhood in a tiny village in the middle of nowhere (Väätsa, Estonia), playing football, working in construction and driving tractors. I used it buy my own computer, but did not do much more than listen to music, play games and watch anime with it.
+
+Things changed in highschool, where we had a programming class. I started creating my own games, participating in competitions (even going to International Olympiad once) and generally learning and reverse engineering anything I could get my hands on.
+
+Some time has passed since then - I have since been a student, teacher, first engineer at a guitar learning startup, worked in fintech, helped scale a database cluster holding 1PB of data at an analytics company, learned and helped automate manufacturing of stickers, been a CTO in agritech startup and now learning how this open source business works.
+
+In personal life, you can find me in the wilderness looking for geocaches or hiking, buying too many books and recently trying to figure out this parenting thing.
 
 </div>
 
