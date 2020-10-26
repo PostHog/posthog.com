@@ -31,7 +31,6 @@ import trafficFlow from '../images/retro-how-traffic-flows.svg'
 import visualizeTrends from '../images/retro-product-trends.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
-import { Helmet } from 'react-helmet'
 import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSectionTextRight'
 import { Spacer } from '../components/Spacer'
@@ -40,13 +39,12 @@ function IndexPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
     return (
-        <div className="indexContainer">
+        <div className="indexContainer homepage">
             <Layout containerStyle={{ maxWidth: 'auto', padding: 0 }} isHomePage={true}>
                 <SEO
                     title="PostHog - Open-Source Product Analytics"
                     description="Self-hosted product analytics stack, to deploy on your infrastructure."
                 />
-                <Helmet bodyAttributes={{ class: 'homepage' }}>{/* <style>{indexCSS}</style> */}</Helmet>
                 <div className="topSectionWrapperMobile">
                     <div className="topPageWrapper wrapper">
                         <div className="pageHeader row">
