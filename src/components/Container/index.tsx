@@ -1,6 +1,13 @@
 import React from 'react'
 
-function Container({ onPostPage, className, containerStyle = {}, children }) {
+interface ContainerProps {
+    onPostPage: boolean
+    className: string
+    containerStyle?: React.CSSProperties
+    children: any
+}
+
+function Container({ onPostPage, className, containerStyle = {}, children }: ContainerProps) {
     return (
         <div className={className + ' ' + (onPostPage && ' docs-container')}>
             <div
