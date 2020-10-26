@@ -1,26 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import Menu from 'antd/lib/menu'
 import 'antd/lib/menu/style/css'
 import './SidebarContents.scss'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-import { featureFlagLogic } from '../../logic/featureFlagLogic'
 
 const SubMenu = Menu.SubMenu
 
 function SidebarContents() {
-    const { featureFlags } = useValues(featureFlagLogic)
-
-    useEffect(() => {
-        if (!featureFlags['launch-tutorials-section']) {
-            const tutorialsDiv = window.document.getElementById('tutorials-sidebar-item')
-            if (tutorialsDiv) {
-                tutorialsDiv.style.display = 'none'
-            }
-        }
-    }, [featureFlags])
-
     const {
         sidebarSelectedKey: selectedKey,
         sidebarExpandedKeys: expandedKeys,
@@ -170,17 +158,18 @@ function SidebarContents() {
                     }
                 }
                 return (
-                    <Menu
-                        mode="inline"
-                        defaultOpenKeys={defaultOpenKeys}
-                        selectedKeys={[selectedKey]}
-                        inlineIndent={12}
-                        onOpenChange={onSidebarContentExpanded}
-                        style={{ height: '100%', backgroundColor: '#F9F9F9' }}
-                        theme="light"
-                    >
-                        {loop(tree)}
-                    </Menu>
+                    <span>
+                        <Menu
+                            mode="inline"
+                            defaultOpenKeys={defaultOpenKeys}
+                            selectedKeys={[selectedKey]}
+                            inlineIndent={12}
+                            onOpenChange={onSidebarContentExpanded}
+                            style={{ height: '100%', backgroundColor: '#F9F9F9' }}
+                        >
+                            {loop(tree)}
+                        </Menu>
+                    </span>
                 )
             }}
         />

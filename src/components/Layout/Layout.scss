@@ -20,6 +20,7 @@ html {
 body {
     margin: 0;
 }
+
 article,
 aside,
 details,
@@ -354,7 +355,6 @@ ul {
     margin-bottom: 1.45rem;
     list-style-position: outside;
     list-style-image: none;
-    background-color: #ffffff;
 }
 ol {
     margin-left: 1.45rem;
@@ -689,10 +689,6 @@ header {
     padding: 0;
 }
 
-.menuHeader {
-    background-color: #ffffff !important;
-}
-
 .blogHeader {
     background-color: #35416b !important;
     background-size: cover;
@@ -728,10 +724,6 @@ header {
 
 .headerKey a {
     color: #000000;
-}
-
-.sideBar {
-    background-color: #f9f9f9 !important;
 }
 
 .mobileHeader {
@@ -882,14 +874,6 @@ aside.sidebarRight {
     border: none;
 }
 
-.rightBar {
-    border: none;
-}
-
-.rightBar div {
-    background-color: #fff;
-}
-
 a.ant-anchor-link-title:hover,
 .ant-anchor-link-active a {
     color: #1d4aff !important;
@@ -901,10 +885,6 @@ span.ant-anchor-ink-ball {
 
 .rightBar {
     border: none;
-}
-
-.rightBar div {
-    background-color: #fff;
 }
 
 a.ant-anchor-link-title:hover {
@@ -992,7 +972,7 @@ a.ant-anchor-link-title:hover {
 
 .docsPages h2,
 .docsPages h3 {
-    color: #000000 !important;
+    color: #000000;
     margin-top: 2rem;
     margin-bottom: 1.45rem;
     left: 0;
@@ -1006,11 +986,11 @@ a.ant-anchor-link-title:hover {
 }
 
 .docsPages a {
-    color: #1d4aff !important;
+    color: #1d4aff;
 }
 
 .docsPages a:hover {
-    color: #577bfb !important;
+    color: #577bfb;
 }
 
 .blogHeaderTitle {
@@ -1048,14 +1028,11 @@ a.ant-anchor-link-title:hover {
     color: #577bfb;
 }
 
-.ant-layout {
-    background-color: white !important;
-}
-
 .docs-footer {
     margin-top: 2rem;
-    background: rgba(41, 37, 44, 0.1);
+    background: rgb(218, 218, 218);
     padding: 1rem 2rem;
+    border-radius: 10px;
 }
 
 .docs-footer a {
@@ -1108,7 +1085,7 @@ a.middle {
 
 .docsPageLayout main {
     min-height: 280px;
-    padding: 3rem 0% 0 10%;
+    padding: 2rem 0% 0 10%;
     width: 100%;
 }
 
@@ -1258,6 +1235,7 @@ table th {
 .sidebarButton {
     position: absolute;
     margin: 8px;
+    z-index: 1;
 }
 
 .mobileSidebarWrapper {
@@ -1399,7 +1377,7 @@ code {
 .navbar-list {
     width: 100%;
     float: left;
-    background-color: 'white';
+    background-color: #ffffff !important;
 }
 
 .right {
@@ -1426,13 +1404,19 @@ code {
     color: white;
 }
 
-.docs-only-layout main {
-    padding-top: 0 !important;
-}
-
 li {
     font-size: 16px;
     color: black;
+}
+
+.post-page-sub-header {
+    display: block;
+    height: 60px;
+}
+
+.post-page-sub-header-inner {
+    position: absolute !important;
+    right: 50px;
 }
 
 @media screen and (min-width: 1076px) {
@@ -1454,7 +1438,16 @@ li {
     .menuHeaderWrapper.noLogo {
         justify-content: space-between;
     }
-
+    .toggle-wrapper {
+        display: none !important;
+    }
+    .post-page-sub-header {
+        position: relative;
+        z-index: 0;
+    }
+    .post-page-sub-header-inner {
+        right: 10px;
+    }
     .docsHeader {
         background-color: #f9f9f9;
         border-bottom: 6px solid #c4c4c4;
@@ -1503,8 +1496,14 @@ li {
         font-size: 20px;
         line-height: 32px;
     }
+}
 
+@media screen and (max-width: 1250px) {
     .footer-links-header {
-        font-size: 16px;
+        font-size: 16px !important;
     }
+}
+
+img {
+    border-radius: 8px;
 }

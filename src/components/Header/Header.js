@@ -14,7 +14,7 @@ function Header({ onPostPage, isBlogArticlePage, isHomePage }) {
             <Link id="logo" to="/" className={onPostPage && !isBlogArticlePage ? 'display-mobile ' : ''}>
                 <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
             </Link>
-            <Menu isBlogArticlePage={isBlogArticlePage} isHomePage={isHomePage} />
+            <Menu isBlogArticlePage={isBlogArticlePage} isHomePage={isHomePage} onPostPage={onPostPage} />
         </div>
     )
 }

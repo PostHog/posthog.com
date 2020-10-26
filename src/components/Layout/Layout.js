@@ -1,18 +1,19 @@
-import React from 'react'
-import Helmet from 'react-helmet'
+import React, { useEffect } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import './Layout.scss'
-import ResponsiveSidebar from '../ResponsiveSidebar'
+import { ResponsiveSidebar } from '../ResponsiveSidebar'
 import Container from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import { default as AntdLayout } from 'antd/lib/layout'
 import NewsletterForm from '../NewsletterForm'
-import { useValues } from 'kea'
+import { useValues, useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { DocsSearch } from '../DocsSearch'
+import { DarkModeToggle } from '../../components/DarkModeToggle'
+import './Layout.scss'
+import './DarkMode.scss'
 
 function Layout({
     onPostPage,
@@ -25,13 +26,13 @@ function Layout({
     className,
     containerStyle = {},
 }) {
-    const { sidebarHide, anchorHide } = useValues(layoutLogic)
-    const links = [
-        {
-            rel: 'stylesheet',
-            href: 'https://cdn.jsdelivr.net/npm/docsearch.js@{{docSearchJSVersion}}/dist/cdn/docsearch.min.css',
-        },
-    ]
+    const { sidebarHide, anchorHide, websiteTheme } = useValues(layoutLogic)
+    const { setWebsiteTheme } = useActions(layoutLogic)
+
+    useEffect(() => {
+        setWebsiteTheme(window.__theme)
+        window.__onThemeChange = () => setWebsiteTheme(window.__theme)
+    }, [])
 
     return (
         <StaticQuery
@@ -47,40 +48,34 @@ function Layout({
             render={(data) => {
                 return (
                     <>
-                        <Helmet
-                            title={data.site.siteMetadata.title}
-                            meta={[
-                                { name: 'description', content: 'Sample' },
-                                { name: 'keywords', content: 'sample, something' },
-                            ]}
-                            links={links}
-                        >
-                            <html lang="en" />
-                        </Helmet>
-                        <AntdLayout theme="light">
+                        <AntdLayout id="antd-main-layout-wrapper">
                             {onPostPage && !sidebarHide && !isBlogArticlePage && (
-                                <AntdLayout.Sider width="300" theme="light" className="sideBar display-desktop">
+                                <AntdLayout.Sider
+                                    width="300"
+                                    className="sideBar display-desktop"
+                                    id="docs-sidebar"
+                                    style={{ background: '#f9f9f9' }}
+                                >
                                     <ResponsiveSidebar />
                                 </AntdLayout.Sider>
                             )}
-
-                            <AntdLayout theme="light">
+                            <AntdLayout id="ant-layout-content-wrapper" style={{ background: '#ffffff' }}>
                                 <AntdLayout.Header
                                     className={
                                         'menuHeader ' +
                                         (onPostPage && 'docsHeader ') +
                                         (isBlogArticlePage && 'blogHeader')
                                     }
-                                    theme="light"
+                                    id="menu-header"
+                                    style={{ background: '#ffffff' }}
                                 >
                                     <Header
                                         siteTitle={data.site.siteMetadata.title}
                                         onPostPage={onPostPage}
+                                        isBlogArticlePage={isBlogArticlePage}
                                         isHomePage={isHomePage}
                                         isDocsPage={isDocsPage}
-                                        isBlogArticlePage={isBlogArticlePage}
                                         isHandbookPage={isHandbookPage}
-                                        theme="light"
                                     />
                                     {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                                         <span className="display-mobile">
@@ -94,7 +89,20 @@ function Layout({
                                     )}
                                 </AntdLayout.Header>
 
-                                {isDocsPage && <DocsSearch />}
+                                {onPostPage && (
+                                    <div className="post-page-sub-header">
+                                        <div className="post-page-sub-header-inner">
+                                            <DarkModeToggle
+                                                checked={websiteTheme === 'dark'}
+                                                onChange={(e) =>
+                                                    window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
+                                                }
+                                                style={{ paddingRight: isDocsPage ? 5 : 30 }}
+                                            />
+                                            {isDocsPage && <DocsSearch theme={websiteTheme} />}
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* content */}
                                 <AntdLayout
@@ -104,7 +112,8 @@ function Layout({
                                         (isBlogArticlePage ? 'blogPageLayout ' : '') +
                                         (isDocsPage && 'docs-only-layout')
                                     }
-                                    theme="light"
+                                    id={onPostPage ? 'docs-content-wrapper' : ''}
+                                    style={{ backgroundColor: '#ffffff' }}
                                 >
                                     <AntdLayout.Content>
                                         {isBlogArticlePage && (
@@ -124,7 +133,11 @@ function Layout({
 
                                     {/* Sidebar right */}
                                     {onPostPage && !anchorHide && (
-                                        <AntdLayout.Sider theme="light" className="rightBar display-desktop">
+                                        <AntdLayout.Sider
+                                            className="rightBar display-desktop"
+                                            id="right-navbar"
+                                            style={{ background: '#ffffff' }}
+                                        >
                                             <ResponsiveAnchor />
                                         </AntdLayout.Sider>
                                     )}
