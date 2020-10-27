@@ -20,6 +20,10 @@
     content: url('../../images/posthog-logo-white.svg');
 }
 
+.homepage body {
+    overflow-x: hidden;
+}
+
 main {
     margin-top: 0 !important;
 }
