@@ -35,7 +35,7 @@ If quick start did not work for you, do the following after logging in:
 1. Look for a Select the 'Marketplace' option on the top right
 1. Select the 'Docker' option
 1. Follow the steps and define the settings to create the droplet 
-   -  The $20.00 droplet configuration should be good for most purposes. It has 4GB of RAM, 2 CPUs, 80GB of storage, and 4TB of transfer. However, if your volume is expected to be low, you should be able to safely pick to a lighter option. Alternatively, if you know your volume will be extremely high out of the gate, you might want to consider a more expensive option.
+   -  The \$20.00 droplet configuration should be good for most purposes. It has 4GB of RAM, 2 CPUs, 80GB of storage, and 4TB of transfer. However, if your volume is expected to be low, you should be able to safely pick to a lighter option. Alternatively, if you know your volume will be extremely high out of the gate, you might want to consider a more expensive option.
 
 > **Note**: You may also create your droplet with a plain Ubuntu distribution (or any other distro) without a one-click app. However, the 'Docker' app ships with the Docker engine and Docker Compose by default on Ubuntu 18.04, which can save you a **lot of time** when setting up.
 

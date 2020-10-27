@@ -92,7 +92,7 @@ This way, you'll get a chance to see how we work, and we'll get a chance to see 
 * [Generous parental leave](/handbook/people/time-off#parental-leave)
 * Visa sponsorship
 * [Training budget](/handbook/people/training#training-budget) (role dependent)
-* $200/month [budget towards coworking or café working](/handbook/people/spending-money#work-space)
+* \$200/month [budget towards coworking or café working](/handbook/people/spending-money#work-space)
 * Carbon offsetting for work travel with [Project Wren](https://projectwren.com/) 
 * Free [books](/handbook/people/training#books)
 

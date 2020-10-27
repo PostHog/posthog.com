@@ -52,6 +52,6 @@ Multiple people can give out stuff. It's important that we can all see what's go
 * Add a note in the gift voucher itself saying who it is for - link to their profile in Orbit in the note. Avoid including personal information and opt to add a link to their profile.
 * Add a note to Orbit saying you sent them a voucher and why.
 * Tag them on Orbit with the `received merch` tag
-* Tell the community member. It's best to treat this like a gift - you wouldn't give $30 to a friend, but you would give them "a mug". Give a voucher that represents enough for the item and around $15 extra so they'll be able to ship it. Bear in mind shipping costs increase with more stuff as we have lots of suppliers.
-* It is up to you to pick how much to give. Anything from $20 to $100 seems reasonable.
+* Tell the community member. It's best to treat this like a gift - you wouldn't give 30\$ to a friend, but you would give them "a mug". Give a voucher that represents enough for the item and around \$15 extra so they'll be able to ship it. Bear in mind shipping costs increase with more stuff as we have lots of suppliers.
+* It is up to you to pick how much to give. Anything from \$20 to \$100 seems reasonable.
 * We should maximize giving merch to a whole lot of different people instead of a ton of merch to the same group of people.
