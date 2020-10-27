@@ -83,7 +83,7 @@ function Menu({ isBlogArticlePage, isHomePage, onPostPage }) {
                                 <div className="burger-menu-spacer"></div>
                                 <List
                                     itemLayout="horizontal"
-                                    dataSource={menuItems}
+                                    dataSource={menuItems.reverse()}
                                     className="navbar-list"
                                     rowKey={(item) => item.a || item.link}
                                     renderItem={(item) => (

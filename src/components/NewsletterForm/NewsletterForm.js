@@ -18,7 +18,7 @@ class NewsletterForm extends React.Component {
         return (
             <div>
                 <link
-                    href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.scss"
+                    href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css"
                     rel="stylesheet"
                     type="text/css"
                 />
