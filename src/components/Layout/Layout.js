@@ -12,6 +12,7 @@ import { useValues, useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { DocsSearch } from '../DocsSearch'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
+import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
 import './DarkMode.scss'
 
@@ -89,20 +90,23 @@ function Layout({
                                     )}
                                 </AntdLayout.Header>
 
-                                {onPostPage && (
-                                    <div className="post-page-sub-header">
-                                        <div className="post-page-sub-header-inner">
-                                            <DarkModeToggle
-                                                checked={websiteTheme === 'dark'}
-                                                onChange={(e) =>
-                                                    window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
-                                                }
-                                                style={{ paddingRight: isDocsPage ? 5 : 30 }}
-                                            />
-                                            {isDocsPage && <DocsSearch theme={websiteTheme} />}
+                                {onPostPage &&
+                                    (isDocsPage || isHandbookPage ? (
+                                        <div className="post-page-sub-header">
+                                            <div className="post-page-sub-header-inner">
+                                                <DarkModeToggle
+                                                    checked={websiteTheme === 'dark'}
+                                                    onChange={(e) =>
+                                                        window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
+                                                    }
+                                                    style={{ paddingRight: isDocsPage ? 5 : 30 }}
+                                                />
+                                                {isDocsPage && <DocsSearch theme={websiteTheme} />}
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    ) : (
+                                        <Spacer onlyDesktop={true} />
+                                    ))}
 
                                 {/* content */}
                                 <AntdLayout
