@@ -148,7 +148,7 @@ function Layout({
                                 </AntdLayout>
                             </AntdLayout>
                         </AntdLayout>
-                        <AntdLayout>
+                        <AntdLayout style={{ background: '#ffffff' }}>
                             {isBlogArticlePage && <NewsletterForm />}
                             <Footer />
                         </AntdLayout>

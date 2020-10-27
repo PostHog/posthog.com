@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.scss'
 
 class NewsletterForm extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class NewsletterForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="newsletter-form-wrapper center">
                 <link
                     href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css"
                     rel="stylesheet"
