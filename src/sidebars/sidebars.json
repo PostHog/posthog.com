@@ -10,7 +10,7 @@
             "Features",
             "API",
             "Contributing",
-            "Architecture"
+            "Project documentation"
         ]
     },
     {
@@ -63,9 +63,9 @@
         ]
     },
     {
-        "entry": "Architecture",
-        "name": "Architecture",
-        "items": ["docs/data-model"]
+        "entry": "Project documentation",
+        "name": "Project documentation",
+        "items": ["docs/application-settings", "docs/data-model"]
     },
     {
         "entry": "Features",
