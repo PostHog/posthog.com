@@ -153,7 +153,6 @@ function IndexPage() {
                         image={visualizeTrends}
                         color="navy"
                     />
-                    <Spacer onlyDesktop={true} />
                     <FeaturedSectionTripleImage
                         mobileImg={improveMobile}
                         img1={improveRetention}
@@ -168,7 +167,7 @@ function IndexPage() {
                         title3="Paths"
                     />
                     <Spacer />
-                    <Spacer onlyMobile={true} />
+                    <Spacer />
                     <div className="fs-feature-flags-wrapper">
                         <FeaturedSectionTextLeft
                             headerText="Use feature flags to test new ideas"
