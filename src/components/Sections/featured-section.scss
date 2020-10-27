@@ -31,6 +31,12 @@
         width: calc(3 / 10 * 100vw);
     }
 
+    @media screen and (min-width: 1440px) {
+        .fs-header-2 {
+            max-width: calc(1 / 5 * 100vw);
+        }
+    }
+
     @media screen and (max-width: 1080px) {
         .fs-wrapper {
             height: auto !important;

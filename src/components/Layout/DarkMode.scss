@@ -143,22 +143,24 @@ body.dark .post-page-wrapper {
 }
 
 @media screen and (min-width: 1080px) {
-    #docs-sidebar,
-    #menu-header,
-    #right-navbar,
-    .right-bar-inner,
-    #docs-search-container,
-    #docs-content-wrapper,
-    #ant-layout-content-wrapper,
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    li,
-    a {
-        transition: 1s;
+    .post-page-wrapper {
+        #docs-sidebar,
+        #menu-header,
+        #right-navbar,
+        .right-bar-inner,
+        #docs-search-container,
+        #docs-content-wrapper,
+        #ant-layout-content-wrapper,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        li,
+        a {
+            transition: 1s;
+        }
     }
 }

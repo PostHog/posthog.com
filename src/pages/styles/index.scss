@@ -591,6 +591,10 @@ button.modalClose:hover {
         padding-top: 70px;
         background-image: url('../../images/landing-page-background.svg') !important;
     }
+    .fs-self-host-wrapper {
+        padding-top: 70px;
+        background-color: rgba(247, 165, 1, 0.2) !important;
+    }
 }
 
 @media screen and (max-width: 834px) {
@@ -734,89 +738,6 @@ button.modalClose:hover {
     }
     .yourStackShelfRow {
         display: none;
-    }
-}
-
-/* SELF-HOSTED DATA */
-
-.selfHostedDataWrapper {
-    background-color: rgba(247, 165, 1, 0.2);
-    position: relative;
-    height: 600px;
-}
-
-.selfHostedDataRow {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.selfHostedDataCol {
-    top: 155px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    left: calc(5 / 24 * 100vw);
-}
-
-.selfHostedDataImg {
-    top: 53px;
-    position: absolute;
-    background-image: url('../../images/self-host.svg');
-    background-size: 500px 499px;
-    background-repeat: no-repeat;
-    width: calc(100vw - 720px);
-    max-width: 720px;
-    height: 500px;
-    left: 720px;
-}
-
-@media screen and (min-width: 1440px) {
-    .selfHostedDataCol {
-        left: calc(5 / 24 * 1440px);
-        width: 400px;
-    }
-    .selfHostedDataImg {
-        left: 720px;
-    }
-}
-
-@media screen and (max-width: 834px) {
-    .selfHostedDataWrapper {
-        height: 708px;
-    }
-    .selfHostedDataRow {
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 708px;
-        align-items: center;
-    }
-    .selfHostedDataImg {
-        position: relative;
-        background-image: url('../../images/self-host-mobile.svg');
-        background-size: 219px 228px;
-        width: 219px;
-        height: 228px;
-        order: 1;
-        left: 0;
-        top: 0;
-    }
-    .selfHostedDataCol {
-        position: relative;
-        order: 2;
-        top: 0;
-        left: 0;
-        align-items: center;
-        text-align: center;
-        justify-content: flex-end;
-        height: 326px;
-        width: 282px;
-    }
-    .selfHostedDataCol h2 {
-        font-size: 24px;
-        line-height: 40px;
     }
 }
 
