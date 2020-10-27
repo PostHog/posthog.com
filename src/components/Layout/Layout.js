@@ -150,7 +150,7 @@ function Layout({
                         </AntdLayout>
                         <AntdLayout style={{ background: '#ffffff' }}>
                             {isBlogArticlePage && <NewsletterForm />}
-                            <Footer />
+                            <Footer onPostPage={onPostPage} />
                         </AntdLayout>
                     </>
                 )

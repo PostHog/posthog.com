@@ -3,12 +3,11 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
 import List from 'antd/lib/list'
 import { Menu as AntMenu } from 'antd'
-import { StarRepoButton } from '../StarRepoButton'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
 
-function Menu({ isBlogArticlePage, isHomePage, onPostPage }) {
-    const { menuOpen, websiteTheme } = useValues(layoutLogic)
+function Menu({ isBlogArticlePage, isHomePage }) {
+    const { menuOpen } = useValues(layoutLogic)
     const { onChangeMenuState } = useActions(layoutLogic)
 
     return (
@@ -37,11 +36,7 @@ function Menu({ isBlogArticlePage, isHomePage, onPostPage }) {
                             }
                         >
                             {menuItems.reverse().map((item) => {
-                                return item.name === 'star-repo' ? (
-                                    <AntMenu.Item className="headerKey star-repo-btn" key={item.name}>
-                                        <StarRepoButton theme={onPostPage ? websiteTheme : 'light'} />
-                                    </AntMenu.Item>
-                                ) : (
+                                return (
                                     <AntMenu.Item className="headerKey" key={item.link || item.a}>
                                         {item.a ? (
                                             <a
@@ -103,8 +98,6 @@ function Menu({ isBlogArticlePage, isHomePage, onPostPage }) {
                                                         >
                                                             {item.name}
                                                         </a>
-                                                    ) : item.name === 'star-repo' ? (
-                                                        <StarRepoButton theme="light" />
                                                     ) : (
                                                         <Link
                                                             to={item.link}

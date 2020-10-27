@@ -16,9 +16,6 @@
         "a": "https://github.com/PostHog/posthog"
     },
     {
-        "name": "star-repo"
-    },
-    {
         "name": "Login",
         "a": "https://app.posthog.com/login"
     }
