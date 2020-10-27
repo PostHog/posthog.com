@@ -7,7 +7,7 @@ PostHog are proud to have many world-class investors.
 
 ## Seed
 
-We raised a $3M seed round, led by YCombinator and 1984 VC.
+We raised a \$3M seed round, led by YCombinator and 1984 VC.
 
 We are also grateful to work with the support of the following:
 

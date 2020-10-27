@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-First, learn [how PostHog raised $3M for our open source project](/blog/raising-3m-for-os). We could not have done it without this community - thank you for all your issues, feedback, usage and support!
+First, learn [how PostHog raised \$3M for our open source project](/blog/raising-3m-for-os). We could not have done it without this community - thank you for all your issues, feedback, usage and support!
 
 So, what have we been doing with the money?
 
@@ -108,12 +108,12 @@ We had a lot of fun this week thinking about how the PostHog brand looks and fee
 
 From our own blog:
 
-* [How we raised $3M for an open source project](/blog/raising-3m-for-os) - we hope this helps other open source projects.
+* [How we raised \$3M for an open source project](/blog/raising-3m-for-os) - we hope this helps other open source projects.
 * [Super fast testing with Cypress and GitHub actions](/blog/cypress-end-to-end-tests) - an example of the focus we have on investing in dev tooling.
 
 Other cool stuff from around the web:
 
-* [Funding for moonshots](https://apolloprojects.com/) - get your own $3M.
+* [Funding for moonshots](https://apolloprojects.com/) - get your own \$3M.
 * [Strandbeest](https://www.strandbeest.com/) - wooden, walking sculptures… they're pretty weird.
 
 ## PostHog news

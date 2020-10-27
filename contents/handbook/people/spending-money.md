@@ -106,8 +106,8 @@ Individual software is down to personal preference, and we encourage you to shar
 
 ### IDEs
 
-* IDEs range widely in cost. Best in class can cost up to $700. We remain sceptical if a best in class IDE is worth several days of engineering time. However, we are happy to revisit this policy whenever we reach the sooner of profitability or a Series A.
-* Before then, if you wish to spend up to $100 on an IDE, that is fine. Visual Studio, VIM and Sublime are the most popular with our team.
+* IDEs range widely in cost. Best in class can cost up to \$700. We remain sceptical if a best in class IDE is worth several days of engineering time. However, we are happy to revisit this policy whenever we reach the sooner of profitability or a Series A.
+* Before then, if you wish to spend up to \$100 on an IDE, that is fine. Visual Studio, VIM and Sublime are the most popular with our team.
 
 ## Work Space
 
@@ -115,7 +115,7 @@ We care about you being healthy, happy and productive.
 
 Whilst PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
-You can spend up to $200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
+You can spend up to \$200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
 
 If you live in the US, a particularly good way to use this budget is to cover the cost of Amex Platinum which provides WeWork access. Outside of the US, you may sign your own agreement or buy day vouchers as needed. We will not cover costs beyond this amount of money.
 
