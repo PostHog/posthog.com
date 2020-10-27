@@ -168,6 +168,7 @@ function IndexPage() {
                         title3="Paths"
                     />
                     <Spacer />
+                    <Spacer onlyMobile={true} />
                     <div className="fs-feature-flags-wrapper">
                         <FeaturedSectionTextLeft
                             headerText="Use feature flags to test new ideas"

@@ -584,7 +584,10 @@ button.modalClose:hover {
     }
 }
 
-/* FEATURE FLAGS */
+.fs-self-host-wrapper {
+    padding-top: 70px;
+    background-color: rgba(247, 165, 1, 0.2) !important;
+}
 
 @media screen and (min-width: 1080px) {
     .fs-feature-flags-wrapper {
