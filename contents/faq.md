@@ -169,5 +169,3 @@ If you’re having trouble setting up PostHog you can send a message to our [com
 ### Are you hiring?
 
 Yes, come help us make PostHog even better. We're growing like crazy, [and we would love to have you join us](https://posthog.com/careers).
-
-
