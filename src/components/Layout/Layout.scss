@@ -100,7 +100,7 @@ sup {
     top: -0.5em;
 }
 img {
-    border-style: none;
+    border-radius: 8px;
 }
 svg:not(:root) {
     overflow: hidden;
@@ -1614,8 +1614,4 @@ div::-webkit-scrollbar-thumb {
 /* handle on hover */
 div::-webkit-scrollbar-thumb:hover {
     background: #b0bec5;
-
-    img {
-        border-radius: 8px;
-    }
 }
