@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/features.css'
+import '../styles/features.scss'
 import Layout from '../../components/Layout'
 import { OtherFeaturesBlock } from '../../components/OtherFeaturesBlock'
 import { PageHeader } from '../../components/PageHeader'
@@ -9,7 +9,7 @@ import { FeaturedSectionTextRight } from '../../components/Sections/FeaturedSect
 import trendsImg1 from '../../images/trends-1.svg'
 import trendsImg2 from '../../images/trends-2.svg'
 import trendsImg3 from '../../images/trends-3.svg'
-import { StartNowButton } from '../../StartNowButton'
+import { StartNowButton } from '../../components/StartNowButton'
 
 function ProductFeatures() {
     return (

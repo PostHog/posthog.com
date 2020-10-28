@@ -15,6 +15,7 @@ html {
     font-family: lato !important;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    overscroll-behavior-y: none;
 }
 
 body {
@@ -705,10 +706,6 @@ header {
     background: none;
 }
 
-.menuHeaderWrapper.noLogo {
-    justify-content: flex-end;
-}
-
 .headerItems {
     margin-right: 20px;
 }
@@ -1237,7 +1234,7 @@ table th {
 }
 
 .sidebarButton {
-    position: absolute;
+    position: relative;
     margin: 8px;
     z-index: 1;
 }
@@ -1423,7 +1420,25 @@ li {
     right: 50px;
 }
 
+@media screen and (min-width: 1076px) {
+    .display-mobile {
+        display: none !important;
+    }
+    .menuHeaderWrapper.noLogo {
+        justify-content: flex-end;
+    }
+}
+
 @media screen and (max-width: 1076px) {
+    .display-desktop {
+        display: none !important;
+    }
+    .display-mobile {
+        display: unset;
+    }
+    .menuHeaderWrapper.noLogo {
+        justify-content: space-between;
+    }
     .toggle-wrapper {
         display: none !important;
     }

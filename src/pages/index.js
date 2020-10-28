@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from 'antd/lib/button'
 import Modal from 'react-modal'
 import 'antd/lib/button/style/css'
-import './styles/index.css'
+import './styles/index.scss'
 import { Link } from 'gatsby'
 import modalSaasCloud from '../images/modal-saas-cloud.svg'
 import modalSelfDeploy from '../images/modal-self-deploy.svg'
@@ -13,27 +13,19 @@ import improveFunnels from '../images/retro-funnels-box.png'
 import enterprise01 from '../images/retro-self-managed.svg'
 import enterprise02 from '../images/enterprise-02.svg'
 import enterprise03 from '../images/enterprise-03.svg'
-import shelf4 from '../images/shelf-4.svg'
-import shelf2 from '../images/shelf-2.svg'
 import coolHedgehog from '../images/cool-hedgehog.svg'
-import stackAndroid from '../images/stack-android.svg'
-import stackPython from '../images/stack-python.svg'
-import stackIos from '../images/stack-ios.svg'
-import stackNode from '../images/stack-node.svg'
-import stackPhp from '../images/stack-php.svg'
-import stackRuby from '../images/stack-ruby.svg'
-import stackGatsby from '../images/stack-gatsby.svg'
-import stackJavascript from '../images/stack-javascript.svg'
-import stackGo from '../images/stack-go.svg'
-import stackApi from '../images/stack-api.svg'
 import retroAutocapture from '../images/retro-autocapture.svg'
 import trafficFlow from '../images/retro-how-traffic-flows.svg'
 import visualizeTrends from '../images/retro-product-trends.svg'
+import retroFlagsImg from '../images/retro-feature-flags.svg'
+import selfHostedImg from '../images/self-host.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSectionTextRight'
+import { FeaturedSectionTripleImage } from '../components/Sections/FeaturedSectionTripleImage'
 import { Spacer } from '../components/Spacer'
+import { DesignedForYourStackBlock } from '../components/Sections/DesignedForYourStackBlock'
 
 function IndexPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -161,163 +153,42 @@ function IndexPage() {
                         image={visualizeTrends}
                         color="navy"
                     />
-
-                    {/*04 - Improve conversion rates*/}
-                    <div className="improveConversionWrapper wrapper bluebg featureSection">
-                        <div className="improveConversionHidden">
-                            <img src={improveMobile} loading="lazy" alt="improve-mobile" className="imageShow" />
-                        </div>
-                        <div className="improveConversionRow1 row">
-                            <div className="improveConversion04 number">
-                                <h1 className="yellowText">04</h1>
-                            </div>
-                            <div className="improveConversionCol col">
-                                <h2 className="gosha">Improve conversion rates</h2>
-                                <hr className="yellowLine" />
-                                <p>
-                                    Visualize how users navigate through your app or website, and use metrics to
-                                    understand what needs improvement.
-                                </p>
-                            </div>
-                        </div>
-                        <br className="hiddenBreak" />
-                        <div className="improveConversionRow2 row">
-                            <div className="improveConversionElement">
-                                <img alt="improve-retention" loading="lazy" src={improveRetention} />
-                                <br className="revHiddenBreak" />
-                                <h4>Retention</h4>
-                            </div>
-                            <div className="improveConversionElement">
-                                <img alt="improve-funnels" loading="lazy" src={improveFunnels} />
-                                <br className="revHiddenBreak" />
-                                <h4>Funnels</h4>
-                            </div>
-                            <div className="improveConversionElement">
-                                <img alt="improve-paths" loading="lazy" src={improvePaths} />
-                                <br className="revHiddenBreak" />
-                                <h4>Paths</h4>
-                            </div>
-                        </div>
+                    <FeaturedSectionTripleImage
+                        mobileImg={improveMobile}
+                        img1={improveRetention}
+                        img2={improveFunnels}
+                        img3={improvePaths}
+                        listItem="04"
+                        headerText="Improve conversion rates"
+                        descriptionText={`Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.`}
+                        color="yellow"
+                        title1="Retention"
+                        title2="Funnels"
+                        title3="Paths"
+                    />
+                    <Spacer />
+                    <Spacer />
+                    <div className="fs-feature-flags-wrapper">
+                        <FeaturedSectionTextLeft
+                            headerText="Use feature flags to test new ideas"
+                            listItem="05"
+                            descriptionText="Roll out new features to a few users first, randomly or based on their previous behavior or profile information."
+                            image={retroFlagsImg}
+                            color="red"
+                        />
                     </div>
-
-                    {/*05 - Use feature flags to test new ideas*/}
-                    <div className="featureFlagsWrapper wrapper featureSection">
-                        <div className="featureFlagsRow row">
-                            <div className="featureFlags05 number">
-                                <h1 className="redText">05</h1>
-                            </div>
-                            <div className="featureFlagsCol col">
-                                <h2 className="gosha">
-                                    Use feature flags <br />
-                                    to test new ideas
-                                </h2>
-                                <hr className="redLine" />
-                                <br />
-                                <p className="featureFlagsText">
-                                    Roll out new features to a few users first, randomly or based on their previous
-                                    behavior or profile information.
-                                </p>
-                            </div>
-                            <div className="featureFlagsImg" />
-                        </div>
+                    <DesignedForYourStackBlock />
+                    <Spacer />
+                    <div className="fs-self-host-wrapper">
+                        <FeaturedSectionTextLeft
+                            headerText="Self host available, with full underlying data access"
+                            listItem=""
+                            descriptionText="Huge user base? No problem. Eliminate the data protection risks and costs associated with sending millions of users' data to 3rd parties."
+                            image={selfHostedImg}
+                            color="blue"
+                        />
                     </div>
-
-                    {/*Designed for your Stack */}
-                    <div className="designed4StackWrapper">
-                        <div className="designed4StackRow row-">
-                            <h2 align="middle" className="gosha">
-                                Designed for your stack
-                            </h2>
-                        </div>
-                        <div className="yourStackWrapper">
-                            <div className="yourStackLogosRow row" align="bottom">
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/python-integration">
-                                        <img alt="Python" className="imageShow" loading="lazy" src={stackPython} />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/php-integration">
-                                        <img alt="PHP" className="imageShow" loading="lazy" src={stackPhp} />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/android-integration">
-                                        <img alt="Android" className="imageShow" loading="lazy" src={stackAndroid} />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/ios-integration">
-                                        <img alt="iOS" className="imageShow" loading="lazy" src={stackIos} />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/node-integration">
-                                        <img alt="Node" className="imageShow" loading="lazy" src={stackNode} />
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="yourStackShelfRow row">
-                                <div className="yourStackShelf">
-                                    <img alt="shelf-2" className="imageShow shelf" loading="lazy" src={shelf2} />
-                                </div>
-                            </div>
-                            <div className="yourStackLogosRow row" align="bottom">
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/ruby-integration">
-                                        <img alt="Ruby" className="imageShow" loading="lazy" src={stackRuby} />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/gatsby-integration">
-                                        <img alt="Gatsby" className="imageShow" loading="lazy" src={stackGatsby} />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/js-integration">
-                                        <img
-                                            alt="Javascript"
-                                            className="imageShow"
-                                            loading="lazy"
-                                            src={stackJavascript}
-                                        />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/go-integration">
-                                        <img alt="Go" className="imageShow" loading="lazy" src={stackGo} />
-                                    </Link>
-                                </div>
-                                <div className="yourStackLogos">
-                                    <Link to="/docs/integrations/api">
-                                        <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="yourStackShelfRow row">
-                                <div className="yourStackShelf">
-                                    <img alt="shelf-4" className="imageShow shelf" loading="lazy" src={shelf4} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* self-hosted full data*/}
-                    <div className="selfHostedDataWrapper wrapper">
-                        <div className="selfHostedDataRow row">
-                            <div className="selfHostedDataCol">
-                                <h2 className="gosha">
-                                    Self host available, <br /> with full underlying data access
-                                </h2>
-                                <hr className="blueLine" />
-                                <p className="darkBlueText">
-                                    Huge user base? No problem. Eliminate the data protection risks and costs associated
-                                    with sending millions of users' data to 3rd parties.
-                                </p>
-                            </div>
-                            <div className="selfHostedDataImg" />
-                        </div>
-                    </div>
+                    <Spacer onlyDesktop={true} />
 
                     {/* Why posthog */}
                     <div className="whyPosthogWrapper wrapper">
