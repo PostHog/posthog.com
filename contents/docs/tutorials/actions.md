@@ -3,6 +3,7 @@ title: Going Beyond Autocapture
 sidebar: Docs
 showTitle: true
 ---
+
 <br />
 
 <small class="note-block centered">_Estimated Reading Time: 6 minutes ☕☕_</small>
@@ -92,3 +93,29 @@ Now that we've learned how to sort through events, let's go through how to creat
 
 Custom events can be created from any of our [libraries](/docs/integrations), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. 
 
+**Example: Custom Events from your frontend**
+
+Frontend JS is heavily event-based by nature, making it a simple paradigm to pair up JavaScript events with PostHog events.
+
+For example, to trigger an event when an element is hovered, you can do:
+
+```js
+// Vanilla JS
+
+const myElement = document.getElementById('my-element')
+
+myElement.addEventListener('hover', () => {
+    posthog.capture('my custom event')
+})
+
+```
+
+Another useful custom event might be tracking exceptions, like so:
+
+```js
+window.onerror = (errorMsg, url, lineNumber) => {
+    // Pass exception details as event properties
+    posthog.capture('exception', {"message": errorMsg, "url": url, "lineNumber": lineNumber})
+    return false;
+}
+```
