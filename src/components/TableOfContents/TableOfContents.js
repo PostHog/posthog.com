@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Anchor from 'antd/lib/anchor'
 import 'antd/lib/anchor/style/css'
-import './TableOfContents.css'
+import './TableOfContents.scss'
 import { useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 

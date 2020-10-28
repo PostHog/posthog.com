@@ -4,7 +4,11 @@ import featuresPageData from './features'
 import './other-features.scss'
 import { Spacer } from '../Spacer'
 
-export const OtherFeaturesBlock = ({ currentPageKey }) => {
+interface OtherFeaturesBlockProps {
+    currentPageKey: string
+}
+
+export const OtherFeaturesBlock = ({ currentPageKey }: OtherFeaturesBlockProps) => {
     const pagesToDisplay = featuresPageData.filter((page) => page.key !== currentPageKey)
     return (
         <div className="other-features-container">
