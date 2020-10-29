@@ -6,7 +6,7 @@ showTitle: true
 
 <br />
 
-<small class="note-block centered">_Estimated Reading Time: 6 minutes ☕☕_</small>
+<small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
 
 <br />
 
@@ -93,7 +93,7 @@ Now that we've learned how to sort through events, let's go through how to creat
 
 Custom events can be created from any of our [libraries](/docs/integrations), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. 
 
-**Example: Custom Events from your frontend**
+**Example: Custom events from your frontend**
 
 Frontend JS is heavily event-based by nature, making it a simple paradigm to pair up JavaScript events with PostHog events.
 
@@ -104,7 +104,7 @@ For example, to trigger an event when an element is hovered, you can do:
 
 const myElement = document.getElementById('my-element')
 
-myElement.addEventListener('hover', () => {
+myElement.addEventListener('mouseover', () => {
     posthog.capture('my custom event')
 })
 
@@ -113,9 +113,84 @@ myElement.addEventListener('hover', () => {
 Another useful custom event might be tracking exceptions, like so:
 
 ```js
+// Vanilla JS
+
 window.onerror = (errorMsg, url, lineNumber) => {
     // Pass exception details as event properties
     posthog.capture('exception', {"message": errorMsg, "url": url, "lineNumber": lineNumber})
     return false;
 }
 ```
+
+These exceptions can then be correlated with [feature flags](/docs/features/feature-flags) as well as usage of your app, for example.
+
+Essentially, it's entirely up to you what events you capture and what properties you pass to them. You can also add more complex logic to determine when to trigger an event, as well as what properties to pass to it.
+
+**Example: Custom events from your backend**
+
+Custom events are not limited to your frontend, however! You can also send events from your backend, which is very useful for going deeper into how your app is being used. 
+
+You can track what functions are being called, for example:
+
+```python
+# Python
+
+def my_func():
+    do_stuff() # Your own logic
+    timestamp = get_timestamp() # Logic for getting current timestamp
+
+    posthog.capture(
+        'user_distinct_id', 
+        event='my_func_called', 
+        properties={'foo': 'bar'},
+        timestamp=timestamp
+    )
+
+    return True
+```
+
+Another useful event could potentially be tracking endpoints that returned a status code not in the 200s. Here's an example for tracking 404s:
+
+```go
+// Go + Martini Web Framework
+
+m.NotFound(func(req *http.Request) string) {
+    // Send event to PostHog 
+    client.Enqueue(posthog.Capture{
+      DistinctId: "user_distinct_id",
+      Event:      "404_error",
+      Properties: posthog.NewProperties().Set("route", req.RequestURI)
+    })
+    
+    return "404: Page Not Found"
+}
+```
+
+Once again, you can track anything that you like, and you can do so with any of our 10+ [integrations](/docs/integrations), as well as our [API](/docs/api).
+
+**Using custom events in PostHog**
+
+Custom events in PostHog are treated just like any other event. 
+
+You will be able to see them in the events table as well as select them for your analysis in 'Insights'.
+
+No extra setup is required, just start sending events and watch them flow in!
+
+<br />
+
+<div class='small-inner-text'>
+
+> ##### **Recap**
+>
+> To make the most out of PostHog, you should:
+>
+> - Create actions from your events
+>   - Actions work retroactively and can tag one or more events
+>   - You can easily create actions with our toolbar
+>
+> - Send custom events
+>   - Custom events let you track exactly what you care about in your product
+>   - They can be captured from any of our 10+ integrations
+>   - You can use them in PostHog just like autocaptured events
+
+</div>
