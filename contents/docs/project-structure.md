@@ -18,7 +18,6 @@ showTitle: true
 ├── frontend
 │   └── public
 │   └── src
-│       └── editor
 │       └── layout
 │       └── lib
 │       └── models
@@ -73,10 +72,6 @@ PostHog logos to be used by the app.
 #### src
 
 Code for the frontend.
-
-##### src/editor
-
-Component used to load the [PostHog Toolbar](/docs/features/toolbar) on a webpage. 
 
 ##### src/layout
 
