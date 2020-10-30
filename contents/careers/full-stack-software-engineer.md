@@ -64,6 +64,8 @@ We sweated over this ad - we value nothing more than having an excellent team wi
 
 Drop us a line - [apply-105baa89cb9a01@posthog.breezy-mail.com](mailto:apply-105baa89cb9a01@posthog.breezy-mail.com).
 
+Ps. Sorry about the weirdly big email address - this helps us keep things organized :)
+
 Tell us:
 
 * How you can achieve the above in a few sentences
