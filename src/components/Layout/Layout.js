@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -8,7 +8,7 @@ import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import { default as AntdLayout } from 'antd/lib/layout'
 import NewsletterForm from '../NewsletterForm'
-import { useValues, useActions } from 'kea'
+import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { DocsSearch } from '../DocsSearch'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
@@ -16,7 +16,7 @@ import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
 import './DarkMode.scss'
 
-function Layout({
+const Layout = ({
     onPostPage,
     pageTitle,
     isDocsPage,
@@ -26,14 +26,8 @@ function Layout({
     children,
     className,
     containerStyle = {},
-}) {
-    const { sidebarHide, anchorHide, websiteTheme } = useValues(layoutLogic)
-    const { setWebsiteTheme } = useActions(layoutLogic)
-
-    useEffect(() => {
-        setWebsiteTheme(window.__theme)
-        window.__onThemeChange = () => setWebsiteTheme(window.__theme)
-    }, [])
+}) => {
+    const { sidebarHide, anchorHide } = useValues(layoutLogic)
 
     return (
         <StaticQuery
@@ -94,14 +88,10 @@ function Layout({
                                     (isDocsPage || isHandbookPage ? (
                                         <div className="post-page-sub-header">
                                             <div className="post-page-sub-header-inner">
-                                                <DarkModeToggle
-                                                    checked={websiteTheme === 'dark'}
-                                                    onChange={(e) =>
-                                                        window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
-                                                    }
-                                                    style={{ paddingRight: isDocsPage ? 5 : 30 }}
-                                                />
-                                                {isDocsPage && <DocsSearch theme={websiteTheme} />}
+                                                <span style={{ paddingRight: isDocsPage ? 5 : 30 }}>
+                                                    <DarkModeToggle />
+                                                </span>
+                                                {isDocsPage && <DocsSearch />}
                                             </div>
                                         </div>
                                     ) : (
