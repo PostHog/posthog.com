@@ -18,7 +18,6 @@ showTitle: true
 ├── frontend
 │   └── public
 │   └── src
-│       └── editor
 │       └── layout
 │       └── lib
 │       └── models
