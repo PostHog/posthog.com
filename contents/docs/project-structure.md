@@ -73,10 +73,6 @@ PostHog logos to be used by the app.
 
 Code for the frontend.
 
-##### src/editor
-
-Component used to load the [PostHog Toolbar](/docs/features/toolbar) on a webpage. 
-
 ##### src/layout
 
 Components referring to the overall PostHog app layout, such as sections of the app used in most pages, like `Sidebar.js`.
