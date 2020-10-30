@@ -43,7 +43,7 @@ const Layout = ({
             render={(data) => {
                 return (
                     <>
-                        <AntdLayout id="antd-main-layout-wrapper">
+                        <AntdLayout id="antd-main-layout-wrapper" hasSider>
                             {onPostPage && !sidebarHide && !isBlogArticlePage && (
                                 <AntdLayout.Sider
                                     width="300"
