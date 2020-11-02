@@ -18,7 +18,7 @@ showTitle: true
 
 <br />
 
-Each user uses your product slightly differently from the next, and some user groups might use your app in a completely different way from others.
+Each user uses your product slightly differently from the next, and some user groups might use your app in a completely distinct way from others.
 
 This happens for a variety of reasons, including software, user profiles, accesibility needs, culture, understanding of the product, individual goals, among many other variables.
 
