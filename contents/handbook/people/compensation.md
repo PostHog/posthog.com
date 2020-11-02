@@ -41,6 +41,8 @@ Within each level, we believe there's a place to have incremental steps. We defi
 - *Thriving*: Exceeding expectations.
 - *Expert*: Exceeding expectations consistently.
 
+The definition of what is needed to progress from one step to the next in more detail depends on your role. Ask your manager for detail of what you need to work on.
+
 ## Options
 ​
 You'll receive approximately 0.1-0.5% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
