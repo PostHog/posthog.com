@@ -12,7 +12,7 @@ showTitle: true
 
 <span class="larger-image">
 
-![Funnels Banner Image](../../images/tutorials/banners/spa.png)
+![SPA Banner Image](../../images/tutorials/banners/spa.png)
 
 </span>
 
@@ -33,9 +33,9 @@ To follow this tutorial along, you need to:
 
 If you use PostHog to track a traditional website, our autocapture feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
 
-As such, in order to accurately capture navigation in SPAs, we need to use [custom events](/docs/integrations/js-integration/#sending-events), since autocapture is not enough. 
+As such, in order to accurately capture navigation in SPAs, we need to manually send events, since autocapture is not enough. 
 
-This tutorial will now take you through various methods that use custom events to track navigation, which can be used by themselves or in combination with the others.
+This tutorial will now take you through various methods that use events to track navigation, which can be used by themselves or in combination with the others.
 
 ### Navigation via Clicks
 
@@ -88,7 +88,7 @@ const isElementInViewport = (el) => {
 }
 ```
 
-The function above takes a reference to a DOM element as a parameter and returns `true` if the element is visible (and `false` otherwise). It does so by checking the coordinates of the rectangle that bounds the element against the user viewport to determine if the element is visible in the user's screen ([more info(https://stackoverflow.com/questions/123999/how-can-i-tell-if-a-dom-element-is-visible-in-the-current-viewport)).
+The function above takes a reference to a DOM element as a parameter and returns `true` if the element is visible (and `false` otherwise). It does so by checking the coordinates of the rectangle that bounds the element against the user viewport to determine if the element is visible in the user's screen ([more info](https://stackoverflow.com/questions/123999/how-can-i-tell-if-a-dom-element-is-visible-in-the-current-viewport)).
 
 We will be using this function to periodically check if certain elements are visible as the user goes through the page.
 
@@ -132,14 +132,19 @@ const visibilityChangeHandler = () => {
         // Check if the element is visible
         let visible = isElementInViewport(el.ref)
 
-        // Check if there has been a change in visibility to prevent useless triggers
+        // Check diff to prevent useless triggers
         if (visible !== el.visible) {
 
             // Update the element visibility state
             el.visible = visible
 
             // Capture a pageview with PostHog
-            if (visible) posthog.capture('$pageview', { section: el.name, $current_url: el.name })
+            if (visible) {
+                posthog.capture(
+                    '$pageview', 
+                    { section: el.name, $current_url: el.name }
+                )
+            }
         }
     }
 }
@@ -149,27 +154,115 @@ The comments in the code provide context as to what each line is doing, but, ess
 
 You could also add some more complex logic here, such as capturing a pageview when one element stops being visible and another one becomes visible. 
 
+Additionally, you also have choices when calling `posthog.capture`. You can either set your custom property to track the current screen (`section` in the example), or override PostHog's default `$current_url` prop (or both). 
+
+If you override the default property, your events table will look like this:
+
+![SPA Events Table](../../images/tutorials/spa/events-table.png)
+
+Instead of a the automatically captured URL, your events table will show your custom value under 'URL / Screen'.
+
+> **Note:** Overriding the default 'Current URL' property is most useful if the URL in your app _never_ changes.
+
 **Setting the relevant listeners**
 
 Finally, we need to listen for the relevant changes to window that might lead to a new page view:
 
 ```js
 if (window.addEventListener) {
+    addEventListener('scroll', visibilityChangeHandler, false)
+    addEventListener('resize', visibilityChangeHandler, false)
+
     // Uncomment next lines to capture pageviews on page load
     // addEventListener('DOMContentLoaded', handler, false);
     // addEventListener('load', visibilityChangeHandler, false);
+}
+```
+
+Here, we are listening for window events that may cause a new section to come into view, which are scrolling and resizing. Since PostHog autocapture already captures a `$pageview` when the page loads, you don't need to capture another one immeediately. 
+
+However, if you have reason to do so, you can listen for window `load` events and/or `DOMContentLoaded` events. The latter triggers when the DOM structure is ready (i.e. HTML and CSS loaded), whereas the former triggers when images and frames finish loading.
+
+
+**Full Snippet**
+
+Putting everything together, here's what the final snippet looks like (without comments):
+
+```js
+let elementsToTrack = [
+    {
+        name: "section1",
+        ref: document.getElementById('section1'),
+        visible: true
+    },
+    {
+        name: "section2",
+        ref: document.getElementById('section2'),
+        visible: false
+    },
+]
+
+const isElementInViewport = (el) => {
+    const rect = el.getBoundingClientRect()
+    
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && 
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) 
+    );
+}
+
+const visibilityChangeHandler = () => {
+    for (let el of elementsToTrack) {
+        let visible = isElementInViewport(el.ref)
+        if (visible !== el.visible) {
+            el.visible = visible
+            if (visible) {
+                posthog.capture(
+                    '$pageview', 
+                    { section: el.name, $current_url: el.name }
+                )
+            }
+        }
+    }
+}
+
+if (window.addEventListener) {
     addEventListener('scroll', visibilityChangeHandler, false)
     addEventListener('resize', visibilityChangeHandler, false)
 }
 ```
 
-Here, we are listening for window events that may cause a new section to come into view, which are scrolling and resizing. Since PostHog autocapture already captures a `$pageview` when the page loads, you don't need to 
+This snippet is written in Vanilla JS and can be included at the bottom of your page's `body` to track navigation.
 
-<!--
-before unload
-clicks
-navigation
-window.location.href
--->
+Additionally, if you are using a web framework like React, you can either set this logic on a `useEffect` hook or `componentDidMount` call on a wrapper/layout component, as well as you can also track navigation based on when certain components render. 
 
 
+### Additional Methods
+
+The methods presented here are examples of options to track SPAs with PostHog. However, with an understanding of how to go about setting up tracking, you can also explore other methods.
+
+Given the wide variety of available JavaScript events, you can also set up your navigation tracking in other ways, such as through `mouseover` events, for example. 
+
+In addition, you can also send your own [custom events](/docs/integrations/js-integration/#sending-events) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
+
+```js
+posthog.capture(
+    'screenview', 
+    { 
+        screenName: 'About Us', 
+        route: '#about-us', 
+        navigationMethod: 'scroll' 
+    }
+)
+
+```
+
+Essentially, the key steps to keep in mind for tracking navigation in SPAs are:
+
+1. Identify what counts as a new screen and how to account for it (e.g. relevant elements and triggers)
+1. Capture a pageview or custom event to track navigation
+1. Set your own properties and/or override `$current_url` to track pages as you like
+
+Following these steps, you can track navigation on your app just like any other website, ensuring you capture exactly how users are using your product. 
