@@ -14,34 +14,103 @@ At the moment, we're not too worried about having a clearly defined job spec. Po
 
 See [our Strategy page](/handbook/strategy/strategy) to find out how many people we should be hiring at any time, and at what pace.
 
-## Advertizing the Job
+If we are hiring a role that we have less expertise in - for example, for a role we've never hired before, it is worth us getting an outside opinion on how to hire this role before starting any of the below.
 
-There are a couple of places that are worth posting to:
+## Building a Pipeline
+
+### Booking meetings
+
+* Make sure you add a Zoom link that the people doing the interview are going to be able to open.
+* Set an agenda for the meeting - this is to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
+* Forward the candidate's resume/linkedin etc if we have one. This is easiest through [Breezy](https://app.breezy.hr).
+
+The next section is an example agenda. Make sure to insert the appropriate stage and links for the role. Keep the diversity message in as part of being inclusive to all candidates.
+
+#### Example agenda
+
+Hey Mary,
+
+Welcome to the first step of our hiring process. We're excited to meet you!
+
+This is a cultural discussion, and it's to understand if we'd be setting each other for success by working together.
+
+Here is [a little info about the role](https://posthog.com/careers/designer).
+
+We are a transparent by default company since [we value being open source](https://posthog.com/handbook/company/values) - you can read our entire [handbook online](https://posthog.com/handbook). Here's a bit about [working at PostHog](https://posthog.com/careers). 
+
+We're proud to be a group of [misfits](https://posthog.com/handbook/company/diversity/). Diversity in our hiring matters greatly to us.
+
+### Outreach
+
+Outreach has a few advantages:
+
+* We can approach people with very specific experience
+* It allows us to encourage candidates from a wider range of backgrounds to apply 
+
+It is possible to research a list of potential candidates through:
+
+* Twitter
+* LinkedIn
+* Behance
+* Dribble
+
+It is important before starting outreach like this that you consider *why* a candidate messaged like this may move to us so your note to them can explain why you felt it might be a nice fit.
+
+### YC's Work at a Startup
+
+Since PostHog is a YC company, we can place job ads in YC's [Work at a Startup list](https://www.workatastartup.com/jobs).
+
+### Referrals
+
+* From our own team
+* From our investors
+* From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
+* From the YC community (Slack/Whatsapp/forum)
+
+### Job boards
+
+#### Design
+
+We are learning which boards work well:
+
+- [Behance](https://www.behance.net/adobetalent)
+- [Dribbble](https://dribbble.com/jobs/new)
+
+#### Engineering
 
 - HackerNews Who's Hiring
     - Tend to get high quality candidates, and people interested in working at startups. 
     - See [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
-- RemoteOK
-    - High volume of candidates, but much lower quality.
-- AngelList
+- [Tech Ladies](https://www.hiretechladies.com/)
+    - Paid, but helps us achieve a more diverse group of candidates.
+- [AngelList](https://angel.co)
     - We found Eric through there. Higher quality than RemoteOK and pretty high volume.
+- [RemoteOK](https://remoteok.io/)
+    - High volume of candidates, but much lower quality.
 
 ## Interviewing
 
 The stages of interviewing are:
 
 - Application
-- Interview with Tim
-- Interview with James
-- Interview with someone from the team
-- 3 days of contracting work
+   - decide if we will interview
+- Interview with the hiring team (this will always be James, Tim and 1 or more people that would work closely with the candidate day-to-day).
+   - decide if we will do a SuperDay else give feedback.
+   - after 2 interviews, if both people aren't sure it's worth doing the 3rd, we should stop the process at this point.
+- PostHog SuperDay
 - Decision
 
-We track the stage the candidate is at [in this spreadsheet](https://docs.google.com/spreadsheets/d/1iiOj3t-8TfJDG0ZUuZbc0u_Ex72-ds6G75kppr6Igck/edit?usp=sharing).
+We track the stage the candidate is at [in Breezy](https://app.breezy.hr).
 
 ### Application
 
-It's worth reading applications and CVs carefully. For current roles, the things we look for are:
+Read applications and resumes carefully. 
+
+If a candidate hasn't customized the application or resume to the role, it is a flag they're aren't that excited about working at PostHog. It is understandable why people don't do this, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
+
+#### Engineering
+
+For current roles, the things we look for are:
 
 - Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
 - Has started a project from scratch, without outside help
@@ -51,43 +120,65 @@ It's worth reading applications and CVs carefully. For current roles, the things
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate.
 
-### Interview with Tim
+### What the interviews are like
 
-I tend to split the interview up into the following sections:
-- Talk about PostHog, where we're at and what the future looks like, including our long-term vision
+#### Roles
+
+Each person on a hiring team is assigned a role:
+
+- Bar-raiser: The person interviewing outside their area of expertise is the bar-raiser. The bar-raiser is here to qualify that everyone is truly excited about the candidate and that they're an example of us believing in talent compounds. Everyone should still think this way - or they should be clear in why they don't feel like this as part of their feedback.
+- Technical assessor: everyone else
+
+#### Step 1 - Culture
+
+We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are.
+
+This is to allow both PostHog and the candidate to assess cultural fit, and to dig into any concerns that Tim may have had in the first interview. I am looking for proactivity, directness, strong communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
+
+- Talk about PostHog, where we're at and what the future looks like, including our long-term vision. If it was cold outreach, we provide a little more context up front.
 - Talk about the candidate, dig into any questions I have from their CV
-- Talk about the hiring process and ask about expected compensation
+- Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned
 
-Hiring questions I like to ask:
+#### Steps 2, 3 (and sometimes 4) - Technical
+
+We wil usually have 1 cultural interview then 2 technical interviews. However this may vary with the role (ie a candidate who would interact with design and engineering should meet with someone working in both of those areas, plus Tim and James).
+
+These interviews will focus on the skills needed to fill the role.
+
+For a design hire, this could be:
+- A walk through of an example website page, product or other, 
+- Tell me about one of the pieces in your portfolio
+- What does your calendar look like on a day you'd really look forward to - what sort of tasks would be on it?
+- How do you educate yourself on design?
+
+For an engineering hire this would be things like:
 - Tell me about a project you started from scratch.
 - What was the hardest technical thing you've done in the last month?
 - What did you do on your very best day at work?
 - Tell me about a project that you led that failed. Why did it fail and what did you learn?
 
-### Interview with James
+### PostHog SuperDay
 
-This is to allow both PostHog and the candidate to assess cultural fit, and to dig into any concerns that Tim may have had in the first interview. I am looking for proactivity, directness, strong communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
+We offer everyone who's gotten through the interview process the chance to do a paid PostHog SuperDay. We schedule 1 full day in advance with the candidate where we hire them as a contractor.
 
-### Interview with a Team Member
-
-This is up to the interviewer. It can be useful to dig into some technical areas of their work.
-
-### 3 Days of Contracting Work
-
-We offer everyone who's gotten through the first 3 stages 3 days of contracting work. This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate.
-
-If the candidate is currently employed full-time and can't take time off, we still offer 3 days but spread out over their evenings or weekends.
+This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a very demanding day of work.
 
 We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not you can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it.
 
-The candidate will be invited to the team's standups and can pick up work like any other PostHog employee.
+This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. It should be too much work for one person to complete in a day to get a sense of the person's ability to prioritize. The tasks should be as close as possible to those that the candidate would be working on every day.
 
-### Decision
+### Decide if we will hire
 
-There will be a written catchup over Slack or via Zoom about the candidate with all people involved during the hiring. A yes/no decision will be made and then communicated to the candidate. 
+There will be a written catchup over Slack or via Zoom about the candidate with all people involved during the hiring. A yes/no decision will be made and then communicated to the candidate.
 
-In case of a rejection, it's important to clearly outline why that decision was made. Highlight what went well, but also mention specific points of improvement. Make sure to leave the door open for the future so they can apply again in 12-18 months time.
+It is expected that everyone takes notes on every interview and brings these to the meeting. These should _not_ be shared in advance of subsequent interviews but feel free to ask the next interviewer to dig into a certain area when you wished you had asked something.
 
-### After
+In case of a rejection, it's important to clearly outline why that decision was made. Highlight what went well, but also mention specific points of improvement. Make sure to leave the door open for the future so they can apply again in 12-18 months time as circumstances and people change.
+
+If there are wildly different opinions, reflect on why.
+
+### Making the hire
+
+Hooray!
 
 To give an employee an offer letter and to do the rest of the onboarding, see [Onboarding](/handbook/people/onboarding).
