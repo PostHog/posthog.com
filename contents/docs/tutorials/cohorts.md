@@ -1,5 +1,5 @@
 ---
-title: Analyzing the Behavior of Different Groups of Users 
+title: Analyzing User Behavior with Cohorts
 sidebar: Docs
 showTitle: true
 ---
