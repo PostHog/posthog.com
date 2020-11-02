@@ -14,7 +14,7 @@ At the moment, we're not too worried about having a clearly defined job spec. Po
 
 See [our Strategy page](/handbook/strategy/strategy) to find out how many people we should be hiring at any time, and at what pace.
 
-If we are hiring a role that we have less expertise in - for example, for a role we've never hired before, it is worth us getting an outside opinion on how to hire this role before starting any of the below.
+If we are hiring a role that we have less expertise in (e.g. a role we've never hired for before), it is worth us getting an outside opinion on how to hire this role before starting any of the below.
 
 ## Building a Pipeline
 
@@ -22,11 +22,13 @@ If we are hiring a role that we have less expertise in - for example, for a role
 
 * Make sure you add a Zoom link that the people doing the interview are going to be able to open.
 * Set an agenda for the meeting - this is to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
-* Forward the candidate's resume/linkedin etc if we have one. This is easiest through [Breezy](https://app.breezy.hr).
+* Forward the candidate's resume, LinkedIn, and other relevant resources to the relevant team members. This is easiest through [Breezy](https://app.breezy.hr).
 
 The next section is an example agenda. Make sure to insert the appropriate stage and links for the role. Keep the diversity message in as part of being inclusive to all candidates.
 
 #### Example agenda
+
+<blockquote>
 
 Hey Mary,
 
@@ -39,6 +41,8 @@ Here is [a little info about the role](https://posthog.com/careers/designer).
 We are a transparent by default company since [we value being open source](https://posthog.com/handbook/company/values) - you can read our entire [handbook online](https://posthog.com/handbook). Here's a bit about [working at PostHog](https://posthog.com/careers). 
 
 We're proud to be a group of [misfits](https://posthog.com/handbook/company/diversity/). Diversity in our hiring matters greatly to us.
+
+</blockquote>
 
 ### Outreach
 
@@ -54,7 +58,7 @@ It is possible to research a list of potential candidates through:
 * Behance
 * Dribble
 
-It is important before starting outreach like this that you consider *why* a candidate messaged like this may move to us so your note to them can explain why you felt it might be a nice fit.
+It is important before starting outreach like this that you consider *why* a candidate messaged through this approach would move to us, so that your note to them can explain why you felt it might be a nice fit.
 
 ### YC's Work at a Startup
 
@@ -65,7 +69,7 @@ Since PostHog is a YC company, we can place job ads in YC's [Work at a Startup l
 * From our own team
 * From our investors
 * From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
-* From the YC community (Slack/Whatsapp/forum)
+* From the YC community (Slack / WhatsApp / Forum)
 
 ### Job boards
 
@@ -93,8 +97,8 @@ We are learning which boards work well:
 The stages of interviewing are:
 
 - Application
-   - decide if we will interview
-- Interview with the hiring team (this will always be James, Tim and 1 or more people that would work closely with the candidate day-to-day).
+   - Decide if we will interview
+- Interview with the hiring team: for now, this will always be James, Tim, and one or more people that would work closely with the candidate day-to-day).
    - decide if we will do a SuperDay else give feedback.
    - after 2 interviews, if both people aren't sure it's worth doing the 3rd, we should stop the process at this point.
 - PostHog SuperDay
