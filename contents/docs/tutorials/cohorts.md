@@ -1,12 +1,12 @@
 ---
-title: Analyzing User Behavior with Cohorts
+title: Analyzing the Behavior of Different Groups of Users 
 sidebar: Docs
 showTitle: true
 ---
 
 <br />
 
-<small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
+<small class="note-block centered">_Estimated Reading Time: 8 minutes ☕☕_</small>
 
 <br />
 
