@@ -28,19 +28,31 @@ This is extremely useful for comparing metrics across cohorts in order to determ
 
 Here are some examples:
 
-**Segmenting by browser**
-
-Allows you to determine if your UX is particularly poor on certain browsers. This can be indicated by a lower retention, bad conversion on your funnels, or a lack of certain events being captured. 
-
-**Segmenting by audience type**
-
-When you sign up, websites like GitHub will ask you about your goals with the platform, as well as your level of experience in a certain field. This information can be used to group users, and you can then see which users are best suited for your platform. For instance, in GitHub's case, you'd expect retention to be higher amongst people who use GitHub for their jobs instead of hobbyists.
-
 **Segmenting by engagement level**
 
 Another useful way of grouping users is by their engagement with your product. How do power users use your product when compared to free trial users? 
 
-### Cohorts in PostHog
+**Segmenting by profile data**
+
+When you sign up, websites like GitHub will ask you about your goals with the platform, as well as your level of experience in a certain field. This information can be used to group users, and you can then see which users are best suited for your platform. For instance, in GitHub's case, you'd expect retention to be higher amongst people who use GitHub for their jobs instead of hobbyists. Through profile segmentation, you can then tailor your onboarding flows and UX to better meet the use case for the profiles you care about.
+
+**Segmenting by previous behavior**
+
+Users who performed a certain defining action might use your product differently from those who haven't. At PostHog, for example, we have a dedicated cohort for people who have accessed our Docs. We can then use that cohort to see if people who have read our documentation use our product in a specific way e.g. are they more comfortable navigating around the features?
+
+**Segmenting by team**
+
+As a B2B tool, PostHog has various different companies using our product. This allows us to segment our analytics by the different teams using the platform and understand how each group of users uses the product differently. This not only lets us get a broader perspective of how different companies use our product internally, but also allows us to reach out and help teams take full advantage of the features with data that provides context about their usage.  
+
+**Segmenting by marketing source**
+
+PostHog grabs [UTM tags](https://en.wikipedia.org/wiki/UTM_parameters) from URLs by default, as well as it captures information such as 'Referrer URL' and 'Initial Referrer Domain' as properties on events. This allows you to segment users based on where they came from, so you can determine if users from a certain marketing campaign retain better than others, for instance.
+
+**Segmenting by browser**
+
+Allows you to determine if your UX is particularly poor on certain browsers. This can be indicated by a lower retention, bad conversion on your funnels, or a lack of certain events being captured. 
+
+### Defining a Group of Users: Setting up a Cohort in PostHog
 
 User group segmentation for cohort analysis is built into PostHog via our cohorts feature.
 
@@ -82,15 +94,15 @@ New group let's you add another match condition for the cohort, allowing you to 
 
 > **Note:** This is an `OR` operation. Users who match _any_ of the specified conditions will be added to the cohort.
 
-### Using Cohorts
+### Using Cohorts to Determine Important Metrics
 
 Cohorts can be used in most of PostHog's features, so let's go over some of the key places where they might be useful:
 
-[**Feature Flags**](/docs/tutorials/feature-flags)
+**Feature Flags**
 
 ![Feature Flags By Cohort](../../images/tutorials/cohorts/feature-flags.png)
 
-You can create feature flags that target specific cohorts in order to roll out features to specific user groups first, or simply to see how features perform with different cohorts. 
+You can create [feature flags](/docs/tutorials/feature-flags) that target specific cohorts in order to roll out features to specific user groups first, or simply to see how features perform with different cohorts. 
 
 Examples:
 
@@ -106,12 +118,9 @@ Not only are you able to roll out features by cohort, but you are also able to c
 
 **Insights** 
 
-<small>[Trends](/docs/features/trends) | [Sessions](/docs/features/sessions) | [Funnels](/docs/features/Funnels) | [Retention](/docs/features/retention) | [User Paths](/docs/features/paths)</small>
-
 </span>
 
-
-Cohorts can be used on filters on all PostHog Insights, and they can also be used for breakdowns in 'Trends'.
+Cohorts can be used on filters on all PostHog Insights, and they can also be used for breakdowns in [Trends](/docs/features/trends).
 
 Regarding business metrics, cohorts are especially useful to determine retention and conversion of different groups. They can help answer questions like:
 
@@ -124,7 +133,7 @@ To answer questions like these, just filter your queries by cohort when using In
 
 This will give you the same query as before but only including events from users in that specific cohort.
 
-Additionally, if you want to see comparisons across cohorts side-by-side, you can add the designated panels to a dashboard, creating a view like the picture below, which works for charts, tables, and funnels.
+Additionally, if you want to see comparisons across cohorts side-by-side, you can add the designated panels to a dashboard, creating a view like the picture below, which works for charts, tables, and [funnels](/docs/features/funnels).
 
 ![Cohort Dashboard Funnels](../../images/tutorials/cohorts/dashboard.png)
 <small class='center'>[_Access a full dashboards tutorial here_](/docs/features/dashboards/)  </small>
