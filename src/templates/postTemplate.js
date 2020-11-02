@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import 'katex/dist/katex.min.css'
+import './postTemplate.scss'
 import { DocsFooter } from '../components/Footer/DocsFooter'
 import SEO from '../components/seo'
 import { layoutLogic } from '../logic/layoutLogic'
@@ -36,7 +37,7 @@ function Template({
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
     return (
-        <div className={isDocsPage || isHandbookPage ? 'post-page-wrapper' : ''}>
+        <div className={'post-page ' + (isDocsPage || isHandbookPage ? 'post-page-wrapper' : '')}>
             <Layout
                 onPostPage={true}
                 isBlogArticlePage={isBlogArticlePage}
