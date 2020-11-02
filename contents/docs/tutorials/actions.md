@@ -1,5 +1,5 @@
 ---
-title: Going Beyond Autocapture
+title: Complete Guide to Event Tracking 
 sidebar: Docs
 showTitle: true
 ---
@@ -28,7 +28,7 @@ First, event autocapture can be a bit overwhelming. On high volume instances, wh
 
 Second, autocapture is a general solution that provides value for most users, but, to get the most out of PostHog, you should be using custom events. Custom events let you track _exactly_ the things that you care about, ranging from a user hovering over a certain part of your app, to a specific function being called on your backend.
 
-This tutorial will address these two points, walking you through how to create actions and send custom events step-by-step, so you can make the most out of PostHog.
+This tutorial will address these two points, walking you through how to create actions and send relevant custom events step-by-step, so you can make the most out of PostHog.
 
 ### Pre-Requisites
 
@@ -38,7 +38,7 @@ To follow this tutorial along, you need to:
 
 ### Sorting Through Your Events with Actions
 
-With the goal of making it easier to sort through your events, PostHog introduced the concept of [actions](/docs/features/actions), which are a way to tag and combine events you care about.
+With the goal of making it easier to sort through your events, PostHog introduced the concept of [actions](/docs/features/actions), which are a way to tag and combine events you care about. They are an important part of other features in PostHog, such as Cohorts. <!-- Link to Cohorts Tutorial Here -->
 
 The relationship between events and actions can be both one-to-one or many-to-one. What this means is that you can create an action from one event only, such as a "Pageview" action for a `$pageview` event, as well as an action targeting multiple events, like a "Sign Up" action targeting the events `clicked button with text "Sign Up"` and `clicked button with text "Sign Up Now"`.
 
@@ -87,25 +87,25 @@ Lastly, you can of course create actions from the 'Actions' page under 'Events':
 
 Visit our [dedicated actions page](/docs/features/actions/) for a comprehensive explanation of all the options available when creating an action.
 
-### Upgrading Your Analytics Game with Custom Events
+### Using Custom Events to Track Advanced Behaviors 
 
 Now that we've learned how to sort through events, let's go through how to create events that PostHog doesn't automatically capture for you.
 
-Custom events can be created from any of our [libraries](/docs/integrations), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. 
+Custom events can be created from any of our [libraries](/docs/integrations), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. We recommend looking through our integrations and only using our API if there isn't a suitable library for you, since using our libraries ensure you are always up-to-date.
 
-**Example: Custom events from your frontend**
+**Using JavaScript Event Listeners to Track User Focus and Exceptions**
 
-Frontend JS is heavily event-based by nature, making it a simple paradigm to pair up JavaScript events with PostHog events.
+Frontend JS is heavily event-based by nature, a paradigm that pairs up well with PostHog events.
 
 For example, to trigger an event when an element is hovered, you can do:
 
 ```js
 // Vanilla JS
 
-const myElement = document.getElementById('my-element')
+const paymentButtonEl = document.getElementById('payment-btn')
 
-myElement.addEventListener('mouseover', () => {
-    posthog.capture('my custom event')
+paymentButtonEl.addEventListener('mouseover', () => {
+    posthog.capture('payment button hovered')
 })
 
 ```
@@ -117,16 +117,16 @@ Another useful custom event might be tracking exceptions, like so:
 
 window.onerror = (errorMsg, url, lineNumber) => {
     // Pass exception details as event properties
-    posthog.capture('exception', {"message": errorMsg, "url": url, "lineNumber": lineNumber})
+    posthog.capture('frontend exception', {"message": errorMsg, "url": url, "lineNumber": lineNumber})
     return false;
 }
 ```
 
-These exceptions can then be correlated with [feature flags](/docs/features/feature-flags) as well as usage of your app, for example.
+These exceptions can then be correlated with [feature flags](/docs/features/feature-flags) and app usage, to determine if a new feature increased the incidence of exceptions, or if a certain exception harms conversion in a funnel, for example. 
 
 Essentially, it's entirely up to you what events you capture and what properties you pass to them. You can also add more complex logic to determine when to trigger an event, as well as what properties to pass to it.
 
-**Example: Custom events from your backend**
+**Using Backend Libraries to Track Function Calls and HTTP Status Codes**
 
 Custom events are not limited to your frontend, however! You can also send events from your backend, which is very useful for going deeper into how your app is being used. 
 
@@ -154,6 +154,7 @@ Another useful event could potentially be tracking endpoints that returned a sta
 ```go
 // Go + Martini Web Framework
 
+// Triggered when route is not found
 m.NotFound(func(req *http.Request) string) {
     // Send event to PostHog 
     client.Enqueue(posthog.Capture{
