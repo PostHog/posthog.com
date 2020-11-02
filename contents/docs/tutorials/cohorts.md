@@ -42,7 +42,7 @@ Users who performed a certain defining action might use your product differently
 
 **Segmenting by team**
 
-As a B2B tool, PostHog has various different companies using our product. This allows us to segment our analytics by the different teams using the platform and understand how each group of users uses the product differently. This not only lets us get a broader perspective of how different companies use our product internally, but also allows us to reach out and help teams take full advantage of the features with data that provides context about their usage.  
+As a B2B tool, PostHog has various companies using our product. This allows us to segment our analytics by the different teams using the platform and understand how each group of users uses the product differently. This not only lets us get a broader perspective of how different companies use our product internally, but also allows us to reach out and help teams take full advantage of the features with data that provides context about their usage.  
 
 **Segmenting by marketing source**
 
