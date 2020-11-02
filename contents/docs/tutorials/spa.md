@@ -1,0 +1,175 @@
+---
+title: Tracking Single Page Apps
+sidebar: Docs
+showTitle: true
+---
+
+<br />
+
+<small class="note-block centered">_Estimated Reading Time: 8 minutes ☕☕_</small>
+
+<br />
+
+<span class="larger-image">
+
+![Funnels Banner Image](../../images/tutorials/banners/spa.png)
+
+</span>
+
+<br />
+
+If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further.
+
+This tutorial will guide you through multiple methods you can use to ensure you capture navigation in your SPA website.  
+
+### Pre-Requisites
+
+To follow this tutorial along, you need to:
+
+1. Have [deployed PostHog](/docs/deployment).
+1. Be using our [JavaScript integration](/docs/integrations/js-integration) to track your SPA
+
+### Tracking Navigation Changes in SPAs
+
+If you use PostHog to track a traditional website, our autocapture feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
+
+As such, in order to accurately capture navigation in SPAs, we need to use [custom events](/docs/integrations/js-integration/#sending-events), since autocapture is not enough. 
+
+This tutorial will now take you through various methods that use custom events to track navigation, which can be used by themselves or in combination with the others.
+
+### Navigation via Clicks
+
+The most straightforward way to track navigation in SPAs is to set triggers for clicks that coordinate the navigation and use them to determine what "page" the user is now on.
+
+Consider a webpage where clicking on the navigation takes the user to another location on the same page, for example. This can easily be done by adding element IDs as values for the `href` property on links, like so:
+
+```html
+<a id='nav-about-us' href='#about-us'>About Us</a>
+```
+
+Clicking the link above will take the user to the element with ID `about-us`, working as navigation. 
+
+Thus, we can track that by listening for the click event on that element, and subsequently capturing a PostHog `$pageview` when the event is triggered. In Vanilla JS, this would look something like this:
+
+```js
+document.getElementById('nav-about-us').addEventListener('click', () => {
+    posthog.capture('$pageview')
+})
+```
+
+Since PostHog captures the 'Current URL' property from `window.location.href` and `a` tags pointing to the same page update that value, the event `$pageview` will be automatically populated with the correct URL, such as `mywebsite.com/#about-us`.
+
+As such, to track navigation via clicks, one simply needs to set event listeners for the all the relevant clicks and capture a `$pageview` on those events. Provided that the clicks change the URL (`window.location.href`), this method will work with no additional tweaks needed. However, we will still go through how you can update the URL yourself.
+
+### Tracking Visible Elements on the Page
+
+While tracking pageviews from clicks is a good first step, the approach is not ideal for a lot of SPAs. 
+
+Tracking navigation via clicks only works perfectly if the _only way_ users can navigate through your application is via clicking. However, for many SPAs, scrolling is another way to navigate via sections, so that the user can either click on the navbar items or scroll through the page in order to access other sections.
+
+In this case, clicks are not enough: we need to track what elements are visible on the page every time the viewport changes, and capture page views when new sections become visible (i.e. were navigated to). 
+
+To do so, we need a few things.
+
+**Checking if an element is visible to the user**
+
+To check if an element is visible to the user, we can use the following helper function:
+
+```js
+const isElementInViewport = (el) => {
+    const rect = el.getBoundingClientRect()
+    
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && 
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) 
+    );
+}
+```
+
+The function above takes a reference to a DOM element as a parameter and returns `true` if the element is visible (and `false` otherwise). It does so by checking the coordinates of the rectangle that bounds the element against the user viewport to determine if the element is visible in the user's screen ([more info(https://stackoverflow.com/questions/123999/how-can-i-tell-if-a-dom-element-is-visible-in-the-current-viewport)).
+
+We will be using this function to periodically check if certain elements are visible as the user goes through the page.
+
+**Determining elements that represent new sections**
+
+The next step is to decide what elements in our SPA constitute a new section/screen. We will use these to trigger pageviews when they are visible for the user.
+
+For example, these could be section heders, as well as wrapping `div` tags. This will vary from website to website, and you need to decide for yourself when _exactly_ the page view should be triggered. For example, do you want to trigger a `$pageview` when the section is partly visible or entirely covering the screen? 
+
+Once you have determined the elements to use, you can specify them in a structure like this:
+
+```js
+let elementsToTrack = [
+    {
+        name: "section1",
+        ref: document.getElementById('section1'),
+        visible: true
+    },
+    {
+        name: "section2",
+        ref: document.getElementById('section2'),
+        visible: false
+    },
+]
+```
+
+This structure will be useful for the next step, but you can of course customize this entire solution as you wish.
+
+**Listening for changes to the window to trigger page views**
+
+With the structure in place, let's now actually listen for changes and capture events.
+
+First, let's write up a handler that checks if our elements are visible and captures a pageview if they are:
+
+```js
+const visibilityChangeHandler = () => {
+    
+    // Loop through the relevant elements
+    for (let el of elementsToTrack) {
+
+        // Check if the element is visible
+        let visible = isElementInViewport(el.ref)
+
+        // Check if there has been a change in visibility to prevent useless triggers
+        if (visible !== el.visible) {
+
+            // Update the element visibility state
+            el.visible = visible
+
+            // Capture a pageview with PostHog
+            if (visible) posthog.capture('$pageview', { section: el.name, $current_url: el.name })
+        }
+    }
+}
+```
+
+The comments in the code provide context as to what each line is doing, but, essentially, when the handler is triggered, we check the elements we care about for _changes_ in visibility, update the state, and capture a `$pageview` if the change was from `false -> true` only. 
+
+You could also add some more complex logic here, such as capturing a pageview when one element stops being visible and another one becomes visible. 
+
+**Setting the relevant listeners**
+
+Finally, we need to listen for the relevant changes to window that might lead to a new page view:
+
+```js
+if (window.addEventListener) {
+    // Uncomment next lines to capture pageviews on page load
+    // addEventListener('DOMContentLoaded', handler, false);
+    // addEventListener('load', visibilityChangeHandler, false);
+    addEventListener('scroll', visibilityChangeHandler, false)
+    addEventListener('resize', visibilityChangeHandler, false)
+}
+```
+
+Here, we are listening for window events that may cause a new section to come into view, which are scrolling and resizing. Since PostHog autocapture already captures a `$pageview` when the page loads, you don't need to 
+
+<!--
+before unload
+clicks
+navigation
+window.location.href
+-->
+
+
