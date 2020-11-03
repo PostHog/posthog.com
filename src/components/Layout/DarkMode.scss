@@ -36,14 +36,12 @@ body.dark .post-page-wrapper {
         h3,
         h4,
         h5,
-        h6 {
+        h6,
+        strong {
             color: #ffffff !important;
         }
 
-        li {
-            color: #d4d4d4 !important;
-        }
-
+        li,
         p {
             color: #d4d4d4 !important;
         }
@@ -97,6 +95,10 @@ body.dark .post-page-wrapper {
         code {
             background: #28292b;
             color: #ffffff;
+        }
+
+        pre code {
+            background: #272822 !important;
         }
 
         .warning-note {
