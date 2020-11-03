@@ -142,7 +142,7 @@ By setting the appropriate filters you can derive metrics for each relevant grou
 In addition, following the segmentation of your retention metrics, you can then use the results of your retention analysis to 
 decide which users to contact, either from the churned or high-retention groups. 
 
-Using the filters from the retention table, you can filter users on the 'People' section, in order to conduct further analysis on what user properties lead to good retention, do sales calls with users who could become paying customers, or contact churned users for feedback.
+Using the filters from the retention table, you can filter users on our 'People' page, in order to conduct further analysis on what user properties lead to good retention, do sales calls with users who could become paying customers, or contact churned users for feedback.
 
 Finally, another great way to use retention filters is by pairing it with [feature flags](/docs/features/feature-flags). As you roll out a new feature to specific groups or a percentage of your overall users, you can then directly measure the impact of the feature flag on retention over time. 
 
@@ -163,10 +163,9 @@ As mentioned in the introductory section of this tutorial, different businesses 
 
 > ##### **Recap**
 >
-> - Cohorts are a way of segmenting users by shared characteristics.
-> - Users can be grouped by shared actions or properties
-> - Cohort matching conditions operate on an `OR` basis
-> - Cohorts can be used in all of PostHog's insights, as well as Feature Flags 
+> - Your business should set appropriate retention metrics that are specific to your product
+> - PostHog allows you to view retention on any event or action
+> - Filtering retention by event properties or cohorts is a great way to improve product-market fit
 
 </div>
 
