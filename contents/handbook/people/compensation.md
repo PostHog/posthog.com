@@ -22,7 +22,7 @@ We will not adjust your pay downwards for existing team members if this ratio ch
 
 ## Location factor
 ​
-We use GitLab's location factors to calculate what a fair market rate is for each location. GitLab uses a combination of data from Economic Research Institute (ERI), Numbeo, Comptryx, Radford, Robert Half, and Dice. [Read more](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#calculating-location-factors) on how GitLab calculates this location factor.
+We use GitLab's location factors to calculate what a fair market rate is for each location. GitLab uses a combination of data from Economic Research Institute (ERI), Numbeo, Comptryx, Radford, Robert Half, and Dice. [Read more](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#calculating-location-factors) on how GitLab calculates this location factor. If your location isn't listed, we will create one for you based on Numbeo's data for the relative Cost Of Living with San Francisco.
 ​
 ## Level
 
@@ -49,8 +49,8 @@ You'll receive approximately 0.1-0.5% of the company with a standard 1-year clif
 ​
 Whilst the terms of options for *any company* could vary if we were ever acquired, we have set them up with the following key terms:
 
-* 10 year exercise period
-* Double trigger acceleration which means if we are acquired before you have fully vested, you receive all your options at that time
+* 10 years to exercise your options in the event that you leave PostHog
+* Double trigger acceleration which means if you are let go or forced to leave due to the company restructuring, you receive all of your options at that time
 * Vesting starts from your start date (not after a "probation period" or similar)
 
 It can take time to approve options (it requires a board meeting). We can clarify the likely timeframe at the time we're hiring you.
@@ -67,7 +67,7 @@ If you plan on spending >4 months/year in a place different from your home base,
 
 For a trip with many destinations over a period of more than 4 months, the location factor will be located along the various places you intend to stay, averaged by the amount of time spent.
 
-If you are uncertain about where you're travelling to in advance, and you are travelling over 4 months, then we will keep your pay the same as when you departed. 4 months later, we will make a manual adjustment to edit your next pay amount based on the average of the previous 4 months. This will take place every 4 months until you are done travelling. If the adjustment would require reclaiming more than your entire pay amount (for example if you moved from one of the world's most expensive areasa to one of the world's least inexpensive areas), then we will work with you on how quickly we reclaim it. Generally this would be over no more than the following 4 months. It is your responsibility if you take this approach to budget appropriately.
+If you are uncertain about where you're travelling to in advance, and you are travelling for over 4 months, then we will keep your pay the same as when you departed. 4 months later, we will make a manual adjustment to edit your next pay amount based on the average of the previous 4 months. This will take place every 4 months until you are done travelling. If the adjustment would require reclaiming more than your entire pay amount (for example if you moved from one of the world's most expensive areas to one of the world's least inexpensive areas), then we will work with you on how quickly we reclaim it. Generally this would be over no more than the following 4 months. It is your responsibility if you take this approach to budget appropriately.
 ​
 If this represents an increase in pay from however much you were *most recently* paid, _we need to approve this change in advance_ - we cannot guarantee it is always possible, as our budgets may or may not allow it.
 
