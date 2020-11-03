@@ -90,9 +90,15 @@ const isElementInViewport = (el) => {
     return (
         rect.top >= 0 &&
         rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && 
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth) 
-    );
+        (   
+            window.innerHeight || 
+            document.documentElement.clientHeight
+        ) >= rect.bottom &&
+        (
+            window.innerWidth || 
+            document.documentElement.clientWidth
+        ) >= rect.right
+    )
 }
 ```
 
@@ -218,9 +224,15 @@ const isElementInViewport = (el) => {
     return (
         rect.top >= 0 &&
         rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && 
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth) 
-    );
+        (   
+            window.innerHeight || 
+            document.documentElement.clientHeight
+        ) >= rect.bottom &&
+        (
+            window.innerWidth || 
+            document.documentElement.clientWidth
+        ) >= rect.right
+    )
 }
 
 const visibilityChangeHandler = () => {
