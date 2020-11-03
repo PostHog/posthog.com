@@ -26,7 +26,7 @@ Tracking retention is about measuring how big those holes are and identifying th
 
 This tutorial will introduce you to the basic concepts of retention and churn and teach you how to use PostHog's many features to track retention at various stages.
 
-### Pre-Requisites
+#### Pre-Requisites
 
 To follow this tutorial along, you need to:
 
@@ -78,17 +78,85 @@ Having determined how to measure retention in a way that is relevant to your bus
 
 Before we proceed to walkthroughs of PostHog's functionality, you should be aware that PostHog offers two different retention metrics that you may want to use. These are:
 
-**Retention** 
+[**Retention**](/docs/features/retention)
 
 Retention tracks repeated usage of your product over set time periods. For example, you can look at retention for a given event over the past week, visualizing how retention changed on each specific day of that week. Retention can be found as a tab in 'Insights'.
 
-**Stickiness** 
+[**Stickiness**](/docs/features/trends/#trend-segmentation-by-stickiness)
 
 Stickiness is also a metric of repeated usage, but it disregards the absolute time period in favor of a relative metric. In practical terms, while retention will give you an answer for how many users visited your page on October 22nd and then visited again on October 23rd, stickiness doesn't care about the dates, rather offering an answer for how many users came back to your site on day 2 after visiting on day 1 (irrespective of what the exact dates were). Tracking stickiness in PostHog is done in the 'Trends' tab in 'Insights'.
 
-![Retention in Insights image](../../images/tutorials/retention/insights.png)
+![Retention in Insights Image](../../images/tutorials/retention/insights.png)
 
-#### Configuring Retention Tables 
+This tutorial will focus on 'retention' specifically, but the majority of concepts is also applicable to stickiness views.
+
+#### Configuring Retention Tables for your Metrics
+
+To start calculating your retention, head over to the 'Retention' tab in 'Insights'.
+
+This will show you a retention table for the `$pageview` event, like so:
+
+![Retention Table Image](../../images/tutorials/retention/table.png)
+
+If this table is a bit confusing to you, check out our dedicated [retention](/docs/features/retention) page for a full walkthrough of how it works.
+
+Here, you have a few settings you can tweak to meet your desired use-case:
+
+##### Track retention on the events that matter to you
+
+The first thing you can do is select any action or event to track retention on. This can be:
+
+- A website visit: Shows you if your users are coming back repeatedly
+- A button click: Can be used to track usage of important features you want users to use often, such as comment on a post 
+- A custom event: Anything you want users to do regularly (see [custom events](/docs/integrations/js-integration/#sending-events))
+
+Remember that here you are tracking how often users come and do the same thing again over a period of time. To track subsequent actions or events, you should use [funnels](/docs/features/funnels).
+
+##### Setting relevant filters
+
+Even if you don't have complex metrics in place, the filter functionality should not be overlooked. It can be used to:
+
+**Segregate events by URL**
+
+If you have multiple domains being tracked in PostHog at once, you might want to look at their retention metrics separately. This can be done through filtering by 'Current URL'. In our case, for example, to look at retention for [app.posthog.com](https://app.posthog.com) (our product) separately, we set a filter of `Current URL contains app.posthog.com`.
+
+In addition, you could also look at retention for specific pages on your website, such as for your blog or documentation.
+
+**Determining product-market fit**
+
+Informing product direction for better product-market fit is one of the main use-cases for retention.
+
+To understand what groups you retain better, you can filter your retention table by specific user properties, as well as by [cohort](/docs/features/cohorts). This allows you to answer questions like:
+
+- Is our `$pageview` retention better with cohort 'Users who contacted support'?
+- Over the last month, did users in cohort 'Technical Users' have better or worse retention for event `new feature used`?
+- Is retention on our blog better for users with `utm_source` equal to `twitter` or `facebook`?
+- For our in-browser design tool, does retention vary significantly across browsers? 
+
+By setting the appropriate filters you can derive metrics for each relevant group in order to decide if:
+
+- You want to tailor your product towards high-retention users 
+- There are improvements to be done that can reduce churn of a particular group
+- Your intended target audience is retaining better or worse than other groups
+
+In addition, following the segmentation of your retention metrics, you can then use the results of your retention analysis to 
+decide which users to contact, either from the churned or high-retention groups. 
+
+Using the filters from the retention table, you can filter users on the 'People' section, in order to conduct further analysis on what user properties lead to good retention, do sales calls with users who could become paying customers, or contact churned users for feedback.
+
+Finally, another great way to use retention filters is by pairing it with [feature flags](/docs/features/feature-flags). As you roll out a new feature to specific groups or a percentage of your overall users, you can then directly measure the impact of the feature flag on retention over time. 
+
+> **Pro Tip:** Setting up [cohorts](/docs/features/cohorts) is the best way to roll out feature flags to a specific group of users and perform analytics on the performance of the feature, including retention metrics.
+
+##### See how your retention evolves over time
+
+If you set retention KPIs, or are looking to improve your retention in general, you should be comparing retention across periods. Setting the 'Current Date' allows you to do this. 
+
+To keep track of major changes that may affect your retention, you should also consider using [annotations](/docs/features/annotations).
+
+##### Tailor your retention view to your business
+
+As mentioned in the introductory section of this tutorial, different businesses need to look at retention over different time periods. By setting the 'period' appropriately, you can ensure that you are looking at retention in the time frame that is relevant to your business. 
 
 
 <div class='small-inner-text'>
