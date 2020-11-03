@@ -41,7 +41,12 @@
     {
         "entry": "Tutorials",
         "name": "Tutorials",
-        "items": ["docs/tutorials/feature-flags", "docs/tutorials/toolbar", "docs/tutorials/funnels"]
+        "items": [
+            "docs/tutorials/feature-flags",
+            "docs/tutorials/toolbar",
+            "docs/tutorials/funnels",
+            "docs/tutorials/spa"
+        ]
     },
     {
         "entry": "Deployment",

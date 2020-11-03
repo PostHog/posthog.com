@@ -18,9 +18,17 @@ showTitle: true
 
 <br />
 
-If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further.
+If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further. 
 
-This tutorial will guide you through multiple methods you can use to ensure you capture navigation in your SPA website.  
+This tutorial will guide you through multiple methods you can use to ensure you capture navigation in your SPA website. 
+
+### Is This Tutorial For Me?
+
+This tutorial is aimed at SPAs, which are websites that only load one time, with all content either being loaded at once or dynamically as the user browses (without a page refresh). However, it may also provide relevant insights for:
+
+- Tracking mobile apps
+- Tracking apps/Websites with non-standard navigation
+- Those looking to capture additional `$pageview` events
 
 ### Pre-Requisites
 
@@ -31,7 +39,7 @@ To follow this tutorial along, you need to:
 
 ### Tracking Navigation Changes in SPAs
 
-If you use PostHog to track a traditional website, our autocapture feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
+If you use PostHog to track a traditional website, our [autocapture](/docs/integrations/js-integration#autocapture) feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
 
 As such, in order to accurately capture navigation in SPAs, we need to manually send events, since autocapture is not enough. 
 
@@ -162,7 +170,9 @@ If you override the default property, your events table will look like this:
 
 Instead of a the automatically captured URL, your events table will show your custom value under 'URL / Screen'.
 
-> **Note:** Overriding the default 'Current URL' property is most useful if the URL in your app _never_ changes.
+Additionally, you will also be able to use our [paths](/docs/features/paths) feature with your custom URLs.
+
+> **Note:** If your page does not refresh but the URL changes with navigation, PostHog's default 'Current URL' may still be useful. Otherwise, if your URL _never_ changes, you should definitely override the prop with your own values - just make sure to follow a good naming system!
 
 **Setting the relevant listeners**
 
