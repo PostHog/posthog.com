@@ -26,7 +26,7 @@ If you'd like to watch a video about our Actions feature, check out our demo vid
 
 To access the Actions page, go to the 'Events' section on the left-hand navigation sidebar which will open up a submenu including 'Actions':
 
-![](../../images/features/actions/actions-page.png)
+![Accessing Actions](../../images/features/actions/actions-page.png)
 <br>
 
 ## Creating Frontend Actions
@@ -50,13 +50,13 @@ Alternatively you can create an event based on `pageview` or an existing [event]
 
 To do so, click 'Create new action' and the following modal should appear (without the red rectangle):
 
-![](../../images/features/actions/action-modal.png)
+![Action modal image](../../images/features/actions/action-modal.png)
 
 <br />
 
 If you select the 'From event or pageview' option, you will be taken to the following page, where you can then set up your action from exisiting events:
 
-![](../../images/features/actions/action-from-event.png)
+![Action from event image](../../images/features/actions/action-from-event.png)
 
 <br />
 
