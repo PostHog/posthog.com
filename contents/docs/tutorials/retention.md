@@ -86,6 +86,8 @@ Retention tracks repeated usage of your product over set time periods. For examp
 
 Stickiness is also a metric of repeated usage, but it disregards the absolute time period in favor of a relative metric. In practical terms, while retention will give you an answer for how many users visited your page on October 22nd and then visited again on October 23rd, stickiness doesn't care about the dates, rather offering an answer for how many users came back to your site on day 2 after visiting on day 1 (irrespective of what the exact dates were). Tracking stickiness in PostHog is done in the 'Trends' tab in 'Insights'.
 
+> **Pro Tip:** Stickiness is particularly useful at the early stages of your product tracking when you do not have a lot of data. In this case, it makes sense to focus on the overall repeated usage of features rather than looking at retention over specific time periods. 
+
 ![Retention in Insights Image](../../images/tutorials/retention/insights.png)
 
 This tutorial will focus on 'retention' specifically, but the majority of concepts is also applicable to stickiness views.
@@ -125,6 +127,10 @@ In addition, you could also look at retention for specific pages on your website
 **Determining product-market fit**
 
 Informing product direction for better product-market fit is one of the main use-cases for retention.
+
+Traditionally, you are supposed to focus on your ability to sell a product to work out if you have product-market fit. However, we believe it is _just_ as important that users are coming back to your product repeatedly. If you can get both of those things right, you know you are in a position to scale your business. Retention tells you if people are coming back. It's also key to recognize that you may have stronger product market fit with a subset of your users - for example, those in a certain group or cohort. 
+
+> If you have time, check out [Superhuman's explanation for finding product-market fit](https://firstround.com/review/how-superhuman-built-an-engine-to-find-product-market-fit/). They used surveys, but we believe that whilst both have value, what people do is more important than what they say.
 
 To understand what groups you retain better, you can filter your retention table by specific user properties, as well as by [cohort](/docs/features/cohorts). This allows you to answer questions like:
 
