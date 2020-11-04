@@ -14,7 +14,10 @@ This way, debugging issues becomes a lot easier.
 
 ## Installation
 
-Make sure you're using both PostHog and Sentry as a JS module.
+Make sure you're using both PostHog and Sentry as a JS module. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.
+
+- `'your organization'` will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
+- `project-id` will be the last few digits in your Sentry DSN, such as `https://3015132e31ec4fa28a20ce435ed7c1ec@o344752.ingest.sentry.io/project-id`
 
 ```js
 import posthog from 'posthog-js'
@@ -23,8 +26,8 @@ import * as Sentry from '@sentry/browser'
 posthog.init('<your api key>')
 
 Sentry.init({
-    dsn: '<your Sentry DSN'),
-    integrations: [new posthog.SentryIntegration(posthog, 'posthog', 1899813)],
+    dsn: '<your Sentry DSN>'),
+    integrations: [new posthog.SentryIntegration(posthog, 'your organization', project-id)],
 })
 ```
 
