@@ -1,5 +1,5 @@
 ---
-title: Designer
+title: Lead Designer
 sidebar: Careers
 showTitle: true
 ---
@@ -8,7 +8,9 @@ showTitle: true
 
 PostHog exists to increase the number of successful products in the world.
 
-We're not just building software, our product is the company. This role is to shape how we get design into every part of that - from brand, to web presence, our engagement with our blossoming community, and into the platform itself.
+We're not just building software, our product is the company. We're building our first design team and this role is for a lead designer to shape how we shape our visual design across branding, website, documentation, social media, merch (!), and anywhere else you can see that needs attention.
+
+Whilst this isn't a UX role, we'd expect some feedback from a visual perspective on the product itself too, for example in the aesthetics of our components.
 
 ## Ambition and engineering have taken us a really long way, so far
 
@@ -28,15 +30,19 @@ The core of our approach is to delight end users. It's not about executive dashb
 
 We aren't on track to achieve this, as we are missing *you*.
 
-You will be responsible for getting world class design into every part of our company. We'll team you up with an incredible graphic designer, and with our developer advocate and engineering team to create something special. You'd be one of the very first design hires we'd make at a pivotal stage for the company.
+You will be responsible for getting world class visual design into every part of our company. We'll team you up with an incredible graphic designer, and with our developer advocate, product and engineering team to create something special.
 
-## This role isn't scoped tightly
+You'd be one of the very first design hires we'd make at a pivotal stage for the company, hence for the need for this to be a lead designer position.
 
-The reason we hire exceptional people is so they can tell us what to do.
+## We hire the best to tell us what to do
 
-Success in this role means it's obvious our website, docs, product and presence are world class. We are focussed on increasing user acquisition, retention and our community growth. Design is core to impacting all of these things.
+We are focussed on increasing user acquisition, retention and our community growth. Design is core to all of these things.
 
-## Does this sound like you?
+Success in this role means we build a great brand, which filters through everything that reaches our audience of users and potential users.
+
+This will be a challenging role - it will require the ability to execute quickly and creatively, whilst creating consistency across many assets. You will need to be strong at web layouts, understanding the developer mentality when it comes to design, and in collaborating with an all remote team to get your vision into production.
+
+## Sounds like fun?
 
 [Drop us a line](mailto:careers@posthog.com).
 
