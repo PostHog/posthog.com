@@ -8,7 +8,7 @@ showTitle: true
 
 PostHog exists to increase the number of successful products in the world.
 
-We're not just building software, our product is the company. We're building our first design team and this role is for a lead designer to shape how we shape our visual design across branding, website, documentation, social media, merch (!), and anywhere else you can see that needs attention.
+We're not just building software, our product is the company. We're building our first design team and this role is for a lead designer to shape our visual design across branding, website, documentation, social media, merch (!), and anywhere else you can see that needs attention.
 
 Whilst this isn't a UX role, we'd expect some feedback from a visual perspective on the product itself too, for example in the aesthetics of our components.
 
