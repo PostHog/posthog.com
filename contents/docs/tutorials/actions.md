@@ -167,6 +167,8 @@ m.NotFound(func(req *http.Request) string) {
 }
 ```
 
+> **Note:** Unlike exception tracking platforms such as [Sentry](https://sentry.io/) (which we use), tracking exceptions with PostHog is beneficial to correlate error metrics with your product's UX and usage rather than for debugging purposes.
+
 Once again, you can track anything that you like, and you can do so with any of our 10+ [integrations](/docs/integrations), as well as our [API](/docs/api).
 
 **Using custom events in PostHog**
