@@ -13,15 +13,15 @@ So, without further ado, here they are:
 
 ## Release Notes
 
-### [Session Recording (Beta)](https://github.com/PostHog/posthog/pulls?q=is%3Apr+session+recording+)
+### [Session Recording (Beta)](https://github.com/PostHog/posthog/issues/1846)
 
 ![Session Recording Page Screenshot](../images/blog/array/session-recording.png)
 
-Given that our stated mission at PostHog is to increase the number of successful projects in the world, session recording felt like a feature that fits in perfectly with that goal.
+Given that our mission at PostHog is to increase the number of successful projects in the world, session recording felt like a feature that fits in perfectly with that goal.
 
-PostHog already provides various features to help you understand and improve your UX - but watching real users use your product is a _whole nother ball game_. 
+PostHog already provides various features to help you understand and improve your UX - but watching real users use your product is a _whole other ball game_. 
 
-With PostHog's session recording, you are able to truly feel the pain point of your users first-hand, seeing where they get stuck, debugging exceptions faster, and making your UX smoother. 
+With PostHog's session recording, you are able to truly feel the pain points of your users first-hand, seeing where they get stuck, debugging exceptions faster, and making your UX smoother. 
 
 ![Session Recording Screenshot](../images/blog/array/session-recording-ss.png)
 
@@ -30,7 +30,7 @@ Additionally, you can do so while still preserving the privacy of your users, by
 However, please note that our session recording feature is in **Beta** at the moment. This means that it can be unstable and have bugs. To report bugs you find while using it, please [open an issue for us on GitHub](https://github.com/PostHog/posthog/issues). 
 
 
-### [Plugins (Beta)](https://github.com/PostHog/posthog/pulls?q=is%3Apr+plugins)
+### [Plugins (Beta)](https://github.com/PostHog/posthog/issues/1896)
 
 ![Plugins Screenshot](../images/blog/array/plugins.png)
 
@@ -39,6 +39,8 @@ Plugins is another **Beta** feature that we're extremely excited for. Currently 
 At the moment, we have created a few example plugins for you to test out the functionality, and have the intention of launching more for the next release. We will also be launching tutorials on how to make your own plugins, so stay tuned for that.
 
 As of right now, if you're on a self-hosted instance, you should head over to 'Project' -> 'Plugins' to enable the functionality. You can start testing it out with our "Hello World" plugin, which adds a property to your events called `foo` with a value that is up to you to decide in setup. 
+
+We also have built plugins for currency normalization and GeoIP data, allowing you to convert currency values in events according to up-to-date exchange rates and determine the location of an event based on the user's IP.
 
 Our overall vision for plugins is to enable seamless integration with other relevant data analytics platforms, as well as allow users to more easily customize PostHog's functionality by adding their own logic and data to the event pipeline.
 
