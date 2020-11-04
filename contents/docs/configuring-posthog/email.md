@@ -39,7 +39,56 @@ Below you will find details on how to configure the most common email providers 
 
 
 ## Twilio's Sendgrid
-1. After creating select the option to create a new sender profile, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/senders/new](https://app.sendgrid.com/settings/sender_auth/senders/new).
+With Sendgrid you have 2 different configuration options. 
+
+### Option A [Recommended]. Domain Authentication 
+[Domain authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/#setting-up-domain-authentication) allows you to send emails from any address within your validated domain. It is the best option to guarantee email deliverability because it establishes DNS records on your domain that validate your identity.
+
+1. On sender authentication, select the option to authenticate a domain, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/domain/create](https://app.sendgrid.com/settings/sender_auth/domain/create).
+
+1. Fill out the required details for the domain you wish to configure. We recommend using the default configuration.
+
+1. You will receive now a list of DNS records that need to be added to your domain. After adding them, be sure to verify them on Sendgrid. You are now ready to start sending emails.
+
+
+### Option B. Single sender authentication
+As an alternative you can do [single sender verification](https://sendgrid.com/docs/ui/sending-email/sender-verification/) which is the easiest option to configure. You will only need to be able to receive emails on the address you want to use as sender. **Please note this method is only recommended as a starting point, or for small scale usage.**
+
+1. On sender authentication, select the option to create a new sender profile, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/senders/new](https://app.sendgrid.com/settings/sender_auth/senders/new).
+
+1. Fill out the form with the required details, see an example below.
+
+    ![](../../images/configuring-posthog/sendgrid-2.png)
+
+1. Validate the email address by clicking on the link you will receive.
+
+
+After you have set up your sending configuration, you can continue below to set up your credentials and configure to send emails with Sendgrid.
+
+1. To create the required credentials, go to Settings > [API keys](https://app.sendgrid.com/settings/api_keys) and click on "Create API key".
+
+1. Set a name for your API key, we recommend using "PostHog", and select the "Restricted Key" option. You will need to enable the "Mail Send" permission as detailed below. Copy the key directly to your environment configuration.
+
+    ![](../../images/configuring-posthog/sendgrid-3.png)
+
+1. With the key you created above, you can now set your environment configuration in PostHog:
+    ```yaml
+    EMAIL_HOST: smtp.sendgrid.net
+    EMAIL_PORT: 587
+    EMAIL_HOST_USER: apikey # same for everyone
+    EMAIL_HOST_PASSWORD: SG.rqHsfjxZPiqE5lqXTgQ_lz7x7IVLv # obtained from step above
+    EMAIL_USE_TLS: true
+    EMAIL_USE_SSL: false
+    DEFAULT_FROM_EMAIL: hey@example.com # you can define this, just use your domain or single sender address
+    ```
+
+1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
+    > Please note that you will need to restart both your web server and background worker for this to work properly.
+
+
+1. As an additional optional step, we recommend turning off open & click tracking to avoid having weird-looking links and increase deliverability (there's little value in having this data). You can do so by going to [tracking settings](https://app.sendgrid.com/settings/tracking).
+
+    ![](../../images/configuring-posthog/sendgrid-4.png)
 
 ## Mailgun
 1. After you have created an account, go to Sending > [Domains](https://app.mailgun.com/app/sending/domains), and click on "Add New Domain".
@@ -52,16 +101,15 @@ Below you will find details on how to configure the most common email providers 
 1. Once you have added all records and verify them you can go to the domain settings > "SMTP credentials" section. You then need to create a set of SMTP credentials.
 
 1. With the SMTP credentials, you can now set the required environment variables for email to work properly. You will also need to obtain the hostname from the credentials page. Your configuration should now look something like this.
-Sample configuration:
-```yaml
-EMAIL_HOST: smtp.eu.mailgun.org # obtained from credentials page
-EMAIL_PORT: 587
-EMAIL_HOST_USER: postmaster@m.example.com # obtained from credentials page
-EMAIL_HOST_PASSWORD: password # obtained from credentials page
-EMAIL_USE_TLS: true
-EMAIL_USE_SSL: false
-DEFAULT_FROM_EMAIL: hey@example.com # you can define this, just use your domain
-```
+    ```yaml
+    EMAIL_HOST: smtp.eu.mailgun.org # obtained from credentials page
+    EMAIL_PORT: 587
+    EMAIL_HOST_USER: postmaster@m.example.com # obtained from credentials page
+    EMAIL_HOST_PASSWORD: password # obtained from credentials page
+    EMAIL_USE_TLS: true
+    EMAIL_USE_SSL: false
+    DEFAULT_FROM_EMAIL: hey@example.com # you can define this, just use your domain
+    ```
 
 1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
     > Please note that you will need to restart both your web server and background worker for this to work properly.
