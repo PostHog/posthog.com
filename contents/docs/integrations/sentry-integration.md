@@ -17,7 +17,7 @@ This way, debugging issues becomes a lot easier.
 Make sure you're using both PostHog and Sentry as a JS module. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.
 
 - `'your organization'` will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
-- `project-id` will be the last few digits in your Sentry DSN, such as `https://3015132e31ec4fa28a20ce435ed7c1ec@o344752.ingest.sentry.io/project-id`
+- `project-id` will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
 
 ```js
 import posthog from 'posthog-js'
