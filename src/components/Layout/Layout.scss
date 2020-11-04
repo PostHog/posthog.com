@@ -99,9 +99,6 @@ sub {
 sup {
     top: -0.5em;
 }
-img {
-    border-style: none;
-}
 svg:not(:root) {
     overflow: hidden;
 }
@@ -1417,6 +1414,13 @@ for all other rows the portrait image wraps above bio*/
     flex-wrap: wrap;
 }
 
+.small-inner-text a,
+.small-inner-text p,
+.small-inner-text li {
+    font-size: 14px !important;
+    line-height: 1;
+}
+
 /*split to one column on smaller screens*/
 @media screen and (max-width: 560px) {
     .team-left-text,
@@ -1500,8 +1504,4 @@ div::-webkit-scrollbar-thumb {
 /* handle on hover */
 div::-webkit-scrollbar-thumb:hover {
     background: #b0bec5;
-
-    img {
-        border-radius: 8px;
-    }
 }

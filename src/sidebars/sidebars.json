@@ -46,7 +46,9 @@
             "docs/tutorials/toolbar",
             "docs/tutorials/funnels",
             "docs/tutorials/cohorts",
-            "docs/tutorials/retention"
+            "docs/tutorials/retention",
+            "docs/tutorials/spa",
+            "docs/tutorials/actions"
         ]
     },
     {
@@ -165,6 +167,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-16-0",
             "blog/the-posthog-array-1-15-0",
             "blog/the-posthog-array-1-14-0",
             "blog/the-posthog-array-1-13-0",
