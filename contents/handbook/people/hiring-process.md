@@ -93,14 +93,17 @@ We are learning which boards work well:
 The stages of interviewing are:
 
 - Application
-   - decide if we will interview
-- Interview with the hiring team (this will always be James, Tim and 1 or more people that would work closely with the candidate day-to-day).
-   - decide if we will do a SuperDay else give feedback.
-   - after 2 interviews, if both people aren't sure it's worth doing the 3rd, we should stop the process at this point.
+   - decide if we will interview, give feedback if the candidate has written a personalized application
+- Interview with James, decide if we will continue
+- 1 hour interview with the hiring team (Tim and 1 or more people that would work closely with the candidate day-to-day).
+   - this is usually 2 PostHog team members interviewing the candidate at the same time
+   - decide if we will do a SuperDay else give feedback
 - PostHog SuperDay
 - Decision
 
 We track the stage the candidate is at [in Breezy](https://app.breezy.hr).
+
+There may be an additional interview where we bring in a 3rd party with specialist expertise in the case of hiring roles that we've not hired for before.
 
 ### Application
 
@@ -110,7 +113,7 @@ If a candidate hasn't customized the application or resume to the role, it is a 
 
 #### Engineering
 
-For current roles, the things we look for are:
+We hire repeatedly into engineering roles, so here are a few things we look for:
 
 - Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
 - Has started a project from scratch, without outside help
@@ -129,19 +132,19 @@ Each person on a hiring team is assigned a role:
 - Bar-raiser: The person interviewing outside their area of expertise is the bar-raiser. The bar-raiser is here to qualify that everyone is truly excited about the candidate and that they're an example of us believing in talent compounds. Everyone should still think this way - or they should be clear in why they don't feel like this as part of their feedback.
 - Technical assessor: everyone else
 
-#### Step 1 - Culture
+#### Step 1 - Culture with James
 
 We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are.
 
-This is to allow both PostHog and the candidate to assess cultural fit, and to dig into any concerns that Tim may have had in the first interview. I am looking for proactivity, directness, strong communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
+This is to allow both PostHog and the candidate to assess cultural fit, and to dig into any areas of potential misalignment based on the application. We are looking for proactivity, directness, strong communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
 
 - Talk about PostHog, where we're at and what the future looks like, including our long-term vision. If it was cold outreach, we provide a little more context up front.
 - Talk about the candidate, dig into any questions I have from their CV
 - Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned
 
-#### Steps 2, 3 (and sometimes 4) - Technical
+#### Step 2 - Technical
 
-We wil usually have 1 cultural interview then 2 technical interviews. However this may vary with the role (ie a candidate who would interact with design and engineering should meet with someone working in both of those areas, plus Tim and James).
+The second step is the technical interview. This is usually 2 PostHog team members spending an hour with the candidate (at the same time).
 
 These interviews will focus on the skills needed to fill the role.
 
@@ -157,9 +160,11 @@ For an engineering hire this would be things like:
 - What did you do on your very best day at work?
 - Tell me about a project that you led that failed. Why did it fail and what did you learn?
 
+One of the two technical interviewers will lead the discussion. The reason for 2 people is to ensure a deeper, higher quality interview.
+
 ### PostHog SuperDay
 
-We offer everyone who's gotten through the interview process the chance to do a paid PostHog SuperDay. We schedule 1 full day in advance with the candidate where we hire them as a contractor.
+We offer those who have gotten through the interview process the chance to do a paid PostHog SuperDay. We schedule 1 full day in advance with the candidate where we hire them as a contractor.
 
 This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a very demanding day of work.
 
