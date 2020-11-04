@@ -102,13 +102,6 @@ sup {
 svg:not(:root) {
     overflow: hidden;
 }
-code,
-kbd,
-pre,
-samp {
-    font-family: monospace, monospace;
-    font-size: 1em;
-}
 figure {
     margin: 1em 40px;
 }
@@ -451,18 +444,7 @@ fieldset {
     padding-top: 0;
     margin-bottom: 1.45rem;
 }
-blockquote {
-    margin-left: 1.45rem;
-    margin-right: 1.45rem;
-    margin-top: 0;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff7ea;
-    margin-bottom: 1.45rem;
-}
-.warning-note {
-    background-color: #ffdbd5;
-}
+
 form {
     margin-left: 0;
     margin-right: 0;
@@ -559,14 +541,6 @@ p *:last-child {
 li > p {
     margin-bottom: calc(1.45rem / 2);
 }
-code {
-    font-size: 0.85rem;
-    line-height: 1.45rem;
-}
-code[class*='language-'] {
-    margin: 0;
-    padding: 0;
-}
 kbd {
     font-size: 0.85rem;
     line-height: 1.45rem;
@@ -611,24 +585,6 @@ td:first-child {
 th:last-child,
 td:last-child {
     padding-right: 0;
-}
-tt,
-code {
-    border-radius: 3px;
-    font-family: 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Menlo, Courier,
-        monospace;
-    margin: 0 2px;
-    padding: 3px 5px;
-    white-space: pre-wrap;
-}
-
-tt {
-    background-color: #f8f8f8;
-}
-
-pre code {
-    background: none;
-    line-height: 1.42;
 }
 
 /* CUSTOM */
@@ -1187,41 +1143,6 @@ table th {
     background-color: #577bfb !important;
 }
 
-.blog-quote {
-    background: #f9f9f9;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
-    quotes: '\201C''\201D''\2018''\2019';
-    max-width: 80%;
-    margin-left: 5%;
-    text-align: center;
-}
-
-.blog-quote:before {
-    color: #ccc;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-}
-
-.blog-quote:after {
-    color: #ccc;
-    content: close-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-    margin-left: 1%;
-}
-
-.blog-quote > p {
-    display: inline;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
-}
-
 .sidebarButtonWrapper {
     position: static;
     width: 100vw;
@@ -1295,11 +1216,6 @@ table th {
     color: #577bfb !important;
 }
 
-code {
-    background-color: rgba(41, 37, 44, 0.1);
-    font-size: 14px !important;
-}
-
 .centered {
     display: block;
     text-align: center;
@@ -1310,22 +1226,6 @@ code {
     text-align: center !important;
     margin-left: auto !important;
     margin-right: auto !important;
-}
-
-.note-block {
-    background: #eeeeee;
-    padding-left: 10px;
-    padding-right: 5px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    border-radius: 5px;
-}
-
-.small-text > code,
-.small-text > span,
-.small-text > a,
-.small-text > p {
-    font-size: 12px !important;
 }
 
 .menu-header {
@@ -1386,20 +1286,6 @@ code {
 .left {
     display: block;
     text-align: left;
-}
-
-.contributor-faces {
-    width: 50px;
-    height: 50px;
-}
-
-.hacktoberfest {
-    background-color: #fcb80f !important;
-}
-
-.good-first-issue {
-    background-color: #7057ff !important;
-    color: white;
 }
 
 li {
