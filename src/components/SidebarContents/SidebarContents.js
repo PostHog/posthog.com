@@ -139,7 +139,7 @@ function SidebarContents() {
                                             onClick={() => setSidebarOpen(false)}
                                             style={{ float: 'left' }}
                                         >
-                                            {item.title}
+                                            {item.title.length <= 36 ? item.title : item.title.slice(0, 34) + '…'}
                                         </Link>
                                     </Menu.Item>
                                 )
