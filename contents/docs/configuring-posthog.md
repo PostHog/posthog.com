@@ -15,4 +15,4 @@ There are various ways to configure and personalize your PostHog instance to bet
 - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 - [Running Behind Proxy](/docs/configuring-posthog/running-behind-proxy)
-- [SMTP Credentials](/docs/configuring-posthog/smtp-credentials)
+- [Email Configuration](/docs/configuring-posthog/email)
