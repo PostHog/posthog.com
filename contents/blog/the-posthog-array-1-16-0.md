@@ -9,9 +9,12 @@ hideAnchor: true
 
 Following our largest release to date, we are now back on a more regular release schedule. And, given that scalability was the focus of the previous release, we thought it was time for some fresh new features. 
 
+
 So, without further ado, here they are:
 
 ## Release Notes
+
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
 
 ### [Session Recording (Beta)](https://github.com/PostHog/posthog/issues/1846)
 
