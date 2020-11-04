@@ -18,7 +18,7 @@ PostHog's engineering culture is best-in-class, and we've had explosive user gro
 
 We [launched a four week old minimum viable product in February](/handbook/company/story), and since then have been deployed in thousands of places around the world.
 
-Our platform is used to help indie game designers make it more fun to defend earth from an alien threat. We are used by mulitnational organizations running software that powers everything from banks to airlines. We are used by startups disrupting their own industries.
+PostHog's platform makes it easy for software teams to understand their user behavior. This coupled with our fast growth has led to a broad variety of very cool use cases. PostHog is used to help indie game designers make it more fun to defend earth from an alien threat. PostHog is used by multinational organizations running software that powers everything from banks to airlines. PostHog is used by startups disrupting their own industries.
 
 We're a company like no other in our space. Our approach is bottoms up and that starts by being great for developers to install and use.
 
