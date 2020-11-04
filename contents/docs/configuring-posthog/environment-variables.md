@@ -38,15 +38,14 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for GitLab authentication. Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
 | `DATABASE_URL`| [Database URL](https://github.com/jacobian/dj-database-url#url-schema) pointing to your PostgreSQL instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
 | `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
-| `EMAIL_HOST` | Used for configuring SMTP. Host of your email server.                                                           | `None`
-| `EMAIL_PORT` | Used for configuring SMTP. Port used by your email server in the specified host.                                | `None`
-| `EMAIL_HOST_USER` | Used for configuring SMTP. Username used by the email server.                                              | `None`
-| `EMAIL_HOST_PASSWORD` | Used for configuring SMTP. Password for the specified username used by the email server.               | `None`
-| `EMAIL_USE_TLS` | Used for configuring SMTP. Determines if TLS should be used for the email service. It is recommended that either this or `EMAIL_USE_SSL` be set to `True`.          | `False`
-| `EMAIL_USE_TLS` | Used for configuring SMTP. Determines if SSL should be used for the email service. It is recommended that either this or `EMAIL_USE_TLS` be set to `True`.          | `False`
-| `DEFAULT_FROM_EMAIL` | Determines the email address that should be used to send emails.                                        | `tim@posthog.com`
-
-
+| `EMAIL_HOST` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.     | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_PORT` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_HOST_USER` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_HOST_PASSWORD` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.               | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_USE_TLS` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.       | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_USE_TLS` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.         | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_DEFAULT_FROM` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_ENABLED` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
 
 
 

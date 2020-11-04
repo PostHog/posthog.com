@@ -14,6 +14,7 @@ PostHog's core relies on email messaging for certain functionality. For example:
 
 We very strongly recommend using an email service to act as email server (see examples below for most common providers). These providers are optimized to maximize email deliverability. To prevent spam, most email providers have very complex systems in place that validate a myriad of factors before allowing an email through. Optimizing your local server for this is a bit like reinventing the wheel, avoid this unless you have a very strong reason to use your local server.
 
+## General configuration
 
 To configure a remote email server, you will need to set up the following environment variables:
 - `EMAIL_HOST`: Defaults to `localhost`. Hostname to connect to for establishing SMTP connections.
@@ -22,7 +23,8 @@ To configure a remote email server, you will need to set up the following enviro
 - `EMAIL_HOST_PASSWORD`: Defaults to `null`. Credentials to connect to the host.
 - `EMAIL_USE_TLS`: Defaults to `false`. Whether to use TLS protocol when connecting to the host.
 - `EMAIL_USE_SSL`: Defaults to `false`. Whether to use SSL protocol when connecting to the host.
-- `DEFAULT_FROM_EMAIL`: Defaults to `root@localhost`. Email address that will appear as the sender in emails (`From` header).
+- `EMAIL_DEFAULT_FROM`: Defaults to `root@localhost`. Email address that will appear as the sender in emails (`From` header).
+- `EMAIL_ENABLED`: Defaults to `true`. Whether email service is enabled or not.
 
 Sample configuration:
 ```yaml
@@ -32,7 +34,7 @@ EMAIL_HOST_USER: postmaster@example.com
 EMAIL_HOST_PASSWORD: password
 EMAIL_USE_TLS: false
 EMAIL_USE_SSL: true
-DEFAULT_FROM_EMAIL: no-reply@example.com
+EMAIL_DEFAULT_FROM: no-reply@example.com
 ```
 
 Below you will find details on how to configure the most common email providers (not in any particular order). 
@@ -46,7 +48,7 @@ With Sendgrid you have 2 different configuration options.
 
 1. On sender authentication, select the option to authenticate a domain, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/domain/create](https://app.sendgrid.com/settings/sender_auth/domain/create).
 
-1. Fill out the required details for the domain you wish to configure. We recommend using the default configuration.
+1. Fill out the required details for the domain you wish to configure. We recommend using the default configuration. If you do not use the advanced settings option please be sure to properly configure [DKIM][dkim] and [SPF][spf] records to ensure deliverability.
 
 1. You will receive now a list of DNS records that need to be added to your domain. After adding them, be sure to verify them on Sendgrid. You are now ready to start sending emails.
 
@@ -79,7 +81,7 @@ After you have set up your sending configuration, you can continue below to set 
     EMAIL_HOST_PASSWORD: SG.rqHsfjxZPiqE5lqXTgQ_lz7x7IVLv # obtained from step above
     EMAIL_USE_TLS: true
     EMAIL_USE_SSL: false
-    DEFAULT_FROM_EMAIL: hey@example.com # you can define this, just use your domain or single sender address
+    EMAIL_DEFAULT_FROM: hey@example.com # you can define this, just use your domain or single sender address
     ```
 
 1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
@@ -96,7 +98,11 @@ After you have set up your sending configuration, you can continue below to set 
 
     ![](../../images/configuring-posthog/mailgun-1.png)
 
-1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability.
+1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability. If not provided, we also recommend adding the following [SPF][spf] record to prevent email forgery with your domain.
+
+    ```
+    TXT @ v=spf1 include:mailgun.org ~all
+    ```
 
 1. Once you have added all records and verify them you can go to the domain settings > "SMTP credentials" section. You then need to create a set of SMTP credentials.
 
@@ -108,15 +114,12 @@ After you have set up your sending configuration, you can continue below to set 
     EMAIL_HOST_PASSWORD: password # obtained from credentials page
     EMAIL_USE_TLS: true
     EMAIL_USE_SSL: false
-    DEFAULT_FROM_EMAIL: hey@example.com # you can define this, just use your domain
+    EMAIL_DEFAULT_FROM: hey@example.com # you can define this, just use your domain
     ```
 
 1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
     > Please note that you will need to restart both your web server and background worker for this to work properly.
 
-## Amazon SES
-Generally the least expensive option, but it's a bit more complicated to set up.
-
-
 
 [dkim]: https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail
+[spf]: https://en.wikipedia.org/wiki/Sender_Policy_Framework
