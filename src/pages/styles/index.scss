@@ -454,6 +454,11 @@ button.modalClose:hover {
     color: #1d4aff;
 }
 
+.fs-self-host-wrapper {
+    padding-top: 70px;
+    background-color: rgba(247, 165, 1, 0.2) !important;
+}
+
 @media screen and (max-width: 834px) {
     .modalContent {
         height: 820px;
@@ -588,19 +593,14 @@ button.modalClose:hover {
     }
 }
 
-.fs-self-host-wrapper {
-    padding-top: 70px;
-    background-color: rgba(247, 165, 1, 0.2) !important;
-}
-
 @media screen and (min-width: 1080px) {
     .fs-feature-flags-wrapper {
         padding-top: 70px;
         background-image: url('../../images/landing-page-background.svg') !important;
     }
-    .fs-self-host-wrapper {
-        padding-top: 70px;
-        background-color: rgba(247, 165, 1, 0.2) !important;
+    .fs-self-host-wrapper .fs-header-2 {
+        max-width: 30vw !important;
+        width: 30vw !important;
     }
 }
 
@@ -785,7 +785,7 @@ button.modalClose:hover {
 
 .whyPosthogElement h2 {
     color: #ffffff !important;
-    font-size: 32 !important;
+    font-size: 32px !important;
 }
 
 .whyPosthogElement p {

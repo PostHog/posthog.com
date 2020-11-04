@@ -48,7 +48,7 @@ function IndexPage() {
                                 <div className="topPageCol1">
                                     <div className="joinUsersText">
                                         <p>
-                                            Join 2,100 companies <br className="hiddenBreak" /> using PostHog.
+                                            Join 2,400 companies <br className="hiddenBreak" /> using PostHog.
                                         </p>
                                         <br />
                                     </div>
@@ -181,9 +181,9 @@ function IndexPage() {
                     <Spacer />
                     <div className="fs-self-host-wrapper">
                         <FeaturedSectionTextLeft
-                            headerText="Self host available, with full underlying data access"
+                            headerText="Self-host PostHog with full data access"
                             listItem=""
-                            descriptionText="Huge user base? No problem. Eliminate the data protection risks and costs associated with sending millions of users' data to 3rd parties."
+                            descriptionText="Huge user base? No problem. Eliminate the data protection risks and costs associated with sending millions of users' data to third parties."
                             image={selfHostedImg}
                             color="blue"
                         />
