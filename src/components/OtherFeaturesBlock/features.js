@@ -1,4 +1,4 @@
-import eventAutocaptureIcon from '../../images/event-autocapture-icon.svg'
+import eventAutocaptureIcon from '../../images/autocapture-icon.svg'
 import featureFlagsIcon from '../../images/feature-flags-icon.svg'
 import trendsIcon from '../../images/trends-icon.svg'
 import funnelsIcon from '../../images/funnels-icon.svg'
