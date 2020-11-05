@@ -145,7 +145,8 @@
         "items": [
             "docs/integrations/slack",
             "docs/integrations/microsoft-teams",
-            "docs/integrations/message-formatting"
+            "docs/integrations/message-formatting",
+            "docs/integrations/sentry-integration"
         ]
     },
     {
