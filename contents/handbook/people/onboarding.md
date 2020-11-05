@@ -17,7 +17,6 @@ Doing a great job of welcoming a new member of the PostHog team is really import
 
 At PostHog, we have a culture of treating team members as partners. This means it is the new person's responsibility to ensure they go through this process properly!
 
-<input type="checkbox"/>  Add the new team member to [Pulley](https://pulley.com) <br>
 <input type="checkbox"/>  To set up as an employee, complete and email [employee offer letter](https://drive.google.com/drive/u/0/folders/1vDgWksBtt5cg_BZVFV2eWrD56OmZpKTQ) as a *PDF* <br>
 <input type="checkbox"/>  To set up as an employee, complete and email [employee confidentiality letter](https://drive.google.com/open?id=19yXodJzE8D2j-aCbNjexsCAGVF1lJfMZ) as a *PDF* <br>
 <input type="checkbox"/>  To set up as an employee, email the signed offer letter to [legal](mailto:legal@posthog.com) <br>

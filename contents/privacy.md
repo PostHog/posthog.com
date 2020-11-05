@@ -64,6 +64,8 @@ PostHog will not rent or sell potentially personally-identifying and personally-
 
 PostHog takes measures reasonably necessary to protect against the unauthorized access, use, alteration, or destruction of potentially personally-identifying and personally-identifying information.
 
+PostHog at its sole discretion may make use of company logos where those companies are using the software that we provide. If you have concerns over the use of your logo, please email logos@posthog.com.
+
 ### International Transfer of Information
 
 The Website is hosted in the United States and information we collect will be stored and processed on our servers in the United States. Our employees, contractors and affiliated organizations that process information for us as described above may be located in the United States or in other countries outside of your home country; by using the Website, you consent to the international transfer of your information by PostHog.

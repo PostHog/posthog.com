@@ -99,9 +99,6 @@ sub {
 sup {
     top: -0.5em;
 }
-img {
-    border-style: none;
-}
 svg:not(:root) {
     overflow: hidden;
 }
@@ -240,7 +237,7 @@ h1 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 64px;
+    font-size: 48px;
     line-height: 150%;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
@@ -257,7 +254,7 @@ h2 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 48px;
+    font-size: 40px;
     line-height: 72px;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
@@ -274,7 +271,7 @@ h3 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 54px;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
@@ -291,9 +288,9 @@ h4 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 30px;
+    font-size: 24px;
     line-height: 45px;
-    font-family: 'Helvetica Neue';
+    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
 h5 {
@@ -308,9 +305,9 @@ h5 {
     color: inherit;
     font-weight: 400;
     text-rendering: optimizeLegibility;
-    font-size: 0.9rem;
+    font-size: 20px;
     line-height: 1.5;
-    font-family: 'Helvetica Neue';
+    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
 h6 {
     margin-left: 0;
@@ -324,9 +321,9 @@ h6 {
     color: inherit;
     font-weight: 400;
     text-rendering: optimizeLegibility;
-    font-size: 0.78405rem;
+    font-size: 18px;
     line-height: 1.5;
-    font-family: 'Helvetica Neue';
+    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
 hgroup {
     margin-left: 0;
@@ -1417,6 +1414,13 @@ for all other rows the portrait image wraps above bio*/
     flex-wrap: wrap;
 }
 
+.small-inner-text a,
+.small-inner-text p,
+.small-inner-text li {
+    font-size: 14px !important;
+    line-height: 1;
+}
+
 /*split to one column on smaller screens*/
 @media screen and (max-width: 560px) {
     .team-left-text,
@@ -1500,8 +1504,4 @@ div::-webkit-scrollbar-thumb {
 /* handle on hover */
 div::-webkit-scrollbar-thumb:hover {
     background: #b0bec5;
-
-    img {
-        border-radius: 8px;
-    }
 }
