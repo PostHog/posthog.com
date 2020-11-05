@@ -142,7 +142,9 @@ def purchase(request):
 
 ## Sentry
 
-Using [sentry in python](https://docs.sentry.io/platforms/python/), you can see links to users person page with the following: 
+When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles. 
+
+### Example Implementation
 
 ```python
 from posthog.sentry import update_posthog
@@ -159,9 +161,9 @@ with configure_scope() as scope:
     scope.set_tag('posthog_distinct_id', 'some distinct id')
 ```
 
-### With django
+### Example Implementation with Django
 
-This can be made automatic in django, by adding the following middleware and settings to `settings.py`
+This can be made automatic in Dejango, by adding the following middleware and settings to `settings.py`:
 
 ```python
 
