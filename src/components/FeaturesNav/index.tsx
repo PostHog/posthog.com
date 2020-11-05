@@ -44,11 +44,11 @@ export const FeaturesNav = () => {
                     </Link>
                 </div>
                 <div className="feature-links-section two-features">
-                    <Link to="/product-features/funnels" className="two-features-img1">
+                    <Link to="/product-features/session-recording" className="two-features-img1">
                         <img src={sessionRecordingIcon} />
                         <h4>Session Recording</h4>
                     </Link>
-                    <Link to="/product-features/retention" className="two-features-img2">
+                    <Link to="/product-features/plugins" className="two-features-img2">
                         <img src={pluginsIcon} />
                         <h4>Plugins</h4>
                     </Link>

@@ -25,7 +25,11 @@ function SessionRecordingPage() {
                 <FeaturedSectionTextLeft
                     headerText="Experience user pain points first-hand"
                     listItem="01"
-                    descriptionText={``}
+                    descriptionText={`
+                        With session recording, you don't need to guess what your users are doing - you can just watch it. 
+                        See exactly where users are gettng stuck, what parts of your UI are confusing, and how you can make your 
+                        UX more intuitive.
+                    `}
                     image={sessionRecordingImg1}
                     color="red"
                 />
@@ -33,7 +37,10 @@ function SessionRecordingPage() {
                 <FeaturedSectionTextRight
                     headerText="Track down bugs faster"
                     listItem="02"
-                    descriptionText={``}
+                    descriptionText={`
+                        No more debugging in production with user screenshots and cryptic logs. When watching a recording you 
+                        can see exactly where users encountered bugs, what went wrong in your app, and how to reproduce errors. 
+                    `}
                     image={sessionRecordingImg2}
                     color="red"
                 />
@@ -41,13 +48,17 @@ function SessionRecordingPage() {
                 <FeaturedSectionTextLeft
                     headerText="Ensure privacy for your users"
                     listItem="03"
-                    descriptionText={``}
+                    descriptionText={`
+                        Reap the benefits of session recording while only recording what you really need to. Toggle session 
+                        recording on and off as needed and avoid capturing any sensitive information by customizing what elements
+                        should not be included in recordings.
+                    `}
                     image={sessionRecordingImg3}
                     color="red"
                 />
                 <Spacer onlyDesktop={true} />
                 <StartNowButton />
-                <OtherFeaturesBlock currentPageKey="feature-flags" />
+                <OtherFeaturesBlock currentPageKey="session-recording" />
             </div>
         </Layout>
     )
