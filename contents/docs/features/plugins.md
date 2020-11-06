@@ -13,17 +13,19 @@ Our goal with plugins is to allow anyone to extend and customize PostHog in orde
 
 ## Architecture
 
-When an event is sent to PostHog, it is added to a task queue, after which it is picked up by a worker which processes and ingests the event, storing it into the database. 
+When an event is sent to PostHog, it is added to a task queue, after which it is picked up by a worker that processes and ingests the event, storing it into the database. 
 
 When plugins are enabled, an extra step is added to the pipeline. Instead of creating `process_event` tasks that ingest the event, `process_event_with_plugins` tasks are created first, processed by a Node.js server, and then added back into the pipeline as `process_event` tasks.
 
-This makes it so that our Celery workers continue to handle `process_event` tasks without any knowledge that an extra step has been added to the pipeline, making it easy to turn plugins off and circumvent that step to speed up the ingestion process.
+This makes it so that our Celery workers continue to handle `process_event` tasks without any knowledge that an extra step has been added to the pipeline, making it easy to turn plugins off and circumvent that step.
 
 Here's what a deeply simplified view of this process looks like:
 
 ![Plugins Pipeline](../../images/features/plugins/plugins-pipeline.png)
 
 Essentially, before an event is added to the database, plugins have access to the event, being able to modify it, prevent ingestion, or send the data somewhere else.
+
+### Example Plugin
 
 Configuration aside, a simple plugin might look like this:
 
