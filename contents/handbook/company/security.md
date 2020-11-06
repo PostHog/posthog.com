@@ -14,4 +14,8 @@ PostHog uses [1password](https://1password.com/) for storing all passwords.
 
 ## Password Strength
 
-Please use strong passwords for everything. Use the 1password password generator that comes with the app in all cases.
+Please use strong passwords for everything. Use the 1password password generator that comes with the app in all cases. Do not repeat passwords across different sites. 
+
+## Dual Factor Authentication
+
+You should enable dual factor authentication for any account where the option is available, especially those which are core to your work. 
