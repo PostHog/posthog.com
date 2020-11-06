@@ -36,6 +36,7 @@ div.post-page {
     pre code {
         background: none;
         line-height: 1.42;
+        white-space: unset !important;
     }
 
     .small-text > code,
