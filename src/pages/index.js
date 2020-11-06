@@ -19,6 +19,7 @@ import trafficFlow from '../images/retro-how-traffic-flows.svg'
 import visualizeTrends from '../images/retro-product-trends.svg'
 import retroFlagsImg from '../images/retro-feature-flags.svg'
 import selfHostedImg from '../images/self-host.svg'
+import sessionRecordingImg from '../images/session-recording-3.svg'
 import SEO from '../components/seo'
 import Layout from '../components/Layout'
 import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
@@ -153,15 +154,25 @@ function IndexPage() {
                         image={visualizeTrends}
                         color="navy"
                     />
+                    <Spacer onlyDesktop={true} />
+                    <FeaturedSectionTextLeft
+                        headerText="Watch how real users use your product"
+                        listItem="04"
+                        descriptionText="Watch back sessions from real users to track down bugs
+                        faster and see where your customers get stuck."
+                        image={sessionRecordingImg}
+                        color="yellow"
+                    />
+                    <Spacer onlyDesktop={true} />
                     <FeaturedSectionTripleImage
                         mobileImg={improveMobile}
                         img1={improveRetention}
                         img2={improveFunnels}
                         img3={improvePaths}
-                        listItem="04"
+                        listItem="05"
                         headerText="Improve conversion rates"
                         descriptionText={`Visualize how users navigate through your app or website, and use metrics to understand what needs improvement.`}
-                        color="yellow"
+                        color="red"
                         title1="Retention"
                         title2="Funnels"
                         title3="Paths"
@@ -171,10 +182,10 @@ function IndexPage() {
                     <div className="fs-feature-flags-wrapper">
                         <FeaturedSectionTextLeft
                             headerText="Use feature flags to test new ideas"
-                            listItem="05"
+                            listItem="06"
                             descriptionText="Roll out new features to a few users first, randomly or based on their previous behavior or profile information."
                             image={retroFlagsImg}
-                            color="red"
+                            color="navy"
                         />
                     </div>
                     <DesignedForYourStackBlock />
