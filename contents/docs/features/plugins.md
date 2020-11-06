@@ -19,10 +19,6 @@ When plugins are enabled, an extra step is added to the pipeline. Instead of cre
 
 This makes it so that our Celery workers continue to handle `process_event` tasks without any knowledge that an extra step has been added to the pipeline, making it easy to turn plugins off and circumvent that step.
 
-Here's what a deeply simplified view of this process looks like:
-
-![Plugins Pipeline](../../images/features/plugins/plugins-pipeline.png)
-
 Essentially, before an event is added to the database, plugins have access to the event, being able to modify it, prevent ingestion, or send the data somewhere else.
 
 ### Example Plugin
