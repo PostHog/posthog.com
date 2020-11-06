@@ -5,6 +5,16 @@ showTitle: true
 ---
 <br>
 
+Plugins are a way to extend PostHog's functionality by either pulling data into or sending data out of PostHog. 
+
+Our goal with plugins is to allow anyone to extend and customize PostHog in order to better fit their analytics and business needs. 
+
+## Architecture
+
+PostHog [uses Celery](/docs/stack) to execute tasks such as ingesting an event. 
+
+
+
 ![Plugins Pipeline](../../images/features/plugins/plugins-pipeline.png)
 
 
