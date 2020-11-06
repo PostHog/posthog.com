@@ -52,7 +52,7 @@ Our users do not use PostHog for the most complex querying of user data imaginab
 
 The technical challenge here is designing a highly scalable product right out of the box when deployed on premise, supporting a wide breadth of features that give users super powers, and enabling an ecosystem of contributors and plugins from anyone in the world so PostHog becomes a true platform.
 
-Today, PostHog meets simple use cases across a broad part of product development. That reaches from understanding retention, conversion rates, abd feature usage, to feature flags and heatmaps. Up next, we have session recording and plugins to expand our breadth even faster.
+Today, PostHog meets simple use cases across a broad part of product development. That reaches from understanding retention, conversion rates, abd feature usage, to feature flags, session recordings, plugins and heatmaps.
 
 You would be a key part in us expanding the range of functionality we are offering, or in supporting its use at scale. We'd want you to suggest ideas that you could take from concept to tests and deployment.
 
