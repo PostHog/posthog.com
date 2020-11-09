@@ -204,4 +204,3 @@ Or perhaps you're not either but think you'd still be a good fit for PostHog?
 
 [We want you!](https://posthog.com/careers) 
 
-

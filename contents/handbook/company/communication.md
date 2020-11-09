@@ -38,7 +38,7 @@ It's best practice to start a discussion where possible with a Pull Request (PR)
 1. By default, pull requests are **non-confidential**. However, for things that are not public please open a confidential issue with suggestions to specific changes that you are proposing. When possible, consider not including sensitive information so the wider community can contribute.
 1. Not every solution will solve the problem at hand. Keep discussions focused by **defining the problem first** and **explaining your rationale** behind the Minimal Viable Change (MVC) proposed in the PR.
 1. Be proactive and consistent with communication on discussions that have external stakeholders, such as customers. It's important to keep communication flowing to keep everyone up to date. PRs can appear stale if there aren't recent discussions and no clear definition on when another update will be provided, based on feedback. This leaves those subscribed in the dark, causing unnecessary surprise if something ends up delayed and suddenly jumps to the next milestone. It is important that PRs are closed in a timely manner through approving or rejecting the open requests.
-1. Have a **bias for action** and don't aim for consensus. Every PR is a proposal, if a PRs author isn't responsive take ownership of it and complete it. Some improvement is better than none.
+1. Have a **bias for action** and don't aim for consensus. Every PR is a proposal - if a PR's author isn't responsive, take ownership of it and complete it. Some improvement is better than none.
 1. **Cross link** issues or other PRs with related conversations. Put the link at the top of each PR's description with a short mention of the relationship (Report, Dependency, etc.) and use one as the central one and ideally close the alternate if duplicate.
 1. If submitting a change for a feature, **update the description with the final conclusions** (why a PR was rejected or approved). This makes it much easier to see the current state of an issue for everyone involved in the implementation and prevents confusion and discussion later on.
 1. Submit the **smallest** item of work that makes sense. When proposing a change, submit the smallest reasonable commit, put suggestions for other enhancements in separate issues/PRs and link them.
@@ -51,7 +51,9 @@ It's best practice to start a discussion where possible with a Pull Request (PR)
 
 ## Issues
 
-Issues are useful when there isn't a specific code change that is being proposed or needed. For example, you may want to start an issue for tracking progress or for project management purposes that do not pertain to code commits. This can be particularly useful when tracking team tasks and creating issue boards. However, it is still important to maintain focus when opening issues by defining a single specific topic of discussion as well as defining the desired outcome that would result in the resolution of the issue. The point is to not keep issues open-ended and to prevent issues from going stale due to lack of resolution. For example, a team member may open an issue to track the progress of a blog post with associated to-do items that need to be completed by a certain date (e.g. first draft, peer review, publish). Once the specific items are completed, the issue can successfully be closed. Below are a few things to remember when creating issues:
+Issues are useful when there isn't a specific code change that is being proposed or needed. For example, you may want to start an issue for tracking progress or for project management purposes that do not pertain to code commits. This can be particularly useful when tracking team tasks and creating issue boards. 
+
+However, it is still important to maintain focus when opening issues by defining a single specific topic of discussion as well as defining the desired outcome that would result in the resolution of the issue. The point is to not keep issues open-ended and to prevent issues from going stale due to lack of resolution. For example, a team member may open an issue to track the progress of a blog post with associated to-do items that need to be completed by a certain date (e.g. first draft, peer review, publish). Once the specific items are completed, the issue can successfully be closed.
  
 ## Internal Communication
 
@@ -61,9 +63,9 @@ Issues are useful when there isn't a specific code change that is being proposed
 1. If you choose to email instead of chat it is OK to send an _internal_ email that contains only a short message, similar as you would use in chat.
 1. You are not expected to be available all the time. There is no expectation to respond to messages outside of your planned working hours.
 1. Sometimes synchronous communication is the better option, but do not default to it. For example, a video call can clear things up quickly when you are blocked.
-1. It is 100% OK to ask as many questions as you have. Please ask them so many people can answer them and many people see the answer, so use issues or public chat channels instead of private messages or one-on-one emails. If someone sends you a handbook link they are proud that we have the answer documented, they don't mean that you should have found that yourself or that this is the complete answer, feel free to ask for clarification. If the answer to a question isn't documented yet please immediately make a pull request to add it to the handbook in a place you have looked for it. It is great for the person who answered the question to see you help to ensure they have to answer it only once. A pull request is the best way to say thanks for help.
+1. It is 100% OK to ask as many questions as you have. Please ask them so many people can answer them and many people see the answer, so use issues or public chat channels instead of private messages or one-on-one emails. If someone sends you a handbook link, that means they are proud that we have the answer documented - they don't mean that you should have found that yourself or that this is the complete answer, so feel free to ask for clarification. If the answer to a question isn't documented yet please immediately make a pull request to add it to the handbook in a place you have looked for it. It is great for the person who answered the question to see you help to ensure they have to answer it only once. A pull request is the best way to say thanks for help.
 1. If you mention something (a pull request, issue, commit, webpage, comment, etc.) please include a link to it.
-1. When someone asks for something, reply back with a deadline or by noting that you already did it. Answers like: 'will do', 'OK', 'it is on my todo list' are not helpful. If it is small it's better to spend 2 minutes and do the tasks so the other person can mentally forget about it. If it is large you need to figure out when you'll do it, by returning that information the other person might decide to solve it in another way if it takes too long.
+1. When someone asks for something, reply back with a deadline or by noting that you already did it. Answers like: 'will do', 'OK', or 'it is on my todo list' are not helpful. If it is small task for you but will unblock someone else, consider spending a few minutes to do the task so the other person can move forward. If it is large, you need to figure out when you'll be able do it - by returning that information, the other person might decide to solve it in another way if it takes too long.
 1. Avoid creating private groups for internal discussions.
 
 ### Not Public
@@ -77,34 +79,35 @@ So most things are **public** unless there is a reason not to. The following ite
 1. Financial information, including revenue and costs for the company, is confidential because we plan to be a public company one day and, as such, need to limit both the timing and content of financial information as investors will use and rely on it one day as they trade in our stock.
 1. Deals with external parties like contracts and approving and paying invoices.
 1. Content that would violate confidentiality for a PostHog team member, customer, or user.
-1. Legal discussions are not public due to the purpose of Attorney-Client Privilege.
-1. Some information is kept confidential to protect the privacy, safety, and security of team members and applicants, including applications, background check reports, reference checks, compensation, termination (voluntary and involuntary) details, demographic information, and home address. Whistleblower identity is confidential.
-1. Acquisition offers for us are not public since informing people of an acquisition that might not happen can be very disruptive.
-1. Acquisition offers we give are not public since the organization being acquired frequently prefers to have them stay private.
-1. Customer information is not public since customers are not comfortable with that, and it would make it easier for competitors to approach our customers. If an issue needs to contain _any_ specific information about a customer, including but not limited to company name, employee names, number of users, link to their Hubspot record. When we discuss a competitor (for example in a sales call) this can be public as our competitive advantages are public, but you *must* be truthful - in the long run, we will end up building the best product, in the short run sometimes it may make sense for a customer to use a competitor.
-1. Competitive sales and marketing campaign planning is confidential since we want the minimize the time the competition has to respond to it.
+1. Legal discussions are not public for the purposes of Attorney-Client Privilege.
+1. Some information is kept confidential to protect the privacy, safety, and security of team members and applicants, including applications, background check reports, reference checks, compensation, termination (voluntary and involuntary) details, demographic information, and home address.
+1. Acquisition offers for us are not public, since informing people of an acquisition that might not happen can be very disruptive.
+1. Acquisition offers we give are not public, since the organization potentially being acquired frequently prefers to have them stay private.
+1. Customer information is not public since customers are not comfortable with that, and it would make it easier for competitors to approach our customers. If an issue needs to contain _any_ specific information about a customer, including but not limited to company name, employee names, number of users, link to their Hubspot record. When we discuss a competitor (for example in a sales call) this can be public as our competitive advantages are public, but you *must* be truthful. In the long run, we will end up building the best product, but in the short run it may sometimes make sense for a customer to use a competitor.
+1. Competitive sales and marketing campaign planning is confidential since we want the minimize the time our competition has to respond to it.
 1. Plans for reorganizations are not public and on a need-to-know basis within the organization. Reorganizations cause disruption and the plans tend to change a lot before being finalized, so being public about them prolongs the disruption. We will keep relevant team members informed whenever possible.
 
 ## Email
 
 1. Internal email usually doesn't make sense in nearly all cases. Use GitHub for feature / product discussion, use Slack if you cannot use GitHub, and use Google Docs for anything else (e.g. planning documents for private information).
-1. The only use for internal email is for:
+1. The only uses we have for internal email are for:
   1. Obtaining approvals
-  1. Sending official company documents/records (e.g. job offers)
+  1. Sending some types of more official company documents (e.g. job offers, payroll forms)
+  1. Communicating with certain external partners
 
 ## Slack
 
-Similar to email, we actively discourage the use of Slack as it is one time only communication that isn't leveraged.
+Similar to email, we are careful with our use of Slack as it is one time only communication that isn't leveraged.
 
 Slack is to be used for informal communication only. Only 90 days of activity will be retained. Accordingly, Slack should specifically NOT be used for:
-   1. obtaining approvals;
-   1. documenting decisions;
-   1. storing official company records or documents; or
-   1. sharing personal or sensitive information regarding any individuals
+   1. Obtaining approvals
+   1. Documenting decisions
+   1. Storing official company records or documents
+   1. Sharing personal or sensitive information regarding individuals
 
 #### Are my direct messages and private channel conversations completely private?
 
-In short, [no](https://www.techjunkie.com/slack-dms-private/). We fundamentally have access to them, despite not actively doing so.
+In short, [no](https://www.techjunkie.com/slack-dms-private/). We fundamentally can view them, though we do not actively access them.
 
 ## Google Docs
 
@@ -119,7 +122,7 @@ Never use a Google Doc / Presentations for something non-confidential that has t
 
 ## Presentations
 
-1. Please avoid presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
+Please avoid presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
 
 ## Scheduling Meetings
 
@@ -135,8 +138,10 @@ Never use a Google Doc / Presentations for something non-confidential that has t
 
 ## Video Calls
 
+PostHog uses [Zoom](https://zoom.us/) for video communications. Zoom also has useful plugins for Google Calendar and Slack which you may wish to use.
+
 1. Use video calls if you find yourself going back and forth in an issue/via email
-or over chat. Rule of thumb: if you have gone **back and forth 3 times**, it's time
+or over chat. Rule of thumb: if you have gone **back and forth 3 times**, it's probably time
 for a video call.
 1. Sometimes it's better to _not_ have a video call. Consider these tradeoffs:
    1. It is difficult (or impossible) to multi-task in a video call.
@@ -146,30 +151,17 @@ for a video call.
    1. You can easily "promote" an async conversation from an issue to a video call, as needed. The reverse is harder. So there is lower risk to start with an async conversation.
    1. For a newcomer to the conversation, it's easier and more efficient to parse an issue, than read a video transcript or watch it.
    1. Conversations in issues are easily searchable. Video calls are not.
-1. Try to have your video on at all times because it's much more engaging for participants
-   1. Having pets, children, significant others, friends, and family visible during video chats is encouraged. If they are human, ask them to wave at your remote team member to say "Hi".
+1. Try to have your video on at all times because it's much more engaging for participants. Having pets, children, significant others, friends, and family visible during video chats is encouraged. If they are human, ask them to wave at your remote team member to say "Hi!".
 1. Google Calendar also has a [Zoom plugin](https://chrome.google.com/webstore/detail/zoom-scheduler/kgjfgplpablkjnlkjmjdecgdpfankdle?hl=en-US) where you can easily add a Zoom link for a video call to the invite
-1. For meetings that are scheduled with Zoom:
 1. As a remote company we are always striving to have the highest fidelity, collaborative conversations. Use of a headset with a microphone, is strongly suggested.
    1. If other people are using headphones then no-headphones works fine. But if multiple people aren't using headphones you get distractions.
-   1. Reasons to use headphones:
-         1. Computer speakers can cause an echo and accentuate background noise.
-         1. Using headphones decreases the likelihood of talking over one another, enabling a more lively conversation.
-         1. Better sound quality, avoiding dynamic volume suppression due to echo cancellation.
-   1. Leave the 'no headphones' to:
-         1. People who don't have them handy at that time
-         1. People from outside the company
    1. Suggested headphone models can be found in the handbook under [spending company money](/handbook/spending-company-money/equipment-examples/#headphones-and-earbuds).
 1. [Hybrid calls are horrible](#hybrid-calls-are-horrible)
 1. Always be sure to advise participants to mute their mics if there is unnecessary background noise to ensure the speaker is able to be heard by all attendees.
 1. We start on time and do not wait for people. People are expected to join no later than the scheduled minute of the meeting (before :01 if it is scheduled for :00). The question 'is everyone here' is not needed.
 1. It feels rude in video calls to interrupt people. This is because the latency causes you to talk over the speaker for longer than during an in-person meeting. We should not be discouraged by this, the questions and context provided by interruptions are valuable.
 1. We end on the scheduled time. It might feel rude to end a meeting, but you're actually allowing all attendees to be on time for their next meeting.
-1. It is unusual to smoke in an open office or video conference, vaping is associated with this. For this reason we ask that you don't vape during calls, and if you absolutely have to, kindly switch your camera off.
-
-## Zoom
-
-PostHog uses [Zoom](https://zoom.us/) for video communications.
+1. It is unusual to smoke in an open office or video conference, and vaping is associated with this. For this reason we ask that you don't vape during calls, and if you absolutely have to, kindly switch your camera off.
 
 ## Hybrid calls are horrible
 
@@ -210,7 +202,7 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 
 ## Writing Style Guidelines
 
-1. At PostHog, we use American English as the standard written language.
+1. At PostHog, we use American English as the standard written language in our public-facing comms.
 1. Do not create links like "here" or "click here". All links should have relevant anchor text that describes what they link to. Using meaningful links is important to both search engine crawlers (SEO) and people with accessibility issues.
 This guidance should be followed in all places links are provided, whether in the handbook, website, Google Docs, or any other content.
 1. Do not use acronyms when you can avoid them. Acronyms have the effect of excluding people from the conversation if they are not familiar with a particular term.
