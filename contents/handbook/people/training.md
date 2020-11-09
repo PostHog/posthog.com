@@ -18,6 +18,6 @@ Books do not have to be tied directly to your area, and they only need be loosel
 
 ## Training budget
 
-If you are new in your job role personally (for example, you have just graduated and we hired you, or the role represents something you've never worked on before), *and* PostHog doesn't have someone more experienced in your current role, we are very keen that we give you budget to improve your skills.
+If you are new in your job role personally (for example, you have just graduated or the role represents something you've never worked on before) *and* PostHog doesn't have someone more experienced in your current role, we are very keen that we give you budget to improve your skills.
 
-We are currently trialling this with one employee and will roll it out more broadly if successful. If this would help you in your role, please ask at this time.
+We are currently trialling this with one employee and will roll it out more broadly if successful. If this would help you in your role, please ask James or Tim. 
