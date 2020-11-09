@@ -85,6 +85,14 @@ docker-compose up -d
 ```
 1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
+<blockquote class='warning-note'>
+
+**Important:** If you do not have a TLS/SSL certificate set up for your domain/IP, accessing the address of your PostHog instance _will not work_. To get around this, you need to edit the `docker-compose.yml` file manually and add the environment variables   `DISABLE_SECURE_SSL_REDIRECT: 'true'` and `SECURE_COOKIES: 'false'` under `services > web > environment`. This is a manual process because PostHog should not be run without a certificate (i.e. over HTTP). 
+
+Doing this and restarting the service will allow you to access PostHog over HTTP, but might require configuring browser settings to allow HTTP traffic depending on what browser you use. 
+
+</blockquote>
+
 <br>
 
 ## Important Points
@@ -127,9 +135,9 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 ## Useful Tutorials
 <br>
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
+###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
+###### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
+###### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 

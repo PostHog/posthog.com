@@ -1,10 +1,11 @@
 /* - OTHER FEATURES */
 .other-features-container {
+    display: block;
+    clear: both;
     .other-features-wrapper {
         position: relative;
         width: 100vw;
         max-width: 1440px;
-        height: 1380px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -13,7 +14,7 @@
 
     .features {
         width: 834px;
-        height: 1130px;
+        height: 1500px;
         padding: 0 25px;
         display: flex;
         flex-direction: column;
@@ -66,7 +67,7 @@
             height: 1000px;
         }
         .features {
-            height: 800px;
+            height: 1100px;
             flex-direction: column;
             width: 100vw;
             align-items: center;

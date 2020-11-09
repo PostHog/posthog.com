@@ -35,7 +35,7 @@ If quick start did not work for you, do the following after logging in:
 1. Look for a Select the 'Marketplace' option on the top right
 1. Select the 'Docker' option
 1. Follow the steps and define the settings to create the droplet 
-   -  The $20.00 droplet configuration should be good for most purposes. It has 4GB of RAM, 2 CPUs, 80GB of storage, and 4TB of transfer. However, if your volume is expected to be low, you should be able to safely pick to a lighter option. Alternatively, if you know your volume will be extremely high out of the gate, you might want to consider a more expensive option.
+   -  The \$20.00 droplet configuration should be good for most purposes. It has 4GB of RAM, 2 CPUs, 80GB of storage, and 4TB of transfer. However, if your volume is expected to be low, you should be able to safely pick to a lighter option. Alternatively, if you know your volume will be extremely high out of the gate, you might want to consider a more expensive option.
 
 > **Note**: You may also create your droplet with a plain Ubuntu distribution (or any other distro) without a one-click app. However, the 'Docker' app ships with the Docker engine and Docker Compose by default on Ubuntu 18.04, which can save you a **lot of time** when setting up.
 
@@ -120,9 +120,13 @@ docker-compose up -d
 ```
 1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
-    > **Important:** If you do not have a TLS/SSL certificate set up for your domain/IP, accessing the address of your PostHog instance _will   not work_. To get around this, you need to edit the `docker-compose.yml` file manually and add the environment variable   `DISABLE_SECURE_SSL_REDIRECT: 'true'` under `services > web > environment`. This is a manual process because PostHog should not be run without a certificate (i.e. over HTTP). 
+<blockquote class='warning-note'>
 
-    Doing this and restarting the service will allow you to access PostHog over HTTP, but might require configuring browser settings to allow HTTP traffic depending on what browser you use. 
+**Important:** If you do not have a TLS/SSL certificate set up for your domain/IP, accessing the address of your PostHog instance _will not work_. To get around this, you need to edit the `docker-compose.yml` file manually and add the environment variables   `DISABLE_SECURE_SSL_REDIRECT: 'true'` and `SECURE_COOKIES: 'false'` under `services > web > environment`. This is a manual process because PostHog should not be run without a certificate (i.e. over HTTP). 
+
+Doing this and restarting the service will allow you to access PostHog over HTTP, but might require configuring browser settings to allow HTTP traffic depending on what browser you use. 
+
+</blockquote>
 
 <br>
 
@@ -159,13 +163,13 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 
 #### - Setting Up SSL on Digital Ocean with [NGINX](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04) or [Apache](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04)
 
-#### - [How to Add Domains to Digital Ocean Projects](https://www.digitalocean.com/docs/networking/dns/how-to/add-domains/)
+###### - [How to Add Domains to Digital Ocean Projects](https://www.digitalocean.com/docs/networking/dns/how-to/add-domains/)
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
+###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
+###### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
+###### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 
 
 

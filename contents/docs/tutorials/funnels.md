@@ -58,15 +58,7 @@ To follow this tutorial along, you need to:
 1. Have [deployed PostHog](/docs/deployment).
 1. Have started receiving events via our [snippet](/docs/integrations/js-integration), one of our [integrations](/docs/integrations), or our [API](/docs/api/overview)
 
-**Note:** It can also be useful to have some [actions](/docs/tutorials/toolbar#creating-actions) set up, but not necessary.
-
-## Playground (Beta)
-
-As a supporting resource for this tutorial, we have created a <a href="https://playground.posthog.com/funnels.html" target="_blank">playground</a> where you can test out the functionality explained here.
-
-It is recommended that you go through the tutorial first to understand the concepts better before seeing the functionality in action.
-
-Please note that the playground is a Beta feature, and we would appreciate [feedback on GitHub](https://github.com/PostHog/posthog.com/issues/491). 
+> **Note:** It can also be useful to have some [actions](/docs/tutorials/toolbar#creating-actions) set up, but not necessary.
 
 ## When You Should Use Funnels
 

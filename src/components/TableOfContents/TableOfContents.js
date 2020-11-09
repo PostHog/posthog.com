@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Anchor from 'antd/lib/anchor'
 import 'antd/lib/anchor/style/css'
-import './TableOfContents.css'
+import './TableOfContents.scss'
 import { useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
@@ -60,7 +60,7 @@ function TableOfContents({ offsetTop, affix }) {
         })
 
     return (
-        <Anchor onClick={() => setAnchorOpen(false)} offsetTop={offsetTop} affix={affix}>
+        <Anchor onClick={() => setAnchorOpen(false)} offsetTop={offsetTop} affix={affix} className="right-bar-inner">
             {loop(anchors)}
         </Anchor>
     )

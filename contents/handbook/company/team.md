@@ -2,9 +2,16 @@
 title: Team
 sidebar: Handbook
 showTitle: true
+hideAnchor: true
 ---
 
-We are proud to be misfits. Why?
+<!--- Intro Info -->
+
+<div class="team-row intro" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+<h3> We are proud to be misfits. Why? </h3>
 
 Building an unusually great company starts with an unusual team.
 
@@ -12,14 +19,38 @@ We don't care if you haven't finished (or attended) school, if you were super im
 
 What we do care about is your ability to learn, iterate, and ship.
 
-That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. 
+That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. Learn more about [diversity](diversity) at PostHog.
 
-![Remote Work Banner](../../images/posthogers-map.png) 
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Remote work globe animation](../../images/team/team-global.gif)
 <br /><small class="centered">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
+
+</div>
+
+</div>
+
+<!--- Core Team Section -->
+
+<div class="team-title" markdown="1">
 
 ## Core Team
 
-### James Hawkins, Co-Founder and CEO
+</div>
+
+<!--- James Hawkins Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### James Hawkins, Co-Founder & CEO
+
+<div class="team-left-bio" markdown="1">
 
 I spent the first 10 years of my career trying to be a professional cyclist. I used to do web development part time to make some money on the side. I wasn't particularly good at either.
 
@@ -31,7 +62,29 @@ I wanted more experience of working in a VC backed startup, so I could work on s
 
 I started working with Tim on a few ideas that didn't work out in August 2019. We built PostHog during the YCombinator W20 batch, and launched in February. You can work out what I've been up to since by stalking me online.
 
-### Tim Glaser, Co-Founder and CTO
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![James Hawkins portrait](../../images/team/JamesH.png)
+
+</div>
+
+</div>
+
+<!--- Tim Glaser Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Tim Glaser, Co-Founder & CTO
+
+<div class="team-left-bio" markdown="1">
 
 I've been coding since I've been 11, which isn't as long ago as I'd like it to be. Someone first paid me to write code when I was 13 (though I'm sure they regretted it) and [someone else](https://en.wikipedia.org/wiki/Cloud9_IDE) gainfully employed me when I was 16.
 
@@ -41,7 +94,29 @@ After four years I thought it was time to go do something else and had lined up 
 
 In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-shaped ball and watch a lot of Bondi beach in order to perfect my Australian accent.
 
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Tim Glaser portrait](../../images/team/Tim.png)
+
+</div>
+
+</div>
+
+<!--- Marius Andra Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
 ### Marius Andra, Software Engineer
+
+<div class="team-left-bio" markdown="1">
 
 I first got into programming in 1994 when I wanted to make my own computer games... and asked my father for help. He sat me behind a Turbo Basic interpreter, wrote `PRINT "Marius on tubli poiss"` and then left me there. I was 8 years old.
 
@@ -53,19 +128,63 @@ This was followed by years of writing games in C++ and then [writing tutorials](
 
 On the side I built an [open source database analytics platform](https://github.com/mariusandra/insights)... and when that [got on Hacker News](https://news.ycombinator.com/item?id=22347516), James reached out... and the rest is history.
 
-These days I live in Belgium and code [state management libraries](https://kea.js.org/) in JavaScript for fun. 
+These days I live in Belgium and code [state management libraries](https://kea.js.org/) in JavaScript for fun.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Marius Andra portrait](../../images/team/Marius.png)
+
+</div>
+
+</div>
+
+<!--- Eric Duong Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
 
 ### Eric Duong, Software Engineer
 
+<div class="team-left-bio" markdown="1">
+
 I recently graduated and while in college I helped cofound a social dining platform. I spent two years trying to get strangers to cook and dine with each other. In reality, it turned into a 2 year stint of teach yourself as much mobile development as you can while simultaneously trying to build a usable platform. My cofounders and I had our fair share of contemplating dropping out of school and becoming a unicorn in 5 years—it didn't work out.
 
-Somewhere along the way I fell down the bitcoin rabbit hole and after realizing day trading crypto wasn't a feasible nor fulfilling long term goal, I remained fascinated by digital currency. This led me to briefly work with a company building a digital cash transfer system for developing economies. 
+Somewhere along the way I fell down the bitcoin rabbit hole and after realizing day trading crypto wasn't a feasible nor fulfilling long term goal, I remained fascinated by digital currency. This led me to briefly work with a company building a digital cash transfer system for developing economies.
 
 I currently work as a generalist around most of Posthog's stack building many of the user-facing features but occasionally pick up backend tasks.
 
 To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage of Posthog's all remote policy to travel and hike as many major mountain treks around the world as possible. Ambitions subject to change as always though.
 
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team/Eric.png)
+
+</div>
+
+</div>
+
+<!--- James Greenhill Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
 ### James Greenhill, Software Engineer
+
+<div class="team-left-bio" markdown="1">
 
 When I was a kid the first thing I remember wanting to be was a pilot, so naturally here I am knee deep in code and data!
 
@@ -77,7 +196,29 @@ In my professional life I’ve generally managed mopping up the 1’s and 0’s.
 
 When I’m not out and about in nature you can find me at home with my cat Tesla and Taco our goofball of a Lab Corgi mix.
 
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team/JamesG.png)
+
+</div>
+
+</div>
+
+<!--- Michael Matloka Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
 ### Michael Matloka, Software Engineer
+
+<div class="team-left-bio" markdown="1">
 
 Got into software by tinkering with bada OS – if anyone even remembers that! – and just never stopped (though I did move to Android soon and later became an iOS fan).
 
@@ -86,44 +227,192 @@ Before graduating from high school here in Poland – and having some open-sourc
 Happy to report that I ended up joining PostHog, where open-source software, a quality product and great people all mix freely!
 In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), [photography](https://unsplash.com/@twixes) and [cinema](https://www.nowehoryzonty.pl/index.do?lang=en). Decidedly a fan of precipitation and overcast weather, I have a secret plan to move to the Nordics or the UK one day.
 
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Michael Matloka portrait](../../images/team/Michael.png)
+
+</div>
+
+</div>
+
+<!--- Paolo D'Amico Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
 ### Paolo D'Amico, Growth Engineer
+
+<div class="team-left-bio" markdown="1">
 
 I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical. I have 10+ years of experience as a software engineer and product manager.
 
-Prior to joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
+Before joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
 
-### Lottie Coxon, Designer
+</div>
 
-I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin). 
+</div>
 
-I spent my youth trying to master fine art, after my teacher said I was awful and that I should try something else. 
-In my stubbornness I decided to prove her wrong, and here I am - a designer. 
+<div class="team-center-space"></div>
 
-I was quite a weird child. I once ran a race with locked legs (Forest Gump style) because I had a dream the night before that I won by doing so. For those who are wondering, no I did not win. But I would rather be the weird child than the boring one. 
+<div class="team-right-image" markdown="1">
 
-I took Graphic Design at university and graduated this summer and instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio on twitter, I was contacted by PostHog a mere 24 hours later. 
+![Placeholder Portrait Image](../../images/team/Paolo.png)
 
-I am now their Graphic Designer, and spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly drawing hedgehogs with sunglasses on. 
+</div>
 
-On a side note I have decided to move to Senegal (Africa) to be with my boyfriend George. It’s a bold decision really as I cannot speak French, but I will (try) learn. 
+</div>
+
+<!--- Lottie Coxon Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Lottie Coxon, Graphic Designer
+
+<div class="team-left-bio" markdown="1">
+
+I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin).
+
+I spent my youth trying to master fine art, after my teacher said I was awful and that I should try something else.
+In my stubbornness I decided to prove her wrong, and here I am - a designer.
+
+I was quite a weird child. I once ran a race with locked legs (Forest Gump style) because I had a dream the night before that I won by doing so. For those who are wondering, no I did not win. But I would rather be the weird child than the boring one.
+
+I took Graphic Design at university and graduated this summer and instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio on twitter, I was contacted by PostHog a mere 24 hours later.
+
+I am now their Graphic Designer, and spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly drawing hedgehogs with sunglasses on.
+
+On a side note I have decided to move to Senegal (Africa) to be with my boyfriend George. It’s a bold decision really as I cannot speak French, but I will (try) learn.
 
 *French accent* C’est la Vie
 
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Placeholder Portrait Image](../../images/team/Lottie.png)
+
+</div>
+
+</div>
+
+<!--- Yakko Majuri Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
 ### Yakko Majuri, Technical Writer and Developer
+
+<div class="team-left-bio" markdown="1">
 
 Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who has lived in 5 countries across 4 continents.
 
-Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD). 
+Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD).
 
-Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space. 
+Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space.
 
-For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://medium.com/@yakko.majuri) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am. 
+For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://medium.com/@yakko.majuri) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am.
 
-When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain. 
+When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain.
 
-Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime. If that means anything. 
+Oh, and I'm also part of the select group of software developers who have won a dunk contest in their lifetime. If that means anything.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Yakko Majuri portrait](../../images/team/Yakko.png)
+
+</div>
+
+</div>
+
+<!--- Leah Smith Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Leah Smith, Operations
+
+<div class="team-left-bio" markdown="1">
+
+Hello / aka Kia Ora where I am from.
+
+You’ve may never heard of where I grew up, or heard of it but dont know where it is and that's ok, because half the time we aren't put on the map.. However I am from New Zealand and moved aboard after Christmas in 2019 by myself!
+
+Let me sum up your questions/assumptions about NZ… Yes, we are next to Australia. No, we aren't the same country; we are a different country. No, we can't take a boat to Australia for the weekend. Yes, we have to take a plane as it takes a minimum of at least 3 1/2hrs to get to the nearest part in Aus. Yes [the pavlova is from NZ](https://en.wikipedia.org/wiki/Pavlova_(cake))!
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-left-image" markdown="1">
+
+![Leah Smith portrait](../../images/team/Leah.png)
+
+</div>
+
+</div>
+
+<!--- Karl Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Karl-Aksel Puulmann, Software Engineer
+
+<div class="team-left-bio" markdown="1">
+
+I spent my childhood in a tiny village in the middle of nowhere (Väätsa, Estonia), playing football, working in construction and driving tractors. I used it buy my own computer, but did not do much more than listen to music, play games and watch anime with it.
+
+Things changed in highschool, where we had a programming class. I started creating my own games, participating in competitions (even going to International Olympiad once) and generally learning and reverse engineering anything I could get my hands on.
+
+Some time has passed since then - I have since been a student, teacher, first engineer at a guitar learning startup, worked in fintech, helped scale a database cluster holding 1PB of data at an analytics company, learned and helped automate manufacturing of stickers, been a CTO in agritech startup and now learning how this open source business works.
+
+In personal life, you can find me in the wilderness looking for geocaches or hiking, buying too many books and recently trying to figure out this parenting thing.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Karl portrait](../../images/team/Karl.png)
+
+</div>
+
+</div>
+
+<!--- Contributors Section -->
+
+<div class="team-title" markdown="1">
 
 ## Contributors
+
+</div>
 
 <a href="https://github.com/timgl"><img src="https://avatars1.githubusercontent.com/u/1727427?v=4" title="timgl" class="contributor-faces"></a>
 <a href="https://github.com/jamesefhawkins"><img src="https://avatars3.githubusercontent.com/u/47497682?v=4" title="jamesefhawkins" class="contributor-faces"></a>
@@ -194,8 +483,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 <a href="https://github.com/14MR"><img src="https://avatars1.githubusercontent.com/u/5824170?v=4" title="14MR" class="contributor-faces"></a>
 <a href="https://github.com/03difoha"><img src="https://avatars3.githubusercontent.com/u/8876615?v=4" title="03difoha" class="contributor-faces"></a>
 <a href="https://github.com/Kacppian"><img src="https://avatars1.githubusercontent.com/u/14990078?v=4" title="Kacppian" class="contributor-faces"></a>
-<a href="https://github.com/iM
-a"><img src="https://avatars3.githubusercontent.com/u/487897?v=4" title="iMerica" class="contributor-faces"></a>
+<a href="https://github.com/iMa"><img src="https://avatars3.githubusercontent.com/u/487897?v=4" title="iMerica" class="contributor-faces"></a>
 <a href="https://github.com/pedroapfilho"><img src="https://avatars2.githubusercontent.com/u/13142568?v=4" title="pedroapfilho" class="contributor-faces"></a>
 <a href="https://github.com/eLRuLL"><img src="https://avatars3.githubusercontent.com/u/1459486?v=4" title="eLRuLL" class="contributor-faces"></a>
 <a href="https://github.com/samcaspus"><img src="https://avatars0.githubusercontent.com/u/19220113?v=4" title="samcaspus" class="contributor-faces"></a>

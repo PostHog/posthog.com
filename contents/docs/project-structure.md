@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-**Note:** This page refers to our [main product repo](https://github.com/PostHog/posthog), not our website. 
+> **Note:** This page refers to our [main product repo](https://github.com/PostHog/posthog), not our website. 
 
 ## Directory Tree 
 
@@ -18,7 +18,6 @@ showTitle: true
 ├── frontend
 │   └── public
 │   └── src
-│       └── editor
 │       └── layout
 │       └── lib
 │       └── models
@@ -73,10 +72,6 @@ PostHog logos to be used by the app.
 #### src
 
 Code for the frontend.
-
-##### src/editor
-
-Component used to load the [PostHog Toolbar](/docs/features/toolbar) on a webpage. 
 
 ##### src/layout
 

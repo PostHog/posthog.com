@@ -10,7 +10,7 @@
             "Features",
             "API",
             "Contributing",
-            "Architecture"
+            "Project documentation"
         ]
     },
     {
@@ -41,7 +41,15 @@
     {
         "entry": "Tutorials",
         "name": "Tutorials",
-        "items": ["docs/tutorials/feature-flags", "docs/tutorials/toolbar", "docs/tutorials/funnels"]
+        "items": [
+            "docs/tutorials/feature-flags",
+            "docs/tutorials/toolbar",
+            "docs/tutorials/funnels",
+            "docs/tutorials/cohorts",
+            "docs/tutorials/retention",
+            "docs/tutorials/spa",
+            "docs/tutorials/actions"
+        ]
     },
     {
         "entry": "Deployment",
@@ -63,9 +71,9 @@
         ]
     },
     {
-        "entry": "Architecture",
-        "name": "Architecture",
-        "items": ["docs/data-model", "docs/navigation"]
+        "entry": "Project documentation",
+        "name": "Project documentation",
+        "items": ["docs/application-settings", "docs/data-model", "docs/navigation"]
     },
     {
         "entry": "Features",
@@ -81,6 +89,7 @@
             "docs/features/live-actions",
             "docs/features/log-in-with-github-gitlab",
             "docs/features/paths",
+            "docs/features/plugins",
             "docs/features/retention",
             "docs/features/sessions",
             "docs/features/toolbar",
@@ -137,7 +146,8 @@
         "items": [
             "docs/integrations/slack",
             "docs/integrations/microsoft-teams",
-            "docs/integrations/message-formatting"
+            "docs/integrations/message-formatting",
+            "docs/integrations/sentry-integration"
         ]
     },
     {
@@ -159,6 +169,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-16-0",
             "blog/the-posthog-array-1-15-0",
             "blog/the-posthog-array-1-14-0",
             "blog/the-posthog-array-1-13-0",
@@ -215,6 +226,7 @@
             "handbook/company/story",
             "handbook/company/culture",
             "handbook/company/values",
+            "handbook/company/diversity",
             "handbook/company/communication",
             "handbook/company/security",
             "handbook/company/branding",
@@ -236,15 +248,34 @@
         ]
     },
     {
+        "entry": "Careers",
+        "name": "Careers",
+        "items": ["careers"],
+        "child_entries": ["Open Roles"]
+    },
+    {
+        "entry": "Open Roles",
+        "name": "Open Roles",
+        "items": ["careers/designer", "careers/full-stack-software-engineer"]
+    },
+    {
         "entry": "Growth",
         "name": "Growth",
         "items": [
             "handbook/growth/community",
             "handbook/growth/customer-success",
             "handbook/growth/sales",
-            "handbook/growth/trials",
-            "handbook/growth/posthog-array",
-            "handbook/growth/releasing-content"
+            "handbook/growth/trials"
+        ],
+        "child_entries": ["Content"]
+    },
+    {
+        "entry": "Content",
+        "name": "Content",
+        "items": [
+            "handbook/growth/content",
+            "handbook/growth/content/posthog-array",
+            "handbook/growth/content/releasing-content"
         ]
     },
     {

@@ -6,73 +6,70 @@ showTitle: true
 ​
 ## How it Works
 
-As we are a small (but growing!) startup, we've kept compensation super simple. Our formula is:
+As we are a small (but growing!) startup, we've kept compensation simple. 
 
-SF Benchmark x Cost of Living x Experience Factor
+You can use our calculator below to work out what your salary would be.
 
-NB. We apply a _floor_ to the Cost of Living of 0.625.
+<iframe src="/compensation" style="border: none; width:100%; height:425px"></iframe>
 
-As a general philosophy, we aim to pay at least in the top 25% of market for any given role. That objective coupled with an all-remote team and open source approach makes us able to hire many of the best people in the world. We think the fastest possible shipping comes from a leaner, stronger team, and our pay structure allows us to do that.
+We think the fastest possible shipping comes from a leaner, stronger team, so we try to pay top of market. We pay well so you'll work with the best people in the world. 
 
-## SF Benchmark
+## San Francisco Benchmark
 ​
-At the moment we do not have many different job roles. We expect everyone to be able to deliver features top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles.
-
-| Role | SF Benchmark |
-| --- | --- |
-| Engineer | \$160,000 |
-| Designer | \$107,000 |
-| Technical Writer | \$115,000 |
+We deliberately do not have many different job roles. We expect everyone to be able to deliver features top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile so we add a 1.2x multiplier to get to the below numbers.
 
 We will not adjust your pay downwards for existing team members if this ratio changes once you've already started working for PostHog. That means you can feel confident in your pay.
 
-## Cost of Living
+## Location factor
 ​
-We use Cost Of Living numbers provided by [Numbeo](https://www.numbeo.com/cost-of-living/in/San-Francisco). To get your local Cost of Living rate, compare your city with San Francisco.
+We use GitLab's location factors to calculate what a fair market rate is for each location. GitLab uses a combination of data from Economic Research Institute (ERI), Numbeo, Comptryx, Radford, Robert Half, and Dice. [Read more](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#calculating-location-factors) on how GitLab calculates this location factor. If your location isn't listed, we will create one for you based on Numbeo's data for the relative Cost Of Living with San Francisco.
 ​
-In this example, the calculation for London, UK would be \$5,953/\$8,365 = 0.71. Then, \$160,000 x 0.71 = \$113,600.
+## Level
 
-We apply a floor to the Cost of Living. This is because it turns out that market rates for many roles do not linearly reflect Cost of Living, and running the above formula in lower Cost of Living areas often resulted in a below market rate figure. However, we do not wish to use local market rate for roles since the data is too granular to be statistically meaningful (we'd need a benchmark for every role in every geography - for more niche roles, this just wouldn't be possible).
-
-The Cost of Living floor means we may pay above the top 25% of market in certain locations. This sounds like it would harm our capital efficiency - however, in reality, this affects low Cost of Living areas, so the effect is nowhere near as pronounced when compared to, for example, paying the highest rates in San Francisco. This also means in many locations we should have an easier time recruiting the absolute best candidates.
-​
-## Experience Factor
-
-| Level | Multiplier |
-| --- | --- |
-| Senior+ | up to 1.2 |
-| Senior | 1 |
-| Mid | 0.8 |
-| 2-5 years | 0.6 |
-| 0-2 years | 0.5 |
-
-Taking the previous example, a mid-level engineer in London would make \$113,600 x 0.8 = \$90,880.  
-
-More experience does not correlate with increased importance. Seniority is *not* a title - we don't believe in having a huge hierarchy of roles, as each person at our stage needs to feel like the owner of the company that they are.
+More experience does not correlate with increased importance. Seniority is *not* a title - we don't believe in having a huge hierarchy of roles, as everyone needs to feel like the owner of the company that they are.
 
 We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill - being able to ship faster through less time having to work things out for the first time is valuable. Experienced hires can help upskill the less experienced hires in the team too. Team members who have less experience can see a steady increase in pay over time as they increase their experience and skill.
 
 We believe at first increased skill comes from more time spent in the role. Over time, this judgement becomes more subjective and is instead based on the speed with which you can ship or help the team to ship, the quality of your prioritization and decision-making, as well as your technical approach. 
 
+## Steps
+
+Within each level, we believe there's a place to have incremental steps. We define these as follows:
+
+- *Learning*: Starting to match expectations.
+- *Growing*: Matching expectations.
+- *Thriving*: Exceeding expectations.
+- *Expert*: Exceeding expectations consistently.
+
+The definition of what is needed to progress from one step to the next in more detail depends on your role. Ask your manager for detail of what you need to work on.
+
 ## Options
 ​
-The next 7 hires will each receive approximately 0.25-0.5% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
+You'll receive approximately 0.1-0.5% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
 ​
+Whilst the terms of options for *any company* could vary if we were ever acquired, we have set them up with the following key terms:
+
+* 10 years to exercise your options in the event that you leave PostHog
+* Double trigger acceleration which means if you are let go or forced to leave due to the company restructuring, you receive all of your options at that time
+* Vesting starts from your start date (not after a "probation period" or similar)
+
+It can take time to approve options (it requires a board meeting). We can clarify the likely timeframe at the time we're hiring you.
+
 ## Relocating
 ​
-If you're planning on relocating permanently, your salary will be adjusted (up or down) to your new cost of living.
+If you're planning on relocating permanently, your salary will be adjusted (up or down) to your new location.
 
 If this represents an increase in pay, _we need to approve this change in advance_ - we cannot guarantee it is always possible, as our budgets may or may not allow it.
 ​
 ## Nomading
 ​
-If you plan on spending >4 months/year in a place different from your home base, that will be adjusted in the Cost Of Living after 4 months.
+If you plan on spending >4 months/year in a place different from your home base, that will be adjusted based on your location after 4 months.
 
-For a trip with many destinations over a period of more than 4 months, the Cost of Living will be located along the various places you intend to stay, averaged by the amount of time spent. If the resulting figure is below the Cost of Living floor, we'd increase it to that figure.
+For a trip with many destinations over a period of more than 4 months, the location factor will be located along the various places you intend to stay, averaged by the amount of time spent.
+
+If you are uncertain about where you're travelling to in advance, and you are travelling for over 4 months, then we will keep your pay the same as when you departed. 4 months later, we will make a manual adjustment to edit your next pay amount based on the average of the previous 4 months. This will take place every 4 months until you are done travelling. If the adjustment would require reclaiming more than your entire pay amount (for example if you moved from one of the world's most expensive areas to one of the world's least inexpensive areas), then we will work with you on how quickly we reclaim it. Generally this would be over no more than the following 4 months. It is your responsibility if you take this approach to budget appropriately.
 ​
-For example, if you spend half your time in London and half your time in Bali (where CoL is \$2,283), your CoL factor will be ((\$5,953/\$8,365)+(\33,000,000Rp/118,370,527Rp))/2 = 0.495. That would then be increased to 0.625 (because of the Cost of Living floor).
-​
-If this represents an increase in pay, _we need to approve this change in advance_ - we cannot guarantee it is always possible, as our budgets may or may not allow it.
+If this represents an increase in pay from however much you were *most recently* paid, _we need to approve this change in advance_ - we cannot guarantee it is always possible, as our budgets may or may not allow it.
 
 ## Salary Adjustments, Raises, and Promotions
 ​

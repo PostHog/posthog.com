@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import '../featured-section.scss'
 import { Spacer } from '../../Spacer'
 
 export const FeaturedSectionTextRight = ({
@@ -31,7 +32,7 @@ export const FeaturedSectionTextRight = ({
     }
 
     return (
-        <div className="featured-section-right-wrapper">
+        <div className="featured-section-right-wrapper featured-section-main">
             <div className="fs-wrapper feature-section">
                 <div className="row">
                     <div className="section-banner-image" style={imageStyle} />
@@ -41,11 +42,11 @@ export const FeaturedSectionTextRight = ({
                         </h1>
                     </div>
                     <div className="col">
-                        <h2 className="gosha fs-right-header-2">{headerText}</h2>
+                        <h2 className="gosha fs-header-2">{headerText}</h2>
                         <br className="revHiddenBreak" />
                         <hr className={styleMap[color][1]} />
                         <br className="revHiddenBreak" />
-                        <p>{descriptionText}</p>
+                        <p className="fs-paragraph">{descriptionText}</p>
                     </div>
                 </div>
             </div>

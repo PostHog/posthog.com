@@ -10,6 +10,7 @@ export const layoutLogic = kea({
 
         setSidebarDocked: (docked) => ({ docked }),
         setSidebarContentEntry: (entry) => ({ entry }),
+        setWebsiteTheme: (theme) => ({ theme }),
         setSidebarContentStructure: (entry, tree, dir) => ({ entry, tree, dir }),
         onSidebarContentExpanded: (expandedKeys) => ({ expandedKeys }),
         onSidebarContentSelected: (selectedKey) => ({ selectedKey }),
@@ -47,6 +48,12 @@ export const layoutLogic = kea({
             false,
             {
                 setSidebarDocked: (_, { docked }) => docked,
+            },
+        ],
+        websiteTheme: [
+            'light',
+            {
+                setWebsiteTheme: (_, { theme }) => theme,
             },
         ],
         sidebarExpandedKeys: [

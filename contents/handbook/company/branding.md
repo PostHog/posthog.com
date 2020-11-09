@@ -48,7 +48,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 
 ## Text
 
-#### H1 
+# H1 
 
 ###### Font Specifications 
 
@@ -58,7 +58,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 * Color: Black
 * Opacity: 100%
 
-#### H2
+## H2
 
 ###### Font Specifications 
 
@@ -68,7 +68,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 * Color: Black
 * Opacity: 100%
 
-#### H3
+### H3
 
 ###### Font Specifications 
 
@@ -88,7 +88,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 * Color: Black
 * Opacity: 100%
 
-#### Extra Large Text
+##### H5
 
 ###### Font Specifications 
 
@@ -98,7 +98,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 * Color: Black
 * Opacity: 100%
 
-#### Large Text
+###### H6
 
 ###### Font Specifications 
 

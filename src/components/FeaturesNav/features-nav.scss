@@ -11,15 +11,32 @@
         background-color: #fff;
     }
 
-    .threeFeatures {
+    .feature-links-section {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
         width: 100vw;
         max-width: 1440px;
     }
 
-    .threeFeatures a {
+    .three-features {
+        justify-content: space-evenly;
+    }
+
+    @media screen and (min-width: 1080px) {
+        .two-features {
+            justify-content: center;
+
+            .two-features-img1 {
+                margin-right: 75px;
+            }
+
+            .two-features-img2 {
+                margin-left: 75px;
+            }
+        }
+    }
+
+    .feature-links-section a {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -31,39 +48,46 @@
         height: 340px;
     }
 
-    .threeFeatures a > h4 {
+    .feature-links-section a > h4 {
         font-family: 'Gosha sans', Arial, Helvetica, sans-serif;
+        color: #000000;
         font-weight: bold;
         font-size: 20px;
         line-height: 36px;
         margin-bottom: 28px;
     }
 
-    .threeFeatures a > img {
+    .feature-links-section a > img {
         margin-bottom: 0 !important;
         height: 292px;
         width: 232px;
     }
 
-    .threeFeatures a:hover {
+    .feature-links-section a:hover {
         box-shadow: 0 0 5px 5px #f0f0f0;
+
+        h4 {
+            color: #1d4aff;
+        }
     }
 
-    @media screen and (max-width: 834px) {
+    @media screen and (max-width: 1080px) {
+        .two-features {
+            justify-content: space-evenly;
+        }
         .featuresNav {
             flex-direction: row;
             justify-content: space-evenly;
         }
-        .threeFeatures {
-            /* flex-direction: column; */
+        .feature-links-section {
             align-items: center;
         }
-        .threeFeatures a {
+        .feature-links-section a {
             width: 140px;
             height: 280px;
         }
-        .threeFeatures img {
-            width: 140px;
+        .feature-links-section img {
+            width: 120px !important;
             height: 180px !important;
         }
     }
