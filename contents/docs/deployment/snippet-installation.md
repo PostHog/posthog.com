@@ -6,63 +6,34 @@ showTitle: true
 
 The easiest way to get going is to add a JavaScript snippet to your application.
 
-## Finding the Snippet
+### Finding the Snippet
 
-To find the snippet, login at app.posthog.com
+This snippet will be provided to you during setup, but, if you need to access it afterwards, you can find it under 'Project' -> 'Settings':
 
-Now, go to ‘Setup’ in the left hand navigation:
+![Snippet Settings Screenshot](../../images/features/snippet/snippet-settings.png)
 
-![Left hand navigation](../../images/02/Screenshot-2020-02-09-at-21.16.41.png)
 
-Enter the domain of your application then press ‘Save url’.
+### Adding the snippet to your website
 
-![Select domain image](../../images/02/Screenshot-2020-02-09-at-21.17.37.png)
-
-## Adding the snippet to your application or website
-
-Now, under ‘Integrate PostHog’, copy the code snippet.
-
-Paste this within the `<head>` tags of your application, ideally just above the closing `</head>` tag.
+Having copied the snippet from the Settings page, you should now paste this within the `<head>` tags of your website, ideally just above the closing `</head>` tag. You will need to do this for all pages that you wish to track. 
 
 ## Website vs App
 
-We recommend putting PostHog both on your homepage and your application if applicable. That means you'll be able to follow a user from the moment they come onto your website, all the way through Sign Up and actually using your product.
+We recommend adding the PostHog snippet both on your homepage and your application (if you have one). That means you'll be able to follow a user from the moment they come onto your website, all the way through Sign Up and their actual usage of your product.
 
 ## Adding Multiple URLs 
 
-PostHog can also support tracking across multiple URLs and domains. In Setup you can select '+ Add Another URL'.
+PostHog supports tracking across multiple URLs and domains. Also on your Project Settings page, you are able to add more URLs that you wish to track. 
 
-![Select urls](../../images/03/Posthog-14.png)
+![Snippet Settings Screenshot](../../images/features/snippet/add-url.png)
 
-You can then enter multiple URLs that you would like to track activity for.
-
-![setup multiple urls](../../images/03/setupmultipleurls.gif)
-
-## Verify Events Tracking
-
-To check that events tracking is working, navigate to your application and verify that you can see the snippet in the correct place.
-
-Now, visit a URL of your application. Then, go back to PostHog.
-
-Click ‘Events’ in the left hand Navigation:
-
-![Left hand navigation, events selected](../../images/02/Screenshot-2020-02-09-at-21.18.55.png)
-
-You should be able to see a list of events, when they took place and the path containing the URL you visited.
-
-![Events list](../../images/02/Screenshot-2020-02-09-at-21.20.20.png)
-
-You should be able to see a list of events, when they took place, and the path containing the URL you visited.
-
-## Ignore/Censure elements
+###  Ignore/Censure elements
 PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website. If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
 
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
 ```
 
-<br>
+### Alternatives to the snippet
 
-## Event Tracking via API (Instead of JavaScript)
-
-You can choose not to use a JavaScript snippet, and can instead push events to the PostHog API. See the Events documentation for more detail.
+You can choose not to use a JavaScript snippet, and can instead use one of our [many integrations](/docs/integrations) or our [API](/docs/api/overview).
