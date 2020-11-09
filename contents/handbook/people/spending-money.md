@@ -38,7 +38,7 @@ If your purchase fits within the policy below, there is no need to ask. We **can
 
 You may not have enough space on your company card if you're a new starter, just ask James (and if he's unavailable, Tim) to increase your limit.
 
-## Equipment
+## Equipment
 
 PostHog is an all-remote company. This means it's important you have an ergonomic setup at home to be as productive as possible.
 
@@ -50,7 +50,7 @@ We'd prefer you to use a laptop. This is so when we host meetups in real life, y
 
 Our general laptop of choice is a MacBook Pro. Please look for a recent refurbished model. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-The main thing to look for is that you have enough RAM. 8GB is (frustratingly!) the minimum you'll realistically need if you're browsing the web, writing code and using Slack.
+The main thing to look for is that you have enough RAM. 8GB is (frustratingly!) the minimum you'll realistically need if you're browsing the web, writing code, running Excel, using Slack etc.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen.
 
@@ -62,15 +62,15 @@ For monitors, we suggest you pick one that supports 4K. This means you'll get a 
 
 We would expect to spend \$250 to \$350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
 
-#### Keyboard, Mouse, and Laptop Stand
+### Keyboard, Mouse, and Laptop Stand
 
 We'd encourage you to buy a keyboard, mouse and laptop stand.
 
-Apple refurbished items for keyboards and mice should be what you default to.
+Again, Apple refurbished items for keyboards and mice should be what you default to.
 
 [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
 
-### Chairs and Desks
+### Chairs and Desks
 
 We find that most people already have a desk and chair that are comfortable.
 
@@ -102,28 +102,28 @@ Our entire stack for collaborative software is pleasing simple. All we use is:
 * PostHog - product analytics
 * Figma - graphic design
 
-Individual software is down to personal preference, and we encourage you to share cool software.
+Individual software is down to your personal preference, and we encourage you to share cool software.
 
 ### IDEs
 
-* IDEs range widely in cost. Best in class can cost up to \$700. We remain sceptical if a best in class IDE is worth several days of engineering time. However, we are happy to revisit this policy whenever we reach the sooner of profitability or a Series A.
+* IDEs range widely in cost. Best in class can cost up to \$700. We remain sceptical if a best in class IDE is worth several days of engineering time. However, we are happy to revisit this policy in the future.
 * Before then, if you wish to spend up to \$100 on an IDE, that is fine. Visual Studio, VIM and Sublime are the most popular with our team.
 
 ## Work Space
 
 We care about you being healthy, happy and productive. 
 
-Whilst PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
+While PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
 You can spend up to \$200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
 
 If you live in the US, a particularly good way to use this budget is to cover the cost of Amex Platinum which provides WeWork access. Outside of the US, you may sign your own agreement or buy day vouchers as needed. We will not cover costs beyond this amount of money.
 
-## Client Meetings
+## Client Meetings
 
 If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill.
 
-At PostHog's current stage, a fancy coffee shop is encouraged, a fancy lunch or dinner is not.
+At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or dinner is not.
 
 ## Training
 
