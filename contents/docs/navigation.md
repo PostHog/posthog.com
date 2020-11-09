@@ -19,17 +19,18 @@ The main navigation bar contains the following elements (nested elements are fea
 ```
 .
 ├── Dashboards
-├── Funnels
 ├── Insights
 │   └── Trends
+│   └── Funnels
+│   └── Retention
 │   └── User Paths
 │   └── Sessions
-├── Retention
-├── Feature Flags  
-├── Actions & Events
+├── Events
+├── Actions
 ├── Sessions
 ├── Persons
 ├── Cohorts
+├── Feature Flags
 ├── Plugins
 ├── Project
 └── Toolbar
