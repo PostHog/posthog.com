@@ -24,6 +24,7 @@ Charles will create the contract needed, depending on who is joining. Only James
 ### UK Team Member Checklist
 
 <input type="checkbox"/>  For now, we create UK employee agreements manually - in the future, we will automate this process as well <br>
+<input type="checkbox"/>  Email Parallel to add them to our pension scheme <br>
 
 ### Non-US nor UK Team Member Checklist
 
