@@ -8,7 +8,7 @@ This page will walk you through how we hire at PostHog. The goal is to have a li
 
 ## Deciding to Hire
 
-Every hire introduces complexity to the organisation and increases our burn rate. As a result, we think very careful about each new role, and we set an extremely high bar for the people that we do hire. 
+Every hire introduces complexity to the organisation and increases our burn rate. As a result, we think very carefully about each new role, and we set an extremely high bar for the people that we do hire. 
 
 See [our Strategy page](/handbook/strategy/strategy) to find out how we are thinking about which people we should be hiring, and when.
 
@@ -18,7 +18,7 @@ If we are hiring a role that we have less expertise in (e.g. a role we've never 
 
 At the moment, we're not too worried about everyone on the team having really precisely defined job specs. PostHog is growing fast and job descriptions are changing rapidly so it's impossible to define a set list of tasks.
 
-That being said, it is important that any job spec is written with your target audience in mind, in a clear and engaging way. There are several guides on how to this - [here is a good one](https://resources.workable.com/tutorial/how-to-write-a-good-job-description) - and you can also look at previous job ads to get a feel for how we communicate about PostHog. 
+That being said, it is important that any job spec is written with your target audience in mind, in a clear and engaging way. There are several guides on how to this ([here is a good one](https://resources.workable.com/tutorial/)how-to-write-a-good-job-description), and you can also look at previous job ads to get a feel for how we communicate about PostHog. 
 
 Once you have the job ad out there, don't be afraid to [iterate](https://posthog.com/handbook/company/culture#iteration) and improve on it given the data! You shouldn't feel constrained by your initial spec if it isn't quite working, or if PostHog's needs have evolved since you first wrote it. 
 
@@ -30,7 +30,7 @@ We manage all of our candidates through [Breezy](https://app.breezy.hr) - please
 
 * Make sure you add a Zoom link that the people doing the interview are going to be able to open. If you are not going to be at the interview yourself, consider using Google Meet as it doesn't require a host. 
 * Set an agenda for the meeting - this is to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
-* Forward the candidate's cover letter, LinkedIn, and other relevant resources to the relevant team members. This is easiest through [Breezy](https://app.breezy.hr).
+* Forward the candidate's cover letter, LinkedIn profile, and other useful resources to the relevant team members. The easiest way to do this is through [Breezy](https://app.breezy.hr).
 
 The next section is an example agenda for the first stage. Make sure to insert the appropriate stage and links for the role. Keep the diversity message in as part of being inclusive to all candidates.
 
@@ -131,7 +131,7 @@ Read applications and resumes carefully.
 
 If a candidate hasn't customized the application or resume to the role, it is a flag they're aren't that excited about working at PostHog. It is understandable why people don't do this, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
 
-Candidates who are unsuccessful at this stage should receive automated feedback, unless they personalised their application in which case a short email is appropriate.
+Candidates who are unsuccessful at this stage should receive automated feedback, unless they personalized their application, in which case a short email is appropriate.
 
 #### Engineering
 
@@ -153,7 +153,7 @@ This is to allow both PostHog and the candidate to assess cultural fit, and to d
 - Talk about the candidate, dig into any questions I have from their CV
 - Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned
 
-Candidates who are unsuccessful at this stage should receive a personalised email with feedback. 
+Candidates who are unsuccessful at this stage should receive a personalized email with feedback. 
 
 ### Interview 2 - Technical
 
@@ -181,7 +181,7 @@ The person interviewing outside their area of expertise is the bar-raiser. The b
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. If it is not a _definite yes_, then it's a _no_. 
 
-Candidates who are unsuccessful at this stage should receive a personalised email with feedback. 
+Candidates who are unsuccessful at this stage should receive a personalized email with feedback. 
 
 ### PostHog SuperDay
 
