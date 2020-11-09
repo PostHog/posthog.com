@@ -88,3 +88,13 @@ Unless there is a very good reason, you'll be paid in your local currency. This 
 | GBP | 0.758 |
 
 </span>
+
+## Probation
+
+You will join us on a 3 month probation period, during which either you or PostHog can choose to end your contract with 1 week's notice. We are fully committed to ensuring that you are set up for success, but also understand that it may take some time to determine whether or not there is a long term fit between you and PostHog. Our bar for hiring is very high, and you should not expect to automatically pass probation. 
+
+Your manager is responsible for monitoring and specifically reviewing your performance throughout the probation period. If underperformance is a concern, or if there is any hesitation regarding the successful completion of a probation period, this should be discussed immediately with you and James or Tim. 
+
+## Severance
+
+If your time at PostHog comes to an end, then we will pay generous severance. If PostHog decides to end your contract after your probation period has been completed, we will pay you 4 months of salary. If the decision to leave is yours, then we just require 1 month of notice. We have structured notice in this way as we believe it is in neither PostHog's nor your interest to lock you into a role that is no longer right for you due to financial considerations. 
