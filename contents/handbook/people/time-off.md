@@ -22,7 +22,7 @@ You do not need to "clear" time off with your manager.
 
 We care about your results, not how long you work. Whilst no approval is needed, it shouldn't be at the expense of business getting done. For example, having the entire technical team off means we can't be responsive to community issues. Please coordinate with your team.
 
-When you pick a date(s) to have off, please enter it into [CharlieHR] (https://posthog.charliehr.com/) and it will be automatically approved and added to the team time off calendar. Remember to set an out of office message on your email.
+When you pick a date(s) to have off, please enter it into [CharlieHR](https://posthog.charliehr.com/) and it will be automatically approved and added to the team time off calendar. Remember to set an out of office message on your email.
 
 The same rules as above apply regardless of the vacation length.
 
