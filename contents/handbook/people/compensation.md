@@ -8,23 +8,23 @@ showTitle: true
 
 As we are a small (but growing!) startup, we've kept compensation simple. 
 
-You can use our calculator below to work out what your salary would be.
+You can use our calculator below to work out what your salary would be for a few example roles:
 
 <iframe src="/compensation" style="border: none; width:100%; height:425px"></iframe>
 
-We think the fastest possible shipping comes from a leaner, stronger team, so we try to pay top of market. We pay well so you'll work with the best people in the world. 
+We think the fastest possible shipping comes from a leaner, stronger team, so we try to pay top of market. We pay well, so you'll work with the best people in the world. 
 
-## San Francisco Benchmark
+### San Francisco Benchmark
 ​
-We deliberately do not have many different job roles. We expect everyone to be able to deliver features top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile so we add a 1.2x multiplier to get to the below numbers.
+We deliberately do not have many different job roles. We expect everyone to be able to deliver features or run projects top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile, so we add a 1.2x multiplier to get to the below numbers.
 
 We will not adjust your pay downwards for existing team members if this ratio changes once you've already started working for PostHog. That means you can feel confident in your pay.
 
-## Location factor
+### Location factor
 ​
 We use GitLab's location factors to calculate what a fair market rate is for each location. GitLab uses a combination of data from Economic Research Institute (ERI), Numbeo, Comptryx, Radford, Robert Half, and Dice. [Read more](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#calculating-location-factors) on how GitLab calculates this location factor. If your location isn't listed, we will create one for you based on Numbeo's data for the relative Cost Of Living with San Francisco.
 ​
-## Level
+### Level
 
 More experience does not correlate with increased importance. Seniority is *not* a title - we don't believe in having a huge hierarchy of roles, as everyone needs to feel like the owner of the company that they are.
 
@@ -32,7 +32,7 @@ We pay more experienced team members a greater amount since it is reasonable to 
 
 We believe at first increased skill comes from more time spent in the role. Over time, this judgement becomes more subjective and is instead based on the speed with which you can ship or help the team to ship, the quality of your prioritization and decision-making, as well as your technical approach. 
 
-## Steps
+### Steps
 
 Within each level, we believe there's a place to have incremental steps. We define these as follows:
 
@@ -43,17 +43,17 @@ Within each level, we believe there's a place to have incremental steps. We defi
 
 The definition of what is needed to progress from one step to the next in more detail depends on your role. Ask your manager for detail of what you need to work on.
 
-## Options
+## Share Options
 ​
-You'll receive approximately 0.1-0.5% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
+As part of your compensation, you will receive approximately 0.1-0.5% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
 ​
 Whilst the terms of options for *any company* could vary if we were ever acquired, we have set them up with the following key terms:
 
 * 10 years to exercise your options in the event that you leave PostHog
-* Double trigger acceleration which means if you are let go or forced to leave due to the company restructuring, you receive all of your options at that time
+* Double trigger acceleration, which means if you are let go or forced to leave due to the company being acquired, you receive all of your options at that time
 * Vesting starts from your start date (not after a "probation period" or similar)
 
-It can take time to approve options (it requires a board meeting). We can clarify the likely timeframe at the time we're hiring you.
+It can take time to approve options, as it requires a board meeting and company valuation. We can clarify the likely timeframe at the time we're hiring you. In any case, you will not be disadvantaged as vesting will always start from when you joined PostHog. 
 
 ## Relocating
 ​
@@ -73,7 +73,7 @@ If this represents an increase in pay from however much you were *most recently*
 
 ## Salary Adjustments, Raises, and Promotions
 ​
-We do not expect to do any salary raises, adjustments or promotions until July 2021 outside of role or location based changes. After that, we will run an annual review cycle to evaluate your level of experience.
+We do not expect to do any salary raises, adjustments or promotions until July 2021, outside of role or location-based changes. After that, we will run an annual review cycle to evaluate which Level and Step you are at.
 
 ## Exchange Rate
 
@@ -81,7 +81,7 @@ Unless there is a very good reason, you'll be paid in your local currency. This 
 
 <span class="table-borders">
 
-| Currency | Multiplier |
+| Currency | USD Multiplier |
 | --- | --- |
 | EUR | 0.89 |
 | PLN | 3.79 |
