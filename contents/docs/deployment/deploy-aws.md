@@ -18,11 +18,11 @@ Jump straight in:
 
 [![Launch AWS Stack](../../../src/images/deploy-button-aws.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Posthog&templateURL=https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml)
 
-1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors, get alarms or setup SMTP configs as described below.
+1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors, get alarms, or setup SMTP configs as described below.
 
 1. Review the rest of the Configuration Wizard pages
 
-1. (Optional) On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
+1. (Optional) On the 'Review Stack' page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
 
 1. If you are ready, click **Create Stack**!
 
