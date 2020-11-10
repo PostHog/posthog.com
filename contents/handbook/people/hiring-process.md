@@ -18,7 +18,7 @@ If we are hiring a role that we have less expertise in (e.g. a role we've never 
 
 At the moment, we're not too worried about everyone on the team having really precisely defined job specs. PostHog is growing fast and job descriptions are changing rapidly so it's impossible to define a set list of tasks.
 
-That being said, it is important that any job spec is written with your target audience in mind, in a clear and engaging way. There are several guides on how to this ([here is a good one](https://resources.workable.com/tutorial/)how-to-write-a-good-job-description), and you can also look at previous job ads to get a feel for how we communicate about PostHog. 
+That being said, it is important that any job spec is written with your target audience in mind, in a clear and engaging way. There are several guides on how to this ([here is a good one](https://resources.workable.com/tutorial/how-to-write-a-good-job-description)), and you can also look at previous job ads to get a feel for how we communicate about PostHog. 
 
 Once you have the job ad out there, don't be afraid to [iterate](https://posthog.com/handbook/company/culture#iteration) and improve on it given the data! You shouldn't feel constrained by your initial spec if it isn't quite working, or if PostHog's needs have evolved since you first wrote it. 
 
