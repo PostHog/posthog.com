@@ -33,4 +33,12 @@ Sessions that can be played back are the ones that contain `$snapshot` events, w
 
 When watching sessions, you can change the speed as well as select the option 'skip inactive' - this will skip chunks of the recording where the user was inactive on the page. 
 
+## Ignoring Sensitive Elements
+
+If recording your application may clead to capturing sensitive information on your users, you need to update your codebase to prevent PostHog from capturing this during session recordings.
+
+To do so, you should add the class name `ph-no-capture` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches session recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
+
+Additionally, when dealing with inputs, if you wish to still capture the input box but not its contents, you can use the class name `ph-ignore-input` instead.
+
 
