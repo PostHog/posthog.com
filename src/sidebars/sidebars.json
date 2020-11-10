@@ -92,6 +92,7 @@
             "docs/features/plugins",
             "docs/features/retention",
             "docs/features/sessions",
+            "docs/features/session-recording",
             "docs/features/toolbar",
             "docs/features/trends",
             "docs/features/users"
