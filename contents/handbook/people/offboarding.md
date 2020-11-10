@@ -24,7 +24,7 @@ We ask for 30 days of notice by default (unless locally a different maximum or m
 
 ## Involuntary Offboarding
 
-In this case, we require the employee to leave. This is generally for performance reasons or because the company's needs have changed and the role can no-longer be justified.
+In this case, we require the employee to leave. This is generally for performance reasons or because the company's needs have changed and the role can no-longer be justified. We provide a 4-month notice if this is the case. 
 
 ## The Process for Offboarding
 
@@ -42,8 +42,8 @@ During the call, another team member needs to complete the [offboarding checklis
 Final pay will be determined based on length of service and the reasons for leaving.
 
 * If the offboarding is voluntary, you will be paid up until your last day. We will look at the amount of holiday taken in the last 12 months and will pay any "unused" vacation pay assuming you would have taken 25 days (since we offer unlimited vacation periods).
-* If the offboarding is involuntary and for performance or a change in business need reasons, you will receive 1 month of pay if you have worked with us for at least 6 months. Under that, we will provide 2 weeks of pay.
-* If the offboarding is involuntary and for gross misconduct or extreme behavior, you may receive nothing as your last day.
+* If the offboarding is involuntary and due to performance reasons or a change in business needs, you will receive 4 months of pay, provided you have passed your probation period. 
+* If the offboarding is involuntary and for gross misconduct or breach of contract, you may receive nothing as your last day.
 
 We are likely to ask departing employees to sign a release of claims in order to receive payments beyond their final day of work.
 
@@ -59,7 +59,7 @@ We will pay any expenses in line with our policy that are still unpaid.
 
 ### Personal Email to the Company
 
-In the case of voluntary offboarding, the team member is offered the chance to send a goodbye email to the company, with relevant contact information as they move on.
+In the case of voluntary offboarding, you will be offered the chance to send a goodbye email to the company, with relevant contact information as they move on.
 
 ## Offboarding checklist
 
@@ -71,4 +71,4 @@ In the case of voluntary offboarding, the team member is offered the chance to s
 <input type="checkbox"/> Remove team member from PostHog Users Slack <br />
 <input type="checkbox"/> Remove team member from 1password <br />
 <input type="checkbox"/> Remove team member from app.posthog.com <br />
-<input type="checkbox"/> Remove team member from AWS access <br />
+<input type="checkbox"/> Remove team member from AWS <br />
