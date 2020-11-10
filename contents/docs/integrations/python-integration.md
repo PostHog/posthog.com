@@ -135,7 +135,7 @@ import posthog
 
 def purchase(request):
     # example capture
-    posthog.capture(request.session.session_key, 'purchase', ...)
+    posthog.capture(request.user.pk, 'purchase', ...)
 ```
 
 # Integrations
