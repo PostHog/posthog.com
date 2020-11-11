@@ -97,6 +97,6 @@ Your manager is responsible for monitoring and specifically reviewing your perfo
 
 ## Severance
 
-If your time at PostHog comes to an end, then we will pay severance to support your transition into your next role. If PostHog decides to end your contract after your probation period has been completed, we will give you 4 months' notice. If we agree with you that a shorter notice period is more appropriate, we will still pay you 4 months of salary. If the decision to leave is yours, then we just require 1 month of notice. 
+If your time at PostHog comes to an end, then we will pay severance to support your transition into your next role. If PostHog decides to end your contract after your probation period has been completed, we will give you 4 months' notice and pay you for those months. If we agree with you that a shorter notice period is more appropriate, we will still pay you a total of 4 months of salary (even if you leave immediately). If the decision to leave is yours, then we just require 1 month of notice. 
 
 We have structured notice in this way as we believe it is in neither PostHog's nor your interest to lock you into a role that is no longer right for you due to financial considerations. This extended notice period only applies in the case of under-performance or a change in business needs - if your contract is terminated due to gross misconduct then you may be dismissed without notice. If this policy conflicts with the requirements of your local jurisdiction, then those local laws will take priority. 
