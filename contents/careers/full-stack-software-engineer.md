@@ -62,11 +62,7 @@ In particular, those with a very strong background in Django, architecture and d
 
 We sweated over this ad - we value nothing more than having an excellent team with a great environment to work in. We hope this came through.
 
-Drop us a line - [apply-105baa89cb9a01@posthog.breezy-mail.com](mailto:apply-105baa89cb9a01@posthog.breezy-mail.com).
-
-Ps. Sorry about the weirdly big email address - this helps us keep things organized :)
-
-Tell us:
+[Drop us a line](https://apply.workable.com/posthog/j/2F287E18A5/apply/) and tell us:
 
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
