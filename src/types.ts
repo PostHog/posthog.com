@@ -4,3 +4,11 @@ export interface FeaturesPageData {
     href: string
     icon: string
 }
+
+export interface FeatureComparisonData {
+    title: string
+    posthog: boolean
+    amplitude: boolean
+    mixpanel: boolean
+    heap: boolean
+}
