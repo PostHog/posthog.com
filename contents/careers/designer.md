@@ -44,9 +44,7 @@ This will be a challenging role - it will require the ability to execute quickly
 
 ## Sounds like fun?
 
-[Drop us a line](mailto:careers@posthog.com).
-
-Tell us:
+[Drop us a line](https://apply.workable.com/posthog/j/708CF30938/apply/) and tell us:
 
 * How you can achieve the above in a few sentences 
 * Why you're drawn to us
