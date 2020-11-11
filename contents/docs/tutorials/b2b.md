@@ -6,7 +6,7 @@ showTitle: true
 
 <br />
 
-<small class="note-block centered">_Estimated Reading Time: 10 minutes ☕☕☕_</small>
+<small class="note-block centered">_Estimated Reading Time: 12 minutes ☕☕☕_</small>
 
 <br />
 
@@ -18,7 +18,9 @@ showTitle: true
 
 <br />
 
-While there is some overlap between the analytics processes of B2C and B2B businesses, there are significant differences in the business model that need to be accounted for when tracking key performance metrics.
+If you run a B2B business, it is especially important to track group usage of your product, since, by definition, you have multiple clearly-defined groups as your clients. 
+
+Since usage may vary from company to company in your clients list, digging deeper into how these different teams and businesses use your product is essential to developing a platform that meets the use-case of your core audience well.
 
 As such, this tutorial will walk you through how to track usage of your B2B product, going over key metrics and how you can set up your analytics views to reflect them.
 
@@ -34,17 +36,13 @@ To follow this tutorial along, you need to:
 
 ### Determining Product-Market Fit
 
-The first question you should seek an answer to is: _Is my product being used?_
-
-Given that the answer is a _yes_, you should then ask: _Who's using it?_
-
-These questions are essential to determining product-market fit for your business. Essentially, you want to solve a pain point for one or more groups of users, ensuring that you provide a product that strongly meets their use-case. 
-
-To analyze this, let's see how PostHog can help you answer those two questions individually.
+Determining product-market fit is a key step to making your product successful, and, in order to do so, you need to understand if your product is being used, who is using it, and how it's being used. 
 
 #### Is my product being used?
 
 To determine if your product is being used, let's start in 'Trends' (under 'Insights').
+
+##### How many people use my product?
 
 By default, this will give you a chart of pageviews over time, which is a reasonable start to understand if your product is being used. However, this chart might include a lot of data that doesn't tell you much about the usage of your product.
 
@@ -60,9 +58,55 @@ Here's what your chart might look like after the aforementioned setup:
 
 Depending on your PostHog setup, you might need or want to narrow this view even further. For this, you can set as many filters you like, to ensure you're measuring users that really did use your product. For example, you might want to filter based on a specific URL, or change the event from `$pageview` to a custom action that you set up. You could, for instance, determine that to count an active user, the user needs to use a certain part of your product. As such, you could represent that by a button click or [custom event](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors).
 
-#### Who's using my product?
+##### We set up a free trial for a user, have they been using the product?
 
-Having established the usage of your product, it is then important to ask yourself who those users are. This is where the 'Break Down By' option comes in. 
+When you onboard a user, you probably want to track their specific usage on the platform. For example, you may want to know:
+
+- Has the user has logged in after the onboarding?
+- What features have they used?
+- Have they invited their team?
+
+In order to track this, you should first ensure you are sending relevant user data to PostHog. For example, when a user signs up, you should consider adding their email as a property to PostHog, as well as other valuable information such as their company name.
+
+With our [JavaScript Integration](/docs/integrations/js-integration), this might look something like this:
+
+```js
+const login = (userEmail, userPassword, userCompanyName) => {
+    /* Your authentication logic here */
+    posthog.people.set({
+        email: userEmail
+        company: userCompanyName
+    })
+}
+```
+
+This way, you can then find the user on PostHog's 'People' page and access their individual page to analyze their events and watch their recorded sessions.
+
+![People Screenshot](../../images/tutorials/b2b/person.png)
+
+Additionally, you will also then be able to filter charts in 'Insights' to find the data on that specific user, by setting a filter like 'Email equals `tester@test.com`'. Here's an example:
+
+![Chart Person Screenshot](../../images/tutorials/b2b/chart-person.png)
+
+On the chart above, we can see how often the user performed the action 'Toggle Dark Mode'. However, you could do the same for the actions that you set which are valuable to you, such as 'Invited Team Member', 'Logged In', and 'Used Feature X'.
+
+And remember, you can set this filter on any 'Insights', including 'Retention':
+
+![Person Retention Screenshot](../../images/tutorials/b2b/person-retention.png)
+
+And 'Paths':
+
+![Person Paths Screenshot](../../images/tutorials/b2b/person-paths.png)
+
+PostHog also remembers your filters, so flipping through tabs in 'Insights' ensures your views are filtered accordingly by default.
+
+#### What clients use my product the most?
+
+Understanding how much your product is being used is a great first step, and so is looking at users individually to see how they interact with your platform.
+
+However, as a B2B business, you can also derive valuable insights from looking at your metrics across the companies that use your product.
+
+##### Breaking down product usage by client teams
 
 Using the breakdown functionality is useful to segment your data into groups of users that share certain relevant characteristics, so you can derive conclusions about what groups of users engage the most with your product.
 
@@ -79,6 +123,78 @@ Here, we can clearly see the usage of our product by company. This can be useful
 - It allows you to determine what companies you have a better chance of converting to a premium plan
 
 Additionally, you can also break down data by any other property you like, as well as by specific cohorts you have set. This lets you compare metrics across marketing campaigns, referral domains, software version, browser, and anything else that is valuable to you. You are also able to compare between features when using [feature flags](/docs/tutorials/feature-flags).
+
+##### What company is most likely to convert into a paying customer?
+
+Let's say you have two different companies doing a free trial. You want to know which of them is most likely to convert into a paying user, so you can better allocate your resources and concentrate your sales efforts. 
+
+Having established some key metrics, you can then compare the two to determine which one to approach and suggest an upgrade.
+
+For example, here's some real PostHog data (with company names anonymized):
+
+![Funnel Companies](../../images/tutorials/b2b/funnel-companies.png)
+
+Users creating an action in PostHog is something we care about because it shows that a team has dedicated some time to understanding how PostHog works and want to leverage actions to perform more advanced analytics.
+
+With the funnels above, we can see which of the two companies converts better from initial visit of our app to creating an action. In this case, there are two values that stand out about Company A, which may trigger a sales effort from our end:
+
+- They have  26 team members on the platform (Compared to Company B's 6)
+- Their conversion rate on this specific metric is better and more statistically significant 
+
+Once again, this should be tailored to the metrics you care about, be it retention, conversion on a five-step funnel, or aggregate usage volume numbers. The key here is to compare how your KPIs differ from client to client, so you can determine:
+
+- What types of companies fit your product best
+- What companies you can approach with a sales pitch
+- What companies are likely to churn and not worth chasing
+- What companies can be nudged to understand their use-case better
+
+
+#### Which features are important to my users?
+
+PostHog can also help you be data-driven in your decisions about features, allowing you to determine:
+
+- What features should be worked on more
+- What features can be dropped
+- If your new features are useful
+
+##### What features should we invest more in?
+
+Tracking your specific features can be done through tracking pageviews that match the feature's URL, button clicks related to the feature, or any other custom event that suits you better.
+
+This is useful to determine if your features are performing as expected, and if there are any features that your users particularly like which should be invested in more.
+
+In our case, feature flags are a great example:
+
+![Feature Flags Tracking](../../images/tutorials/b2b/feature-flags.png)
+
+Originally rolled out as an experimental feature, our [feature flags](/docs/features/feature-flags) functionality has seen its usage grow consistently month after month, indicating to us that it is worth improving and expanding the feature - something we have been doing actively.
+
+##### Are there features we should drop?
+
+After some time discussing if our 'Live Actions' feature has been useful to users, we [finally decided to drop it](https://github.com/PostHog/posthog/pull/2303).
+
+While this was initially driven by our internal sentiment about the feature, looking at different metrics for the feature's performance was helpful in confirming that the feature indeed was barely being used:
+
+![Live Actions Usage](../../images/tutorials/b2b/live-actions.png)
+
+Keeping an eye on how your features are performing is key to determining if there are any that are worth dropping altogether, or that require special attention to be developed further.
+
+##### Rolling out new features by company
+
+B2B businesses can also greatly benefit from using feature flags. 
+
+> **Note:** For an in-depth walkthrough of our Feature Flags functionality, check out the [dedicated tutorial](/docs/tutorials/feature-flags).
+
+If you're unaware, feature flags are a PostHog feature that allows you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
+
+Feature flags make sense especially for B2B businesses because they allow you to roll out features by company, in order to meet the specific use-cases of your clients. For example, a company might need a feature quickly and be willing to be a Beta tester for it, 
+while another company might be more conservative and want to always be using a stable version of your product.
+
+As such, you can roll out certain features to some companies first, as well as roll them back easily if there's ever an issue.
+
+You can then see how the new feature impacted your key retention, conversion, and aggregate usage metrics, in order to determine if it should be rolled out to all users or not. 
+
+At PostHog, we rolled out our session recording feature using feature flags.
 
 ### Your Key Metrics in One Place
 
@@ -113,21 +229,6 @@ With everything configured, you will start receiving messages like these:
 ![Slack Message](../../images/slack-message.png)
 
 These messages can help keep your team up-to-date with key user events such as signups without leaving the team's chat platform.
-
-### Rolling out new features by company
-
-B2B businesses can also greatly benefit from using feature flags. 
-
-> **Note:** For an in-depth walkthrough of our Feature Flags functionality, check out the [dedicated tutorial](/docs/tutorials/feature-flags).
-
-If you're unaware, feature flags are a PostHog feature that allows you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
-
-Feature flags make sense especially for B2B businesses because they allow you to roll out features by company, in order to meet the specific use-cases of your clients. For example, a company might need a feature quickly and be willing to be a Beta tester for it, 
-while another company might be more conservative and want to always be using a stable version of your product.
-
-As such, you can roll out certain features to some companies first, as well as roll them back easily if there's ever an issue.
-
-You can then see how the new feature impacted your key retention, conversion, and aggregate usage metrics, in order to determine if it should be rolled out to all users or not. 
 
 ### Providing metrics for your own users
 
