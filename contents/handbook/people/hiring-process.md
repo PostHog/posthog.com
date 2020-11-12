@@ -24,7 +24,7 @@ Once the job ad is out there, don't be afraid to [iterate](https://posthog.com/h
 
 ## Managing candidates
 
-We manage all of our candidates through [Workable](https://posthog.workable.com/backend) - please ask Charles, James or Tim for an invite to view candidates, leave feedback and schedule meetings. Make sure you record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog. 
+We manage all of our candidates through [Workable](https://posthog.workable.com/backend) - please ask Charles, James or Tim for an invite to view candidates, leave feedback, and schedule meetings. Make sure you record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog. 
 
 Workable is a pretty intuitive platform to use, but here are a few helpful tips to get you going:
 
@@ -44,7 +44,7 @@ If you are booking meetings through Workable, you should connect your Google Cal
 
 When you book, you have the option of selecting a Google Meet or Zoom call. You should default to Zoom unless you are scheduling a meeting that you are not attending yourself, in which case use Google Meet (as Zoom will require you to attend as host). 
 
-Make sure you have set an agenda for the meeting - this is to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
+Make sure you have set an agenda for the meeting in order to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
 
 ## Our Hiring Process
 
@@ -79,7 +79,7 @@ We hire repeatedly into engineering roles, so here are a few things we look for:
 - Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
 - Has started a project from scratch, without outside help
     - Usually this manifests as having been the founder of a startup, or building an impressive side project. It can also be shown through a big project in the day job, but that requires a bit more digging.
-- Communication. Do they have written errors in their cover letter? What does their online presence look like?
+- Communication. Do they have writing errors in their cover letter? What does their online presence look like?
     - More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
 
 ### Interview 1 - Culture with James
