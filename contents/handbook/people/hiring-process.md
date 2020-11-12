@@ -32,6 +32,12 @@ Workable is a pretty intuitive platform to use, but here are a few helpful tips 
 * Link your Gmail account in Settings if you are in direct contact with candidates - this means any emails you send directly from your inbox will automatically be captured on their Workable record for everyone on the hiring team to see.
 * When emailing candidates from within Workable, you can select a Template from the drop down bar (and customise it if you want). If you find yourself writing the same email, it is worth saving as a template.
 
+If you receive an application directly emailed to you or if someone contacts us through a non-Workable channel like Slack, you can either:
+
+* Forward their email onto our [dedicated Workable email address](mailto:posthog@jobs.workablemail.com) - this is the most effective option.
+* If you think they are a strong candidate but they didn't email, introduce them directly to us via our [careers email address](mailto:careers@posthog.com).
+* As a last resort, ask them to apply via the relevant link on our [Careers page](heeps://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for very high volume roles. 
+
 ### Booking meetings
 
 If you are booking meetings through Workable, you should connect your Google Calendar and Zoom accounts under Settings first - this enables you to schedule meetings from within Workable itself. This is really helpful, as Workable will automatically populate the calendar invitation with all the useful info for interviewers like resumes so you don't need to do it manually.
