@@ -28,10 +28,12 @@ They can all be used to send custom events, update user properties, identify use
 - [Android](/docs/integrations/android-integration)
 - [Flutter](/docs/integrations/flutter-integration)
 - [React Native](/docs/integrations/react-native-integration)
+- [Segment](/docs/integrations/segment-integration)
 - [API](/docs/api/overview)
 - [Community](/docs/integrations/community)
   - [Gatsby](/docs/integrations/gatsby-integration)
   - [Elixir](/docs/integrations/elixir-integration)
+  - [Docusaurus](/docs/integrations/docusaurus-integration)
 
 ## Sending Data to Other Systems
 

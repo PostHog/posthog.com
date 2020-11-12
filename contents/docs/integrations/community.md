@@ -8,3 +8,4 @@ We love seeing PostHog integrations with other languages/frameworks in the wild.
 
 - [Gatsby](/docs/integrations/gatsby-integration)
 - [Elixir](/docs/integrations/elixir-integration)
+- [Docusaurus](/docs/integrations/docusaurus-integration)
