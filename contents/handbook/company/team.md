@@ -344,36 +344,6 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 </div>
 
-<!--- Leah Smith Bio -->
-
-<div class="team-row" markdown="1">
-
-<div class="team-left-text" markdown="1">
-
-### Leah Smith, Operations
-
-<div class="team-left-bio" markdown="1">
-
-Hello / aka Kia Ora where I am from.
-
-You’ve may never heard of where I grew up, or heard of it but dont know where it is and that's ok, because half the time we aren't put on the map.. However I am from New Zealand and moved aboard after Christmas in 2019 by myself!
-
-Let me sum up your questions/assumptions about NZ… Yes, we are next to Australia. No, we aren't the same country; we are a different country. No, we can't take a boat to Australia for the weekend. Yes, we have to take a plane as it takes a minimum of at least 3 1/2hrs to get to the nearest part in Aus. Yes [the pavlova is from NZ](https://en.wikipedia.org/wiki/Pavlova_(cake))!
-
-</div>
-
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-left-image" markdown="1">
-
-![Leah Smith portrait](../../images/team/Leah.png)
-
-</div>
-
-</div>
-
 <!--- Karl Bio -->
 
 <div class="team-row" markdown="1">
