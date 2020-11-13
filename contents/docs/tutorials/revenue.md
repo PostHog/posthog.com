@@ -1,0 +1,163 @@
+---
+title: Sales and Revenue Tracking
+sidebar: Docs
+showTitle: true
+---
+
+<br />
+
+<small class="note-block centered">_Estimated Reading Time: 12 minutes ☕☕_</small>
+
+<br />
+
+<span class="larger-image">
+
+![Revenue Tracking Banner Image](../../images/tutorials/banners/revenue.png)
+
+</span>
+
+<br />
+
+To determine the quality of your product, and if you have a good product-market fit, one of the best metrics you can use is:
+
+_Are people paying for it?_
+
+With this tutorial, we'll give you a full guide to getting started with tracking your sales and revenue through PostHog, so you can:
+
+- Determine sales KPIs
+- Understand who your paying customers are
+- Analyze your revenue and its main sources
+- Track conversion and retention across subscription plans
+
+### Pre-Requisites
+
+To follow this tutorial along, you need to:
+
+1. Have [deployed PostHog](/docs/deployment).
+1. Have started receiving events via our [snippet](/docs/integrations/js-integration), one of our [integrations](/docs/integrations), or our [API](/docs/api/overview).
+
+> **Note:** For sending events with revenue data, we recommend you integrate PostHog in your backend, given that, by nature, client-side code can be modified by the user. 
+
+### Setting up events to track revenue
+
+The first thing you need to do to start tracking revenue and sales is set up events that trigger when a relevant operation occurs.
+
+Essentially, when a sale operation completes succesfully, you want to capture a PostHog event with the useful information from that sale.
+
+For example:
+
+```python
+# Python Example Implementation
+
+# Internal function on a specific API endpoint
+def _sale_completed(user, sale_data):
+    posthog.capture(
+        user.id, # Distinct ID that identifies the user in PostHog
+        event="purchase"
+        properties={
+            "plan": sale_data["plan_name"],
+            "price": sale_data["price"],
+            "currency": sale_data["currency"]
+        },
+    )
+```
+
+In the example above, `_sale_completed` would be called after your existing logic for purchases determines a sale has been successfully completed. An event will then be sent to PostHog with the information you want to include about the sale, such as the plan, the price, the currency, and anything else you may find relevant. 
+
+> **Note:** The most important thing here is to ensure you only send the event to PostHog when you are sure a sale completed. This ensures your tracking data matches your actual revenue, preventing an event from being captured for a sale that later gets cancelled. 
+
+### Visualizing your revenue over time
+
+Having started to send events that track sales to PostHog, the first thing to do is visualize your revenue over time. This can be done in 'Trends', and might look something like this:
+
+![Revenue Over Time Chart](../../images/tutorials/revenue/revenue-over-time.png)
+
+The chart above is targeting a `$purchase` event over the time period of "Last 90 days". However, instead of tracking the total volume of the event, it is tracking a sum of the value of one of its properties, called `purchase_value`.
+
+The way you can achieve this view is by clicking on the dropdown to the right of the property name, which is set to `Total volume` by default. Once selected, this will reveal the following options:
+
+- Total volume
+- Active users
+- Sum
+- Average
+- Maximum
+- Minimum
+
+The first two options target the event itself, showing either the volume of events or the number of active users who triggered the event. 
+
+However, the last four options target numerical properties on events. When tracking revenue, this allows you to visualize:
+
+- The total revenue per time period (e.g. by hour, day, or month)
+- The largest (and smallest) purchase per time period
+- The average purchase value per time period
+
+Here are is an example dashboard combining charts that use all four of the numerical operations:
+
+![Operations Dashboard Image](../../images/tutorials/revenue/operations-dashboard.png)
+
+
+### Total Revenue In The Last Month
+
+If you want to see agreggate values for periods, you can change the time frame on line charts, or you can also display data as a table or pie chart, which combines the aggregate values of the periods and displays it as one value. 
+
+To see the total revenue of the previous month, for instance, you can set your time frame to 'Previous Month' and your chart type to 'Pie'. You can pair this with a view of this month's total month-to-date revenue, as well as compare performance on a week-by-week basis. 
+
+Here's what a dashboard with these views might look like:
+
+![TR Per Month Image](../../images/tutorials/revenue/tr-month.png)
+
+### Breaking Down Revenue By Source
+
+Another important metric is determining the contribution of each revenue source to your total revenue.
+
+You can visualize this by using our 'Break Down By' feature. 
+
+For example, for a company with the following pricing structure:
+
+| Plan Name | Price  |
+| : ------ :| : --- :|
+| Basic     | 10     |
+| Growth    | 20     |
+| Premium   | 30     |
+
+We can break down revenue by the property `plan` and see how each plan is performing:
+
+![Plan Breakdown Image](../../images/tutorials/revenue/plan-breakdown.png)
+
+If, rather than plans, your company has different revenue sources altogether, you could, for instance, substitute the `plan` property for `source`. This would allow you to have the same view, broken down by source, such as `in_app` or `desktop`.
+
+This can also be visualized as a pie, in order to see more clearly the actual _contribution_ of a plan to TR:
+
+![Pie Plan Breakdown Image](../../images/tutorials/revenue/pie-plan-breakdown.png)
+
+### Conversion Funnels
+
+When tracking revenue, there are various useful conversion metrics to explore:
+
+#### What percentage of my paid users pick 'Plan X'?
+
+One of the simplest metrics you can start with when using PostHog funnels is determining what plans are most popular.
+
+To do so, you can set up a funnel with the following two events:
+
+1. `purchase` event or equivalent
+2. `purchase` event or equivalent filtered by `plan equals X` or equivalent properties
+
+This gives you the following view:
+
+![Conversion To Basic Image](../../images/tutorials/revenue/conversion-to-basic.png)
+
+The funnel above shows us that, out of all unique users who paid for a plan (had a `$purchase` event), 33.4% pick plan `basic`.
+
+#### What percentage of my total users convert to a paid plan?
+
+
+
+#### What percentage of my free trial users converts to a paid plan?
+
+
+### Measuring Retention Per Subscription Plan
+
+
+
+
