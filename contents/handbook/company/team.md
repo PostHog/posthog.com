@@ -376,7 +376,7 @@ In personal life, you can find me in the wilderness looking for geocaches or hik
 
 </div>
 
-<!--- Contributors Section -->
+<!--- Charles Bio -->
 
 <div class="team-title" markdown="1">
 
@@ -398,17 +398,13 @@ I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [
 
 <div class="team-right-image" markdown="1">
 
-![Michael Matloka portrait](../../images/team/Charles.png)
+![Charles Cook portrait](../../images/team/Charles.png)
 
 </div>
 
 </div>
 
-<!--- Paolo D'Amico Bio -->
-
-<div class="team-row" markdown="1">
-
-<div class="team-left-text" markdown="1">
+<!--- Contributors Section -->
 
 ## Contributors
 
