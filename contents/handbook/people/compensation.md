@@ -12,7 +12,12 @@ You can use our calculator below to work out what your salary would be for a few
 
 <iframe src="/compensation" style="border: none; width:100%; height:425px"></iframe>
 
-We think the fastest possible shipping comes from a leaner, stronger team, so we try to pay top of market. We pay well, so you'll work with the best people in the world. 
+We think the fastest possible shipping comes from a leaner, stronger team, so we try to pay top of market. We pay well, so you'll work with the best people in the world.
+
+Important:
+
+* If we are missing your country, it simply means we've not hired there before so we'd need to put together some data in advance of hiring you.
+* If you're considering applying to PostHog and the salary is the only blocker, then something is wrong with our model (as we aim to pay around the top of the market) for your circumstances in most cases. Please tell us as part of the hiring process and we will review things.
 
 ### San Francisco Benchmark
 ​
