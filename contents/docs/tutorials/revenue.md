@@ -132,7 +132,7 @@ This can also be visualized as a pie, in order to see more clearly the actual _c
 
 ### Conversion Funnels
 
-When tracking revenue, there are various useful conversion metrics to explore:
+When tracking revenue, there are various useful conversion metrics to explore. Here are some examples:
 
 #### What percentage of my paid users pick 'Plan X'?
 
@@ -141,7 +141,7 @@ One of the simplest metrics you can start with when using PostHog funnels is det
 To do so, you can set up a funnel with the following two events:
 
 1. `purchase` event or equivalent
-2. `purchase` event or equivalent filtered by `plan equals X` or equivalent properties
+2. `purchase` event or equivalent filtered by `plan equals 'X'` or equivalent properties
 
 This gives you the following view:
 
@@ -149,12 +149,49 @@ This gives you the following view:
 
 The funnel above shows us that, out of all unique users who paid for a plan (had a `$purchase` event), 33.4% pick plan `basic`.
 
-#### What percentage of my total users convert to a paid plan?
+#### Measuring Conversion to Paid Plans
 
+Let's answer the following two questions with funnels:
 
+1. What percentage of my total users convert to a paid plan?
+2. What percentage of my free trial users convert to a paid plan?
 
-#### What percentage of my free trial users converts to a paid plan?
+Here's an example dashboard that answers these questions: 
 
+![Conversion Dashboard Image](../../images/tutorials/revenue/funnels-dashboard.png)
+
+##### Pageview -> Free Trial -> Purchase -> Premium Plan
+
+The top funnel in blue shows us the journey of our users from pageview to upgrading to a premium plan. It was created with the following steps:
+
+1. PostHog's `$pageview` event
+2. A `joined_free_trial` event
+3. A `$purchase` event
+4. A `$purchase` event filtered by `plan equals 'premium'`
+
+From this funnel we can establish that:
+
+- ~80% of the users that visited our website got a free trial
+- ~60% of the total users made a purchase
+- ~20% of our users purchased the premium plan
+
+##### Free Trial -> Purchase
+
+This funnel in purple on the bottom left was created from some of the same steps as the main funnel, but it is more concise. It targets:
+
+1. A `joined_free_trial` event
+1. A `$purchase` event
+
+From it, we can determine that 77% of our free trial users from the last 30 days signed up for a paid plan, which is a great conversion rate.
+
+##### Free Trial -> Growth Plan
+
+Lastly, this funnel is the most specific out of the three, giving us the conversion from the free trial to a specific plan. It was built as follows:
+
+1. A `joined_free_trial` event
+2. A `$purchase` event filtered by `plan equals 'growth'`
+
+It shows us that in the last 30 days, ~25% of our users who had a free trial signed up for a growth plan afterwards.
 
 ### Measuring Retention Per Subscription Plan
 
