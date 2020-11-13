@@ -195,6 +195,33 @@ It shows us that in the last 30 days, ~25% of our users who had a free trial sig
 
 ### Measuring Retention Per Subscription Plan
 
+Having users pay you for your product is great, however, if you have a subscription plan, it is just as important to keep a customer as it is to acquire a customer. 
 
+For this, we need to calculate retention. This can be done either on purchases as a whole, to see if your users consistently keep _a_ subscription, or filtered by plan, to see if users consistently keep the same subscription. The latter is particularly relevant for your top plans, since users can't upgrade, so you want to make sure they don't downgrade.
 
+Here's an example of a monthly retention table (recurring) for a specific plan:
 
+![Retention Growth Plan Image](../../images/tutorials/revenue/retention-growth.png)
+
+Here we can see the retention on the 'Growth' plan, which appears to be improving over time.
+
+While only 17% of the users from the previous December have continued with the subscription until now, the retention from Month 0 to Month 1 improved from 60% in December to over 90% across the past 3 months, indicating a positive trend.
+
+This retention view also pairs well with funnels, so that when you determine that your retention for a plan is poor, you can find out where those users are going. Are they cancelling their subscription? Are they downgrading? 
+
+To test for this, you could create a funnel starting with a subscription to a specific plan, and ending with a `cancel_subscription` event, or equivalent, in order to determine the percentage of users out of those that churned from a plan who churned from your platform altogether.
+
+> **Note:** If you are tracking subscriptions, make sure to send a PostHog event at every billing event, rather than simply one purchase event upfront. Following the same principle, you can set the `cancel_subscription` event when a subscription has been successfully cancelled, in order to track churn more accurately.
+
+### Correlate revenue data with usage data
+
+This tutorial provides a good foundation for you to start tracking your revenue and understanding the underlying data better.
+
+However, you can have great insights from correlating revenue data with your overall usage data, such as determining how the number of errors thrown affects your revenue, as well as how different features impact your subscription numbers and retention.
+
+Tracking revenue is just the start.
+
+### Other Relevant Tutorials
+
+- [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
+- [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
