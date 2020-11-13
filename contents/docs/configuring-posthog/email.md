@@ -17,7 +17,7 @@ We very strongly recommend using an email service to act as email server (see ex
 ## General configuration
 
 To configure a remote email server, you will need to set up the following environment variables:
-- `EMAIL_HOST`: Defaults to `localhost`. Hostname to connect to for establishing SMTP connections.
+- `EMAIL_HOST`: Defaults to `None`. Hostname to connect to for establishing SMTP connections.
 - `EMAIL_PORT`: Defaults to `25`. Port that should be used to connect to the host.
 - `EMAIL_HOST_USER`: Defaults to `null`. Credentials to connect to the host.
 - `EMAIL_HOST_PASSWORD`: Defaults to `null`. Credentials to connect to the host.
