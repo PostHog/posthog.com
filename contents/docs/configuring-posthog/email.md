@@ -9,11 +9,10 @@ PostHog's core relies on email messaging for certain functionality. For example:
 - Sending a weekly report on the number of active users.
 - Sending an invite link for new team members to join PostHog.
 
-> By default, PostHog will send email messages using your current server (`localhost`) via `Sendmail`, however it is <b>highly recommended to set up a proper email server</b> as detailed below. Failure to do this can **severly affect email deliverability** and even send some messages to spam.
 
-We very strongly recommend using an email service to act as email server (see examples below for most common providers). These providers are optimized to maximize email deliverability. 
+By default, PostHog will **not** send email messages until you enable an SMTP server. We very strongly recommend using an email service to act as email server (see examples below for most common providers). These providers are optimized to maximize email deliverability. 
 
-To prevent spam, most email providers have very complex systems in place that validate a myriad of factors before allowing an email through. Optimizing your local server for this is a bit like reinventing the wheel, so avoid this unless you have a very strong reason not to.
+To prevent spam, most email providers have very complex systems in place that validate a myriad of factors before allowing an email through. Optimizing local servers for this is a bit like reinventing the wheel, so avoid this unless you have a very strong reason not to.
 
 ## General configuration
 
