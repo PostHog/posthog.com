@@ -25,6 +25,7 @@ To configure a remote email server, you will need to set up the following enviro
 - `EMAIL_USE_SSL`: Defaults to `false`. Whether to use SSL protocol when connecting to the host.
 - `EMAIL_DEFAULT_FROM`: Defaults to `root@localhost`. Email address that will appear as the sender in emails (`From` header).
 - `EMAIL_ENABLED`: Defaults to `true`. Whether email service is enabled or not.
+- `SITE_URL`: Defaults to `http://localhost:8000`. Not unique to the email service, but it needs to be set for emails to work properly. Principal URL of your PostHog instance.
 
 Sample configuration:
 ```yaml
@@ -35,6 +36,7 @@ EMAIL_HOST_PASSWORD: password
 EMAIL_USE_TLS: false
 EMAIL_USE_SSL: true
 EMAIL_DEFAULT_FROM: no-reply@example.com
+SITE_URL: https://posthog.example.com
 ```
 
 Below you will find details on how to configure the most common email providers (not in any particular order). 
@@ -82,6 +84,7 @@ After you have set up your sending configuration, you can continue below to set 
     EMAIL_USE_TLS: true
     EMAIL_USE_SSL: false
     EMAIL_DEFAULT_FROM: hey@example.com # you can define this, just use your domain or single sender address
+    SITE_URL: https://posthog.example.com # this is the URL of your instance 
     ```
 
 1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
@@ -115,6 +118,7 @@ After you have set up your sending configuration, you can continue below to set 
     EMAIL_USE_TLS: true
     EMAIL_USE_SSL: false
     EMAIL_DEFAULT_FROM: hey@example.com # you can define this, just use your domain
+    SITE_URL: https://posthog.example.com # this is the URL of your instance
     ```
 
 1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
