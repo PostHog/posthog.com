@@ -9,14 +9,15 @@ PostHog's core relies on email messaging for certain functionality. For example:
 - Sending a weekly report on the number of active users.
 - Sending an invite link for new team members to join PostHog.
 
-> By default, PostHog will send email messages using your current server (`localhost`) via `Sendmail`, however it is <b>highly recommended to set up a proper email server</b> as detailed below. Failure to do this can <b>severly affect email deliverability</b> and even send some messages to spam.
+> By default, PostHog will send email messages using your current server (`localhost`) via `Sendmail`, however it is <b>highly recommended to set up a proper email server</b> as detailed below. Failure to do this can **severly affect email deliverability** and even send some messages to spam.
 
+We very strongly recommend using an email service to act as email server (see examples below for most common providers). These providers are optimized to maximize email deliverability. 
 
-We very strongly recommend using an email service to act as email server (see examples below for most common providers). These providers are optimized to maximize email deliverability. To prevent spam, most email providers have very complex systems in place that validate a myriad of factors before allowing an email through. Optimizing your local server for this is a bit like reinventing the wheel, avoid this unless you have a very strong reason to use your local server.
+To prevent spam, most email providers have very complex systems in place that validate a myriad of factors before allowing an email through. Optimizing your local server for this is a bit like reinventing the wheel, so avoid this unless you have a very strong reason not to.
 
 ## General configuration
 
-To configure a remote email server, you will need to set up the following environment variables:
+To configure a remote email server, you will need to set up the following [environment variables](/docs/configuring-posthog/enviroment-variables):
 - `EMAIL_HOST`: Defaults to `None`. Hostname to connect to for establishing SMTP connections.
 - `EMAIL_PORT`: Defaults to `25`. Port that should be used to connect to the host.
 - `EMAIL_HOST_USER`: Defaults to `null`. Credentials to connect to the host.
@@ -41,7 +42,6 @@ SITE_URL: https://posthog.example.com
 
 Below you will find details on how to configure the most common email providers (not in any particular order). 
 
-
 ## Twilio's Sendgrid
 With Sendgrid you have 2 different configuration options. 
 
@@ -62,10 +62,9 @@ As an alternative you can do [single sender verification](https://sendgrid.com/d
 
 1. Fill out the form with the required details, see an example below.
 
-    ![](../../images/configuring-posthog/sendgrid-2.png)
+![Configuring Sendgrid](../../images/configuring-posthog/sendgrid-2.png)
 
 1. Validate the email address by clicking on the link you will receive.
-
 
 After you have set up your sending configuration, you can continue below to set up your credentials and configure to send emails with Sendgrid.
 
@@ -73,7 +72,7 @@ After you have set up your sending configuration, you can continue below to set 
 
 1. Set a name for your API key, we recommend using "PostHog", and select the "Restricted Key" option. You will need to enable the "Mail Send" permission as detailed below. Copy the key directly to your environment configuration.
 
-    ![](../../images/configuring-posthog/sendgrid-3.png)
+![API Sendgrid](../../images/configuring-posthog/sendgrid-3.png)
 
 1. With the key you created above, you can now set your environment configuration in PostHog:
     ```yaml
@@ -91,9 +90,9 @@ After you have set up your sending configuration, you can continue below to set 
     > Please note that you will need to restart both your web server and background worker for this to work properly.
 
 
-1. As an additional optional step, we recommend turning off open & click tracking to avoid having weird-looking links and increase deliverability (there's little value in having this data). You can do so by going to [tracking settings](https://app.sendgrid.com/settings/tracking).
+1. As an additional optional step, we recommend turning off 'open & click tracking' to avoid having weird-looking links and increase deliverability (there's little value in having this data). You can do so by going to [tracking settings](https://app.sendgrid.com/settings/tracking).
 
-    ![](../../images/configuring-posthog/sendgrid-4.png)
+![Sendgrid Config](../../images/configuring-posthog/sendgrid-4.png)
 
 ## Mailgun
 1. After you have created an account, go to Sending > [Domains](https://app.mailgun.com/app/sending/domains), and click on "Add New Domain".
@@ -101,7 +100,7 @@ After you have set up your sending configuration, you can continue below to set 
 
     ![](../../images/configuring-posthog/mailgun-1.png)
 
-1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability. If not provided, we also recommend adding the following [SPF][spf] record to prevent email forgery with your domain.
+1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability. If not provided, we also recommend adding the following [SPF](spf) record to prevent email forgery with your domain.
 
     ```
     TXT @ v=spf1 include:mailgun.org ~all
@@ -122,7 +121,8 @@ After you have set up your sending configuration, you can continue below to set 
     ```
 
 1. Once you have set these environment variables, restart your server and test sending an email (e.g. request a password reset).
-    > Please note that you will need to restart both your web server and background worker for this to work properly.
+    
+> **Note:** You will need to restart both your web server and background worker for this to work properly.
 
 
 [dkim]: https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail
