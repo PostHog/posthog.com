@@ -16,7 +16,7 @@ We think the fastest possible shipping comes from a leaner, stronger team, so we
 
 ### San Francisco Benchmark
 ​
-We deliberately do not have many different job roles. We expect everyone to be able to deliver features or run projects top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile, so we add a 1.2x multiplier to get to the below numbers.
+We deliberately do not have many different job roles. We expect everyone to be able to deliver features or run projects top to bottom. We take the benchmark directly from GitLab's job families file, as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile, so we add a 1.2x multiplier to get to the below numbers.
 
 We will not adjust your pay downwards for existing team members if this ratio changes once you've already started working for PostHog. That means you can feel confident in your pay.
 
