@@ -378,7 +378,9 @@ In personal life, you can find me in the wilderness looking for geocaches or hik
 
 <!--- Charles Bio -->
 
-<div class="team-title" markdown="1">
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
 
 ### Charles Cook, Business Operations
 
