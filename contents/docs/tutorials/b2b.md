@@ -34,7 +34,7 @@ To follow this tutorial along, you need to:
 > **Pro Tip:** To make the most out of this tutorial, we recommend that you have some [actions](/docs/tutorials/actions#sorting-through-your-events-with-actions) set up, as well as have tried sending some [custom events](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors). These are explained in detail in our [Complete Guide to Event Tracking](/docs/tutorials/actions). Additionally, it is also beneficial to be familiar with [Cohorts](/docs/tutorials/cohorts).
  
 
-### Determining Product-Market Fit
+### Determining B2B Product-Market Fit
 
 Determining product-market fit is a key step to making your product successful, and, in order to do so, you need to understand if your product is being used, who is using it, and how it's being used. 
 
@@ -42,9 +42,9 @@ Determining product-market fit is a key step to making your product successful, 
 
 To determine if your product is being used, let's start in 'Trends' (under 'Insights').
 
-##### How many people use my product?
+##### How many users do I have?
 
-By default, this will give you a chart of pageviews over time, which is a reasonable start to understand if your product is being used. However, this chart might include a lot of data that doesn't tell you much about the usage of your product.
+By default, 'Trends' will give you a chart of pageviews over time, which is a reasonable start to understand if your product is being used. However, this chart might include a lot of data that doesn't tell you much about the usage of your product.
 
 This can be the case if you use PostHog to track multiple websites or applications, such as your landing page and your web app. Thus, as a first step, we can set a filter for the 'Current URL' property to focus only on our product pageviews. 
 
@@ -212,7 +212,7 @@ Dashboards can be customized as you wish - you can change the color, size, and n
 
 > **Note:** If you want to learn more about dashboards, check out our [dedicated Dashboards page](/docs/features/dashboards).
 
-### Keep track of new signups
+### Help your teams stay on top of usage
 
 If you want to stay on top of new signups (or any other specific action), you can use webhooks to send messages to platforms like Slack and Microsoft Teams.
 
