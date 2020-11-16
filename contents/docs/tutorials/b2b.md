@@ -60,6 +60,8 @@ Depending on your PostHog setup, you might need or want to narrow this view even
 
 ##### We set up a free trial for a user, have they been using the product?
 
+###### Individual Users
+
 When you onboard a user, you probably want to track their specific usage on the platform. For example, you may want to know:
 
 - Has the user has logged in after the onboarding?
@@ -99,6 +101,12 @@ And 'Paths':
 ![Person Paths Screenshot](../../images/tutorials/b2b/person-paths.png)
 
 PostHog also remembers your filters, so flipping through tabs in 'Insights' ensures your views are filtered accordingly by default.
+
+###### Teams
+
+When you onboard teams, you can make use of the same views mentioned above, but you should filter them by [cohort](/docs/tutorials/cohorts). By creating a cohort for the new team, you can track how the group uses the product as a whole, as well as determine who are the people within the team that are most engaged. 
+
+This way, you can determine how to approach specific users in a team, and who might be the "champion" of your product within the company. You can also derive insights as to what types of roles use your product the most - for example, is your retention better with people from marketing or product teams within that company?
 
 #### What clients use my product the most?
 
@@ -212,7 +220,7 @@ Dashboards can be customized as you wish - you can change the color, size, and n
 
 > **Note:** If you want to learn more about dashboards, check out our [dedicated Dashboards page](/docs/features/dashboards).
 
-### Help your teams stay on top of usage
+### Helping your teams stay on top of usage
 
 If you want to stay on top of new signups (or any other specific action), you can use webhooks to send messages to platforms like Slack and Microsoft Teams.
 
@@ -228,7 +236,11 @@ With everything configured, you will start receiving messages like these:
 
 ![Slack Message](../../images/slack-message.png)
 
-These messages can help keep your team up-to-date with key user events such as signups without leaving the team's chat platform.
+These messages can help keep your team up-to-date with key user events such as signups without leaving the team's chat platform. For example, it can be useful for:
+
+- Your sales team to spot new sign ups that could become paying users 
+- Your customer success team to monitor customers' product usage so they know who needs training
+- Your marketing team to monitor the quality of sign ups from a new campaign in real-time
 
 ### Providing metrics for your own users
 
