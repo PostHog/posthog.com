@@ -258,7 +258,7 @@
     {
         "entry": "Open Roles",
         "name": "Open Roles",
-        "items": ["careers/designer", "careers/full-stack-software-engineer"]
+        "items": ["careers/designer", "careers/full-stack-software-engineer", "careers/recruiter"]
     },
     {
         "entry": "Growth",
