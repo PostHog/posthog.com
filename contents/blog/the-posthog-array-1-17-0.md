@@ -41,13 +41,13 @@ You can read more about RudderStack on [their website](https://rudderstack.com/)
 
 ![MaxMind Plugin Page Screenshot](../images/blog/array/maxmind-plugin.png)
 
-Over the past two weeks, our [Plugins](/docs/features/plugins) feature was extensively worked on to improve the experience of using and developing plugins for PostHog. 
+Over the past two weeks, our [Plugins](/docs/plugins/overview) feature was extensively worked on to improve the experience of using and developing plugins for PostHog. 
 
 One of the main changes was the addition of plugin attachments, which allow you to upload files that are used in the configuration of the plugin, vastly expanding the realm of possibilities of what plugins can do. 
 
-As a result of this, we built the [PostHog MaxMind Plugin](https://github.com/PostHog/posthog-maxmind-plugin), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
+As a result of this, we built the [PostHog MaxMind Plugin](/docs/plugins/maxmind), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
 
-> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](https://github.com/PostHog/posthog-maxmind-plugin#posthog-maxmind-plugin).
+> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](/docs/plugins/maxmind). If you want to build your own plugin, check out our [fresh new guide](/docs/plugins/build) on how to do so.
 
 ### [Retentions & Paths Dashboard Panels](https://github.com/PostHog/posthog/pull/2201)
 
