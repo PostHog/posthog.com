@@ -1,6 +1,6 @@
 ---
 date: 2020-06-04
-title: How we raised \$3M for an open source project
+title: How we raised $3M for an open source project
 rootPage: /blog
 sidebar: Blog
 showTitle: true
