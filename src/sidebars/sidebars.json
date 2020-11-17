@@ -8,6 +8,7 @@
             "Configuring PostHog",
             "Integrations",
             "Features",
+            "Plugins",
             "API",
             "Contributing",
             "Project documentation"
@@ -48,7 +49,8 @@
             "docs/tutorials/cohorts",
             "docs/tutorials/retention",
             "docs/tutorials/spa",
-            "docs/tutorials/actions"
+            "docs/tutorials/actions",
+            "docs/tutorials/b2b"
         ]
     },
     {
@@ -96,6 +98,17 @@
             "docs/features/toolbar",
             "docs/features/trends",
             "docs/features/users"
+        ]
+    },
+    {
+        "entry": "Plugins",
+        "name": "Plugins",
+        "items": [
+            "docs/plugins/overview",
+            "docs/plugins/architecture",
+            "docs/plugins/build",
+            "docs/plugins/maxmind",
+            "docs/plugins/currency-normalization"
         ]
     },
     {
@@ -258,7 +271,7 @@
     {
         "entry": "Open Roles",
         "name": "Open Roles",
-        "items": ["careers/designer", "careers/full-stack-software-engineer"]
+        "items": ["careers/designer", "careers/full-stack-software-engineer", "careers/recruiter"]
     },
     {
         "entry": "Growth",
