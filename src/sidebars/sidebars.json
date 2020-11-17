@@ -8,6 +8,7 @@
             "Configuring PostHog",
             "Integrations",
             "Features",
+            "Plugins",
             "API",
             "Contributing",
             "Project documentation"
@@ -97,6 +98,17 @@
             "docs/features/toolbar",
             "docs/features/trends",
             "docs/features/users"
+        ]
+    },
+    {
+        "entry": "Plugins",
+        "name": "Plugins",
+        "items": [
+            "docs/plugins/overview",
+            "docs/plugins/architecture",
+            "docs/plugins/build",
+            "docs/plugins/maxmind",
+            "docs/plugins/currency-normalization"
         ]
     },
     {

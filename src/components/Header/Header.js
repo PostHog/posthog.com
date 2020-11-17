@@ -10,19 +10,16 @@ function Header({ onPostPage, isBlogArticlePage, isHomePage, isDocsPage, isHandb
     const { sidebarHide } = useValues(layoutLogic)
 
     return (
-        <div
-            className={
-                'menuHeaderWrapper ' +
-                (!isBlogArticlePage && !sidebarHide && (isDocsPage || isHandbookPage) && 'noLogo ')
-            }
-        >
-            <Link
-                id="logo"
-                to="/"
-                className={(isDocsPage || isHandbookPage) && !isBlogArticlePage ? 'display-mobile ' : ''}
-            >
-                <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
-            </Link>
+        <div className={'menuHeaderWrapper ' + (!isBlogArticlePage && !sidebarHide && onPostPage && 'noLogo ')}>
+            {!(!isBlogArticlePage && !sidebarHide && onPostPage) && (
+                <Link
+                    id="logo"
+                    to="/"
+                    className={(isDocsPage || isHandbookPage) && !isBlogArticlePage ? 'display-mobile ' : ''}
+                >
+                    <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
+                </Link>
+            )}
             <Menu isBlogArticlePage={isBlogArticlePage} isHomePage={isHomePage} onPostPage={onPostPage} />
         </div>
     )
