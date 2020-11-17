@@ -114,6 +114,8 @@ Or perhaps you're not either but think you'd still be a good fit for PostHog?
 
 In addition to the highlights listed above, we also merged a bunch of PRs improving PostHog's performance and fixing bugs:
 
+- Fix Cohorts [\#2415](https://github.com/PostHog/posthog/pull/2145) ([timgl](https://github.com/timgl))
+- Fix heroku image [\#2414](https://github.com/PostHog/posthog/pull/2414) ([timgl](https://github.com/timgl))
 - Fix cohorts not being calculated [\#2404](https://github.com/PostHog/posthog/pull/2404) ([timgl](https://github.com/timgl))
 - Fix navigation with actions & events [\#2401](https://github.com/PostHog/posthog/pull/2401) ([paolodamico](https://github.com/paolodamico))
 - Minor fix: remove repeated code [\#2399](https://github.com/PostHog/posthog/pull/2399) ([paolodamico](https://github.com/paolodamico))
