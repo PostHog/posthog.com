@@ -16,7 +16,7 @@ showTitle: true
 
 A PostHog plugin is composed of 3 main parts:
 
-### `plugin.json` file
+### plugin.json file
 
 A `plugin.json` file is structured as follows:
 
@@ -66,20 +66,20 @@ Here's an example `plugin.json` file from our ['Hello World Plugin'](https://git
 
 Most options in this file are self-explanatory, but there are a few worth exploring further:
 
-#### `main`
+#### main
 
 `main` determines the entry point for your plugin, where your `setupPlugin` and `processEvent` functions are. More on these later.
 
-#### `lib`
+#### lib
 
 Another file to be automatically included with your `main` file. 
 
-#### `type` (`config -> param -> type`)
+#### type (config -> param -> type)
 
 The type of a parameter in the config can be either `string` or `attachment`. If the type is set to `attachment`, PostHog will prompt the user for a file upload during the configuration step.
 
 
-### `setupPlugin` function
+### setupPlugin function
 
 `setupPlugin` is a function you can use to dynamically set plugin configuration based on the user's inputs at the configuration step. 
 
@@ -97,7 +97,7 @@ export function setupPlugin({ attachments, global }) {
 }
 ```
 
-### `processEvent` function
+### processEvent function
 
 `processEvent` is the juice of your plugin. 
 
@@ -133,11 +133,11 @@ As you can see, the function receives the event before it is ingested by PostHog
 
 PostHog automatically injects useful parameters in the `setupPlugin` and `processEvent` functions. These are:
 
-#### `config`
+#### config
 
 Gives you access to the PostHog config as described in `plugin.json` and configured via the PostHog interface.
 
-#### `cache`
+#### cache
 
 A way to store values that persist across `processEvent` calls. 
 
@@ -157,11 +157,11 @@ defaultValue: unknown
 
 > If you're unfamiliar with TypeScript, you can read about the `unknown` type on this [blog post by Microsoft](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
 
-### `global`
+### global
 
 Global is used for sharing functionality between `setupPlugin` and `processEvent`, since global scope does not work in the context of PostHog plugins. 
 
-### `attachments`
+### attachments
 
 Attachments gives access to files uploaded by the user for config parameters of type `attachment`. An `attachment` has the following type definition:
 
