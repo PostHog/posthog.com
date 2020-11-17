@@ -145,15 +145,17 @@ Storing values is done via `cache.set`, which takes the following parameters:
 
 ```
 key: string, 
-value: [unknown](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
+value: unknown
 ```
 
 And retrieving them uses `cache.get`, which takes:
 
 ```
 key: string, 
-defaultValue: [unknown](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
+defaultValue: unknown
 ```
+
+> If you're unfamiliar with TypeScript, you can read about the `unknown` type on this [blog post by Microsoft](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
 
 ### `global`
 
