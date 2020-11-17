@@ -85,7 +85,7 @@ The type of a parameter in the config can be either `string` or `attachment`. If
 
 You could, for example, check if an API Key inputted by the user is valid and throw an error if it isn't, prompting PostHog to ask for a new key.
 
-It can take an object as a parameter, with the fields `cache`, `global`, `attachments` and `config` being injected by PostHog's plugin server (explained below). 
+The plugins server calls this function with an object containing `cache`, `global`, `attachments` and `config` (explained below), which you can use in your logic. 
 
 Example (from the [PostHog MaxMind Plugin](https://github.com/PostHog/posthog-maxmind-plugin)):
 
@@ -139,7 +139,7 @@ Gives you access to the PostHog config as described in `plugin.json` and configu
 
 #### cache
 
-A way to store values that persist across `processEvent` calls. 
+A way to store values that persist across `processEvent` calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
 
 Storing values is done via `cache.set`, which takes the following parameters:
 
@@ -179,7 +179,7 @@ As such, accessing the contents of an uploaded file can be done with `attachment
 
 There are 3 ways to use plugins you build:
 
-1. Publish the plugin to `npm` and install it with `npm` or `yarn` (Recommended)
+1. Publish the plugin to `npm` and install it with the url from `npmjs.com` 
 1. If the plugin is built with JavaScript only (not TypeScript), you can add it via its repository URL (e.g. GitHub/GitLab)
 1. Reference the location of the plugin on your local instance (e.g. /Users/yourname/path/to/plugin)
 

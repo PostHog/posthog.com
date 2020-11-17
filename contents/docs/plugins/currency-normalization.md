@@ -31,7 +31,7 @@ yarn add posthog-currency-normalization-plugin
 > **Note:** Plugins are currently only available on [self-hosted PostHog instances](posthog.com/docs/features/plugins).
 
 1. Visit the _Plugins_ page in PostHog ('Settings' -> 'Project Plugins')
-1. Click '+ Install new plugin' and use the path to your local module installation to add the plugin
+1. Click '+ Install new plugin' and use this URL to install: `http://www.npmjs.com/package/posthog-currency-normalization-plugin` 
   - Alternatively, you can also install by using the link to the [official repository](https://github.com/PostHog/posthog-currency-normalization-plugin)
 1. [Sign up to openexchangerates.org](https://openexchangerates.org/)
 1. Generate and copy an API Key from Open Exchange Rates
