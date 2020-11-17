@@ -15,44 +15,6 @@ You'll notice PostHog feels much nicer to use and that's largely in part to all 
 
 > If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
 
-### [Plugin Attachments and GeoIP Plugin](https://github.com/PostHog/posthog/pull/2263)
-
-![MaxMind Plugin Page Screenshot](../images/blog/array/maxmind-plugin.png)
-
-Over the past two weeks, our [Plugins](/docs/features/plugins) feature was extensively worked on to improve the experience of using and developing plugins for PostHog. 
-
-One of the main changes was the addition of plugin attachments, which allow you to upload files that are used in the configuration of the plugin, vastly expanding the realm of possibilities of what plugins can do. 
-
-As a result of this, we built the [PostHog MaxMind Plugin](https://github.com/PostHog/posthog-maxmind-plugin), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
-
-> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](https://github.com/PostHog/posthog-maxmind-plugin#posthog-maxmind-plugin). 
-
-
-### [New Events & Actions View](https://github.com/PostHog/posthog/pull/2319)
-
-![Manage Events View Screenshot](../images/blog/array/manage-events.png)
-
-In an effort to make it easier to filter through your events in PostHog and tag events that you find useful, we have now consolidated 'Events' and 'Actions' into one single view, found on the left sidebar as 'Events & Actions'.
-
-On this page, you'll be able to manage everything related to your events, from inspecting their properties, to tagging them as actions. In addition, we have also added stats for your event and property volumes, so you can dig deeper into your analytics data collection, and optimize it to your needs.
-
-### [First Time Retention](https://github.com/PostHog/posthog/pull/2325)
-
-![First Time Retention Screenshot](../images/blog/array/first-time-retention.png)
-
-Following some feedback from our own Growth Engineer on what functionality we need for ourselves at PostHog, we have now extended the functionality of our 'Retention' view, adding first time retention and differentiating between 'Cohortizing' and 'Retaining' events.
-
-In short, first time retention cohortizes users based on when they did an event for the **first time**, rather than adding a user to each cohort they had the event in. Additionally, by being able to have different target events for the cohort and the retention, you are able to track the impact of 'Event A' on the retention of 'Event B', exploring hypotheses such as how users who read your documentation retain on product pageviews when compared to other users.
-
-### [Retentions & Paths Dashboard Panels](https://github.com/PostHog/posthog/pull/2201)
-
-![Retention Panel Screenshot](../images/blog/array/retention-panel.png)
-
-Dashboards are a key part of PostHog, so it's important to us that you can have an overview of as many as possible of your metrics in them.
-
-As such, the user paths graph and the retention table can now be added as panels on dashboards, making it so that every single chart, table, funnel, and graph you create in PostHog can make it to your dashboards now. 
-
-
 ### [Sentry Integration](https://github.com/PostHog/posthog/pull/1833)
 
 ![Sentry Screenshot](../images/blog/array/sentry.png)
@@ -75,6 +37,42 @@ As of last week, PostHog is now available as a destination on RudderStack, allow
 
 You can read more about RudderStack on [their website](https://rudderstack.com/), and learn how to integrate PostHog through their [comprehensive integration docs](https://docs.rudderstack.com/destinations/posthog). 
 
+### [Plugin Attachments and GeoIP Plugin](https://github.com/PostHog/posthog/pull/2263)
+
+![MaxMind Plugin Page Screenshot](../images/blog/array/maxmind-plugin.png)
+
+Over the past two weeks, our [Plugins](/docs/features/plugins) feature was extensively worked on to improve the experience of using and developing plugins for PostHog. 
+
+One of the main changes was the addition of plugin attachments, which allow you to upload files that are used in the configuration of the plugin, vastly expanding the realm of possibilities of what plugins can do. 
+
+As a result of this, we built the [PostHog MaxMind Plugin](https://github.com/PostHog/posthog-maxmind-plugin), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
+
+> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](https://github.com/PostHog/posthog-maxmind-plugin#posthog-maxmind-plugin).
+
+### [Retentions & Paths Dashboard Panels](https://github.com/PostHog/posthog/pull/2201)
+
+![Retention Panel Screenshot](../images/blog/array/retention-panel.png)
+
+Dashboards are a key part of PostHog, so it's important to us that you can have an overview of as many as possible of your metrics in them.
+
+As such, the user paths graph and the retention table can now be added as panels on dashboards, making it so that every single chart, table, funnel, and graph you create in PostHog can make it to your dashboards now. 
+
+### [First Time Retention](https://github.com/PostHog/posthog/pull/2325)
+
+![First Time Retention Screenshot](../images/blog/array/first-time-retention.png)
+
+Following some feedback from our own Growth Engineer on what functionality we need for ourselves at PostHog, we have now extended the functionality of our 'Retention' view, adding first time retention and differentiating between 'Cohortizing' and 'Retaining' events.
+
+In short, first time retention cohortizes users based on when they did an event for the **first time**, rather than adding a user to each cohort they had the event in. Additionally, by being able to have different target events for the cohort and the retention, you are able to track the impact of 'Event A' on the retention of 'Event B', exploring hypotheses such as how users who read your documentation retain on product pageviews when compared to other users.
+
+### [New Events & Actions View](https://github.com/PostHog/posthog/pull/2319)
+
+![Manage Events View Screenshot](../images/blog/array/manage-events.png)
+
+In an effort to make it easier to filter through your events in PostHog and tag events that you find useful, we have now consolidated 'Events' and 'Actions' into one single view, found on the left sidebar as 'Events & Actions'.
+
+On this page, you'll be able to manage everything related to your events, from inspecting their properties, to tagging them as actions. In addition, we have also added stats for your event and property volumes, so you can dig deeper into your analytics data collection, and optimize it to your needs.
+
 ### [Improved AWS CloudFormation Deployment](https://github.com/PostHog/deployment/pulls?q=is%3Apr+is%3Aclosed)
 
 Following a lot of great user feedback, we have now significantly improved our [AWS CloudFormation Deployment](/docs/deployment/deploy-aws).
@@ -88,6 +86,29 @@ We’re working hard to improve PostHog and would love to talk to you about your
 If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback). 
 
 Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
+
+## Favorite Issue
+
+### [EPIC: Retention](https://github.com/PostHog/posthog/issues/2228)
+
+A roadmap for various retention improvements that will significantly increase the power of PostHog's retention functionality.
+
+## PostHog News
+
+Our community continues to be as awesome as ever, providing valuable feedback and helping out with issues, pull requests, and discussions on our [Slack group](/slack).
+
+This week, we want to give a special shoutout to [Adam](https://github.com/adamb70), who got 2 PRs merged and wrote an article about integrating PostHog on their website. 
+
+Check it out: [Valuing user privacy — PostHog Analytics](https://boaler.uk/posts/valuing-user-privacy-posthog/)
+
+## Open Roles
+
+Are you a Lead Designer, Fullstack Engineer, or Recruiter? 
+
+Or perhaps you're not either but think you'd still be a good fit for PostHog? 
+
+[We want you!](https://posthog.com/careers) 
+
 
 ## Bug Fixes and Performance Improvements
 
@@ -188,26 +209,3 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Save session player speed in localstorage [\#2110](https://github.com/PostHog/posthog/pull/2110) ([macobo](https://github.com/macobo))
 - Improve weekly report testing [\#2014](https://github.com/PostHog/posthog/pull/2014) ([paolodamico](https://github.com/paolodamico))
 - Run posthog-production CI in a way testing migration continuity [\#1863](https://github.com/PostHog/posthog/pull/1863) ([Twixes](https://github.com/Twixes))
-
-## Favorite Issue
-
-### [EPIC: Retention](https://github.com/PostHog/posthog/issues/2228)
-
-A roadmap for various retention improvements that will significantly increase the power of PostHog's retention functionality.
-
-## PostHog News
-
-Our community continues to be as awesome as ever, providing valuable feedback and helping out with issues, pull requests, and discussions on our [Slack group](/slack).
-
-This week, we want to give a special shoutout to [Adam](https://github.com/adamb70), who got 2 PRs merged and wrote an article about integrating PostHog on their website. 
-
-Check it out: [Valuing user privacy — PostHog Analytics](https://boaler.uk/posts/valuing-user-privacy-posthog/)
-
-## Open Roles
-
-Are you a Lead Designer, Fullstack Engineer, or Recruiter? 
-
-Or perhaps you're not either but think you'd still be a good fit for PostHog? 
-
-[We want you!](https://posthog.com/careers) 
-
