@@ -12,7 +12,7 @@ We are **big fans** of Segment, and many in our team use it now or have used it 
 
 The PostHog integration with Segment gives you access to everything our [JS Integration](/docs/integrations/js-integration) can do, with the exception of autocapture. All features for your PostHog instance will be the same, but all Segment sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/features/toolbar). 
 
-Laslty, Segment is also more easily blocked by ad-blockers. To get around these limitations, you can install the [PostHog snippet](/docs/integrations/js-integration) alongside your Segment integration.
+Lastly, Segment is also more easily blocked by ad-blockers. To get around these limitations, you can install the [PostHog snippet](/docs/integrations/js-integration) alongside your Segment integration.
 
 ## Getting Started with Segment
 

@@ -118,7 +118,6 @@
         "name": "Integrations",
         "items": [
             "docs/integrations",
-            "docs/integrations/segment-integration",
             "docs/integrations/android-integration",
             "docs/integrations/go-integration",
             "docs/integrations/ios-integration",
@@ -128,7 +127,9 @@
             "docs/integrations/python-integration",
             "docs/integrations/flutter-integration",
             "docs/integrations/react-native-integration",
-            "docs/integrations/ruby-integration"
+            "docs/integrations/ruby-integration",
+            "docs/integrations/rudderstack-integration",
+            "docs/integrations/segment-integration"
         ],
         "child_entries": ["Community", "Sending Data Out"]
     },
