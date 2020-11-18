@@ -68,7 +68,7 @@ In the example above, `_sale_completed` would be called after your existing logi
 
 ### Visualizing your revenue over time
 
-Having started to send events that track sales to PostHog, the first thing to do is visualize your revenue over time. This can be done in 'Trends', and might look something like this:
+Having started to send events that track sales to PostHog, the first thing to do is visualize your revenue over time. This can be done in ['Trends'](/docs/features/trends), and might look something like this:
 
 ![Revenue Over Time Chart](../../images/tutorials/revenue/revenue-over-time.png)
 
@@ -91,7 +91,7 @@ However, the last four options target numerical properties on events. When track
 - The largest (and smallest) purchase per time period
 - The average purchase value per time period
 
-Here are is an example dashboard combining charts that use all four of the numerical operations:
+Here are is an example [dashboard](/docs/features/dashboards) combining charts that use all four of the numerical operations:
 
 ![Operations Dashboard Image](../../images/tutorials/revenue/operations-dashboard.png)
 
@@ -105,6 +105,8 @@ To see the total revenue of the previous month, for instance, you can set your t
 Here's what a dashboard with these views might look like:
 
 ![TR Per Month Image](../../images/tutorials/revenue/tr-month.png)
+
+> **Note:** With a view like this, you can then fire up your ad platform of choice to work out your ROIs, or better yet, [build a plugin](/docs/plugins/overview) to automate this.
 
 ### Breaking Down Revenue By Source
 
@@ -129,6 +131,8 @@ If, rather than plans, your company has different revenue sources altogether, yo
 This can also be visualized as a pie, in order to see more clearly the actual _contribution_ of a plan to TR:
 
 ![Pie Plan Breakdown Image](../../images/tutorials/revenue/pie-plan-breakdown.png)
+
+> **Note:** If you have revenue data in various currencies, or simply want to convert your values to another currency, you can use our [Currency Normalization Plugin](/docs/plugins/currency-normalization) to do so.
 
 ### Conversion Funnels
 
