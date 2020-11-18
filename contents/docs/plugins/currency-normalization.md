@@ -14,8 +14,7 @@ For example, if you have events with currency data that uses both `EUR` and `USD
 
 > **Official Repository:** [posthog-currency-normalization-plugin](https://github.com/PostHog/posthog-currency-normalization-plugin)
 
-Install by selecting this plugin from the list or copy the package URL directly:
-
+Install by selecting this plugin from the list or pasting the package URL in the plugin installation interface:
 ```
 https://www.npmjs.com/package/posthog-currency-normalization-plugin
 ```

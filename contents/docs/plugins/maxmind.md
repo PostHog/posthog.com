@@ -28,7 +28,7 @@ In addition, it also adds specific subdivision names and codes if available.
 
 > **Official Repository:** [posthog-maxmind-plugin](https://github.com/PostHog/posthog-maxmind-plugin)
 
-Install by selecting this plugin from the list or copy the package URL directly:
+Install by selecting this plugin from the list or pasting the package URL in the plugin installation interface:
 
 ```
 https://www.npmjs.com/package/posthog-maxmind-plugin
