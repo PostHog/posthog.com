@@ -37,7 +37,7 @@ function Template({
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
     return (
-        <div className={'post-page ' + (isDocsPage || isHandbookPage ? 'post-page-wrapper' : '')}>
+        <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
             <Layout
                 onPostPage={true}
                 isBlogArticlePage={isBlogArticlePage}
