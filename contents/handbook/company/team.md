@@ -344,36 +344,6 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 </div>
 
-<!--- Leah Smith Bio -->
-
-<div class="team-row" markdown="1">
-
-<div class="team-left-text" markdown="1">
-
-### Leah Smith, Operations
-
-<div class="team-left-bio" markdown="1">
-
-Hello / aka Kia Ora where I am from.
-
-You’ve may never heard of where I grew up, or heard of it but dont know where it is and that's ok, because half the time we aren't put on the map.. However I am from New Zealand and moved aboard after Christmas in 2019 by myself!
-
-Let me sum up your questions/assumptions about NZ… Yes, we are next to Australia. No, we aren't the same country; we are a different country. No, we can't take a boat to Australia for the weekend. Yes, we have to take a plane as it takes a minimum of at least 3 1/2hrs to get to the nearest part in Aus. Yes [the pavlova is from NZ](https://en.wikipedia.org/wiki/Pavlova_(cake))!
-
-</div>
-
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-left-image" markdown="1">
-
-![Leah Smith portrait](../../images/team/Leah.png)
-
-</div>
-
-</div>
-
 <!--- Karl Bio -->
 
 <div class="team-row" markdown="1">
@@ -406,9 +376,37 @@ In personal life, you can find me in the wilderness looking for geocaches or hik
 
 </div>
 
-<!--- Contributors Section -->
+<!--- Charles Bio -->
 
-<div class="team-title" markdown="1">
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Charles Cook, Business Operations
+
+<div class="team-left-bio" markdown="1">
+
+Born and raised in the United Arab Emirates, I'm half British, half Lebanese, and lived in a variety of places growing up across the Middle East, Africa and Europe. Now based in London, I live with my wife Steph and son Remy, who was serendipitously born right at the beginning of lockdown here in the UK. 
+
+I take care of all things business ops-related at Posthog, across finance, people, legal and basically anything else that doesn't involve actually building the product! Posthog is now my 3rd startup - I was previously COO at [Vitl](https://vitl.com), (personalised nutrition), and before that I was Director of Product at [ROLI](https://roli.com) (electronic music products). 
+
+I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [designer houses](https://www.themodernhouse.com/) I will never live in. I like to occasionally torment my son with my piano playing and spend more time than is probably reasonable making lists of things, à la [High Fidelity](https://en.wikipedia.org/wiki/High_Fidelity_(film)). 
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Charles Cook portrait](../../images/team/Charles.png)
+
+</div>
+
+</div>
+
+<!--- Contributors Section -->
 
 ## Contributors
 

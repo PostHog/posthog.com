@@ -12,11 +12,16 @@ You can use our calculator below to work out what your salary would be for a few
 
 <iframe src="/compensation" style="border: none; width:100%; height:425px"></iframe>
 
-We think the fastest possible shipping comes from a leaner, stronger team, so we try to pay top of market. We pay well, so you'll work with the best people in the world. 
+We think the fastest possible shipping comes from a leaner, stronger team, so we try to pay top of market. We pay well, so you'll work with the best people in the world.
+
+Important:
+
+* If we are missing your country, it simply means we've not hired there before so we'd need to put together some data in advance of hiring you.
+* If you're considering applying to PostHog and the salary is the only blocker, then something is wrong with our model (as we aim to pay around the top of the market) for your circumstances in most cases. Please tell us as part of the hiring process and we will review things.
 
 ### San Francisco Benchmark
 ​
-We deliberately do not have many different job roles. We expect everyone to be able to deliver features or run projects top to bottom. We take the benchmark directly from [GitLab's job families file](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/job_families.yml), as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile, so we add a 1.2x multiplier to get to the below numbers.
+We deliberately do not have many different job roles. We expect everyone to be able to deliver features or run projects top to bottom. We take the benchmark directly from GitLab's job families file, as they have done the hard work of combining [various data sources](https://about.gitlab.com/handbook/total-rewards/compensation/compensation-calculator/#sf-benchmark) for most of these roles. GitLab aims for about 75% percentile, so we add a 1.2x multiplier to get to the below numbers.
 
 We will not adjust your pay downwards for existing team members if this ratio changes once you've already started working for PostHog. That means you can feel confident in your pay.
 

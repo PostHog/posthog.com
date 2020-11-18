@@ -8,6 +8,7 @@
             "Configuring PostHog",
             "Integrations",
             "Features",
+            "Plugins",
             "API",
             "Contributing",
             "Project documentation"
@@ -23,7 +24,7 @@
             "docs/configuring-posthog/scaling-posthog",
             "docs/configuring-posthog/securing-posthog",
             "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/smtp-credentials",
+            "docs/configuring-posthog/email",
             "docs/configuring-posthog/deleting-data"
         ]
     },
@@ -49,6 +50,7 @@
             "docs/tutorials/retention",
             "docs/tutorials/spa",
             "docs/tutorials/actions",
+            "docs/tutorials/b2b",
             "docs/tutorials/revenue"
         ]
     },
@@ -87,7 +89,6 @@
             "docs/features/events",
             "docs/features/feature-flags",
             "docs/features/funnels",
-            "docs/features/live-actions",
             "docs/features/log-in-with-github-gitlab",
             "docs/features/multiple-projects",
             "docs/features/paths",
@@ -98,6 +99,17 @@
             "docs/features/toolbar",
             "docs/features/trends",
             "docs/features/users"
+        ]
+    },
+    {
+        "entry": "Plugins",
+        "name": "Plugins",
+        "items": [
+            "docs/plugins/overview",
+            "docs/plugins/architecture",
+            "docs/plugins/build",
+            "docs/plugins/maxmind",
+            "docs/plugins/currency-normalization"
         ]
     },
     {
@@ -172,6 +184,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-17-0",
             "blog/the-posthog-array-1-16-0",
             "blog/the-posthog-array-1-15-0",
             "blog/the-posthog-array-1-14-0",
@@ -259,7 +272,7 @@
     {
         "entry": "Open Roles",
         "name": "Open Roles",
-        "items": ["careers/designer", "careers/full-stack-software-engineer"]
+        "items": ["careers/designer", "careers/full-stack-software-engineer", "careers/recruiter"]
     },
     {
         "entry": "Growth",

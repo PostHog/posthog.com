@@ -44,10 +44,10 @@ There are lots of situations where life needs to come first. Please let it - jus
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of the way you've become a parent - childbirth, adoption or foster care. 
 
-If you have been at PostHog for over 1 year, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. After this, if you need to stagger your return to work, you can come back at 50% capacity on 50% pay afterwards. This is intended to supplement your local jurisdiction's legal requirements so if (for example) you are entitled to up to 12 months off in your country, then this will be factored into your overall parental leave package.
+If you have been at PostHog for over 1 year, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. After this, if you need to stagger your return to work, you can come back at 50% capacity on 50% pay afterwards. If you live in a country where a statutory parental leave benefit is available, you will be required to claim statutory parental leave pay (if you are eligible) and PostHog will supplement any gaps.
 
 If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements.
 
-Please communicate parental leave to you manager as soon as you feel comfortable doing so, and in any case at least 2 months before it will begin to your manager.
+Please communicate parental leave to your manager as soon as you feel comfortable doing so, and in any case at least 2 months before it will begin.
 
-We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.  
+We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.

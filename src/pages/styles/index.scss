@@ -594,7 +594,7 @@
         }
     }
 
-    @media screen and (min-width: 1080px) {
+    @media screen and (min-width: 1080px) and (max-width: 1440px) {
         .fs-feature-flags-wrapper {
             padding-top: 70px;
             background-image: url('../../images/landing-page-background.svg') !important;

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-There are many occassions when you will need to spend company money.
+There are many occasions when you will need to spend company money.
 
 PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
@@ -31,6 +31,10 @@ PostHog uses [Expensify](https://expensify.com) for receipt collection. You will
 It's a good idea to download the app so you can take photos of receipts as you make purchases.
 
 _Important:_ If you need reimbursement for a receipt, you must tag the expense as such (for example, if you have to buy something on your company card) as being reimbursable. Please do not mark things you've purchased on a company card as reimbursable (since the company has already paid for them)!
+
+If you find that your Expensify report has been approved before you had a chance to add a receipt, let Charles know and he can manually add it for you. 
+
+Accidentally bought something on the company card when it was a personal expense? Don't worry! Again, just let Charles know _as soon as you become aware_ and he will provide you with the relevant bank details for you to repay the company. 
 
 ## Making Larger Purchases
 
@@ -127,4 +131,4 @@ At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or 
 
 ## Training
 
-We have a separate section on spending money on [training](/handbook/people/training) (which covers books and conferences).
+We have a separate section on spending money on [training](/handbook/people/training) (which covers things like books and conferences).

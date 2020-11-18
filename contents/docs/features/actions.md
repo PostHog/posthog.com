@@ -6,7 +6,7 @@ showTitle: true
 
 Actions are PostHog’s way of easily cleaning up a large amount of Event data.
 
-Actions consist of one or more events that you have decided to put into a manually-labelled bucket. They're used in Funnels, Live actions and Trends.
+Actions consist of one or more events that you have decided to put into a manually-labelled bucket. They're used in PostHog's Insights, as well as in Feature Flags.
 
 For example, a typical action might be one of the following:
 

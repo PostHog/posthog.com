@@ -270,8 +270,8 @@ function IndexPage() {
                                 <img alt="enterprise-03" loading="lazy" src={enterprise03} className="imageShow" />
                                 <div className="enterpriseText">
                                     <p>
-                                        PostHog can be deployed in your cloud, for painless adoption and onboarding,
-                                        with full underlying data access.
+                                        PostHog's team can offer instance monitoring, updates and help with supporting
+                                        integrations.
                                     </p>
                                 </div>
                             </div>

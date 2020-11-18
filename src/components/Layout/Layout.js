@@ -85,7 +85,7 @@ const Layout = ({
                                 </AntdLayout.Header>
 
                                 {onPostPage &&
-                                    (isDocsPage || isHandbookPage ? (
+                                    (!isBlogArticlePage ? (
                                         <div className="post-page-sub-header">
                                             <div className="post-page-sub-header-inner">
                                                 <span style={{ paddingRight: isDocsPage ? 5 : 30 }}>
