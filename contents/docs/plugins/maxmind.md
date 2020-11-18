@@ -28,24 +28,16 @@ In addition, it also adds specific subdivision names and codes if available.
 
 > **Official Repository:** [posthog-maxmind-plugin](https://github.com/PostHog/posthog-maxmind-plugin)
 
-### npm
+Install by selecting this plugin from the list or copy the package URL directly:
 
-```shell
-npm i posthog-maxmind-plugin
 ```
-
-### yarn
-
-```shell
-yarn add posthog-maxmind-plugin
+https://www.npmjs.com/package/posthog-maxmind-plugin
 ```
 
 ## PostHog Configuration
 
 > **Note:** Plugins are currently only available on [self-hosted PostHog instances](posthog.com/docs/features/plugins).
 
-1. Visit the _Plugins_ page in PostHog ('Settings' -> 'Project Plugins')
-1. Click '+ Install new plugin' and use this URL to install: `http://www.npmjs.com/package/posthog-maxmind-plugin` 
 1. [Sign up to MaxMind](https://dev.maxmind.com/geoip/geoip2/geolite2/)
 1. Download the GeoLite2 City (or the paid GeoIP City) database
 1. Upload the `.mmdb` file in the archive via the plugin interface
