@@ -12,27 +12,17 @@ For example, if you have events with currency data that uses both `EUR` and `USD
 
 ## Installation
 
-> **Official Repository:** [posthog-maxmind-plugin](https://github.com/PostHog/posthog-maxmind-plugin)
+> **Official Repository:** [posthog-currency-normalization-plugin](https://github.com/PostHog/posthog-currency-normalization-plugin)
 
-### npm
-
-```shell
-npm i posthog-currency-normalization-plugin
+Install by selecting this plugin from the list or pasting the package URL in the plugin installation interface:
 ```
-
-### yarn
-
-```shell
-yarn add posthog-currency-normalization-plugin
+https://www.npmjs.com/package/posthog-currency-normalization-plugin
 ```
 
 ## PostHog Configuration
 
 > **Note:** Plugins are currently only available on [self-hosted PostHog instances](posthog.com/docs/features/plugins).
 
-1. Visit the _Plugins_ page in PostHog ('Settings' -> 'Project Plugins')
-1. Click '+ Install new plugin' and use this URL to install: `http://www.npmjs.com/package/posthog-currency-normalization-plugin` 
-  - Alternatively, you can also install by using the link to the [official repository](https://github.com/PostHog/posthog-currency-normalization-plugin)
 1. [Sign up to openexchangerates.org](https://openexchangerates.org/)
 1. Generate and copy an API Key from Open Exchange Rates
 1. Add the API Key in the configuration step on the plugins interface
