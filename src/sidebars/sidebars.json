@@ -76,7 +76,7 @@
     {
         "entry": "Project documentation",
         "name": "Project documentation",
-        "items": ["docs/application-settings", "docs/data-model"]
+        "items": ["docs/application-settings", "docs/data-model", "docs/navigation"]
     },
     {
         "entry": "Features",
