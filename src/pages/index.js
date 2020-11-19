@@ -49,7 +49,7 @@ function IndexPage() {
                                 <div className="topPageCol1">
                                     <div className="joinUsersText">
                                         <p>
-                                            Join 2,400 companies <br className="hiddenBreak" /> using PostHog.
+                                            Join 2,700 companies <br className="hiddenBreak" /> using PostHog.
                                         </p>
                                         <br />
                                     </div>
