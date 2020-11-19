@@ -185,6 +185,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/rudderstack-integration",
             "blog/the-posthog-array-1-17-0",
             "blog/the-posthog-array-1-16-0",
             "blog/the-posthog-array-1-15-0",

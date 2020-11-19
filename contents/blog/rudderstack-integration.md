@@ -1,5 +1,5 @@
 ---
-date: 2020-07-22
+date: 2020-11-19
 title: PostHog is Now Available on RudderStack!
 rootPage: /blog
 sidebar: Blog
@@ -19,9 +19,19 @@ RudderStack is an open-source, warehouse-first, customer data platform for devel
 
 The idea is that you can collect data from various sources and send it to one of their 70+ destinations with a single integration, making it easy to aggregate data from all services you use for data collection, as well as get the aggregated data into a data warehouse or sent to all the services where you need it to be. 
 
-For example, you might collect analytics data from both your app and website, and then have the relevant events sent to PostHog, Slack, Salesforce, Snowflake, and S3. This way, all your teams have access to the data in the platform where they need it, you make sure you have all data stored in a warehouse, and do it all with only one integration as the intermediary.
+For example, **with a single SDK**, you can collect usage data from both your apps and websites and then send them over to:
 
-In addition, just like PostHog, RudderStack can also be self-hosted, meaning you can deploy it in your own infrastructure, without having to send your data to a third-party. This makes PostHog and RudderStack a powerful combo, forming the foundation of a fully open-source and self-hosted enterprise analytics stack. 
+- PostHog for product analytics
+- Your data warehouse for bulk storage and data analytics
+- Slack to trigger a message to your teams that a user performed an event (e.g. signed up)
+- Salesforce to give your sales team access to relevant user data for their outreach
+- Customer.io to trigger an email or push notification to a user
+
+This is powerful to ensure that all your teams have access to the data they need, where they need it, and in the right format for their specific use-case. Beyond just relaying data from sources to destinations, RudderStack can also do powerful things like [transformations](https://docs.rudderstack.com/how-to-guides/adding-a-new-user-transformation-in-rudderstack), which let you "transform" your events by enriching, changing, or cleaning their data. As such, you have full control over what data goes where, and how that data is structured when it reaches the specified destination. 
+
+And, once again, you can control all of this from a single dashboard, after integrating their SDK. 
+
+Furthermore, just like PostHog, RudderStack can also be self-hosted, meaning you can deploy it in your own infrastructure, without having to send your data to a third-party. This makes PostHog and RudderStack a powerful combo, forming the foundation of a fully open-source and self-hosted enterprise analytics stack. 
 
 ![RudderStack Conenction to Destination](../images/blog/rs/rs-connection.gif)
 
