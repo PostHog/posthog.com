@@ -6,7 +6,9 @@ showTitle: true
 
 As a remote organisation, doing a great job of welcoming a new member of the PostHog team is really important. You may find that you need to invest extra time and effort into onboarding someone than you might at a company where everyone is physically located together. 
 
-We have members working all around the world, so their onboarding process may look a little different depending on where they are based and what type of contract they are on. If you have any questions, ask Charles, James or Tim. 
+We have members working all around the world, so their onboarding process may look a little different depending on where they are based and what type of contract they are on. We either bring on new people as an employee or contractor (with equivalent terms and benefits as an employee) dependent on the jurisdiction.
+
+If you have any questions on any of this stuff, ask Charles, James or Tim. 
 
 ## Upon Offer Acceptance
 
