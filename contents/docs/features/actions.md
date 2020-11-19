@@ -24,9 +24,7 @@ If you'd like to watch a video about our Actions feature, check out our demo vid
 
 ## Accessing Actions
 
-To access the Actions page, go to the 'Events' section on the left-hand navigation sidebar which will open up a submenu including 'Actions':
-
-![Accessing Actions](../../images/features/actions/actions-page.png)
+To access the Actions page, go to the 'Events & Actions' section on the left-hand navigation sidebar.
 <br>
 
 ## Creating Frontend Actions
