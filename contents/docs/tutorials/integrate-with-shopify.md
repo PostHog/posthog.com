@@ -3,11 +3,6 @@ title: Integrate PostHog with Shopify
 sidebar: Docs
 showTitle: true
 ---
-<br />
-
-<small class="note-block centered">_Estimated Reading Time: 1 minutes_</small>
-
-<br />
 
 ## Objective
 
