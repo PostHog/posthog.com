@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
+> For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).
 
 PostHog provides you with an API endpoint to create and update your [feature flags](/docs/features/feature-flags). This section refers to that endpoint specifically. 
 

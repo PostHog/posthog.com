@@ -4,9 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-> This is a community contributed plugin
+> This is a community integration that is not maintained by the PostHog core team. Thanks to [Ritesh Kadmawala](https://github.com/kgritesh/gatsby-plugin-posthog-analytics/) for building it!
 
-Thanks to [Ritesh Kadmawala](https://github.com/kgritesh/gatsby-plugin-posthog-analytics/)!
 
 ## Install
 

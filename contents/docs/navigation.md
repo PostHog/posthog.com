@@ -25,8 +25,7 @@ The main navigation bar contains the following elements (nested elements are fea
 │   └── Retention
 │   └── User Paths
 │   └── Sessions
-├── Events
-├── Actions
+├── Events & Actions
 ├── Sessions
 ├── Persons
 ├── Cohorts

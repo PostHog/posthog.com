@@ -251,16 +251,17 @@ Some of the most relevant options are:
 
 <span class="table-borders">
 
-| Attribute | Type | Default | Description |
-| --- | --- | --- | ------------------------- | ------------------------------------------------------- |
-| `api_host` | String | `https://app.posthog.com` | URL of your PostHog instance. |
-| `loaded` | Function | `function () {}` (no-op) | A function to be called once the PostHog scripts have loaded successfully. |
-| `autocapture` | Boolean | `true` | Determines if PostHog should [autocapture](#autocapture) events. |
-| `capture_pageview` | Boolean | `true` | Determines if PostHog should automatically capture pageview events. |
-| `disable_session_recording` | Boolean | `false` | Determines if users should be opted out of PostHog session recording if enabled in the app. |
-| `opt_out_capturing_by_default` | Boolean | `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
-| `property_blacklist` | Array | `[]` | A list of properties that should never be sent with `capture` calls. |
-| `xhr_headers` | Object | `{}` | Any additional headers you wish to pass with the XHR requests to the PostHog API. |
+| Attribute                                                                         | Description                                                                                                                    |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `api_host`<br/><br/>**Type:** String<br/>**Default:** `https://app.posthog.com`   | URL of your PostHog instance.                                                                                                  |
+| `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`            | A function to be called once the PostHog scripts have loaded successfully.                                                     |
+| `autocapture`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                  | Determines if PostHog should [autocapture](#autocapture) events.                                                               |
+| `capture_pageview`<br/><br/>**Type:** Boolean<br/>**Default:** `true`             | Determines if PostHog should automatically capture pageview events.                                                            |
+| `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `true`    | Determines if users should be opted out of session recording.                                                                  |
+| `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
+| `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`               | A list of properties that should never be sent with `capture` calls.                                                           |
+| `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                     | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
+
 
 <br />
 
