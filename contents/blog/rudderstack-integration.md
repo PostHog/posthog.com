@@ -27,9 +27,7 @@ For example, **with a single SDK**, you can collect usage data from both your ap
 - Salesforce to give your sales team access to relevant user data for their outreach
 - Customer.io to trigger an email or push notification to a user
 
-This is powerful to ensure that all your teams have access to the data they need, where they need it, and in the right format for their specific use-case. Beyond just relaying data from sources to destinations, RudderStack can also do powerful things like [transformations](https://docs.rudderstack.com/how-to-guides/adding-a-new-user-transformation-in-rudderstack), which let you "transform" your events by enriching, changing, or cleaning their data. As such, you have full control over what data goes where, and how that data is structured when it reaches the specified destination. 
-
-And, once again, you can control all of this from a single dashboard, after integrating their SDK. 
+This is powerful because it ensures all your teams have access to the data they need, where they need it, and in the right format for their specific use-case. Beyond just relaying data from sources to destinations, RudderStack can also do powerful things like [transformations](https://docs.rudderstack.com/how-to-guides/adding-a-new-user-transformation-in-rudderstack), which let you "transform" your events by enriching, changing, or cleaning their data. As such, you have full control over what data goes where, and how that data is structured when it reaches the specified destination. 
 
 Furthermore, just like PostHog, RudderStack can also be self-hosted, meaning you can deploy it in your own infrastructure, without having to send your data to a third-party. This makes PostHog and RudderStack a powerful combo, forming the foundation of a fully open-source and self-hosted enterprise analytics stack. 
 
@@ -39,3 +37,4 @@ To use this integration, check out our [dedicated docs page](/docs/integrations/
 
 Also, if you're already using RudderStack, you can connect to PostHog without having to move away from your current analytics stack, by simply adding us as a new destination in your pipeline. This is a great way to get started trying out PostHog without having to immediately commit to the change.
 
+> **Note:** The PostHog integration on RudderStack does not give you access to many of PostHog's features, such as heatmaps, autocapture, and session recording. To access these, you need to include the [PostHog snippet](/docs/deployment/snippet-installation) in your website.
