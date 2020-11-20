@@ -8,6 +8,10 @@ showTitle: true
 
 Integrating PostHog with your Shopify store.
 
+## Why is this useful?
+
+Tracking how users use your [Shopify](https://www.shopify.com/) store can help you improve the user experience and increase conversion rates on your e-shop.  
+
 ## Pre-Requisites
 
 To follow this tutorial along, you should:

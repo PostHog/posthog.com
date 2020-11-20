@@ -8,7 +8,9 @@ showTitle: true
 
 Integrating PostHog with your Metabase instance.
 
-[Metabase](https://www.metabase.com/) is an open-source data explorer and Business Intelligence tool. 
+## Why is this useful?
+
+[Metabase](https://www.metabase.com/) is an open-source data explorer and Business Intelligence tool that lets you derive insights and build charts from your data with ease.
 
 ## Pre-Requisites
 
@@ -18,9 +20,9 @@ To follow this tutorial along, you should:
 
 **Important Note** 
 
-Integrating with Metabase currently works only for self-hosted PostHog instances. Additionally, since Metabase does not support ClickHouse, you are only able to integrate it with your PostHog database if your PostHog instance uses PostgreSQL for event data (i.e. you're not using our Enterprise Edition). 
+Integrating with Metabase currently works only for self-hosted PostHog instances. Additionally, since Metabase does not support ClickHouse, you are only able to integrate it _directly_ with your PostHog database if your PostHog instance uses PostgreSQL for event data (i.e. you're not using our Enterprise Edition). 
 
-If you're on EE, we still use Postgres for certain types of data which you could explore with Metabase, but you'll have no access to event data, for example.
+If you're on EE, we still use Postgres for certain types of data which you could explore with Metabase, but you'll have no access to event data, for example. If using Metabase is essential to you, you could export the ClickHouse data to another Metabase-supported database. 
 
 ## Step-By-Step Instructions
 
@@ -65,13 +67,11 @@ If you're on EE, we still use Postgres for certain types of data which you could
     <br />![Metabase Dashboard](../../images/tutorials/metabase/dashboard.png)<br />
 
 
-
-
 #### For PostHog Docker Deployments
     
 If you deployed PostHog with Docker, some additional setup is necessary to make the connection with Metabase work. 
 
-With our standard Docker deployment, we do not expose a port to connect to the database from outside the Docker container. As such, you need to edit your `docker-compose.yml` file to do this. 
+For security reasons, with our standard Docker deployment, we do not expose a port to connect to the database from outside the Docker container. As such, you need to edit your `docker-compose.yml` file to do this. 
 
 ##### db
 
@@ -87,7 +87,7 @@ services:
         image: postgres:alpine
         volumes:
             - postgres-data:/var/lib/postgresql/data
-        ports:
+        ports: # Add port mapping here
             - 5432:5432
 # ...
 ```
