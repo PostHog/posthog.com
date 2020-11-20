@@ -47,15 +47,10 @@ export const DocsPageSurvey = () => {
                     </div>
                 </Row>
             </Col>
-            <form
-                id="helpful-page-survey"
-                name="helpful-page-survey"
-                style={{ display: 'none' }}
-                method="POST"
-                data-netlify="true"
-            >
-                <input type="text" name="page-url" value="/docs" />
-                <input type="text" name="was-page-helpful" value="false" />
+            <form id="helpful-page-survey" name="helpful-page-survey" method="POST" data-netlify="true">
+                <input type="hidden" name="helpful-page-survey" value="contact" />
+                <input type="hidden" name="page-url" value="/docs" />
+                <input type="hidden" name="was-page-helpful" value="false" />
             </form>
         </>
     )
