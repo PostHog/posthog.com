@@ -52,7 +52,13 @@
             "docs/tutorials/actions",
             "docs/tutorials/b2b",
             "docs/tutorials/revenue"
-        ]
+        ],
+        "child_entries": ["1 Minute Tutorials"]
+    },
+    {
+        "entry": "1 Minute Tutorials",
+        "name": "1 Minute Tutorials",
+        "items": ["docs/tutorials/integrate-with-shopify", "docs/tutorials/integrate-with-metabase"]
     },
     {
         "entry": "Deployment",
