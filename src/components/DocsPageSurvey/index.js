@@ -4,18 +4,13 @@ import { Col, Row, Button } from 'antd'
 export const DocsPageSurvey = () => {
     const [submittedResponse, setSubmittedResponse] = useState(false)
 
-    const submitResponse = (wasHelpful: boolean) => {
-        const surveyForm = document.getElementById('helpful-page-survey')
-        let formData = new FormData(surveyForm as HTMLFormElement)
-        formData.set('wasPageHelpful', String(wasHelpful))
-        formData.set('page-url', window.location.pathname)
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData as any).toString(),
-        })
-            .then(() => setSubmittedResponse(true))
-            .catch(() => setSubmittedResponse(true))
+    const submitResponse = (wasHelpful) => {
+        if (window.posthog) {
+            window.posthog.capture('docs_page_review', {
+                wasHelpful: wasHelpful,
+            })
+        }
+        setSubmittedResponse(true)
     }
 
     return (
@@ -47,11 +42,6 @@ export const DocsPageSurvey = () => {
                     </div>
                 </Row>
             </Col>
-            <form id="helpful-page-survey" name="helpful-page-survey" method="POST" data-netlify="true">
-                <input type="hidden" name="helpful-page-survey" value="contact" />
-                <input type="hidden" name="page-url" value="/docs" />
-                <input type="hidden" name="was-page-helpful" value="false" />
-            </form>
         </>
     )
 }
