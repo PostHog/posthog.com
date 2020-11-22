@@ -49,7 +49,7 @@ git clone https://github.com/PostHog/posthog
     GRANT ALL PRIVILEGES ON DATABASE posthog, posthog_e2e_test TO posthog;
     ```
 6. Navigate into the correct folder (project's root directory): `cd posthog`
-7. Run `python3 -m venv env` (creates virtual environment in current direction called 'env')
+7. Run `python3 -m venv env` (creates virtual environment in current directory called 'env')
 8. Run `source env/bin/activate` (activates the virtual environment)
 9. Run `pip install -r requirements.txt`.
 
