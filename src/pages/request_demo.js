@@ -7,7 +7,28 @@ const layout = {
     wrapperCol: { span: 6 },
 }
 
-const RequestDemoForm = ({ title, subtitle, onSubmit }) => {
+const RequestDemoForm = ({ title, subtitle }) => {
+    const handleFormSubmission = (e) => {
+        e.preventDefault()
+        const formElement = e.target
+        const inputs = formElement.getElementsByTagName('input')
+        let valuesMap = {}
+        for (let input of inputs) {
+            if (input.id) valuesMap[input.id] = input.value
+        }
+        if (window.posthog) {
+            window.posthog.capture('demo_requested', { ...valuesMap })
+        }
+        let formData = new FormData(formElement)
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString(),
+        })
+            .then(() => console.log('Form successfully submitted'))
+            .catch((error) => alert(error))
+    }
+
     return [
         <Col className="header-row" align="middle" key="startup-form-1">
             <h2 id="apply_section">{title}</h2>
@@ -23,9 +44,9 @@ const RequestDemoForm = ({ title, subtitle, onSubmit }) => {
                 name="demo-request"
                 id="demo-request"
                 method="POST"
-                onSubmit={onSubmit}
                 style={{ maxWidth: '80vw' }}
                 data-netlify="true"
+                onSubmit={(e) => handleFormSubmission(e)}
             >
                 <input type="hidden" name="demo-request" value="demo-request" />
                 <Form.Item
@@ -68,7 +89,6 @@ const RequestDemoPage = () => {
             <RequestDemoForm
                 title="Request Demo"
                 subtitle="Request a demo to get on a call with one of us! We will do a quick product tour to help you get an in deptch review of the product. Afterwards, we'll anwer any questions you might have and help you get started!"
-                startup={false}
             />
         </Layout>
     )
