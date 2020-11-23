@@ -6,27 +6,28 @@ showTitle: true
 
 <br>
 
-> PostHog follows the philosophy of product-led growth.
+> PostHog aims to increase the number of successful products in the world.
 <br>
 
 ## Where will we compete?
 
 PostHog helps teams build better software.
 
-We believe the best software teams have everyone understanding user behavior, not just product managers.
+We believe the best software teams have everyone understanding user behavior, not just product managers (PMs).
 
-We can build something 10x better than our competition by appealing to multiple teams rather than just focusing on PMs. However, we need a small foothold first.
+We can build something 10x better than our competition by appealing to multiple teams rather than just focusing on PMs.
 
 There are tens of millions more engineers in the world than product managers, often making product decisions every day. This is where we're starting. After all, they're the ones building the software, and we've seen that these are the types of users we retain best.
 
 ## How will we get there
+
+Today, there are many siloes in the market for products that help understand and act on user behavior. There are separate tools for "graph" type analytics, session recording, feature flags, and so on. PostHog provides these in one platform - the sum is greater than the parts.
 
 We need to:
 
 * Build a large open source community around a great open source product
 * Build an enterprise source-available product that adds extra features needed by enterprises only
 * Make it possible for an individual user to convert from our open source to our enterprise version easily
-
 
 Why do these three things matter?
 
@@ -62,20 +63,21 @@ We have:
   * Focused on (i) technical open source users and (ii) enterprise software teams
   * Bottleneck: Both of the above require a UX developer to start, we're hiring currently
 * We need to speed up our community growth
+  * Bottleneck: we have released plugins to speed up our breadth of use cases and therefore the size of our funnel and word of mouth growth. We need to get this out of pre-beta stage.
   * Bottleneck: we have no one dedicated just to new user acquisition into the community. 
   * **Question**: Should we hire someone focused on this and give them a budget?
 
 ### Enterprise product
 
-* We need greater scalability
-  * Bottleneck: Clickhouse needs to be fully tested
-* Monitoring the deployment so large customers don't experience downtime
+* We continuously need this in production with the next order of magnitude usage user.
+* We need to build monitoring and a standard way of managing the instance for our customers.
   * Bottleneck: We need to scope how this would work, and to validate those ideas with customer feedback. Maybe it's just a process to start with.
+* We need a stronger opinion on best practise for how to integrate with the rest of the typical enterprise stack.
 * We need to support enterprise customers ongoingly
   * **Question:** Are we learning enough about enterprise customer product needs? Should we hire a CS person who can help us do this and support very early deployments? Should we bring them in so they're ready before the first implementation?
 
 ### Conversion from community to enterprise
 
 * We need to build an upgrade flow to do this
-  * Bottleneck: Clickhouse needs to be fully tested
-* **Question:** We currently have identified that we need: (i) the Clickhouse integration to be done, so we can calculate retention easily (ii) a process for experimentation carried out in practice (iii) a clear view of our funnel as it leads to the behaviors that correlate with retention created. Anything else? Should we increase our growth team size so we can do this faster whilst working on the activation / referral flows at the same time?
+  * Bottleneck: complete a retention deep dive so we optimize the flow towards an outcome that optimizes for retention.
+* **Question:** We currently have identified that we need: (i) a process for experimentation carried out in practice (ii) a clear view of our funnel as it leads to the behaviors that correlate with retention created. Do we hire a growth engineer to speed up here?

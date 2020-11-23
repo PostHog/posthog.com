@@ -7,6 +7,7 @@ import { DocsFooter } from '../components/Footer/DocsFooter'
 import SEO from '../components/seo'
 import { layoutLogic } from '../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
+import { DocsPageSurvey } from '../components/DocsPageSurvey'
 
 function addIndex(url) {
     const indexUrls = ['/docs', '/handbook']
@@ -61,6 +62,7 @@ function Template({
                         )}
                         <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
                     </div>
+                    {isDocsPage && <DocsPageSurvey />}
                     {(isDocsPage || isHandbookPage) && (
                         <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
                     )}

@@ -76,6 +76,7 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> (Contractor only) End their contract on Deel <br />
 <input type="checkbox"/> (UK employee only) Email DRG with their last day and to remove them from the pension scheme <br />
 <input type="checkbox"/> (US employee only) Remove the team member from Gusto <br />
+<input type="checkbox"/> (US employee only) Get the team member to sign their termination certificate <br />
 <input type="checkbox"/> Put on an out of office and then deactivate the GSuite account for the team member <br />
 <input type="checkbox"/> Make any outstanding notice payments (if applicable) <br />
 <input type="checkbox"/> Mark the employee has departed in Pulley <br />

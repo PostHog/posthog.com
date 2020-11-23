@@ -49,12 +49,12 @@ git clone https://github.com/PostHog/posthog
     GRANT ALL PRIVILEGES ON DATABASE posthog, posthog_e2e_test TO posthog;
     ```
 6. Navigate into the correct folder (project's root directory): `cd posthog`
-7. Run `python3 -m venv env` (creates virtual environment in current direction called 'env')
+7. Run `python3 -m venv env` (creates virtual environment in current directory called 'env')
 8. Run `source env/bin/activate` (activates the virtual environment)
 9. Run `pip install -r requirements.txt`.
 
     If you have problems with this step (TLS/SSL error), then run `~ brew update && brew upgrade` followed by `python3 -m pip install --upgrade pip`, then retry the requirements.txt install.
-10. Install dev requirements: `pip install -r requirements/dev.txt`
+10. Install dev requirements: `pip install -r requirements-dev.txt`
 11. Run migrations: `DEBUG=1 python3 manage.py migrate`
 12. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
