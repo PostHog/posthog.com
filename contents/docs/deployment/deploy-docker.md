@@ -85,15 +85,21 @@ docker-compose restart -d
 
 ### Local Installation
 
-If you're running locally:
+<blockquote class='warning-note'>
 
-- Make sure to **add** `DEBUG=1` as an environment variable - this will prevent an infinite loop of SSL redirects.
-- PostHog assumes you want to use SSL and will redirect you to `https://...`. To avoid this, set `DISABLE_SECURE_SSL_REDIRECT=1`
+**Important:** If you do not have a TLS/SSL certificate set up for your domain/IP, accessing the address of your PostHog instance _will not work_. To get around this, you need to edit the `docker-compose.yml` file manually and add the environment variables   `DISABLE_SECURE_SSL_REDIRECT: 'true'` and `SECURE_COOKIES: 'false'` under `services > web > environment`. This is a manual process because PostHog should not be run without a certificate (i.e. over HTTP). 
 
-- With these two recommendations your new `docker-compose` statement will look like this:
+
+Doing this and restarting the service will allow you to access PostHog over HTTP, but might require configuring browser settings to allow HTTP traffic depending on what browser you use. 
+
+</blockquote>
+
+### Local Installation
+
+If you're running locally, use our `docker-compose.dev.yml` file:
 
 ```bash
-docker-compose up -d -e DEBUG=1 DISABLE_SECURE_SSL_REDIRECT=1
+docker-compose -f docker-compose.dev.yml up
 ```
 
 ### External Postgres Database
@@ -117,7 +123,7 @@ docker run -t -i --rm --publish 8000:8000 -v postgres:/var/lib/postgresql postho
 
 Upgrading PostHog with Docker depends on how you've deployed with Docker.
 
-**Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/configuring-posthog/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
+> **Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/configuring-posthog/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
 
 - For docker-compose, run `docker-compose pull web`
 

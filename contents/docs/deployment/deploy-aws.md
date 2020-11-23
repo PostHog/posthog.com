@@ -18,17 +18,19 @@ Jump straight in:
 
 [![Launch AWS Stack](../../../src/images/deploy-button-aws.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Posthog&templateURL=https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml)
 
-1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors or setup SMTP configs as described below.
+1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors, get alarms, or setup SMTP configs as described below.
 
 1. Review the rest of the Configuration Wizard pages
 
-1. (Optional) On the Review stack page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
+1. (Optional) On the 'Review Stack' page you can click **estimate cost** to get an estimate of how much your specific config will cost per month. The default configs cost about ~\$27 USD per month
 
 1. If you are ready, click **Create Stack**!
 
 1. Once deployment completes look under **Outputs** for `ExternalUrl`
 
-1. Review all parameters in the config and ensure everything is nominal
+1. Review all parameters in the config and ensure everything is nominal.
+
+1. If you filled out Alarm email, then check your email to confirm SNS subscription. 
 
 ### Adding TLS/SSL support
 
@@ -44,7 +46,7 @@ Jump straight in:
 
 ## Updating AWS Fargate
 
-To update follow these steps:
+Do this to get the latest and greatest version of posthog. Follow these steps:
 
 1. Open up your AWS console to [ECS management page](https://console.aws.amazon.com/ecs/)
 
@@ -69,6 +71,17 @@ To update follow these steps:
 You can find more details on Amazon's Docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html).
 <br>
 
+## Updating Cloudformation template
+
+Do this to update parameters: to scale different services up/down, update who gets alarms, STMP or more.
+
+1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
+
+2. Find your stack, select it, click update
+
+3. Select replace current template and use this url: `https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml`
+
+4. Review parameters and other pages and update stack.
 
 ## AWS Marketplace Quick Install
 
@@ -156,6 +169,14 @@ docker-compose up -d
 ```
 1. You're good to go! PostHog should be accessible on the domain you set up or the IP of your instance.
 
+<blockquote class='warning-note'>
+
+**Important:** If you do not have a TLS/SSL certificate set up for your domain/IP, accessing the address of your PostHog instance _will not work_. To get around this, you need to edit the `docker-compose.yml` file manually and add the environment variables   `DISABLE_SECURE_SSL_REDIRECT: 'true'` and `SECURE_COOKIES: 'false'` under `services > web > environment`. This is a manual process because PostHog should not be run without a certificate (i.e. over HTTP). 
+
+Doing this and restarting the service will allow you to access PostHog over HTTP, but might require configuring browser settings to allow HTTP traffic depending on what browser you use. 
+
+</blockquote>
+
 <br>
 
 ## Important Points
@@ -198,8 +219,8 @@ See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) abo
 ## Useful Tutorials
 <br>
 
-#### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
+###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 
-#### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
+###### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 
-#### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
+###### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)

@@ -9,7 +9,7 @@ hideAnchor: true
 
 Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.
 
-For those who've not met us before, PostHog provide open source product analytics. We went through the YCombinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised $3.025M in funding really quickly, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
+For those who've not met us before, PostHog provide open source product analytics. We went through the YCombinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised \$3.025M in funding really quickly, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
 
 # Why raise money at all
 
@@ -33,7 +33,7 @@ VC hype begets a bigger team, begets results (hopefully), begets hype:
 
 ![VC Hype Cycle](../images/vc-hype-cycle.jpg)
 
-Especially early on, VC is buying into your potential value. This makes sense - if the company that forms around your project has a 1% chance of being worth $1Bn or more, it is rational for people to take that bet if the price is right. Open source companies really can make it big - it's a post for another time, but we believe that open source will eat SaaS's lunch in many product categories.
+Especially early on, VC is buying into your potential value. This makes sense - if the company that forms around your project has a 1% chance of being worth \$1Bn or more, it is rational for people to take that bet if the price is right. Open source companies really can make it big - it's a post for another time, but we believe that open source will eat SaaS's lunch in many product categories.
 
 The way to pitch open source to VCs is that it is easier to get into production, and there is less of a sense of vendor lock in, which puts off many developers from trying out a new SaaS product. SaaS may be "less work" to manage, but there's probably no reason you can't also provide your own product, hosted. The end result is that your open source repo could get used at huge companies. They probably have needs your free product can't deliver (uptime, better features, support), which you can make money from meeting (through providing services, hosting or premium features), to invest back into the project.
 
@@ -123,18 +123,18 @@ Do a really good job of that and you'll get random emails from folks at bigger c
 # How long it took
 
 * August 2019: Tim and I quit our jobs.
-* January 4th 2020: We started the YC W20 batch, and that meant receiving our first $150K investment from YC. We worked on a different idea to start with but soon [pivoted](/blog/pivot-to-posthog).
+* January 4th 2020: We started the YC W20 batch, and that meant receiving our first \$150K investment from YC. We worked on a different idea to start with but soon [pivoted](/blog/pivot-to-posthog).
 * January 23rd 2020: We wrote the first line of code for PostHog
 * February 14th: We did a mini launch for a few YC companies to get early feedback
 * February 21st: PostHog [launched on HackerNews](https://news.ycombinator.com/item?id=22376732)
 * March 6th: Day 1 of fundraising and first cheque ($10K!)
-* March 12th: Left San Francisco due to covid and started working fully remote from the UK. Everything seemed to slow down at this point for 3 weeks. Our bank balance was $205K this day.
+* March 12th: Left San Francisco due to covid and started working fully remote from the UK. Everything seemed to slow down at this point for 3 weeks. Our bank balance was \$205K this day.
 * March 16th: Demo day. 
-* March 31st: Balance: $530K.
-* April 24th: Balance: $719K
-* April 26th: Seed round completed at $3.025M - when you start closing bigger cheques, it wraps up very, very fast.
+* March 31st: Balance: \$530K.
+* April 24th: Balance: \$719K
+* April 26th: Seed round completed at \$3.025M - when you start closing bigger cheques, it wraps up very, very fast.
 
-There was one thing we never expected to happen - we ended up with offers for "too much" money and could have raised $5.5M. We're trying not to humblebrag, but it is kind of weird. We already sold quite a lot of the company and didn't want to sell more - the money raised already was enough we felt to get to a really good series A.
+There was one thing we never expected to happen - we ended up with offers for "too much" money and could have raised \$5.5M. We're trying not to humblebrag, but it is kind of weird. We already sold quite a lot of the company and didn't want to sell more - the money raised already was enough we felt to get to a really good series A.
 
 We had to shift from selling ourselves to investors, to having to let investors down. This made us feel pretty guilty after all the meetings and relationships that we had built, but it was a great problem to have, and we tried to be as upfront as possible through the process.
 
@@ -272,7 +272,7 @@ Once that's done, take a moment to think if anything could have been better for 
 
 Do not underestimate how much pipeline you need to build. There is a lot of legwork. My investor spreadsheet ended up with 157 rows.
 
-That number doesn't reflect that we often had 2 - 5 meetings with the same person. I would estimate I did about 200 calls, each lasting about 45 minutes, in \~6 weeks, on top of all the booking meetings in. We probably had 30 rejections, usually due to us being "too early", often coming from investors who hadn't invested in open source companies before. At first, these felt disheartening, but after a while it became clear some people love what we're working on, and others don't, so we stoped caring! We ended up with the possibility of raising $5.5M and got really oversubscribed with investors fighting to get in, but it didn't feel like that would happen at first.
+That number doesn't reflect that we often had 2 - 5 meetings with the same person. I would estimate I did about 200 calls, each lasting about 45 minutes, in \~6 weeks, on top of all the booking meetings in. We probably had 30 rejections, usually due to us being "too early", often coming from investors who hadn't invested in open source companies before. At first, these felt disheartening, but after a while it became clear some people love what we're working on, and others don't, so we stoped caring! We ended up with the possibility of raising \$5.5M and got really oversubscribed with investors fighting to get in, but it didn't feel like that would happen at first.
 
 It was very important that we kept the product getting better and our usage growing during this time. I focussed exclusively on the fundraising process, and Tim focussed exclusively on building the product with our kick ass team and helping out the community. It would have been much harder if we were solo founders. Some investors during the process of talking to us saw our user number double. ie our user numbers did this:
 
@@ -296,7 +296,7 @@ It became clear, the same is true - at least for us - on the VC side. Not all, b
 
 # The paperwork you'll need
 
-If you're raising money in the US, we'd recommend you have a US parent company. You can "flip" your existing company to have a US parent - this cost us $10k, which was a frustrating expense, but a necessary one that was far outweighed in financial terms by raising in a more competitive market. If you don't have a company formed for your project already, I'd just set up directly as a US company, and I'd definitely pay a US attorney to do that for you. You will have to have some money to do that, and it'll mean you need to get an accountant to do taxes. Tim and I saved up before we started and used our own money for this.
+If you're raising money in the US, we'd recommend you have a US parent company. You can "flip" your existing company to have a US parent - this cost us \$10k, which was a frustrating expense, but a necessary one that was far outweighed in financial terms by raising in a more competitive market. If you don't have a company formed for your project already, I'd just set up directly as a US company, and I'd definitely pay a US attorney to do that for you. You will have to have some money to do that, and it'll mean you need to get an accountant to do taxes. Tim and I saved up before we started and used our own money for this.
 
 Once the company was incorporated (which we had to do to get YC's \$150k initial investment in regardless so we were extra incentivized), we (/ our lawyer) created an employee options pool then raised our entire round on [SAFEs](https://www.ycombinator.com/documents/). SAFEs allow investors to invest without you having to create a priced round which costs usually a minimum of \$25K or so, unless you use the [Series Seed](https://www.seriesseed.com/) paperwork. They are quick to sign, with no legal work needed.
 

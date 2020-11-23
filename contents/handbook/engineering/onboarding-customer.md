@@ -6,11 +6,13 @@ showTitle: true
 
 A lot of people want to set up PostHog on their own without talking to anyone, and we'll make sure that path is as optimised as possible. However, sometimes it's more efficient/better to talk to one of us over a call. 
 
+Our user notes are not shared publicly. [Read them here](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit#heading=h.q9lg9hgl34g2).
+
 A standard structure you could maintain while doing that call is:
 
 ## 1. Introductions / Find Out About Their Business
 
-1. Make sure you introduce yourself
+1. Make sure you introduce yourself and check it's ok if you take notes.
 1. Introduce PostHog: "We're open-source product analytics. Think Mixpanel or Amplitude, but with full control over your data and focused on engineers"
 1. Ask questions about their business:
     - Why did they reach out in the first place?

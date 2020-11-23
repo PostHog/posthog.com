@@ -31,7 +31,11 @@ The retention table is structured as follows:
 
 #### Column 1: Cohort
 
-The table starts from 11 days before the day you are viewing it, and each row is incremented by one day until "yesterday" (last row). The cohort is defined by the group of distinct users that visited your website on that day.
+The table starts from 11 days before the day you are viewing it, and each row is incremented by one day until "yesterday" (last row). 
+
+For [Recurring Retention](#recurring-retention), the cohort is defined by the group of distinct users that performed the event on that time period. 
+
+For [First Time Retention](#first-time-retention), the cohort is defined by the group of distinct users that performed the event _for the first time_ on that time period.
 
 #### Column 2: Users
 
@@ -70,7 +74,20 @@ Products like email providers likely see very high rentention rates, since most 
 
 In conclusion, aim for high retention rates! And we'll help you identify that with colors. The darker the cell, the higher the retention.
 
+## Retention Types
 
+### Recurring Retention
 
-> **Note:** Retention pairs up nicely with [Trend Stickiness](/docs/features/trends), so you can determine what trends may be influencing your retention in a good or bad way.
+Recurring Retention counts a user as part of a cohort if they performed the cohortizing event on that time period, irrespective of it was their first time or not.
+
+### First Time Retention
+
+Rirst time retention cohortizes users based on when they did an event for the first time, rather than adding a user to each cohort they had the event in.
+
+## Retention Events
+
+### Cohortizing Event vs. Retaining Event
+
+The _cohortizing event_ is the event that determines if the user is a part of a cohort or not (i.e. adds the user to the first column). The _retaining event_, on the other hand, is the event retention is being calculated on (i.e. adds the user as a data point to one of the "percentage boxes").
+
 <br>

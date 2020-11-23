@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles/features.css'
+import './styles/features.scss'
 import Layout from '../components/Layout'
 import { PageHeader } from '../components/PageHeader'
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'

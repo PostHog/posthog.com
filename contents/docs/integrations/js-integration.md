@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-**Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
+> **Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
 
 This page of the Docs refers to our [JS library](https://github.com/PostHog/posthog-js).
 
@@ -205,6 +205,11 @@ Here's how you can use them:
     posthog.reloadFeatureFlags()
     ```
 
+- By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
+    ```js
+    posthog.isFeatureEnabled('keyword', {send_event: false})
+    ```
+
 ## Reset After Logout
 
 If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user. 
@@ -249,10 +254,11 @@ Some of the most relevant options are:
 | Attribute | Type | Default | Description |
 | --- | --- | --- | ------------------------- | ------------------------------------------------------- |
 | `api_host` | String | `https://app.posthog.com` | URL of your PostHog instance. |
-| `autocapture` | Boolean | `true` | Determines if PostHog should [autocapture](#autocapture) events. |
 | `loaded` | Function | `function () {}` (no-op) | A function to be called once the PostHog scripts have loaded successfully. |
+| `autocapture` | Boolean | `true` | Determines if PostHog should [autocapture](#autocapture) events. |
 | `capture_pageview` | Boolean | `true` | Determines if PostHog should automatically capture pageview events. |
-| <span class="small-text"> `opt_out_capturing_by_default` </span> | Boolean | `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
+| `disable_session_recording` | Boolean | `false` | Determines if users should be opted out of PostHog session recording if enabled in the app. |
+| `opt_out_capturing_by_default` | Boolean | `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
 | `property_blacklist` | Array | `[]` | A list of properties that should never be sent with `capture` calls. |
 | `xhr_headers` | Object | `{}` | Any additional headers you wish to pass with the XHR requests to the PostHog API. |
 

@@ -8,9 +8,10 @@
             "Configuring PostHog",
             "Integrations",
             "Features",
+            "Plugins",
             "API",
             "Contributing",
-            "Architecture"
+            "Project documentation"
         ]
     },
     {
@@ -23,7 +24,7 @@
             "docs/configuring-posthog/scaling-posthog",
             "docs/configuring-posthog/securing-posthog",
             "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/smtp-credentials",
+            "docs/configuring-posthog/email",
             "docs/configuring-posthog/deleting-data"
         ]
     },
@@ -41,7 +42,23 @@
     {
         "entry": "Tutorials",
         "name": "Tutorials",
-        "items": ["docs/tutorials/feature-flags", "docs/tutorials/toolbar", "docs/tutorials/funnels"]
+        "items": [
+            "docs/tutorials/feature-flags",
+            "docs/tutorials/toolbar",
+            "docs/tutorials/funnels",
+            "docs/tutorials/cohorts",
+            "docs/tutorials/retention",
+            "docs/tutorials/spa",
+            "docs/tutorials/actions",
+            "docs/tutorials/b2b",
+            "docs/tutorials/revenue"
+        ],
+        "child_entries": ["1 Minute Tutorials"]
+    },
+    {
+        "entry": "1 Minute Tutorials",
+        "name": "1 Minute Tutorials",
+        "items": ["docs/tutorials/integrate-with-shopify", "docs/tutorials/integrate-with-metabase"]
     },
     {
         "entry": "Deployment",
@@ -63,9 +80,9 @@
         ]
     },
     {
-        "entry": "Architecture",
-        "name": "Architecture",
-        "items": ["docs/data-model"]
+        "entry": "Project documentation",
+        "name": "Project documentation",
+        "items": ["docs/application-settings", "docs/data-model", "docs/navigation"]
     },
     {
         "entry": "Features",
@@ -78,14 +95,27 @@
             "docs/features/events",
             "docs/features/feature-flags",
             "docs/features/funnels",
-            "docs/features/live-actions",
             "docs/features/log-in-with-github-gitlab",
+            "docs/features/multiple-projects",
             "docs/features/paths",
+            "docs/features/plugins",
             "docs/features/retention",
             "docs/features/sessions",
+            "docs/features/session-recording",
             "docs/features/toolbar",
             "docs/features/trends",
             "docs/features/users"
+        ]
+    },
+    {
+        "entry": "Plugins",
+        "name": "Plugins",
+        "items": [
+            "docs/plugins/overview",
+            "docs/plugins/architecture",
+            "docs/plugins/build",
+            "docs/plugins/maxmind",
+            "docs/plugins/currency-normalization"
         ]
     },
     {
@@ -107,7 +137,6 @@
         "name": "Integrations",
         "items": [
             "docs/integrations",
-            "docs/integrations/segment-integration",
             "docs/integrations/android-integration",
             "docs/integrations/go-integration",
             "docs/integrations/ios-integration",
@@ -117,7 +146,9 @@
             "docs/integrations/python-integration",
             "docs/integrations/flutter-integration",
             "docs/integrations/react-native-integration",
-            "docs/integrations/ruby-integration"
+            "docs/integrations/ruby-integration",
+            "docs/integrations/rudderstack-integration",
+            "docs/integrations/segment-integration"
         ],
         "child_entries": ["Community", "Sending Data Out"]
     },
@@ -137,7 +168,8 @@
         "items": [
             "docs/integrations/slack",
             "docs/integrations/microsoft-teams",
-            "docs/integrations/message-formatting"
+            "docs/integrations/message-formatting",
+            "docs/integrations/sentry-integration"
         ]
     },
     {
@@ -159,6 +191,8 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-17-0",
+            "blog/the-posthog-array-1-16-0",
             "blog/the-posthog-array-1-15-0",
             "blog/the-posthog-array-1-14-0",
             "blog/the-posthog-array-1-13-0",
@@ -237,15 +271,34 @@
         ]
     },
     {
+        "entry": "Careers",
+        "name": "Careers",
+        "items": ["careers"],
+        "child_entries": ["Open Roles"]
+    },
+    {
+        "entry": "Open Roles",
+        "name": "Open Roles",
+        "items": ["careers/designer", "careers/full-stack-software-engineer", "careers/recruiter"]
+    },
+    {
         "entry": "Growth",
         "name": "Growth",
         "items": [
             "handbook/growth/community",
             "handbook/growth/customer-success",
             "handbook/growth/sales",
-            "handbook/growth/trials",
-            "handbook/growth/posthog-array",
-            "handbook/growth/releasing-content"
+            "handbook/growth/trials"
+        ],
+        "child_entries": ["Content"]
+    },
+    {
+        "entry": "Content",
+        "name": "Content",
+        "items": [
+            "handbook/growth/content",
+            "handbook/growth/content/posthog-array",
+            "handbook/growth/content/releasing-content"
         ]
     },
     {

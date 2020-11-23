@@ -17,3 +17,7 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
 - [Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
 - [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
+- [Analyzing User Behavior with Cohorts](/docs/tutorials/cohorts)
+- [Measuring Retention and Tracking Churn](/docs/tutorials/retention)
+- [Tracking Single Page Apps](/docs/tutorials/spa)
+- [Complete Guide to Event Tracking ](/docs/tutorials/actions)

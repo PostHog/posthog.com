@@ -1,6 +1,5 @@
 import React from 'react'
-import '../styles/features.css'
-import '../../components/Layout/Layout.css'
+import '../styles/features.scss'
 import Layout from '../../components/Layout'
 import { OtherFeaturesBlock } from '../../components/OtherFeaturesBlock'
 import { PageHeader } from '../../components/PageHeader'
@@ -10,7 +9,7 @@ import { FeaturedSectionTextRight } from '../../components/Sections/FeaturedSect
 import retentionImg1 from '../../images/retention-2.svg'
 import retentionImg2 from '../../images/retention-1.svg'
 import retentionImg3 from '../../images/retention-3.svg'
-import { StartNowButton } from '../../StartNowButton'
+import { StartNowButton } from '../../components/StartNowButton'
 
 function RetentionPage() {
     return (

@@ -18,7 +18,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `DEBUG`                    | Determines if PostHog should run in [DEBUG mode](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-DEBUG). You can set this to a truthy value when developing, but disable this in production!  | `False`
 | `SECRET_KEY`               | [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, sessions, hashes, etc. Custom value required in production. | `<randomly generated secret key>`
 | `SECURE_COOKIES`           | Determines if Django should use [secure cookies](https://docs.djangoproject.com/en/2.2/ref/settings/#session-cookie-secure). Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode, else `True`
-| `SITE_URL`                 | URL of your PostHog instance.                                                                     | `http://localhost:8000`
+| `SITE_URL` - should be an absolute URL and include the protocol (e.g. `https://app.posthog.com`)            | Principal/canonical URL of your PostHog instance. **Required for emails and webhooks to work properly.**                                                                   | `http://localhost:8000`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
 | `SENTRY_DSN`               | Used to integrate with [Sentry](https://sentry.io/welcome/) error and event tracking. Ignored when running tests.  | `None`
 | `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
@@ -38,15 +38,14 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for GitLab authentication. Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
 | `DATABASE_URL`| [Database URL](https://github.com/jacobian/dj-database-url#url-schema) pointing to your PostgreSQL instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
 | `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
-| `EMAIL_HOST` | Used for configuring SMTP. Host of your email server.                                                           | `None`
-| `EMAIL_PORT` | Used for configuring SMTP. Port used by your email server in the specified host.                                | `None`
-| `EMAIL_HOST_USER` | Used for configuring SMTP. Username used by the email server.                                              | `None`
-| `EMAIL_HOST_PASSWORD` | Used for configuring SMTP. Password for the specified username used by the email server.               | `None`
-| `EMAIL_USE_TLS` | Used for configuring SMTP. Determines if TLS should be used for the email service. It is recommended that either this or `EMAIL_USE_SSL` be set to `True`.          | `False`
-| `EMAIL_USE_TLS` | Used for configuring SMTP. Determines if SSL should be used for the email service. It is recommended that either this or `EMAIL_USE_TLS` be set to `True`.          | `False`
-| `DEFAULT_FROM_EMAIL` | Determines the email address that should be used to send emails.                                        | `tim@posthog.com`
-
-
+| `EMAIL_HOST` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.     | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_PORT` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_HOST_USER` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_HOST_PASSWORD` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.               | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_USE_TLS` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.       | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_USE_TLS` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.         | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_DEFAULT_FROM` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_ENABLED` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
 
 
 

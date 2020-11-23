@@ -1,6 +1,5 @@
 import React from 'react'
-import '../styles/features.css'
-import '../../components/Layout/Layout.css'
+import '../styles/features.scss'
 import Layout from '../../components/Layout'
 import { OtherFeaturesBlock } from '../../components/OtherFeaturesBlock'
 import { PageHeader } from '../../components/PageHeader'
@@ -10,7 +9,7 @@ import { FeaturedSectionTextRight } from '../../components/Sections/FeaturedSect
 import selfHostedImg1 from '../../images/self-hosted-1.svg'
 import selfHostedImg2 from '../../images/self-hosted-2.svg'
 import selfHostedImg3 from '../../images/self-hosted-3.svg'
-import { StartNowButton } from '../../StartNowButton'
+import { StartNowButton } from '../../components/StartNowButton'
 
 function ProductFeatures() {
     return (

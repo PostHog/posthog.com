@@ -23,12 +23,18 @@
     }
 
     .fs-header-2 {
-        max-width: calc(3 / 10 * 100vw);
+        width: calc(3 / 10 * 100vw);
     }
 
     .fs-paragraph {
         font-size: 18px;
         width: calc(3 / 10 * 100vw);
+    }
+
+    @media screen and (min-width: 1440px) {
+        .fs-header-2 {
+            max-width: calc(1 / 5 * 100vw);
+        }
     }
 
     @media screen and (max-width: 1080px) {
@@ -113,11 +119,5 @@
             width: calc(4 / 20 * 100vw);
             font-size: 24px !important;
         }
-    }
-
-    @media screen and (min-width: 1680px) {
-        /*         .fs-left-header-2 {
-            max-width: calc(1 / 5 * 100vw);
-        } */
     }
 }

@@ -135,7 +135,45 @@ import posthog
 
 def purchase(request):
     # example capture
-    posthog.capture(request.session.session_key, 'purchase', ...)
+    posthog.capture(request.user.pk, 'purchase', ...)
+```
+
+# Integrations
+
+## Sentry
+
+When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles. 
+
+### Example Implementation
+
+```python
+from posthog.sentry import update_posthog
+
+sentry_sdk.init(
+    dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
+    before_send=update_posthog
+)
+
+# Also set `posthog_distinct_id` tag
+from sentry_sdk import configure_scope
+
+with configure_scope() as scope:
+    scope.set_tag('posthog_distinct_id', 'some distinct id')
+```
+
+### Example Implementation with Django
+
+This can be made automatic in Dejango, by adding the following middleware and settings to `settings.py`:
+
+```python
+
+MIDDLEWARE = [
+    "posthog.sentry.django.PosthogDistinctIdMiddleware"
+]
+
+POSTHOG_DJANGO = {
+    "distinct_id": lambda request: request.user and request.user.distinct_id
+}
 ```
 
 # Development
