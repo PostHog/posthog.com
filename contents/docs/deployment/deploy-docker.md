@@ -63,17 +63,17 @@ docker-compose up -d
 
 ### Configure docker-compose.yml
 
-You can also go through production-ready `docker-compose.yml` setup using our `docker-compose-config.py` configurator. It will guide you through relevant settings and explain them along the way. How to use it:
+You can also go through production-ready `docker-compose.yml` setup using our `docker-compose-config.py` configurator. It will guide you through relevant settings and explain them along the way. Here's how to use it:
 
-1. Install PostHog's Python dependencies (preferably in a virtual environment).
+1. Enter PostHog's directory with `cd` like so:
 ```bash
-python3 -m pip install -r requirements.txt
+cd ~/Developer/posthog/
 ```
 1. Run the configurator:
 ```bash
-python3 ./docker-compose-config.py
+./docker-compose-config.sh
 ```
-1. Follow the instructions and make changes where you see fit – or don't, and stick to default values.
+1. Follow the instructions and make changes where you see fit – or don't, sticking to default values.
 1. Enjoy PostHog with the new configuration:
 ```bash
 docker-compose up -d
