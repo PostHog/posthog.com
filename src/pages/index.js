@@ -68,7 +68,7 @@ function IndexPage() {
                                             className="modalContent"
                                             overlayClassName="modalOverlay"
                                         >
-                                            <h2>Try PostHog - free</h2>
+                                            <h2>Try PostHog for free</h2>
                                             <div className="modalCardsWrapper">
                                                 <a href="https://app.posthog.com/signup">
                                                     <div className="modalSaasCloud modalCard">
