@@ -6,7 +6,7 @@ showTitle: true
 
 ## Why Docker
 
-Through Docker, PostHogers can install specific versions of the app while also having it within a containerized environment.
+Through Docker, PostHoggers can install specific versions of the app while also having it within a containerized environment.
 
 We currently have [three types of images](https://hub.docker.com/r/posthog/posthog):
 
@@ -26,7 +26,6 @@ If you are deploying with Docker on AWS or Digital Ocean, you can check our indi
 <br>
 
 #### Generic Docker Installation Tutorial
-
 
 1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
@@ -69,6 +68,28 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 
 </blockquote>
 
+### Configure docker-compose.yml
+
+You can also go through production-ready `docker-compose.yml` setup using our `docker-compose-config.py` configurator. It will guide you through relevant settings and explain them along the way. Here's how to use it:
+
+1. Enter PostHog's directory with `cd` like so:
+```bash
+cd ~/Developer/posthog/
+```
+1. Run the configurator:
+```bash
+./docker-compose-config.sh
+```
+1. Follow the instructions and make changes where you see fit – or don't, sticking to default values.
+1. Enjoy PostHog with the new configuration:
+```bash
+docker-compose up -d
+```
+or
+```bash
+docker-compose restart -d
+```
+
 ### Local Installation
 
 If you're running locally, use our `docker-compose.dev.yml` file:
@@ -84,7 +105,7 @@ If you're running your Postgres database elsewhere (i.e. RDS, or a different ser
 - Set the `DATABASE_URL` property to the location of your database
 - Remove `services -> db` and `depends_on: - db`
 
-### Docker one line preview
+### Docker One-Line Preview
 
 If you would like to run the software locally, you can use a Docker preview. Note that this is **not** meant for production use.
 
