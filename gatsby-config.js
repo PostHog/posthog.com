@@ -134,7 +134,7 @@ module.exports = {
         },
         `gatsby-plugin-remove-trailing-slashes`,
         {
-            resolve: `gatsby-plugin-posthog-analytics`,
+            resolve: `gatsby-plugin-posthog`,
             options: {
                 // Specify the API key for your Posthog Project (required)
                 apiKey: 'sTMFPsFhdP1Ssg',
