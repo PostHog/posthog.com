@@ -11,12 +11,8 @@ function Header({ onPostPage, isBlogArticlePage, isHomePage, isDocsPage, isHandb
 
     return (
         <div className={'menuHeaderWrapper ' + (!isBlogArticlePage && !sidebarHide && onPostPage && 'noLogo ')}>
-            {!(!isBlogArticlePage && !sidebarHide && onPostPage) && (
-                <Link
-                    id="logo"
-                    to="/"
-                    className={(isDocsPage || isHandbookPage) && !isBlogArticlePage ? 'display-mobile ' : ''}
-                >
+            {!sidebarHide && (
+                <Link id="logo" to="/" className={isDocsPage || isHandbookPage ? 'display-mobile ' : ''}>
                     <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
                 </Link>
             )}
