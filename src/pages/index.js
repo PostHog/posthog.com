@@ -275,27 +275,33 @@ function IndexPage() {
                             </div>
                         </div>
                     </div>
-
-                    <div className="buildingIsExpensiveWrapper wrapper">
-                        <div className="buildingIsExpensiveRow row">
-                            <div className="buildingIsExpensiveText">
-                                <div className="buildingIsExpensiveText2">
-                                    <div className="startTrialRow">
-                                        <Button
-                                            type="primary"
-                                            className="startTrialButton"
-                                            onClick={() => setModalIsOpen(true)}
-                                        >
-                                            Start my 30-day free trial
+                    <Spacer />
+                    <Spacer />
+                    <FeaturedSectionTextLeft
+                        listItem=""
+                        headerText="Get started for free"
+                        image={coolHedgehog}
+                        color="blue"
+                        imgDesktopHeight={300}
+                        descriptionText={
+                            <div>
+                                <p>
+                                    Self-host our free-forever open source offering or start tracking your product
+                                    instantly with PostHog Cloud.
+                                </p>
+                                <div className="landing-page-final-cta">
+                                    <Button type="primary" size="large" onClick={() => setModalIsOpen(true)}>
+                                        Get Started for Free
+                                    </Button>
+                                    <a href="/slack">
+                                        <Button type="primary" size="large">
+                                            Join Our Slack
                                         </Button>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
-                            <div className="coolHedgehog">
-                                <img alt="Cool hedgehog" src={coolHedgehog} />
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    />
                 </Layout>
             </div>
         </div>
