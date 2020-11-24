@@ -16,7 +16,7 @@ showTitle: true
 
 - Framework: [Django](https://www.djangoproject.com/)
 - Databases: [PostgreSQL](https://www.postgresql.org/) and [ClickHouse](https://clickhouse.tech/)
-- Task Queue: [Redis](https://redis.io/)
+- Task Queue/Event Streaming: [Redis](https://redis.io/) and [Apache Kafka](https://kafka.apache.org/)
 - Task Worker: [Celery](https://docs.celeryproject.org/)
 
 ### Testing

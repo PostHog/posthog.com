@@ -90,36 +90,3 @@ Run `./bin/start-frontend`
 ### Running backend tests
 
 Run `./bin/tests`
-
-### Running Clickhouse locally
-
-0. Ensure you have Docker and Docker Compose installed
-1. Create a new directory (not inside `/posthog`!) and enter it
-2. Create a file called `docker-compose.yml` and paste the following snippet into it:
-
-```yaml
-version: "3"
-services:
-    server:
-     image: yandex/clickhouse-server
-     ports:
-     - "8123:8123"
-     - "9000:9000"
-     - "9009:9009"
-
-     ulimits:
-      nproc: 65535
-      nofile:
-       soft: 262144
-       hard: 262144
-    client:
-      image: yandex/clickhouse-client
-      command: ['--host', 'server']
-```
-
-3. Run `docker-compose up -d`. You'll now have a Clickhouse server running on `http://127.0.0.1:8123`
-
-For more information on how to interface with the database, visit the [Clickhouse Docs](https://clickhouse.tech/docs/en/interfaces/).
-
-4. Run migrations: `python manage.py migrate_clickhouse`
-5. Set environment variables: `PRIMARY_DB=clickhouse` and `CLICKHOUSE_SECURE=False`

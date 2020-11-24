@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> This is a community integration that is not maintained by the PostHog core team.
+
 ## Install
 
 ```bash

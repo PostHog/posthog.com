@@ -98,16 +98,8 @@ To avoid this, we strongly recommend upgrading to at least a "Hobby" dyno:
 
 1. Choose your desired tier!
 
-### Upgrading from before 1.0.11?
+## Running PostHog Behind a Proxy or Load Balancer
 
-PostHog is now using Redis with a worker to process events and other background tasks. If you're getting a `REDIS_URL is required` error or seeing a `Configuration Error` in the interface, you'll need to setup a Redis server and run the worker process.
+If you're running PostHog behind a proxy or load balancer, you need to set the `IS_BEHIND_PROXY` environment variable to `True`.
 
-A new Heroku Redis addon should be enabled automatically with the free plan. We recommend to switch to at least the first paid plan (premium-0) to enable [persistence](https://devcenter.heroku.com/articles/heroku-redis#persistence) and protect yourself against data loss. You will also see a new dyno type called `worker`, which may or may not be deployed automatically. You will need to deploy at least one `worker` dyno for the background tasks to work.
-
-### Upgrading from before 3 March 2020?
-
-If you last updated PostHog before 3 March 2020 **AND** you have a lot of events, there is one migration (0027) that might take a long time.
-
-To avoid this, _before_ you migrate, run `python manage.py migrate_elementgroup` to pre-migrate elements across.
-
-If you only have a few thousand events, you probably don't need to worry about this.
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
