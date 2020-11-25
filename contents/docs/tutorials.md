@@ -12,7 +12,7 @@ This is a new section of our Docs and we appreciate any suggestions you may have
 
 If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to you!
 
-## **In This Section:**
+## In This Section
 
 - [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
 - [Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
@@ -21,3 +21,10 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [Measuring Retention and Tracking Churn](/docs/tutorials/retention)
 - [Tracking Single Page Apps](/docs/tutorials/spa)
 - [Complete Guide to Event Tracking ](/docs/tutorials/actions)
+- [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
+- [Sales and Revenue Tracking](/docs/tutorials/revenue)
+
+**1 Minute Tutorials**
+
+- [Integrate PostHog with Shopify](/docs/tutorials/integrate-with-shopify)
+- [Integrate PostHog with Metabase](/docs/tutorials/integrate-with-metabase)

@@ -10,25 +10,60 @@ These Docs explain how to deploy, use, and contribute to PostHog.
 
 ## Philosophy
 
-We believe the era of third-party product analytics software will eventually come to end.
+PostHog is a product analytics platform built for the modern enterprise, with the differentiators of being open source and having a broader view of the tools needed to make a product successful. 
 
-In our view, third-party analytics does not work anymore in a world of Cookie Laws, GDPR, CCPA, and many other four-letter acronyms. There should be an alternative to sending all of your customers' personal information and usage data to third-parties like Google.
+As a result, PostHog can be deployed on your own infrastructure and provides a [large set of tools](/product-features) to help improve your product, such as session recording, heatmaps, and feature flags, which are unique to us in the product analytics space.
 
-PostHog gives you full control over all the data from your users, while being able to do powerful analytics.
+## Documentation Structure
 
-We have seen multiple larger companies who cannot send their data to third-party tracking services for cost or privacy reasons. As a result, they end up with a complex data pipeline into a data lake with an analytics platform on top. Data analysts end up being the only people who understand it.
+### Deployment
 
-PostHog solves that. We let every person in the company have easy access to product analytics that they can understand and use independently, even at a massive scale, all without sending data to third-parties.
+We provide over 10 options for deploying PostHog if you are not using [PostHog Cloud](app.posthog.com).
 
-## Getting Started
+**Do you want to self-host PostHog?**
 
-There are four steps to follow next:
+Check out our [Deployment page](/docs/deployment).
 
-1. [Deployment](/docs/deployment)
-2. [Snippet installation](/docs/deployment/snippet-installation)
-3. [Actions configuration](/docs/features/actions)
-4. [Optional: user data integration](/docs/integrations)
+**Want to get up and running immediately?** 
 
-<br>
+Use our one-click [Heroku deployment](/docs/deployment/deploy-heroku):
 
-> **Note:** If you want us to host PostHog for you, are a larger customer, or would like access to premium features, feel free to get in touch with us via email at *sales@posthog.com*. On top of our main features, we are also able to provide personalized support, user permissions, A/B testing, database integrations, audit logs, among other features.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
+
+**Looking for instructions on using our snippet?**
+
+Check out [Snippet Installation](/docs/deployment/snippet-installation).
+
+### Tutorials
+
+Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many features with in-depth walkthroughs. 
+
+### Configuring PostHog
+
+[Configuring PostHog](/docs/configuring-posthog) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/configuring-posthog/scaling-posthog), [security](/docs/configuring-posthog/securing-posthog), and [upgrade methods](/docs/configuring-posthog/upgrading-posthog).
+
+### Integrations
+
+[Integrations](/docs/integrations) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
+
+We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrations/segment-integration), [Slack](/docs/integrations/slack), and [Sentry](/docs/integrations/sentry-integration).
+
+### API
+
+If you have a niche use-case and our integrations are not sufficient for you, you are welcome to use our [API](/docs/api/overview).
+
+### Plugins
+
+[Plugins](/docs/plugins/overview) are a beta feature that lets you extend PostHog's functionality, allowing you to enrich your event data, send events to other services, as well as prevent event ingestion.  
+
+If there's something you need in PostHog that we haven't built yet, you can [request it on GitHub](https://github.com/PostHog/posthog/issues/new?labels=enhancement&template=feature_request.md), or [build a plugin for it yourself](/docs/plugins/build).
+
+### Contributing to PostHog
+
+We love contributions to PostHog, big or small.
+
+Check out our [Contributing Docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/developing-locally), what our [stack](/docs/stack) is, and how the [project is structured](/docs/project-structure).
+
+### Project Documentation
+
+[Project Documentation](/docs/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.
