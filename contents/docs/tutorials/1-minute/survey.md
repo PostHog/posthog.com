@@ -1,5 +1,5 @@
 ---
-title: Running Surveys with no Backend
+title: Running Surveys with No Backend
 sidebar: Docs
 showTitle: true
 ---
