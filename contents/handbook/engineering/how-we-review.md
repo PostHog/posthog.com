@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Almost all PRs made to repositories on PostHog will need a review from another engineer. We do this because almost every time we do a PR we find a bug, a performance issue, unnecessary code or UX that could have been confusing.
+Almost all PRs made to repositories on PostHog will need a review from another engineer. We do this because almost every time we review a PR we find a bug, a performance issue, unnecessary code or UX that could have been confusing.
 
 ## How to review
 
@@ -28,6 +28,7 @@ Almost all PRs made to repositories on PostHog will need a review from another e
   - What not to look for:
     - Issues _not_ related to this PR. Create a new issue for those.
 
+The emphasis should be on getting something out quickly. Endless review cycles sap energy and enthusiasm.
 
 ## Setting up Heroku Test Environment 
 
