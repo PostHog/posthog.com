@@ -58,7 +58,7 @@
     {
         "entry": "1 Minute Tutorials",
         "name": "1 Minute Tutorials",
-        "items": ["docs/tutorials/integrate-with-shopify", "docs/tutorials/integrate-with-metabase"]
+        "items": ["docs/tutorials/1-minute/integrate-with-shopify", "docs/tutorials/1-minute/integrate-with-metabase"]
     },
     {
         "entry": "Deployment",
