@@ -14,6 +14,7 @@ Almost all PRs made to repositories on PostHog will need a review from another e
     - Code that you think will cause performance issues
     - Are there tests for all of the new functionality, and do they test the right thing?
     - Any security issues or project leakage?
+    - Is the code properly instrumented to allow tracking of every relevant action (i.e. all the relevant frontend elements have unique and helpful `data-attr`s, and there are backend events where appropriate)?
   - What _not_ to look for:
     - Formatting issues (prettier should handle this, raise a PR to fix that)
     - "I would have done it differently" (Unless the code is completely incomprehensible or unreadable, or will cause us massive harm long term, as long as it works it's good enough.)
@@ -23,6 +24,9 @@ Almost all PRs made to repositories on PostHog will need a review from another e
     - Bugs in the new functionality (if you're reviewing the insights page, make sure you try breakdown, cohorts, filters, different time frames etc)
     - Confusing UX
     - Confusing wording
+    - Backend tracked events not being fired properly or with an incorrect payload.
+    - Should the code be behind a feature flag?
+      - If the code is behind a feature flag, do all cases work properly? (particularly make sure the old functionality does not brake)
     - Are we building the right thing? (We should be willing to throw away PRs or start over)
     - Don't be shy here, try to break it!
   - What not to look for:
