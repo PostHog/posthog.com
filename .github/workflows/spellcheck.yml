@@ -25,4 +25,4 @@ jobs:
 
             - name: Correct spelling
               run: |
-                  codespell ./contents -S "images/*" -s
+                  codespell ./contents -S "images/*"
