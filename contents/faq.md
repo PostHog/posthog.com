@@ -10,7 +10,7 @@ showTitle: true
 
 PostHog provides open source product analytics. We are an open source alternative to products like Mixpanel, Amplitude, and Heap.
 
-The key difference is that you can self-host the platform, and it's open source.
+The key differense is that you can self-host the platform, and it's open source.
 
 * That makes us a very good fit for B2C applications (since we don't charge based on volume).
 * We are a better fit for enterprise users since you don't need to go through information security/vendor risk management to get into production with our community version.
