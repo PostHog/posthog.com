@@ -22,7 +22,7 @@ If you're self-hosting and want to upgrade for a better experience with nicer fe
 
 ![](../images/posthog-segment.png)
 
-We're happy to announce that PostHog is now availble as a destination on Segment.
+We're happy to announce that PostHog is now available as a destination on Segment.
 
 Our friends at Segment have built a platform that works as an integrated data pipeline to pull in all your customer data. It's a cool way to combine PostHog with ie Google Analytics or Salesforce data.
 
