@@ -136,7 +136,7 @@ This day will be _the same_ task each time for a given role, to be shared with t
 
 In advance of the SuperDay, you will need to do some additional prep to ensure that the candidate has a great experience:
 
-* Send them an email in the first instance to schedule the SuperDay - you should do this as soon as possible, as candidates often will need to book a day off work. Use the Workable email template for this. 
+* Send them an email in the first instance to schedule the SuperDay - you should do this as soon as possible, as candidates often will need to book a day off work. Use the Workable email template for this. If the task involves them doing 'real' work for PostHog, you should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason. 
 * (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There are different templates for this email in Workable, depending on the role - this will probably need customising. 
 * (One day before the SuperDay) Create a private channel in Slack for the candidate, you and anyone else relevant - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. You may need to add the candidate to one of our systems depending on the role, e.g. Workable for a recruiter SuperDay, but on the whole this should be minimised.
 * (One day before the SuperDay) Invite the candidate to a kickoff meeting with you at the start of the day, and our daily standup at the end. You may also want to have a proper wrap up with them immediately after the team standup. 
