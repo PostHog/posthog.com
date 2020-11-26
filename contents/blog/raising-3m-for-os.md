@@ -202,7 +202,7 @@ The format was a single long document, with more detailed notes that I stored as
 
 ### Capable management
 
-We used [Pulley](https://pulley.com/) for this. [Capable.io](https://capable.io/) is a well known alternative. 
+We used [Pulley](https://pulley.com/) for this. [Captable.io](https://captable.io/) is a well known alternative. 
 
 This software helps you model out how much of the company you are selling. You can experiment with different scenarios and their impact at series A stage.
 
