@@ -25,7 +25,7 @@ jobs:
 
             - name: Correct spelling
               run: |
-                  codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 --I ./.codespellignore
+                  codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
                   git config user.name github-actions
                   git config user.email github-actions@github.com
                   git add .
