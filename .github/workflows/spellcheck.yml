@@ -21,10 +21,6 @@ jobs:
                   python -m pip install -U pip
                   python -m pip install codespell
 
-            - name: Set branch name
-              id: vars
-              run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-
             - name: Correct spelling
               run: |
                   codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8
@@ -32,4 +28,4 @@ jobs:
                   git config user.email github-actions@github.com
                   git add .
                   git commit -m "Fix typos"
-                  git push origin HEAD:${{ steps.vars.outputs.short_ref }}
+                  git push origin HEAD:${{ github.base_ref }}
