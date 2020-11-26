@@ -26,6 +26,8 @@ When you pick a date(s) to have off, please enter it into [CharlieHR](https://po
 
 The same rules as above apply regardless of the vacation length.
 
+You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. 
+
 ## When You Should Have Time Off
 
 ### You are sick
