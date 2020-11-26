@@ -42,7 +42,7 @@ To follow this tutorial along, you need to:
 
 The first thing you need to do to start tracking revenue and sales is set up events that trigger when a relevant operation occurs.
 
-Essentially, when a sale operation completes succesfully, you want to capture a PostHog event with the useful information from that sale.
+Essentially, when a sale operation completes successfully, you want to capture a PostHog event with the useful information from that sale.
 
 For example:
 

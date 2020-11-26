@@ -25,7 +25,7 @@ Tim built the product and I started doing customer calls from the cheapest Airbn
 
 Not only did I have slow wifi, but the idea was complicated and people didn't get it. We had just two customers start using it, and that's only because they were already our friends. One of those two was happy paying \$200 MRR for it, but then his company pivoted. We ended up bringing Aaron on board as our first employee the following January.
 
-If we explained the complex modelling, we'd watch people's eyes glaze over. If we didn't, they would't believe it worked.
+If we explained the complex modelling, we'd watch people's eyes glaze over. If we didn't, they wouldn't believe it worked.
 
 We decided to simplify it. We turned our 1-liner into "a sales 1:1 tool that uses predictive analytics to make sure you talk about the deals that matter". When I ran sales, I struggled to find time to do this, yet I felt it was important, and I felt that salespeople would want to talk about good news but not bad news. Our predictive analytics could keep 1:1s well organised and balanced.
 
@@ -37,7 +37,7 @@ Although I can code, I am too slow, but I have done a lot of sales and marketing
 
 We did that for 3 weeks. We wrote lengthy notes and took quotes from every single meeting in a gigantic Google Doc. We hit our target. I got meetings by finding real life communities, making friends in those and asking around. I also used LinkedIn a lot, engaging in conversations and eventually asking to talk about our roadmap with people who might find it interesting. People are pretty helpful if you are just asking for advice and not trying to sell them. It was uncomfortable and hard work, but it helped us constantly "talk to users" - something YC preaches.
 
-In the product, we focussed heavily on the onboarding flow. We wanted each user to bring more than 1 extra user. Just like Facebook in the early days. When a user signed in, it would send them to a page that'd read their calendar to guess which meetings were 1:1s, and it'd ask them to invite those users. Once they were in the tool, it'd also integrate with Slack so it'd remind you to plan your 1:1s and it'd let you plan the whole thing through their UX.
+In the product, we focused heavily on the onboarding flow. We wanted each user to bring more than 1 extra user. Just like Facebook in the early days. When a user signed in, it would send them to a page that'd read their calendar to guess which meetings were 1:1s, and it'd ask them to invite those users. Once they were in the tool, it'd also integrate with Slack so it'd remind you to plan your 1:1s and it'd let you plan the whole thing through their UX.
 
 The calls sounded like they were going really well. 15 people said they would use it for their team.
 

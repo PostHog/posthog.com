@@ -12,7 +12,7 @@ However, if you do start going beyond these numbers, there are things you can do
 
 ## Handling Higher Volume with Partitions
 
-We recommend partitioning tables when running queries in PostHog is getting noticably slow. The partition function applies event/timestamp partitioning to the event table, meaning the table will be partitioned per event and each event table will be partitioned per week.
+We recommend partitioning tables when running queries in PostHog is getting noticeably slow. The partition function applies event/timestamp partitioning to the event table, meaning the table will be partitioned per event and each event table will be partitioned per week.
 
 Partitioning events doesn't change how you use PostHog. It'll only speed things up.
 

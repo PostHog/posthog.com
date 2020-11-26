@@ -8,7 +8,7 @@ showTitle: true
 
 James started as a developer, then used to run a multi-million dollar monthly online marketing budget. Tim ran R&D, has deep development experience, and used to work with James. Tim can build stuff fast.
 
-James and Tim decided to start a startup, so put together an initial product focussed on technical debt. In doing this, they wanted a way to understand who was using the product, which parts of the product were being used, and to be able to understand where all these individual users came from in the first place. This would help improve retention and it’d reduce inefficient marketing spend.
+James and Tim decided to start a startup, so put together an initial product focused on technical debt. In doing this, they wanted a way to understand who was using the product, which parts of the product were being used, and to be able to understand where all these individual users came from in the first place. This would help improve retention and it’d reduce inefficient marketing spend.
 
 James got frustrated at having to repeatedly add track(‘event’) to every element, especially when the product and funnel was changing so frequently.
 

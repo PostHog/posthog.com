@@ -22,7 +22,7 @@ Segment is a platform that works as an integrated data pipeline to facilitate th
 
 <br>
 
-The idea is that multiple sources of data can be integrated via one single platform and delivered to the desired Product Analytics tools all in one continous flow. 
+The idea is that multiple sources of data can be integrated via one single platform and delivered to the desired Product Analytics tools all in one continuous flow. 
 
 For example, if you have both an app and a website and your Marketing and Engineering teams use different tools and data to make decisions, Segment can make that integration process much simpler for you.
 

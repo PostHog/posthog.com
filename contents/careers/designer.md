@@ -36,7 +36,7 @@ You'd be one of the very first design hires we'd make at a pivotal stage for the
 
 ## We hire the best to tell us what to do
 
-We are focussed on increasing user acquisition, retention and our community growth. Design is core to all of these things.
+We are focused on increasing user acquisition, retention and our community growth. Design is core to all of these things.
 
 Success in this role means we build a great brand, which filters through everything that reaches our audience of users and potential users.
 
