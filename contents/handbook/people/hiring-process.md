@@ -36,7 +36,7 @@ If you receive an application directly emailed to you or if someone contacts us 
 
 * Forward their email onto our [dedicated Workable email address](mailto:posthog@jobs.workablemail.com) - this is the most effective option.
 * If you think they are a strong candidate but they didn't email, introduce them directly to us via our [careers email address](mailto:careers@posthog.com).
-* As a last resort, ask them to apply via the relevant link on our [Careers page](heeps://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for very high volume roles. 
+* As a last resort, ask them to apply via the relevant link on our [Careers page](heeps://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
 
 ### Booking meetings
 
@@ -84,7 +84,7 @@ We hire repeatedly into engineering roles, so here are a few things we look for:
 
 ### Interview 1 - Culture with James
 
-We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are.
+We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Workable.
 
 This is to allow both PostHog and the candidate to assess cultural fit, and to dig into any areas of potential misalignment based on the application. We are looking for proactivity, directness, good communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
 
@@ -134,9 +134,20 @@ We will pay the candidate their 'normal day rate.' If they have done contracting
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. It should be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. The tasks should be as close as possible to those that the candidate would be working on every day.
 
+In advance of the SuperDay, you will need to do some additional prep to ensure that the candidate has a great experience:
+
+* Send them an email in the first instance to schedule the SuperDay - you should do this as soon as possible, as candidates often will need to book a day off work. Use the Workable email template for this. If the task involves them doing 'real' work for PostHog, you should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason. 
+* (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There are different templates for this email in Workable, depending on the role - this will probably need customising. 
+* (One day before the SuperDay) Create a private channel in Slack for the candidate, you and anyone else relevant - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. You may need to add the candidate to one of our systems depending on the role, e.g. Workable for a recruiter SuperDay, but on the whole this should be minimized.
+* (One day before the SuperDay) Invite the candidate to a kickoff meeting with you at the start of the day, and our daily standup at the end. You may also want to have a proper wrap up with them immediately after the team standup. 
+* (One day before the SuperDay) Send the candidate the task - aim to send this late on the day before so that some candidates won't happen to have more time to prepare than others and the process remains fair (you can Schedule Send your email in Gmail for this). 
+* (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like you need to check in with them - let them get on with the task and trust that they will message you. 
+* (One day after the SuperDay) Schedule in the hiring decision meeting. 
+* (One day after the SuperDay) Pay the candidate using the bank details they provided.
+
 ### Decide if we will hire
 
-There will be a written catchup over Slack or via Zoom about the candidate with all people involved during the hiring. A yes/no decision will be made and then communicated to the candidate.
+There will be a written catchup over Slack or call via Zoom about the candidate with all people involved during the hiring. A yes/no decision will be made and then communicated to the candidate.
 
 It is expected that everyone has submitted their notes on Workable so we can discuss these to the meeting.
 

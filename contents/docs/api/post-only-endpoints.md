@@ -70,7 +70,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
 }
 ```
 
-From this reponse, if you are looking to use feature flags in your backend, you will most likely need only the values for the `"featureFlags"` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
+From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `"featureFlags"` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
 
 
 ## Sending events

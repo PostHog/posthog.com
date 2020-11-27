@@ -29,7 +29,7 @@ If you are deploying with Docker on AWS or Digital Ocean, you can check our indi
 
 1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. [Setup Docker to run without root privileges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
 1. Install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git

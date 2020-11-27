@@ -13,7 +13,7 @@ hideAnchor: true
 
 <br />
 
-Many companies are currenlty having to adjust to remote work, but what about the ones that started this way from scratch?
+Many companies are currently having to adjust to remote work, but what about the ones that started this way from scratch?
 
 PostHog has a team of 12, 10 of whom have never met each other in real life. 
 

@@ -52,7 +52,7 @@ To do so, click 'Create new action' and the following modal should appear (witho
 
 <br />
 
-If you select the 'From event or pageview' option, you will be taken to the following page, where you can then set up your action from exisiting events:
+If you select the 'From event or pageview' option, you will be taken to the following page, where you can then set up your action from existing events:
 
 ![Action from event image](../../images/features/actions/action-from-event.png)
 
