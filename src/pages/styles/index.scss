@@ -186,6 +186,15 @@
         left: -20px;
     }
 
+    .landing-page-final-cta {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        width: 310px;
+        padding: 0;
+    }
+
     .topPageCol2 {
         background-image: url('../../images/computer-dashboard-4.svg') !important;
         position: relative;
@@ -457,6 +466,12 @@
         .fs-self-host-wrapper .fs-header-2 {
             max-width: 30vw !important;
             width: 30vw !important;
+        }
+    }
+
+    @media screen and (max-width: 1080px) {
+        .landing-page-final-cta {
+            margin: auto;
         }
     }
 
