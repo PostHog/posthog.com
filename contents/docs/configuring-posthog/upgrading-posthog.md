@@ -11,7 +11,7 @@ Because some data migrations require touching the Events table which can get ver
 If you need help, feel free to create an issue, or [join our Slack](/slack).
 
 
-## Deployment-Specific Intructions
+## Deployment-Specific Instructions
 
 Follow these tutorials for upgrading PostHog if you've deployed with any of the following options:
 

@@ -70,7 +70,7 @@ On setting the cohort to 'user has *action*', you will be presented with the fol
 <br />
 
 
-Currenly, our time filtering for cohorts has 3 options, but we are working to [expand this functionality](https://github.com/PostHog/posthog/issues/199).
+Currently, our time filtering for cohorts has 3 options, but we are working to [expand this functionality](https://github.com/PostHog/posthog/issues/199).
 
 <br />
 
@@ -84,7 +84,7 @@ Go to 'People' > 'Cohorts' in the left-hand navigation (as shown in the beginnin
 ## Differentiating Team vs. Users Traffic
 From the initial setup, [PostHog is tracking various events](/docs/integrations/js-integration#autocapture) from all users. However, you may want to differentiate between traffic from your team and traffic from your users.
 
-To do so, you can identify your team members in PostHog either through a [`posthog.identify`](/docs/integrations/js-integration#identifying-users) (e.g. by setting an email as the ID) call or by [assocating properties](/docs/integrations/js-integration#sending-user-information) with your team member users (e.g. `is_team = true`). 
+To do so, you can identify your team members in PostHog either through a [`posthog.identify`](/docs/integrations/js-integration#identifying-users) (e.g. by setting an email as the ID) call or by [associating properties](/docs/integrations/js-integration#sending-user-information) with your team member users (e.g. `is_team = true`). 
 
 With that done, you can then create a cohort of your team and/or a cohort that does not include any of your team members, so that you can continue to gather data on all users, but can differentiate between them when performing your analytics processes.
 

@@ -27,11 +27,11 @@ The second thing we try to do well is to set up informal communication with the 
 
 Throughout YC, we’ve split our roles pretty clearly. As my former boss used to say “don’t be like 5 year olds playing football”.
 
-Even when there were just two of us, Tim and I quickly saw how important it was to write tickets for features and issues. This meant that Tim could code uninterrupted, with notifications disabled. I would do everything else. We tend to work with our headphones on almost all day to help stay focussed. Occasionally we take them off, and one day we may treat ourselves to a new lightbulb for the office (updated - we never did):
+Even when there were just two of us, Tim and I quickly saw how important it was to write tickets for features and issues. This meant that Tim could code uninterrupted, with notifications disabled. I would do everything else. We tend to work with our headphones on almost all day to help stay focused. Occasionally we take them off, and one day we may treat ourselves to a new lightbulb for the office (updated - we never did):
 
 ![](../images/02/working.jpeg)
 
-Since Aaron joined, he has focussed on getting feedback from users, Tim has kept working on the product, and I’ve focussed on product, marketing and anything else. Aaron and I share the QA for features and we try to get them done immediately, so it doesn’t cause Tim to have to multitask.
+Since Aaron joined, he has focused on getting feedback from users, Tim has kept working on the product, and I’ve focused on product, marketing and anything else. Aaron and I share the QA for features and we try to get them done immediately, so it doesn’t cause Tim to have to multitask.
 
 Every Monday, we do a short post mortem of the week before, and set new weekly goals, then we do a 5 minute standup 2 to 3 times a week to keep us on track. We write all of this down too, and have been doing so since August. It’s really simple, but when we don’t do this, we tend to lose days to random tasks that don’t actually help us.
 

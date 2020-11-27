@@ -37,9 +37,9 @@ We kept up the two meetings a day target, but often missed it. Engineering leade
 
 The week before, we booked practice sessions with everyone we thought was relevant. This meant friends, family, a VC and two YC alumni who were offering to do this on Twitter.
 
-We made these sessions realistic - we told them to cut us off, to interupt if we weren't getting to the point, and to trip us up.
+We made these sessions realistic - we told them to cut us off, to interrupt if we weren't getting to the point, and to trip us up.
 
-We focussed on clarity. We had achieved a lot fast. We had signed up 400 people in just three weeks, for \$10 per user (the cost came down a lot per user after a lot of tweaking, so the more recent ones were way less expensive). Given we'd charge \$10 per month per user, the unit economics looked really good. We hadn't yet generated revenue, but we had 2 companies who said they would pay (and, a few weeks after the interview, they both did, which got us to our first \$600 MRR).
+We focused on clarity. We had achieved a lot fast. We had signed up 400 people in just three weeks, for \$10 per user (the cost came down a lot per user after a lot of tweaking, so the more recent ones were way less expensive). Given we'd charge \$10 per month per user, the unit economics looked really good. We hadn't yet generated revenue, but we had 2 companies who said they would pay (and, a few weeks after the interview, they both did, which got us to our first \$600 MRR).
 
 Tim and I got the Eurostar from Kings Cross to France the night before. That evening, we went out for a beer and caught up with an old friend.
 
@@ -53,7 +53,7 @@ We began the blustery but bright walk from our hotel to Front's offices, who wer
 
 We walked in, got our badges and did our best to ignore everyone else. We were led into the room by Dalton Cadwell. He was the first person I'd met in real life that I already recognized from YouTube. Geoff Ralston, who also interviewed us, was the second. There was one other person who remained quiet.
 
-The questions came thick and fast as soon as we started shaking hands, but the tone was bright, excited and helpful. We had a clear view of who would answer different types of question, which was important. The key thing we focussed on was making ourselves pause before answering, and we took the time we needed to be clear. We'd endlessly rehearsed explaining what we do "off guard", so we wouldn't get caught out.
+The questions came thick and fast as soon as we started shaking hands, but the tone was bright, excited and helpful. We had a clear view of who would answer different types of question, which was important. The key thing we focused on was making ourselves pause before answering, and we took the time we needed to be clear. We'd endlessly rehearsed explaining what we do "off guard", so we wouldn't get caught out.
 
 As we left, literally as the door was shutting, we were asked who we were. It's important you can describe your relevant experience as concisely as you can describe the product. 
 

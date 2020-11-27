@@ -20,7 +20,7 @@ showTitle: true
 
 Each user uses your product slightly differently from the next, and some user groups might use your app in a completely distinct way from others.
 
-This happens for a variety of reasons, including software, user profiles, accesibility needs, culture, understanding of the product, individual goals, among many other variables.
+This happens for a variety of reasons, including software, user profiles, accessibility needs, culture, understanding of the product, individual goals, among many other variables.
 
 As such, an established technique for performing analytics is cohort analysis. When doing cohort analysis, users are split into different groups according to certain characteristics, and you can then derive metrics for each specific group (cohort), rather than only performing your analytics on the entire collection of users.
 

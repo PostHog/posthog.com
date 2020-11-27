@@ -13,7 +13,7 @@ First our updates and new features.
 
 Also as you will see below we have added Celery workers, we’ll move tasks to workers to speed up a lot of actions in PostHog so we've updated the upgrade docs too.
 
-Updates and performance improvements this week have focussed on making PostHog easier to use in small but powerful ways.
+Updates and performance improvements this week have focused on making PostHog easier to use in small but powerful ways.
 
 ## PostHog updates
 

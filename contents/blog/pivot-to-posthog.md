@@ -11,7 +11,7 @@ YC has been running for 15 years, and getting bigger every year.
 
 That means there are more than 2,000 companies in their network. Many are still small, many are dead, but many of them are huge – 102 are valued at more than \$150M. The reason this is awesome if you are in the YC network is that it gives you a lot of customers that are slightly more likely to be friendly.
 
-We focussed on building pipeline, again – aiming for our 2 meetings a day routine. We went to as many of the meetings as we could in person.
+We focused on building pipeline, again – aiming for our 2 meetings a day routine. We went to as many of the meetings as we could in person.
 
 A lot of these meetings went well – the product was getting stronger. We started talking money with people.
 

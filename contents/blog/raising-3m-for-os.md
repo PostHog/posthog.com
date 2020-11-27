@@ -154,7 +154,7 @@ However, after a couple more weeks, it felt like the VCs had become used to this
 
 # "You're too early"
 
-It sounds obvious, but many of the most succesful open source companies start off with a really popular open source project. The implication is that you're going to have to build something that gets popular first, then monetize later, in most cases.
+It sounds obvious, but many of the most successful open source companies start off with a really popular open source project. The implication is that you're going to have to build something that gets popular first, then monetize later, in most cases.
 
 From a fundraising perspective, this means you can either be raising (i) off the back of lots of revenue, which seems unlikely or (ii) from a ton of growth of the project.
 
@@ -200,7 +200,7 @@ This was handy to store more context than is possible in as spreadsheet.
 
 The format was a single long document, with more detailed notes that I stored as a private repo. I just had 5-10 bullet points about each person I was meeting and their firm, that I would generate during the [planning process](#plan-the-meeting).
 
-### Captable management
+### Capable management
 
 We used [Pulley](https://pulley.com/) for this. [Captable.io](https://captable.io/) is a well known alternative. 
 
@@ -272,9 +272,9 @@ Once that's done, take a moment to think if anything could have been better for 
 
 Do not underestimate how much pipeline you need to build. There is a lot of legwork. My investor spreadsheet ended up with 157 rows.
 
-That number doesn't reflect that we often had 2 - 5 meetings with the same person. I would estimate I did about 200 calls, each lasting about 45 minutes, in \~6 weeks, on top of all the booking meetings in. We probably had 30 rejections, usually due to us being "too early", often coming from investors who hadn't invested in open source companies before. At first, these felt disheartening, but after a while it became clear some people love what we're working on, and others don't, so we stoped caring! We ended up with the possibility of raising \$5.5M and got really oversubscribed with investors fighting to get in, but it didn't feel like that would happen at first.
+That number doesn't reflect that we often had 2 - 5 meetings with the same person. I would estimate I did about 200 calls, each lasting about 45 minutes, in \~6 weeks, on top of all the booking meetings in. We probably had 30 rejections, usually due to us being "too early", often coming from investors who hadn't invested in open source companies before. At first, these felt disheartening, but after a while it became clear some people love what we're working on, and others don't, so we stopped caring! We ended up with the possibility of raising \$5.5M and got really oversubscribed with investors fighting to get in, but it didn't feel like that would happen at first.
 
-It was very important that we kept the product getting better and our usage growing during this time. I focussed exclusively on the fundraising process, and Tim focussed exclusively on building the product with our kick ass team and helping out the community. It would have been much harder if we were solo founders. Some investors during the process of talking to us saw our user number double. ie our user numbers did this:
+It was very important that we kept the product getting better and our usage growing during this time. I focused exclusively on the fundraising process, and Tim focused exclusively on building the product with our kick ass team and helping out the community. It would have been much harder if we were solo founders. Some investors during the process of talking to us saw our user number double. ie our user numbers did this:
 
 ![user growth](../images/ph-deployments.jpg)
 

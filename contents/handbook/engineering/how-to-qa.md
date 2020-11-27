@@ -8,7 +8,7 @@ showTitle: true
 
 We’ve found that almost every time we do Quality Assurance on something, we find something that would have been confusing/annoying to our users. Hence it’s worth doing QA for everything. 
 
-There are very few excpetions to this rule.
+There are very few exceptions to this rule.
 
 ## What does good QA look like?
 - You understand what has changed
