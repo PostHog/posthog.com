@@ -54,11 +54,7 @@ When we review a PR, we'll look at the following things:
 Things we do not care about during review:
 - Syntax. If we're arguing about syntax, that means we should install a code formatter
 
-## 6. Quality Assurance
-
-All our PRs go through a QA process by at least another member.
-
-See: [How to QA](/handbook/engineering/how-to-qa).
+See: [How we review](/handbook/engineering/how-we-review).
 
 ## 7. Merging
 
@@ -70,9 +66,9 @@ Our testing, reviewing and building process should be good enough that we're com
 
 See: [How to test](/docs/contributing#testing).
 
-## How to QA
+## How we Review
 
-See: [How to QA](/handbook/engineering/how-to-qa).
+See: [How we review](/handbook/engineering/how-we-review).
 
 ## How to release a new version 
 
