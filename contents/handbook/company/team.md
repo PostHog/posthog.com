@@ -292,7 +292,7 @@ I am now their Graphic Designer, and spend my days composing layouts for the web
 
 On a side note I have decided to move to Senegal (Africa) to be with my boyfriend George. It’s a bold decision really as I cannot speak French, but I will (try) learn.
 
-*French accent* C’est la Vie
+*French accent* C’est la Via
 
 </div>
 
