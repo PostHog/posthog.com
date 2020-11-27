@@ -9,7 +9,7 @@ hideAnchor: true
 
 ## Moving fast is easy. Moving fast with confidence is hard.
 
-If you've been keeping track of [The Array](/blog) release posts you know that we prioritize shipping things fast and often. Just as important to us is being sure that we are not going to break things unneccesarily for our users as we add new features and speedups.
+If you've been keeping track of [The Array](/blog) release posts you know that we prioritize shipping things fast and often. Just as important to us is being sure that we are not going to break things unnecessarily for our users as we add new features and speedups.
 
 What we have found that works really well is nothing terribly novel by itself: a solid foundation of unit tests, end to end tests (integration tests), and CI/CD that for automation and gatekeeper keeping master clean.
 
@@ -21,7 +21,7 @@ For this we do lean heavily on the standard Django test runner.
 
 If you are interested in learning more on testing with Django check out Django's great [docs](https://docs.djangoproject.com/en/3.0/topics/testing/) on testing.
 
-These tests only get you so far though. You know that the backend is going to behave well after you land the changes that you've made, but what if you accidently changed something that breaks the frontend in weird and unexpected ways?
+These tests only get you so far though. You know that the backend is going to behave well after you land the changes that you've made, but what if you accidentally changed something that breaks the frontend in weird and unexpected ways?
 
 ### Enter Cypress
 
@@ -87,7 +87,7 @@ describe('Funnels', () => {
 })
 ```
 
-I personally love this syntax. It feels super readible to me and reminds me a bit of the best parts of jQuery.
+I personally love this syntax. It feels super readable to me and reminds me a bit of the best parts of jQuery.
 
 
 ### Github Actions
@@ -104,7 +104,7 @@ The second round of poking we do with our app is we hit it with Cypress tests th
 
 ### Caching
 
-We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser… this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? Thats where we ended up using one of the best features of Github Actions: the [cache step](https://github.com/actions/cache).
+We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser… this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? That's where we ended up using one of the best features of Github Actions: the [cache step](https://github.com/actions/cache).
 
 Using the cache step we can cache the results of pulling python dependencies or javascript dependencies. This saves a chunk of time if you have ever messed around with watching yarn sort out the deps for a large frontend project. Check it out:
 

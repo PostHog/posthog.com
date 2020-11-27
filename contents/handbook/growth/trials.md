@@ -51,7 +51,7 @@ The purpose of this call is to get the client as close to up and running as poss
 * If they have a web-based app, we ought to be able to get autocapture up and running.
 * If they are on iOS or Android, getting at least some events coming in is a good goal to aim for, as it's then considerably less effort to get from there to more events coming in!
 
-If ahead of the call the client has already installed everything succesfully, it can be used to make sure the dashboards are working properly to help track the metrics needed.
+If ahead of the call the client has already installed everything successfully, it can be used to make sure the dashboards are working properly to help track the metrics needed.
 
 Otherwise, and most frequently, this call will be used to deploy PostHog using screensharing and to get events from the client's app sent into PostHog.
 
@@ -71,7 +71,7 @@ It will feel natural to say to the client "do you want to finish up on your own?
 * Send first events to PostHog if applicable.
 * Get relevant dashboards set up.
 * Send login invites to the relevant teams (to ensure adoption during the trial and help de-risk).
-* Discuss meeting cadence to ensure the project is succesful.
+* Discuss meeting cadence to ensure the project is successful.
 
 ### 3 - Check-in Calls 
 

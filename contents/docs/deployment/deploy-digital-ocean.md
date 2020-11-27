@@ -79,7 +79,7 @@ sudo ls -la /root
 
 You're all set!
 
-###### Running Docker Without Root Priviledges (Sudo)
+###### Running Docker Without Root Privileges (Sudo)
 
 As it currently stands, we can only run Docker on the new user by using `sudo`. This is not necessarily a good idea. To allow Docker to run without `sudo` on a non-root user, check out [this tutorial by Docker](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
 

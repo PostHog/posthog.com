@@ -105,7 +105,7 @@ posthog.init('[your api key]', {
 ### Sending User Information
 An ID alone might not be enough to work out which user is who within PostHog. That's why it's useful to send over more metadata of the user. At minimum, we recommend sending the `email` property, which is also what we use to display in PostHog.
 
-You can make this call on every page view to make sure this information is up-to-date. Alternatively, you can also do this whenever a user first appears (afer signup) or when they change their information.
+You can make this call on every page view to make sure this information is up-to-date. Alternatively, you can also do this whenever a user first appears (after signup) or when they change their information.
 
 ```js
 posthog.people.set({email: 'john@gmail.com'});
@@ -189,7 +189,7 @@ Here's how you can use them:
 
     The argument `callback(flags: string[])` will be called when the feature flags are loaded.
 
-    In case the flags are already loaded, it'll be called immediately. Aditionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
+    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
 
     ```js
     posthog.onFeatureFlags(callback)
