@@ -43,7 +43,7 @@ However, PostHog is positioned to store analytics metadata as objects for use th
 
 ### Integrating with Other Tools
 
-Product-led growth is an [early trend](https://trends.google.com/trends/explore?date=all&q=product%20led%20growth) that currently is taking place in marketing and some product teams. Within startups, this is often viewed as a key part of the strategy, and that will eventually feed through to most software companies. Many of the world's most succesful companies have taken such an approach:
+Product-led growth is an [early trend](https://trends.google.com/trends/explore?date=all&q=product%20led%20growth) that currently is taking place in marketing and some product teams. Within startups, this is often viewed as a key part of the strategy, and that will eventually feed through to most software companies. Many of the world's most successful companies have taken such an approach:
 
 * Facebook
 * LinkedIn

@@ -42,11 +42,11 @@ However, this will vary based on the volume you're expecting. If you're expectin
 
 #### Docker Installation
 
-On the page for your instance, you can choose how to access it. Clicking SSH will take you to a virtual terminal in your browser where you can interact with the virtual machine. However, you may want to SSH in from your own terminal. In this case, you need to follow [this tutorial](https://cloud.google.com/compute/docs/instances/connecting-advanced#provide-key) to provide you Public Key to the VM Instace.
+On the page for your instance, you can choose how to access it. Clicking SSH will take you to a virtual terminal in your browser where you can interact with the virtual machine. However, you may want to SSH in from your own terminal. In this case, you need to follow [this tutorial](https://cloud.google.com/compute/docs/instances/connecting-advanced#provide-key) to provide you Public Key to the VM Instance.
 
 1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. [Setup Docker to run without root privileges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
 1. You should already have `git` installed. In that case, skip this step. Otherwise, install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git

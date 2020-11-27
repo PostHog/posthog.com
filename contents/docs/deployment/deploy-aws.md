@@ -144,7 +144,7 @@ ssh -i path/to/your/key.pem <username>@<YOUR_IP>
 ```
 1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. [Setup Docker to run without root privileges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
 1. Install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git
