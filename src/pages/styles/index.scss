@@ -469,6 +469,12 @@
         }
     }
 
+    @media screen and (max-width: 1080px) {
+        .landing-page-final-cta {
+            margin: auto;
+        }
+    }
+
     @media screen and (max-width: 834px) {
         .featureFlagsWrapper {
             background-image: none !important;
