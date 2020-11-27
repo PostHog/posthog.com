@@ -274,7 +274,7 @@ Do not underestimate how much pipeline you need to build. There is a lot of legw
 
 That number doesn't reflect that we often had 2 - 5 meetings with the same person. I would estimate I did about 200 calls, each lasting about 45 minutes, in \~6 weeks, on top of all the booking meetings in. We probably had 30 rejections, usually due to us being "too early", often coming from investors who hadn't invested in open source companies before. At first, these felt disheartening, but after a while it became clear some people love what we're working on, and others don't, so we stopped caring! We ended up with the possibility of raising \$5.5M and got really oversubscribed with investors fighting to get in, but it didn't feel like that would happen at first.
 
-It was very important that we kept the product getting better and our usage growing during this time. I focused exclusively on the fundraising process, and Tim focused exclusively on building the product with our kick ass team and helping out the community. It would have been much harder if we were solo founders. Some investors during the process of talking to us saw our user number double. ie our user numbers did this:
+It was very importnt that we kept the product getting better and our usage growing during this time. I focused exclusively on the fundraising process, and Tim focused exclusively on building the product with our kick ass team and helping out the community. It would have been much harder if we were solo founders. Some investors during the process of talking to us saw our user number double. ie our user numbers did this:
 
 ![user growth](../images/ph-deployments.jpg)
 

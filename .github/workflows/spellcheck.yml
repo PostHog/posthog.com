@@ -21,7 +21,7 @@ jobs:
             - name: Install codespell with pip
               run: |
                   python -m pip install -U pip
-                  python -m pip install codespell
+                  python -m pip install git+https://github.com/yakkomajuri/codespell.git
 
             - name: Correct spelling
               run: |
