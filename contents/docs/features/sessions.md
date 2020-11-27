@@ -31,7 +31,7 @@ You can filter average session length by the same properties as you any other fe
 
 ### Distribution of Session Lengths
 
-Distribution of session lengths breaks down the total sessions in the selected time frame by a select number of time intervals raning from 0 seconds (in which only 1 event occured during the session) to 1+ hours.
+Distribution of session lengths breaks down the total sessions in the selected time frame by a select number of time intervals raning from 0 seconds (in which only 1 event occurred during the session) to 1+ hours.
 
 ![Distribution of session lengths](../../images/features/sessions/sessions-distribution.png)
 

@@ -56,7 +56,7 @@ We have:
   * This will always be a bottleneck. See [roadmap](https://github.com/orgs/PostHog/projects/1).
   * **Question:** When do we grow our engineering capacity, and why?
 * The open source product activation flow will be optimized
-  * Bottlenck: We need Clickhouse done to identify a top level retention metric we focus on first
+  * Bottleneck: We need Clickhouse done to identify a top level retention metric we focus on first
   * Bottleneck: We haven't yet written out a process in our Docs for how we manage tests
 * The website, README, and Docs will be:
   * Comprehensive, thoughtful, and beautiful, to signal it's worth investing time and effort with using the open source product, and to reduce user frustration

@@ -40,7 +40,7 @@ The main navigation bar contains the following elements (nested elements are fea
 
 
 ## Secondary navigation
-The top bar is used to aid in some secondary navigation, mainly for configuration or billing settings that don't require continuous acccess. The secondary navigation also allows switching between projects and organizations. The following items are navigated primarily from the secondary navigation:
+The top bar is used to aid in some secondary navigation, mainly for configuration or billing settings that don't require continuous access. The secondary navigation also allows switching between projects and organizations. The following items are navigated primarily from the secondary navigation:
 - User account settings (e.g. password changing, personal API keys, ...)
 - Project settings (e.g. ingestion key, permitted domains, toolbar settings, ...)
 - Organization & billing (cloud only) settings (e.g. invite members, ...)

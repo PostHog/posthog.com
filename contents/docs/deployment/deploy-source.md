@@ -57,4 +57,4 @@ If there is no desire to customize your source, we strongly recommend other depl
 
 <br>
 
-> We reccomend using something like [Supervisor](https://github.com/Supervisor/supervisor) to keep this command running. This is important because once you exit the current shell the process will stop. This happens for example when you terminate an SSH session. As such, you need to run these commands in detached mode, which Supervisor allows you to do. 
+> We recommend using something like [Supervisor](https://github.com/Supervisor/supervisor) to keep this command running. This is important because once you exit the current shell the process will stop. This happens for example when you terminate an SSH session. As such, you need to run these commands in detached mode, which Supervisor allows you to do. 

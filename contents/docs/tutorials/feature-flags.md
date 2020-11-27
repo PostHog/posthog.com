@@ -194,7 +194,7 @@ Here's an example view of Trends in PostHog filtering pageview events that conta
 
 ### Starting with a few users first
 
-There are many occasions when you might want to roll out a feature to your users slowly. Maybe you only want to enable it for Beta users, or you simply want to give users a transtion period.
+There are many occasions when you might want to roll out a feature to your users slowly. Maybe you only want to enable it for Beta users, or you simply want to give users a transition period.
 
 Whatever the case may be, feature flags let you easily roll out features in an incremental way, increasing the portion of users that have the feature as fast or slow as you wish. 
 
