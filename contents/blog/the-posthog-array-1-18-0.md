@@ -33,7 +33,7 @@ If you're using the chart to deploy PostHog, upgrading to the latest version wil
 
 ### [Honorary Mention: Requiring Curly Brackets](https://github.com/PostHog/posthog/pull/2505)
 
-Our codebase now disallows bracket-less control structures, enforcing curly brackets on if statements. 
+Our codebase now disallows bracket-less control structures, enforcing curly brackets on `if` statements for unbeatable readability. 
 
 As described by Michael, one of our engineers:
 
