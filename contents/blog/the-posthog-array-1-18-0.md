@@ -44,7 +44,7 @@ Out of the many improvements to session recording, there are some worth mentioni
 
 ### [Honorary Mention: Requiring Curly Brackets](https://github.com/PostHog/posthog/pull/2505)
 
-Our codebase now disallows bracket-less control structures, enforcing curly brackets on if statements. 
+Our codebase now disallows bracket-less control structures, enforcing curly brackets on `if` statements for unbeatable readability. 
 
 As described by Michael, one of our engineers:
 
@@ -189,7 +189,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Use isoformat\(\) for dates in Kafka WAL [\#2396](https://github.com/PostHog/posthog/pull/2396) ([mariusandra](https://github.com/mariusandra))
 - Combine events and actions into select box [\#2394](https://github.com/PostHog/posthog/pull/2394) ([timgl](https://github.com/timgl))
 - Event usage split clickhouse queries [\#2388](https://github.com/PostHog/posthog/pull/2388) ([timgl](https://github.com/timgl))
-- Add feature flag filters and roll out precentage to main table [\#2387](https://github.com/PostHog/posthog/pull/2387) ([GalDayan](https://github.com/GalDayan))
+- Add feature flag filters and roll out percentage to main table [\#2387](https://github.com/PostHog/posthog/pull/2387) ([GalDayan](https://github.com/GalDayan))
 - Fix prop filter not formatting properly [\#2386](https://github.com/PostHog/posthog/pull/2386) ([EDsCODE](https://github.com/EDsCODE))
 - Organize logic [\#2358](https://github.com/PostHog/posthog/pull/2358) ([EDsCODE](https://github.com/EDsCODE))
 - Improve docker-compose-config experience [\#2266](https://github.com/PostHog/posthog/pull/2266) ([Twixes](https://github.com/Twixes))
