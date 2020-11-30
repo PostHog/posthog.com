@@ -35,12 +35,13 @@ If you're using the chart to deploy PostHog, upgrading to the latest version wil
 
 Out of the many improvements to session recording, there are some worth mentioning specifically:
 
-- Keyboard shortcuts for the session recording player (`spacebar` to pause/play, `spacebar + f` to open in full screen)
+- Keyboard shortcuts for the session recording player (`spacebar` to pause/play, `f` to open player in full screen)
+- Ability to jump back/forward 8 seconds with the keyboard arrows (or player button)
 - Full-screen support for the session recording player without losing the controls bar
 - Pause/Play recording when clicking on the video
-- Ability to jump back/forward 8 seconds with the keyboard arrows (or player button)
 - Skipping inactivity made clearer with an overlay over the player
 - The session recording player is now responsive to the client's screen size
+- Incomplete session recordings (i.e. "blank screens") are now hidden from the list 
 
 ### [Honorary Mention: Requiring Curly Brackets](https://github.com/PostHog/posthog/pull/2505)
 
