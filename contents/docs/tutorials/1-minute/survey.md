@@ -1,5 +1,5 @@
 ---
-title: Running Surveys with No Backend
+title: Running Simple Surveys with No Backend
 sidebar: Docs
 showTitle: true
 ---
@@ -11,6 +11,8 @@ Running a user feedback survey without any backend.
 ## Why is this useful?
 
 Getting user feedback is very important for improving your product. With PostHog, you run a survey without a backend, and can easily pair the survey data with all other metrics about your product.
+
+This is especially helpful for static websites, or those using static site generators like Gatsby or Node.js.
 
 ## Pre-Requisites
 
@@ -24,7 +26,9 @@ To follow this tutorial along, you should:
 
 **1. Determine what you want to ask in your survey.**
    
-Ideally, this data should be categorical, binary, interval-based, or on a scale. In other words, there should be a limited set of possibilities from which an answer is chosen, rather than accepting arbitrary data.
+PostHog is best suited for visualizing data that is categorical, binary, interval-based, or on a scale. In other words, there should be a limited set of possibilities from which an answer is chosen, rather than accepting arbitrary data.
+
+PostHog also allows users to visualize arbitrary data from surveys, but we believe other services may be better suited for this.
     
 > **Fun Fact:** At PostHog we use PostHog to run our _"Was this page helpful?"_ survey.
 
