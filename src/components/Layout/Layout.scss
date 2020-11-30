@@ -1257,7 +1257,12 @@ table th {
     z-index: 100 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
-    padding-top: 5vh !important;
+    margin-top: 64px !important;
+    border-top: 0.5px solid #ebebeb;
+
+    .ant-list {
+        border-bottom: 0.5px solid #ebebeb;
+    }
 }
 
 .responsive-menu-item {
