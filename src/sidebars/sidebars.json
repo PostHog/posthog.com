@@ -191,6 +191,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-18-0",
             "blog/the-posthog-array-1-17-0",
             "blog/the-posthog-array-1-16-0",
             "blog/the-posthog-array-1-15-0",
