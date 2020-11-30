@@ -17,6 +17,12 @@ Finally, thank you to everyone who helped us out with feedback and contributions
 
 > If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
 
+### [New Event Selection Box](https://github.com/PostHog/posthog/pull/2394)
+
+![Events Box Screenshot](../images/blog/array/events-box.png)
+
+We upgraded our event selection box to include actions and events in one, as well as provide smarter recommendations of events and actions you might want to use of based frequently used in queries by you or your team.
+
 ### [Improvements to posthog-js](https://github.com/PostHog/posthog-js)
 
 A new version of `posthog-js` is available and we recommend you to update if you've installed it via `npm`. Snippet users have access to the latest version by default.
