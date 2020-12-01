@@ -7771,10 +7771,10 @@ gatsby-plugin-page-creator@^2.3.34:
     graphql "^14.7.0"
     lodash "^4.17.20"
 
-gatsby-plugin-posthog@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-posthog/-/gatsby-plugin-posthog-1.0.0.tgz#da2cfe4e84163c25cd6ffa1a60a562456029f456"
-  integrity sha512-NF1zOaKvyMzUM61EcLAS4wa5xGnXIIkqZwYyC2ofFwExrY6AkQSJ6paadnok+FoDmlM+rkyn50/AMA+TkQUxfg==
+gatsby-plugin-posthog@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-posthog/-/gatsby-plugin-posthog-1.0.1.tgz#e455720a66d235ed8d7f508e9e575f95e20f189b"
+  integrity sha512-RIyDTj/XcMvmV6Vs6HJa8zQFGcQr52LcS4iD76g5WfFB705hFOAPchIISFoFMQd3qN1n3m4jUinhA/uuhN43Qg==
   dependencies:
     "@babel/runtime" "^7.8.7"
 
