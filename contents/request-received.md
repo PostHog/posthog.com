@@ -1,6 +1,6 @@
 ---
 title: Request received
-sidebar: null
+sidebar: Docs
 showTitle: true
 ---
 

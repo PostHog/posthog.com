@@ -1,6 +1,6 @@
 ---
 title: FAQ
-sidebar: null
+sidebar: Docs
 showTitle: true
 ---
 
@@ -144,7 +144,7 @@ There are multiple open source analytics offerings - Metabase, Matomo, etc. Howe
 ### How do I contribute
 
 We love contributions big or small. [See docs for a guide on how to get started](https://posthog.com/docs/contributing).
-Not sure where to start?[Book a free, no-pressure pairing session](mailto:tim@posthog.com?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!) with one of our core contributors.
+Not sure where to start?[Book a free, no-pressure pairing session](mailto:hey@posthog.com?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!) with one of our core contributors.
 
 ### What are the Docs like?
 

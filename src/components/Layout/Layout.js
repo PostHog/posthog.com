@@ -25,6 +25,7 @@ const Layout = ({
     children,
     className,
     containerStyle = {},
+    hideLogoOnDesktop,
 }) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
 
@@ -68,6 +69,7 @@ const Layout = ({
                                         onPostPage={onPostPage}
                                         isBlogArticlePage={isBlogArticlePage}
                                         isHomePage={isHomePage}
+                                        hideLogoOnDesktop={hideLogoOnDesktop}
                                     />
                                     {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                                         <span className="display-mobile">
