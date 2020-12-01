@@ -41,7 +41,6 @@ function Template({
         <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
             <Layout
                 onPostPage={true}
-                hideLogoOnDesktop={!!frontmatter.sidebar}
                 isBlogArticlePage={isBlogArticlePage}
                 pageTitle={frontmatter.title}
                 isHomePage={false}
