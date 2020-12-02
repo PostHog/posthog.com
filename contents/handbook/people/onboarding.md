@@ -61,6 +61,7 @@ Charles and the new team member's manager will mostly do this.
 <input type="checkbox"/>  For the first week or so, book extra sessions as appropriate to provide extra help <br>
 <input type="checkbox"/>  Add team member to any relevant Google Groups <br>
 <input type="checkbox"/>  Add team member to the internal company Slack (and give them a warm welcome!) <br>
+<input type="checkbox"/>  Also add them to the virtual-coffee and standup channels on Slack <br>
 <input type="checkbox"/>  Add team member to PostHog Users Slack <br>
 <input type="checkbox"/>  Add team member to PostHog organization in GitHub <br>
 
