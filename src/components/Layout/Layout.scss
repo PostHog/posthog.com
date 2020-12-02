@@ -1331,7 +1331,8 @@ li {
     }
     .post-page-sub-header {
         position: relative;
-        z-index: 0;
+        z-index: 1;
+        height: 80px !important;
     }
     .post-page-sub-header-inner {
         right: 10px;

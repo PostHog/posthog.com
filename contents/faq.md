@@ -4,7 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-# Why PostHog
+## About PostHog
+
+### What is PostHog?
+
+PostHog is a product analyticsplatform built for the modern enterprise, with the differentiators of being open source and having a broader view of the tools needed to make a product successful. 
+
+As a result, PostHog **can be deployed on your own infrastructure** and provides a large set of tools to help improve your product, such as session recording, heatmaps, and feature flags, that are unique to PostHog in the product analytics space.
 
 ### Will this fit what I need?
 
@@ -19,16 +25,24 @@ The key difference is that PostHog is open source, and you can self-host it.
 
 We track user behavior across your website and applications.
 
-* We provide event capture for front and back end events.
-* We track all this at an identifiable user level (if you choose to identify your users).
-* PostHog also provides a full product analytics UX. That means:
+**Features Overview**
+
+* Event capture for both frontend and backend events.
+* Event tracking at an identifiable user level (if you choose to identify your users).
+* A full product analytics UX, including:
 	* [Trends](/docs/features/trends)
 	* [Funnels](/docs/features/funnels)
 	* [Cohorts](/docs/features/cohorts)
-	* [Trend Stickiness](/docs/features/trends#trend-segmentation-by-stickiness)
-	* [Retention](https://posthog.com/docs/features/retention)
+	* [Retention](/docs/features/retention)
+	* [Paths]((/docs/features/paths))
 	* [User histories](/docs/features/users)
-	* [Feature-rich Toolbar](https://posthog.com/docs/features/toolbar)
+* Data visualization and product experimentation tools, such as:
+	* [Feature-rich Toolbar](/docs/features/toolbar)
+	* [Feature Flags](/docs/features/feature-flags)
+	* [Session Recording](/docs/features/session-recording)
+	* [Plugins](/docs/features/plugins)
+
+You can read more about our available features on the dedicated [Product Features page](/product-features).
 
 ### Does it work for mobile and web?
 
@@ -50,7 +64,7 @@ Yes. We are in very [active development](https://github.com/PostHog/posthog/grap
 
 PostHog is a [well-funded](/handbook/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/handbook/company/team) and our active community.
 
-# About the Software
+## About the Software
 
 ### How popular is the software?
 
@@ -82,7 +96,7 @@ No. If you want to get started quickly you can use our [cloud version](https://a
 
 Additionally, if your company has a very large userbase and you need help with scalability and managing your setup, we can offer [paid help](mailto:sales@posthog.com) here.
  
-# Deployment
+## Deployment
 
 ### Can I self-host?
 
@@ -125,7 +139,7 @@ If you work at a software company, understanding user behavior is critical to dr
 
 The cool thing about PostHog is that you can go live into production without having to send all your user data to a SaaS company.
 
-# Community
+## Community
 
 ### What's the community like?
 
@@ -141,7 +155,7 @@ There are multiple open source analytics offerings - Metabase, Matomo, etc. Howe
 2. Full identifiable user histories 
 3. A complete product analytics UX, including additional features such as session recording and heatmaps.
 
-# Contributing
+## Contributing
 
 ### How can I contribute?
 
@@ -152,7 +166,7 @@ Not sure where to start? [Book a free, no-pressure pairing session](mailto:tim@p
 
 Our Docs are a top priority to us and are updated **daily**. [Check them out](/docs) for yourself!
 
-# General Questions
+## General Questions
 
 ### Can I suggest new features?
 
