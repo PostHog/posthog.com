@@ -8,7 +8,7 @@ showTitle: true
 
 ### What is PostHog?
 
-PostHog is a product analyticsplatform built for the modern enterprise, with the differentiators of being open source and having a broader view of the tools needed to make a product successful. 
+PostHog is a product analytics platform built for the modern enterprise, with the differentiators of being open source and having a broader view of the tools needed to make a product successful. 
 
 As a result, PostHog **can be deployed on your own infrastructure** and provides a large set of tools to help improve your product, such as session recording, heatmaps, and feature flags, that are unique to PostHog in the product analytics space.
 
@@ -37,7 +37,7 @@ We track user behavior across your website and applications.
 	* [Paths]((/docs/features/paths))
 	* [User histories](/docs/features/users)
 * Data visualization and product experimentation tools, such as:
-	* [Feature-rich Toolbar](/docs/features/toolbar)
+	* [Heatmaps](/docs/features/toolbar)
 	* [Feature Flags](/docs/features/feature-flags)
 	* [Session Recording](/docs/features/session-recording)
 	* [Plugins](/docs/features/plugins)
@@ -78,7 +78,7 @@ Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) or join our [Slac
 
 ### How many companies use it / How many well-known companies use it?
 
-We have thousands of users including several very large enterprises.
+We have thousands of users including very large enterprises.
 
 We are currently working on creating some case studies.
 
