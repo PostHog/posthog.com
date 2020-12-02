@@ -6,7 +6,7 @@ showTitle: true
 
 PostHog is proud to be an international group of misfits. You can't disrupt an industry by thinking the same way as everyone else.
 
-## How diversity helps us
+## How diversity helps us
 
 Having a great breadth of talented team members who think differently because of their different life stories, backgrounds, countries and levels of experience helps us better understand how to make sure there are more successful products in the *world*.
 
