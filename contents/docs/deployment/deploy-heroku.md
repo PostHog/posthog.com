@@ -103,3 +103,37 @@ To avoid this, we strongly recommend upgrading to at least a "Hobby" dyno:
 If you're running PostHog behind a proxy or load balancer, you need to set the `IS_BEHIND_PROXY` environment variable to `True`.
 
 For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
+
+## Scaling Heroku Redis
+
+PostHog currently supports Redis v5, while Heroku's Redis add-on now defaults to Redis v6.
+
+This causes a problem when scaling your Redis addon beyond `hobby-dev`, leading PostHog to fail.
+
+As such, if you need to scale Heroku Redis on your PostHog instance, you should do the following:
+
+1. Create a new Redis add-on on version 5, using the desired premium plan (e.g. `premium-0`):
+    
+    ```shell
+    heroku addons:create heroku-redis:premium-0 --version 5 -a your-app-name
+    ```
+
+1. Once it has been provisioned, change its max memory policy to `allkeys-lru`, using the add-on name provided to you at the previous step:
+   
+    ```shell
+    heroku redis:maxmemory your-redis-addon-name --policy allkeys-lru -a your-app-name
+    ```
+
+1. Promote the add-on to your default Redis instance:
+   
+    ```shell
+    heroku redis:promote your-redis-addon-name -a your-app-name
+    ```
+
+1. Delete the old Redis add-on:
+
+    ```shell
+    heroku addons:destroy old-redis-addon-name -a your-app-name
+    ```
+
+1. That's it! You will only need to do this once, and can now scale your Redis add-on normally if you need to do so again e.g. from `premium-0` to `premium-2`.
