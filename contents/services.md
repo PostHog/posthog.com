@@ -1,6 +1,6 @@
 ---
 title: Services
-sidebar: null
+sidebar: Docs
 showTitle: true
 ---
 

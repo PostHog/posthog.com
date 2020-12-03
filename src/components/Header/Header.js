@@ -10,7 +10,7 @@ function Header({ onPostPage, isBlogArticlePage, isHomePage }) {
     const { sidebarHide } = useValues(layoutLogic)
 
     return (
-        <div className={'menuHeaderWrapper ' + (!isBlogArticlePage && !sidebarHide && onPostPage && 'noLogo ')}>
+        <div className={'menuHeaderWrapper ' + (!isBlogArticlePage && !sidebarHide && onPostPage ? ' noLogo' : '')}>
             {!sidebarHide && (
                 <Link id="logo" to="/" className={onPostPage && !isBlogArticlePage ? 'display-mobile ' : ''}>
                     <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
