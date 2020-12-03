@@ -121,13 +121,13 @@ As such, if you need to scale Heroku Redis on your PostHog instance, you should 
 1. Once it has been provisioned, change its max memory policy to `allkeys-lru`, using the add-on name provided to you at the previous step:
    
     ```shell
-    heroku redis:maxmemory your-redis-addon-name --policy allkeys-lru -a your-app-name
+    heroku redis:maxmemory new-redis-addon-name --policy allkeys-lru -a your-app-name
     ```
 
 1. Promote the add-on to your default Redis instance:
    
     ```shell
-    heroku redis:promote your-redis-addon-name -a your-app-name
+    heroku redis:promote new-redis-addon-name -a your-app-name
     ```
 
 1. Delete the old Redis add-on:
