@@ -38,6 +38,28 @@ Check out [Snippet Installation](/docs/deployment/snippet-installation).
 
 Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many features with in-depth walkthroughs. 
 
+**Doing Analytics with PostHog**
+
+- [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
+- [Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
+- [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
+- [Analyzing User Behavior with Cohorts](/docs/tutorials/cohorts)
+- [Measuring Retention and Tracking Churn](/docs/tutorials/retention)
+- [Tracking Single Page Apps](/docs/tutorials/spa)
+- [Complete Guide to Event Tracking](/docs/tutorials/actions)
+- [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
+- [Sales and Revenue Tracking](/docs/tutorials/revenue)
+- [Running Surveys with No Backend ⏱️](/docs/tutorials/1-minute/survey)
+
+**Integrating PostHog with Other Tools**
+
+- [Integrate PostHog with Shopify ⏱️](/docs/tutorials/1-minute/integrate-with-shopify) 
+- [Integrate PostHog with Metabase ⏱️](/docs/tutorials/1-minute/integrate-with-metabase) 
+- [Integrate PostHog with Google Tag Manager ⏱️](/docs/tutorials/1-minute/integrate-with-gtm) 
+
+> The ⏱️ emoji denotes tutorials in our '1 Minute Tutorials' section
+
+
 ### Configuring PostHog
 
 [Configuring PostHog](/docs/configuring-posthog) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/configuring-posthog/scaling-posthog), [security](/docs/configuring-posthog/securing-posthog), and [upgrade methods](/docs/configuring-posthog/upgrading-posthog).
@@ -64,6 +86,6 @@ We love contributions to PostHog, big or small.
 
 Check out our [Contributing Docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/developing-locally), what our [stack](/docs/stack) is, and how the [project is structured](/docs/project-structure).
 
-### Project Documentation
+### Platform Structure
 
-[Project Documentation](/docs/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.
+[Platform Structure](/docs/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.
