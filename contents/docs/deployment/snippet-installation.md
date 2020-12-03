@@ -21,11 +21,11 @@ Having copied the snippet from the Settings page, you should now paste this with
 
 We recommend adding the PostHog snippet both on your homepage and your application (if you have one). That means you'll be able to follow a user from the moment they come onto your website, all the way through Sign Up and their actual usage of your product.
 
-## Adding Multiple URLs 
+## Adding Multiple Domains 
 
-PostHog supports tracking across multiple URLs and domains. Also on your Project Settings page, you are able to add more URLs that you wish to track. 
+PostHog supports tracking across multiple domains - just include the same snippet on all the websites you wish to track under the same project.
 
-![Snippet Settings Screenshot](../../images/features/snippet/add-url.png)
+However, you can also configure "permitted domains" in your 'Project Settings'. These are domains where you'll be able to record user sessions and use the PostHog toolbar. 
 
 ###  Ignore/Censure elements
 PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website. If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
