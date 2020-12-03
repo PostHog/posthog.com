@@ -771,8 +771,15 @@ li > .ant-menu-submenu-title span {
     font-size: 14px;
 }
 
+/* Targets submenu titles */
 .ant-menu-submenu-title span {
     font-weight: 400 !important;
+}
+
+/* Targets submenu titles inside a submenu e.g. 1 min tutorials */
+ul ul .ant-menu-submenu-title span {
+    font-size: 15px !important;
+    font-weight: 500 !important;
 }
 
 .ant-menu-submenu-selected > .ant-menu-submenu-title span {
