@@ -4,21 +4,35 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br>
+<br />
 
 These Docs explain how to deploy, use, and contribute to PostHog.
 
 ## Philosophy
 
-PostHog is a product analytics platform built for the modern enterprise, with the differentiators of being open source and having a broader view of the tools needed to make a product successful. 
+We believe the era of third-party product analytics software will eventually come to end.
 
-As a result, PostHog can be deployed on your own infrastructure and provides a [large set of tools](/product-features) to help improve your product, such as session recording, heatmaps, and feature flags, which are unique to us in the product analytics space.
+In our view, third-party analytics doesn't work anymore in a world of Cookie Laws, GDPR, CCPA, and many other four-letter acronyms. There should be an alternative to sending all of your customers' personal information and usage data to third-parties like Google.
+
+PostHog gives you full control over all the data from your users, while allowing you to do powerful analytics.
+
+We have seen multiple larger companies who cannot send their data to third-party tracking services for cost or privacy reasons. As a result, they end up with a complex data pipeline into a data lake with an analytics platform on top. Data analysts end up being the only people who understand it.
+
+PostHog solves that. We let every person in the company have easy access to product analytics that they can understand and use independently, even at a massive scale, all without sending data to third-parties.
 
 ## Documentation Structure
 
 ### Deployment
 
-We provide over 10 options for deploying PostHog if you are not using [PostHog Cloud](app.posthog.com).
+There are 3 ways of using PostHog:
+
+* PostHog Open Source
+* PostHog Enterprise
+* PostHog Cloud
+
+**Do you want to get started quickly without having to deploy PostHog yourself?**
+
+Start using [PostHog Cloud for free](app.posthog.com).
 
 **Do you want to self-host PostHog?**
 
@@ -30,9 +44,13 @@ Use our one-click [Heroku deployment](/docs/deployment/deploy-heroku):
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
 
-**Looking for instructions on using our snippet?**
+### Capturing Events with PostHog
 
-Check out [Snippet Installation](/docs/deployment/snippet-installation).
+You can capture events and send data to PostHog in 3 different ways:
+
+**Snippet**
+
+Using our snippet is the quickest way to get started if you're using PostHog to track a website. 
 
 ### Tutorials
 
