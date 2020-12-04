@@ -50,7 +50,15 @@ You can capture events and send data to PostHog in 3 different ways:
 
 **Snippet**
 
-Using our snippet is the quickest way to get started if you're using PostHog to track a website. 
+Using our [HTML snippet](/docs/deployment/snippet-installation) is the quickest way to get started if you're using PostHog to track a website. 
+
+**Integrations**
+
+We provide [15+ integrations](/docs/integrations) for various popular programming languages and tools that you can use to send data to PostHog. 
+
+**API**
+
+You can use our [API](/docs/api/overview) to get data in and out of PostHog, making it suitable for any use case you have that is not met by our integrations. 
 
 ### Tutorials
 
@@ -88,13 +96,9 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrations/segment-integration), [Slack](/docs/integrations/slack), and [Sentry](/docs/integrations/sentry-integration).
 
-### API
-
-If you have a niche use-case and our integrations are not sufficient for you, you are welcome to use our [API](/docs/api/overview).
-
 ### Plugins
 
-[Plugins](/docs/plugins/overview) are a beta feature that lets you extend PostHog's functionality, allowing you to enrich your event data, send events to other services, as well as prevent event ingestion.  
+[Plugins](/docs/plugins/overview) are a Beta feature that lets you extend PostHog's functionality, allowing you to enrich your event data, send events to other services, as well as prevent event ingestion.  
 
 If there's something you need in PostHog that we haven't built yet, you can [request it on GitHub](https://github.com/PostHog/posthog/issues/new?labels=enhancement&template=feature_request.md), or [build a plugin for it yourself](/docs/plugins/build).
 
