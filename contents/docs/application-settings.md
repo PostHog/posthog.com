@@ -46,7 +46,7 @@ Settings scoped to the logged in user, any changes here **will only affect the c
 
 #### Authentication
 - Change password.
-- Personal API keys. These keys are used to authenticate you against our api (see [docs](/docs/api/api#authentication) for more information).
+- Personal API keys. These keys are used to authenticate you against our api (see [docs](/docs/api/overview#authentication) for more information).
 
 #### Notifications
 - Notification settings. Control which notifications (email or push) you receive (e.g. security updates).

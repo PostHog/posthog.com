@@ -29,7 +29,7 @@ If you've never heard of Heroku or what it does, feel free to check out [this pa
 
 4. Once completed, you will see two options on the bottom of the screen: **Manage App** & **View App**. To go to PostHog, simply click the **View App** button!
 
-    - If you want to review add ons and other details of the instance, simply click the **Manage App** button or access the instance from your **Dashboard** *(click on the 9 dots by your profile on the top right)*.
+    - If you want to review add owns and other details of the instance, simply click the **Manage App** button or access the instance from your **Dashboard** *(click on the 9 dots by your profile on the top right)*.
 
     - Within the **Manage App** screen, simply click **Open App** on the top right to start your PostHog environment.
 
@@ -98,16 +98,42 @@ To avoid this, we strongly recommend upgrading to at least a "Hobby" dyno:
 
 1. Choose your desired tier!
 
-### Upgrading from before 1.0.11?
+## Running PostHog Behind a Proxy or Load Balancer
 
-PostHog is now using Redis with a worker to process events and other background tasks. If you're getting a `REDIS_URL is required` error or seeing a `Configuration Error` in the interface, you'll need to setup a Redis server and run the worker process.
+If you're running PostHog behind a proxy or load balancer, you need to set the `IS_BEHIND_PROXY` environment variable to `True`.
 
-A new Heroku Redis addon should be enabled automatically with the free plan. We recommend to switch to at least the first paid plan (premium-0) to enable [persistence](https://devcenter.heroku.com/articles/heroku-redis#persistence) and protect yourself against data loss. You will also see a new dyno type called `worker`, which may or may not be deployed automatically. You will need to deploy at least one `worker` dyno for the background tasks to work.
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
 
-### Upgrading from before 3 March 2020?
+## Scaling Heroku Redis
 
-If you last updated PostHog before 3 March 2020 **AND** you have a lot of events, there is one migration (0027) that might take a long time.
+PostHog currently supports Redis v5, while Heroku's Redis add-on now defaults to Redis v6.
 
-To avoid this, _before_ you migrate, run `python manage.py migrate_elementgroup` to pre-migrate elements across.
+This causes a problem when scaling your Redis addon beyond `hobby-dev`, leading PostHog to fail.
 
-If you only have a few thousand events, you probably don't need to worry about this.
+As such, if you need to scale Heroku Redis on your PostHog instance, you should do the following:
+
+1. Create a new Redis add-on on version 5, using the desired premium plan (e.g. `premium-0`):
+    
+    ```shell
+    heroku addons:create heroku-redis:premium-0 --version 5 -a your-app-name
+    ```
+
+1. Once it has been provisioned, change its max memory policy to `allkeys-lru`, using the add-on name provided to you at the previous step:
+   
+    ```shell
+    heroku redis:maxmemory new-redis-addon-name --policy allkeys-lru -a your-app-name
+    ```
+
+1. Promote the add-on to your default Redis instance:
+   
+    ```shell
+    heroku redis:promote new-redis-addon-name -a your-app-name
+    ```
+
+1. Delete the old Redis add-on:
+
+    ```shell
+    heroku addons:destroy old-redis-addon-name -a your-app-name
+    ```
+
+1. That's it! You will only need to do this once, and can now scale your Redis add-on normally if you need to do so again e.g. from `premium-0` to `premium-2`.

@@ -22,7 +22,7 @@ Please also update your `posthog-js` version to at least `1.3.5` if you have it 
 
 ![](../images/shared-dashboard.png)
 
-Dashboard on a TV in your office? Want to have a public stats page? Share a dashboard with someone who doesn't have a PostHog account? You can now publicly share a dashboard. Just click "Share Dashboard" and enable sharing. You'll get a link that's publicly accesible.
+Dashboard on a TV in your office? Want to have a public stats page? Share a dashboard with someone who doesn't have a PostHog account? You can now publicly share a dashboard. Just click "Share Dashboard" and enable sharing. You'll get a link that's publicly accessible.
 
 Changed your mind? You can always disable sharing.
 

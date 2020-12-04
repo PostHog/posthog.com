@@ -44,7 +44,7 @@ To provide some context as to how different businesses may look at retention, le
 
 **Examples:** Twitter, Facebook, YouTube
 
-Platforms that are focused on content and user interactions can benefit greatly from the most straighforward retention metrics. Essentially, with businesses like these, you want to know if your users are coming back day after day. 
+Platforms that are focused on content and user interactions can benefit greatly from the most straightforward retention metrics. Essentially, with businesses like these, you want to know if your users are coming back day after day. 
 
 It is not enough to have users that use the platform monthly, or even biweekly, even if they do so regularly. Social media and content platforms, for the most part, need users to be using the platform multiple times a week in order to be successful. 
 
@@ -54,7 +54,7 @@ It is not enough to have users that use the platform monthly, or even biweekly, 
 
 Imagine if airlines looked at their retention numbers on a daily timescale. They would probably see extremely low retention rates.
 
-That is because airlines are a business which provides a product that the individual consumer uses infrequently. Thus, a broader view of retention is needed. A given user, if statisfied with a certain airline, or the experience of booking an Airbnb home, might book again once or twice in the same year, and sometimes even less. 
+That is because airlines are a business which provides a product that the individual consumer uses infrequently. Thus, a broader view of retention is needed. A given user, if satisfied with a certain airline, or the experience of booking an Airbnb home, might book again once or twice in the same year, and sometimes even less. 
 
 As such, it is more important to focus on retention for the core product over a longer timespan, as well as consider supporting retention metrics for smaller time periods, such as retention on the searches for flights on the website.
 

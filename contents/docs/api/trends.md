@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
+> For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).
 
 In PostHog, there is an API endpoint available to do advanced analytics on your data. We use this endpoint for the [Trends page](/docs/features/trends) in PostHog.
 

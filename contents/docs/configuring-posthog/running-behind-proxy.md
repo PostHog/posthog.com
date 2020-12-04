@@ -5,13 +5,13 @@ showTitle: true
 ---
 
 
-If you're running PostHog behind a proxy, there are a few more things you need to do to make sure PostHog (specifically the toolbar, which runs on your own site) works.
+If you're running PostHog behind a proxy, there are a few more things you need to do to make sure PostHog works.
 
 ### Setup
 
-If PostHog is running behind a proxy, you need to do 2 things:
-1. Make sure you have the `IS_BEHIND_PROXY` environment variable set to `True`.
-1. If deploying with Docker, use the `docker-compose.proxy.yml` file. This is the exact same as the `docker-compose.yml` file with one line removed, preventing a port conflict between the PostHog Docker container and the proxy.
+If PostHog is running behind a proxy, you need to do the following:
+- Make sure you have the `IS_BEHIND_PROXY` environment variable set to `True`.
+- If deploying with Docker, use the `docker-compose.proxy.yml` file. This is the exact same as the `docker-compose.yml` file with one line removed, preventing a port conflict between the PostHog Docker container and the proxy.
 
 <div class='note-block'><b>Note:</b> It is suggested to set up the proxy separately from PostHog's Docker Compose definition.</div>
 

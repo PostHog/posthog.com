@@ -1,6 +1,6 @@
 ---
 title: Support
-sidebar: null
+sidebar: Docs
 showTitle: true
 ---
 

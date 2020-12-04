@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> This is a community integration that is not maintained by the PostHog core team.
+
 This library provides an Elixir HTTP client for Posthog. [See the repository](https://github.com/whitepaperclip/posthog) for more information.
 
 ## Installation

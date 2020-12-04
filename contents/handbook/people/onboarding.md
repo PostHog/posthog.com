@@ -40,10 +40,10 @@ Charles will create the contract needed, depending on who is joining. Only James
 
 Charles and the new team member's manager will mostly do this.
 
-<input type="checkbox"/> Add the team member to CharlieHR and ask them to fill in all details, upload relevant docs (e.g. passport scan) <br>
+<input type="checkbox"/> Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan) <br>
 <input type="checkbox"/>  Send team member a copy of this page so they can check everything has been done <br>
-<input type="checkbox"/> (US only) Add the team member to [Gusto](https://app.gusto.com)
-<input type="checkbox"/> (UK only) Send the team member the HMRC new starter form <br>
+<input type="checkbox"/> (US only) Add the team member to [Gusto](https://app.gusto.com) <br>
+<input type="checkbox"/> (UK only) Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll <br>
 <input type="checkbox"/>  Create GSuite account for the team member <br>
 <input type="checkbox"/>  Add team member to 1password <br>
 <input type="checkbox"/>  Check that the team member is invited to the daily standups and any other regular meetings (e.g. retros, life stories) <br> 
@@ -57,9 +57,11 @@ Charles and the new team member's manager will mostly do this.
 ## On Their First Day
 
 <input type="checkbox"/>  Manager to book a weekly 1:1 with the team member <br>
+<input type="checkbox"/>  Send them these instructions on adding the [team time off cal](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) to their Gcal <br>
 <input type="checkbox"/>  For the first week or so, book extra sessions as appropriate to provide extra help <br>
 <input type="checkbox"/>  Add team member to any relevant Google Groups <br>
 <input type="checkbox"/>  Add team member to the internal company Slack (and give them a warm welcome!) <br>
+<input type="checkbox"/>  Also add them to the virtual-coffee and standup channels on Slack <br>
 <input type="checkbox"/>  Add team member to PostHog Users Slack <br>
 <input type="checkbox"/>  Add team member to PostHog organization in GitHub <br>
 

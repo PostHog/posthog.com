@@ -87,7 +87,7 @@ This will prompt you to select the URL you'd like to launch it on (in case you a
 
 The heatmap is the most exciting feature of our toolbar. To use it, just hover over the hedgehog, and click on the red fire (🔥) icon. 
 
-The process is the same for toggling any functionality on or off. By defalt, you might have actions toggled on. Just click on the green flag icon to toggle that off and reduce noise on the page.
+The process is the same for toggling any functionality on or off. By default, you might have actions toggled on. Just click on the green flag icon to toggle that off and reduce noise on the page.
 
 ![Launch Toolbar](../../images/tutorials/toolbar/toolbar-options.png)
 

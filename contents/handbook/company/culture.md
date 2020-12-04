@@ -6,11 +6,7 @@ showTitle: true
 
 So, what's it like working at PostHog?
 
-## A day in the life
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xlODCLrZyvM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Philosophy
+## Our Philosophy
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/rRwzJiljpSA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -20,31 +16,39 @@ Our [team](/handbook/company/team) is 100% remote, and distributed across over 1
 
 As well as the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space) or to cover the costs of coffees for those who prefer not to work at home.
 
-### Advantages
+All remote has a bunch of advantages:
 
-* Hiring [amazing people](/handbook/company/team) from a global talent pool.
-* This encourages a deeper level of personal thought and writing things down.
-* We have an open core business model. This helps the community understand our decision-making.
+* We can hire [amazing people](/handbook/company/team) from a global talent pool.
+* Being remote encourages a deeper level of personal thought and writing things down.
 * It allows for uninterrupted work.
 * It makes results clearer, which helps us hold people to account for outcomes rather than hours spent in the office.
 
-## Everyone is a moderator
+## Diversity
 
-Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook.
+This is actually so important to us that it has [its own dedicated page](https://posthog.com/handbook/company/diversity). 
 
-### Advantages
+## Transparency
 
-* This allows anyone to give direct feedback on work they think could be improved.
-* People can work on what they're interested in.
-* This helps increase our responsiveness to the community. 
+As the builders of an open-source product, we believe it is only right that we be as transparent as possible as a company.
+
+And this isn't just a meaningless corporate statement. Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and our open source handbook explains everything from how we hire and pay employees to how we email investors!
+
+Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improve, which helps increase our responsiveness to the community. 
+
+We're committed to much more than just public code. 
 
 ## Write stuff down
 
-There is power in writing things down. We see transparency as part of this.
+We're an all-remote company that allows people to work from almost anywhere in the world. With team members across many countries, it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
 
 * It creates clear and deep thought.
+* We have an open core business model. This helps the community understand our decision-making.
 * It is usually clearer than a conversation, so everyone can row in the same direction.
 * It is very leveraged as we grow a large community and look to hire people around the world.
+
+To accomplish this, we use asynchronous communication as a starting point and stay as open and transparent as we can by communicating through public issues, pull requests, and (minimally) Slack.
+
+Putting things in writing helps us clarify our own ideas, as well as allow others to provide better feedback. It has been key to our development and growth.
 
 ## Don't let others fail
 
@@ -62,3 +66,7 @@ If given a choice, go live. If you can't go live, reduce the task size so you ca
 
 * We are small, and can only win based on speed and agility.
 * Going live forces a level of completion, on which you can build.
+
+## A day in the life
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xlODCLrZyvM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

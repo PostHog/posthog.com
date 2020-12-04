@@ -125,6 +125,12 @@ However, this will vary based on the volume you're expecting. If you're expectin
 1. Click 'Review and Launch'
 1. Once your instance is live, you should get a notification. That means you're ready to move on to the next tutorial.
 
+## Running PostHog Behind a Proxy or Load Balancer
+
+If you're running PostHog behind a proxy or load balancer like [ELB](https://aws.amazon.com/elasticloadbalancing/?elb-whats-new.sort-by=item.additionalFields.postDateTime&elb-whats-new.sort-order=desc), you need to set the `IS_BEHIND_PROXY` environment variable to `True`.
+
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
+
 #### Docker Installation
 
 0. SSH into your EC2 instance by using the IP provided on your console instead of `<YOUR_IP>`. On a terminal, this should look something like this:
@@ -138,7 +144,7 @@ ssh -i path/to/your/key.pem <username>@<YOUR_IP>
 ```
 1. After accessing the instance, install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. [Setup Docker to run without root privileges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
 1. Install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git
@@ -182,10 +188,10 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 ## Important Points
 
 #### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
-PostHog needs to run on HTTPS because:
+PostHog needs to run on HTTPS because if it doesn't:
  
  a) It will fail<br>
- b) It is a **grave security concern and potentially illegal**
+ b) Your user data will be at risk
 
 #### Check Your Firewall/Security Group if You Cannot Connect to a Port
 

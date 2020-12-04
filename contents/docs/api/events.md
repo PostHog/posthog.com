@@ -4,11 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-<span class='note-block'>For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).</span><br />
+> For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).
 
-In PostHog, there is an API endpoint available to see all events in your system and filter them.
-
-> **Important:** To **create events** you should [use the dedicated event capture API](/docs/api/post-only-endpoints) or [one of our libraries](/docs/integrations).
+In PostHog, there is an API endpoint available to retrieve all events in your system and filter them. To _create_ events you should [use the dedicated event capture API](/docs/api/post-only-endpoints) or [one of our libraries](/docs/integrations).
 
 ## Pagination
 

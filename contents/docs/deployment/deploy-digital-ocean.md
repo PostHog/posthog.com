@@ -79,7 +79,7 @@ sudo ls -la /root
 
 You're all set!
 
-###### Running Docker Without Root Priviledges (Sudo)
+###### Running Docker Without Root Privileges (Sudo)
 
 As it currently stands, we can only run Docker on the new user by using `sudo`. This is not necessarily a good idea. To allow Docker to run without `sudo` on a non-root user, check out [this tutorial by Docker](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
 
@@ -130,13 +130,19 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 
 <br>
 
+## Running PostHog Behind a Proxy or Load Balancer
+
+If you're running PostHog behind a proxy or load balancer, you need to set the `IS_BEHIND_PROXY` environment variable to `True`.
+
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
+
 ## Important Points
 
 #### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
-PostHog needs to run on HTTPS because:
+PostHog needs to run on HTTPS because if it doesn't:
  
  a) It will fail<br>
- b) It is a **grave security concern and potentially illegal**
+ b) Your user data will be at risk
 
 #### Check Your Firewall if You Cannot Connect to a Port
 

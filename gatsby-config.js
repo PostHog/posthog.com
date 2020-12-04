@@ -142,6 +142,9 @@ module.exports = {
                 head: true,
                 // Enable posthog analytics tracking during development (optional, default: false)
                 isEnabledDevMode: true,
+                initOptions: {
+                    _capture_metrics: true,
+                },
             },
         },
         // this (optional) plugin enables Progressive Web App + Offline functionality

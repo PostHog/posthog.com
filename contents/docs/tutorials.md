@@ -20,11 +20,13 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [Analyzing User Behavior with Cohorts](/docs/tutorials/cohorts)
 - [Measuring Retention and Tracking Churn](/docs/tutorials/retention)
 - [Tracking Single Page Apps](/docs/tutorials/spa)
-- [Complete Guide to Event Tracking ](/docs/tutorials/actions)
+- [Complete Guide to Event Tracking](/docs/tutorials/actions)
 - [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
 - [Sales and Revenue Tracking](/docs/tutorials/revenue)
 
 **1 Minute Tutorials**
 
-- [Integrate PostHog with Shopify](/docs/tutorials/integrate-with-shopify)
-- [Integrate PostHog with Metabase](/docs/tutorials/integrate-with-metabase)
+- [Integrate PostHog with Shopify](/docs/tutorials/1-minute/integrate-with-shopify)
+- [Integrate PostHog with Metabase](/docs/tutorials/1-minute/integrate-with-metabase)
+- [Running Simple Surveys with No Backend](/docs/tutorials/1-minute/survey)
+- [Integrate PostHog with Google Tag Manager](/docs/tutorials/1-minute/integrate-with-gtm)

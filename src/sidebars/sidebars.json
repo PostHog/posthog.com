@@ -58,7 +58,12 @@
     {
         "entry": "1 Minute Tutorials",
         "name": "1 Minute Tutorials",
-        "items": ["docs/tutorials/integrate-with-shopify", "docs/tutorials/integrate-with-metabase"]
+        "items": [
+            "docs/tutorials/1-minute/integrate-with-shopify",
+            "docs/tutorials/1-minute/integrate-with-metabase",
+            "docs/tutorials/1-minute/survey",
+            "docs/tutorials/1-minute/integrate-with-gtm"
+        ]
     },
     {
         "entry": "Deployment",
@@ -191,6 +196,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-18-0",
             "blog/the-posthog-array-1-17-0",
             "blog/the-posthog-array-1-16-0",
             "blog/the-posthog-array-1-15-0",
@@ -306,7 +312,7 @@
         "name": "Engineering",
         "items": [
             "handbook/engineering/development-process",
-            "handbook/engineering/how-to-qa",
+            "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",

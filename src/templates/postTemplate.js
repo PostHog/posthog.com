@@ -45,7 +45,6 @@ function Template({
                 pageTitle={frontmatter.title}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
-                isHandbookPage={isHandbookPage}
             >
                 <SEO
                     title={

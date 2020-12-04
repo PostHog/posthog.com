@@ -1,6 +1,6 @@
 ---
 title: Terms
-sidebar: null
+sidebar: Docs
 showTitle: false
 ---
 # PostHog Enterprise License Terms

@@ -29,7 +29,7 @@ If you are deploying with Docker on AWS or Digital Ocean, you can check our indi
 
 1. Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu)
 1. Then install [Docker Compose](https://docs.docker.com/compose/install/)
-1. [Setup Docker to run without root priviledges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
+1. [Setup Docker to run without root privileges](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) (optional but strongly recommended)
 1. Install `git`:
 ```bash
 sudo apt-get update && sudo apt-get install git
@@ -125,33 +125,9 @@ Upgrading PostHog with Docker depends on how you've deployed with Docker.
 
 If you've pinned a version, see [CHANGELOG.md](https://github.com/PostHog/posthog/blob/master/CHANGELOG.md) for the latest version.
 
-### Upgrading from before 1.0.11?
 
-PostHog is now using Redis with a worker to process events and other background tasks. If you're getting a `REDIS_URL is required` error or you see `Configuration Error` in the interface, you'll need to setup a Redis server and run the worker process.
+## Running PostHog Behind a Proxy or Load Balancer
 
-If you're using a docker-compose file, either pull the latest version from `master`, or add the following to your docker-compose file:
+If you're running PostHog on Docker behind a proxy or load balancer, you should use the `docker-compose.proxy.yml` file. This is the exact same as the `docker-compose.yml` file with one line removed, preventing a port conflict between the PostHog Docker container and the proxy.
 
-```yaml
-  redis:
-    image: "redis:alpine"
-    container_name: posthog_redis
-  web:
-    ...
-    environment:
-      ...
-      REDIS_URL: "redis://redis:6379/"
-    depends_on:
-      - db
-      - redis
-    links:
-      - db:db
-      - redis:redis
-```
-
-### Upgrading from before 3 March 2020?
-
-If you last updated PostHog before 3 March 2020 **AND** you have a lot of events, there is one migration (0027) that might take a long time.
-
-To avoid this, _before_ you migrate, run `python manage.py migrate_elementgroup` to pre-migrate elements across.
-
-If you only have a few thousand events, you probably don't need to worry about this.
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
