@@ -6,7 +6,7 @@ showTitle: true
 
 <br />
 
-<span class='note-block'>Update: These endpoints can now be accessed with either your Team API Key or your [Personal API Key](/docs/api/overview).</span>
+> **Update:** These endpoints can now be accessed with either your Team API Key or your [Personal API Key](/docs/api/overview).
 
 <br />
 

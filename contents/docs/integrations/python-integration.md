@@ -21,7 +21,7 @@ In your app, import the `posthog` library and set your api key and host **before
 ```python
 import posthog
 
-posthog.api_key = 'YOUR API KEY'
+posthog.api_key = 'YOUR TEAM API KEY'
 
 # You can remove this line if you're using app.posthog.com
 posthog.host = 'https://posthog.[your domain].com'
@@ -104,6 +104,30 @@ For example:
 ```python
 posthog.alias('anonymous session id', 'distinct id')
 ```
+
+### Feature Flags
+
+PostHog's [Feature Flags](/docs/features/feature-flags) allow you to safely deploy and roll back new features.
+
+When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
+
+**How to check if a flag is enabled**
+
+```python
+posthog.feature_enabled('beta-feature', 'distinct id')
+```
+
+**Example Use Case**
+
+Here's how you might send different users a different version of your homepage, for example:
+
+```python
+def homepage(request):
+    template = "new.html" if posthog.feature_enabled('new_ui', 'distinct id') else "old.html"
+    return render_template(template, request=request)
+```
+
+> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/features/feature-flags#feature-flag-persistence). 
 
 ### Sending Page Views
 
