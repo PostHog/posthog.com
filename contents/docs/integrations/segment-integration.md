@@ -19,8 +19,8 @@ Lastly, Segment is also more easily blocked by ad-blockers. To get around these 
 Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, either [self-hosted](/docs/deployment) or using [PostHog Cloud](https://app.posthog.com/signup).
 
 1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment.
-1. Grab the PostHog API key from the /setup page in PostHog.
-1. Use one of Segment's libraries to send events.
-1. See the events coming into PostHog
+2. Grab the PostHog API key from the 'Project Settings' page in PostHog.
+3. Use one of Segment's libraries to send events.
+4. See the events coming into PostHog
 
 

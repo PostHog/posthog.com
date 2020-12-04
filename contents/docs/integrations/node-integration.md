@@ -32,7 +32,7 @@ const client = new PostHog(
 
 > **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
-You can find your key in the /setup page in PostHog.
+You can find your key in the 'Project Settings' page in PostHog.
 
 ## Making Calls
 

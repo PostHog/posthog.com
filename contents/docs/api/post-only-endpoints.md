@@ -15,7 +15,7 @@ As explained in our [API Overview](/docs/api/overview-overview) page, PostHog pr
 
 This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrations/js-integration). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance. 
 
-> **Note:** For this API, you should use your 'Team API Key' from the `/setup` page in PostHog. This is the same key used in your frontend snippet.
+> **Note:** For this API, you should use your 'Team API Key' from the 'Project Settings' page in PostHog. This is the same key used in your frontend snippet.
 
 ## Feature Flags
 
@@ -34,8 +34,8 @@ POST https://[your-instance].com/decide/
 Content-Type: application/json
 Body:
 {
-    "api_key": "[your api key in /setup]",
-    "distinct_id": "[your users' distinct id]"
+    "api_key": "<PROJECT_API_KEY>",
+    "distinct_id": "[user's distinct id]"
 }
 ```
 
@@ -45,7 +45,7 @@ Body:
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
-    "api_key": "<INSERT YOUR API KEY>",
+    "api_key": "<PROJECT_API_KEY>",
     "distinct_id": "1234"
 }' https://app.posthog.com/decide/
 ```
@@ -88,7 +88,7 @@ POST https://[your-instance].com/capture/
 Content-Type: application/json
 Body:
 {
-    "api_key": "[your api key in /setup]",
+    "api_key": "<PROJECT_API_KEY>",
     "event": "[event name]",
     "properties": {
         "distinct_id": "[your users' distinct id]",
@@ -110,7 +110,7 @@ POST https://[your-instance].com/capture/
 Content-Type: application/json
 Body:
 {
-    "api_key": "[your api key in /setup]",
+    "api_key": "<PROJECT_API_KEY>",
     "batch": [
         {
             "event": "[event name]",
@@ -136,7 +136,7 @@ Additionally, if you're self-hosting, you'll have to substitute `https://app.pos
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<INSERT YOUR API KEY>",
+    "api_key": "<PROJECT_API_KEY>",
     "properties": {
         "distinct_id": "123",
         "alias": "456"
@@ -152,7 +152,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<INSERT YOUR API KEY>",
+    "api_key": "<PROJECT_API_KEY>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
     "context": {},
@@ -167,7 +167,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<INSERT YOUR API KEY>",
+    "api_key": "<PROJECT_API_KEY>",
     "timestamp": "2020-08-16 09:03:11.913767",
     "context": {},
     "type": "screen",
@@ -182,7 +182,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<INSERT YOUR API KEY>",
+    "api_key": "<PROJECT_API_KEY>",
     "timestamp": "2020-08-16 09:03:11.913767",
     "groupId": "123",
     "context": {},
@@ -198,7 +198,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<INSERT YOUR API KEY>",
+    "api_key": "<PROJECT_API_KEY>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
     "category": "some category",
@@ -215,7 +215,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<INSERT YOUR API KEY>",
+    "api_key": "<PROJECT_API_KEY>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
     "category": "some category",
