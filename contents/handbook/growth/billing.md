@@ -50,4 +50,17 @@ As a customer, to redeem a license key:
 1. Tap on activate license key and you are good to go.
 
 
+### Cloud billing
+Cloud billing may be set up using self-serve. For this, the new user just needs to go to the signup page with the appropriate plan attribute (e.g. `https://app.posthog.com/signup?plan=growth`). If you need to set up a billing agreement after signup, please follow these steps.
+
+1. Go to the [Django admin](https://app.posthog.com/admin/) and open the [Organization billing](https://app.posthog.com/admin/multi_tenancy/organizationbilling/) objects.
+1. Search for the relevant user (either by name, company name or email).
+1. Once you have the appropriate user, select the plan you want to assign to the organization.
+1. In addition to the plan, be sure to check the "Should setup billing" checkbox and click save.
+
+After this the user will be prompted in their app to enter their card details to initiate the billing agreement.
+
+If you need to activate a plan bypassing actual billing on Stripe, just set up a `billing_period_ends` that is after today's date (and be sure that "Should setup billing" is not checked). This is however not recommended.
+
+
 [license]: https://github.com/posthog/license
