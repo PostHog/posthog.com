@@ -22,7 +22,6 @@ const Layout = ({
     isDocsPage,
     isHomePage,
     isBlogArticlePage,
-    isHandbookPage,
     children,
     className,
     containerStyle = {},
@@ -69,8 +68,6 @@ const Layout = ({
                                         onPostPage={onPostPage}
                                         isBlogArticlePage={isBlogArticlePage}
                                         isHomePage={isHomePage}
-                                        isDocsPage={isDocsPage}
-                                        isHandbookPage={isHandbookPage}
                                     />
                                     {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                                         <span className="display-mobile">

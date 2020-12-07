@@ -16,7 +16,7 @@ Today, we are focused on community growth around our open source project. We aim
 
 We've made a crazy amount of progress to date.
 
-We took part in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most succesful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just 4 weeks old.
+We took part in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most successful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just 4 weeks old.
 
 Our GitHub repo has over over 3.3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 

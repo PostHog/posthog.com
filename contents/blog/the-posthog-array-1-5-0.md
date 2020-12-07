@@ -17,7 +17,7 @@ Another week, another PostHog Array. We're steadily working towards parity with 
 
 ![](../images/05/multiple-dashboards.png)
 
-It's now possible to have multiple dashboards. This can help you organize your graphs and let people have their own personal dashboards. You can also pin important dashboards so they're easily accesible to anyone in your organization.
+It's now possible to have multiple dashboards. This can help you organize your graphs and let people have their own personal dashboards. You can also pin important dashboards so they're easily accessible to anyone in your organization.
 
 In the next release, you'll even be able to resize, re-order and pick your own color for graphs.
 

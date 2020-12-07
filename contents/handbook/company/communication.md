@@ -165,7 +165,7 @@ for a video call.
 
 ## Hybrid calls are horrible
 
-In calls that have remote participants everyone should use have their own equipment (camera, headset, screen).
+In calls that have remote participants everyone should have their own equipment (camera, headset, screen).
 
 When multiple people share equipment the following **problems arise for remote participants**:
 

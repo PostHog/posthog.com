@@ -1,6 +1,6 @@
 ---
 title: Newsletter
-sidebar: null
+sidebar: Docs
 showTitle: true
 ---
 

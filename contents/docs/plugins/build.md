@@ -52,7 +52,6 @@ Here's an example `plugin.json` file from our ['Hello World Plugin'](https://git
   "url": "https://github.com/PostHog/helloworldplugin",
   "description": "Greet the World and Foo a Bar, JS edition!",
   "main": "index.js",
-  "lib": "lib.js",
   "config": {
     "bar": {
       "name": "What's in the bar?",
@@ -69,10 +68,6 @@ Most options in this file are self-explanatory, but there are a few worth explor
 #### main
 
 `main` determines the entry point for your plugin, where your `setupPlugin` and `processEvent` functions are. More on these later.
-
-#### lib
-
-Another file to be automatically included with your `main` file. 
 
 #### type (config -> param -> type)
 

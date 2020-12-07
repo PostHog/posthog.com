@@ -153,7 +153,7 @@ $ helm install -f my-values.yaml my-release .
 
 ## [Packages](#packages)
 
-### PostgresSQL
+### PostgreSQL
 
 By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. 
 

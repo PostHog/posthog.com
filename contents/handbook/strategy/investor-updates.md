@@ -36,7 +36,7 @@ We may need help with connections to people or organizations, with hiring, or tr
 ------------------------------------------------
 Key metrics
 
-Investors have a right to know how we're doing. Putting up regular numbers keeps our team focussed, and makes many problems more obvious so we can tackle them.
+Investors have a right to know how we're doing. Putting up regular numbers keeps our team focused, and makes many problems more obvious so we can tackle them.
 
 ------------------------------------------------
 Lowlights

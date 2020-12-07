@@ -75,7 +75,6 @@ function Menu({ isBlogArticlePage, isHomePage }) {
                         />
                         {menuOpen && (
                             <div id="navbar-responsive-wrapper" className="display-mobile">
-                                <div className="burger-menu-spacer"></div>
                                 <List
                                     itemLayout="horizontal"
                                     dataSource={menuItems.reverse()}

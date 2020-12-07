@@ -1,6 +1,6 @@
 ---
 title: Privacy
-sidebar: null
+sidebar: Docs
 showTitle: true
 ---
 

@@ -151,7 +151,7 @@ Remember that the application lifecycle events won't have any special context se
 </html>
 ```
 
-For more informations please check: https://posthog.com/docs/integrations/js-integration
+For more information please check: https://posthog.com/docs/integrations/js-integration
 
 ## Issues
 
