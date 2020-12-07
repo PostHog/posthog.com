@@ -62,3 +62,7 @@ If given a choice, go live. If you can't go live, reduce the task size so you ca
 
 * We are small, and can only win based on speed and agility.
 * Going live forces a level of completion, on which you can build.
+
+## Have fewer meetings
+
+We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all (which we try to avoid, see _"Write stuff down"_ above), we'll cluster them around the standup so our day doesn't get split up. On Tuesdays, we don't have internal meetings at all. Occasionally an external meeting will slip in on a Tuesday but we try to keep those to a minimum.
