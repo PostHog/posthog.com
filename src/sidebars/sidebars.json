@@ -294,7 +294,8 @@
             "handbook/growth/community",
             "handbook/growth/customer-success",
             "handbook/growth/sales",
-            "handbook/growth/trials"
+            "handbook/growth/trials",
+            "handbook/growth/billing"
         ],
         "child_entries": ["Content"]
     },
