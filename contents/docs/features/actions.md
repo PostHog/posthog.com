@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> Would you rather go through a tutorial about actions instead of this feature reference? Check out our [Complete Guide to Event Tracking](/docs/tutorials/actions#sorting-through-your-events-with-actions).
+
 Actions are PostHog’s way of easily cleaning up a large amount of Event data.
 
 Actions consist of one or more events that you have decided to put into a manually-labelled bucket. They're used in PostHog's Insights, as well as in Feature Flags.
