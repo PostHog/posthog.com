@@ -6,7 +6,7 @@ showTitle: true
 
 Offboarding team members can be a sensitive time. The aim of this policy is to create transparency around how this process works.
 
-Very infrequently, we may have long term contractors working for PostHog, acting essentially like an individual employee. In this case, the process below is exactly the same.  This offboarding policy *does not* apply to regular contractors who are doing short term work for us.
+Very infrequently, we may have long term contractors working for PostHog, acting essentially like a permanent employee. In this case, the process below is exactly the same.  This offboarding policy *does not* apply to regular contractors who are doing short term work for us.
 
 ## Communicating Departures
 
@@ -22,9 +22,9 @@ In this case, the team member chooses to leave.
 
 We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work that notice period. This is so we have some time to find someone to hire and to enable a handover.
 
-If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or another trusted team member to discuss your reasons for wanting to leave. At PostHog we want to ensure that all issues team members are facing are discussed and resolved before a resignation decision has been made.
+If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your coach or another trusted team member to discuss your reasons for wanting to leave. We want to ensure that all issues team members are facing are discussed and resolved before a resignation decision has been made.
 
-If resignation is the only solution after you have discussed your concerns, please communicate your intention to resign to your manager. Then with your manager you can discuss what is needed to work on a handover/transition. 
+If resignation is the only solution after you have discussed your concerns, please communicate your intention to resign to your coach. Then with your coach you can discuss what is needed to work on a handover/transition. 
 
 ## Involuntary Departure
 
@@ -40,7 +40,7 @@ A call needs to take place, covering the following points with the team member:
 1. Business expenses
 1. Personal email to the company
 
-During the call, another team member needs to complete the [offboarding checklist](#offboarding-checklist).
+During the call, someone on the ops team needs to complete the [offboarding checklist](#offboarding-checklist).
 
 ### Final Pay
 
@@ -48,16 +48,16 @@ Final pay will be determined based on length of service and the reasons for leav
 
 * If the offboarding is voluntary, you will be paid up until your last day. We will look at the amount of holiday taken in the last 12 months and will pay any "unused" vacation pay assuming you would have taken 25 days (since we offer unlimited vacation periods).
 * If the offboarding is involuntary and due to performance reasons or a change in business needs, you will receive 4 months of pay, provided you have passed your probation period. 
-* If the offboarding is voluntary or involuntary and due to performance reasons during a team member's probation period, 1 week's notice applies. 
+* If the offboarding is voluntary or involuntary and due to performance reasons during your probation period, 1 week's notice applies. 
 * If the offboarding is involuntary and for gross misconduct or breach of contract, you may be paid nothing and receive no notice.
 
-We are likely to ask departing employees to sign a release of claims in order to receive payments beyond their final day of work.
+We are likely to ask departing team members to sign a release of claims in order to receive payments beyond their final day of work.
 
 Please note that if there are local laws which are applicable, we will pay the greater of the above or the legally required minimum.
 
 ### Share Options Vested
 
-If you have been allocated share options, we will confirm how many have vested and the process by which you may wish to exercise them. We have an employee-friendly post-departure exercise window of 10 years, and most team members who leave will be deemed a 'good leaver' unless you have been terminated due to misconduct or negligence. 
+If you have been allocated share options, we will confirm how many have vested and the process by which you may wish to exercise them. We have a team-friendly post-departure exercise window of 10 years, and most team members who leave will be deemed a 'good leaver' unless you have been terminated due to misconduct or negligence. 
 
 ### Company Property
 
