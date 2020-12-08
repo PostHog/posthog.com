@@ -24,7 +24,7 @@ Once the job ad is out there, don't be afraid to [iterate](https://posthog.com/h
 
 ## Managing candidates
 
-We manage all of our candidates through [Workable](https://posthog.workable.com/backend) - please ask Charles, James or Tim for an invite to view candidates, leave feedback, and schedule meetings. Make sure you record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog. 
+We manage all of our candidates through [Workable](https://posthog.workable.com/backend) - please ask Eltje or Charles for an invite to view candidates, leave feedback, and schedule meetings. Make sure you record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog. 
 
 Workable is a pretty intuitive platform to use, but here are a few helpful tips to get you going:
 
@@ -159,7 +159,7 @@ If there are wildly different opinions, reflect on why.
 
 Hooray!
 
-To give an employee an offer letter and to do the rest of the onboarding, see [Onboarding](/handbook/people/onboarding).
+To give a candidate an offer letter and to move to the rest of the onboarding, see [Onboarding](/handbook/people/onboarding).
 
 ## Where to find great candidates
 
