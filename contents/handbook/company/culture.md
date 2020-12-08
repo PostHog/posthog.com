@@ -31,7 +31,7 @@ This is actually so important to us that it has [its own dedicated page](https:/
 
 As the builders of an open-source product, we believe it is only right that we be as transparent as possible as a company.
 
-And this isn't just a meaningless corporate statement. Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and our open source handbook explains everything from how we hire and pay employees to how we email investors!
+And this isn't just a meaningless corporate statement. Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and our open source handbook explains everything from how we hire and pay team members to how we email investors!
 
 Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improve, which helps increase our responsiveness to the community. 
 
