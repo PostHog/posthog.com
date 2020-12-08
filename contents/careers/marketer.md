@@ -16,7 +16,7 @@ We also would ideally love to bring on someone who is interested in xxxx.
 
 ## We hire the best to tell us what to do
 
-We are focussed on increasing user acquisition, retention and our community growth. Marketing is core to all of these things.
+We are focused on increasing user acquisition, retention and our community growth. Marketing is core to all of these things.
 
 Success in this role means xxx
 
