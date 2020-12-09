@@ -50,7 +50,7 @@ To see the difference in speed, check out our [demo Retool app](https://phtestin
 Integrating Retool with PostgreSQL directly is rather simple. 
 
 1. When creating a new resource, select the PostgreSQL integration. 
-2. This will prompt you to enter your database details, which are the same authetication parameters you use to connect the database to PostHog. 
+2. This will prompt you to enter your database details, which are the same authentication parameters you use to connect the database to PostHog. 
 3. With the connection complete, you are now able to run SQL queries on your PostHog database and use the result on Retool tables, charts, and any other component available. Retool also makes the database tables and their respective schemas available to you, making the process of writing queries easier. 
 
 
