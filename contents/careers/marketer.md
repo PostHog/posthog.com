@@ -5,33 +5,31 @@ showTitle: true
 ---
 ## PostHog exists to increase the number of successful products in the world.
 
-We're growing quickly and are looking for our first marketer to…… While we have mainly engineers to date, we are now hiring across all areas of the business.
-We also would ideally love to bring on someone who is interested in xxxx.
+While we have mainly engineers to date, we are now hiring across all areas of the business and we are looking to hire our first **marketer**. 
 
-## What you’ll be doing
-*
-*
-*
+We are focused on increasing user acquisition, retention and our community growth. Marketing is core to all of these things. 
 
+The primarily goal of this role is to increase the number of new users. We currently get around 120 deployments a week organically, but we want to accelerate this growth. Secondarily, we want to increase our community size (it currently exists in our Slack user group, GitHub, our mailing list and Twitter). 
 
-## We hire the best to tell us what to do
+We hire the best to tell us what to do. We'd expect to give you a healthy budget to achieve the above, a great candidate will be able to steer us as to what type of spend is appropriate.
 
-We are focused on increasing user acquisition, retention and our community growth. Marketing is core to all of these things.
-
-Success in this role means xxx
-
-This will be a challenging role - it will require the ability to execute quickly and xxx.
+## What you'll bring
+* Ability to understand a developer's mindset - you might have been a developer in the past or you might have collaborated very closely with engineering teams 
+* Strong Marketing experience across digital, paid and social
+* Strong background in writing content for a developer audience
+* Experience in early-stage, high-growth companies, or you might have been a founder yourself
+* Ideally, you make experience in marketing in developer-focused companies
 
 ## What we offer in return
-* Generous compensation
-* Unlimited, permissionless vacation with a 25 day minimum
+* Generous [compensation](/handbook/people/compensation)
+* [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
 * Health insurance provided or the cost covered depending on jurisdiction
-* Generous parental leave
+* [Generous parental leave](/handbook/people/time-off)
 * Visa sponsorship if needed, for you and your loved ones
-* Training budget (role dependent)
-* $200/month budget towards coworking or café working
-* Carbon offsetting for work travel with Project Wren
-* Free books
+* [Training budget](/handbook/people/training)
+* [$200/month budget towards coworking or café working](/handbook/people/spending-money)
+* Carbon offsetting for work travel with [Project Wren](https://www.wren.co/)
+* [Free books](/handbook/people/training#books)
 
 *Please note that benefits vary by country. If you have any questions, please don't hesitate to ask our team.*
 
@@ -57,7 +55,6 @@ Our [team](/handbook/company/team) is tiny but we live in 10 different countries
 We take bets on people with less experience too - we are as willing to hire an unproven genius straight out of school as we are a seasoned veteran.
 
 We're all remote, and we've raised enough to pay top of market. [We’re are proudly backed](/handbook/strategy/investors) by some of the best VCs and Investors in the world, including YCombinator and 1984 VC.
-
 
 ## Sold? Apply now
 Drop us a line and tell us:
