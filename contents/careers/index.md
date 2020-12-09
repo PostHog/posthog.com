@@ -113,9 +113,7 @@ We take this application seriously, and that's why it's listed above our other r
 
 Our team is proactively looking for the following:
 
-* [Designer](/careers/designer)
 * [Full Stack Software Engineer](/careers/full-stack-software-engineer)
-
 
 # Get Started - Applying
 
