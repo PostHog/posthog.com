@@ -5,7 +5,7 @@ showTitle: true
 ---
 ## PostHog exists to increase the number of successful products in the world.
 
-While we have mainly engineers to date, we are now hiring across all areas of the business and we are looking to hire our first **marketer**. 
+While we have mainly engineers to date, we are now hiring across all areas of the business and we are looking to hire our first **Marketeer**. 
 
 We are focused on increasing user acquisition, retention and our community growth. Marketing is core to all of these things. 
 
@@ -13,14 +13,14 @@ The primarily goal of this role is to increase the number of new users. We curre
 
 We hire the best to tell us what to do. We'd expect to give you a healthy budget to achieve the above, a great candidate will be able to steer us as to what type of spend is appropriate.
 
-## What you'll bring
+## What you'll bring:
 * Ability to understand a developer's mindset - you might have been a developer in the past or you might have collaborated very closely with engineering teams 
 * Strong Marketing experience across digital, paid and social
 * Strong background in writing content for a developer audience
 * Experience in early-stage, high-growth companies, or you might have been a founder yourself
 * Ideally, you make experience in marketing in developer-focused companies
 
-## What we offer in return
+## What we offer in return:
 * Generous [compensation](/handbook/people/compensation)
 * [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
 * Health insurance provided or the cost covered depending on jurisdiction
