@@ -167,15 +167,18 @@ To give a candidate an offer letter and to move to the rest of the onboarding, s
 
 Outreach has a few advantages:
 
-* We can approach people with very specific or relevant experience
+* We can approach people with very specific or relevant experience, even when they are not currently looking for a new role
 * It allows us to encourage candidates from a wider range of backgrounds to apply 
+* It also helps with building an employer brand and general awareness
 
 It is possible to research a list of potential candidates through:
 
-* Twitter
+* Workable - [People search](https://help.workable.com/hc/en-us/articles/115012750768-What-is-People-Search-) is a great tool to find profiles, email addresses and social media profiles!
 * LinkedIn - [Boolean searches](https://www.talentlyft.com/en/blog/article/306/boolean-search-a-simple-guide-for-recruiters) are your friend!
+* Twitter 
 * Behance
 * Dribble
+* AngelList
 
 It is important before starting outreach like this that you consider *why* a candidate messaged through this approach would move to us, so that your note to them can explain why you felt it might be a nice fit. 
 
