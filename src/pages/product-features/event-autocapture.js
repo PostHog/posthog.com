@@ -29,7 +29,7 @@ function ProductFeatures() {
                     image={autocaptureImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="Don't miss a thing"
                     listItem="02"
@@ -37,7 +37,7 @@ function ProductFeatures() {
                     image={autocaptureImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Customize as you wish"
                     listItem="03"
@@ -45,7 +45,7 @@ function ProductFeatures() {
                     image={autocaptureImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="autocapture" />
             </div>

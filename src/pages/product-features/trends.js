@@ -29,7 +29,7 @@ function ProductFeatures() {
                     image={trendsImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="Understand how your app is being used over time"
                     listItem="02"
@@ -37,7 +37,7 @@ function ProductFeatures() {
                     image={trendsImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Visualize how your changes affect the UX"
                     listItem="03"
@@ -45,7 +45,7 @@ function ProductFeatures() {
                     image={trendsImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="trends" />
             </div>

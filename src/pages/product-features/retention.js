@@ -29,7 +29,7 @@ function RetentionPage() {
                     image={retentionImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="Understand what keeps users coming back"
                     listItem="02"
@@ -37,7 +37,7 @@ function RetentionPage() {
                     image={retentionImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Identify the types of users you’re losing"
                     listItem="03"
@@ -45,7 +45,7 @@ function RetentionPage() {
                     image={retentionImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="retention" />
             </div>

@@ -33,7 +33,7 @@ function PluginsPage() {
                     image={pluginsImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="Send data to other platforms seamlessly"
                     listItem="02"
@@ -45,7 +45,7 @@ function PluginsPage() {
                     image={pluginsImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Build your own plugins with ease"
                     listItem="03"
@@ -56,7 +56,7 @@ function PluginsPage() {
                     image={pluginsImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="plugins" />
             </div>

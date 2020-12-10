@@ -32,7 +32,7 @@ function FunnelsPage() {
                     image={funnelsImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="Understand where users drop off"
                     listItem="02"
@@ -42,7 +42,7 @@ function FunnelsPage() {
                     image={funnelsImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Improve your app’s UX"
                     listItem="03"
@@ -53,7 +53,7 @@ function FunnelsPage() {
                     image={funnelsImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="funnels" />
             </div>
