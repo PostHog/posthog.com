@@ -141,7 +141,7 @@ posthog.register({
 
 The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified super property. 
 
-However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.set`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.people.set`. More information on this can be found on the [Sending User Information section](#sending-user-information).
 
 Furthermore, if you register the same property multiple times, the next event will use the new value of that property. If you want to register a property only once (e.g. for ad campaign properties) you can use `register_once`, like so:
 
@@ -152,6 +152,16 @@ posthog.register_once({
 ```
 
 Using `register_once` will ensure that if a property is already set, it will not be set again. For example, if the user already has property `"icecream pref": "vanilla"`, calling `posthog.register_once({"icecream pref": "chocolate"})` will **not** update the property.
+
+#### Removing stored super properties
+
+Setting super properties creates a cookie on the client with the respective properties and their values. In order to stop sending a super property with events and remove the cookie, you can use `posthog.unregister`, like so:
+
+```js
+posthog.unregister("icecream pref")
+```
+
+This will remove the super property and subsequent events will not include it.
 
 ### Opt Users Out
 
