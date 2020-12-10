@@ -285,7 +285,7 @@
     {
         "entry": "Open Roles",
         "name": "Open Roles",
-        "items": ["careers/designer", "careers/full-stack-software-engineer", "careers/marketer"]
+        "items": ["careers/full-stack-software-engineer", "careers/marketer"]
     },
     {
         "entry": "Growth",
@@ -294,7 +294,8 @@
             "handbook/growth/community",
             "handbook/growth/customer-success",
             "handbook/growth/sales",
-            "handbook/growth/trials"
+            "handbook/growth/trials",
+            "handbook/growth/billing"
         ],
         "child_entries": ["Content"]
     },

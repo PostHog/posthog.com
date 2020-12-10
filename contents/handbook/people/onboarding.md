@@ -38,7 +38,7 @@ Charles will create the contract needed, depending on who is joining. Only James
 
 ## The Week Before They Join
 
-Charles and the new team member's manager will mostly do this.
+Charles and the new team member's coach will mostly do this.
 
 <input type="checkbox"/> Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan) <br>
 <input type="checkbox"/>  Send team member a copy of this page so they can check everything has been done <br>
@@ -56,7 +56,7 @@ Charles and the new team member's manager will mostly do this.
 
 ## On Their First Day
 
-<input type="checkbox"/>  Manager to book a weekly 1:1 with the team member <br>
+<input type="checkbox"/>  Coach to book a weekly 1:1 with the team member <br>
 <input type="checkbox"/>  Send them these instructions on adding the [team time off cal](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) to their Gcal <br>
 <input type="checkbox"/>  For the first week or so, book extra sessions as appropriate to provide extra help <br>
 <input type="checkbox"/>  Add team member to any relevant Google Groups <br>
@@ -69,11 +69,22 @@ Charles and the new team member's manager will mostly do this.
 
 Add these if appropriate for the role:
 
-<input type="checkbox"/>  Add the new team member to the 'Team' group in AWS <br>
-<input type="checkbox"/>  Add team member to PagerDuty and into on-call rotation. Make sure the alerts work. <br>
-<input type="checkbox"/>  Add team member to Heroku. <br>
-<input type="checkbox"/>  Add team member to AWS. <br>
-<input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list). <br>
+#### Engineering
+
+<input type="checkbox"/>  'Team' group in AWS <br>
+<input type="checkbox"/>  PagerDuty and into on-call rotation - make sure the alerts work <br>
+<input type="checkbox"/>  Papercups for customer support <br>
+<input type="checkbox"/>  Heroku <br>
+<input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list) <br>
+
+#### Ops
+
+<input type="checkbox"/>  Workable if they are involved in recruitment <br>
+<input type="checkbox"/>  Google Voice - an admin will need to issue them a licence, add the company address and assign them a number, then invite <br>
+<input type="checkbox"/>  Any relevant job boards we advertise on <br>
+<input type="checkbox"/>  Gusto, Deel and/or CharlieHR admin access if they are involved in people ops <br>
+<input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) <br>
+<input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br>
 
 ## Signatories
 

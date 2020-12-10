@@ -72,7 +72,7 @@ This includes YCombinator, Solomon Hykes (Founder of Docker), David Cramer (Foun
 
 ## The Process
 
-We will schedule 2 to 3 short calls with our [founders and team](handbook/company/team). These will focus on two key areas:
+We will schedule 2 to 3 short calls with Eltje or one of our [founders and team](handbook/company/team). These will focus on two key areas:
 
 * Ensuring you will be a great cultural fit
 * Aptitude for the role
@@ -113,9 +113,7 @@ We take this application seriously, and that's why it's listed above our other r
 
 Our team is proactively looking for the following:
 
-* [Designer](/careers/designer)
 * [Full Stack Software Engineer](/careers/full-stack-software-engineer)
-
 
 # Get Started - Applying
 

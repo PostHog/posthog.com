@@ -46,7 +46,7 @@ Within each level, we believe there's a place to have incremental steps. We defi
 - *Thriving*: Exceeding expectations.
 - *Expert*: Exceeding expectations consistently.
 
-The definition of what is needed to progress from one step to the next in more detail depends on your role. Ask your manager for detail of what you need to work on.
+The definition of what is needed to progress from one step to the next in more detail depends on your role. Ask your coach for detail of what you need to work on.
 
 ## Share Options
 ​
@@ -98,7 +98,7 @@ Unless there is a very good reason, you'll be paid in your local currency. This 
 
 You will join us on a 3 month probation period, during which either you or PostHog can choose to end your contract with 1 week's notice. We are fully committed to ensuring that you are set up for success, but also understand that it may take some time to determine whether or not there is a long term fit between you and PostHog. Our bar for hiring is very high, and you should not expect to automatically pass probation. 
 
-Your manager is responsible for monitoring and specifically reviewing your performance throughout the probation period. If underperformance is a concern, or if there is any hesitation regarding the successful completion of a probation period, this should be discussed immediately with you and James or Tim. 
+Your coach is responsible for monitoring and specifically reviewing your performance throughout the probation period. If underperformance is a concern, or if there is any hesitation regarding the successful completion of a probation period, this should be discussed immediately with you and your coach. 
 
 ## Severance
 
