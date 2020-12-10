@@ -14,12 +14,11 @@ The primary goal of this role is to increase the number of new users into our op
 We hire the best to tell us what to do. We'd expect to give you a healthy budget to achieve the above, and we're well-financed. A great candidate will be able to steer us as to what type of spend is appropriate, and will be happy doing the work whilst steering the ship. 
 
 ## What you'll bring:
-* Ability to understand a developer's mindset - you might have been a developer in the past or you might have collaborated very closely with engineering teams
+* Ability to understand a developer's mindset - you might have been a developer in the past or you might have collaborated very closely with engineering teams, or you've worked in marketing at a developer-focussed company
 * Strong Marketing experience across digital (content, social) and brand
 * Strong background in writing content for a developer audience
 * Experience in early-stage, high-growth companies, or you might have been a founder yourself
-* Some paid experience a plus
-* Ideally, you have experience in marketing in developer-focused companies
+* Some paid marketing experience a plus
 * You've led marketing in some capacity before. You need not to have managed a huge team, but we do need someone that has demonstrably taken initiative before with a proven track record of success. The ideal candidate is comfortable leading, but wants to be the first person in at a hyper growth company.
 
 ## What we offer in return:
