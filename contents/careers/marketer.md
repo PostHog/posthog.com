@@ -1,24 +1,26 @@
 ---
-title: Marketer
+title: Head of Marketing
 sidebar: Careers
 showTitle: true
 ---
 ## PostHog exists to increase the number of successful products in the world.
 
-While we have mainly engineers to date, we are now hiring across all areas of the business and we are looking to hire our first **Marketeer**. 
+While we have hired mainly engineers to date, we are now growing across all areas of the business and we are looking to hire someone that is able to take complete ownership of our marketing - from strategy to execution, as the first hire.
 
-We are focused on increasing user acquisition, retention and our community growth. Marketing is core to all of these things. 
+This role will be focused on increasing user acquisition, and community growth around our open source project. It's key to PostHog's success and will report directly to the CEO.
 
-The primarily goal of this role is to increase the number of new users. We currently get around 120 deployments a week organically, but we want to accelerate this growth. Secondarily, we want to increase our community size (it currently exists in our Slack user group, GitHub, our mailing list and Twitter). 
+The primary goal of this role is to increase the number of new users into our open source project. We currently get around 120 deployments a week organically, but we want to accelerate this growth. Secondarily, we want to increase our community size (it currently exists in our Slack user group, GitHub, our mailing list and Twitter). 
 
-We hire the best to tell us what to do. We'd expect to give you a healthy budget to achieve the above, a great candidate will be able to steer us as to what type of spend is appropriate.
+We hire the best to tell us what to do. We'd expect to give you a healthy budget to achieve the above, and we're well-financed. A great candidate will be able to steer us as to what type of spend is appropriate, and will be happy doing the work whilst steering the ship. 
 
 ## What you'll bring:
-* Ability to understand a developer's mindset - you might have been a developer in the past or you might have collaborated very closely with engineering teams 
-* Strong Marketing experience across digital, paid and social
+* Ability to understand a developer's mindset - you might have been a developer in the past or you might have collaborated very closely with engineering teams
+* Strong Marketing experience across digital (content, social) and brand
 * Strong background in writing content for a developer audience
 * Experience in early-stage, high-growth companies, or you might have been a founder yourself
-* Ideally, you make experience in marketing in developer-focused companies
+* Some paid experience a plus
+* Ideally, you have experience in marketing in developer-focused companies
+* You've led marketing in some capacity before. You need not to have managed a huge team, but we do need someone that has demonstrably taken initiative before with a proven track record of success. The ideal candidate is comfortable leading, but wants to be the first person in at a hyper growth company.
 
 ## What we offer in return:
 * Generous [compensation](/handbook/people/compensation)
@@ -31,7 +33,7 @@ We hire the best to tell us what to do. We'd expect to give you a healthy budget
 * Carbon offsetting for work travel with [Project Wren](https://www.wren.co/)
 * [Free books](/handbook/people/training#books)
 
-*Please note that benefits vary by country. If you have any questions, please don't hesitate to ask our team.*
+*Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team.*
 
 ## About PostHog:
 
@@ -48,13 +50,14 @@ By being open source, we can be used on any software project throughout the worl
 The core of our approach is to delight end users. It's not about executive dashboards and then a terrible interface for everyone else. It's the sense of power we give to the person on the ground, doing the actual work, every day.
 
 ## Our team:
+
 Our team is a combination of former CTOs and YC founders all turned developers, alongside some of the best developers from the world's largest tech companies who have the experience to help us handle scalability.
 
 Our [team](/handbook/company/team) is tiny but we live in 10 different countries. This diverse group looks pretty weird on paper, but it's magical. Apart from the fact most of them think [pineapple belongs on pizza](https://twitter.com/PostHogHQ/status/1319583079648923648). It doesn't.
 
 We take bets on people with less experience too - we are as willing to hire an unproven genius straight out of school as we are a seasoned veteran.
 
-We're all remote, and we've raised enough to pay top of market. [We’re are proudly backed](/handbook/strategy/investors) by some of the best VCs and Investors in the world, including YCombinator and 1984 VC.
+We're all remote, and we've raised enough to pay top of market. [We’re are proudly backed](/handbook/strategy/investors) by some of the best VCs and Investors in the world, such as YCombinator.
 
 ## Sold? Apply now
 Drop us a line and tell us:
