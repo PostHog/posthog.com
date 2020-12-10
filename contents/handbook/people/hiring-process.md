@@ -173,7 +173,7 @@ Outreach has a few advantages:
 
 It is possible to research a list of potential candidates through:
 
-* Workable - [People search] (https://help.workable.com/hc/en-us/articles/115012750768-What-is-People-Search-) is a great tool to find profiles, email addresses and social media profiles!
+* Workable - [People search](https://help.workable.com/hc/en-us/articles/115012750768-What-is-People-Search-) is a great tool to find profiles, email addresses and social media profiles!
 * LinkedIn - [Boolean searches](https://www.talentlyft.com/en/blog/article/306/boolean-search-a-simple-guide-for-recruiters) are your friend!
 * Twitter 
 * Behance
