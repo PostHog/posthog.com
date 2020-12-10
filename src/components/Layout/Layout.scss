@@ -1320,6 +1320,10 @@ li {
     }
 }
 
+.request-demo-referrer label::after {
+    content: ' ' !important;
+}
+
 @media screen and (min-width: 1076px) {
     .display-mobile {
         display: none !important;

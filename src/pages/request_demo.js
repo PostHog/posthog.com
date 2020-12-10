@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
-import { Col, Form, Input, Button } from 'antd'
+import { Col, Form, Input, Button, Select } from 'antd'
+
+const { Option } = Select
 
 const layout = {
     labelCol: { offset: 4, span: 6 },
@@ -82,6 +84,20 @@ const RequestDemoForm = ({ title, subtitle }) => {
                     >
                         <Input id="company" name="company" required />
                     </Form.Item>
+                    <span className="request-demo-referrer">
+                        <Form.Item label="How did you find out about PostHog?" name="referrer">
+                            <Select id="referrer" name="referrer">
+                                <Option value="referral">Through a referral</Option>
+                                <Option value="alternatives">Searching for product analytics</Option>
+                                <Option value="yc">YCombinator</Option>
+                                <Option value="twitter">Twitter</Option>
+                                <Option value="linkedin">LinkedIn</Option>
+                                <Option value="hackernews">HackerNews</Option>
+                                <Option value="github">GitHub</Option>
+                                <Option value="other">Other</Option>
+                            </Select>
+                        </Form.Item>
+                    </span>
                     <Button type="primary" htmlType="submit">
                         Submit
                     </Button>
