@@ -59,7 +59,7 @@ We take bets on people with less experience too - we are as willing to hire an u
 We're all remote, and we've raised enough to pay top of market. [We’re are proudly backed](/handbook/strategy/investors) by some of the best VCs and Investors in the world, such as YCombinator.
 
 ## Sold? Apply now
-* [Drop us a line](mailto:careers@posthog.com) and tell us:
+* [Drop us a line](mailto:8D28C092E5@jobs.workablemail.com) and tell us:
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
 * Your resumé and/or LinkedIn
