@@ -60,16 +60,15 @@ We take bets on people with less experience too - we are as willing to hire an u
 We're all remote, and we've raised enough to pay top of market. [We’re are proudly backed](/handbook/strategy/investors) by some of the best VCs and Investors in the world, such as YCombinator.
 
 ## Sold? Apply now
-Drop us a line and tell us:
-How you can achieve the above in a few sentences
-Why you're drawn to us
-Projects you've worked on (at your work or on the side)
+* [Drop us a line](mailto:careers@posthog.com) and tell us:
+* How you can achieve the above in a few sentences
+* Why you're drawn to us
+* Your resumé and/or LinkedIn
 
 ## Not sold? Learn more first
 * [How we hire](/careers#the-process)
 * We ask for your best work, and in return [pay generously](/handbook/people/compensation) and have [exceptional benefits](/careers/#benefits)
 * Learn about [the team you'd be working with](/handbook/company/team)
 * Getting hiring right is key to diversity. Learn about [how we think about this](/handbook/company/diversity).
-* Check out our stack
  
 *We believe people from diverse backgrounds, with different identities and experiences, make our product and our company better. No matter your background, we'd love to hear from you! Also, if you have a disability, please let us know if there's any way we can make the interview process better for you; we're happy to accommodate!*
