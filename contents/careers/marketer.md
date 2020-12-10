@@ -1,5 +1,5 @@
 ---
-title: Head of Marketing
+title: Marketing Lead
 sidebar: Careers
 showTitle: true
 ---
