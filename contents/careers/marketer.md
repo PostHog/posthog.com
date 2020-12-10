@@ -19,7 +19,7 @@ We hire the best to tell us what to do. We'd expect to give you a healthy budget
 * Strong background in writing content for a developer audience
 * Experience in early-stage, high-growth companies, or you might have been a founder yourself
 * Some paid marketing experience a plus
-* You've led marketing in some capacity before. You need not to have managed a huge team, but we do need someone that has demonstrably taken initiative before with a proven track record of success. The ideal candidate is comfortable leading, but wants to be the first person in at a hyper growth company.
+* You have either led marketing before or you're ready to step up and can demonstrate you've a track record of taking initiative over the strategy and execution. The ideal candidate will need to be comfortable working out where to start as the first person on the team in a hypergrowth company.
 
 ## What we offer in return:
 * Generous [compensation](/handbook/people/compensation)
