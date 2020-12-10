@@ -24,7 +24,9 @@ export const DocsSearch = ({ className = '', backgroundColor = '#ffffff' }) => {
             const docSearchBarElement = doc.getElementById('doc-search-wrapper')
             const docSearchInputElement = doc.getElementById('doc-search')
 
-            docSearchInputElement.placeholder += window.navigator.platform.includes('Mac') ? ' (⌘K)' : ' (Ctrl + K)'
+            if (window.screen.width > 1080) {
+                docSearchInputElement.placeholder += window.navigator.platform.includes('Mac') ? ' (⌘K)' : ' (Ctrl + K)'
+            }
 
             // Add light yellow 'glow' if user has not tried the search bar before
             if (!window.localStorage['hasUsedSearchBar'])
