@@ -74,6 +74,8 @@ The type of a parameter in the config can be either `string` or `attachment`. If
 
 ### PluginMeta
 
+> Check out [Plugin Types](/docs/plugins/types) for a full spec of types for plugin authors.
+
 **Every plugin server function** is called by the plugin server with an object of type `PluginMeta` that will always contain the object `cache`, and can also include `global`, `attachments`, and `config`, which you can use in your logic. 
 
 Here's what they do:
