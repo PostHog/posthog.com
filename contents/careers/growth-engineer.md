@@ -9,7 +9,7 @@ We provide an open source platform for product analytics. The product is new - w
 
 This growth has meant we've been able to raise significant investment from the best in the world, such as YCombinator, and we're now ready to build our first growth team, and we need the first person on that team! You will play an instrumental role in establishing culture and in guiding how we conduct experimentation.
 
-This role will be focussed on increasing our company's most important metrics. We use Acquisition, Activation, Retention, Revenue, Referral (AARRR) as a framework, and you'd be responsible for everything outside Retention which is the focus of our core engineering team. You'd collaborate with our marketing team on acquisition. Activation and Referral you'd collaborate with our product and design team.
+This role will be focused on increasing our company's most important metrics. We use Acquisition, Activation, Retention, Revenue, Referral (AARRR) as a framework, and you'd be responsible for everything outside Retention which is the focus of our core engineering team. You'd collaborate with our marketing team on acquisition. Activation and Referral you'd collaborate with our product and design team.
 
 Since this is the first person in this type of role, you will need product and design thinking, the ability to implement, and basic data analysis skills.
 
