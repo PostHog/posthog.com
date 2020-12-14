@@ -1,5 +1,5 @@
-import { Spacer } from 'components/Spacer'
 import React from 'react'
+import { Spacer } from '../Spacer'
 import './style.scss'
 
 export const DemoScheduler = () => {

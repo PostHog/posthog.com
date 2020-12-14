@@ -1,0 +1,15 @@
+.yc-onboarding-wrapper {
+    p {
+        margin: auto;
+        font-size: 15px !important;
+        max-width: 60%;
+        display: block;
+        text-align: center;
+    }
+
+    @media screen and (max-width: 1080px) {
+        p {
+            max-width: 90%;
+        }
+    }
+}
