@@ -510,9 +510,6 @@ dt {
 th {
     font-weight: bold;
 }
-li {
-    margin-bottom: calc(1.45rem / 2);
-}
 ol li {
     padding-left: 0;
 }
@@ -1300,6 +1297,7 @@ table th {
 }
 
 li {
+    margin-bottom: calc(1.45rem / 2);
     font-size: 18px;
     color: rgba(0, 0, 0, 0.8);
 }
@@ -1522,4 +1520,10 @@ div::-webkit-scrollbar-thumb {
 /* handle on hover */
 div::-webkit-scrollbar-thumb:hover {
     background: #b0bec5;
+}
+
+@media screen and (max-width: 834px) {
+    li {
+        font-size: 16px;
+    }
 }
