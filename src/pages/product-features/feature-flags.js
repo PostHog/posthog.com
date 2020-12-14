@@ -32,7 +32,7 @@ function FeatureFlagsPage() {
                     image={featureFlagsImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="See how new features affect the UX"
                     listItem="02"
@@ -43,7 +43,7 @@ function FeatureFlagsPage() {
                     image={featureFlagsImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Safely roll back features"
                     listItem="03"
@@ -53,7 +53,7 @@ function FeatureFlagsPage() {
                     image={featureFlagsImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="feature-flags" />
             </div>

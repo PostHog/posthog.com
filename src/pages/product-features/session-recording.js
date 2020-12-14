@@ -33,7 +33,7 @@ function SessionRecordingPage() {
                     image={sessionRecordingImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="Track down bugs faster"
                     listItem="02"
@@ -44,7 +44,7 @@ function SessionRecordingPage() {
                     image={sessionRecordingImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Ensure privacy for your users"
                     listItem="03"
@@ -56,7 +56,7 @@ function SessionRecordingPage() {
                     image={sessionRecordingImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="session-recording" />
             </div>

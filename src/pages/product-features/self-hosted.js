@@ -29,7 +29,7 @@ function ProductFeatures() {
                     image={selfHostedImg1}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextRight
                     headerText="Deploy in your own way"
                     listItem="02"
@@ -37,15 +37,15 @@ function ProductFeatures() {
                     image={selfHostedImg2}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <FeaturedSectionTextLeft
                     headerText="Perform powerful analytics your entire team can use"
                     listItem="03"
-                    descriptionText={`When you self-host, your data is all yours. This means your users’ data is not sent to any third-party, not even PostHog. The privacy of your users is preserved, and it is easier to comply with legislation such as GDPR and cookie laws. `}
+                    descriptionText={`PostHog provides self-serve analytics for any Engineer or Product Manager. The interface is simple for any user - no data analysts needed. With PostHog, you have all the benefits of self-building plus the support of a world-class team ensuring you have all the features you need. In addition, by being open source, PostHog ensures that our tool is secure and battle-tested.`}
                     image={selfHostedImg3}
                     color="red"
                 />
-                <Spacer onlyDesktop={true} />
+                <Spacer onlyDesktop={true} height={125} />
                 <StartNowButton />
                 <OtherFeaturesBlock currentPageKey="self-hosted" />
             </div>
