@@ -114,6 +114,7 @@ We take this application seriously, and that's why it's listed above our other r
 Our team is proactively looking for the following:
 
 * [Full Stack Software Engineer](/careers/full-stack-software-engineer)
+* [Marketing Lead](/careers/marketer)
 
 # Get Started - Applying
 
