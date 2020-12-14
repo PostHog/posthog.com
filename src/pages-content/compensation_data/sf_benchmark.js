@@ -4,8 +4,9 @@ const sf_benchmark = {
     Designer: 128400,
     Engineer: 192000,
     'Product Designer': 174000,
-    Recruiter: 144000,
-    'Technical Writer': 138000,
+    'Marketing Lead': 248400,
+    //Recruiter: 144000,
+    //'Technical Writer': 138000,
 }
 
 export default sf_benchmark
