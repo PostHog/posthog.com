@@ -16,7 +16,7 @@ const DemoCallInfo = () => (
         </p>
         <br />
         <p>
-            The demo call will take place with Yakko, one of our developers, and runs for about an hour. Before the
+            The setup call will take place with Yakko, one of our developers, and runs for about an hour. Before the
             call, we recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a> and try your hand
             at
             <Link to="/docs/deployment/snippet-installation"> installing our snippet</Link> on your website. Doing so
