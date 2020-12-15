@@ -52,7 +52,7 @@ You can learn more about scheduled plugins on the [PR that created them](https:/
 
 Our 'Trends' tab just got an awesome new feature: lifecycle graphs!
 
-Lifecycle analysis digs deeper into your events and shows you a breakdown of the event volume into new, returning, and resurrecting occurrences. In addition, it also shows you the churn on that event for the specified time period. 
+Lifecycle analysis digs deeper into your events and shows you a breakdown of the users who performed the event into new, returning, and resurrecting users. In addition, it also shows you the churn on for the specified time period. 
 
 To use it, select 'Shown As' -> 'Lifecycle' when in the 'Trends' tab.  
 
