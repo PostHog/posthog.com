@@ -51,7 +51,7 @@ Make sure you have set an agenda for the meeting in order to be welcoming to the
 The stages of our hiring process are:
 
 - Application
-- Culture interview with James
+- Culture interview with Eltje
 - Technical interview with the hiring team 
    - this is usually Tim and 1 or more PostHog team members interviewing the candidate at the same time who would work closely with the candidate day-to-day
    - decide if we will do a SuperDay, else give feedback
@@ -82,11 +82,11 @@ We hire repeatedly into engineering roles, so here are a few things we look for:
 - Communication. Do they have writing errors in their cover letter? What does their online presence look like?
     - More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
 
-### Interview 1 - Culture with James
+### Interview 1 - Culture with Eltje
 
 We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Workable.
 
-This is to allow both PostHog and the candidate to assess cultural fit, and to dig into any areas of potential misalignment based on the application. We are looking for proactivity, directness, good communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
+This is to allow both PostHog and the candidate to assess whether the candidate is a great cultural addition to the team, and to dig into any areas of potential misalignment based on the application. We are looking for proactivity, directness, good communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
 
 - Talk about PostHog, where we're at and what the future looks like, including our long-term vision. If it was cold outreach, we provide a little more context up front.
 - Talk about the candidate, dig into any questions we have from their CV.
