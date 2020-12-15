@@ -38,7 +38,7 @@ Software is a good chunk through eating the World.
 
 Product led growth is just getting started with eating software. See Figma, Slack, Dropbox, or Google. Incumbent software companies will either becoming product led or they'll get disrupted.
 
-PostHog today is focussed on enabling engineering teams and product teams to work together, better. That gives us the foothold to steer decision making in every team in every company. For product led companies, it all starts from their user behavior.
+PostHog today is focused on enabling engineering teams and product teams to work together, better. That gives us the foothold to steer decision making in every team in every company. For product led companies, it all starts from their user behavior.
 
 ## What do we need to do next
 
