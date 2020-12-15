@@ -28,7 +28,7 @@ posthog = PostHog::Client.new({
 })
 ```
 
-You can find your key in the /setup page in PostHog.
+You can find your key in the 'Project Settings' page in PostHog.
 
 ## Making Calls
 

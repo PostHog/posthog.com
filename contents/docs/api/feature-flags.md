@@ -27,7 +27,7 @@ POST /feature_flag/
 | `active` | Boolean | No | `False` | Toggles the flag on and off. |
 | `rollout_percentage` | Integer | No | `None` | Percentage of users with the specified filters that ther given flag will apply to. If filters are not specified, this will be a percentage of your total users.  |
 | `filters` | Hash Table | No | `{}` | Properties of users to be matched for a flag to be on. |
-| `personal_api_key` | String | Yes | | Your Personal API Key from /setup. |
+| `personal_api_key` | String | Yes | | Your Personal API Key from the Project Settings page. |
 
 
 </span>

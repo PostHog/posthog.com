@@ -60,7 +60,7 @@ python manage.py runserver
 
 **Tips & Tricks**
 
-If you're testing the Toolbar, make sure to add the ngrok urls to the list on the /setup page.
+If you're testing the Toolbar, make sure to add the ngrok urls to the list on the 'Project Settings' page.
 
 ![Permitted domains](../../images/engineering/toolbar-permitted-ngrok.png)
 

@@ -55,7 +55,7 @@ posthog.onFeatureFlags(function() {
 })
 ```
 
-> **Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the /setup page in PostHog.
+> **Note:** To avoid `posthog has no attribute isFeatureEnabled` errors, make sure you're using the latest snippet. You can find that in the 'Project Settings' page in PostHog.
 
 ## Develop Locally
 

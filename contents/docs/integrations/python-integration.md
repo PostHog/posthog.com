@@ -21,15 +21,21 @@ In your app, import the `posthog` library and set your api key and host **before
 ```python
 import posthog
 
-posthog.api_key = 'YOUR TEAM API KEY'
+# Substitutes posthog.api_key which still exists but has been deprecated
+posthog.project_api_key = 'PROJECT API KEY'
+
+# Only necessary if you want to use feature flags
+posthog.personal_api_key = 'PERSONAL API KEY'
 
 # You can remove this line if you're using app.posthog.com
 posthog.host = 'https://posthog.[your domain].com'
 ```
 
+You can read more about the differences between the project and personal API keys in the dedicated [API Authentication section](/docs/api/overview#authentication) of the Docs. 
+
 > **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
-You can find your key in the /setup page in PostHog.
+You can find your keys in the 'Project Settings' page in PostHog.
 
 To debug, you can toggle debug mode on:
 ```python
@@ -106,6 +112,8 @@ posthog.alias('anonymous session id', 'distinct id')
 ```
 
 ### Feature Flags
+
+> **Note:** To use feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
 
 PostHog's [Feature Flags](/docs/features/feature-flags) allow you to safely deploy and roll back new features.
 
