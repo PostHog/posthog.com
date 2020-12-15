@@ -105,21 +105,6 @@ Retrieving values uses `cache.get`, which takes the key of the value to be retri
 
 You can also use `cache.incr` to increment numerical values by 1, and `cache.expire` to make [keys volatile](https://redis.io/commands/expire), meaning they will expire after the specified number of seconds.
 
-Example usage:
-
-```js
-async function processEvent(event, {cache }) {
-  await cache.set('counter', 1) 
-  await cache.incr('counter') 
-  let counter = await cache.get('counter') // counter = 2
-  await cache.expire('counter', 60) // Expire counter after 1min
-
-  event['counter'] = counter
-  return event
-}
-```
-
-> **Note:** `processEvent` is addressed later in this doc.
 
 #### global
 
@@ -191,7 +176,7 @@ As you can see, the function receives the event before it is ingested by PostHog
 
 ### processEventBatch function 
 
-`processEventBatch` works just like `processEvent`, except it takes a batch of events at once, rather than one event at a time. It also returns an array of events. This is especially useful for plugins that export data out of PostHog, so that they do not need to make an HTTP request with every incoming event. 
+`processEventBatch` works just like `processEvent`, except it takes a batch of events at once, rather than one event at a time. It also returns an array of events (although not necessarily with the same number of events as the input array). This is especially useful for plugins that export data out of PostHog, so that they do not need to make an HTTP request with every incoming event. 
 
 > **Note:** Your plugin can use `processEvent` or `processEventBatch`. Currently, if both are present, `processEventBatch` will not run. 
 
@@ -231,18 +216,30 @@ These functions only take an object of type `PluginMeta` as a parameter and do n
 Example usage:
 
 ```js
-async function runEveryMinute ({cache}) {
-    const cursor = await cache.get('last_fetched_cursor')
-    const response = await fetch(`http://my.api.com/get_stargazers?since=${cursor}`)
-    for (const { username } of response.stargazers) {
-        posthog.capture('someone starred you!', { username })
-    }
-    const last_cursor = response.stargazers.map(s => s.created_at).sort().reverse()[0] || cursor
-    await cache.set('last_fetched_cursor', last_cursor)
+async function runEveryMinute({ config }) {
+    const url = `https://api.github.com/repos/PostHog/posthog`
+    const response = await fetch(url)
+    const metrics = await response.json()
+
+  // posthog.capture is also available in plugins by default
+    posthog.capture('github metrics', { 
+        stars: metrics.stargazers_count,
+        open_issues: metrics.open_issues_count,
+        forks: metrics.forks_count,
+        subscribers: metrics.subscribers_count
+    })
 }
 ```
 
 It's worth noting that the plugin server supports debouncing, meaning that the counter for the next task will only start once the previous task finishes. In other words, if a given task that runs "every minute" takes longer than a minute, the next task will only start one minute after the previous task finishes.
+
+#### Limitations
+
+PostHog plugins are still in beta, and our scheduled tasks are the newest feature within plugins. As such, they currently have a few limitations:
+
+1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
+2. We intend to make scheduled tasks via plugins more flexible in the near-future. Keep an eye out for any updates to the API.
+3. If you have multiple instances of `posthog-plugin-server` running, the defined tasks will be run on each instance at the specified interval. Fixes for this are also on the way in the upcoming releases.
 
 ### Publishing Your Plugin
 
