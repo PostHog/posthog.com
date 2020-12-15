@@ -26,7 +26,6 @@ The more PostHog can become part of our customers' infrastructure, the better.
 
 The ways to achieve this are (i) by becoming a data store (ii) by ensuring extensibility through integrating with other tools and (iii) by the breadth of users powered by the tool in the clients that adopt us.
 
-
 ### Data Store
 
 PostHog already generates a large volume of data about customers and their behavior. However, in the market, there are many tools that already capture user data and event data so there seems little point in competing there.
