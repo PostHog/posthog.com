@@ -47,3 +47,28 @@ By being open source, we can be used on any software project throughout the worl
 
 The core of our approach is to delight end users. It's not about executive dashboards and then a terrible interface for everyone else. It's the sense of power we give to the person on the ground, doing the actual work, every day.
 
+## Our team:
+
+Our team is a combination of former CTOs and YC founders all turned developers, alongside some of the best developers from the world's largest tech companies who have the experience to help us handle scalability.
+
+Our [team](/handbook/company/team) is tiny but we live in 10 different countries. This diverse group looks pretty weird on paper, but it's magical. Apart from the fact most of them think [pineapple belongs on pizza](https://twitter.com/PostHogHQ/status/1319583079648923648). It doesn't.
+
+We take bets on people with less experience too - we are as willing to hire an unproven genius straight out of school as we are a seasoned veteran.
+
+We're all remote, and we've raised enough to pay top of market. [We’re are proudly backed](/handbook/strategy/investors) by some of the best VCs and Investors in the world, such as YCombinator.
+
+## Sold? Apply now
+* [Drop us a line](mailto:8D28C092E5@jobs.workablemail.com) and tell us:
+* How you can achieve the above in a few sentences
+* Why you're drawn to us
+* Your resumé and/or LinkedIn
+
+## Not sold? Learn more first
+* [How we hire](/careers#the-process)
+* We ask for your best work, and in return [pay generously](/handbook/people/compensation) and have [exceptional benefits](/careers/#benefits)
+* Learn about [the team you'd be working with](/handbook/company/team)
+* Getting hiring right is key to diversity. Learn about [how we think about this](/handbook/company/diversity).
+ 
+*We believe people from diverse backgrounds, with different identities and experiences, make our product and our company better. No matter your background, we'd love to hear from you! Also, if you have a disability, please let us know if there's any way we can make the interview process better for you; we're happy to accommodate!*
+
+
