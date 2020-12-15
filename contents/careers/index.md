@@ -70,20 +70,28 @@ We're young, but we're already [backed](/handbook/strategy/investors) by many of
 
 This includes YCombinator, Solomon Hykes (Founder of Docker), David Cramer (Founder/CEO of Sentry), Adam Goldstein (Founder of Hipmunk), and [many more](/handbook/strategy/investors).
 
-## The Process
+## Our Interview Process
 
-We will schedule 2 to 3 short calls with Eltje or one of our [founders and team](handbook/company/team). These will focus on two key areas:
+The stages of our hiring process are:
 
-* Ensuring you will be a great cultural fit
-* Aptitude for the role
+**Application** - we aim to get back to you within 2 working days, but please bear with us in case it takes a bit longer. 
 
-If you succeed with the above, we will set you up with a *PostHog SuperDay*.
+**[Culture interview](/handbook/people/hiring-process#interview-1---culture-with-james) with Eltje, our People and Talent Lead.**
+  The video call is going to take 30 minutes and the goal is to ensure you will be a great cultural addition to the team and of course to answer any questions you   might have about PostHog or the role. 
 
-This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
+**[Technical interview](/handbook/people/hiring-process#interview-2---technical) with the hiring team (/handbook/company/team).** 
+  This is usually 2 PostHog team members spending an hour with the candidate. This interview will focus on the skills needed to fill the role.
+  
+**[PostHog SuperDay](/handbook/people/hiring-process#posthog-superday)** - this is a *paid* day of working with us, which we will fit around your schedule. 
 
-We'll set you up with a Slack support channel with several of [our core team](handbook/company/team). We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+  Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to         succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
 
-This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting paid, of course.
+  We'll set you up with a Slack support channel with several of [our core team](handbook/company/team). We'll give you a variety of tasks to work on. We are         looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+
+  This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting     paid, of course.
+
+**Offer**
+
 
 ## Benefits
 
