@@ -26,7 +26,6 @@ A `plugin.json` file is structured as follows:
   "url": "<repo_url>",
   "description": "<description>",
   "main": "<entry_point>",
-  "lib": "<lib_file>",
   "config": {
     "param1": {
       "name": "<param1_name>",
@@ -73,6 +72,58 @@ Most options in this file are self-explanatory, but there are a few worth explor
 
 The type of a parameter in the config can be either `string` or `attachment`. If the type is set to `attachment`, PostHog will prompt the user for a file upload during the configuration step.
 
+### PluginMeta
+
+> Check out [Plugin Types](/docs/plugins/types) for a full spec of types for plugin authors.
+
+**Every plugin server function** is called by the plugin server with an object of type `PluginMeta` that will always contain the object `cache`, and can also include `global`, `attachments`, and `config`, which you can use in your logic. 
+
+Here's what they do:
+
+#### config
+
+Gives you access to the plugin config values as described in `plugin.json` and configured via the PostHog interface.
+
+#### cache
+
+A way to store values that persist across `processEvent` calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
+
+The `cache` type is defined as follows:
+
+```js
+interface CacheExtension {
+    set: (key: string, value: unknown, ttlSeconds?: number) => Promise<void>
+    get: (key: string, defaultValue: unknown) => Promise<unknown>
+    incr: (key: string) => Promise<number>
+    expire: (key: string, ttlSeconds: number) => Promise<boolean>
+}
+```
+
+Storing values is done via `cache.set`, which takes a key and a value, as well as an optional value in seconds after which the key will expire.
+
+Retrieving values uses `cache.get`, which takes the key of the value to be retrieved, as well as a default value in case the key does not exist.
+
+You can also use `cache.incr` to increment numerical values by 1, and `cache.expire` to make [keys volatile](https://redis.io/commands/expire), meaning they will expire after the specified number of seconds.
+
+
+#### global
+
+Global is used for sharing functionality between `setupPlugin` and `processEvent` or `processEventBatch`, since global scope does not work in the context of PostHog plugins. 
+
+#### attachments
+
+Attachments gives access to files uploaded by the user for config parameters of type `attachment`. An `attachment` has the following type definition:
+
+```js
+interface PluginAttachment {
+    content_type: string
+    file_name: string
+    contents: any
+}
+```
+
+As such, accessing the contents of an uploaded file can be done with `attachments.attachmentName.contents`.
+
 
 ### setupPlugin function
 
@@ -80,7 +131,7 @@ The type of a parameter in the config can be either `string` or `attachment`. If
 
 You could, for example, check if an API Key inputted by the user is valid and throw an error if it isn't, prompting PostHog to ask for a new key.
 
-The plugins server calls this function with an object containing `cache`, `global`, `attachments` and `config` (explained below), which you can use in your logic. 
+It takes only an object of type `PluginMeta` as a parameter and does not return anything.
 
 Example (from the [PostHog MaxMind Plugin](https://github.com/PostHog/posthog-maxmind-plugin)):
 
@@ -102,7 +153,7 @@ In essence, it takes an event as a parameter and returns an event as a result. I
 - Sent somewhere else
 - Not returned (preventing ingestion)
 
-Like `setupPlugin`, it can also take `cache`, `global`, `attachments`, and `config` as parameters via an object. 
+It takes an event and an object of type `PluginMeta` as parameters and returns an event.
 
 Here's an example (from the ['Hello World Plugin'](https://github.com/PostHog/helloworldplugin)):
 
@@ -115,7 +166,6 @@ async function processEvent(event, { config, cache }) {
         event.properties['hello'] = 'world'
         event.properties['bar'] = config.bar
         event.properties['$counter'] = counter
-        event.properties['lib_number'] = libFunction(3)
     }
 
     return event
@@ -124,51 +174,72 @@ async function processEvent(event, { config, cache }) {
 
 As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all plugins run).
 
-### Global Parameters
+### processEventBatch function 
 
-PostHog automatically injects useful parameters in the `setupPlugin` and `processEvent` functions. These are:
+`processEventBatch` works just like `processEvent`, except it takes a batch of events at once, rather than one event at a time. It also returns an array of events (although not necessarily with the same number of events as the input array). This is especially useful for plugins that export data out of PostHog, so that they do not need to make an HTTP request with every incoming event. 
 
-#### config
+> **Note:** Your plugin can use `processEvent` or `processEventBatch`. Currently, if both are present, `processEventBatch` will not run. 
 
-Gives you access to the PostHog config as described in `plugin.json` and configured via the PostHog interface.
-
-#### cache
-
-A way to store values that persist across `processEvent` calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
-
-Storing values is done via `cache.set`, which takes the following parameters:
-
-```
-key: string, 
-value: unknown
-```
-
-And retrieving them uses `cache.get`, which takes:
-
-```
-key: string, 
-defaultValue: unknown
-```
-
-> If you're unfamiliar with TypeScript, you can read about the `unknown` type on this [blog post by Microsoft](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
-
-### global
-
-Global is used for sharing functionality between `setupPlugin` and `processEvent`, since global scope does not work in the context of PostHog plugins. 
-
-### attachments
-
-Attachments gives access to files uploaded by the user for config parameters of type `attachment`. An `attachment` has the following type definition:
+Here's the same example from above, except now using `processEventBatch`: 
 
 ```js
-interface PluginAttachment {
-    content_type: string
-    file_name: string
-    contents: any
+async function processEventBatch(events, { config, cache }) {
+    const counter = await cache.get('counter', 0)
+    cache.set('counter', counter + 1)
+
+    for (let event of events) {
+      if (event.properties) {
+          event.properties['hello'] = 'world'
+          event.properties['bar'] = config.bar
+          event.properties['$counter'] = counter
+      }
+    }
+
+    return events
 }
 ```
 
-As such, accessing the contents of an uploaded file can be done with `attachments.attachmentName.contents`.
+As you can see, since `events` is an array of events, we iterate over it to access every individual event. 
+
+> **Note:** As of right now, batch size is not yet configurable and still receives only one event (albeit in array form).
+
+### Scheduled Tasks
+
+Plugins can also run scheduled tasks through the functions:
+
+- `runEveryMinute`
+- `runEveryHour`
+- `runEveryDay`
+
+These functions only take an object of type `PluginMeta` as a parameter and do not return anything.
+
+Example usage:
+
+```js
+async function runEveryMinute({ config }) {
+    const url = `https://api.github.com/repos/PostHog/posthog`
+    const response = await fetch(url)
+    const metrics = await response.json()
+
+  // posthog.capture is also available in plugins by default
+    posthog.capture('github metrics', { 
+        stars: metrics.stargazers_count,
+        open_issues: metrics.open_issues_count,
+        forks: metrics.forks_count,
+        subscribers: metrics.subscribers_count
+    })
+}
+```
+
+It's worth noting that the plugin server supports debouncing, meaning that the counter for the next task will only start once the previous task finishes. In other words, if a given task that runs "every minute" takes longer than a minute, the next task will only start one minute after the previous task finishes.
+
+#### Limitations
+
+PostHog plugins are still in beta, and our scheduled tasks are the newest feature within plugins. As such, they currently have a few limitations:
+
+1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
+2. We intend to make scheduled tasks via plugins more flexible in the near-future. Keep an eye out for any updates to the API.
+3. If you have multiple instances of `posthog-plugin-server` running, the defined tasks will be run on each instance at the specified interval. Fixes for this are also on the way in the upcoming releases.
 
 ### Publishing Your Plugin
 
