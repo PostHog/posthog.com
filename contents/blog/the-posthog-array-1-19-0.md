@@ -56,14 +56,6 @@ Lifecycle analysis digs deeper into your events and shows you a breakdown of the
 
 To use it, select 'Shown As' -> 'Lifecycle' when in the 'Trends' tab.  
 
-### [Retention Graph](https://github.com/PostHog/posthog/pull/2578)
-
-![Retention Graph Screenshot](../images/blog/array/retention-graph.png)
-
-Retention is a [key metric for most products](https://posthog.com/docs/tutorials/retention), including PostHog. As such, it's important to us (and probably to our users!) to see how your retention changes over time, allowing you to determine if the changes you're making to your product are moving the needle in the right direction.
-
-Enter retention graphs. By clicking on 'Table' on the top right corner of your retention table you can now switch the view to 'Linear', which will give you a line graph of your retention over time!
-
 ### [New Session Recording Compression Scheme](https://github.com/PostHog/posthog/pull/2578)
 
 ![Gzip Session Recording Screenshot](../images/blog/array/session-recording-gzip.png)
