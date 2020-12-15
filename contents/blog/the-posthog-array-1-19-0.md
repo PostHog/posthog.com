@@ -74,6 +74,8 @@ By using gzip-based compression, we have now significantly improved performance 
 
 Also, while on the topic of session recording, have you been keeping up with the [updates to our player](#session-recording-player-ux-improvements)?
 
+> If you installed `posthog-js` via `npm`, you should update to version 1.8.0 to get access to this update. Snippet users have access to the latest version by default.
+
 
 ### [New Actions UX](https://github.com/PostHog/posthog/pull/2615)
 
