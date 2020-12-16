@@ -11,7 +11,7 @@
             "Plugins",
             "API",
             "Contributing",
-            "Project documentation"
+            "Platform Structure"
         ]
     },
     {
@@ -86,8 +86,8 @@
         ]
     },
     {
-        "entry": "Project documentation",
-        "name": "Project documentation",
+        "entry": "Platform Structure",
+        "name": "Platform Structure",
         "items": ["docs/application-settings", "docs/data-model", "docs/navigation"]
     },
     {

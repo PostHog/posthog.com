@@ -12,7 +12,7 @@ This is a new section of our Docs and we appreciate any suggestions you may have
 
 If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to you!
 
-## **In This Section:**
+## In This Section
 
 - [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
 - [Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
