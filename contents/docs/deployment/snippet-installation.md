@@ -6,6 +6,14 @@ showTitle: true
 
 The easiest way to get going is to add a JavaScript snippet to your application.
 
+### Get Started With No Code
+
+To try out the snippet without having to update your codebase, you can make use of our bookmarklet, which you can find over in 'Project Settings'.
+
+Here's a 25-second video showing how to use the bookmarklet to capture events in your website without **any code**:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Oe4wiNGzmk8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ### Finding the Snippet
 
 This snippet will be provided to you during setup, but, if you need to access it afterwards, you can find it under 'Project' -> 'Settings':
