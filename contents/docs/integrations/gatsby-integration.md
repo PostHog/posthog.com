@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-> This is a community integration that is not maintained by the PostHog core team. Thanks to [Ritesh Kadmawala](https://github.com/kgritesh/gatsby-plugin-posthog-analytics/) for building it!
+Thanks to [Ritesh Kadmawala](https://github.com/kgritesh) for building this! Github: [posthog/gatsby-plugin-posthog](https://github.com/posthog/gatsby-plugin-posthog)!
 
-Thanks to [Ritesh Kadmawala](https://github.com/posthog/gatsby-plugin-posthog/)!
+Gatsby behaves like a single-page app which means to track `$pageview` events special care is needed. This plugin takes care of that.
 
 ## Install
 
@@ -44,5 +44,8 @@ module.exports = {
 ```
 
 This will automatically start tracking pageviews, clicks and more.
+
+
+In your code you can access posthog via `window.posthog`.
 
 For instructions on the JS library itself, see [JS integration](/integrations/js-integration).
