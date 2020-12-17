@@ -77,6 +77,8 @@ function IndexPage() {
         }
     }, [])
 
+    const CarouselFallback = () => <div style={{ height: 60 }}></div>
+
     return (
         <div className="homepage">
             <div className="indexContainer">
@@ -135,10 +137,12 @@ function IndexPage() {
                     <Spacer />
                     <h2 className="centered">Used At</h2>
                     {carouselAvailable ? (
-                        <Suspense fallback={<div style={{ height: 60 }}></div>}>
+                        <Suspense fallback={<CarouselFallback />}>
                             <UserLogosCarousel />
                         </Suspense>
-                    ) : null}
+                    ) : (
+                        <CarouselFallback />
+                    )}
                     <Spacer />
                     <FeaturedSectionTextRight
                         headerText="It all starts with event autocapture"
