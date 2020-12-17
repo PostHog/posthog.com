@@ -1,5 +1,5 @@
 ---
-date: 2020-10-01
+date: 2020-12-17
 title:  PostHog Raises $12 Million in Funding Led by GV and Y Combinator, to Bring Open Source Product Analytics Platform to Engineers
 rootPage: /blog
 sidebar: Blog
