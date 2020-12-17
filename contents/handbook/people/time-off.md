@@ -18,7 +18,7 @@ The reason for this policy is that it's critical for PostHog that we hire people
 
 ## Permissionless Time Off
 
-You do not need to "clear" time off with your coach.
+You do not need to "clear" time off with your manager.
 
 We care about your results, not how long you work. Whilst no approval is needed, it shouldn't be at the expense of business getting done. For example, having the entire technical team off means we can't be responsive to community issues. Please coordinate with your team.
 
@@ -34,7 +34,7 @@ You can add the team time off calendar to Google Calendar by following [these in
 
 If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, then just take them.
 
-Please let your coach know if you need to take off due to illness as soon as you are able to.
+Please let your manager know if you need to take off due to illness as soon as you are able to.
 
 For extended periods of illness, please speak to us so we can work out a plan. In some countries, we may be required to request a doctor's note from you. 
 
@@ -50,6 +50,6 @@ If you have been at PostHog for over 1 year, you can take up to 12 weeks off on 
 
 If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements.
 
-Please communicate parental leave to your coach as soon as you feel comfortable doing so, and in any case at least 2 months before it will begin.
+Please communicate parental leave to your manager as soon as you feel comfortable doing so, and in any case at least 2 months before it will begin.
 
 We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.
