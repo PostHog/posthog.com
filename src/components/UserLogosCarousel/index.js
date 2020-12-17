@@ -45,8 +45,8 @@ const companies = [
     },
 ]
 
-export const UserLogosCarousel = () => {
-    return window ? (
+const UserLogosCarousel = () => {
+    return (
         <div className="centered logo-carousel-wrapper">
             <InfiniteCarousel
                 breakpoints={[
@@ -80,5 +80,7 @@ export const UserLogosCarousel = () => {
                 ))}
             </InfiniteCarousel>
         </div>
-    ) : null
+    )
 }
+
+export default UserLogosCarousel

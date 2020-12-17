@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Button from 'antd/lib/button'
 import Modal from 'react-modal'
 import 'antd/lib/button/style/css'
@@ -27,7 +27,7 @@ import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSection
 import { FeaturedSectionTripleImage } from '../components/Sections/FeaturedSectionTripleImage'
 import { Spacer } from '../components/Spacer'
 import { DesignedForYourStackBlock } from '../components/Sections/DesignedForYourStackBlock'
-import { UserLogosCarousel } from '../components/UserLogosCarousel'
+const UserLogosCarousel = React.lazy(() => import('../components/UserLogosCarousel'))
 
 const GetStartedModalContent = () => (
     <>
@@ -69,6 +69,13 @@ const GetStartedModalContent = () => (
 
 function IndexPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [carouselAvailable, setCarouselAvailable] = useState(false)
+
+    useEffect(() => {
+        if (window && !carouselAvailable) {
+            setCarouselAvailable(true)
+        }
+    }, [])
 
     return (
         <div className="homepage">
@@ -127,7 +134,11 @@ function IndexPage() {
                     </div>
                     <Spacer />
                     <h2 className="centered">Used At</h2>
-                    <UserLogosCarousel />
+                    {carouselAvailable ? (
+                        <Suspense fallback={<div style={{ height: 60 }}></div>}>
+                            <UserLogosCarousel />
+                        </Suspense>
+                    ) : null}
                     <Spacer />
                     <FeaturedSectionTextRight
                         headerText="It all starts with event autocapture"
