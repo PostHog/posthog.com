@@ -247,11 +247,11 @@ In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [m
 
 <div class="team-left-text" markdown="1">
 
-### Paolo D'Amico, Growth Engineer
+### Paolo D'Amico, Product Team
 
 <div class="team-left-bio" markdown="1">
 
-I joined PostHog to focus on Growth after a much-needed, albeit short sabbatical. I have 10+ years of experience as a software engineer and product manager.
+I started coding when I was about 9 years old, starting with the very basic LEGO RCX & Turbo Pascal language. I always enjoyed learning new languages, frameworks or technologies on my own, especially with a good book. Funnily enough, I decided not to study computer science.
 
 Before joining PostHog, I lead a product team at Grow Mobility, the largest micro-mobility company in Latin America at the time. Before that, I co-founded Flinto, a Y Combinator startup targeting financial inclusion in developing economies. I enjoy reading while walking around strange places, and have tripped more than once.
 
