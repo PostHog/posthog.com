@@ -14,42 +14,34 @@ const companies = [
     {
         logo: hasuraLogo,
         name: 'Hasura',
-        website: 'https://hasura.io/',
     },
     {
         logo: tinkoffLogo,
         name: 'Tinkoff',
-        website: 'https://www.tinkoffgroup.com/',
     },
     {
         logo: spacexLogo,
         name: 'SpaceX',
-        website: 'https://spacex.com/',
     },
     {
         logo: airbalticLogo,
         name: 'AirBaltic',
-        website: 'https://airbaltic.com/',
     },
     {
         logo: ycLogo,
         name: 'YCombinator',
-        website: 'https://ycombinator.com/',
     },
     {
         logo: staplesLogo,
         name: 'Staples',
-        website: 'https://staples.com/',
     },
     {
         logo: landmarkLogo,
         name: 'Landmark Group',
-        website: 'https://landmarkgroup.com/',
     },
     {
         logo: webinyLogo,
         name: 'Webiny',
-        website: 'https://webiny.com/',
     },
 ]
 
@@ -83,9 +75,7 @@ export const UserLogosCarousel = () => {
             >
                 {companies.map((company) => (
                     <div key={company.name.toLowerCase()}>
-                        <a href={company.website} target="_blank" rel="noreferrer">
-                            <img alt="user logo" className="user-logos" src={company.logo} style={{ maxWidth: 200 }} />
-                        </a>
+                        <img alt="user logo" className="user-logos" src={company.logo} style={{ maxWidth: 200 }} />
                     </div>
                 ))}
             </InfiniteCarousel>
