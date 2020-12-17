@@ -1,0 +1,10 @@
+.logo-carousel-wrapper {
+    max-width: 85vw !important;
+    margin: auto;
+}
+
+@media screen and (max-width: 1080px) {
+    .logo-carousel-wrapper {
+        max-width: 100vw !important;
+    }
+}

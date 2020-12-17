@@ -27,6 +27,7 @@ import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSection
 import { FeaturedSectionTripleImage } from '../components/Sections/FeaturedSectionTripleImage'
 import { Spacer } from '../components/Spacer'
 import { DesignedForYourStackBlock } from '../components/Sections/DesignedForYourStackBlock'
+import { UserLogosCarousel } from '../components/UserLogosCarousel'
 
 const GetStartedModalContent = () => (
     <>
@@ -124,6 +125,9 @@ function IndexPage() {
                             </div>
                         </div>
                     </div>
+                    <Spacer />
+                    <h2 className="centered">Used At</h2>
+                    <UserLogosCarousel />
                     <Spacer />
                     <FeaturedSectionTextRight
                         headerText="It all starts with event autocapture"
