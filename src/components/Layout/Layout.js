@@ -160,7 +160,7 @@ const Layout = ({
                             {isBlogArticlePage && <NewsletterForm />}
                             <Footer onPostPage={onPostPage} />
                         </AntdLayout>
-                        {window && showAnnouncement ? (
+                        {showAnnouncement ? (
                             <Link
                                 to="/blog/posthog-announces-9-million-dollar-series-A"
                                 onClick={(e) => stopAnnouncement(e, 'link')}
