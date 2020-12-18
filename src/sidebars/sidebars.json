@@ -228,6 +228,7 @@
         "entry": "Company Blog",
         "name": "Company Blog",
         "items": [
+            "blog/posthog-announces-9-million-dollar-series-A",
             "blog/hacktoberfest-2020",
             "blog/open-source-telemetry-ethical",
             "blog/open-source-eating-saas",
