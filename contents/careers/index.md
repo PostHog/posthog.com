@@ -79,7 +79,7 @@ The stages of our hiring process are:
 **[Culture interview](/handbook/people/hiring-process#interview-1---culture-with-james) with Eltje, our People and Talent Lead.**
   The video call is going to take 30 minutes and the goal is to ensure you will be a great cultural addition to the team and of course to answer any questions you   might have about PostHog or the role. 
 
-**[Technical interview](/handbook/people/hiring-process#interview-2---technical) with the hiring team (/handbook/company/team).** 
+**[Technical interview](/handbook/people/hiring-process#interview-2---technical)** with the [hiring team](/handbook/company/team).
   This is usually 2 PostHog team members spending an hour with the candidate. This interview will focus on the skills needed to fill the role.
   
 **[PostHog SuperDay](/handbook/people/hiring-process#posthog-superday)** - this is a *paid* day of working with us, which we will fit around your schedule. 
@@ -90,7 +90,7 @@ The stages of our hiring process are:
 
   This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting     paid, of course.
 
-**Offer**
+**Offer** Hooray! We will send you an offer letter outlining all the details of the offer and if you choose to accept, we will kickstart the onboarding process! 
 
 
 ## Benefits
