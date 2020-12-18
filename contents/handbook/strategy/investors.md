@@ -7,7 +7,9 @@ PostHog are proud to have many world-class investors.
 
 ## Series A
 
-We have raised a \$9M Series A round, led by Alphabet’s VC firm GV. 
+We raised a \$9M Series A round, led by Alphabet’s VC firm GV, with participation from YCombinator's Continuity Fund and Tapas Capital.
+
+We brought on board Jason Warner (CTO GitHub) as an investor.
 
 ## Seed
 
