@@ -5,6 +5,10 @@ showTitle: true
 ---
 PostHog are proud to have many world-class investors.
 
+## Series A
+
+We have raised a \$9M Series A round, led by Alphabet’s VC firm GV. 
+
 ## Seed
 
 We raised a \$3M seed round, led by YCombinator and 1984 VC.
