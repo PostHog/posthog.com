@@ -1318,6 +1318,35 @@ li {
     }
 }
 
+.announcement-banner {
+    background-color: #f7a501;
+    height: 50px;
+    z-index: 999999;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    .announcement-text {
+        color: #fff;
+        margin-top: 8px;
+        font-family: 'Gosha Sans';
+        font-size: 18px;
+    }
+
+    .announcement-banner-close {
+        position: fixed;
+        right: 20px;
+        bottom: 18px;
+        z-index: 99999999;
+    }
+}
+
+.announcement-banner:hover {
+    background-color: #fab938;
+    cursor: pointer;
+}
+
 @media screen and (min-width: 1076px) {
     .display-mobile {
         display: none !important;
@@ -1395,6 +1424,12 @@ li {
         font-weight: 400;
         font-size: 20px;
         line-height: 32px;
+    }
+
+    .announcement-banner {
+        .announcement-text {
+            font-size: 14px;
+        }
     }
 }
 
