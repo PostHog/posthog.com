@@ -15,6 +15,7 @@ export const plugins = [
         link: 'https://github.com/PostHog/posthog-maxmind-plugin',
         isCommunity: false,
         isSnippet: false,
+        type: 'data_in',
     },
     {
         name: 'Currency Normalization',
@@ -23,6 +24,7 @@ export const plugins = [
         link: 'https://github.com/PostHog/posthog-currency-normalization-plugin',
         isCommunity: false,
         isSnippet: false,
+        type: 'data_in',
     },
     {
         name: 'GitHub Release Tracker',
@@ -31,6 +33,7 @@ export const plugins = [
         link: 'https://github.com/PostHog/posthog-currency-normalization-plugin',
         isCommunity: false,
         isSnippet: true,
+        type: 'data_in',
     },
     {
         name: 'GitLab Release Tracker',
@@ -39,6 +42,7 @@ export const plugins = [
         link: 'https://github.com/PostHog/posthog-currency-normalization-plugin',
         isCommunity: false,
         isSnippet: true,
+        type: 'data_in',
     },
     {
         name: 'Twitter Followers',
@@ -47,6 +51,7 @@ export const plugins = [
         link: 'https://github.com/PostHog/posthog-currency-normalization-plugin',
         isCommunity: false,
         isSnippet: true,
+        type: 'data_in',
     },
     {
         name: 'Hubspot',
@@ -55,14 +60,16 @@ export const plugins = [
         link: 'https://github.com/PostHog/posthog-currency-normalization-plugin',
         isCommunity: false,
         isSnippet: true,
+        type: 'data_out',
     },
     {
         name: 'Customer.io',
         description: 'Send event data and available emails to Customer.io.',
         image: customerioLogoImg,
-        link: 'https://github.com/PostHog/posthog-currency-normalization-plugin',
+        link: '/plugins/customerio',
         isCommunity: false,
         isSnippet: true,
+        type: 'data_out',
     },
     {
         name: 'Schema Enforcer',
@@ -71,5 +78,6 @@ export const plugins = [
         link: 'https://github.com/PostHog/posthog-schema-enforcer-plugin',
         isCommunity: false,
         isSnippet: false,
+        type: 'ingestion_filtering',
     },
 ]
