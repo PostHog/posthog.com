@@ -6,6 +6,7 @@ import twitterLogoImg from '../images/plugin-logos/twitter.svg'
 import hubspotLogoImg from '../images/plugin-logos/hubspot.svg'
 import customerioLogoImg from '../images/plugin-logos/customerio.svg'
 import schemaImg from '../images/plugin-logos/schema.svg'
+import sendgridLogoImg from '../images/plugin-logos/sendgrid.svg'
 
 export const plugins = [
     {
@@ -55,7 +56,7 @@ export const plugins = [
     },
     {
         name: 'Hubspot',
-        description: 'Send contact data to Hubspot on PostHog $identify events.',
+        description: 'Send emails and user data to Hubspot when you identify users using PostHog.',
         image: hubspotLogoImg,
         link: 'https://github.com/PostHog/plugin-snippets/tree/master/hubspot-plugin',
         isCommunity: false,
@@ -79,5 +80,14 @@ export const plugins = [
         isCommunity: false,
         isSnippet: false,
         type: 'ingestion_filtering',
+    },
+    {
+        name: 'Sendgrid',
+        description: 'Send emails and user data to Sendgrid when you identify users using PostHog.',
+        image: sendgridLogoImg,
+        link: 'https://github.com/PostHog/plugin-snippets/tree/master/sendgrid-plugin',
+        isCommunity: false,
+        isSnippet: true,
+        type: 'data_out',
     },
 ]
