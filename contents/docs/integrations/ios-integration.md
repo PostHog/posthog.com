@@ -180,37 +180,10 @@ posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
 
 ## A note about IDFA (identifier for advertisers) collection in iOS 14
 
-Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework might trip the App Store's static analysis, making it a bit unclear if SDK users can confidently say that their apps do not use the IDFA. 
+Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework, even in strings, [will trip](https://github.com/PostHog/posthog-ios/issues/6) the App Store's static analysis.
 
-Hence **starting with posthog-ios version 1.1.0** the responsibility to collect the IDFA has been moved out of the PostHog SDK library and into the client app.
+Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework. 
 
-To opt in to capturing the IDFA in Objective-C, SDK clients will want to do something like this:
-
-```objective-c
-// At the top of your .m file
-@import AdSupport;  // or #import <AdSupport/ASIdentifierManager.h>
-
-// During PostHog initialization
-PHGPostHogConfiguration` *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"YOUR_API_KEY"];
-configuration.enableAdvertisingCapturing = YES;
-configuration.adSupportBlock = ^{
-    return [[ASIdentifierManager sharedManager].advertisingIdentifier uuidString];
-};
-```
-
-Or in Swift:
-
-```swift
-// At the top of your .swift file
-import AdSupport
-
-// During PostHog initialization
-let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY")
-configuration.enableAdvertisingCapturing = true
-configuration.adSupportBlock = {
-    return ASIdentifierManager.shared().advertisingIdentifier.uuidString
-}
-```
 
 ## All Configuration options
 
@@ -225,11 +198,6 @@ The `configuration` element contains several other settings you can toggle:
  * accessing Location APIs.
  */
 configuration.shouldUseLocationServices = NO;
-
-/**
- * Whether the posthog client should capture advertisting info. `YES` by default.
- */
-configuration.enableAdvertisingCapturing = YES;
 
 /**
  * The number of queued events that the posthog client should flush at. Setting this to `1` will not queue  
