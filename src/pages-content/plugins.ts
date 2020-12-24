@@ -7,6 +7,7 @@ import hubspotLogoImg from '../images/plugin-logos/hubspot.svg'
 import customerioLogoImg from '../images/plugin-logos/customerio.svg'
 import schemaImg from '../images/plugin-logos/schema.svg'
 import sendgridLogoImg from '../images/plugin-logos/sendgrid.svg'
+import mblLogoImg from '../images/plugin-logos/mbl.svg'
 
 export const plugins = [
     {
@@ -89,5 +90,14 @@ export const plugins = [
         isCommunity: false,
         isSnippet: true,
         type: 'data_out',
+    },
+    {
+        name: 'Email Scoring',
+        description: 'Add email scores to PostHog user profiles using the the Mailboxlayer API.',
+        image: mblLogoImg,
+        link: 'https://github.com/PostHog/plugin-snippets/tree/master/mailboxlayer-plugin',
+        isCommunity: false,
+        isSnippet: true,
+        type: 'data_in',
     },
 ]
