@@ -50,17 +50,19 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 ### Laptop, Monitor, and Accessories
 
-We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you.
+We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. 
 
-Our general laptop of choice is a MacBook Pro. Please look for a recent refurbished model. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
+Our general laptop of choice is a MacBook Pro. Please look for something with an M1 chip or a recent refurbished model. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-The main thing to look for is that you have enough RAM. 8GB is (frustratingly!) the minimum you'll realistically need if you're browsing the web, writing code, running Excel, using Slack etc.
+The main thing to look for is that you have enough RAM. We suggest 16GB if you are buying a Macbook with an M1 chip, or 32GB for a refurbished model. This is (frustratingly!) the minimum you'll realistically need if you're browsing the web, writing code, running Excel, using Slack etc.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen.
 
 If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
 You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
+
+We would expect to spend \$1200 to \$2000 on a laptop, depending on what you need to run. 
 
 For monitors, we suggest you pick one that supports 4K. This means you'll get a higher resolution than a standard HD monitor, and thus can fit more content onto the screen.
 
@@ -82,13 +84,13 @@ If you do not, please suggest something to us. We aren't yet at the stage where 
 
 For example, if you would like a standing desk, buy one you consider to be good value.
 
-We would expect to spend \$50-\$200 on a desk, and around the same for a chair.
+We would expect to spend \$250 on a desk, and around the same for a chair.
 
 ### Headphones
 
 If you need to work in a noisy environment and don't already have a noise cancelling headphones with a microphone, feel free to buy a pair.
 
-We would expect to spend \$200 on noise cancelling headphones.
+We would expect to spend \$250 on noise cancelling headphones.
 
 ## Software
 
