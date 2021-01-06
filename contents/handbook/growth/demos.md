@@ -8,7 +8,7 @@ showTitle: true
 
 Always focus on delivering what the customer needs. Sometimes that will mean sending them to a competitor or turning them down. 
 
-### Initial Call
+### Initial Call
 
 The purpose of this call is to work out what the potential customer needs. 
 
@@ -24,7 +24,7 @@ You are trying to work out:
 
 As a rule, always understand the context behind the question - it may help you make further useful recommendations.
 
-### Demo
+### Demo
 
 #### Environment
 
