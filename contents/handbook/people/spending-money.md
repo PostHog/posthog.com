@@ -48,21 +48,22 @@ PostHog is an all-remote company. This means it's important you have an ergonomi
 
 PostHog will provide you with office equipment. Please note that it remains PostHog's property.
 
-### Laptop, Monitor, and Accessories
+### Laptop
 
-We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. 
+We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-Our general laptop of choice is a MacBook Pro. Please look for something with an M1 chip or a recent refurbished model. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
+* If you are in a technical or design role, we recommend a Macbook Pro with an Apple Silicon processor and at least 16GB of RAM.
+* If you are in a non-technical role, we recommend a Macbook Air with an Apple Silicon processor and 8GB of RAM.
 
-The main thing to look for is that you have enough RAM. We suggest 16GB if you are buying a Macbook with an M1 chip, or 32GB for a refurbished model. This is (frustratingly!) the minimum you'll realistically need if you're browsing the web, writing code, running Excel, using Slack etc.
+These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above, that is completely fine. 
 
-Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen.
-
-If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
+Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
 You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-We would expect to spend \$1200 to \$2000 on a laptop, depending on what you need to run. 
+We would expect to spend \$1200 to \$2000 on a laptop, depending on what you need to run. We find the easiest solution is to just purchase directly from Apple's website in your territory. 
+
+### Monitor
 
 For monitors, we suggest you pick one that supports 4K. This means you'll get a higher resolution than a standard HD monitor, and thus can fit more content onto the screen.
 
@@ -72,7 +73,7 @@ We would expect to spend \$250 to \$350 on a monitor. Philips have a [great valu
 
 We'd encourage you to buy a keyboard, mouse and laptop stand.
 
-Again, Apple refurbished items for keyboards and mice should be what you default to.
+Again, Apple items for keyboards and mice should be what you default to - refurbished is usually fine. 
 
 [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
 
