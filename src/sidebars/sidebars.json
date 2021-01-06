@@ -301,11 +301,11 @@
             "handbook/growth/trials",
             "handbook/growth/billing"
         ],
-        "child_entries": ["Content"]
+        "child_entries": ["Marketing"]
     },
     {
-        "entry": "Content",
-        "name": "Content",
+        "entry": "Marketing",
+        "name": "Marketing",
         "items": [
             "handbook/growth/content",
             "handbook/growth/content/posthog-array",
