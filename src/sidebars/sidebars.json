@@ -296,10 +296,7 @@
         "name": "Growth",
         "items": [
             "handbook/growth/community",
-            "handbook/growth/customer-success",
-            "handbook/growth/sales",
-            "handbook/growth/trials",
-            "handbook/growth/billing"
+            "handbook/growth/customer-success"
         ],
         "child_entries": ["Marketing"]
     },
@@ -309,7 +306,19 @@
         "items": [
             "handbook/growth/content",
             "handbook/growth/content/posthog-array",
-            "handbook/growth/content/releasing-content"
+            "handbook/growth/content/releasing-content",
+            "handbook/growth/press"
+        ]
+    },
+        "child_entries": ["Sales"]
+    },
+    {
+        "entry": "Sales",
+        "name": "Sales",
+        "items": [
+            "handbook/growth/sales-operations",
+            "handbook/growth/demos",
+            "handbook/growth/billing"
         ]
     },
     {
