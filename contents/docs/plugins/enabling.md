@@ -10,7 +10,7 @@ Plugins are currently BETA and require you to opt-in.
 When you open "Settings" / "Project Plugins" in PostHog, you will see a screen
 such as this:
 
-![Opt In to Plugins](../../images/plugins/optin.png)
+![Opt In to Plugins](../../images/plugins/option.png)
 
 ### Enabling Plugins
 
