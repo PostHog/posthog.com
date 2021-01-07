@@ -55,9 +55,9 @@ When doing a demo of PostHog, you should prioritize using the following environm
 
 #### Guidance
 
-Show the client the product. Use localhost with example data. Pause frequently and make sure there are no questions. Ask if the functionality would help them.
+Show the client the product. Pause frequently and make sure there are no questions. Ask if the functionality would help them.
 
-Use this to confirm the benefits to the customer that PostHog needs to provide. If you are talking only about feature X does Y, then you’re doing it wrong!
+Use this to confirm the benefits to the customer that PostHog needs to provide. If you are talking only about feature X does Y, then you’re doing it wrong. "As a Product Manager, I may want to know 'X' about my users, this is how you do that."
 
 ### Follow Up
 
