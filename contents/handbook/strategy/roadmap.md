@@ -4,16 +4,16 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our mission is to make more successful products in the world. 
+Our mission is to increase the number of successful products in the world. 
 
 Our roadmap for 2021 will do three things:
 1. Create a solid core product that's easy to use
-2. Have the best developer platform for event-based analytics
-3. Set us up to service huge volumes
+2. Ensure the best developer platform for event-based analytics
+3. Set PostHog up to service huge volumes
 
 # 1. Core product
 
-PostHog is a product that people love, primarily because covers 90% of analytics use cases but bundled into one package.
+PostHog is a product that people love, primarily because it covers 90% of analytics use cases but bundled into one package.
 Some examples of the functionality we've built last year:
 
 - Product analytics
