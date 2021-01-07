@@ -12,7 +12,7 @@ As a first step, it is _really important_ that you [connect your personal PostHo
 
 You might also find it useful to install HubSpot's [Chrome extension](https://chrome.google.com/webstore/detail/hubspot-sales/oiiaigjnkhngdbnoookogelabohpglmd?hl=en), as it means you can manage most things directly in Gmail. 
 
-As a general principle, we try to ensure as much customer communication as possible is captured in HubSpot, rather than in individual email inboxes or Slack messages, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!)
+As a general principle, we try to ensure as much customer communication as possible is captured in HubSpot, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!) You should use the channel that suits the user, not us. Just make sure you keep Hubspot up to date with your interactions. We've seen much higher response rates on Slack than email. You can copy paste from there into Hubspot until we have a way to integrate the two.
 
 Hubspot is a comprehensive tool with a lot of functionality, so we are currently focused on using a few core features well. You are most likely to use the following regularly:
 
