@@ -67,9 +67,17 @@ If given a choice, go live. If you can't go live, reduce the task size so you ca
 * We are small, and can only win based on speed and agility.
 * Going live forces a level of completion, on which you can build.
 
-## Have fewer meetings
+## Have fewer meetings
 
-We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all (which we try to avoid, see _"Write stuff down"_ above), we'll cluster them around the standup so our day doesn't get split up. On Tuesdays, we don't have internal meetings at all. Occasionally an external meeting will slip in on a Tuesday but we try to keep those to a minimum.
+We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all (which we try to avoid, see _"Write stuff down"_ above), we'll cluster them around the standup so our day doesn't get split up. On Tuesdays, we don't have internal meetings at all, not even the daily standup. Occasionally an external meeting will slip in on a Tuesday but we try to keep those to a minimum.
+
+## Minimal team structure
+
+One of the benefits of hiring high-performing, self-sufficient, empowered team members is that we don't need to put in place some of the typical corporate structures and processes that can slow teams down. 
+
+Right now, our structure is super simple - James H and Tim are the only managers (and people with a 'Chief' in their title), and everyone else reports into one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and tread on toes, especially if they are not in a 'senior' role. 
+
+Our team structure will probably have to evolve as we grow, but for now we find this works well for us. 
 
 ## A day in the life
 
