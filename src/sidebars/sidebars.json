@@ -294,22 +294,26 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": [
-            "handbook/growth/community",
-            "handbook/growth/customer-success",
-            "handbook/growth/sales",
-            "handbook/growth/trials",
-            "handbook/growth/billing"
-        ],
-        "child_entries": ["Content"]
+        "items": ["handbook/growth/community", "handbook/growth/customer-success"],
+        "child_entries": ["Marketing", "Sales"]
     },
     {
-        "entry": "Content",
-        "name": "Content",
+        "entry": "Marketing",
+        "name": "Marketing",
         "items": [
-            "handbook/growth/content",
-            "handbook/growth/content/posthog-array",
-            "handbook/growth/content/releasing-content"
+            "handbook/growth/marketing",
+            "handbook/growth/marketing/posthog-array",
+            "handbook/growth/marketing/releasing-content",
+            "handbook/growth/marketing/press"
+        ]
+    },
+    {
+        "entry": "Sales",
+        "name": "Sales",
+        "items": [
+            "handbook/growth/sales/sales-operations",
+            "handbook/growth/sales/demos",
+            "handbook/growth/sales/billing"
         ]
     },
     {

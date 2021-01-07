@@ -10,7 +10,7 @@ For customers with special pricing (i.e. very large volumes or Enterprise & Supp
 ### Self-hosted
 Contrary to cloud plans, **all self-hosted _paid_ plans must be manually prepared** (i.e. there's no self-serve option). To set up billing for self-hosted, please follow these instructions:
 
-#### Pre-setup
+#### Pre-setup
 This process only needs to happen once.
 1. Download the Postman collection from [license][license].
 1. Open the collection & set up the required environment variables (per the instructions on the repo).
