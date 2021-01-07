@@ -250,7 +250,7 @@
     {
         "entry": "Handbook",
         "name": "Handbook",
-        "child_entries": ["Company", "People", "Engineering", "Growth", "Strategy"]
+        "child_entries": ["Company", "People", "Engineering", "Growth", "Marketing", "Sales", "Strategy"]
     },
     {
         "entry": "Company",
@@ -294,32 +294,22 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": [
-            "handbook/growth/community",
-            "handbook/growth/customer-success"
-        ],
-        "child_entries": ["Marketing"]
+        "items": ["handbook/growth/community", "handbook/growth/customer-success"]
     },
     {
         "entry": "Marketing",
         "name": "Marketing",
         "items": [
-            "handbook/growth/content",
-            "handbook/growth/content/posthog-array",
-            "handbook/growth/content/releasing-content",
-            "handbook/growth/press"
+            "handbook/marketing",
+            "handbook/marketing/posthog-array",
+            "handbook/marketing/releasing-content",
+            "handbook/marketing/press"
         ]
-    },
-        "child_entries": ["Sales"]
     },
     {
         "entry": "Sales",
         "name": "Sales",
-        "items": [
-            "handbook/growth/sales-operations",
-            "handbook/growth/demos",
-            "handbook/growth/billing"
-        ]
+        "items": ["handbook/sales/sales-operations", "handbook/sales/demos", "handbook/sales/billing"]
     },
     {
         "entry": "Engineering",
