@@ -76,7 +76,7 @@ The stages of our hiring process are:
 
 **Application** - we aim to get back to you within 2 working days, but please bear with us in case it takes a bit longer. 
 
-**[Culture interview](/handbook/people/hiring-process#interview-1---culture-with-james) with Eltje, our People and Talent Lead.**
+**[Culture interview](/handbook/people/hiring-process#interview-1---culture-with-eltje) with Eltje, our People and Talent Lead.**
   The video call is going to take 30 minutes and the goal is to ensure you will be a great cultural addition to the team and of course to answer any questions you   might have about PostHog or the role. 
 
 **[Technical interview](/handbook/people/hiring-process#interview-2---technical)** with the [hiring team](/handbook/company/team).
