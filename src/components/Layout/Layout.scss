@@ -1433,6 +1433,20 @@ li {
     }
 }
 
+.card-elevated {
+    box-shadow: 0px 80px 80px rgba(0, 0, 0, 0.075), 0px 10px 10px rgba(0, 0, 0, 0.035) !important;
+}
+
+.card-elevated:hover {
+    box-shadow: 0px 80px 80px rgba(76, 155, 245, 0.075), 0px 10px 10px rgba(111, 149, 255, 0.035) !important;
+    cursor: pointer;
+    background-color: #fbfeff;
+}
+
+.ant-tabs-bar {
+    border-bottom: none !important;
+}
+
 @media screen and (max-width: 1250px) {
     .footer-links-header {
         font-size: 16px !important;
