@@ -74,13 +74,15 @@ div.post-page {
     }
 
     .blog-quote {
-        background: #f9f9f9;
+        background: transparent;
         margin: 1.5em 10px;
         padding: 0.5em 10px;
         quotes: '\201C''\201D''\2018''\2019';
         max-width: 80%;
         margin-left: 5%;
         text-align: center;
+        font-style: italic;
+        font-size: 16px;
     }
 
     .blog-quote:before {
