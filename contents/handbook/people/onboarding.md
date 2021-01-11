@@ -10,6 +10,8 @@ We have members working all around the world, so their onboarding process may lo
 
 If you have any questions on any of this stuff, ask Charles, James or Tim. 
 
+The best way to run through this checklist is to copy the relevant sections below into an onboarding issue on the [Ops Roadmap](https://github.com/orgs/PostHog/projects/2) in GitHub.
+
 ## Upon Offer Acceptance
 
 Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.  
