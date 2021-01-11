@@ -438,7 +438,7 @@ Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/M
 
 </div>
 
-<!--- Eltje Lange Bio -->
+<!--- Cory Bio -->
 
 <div class="team-row" markdown="1">
 
