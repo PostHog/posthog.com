@@ -8,16 +8,17 @@ As a YCombinator company ourselves, we want to be supportive of other YC compani
 
 ## The YC Deal
 
-Our YC Deal is as follows:
+Our YC Deal provides the following:
 
-One year of Enterprise Cloud with up to 10 million events per month *or* a one-year enterprise license if they want to self-host PostHog.
+One free year of PostHog Cloud with up to 10 million events per month *or* a one-year enterprise license if they want to self-host PostHog.
 
-Companies also get a 50$ gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
+Companies also get a \$50 gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
 
 For YC W21 companies, we also offer:
 
 - A choice of Airpods or Allbirds shoes
 - A referral scheme to get more of the above
+    - We will also give more merch (an extra $50 voucher for our store) to the company they refer to us
 
 > **Note:** Batch-specific deals will be updated here as new batches come along.
 
@@ -36,6 +37,8 @@ Ideally we want users to have gotten started with PostHog before the demo call. 
 <div class="blog-quote">
 Before the call, we recommend you sign up to our Cloud version and try your hand at installing our snippet on your website. Doing so would allow us to tailor the onboarding to your needs, leveraging data from your own website instead of demo data. However, if you prefer to get a demo first, we'll give you access to a demo playground during our call.
 </div>
+
+> **Note:** We recommend PostHog Cloud as a way to get started quick, but it's up to them if they want to set up a self-hosted instance before the call. You should also help with this.
 
 If users come to the call with a ready instance, we can focus more on their needs and setting up relevant views for them than a basic overview of the platform that they could have gotten without us.
 
@@ -78,4 +81,4 @@ You should:
 
 ## Current Responsibilities
 
-Yakko currently handles YC onboarding calls while Charles process merch requests. Paolo is the point of contact for billing issues.
+Yakko currently handles YC onboarding calls while Charles processes merch requests. Paolo is the point of contact for billing issues.
