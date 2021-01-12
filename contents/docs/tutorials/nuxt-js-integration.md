@@ -20,7 +20,7 @@ To follow this tutorial along, you need to:
 1. Have [deployed PostHog](/docs/deployment).
 2. Have a running Nuxt.js application
 
-### Minmal Example
+### Minimal Example
 
 We are going to implement PostHog as a [Nuxt.js plugin](https://nuxtjs.org/docs/2.x/directory-structure/plugins) which gives us the possibility to inject
 the posthog object and make it available across our application.
@@ -44,10 +44,7 @@ import posthog from 'posthog-js'
 import Vue from 'vue'
 
 export default function({ app: { router } }, inject) {
-  /* Init PostHog
-  Note: In a production setup you don't want to have your secrets here but rather
-  use environment variables for it
-  */
+  // Init PostHog
   posthog.init('POSTHOG_API_KEY', {
     api_host: 'POSTHOG_HOST',
     capture_pageview: false,
