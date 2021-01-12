@@ -12,7 +12,7 @@ export const PluginLibraryPage = () => {
     const [filter, setFilter] = useState('all')
 
     const filterPlugins = (plugin) => {
-        return filter === 'all' ? true : filter === plugin.type
+        return plugin.displayOnWebsiteLib && (filter === 'all' ? true : filter === plugin.type)
     }
 
     const { plugins } = useValues(pluginLibraryLogic)
