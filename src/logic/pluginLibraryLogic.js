@@ -1,6 +1,10 @@
 import { kea } from 'kea'
 
 export const pluginLibraryLogic = kea({
+    actions: {
+        setFilter: (filter) => ({ filter }),
+    },
+    reducers: { filter: ['all', { setFilter: (_, { filter }) => filter }] },
     loaders: () => ({
         plugins: [
             [],
@@ -14,9 +18,19 @@ export const pluginLibraryLogic = kea({
             },
         ],
     }),
+    selectors: {
+        filteredPlugins: [
+            (s) => [s.plugins, s.filter],
+            (plugins, filter) =>
+                plugins.filter((p) => p.displayOnWebsiteLib && (filter === 'all' || filter === p.type)),
+        ],
+    },
     events: ({ actions }) => ({
         afterMount: () => {
-            actions.loadPlugins()
+            // only load in the frontend
+            if (typeof window !== 'undefined') {
+                actions.loadPlugins()
+            }
         },
     }),
 })
