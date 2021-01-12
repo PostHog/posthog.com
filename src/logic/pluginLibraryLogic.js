@@ -1,5 +1,4 @@
 import { kea } from 'kea'
-import api from '../lib/api'
 import { loadersPlugin } from 'kea-loaders'
 import { resetContext } from 'kea'
 
@@ -13,10 +12,10 @@ export const pluginLibraryLogic = kea({
             [],
             {
                 loadPlugins: async () => {
-                    const response = await api.get(
+                    const response = await window.fetch(
                         'https://raw.githubusercontent.com/PostHog/plugin-repository/main/repository.json'
                     )
-                    return response
+                    return await response.json()
                 },
             },
         ],
