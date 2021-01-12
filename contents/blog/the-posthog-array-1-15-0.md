@@ -35,7 +35,7 @@ As you may know, we have been using the well-established and reliable PostgreSQL
 
 On our cloud version we handle event numbers in the nine figures, and implementing ClickHouse has drastically reduced the execution time for all of our queries. 
 
-If you're interested in using PostHog with ClickHouse, send us an email at _sales@posthog.com_.
+If you're interested in using PostHog with ClickHouse, send us an email at _[sales@posthog.com](mailto:sales@posthog.com)_.
 
 ### [Command Palette](https://github.com/PostHog/posthog/pull/1819)
 

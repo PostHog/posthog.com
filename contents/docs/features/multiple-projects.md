@@ -14,4 +14,4 @@ When enabled, you will be able to switch between projects on the top right of th
 
 Each project will have a separate token which you can use to initialize your [integration of choice](/docs/integrations), as well as connect to our [API](/docs/api/overview).
 
-> **Note:** Our _Multiple Projects_ feature is part of our Enterprise Edition offering. It is currently enabled by default on PostHog Cloud, but if you wish to have access to it when self-hosting, please contact _sales@posthog.com_,
+> **Note:** Our _Multiple Projects_ feature is part of our Enterprise Edition offering. It is currently enabled by default on PostHog Cloud, but if you wish to have access to it when self-hosting, please contact _[sales@posthog.com](mailto:sales@posthog.com)_,
