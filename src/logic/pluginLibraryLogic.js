@@ -1,10 +1,4 @@
 import { kea } from 'kea'
-import { loadersPlugin } from 'kea-loaders'
-import { resetContext } from 'kea'
-
-resetContext({
-    plugins: [loadersPlugin({})],
-})
 
 export const pluginLibraryLogic = kea({
     loaders: () => ({
