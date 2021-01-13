@@ -44,4 +44,20 @@
         max-width: 100px;
         margin-left: 20vh;
     }
+
+    @media screen and (max-width: 1080px) {
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        li,
+        img {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
 }
