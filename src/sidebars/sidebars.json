@@ -294,7 +294,7 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/community", "handbook/growth/customer-success"],
+        "items": ["handbook/growth/community", "handbook/growth/customer-success", "handbook/growth/yc-onboarding"],
         "child_entries": ["Marketing", "Sales"]
     },
     {
@@ -323,6 +323,7 @@
             "handbook/engineering/development-process",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
+            "handbook/engineering/releasing-python",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",

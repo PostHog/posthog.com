@@ -12,7 +12,7 @@
         "gatsby"
     ],
     "scripts": {
-        "build": "gatsby build",
+        "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
         "start": "gatsby develop",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,7 @@
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.19",
         "antd": "^3.23.2",
+        "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
         "eslint-plugin-flowtype": "^2.50.3",
         "gatsby": "^2.24.80",
