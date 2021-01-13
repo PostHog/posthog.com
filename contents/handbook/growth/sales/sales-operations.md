@@ -65,10 +65,13 @@ Make sure you also assign someone as the Contact owner, so it's clear who is res
 
 ## Deals
 
+We manage two pipelines for our deals - _Enterprise_ and _Startup_. This helps us stay organised, given the process is different for each.
+
 Creating a contact should be the first thing you do when you are setting up a deal in HubSpot, if one does not exist already.
 
 Creating a new deal is quite intuitive, but here are a few tips:
 - Generally, try to fill out as much information as possible - this is useful for you, but also gives context to other people working with a customer
+- Make sure you assign your deal to the right pipeline 
 - Every deal needs an owner - this is the customer's main point of contact at PostHog
 - Tag every deal by 'Deal Type' - use your judgement to determine which category makes sense
 - Put the deal in the right _Deal Stage_ - again, use your judgement! Usually this will be 'First Contact' or 'In Discussion'. 
