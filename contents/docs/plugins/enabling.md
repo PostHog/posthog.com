@@ -37,9 +37,9 @@ You must have both the celery and plugin workers running for PostHog to function
 You can either launch and scale them in separate dynos
 or run the default `worker` dyno, which includes both of them.
 
-#### ECS / CloudFormation
+#### AWS CloudFormation
 
-Please update to the latest [cloudformation config](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml) 
+Please [upgrade to the latest CloudFormation config](/docs/deployment/deploy-aws#updating-cloudformation-template) 
 that combines all background workers into one task and activates the plugin server.
 
 Previously we had separate tasks for `worker-beat` and `worker-celery`. In the latest version there is just one `worker`
