@@ -22,9 +22,6 @@ const PluginCardStructure = ({ name, description, imageSrc, isCommunityPlugin }:
                 style={{ height: '100%', display: 'flex', marginBottom: 20 }}
                 bodyStyle={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
                 className="card-elevated"
-                onClick={() => {
-                    console.log('hey')
-                }}
             >
                 <Tag
                     color={isCommunityPlugin ? 'green' : 'blue'}
