@@ -255,7 +255,7 @@ h2 {
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 40px;
-    line-height: 72px;
+    line-height: normal;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
@@ -272,7 +272,7 @@ h3 {
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 32px;
-    line-height: 54px;
+    line-height: normal;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
@@ -1431,6 +1431,20 @@ li {
             font-size: 14px;
         }
     }
+}
+
+.card-elevated {
+    box-shadow: 0px 80px 80px rgba(0, 0, 0, 0.075), 0px 10px 10px rgba(0, 0, 0, 0.035) !important;
+}
+
+.card-elevated:hover {
+    box-shadow: 0px 80px 80px rgba(76, 155, 245, 0.075), 0px 10px 10px rgba(111, 149, 255, 0.035) !important;
+    cursor: pointer;
+    background-color: #fbfeff;
+}
+
+.ant-tabs-bar {
+    border-bottom: none !important;
 }
 
 @media screen and (max-width: 1250px) {

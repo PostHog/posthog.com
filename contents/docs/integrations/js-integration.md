@@ -82,6 +82,7 @@ posthog.capture('[event-name]', {property1: 'value', property2: 'another value'}
 ```
 
 ### Identifying Users
+
 To make sure you understand which user is performing actions within your app, you can identify users at any point. From the moment you make this call, all events will be identified with that distinct id.
 
 The ID can by anything, but is usually the unique ID that you identify users by in the database. 
@@ -100,6 +101,21 @@ posthog.init('[your api key]', {
     api_host: 'https://posthog.[your-domain].com',
     loaded: function(posthog) { posthog.identify('[user unique id]'); }
 });
+```
+
+## Reset After Logout
+
+If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user due to shared cookies between sessions.
+
+You can do that like so:
+```js
+posthog.reset();
+```
+
+If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
+
+```js
+posthog.reset(true);
 ```
 
 ### Sending User Information
@@ -219,21 +235,6 @@ Here's how you can use them:
     ```js
     posthog.isFeatureEnabled('keyword', {send_event: false})
     ```
-
-## Reset After Logout
-
-If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user. 
-
-You can do that like so:
-```js
-posthog.reset();
-```
-
-If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
-
-```js
-posthog.reset(true);
-```
 
 ### Complete Signup Pseudocode
 

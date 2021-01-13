@@ -28,7 +28,7 @@ That's why we have people in Belgium, Brazil, the East and West coast of the US,
 <div class="team-right-image" markdown="1">
 
 ![Remote work globe animation](../../images/team/team-global.gif)
-<br /><small class="centered">Our team of 12 is distributed across 10 countries and no two team members live in the same city. </small>
+<br /><small class="centered">Our team of 13 is distributed across 10 countries and no two team members live in the same city. </small>
 
 </div>
 
@@ -401,6 +401,68 @@ I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [
 <div class="team-right-image" markdown="1">
 
 ![Charles Cook portrait](../../images/team/Charles.png)
+
+</div>
+
+</div>
+
+<!--- Eltje Lange Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Eltje Lange, People and Talent
+
+<div class="team-left-bio" markdown="1">
+
+Originally from Northern Germany, I moved to the UK in 2017 and I am now based in East London. 
+
+Just like James, I used to be a professional cyclist until I realised you can’t make a living as a female cyclist. After a short identity crisis, I started university with the goal to become a management consultant. That never happened, I luckily realised my skills and personality are much better suited in a people (I guess non-startup people call it HR) role. 
+
+At PostHog I look after our People and Talent function and my goal is make PostHog THE best company to work for. Previously I worked in very a similar role at a startup called [Farewill](https://farewill.com), who offer services around death (yes, you read right). Prior to that, I worked for a couple of companies later on the scaling journey, like [TransferWise](https://transferwise.com/) and [Xing](xing.com).
+
+Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and I love to go for a run or cycle around London, do yoga and drink coffee. 
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Eltje portrait](../../images/team/Eltje.png)
+
+</div>
+
+</div>
+
+<!--- Cory Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Cory Watilo, Lead Designer
+
+<div class="team-left-bio" markdown="1">
+
+As one of the few PostHoggers who never attempted to enter the world of professional cycling, I instead spend much of my free time exploring new coffee shops or wine bars, generally sipping a cold brew iced coffee in the morning and a nice rosé once it hits 5:00 somewhere.
+
+Due to the fact that I generally require both warmth and sunshine to function at any normal capacity, my wife and I bought an RV a couple years ago and hit the road fulltime, our sole requirement being that wherever we travel _must_ have a [UV index](https://www.google.com/search?sxsrf=ALeKk010aYaVBhFgzWm_AysLPp_ytPyFRg:1610376210393&q=What+is+the+best+UV+index+to+tan%3F&sa=X&ved=2ahUKEwjMk-bvjpTuAhXBp1kKHXVtDIwQzmd6BAgTEAU&biw=1080&bih=946&dpr=2) of 6 or greater. (At 45 feet long, our RV is larger by square footage than many apartments in New York or San Francisco!)
+
+Our party of 2 became a party of 3 last year. 🎉 Now that I am officially a dad, I am now legally entitled to make dad jokes. So in light of the rich cycling history of our company, I present the following: "Why couldn't the bicycle stand up by itself? It was two tired."
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Eltje portrait](../../images/team/Cory.png)
 
 </div>
 

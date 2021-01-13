@@ -10,6 +10,8 @@ We have members working all around the world, so their onboarding process may lo
 
 If you have any questions on any of this stuff, ask Charles, James or Tim. 
 
+The best way to run through this checklist is to copy the relevant sections below into an onboarding issue on the [Ops Roadmap](https://github.com/orgs/PostHog/projects/2) in GitHub.
+
 ## Upon Offer Acceptance
 
 Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.  
@@ -85,6 +87,40 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Gusto, Deel and/or CharlieHR admin access if they are involved in people ops <br>
 <input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) <br>
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br>
+
+## Tools we use
+
+We use a number of different tools to organise our work and communicate at PostHog. Below is a summary list of the most important ones - this list is not intended to be exhaustive
+
+### Everyone
+- Google Suite - Gmail, Google Apps such as Docs, Sheets, Slides 
+- GitHub - most comms and product work
+- Slack - we have an internal workspace and a users Slack as well
+- Brex (US) or Revolut (UK) - company cards
+- Expensify - team expenses
+- Shopify - powers our merch store
+- CharlieHR - holiday tracking, personal details
+
+### Engineering
+- AWS
+- Pagerduty
+- Heroku
+- Grafana
+- Sentry
+
+### Design
+- Figma - our main design tool
+
+### Ops
+- HubSpot - for managing all sales
+- Papercups - our support platform
+- Pry - financial modelling
+- Pulley - cap table management
+- Clerky - generates legal docs and US contracts
+- Fondo - US accounting
+- Gusto - US payroll
+- Deel - international payroll and contracts
+- Workable - recruitment tool
 
 ## Signatories
 

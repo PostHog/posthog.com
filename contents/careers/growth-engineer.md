@@ -41,7 +41,7 @@ We [launched a four week old minimum viable product in February](/handbook/compa
 
 PostHog's platform makes it easy for software teams to understand their user behavior. This coupled with our fast growth has led to a broad variety of very cool use cases. PostHog is used to help indie game designers make it more fun to defend earth from an alien threat. PostHog is used by multinational organizations running software that powers everything from banks to airlines. PostHog is used by startups disrupting their own industries.
 
-We're a company like no other in our space. Our approach is bottoms up and that starts by being great for developers to install and use.
+We're a company like no other in our space. Our approach is bottom up and that starts by being great for developers to install and use.
 
 By being open source, we can be used on any software project throughout the world, for free, forever. Some developers will use the platform on a side project, others at their startup or small business, and others in their Fortune 500. We are building a true platform that can grow from 1 user to many no matter the size or shape of the organization.
 

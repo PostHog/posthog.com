@@ -1,5 +1,5 @@
 ---
-title: Content
+title: Strategy
 sidebar: Handbook
 showTitle: true
 ---

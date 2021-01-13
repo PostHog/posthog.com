@@ -1,14 +1,14 @@
 ---
-title: Sales
+title: Demos
 sidebar: Handbook
 showTitle: true
 ---
 
-## Running a Sales Process
+## Giving Great Demos
 
 Always focus on delivering what the customer needs. Sometimes that will mean sending them to a competitor or turning them down. 
 
-### Initial Call
+### Initial Call
 
 The purpose of this call is to work out what the potential customer needs. 
 
@@ -24,7 +24,7 @@ You are trying to work out:
 
 As a rule, always understand the context behind the question - it may help you make further useful recommendations.
 
-### Demo
+### Demo
 
 #### Environment
 
@@ -55,9 +55,9 @@ When doing a demo of PostHog, you should prioritize using the following environm
 
 #### Guidance
 
-Show the client the product. Use localhost with example data. Pause frequently and make sure there are no questions. Ask if the functionality would help them.
+Show the client the product. Pause frequently and make sure there are no questions. Ask if the functionality would help them.
 
-Use this to confirm the benefits to the customer that PostHog needs to provide. If you are talking only about feature X does Y, then you’re doing it wrong!
+Use this to confirm the benefits to the customer that PostHog needs to provide. If you are talking only about feature X does Y, then you’re doing it wrong. "As a Product Manager, I may want to know 'X' about my users, this is how you do that."
 
 ### Follow Up
 
@@ -66,12 +66,6 @@ Keep this as quick as possible - if you can follow up immediately / on the same 
 ### Feature Requests
 
 Sometimes client calls will highlight features that they would need which we don’t have. Your first step is to work out if what we do will be valuable enough to move forward with. Avoid committing to new functionality unless you’re already about to work on it. It’s better to underpromise and overdeliver.
-
-### Pricing
-
-Our pricing is new and may need some modifications. We trust you to make a sensible judgement. Generally, you should be covered by the pricing we have on our website - if they need something more (e.g. they have a huge volume), get as much info on their requirements as you can, then debrief internally to work out what is reasonable. Finally, confirm with the potential client - that can all happen the same day.
-
-We provide a 10% discount for annual upfront invoicing.
 
 ### Style
 
