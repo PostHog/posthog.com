@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Layout from '../components/Layout'
 import { Spacer } from '../components/Spacer'
 import { PluginCard } from '../components/PluginLibrary/PluginCard'
-import { plugins } from '../pages-content/plugins'
 import { Row, Tabs } from 'antd'
+import { useActions, useValues } from 'kea'
+import { pluginLibraryLogic } from '../logic/pluginLibraryLogic'
+import { Spin } from 'antd'
 
 const { TabPane } = Tabs
 
 export const PluginLibraryPage = () => {
-    const [filter, setFilter] = useState('all')
-
-    const filterPlugins = (plugin) => {
-        return filter === 'all' ? true : filter === plugin.type
-    }
+    const { filteredPlugins, filter } = useValues(pluginLibraryLogic)
+    const { setFilter } = useActions(pluginLibraryLogic)
 
     return (
         <Layout>
@@ -31,18 +30,28 @@ export const PluginLibraryPage = () => {
                     <TabPane tab="Ingestion Filtering" key="ingestion_filtering" />
                 </Tabs>
                 <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
-                    {plugins
-                        .filter((plugin) => filterPlugins(plugin))
-                        .map((plugin) => (
+                    {filteredPlugins.length > 0 ? (
+                        filteredPlugins.map((plugin) => (
                             <PluginCard
                                 key={plugin.name}
                                 name={plugin.name}
                                 description={plugin.description}
-                                link={plugin.link}
-                                imageSrc={plugin.image}
-                                isCommunityPlugin={plugin.isCommunity}
+                                link={plugin.url}
+                                imageSrc={
+                                    plugin.imageLink
+                                        ? plugin.imageLink
+                                        : plugin.url.includes('github')
+                                        ? `https://raw.githubusercontent.com/${
+                                              plugin.url.split('hub.com/')[1]
+                                          }/main/logo.png`
+                                        : null
+                                }
+                                isCommunityPlugin={plugin.maintainer === 'community'}
                             />
-                        ))}
+                        ))
+                    ) : (
+                        <Spin />
+                    )}
                 </Row>
             </div>
             <Spacer />
