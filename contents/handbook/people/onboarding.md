@@ -37,6 +37,7 @@ Charles will create the contract needed, depending on who is joining. Only James
 <input type="checkbox"/>  Select a notice period of 30 days <br>
 <input type="checkbox"/>  Select for the contractor to upload necessary compliance documents <br>
 <input type="checkbox"/>  Select for the contractor to be potentially allocated equity in the future (if this has been agreed) <br>
+<input type="checkbox"/>  Under 'Other Specifics' add the following as a special clause: _Contractor agrees to comply with any rules, policies and procedures set out in the Company Handbook, a copy of which is available on the Client's website. To the extent that there is any conflict between the terms of this Agreement and the Company Handbook, the terms which are more favorable to the Contractor shall prevail._ <br>
 
 ## The Week Before They Join
 

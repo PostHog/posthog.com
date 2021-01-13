@@ -118,6 +118,7 @@
         "name": "Plugins",
         "items": [
             "docs/plugins/overview",
+            "docs/plugins/enabling",
             "docs/plugins/architecture",
             "docs/plugins/build",
             "docs/plugins/types",
