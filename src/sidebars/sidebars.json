@@ -294,7 +294,7 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/community", "handbook/growth/customer-success"],
+        "items": ["handbook/growth/community", "handbook/growth/customer-success", "handbook/growth/yc-onboarding"],
         "child_entries": ["Marketing", "Sales"]
     },
     {
