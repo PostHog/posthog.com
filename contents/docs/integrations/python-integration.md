@@ -212,14 +212,12 @@ POSTHOG_DJANGO = {
 
 ## Naming Confusion
 
-As our open source project [PostHog](https://github.com/PostHog/posthog) shares the same module name, we created a special `posthog-analytics` package, mostly for internal use to avoid module collision. It is the exact same.
-
-## How to Release
-1. Increase `VERSION` in `posthog/version.py`
-2. run `make release` and `make release_analytics`
-3. `git commit -am "Release X.Y.Z."` (where X.Y.Z is the new version)
-4. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
+As our open source project [PostHog](https://github.com/PostHog/posthog) shares the same module name, we created a special `posthoganalytics` package, mostly for internal use to avoid module collision. It is the exact same.
 
 ## Thank You
 
 This library is largely based on the `analytics-python` package.
+
+## How to release
+
+Instructions on how to release a new version of this package [have moved to our Handbook](/handbook/engineering/releasing-python).
