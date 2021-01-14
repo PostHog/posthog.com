@@ -19,27 +19,41 @@ const getImageSizeSync = (file) => {
     return dimensions
 }
 
-module.exports = ({ markdownAST }, { enabled, host, maxWidth }) => {
+module.exports = ({ markdownAST }, { imgixHost, maxWidth }) => {
     // handle all image nodes
     visit(markdownAST, 'image', (node) => {
+        // Always add lazy loading
         let html = `
-            <img src='${node.url}' title='${node.alt}' alt='${node.alt}' loading='lazy'>
+            <img 
+                class="gatsby-resp-image-image" 
+                src='${node.url}' 
+                title='${node.alt}' 
+                alt='${node.alt}' 
+                loading='lazy'>
         `
-        if (enabled && host && node.url.startsWith('/') && (node.url.endsWith('.png') || node.url.endsWith('.jpg'))) {
+
+        // Get dimensions for local images
+        if (
+            node.url.startsWith('/') &&
+            (node.url.endsWith('.png') || node.url.endsWith('.jpg') || node.url.endsWith('.gif'))
+        ) {
             try {
                 const dimensions = getImageSizeSync(path.join(__dirname, '../../public', node.url))
-                const srcSet = [0.25, 0.5, 1, 1.5, 2, 3]
-                    .map((m) => m * maxWidth)
-                    .filter((w) => w <= dimensions.width)
-                    .map((w) => `https://${host}${node.url}?w=${w}`)
-                    .join(' ')
+                let srcSet = ''
+                if (imgixHost && !node.url.endsWith('.gif')) {
+                    srcSet = [0.25, 0.5, 1, 1.5, 2, 3]
+                        .map((m) => m * maxWidth)
+                        .filter((w) => w <= dimensions.width)
+                        .map((w) => `https://${imgixHost}${node.url}?w=${w}`)
+                        .join(' ')
+                }
 
-                // in case the image is less than maxWidth wide, make it responsive (100vw) only if the screen is smaller
+                // in case the image is less than maxWidth wide, make it responsive (100vw) only if the screen is smaller than that
                 const minWidth = Math.min(maxWidth, dimensions.width)
 
                 html = `
                     <img
-                        className="gatsby-resp-image-image"
+                        class="gatsby-resp-image-image"
                         src='${node.url}'
                         srcSet=${srcSet} 
                         sizes="(max-width: ${minWidth}px) 100vw, ${minWidth}px"
@@ -48,11 +62,11 @@ module.exports = ({ markdownAST }, { enabled, host, maxWidth }) => {
                         loading='lazy'>
                 `
             } catch (e) {
-                // ignore
+                // can't get dimensions. ignore
             }
         }
 
-        node.type = 'html' // this breaks the node type, so always use this plug in at last
+        node.type = 'html' // this breaks the node type, so always use this plugin last
         node.children = undefined
         node.value = html
     })
