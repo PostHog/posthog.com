@@ -14,26 +14,28 @@ You can build a good company by focusing on getting lots of customers. To build 
 
 We have a few different routes for users to contact us. As an open source company, our bias is towards increasing the bandwidth of communication with our users and making it easy for them to reach us. We do not believe in putting up barriers by saying they can only reach us through a dedicated support email address, for example. 
 
-These are the ways in which customers can currently reach us:
+These are the ways in which customers can currently reach us, in order of popularity:
 
 - **Slack** - our active [PostHog Users Slack](posthogusers.slack.com) community frequently post questions
 - **Email** - a user may email hey@ with a specific support query
-- **In-app** - we provide in-app support chat via the [Papercups](https://papercups.io/) widget (more on this below)
+- **Papercups** - we provide in-app support chat via the [Papercups](https://papercups.io/) widget
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
 ### Simple, lightweight tools
 
-We go to where our users are. That means we respond to the same channel that they reached out to, rather than trying to funnel them somewhere else. 
+We go to where our users are. That means **we respond in the same channel that they reached out to**, rather than trying to funnel them somewhere else.
 
-This can result in a bit of inefficiency trying to monitor multiple channels, which is why we use [Papercups](https://papercups.io/) as our internal platform to collate and manage user requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog.  
+We use [Papercups](https://papercups.io/) as our internal platform to get an overview of our support requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog. 
 
-Papercups has some really nice integrations which help us run things more smoothly:
+A quick overview of Papercups main features:
 
-- You can reply directly to PostHog app questions either in Papercups itself or in the _customer_support_ channel in our internal Slack - both work!
-- In the users Slack, the _general_ and _feedback_ channels are also synced with Papercups - this means you can reply to users in Slack _or_ Papercups and the two will stay synced. Please make sure you _reply in a thread_ to any questions. This makes it easier for our users to navigate, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation). 
-- You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
-- If you click 'Share Conversation' at the bottom of the right hand pane, you can link directly to a conversation.
-- 'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. 
+- _Slack integration (1)_: You can reply directly to PostHog app questions either in Papercups itself or in the _customer_support_ channel in our internal Slack - both work!
+- _Slack integration (2)_: In the users Slack, the _general_ and _feedback_ channels are both synced with Papercups - similar to the above, this means you can reply to users in Slack or Papercups. For now, we advise that you stick to replying in Slack as the integration isn't quite there yet if you reply in Papercups. 
+- _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
+- _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation.
+- _Analytics_:'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. 
+
+When replying to users in Slack, please try to reply in a thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation right now).
 
 Papercups are an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.  
 
