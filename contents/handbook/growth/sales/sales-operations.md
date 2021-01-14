@@ -101,11 +101,15 @@ Our Enterprise pricing starts at $2,000 per month, but you will need to determin
 - Whether they have existing data to migrate
 - Any relevant deadlines
 
-We provide a 10% discount for annual upfront invoicing. We may offer some sort of trial if appropriate. 
+We provide a discount for annual upfront invoicing, typically 10%. We may also offer some sort of free trial if appropriate - 30 days is our standard. 
 
 We generate quotes directly within HubSpot - go to 'Sales' -> 'Quotes'. 
 
-The process is fairly straightforward for creating a quote. Do not use the Stripe billing integration as it is very basic and does not enable you to have different types of line item (e.g. 1 month free trial and then an ongoing monthly subscription). 
+The process is fairly straightforward for creating a quote. A couple of points to note:
+
+- It is really important that you add our standard payment terms to the quote, so it is clear when the customer should expect to pay.
+- You can use 'Snippets' when building a quote to insert frequently used text (like payment terms). 
+- Do not use the Stripe billing integration as it is very basic and does not enable you to have different types of line item (e.g. 1 month free trial and then an ongoing monthly subscription). 
 
 ### Billing
 
