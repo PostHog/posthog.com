@@ -38,18 +38,19 @@ module.exports = ({ markdownAST }, { imgixHost, maxWidth }) => {
             (node.url.endsWith('.png') || node.url.endsWith('.jpg') || node.url.endsWith('.gif'))
         ) {
             try {
-                const dimensions = getImageSizeSync(path.join(__dirname, '../../public', node.url))
+                const { width } = getImageSizeSync(path.join(__dirname, '../../public', node.url))
                 let srcSet = ''
                 if (imgixHost && !node.url.endsWith('.gif')) {
                     srcSet = [0.25, 0.5, 1, 1.5, 2, 3]
                         .map((m) => m * maxWidth)
-                        .filter((w) => w <= dimensions.width)
-                        .map((w) => `https://${imgixHost}${node.url}?w=${w}`)
-                        .join(' ')
+                        .filter((w) => w < width)
+                        .concat([width])
+                        .map((w) => `https://${imgixHost}${node.url}?w=${w} ${w}w`)
+                        .join(', ')
                 }
 
                 // in case the image is less than maxWidth wide, make it responsive (100vw) only if the screen is smaller than that
-                const minWidth = Math.min(maxWidth, dimensions.width)
+                const minWidth = Math.min(maxWidth, width)
 
                 html = `
                     <img
@@ -68,7 +69,7 @@ module.exports = ({ markdownAST }, { imgixHost, maxWidth }) => {
 
         node.type = 'html' // this breaks the node type, so always use this plugin last
         node.children = undefined
-        node.value = html
+        node.value = `<a href='${node.url}'>${html}</a>`
     })
 
     return markdownAST
