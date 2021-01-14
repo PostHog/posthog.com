@@ -62,7 +62,7 @@ This allows you to segregate concerns, such as keeping tracking for your dev and
 
 In addition, we also enhanced our invite and permissioning system as a by-product of this feature. 
 
-As this is an Enterprise Edition feature, please contact us at _sales@posthog.com_ if you are interested in using it.
+As this is an Enterprise Edition feature, please contact us at _[sales@posthog.com](mailto:sales@posthog.com)_ if you are interested in using it.
 
 ### [Dashboard Templates](https://github.com/PostHog/posthog/pull/1942)
 

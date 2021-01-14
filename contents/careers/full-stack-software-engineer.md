@@ -78,7 +78,7 @@ By being open source, we can be used on any software project throughout the worl
 The core of our approach is to delight end users. It's not about executive dashboards and then a terrible interface for everyone else. It's the sense of power we give to the person on the ground, doing the actual work, every day.
 
 ## Sold? Apply now
-* [Drop us a line](2F287E18A5@jobs.workablemail.com) and tell us:
+* [Drop us a line](mailto:2F287E18A5@jobs.workablemail.com) and tell us:
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
 * Your resumé and/or LinkedIn
