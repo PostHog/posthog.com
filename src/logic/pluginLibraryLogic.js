@@ -3,9 +3,8 @@ import { kea } from 'kea'
 export const pluginLibraryLogic = kea({
     actions: {
         setFilter: (filter) => ({ filter }),
-        setModalMarkdown: (markdown) => ({ markdown }),
         setModalOpen: (open) => ({ open }),
-        setPluginImageSrc: (pluginImageSrc) => ({ pluginImageSrc }),
+        setActivePlugin: (activePlugin) => ({ activePlugin }),
     },
     reducers: {
         filter: [
@@ -14,22 +13,16 @@ export const pluginLibraryLogic = kea({
                 setFilter: (_, { filter }) => filter,
             },
         ],
-        modalMarkdown: [
-            '',
-            {
-                setModalMarkdown: (_, { markdown }) => markdown,
-            },
-        ],
         modalOpen: [
             false,
             {
                 setModalOpen: (_, { open }) => open,
             },
         ],
-        pluginImageSrc: [
-            '',
+        activePlugin: [
+            {},
             {
-                setPluginImageSrc: (_, { pluginImageSrc }) => pluginImageSrc,
+                setActivePlugin: (_, { activePlugin }) => activePlugin,
             },
         ],
     },

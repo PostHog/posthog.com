@@ -66,6 +66,7 @@
     },
     "devDependencies": {
         "@types/react-helmet": "^6.1.0",
+        "@types/react-modal": "^3.10.6",
         "@typescript-eslint/parser": "^4.5.0",
         "eslint": "^7.9.0",
         "eslint-plugin-react": "^7.20.6",

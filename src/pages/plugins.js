@@ -3,21 +3,21 @@ import Layout from '../components/Layout'
 import { Spacer } from '../components/Spacer'
 import { PluginCard } from '../components/PluginLibrary/PluginCard'
 import { Row, Tabs } from 'antd'
-import Markdown from 'react-markdown'
 import { useActions, useValues } from 'kea'
 import { pluginLibraryLogic } from '../logic/pluginLibraryLogic'
-import { Spin, Button } from 'antd'
-import Modal from 'react-modal'
+import { Spin } from 'antd'
+import { PluginModal } from '../components/PluginLibrary/PluginModal'
+import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import './styles/plugin-library.scss'
 
 const { TabPane } = Tabs
 
 export const PluginLibraryPage = () => {
-    const { filteredPlugins, filter, modalMarkdown, modalOpen, pluginImageSrc } = useValues(pluginLibraryLogic)
-    const { setFilter, setModalMarkdown, setModalOpen, setPluginImageSrc } = useActions(pluginLibraryLogic)
+    const { filteredPlugins, filter, modalOpen, activePlugin } = useValues(pluginLibraryLogic)
+    const { setFilter, setModalOpen, setActivePlugin } = useActions(pluginLibraryLogic)
 
     const handlePluginClick = async (e, plugin) => {
-        let markdown = `# ${plugin.name} \n ${plugin.description}`
+        let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
         if (plugin.url.includes('github')) {
             e.stopPropagation()
             const response = await window.fetch(
@@ -27,8 +27,12 @@ export const PluginLibraryPage = () => {
                 markdown = await response.text()
             }
         }
-        setPluginImageSrc(getPluginImageSrc(plugin))
-        setModalMarkdown(markdown.split(/!\[.*\]\(.*\)/).join('')) // Remove images from MD
+        if (!markdown.includes('Installation')) {
+            markdown += pluginInstallationMd
+        }
+        plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
+        plugin['imageSrc'] = getPluginImageSrc(plugin)
+        setActivePlugin(plugin)
         setModalOpen(true)
     }
 
@@ -42,19 +46,12 @@ export const PluginLibraryPage = () => {
     return (
         <Layout>
             <div className="centered" style={{ margin: 'auto' }}>
-                <Modal
-                    isOpen={modalOpen}
-                    onRequestClose={() => setModalOpen(false)}
-                    className="pluginModalContent"
-                    overlayClassName="modalOverlay"
-                >
-                    <div>
-                        <Spacer />
-                        <img src={pluginImageSrc} />
-                        <Markdown source={modalMarkdown} linkTarget="_blank" />
-                    </div>
-                    <Button icon="close" onClick={() => setModalOpen(false)} className="modalClose" />
-                </Modal>
+                <PluginModal
+                    modalOpen={modalOpen}
+                    pluginImageSrc={activePlugin.imageSrc}
+                    modalMarkdown={activePlugin.markdown}
+                    setModalOpen={setModalOpen}
+                />
                 <Spacer />
                 <h1 className="center">Plugin Library</h1>
                 <Tabs
