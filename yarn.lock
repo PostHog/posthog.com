@@ -8102,23 +8102,6 @@ gatsby-remark-copy-linked-files@^2.3.2:
     probe-image-size "^4.1.1"
     unist-util-visit "^1.4.1"
 
-gatsby-remark-images@^3.1.22:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.2.3.tgz#9b9df88cdea282c4dae741e123533d5e10a86fd1"
-  integrity sha512-pGF6khRD1eTAYccgAH3FMmTl8kQgvwUezj92f2el4rKpA3ycWAutCLgeEWf1iap0c5LtiaFNPzhoEmiUIQkshQ==
-  dependencies:
-    "@babel/runtime" "^7.8.7"
-    chalk "^2.4.2"
-    cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.1.2"
-    is-relative-url "^3.0.0"
-    lodash "^4.17.15"
-    mdast-util-definitions "^1.2.5"
-    potrace "^2.1.5"
-    query-string "^6.11.1"
-    unist-util-select "^1.5.0"
-    unist-util-visit-parents "^2.1.2"
-
 gatsby-remark-katex@^3.1.8:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/gatsby-remark-katex/-/gatsby-remark-katex-3.2.2.tgz#3707dde17b04993acfb2a20520065d007e736356"
@@ -8136,6 +8119,15 @@ gatsby-remark-prismjs@^3.5.1:
     "@babel/runtime" "^7.9.6"
     parse-numeric-range "^0.0.2"
     unist-util-visit "^1.4.1"
+
+gatsby-remark-static-images@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-static-images/-/gatsby-remark-static-images-1.2.1.tgz#3bdbf6ac0e5c9fee0cdb24d6109f941448fc5e3b"
+  integrity sha512-v8zXFRmVFXm0w6c3NWkXT0CISvFMBteVtPzzbH4C/k+fJiWdewAyhl/VZuZkqGz9YRoq2mAiUIJmStMp+cgZHQ==
+  dependencies:
+    himalaya "^1.1.0"
+    is-relative-url "^2.0.0"
+    slash "^2.0.0"
 
 gatsby-source-filesystem@^2.1.22:
   version "2.2.3"
@@ -9166,6 +9158,11 @@ highlight.js@^8.1.0:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-8.9.1.tgz#b8a9c5493212a9392f0222b649c9611497ebfb88"
   integrity sha1-uKnFSTISqTkvAiK2SclhFJfr+4g=
 
+himalaya@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/himalaya/-/himalaya-1.1.0.tgz#31724ae9d35714cd7c6f4be94888953f3604606a"
+  integrity sha512-LLase1dHCRMel68/HZTFft0N0wti0epHr3nNY7ynpLbyZpmrKMQ8YIpiOV77TM97cNpC8Wb2n6f66IRggwdWPw==
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -10185,6 +10182,13 @@ is-regexp@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-regexp/-/is-regexp-1.0.0.tgz#fd2d883545c46bac5a633e7b9a09e87fa2cb5069"
   integrity sha1-/S2INUXEa6xaYz57mgnof6LLUGk=
+
+is-relative-url@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/is-relative-url/-/is-relative-url-2.0.0.tgz#72902d7fe04b3d4792e7db15f9db84b7204c9cef"
+  integrity sha1-cpAtf+BLPUeS59sV+duEtyBMnO8=
+  dependencies:
+    is-absolute-url "^2.0.0"
 
 is-relative-url@^3.0.0:
   version "3.0.0"
@@ -11303,7 +11307,7 @@ mdast-util-compact@^2.0.0:
   dependencies:
     unist-util-visit "^2.0.0"
 
-mdast-util-definitions@^1.2.0, mdast-util-definitions@^1.2.5:
+mdast-util-definitions@^1.2.0:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/mdast-util-definitions/-/mdast-util-definitions-1.2.5.tgz#3fe622a4171c774ebd06f11e9f8af7ec53ea5c74"
   integrity sha512-CJXEdoLfiISCDc2JB6QLb79pYfI6+GcIH+W2ox9nMc7od0Pz+bovcHsiq29xAQY6ayqe/9CsK2VzkSJdg1pFYA==
@@ -13829,15 +13833,6 @@ query-string@^5.0.1:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^6.11.1:
-  version "6.12.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.12.1.tgz#2ae4d272db4fba267141665374e49a1de09e8a7c"
-  integrity sha512-OHj+zzfRMyj3rmo/6G8a5Ifvw3AleL/EbcHMD27YA31Q+cO5lfmQxECkImuNVjcskLcvBRVHNAB3w6udMs1eAA==
-  dependencies:
-    decode-uri-component "^0.2.0"
-    split-on-first "^1.0.0"
-    strict-uri-encode "^2.0.0"
-
 query-string@^6.13.1:
   version "6.13.1"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.1.tgz#d913ccfce3b4b3a713989fe6d39466d92e71ccad"
@@ -15833,6 +15828,11 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
   integrity sha1-xB8vbDn8FtHNF61LXYlhFK5HDVU=
+
+slash@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
+  integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
 
 slash@^3.0.0:
   version "3.0.0"

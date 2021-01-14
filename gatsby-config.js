@@ -73,12 +73,11 @@ module.exports = {
                             className: 'post-toc-anchor',
                         },
                     },
+                    'gatsby-remark-static-images',
                     {
-                        resolve: `gatsby-remark-images`,
+                        resolve: './plugins/gasby-remark-lazy-imgix',
                         options: {
-                            // It's important to specify the maxWidth (in pixels) of
-                            // the content container as this plugin uses this as the
-                            // base for generating different widths of each image.
+                            imgixHost: process.env.CONTEXT === 'production' ? 'posthog.imgix.net' : null,
                             maxWidth: 700,
                         },
                     },
