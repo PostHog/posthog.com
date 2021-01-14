@@ -35,7 +35,7 @@ In team mode, it is a way for multiple teams to organize distributed development
 
 As an individual, you can view as a pure utility for launching feature flags. I can write myself or use this thing off the shelf to save time. Interesting but limited value proposition.
 
-In team mode, it becomes a way for a team to organize its business process between Product Managment and Engineering. It becomes a product management process tool on rails.
+In team mode, it becomes a way for a team to organize its business process between Product Management and Engineering. It becomes a product management process tool on rails.
 
 ## Our structure
 
@@ -87,7 +87,7 @@ Developer-evangelism is more about adoption of the first users - creating conten
 
 #### What's the difference between Customer Success and Developer Experience?
 
-Customer Success is a more commercially-oriented function, focussed on inbound sales.
+Customer Success is a more commercially-oriented function, focused on inbound sales.
 
 #### What are business ops?
 
