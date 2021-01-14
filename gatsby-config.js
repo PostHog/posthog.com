@@ -75,6 +75,14 @@ module.exports = {
                     },
                     'gatsby-remark-static-images',
                     {
+                        resolve: './plugins/gasby-remark-lazy-imgix',
+                        options: {
+                            enabled: process.env.CONTEXT === 'production',
+                            host: 'posthog.imgix.net',
+                            maxWidth: 700,
+                        },
+                    },
+                    {
                         resolve: `gatsby-remark-prismjs`,
                         options: {
                             // Class prefix for <pre> tags containing syntax highlighting;
