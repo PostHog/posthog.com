@@ -103,7 +103,7 @@ posthog.init('[your api key]', {
 });
 ```
 
-## Reset After Logout
+### Reset After Logout
 
 If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user due to shared cookies between sessions.
 
