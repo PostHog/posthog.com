@@ -55,7 +55,7 @@ module.exports = ({ markdownAST }, { imgixHost, maxWidth }) => {
                     <img
                         class="gatsby-resp-image-image"
                         src='${node.url}'
-                        srcSet=${srcSet} 
+                        srcSet="${srcSet}" 
                         sizes="(max-width: ${minWidth}px) 100vw, ${minWidth}px"
                         title='${node.alt || ''}'
                         alt='${node.alt || ''}'
