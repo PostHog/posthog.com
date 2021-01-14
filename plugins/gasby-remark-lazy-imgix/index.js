@@ -67,9 +67,13 @@ module.exports = ({ markdownAST }, { imgixHost, maxWidth }) => {
             }
         }
 
+        // Add a link if the image is the first thing in the line (e.g.: ![alt](/path.png))
+        // ... otherwise it's in a link already (e.g.: [![alt](/path.png)](http://link))
+        const addLink = node.position.start.column === 1
+
+        node.value = addLink ? `<a href='${node.url}'>${html}</a>` : html
         node.type = 'html' // this breaks the node type, so always use this plugin last
         node.children = undefined
-        node.value = `<a href='${node.url}'>${html}</a>`
     })
 
     return markdownAST
