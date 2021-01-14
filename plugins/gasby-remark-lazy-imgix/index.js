@@ -34,12 +34,15 @@ module.exports = ({ markdownAST }, { enabled, host, maxWidth }) => {
                     .map((w) => `https://${host}${node.url}?w=${w}`)
                     .join(' ')
 
+                // in case the image is less than maxWidth wide, make it responsive (100vw) only if the screen is smaller
+                const minWidth = Math.min(maxWidth, dimensions.width)
+
                 html = `
                     <img
                         className="gatsby-resp-image-image"
                         src='${node.url}'
                         srcSet=${srcSet} 
-                        sizes="${dimensions.width > maxWidth ? '(max-width: 700px) 100vw, 700px' : ''}"
+                        sizes="(max-width: ${minWidth}px) 100vw, ${minWidth}px"
                         title='${node.alt || ''}'
                         alt='${node.alt || ''}'
                         loading='lazy'>
