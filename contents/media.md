@@ -30,18 +30,18 @@ Hello! We've created some brand assets that mean you don't have to negotiate leg
 
 ## PostHog Backgrounds
 
-![PostHog Background - comms](/images/background-comms.png)
+![PostHog Background - comms](./images/background-comms.png)
 
-![PostHog Background - error1](/images/background-error1.png)
+![PostHog Background - error1](./images/background-error1.png)
 
-![PostHog Background - error2](/images/background-error2.png)
+![PostHog Background - error2](./images/background-error2.png)
 
-![PostHog Background - nexus](/images/background-nexus.png)
+![PostHog Background - nexus](./images/background-nexus.png)
 
-![PostHog Background - office](/images/background-office.png)
+![PostHog Background - office](./images/background-office.png)
 
-![PostHog Background - outline](/images/background-outline.png)
+![PostHog Background - outline](./images/background-outline.png)
 
-![PostHog Background - sky](/images/background-sky.png)
+![PostHog Background - sky](./images/background-sky.png)
 
-![PostHog Background - stars](/images/background-stars.png)
+![PostHog Background - stars](./images/background-stars.png)
