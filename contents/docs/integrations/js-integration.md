@@ -270,7 +270,7 @@ Some of the most relevant options are:
 | `disable_cookie`<br/><br/>**Type:** Boolean<br/>**Default:** `false`              | Disable persisting user data across pages. This will disable cookies, session storage and local storage.  |
 | `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`    | Determines if users should be opted out of session recording.                                                                  |
 | `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`            | A function to be called once the PostHog scripts have loaded successfully.                                                     |
-| `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
+| `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
 | `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`               | A list of properties that should never be sent with `capture` calls.                                                           |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                     | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
 
