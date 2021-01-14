@@ -18,16 +18,12 @@ Charles will create the contract needed, depending on who is joining. Only James
 
 ### US Team Member Checklist
 
-<input type="checkbox"/>  Use [Clerky](https://app.clerky.com). Choose 'New' and select 'Employee Agreement' and then 'Offer Letter (with equity compensation) and CIIA Agreement — Employee Agreement'. Follow the instructions. <br>
-<input type="checkbox"/>  Enter 'Delaware' for State of Incorporation. <br>
-<input type="checkbox"/>  Enter 'Stock Options' for Type of Restricted Stock  <br>
-<input type="checkbox"/>  Fill out the sections for Description of Excluded IP and Restrictive Prior Agreements if relevant, otherwise ignore <br>
-<input type="checkbox"/>  Enter 'State of Delaware' for Governing Law Jurisdiction <br>
-<input type="checkbox"/>  Complete the rest of the details and send to the team member for signing <br>
+<input type="checkbox"/>  Create a contract using the [Google Docs template](https://docs.google.com/document/d/15cdfWfGj5OWBpVST6VcMwb5TP5qLVPQd9SGWKSnB9bc/edit?usp=sharing) in the Legal Docs shared drive <br>
+<input type="checkbox"/>  If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto <br>
 
 ### UK Team Member Checklist
 
-<input type="checkbox"/>  For now, we create UK employee agreements manually - in the future, we will automate this process as well <br>
+<input type="checkbox"/>  Create a contract using the Google Docs templates for [CIIA](https://docs.google.com/document/d/1r7Xc1ALf-JKUrL3g_oyzaQ8H3SOuVchBpJrGp7TINdc/edit?usp=sharing) and [Offer Letter](https://docs.google.com/document/d/1ZzF5hbVmTmKIYKxW7JkXzrBFFNrztkcNvcdO643r6sY/edit?usp=sharing) in the Legal Docs shared drive <br>
 <input type="checkbox"/>  Email Parallel to add them to our pension scheme <br>
 
 ### Non-US nor UK Team Member Checklist
