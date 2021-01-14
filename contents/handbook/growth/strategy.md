@@ -47,7 +47,7 @@ As we grow, it'll get important to work out which teams in PostHog own different
     </tr>
     <tr>
         <td>Marketing</td>
-        <td colspan="2" style="text-align: center;">Marketing (Online Programs / Evangelism)</td>
+        <td colspan="2" style="text-align: center;">Marketing (Developer Evangelism)</td>
         <td>Enterprise Product Marketing</td>
     </tr>
     <tr>
@@ -58,7 +58,7 @@ As we grow, it'll get important to work out which teams in PostHog own different
     </tr>
     <tr>
         <td>Support</td>
-        <td colspan="3" style="text-align: center;">Support (Different SLAs)</td>
+        <td colspan="3" style="text-align: center;">Developer Experience</td>
     </tr>
     <tr>
         <td>Success/Retention</td>
@@ -71,3 +71,24 @@ As we grow, it'll get important to work out which teams in PostHog own different
         <td colspan="3" style="text-align: center;">Business Ops</td>
     </tr>
 </table>
+
+
+### Structure FAQ
+
+#### Why do you have "sales" for the free product?
+
+Developer experience will help ensure the open source product is properly adopted, for $0 in this case.
+
+#### What's 'Enterprise Product Marketing' versus 'Marketing (Developer Evangelism)'?
+
+Product marketing is making sure that PostHog is positioned as a platform that can be used organization-wide, to aid with expansion. For example, organizing roadmap discussions with large clients.
+
+Developer-evangelism is more about adoption of the first users - creating content, building an audience across social media and GitHub, etc. 
+
+#### What's the difference between Customer Success and Developer Experience?
+
+Customer Success is a more commercially-oriented function, focussed on inbound sales.
+
+#### What are business ops?
+
+It'll be important we have good processes in place to grow usage from free to team and beyond. This means making sure we have a CRM set up, integrated with our product, etc.

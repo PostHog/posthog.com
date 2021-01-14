@@ -294,7 +294,12 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/community", "handbook/growth/customer-success", "handbook/growth/yc-onboarding"],
+        "items": [
+            "handbook/growth/strategy",
+            "handbook/growth/community",
+            "handbook/growth/customer-success",
+            "handbook/growth/yc-onboarding"
+        ],
         "child_entries": ["Marketing", "Sales"]
     },
     {
