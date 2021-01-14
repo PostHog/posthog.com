@@ -30,7 +30,7 @@ This can result in a bit of inefficiency trying to monitor multiple channels, wh
 Papercups has some really nice integrations which help us run things more smoothly:
 
 - You can reply directly to PostHog app questions either in Papercups itself or in the _customer_support_ channel in our internal Slack - both work!
-- In the users Slack, the _general_ channel is also synced with Papercups - this means you can reply to users in Slack _or_ Papercups and the two will stay synced. In the future we'll be able to do this with multiple channels, but the functionality isn't available in Papercups yet. 
+- In the users Slack, the _general_ and _feedback_ channels are also synced with Papercups - this means you can reply to users in Slack _or_ Papercups and the two will stay synced. Please make sure you _reply in a thread_ to any questions. This makes it easier for our users to navigate, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation). 
 - You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
 - If you click 'Share Conversation' at the bottom of the right hand pane, you can link directly to a conversation.
 - 'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. 
