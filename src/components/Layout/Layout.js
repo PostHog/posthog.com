@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { ResponsiveSidebar } from '../ResponsiveSidebar'
@@ -15,7 +15,7 @@ import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
 import './DarkMode.scss'
-import { CloseOutlined } from '@ant-design/icons'
+import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 
 const Layout = ({
     onPostPage,
@@ -28,27 +28,7 @@ const Layout = ({
     containerStyle = {},
 }) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
-    const [showAnnouncement, setShowAnnouncement] = useState(false)
 
-    useEffect(() => {
-        if (window && !localStorage.getItem('hide-announcement')) {
-            setShowAnnouncement(true)
-        }
-    }, [])
-
-    const stopAnnouncement = (e, source) => {
-        if (source === 'close') {
-            e.preventDefault()
-            e.stopPropagation()
-        }
-        setShowAnnouncement(false)
-        localStorage.setItem('hide-announcement', '1')
-        if (window) {
-            window.posthog.capture(source === 'link' ? 'clicked_announcement' : 'closed_announcement', {
-                announcement_type: 'series a',
-            })
-        }
-    }
     return (
         <StaticQuery
             query={graphql`
@@ -160,22 +140,7 @@ const Layout = ({
                             {isBlogArticlePage && <NewsletterForm />}
                             <Footer onPostPage={onPostPage} />
                         </AntdLayout>
-                        {showAnnouncement ? (
-                            <Link
-                                to="/blog/posthog-announces-9-million-dollar-series-A"
-                                onClick={(e) => stopAnnouncement(e, 'link')}
-                            >
-                                <div className="announcement-banner">
-                                    <p className="centered announcement-text">
-                                        PostHog Raises $9 Million Series A
-                                        <CloseOutlined
-                                            className="announcement-banner-close"
-                                            onClick={(e) => stopAnnouncement(e, 'close')}
-                                        />
-                                    </p>
-                                </div>
-                            </Link>
-                        ) : null}
+                        <PosthogAnnouncement />
                     </>
                 )
             }}
