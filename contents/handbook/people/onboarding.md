@@ -52,7 +52,6 @@ Charles and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Check that the team member is invited to the daily standups and any other regular meetings (e.g. retros, life stories) <br> 
 <input type="checkbox"/>  Send team member a link to the [Handbook](/handbook) <br>
 <input type="checkbox"/>  Send team member a digital company card <br>
-<input type="checkbox"/>  Add team member to Expensify <br>
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/people/spending-money) guidelines <br>
 <input type="checkbox"/>  Ask James or Yakko to give them $100 credit to spend on Shopify <br>
 <input type="checkbox"/>  Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them <br>
@@ -97,8 +96,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - Google Suite - Gmail, Google Apps such as Docs, Sheets, Slides 
 - GitHub - most comms and product work
 - Slack - we have an internal workspace and a users Slack as well
-- Brex (US) or Revolut (UK) - company cards
-- Expensify - team expenses
+- Brex (US) or Revolut (UK) - company cards and expenses tracking
 - Shopify - powers our merch store
 - CharlieHR - holiday tracking, personal details
 
