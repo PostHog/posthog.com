@@ -40,7 +40,7 @@ Again, we've hired the best people and have high talent density, so we trust eve
 
 As a manager, it's tempting to see yourself as the sole owner of all the information, and give it out sparingly.
 People will come to you often with questions (because they don't have the context) and when they do you'll get more validation that holding all the context yourself makes you an Important Person.
-What managers should really aim for at PostHog is to make themselves obsolete. Share as much context as possible, preferrably in written form. That way everyone will be able to do their best work.
+What managers should really aim for at PostHog is to make themselves obsolete. Share as much context as possible, preferably in written form. That way everyone will be able to do their best work.
 
 ## Part-time managers
 
