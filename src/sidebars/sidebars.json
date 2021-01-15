@@ -299,8 +299,7 @@
         "items": [
             "handbook/growth/strategy",
             "handbook/growth/community",
-            "handbook/growth/customer-success",
-            "handbook/growth/yc-onboarding"
+            "handbook/growth/customer-success"
         ],
         "child_entries": ["Marketing", "Sales"]
     },
@@ -319,6 +318,7 @@
         "name": "Sales",
         "items": [
             "handbook/growth/sales/sales-operations",
+            "handbook/growth/sales/yc-onboarding",
             "handbook/growth/sales/demos",
             "handbook/growth/sales/billing"
         ]
