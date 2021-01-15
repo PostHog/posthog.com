@@ -7,9 +7,9 @@ showTitle: true
 hideAnchor: true
 ---
 
-PostHog has pivoted so many times, I don't even try to explain it to people.
+PostHog has pivoted a _lot_.
 
-After 3 pivots in 6 months, we got into YCombinator last year, pivoted again whilst we were there and have now gone from the first commit to $12M raised, thousands of deployments and a team across 10 countries, in well under a year.
+After 5 pivots in 6 months, we got into YCombinator last year, pivoted again whilst we were there and have now gone from the first commit to $12M raised, thousands of deployments and a team across 10 countries, in well under a year.
 
 This is that story and what we learned from it.
 
@@ -32,13 +32,11 @@ My sole focus for weeks on end was just to get meetings with people that we felt
 
 ## It got good eventually, right?
 
-In around 9 months, we built 6 products and did more than 100 meetings with potential users.
+In around 9 months, we built 6 products and did more than 100 meetings with potential users. We went through a really wide range of products, all focussed on problems we felt we'd experienced in our previous professional lives.
 
-The range of ideas is weirdly broad, but that reflects our backgrounds.
+I started as a mediocre developer, bootstrapped an online marketing company, and somehow wound up as a VP Sales at an enterprise software company. Tim, my co-founder, has always been a developer through and through, and has evolved into our CTO.
 
-I started as a mediocre developer, bootstrapped an online marketing company, and somehow wound up as a VP Sales at an enterprise software company. Tim, my co-founder, has always been a developer through and through.
-
-### 1. sales territory management tool
+### 1. Sales Territory Management Tool
 
 It's galling that when you run a sales team, very typically over 90% of your pipeline will never close. The _majority_ of your time is spent getting nowhere. Sidenote: this is why product led growth is so much better.
 
@@ -52,7 +50,7 @@ We got 15 VPs of sales to agree to trying this out, sent them
 
 With hindsight, it was way overpowered for tiny teams and we'd only have had a great fit for huge ones with a lot of data. The only people interested in smaller teams were, to use [Crossing the Chasm's framework](https://en.wikipedia.org/wiki/Crossing_the_Chasm), innovators, which doesn't represent most of the market. And doing _only_ sales into big companies would be really tough - slower sales, a better product required, and a longer cycle time so reduced learning.
 
-### 2. CRM with predictive analytics
+### 2. CRM with Predictive Analytics
 
 We kept getting asked for the above in the CRM versus standalone, so we integrated it, but then we saw very early users just using it as their CRM - they didn't need the complexity of Salesforce, so we just thought we'd provide a CRM for tiny companies.
 
@@ -60,7 +58,7 @@ This was a poor decision - there are many "lightweight CRMs" out there, so getti
 
 We didn't think through who we were building for. The market is also pretty saturated with noise, so we could have focussed more on our differentiation - a product may have made more sense than a platform here. We couldn't get people to agree to try it. From memory we got a single customer for $20/month, who then didn't actually pay the invoice.
 
-### 3. 1:1 tool with predictive analytics
+### 3. 1:1 Tool with Predictive Analytics
 
 We felt that the actual problem we were solving was still prioritization of where to focus time.
 
@@ -68,7 +66,7 @@ We were both big believers in [Andrew Grove](https://en.wikipedia.org/wiki/Andre
 
 By this stage, we were thinking we just wanted to work with people that would at least try our stuff.
 
-### 4. technical debt monitoring tool using surveys after each pull request
+### 4. Technical Debt Monitoring Tool using Surveys after each Pull Request
 
 We finally started getting a little clearer over those we were build
 
@@ -80,7 +78,7 @@ Along the way though, we learned a lot about how developers and product managers
 
 If you can't stop thinking of other ideas, you probably are building something you don't like. 
 
-### 5. engineering retention tool using surveys after each pull request
+### 5. Engineering Retention Tool using Surveys after each Pull Request
 
 Those capricious engineers coming and going like ships in the night.
 
@@ -90,7 +88,7 @@ This lasted all of about 5 days. We had a bunch of meetings left over from (4).
 
 We had a wildly unenthusiastic response. The lowlight was during one of the meetings that we resorted to asking the CTO of an 80 person start up what his biggest problem was, "I've not really got any". Cool, we'll just run out of food and shelter then.
 
-### 6. open source product analytics platform
+### 6. Open Source Product Analytics Platform
 
 Things were about to get meta.
 
@@ -106,7 +104,7 @@ It is *crucial* to be really quick at moving on when it's time. If you're talkin
 
 It's easy to imagine a world where we just about scraped by with the tool, raised a small seed round from oversubscribed investors, and we'd still be struggling with someothing we weren't enjoying working on.
 
-###This sucks, let's change it
+###Thinking we wanted to change course, but not thinking about it enough
 
 We pivotted so much we developed a real knack for building an MVP and a new website in a single all nighter and getting meetings by the first day to show it to people. In the same way that a child could operate a car.
 
@@ -116,14 +114,22 @@ We implemented an important rule:
 
 Our inclination was to pivot _very_ frequently, whereas it's apparently more typical for people to really not want to do this. Know where you sit on this line. We had to add a small delay.
 
-During YCombinator, we saw companies say they were pivoting almost every time we saw them, but without having built and tested things out.
+Apparently, this is normally the other way around - people don't start over soon enough. During YCombinator, we saw companies say they were pivoting almost every time we saw them, but without having built and tested things out.
+
+I'm now glad we were so decisive.
 
 ## Experts are just that
 
+Sometimes a seemingly "waste of time" meeting with someone can help you avoid a mistake that could cost you weeks, months or years of your life.
+
 For the pivot to open source product analytics, there were a few things that speaking to experts helped us clear up:
 
-* We saw open source as a feature, not as fundamental to the strategy. We spoke to Dalton Caldwell
-* We met with a bunch of founders of huge open source companies. We only knew about half of them through other people. They ended up becoming angel investors when they saw we'd incorporated their advice into our work and that helped us raise a ton of money later on, but only because we weren't trying to sell them.
+* We spoke to a couple of people who weren't industry insiders, but with very significant experience working with a broad range of startups. This helped us realize that open source was the strategy, and all the features we wanted were just that.
+* We met with a bunch of founders of huge open source companies. This gave us a very opinionated stance on where to focus. Coming from a SaaS background, giving so much away so freely felt counterintuitive, but it's why our launch went really well.
+
+I'd stress we met genuine world experts in the above too. We often got a different view meeting people than just reading online - they'd tell us why they actually went in a certain direction, or how they lost a bunch of time and money themselves doing the wrong thing.
+
+People like this can be pretty friendly even if you don't know them and don't have a friendly introduction, if you're respectful of their time. Meaning, you've done your research, you're clearly at a major inflection point, and you're not trying to get a sale or investment from them. The latter just kind of happens naturally later on, but it wouldn't if we were exclusively interested in it.
 
 ## We did some things really well
 
@@ -135,8 +141,8 @@ We didn't think about the users or companies we were building for. This is easy 
 
 ## Let's end on a cliché
 
-The nice thing about writing a post about startups is there are enough of these illustrate my points very well.
+At least we didn't scatter this article with emojis.
 
-"The people who are crazy enough to think they can change the world, are the ones who do."
+"The people who are crazy enough to think they can change the world, are the ones who do." - Steve Jobs
 
-As we tried more and more ideas, we stopped caring about what people thought of us, and we started thinking harder about who would really benefit from our product.
+You're going to look pretty crazy if / when you pivot. That's because most people are used to working on a career where they steadily build in a certain direction. Startups involve a lot of zig zagging. Don't worry about it - egos are expensive to maintain.
