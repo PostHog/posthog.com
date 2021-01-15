@@ -106,7 +106,7 @@ It's easy to imagine a world where we just about scraped by with the tool, raise
 
 ###Thinking we wanted to change course, but not thinking about it enough
 
-We pivotted so much we developed a real knack for building an MVP and a new website in a single all nighter and getting meetings by the first day to show it to people. In the same way that a child could operate a car.
+We pivoted so much we developed a real knack for building an MVP and a new website in a single all nighter and getting meetings by the first day to show it to people. In the same way that a child could operate a car.
 
 We implemented an important rule:
 
