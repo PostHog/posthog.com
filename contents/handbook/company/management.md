@@ -19,6 +19,7 @@ A manager at PostHog is _not_ responsible for:
 1. Setting tasks for their direct reports
 1. Creating a career path (career paths should be transparent and documented, and for now centrally managed)
 1. "Approving," whether that's projects, expenses, days off or accounts (people should have admin access by default to most things)
+1. Giving feedback (managers give feedback in their capacity as individual contributor, but so does everyone else)
 
 
 ## What does setting context mean?
@@ -30,7 +31,7 @@ However, for those people to make the best decisions, they need context. That co
 - what a customer said was or wasn't important to them
 - what the metrics are saying needs to be improved
 - what another team in the organisation is working on
-- what the overal goals are for PostHog
+- what the overall goals are for PostHog
 
 The shift here, and the biggest difference between PostHog and other places, is that in the end it is up to the individual to make the decisions.
 All you can do as a manager is set context. From there, you'll have to trust that we've made the right hiring decisions and that the individual is able to execute on that. If they can't, we have a [generous severance policy](/handbook/people/compensation#severance).
@@ -40,7 +41,7 @@ Again, we've hired the best people and have high talent density, so we trust eve
 
 As a manager, it's tempting to see yourself as the sole owner of all the information, and give it out sparingly.
 People will come to you often with questions (because they don't have the context) and when they do you'll get more validation that holding all the context yourself makes you an Important Person.
-What managers should really aim for at PostHog is to make themselves obsolete. Share as much context as possible, preferrably in written form. That way everyone will be able to do their best work.
+What managers should really aim for at PostHog is to make themselves obsolete. Share as much context as possible, preferrably in written form in a public channel. That way everyone will be able to do their best work.
 
 ## Part-time managers
 
@@ -49,7 +50,10 @@ That means everyone, from CEO and CTO on up, still spend the majority of their t
 
 As an engineer, you wouldn't respect the opinion of someone who can't code on a coding question.
 As a designer, you really want your manager to have an eye for design.
+As an operator, you want to be managed by someone who has scaled a business.
 That's why it's important for managers to keep practicing their craft.
+
+Management tasks do come first, as giving context to your team tends to have a multiplying effect vs getting one more PR out. After that though, it's back to work.
 
 ## Hierarchy
 
