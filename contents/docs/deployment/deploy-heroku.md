@@ -17,7 +17,7 @@ If you've never heard of Heroku or what it does, feel free to check out [this pa
 
 ## Step By Step Installation
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
+<a href="https://heroku.com/deploy?template=https://github.com/posthog/posthog"><img src="https://www.herokucdn.com/deploy/button.svg" width="250px" /></a>
 
 1. Click on the button above to go to the app creation screen.
 
