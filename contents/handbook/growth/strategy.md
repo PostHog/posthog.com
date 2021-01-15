@@ -45,6 +45,9 @@ In team mode, it becomes a way for a team to organize its business process betwe
 
 As we grow, it'll get important to work out which teams in PostHog own different functions.
 
+<span class="table-borders">
+
+
 <table>
     <tr>
         <th>Function</th><th>Free</th><th>Team (Self Serve)</th><th>Enterprise (C-Level)</th>
@@ -76,6 +79,7 @@ As we grow, it'll get important to work out which teams in PostHog own different
     </tr>
 </table>
 
+</span>
 
 ### Structure FAQ
 
