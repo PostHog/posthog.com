@@ -1125,8 +1125,8 @@ table th {
     border: none;
 }
 
-.table-borders > table > thead > tr > th,
-.table-borders > table > tbody > tr > td {
+.table-borders th,
+.table-borders td {
     border: 1px solid !important;
     border-color: #e8e8e8 !important;
     padding-left: 10px !important;

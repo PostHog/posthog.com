@@ -18,10 +18,14 @@ We believe this approach will lead to the best product for end users, which is h
 
 This means the path to revenue starts with adoption of a Free version, then working out how to get teams (whether a small team at a big company or a 20 person startup) onto a paid version, and ultimately how to get departmental adoption at large enterprises.
 
+<span class="table-borders">
+
 | | 1 - Free | 2 - Team (Self Serve) | 3 - Enterprise (C-Level) |
 |---|---|---|---|
 |Value|Creation|Collaboration|Compliance|
 |GTM|Free/Adoption|Self-serve|Enterprise|
+
+</span>
 
 ### Examples of other companies following (part) of this
 
@@ -40,6 +44,9 @@ In team mode, it becomes a way for a team to organize its business process betwe
 ## Our structure
 
 As we grow, it'll get important to work out which teams in PostHog own different functions.
+
+<span class="table-borders">
+
 
 <table>
     <tr>
@@ -72,6 +79,7 @@ As we grow, it'll get important to work out which teams in PostHog own different
     </tr>
 </table>
 
+</span>
 
 ### Structure FAQ
 
