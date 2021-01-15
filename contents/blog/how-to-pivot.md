@@ -46,7 +46,7 @@ As deals get older, after a while, the probability they close drops off a cliff.
 
 We pulled data from Hubspot or Salesforce, then used predictive analytics to work out how this curve looked based on historic data, then applied it to the current pipeline. Once a deal dropped below a certain threshold, we'd recommend you swap out that target company and pull a new one into the pipeline.
 
-We confused a lot of people with this idea, because we ourselves were confused with whom we were targetting.
+We confused a lot of people with this idea, because we ourselves were confused with whom we were targeting.
 
 We got 15 VPs of sales to agree to trying this out, sent them 
 
@@ -58,7 +58,7 @@ We kept getting asked for the above in the CRM versus standalone, so we integrat
 
 This was a poor decision - there are many "lightweight CRMs" out there, so getting attention was very hard, and predictive analytics make more sense for those with more data. This was around the time that [Superhuman](https://superhuman.com/) was getting pretty popular; we got overexcited, and kept using words like "blazing", "gorgeous", "brilliant".
 
-We didn't think through who we were building for. The market is also pretty saturated with noise, so we could have focussed more on our differentiation - a product may have made more sense than a platform here. We couldn't get people to agree to try it. From memory we got a single customer for $20/month, who then didn't actually pay the invoice.
+We didn't think through who we were building for. The market is also pretty saturated with noise, so we could have focused more on our differentiation - a product may have made more sense than a platform here. We couldn't get people to agree to try it. From memory we got a single customer for $20/month, who then didn't actually pay the invoice.
 
 ### 3. 1:1 tool with predictive analytics
 
