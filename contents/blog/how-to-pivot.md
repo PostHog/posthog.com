@@ -32,7 +32,7 @@ My sole focus for weeks on end was just to get meetings with people that we felt
 
 ## It got good eventually, right?
 
-In around 9 months, we built 6 products and did more than 100 meetings with potential users. We went through a really wide range of products, all focussed on problems we felt we'd experienced in our previous professional lives.
+In around 9 months, we built 6 products and did more than 100 meetings with potential users. We went through a really wide range of products, all focused on problems we felt we'd experienced in our previous professional lives.
 
 I started as a mediocre developer, bootstrapped an online marketing company, and somehow wound up as a VP Sales at an enterprise software company. Tim, my co-founder, has always been a developer through and through, and has evolved into our CTO.
 
