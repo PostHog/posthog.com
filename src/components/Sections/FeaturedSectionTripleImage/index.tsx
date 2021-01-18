@@ -49,7 +49,7 @@ export const FeaturedSectionTripleImage = ({
                     <div className="col">
                         <h2 className="gosha">{headerText}</h2>
                         <hr className={styleMap[color][1]} />
-                        <p>{descriptionText}</p>
+                        <div className="description-text">{descriptionText}</div>
                     </div>
                 </div>
                 <br className="hiddenBreak" />
