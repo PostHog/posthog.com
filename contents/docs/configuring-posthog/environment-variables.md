@@ -42,10 +42,10 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `POSTHOG_DB_PASSWORD`| Database password. | `""` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_POSTGRES_HOST`| Host pointing to your PostgreSQL instance. | `localhost` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_POSTGRES_PORT`| Port pointing to your PostgreSQL instance. | `5432` if PostHog is running in DEBUG or TEST mode.  Must be specified when `DATABASE_URL` is not set.
-| `POSTHOG_POSTGRES_SSL_MODE`| SSL mode. [More info](https://www.postgresql.org/docs/current/ssl-tcp.html). | `None`
-| `POSTHOG_POSTGRES_CLI_SSL_CA`| The location of the root certificate file. [More info](https://www.postgresql.org/docs/current/ssl-tcp.html). | `None`
-| `POSTHOG_POSTGRES_CLI_SSL_CRT`| The location of the certificate file. [More info](https://www.postgresql.org/docs/current/ssl-tcp.html). | `None`
-| `POSTHOG_POSTGRES_CLI_SSL_KEY`| The location of the key file. [More info](https://www.postgresql.org/docs/current/ssl-tcp.html). | `None`
+| `POSTHOG_POSTGRES_SSL_MODE`| PostgreSQL SSL mode. [More info.](https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBQ-SSL-CERTIFICATES) | `None`
+| `POSTHOG_POSTGRES_CLI_SSL_CA`| Location of the SSL root certificate file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
+| `POSTHOG_POSTGRES_CLI_SSL_CRT`| Location of the SSL certificate file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
+| `POSTHOG_POSTGRES_CLI_SSL_KEY`| Location of the SSL key file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
 | `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
 | `EMAIL_HOST` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.     | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
 | `EMAIL_PORT` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
