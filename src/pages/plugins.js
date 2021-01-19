@@ -13,10 +13,12 @@ import './styles/plugin-library.scss'
 const { TabPane } = Tabs
 
 export const PluginLibraryPage = () => {
-    const { filteredPlugins, filter, modalOpen, activePlugin } = useValues(pluginLibraryLogic)
-    const { setFilter, setModalOpen, setActivePlugin } = useActions(pluginLibraryLogic)
+    const { filteredPlugins, filter } = useValues(pluginLibraryLogic)
+    const { setFilter, setModalOpen, setActivePlugin, setPluginLoading } = useActions(pluginLibraryLogic)
 
     const handlePluginClick = async (e, plugin) => {
+        setPluginLoading(true)
+        setModalOpen(true)
         let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
         if (plugin.url.includes('github')) {
             e.stopPropagation()
@@ -33,7 +35,7 @@ export const PluginLibraryPage = () => {
         plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
         plugin['imageSrc'] = getPluginImageSrc(plugin)
         setActivePlugin(plugin)
-        setModalOpen(true)
+        setPluginLoading(false)
     }
 
     const getPluginImageSrc = (plugin) =>
@@ -46,12 +48,7 @@ export const PluginLibraryPage = () => {
     return (
         <Layout>
             <div className="centered" style={{ margin: 'auto' }}>
-                <PluginModal
-                    modalOpen={modalOpen}
-                    pluginImageSrc={activePlugin.imageSrc}
-                    modalMarkdown={activePlugin.markdown}
-                    setModalOpen={setModalOpen}
-                />
+                <PluginModal />
                 <Spacer />
                 <h1 className="center">Plugin Library</h1>
                 <Tabs
