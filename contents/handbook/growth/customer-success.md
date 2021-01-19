@@ -29,13 +29,13 @@ We use [Papercups](https://papercups.io/) as our internal platform to get an ove
 
 A quick overview of Papercups main features:
 
-- _Slack integration (1)_: You can reply directly to PostHog app questions either in Papercups itself or in the _customer_support_ channel in our internal Slack - both work!
-- _Slack integration (2)_: In the users Slack, the _general_ and _feedback_ channels are both synced with Papercups - similar to the above, this means you can reply to users in Slack or Papercups. For now, we advise that you stick to replying in Slack as the integration isn't quite there yet if you reply in Papercups. 
+- _Slack integration (1)_: You can reply directly to PostHog app questions either in Papercups itself or in the private _customer_support_ channel in the PostHog Users Slack - both work!
+- _Slack integration (2)_: In the PostHog Users Slack, the _general_ and _feedback_ channels are both synced with Papercups - similar to the above, this means you can reply to users in that Slack channel directly or Papercups. For now, we advise that you stick to replying in Slack as the integration isn't quite there yet if you reply in Papercups. 
 - _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
 - _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation.
 - _Analytics_:'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. 
 
-When replying to users in Slack, please try to reply in a thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation right now).
+When replying to users in Slack, please try to reply in a thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation).
 
 Papercups are an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.  
 

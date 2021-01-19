@@ -81,6 +81,8 @@ As we grow, it'll get important to work out which teams in PostHog own different
 
 </span>
 
+Following the 1-2-3 framework, we are currently focused on building our team in the first and second columns - _Free_ and _Team_ - and already have Developer Experience and Business Ops people in place. Only after we have brought in people to take care of Marketing/Developer Evangelism and Customer Success will we then look at recruiting people into the roles in the third column, _Enterprise_. 
+
 ### Structure FAQ
 
 #### Why do you have "sales" for the free product?

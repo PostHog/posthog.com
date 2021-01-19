@@ -12,6 +12,7 @@ interface PluginCardStructureMeta {
 
 interface PluginCardMeta extends PluginCardStructureMeta {
     link: string
+    onClick?: () => void | undefined
 }
 
 const PluginCardStructure = ({ name, description, imageSrc, isCommunityPlugin }: PluginCardStructureMeta) => {
@@ -40,7 +41,7 @@ const PluginCardStructure = ({ name, description, imageSrc, isCommunityPlugin }:
     )
 }
 
-export const PluginCard = ({ name, description, link, imageSrc, isCommunityPlugin }: PluginCardMeta) => {
+export const PluginCard = ({ name, description, link, imageSrc, isCommunityPlugin, onClick }: PluginCardMeta) => {
     const PluginDetails = () => (
         <PluginCardStructure
             name={name}
@@ -52,7 +53,11 @@ export const PluginCard = ({ name, description, link, imageSrc, isCommunityPlugi
 
     return (
         <>
-            {link.includes('.') ? (
+            {onClick ? (
+                <span onClick={onClick}>
+                    <PluginDetails />
+                </span>
+            ) : link.includes('.') ? (
                 <a href={link}>
                     <PluginDetails />
                 </a>
