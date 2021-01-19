@@ -17,7 +17,7 @@ We're back! 2020 was a hectic year for us and our team put in a whole lot of eff
 
 ### [Plugins, Plugins, and more Plugins](/plugins)
 
-![Plugin Library Screenshot](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-library.pn)
+![Plugin Library Screenshot](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-library.png)
 
 A lot has been happening on our Plugins front. 
 
