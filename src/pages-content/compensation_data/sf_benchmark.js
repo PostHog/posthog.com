@@ -6,6 +6,7 @@ const sf_benchmark = {
     'Growth Engineer': 192000,
     'Product Designer': 174000,
     'Marketing Lead': 248400,
+    'Customer Success Lead': 120000,
     //Recruiter: 144000,
     //'Technical Writer': 138000,
 }
