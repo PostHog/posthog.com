@@ -5,6 +5,7 @@ export const pluginLibraryLogic = kea({
         setFilter: (filter) => ({ filter }),
         setModalOpen: (open) => ({ open }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),
+        setPluginLoading: (pluginLoading) => ({ pluginLoading }),
     },
     reducers: {
         filter: [
@@ -23,6 +24,12 @@ export const pluginLibraryLogic = kea({
             {},
             {
                 setActivePlugin: (_, { activePlugin }) => activePlugin,
+            },
+        ],
+        pluginLoading: [
+            false,
+            {
+                setPluginLoading: (_, { pluginLoading }) => pluginLoading,
             },
         ],
     },
