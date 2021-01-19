@@ -13,7 +13,7 @@ You'll be the first person in this role, so will be setting up the way we help g
 * Making sure any paid user of PostHog is successful. We need to build strong relationships, ensure they're well setup, and that we pass any product feedback to our product and engineering team to act upon.
 * Work out the best process for converting teams on our free product into paying customers, and for handling inbound demo requests.
 * Establishing how to expand existing accounts into larger ones.
-* PostHog's strategy is built on bottom up adoption, as per our [growth strategy](../growth/strategy). That means we'll be prioritizing how to get small contracts signed in small or big companies, based on inbound demand or existing free usage.
+* PostHog's strategy is built on bottom up adoption, as per our [growth strategy](../handbook/growth/strategy). That means we'll be prioritizing how to get small contracts signed in small or big companies, based on inbound demand or existing free usage.
 
 **What you'll bring:**
 * Above all you must be incredibly conscientious and helpful.
