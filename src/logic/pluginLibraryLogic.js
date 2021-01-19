@@ -3,8 +3,29 @@ import { kea } from 'kea'
 export const pluginLibraryLogic = kea({
     actions: {
         setFilter: (filter) => ({ filter }),
+        setModalOpen: (open) => ({ open }),
+        setActivePlugin: (activePlugin) => ({ activePlugin }),
     },
-    reducers: { filter: ['all', { setFilter: (_, { filter }) => filter }] },
+    reducers: {
+        filter: [
+            'all',
+            {
+                setFilter: (_, { filter }) => filter,
+            },
+        ],
+        modalOpen: [
+            false,
+            {
+                setModalOpen: (_, { open }) => open,
+            },
+        ],
+        activePlugin: [
+            {},
+            {
+                setActivePlugin: (_, { activePlugin }) => activePlugin,
+            },
+        ],
+    },
     loaders: () => ({
         plugins: [
             [],

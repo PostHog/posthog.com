@@ -115,6 +115,7 @@ function IndexPage() {
                                             onRequestClose={() => setModalIsOpen(false)}
                                             className="modalContent"
                                             overlayClassName="modalOverlay"
+                                            ariaHideApp={false}
                                         >
                                             <GetStartedModalContent />
                                             <Button
