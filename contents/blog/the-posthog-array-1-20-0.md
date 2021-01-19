@@ -21,7 +21,7 @@ We're back! 2020 was a hectic year for us and our team put in a whole lot of eff
 
 A lot has been happening on our Plugins front. 
 
-Besides a whole bunch work to deliver perfomance improvements and mature the PostHog Plugins ecosystem, we have two major changes being introduced with this new PostHog version:
+Besides a whole bunch work to deliver performance improvements and mature the PostHog Plugins ecosystem, we have two major changes being introduced with this new PostHog version:
 
 **A shiny new plugin library**
 
