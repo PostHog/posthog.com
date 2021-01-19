@@ -50,7 +50,7 @@ The definition of what is needed to progress from one step to the next in more d
 
 ## Share Options
 ​
-As part of your compensation, you will receive approximately 0.1-0.5% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
+As part of your compensation, you will receive approximately 0.1-0.25% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
 ​
 Whilst the terms of options for *any company* could vary if we were ever acquired, we have set them up with the following key terms:
 
