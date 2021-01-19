@@ -200,6 +200,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-20-0",
             "blog/the-posthog-array-1-19-0",
             "blog/the-posthog-array-1-18-0",
             "blog/the-posthog-array-1-17-0",
@@ -291,16 +292,17 @@
     {
         "entry": "Open Roles",
         "name": "Open Roles",
-        "items": ["careers/full-stack-software-engineer", "careers/marketer", "careers/growth-engineer", "careers/senior-fs-software-engineer"]
+        "items": [
+            "careers/full-stack-software-engineer",
+            "careers/marketer",
+            "careers/growth-engineer",
+            "careers/senior-fs-software-engineer"
+        ]
     },
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": [
-            "handbook/growth/strategy",
-            "handbook/growth/community",
-            "handbook/growth/customer-success"
-        ],
+        "items": ["handbook/growth/strategy", "handbook/growth/community", "handbook/growth/customer-success"],
         "child_entries": ["Marketing", "Sales"]
     },
     {
