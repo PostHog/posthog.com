@@ -155,7 +155,7 @@ $ helm install -f my-values.yaml my-release .
 
 ```bash
 $ helm repo update
-$ helm upgrade -f <config_yaml> <cluster-name> posthog/posthog
+$ helm upgrade -f <config_yaml> <release-name> posthog/posthog
 ```
 
 ## [Packages](#packages)
