@@ -19,4 +19,5 @@ Follow these tutorials for upgrading PostHog if you've deployed with any of the 
 - [AWS Fargate](/docs/deployment/deploy-aws#updating-aws-fargate)
 - [Docker](/docs/deployment/deploy-docker#upgrading-posthog-with-docker)
 - [Linode](/docs/deployment/deploy-linode#updating-your-posthog)
+- [Helm Charts](/docs/deployment/deploy-kubernetes#updating-your-posthog)
 
