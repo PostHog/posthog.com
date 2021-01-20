@@ -21,7 +21,6 @@
         "@ant-design/icons": "^4.1.0",
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.19",
-        "@posthog/plugin-scaffold": "^0.2.9",
         "antd": "^3.23.2",
         "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
