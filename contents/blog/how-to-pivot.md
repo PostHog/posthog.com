@@ -130,6 +130,8 @@ It turns out everyone has problems with technical debt, but solving it involves 
 
 After a meetup with our YC friends at a cool [food truck spot](http://sparksocialsf.com/), we took a long walk back to our house in [Castro](https://en.wikipedia.org/wiki/Castro_District,_San_Francisco). We were thinking about how to solve our product woes. Could it turn into a piece of roadmapping software? Would it need to integrate with the roadmap software already in use? We just didn't feel excited about building these things out.
 
+![James and Tim at a group ycombinator meetup about to walk home](../images/blog/pivoting/about-to-run-out-of-product-ideas.jpeg)
+
 A couple of days later, driving between Mountain View and San Francisco, we realized that we just weren't the right people to run this business.
 
 Although Tim had struggled with technical debt first hand, neither of us had actually solved it. If one of us had managed an engineering team before, we'd have perhaps been better placed to understand things. Our basic skills were good enough to get quite far with the idea, but we didn't have the belief to take it further.
@@ -155,6 +157,8 @@ We had a wildly unenthusiastic response from prospective users. The lowlight was
 Things got meta.
 
 Along our journey (/series of failed ideas), we got frustrated having to send all our user data to 3rd parties to understand our product usage. It felt wrong and it meant we'd lose a bunch of user data that would have been quite useful.
+
+So we built [PostHog](https://posthog.com).
 
 The [rest is history](../handbook/company/story).
 
