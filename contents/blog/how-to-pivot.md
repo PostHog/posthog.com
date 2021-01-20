@@ -30,7 +30,7 @@ My sole focus for weeks on end was just to get meetings with people that we felt
 
 In 9 months, we built 6 products and did more than 100 meetings with potential users.
 
-The range of ideas we tried to solve looks broad, but the thing that connected all of them was that we focussed on problems we felt we'd experienced in our previous professional lives.
+The range of ideas we tried to solve looks broad, but the thing that connected all of them was that we focused on problems we felt we'd experienced in our previous professional lives.
 
 So, what did we build?
 
@@ -201,7 +201,7 @@ You _must_ be really quick to do this. Others we heard of during the batch inten
 
 We didn't think about the users or companies we were building for. This is easy to over-think, but just a few hours of thought could have cut down the number of times we pivoted.
 
-We focussed on things we wanted ourselves, which was good, but some of those ideas just weren't applicable to _anyone_ else.
+We focused on things we wanted ourselves, which was good, but some of those ideas just weren't applicable to _anyone_ else.
 
 ## Let's end on an overused quote
 
