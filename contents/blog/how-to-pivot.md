@@ -7,9 +7,9 @@ showTitle: true
 hideAnchor: true
 ---
 
-PostHog has pivoted a _lot_.
+PostHog has pivoted _a lot_.
 
-After 5 pivots in 6 months, we got into YCombinator last year, pivoted again whilst we were there and have now gone from the first commit to $12M raised, thousands of deployments and a team across 10 countries, in well under a year.
+After 5 pivots in 6 months, we got into [YCombinator](https://www.ycombinator.com/) last year, pivoted again whilst we were there and have now gone from the first commit to \$12M raised, thousands of deployments and a team across 10 countries, in well under a year.
 
 This is that story and what we learned from it.
 
@@ -36,7 +36,7 @@ So, what did we build?
 
 ### 1. Sales Territory Management Tool
 
-At one stage in my life, I was the VP Sales at an enterprise software company. On paper, it looked like a glamorous job - I used to fly around the world with the sales team, to go to important meetings with huge banks, in fancy skyscrapers, like the [ICC in Hong Kong](https://en.wikipedia.org/wiki/International_Commerce_Centre):
+At one stage in my life, I was the VP of Sales at an enterprise software company. On paper, it looked like a glamorous job - I used to fly around the world with the sales team, to go to important meetings with huge banks, in fancy skyscrapers, like the [ICC in Hong Kong](https://en.wikipedia.org/wiki/International_Commerce_Centre):
 
 ![International Commerce Center - a big skyscraper in Hong Kong](../images/blog/pivoting/international-commerce-centre.jpg)
 
@@ -46,9 +46,7 @@ The _majority_ of your time is spent getting nowhere. All those hotels, flights,
 
 Sidenote: this is why [product led growth](../handbook/growth/strategy) is so much better.
 
-As deals get older, after a while, the probability they close drops off a cliff. If you're not getting anywhere with a potential customer after a few weeks or months of trying, it's going to get worse not better. Yet systems that are the core products of [\$17.1Bn revenue companies](https://en.wikipedia.org/wiki/Salesforce) by default come with a manually selected arbitrary number for the percentage probability.
-
-There comes a certain time, when it's rational to stop focussing on a given customer and to move on - a fresh customer is more likely to close than one that has been repeatedly ignoring you.
+If you're not getting anywhere with a potential customer after a few weeks or months of trying, your time is better spent elsewhere. Yet systems that are the core products of [\$17.1Bn revenue companies](https://en.wikipedia.org/wiki/Salesforce) come with a manually selected arbitrary number for the percentage probability that doesn't vary with time.
 
 We pulled pipeline data from Hubspot or Salesforce, then used predictive analytics to work out how this curve looked based on historic data, then applied it to the current pipeline. Once a deal dropped below a certain threshold, we'd recommend you swap out that target company and pull a new one into the pipeline.
 
