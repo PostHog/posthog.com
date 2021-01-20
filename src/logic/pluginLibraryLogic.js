@@ -1,23 +1,19 @@
 import { kea } from 'kea'
+import { pluginInstallationMd } from '../pages-content/plugin-installation'
+import { getPluginImageSrc } from '../lib/utils'
 
 export const pluginLibraryLogic = kea({
     actions: {
         setFilter: (filter) => ({ filter }),
-        setModalOpen: (open) => ({ open }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),
-        setPluginLoading: (pluginLoading) => ({ pluginLoading }),
+        openPlugin: (pluginName) => ({ pluginName }),
+        setModalOpen: (modalOpen) => ({ modalOpen }),
     },
-    reducers: {
+    reducers: ({ actions }) => ({
         filter: [
             'all',
             {
                 setFilter: (_, { filter }) => filter,
-            },
-        ],
-        modalOpen: [
-            false,
-            {
-                setModalOpen: (_, { open }) => open,
             },
         ],
         activePlugin: [
@@ -29,10 +25,18 @@ export const pluginLibraryLogic = kea({
         pluginLoading: [
             false,
             {
-                setPluginLoading: (_, { pluginLoading }) => pluginLoading,
+                [actions.openPlugin]: () => true,
+                [actions.setActivePlugin]: () => false,
             },
         ],
-    },
+        modalOpen: [
+            false,
+            {
+                [actions.openPlugin]: () => true,
+                setModalOpen: (_, { modalOpen }) => modalOpen,
+            },
+        ],
+    }),
     loaders: () => ({
         plugins: [
             [],
@@ -59,6 +63,28 @@ export const pluginLibraryLogic = kea({
             if (typeof window !== 'undefined') {
                 actions.loadPlugins()
             }
+        },
+    }),
+
+    listeners: ({ values, actions }) => ({
+        openPlugin: async ({ pluginName }) => {
+            const { setActivePlugin } = actions
+            let plugin = values.filteredPlugins.filter((plugin) => plugin.name === pluginName)[0]
+            let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
+            if (plugin.url.includes('github')) {
+                const response = await window.fetch(
+                    `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/README.md`
+                )
+                if (response.status === 200) {
+                    markdown = await response.text()
+                }
+            }
+            if (!markdown.includes('Installation')) {
+                markdown += pluginInstallationMd
+            }
+            plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
+            plugin['imageSrc'] = getPluginImageSrc(plugin)
+            setActivePlugin(plugin)
         },
     }),
 })

@@ -7,43 +7,14 @@ import { useActions, useValues } from 'kea'
 import { pluginLibraryLogic } from '../logic/pluginLibraryLogic'
 import { Spin } from 'antd'
 import { PluginModal } from '../components/PluginLibrary/PluginModal'
-import { pluginInstallationMd } from '../pages-content/plugin-installation'
+import { getPluginImageSrc } from '../lib/utils'
 import './styles/plugin-library.scss'
 
 const { TabPane } = Tabs
 
 export const PluginLibraryPage = () => {
     const { filteredPlugins, filter } = useValues(pluginLibraryLogic)
-    const { setFilter, setModalOpen, setActivePlugin, setPluginLoading } = useActions(pluginLibraryLogic)
-
-    const handlePluginClick = async (e, plugin) => {
-        setPluginLoading(true)
-        setModalOpen(true)
-        let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
-        if (plugin.url.includes('github')) {
-            e.stopPropagation()
-            const response = await window.fetch(
-                `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/README.md`
-            )
-            if (response.status === 200) {
-                markdown = await response.text()
-            }
-        }
-        if (!markdown.includes('Installation')) {
-            markdown += pluginInstallationMd
-        }
-        plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
-        plugin['imageSrc'] = getPluginImageSrc(plugin)
-        setActivePlugin(plugin)
-        setPluginLoading(false)
-    }
-
-    const getPluginImageSrc = (plugin) =>
-        plugin.imageLink
-            ? plugin.imageLink
-            : plugin.url.includes('github')
-            ? `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/logo.png`
-            : null
+    const { setFilter, openPlugin } = useActions(pluginLibraryLogic)
 
     return (
         <Layout>
@@ -72,8 +43,8 @@ export const PluginLibraryPage = () => {
                                 link={plugin.url}
                                 imageSrc={getPluginImageSrc(plugin)}
                                 isCommunityPlugin={plugin.maintainer === 'community'}
-                                onClick={(e) => {
-                                    handlePluginClick(e, { ...plugin })
+                                onClick={() => {
+                                    openPlugin(plugin.name)
                                 }}
                             />
                         ))

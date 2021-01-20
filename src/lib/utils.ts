@@ -12,3 +12,10 @@ export const unsafeHash = (str: string) => {
     }
     return String(a)
 }
+
+export const getPluginImageSrc = (plugin) =>
+    plugin.imageLink
+        ? plugin.imageLink
+        : plugin.url.includes('github')
+        ? `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/logo.png`
+        : null
