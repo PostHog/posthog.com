@@ -103,5 +103,23 @@ export const pluginLibraryLogic = kea({
                 actions.closeModal()
             }
         },
+        loadPluginsSuccess: () => {
+            const pluginPathname = window.location.pathname.split('plugins/')[1]
+            if (pluginPathname) {
+                const { filteredPlugins } = values
+                const { openPlugin } = actions
+
+                const pluginMatch = filteredPlugins.filter(
+                    (plugin) => plugin.name.toLowerCase().replaceAll(' ', '-') === pluginPathname
+                )
+
+                if (pluginMatch[0]) {
+                    openPlugin(pluginMatch[0].name)
+                } else {
+                    const { push } = router.actions
+                    push('/plugins')
+                }
+            }
+        },
     }),
 })
