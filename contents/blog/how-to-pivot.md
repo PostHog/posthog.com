@@ -82,7 +82,7 @@ After hundreds of messages to potential users, we eventually got a single custom
 
 ### 3. 1:1 Tool with Predictive Analytics
 
-Back to basics - what the actual problem we were solving?
+Back to basics - what was the actual problem we were solving?
 
 It was the prioritization of where to focus your sales efforts. If 90% of your deals deals won't close, you need to get good at not spending time on those that aren't going to close.
 
