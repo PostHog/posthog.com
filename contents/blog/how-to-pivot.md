@@ -140,7 +140,7 @@ Along the way, we learned a lot about how developers and product managers work t
 
 So what did we do next?
 
-### 5. Engineering Retention Tool using Surveys after each Pull Request
+### 5. Engineering Retention Tool using Surveys after each Pull Request
 
 Those fickle engineers joining companies and leaving them whenever they want to ;)
 
@@ -159,6 +159,18 @@ Things got meta.
 Along our journey (/series of failed ideas), we got frustrated having to send all our user data to 3rd parties to understand our product usage. It felt wrong and it meant we'd lose a bunch of user data that would have been quite useful.
 
 So we built [PostHog](https://posthog.com).
+
+There were a load of features we wanted conceptually - but it was when we realized that the _strategy_ was being open source first and foremost that we felt more excited than we ever had before. When that clicked, we knew we'd just fallen in love with this idea.
+
+We started building on [January 23rd, 2020](https://github.com/PostHog/posthog/commits/master?after=9ae6854254085bbe10cc4f9c98820d9efed52424+306).
+
+When did we know this idea was right? 
+
+When we saw real life actual people on the internet start using our thing, without us having to manually get them to do so.
+
+Even better was seeing a community starting to appear. We got [our first ever issue from someone else](https://github.com/PostHog/posthog/issues/100) on February 15th, and our first community discussion [on the 23rd](https://github.com/PostHog/posthog/issues/149). This started to spiral. We now get a stream of issues every day in our [PostHog Users Slack](https://posthog.com/slack) or the [repo](https://github.com/posthog/posthog).
+
+Growth suddenly went from being the hardest part of what we were doing, to being quite easy - we started getting swamped with product work. The problem was keeping up rather than getting something to happen.
 
 The [rest is history](../handbook/company/story).
 
@@ -219,8 +231,14 @@ We focused on things we wanted ourselves, which was good, but some of those idea
 
 ## Let's end on an overused quote
 
-At least we didn't scatter this article with emojis.
+Hey, at least we didn't scatter this article with emojis.
 
 "The people who are crazy enough to think they can change the world, are the ones who do." - Steve Jobs
 
-You're going to look pretty crazy if you pivot. That's because most people are used to working on a career where they steadily build in a certain direction. Startups involve a lot of zig zagging. Don't worry about it - egos are expensive to maintain.
+You're going to look pretty crazy if you pivot. That's because most people are used to working on a career where they steadily build in a certain direction. Startups involve a lot of zig zagging.
+
+We stopped working on several ideas that probably could have worked out, _if_ we'd been willing to persist and to keep tweaking them. This makes us look non committal, but - as with anything - you learn a lot by doing; we knew we'd find something good but weren't done searching until the 6th idea.
+
+Those very early decisions are the most leveraged you will ever take for your startup. Whatever you stick with may well be the thing you do for the next 10 years, and the stronger product market fit you can find early on, the easier literally everything else will be later. It's a lot easier to sell something that people want.
+
+It turns out, PostHog so far has really been a journey about finding a combination of an idea we _wanted_ to work on long term, that others wanted. If we can achieve one thing with this article, it's that if someone is having a tough time working out if they should pivot, that this perspective is helpful.
