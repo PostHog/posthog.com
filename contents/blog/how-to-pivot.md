@@ -13,7 +13,7 @@ After 5 pivots in 6 months, we got into [YCombinator](https://www.ycombinator.co
 
 This is that story and what we learned from it.
 
-##You'll feel silly
+## You'll feel silly
 
 It goes something like this:
 
@@ -30,7 +30,7 @@ My sole focus for weeks on end was just to get meetings with people that we felt
 
 In 9 months, we built 6 products and did more than 100 meetings with potential users.
 
-The range of ideas we tried to solve looks broad, but the thing that connected all of them was that we focused on problems we felt we'd experienced in our previous professional lives.
+The range of ideas we tried to solve looks broad, but the thing that connected all of them was that we tackled problems we'd experienced in our previous professional lives.
 
 So, what did we build?
 
@@ -40,9 +40,7 @@ At one stage in my life, I was the VP of Sales at an enterprise software company
 
 ![International Commerce Center - a big skyscraper in Hong Kong](../images/blog/pivoting/international-commerce-centre.jpg)
 
-I vividly remember the realization that over 90% of your sales pipeline, roughly, will never close. Even if you're really, really good at sales.
-
-The _majority_ of your time is spent getting nowhere. All those hotels, flights, calls, fastidiously wearing a suit in inappropriately warm weather - very few of those things actually result in anything.
+Despite this, the _majority_ of your time in sales is spent getting nowhere. All those hotels, flights, calls, fastidiously wearing a suit in inappropriately warm weather - very few of those things actually result in anything.
 
 Sidenote: this is why [product led growth](../handbook/growth/strategy) is so much better.
 
@@ -58,27 +56,25 @@ and waited...
 
 just _one_ person even clicked the sign up link. The rest didn't even try it.
 
-With hindsight, it was way overpowered for tiny teams and we'd only have had a great fit for huge ones with a lot of data. The only people interested in smaller teams were, to use [Crossing the Chasm's framework](https://en.wikipedia.org/wiki/Crossing_the_Chasm), innovators, which doesn't represent most of the market. And doing _only_ sales into big companies would be really tough - slower sales, a better product required, and a longer cycle time so reduced learning.
+With hindsight, it was way overpowered for tiny teams and we'd only have had a great fit for huge ones with a lot of data.
+
+The only people interested in smaller teams were enthusiasts, but there wasn't an easy jump from that to a bigger market. We could have just worked on selling the product to big companies, but that would be [really tough](https://www.ycombinator.com/library/3O-why-big-deals-are-bad-for-startups).
 
 ### 2. CRM with Predictive Analytics
 
-We had a single real user.
-
-One of our friends who ran a small sales team had been really engaged with the product. Why?
+One of our friends who ran a small sales team had been really engaged with the first product. We asked ourselves - why?
 
 He had used it to _replace_ his CRM. 
 
-Could we just do the whole lot in one place, and reimagine the CRM?
-
-Perhaps it was too much to ask people to use a separate tool to manage their sales territories. The integration with Hubspot and Salesforce made the product feel quite complicated. People sure looked confused when we spoke to them! 
+Could we just do the whole lot in one place, and reimagine the CRM - would that make things feel simpler?
 
 We positioned the product as a CRM for small companies, with predictive analytics for an even simpler experience managing everything. We tweaked the functionality to have more control over deals and contacts.
 
 It suddenly got really hard to get anyone to talk to us.
 
-There are many lightweight CRMs out there, and predictive analytics make more sense for those with more data not startups with hardly any.
+There are many lightweight CRMs out there, and predictive analytics make more sense for those with more data, not startups with hardly any.
 
-This was around the time that [Superhuman](https://superhuman.com/) was getting pretty popular; we got overexcited, and kept using words like "blazing", "gorgeous", "brilliant". I think we got overexcited. I blame [VC Twitter](https://sifted.eu/articles/vc-brags-twitter/).
+This was around the time that [Superhuman](https://superhuman.com/) was getting pretty popular; we got overexcited, and kept using words like "blazing", "gorgeous", "brilliant". I blame too much time wasted reading [VC Twitter](https://sifted.eu/articles/vc-brags-twitter/).
 
 We didn't think through who we were building for. The market we were working on was very busy, so if I went back in time, I would have focused more on our differentiation - a product could make more sense than a platform to start out. Tim and I also just weren't strong enough at design to differentiate on that alone.
 
@@ -116,27 +112,41 @@ If we'd have asked this question, we'd have saved a couple more weeks of time.
 
 By this stage, we were thinking we just wanted to work with people that would at least try our stuff. These pesky heads of sales were just too capricious and we needed a break.
 
-Software engineers, surely they'd be more willing to try something that we built. We moved on to a different idea we'd had.
+Software engineers, surely they'd be more willing to try something that we built. We moved on to a different idea we'd had. Voilà:
 
 ### 4. Technical Debt Monitoring Tool using Surveys after each Pull Request
 
-It turns out everyone has problems with technical debt, but solving it involves changing how teams prioritize.
+We'd seen the impact of technical debt not being paid off at the right rate in our past, and had the perspective that automation isn't key to solving it. We believed that engineers knew when it was worth tackling.
 
-We just weren't the right people to run this business. Although Tim had struggled with technical debt first hand, neither of us had struggled with actually solving it. If one of us had managed an engineering team before, we'd have perhaps been better placed to understand this area.
+I spoke with every developer or engineering leader I'd ever worked with, and many I hadn't. They all said this problem was a huge pain point.
 
-Along the way though, we learned a lot about how developers and product managers work together. We'd also created a large list of
+So we built a survey tool that integrated with git repositories. After each pull request, it would ask the developer to answer a few quick questions - did anything slow them down, what type of problem was it, and roughly how much time was wasted. The tool would then visualize the code base against time lost to help surface where to start.
 
-If you can't stop thinking of other ideas, you probably are building something you don't like. 
+We got quite a lot of users, and we got into YCombinator with this idea. Three weeks into the batch, we had reached 600 users, with a 50% response rate to the surveys.
+
+We had started trying to charge people for the product. But we kept getting feedback that although it was a nice way to log issues, it just wasn't helping solve the problem. A few teams converted at very low order values with a lot of pushing, but it was clear we had a problem.
+
+It turns out everyone has problems with technical debt, but solving it involves changing how teams prioritize. Product teams weren't using the tool, and they were often dictating what people built.
+
+After a meetup with our YC friends at a cool [food truck spot](http://sparksocialsf.com/), we took a long walk back to our house in [Castro](https://en.wikipedia.org/wiki/Castro_District,_San_Francisco). We were thinking about how to solve our product woes. Could it turn into a piece of roadmapping software? Would it need to integrate with the roadmap software already in use? We just didn't feel excited about building these things out.
+
+A couple of days later, driving between Mountain View and San Francisco, we realized that we just weren't the right people to run this business.
+
+Although Tim had struggled with technical debt first hand, neither of us had actually solved it. If one of us had managed an engineering team before, we'd have perhaps been better placed to understand things. Our basic skills were good enough to get quite far with the idea, but we didn't have the belief to take it further.
+
+Along the way, we learned a lot about how developers and product managers work together. We'd also created a big list of future ideas we'd had whilst building all the above things out. In fact, if you can't stop thinking of other ideas, you probably are building something you don't like. This all came into play for idea 6 later on (the good one).
+
+So what did we do next?
 
 ### 5. Engineering Retention Tool using Surveys after each Pull Request
 
-Those fickle engineers joining companies and leaving them whenever they want to.
+Those fickle engineers joining companies and leaving them whenever they want to ;)
 
 This idea didn't come from us, which doomed it before it even really started.
 
 This lasted all of 5 days. We had a bunch of meetings left over from (4) to validate it. Amusingly we had to do a YCombinator demo day dry run for this in front of 500 people who made up the YC batch.
 
-We had a wildly unenthusiastic response from prospective users. The lowlight was during one of the meetings that we resorted to asking the CTO of an 80 person start up what his biggest problem was, "I've not really got any". Noice.
+We had a wildly unenthusiastic response from prospective users. The lowlight was during one of the meetings that we resorted to asking the CTO of an 80 person start up what his biggest problem was, "I've not really got any". Noice, noice.
 
 <div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/CheapFeistyDassierat' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div><p><a href="https://gfycat.com/discover/andy-samberg-gifs">from Andy Samberg GIFs</a></p>
 
@@ -144,7 +154,7 @@ We had a wildly unenthusiastic response from prospective users. The lowlight was
 
 Things got meta.
 
-Along our journey (/series of failed ideas), we got frustrated having to send all our user data to 3rd parties. It felt wrong and it meant we'd lose a bunch of user data that would have been quite useful.
+Along our journey (/series of failed ideas), we got frustrated having to send all our user data to 3rd parties to understand our product usage. It felt wrong and it meant we'd lose a bunch of user data that would have been quite useful.
 
 The [rest is history](../handbook/company/story).
 
