@@ -8,6 +8,7 @@ import ycLogo from '../../images/user-logos/yc.svg'
 import landmarkLogo from '../../images/user-logos/landmark.svg'
 import staplesLogo from '../../images/user-logos/staples.svg'
 import webinyLogo from '../../images/user-logos/webiny.svg'
+import dataikuLogo from '../../images/user-logos/dataiku.svg'
 import './style.scss'
 
 const companies = [
@@ -42,6 +43,10 @@ const companies = [
     {
         logo: webinyLogo,
         name: 'Webiny',
+    },
+    {
+        logo: dataikuLogo,
+        name: 'Dataiku',
     },
 ]
 
