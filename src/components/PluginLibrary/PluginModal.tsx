@@ -9,12 +9,12 @@ import { pluginLibraryLogic } from '../../logic/pluginLibraryLogic'
 
 export const PluginModal = () => {
     const { activePlugin, modalOpen, pluginLoading } = useValues(pluginLibraryLogic)
-    const { setModalOpen } = useActions(pluginLibraryLogic)
+    const { closeModal } = useActions(pluginLibraryLogic)
 
     return (
         <Modal
             isOpen={modalOpen}
-            onRequestClose={() => setModalOpen(false)}
+            onRequestClose={closeModal}
             className="pluginModalContent"
             overlayClassName="modalOverlay"
             ariaHideApp={false}
@@ -32,7 +32,7 @@ export const PluginModal = () => {
                             Learn More <ExportOutlined />
                         </a>
                     </div>
-                    <Button icon="close" onClick={() => setModalOpen(false)} className="modalClose" />
+                    <Button icon="close" onClick={closeModal} className="modalClose" />
                 </>
             )}
         </Modal>

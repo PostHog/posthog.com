@@ -13,7 +13,7 @@ export const unsafeHash = (str: string) => {
     return String(a)
 }
 
-export const getPluginImageSrc = (plugin) =>
+export const getPluginImageSrc = (plugin: any) =>
     plugin.imageLink
         ? plugin.imageLink
         : plugin.url.includes('github')

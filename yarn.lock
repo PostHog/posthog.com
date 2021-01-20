@@ -2002,6 +2002,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@posthog/plugin-scaffold@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@posthog/plugin-scaffold/-/plugin-scaffold-0.2.9.tgz#069147cee1fc91417561e7c8776abd3820e1f85f"
+  integrity sha512-NhTcDO9FgU/N8VGJXmGehZ+edBQJLzGgCrRqURDw90KXhz5laBcsCBRsSJbfJfrKZiPAgVl6v8J7Ay3qtY8nxQ==
+
 "@reach/alert@0.10.3":
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/@reach/alert/-/alert-0.10.3.tgz#9e4278edf8e6cfbe94df9a105faaa1c049a84517"

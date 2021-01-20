@@ -1,13 +1,14 @@
 import { kea } from 'kea'
 import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import { getPluginImageSrc } from '../lib/utils'
+import { router } from 'kea-router'
 
 export const pluginLibraryLogic = kea({
     actions: {
         setFilter: (filter) => ({ filter }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),
         openPlugin: (pluginName) => ({ pluginName }),
-        setModalOpen: (modalOpen) => ({ modalOpen }),
+        closeModal: () => true,
     },
     reducers: ({ actions }) => ({
         filter: [
@@ -33,7 +34,7 @@ export const pluginLibraryLogic = kea({
             false,
             {
                 [actions.openPlugin]: () => true,
-                setModalOpen: (_, { modalOpen }) => modalOpen,
+                [actions.closeModal]: () => false,
             },
         ],
     }),
@@ -68,6 +69,10 @@ export const pluginLibraryLogic = kea({
 
     listeners: ({ values, actions }) => ({
         openPlugin: async ({ pluginName }) => {
+            const pluginPath = pluginName.toLowerCase().replaceAll(' ', '-')
+            const { push } = router.actions
+            push(`/plugins/${pluginPath}`)
+
             const { setActivePlugin } = actions
             let plugin = values.filteredPlugins.filter((plugin) => plugin.name === pluginName)[0]
             let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
@@ -84,7 +89,19 @@ export const pluginLibraryLogic = kea({
             }
             plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
             plugin['imageSrc'] = getPluginImageSrc(plugin)
+
             setActivePlugin(plugin)
+        },
+        closeModal: () => {
+            if (window.location.pathname !== '/plugins') {
+                const { push } = router.actions
+                push('/plugins')
+            }
+        },
+        [router.actions.locationChanged]: ({ pathname }) => {
+            if (pathname === '/plugins') {
+                actions.closeModal()
+            }
         },
     }),
 })
