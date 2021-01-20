@@ -22,24 +22,29 @@ A `plugin.json` file is structured as follows:
 
 ```json
 {
-  "name": "<plugin_name>",
+  "name": "<plugin_display_name>",
   "url": "<repo_url>",
   "description": "<description>",
   "main": "<entry_point>",
-  "config": {
-    "param1": {
+  "config": [
+    {
+      "markdown": "Custom markdown block before the fields,\n[Use links](http://example.com) and other goodies!"
+    },
+    {
+      "key": "param1",
       "name": "<param1_name>",
       "type": "<param1_type>",
       "default": "<param1_default_value>",
+      "hint": "<param1_hint_value>",
       "required": <is_param1_required>
     },
-    "param2": {
+    {
       "name": "<param2_name>",
       "type": "<param2_type>",
       "default": "<param2_default_value>",
       "required": <is_param2_required>
-    },
-  }
+    }
+  ]
 }
 ```
 
@@ -47,18 +52,23 @@ Here's an example `plugin.json` file from our ['Hello World Plugin'](https://git
 
 ```json
 {
-  "name": "helloworldplugin",
+  "name": "Hello World",
   "url": "https://github.com/PostHog/helloworldplugin",
   "description": "Greet the World and Foo a Bar, JS edition!",
   "main": "index.js",
-  "config": {
-    "bar": {
+  "config": [
+    {
+      "markdown": "This is a sample plugin!"
+    },
+    {
+      "key": "bar",
       "name": "What's in the bar?",
       "type": "string",
       "default": "baz",
+      "hint": "This will be sent in a **property**",
       "required": false
     }
-  }
+  ]
 }
 ```
 
