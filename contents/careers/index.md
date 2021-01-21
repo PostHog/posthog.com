@@ -144,3 +144,7 @@ Learn more [about the people](/handbook/company/team) you could be working with.
 Watch a day in the life of our graphic designer, Lottie!
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xlODCLrZyvM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Note to recruitment agencies
+
+At Posthog, we are not working with recruitment agencies at the moment. Any direct approaches will be left unanswered, please do not call or follow up via email. We do not accept any specualative CVs, unless we have specifally instructed you to provide these. We will not be responsible for any fees relating to unsolicited CVs.
