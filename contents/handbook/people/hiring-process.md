@@ -171,7 +171,7 @@ If you know someone who would be a great addition to the team, please submit the
 Someone you have a personal or professional relationship with to confidently say they align with our values and fit our requirements. Please make sure the candidate has given their consent before putting them forward!
 
 **What's the process?**
-* If there is an ongoing conversation, please pink Eltje into the email thread with the referred candidate, she will take it over from there.
+* If there is an ongoing conversation, please ping Eltje into the email thread with the referred candidate, she will take it over from there.
 * Otherwise, Send Eltje their CV and contact details. If you don't have their resume, please include a link to their LinkedIn profile.
 * If they have applied themselves already, let Eltje know within 48 hours of them applying.
 
