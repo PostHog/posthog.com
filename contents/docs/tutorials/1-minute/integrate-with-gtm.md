@@ -22,7 +22,7 @@ To follow this tutorial along, you should:
 
 ## Step-By-Step Instructions
 
-1. Get your [PostHog snippet]((/docs/deployment/snippet-installation)) from your 'Project Settings' or the initial PostHog setup
+1. Get your [PostHog snippet](/docs/deployment/snippet-installation) from your 'Project Settings' or the initial PostHog setup
 2. Access your [Google Tag Manager Dashboard](https://tagmanager.google.com/) and navigate to the desired account/container that is integrated with the website you want to add PostHog tracking to
 3. Click to add a new tag:
 
