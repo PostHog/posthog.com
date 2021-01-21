@@ -10624,10 +10624,10 @@ kea-router@^0.5.1:
   dependencies:
     url-pattern "^1.0.3"
 
-kea@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/kea/-/kea-2.2.0.tgz#1ba4a174a53880cca8002a67cf62b19b30d09702"
-  integrity sha512-IzgTC6SC89wTLfiBMPlduG4r4YanxONYK4werz8RMZxPvcYw4XEEK8xQJguwVYtLCEGm4x5YiLCubGqGfRcbEw==
+kea@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/kea/-/kea-2.2.2.tgz#2a58ca5089b95fcc463224e6d08d95f05fac7af7"
+  integrity sha512-9qtmm/J0kz+wSrST1ljsxuoKoIpAhynkV0Rht8OQkAHvX7KEtABNVVdX/r6AgK1BOsjACF4t6tcMnYXG51GEZQ==
 
 keyv@3.0.0:
   version "3.0.0"
