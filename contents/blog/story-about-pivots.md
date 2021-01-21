@@ -40,7 +40,7 @@ At one stage in my life, I was the VP of Sales at an enterprise software company
 
 ![International Commerce Center - a big skyscraper in Hong Kong](../images/blog/pivoting/international-commerce-centre.jpg)
 
-Despite this, the _majority_ of your time in sales is spent getting nowhere. All those hotels, flights, calls, fastidiously wearing a suit in inappropriately warm weather - very few of those things actually result in anything.
+Despite this, the _majority_ of your time in sales is spent getting nowhere. All those hotels, flights, calls, fastidiously wearing a suit in inappropriately warm weather - very few of those things result in anything.
 
 Sidenote: this is why [product led growth](../handbook/growth/strategy) is so much better.
 
@@ -48,7 +48,7 @@ If you're not getting anywhere with a potential customer after a few weeks or mo
 
 We pulled pipeline data from Hubspot or Salesforce, then used predictive analytics to work out how this curve looked based on historic data, then applied it to the current pipeline. Once a deal dropped below a certain threshold, we'd recommend you swap out that target company and pull a new one into the pipeline.
 
-We confused a lot of people with this idea, because we ourselves were confused with whom we were targeting.
+We confused a lot of people with this idea, because we were confused with whom we were targeting.
 
 We got 15 sales leaders to agree to trying this out, sent them a link, then waited...
 
@@ -58,11 +58,11 @@ just _one_ person even clicked the sign up link. The rest didn't even try it.
 
 With hindsight, it was way overpowered for tiny teams and we'd only have had a great fit for huge ones with a lot of data.
 
-The only people interested in smaller teams were enthusiasts, but there wasn't an easy jump from that to a bigger market. We could have just worked on selling the product to big companies, but that would be [really tough](https://www.ycombinator.com/library/3O-why-big-deals-are-bad-for-startups).
+The only people interested in smaller teams were enthusiasts, but there wasn't an easy jump from that to a bigger market. We could have just worked on selling the product to big companies, but that would be [tough](https://www.ycombinator.com/library/3O-why-big-deals-are-bad-for-startups).
 
 ### 2. CRM with Predictive Analytics
 
-One of our friends who ran a small sales team had been really engaged with the first product. We asked ourselves - why?
+One of our friends who ran a small sales team was a clear outliter. He had been using our first product a lot. We asked ourselves - why?
 
 He had used it to _replace_ his CRM. 
 
@@ -76,7 +76,7 @@ There are many lightweight CRMs out there, and predictive analytics make more se
 
 This was around the time that [Superhuman](https://superhuman.com/) was getting pretty popular; we got overexcited, and kept using words like "blazing", "gorgeous", "brilliant". I blame too much time wasted reading [VC Twitter](https://sifted.eu/articles/vc-brags-twitter/).
 
-We didn't think through who we were building for. The market we were working on was very busy, so if I went back in time, I would have focused more on our differentiation - a product could make more sense than a platform to start out. Tim and I also just weren't strong enough at design to differentiate on that alone.
+We didn't think through who we were building for. The market we were working on was very busy, so if I went back in time, I would have focused more on our differentiation - a product could make more sense than a platform. Tim and I also just weren't strong enough at design to differentiate on that alone.
 
 After hundreds of messages to potential users, we eventually got a single customer for $20/month, who then didn't actually pay the invoice. If you're pushing this hard and getting nowhere, you don't have the magic of [product market fit](https://www.youtube.com/watch?v=l-vfn97QTr0).
 
@@ -88,7 +88,7 @@ It was the prioritization of where to focus your sales efforts. If 90% of your d
 
 [Andrew Grove](https://en.wikipedia.org/wiki/Andrew_Grove) has an excellent book, [High Output Management](https://www.amazon.com/High-Output-Management-Andrew-Grove/dp/0679762884/ref=sr_1_1?dchild=1&keywords=high+output+management&qid=1610712757&s=books&sr=1-1). The premise is that your 1:1 meetings with your direct reports are your most leveraged time.
 
-Yet, many managers in practise don't really end up preparing properly.
+Yet, many managers in practise don't prepare, at all.
 
 ![A team that look a little bit like their happiness is staged](../images/blog/pivoting/amazing-team.jpg)
 
@@ -108,7 +108,7 @@ If they haven't solved the problem, ask why not. Have they tried searching for s
 Rule of thumb: Anything involving the future is an over-optimistic lie.
 ```
 
-If we'd have asked this question, we'd have saved a couple more weeks of time.
+If we'd have asked this question, we'd have saved a couple more weeks.
 
 By this stage, we were thinking we just wanted to work with people that would at least try our stuff. These pesky heads of sales were just too capricious and we needed a break.
 
@@ -134,9 +134,9 @@ After a meetup with our YC friends at a cool [food truck spot](http://sparksocia
 
 A couple of days later, driving between Mountain View and San Francisco, we realized that we just weren't the right people to run this business.
 
-Although Tim had struggled with technical debt first hand, neither of us had actually solved it. If one of us had managed an engineering team before, we'd have perhaps been better placed to understand things. Our basic skills were good enough to get quite far with the idea, but we didn't have the belief to take it further.
+Although Tim had struggled with technical debt first hand, neither of us had solved it. If one of us had managed an engineering team before, we'd have perhaps been better placed to understand things. Our basic skills were good enough to get quite far with the idea, but we didn't have the belief to take it further.
 
-Along the way, we learned a lot about how developers and product managers work together. We'd also created a big list of future ideas we'd had whilst building all the above things out. In fact, if you can't stop thinking of other ideas, you probably are building something you don't like. This all came into play for idea 6 later on (the good one).
+Along the way, we learned a lot about how developers and product managers work together. We'd also created a big list of future ideas we'd had whilst building all the above things out. If you can't stop thinking of other ideas, you probably are building something you don't like. This all came into play for idea 6 later on (the good one).
 
 So what did we do next?
 
@@ -194,7 +194,7 @@ We implemented an important rule:
 
 1. If you decide to pivot, you have to wait at least until the next day to do it.
 
-Our inclination was to pivot _very_ frequently, whereas it's more typical for people to really not want to do this. Know where you sit on this line. We had to add a small delay so we weren't acting impulsively.
+We inclined to pivot _very_ frequently, whereas it's more typical for people to not want to do so until way too late. Know where you sit on this line. We had to add a small delay so we weren't acting impulsively.
 
 This is normally [the other way around](https://www.inc.com/scott-mautz/jeff-immelt-just-nailed-why-too-many-startups-pivot-their-business-too-late.html) - people don't start over soon enough. During YCombinator, we saw companies say they were pivoting almost every time we saw them, but without having built and tested their new thing. Those companies had a really tough time by the end of the batch.
 
@@ -207,7 +207,7 @@ A meeting with the right person when you're at a literally pivotal moment can he
 For the pivot to open source product analytics, there were a few things that speaking to experts helped us clear up:
 
 * We spoke to a couple of people who weren't industry insiders, but with very significant experience working with a broad range of startups. This helped us realize that open source was the strategy, and all the features we wanted were just that.
-* We met with a bunch of founders of huge open source companies. This gave us a very opinionated stance on where to focus. Coming from a SaaS background, giving so much away so freely felt counterintuitive, but it's why our launch went really well.
+* We met with a bunch of founders of huge open source companies. This gave us a very opinionated stance on where to focus. Coming from a SaaS background, giving so much away so freely felt counterintuitive, but it's why our launch went well.
 
 People like this can be pretty friendly even if you don't know them and don't have a friendly introduction, if you're respectful of their time. Meaning, you've done your research, you're clearly at a major inflection point, and you're not trying to get a sale or investment from them. The latter just kind of happens naturally later on, but it wouldn't if we were exclusively interested in it.
 
@@ -215,19 +215,19 @@ It was remarkable how often we got a different view meeting people than just rea
 
 They'd explain why they went in a certain direction, or how they lost a bunch of time and money themselves doing the wrong thing. Don't just rely on the insanely-impressive growth studies you read about online.
 
-You definitely learn more by doing than getting advice, but sprinkling an intensive period of it in at such a key moment is important.
+You learn more by doing than getting advice, but sprinkling an intensive period of it in at such a key moment is important.
 
 ## Don't be scared to build
 
 We continuously built products and recruited users onto something real. What people did and what we though they'd do often diverged. [Jason Fried](https://twitter.com/jasonfried) goes so far as to say [you can't validate something that doesn't exist](https://twitter.com/jasonfried/status/1337095209620946944). The key is not to get scared about just building the thing you're talking about - Tim often only spent a week building things out, and during this time I was busy booking lots of meetings and finding potential users.
 
-You _must_ be really quick to do this. Others we heard of during the batch intended on spending months building their new idea out. That idea is a lot more frightening than starting with some throwaway code. Getting some production use, even if [embarassingly early](/we-ship-whenever#why), is really important at least to know if your _concept_ is a compelling one.
+You _must_ be quick to do this. Others we heard of during the batch intended on spending months building their new idea out. That idea is a lot more frightening than starting with some throwaway code. Getting some production use, even if [embarassingly early](/we-ship-whenever#why), is important to know if your _concept_ is a compelling enough one that early users are willing to put up with some pain to try to solve the problem you're tackling.
 
 ## Have a user in mind
 
 We didn't think about the users or companies we were building for. This is easy to over-think, but just a few hours of thought could have cut down the number of times we pivoted.
 
-We focused on things we wanted ourselves, which was good, but some of those ideas just weren't applicable to _anyone_ else.
+We focused on things we wanted ourselves, which was good, but some of those ideas just didn't apply to _anyone_ else.
 
 ## Let's end on an overused quote
 
@@ -239,6 +239,6 @@ You're going to look pretty crazy if you pivot. That's because most people are u
 
 We stopped working on several ideas that probably could have worked out, _if_ we'd been willing to persist and to keep tweaking them. This makes us look non committal, but - as with anything - you learn a lot by doing; we knew we'd find something good but weren't done searching until the 6th idea.
 
-Those very early decisions are the most leveraged you will ever take for your startup. Whatever you stick with may well be the thing you do for the next 10 years, and the stronger product market fit you can find early on, the easier literally everything else will be later. It's a lot easier to sell something that people want.
+Those very early decisions are the most leveraged you will ever take for your startup. Whatever you stick with may well be the thing you do for the next 10 years, and the stronger product market fit you can find early on, the easier everything else will be later. It's a lot easier to sell something that people want.
 
-It turns out, PostHog so far has really been a journey about finding a combination of an idea we _wanted_ to work on long term, that others wanted. If we can achieve one thing with this article, it's that if someone is having a tough time working out if they should pivot, that this perspective is helpful.
+It turns out, PostHog so far has been a journey about finding a combination of an idea we _wanted_ to work on long term, that others wanted. If we can achieve one thing with this article, it's that if someone is having a tough time working out if they should pivot, that this perspective is helpful.
