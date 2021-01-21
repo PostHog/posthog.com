@@ -14,7 +14,7 @@ export const PosthogAnnouncement = () => {
 
     useEffect(() => {
         if (window && posthog) {
-            const announcements = posthog.persistence.props.$active_feature_flags.filter((flag: string) =>
+            const announcements = (posthog.persistence.props.$active_feature_flags || []).filter((flag: string) =>
                 flag.includes('Announcement:')
             )
             if (announcements.length > 0) {
