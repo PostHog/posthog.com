@@ -80,6 +80,7 @@ You should:
 - Ask them to confirm they've tagged themselves as using us, and send a direct link [to the deal](https://bookface.ycombinator.com/deals/687), so this is easy.
 - If they refer another company, use Shopify to send them a $50 voucher at [our store](https://merch.posthog.com).
 - After they've gotten set up, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations)
+- Add their email domain to the 'YC W21 Onboarded Users' cohort as a new match group that tags `email contains @theirdomain.com`
 
 ## Current Responsibilities
 

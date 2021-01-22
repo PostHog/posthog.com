@@ -136,6 +136,22 @@ You can spend up to \$200/month to work in cafés or coworking spaces if working
 
 If you live in the US, a particularly good way to use this budget is to cover the cost of Amex Platinum which provides WeWork access. Outside of the US, you may sign your own agreement or buy day vouchers as needed. We will not cover costs beyond this amount of money.
 
+## Celebrations and life events
+
+It's important to us at PostHog to celebrate team member milestones and achievements.
+
+**Birthdays**
+
+We have a budget of $50 for a personalised birthday gift. Eltje will reach out to the team a week before the birtday to start a virtual birthday card and ask for gift ideas. 
+
+**PostHog anniversaries**
+
+For every PostHog anniversary, we will donate $50 to a charity of your choice. And just like for birthdays, we will also send a virtual card. 
+
+**Significant life events**
+
+For events like childbirth, weddings, return to work after extended sick leave or the loss of a loved one, Eltje will send flowers and a gift, the budget is $100. We will also send a virtual card.  
+
 ## Client Meetings
 
 If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill.

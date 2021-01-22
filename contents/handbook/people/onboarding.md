@@ -51,6 +51,7 @@ Charles and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/people/spending-money) guidelines <br>
 <input type="checkbox"/>  Ask James or Yakko to give them $100 credit to spend on Shopify <br>
 <input type="checkbox"/>  Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them <br>
+<input type="checkbox"/>  Add the team member's details to our hiring plan in Pry <br>
 
 ## On Their First Day
 

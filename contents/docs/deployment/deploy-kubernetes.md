@@ -151,6 +151,13 @@ Alternatively, a YAML file that specifies the values for the above parameters ca
 $ helm install -f my-values.yaml my-release .
 ```
 
+## Updating your PostHog
+
+```bash
+$ helm repo update
+$ helm upgrade -f <config_yaml> <release-name> posthog/posthog
+```
+
 ## [Packages](#packages)
 
 ### PostgreSQL

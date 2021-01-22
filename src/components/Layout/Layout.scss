@@ -1125,8 +1125,8 @@ table th {
     border: none;
 }
 
-.table-borders > table > thead > tr > th,
-.table-borders > table > tbody > tr > td {
+.table-borders th,
+.table-borders td {
     border: 1px solid !important;
     border-color: #e8e8e8 !important;
     padding-left: 10px !important;
@@ -1484,6 +1484,14 @@ for all other rows the portrait image wraps above bio*/
 .small-inner-text li {
     font-size: 14px !important;
     line-height: 1;
+}
+
+.centered-spin {
+    display: block !important;
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /*split to one column on smaller screens*/
