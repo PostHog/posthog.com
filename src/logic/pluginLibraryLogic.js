@@ -7,7 +7,7 @@ export const pluginLibraryLogic = kea({
         setFilter: (filter) => ({ filter }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),
         setOpenPlugin: (pluginName) => ({ pluginName }),
-        matchPathnameToPlugin: (pathname) => ({ pathname }),
+        setPluginPathname: (pathname) => ({ pathname }),
     },
     reducers: () => ({
         filter: [
@@ -26,6 +26,13 @@ export const pluginLibraryLogic = kea({
             '',
             {
                 setOpenPlugin: (_, { pluginName }) => pluginName ?? '',
+            },
+        ],
+        pluginPathname: [
+            '',
+            {
+                setPluginPathname: (_, { pathname }) => pathname,
+                setOpenPlugin: (_, { pluginName }) => pluginName.toLowerCase().replaceAll(' ', '-'),
             },
         ],
         pluginLoading: [
@@ -55,9 +62,10 @@ export const pluginLibraryLogic = kea({
             (plugins, filter) =>
                 plugins.filter((p) => p.displayOnWebsiteLib && (filter === 'all' || filter === p.type)),
         ],
-        pluginPathname: [
-            (s) => [s.activePluginName],
-            (activePluginName) => activePluginName.toLowerCase().replaceAll(' ', '-'),
+        pluginMatch: [
+            (s) => [s.pluginPathname, s.filteredPlugins],
+            (pluginPathname, filteredPlugins) =>
+                filteredPlugins.filter((plugin) => plugin.name.toLowerCase().replaceAll(' ', '-') === pluginPathname),
         ],
     },
     events: ({ actions }) => ({
@@ -94,17 +102,13 @@ export const pluginLibraryLogic = kea({
             setActivePlugin(plugin)
         },
         loadPluginsSuccess: () => {
-            const pluginPathname = window.location.pathname.split('plugins/')[1]
-            if (pluginPathname) {
-                const { filteredPlugins } = values
-                const { setOpenPlugin } = actions
-
-                const pluginMatch = filteredPlugins.filter(
-                    (plugin) => plugin.name.toLowerCase().replaceAll(' ', '-') === pluginPathname
-                )
-
-                setOpenPlugin(pluginMatch[0] ? pluginMatch[0].name : '')
-            }
+            const { setPluginPathname } = actions
+            setPluginPathname(window.location.pathname.split('plugins/')[1])
+        },
+        setPluginPathname: () => {
+            const { pluginMatch } = values
+            const { setOpenPlugin } = actions
+            setOpenPlugin(pluginMatch[0] ? pluginMatch[0].name : '')
         },
     }),
     actionToUrl: ({ values }) => ({
