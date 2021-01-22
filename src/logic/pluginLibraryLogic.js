@@ -32,7 +32,7 @@ export const pluginLibraryLogic = kea({
             '',
             {
                 setPluginPathname: (_, { pathname }) => pathname,
-                setOpenPlugin: (_, { pluginName }) => pluginName.toLowerCase().replaceAll(' ', '-'),
+                setOpenPlugin: (_, { pluginName }) => (pluginName ? pluginName.toLowerCase().replaceAll(' ', '-') : ''),
             },
         ],
         pluginLoading: [
