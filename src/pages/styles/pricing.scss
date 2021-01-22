@@ -262,4 +262,30 @@
             font-size: 30px !important;
         }
     }
+
+    .pricing-cloud {
+        width: 100%;
+        text-align: left;
+
+        .feature-card {
+            max-width: 400px;
+            margin: 32px auto;
+        }
+
+        ul {
+            text-align: center;
+
+            li {
+                font-size: 14px;
+                position: relative;
+
+                .disclaimer {
+                    font-size: 10px;
+                    font-weight: bold;
+                    vertical-align: top;
+                    padding-left: 2px;
+                }
+            }
+        }
+    }
 }

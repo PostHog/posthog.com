@@ -103,7 +103,7 @@ const PricingPage = () => {
                         </Col>
                     </Row>
                     <Row gutter={[24, 36]} type="flex" style={{ justifyContent: 'center', marginTop: '32px' }}>
-                        {plans[state.planOptions].map((plan) => (
+                        {(plans[state.planOptions] || []).map((plan) => (
                             <Col
                                 className="plan-card"
                                 md={24 / plans[state.planOptions].length}
@@ -152,6 +152,58 @@ const PricingPage = () => {
                                 </Card>
                             </Col>
                         ))}
+                        {state.planOptions === 'cloud' && (
+                            <div className="pricing-cloud">
+                                <h4>One Price. Pay only for what you use.</h4>
+                                <div>
+                                    Get all the features with a straight and transparent pricing. Pay based on the
+                                    events you ingest every month.
+                                </div>
+                                $0.000225/mo per event.
+                                <Card className="feature-card">
+                                    <div className="text-center">
+                                        <h5>Features included</h5>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <b>Unlimited</b> event allocation. Pay only for what you use.
+                                        </li>
+                                        <li>
+                                            <b>Unlimited</b> tracked users
+                                        </li>
+                                        <li>
+                                            <b>Unlimited</b> team members
+                                        </li>
+                                        <li>
+                                            <b>Unlimited</b> projects
+                                        </li>
+                                        <li>
+                                            <b>7 years</b> of data retention
+                                            <span className="disclaimer">
+                                                <a href="#">1</a>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <b>All core analytics features</b>
+                                        </li>
+                                        <li>
+                                            Session recording with unlimited storage
+                                            <span className="disclaimer">
+                                                <a href="#">2</a>
+                                            </span>
+                                        </li>
+                                        <li>Feature flags</li>
+                                        <li>Plugins &amp; other integrations</li>
+                                        <li>Zapier integration</li>
+                                        <li>SSO/SAML</li>
+                                        <li>Export to data lakes</li>
+                                        <li>Community, Slack &amp; Email support</li>
+                                    </ul>
+                                    For companies using on average 1,000,000 events per month or more, we offer{' '}
+                                    <b>priority support</b>.
+                                </Card>
+                            </div>
+                        )}
                         <Col span={24} align="middle">
                             All prices in US Dollars (USD), excluding taxes
                         </Col>
