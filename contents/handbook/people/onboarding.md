@@ -85,6 +85,13 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) <br>
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br>
 
+## PostHog buddy
+
+Starting a new job is really exciting, but it can also be a little bit overwhelming. To make your first few weeks a bit easier, we started a buddy system. 
+The buddy can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help. 
+
+We will pair people in similar time zones to make sure you get the most out of each other. The goal is to have a catch up at least once a week during the first few weeks, including time to chat about non-work topics.
+
 ## Tools we use
 
 We use a number of different tools to organise our work and communicate at PostHog. Below is a summary list of the most important ones - this list is not intended to be exhaustive
