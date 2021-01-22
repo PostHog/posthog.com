@@ -173,6 +173,14 @@ const PricingPage = () => {
                                     For everyone.
                                 </div>
 
+                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                    Have very large volumes? If you expect to capture for than 10 million events,{' '}
+                                    <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
+                                        contact us
+                                    </a>
+                                    .
+                                </div>
+
                                 <Card className="feature-card">
                                     <div className="plan-image">
                                         <img src={imgCloudPlan} alt="" />
@@ -270,7 +278,7 @@ const PricingPage = () => {
                                         <li>You want to get automatic updates with all the latest features.</li>
                                     </ul>
                                     <div className="p-comparison-btn">
-                                        <a href="https://app.posthog.com/signup?plan=starter">
+                                        <a href="https://app.posthog.com/signup">
                                             <Button type="primary" size="large">
                                                 Start my 30-day free trial
                                             </Button>

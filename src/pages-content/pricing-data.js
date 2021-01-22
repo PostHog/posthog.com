@@ -76,17 +76,12 @@ const faqs = [
     {
         q: 'How do I know what my volume is?',
         a:
-            'We provide a free tier on our Cloud plan. This allows you to quickly get a sense of what your volume is. If you have very high volumes (10s-100s of thousands of users, our enterprise product is probably the most cost effective.',
-    },
-    {
-        q: 'What happens when I reach the maximum number of events in my plan?',
-        a:
-            'We will let you know when you are close to the maximum number of events and prompt you to upgrade to a different plan. We will not stop collecting events but we might limit your ability to consult your data or run analytics until the next billing period.',
+            'We provide a free trial on our Cloud plan. This allows you to get a sense of what your volume is. If you have very high volumes (10s-100s of thousands of users, our enterprise product is probably the most cost effective.',
     },
     {
         q: 'Is there a free trial on paid plans?',
         a:
-            'You can get a 30-day free trial on our Starter and Growth plans. Our Ultimate plan does not offer a free trial because it has the same base features as the Growth plan.',
+            'Yes! When you activate your Cloud plan, you will get the first 30 days for free (regardless of usage). In addition, every month your first 10,000 events are free.',
     },
     {
         q: 'What happens after the data retention period elapses?',
@@ -97,6 +92,11 @@ const faqs = [
         q: 'Can I switch between the Cloud and Enterprise plans?',
         a:
             'We are working hard to enable a bridge that allows data transfer between cloud instances and enterprise instances. This will be possible in the coming months.',
+    },
+    {
+        q: 'Are there any minimums or annual commitments?',
+        a:
+            'Our Cloud plan is simple, pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing. As our enterprise plans are custom for each company, we handle this case-by-case. Ask us.',
     },
 ]
 
