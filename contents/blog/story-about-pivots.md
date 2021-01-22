@@ -9,7 +9,7 @@ hideAnchor: true
 
 PostHog has pivoted _a lot_.
 
-After 5 pivots in 6 months, we got into [YCombinator](https://www.ycombinator.com/) last year, pivoted again whilst we were there and have now gone from the first commit to \$12M raised, thousands of deployments and a team across 10 countries, in well under a year.
+After 5 pivots in 6 months, we got into [YCombinator](https://www.ycombinator.com/) last year, pivoted again whilst we were there and have now gone from the first commit to thousands of deployments, a team across 10 countries and $12M raised, in well under a year.
 
 This is that story and what we learned from it.
 
