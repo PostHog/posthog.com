@@ -161,6 +161,32 @@ Hooray!
 
 To give a candidate an offer letter and to move to the rest of the onboarding, see [Onboarding](/handbook/people/onboarding).
 
+## Referrals
+
+Every time we open a new role, we will share the details and ideal profile with the team during standup. 
+
+If you know someone who would be a great addition to the team, please submit them as a referral. If they're successfully hired, you'll receive a $1000 Referral Bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity. 
+
+**What counts as a referral?**
+Someone you have a personal or professional relationship with to confidently say they align with our values and fit our requirements. Please make sure the candidate has given their consent before putting them forward!
+
+**What's the process?**
+* If there is an ongoing conversation, please ping Eltje into the email thread with the referred candidate, she will take it over from there.
+* Otherwise, Send Eltje their CV and contact details. If you don't have their resume, please include a link to their LinkedIn profile.
+* If they have applied themselves already, let Eltje know within 48 hours of them applying.
+
+**Referral payout process:**
+The bonus date is 3 months from the new team member's start date and will be processed as part of payroll.
+
+**External referrals**
+We also welcome external referrals, e.g. from:
+* From our investors
+* From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
+* From the YC community (Slack / WhatsApp / Forum)
+
+As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
+
+
 ## Where to find great candidates
 
 ### Direct outreach
@@ -181,17 +207,6 @@ It is possible to research a list of potential candidates through:
 * AngelList
 
 It is important before starting outreach like this that you consider *why* a candidate messaged through this approach would move to us, so that your note to them can explain why you felt it might be a nice fit. 
-
-### Referrals
-
-* From our own team
-* From our investors
-* From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
-* From the YC community (Slack / WhatsApp / Forum)
-
-For any referrals, please add Eltje to the conversation. Eltje can then add the referral to Workable and start the process. 
-
-At the moment, we don't offer a referral bonus, but we are thinking of ways to encourage referrals. 
 
 ### Job boards
 
