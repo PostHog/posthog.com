@@ -8,13 +8,13 @@ import { useActions, useValues } from 'kea'
 import { pluginLibraryLogic } from '../../logic/pluginLibraryLogic'
 
 export const PluginModal = () => {
-    const { activePlugin, modalOpen, pluginLoading } = useValues(pluginLibraryLogic)
-    const { closeModal } = useActions(pluginLibraryLogic)
+    const { activePlugin, activePluginName, pluginLoading } = useValues(pluginLibraryLogic)
+    const { setOpenPlugin } = useActions(pluginLibraryLogic)
 
     return (
         <Modal
-            isOpen={modalOpen}
-            onRequestClose={closeModal}
+            isOpen={!!activePluginName}
+            onRequestClose={() => setOpenPlugin('')}
             className="pluginModalContent"
             overlayClassName="modalOverlay"
             ariaHideApp={false}
@@ -32,7 +32,7 @@ export const PluginModal = () => {
                             Learn More <ExportOutlined />
                         </a>
                     </div>
-                    <Button icon="close" onClick={closeModal} className="modalClose" />
+                    <Button icon="close" onClick={() => setOpenPlugin('')} className="modalClose" />
                 </>
             )}
         </Modal>

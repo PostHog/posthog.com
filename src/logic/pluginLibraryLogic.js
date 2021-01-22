@@ -1,16 +1,15 @@
 import { kea } from 'kea'
 import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import { getPluginImageSrc } from '../lib/utils'
-import { router } from 'kea-router'
 
 export const pluginLibraryLogic = kea({
     actions: {
         setFilter: (filter) => ({ filter }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),
-        openPlugin: (pluginName) => ({ pluginName }),
-        closeModal: () => true,
+        setOpenPlugin: (pluginName) => ({ pluginName }),
+        matchPathnameToPlugin: (pathname) => ({ pathname }),
     },
-    reducers: ({ actions }) => ({
+    reducers: () => ({
         filter: [
             'all',
             {
@@ -23,18 +22,17 @@ export const pluginLibraryLogic = kea({
                 setActivePlugin: (_, { activePlugin }) => activePlugin,
             },
         ],
+        activePluginName: [
+            '',
+            {
+                setOpenPlugin: (_, { pluginName }) => pluginName ?? '',
+            },
+        ],
         pluginLoading: [
             false,
             {
-                [actions.openPlugin]: () => true,
-                [actions.setActivePlugin]: () => false,
-            },
-        ],
-        modalOpen: [
-            false,
-            {
-                [actions.openPlugin]: () => true,
-                [actions.closeModal]: () => false,
+                setOpenPlugin: () => true,
+                setActivePlugin: () => false,
             },
         ],
     }),
@@ -57,6 +55,10 @@ export const pluginLibraryLogic = kea({
             (plugins, filter) =>
                 plugins.filter((p) => p.displayOnWebsiteLib && (filter === 'all' || filter === p.type)),
         ],
+        pluginPathname: [
+            (s) => [s.activePluginName],
+            (activePluginName) => activePluginName.toLowerCase().replaceAll(' ', '-'),
+        ],
     },
     events: ({ actions }) => ({
         afterMount: () => {
@@ -68,11 +70,10 @@ export const pluginLibraryLogic = kea({
     }),
 
     listeners: ({ values, actions }) => ({
-        openPlugin: async ({ pluginName }) => {
-            const pluginPath = pluginName.toLowerCase().replaceAll(' ', '-')
-            const { push } = router.actions
-            push(`/plugins/${pluginPath}`)
-
+        setOpenPlugin: async ({ pluginName }) => {
+            if (!pluginName) {
+                return
+            }
             const { setActivePlugin } = actions
             let plugin = values.filteredPlugins.filter((plugin) => plugin.name === pluginName)[0]
             let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
@@ -92,34 +93,25 @@ export const pluginLibraryLogic = kea({
 
             setActivePlugin(plugin)
         },
-        closeModal: () => {
-            if (window.location.pathname !== '/plugins') {
-                const { push } = router.actions
-                push('/plugins')
-            }
-        },
-        [router.actions.locationChanged]: ({ pathname }) => {
-            if (pathname === '/plugins') {
-                actions.closeModal()
-            }
-        },
         loadPluginsSuccess: () => {
             const pluginPathname = window.location.pathname.split('plugins/')[1]
             if (pluginPathname) {
                 const { filteredPlugins } = values
-                const { openPlugin } = actions
+                const { setOpenPlugin } = actions
 
                 const pluginMatch = filteredPlugins.filter(
                     (plugin) => plugin.name.toLowerCase().replaceAll(' ', '-') === pluginPathname
                 )
 
-                if (pluginMatch[0]) {
-                    openPlugin(pluginMatch[0].name)
-                } else {
-                    const { push } = router.actions
-                    push('/plugins')
-                }
+                setOpenPlugin(pluginMatch[0] ? pluginMatch[0].name : '')
             }
         },
+    }),
+    actionToUrl: ({ values }) => ({
+        setOpenPlugin: ({ pluginName }) => (!pluginName ? '/plugins/' : `/plugins/${values.pluginPathname}`),
+    }),
+    urlToAction: ({ actions }) => ({
+        '/plugins': () => actions.setOpenPlugin(''),
+        '/plugins/': () => actions.setOpenPlugin(''),
     }),
 })
