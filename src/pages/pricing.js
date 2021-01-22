@@ -10,6 +10,7 @@ import 'antd/lib/collapse/style/css'
 import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgChevronRight from '../images/chevron-right.svg'
+import imgCloudPlan from '../images/plan-cloud.svg'
 
 // Data for plans abstracted to pricing-data.js to reduce noise
 import { plans, faqs } from '../pages-content/pricing-data'
@@ -159,8 +160,13 @@ const PricingPage = () => {
                                     Get all the features with a straight and transparent pricing. Pay based on the
                                     events you ingest every month.
                                 </div>
-                                $0.000225/mo per event.
+                                <div className="main-price">
+                                    <div>$0.000225/event</div> per month
+                                </div>
                                 <Card className="feature-card">
+                                    <div className="plan-image">
+                                        <img src={imgCloudPlan} alt="" />
+                                    </div>
                                     <div className="text-center">
                                         <h5>Features included</h5>
                                     </div>

@@ -272,6 +272,25 @@
             margin: 32px auto;
         }
 
+        .plan-image {
+            text-align: center;
+            margin-top: 32px;
+            img {
+                height: 100px;
+            }
+        }
+
+        .main-price {
+            div {
+                font-size: 1.6rem;
+                font-weight: bold;
+                color: #2d2d2d;
+            }
+            font-size: 1rem;
+            color: #bfbfbf;
+            margin-top: 16px;
+        }
+
         ul {
             text-align: center;
 
