@@ -159,6 +159,7 @@ const PricingPage = () => {
                                     Get all the features with a straight and transparent pricing. Pay based on the
                                     events you ingest every month.
                                 </div>
+
                                 <div className="main-price">
                                     <div>
                                         <DollarCircleTwoTone style={{ marginRight: 6 }} />
@@ -166,6 +167,12 @@ const PricingPage = () => {
                                     </div>{' '}
                                     per month
                                 </div>
+
+                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                    Looking for our free plan? First <b>10,000 events are free</b> every single month.
+                                    For everyone.
+                                </div>
+
                                 <Card className="feature-card">
                                     <div className="plan-image">
                                         <img src={imgCloudPlan} alt="" />
