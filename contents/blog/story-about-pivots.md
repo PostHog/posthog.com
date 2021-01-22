@@ -10,7 +10,7 @@ hideAnchor: true
 
 PostHog has pivoted _a lot_.
 
-After 5 pivots in 6 months, we got into [YCombinator](https://www.ycombinator.com/) last year, pivoted again whilst we were there and have now gone from the first commit to thousands of deployments, a team across 10 countries and $12M raised, in well under a year.
+After 5 pivots in 6 months, we got into [YCombinator](https://www.ycombinator.com/) last year, pivoted again whilst we were there and have now gone from the first commit to thousands of deployments, a team across 10 countries and $12M raised, in well under a year. We've a long way to go, but we're delighted at how it has gone so far.
 
 This is that story and what we learned from it.
 
@@ -37,7 +37,7 @@ So, what did we build?
 
 ### 1. Sales Territory Management Tool
 
-At one stage in my life, I was the VP of Sales at an enterprise software company. On paper, it looked like a glamorous job - I used to fly around the world with the sales team, to go to important meetings with huge banks, in fancy skyscrapers, like the [ICC in Hong Kong](https://en.wikipedia.org/wiki/International_Commerce_Centre):
+At one stage in my life, I was the VP of Sales at an enterprise software company. On paper, it looked like a glamorous job - I used to fly around the world with the sales team, and met with huge enterprise clients in fancy skyscrapers, like the [ICC in Hong Kong](https://en.wikipedia.org/wiki/International_Commerce_Centre):
 
 ![International Commerce Center - a big skyscraper in Hong Kong](../images/blog/pivoting/international-commerce-centre.jpg)
 
@@ -242,4 +242,4 @@ We stopped working on several ideas that probably could have worked out, _if_ we
 
 Those very early decisions are the most leveraged you will ever take for your startup. Whatever you stick with may well be the thing you do for the next 10 years, and the stronger product market fit you can find early on, the easier everything else will be later. It's a lot easier to sell something that people want.
 
-It turns out, PostHog so far has been a journey about finding a combination of an idea we _wanted_ to work on long term, that others wanted. If we can achieve one thing with this article, it's that if someone is having a tough time working out if they should pivot, that this perspective is helpful.
+It turns out that PostHog has been about building something people want, that we also wanted to work on. If you're reading this article and having a tough time working out if you should pivot, drop us [an email](mailto:blog@posthog.com).
