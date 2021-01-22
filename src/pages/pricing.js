@@ -11,9 +11,8 @@ import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgChevronRight from '../images/chevron-right.svg'
 import imgCloudPlan from '../images/plan-cloud.svg'
-
-// Data for plans abstracted to pricing-data.js to reduce noise
 import { plans, faqs } from '../pages-content/pricing-data'
+import { DollarCircleTwoTone } from '@ant-design/icons'
 
 const PricingPage = () => {
     const [state, setState] = useState({ planOptions: 'cloud' })
@@ -161,7 +160,11 @@ const PricingPage = () => {
                                     events you ingest every month.
                                 </div>
                                 <div className="main-price">
-                                    <div>$0.000225/event</div> per month
+                                    <div>
+                                        <DollarCircleTwoTone style={{ marginRight: 6 }} />
+                                        $0.000225/event
+                                    </div>{' '}
+                                    per month
                                 </div>
                                 <Card className="feature-card">
                                     <div className="plan-image">
@@ -186,7 +189,7 @@ const PricingPage = () => {
                                         <li>
                                             <b>7 years</b> of data retention
                                             <span className="disclaimer">
-                                                <a href="#">1</a>
+                                                <a href="#disclaimer-1">1</a>
                                             </span>
                                         </li>
                                         <li>
@@ -195,7 +198,7 @@ const PricingPage = () => {
                                         <li>
                                             Session recording with unlimited storage
                                             <span className="disclaimer">
-                                                <a href="#">2</a>
+                                                <a href="#disclaimer-2">2</a>
                                             </span>
                                         </li>
                                         <li>Feature flags</li>
@@ -218,6 +221,18 @@ const PricingPage = () => {
                                 Full features details <img alt="" src={imgChevronRight} />
                             </Link>
                         </Col>
+                        {state.planOptions === 'cloud' && (
+                            <div className="disclaimer-details">
+                                <div id="disclaimer-1">
+                                    1. Data may be moved to cold storage after 12 months. Queries that involve data in
+                                    cold storage can take longer than normal to run.
+                                </div>
+                                <div id="disclaimer-2">
+                                    2. While there is no restriction on session recording storage, session recording
+                                    information is captured and stored as normal events and therefore billed as such.
+                                </div>
+                            </div>
+                        )}
                     </Row>
                     <br />
                     <Row gutter={[24, 24]} style={{ marginTop: '32px' }}>
