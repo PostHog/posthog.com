@@ -114,8 +114,10 @@ export const pluginLibraryLogic = kea({
     actionToUrl: ({ values }) => ({
         setOpenPlugin: ({ pluginName }) => (!pluginName ? '/plugins/' : `/plugins/${values.pluginPathname}`),
     }),
-    urlToAction: ({ actions }) => ({
+    urlToAction: ({ actions, values }) => ({
         '/plugins': () => actions.setOpenPlugin(''),
         '/plugins/': () => actions.setOpenPlugin(''),
+        '/plugins/:pathname': ({ pathname }) =>
+            values.filteredPlugins && !values.openPlugin ? actions.setPluginPathname(pathname) : () => {},
     }),
 })
