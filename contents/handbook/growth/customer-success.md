@@ -21,24 +21,6 @@ These are the ways in which customers can currently reach us, in order of popula
 - **Papercups** - we provide in-app support chat via the [Papercups](https://papercups.io/) widget
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
-### Simple, lightweight tools
-
-We go to where our users are. That means **we respond in the same channel that they reached out to**, rather than trying to funnel them somewhere else.
-
-We use [Papercups](https://papercups.io/) as our internal platform to get an overview of our support requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog. 
-
-A quick overview of Papercups main features:
-
-- _Slack integration (1)_: You can reply directly to PostHog app questions either in Papercups itself or in the private _customer_support_ channel in the PostHog Users Slack - both work!
-- _Slack integration (2)_: In the PostHog Users Slack, the _general_ and _feedback_ channels are both synced with Papercups - similar to the above, this means you can reply to users in that Slack channel directly or Papercups. For now, we advise that you stick to replying in Slack as the integration isn't quite there yet if you reply in Papercups. 
-- _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
-- _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation.
-- _Analytics_:'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. 
-
-When replying to users in Slack, please try to reply in a thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation).
-
-Papercups are an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.  
-
 ### No dedicated support people
 
 We intentionally have not hired a single person dedicated to customer support. The direct interaction between our engineering team and our users is _hugely_ valuable, and an important part of building trust in our community is the ability for users to talk directly with the people who are actually building the product. 
@@ -47,7 +29,26 @@ Providing support is a responsibility shared across our team - we expect everyon
 
 This does mean sometimes that, especially when we are particularly busy, customer success can take a bit of a back seat. 
 
-This is why, in addition, one person takes on the Support Hero role each two week sprint. This is a rotating responsibility, where the person involved spends most-to-all of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as support hero has thrown up a lot of really valuable feedback. 
+This is why, in addition, one person takes on the **Support Hero** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+
+### Simple, lightweight tools
+
+We go to where our users are. That means **we respond in the same channel that they reached out to**, rather than trying to funnel them somewhere else.
+
+We use [Papercups](https://papercups.io/) as our internal platform to get an overview of our support requests. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. If customer success is part of your role, you should have received an invite to join as part of your onboarding - if you didn't, ask Charles. 
+
+The first time you sign into Papercups, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
+
+A quick overview of Papercups' main features:
+
+- _Main conversations view_: when you sign into Papercups, you can either [view all conversations](https://app.papercups.io/conversations/all), or just those [assigned to you](https://app.papercups.io/conversations/me). If you are the first person to respond to a query, you will be automatically assigned that conversation. Don't forget to close a conversation by ticking the box in the top right when you are done, so we know which queries have been resolved!  
+- _Slack integration (1)_: You can reply directly to PostHog app questions either in the Papercups app itself or in the private _customer_support_ channel in the [PostHog Users Slack](http://posthogusers.slack.com/) - both work.
+- _Slack integration (2)_: In the PostHog Users Slack, messages posted in the _general_ and _feedback_ channels are also synced with the Papercups app. As above, this means you can reply to users in that Slack channel directly or in Papercups. Please try to reply in a Slack thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation).
+- _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
+- _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation. This is useful for sharing context with other team members.
+- _Analytics_:'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. We don't report on these yet as we're still figuring out the best way for us to do support. 
+
+Papercups are an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.  
 
 ## Some useful questions to ask
 
