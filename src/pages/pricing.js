@@ -3,7 +3,7 @@ import { useLocation } from '@reach/router'
 import { Link } from 'gatsby'
 import queryString from 'query-string'
 import Layout from '../components/Layout'
-import { Row, Col, Button, Card, Collapse } from 'antd'
+import { Row, Col, Button, Card, Collapse, Slider } from 'antd'
 import SEO from '../components/seo'
 import './styles/pricing.scss'
 import 'antd/lib/collapse/style/css'
@@ -11,11 +11,13 @@ import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
 import imgChevronRight from '../images/chevron-right.svg'
 import imgCloudPlan from '../images/plan-cloud.svg'
+import 'antd/lib/slider/style/css'
 import { plans, faqs } from '../pages-content/pricing-data'
 import { DollarCircleTwoTone } from '@ant-design/icons'
 
 const PricingPage = () => {
     const [state, setState] = useState({ planOptions: 'cloud' })
+    const [priceSimulation, setPriceSimulation] = useState(250000)
     const comparisonRef = useRef()
     const location = useLocation()
     const { Panel } = Collapse
@@ -160,12 +162,45 @@ const PricingPage = () => {
                                     events you ingest every month.
                                 </div>
 
-                                <div className="main-price">
-                                    <div>
-                                        <DollarCircleTwoTone style={{ marginRight: 6 }} />
-                                        $0.000225/event
-                                    </div>{' '}
-                                    per month
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <div className="main-price">
+                                        <div>
+                                            <DollarCircleTwoTone style={{ marginRight: 6 }} />
+                                            $0.000225/event
+                                        </div>{' '}
+                                        per month
+                                    </div>
+                                    <div style={{ flexGrow: 1 }}>
+                                        <Slider
+                                            defaultValue={250000}
+                                            min={10000}
+                                            max={5000000}
+                                            step={10000}
+                                            tooltipVisible
+                                            tipFormatter={(value) => value.toLocaleString()}
+                                            onChange={(value) => setPriceSimulation(value)}
+                                        />
+                                        <div style={{ fontSize: '1rem' }}>
+                                            {priceSimulation < 5000000 ? (
+                                                <>
+                                                    <span className="text-muted">Monthly estimate:</span>{' '}
+                                                    <b>
+                                                        $
+                                                        {Math.round(
+                                                            (priceSimulation - 10000) * 0.000225
+                                                        ).toLocaleString()}
+                                                    </b>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
+                                                        Contact us
+                                                    </a>{' '}
+                                                    to talk pricing.
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
@@ -174,7 +209,8 @@ const PricingPage = () => {
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Have very large volumes? If you expect to capture for than 10 million events,{' '}
+                                    Have very large volumes? If you expect to capture for than 5 million events per
+                                    month,{' '}
                                     <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
                                         contact us
                                     </a>
