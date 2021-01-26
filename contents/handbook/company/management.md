@@ -22,7 +22,7 @@ A manager at PostHog is _not_ responsible for:
 1. Giving feedback (managers give feedback in their capacity as individual contributor, but so does everyone else)
 
 
-## What does setting context mean?
+## What does setting context mean?
 
 At PostHog, we exclusively hire people that are the best in their field.
 That means managers won't need to spend time telling their direct reports what to do.
