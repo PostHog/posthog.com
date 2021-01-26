@@ -7,7 +7,6 @@ showTitle: true
 For a user experience that scales for all your needs, PostHog implements the concept of organizations.
 An organization is the largest building block of PostHog's structure: it contains projects and is made up of one or more PostHog users.
 
-
 ## Projects
 
 By default an organization only has the default project. [For multiple projects – which are a premium PostHog feature – take a look at their dedicated page.](/docs/features/multiple-projects)
