@@ -19,11 +19,11 @@ As for PostHog Cloud users, they may belong to any number of organizations at th
 
 Self-hosted PostHog works a bit differently, though practically it's very similar: billing is per-instance, but a self-hosted instance can only have a single organization. As self-hosted users can only belong to the single company organization, they can easily be accounted for.
 
-## New accounts
+## New Accounts
 
 As a brand new PostHog user you'll always find yourself in a single organization upon account creation. If you've joined from an invite, that will be the organization you've been invited to. Otherwise a new organization will be created just for you, based on the company name you provided when creating the account.
 
-## Members and permissioning
+## Members and Permissioning
 
 An organization can have any number of members, besides the constraint that there always must be a single Owner.
 
