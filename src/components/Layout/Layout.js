@@ -7,7 +7,6 @@ import { Container } from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import { default as AntdLayout } from 'antd/lib/layout'
-import NewsletterForm from '../NewsletterForm'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { DocsSearch } from '../DocsSearch'
@@ -16,6 +15,8 @@ import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
+import { BlogFooter } from '../../components/BlogFooter'
+import { GetStartedModal } from '../../components/GetStartedModal'
 
 const Layout = ({
     onPostPage,
@@ -26,6 +27,7 @@ const Layout = ({
     children,
     className,
     containerStyle = {},
+    menuActiveKey,
 }) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
 
@@ -69,6 +71,7 @@ const Layout = ({
                                         onPostPage={onPostPage}
                                         isBlogArticlePage={isBlogArticlePage}
                                         isHomePage={isHomePage}
+                                        menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
                                     />
                                     {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                                         <span className="display-mobile">
@@ -137,10 +140,11 @@ const Layout = ({
                             </AntdLayout>
                         </AntdLayout>
                         <AntdLayout style={{ background: '#ffffff' }}>
-                            {isBlogArticlePage && <NewsletterForm />}
+                            {isBlogArticlePage && <BlogFooter />}
                             <Footer onPostPage={onPostPage} />
                         </AntdLayout>
                         <PosthogAnnouncement />
+                        <GetStartedModal />
                     </>
                 )
             }}

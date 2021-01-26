@@ -90,6 +90,11 @@ body.dark .post-page-wrapper {
             color: #b78aff !important;
         }
 
+        .header-key-active span {
+            color: #b78aff !important;
+            border-bottom: solid 2px #b78aff;
+        }
+
         .docs-footer,
         .note-block,
         blockquote,
