@@ -10,7 +10,12 @@ import './style.scss'
 
 export const GetStartedModal = () => {
     const { isGetStartedModalOpen } = useValues(layoutLogic)
-    const { setIsGetStartedModalOpen } = useActions(layoutLogic)
+    const { setIsGetStartedModalOpen, onChangeMenuState } = useActions(layoutLogic)
+
+    const closeEverythingOnClick = () => {
+        setIsGetStartedModalOpen(false)
+        onChangeMenuState(1)
+    }
 
     return (
         <Modal
@@ -32,7 +37,7 @@ export const GetStartedModal = () => {
                         <p>This is the simplest way to get started. Create an account.</p>
                     </div>
                 </a>
-                <Link to="/docs/deployment">
+                <Link to="/docs/deployment" onClick={closeEverythingOnClick}>
                     <div className="modalSelfDeploy modalCard">
                         <div className="modalCardHeader">
                             <img src={modalSelfDeploy} alt="modal-self-deploy " />
