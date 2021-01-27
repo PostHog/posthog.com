@@ -6,7 +6,6 @@ import { Container } from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
 import ResponsiveTopBar from '../ResponsiveTopBar'
 import { default as AntdLayout } from 'antd/lib/layout'
-import NewsletterForm from '../NewsletterForm'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { DocsSearch } from '../DocsSearch'
@@ -15,6 +14,8 @@ import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
+import { GetStartedModal } from '../../components/GetStartedModal'
+import { BlogFooter } from '../../components/BlogFooter'
 
 interface LayoutProps {
     pageTitle?: string
@@ -25,6 +26,7 @@ interface LayoutProps {
     children?: any
     className?: string
     containerStyle?: Object
+    menuActiveKey: string
 }
 
 const Layout = ({
@@ -36,6 +38,7 @@ const Layout = ({
     children,
     className = '',
     containerStyle = {},
+    menuActiveKey,
 }: LayoutProps) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
 
@@ -58,7 +61,12 @@ const Layout = ({
                         id="menu-header"
                         style={{ background: '#ffffff' }}
                     >
-                        <Header onPostPage={onPostPage} isBlogArticlePage={isBlogArticlePage} isHomePage={isHomePage} />
+                        <Header
+                            onPostPage={onPostPage}
+                            isBlogArticlePage={isBlogArticlePage}
+                            isHomePage={isHomePage}
+                            menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
+                        />
                         {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                             <span className="display-mobile">
                                 <ResponsiveTopBar />
@@ -126,10 +134,11 @@ const Layout = ({
                 </AntdLayout>
             </AntdLayout>
             <AntdLayout style={{ background: '#ffffff' }}>
-                {isBlogArticlePage && <NewsletterForm />}
+                {isBlogArticlePage && <BlogFooter />}
                 <Footer onPostPage={onPostPage} />
             </AntdLayout>
             <PosthogAnnouncement />
+            <GetStartedModal />
         </>
     )
 }
