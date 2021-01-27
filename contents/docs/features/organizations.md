@@ -9,7 +9,7 @@ An organization is the largest building block of PostHog's structure: it contain
 
 ## Projects
 
-By default an organization only has the default project. [For multiple projects – which are a premium PostHog feature – take a look at their dedicated page.](/docs/features/multiple-projects)
+By default an organization only has the default project. For multiple projects – which are a premium PostHog feature – [take a look at their dedicated page](/docs/features/multiple-projects).
 
 ## Cloud vs. Self-Hosted
 
@@ -26,13 +26,13 @@ As a brand new PostHog user you'll always find yourself in a single organization
 
 An organization can have any number of members, besides the constraint that there always must be a single Owner.
 
-Members have varying access levels with different implications. From bottom up to top:
+Members have varying access levels with different implications. From the bottom up:
 
 1. **Member** – plain organization member:
 
-    - has access to full analytics features
+    - has full access to analytics features
     - can create projects, but not delete them
-    - can leave
+    - can leave the organization
     - can invite others, but not remove them
     - has access to billing management
 
@@ -50,7 +50,7 @@ Members have varying access levels with different implications. From bottom up t
 
 ## Invitations
 
-Any organization member can create organization invites. Such an invite is valid for 3 days after creation and **only for the specific provided email**.
+Any organization member can create organization invites. Such an invite is valid for 3 days after creation and **only for the specified email**.
 
 If there's no account associated with that email, the invited person will have to create an account. Otherwise they'll be able to join with their existing account.
 
