@@ -42,7 +42,7 @@ const PricingPage = () => {
     )
 
     return (
-        <Layout>
+        <Layout menuActiveKey="pricing">
             <div className="pricing-page-wrapper">
                 <div className="pricing-page-container">
                     <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
