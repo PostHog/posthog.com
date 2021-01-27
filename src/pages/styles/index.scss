@@ -322,7 +322,7 @@
         border: none;
     }
 
-    .requestDemo {
+    .scheduleDemo {
         display: flex;
         flex-direction: row;
         padding: 8px;
@@ -334,7 +334,7 @@
         text-align: center;
     }
 
-    .requestDemo:hover {
+    .scheduleDemo:hover {
         border-color: none;
         background-color: #a0a0a0;
         color: #ffffff;
@@ -345,7 +345,7 @@
             position: relative;
             margin: 10% 0;
         }
-        .requestDemo {
+        .scheduleDemo {
             position: relative;
             left: 0;
             margin: 10% 0;

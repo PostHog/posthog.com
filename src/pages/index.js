@@ -71,9 +71,9 @@ function IndexPage() {
                                         >
                                             Get Started for Free
                                         </Button>
-                                        <a href="/request_demo">
-                                            <Button type="primary" size="large" className="requestDemo">
-                                                Request Demo
+                                        <a href="/schedule-demo">
+                                            <Button type="primary" size="large" className="scheduleDemo">
+                                                Schedule Demo
                                             </Button>
                                         </a>
                                     </div>

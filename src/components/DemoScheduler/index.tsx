@@ -2,15 +2,11 @@ import React from 'react'
 import { Spacer } from '../Spacer'
 import './style.scss'
 
-export const DemoScheduler = () => {
+export const DemoScheduler = ({ iframeSrc = 'https://calendly.com/yakko/yc-onboarding' }: { iframeSrc?: string }) => {
     return (
         <>
             <div>
-                <iframe
-                    src="https://calendly.com/yakko/yc-onboarding"
-                    className="centered calendly-frame"
-                    style={{ margin: 'auto' }}
-                />
+                <iframe src={iframeSrc} className="centered calendly-frame" style={{ margin: 'auto' }} />
             </div>
             <Spacer height={100} />
         </>
