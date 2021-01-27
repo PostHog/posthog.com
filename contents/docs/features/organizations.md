@@ -11,6 +11,13 @@ An organization is the largest building block of PostHog's structure: it contain
 
 By default an organization only has the default project. For multiple projects – which are a premium PostHog feature – [take a look at their dedicated page](/docs/features/multiple-projects).
 
+### Segregating data into multiple projects
+
+The data you send to one project is completely segregated from the others, which requires you to have a think about what data should go where. In general, we recommend using multiple projects to do the following, for example:
+
+- Keep data from different environments separate (e.g. dev, prod, and staging): You don't want your staging data mixed with data from real users!
+- Completely separate products: If you have a mobile app and a web app for the same product, it makes sense to keep all this data in one project, so you can analyze users across these different facets of the same product. However, if your company has multiple standalone products, you should probably consider having a project per product.
+
 ## Cloud vs. Self-Hosted
 
 On PostHog Cloud, billing is per-organization with premium features pertaining specifically to the billed organization.
