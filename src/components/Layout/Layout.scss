@@ -1484,9 +1484,12 @@ for all other rows the portrait image wraps above bio*/
 }
 
 .main-nav-cta {
-    border-radius: 4px;
-    padding: 6px 8px;
+    border: 1px solid $border;
+    border-radius: 2px;
+    padding: 8px 16px;
     color: #fff;
+    transition: background-color 300ms ease-out;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 
 .main-nav-cta-wrapper:hover {
@@ -1494,20 +1497,22 @@ for all other rows the portrait image wraps above bio*/
 }
 
 .main-nav-cta-dark-bg {
-    background-color: $brand_red;
+    background-color: white;
+    color: $text_default;
 }
 
 .main-nav-cta-light-bg {
     background-color: $primary;
+    border-color: $primary;
 }
 
 .main-nav-cta-wrapper:hover {
     .main-nav-cta-light-bg {
-        background-color: #6885f8;
+        background-color: darken($primary, 5%);
     }
 
     .main-nav-cta-dark-bg {
-        background-color: #f57033;
+        background-color: darken(white, 20%);
     }
 }
 

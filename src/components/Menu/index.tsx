@@ -65,7 +65,7 @@ function Menu({ isBlogArticlePage = false, isHomePage = false, activeKey }: Menu
                                                 : 'main-nav-cta-light-bg')
                                         }
                                     >
-                                        Start For Free
+                                        Get started now
                                     </span>
                                 </a>
                             </AntMenu.Item>
