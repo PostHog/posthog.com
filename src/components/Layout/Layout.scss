@@ -1497,13 +1497,19 @@ for all other rows the portrait image wraps above bio*/
 }
 
 .main-nav-cta-dark-bg {
-    background-color: white;
-    color: $text_default;
+    background-color: #353f6f;
+    border-color: #fff;
+    border-radius: 2px;
+    color: #fff;
 }
 
 .main-nav-cta-light-bg {
     background-color: $primary;
     border-color: $primary;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition-delay: 0s;
 }
 
 .main-nav-cta-wrapper:hover {
@@ -1512,7 +1518,9 @@ for all other rows the portrait image wraps above bio*/
     }
 
     .main-nav-cta-dark-bg {
-        background-color: darken(white, 20%);
+        background-color: #fff !important;
+        color: #353f6f !important;
+        border-color: #353f6f !important;
     }
 }
 
