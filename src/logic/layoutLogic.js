@@ -15,6 +15,7 @@ export const layoutLogic = kea({
         onSidebarContentExpanded: (expandedKeys) => ({ expandedKeys }),
         onSidebarContentSelected: (selectedKey) => ({ selectedKey }),
         onChangeMenuState: (nItem) => ({ nItem }),
+        setIsGetStartedModalOpen: (open) => ({ open }),
     },
 
     reducers: {
@@ -102,6 +103,12 @@ export const layoutLogic = kea({
             null,
             {
                 onChangeMenuState: (state, { nItem }) => nItem,
+            },
+        ],
+        isGetStartedModalOpen: [
+            false,
+            {
+                setIsGetStartedModalOpen: (_, { open }) => open,
             },
         ],
     },
