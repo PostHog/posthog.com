@@ -6,7 +6,7 @@ import whiteLogo from '../../images/posthog-logo-white.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
-function Header({ onPostPage, isBlogArticlePage, isHomePage, menuActiveKey }) {
+function Header({ onPostPage, isBlogArticlePage, isHomePage }) {
     const { sidebarHide } = useValues(layoutLogic)
 
     return (
@@ -16,12 +16,7 @@ function Header({ onPostPage, isBlogArticlePage, isHomePage, menuActiveKey }) {
                     <img alt="logo" id="logo-image-header" src={isHomePage || isBlogArticlePage ? whiteLogo : logo} />
                 </Link>
             )}
-            <Menu
-                isBlogArticlePage={isBlogArticlePage}
-                isHomePage={isHomePage}
-                onPostPage={onPostPage}
-                activeKey={menuActiveKey}
-            />
+            <Menu isBlogArticlePage={isBlogArticlePage} isHomePage={isHomePage} onPostPage={onPostPage} />
         </div>
     )
 }
