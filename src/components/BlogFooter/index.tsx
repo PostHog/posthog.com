@@ -14,8 +14,8 @@ export function BlogFooter() {
             <hr className="blog-footer-divider" />
             <Spacer />
 
-            <Row>
-                <Col span={10}>
+            <Row className="blog-footer-row">
+                <Col span={8}>
                     <img src={coolHedgehog} className="centered blog-footer-img" height={170} />
                 </Col>
                 <Col span={14}>
@@ -34,6 +34,7 @@ export function BlogFooter() {
                         </Button>
                     </div>
                 </Col>
+                <Col span={2} className="blog-footer-spacer-row-desktop" />
             </Row>
             <Spacer />
         </div>
