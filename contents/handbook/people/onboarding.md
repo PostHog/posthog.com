@@ -118,9 +118,10 @@ We use a number of different tools to organise our work and communicate at PostH
 - HubSpot - for managing all sales
 - Papercups - our support platform
 - Pry - financial modelling
-- Pulley - cap table management
-- Clerky - generates legal docs and US contracts
+- Captable.io - cap table management
 - Fondo - US accounting
+- Xero - UK accounting
+- Calendly - external meeting scheduling (e.g. demos, sales)
 - Gusto - US payroll
 - Deel - international payroll and contracts
 - Workable - recruitment tool
