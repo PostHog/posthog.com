@@ -11,10 +11,9 @@ export const ScheduleDemo = () => {
                 <Spacer />
                 <h1 className="centered">Schedule Demo</h1>
                 <p>
-                    Use the widget below to schedule a demo call with Yakko, one of our engineers. During this slot we
-                    can we can help you set up and give you access to a demo PostHog instance to play around with. If
-                    you're already using PostHog, we can also help you create some useful dashboards or clarify any
-                    questions you may have.
+                    Use the widget below to schedule a demo call with one of our engineers. We will discuss what you
+                    need, show you the platform, get you set up if possible, and can also give you access to a demo
+                    instance so you can try out PostHog yourself.
                 </p>
                 <br />
                 <p>
