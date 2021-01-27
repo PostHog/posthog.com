@@ -22,6 +22,11 @@
         text-justify: inter-word;
     }
 
+    .blog-footer-row {
+        max-width: 800px;
+        margin: auto;
+    }
+
     @media screen and (max-width: 1076px) {
         .blog-footer-description {
             font-size: 14px !important;
@@ -43,6 +48,14 @@
 
         h4 {
             font-size: 18px !important;
+        }
+
+        .ant-col-14 {
+            width: 65%;
+        }
+
+        .ant-col-8 {
+            width: 35%;
         }
     }
 
