@@ -153,11 +153,11 @@ We recommend you appoint a group for us to collaborate with similar to the follo
 
 PostHog will provide:
 
-* A Deployment Specialist to ensure your isntance of PostHog is scaled and operating appropriately
+* A Deployment Specialist to ensure your instance of PostHog is scaled and operating appropriately
 * A Customer Success person to ensure the success of the project and commercial side of the engagement
 * A Developer Experience person with a developer background to help with configuration and implementation
 * Multiple engineers for more specialist questions
-* Executive support to ensure long term sucess
+* Executive support to ensure long term success
 
 Ideally, the above would be set up in a private Slack group, but we can provide alternative solutions as needed.
 
@@ -220,5 +220,5 @@ Your experience working with us will be remarkable. Here's why:
 * _Transparency_. PostHog provides full transparency into
 * _Collaboration_. Our roadmap is publicly available, and your team are able to get full access to the code, to raise feature requests and 
 * _Financial stability_. We have raised significant funding from the world's best investors such as Google Ventures and YCombinator. We are growing very significantly as we've had so much traction.
-* _End-user focus_. We are end user focussed. The reason we've raised significant financing is so we can focus on each product manager, each engineer and each data analyst using the platform first and foremost. So many enterprise software deployments fail fundamentally due to a lack of usability.
+* _End-user focus_. We are end user focused. The reason we've raised significant financing is so we can focus on each product manager, each engineer and each data analyst using the platform first and foremost. So many enterprise software deployments fail fundamentally due to a lack of usability.
 * _Experience_. Our team have worked on enterprise software implementation before, and many of us have worked in hypergrowth companies that have seen the challenges of software in environments that move quickly even at scale. We can work at your speed, however fast or slow that needs to be.
