@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { Col, Row, Button } from 'antd'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { useValues } from 'kea'
 
 export const DocsPageSurvey = () => {
     const [submittedResponse, setSubmittedResponse] = useState(false)
+    const { posthog } = useValues(posthogAnalyticsLogic)
 
     const submitResponse = (wasHelpful) => {
-        if (window.posthog) {
-            window.posthog.capture('docs_page_review', {
+        if (posthog) {
+            posthog.capture('docs_page_review', {
                 wasHelpful: wasHelpful,
             })
         }
