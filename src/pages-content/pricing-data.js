@@ -89,6 +89,11 @@ const faqs = [
             'On the Cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Enterprise and Open Source plans, you control your data retention and what happens to your data afterwards.',
     },
     {
+        q: 'Do I pay anything for stored events?',
+        a:
+            'No, you only pay the flat fee per captured event (i.e. you only pay when each event is first received). There are no additional costs or fees.',
+    },
+    {
         q: 'Can I switch between the Cloud and Enterprise plans?',
         a:
             'We are working hard to enable a bridge that allows data transfer between cloud instances and enterprise instances. This will be possible in the coming months.',

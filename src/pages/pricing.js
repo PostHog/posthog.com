@@ -159,7 +159,7 @@ const PricingPage = () => {
                                 <h4>One Price. Pay only for what you use.</h4>
                                 <div>
                                     Get all the features with a straight and transparent pricing. Pay based on the
-                                    events you ingest every month.
+                                    events you <b>capture</b> every month.
                                 </div>
 
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
