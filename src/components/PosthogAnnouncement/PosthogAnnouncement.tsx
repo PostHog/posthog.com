@@ -10,11 +10,11 @@ export const PosthogAnnouncement = () => {
     const [announcementText, setAnnouncementText] = useState('')
     const [announcementLink, setAnnouncementLink] = useState('')
 
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const { posthog, featureFlags } = useValues(posthogAnalyticsLogic)
 
     useEffect(() => {
         if (window && posthog) {
-            const announcements = (posthog.persistence.props.$active_feature_flags || []).filter((flag: string) =>
+            const announcements = (Object.keys(featureFlags) || []).filter((flag: string) =>
                 flag.includes('Announcement:')
             )
             if (announcements.length > 0) {
