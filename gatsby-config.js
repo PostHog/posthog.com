@@ -26,14 +26,7 @@ module.exports = {
                 path: `${__dirname}/contents`,
             },
         },
-        {
-            resolve: `gatsby-plugin-mdx`,
-            options: {
-                defaultLayouts: {
-                    default: require.resolve('./src/templates/TemplateMdx.js'),
-                },
-            },
-        },
+        `gatsby-plugin-mdx`,
         `gatsby-transformer-json`,
         {
             resolve: `gatsby-source-filesystem`,
