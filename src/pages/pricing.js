@@ -162,26 +162,26 @@ const PricingPage = () => {
                                     events you <b>capture</b> every month.
                                 </div>
 
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <div>
                                     <div className="main-price">
                                         <div>
                                             <DollarCircleTwoTone style={{ marginRight: 6 }} />
                                             $0.000225/event
-                                        </div>{' '}
-                                        per month
+                                            <span>per month</span>
+                                        </div>
                                     </div>
-                                    <div style={{ flexGrow: 1 }}>
+                                    <div>
                                         <Slider
                                             defaultValue={250000}
                                             min={10000}
-                                            max={5000000}
-                                            step={10000}
+                                            max={4000000}
+                                            step={20000}
                                             tooltipVisible
                                             tipFormatter={(value) => value.toLocaleString()}
                                             onChange={(value) => setPriceSimulation(value)}
                                         />
-                                        <div style={{ fontSize: '1rem' }}>
-                                            {priceSimulation < 5000000 ? (
+                                        <div style={{ fontSize: '1rem', textAlign: 'right' }}>
+                                            {priceSimulation < 4000000 ? (
                                                 <>
                                                     <span className="text-muted">Monthly estimate:</span>{' '}
                                                     <b>
@@ -209,7 +209,7 @@ const PricingPage = () => {
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Have very large volumes? If you expect to capture for than 5 million events per
+                                    Have very large volumes? If you expect to capture for than 4 million events per
                                     month,{' '}
                                     <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
                                         contact us
@@ -224,7 +224,7 @@ const PricingPage = () => {
                                     <div className="text-center">
                                         <h5>Features included</h5>
                                     </div>
-                                    <ul>
+                                    <ul style={{ listStyle: 'none' }}>
                                         <li>
                                             <b>Unlimited</b> event allocation. Pay only for what you use.
                                         </li>
@@ -268,7 +268,7 @@ const PricingPage = () => {
                             All prices in US Dollars (USD), excluding taxes
                         </Col>
                         <Col span={24} align="middle">
-                            <Link to="/docs/features" className="p-features-link">
+                            <Link to="/product-features" className="p-features-link">
                                 Full features details <img alt="" src={imgChevronRight} />
                             </Link>
                         </Col>

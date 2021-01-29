@@ -285,9 +285,14 @@
                 font-size: 1.2rem;
                 font-weight: bold;
                 color: #2d2d2d;
+
+                span {
+                    margin-left: 8px;
+                    font-size: 1rem;
+                    color: #bfbfbf;
+                }
             }
-            font-size: 1rem;
-            color: #bfbfbf;
+
             margin-top: 16px;
             margin-right: 32px;
         }
