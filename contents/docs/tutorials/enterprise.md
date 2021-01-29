@@ -10,7 +10,7 @@ showTitle: true
 
 <br />
 
-Thinking of using PostHog at a larger organization and want more information first?
+Thinking of using PostHog at a larger organization and need more information first?
 
 This tutorial is designed to give you a quick overview of how and why, the product and our organization work with people like you!
 
