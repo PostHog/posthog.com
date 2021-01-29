@@ -14,7 +14,7 @@ const { TabPane } = Tabs
 
 export const PluginLibraryPage = () => {
     const { filteredPlugins, filter } = useValues(pluginLibraryLogic)
-    const { setFilter, setOpenPlugin } = useActions(pluginLibraryLogic)
+    const { setFilter, openPlugin } = useActions(pluginLibraryLogic)
 
     return (
         <Layout>
@@ -43,7 +43,7 @@ export const PluginLibraryPage = () => {
                                 link={plugin.url}
                                 imageSrc={getPluginImageSrc(plugin)}
                                 isCommunityPlugin={plugin.maintainer === 'community'}
-                                onClick={() => setOpenPlugin(plugin.name)}
+                                onClick={() => openPlugin(plugin.name)}
                             />
                         ))
                     ) : (

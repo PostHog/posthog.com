@@ -2,12 +2,15 @@ import { kea } from 'kea'
 import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import { getPluginImageSrc } from '../lib/utils'
 
+const toPathName = (pluginName) => pluginName.toLowerCase().replaceAll(' ', '-')
+
 export const pluginLibraryLogic = kea({
     actions: {
         setFilter: (filter) => ({ filter }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),
-        setOpenPlugin: (pluginName) => ({ pluginName }),
-        setPluginPathname: (pathname) => ({ pathname }),
+        openLibrary: true,
+        openPlugin: (pluginName) => ({ pluginName }),
+        openPluginPath: (pathname) => ({ pathname }),
     },
     reducers: () => ({
         filter: [
@@ -25,20 +28,22 @@ export const pluginLibraryLogic = kea({
         activePluginName: [
             '',
             {
-                setOpenPlugin: (_, { pluginName }) => pluginName ?? '',
+                openPlugin: (_, { pluginName }) => pluginName,
+                openLibrary: () => '',
             },
         ],
         pluginPathname: [
             '',
             {
-                setPluginPathname: (_, { pathname }) => pathname,
-                setOpenPlugin: (_, { pluginName }) => (pluginName ? pluginName.toLowerCase().replaceAll(' ', '-') : ''),
+                openPluginPath: (_, { pathname }) => pathname,
+                openPlugin: (_, { pluginName }) => toPathName(pluginName),
+                openLibrary: () => '',
             },
         ],
         pluginLoading: [
             false,
             {
-                setOpenPlugin: () => true,
+                openPlugin: () => true,
                 setActivePlugin: () => false,
             },
         ],
@@ -65,7 +70,7 @@ export const pluginLibraryLogic = kea({
         pluginMatch: [
             (s) => [s.pluginPathname, s.filteredPlugins],
             (pluginPathname, filteredPlugins) =>
-                filteredPlugins.filter((plugin) => plugin.name.toLowerCase().replaceAll(' ', '-') === pluginPathname),
+                filteredPlugins.find((plugin) => toPathName(plugin.name) === pluginPathname),
         ],
     },
     events: ({ actions }) => ({
@@ -76,21 +81,21 @@ export const pluginLibraryLogic = kea({
             }
         },
     }),
-
     listeners: ({ values, actions }) => ({
-        setOpenPlugin: async ({ pluginName }) => {
-            if (!pluginName) {
-                return
-            }
+        openPlugin: async ({ pluginName }) => {
             const { setActivePlugin } = actions
             let plugin = values.filteredPlugins.filter((plugin) => plugin.name === pluginName)[0]
             let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
-            if (plugin.url.includes('github')) {
-                const response = await window.fetch(
-                    `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/README.md`
-                )
-                if (response.status === 200) {
-                    markdown = await response.text()
+            if (plugin.url.includes('github.com/')) {
+                try {
+                    const response = await window.fetch(
+                        `https://raw.githubusercontent.com/${plugin.url.split('github.com/')[1]}/main/README.md`
+                    )
+                    if (response.status === 200) {
+                        markdown = await response.text()
+                    }
+                } catch (e) {
+                    // can't load the readme, revert to default text
                 }
             }
             if (!markdown.includes('Installation')) {
@@ -98,28 +103,32 @@ export const pluginLibraryLogic = kea({
             }
             plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
             plugin['imageSrc'] = getPluginImageSrc(plugin)
-
             setActivePlugin(plugin)
         },
         loadPluginsSuccess: () => {
-            const { setPluginPathname } = actions
-            setPluginPathname(window.location.pathname.split('plugins/')[1])
+            const { openPluginPath } = actions
+            openPluginPath(window.location.pathname.split('/plugins/')[1])
         },
-        setPluginPathname: () => {
+        openPluginPath: () => {
             const { pluginMatch, pluginsLoading } = values
-            const { setOpenPlugin } = actions
-            if (!pluginsLoading) {
-                setOpenPlugin(pluginMatch[0] ? pluginMatch[0].name : '')
+            if (pluginsLoading) {
+                return
+            }
+            if (pluginMatch) {
+                actions.openPlugin(pluginMatch.name)
+            } else {
+                actions.openLibrary()
             }
         },
     }),
-    actionToUrl: ({ values }) => ({
-        setOpenPlugin: ({ pluginName }) => (!pluginName ? '/plugins/' : `/plugins/${values.pluginPathname}`),
+    actionToUrl: () => ({
+        openLibrary: () => '/plugins/',
+        openPlugin: ({ pluginName }) => `/plugins/${toPathName(pluginName)}`,
+        openPluginPath: ({ pathname }) => `/plugins/${pathname}`,
     }),
-    urlToAction: ({ actions, values }) => ({
-        '/plugins': () => actions.setOpenPlugin(''),
-        '/plugins/': () => actions.setOpenPlugin(''),
-        '/plugins/:pathname': ({ pathname }) =>
-            values.filteredPlugins && !values.openPlugin ? actions.setPluginPathname(pathname) : () => {},
+    urlToAction: ({ actions }) => ({
+        '/plugins': () => actions.openLibrary(),
+        '/plugins/': () => actions.openLibrary(),
+        '/plugins/:pathname': ({ pathname }) => actions.openPluginPath(pathname),
     }),
 })
