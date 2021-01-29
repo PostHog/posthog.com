@@ -51,7 +51,8 @@
             "docs/tutorials/spa",
             "docs/tutorials/actions",
             "docs/tutorials/b2b",
-            "docs/tutorials/revenue"
+            "docs/tutorials/revenue",
+            "docs/tutorials/enterprise"
         ],
         "child_entries": ["1 Minute Tutorials"]
     },
@@ -330,6 +331,7 @@
         "entry": "Engineering",
         "name": "Engineering",
         "items": [
+            "handbook/engineering/deployment-strategy",
             "handbook/engineering/development-process",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
