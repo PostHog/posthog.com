@@ -80,7 +80,7 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> Put on an out of office and then deactivate the GSuite account for the team member <br />
 <input type="checkbox"/> Make any outstanding notice payments (if applicable) <br />
 <input type="checkbox"/> Mark the employee has departed in Pulley <br />
-<input type="checkbox"/> Cancel team member's company card on Brex <br />
+<input type="checkbox"/> Cancel team member's company card on Brex - _check if they have any company subscriptions first that need transferring_ <br />
 <input type="checkbox"/> Remove team member from PostHog organization in GitHub <br />
 <input type="checkbox"/> Remove team member from the internal company Slack <br />
 <input type="checkbox"/> Remove team member from PostHog Users Slack <br />

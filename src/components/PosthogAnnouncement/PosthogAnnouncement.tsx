@@ -10,16 +10,16 @@ export const PosthogAnnouncement = () => {
     const [announcementText, setAnnouncementText] = useState('')
     const [announcementLink, setAnnouncementLink] = useState('')
 
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const { posthog, featureFlags } = useValues(posthogAnalyticsLogic)
 
     useEffect(() => {
         if (window && posthog) {
-            const announcements = (posthog.persistence.props.$active_feature_flags || []).filter((flag: string) =>
+            const announcements = (Object.keys(featureFlags) || []).filter((flag: string) =>
                 flag.includes('Announcement:')
             )
             if (announcements.length > 0) {
                 const announcement = announcements[0].split('Announcement: ')[1].split(' Link: ')
-                if (!localStorage.getItem(`hide-announcement-${unsafeHash(announcement[0])}`)) {
+                if (!window.localStorage.getItem(`hide-announcement-${unsafeHash(announcement[0])}`)) {
                     setAnnouncementText(announcement[0])
                     setAnnouncementLink(announcement[1])
                     setShowAnnouncement(true)
@@ -34,7 +34,9 @@ export const PosthogAnnouncement = () => {
             e.stopPropagation()
         }
         setShowAnnouncement(false)
-        localStorage.setItem(`hide-announcement-${unsafeHash(announcementText)}`, '1')
+        if (window) {
+            window.localStorage.setItem(`hide-announcement-${unsafeHash(announcementText)}`, '1')
+        }
         if (posthog) {
             posthog.capture(source === 'link' ? 'clicked_announcement' : 'closed_announcement', {
                 announcement: announcementText,
