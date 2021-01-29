@@ -78,7 +78,9 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                 />
                 <div className="docsPagesContainer">
                     <div className="docsPages">
-                        {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && <h1>{frontmatter.title}</h1>}
+                        {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
+                            <h1 className="centered">{frontmatter.title}</h1>
+                        )}
                         <div className="docsPagesContent">
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
