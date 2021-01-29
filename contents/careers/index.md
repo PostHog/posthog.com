@@ -95,7 +95,7 @@ The stages of our hiring process are:
 
 ## Benefits
 
-* [Generous, transparent compansation](/handbook/people/compensation)
+* [Generous, transparent compensation](/handbook/people/compensation)
 * [Share options](/handbook/people/compensation#share-options)
 * [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
 * Health insurance including dental and vision provided in the US via our payroll provider [Gusto](https://gusto.com/)
