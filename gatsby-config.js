@@ -27,12 +27,13 @@ module.exports = {
             },
         },
         {
-            resolve: 'gatsby-plugin-page-creator',
+            resolve: `gatsby-plugin-mdx`,
             options: {
-                path: `${__dirname}/contents`,
+                defaultLayouts: {
+                    default: require.resolve('./src/templates/TemplateMdx.js'),
+                },
             },
         },
-        `gatsby-plugin-mdx`,
         `gatsby-transformer-json`,
         {
             resolve: `gatsby-source-filesystem`,
