@@ -91,8 +91,10 @@ Normally, you would put this below `posthog.init` if you have the information th
 If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and after they signed up will be shown under the same user.
 
 ```js
-posthog.identify('[user unique id]');
+posthog.identify('[user unique id]', { userProperty: 'xxxx' });
 ```
+
+You can also pass a second argument to `posthog.identify` which is an object consisting of as many properties as you want to be set on that user's profile. This operates in the same way as `posthog.people.set`. 
 
 Warning! You can't call identify straight after an .init (as .init sends a page view, probably with the user's anonymous id. To combat this, you can call .init with a callback, inside which you can then call identify.
 
