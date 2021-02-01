@@ -81,7 +81,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged && node mdxImportGen"
+            "pre-commit": "node mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
     "lint-staged": {
