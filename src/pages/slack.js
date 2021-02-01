@@ -21,12 +21,9 @@ function Slack() {
 
     return (
         <div style={{ display: 'flex', alignItems: 'center', marginTop: 48, fontSize: 16, flexDirection: 'column' }}>
-            <h1>We're redirecting you to the Slack.</h1>
-            <div style={{ marginTop: 16 }}>
-                <Spin size="large" />
-            </div>
+            <h1 style={{ marginBottom: '1rem' }}>We're redirecting you to Slack.</h1>
             {source === 'app' && (
-                <div style={{ marginTop: 32 }}>
+                <div style={{ fontSize: '1.1rem', color: 'var(--muted)' }}>
                     Remember to use the{' '}
                     <b>
                         <span style={{ color: 'var(--danger)' }}>same email</span> you used to sign up
@@ -34,6 +31,9 @@ function Slack() {
                     in the PostHog app.
                 </div>
             )}
+            <div style={{ marginTop: '2rem' }}>
+                <Spin size="large" />
+            </div>
         </div>
     )
 }
