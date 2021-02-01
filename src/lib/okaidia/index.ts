@@ -55,7 +55,7 @@ export const OkaidiaTheme: PrismTheme = {
         {
             types: ['builtin', 'char', 'constant', 'function'],
             style: {
-                color: '#f92672',
+                color: '#e6db74',
             },
         },
         {

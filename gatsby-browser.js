@@ -7,7 +7,6 @@
 import 'prismjs/themes/prism-okaidia.css'
 import { wrapElement, initKea } from './kea'
 
-require('./src/lib/prism-nightowl.css')
 initKea(false)
 
 export const wrapRootElement = wrapElement
