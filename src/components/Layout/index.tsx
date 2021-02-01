@@ -38,7 +38,7 @@ const Layout = ({
     children,
     className = '',
     containerStyle = {},
-    menuActiveKey,
+    menuActiveKey = '',
 }: LayoutProps) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
 
