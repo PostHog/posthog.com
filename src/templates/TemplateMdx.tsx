@@ -11,7 +11,7 @@ import { DocsPageSurvey } from '../components/DocsPageSurvey'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { CodeBlock } from '../components/CodeBlock'
-
+import { shortcodes } from '../mdxGlobalComponents'
 interface MdxQueryData {
     mdx: {
         id: string
@@ -31,6 +31,7 @@ interface MdxQueryData {
 
 const components = {
     pre: CodeBlock,
+    ...shortcodes,
 }
 
 function addIndex(url: string) {
