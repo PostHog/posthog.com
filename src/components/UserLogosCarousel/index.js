@@ -89,3 +89,4 @@ const UserLogosCarousel = () => {
 }
 
 export default UserLogosCarousel
+export { UserLogosCarousel }
