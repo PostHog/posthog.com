@@ -5,5 +5,9 @@
  */
 
 // You can delete this file if you're not using it
-import wrapWithProvider from './wrap-with-provider'
-export const wrapRootElement = wrapWithProvider
+import { wrapElement, initKea } from './kea'
+
+export const wrapPageElement = ({ element, props }) => {
+    initKea(true, props.location)
+    return wrapElement({ element })
+}

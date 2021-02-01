@@ -47,8 +47,9 @@
         "gatsby-transformer-remark": "^2.8.7",
         "gatsby-transformer-sharp": "^2.2.14",
         "katex": "^0.12.0",
-        "kea": "^2.2.0",
+        "kea": "^2.2.2",
         "kea-loaders": "^0.3.0",
+        "kea-router": "^0.5.1",
         "node-sass": "^4.14.1",
         "prism-react-renderer": "^1.1.1",
         "prismjs": "^1.23.0",
@@ -62,6 +63,7 @@
         "react-modal": "^3.11.2",
         "react-redux": "^7.2.1",
         "react-responsive": "^6.1.2",
+        "redux": "^4.0.5",
         "reselect": "^4.0.0",
         "typescript": "^4.0.2"
     },

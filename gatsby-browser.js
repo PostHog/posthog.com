@@ -4,9 +4,10 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-// You can delete this file if you're not using it
-import wrapWithProvider from './wrap-with-provider'
-export const wrapRootElement = wrapWithProvider
+import 'prismjs/themes/prism-okaidia.css'
+import { wrapElement, initKea } from './kea'
 
-// gatsby-browser.js
 require('./src/lib/prism-nightowl.css')
+initKea(false)
+
+export const wrapRootElement = wrapElement

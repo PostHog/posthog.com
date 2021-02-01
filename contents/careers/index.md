@@ -18,7 +18,7 @@ We've made a crazy amount of progress to date.
 
 We took part in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most successful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just 4 weeks old.
 
-Our GitHub repo has over over 3.3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
+Our GitHub repo has over over 3.7k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
@@ -80,7 +80,7 @@ The stages of our hiring process are:
   The video call is going to take 30 minutes and the goal is to ensure you will be a great cultural addition to the team and of course to answer any questions you   might have about PostHog or the role. 
 
 **[Technical interview](/handbook/people/hiring-process#interview-2---technical)** with the [hiring team](/handbook/company/team).
-  This is usually 2 PostHog team members spending an hour with the candidate. This interview will focus on the skills needed to fill the role.
+  This is usually 2 PostHog team members spending 45-60 minutes with the candidate. This interview will focus on the skills needed to fill the role.
   
 **[PostHog SuperDay](/handbook/people/hiring-process#posthog-superday)** - this is a *paid* day of working with us, which we will fit around your schedule. 
 
@@ -95,27 +95,24 @@ The stages of our hiring process are:
 
 ## Benefits
 
+* [Generous, transparent compensation](/handbook/people/compensation)
+* [Share options](/handbook/people/compensation#share-options)
 * [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
-* Health insurance provided or the cost covered depending on jurisdiction
+* Health insurance including dental and vision provided in the US via our payroll provider [Gusto](https://gusto.com/)
 * [Generous parental leave](/handbook/people/time-off#parental-leave)
 * Visa sponsorship
 * [Training budget](/handbook/people/training#training-budget) (role dependent)
+* We provide [all equipment](/handbook/people/spending-money#equipment) needed have an ergonomic setup at home to be as productive as possible
 * \$200/month [budget towards coworking or café working](/handbook/people/spending-money#work-space)
 * Carbon offsetting for work travel with [Project Wren](https://projectwren.com/) 
 * Free [books](/handbook/people/training#books)
+
+_Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team._
 
 <br>
 <br>
 
 # Open Roles
-
-## Open Application
-
-We take exceptional people when they come along, and we really mean that.
-
-If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
-
-We take this application seriously, and that's why it's listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
 
 ## Open Roles
 
@@ -125,6 +122,14 @@ Our team is proactively looking for the following:
 * [Senior Full Stack Software Engineer](/careers/senior-fs-software-engineer)
 * [Growth Engineer](/careers/growth-engineer)
 * [Customer Success Lead](/careers/customer-success-lead)
+
+## Open Application
+
+We take exceptional people when they come along, and we really mean that.
+
+If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
+
+We take this application seriously - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
 
 # Get Started - Applying
 

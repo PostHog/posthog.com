@@ -1,99 +1,8 @@
-import imgHobby from '../images/plan-hobby.svg'
-import imgStarter from '../images/plan-starter.svg'
-import imgGrowth from '../images/plan-growth.svg'
-import imgUltimate from '../images/plan-enterprise.svg'
 import imgOpenSource from '../images/plan-open-source.svg'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
 
 const plans = {
-    cloud: [
-        {
-            title: 'Hobby',
-            image: imgHobby,
-            popular: false,
-            price: '$0',
-            priceDetail: 'forever',
-            description: 'Ideal for just yourself or small side projects',
-            callToAction: 'Create free account',
-            callToActionDest: {
-                type: 'url',
-                value: 'https://app.posthog.com/signup',
-            },
-            benefits: [
-                'Capture up to <b>20,000 events/month</b>',
-                '<b>All core analytics features</b>',
-                '<b>Unlimited</b> tracked users',
-                '<b>1</b> team member',
-                '90-day data retention',
-                'Community support',
-            ],
-        },
-        {
-            title: 'Starter',
-            image: imgStarter,
-            popular: true,
-            price: '$19',
-            priceDetail: '/month',
-            description: 'Ideal to get your product or website off the ground',
-            callToAction: 'Start my free trial',
-            callToActionDest: {
-                type: 'url',
-                value: 'https://app.posthog.com/signup?plan=starter',
-            },
-            benefits: [
-                '<span class="p-plan-benefit-lg">Everything in Hobby, plus:</span>',
-                'Capture up to <b>200,000 events/month</b>',
-                '<b>Unlimited</b> team members',
-                '<a href="/docs/features/feature-flags" target="blank">Feature flags</a>',
-                '<a href="/docs/features/cohorts" target="blank">User cohorts</a>',
-                '<a href="/docs/features/users#user-history" target="blank">Individual user history</a>',
-                '6-month data retention',
-                'Community support',
-            ],
-        },
-        {
-            title: 'Growth',
-            image: imgGrowth,
-            popular: false,
-            price: '$99',
-            priceDetail: '/month',
-            description: 'Ideal for companies with large volumes',
-            callToAction: 'Start my free trial',
-            callToActionDest: {
-                type: 'url',
-                value: 'https://app.posthog.com/signup?plan=growth',
-            },
-            benefits: [
-                '<span class="p-plan-benefit-lg">Everything in Starter, plus:</span>',
-                'Up to <b>500,000 events/month</b>',
-                'Further events charged $99/500K',
-                '12-month data retention',
-                'Email support',
-            ],
-        },
-        {
-            title: 'Ultimate',
-            image: imgUltimate,
-            popular: false,
-            price: 'Custom',
-            priceDetail: 'contact us',
-            description: 'Ideal for large companies with millions of users',
-            callToAction: 'Contact sales',
-            callToActionDest: {
-                type: 'url',
-                value: 'mailto:sales@posthog.com?subject=Enquiry%20about%20enterprise%20plan',
-            },
-            benefits: [
-                '<span class="p-plan-benefit-lg">Everything in Growth, plus:</span>',
-                'Capture <b>unlimited</b> events',
-                '<b>Unlimited</b> data retention',
-                'Dedicated support',
-                'SSO/SAML',
-                'Export to data lakes',
-            ],
-        },
-    ],
     enterprise: [
         {
             title: 'Enterprise',
@@ -167,17 +76,12 @@ const faqs = [
     {
         q: 'How do I know what my volume is?',
         a:
-            'We provide a free tier on our Cloud plan. This allows you to quickly get a sense of what your volume is. If you have very high volumes (10s-100s of thousands of users, our enterprise product is probably the most cost effective.',
-    },
-    {
-        q: 'What happens when I reach the maximum number of events in my plan?',
-        a:
-            'We will let you know when you are close to the maximum number of events and prompt you to upgrade to a different plan. We will not stop collecting events but we might limit your ability to consult your data or run analytics until the next billing period.',
+            'We provide a free trial on our Cloud plan. This allows you to get a sense of what your volume is. If you have very high volumes (10s-100s of thousands of users, our enterprise product is probably the most cost effective.',
     },
     {
         q: 'Is there a free trial on paid plans?',
         a:
-            'You can get a 30-day free trial on our Starter and Growth plans. Our Ultimate plan does not offer a free trial because it has the same base features as the Growth plan.',
+            'Yes! When you activate your Cloud plan, you will get the first 30 days for free (regardless of usage). In addition, every month your first 10,000 events are free.',
     },
     {
         q: 'What happens after the data retention period elapses?',
@@ -185,9 +89,19 @@ const faqs = [
             'On the Cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Enterprise and Open Source plans, you control your data retention and what happens to your data afterwards.',
     },
     {
+        q: 'Do I pay anything for stored events?',
+        a:
+            'No, you only pay the flat fee per captured event (i.e. you only pay when each event is first received). There are no additional costs or fees.',
+    },
+    {
         q: 'Can I switch between the Cloud and Enterprise plans?',
         a:
             'We are working hard to enable a bridge that allows data transfer between cloud instances and enterprise instances. This will be possible in the coming months.',
+    },
+    {
+        q: 'Are there any minimums or annual commitments?',
+        a:
+            'Our Cloud plan is simple, pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing. As our enterprise plans are custom for each company, we handle this case-by-case. Ask us.',
     },
 ]
 
