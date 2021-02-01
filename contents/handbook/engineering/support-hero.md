@@ -13,10 +13,12 @@ There are a couple of channels that customer requests come in so make sure you k
   - Also make sure you're in the private #_customer_support channel where Papercups conversations get routed
 - [HubSpot inbox](https://app.hubspot.com/live-messages/6958578/inbox/)
 - GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one
+- Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack
 
 ## Tips
 
 - When trying to debug an issue with a customer and it's not immediately obvious, it's usually much faster to do a Zoom session. You also tend to get other useful product feedback.
 - When dealing with slowness, ask users to send a screenshot of their "System Status" page (under settings)
-  - If they have a lot of volume, ask them what instance they are on as chances are their instance isn't able to handle the volume. This might also be a chance to upsell to a managed service, so feel free to hit #sales in our main slack to get someone from sales involved.
+  - If they have a lot of volume, ask them what instance they are on as chances are their instance isn't able to handle the volume. This might also be a chance to upsell to a managed service, so feel free to hit #sales in our main Slack to get someone from sales involved.
 - [Papercups](https://app.papercups.io/) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything.
+- Sometimes questions will have been asked earlier in the User's Slack so it's worth searching through that if you're not sure.
