@@ -1,3 +1,16 @@
+@import 'src/vars';
+
+:root {
+    --primary: #{$primary};
+    --success: #{$success};
+    --danger: #{$danger};
+    --warning: #{$warning};
+    --bg-menu: #{$bg_menu};
+    --bg-mid: #{$bg_mid};
+    --text-default: #{$text_default};
+    --muted: #{$text_muted};
+}
+
 .homepage {
     @font-face {
         font-family: 'Gosha Sans';
