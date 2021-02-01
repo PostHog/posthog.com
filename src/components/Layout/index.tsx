@@ -26,7 +26,7 @@ interface LayoutProps {
     children?: any
     className?: string
     containerStyle?: Object
-    menuActiveKey: string
+    menuActiveKey?: string
 }
 
 const Layout = ({
