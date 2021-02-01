@@ -1,9 +1,9 @@
-// Original: https://github.com/sdras/night-owl-vscode-theme
-// Converted automatically using ./tools/themeFromVsCode
-var theme = {
+import { PrismTheme } from 'prism-react-renderer'
+
+export const OkaidiaTheme: PrismTheme = {
     plain: {
-        color: '#d6deeb',
-        backgroundColor: '#011627',
+        color: '#f8f8f2',
+        backgroundColor: '#272822',
     },
     styles: [
         {
@@ -59,11 +59,9 @@ var theme = {
             },
         },
         {
-            // This was manually added after the auto-generation
-            // so that punctuations are not italicised
             types: ['punctuation'],
             style: {
-                color: 'rgb(199, 146, 234)',
+                color: '#f8f8f2',
             },
         },
         {
@@ -105,5 +103,3 @@ var theme = {
         },
     ],
 }
-
-export default theme

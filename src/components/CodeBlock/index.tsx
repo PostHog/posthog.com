@@ -1,6 +1,6 @@
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/nightOwl'
+import { OkaidiaTheme } from '../../lib/okaidia'
 
 export const CodeBlock = (props: any) => {
     const className = props.children.props.className || ''
@@ -10,7 +10,7 @@ export const CodeBlock = (props: any) => {
             {...defaultProps}
             code={props.children.props.children.trim()}
             language={matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''}
-            theme={theme}
+            theme={OkaidiaTheme}
         >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ ...style, padding: '20px' }}>
