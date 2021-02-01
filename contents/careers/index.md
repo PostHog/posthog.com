@@ -129,7 +129,7 @@ We take exceptional people when they come along, and we really mean that.
 
 If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
 
-We take this application seriously, and that's why it's listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
+We take this application seriously - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
 
 # Get Started - Applying
 
