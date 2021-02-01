@@ -27,7 +27,6 @@ import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
 import { TableOfContents } from './components/TableOfContents'
-import { UserLogosCarousel } from './components/UserLogosCarousel'
 
 export const shortcodes = {
     BasicHedgehogImage,
@@ -57,5 +56,4 @@ export const shortcodes = {
     StarRepoButton,
     StartNowButton,
     TableOfContents,
-    UserLogosCarousel,
 }
