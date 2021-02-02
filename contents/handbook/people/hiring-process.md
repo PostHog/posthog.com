@@ -4,25 +4,43 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This page will walk you through how we hire at PostHog. The goal is to have a lightweight process that optimizes for speed for the candidate, but above all for quality of the hire.
+This page will walk you through how we hire at PostHog. The goal is to have a lightweight process that optimizes for speed and quality of the hire, but also ensures the best possible candidate experience! 
 
-## Deciding to Hire
+## Our Hiring Process in short
 
-Every hire introduces complexity to the organisation and increases our burn rate. As a result, we think very carefully about each new role, and we set an extremely high bar for the people that we do hire. 
+For most roles, our hiring process looks like this: 
 
-See [our Strategy page](/handbook/strategy/strategy) to find out how we are thinking about which people we should be hiring, and when.
+* [Application](/handbook/people/hiring-process#application)
+* [Culture interview](/handbook/people/hiring-process#interview-1---culture-with-eltje)
+* [Technical interview](/handbook/people/hiring-process#interview-2---technical)
+* [PostHog SuperDay](/handbook/people/hiring-process#posthog-superday)
+* [Offer](/handbook/people/hiring-process#making-the-hire)
+
+_There may be an additional interview where we bring in a 3rd party with specialist expertise in the case of hiring roles that we've not hired for before._
+
+Responsiveness at all stages is really important to us - at each stage of the process, we aim to get back to candidates within 2 working days. It is not ok to leave candidates waiting for weeks, or for someone to apply and never hear back from us.
+
+## Our Hiring process in long
+
+### Deciding to Hire
+
+We are a small team and every new hire means a lot to us! As a result, we think very carefully about each new role, and we set an extremely high bar for the people that we do hire.
+
+Check our [Strategy page](/handbook/strategy/strategy)to find out how we are thinking about which people we should be hiring, and when.
 
 If we are hiring a role that we have less expertise in (e.g. a role we've never hired for before), it is worth getting an outside opinion on how to hire for this role before starting any of the below.
 
-## Writing the spec
+### Writing the spec
 
 At the moment, we're not too worried about everyone on the team having really precisely defined job specs. PostHog is growing fast and job descriptions are changing rapidly so it's impossible to define a set list of tasks.
 
-That being said, it is important that any job spec is written with your target audience in mind, in a clear and engaging way. There are several guides on how to this ([here is a good one](https://resources.workable.com/tutorial/how-to-write-a-good-job-description)), and you can also look at previous job ads to get a feel for how we communicate about PostHog. 
+That being said, it is important that any job spec is written with your target audience in mind, in a clear and engaging way. 
 
-Once the job ad is out there, don't be afraid to [iterate](https://posthog.com/handbook/company/culture#iteration) and improve on it given the data! You shouldn't feel constrained by your initial spec if it isn't quite working, or if PostHog's needs have evolved since you first wrote it. Bear in mind that you will need to update it everywhere it has been advertised, so it is worth putting the effort in up front to get it right.
+Once the job ad is out there, we will share it internally to encourage referrals, as well as with our network externally. 
 
-## Managing candidates
+If the job description isn't working, or if PostHog's needs have evolved since we first wrote it, we need to [iterate](/handbook/company/culture#iteration and improve it as soon as possible. One thing to bear in mind that we will need to update it everywhere it has been advertised, so it is worth putting the effort in up front to get it right.
+
+### Managing candidates
 
 We manage all of our candidates through [Workable](https://posthog.workable.com/backend) - please ask Eltje or Charles for an invite to view candidates, leave feedback, and schedule meetings. Make sure you record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog. 
 
@@ -38,31 +56,7 @@ If you receive an application directly emailed to you or if someone contacts us 
 * If you think they are a strong candidate but they didn't email, introduce them directly to us via our [careers email address](mailto:careers@posthog.com).
 * As a last resort, ask them to apply via the relevant link on our [Careers page](heeps://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
 
-### Booking meetings
-
-If you are booking meetings through Workable, you should connect your Google Calendar and Zoom accounts under Settings first - this enables you to schedule meetings from within Workable itself. This is really helpful, as Workable will automatically populate the calendar invitation with all the useful info for interviewers like resumes so you don't need to do it manually.
-
-When you book, you have the option of selecting a Google Meet or Zoom call. You should default to Zoom unless you are scheduling a meeting that you are not attending yourself, in which case use Google Meet (as Zoom will require you to attend as host). 
-
-Make sure you have set an agenda for the meeting in order to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
-
-## Our Hiring Process
-
-The stages of our hiring process are:
-
-- Application
-- Culture interview with Eltje
-- Technical interview with the hiring team 
-   - this is usually Tim and 1 or more PostHog team members interviewing the candidate at the same time who would work closely with the candidate day-to-day
-   - decide if we will do a SuperDay, else give feedback
-- PostHog SuperDay
-- Offer
-
-There may be an additional interview where we bring in a 3rd party with specialist expertise in the case of hiring roles that we've not hired for before.
-
-Responsiveness at all stages is really important to us - at each stage of the process, we should aim to get back to candidates with feedback within 48 hours. It is not ok to leave candidates waiting for weeks, or for someone to apply and never hear back from us. 
-
-### Application
+## Application
 
 Read applications and resumes/portfolios carefully and leave your feedback as a Comment on their record in Workable. 
 
@@ -72,33 +66,41 @@ A good rule of thumb when deciding whether not to progress - if the candidate do
 
 Candidates who are unsuccessful at this stage will receive automated feedback, unless they personalized their application, in which case a short email is appropriate.
 
-#### Engineering
+### Engineering
 
 We hire repeatedly into engineering roles, so here are a few things we look for:
 
 - Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
-- Has started a project from scratch, without outside help
-    - Usually this manifests as having been the founder of a startup, or building an impressive side project. It can also be shown through a big project in the day job, but that requires a bit more digging.
-- Communication. Do they have writing errors in their cover letter? What does their online presence look like?
-    - More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
+- Someone who has started a project from scratch, without outside help.
+   - You might have been a founder of a startup, or have built an impressive site project. Or it could be part of a big project in your current job, where you work as part of a small, autonomous team.
+- Communication. Are there any writing errors in the cover letter? Does the online preference look good?
+   -More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
+   
+### Booking interviews
 
-### Interview 1 - Culture with Eltje
+If you are booking meetings through Workable, you should connect your Google Calendar and Zoom accounts under Settings first - this enables you to schedule meetings from within Workable itself. This is really helpful, as Workable will automatically populate the calendar invitation with all the useful info for interviewers like resumes so you don't need to do it manually.
 
-We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Workable.
+When you book, you have the option of selecting a Google Meet or Zoom call. You should default to Zoom unless you are scheduling a meeting that you are not attending yourself, in which case use Google Meet (as Zoom will require you to attend as host). 
 
-This is to allow both PostHog and the candidate to assess whether the candidate is a great cultural addition to the team, and to dig into any areas of potential misalignment based on the application. We are looking for proactivity, directness, good communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
+Make sure you have set an agenda for the meeting in order to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
 
-- Talk about PostHog, where we're at and what the future looks like, including our long-term vision. If it was cold outreach, we provide a little more context up front.
-- Talk about the candidate, dig into any questions we have from their CV.
-- Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned.
+## Interview 1 - Culture
 
-Candidates who are unsuccessful at this stage should receive a personalized email with feedback. 
+The first stage of the interview process is a culture-based interview with [Eltje](/handbook/people/team), our People and Talent Lead. 
 
-### Interview 2 - Technical
+At this stage we want to get an impression of what the candidate is looking for, and to explain who we are and what we are looking for. 
 
-The second step is the technical interview. This is usually 2 PostHog team members spending an hour with the candidate (at the same time).
+We also want to make sure that the candidate is a great cultural addition to the team. We are looking for proactivity, directness, good communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset.
 
-These interviews will focus on the skills needed to fill the role. 
+We will also give the candidate the chance to ask any questions you might have about PostHog and the role, and explain the next steps. 
+
+Candidates who are unsuccessful at this stage should receive a personalized email with feedback.
+
+## Interview 2 - Technical
+
+The second step is the technical interview. This is usually 2 PostHog team members spending 45-60 minutes with the candidate.
+
+These interviews will focus on the skills needed to fill the role.
 
 For a design hire, questions could be:
 - A walk through of an example website page, product or other 
@@ -124,9 +126,9 @@ As a rule of thumb, everyone interviewing must feel a genuine sense of excitemen
 
 Candidates who are unsuccessful at this stage should receive a personalized email with feedback. 
 
-### PostHog SuperDay
+## PostHog SuperDay
 
-We offer those who have gotten through the interview process the chance to do a paid PostHog SuperDay. We schedule 1 full day in advance with the candidate where we hire them as a contractor.
+The final stage of the interview process in the PostHos SuperDay. This is a paid full day of work where you will be set a task to work on that is representative of the kind of work that someone in this role does at PostHog.
 
 This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a very demanding day of work.
 
@@ -155,7 +157,7 @@ In case of a rejection, it's important to clearly outline why that decision was 
 
 If there are wildly different opinions, reflect on why.
 
-### Making the hire
+### Making an offer!
 
 Hooray!
 
