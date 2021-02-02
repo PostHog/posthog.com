@@ -324,7 +324,7 @@ Passionate about teaching (but far from an academic), I taught an official high 
 
 Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space.
 
-For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://medium.com/@yakko.majuri) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am.
+For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://yakkomajuri.medium.com) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am.
 
 When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain.
 
