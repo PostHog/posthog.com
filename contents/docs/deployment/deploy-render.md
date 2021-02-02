@@ -12,7 +12,7 @@ You can use Render's one-click deploy button to get PostHog up and running quick
 
 ## Step By Step Installation
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/posthog)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/posthog/render-example)
 
 1. Click Deploy to Render above.
 
