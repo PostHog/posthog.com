@@ -22,6 +22,7 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [Deploying to Digital Ocean](/docs/deployment/deploy-digital-ocean)
 - [Deploying to GCS](/docs/deployment/deploy-gcs)
 - [Deploying to Microsoft Azure](/docs/deployment/deploy-azure)
+- [Deploying to Qovery](/docs/deployment/deploy-qovery)
 - [Deploying with Docker](/docs/deployment/deploy-docker)
 - [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
 - [Deploying from Source](/docs/deployment/deploy-source)

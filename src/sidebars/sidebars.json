@@ -76,6 +76,7 @@
             "docs/deployment/deploy-aws",
             "docs/deployment/deploy-azure",
             "docs/deployment/deploy-digital-ocean",
+            "docs/deployment/deploy-qovery",
             "docs/deployment/deploy-docker",
             "docs/deployment/deploy-gcs",
             "docs/deployment/deploy-kubernetes",
