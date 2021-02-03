@@ -6,6 +6,8 @@ showTitle: true
 
 ## Why Render
 
+> This deployment method and its documentation are a community contribution. Thank you [@jakemalachowski](https://github.com/jakemalachowski)!
+
 You can use Render's one-click deploy button to get PostHog up and running quickly without an extensive setup.
 
 [Render](https://render.com) is a cloud platform to build and run apps and websites with free SSL, a global CDN, private networks, and automatic deploys with Git.
