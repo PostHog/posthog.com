@@ -372,14 +372,38 @@ const PricingPage = () => {
                     </Row>
 
                     <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
-                        <Col span={24} align="middle">
+                        <Col span={24} id="non-profits">
                             <Card>
-                                <h4>Are you a non-profit?</h4>
+                                <h4 className="text-center">Are you a non-profit?</h4>
                                 We're committed to helping non-profit organizations and we're offering a{' '}
-                                <b>50% discount</b> of our cloud offering to any such organization. We also have special
-                                pricing for the Enterprise plans. To redeem either offer just send us an email to{' '}
-                                <a href="mailto:sales@posthog.com">sales@posthog.com</a> with the details of your
-                                organization.
+                                <b>50% discount</b> of our cloud offering to any such organization. To redeem:{' '}
+                                <ol className="redemption-instructions">
+                                    <li>
+                                        <a href="https://app.posthog.com/signup?utm_campaign=pricing-non-profits&utm_medium=landing-website">
+                                            Sign up
+                                        </a>{' '}
+                                        for a regular PostHog account.
+                                    </li>
+                                    <li>
+                                        Go to{' '}
+                                        <a href="https://app.posthog.com/organization/billing?utm_campaign=pricing-non-profits&utm_medium=landing-website">
+                                            Billing
+                                        </a>
+                                        , activate the <i>Standard plan</i> and enter your card billing information.
+                                    </li>
+                                    <li>
+                                        Send us an email to <a href="mailto:sales@posthog.com">sales@posthog.com</a>{' '}
+                                        with your organization details and include the email address of the account you
+                                        created.
+                                    </li>
+                                </ol>
+                                <div>
+                                    We also have special pricing for the Enterprise plans.{' '}
+                                    <a href="mailto:sales@posthog.com?subject=Non-profit%20enterprise%20plan">
+                                        Contact us
+                                    </a>{' '}
+                                    for more details.
+                                </div>
                             </Card>
                         </Col>
                     </Row>
