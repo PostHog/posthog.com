@@ -63,4 +63,25 @@ After this the user will be prompted in their app to enter their card details to
 If you need to activate a plan bypassing actual billing on Stripe, just set up a `billing_period_ends` that is after today's date (and be sure that "Should setup billing" is not checked). This is however not recommended.
 
 
+#### Non-profit organizations
+We offer 50% discount to non-profit companies (see [pricing](/pricing#non-profits)). The activation process is as follows:
+1. Non-profit company reaches out to PostHog, likely via email.
+1. On our end we validate the company is eligible for the discount.
+1. Validate the customer has signed up for the standard plan and completed the billing process. _Easiest done in [Stripe dashboard][stripe_dashboard], look up the customer using the owner's email address. The Standard Plan subscription must be active **and** the customer must have a valid payment source on file._
+1. On the customer page click on Actions, and then _Apply coupon_. Select coupon "Non-profit organization discount" (ID: `NxipELS0`)
+1. Let the customer know via email.
+
+
+#### Updating subscriptions
+This section provides instructions for a PostHog team member to change subscriptions for a existing customer (e.g. if they want to upgrade/downgrade, move from legacy plans to standard plans, etc.)
+1. Look up the customer on [Stripe dashboard][stripe_dashboard] using their email address or Stripe ID (this ID can be obtained from Django Admin too, under `OrganizationBilling` object).
+1. Click on the customer's current subscription.
+1. Click on _Update subscription_.
+1. Remove the old item from the pricing table and add the new item. 
+1. Click on _Update subscription_. Do not schedule the update for a later time. There will be unintended side effects if the changes are not applied immediately.
+1. Find the corresponding `OrganizationBilling` on [Django Admin](https://app.posthog.com/admin/multi_tenancy/organizationbilling/). You can look up by the same email address.
+1. Update the **new billing plan and the new Stripe subscription item ID**. The subscription item ID starts with `si_` (not to be confused with a Subscription ID). This **ID will have changed**, the Subscription ID remains the same.
+
+
 [license]: https://github.com/posthog/license
+[stripe_dashboard]: https://dashboard.stripe.com/
