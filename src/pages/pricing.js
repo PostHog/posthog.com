@@ -373,6 +373,19 @@ const PricingPage = () => {
 
                     <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
                         <Col span={24} align="middle">
+                            <Card>
+                                <h4>Are you a non-profit?</h4>
+                                We're committed to helping non-profit organizations and we're offering a{' '}
+                                <b>50% discount</b> of our cloud offering to any such organization. We also have special
+                                pricing for the Enterprise plans. To redeem either offer just send us an email to{' '}
+                                <a href="mailto:sales@posthog.com">sales@posthog.com</a> with the details of your
+                                organization.
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
+                        <Col span={24} align="middle">
                             <h2 className="p-text-primary">Ready to get started?</h2>
                             <a href="https://app.posthog.com/signup">
                                 <Button type="primary" size="large">
