@@ -7,9 +7,21 @@ showTitle: true
 
 > **Important:** Our Plugins functionality is still in **Beta** mode. Please report any issues you find [on GitHub](https://github.com/PostHog/posthog/issues). 
 
+_Interested in what plugins we have available? Check out our [Plugin Library](/plugins)._
+
+<hr /><br />
+
 Plugins are a way to extend PostHog's functionality by either pulling data into or sending data out of PostHog. 
 
 Our goal with plugins is to allow anyone to extend and customize PostHog in order to better fit their analytics and business needs. 
+
+They serve three key purposes:
+
+- **Enriching:** Getting data into PostHog
+- **Exporting:** Getting data out of PostHog
+- **Cleaning:** Data parsing and filtering at the ingestion step
+
+![Plugins Diagram](../images/../../images/plugins-diagram.svg)
 
 ## Example Use-Cases
 
@@ -49,9 +61,43 @@ Given that plugins are still in **Beta**, our default library is currently limit
 
 In the meanwhile, you can [follow our progress on GitHub](https://github.com/PostHog/posthog/issues/1896).
 
-## In This Section
+### Installing plugins from private sources
 
-- [Plugin Architecture](/docs/plugins/architecture)
-- [Build Your Own Plugin](/docs/plugins/build)
-- [MaxMind Plugin](/docs/plugins/maxmind)
-- [Currency Normalization Plugin](/docs/plugins/currency-normalization)
+To install plugins from private sources, like private npm packages or private repositories, you can either:
+
+1. Use the following environment variables:
+
+<span class='table-borders'>
+
+| Variable                   | Description                           | Default Value         |
+| :------------------------: | :------------------------------------ | :-------------------: |
+| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
+| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
+| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
+
+</span>
+
+2. Append `?private_token=<YOUR_TOKEN>` to the plugin URL
+
+### Reordering plugins
+
+PostHog will automatically create an order for your plugins based on the order of installation.
+
+This order determines the sequence in which your plugins will run. For example, here's a model workflow:
+
+1. You send an event to PostHog
+2. Plugin 1 runs on the raw events
+3. Plugin 2 runs on the results of Plugin 1's processing
+4. Plugin 3 runs on the results of Plugin 2's processing
+5. Events returned from Plugin 3 are ingested (inserted into the database)
+
+Plugin ordering is important if you have a plugin that depends on another. For example, Plugin A might add the company name based on the email of the user, while Plugin B adds company data to the event based on the company name.
+### Updating Plugins
+
+![Plugins Update Screenshot](../../images/plugin-update.png)
+
+Plugins can be updated to the latest version directly on the PostHog UI.
+
+By default, PostHog will check if there are any updates available and notify you of them, but you can also force PostHog to check again by clicking 'Check again'.
+
+Before updating a plugin, if you want to check what has changed between versions, simply click on the button that says 'Update available'. This will open a new tab and show you the diff between your current version and the latest one. 

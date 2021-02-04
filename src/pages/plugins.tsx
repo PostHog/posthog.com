@@ -8,7 +8,10 @@ import { pluginLibraryLogic } from '../logic/pluginLibraryLogic'
 import { Spin } from 'antd'
 import { PluginModal } from '../components/PluginLibrary/PluginModal'
 import { getPluginImageSrc } from '../lib/utils'
+import { LibraryPluginType } from '../types'
+
 import './styles/plugin-library.scss'
+import { Link } from 'gatsby'
 
 const { TabPane } = Tabs
 
@@ -22,6 +25,9 @@ export const PluginLibraryPage = () => {
                 <PluginModal />
                 <Spacer />
                 <h1 className="center">Plugin Library</h1>
+                <p className="center">
+                    <Link to="/docs/plugins/overview">Learn more about plugins on our dedicated Docs section.</Link>
+                </p>
                 <Tabs
                     activeKey={!filter ? 'default' : filter}
                     onChange={(key) => {
@@ -35,13 +41,13 @@ export const PluginLibraryPage = () => {
                 </Tabs>
                 <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
                     {filteredPlugins.length > 0 ? (
-                        filteredPlugins.map((plugin) => (
+                        filteredPlugins.map((plugin: LibraryPluginType) => (
                             <PluginCard
                                 key={plugin.name}
                                 name={plugin.name}
-                                description={plugin.description}
+                                description={plugin.description || ''}
                                 link={plugin.url}
-                                imageSrc={getPluginImageSrc(plugin)}
+                                imageSrc={getPluginImageSrc(plugin) || ''}
                                 isCommunityPlugin={plugin.maintainer === 'community'}
                                 onClick={() => openPlugin(plugin.name)}
                             />
