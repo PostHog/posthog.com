@@ -22,9 +22,9 @@ In this case, the team member chooses to leave.
 
 We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work that notice period. This is so we have some time to find someone to hire and to enable a handover.
 
-If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your coach or another trusted team member to discuss your reasons for wanting to leave. We want to ensure that all issues team members are facing are discussed and resolved before a resignation decision has been made.
+If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or another trusted team member to discuss your reasons for wanting to leave. We want to ensure that all issues team members are facing are discussed and resolved before a resignation decision has been made.
 
-If resignation is the only solution after you have discussed your concerns, please communicate your intention to resign to your coach. Then with your coach you can discuss what is needed to work on a handover/transition. 
+If resignation is the only solution after you have discussed your concerns, please communicate your intention to resign to your manager. Then with your manager you can discuss what is needed to work on a handover/transition. 
 
 ## Involuntary Departure
 
@@ -80,7 +80,7 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> Put on an out of office and then deactivate the GSuite account for the team member <br />
 <input type="checkbox"/> Make any outstanding notice payments (if applicable) <br />
 <input type="checkbox"/> Mark the employee has departed in Pulley <br />
-<input type="checkbox"/> Cancel team member's company card on Brex <br />
+<input type="checkbox"/> Cancel team member's company card on Brex - _check if they have any company subscriptions first that need transferring_ <br />
 <input type="checkbox"/> Remove team member from PostHog organization in GitHub <br />
 <input type="checkbox"/> Remove team member from the internal company Slack <br />
 <input type="checkbox"/> Remove team member from PostHog Users Slack <br />

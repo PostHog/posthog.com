@@ -42,7 +42,8 @@ body.dark .post-page-wrapper {
         }
 
         li,
-        p {
+        p,
+        .blog-quote {
             color: #d4d4d4 !important;
         }
 
@@ -87,6 +88,11 @@ body.dark .post-page-wrapper {
 
         .ant-menu-item-selected > a {
             color: #b78aff !important;
+        }
+
+        .header-key-active span {
+            color: #b78aff !important;
+            border-bottom: solid 2px #b78aff;
         }
 
         .docs-footer,

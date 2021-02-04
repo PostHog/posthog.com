@@ -37,6 +37,15 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `SOCIAL_AUTH_GITLAB_SECRET`| GitLab secret for allowing [sign up with GitLab](/docs/features/log-in-with-github-gitlab).                                                     | 
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for GitLab authentication. Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
 | `DATABASE_URL`| [Database URL](https://github.com/jacobian/dj-database-url#url-schema) pointing to your PostgreSQL instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
+| `POSTHOG_DB_NAME`| Database name. | Must be specified when `DATABASE_URL` is not set.
+| `POSTHOG_DB_USER`| Database user name. | `postgres` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
+| `POSTHOG_DB_PASSWORD`| Database password. | `""` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
+| `POSTHOG_POSTGRES_HOST`| Host pointing to your PostgreSQL instance. | `localhost` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
+| `POSTHOG_POSTGRES_PORT`| Port pointing to your PostgreSQL instance. | `5432` if PostHog is running in DEBUG or TEST mode.  Must be specified when `DATABASE_URL` is not set.
+| `POSTHOG_POSTGRES_SSL_MODE`| PostgreSQL SSL mode. [More info.](https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBQ-SSL-CERTIFICATES) | `None`
+| `POSTHOG_POSTGRES_CLI_SSL_CA`| Location of the SSL root certificate file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
+| `POSTHOG_POSTGRES_CLI_SSL_CRT`| Location of the SSL certificate file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
+| `POSTHOG_POSTGRES_CLI_SSL_KEY`| Location of the SSL key file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
 | `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
 | `EMAIL_HOST` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.     | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
 | `EMAIL_PORT` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
@@ -46,7 +55,9 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `EMAIL_USE_TLS` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.         | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
 | `EMAIL_DEFAULT_FROM` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
 | `EMAIL_ENABLED` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-
+| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
+| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
+| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 
 
 

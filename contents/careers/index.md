@@ -18,7 +18,7 @@ We've made a crazy amount of progress to date.
 
 We took part in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most successful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just 4 weeks old.
 
-Our GitHub repo has over over 3.3k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
+Our GitHub repo has over over 3.7k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
@@ -70,36 +70,57 @@ We're young, but we're already [backed](/handbook/strategy/investors) by many of
 
 This includes YCombinator, Solomon Hykes (Founder of Docker), David Cramer (Founder/CEO of Sentry), Adam Goldstein (Founder of Hipmunk), and [many more](/handbook/strategy/investors).
 
-## The Process
+## Our Interview Process
 
-We will schedule 2 to 3 short calls with Eltje or one of our [founders and team](handbook/company/team). These will focus on two key areas:
+The stages of our hiring process are:
 
-* Ensuring you will be a great cultural fit
-* Aptitude for the role
+**Application** - we aim to get back to you within 2 working days, but please bear with us in case it takes a bit longer. 
 
-If you succeed with the above, we will set you up with a *PostHog SuperDay*.
+**[Culture interview](/handbook/people/hiring-process#interview-1---culture-with-eltje) with Eltje, our People and Talent Lead.**
+  The video call is going to take 30 minutes and the goal is to ensure you will be a great cultural addition to the team and of course to answer any questions you   might have about PostHog or the role. 
 
-This is a *paid* day of working with us, which we will fit around your schedule. Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
+**[Technical interview](/handbook/people/hiring-process#interview-2---technical)** with the [hiring team](/handbook/company/team).
+  This is usually 2 PostHog team members spending 45-60 minutes with the candidate. This interview will focus on the skills needed to fill the role.
+  
+**[PostHog SuperDay](/handbook/people/hiring-process#posthog-superday)** - this is a *paid* day of working with us, which we will fit around your schedule. 
 
-We'll set you up with a Slack support channel with several of [our core team](handbook/company/team). We'll give you a variety of tasks to work on. We are looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+  Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to         succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
 
-This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting paid, of course.
+  We'll set you up with a Slack support channel with several of [our core team](handbook/company/team). We'll give you a variety of tasks to work on. We are         looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+
+  This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting     paid, of course.
+
+**Offer** Hooray! We will send you an offer letter outlining all the details of the offer and if you choose to accept, we will kickstart the onboarding process! 
+
 
 ## Benefits
 
+* [Generous, transparent compensation](/handbook/people/compensation)
+* [Share options](/handbook/people/compensation#share-options)
 * [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
-* Health insurance provided or the cost covered depending on jurisdiction
+* Health insurance including dental and vision provided in the US via our payroll provider [Gusto](https://gusto.com/)
 * [Generous parental leave](/handbook/people/time-off#parental-leave)
 * Visa sponsorship
 * [Training budget](/handbook/people/training#training-budget) (role dependent)
+* We provide [all equipment](/handbook/people/spending-money#equipment) needed have an ergonomic setup at home to be as productive as possible
 * \$200/month [budget towards coworking or café working](/handbook/people/spending-money#work-space)
 * Carbon offsetting for work travel with [Project Wren](https://projectwren.com/) 
 * Free [books](/handbook/people/training#books)
+
+_Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team._
 
 <br>
 <br>
 
 # Open Roles
+
+## Open Roles
+
+Our team is proactively looking for the following:
+
+* [Full Stack Software Engineer](/careers/full-stack-software-engineer)
+* [Senior Full Stack Software Engineer](/careers/senior-fs-software-engineer)
+* [Customer Success Lead](/careers/customer-success-lead)
 
 ## Open Application
 
@@ -107,15 +128,7 @@ We take exceptional people when they come along, and we really mean that.
 
 If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
 
-We take this application seriously, and that's why it's listed above our other roles - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
-
-## Open Roles
-
-Our team is proactively looking for the following:
-
-* [Full Stack Software Engineer](/careers/full-stack-software-engineer)
-* [Marketing Lead](/careers/marketer)
-* [Growth Engineer](/careers/growth-engineer)
+We take this application seriously - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
 
 # Get Started - Applying
 
@@ -134,3 +147,7 @@ Learn more [about the people](/handbook/company/team) you could be working with.
 Watch a day in the life of our graphic designer, Lottie!
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xlODCLrZyvM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Note to recruitment agencies
+
+At Posthog, we do not work with recruitment agencies. Any direct approaches will be left unanswered, please do not call or follow up via email. We do not accept speculative resumés, unless we have specifally instructed you to provide these. We will not be responsible for any fees relating to unsolicited resumés.

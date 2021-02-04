@@ -46,11 +46,13 @@ Within each level, we believe there's a place to have incremental steps. We defi
 - *Thriving*: Exceeding expectations.
 - *Expert*: Exceeding expectations consistently.
 
-The definition of what is needed to progress from one step to the next in more detail depends on your role. Ask your coach for detail of what you need to work on.
+The definition of what is needed to progress from one step to the next in more detail depends on your role. Ask your manager for detail of what you need to work on.
 
 ## Share Options
 ​
-As part of your compensation, you will receive approximately 0.1-0.5% of the company with a standard 1-year cliff, 4-year vest. Broadly, this will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
+It’s important to us that all PostHog employees can feel invested in the company’s success. Every one of us plays a critical role in the business and deserves a share in the companies success as we grow. When employees perform well, they contribute to the business doing well, and therefore should share a part of the increased financial value of the business.
+
+As part of your compensation, you will receive share options in the company with a standard 1-year cliff, 4-year vest. Broadly, the amount of options will depend on the Level as per the Experience Factor. We may change this policy from time to time depending on our rate of hiring - e.g. if we had a gap in hiring for an extended period, we would adjust this.
 ​
 Whilst the terms of options for *any company* could vary if we were ever acquired, we have set them up with the following key terms:
 
@@ -98,7 +100,7 @@ Unless there is a very good reason, you'll be paid in your local currency. This 
 
 You will join us on a 3 month probation period, during which either you or PostHog can choose to end your contract with 1 week's notice. We are fully committed to ensuring that you are set up for success, but also understand that it may take some time to determine whether or not there is a long term fit between you and PostHog. Our bar for hiring is very high, and you should not expect to automatically pass probation. 
 
-Your coach is responsible for monitoring and specifically reviewing your performance throughout the probation period. If underperformance is a concern, or if there is any hesitation regarding the successful completion of a probation period, this should be discussed immediately with you and your coach. 
+Your manager is responsible for monitoring and specifically reviewing your performance throughout the probation period. If underperformance is a concern, or if there is any hesitation regarding the successful completion of a probation period, this should be discussed immediately with you and your manager. 
 
 ## Severance
 

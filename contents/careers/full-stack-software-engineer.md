@@ -6,21 +6,13 @@ showTitle: true
 
 "Let me do it. You tell me when you want it and where you want it to land, and I'll do it backwards and tell you when to take off." - [Katherine Johnson](https://www.nasa.gov/content/katherine-johnson-biography)
 
-PostHog exists to increase the number of successful products in the world.
+**PostHog exists to increase the number of successful products in the world.**
 
-## Engineering has been everything to us so far
+We provide an open source platform for product analytics. The product is new - we launched in February 2020, and have had thousands of deployments organically since we started.
 
-[James](https://twitter.com/james406) and [Tim](https://twitter.com/timgl) founded PostHog in January. They had a bunch of features they wanted to build to understand their own user behavior - not sharing user data to a third party service, autocapturing events, and getting access to underlying data. Things an engineer would care about.
+This growth has meant we've been able to raise significant investment from the best in the world, such as YCombinator and GV. We are now looking to grow our engineering team and we are looking for 2-3 **Full Stack Engineers** to join us!  
 
-It wasn't until they met [Dalton Caldwell](https://twitter.com/daltonc?lang=en) for a chat that it all clicked - *open source* would be the strategy, everything else would follow.
-
-This means PostHog is a product-led company. We're building a big open source community around a great, totally free, product.
-
-The end result? Releasing new features regularly has been the *only* thing we've had to do to get thousands of deployments. We've raised millions of dollars from the world's best investors but we're still a small, lean team.
-
-PostHog helps power products as diverse as those in airlines and banks, to indie gamers making it more fun to protect earth from aliens to underwear startups working on their retention!
-
-## The release schedule is wild
+**The release schedule is wild**
 
 We're up against billion dollar companies, and we're catching up. We will overtake them by being faster.
 
@@ -58,20 +50,43 @@ You would be a key part in us expanding the range of functionality we are offeri
 
 In particular, those with a very strong background in Django, architecture and databases (we use Clickhouse and Postgres) are going to have fun here - we have even individual clients doing hundreds of millions of events a day, but we are *truly* open to applications from any engineer that thinks they could deliver exceptional work here.
 
+## What we offer in return:
+* Generous [compensation](/handbook/people/compensation)
+* [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
+* Health insurance provided or the cost covered depending on jurisdiction
+* [Generous parental leave](/handbook/people/time-off)
+* Visa sponsorship if needed, for you and your loved ones
+* [Training budget](/handbook/people/training)
+* [$200/month budget towards coworking or café working](/handbook/people/spending-money)
+* Carbon offsetting for work travel with [Project Wren](https://www.wren.co/)
+* [Free books](/handbook/people/training#books)
+
+*Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team.*
+
+## About PostHog:
+
+PostHog's engineering culture is best-in-class, and we've had explosive user growth from this alone.
+
+We [launched a four week old minimum viable product in February 2020](/handbook/company/story), and since then have been deployed in thousands of places around the world.
+
+PostHog's platform makes it easy for software teams to understand their user behavior. This coupled with our fast growth has led to a broad variety of very cool use cases. PostHog is used to help indie game designers make it more fun to defend earth from an alien threat. PostHog is used by multinational organizations running software that powers everything from banks to airlines. PostHog is used by startups disrupting their own industries.
+
+We're a company like no other in our space. Our approach is bottom up and that starts by being great for developers to install and use.
+
+By being open source, we can be used on any software project throughout the world, for free, forever. Some developers will use the platform on a side project, others at their startup or small business, and others in their Fortune 500. We are building a true platform that can grow from 1 user to many no matter the size or shape of the organization.
+
+The core of our approach is to delight end users. It's not about executive dashboards and then a terrible interface for everyone else. It's the sense of power we give to the person on the ground, doing the actual work, every day.
+
 ## Sold? Apply now
-
-We sweated over this ad - we value nothing more than having an excellent team with a great environment to work in. We hope this came through.
-
-[Drop us a line](https://apply.workable.com/posthog/j/2F287E18A5/apply/) and tell us:
-
+* [Drop us a line](mailto:2F287E18A5@jobs.workablemail.com) and tell us:
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
-* Projects you've worked on (at your work or on the side)
+* Your resumé and/or LinkedIn
 
 ## Not sold? Learn more first
-
 * [How we hire](/careers#the-process)
 * We ask for your best work, and in return [pay generously](/handbook/people/compensation) and have [exceptional benefits](/careers/#benefits)
 * Learn about [the team you'd be working with](/handbook/company/team)
-* Getting hiring right is key to diversity. Learn about [how we think about this](/handbook/company/diversity)
-* Check out [our stack](/docs/stack)
+* Getting hiring right is key to diversity. Learn about [how we think about this](/handbook/company/diversity).
+ 
+*We believe people from diverse backgrounds, with different identities and experiences, make our product and our company better. No matter your background, we'd love to hear from you! Also, if you have a disability, please let us know if there's any way we can make the interview process better for you; we're happy to accommodate!*

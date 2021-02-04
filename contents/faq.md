@@ -82,7 +82,7 @@ We have thousands of users including very large enterprises.
 
 We are currently working on creating some case studies.
 
-If you would like to be featured, please email _hey@posthog.com_.
+If you would like to be featured, please email _[hey@posthog.com](mailto:hey@posthog.com)_.
 
 ### Is the software buggy?
 

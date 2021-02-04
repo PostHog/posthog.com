@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/plugins/*"
+  to = "/plugins"
+  status = 200

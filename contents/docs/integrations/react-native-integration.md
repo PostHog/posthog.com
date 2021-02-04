@@ -76,9 +76,6 @@ await PostHog.setup('YOUR_API_KEY', {
         // Capture push notifications
         capturePushNotifications: false,
 
-        // Capture advertisting info
-        enableAdvertisingCapturing: true,
-
         // The maximum number of items to queue before starting to drop old ones.
         maxQueueSize: 1000,
 

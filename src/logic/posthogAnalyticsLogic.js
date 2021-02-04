@@ -29,7 +29,9 @@ export const posthogAnalyticsLogic = kea({
 
     listeners: ({ actions }) => ({
         posthogFound: ({ posthog }) => {
-            posthog.onFeatureFlags(actions.setFeatureFlags)
+            if (posthog.onFeatureFlags) {
+                posthog.onFeatureFlags(actions.setFeatureFlags)
+            }
         },
     }),
 

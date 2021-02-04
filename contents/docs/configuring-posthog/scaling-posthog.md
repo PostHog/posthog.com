@@ -14,5 +14,5 @@ However, once you have more data, you might start having issues while running qu
 
 The downside of ClickHouse is that it takes more work to set up and configure correctly when compared to Postgres. This is why we currently only offer ClickHouse as part of our [paid offering](/pricing). 
 
-If you have large event volumes and would like to use a more scalable and efficient version of PostHog, please email us at _sales@posthog.com_ to discuss details.
+If you have large event volumes and would like to use a more scalable and efficient version of PostHog, please email us at _[sales@posthog.com](mailto:sales@posthog.com)_ to discuss details.
 

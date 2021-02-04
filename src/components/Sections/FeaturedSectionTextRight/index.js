@@ -46,7 +46,7 @@ export const FeaturedSectionTextRight = ({
                         <br className="revHiddenBreak" />
                         <hr className={styleMap[color][1]} />
                         <br className="revHiddenBreak" />
-                        <p className="fs-paragraph">{descriptionText}</p>
+                        <div className="fs-paragraph">{descriptionText}</div>
                     </div>
                 </div>
             </div>

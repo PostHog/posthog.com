@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Button from 'antd/lib/button'
-import Modal from 'react-modal'
 import 'antd/lib/button/style/css'
 import './styles/index.scss'
-import { Link } from 'gatsby'
-import modalSaasCloud from '../images/modal-saas-cloud.svg'
-import modalSelfDeploy from '../images/modal-self-deploy.svg'
 import improveMobile from '../images/improve-mobile.svg'
 import improveRetention from '../images/retro-retention-box.svg'
 import improvePaths from '../images/retro-paths-box.svg'
@@ -27,47 +23,22 @@ import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSection
 import { FeaturedSectionTripleImage } from '../components/Sections/FeaturedSectionTripleImage'
 import { Spacer } from '../components/Spacer'
 import { DesignedForYourStackBlock } from '../components/Sections/DesignedForYourStackBlock'
+import { useActions } from 'kea'
+import { layoutLogic } from '../logic/layoutLogic'
 
-const GetStartedModalContent = () => (
-    <>
-        <h2>Try PostHog for free</h2>
-        <div className="modalCardsWrapper">
-            <a href="https://app.posthog.com/signup">
-                <div className="modalSaasCloud modalCard">
-                    <div className="modalCardHeader">
-                        <img src={modalSaasCloud} alt="modal-saas-cloud" />
-                        <h2>Cloud</h2>
-                    </div>
-                    <h4>Small business or low volumes and don't want hassle?</h4>
-                    <p>This is the simplest way to get started. Create an account.</p>
-                </div>
-            </a>
-            <Link to="/docs/deployment">
-                <div className="modalSelfDeploy modalCard">
-                    <div className="modalCardHeader">
-                        <img src={modalSelfDeploy} alt="modal-self-deploy " />
-                        <h2>Open Source</h2>
-                    </div>
-                    <h4>Want to use our free open source product?</h4>
-                    <p>Deploy PostHog Open Source on your own infrastructure. Free forever.</p>
-                </div>
-            </Link>
-            <a href="mailto:sales@posthog.com">
-                <div className="modalSelfDeploy modalCard">
-                    <div className="modalCardHeader">
-                        <img src={modalSelfDeploy} alt="modal-self-deploy " />
-                        <h2>Enterprise</h2>
-                    </div>
-                    <h4>10K+ users? Need support?</h4>
-                    <p>Managed on your infrastructure with greater scalability and support. Book a pilot.</p>
-                </div>
-            </a>
-        </div>
-    </>
-)
+const UserLogosCarousel = React.lazy(() => import('../components/UserLogosCarousel'))
 
 function IndexPage() {
-    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [carouselAvailable, setCarouselAvailable] = useState(false)
+    const { setIsGetStartedModalOpen } = useActions(layoutLogic)
+
+    useEffect(() => {
+        if (window && !carouselAvailable) {
+            setCarouselAvailable(true)
+        }
+    }, [])
+
+    const CarouselFallback = () => <div style={{ height: 60 }}></div>
 
     return (
         <div className="homepage">
@@ -96,26 +67,13 @@ function IndexPage() {
                                             type="secondary"
                                             size="large"
                                             className="getStarted"
-                                            onClick={() => setModalIsOpen(true)}
+                                            onClick={() => setIsGetStartedModalOpen(true)}
                                         >
                                             Get Started for Free
                                         </Button>
-                                        <Modal
-                                            isOpen={modalIsOpen}
-                                            onRequestClose={() => setModalIsOpen(false)}
-                                            className="modalContent"
-                                            overlayClassName="modalOverlay"
-                                        >
-                                            <GetStartedModalContent />
-                                            <Button
-                                                icon="close"
-                                                onClick={() => setModalIsOpen(false)}
-                                                className="modalClose"
-                                            />
-                                        </Modal>
-                                        <a href="/request_demo">
-                                            <Button type="primary" size="large" className="requestDemo">
-                                                Request Demo
+                                        <a href="/schedule-demo">
+                                            <Button type="primary" size="large" className="scheduleDemo">
+                                                Schedule Demo
                                             </Button>
                                         </a>
                                     </div>
@@ -124,6 +82,15 @@ function IndexPage() {
                             </div>
                         </div>
                     </div>
+                    <Spacer />
+                    <h2 className="centered">Used At</h2>
+                    {carouselAvailable ? (
+                        <Suspense fallback={<CarouselFallback />}>
+                            <UserLogosCarousel />
+                        </Suspense>
+                    ) : (
+                        <CarouselFallback />
+                    )}
                     <Spacer />
                     <FeaturedSectionTextRight
                         headerText="It all starts with event autocapture"
@@ -231,7 +198,7 @@ function IndexPage() {
                                 <Button
                                     type="primary"
                                     className="startTrialButton"
-                                    onClick={() => setModalIsOpen(true)}
+                                    onClick={() => setIsGetStartedModalOpen(true)}
                                 >
                                     Start my 30-day free trial
                                 </Button>
@@ -290,7 +257,7 @@ function IndexPage() {
                                     instantly with PostHog Cloud.
                                 </p>
                                 <div className="landing-page-final-cta">
-                                    <Button type="primary" size="large" onClick={() => setModalIsOpen(true)}>
+                                    <Button type="primary" size="large" onClick={() => setIsGetStartedModalOpen(true)}>
                                         Get Started for Free
                                     </Button>
                                     <a href="/slack">

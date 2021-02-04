@@ -61,7 +61,7 @@ PostHog puts a great amount of effort into making sure it doesn't capture any se
 
 While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
 
-Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags. 
+Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags.
 
 As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
 
@@ -82,16 +82,19 @@ posthog.capture('[event-name]', {property1: 'value', property2: 'another value'}
 ```
 
 ### Identifying Users
+
 To make sure you understand which user is performing actions within your app, you can identify users at any point. From the moment you make this call, all events will be identified with that distinct id.
 
-The ID can by anything, but is usually the unique ID that you identify users by in the database. 
+The ID can by anything, but is usually the unique ID that you identify users by in the database.
 Normally, you would put this below `posthog.init` if you have the information there.
 
 If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and after they signed up will be shown under the same user.
 
 ```js
-posthog.identify('[user unique id]');
+posthog.identify('[user unique id]', { userProperty: 'xxxx' });
 ```
+
+You can also pass a second argument to `posthog.identify` which is an object consisting of as many properties as you want to be set on that user's profile. This operates in the same way as `posthog.people.set`. 
 
 Warning! You can't call identify straight after an .init (as .init sends a page view, probably with the user's anonymous id. To combat this, you can call .init with a callback, inside which you can then call identify.
 
@@ -100,6 +103,21 @@ posthog.init('[your api key]', {
     api_host: 'https://posthog.[your-domain].com',
     loaded: function(posthog) { posthog.identify('[user unique id]'); }
 });
+```
+
+### Reset After Logout
+
+If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user due to shared cookies between sessions.
+
+You can do that like so:
+```js
+posthog.reset();
+```
+
+If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
+
+```js
+posthog.reset(true);
 ```
 
 ### Sending User Information
@@ -124,7 +142,7 @@ posthog.capture('$pageview');
 
 This will automatically send the current URL.
 
-### Super Properties 
+### Super Properties
 
 Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $pageview, an autocaptured button click, or anything else.
 
@@ -139,7 +157,7 @@ posthog.register({
 })
 ```
 
-The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified super property. 
+The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified super property.
 
 However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.people.set`. More information on this can be found on the [Sending User Information section](#sending-user-information).
 
@@ -165,9 +183,9 @@ This will remove the super property and subsequent events will not include it.
 
 ### Opt Users Out
 
-PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner). 
+PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner).
 
-This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in. 
+This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in.
 
 If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/features/cohorts#differentiating-team-vs-users-traffic).
 
@@ -220,21 +238,6 @@ Here's how you can use them:
     posthog.isFeatureEnabled('keyword', {send_event: false})
     ```
 
-## Reset After Logout
-
-If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user. 
-
-You can do that like so:
-```js
-posthog.reset();
-```
-
-If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
-
-```js
-posthog.reset(true);
-```
-
 ### Complete Signup Pseudocode
 
 As an example, here is how to put some of the above concepts together:
@@ -255,7 +258,7 @@ function signup(email) {
 
 When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
 
-There are [33 different options](https://github.com/PostHog/posthog-js/blob/master/src/posthog-core.js#L1120-L1206), most of which you do not have to ever worry about. 
+There are [33 different options](https://github.com/PostHog/posthog-js/blob/master/src/posthog-core.js#L1120-L1206), most of which you do not have to ever worry about.
 
 Some of the most relevant options are:
 
@@ -264,11 +267,12 @@ Some of the most relevant options are:
 | Attribute                                                                         | Description                                                                                                                    |
 | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `api_host`<br/><br/>**Type:** String<br/>**Default:** `https://app.posthog.com`   | URL of your PostHog instance.                                                                                                  |
-| `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`            | A function to be called once the PostHog scripts have loaded successfully.                                                     |
 | `autocapture`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                  | Determines if PostHog should [autocapture](#autocapture) events.                                                               |
 | `capture_pageview`<br/><br/>**Type:** Boolean<br/>**Default:** `true`             | Determines if PostHog should automatically capture pageview events.                                                            |
-| `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `true`    | Determines if users should be opted out of session recording.                                                                  |
-| `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
+| `disable_cookie`<br/><br/>**Type:** Boolean<br/>**Default:** `false`              | Disable persisting user data across pages. This will disable cookies, session storage and local storage.  |
+| `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`    | Determines if users should be opted out of session recording.                                                                  |
+| `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`            | A function to be called once the PostHog scripts have loaded successfully.                                                     |
+| `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
 | `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`               | A list of properties that should never be sent with `capture` calls.                                                           |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                     | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
 
