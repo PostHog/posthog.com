@@ -123,9 +123,7 @@
             "docs/plugins/enabling",
             "docs/plugins/architecture",
             "docs/plugins/build",
-            "docs/plugins/types",
-            "docs/plugins/maxmind",
-            "docs/plugins/currency-normalization"
+            "docs/plugins/types"
         ]
     },
     {
