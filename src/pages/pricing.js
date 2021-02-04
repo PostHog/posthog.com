@@ -376,7 +376,8 @@ const PricingPage = () => {
                             <Card>
                                 <h4 className="text-center">Are you a non-profit?</h4>
                                 We're committed to helping non-profit organizations and we're offering a{' '}
-                                <b>50% discount</b> of our cloud offering to any such organization. To redeem:{' '}
+                                <b>50% discount</b> off any of our Cloud plans, as part of our commitment to supporting
+                                these organizations. To redeem:{' '}
                                 <ol className="redemption-instructions">
                                     <li>
                                         <a href="https://app.posthog.com/signup?utm_campaign=pricing-non-profits&utm_medium=landing-website">
@@ -393,14 +394,15 @@ const PricingPage = () => {
                                     </li>
                                     <li>
                                         Send us an email to <a href="mailto:sales@posthog.com">sales@posthog.com</a>{' '}
-                                        with your organization details and include the email address of the account you
-                                        created.
+                                        from the email address you used to register, and include some details about your
+                                        organization.
                                     </li>
+                                    <li>We'll apply the 50% discount to your account.</li>
                                 </ol>
                                 <div>
-                                    We also have special pricing for the Enterprise plans.{' '}
+                                    We also offer special pricing for our Enterprise plans -{' '}
                                     <a href="mailto:sales@posthog.com?subject=Non-profit%20enterprise%20plan">
-                                        Contact us
+                                        contact us
                                     </a>{' '}
                                     for more details.
                                 </div>
