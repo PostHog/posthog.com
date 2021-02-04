@@ -9,6 +9,8 @@ showTitle: true
 
 Plugins are a way to extend PostHog's functionality by either pulling data into or sending data out of PostHog. 
 
+![Plugins Diagram](../images/../../images/plugins-diagram.svg)
+
 Our goal with plugins is to allow anyone to extend and customize PostHog in order to better fit their analytics and business needs. 
 
 ## Example Use-Cases
