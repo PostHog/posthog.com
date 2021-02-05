@@ -13,6 +13,10 @@ jobs:
               with:
                   ref: ${{ github.ref }}
 
+            - name: Succeed on forks
+              if: ${{ failure() }}
+              run: exit 0
+
             - name: Set up Python 3.8
               uses: actions/setup-python@v2
               with:
