@@ -11,7 +11,8 @@ If you're running PostHog behind a proxy, there are a few more things you need t
 
 If PostHog is running behind a proxy, you need to do the following:
 - Make sure you have the `IS_BEHIND_PROXY` environment variable set to `True`.
-- If deploying with Docker, use the `docker-compose.proxy.yml` file. This is the exact same as the `docker-compose.yml` file with one line removed, preventing a port conflict between the PostHog Docker container and the proxy.
+- If deploying with Docker, use the `docker-compose-config.py` script to expose the appropriate port in `docker-compose.yml`. By default port 80 is exposed, causing a port conflict between the PostHog Docker container and the proxy.
+- Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/configuring-posthog/environment-variables). Try this if the above settings do not solve your issue.
 
 <div class='note-block'><b>Note:</b> It is suggested to set up the proxy separately from PostHog's Docker Compose definition.</div>
 

@@ -128,6 +128,6 @@ If you've pinned a version, see [CHANGELOG.md](https://github.com/PostHog/postho
 
 ## Running PostHog Behind a Proxy or Load Balancer
 
-If you're running PostHog on Docker behind a proxy or load balancer, you should use the `docker-compose.proxy.yml` file. This is the exact same as the `docker-compose.yml` file with one line removed, preventing a port conflict between the PostHog Docker container and the proxy.
+If you're running PostHog on Docker behind a proxy or load balancer, you should use the `docker-compose-config.py` script to expose the appropriate port in `docker-compose.yml`. By default port 80 is exposed, causing a port conflict between the PostHog Docker container and the proxy.
 
 For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
