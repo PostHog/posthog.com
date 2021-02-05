@@ -393,7 +393,7 @@ const PricingPage = () => {
                                         , activate the <i>Standard plan</i> and enter your card billing information.
                                     </li>
                                     <li>
-                                        Send us an email to{' '}
+                                        Send us an email to {' '}
                                         <a href="mailto:sales@posthog.com?subject=Non-profit%20plan">
                                             sales@posthog.com
                                         </a>{' '}
