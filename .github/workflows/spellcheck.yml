@@ -10,11 +10,12 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
+              if: github.event.pull_request.head.repo.full_name == github.repository
               with:
                   ref: ${{ github.head_ref }}
 
             - name: Succeed on forks
-              if: ${{ failure() }}
+              if: github.event.pull_request.head.repo.full_name != github.repository
               run: exit 0
 
             - name: Set up Python 3.8
