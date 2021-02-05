@@ -36,3 +36,11 @@ Please feel free to suggest any changes. See our [contributing guide](https://gi
 Mny speling mistkes ovr heere
 
 Wil thay b fixd?
+
+over-engeneer
+over-engeneering
+overaall
+overal
+overcompansate
+overcompansated
+overcompansates
