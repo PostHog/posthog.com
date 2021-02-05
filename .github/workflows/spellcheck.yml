@@ -11,7 +11,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
               with:
-                  ref: ${{ github.ref }}
+                  ref: ${{ github.head_ref }}
 
             - name: Succeed on forks
               if: ${{ failure() }}
