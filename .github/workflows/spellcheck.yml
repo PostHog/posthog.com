@@ -7,10 +7,10 @@ jobs:
     spell-check:
         name: Spell Checker
         runs-on: ubuntu-latest
+        if: github.event.pull_request.head.repo.full_name == github.repository
 
         steps:
             - uses: actions/checkout@v2
-              if: github.event.pull_request.head.repo.full_name == github.repository
               with:
                   ref: ${{ github.head_ref }}
 
