@@ -32,7 +32,7 @@ There are 3 ways of using PostHog:
 
 **Do you want to get started quickly without having to deploy PostHog yourself?**
 
-Start using [PostHog Cloud for free](app.posthog.com).
+Start using [PostHog Cloud for free](https://app.posthog.com).
 
 **Do you want to self-host PostHog?**
 
