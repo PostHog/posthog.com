@@ -48,7 +48,7 @@ If you are interested in software infrastructure on Kubernetes, excited to work 
 *Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team.*
 
 ## Sold? Apply now
-* [Drop us a line](22ABB4D4D3@jobs.workablemail.com) and tell us:
+* [Drop us a line](mailto:22ABB4D4D3@jobs.workablemail.com) and tell us:
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
 * Your resumé and/or LinkedIn
