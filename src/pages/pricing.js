@@ -372,6 +372,48 @@ const PricingPage = () => {
                     </Row>
 
                     <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
+                        <Col span={24} id="non-profits">
+                            <Card>
+                                <h4 className="text-center">Are you a non-profit?</h4>
+                                We're committed to helping non-profit organizations and we're offering a{' '}
+                                <b>50% discount off any of our plans</b>, as part of our commitment to supporting these
+                                organizations. To redeem:{' '}
+                                <ol className="redemption-instructions">
+                                    <li>
+                                        <a href="https://app.posthog.com/signup?utm_campaign=pricing-non-profits&utm_medium=landing-website">
+                                            Sign up
+                                        </a>{' '}
+                                        for a regular PostHog account.
+                                    </li>
+                                    <li>
+                                        Go to{' '}
+                                        <a href="https://app.posthog.com/organization/billing?utm_campaign=pricing-non-profits&utm_medium=landing-website">
+                                            Billing
+                                        </a>
+                                        , activate the <i>Standard plan</i> and enter your card billing information.
+                                    </li>
+                                    <li>
+                                        Send us an email to {' '}
+                                        <a href="mailto:sales@posthog.com?subject=Non-profit%20plan">
+                                            sales@posthog.com
+                                        </a>{' '}
+                                        from the email address you used to register, and include some details about your
+                                        organization.
+                                    </li>
+                                    <li>We'll apply the 50% discount to your account.</li>
+                                </ol>
+                                <div>
+                                    To redeem the offer for Enterprise plans just
+                                    <a href="mailto:sales@posthog.com?subject=Non-profit%20enterprise%20plan">
+                                        send us an email
+                                    </a>
+                                    .
+                                </div>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
                         <Col span={24} align="middle">
                             <h2 className="p-text-primary">Ready to get started?</h2>
                             <a href="https://app.posthog.com/signup">
