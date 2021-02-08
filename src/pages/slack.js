@@ -5,8 +5,7 @@ import queryString from 'query-string'
 function Slack() {
     /* This component will redirect the user to the Slack users group. */
     const [source, setSource] = useState(null)
-    const slackUrl =
-        'https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ'
+    const slackUrl = 'https://join.slack.com/t/posthogusers/shared_invite/zt-cb0qt1oj-dh1JbmjYl9J0XAFbgcuPKA'
 
     useEffect(() => {
         const { s } = queryString.parse(location.search)
