@@ -122,6 +122,7 @@ Our team is proactively looking for the following:
 * [Senior Full Stack Software Engineer](/careers/senior-fs-software-engineer)
 * [Customer Success Lead](/careers/customer-success-lead)
 * [Site Reliability Engineer](careers/site-reliability-engineer)
+* [Content Writer](careers/content-writer)
 
 ## Open Application
 
@@ -151,4 +152,4 @@ Watch a day in the life of our graphic designer, Lottie!
 
 # Note to recruitment agencies
 
-At Posthog, we do not work with recruitment agencies. Any direct approaches will be left unanswered, please do not call or follow up via email. We do not accept speculative resumés, unless we have specifally instructed you to provide these. We will not be responsible for any fees relating to unsolicited resumés.
+At Posthog, we do not work with recruitment agencies. Any direct approaches will be left unanswered, please do not call or follow up via email. We do not accept speculative resumés, unless we have specifically instructed you to provide these. We will not be responsible for any fees relating to unsolicited resumés.
