@@ -64,6 +64,7 @@ We're all remote, and we've raised enough to pay top of market. [We’re are pro
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
 * Your resumé and/or LinkedIn
+* Please also add a link to your portfolio or examples of previous work
 
 ## Not sold? Learn more first
 * [How we hire](/careers#the-process)
