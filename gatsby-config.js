@@ -19,6 +19,13 @@ module.exports = {
                 path: `${__dirname}/src/images`,
             },
         },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `contents`,
+                path: `${__dirname}/contents`,
+            },
+        },
         `gatsby-plugin-mdx`,
         `gatsby-transformer-json`,
         {
@@ -26,13 +33,6 @@ module.exports = {
             options: {
                 name: `menuItems`,
                 path: `${__dirname}/src/menuItems`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `contents`,
-                path: `${__dirname}/contents`,
             },
         },
         {

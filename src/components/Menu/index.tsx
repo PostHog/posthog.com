@@ -174,3 +174,4 @@ function Menu({ isBlogArticlePage = false, isHomePage = false, activeKey }: Menu
 }
 
 export default Menu
+export { Menu }

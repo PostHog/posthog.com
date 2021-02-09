@@ -35,6 +35,15 @@ function SidebarContents() {
                             }
                         }
                     }
+                    allMdx(sort: { order: ASC, fields: slug }) {
+                        nodes {
+                            slug
+                            id
+                            frontmatter {
+                                title
+                            }
+                        }
+                    }
                     allSidebarsJson {
                         nodes {
                             id
@@ -47,8 +56,9 @@ function SidebarContents() {
                 }
             `}
             render={(data) => {
+                const parsedMdxData = data.allMdx.nodes.map((node) => ({ ...node, fields: { slug: `/${node.slug}` } }))
                 const entries = data.allSidebarsJson.nodes
-                const pages = data.allMarkdownRemark.nodes
+                const pages = [...data.allMarkdownRemark.nodes, ...parsedMdxData]
                 let dir = []
                 let tree = null
                 let defaultOpenKeys = []
