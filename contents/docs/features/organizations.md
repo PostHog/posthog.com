@@ -63,4 +63,4 @@ If there's no account associated with that email, the invited person will have t
 
 Newly-joined users get the basic Member access level.
 
-> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. However multiple organizations per a self-hosted PostHog instance belong to our premium team-oriented offering. To use this feature, contact [sales@posthog.com](mailto:sales@posthog.com) for a self-hosted license.
+> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. However multiple organizations per self-hosted PostHog instance belong to our premium team-oriented offering. To use this feature, contact [sales@posthog.com](mailto:sales@posthog.com) for a self-hosted license.
