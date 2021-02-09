@@ -26,7 +26,13 @@ module.exports = {
                 path: `${__dirname}/contents`,
             },
         },
-        `gatsby-plugin-mdx`,
+        {
+            resolve: 'gatsby-plugin-mdx',
+            options: {
+                gatsbyRemarkPlugins: [`gatsby-remark-static-images`],
+                plugins: [`gatsby-remark-static-images`],
+            },
+        },
         `gatsby-transformer-json`,
         {
             resolve: `gatsby-source-filesystem`,
