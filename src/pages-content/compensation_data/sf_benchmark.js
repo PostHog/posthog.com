@@ -7,6 +7,7 @@ const sf_benchmark = {
     'Product Designer': 174000,
     'Customer Success Lead': 190000,
     'Site Reliability Engineer': 170000,
+    'Content Marketer': 165000,
     //Recruiter: 144000,
     //'Technical Writer': 138000,
 }
