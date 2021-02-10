@@ -1,11 +1,11 @@
 ---
-title: Content Writer
+title: Content Marketer
 sidebar: Careers
 showTitle: true
 ---
 ## PostHog exists to increase the number of successful products in the world.
 
-While we have mainly hired engineers to date, we are now growing across all areas of the business and we are currently hiring for our first Content Writer to work alongside our newly hired Marketing Lead.
+While we have mainly hired engineers to date, we are now growing across all areas of the business and we are currently hiring for our first Content Marketer to work alongside our newly hired Marketing Lead.
 
 **What you'll be be doing:**
 
