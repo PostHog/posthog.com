@@ -9,7 +9,7 @@ An organization is the largest building block of PostHog's structure: it contain
 
 ## Projects
 
-By default an organization only has the default project. For more on projects [take a look at their dedicated page](/docs/features/multiple-projects).
+By default an organization only has the default project. For more on projects [take a look at their dedicated page](/docs/features/projects).
 
 ### Segregating data into multiple projects
 
