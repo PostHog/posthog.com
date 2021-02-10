@@ -188,7 +188,8 @@
     {
         "entry": "Guide",
         "name": "Guide",
-        "items": ["docs/guide/anchor", "docs/guide/contents", "docs/guide/menu-items", "docs/guide/sidebar"]
+        "items": ["docs/guide/anchor", "docs/guide/
+                  s", "docs/guide/menu-items", "docs/guide/sidebar"]
     },
     {
         "entry": "Blog",
@@ -298,7 +299,7 @@
             "careers/senior-fs-software-engineer",
             "careers/customer-success-lead",
             "careers/site-reliability-engineer",
-            "careers/content-writer"
+            "careers/content-marketer"
      
         ]
     },
