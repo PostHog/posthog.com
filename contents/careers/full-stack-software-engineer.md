@@ -4,9 +4,9 @@ sidebar: Careers
 showTitle: true
 ---
 
-"Let me do it. You tell me when you want it and where you want it to land, and I'll do it backwards and tell you when to take off." - [Katherine Johnson](https://www.nasa.gov/content/katherine-johnson-biography)
+<h5 class='centered'>PostHog exists to increase the number of successful products in the world.</h5>
 
-**PostHog exists to increase the number of successful products in the world.**
+"Let me do it. You tell me when you want it and where you want it to land, and I'll do it backwards and tell you when to take off." - [Katherine Johnson](https://www.nasa.gov/content/katherine-johnson-biography)
 
 We provide an open source platform for product analytics. The product is new - we launched in February 2020, and have had thousands of deployments organically since we started.
 
@@ -20,7 +20,7 @@ We're up against billion dollar companies, and we're catching up. We will overta
 
 We keep cycles very short. There is a roadmap session, [like this](https://github.com/PostHog/posthog/issues/1870), every two weeks - each developer suggests what they want to build to have the greatest impact, then they do just that. You choose what you focus on, and you are responsible for tests, user feedback and tracking.
 
-## The people here are really, really smart
+**The people here are really, really smart**
 
 Every day we feel lucky to have them here!
 
@@ -32,13 +32,13 @@ We take bets on people with less experience too - we are as willing to hire an u
 
 Our team is tiny but we live in 10 different countries. This [diverse group](/handbook/company/diversity) looks [pretty weird](/handbook/company/team) on paper, but it's magical. Apart from the fact [most of them think pineapple belongs on pizza](https://twitter.com/PostHogHQ/status/1319583079648923648). It doesn't.
 
-## Get in early
+### Get in early
 
 Would you have rather been in the first 20 or the last 20 people to join a [FAANG](https://en.wikipedia.org/wiki/Big_Tech) company? The early team we're hiring *right now* are building more than the software - they're building the way the company operates.
 
 We need engineers who care about users, can ship quickly and thrive under a lot of autonomy. You aren't going to have a product manager dictating what you do, but you are going to need to make intelligent design and prioritization decisions with full support from the rest of the team.
 
-## We can't do this without you
+### We can't do this without you
 
 Our users do not use PostHog for the most complex querying of user data imaginable. We aren't going to use { machine learning | AI | blockchain } any time soon. 
 
@@ -50,7 +50,8 @@ You would be a key part in us expanding the range of functionality we are offeri
 
 In particular, those with a very strong background in Django, architecture and databases (we use Clickhouse and Postgres) are going to have fun here - we have even individual clients doing hundreds of millions of events a day, but we are *truly* open to applications from any engineer that thinks they could deliver exceptional work here.
 
-## What we offer in return:
+### What we offer in return
+
 * Generous [compensation](/handbook/people/compensation)
 * [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
 * Health insurance provided or the cost covered depending on jurisdiction
@@ -63,7 +64,7 @@ In particular, those with a very strong background in Django, architecture and d
 
 *Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team.*
 
-## About PostHog:
+### About PostHog
 
 PostHog's engineering culture is best-in-class, and we've had explosive user growth from this alone.
 
@@ -77,13 +78,15 @@ By being open source, we can be used on any software project throughout the worl
 
 The core of our approach is to delight end users. It's not about executive dashboards and then a terrible interface for everyone else. It's the sense of power we give to the person on the ground, doing the actual work, every day.
 
-## Sold? Apply now
+### Sold? Apply now
+
 * [Drop us a line](mailto:2F287E18A5@jobs.workablemail.com) and tell us:
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
 * Your resumé and/or LinkedIn
 
-## Not sold? Learn more first
+### Not sold? Learn more first
+
 * [How we hire](/careers#the-process)
 * We ask for your best work, and in return [pay generously](/handbook/people/compensation) and have [exceptional benefits](/careers/#benefits)
 * Learn about [the team you'd be working with](/handbook/company/team)
