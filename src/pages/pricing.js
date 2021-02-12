@@ -403,7 +403,7 @@ const PricingPage = () => {
                                     <li>We'll apply the 50% discount to your account.</li>
                                 </ol>
                                 <div>
-                                    To redeem the offer for Enterprise plans just
+                                    To redeem the offer for Enterprise plans just{' '}
                                     <a href="mailto:sales@posthog.com?subject=Non-profit%20enterprise%20plan">
                                         send us an email
                                     </a>
