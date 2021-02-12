@@ -130,7 +130,7 @@ We offer those who have gotten through the interview process the chance to do a 
 
 This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a very demanding day of work.
 
-We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not you can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it.
+We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not you can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. In case the candidate is unable to accept pay for the SuperDay, we will donate the amount to a charity of their choice. 
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. It should be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. The tasks should be as close as possible to those that the candidate would be working on every day.
 
@@ -222,8 +222,6 @@ We are learning which boards work well:
 - HackerNews Who's Hiring
     - Tend to get high quality candidates, and people interested in working at startups. 
     - See [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
-- [Tech Ladies](https://www.hiretechladies.com/)
-    - Paid, but helps us achieve a more diverse group of candidates.
 - [AngelList](https://angel.co)
     - We found Eric through there. Higher quality than RemoteOK and pretty high volume.
 - [RemoteOK](https://remoteok.io/)
@@ -231,5 +229,6 @@ We are learning which boards work well:
 
 #### General
 
+- Workable pushes all jobs to 17 job boards, including LinkedIn, Indeed etc.
 - Since PostHog is a YC company, we can place job ads in YC's [Work at a Startup list](https://www.workatastartup.com/jobs).
 - [AngelList](https://angel.co)
