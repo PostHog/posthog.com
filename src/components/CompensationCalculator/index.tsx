@@ -40,7 +40,7 @@ export const CompensationCalculator = () => {
             if (type === 'job') setJob(value)
             if (type === 'country') {
                 setCountry(value)
-                setItem('region')('false')
+                setItem('region')('')
             }
             if (type === 'region') setRegion(value)
             if (type === 'level') {
@@ -54,7 +54,6 @@ export const CompensationCalculator = () => {
     const calculatedLocationFactor =
         country &&
         region &&
-        region !== 'false' &&
         locationFactor.filter((location) => location.country === country && location.area === region)[0].locationFactor
 
     let countries = unique(locationFactor.map((l) => l.country))
