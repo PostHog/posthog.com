@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { ResponsiveSidebar } from '../ResponsiveSidebar'
@@ -16,6 +16,7 @@ import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
 import { BlogFooter } from '../../components/BlogFooter'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 interface LayoutProps {
     pageTitle?: string
@@ -41,6 +42,13 @@ const Layout = ({
     menuActiveKey = '',
 }: LayoutProps) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
+    const { posthog } = useValues(posthogAnalyticsLogic)
+
+    useEffect(() => {
+        if (window && posthog) {
+            posthog.people.set({ preferred_theme: (window as any).__theme })
+        }
+    }, [])
 
     return (
         <>
