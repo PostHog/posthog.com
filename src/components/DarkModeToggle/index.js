@@ -1,15 +1,24 @@
 import React, { useEffect } from 'react'
 import { useValues, useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
 
 export const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
     const { setWebsiteTheme } = useActions(layoutLogic)
+    const { posthog } = useValues(posthogAnalyticsLogic)
 
     useEffect(() => {
-        setWebsiteTheme(window.__theme)
-        window.__onThemeChange = () => setWebsiteTheme(window.__theme)
+        if (window) {
+            setWebsiteTheme(window.__theme)
+            window.__onThemeChange = () => {
+                setWebsiteTheme(window.__theme)
+                if (posthog) {
+                    posthog.people.set({ preferred_theme: window.__theme })
+                }
+            }
+        }
     }, [])
 
     return (
