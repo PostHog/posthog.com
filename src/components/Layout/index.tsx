@@ -59,7 +59,6 @@ const Layout = ({
                     <AntdLayout.Header
                         className={'menuHeader ' + (onPostPage && 'docsHeader ') + (isBlogArticlePage && 'blogHeader')}
                         id="menu-header"
-                        style={{ background: '#ffffff' }}
                     >
                         <Header
                             onPostPage={onPostPage}

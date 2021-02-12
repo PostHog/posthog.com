@@ -23,7 +23,7 @@
     }
 
     header {
-        background-color: #35416b !important;
+        background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
     }
 
     header a {
@@ -127,7 +127,7 @@
     }
 
     .topPageWrapper {
-        background-color: #35416b;
+        background: linear-gradient(180deg, #220f3f 0%, #2c1e60 100%);
         top: 0;
         height: 780px;
         margin-top: 0;
@@ -147,7 +147,7 @@
 
     @media screen and (min-width: 834px) {
         .pageHeader h1 {
-            font-size: 56px;
+            font-size: 48px;
         }
     }
 

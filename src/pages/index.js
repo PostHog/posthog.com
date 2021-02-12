@@ -51,7 +51,9 @@ function IndexPage() {
                     <div className="topSectionWrapperMobile">
                         <div className="topPageWrapper wrapper">
                             <div className="pageHeader row">
-                                <h1>A complete product analytics stack, to deploy on your infrastructure.</h1>
+                                <h1 className="mt-12">
+                                    A complete product analytics stack, to deploy on your infrastructure.
+                                </h1>
                             </div>
                             <Spacer height={25} onlyDesktop={true} />
                             <div className="topPageRow row">
