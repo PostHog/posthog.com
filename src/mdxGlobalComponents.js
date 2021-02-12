@@ -3,6 +3,7 @@
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CodeBlock } from './components/CodeBlock'
+import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -32,6 +33,7 @@ export const shortcodes = {
     BasicHedgehogImage,
     BlogFooter,
     CodeBlock,
+    CompensationCalculator,
     Container,
     DarkModeToggle,
     DemoScheduler,
