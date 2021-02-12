@@ -59,7 +59,7 @@ export const CompensationCalculator = () => {
 
     let countries = unique(locationFactor.map((l) => l.country))
     return (
-        <div style={{ fontSize: '0.85rem' }} className="compensation-calculator">
+        <div style={{ fontSize: '0.85rem' }} className="compensation-calculator ph-no-capture">
             <p>Select a role</p>
             <Radio.Group
                 style={{ width: '100%', marginBottom: '0.75rem' }}
