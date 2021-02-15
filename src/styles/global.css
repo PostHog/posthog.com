@@ -4,7 +4,14 @@
 
 ol,
 ul {
-    list-style: initial;
     margin: initial;
     padding: initial;
+}
+
+ol {
+    list-style: decimal;
+}
+
+ul {
+    list-style: disc;
 }
