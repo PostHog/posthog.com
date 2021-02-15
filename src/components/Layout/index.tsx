@@ -56,10 +56,6 @@ const Layout = ({
                     </AntdLayout.Sider>
                 )}
                 <AntdLayout id="ant-layout-content-wrapper" style={{ background: '#ffffff' }}>
-                    <AntdLayout.Header
-                        className={'menuHeader ' + (onPostPage && 'docsHeader ') + (isBlogArticlePage && 'blogHeader')}
-                        id="menu-header"
-                    >
                         <Header
                             onPostPage={onPostPage}
                             isBlogArticlePage={isBlogArticlePage}
@@ -76,7 +72,6 @@ const Layout = ({
                                 <h1>{pageTitle}</h1>
                             </div>
                         )}
-                    </AntdLayout.Header>
 
                     {onPostPage &&
                         (!isBlogArticlePage ? (

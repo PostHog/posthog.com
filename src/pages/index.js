@@ -64,16 +64,14 @@ function IndexPage() {
                                         </p>
                                         <br />
                                     </div>
-                                    <div className="joinUsersButtons">
-                                        <Button
-                                            type="secondary"
-                                            size="large"
-                                            className="getStarted"
+                                    <div className="flex flex-col">
+                                        <button
+                                            className="px-4 py-2 bg-primary block rounded font-semibold tracking-widest text-white uppercase"
                                             onClick={() => setIsGetStartedModalOpen(true)}
                                         >
                                             Get Started for Free
-                                        </Button>
-                                        <a href="/schedule-demo">
+                                        </button>
+                                        <a href="/schedule-demo" className="block">
                                             <Button type="primary" size="large" className="scheduleDemo">
                                                 Schedule Demo
                                             </Button>

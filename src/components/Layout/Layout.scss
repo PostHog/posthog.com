@@ -338,18 +338,6 @@ hgroup {
     padding-top: 0;
     margin-bottom: 1.45rem;
 }
-ul {
-    margin-left: 1.45rem;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    list-style-position: outside;
-    list-style-image: none;
-}
 ol {
     margin-left: 1.45rem;
     margin-right: 0;
@@ -1279,12 +1267,6 @@ table th {
 .left {
     display: block;
     text-align: left;
-}
-
-li {
-    margin-bottom: calc(1.45rem / 2);
-    font-size: 18px;
-    color: rgba(0, 0, 0, 0.8);
 }
 
 .post-page-sub-header {
