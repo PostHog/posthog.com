@@ -154,7 +154,7 @@ If you're trying to decide between two things to work on, a useful exercise can 
 
 1. Estimate the number of successful products that could come out of each category globally (example numbers given)
 2. Estimate the amount of revenue we could grab from those categories (example numbers given)
-3. Estimate how many of the succesful products we could grab (/create) if we had this feature
+3. Estimate how many of the successful products we could grab (/create) if we had this feature
 4. Estimate how much revenue we could grab if we had this feature
 5. Repeat steps 1-4 for the feature you're trying to compare
 
