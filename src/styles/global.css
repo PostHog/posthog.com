@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ol,
+ul {
+    list-style: initial;
+    margin: initial;
+    padding: initial;
+}
