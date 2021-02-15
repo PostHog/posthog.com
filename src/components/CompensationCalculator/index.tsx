@@ -17,46 +17,49 @@ var formatter = new Intl.NumberFormat('en-US', {
 let formatCur = (val: number) => formatter.format(val).replace('.00', '')
 
 export const CompensationCalculator = () => {
-    useEffect(() => {
-        if (window) {
-            if (localStorage.getItem('job')) setJob(localStorage.getItem('job') || '')
-            if (localStorage.getItem('country')) setCountry(localStorage.getItem('country') || '')
-            if (localStorage.getItem('region')) setRegion(localStorage.getItem('region') || '')
-            if (localStorage.getItem('level')) setLevel(localStorage.getItem('level') || '')
-            if (localStorage.getItem('step')) setStep(localStorage.getItem('step') || '')
-        }
-    }, [])
-
     const [job, setJob] = useState('Engineer')
     const [country, setCountry] = useState('United States')
     const [region, setRegion] = useState('San Francisco, California')
     const [level, setLevel] = useState('Senior')
     const [step, setStep] = useState('Thriving')
 
+    useEffect(() => {
+        if (window) {
+            if (localStorage.getItem('job')) setJob(localStorage.getItem('job') || 'Engineer')
+            if (localStorage.getItem('country')) setCountry(localStorage.getItem('country') || 'United States')
+            if (localStorage.getItem('region')) setRegion(localStorage.getItem('region') || 'San Francisco, California')
+            if (localStorage.getItem('level')) setLevel(localStorage.getItem('level') || 'Senior')
+            if (localStorage.getItem('step')) setStep(localStorage.getItem('step') || 'Thriving')
+        }
+    }, [])
+
     const unique = (arr: string[]) => Array.from(new Set(arr))
 
     const setItem = (type: string) => {
-        return (value: string) => {
-            if (type === 'job') setJob(value)
-            if (type === 'country') {
+        return (value: string | boolean) => {
+            if (type === 'job' && typeof value === 'string') setJob(value)
+            if (type === 'country' && typeof value === 'string') {
                 setCountry(value)
-                setItem('region')('')
+                setItem('region')(false)
             }
-            if (type === 'region') setRegion(value)
-            if (type === 'level') {
+            if (type === 'region') setRegion(String(value))
+            if (type === 'level' && typeof value === 'string') {
                 setLevel(value)
             }
-            if (type === 'step') setStep(value)
-            localStorage.setItem(type, value)
+            if (type === 'step' && typeof value === 'string') setStep(value)
+            localStorage.setItem(type, String(value))
         }
     }
 
     const calculatedLocationFactor =
         country &&
         region &&
+        region !== 'false' &&
         locationFactor.filter((location) => location.country === country && location.area === region)[0].locationFactor
 
     let countries = unique(locationFactor.map((l) => l.country))
+
+    console.log(locationFactor.filter((location) => location.country === country))
     return (
         <div style={{ fontSize: '0.85rem' }} className="compensation-calculator ph-no-capture">
             <p>Select a role</p>
@@ -89,14 +92,14 @@ export const CompensationCalculator = () => {
             <Select
                 showSearch
                 style={{ width: '100%', marginBottom: '0.75rem' }}
-                value={region}
+                value={region === 'false' ? '' : region}
                 onChange={setItem('region')}
             >
                 {locationFactor
                     .filter((location) => location.country === country)
-                    .map((region) => (
-                        <Select.Option value={region.area} key={region.area}>
-                            {region.area} <span>{region.locationFactor}</span>
+                    .map((countryRegion) => (
+                        <Select.Option value={countryRegion.area} key={countryRegion.area}>
+                            {countryRegion.area} <span>{countryRegion.locationFactor}</span>
                         </Select.Option>
                     ))}
             </Select>
