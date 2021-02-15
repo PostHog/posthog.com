@@ -27,14 +27,14 @@ Below is a table of how we see our product market fit for various sizes of compa
         <td>Enterprise</td>
     </tr>
     <tr>
-        <td>Engineers</td>
+        <td>Engineers / Ex-Developer Product Managers</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
         <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
     </tr>
     <tr>
-        <td>Product Managers</td>
+        <td>Non-Technical Product Managers</td>
         <td style="background:var(--warning)">Too technical</td>
         <td style="background:var(--warning)">Too technical</td>
         <td style="background:var(--warning)">Too technical</td>
@@ -57,7 +57,7 @@ Below is a table of how we see our product market fit for various sizes of compa
 </table>
 </span>
 
-As you can see, we have good PMF with engineers generally, and specifically for enthusiasts and startups. 
+As you can see, we have good product-market fit with engineers generally, and specifically for enthusiasts and startups. 
 
 ## Value
 
