@@ -10,30 +10,65 @@ function Header() {
                     <img alt="logo" src={whiteLogo} />
                 </Link>
 
-                <ul className="flex justify-between items-center mb-0">
+                <ul className="list-none flex justify-between items-center mb-0">
                     <li className="leading-none">
-                        <Link to="/product-features" className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider">Product</Link>
+                        <Link
+                            to="/product-features"
+                            className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider"
+                        >
+                            Product
+                        </Link>
                     </li>
                     <li className="leading-none">
-                        <Link to="/docs" className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider">Docs</Link>
+                        <Link
+                            to="/docs"
+                            className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider"
+                        >
+                            Docs
+                        </Link>
                     </li>
                     <li className="leading-none">
-                        <Link to="https://github.com/posthog/posthog" className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider">Community</Link>
+                        <Link
+                            to="https://github.com/posthog/posthog"
+                            className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider"
+                        >
+                            Community
+                        </Link>
                     </li>
                     <li className="leading-none">
-                        <Link to="/handbook/company/store" className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider">Company</Link>
+                        <Link
+                            to="/handbook/company/store"
+                            className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider"
+                        >
+                            Company
+                        </Link>
                     </li>
                     <li className="leading-none">
-                        <Link to="/pricing" className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider">Pricing</Link>
+                        <Link
+                            to="/pricing"
+                            className="text-white hover:text-white opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider"
+                        >
+                            Pricing
+                        </Link>
                     </li>
                 </ul>
 
-                <ul className="flex justify-between items-center mb-0">
+                <ul className="list-none flex justify-between items-center mb-0">
                     <li className="leading-none">
-                        <a href="" className="px-4 py-2 bg-primary rounded font-semibold tracking-widest text-white hover:text-white uppercase">Get started</a>
+                        <a
+                            href=""
+                            className="px-4 py-2 bg-primary rounded font-semibold tracking-widest text-white hover:text-white uppercase"
+                        >
+                            Get started
+                        </a>
                     </li>
                     <li className="leading-none">
-                        <a href="" className="text-white hover:text-white px-4 py-2 font-semibold tracking-widest uppercase">Login</a>
+                        <a
+                            href=""
+                            className="text-white hover:text-white px-4 py-2 font-semibold tracking-widest uppercase"
+                        >
+                            Login
+                        </a>
                     </li>
                 </ul>
             </div>
