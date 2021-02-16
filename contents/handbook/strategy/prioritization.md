@@ -27,14 +27,14 @@ Below is a table of how we see our product-market fit for various sizes of compa
         <td>Enterprise</td>
     </tr>
     <tr>
-        <td>Engineers</td>
+        <td>Engineers / Ex-Developer Product Managers</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
         <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
     </tr>
     <tr>
-        <td>Product Managers</td>
+        <td>Non-Technical Product Managers</td>
         <td style="background:var(--warning)">Too technical</td>
         <td style="background:var(--warning)">Too technical</td>
         <td style="background:var(--warning)">Too technical</td>
@@ -57,7 +57,11 @@ Below is a table of how we see our product-market fit for various sizes of compa
 </table>
 </span>
 
+<<<<<<< HEAD
 As you can see, we have good product-market fit with engineers, specifically with enthusiasts and startups. 
+=======
+As you can see, we have good product-market fit with engineers generally, and specifically for enthusiasts and startups. 
+>>>>>>> a0ade2b8182f22410f25ca626b2155f4d4f62fe4
 
 ## Value
 
@@ -154,7 +158,7 @@ If you're trying to decide between two things to work on, a useful exercise can 
 
 1. Estimate the number of successful products that could come out of each category globally (example numbers given)
 2. Estimate the amount of revenue we could grab from those categories (example numbers given)
-3. Estimate how many of the succesful products we could create if we had this feature
+3. Estimate how many of the successful products we could create if we had this feature
 4. Estimate how much revenue we could get if we had this feature
 5. Repeat steps 1-4 for the feature you're trying to compare
 
