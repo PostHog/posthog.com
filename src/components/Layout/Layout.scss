@@ -723,7 +723,7 @@ header {
 }
 
 .footer-universal {
-    background: #353f6f;
+    background: linear-gradient(180deg, #232e5c 0%, #222d5b 100%);
     color: #fff;
     position: relative;
     left: 0px;
@@ -1480,7 +1480,7 @@ for all other rows the portrait image wraps above bio*/
 }
 
 .main-nav-cta-dark-bg {
-    background-color: #353f6f;
+    background-color: #222d5b;
     border-color: #fff;
     border-radius: 2px;
     color: #fff;
@@ -1502,8 +1502,8 @@ for all other rows the portrait image wraps above bio*/
 
     .main-nav-cta-dark-bg {
         background-color: #fff !important;
-        color: #353f6f !important;
-        border-color: #353f6f !important;
+        color: #222d5b !important;
+        border-color: #222d5b !important;
     }
 }
 
