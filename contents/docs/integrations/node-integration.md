@@ -46,7 +46,7 @@ You can find your key in the 'Project Settings' page in PostHog.
 | `retryCount` | How often to retry sending an event before giving up. | `3` |
 
 
-> **Note:** If you're using PostHog in a lambda or other function make sure you set `flushAt` and `flushInterval` to `0`.
+> **Note:** If you're using PostHog in an AWS Lambda function or other similar serverless function tools make sure you set `flushAt` and `flushInterval` to `0`.
 
 ## Making Calls
 
