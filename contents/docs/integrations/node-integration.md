@@ -30,9 +30,23 @@ const client = new PostHog(
 )
 ```
 
-> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
 You can find your key in the 'Project Settings' page in PostHog.
+
+> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
+
+### Options
+
+
+| Variable                   | Description                           | Default Value         |
+| :------------------------: | :------------------------------------ | :-------------------: |
+| `host` | Your PostHog host | `https://app.posthog.com/` |
+| `flushAt` | After how many capture calls we should flush the queue (in one batch). | `20` |
+| `flushInterval` | After how many ms we should flush the queue. | `10000` |
+| `retryCount` | How often to retry sending an event before giving up. | `3` |
+
+
+> **Note:** If you're using PostHog in a lambda or other function make sure you set `flushAt` and `flushInterval` to `0`.
 
 ## Making Calls
 
