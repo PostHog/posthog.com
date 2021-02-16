@@ -13,9 +13,9 @@ Our mission is to increase the number of successful products in the world.
 
 To achieve this, we will need revenue to be able to re-invest into making a better product.
 
-## How is our Product Market Fit?
+## How is our Product-Market Fit?
 
-Below is a table of how we see our product market fit for various sizes of companies and various job roles.
+Below is a table of how we see our product-market fit for various sizes of companies and various job roles.
 
 <span class="table-borders">
 <table>
@@ -57,7 +57,7 @@ Below is a table of how we see our product market fit for various sizes of compa
 </table>
 </span>
 
-As you can see, we have good PMF with engineers generally, and specifically for enthusiasts and startups. 
+As you can see, we have good product-market fit with engineers, specifically with enthusiasts and startups. 
 
 ## Value
 
@@ -103,12 +103,12 @@ Given scores from 1-5, here's how each type of company stacks up against those t
 
 ## Putting it together
 
-When thinking of building a new feature, we can combine the product market fit table and the priority table into one.
+When thinking of building a new feature, we can combine the product-market fit table and the priority table into one.
 
 We have three options for each box:
 - Deprecate: stop supporting
 - Maintain: fix bugs but don't introduce new features
-- Grow: actively fix bugs, market and make easier to get started but don't build new features.
+- Grow: fix bugs, do marketing and make PostHog easier to get started with but don't build new features.
 - Build: all of the above + building new features specifically for these categories
 
 <span class="table-borders">
@@ -154,11 +154,11 @@ If you're trying to decide between two things to work on, a useful exercise can 
 
 1. Estimate the number of successful products that could come out of each category globally (example numbers given)
 2. Estimate the amount of revenue we could grab from those categories (example numbers given)
-3. Estimate how many of the succesful products we could grab (/create) if we had this feature
-4. Estimate how much revenue we could grab if we had this feature
+3. Estimate how many of the succesful products we could create if we had this feature
+4. Estimate how much revenue we could get if we had this feature
 5. Repeat steps 1-4 for the feature you're trying to compare
 
-For example, for our virtual private cloud feature we came up with the following numbers
+For example, for our virtual private cloud feature we came up with the following numbers:
 
 <span class="table-borders">
 <table>
@@ -184,7 +184,7 @@ For example, for our virtual private cloud feature we came up with the following
         <td>$4B</td>
     </tr>
     <tr>
-        <td>Feature additional successful products</td>
+        <td>Additional successful products from feature</td>
         <td>0%</td>
         <td>5%</td>
         <td>5%</td>
@@ -192,7 +192,7 @@ For example, for our virtual private cloud feature we came up with the following
         <th>51.5k</th>
     </tr>
     <tr>
-        <td>Feature additional revenue</td>
+        <td>Additional revenue from feature</td>
         <td>0%</td>
         <td>15%</td>
         <td>15%</td>
@@ -202,6 +202,6 @@ For example, for our virtual private cloud feature we came up with the following
 </table>
 </span>
 
-The point of this exercise is not to come up with the 'correct' numbers. The point is to go through a though exercise that'll help you figure out the impact of what you're working on.
+The point of this exercise is not to come up with the 'correct' numbers. The point is to go through a thought exercise that'll help you figure out the impact of what you're working on.
 
 The idea also isn't that you should do this for every feature you build. Instead, you'll now have a framework for how to think about the impact of what you're building.
