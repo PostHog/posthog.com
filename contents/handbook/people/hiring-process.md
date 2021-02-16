@@ -186,7 +186,7 @@ We also welcome external referrals, e.g. from:
 
 As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
 
-### Visa sponsorship
+## Visa sponsorship
 
 Building a diverse team is at the heart of our culture at PostHog and we are proud of be hiring internationally. In some cases, this included the need for visa sponsorship. We are currently able to provide visas in the US and the UK, under the following conditions. 
 
