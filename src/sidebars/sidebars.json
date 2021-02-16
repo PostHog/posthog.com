@@ -85,7 +85,13 @@
             "docs/deployment/deploy-qovery",
             "docs/deployment/snippet-installation",
             "docs/deployment/hosting-costs"
-        ]
+        ],
+        "child_entries": ["Virtual Private Cloud"]
+    },
+    {
+        "entry": "Virtual Private Cloud",
+        "name": "Virtual Private Cloud",
+        "items": ["docs/deployment/vpc/vpc", "docs/deployment/vpc/vpc-aws"]
     },
     {
         "entry": "Platform Structure",
