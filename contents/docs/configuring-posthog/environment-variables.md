@@ -11,7 +11,6 @@ Rows with a missing 'Default Value' usually default to an empty string. This is 
 
 Some variables here are default Django variables. This [Django Docs page](https://docs.djangoproject.com/en/2.2/ref/settings/) has more information about them.
 
-<span class="table-borders">
 
 | Variable                   | Description                           | Default Value         |
 | :------------------------: | :------------------------------------ | :-------------------: |
@@ -62,4 +61,3 @@ Some variables here are default Django variables. This [Django Docs page](https:
 
 
 
-</span>
