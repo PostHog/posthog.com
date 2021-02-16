@@ -186,6 +186,14 @@ We also welcome external referrals, e.g. from:
 
 As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
 
+### Visa sponsorship
+
+Building a diverse team is at the heart of our culture at PostHog and we are proud of be hiring internationally. In some cases, this included the need for visa sponsorship. We are currently able to provide visas in the US and the UK, under the following conditions. 
+
+- If you are already in the country on a visa (e.g. employed, youth mobility), or require a new visa to remain in the country (e.g. student converting to employed), we will cover the costs for any employee, new or current.
+- If you wich to relocate and need a visa, we unfortunately will not cover the cost.
+
+In case a candidate needs a visa sponsorship, please keep in mind that the process in lenghty and costly. 
 
 ## Where to find great candidates
 
@@ -232,12 +240,3 @@ We are learning which boards work well:
 - Workable pushes all jobs to 17 job boards, including LinkedIn, Indeed etc.
 - Since PostHog is a YC company, we can place job ads in YC's [Work at a Startup list](https://www.workatastartup.com/jobs).
 - [AngelList](https://angel.co)
-
-
-### Visa sponsorship
-
-Building a diverse team is at the heart of our culture at PostHog and we are proud of be hiring internationally. In some cases, this included the need for visa sponsorship. We are currently able to provide visas in the US and the UK, under the following conditions. 
-- If you are already in the country on a visa (e.g. employed, youth mobility), or require a new visa to remain in the country (e.g. student converting to employed), we will cover the costs for any employee, new or current.
-- If you which to relocate and need a visa, we unfortunately will not cover the cost.
-
-In case a candidate needs a visa sponsorship, please keep in mind that the process in lengthy and costly. 
