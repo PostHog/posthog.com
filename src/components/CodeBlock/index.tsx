@@ -31,24 +31,20 @@ export const CodeBlock = (props: any) => {
     }, [props])
 
     const highlightToken = async (token: string) => {
-        try {
-            const phTokenElements = document.evaluate(
-                `//pre[@id='${codeBlockId}']/*/span[contains(., '${token}')]`,
-                document,
-                null,
-                XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-                null
-            )
-            const tokenHighlightHtml = `<span class='code-block-ph-token' data-tooltip='This is the Project API Key for your project "${projectName}" in PostHog Cloud.'>${token}</span>`
-            const tokenMatchRegex = new RegExp(token, 'g')
-            let snapshotIndex = 0
-            let node: HTMLElement | null = phTokenElements.snapshotItem(snapshotIndex) as HTMLElement
-            while (node) {
-                node.innerHTML = node.innerHTML.replace(tokenMatchRegex, tokenHighlightHtml)
-                node = phTokenElements.snapshotItem(snapshotIndex + 1) as HTMLElement
-            }
-        } catch {
-            //
+        const phTokenElements = document.evaluate(
+            `//pre[@id='${codeBlockId}']/*/span[contains(., '${token}')]`,
+            document,
+            null,
+            XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+            null
+        )
+        const tokenHighlightHtml = `<span class='code-block-ph-token' data-tooltip='This is the Project API Key for your project "${projectName}" in PostHog Cloud.'>${token}</span>`
+        const tokenMatchRegex = new RegExp(token, 'g')
+        let snapshotIndex = 0
+        let node: HTMLElement | null = phTokenElements.snapshotItem(snapshotIndex) as HTMLElement
+        while (node) {
+            node.innerHTML = node.innerHTML.replace(tokenMatchRegex, tokenHighlightHtml)
+            node = phTokenElements.snapshotItem(snapshotIndex + 1) as HTMLElement
         }
     }
 
