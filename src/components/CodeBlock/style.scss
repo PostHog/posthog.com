@@ -17,14 +17,13 @@ body.dark {
     border-radius: 4px !important;
     border-bottom: 1px dashed #000 !important;
     cursor: help;
-    z-index: 999999999;
 }
 
 [data-tooltip] {
     position: relative;
     border-bottom: 1px dashed #000;
     cursor: help;
-    z-index: 999999999;
+    z-index: 9999;
 }
 
 span[data-tooltip]:hover:after {
