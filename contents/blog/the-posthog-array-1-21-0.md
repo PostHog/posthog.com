@@ -332,7 +332,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Add try statement for deleting persons in case the table is distributed [\#3042](https://github.com/PostHog/posthog/pull/3042) ([EDsCODE](https://github.com/EDsCODE))
 - Add refresh param to retention and paths [\#3039](https://github.com/PostHog/posthog/pull/3039) ([EDsCODE](https://github.com/EDsCODE))
 - Hide plugins from nav in Cloud  [\#3038](https://github.com/PostHog/posthog/pull/3038) ([yakkomajuri](https://github.com/yakkomajuri))
-- Patch DONE in sessionsplaylogic [\#3037](https://github.com/PostHog/posthog/pull/3037) ([EDsCODE](https://github.com/EDsCODE))
+- Patch DNE in sessionsplaylogic [\#3037](https://github.com/PostHog/posthog/pull/3037) ([EDsCODE](https://github.com/EDsCODE))
 - Plugin server 0.6.6 [\#3035](https://github.com/PostHog/posthog/pull/3035) ([mariusandra](https://github.com/mariusandra))
 - Don't install unused pandas and numpy [\#3034](https://github.com/PostHog/posthog/pull/3034) ([Twixes](https://github.com/Twixes))
 - Plugin unique url with different private tokens & improve privacy [\#3033](https://github.com/PostHog/posthog/pull/3033) ([mariusandra](https://github.com/mariusandra))
