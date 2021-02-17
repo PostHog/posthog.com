@@ -8,19 +8,19 @@ Please feel free to suggest any changes. See our [contributing guide](https://gi
 
 1. **Pre-Installation**
 
-    Install [Node](https://nodejs.org/en/download/) and [GatsbyJS](https://www.gatsbyjs.org). GatsbyJS needs to be installed globally (see command below).
+    Install [Node](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/).
     ```bash
-    npm install -g gatsby-cli
+    npm install --global yarn
     ```
 
 1.  **Start Developing**
 
-    Clone the repo then navigate into your new site’s directory and start it up.
+    Clone the repo then navigate into your new site’s directory, install the site dependencies, and start it up.
 
     ```bash
     cd posthog.com/
-    yarn install
-    gatsby develop
+    yarn
+    yarn start
     ```
 
 1.  **Open the Source Code and Start Editing!**

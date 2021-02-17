@@ -14,12 +14,12 @@ The best way to run through this checklist is to copy the relevant sections belo
 
 ## Upon Offer Acceptance
 
-Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.  
+Eltje or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.  
 
 ### US Team Member Checklist
 
 <input type="checkbox"/>  Create a contract using the [Google Docs template](https://docs.google.com/document/d/15cdfWfGj5OWBpVST6VcMwb5TP5qLVPQd9SGWKSnB9bc/edit?usp=sharing) in the Legal Docs shared drive <br>
-<input type="checkbox"/>  If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto <br>
+<input type="checkbox"/>  If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto as soon as possible, as there can be a long lead time <br>
 
 ### UK Team Member Checklist
 
@@ -40,9 +40,10 @@ Charles will create the contract needed, depending on who is joining. Only James
 Charles and the new team member's manager will mostly do this.
 
 <input type="checkbox"/> Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan) <br>
+<input type="checkbox"/>  (UK only) Send a copy of their HMRC new starter form on CharlieHR to DRG, and include their salary and if they are full or part time <br>
 <input type="checkbox"/>  Send team member a copy of this page so they can check everything has been done <br>
-<input type="checkbox"/> (US only) Add the team member to [Gusto](https://app.gusto.com) <br>
-<input type="checkbox"/> (UK only) Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll <br>
+<input type="checkbox"/>  (US only) Add the team member to [Gusto](https://app.gusto.com) <br>
+<input type="checkbox"/>  (UK only) Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll <br>
 <input type="checkbox"/>  Create GSuite account for the team member <br>
 <input type="checkbox"/>  Add team member to 1password <br>
 <input type="checkbox"/>  Check that the team member is invited to the daily standups and any other regular meetings (e.g. retros, life stories) <br> 
@@ -52,6 +53,7 @@ Charles and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Ask James or Yakko to give them $100 credit to spend on Shopify <br>
 <input type="checkbox"/>  Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them <br>
 <input type="checkbox"/>  Add the team member's details to our hiring plan in Pry <br>
+<input type="checkbox"/>  Add the team member's share options to Captable.io (if relevant) <br>
 
 ## On Their First Day
 
