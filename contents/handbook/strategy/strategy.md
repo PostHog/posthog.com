@@ -41,3 +41,5 @@ PostHog today is focused on enabling engineering teams and product teams to work
 ## What do we need to do next
 
 We have a [strategy project](https://github.com/orgs/PostHog/projects/5), which is visible for PostHog team members.
+
+We have a [prioritization framework](/handbook/strategy/prioritization) to figure out what to work on next.

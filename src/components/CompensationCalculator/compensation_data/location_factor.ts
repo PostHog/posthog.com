@@ -1,7 +1,13 @@
 // This information comes from GitLab's location_factors file and converted to JSON
 // https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/location_factors.yml
 
-const location_factor = [
+interface CompensationCalculatorLocation {
+    country: string
+    area: string
+    locationFactor: Number
+}
+
+export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Connecticut',
@@ -1583,4 +1589,3 @@ const location_factor = [
         locationFactor: 0.45,
     },
 ]
-export default location_factor

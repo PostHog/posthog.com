@@ -1,8 +1,9 @@
-// AUTO GENERATED FILE 
+// AUTO GENERATED FILE
 
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CodeBlock } from './components/CodeBlock'
+import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -29,31 +30,32 @@ import { StartNowButton } from './components/StartNowButton'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
-	BasicHedgehogImage,
-	BlogFooter,
-	CodeBlock,
-	Container,
-	DarkModeToggle,
-	DemoScheduler,
-	DocsPageSurvey,
-	DocsSearch,
-	FeaturesComparisonTable,
-	FeaturesNav,
-	Footer,
-	GetStartedModal,
-	NewsletterForm,
-	OtherFeaturesBlock,
-	PageHeader,
-	PostCard,
-	ResponsiveAnchor,
-	ResponsiveSidebar,
-	ResponsiveTopBar,
-	DesignedForYourStackBlock,
-	FeaturedSectionTextLeft,
-	FeaturedSectionTextRight,
-	FeaturedSectionTripleImage,
-	Spacer,
-	StarRepoButton,
-	StartNowButton,
-	TableOfContents
+    BasicHedgehogImage,
+    BlogFooter,
+    CodeBlock,
+    CompensationCalculator,
+    Container,
+    DarkModeToggle,
+    DemoScheduler,
+    DocsPageSurvey,
+    DocsSearch,
+    FeaturesComparisonTable,
+    FeaturesNav,
+    Footer,
+    GetStartedModal,
+    NewsletterForm,
+    OtherFeaturesBlock,
+    PageHeader,
+    PostCard,
+    ResponsiveAnchor,
+    ResponsiveSidebar,
+    ResponsiveTopBar,
+    DesignedForYourStackBlock,
+    FeaturedSectionTextLeft,
+    FeaturedSectionTextRight,
+    FeaturedSectionTripleImage,
+    Spacer,
+    StarRepoButton,
+    StartNowButton,
+    TableOfContents,
 }

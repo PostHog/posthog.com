@@ -9,7 +9,7 @@ An organization is the largest building block of PostHog's structure: it contain
 
 ## Projects
 
-By default an organization only has the default project. For multiple projects – which are a premium PostHog feature – [take a look at their dedicated page](/docs/features/multiple-projects).
+By default an organization only has the default project. For more on projects [take a look at their dedicated page](/docs/features/projects).
 
 ### Segregating data into multiple projects
 
@@ -62,3 +62,5 @@ Any organization member can create organization invites. Such an invite is valid
 If there's no account associated with that email, the invited person will have to create an account. Otherwise they'll be able to join with their existing account.
 
 Newly-joined users get the basic Member access level.
+
+> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. However multiple organizations per self-hosted PostHog instance belong to our premium team-oriented offering. To use this feature, contact [sales@posthog.com](mailto:sales@posthog.com) for a self-hosted license.
