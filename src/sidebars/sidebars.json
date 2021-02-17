@@ -104,7 +104,8 @@
             "docs/features/feature-flags",
             "docs/features/funnels",
             "docs/features/log-in-with-github-gitlab",
-            "docs/features/multiple-projects",
+            "docs/features/organizations",
+            "docs/features/projects",
             "docs/features/paths",
             "docs/features/plugins",
             "docs/features/retention",
@@ -296,8 +297,9 @@
         "items": [
             "careers/full-stack-software-engineer",
             "careers/senior-fs-software-engineer",
+            "careers/site-reliability-engineer",
             "careers/customer-success-lead",
-            "careers/site-reliability-engineer"
+            "careers/content-marketer"
         ]
     },
     {
@@ -348,6 +350,7 @@
             "handbook/strategy/strategy",
             "handbook/strategy/business-model",
             "handbook/strategy/roadmap",
+            "handbook/strategy/prioritization",
             "handbook/strategy/investors",
             "handbook/strategy/investor-updates"
         ]
