@@ -56,7 +56,7 @@ Feature flags can now be rolled out to multiple different groups that use distin
 
 For example, you can now determine a feature flag to be rolled out to all of the following:
 
-- 100% of users in the 'Beta Testers` cohort
+- 100% of users in the 'Beta Testers' cohort
 - 40% of all your users
 - All users in a specific team that requested the feature from you  
 
