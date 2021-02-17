@@ -23,7 +23,7 @@ Make sure you're using both PostHog and Sentry as JS modules. You'll need to rep
 import posthog from 'posthog-js'
 import * as Sentry from '@sentry/browser'
 
-posthog.init('<your api key>')
+posthog.init('<ph_project_api_key>')
 
 Sentry.init({
     dsn: '<your Sentry DSN>',

@@ -25,8 +25,8 @@ In your app, set your API key **before** making any calls.
 import PostHog from 'posthog-node'
 
 const client = new PostHog(
-  'API key',
-  {host: 'https://posthog.[your domain].com'} // You can remove this line if you're using app.posthog.com
+  '<ph_project_api_key>',
+  {host: '<ph_instance_address>'} // You can remove this line if you're using app.posthog.com
 )
 ```
 

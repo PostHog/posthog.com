@@ -21,3 +21,31 @@ export const getPluginImageSrc = (plugin: LibraryPluginType) =>
         : plugin.url.includes('github')
         ? `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/logo.png`
         : null
+
+export const getCookie = (name: string) => {
+    if (name === 'ph_current_project_token') {
+        return 'sjd0293jdb28eb237rdsjd235cjf'
+    }
+    if (name === 'ph_current_project_name') {
+        return 'HogFlix Project'
+    }
+    var cookieValue = null
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';')
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim()
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + '=') {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+                break
+            }
+        }
+    }
+    return cookieValue
+}
+
+export const generateRandomHtmlId = () =>
+    Math.random()
+        .toString(36)
+        .replace(/[^a-z]+/g, '')
+        .substr(2, 10)
