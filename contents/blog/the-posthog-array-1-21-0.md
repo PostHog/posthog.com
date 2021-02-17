@@ -101,7 +101,7 @@ Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com
 
 ## Favorite Issue
 
-### [Darkmode Design + UX](https://github.com/PostHog/posthog.com/issues)
+### [Darkmode Design + UX](https://github.com/PostHog/posthog.com/issues/993)
 
 We're redesigning Dark Mode for our Docs - _can ya dig it?_
 
