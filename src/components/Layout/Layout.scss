@@ -1,21 +1,28 @@
 @import '../../vars';
 
-// Some comment
-/* latin */
-@font-face {
-    font-family: 'Lato';
-    src: url(https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wXiWtFCc.woff2);
-}
-
-/*Gosha Sans*/
+/* Gosha Sans */
 @font-face {
     font-family: 'Gosha Sans';
     src: url('/fonts/GoshaSans-Bold.woff') format('woff');
     src: url('/fonts/GoshaSans-Bold.woff2') format('woff2');
 }
 
+/* Good Sans */
+@font-face {
+    font-family: 'Good Sans';
+    src: url('/fonts/GoodSans-Medium.woff') format('woff');
+    src: url('/fonts/GoodSans-Medium.woff2') format('woff2');
+}
+
+/* Good Sans Bold */
+@font-face {
+    font-family: 'Good Sans Bold';
+    src: url('/fonts/GoodSans-Bold.woff') format('woff');
+    src: url('/fonts/GoodSans-Bold.woff2') formt('woff2');
+}
+
 html {
-    font-family: lato !important;
+    font-family: 'Good Sans' !important;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     overscroll-behavior-y: none;
@@ -208,7 +215,7 @@ html {
 }
 body {
     color: hsla(0, 0%, 0%, 0.8);
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-family: 'Good Sans', Helvetica, Arial, sans-serif !important;
     font-weight: normal;
     word-wrap: break-word;
     font-kerning: normal;
@@ -601,8 +608,7 @@ td:last-child {
     color: rgba(0, 0, 0, 0.85);
     font-size: 18px;
     line-height: 64px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
-        'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: 'Good Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-variant: tabular-nums;
     white-space: nowrap;
     text-decoration: none;
