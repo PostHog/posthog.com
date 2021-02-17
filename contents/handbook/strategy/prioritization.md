@@ -57,11 +57,8 @@ Below is a table of how we see our product-market fit for various sizes of compa
 </table>
 </span>
 
-<<<<<<< HEAD
-As you can see, we have good product-market fit with engineers, specifically with enthusiasts and startups. 
-=======
+
 As you can see, we have good product-market fit with engineers generally, and specifically for enthusiasts and startups. 
->>>>>>> a0ade2b8182f22410f25ca626b2155f4d4f62fe4
 
 ## Value
 
