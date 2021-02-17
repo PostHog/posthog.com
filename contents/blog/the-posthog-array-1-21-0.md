@@ -31,7 +31,7 @@ We had this behind a feature flag, but now all our users have access to our fres
 
 ![Refreshing Insights](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/refreshing-insights.png)
 
-To provide a smooth user experience, we cache query results so that you don't have to wait for a query to run everytime you go back to a chart you've recently looked at.
+To provide a smooth user experience, we cache query results so that you don't have to wait for a query to run every time you go back to a chart you've recently looked at.
 
 However, this might mean you're sometimes looking at slightly outdated results. As such, we now clearly indicate to you if you're looking at a cached result, how long ago this result was computed, and allow you to refresh it any time you want to see an updated result. 
 
@@ -71,7 +71,7 @@ A lot has happened to our plugins feature since the last release, including:
 
 - An improved UI
 - The ability to reorder plugins
-- The ability to upgrade plugins (and see excatly what changed between plugin versions)
+- The ability to upgrade plugins (and see exactly what changed between plugin versions)
 - Autofill on commonly used plugin configuration fields
 - A new plugin configuration field type, letting plugin builders specify pre-determined choices for the user to select from
 - A ton of performance improvements
@@ -228,7 +228,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Emit timing gauge to statsd for sync\_execute on clickhouse [\#3209](https://github.com/PostHog/posthog/pull/3209) ([fuziontech](https://github.com/fuziontech))
 - str\(team.organization\_id\) in PLUGINS\_CLOUD\_WHITELISTED\_ORG\_IDS check [\#3208](https://github.com/PostHog/posthog/pull/3208) ([Twixes](https://github.com/Twixes))
 - Handle navigation race in insights logic [\#3207](https://github.com/PostHog/posthog/pull/3207) ([macobo](https://github.com/macobo))
-- Filp PLUGIN\_SERVER\_INGESTION on [\#3206](https://github.com/PostHog/posthog/pull/3206) ([mariusandra](https://github.com/mariusandra))
+- Flip PLUGIN\_SERVER\_INGESTION on [\#3206](https://github.com/PostHog/posthog/pull/3206) ([mariusandra](https://github.com/mariusandra))
 - Bump plugin server to 0.7.2 [\#3205](https://github.com/PostHog/posthog/pull/3205) ([Twixes](https://github.com/Twixes))
 - Update plugin server to 0.7.1 [\#3204](https://github.com/PostHog/posthog/pull/3204) ([mariusandra](https://github.com/mariusandra))
 - Alltime compare sentry error [\#3203](https://github.com/PostHog/posthog/pull/3203) ([EDsCODE](https://github.com/EDsCODE))
@@ -329,10 +329,10 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Kea TypeGen types in the same folder as logic [\#3048](https://github.com/PostHog/posthog/pull/3048) ([mariusandra](https://github.com/mariusandra))
 - Fix session recording breakage [\#3045](https://github.com/PostHog/posthog/pull/3045) ([macobo](https://github.com/macobo))
 - Plugin Server 0.6.8 [\#3043](https://github.com/PostHog/posthog/pull/3043) ([mariusandra](https://github.com/mariusandra))
-- Add try statement for deleting persons incase the table is distributed [\#3042](https://github.com/PostHog/posthog/pull/3042) ([EDsCODE](https://github.com/EDsCODE))
+- Add try statement for deleting persons in case the table is distributed [\#3042](https://github.com/PostHog/posthog/pull/3042) ([EDsCODE](https://github.com/EDsCODE))
 - Add refresh param to retention and paths [\#3039](https://github.com/PostHog/posthog/pull/3039) ([EDsCODE](https://github.com/EDsCODE))
 - Hide plugins from nav in Cloud  [\#3038](https://github.com/PostHog/posthog/pull/3038) ([yakkomajuri](https://github.com/yakkomajuri))
-- Patch DNE in sessionsplaylogic [\#3037](https://github.com/PostHog/posthog/pull/3037) ([EDsCODE](https://github.com/EDsCODE))
+- Patch DONE in sessionsplaylogic [\#3037](https://github.com/PostHog/posthog/pull/3037) ([EDsCODE](https://github.com/EDsCODE))
 - Plugin server 0.6.6 [\#3035](https://github.com/PostHog/posthog/pull/3035) ([mariusandra](https://github.com/mariusandra))
 - Don't install unused pandas and numpy [\#3034](https://github.com/PostHog/posthog/pull/3034) ([Twixes](https://github.com/Twixes))
 - Plugin unique url with different private tokens & improve privacy [\#3033](https://github.com/PostHog/posthog/pull/3033) ([mariusandra](https://github.com/mariusandra))
