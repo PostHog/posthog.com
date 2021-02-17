@@ -219,7 +219,7 @@ const PricingPage = () => {
 
                                 <Card className="feature-card">
                                     <div className="plan-image">
-                                        <img src={imgCloudPlan} alt="" />
+                                        <img src={imgCloudPlan} alt="" className="inline-block" />
                                     </div>
                                     <div className="text-center">
                                         <h5>Features included</h5>
@@ -393,7 +393,7 @@ const PricingPage = () => {
                                         , activate the <i>Standard plan</i> and enter your card billing information.
                                     </li>
                                     <li>
-                                        Send us an email to {' '}
+                                        Send us an email to{' '}
                                         <a href="mailto:sales@posthog.com?subject=Non-profit%20plan">
                                             sales@posthog.com
                                         </a>{' '}
@@ -403,7 +403,7 @@ const PricingPage = () => {
                                     <li>We'll apply the 50% discount to your account.</li>
                                 </ol>
                                 <div>
-                                    To redeem the offer for Enterprise plans just
+                                    To redeem the offer for Enterprise plans just{' '}
                                     <a href="mailto:sales@posthog.com?subject=Non-profit%20enterprise%20plan">
                                         send us an email
                                     </a>
