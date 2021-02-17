@@ -113,7 +113,7 @@ Sean has joined us to lead our marketing efforts and we're super excited.
 
 Big thanks to the following members of our community who have contributed to PostHog over this release cycle:
 
-- [FUSKALA](https://github.com/FUSKALA)
+- [FUSAKLA](https://github.com/FUSAKLA)
 - [cpankajr](https://github.com/cpankajr)
 - [zegl](https://github.com/zegl)
 - [reicolina](https://github.com/reicolina)
