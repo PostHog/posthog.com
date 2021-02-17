@@ -26,3 +26,7 @@ ul {
 .bg-purple-gradient {
     background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
 }
+
+.bg-dark-gray {
+    background: #0e0e0e !important;
+}

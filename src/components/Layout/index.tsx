@@ -52,6 +52,13 @@ const Layout = ({
 
     return (
         <>
+            <Header
+                onPostPage={onPostPage}
+                isBlogArticlePage={isBlogArticlePage}
+                isHomePage={isHomePage}
+                isDocsPage={isDocsPage}
+                menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
+            />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
                     <AntdLayout.Sider
@@ -64,12 +71,6 @@ const Layout = ({
                     </AntdLayout.Sider>
                 )}
                 <AntdLayout id="ant-layout-content-wrapper" style={{ background: '#ffffff' }}>
-                    <Header
-                        onPostPage={onPostPage}
-                        isBlogArticlePage={isBlogArticlePage}
-                        isHomePage={isHomePage}
-                        menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
-                    />
                     {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                         <span className="display-mobile">
                             <ResponsiveTopBar />
