@@ -7,15 +7,21 @@ showTitle: true
 hideAnchor: true
 ---
 
-We took our time with this one because our word of the month was **stability**.
+Release 1.21 is a big one, on top of exciting new features and improvements, we put extra time into the overall stability of PostHog squashing dozens of issues. Some highlights of this release:
+
+- New: Our new navigation is out of beta and available to all
+- New: assign Feature Flags to multiple groups of users
+- New: Plugins UI and new Taxonomy plugin
+- Improvement: to Insight query caching
+- Improvement: to Session Recording filters
 
 We received a lot of great feedback and issue reports and over this release cycle we fixed hundreds of issues, polishing our UI, squashing bugs, and significantly improving our performance.
 
-There's still some new shiny features out though, so make sure to upgrade if you're looking to grab _'em_.
+Make sure to upgrade to get the new features, improvements and fixes.
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
 
 
 ### [New Navigation For All](https://github.com/PostHog/posthog/pull/3167)
@@ -24,25 +30,23 @@ There's still some new shiny features out though, so make sure to upgrade if you
 
 While this might not be news to all of you, we have now released our new navigation to everyone.
 
-We had this behind a feature flag, but now all our users have access to our fresh spaceship-like navigation. What do you think? 🚀
+We had this behind a feature flag, but now all our users have access to our fresh "spaceship-like" navigation. What do you think? 🚀
 
 
 ### [Refreshing Insights](https://github.com/PostHog/posthog/pull/3144)
 
 ![Refreshing Insights](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/refreshing-insights.png)
 
-To provide a smooth user experience, we cache query results so that you don't have to wait for a query to run every time you go back to a chart you've recently looked at.
+To provide a smooth user experience, we cache query results so that you don't have to wait for a query to run every time you view a chart.
 
-However, this might mean you're sometimes looking at slightly outdated results. As such, we now clearly indicate to you if you're looking at a cached result, how long ago this result was computed, and allow you to refresh it any time you want to see an updated result. 
+This has the side effect that sometimes you'll be looking at slightly outdated results. We made improvements to clearly indicate when you're looking at a cached result, when it was computed, and allow you to refresh. 
 
 
 ### [Session Recording Filters](https://github.com/PostHog/posthog/pull/2993)
 
 ![Session filters](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/session-filters.png)
 
-Our session recording filters just got **so much more powerful**.
-
-Filter by session duration, user properties, unseen recordings, actions performed in a session, and so much more. 
+Our session recording filters just got **so much more powerful**. Filter by session duration, user properties, unseen recordings, actions performed in a session, and so much more. 
 
 You can now get a lot more out of your session recording sessions by tailoring the recordings to specific areas of your product you're looking into.
 
@@ -54,13 +58,13 @@ For a start, how about [integrating PostHog with Sentry](https://posthog.com/doc
 
 Feature flags can now be rolled out to multiple different groups that use distinct settings, unlocking a whole new world of opportunities for your A/B testing and feature rollout processes.
 
-For example, you can now determine a feature flag to be rolled out to all of the following:
+For example, you can now roll out feature flags like this:
 
 - 100% of users in the 'Beta Testers' cohort
 - 40% of all your users
 - All users in a specific team that requested the feature from you  
 
-You can then adjust the filters and rollout percentage for each individually, giving you an even greater degree of flexibility with how you leverage our flags in your workflows.
+The filters and rollout percentages can be adjusted per group, giving you greater control degree of how you build and test your products. 
 
 
 ### [A New Plugins UI with Brand New Features](https://github.com/PostHog/posthog/pull/2774)
@@ -107,7 +111,9 @@ We're redesigning Dark Mode for our Docs - _can ya dig it?_
 
 ## PostHog News
 
-Sean has joined us to lead our marketing efforts and we're super excited. 
+Sean has joined us to lead our marketing efforts and we're super excited.
+
+He is a developer with an impressive background in open source software and game development and believes (correctly) that pineapple and pizza must not commingle.
 
 ## Community Shoutouts
 
@@ -122,6 +128,9 @@ Big thanks to the following members of our community who have contributed to Pos
 - [leggetter](https://github.com/leggetter)
 - [tmilicic](https://github.com/tmilicic)
 
+## Community MVP
+
+A special shoutout goes to [cpankajr](https://github.com/cpankajr), our Community MVP for this release cycle, for [helping us say goodbye to the `pandas` and `numpy` bloat](https://github.com/PostHog/posthog/pull/2997) in our images.
 
 ## Open Roles
 
