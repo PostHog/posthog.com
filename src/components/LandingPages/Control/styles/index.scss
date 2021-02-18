@@ -31,7 +31,7 @@
     }
 
     #logo-image {
-        content: url('../../images/posthog-logo-white.svg');
+        content: url('../../../../images/posthog-logo-white.svg');
     }
 
     body {
@@ -209,7 +209,7 @@
     }
 
     .topPageCol2 {
-        background-image: url('../../images/computer-dashboard-4.svg') !important;
+        background-image: url('../../../../images/computer-dashboard-4.svg') !important;
         position: relative;
         height: 410px;
         width: calc(14 / 24 * 100vw);
@@ -411,7 +411,7 @@
             height: 683px;
         }
         .trafficImg {
-            background-image: url('../../images/traffic-background-mobile.svg') !important;
+            background-image: url('../../../../images/traffic-background-mobile.svg') !important;
             background-repeat: no-repeat;
             background-size: 541px 265px;
             background-position: calc((100vw - 834px) / 2 + 230px) top;
@@ -474,7 +474,7 @@
     @media screen and (min-width: 1080px) and (max-width: 1440px) {
         .fs-feature-flags-wrapper {
             padding-top: 70px;
-            background-image: url('../../images/landing-page-background.svg') !important;
+            background-image: url('../../../../images/landing-page-background.svg') !important;
         }
         .fs-self-host-wrapper .fs-header-2 {
             max-width: 30vw !important;
@@ -1038,7 +1038,7 @@
 
     .installNowShelf {
         position: relative;
-        background-image: url('../../images/shelf-5.svg') !important;
+        background-image: url('../../../../images/shelf-5.svg') !important;
         background-size: 1048px calc(88 / 768 * 1048px);
         background-position: center top;
         background-repeat: no-repeat;

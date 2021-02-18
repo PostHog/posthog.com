@@ -13,6 +13,8 @@ import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { Control } from './components/LandingPages/Control'
+import { Test } from './components/LandingPages/Test'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
@@ -43,6 +45,8 @@ export const shortcodes = {
     FeaturesNav,
     Footer,
     GetStartedModal,
+    Control,
+    Test,
     NewsletterForm,
     OtherFeaturesBlock,
     PageHeader,
