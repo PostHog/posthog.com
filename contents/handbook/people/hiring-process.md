@@ -242,3 +242,4 @@ We are learning which boards work well:
 - Workable pushes all jobs to 17 job boards, including LinkedIn, Indeed etc.
 - Since PostHog is a YC company, we can place job ads in YC's [Work at a Startup list](https://www.workatastartup.com/jobs).
 - [AngelList](https://angel.co)
+
