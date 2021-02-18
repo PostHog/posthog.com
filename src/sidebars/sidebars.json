@@ -314,6 +314,7 @@
         "name": "Marketing",
         "items": [
             "handbook/growth/marketing",
+            "handbook/growth/marketing/content",
             "handbook/growth/marketing/posthog-array",
             "handbook/growth/marketing/releasing-content",
             "handbook/growth/marketing/press"
