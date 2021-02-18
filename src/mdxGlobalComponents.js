@@ -30,6 +30,7 @@ import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
 import { TableOfContents } from './components/TableOfContents'
+import { TestLayout } from './components/TestLayout'
 
 export const shortcodes = {
     BasicHedgehogImage,
@@ -62,4 +63,5 @@ export const shortcodes = {
     StarRepoButton,
     StartNowButton,
     TableOfContents,
+    TestLayout,
 }
