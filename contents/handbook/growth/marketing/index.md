@@ -4,49 +4,79 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Regularly publishing useful content helps us:
+We're in the process of building a cross-functional marketing team to initially convert technical teams and individuals developers at startups, thereafter expanding to other business functions and scale-ups and enterprises.
 
-* Build awareness of PostHog in the developer community
-* Convert people who are aware of us into users
-* Convert users into power users
+## Marketing Functions
 
-## Content Personas
+Our marketing functions will include product marketing, content marketing, community, paid and operations but as a team we work closely with the product team, engineering and specifically growth engineering to improve AARRR, support and sales.
 
-We tailor our content to specific audiences.
+### Product Marketing
 
-### Raising awareness
+Product marketing is the foundation upon which other marketing efforts are built. Product marketing consists of the following activities:
 
-Many developers have no idea who we are, and do not have a current need for PostHog at this time. However, they may develop a need in future. These people are interested in broader content:
+- Market research to identify targetable industries and use cases
+- Competitor research
+- Working with our product team to develop a competitive product positioning
+- Developing and maintaining buyer personas
+- Creating product messaging for our website to address our buyer personas
+- Creating gated marketing content and sales collateral: reports, white papers etc
+- Measuring the success of content
 
-* Syndicating content about how to make your product successful - being a pundit.
-  * New and useful open source libraries to build / understand user behavior
-  * Syndicating content about talking to users and how to help engineers become better at product-thinking
-  * Running an engineering team that ships
-  * Big new releases in popular libraries that people use to ship with
-  * Useful new products that are released
-* 1st hand content about building an open source company
-  * Building in the open
+**Hiring**: We're hiring an intermediate technical product marketer **soon** to address developers/startups and will expand the team when we're reaching our capacity (approximately 4-8 months).
 
-There are also developers that have no idea who we are, but with a specific need that we could solve.
+### Content Marketing
 
-**Suitable Content**
+Content marketers are our story tellers. They excel at creating narrative driven content most commonly found on our blog but can also be in other formats. Using our foundational research and messaging, content marketers have the following responsibilities:
 
-* Tutorials explaining the use cases of our product
+- Researching and pitching innovative ideas
+- Creating articles, interviews, case studies, infographics and ebooks
+- Creating engaging timely content around anything trendy
+- Maintaining a content calendar that proportionally addresses our target audiences
+- Measuring the success of content
 
-### Converting awareness into usage
+**Hiring**: We're hiring an intermediate content marketer **now** and will expand the team when we have a product marketing foundation, effective reporting and content, and are close to our content creation capacity (approximately 4-8 months).
 
-There are thousands of developers who are aware of us, but who are not using us (yet)! This could be people who have starred our repo, people who have made a demo or startup scheme enquiry, people that our own team knows  (e.g. other founders), and potentially even users that have churned.
+### Community
 
-With this group, we need content that demonstrates the product's use cases, highlighting what is changing as the product's capabilities expand.
+The PostHog community team works across product, engineering, support and marketing, ultimately all their efforts go towards community growth and empowerment. Yakko is fulfilling a community experience role with the following responsibilities:
 
-**Suitable Content**
+- Onboarding YC startups as part of our [Deal for YC companies](https://posthog.com/handbook/growth/sales/yc-onboarding)
+  - We will be expanding our marketing in this area with the goal of onboarding majority of companies in upcoming batches and a large portion of previous batches
+- PostHog releases: collaborating with our engineering team, doing the release, writing the release post and working with the rest of marketing to promote
+- Maintaining our documentation infrastructure
+- Creating documentation and tutorials
+- User interviews and community support
 
-* Monthly wrap ups that contain the headline new features and any new tutorials
+Other community activities that will come up as we grow:
 
-### Converting users into ambassadors
+- Developing community apps and tools to increase growth and support our community
+- Running events and supporting community events
+- Community moderation and/or self-moderation
+- Managing discussions on social channels
 
-Once people start using PostHog, we've seen we get word of mouth growth when we really impress people, which has so far come from shipping fast. Our content can reinforce this, and to make these users clear how to get the most use out of the product. 
+**Hiring**: We will hire additional community team members when Yakko is reaching capacity (end of 2021).
 
-**Suitable Content**
+### Paid
 
-* [Array](posthog-array) (release notes + new tutorials)
+Paid marketing will be used to grow revenue or community and include:
+
+- Search engine
+- YouTube 
+- Social
+- Websites, blogs
+- Newsletters
+- Podcasts, YouTube channels
+- Events
+- Competitions
+
+**Hiring**: We'll hire this role when we have effective product messaging, content and reporting (end of 2021, early 2022).
+
+### Operations
+
+Marketing operations can encompass a wide range of activities including:
+
+- Development of marketing websites, apps and tools
+- Research and maintenance of our marketing stack
+- Automation of activities on our various channels 
+
+**Hiring**: We'll hire this role when we have someone in all our other marketing functions and need operations to be optimised to scale the team further (2022).
