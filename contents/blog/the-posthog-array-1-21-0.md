@@ -111,7 +111,9 @@ We're redesigning Dark Mode for our Docs - _can ya dig it?_
 
 ## PostHog News
 
-Sean has joined us to lead our marketing efforts and we're super excited. 
+Sean has joined us to lead our marketing efforts and we're super excited.
+
+He is a developer with an impressive background in open source software and game development and believes (correctly) that pineapple and pizza must not commingle.
 
 ## Community Shoutouts
 
@@ -126,6 +128,9 @@ Big thanks to the following members of our community who have contributed to Pos
 - [leggetter](https://github.com/leggetter)
 - [tmilicic](https://github.com/tmilicic)
 
+## Community MVP
+
+A special shoutout goes to [cpankajr](https://github.com/cpankajr), our Community MVP for this release cycle, for [helping us say goodbye to the `pandas` and `numpy` bloat](https://github.com/PostHog/posthog/pull/2997) in our images.
 
 ## Open Roles
 
