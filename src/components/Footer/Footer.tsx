@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import NewsletterSignup from './NewsletterSignup'
+
 const FooterListItem = ({ to, children, hideBorder }) => {
     const baseClasses = 'block py-3 text-white opacity-80 hover:opacity-100'
     const fullClassList = hideBorder ? baseClasses : `${baseClasses} border-b border-blue-600`
@@ -16,9 +18,12 @@ const FooterSubCategory = ({ children }) => <h7 className="block text-blue-600 m
 
 const FooterCategory = ({ children }) => <h5 className="text-blue-600 text-lg">{children}</h5>
 
-const Footer = () => {
+const Footer = ({ showNewsletter }: { showNewsletter?: boolean }) => {
+    const newsletterSignup = showNewsletter ? <NewsletterSignup /> : null
+
     return (
         <div className="footer-universal py-24">
+            {newsletterSignup}
             <div className="w-11/12 max-w-4xl flex flex-col md:flex-row justify-between mx-auto">
                 <div className="w-full md:w-1/4 md:pr-8">
                     <FooterCategory>Product</FooterCategory>

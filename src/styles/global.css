@@ -26,3 +26,16 @@ ul {
 .bg-purple-gradient {
     background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
 }
+
+.bg-neon {
+    background: radial-gradient(
+        98.07% 3378.56% at 0% 76.88%,
+        #ff66dd 0%,
+        #ff1c1c 15.1%,
+        #ff3672 32.29%,
+        #f8612e 50%,
+        #ff3672 70.83%,
+        #ff1c1c 85.94%,
+        #ff66dd 100%
+    );
+}
