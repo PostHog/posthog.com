@@ -38,14 +38,19 @@ Content marketers are our story tellers. They excel at creating narrative driven
 
 ### Community
 
-The PostHog community team works across product, engineering, support and marketing, ultimately all their efforts go towards community growth and empowerment. Yakko is fulfilling a community experience role with the following responsibilities:
+The PostHog community team works across product, engineering, support, and marketing, ultimately all their efforts go towards community growth and empowerment. Yakko, from our Developer Experience team, has the following responsibilities regarding our community:
 
 - Onboarding YC startups as part of our [Deal for YC companies](https://posthog.com/handbook/growth/sales/yc-onboarding)
   - We will be expanding our marketing in this area with the goal of onboarding majority of companies in upcoming batches and a large portion of previous batches
-- PostHog releases: collaborating with our engineering team, doing the release, writing the release post and working with the rest of marketing to promote
-- Maintaining our documentation infrastructure
+- Running demos
+- PostHog releases: collaborating with our engineering team, doing the release, writing the release post, and working with the rest of marketing to promote
 - Creating documentation and tutorials
-- User interviews and community support
+- Supporting contributors to our codebase
+    - Making it easier to contribute 
+    - Providing assistance in pull requests
+    - Providing merch for contributions
+    - Empowering contributors and highlighting their contributions
+- [Providing support](/handbook/growth/strategy) for users of our open source product
 
 Other community activities that will come up as we grow:
 
