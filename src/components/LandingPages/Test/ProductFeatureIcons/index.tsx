@@ -7,7 +7,13 @@ import featureFlagsImg from '../images/ProductFeatureIcons/feature-flags.svg'
 import userFeedbackImg from '../images/ProductFeatureIcons/user-feedback.svg'
 import revenueTrackingImg from '../images/ProductFeatureIcons/revenue-tracking.svg'
 
-const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }) => {
+interface ProductIconData {
+    label: string
+    icon: any
+    expectedLaunchDate?: string
+}
+
+const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }: ProductIconData) => {
     const opacity = expectedLaunchDate ? 'opacity-50' : 'opacity-100'
     const expectedLabel = expectedLaunchDate ? <span className="text-white font-thin">{expectedLaunchDate}</span> : null
 
