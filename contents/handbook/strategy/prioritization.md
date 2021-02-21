@@ -27,18 +27,18 @@ Below is a table of how we see our product-market fit for various sizes of compa
         <td>Enterprise</td>
     </tr>
     <tr>
-        <td>Engineers / Ex-Developer Product Managers</td>
+        <td>Engineers / PMs with technical expertise</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
         <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
     </tr>
     <tr>
-        <td>Non-Technical Product Managers</td>
+        <td>Non-Technical PMs, marketing, sales, business</td>
         <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
+        <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
     </tr>
     <tr>
         <td>Analysts</td>
@@ -88,8 +88,8 @@ Given scores from 1-5, here's how each type of company stacks up against those t
     <tr>
         <td>Revenue</td>
         <td>Low (1/5)</td>
-        <td>Low (1/5)</td>
-        <td>Mid (3/5)</td>
+        <td>Mid (2/5)</td>
+        <td>High (4/5)</td>
         <td>Very high (5/5)</td>
     </tr>
     <tr>
