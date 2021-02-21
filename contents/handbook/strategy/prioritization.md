@@ -34,7 +34,7 @@ Below is a table of how we see our product-market fit for various sizes of compa
         <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
     </tr>
     <tr>
-        <td>Non-Technical PMs, marketing, sales, business</td>
+        <td>Non-technical PMs, marketing, sales, business</td>
         <td style="background:var(--warning)">Too technical</td>
         <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
         <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
@@ -124,15 +124,15 @@ We have three options for each box:
     <tr>
         <td>Engineers</td>
         <td style="background:var(--muted)" rowspan="3">Maintain</td>
-        <td style="background:var(--warning)">Grow</td>
+        <td style="background:var(--success)">Build</td>
         <td style="background:var(--success)">Build</td>
         <td style="background:var(--success)">Build</td>
     </tr>
     <tr>
-        <td>Product Managers</td>
-        <td style="background:var(--success)">Build</td>
-        <td style="background:var(--success)">Build</td>
-        <td style="background:var(--success)">Build</td>
+        <td>Non-technical roles</td>
+        <td style="background:var(--muted)">Maintain</td>
+        <td style="background:var(--muted)">Maintain</td>
+        <td style="background:var(--muted)">Maintain</td>
     </tr>
     <tr>
         <td>Analysts</td>
