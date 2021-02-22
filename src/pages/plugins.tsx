@@ -10,8 +10,6 @@ import { PluginModal } from '../components/PluginLibrary/PluginModal'
 import { getPluginImageSrc } from '../lib/utils'
 import { LibraryPluginType } from '../types'
 import { SEO } from '../components/seo'
-
-import './styles/plugin-library.scss'
 import { Link } from 'gatsby'
 
 const { TabPane } = Tabs

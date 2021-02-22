@@ -7,6 +7,7 @@ import { ExportOutlined } from '@ant-design/icons'
 import { useActions, useValues } from 'kea'
 import { pluginLibraryLogic, toPathName } from '../../logic/pluginLibraryLogic'
 import { SEO } from '../seo'
+import './style.scss'
 
 export const PluginModal = () => {
     const { activePlugin, activePluginName, pluginLoading } = useValues(pluginLibraryLogic)
@@ -25,7 +26,7 @@ export const PluginModal = () => {
             <Modal
                 isOpen={!!activePluginName}
                 onRequestClose={openLibrary}
-                className="pluginModalContent"
+                className="plugin-modal-content"
                 overlayClassName="modalOverlay"
                 ariaHideApp={false}
             >
