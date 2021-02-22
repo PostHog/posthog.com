@@ -61,7 +61,7 @@ Initial user interviews will be informal, but as we start to identify key themes
 
 ## Metrics
 
-### Aquisition
+### Acquisition
 
 For year, month, week, day:
 
