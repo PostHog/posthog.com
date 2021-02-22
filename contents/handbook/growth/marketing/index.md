@@ -47,7 +47,7 @@ We'll create tools and apps that celebrate our community's growth and members' c
 
 We'll thank substantial contributions with swag and other sponsorships.
 
-We'll financially support community lead events.S
+We'll financially support community lead events.
 
 
 ## Content
