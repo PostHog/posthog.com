@@ -9,6 +9,7 @@ import { Spin } from 'antd'
 import { PluginModal } from '../components/PluginLibrary/PluginModal'
 import { getPluginImageSrc } from '../lib/utils'
 import { LibraryPluginType } from '../types'
+import { SEO } from '../components/seo'
 
 import './styles/plugin-library.scss'
 import { Link } from 'gatsby'
@@ -21,6 +22,10 @@ export const PluginLibraryPage = () => {
 
     return (
         <Layout>
+            <SEO
+                title="Plugin Library • PostHog"
+                description="Plugins for getting data in and out of PostHog, the open source product analytics platform."
+            />
             <div className="centered" style={{ margin: 'auto' }}>
                 <PluginModal />
                 <Spacer />
