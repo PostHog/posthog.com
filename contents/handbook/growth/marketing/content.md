@@ -24,7 +24,7 @@ Many developers have no idea who we are, and do not have a current need for Post
   * Running an engineering team that ships
   * Big new releases in popular libraries that people use to ship with
   * Useful new products that are released
-* 1st hand content about building an open source company
+* 1st hand content about building a company, written for technical founders
   * Building in the open
   * Stories from other companies
 
