@@ -59,6 +59,75 @@ We're interested to learn about their processes, their awareness and adoption of
 Initial user interviews will be informal, but as we start to identify key themes, will become more structured - making it easier for us to track improvements in our marketing. For example, early discussion may identify that non-technical teams choose product analytics solutions more often than technical teams.
 
 
+## Metrics
+
+### Aquisition
+
+For year, month, week, day:
+
+- posthog.com:
+  - Funnel
+  - Page views, sessions, uniques:
+    - Total
+    - Change vs previous periods
+  - Top x referral sources:
+    - Total and rate
+    - Change vs previous periods
+  - bounce:
+    - Rate
+    - Change vs previous periods
+    - List of top x pages with highest bounce rate
+
+- Downloads, cloud signups, sales contacts, newsletter subs, GitHub referrals:
+  - Track event
+  - Total and rate (relative to page views, sessions, uniques)
+  - List of top x pages amongst conversions
+  - List of top x first-visit pages amongst conversions
+
+- Per newsletter:
+  - Hook up UTM codes to events
+  - Sends, clicks, subs, unsubs, opens:
+    - Total and rate
+    - Change vs previous periods
+
+- Twitter, LinkedIn and other social
+  - Impressions, posts, follows, reshares, likes, comments, clicks:
+    - Total and rate
+    - Change vs previous periods
+  - List of x top converting posts
+
+- Community Slack
+  - signups, messages:
+    - total
+    - change vs previous periods
+
+- HN:
+  - Posts, comments, name mentions, link mentions
+    - total
+    - change vs previous periods
+
+- GitHub:
+  - Stars, forks:
+    - total
+    - change vs previous periods
+
+### Activation
+
+Defined by product and engineering teams.
+
+### Retention
+
+Defined by product and engineering teams.
+
+### Referral
+
+todo
+
+### Revenue
+
+todo
+
+
 ## Content
 
 Regularly publishing useful content helps us:
