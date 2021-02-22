@@ -2,7 +2,7 @@ import { kea } from 'kea'
 import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import { getPluginImageSrc } from '../lib/utils'
 
-const toPathName = (pluginName) => pluginName.toLowerCase().replaceAll(' ', '-')
+export const toPathName = (pluginName) => pluginName.toLowerCase().replaceAll(' ', '-')
 
 export const pluginLibraryLogic = kea({
     actions: {
