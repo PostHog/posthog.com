@@ -26,6 +26,7 @@ Many developers have no idea who we are, and do not have a current need for Post
   * Useful new products that are released
 * 1st hand content about building an open source company
   * Building in the open
+  * Stories from other companies
 
 There are also developers that have no idea who we are, but with a specific need that we could solve.
 
