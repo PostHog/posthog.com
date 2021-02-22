@@ -207,4 +207,4 @@ Customer shall ensure that any and all information or data, including without li
 
 # PostHog GDPR Data Processing Agreement
 
-We may enter into a GDPR Data Processing Agreement with certain Enterprise clients, depending on the nature of the installation, how data is being processed and where it is stored. Our standard form agreement can be [viewed here](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing).  
+We may enter into a GDPR Data Processing Agreement with certain Enterprise clients, depending on the nature of the installation, how data is being processed, and where it is stored. Our standard form agreement can be [viewed here](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing).  
