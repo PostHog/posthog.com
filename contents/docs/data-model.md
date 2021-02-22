@@ -7,7 +7,6 @@ showTitle: true
 
 ## Event (posthog_event)
 
-<span class="table-borders">
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -19,12 +18,10 @@ showTitle: true
 | **ip** | GenericIPAddressField | IP of the user |
 | **elements** | JSONField | Deprecated in favour of the Element model |
 
-</span>
 
 ## Element
 At the moment, we're storing every element for every event, which means there's quite a lot of duplication. This is something that needs to be optimised.
 
-<span class="table-borders">
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -39,4 +36,3 @@ At the moment, we're storing every element for every event, which means there's 
 | **nth_of_type** | IntegerField | Position of the element of its own type<br>(eg. `<div><strong>First</strong><a>Second</a></div>`, the second `a` would have nth_of_type=1) |
 | **attributes** | CharField | Any other attribute that wasn't set in the above properties (including data properties) |
 
-</span>

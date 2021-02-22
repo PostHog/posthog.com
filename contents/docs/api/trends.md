@@ -14,7 +14,6 @@ In PostHog, there is an API endpoint available to do advanced analytics on your 
 GET /action/trends/?events=[{"id":"$pageview"}]
 GET /action/trends/?events=[{"id":"$pageview"}]&properties=[{"key":"$browser","value":"Chrome"}]
 ```
-<span class="table-borders">
 
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -24,7 +23,6 @@ GET /action/trends/?events=[{"id":"$pageview"}]&properties=[{"key":"$browser","v
 | `breakdown_value` | String | no | Split out all entities by any property value or cohort id.  
 | `breakdown_type` | String | no | Default: `property`. Can be set to `cohort`, in which case you can pass through a cohort_id to `breakdown_value`
 
-</span>
 
 Example request:
 

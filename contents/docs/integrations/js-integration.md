@@ -262,7 +262,6 @@ There are [33 different options](https://github.com/PostHog/posthog-js/blob/mast
 
 Some of the most relevant options are:
 
-<span class="table-borders">
 
 | Attribute                                                                         | Description                                                                                                                    |
 | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -290,8 +289,6 @@ posthog.init('[your api key]', {
 });
 ```
 
-
-</span>
 
 ## Development
 
