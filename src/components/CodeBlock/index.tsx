@@ -38,7 +38,7 @@ export const CodeBlock = (props: any) => {
             XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
             null
         )
-        const tokenHighlightHtml = `<span class='code-block-ph-token' data-tooltip='This is the Project API Key for your project "${projectName}" in PostHog Cloud.'>${token}</span>`
+        const tokenHighlightHtml = `<span class='code-block-ph-token' data-tooltip='This is the API key of your ${projectName} project in PostHog Cloud.'>${token}</span>`
         const tokenMatchRegex = new RegExp(token, 'g')
         let snapshotIndex = 0
         let node: HTMLElement | null = phTokenElements.snapshotItem(snapshotIndex) as HTMLElement
