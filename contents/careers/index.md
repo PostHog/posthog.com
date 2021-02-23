@@ -123,6 +123,7 @@ Our team is proactively looking for the following:
 * [Customer Success Lead](/careers/customer-success-lead)
 * [Site Reliability Engineer](careers/site-reliability-engineer)
 * [Content Marketer](careers/content-marketer)
+* [Product Marketer](careers/product-marketer)
 
 ## Open Application
 
