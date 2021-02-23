@@ -10,7 +10,7 @@ In 2021 we're focussing our marketing efforts on "startup" engineering teams and
 
 ### For Engineers
 
-Unlike many analytics solutions, that target product managers and other non-engineering roles, we're building PostHog for engineers and we'll support them with content- and community-driven campaigns that empower them to build successful products.
+Unlike many analytics solutions that target product managers and other non-engineering roles, we're building PostHog for engineers and we'll support them with content- and community-driven campaigns that empower them to build successful products.
 
 Some themes we've been discussing internally:
 
@@ -59,6 +59,125 @@ We're interested to learn about their processes, their awareness and adoption of
 
 Initial user interviews will be informal, but as we start to identify key themes, will become more structured - making it easier for us to track improvements in our marketing. For example, early discussion may identify that non-technical teams choose product analytics solutions more often than technical teams.
 
+
+## Plan
+
+The plan for each quarter will be expanded closer to the time and issues will created and assigned to the team.
+
+### February
+
+- [x] Sean joined as mid-Feb
+- [x] Marketing strategy and campaigns, plan and functions
+- [ ] Product Marketing
+  - [ ] Conduct rapid market and competitor analysis
+  - [ ] Summarise existing user interviews
+  - [ ] Create feature page template
+  - [ ] Create product marketing for example feature for Design team
+- [ ] Hiring
+  - [x] Post Content Marketer role
+  - [ ] Post Product Marketer role
+
+### March
+
+- [ ] Campaign: Improved YC deal for S21
+  - [ ] Brainstorm ideas:
+    - YC S21 Application Support AMA, [example](https://dutchtechsf.com/events/ycombinator-s21)
+  - [ ] Plan campaign and define metrics
+  - [ ] Start executing, creating content and events
+  - Notable dates:
+    - [23 March 2021 YC W21 Demo Day](https://blog.ycombinator.com/yc-w21-virtual-demo-day/)
+- Product Marketing
+  - [ ] Continue creating product marketing for existing features
+- Content Marketing:
+  - [ ] Work with Design to improve release posts
+  - [ ] Syndicate releases to startup/hacker communities
+- Improve release newsletter:
+  - [ ] Spam detection
+  - [ ] Opens
+  - [ ] Clicks
+- Conduct a handful of conversion experiments:
+  - [ ] E.g changing CTA text, adding more CTAs, SEO etc
+- Metrics:
+  - [ ] Implement dashboards for conversion metrics, then make a start on remaining metrics
+  - [ ] Define growth goals for Q2
+- Hiring:
+  - [ ] Sign Content Marketer
+  - [ ] Sign Product Marketer
+
+### Q2
+
+- Product marketing
+  - Experiment changing existing messaging to improve conversion
+  - Expand market and competitor research
+  - Identify more personas
+  - Create product marketing for new features
+  - Start creating content for next personas
+- Content marketing
+  - Work with product marketing to create content themes that address buyer personas
+  - Classify existing content into themes and rank effectiveness
+  - Experiment within popular and new (e.g case studies) content themes
+  - Create a content schedule
+- Community
+  - Make it easier to contribute to in-the-monent and long-running discussions using open tools
+  - Define areas community members can get involved
+    - Create getting started content for each area and different experience levels
+- Metrics:
+  - Implement remaining dashboards except more complex custom queries like "popular content"
+  - Define growth goals for Q3
+- Campaign: Improved YC deal for S21
+  - Continue to deliver and report on campaign
+
+### Q3
+
+- Product marketing
+  - Continue experiments
+  - Create product marketing for new features
+  - Complete content for remaining new personas
+- Content marketing
+  - Conduct design experiments to improve engagement and conversion
+  - Update themes
+  - Continue to experiment
+- Paid:
+  - Conduct various paid experiments
+- Campaign: Community events
+- Campaign: Community member profile of contributions and achievements
+- Campaign: Enterprise early adopters
+  - Conduct early marketing experiments
+- Campaign: Improved YC deal for S21
+  - Complete and report on campaign
+  - Plan and deliver post batch campaign
+- Metrics:
+  - Implement dashboards for complex custom queries
+- Hiring: Assess hiring needs in most likely areas:
+  - product, content, community
+
+### Q4
+
+- Product marketing
+  - Continue experiments
+  - Create product marketing for new features
+  - Update research and personas, expanding into enterprise
+  - Start creating enterprise product marketing
+- Content marketing
+  - Create specialization areas for team (e.g startups, enterprise, developers, non-technical)
+  - Update themes
+  - Continue to experiment
+- Paid:
+  - Expand experiments
+  - Set budget and targets for Q1 2022
+- Ops:
+  - Identify ops bottlenecks
+- Campaign: Enterprise early adopters
+  - Expand experiments
+- Campaign: Plan YC W22
+- Metrics:
+  - Report on past year
+  - Define growth goals for 2022
+- Hiring:
+  - continue to assess hiring needs in most likely areas:
+    - If not fulfilled: product, content, community
+    - paid, ops
+  - Set targets and discuss budget for 2022
 
 ## Metrics
 
