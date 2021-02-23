@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Spin } from 'antd'
 import queryString from 'query-string'
+import { SEO } from '../components/seo'
 
 function Slack() {
     /* This component will redirect the user to the Slack users group. */
@@ -20,9 +21,7 @@ function Slack() {
 
     return (
         <>
-            <head>
-                <title>PostHog Slack</title>
-            </head>
+            <SEO title="PostHog Community Slack" />
             <div
                 style={{ display: 'flex', alignItems: 'center', marginTop: 48, fontSize: 16, flexDirection: 'column' }}
             >
