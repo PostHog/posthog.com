@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
+import logo from '../../images/posthog-hog-transparent.svg'
 
-const FooterListItem = ({ to, children, border = true }) => {
+const FooterListItem = ({ to, children, border = true }: { to: string; children: any; border?: boolean }) => {
     const baseClasses = 'block py-3 text-white text-opacity-60 hover:text-opacity-100 hover:text-white'
     const fullClassList = border ? `${baseClasses} border-b border-gray-600` : baseClasses
 
@@ -12,9 +13,11 @@ const FooterListItem = ({ to, children, border = true }) => {
     )
 }
 
-const FooterSubCategory = ({ children }) => <h7 className="block text-white mt-8 font-bold">{children}</h7>
+const FooterSubCategory = ({ children }: { children: any }) => (
+    <header className="block gosha text-white mt-8 font-bold text-base">{children}</header>
+)
 
-const FooterCategory = ({ children, title }) => {
+const FooterCategory = ({ children, title }: { children: any; title: string }) => {
     const [expanded, setExpanded] = useState(false)
 
     return (
@@ -36,7 +39,8 @@ const FooterCategory = ({ children, title }) => {
 const Footer = () => {
     return (
         <div className="footer py-24">
-            <div className="w-11/12 max-w-4xl flex flex-col md:flex-row justify-between mx-auto">
+            <img src={logo} className="mx-auto block text-center" />
+            <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">
                 <div className="w-full md:w-1/4 md:pr-8">
                     <FooterCategory title="Product">
                         <FooterSubCategory>Overview</FooterSubCategory>

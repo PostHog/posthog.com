@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import './styles/index.scss'
+import posthogComputer from '../images/computer-dashboard-4.svg'
 import improveMobile from '../images/improve-mobile.svg'
 import improveRetention from '../images/retro-retention-box.svg'
 import improvePaths from '../images/retro-paths-box.svg'
@@ -56,29 +57,34 @@ function IndexPage() {
                                 </h1>
                             </div>
                             <Spacer height={25} onlyDesktop={true} />
-                            <div className="topPageRow row">
-                                <div className="topPageCol1">
-                                    <div className="joinUsersText">
-                                        <p>
-                                            Join 2,700 companies <br className="hiddenBreak" /> using PostHog.
-                                        </p>
-                                        <br />
-                                    </div>
-                                    <div className="flex flex-col">
+                            <div className="w-11/12 mx-auto max-w-4xl flex justify-between items-center flex-col lg:flex-row">
+                                <div className="w-full lg:w-1/2">
+                                    <span className="text-white text-2xl hidden lg:block">
+                                        Join 2,700 companies <br className="hiddenBreak" /> using PostHog.
+                                    </span>
+
+                                    <div className="mt-4 flex justify-start flex-col lg:flex-row flex-wrap items-center">
                                         <button
-                                            className="px-4 py-2 bg-primary block rounded font-semibold tracking-widest text-white uppercase"
+                                            className="px-4 py-2 my-1 block bg-primary rounded font-semibold tracking-widest text-white uppercase lg:mr-1"
                                             onClick={() => setIsGetStartedModalOpen(true)}
                                         >
                                             Get Started for Free
                                         </button>
-                                        <a href="/schedule-demo" className="block">
-                                            <Button type="primary" size="large" className="scheduleDemo">
-                                                Schedule Demo
-                                            </Button>
+                                        <a
+                                            href="/schedule-demo"
+                                            className="px-4 py-2 my-1 block bg-transparent border border-white rounded font-semibold tracking-widest text-white uppercase lg:mr-1"
+                                        >
+                                            Schedule Demo
                                         </a>
                                     </div>
                                 </div>
-                                <div className="topPageCol2" />
+
+                                <div className="w-full lg:w-1/2">
+                                    <img
+                                        src={posthogComputer}
+                                        className="w-full max-w-lg mx-auto mt-8 lg:mt-0 lg:max-w-full block"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -30,3 +30,7 @@ ul {
 .footer {
     background: #08042f;
 }
+
+.bg-dark-gray {
+    background: #0e0e0e !important;
+}
