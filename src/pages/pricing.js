@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import queryString from 'query-string'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Card, Collapse, Slider } from 'antd'
-import SEO from '../components/seo'
+import { SEO } from '../components/seo'
 import './styles/pricing.scss'
 import 'antd/lib/collapse/style/css'
 import imgCloud from '../images/cloud.svg'
@@ -117,7 +117,7 @@ const PricingPage = () => {
                                 <Card className="p-full-height">
                                     {plan.image && (
                                         <div style={{ marginTop: 16 }}>
-                                            <img src={plan.image} alt="" />
+                                            <img src={plan.image} alt="Plan image" />
                                         </div>
                                     )}
                                     <h3

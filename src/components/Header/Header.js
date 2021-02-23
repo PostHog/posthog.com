@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useValues } from 'kea'
+import { useValues, useActions } from 'kea'
 import { Link } from 'gatsby'
 import { layoutLogic } from '../../logic/layoutLogic'
 import whiteLogo from '../../images/posthog-logo-white.svg'
@@ -20,16 +20,18 @@ const NavbarLink = ({ to, children, textLight, className }) => {
     )
 }
 
-const PrimaryCta = ({ href, children, className }) => {
+const PrimaryCta = ({ children, className }) => {
+    const { setIsGetStartedModalOpen } = useActions(layoutLogic)
+
     const classes = 'px-4 py-2 bg-primary inline-block rounded font-semibold tracking-widest text-white hover:text-white uppercase '.concat(
         className
     )
 
     return (
         <li className="leading-none">
-            <a href={href} className={classes}>
+            <button onClick={() => setIsGetStartedModalOpen(true)} className={classes}>
                 {children}
-            </a>
+            </button>
         </li>
     )
 }

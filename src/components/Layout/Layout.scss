@@ -429,7 +429,6 @@ table {
     margin-bottom: 1.45rem;
     font-size: 14px;
     line-height: 1.45rem;
-    border-collapse: collapse;
     width: 100%;
 }
 fieldset {
@@ -1081,19 +1080,17 @@ a.middle {
     background-color: #35416b !important;
 }
 
+.table-no-borders th,
+.table-no-borders td {
+    border: none;
+}
+
+table th,
 table td {
-    border: none;
-}
-
-table th {
-    border: none;
-}
-
-.table-borders th,
-.table-borders td {
-    border: 1px solid !important;
-    border-color: #e8e8e8 !important;
+    border: 1px solid;
+    border-color: #e8e8e8;
     padding-left: 10px !important;
+    max-width: 200px !important;
 }
 
 #mc_embed_signup {

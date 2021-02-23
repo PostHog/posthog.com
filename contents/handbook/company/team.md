@@ -420,7 +420,7 @@ Originally from Northern Germany, I moved to the UK in 2017 and I am now based i
 
 Just like James, I used to be a professional cyclist until I realised you can’t make a living as a female cyclist. After a short identity crisis, I started university with the goal to become a management consultant. That never happened, I luckily realised my skills and personality are much better suited in a people (I guess non-startup people call it HR) role. 
 
-At PostHog I look after our People and Talent function and my goal is make PostHog THE best company to work for. Previously I worked in very a similar role at a startup called [Farewill](https://farewill.com), who offer services around death (yes, you read right). Prior to that, I worked for a couple of companies later on the scaling journey, like [TransferWise](https://transferwise.com/) and [Xing](xing.com).
+At PostHog I look after our People and Talent function and my goal is make PostHog THE best company to work for. Previously I worked in very a similar role at a startup called [Farewill](https://farewill.com), who offer services around death (yes, you read right). Prior to that, I worked for a couple of companies later on the scaling journey, like [TransferWise](https://transferwise.com/) and [Xing](https://xing.com).
 
 Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and I love to go for a run or cycle around London, do yoga and drink coffee. 
 

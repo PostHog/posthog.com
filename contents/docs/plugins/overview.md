@@ -67,17 +67,14 @@ To install plugins from private sources, like private npm packages or private re
 
 1. Use the following environment variables:
 
-<span class='table-borders'>
-
 | Variable                   | Description                           | Default Value         |
 | :------------------------: | :------------------------------------ | :-------------------: |
 | `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
 | `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 
-</span>
 
-2. Append `?private_token=<YOUR_TOKEN>` to the plugin URL
+1. Append `?private_token=<YOUR_TOKEN>` to the plugin URL
 
 ### Reordering plugins
 
