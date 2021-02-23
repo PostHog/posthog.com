@@ -200,6 +200,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-21-0",
             "blog/the-posthog-array-1-20-0",
             "blog/the-posthog-array-1-19-0",
             "blog/the-posthog-array-1-18-0",
@@ -350,6 +351,7 @@
             "handbook/strategy/strategy",
             "handbook/strategy/business-model",
             "handbook/strategy/roadmap",
+            "handbook/strategy/prioritization",
             "handbook/strategy/investors",
             "handbook/strategy/investor-updates"
         ]

@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PostCard from '../components/PostCard'
-import SEO from '../components/seo'
+import { SEO } from '../components/seo'
 
 const BlogPage = ({
     data: {

@@ -37,7 +37,6 @@ You can find your key in the 'Project Settings' page in PostHog.
 
 ### Options
 
-<span class="table-borders">
 
 | Variable                   | Description                           | Default Value         |
 | :------------------------: | :------------------------------------ | :-------------------: |
@@ -46,7 +45,6 @@ You can find your key in the 'Project Settings' page in PostHog.
 | `flushInterval` | After how many ms we should flush the queue. | `10000` |
 | `retryCount` | How often to retry sending an event before giving up. | `3` |
 
-</span>
 
 > **Note:** If you're using PostHog in an AWS Lambda function or other similar serverless function tools make sure you set `flushAt` and `flushInterval` to `0`.
 

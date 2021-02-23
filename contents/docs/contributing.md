@@ -8,7 +8,6 @@ showTitle: true
 
 We love contributions to PostHog, big or small.
 
-
 ## Reporting Bugs or Issues
 
 Bug reports help us make PostHog better for everyone. When you create a bug, the description will automatically be filled with a template that makes is very clear what we'd like you to add.

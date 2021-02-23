@@ -3,7 +3,19 @@ import { Link } from 'gatsby'
 import Card from 'antd/lib/card'
 import 'antd/lib/card/style/css'
 
-const PostCard = ({ post }) => (
+interface PostType {
+    id: string
+    excerpt: string
+    fields: {
+        slug: string
+    }
+    frontmatter: {
+        date: string
+        title: string
+    }
+}
+
+const PostCard = ({ post }: { post: PostType }) => (
     <div>
         <Card
             title={

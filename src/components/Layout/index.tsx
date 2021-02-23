@@ -121,7 +121,7 @@ const Layout = ({
                             )}
                             <Container
                                 onPostPage={onPostPage}
-                                className={className + ' container'}
+                                className={className + ' max-w-none container'}
                                 containerStyle={containerStyle}
                             >
                                 {children}
