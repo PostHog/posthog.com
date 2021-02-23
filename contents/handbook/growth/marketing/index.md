@@ -113,7 +113,7 @@ For year, month, week, day:
 
 ### Activation, Retention and Referral
 
-While these metrics, and the ability to impact them, are mostly defined by Product and Engineering, Marketing is intereseted in their continued improvement and the ability to implement referral mechanisms within the product.
+While these metrics, and the ability to impact them, are mostly defined by Product and Engineering, Marketing is interested in their continued improvement and the ability to implement referral mechanisms within the product.
 
 ### Revenue
 
