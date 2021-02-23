@@ -23,7 +23,26 @@ It makes sense to make it `companyname-posthog`.
 This way you'll be able to scope down what we have access to heavily.
 
 The permissions we need are:
-- TODO
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PosthogDeploy",
+            "Effect": "Allow",
+            "Action": [
+                "rds:*",
+                "s3:*",
+                "ec2:*",
+                "elasticloadbalancing:*",
+                "eks:*",
+                "elasticache:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
 
 ![AWS create group](../../../images/vpc-aws-create-group.png)
 
