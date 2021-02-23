@@ -728,17 +728,6 @@ header {
     margin: 0 10px;
 }
 
-.footer-universal {
-    background: linear-gradient(180deg, #232e5c 0%, #222d5b 100%);
-    color: #fff;
-    position: relative;
-    left: 0px;
-    width: '100%';
-    top: '100%';
-    margin-top: 0;
-    height: 100%;
-}
-
 .ant-menu,
 .ant-menu-submenu,
 .ant-menu-item {
@@ -846,22 +835,6 @@ a.ant-anchor-link-title:hover {
 
 .ant-anchor-ink span {
     border-color: #1d4aff !important;
-}
-
-.footer-universal a {
-    color: #fff;
-}
-.footer-links {
-    list-style-type: none;
-    margin-top: 20px;
-    line-height: 1em;
-    text-align: left;
-}
-
-.footer-links-header {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .footer-message {
