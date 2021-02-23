@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import Highlight, { defaultProps } from 'prism-react-renderer'
+import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import { OkaidiaTheme } from '../../lib/okaidia'
 import { getCookie, generateRandomHtmlId } from '../../lib/utils'
 import './style.scss'
 
-export const CodeBlock = (props: any) => {
+interface CodeBlockProps {
+    children: {
+        key?: string | null
+        props: {
+            parentName: string
+            className: string
+            originalType: string
+            mdxType: string
+            children: string
+        }
+        [extraProps: string]: any // 'children' has other props that we don't use here
+    }
+}
+
+export const CodeBlock = (props: CodeBlockProps) => {
     const className = props.children.props.className || ''
     const matches = className.match(/language-(?<lang>.*)/)
     const [code, setCode] = useState('')
@@ -22,8 +36,8 @@ export const CodeBlock = (props: any) => {
             if (phToken) {
                 let updatedCode = props.children.props.children
                     .trim()
-                    .replaceAll('<ph_project_api_key>', phToken)
-                    .replaceAll('<ph_instance_address>', 'https://app.posthog.com')
+                    .replace(/<ph_project_api_key>/g, phToken)
+                    .replace(/<ph_instance_address>/g, 'https://app.posthog.com')
                 setCode(updatedCode)
                 highlightToken(phToken)
             }
@@ -52,7 +66,7 @@ export const CodeBlock = (props: any) => {
         <Highlight
             {...defaultProps}
             code={code || props.children.props.children.trim()}
-            language={language}
+            language={language as Language}
             theme={OkaidiaTheme}
         >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
