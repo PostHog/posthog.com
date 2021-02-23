@@ -117,7 +117,7 @@ const PricingPage = () => {
                                 <Card className="p-full-height">
                                     {plan.image && (
                                         <div style={{ marginTop: 16 }}>
-                                            <img src={plan.image} alt="" />
+                                            <img src={plan.image} alt="Plan image" />
                                         </div>
                                     )}
                                     <h3
