@@ -18,14 +18,12 @@ We believe this approach will lead to the best product for end users, which is h
 
 This means the path to revenue starts with adoption of a Free version, then working out how to get teams (whether a small team at a big company or a 20 person startup) onto a paid version, and ultimately how to get departmental adoption at large enterprises.
 
-<span class="table-borders">
 
 | | 1 - Free | 2 - Team (Self Serve) | 3 - Enterprise (C-Level) |
 |---|---|---|---|
 |Value|Creation|Collaboration|Compliance|
 |GTM|Free/Adoption|Self-serve|Enterprise|
 
-</span>
 
 ### Examples of other companies following (part) of this
 
@@ -44,8 +42,6 @@ In team mode, it becomes a way for a team to organize its business process betwe
 ## Our structure
 
 As we grow, it'll get important to work out which teams in PostHog own different functions.
-
-<span class="table-borders">
 
 
 <table>
@@ -79,7 +75,6 @@ As we grow, it'll get important to work out which teams in PostHog own different
     </tr>
 </table>
 
-</span>
 
 Following the 1-2-3 framework, we are currently focused on building our team in the first and second columns - _Free_ and _Team_ - and already have Developer Experience and Business Ops people in place. Only after we have brought in people to take care of Marketing/Developer Evangelism and Customer Success will we then look at recruiting people into the roles in the third column, _Enterprise_. 
 

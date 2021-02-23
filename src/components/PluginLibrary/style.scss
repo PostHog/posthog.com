@@ -1,4 +1,4 @@
-.pluginModalContent {
+.plugin-modal-content {
     position: relative;
     background: #ffffff;
     overflow: auto;
@@ -44,6 +44,17 @@
         margin-left: 20vh;
     }
 
+    pre {
+        max-width: 600px;
+        margin-left: 20%;
+        background: #464646;
+    }
+
+    ul li li,
+    ol li li {
+        margin-left: 0 !important;
+    }
+
     @media screen and (max-width: 1080px) {
         p,
         h1,
@@ -56,6 +67,10 @@
         img {
             margin-left: 5px;
             margin-right: 5px;
+        }
+
+        pre {
+            margin-left: 5px;
         }
     }
 }
