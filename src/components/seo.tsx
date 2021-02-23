@@ -4,7 +4,15 @@ import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
 
-const SEO = ({ title, description, image, article }) => {
+interface SEOProps {
+    title: string
+    description?: string
+    image?: any
+    article?: boolean
+    canonicalUrl?: string
+}
+
+export const SEO = ({ title, description, image, article, canonicalUrl }: SEOProps) => {
     const { pathname } = useLocation()
     const { site } = useStaticQuery(query)
 
@@ -48,11 +56,11 @@ const SEO = ({ title, description, image, article }) => {
             {seo.description && <meta name="twitter:description" content={seo.description} />}
 
             {seo.image && <meta name="twitter:image" content={seo.image} />}
+
+            {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
         </Helmet>
     )
 }
-
-export default SEO
 
 SEO.propTypes = {
     title: PropTypes.string,

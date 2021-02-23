@@ -14,7 +14,7 @@ import benHorowitz from '../images/ben-horowitz.jpg'
 import michaelSeibel from '../images/michael-seibel.jpg'
 import paulGraham from '../images/paul-graham.jpg'
 import { Col, Row, Card, Tabs } from 'antd'
-import SEO from '../components/seo'
+import { SEO } from '../components/seo'
 
 const { TabPane } = Tabs
 const { Meta } = Card
