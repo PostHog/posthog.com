@@ -111,22 +111,13 @@ For year, month, week, day:
     - total
     - change vs previous periods
 
-### Activation
+### Activation, Retention and Referral
 
-Defined by product and engineering teams.
-
-### Retention
-
-Defined by product and engineering teams.
-
-### Referral
-
-todo
+While these metrics, and the ability to impact them, are mostly defined by Product and Engineering, Marketing is intereseted in their continued improvement and the ability to implement referral mechanisms within the product.
 
 ### Revenue
 
-todo
-
+Revenue metrics fall under Sales, but Marketing is interested in the types of leads that result in conversions in order for us to adjust our focus.
 
 ## Content
 
