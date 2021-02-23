@@ -3,10 +3,12 @@ import Layout from '../components/Layout'
 import { DemoScheduler } from '../components/DemoScheduler'
 import { Spacer } from '../components/Spacer'
 import './styles/yc-onboarding.scss'
+import { SEO } from '../components/seo'
 
 export const ScheduleDemo = () => {
     return (
         <Layout>
+            <SEO title="Schedule Demo • PostHog" />
             <div className="yc-onboarding-wrapper">
                 <Spacer />
                 <h1 className="centered">Schedule Demo</h1>

@@ -19,21 +19,28 @@ function Slack() {
     }, [])
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: 48, fontSize: 16, flexDirection: 'column' }}>
-            <h1 style={{ marginBottom: '1rem' }}>We're redirecting you to Slack.</h1>
-            {source === 'app' && (
-                <div style={{ fontSize: '1.1rem', color: 'var(--muted)' }}>
-                    Remember to use the{' '}
-                    <b>
-                        <span style={{ color: 'var(--danger)' }}>same email</span> you used to sign up
-                    </b>{' '}
-                    in the PostHog app.
+        <>
+            <head>
+                <title>PostHog Slack</title>
+            </head>
+            <div
+                style={{ display: 'flex', alignItems: 'center', marginTop: 48, fontSize: 16, flexDirection: 'column' }}
+            >
+                <h1 style={{ marginBottom: '1rem' }}>We're redirecting you to Slack.</h1>
+                {source === 'app' && (
+                    <div style={{ fontSize: '1.1rem', color: 'var(--muted)' }}>
+                        Remember to use the{' '}
+                        <b>
+                            <span style={{ color: 'var(--danger)' }}>same email</span> you used to sign up
+                        </b>{' '}
+                        in the PostHog app.
+                    </div>
+                )}
+                <div style={{ marginTop: '2rem' }}>
+                    <Spin size="large" />
                 </div>
-            )}
-            <div style={{ marginTop: '2rem' }}>
-                <Spin size="large" />
             </div>
-        </div>
+        </>
     )
 }
 

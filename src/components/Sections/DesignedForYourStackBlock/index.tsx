@@ -74,7 +74,7 @@ export const DesignedForYourStackBlock = () => {
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/api">
+                        <Link to="/docs/api/overview">
                             <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
                         </Link>
                     </div>
