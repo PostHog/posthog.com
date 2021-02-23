@@ -8,7 +8,7 @@ showTitle: true
 
 In 2021 we're focussing our marketing efforts on "startup" engineering teams and enthusiasts, stages 1-2 of our [Growth Strategy](https://posthog.com/handbook/growth/strategy) and columns 1-2 of our company [Strategy Prioritization](https://posthog.com/handbook/strategy/prioritization#how-is-our-product-market-fit), supplemented with Enterprise (stage 3) campaigns and experiments that synergise with learnings from our early enterprise customers. This does not mean that you won't get more "startup-like" engineering teams at larger companies. We've already validated that there are engineering teams at scale-ups and enterprises that seek the best technology to iterate quicker. Our early enterprise customers will enable us to connect with more traditional enterprise engineering teams through accurate product messaging, case studies and more.
 
-### "For Engineers"
+### For Engineers
 
 Unlike many analytics solutions, that target product managers and other non-engineering roles, we're building PostHog for engineers and we'll support them with content- and community-driven campaigns that empower them to build successful products.
 
@@ -19,7 +19,7 @@ Some themes we've been discussing internally:
 - Getting your first customers
 - How to start an open source startup
 
-#### Mass adoption at YC startups
+### Mass adoption at YC startups
 
 YC is not only one of the most successful and challenging startup accelerators, it's also a strongly supportive network who want to help each other build successful products. Members show their support with advice and generous deals for their respective products - [our deal]() has helped over 50 startups, many who've gone on to be paying customers.
 
@@ -37,17 +37,19 @@ To incentivise YC startups to choose PostHog for the product analytics, we'll of
 - Additional free licenses, hardware etc to be determined
 - Access to our growing library of tutorials and other resources in our docs
 
-#### The best developer community
+### The best developer community
 
 We want to build the most active and supportive developer community around, by supporting and celebrating our community's contributions more than any other community.
 
-We'll create resources to make it easier to contribute to different areas of PostHot, whatever your level of experience.
+We'll create resources to make it easier to contribute to different areas of PostHog, whatever your level of experience.
 
 We'll create tools and apps that celebrate our community's growth and members' contributions.
 
 We'll thank substantial contributions with swag and other sponsorships.
 
 We'll financially support community lead events.
+
+We'll make it easy to contribute to in-the-monent and long-running discussions using open tools.
 
 ### Enterprise early adopters
 
