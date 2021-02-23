@@ -63,9 +63,20 @@ Initial user interviews will be informal, but as we start to identify key themes
 
 ### Acquisition
 
+Marketing wholly defines the Acquisition/Awareness metrics, and indirectly invested in the remaining categories of AARRR.
+
+In 2021 we'll build our comprehensive metrics suite, and identify the things that have the most impact throughout the funnel and not just at obvious conversion event.
+
 For year, month, week, day:
 
-- posthog.com:
+- Conversions: Downloads, cloud signups, sales contacts, newsletter subs, community signups:
+  - Track event
+  - Total and rate (relative to page views, sessions, uniques)
+  - List of top x pages amongst conversions
+  - List of top x first-visit pages amongst conversions
+  - List of top x referral sources amongst conversions
+
+- Website: /, docs, handbook:
   - Funnel
   - Page views, sessions, uniques:
     - Total
@@ -73,16 +84,13 @@ For year, month, week, day:
   - Top x referral sources:
     - Total and rate
     - Change vs previous periods
-  - bounce:
+  - Bounce:
     - Rate
     - Change vs previous periods
     - List of top x pages with highest bounce rate
-
-- Downloads, cloud signups, sales contacts, newsletter subs, GitHub referrals:
-  - Track event
-  - Total and rate (relative to page views, sessions, uniques)
-  - List of top x pages amongst conversions
-  - List of top x first-visit pages amongst conversions
+  - Per referral (GitHub, Social, etc):
+    - Total and rate
+    - List of top x referral pages
 
 - Per newsletter:
   - Hook up UTM codes to events
@@ -90,16 +98,16 @@ For year, month, week, day:
     - Total and rate
     - Change vs previous periods
 
-- Twitter, LinkedIn and other social
+- Social: Twitter, LinkedIn, etc:
   - Impressions, posts, follows, reshares, likes, comments, clicks:
     - Total and rate
     - Change vs previous periods
   - List of x top converting posts
 
-- Community Slack
-  - signups, messages:
-    - total
-    - change vs previous periods
+- Community (Slack):
+  - Signups, messages:
+    - Total
+    - Change vs previous periods
 
 - HN:
   - Posts, comments, name mentions, link mentions
@@ -110,6 +118,10 @@ For year, month, week, day:
   - Stars, forks:
     - total
     - change vs previous periods
+
+- Per deployment method:
+  - Total
+  - Change vs previous periods
 
 ### Activation, Retention and Referral
 
