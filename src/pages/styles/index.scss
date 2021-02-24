@@ -612,7 +612,6 @@
         text-align: center;
         background-color: #35416b;
         width: 392px;
-        height: 546px;
         padding: 41px 0;
         border-radius: 30px;
     }
@@ -627,11 +626,9 @@
     }
 
     .whyPosthogElementBody {
-        position: absolute;
         display: flex;
         flex-direction: column;
         align-items: center;
-        top: 124px;
         margin-top: 15px;
     }
 
@@ -652,7 +649,6 @@
     .startTrialButton {
         position: relative;
         align-self: center;
-        width: 330px;
         height: 64px;
         font-size: 24px;
     }
@@ -673,11 +669,10 @@
             justify-content: space-between;
             align-items: center;
             width: 100vw;
-            height: 986px;
         }
         .whyPosthogElement {
-            height: 484px;
             width: 310px;
+            margin-top: 12px;
             justify-content: space-between;
             align-items: space-between;
         }
@@ -703,7 +698,6 @@
             height: 40px;
         }
         .startTrialButton {
-            width: 180px;
             height: 32px;
             font-size: 14px;
         }

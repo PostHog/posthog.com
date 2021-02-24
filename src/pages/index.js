@@ -65,14 +65,14 @@ function IndexPage() {
 
                                     <div className="mt-4 flex justify-start flex-col lg:flex-row flex-wrap items-center">
                                         <button
-                                            className="px-4 py-2 my-1 block bg-primary rounded font-semibold tracking-widest text-white uppercase lg:mr-1"
+                                            className="button-primary lg:mr-1"
                                             onClick={() => setIsGetStartedModalOpen(true)}
                                         >
                                             Get Started for Free
                                         </button>
                                         <a
                                             href="/schedule-demo"
-                                            className="px-4 py-2 my-1 block bg-transparent border border-white rounded font-semibold tracking-widest text-white uppercase lg:mr-1"
+                                            className="px-4 py-2 my-1 block bg-transparent border border-white rounded font-semibold tracking-widest text-white uppercase lg:mr-1 hover:bg-white hover:bg-opacity-10 hover:text-white"
                                         >
                                             Schedule Demo
                                         </a>

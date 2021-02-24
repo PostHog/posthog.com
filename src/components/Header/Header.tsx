@@ -5,49 +5,55 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
 
-const NavbarLink = ({ to, children, textLight, className }) => {
+interface NavbarLinkProps {
+    to: string
+    children: any
+    textLight: boolean
+    className?: string
+}
+
+const NavbarLink = ({ to, children, textLight, className = '' }: NavbarLinkProps) => {
     const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider '.concat(className)
-    const classes = textLight
+    const classList = textLight
         ? `text-white hover:text-white ${baseClasses}`
         : `text-black hover:text-black ${baseClasses}`
 
     return (
         <li className="leading-none">
-            <Link to={to} className={classes}>
+            <Link to={to} className={classList}>
                 {children}
             </Link>
         </li>
     )
 }
 
-const PrimaryCta = ({ children, className }) => {
+const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
     const { setIsGetStartedModalOpen } = useActions(layoutLogic)
 
-    const classes = 'px-4 py-2 bg-primary inline-block rounded font-semibold tracking-widest text-white hover:text-white uppercase '.concat(
-        className
-    )
+    const classList = `button-primary ${className}`
 
     return (
         <li className="leading-none">
-            <button onClick={() => setIsGetStartedModalOpen(true)} className={classes}>
+            <button onClick={() => setIsGetStartedModalOpen(true)} className={classList}>
                 {children}
             </button>
         </li>
     )
 }
 
-function Header({ isDocsPage }) {
+function Header({ isDocsPage }: { isDocsPage: boolean }) {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
-    const themeSupportedColor = websiteTheme === 'light' ? 'bg-gray-100' : 'bg-dark-gray'
+    const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-gray'
     const backgroundColor = isDocsPage ? themeSupportedColor : 'bg-purple-gradient'
     const logo = isDocsPage && websiteTheme === 'light' ? darkLogo : whiteLogo
     const textLight = !isDocsPage || websiteTheme === 'dark'
+    const layoutWidth = isDocsPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
         <div className={`primary-navbar py-6 ${backgroundColor}`}>
-            <div className="w-11/12 mx-auto flex justify-between items-center">
+            <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />
                 </Link>
@@ -71,7 +77,7 @@ function Header({ isDocsPage }) {
                 </ul>
 
                 <ul className="hidden lg:flex list-none flex justify-between items-center mb-0">
-                    <PrimaryCta href="">Get Started</PrimaryCta>
+                    <PrimaryCta>Get Started</PrimaryCta>
                     <NavbarLink to="https://app.posthog.com/login" textLight={textLight} className="uppercase">
                         Login
                     </NavbarLink>
@@ -138,9 +144,7 @@ function Header({ isDocsPage }) {
                         Login
                     </NavbarLink>
 
-                    <PrimaryCta href="" className="my-2 ml-4">
-                        Get Started
-                    </PrimaryCta>
+                    <PrimaryCta className="my-2 ml-4">Get Started</PrimaryCta>
                 </ul>
             ) : null}
         </div>
