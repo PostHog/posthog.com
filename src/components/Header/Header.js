@@ -23,9 +23,7 @@ const NavbarLink = ({ to, children, textLight, className }) => {
 const PrimaryCta = ({ children, className }) => {
     const { setIsGetStartedModalOpen } = useActions(layoutLogic)
 
-    const classes = 'px-4 py-2 bg-primary inline-block rounded font-semibold tracking-widest text-white hover:text-white uppercase '.concat(
-        className
-    )
+    const classes = `button-primary ${className}`
 
     return (
         <li className="leading-none">
