@@ -118,7 +118,7 @@ The plan for each quarter will be expanded closer to the time and issues will cr
   - Experiment within popular and new (e.g case studies) content themes
   - Create a content schedule
 - Community
-  - Make it easier to contribute to in-the-monent and long-running discussions using open tools
+  - Make it easier to contribute to in-the-moment and long-running discussions using open tools
   - Define areas community members can get involved
     - Create getting started content for each area and different experience levels
 - Metrics:
