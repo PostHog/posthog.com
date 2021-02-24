@@ -6,13 +6,14 @@ import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
 
 interface NavbarLinkProps {
-    to: string
+    to?: string
+    href?: string
     children: any
     textLight: boolean
     className?: string
 }
 
-const NavbarLink = ({ to, children, textLight, className = '' }: NavbarLinkProps) => {
+const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLinkProps) => {
     const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider '.concat(className)
     const classList = textLight
         ? `text-white hover:text-white ${baseClasses}`
@@ -20,9 +21,15 @@ const NavbarLink = ({ to, children, textLight, className = '' }: NavbarLinkProps
 
     return (
         <li className="leading-none">
-            <Link to={to} className={classList}>
-                {children}
-            </Link>
+            {to ? (
+                <Link to={to} className={classList}>
+                    {children}
+                </Link>
+            ) : (
+                <a href={href} className={classList}>
+                    {children}
+                </a>
+            )}
         </li>
     )
 }
@@ -65,7 +72,7 @@ function Header({ isDocsPage }: { isDocsPage: boolean }) {
                     <NavbarLink to="/docs" textLight={textLight}>
                         Docs
                     </NavbarLink>
-                    <NavbarLink to="https://github.com/posthog/posthog" textLight={textLight}>
+                    <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
                         Community
                     </NavbarLink>
                     <NavbarLink to="/handbook/company/story" textLight={textLight}>
@@ -78,7 +85,7 @@ function Header({ isDocsPage }: { isDocsPage: boolean }) {
 
                 <ul className="hidden lg:flex list-none flex justify-between items-center mb-0">
                     <PrimaryCta>Get Started</PrimaryCta>
-                    <NavbarLink to="https://app.posthog.com/login" textLight={textLight} className="uppercase">
+                    <NavbarLink href="https://app.posthog.com/login" textLight={textLight} className="uppercase">
                         Login
                     </NavbarLink>
                 </ul>
@@ -116,7 +123,7 @@ function Header({ isDocsPage }: { isDocsPage: boolean }) {
                         Docs
                     </NavbarLink>
                     <NavbarLink
-                        to="https://github.com/posthog/posthog"
+                        href="https://github.com/posthog/posthog"
                         textLight={textLight}
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >
@@ -137,7 +144,7 @@ function Header({ isDocsPage }: { isDocsPage: boolean }) {
                         Pricing
                     </NavbarLink>
                     <NavbarLink
-                        to="https://app.posthog.com/login"
+                        href="https://app.posthog.com/login"
                         textLight={textLight}
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >
