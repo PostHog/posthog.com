@@ -3,6 +3,7 @@ export const sfBenchmark: Record<string, number> = {
     'Customer Success Lead': 190000,
     'Site Reliability Engineer': 205000,
     'Content Marketer': 165000,
+    'Product Marketer': 195000,
     // 'Recruiter': 144000,
     // 'Technical Writer': 138000,
     // 'Growth Engineer': 192000,
