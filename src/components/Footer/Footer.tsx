@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
+import { useValues } from 'kea'
+import { layoutLogic } from '../../logic/layoutLogic'
+
 import logo from '../../images/posthog-hog-transparent.svg'
 
 interface FooterListItemProps {
@@ -51,9 +54,11 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-const Footer = () => {
+const Footer = ({ isDocsPage }: { isDocsPage: boolean }) => {
+    const { websiteTheme } = useValues(layoutLogic)
+    const bgClass = isDocsPage && websiteTheme === 'dark' ? 'bg-darkmode-gray' : 'bg-footer'
     return (
-        <div className="footer py-24">
+        <div className={`${bgClass} site-footer py-24`}>
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">
                 <div className="w-full md:w-1/4 md:pr-8">

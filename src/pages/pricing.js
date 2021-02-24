@@ -209,7 +209,7 @@ const PricingPage = () => {
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Have very large volumes? If you expect to capture for than 4 million events per
+                                    Have very large volumes? If you expect to capture more than 4 million events per
                                     month,{' '}
                                     <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
                                         contact us
