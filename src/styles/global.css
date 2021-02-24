@@ -39,6 +39,10 @@ ul {
     background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
 }
 
-.bg-dark-gray {
+.bg-darkmode-gray {
     background: #0e0e0e !important;
+}
+
+.bg-lightmode-gray {
+    background: rgb(249, 249, 249) none repeat scroll 0% 0%;
 }

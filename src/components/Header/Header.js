@@ -38,14 +38,15 @@ function Header({ isDocsPage }) {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
-    const themeSupportedColor = websiteTheme === 'light' ? 'bg-gray-100' : 'bg-dark-gray'
+    const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-gray'
     const backgroundColor = isDocsPage ? themeSupportedColor : 'bg-purple-gradient'
     const logo = isDocsPage && websiteTheme === 'light' ? darkLogo : whiteLogo
     const textLight = !isDocsPage || websiteTheme === 'dark'
+    const layoutWidth = isDocsPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
         <div className={`primary-navbar py-6 ${backgroundColor}`}>
-            <div className="w-11/12 mx-auto flex justify-between items-center">
+            <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />
                 </Link>
