@@ -23,12 +23,6 @@ export const getPluginImageSrc = (plugin: LibraryPluginType) =>
         : null
 
 export const getCookie = (name: string) => {
-    if (name === 'ph_current_project_token') {
-        return 'sjd0293jdb28eb237rdsjd235cjf'
-    }
-    if (name === 'ph_current_project_name') {
-        return 'HogFlix Project'
-    }
     var cookieValue = null
     if (document.cookie && document.cookie !== '') {
         var cookies = document.cookie.split(';')

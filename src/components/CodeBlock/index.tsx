@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import { OkaidiaTheme } from '../../lib/okaidia'
 import { getCookie, generateRandomHtmlId } from '../../lib/utils'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
 
 interface CodeBlockProps {
@@ -19,6 +21,7 @@ interface CodeBlockProps {
 }
 
 export const CodeBlock = (props: CodeBlockProps) => {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const className = props.children.props.className || ''
     const matches = className.match(/language-(?<lang>.*)/)
     const [code, setCode] = useState('')
@@ -45,6 +48,12 @@ export const CodeBlock = (props: CodeBlockProps) => {
     }, [props])
 
     const highlightToken = async (token: string) => {
+        if (!localStorage.getItem('token_autofilled')) {
+            localStorage.setItem('token_autofilled', '1')
+            if (posthog) {
+                posthog.capture('token_autofilled', { $set: { token_autofilled: true } })
+            }
+        }
         const phTokenElements = document.evaluate(
             `//pre[@id='${codeBlockId}']/*/span[contains(., '${token}')]`,
             document,
