@@ -2,15 +2,30 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import logo from '../../images/posthog-hog-transparent.svg'
 
-const FooterListItem = ({ to, children, border = true }: { to: string; children: any; border?: boolean }) => {
-    const baseClasses = 'block py-3 text-white text-opacity-60 hover:text-opacity-100 hover:text-white'
-    const fullClassList = border ? `${baseClasses} border-b border-gray-600` : baseClasses
+interface FooterListItemProps {
+    to?: string
+    href?: string
+    children: any
+    border?: boolean
+}
 
-    return (
-        <Link to={to} className={fullClassList}>
-            {children}
-        </Link>
-    )
+const FooterListItem = ({ to = '', border = true, href = '', children }: FooterListItemProps) => {
+    const baseClasses = 'block py-3 text-white text-opacity-60 hover:text-opacity-100 hover:text-white'
+    const classList = border ? `${baseClasses} border-b border-gray-600` : baseClasses
+
+    if (to) {
+        return (
+            <Link to={to} className={classList}>
+                {children}
+            </Link>
+        )
+    } else {
+        return (
+            <a href={href} className={classList}>
+                {children}
+            </a>
+        )
+    }
 }
 
 const FooterSubCategory = ({ children }: { children: any }) => (
@@ -44,25 +59,25 @@ const Footer = () => {
                 <div className="w-full md:w-1/4 md:pr-8">
                     <FooterCategory title="Product">
                         <FooterSubCategory>Overview</FooterSubCategory>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem to="/product-features" border={false}>
                             Product overview &amp; comparison
                         </FooterListItem>
 
                         <FooterSubCategory>Product suite</FooterSubCategory>
                         <FooterListItem to="">Analytics</FooterListItem>
                         <FooterListItem to="">Heatmaps</FooterListItem>
-                        <FooterListItem to="">Session replay</FooterListItem>
-                        <FooterListItem to="">Feature Flags</FooterListItem>
+                        <FooterListItem to="/product-features/session-recording">Session replay</FooterListItem>
+                        <FooterListItem to="/product-features/feature-flags">Feature Flags</FooterListItem>
                         <FooterListItem to="">User feedback</FooterListItem>
                         <FooterListItem to="" border={false}>
                             Revenue tracking
                         </FooterListItem>
 
                         <FooterSubCategory>Features</FooterSubCategory>
-                        <FooterListItem to="">Auto capture</FooterListItem>
-                        <FooterListItem to="">Plugins</FooterListItem>
-                        <FooterListItem to="">Data portability</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem to="/product-features/event-autocapture">Auto capture</FooterListItem>
+                        <FooterListItem to="/product-features/plugins">Plugins</FooterListItem>
+                        <FooterListItem to="/product-features/self-hosted">Data portability</FooterListItem>
+                        <FooterListItem to="/product-features/self-hosted" border={false}>
                             Private cloud deployment
                         </FooterListItem>
                     </FooterCategory>
@@ -70,23 +85,25 @@ const Footer = () => {
                 <div className="w-full md:w-1/4 md:px-8">
                     <FooterCategory title="Community">
                         <FooterSubCategory>Code</FooterSubCategory>
-                        <FooterListItem to="">Source code</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem href="https://github.com/posthog/posthog">Source code</FooterListItem>
+                        <FooterListItem href="https://github.com/posthog" border={false}>
                             All repositories
                         </FooterListItem>
 
                         <FooterSubCategory>Discussion</FooterSubCategory>
-                        <FooterListItem to="">Slack</FooterListItem>
-                        <FooterListItem to="">Issues</FooterListItem>
-                        <FooterListItem to="">Support</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem href="https://posthog.com/slack">Slack</FooterListItem>
+                        <FooterListItem href="https://github.com/PostHog/posthog/issues">Issues</FooterListItem>
+                        <FooterListItem href="https://posthog.com/support">Support</FooterListItem>
+                        <FooterListItem href="mailto:sales@posthog.com" border={false}>
                             Contact sales
                         </FooterListItem>
 
                         <FooterSubCategory>Get involved</FooterSubCategory>
-                        <FooterListItem to="">Roadmap</FooterListItem>
-                        <FooterListItem to="">Contributors</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem href="https://github.com/orgs/PostHog/projects/1">Roadmap</FooterListItem>
+                        <FooterListItem href="https://github.com/PostHog/posthog/graphs/contributors">
+                            Contributors
+                        </FooterListItem>
+                        <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
                             Merch
                         </FooterListItem>
                     </FooterCategory>
@@ -101,18 +118,18 @@ const Footer = () => {
                         </FooterListItem>
 
                         <FooterSubCategory>Configuring PostHog</FooterSubCategory>
-                        <FooterListItem to="">Installation</FooterListItem>
-                        <FooterListItem to="">Docs</FooterListItem>
-                        <FooterListItem to="">API</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem to="/docs/deployment">Installation</FooterListItem>
+                        <FooterListItem to="/docs">Docs</FooterListItem>
+                        <FooterListItem to="/docs/api/overview">API</FooterListItem>
+                        <FooterListItem to="/docs/integrations" border={false}>
                             Libraries
                         </FooterListItem>
 
                         <FooterSubCategory>Using PostHog</FooterSubCategory>
-                        <FooterListItem to="">Features</FooterListItem>
-                        <FooterListItem to="">Plugins</FooterListItem>
-                        <FooterListItem to="">Tutorials</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem to="/docs/features">Features</FooterListItem>
+                        <FooterListItem to="/docs/plugins/overview">Plugins</FooterListItem>
+                        <FooterListItem to="/docs/tutorials">Tutorials</FooterListItem>
+                        <FooterListItem to="/faq" border={false}>
                             FAQ
                         </FooterListItem>
                     </FooterCategory>
@@ -121,25 +138,25 @@ const Footer = () => {
                     <FooterCategory title="Company">
                         <FooterSubCategory>About</FooterSubCategory>
                         <FooterListItem to="">Open source</FooterListItem>
-                        <FooterListItem to="">Our story</FooterListItem>
-                        <FooterListItem to="">Handbook</FooterListItem>
-                        <FooterListItem to="">Team</FooterListItem>
-                        <FooterListItem to="">Investors</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem to="/handbook/company/story">Our story</FooterListItem>
+                        <FooterListItem to="/handbook">Handbook</FooterListItem>
+                        <FooterListItem to="/handbook/company/team">Team</FooterListItem>
+                        <FooterListItem to="/handbook/strategy/investors">Investors</FooterListItem>
+                        <FooterListItem to="/careers" border={false}>
                             Careers
                         </FooterListItem>
 
                         <FooterSubCategory>Resources</FooterSubCategory>
-                        <FooterListItem to="">Blog</FooterListItem>
+                        <FooterListItem to="/blog">Blog</FooterListItem>
                         <FooterListItem to="">HogTalks</FooterListItem>
-                        <FooterListItem to="">Media</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem to="/media">Media</FooterListItem>
+                        <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
                             Merch
                         </FooterListItem>
 
                         <FooterSubCategory>Get in touch</FooterSubCategory>
-                        <FooterListItem to="">Contact sales</FooterListItem>
-                        <FooterListItem to="" border={false}>
+                        <FooterListItem href="mailto:sales@posthog.com">Contact sales</FooterListItem>
+                        <FooterListItem href="https://posthog.com/support" border={false}>
                             Support
                         </FooterListItem>
                     </FooterCategory>
