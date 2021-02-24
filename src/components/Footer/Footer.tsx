@@ -145,6 +145,24 @@ const Footer = () => {
                     </FooterCategory>
                 </div>
             </div>
+
+            <div className="w-11/12 mt-24 text-center">
+                <span className="text-base text-white text-opacity-40">&copy; 2021 PostHog, Inc.</span>
+                <div className="mt-4">
+                    <Link
+                        to="/privacy"
+                        className="p-2 mx-1 text-white bg-transparent border rounded opacity-40 hover:text-white hover:opacity-100"
+                    >
+                        Privacy
+                    </Link>
+                    <Link
+                        to="/terms"
+                        className="p-2 mx-1 text-white bg-transparent border rounded opacity-40 hover:text-white hover:opacity-100"
+                    >
+                        Terms
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }
