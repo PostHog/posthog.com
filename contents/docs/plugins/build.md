@@ -249,7 +249,6 @@ PostHog plugins are still in beta, and our scheduled tasks are the newest featur
 
 1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
 2. We intend to make scheduled tasks via plugins more flexible in the near-future. Keep an eye out for any updates to the API.
-3. If you have multiple instances of `posthog-plugin-server` running, the defined tasks will be run on each instance at the specified interval. Fixes for this are also on the way in the upcoming releases.
 
 ### Publishing Your Plugin
 
