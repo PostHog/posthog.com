@@ -67,15 +67,15 @@ const PricingPage = () => {
                                     />{' '}
                                     Cloud
                                 </label>
-                                <label className={state.planOptions === 'enterprise' ? 'active' : ''}>
+                                <label className={state.planOptions === 'vpc' ? 'active' : ''}>
                                     <input
                                         type="radio"
-                                        value="enterprise"
+                                        value="vpc"
                                         name="planOptions"
-                                        checked={state.planOptions === 'enterprise'}
+                                        checked={state.planOptions === 'vpc'}
                                         onChange={(event) => handleSegmentChange(event)}
                                     />{' '}
-                                    Enterprise
+                                    VPC
                                 </label>
                                 <label className={state.planOptions === 'open-source' ? 'active' : ''}>
                                     <input
@@ -154,6 +154,109 @@ const PricingPage = () => {
                                 </Card>
                             </Col>
                         ))}
+                        {state.planOptions === 'vpc' && (
+                            <div className="pricing-cloud">
+                                <h4>Much less expensive for higher volume usage. Pay just for what you use.</h4>
+                                <div>
+                                    Our pricing is logarithmic and gets much, much less expensive at scale with VPC
+                                    deployment. No setup fee or minimum commitment.
+                                </div>
+
+                                <div>
+                                    <div className="main-price">
+                                        <div>
+                                            <DollarCircleTwoTone style={{ marginRight: 6 }} />$
+                                            {priceSimulation < 10000000 ? <>0.000225</> : <>0.000045</>}/event
+                                            <span>per month</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <Slider
+                                            defaultValue={250000}
+                                            min={10000}
+                                            max={100000000}
+                                            step={20000}
+                                            tooltipVisible
+                                            tipFormatter={(value) => value.toLocaleString()}
+                                            onChange={(value) => setPriceSimulation(value)}
+                                        />
+                                        <div style={{ fontSize: '1rem', textAlign: 'right' }}>
+                                            {priceSimulation < 10000000 ? (
+                                                <>
+                                                    <span className="text-muted">Monthly estimate:</span>{' '}
+                                                    <b>${Math.round(priceSimulation * 0.000225).toLocaleString()}</b>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span className="text-muted">Monthly estimate:</span>{' '}
+                                                    <b>
+                                                        $
+                                                        {Math.round(
+                                                            10000000 * 0.000225 +
+                                                                (priceSimulation - 10000000) * 0.000045
+                                                        ).toLocaleString()}
+                                                    </b>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                    Unsure about your numbers or want to talk?{' '}
+                                    <a href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry">Contact us</a>.
+                                </div>
+
+                                <Card className="feature-card">
+                                    <div className="plan-image">
+                                        <img src={imgCloudPlan} alt="" className="inline-block" />
+                                    </div>
+                                    <div className="text-center">
+                                        <h5>Features included</h5>
+                                    </div>
+                                    <ul style={{ listStyle: 'none' }}>
+                                        <li>
+                                            Deployed on <b>your infrastructure</b>, managed by <b>us</b>.
+                                        </li>
+                                        <li>
+                                            <b>Unlimited</b> event allocation. Pay only for what you use.
+                                        </li>
+                                        <li>
+                                            <b>Unlimited</b> tracked users
+                                        </li>
+                                        <li>
+                                            <b>Unlimited</b> team members
+                                        </li>
+                                        <li>
+                                            <b>Unlimited</b> projects
+                                        </li>
+                                        <li>
+                                            <b>7 years</b> of data retention
+                                            <span className="disclaimer">
+                                                <a href="#disclaimer-1">1</a>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <b>All core analytics features</b>
+                                        </li>
+                                        <li>
+                                            Session recording with unlimited storage
+                                            <span className="disclaimer">
+                                                <a href="#disclaimer-2">2</a>
+                                            </span>
+                                        </li>
+                                        <li>Feature flags</li>
+                                        <li>Plugins &amp; other integrations</li>
+                                        <li>Zapier integration</li>
+                                        <li>SSO/SAML</li>
+                                        <li>Export to data lakes</li>
+                                        <li>Community, Slack &amp; Email support</li>
+                                    </ul>
+                                    For companies using on average 1,000,000 events per month or more, we offer{' '}
+                                    <b>priority support</b>.
+                                </Card>
+                            </div>
+                        )}
                         {state.planOptions === 'cloud' && (
                             <div className="pricing-cloud">
                                 <h4>One Price. Pay only for what you use.</h4>
@@ -174,14 +277,14 @@ const PricingPage = () => {
                                         <Slider
                                             defaultValue={250000}
                                             min={10000}
-                                            max={4000000}
+                                            max={100000000}
                                             step={20000}
                                             tooltipVisible
                                             tipFormatter={(value) => value.toLocaleString()}
                                             onChange={(value) => setPriceSimulation(value)}
                                         />
                                         <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                                            {priceSimulation < 4000000 ? (
+                                            {priceSimulation < 1000000000 ? (
                                                 <>
                                                     <span className="text-muted">Monthly estimate:</span>{' '}
                                                     <b>
@@ -204,15 +307,13 @@ const PricingPage = () => {
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Looking for our free plan? First <b>10,000 events are free</b> every single month.
-                                    For everyone.
+                                    First <b>10,000 events are free</b> every single month. For everyone.
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Have very large volumes? If you expect to capture more than 4 million events per
-                                    month,{' '}
+                                    Unsure about your numbers or want to talk?{' '}
                                     <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
-                                        contact us
+                                        Contact us
                                     </a>
                                     .
                                 </div>
@@ -289,10 +390,7 @@ const PricingPage = () => {
                     <Row gutter={[24, 24]} style={{ marginTop: '32px' }}>
                         <Col span={24}>
                             <div ref={comparisonRef} id="comparison"></div>
-                            <h2>Cloud vs. Enterprise</h2>
-                            <p>
-                                Cloud or Enterprise? We'd love to help you find the option that's <b>right for you</b>.
-                            </p>
+                            <h2>Cloud vs. VPC</h2>
                         </Col>
                         <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
                             <Col md={12} sm={24}>
@@ -325,18 +423,17 @@ const PricingPage = () => {
                             <Col md={12} sm={24}>
                                 <div className="p-full-height">
                                     <h4 className="p-text-primary p-title-with-icon">
-                                        <img src={imgBuilding} alt="" /> Enterprise
+                                        <img src={imgBuilding} alt="" /> VPC
                                     </h4>
                                     <ul className="p-comparison-list">
-                                        <li>Recommended if you have large volumes of events or users ({'>100k'}).</li>
                                         <li>
-                                            You have strict compliance requirements on privacy or data handling (e.g.
-                                            HIPAA, SOC2).
+                                            Recommended if you have large volumes of events or users (
+                                            {'>10k monthly users'}).
                                         </li>
                                         <li>
-                                            You need dedicated support, and want regular touch points with our team to
-                                            get the best value.
+                                            You don't want user data to leave your infrastructure (e.g. HIPAA, SOC2).
                                         </li>
+                                        <li>You need full access to the production instance.</li>
                                         <li>
                                             You are concerned with browser privacy features, ad blockers, or third-party
                                             cookie blockers.
