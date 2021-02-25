@@ -16,19 +16,15 @@ const FooterListItem = ({ to = '', border = true, href = '', children }: FooterL
     const baseClasses = 'block py-3 text-white text-opacity-60 hover:text-opacity-100 hover:text-white'
     const classList = border ? `${baseClasses} border-b border-gray-600` : baseClasses
 
-    if (to) {
-        return (
-            <Link to={to} className={classList}>
-                {children}
-            </Link>
-        )
-    } else {
-        return (
-            <a href={href} className={classList}>
-                {children}
-            </a>
-        )
-    }
+    return to ? (
+        <Link to={to} className={classList}>
+            {children}
+        </Link>
+    ) : (
+        <a href={href} className={classList}>
+            {children}
+        </a>
+    )
 }
 
 const FooterSubCategory = ({ children }: { children: any }) => (
@@ -54,7 +50,7 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-const Footer = ({ isDocsPage }: { isDocsPage: boolean }) => {
+export const Footer = ({ isDocsPage }: { isDocsPage: boolean }) => {
     const { websiteTheme } = useValues(layoutLogic)
     const bgClass = isDocsPage && websiteTheme === 'dark' ? 'bg-darkmode-gray' : 'bg-footer'
     return (
@@ -188,5 +184,3 @@ const Footer = ({ isDocsPage }: { isDocsPage: boolean }) => {
         </div>
     )
 }
-
-export default Footer
