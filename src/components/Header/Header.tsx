@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useValues, useActions } from 'kea'
 import { Link } from 'gatsby'
 import { layoutLogic } from '../../logic/layoutLogic'
+import hamburgerIcon from '../../images/icons/hamburger.svg';
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
 
@@ -48,7 +49,7 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
     )
 }
 
-function Header({ isDocsPage }: { isDocsPage: boolean }) {
+export const Header = ({ isDocsPage }: { isDocsPage: boolean }) => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
@@ -90,19 +91,8 @@ function Header({ isDocsPage }: { isDocsPage: boolean }) {
                     </NavbarLink>
                 </ul>
 
-                <button className="text-white lg:hidden" onClick={() => expandMenu(!expanded)}>
-                    <svg
-                        viewBox="64 64 896 896"
-                        focusable="false"
-                        className=""
-                        data-icon="menu"
-                        width="1em"
-                        height="1em"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path>
-                    </svg>
+                <button className="text-white h-3 w-3 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
+                    <img src={hamburgerIcon} className="block" />
                 </button>
             </div>
 
@@ -158,4 +148,3 @@ function Header({ isDocsPage }: { isDocsPage: boolean }) {
     )
 }
 
-export default Header

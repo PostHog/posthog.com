@@ -49,11 +49,7 @@ function Menu({ isBlogArticlePage = false, isHomePage = false, activeKey }: Menu
                     <div className="flex justify-between items-center">
                         <AntMenu.Item className="header-key main-nav-cta-wrapper">
                             <a onClick={() => setIsGetStartedModalOpen(true)}>
-                                <span
-                                    className=""
-                                >
-                                    Get started now
-                                </span>
+                                <span>Get started now</span>
                             </a>
                         </AntMenu.Item>
                     </div>
