@@ -51,7 +51,8 @@
             "docs/tutorials/spa",
             "docs/tutorials/actions",
             "docs/tutorials/b2b",
-            "docs/tutorials/revenue"
+            "docs/tutorials/revenue",
+            "docs/tutorials/beyond-the-user-model"
         ],
         "child_entries": ["1 Minute Tutorials"]
     },
