@@ -29,7 +29,6 @@ Or go to an individual user page and select 'Sessions By Day':
 
 As shown in the screenshots above, sessions that were recorded have a green play button available on the 'Play Session' column, which opens a modal where you can watch the session.
 
-Sessions that can be played back are the ones that contain `$snapshot` events, which is how PostHog stores the session recording data.
 
 When watching sessions, you can change the speed as well as select the option 'skip inactive' - this will skip chunks of the recording where the user was inactive on the page. 
 
