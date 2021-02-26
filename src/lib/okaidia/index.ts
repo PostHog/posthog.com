@@ -21,7 +21,7 @@ export const OkaidiaTheme: PrismTheme = {
             },
         },
         {
-            types: ['inserted', 'attr-name'],
+            types: ['inserted'],
             style: {
                 color: 'rgb(173, 219, 103)',
                 fontStyle: 'italic',
@@ -53,7 +53,7 @@ export const OkaidiaTheme: PrismTheme = {
             },
         },
         {
-            types: ['builtin', 'char', 'constant', 'function'],
+            types: ['builtin', 'char', 'constant', 'function', 'class-name'],
             style: {
                 color: '#e6db74',
             },
@@ -72,12 +72,6 @@ export const OkaidiaTheme: PrismTheme = {
             },
         },
         {
-            types: ['class-name'],
-            style: {
-                color: 'rgb(255, 203, 139)',
-            },
-        },
-        {
             types: ['tag', 'operator', 'keyword'],
             style: {
                 color: '#66d9ef',
@@ -86,19 +80,38 @@ export const OkaidiaTheme: PrismTheme = {
         {
             types: ['boolean'],
             style: {
-                color: 'rgb(255, 88, 116)',
-            },
-        },
-        {
-            types: ['property'],
-            style: {
-                color: 'rgb(128, 203, 196)',
+                color: '#ae81ff',
             },
         },
         {
             types: ['namespace'],
             style: {
                 color: 'rgb(178, 204, 214)',
+                opacity: 0.7,
+            },
+        },
+        {
+            types: ['tag', 'property'],
+            style: {
+                color: '#f92672',
+            },
+        },
+        {
+            types: ['attr-name'],
+            style: {
+                color: '#a6e22e !important',
+            },
+        },
+        {
+            types: ['doctype'],
+            style: {
+                color: '#8292a2',
+            },
+        },
+        {
+            types: ['rule'],
+            style: {
+                color: '#e6db74',
             },
         },
     ],

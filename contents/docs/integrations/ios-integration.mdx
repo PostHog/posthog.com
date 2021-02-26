@@ -52,11 +52,8 @@ configuration.recordScreenViews = YES; // Record screen views automatically!
 ```swift
 import PostHog
 
-// on posthog.com
-let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY")
-
-// self-hosted
-let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY", host: "http://app.posthog.com")
+// `host` is optional if you use PostHog Cloud (app.posthog.com)
+let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
 
 configuration.captureApplicationLifecycleEvents = true; // Record certain application events automatically!
 configuration.recordScreenViews = true; // Record screen views automatically!

@@ -40,12 +40,12 @@ cd ..
 
 Somewhere your application, setup the SDK like so:
 
-```
+```js
 import PostHog from 'posthog-react-native'
 
-await PostHog.setup('YOUR_API_KEY', {
+await PostHog.setup('<ph_project_api_key>', {
     // PostHog API host
-    host: 'https://app.posthog.com',
+    host: '<ph_instance_address>',
 
     // Record certain application events automatically! (off/false by default)
     captureApplicationLifecycleEvents: true,

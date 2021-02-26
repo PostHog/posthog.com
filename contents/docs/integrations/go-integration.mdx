@@ -37,7 +37,7 @@ import (
 )
 
 func main() {
-    client := posthog.NewWithConfig(os.Getenv("POSTHOG_API_KEY"), posthog.Config{Endpoint:"https://your.posthog.endpoint"})
+    client := posthog.NewWithConfig(os.Getenv("POSTHOG_API_KEY"), posthog.Config{Endpoint:"<ph_instance_address>"})
     defer client.Close()
 
     // run commands
