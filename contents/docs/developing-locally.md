@@ -6,6 +6,8 @@ showTitle: true
 
 ## Using Docker
 
+> **Note:** Currently Docker does not support Apple Silicon. Please use the virtualenv setup instead.
+
 First clone the repository:
 ```bash
 git clone https://github.com/PostHog/posthog
@@ -63,7 +65,16 @@ git clone https://github.com/PostHog/posthog
     brew install yarn
     ```
 
-13. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
+13. Make sure you have [NodeJS installed](https://nodejs.org/en/download/):
+
+    ```bash
+    # macOS (Homebrew)
+    brew install node
+    ```
+
+> **Note:** For Apple Silicon support, please use NodeJS >= v15.0
+
+14. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
 
     *_Note:_ The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
 
