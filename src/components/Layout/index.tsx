@@ -138,7 +138,7 @@ const Layout = ({
             </AntdLayout>
             <AntdLayout style={{ background: '#ffffff' }}>
                 {isBlogArticlePage && <BlogFooter />}
-                <Footer isDocsPage={isDocsPage} />
+                <Footer isDocsPage={isDocsPage} onPostPage={onPostPage} />
             </AntdLayout>
             <PosthogAnnouncement />
             <GetStartedModal />
