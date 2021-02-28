@@ -4,7 +4,7 @@ body.dark {
     .post-page-wrapper {
         @media screen and (min-width: 1080px) {
             #docs-sidebar {
-                background-color: #0e0e0e !important;
+                background-color: #19082f !important;
             }
 
             #menu-header,
@@ -14,7 +14,7 @@ body.dark {
             #docs-content-wrapper,
             #docs-content-wrapper,
             #ant-layout-content-wrapper {
-                background-color: #18191a !important;
+                background-color: #220f3f !important;
             }
 
             .footer-universal {
@@ -126,7 +126,7 @@ body.dark {
             }
 
             .ant-anchor-link a {
-                color: #4e4c4c;
+                color: rgba(255, 255, 255, 0.4);
             }
 
             .ant-anchor-link a:hover {
@@ -139,7 +139,7 @@ body.dark {
 
             .ant-anchor-ink-ball {
                 border-color: #ba8fff !important;
-                background: #18191a !important;
+                background: #220f3f !important;
             }
 
             .zambezi {

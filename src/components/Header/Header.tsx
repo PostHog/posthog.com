@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useValues, useActions } from 'kea'
 import { Link } from 'gatsby'
 import { layoutLogic } from '../../logic/layoutLogic'
-import hamburgerIcon from '../../images/icons/hamburger.svg';
+import hamburgerIcon from '../../images/icons/hamburger.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
 
@@ -49,15 +49,18 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
     )
 }
 
-export const Header = ({ isDocsPage }: { isDocsPage: boolean }) => {
+export const Header = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPostPage: boolean }) => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
-    const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-gray'
-    const backgroundColor = isDocsPage ? themeSupportedColor : 'bg-purple-gradient'
-    const logo = isDocsPage && websiteTheme === 'light' ? darkLogo : whiteLogo
-    const textLight = !isDocsPage || websiteTheme === 'dark'
-    const layoutWidth = isDocsPage ? 'w-full px-4' : 'w-11/12 mx-auto'
+    const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-purple'
+
+    const darkModeSupportedPage = isDocsPage || onPostPage
+
+    const backgroundColor = darkModeSupportedPage ? themeSupportedColor : 'bg-purple-gradient'
+    const logo = darkModeSupportedPage && websiteTheme === 'light' ? darkLogo : whiteLogo
+    const textLight = !darkModeSupportedPage || websiteTheme === 'dark'
+    const layoutWidth = darkModeSupportedPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
         <div className={`primary-navbar py-6 ${backgroundColor}`}>
@@ -74,7 +77,7 @@ export const Header = ({ isDocsPage }: { isDocsPage: boolean }) => {
                         Docs
                     </NavbarLink>
                     <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
-                        Community
+                        Github
                     </NavbarLink>
                     <NavbarLink to="/handbook/company/story" textLight={textLight}>
                         Company
@@ -117,7 +120,7 @@ export const Header = ({ isDocsPage }: { isDocsPage: boolean }) => {
                         textLight={textLight}
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >
-                        Community
+                        Github
                     </NavbarLink>
                     <NavbarLink
                         to="/handbook/company/story"
@@ -147,4 +150,3 @@ export const Header = ({ isDocsPage }: { isDocsPage: boolean }) => {
         </div>
     )
 }
-

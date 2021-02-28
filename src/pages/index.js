@@ -59,7 +59,7 @@ function IndexPage() {
                             <Spacer height={25} onlyDesktop={true} />
                             <div className="w-11/12 mx-auto max-w-4xl flex justify-between items-center flex-col lg:flex-row">
                                 <div className="w-full lg:w-1/2">
-                                    <span className="text-white text-2xl hidden lg:block">
+                                    <span className="text-white text-xl hidden lg:block">
                                         Join 2,700 companies <br className="hiddenBreak" /> using PostHog.
                                     </span>
 
@@ -72,7 +72,7 @@ function IndexPage() {
                                         </button>
                                         <a
                                             href="/schedule-demo"
-                                            className="px-4 py-2 my-1 block bg-transparent border border-white rounded font-semibold tracking-widest text-white uppercase lg:mr-1 hover:bg-white hover:bg-opacity-10 hover:text-white"
+                                            className="px-4 py-2 my-1 font-gosha block bg-transparent border border-white rounded font-semibold text-base-larger text-white uppercase lg:mr-1 hover:bg-white hover:bg-opacity-10 hover:text-white"
                                         >
                                             Schedule Demo
                                         </a>
