@@ -12,6 +12,7 @@ import { DocsSearch } from '../DocsSearch'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
+import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
@@ -47,6 +48,17 @@ const Layout = ({
     useEffect(() => {
         if (window && posthog) {
             posthog.people.set({ preferred_theme: (window as any).__theme })
+        }
+
+        const skeletonLoaded = document.getElementsByClassName('skeleton-loading')
+
+        for (var i = 0; i < skeletonLoaded.length; i++) {
+            let el = skeletonLoaded[i]
+
+            el.classList.remove('skeleton-loading--250')
+            el.classList.remove('skeleton-loading--500')
+            el.classList.remove('skeleton-loading--750')
+            el.classList.remove('skeleton-loading--1000')
         }
     }, [])
 

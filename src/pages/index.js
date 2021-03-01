@@ -50,7 +50,7 @@ function IndexPage() {
                         description="Self-hosted product analytics stack, to deploy on your infrastructure."
                     />
                     <div className="topSectionWrapperMobile">
-                        <div className="topPageWrapper wrapper">
+                        <div className="topPageWrapper wrapper skeleton-loading skeleton-loading--750">
                             <div className="pageHeader row">
                                 <h1 className="mt-12">
                                     A complete product analytics stack, to deploy on your infrastructure.
@@ -82,7 +82,7 @@ function IndexPage() {
                                 <div className="w-full lg:w-1/2">
                                     <img
                                         src={posthogComputer}
-                                        className="w-full max-w-lg mx-auto mt-8 lg:mt-0 lg:max-w-full block"
+                                        className="w-full max-w-lg mx-auto mt-8 lg:mt-0 lg:max-w-full block skeleton-loading skeleton-loading--250"
                                     />
                                 </div>
                             </div>
