@@ -1,7 +1,7 @@
 import React from 'react'
 
 import TestLayout from '../../TestLayout'
-import Header from '../../Header'
+import { Header } from '../../Header'
 import Hero from './Hero'
 import SocialProof from './SocialProof'
 import Features from './Features'
@@ -12,13 +12,13 @@ import ProductFeatureIcons from './ProductFeatureIcons'
 import PrimaryCta from './Shared/Buttons/PrimaryCta'
 import SecondaryCta from './Shared/Buttons/SecondaryCta'
 import RecentBlogPosts from './RecentBlogPosts'
-import Footer from '../../Footer/Footer'
+import { Footer } from '../../Footer/Footer'
 
 import featuresImg from './images/safe-features.png'
 import userBehaviorImg from './images/user-behavior.png'
 import funnelsImg from './images/funnels.png'
 
-import SEO from '../../seo'
+import { SEO } from '../../seo'
 
 import './styles/index.scss'
 

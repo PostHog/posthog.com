@@ -247,7 +247,7 @@ h1 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 48px;
+    font-size: 42px;
     line-height: 150%;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
@@ -264,7 +264,7 @@ h2 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 40px;
+    font-size: 36px;
     line-height: normal;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
@@ -281,7 +281,7 @@ h3 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 32px;
+    font-size: 30px;
     line-height: normal;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
@@ -387,7 +387,7 @@ p {
     padding-right: 0;
     padding-top: 0;
     margin-bottom: 1.45rem;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -429,7 +429,6 @@ table {
     margin-bottom: 1.45rem;
     font-size: 14px;
     line-height: 1.45rem;
-    border-collapse: collapse;
     width: 100%;
 }
 fieldset {
@@ -728,17 +727,6 @@ header {
     margin: 0 10px;
 }
 
-.footer-universal {
-    background: linear-gradient(180deg, #232e5c 0%, #222d5b 100%);
-    color: #fff;
-    position: relative;
-    left: 0px;
-    width: '100%';
-    top: '100%';
-    margin-top: 0;
-    height: 100%;
-}
-
 .ant-menu,
 .ant-menu-submenu,
 .ant-menu-item {
@@ -748,7 +736,7 @@ header {
 }
 
 li > .ant-menu-submenu-title span {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .ant-menu-submenu a {
@@ -846,22 +834,6 @@ a.ant-anchor-link-title:hover {
 
 .ant-anchor-ink span {
     border-color: #1d4aff !important;
-}
-
-.footer-universal a {
-    color: #fff;
-}
-.footer-links {
-    list-style-type: none;
-    margin-top: 20px;
-    line-height: 1em;
-    text-align: left;
-}
-
-.footer-links-header {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .footer-message {
@@ -1108,19 +1080,17 @@ a.middle {
     background-color: #35416b !important;
 }
 
+.table-no-borders th,
+.table-no-borders td {
+    border: none;
+}
+
+table th,
 table td {
-    border: none;
-}
-
-table th {
-    border: none;
-}
-
-.table-borders th,
-.table-borders td {
-    border: 1px solid !important;
-    border-color: #e8e8e8 !important;
+    border: 1px solid;
+    border-color: #e8e8e8;
     padding-left: 10px !important;
+    max-width: 200px !important;
 }
 
 #mc_embed_signup {

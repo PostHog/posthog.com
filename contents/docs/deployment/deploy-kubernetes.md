@@ -40,7 +40,6 @@ The following table lists the configurable parameters of the PostHog Helm Chart 
 
 Dependent charts can also have values overwritten. Preface values with PostgreSQL.
 
-<span class="table-borders">
 
  | Parameter & Description                                                                                                                                      | Default                           |
  | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- |
@@ -132,8 +131,6 @@ Dependent charts can also have values overwritten. Preface values with PostgreSQ
  | `serviceAccount.create`<br/><br/>&nbsp; Configures if a ServiceAccount with this name should be created                                                      | `true`                            |
  | `serviceAccount.annotations`<br/><br/>&nbsp; Configures annotation for the ServiceAccount                                                                    | `{}`                              |
 
-
-</span>
 
 Dependent charts can also have values overwritten. Preface values with "postgresql."
 

@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import queryString from 'query-string'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Card, Collapse, Slider } from 'antd'
-import SEO from '../components/seo'
+import { SEO } from '../components/seo'
 import './styles/pricing.scss'
 import 'antd/lib/collapse/style/css'
 import imgCloud from '../images/cloud.svg'
@@ -117,7 +117,7 @@ const PricingPage = () => {
                                 <Card className="p-full-height">
                                     {plan.image && (
                                         <div style={{ marginTop: 16 }}>
-                                            <img src={plan.image} alt="" />
+                                            <img src={plan.image} alt="Plan image" />
                                         </div>
                                     )}
                                     <h3
@@ -209,7 +209,7 @@ const PricingPage = () => {
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Have very large volumes? If you expect to capture for than 4 million events per
+                                    Have very large volumes? If you expect to capture more than 4 million events per
                                     month,{' '}
                                     <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
                                         contact us
@@ -228,36 +228,36 @@ const PricingPage = () => {
                                         <li>
                                             <b>Unlimited</b> event allocation. Pay only for what you use.
                                         </li>
-                                        <li>
+                                        <li className="mt-2">
                                             <b>Unlimited</b> tracked users
                                         </li>
-                                        <li>
+                                        <li className="mt-2">
                                             <b>Unlimited</b> team members
                                         </li>
-                                        <li>
+                                        <li className="mt-2">
                                             <b>Unlimited</b> projects
                                         </li>
-                                        <li>
+                                        <li className="mt-2">
                                             <b>7 years</b> of data retention
                                             <span className="disclaimer">
                                                 <a href="#disclaimer-1">1</a>
                                             </span>
                                         </li>
-                                        <li>
+                                        <li className="mt-2">
                                             <b>All core analytics features</b>
                                         </li>
-                                        <li>
+                                        <li className="mt-2">
                                             Session recording with unlimited storage
                                             <span className="disclaimer">
                                                 <a href="#disclaimer-2">2</a>
                                             </span>
                                         </li>
-                                        <li>Feature flags</li>
-                                        <li>Plugins &amp; other integrations</li>
-                                        <li>Zapier integration</li>
-                                        <li>SSO/SAML</li>
-                                        <li>Export to data lakes</li>
-                                        <li>Community, Slack &amp; Email support</li>
+                                        <li className="mt-2">Feature flags</li>
+                                        <li className="mt-2">Plugins &amp; other integrations</li>
+                                        <li className="mt-2">Zapier integration</li>
+                                        <li className="mt-2">SSO/SAML</li>
+                                        <li className="mt-2">Export to data lakes</li>
+                                        <li className="mt-2">Community, Slack &amp; Email support</li>
                                     </ul>
                                     For companies using on average 1,000,000 events per month or more, we offer{' '}
                                     <b>priority support</b>.

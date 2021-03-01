@@ -33,16 +33,17 @@ PostHog uses Brex and Revolut's built-in expenses tracking feature. You'll find 
 ### Brex
 
 - Buy something on your Brex card.
-- Respond to the Brex app or SMS notification with a picture of your receipt. Alternatively, you can forward it to receipts@brex.com. 
+- If it's a digital invoice, just forward it to receipts@brex.com. If it's a physical receipt, respond to the Brex or SMS notification with a picture of your receipt.
 - You _only_ need to submit receipts for purchases of \$75 or more.
 - That's it!
+
+Make sure you forward digital invoices to Brex from your PostHog email address - it won't work if you send from another email address.
 
 ### Revolut
 
 - Buy something on your Revolut card.
-- Respond to the Revolut app notification with a picture of your receipt or log into the Revolut website.
-- Assign the spend to a category - using the search function is easiest.
-- You need to submit receipts for _all_ purchases (Revolut does not yet have the ability to set a minimum threshold).  
+- If it's a digital invoice, just forward it to ukinvoices@posthog.com. If it's a physical receipt, take a picture and forward it to the same place.
+- You need to submit receipts for _all_ purchases.  
 
 Accidentally bought something on the company card when it was a personal expense? Don't worry! Again, just let Charles know _as soon as you become aware_ and he will provide you with the relevant bank details for you to repay the company. 
 

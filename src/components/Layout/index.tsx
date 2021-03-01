@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
+import { Header } from '../Header/Header'
+import { Footer } from '../Footer/Footer'
 import { ResponsiveSidebar } from '../ResponsiveSidebar'
 import { Container } from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
@@ -12,6 +12,7 @@ import { DocsSearch } from '../DocsSearch'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
+import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
@@ -48,10 +49,28 @@ const Layout = ({
         if (window && posthog) {
             posthog.people.set({ preferred_theme: (window as any).__theme })
         }
+
+        const skeletonLoaded = document.getElementsByClassName('skeleton-loading')
+
+        for (var i = 0; i < skeletonLoaded.length; i++) {
+            let el = skeletonLoaded[i]
+
+            el.classList.remove('skeleton-loading--250')
+            el.classList.remove('skeleton-loading--500')
+            el.classList.remove('skeleton-loading--750')
+            el.classList.remove('skeleton-loading--1000')
+        }
     }, [])
 
     return (
         <>
+            <Header
+                onPostPage={onPostPage}
+                isBlogArticlePage={isBlogArticlePage}
+                isHomePage={isHomePage}
+                isDocsPage={isDocsPage}
+                menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
+            />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
                     <AntdLayout.Sider
@@ -64,12 +83,6 @@ const Layout = ({
                     </AntdLayout.Sider>
                 )}
                 <AntdLayout id="ant-layout-content-wrapper" style={{ background: '#ffffff' }}>
-                    <Header
-                        onPostPage={onPostPage}
-                        isBlogArticlePage={isBlogArticlePage}
-                        isHomePage={isHomePage}
-                        menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
-                    />
                     {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
                         <span className="display-mobile">
                             <ResponsiveTopBar />
@@ -137,7 +150,7 @@ const Layout = ({
             </AntdLayout>
             <AntdLayout style={{ background: '#ffffff' }}>
                 {isBlogArticlePage && <BlogFooter />}
-                <Footer onPostPage={onPostPage} />
+                <Footer isDocsPage={isDocsPage} onPostPage={onPostPage} />
             </AntdLayout>
             <PosthogAnnouncement />
             <GetStartedModal />

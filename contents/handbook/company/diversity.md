@@ -34,7 +34,7 @@ We don't just state that we care - these are some of the things we've implemente
 * [Paid SuperDay](/careers#the-process) as part of the hiring process - to allow you to see what it's really like working on the team, before starting.
 * [Training budget](/handbook/people/training#training-budget) for those in roles where we don't have lots of existing experience as a company.
 * Life story Fridays (when we have a new team member, we'll ask them to present their life story for an hour on a Friday) - so you have more context on the points of views of others in the team.
-* Sponsored visas for those who need them.
+* [Sponsored visas](/handbook/people/hiring-process#visa-sponsorship) for those who need them
 * Health insurance for those from countries that do not provide this freely.
 
 Are you a potential candidate reading this? [Let us know](mailto:careers@posthog.com) how we can do a better job!

@@ -59,7 +59,6 @@ export const CompensationCalculator = () => {
 
     let countries = unique(locationFactor.map((l) => l.country))
 
-    console.log(locationFactor.filter((location) => location.country === country))
     return (
         <div style={{ fontSize: '0.85rem' }} className="compensation-calculator ph-no-capture">
             <p>Select a role</p>

@@ -9,9 +9,9 @@ import { Spin } from 'antd'
 import { PluginModal } from '../components/PluginLibrary/PluginModal'
 import { getPluginImageSrc } from '../lib/utils'
 import { LibraryPluginType } from '../types'
-
-import './styles/plugin-library.scss'
+import { SEO } from '../components/seo'
 import { Link } from 'gatsby'
+import pluginLibraryOgImage from '../images/posthog-plugins.png'
 
 const { TabPane } = Tabs
 
@@ -21,6 +21,11 @@ export const PluginLibraryPage = () => {
 
     return (
         <Layout>
+            <SEO
+                title="Plugin Library • PostHog"
+                description="Plugins for getting data in and out of PostHog, the open source product analytics platform."
+                image={pluginLibraryOgImage}
+            />
             <div className="centered" style={{ margin: 'auto' }}>
                 <PluginModal />
                 <Spacer />

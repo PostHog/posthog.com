@@ -200,6 +200,7 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-21-0",
             "blog/the-posthog-array-1-20-0",
             "blog/the-posthog-array-1-19-0",
             "blog/the-posthog-array-1-18-0",
@@ -313,6 +314,7 @@
         "name": "Marketing",
         "items": [
             "handbook/growth/marketing",
+            "handbook/growth/marketing/content",
             "handbook/growth/marketing/posthog-array",
             "handbook/growth/marketing/releasing-content",
             "handbook/growth/marketing/press"
