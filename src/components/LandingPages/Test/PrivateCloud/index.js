@@ -2,7 +2,7 @@ import React from 'react'
 
 const FeatureBenefit = ({ feature, benefit }) => {
     return (
-        <div className="w-1/3 px-3 text-left my-5">
+        <div className="w-full md:w-1/3 px-3 text-left my-5">
             <header className="text-green-300 font-bold">{feature}</header>
             <main className="text-white opacity-80">{benefit}</main>
         </div>
@@ -19,7 +19,7 @@ const PrivateCloud = () => {
                     privacy-conscious and compliance-oriented companies.
                 </p>
 
-                <div className="flex justify-between items-stretch flex-row flex-wrap">
+                <div className="flex justify-between items-stretch flex-col md:flex-row flex-wrap">
                     <FeatureBenefit
                         feature="Built to scale"
                         benefit="Private cloud deployments are capable of supporting hundreds of millions of users"
@@ -49,7 +49,7 @@ const PrivateCloud = () => {
                 <div className="mt-24">
                     <div
                         style={{ background: 'rgba(255,255,255,.6)' }}
-                        className="rounded p-12 flex justify-between items-center"
+                        className="rounded p-12 flex flex-col md:flex-row justify-between items-center"
                     >
                         <div className="w-full md:w-1/2 md:mr-4">
                             <h3 className="text-purpleish">Open-source to our core</h3>

@@ -18,7 +18,7 @@ const Features = () => {
                         <img src={oldWayImg} alt="The old way" className="w-full" />
                     </div>
 
-                    <div className="w-full md:w-1/2 md:ml-5">
+                    <div className="w-full mt-12 md:mt-0 md:w-1/2 md:ml-5">
                         <header className="gosha text-lg">The new way</header>
                         <img src={newWayImg} alt="The new way" className="w-full" />
                         <p className="opacity-80 mt-3">

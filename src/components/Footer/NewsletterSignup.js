@@ -3,9 +3,9 @@ import React from 'react'
 const NewsletterSignup = () => {
     return (
         <div className="w-11/12 max-w-4xl mx-auto mb-24">
-            <div className="bg-neon w-full h-full p-2 rounded">
+            <div className="bg-neon w-full h-full p-1 rounded">
                 <div
-                    className="rounded flex justify-between flex-col md:flex-row p-8"
+                    className="rounded flex justify-between flex-col md:flex-row p-8 relative z-10"
                     style={{ backgroundColor: '#08042f' }}
                 >
                     <div className="w-full lg:w-2/3 lg:mr-4 text-white">

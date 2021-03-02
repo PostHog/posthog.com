@@ -81,7 +81,7 @@ const TestLandingPage = () => {
                             <span className="text-center text-white opacity-60 mt-2 block text-xs">8 min read</span>
                         </div>
 
-                        <div className="w-full lg:w-1/3 lg:mx-2 bg-purple-400 bg-opacity-30 rounded p-3">
+                        <div className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:mx-2 bg-purple-400 bg-opacity-30 rounded p-3">
                             <img src={userBehaviorImg} className="w-full" alt="How to safely rollout new features" />
 
                             <strong className="block text-center text-white">
@@ -90,7 +90,7 @@ const TestLandingPage = () => {
                             <span className="text-center text-white opacity-60 mt-2 block text-xs">6 min read</span>
                         </div>
 
-                        <div className="w-full lg:w-1/3 lg:ml-2 bg-purple-400 bg-opacity-30 rounded p-3">
+                        <div className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:ml-2 bg-purple-400 bg-opacity-30 rounded p-3">
                             <img src={funnelsImg} className="w-full" alt="How to safely rollout new features" />
 
                             <strong className="block text-center text-white">
