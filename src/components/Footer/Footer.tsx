@@ -66,13 +66,9 @@ export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPost
                         </FooterListItem>
 
                         <FooterSubCategory>Product suite</FooterSubCategory>
-                        <FooterListItem to="">Analytics</FooterListItem>
-                        <FooterListItem to="">Heatmaps</FooterListItem>
                         <FooterListItem to="/product-features/session-recording">Session replay</FooterListItem>
-                        <FooterListItem to="/product-features/feature-flags">Feature Flags</FooterListItem>
-                        <FooterListItem to="">User feedback</FooterListItem>
-                        <FooterListItem to="" border={false}>
-                            Revenue tracking
+                        <FooterListItem to="/product-features/feature-flags" border={false}>
+                            Feature Flags
                         </FooterListItem>
 
                         <FooterSubCategory>Features</FooterSubCategory>
@@ -113,10 +109,9 @@ export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPost
                 <div className="w-full md:w-1/4 md:px-8">
                     <FooterCategory title="Docs">
                         <FooterSubCategory>Getting started</FooterSubCategory>
-                        <FooterListItem to="">Open source</FooterListItem>
-                        <FooterListItem to="">Private cloud</FooterListItem>
-                        <FooterListItem to="" border={false}>
-                            PostHog cloud
+                        <FooterListItem href="https://app.posthog.com/signup">PostHog cloud</FooterListItem>
+                        <FooterListItem to="/docs/deployment" border={false}>
+                            Deploying PostHog
                         </FooterListItem>
 
                         <FooterSubCategory>Configuring PostHog</FooterSubCategory>
@@ -139,7 +134,7 @@ export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPost
                 <div className="w-full md:w-1/4 md:pl-8">
                     <FooterCategory title="Company">
                         <FooterSubCategory>About</FooterSubCategory>
-                        <FooterListItem to="">Open source</FooterListItem>
+                        <FooterListItem href="https://github.com/posthog/posthog">Open source</FooterListItem>
                         <FooterListItem to="/handbook/company/story">Our story</FooterListItem>
                         <FooterListItem to="/handbook">Handbook</FooterListItem>
                         <FooterListItem to="/handbook/company/team">Team</FooterListItem>
@@ -150,7 +145,6 @@ export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPost
 
                         <FooterSubCategory>Resources</FooterSubCategory>
                         <FooterListItem to="/blog">Blog</FooterListItem>
-                        <FooterListItem to="">HogTalks</FooterListItem>
                         <FooterListItem to="/media">Media</FooterListItem>
                         <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
                             Merch
