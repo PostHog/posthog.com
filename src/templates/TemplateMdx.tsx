@@ -90,7 +90,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                     </div>
                     {isDocsPage && <DocsPageSurvey />}
                     {(isDocsPage || isHandbookPage) && (
-                        <DocsFooter filename={`${addIndex(mdx.slug)}.md`} title={frontmatter.title} />
+                        <DocsFooter filename={`/${addIndex(mdx.slug)}.mdx`} title={frontmatter.title} />
                     )}
                 </div>
             </Layout>
