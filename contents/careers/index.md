@@ -8,17 +8,17 @@ showTitle: true
 
 PostHog is increasing the number of successful products in the world.
 
-We do that by providing a platform for open-source product analytics. This helps software teams understand user behavior.
+We do that by providing a platform for open-source product analytics; this helps software teams understand user behavior.
 
-The analytics landscape has historically been very fragmented. There are many tools that provide value individually, but integrating the basic features across many verticals provides much more value.
+The analytics landscape has historically been very fragmented. Many tools provide value individually, but integrating the basic features across many verticals provides much more value.
 
-Today, we are focused on community growth around our open source project. We aim to provide the core features of many tools, that traditionally would all sit in silos. This, coupled with the ability to use the software for free, for life, is making PostHog a no-brainer for every new software project.
+Today, we are focused on community growth around our open-source project. We aim to provide the core features of many tools that traditionally would all sit in silos. This, coupled with the ability to use the software for free, for life, is making PostHog a no-brainer for every new software project.
 
 We've made a crazy amount of progress to date.
 
-We took part in [Y Combinator's](https://www.ycombinator.com/) W20 cohort, and had the most successful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just 4 weeks old.
+We took part in [Y Combinator's](https://www.ycombinator.com/) W20 cohort and had the most successful B2B software launch on [HackerNews](https://news.ycombinator.com/) since 2012, with a product that was just four weeks old.
 
-Our GitHub repo has over over 3.7k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
+Our GitHub repo has over 3.8k stars (and growing fast), and we already have thousands of users, including deployments at large companies. 
 
 We're backed by some of the world's top investors and believe in product-led growth, where we build something awesome and let our product bring the users, rather than an outbound sales team and regular cold calls.
 
@@ -58,11 +58,11 @@ We're committed to much more than just public code.
 
 ##### Written communication
 
-We're an all-remote company that allows people to work from almost anywhere in the world. With [team members across many countries](handbook/company/team), it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
+We're an all-remote company that allows people to work from almost anywhere in the world. With [team members across many countries](handbook/company/team), it's essential for us to practice clear communication in ways that help us stay connected and work more efficiently.
 
 To accomplish this, we use asynchronous communication as a starting point and stay as open and transparent as we can by communicating through public issues, pull requests, and (minimally) Slack.
 
-Putting things in writing helps us clarify our own ideas, as well as allow others to provide better feedback. It has been key to our development and growth.
+Putting things in writing helps us clarify our own ideas, and allows others to provide better feedback. It has been key to our development and growth.
 
 ## Our Backers
 
@@ -77,20 +77,20 @@ The stages of our hiring process are:
 **Application** - we aim to get back to you within 2 working days, but please bear with us in case it takes a bit longer. 
 
 **[Culture interview](/handbook/people/hiring-process#interview-1---culture-with-eltje) with Eltje, our People and Talent Lead.**
-  The video call is going to take 30 minutes and the goal is to ensure you will be a great cultural addition to the team and of course to answer any questions you   might have about PostHog or the role. 
+  The video call will take 30 minutes, and the goal is to ensure you will be a great cultural addition to the team and, of course, to answer any questions you might have about PostHog or the role. 
 
 **[Technical interview](/handbook/people/hiring-process#interview-2---technical)** with the [hiring team](/handbook/company/team).
   This is usually 2 PostHog team members spending 45-60 minutes with the candidate. This interview will focus on the skills needed to fill the role.
   
 **[PostHog SuperDay](/handbook/people/hiring-process#posthog-superday)** - this is a *paid* day of working with us, which we will fit around your schedule. 
 
-  Getting hired by us is extremely challenging, and this will be a big day. However, our team are going to work hard to make you successful - we want you to         succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
+  Getting hired by us is extremely challenging, and this will be a big day. However, our team is going to work hard to make you successful - we want you to succeed. You'll need to be fully engaged with a steady supply of tea, coffee, and biscuits.
 
-  We'll set you up with a Slack support channel with several of [our core team](handbook/company/team). We'll give you a variety of tasks to work on. We are         looking for your ability to iterate, to get things live, to learn, to take initiative, and to prioritize.
+  We'll set you up with a Slack support channel with several of [our core team](handbook/company/team). We'll give you a variety of tasks to work on. We are looking for your ability to iterate, get things live, learn, take initiative, and prioritize.
 
-  This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting     paid, of course.
+  This way, you'll get a chance to see how we work, and we'll get a chance to see how you get on during the equivalent of a very busy day. And you'll be getting paid, of course.
 
-**Offer** Hooray! We will send you an offer letter outlining all the details of the offer and if you choose to accept, we will kickstart the onboarding process! 
+**Offer** Hooray! We will send you an offer letter outlining all the details of the offer, and if you choose to accept, we will kickstart the onboarding process! 
 
 
 ## Benefits
@@ -102,7 +102,7 @@ The stages of our hiring process are:
 * [Generous parental leave](/handbook/people/time-off#parental-leave)
 * Visa sponsorship
 * [Training budget](/handbook/people/training#training-budget) (role dependent)
-* We provide [all equipment](/handbook/people/spending-money#equipment) needed have an ergonomic setup at home to be as productive as possible
+* We provide [all equipment](/handbook/people/spending-money#equipment) needed to have an ergonomic setup at home to be as productive as possible
 * \$200/month [budget towards coworking or café working](/handbook/people/spending-money#work-space)
 * Carbon offsetting for work travel with [Project Wren](https://projectwren.com/) 
 * Free [books](/handbook/people/training#books)
@@ -131,7 +131,7 @@ We take exceptional people when they come along, and we really mean that.
 
 If you do *not* see a specific role listed, that really doesn't mean we won't have a spot for you.
 
-We take this application seriously - you won't just end up in a candidate database, we will either hire you, reject you, or give you some insight into when may make more sense to apply.
+We take this application seriously - you won't just end up in a candidate database. We will either hire you, reject you, or give you some insight into when it may make more sense to apply.
 
 # Get Started - Applying
 
@@ -153,4 +153,4 @@ Watch a day in the life of our graphic designer, Lottie!
 
 # Note to recruitment agencies
 
-At Posthog, we do not work with recruitment agencies. Any direct approaches will be left unanswered, please do not call or follow up via email. We do not accept speculative resumés, unless we have specifically instructed you to provide these. We will not be responsible for any fees relating to unsolicited resumés.
+At Posthog, we do not work with recruitment agencies. Any direct approaches will be left unanswered; please do not call or follow up via email. We do not accept speculative resumés unless we have specifically instructed you to provide these. We will not be responsible for any fees relating to unsolicited resumés.
