@@ -45,9 +45,10 @@ const TestLandingPage = () => {
 
                 <PrimaryCta>Get Started</PrimaryCta>
                 <SecondaryCta>Book a demo</SecondaryCta>
+
+                <SocialProof />
             </Hero>
 
-            <SocialProof />
             <Features />
             <PrivateCloud />
 

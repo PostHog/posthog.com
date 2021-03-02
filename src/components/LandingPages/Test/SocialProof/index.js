@@ -13,7 +13,7 @@ const Logo = ({ logo, alt }) => <img src={logo} alt={alt} className="p-4" />
 
 const SocialProof = () => {
     return (
-        <div className="social-proof py-24">
+        <div className="py-24">
             <div className="w-11/12 max-w-2xl mx-auto flex justify-around flex-row flex-wrap">
                 <Logo logo={airbalticLogo} alt="Airbaltic" />
                 <Logo logo={dataikuLogo} alt="Dataiku" />
