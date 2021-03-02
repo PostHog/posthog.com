@@ -916,8 +916,6 @@ a.ant-anchor-link-title:hover {
 
 .blogHeaderTitle {
     position: relative;
-    height: calc(100% - 64px);
-    top: 0;
     width: 80%;
     color: white;
     vertical-align: bottom;
@@ -925,9 +923,7 @@ a.ant-anchor-link-title:hover {
 }
 
 .blogHeaderTitle h1 {
-    position: absolute;
-    color: white;
-    bottom: 0;
+    margin-top: 24px;
 }
 
 .blog-post p + h2 {

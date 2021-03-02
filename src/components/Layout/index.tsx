@@ -90,7 +90,7 @@ const Layout = ({
                     )}
                     {isBlogArticlePage && (
                         <div className="blogHeaderTitle display-desktop">
-                            <h1>{pageTitle}</h1>
+                            <h1 className="text-gray-900">{pageTitle}</h1>
                         </div>
                     )}
 
@@ -105,7 +105,7 @@ const Layout = ({
                                 </div>
                             </div>
                         ) : (
-                            <Spacer onlyDesktop={true} />
+                            <Spacer onlyDesktop={true} height={5} />
                         ))}
 
                     {/* content */}

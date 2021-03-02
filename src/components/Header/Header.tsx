@@ -89,7 +89,11 @@ export const Header = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPost
 
                 <ul className="hidden lg:flex list-none flex justify-between items-center mb-0">
                     <PrimaryCta>Get Started</PrimaryCta>
-                    <NavbarLink href="https://app.posthog.com/login" textLight={textLight} className="uppercase">
+                    <NavbarLink
+                        href="https://app.posthog.com/login"
+                        textLight={textLight}
+                        className="uppercase text-xs"
+                    >
                         Login
                     </NavbarLink>
                 </ul>
