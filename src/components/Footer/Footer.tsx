@@ -55,7 +55,7 @@ export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPost
     const darkModeSupportedPage = isDocsPage || onPostPage
     const bgClass = darkModeSupportedPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
     return (
-        <div className={`${bgClass} site-footer py-24`}>
+        <div className={`${bgClass} site-footer py-24 relative`}>
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">
                 <div className="w-full md:w-1/4 md:pr-8">
