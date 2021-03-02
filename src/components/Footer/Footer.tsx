@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
+import NewsletterSignup from './NewsletterSignup'
 import logo from '../../images/posthog-hog-transparent.svg'
 
 interface FooterListItemProps {
@@ -50,12 +51,22 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPostPage: boolean }) => {
+export const Footer = ({
+    isDocsPage,
+    onPostPage,
+    showNewsletter = false,
+}: {
+    isDocsPage: boolean
+    onPostPage: boolean
+    showNewsletter?: boolean
+}) => {
+    const newsletterSignup = showNewsletter ? <NewsletterSignup /> : null
     const { websiteTheme } = useValues(layoutLogic)
     const darkModeSupportedPage = isDocsPage || onPostPage
     const bgClass = darkModeSupportedPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
     return (
         <div className={`${bgClass} site-footer py-24 relative`}>
+            {newsletterSignup}
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">
                 <div className="w-full md:w-1/4 md:pr-8">

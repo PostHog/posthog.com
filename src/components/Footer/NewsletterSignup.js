@@ -6,9 +6,9 @@ const NewsletterSignup = () => {
             <div className="bg-neon w-full h-full p-2 rounded">
                 <div
                     className="rounded flex justify-between flex-col md:flex-row p-8"
-                    style={{ backgroundColor: '#222D5B' }}
+                    style={{ backgroundColor: '#08042f' }}
                 >
-                    <div className="w-full lg:w-2/3 lg:mr-4">
+                    <div className="w-full lg:w-2/3 lg:mr-4 text-white">
                         <h5 className="text-white text-3xl gosha">Your inbox but better...</h5>
                         <p className="opacity-80 text-sm">
                             Our newsletter keeps you up to date on what great things we are doing here at PostHog, and
