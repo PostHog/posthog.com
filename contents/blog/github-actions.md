@@ -9,9 +9,9 @@ hideAnchor: true
 
 While actively developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure, launching new systems, phasing out deprecated solutions, ensuring security, keeping track of dependencies… And that is just the pure code part, product and people considerations aside.
 
-Some of the above work requires a brain every single time – software is all 1s and 0s, but (un)fortunately in the end it serves human purposes. Until a massive breakthrough in artificial intelligence occurs, figuring out features that compile AND suit human needs programatically remains a pipe dream.
+Some of the above work requires a brain every single time – software is all 1s and 0s, but (un)fortunately in the end it serves human purposes. Until a massive breakthrough in artificial intelligence occurs, figuring out features that compile AND suit human needs programmatically remains a pipe dream.
 
-What about… all these tedious tasks though? Running tests, publishing releases, deploying continously, keeping the repository clean. Plain chores – boring and following the same pattern each and every time. Not unimportant though. Well, we don't need any sort of AI for that. All we need is a solid cause & effect API integrated with version control.
+What about… all these tedious tasks though? Running tests, publishing releases, deploying continuously, keeping the repository clean. Plain chores – boring and following the same pattern each and every time. Not unimportant though. Well, we don't need any sort of AI for that. All we need is a solid cause & effect API integrated with version control.
 
 ## Automation 101
 
