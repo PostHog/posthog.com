@@ -159,7 +159,7 @@ export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPost
                 </div>
             </div>
 
-            <div className="w-11/12 mt-24 text-center">
+            <div className="w-11/12 mt-24 text-center mx-auto">
                 <span className="text-base text-white text-opacity-40">&copy; 2021 PostHog, Inc.</span>
                 <div className="mt-4">
                     <Link
