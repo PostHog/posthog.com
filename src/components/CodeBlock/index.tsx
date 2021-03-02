@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import { OkaidiaTheme } from '../../lib/okaidia'
+import theme from 'prism-react-renderer/themes/okaidia'
 import { getCookie, generateRandomHtmlId } from '../../lib/utils'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
@@ -76,7 +76,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
             {...defaultProps}
             code={code || props.children.props.children.trim()}
             language={language as Language}
-            theme={OkaidiaTheme}
+            theme={theme}
         >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>

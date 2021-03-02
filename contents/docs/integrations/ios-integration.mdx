@@ -49,7 +49,7 @@ configuration.recordScreenViews = YES; // Record screen views automatically!
 
 ### With Swift
 
-```swift
+```js
 import PostHog
 
 // `host` is optional if you use PostHog Cloud (app.posthog.com)
@@ -86,7 +86,7 @@ For example:
                                        @"email": @"peter@familyguy.com" }];
 ```
 
-```swift
+```js
 // in swift
 posthog.identify("user_id_from_your_database", 
           properties: ["name": "Peter Griffin", "email": "peter@familyguy.com"])
@@ -117,7 +117,7 @@ For example:
 [[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
 ```
 
-```swift
+```js
 // in swift
 posthog.capture("Signed Up", properties: ["plan": "Pro++"])
 ```
@@ -139,7 +139,7 @@ You can also manually flush the queue:
 [[PHGPostHog sharedPostHog] flush]
 ```
 
-```swift
+```js
 // in swift
 posthog.capture("Logged Out")
 posthog.flush()
@@ -154,7 +154,7 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 [[PHGPostHog sharedPostHog] reset]
 ```
 
-```swift
+```js
 // in swift
 posthog.reset()
 ```
@@ -170,7 +170,7 @@ If you want to manually send a new screen capture event, use the `screen` functi
 [[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
 ```
 
-```swift
+```js
 // in swift
 posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
 ```

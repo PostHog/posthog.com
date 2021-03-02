@@ -55,7 +55,7 @@
         "node-fetch": "^2.6.1",
         "node-sass": "^4.14.1",
         "postcss": "^8.2.6",
-        "prism-react-renderer": "^1.1.1",
+        "prism-react-renderer": "^1.2.0",
         "prismjs": "^1.23.0",
         "query-string": "^6.13.1",
         "react": "^16.13.1",
