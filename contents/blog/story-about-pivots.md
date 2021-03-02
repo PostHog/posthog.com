@@ -1,6 +1,5 @@
 ---
 date: 2021-01-21
-
 title: A story about pivots
 rootPage: /blog
 sidebar: Blog
