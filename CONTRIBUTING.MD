@@ -14,7 +14,7 @@ If you'd like to do lots of work and want to speak to us before doing so, just e
 
 ## Issues
 
-Spotted a typo? Not got time  or unsure how to fix it yourself? Raise an issue so we can spot it! <!-- Is "Not got time" supposed to be grammatically incorrect on purpose? -->
+Spotted a typo? Not got time or unsure how to fix it yourself? Raise an issue so we can spot it! <!-- Is "Not got time" supposed to be grammatically incorrect on purpose? -->
 
 …or pick up and fix an issue if you want to do a Pull Request. <!-- What is meant by "pick up and fix an issue"? Is it trying to say, "take the initiative by picking an issue to fix, fix it, and then do a PR"? -->
 
