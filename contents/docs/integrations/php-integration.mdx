@@ -24,7 +24,7 @@ And then install the dependencies with the command: `php composer.phar install`
 
 In your app, set your API key before making any calls.
 
-```php
+```js
 PostHog::init("<ph_project_api_key>",
   array('host' => '<ph_instance_address>') // You can remove this line if you're using app.posthog.com
 );
@@ -49,7 +49,8 @@ Optionally you can submit:
 - `properties`, which is an array with any information you'd like to add
 
 For example:
-```php
+
+```js
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => 'movie played',
@@ -73,7 +74,7 @@ An `identify` call requires:
 
 For example:
 
-```
+```js
 PostHog::identify(array(
   'distinctId' => 'user:123',
   'properties' => array(
@@ -101,7 +102,7 @@ An alias call requires:
 
 For example:
 
-```
+```js
 PostHog::alias(array(
   'distinctId' => 'user:123',
   'alias' => 'user:12345'
@@ -112,7 +113,7 @@ PostHog::alias(array(
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
-```php
+```js
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => '$pageview',
