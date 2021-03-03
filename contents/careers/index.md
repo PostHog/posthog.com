@@ -120,7 +120,7 @@ Our team is proactively looking for the following:
 
 * [Full Stack Software Engineer](/careers/full-stack-software-engineer)
 * [Senior Full Stack Software Engineer](/careers/senior-fs-software-engineer)
-* [Customer Success Lead](/careers/customer-success-lead)
+* [Sales Engineer](/careers/sales-engineer)
 * [Site Reliability Engineer](careers/site-reliability-engineer)
 * [Content Marketer](careers/content-marketer)
 * [Product Marketer](careers/product-marketer)
