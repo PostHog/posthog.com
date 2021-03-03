@@ -172,7 +172,7 @@ To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Eric.png)
+![Eric Duong portrait](../../images/team/Eric.png)
 
 </div>
 
@@ -206,7 +206,7 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/JamesG.png)
+![James Greenhill portrait](../../images/team/JamesG.png)
 
 </div>
 
@@ -265,7 +265,7 @@ Before joining PostHog, I lead a product team at Grow Mobility, the largest micr
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Paolo.png)
+![Paolo D'Amico portrait](../../images/team/Paolo.png)
 
 </div>
 
@@ -304,7 +304,7 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Lottie.png)
+![Lottie Coxon portrait](../../images/team/Lottie.png)
 
 </div>
 
