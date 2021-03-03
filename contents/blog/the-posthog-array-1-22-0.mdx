@@ -32,23 +32,23 @@ However, we now support two different types of bar charts! When selecting a char
 
 ![UTM Tags](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/utm-tags.png)
 
-If you use UTM tags to track your marketing campaigns, for example, these will now be automatically set as user properties, so you can filter and create cohorts of users much more easily based on what campaign, source, or medium brought them to your product or landing page.
+PostHot now automatically sets user properties from [UTM tags](https://en.wikipedia.org/wiki/UTM_parameters). You can now filter and create cohorts of users much more easily based on what campaign, source, or medium brought them to your product or landing page. This is a big feature for us as it gives our users an automatic way of connecting marketing and product to have a more complete view of your business. We're very excited for our community to start using this feature and extending it through [plugins](https://posthog.com/docs/plugins/).
 
 ### [Multiple Value Selector for Equality Filters](https://github.com/PostHog/posthog/pull/3422)
 
 ![Multiple equality selector](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/multiple-selector.png)
 
-When setting equality filters (`equals`, `doesn't equal`), you can now select multiple values instead of just one.
+Writing complex filters is now easier than ever before. You can now select multiple values for Equality Filters instead of just one - this will simplify filter creation and debugging and just save people a lot of time!
 
 ### [Refreshing Dashboards and Updating Time Range for All Panels](https://github.com/PostHog/posthog/pull/3363)
 
 ![Dashboards New UX](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/dashboards-ux.png)
 
-Dashboards just got a set of significant improvements to make your job easier when looking through your key metrics:
+It's now easier to work through your key metrics in Dashboards:
 
-- You can now refresh all dashboard panels at once to ensure you're not seeing cached results
-- You can change the time range of all dashboard panels to the same range at once
-- You are able to see who created a dashboard and when
+- All dashboard panels can be refreshed at the same time to ensure you're not seeing cached results
+- Time ranges for all dashboard panels can be changed at the same time
+- The dashboard author and creation time are displayed below the title
 
 ### [Exposing $set and $set_once on all events](https://github.com/PostHog/posthog/pull/3363)
 
@@ -85,9 +85,9 @@ This key will be based on the last project you used in PostHog, and you can chec
 
 ### [User Interviews](calendly.com/posthog-feedback)
 
-We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
+We’re working hard to improve PostHog and would love to talk to you about your experience with the product.
 
-If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback). 
+If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback).
 
 Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
 
@@ -116,11 +116,11 @@ Big thanks to the following members of our community who have contributed to Pos
 
 ## Open Roles
 
-Are you a Fullstack Engineer, Senior Engineer, Site Reliability Engineer, Sales Engineer, Product Marketer, or Content Writer? 
+Are you a Fullstack Engineer, Senior Engineer, Site Reliability Engineer, Sales Engineer, Product Marketer, or Content Writer?
 
-Or perhaps you're not either but think you'd still be a good fit for PostHog? 
+Or perhaps you're not either but think you'd still be a good fit for PostHog?
 
-[We want you!](https://posthog.com/careers) 
+[We want you!](https://posthog.com/careers)
 
 ## Bug Fixes and Performance Improvements
 
