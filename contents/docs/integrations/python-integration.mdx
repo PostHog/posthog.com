@@ -74,7 +74,44 @@ or
 posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc())
 ```
 
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```python
+posthog.capture(
+    'distinct id', 
+    event='movie played', 
+    properties={ '$set': { 'userProperty': 'value' } }
+)
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```python
+posthog.capture(
+    'distinct id', 
+    event='movie played', 
+    properties={ '$set_once': { 'userProperty': 'value' } }
+)
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+
 ### Identify
+
 Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
 

@@ -8,6 +8,12 @@ showTitle: true
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
+## Installation
+
+```go
+go get github.com/posthog/posthog-go
+```
+
 ## Usage
 
 ```go
@@ -70,6 +76,53 @@ client.Enqueue(posthog.Capture{
     Set("friends", 42),
 })
 ```
+
+
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+client.Enqueue(posthog.Capture{
+  DistinctId: "test-user",
+  Event:      "test-snippet",
+  Properties: map[string]interface{}{
+		"eventProp":    "value1", 
+		"$set": map[string]interface{}{
+			"userProp": "value2",
+		},
+	}
+})
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+client.Enqueue(posthog.Capture{
+  DistinctId: "test-user",
+  Event:      "test-snippet",
+  Properties: map[string]interface{}{
+		"eventProp":    "value1", 
+		"$set_once": map[string]interface{}{
+			"userProp": "value2",
+		},
+	}
+})
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ## Identify
 
