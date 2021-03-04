@@ -49,18 +49,15 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
     )
 }
 
-export const Header = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPostPage: boolean }) => {
+export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
     const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-purple'
-
-    const darkModeSupportedPage = isDocsPage || onPostPage
-
-    const backgroundColor = darkModeSupportedPage ? themeSupportedColor : 'bg-purple-gradient'
-    const logo = darkModeSupportedPage && websiteTheme === 'light' ? darkLogo : whiteLogo
-    const textLight = !darkModeSupportedPage || websiteTheme === 'dark'
-    const layoutWidth = darkModeSupportedPage ? 'w-full px-4' : 'w-11/12 mx-auto'
+    const backgroundColor = onPostPage ? themeSupportedColor : 'bg-purple-gradient'
+    const logo = onPostPage && websiteTheme === 'light' ? darkLogo : whiteLogo
+    const textLight = !onPostPage || websiteTheme === 'dark'
+    const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
         <div className={`primary-navbar py-6 ${backgroundColor}`}>

@@ -51,19 +51,11 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-export const Footer = ({
-    isDocsPage,
-    onPostPage,
-    showNewsletter = false,
-}: {
-    isDocsPage: boolean
-    onPostPage: boolean
-    showNewsletter?: boolean
-}) => {
+export const Footer = ({ onPostPage, showNewsletter = false }: { onPostPage: boolean; showNewsletter?: boolean }) => {
     const newsletterSignup = showNewsletter ? <NewsletterSignup /> : null
     const { websiteTheme } = useValues(layoutLogic)
-    const darkModeSupportedPage = isDocsPage || onPostPage
-    const bgClass = darkModeSupportedPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
+    const bgClass = onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
+
     return (
         <div className={`${bgClass} site-footer py-24 relative`}>
             {newsletterSignup}
@@ -170,7 +162,7 @@ export const Footer = ({
                 </div>
             </div>
 
-            <div className="w-11/12 mt-24 text-center">
+            <div className="w-11/12 mt-24 text-center mx-auto">
                 <span className="text-base text-white text-opacity-40">&copy; 2021 PostHog, Inc.</span>
                 <div className="mt-4">
                     <Link
