@@ -2,7 +2,7 @@ import React from 'react'
 
 import rocketImg from '../images/rocket.svg'
 
-const PrimaryCta = ({ children }) => {
+export const PrimaryCta = ({ children }) => {
     return (
         <button className="bg-primary p-2 uppercase rounded-sm text-white mt-8 flex items-center justify-between mx-auto">
             <div className="bg-opacity-10 bg-yellow-100 rounded rounded-sm p-1 mr-8">
@@ -12,5 +12,3 @@ const PrimaryCta = ({ children }) => {
         </button>
     )
 }
-
-export default PrimaryCta

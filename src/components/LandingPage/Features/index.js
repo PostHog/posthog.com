@@ -3,7 +3,7 @@ import React from 'react'
 import oldWayImg from '../images/platform-old-way.svg'
 import newWayImg from '../images/platform-new-way.svg'
 
-const Features = () => {
+export const Features = () => {
     return (
         <div className="features py-24 text-white text-center">
             <div className="w-11/12 max-w-4xl mx-auto">
@@ -30,5 +30,3 @@ const Features = () => {
         </div>
     )
 }
-
-export default Features

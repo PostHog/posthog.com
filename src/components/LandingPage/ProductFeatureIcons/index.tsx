@@ -28,7 +28,7 @@ const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }: ProductIconData
     )
 }
 
-const ProductFeatureIcons = () => {
+export const ProductFeatureIcons = () => {
     return (
         <div className="flex justify-between items-stretch flex-col md:flex-row my-16">
             <ProductFeatureIcon label="Analytics" icon={analyticsImg} />
@@ -47,5 +47,3 @@ const ProductFeatureIcons = () => {
         </div>
     )
 }
-
-export default ProductFeatureIcons

@@ -2,7 +2,7 @@ import React from 'react'
 
 import blogPostImg from './images/blog-post.png'
 
-const RecentBlogPosts = () => {
+export const RecentBlogPosts = () => {
     return (
         <div className="recent-blog-posts py-24">
             <div className="w-11/12 max-w-4xl mx-auto">
@@ -61,5 +61,3 @@ const RecentBlogPosts = () => {
         </div>
     )
 }
-
-export default RecentBlogPosts

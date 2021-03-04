@@ -11,7 +11,7 @@ import staplesLogo from '../images/SocialProofLogos/staples.svg'
 
 const Logo = ({ logo, alt }) => <img src={logo} alt={alt} className="p-4" />
 
-const SocialProof = () => {
+export const SocialProof = () => {
     return (
         <div className="py-24">
             <div className="w-11/12 max-w-2xl mx-auto flex justify-around flex-row flex-wrap">
@@ -36,5 +36,3 @@ const SocialProof = () => {
         </div>
     )
 }
-
-export default SocialProof

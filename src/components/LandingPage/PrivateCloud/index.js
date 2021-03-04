@@ -9,7 +9,7 @@ const FeatureBenefit = ({ feature, benefit }) => {
     )
 }
 
-const PrivateCloud = () => {
+export const PrivateCloud = () => {
     return (
         <div className="private-cloud py-24 text-white text-center">
             <div className="w-11/12 max-w-4xl mx-auto">
@@ -323,5 +323,3 @@ const PrivateCloud = () => {
         </div>
     )
 }
-
-export default PrivateCloud

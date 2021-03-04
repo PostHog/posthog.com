@@ -2,7 +2,7 @@ import React from 'react'
 
 import calendarImg from '../images/calendar.svg'
 
-const SecondaryCta = ({ children }) => {
+export const SecondaryCta = ({ children }) => {
     return (
         <button className="bg-transparent border-white border-opacity-20 border-2 p-2 uppercase rounded-sm text-white mt-2 flex items-center justify-between mx-auto">
             <div className="bg-opacity-10 bg-yellow-100 rounded rounded-sm p-1 mr-8">
@@ -12,5 +12,3 @@ const SecondaryCta = ({ children }) => {
         </button>
     )
 }
-
-export default SecondaryCta
