@@ -1,6 +1,6 @@
 import React from 'react'
 
-import rocketImg from '../../images/rocket.svg'
+import rocketImg from '../images/rocket.svg'
 
 const PrimaryCta = ({ children }) => {
     return (

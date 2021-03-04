@@ -1,6 +1,6 @@
 import React from 'react'
 
-import calendarImg from '../../images/calendar.svg'
+import calendarImg from '../images/calendar.svg'
 
 const SecondaryCta = ({ children }) => {
     return (
