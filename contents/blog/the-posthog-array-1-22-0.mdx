@@ -10,9 +10,17 @@ hideAnchor: true
 import { Link } from 'gatsby'
 import { Button } from 'antd'
 
-Our latest release is marked by significant improvements to our core insights, as well as the typical squashing of hundreds of bugs and the multitude of performance improvements.
+PostHog 1.22 is out with awesome new features, usability and performance improvements, and the usual bug squashing.
 
-Here's the TL;DR:
+### Community MVP
+
+The community MVP for PostHog 1.22.0 is [oshura3](https://github.com/oshura3), who did a [thorough review and edit of our website content](https://github.com/PostHog/posthog.com/pull/1045) and continues to be active in design and marketing discussions.
+
+Anyone can contribute to PostHog and open source, whether it's code, copy, design or discussion. We're delighted that our community are so passionate that they even [share PostHog with their family](https://github.com/PostHog/posthog.com/issues/1036#issuecomment-788732593) ;)
+
+Thank you oshura3, we look forward to collaborating with you more!
+
+**In this release:**
 
 - **New:** Support for bar charts by value
 - **New:** UTM tags now get automatically set as user properties
@@ -23,23 +31,23 @@ Here's the TL;DR:
 - **Improvement:** Better tooling for updating data in dashboards
 - **Improvement:** A whole new UX for individual person pages
 
-<Link to='/docs/deployment'><Button className='center' type='primary' size='large'>Install PostHog</Button></Link>
+<Link to='https://app.posthog.com/signup'><Button className='center' type='primary' size='large'>Try PostHog Cloud Now</Button></Link>
 
 <br />
 
 ## Important Announcement for Self-Hosted Users
 
-If you're self hosting PostHog, make sure you have your plugin server up and running correctly. You can check that this is the case by looking at the color of the middle circle on the top left of the PostHog UI.
+If you're self hosting PostHog, make sure you have your plugin server up and running by looking at the color of the middle circle on the top left of the PostHog UI.
 
-If your plugin server is running, this will be a green checkmark, and hovering over it will give the message "All systems operational", like so:
+If it is running, you'll see a green checkmark, and hovering over it will give the message "All systems operational", like so:
 
 ![Plugin server](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-server.png)
 
-From this version (1.22.0) onwards, if your plugin server is not running, this circle will turn orange/yellow. You can click on the server to verify if your plugin server is indeed the problem.
+From this release (1.22.0) onwards, if your plugin server is not running, this circle will turn amber. You can click on the server to verify if your plugin server is indeed the problem.
 
-This is important because from the next release onwards we will move our event ingestion to the plugin server, meaning that you **will not be able to ingest events** if your plugin server isn't running. 
+**Important:** next release we will move all our event ingestion to the plugin server, meaning that you **will not be able to ingest events** if your plugin server isn't running.
 
-## Release Notes
+## PostHog 1.22.0 Release Notes
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
 
@@ -47,15 +55,15 @@ This is important because from the next release onwards we will move our event i
 
 ![Bar chart by values](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/bar-value.png)
 
-Before this change, our bar charts would always be time-based, meaning that if you had multiple graph series (values), these would just all be stacked into one bar for each time period.
+Before this release bar charts were time-based, which meant that if you had multiple graph series (values), they would all be stacked into one bar for each time period.
 
-However, we now support two different types of bar charts! When selecting a chart type, you will see the options 'Time' and 'Value' under 'Bar Chart'. Selecting 'Value' will give you the view from the image above, where each graph series is represented in a separate bar, with the value consisting of the aggregate value for the time period specified.
+We now support two different types of bar charts! When selecting a chart type, you will see the options 'Time' and 'Value' under 'Bar Chart'. Selecting 'Value' will give you the view from the image above, where each graph series is represented in a separate bar, with the value consisting of the aggregate value for the time period specified.
 
 ### [UTM Tags Automatically Set as User Properties](https://github.com/PostHog/plugin-server/pull/214)
 
 ![UTM Tags](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/utm-tags.png)
 
-PostHog now automatically sets user properties from [UTM tags](https://en.wikipedia.org/wiki/UTM_parameters). You can now filter and create cohorts of users much more easily based on what campaign, source, or medium brought them to your product or landing page. This is a big feature for us as it gives our users an automatic way of connecting marketing and product to have a more complete view of your business. We're very excited for our community to start using this feature and extending it through [plugins](https://posthog.com/docs/plugins/).
+PostHog now automatically sets user properties from [UTM tags](https://en.wikipedia.org/wiki/UTM_parameters). You can now filter and create cohorts of users much more easily based on what campaign, source, or medium brought them to your product or landing page. This is a big feature for us as it gives our users an automatic way of connecting marketing and product to have a more complete view of your business. We're very excited for our community to start using this feature and extending it through [plugins](https://posthog.com/docs/plugins/overview).
 
 ### [Multiple Value Selector for Equality Filters](https://github.com/PostHog/posthog/pull/3422)
 
@@ -136,7 +144,7 @@ On the rare occasions that our M² team (Michael & Marius) is not found working 
 
 Kunal has joined us as our first Growth Engineer, and he's already been making a solid impact. Kunal is a startup vet, who started out as a developer and now works on growth, being passionate about building the right product experience to drive the most value.
 
-He sent shockwaves across the company by claiming that pineapple belongs on pizza... sometimes? Never before has the entire company disagreed with someone's stance on this sensitive topic. 
+He sent shockwaves across the company by claiming that pineapple belongs on pizza... sometimes? Never before has the entire company disagreed with someone's stance on this sensitive topic.
 
 ## Community Shoutouts
 
@@ -147,10 +155,6 @@ Big thanks to the following members of our community who have contributed to Pos
 - [oshura3](https://github.com/oshura3)
 - [Abo7atm](https://github.com/Abo7atm)
 - [andrewm4894](https://github.com/andrewm4894)
-
-## Community MVP
-
-Our special shoutout this week goes to [oshura3](https://github.com/oshura3), who helped us with a [thorough review of the content on our website](https://github.com/PostHog/posthog.com/pull/1045), correcting typos and standardizing our writing!
 
 ## Open Roles
 
