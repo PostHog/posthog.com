@@ -1,12 +1,12 @@
 ---
-title: Customer Success Lead
+title: Sales Engineer
 sidebar: Careers
 showTitle: true
 ---
 
 <h5 class='centered'>PostHog exists to increase the number of successful products in the world.</h5>
 
-Our open source project has taken off, and we're getting too much demand to handle on our paid version, and are growing across all areas of the business. That means we are looking to make our first **customer success** hire.
+Our open source project has taken off, and we're getting too much demand to handle on our paid version, and are growing across all areas of the business. That means we are looking to hire our first **Sales Engineer**.
 
 You’ll be the first person in this role; as such, you will be pioneering how we help grow free customers into paying ones from the ground up, and likewise how we handle inbound paid requests.
 
@@ -65,7 +65,7 @@ We're all remote, and we've raised enough to pay top of market. [We are proudly 
 
 ### Sold? Apply now
 
-* [Drop us a line](mailto:41393E1EE1@jobs.workablemail.com) and tell us:
+* [Drop us a line](mailto:626A246866@jobs.workablemail.com) and tell us:
 * How you can achieve the above in a few sentences
 * Why you're drawn to us
 * Your resumé and/or LinkedIn
