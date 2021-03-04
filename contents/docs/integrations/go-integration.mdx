@@ -86,7 +86,7 @@ To set properties on your users via an event, you can leverage the event propert
 
 **Example**
 
-```c
+```go
 client.Enqueue(posthog.Capture{
   DistinctId: "test-user",
   Event:      "test-snippet",
@@ -107,7 +107,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 **Example**
 
-```c
+```go
 client.Enqueue(posthog.Capture{
   DistinctId: "test-user",
   Event:      "test-snippet",
