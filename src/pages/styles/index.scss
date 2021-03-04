@@ -22,7 +22,7 @@
         border-bottom: none;
     }
 
-    header {
+    > header {
         background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
     }
 
@@ -238,12 +238,12 @@
         border: solid;
         border-color: #fff;
         border-radius: 2px;
-        color: #353f6f;
+        color: #222d5b;
         border-width: 1px;
     }
 
     .ant-btn-secondary:hover {
-        background-color: #353f6f !important;
+        background-color: #222d5b !important;
         color: #fff !important;
         border-color: #fff !important;
         border: solid 1px !important;
@@ -251,25 +251,25 @@
 
     .ant-btn-secondary:focus {
         background-color: #fff !important;
-        color: #353f6f !important;
-        border-color: #353f6f !important;
+        color: #222d5b !important;
+        border-color: #222d5b !important;
     }
 
     .ant-btn-primary:hover {
         background-color: #fff !important;
-        color: #353f6f !important;
-        border-color: #353f6f !important;
+        color: #222d5b !important;
+        border-color: #222d5b !important;
     }
 
     .ant-btn-primary:focus {
-        background-color: #353f6f !important;
+        background-color: #222d5b !important;
         color: #fff !important;
         border-color: #fff !important;
         border: solid 1px !important;
     }
 
     .ant-btn-primary {
-        background-color: #353f6f;
+        background-color: #222d5b;
         border-color: #fff;
         border-radius: 2px;
         color: #fff;

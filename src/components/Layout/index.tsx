@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
-import Footer from '../Footer/Footer'
+import { Footer } from '../Footer/Footer'
 import { ResponsiveSidebar } from '../ResponsiveSidebar'
 import { Container } from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
@@ -150,7 +150,7 @@ const Layout = ({
             </AntdLayout>
             <AntdLayout style={{ background: '#ffffff' }}>
                 {isBlogArticlePage && <BlogFooter />}
-                <Footer onPostPage={onPostPage} />
+                <Footer isDocsPage={isDocsPage} onPostPage={onPostPage} />
             </AntdLayout>
             <PosthogAnnouncement />
             <GetStartedModal />

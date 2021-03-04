@@ -1,6 +1,16 @@
 body.dark {
     background-color: #220f3f;
 
+    .site-footer {
+        a {
+            color: rgba(255, 255, 255, 0.6) !important;
+
+            &:hover {
+                color: rgba(255, 255, 255, 1) !important;
+            }
+        }
+    }
+
     .post-page-wrapper {
         @media screen and (min-width: 1080px) {
             #docs-sidebar {
@@ -20,10 +30,6 @@ body.dark {
             .footer-universal {
                 color: white !important;
                 background-color: #111213 !important;
-            }
-
-            .footer-universal a {
-                color: #6e6d72 !important;
             }
 
             .footer-universal a:hover {

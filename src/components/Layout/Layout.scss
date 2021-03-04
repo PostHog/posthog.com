@@ -727,19 +727,6 @@ header {
     margin: 0 10px;
 }
 
-.footer-universal {
-    background: #353f6f;
-    color: #fff;
-    position: relative;
-    left: 0px;
-    width: '100%';
-    top: '100%';
-    margin-top: 0;
-    padding-top: 40px;
-    padding-bottom: 80px;
-    height: 100%;
-}
-
 .ant-menu,
 .ant-menu-submenu,
 .ant-menu-item {
@@ -847,22 +834,6 @@ a.ant-anchor-link-title:hover {
 
 .ant-anchor-ink span {
     border-color: #1d4aff !important;
-}
-
-.footer-universal a {
-    color: #fff;
-}
-.footer-links {
-    list-style-type: none;
-    margin-top: 20px;
-    line-height: 1em;
-    text-align: left;
-}
-
-.footer-links-header {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .footer-message {
@@ -1479,7 +1450,7 @@ for all other rows the portrait image wraps above bio*/
 }
 
 .main-nav-cta-dark-bg {
-    background-color: #353f6f;
+    background-color: #222d5b;
     border-color: #fff;
     border-radius: 2px;
     color: #fff;
@@ -1501,8 +1472,8 @@ for all other rows the portrait image wraps above bio*/
 
     .main-nav-cta-dark-bg {
         background-color: #fff !important;
-        color: #353f6f !important;
-        border-color: #353f6f !important;
+        color: #222d5b !important;
+        border-color: #222d5b !important;
     }
 }
 
