@@ -50,10 +50,10 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-export const Footer = ({ isDocsPage, onPostPage }: { isDocsPage: boolean; onPostPage: boolean }) => {
+export const Footer = ({ onPostPage }: { onPostPage: boolean }) => {
     const { websiteTheme } = useValues(layoutLogic)
-    const darkModeSupportedPage = isDocsPage || onPostPage
-    const bgClass = darkModeSupportedPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
+    const bgClass = onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
+
     return (
         <div className={`${bgClass} site-footer py-24 relative`}>
             <img src={logo} className="mx-auto block text-center" />
