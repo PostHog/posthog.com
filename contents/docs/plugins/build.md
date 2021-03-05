@@ -245,7 +245,7 @@ It's worth noting that the plugin server supports debouncing, meaning that the c
 
 #### Limitations
 
-PostHog plugins are still in beta, and our scheduled tasks are the newest feature within plugins. As such, they currently have a few limitations:
+Scheduled tasks are a new feature within plugins. As such, they currently have a few limitations:
 
 1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
 2. We intend to make scheduled tasks via plugins more flexible in the near-future. Keep an eye out for any updates to the API.
@@ -259,8 +259,3 @@ There are 3 ways to use plugins you build:
 1. Reference the location of the plugin on your local instance (e.g. /Users/yourname/path/to/plugin)
 
 This can be configured in 'Settings' -> 'Project Plugins'. 
-
-
-
-
-

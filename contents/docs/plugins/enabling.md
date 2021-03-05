@@ -5,8 +5,6 @@ showTitle: true
 ---
 <br>
 
-Plugins are currently BETA and require you to opt-in.
-
 When you open "Settings" / "Project Plugins" in PostHog, you will see a screen
 such as this:
 

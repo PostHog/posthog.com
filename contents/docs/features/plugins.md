@@ -5,8 +5,6 @@ showTitle: true
 ---
 <br>
 
-> **Important:** Our Plugins functionality is still in **Beta** mode. Please report any issues you find [on GitHub](https://github.com/PostHog/posthog/issues). 
-
 _Interested in what plugins we have available? Check out our [Plugin Library](/plugins)._
 
 <hr /><br />
@@ -89,8 +87,6 @@ To use plugins on your self-hosted instance, head over to 'Project' -> 'Plugins'
 ![Plugins Screenshot](../../images/plugins.png)
 
 Here you will be able to install our default plugins to test out the functionality or install a custom plugin by pasting a link to its public repository. 
-
-Given that plugins are still in **Beta**, our default library is currently limited to test plugins. We are working to expand the number of plugins available and will soon release tutorials on how to build your own plugin. 
 
 In the meanwhile, you can [follow our progress on GitHub](https://github.com/PostHog/posthog/issues/1896).
 

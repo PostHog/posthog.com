@@ -100,7 +100,7 @@ We have PostHog libraries written in all major programming languages, as well as
 
 ### Plugins
 
-[Plugins](/docs/plugins/overview) are a Beta feature that lets you extend PostHog's functionality, allowing you to enrich your event data, send events to other services, as well as prevent event ingestion.  
+[Plugins](/docs/plugins/overview) are a core feature that lets you extend PostHog's functionality, allowing you to enrich your event data, send events to other services, as well as prevent event ingestion.  
 
 If there's something you need in PostHog that we haven't built yet, you can [request it on GitHub](https://github.com/PostHog/posthog/issues/new?labels=enhancement&template=feature_request.md), or [build a plugin for it yourself](/docs/plugins/build).
 
