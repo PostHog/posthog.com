@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
 import blogPostImg from './images/blog-post.png'
 
@@ -10,7 +11,10 @@ export const RecentBlogPosts = () => {
                 <p className="text-white opacity-80 text-center mt-2 text-sm">Follow our journey as we grow</p>
 
                 <div className="mt-12 flex flex-col lg:flex-row justify-between">
-                    <div className="bg-purple-500 bg-opacity-20 p-6 w-full lg:w-2/3 lg:mr-2 rounded flex flex-col lg:flex-row justify-between items-stretch">
+                    <Link
+                        to="/blog/story-about-pivots"
+                        className="bg-purple-500 bg-opacity-20 hover:bg-opacity-30 p-6 w-full lg:w-2/3 lg:mr-2 rounded flex flex-col lg:flex-row justify-between items-stretch"
+                    >
                         <div className="w-full lg:w-1/3 mr-2">
                             <img src={blogPostImg} className="w-full mb-0" />
                         </div>
@@ -31,30 +35,42 @@ export const RecentBlogPosts = () => {
 
                             <p className="mt-1 opacity-70 text-sm">This is that story and what we learned from it.</p>
                         </div>
-                    </div>
+                    </Link>
 
                     <div className="bg-purple-500 bg-opacity-20 p-6 w-full lg:w-1/3 lg:ml-2 rounded text-white">
                         <span className="block opacity-70">Popular articles</span>
 
-                        <span className="block mt-3">
+                        <Link
+                            to="/blog/posthog-announces-9-million-dollar-series-A"
+                            className="block mt-3 text-white hover:text-white hover:underline"
+                        >
                             PostHog Raises $12 Million in Funding Led by GV and Y Combinator
-                        </span>
-                        <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                        </Link>
 
-                        <span className="block mt-3">
-                            PostHog Raises $12 Million in Funding Led by GV and Y Combinator
-                        </span>
-                        <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                        <Link
+                            to="/blog/hacktoberfest-2020"
+                            className="block mt-4 text-white hover:text-white hover:underline"
+                        >
+                            PostHog Joins Hacktoberfest 2020
+                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                        </Link>
 
-                        <span className="block mt-3">
-                            PostHog Raises $12 Million in Funding Led by GV and Y Combinator
-                        </span>
-                        <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                        <Link
+                            to="/blog/open-source-telemetry-ethical"
+                            className="block mt-4 text-white hover:text-white hover:underline"
+                        >
+                            Should open source projects track you?
+                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                        </Link>
 
-                        <span className="block mt-3">
-                            PostHog Raises $12 Million in Funding Led by GV and Y Combinator
-                        </span>
-                        <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                        <Link
+                            to="/blog/remote-culture"
+                            className="block mt-4 text-white hover:text-white hover:underline"
+                        >
+                            Building an All-Remote Company from Scratch
+                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                        </Link>
                     </div>
                 </div>
             </div>

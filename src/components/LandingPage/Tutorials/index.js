@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import { PrimaryCta } from '../Buttons/PrimaryCta'
 import { SecondaryCta } from '../Buttons/SecondaryCta'
 import featuresImg from '../images/safe-features.png'
@@ -25,26 +26,35 @@ export const Tutorials = () => {
                 <p className="text-sm opacity-60 mt-8">Popular tutorials</p>
 
                 <div className="flex flex-col lg:flex-row justify-between items-stretch">
-                    <div className="w-full lg:w-1/3 lg:mr-2 bg-purple-400 bg-opacity-30 rounded p-3">
+                    <Link
+                        to="/docs/tutorials/feature-flags"
+                        className="w-full lg:w-1/3 lg:mr-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
+                    >
                         <img src={featuresImg} className="w-full" alt="How to safely rollout new features" />
 
                         <strong className="block text-center text-white">How to Safely Rollout New Features</strong>
-                        <span className="text-center text-white opacity-60 mt-2 block text-xs">8 min read</span>
-                    </div>
+                        <span className="text-center text-white opacity-60 mt-2 block text-xs">7 min read</span>
+                    </Link>
 
-                    <div className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:mx-2 bg-purple-400 bg-opacity-30 rounded p-3">
-                        <img src={userBehaviorImg} className="w-full" alt="How to safely rollout new features" />
+                    <Link
+                        to="/docs/tutorials/toolbar"
+                        className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:mx-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
+                    >
+                        <img src={userBehaviorImg} className="w-full" alt="Visualizing User Behavior - Toolbar" />
 
                         <strong className="block text-center text-white">Visualizing User Behavior - Toolbar</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">6 min read</span>
-                    </div>
+                    </Link>
 
-                    <div className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:ml-2 bg-purple-400 bg-opacity-30 rounded p-3">
-                        <img src={funnelsImg} className="w-full" alt="How to safely rollout new features" />
+                    <Link
+                        to="/docs/tutorials/funnels"
+                        className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:ml-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
+                    >
+                        <img src={funnelsImg} className="w-full" alt="Analyzing Your Conversion with Funnels" />
 
                         <strong className="block text-center text-white">Analyzing Your Conversion with Funnels</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">8 min read</span>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>
