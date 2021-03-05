@@ -96,8 +96,9 @@ Each object in a config can have the following properties:
 |  order   |                  `number`                  |                                                                           Deprecated                                                                            |
 | required |                 `boolean`                  |                                               Specifies if the user needs to provide a value for the field or not                                               |
 |  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for plugins that ask for API Keys, for example                      |
-| choices  |                  `array`                   |                           Only accepted on configs with `type` equal to `"choice"` - an array of choices to be presented to the user                            |
+| choices  |                  `string[]`                   |                           Only accepted on configs with `type` equal to `"choice"` - an array of choices (of type `string`) to be presented to the user                            |
 
+> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your plugin but can be placed anywhere in the `config` array and is useful for customizing the content of your plugin's configuration step in the PostHog UI.
 ### PluginMeta
 
 > Check out [Plugin Types](/docs/plugins/types) for a full spec of types for plugin authors.
