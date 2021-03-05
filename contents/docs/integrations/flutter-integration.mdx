@@ -67,6 +67,12 @@ class MyApp extends StatelessWidget {
                   'foo': 'bar',
                   'number': 1337,
                   'clicked': true,
+                  '$set': {
+                    'userProp': 'value1'
+                  },
+                  '$set_once': {
+                    'userProp': 'value2'
+                  }
                 },
               );
             },
