@@ -50,7 +50,7 @@ function IndexPage() {
                         description="Self-hosted product analytics stack, to deploy on your infrastructure."
                     />
                     <div className="topSectionWrapperMobile">
-                        <div className="topPageWrapper wrapper min-h-screen">
+                        <div className="topPageWrapper wrapper min-h-780">
                             <div className="pageHeader row">
                                 <h1 className="mt-12">
                                     A complete product analytics stack, to deploy on your infrastructure.

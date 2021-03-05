@@ -9,6 +9,9 @@ module.exports = {
             fontSize: {
                 'base-larger': '15px',
             },
+            minHeight: {
+                780: '780px',
+            },
         },
     },
     variants: {
