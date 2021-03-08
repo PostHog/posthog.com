@@ -6,6 +6,8 @@ showTitle: true
 
 ## Managing billing
 
+This handbook section is sort of the operation manual for the billing engine. If you're looking for the technical details or need to troubleshoot something check out the relevant [tech docs](https://github.com/PostHog/posthog-cloud#additional-docs)
+
 ### Self-hosted
 For customers with special pricing (i.e. very large volumes or Enterprise & Supported plans), we need to manually set up the billing information on the system. This page contains instructions for setting up billing. Please note this page covers the process after an official PostHog quote has been approved by the customer. For information before this stage, please refer to the [Sales](/handbook/growth/sales) section of the handbook. Contrary to cloud plans, **all self-hosted _paid_ plans must be manually prepared today** (i.e. there's no self-serve option yet). To set up billing for self-hosted, please follow these instructions:
 
@@ -97,7 +99,6 @@ This section provides instructions for a PostHog team member to change subscript
 1. Click on _Update subscription_. Do not schedule the update for a later time. There will be unintended side effects if the changes are not applied immediately.
 1. Find the corresponding `OrganizationBilling` on [Django Admin](https://app.posthog.com/admin/multi_tenancy/organizationbilling/). You can look up by the same email address.
 1. Update the **new billing plan and the new Stripe subscription item ID**. The subscription item ID starts with `si_` (not to be confused with a Subscription ID). This **ID will have changed**, the Subscription ID remains the same.
-
 
 [license]: https://github.com/posthog/license
 [posthog-cloud]: https://github.com/posthog/posthog-cloud
