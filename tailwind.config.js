@@ -9,6 +9,10 @@ module.exports = {
             fontSize: {
                 'base-larger': '15px',
             },
+            colors: {
+                primary: 'rgba(255, 99, 39, 0.9)',
+                'primary-dark': 'rgba(218, 72, 16, 0.9)',
+            },
         },
     },
     variants: {

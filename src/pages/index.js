@@ -24,11 +24,8 @@ const IndexPage = () => {
             <Hero />
             <Features />
             <PrivateCloud />
-
             <Roadmap />
-
             <Tutorials />
-
             <RecentBlogPosts />
             <Footer showNewsletter={true} />
         </div>

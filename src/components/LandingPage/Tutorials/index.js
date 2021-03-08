@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { PrimaryCta } from '../Buttons/PrimaryCta'
-import { SecondaryCta } from '../Buttons/SecondaryCta'
+import { CallToAction } from '../../CallToAction'
 import featuresImg from '../images/safe-features.png'
 import userBehaviorImg from '../images/user-behavior.png'
 import funnelsImg from '../images/funnels.png'
@@ -15,8 +14,10 @@ export const Tutorials = () => {
                     Don’t get left behind. Join 2,700 companies using PostHog.
                 </p>
 
-                <PrimaryCta>Get Started</PrimaryCta>
-                <SecondaryCta>Book a demo</SecondaryCta>
+                <CallToAction icon="rocket">Get Started</CallToAction>
+                <CallToAction icon="calendar" type="secondary" className="mt-3">
+                    Book a demo
+                </CallToAction>
             </div>
 
             <div className="mt-24 text-center text-white w-11/12 max-w-4xl mx-auto">

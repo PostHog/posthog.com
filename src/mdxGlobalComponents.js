@@ -2,6 +2,7 @@
 
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
+import { CallToAction } from './components/CallToAction'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
@@ -41,6 +42,7 @@ import { TableOfContents } from './components/TableOfContents'
 export const shortcodes = {
     BasicHedgehogImage,
     BlogFooter,
+    CallToAction,
     CodeBlock,
     CompensationCalculator,
     Container,

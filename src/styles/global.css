@@ -21,6 +21,11 @@ ul {
     border-color: rgba(255, 99, 39, 0.9);
 }
 
+.bg-primary-dark {
+    background: rgba(218, 72, 16, 0.9);
+    border-color: rgba(218, 72, 16, 0.9);
+}
+
 .button-primary {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(2px);

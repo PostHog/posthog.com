@@ -1,8 +1,7 @@
 import React from 'react'
 import { ProductFeatureIcons } from '../ProductFeatureIcons'
 import { SocialProof } from '../SocialProof'
-import { PrimaryCta } from '../Buttons/PrimaryCta'
-import { SecondaryCta } from '../Buttons/SecondaryCta'
+import { CallToAction } from '../../CallToAction'
 
 export const Hero = () => {
     return (
@@ -20,8 +19,10 @@ export const Hero = () => {
                     <ProductFeatureIcons />
                 </div>
 
-                <PrimaryCta>Get Started</PrimaryCta>
-                <SecondaryCta>Book a demo</SecondaryCta>
+                <CallToAction icon="rocket">Get Started</CallToAction>
+                <CallToAction icon="calendar" type="secondary" className="mt-3">
+                    Book a demo
+                </CallToAction>
 
                 <SocialProof />
             </div>
