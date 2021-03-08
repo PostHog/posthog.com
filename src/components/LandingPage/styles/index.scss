@@ -1,6 +1,7 @@
 .hero {
     background: url(../images/hero-bg.svg), linear-gradient(180deg, #220f3f 0%, #2c1e60 100%);
-    background-position: center bottom;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .spotlight {
@@ -9,6 +10,7 @@
 
 .bg-pipes {
     background: url(../images/pipes.svg), linear-gradient(180deg, #2b114d 0%, #2a235b 100%);
+    background-size: cover;
 }
 
 .roadmap {
@@ -29,6 +31,7 @@
 
 .private-cloud {
     background: url(../images/clouds.svg), linear-gradient(180deg, #3c3288 0%, #b75184 100%);
+    background-size: cover;
 }
 
 .text-purpleish {

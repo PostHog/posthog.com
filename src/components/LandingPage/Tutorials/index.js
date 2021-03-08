@@ -7,7 +7,7 @@ import funnelsImg from '../images/funnels.png'
 
 export const Tutorials = () => {
     return (
-        <div className="bg-pipes py-24">
+        <div className="bg-pipes py-24 -my-1">
             <div className="w-11/12 max-w-3xl mx-auto">
                 <h3 className="text-white text-center">Hop aboard</h3>
                 <p className="text-white opacity-80 mt-1 text-center">
