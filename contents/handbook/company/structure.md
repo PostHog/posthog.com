@@ -21,6 +21,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 * A Small Team has an Accountable Person responsible for its performance - whoever is most appropriate depending on what the team is working on. Who would make the right founder for that bit of the company?
 * A Small Team must have (1) a customer, (2) a mission and (3) metrics
 * There may be certain functions where at our current stage we don't need a Small Team yet.
+* Each small team runs its own retrospective + sprint every week for 30 mins.
 
 # Small Teams list
 
