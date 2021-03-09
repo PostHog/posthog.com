@@ -45,6 +45,8 @@ We know that giving feedback can sometimes be difficult, so here are a few tips 
 - If your feedback is about behavior, focus on the behavior itself and its impact on you, rather than attacking the person's character. For example 'When you do X, it makes me feel Y. Would you be willing to do Z instead?'
 - Remember that positive feedback is really important - we should reinforce and affirm the things we want that person to keep doing!
 
+We expect everyone to support each other by giving lots of feedback - it's not ok to stay quiet if you have something constructive to share. 
+
 ### How to Receive Feedback Well
 
 If someone is making the effort to give you feedback, you should reciprocate by receiving that feedback well. Being a good feedback receiver means that people will be more inclined to give you feedback in the future, which will help you to grow!
