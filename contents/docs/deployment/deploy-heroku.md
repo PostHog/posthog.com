@@ -138,3 +138,15 @@ As such, if you need to scale Heroku Redis on your PostHog instance, you should 
     ```
 
 1. That's it! You will only need to do this once, and can now scale your Redis add-on normally if you need to do so again e.g. from `premium-0` to `premium-2`.
+
+## Error connecting to PostgreSQL in the worker
+
+In case the `worker` or `pluginworker` dyno gives you the following error:
+
+```
+app[worker.1]: [MAIN] 💥 Launchpad failure! error: no pg_hba.conf entry for host "XXXX", user "XXXX", database "XXXX", SSL off
+```
+
+You must make sure the env `DEPLOYMENT` is set to `"Heroku"`. This is [automatically set](https://github.com/PostHog/posthog/blob/4ad6a28e60b9d3c346b3da0a5ecc9af59b7993bf/app.json#L71) if you're using our `app.json`, but might be missing if you have a custom deployment.
+
+Heroku Postgres has a quirk where SSL is required but with slightly unusual and different handling (no hostname verification due to the very dynamic way Heroku provisions their data addons). This env var lets PostHog know to employ that handling.
