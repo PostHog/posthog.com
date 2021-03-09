@@ -4,7 +4,6 @@ import { Header } from '../components/Header'
 import { Hero } from '../components/LandingPage/Hero'
 import { Features } from '../components/LandingPage/Features'
 import { PrivateCloud } from '../components/LandingPage/PrivateCloud'
-import { Roadmap } from '../components/LandingPage/Roadmap'
 import { Tutorials } from '../components/LandingPage/Tutorials'
 import { RecentBlogPosts } from '../components/LandingPage/RecentBlogPosts'
 import { Footer } from '../components/Footer/Footer'
@@ -24,7 +23,6 @@ const IndexPage = () => {
             <Hero />
             <Features />
             <PrivateCloud />
-            <Roadmap />
             <Tutorials />
             <RecentBlogPosts />
             <Footer showNewsletter={true} />

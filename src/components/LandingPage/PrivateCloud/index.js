@@ -1,5 +1,6 @@
 import React from 'react'
 import { CallToAction } from '../../CallToAction'
+import { Roadmap } from '../Roadmap'
 
 const FeatureBenefit = ({ feature, benefit }) => {
     return (
@@ -12,7 +13,7 @@ const FeatureBenefit = ({ feature, benefit }) => {
 
 export const PrivateCloud = () => {
     return (
-        <div className="private-cloud py-24 text-white text-center">
+        <div className="private-cloud pt-24 text-white text-center">
             <div className="w-11/12 max-w-4xl mx-auto">
                 <h3>Host on your own private cloud</h3>
                 <p className="opacity-80 mt-1 text-center">
@@ -340,6 +341,7 @@ export const PrivateCloud = () => {
                     </div>
                 </div>
             </div>
+            <Roadmap />
         </div>
     )
 }

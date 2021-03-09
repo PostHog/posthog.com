@@ -7,6 +7,7 @@ import rocketImg from './images/rocket.svg'
 import calendarImg from './images/calendar.svg'
 import githubImg from './images/github.svg'
 import handbookImg from './images/handbook.svg'
+import roadmapImg from './images/roadmap.svg'
 
 interface CallToActionProps {
     onClick?: void
@@ -24,6 +25,7 @@ const icons = {
     calendar: calendarImg,
     github: githubImg,
     handbook: handbookImg,
+    roadmap: roadmapImg,
     none: null,
 }
 
