@@ -88,9 +88,11 @@ We collect responses to the [the merch form](https://forms.gle/K61bhD6uLxaaTqoK6
 
 We provide the standard [AirPods](https://www.apple.com/shop/product/MV7N2AM/A/airpods-with-charging-case) and case (ie. not AirPods Pro or the wireless charging case). For Allbirds, we provide any shoes that show as $95 or less on their [US site](https://www.allbirds.com/). 
 
-For users in a country which has an Apple or Airpods website, just use the relevant country's site. This usually applies to the USA, UK and EU. 
+This is where we buy from, in descending order of preference:
 
-For anywhere else, you should ask the user to purchase the product themselves and then send us their receipt and bank account details for reimbursement. It is not a good use of time to try and navigate resellers or e-commerce sites in a language you don't understand, especially as they probably won't accept a US card anyway. 
+1. Buy directly from that country's Apple or Allbirds site. This usually applies to the USA, UK and EU. For Apple, use your Brex card via [this referral link](https://apple.sjv.io/c/2279798/524650/7613?subId1=VXNlcjpjdXVzZXJfY2tlY28zN29zMDAyMTAxcmF5OWY4c201OA==&sharedId=RewardsMarketplace) as it gets us cashback. 
+2. Send an Amazon gift card for $100 equivalent from their local store.
+3. If Amazon is not available in their country, ask the user to buy and send us a receipt, and we will reimburse to their bank account.
 
 When ordering from Apple, put in your email address as the main one for the order, and then add the user's email address under 'Share delivery updates' so they can easily track their order. For Allbirds, you will need to put in your email address and then just forward the receipt to the user for them to track. You should not just put in their email address for the order, as you won't then get a copy of the receipt for expenses. 
 
