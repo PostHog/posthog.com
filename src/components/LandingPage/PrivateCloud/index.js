@@ -1,4 +1,5 @@
 import React from 'react'
+import { CallToAction } from '../../CallToAction'
 
 const FeatureBenefit = ({ feature, benefit }) => {
     return (
@@ -52,14 +53,33 @@ export const PrivateCloud = () => {
                         className="rounded p-12 flex flex-col md:flex-row justify-between items-center"
                     >
                         <div className="w-full md:w-1/2 md:mr-4">
-                            <h3 className="text-purpleish">Open-source to our core</h3>
-                            <p className="text-purpleish mt-1 text-center">
+                            <h3 className="text-purpleish text-3xl font-semibold">Open-source to our core</h3>
+                            <p className="text-purpleish text-center">
                                 Our workflow, strategy, internal policies, handbook, and brand book are public and open
                                 source.
                             </p>
+
+                            <CallToAction
+                                type="custom"
+                                className="bg-purpleish text-white hover:text-white hover:bg-purpleish-dark border-purpleish-dark border-2"
+                                icon="github"
+                                width="full"
+                                href="https://github.com/posthog"
+                            >
+                                Browse GitHub
+                            </CallToAction>
+                            <CallToAction
+                                type="custom"
+                                icon="handbook"
+                                width="full"
+                                className="text-purpleish border-purpleish border-2 mt-2 hover:bg-white hover:bg-opacity-20 hover:text-purpleish"
+                                to="/handbook"
+                            >
+                                Explore Handbook
+                            </CallToAction>
                         </div>
 
-                        <div className="w-full md:w-1/2 md:ml-4 flex flex-wrap">
+                        <div className="w-full mt-12 md:mt-0 md:w-1/2 md:ml-4 flex flex-wrap justify-center">
                             <a href="https://github.com/bhavish-agarwal">
                                 <img
                                     src="https://avatars.githubusercontent.com/u/14195048?v=4"
