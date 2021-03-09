@@ -33,6 +33,8 @@ We currently run performance reviews every 6 months, based on your start date. W
 
 Part of the followup conversation with your manager will include your [compensation](/handbook/people/compensation), as we directly link this to your level of experience and your performance. You should not, however, expect every performance review to result in a change to your salary. You will find that your Step will change more frequently than your Level.
 
+Feedback from the team may be listened to, but you may also actively choose not to act on it, which is what the discussion with your manager should cover. Or, if you do act on it, this also gives you something to work on to improve demonstrably for next time, perhaps to justify an increase in Step or Level.
+
 ### How to Give Good Feedback
 
 We know that giving feedback can sometimes be difficult, so here are a few tips on how to give good feedback:
