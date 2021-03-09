@@ -51,12 +51,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'New Jersey',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
         area: 'Everywhere else, New York',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -81,7 +81,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Indiana',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -91,7 +91,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Michigan',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -101,7 +101,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Ohio',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -121,7 +121,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Wisconsin',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -136,7 +136,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Illinois',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -151,7 +151,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Nebraska',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -161,17 +161,17 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Kansas',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
         area: 'North Dakota',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
         area: 'Everywhere else, Minnesota',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -181,12 +181,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'South Dakota',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
         area: 'Everywhere else, Missouri',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -201,7 +201,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Delaware',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -211,7 +211,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Florida',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -236,7 +236,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Georgia',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -246,12 +246,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Maryland',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
         area: 'Everywhere else, North Carolina',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -271,7 +271,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Virginia',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -286,12 +286,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'West Virginia',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
         area: 'Everywhere else, Alabama',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -301,7 +301,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Kentucky',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -311,7 +311,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Mississippi',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -321,7 +321,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Tennessee',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -331,7 +331,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Arkansas',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -341,7 +341,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Louisiana',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -356,7 +356,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Texas',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -381,7 +381,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Arizona',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -406,7 +406,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Idaho',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -431,12 +431,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Utah',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
         area: 'Everywhere else, Nevada',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -451,7 +451,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Wyoming',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -466,7 +466,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Alaska',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -511,7 +511,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Oregon',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -531,7 +531,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Washington',
-        locationFactor: 0.633,
+        locationFactor: 0.65,
     },
     {
         country: 'United States',
@@ -581,7 +581,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Canada',
         area: 'Everywhere else, Manitoba',
-        locationFactor: 0.45,
+        locationFactor: 0.5,
     },
     {
         country: 'Canada',
@@ -601,7 +601,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Canada',
         area: 'Northwest Territories',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Canada',
@@ -611,7 +611,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Canada',
         area: 'Nunavut',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Canada',
@@ -651,7 +651,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Canada',
         area: 'Everywhere else, Saskatchewan',
-        locationFactor: 0.458,
+        locationFactor: 0.5,
     },
     {
         country: 'Canada',
@@ -666,7 +666,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Canada',
         area: 'Yukon',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Bermuda',
@@ -681,12 +681,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Dominican Republic',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Jamaica',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Puerto Rico',
@@ -696,37 +696,37 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Cuba',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Trinidad and Tobago',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'El Salvador',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Guatemala',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Mexico',
         area: 'All',
-        locationFactor: 0.35,
+        locationFactor: 0.5,
     },
     {
         country: 'Costa Rica',
         area: 'All',
-        locationFactor: 0.418,
+        locationFactor: 0.5,
     },
     {
         country: 'Nicaragua',
         area: 'All',
-        locationFactor: 0.418,
+        locationFactor: 0.5,
     },
     {
         country: 'Panama',
@@ -736,132 +736,132 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Suriname',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Venezuela',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Paraguay',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Colombia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Ecuador',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Argentina',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Bolivia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Chile',
         area: 'All',
-        locationFactor: 0.4,
+        locationFactor: 0.5,
     },
     {
         country: 'Peru',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Uruguay',
         area: 'All',
-        locationFactor: 0.412,
+        locationFactor: 0.5,
     },
     {
         country: 'Brazil',
         area: 'Sao Paulo',
-        locationFactor: 0.36,
+        locationFactor: 0.5,
     },
     {
         country: 'Brazil',
         area: 'Rio de Janeiro',
-        locationFactor: 0.4,
+        locationFactor: 0.5,
     },
     {
         country: 'Brazil',
         area: 'Everywhere else',
-        locationFactor: 0.35,
+        locationFactor: 0.5,
     },
     {
         country: 'Algeria',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Egypt',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Libya',
         area: 'All',
-        locationFactor: 0.413,
+        locationFactor: 0.5,
     },
     {
         country: 'Morocco',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Tunisia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Uganda',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Rwanda',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Zimbabwe',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Zambia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Kenya',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Ethiopia',
         area: 'All',
-        locationFactor: 0.459,
+        locationFactor: 0.5,
     },
     {
         country: 'Tanzania',
         area: 'All',
-        locationFactor: 0.441,
+        locationFactor: 0.5,
     },
     {
         country: 'Namibia',
         area: 'All',
-        locationFactor: 0.417,
+        locationFactor: 0.5,
     },
     {
         country: 'Ghana',
@@ -871,37 +871,37 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'South Africa',
         area: 'Everywhere else',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'South Africa',
         area: 'Cape Town',
-        locationFactor: 0.455,
+        locationFactor: 0.5,
     },
     {
         country: 'Nigeria',
         area: 'All',
-        locationFactor: 0.474,
+        locationFactor: 0.5,
     },
     {
         country: 'Benin',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Kazakhstan',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Uzbekistan',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'China',
         area: 'All',
-        locationFactor: 0.35,
+        locationFactor: 0.5,
     },
     {
         country: 'Hong Kong',
@@ -916,7 +916,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'South Korea',
         area: 'Everywhere else',
-        locationFactor: 0.486,
+        locationFactor: 0.5,
     },
     {
         country: 'Japan',
@@ -926,22 +926,22 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Mongolia',
         area: 'All',
-        locationFactor: 0.426,
+        locationFactor: 0.5,
     },
     {
         country: 'Taiwan',
         area: 'All',
-        locationFactor: 0.426,
+        locationFactor: 0.5,
     },
     {
         country: 'Brunei Darussalam',
         area: 'All',
-        locationFactor: 0.433,
+        locationFactor: 0.5,
     },
     {
         country: 'Cambodia',
         area: 'All',
-        locationFactor: 0.421,
+        locationFactor: 0.5,
     },
     {
         country: 'Singapore',
@@ -951,107 +951,107 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Indonesia',
         area: 'Everywhere else',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Indonesia',
         area: 'Jakarta',
-        locationFactor: 0.443,
+        locationFactor: 0.5,
     },
     {
         country: 'Malaysia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Philippines',
         area: 'Makati/Manila',
-        locationFactor: 0.481,
+        locationFactor: 0.5,
     },
     {
         country: 'Philippines',
         area: 'Everywhere else',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Thailand',
         area: 'Bangkok',
-        locationFactor: 0.441,
+        locationFactor: 0.5,
     },
     {
         country: 'Thailand',
         area: 'Everywhere else',
-        locationFactor: 0.44,
+        locationFactor: 0.5,
     },
     {
         country: 'Vietnam',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Nepal',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Bangladesh',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Iran',
         area: 'All',
-        locationFactor: 0.424,
+        locationFactor: 0.5,
     },
     {
         country: 'Maldives',
         area: 'All',
-        locationFactor: 0.483,
+        locationFactor: 0.5,
     },
     {
         country: 'Pakistan',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Sri Lanka',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'India',
         area: 'Mumbai',
-        locationFactor: 0.319,
+        locationFactor: 0.5,
     },
     {
         country: 'India',
         area: 'Everywhere else',
-        locationFactor: 0.308,
+        locationFactor: 0.5,
     },
     {
         country: 'Armenia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Georgia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Azerbaijan',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Cyprus',
         area: 'All',
-        locationFactor: 0.44,
+        locationFactor: 0.5,
     },
     {
         country: 'Jordan',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Saudi Arabia',
@@ -1061,12 +1061,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Turkey',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Iraq',
         area: 'All',
-        locationFactor: 0.422,
+        locationFactor: 0.5,
     },
     {
         country: 'Lebanon',
@@ -1106,62 +1106,62 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Bulgaria',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Moldova',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Romania',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Russia',
         area: 'Everywhere else',
-        locationFactor: 0.25,
+        locationFactor: 0.5,
     },
     {
         country: 'Russia',
         area: 'Moscow',
-        locationFactor: 0.32,
+        locationFactor: 0.5,
     },
     {
         country: 'Belarus',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Ukraine',
         area: 'All',
-        locationFactor: 0.267,
+        locationFactor: 0.5,
     },
     {
         country: 'Slovakia',
         area: 'All',
-        locationFactor: 0.421,
+        locationFactor: 0.5,
     },
     {
         country: 'Hungary',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Poland',
         area: 'All',
-        locationFactor: 0.333,
+        locationFactor: 0.5,
     },
     {
         country: 'Czech Republic',
         area: 'Everywhere else',
-        locationFactor: 0.37,
+        locationFactor: 0.5,
     },
     {
         country: 'Czech Republic',
         area: 'Prague',
-        locationFactor: 0.4,
+        locationFactor: 0.5,
     },
     {
         country: 'Denmark',
@@ -1216,22 +1216,22 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Sweden',
         area: 'Everywhere else',
-        locationFactor: 0.463,
+        locationFactor: 0.5,
     },
     {
         country: 'Latvia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Lithuania',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Estonia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'United Kingdom',
@@ -1241,7 +1241,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United Kingdom',
         area: 'Wales',
-        locationFactor: 0.45,
+        locationFactor: 0.5,
     },
     {
         country: 'United Kingdom',
@@ -1271,7 +1271,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United Kingdom',
         area: 'Everywhere else, England',
-        locationFactor: 0.45,
+        locationFactor: 0.5,
     },
     {
         country: 'United Kingdom',
@@ -1281,37 +1281,37 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United Kingdom',
         area: 'Everywhere else, Scotland',
-        locationFactor: 0.45,
+        locationFactor: 0.5,
     },
     {
         country: 'Albania',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Bosnia and Herzegovina',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Croatia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Greece',
         area: 'Everywhere else',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Greece',
         area: 'Athens',
-        locationFactor: 0.45,
+        locationFactor: 0.5,
     },
     {
         country: 'Italy',
         area: 'Everywhere else',
-        locationFactor: 0.424,
+        locationFactor: 0.5,
     },
     {
         country: 'Italy',
@@ -1346,67 +1346,67 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Montenegro',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Portugal',
         area: 'Everywhere else',
-        locationFactor: 0.401,
+        locationFactor: 0.5,
     },
     {
         country: 'Portugal',
         area: 'Lisbon',
-        locationFactor: 0.442,
+        locationFactor: 0.5,
     },
     {
         country: 'Serbia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Slovenia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Spain',
         area: 'Everywhere else',
-        locationFactor: 0.419,
+        locationFactor: 0.5,
     },
     {
         country: 'Spain',
         area: 'Palma De Mallorca',
-        locationFactor: 0.451,
+        locationFactor: 0.5,
     },
     {
         country: 'Spain',
         area: 'Madrid',
-        locationFactor: 0.477,
+        locationFactor: 0.5,
     },
     {
         country: 'Spain',
         area: 'Barcelona',
-        locationFactor: 0.48,
+        locationFactor: 0.5,
     },
     {
         country: 'Spain',
         area: 'Bilbao',
-        locationFactor: 0.46,
+        locationFactor: 0.5,
     },
     {
         country: 'Macedonia',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Kosovo',
         area: 'All',
-        locationFactor: 0.411,
+        locationFactor: 0.5,
     },
     {
         country: 'Austria',
         area: 'Everywhere else',
-        locationFactor: 0.484,
+        locationFactor: 0.5,
     },
     {
         country: 'Austria',
@@ -1416,7 +1416,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Belgium',
         area: 'Everywhere else',
-        locationFactor: 0.49,
+        locationFactor: 0.5,
     },
     {
         country: 'Belgium',
@@ -1476,7 +1476,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Netherlands',
         area: 'Everywhere else',
-        locationFactor: 0.467,
+        locationFactor: 0.5,
     },
     {
         country: 'Netherlands',
@@ -1526,7 +1526,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Australia',
         area: 'Everywhere else, South Australia',
-        locationFactor: 0.497,
+        locationFactor: 0.0.5,
     },
     {
         country: 'Australia',
@@ -1586,6 +1586,6 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Andorra',
         area: 'All',
-        locationFactor: 0.45,
+        locationFactor: 0.5,
     },
 ]
