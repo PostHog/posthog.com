@@ -149,4 +149,4 @@ app[worker.1]: [MAIN] 💥 Launchpad failure! error: no pg_hba.conf entry for ho
 
 You must make sure the env `DEPLOYMENT` is set to `"Heroku"`. This is [automatically set](https://github.com/PostHog/posthog/blob/4ad6a28e60b9d3c346b3da0a5ecc9af59b7993bf/app.json#L71) if you're using our `app.json`, but might be missing if you have a custom deployment.
 
-Heroku Postgres has a quirk where SSL is required but with slightly unusual and different handling (no hostname verification due to the very dynamic way Heroku provisions their data addons). This env var lets PostHog know to employ that handling.
+Heroku Postgres has a quirk where SSL is required but with slightly unusual and different handling (no hostname verification due to the Heroku's dynamic add-on provisioning mechanism). This environment variable lets PostHog know to employ that handling.
