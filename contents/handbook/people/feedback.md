@@ -26,7 +26,7 @@ We currently run performance reviews every 6 months, based on your start date. W
 
 1. The People team will get an alert in Charlie HR every 6 months that someone is due to have their review.
 2. They will schedule a 1 hour feedback meeting for the team member, with an open invitation to _anyone_ at PostHog who wants to give feedback. It will be the team member's responsibility to encourage people to join if they would like their feedback. If you would be more comfortable with your manager facilitating the session, please ask them do so! A member of the people team may sit in on the occasional feedback meeting to see how well they are working. 
-3. The team member's manager then summarises the outcome of that meeting in this [document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing).
+3. The team member's manager then summarizes the outcome of that meeting in this [document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing).
 4. The team member also writes up their own self-assessment in this [document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing).
 7. Within a week of the feedback meeting, the team member and their manager should have a 30min 1-1 followup discussion to reflect on the feedback and align on next steps.
 8. The manager then communicates back to the People team that the review is complete and what next steps are needed (if any), including around any salary adjustments if the team member's Step or Level should change. The People team will store these docs on Charlie HR for future reference.
