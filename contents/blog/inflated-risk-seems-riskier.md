@@ -27,7 +27,7 @@ So we got comfortable with doing something bigger and not owning the whole pie. 
 
 We reorganized everything around weekly product launches. Yes that’s right, not sprints, build and validate the product with 10-15 customers in a week. It sounds ludicrously outrageous, and it was. But demonstrating and giving access to a product rather than a landing page or mockups got us the high quality validation we needed to move on to the next idea. We got comfortable throwing out what we’d built - as cliché as it sounds, the light bulb moment is realizing you never throw away the lessons. If you’d like more detail, I wrote more on [our time before YC](https://posthog.com/blog/before-yc).
 
-[](https://static.fjcdn.com/pictures/Awesome+what's+up_a3e2d0_4319326.png)
+[](https://static.fjcdn.com/pictures/Awesome+whats+up_a3e2d0_4319326.png)
 
 ## Spend early money, wisely
 
