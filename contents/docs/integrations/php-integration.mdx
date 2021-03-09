@@ -24,9 +24,9 @@ And then install the dependencies with the command: `php composer.phar install`
 
 In your app, set your API key before making any calls.
 
-```php
-PostHog::init("YOUR_API_KEY",
-  array('host' => 'https://posthog.[your-domain].com') // You can remove this line if you're using app.posthog.com
+```js
+PostHog::init("<ph_project_api_key>",
+  array('host' => '<ph_instance_address>') // You can remove this line if you're using app.posthog.com
 );
 ```
 
@@ -49,7 +49,8 @@ Optionally you can submit:
 - `properties`, which is an array with any information you'd like to add
 
 For example:
-```php
+
+```js
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => 'movie played',
@@ -58,8 +59,51 @@ PostHog::capture(array(
     'category' => 'romcom'
   )
 ));
-
 ```
+
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+PostHog::capture(array(
+  'distinctId' => 'user:123',
+  'event' => 'movie played',
+  'properties' => array(
+    '$set' => array(
+      'userProperty' => 'value'
+    )
+  )
+));
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+PostHog::capture(array(
+  'distinctId' => 'user:123',
+  'event' => 'movie played',
+  'properties' => array(
+    '$set_once' => array(
+      'userProperty' => 'value'
+    )
+  )
+));
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ## Identify
 
@@ -73,7 +117,7 @@ An `identify` call requires:
 
 For example:
 
-```
+```js
 PostHog::identify(array(
   'distinctId' => 'user:123',
   'properties' => array(
@@ -101,7 +145,7 @@ An alias call requires:
 
 For example:
 
-```
+```js
 PostHog::alias(array(
   'distinctId' => 'user:123',
   'alias' => 'user:12345'
@@ -112,7 +156,7 @@ PostHog::alias(array(
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
-```php
+```js
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => '$pageview',

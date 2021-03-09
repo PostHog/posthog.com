@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import 'katex/dist/katex.min.css'
@@ -8,6 +8,7 @@ import { SEO } from '../components/seo'
 import { layoutLogic } from '../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
 import { DocsPageSurvey } from '../components/DocsPageSurvey'
+import { Spin } from 'antd'
 
 function addIndex(url) {
     const indexUrls = ['/docs', '/handbook']
@@ -20,6 +21,7 @@ function Template({
     const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
+    const [runningInBrowser, setRunningInBrowser] = useState(false)
     const { markdownRemark } = data // data.markdownRemark holds our post data
     const { frontmatter, html, excerpt, id } = markdownRemark
 
@@ -37,36 +39,51 @@ function Template({
     const isBlogArticlePage = frontmatter.sidebar === 'Blog'
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
+    useEffect(() => {
+        if (window) {
+            setRunningInBrowser(true)
+        }
+    })
+
     return (
         <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
-            <Layout
-                onPostPage={true}
-                isBlogArticlePage={isBlogArticlePage}
-                pageTitle={frontmatter.title}
-                isHomePage={false}
-                isDocsPage={isDocsPage}
-            >
-                <SEO
-                    title={
-                        frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
-                    }
-                    description={frontmatter.description || excerpt}
-                    pathname={markdownRemark.fields.slug}
-                    article
-                />
-                <div className="docsPagesContainer">
-                    <div className="docsPages">
-                        {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
-                            <h1 align="center">{frontmatter.title}</h1>
+            {runningInBrowser ? (
+                <Layout
+                    onPostPage={true}
+                    isBlogArticlePage={isBlogArticlePage}
+                    pageTitle={frontmatter.title}
+                    isHomePage={false}
+                    isDocsPage={isDocsPage}
+                >
+                    <SEO
+                        title={
+                            frontmatter.title +
+                            ' - PostHog' +
+                            (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
+                        }
+                        description={frontmatter.description || excerpt}
+                        pathname={markdownRemark.fields.slug}
+                        article
+                    />
+                    <div className="docsPagesContainer">
+                        <div className="docsPages">
+                            {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
+                                <h1 align="center">{frontmatter.title}</h1>
+                            )}
+                            <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
+                        </div>
+                        {isDocsPage && <DocsPageSurvey />}
+                        {(isDocsPage || isHandbookPage) && (
+                            <DocsFooter
+                                filename={`${addIndex(markdownRemark.fields.slug)}.md`}
+                                title={frontmatter.title}
+                            />
                         )}
-                        <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
                     </div>
-                    {isDocsPage && <DocsPageSurvey />}
-                    {(isDocsPage || isHandbookPage) && (
-                        <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
-                    )}
-                </div>
-            </Layout>
+                </Layout>
+            ) : (
+                <Spin size="large" style={{ position: 'fixed', top: '50%', left: '50%' }} />
+            )}
         </div>
     )
 }

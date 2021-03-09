@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-smooth: 1.5px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
 ol,
 ul {
     margin: initial;
-    padding: initial;
+    padding-left: 14px;
 }
 
 ol {
@@ -14,4 +20,39 @@ ol {
 
 ul {
     list-style: disc;
+}
+
+.button-primary {
+    background: rgba(255, 99, 39, 0.9);
+    border-color: rgba(255, 99, 39, 0.9);
+
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(2px);
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+    transition: 0.25s ease all;
+
+    @apply px-4 py-2 font-gosha inline-block rounded font-semibold border text-base-larger text-white hover:text-white uppercase;
+}
+
+.button-primary:hover,
+.button-primary:active,
+.button-primary:focus {
+    background: rgba(218, 72, 16, 0.9);
+    border-color: rgba(218, 72, 16, 0.9);
+}
+
+.bg-purple-gradient {
+    background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
+}
+
+.bg-darkmode-purple {
+    background: #220f3f !important;
+}
+
+.bg-lightmode-gray {
+    background: rgb(249, 249, 249) none repeat scroll 0% 0%;
+}
+
+.bg-footer {
+    background: #08042f;
 }

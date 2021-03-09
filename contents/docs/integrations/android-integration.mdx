@@ -27,10 +27,10 @@ dependencies {
 
 The best place to initialize the client is in your `Application` subclass.
 
-```java
+```js
 public class SampleApp extends Application {
-  private static final String POSTHOG_API_KEY = "8jVz0YZ2YPtP7eL1I5l5RQIp-WcuFeD3pZO8c0YDMx4";
-  private static final String POSTHOG_HOST = "https://app.posthog.com";
+  private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
+  private static final String POSTHOG_HOST = "<ph_instance_address>";
 
   @Override
   public void onCreate() {
@@ -64,7 +64,7 @@ An identify call requires:
 * `distinctId` which uniquely identifies your user in your database
 * `userProperties` with a dictionary of key:value pairs
 
-```java
+```js
 PostHog.with(this)
        .identify(distinctID, new Properties()
                                 .putValue("name", "My Name")
@@ -91,12 +91,56 @@ Optionally you can submit:
 
 For example:
 
-```java
+```js
 PostHog.with(this)
        .capture("Button B Clicked", new Properties()
                                         .putValue("color", "blue")
                                         .putValue("icon", "new2-final"));
 ```
+
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set", userProps));
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set_once", userProps));
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ### Flush
 
@@ -106,7 +150,7 @@ Setting this to `1` will send events immediately and will use more battery. The 
 You can also configure the flush interval. By default we flush all events after `30` seconds,
 no matter how many events have been gathered.
 
-```java
+```js
 PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
   .flushQueueSize(20)
   .flushInterval(30, TimeUnit.SECONDS)
@@ -116,7 +160,7 @@ PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
 
 You can also manually flush the queue:
 
-```java
+```js
 PostHog.with(this)
        .flush();
 ```
@@ -125,7 +169,7 @@ PostHog.with(this)
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
-```java
+```js
 PostHog.with(this)
        .reset();
 ```
@@ -138,7 +182,7 @@ If you want to manually send a new screen capture event, use the `screen` functi
 
 This function requires a `name`. You may also pass in an optional `properties` object.
 
-```java
+```js
 PostHog.with(this)
        .screen("Dashboard", new Properties()
                                   .putValue("background", "blue")
@@ -150,7 +194,7 @@ PostHog.with(this)
 
 When creating the PostHog client, there are many options you can set:
 
-```java
+```js
 PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
     // Record certain application events automatically! (off/false by default)
     .captureApplicationLifecycleEvents()

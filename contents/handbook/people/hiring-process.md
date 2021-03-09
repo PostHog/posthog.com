@@ -36,7 +36,7 @@ If you receive an application directly emailed to you or if someone contacts us 
 
 * Forward their email onto our [dedicated Workable email address](mailto:posthog@jobs.workablemail.com) - this is the most effective option.
 * If you think they are a strong candidate but they didn't email, introduce them directly to us via our [careers email address](mailto:careers@posthog.com).
-* As a last resort, ask them to apply via the relevant link on our [Careers page](heeps://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
+* As a last resort, ask them to apply via the relevant link on our [Careers page](https://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
 
 ### Booking meetings
 

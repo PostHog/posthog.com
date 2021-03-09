@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
 import './styles/index.scss'
+import posthogComputer from '../images/computer-dashboard-4.svg'
 import improveMobile from '../images/improve-mobile.svg'
 import improveRetention from '../images/retro-retention-box.svg'
 import improvePaths from '../images/retro-paths-box.svg'
@@ -16,13 +17,13 @@ import visualizeTrends from '../images/retro-product-trends.svg'
 import retroFlagsImg from '../images/retro-feature-flags.svg'
 import selfHostedImg from '../images/self-host.svg'
 import sessionRecordingImg from '../images/session-recording-3.svg'
-import { SEO } from '../components/seo'
-import Layout from '../components/Layout'
-import { FeaturedSectionTextLeft } from '../components/Sections/FeaturedSectionTextLeft'
-import { FeaturedSectionTextRight } from '../components/Sections/FeaturedSectionTextRight'
-import { FeaturedSectionTripleImage } from '../components/Sections/FeaturedSectionTripleImage'
-import { Spacer } from '../components/Spacer'
-import { DesignedForYourStackBlock } from '../components/Sections/DesignedForYourStackBlock'
+import { SEO } from 'components/seo'
+import Layout from 'components/Layout'
+import { FeaturedSectionTextLeft } from 'components/Sections/FeaturedSectionTextLeft'
+import { FeaturedSectionTextRight } from 'components/Sections/FeaturedSectionTextRight'
+import { FeaturedSectionTripleImage } from 'components/Sections/FeaturedSectionTripleImage'
+import { Spacer } from 'components/Spacer'
+import { DesignedForYourStackBlock } from 'components/Sections/DesignedForYourStackBlock'
 import { useActions } from 'kea'
 import { layoutLogic } from '../logic/layoutLogic'
 
@@ -49,36 +50,41 @@ function IndexPage() {
                         description="Self-hosted product analytics stack, to deploy on your infrastructure."
                     />
                     <div className="topSectionWrapperMobile">
-                        <div className="topPageWrapper wrapper">
+                        <div className="topPageWrapper wrapper min-h-780">
                             <div className="pageHeader row">
-                                <h1>A complete product analytics stack, to deploy on your infrastructure.</h1>
+                                <h1 className="mt-12">
+                                    A complete product analytics stack, to deploy on your infrastructure.
+                                </h1>
                             </div>
                             <Spacer height={25} onlyDesktop={true} />
-                            <div className="topPageRow row">
-                                <div className="topPageCol1">
-                                    <div className="joinUsersText">
-                                        <p>
-                                            Join 2,700 companies <br className="hiddenBreak" /> using PostHog.
-                                        </p>
-                                        <br />
-                                    </div>
-                                    <div className="joinUsersButtons">
-                                        <Button
-                                            type="secondary"
-                                            size="large"
-                                            className="getStarted"
+                            <div className="w-11/12 mx-auto max-w-4xl flex justify-between items-center flex-col lg:flex-row">
+                                <div className="w-full lg:w-1/2">
+                                    <span className="text-white text-xl hidden lg:block">
+                                        Join 2,700 companies <br className="hiddenBreak" /> using PostHog.
+                                    </span>
+
+                                    <div className="mt-4 flex justify-start flex-col lg:flex-row flex-wrap items-center">
+                                        <button
+                                            className="button-primary lg:mr-1"
                                             onClick={() => setIsGetStartedModalOpen(true)}
                                         >
                                             Get Started for Free
-                                        </Button>
-                                        <a href="/schedule-demo">
-                                            <Button type="primary" size="large" className="scheduleDemo">
-                                                Schedule Demo
-                                            </Button>
+                                        </button>
+                                        <a
+                                            href="/schedule-demo"
+                                            className="px-4 py-2 my-1 font-gosha block bg-transparent border border-white rounded font-semibold text-base-larger text-white uppercase lg:mr-1 hover:bg-white hover:bg-opacity-10 hover:text-white"
+                                        >
+                                            Schedule Demo
                                         </a>
                                     </div>
                                 </div>
-                                <div className="topPageCol2" />
+
+                                <div className="w-full lg:w-1/2">
+                                    <img
+                                        src={posthogComputer}
+                                        className="w-full max-w-lg mx-auto mt-8 lg:mt-0 lg:max-w-full block skeleton-loading skeleton-loading--250"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
