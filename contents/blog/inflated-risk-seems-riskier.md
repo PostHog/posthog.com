@@ -1,6 +1,6 @@
 ---
 date: 2021-03-09
-title: Money Diaries: Inflated risk seems riskier
+title: Money Diaries\: Inflated risk seems riskier
 rootPage: /blog
 sidebar: Blog
 showTitle: true
