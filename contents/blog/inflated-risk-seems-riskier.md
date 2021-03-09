@@ -27,13 +27,13 @@ So we got comfortable with doing something bigger and not owning the whole pie. 
 
 We reorganised everything around weekly product launches. Yes that’s right, not sprints, build and validate the product with 10-15 customers in a week. It sounds ludicrously outrageous, and it was. But demonstrating a product rather than a landing page or mockups got us the high quality validation we needed to move on to the next idea. We got comfortable throwing out what we’d built - as cliche as it sounds, the light bulb moment is realizing you never throw away the lessons. If you’d like more detail, I wrote more on [our time before YC](https://posthog.com/blog/before-yc).
 
-[](https://static.fjcdn.com/pictures/Awesome+whats+up_a3e2d0_4319326.png)
+[](https://static.fjcdn.com/pictures/Awesome+what's+up_a3e2d0_4319326.png)
 
 ## Spend early money, wisely
 
 As conventional wisdom goes, we spent very little money in the early days. GitHub, AWS and Figma free tier were our bread and butter but it took longer to discover the true value of your time and how to spend it wisely.
 
-Tim and I tried remote working, but found it difficult to be focussed and in-sync with each other while rapidly prototyping. Getting cheap WeWork access ($100/month/person) was a game changer for us. We constantly pushed each other and tried to keep up with the other’s pace - plus all the free coffee we could drink!
+Tim and I tried remote working, but found it difficult to be focused and in-sync with each other while rapidly prototyping. Getting cheap WeWork access ($100/month/person) was a game changer for us. We constantly pushed each other and tried to keep up with the other’s pace - plus all the free coffee we could drink!
 
 [](https://media2.giphy.com/media/oGP0Sv692lb68/giphy.gif?cid=ecf05e47nvxktimy3xz3xgbls30vrk7qwidgfjfunf8nnuai&rid=giphy.gif)
 
@@ -43,7 +43,7 @@ While Tim was building products, I recruited users to validate them. It was manu
 
 Both Tim and I wanted to get into YC from the moment we ditched bootstrapping. We reached out to our network and scoured the internet to gleam application strategies.
 
-Many swung big in the hope of going viral, like a well-timed Show HN launch before the application. This felt too binary for us: you are either screwed or winning. Whereas if we thought of ways to get steadily users every week we'd have something real to talk about. We saw YC cared about speed and iteration, so we focussed on doing what we are good at.
+Many swung big in the hope of going viral, like a well-timed Show HN launch before the application. This felt too binary for us: you are either screwed or winning. Whereas if we thought of ways to get steadily users every week we'd have something real to talk about. We saw YC cared about speed and iteration, so we focused on doing what we are good at.
 
 For most of our ideas we struggled to get and retain users. The idea we got into YC with was different, users were excited to join and stuck around. We doubled down on ads and by the time we applied we had 300 users and 600 by the interview - tt was important for us to show continued growth.
 
