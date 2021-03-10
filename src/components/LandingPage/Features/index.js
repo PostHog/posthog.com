@@ -5,7 +5,7 @@ import newWayImg from '../images/platform-new-way.svg'
 
 export const Features = () => {
     return (
-        <div className="features py-24 text-white text-center">
+        <div className="features py-12 text-white text-center">
             <div className="w-11/12 max-w-4xl mx-auto">
                 <h3>A single platform that does it all</h3>
                 <p className="opacity-80 mt-1 text-center">

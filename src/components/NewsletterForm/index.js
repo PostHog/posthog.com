@@ -17,7 +17,7 @@ export class NewsletterForm extends React.Component {
 
     render() {
         return (
-            <div className="w-11/12 max-w-4xl mx-auto mb-24">
+            <div className="w-11/12 max-w-4xl mx-auto mb-48">
                 <div className="bg-neon w-full h-full p-1 rounded">
                     <div
                         className="rounded flex justify-between flex-col lg:flex-row p-8 relative z-10"
