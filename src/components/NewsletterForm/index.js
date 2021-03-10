@@ -79,14 +79,6 @@ export class NewsletterForm extends React.Component {
                                         >
                                             Join the List
                                         </CallToAction>
-                                        {/* <input
-                                            style={{ marginLeft: 5 }}
-                                            type="submit"
-                                            value="Subscribe"
-                                            name="subscribe"
-                                            id="mc-embedded-subscribe"
-                                            className="button"
-                                        /> */}
                                     </div>
                                 </div>
                             </form>
