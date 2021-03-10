@@ -13,22 +13,26 @@ import 'antd/lib/slider/style/css'
 import { plans, faqs } from '../pages-content/pricing-data'
 
 const PricingPage = () => {
-    const [state, setState] = useState({ planOptions: 'cloud', unitPricing: '0.000225' })
+    const [state, setState] = useState({ planOptions: 'cloud', unitPricing: '0.000225', finalCost: '200' })
     const [priceSimulation, setPriceSimulation] = useState(250000)
     const comparisonRef = useRef()
     const location = useLocation()
     const { Panel } = Collapse
 
-    function checkScale(value, unitPricing) {
+    function checkScale(value, unitPricing, finalCost) {
         if (value < 10000000) {
             unitPricing = 0.000225
+            finalCost = 200
         } else if (value >= 10000000 && value < 100000000) {
             unitPricing = 0.000045
+            finalCost = 10000000 * 0.000225 + (value - 10000000) * 0.000045
         } else {
             unitPricing = 0.000009
+            finalCost = 10000000 * 0.000225 + 100000000 * 0.000045 + (value - 100000000) * 0.000009
         }
 
-        setState({ ...state, unitPricing: unitPricing })
+        finalCost = Math.round(finalCost)
+        setState({ ...state, finalCost: finalCost, unitPricing: unitPricing })
     }
 
     const setOptionFromQS = () => {
@@ -188,30 +192,11 @@ const PricingPage = () => {
                                             tipFormatter={(value) =>
                                                 value.toLocaleString().concat(' events ingested /month')
                                             }
-                                            onChange={
-                                                ((value) => setPriceSimulation(value), (value) => checkScale(value))
-                                            }
+                                            onChange={(value) => checkScale(value)}
                                         />
                                         <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                                            {priceSimulation < 10000000 ? (
-                                                <>
-                                                    <span className="text-muted">Price:</span>{' '}
-                                                    <b>${Math.round(priceSimulation * 0.000225).toLocaleString()}</b>
-                                                    /month
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <span className="text-muted">Price:</span>{' '}
-                                                    <b>
-                                                        $
-                                                        {Math.round(
-                                                            10000000 * 0.000225 +
-                                                                (priceSimulation - 10000000) * 0.000045
-                                                        ).toLocaleString()}
-                                                    </b>
-                                                    /month
-                                                </>
-                                            )}
+                                            <span className="text-muted">Price:</span> <b>${state.finalCost}</b>
+                                            /month
                                         </div>
                                     </div>
                                 </div>
@@ -252,25 +237,9 @@ const PricingPage = () => {
                                             onChange={(value) => setPriceSimulation(value)}
                                         />
                                         <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                                            {priceSimulation < 1000000000 ? (
-                                                <>
-                                                    <span className="text-muted">Price:</span>{' '}
-                                                    <b>
-                                                        $
-                                                        {Math.round(
-                                                            (priceSimulation - 10000) * 0.000225
-                                                        ).toLocaleString()}
-                                                    </b>
-                                                    /month
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
-                                                        Contact us
-                                                    </a>{' '}
-                                                    to talk pricing.
-                                                </>
-                                            )}
+                                            <span className="text-muted">Price:</span>{' '}
+                                            <b>${Math.round((priceSimulation - 10000) * 0.000225).toLocaleString()}</b>
+                                            /month
                                         </div>
                                     </div>
                                 </div>
