@@ -36,13 +36,14 @@ A `plugin.json` file is structured as follows:
       "type": "<param1_type>",
       "default": "<param1_default_value>",
       "hint": "<param1_hint_value>",
-      "required": <is_param1_required>
+      "required": true,
+      "secret": true
     },
     {
       "name": "<param2_name>",
       "type": "<param2_type>",
       "default": "<param2_default_value>",
-      "required": <is_param2_required>
+      "required": false,
     }
   ]
 }
@@ -78,10 +79,26 @@ Most options in this file are self-explanatory, but there are a few worth explor
 
 `main` determines the entry point for your plugin, where your `setupPlugin` and `processEvent` functions are. More on these later.
 
-#### type (config -> param -> type)
+#### config
 
-The type of a parameter in the config can be either `string` or `attachment`. If the type is set to `attachment`, PostHog will prompt the user for a file upload during the configuration step.
+`config` consists of an array of objects that each pertain to a specific configuration field or markdown explanation for your plugin.
 
+Each object in a config can have the following properties:
+
+|   Key    |                    Type                    |                                                                           Description                                                                           |
+| :------: | :----------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   type   | `"string"` or `"attachment"` or `"choice"` | Determines the type of the field - "attachment" asks the user for an upload, and "choice" requires the config object to have a `choices` array, explained below |
+|   key    |                  `string`                  |                                     The key of the plugin config field, used to reference the value from inside the plugin                                      |
+|   name   |                  `string`                  |                                          Displayable name of the field - appears on the plugin setup in the PostHog UI                                          |
+| default  |                  `string`                  |                                                                   Default value of the field                                                                    |
+|   hint   |                  `string`                  |                                             More information about the field, displayed under the in the PostHog UI                                             |
+| markdown |                  `string`                  |                                                             Markdown to be displayed with the field                                                             |
+|  order   |                  `number`                  |                                                                           Deprecated                                                                            |
+| required |                 `boolean`                  |                                               Specifies if the user needs to provide a value for the field or not                                               |
+|  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for plugins that ask for API Keys, for example                      |
+| choices  |                  `string[]`                   |                           Only accepted on configs with `type` equal to `"choice"` - an array of choices (of type `string`) to be presented to the user                            |
+
+> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your plugin but can be placed anywhere in the `config` array and is useful for customizing the content of your plugin's configuration step in the PostHog UI.
 ### PluginMeta
 
 > Check out [Plugin Types](/docs/plugins/types) for a full spec of types for plugin authors.
@@ -249,7 +266,6 @@ PostHog plugins are still in beta, and our scheduled tasks are the newest featur
 
 1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
 2. We intend to make scheduled tasks via plugins more flexible in the near-future. Keep an eye out for any updates to the API.
-3. If you have multiple instances of `posthog-plugin-server` running, the defined tasks will be run on each instance at the specified interval. Fixes for this are also on the way in the upcoming releases.
 
 ### Publishing Your Plugin
 

@@ -63,34 +63,6 @@ https://posthog.example.com/api/person/
 
 <br />
 
-### Username & Password (Deprecated)
-
-<blockquote class='warning-note'>
-
-**Important:** While you can still use this type of authentication, it's significantly more secure to use personal API keys, as described above.
-
-</blockquote>
-
-Authentication can also be done using your own username and password. We suggest creating a new user within your team specifically for this.
-
-With `curl`:
-```bash
-curl -u username:password https://posthog.example.com/api/person/
-```
-
-As a header:
-```bash
-AUTH=$(echo -ne "username:password" | base64 --wrap 0)
-
-curl \
-  --header "Authorization: Basic $AUTH" \
-  https://posthog.example.com/api/person/
-```
-
-> **Important:** The key under "API key" in the Setup page is write-only and public. You cannot use it for any of these endpoints.
-
-<br />
-
 ## `/user/`
 
 The [`/user/` endpoint](./user) gives you a lot of useful information about the possible event names and properties you can use throughout the rest of the API. 

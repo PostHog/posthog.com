@@ -4,6 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
+
 > **Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
 
 This page of the Docs refers to our [JS library](https://github.com/PostHog/posthog-js).
@@ -18,28 +19,33 @@ You can either load the snippet as a script in your HTML:
 ```html
 <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('[your-token]', {api_host: 'https://[your-instance]'})
+    posthog.init('<ph_project_api_key>', {api_host: '<ph_instance_address>'})
 </script>
 ```
 
-Or you can include it using npm, by doing either
+Or you can include it using npm, by doing either:
+
 ```bash
 yarn add posthog-js
 ```
-or
+
+or:
+
 ```bash
 npm install --save posthog-js
 ```
 
 And then include it in your files:
+
 ```js
 import posthog from 'posthog-js';
-posthog.init("[your-token]", {api_host: 'https://[your-instance]'});
+posthog.init("<ph_project_api_key>", {api_host: '<ph_instance_address>'});
 ```
 
 If you don't want to send a bunch of test data while you're developing, you could do the following:
+
 ```js
-window.location.href.indexOf('127.0.0.1') === -1 && posthog.init("[your-token]", {api_host: 'https://[your-instance]'})
+window.location.href.indexOf('127.0.0.1') === -1 && posthog.init("<ph_project_api_key>", {api_host: '<ph_instance_address>'})
 ```
 
 ## Usage
@@ -55,7 +61,8 @@ PostHog puts a great amount of effort into making sure it doesn't capture any se
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
 ```
-<br>
+
+<br />
 
 #### Important Note on Autocapture
 
@@ -81,6 +88,40 @@ This allows you to send more context than the default event info that PostHog ca
 posthog.capture('[event-name]', {property1: 'value', property2: 'another value'});
 ```
 
+#### Setting user properties via an event
+
+To set properties on a user, you can use the `posthog.people.set` and `posthog.people.set_once` methods.
+
+However, you can also leverage the event properties `$set` and `$set_once` to do this via an event.
+
+##### $set
+
+**Example**
+
+```js
+posthog.capture('some event', { $set: { userProperty: 'value' } });
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+This works the same way as `posthog.people.set`.
+
+##### $set_once
+
+**Example**
+
+```js
+posthog.capture('some event', { $set_once: { userProperty: 'value' } });
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+
+This works the same way as `posthog.people.set_once`.
+
 ### Identifying Users
 
 To make sure you understand which user is performing actions within your app, you can identify users at any point. From the moment you make this call, all events will be identified with that distinct id.
@@ -91,10 +132,16 @@ Normally, you would put this below `posthog.init` if you have the information th
 If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and after they signed up will be shown under the same user.
 
 ```js
-posthog.identify('[user unique id]', { userProperty: 'xxxx' });
+posthog.identify(
+    '[user unique id]', // required
+    { userProperty: 'value1' }, // optional
+    { anotherUserProperty: 'value2' } // optional
+);
 ```
 
-You can also pass a second argument to `posthog.identify` which is an object consisting of as many properties as you want to be set on that user's profile. This operates in the same way as `posthog.people.set`. 
+You can also pass two more arguments to `posthog.identify`. Both take objects consisting of as many properties as you want to be set on that user's profile. The difference is that the second argument will use the `$set` mechanism, whereas the third argument will use `$set_once`. 
+
+You can read more about the difference between this [in the previous section](#setting-user-properties-via-an-event).
 
 Warning! You can't call identify straight after an .init (as .init sends a page view, probably with the user's anonymous id. To combat this, you can call .init with a callback, inside which you can then call identify.
 
@@ -192,9 +239,11 @@ If you still wish to capture these events but want to create a distinction betwe
 With PostHog, you can:
 
 Opt a user out:
+
 ```js
 posthog.opt_out_capturing();
 ```
+
 See if a user has opted out:
 
 ```js
@@ -202,6 +251,7 @@ posthog.has_opted_out_capturing();
 ```
 
 Opt a user back in:
+
 ```js
 posthog.opt_in_capturing();
 ```
@@ -219,24 +269,27 @@ Here's how you can use them:
 
     In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
 
-    ```js
-    posthog.onFeatureFlags(callback)
-    ```
+```js
+posthog.onFeatureFlags(callback)
+```
 
 - Check if a feature is enabled:
-    ```js
-    posthog.isFeatureEnabled('keyword')
-    ```
+
+```js
+posthog.isFeatureEnabled('keyword')
+```
 
 - Trigger a reload of the feature flags:
-    ```js
-    posthog.reloadFeatureFlags()
-    ```
+    
+```js
+posthog.reloadFeatureFlags()
+```
 
 - By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
-    ```js
-    posthog.isFeatureEnabled('keyword', {send_event: false})
-    ```
+
+```js
+posthog.isFeatureEnabled('keyword', {send_event: false})
+```
 
 ### Complete Signup Pseudocode
 
@@ -281,23 +334,29 @@ Some of the most relevant options are:
 To configure these options, pass them as an object to the `posthog.init` call, like so:
 
 ```js
-posthog.init('[your api key]', {
-    api_host: 'https://posthog.[your-domain].com',
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
     loaded: function(posthog) { posthog.identify('[user unique id]'); },
     autocapture: false
     // ... more options
 });
 ```
 
+## Debugging
+
+In your dev console you can run `posthog.debug()`. This will enable debugging, easily allowing you to see all data that is being sent to PostHog.
+
 
 ## Development
 
 To develop, clone the [repo](https://github.com/PostHog/posthog-js) and run:
+
 ```bash
 yarn start
 ```
 
 To create a minified production version, run:
+
 ```bash
 yarn build
 ```

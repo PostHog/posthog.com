@@ -49,14 +49,11 @@ configuration.recordScreenViews = YES; // Record screen views automatically!
 
 ### With Swift
 
-```swift
+```js
 import PostHog
 
-// on posthog.com
-let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY")
-
-// self-hosted
-let configuration = PHGPostHogConfiguration(apiKey: "YOUR_API_KEY", host: "http://app.posthog.com")
+// `host` is optional if you use PostHog Cloud (app.posthog.com)
+let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
 
 configuration.captureApplicationLifecycleEvents = true; // Record certain application events automatically!
 configuration.recordScreenViews = true; // Record screen views automatically!
@@ -89,7 +86,7 @@ For example:
                                        @"email": @"peter@familyguy.com" }];
 ```
 
-```swift
+```js
 // in swift
 posthog.identify("user_id_from_your_database", 
           properties: ["name": "Peter Griffin", "email": "peter@familyguy.com"])
@@ -120,10 +117,50 @@ For example:
 [[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
 ```
 
-```swift
+```js
 // in swift
 posthog.capture("Signed Up", properties: ["plan": "Pro++"])
 ```
+
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+// in objective-c
+[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"userProp": "value1" } }];
+```
+
+```c
+// in swift
+posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set": ["userProp": "value1"] ])
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+// in objective-c
+[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"userProp": "value1" } }];
+```
+
+```c
+// in swift
+posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set_once": ["userProp": "value1"] ])
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ### Flush
 
@@ -142,7 +179,7 @@ You can also manually flush the queue:
 [[PHGPostHog sharedPostHog] flush]
 ```
 
-```swift
+```js
 // in swift
 posthog.capture("Logged Out")
 posthog.flush()
@@ -157,7 +194,7 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 [[PHGPostHog sharedPostHog] reset]
 ```
 
-```swift
+```js
 // in swift
 posthog.reset()
 ```
@@ -173,7 +210,7 @@ If you want to manually send a new screen capture event, use the `screen` functi
 [[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
 ```
 
-```swift
+```js
 // in swift
 posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
 ```

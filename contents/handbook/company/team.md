@@ -94,6 +94,8 @@ After four years I thought it was time to go do something else and had lined up 
 
 In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-shaped ball and watch a lot of Bondi beach in order to perfect my Australian accent.
 
+[See my README for tips on how to work with me](/handbook/company/team/tim-glaser)
+
 </div>
 
 </div>
@@ -170,7 +172,7 @@ To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Eric.png)
+![Eric Duong portrait](../../images/team/Eric.png)
 
 </div>
 
@@ -204,7 +206,7 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/JamesG.png)
+![James Greenhill portrait](../../images/team/JamesG.png)
 
 </div>
 
@@ -263,7 +265,7 @@ Before joining PostHog, I lead a product team at Grow Mobility, the largest micr
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Paolo.png)
+![Paolo D'Amico portrait](../../images/team/Paolo.png)
 
 </div>
 
@@ -302,7 +304,7 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 <div class="team-right-image" markdown="1">
 
-![Placeholder Portrait Image](../../images/team/Lottie.png)
+![Lottie Coxon portrait](../../images/team/Lottie.png)
 
 </div>
 
@@ -416,13 +418,13 @@ I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [
 
 <div class="team-left-bio" markdown="1">
 
-Originally from Northern Germany, I moved to the UK in 2017 and I am now based in East London. 
+Hi, I'm Eltje (_pronounced Elt-ie_), originally from Northern Germany, I moved to the UK in 2017 and I am now based in East London. 
 
 Just like James, I used to be a professional cyclist until I realised you can’t make a living as a female cyclist. After a short identity crisis, I started university with the goal to become a management consultant. That never happened, I luckily realised my skills and personality are much better suited in a people (I guess non-startup people call it HR) role. 
 
 At PostHog I look after our People and Talent function and my goal is make PostHog THE best company to work for. Previously I worked in very a similar role at a startup called [Farewill](https://farewill.com), who offer services around death (yes, you read right). Prior to that, I worked for a couple of companies later on the scaling journey, like [TransferWise](https://transferwise.com/) and [Xing](https://xing.com).
 
-Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and I love to go for a run or cycle around London, do yoga and drink coffee. 
+Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and you can usually find me outdoors - either on my bike or during a long walk. 
 
 </div>
 

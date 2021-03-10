@@ -22,13 +22,13 @@ In your app, import the `posthog` library and set your api key and host **before
 import posthog
 
 # Substitutes posthog.api_key which still exists but has been deprecated
-posthog.project_api_key = 'PROJECT API KEY'
+posthog.project_api_key = '<ph_project_api_key>'
 
 # Only necessary if you want to use feature flags
-posthog.personal_api_key = 'PERSONAL API KEY'
+posthog.personal_api_key = '<ph_personal_api_key>'
 
 # You can remove this line if you're using app.posthog.com
-posthog.host = 'https://posthog.[your domain].com'
+posthog.host = '<ph_instance_address>'
 ```
 
 You can read more about the differences between the project and personal API keys in the dedicated [API Authentication section](/docs/api/overview#authentication) of the Docs. 
@@ -74,7 +74,44 @@ or
 posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc())
 ```
 
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```python
+posthog.capture(
+    'distinct id', 
+    event='movie played', 
+    properties={ '$set': { 'userProperty': 'value' } }
+)
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```python
+posthog.capture(
+    'distinct id', 
+    event='movie played', 
+    properties={ '$set_once': { 'userProperty': 'value' } }
+)
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+
 ### Identify
+
 Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
 
@@ -156,8 +193,8 @@ import posthog
 
 class YourAppConfig(AppConfig):
     def ready(self):
-        posthog.api_key = 'your key'
-        posthog.host = 'https://posthog.[your domain].com' # You can remove this line if you're using app.posthog.com
+        posthog.api_key = '<ph_project_api_key>'
+        posthog.host = '<ph_instance_address>' # You can remove this line if you're using app.posthog.com
 
 ```
 

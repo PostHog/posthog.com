@@ -14,16 +14,16 @@ This library uses an internal queue to make calls fast and non-blocking. It also
 
 Add this to your `Gemfile`:
 
-```ruby
+```bash
 gem "posthog-ruby"
 ```
 
 In your app, set your api key **before** making any calls.
 
-```ruby
+```c
 posthog = PostHog::Client.new({
-  api_key: "my_key",
-  api_host: "https://posthog.[your-domain].com", # You can remove this line if you're using app.posthog.com
+  api_key: "<ph_project_api_key>",
+  api_host: "<ph_instance_address>", # You can remove this line if you're using app.posthog.com
   on_error: Proc.new { |status, msg| print msg }
 })
 ```
@@ -46,7 +46,7 @@ Optionally you can submit:
 - `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
 
 For example:
-```ruby
+```c
 posthog.capture({
     distinct_id: 'distinct id',
     event: 'movie played',
@@ -57,7 +57,48 @@ posthog.capture({
 })
 ```
 
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+posthog.capture({
+    distinct_id: 'distinct id',
+    event: 'movie played',
+    properties: {
+        $set: { userProperty: 'value' }
+    }
+})
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+posthog.capture({
+    distinct_id: 'distinct id',
+    event: 'movie played',
+    properties: {
+        $set_once: { userProperty: 'value' }
+    }
+})
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+
 ### Identify
+
 Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
 
@@ -66,7 +107,7 @@ An `identify` call requires:
 - `properties` with a dict with any key:value pairs 
 
 For example:
-```ruby
+```c
 posthog.identify({
   distinct_id: "user:123",
   properties: {
@@ -93,7 +134,7 @@ An `alias` call requires:
 - `distinct id`: the current unique id
 
 For example:
-```ruby
+```c
 posthog.alias({
   distinct_id: "user:123",
   alias: "user:12345",
@@ -104,7 +145,7 @@ posthog.alias({
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
-```ruby
+```c
 posthog.capture({
     distinct_id: 'distinct id',
     event: '$pageview',

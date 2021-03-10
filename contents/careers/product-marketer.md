@@ -1,31 +1,33 @@
 ---
-title: Content Marketer
+title: Product Marketer
 sidebar: Careers
 showTitle: true
 ---
 
 <h5 class='centered'>PostHog exists to increase the number of successful products in the world.</h5>
 
-While we have mainly hired engineers to date, we are now growing across all areas of the business, and we are currently hiring for our first Content Marketer to work alongside our newly hired Marketing Lead.
+While we have mainly hired engineers to date, we are now growing across all areas of the business, and we are currently hiring for our first **Product Marketer** to work alongside our newly hired Marketing Lead. In this role, you will own market/competitor research, product position, and messaging. You will play a key role in our growth.
 
 ### What you'll be doing
 
-- Creating top-of-funnel technical content marketing such as tutorials, blog posts, infographics, eBooks, web pages, white papers, and reports that attract new developers to PostHog.
-- Working with our marketing, product, and development teams and community to translate messaging into innovative and timely content ideas and manage content production from start to finish.
-- Growing and maintaining our content schedule around user personas and segments.
-- Working with our marketing team to analyze how your content performs and decide how to adjust our content strategy accordingly.
+- Conducting market/competitor research. PostHog operates across a number of industries. It will be your job to understand our competition.
+- Armed with a deep understanding of the market, you'll iterate on our product positioning and messaging.
+- Develop user personas from user research conducted by our team and supplemented by you.
+- Collaborate with our Product team on our vision and roadmap to stay ahead of the competition and satisfy user demand.
+- Create compelling collateral/content to communicate product benefits to personas and enable sales.
 
 ### What you'll bring
 
-- Experience working as a technical content marketer creating top-of-funnel content for developers.
-- Excellent writing, researching, and communication skills.
-- Experience coming up with innovative and timely content ideas and producing well-written content to a content schedule.
-- A detail-orientated and organized approach to work with a desire to move quickly and constantly improve yourself and your team.
-- Experience creating content for an open source product is desirable but not critical.
+- Experience working as a product marketer for a technical product positioned at developers.
+- Excellent writing, researching and communication skills.
+- Experience owning marketing research, product positioning, and messaging.
+- Experience working closely with product and sales teams.
+- A detail-orientated and organized approach to work with a desire to move quickly and continuously improve yourself and your team.
+- Experience working in open source and/or product analytics is desirable but not critical.
 
 ### What we offer in return
 
-* Generous [compensation](/handbook/people/compensation)
+* Generous, transparent [compensation](/handbook/people/compensation)
 * [Unlimited, permissionless vacation](/handbook/people/time-off) with a 25 day minimum
 * Health insurance, including dental and vision (UK and US-based only)
 * [Generous parental leave](/handbook/people/time-off)

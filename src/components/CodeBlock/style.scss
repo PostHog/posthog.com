@@ -1,0 +1,47 @@
+@import '../../vars';
+
+body.dark {
+    .code-block-ph-token {
+        background-color: #a36dfa !important;
+    }
+    span[data-tooltip]:hover:after {
+        background: rgb(2, 0, 29);
+    }
+}
+
+.code-block-ph-token {
+    background-color: $blue_500 !important;
+    color: #fff !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+    border-radius: 4px !important;
+    border-bottom: 1px dashed #000 !important;
+    cursor: help;
+}
+
+[data-tooltip] {
+    position: relative;
+    border-bottom: 1px dashed #000;
+    cursor: help;
+    z-index: 9999;
+}
+
+span[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    display: inline-block;
+    position: absolute;
+    bottom: -2px;
+    color: #fff;
+    left: 0;
+    background: rgb(0, 0, 29);
+    border: 1px solid #000;
+    padding: 0.25em;
+    text-shadow: none;
+    z-index: 99999;
+    font-family: Arial, Helvetica, sans-serif;
+    transform: translateY(-20px);
+    transition: all 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 300ms;
+    font-size: 10px;
+    border-radius: 4px;
+}

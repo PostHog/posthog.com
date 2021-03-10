@@ -73,14 +73,14 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                     <NavbarLink to="/docs" textLight={textLight}>
                         Docs
                     </NavbarLink>
-                    <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
-                        Github
-                    </NavbarLink>
                     <NavbarLink to="/handbook/company/story" textLight={textLight}>
                         Company
                     </NavbarLink>
                     <NavbarLink to="/pricing" textLight={textLight}>
                         Pricing
+                    </NavbarLink>
+                    <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
+                        GitHub
                     </NavbarLink>
                 </ul>
 
@@ -117,13 +117,6 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                         Docs
                     </NavbarLink>
                     <NavbarLink
-                        href="https://github.com/posthog/posthog"
-                        textLight={textLight}
-                        className="block my-2 py-2 border-b border-white border-opacity-10"
-                    >
-                        Github
-                    </NavbarLink>
-                    <NavbarLink
                         to="/handbook/company/story"
                         textLight={textLight}
                         className="block my-2 py-2 border-b border-white border-opacity-10"
@@ -136,6 +129,13 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >
                         Pricing
+                    </NavbarLink>
+                    <NavbarLink
+                        href="https://github.com/posthog/posthog"
+                        textLight={textLight}
+                        className="block my-2 py-2 border-b border-white border-opacity-10"
+                    >
+                        GitHub
                     </NavbarLink>
                     <NavbarLink
                         href="https://app.posthog.com/login"

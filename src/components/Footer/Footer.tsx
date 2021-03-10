@@ -92,9 +92,9 @@ export const Footer = ({ onPostPage, showNewsletter = false }: { onPostPage: boo
                         </FooterListItem>
 
                         <FooterSubCategory>Discussion</FooterSubCategory>
-                        <FooterListItem href="https://posthog.com/slack">Slack</FooterListItem>
+                        <FooterListItem to="/slack">Slack</FooterListItem>
                         <FooterListItem href="https://github.com/PostHog/posthog/issues">Issues</FooterListItem>
-                        <FooterListItem href="https://posthog.com/support">Support</FooterListItem>
+                        <FooterListItem to="/support">Support</FooterListItem>
                         <FooterListItem href="mailto:sales@posthog.com" border={false}>
                             Contact sales
                         </FooterListItem>

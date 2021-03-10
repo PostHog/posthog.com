@@ -15,6 +15,9 @@ module.exports = {
                 purpleish: '#802f6a',
                 'purpleish-dark': '#72286E',
             },
+            minHeight: {
+                780: '780px',
+            },
         },
     },
     variants: {

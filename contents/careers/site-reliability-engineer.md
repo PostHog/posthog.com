@@ -6,16 +6,16 @@ showTitle: true
 
 <h5 class='centered'>PostHog exists to increase the number of successful products in the world.</h5>
 
-Right now we are focusing on helping product creators understand how people are using their product. Where things go well. Where things don't go so well.
+Right now, we are focusing on helping product creators understand how people are using their product. Where things go well. Where things don't go so well.
 
-We have built a great service for understanding how users use products. Now we need to scale it and make sure it is rock solid. You will be joining a rapidly growing team helping us support the services that allow us to absorb billions of events without loss even during crazy peaks. You will also be helping out with keeping our query engine up during high loads.
-We also need to build out the infrastructure needed to deploy this stack on customer’s VPCs and equivalents so that they can maintain control over their data without any loss of quality of experience on Posthog.
+We have built an excellent service for understanding how users use products. Now we need to scale it and make sure it is rock solid. You will be joining a rapidly growing team, helping us support the services that allow us to absorb billions of events without loss, even during crazy peaks. You will also be helping out with keeping our query engine up during high loads.
+We also need to build out the infrastructure required to deploy this stack on customer’s VPCs and equivalents so that they can maintain control over their data without any loss of quality of experience on Posthog.
 
-Posthog is a well funded Y-Combinator and GV backed startup from the W20 batch and is growing rapidly. We love open source, data, and crafting beautiful products that are easy to use and provide clear value.
+Posthog is a well-funded Y-Combinator and GV-backed startup from the W20 batch and is growing rapidly. We love open source, data, and crafting beautiful products that are easy to use and provide clear value.
 
-If you are interested in software infrastructure on Kubernetes, excited to work with an experienced software development team, this job is for you.
+If you are interested in software infrastructure on Kubernetes and excited to work with an experienced software development team, this job is for you.
 
-### What you'll be be doing
+### What you'll be doing
 
 * Building AWS, GCP, Azure (and more!) deployment automation for delivering Posthog to ourselves and customers
 * Troubleshooting networking, compute, and Kubernetes failures.
@@ -36,10 +36,10 @@ If you are interested in software infrastructure on Kubernetes, excited to work 
 
 ### What to expect once you apply
 
-* We will send you a 30 minute SRE quiz
-* You will join a 30 minute intro call to walk you through culture, compensation, the interview process, and requirements.
-* Technical interview with the hiring team. This is usually 2 PostHog team members spending 45-60 minutes in conversation
-* PostHog SuperDay - this is a paid day of working with us, which we will fit around your schedule and have you work on something SRE related
+* We will send you a 30-minute SRE quiz
+* You will join a [30-minute intro call](/handbook/people/hiring-process#interview-1---culture-with-eltje) to walk you through culture, compensation, the interview process, and requirements.
+* [Technical interview](/handbook/people/hiring-process#interview-2---technical) with the [hiring team](/handbook/company/team). This is usually 2 PostHog team members spending 45-60 minutes in conversation
+* [PostHog SuperDay](/handbook/people/hiring-process#posthog-superday) - this is a paid day of working with us, which we will fit around your schedule and have you work on something SRE related
 
 ### What we offer in return
 
@@ -52,6 +52,7 @@ If you are interested in software infrastructure on Kubernetes, excited to work 
 * [$200/month budget towards coworking or café working](/handbook/people/spending-money)
 * Carbon offsetting for work travel with [Project Wren](https://www.wren.co/)
 * [Free books](/handbook/people/training#books)
+
 *Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team.*
 
 ### Sold? Apply now
@@ -65,3 +66,5 @@ If you are interested in software infrastructure on Kubernetes, excited to work 
 * We ask for your best work, and in return [pay generously](/handbook/people/compensation) and have [exceptional benefits](/careers/#benefits)
 * Learn about [the team you'd be working with](/handbook/company/team)
 * Getting hiring right is key to diversity. Learn about [how we think about this](/handbook/company/diversity).
+
+*We believe people from diverse backgrounds, with different identities and experiences, make our product and our company better. No matter your background, we'd love to hear from you! Also, if you have a disability, please let us know if there's any way we can make the interview process better for you; we're happy to accommodate!*

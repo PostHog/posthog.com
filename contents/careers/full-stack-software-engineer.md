@@ -8,17 +8,17 @@ showTitle: true
 
 "Let me do it. You tell me when you want it and where you want it to land, and I'll do it backwards and tell you when to take off." - [Katherine Johnson](https://www.nasa.gov/content/katherine-johnson-biography)
 
-We provide an open source platform for product analytics. The product is new - we launched in February 2020, and have had thousands of deployments organically since we started.
+We provide an open source platform for product analytics. The product is new - we launched in February 2020 and have had thousands of deployments organically since.
 
-This growth has meant we've been able to raise significant investment from the best in the world, such as YCombinator and GV. We are now looking to grow our engineering team and we are looking for 2-3 **Full Stack Engineers** to join us!  
+This growth has meant we've been able to raise significant investment from the best in the world, such as YCombinator and GV. We are now looking to grow our engineering team, and we are looking for 2-3 **Full Stack Engineers** to join us!  
 
 **The release schedule is wild**
 
-We're up against billion dollar companies, and we're catching up. We will overtake them by being faster.
+We're up against billion-dollar companies, and we're catching up. We will overtake them by being faster.
 
 [Comments like this](https://news.ycombinator.com/item?id=22378393) are what we live and die by.
 
-We keep cycles very short. There is a roadmap session, [like this](https://github.com/PostHog/posthog/issues/1870), every two weeks - each developer suggests what they want to build to have the greatest impact, then they do just that. You choose what you focus on, and you are responsible for tests, user feedback and tracking.
+We keep cycles very short. There is a roadmap session, [like this](https://github.com/PostHog/posthog/issues/1870), every two weeks - each developer suggests what they want to build to have the most significant impact, then they do just that. You choose what you focus on, and you are responsible for tests, user feedback, and tracking.
 
 **The people here are really, really smart**
 
@@ -30,25 +30,25 @@ You'd be working with a combination of former CTOs and YC founders all turned de
 
 We take bets on people with less experience too - we are as willing to hire an unproven genius straight out of school as we are a seasoned veteran.
 
-Our team is tiny but we live in 10 different countries. This [diverse group](/handbook/company/diversity) looks [pretty weird](/handbook/company/team) on paper, but it's magical. Apart from the fact [most of them think pineapple belongs on pizza](https://twitter.com/PostHogHQ/status/1319583079648923648). It doesn't.
+Our team is tiny, but we live in 10 different countries. This [diverse group](/handbook/company/diversity) looks [pretty weird](/handbook/company/team) on paper, but it's magical. Apart from the fact [most of them think pineapple belongs on pizza](https://twitter.com/PostHogHQ/status/1319583079648923648). It doesn't.
 
 ### Get in early
 
-Would you have rather been in the first 20 or the last 20 people to join a [FAANG](https://en.wikipedia.org/wiki/Big_Tech) company? The early team we're hiring *right now* are building more than the software - they're building the way the company operates.
+Would you have rather been in the first 20 or the last 20 people to join a [FAANG](https://en.wikipedia.org/wiki/Big_Tech) company? The early team we're hiring *right now* is building more than the software - they're building the way the company operates.
 
-We need engineers who care about users, can ship quickly and thrive under a lot of autonomy. You aren't going to have a product manager dictating what you do, but you are going to need to make intelligent design and prioritization decisions with full support from the rest of the team.
+We need engineers who care about users, can ship quickly, and thrive under a lot of autonomy. You aren't going to have a product manager dictating what you do, but you will need to make intelligent design and prioritization decisions with full support from the rest of the team.
 
 ### We can't do this without you
 
 Our users do not use PostHog for the most complex querying of user data imaginable. We aren't going to use { machine learning | AI | blockchain } any time soon. 
 
-The technical challenge here is designing a highly scalable product right out of the box when deployed on premise, supporting a wide breadth of features that give users super powers, and enabling an ecosystem of contributors and plugins from anyone in the world so PostHog becomes a true platform.
+The technical challenge here is designing a highly scalable product right out of the box when deployed on premise, supporting a wide breadth of features that give users superpowers, and enabling an ecosystem of contributors and plugins from anyone in the world so PostHog becomes a true platform.
 
-Today, PostHog meets simple use cases across a broad part of product development. That reaches from understanding retention, conversion rates, abd feature usage, to feature flags, session recordings, plugins and heatmaps.
+Today, PostHog meets simple use cases across a broad part of product development. That reaches from understanding retention, conversion rates, and feature usage, to feature flags, session recordings, plugins, and heatmaps.
 
-You would be a key part in us expanding the range of functionality we are offering, or in supporting its use at scale. We'd want you to suggest ideas that you could take from concept to tests and deployment.
+You would be a key part in us expanding the range of functionality we are offering or in supporting its use at scale. We'd want you to suggest ideas that you could take from concept to tests and deployment.
 
-In particular, those with a very strong background in Django, architecture and databases (we use Clickhouse and Postgres) are going to have fun here - we have even individual clients doing hundreds of millions of events a day, but we are *truly* open to applications from any engineer that thinks they could deliver exceptional work here.
+In particular, those with a very strong background in Django, architecture, and databases (we use Clickhouse and Postgres) are going to have fun here - we have even individual clients doing hundreds of millions of events a day. However, we are *truly* open to applications from any engineer that thinks they could deliver exceptional work here.
 
 ### What we offer in return
 
@@ -70,11 +70,11 @@ PostHog's engineering culture is best-in-class, and we've had explosive user gro
 
 We [launched a four week old minimum viable product in February 2020](/handbook/company/story), and since then have been deployed in thousands of places around the world.
 
-PostHog's platform makes it easy for software teams to understand their user behavior. This coupled with our fast growth has led to a broad variety of very cool use cases. PostHog is used to help indie game designers make it more fun to defend earth from an alien threat. PostHog is used by multinational organizations running software that powers everything from banks to airlines. PostHog is used by startups disrupting their own industries.
+PostHog's platform makes it easy for software teams to understand their user behavior. This, coupled with our fast growth, has led to a wide variety of very cool use cases. PostHog helps indie game designers make it more fun to defend earth from an alien threat. PostHog is used by multinational organizations running software that powers everything from banks to airlines. PostHog is used by startups disrupting their own industries.
 
-We're a company like no other in our space. Our approach is bottom up and that starts by being great for developers to install and use.
+We're a company like no other in our space. Our approach is bottom up, and that starts by being great for developers to install and use.
 
-By being open source, we can be used on any software project throughout the world, for free, forever. Some developers will use the platform on a side project, others at their startup or small business, and others in their Fortune 500. We are building a true platform that can grow from 1 user to many no matter the size or shape of the organization.
+By being open source, we can be used on any software project throughout the world, for free, forever. Some developers will use the platform on a side project, others at their startup or small business, and others in their Fortune 500. We are building a true platform that can grow from 1 user to many, no matter the size or shape of the organization.
 
 The core of our approach is to delight end users. It's not about executive dashboards and then a terrible interface for everyone else. It's the sense of power we give to the person on the ground, doing the actual work, every day.
 
