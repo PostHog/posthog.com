@@ -14,8 +14,10 @@ export const Tutorials = () => {
                     Don’t get left behind. Join 2,700 companies using PostHog.
                 </p>
 
-                <CallToAction icon="rocket">Get Started</CallToAction>
-                <CallToAction icon="calendar" type="secondary" className="mt-3">
+                <CallToAction icon="rocket" href="https://app.posthog.com/signup">
+                    Get Started
+                </CallToAction>
+                <CallToAction icon="calendar" type="secondary" className="mt-3" to="/schedule-demo">
                     Book a demo
                 </CallToAction>
             </div>
@@ -57,6 +59,11 @@ export const Tutorials = () => {
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">8 min read</span>
                     </Link>
                 </div>
+
+                <CallToAction type="secondary" className="mt-8" to="/docs/tutorials" icon="book" width="72">
+                    See all tutorials
+                    <span className="text-xs text-white text-opacity-50 ml-1">13</span>
+                </CallToAction>
             </div>
         </div>
     )

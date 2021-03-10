@@ -8,6 +8,8 @@ import calendarImg from './images/calendar.svg'
 import githubImg from './images/github.svg'
 import handbookImg from './images/handbook.svg'
 import roadmapImg from './images/roadmap.svg'
+import checkImg from './images/check.svg'
+import bookImg from './images/book.svg'
 
 interface CallToActionProps {
     onClick?: void
@@ -26,12 +28,15 @@ const icons = {
     github: githubImg,
     handbook: handbookImg,
     roadmap: roadmapImg,
+    check: checkImg,
+    book: bookImg,
     none: null,
 }
 
 const buttonTypeClasses = {
-    secondary: 'bg-transparent border-2 border-white border-opacity-30 text-white hover:bg-white hover:bg-opacity-10',
-    primary: 'bg-primary border-primary hover:border-primary-dark hover:bg-primary-dark text-white',
+    secondary:
+        'bg-transparent border-2 border-white border-opacity-30 text-white hover:bg-white hover:bg-opacity-10 hover:text-white',
+    primary: 'bg-primary border-primary text-white hover:border-primary-dark hover:bg-primary-dark hover:text-white',
     custom: '',
 }
 

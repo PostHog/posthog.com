@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import { CallToAction } from '../../CallToAction'
 import blogPostImg from './images/blog-post.png'
 
 export const RecentBlogPosts = () => {
@@ -13,7 +14,7 @@ export const RecentBlogPosts = () => {
                 <div className="mt-12 flex flex-col lg:flex-row justify-between">
                     <Link
                         to="/blog/story-about-pivots"
-                        className="bg-purple-500 bg-opacity-20 hover:bg-opacity-30 p-6 w-full lg:w-2/3 lg:mr-2 rounded flex flex-col lg:flex-row justify-between items-stretch"
+                        className="bg-purple-500 bg-opacity-10 hover:bg-opacity-20 p-6 w-full lg:w-2/3 lg:mr-2 rounded flex flex-col lg:flex-row justify-between items-stretch"
                     >
                         <div className="w-full lg:w-1/3 mr-2">
                             <img src={blogPostImg} className="w-full mb-0" />
@@ -37,7 +38,7 @@ export const RecentBlogPosts = () => {
                         </div>
                     </Link>
 
-                    <div className="bg-purple-500 bg-opacity-20 p-6 w-full lg:w-1/3 lg:ml-2 rounded text-white">
+                    <div className="bg-purple-500 bg-opacity-10 p-6 w-full mt-2 lg:mt-0 lg:w-1/3 lg:ml-2 rounded text-white">
                         <span className="block opacity-70">Popular articles</span>
 
                         <Link
@@ -73,6 +74,10 @@ export const RecentBlogPosts = () => {
                         </Link>
                     </div>
                 </div>
+
+                <CallToAction type="secondary" className="mt-12" to="/blog" icon="book">
+                    Visit Blog
+                </CallToAction>
             </div>
         </div>
     )

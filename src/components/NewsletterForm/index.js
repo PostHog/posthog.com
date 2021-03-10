@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.scss'
+import { CallToAction } from '../CallToAction'
 
 export class NewsletterForm extends React.Component {
     constructor(props) {
@@ -70,14 +70,23 @@ export class NewsletterForm extends React.Component {
                                         />
                                     </div>
                                     <div className="clear">
-                                        <input
+                                        <CallToAction
+                                            type="secondary"
+                                            icon="check"
+                                            width="full"
+                                            className="mt-2"
+                                            submit={true}
+                                        >
+                                            Join the List
+                                        </CallToAction>
+                                        {/* <input
                                             style={{ marginLeft: 5 }}
                                             type="submit"
                                             value="Subscribe"
                                             name="subscribe"
                                             id="mc-embedded-subscribe"
                                             className="button"
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
                             </form>
