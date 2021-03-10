@@ -9,18 +9,27 @@ import './styles/pricing.scss'
 import 'antd/lib/collapse/style/css'
 import imgCloud from '../images/cloud.svg'
 import imgBuilding from '../images/building.svg'
-import imgChevronRight from '../images/chevron-right.svg'
-import imgCloudPlan from '../images/plan-cloud.svg'
 import 'antd/lib/slider/style/css'
 import { plans, faqs } from '../pages-content/pricing-data'
-import { DollarCircleTwoTone } from '@ant-design/icons'
 
 const PricingPage = () => {
-    const [state, setState] = useState({ planOptions: 'cloud' })
+    const [state, setState] = useState({ planOptions: 'cloud', unitPricing: '0.000225' })
     const [priceSimulation, setPriceSimulation] = useState(250000)
     const comparisonRef = useRef()
     const location = useLocation()
     const { Panel } = Collapse
+
+    function checkScale(value, unitPricing) {
+        if (value < 10000000) {
+            unitPricing = 0.000225
+        } else if (value >= 10000000 && value < 100000000) {
+            unitPricing = 0.000045
+        } else {
+            unitPricing = 0.000009
+        }
+
+        setState({ ...state, unitPricing: unitPricing })
+    }
 
     const setOptionFromQS = () => {
         // On load, set the correct plan options (if applicable)
@@ -156,39 +165,43 @@ const PricingPage = () => {
                         ))}
                         {state.planOptions === 'vpc' && (
                             <div className="pricing-cloud">
-                                <h4>Much less expensive for higher volume usage. Pay just for what you use.</h4>
+                                <h4>For those with high volume usage or privacy needs.</h4>
                                 <div>
-                                    Our pricing is logarithmic and gets much, much less expensive at scale with VPC
-                                    deployment. No setup fee or minimum commitment.
+                                    You host, we manage it. Pricing is logarithmic and gets much less expensive at
+                                    scale. No setup fee.
                                 </div>
 
                                 <div>
                                     <div className="main-price">
                                         <div>
-                                            <DollarCircleTwoTone style={{ marginRight: 6 }} />$
-                                            {priceSimulation < 10000000 ? <>0.000225</> : <>0.000045</>}/event
-                                            <span>per month</span>
+                                            ${state.unitPricing}
+                                            <span>/additional event ingested</span>
                                         </div>
                                     </div>
                                     <div>
                                         <Slider
                                             defaultValue={250000}
                                             min={10000}
-                                            max={100000000}
+                                            max={150000000}
                                             step={20000}
                                             tooltipVisible
-                                            tipFormatter={(value) => value.toLocaleString()}
-                                            onChange={(value) => setPriceSimulation(value)}
+                                            tipFormatter={(value) =>
+                                                value.toLocaleString().concat(' events ingested /month')
+                                            }
+                                            onChange={
+                                                ((value) => setPriceSimulation(value), (value) => checkScale(value))
+                                            }
                                         />
                                         <div style={{ fontSize: '1rem', textAlign: 'right' }}>
                                             {priceSimulation < 10000000 ? (
                                                 <>
-                                                    <span className="text-muted">Monthly estimate:</span>{' '}
+                                                    <span className="text-muted">Price:</span>{' '}
                                                     <b>${Math.round(priceSimulation * 0.000225).toLocaleString()}</b>
+                                                    /month
                                                 </>
                                             ) : (
                                                 <>
-                                                    <span className="text-muted">Monthly estimate:</span>{' '}
+                                                    <span className="text-muted">Price:</span>{' '}
                                                     <b>
                                                         $
                                                         {Math.round(
@@ -196,103 +209,59 @@ const PricingPage = () => {
                                                                 (priceSimulation - 10000000) * 0.000045
                                                         ).toLocaleString()}
                                                     </b>
+                                                    /month
                                                 </>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-
+                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                    Minimum price <b>$200</b> / month. <b>No setup cost</b>.
+                                </div>
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
                                     Unsure about your numbers or want to talk?{' '}
                                     <a href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry">Contact us</a>.
                                 </div>
-
-                                <Card className="feature-card">
-                                    <div className="plan-image">
-                                        <img src={imgCloudPlan} alt="" className="inline-block" />
-                                    </div>
-                                    <div className="text-center">
-                                        <h5>Features included</h5>
-                                    </div>
-                                    <ul style={{ listStyle: 'none' }}>
-                                        <li>
-                                            Deployed on <b>your infrastructure</b>, managed by <b>us</b>.
-                                        </li>
-                                        <li>
-                                            <b>Unlimited</b> event allocation. Pay only for what you use.
-                                        </li>
-                                        <li>
-                                            <b>Unlimited</b> tracked users
-                                        </li>
-                                        <li>
-                                            <b>Unlimited</b> team members
-                                        </li>
-                                        <li>
-                                            <b>Unlimited</b> projects
-                                        </li>
-                                        <li>
-                                            <b>7 years</b> of data retention
-                                            <span className="disclaimer">
-                                                <a href="#disclaimer-1">1</a>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <b>All core analytics features</b>
-                                        </li>
-                                        <li>
-                                            Session recording with unlimited storage
-                                            <span className="disclaimer">
-                                                <a href="#disclaimer-2">2</a>
-                                            </span>
-                                        </li>
-                                        <li>Feature flags</li>
-                                        <li>Plugins &amp; other integrations</li>
-                                        <li>Zapier integration</li>
-                                        <li>SSO/SAML</li>
-                                        <li>Export to data lakes</li>
-                                        <li>Community, Slack &amp; Email support</li>
-                                    </ul>
-                                    For companies using on average 1,000,000 events per month or more, we offer{' '}
-                                    <b>priority support</b>.
-                                </Card>
                             </div>
                         )}
                         {state.planOptions === 'cloud' && (
                             <div className="pricing-cloud">
                                 <h4>One Price. Pay only for what you use.</h4>
                                 <div>
-                                    Get all the features with a straight and transparent pricing. Pay based on the
-                                    events you <b>capture</b> every month.
+                                    Get all the features with zero-minimum pricing. Pay based on the events you{' '}
+                                    <b>capture</b> every month.
                                 </div>
 
                                 <div>
                                     <div className="main-price">
                                         <div>
-                                            <DollarCircleTwoTone style={{ marginRight: 6 }} />
-                                            $0.000225/event
-                                            <span>per month</span>
+                                            $0.000225
+                                            <span>/ additional event ingested</span>
                                         </div>
                                     </div>
                                     <div>
                                         <Slider
                                             defaultValue={250000}
                                             min={10000}
-                                            max={100000000}
+                                            max={150000000}
                                             step={20000}
                                             tooltipVisible
-                                            tipFormatter={(value) => value.toLocaleString()}
+                                            tipFormatter={(value) =>
+                                                value.toLocaleString().concat(' events ingested /month')
+                                            }
                                             onChange={(value) => setPriceSimulation(value)}
                                         />
                                         <div style={{ fontSize: '1rem', textAlign: 'right' }}>
                                             {priceSimulation < 1000000000 ? (
                                                 <>
-                                                    <span className="text-muted">Monthly estimate:</span>{' '}
+                                                    <span className="text-muted">Price:</span>{' '}
                                                     <b>
                                                         $
                                                         {Math.round(
                                                             (priceSimulation - 10000) * 0.000225
                                                         ).toLocaleString()}
                                                     </b>
+                                                    /month
                                                 </>
                                             ) : (
                                                 <>
@@ -307,7 +276,7 @@ const PricingPage = () => {
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    First <b>10,000 events are free</b> every single month. For everyone.
+                                    First <b>10,000 events are free</b> every single month.
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
@@ -316,72 +285,6 @@ const PricingPage = () => {
                                         Contact us
                                     </a>
                                     .
-                                </div>
-
-                                <Card className="feature-card">
-                                    <div className="plan-image">
-                                        <img src={imgCloudPlan} alt="" className="inline-block" />
-                                    </div>
-                                    <div className="text-center">
-                                        <h5>Features included</h5>
-                                    </div>
-                                    <ul style={{ listStyle: 'none' }}>
-                                        <li>
-                                            <b>Unlimited</b> event allocation. Pay only for what you use.
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>Unlimited</b> tracked users
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>Unlimited</b> team members
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>Unlimited</b> projects
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>7 years</b> of data retention
-                                            <span className="disclaimer">
-                                                <a href="#disclaimer-1">1</a>
-                                            </span>
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>All core analytics features</b>
-                                        </li>
-                                        <li className="mt-2">
-                                            Session recording with unlimited storage
-                                            <span className="disclaimer">
-                                                <a href="#disclaimer-2">2</a>
-                                            </span>
-                                        </li>
-                                        <li className="mt-2">Feature flags</li>
-                                        <li className="mt-2">Plugins &amp; other integrations</li>
-                                        <li className="mt-2">Zapier integration</li>
-                                        <li className="mt-2">SSO/SAML</li>
-                                        <li className="mt-2">Export to data lakes</li>
-                                        <li className="mt-2">Community, Slack &amp; Email support</li>
-                                    </ul>
-                                    For companies using on average 1,000,000 events per month or more, we offer{' '}
-                                    <b>priority support</b>.
-                                </Card>
-                            </div>
-                        )}
-                        <Col span={24} align="middle">
-                            All prices in US Dollars (USD), excluding taxes
-                        </Col>
-                        <Col span={24} align="middle">
-                            <Link to="/product-features" className="p-features-link">
-                                Full features details <img alt="" src={imgChevronRight} />
-                            </Link>
-                        </Col>
-                        {state.planOptions === 'cloud' && (
-                            <div className="disclaimer-details">
-                                <div id="disclaimer-1">
-                                    1. Data may be moved to cold storage after 12 months. Queries that involve data in
-                                    cold storage can take longer than normal to run.
-                                </div>
-                                <div id="disclaimer-2">
-                                    2. While there is no restriction on session recording storage, session recording
-                                    information is captured and stored as normal events and therefore billed as such.
                                 </div>
                             </div>
                         )}
@@ -414,7 +317,7 @@ const PricingPage = () => {
                                     <div className="p-comparison-btn">
                                         <a href="https://app.posthog.com/signup">
                                             <Button type="primary" size="large">
-                                                Start my 30-day free trial
+                                                Start free
                                             </Button>
                                         </a>
                                     </div>
@@ -443,7 +346,7 @@ const PricingPage = () => {
                                         <Button
                                             type="primary"
                                             size="large"
-                                            href="mailto:sales@posthog.com?title=Start enterprise deployment"
+                                            href="mailto:sales@posthog.com?title=Start vpc deployment"
                                         >
                                             Contact sales
                                         </Button>
@@ -500,8 +403,8 @@ const PricingPage = () => {
                                     <li>We'll apply the 50% discount to your account.</li>
                                 </ol>
                                 <div>
-                                    To redeem the offer for Enterprise plans just{' '}
-                                    <a href="mailto:sales@posthog.com?subject=Non-profit%20enterprise%20plan">
+                                    To redeem the offer for VPC plans just{' '}
+                                    <a href="mailto:sales@posthog.com?subject=Non-profit%vpc%20plan">
                                         send us an email
                                     </a>
                                     .

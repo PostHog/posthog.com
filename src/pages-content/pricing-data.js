@@ -76,32 +76,45 @@ const faqs = [
     {
         q: 'How do I know what my volume is?',
         a:
-            'We provide a free trial on our Cloud plan. This allows you to get a sense of what your volume is. If you have very high volumes (10s-100s of thousands of users, our enterprise product is probably the most cost effective.',
+            'The easiest way is to enable a cloud plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is. If you have very high volumes (10M+ monthly events, 100K+ monthly users, our VPC product is probably the most cost effective.',
     },
     {
         q: 'Is there a free trial on paid plans?',
         a:
-            'Yes! When you activate your Cloud plan, you will get the first 30 days for free (regardless of usage). In addition, every month your first 10,000 events are free.',
+            'Yes! When you activate your Cloud plan, you will get the first 10k events free permanently. If you want to trial the VPC plan, we recommend keeping the volume very low so any fees are negligible - contact sale@posthog.com to discuss.',
     },
     {
         q: 'What happens after the data retention period elapses?',
         a:
-            'On the Cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Enterprise and Open Source plans, you control your data retention and what happens to your data afterwards.',
+            'On the Cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the VPC plan, you control your data retention and what happens to your data afterwards.',
     },
     {
         q: 'Do I pay anything for stored events?',
         a:
-            'No, you only pay the flat fee per captured event (i.e. you only pay when each event is first received). There are no additional costs or fees.',
+            'No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.',
     },
     {
-        q: 'Can I switch between the Cloud and Enterprise plans?',
-        a:
-            'We are working hard to enable a bridge that allows data transfer between cloud instances and enterprise instances. This will be possible in the coming months.',
+        q: 'Can I switch between the Cloud and VPC plans?',
+        a: 'Yes, just email our support team (hey@posthog.com). We will manually transfer your data, free.',
     },
     {
         q: 'Are there any minimums or annual commitments?',
         a:
-            'Our Cloud plan is simple, pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing. As our enterprise plans are custom for each company, we handle this case-by-case. Ask us.',
+            'No! Our cloud and VPC plans are simple, pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing.',
+    },
+    {
+        q: 'What currency are your prices in?',
+        a: 'All prices are in US Dollars (USD), excluding taxes.',
+    },
+    {
+        q: 'How long do you retain data?',
+        a:
+            'Data in PostHog Cloud is retained for 7 years - after 1 year, data is moved into cold storage so queries may run more slowly. For VPC deployment we configure this with you.',
+    },
+    {
+        q: 'Does session recording impact costs?',
+        a:
+            'Session recording generates events which are billed the same as any other event type. You can tightly control where it is used to manage the cost.',
     },
 ]
 
