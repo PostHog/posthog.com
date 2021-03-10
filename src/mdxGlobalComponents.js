@@ -22,7 +22,6 @@ import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
 import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
-import { styles } from './components/LandingPage/styles'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
@@ -62,7 +61,6 @@ export const shortcodes = {
     Roadmap,
     SocialProof,
     Tutorials,
-    styles,
     NewsletterForm,
     OtherFeaturesBlock,
     PageHeader,

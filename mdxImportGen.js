@@ -12,7 +12,7 @@ const getComponentsInDir = (dir, components = []) => {
             subdirectories.push(f)
             continue
         }
-        if (!indexFileInDir && f.includes('index')) {
+        if (!indexFileInDir && f.includes('index') && !f.includes('css')) {
             indexFileInDir = true
         }
     }
