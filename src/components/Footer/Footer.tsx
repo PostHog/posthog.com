@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
-import NewsletterSignup from './NewsletterSignup'
+import { NewsletterForm } from '../NewsletterForm'
 import logo from '../../images/posthog-hog-transparent.svg'
 
 interface FooterListItemProps {
@@ -52,7 +52,7 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
 }
 
 export const Footer = ({ onPostPage, showNewsletter = false }: { onPostPage: boolean; showNewsletter?: boolean }) => {
-    const newsletterSignup = showNewsletter ? <NewsletterSignup /> : null
+    const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
     const { websiteTheme } = useValues(layoutLogic)
     const bgClass = onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
 
