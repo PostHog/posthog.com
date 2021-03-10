@@ -1,7 +1,9 @@
 module.exports = {
     purge: {
         content: ['./src/**/*.{js,jsx,ts,tsx}'],
-        safelist: ['w-full', 'w-56', 'w-64', 'w-72'],
+        options: {
+            safelist: ['w-full', 'w-56', 'w-64', 'w-72'],
+        },
     },
     darkMode: false, // or 'media' or 'class'
     theme: {
