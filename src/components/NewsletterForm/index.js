@@ -30,7 +30,7 @@ export class NewsletterForm extends React.Component {
                                 and trust me you don’t want to miss a thing.
                             </p>
                             <p className="opacity-80 mt-2 text-sm">
-                                Plus if you decide that these emails aren’t brightening your day, you can unsuscribe at
+                                Plus if you decide that these emails aren’t brightening your day, you can unsubscribe at
                                 any time, no hard feelings.
                             </p>
                         </div>
