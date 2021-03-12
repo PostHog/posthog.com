@@ -14,7 +14,7 @@ I take care of all things business ops-related at Posthog, across finance, peopl
 
 I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [designer houses](https://www.themodernhouse.com/) I will never live in. I like to occasionally torment my son with my piano playing and spend more time than is probably reasonable making lists of things, à la [High Fidelity](https://en.wikipedia.org/wiki/High_Fidelity_(film)).
 
-## Areas of responsibility
+## Areas of responsibility
 
 - Making sure all our business operations run smoothly
 - All of our finance stuff (accounting, tax etc.)
