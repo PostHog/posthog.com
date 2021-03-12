@@ -75,4 +75,4 @@ Future posts in this series will cover our fast-follow seed and series A rounds 
 
 If you haven’t tried PostHog yet what are you waiting for? We’re a fast growing, developer-first, and open source product analytics platform you can’t afford to miss.
 
-[Try PostHog Cloud](https://app.posthog.com/signup), get started in lest than a minute.
+[Try PostHog Cloud](https://app.posthog.com/signup), get started in less than a minute.
