@@ -13,11 +13,13 @@ I began this journey because I had spent a lot of time in the world of enterpris
 
 <iframe src="https://giphy.com/embed/Ihs8jRSnrj5JeXOyNO" width="480" height="343" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fallontonight-jimmy-fallon-tonight-show-starring-Ihs8jRSnrj5JeXOyNO">via GIPHY</a></p>
 
-## You may be able to make quitting your job pretty low risk
+## Quitting your job can be the most sensible thing to do
 
 Risk is different depending on your skills and experience. Take a look at the demand for your services on the open market. Will the market demand hold for a year or two? Do you have experience contracting or freelancing? If not, do your research and experiment so that you can find your true risk profile - it could be much lower risk than you think.
 
 Tim and I both code but he’s the stronger developer so he went full-time and I negotiated to go part time 2 days a week. That money went straight into the business. I had a mortgage to pay and it minimized our shared risk and allowed us to get coworking space, pay for tools and ads without drawing on savings.
+
+Quite simply, we would spend a set amount of our savings and time, and if it didn't work out, we were fortunate enough to know we'd probably be able to get another job. That takes a lot of privilege because of years working in tech, and our lives leading up to that, and we can only imagine how the world could look now if that were the case for more people.
 
 ## You’ll have to decide to bootstrap or go for VC
 
