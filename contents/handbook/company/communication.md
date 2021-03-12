@@ -25,7 +25,13 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 1. When someone asks for something, reply back with a deadline or by noting that you already did it. Answers like: 'will do', 'OK', or 'it is on my todo list' are not helpful. If it is small task for you but will unblock someone else, consider spending a few minutes to do the task so the other person can move forward.
 1. By default, avoid creating private groups for internal discussions. 
 
-We make things public by default because [transparency is part of Communication, one of our values](/handbook/values/#communication). The only kinds of things that are not public by default include security vulnerabilities, financial information, confidential agreements we have with external parties, and personal information about our users or the PostHog team.
+## Public by default
+
+We make things public by default because [transparency is part of Communication, one of our values](/handbook/values/#communication). The kinds of information we share falls into one of three buckets:
+
+- _Public_ - most things, including our product, roadmap, handbook and strategy. 
+- _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
+- _Private internally_ - personal team information, ie. compensation, disciplinary issues.
 
 ## Written Communication
 
