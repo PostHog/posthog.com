@@ -12,10 +12,7 @@ export const RecentBlogPosts = () => {
                 <p className="text-white opacity-80 text-center mt-2 text-sm">Follow our journey as we grow</p>
 
                 <div className="mt-12 flex flex-col lg:flex-row justify-between">
-                    <Link
-                        to="/blog/story-about-pivots"
-                        className="bg-purple-500 bg-opacity-10 hover:bg-opacity-20 p-6 w-full lg:w-2/3 lg:mr-2 rounded flex flex-col lg:flex-row justify-between items-stretch"
-                    >
+                    <div className="bg-purple-500 bg-opacity-10 p-6 w-full lg:w-2/3 lg:mr-2 rounded flex flex-col lg:flex-row justify-between items-stretch">
                         <div className="w-full lg:w-1/3 mr-2">
                             <img src={blogPostImg} className="w-full mb-0" />
                         </div>
@@ -35,8 +32,18 @@ export const RecentBlogPosts = () => {
                             </p>
 
                             <p className="mt-1 opacity-70 text-sm">This is that story and what we learned from it.</p>
+
+                            <CallToAction
+                                type="secondary"
+                                className="mx-0 mt-4"
+                                to="/blog/story-about-pivots"
+                                icon="book"
+                                width={64}
+                            >
+                                Continue reading
+                            </CallToAction>
                         </div>
-                    </Link>
+                    </div>
 
                     <div className="bg-purple-500 bg-opacity-10 p-6 w-full mt-2 lg:mt-0 lg:w-1/3 lg:ml-2 rounded text-white">
                         <span className="block opacity-70">Popular articles</span>
@@ -75,7 +82,7 @@ export const RecentBlogPosts = () => {
                     </div>
                 </div>
 
-                <CallToAction type="secondary" className="mt-12" to="/blog" icon="book">
+                <CallToAction type="secondary" className="mt-12 mx-auto" to="/blog" icon="book">
                     Visit Blog
                 </CallToAction>
             </div>

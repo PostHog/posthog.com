@@ -18,7 +18,7 @@ const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }: ProductIconData
     const expectedLabel = expectedLaunchDate ? <span className="text-white font-thin">{expectedLaunchDate}</span> : null
 
     return (
-        <div className={`text-center mx-4 flex flex-col ${opacity}`}>
+        <div className={`text-center px-2 mt-8 md:mt-0 lg:px-4 flex flex-col w-1/2 md:w-auto ${opacity}`}>
             <div className="h-12 flex items-center justify-around">
                 <img src={icon} alt={label} className="mb-0 block mx-auto" />
             </div>
@@ -30,19 +30,13 @@ const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }: ProductIconData
 
 export const ProductFeatureIcons = () => {
     return (
-        <div className="flex justify-between items-stretch flex-col md:flex-row my-16">
+        <div className="flex justify-around lg:justify-between items-stretch flex-row flex-wrap my-16">
             <ProductFeatureIcon label="Analytics" icon={analyticsImg} />
-
             <ProductFeatureIcon label="Heatmaps" icon={heatmapsImg} />
-
             <ProductFeatureIcon label="Session Replay" icon={sessionReplayImg} />
-
             <ProductFeatureIcon label="Feature Flags" icon={featureFlagsImg} />
-
             <ProductFeatureIcon label="A/B Testing" icon={featureFlagsImg} expectedLaunchDate="May" />
-
             <ProductFeatureIcon label="User Feedback" icon={userFeedbackImg} expectedLaunchDate="June" />
-
             <ProductFeatureIcon label="Revenue Tracking" icon={revenueTrackingImg} expectedLaunchDate="August" />
         </div>
     )

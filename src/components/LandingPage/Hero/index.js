@@ -19,10 +19,10 @@ export const Hero = () => {
                     <ProductFeatureIcons />
                 </div>
 
-                <CallToAction icon="rocket" href="https://app.posthog.com/signup">
+                <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
                     Get Started
                 </CallToAction>
-                <CallToAction icon="calendar" type="secondary" className="mt-3" to="/schedule-demo">
+                <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
                     Book a demo
                 </CallToAction>
 

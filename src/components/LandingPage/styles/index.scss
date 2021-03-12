@@ -10,7 +10,9 @@
 
 .bg-pipes {
     background: url(../images/pipes.svg), linear-gradient(180deg, #2b114d 0%, #2a235b 100%);
-    background-size: cover;
+    background-size: contain;
+    background-position: top center;
+    background-repeat: no-repeat;
 }
 
 .social-proof {

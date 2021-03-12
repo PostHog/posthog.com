@@ -9,12 +9,12 @@ import spacexLogo from '../images/SocialProofLogos/spacex.svg'
 import ycombinatorLogo from '../images/SocialProofLogos/ycombinator.svg'
 import staplesLogo from '../images/SocialProofLogos/staples.svg'
 
-const Logo = ({ logo, alt }) => <img src={logo} alt={alt} className="p-4" />
+const Logo = ({ logo, alt }) => <img src={logo} alt={alt} className="p-6" />
 
 export const SocialProof = () => {
     return (
         <div className="mt-24">
-            <div className="w-11/12 max-w-2xl mx-auto flex justify-around flex-row flex-wrap">
+            <div className="w-11/12 max-w-3xl mx-auto flex justify-around flex-row flex-wrap">
                 <Logo logo={airbalticLogo} alt="Airbaltic" />
                 <Logo logo={dataikuLogo} alt="Dataiku" />
                 <Logo logo={landmarkLogo} alt="Landmark Group" />

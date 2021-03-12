@@ -16,7 +16,7 @@ export const Roadmap = () => (
                 to="/handbook/strategy/roadmap"
                 type="custom"
                 width="64"
-                className="mt-8 bg-purpleish text-white hover:bg-purpleish-dark hover:text-white border-purpleish-dark"
+                className="mt-8 bg-purpleish text-white hover:bg-purpleish-dark hover:text-white border-purpleish-dark mx-auto"
             >
                 Explore Roadmap
             </CallToAction>

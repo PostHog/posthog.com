@@ -57,7 +57,7 @@ export const CallToAction = ({
     ) : null
 
     const widthClass = `w-${width}`
-    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm flex items-center justify-between mx-auto`
+    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm flex items-center justify-between`
     const classList = [baseClasses, buttonTypeClasses[type], className].join(' ')
 
     const innerHtml = (

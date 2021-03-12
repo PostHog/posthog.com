@@ -111,3 +111,13 @@ ul {
 .bg-footer {
     background: #08042f;
 }
+
+.contributor-images > a {
+    @apply rounded p-1;
+}
+
+.contributor-images > a > img {
+    margin-bottom: 0 !important;
+
+    @apply rounded;
+}

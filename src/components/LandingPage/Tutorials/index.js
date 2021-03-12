@@ -7,17 +7,17 @@ import funnelsImg from '../images/funnels.png'
 
 export const Tutorials = () => {
     return (
-        <div className="bg-pipes py-24 -my-1">
+        <div className="bg-pipes py-24 -my-6">
             <div className="w-11/12 max-w-3xl mx-auto">
                 <h3 className="text-white text-center">Hop aboard</h3>
                 <p className="text-white opacity-80 mt-1 text-center">
                     Don’t get left behind. Join 2,700 companies using PostHog.
                 </p>
 
-                <CallToAction icon="rocket" href="https://app.posthog.com/signup">
+                <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
                     Get Started
                 </CallToAction>
-                <CallToAction icon="calendar" type="secondary" className="mt-3" to="/schedule-demo">
+                <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
                     Book a demo
                 </CallToAction>
             </div>
@@ -60,7 +60,7 @@ export const Tutorials = () => {
                     </Link>
                 </div>
 
-                <CallToAction type="secondary" className="mt-8" to="/docs/tutorials" icon="book" width="72">
+                <CallToAction type="secondary" className="mt-8 mx-auto" to="/docs/tutorials" icon="book" width="72">
                     See all tutorials
                     <span className="text-xs text-white text-opacity-50 ml-1">13</span>
                 </CallToAction>
