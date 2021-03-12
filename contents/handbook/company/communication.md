@@ -33,6 +33,8 @@ We make things public by default because [transparency is part of Communication,
 - _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
 - _Private internally_ - personal team information, ie. compensation, disciplinary issues.
 
+Information that is not publically shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
+
 ## Written Communication
 
 ### GitHub
