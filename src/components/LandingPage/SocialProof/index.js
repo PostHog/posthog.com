@@ -8,21 +8,25 @@ import hasuraLogo from '../images/SocialProofLogos/hasura.svg'
 import spacexLogo from '../images/SocialProofLogos/spacex.svg'
 import ycombinatorLogo from '../images/SocialProofLogos/ycombinator.svg'
 import staplesLogo from '../images/SocialProofLogos/staples.svg'
+import webinyLogo from '../images/SocialProofLogos/webiny.svg'
 
-const Logo = ({ logo, alt }) => <img src={logo} alt={alt} className="p-6" />
+const Logo = ({ logo, alt }) => <img src={logo} alt={alt} className="px-2" />
 
 export const SocialProof = () => {
     return (
         <div className="mt-24">
-            <div className="w-11/12 max-w-3xl mx-auto flex justify-around flex-row flex-wrap">
-                <Logo logo={airbalticLogo} alt="Airbaltic" />
+            <div className="w-11/12 max-w-3xl mx-auto mb-4 flex justify-center sm:justify-between flex-row flex-wrap">
                 <Logo logo={dataikuLogo} alt="Dataiku" />
-                <Logo logo={landmarkLogo} alt="Landmark Group" />
-                <Logo logo={tinkoffLogo} alt="Tinkoff" />
                 <Logo logo={hasuraLogo} alt="Hasura" />
-                <Logo logo={spacexLogo} alt="Spacex" />
-                <Logo logo={ycombinatorLogo} alt="Ycombinator" />
+                <Logo logo={ycombinatorLogo} alt="Y Combinator" />
                 <Logo logo={staplesLogo} alt="Staples" />
+                <Logo logo={spacexLogo} alt="Spacex" />
+            </div>
+            <div className="w-11/12 max-w-3xl mx-auto flex justify-around flex-row flex-wrap">
+                <Logo logo={webinyLogo} alt="Webiny" />
+                <Logo logo={landmarkLogo} alt="Landmark Group" />
+                <Logo logo={airbalticLogo} alt="Airbaltic" />
+                <Logo logo={tinkoffLogo} alt="Tinkoff" />
             </div>
 
             <div className="w-11/12 max-w-3xl mx-auto mt-24 bg-purple-500 bg-opacity-20 rounded p-8 text-center text-white brackets brackets-lg">
