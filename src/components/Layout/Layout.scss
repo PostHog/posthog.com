@@ -218,13 +218,14 @@ html {
 body {
     color: hsla(0, 0%, 0%, 0.8);
     font-family: 'Good Sans', Helvetica, Arial, sans-serif !important;
-    font-weight: normal;
-    word-wrap: break-word;
     font-kerning: normal;
+    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    font-weight: normal;
+    overflow-x: hidden;
+    word-wrap: break-word;
 }
 img {
     max-width: 100%;
@@ -249,7 +250,7 @@ h1 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 42px;
+    font-size: 48px;
     line-height: 150%;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
@@ -266,7 +267,7 @@ h2 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 36px;
+    font-size: 40px;
     line-height: normal;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;

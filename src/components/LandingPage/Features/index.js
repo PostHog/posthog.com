@@ -7,7 +7,7 @@ export const Features = () => {
     return (
         <div className="features py-12 text-white text-center">
             <div className="w-11/12 max-w-4xl mx-auto">
-                <h3>A single platform that does it all</h3>
+                <h2>A single platform that does it all</h2>
                 <p className="opacity-80 mt-1 text-center">
                     PostHog eliminates the need for multiple tools that weren’t built to work together.
                 </p>

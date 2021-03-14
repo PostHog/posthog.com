@@ -19,7 +19,7 @@ export const PrivateCloud = () => {
     return (
         <div className="private-cloud pt-24 text-white text-center">
             <div className="w-11/12 max-w-5xl mx-auto">
-                <h3>Host on your own private cloud</h3>
+                <h2>Host on your own private cloud</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
                     Optionally host PostHog yourself with a private cloud deployment - a great solution for
                     privacy-conscious and compliance-oriented companies.
