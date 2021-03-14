@@ -16,7 +16,7 @@ We have a few different routes for users to contact us. As an open source compan
 
 These are the ways in which customers can currently reach us, in order of popularity:
 
-- **Slack** - our active [PostHog Users Slack](posthogusers.slack.com) community frequently post questions
+- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions
 - **Email** - a user may email hey@ with a specific support query
 - **Papercups** - we provide in-app support chat via the [Papercups](https://papercups.io/) widget
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
@@ -42,7 +42,7 @@ The first time you sign into Papercups, please make sure you include your name a
 A quick overview of Papercups' main features:
 
 - _Main conversations view_: when you sign into Papercups, you can either [view all conversations](https://app.papercups.io/conversations/all), or just those [assigned to you](https://app.papercups.io/conversations/me). If you are the first person to respond to a query, you will be automatically assigned that conversation. Don't forget to close a conversation by ticking the box in the top right when you are done, so we know which queries have been resolved!  
-- _Slack integration (1)_: You can reply directly to PostHog app questions either in the Papercups app itself or in the private _customer_support_ channel in the [PostHog Users Slack](http://posthogusers.slack.com/) - both work.
+- _Slack integration (1)_: You can reply directly to PostHog app questions either in the Papercups app itself or in the private _customer_support_ channel in the [PostHog Users Slack](http://posthog.com/slack) - both work.
 - _Slack integration (2)_: In the PostHog Users Slack, messages posted in the _general_ and _feedback_ channels are also synced with the Papercups app. As above, this means you can reply to users in that Slack channel directly or in Papercups. Please try to reply in a Slack thread to any questions. This makes it easier for other users to navigate the channel without a lot of noise, and also prevents Papercups creating a new conversation for each response (as Papercups treats each thread in Slack as a conversation).
 - _Notes_: You can leave a 'Private Note' in the right hand pane in Papercups if you need to make a note of something for future reference, e.g. a relevant GitHub issue.
 - _Sharing_: If you click 'Share Conversation' at the bottom of the right hand pane in the Papercups app, you can link directly to a conversation. This is useful for sharing context with other team members.
