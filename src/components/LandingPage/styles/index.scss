@@ -1,7 +1,39 @@
 .hero {
     background: url(../images/hero-bg.svg), linear-gradient(180deg, #220f3f 0%, #2c1e60 100%);
     background-position: center center;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
+    position: relative;
+
+    &:before {
+        background: url(../images/rocket.svg);
+        bottom: -6%;
+        content: '';
+        display: none;
+        height: 939px;
+        position: absolute;
+        left: 3%;
+        width: 174px;
+
+        @media (min-width: 640px) {
+            display: block;
+        }
+    }
+
+    &:after {
+        background: url(../images/moon.svg);
+        content: '';
+        height: 539px;
+        position: absolute;
+        right: -10%;
+        top: -1%;
+        width: 539px;
+        zoom: 0.5;
+
+        @media (min-width: 640px) {
+            top: -5%;
+            zoom: 1;
+        }
+    }
 }
 
 .spotlight {
