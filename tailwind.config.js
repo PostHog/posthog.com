@@ -19,6 +19,7 @@ module.exports = {
                 'primary-dark': 'rgba(218, 72, 16, 0.9)',
                 purpleish: '#802f6a',
                 'purpleish-dark': '#72286E',
+                orange: '#FFB877',
             },
             minHeight: {
                 780: '780px',
