@@ -35,8 +35,9 @@ const icons = {
 
 const buttonTypeClasses = {
     secondary:
-        'bg-transparent border-2 border-white border-opacity-30 text-white hover:bg-white hover:bg-opacity-10 hover:text-white',
-    primary: 'bg-primary border-primary text-white hover:border-primary-dark hover:bg-primary-dark hover:text-white',
+        'bg-transparent border-3 border-white border-opacity-30 text-white mt-2 hover:bg-white hover:bg-opacity-10 hover:text-white',
+    primary:
+        'brackets rounded-sm bg-primary border-primary text-white hover:border-primary-dark hover:bg-primary-dark hover:text-white',
     custom: '',
 }
 
@@ -45,25 +46,25 @@ export const CallToAction = ({
     type = 'primary',
     icon = 'none',
     children,
-    width = '56',
+    width = '64',
     href,
     to,
     onClick,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
-        <div className="bg-opacity-10 bg-yellow-100 rounded rounded-sm p-1 mr-8">
+        <div className="bg-opacity-10 bg-yellow-100 rounded rounded-sm p-2 mr-8">
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
         </div>
     ) : null
 
     const widthClass = `w-${width}`
-    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm flex items-center justify-between`
+    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm inline-flex items-center justify-between select-none text-base font-gosha`
     const classList = [baseClasses, buttonTypeClasses[type], className].join(' ')
 
     const innerHtml = (
         <>
             {iconNode}
-            <div className="mr-8">{children}</div>
+            <div className="mr-8 button-label">{children}</div>
             <span></span>
         </>
     )

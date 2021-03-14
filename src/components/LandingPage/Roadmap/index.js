@@ -15,7 +15,7 @@ export const Roadmap = () => (
                 icon="roadmap"
                 to="/handbook/strategy/roadmap"
                 type="custom"
-                width="64"
+                width="72"
                 className="mt-8 bg-purpleish text-white hover:bg-purpleish-dark hover:text-white border-purpleish-dark mx-auto"
             >
                 Explore Roadmap

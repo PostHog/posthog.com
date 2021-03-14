@@ -12,13 +12,15 @@
     font-family: 'Good Sans';
     src: url('/fonts/GoodSans-Medium.woff') format('woff');
     src: url('/fonts/GoodSans-Medium.woff2') format('woff2');
+    font-weight: normal;
 }
 
 /* Good Sans Bold */
 @font-face {
-    font-family: 'Good Sans Bold';
+    font-family: 'Good Sans';
     src: url('/fonts/GoodSans-Bold.woff') format('woff');
     src: url('/fonts/GoodSans-Bold.woff2') formt('woff2');
+    font-weight: bold;
 }
 
 html {

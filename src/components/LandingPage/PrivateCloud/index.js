@@ -66,7 +66,7 @@ export const PrivateCloud = () => {
 
                             <CallToAction
                                 type="custom"
-                                className="bg-purpleish text-white hover:text-white hover:bg-purpleish-dark border-purpleish-dark border-2"
+                                className="bg-purpleish brackets border-3 text-white hover:text-white hover:bg-purpleish-dark border-purpleish-dark"
                                 icon="github"
                                 width="full"
                                 href="https://github.com/posthog"

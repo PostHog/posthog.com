@@ -24,6 +24,13 @@ module.exports = {
             minHeight: {
                 780: '780px',
             },
+            borderRadius: {
+                sm: '4px',
+                lg: '20px',
+            },
+            borderWidth: {
+                3: '3px',
+            },
         },
     },
     variants: {

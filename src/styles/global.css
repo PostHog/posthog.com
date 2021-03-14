@@ -23,8 +23,7 @@ ul {
 }
 
 .bg-primary {
-    background: rgba(255, 99, 39, 0.9);
-    border-color: rgba(255, 99, 39, 0.9);
+    background: linear-gradient(91.54deg, rgba(255, 99, 39, 0.9) 0%, rgba(248, 88, 27, 0.9) 100%);
 }
 
 .bg-primary-dark {
@@ -68,7 +67,7 @@ ul {
             #f7a501 360deg
         ),
         rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
+    border-radius: 20px;
     bottom: -8px;
     content: '';
     position: absolute;

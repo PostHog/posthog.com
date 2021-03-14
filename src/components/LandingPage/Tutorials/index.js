@@ -14,12 +14,14 @@ export const Tutorials = () => {
                     Don’t get left behind. Join 2,700 companies using PostHog.
                 </p>
 
-                <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
-                    Get Started
-                </CallToAction>
-                <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
-                    Book a demo
-                </CallToAction>
+                <div className="flex flex-col">
+                    <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
+                        Get Started
+                    </CallToAction>
+                    <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
+                        Book a demo
+                    </CallToAction>
+                </div>
             </div>
 
             <div className="mt-24 text-center text-white w-11/12 max-w-4xl mx-auto">

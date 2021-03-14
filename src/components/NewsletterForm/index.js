@@ -20,7 +20,7 @@ export class NewsletterForm extends React.Component {
             <div className="w-11/12 max-w-4xl mx-auto mb-48">
                 <div className="bg-neon w-full h-full p-1 rounded">
                     <div
-                        className="rounded flex justify-between flex-col lg:flex-row p-8 relative z-10"
+                        className="rounded-lg flex justify-between flex-col lg:flex-row p-8 relative z-10"
                         style={{ backgroundColor: '#08042f' }}
                     >
                         <div className="w-full lg:w-2/3 lg:mr-4 text-white">
@@ -53,10 +53,10 @@ export class NewsletterForm extends React.Component {
                                     <input
                                         type="email"
                                         name="EMAIL"
-                                        className="block w-full py-2 px-3 bg-white text-gray-900 rounded mt-1"
+                                        className="block w-full py-2 px-3 bg-white text-gray-900 rounded my-1"
                                         id="mce-EMAIL"
                                         onChange={this.handleChange}
-                                        placeholder="email address"
+                                        placeholder="Email address"
                                         value={this.state.email}
                                         required
                                     />
@@ -70,13 +70,7 @@ export class NewsletterForm extends React.Component {
                                         />
                                     </div>
                                     <div className="clear">
-                                        <CallToAction
-                                            type="secondary"
-                                            icon="check"
-                                            width="full"
-                                            className="mt-2"
-                                            submit={true}
-                                        >
+                                        <CallToAction type="secondary" icon="check" width="full" submit={true}>
                                             Join the List
                                         </CallToAction>
                                     </div>

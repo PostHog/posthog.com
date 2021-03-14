@@ -38,7 +38,7 @@ export const RecentBlogPosts = () => {
                                 className="mx-0 mt-4"
                                 to="/blog/story-about-pivots"
                                 icon="book"
-                                width={64}
+                                width="full"
                             >
                                 Continue reading
                             </CallToAction>
@@ -82,9 +82,11 @@ export const RecentBlogPosts = () => {
                     </div>
                 </div>
 
-                <CallToAction type="secondary" className="mt-12 mx-auto" to="/blog" icon="book">
-                    Visit Blog
-                </CallToAction>
+                <div className="flex">
+                    <CallToAction type="secondary" className="mt-12 mx-auto" to="/blog" icon="book">
+                        Visit Blog
+                    </CallToAction>
+                </div>
             </div>
         </div>
     )
