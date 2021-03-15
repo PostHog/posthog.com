@@ -920,6 +920,7 @@ a.ant-anchor-link-title:hover {
     color: white;
     vertical-align: bottom;
     left: calc((100% - 960px) * 0.5 + 2.175rem);
+    max-width: 960px;
 }
 
 .blogHeaderTitle h1 {
