@@ -14,6 +14,7 @@ There are plenty of product analytics tools out there, but all the alternatives 
 
 * We didn't want to send all our user data to 3rd parties.
 * We wanted full underlying data access.
+* They don't give you choice and control over pricing.
 
 ## Launch - February, 2020
 
