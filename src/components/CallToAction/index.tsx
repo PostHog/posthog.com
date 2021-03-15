@@ -10,6 +10,7 @@ import handbookImg from './images/handbook.svg'
 import roadmapImg from './images/roadmap.svg'
 import checkImg from './images/check.svg'
 import bookImg from './images/book.svg'
+import buttonBracketImg from '../LandingPage/images/rounded-corner.svg'
 
 interface CallToActionProps {
     onClick?: void
@@ -20,6 +21,7 @@ interface CallToActionProps {
     width?: string
     href?: string
     to?: string
+    displayBrackets?: boolean
 }
 
 const icons = {
@@ -49,6 +51,7 @@ export const CallToAction = ({
     href,
     to,
     onClick,
+    displayBrackets = false,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
         <div className="bg-opacity-10 bg-yellow-100 rounded rounded-sm p-1 mr-8">
@@ -56,12 +59,39 @@ export const CallToAction = ({
         </div>
     ) : null
 
+    const brackets =
+        type === 'primary' || displayBrackets ? (
+            <>
+                <img
+                    src={buttonBracketImg}
+                    alt="button bracket"
+                    className="absolute top-0 left-0 -mt-2 -ml-2 opacity-30"
+                />
+                <img
+                    src={buttonBracketImg}
+                    alt="button bracket"
+                    className="absolute top-0 right-0 -mt-2 -mr-2 opacity-30 transform rotate-90"
+                />
+                <img
+                    src={buttonBracketImg}
+                    alt="button bracket"
+                    className="absolute bottom-0 left-0 -mb-2 -ml-2 opacity-30 transform -rotate-90"
+                />
+                <img
+                    src={buttonBracketImg}
+                    alt="button bracket"
+                    className="absolute bottom-0 right-0 -mb-2 -mr-2 opacity-30 transform rotate-180"
+                />
+            </>
+        ) : null
+
     const widthClass = `w-${width}`
-    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm flex items-center justify-between`
+    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm flex items-center justify-between relative`
     const classList = [baseClasses, buttonTypeClasses[type], className].join(' ')
 
     const innerHtml = (
         <>
+            {brackets}
             {iconNode}
             <div className="mr-8">{children}</div>
             <span></span>
