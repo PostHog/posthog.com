@@ -10,10 +10,9 @@ PostHog was founded by James and Tim on January 23rd, 2020.
 
 We started working together on a startup in August 2019 with the first idea being to help engineers manage technical debt. It didn't work out, but we realized the power of treating growth as an engineering problem. We also knew that many engineers struggle to understand their impact on their users.
 
-There are plenty of product analytics tools out there, but all the alternatives are SAAS-based. While they are very powerful, they can be frustrating for developers. From our perspective, these tools can be problematic because:
+There are plenty of product analytics tools out there, but all the alternatives are SaaS-based. While they are very powerful, they can be frustrating for developers. From our perspective, these tools can be problematic because:
 
 * We didn't want to send all our user data to 3rd parties.
-* It's frustrating to integrate with a tool that charges on usage - you have no idea what it will end up costing, even if it starts out free.
 * We wanted full underlying data access.
 
 ## Launch - February, 2020
