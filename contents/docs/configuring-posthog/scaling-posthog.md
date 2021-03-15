@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-A standard instance of PostHog using PostgreSQL is pretty efficient for storing large volumes of data. We've seen volumes of **5 million events/day** and hundreds of requests a second on Heroku's cheapest tier with no problems.
+A standard instance of PostHog using PostgreSQL is pretty efficient for storing large volumes of data. We've seen volumes of **1 million events/day** and hundreds of requests a second on Heroku's standard tier with no problems.
 
 However, once you have more data, you might start having issues while running queries. The issue is that Postgres isn't very good at doing analytical queries on larger datasets. This is where ClickHouse comes in.
 
