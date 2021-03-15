@@ -85,7 +85,7 @@ export const PrivateCloud = () => {
                         </div>
 
                         <div className="w-full mt-12 md:mt-0 md:w-1/2 md:ml-4 lg:w-7/12 relative z-20">
-                            <div className="w-full flex flex-wrap justify-center contributor-images">
+                            <div className="flex flex-wrap justify-center contributor-images -mx-10 md:w-full md:mx-0">
                                 <a href="https://github.com/bhavish-agarwal">
                                     <img
                                         src="https://avatars.githubusercontent.com/u/14195048?v=4"

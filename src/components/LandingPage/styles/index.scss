@@ -205,7 +205,7 @@
     animation-fill-mode: forwards !important;
     position: relative;
     opacity: 0;
-    width: 120px;
+    width: 115px;
 }
 
 .product-features {
@@ -283,7 +283,10 @@
 }
 
 .mountains {
-    @media (max-width: 1023px) {
+    @media (max-width: 639px) {
+        height: 350px;
+    }
+    @media (min-width: 640px) and (max-width: 1023px) {
         height: 738px;
     }
     @media (min-width: 1024px) {
@@ -306,7 +309,13 @@
 }
 
 .timeline-wrapper {
-    @media (max-width: 1023px) {
+    @media (max-width: 639px) {
+        margin-top: 150px;
+        padding-bottom: 182px;
+        zoom: 0.8;
+    }
+
+    @media (min-width: 640px) and (max-width: 1023px) {
         margin-top: -399px;
         padding-bottom: 182px;
         zoom: 0.8;
@@ -314,6 +323,10 @@
 
     @media (min-width: 1024px) {
         margin-bottom: 189px;
+    }
+
+    @media (min-width: 1280px) {
+        margin-bottom: 89px;
     }
 }
 
