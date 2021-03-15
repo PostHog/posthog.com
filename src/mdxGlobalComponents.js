@@ -1,4 +1,4 @@
-// AUTO GENERATED FILE 
+// AUTO GENERATED FILE
 
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
@@ -13,6 +13,7 @@ import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { HiddenSection } from './components/HiddenSection'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
@@ -30,32 +31,33 @@ import { StartNowButton } from './components/StartNowButton'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
-	BasicHedgehogImage,
-	BlogFooter,
-	CodeBlock,
-	CompensationCalculator,
-	Container,
-	DarkModeToggle,
-	DemoScheduler,
-	DocsPageSurvey,
-	DocsSearch,
-	FeaturesComparisonTable,
-	FeaturesNav,
-	Footer,
-	GetStartedModal,
-	NewsletterForm,
-	OtherFeaturesBlock,
-	PageHeader,
-	PostCard,
-	ResponsiveAnchor,
-	ResponsiveSidebar,
-	ResponsiveTopBar,
-	DesignedForYourStackBlock,
-	FeaturedSectionTextLeft,
-	FeaturedSectionTextRight,
-	FeaturedSectionTripleImage,
-	Spacer,
-	StarRepoButton,
-	StartNowButton,
-	TableOfContents
+    BasicHedgehogImage,
+    BlogFooter,
+    CodeBlock,
+    CompensationCalculator,
+    Container,
+    DarkModeToggle,
+    DemoScheduler,
+    DocsPageSurvey,
+    DocsSearch,
+    FeaturesComparisonTable,
+    FeaturesNav,
+    Footer,
+    GetStartedModal,
+    HiddenSection,
+    NewsletterForm,
+    OtherFeaturesBlock,
+    PageHeader,
+    PostCard,
+    ResponsiveAnchor,
+    ResponsiveSidebar,
+    ResponsiveTopBar,
+    DesignedForYourStackBlock,
+    FeaturedSectionTextLeft,
+    FeaturedSectionTextRight,
+    FeaturedSectionTripleImage,
+    Spacer,
+    StarRepoButton,
+    StartNowButton,
+    TableOfContents,
 }
