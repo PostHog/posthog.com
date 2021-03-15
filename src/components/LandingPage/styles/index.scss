@@ -6,7 +6,7 @@
 
     &:before {
         background: url(../images/rocket.svg);
-        bottom: -6%;
+        bottom: -10%;
         content: '';
         display: none;
         height: 939px;
@@ -160,6 +160,75 @@
                 right: -14px;
             }
         }
+    }
+}
+
+@keyframes animateIn100 {
+    0% {
+        opacity: 0;
+        top: 10px;
+    }
+
+    85% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+@keyframes animateIn50 {
+    0% {
+        opacity: 0;
+        top: 10px;
+    }
+
+    85% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0.5;
+        top: 0;
+    }
+}
+
+.product-features > div {
+    &.opacity-100 {
+        animation: animateIn100 0.5s ease;
+    }
+
+    &.opacity-50 {
+        animation: animateIn50 0.5s ease;
+    }
+
+    animation-fill-mode: forwards !important;
+    position: relative;
+    opacity: 0;
+
+    &:nth-child(1) {
+        animation-delay: 0.25s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.5s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.75s;
+    }
+    &:nth-child(4) {
+        animation-delay: 1s;
+    }
+    &:nth-child(5) {
+        animation-delay: 1.25s;
+    }
+    &:nth-child(6) {
+        animation-delay: 1.5s;
+    }
+    &:nth-child(7) {
+        animation-delay: 1.75s;
+    }
+    &:nth-child(8) {
+        animation-delay: 0.25s;
     }
 }
 

@@ -12,6 +12,7 @@ module.exports = {
                 gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
             },
             fontSize: {
+                '2xs': '0.65rem',
                 'base-larger': '15px',
             },
             colors: {
