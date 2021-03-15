@@ -15,7 +15,7 @@ interface NavbarLinkProps {
 }
 
 const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLinkProps) => {
-    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider '.concat(className)
+    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold '.concat(className)
     const classList = textLight
         ? `text-white hover:text-white ${baseClasses}`
         : `text-black hover:text-black ${baseClasses}`
