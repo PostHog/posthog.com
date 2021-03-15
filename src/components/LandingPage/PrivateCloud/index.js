@@ -1,6 +1,8 @@
 import React from 'react'
 import { CallToAction } from '../../CallToAction'
 import { Roadmap } from '../Roadmap'
+import { CornerBrackets } from '../../CornerBrackets'
+
 import checkImg from '../images/green-check.svg'
 
 const FeatureBenefit = ({ feature, benefit }) => {
@@ -55,8 +57,9 @@ export const PrivateCloud = () => {
                 <div className="mt-24">
                     <div
                         style={{ background: 'rgba(255,255,255,.6)' }}
-                        className="rounded-lg p-12 flex flex-col md:flex-row justify-between items-center"
+                        className="rounded-lg p-12 flex flex-col md:flex-row justify-between items-center relative"
                     >
+                        <CornerBrackets />
                         <div className="w-full md:w-1/2 md:mr-4 lg:w-5/12">
                             <h3 className="text-purpleish text-3xl font-semibold">Open-source to our core</h3>
                             <p className="text-purpleish text-center">

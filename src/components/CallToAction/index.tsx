@@ -3,6 +3,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import { CornerBrackets } from '../CornerBrackets'
+
 import rocketImg from './images/rocket.svg'
 import calendarImg from './images/calendar.svg'
 import githubImg from './images/github.svg'
@@ -10,7 +12,6 @@ import handbookImg from './images/handbook.svg'
 import roadmapImg from './images/roadmap.svg'
 import checkImg from './images/check.svg'
 import bookImg from './images/book.svg'
-import buttonBracketImg from '../LandingPage/images/rounded-corner.svg'
 
 interface CallToActionProps {
     onClick?: void
@@ -59,31 +60,7 @@ export const CallToAction = ({
         </div>
     ) : null
 
-    const brackets =
-        type === 'primary' || displayBrackets ? (
-            <>
-                <img
-                    src={buttonBracketImg}
-                    alt="button bracket"
-                    className="absolute top-0 left-0 -mt-2 -ml-2 opacity-30"
-                />
-                <img
-                    src={buttonBracketImg}
-                    alt="button bracket"
-                    className="absolute top-0 right-0 -mt-2 -mr-2 opacity-30 transform rotate-90"
-                />
-                <img
-                    src={buttonBracketImg}
-                    alt="button bracket"
-                    className="absolute bottom-0 left-0 -mb-2 -ml-2 opacity-30 transform -rotate-90"
-                />
-                <img
-                    src={buttonBracketImg}
-                    alt="button bracket"
-                    className="absolute bottom-0 right-0 -mb-2 -mr-2 opacity-30 transform rotate-180"
-                />
-            </>
-        ) : null
+    const brackets = type === 'primary' || displayBrackets ? <CornerBrackets /> : null
 
     const widthClass = `w-${width}`
     const baseClasses = `p-2 ${widthClass} uppercase rounded-sm flex items-center justify-between relative`
