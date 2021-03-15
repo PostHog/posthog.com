@@ -7,6 +7,7 @@ import featureFlagsImg from '../images/ProductFeatureIcons/feature-flags.svg'
 import abTestingImg from '../images/ProductFeatureIcons/ab-testing.svg'
 import userFeedbackImg from '../images/ProductFeatureIcons/user-feedback.svg'
 import revenueTrackingImg from '../images/ProductFeatureIcons/revenue-tracking.svg'
+import placeholderImg from '../images/ProductFeatureIcons/placeholder.svg'
 
 interface ProductIconData {
     label: string
@@ -21,7 +22,7 @@ const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }: ProductIconData
     ) : null
 
     return (
-        <div className={`text-center px-2 mt-8 md:mt-0 lg:px-4 flex flex-col w-1/2 md:w-auto ${opacity}`}>
+        <div className={`text-center px-2 lg:px-4 flex flex-col ${opacity}`}>
             <div className="h-12 flex items-center justify-around">
                 <img src={icon} alt={label} className="mb-0 block mx-auto" />
             </div>
@@ -33,14 +34,19 @@ const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }: ProductIconData
 
 export const ProductFeatureIcons = () => {
     return (
-        <div className="product-features flex justify-around lg:justify-between items-stretch flex-row flex-wrap my-16 leading-4">
-            <ProductFeatureIcon label="Analytics" icon={analyticsImg} />
-            <ProductFeatureIcon label="Heatmaps" icon={heatmapsImg} />
-            <ProductFeatureIcon label="Session Replay" icon={sessionReplayImg} />
-            <ProductFeatureIcon label="Feature Flags" icon={featureFlagsImg} />
-            <ProductFeatureIcon label="A/B Testing" icon={abTestingImg} expectedLaunchDate="May" />
-            <ProductFeatureIcon label="User Feedback" icon={userFeedbackImg} expectedLaunchDate="June" />
-            <ProductFeatureIcon label="Revenue Tracking" icon={revenueTrackingImg} expectedLaunchDate="August" />
+        <div className="product-features mt-8 mb-16 lg:my-16 lg:flex lg:justify-center">
+            <div className="row-1 flex justify-center lg:justify-between items-stretch flex-row flex-wrap leading-4">
+                <ProductFeatureIcon label="Analytics" icon={analyticsImg} />
+                <ProductFeatureIcon label="Heatmaps" icon={heatmapsImg} />
+                <ProductFeatureIcon label="Session Replay" icon={sessionReplayImg} />
+                <ProductFeatureIcon label="Feature Flags" icon={featureFlagsImg} />
+            </div>
+            <div className="row-2 flex justify-center lg:justify-between items-stretch flex-row flex-wrap my-6 lg:my-0 leading-4">
+                <ProductFeatureIcon label="A/B Testing" icon={abTestingImg} expectedLaunchDate="May" />
+                <ProductFeatureIcon label="User Feedback" icon={userFeedbackImg} expectedLaunchDate="June" />
+                <ProductFeatureIcon label="Revenue Tracking" icon={revenueTrackingImg} expectedLaunchDate="August" />
+                <ProductFeatureIcon label="" icon={placeholderImg} />
+            </div>
         </div>
     )
 }
