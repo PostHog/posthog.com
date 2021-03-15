@@ -193,53 +193,54 @@
     }
 }
 
-.product-features > div > div {
-    &.opacity-100 {
-        animation: animateIn100 0.5s ease;
-    }
-
-    &.opacity-50 {
-        animation: animateIn50 0.5s ease;
-    }
-
-    animation-fill-mode: forwards !important;
-    position: relative;
-    opacity: 0;
-    width: 115px;
-}
-
 .product-features {
-    .row-1 {
-        div {
-            &:nth-child(1) {
-                animation-delay: 0.15s;
-            }
-            &:nth-child(2) {
-                animation-delay: 0.3s;
-            }
-            &:nth-child(3) {
-                animation-delay: 0.45s;
-            }
-            &:nth-child(4) {
-                animation-delay: 0.6s;
-            }
-        }
+    grid-template-columns: repeat(4, 1fr);
+
+    @media (min-width: 640px) and (max-width: 1023px) {
+        grid-template-columns: repeat(4, 115px);
     }
 
-    .row-2 {
-        div {
-            &:nth-child(1) {
-                animation-delay: 0.75s;
-            }
-            &:nth-child(2) {
-                animation-delay: 0.9s;
-            }
-            &:nth-child(3) {
-                animation-delay: 1.05s;
-            }
-            &:nth-child(4) {
-                animation-delay: 1.2s;
-            }
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(7, 115px);
+    }
+
+    > div {
+        &.opacity-100 {
+            animation: animateIn100 0.5s ease;
+        }
+
+        &.opacity-50 {
+            animation: animateIn50 0.5s ease;
+        }
+
+        animation-fill-mode: forwards !important;
+        position: relative;
+        opacity: 0;
+        //width: 115px;
+
+        &:nth-child(1) {
+            animation-delay: 0.15s;
+        }
+        &:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        &:nth-child(3) {
+            animation-delay: 0.45s;
+        }
+        &:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        &:nth-child(5) {
+            animation-delay: 0.75s;
+        }
+        &:nth-child(6) {
+            animation-delay: 0.9s;
+        }
+        &:nth-child(7) {
+            animation-delay: 1.05s;
+        }
+        &:nth-child(8) {
+            animation-delay: 1.2s;
         }
     }
 }
