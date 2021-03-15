@@ -55,9 +55,9 @@ export const PrivateCloud = () => {
                 <div className="mt-24">
                     <div
                         style={{ background: 'rgba(255,255,255,.6)' }}
-                        className="rounded-lg p-12 flex flex-col md:flex-row justify-between items-center"
+                        className="rounded-lg p-12 pb-20 flex flex-col md:flex-row justify-between items-center"
                     >
-                        <div className="w-full md:w-1/2 md:mr-4 lg:w-5/12">
+                        <div className="w-full md:w-1/2 md:mr-4 lg:w-5/12 relative z-30">
                             <h3 className="text-purpleish text-3xl font-semibold">Open-source to our core</h3>
                             <p className="text-purpleish text-center">
                                 Our workflow, strategy, internal policies, handbook, and brand book are public and open
@@ -84,7 +84,7 @@ export const PrivateCloud = () => {
                             </CallToAction>
                         </div>
 
-                        <div className="w-full mt-12 md:mt-0 md:w-1/2 md:ml-4 lg:w-7/12">
+                        <div className="w-full mt-12 md:mt-0 md:w-1/2 md:ml-4 lg:w-7/12 relative z-20">
                             <div className="w-full flex flex-wrap justify-center contributor-images">
                                 <a href="https://github.com/bhavish-agarwal">
                                     <img

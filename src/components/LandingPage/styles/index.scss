@@ -190,3 +190,54 @@
     background: url(../images/clouds.svg), linear-gradient(180deg, #3c3288 0%, #b75184 100%);
     background-size: cover;
 }
+
+.city-wrapper {
+    @media (max-width: 1023px) {
+        padding-bottom: 3vw;
+    }
+
+    @media (min-width: 1024px) {
+        padding-bottom: 5vw;
+    }
+}
+
+.mountains {
+    height: 838px;
+    margin-top: -455px;
+    width: 100%;
+}
+
+.sun {
+    height: 1259px;
+    left: -50px;
+    top: -700px;
+    width: 1260px;
+}
+
+.timeline-wrapper {
+    @media (max-width: 1023px) {
+        margin-top: -399px;
+        padding-bottom: 182px;
+        zoom: 0.8;
+    }
+
+    @media (min-width: 1024px) {
+        margin-bottom: 189px;
+    }
+}
+
+.timeline {
+    // height: 499px;
+}
+
+.subway-wrapper {
+    background: url(../images/subway-track.svg) repeat-x;
+    height: 130px;
+    @media (max-width: 1023px) {
+        margin-top: -163px;
+    }
+}
+
+.subway {
+    //height: 130px;
+}
