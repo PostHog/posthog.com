@@ -1,6 +1,8 @@
 import React from 'react'
 import { CallToAction } from '../../CallToAction'
 import { Roadmap } from '../Roadmap'
+import { CornerBrackets } from '../../CornerBrackets'
+
 import checkImg from '../images/green-check.svg'
 
 const FeatureBenefit = ({ feature, benefit }) => {
@@ -66,11 +68,12 @@ export const PrivateCloud = () => {
 
                             <CallToAction
                                 type="custom"
-                                className="bg-purpleish brackets border-3 text-white hover:text-white hover:bg-purpleish-dark border-purpleish-dark"
+                                className="bg-purpleish border-3 text-white hover:text-white hover:bg-purpleish-dark border-purpleish-dark"
                                 icon="github"
                                 width="full"
                                 href="https://github.com/posthog"
                             >
+                                <CornerBrackets color="purpleish" />
                                 Browse GitHub
                             </CallToAction>
                             <CallToAction
