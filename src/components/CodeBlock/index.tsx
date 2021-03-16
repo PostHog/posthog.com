@@ -94,7 +94,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
                     <Tooltip title="Copied!" visible={tooltipVisible}>
-                        {navigator.clipboard ? (
+                        {window && navigator.clipboard ? (
                             <CopyOutlined
                                 style={{
                                     position: 'absolute',
