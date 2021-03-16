@@ -273,88 +273,116 @@
     background-size: cover;
 }
 
-.city-wrapper {
-    @media (max-width: 1023px) {
-        padding-bottom: 3vw;
-    }
+.scene-wrapper {
+    position: relative;
 
-    @media (min-width: 1024px) {
-        padding-bottom: 5vw;
+    .text-wrapper {
+        @media (max-width: 639px) {
+            background: linear-gradient(180deg, #b55174 0%, #cb7084 100%);
+            margin-top: 40%;
+        }
+
+        @media (min-width: 640px) {
+            margin-top: 10%;
+        }
+    }
+}
+
+.city-wrapper {
+    @media (min-width: 1024px) and (max-width: 1400px) {
+        padding-bottom: 10vw;
     }
 }
 
 .mountains {
     @media (max-width: 639px) {
-        height: 350px;
+        margin-top: -110%;
     }
-    @media (min-width: 640px) and (max-width: 1023px) {
-        height: 738px;
+    @media (min-width: 640px) {
+        margin-top: -30%;
+        // height: 738px;
     }
     @media (min-width: 1024px) {
-        height: 838px;
+        // height: 838px;
     }
     @media (min-width: 2800px) {
-        height: 1000px;
-        margin-top: -255px;
+        // height: 1000px;
+        // margin-top: -255px;
     }
-    margin-top: -455px;
+    // margin-top: -455px;
     width: 100%;
 }
 
 .sun {
     height: 1259px;
     @media (max-width: 1023px) {
-        left: -400px;
+        // left: -400px;
     }
     @media (min-width: 1024px) {
-        left: -200px;
+        // left: -200px;
     }
     @media (min-width: 2800px) {
-        left: 25%;
+        // left: 25%;
     }
-    top: -700px;
+    // top: -700px;
+    left: calc(50% - 830px);
+    max-width: none;
+    position: absolute;
+    top: calc(-630px + (-10vw / 2)); // don't ask
     width: 1260px;
 }
 
 .timeline-wrapper {
+    height: 580px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    z-index: 20;
+
     @media (max-width: 639px) {
-        margin-top: 150px;
-        padding-bottom: 182px;
-        zoom: 0.8;
+        margin-top: 55%;
+        zoom: 0.75;
+    }
+    @media (min-width: 640px) {
+        margin-top: -30%;
     }
 
-    @media (min-width: 640px) and (max-width: 1023px) {
-        margin-top: -399px;
-        padding-bottom: 182px;
-        zoom: 0.8;
-    }
-
-    @media (min-width: 1024px) {
-        margin-bottom: 189px;
+    @media (min-width: 1440px) {
+        height: 0;
+        padding-bottom: 40.28%;
     }
 
     @media (min-width: 1280px) {
-        margin-bottom: 89px;
+        // margin-top: -26%;
+        // padding-bottom: 34.6%;
+        // position: relative;
+
+        // .timeline {
+        //     height: 100%;
+        //     left: 0;
+        //     position: absolute;
+        //     top: 0;
+        //     width: 100%;
+        // }
     }
+
+    @media (min-width: 1440px) {
+        // overflow-x: hidden;
+    }
+}
+
+.timeline,
+.city {
+    height: auto;
+    left: 0;
+    min-width: 1440px;
+    max-width: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 
 .timeline {
     max-width: none;
-    width: 1440px;
-
-    @media (min-width: 1440px) {
-        width: 100%;
-    }
-}
-
-.subway-wrapper {
-    background: url(../images/subway-track.svg) repeat-x;
-    height: 130px;
-    @media (max-width: 1023px) {
-        margin-top: -163px;
-    }
-}
-
-.subway {
-    //height: 130px;
+    // width: 1440px;
 }
