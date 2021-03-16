@@ -6,7 +6,7 @@ showTitle: true
 
 Annotations allow you to leave notes on your charts that can help you understand the driving factors behind the changes that happen over time.
 
-focussed 
+focused 
 
 For example, at PostHog, we use annotations to mark things like version releases and new blog posts, so we can easily explore the impact of these events on our metrics. 
 
