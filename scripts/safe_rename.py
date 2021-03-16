@@ -22,5 +22,9 @@ if len(from_paths) == len(to_paths):
     for i in range(len(from_paths)):
         new_redirects += redirect_text.format(from_paths[i], to_paths[i])
     
+    with open("./netlify.toml", "r") as netlify_config:
+        netlify_config_text = netlify_config.read()
+    
     with open("./netlify.toml", "a") as netlify_config:
-        netlify_config.write(new_redirects)
+        if from_paths[i] not in netlify_config_text:
+            netlify_config.write(new_redirects)
