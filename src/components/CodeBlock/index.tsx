@@ -29,7 +29,6 @@ export const CodeBlock = (props: CodeBlockProps) => {
     const [code, setCode] = useState('')
     const [projectName, setProjectName] = useState('')
     const [hasBeenCopied, setHasBeenCopied] = useState(false)
-    const [spin, setSpin] = useState(false)
     const [tooltipVisible, setTooltipVisible] = useState(false)
 
     const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
@@ -79,14 +78,10 @@ export const CodeBlock = (props: CodeBlockProps) => {
     const copyToClipboard = () => {
         if (navigator.clipboard) {
             navigator.clipboard.writeText(code || props.children.props.children.trim())
-            setSpin(true)
+            setHasBeenCopied(true)
+            setTooltipVisible(true)
             setTimeout(() => {
-                setSpin(false)
-                setHasBeenCopied(true)
-                setTooltipVisible(true)
-                setTimeout(() => {
-                    setTooltipVisible(false)
-                }, 1000)
+                setTooltipVisible(false)
             }, 1000)
         }
     }
@@ -110,7 +105,6 @@ export const CodeBlock = (props: CodeBlockProps) => {
                                     transitionDuration: '1s',
                                 }}
                                 onClick={copyToClipboard}
-                                spin={spin}
                             />
                         </Tooltip>
                         {tokens.map((line, i) => (
