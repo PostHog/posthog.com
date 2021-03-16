@@ -30,6 +30,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
     const [projectName, setProjectName] = useState('')
     const [hasBeenCopied, setHasBeenCopied] = useState(false)
     const [tooltipVisible, setTooltipVisible] = useState(false)
+    const [copyToClipboardAvailable, setCopyToClipboardAvailable] = useState(false)
 
     const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
 
@@ -47,6 +48,9 @@ export const CodeBlock = (props: CodeBlockProps) => {
                     .replace(/<ph_instance_address>/g, 'https://app.posthog.com')
                 setCode(updatedCode)
                 highlightToken(phToken)
+            }
+            if (navigator.clipboard) {
+                setCopyToClipboardAvailable(true)
             }
         }
     }, [props])
@@ -94,7 +98,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
                     <Tooltip title="Copied!" visible={tooltipVisible}>
-                        {window && navigator.clipboard ? (
+                        {copyToClipboardAvailable ? (
                             <CopyOutlined
                                 style={{
                                     position: 'absolute',
