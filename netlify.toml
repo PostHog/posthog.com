@@ -2,17 +2,3 @@
   from = "/plugins/*"
   to = "/plugins"
   status = 200
-
-[[redirects]]
-    from = "/docs/features/annotations"
-    to = "/docs/features/annotationsz"
-
-
-[[redirects]]
-    from = "/docs/features/dashboards"
-    to = "/docs/features/dashboardz"
-
-
-[[redirects]]
-    from = "(.*)"
-    to = "(.*)"
