@@ -30,7 +30,6 @@ jobs:
                   git config user.name PostHog Bot
                   git config user.email hey@posthog.com
                   git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos" && git push
 
             - name: Add safe redirects
               run: |
@@ -38,4 +37,4 @@ jobs:
                   export PR_DIFF=$(git diff master)
                   python3 ./scripts/safe_rename.py
                   git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add redirects" && git push
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add fixes" && git push
