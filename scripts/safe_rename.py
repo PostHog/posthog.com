@@ -17,9 +17,9 @@ redirect_text = '''
     to = "{}"
 '''
 
-if len(from_paths) == len(to_paths):
+if len(from_paths) > 0 and len(from_paths) == len(to_paths):
     new_redirects = ''
-    for i in range(len(from_paths)):
+    for i in range(len(from_paths)-1):
         new_redirects += redirect_text.format(from_paths[i], to_paths[i])
     
     with open("./netlify.toml", "r") as netlify_config:
