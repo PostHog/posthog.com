@@ -5,6 +5,8 @@ import { getCookie, generateRandomHtmlId } from '../../lib/utils'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
+import { CopyOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 
 interface CodeBlockProps {
     children: {
@@ -26,6 +28,9 @@ export const CodeBlock = (props: CodeBlockProps) => {
     const matches = className.match(/language-(?<lang>.*)/)
     const [code, setCode] = useState('')
     const [projectName, setProjectName] = useState('')
+    const [hasBeenCopied, setHasBeenCopied] = useState(false)
+    const [spin, setSpin] = useState(false)
+    const [tooltipVisible, setTooltipVisible] = useState(false)
 
     const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
 
@@ -71,24 +76,53 @@ export const CodeBlock = (props: CodeBlockProps) => {
         }
     }
 
+    const copyToClipboard = () => {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(code || props.children.props.children.trim())
+            setSpin(true)
+            setTimeout(() => {
+                setSpin(false)
+                setHasBeenCopied(true)
+                setTooltipVisible(true)
+                setTimeout(() => {
+                    setTooltipVisible(false)
+                }, 1000)
+            }, 1000)
+        }
+    }
+
     return (
-        <Highlight
-            {...defaultProps}
-            code={code || props.children.props.children.trim()}
-            language={language as Language}
-            theme={theme}
-        >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
-                    {tokens.map((line, i) => (
-                        <div key={i} {...getLineProps({ line, key: i })}>
-                            {line.map((token, key) => (
-                                <span key={key} {...getTokenProps({ token, key })} />
-                            ))}
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
+        <>
+            <Highlight
+                {...defaultProps}
+                code={code || props.children.props.children.trim()}
+                language={language as Language}
+                theme={theme}
+            >
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
+                        <Tooltip title="Copied!" visible={tooltipVisible}>
+                            <CopyOutlined
+                                style={{
+                                    position: 'absolute',
+                                    right: 15,
+                                    color: hasBeenCopied ? '#9c9a9a' : '#fff',
+                                    transitionDuration: '1s',
+                                }}
+                                onClick={copyToClipboard}
+                                spin={spin}
+                            />
+                        </Tooltip>
+                        {tokens.map((line, i) => (
+                            <div key={i} {...getLineProps({ line, key: i })}>
+                                {line.map((token, key) => (
+                                    <span key={key} {...getTokenProps({ token, key })} />
+                                ))}
+                            </div>
+                        ))}
+                    </pre>
+                )}
+            </Highlight>
+        </>
     )
 }
