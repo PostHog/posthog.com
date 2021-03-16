@@ -1,11 +1,11 @@
-name: Spell Checker
+name: Standard Checks
 
 on:
     - pull_request
 
 jobs:
     spell-check:
-        name: Spell Checker
+        name: Standard Checks
         runs-on: ubuntu-latest
         if: github.event.pull_request.head.repo.full_name == github.repository
 
@@ -35,6 +35,6 @@ jobs:
             - name: Add safe redirects
               run: |
                   export PR_DIFF=$(git diff master)
-                  python3 ../scripts/safe_rename.py
+                  python3 ./scripts/safe_rename.py
                   git add .
                   [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add redirects" && git push
