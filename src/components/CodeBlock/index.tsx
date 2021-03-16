@@ -76,27 +76,25 @@ export const CodeBlock = (props: CodeBlockProps) => {
     }
 
     const copyToClipboard = () => {
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(code || props.children.props.children.trim())
-            setHasBeenCopied(true)
-            setTooltipVisible(true)
-            setTimeout(() => {
-                setTooltipVisible(false)
-            }, 1000)
-        }
+        navigator.clipboard.writeText(code || props.children.props.children.trim())
+        setHasBeenCopied(true)
+        setTooltipVisible(true)
+        setTimeout(() => {
+            setTooltipVisible(false)
+        }, 1000)
     }
 
     return (
-        <>
-            <Highlight
-                {...defaultProps}
-                code={code || props.children.props.children.trim()}
-                language={language as Language}
-                theme={theme}
-            >
-                {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
-                        <Tooltip title="Copied!" visible={tooltipVisible}>
+        <Highlight
+            {...defaultProps}
+            code={code || props.children.props.children.trim()}
+            language={language as Language}
+            theme={theme}
+        >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
+                    <Tooltip title="Copied!" visible={tooltipVisible}>
+                        {navigator.clipboard ? (
                             <CopyOutlined
                                 style={{
                                     position: 'absolute',
@@ -106,17 +104,17 @@ export const CodeBlock = (props: CodeBlockProps) => {
                                 }}
                                 onClick={copyToClipboard}
                             />
-                        </Tooltip>
-                        {tokens.map((line, i) => (
-                            <div key={i} {...getLineProps({ line, key: i })}>
-                                {line.map((token, key) => (
-                                    <span key={key} {...getTokenProps({ token, key })} />
-                                ))}
-                            </div>
-                        ))}
-                    </pre>
-                )}
-            </Highlight>
-        </>
+                        ) : null}
+                    </Tooltip>
+                    {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line, key: i })}>
+                            {line.map((token, key) => (
+                                <span key={key} {...getTokenProps({ token, key })} />
+                            ))}
+                        </div>
+                    ))}
+                </pre>
+            )}
+        </Highlight>
     )
 }
