@@ -269,7 +269,7 @@
 }
 
 .private-cloud {
-    background: url(../images/clouds.svg), linear-gradient(180deg, #3c3288 0%, #b75184 100%);
+    background: url(../images/clouds.png), linear-gradient(180deg, #3c3288 0%, #b75184 100%);
     background-size: cover;
 }
 
@@ -339,7 +339,12 @@
 }
 
 .timeline {
-    // height: 499px;
+    max-width: none;
+    width: 1440px;
+
+    @media (min-width: 1440px) {
+        width: 100%;
+    }
 }
 
 .subway-wrapper {

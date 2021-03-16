@@ -1,8 +1,8 @@
 import React from 'react'
-import roadmapImg from '../images/mountains.svg'
-import sunImg from '../images/sun.svg'
-import timelineImg from '../images/timeline.svg'
-import subwayImg from '../images/subway.svg'
+import roadmapImg from '../images/mountains.png'
+import sunImg from '../images/sun.png'
+import timelineImg from '../images/timeline.png'
+import subwayImg from '../images/subway.png'
 import { CallToAction } from '../../CallToAction'
 
 export const Roadmap = () => (
@@ -26,20 +26,16 @@ export const Roadmap = () => (
                 </CallToAction>
             </div>
 
-            <object
-                data={roadmapImg}
-                type="image/svg+xml"
-                className="w-screen mx-auto relative z-10 mountains"
-            ></object>
+            <img src={roadmapImg} className="w-screen mx-auto relative z-10 mountains" />
 
-            <object data={sunImg} type="image/svg+xml" className="sun absolute"></object>
+            <img src={sunImg} className="sun absolute" />
 
             <div className="timeline-wrapper overflow-x-scroll w-full relative lg:absolute z-40 lg:max-w-full lg:w-full lg:overflow-x-hidden lg:bottom-0">
-                <object data={timelineImg} type="image/svg+xml" className="timeline lg:w-full lg:max-w-full"></object>
+                <img src={timelineImg} className="timeline lg:w-full lg:max-w-full" />
             </div>
 
             <div className="subway-wrapper w-full relative z-40 lg:max-w-full lg:w-full">
-                <object data={subwayImg} type="image/svg+xml" className="subway "></object>
+                <img src={subwayImg} className="subway " />
             </div>
         </div>
     </div>
