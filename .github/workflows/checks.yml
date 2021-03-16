@@ -34,6 +34,7 @@ jobs:
 
             - name: Add safe redirects
               run: |
+                  git fetch origin master:master
                   export PR_DIFF=$(git diff master)
                   python3 ./scripts/safe_rename.py
                   git add .
