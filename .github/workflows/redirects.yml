@@ -1,0 +1,29 @@
+name: Spell Checker
+
+on:
+    - pull_request
+
+jobs:
+    spell-check:
+        name: Spell Checker
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.head.repo.full_name == github.repository
+
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+
+            - name: Set up Python 3.8
+              uses: actions/setup-python@v2
+              with:
+                  python-version: 3.8
+
+            - name: Correct spelling
+              run: |
+                  export PR_DIFF=$(git diff master)
+                  python3 ../scripts/safe_rename.py
+                  git config user.name PostHog Bot
+                  git config user.email hey@posthog.com
+                  git add .
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add redirects" && git push
