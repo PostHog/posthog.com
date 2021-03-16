@@ -308,7 +308,12 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/community", "handbook/growth/customer-success"],
+        "items": [
+            "handbook/growth/strategy",
+            "handbook/growth/community",
+            "handbook/growth/customer-success",
+            "handbook/growth/developer-relations"
+        ],
         "child_entries": ["Marketing", "Sales"]
     },
     {
