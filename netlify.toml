@@ -2,3 +2,7 @@
   from = "/plugins/*"
   to = "/plugins"
   status = 200
+
+[[redirects]]
+    from = "/docs/features/cohorts"
+    to = "/docs/features/cohortz"
