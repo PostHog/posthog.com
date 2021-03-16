@@ -6,6 +6,7 @@ import { CallToAction } from './components/CallToAction'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
+import { CornerBrackets } from './components/CornerBrackets'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -45,6 +46,7 @@ export const shortcodes = {
     CodeBlock,
     CompensationCalculator,
     Container,
+    CornerBrackets,
     DarkModeToggle,
     DemoScheduler,
     DocsPageSurvey,

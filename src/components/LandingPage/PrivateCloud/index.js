@@ -1,6 +1,7 @@
 import React from 'react'
 import { CallToAction } from '../../CallToAction'
 import { Roadmap } from '../Roadmap'
+
 import checkImg from '../images/green-check.svg'
 
 const FeatureBenefit = ({ feature, benefit }) => {
