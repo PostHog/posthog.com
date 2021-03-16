@@ -293,6 +293,10 @@
     @media (min-width: 1024px) {
         height: 838px;
     }
+    @media (min-width: 2800px) {
+        height: 1000px;
+        margin-top: -255px;
+    }
     margin-top: -455px;
     width: 100%;
 }
@@ -304,6 +308,9 @@
     }
     @media (min-width: 1024px) {
         left: -200px;
+    }
+    @media (min-width: 2800px) {
+        left: 25%;
     }
     top: -700px;
     width: 1260px;
