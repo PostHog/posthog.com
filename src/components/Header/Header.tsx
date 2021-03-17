@@ -15,7 +15,7 @@ interface NavbarLinkProps {
 }
 
 const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLinkProps) => {
-    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider '.concat(className)
+    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold '.concat(className)
     const classList = textLight
         ? `text-white hover:text-white ${baseClasses}`
         : `text-black hover:text-black ${baseClasses}`
@@ -38,7 +38,7 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
     const { setIsGetStartedModalOpen } = useActions(layoutLogic)
 
-    const classList = `button-primary ${className}`
+    const classList = `button-primary ${className} border-none`
 
     return (
         <li className="leading-none">
@@ -60,7 +60,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
-        <div className={`primary-navbar py-6 ${backgroundColor}`}>
+        <div className={`primary-navbar py-6 ${backgroundColor} relative z-20`}>
             <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />

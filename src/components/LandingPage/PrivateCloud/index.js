@@ -21,7 +21,7 @@ export const PrivateCloud = () => {
     return (
         <div className="private-cloud pt-24 text-white text-center">
             <div className="w-11/12 max-w-5xl mx-auto">
-                <h3>Host on your own private cloud</h3>
+                <h2>Host on your own private cloud</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
                     Optionally host PostHog yourself with a private cloud deployment - a great solution for
                     privacy-conscious and compliance-oriented companies.
@@ -57,10 +57,9 @@ export const PrivateCloud = () => {
                 <div className="mt-24">
                     <div
                         style={{ background: 'rgba(255,255,255,.6)' }}
-                        className="rounded-lg p-12 flex flex-col md:flex-row justify-between items-center relative"
+                        className="rounded-lg p-12 pb-20 flex flex-col md:flex-row justify-between items-center"
                     >
-                        <CornerBrackets />
-                        <div className="w-full md:w-1/2 md:mr-4 lg:w-5/12">
+                        <div className="w-full md:w-1/2 md:mr-4 lg:w-5/12 relative z-30">
                             <h3 className="text-purpleish text-3xl font-semibold">Open-source to our core</h3>
                             <p className="text-purpleish text-center">
                                 Our workflow, strategy, internal policies, handbook, and brand book are public and open
@@ -69,11 +68,12 @@ export const PrivateCloud = () => {
 
                             <CallToAction
                                 type="custom"
-                                className="bg-purpleish text-white hover:text-white hover:bg-purpleish-dark border-purpleish-dark border-2"
+                                className="bg-purpleish border-3 text-white hover:text-white hover:bg-purpleish-dark border-purpleish-dark"
                                 icon="github"
                                 width="full"
                                 href="https://github.com/posthog"
                             >
+                                <CornerBrackets color="purpleish" />
                                 Browse GitHub
                             </CallToAction>
                             <CallToAction
@@ -87,8 +87,8 @@ export const PrivateCloud = () => {
                             </CallToAction>
                         </div>
 
-                        <div className="w-full mt-12 md:mt-0 md:w-1/2 md:ml-4 lg:w-7/12">
-                            <div className="w-full flex flex-wrap justify-center contributor-images">
+                        <div className="w-full mt-12 md:mt-0 md:w-1/2 md:ml-4 lg:w-7/12 relative z-20">
+                            <div className="flex flex-wrap justify-center contributor-images -mx-10 md:w-full md:mx-0">
                                 <a href="https://github.com/bhavish-agarwal">
                                     <img
                                         src="https://avatars.githubusercontent.com/u/14195048?v=4"

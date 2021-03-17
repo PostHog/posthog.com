@@ -7,23 +7,25 @@ import funnelsImg from '../images/funnels.png'
 
 export const Tutorials = () => {
     return (
-        <div className="bg-pipes py-24 -my-6">
+        <div className="bg-pipes py-24 -my-12">
             <div className="w-11/12 max-w-3xl mx-auto">
-                <h3 className="text-white text-center">Hop aboard</h3>
+                <h2 className="text-white text-center">Hop aboard</h2>
                 <p className="text-white opacity-80 mt-1 text-center">
                     Don’t get left behind. Join 2,700 companies using PostHog.
                 </p>
 
-                <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
-                    Get Started
-                </CallToAction>
-                <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
-                    Book a demo
-                </CallToAction>
+                <div className="flex flex-col">
+                    <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
+                        Get Started
+                    </CallToAction>
+                    <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
+                        Book a demo
+                    </CallToAction>
+                </div>
             </div>
 
             <div className="mt-24 text-center text-white w-11/12 max-w-4xl mx-auto">
-                <h3>Tutorials</h3>
+                <h2>Tutorials</h2>
                 <p className="opacity-80 mt-1">Our developers highlight some of the functionality inside PostHog.</p>
 
                 <p className="text-sm opacity-60 mt-8">Popular tutorials</p>
