@@ -24,18 +24,24 @@ jobs:
                   python -m pip install -U pip
                   python -m pip install git+https://github.com/yakkomajuri/codespell.git
 
-            - name: Correct spelling
+            - name: Configure Git
               run: |
-                  codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
+                  git fetch origin master:master
                   git config user.name PostHog Bot
                   git config user.email hey@posthog.com
-                  git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos" && git push
 
             - name: Add safe redirects
               run: |
-                  git fetch origin master:master
-                  export PR_DIFF=$(git diff master)
-                  python3 ./scripts/safe_rename.py
+                  PR_DIFF=$(git diff ${{ github.head_ref }} ${{ github.base_ref }}) python3 ./scripts/safe_rename.py
                   git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add redirects" && git push
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
+
+            - name: Fix typos
+              run: |
+                  codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
+                  git add .
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos"
+
+            - name: Push changes
+              run: |
+                  git push

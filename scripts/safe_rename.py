@@ -23,7 +23,7 @@ if len(from_paths) > 0 and len(from_paths) == len(to_paths):
     
     new_redirects = ''
 
-    for i in range(len(from_paths)-1):
+    for i in range(len(from_paths)):
         if from_paths[i] not in netlify_config_text:
             new_redirects += redirect_text.format(from_paths[i], to_paths[i])
     
