@@ -19,6 +19,7 @@ import { GetStartedModal } from './components/GetStartedModal'
 import { HiddenSection } from './components/HiddenSection'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
+import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { PrivateCloud } from './components/LandingPage/PrivateCloud'
 import { ProductFeatureIcons } from './components/LandingPage/ProductFeatureIcons'
 import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
@@ -61,6 +62,7 @@ export const shortcodes = {
     HiddenSection,
     Features,
     Hero,
+    LandingPageCallToAction,
     PrivateCloud,
     ProductFeatureIcons,
     RecentBlogPosts,

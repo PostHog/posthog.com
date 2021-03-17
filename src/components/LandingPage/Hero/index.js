@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProductFeatureIcons } from '../ProductFeatureIcons'
 import { SocialProof } from '../SocialProof'
-import { CallToAction } from '../../CallToAction'
+import { LandingPageCallToAction } from '../LandingPageCallToAction'
 
 export const Hero = () => {
     return (
@@ -28,16 +28,7 @@ export const Hero = () => {
                 <div className="max-w-4xl mx-auto">
                     <ProductFeatureIcons />
                 </div>
-
-                <div className="flex flex-col">
-                    <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
-                        Get Started
-                    </CallToAction>
-                    <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
-                        Book a demo
-                    </CallToAction>
-                </div>
-
+                <LandingPageCallToAction />
                 <SocialProof />
             </div>
         </div>
