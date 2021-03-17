@@ -5,7 +5,7 @@ import { CornerBrackets } from '../../CornerBrackets'
 import airbalticLogo from '../images/SocialProofLogos/airbaltic.svg'
 import dataikuLogo from '../images/SocialProofLogos/dataiku.svg'
 import landmarkLogo from '../images/SocialProofLogos/landmark.svg'
-import tinkoffLogo from '../images/SocialProofLogos/webiny.svg'
+import tinkoffLogo from '../images/SocialProofLogos/tinkoff.svg'
 import hasuraLogo from '../images/SocialProofLogos/hasura.svg'
 import spacexLogo from '../images/SocialProofLogos/spacex.svg'
 import ycombinatorLogo from '../images/SocialProofLogos/ycombinator.svg'
@@ -31,7 +31,7 @@ export const SocialProof = () => {
                 <Logo logo={tinkoffLogo} alt="Tinkoff" />
             </div>
 
-            <div className="w-11/12 max-w-3xl mx-auto mt-24 bg-purple-500 bg-opacity-20 rounded p-8 text-center text-white relative">
+            <div className="w-11/12 max-w-xl mx-auto mt-24 bg-purple-500 bg-opacity-20 rounded p-8 text-center text-white relative">
                 <CornerBrackets spacing="lg" />
                 <p className="opacity-80">
                     PostHog is what I always wanted a Product Analytics SaaS to be. Private cloud option so GDPR becomes

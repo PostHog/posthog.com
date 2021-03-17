@@ -7,6 +7,7 @@ import { PrivateCloud } from '../components/LandingPage/PrivateCloud'
 import { Tutorials } from '../components/LandingPage/Tutorials'
 import { RecentBlogPosts } from '../components/LandingPage/RecentBlogPosts'
 import { Footer } from '../components/Footer/Footer'
+import { GetStartedModal } from 'components/GetStartedModal'
 
 import { SEO } from '../components/seo'
 
@@ -26,6 +27,7 @@ const IndexPage = () => {
             <Tutorials />
             <RecentBlogPosts />
             <Footer showNewsletter={true} />
+            <GetStartedModal />
         </div>
     )
 }

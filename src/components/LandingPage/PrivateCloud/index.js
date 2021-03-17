@@ -58,7 +58,7 @@ export const PrivateCloud = () => {
                 <div className="mt-24">
                     <div
                         style={{ background: 'rgba(255,255,255,.6)' }}
-                        className="rounded-lg p-12 pb-20 flex flex-col md:flex-row justify-between items-center"
+                        className="rounded-lg p-12 pb-20 flex flex-col md:flex-row justify-between items-start"
                     >
                         <div className="w-full md:w-1/2 md:mr-4 lg:w-5/12 relative z-30">
                             <h3 className="text-purpleish text-3xl font-semibold">Open-source to our core</h3>
@@ -93,10 +93,11 @@ export const PrivateCloud = () => {
 
                             <div className="mt-6 text-purpleish text-center">
                                 <p className="text-sm mb-1">
-                                    Here’s a handful of the <strong>263 people</strong> we have to thank for our
-                                    success.
+                                    Here’s a handful of the <strong>263 people</strong> we have to thank for our success
                                 </p>
-                                <p className="text-xs opacity-80">Based on contributions to PostHog Github libraries</p>
+                                <p className="text-xs opacity-80">
+                                    based on contributions to PostHog GitHub libraries.
+                                </p>
                             </div>
                         </div>
                     </div>

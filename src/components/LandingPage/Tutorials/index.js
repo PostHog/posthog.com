@@ -4,6 +4,7 @@ import { CallToAction } from '../../CallToAction'
 import featuresImg from '../images/safe-features.png'
 import userBehaviorImg from '../images/user-behavior.png'
 import funnelsImg from '../images/funnels.png'
+import { LandingPageCallToAction } from '../LandingPageCallToAction'
 
 export const Tutorials = () => {
     return (
@@ -14,14 +15,7 @@ export const Tutorials = () => {
                     Don’t get left behind. Join 2,700 companies using PostHog.
                 </p>
 
-                <div className="flex flex-col">
-                    <CallToAction icon="rocket" className="mx-auto" href="https://app.posthog.com/signup">
-                        Get Started
-                    </CallToAction>
-                    <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
-                        Book a demo
-                    </CallToAction>
-                </div>
+                <LandingPageCallToAction />
             </div>
 
             <div className="mt-24 text-center text-white w-11/12 max-w-4xl mx-auto">

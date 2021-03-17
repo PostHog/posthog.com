@@ -14,7 +14,7 @@ import checkImg from './images/check.svg'
 import bookImg from './images/book.svg'
 
 interface CallToActionProps {
-    onClick?: void
+    onClick?: () => void
     className?: string
     type?: string
     icon?: string
