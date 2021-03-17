@@ -163,7 +163,7 @@
 
 .city-wrapper {
     @media (min-width: 1024px) and (max-width: 1400px) {
-        padding-bottom: 10vw;
+        padding-bottom: 4vw;
     }
 }
 
@@ -209,6 +209,9 @@
 }
 
 .timeline-wrapper {
+    @media (max-width: 1440px) {
+        height: 595px; // leave room for scrollbar
+    }
     height: 580px;
     overflow-x: auto;
     overflow-y: hidden;

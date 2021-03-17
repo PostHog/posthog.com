@@ -21,7 +21,7 @@ const ProductFeatureIcon = ({ label, icon, expectedLaunchDate }: ProductIconData
     ) : null
 
     return (
-        <div className={`text-center text-baseline px-2 mb-4 lg:px-4 flex flex-col ${opacity}`}>
+        <div className={`text-center text-baseline leading-snug px-2 mb-4 lg:px-4 flex flex-col ${opacity}`}>
             <div className="h-12 flex items-center justify-around">
                 <img src={icon} alt={label} className="mb-0 block mx-auto" />
             </div>

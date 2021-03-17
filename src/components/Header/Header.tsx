@@ -15,7 +15,7 @@ interface NavbarLinkProps {
 }
 
 const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLinkProps) => {
-    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold '.concat(className)
+    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 text-xs font-semibold '.concat(className)
     const classList = textLight
         ? `text-white hover:text-white ${baseClasses}`
         : `text-black hover:text-black ${baseClasses}`
@@ -84,7 +84,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                     </NavbarLink>
                 </ul>
 
-                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0">
+                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0 text-2xs">
                     <PrimaryCta>Get Started</PrimaryCta>
                     <NavbarLink
                         href="https://app.posthog.com/login"
@@ -145,7 +145,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                         Login
                     </NavbarLink>
 
-                    <PrimaryCta className="my-2 ml-4">Get Started</PrimaryCta>
+                    <PrimaryCta className="my-2 ml-4 transition-none hover:transition-none">Get Started</PrimaryCta>
                 </ul>
             ) : null}
         </div>
