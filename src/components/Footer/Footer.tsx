@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
+import { NewsletterForm } from '../NewsletterForm'
 import logo from '../../images/posthog-hog-transparent.svg'
 
 interface FooterListItemProps {
@@ -28,7 +29,7 @@ const FooterListItem = ({ to = '', border = true, href = '', children }: FooterL
 }
 
 const FooterSubCategory = ({ children }: { children: any }) => (
-    <header className="block gosha text-white mt-8 font-bold text-base">{children}</header>
+    <header className="block gosha text-white mt-8 font-bold text-sm">{children}</header>
 )
 
 const FooterCategory = ({ children, title }: { children: any; title: string }) => {
@@ -50,12 +51,14 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-export const Footer = ({ onPostPage }: { onPostPage: boolean }) => {
+export const Footer = ({ onPostPage, showNewsletter = false }: { onPostPage: boolean; showNewsletter?: boolean }) => {
+    const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
     const { websiteTheme } = useValues(layoutLogic)
     const bgClass = onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
 
     return (
         <div className={`${bgClass} site-footer py-24 relative`}>
+            {newsletterSignup}
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">
                 <div className="w-full md:w-1/4 md:pr-8">
@@ -66,6 +69,9 @@ export const Footer = ({ onPostPage }: { onPostPage: boolean }) => {
                         </FooterListItem>
 
                         <FooterSubCategory>Product suite</FooterSubCategory>
+                        <FooterListItem to="/product-features/trends">Trends</FooterListItem>
+                        <FooterListItem to="/product-features/funnels">Funnels</FooterListItem>
+                        <FooterListItem to="/product-features/retention">Retention</FooterListItem>
                         <FooterListItem to="/product-features/session-recording">Session replay</FooterListItem>
                         <FooterListItem to="/product-features/feature-flags" border={false}>
                             Feature Flags
@@ -160,17 +166,17 @@ export const Footer = ({ onPostPage }: { onPostPage: boolean }) => {
             </div>
 
             <div className="w-11/12 mt-24 text-center mx-auto">
-                <span className="text-base text-white text-opacity-40">&copy; 2021 PostHog, Inc.</span>
+                <span className="text-sm font-bold text-white text-opacity-40">&copy; 2021 PostHog, Inc.</span>
                 <div className="mt-4">
                     <Link
                         to="/privacy"
-                        className="p-2 mx-1 text-white bg-transparent border rounded opacity-40 hover:text-white hover:opacity-100"
+                        className="p-2 mx-1 text-white bg-transparent border rounded opacity-60 hover:text-white hover:opacity-100"
                     >
                         Privacy
                     </Link>
                     <Link
                         to="/terms"
-                        className="p-2 mx-1 text-white bg-transparent border rounded opacity-40 hover:text-white hover:opacity-100"
+                        className="p-2 mx-1 text-white bg-transparent border rounded opacity-60 hover:text-white hover:opacity-100"
                     >
                         Terms
                     </Link>
