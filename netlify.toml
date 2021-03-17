@@ -2,3 +2,103 @@
   from = "/plugins/*"
   to = "/plugins"
   status = 200
+
+
+[[redirects]]
+    from = "/docs/integrations/android-integration"
+    to = "/docs/libraries/android-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/community"
+    to = "/docs/libraries/community"
+
+
+[[redirects]]
+    from = "/docs/integrations/docusaurus-integration"
+    to = "/docs/libraries/docusaurus-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/elixir-integration"
+    to = "/docs/libraries/elixir-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/flutter-integration"
+    to = "/docs/libraries/flutter-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/gatsby-integration"
+    to = "/docs/libraries/gatsby-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/go-integration"
+    to = "/docs/libraries/go-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/ios-integration"
+    to = "/docs/libraries/ios-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/js-integration"
+    to = "/docs/libraries/js-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/message-formatting"
+    to = "/docs/libraries/message-formatting"
+
+
+[[redirects]]
+    from = "/docs/integrations/microsoft-teams"
+    to = "/docs/libraries/microsoft-teams"
+
+
+[[redirects]]
+    from = "/docs/integrations/node-integration"
+    to = "/docs/libraries/node-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/php-integration"
+    to = "/docs/libraries/php-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/python-integration"
+    to = "/docs/libraries/python-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/react-native-integration"
+    to = "/docs/libraries/react-native-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/ruby-integration"
+    to = "/docs/libraries/ruby-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/rudderstack-integration"
+    to = "/docs/libraries/rudderstack-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/segment-integration"
+    to = "/docs/libraries/segment-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/sentry-integration"
+    to = "/docs/libraries/sentry-integration"
+
+
+[[redirects]]
+    from = "/docs/integrations/slack"
+    to = "/docs/libraries/slack"
