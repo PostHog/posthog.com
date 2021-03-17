@@ -168,8 +168,11 @@
 }
 
 .mountains {
-    @media (max-width: 639px) {
+    @media (max-width: 599px) {
         margin-top: -110%;
+    }
+    @media (max-width: 639px) {
+        margin-top: -90%;
     }
     @media (min-width: 640px) {
         margin-top: -30%;
