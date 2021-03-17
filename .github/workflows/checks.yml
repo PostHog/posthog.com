@@ -32,7 +32,7 @@ jobs:
 
             - name: Add safe redirects
               run: |
-                  PR_DIFF=$(git diff ${{ github.head_ref }} ${{ github.base_ref }}) python3 ./scripts/safe_rename.py
+                  PR_DIFF=$(git diff ${{ github.base_ref }} ${{ github.head_ref }})  python3 ./scripts/safe_rename.py
                   git add .
                   [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
 
