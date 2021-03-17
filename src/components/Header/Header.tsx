@@ -95,7 +95,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                     </NavbarLink>
                 </ul>
 
-                <button className="text-white h-3 w-3 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
+                <button className="text-white h-4 w-4 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
                     <img src={hamburgerIcon} className="block" />
                 </button>
             </div>

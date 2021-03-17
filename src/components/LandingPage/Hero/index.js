@@ -5,7 +5,7 @@ import { CallToAction } from '../../CallToAction'
 
 export const Hero = () => {
     return (
-        <div className="hero py-24">
+        <div className="hero py-12 sm:py-24">
             <div className="w-11/12 mx-auto text-center relative z-10 rounded">
                 <div className="max-w-3xl mx-auto">
                     <h1 className="text-white mb-0 pb-0">More than product analytics</h1>
