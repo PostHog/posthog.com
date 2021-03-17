@@ -16,6 +16,7 @@ import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { HiddenSection } from './components/HiddenSection'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
 import { PrivateCloud } from './components/LandingPage/PrivateCloud'
@@ -57,6 +58,7 @@ export const shortcodes = {
     FeaturesNav,
     Footer,
     GetStartedModal,
+    HiddenSection,
     Features,
     Hero,
     PrivateCloud,

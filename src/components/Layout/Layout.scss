@@ -359,6 +359,10 @@ ol {
     list-style-position: outside;
     list-style-image: none;
 }
+li {
+    font-size: 16px;
+    line-height: 1.5;
+}
 dl {
     margin-left: 0;
     margin-right: 0;
@@ -922,6 +926,7 @@ a.ant-anchor-link-title:hover {
     color: white;
     vertical-align: bottom;
     left: calc((100% - 960px) * 0.5 + 2.175rem);
+    max-width: 960px;
 }
 
 .blogHeaderTitle h1 {
