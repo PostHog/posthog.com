@@ -112,4 +112,4 @@ If you choose to match the URL as well, it will track any button on that page if
 If you have multiple sign up buttons on the same page, all with the same text and you want to track events relating to just one of them, you can use ‘Selector’. If they are technically the same element type **and** have the same classes, then you need to add a new class, `id` or `data-attr` to the button you wish to track separately, and use this to identify it.
 
 
-focused
+focussed
