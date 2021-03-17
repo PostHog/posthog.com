@@ -27,21 +27,20 @@ jobs:
             - name: Configure Git
               run: |
                   git fetch origin master:master
-                  export PR_DIFF=$(git diff master)
                   git config user.name PostHog Bot
                   git config user.email hey@posthog.com
+
+            - name: Add safe redirects
+              run: |
+                  PR_DIFF=$(git diff master) python3 ./scripts/safe_rename.py
+                  git add .
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
 
             - name: Correct spelling
               run: |
                   codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
                   git add .
                   [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos"
-
-            - name: Add safe redirects
-              run: |
-                  python3 ./scripts/safe_rename.py
-                  git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
 
             - name: Push changes
               run: |
