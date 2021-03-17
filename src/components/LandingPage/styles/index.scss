@@ -176,16 +176,16 @@
     }
     @media (min-width: 640px) {
         margin-top: -30%;
-        // height: 738px;
     }
     @media (min-width: 1024px) {
-        // height: 838px;
+        margin-top: -25%;
+    }
+    @media (min-width: 2200px) {
+        margin-top: -22%;
     }
     @media (min-width: 2800px) {
-        // height: 1000px;
-        // margin-top: -255px;
+        margin-top: -20%;
     }
-    // margin-top: -455px;
     width: 100%;
 }
 
