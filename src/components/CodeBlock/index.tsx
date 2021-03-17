@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/okaidia'
+import theme from 'prism-react-renderer/themes/nightOwl'
 import { getCookie, generateRandomHtmlId } from '../../lib/utils'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
