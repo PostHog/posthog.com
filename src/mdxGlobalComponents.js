@@ -6,6 +6,7 @@ import { CallToAction } from './components/CallToAction'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
+import { ContributorAvatars } from './components/ContributorAvatars'
 import { CornerBrackets } from './components/CornerBrackets'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -46,6 +47,7 @@ export const shortcodes = {
     CodeBlock,
     CompensationCalculator,
     Container,
+    ContributorAvatars,
     CornerBrackets,
     DarkModeToggle,
     DemoScheduler,

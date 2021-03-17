@@ -76,23 +76,17 @@ export const CallToAction = ({
         </>
     )
 
-    if (href) {
-        return (
-            <a href={href} target="_blank" className={classList} rel="noreferrer">
-                {innerHtml}
-            </a>
-        )
-    } else if (to) {
-        return (
-            <Link to={to} className={classList}>
-                {innerHtml}
-            </Link>
-        )
-    } else {
-        return (
-            <button onClick={onClick} className={classList}>
-                {innerHtml}
-            </button>
-        )
-    }
+    return href ? (
+        <a href={href} target="_blank" className={classList} rel="noreferrer">
+            {innerHtml}
+        </a>
+    ) : to ? (
+        <Link to={to} className={classList}>
+            {innerHtml}
+        </Link>
+    ) : (
+        <button onClick={onClick} className={classList}>
+            {innerHtml}
+        </button>
+    )
 }

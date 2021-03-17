@@ -10,7 +10,7 @@ import revenueTrackingImg from '../images/ProductFeatureIcons/revenue-tracking.s
 
 interface ProductIconData {
     label: string
-    icon: any
+    icon: string
     expectedLaunchDate?: string
 }
 
