@@ -1,7 +1,8 @@
 import re
 import os
 
-git_diff = os.environ['PR_DIFF']
+with open("./pr_diff", "r") as git_diff_file:
+    git_diff = git_diff_file.read()
 
 rename_from_regex = r'rename from contents(.*).md'
 rename_to_regex = r'rename to contents(.*).md'
