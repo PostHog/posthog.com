@@ -66,6 +66,10 @@
     }
 }
 
+.primary-navbar button {
+    transition: none;
+}
+
 .product-features {
     grid-template-columns: repeat(4, 1fr);
 
