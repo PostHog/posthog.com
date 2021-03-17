@@ -30,9 +30,18 @@ jobs:
                   git config user.name PostHog Bot
                   git config user.email hey@posthog.com
 
-            - name: Fix typos and add redirects
+            - name: Add safe redirects
               run: |
                   PR_DIFF=$(git diff ${{ github.head_ref }} ${{ github.base_ref }}) python3 ./scripts/safe_rename.py
+                  git add .
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
+
+            - name: Fix typos
+              run: |
                   codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
                   git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add fixes" && git push
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos"
+
+            - name: Push changes
+              run: |
+                  git push
