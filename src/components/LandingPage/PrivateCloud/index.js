@@ -96,7 +96,7 @@ export const PrivateCloud = () => {
                                     Here’s a handful of the <strong>263 people</strong> we have to thank for our
                                     success.
                                 </p>
-                                <p className="text-xs opacity-80">Based on contributions to PostHog Github libraries</p>
+                                <p className="text-xs opacity-80">Based on contributions to PostHog GitHub libraries</p>
                             </div>
                         </div>
                     </div>

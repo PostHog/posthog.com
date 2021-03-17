@@ -30,10 +30,6 @@ html {
     overscroll-behavior-y: none;
 }
 
-body {
-    margin: 0;
-}
-
 article,
 aside,
 details,
@@ -225,6 +221,8 @@ body {
     font-weight: normal;
     overflow-x: hidden;
     word-wrap: break-word;
+    margin: 0;
+    overscroll-behavior: none;
 }
 img {
     max-width: 100%;
