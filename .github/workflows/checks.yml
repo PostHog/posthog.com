@@ -32,7 +32,7 @@ jobs:
 
             - name: Fix typos and add redirects
               run: |
-                  PR_DIFF=$(git diff master) python3 ./scripts/safe_rename.py
+                  PR_DIFF=$(git diff ${{ github.head_ref }} ${{ github.base_ref }}) python3 ./scripts/safe_rename.py
                   codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
                   git add .
                   [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add fixes" && git push
