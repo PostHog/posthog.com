@@ -47,9 +47,6 @@ import { TableOfContents } from './components/TableOfContents'
 export const shortcodes = {
     BasicHedgehogImage,
     BlogFooter,
-    CodeBlock,
-    CompensationCalculator,
-    Container,
     CallToAction,
     CodeBlock,
     CompensationCalculator,
