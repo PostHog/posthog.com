@@ -12,7 +12,7 @@ import ycombinatorLogo from '../images/SocialProofLogos/ycombinator.svg'
 import staplesLogo from '../images/SocialProofLogos/staples.svg'
 import webinyLogo from '../images/SocialProofLogos/webiny.svg'
 
-const Logo = ({ logo, alt }) => <img src={logo} alt={alt} className="px-2" />
+const Logo = ({ logo, alt }: { logo: string; alt: string }) => <img src={logo} alt={alt} className="px-2" />
 
 export const SocialProof = () => {
     return (
