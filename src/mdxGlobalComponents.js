@@ -1,5 +1,6 @@
 // AUTO GENERATED FILE
 
+import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
@@ -43,6 +44,7 @@ import { StartNowButton } from './components/StartNowButton'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
+    ArrayCTA,
     BasicHedgehogImage,
     BlogFooter,
     CallToAction,
