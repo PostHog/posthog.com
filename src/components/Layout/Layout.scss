@@ -12,13 +12,15 @@
     font-family: 'Good Sans';
     src: url('/fonts/GoodSans-Medium.woff') format('woff');
     src: url('/fonts/GoodSans-Medium.woff2') format('woff2');
+    font-weight: normal;
 }
 
 /* Good Sans Bold */
 @font-face {
-    font-family: 'Good Sans Bold';
+    font-family: 'Good Sans';
     src: url('/fonts/GoodSans-Bold.woff') format('woff');
     src: url('/fonts/GoodSans-Bold.woff2') formt('woff2');
+    font-weight: bold;
 }
 
 html {
@@ -26,10 +28,6 @@ html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     overscroll-behavior-y: none;
-}
-
-body {
-    margin: 0;
 }
 
 article,
@@ -202,7 +200,6 @@ textarea {
 html {
     font: 112.5%/1.45em georgia, serif;
     box-sizing: border-box;
-    overflow-y: scroll;
 }
 * {
     box-sizing: inherit;
@@ -216,13 +213,16 @@ html {
 body {
     color: hsla(0, 0%, 0%, 0.8);
     font-family: 'Good Sans', Helvetica, Arial, sans-serif !important;
-    font-weight: normal;
-    word-wrap: break-word;
     font-kerning: normal;
+    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    font-weight: normal;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    margin: 0;
+    overscroll-behavior: none;
 }
 img {
     max-width: 100%;
@@ -247,7 +247,7 @@ h1 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 42px;
+    font-size: 48px;
     line-height: 150%;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
@@ -264,7 +264,7 @@ h2 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 36px;
+    font-size: 40px;
     line-height: normal;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
@@ -356,6 +356,10 @@ ol {
     margin-bottom: 1.45rem;
     list-style-position: outside;
     list-style-image: none;
+}
+li {
+    font-size: 16px;
+    line-height: 1.5;
 }
 dl {
     margin-left: 0;
@@ -920,6 +924,7 @@ a.ant-anchor-link-title:hover {
     color: white;
     vertical-align: bottom;
     left: calc((100% - 960px) * 0.5 + 2.175rem);
+    max-width: 960px;
 }
 
 .blogHeaderTitle h1 {

@@ -15,7 +15,7 @@ interface NavbarLinkProps {
 }
 
 const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLinkProps) => {
-    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 font-semibold tracking-wider '.concat(className)
+    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 text-xs font-semibold '.concat(className)
     const classList = textLight
         ? `text-white hover:text-white ${baseClasses}`
         : `text-black hover:text-black ${baseClasses}`
@@ -38,7 +38,7 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
     const { setIsGetStartedModalOpen } = useActions(layoutLogic)
 
-    const classList = `button-primary ${className}`
+    const classList = `button-primary ${className} border-none`
 
     return (
         <li className="leading-none">
@@ -60,7 +60,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
-        <div className={`primary-navbar py-6 ${backgroundColor}`}>
+        <div className={`primary-navbar py-6 ${backgroundColor} relative z-20`}>
             <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />
@@ -84,7 +84,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                     </NavbarLink>
                 </ul>
 
-                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0">
+                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0 text-2xs">
                     <PrimaryCta>Get Started</PrimaryCta>
                     <NavbarLink
                         href="https://app.posthog.com/login"
@@ -95,7 +95,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                     </NavbarLink>
                 </ul>
 
-                <button className="text-white h-3 w-3 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
+                <button className="text-white h-4 w-4 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
                     <img src={hamburgerIcon} className="block" />
                 </button>
             </div>
@@ -145,7 +145,7 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                         Login
                     </NavbarLink>
 
-                    <PrimaryCta className="my-2 ml-4">Get Started</PrimaryCta>
+                    <PrimaryCta className="my-2 ml-4 transition-none hover:transition-none">Get Started</PrimaryCta>
                 </ul>
             ) : null}
         </div>
