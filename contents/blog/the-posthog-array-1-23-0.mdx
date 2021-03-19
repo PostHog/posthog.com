@@ -40,6 +40,12 @@ If it is running, you'll see a green checkmark, and hovering over it will give t
 
 From this release (1.23.0) onwards, you **will not be able to ingest events** if your plugin server isn't running.
 
+### Special Note for CloudFormation Deployments
+
+If you've deployed PostHog via CloudFormation, make sure to check your memory limits, as they may be set too low by default (512MB).
+
+To run the plugin server, we recommend having _at least_ 1024MB of memory, or you might run the risk of running out of it.
+
 ## PostHog 1.23.0 Release Notes
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
