@@ -116,6 +116,11 @@ const faqs = [
         a:
             'Session recording generates events which are billed the same as any other event type. You can tightly control where it is used to manage the cost.',
     },
+    {
+        q: 'Do you offer a discount for non-profits?',
+        a:
+            'Yes - 50% off all pricing for cloud deployment. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
+    },
 ]
 
 export { plans, faqs }
