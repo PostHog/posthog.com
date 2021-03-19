@@ -31,6 +31,8 @@ import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
 import { PostCard } from './components/PostCard'
+import { PricingComparisonTable } from './components/PricingComparisonTable'
+import { PricingSlider } from './components/PricingSlider'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
 import { ResponsiveTopBar } from './components/ResponsiveTopBar'
@@ -75,6 +77,8 @@ export const shortcodes = {
     OtherFeaturesBlock,
     PageHeader,
     PostCard,
+    PricingComparisonTable,
+    PricingSlider,
     ResponsiveAnchor,
     ResponsiveSidebar,
     ResponsiveTopBar,
