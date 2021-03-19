@@ -1378,6 +1378,11 @@ table td {
             font-size: 14px;
         }
     }
+
+    html,
+    body {
+        overflow-x: hidden !important;
+    }
 }
 
 .card-elevated {
