@@ -87,7 +87,7 @@ const PricingPage = () => {
                             </div>
                         </Col>
                     </Row>
-                    <Row gutter={[24, 36]} type="flex" style={{ justifyContent: 'center', marginTop: '32px' }}>
+                    <Row gutter={[24, 36]} type="flex" style={{ justifyContent: 'left', marginTop: '32px' }}>
                         {(plans[state.planOptions] || []).map((plan) => (
                             <Col
                                 className="plan-card"
@@ -149,10 +149,10 @@ const PricingPage = () => {
                                     <PricingSlider pricingOption="vpc" />
                                 </div>
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Minimum price <b>$200</b> / month. <b>No setup cost</b>.
+                                    Minimum price <b>$2,000</b> / month. <b>No setup cost</b>.
                                 </div>
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Unsure about your numbers or want to talk?{' '}
+                                    Want to get started or to discuss?{' '}
                                     <a href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry">Contact us</a>.
                                 </div>
 
@@ -187,6 +187,13 @@ const PricingPage = () => {
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
+                                    <a href="https://app.posthog.com/signup">
+                                        <Button type="primary" size="large">
+                                            Get started
+                                        </Button>
+                                    </a>
+                                    <br />
+                                    <br />
                                     Unsure about your numbers or want to talk?{' '}
                                     <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
                                         Contact us
@@ -201,6 +208,23 @@ const PricingPage = () => {
                                     <li>You want an out-of-the-box secure solution.</li>
                                     <li>You want to get automatic updates with all the latest features.</li>
                                 </ul>
+                            </div>
+                        )}
+                        {state.planOptions === 'open-source' && (
+                            <div className="pricing-cloud">
+                                <h4>For casual use.</h4>
+                                <div>
+                                    Get simpler features to try it out or to run in production at low volumes for a
+                                    small team. Not suitable for 10K+ monthly users due to a slower performance
+                                    database.
+                                    <br />
+                                    <br />
+                                    <a href="https://posthog.com/docs/deployment">
+                                        <Button type="primary" size="large">
+                                            See docs
+                                        </Button>
+                                    </a>
+                                </div>
                             </div>
                         )}
                     </Row>
@@ -230,10 +254,10 @@ const PricingPage = () => {
 
                     <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
                         <Col span={24} align="middle">
-                            <h2 className="p-text-primary">Ready to get started?</h2>
+                            <h2 className="p-text-primary">Just want to get started?</h2>
                             <a href="https://app.posthog.com/signup">
                                 <Button type="primary" size="large">
-                                    Create my free account
+                                    Get started
                                 </Button>
                             </a>
                         </Col>

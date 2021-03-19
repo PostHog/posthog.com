@@ -1,4 +1,3 @@
-import imgOpenSource from '../images/plan-open-source.svg'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
 
@@ -44,30 +43,6 @@ const plans = {
                 '<span class="p-plan-benefit-lg">Everything in Enterprise, plus:</span>',
                 'PostHog deploys and maintains everything (in your own infrastructure)',
                 'Uptime and scalability SLAs',
-            ],
-        },
-    ],
-    'open-source': [
-        {
-            title: 'Open source',
-            image: imgOpenSource,
-            popular: true,
-            price: 'Free',
-            priceDetail: '',
-            description: 'Ideal for those with smaller traffic volumes, happy to manage their own infrastructure',
-            callToAction: 'Deploy',
-            callToActionDest: {
-                type: 'url',
-                value: 'https://posthog.com/docs/deployment',
-            },
-            benefits: [
-                'Advanced analytics',
-                '<a href="/docs/features/feature-flags" target="blank">Feature flags</a>',
-                '<a href="/docs/features/cohorts" target="blank">User cohorts</a>',
-                '<a href="/docs/features/users#user-history" target="blank">Individual user history</a>',
-                'Libraries for all major languages and frameworks',
-                'Integrations with Slack, Teams and Discord',
-                'Community support',
             ],
         },
     ],
