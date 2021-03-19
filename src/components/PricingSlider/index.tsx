@@ -20,7 +20,7 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
         let unitPricing = 0.000225
 
         const estimatedCost = value * unitPricing
-        let finalCost = estimatedCost > 200 ? estimatedCost : 200
+        let finalCost = estimatedCost > 2000 ? estimatedCost : 2000
 
         if (value >= 10000000 && value < 100000000) {
             unitPricing = 0.000045
