@@ -23,7 +23,9 @@ const BlogPage = ({
     return (
         <Layout>
             <SEO title="PostHog Blog" description="What we are up to, every week." />
-            <div className="blogPages">{posts}</div>
+            <div className="blogPages" style={{ marginTop: 20 }}>
+                {posts}
+            </div>
         </Layout>
     )
 }
