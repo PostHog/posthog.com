@@ -1,8 +1,10 @@
 // AUTO GENERATED FILE
 
+import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
+import { Culture } from './components/Careers/Culture'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
@@ -43,9 +45,11 @@ import { StartNowButton } from './components/StartNowButton'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
+    AnchorScrollNavbar,
     BasicHedgehogImage,
     BlogFooter,
     CallToAction,
+    Culture,
     CodeBlock,
     CompensationCalculator,
     Container,

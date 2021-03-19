@@ -12,6 +12,7 @@ import handbookImg from './images/handbook.svg'
 import roadmapImg from './images/roadmap.svg'
 import checkImg from './images/check.svg'
 import bookImg from './images/book.svg'
+import downArrow from './images/down-arrow.svg'
 
 interface CallToActionProps {
     onClick?: () => void
@@ -33,6 +34,7 @@ const icons = {
     roadmap: roadmapImg,
     check: checkImg,
     book: bookImg,
+    'down-arrow': downArrow,
     none: null,
 }
 
