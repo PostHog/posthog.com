@@ -4,7 +4,9 @@ import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
+import { Benefits } from './components/Careers/Benefits'
 import { Culture } from './components/Careers/Culture'
+import { InterviewProcess } from './components/Careers/InterviewProcess'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
@@ -49,7 +51,9 @@ export const shortcodes = {
     BasicHedgehogImage,
     BlogFooter,
     CallToAction,
+    Benefits,
     Culture,
+    InterviewProcess,
     CodeBlock,
     CompensationCalculator,
     Container,

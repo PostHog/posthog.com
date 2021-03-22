@@ -4,6 +4,7 @@ import remoteIcon from './images/remote.svg'
 import transparencyIcon from './images/transparency.svg'
 import communicationIcon from './images/communication.svg'
 import diversityIcon from './images/diversity.svg'
+import positionSkillsImg from './images/position-skills.svg'
 
 const CultureValue = ({ title, icon, children }: { title: string; icon: string; children: any }) => {
     return (
@@ -57,6 +58,9 @@ export const Culture = () => {
                         differences.
                     </p>
                 </CultureValue>
+            </div>
+            <div className="mt-12">
+                <img src={positionSkillsImg} className="max-w-3xl mx-auto" />
             </div>
         </div>
     )

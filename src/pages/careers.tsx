@@ -4,6 +4,8 @@ import { Header } from '../components/Header'
 import { CallToAction } from '../components/CallToAction'
 import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
 import { Culture } from '../components/Careers/Culture'
+import { InterviewProcess } from '../components/Careers/InterviewProcess'
+import { Benefits } from '../components/Careers/Benefits'
 
 import { Footer } from '../components/Footer/Footer'
 import { GetStartedModal } from 'components/GetStartedModal'
@@ -73,6 +75,8 @@ const IndexPage = () => {
                 </div>
 
                 <Culture />
+                <InterviewProcess />
+                <Benefits />
             </div>
 
             <Footer showNewsletter={true} />

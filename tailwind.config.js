@@ -23,6 +23,8 @@ module.exports = {
         extend: {
             fontFamily: {
                 gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
+                sans: ['Good Sans', 'Arial', 'Helvetica', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',
