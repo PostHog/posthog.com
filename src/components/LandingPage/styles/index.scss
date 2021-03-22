@@ -20,6 +20,7 @@
     }
 
     &:after {
+        background: url(../images/moon.svg);
         content: '';
         height: 539px;
         position: absolute;
@@ -31,14 +32,6 @@
         @media (min-width: 640px) {
             top: -5%;
             zoom: 1;
-        }
-    }
-}
-
-@media screen and (min-width: 1076px) {
-    .hero {
-        &:after {
-            background: url(../images/moon.svg);
         }
     }
 }
