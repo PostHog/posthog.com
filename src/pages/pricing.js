@@ -3,21 +3,18 @@ import { useLocation } from '@reach/router'
 import { Link } from 'gatsby'
 import queryString from 'query-string'
 import Layout from '../components/Layout'
-import { Row, Col, Button, Card, Collapse, Slider } from 'antd'
+import { Row, Col, Button, Card, Collapse } from 'antd'
 import { SEO } from '../components/seo'
 import './styles/pricing.scss'
 import 'antd/lib/collapse/style/css'
-import imgCloud from '../images/cloud.svg'
-import imgBuilding from '../images/building.svg'
-import imgChevronRight from '../images/chevron-right.svg'
-import imgCloudPlan from '../images/plan-cloud.svg'
 import 'antd/lib/slider/style/css'
 import { plans, faqs } from '../pages-content/pricing-data'
-import { DollarCircleTwoTone } from '@ant-design/icons'
+
+import { PricingComparisonTable } from 'components/PricingComparisonTable'
+import { PricingSlider } from 'components/PricingSlider'
 
 const PricingPage = () => {
     const [state, setState] = useState({ planOptions: 'cloud' })
-    const [priceSimulation, setPriceSimulation] = useState(250000)
     const comparisonRef = useRef()
     const location = useLocation()
     const { Panel } = Collapse
@@ -67,15 +64,15 @@ const PricingPage = () => {
                                     />{' '}
                                     Cloud
                                 </label>
-                                <label className={state.planOptions === 'enterprise' ? 'active' : ''}>
+                                <label className={state.planOptions === 'vpc' ? 'active' : ''}>
                                     <input
                                         type="radio"
-                                        value="enterprise"
+                                        value="vpc"
                                         name="planOptions"
-                                        checked={state.planOptions === 'enterprise'}
+                                        checked={state.planOptions === 'vpc'}
                                         onChange={(event) => handleSegmentChange(event)}
                                     />{' '}
-                                    Enterprise
+                                    VPC
                                 </label>
                                 <label className={state.planOptions === 'open-source' ? 'active' : ''}>
                                     <input
@@ -85,26 +82,12 @@ const PricingPage = () => {
                                         checked={state.planOptions === 'open-source'}
                                         onChange={(event) => handleSegmentChange(event)}
                                     />{' '}
-                                    Open source
+                                    Open Source
                                 </label>
-                            </div>
-                            <div style={{ paddingTop: '16px' }}>
-                                <a
-                                    href="#comparison"
-                                    onClick={(event) => {
-                                        event.preventDefault()
-                                        comparisonRef.current.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'start',
-                                        })
-                                    }}
-                                >
-                                    What is the difference?
-                                </a>
                             </div>
                         </Col>
                     </Row>
-                    <Row gutter={[24, 36]} type="flex" style={{ justifyContent: 'center', marginTop: '32px' }}>
+                    <Row gutter={[24, 36]} type="flex" style={{ justifyContent: 'left', marginTop: '32px' }}>
                         {(plans[state.planOptions] || []).map((plan) => (
                             <Col
                                 className="plan-card"
@@ -154,133 +137,93 @@ const PricingPage = () => {
                                 </Card>
                             </Col>
                         ))}
+                        {state.planOptions === 'vpc' && (
+                            <div className="pricing-cloud">
+                                <h4>For those with high volume usage or privacy needs.</h4>
+                                <div>
+                                    You host, we manage it. Pricing is logarithmic and gets much less expensive at
+                                    scale. No setup fee.
+                                </div>
+
+                                <div>
+                                    <PricingSlider pricingOption="vpc" />
+                                </div>
+                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                    Minimum price <b>$2,000</b> / month. <b>No setup cost</b>.
+                                </div>
+                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                    Want to get started or to discuss?{' '}
+                                    <a href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry">Contact us</a>.
+                                </div>
+
+                                <ul className="p-comparison-list">
+                                    <li>
+                                        Recommended if you have large volumes of events or users ({'>10k monthly users'}
+                                        ).
+                                    </li>
+                                    <li>You don't want user data to leave your infrastructure (e.g. HIPAA, SOC2).</li>
+                                    <li>You need full access to the production instance.</li>
+                                    <li>
+                                        You are concerned with browser privacy features, ad blockers, or third-party
+                                        cookie blockers.
+                                    </li>
+                                </ul>
+                            </div>
+                        )}
                         {state.planOptions === 'cloud' && (
                             <div className="pricing-cloud">
                                 <h4>One Price. Pay only for what you use.</h4>
                                 <div>
-                                    Get all the features with a straight and transparent pricing. Pay based on the
-                                    events you <b>capture</b> every month.
+                                    Get all the features with zero-minimum pricing. Pay based on the events you{' '}
+                                    <b>capture</b> every month.
                                 </div>
 
                                 <div>
-                                    <div className="main-price">
-                                        <div>
-                                            <DollarCircleTwoTone style={{ marginRight: 6 }} />
-                                            $0.000225/event
-                                            <span>per month</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <Slider
-                                            defaultValue={250000}
-                                            min={10000}
-                                            max={4000000}
-                                            step={20000}
-                                            tooltipVisible
-                                            tipFormatter={(value) => value.toLocaleString()}
-                                            onChange={(value) => setPriceSimulation(value)}
-                                        />
-                                        <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                                            {priceSimulation < 4000000 ? (
-                                                <>
-                                                    <span className="text-muted">Monthly estimate:</span>{' '}
-                                                    <b>
-                                                        $
-                                                        {Math.round(
-                                                            (priceSimulation - 10000) * 0.000225
-                                                        ).toLocaleString()}
-                                                    </b>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
-                                                        Contact us
-                                                    </a>{' '}
-                                                    to talk pricing.
-                                                </>
-                                            )}
-                                        </div>
-                                    </div>
+                                    <PricingSlider pricingOption="cloud" />
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Looking for our free plan? First <b>10,000 events are free</b> every single month.
-                                    For everyone.
+                                    First <b>10,000 events are free</b> every single month.
                                 </div>
 
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Have very large volumes? If you expect to capture more than 4 million events per
-                                    month,{' '}
+                                    <a href="https://app.posthog.com/signup">
+                                        <Button type="primary" size="large">
+                                            Get started
+                                        </Button>
+                                    </a>
+                                    <br />
+                                    <br />
+                                    Unsure about your numbers or want to talk?{' '}
                                     <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
-                                        contact us
+                                        Contact us
                                     </a>
                                     .
                                 </div>
 
-                                <Card className="feature-card">
-                                    <div className="plan-image">
-                                        <img src={imgCloudPlan} alt="" className="inline-block" />
-                                    </div>
-                                    <div className="text-center">
-                                        <h5>Features included</h5>
-                                    </div>
-                                    <ul style={{ listStyle: 'none' }}>
-                                        <li>
-                                            <b>Unlimited</b> event allocation. Pay only for what you use.
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>Unlimited</b> tracked users
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>Unlimited</b> team members
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>Unlimited</b> projects
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>7 years</b> of data retention
-                                            <span className="disclaimer">
-                                                <a href="#disclaimer-1">1</a>
-                                            </span>
-                                        </li>
-                                        <li className="mt-2">
-                                            <b>All core analytics features</b>
-                                        </li>
-                                        <li className="mt-2">
-                                            Session recording with unlimited storage
-                                            <span className="disclaimer">
-                                                <a href="#disclaimer-2">2</a>
-                                            </span>
-                                        </li>
-                                        <li className="mt-2">Feature flags</li>
-                                        <li className="mt-2">Plugins &amp; other integrations</li>
-                                        <li className="mt-2">Zapier integration</li>
-                                        <li className="mt-2">SSO/SAML</li>
-                                        <li className="mt-2">Export to data lakes</li>
-                                        <li className="mt-2">Community, Slack &amp; Email support</li>
-                                    </ul>
-                                    For companies using on average 1,000,000 events per month or more, we offer{' '}
-                                    <b>priority support</b>.
-                                </Card>
+                                <ul className="p-comparison-list">
+                                    <li>Immediate start</li>
+                                    <li>You don't have significant privacy requirements</li>
+                                    <li>You don't want PostHog on your infrastructure</li>
+                                    <li>You want an out-of-the-box secure solution.</li>
+                                    <li>You want to get automatic updates with all the latest features.</li>
+                                </ul>
                             </div>
                         )}
-                        <Col span={24} align="middle">
-                            All prices in US Dollars (USD), excluding taxes
-                        </Col>
-                        <Col span={24} align="middle">
-                            <Link to="/product-features" className="p-features-link">
-                                Full features details <img alt="" src={imgChevronRight} />
-                            </Link>
-                        </Col>
-                        {state.planOptions === 'cloud' && (
-                            <div className="disclaimer-details">
-                                <div id="disclaimer-1">
-                                    1. Data may be moved to cold storage after 12 months. Queries that involve data in
-                                    cold storage can take longer than normal to run.
-                                </div>
-                                <div id="disclaimer-2">
-                                    2. While there is no restriction on session recording storage, session recording
-                                    information is captured and stored as normal events and therefore billed as such.
+                        {state.planOptions === 'open-source' && (
+                            <div className="pricing-cloud">
+                                <h4>For casual use.</h4>
+                                <div>
+                                    Get simpler features to try it out or to run in production at low volumes for a
+                                    small team. Not suitable for 10K+ monthly users due to a slower performance
+                                    database.
+                                    <br />
+                                    <br />
+                                    <a href="https://posthog.com/docs/deployment">
+                                        <Button type="primary" size="large">
+                                            See docs
+                                        </Button>
+                                    </a>
                                 </div>
                             </div>
                         )}
@@ -289,71 +232,9 @@ const PricingPage = () => {
                     <Row gutter={[24, 24]} style={{ marginTop: '32px' }}>
                         <Col span={24}>
                             <div ref={comparisonRef} id="comparison"></div>
-                            <h2>Cloud vs. Enterprise</h2>
-                            <p>
-                                Cloud or Enterprise? We'd love to help you find the option that's <b>right for you</b>.
-                            </p>
+                            <h2>Full Comparison</h2>
                         </Col>
-                        <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
-                            <Col md={12} sm={24}>
-                                <div className="p-full-height">
-                                    <h4 className="p-text-primary p-title-with-icon">
-                                        <img src={imgCloud} alt="" style={{ paddingRight: 0 }} />
-                                        Cloud
-                                    </h4>
-                                    <ul className="p-comparison-list">
-                                        <li>
-                                            Recommended if you want to get started <b>right now</b>. Start capturing
-                                            events in under 5 minutes.
-                                        </li>
-                                        <li>
-                                            You don’t own or want to own your own technical infrastructure.
-                                            <b> We’ll handle everything for you.</b>
-                                        </li>
-                                        <li>You want an out-of-the-box secure solution.</li>
-                                        <li>You want to get automatic updates with all the latest features.</li>
-                                    </ul>
-                                    <div className="p-comparison-btn">
-                                        <a href="https://app.posthog.com/signup">
-                                            <Button type="primary" size="large">
-                                                Start my 30-day free trial
-                                            </Button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={12} sm={24}>
-                                <div className="p-full-height">
-                                    <h4 className="p-text-primary p-title-with-icon">
-                                        <img src={imgBuilding} alt="" /> Enterprise
-                                    </h4>
-                                    <ul className="p-comparison-list">
-                                        <li>Recommended if you have large volumes of events or users ({'>100k'}).</li>
-                                        <li>
-                                            You have strict compliance requirements on privacy or data handling (e.g.
-                                            HIPAA, SOC2).
-                                        </li>
-                                        <li>
-                                            You need dedicated support, and want regular touch points with our team to
-                                            get the best value.
-                                        </li>
-                                        <li>
-                                            You are concerned with browser privacy features, ad blockers, or third-party
-                                            cookie blockers.
-                                        </li>
-                                    </ul>
-                                    <div className="p-comparison-btn">
-                                        <Button
-                                            type="primary"
-                                            size="large"
-                                            href="mailto:sales@posthog.com?title=Start enterprise deployment"
-                                        >
-                                            Contact sales
-                                        </Button>
-                                    </div>
-                                </div>
-                            </Col>
-                        </Row>
+                        <PricingComparisonTable />
                     </Row>
 
                     <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
@@ -372,53 +253,11 @@ const PricingPage = () => {
                     </Row>
 
                     <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
-                        <Col span={24} id="non-profits">
-                            <Card>
-                                <h4 className="text-center">Are you a non-profit?</h4>
-                                We're committed to helping non-profit organizations and we're offering a{' '}
-                                <b>50% discount off any of our plans</b>, as part of our commitment to supporting these
-                                organizations. To redeem:{' '}
-                                <ol className="redemption-instructions">
-                                    <li>
-                                        <a href="https://app.posthog.com/signup?utm_campaign=pricing-non-profits&utm_medium=landing-website">
-                                            Sign up
-                                        </a>{' '}
-                                        for a regular PostHog account.
-                                    </li>
-                                    <li>
-                                        Go to{' '}
-                                        <a href="https://app.posthog.com/organization/billing?utm_campaign=pricing-non-profits&utm_medium=landing-website">
-                                            Billing
-                                        </a>
-                                        , activate the <i>Standard plan</i> and enter your card billing information.
-                                    </li>
-                                    <li>
-                                        Send us an email to{' '}
-                                        <a href="mailto:sales@posthog.com?subject=Non-profit%20plan">
-                                            sales@posthog.com
-                                        </a>{' '}
-                                        from the email address you used to register, and include some details about your
-                                        organization.
-                                    </li>
-                                    <li>We'll apply the 50% discount to your account.</li>
-                                </ol>
-                                <div>
-                                    To redeem the offer for Enterprise plans just{' '}
-                                    <a href="mailto:sales@posthog.com?subject=Non-profit%20enterprise%20plan">
-                                        send us an email
-                                    </a>
-                                    .
-                                </div>
-                            </Card>
-                        </Col>
-                    </Row>
-
-                    <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
                         <Col span={24} align="middle">
-                            <h2 className="p-text-primary">Ready to get started?</h2>
+                            <h2 className="p-text-primary">Just want to get started?</h2>
                             <a href="https://app.posthog.com/signup">
                                 <Button type="primary" size="large">
-                                    Create my free account
+                                    Get started
                                 </Button>
                             </a>
                         </Col>

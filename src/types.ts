@@ -21,3 +21,23 @@ export interface LibraryPluginType {
     imageLink: string
     maintainer?: string
 }
+
+export interface MenuProps {
+    isBlogArticlePage?: boolean
+    isHomePage?: boolean
+    activeKey: string
+}
+
+export interface MenuQueryNodeType {
+    node: {
+        name: string
+        link: string
+        a: string
+    }
+}
+
+export interface MenuQueryType {
+    allMenuItemsJson: {
+        edges: MenuQueryNodeType[]
+    }
+}
