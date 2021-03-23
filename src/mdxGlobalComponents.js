@@ -7,6 +7,7 @@ import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
 import { Culture } from './components/Careers/Culture'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
+import { OpenRoles } from './components/Careers/OpenRoles'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -55,6 +56,7 @@ export const shortcodes = {
     Benefits,
     Culture,
     InterviewProcess,
+    OpenRoles,
     WorkingAtPostHog,
     CodeBlock,
     CompensationCalculator,

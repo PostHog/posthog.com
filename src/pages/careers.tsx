@@ -7,6 +7,7 @@ import { Culture } from '../components/Careers/Culture'
 import { InterviewProcess } from '../components/Careers/InterviewProcess'
 import { Benefits } from '../components/Careers/Benefits'
 import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
+import { OpenRoles } from '../components/Careers/OpenRoles'
 
 import { Footer } from '../components/Footer/Footer'
 import { GetStartedModal } from 'components/GetStartedModal'
@@ -79,6 +80,7 @@ const IndexPage = () => {
                 <InterviewProcess />
                 <Benefits />
                 <WorkingAtPostHog />
+                <OpenRoles />
             </div>
 
             <Footer showNewsletter={true} />
