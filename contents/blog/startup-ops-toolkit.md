@@ -41,7 +41,9 @@ If you need an Employer of Record service, Deel now offer this too - super usefu
 
 Orrick have a <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.orrick.com/en/Total-Access/Tool-Kit/Start-Up-Forms/Employment-and-Consultant">handy free set of templates</a> you can use! (US only)
 
-You need both an Offer Letter and a Confidential Information and Invention Assignment Agreement (US only). Deel have free templates integrated into their platform already, so you’ll only usually use these for permanent employees, unless you want to use a customized contractor agreement in Deel.
+You need both an Offer Letter and a Confidential Information and Invention Assignment Agreement (US only). The CIIAA means that your employees agree that their work is confidential and whatever they build at work is owned by the company. Not having this = major problems in future, especially for fundraising.
+
+Deel have free templates integrated into their platform already, so you’ll only usually use these for permanent employees, unless you want to use a customized contractor agreement in Deel.
 
 Do not pay a lawyer to create contract templates for you - it is a fantastic waste of money better spent when you need them to handle your next funding round.
 
@@ -76,6 +78,8 @@ Put it in <a target="_blank" rel="noopener noreferrer nofollow" href="https://ww
 
 In Europe, <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.revolut.com/">Revolut</a> are about the only digital bank that get anywhere near Brex features-wise, although I find their platform a lot more buggy.
 
+I know what you're thinking - surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (in the early days) prioritising having your cash easily accessible vs. trying to optimise for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
+
 ## Ok, but what about…?
 
 Recruitment? Sales? HR? Business planning? You may or may not consider these ops, but for the sake of simplicity I’m throwing them in under ‘anything that is not building the product or talking to customers’.
@@ -86,7 +90,7 @@ You can do these perfectly fine in a well-organized Google Doc or Sheet. Just be
 - <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.hubspot.com/">HubSpot</a> for sales. Various tiers and combos available, starting from free. Free doesn’t mean you should start there though.
 - Something like <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.charliehr.com/">Charlie</a> or <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.hibob.com/">Bob</a> for things like recording salaries, addresses etc.. Around $6 per employee per month usually.
 
-For business planning, I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and people really don’t like having to use another multiple platforms to track what they’re doing.
+For business planning (setting OKRs etc.), I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and people really don’t like having to use another multiple platforms to track what they’re doing.
 
 Congrats, you have hopefully saved a bunch of precious time and mental energy that can now be used on building the product, talking to customers, recruiting and creating (presumably) massive hype on Clubhouse.
 
