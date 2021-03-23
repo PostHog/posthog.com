@@ -60,7 +60,7 @@ No more than 6 people, but that's the only rule. It could be any group of people
 
 ## Will this lead to inconsistent design?
 
-Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use Ant Design, we don't need this just yet.
+Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
 
 ## Can people change teams?
 
