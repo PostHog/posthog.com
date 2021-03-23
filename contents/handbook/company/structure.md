@@ -98,3 +98,7 @@ Marcus (Tim until Marcus starts) will be ultimately responsible for us having (i
 Marcus (Tim until Marcus starts) has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
+
+## Can a Small Team "own" another Small Team?
+
+Not for now, no. Perhaps when we're much larger this is something to think about.
