@@ -29,11 +29,14 @@ export const CompensationCalculator = () => {
 
     useEffect(() => {
         if (window) {
-            if (localStorage.getItem('job')) setJob(localStorage.getItem('job') || 'Engineer')
+            if (localStorage.getItem('job') && sfBenchmark[localStorage.getItem('job')])
+                setJob(localStorage.getItem('job'))
             if (localStorage.getItem('country')) setCountry(localStorage.getItem('country') || 'United States')
             if (localStorage.getItem('region')) setRegion(localStorage.getItem('region') || 'San Francisco, California')
-            if (localStorage.getItem('level')) setLevel(localStorage.getItem('level') || 'Senior')
-            if (localStorage.getItem('step')) setStep(localStorage.getItem('step') || 'Thriving')
+            if (localStorage.getItem('level') && levelModifier[localStorage.getItem('level')])
+                setLevel(localStorage.getItem('level') || 'Senior')
+            if (localStorage.getItem('step') && stepModifier[localStorage.getItem('step')])
+                setStep(localStorage.getItem('step') || 'Thriving')
         }
     }, [])
 
