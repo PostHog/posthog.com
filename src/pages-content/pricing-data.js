@@ -51,12 +51,12 @@ const faqs = [
     {
         q: 'How do I know what my volume is?',
         a:
-            'The easiest way is to enable a cloud plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is. If you have very high volumes (10M+ monthly events, 100K+ monthly users, our VPC product is probably the most cost effective.',
+            'The easiest way is to enable a cloud plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is.',
     },
     {
         q: 'Is there a free trial on paid plans?',
         a:
-            'Yes! When you activate your Cloud plan, you will get the first 10k events free permanently. If you want to trial the VPC plan, we recommend keeping the volume very low so any fees are negligible - contact sale@posthog.com to discuss.',
+            'Yes! When you activate your Cloud plan, you will get the first 10k events free permanently. For VPC, we do not offer this, because the functionality is identical.',
     },
     {
         q: 'What happens after the data retention period elapses?',
@@ -75,7 +75,7 @@ const faqs = [
     {
         q: 'Are there any minimums or annual commitments?',
         a:
-            'No! Our cloud and VPC plans are simple, pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing.',
+            'For cloud, there is no minimum - pay for what you use. No commitments, no minimums, no hidden fees, no add-on fees, simple pricing. For VPC, we have a minimum of $2k/month commitment at this time.',
     },
     {
         q: 'What currency are your prices in?',
