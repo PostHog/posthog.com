@@ -13,7 +13,7 @@ Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but w
 
 More importantly, what are the tools you can use to streamline and automate these?
 
-**Spoiler alert**: it’s Deel + Gusto + Fondo + Pry + Brex + some free contract templates + Google Sheets/Docs
+**Spoiler alert**: it’s Deel + Gusto + Fondo + Pry + Brex + some free contract templates + Google Sheets/Docs + Workable + Hubspot + Charlie
 
 This article is US-focused, but most of it applies to any country. I won’t offer multiple options here - these are the tools that I have settled on using personally after a bunch of research and trying out different things.
 
