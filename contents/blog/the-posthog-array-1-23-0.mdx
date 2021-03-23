@@ -7,14 +7,11 @@ showTitle: true
 hideAnchor: true
 ---
 
-On this edition of the PostHog Array... a combo! A fresh homepage with a side of "new release".
-
-1.23.0 is here and it only isn't the biggest news of the week because our [landing page](/) makeover is 🔥. An amazing job by Cory, Lottie, and Mike from our team!
-
+In this edition of the PostHog Array: Release 1.23 is out, and our 🔥 new [PostHog.com homepage](/) is live - amazing work from PostHoggers Cory, Lottie, and Mike!
 
 ### Community MVP
 
-The community MVP for PostHog 1.23.0 is Sandeep ([samcaspus](https://github.com/samcaspus)), who helped us out with yet another contribution! If you open a new issue, there's a pretty high change Sandeep will jump on it - you're awesome!
+The PostHog 1.23.0 community MVP is Sandeep ([samcaspus](https://github.com/samcaspus)) - a frequent contributor to Posthog. If you open a new issue, there's a high change Sandeep will jump on it!
 
 Anyone can contribute to PostHog and open source, whether it's code, copy, design or discussion. We're delighted that our community are so passionate that they even [share PostHog with their family](https://github.com/PostHog/posthog.com/issues/1036#issuecomment-788732593) ;)
 
@@ -54,35 +51,29 @@ To run the plugin server, we recommend having _at least_ 1024MB of memory, or yo
 
 ![Toolbar Date Filter](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/toolbar-date.png)
 
-Following a fierce battle with Webpack, Marius brought us the heatmap date filters. 
-
-Our heatmaps are now on a whole new level as they are no longer set to show only the last 7 days but allow you to pick any date range. You can now see heatmaps of yesterday, the last 30 days, or any range you like!
+Following a fierce battle with Webpack, Marius developed our new Heatmap date filters allowing you to now select any date range rather than been fixed to only the last week.
 
 ### [Automatic Filtering of Test Accounts](https://github.com/PostHog/posthog/pull/3492)
 
 ![Filter test accounts](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/filter-test-accounts.png)
 
-If you've ever found yourself looking at a graph and wondering: "how much do events from me and my team affect this data?", well, your days of wondering are over.
-
-We now provide you with a toggle in 'Insights' to automatically filter out test accounts and your team's accounts your team from your graphs. Out of the box we provide you with some basic relevant filters, but you can also configure this yourself in 'Settings'.
+Have you ever wondered what effect your team's usage is having on your analytics data? Well your wondering days are over. You can can now toggle events from internal accounts to be automatic filtered out when viewing Insights. We've provided some convenient filtering defaults, which can customized further in 'Settings'.
 
 ### [Webhooks Are Back - And They're Better](https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Aclosed+webhook)
 
 ![Webhooks](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/webhooks.png)
 
-Members of our community pointed out to us that our latest release caused some issues with webhooks on self-hosted FOSS installations. Largley with help from various community members who provided us with context and feedback, we have now addressed these issues and webhooks should work as normal on 1.23.0.
+We made a big improvement to webhooks, you can now access all event properties in your webhook messages. This change opens up a whole new world of possibilities for creating useful alerts and notifications.
 
-However, we made sure to throw in a little treat to make up for it. You can now access all event properties in your webhook messages, which opens up a whole new realm of possibilities for creating useful alerts and notifications for when certain actions are triggered in PostHog.
+A big thank you to diligent members of our community who reported and helped us debug and fix issues with webhooks on certain self-hosted FOSS setups.
 
 ### [Organization Settings & Gravatar Support](https://github.com/PostHog/posthog/pull/3584)
 
 ![Gravatars](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/gravatar.png)
 
-PostHog now has an 'Organization Settings' page that lets you rename and delete your organization, as well as manage invites.
+We've added an 'Organization Settings' page that lets you rename and delete your organization, as well as manage invites.
 
-Oh, and don't we all love gravatars? 
-
-Well, if you have one set for your email, PostHog will now display it on your profile and the 'Organization Settings' page.
+If you have a Gravatar associated with your email, PostHog will now display it on your profile and the 'Organization Settings' page.
 
 ### [First Time Event Tracker Plugin](/plugins/first-time-event-tracker)
 
@@ -93,9 +84,9 @@ Based on user requests, we have now built a plugin that adds two boolean propert
 - `is_event_first_ever`: tells you if the event if the first event of its kind
 - `is_event_first_for_user`: tells you if the event is the first event of its kind for the user
 
-By enabling it you are then able to add a filter for those properties on all your analytics, to determine things like conversion rates from first touch.
+By enabling the plugin, you can filter for those properties on all your analytics, to determine things like conversion rates from first touch.
 
-> **Important:** This plugin will only work on events ingested after the plugin was enabled. This means it will register events as being the first if there were events that occurred before it was enabled. 
+> **Important:** This plugin will only work on events ingested after the plugin was enabled. This means it will register events as being the first if there were events that occurred before it was enabled.
 
 ### [User Interviews](calendly.com/posthog-feedback)
 
@@ -108,9 +99,7 @@ Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com
 
 ## Favorite ~~Issue~~ Banter
 
-Don't think looking at people review PRs is entertaining? Think again!
-
-Here's an inside look into a PR review from our M² team (Michael & Marius):
+Are PR reviews putting you to sleep? Not at PostHog, it's all excitement! Here's a snippet of a PR review from our M² team (Michael & Marius):
 
 ![M2 PR Review](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/pr-review.png)
 
@@ -125,7 +114,7 @@ Big thanks to the following members of our community who have contributed to Pos
 
 ## Open Roles
 
-Are you a Fullstack Engineer, Senior Engineer, Site Reliability Engineer, Sales Engineer, Product Marketer, or Content Writer?
+Are you a Fullstack Engineer, Senior Engineer, Site Reliability Engineer, Sales Engineer, Product Marketer, or Content Marketer?
 
 Or perhaps you're not either but think you'd still be a good fit for PostHog?
 
