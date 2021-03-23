@@ -79,6 +79,9 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                     <NavbarLink to="/pricing" textLight={textLight}>
                         Pricing
                     </NavbarLink>
+                    <NavbarLink to="/blog" textLight={textLight}>
+                        Blog
+                    </NavbarLink>
                     <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
                         GitHub
                     </NavbarLink>
