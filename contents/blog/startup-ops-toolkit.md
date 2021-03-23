@@ -80,8 +80,6 @@ In Europe, <a target="_blank" rel="noopener noreferrer nofollow" href="https://w
 
 Recruitment? Sales? HR? Business planning? You may or may not consider these ops, but for the sake of simplicity I’m throwing them in under ‘anything that is not building the product or talking to customers’.
 
-
-
 You can do these perfectly fine in a well-organized Google Doc or Sheet. Just be disciplined and keep it up to date. Once you start spending half a day per week on these things, then you should invest in:
 
 - <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.workable.com/">Workable</a> for recruitment. $99 per role per month, pay as you go.
@@ -93,5 +91,3 @@ For business planning, I’m yet to find a tool that genuinely convinces me of i
 Congrats, you have hopefully saved a bunch of precious time and mental energy that can now be used on building the product, talking to customers, recruiting and creating (presumably) massive hype on Clubhouse.
 
 <iframe src="https://giphy.com/embed/26DNdV3b6dqn1jzR6" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/26DNdV3b6dqn1jzR6">via GIPHY</a></p>
-
-[Try PostHog Cloud](https://app.posthog.com/signup), get started in less than a minute.
