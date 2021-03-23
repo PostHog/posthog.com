@@ -6,6 +6,7 @@ import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
 import { Culture } from '../components/Careers/Culture'
 import { InterviewProcess } from '../components/Careers/InterviewProcess'
 import { Benefits } from '../components/Careers/Benefits'
+import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 
 import { Footer } from '../components/Footer/Footer'
 import { GetStartedModal } from 'components/GetStartedModal'
@@ -77,6 +78,7 @@ const IndexPage = () => {
                 <Culture />
                 <InterviewProcess />
                 <Benefits />
+                <WorkingAtPostHog />
             </div>
 
             <Footer showNewsletter={true} />
