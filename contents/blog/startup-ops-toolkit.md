@@ -33,7 +33,7 @@ Time suck alert - online state registration laws vary and all of their websites 
 
 ### Contractors
 
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://www.letsdeel.com/">Deel</a> is the only way to go. They cover pretty much any country and currency you’ll need, handle all the compliance stuff for you, and generally make the process way more pleasant than it has any right to be. Plus their support is insanely responsive and helpful. It’s probably my favourite ops product. Deel charge \$35/month per contractor.
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://www.letsdeel.com/">Deel</a> is the only way to go. They cover pretty much any country and currency you’ll need, handle all the compliance stuff for you, and generally make the process way more pleasant than it has any right to be. Plus their support is insanely responsive and helpful. It’s probably my favorite ops product. Deel charge \$35/month per contractor.
 
 If you need an Employer of Record service, Deel now offer this too - super useful if you are hiring permanent employees outside the US in a country where you don’t have a legal presence.
 
@@ -68,7 +68,7 @@ Don’t spend too much time making financial forecasts at an early stage - your 
 
 A relatively new tool called <a target="_blank" rel="noopener noreferrer nofollow" href="http://pry.co/">Pry</a> has been a game-changer for us. Yes, we all know you can “just” do it in Excel (which you will want to if you have a finance background), but a tool like Pry makes it so much easier. And you can skip the 2 years chained to your desk at Goldman!
 
-Pry connects seamlessly with your accounting software, and you then just fill out assumptions manually or using very simple formulae. Pry also has neat dashboards for visualising everything, as well as scenario modelling. They currently charge \$100/month, though worth asking for a discount if you are a startup...
+Pry connects seamlessly with your accounting software, and you then just fill out assumptions manually or using very simple formulae. Pry also has neat dashboards for visualizing everything, as well as scenario modeling. They currently charge \$100/month, though worth asking for a discount if you are a startup...
 
 ## Where to put the money
 
@@ -78,7 +78,7 @@ Put it in <a target="_blank" rel="noopener noreferrer nofollow" href="https://ww
 
 In Europe, <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.revolut.com/">Revolut</a> are about the only digital bank that get anywhere near Brex features-wise, although I find their platform a lot more buggy.
 
-I know what you're thinking - surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (in the early days) prioritising having your cash easily accessible vs. trying to optimise for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
+I know what you're thinking - surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (in the early days) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though - you should talk to one if you decide this is important.
 
 ## Ok, but what about…?
 
