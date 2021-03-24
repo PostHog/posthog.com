@@ -37,7 +37,7 @@ export class NewsletterForm extends React.Component {
 
                         <div className="w-full lg:w-1/3 lg:ml-4">
                             <form
-                                action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=1474906643"
+                                action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
                                 method="post"
                                 id="mc-embedded-subscribe-form"
                                 name="mc-embedded-subscribe-form"
@@ -64,7 +64,7 @@ export class NewsletterForm extends React.Component {
                                     <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
                                         <input
                                             type="text"
-                                            name="b_292207b434c26e77b45153b96_1474906643"
+                                            name="b_292207b434c26e77b45153b96_97194afa0a"
                                             tabIndex={-1}
                                             defaultValue
                                         />
