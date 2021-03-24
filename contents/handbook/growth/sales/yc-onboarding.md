@@ -82,6 +82,20 @@ You should:
 - After they've gotten set up, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations)
 - Add their email domain to the 'YC W21 Onboarded Users' cohort as a new match group that tags `email contains @theirdomain.com`
 
+## Processing AirPods and Allbirds orders
+
+We collect responses to the [the merch form](https://forms.gle/K61bhD6uLxaaTqoK6) and process these manually once a week by placing the orders on the user's behalf. You can just place the order on your Brex card. 
+
+We provide the standard [AirPods](https://www.apple.com/shop/product/MV7N2AM/A/airpods-with-charging-case) and case (ie. not AirPods Pro or the wireless charging case). For Allbirds, we provide any shoes that show as $95 or less on their [US site](https://www.allbirds.com/). 
+
+This is where we buy from, in descending order of preference:
+
+1. Buy directly from that country's Apple or Allbirds site. This usually applies to the USA, UK and EU. For Apple, use your Brex card via [this referral link](https://apple.sjv.io/c/2279798/524650/7613?subId1=VXNlcjpjdXVzZXJfY2tlY28zN29zMDAyMTAxcmF5OWY4c201OA==&sharedId=RewardsMarketplace) as it gets us cashback. 
+2. Send an Amazon gift card for $100 equivalent from their local store.
+3. If Amazon is not available in their country, ask the user to buy and send us a receipt, and we will reimburse to their bank account.
+
+When ordering from Apple, put in your email address as the main one for the order, and then add the user's email address under 'Share delivery updates' so they can easily track their order. For Allbirds, you will need to put in your email address and then just forward the receipt to the user for them to track. You should not just put in their email address for the order, as you won't then get a copy of the receipt for expenses. 
+
 ## Current Responsibilities
 
 Yakko currently handles YC onboarding calls while Charles processes merch requests. Paolo is the point of contact for billing issues.

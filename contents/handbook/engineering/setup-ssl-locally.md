@@ -18,7 +18,7 @@ The easiest option is to use ngrok.
 
 1. Make sure you [have ngrok installed](https://ngrok.com/download).
 
-2. Sign up for an ngrok account (or sign in with Github) and run `ngrok authtoken <TOKEN>`
+2. Sign up for an ngrok account (or sign in with GitHub) and run `ngrok authtoken <TOKEN>`
 
 3. Edit `$HOME/.ngrok2/ngrok.yml` and add the following after the line with `authtoken: <TOKEN>`:
 

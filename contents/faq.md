@@ -172,7 +172,7 @@ Our Docs are a top priority to us and are updated **daily**. [Check them out](/d
 
 Absolutely!
 
-You can suggest new features by adding them as issues in our [Github repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
+You can suggest new features by adding them as issues in our [GitHub repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
 
 ### I'm having trouble setting up PostHog. What should I do?
 

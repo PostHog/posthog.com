@@ -1,10 +1,14 @@
-// AUTO GENERATED FILE 
+// AUTO GENERATED FILE
 
+import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
+import { CallToAction } from './components/CallToAction'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
+import { ContributorAvatars } from './components/ContributorAvatars'
+import { CornerBrackets } from './components/CornerBrackets'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -13,10 +17,22 @@ import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { HiddenSection } from './components/HiddenSection'
+import { Features } from './components/LandingPage/Features'
+import { Hero } from './components/LandingPage/Hero'
+import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
+import { PrivateCloud } from './components/LandingPage/PrivateCloud'
+import { ProductFeatureIcons } from './components/LandingPage/ProductFeatureIcons'
+import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
+import { Roadmap } from './components/LandingPage/Roadmap'
+import { SocialProof } from './components/LandingPage/SocialProof'
+import { Tutorials } from './components/LandingPage/Tutorials'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
 import { PostCard } from './components/PostCard'
+import { PricingComparisonTable } from './components/PricingComparisonTable'
+import { PricingSlider } from './components/PricingSlider'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
 import { ResponsiveTopBar } from './components/ResponsiveTopBar'
@@ -30,32 +46,48 @@ import { StartNowButton } from './components/StartNowButton'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
-	BasicHedgehogImage,
-	BlogFooter,
-	CodeBlock,
-	CompensationCalculator,
-	Container,
-	DarkModeToggle,
-	DemoScheduler,
-	DocsPageSurvey,
-	DocsSearch,
-	FeaturesComparisonTable,
-	FeaturesNav,
-	Footer,
-	GetStartedModal,
-	NewsletterForm,
-	OtherFeaturesBlock,
-	PageHeader,
-	PostCard,
-	ResponsiveAnchor,
-	ResponsiveSidebar,
-	ResponsiveTopBar,
-	DesignedForYourStackBlock,
-	FeaturedSectionTextLeft,
-	FeaturedSectionTextRight,
-	FeaturedSectionTripleImage,
-	Spacer,
-	StarRepoButton,
-	StartNowButton,
-	TableOfContents
+    ArrayCTA,
+    BasicHedgehogImage,
+    BlogFooter,
+    CallToAction,
+    CodeBlock,
+    CompensationCalculator,
+    Container,
+    ContributorAvatars,
+    CornerBrackets,
+    DarkModeToggle,
+    DemoScheduler,
+    DocsPageSurvey,
+    DocsSearch,
+    FeaturesComparisonTable,
+    FeaturesNav,
+    Footer,
+    GetStartedModal,
+    HiddenSection,
+    Features,
+    Hero,
+    LandingPageCallToAction,
+    PrivateCloud,
+    ProductFeatureIcons,
+    RecentBlogPosts,
+    Roadmap,
+    SocialProof,
+    Tutorials,
+    NewsletterForm,
+    OtherFeaturesBlock,
+    PageHeader,
+    PostCard,
+    PricingComparisonTable,
+    PricingSlider,
+    ResponsiveAnchor,
+    ResponsiveSidebar,
+    ResponsiveTopBar,
+    DesignedForYourStackBlock,
+    FeaturedSectionTextLeft,
+    FeaturedSectionTextRight,
+    FeaturedSectionTripleImage,
+    Spacer,
+    StarRepoButton,
+    StartNowButton,
+    TableOfContents,
 }

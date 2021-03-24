@@ -31,7 +31,7 @@ Visit [the Qovery dashboard](https://start.qovery.com) to create an account if y
 #### 3. Deploy PostHog
 * Click on the "Use a template" button.
 * Select "PostHog".
-* Select your Github or Gitlab repository where Qovery will save your configuration files (Qovery use Git as the source of truth).
+* Select your GitHub or Gitlab repository where Qovery will save your configuration files (Qovery use Git as the source of truth).
 * Click on "deploy".
 
 Congrats 🔥 - Your PostHog is deployed and ready to be used 🎉

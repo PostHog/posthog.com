@@ -20,7 +20,7 @@ export const PluginImage = ({ imageSrc }: { imageSrc?: string }) => {
         >
             <span style={{ display: 'none' }}>{imageSrc}</span>
             {imageSrc ? (
-                <img src={imageSrc} style={{ maxWidth: '90%', maxHeight: '90%', marginBottom: 0 }} alt="" />
+                <img src={imageSrc} style={{ maxWidth: '100%', maxHeight: '90%', marginBottom: 0 }} alt="" />
             ) : (
                 <CodeOutlined style={{ fontSize: 32 }} />
             )}
