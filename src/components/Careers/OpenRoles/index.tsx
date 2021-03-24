@@ -12,15 +12,28 @@ export const OpenRoles = () => {
 
     return (
         <div className="mt-24 text-white text-center">
-            <div className="w-11/12 max-w-5xl mx-auto bg-black bg-opacity-20 rounded-lg p-4 md:p-8 lg:p-12 ">
+            <div className="w-11/12 max-w-5xl mx-auto bg-black bg-opacity-20 rounded-lg p-6 md:p-12 lg:py-24 lg:px-12">
                 <h2>Open roles</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
                     Our team is proactively looking for the following:
                 </p>
                 <div id="whr_embed_hook"></div>
+                <div className="clear-both"></div>
                 <Helmet>
                     <script src="https://www.workable.com/assets/embed.js" type="text/javascript"></script>
                 </Helmet>
+
+                <div className="mt-12 max-w-xl mx-auto text-gray-100 text-opacity-90 text-left">
+                    <p>
+                        We take exceptional people when they come along - and we really mean that! Don’t see a specific
+                        role listed? That doesn't mean we won't have a spot for you.
+                    </p>
+                    <p className="mt-2">
+                        We take applications seriously - you won't just end up in a candidate database. We make quick
+                        decisions, and if the timing isn’t quite right, we’ll do our best to provide insight into a
+                        better time to apply.
+                    </p>
+                </div>
             </div>
         </div>
     )
