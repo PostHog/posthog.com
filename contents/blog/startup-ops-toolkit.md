@@ -9,7 +9,7 @@ hideAnchor: true
 
 Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but what are all the boring admin things that are actually going to drain 40% of your time which no one has told you about?
 
-<iframe src="https://giphy.com/embed/pp1H7Z5TX3z44" width="480" height="245" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reaction-cloudy-with-a-chance-of-meatballs-pp1H7Z5TX3z44">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/j6wvxJLueHV10lATCF" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/usnationalarchives-archivesgif-youinpublicservice-publicservice-j6wvxJLueHV10lATCF">via GIPHY</a></p>
 
 More importantly, what are the tools you can use to streamline and automate these?
 
