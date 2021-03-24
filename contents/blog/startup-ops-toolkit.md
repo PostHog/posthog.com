@@ -21,7 +21,7 @@ By using these, hopefully I can save you a bunch of time and precious $$$ trying
 
 ## Paying people
 
-You’re going to be hiring people either as permanent employees or as contractors. You will need the appropriate contract, and a system for automatically paying them. Finding the right solution can be stressful, especially because your team will be relying on you to get this right. 
+You’re going to be hiring people either as permanent employees or as contractors. You will need the appropriate contract, and a system for automatically paying them. Finding the right solution can be stressful, especially because your team will be relying on you to get this right.
 
 <iframe src="https://giphy.com/embed/l0G18S6f5RfkI8JNK" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/season-12-the-simpsons-12x14-l0G18S6f5RfkI8JNK">via GIPHY</a></p>
 
@@ -58,7 +58,7 @@ There are basically two sides to finance - accounting and budgeting. You know th
 
 For your accounting, you'll want to do the bare minimum to be legally compliant and not sued by the IRS; and have financial reports to look at so you can nod and go ‘hm, yes we are still burning money at an alarming rate.’
 
-We use <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.tryfondo.com/">Fondo<a/> and they are unbelievably good. They become your outsourced finance team, and you submit everything through a shared Slack channel with them or via an online portal, which is remarkably straightforward to use. Fondo will handle your tax returns, annual filing and also send you monthly management reports. They charge on a sliding scale based on your expenses, so I’m not sharing what we pay here for confidentiality reasons.
+We use <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.tryfondo.com/">Fondo</a> and they are unbelievably good. They become your outsourced finance team, and you submit everything through a shared Slack channel with them or via an online portal, which is remarkably straightforward to use. Fondo will handle your tax returns, annual filing and also send you monthly management reports. They charge on a sliding scale based on your expenses, so I’m not sharing what we pay here for confidentiality reasons.
 
 There is no need to do Xero or QuickBooks yourself - it is not a good use of your time, even if it is cheaper. The exception is if you have a finance background, in which case you can probably manage this yourself just fine (but even then, I’d question if it’s the best thing you could be doing).
 
