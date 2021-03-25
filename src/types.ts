@@ -41,3 +41,13 @@ export interface MenuQueryType {
         edges: MenuQueryNodeType[]
     }
 }
+
+export interface Contributor {
+    login: string
+    name: string
+    avatar_url: string
+    profile: string
+    contributions: string[]
+    level: number
+    mvpWins: number
+}
