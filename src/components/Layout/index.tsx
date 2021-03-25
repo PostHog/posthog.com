@@ -35,12 +35,10 @@ const Layout = ({
     onPostPage = false,
     pageTitle = '',
     isDocsPage = false,
-    isHomePage = false,
     isBlogArticlePage = false,
     children,
     className = '',
     containerStyle = {},
-    menuActiveKey = '',
 }: LayoutProps) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -66,10 +64,6 @@ const Layout = ({
         <>
             <Header
                 onPostPage={onPostPage}
-                isBlogArticlePage={isBlogArticlePage}
-                isHomePage={isHomePage}
-                isDocsPage={isDocsPage}
-                menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
             />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
@@ -150,7 +144,7 @@ const Layout = ({
             </AntdLayout>
             <AntdLayout style={{ background: '#ffffff' }}>
                 {isBlogArticlePage && <BlogFooter />}
-                <Footer isDocsPage={isDocsPage} onPostPage={onPostPage} />
+                <Footer onPostPage={onPostPage} />
             </AntdLayout>
             <PosthogAnnouncement />
             <GetStartedModal />
