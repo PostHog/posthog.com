@@ -2,6 +2,15 @@ import { kea } from 'kea'
 import { Contributor } from 'types'
 import { ignoreContributors, mvpWinners } from '../pages-content/community-constants'
 
+const coolHedgehog = {
+    login: "the-cool-hedgehog",
+    profile: "https://github.com/PostHog/posthog",
+    avatar_url: "https://posthog.com/static/cool-hedgehog-2e771b8385a05bfe25cfdea4bbb775a3.svg",
+    contributions:['code', 'doc', 'plugin', 'bug'],
+    mvpWins: 2,
+    level: 99
+}
+
 export const contributorsLogic = kea({
     actions: {
         processSearchInput: (query: string) => ({ query }),
@@ -62,7 +71,7 @@ export const contributorsLogic = kea({
                         contributor['mvpWins'] = mvpWinners[contributor.login] || 0
                     }
 
-                    return contributors.sort((a: Contributor, b: Contributor) => {
+                    const sortedContributors = contributors.sort((a: Contributor, b: Contributor) => {
                         if (b.level > a.level) {
                             return 1
                         } else if (a.level === b.level) {
@@ -71,6 +80,9 @@ export const contributorsLogic = kea({
                             return -1
                         }
                     })
+
+
+                    return [coolHedgehog, ...sortedContributors]
                 },
             },
         ],
