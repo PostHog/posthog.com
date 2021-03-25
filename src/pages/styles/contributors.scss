@@ -3,8 +3,14 @@
         background-color: #220f3f !important;
     }
 
-    h1, h2 {
+    h1,
+    h2 {
         color: #fff;
+    }
+
+    h1 {
+        line-height: 15px;
+        margin-bottom: 30px;
     }
 
     .card-elevated {
@@ -15,5 +21,18 @@
         .ant-progress-inner {
             background: #220f3f;
         }
+    }
+
+    .ant-tabs-nav .ant-tabs-tab-active,
+    .ant-tabs-tab:hover {
+        color: #cca6ff;
+    }
+
+    .ant-tabs-ink-bar {
+        background-color: #cca6ff;
+    }
+
+    .ant-tabs-tab {
+        color: #b485f1;
     }
 }
