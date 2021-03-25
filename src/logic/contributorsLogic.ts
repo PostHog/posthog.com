@@ -16,7 +16,7 @@ export const contributorsLogic = kea({
         ],
     },
     listeners: ({ actions }) => ({
-        processSearchInput: async ({ query }: { query: string }, breakpoint: any) => {
+        processSearchInput: async ({ query }: { query: string }, breakpoint: (ms: number) => Promise<any>) => {
             // pause for 100ms and break if `setUsername`
             // was called again during this time
             await breakpoint(100)
