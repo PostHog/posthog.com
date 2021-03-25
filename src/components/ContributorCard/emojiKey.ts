@@ -1,4 +1,4 @@
-export const emojiKey = {
+export const emojiKey: Record<string, any> = {
       a11y: {
         symbol: '️️️️♿️',
         description: 'Accessibility',
