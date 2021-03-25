@@ -5,12 +5,11 @@ interface AnchorScrollNavbarProps {
 }
 
 export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses =
-        'rounded bg-gray-200 bg-opacity-10 w-full max-w-3xl mx-auto flex justify-between items-stetch p-3 sticky top-3'
+    const baseClasses = 'rounded w-full max-w-3xl mx-auto flex justify-between items-stetch p-3 sticky top-3 z-10'
     const classList = [baseClasses, className].join(' ')
 
     return (
-        <div className={classList}>
+        <div className={classList} style={{ backgroundColor: '#202038' }}>
             <button className="bg-primary text-white px-3 py-2 rounded">Why we're here</button>
             <button className="text-white text-opacity-80 px-3 py-2 rounded hover:bg-gray-100 hover:bg-opacity-10">
                 Our culture
