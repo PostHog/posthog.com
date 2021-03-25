@@ -29,7 +29,7 @@ const Quote = ({ image, name, position, details, className = '' }: QuoteProps) =
 
 export const WorkingAtPostHog = () => {
     return (
-        <div className="mt-24 text-white text-center">
+        <div className="careers-working-at-posthog pt-24 text-white text-center">
             <div className="w-11/12 max-w-5xl mx-auto">
                 <h2>Working at PostHog</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">

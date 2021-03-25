@@ -15,7 +15,7 @@ import { GetStartedModal } from 'components/GetStartedModal'
 import { SEO } from '../components/seo'
 
 import newWayImg from '../components/LandingPage/images/platform-new-way.svg'
-import '../components/LandingPage/styles/index.scss'
+import '../components/Careers/styles/index.scss'
 
 const IndexPage = () => {
     return (
@@ -25,10 +25,17 @@ const IndexPage = () => {
                 title="PostHog - Open-Source Product Analytics"
                 description="Self-hosted product analytics stack, to deploy on your infrastructure."
             />
-            <Header onPostPage={false} isBlogArticlePage={false} isHomePage={true} menuActiveKey="active" />
 
-            <div className="hero py-12 sm:py-24">
-                <div className="w-11/12 mx-auto text-center relative z-10 rounded">
+            <div className="careers-hero">
+                <Header
+                    onPostPage={false}
+                    isBlogArticlePage={false}
+                    isHomePage={true}
+                    menuActiveKey="active"
+                    transparentBackground={true}
+                />
+
+                <div className="w-11/12 pt-12 sm:py-24 mx-auto text-center relative z-10 rounded">
                     <div className="max-w-3xl mx-auto">
                         <h1 className="text-white mb-0 pb-0 text-3xl">
                             We’re working to increase the number of successful products in the world
@@ -39,8 +46,10 @@ const IndexPage = () => {
                         </CallToAction>
                     </div>
                 </div>
+            </div>
 
-                <AnchorScrollNavbar className="mt-12" />
+            <div className="careers-why-were-here pt-12">
+                <AnchorScrollNavbar />
 
                 <div className="mt-12 text-white text-left">
                     <div className="w-11/12 max-w-xl mx-auto">
@@ -69,19 +78,19 @@ const IndexPage = () => {
                             where we build something awesome and let our product bring the users, rather than an
                             outbound sales team and regular cold calls.
                         </p>
-                        <p>
+                        <p className="mb-0">
                             What does this mean for you? We have a lot of capital, but we're a lean, strong team - so
                             you've got the opportunity to have a huge impact.
                         </p>
                     </div>
                 </div>
-
-                <Culture />
-                <InterviewProcess />
-                <Benefits />
-                <WorkingAtPostHog />
-                <OpenRoles />
             </div>
+
+            <Culture />
+            <InterviewProcess />
+            <Benefits />
+            <WorkingAtPostHog />
+            <OpenRoles />
 
             <Footer showNewsletter={true} />
             <GetStartedModal />

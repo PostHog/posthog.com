@@ -37,7 +37,7 @@ const InterviewStep = ({ image, title, children, titleColor, className = '' }: I
 
 export const InterviewProcess = () => {
     return (
-        <div className="mt-24 text-white text-center">
+        <div className="careers-interview-process pt-24 text-white text-center">
             <div className="w-11/12 max-w-3xl mx-auto">
                 <h2>Interview process</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">

@@ -41,7 +41,7 @@ const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
 
 export const Benefits = () => {
     return (
-        <div className="mt-24 text-white text-center">
+        <div className="careers-benefits pt-24 text-white text-center">
             <div className="w-11/12 max-w-3xl mx-auto">
                 <h2>Benefits</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">

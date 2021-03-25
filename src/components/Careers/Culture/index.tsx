@@ -20,7 +20,7 @@ const CultureValue = ({ title, icon, children }: { title: string; icon: string; 
 
 export const Culture = () => {
     return (
-        <div className="mt-12 text-white text-left">
+        <div className="careers-culture pt-12 text-white text-left">
             <div className="w-11/12 max-w-xl mx-auto">
                 <h2 className="text-center">Our culture</h2>
 
@@ -60,7 +60,7 @@ export const Culture = () => {
                 </CultureValue>
             </div>
             <div className="mt-12">
-                <img src={positionSkillsImg} className="max-w-3xl mx-auto" />
+                <img src={positionSkillsImg} className="max-w-3xl mx-auto mb-0" />
             </div>
         </div>
     )
