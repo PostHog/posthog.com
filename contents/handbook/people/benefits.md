@@ -28,7 +28,7 @@ Both of them create tax liability and they will effect your Personal Allowance e
 
 ### Mental health
 
-Our world can feel a bit heavy from time to time and we want to make sure everyone gets support, if they need it. 
+With everything going on in the world (like a global pandemic), life can feel a bit heavy from time to time and we want to make sure everyone gets support, if they need it. 
 
 We launched [Spill](https://www.spill.chat/) in March 2021 to give everyone in the team access to mental health support. Spill offers access to exercises and reading material via Slack and you can also book video therapy sessions with a qualified therapist. 
 
@@ -42,7 +42,7 @@ We also offer generous [parental leave](/handbook/people/time-off#parental-leave
 
 ### Learning and Development
 
-We currently offer a [Training budget](/handbook/training/#training-budget) and [free books](/handbook/people/training#books) for 
+We currently offer a [Training budget](/handbook/training/#training-budget) and [free books](/handbook/people/training#books). 
 
 ### Equipment and co-working
 
