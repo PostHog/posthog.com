@@ -31,7 +31,7 @@ const CultureValue = ({
 
 export const Culture = () => {
     return (
-        <div className="careers-culture pt-24 text-white text-left">
+        <div className="careers-culture pt-24 text-white text-left" id="culture">
             <div className="w-11/12 max-w-xl mx-auto">
                 <h2 className="text-center mb-8">Our culture</h2>
 

@@ -57,7 +57,7 @@ const IndexPage = () => {
                 <WorkingAtPostHog />
                 <OpenRoles />
             </div>
-            <Footer showNewsletter={true} />
+            <Footer showNewsletter={false} />
             <GetStartedModal />
         </div>
     )

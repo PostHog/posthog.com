@@ -3,7 +3,7 @@ import newWayImg from '../../LandingPage/images/platform-new-way.svg'
 
 export const WhyWereHere = () => {
     return (
-        <div className="careers-why-were-here pt-12">
+        <div className="careers-why-were-here pt-12" id="why-were-here">
             <div className="mt-12 text-left">
                 <div className="w-11/12 max-w-2xl mx-auto text-base">
                     <h2 className="text-center text-white">Why we’re here</h2>
