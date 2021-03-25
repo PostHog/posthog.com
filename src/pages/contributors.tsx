@@ -10,6 +10,7 @@ import './styles/contributors.scss'
 import { ContributorCard } from 'components/ContributorCard'
 import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
+import { ContributorsChart } from 'components/ContributorsChart'
 
 const { TabPane } = Tabs
 
@@ -61,7 +62,9 @@ export const ContributorsPage = () => {
                                 ))}
                             </Row>
                         </>
-                    ) : null}
+                    ) : (
+                        <ContributorsChart />
+                    )}
                 </div>
                 <Spacer />
             </Layout>

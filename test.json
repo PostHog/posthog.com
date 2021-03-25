@@ -1,0 +1,153 @@
+{
+    "id": 2779,
+    "name": "Contributors",
+    "pinned": true,
+    "items": [
+        {
+            "id": 147680,
+            "name": "Monthly Contributions",
+            "description": null,
+            "filters": {
+                "events": [
+                    {
+                        "id": "new_contribution",
+                        "math": null,
+                        "name": "new_contribution",
+                        "type": "events",
+                        "order": 0,
+                        "properties": [],
+                        "math_property": null
+                    }
+                ],
+                "display": "ActionsLineGraph",
+                "insight": "TRENDS",
+                "interval": "month",
+                "breakdown": "gh_username",
+                "date_from": "-90d",
+                "breakdown_type": "event",
+                "filter_test_accounts": true
+            },
+            "filters_hash": "cache_780f990aa5bcc777b1468f0d4518d60a",
+            "order": null,
+            "deleted": false,
+            "dashboard": 2779,
+            "layouts": {
+                "lg": {
+                    "h": 5,
+                    "w": 6,
+                    "x": 0,
+                    "y": 0
+                },
+                "sm": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 0,
+                    "moved": false,
+                    "static": false
+                },
+                "xs": {
+                    "h": 5,
+                    "w": 6,
+                    "x": 0,
+                    "y": 0
+                },
+                "xxs": {
+                    "h": 5,
+                    "w": 2,
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "color": "purple",
+            "last_refresh": "2021-03-25T12:03:15.831844Z",
+            "refreshing": false,
+            "result": [
+                {
+                    "action": {
+                        "id": "new_contribution",
+                        "type": "events",
+                        "order": 0,
+                        "name": "new_contribution",
+                        "math": null,
+                        "math_property": null,
+                        "properties": []
+                    },
+                    "label": "new_contribution - moses2117",
+                    "count": 7.0,
+                    "data": [0.0, 0.0, 0.0, 7.0],
+                    "labels": ["Tue. 1 December", "Fri. 1 January", "Mon. 1 February", "Mon. 1 March"],
+                    "days": ["2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01"],
+                    "breakdown_value": "moses2117"
+                },
+                {
+                    "action": {
+                        "id": "new_contribution",
+                        "type": "events",
+                        "order": 0,
+                        "name": "new_contribution",
+                        "math": null,
+                        "math_property": null,
+                        "properties": []
+                    },
+                    "label": "new_contribution - localcurrency",
+                    "count": 5.0,
+                    "data": [0.0, 0.0, 0.0, 5.0],
+                    "labels": ["Tue. 1 December", "Fri. 1 January", "Mon. 1 February", "Mon. 1 March"],
+                    "days": ["2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01"],
+                    "breakdown_value": "localcurrency"
+                },
+                {
+                    "action": {
+                        "id": "new_contribution",
+                        "type": "events",
+                        "order": 0,
+                        "name": "new_contribution",
+                        "math": null,
+                        "math_property": null,
+                        "properties": []
+                    },
+                    "label": "new_contribution - posthog-bot",
+                    "count": 2.0,
+                    "data": [0.0, 0.0, 0.0, 2.0],
+                    "labels": ["Tue. 1 December", "Fri. 1 January", "Mon. 1 February", "Mon. 1 March"],
+                    "days": ["2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01"],
+                    "breakdown_value": "posthog-bot"
+                },
+                {
+                    "action": {
+                        "id": "new_contribution",
+                        "type": "events",
+                        "order": 0,
+                        "name": "new_contribution",
+                        "math": null,
+                        "math_property": null,
+                        "properties": []
+                    },
+                    "label": "new_contribution - yakkomajuri",
+                    "count": 39.0,
+                    "data": [0.0, 0.0, 0.0, 39.0],
+                    "labels": ["Tue. 1 December", "Fri. 1 January", "Mon. 1 February", "Mon. 1 March"],
+                    "days": ["2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01"],
+                    "breakdown_value": "yakkomajuri"
+                }
+            ],
+            "is_sample": false,
+            "saved": false,
+            "created_at": "2021-03-25T12:03:15.832970Z",
+            "created_by": 766
+        }
+    ],
+    "created_at": "2021-03-25T12:03:08.650103Z",
+    "created_by": {
+        "id": 766,
+        "distinct_id": "D_9eluZIT3gqjO9dJqo1aDeqTbAG4yLwXFhN0bz_Vfc",
+        "first_name": "Yakko",
+        "email": "yakko@posthog.com"
+    },
+    "is_shared": true,
+    "share_token": "zNJCq1F_hNWClJknv2csag2I9XypOQ",
+    "deleted": false,
+    "creation_mode": "default",
+    "filters": {}
+}
