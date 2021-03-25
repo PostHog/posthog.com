@@ -1,18 +1,29 @@
 import React from 'react'
 
-import remoteIcon from './images/remote.svg'
-import transparencyIcon from './images/transparency.svg'
-import communicationIcon from './images/communication.svg'
-import diversityIcon from './images/diversity.svg'
+import remoteIcon from './images/remote.png'
+import transparencyIcon from './images/transparency.png'
+import communicationIcon from './images/communication.png'
+import diversityIcon from './images/diversity.png'
 import positionSkillsImg from './images/position-skills.svg'
 
-const CultureValue = ({ title, icon, children }: { title: string; icon: string; children: any }) => {
+const CultureValue = ({
+    title,
+    icon,
+    children,
+    className = '',
+}: {
+    title: string
+    icon: string
+    children: any
+    className?: string
+}) => {
+    const classList = ['flex', className].join(' ')
     return (
-        <div className="flex">
-            <img src={icon} alt={title} className="w-full md:w-1/3 md:mr-2" />
-            <div className="w-full md:w-2/3 md:ml-2">
-                <h4 className="mb-4">{title}</h4>
-                {children}
+        <div className={classList}>
+            <img src={icon} alt={title} className="mx-auto h-24 w-24 md:mx-0 md:mr-6" />
+            <div className="w-full md:mx-0">
+                <h4 className="mb-2 text-lg">{title}</h4>
+                <div className="opacity-80">{children}</div>
             </div>
         </div>
     )
@@ -20,9 +31,9 @@ const CultureValue = ({ title, icon, children }: { title: string; icon: string; 
 
 export const Culture = () => {
     return (
-        <div className="careers-culture pt-12 text-white text-left">
+        <div className="careers-culture pt-24 text-white text-left">
             <div className="w-11/12 max-w-xl mx-auto">
-                <h2 className="text-center">Our culture</h2>
+                <h2 className="text-center mb-8">Our culture</h2>
 
                 <CultureValue title="All Remote" icon={remoteIcon}>
                     <p>We are fully-remote and hire anywhere in the world.</p>
@@ -32,7 +43,7 @@ export const Culture = () => {
                     </p>
                 </CultureValue>
 
-                <CultureValue title="Transparency" icon={transparencyIcon}>
+                <CultureValue title="Transparency" icon={transparencyIcon} className="mt-8">
                     <p>We build an open source product, and try to be as transparent as possible about our company.</p>
                     <p>
                         Our roadmap, employee handbook, salary calculator, investor emails, and most communication are
@@ -40,7 +51,7 @@ export const Culture = () => {
                     </p>
                 </CultureValue>
 
-                <CultureValue title="Written communication" icon={communicationIcon}>
+                <CultureValue title="Written communication" icon={communicationIcon} className="mt-8">
                     <p>
                         Being fully-remote, it’s critical we practice clear communication so we stay connected and work
                         efficiently.
@@ -51,7 +62,7 @@ export const Culture = () => {
                     </p>
                 </CultureValue>
 
-                <CultureValue title="Diversity" icon={diversityIcon}>
+                <CultureValue title="Diversity" icon={diversityIcon} className="mt-8">
                     <p>Being fully remote means we're able to create a team that is truly diverse.</p>
                     <p>
                         We value diversity and believe it’s important to acknowledge and appreciate each other's

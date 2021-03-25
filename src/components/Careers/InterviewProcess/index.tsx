@@ -22,7 +22,7 @@ const InterviewStep = ({ image, title, children, titleColor, className = '' }: I
             <img
                 src={image}
                 alt={title}
-                className="w-24 md:mr-8 mb-0 p-2 bg-gray-100 bg-opacity-10 rounded border-2 border-white border-opacity-30 border-solid"
+                className="w-24 md:mr-8 mb-0 p-2 bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid"
             />
             <div className="flex-grow">
                 <h4 className="mb-0 font-sans font-normal text-lg" style={{ color: titleColor }}>

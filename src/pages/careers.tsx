@@ -3,6 +3,7 @@ import React from 'react'
 import { Header } from '../components/Header'
 import { CallToAction } from '../components/CallToAction'
 import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
+import { WhyWereHere } from '../components/Careers/WhyWereHere'
 import { Culture } from '../components/Careers/Culture'
 import { InterviewProcess } from '../components/Careers/InterviewProcess'
 import { Benefits } from '../components/Careers/Benefits'
@@ -14,7 +15,6 @@ import { GetStartedModal } from 'components/GetStartedModal'
 
 import { SEO } from '../components/seo'
 
-import newWayImg from '../components/LandingPage/images/platform-new-way.svg'
 import '../components/Careers/styles/index.scss'
 
 const IndexPage = () => {
@@ -50,43 +50,7 @@ const IndexPage = () => {
 
             <div className="careers-anchor-navbar">
                 <AnchorScrollNavbar />
-
-                <div className="careers-why-were-here pt-12">
-                    <div className="mt-12 text-white text-left">
-                        <div className="w-11/12 max-w-xl mx-auto">
-                            <h2 className="text-center">Why we’re here</h2>
-                            <p className="opacity-80 mt-1 text-left">
-                                We’re a small (but growing) team building an open source platform that empowers
-                                customers to create successful products.
-                            </p>
-
-                            <img src={newWayImg} className="float-right ml-8 mt-8 mb-8 w-1/2" />
-                            <p>
-                                Until now, tools for building products have been fragmented. Product analytics,
-                                heatmaps, session recording and A/B testing all provide immense value, but existing
-                                tools weren’t natively built to work together.
-                            </p>
-                            <p>
-                                PostHog is different by offering these tools (and more) in a single platform that you
-                                can host yourself.
-                            </p>
-                            <p>
-                                We started PostHog as part of Y Combinator's W20 cohort and had the most successful B2B
-                                software launch on HackerNews since 2012 - with a product that was just 4 weeks old.
-                            </p>
-                            <p>
-                                We're proudly backed by some of the world's top investors and believe in product-led
-                                growth, where we build something awesome and let our product bring the users, rather
-                                than an outbound sales team and regular cold calls.
-                            </p>
-                            <p className="mb-0">
-                                What does this mean for you? We have a lot of capital, but we're a lean, strong team -
-                                so you've got the opportunity to have a huge impact.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
+                <WhyWereHere />
                 <Culture />
                 <InterviewProcess />
                 <Benefits />

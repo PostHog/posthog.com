@@ -21,19 +21,17 @@ interface BenefitProps {
 }
 
 const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
-    const classList = ['w-full md:w-1/2 lg:w-1/4 p-2 md:p-4 lg:p-8', className].join(' ')
+    const classList = ['w-full md:w-1/2 lg:w-1/4 p-2 md:p-4', className].join(' ')
 
     return (
         <div className={classList}>
-            <img
-                src={image}
-                alt={title}
-                className="w-24 mx-auto p-2 bg-gray-100 bg-opacity-10 rounded border-2 border-white border-opacity-30 border-solid"
-            />
-            <div className="flex-grow">
-                <h4 className="mb-0 font-sans font-normal text-lg">{title}</h4>
+            <div className="mx-auto flex justify-center items-center w-24 h-24 p-2 bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid">
+                <img src={image} alt={title} className="max-w-full block mb-0" />
+            </div>
+            <div className="flex-grow mt-4">
+                <h4 className="mb-0 font-sans font-normal text-base leading-tight">{title}</h4>
 
-                {details}
+                <div className="text-opacity-80 text-gray-100 mt-2">{details}</div>
             </div>
         </div>
     )
@@ -42,9 +40,9 @@ const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
 export const Benefits = () => {
     return (
         <div className="careers-benefits pt-24 text-white text-center">
-            <div className="w-11/12 max-w-3xl mx-auto">
+            <div className="w-11/12 max-w-4xl mx-auto">
                 <h2>Benefits</h2>
-                <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
+                <p className="opacity-80 mt-1 text-center max-w-2xl mx-auto">
                     We’re always looking to expand our benefits to offer meaningful value to our team who make all of
                     this possible.
                 </p>

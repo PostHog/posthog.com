@@ -8,6 +8,7 @@ import { Benefits } from './components/Careers/Benefits'
 import { Culture } from './components/Careers/Culture'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
 import { OpenRoles } from './components/Careers/OpenRoles'
+import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -57,6 +58,7 @@ export const shortcodes = {
     Culture,
     InterviewProcess,
     OpenRoles,
+    WhyWereHere,
     WorkingAtPostHog,
     CodeBlock,
     CompensationCalculator,
