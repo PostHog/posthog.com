@@ -104,5 +104,3 @@ export const ContributorsChart = () => {
 
     return <canvas ref={canvasRef} style={{ maxWidth: 1000, maxHeight: 800 }} className="center centered" />
 }
-
-//https://app.posthog.com/shared_dashboard/zNJCq1F_hNWClJknv2csag2I9XypOQ
