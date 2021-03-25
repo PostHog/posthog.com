@@ -56,5 +56,5 @@ Ideally, we would like to meet up in person at twice a year. The team was able t
 
 For any work-related travel, we use [Project Wren](https://www.wren.co/) for Carbon offsetting. 
 
-We also have biweekly coffee catchs up with the team and we use the [Donut](https://www.donut.com/?ref=slackdirectory) Slack app to pair you up with random colleague on Slack. Simply join the #virtual-coffee channel on Slack and be paired up with someone on the team to meet for a virtual coffee/tea etc. 
+We also have biweekly coffee catches up with the team and we use the [Donut](https://www.donut.com/?ref=slackdirectory) Slack app to pair you up with random colleague on Slack. Simply join the #virtual-coffee channel on Slack and be paired up with someone on the team to meet for a virtual coffee/tea etc. 
 
