@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import { Spacer } from '../components/Spacer'
 import { Row, Tabs, Spin } from 'antd'
-import { useValues } from 'kea'
+import { useActions, useValues } from 'kea'
 import { contributorsLogic } from '../logic/contributorsLogic'
 import { SEO } from '../components/seo'
 import pluginLibraryOgImage from '../images/posthog-plugins.png'
@@ -15,8 +15,16 @@ import { ContributorsChart } from 'components/ContributorsChart'
 const { TabPane } = Tabs
 
 export const ContributorsPage = () => {
+    const { setSearchQuery } = useActions(contributorsLogic)
     const { filteredContributors, contributorsLoading } = useValues(contributorsLogic)
     const [activeTab, setActiveTab] = useState('list')
+
+    const handleTabClick = (newTab: string) => {
+        setActiveTab(newTab)
+        if (newTab === 'list') {
+            setSearchQuery('')
+        }
+    }
 
     return (
         <div className="contributors-page-wrapper">
@@ -29,7 +37,7 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
-                    <Tabs activeKey={activeTab} onChange={(key) => setActiveTab(key)}>
+                    <Tabs activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
                         <TabPane tab="List" key="list" />
                         <TabPane tab="Stats" key="stats" />
                     </Tabs>
@@ -57,7 +65,6 @@ export const ContributorsPage = () => {
                                         ))}
                                     </>
                                 )}
-
                             </Row>
                         </>
                     ) : (
