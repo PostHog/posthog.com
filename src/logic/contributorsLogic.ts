@@ -3,7 +3,34 @@ import { Contributor } from 'types'
 import { ignoreContributors, mvpWinners } from '../pages-content/community-constants'
 
 export const contributorsLogic = kea({
-    actions: {},
+    actions: {
+        processSearchInput: (query: string) => ({ query }),
+        setSearchQuery: (query: string) => ({ query }),
+    },
+    reducers: {
+        searchQuery: [
+            '',
+            {
+                setSearchQuery: (_: null, { query }: { query: string }) => query,
+            },
+        ],
+    },
+    listeners: ({ actions }) => ({
+        processSearchInput: async ({ query }: { query: string }, breakpoint: any) => {
+            // pause for 100ms and break if `setUsername`
+            // was called again during this time
+            await breakpoint(100)
+
+            actions.setSearchQuery(query)
+        },
+    }),
+    selectors: {
+        filteredContributors: [
+            (s) => [s.searchQuery, s.contributors],
+            (searchQuery: string, contributors: Contributor[]) =>
+                contributors.filter((contributor: Contributor) => contributor.login.includes(searchQuery)),
+        ],
+    },
     loaders: {
         contributors: [
             [] as Contributor[],

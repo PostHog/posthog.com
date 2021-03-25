@@ -9,9 +9,10 @@ import pluginLibraryOgImage from '../images/posthog-plugins.png'
 import './styles/contributors.scss'
 import { ContributorCard } from 'components/ContributorCard'
 import { Contributor } from 'types'
+import { ContributorSearch } from 'components/ContributorSearch'
 
 export const ContributorsPage = () => {
-    const { contributors } = useValues(contributorsLogic)
+    const { filteredContributors } = useValues(contributorsLogic)
 
     return (
         <div className="contributors-page-wrapper">
@@ -24,6 +25,8 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
+                    <ContributorSearch />
+                    <Spacer height={20} />
                     <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
                         <ContributorCard
                             key="cool-hedgehog"
@@ -34,7 +37,7 @@ export const ContributorsPage = () => {
                             mvpWins={2}
                             contributorLevel={99}
                         />
-                        {contributors.map((contributor: Contributor) => (
+                        {filteredContributors.map((contributor: Contributor) => (
                             <ContributorCard
                                 key={contributor.login}
                                 name={contributor.login}
