@@ -79,6 +79,9 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                     <NavbarLink to="/pricing" textLight={textLight}>
                         Pricing
                     </NavbarLink>
+                    <NavbarLink to="/blog" textLight={textLight}>
+                        Blog
+                    </NavbarLink>
                     <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
                         GitHub
                     </NavbarLink>
@@ -129,6 +132,13 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >
                         Pricing
+                    </NavbarLink>
+                    <NavbarLink
+                        to="/blog"
+                        textLight={textLight}
+                        className="block my-2 py-2 border-b border-white border-opacity-10"
+                    >
+                        Blog
                     </NavbarLink>
                     <NavbarLink
                         href="https://github.com/posthog/posthog"
