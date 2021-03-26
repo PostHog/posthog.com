@@ -41,7 +41,7 @@ const IndexPage = () => {
                             We’re working to increase the number of successful products in the world
                         </h1>
 
-                        <CallToAction icon="down-arrow" to="#positions" type="primary" width="72" className="mt-12">
+                        <CallToAction icon="down-arrow" to="#positions" type="primary" width="72" className="my-12">
                             View open roles
                         </CallToAction>
                     </div>

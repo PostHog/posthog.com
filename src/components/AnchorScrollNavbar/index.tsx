@@ -30,6 +30,33 @@ const ButtonLink = ({
     )
 }
 
+const inPageLinks = [
+    {
+        label: "Why we're here",
+        section: 'why-were-here',
+    },
+    {
+        label: 'Our culture',
+        section: 'culture',
+    },
+    {
+        label: 'Interview process',
+        section: 'interview-process',
+    },
+    {
+        label: 'Benefits',
+        section: 'benefits',
+    },
+    {
+        label: 'Working at PostHog',
+        section: 'working-at-posthog',
+    },
+    {
+        label: 'Open roles',
+        section: 'open-roles',
+    },
+]
+
 interface AnchorScrollNavbarProps {
     className?: string
 }
@@ -51,18 +78,20 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             openRoles: document.getElementById('open-roles')?.offsetTop,
         }
 
+        const scrollThreshold = 50
+
         document.addEventListener('scroll', () => {
             let offset = window.scrollY
 
-            if (offset < sections.culture) {
+            if (offset < sections.culture - scrollThreshold) {
                 setCurrentSection('why-were-here')
-            } else if (offset < sections.interviewProcess) {
+            } else if (offset < sections.interviewProcess - scrollThreshold) {
                 setCurrentSection('culture')
-            } else if (offset < sections.benefits) {
+            } else if (offset < sections.benefits - scrollThreshold) {
                 setCurrentSection('interview-process')
-            } else if (offset < sections.workingAtPosthog) {
+            } else if (offset < sections.workingAtPosthog - scrollThreshold) {
                 setCurrentSection('benefits')
-            } else if (offset < sections.openRoles) {
+            } else if (offset < sections.openRoles - scrollThreshold) {
                 setCurrentSection('working-at-posthog')
             } else {
                 setCurrentSection('open-roles')
@@ -70,27 +99,22 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
         })
     }, [])
 
+    const navbarLinks = inPageLinks.map(({ label, section }) => (
+        <ButtonLink section={section} currentSection={currentSection} key={section}>
+            {label}
+        </ButtonLink>
+    ))
+
+    const selectOptions = inPageLinks.map(({ label, section }) => (
+        <option value={section} key={section}>
+            {label}
+        </option>
+    ))
+
     return (
         <>
             <div className={classList} style={{ backgroundColor: '#202038' }}>
-                <ButtonLink section="why-were-here" currentSection={currentSection}>
-                    Why we're here
-                </ButtonLink>
-                <ButtonLink section="culture" currentSection={currentSection}>
-                    Our culture
-                </ButtonLink>
-                <ButtonLink section="interview-process" currentSection={currentSection}>
-                    Interview process
-                </ButtonLink>
-                <ButtonLink section="benefits" currentSection={currentSection}>
-                    Benefits
-                </ButtonLink>
-                <ButtonLink section="working-at-posthog" currentSection={currentSection}>
-                    Working at PostHog
-                </ButtonLink>
-                <ButtonLink section="open-roles" currentSection={currentSection}>
-                    Open roles
-                </ButtonLink>
+                {navbarLinks}
             </div>
 
             <select
@@ -99,12 +123,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
                 value={currentSection}
                 onChange={(e) => scrollTo(`#${e.target.value}`)}
             >
-                <option value="why-were-here">Why we're here</option>
-                <option value="culture">Our culture</option>
-                <option value="interview-process">Interview process</option>
-                <option value="benefits">Benefits</option>
-                <option value="working-at-posthog">Working at PostHog</option>
-                <option value="open-roles">Open roles</option>
+                {selectOptions}
             </select>
         </>
     )
