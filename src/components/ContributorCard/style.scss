@@ -4,4 +4,9 @@
         border-radius: 20px;
     }
 
+    .tooltip-content:hover,
+    .tooltip-content:hover span {
+        background-color: #271046 !important;
+        cursor: pointer;
+    }
 }

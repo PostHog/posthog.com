@@ -3,6 +3,7 @@ import { Card, Col, Progress, Tag, Tooltip } from 'antd'
 import { Link } from 'gatsby'
 import './style.scss'
 import { emojiKey } from './emojiKey'
+import { Spacer } from 'components/Spacer'
 
 interface ContributorCardStructureMeta {
     name: string
@@ -16,6 +17,23 @@ interface ContributorCardMeta extends ContributorCardStructureMeta {
     link: string
     onClick?: () => void | undefined
 }
+
+const ContributorCardTooltip = ({ title, children }: { title: string; children: React.ReactNode }) => (
+    <Tooltip title={title} overlayClassName="contributor-card-tooltip">
+        <span
+            onClick={(e) => {
+                if (window) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    window.location.pathname = '/'
+                }
+            }}
+            className="tooltip-content"
+        >
+            {children}
+        </span>
+    </Tooltip>
+)
 
 const ContributorCardStructure = ({
     name,
@@ -33,9 +51,13 @@ const ContributorCardStructure = ({
             >
                 {mvpWins > 0 ? (
                     <Tag color="transparent" style={{ maxWidth: '30%', position: 'absolute', right: 15, top: 15 }}>
-                        <Tooltip title={`Community MVP ${mvpWins}x`}>
-                            <h4>{Array.from({ length: mvpWins }).map(() => `🏆`)}</h4>
-                        </Tooltip>
+                        <ContributorCardTooltip title={`Community MVP ${mvpWins}x`}>
+                            <h4>
+                                {Array.from({ length: mvpWins }).map((_: any, i: number) => (
+                                    <span key={`trophy_${i}`}>🏆</span>
+                                ))}
+                            </h4>
+                        </ContributorCardTooltip>
                     </Tag>
                 ) : null}
 
@@ -51,22 +73,30 @@ const ContributorCardStructure = ({
                 <h5 className="centered" style={{ color: '#fff' }}>
                     {name}
                 </h5>
-                <p style={{ color: 'rgb(231 184 250)', marginBottom: 5 }}>lvl {contributorLevel}</p>
-                <Progress
-                    strokeColor={{
-                        '0%': '#220f3f',
-                        '100%': '#ab75ff',
-                    }}
-                    percent={contributorLevel >= 5 ? 100 : (100 * contributorLevel) / 5}
-                    className="progress-bar"
-                    showInfo={false}
-                />
-                <p style={{ color: 'rgb(231 184 250)', fontSize: 20, marginTop: 40 }}>Powers</p>
+                <ContributorCardTooltip title="Number of PRs merged">
+                    <p style={{ color: 'rgb(231 184 250)', marginBottom: 5 }}>lvl {contributorLevel}</p>
+                    <Progress
+                        strokeColor={{
+                            '0%': '#220f3f',
+                            '100%': '#ab75ff',
+                        }}
+                        percent={contributorLevel >= 5 ? 100 : (100 * contributorLevel) / 5}
+                        className="progress-bar"
+                        showInfo={false}
+                    />
+                </ContributorCardTooltip>
+                <Spacer height={40} />
+                <ContributorCardTooltip title="Types of contributions made">
+                    <p style={{ color: 'rgb(231 184 250)', fontSize: 20, marginBottom: 0 }}>Powers</p>
+                </ContributorCardTooltip>
+                <Spacer height={20} />
                 <h2>
                     {contributions.map((key) => (
-                        <Tooltip key={key} title={emojiKey[key].description}>
-                            {emojiKey[key].symbol}{' '}
-                        </Tooltip>
+                        <span key={key}>
+                            <ContributorCardTooltip title={emojiKey[key].description}>
+                                {emojiKey[key].symbol}
+                            </ContributorCardTooltip>{' '}
+                        </span>
                     ))}
                 </h2>
             </Card>
