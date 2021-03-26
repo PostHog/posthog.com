@@ -31,6 +31,7 @@ jobs:
                   git config user.email hey@posthog.com
 
             - name: Add safe redirects
+              if: github.base_ref == master
               run: |
                   git diff ${{ github.base_ref }} ${{ github.head_ref }} > pr_diff
                   python3 ./scripts/safe_rename.py
