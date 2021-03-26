@@ -33,6 +33,7 @@
         "name": "Contributing",
         "items": [
             "docs/contributing",
+            "docs/recognizing-contributions",
             "docs/developing-locally",
             "docs/stack",
             "docs/project-structure",

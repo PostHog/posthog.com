@@ -18,23 +18,6 @@ interface ContributorCardMeta extends ContributorCardStructureMeta {
     onClick?: () => void | undefined
 }
 
-const ContributorCardTooltip = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <Tooltip title={title} overlayClassName="contributor-card-tooltip">
-        <span
-            onClick={(e) => {
-                if (window) {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    window.location.pathname = '/'
-                }
-            }}
-            className="tooltip-content"
-        >
-            {children}
-        </span>
-    </Tooltip>
-)
-
 const ContributorCardStructure = ({
     name,
     imageSrc,
@@ -42,6 +25,33 @@ const ContributorCardStructure = ({
     mvpWins,
     contributorLevel,
 }: ContributorCardStructureMeta) => {
+    const handleTooltipContentClick = (e: React.MouseEvent, pageKey: string = '') => {
+        if (window) {
+            e.preventDefault()
+            e.stopPropagation()
+            window.open(
+                `${window.location.protocol}//${window.location.host}/docs/recognizing-contributions#${pageKey}`,
+                '_blank'
+            )
+        }
+    }
+
+    const ContributorCardTooltip = ({
+        title,
+        children,
+        pageKey,
+    }: {
+        title: string
+        children: React.ReactNode
+        pageKey: string
+    }) => (
+        <Tooltip title={title} overlayClassName="contributor-card-tooltip">
+            <span onClick={(e) => handleTooltipContentClick(e, pageKey)} className="tooltip-content">
+                {children}
+            </span>
+        </Tooltip>
+    )
+
     return (
         <Col sm={12} md={12} lg={8} xl={6} style={{ marginBottom: 20 }}>
             <Card
@@ -51,7 +61,7 @@ const ContributorCardStructure = ({
             >
                 {mvpWins > 0 ? (
                     <Tag color="transparent" style={{ maxWidth: '30%', position: 'absolute', right: 15, top: 15 }}>
-                        <ContributorCardTooltip title={`Community MVP ${mvpWins}x`}>
+                        <ContributorCardTooltip title={`Community MVP ${mvpWins}x`} pageKey="community-mvps">
                             <h4>
                                 {Array.from({ length: mvpWins }).map((_: any, i: number) => (
                                     <span key={`trophy_${i}`}>🏆</span>
@@ -73,7 +83,7 @@ const ContributorCardStructure = ({
                 <h5 className="centered" style={{ color: '#fff' }}>
                     {name}
                 </h5>
-                <ContributorCardTooltip title="Number of PRs merged">
+                <ContributorCardTooltip title="Number of PRs merged" pageKey="level">
                     <p style={{ color: 'rgb(231 184 250)', marginBottom: 5 }}>lvl {contributorLevel}</p>
                     <Progress
                         strokeColor={{
@@ -86,14 +96,14 @@ const ContributorCardStructure = ({
                     />
                 </ContributorCardTooltip>
                 <Spacer height={40} />
-                <ContributorCardTooltip title="Types of contributions made">
+                <ContributorCardTooltip title="Types of contributions made" pageKey="powers">
                     <p style={{ color: 'rgb(231 184 250)', fontSize: 20, marginBottom: 0 }}>Powers</p>
                 </ContributorCardTooltip>
                 <Spacer height={20} />
                 <h2>
                     {contributions.map((key) => (
                         <span key={key}>
-                            <ContributorCardTooltip title={emojiKey[key].description}>
+                            <ContributorCardTooltip title={emojiKey[key].description} pageKey="powers">
                                 {emojiKey[key].symbol}
                             </ContributorCardTooltip>{' '}
                         </span>
