@@ -22,9 +22,9 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 * A Small Team has an Accountable Person responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
 * A Small Team must have (1) a customer (internal or external), (2) a mission and (3) metrics
 * There may be certain functions where at our current stage we don't need a Small Team yet.
-* Each Small Team runs its own retrospective + sprint every week for 30 mins.
-* A Small Team has the final call in which of its features get into production and when, within our existing release schedule.
-* A Small Team can setup it
+* Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
+* A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
+* A Small Team will, at some stage, be able to create its own pricing (too complex in immediate future to do this, however)
 
 # Small Teams list
 
@@ -34,6 +34,7 @@ This is currently being finalized, something similar to:
 * Website and docs
 * Extensibility (plugins/APIs)
 * Experimentation (feature flags, a/b testing, session recording)
+* Deployment (AMI/VPC/PostHog Cloud)
 
 # Functional teams
 
