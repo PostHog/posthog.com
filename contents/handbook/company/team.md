@@ -466,7 +466,7 @@ Our party of 2 became a party of 3 last year. 🎉 Now that I am officially a da
 
 <div class="team-right-image" markdown="1">
 
-![Eltje portrait](../../images/team/Cory.png)
+![Cory portrait](../../images/team/Cory.png)
 
 </div>
 
