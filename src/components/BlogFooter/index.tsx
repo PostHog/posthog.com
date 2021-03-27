@@ -2,13 +2,9 @@ import React from 'react'
 import { Row, Col, Button } from 'antd'
 import coolHedgehog from '../../images/cool-hedgehog.svg'
 import { Spacer } from '../Spacer'
-import { useActions } from 'kea'
-import { layoutLogic } from '../../logic/layoutLogic'
 import './style.scss'
 
 export function BlogFooter() {
-    const { setIsGetStartedModalOpen } = useActions(layoutLogic)
-
     return (
         <div className="blog-footer-cta-wrapper">
             <hr className="blog-footer-divider" />
@@ -28,7 +24,9 @@ export function BlogFooter() {
                         <Button
                             type="primary"
                             className="blog-footer-btn"
-                            onClick={() => setIsGetStartedModalOpen(true)}
+                            onClick={() => {
+                                window.location.href = 'https://app.posthog.com/signup?src=blog-footer'
+                            }}
                         >
                             Get Started For Free
                         </Button>
