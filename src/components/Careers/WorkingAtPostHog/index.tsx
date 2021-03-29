@@ -1,5 +1,6 @@
 import React from 'react'
 import { Structure } from '../../Structure'
+import { mergeClassList } from '../../../lib/utils'
 
 import eltjeImg from './images/eltje.png'
 import charlesImg from './images/charles.png'
@@ -15,7 +16,7 @@ interface QuoteProps {
 }
 
 const Quote = ({ image, name, position, details, className = '' }: QuoteProps) => {
-    const classList = ['w-full text-center mt-12 lg:mt-24 lg:mt-0', className].join(' ')
+    const classList = mergeClassList('w-full text-center mt-12 lg:mt-24 lg:mt-0', className)
 
     return (
         <div className={classList}>

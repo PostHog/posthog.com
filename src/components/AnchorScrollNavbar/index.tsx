@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import scrollTo from 'gatsby-plugin-smoothscroll'
+import { mergeClassList } from '../../lib/utils'
 
 const ButtonLink = ({
     section,
@@ -64,7 +65,7 @@ interface AnchorScrollNavbarProps {
 export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
     const baseClasses =
         'rounded w-11/12 max-w-3xl mx-auto justify-between items-stetch p-3 sticky top-3 z-10 hidden lg:flex'
-    const classList = [baseClasses, className].join(' ')
+    const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
 

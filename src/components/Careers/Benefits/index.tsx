@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Structure } from '../../Structure'
+import { mergeClassList } from '../../../lib/utils'
 import compensationImg from './images/compensation.svg'
 import equityImg from './images/equity.svg'
 import ptoImg from './images/pto.svg'
@@ -22,7 +23,7 @@ interface BenefitProps {
 }
 
 const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
-    const classList = ['w-full md:w-1/2 lg:w-1/4 p-2 md:p-4 mb-8 md:mb-0', className].join(' ')
+    const classList = mergeClassList('w-full md:w-1/2 lg:w-1/4 p-2 md:p-4 mb-8 md:mb-0', className)
 
     return (
         <div className={classList}>

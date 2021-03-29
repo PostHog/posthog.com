@@ -1,4 +1,5 @@
 import React from 'react'
+import { mergeClassList } from '../../lib/utils'
 
 export const Section = ({
     className = '',
@@ -10,5 +11,7 @@ export const Section = ({
     children?: any
 }) => {
     const baseClasses = `w-11/12 max-w-${width} mx-auto`
-    return <div className={`${baseClasses} ${className}`}>{children}</div>
+    const classList = mergeClassList(baseClasses, className)
+
+    return <div className={classList}>{children}</div>
 }

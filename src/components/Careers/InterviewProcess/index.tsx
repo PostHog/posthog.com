@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Structure } from '../../Structure'
+import { mergeClassList } from '../../../lib/utils'
 import applicationImg from './images/application.svg'
 import cultureInterviewImg from './images/culture-interview.svg'
 import technicalInterviewImg from './images/technical-interview.svg'
@@ -16,7 +17,7 @@ interface InterviewStepProps {
 }
 
 const InterviewStep = ({ image, title, children, titleColor, className = '' }: InterviewStepProps) => {
-    const classList = ['flex flex-col md:flex-row justify-between md:items-center', className].join(' ')
+    const classList = mergeClassList('flex flex-col md:flex-row justify-between md:items-center', className)
 
     return (
         <div className={classList}>

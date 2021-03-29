@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Structure } from '../../Structure'
-
+import { mergeClassList } from '../../../lib/utils'
 import remoteIcon from './images/remote.png'
 import transparencyIcon from './images/transparency.png'
 import communicationIcon from './images/communication.png'
@@ -19,7 +19,7 @@ const CultureValue = ({
     children: any
     className?: string
 }) => {
-    const classList = ['flex flex-col md:flex-row text-left', className].join(' ')
+    const classList = mergeClassList('flex flex-col md:flex-row text-left', className)
     return (
         <div className={classList}>
             <img src={icon} alt={title} className="mx-auto h-24 w-24 md:mx-0 md:mr-6" />

@@ -4,6 +4,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import { CornerBrackets } from '../CornerBrackets'
+import { mergeClassList } from '../../lib/utils'
 
 import rocketImg from './images/rocket.svg'
 import calendarImg from './images/calendar.svg'
@@ -67,7 +68,7 @@ export const CallToAction = ({
 
     const widthClass = `w-${width}`
     const baseClasses = `p-2 ${widthClass} uppercase rounded-sm inline-flex items-center justify-between select-none text-base font-gosha relative`
-    const classList = [baseClasses, buttonTypeClasses[type], className].join(' ')
+    const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (
         <>

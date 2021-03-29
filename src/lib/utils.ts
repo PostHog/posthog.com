@@ -43,3 +43,5 @@ export const generateRandomHtmlId = () =>
         .toString(36)
         .replace(/[^a-z]+/g, '')
         .substr(2, 10)
+
+export const mergeClassList = (...args) => args.filter((classList) => !!classList).join(' ')
