@@ -15,7 +15,7 @@ interface InterviewStepProps {
 }
 
 const InterviewStep = ({ image, title, children, titleColor, className = '' }: InterviewStepProps) => {
-    const classList = ['flex flex-col md:flex-row justify-between items-center', className].join(' ')
+    const classList = ['flex flex-col md:flex-row justify-between md:items-center', className].join(' ')
 
     return (
         <div className={classList}>
@@ -25,7 +25,7 @@ const InterviewStep = ({ image, title, children, titleColor, className = '' }: I
                 className="w-24 md:mr-8 mb-0 p-2 bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid"
             />
             <div className="flex-grow">
-                <h4 className="mb-0 font-sans font-normal text-lg" style={{ color: titleColor }}>
+                <h4 className="mb-0 font-sans font-normal text-lg mt-4 md:mt-0" style={{ color: titleColor }}>
                     {title}
                 </h4>
 

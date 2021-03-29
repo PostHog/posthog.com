@@ -21,7 +21,7 @@ interface BenefitProps {
 }
 
 const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
-    const classList = ['w-full md:w-1/2 lg:w-1/4 p-2 md:p-4', className].join(' ')
+    const classList = ['w-full md:w-1/2 lg:w-1/4 p-2 md:p-4 mb-8 md:mb-0', className].join(' ')
 
     return (
         <div className={classList}>

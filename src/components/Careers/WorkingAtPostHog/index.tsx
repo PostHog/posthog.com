@@ -14,7 +14,7 @@ interface QuoteProps {
 }
 
 const Quote = ({ image, name, position, details, className = '' }: QuoteProps) => {
-    const classList = ['w-full text-center mt-24 lg:mt-0', className].join(' ')
+    const classList = ['w-full text-center mt-12 lg:mt-24 lg:mt-0', className].join(' ')
 
     return (
         <div className={classList}>
@@ -73,7 +73,7 @@ export const WorkingAtPostHog = () => {
                     </div>
                 </div>
 
-                <div className="mt-24">
+                <div className="mt-24 max-w-2xl mx-auto">
                     <header className="text-white text-lg">
                         Watch a day in the life of our graphic designer, Lottie!
                     </header>

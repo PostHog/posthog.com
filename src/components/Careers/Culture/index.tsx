@@ -17,11 +17,11 @@ const CultureValue = ({
     children: any
     className?: string
 }) => {
-    const classList = ['flex', className].join(' ')
+    const classList = ['flex flex-col md:flex-row text-left', className].join(' ')
     return (
         <div className={classList}>
             <img src={icon} alt={title} className="mx-auto h-24 w-24 md:mx-0 md:mr-6" />
-            <div className="w-full md:mx-0">
+            <div className="w-full md:mx-0 text-center md:text-left">
                 <h4 className="mb-2 text-lg">{title}</h4>
                 <div className="opacity-80">{children}</div>
             </div>
@@ -70,8 +70,8 @@ export const Culture = () => {
                     </p>
                 </CultureValue>
             </div>
-            <div className="mt-12">
-                <img src={positionSkillsImg} className="max-w-3xl mx-auto mb-0" />
+            <div className="mt-12 w-11/12 max-w-3xl mx-auto">
+                <img src={positionSkillsImg} className="mx-auto mb-0 max-w-full" />
             </div>
         </div>
     )
