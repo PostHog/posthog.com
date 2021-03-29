@@ -6,10 +6,17 @@ interface HiddenSectionProps {
     title: any
     children: any
     endWithDivider?: boolean
+    defaultIsOpen?: boolean
 }
 
-export const HiddenSection = ({ headingType, title, children, endWithDivider = true }: HiddenSectionProps) => {
-    const [isOpen, setIsOpen] = useState(false)
+export const HiddenSection = ({
+    headingType,
+    title,
+    children,
+    endWithDivider = true,
+    defaultIsOpen = false,
+}: HiddenSectionProps) => {
+    const [isOpen, setIsOpen] = useState(defaultIsOpen)
 
     const isLargeHeading = ['h1', 'h2', 'h3'].includes(headingType)
 

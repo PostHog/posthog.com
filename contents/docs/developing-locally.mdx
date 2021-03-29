@@ -4,27 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
+<HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen={true}>
 
-<HiddenSection headingType='h2' title='Using Docker (Fastest)'>
-
-> **Note:** Currently Docker does not support Apple Silicon. Please use the virtualenv setup instead.
-
-First clone the repository:
-```bash
-git clone https://github.com/PostHog/posthog
-```
-
-Then start the instance with `docker-compose`:
-
-```bash
-docker-compose -f docker-compose.dev.yml up
-```
-
-> **It may take several minutes to build the system for the first time**. If you see an error message once your app has launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
-
-</HiddenSection>
-
-<HiddenSection headingType='h2' title='Using virtualenv' endWithDivider={false}>
+> **Note:** If you're using the latest generation MacBooks (M1) have a look [at this issue](https://github.com/PostHog/posthog/issues/2916) for info on how to run PostHog.
 
 #### Clone PostHog
 
@@ -114,6 +96,30 @@ To see some data on the frontend, you should go to the `http://localhost:8000/de
 > **Friendly tip:** Homebrew services can be stopped with `brew services stop <service_name>`
 
 </HiddenSection>
+
+
+<HiddenSection headingType='h2' title='Using Docker'>
+
+> **Note:** Currently Docker does not support Apple Silicon. Please use the virtualenv setup instead.
+
+> **Note:** Developing with Docker may be very slow. If you're planning on doing more than a few simple changes we'd recommend you use virtual env.
+
+First clone the repository:
+```bash
+git clone https://github.com/PostHog/posthog
+```
+
+Then start the instance with `docker-compose`:
+
+```bash
+docker-compose -f docker-compose.dev.yml up
+```
+
+> **It may take several minutes to build the system for the first time**. If you see an error message once your app has launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
+
+</HiddenSection>
+
+
 
 <br /><hr />
 
