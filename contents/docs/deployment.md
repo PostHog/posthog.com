@@ -42,4 +42,4 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 - [Running Behind Proxy](/docs/configuring-posthog/running-behind-proxy)
-- [SMTP Credentials](/docs/configuring-posthog/smtp-credentials)
+- [Configuring Email](/docs/configuring-posthog/email)
