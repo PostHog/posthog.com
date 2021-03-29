@@ -66,4 +66,4 @@ That means:
 * Anyone can give feedback to anyone else on their priorities, and it's our expectation they do so.
 * Every [Small Team](structure) has complete control over what they ship.
 
-This has the added benefit of cross functional teams forming as needed, whilst people having a specialist manager (ie an engineer managing engineers) as far as we are able. 
+This has the added benefit of cross functional teams forming as needed, whilst people having a specialist manager (i.e. an engineer managing engineers) as far as we are able. 
