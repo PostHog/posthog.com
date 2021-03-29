@@ -1,4 +1,5 @@
 import React from 'react'
+import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import { Header } from '../components/Header'
 import { CallToAction } from '../components/CallToAction'
@@ -9,10 +10,8 @@ import { InterviewProcess } from '../components/Careers/InterviewProcess'
 import { Benefits } from '../components/Careers/Benefits'
 import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 import { OpenRoles } from '../components/Careers/OpenRoles'
-
 import { Footer } from '../components/Footer/Footer'
 import { GetStartedModal } from 'components/GetStartedModal'
-
 import { SEO } from '../components/seo'
 
 import '../components/Careers/styles/index.scss'
@@ -41,7 +40,13 @@ const IndexPage = () => {
                             We’re working to increase the number of successful products in the world
                         </h1>
 
-                        <CallToAction icon="down-arrow" to="#positions" type="primary" width="72" className="my-12">
+                        <CallToAction
+                            icon="down-arrow"
+                            onClick={() => scrollTo('#open-roles')}
+                            type="primary"
+                            width="72"
+                            className="my-12"
+                        >
                             View open roles
                         </CallToAction>
                     </div>
