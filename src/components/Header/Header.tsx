@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useValues, useActions } from 'kea'
+import { useValues } from 'kea'
 import { Link } from 'gatsby'
 import { layoutLogic } from '../../logic/layoutLogic'
 import hamburgerIcon from '../../images/icons/hamburger.svg'
@@ -36,13 +36,16 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 }
 
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
-    const { setIsGetStartedModalOpen } = useActions(layoutLogic)
-
     const classList = `button-primary ${className} border-none`
 
     return (
         <li className="leading-none">
-            <button onClick={() => setIsGetStartedModalOpen(true)} className={classList}>
+            <button
+                onClick={() => {
+                    window.location.href = 'https://app.posthog.com/signup?src=header'
+                }}
+                className={classList}
+            >
                 {children}
             </button>
         </li>

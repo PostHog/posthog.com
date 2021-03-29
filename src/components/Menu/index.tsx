@@ -1,14 +1,11 @@
 import React from 'react'
 import { Menu as AntMenu } from 'antd'
-import { layoutLogic } from '../../logic/layoutLogic'
-import { useActions } from 'kea'
 
 function Menu() {
-    const { setIsGetStartedModalOpen } = useActions(layoutLogic)
     return (
         <div className="flex justify-between items-center">
             <AntMenu.Item className="header-key main-nav-cta-wrapper">
-                <a onClick={() => setIsGetStartedModalOpen(true)}>
+                <a href="https://app.posthog.com/signup?src=menu">
                     <span>Get started now</span>
                 </a>
             </AntMenu.Item>
