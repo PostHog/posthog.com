@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Structure } from '../../Structure'
+
 import remoteIcon from './images/remote.png'
 import transparencyIcon from './images/transparency.png'
 import communicationIcon from './images/communication.png'
@@ -32,13 +34,13 @@ const CultureValue = ({
 export const Culture = () => {
     return (
         <div className="careers-culture pt-24 text-white text-left" id="culture">
-            <div className="w-11/12 max-w-xl mx-auto">
+            <Structure.Section width="xl">
                 <h2 className="text-center mb-8">Our culture</h2>
 
                 <CultureValue title="All Remote" icon={remoteIcon}>
                     <p>We are fully-remote and hire anywhere in the world.</p>
                     <p>
-                        If you are on planet earth, please consider applying. We are unfortunately not able to accept
+                        If you are on planet Earth, please consider applying. We are unfortunately not able to accept
                         candidates from other planets or galaxies at this time.
                     </p>
                 </CultureValue>
@@ -69,10 +71,10 @@ export const Culture = () => {
                         differences.
                     </p>
                 </CultureValue>
-            </div>
-            <div className="mt-12 w-11/12 max-w-3xl mx-auto">
+            </Structure.Section>
+            <Structure.Section className="mt-12" width="3xl">
                 <img src={positionSkillsImg} className="mx-auto mb-0 max-w-full" />
-            </div>
+            </Structure.Section>
         </div>
     )
 }

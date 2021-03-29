@@ -47,6 +47,7 @@ import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectio
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
+import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
@@ -97,5 +98,6 @@ export const shortcodes = {
     Spacer,
     StarRepoButton,
     StartNowButton,
+    Structure,
     TableOfContents,
 }

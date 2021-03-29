@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Structure } from '../../Structure'
 import compensationImg from './images/compensation.svg'
 import equityImg from './images/equity.svg'
 import ptoImg from './images/pto.svg'
@@ -40,7 +41,7 @@ const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
 export const Benefits = () => {
     return (
         <div className="careers-benefits pt-24 text-white text-center" id="benefits">
-            <div className="w-11/12 max-w-4xl mx-auto">
+            <Structure.Section>
                 <h2>Benefits</h2>
                 <p className="opacity-80 mt-1 text-center max-w-2xl mx-auto">
                     We’re always looking to expand our benefits to offer meaningful value to our team who make all of
@@ -107,7 +108,7 @@ export const Benefits = () => {
                         details="Each year we organise fully paid company offsites- last year we went to a villa in Italy! Sometimes it’s good to speak face to face."
                     />
                 </div>
-            </div>
+            </Structure.Section>
         </div>
     )
 }

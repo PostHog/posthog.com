@@ -1,11 +1,12 @@
 import React from 'react'
+import { Structure } from '../../Structure'
 import newWayImg from '../../LandingPage/images/platform-new-way.svg'
 
 export const WhyWereHere = () => {
     return (
         <div className="careers-why-were-here pt-12" id="why-were-here">
             <div className="mt-12 text-left">
-                <div className="w-11/12 max-w-2xl mx-auto text-base">
+                <Structure.Section width="2xl" className="text-base">
                     <h2 className="text-center text-white">Why we’re here</h2>
                     <p className=" mt-1 text-left text-white text-lg">
                         We’re a small (but growing) team building an open source platform that empowers customers to
@@ -37,7 +38,7 @@ export const WhyWereHere = () => {
                             you've got the opportunity to have a huge impact.
                         </p>
                     </div>
-                </div>
+                </Structure.Section>
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import { Structure } from '../../Structure'
 
 export const OpenRoles = () => {
     useEffect(() => {
@@ -12,7 +13,7 @@ export const OpenRoles = () => {
 
     return (
         <div className="careers-open-roles pt-24 text-white text-center" id="open-roles">
-            <div className="w-11/12 max-w-5xl mx-auto bg-black bg-opacity-20 rounded-lg p-6 md:p-12 lg:py-24 lg:px-12">
+            <Structure.Section width="5xl" className="bg-black bg-opacity-20 rounded-lg p-6 md:p-12 lg:py-24 lg:px-12">
                 <h2>Open roles</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
                     Our team is proactively looking for the following:
@@ -34,7 +35,7 @@ export const OpenRoles = () => {
                         better time to apply.
                     </p>
                 </div>
-            </div>
+            </Structure.Section>
         </div>
     )
 }

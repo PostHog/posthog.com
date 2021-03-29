@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Structure } from '../../Structure'
 import applicationImg from './images/application.svg'
 import cultureInterviewImg from './images/culture-interview.svg'
 import technicalInterviewImg from './images/technical-interview.svg'
@@ -38,7 +39,7 @@ const InterviewStep = ({ image, title, children, titleColor, className = '' }: I
 export const InterviewProcess = () => {
     return (
         <div className="careers-interview-process pt-24 text-white text-center" id="interview-process">
-            <div className="w-11/12 max-w-3xl mx-auto">
+            <Structure.Section width="3xl">
                 <h2>Interview process</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
                     You can expect a fast, yet thorough process. While it differs by role, we usually follow a structure
@@ -96,7 +97,7 @@ export const InterviewProcess = () => {
                         </p>
                     </InterviewStep>
                 </div>
-            </div>
+            </Structure.Section>
         </div>
     )
 }
