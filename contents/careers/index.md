@@ -121,8 +121,9 @@ Our team is proactively looking for the following:
 * [Full Stack Software Engineer](/careers/full-stack-software-engineer)
 * [Senior Full Stack Software Engineer](/careers/senior-fs-software-engineer)
 * [Sales Engineer](/careers/sales-engineer)
-* [Site Reliability Engineer](careers/site-reliability-engineer)
-* [Product Marketer](careers/product-marketer)
+* [Site Reliability Engineer](/careers/site-reliability-engineer)
+* [Product Marketer](/careers/product-marketer)
+* [Senior Product Designer](/careers/senior-product-designer)
 
 ## Open Application
 
