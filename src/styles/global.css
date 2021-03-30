@@ -143,3 +143,9 @@ ul {
 .whr-location span {
     @apply hidden;
 }
+
+.appearance-none {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
