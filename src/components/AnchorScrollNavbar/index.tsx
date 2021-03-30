@@ -19,7 +19,7 @@ const ButtonLink = ({
             : baseClasses.concat(' text-white text-opacity-80 hover:bg-gray-100 hover:bg-opacity-10 hover:text-white')
     const sectionSelector = `#${section}`
 
-    const clickHandler = (e) => {
+    const clickHandler = (e: { preventDefault: () => void }) => {
         e.preventDefault()
         scrollTo(sectionSelector)
     }
