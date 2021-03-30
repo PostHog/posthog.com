@@ -314,13 +314,7 @@
     {
         "entry": "Marketing",
         "name": "Marketing",
-        "items": [
-            "handbook/growth/marketing",
-            "handbook/growth/marketing/content",
-            "handbook/growth/marketing/posthog-array",
-            "handbook/growth/marketing/releasing-content",
-            "handbook/growth/marketing/press"
-        ]
+        "items": ["handbook/growth/marketing", "handbook/growth/marketing/blog", "handbook/growth/marketing/press"]
     },
     {
         "entry": "Sales",
