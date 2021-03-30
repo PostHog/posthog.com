@@ -81,8 +81,9 @@ export const Footer = ({
                         <FooterListItem to="/product-features/funnels">Funnels</FooterListItem>
                         <FooterListItem to="/product-features/retention">Retention</FooterListItem>
                         <FooterListItem to="/product-features/session-recording">Session replay</FooterListItem>
-                        <FooterListItem to="/product-features/feature-flags" border={false}>
-                            Feature Flags
+                        <FooterListItem to="/product-features/feature-flags">Feature Flags</FooterListItem>
+                        <FooterListItem to="/plugins" border={false}>
+                            Plugin Library
                         </FooterListItem>
 
                         <FooterSubCategory>Features</FooterSubCategory>

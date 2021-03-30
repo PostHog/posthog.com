@@ -51,6 +51,9 @@ ul {
 }
 
 .contributor-images > img {
+    height: 50px;
+    width: 50px;
+
     @apply rounded m-1;
 }
 

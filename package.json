@@ -15,7 +15,8 @@
         "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
         "start": "gatsby develop",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "typegen": "kea-typegen write ."
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
@@ -53,6 +54,7 @@
         "kea": "^2.2.2",
         "kea-loaders": "^0.3.0",
         "kea-router": "^0.5.1",
+        "kea-typegen": "^0.5.3",
         "node-fetch": "^2.6.1",
         "node-sass": "^4.14.1",
         "postcss": "^8.2.6",

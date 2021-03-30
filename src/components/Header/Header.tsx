@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useValues, useActions } from 'kea'
+import { useValues } from 'kea'
 import { Link } from 'gatsby'
 import { layoutLogic } from '../../logic/layoutLogic'
 import hamburgerIcon from '../../images/icons/hamburger.svg'
@@ -36,13 +36,16 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 }
 
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
-    const { setIsGetStartedModalOpen } = useActions(layoutLogic)
-
     const classList = `button-primary ${className} border-none`
 
     return (
         <li className="leading-none">
-            <button onClick={() => setIsGetStartedModalOpen(true)} className={classList}>
+            <button
+                onClick={() => {
+                    window.location.href = 'https://app.posthog.com/signup?src=header'
+                }}
+                className={classList}
+            >
                 {children}
             </button>
         </li>
@@ -88,6 +91,9 @@ export const Header = ({
                     </NavbarLink>
                     <NavbarLink to="/pricing" textLight={textLight}>
                         Pricing
+                    </NavbarLink>
+                    <NavbarLink to="/blog" textLight={textLight}>
+                        Blog
                     </NavbarLink>
                     <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
                         GitHub
@@ -139,6 +145,13 @@ export const Header = ({
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >
                         Pricing
+                    </NavbarLink>
+                    <NavbarLink
+                        to="/blog"
+                        textLight={textLight}
+                        className="block my-2 py-2 border-b border-white border-opacity-10"
+                    >
+                        Blog
                     </NavbarLink>
                     <NavbarLink
                         href="https://github.com/posthog/posthog"

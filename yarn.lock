@@ -2278,6 +2278,11 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
+"@wessberg/ts-clone-node@0.3.18":
+  version "0.3.18"
+  resolved "https://registry.yarnpkg.com/@wessberg/ts-clone-node/-/ts-clone-node-0.3.18.tgz#e1c552c3ed0d5bfb920ca8d406639da4b250ad4b"
+  integrity sha512-m/QAPt9K7w5+zmiDJbKxFeIzr6hMuo8euLwYxhj7ipRsyLB2AeAu2/6AF21s45hDXdWsaFwSed3F9R6STMrECg==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -9863,6 +9868,15 @@ kea-router@^0.5.1:
   dependencies:
     url-pattern "^1.0.3"
 
+kea-typegen@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/kea-typegen/-/kea-typegen-0.5.3.tgz#312a4aa82aeb85aacfbee75e96cf8293ac9cd7e6"
+  integrity sha512-JivKJx0IxNNRKR3fl3atYYYWL9spZx6jG1SYVotbzONMhjZvQqNrNfc1BsRdw1V7gHhYIG3WeMWgUfB5fOWJGg==
+  dependencies:
+    "@wessberg/ts-clone-node" "0.3.18"
+    prettier "^2.2.1"
+    yargs "^16.2.0"
+
 kea@^2.2.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/kea/-/kea-2.3.2.tgz#1f536f27114e0902c8664b7ab943fbad3ceb665f"
@@ -12839,7 +12853,7 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@^2.0.5, prettier@^2.1.0:
+prettier@^2.0.5, prettier@^2.1.0, prettier@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
   integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
@@ -17529,7 +17543,7 @@ yargs@^15.4.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^16.1.0:
+yargs@^16.1.0, yargs@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.2.0.tgz#1c82bf0f6b6a66eafce7ef30e376f49a12477f66"
   integrity sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==

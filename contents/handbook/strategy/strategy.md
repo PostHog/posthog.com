@@ -20,7 +20,7 @@ We're consolidating a fragmented set of tools in the market that help software t
 
 Being open source uniquely enables this approach - we're the only team able to build a true platform that others can build on, to accelerate our breadth of tools that we consolidate.
 
-This is generating opportunities to redfine the category by strengthening the integrations between these tools.
+This is generating opportunities to redefine the category by strengthening the integrations between these tools.
 
 Breadth does come at the expense of depth. We do not aim to answer 100% of questions a product manager or engineer may have about user behavior, so making it easy to integrate PostHog with an existing stack of tools (such as data lakes) is important, mainly for larger volume users.
 

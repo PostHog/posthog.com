@@ -6,7 +6,7 @@ import { ContributorAvatars } from '../../ContributorAvatars'
 
 import checkImg from '../images/green-check.svg'
 
-const FeatureBenefit = ({ feature, benefit }) => {
+const FeatureBenefit = ({ feature, benefit }: { feature: string; benefit: string }) => {
     return (
         <div className="w-full md:w-1/3 px-3 text-left my-5 flex items-start">
             <img src={checkImg} className="mr-2 h-4 mt-1" alt={feature} />

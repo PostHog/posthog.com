@@ -269,6 +269,7 @@
             "handbook/company/branding",
             "handbook/company/team",
             "handbook/company/management",
+            "handbook/company/structure",
             "handbook/company/standups"
         ]
     },
@@ -301,7 +302,6 @@
             "careers/senior-fs-software-engineer",
             "careers/site-reliability-engineer",
             "careers/sales-engineer",
-            "careers/content-marketer",
             "careers/product-marketer"
         ]
     },

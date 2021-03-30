@@ -5,18 +5,35 @@ showTitle: true
 ---
 
 
-If you're running PostHog behind a proxy, there are a few more things you need to do to make sure PostHog works.
+If you're running PostHog behind a proxy, there are a few more things you need to do to make sure PostHog works. You usually need this if running behind a web server like Apache or NGINX, a load balancer (like ELB), or a DDoS protection service (like Cloudflare).
 
-### Setup
+## Setup
 
 If PostHog is running behind a proxy, you need to do the following:
-- Make sure you have the `IS_BEHIND_PROXY` environment variable set to `True`.
+- Set the `IS_BEHIND_PROXY` environment variable to `True`. This will make sure the client's IP address is properly calculated, and SSL is properly handled (e.g. for OAuth requests).
+- Set your [trusted proxies](#trusted-proxies) configuration.
 - If deploying with Docker, use the `docker-compose-config.py` script to expose the appropriate port in `docker-compose.yml`. By default port 80 is exposed, causing a port conflict between the PostHog Docker container and the proxy.
-- Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/configuring-posthog/environment-variables). Try this if the above settings do not solve your issue.
+- Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/configuring-posthog/environment-variables). If you don't allow all hosts (i.e. you are whitelisting specific hosts), you will need to set the address(es) of your proxy here.
 
 <div class='note-block'><b>Note:</b> It is suggested to set up the proxy separately from PostHog's Docker Compose definition.</div>
 
-### NGINX Config (Suggested)
+
+### Trusted proxies
+
+Trusted proxies are used to determine which proxies to consider as valid from the `X-Forwarded-For` HTTP header included in all requests to determine the end user's real IP address. Specifically whitelisting your proxy server's address prevents spoofing of the end user's IP address while ensuring your service works as expected. There are two ways of setting up trusted proxies.
+- **Recommended**. Set a list of trusted IP addresses for your proxies via the `TRUSTED_PROXIES` environment variable (comma-separated list of IP addresses).
+- Trust all proxies by setting `TRUST_ALL_PROXIES` environment variable to `True` (_not recommended unless you have a strong reason for which whitelisting specific addresses wouldn't work for you_).
+
+
+### Common issues
+
+- Some users have reported getting infinite redirects when running behind a proxy. Make sure the `X-Forwarded-Proto` header is set to `https` if you have HTTPS enabled. Alternatively, you can set the `DISABLE_SECURE_SSL_REDIRECT` variable to make PostHog run using HTTP.
+  - If you use a load balancer, it is recommended to terminate the SSL connection at the load balancer (remember to set `DISABLE_SECURE_SSL_REDIRECT` to `True`) and connect via HTTP to your PostHog container (make sure your container is behind a firewall or VPC to prevent unauthorized connections), you would then enforce SSL/TLS connections at the load balancer level.
+- If you have IP blocks that are not working and you're running behind a proxy, your instance may be misconfigured, preventing PostHog from determining the connecting IP address.
+
+
+
+## NGINX Config (Recommended)
 
 You need to make sure your proxy server is sending `X-Forwarded-For` headers. For NGINX, that config should look something like this:
 
@@ -30,7 +47,7 @@ You need to make sure your proxy server is sending `X-Forwarded-For` headers. Fo
     }
 ```
 
-### Apache2 Config
+## Apache2 Config
 
 You need the `proxy` `proxy_http` and `proxy_html` modules enabled. 
 To do this, run `sudo a2enmod proxy proxy_http proxy_html`.
@@ -45,6 +62,3 @@ Make sure SSL is enabled, and include the `X-Forwarded-Proto` header so that Pos
 </VirtualHost>
 ```
 
-### Infinite Redirect
-
-Some users have reported getting infinite redirects when running behind a proxy. Make sure the `X-Forwarded-Proto` header is set to `https` if you have HTTPS enabled. Alternatively, you can set the `DISABLE_SECURE_SSL_REDIRECT` variable to make PostHog run using HTTP.

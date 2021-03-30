@@ -10,7 +10,7 @@ Sharing and receiving feedback openly is _really_ important to us at PostHog. Pa
 
 This includes giving feedback [to each other](/handbook/company/values#tread-on-toes), so we know we are working on the right things, in the right way. While giving feedback to a team member can feel awkward, especially if it is not positive or if you are talking to someone with more experience than you, we believe that it is an important part of [not letting others fail](/handbook/company/culture#dont-let-others-fail). 
 
-'Open and honest' != 'being an asshole' - we expect feedback to be direct, but shared with good intentions and in the spirit of genuinely helping that person and PostHog as a whole to improve. 
+'Open and honest' != 'being an asshole' - we expect feedback to be direct, but shared with good intentions and in the spirit of genuinely helping that person and PostHog as a whole to improve. Please make sure your feedback is constructive and based on observations, not _emotions_. If possible, share examples to help the feedback receiver understand the context of the feedback. 
 
 ## Performance Reviews
 

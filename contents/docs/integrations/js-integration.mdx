@@ -135,9 +135,9 @@ If a user was previously anonymous (because they hadn't signed up or logged in y
 
 ```js
 posthog.identify(
-    '[user unique id]', // required
-    { userProperty: 'value1' }, // optional
-    { anotherUserProperty: 'value2' } // optional
+    '[user unique id]', // distinct_id, required
+    { userProperty: 'value1' }, // $set, optional
+    { anotherUserProperty: 'value2' } $set_once, optional
 );
 ```
 
