@@ -90,7 +90,7 @@ const ContributorCardStructure = ({
                             '0%': '#220f3f',
                             '100%': '#ab75ff',
                         }}
-                        percent={contributorLevel >= 5 ? 100 : (100 * contributorLevel) / 5}
+                        percent={contributorLevel >= 100 ? 100 : (100 * contributorLevel) / 100}
                         className="progress-bar"
                         showInfo={false}
                     />

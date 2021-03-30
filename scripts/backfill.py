@@ -13,19 +13,28 @@ auth_header = { 'Authorization': f'token {github_token}' }
 
 repos = requests.get('https://api.github.com/orgs/PostHog/repos?type=all', headers=auth_header).json()
 
+contributions_per_contributor = {}
+
+i = 0
+l = len(repos)
 for repo in repos:
     if repo['fork']:
         continue
+    print(f'Processing repo {i} of {l}')
     contributors = requests.get(repo['contributors_url'], headers=auth_header).json()
     for contributor in contributors:
         username = contributor['login']
-        if username not in contributors_processed:
-            contributors_processed.add(username)
-            avatar_url = contributor['avatar_url']
-            contributor_faces_html += f'<a href="https://github.com/{username}"><img src="{avatar_url}" title="{username}" width="{image_size}" height="{image_size}"></a>\n'
+        if username in contributions_per_contributor:
+            contributions_per_contributor[username] += contributor['contributions']
+        else:
+            contributions_per_contributor[username] = contributor['contributions']
+    i += 1
+    
+output = ''
+for username, level in contributions_per_contributor.items():
+    output += f"('{username}',{level}),\n"
 
-
-print(contributor_faces_html)
+print(output)
 
 
 

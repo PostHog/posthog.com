@@ -15,6 +15,16 @@ export const ignoreContributors = new Set([
     'fuziontech',
     'dependabot[bot]',
     'posthog-contributions-bot[bot]',
+    'piemets',
+    'lottiecoxon',
+    'berntgl',
+    'seanpackham',
+    'corywatilo',
+    'eltjehelene',
+    'kpthatsme',
+    'ungless',
+    'Tannergoods',
+    'mikenicklas',
 ])
 
 export const mvpWinners: Record<string, number> = {

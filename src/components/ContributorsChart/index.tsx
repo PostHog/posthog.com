@@ -3,6 +3,7 @@ import Chart from 'chart.js'
 import { useValues } from 'kea'
 import { contributorStatsLogic } from './contributorStatsLogic'
 import { Spacer } from 'components/Spacer'
+import { Link } from 'gatsby'
 
 export const ContributorsChart = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -110,6 +111,11 @@ export const ContributorsChart = () => {
             ) : (
                 <>
                     <h5 style={{ margin: 0, color: '#efefef' }}>Top 15 PostHog Contributors</h5>
+                    <Link to="/docs/recognizing-contributions">
+                        <small style={{ color: '#dedede' }}>
+                            ⚠️ Only displaying contributions from after 29/03/2021
+                        </small>
+                    </Link>
                     <Spacer height={10} />
                     <canvas ref={canvasRef} style={{ maxWidth: 1000, maxHeight: 800 }} className="center centered" />
                 </>
