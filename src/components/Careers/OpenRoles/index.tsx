@@ -9,7 +9,7 @@ export const OpenRoles = () => {
                 window.whr_embed(456332, { detail: 'titles', base: 'jobs', zoom: 'country', grouping: 'none' })
             })
         }
-    }, [])
+    })
 
     return (
         <div className="careers-open-roles pt-24 text-white text-center" id="open-roles">
