@@ -12,7 +12,7 @@ Until now, tools for building products have been very fragmented - product analy
 
 PostHog is different by offering these tools (and more) in a single platform that customers can host themselves.
 
-### What you'll be doing
+### The role
 We're looking for a seasoned product designer with a background in interaction design, analytics and data visualization to work on the open source PostHog web app.
 
 This is our first dedicated product design hire, joining our [Design Lead](/handbook/company/team#cory-watilo-lead-designer) and [Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer) whose current efforts are largely focused on our website, docs and contributor experience.
@@ -20,6 +20,7 @@ This is our first dedicated product design hire, joining our [Design Lead](/hand
 You can expect to do a lot of normal product designer-y things, but with one big twist: *YOU decide what you're going to work on!* We hire high-performing individuals who can identify a problem, propose a solution, and execute on it. We ship every two weeks.
 
 You'll work with our contributors to identify the highest leverage opportunities to improve the UX, grow retention, and assist engineers in designing new features. (Our engineers are incredibly UX-minded, so your suggestions won't fall on deaf ears!)
+
 This role encompasses everything from building a design roadmap, user research and testing, evolving our library of Figma components, and prototyping interactions.
 
 There's no requirement around how long you've worked in product design, though most designers in this type of role typically have 5-10 years experience.
@@ -28,12 +29,20 @@ There's no requirement around how long you've worked in product design, though m
 
 - A design generalist, with a strong opinion about UX best practices
 - A background in analytics and data visualization
-- Strong knowledge of Figma
+- Moderate to advanced experience working in Figma
 - Deep understanding of interaction design
 - Ability to ship [iteratively](/handbook/company/culture#iteration)
 - A history of designing and building experience for B2B SaaS apps
 - A background in front end development (This isn't a coding role - though there may be opportunities to delve into the code - but understanding how design translates into code is important.)
 - Strong [communication skills](/handbook/company/culture#write-stuff-down) - most of our interaction with the team and our contributors happens on GitHub
+
+### Nice to haves
+- Interest in/experience with motion design and animation
+F- amiliarity with Ant Design, ChartJS, D3, and working in a React environment
+- An understanding of open source software and the open source community as a whole
+- Copywriting skills
+- Leadership experience
+- An opinion about if pineapple belongs on pizza
 
 ### What we offer in return
 
@@ -80,6 +89,7 @@ We're all remote, and we've raised enough to pay top of market. [We are proudly 
 * Why you're drawn to us
 * Your resumé and/or LinkedIn
 * Please also add a link to your portfolio or examples of previous work
+* Bonus points if you install PostHog on a side project and tell us what you'd tackle first!
 
 ### Not sold? Learn more first
 
