@@ -105,9 +105,7 @@ export const Footer = ({ onPostPage, showNewsletter = false }: { onPostPage: boo
 
                         <FooterSubCategory>Get involved</FooterSubCategory>
                         <FooterListItem href="https://github.com/orgs/PostHog/projects/1">Roadmap</FooterListItem>
-                        <FooterListItem href="https://github.com/PostHog/posthog/graphs/contributors">
-                            Contributors
-                        </FooterListItem>
+                        <FooterListItem to="/contributors">Contributors</FooterListItem>
                         <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
                             Merch
                         </FooterListItem>
