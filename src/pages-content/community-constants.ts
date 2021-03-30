@@ -14,6 +14,7 @@ export const ignoreContributors = new Set([
     'EDsCODE',
     'fuziontech',
     'dependabot[bot]',
+    'posthog-contributions-bot[bot]',
 ])
 
 export const mvpWinners: Record<string, number> = {

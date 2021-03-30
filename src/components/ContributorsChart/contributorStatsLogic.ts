@@ -13,7 +13,7 @@ export const contributorStatsLogic = kea({
             {
                 loadDatasets: async () => {
                     const datasetsRes = await fetch(
-                        'https://app.posthog.com/api/dashboard/2779/?share_token=zNJCq1F_hNWClJknv2csag2I9XypOQ'
+                        'https://app.posthog.com/api/dashboard/2868/?share_token=6j6-3tr86CgbNK_4PmyYHxHQYTdvEg'
                     )
                     const datasetsJson = await datasetsRes.json()
 

@@ -64,7 +64,7 @@ export const ContributorsChart = () => {
                     options: {
                         responsive: true,
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Top 15 PostHog Contributors',
                             fontColor: '#dedede',
                             fontSize: 18,
@@ -105,11 +105,16 @@ export const ContributorsChart = () => {
 
     return (
         <>
-        {datasetsLoading ?
-            <Spacer height={800} /> 
-        :
-            <canvas ref={canvasRef} style={{ maxWidth: 1000, maxHeight: 800 }} className="center centered" />
-        }
+            {datasetsLoading ? (
+                <Spacer height={800} />
+            ) : (
+                <>
+                    <h5 style={{ margin: 0, color: '#efefef' }}>Top 15 PostHog Contributors</h5>
+                    <small style={{ color: '#dedede' }}>⚠️ Only displaying contributions from after 29/03/2021</small>
+                    <Spacer height={10} />
+                    <canvas ref={canvasRef} style={{ maxWidth: 1000, maxHeight: 800 }} className="center centered" />
+                </>
+            )}
         </>
     )
 }
