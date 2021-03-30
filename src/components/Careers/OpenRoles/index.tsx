@@ -14,10 +14,13 @@ export const OpenRoles = () => {
     return (
         <div className="careers-open-roles pt-24 text-white text-center" id="open-roles">
             <Structure.Section width="5xl" className="bg-black bg-opacity-20 rounded-lg p-6 md:p-12 lg:py-24 lg:px-12">
-                <h2>Open roles</h2>
-                <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
-                    Our team is proactively looking for the following:
-                </p>
+                <Structure.SectionHeader
+                    title="Open roles"
+                    titleTag="h2"
+                    leadText="Our team is proactively looking for the following:"
+                    leadTextClassName="opacity-80"
+                />
+
                 <div id="whr_embed_hook"></div>
                 <div className="clear-both"></div>
                 <Helmet>

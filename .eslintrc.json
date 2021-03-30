@@ -16,6 +16,7 @@
     "rules": {
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
-        "no-const-assign": "off"
+        "no-const-assign": "off",
+        "no-undef": "off"
     }
 }

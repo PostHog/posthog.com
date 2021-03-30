@@ -43,11 +43,12 @@ export const Benefits = () => {
     return (
         <div className="careers-benefits pt-24 text-white text-center" id="benefits">
             <Structure.Section>
-                <h2>Benefits</h2>
-                <p className="opacity-80 mt-1 text-center max-w-2xl mx-auto">
-                    We’re always looking to expand our benefits to offer meaningful value to our team who make all of
-                    this possible.
-                </p>
+                <Structure.SectionHeader
+                    title="Benefits"
+                    titleTag="h2"
+                    leadText="We’re always looking to expand our benefits to offer meaningful value to our team who make all of this possible."
+                    leadTextClassName="opacity-80"
+                />
 
                 <div className="flex flex-col md:flex-row md:flex-wrap">
                     <Benefit

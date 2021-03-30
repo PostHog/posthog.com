@@ -5,6 +5,7 @@ import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
+import { CareersHero } from './components/Careers/CareersHero'
 import { Culture } from './components/Careers/Culture'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
 import { OpenRoles } from './components/Careers/OpenRoles'
@@ -56,6 +57,7 @@ export const shortcodes = {
     BlogFooter,
     CallToAction,
     Benefits,
+    CareersHero,
     Culture,
     InterviewProcess,
     OpenRoles,

@@ -1,8 +1,6 @@
 import React from 'react'
-import scrollTo from 'gatsby-plugin-smoothscroll'
 
-import { Header } from '../components/Header'
-import { CallToAction } from '../components/CallToAction'
+import { CareersHero } from '../components/Careers/CareersHero'
 import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
 import { WhyWereHere } from '../components/Careers/WhyWereHere'
 import { Culture } from '../components/Careers/Culture'
@@ -25,34 +23,7 @@ const IndexPage = () => {
                 description="Self-hosted product analytics stack, to deploy on your infrastructure."
             />
 
-            <div className="careers-hero">
-                <Header
-                    onPostPage={false}
-                    isBlogArticlePage={false}
-                    isHomePage={true}
-                    menuActiveKey="active"
-                    transparentBackground={true}
-                />
-
-                <div className="w-11/12 pt-12 sm:py-24 mx-auto text-center relative z-10 rounded">
-                    <div className="max-w-3xl mx-auto">
-                        <h1 className="text-white mb-0 pb-0 text-3xl">
-                            We’re working to increase the number of successful products in the world
-                        </h1>
-
-                        <CallToAction
-                            icon="down-arrow"
-                            onClick={() => scrollTo('#open-roles')}
-                            type="primary"
-                            width="72"
-                            className="my-12"
-                        >
-                            View open roles
-                        </CallToAction>
-                    </div>
-                </div>
-            </div>
-
+            <CareersHero />
             <div className="careers-anchor-navbar">
                 <AnchorScrollNavbar />
                 <WhyWereHere />
@@ -62,7 +33,7 @@ const IndexPage = () => {
                 <WorkingAtPostHog />
                 <OpenRoles />
             </div>
-            <Footer showNewsletter={false} />
+            <Footer showNewsletter={false} backgroundClass="careers-footer" />
             <GetStartedModal />
         </div>
     )

@@ -16,7 +16,7 @@ interface QuoteProps {
 }
 
 const Quote = ({ image, name, position, details, className = '' }: QuoteProps) => {
-    const classList = mergeClassList('w-full text-center mt-12 lg:mt-24 lg:mt-0', className)
+    const classList = mergeClassList('w-full text-center mt-12 lg:mt-0', className)
 
     return (
         <div className={classList}>
@@ -33,10 +33,12 @@ export const WorkingAtPostHog = () => {
     return (
         <div className="careers-working-at-posthog pt-24 text-white text-center" id="working-at-posthog">
             <Structure.Section width="5xl">
-                <h2>Working at PostHog</h2>
-                <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
-                    Real, honest opinions from really honest people
-                </p>
+                <Structure.SectionHeader
+                    title="Working at PostHog"
+                    titleTag="h2"
+                    leadText="Real, honest opinions from really honest people"
+                    leadTextClassName="opacity-80"
+                />
 
                 <div className="flex flex-col lg:flex-row items-center space-between mt-12">
                     <div className="w-full lg:w-1/3 lg:mr-6">

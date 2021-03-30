@@ -9,7 +9,7 @@
 }
 
 .careers-anchor-navbar {
-    @include star-background(linear-gradient(180deg, #03061f 0%, #03061f 100%), left);
+    @include star-background(linear-gradient(180deg, #070822 0%, #070822 100%), left);
 }
 
 .careers-hero {
@@ -40,6 +40,6 @@
     @include star-background(linear-gradient(180deg, #241b4b 0%, #262354 100%));
 }
 
-.bg-footer {
+.careers-footer {
     @include star-background(linear-gradient(180deg, #262354 0%, #282b5f 100%), left);
 }

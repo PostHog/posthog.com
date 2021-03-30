@@ -41,11 +41,12 @@ export const InterviewProcess = () => {
     return (
         <div className="careers-interview-process pt-24 text-white text-center" id="interview-process">
             <Structure.Section width="3xl">
-                <h2>Interview process</h2>
-                <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
-                    You can expect a fast, yet thorough process. While it differs by role, we usually follow a structure
-                    of the following stages:
-                </p>
+                <Structure.SectionHeader
+                    title="Interview process"
+                    titleTag="h2"
+                    leadText="You can expect a fast, yet thorough process. While it differs by role, we usually follow a structure of the following stages:"
+                    leadTextClassName="opacity-80"
+                />
 
                 <div className="w-full bg-black bg-opacity-20 rounded-lg p-4 md:p-8 lg:p-12 text-left">
                     <InterviewStep title="1. Application" titleColor="#E83DEC" image={applicationImg}>
