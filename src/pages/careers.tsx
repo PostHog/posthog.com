@@ -16,7 +16,7 @@ import '../components/Careers/styles/index.scss'
 
 const IndexPage = () => {
     return (
-        <div>
+        <>
             {/* @todo update SEO */}
             <SEO
                 title="PostHog - Open-Source Product Analytics"
@@ -35,7 +35,7 @@ const IndexPage = () => {
             </div>
             <Footer showNewsletter={false} backgroundClass="careers-footer" />
             <GetStartedModal />
-        </div>
+        </>
     )
 }
 

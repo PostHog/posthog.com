@@ -72,16 +72,16 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
     useEffect(() => {
         // @todo - throttle this
         const sections = {
-            culture: document.getElementById('culture')?.offsetTop,
-            interviewProcess: document.getElementById('interview-process')?.offsetTop,
-            benefits: document.getElementById('benefits')?.offsetTop,
-            workingAtPosthog: document.getElementById('working-at-posthog')?.offsetTop,
-            openRoles: document.getElementById('open-roles')?.offsetTop,
+            culture: document.getElementById('culture')!.offsetTop,
+            interviewProcess: document.getElementById('interview-process')!.offsetTop,
+            benefits: document.getElementById('benefits')!.offsetTop,
+            workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
+            openRoles: document.getElementById('open-roles')!.offsetTop,
         }
 
         const scrollThreshold = 50
 
-        document.addEventListener('scroll', () => {
+        const scrollHandler = () => {
             let offset = window.scrollY
 
             if (offset < sections.culture - scrollThreshold) {
@@ -97,7 +97,13 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             } else {
                 setCurrentSection('open-roles')
             }
-        })
+        }
+
+        document.addEventListener('scroll', scrollHandler)
+
+        return () => {
+            document.removeEventListener('scroll', scrollHandler)
+        }
     }, [])
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
