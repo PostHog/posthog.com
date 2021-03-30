@@ -38,7 +38,7 @@ There's no requirement around how long you've worked in product design, though m
 
 ### Nice to haves
 - Interest in/experience with motion design and animation
-F- amiliarity with Ant Design, ChartJS, D3, and working in a React environment
+- Familiarity with Ant Design, ChartJS, D3, and working in a React environment
 - An understanding of open source software and the open source community as a whole
 - Copywriting skills
 - Leadership experience
