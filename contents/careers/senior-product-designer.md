@@ -25,9 +25,9 @@ This role encompasses everything from building a design roadmap, user research a
 
 There's no requirement around how long you've worked in product design, though most designers in this type of role typically have 5-10 years experience.
 
-### What you'll bring
+### What you'll bring:
 
-- A design generalist, with a strong opinion about UX best practices
+- A strong opinion about UX best practices
 - A background in analytics and data visualization
 - Moderate to advanced experience working in Figma
 - Deep understanding of interaction design
