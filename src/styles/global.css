@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'workable-overrides.css';
+@import 'backgrounds.css';
+
 body {
     font-smooth: 1.5px;
     -webkit-font-smoothing: antialiased;
@@ -47,101 +50,8 @@ ul {
     border-color: rgba(218, 72, 16, 0.9);
 }
 
-.bg-purple-gradient {
-    background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
-}
-
-.bg-neon {
-    position: relative;
-}
-
-.bg-neon:after {
-    background: conic-gradient(
-            from 180deg at 50% 50%,
-            #f7a501 0deg,
-            rgba(255, 17, 17, 0.614583) 78.75deg,
-            rgba(252, 10, 228, 0.773124) 140.63deg,
-            rgba(184, 41, 251, 0.817651) 189.38deg,
-            rgba(252, 10, 228, 0.773124) 238.12deg,
-            rgba(255, 17, 17, 0.614583) 300deg,
-            #f7a501 360deg
-        ),
-        rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    bottom: -8px;
-    content: '';
-    position: absolute;
-    left: -8px;
-    right: -8px;
-    top: -8px;
-    z-index: 1;
-}
-
-.bg-neon:before {
-    background: conic-gradient(
-            from 180deg at 50% 50%,
-            #f7a501 0deg,
-            rgba(255, 17, 17, 0.614583) 78.75deg,
-            rgba(252, 10, 228, 0.773124) 140.63deg,
-            rgba(184, 41, 251, 0.817651) 189.38deg,
-            rgba(252, 10, 228, 0.773124) 238.12deg,
-            rgba(255, 17, 17, 0.614583) 300deg,
-            #f7a501 360deg
-        ),
-        rgba(255, 255, 255, 0.8);
-    bottom: 0;
-    content: '';
-    filter: blur(30px);
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-}
-
-.bg-darkmode-purple {
-    background: #220f3f !important;
-}
-
-.bg-lightmode-gray {
-    background: rgb(249, 249, 249) none repeat scroll 0% 0%;
-}
-
-.bg-footer {
-    background: #08042f;
-}
-
 .contributor-images > img {
     @apply rounded m-1;
-}
-
-.whr-items,
-.whr-info {
-    @apply list-none px-0 py-0 mx-0 my-0;
-}
-
-.whr-item {
-    @apply inline-block w-full md:w-1/2 md:float-left text-left mt-6 md:px-6 lg:px-12;
-}
-
-.whr-title {
-    @apply font-sans text-base mb-1;
-}
-
-.whr-title a {
-    @apply text-yellow-400 hover:underline hover:text-yellow-400;
-}
-
-.whr-date {
-    @apply hidden;
-}
-
-.whr-location {
-    @apply text-gray-100 text-opacity-60 text-base-larger;
-}
-
-.whr-location span {
-    @apply hidden;
 }
 
 .appearance-none {
