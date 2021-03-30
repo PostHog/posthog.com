@@ -58,30 +58,6 @@ There's no requirement around how long you've worked in product design, though m
 
 *Please note that benefits vary slightly by country. If you have any questions, please don't hesitate to ask our team.*
 
-### About PostHog
-
-PostHog's engineering culture is best-in-class, and we've had explosive user growth from this alone.
-
-We [launched a four week old minimum viable product in February 2020](/handbook/company/story), and since then have been deployed in thousands of places around the world.
-
-PostHog's platform makes it easy for software teams to understand their user behavior. This, coupled with our fast growth, has led to a wide variety of very cool use cases. PostHog helps indie game designers make it more fun to defend earth from an alien threat. PostHog is used by multinational organizations running software that powers everything from banks to airlines. PostHog is used by startups disrupting their own industries.
-
-We're a company like no other in our space. Our approach is bottom up, and that starts by being great for developers to install and use.
-
-By being open source, we can be used on any software project throughout the world, for free, forever. Some developers will use the platform on a side project, others at their startup or small business, and others in their Fortune 500. We are building a true platform that can grow from 1 user to many, no matter the size or shape of the organization.
-
-The core of our approach is to delight end users. It's not about executive dashboards and then a terrible interface for everyone else. It's the sense of power we give to the person on the ground, doing the actual work, every day.
-
-### Our team
-
-Our team is a combination of former CTOs and YC founders all turned developers, alongside some of the best developers from the world's largest tech companies who have the experience to help us handle scalability.
-
-Our [team](/handbook/company/team) is tiny, but we live in 10 different countries. This diverse group looks pretty weird on paper, but it's magical. Apart from the fact most of them think [pineapple belongs on pizza](https://twitter.com/PostHogHQ/status/1319583079648923648). It doesn't.
-
-We take bets on people with less experience too - we are as willing to hire an unproven genius straight out of school as we are a seasoned veteran.
-
-We're all remote, and we've raised enough to pay top of market. [We are proudly backed](/handbook/strategy/investors) by some of the best VCs and Investors in the world, such as YCombinator.
-
 ### Sold? Apply now
 
 * [Drop us a line](mailto:8A431C8750@jobs.workablemail.com) and tell us:
