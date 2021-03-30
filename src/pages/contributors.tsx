@@ -11,6 +11,7 @@ import { ContributorCard } from 'components/ContributorCard'
 import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
 import { ContributorsChart } from 'components/ContributorsChart'
+import { Link } from 'gatsby'
 
 const { TabPane } = Tabs
 
@@ -37,6 +38,11 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
+                    <Link to="/docs/recognizing-contributions">
+                        <small style={{ color: '#dedede' }}>
+                            ⚠️ Only displaying contributions from after 29/03/2021
+                        </small>
+                    </Link>
                     <Tabs activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
                         <TabPane tab="List" key="list" />
                         <TabPane tab="Stats" key="stats" />

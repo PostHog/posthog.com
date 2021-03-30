@@ -110,7 +110,6 @@ export const ContributorsChart = () => {
             ) : (
                 <>
                     <h5 style={{ margin: 0, color: '#efefef' }}>Top 15 PostHog Contributors</h5>
-                    <small style={{ color: '#dedede' }}>⚠️ Only displaying contributions from after 29/03/2021</small>
                     <Spacer height={10} />
                     <canvas ref={canvasRef} style={{ maxWidth: 1000, maxHeight: 800 }} className="center centered" />
                 </>
