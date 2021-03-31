@@ -1590,3 +1590,13 @@ div::-webkit-scrollbar-thumb:hover {
         font-size: 16px;
     }
 }
+
+.text-center {
+    text-align: center;
+}
+
+.contributor-card-tooltip {
+    .ant-tooltip-inner {
+        background-color: #0f041f;
+    }
+}

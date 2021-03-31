@@ -16,6 +16,9 @@ import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { ContributorAvatars } from './components/ContributorAvatars'
+import { ContributorCard } from './components/ContributorCard'
+import { ContributorSearch } from './components/ContributorSearch'
+import { ContributorsChart } from './components/ContributorsChart'
 import { CornerBrackets } from './components/CornerBrackets'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -71,6 +74,9 @@ export const shortcodes = {
     CompensationCalculator,
     Container,
     ContributorAvatars,
+    ContributorCard,
+    ContributorSearch,
+    ContributorsChart,
     CornerBrackets,
     DarkModeToggle,
     DemoScheduler,
