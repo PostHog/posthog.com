@@ -1,4 +1,5 @@
 import { kea } from 'kea'
+import { ignoreContributors } from '../../pages-content/community-constants'
 
 interface Dataset {
     labels: string[]
@@ -17,7 +18,7 @@ export const contributorStatsLogic = kea({
                     )
                     const datasetsJson = await datasetsRes.json()
 
-                    const sortedDatasets = datasetsJson.items[0].result.sort((a: Dataset, b: Dataset) => {
+                    let sortedDatasets = datasetsJson.items[0].result.sort((a: Dataset, b: Dataset) => {
                         const aTotal = a.data.reduce((aggregate, current) => aggregate + current)
                         const bTotal = b.data.reduce((aggregate, current) => aggregate + current)
                         if (bTotal > aTotal) {
@@ -25,6 +26,10 @@ export const contributorStatsLogic = kea({
                         }
                         return -1
                     })
+
+                    sortedDatasets = sortedDatasets.filter(
+                        (set: Dataset) => !ignoreContributors.has(set.breakdown_value)
+                    )
 
                     return sortedDatasets.slice(0, 15)
                 },
