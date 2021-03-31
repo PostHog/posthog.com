@@ -17,10 +17,9 @@ import '../components/Careers/styles/index.scss'
 const IndexPage = () => {
     return (
         <>
-            {/* @todo update SEO */}
             <SEO
-                title="PostHog - Open-Source Product Analytics"
-                description="Self-hosted product analytics stack, to deploy on your infrastructure."
+                title="Careers - PostHog"
+                description="Why We're Here PostHog is increasing the number of successful products in the world. We do that by providing a platform for open-source product…"
             />
 
             <CareersHero />
@@ -33,7 +32,7 @@ const IndexPage = () => {
                 <WorkingAtPostHog />
                 <OpenRoles />
             </div>
-            <Footer showNewsletter={false} backgroundClass="careers-footer" />
+            <Footer onPostPage={false} showNewsletter={false} backgroundClass="careers-footer" />
             <GetStartedModal />
         </>
     )
