@@ -18,17 +18,15 @@ interface InterviewStepProps {
 
 const InterviewStep = ({ image, title, children, titleColor, className = '' }: InterviewStepProps) => {
     const classList = mergeClassList(
-        'flex flex-col md:flex-row justify-between md:items-center text-center md:text-left',
+        'flex flex-col md:flex-row w-full justify-between md:items-center text-center md:text-left',
         className
     )
 
     return (
         <div className={classList}>
-            <img
-                src={image}
-                alt={title}
-                className="w-24 mx-auto md:mr-8 mb-0 p-2 bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid"
-            />
+            <div className="flex-shrink-0 mx-auto md:mr-8 flex justify-center items-center w-auto bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid">
+                <img src={image} alt={title} className="max-w-full block mb-0 h-24 w-24 p-4" />
+            </div>
             <div className="flex-grow">
                 <h4 className="mb-0 font-sans font-normal text-lg mt-4 md:mt-0" style={{ color: titleColor }}>
                     {title}

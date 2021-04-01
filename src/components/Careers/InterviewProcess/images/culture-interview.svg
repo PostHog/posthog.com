@@ -1,28 +1,30 @@
-<svg width="109" height="109" viewBox="0 0 109 109" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_b)">
-<rect width="108.132" height="108.132" rx="9.40278" fill="url(#paint0_linear)" fill-opacity="0.15"/>
-<rect x="1.5" y="1.5" width="105.132" height="105.132" rx="7.90278" stroke="white" stroke-opacity="0.6" stroke-width="3"/>
-</g>
-<mask id="path-3-inside-1" fill="white">
-<rect x="14" y="14" width="80" height="80" rx="2.71186"/>
-</mask>
-<rect x="14" y="14" width="80" height="80" rx="2.71186" fill="#FF2F93" fill-opacity="0.2" stroke="#FF2F93" stroke-width="8.13559" mask="url(#path-3-inside-1)"/>
-<rect x="77.2031" y="22.3594" width="8.43781" height="8.43781" rx="0.286027" fill="#FF2F93"/>
-<rect x="77.2031" y="77.2031" width="8.43781" height="8.43781" rx="0.286027" fill="#FF2F93"/>
-<rect x="22.3594" y="77.2031" width="8.43781" height="8.43781" rx="0.286027" fill="#FF2F93"/>
-<rect x="22.3594" y="22.3594" width="8.43781" height="8.43781" rx="0.286027" fill="#FF2F93"/>
-<path d="M46.5 50.5H42V42H46V38H58.5V42H63V54.5H58.5V58.5H54.5V63H50.5V54.5H54.5V50H58.5V46.5H54V42.5H50.5V46.5H46.5V50.5Z" fill="#FF2F93" fill-opacity="0.8"/>
-<path d="M50.5 71.5V67H54.5V71.5H50.5Z" fill="#FF2F93" fill-opacity="0.8"/>
-<defs>
-<filter id="filter0_b" x="-10" y="-10" width="128.132" height="128.132" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feGaussianBlur in="BackgroundImage" stdDeviation="5"/>
-<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur" result="shape"/>
-</filter>
-<linearGradient id="paint0_linear" x1="54.066" y1="0" x2="54.066" y2="108.132" gradientUnits="userSpaceOnUse">
-<stop stop-color="white"/>
-<stop offset="1" stop-color="white" stop-opacity="0.5"/>
-</linearGradient>
-</defs>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>culture-interview</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="80" height="80" rx="2.71186"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="culture-interview" transform="translate(-14.000000, -14.000000)">
+            <g id="Group">
+                <rect id="Rectangle" fill-rule="nonzero" x="0" y="0" width="108.132" height="108.132" rx="9.40278"></rect>
+                <rect id="Rectangle" x="1.5" y="1.5" width="105.132" height="105.132" rx="7.90278"></rect>
+            </g>
+            <g id="Clipped" transform="translate(14.000000, 14.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Rectangle"></g>
+                <rect id="Rectangle" stroke="#FF2F93" stroke-width="8.13559" fill-opacity="0.2" fill="#FF2F93" fill-rule="nonzero" mask="url(#mask-2)" x="0" y="0" width="80" height="80" rx="2.71186"></rect>
+            </g>
+            <rect id="Rectangle" fill="#FF2F93" fill-rule="nonzero" x="77.2031" y="22.3594" width="8.43781" height="8.43781" rx="0.286027"></rect>
+            <rect id="Rectangle" fill="#FF2F93" fill-rule="nonzero" x="77.2031" y="77.2031" width="8.43781" height="8.43781" rx="0.286027"></rect>
+            <rect id="Rectangle" fill="#FF2F93" fill-rule="nonzero" x="22.3594" y="77.2031" width="8.43781" height="8.43781" rx="0.286027"></rect>
+            <rect id="Rectangle" fill="#FF2F93" fill-rule="nonzero" x="22.3594" y="22.3594" width="8.43781" height="8.43781" rx="0.286027"></rect>
+            <polygon id="Path" fill-opacity="0.8" fill="#FF2F93" fill-rule="nonzero" points="46.5 50.5 42 50.5 42 42 46 42 46 38 58.5 38 58.5 42 63 42 63 54.5 58.5 54.5 58.5 58.5 54.5 58.5 54.5 63 50.5 63 50.5 54.5 54.5 54.5 54.5 50 58.5 50 58.5 46.5 54 46.5 54 42.5 50.5 42.5 50.5 46.5 46.5 46.5"></polygon>
+            <polygon id="Path" fill-opacity="0.8" fill="#FF2F93" fill-rule="nonzero" points="50.5 71.5 50.5 67 54.5 67 54.5 71.5"></polygon>
+        </g>
+    </g>
 </svg>
