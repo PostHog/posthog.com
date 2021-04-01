@@ -59,7 +59,7 @@ export const Benefits = () => {
                     <Benefit
                         image={equityImg}
                         title="Equity"
-                        details="It’s important to us that all PostHog employees can feel invested in the company’s success, so all employees receive equity in PostHog!"
+                        details="It’s important to us that all PostHog employees can feel invested in the company’s success, so all employees receive equity in PostHog (with very employee-friendly terms)!"
                     />
                     <Benefit
                         image={ptoImg}
