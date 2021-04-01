@@ -106,7 +106,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             document.removeEventListener('scroll', scrollHandler)
             window.removeEventListener('resize', scrollHandler)
         }
-    }, [currentSection])
+    }, [])
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
         <ButtonLink section={section} currentSection={currentSection} key={section}>
