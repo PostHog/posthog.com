@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import scrollTo from 'gatsby-plugin-smoothscroll'
+
 import { mergeClassList } from '../../lib/utils'
+import downIcon from '../../images/icons/down-caret.svg'
 
 const ButtonLink = ({
     section,
@@ -104,7 +106,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             document.removeEventListener('scroll', scrollHandler)
             window.removeEventListener('resize', scrollHandler)
         }
-    }, [])
+    }, [currentSection])
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
         <ButtonLink section={section} currentSection={currentSection} key={section}>
@@ -124,14 +126,18 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
                 {navbarLinks}
             </div>
 
-            <select
-                className="appearance-none text-white w-11/12 p-3 sticky top-3 z-10 mx-auto block max-w-3xl rounded lg:hidden"
-                style={{ backgroundColor: '#202038' }}
-                value={currentSection}
-                onChange={(e) => scrollTo(`#${e.target.value}`)}
-            >
-                {selectOptions}
-            </select>
+            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl lg:hidden">
+                <select
+                    className="appearance-none text-white block p-3 w-full rounded"
+                    style={{ backgroundColor: '#202038' }}
+                    value={currentSection}
+                    onChange={(e) => scrollTo(`#${e.target.value}`)}
+                >
+                    {selectOptions}
+                </select>
+
+                <img src={downIcon} alt="expand menu" className="absolute top-2 right-2 mt-1" />
+            </div>
         </>
     )
 }
