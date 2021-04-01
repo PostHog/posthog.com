@@ -70,19 +70,17 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
     const [currentSection, setCurrentSection] = useState('why-were-here')
 
     useEffect(() => {
-        // @todo - throttle this
-        const sections = {
-            culture: document.getElementById('culture')!.offsetTop,
-            interviewProcess: document.getElementById('interview-process')!.offsetTop,
-            benefits: document.getElementById('benefits')!.offsetTop,
-            workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
-            openRoles: document.getElementById('open-roles')!.offsetTop,
-        }
-
-        const scrollThreshold = 50
+        const scrollThreshold = 100
 
         const scrollHandler = () => {
-            let offset = window.scrollY
+            const sections = {
+                culture: document.getElementById('culture')!.offsetTop,
+                interviewProcess: document.getElementById('interview-process')!.offsetTop,
+                benefits: document.getElementById('benefits')!.offsetTop,
+                workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
+                openRoles: document.getElementById('open-roles')!.offsetTop,
+            }
+            const offset = window.scrollY
 
             if (offset < sections.culture - scrollThreshold) {
                 setCurrentSection('why-were-here')
@@ -100,9 +98,11 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
         }
 
         document.addEventListener('scroll', scrollHandler)
+        window.addEventListener('resize', scrollHandler)
 
         return () => {
             document.removeEventListener('scroll', scrollHandler)
+            window.removeEventListener('resize', scrollHandler)
         }
     }, [])
 
