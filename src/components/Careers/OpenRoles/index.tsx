@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { Structure } from '../../Structure'
 
 interface WorkableWindow extends Window {
-    whr_embed: (_id: number, _options: Record<string, string>) => void
-    whr: (_document: Document) => any
+    whr_embed: (id: number, options: Record<string, string>) => void
+    whr: (document: Document) => any
 }
 
 declare const window: WorkableWindow
