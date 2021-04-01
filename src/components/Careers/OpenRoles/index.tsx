@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react'
-import { Helmet } from 'react-helmet'
 import { Structure } from '../../Structure'
+
+interface WorkableWindow extends Window {
+    whr_embed: (_id: number, _options: Record<string, string>) => void
+    whr: (_document: Document) => any
+}
+
+declare const window: WorkableWindow
 
 export const OpenRoles = () => {
     useEffect(() => {
-        if (typeof window !== 'undefined' && window.whr) {
+        if (window && window.whr) {
             window.whr(document).ready(function () {
                 window.whr_embed(456332, { detail: 'titles', base: 'jobs', zoom: 'country', grouping: 'none' })
             })
@@ -23,9 +29,6 @@ export const OpenRoles = () => {
 
                 <div id="whr_embed_hook"></div>
                 <div className="clear-both"></div>
-                <Helmet>
-                    <script src="https://www.workable.com/assets/embed.js" type="text/javascript"></script>
-                </Helmet>
 
                 <div className="mt-12 max-w-xl mx-auto text-gray-100 text-opacity-90 text-left">
                     <p>
