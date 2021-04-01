@@ -1,130 +1,130 @@
 export const emojiKey: Record<string, any> = {
-      a11y: {
+    a11y: {
         symbol: '️️️️♿️',
         description: 'Accessibility',
-      },
-      audio: {
+    },
+    audio: {
         symbol: '🔊',
         description: 'Audio',
-      },
-      blog: {
+    },
+    blog: {
         symbol: '📝',
         description: 'Blogposts',
-      },
-      bug: {
+    },
+    bug: {
         symbol: '🐛',
-        description: 'Bug reports'
-      },
-      business: {
+        description: 'Bug reports',
+    },
+    business: {
         symbol: '💼',
         description: 'Business development',
-      },
-      code: {
+    },
+    code: {
         symbol: '💻',
         description: 'Code',
-      },
-      content: {
+    },
+    content: {
         symbol: '🖋',
         description: 'Content',
-      },
-      data: {
+    },
+    data: {
         symbol: '🔣',
         description: 'Data',
-      },
-      design: {
+    },
+    design: {
         symbol: '🎨',
         description: 'Design',
-      },
-      doc: {
+    },
+    doc: {
         symbol: '📖',
         description: 'Documentation',
-      },
-      eventOrganizing: {
+    },
+    eventOrganizing: {
         symbol: '📋',
         description: 'Event Organizing',
-      },
-      example: {
+    },
+    example: {
         symbol: '💡',
         description: 'Examples',
-      },
-      financial: {
+    },
+    financial: {
         symbol: '💵',
         description: 'Financial',
-      },
-      fundingFinding: {
+    },
+    fundingFinding: {
         symbol: '🔍',
         description: 'Funding Finding',
-      },
-      ideas: {
+    },
+    ideas: {
         symbol: '🤔',
         description: 'Ideas, Planning, & Feedback',
-      },
-      infra: {
+    },
+    infra: {
         symbol: '🚇',
         description: 'Infrastructure (Hosting, Build-Tools, etc)',
-      },
-      maintenance: {
+    },
+    maintenance: {
         symbol: '🚧',
         description: 'Maintenance',
-      },
-      mentoring: {
+    },
+    mentoring: {
         symbol: '🧑‍🏫',
         description: 'Mentoring',
-      },
-      platform: {
+    },
+    platform: {
         symbol: '📦',
         description: 'Packaging/porting to new platform',
-      },
-      plugin: {
+    },
+    plugin: {
         symbol: '🔌',
         description: 'Plugins',
-      },
-      projectManagement: {
+    },
+    projectManagement: {
         symbol: '📆',
         description: 'Project Management',
-      },
-      question: {
+    },
+    question: {
         symbol: '💬',
         description: 'Answering Questions',
-      },
-      research: {
+    },
+    research: {
         symbol: '🔬',
         description: 'Research',
-      },
-      review: {
+    },
+    review: {
         symbol: '👀',
         description: 'Reviewed Pull Requests',
-      },
-      security: {
+    },
+    security: {
         symbol: '🛡️',
         description: 'Security',
-      },
-      talk: {
+    },
+    talk: {
         symbol: '📢',
         description: 'Talks',
-      },
-      test: {
+    },
+    test: {
         symbol: '⚠️',
         description: 'Tests',
-      },
-      tool: {
+    },
+    tool: {
         symbol: '🔧',
         description: 'Tools',
-      },
-      translation: {
+    },
+    translation: {
         symbol: '🌍',
         description: 'Translation',
-      },
-      tutorial: {
+    },
+    tutorial: {
         symbol: '✅',
         description: 'Tutorials',
-      },
-      userTesting: {
+    },
+    userTesting: {
         symbol: '📓',
         description: 'User Testing',
-      },
-      video: {
+    },
+    video: {
         symbol: '📹',
         description: 'Videos',
-      },
-    }
+    },
+}

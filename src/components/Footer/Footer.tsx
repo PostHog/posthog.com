@@ -51,10 +51,18 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-export const Footer = ({ onPostPage, showNewsletter = false }: { onPostPage: boolean; showNewsletter?: boolean }) => {
+export const Footer = ({
+    onPostPage,
+    showNewsletter = false,
+    backgroundClass = '',
+}: {
+    onPostPage: boolean
+    showNewsletter?: boolean
+    backgroundClass?: string
+}) => {
     const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
     const { websiteTheme } = useValues(layoutLogic)
-    const bgClass = onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer'
+    const bgClass = backgroundClass || (onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer')
 
     return (
         <div className={`${bgClass} site-footer py-24 relative`}>

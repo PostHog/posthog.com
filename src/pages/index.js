@@ -15,7 +15,7 @@ import '../components/LandingPage/styles/index.scss'
 
 const IndexPage = () => {
     return (
-        <div>
+        <div className="w-screen overflow-x-hidden">
             <SEO
                 title="PostHog - Open-Source Product Analytics"
                 description="Self-hosted product analytics stack, to deploy on your infrastructure."

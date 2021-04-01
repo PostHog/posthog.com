@@ -52,7 +52,13 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
     )
 }
 
-export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
+export const Header = ({
+    onPostPage,
+    transparentBackground = false,
+}: {
+    onPostPage: boolean
+    transparentBackground?: boolean
+}) => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
@@ -63,7 +69,11 @@ export const Header = ({ onPostPage }: { onPostPage: boolean }) => {
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
-        <div className={`primary-navbar py-6 ${backgroundColor} relative z-20`}>
+        <div
+            className={`primary-navbar py-6 ${
+                transparentBackground ? 'bg-transparent' : backgroundColor
+            } relative z-20`}
+        >
             <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />

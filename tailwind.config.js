@@ -15,6 +15,11 @@ module.exports = {
                 '-mr-4',
                 '-mb-4',
                 '-ml-4',
+                'max-w-xl',
+                'max-w-2xl',
+                'max-w-3xl',
+                'max-w-4xl',
+                'max-w-5xl',
             ],
         },
     },
@@ -23,6 +28,8 @@ module.exports = {
         extend: {
             fontFamily: {
                 gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
+                sans: ['Good Sans', 'Arial', 'Helvetica', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',
@@ -44,6 +51,9 @@ module.exports = {
             },
             borderWidth: {
                 3: '3px',
+            },
+            padding: {
+                'fluid-video': '56.25%',
             },
         },
     },

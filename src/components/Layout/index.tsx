@@ -62,9 +62,7 @@ const Layout = ({
 
     return (
         <>
-            <Header
-                onPostPage={onPostPage}
-            />
+            <Header onPostPage={onPostPage} />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
                     <AntdLayout.Sider

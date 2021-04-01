@@ -3,6 +3,7 @@
     background-position: center center;
     background-repeat: repeat-x;
     position: relative;
+    overflow-x: hidden;
 
     &:before {
         background: url(../images/rocket.svg);

@@ -3,7 +3,12 @@
         "browser": true,
         "node": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -16,6 +21,7 @@
     "rules": {
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
-        "no-const-assign": "off"
+        "no-const-assign": "off",
+        "no-undef": "off"
     }
 }

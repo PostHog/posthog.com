@@ -1,9 +1,17 @@
-// AUTO GENERATED FILE 
+// AUTO GENERATED FILE
 
+import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
+import { Benefits } from './components/Careers/Benefits'
+import { CareersHero } from './components/Careers/CareersHero'
+import { Culture } from './components/Careers/Culture'
+import { InterviewProcess } from './components/Careers/InterviewProcess'
+import { OpenRoles } from './components/Careers/OpenRoles'
+import { WhyWereHere } from './components/Careers/WhyWereHere'
+import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
@@ -46,54 +54,64 @@ import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectio
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
+import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
-	ArrayCTA,
-	BasicHedgehogImage,
-	BlogFooter,
-	CallToAction,
-	CodeBlock,
-	CompensationCalculator,
-	Container,
-	ContributorAvatars,
-	ContributorCard,
-	ContributorSearch,
-	ContributorsChart,
-	CornerBrackets,
-	DarkModeToggle,
-	DemoScheduler,
-	DocsPageSurvey,
-	DocsSearch,
-	FeaturesComparisonTable,
-	FeaturesNav,
-	Footer,
-	GetStartedModal,
-	HiddenSection,
-	Features,
-	Hero,
-	LandingPageCallToAction,
-	PrivateCloud,
-	ProductFeatureIcons,
-	RecentBlogPosts,
-	Roadmap,
-	SocialProof,
-	Tutorials,
-	NewsletterForm,
-	OtherFeaturesBlock,
-	PageHeader,
-	PostCard,
-	PricingComparisonTable,
-	PricingSlider,
-	ResponsiveAnchor,
-	ResponsiveSidebar,
-	ResponsiveTopBar,
-	DesignedForYourStackBlock,
-	FeaturedSectionTextLeft,
-	FeaturedSectionTextRight,
-	FeaturedSectionTripleImage,
-	Spacer,
-	StarRepoButton,
-	StartNowButton,
-	TableOfContents
+    AnchorScrollNavbar,
+    ArrayCTA,
+    BasicHedgehogImage,
+    BlogFooter,
+    CallToAction,
+    Benefits,
+    CareersHero,
+    Culture,
+    InterviewProcess,
+    OpenRoles,
+    WhyWereHere,
+    WorkingAtPostHog,
+    CodeBlock,
+    CompensationCalculator,
+    Container,
+    ContributorAvatars,
+    ContributorCard,
+    ContributorSearch,
+    ContributorsChart,
+    CornerBrackets,
+    DarkModeToggle,
+    DemoScheduler,
+    DocsPageSurvey,
+    DocsSearch,
+    FeaturesComparisonTable,
+    FeaturesNav,
+    Footer,
+    GetStartedModal,
+    HiddenSection,
+    Features,
+    Hero,
+    LandingPageCallToAction,
+    PrivateCloud,
+    ProductFeatureIcons,
+    RecentBlogPosts,
+    Roadmap,
+    SocialProof,
+    Tutorials,
+    NewsletterForm,
+    OtherFeaturesBlock,
+    PageHeader,
+    PostCard,
+    PricingComparisonTable,
+    PricingSlider,
+    ResponsiveAnchor,
+    ResponsiveSidebar,
+    ResponsiveTopBar,
+    DesignedForYourStackBlock,
+    FeaturedSectionTextLeft,
+    FeaturedSectionTextRight,
+    FeaturedSectionTripleImage,
+    Spacer,
+    StarRepoButton,
+    StartNowButton,
+    Structure,
+    TableOfContents,
 }
