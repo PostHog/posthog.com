@@ -2,3 +2,8 @@
   from = "/plugins/*"
   to = "/plugins"
   status = 200
+
+[[redirects]]
+  from = "/careers/*"
+  to = "/careers"
+  status = 200
