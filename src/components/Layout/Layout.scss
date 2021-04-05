@@ -1592,3 +1592,9 @@ table td[align='center'],
 .text-center {
     text-align: center;
 }
+
+.contributor-card-tooltip {
+    .ant-tooltip-inner {
+        background-color: #0f041f;
+    }
+}

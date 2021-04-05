@@ -33,6 +33,7 @@
         "name": "Contributing",
         "items": [
             "docs/contributing",
+            "docs/recognizing-contributions",
             "docs/developing-locally",
             "docs/stack",
             "docs/project-structure",
@@ -269,6 +270,7 @@
             "handbook/company/branding",
             "handbook/company/team",
             "handbook/company/management",
+            "handbook/company/structure",
             "handbook/company/standups"
         ]
     },
@@ -301,8 +303,8 @@
             "careers/senior-fs-software-engineer",
             "careers/site-reliability-engineer",
             "careers/sales-engineer",
-            "careers/content-marketer",
-            "careers/product-marketer"
+            "careers/product-marketer",
+            "careers/senior-product-designer"
         ]
     },
     {

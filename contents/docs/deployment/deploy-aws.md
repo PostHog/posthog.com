@@ -72,6 +72,9 @@ You can find more details on Amazon's Docs for [Elastic Container Service](https
 <br>
 
 ## Updating Cloudformation template
+> ⚠️ This may remove your RDS instance and your data with it. Please be sure to make a backup of your RDS instance before you proceed.
+> You can read more about this and how to snapshot RDS on [AWS docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html)
+
 
 Do this to update parameters: to scale different services up/down, update who gets alarms, STMP or more.
 

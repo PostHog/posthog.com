@@ -12,16 +12,16 @@ To use the plugin types in your plugin, you can install them as follows:
 
 ```bash
 # if using yarn
-yarn add --dev posthog-plugins
+yarn add --dev @posthog/plugin-scaffold
 
 # if using npm
-npm install --save-dev posthog-plugins
+npm install --save-dev @posthog/plugin-scaffold
 ``` 
 
 Then, in your plugins, you can use them like so:
 
 ```typescript
-import { PluginEvent, PluginMeta } from 'posthog-plugins'
+import { PluginEvent, PluginMeta } from '@posthog/plugin-scaffold'
 
 export function processEvent(event: PluginEvent, meta: PluginMeta) {
     if (event.properties) {

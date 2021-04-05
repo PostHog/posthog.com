@@ -200,7 +200,7 @@ This uses 'Extra Large Text', as defined in the 'Fonts' section.
 
 Underneath these 5 categories are the sub sections, which use 'Normal Text', as defined in the 'Fonts' section.
 
-Side Menus, found on pages such as Docs, are to be a Light Grey (#F0F0F0) and 430px wide. The text and drop down options should be fixed so that even when reading the consumer can still have quick access to other areas within the site. 
+Side Menus, found on pages such as Docs, are to be a Light Grey (#F0F0F0) and 430px wide. The text and dropdown options should be fixed so that even when reading the consumer can still have quick access to other areas within the site. 
 
 The text in this sidebar should be Extra Large Text. The arrows that accompany the categories will be in Figma - they are a simple vector and the stroke needs to be 2.
 
@@ -218,7 +218,7 @@ When transforming any desktop page to mobile please use the iPhone 8 frame on Fi
 
 ### Headers
 
-The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 32 H) and a grey background (375 W x 110 H) in colour #F0F0F0. On the landing page the header is different, but generally the header should be consistent. The landing page header consists of the logo, (206 W x 40.13 H) centred, a menu bar (375 W x 390 H) in grey (#EDEDED) with half tone dots (This image can be found on the Figma file) (375 W x 390 H) laid over the top at 20% passthrough. This gives a subtle halftone effect.
+The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 32 H) and a grey background (375 W x 110 H) in colour #F0F0F0. On the landing page the header is different, but generally the header should be consistent. The landing page header consists of the logo, (206 W x 40.13 H) centred, a menu bar (375 W x 390 H) in grey (#EDEDED) with halftone dots (This image can be found on the Figma file) (375 W x 390 H) laid over the top at 20% passthrough. This gives a subtle halftone effect.
 
 ### Text
 
@@ -276,6 +276,6 @@ Helvetica Neue | Bold | Size 14 | Line Height 20 | Color: Yellow | Opacity: 100%
 
 ## Shapes and Dividers 
 
-Curved rectangle backgrounds, size (203 W x 170 H), with a curved radius of 20, in either Yellow (#F9BD2B), Orange (#F96132), or Navy (#35416B). These can be overlaid with half tone dots, at 20% pass through. 
+Curved rectangle backgrounds, size (203 W x 170 H), with a curved radius of 20, in either Yellow (#F9BD2B), Orange (#F96132), or Navy (#35416B). These can be overlaid with halftone dots, at 20% pass through. 
 
 Dividers on the mobile format are similar to the desktop version but smaller (70 W x 7 H) and generally orange (#F96132), except for the landing page where they alternate between the three PostHog colours. 

@@ -4,6 +4,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import { CornerBrackets } from '../CornerBrackets'
+import { mergeClassList } from '../../lib/utils'
 
 import rocketImg from './images/rocket.svg'
 import calendarImg from './images/calendar.svg'
@@ -12,6 +13,7 @@ import handbookImg from './images/handbook.svg'
 import roadmapImg from './images/roadmap.svg'
 import checkImg from './images/check.svg'
 import bookImg from './images/book.svg'
+import downArrow from './images/down-arrow.svg'
 
 interface CallToActionProps {
     onClick?: () => void
@@ -33,6 +35,7 @@ const icons = {
     roadmap: roadmapImg,
     check: checkImg,
     book: bookImg,
+    'down-arrow': downArrow,
     none: null,
 }
 
@@ -65,7 +68,7 @@ export const CallToAction = ({
 
     const widthClass = `w-${width}`
     const baseClasses = `p-2 ${widthClass} uppercase rounded-sm inline-flex items-center justify-between select-none text-base font-gosha relative`
-    const classList = [baseClasses, buttonTypeClasses[type], className].join(' ')
+    const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (
         <>
