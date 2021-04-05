@@ -25,6 +25,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 * Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
 * A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
 * A Small Team will, at some stage, be able to create its own pricing (too complex in immediate future to do this, however)
+* A Small Team is responsible for talking to users, creating documentation for features, and ensuring their features are highlighted in releases
 
 # Small Teams list
 
@@ -47,7 +48,7 @@ This is currently being finalized, something similar to:
 
 The Accountable Person has the final say in a given Small Team's decision making - they decide what to build / work on.
 
-Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that management at PostHog is [very minimalist](management) - it's critical that managers don't set tasks for those in Small Teams.
+Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that management at PostHog is [very minimalistic](management) - it's critical that managers don't set tasks for those in Small Teams.
 
 Think of the Small Team as the company you work for, and your line manager as your coach.
 
