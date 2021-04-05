@@ -24,8 +24,8 @@ GET /event/?properties=[{"key":"email","operator":"icontains","value":"@gmail.co
 | --- | --- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `properties` | Array of Properties | no | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br><br>For each property, you can specify:<br>- `key` Key of the property<br>- `value` Value you want to filter on<br>- `type` Either `person` or `event`<br>- `operator`, any of: <br>-- `exact`/empty<br>--`is_not`<br>--`icontains`<br>--`not_icontains`<br>--`gt`<br>--`lt`<br>--`is_set` |
 | `event` | String | no | The event you want to filter on, for example `$pageview`. |
-| `date_from` | ISO formatted string/relative date | no | The datetime from which to get events. Can be in iso format (ie `2020-05-25T14:06:33.584171Z`) or a relative date (ie `-7d` for last 7 days, `mStart` for the start of the month etc).
-| `date_to` | ISO formatted string/relative date | no | The datetime up until which to get events. Can be in iso format (ie `2020-05-25T14:06:33.584171Z`) or a relative date (ie `-7d` for last 7 days, `mStart` for the start of the month etc).
+| `after` | ISO formatted string/relative date | no | The datetime from which to get events. Can be in iso format (ie `2020-05-25T14:06:33.584171Z`) or a relative date (ie `-7d` for last 7 days, `mStart` for the start of the month etc).
+| `before` | ISO formatted string/relative date | no | The datetime up until which to get events. Can be in iso format (ie `2020-05-25T14:06:33.584171Z`) or a relative date (ie `-7d` for last 7 days, `mStart` for the start of the month etc).
 
 Example request:
 
