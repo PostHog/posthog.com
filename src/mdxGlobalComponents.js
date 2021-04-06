@@ -3,6 +3,7 @@
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlogSidebar } from './components/Blog/BlogSidebar'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
@@ -61,6 +62,7 @@ export const shortcodes = {
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
+    BlogSidebar,
     BlogFooter,
     CallToAction,
     Benefits,
