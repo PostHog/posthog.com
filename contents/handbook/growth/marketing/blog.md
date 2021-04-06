@@ -4,29 +4,22 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The [blog](/blog) is for telling PostHog stories and updates to attract new people to PostHog and engage with our users. It is the place to publish news, release posts, stories and content that doesn't have place elsewhere on the site (docs, handbook, feature pages etc).
-
-Instructional technical content without a narrative angle most likely belongs in the docs and not the blog.
+The [blog](/blog) is for telling PostHog stories and updates to attract new people to PostHog and engage with our users.
 
 ## Audience
 
-The audience we write for is technical and interested in startups, growth and open source. Our target audience are developers and founders from small teams who are interested in the following product analytics topics:
+We write for developers and technical founders interested in:
 
-- open source
-- privacy and security
-- unified platform
-- startups
-- growth
+- product validation and growth
+- open source, privacy and security
 
-Accessible content with jokes, memes and gifs have done well versus more dry content.
+Accessible content with jokes, memes and gifs have done well.
 
-## Highly successful topics
+## Successful Hacker News topics
 
-A viral post on Hacker News currently has the potential to increase traffic by 5-10%. HN use to have a larger impact, but our monthly organic traffic has taken off since December 2020.
+A successful post on Hacker News can currently increase traffic by 5-10%.
 
-See the [Marketing Dashboard in PostHog](https://app.posthog.com/dashboard/2881) and the [posthog.com traffic breakdown spreadsheet](https://docs.google.com/spreadsheets/d/1MnhPzSZqAMUYUIoqpca66SuZaWkEz6HBjS_dkB2Z5-8/) for a breakdown of traffic and user growth on our web properties.
-
-Stories about hustling during the early days of PostHog have performed really well, see the spikes in blog traffic in the Marketing Dashboard:
+Stories about PostHog's early hustling days have performed well.
 
 - Feb 20, 2020 [Launch HN: PostHog (YC W20) – open-source product analytics](https://news.ycombinator.com/item?id=22376732)
 - Feb 28, 2020 [Our experience moving to SF to do YC](https://posthog.com/blog/moving-to-sf/)
@@ -57,11 +50,13 @@ Arrange further promotion via the newsletter, social channels and 3rd party comm
 
 ## PostHog Array
 
-The PostHog Array is our product release series to update our users on product changes and attract new people to PostHog. It's named the PostHog Array, because many hedgehogs are collectively known as an array of hedgehogs.
+The PostHog Array is our product release series.
 
-Yakko adds new items to the Array ;) by gathering changes from the git history, PRs and asking the engineering team to share their highlights.
+It's named the PostHog Array, because hedgehogs are collectively known as an *array* of hedgehogs.
 
-Each array should include:
+Yakko adds new items to the Array ;) by gathering changes and highlights from PRs and the engineering team.
+
+Each array includes:
 - a community MVP
 - a summary of new features, improvements and fixes
 - important announcements e.g. deprecations
@@ -70,4 +65,4 @@ Each array should include:
 - open roles
 - complete list of PRs included
 
-Before merging and distributing the release post, check with Tim that the new version has been released and Docker images have been built and published.
+Before merging and distributing the release post, check with Tim that the new version has been released.
