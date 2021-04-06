@@ -514,11 +514,10 @@ When he's not working on awesome PostHog marketing, Sean can be found building a
 
 Hi! My name is Kunal. I'm a Bay Area native and a bit of a startup vet. 
 
-I love finding new ways to leverage data, product, and engineering to drive business outcomes. 
+I love helping teams discover new ways to apply data, product, and engineering to drive business outcomes. 
+Most recently, I led the growth team at Amplitude and at an education technology startup prior to that.
 
-Most recently, I led the growth team at Amplitude and at an education startup prior to that.
-
-When I'm not thinking about growth, you'll find me studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
+When I'm not working on growth, you'll find me studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
 
 In terms of cycling– a friend once convinced me to go on a bike ride from San Francisco to Mill Valley. We took the ferry home.
 
