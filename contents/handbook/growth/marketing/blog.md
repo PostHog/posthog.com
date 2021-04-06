@@ -48,6 +48,24 @@ Share the live content with out PostHog Users Slack group first, in the `#editor
 
 Arrange further promotion via the newsletter, social channels and 3rd party communities.
 
+After a day, if it hasn't been shared, post to relevant communities:
+
+- Startup School
+- Hacker News
+- Indie Hackers
+- Reddit:
+  - [/r/analytics](https://www.reddit.com/r/analytics/)
+  - [/r/businessintelligence](https://www.reddit.com/r/businessintelligence/)
+  - [/r/opensource](https://www.reddit.com/r/opensource/)
+  - [/r/programing](https://www.reddit.com/r/programing/)
+  - [/r/python](https://www.reddit.com/r/python/)
+  - [/r/django](https://www.reddit.com/r/django/)
+  - [/r/startups](https://www.reddit.com/r/startups/)
+  - [/r/entrepreneur](https://www.reddit.com/r/entrepreneur/)
+  - [/r/business](https://www.reddit.com/r/business/)
+  - [/r/marketing](https://www.reddit.com/r/marketing/)
+  - [/r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/)
+
 ## PostHog Array
 
 The PostHog Array is our product release series.
