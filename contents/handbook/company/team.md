@@ -512,11 +512,13 @@ When he's not working on awesome PostHog marketing, Sean can be found building a
 
 <div class="team-left-bio" markdown="1">
 
-A Bay Area native and a startup vet, Kunal loves finding new ways to leverage data, product, and engineering to drive business outcomes. Most recently, he was leading the growth team at Amplitude.
+Hi! My name is Kunal, I'm a Bay Area native and a bit of a startup vet. I love discovering new ways to leverage data, product, and engineering to drive business outcomes. 
 
-When not thinking about growth, you can catch him studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
+Most recently, I led growth at Amplitude and an education startup prior to that.
 
-In terms of biking– rumor has it he once went on a bike ride from San Francisco to Mill Valley. He took the ferry back.
+When I'm not thinking about growth, you'll find me studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
+
+In terms of cycling– a friend once convinced me to go on a bike ride from San Francisco to Mill Valley. We took the ferry home.
 
 </div>
 
