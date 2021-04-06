@@ -502,6 +502,36 @@ When he's not working on awesome PostHog marketing, Sean can be found building a
 
 </div>
 
+<!--- Kunal Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Kunal Pathak, Growth Engineer
+
+<div class="team-left-bio" markdown="1">
+
+A Bay Area native and a startup vet, Kunal loves finding new ways to leverage data, product, and engineering to drive business outcomes. Most recently, he was leading the growth team at Amplitude.
+
+When not thinking about growth, you can catch him studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
+
+In terms of biking– rumor has it he once went on a bike ride from San Francisco to Mill Valley. He took the ferry back.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Kunal portrait](../../images/team/Kunal.png)
+
+</div>
+
+</div>
+
 <!--- Contributors Section -->
 
 ## Contributors
