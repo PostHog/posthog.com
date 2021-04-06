@@ -516,7 +516,7 @@ Hi! My name is Kunal. I'm a Bay Area native and a bit of a startup vet.
 
 I love finding new ways to leverage data, product, and engineering to drive business outcomes. 
 
-Most recently, I led growth at Amplitude and an education startup prior to that.
+Most recently, I led the growth team at Amplitude and at an education startup prior to that.
 
 When I'm not thinking about growth, you'll find me studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
 
