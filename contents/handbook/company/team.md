@@ -512,7 +512,9 @@ When he's not working on awesome PostHog marketing, Sean can be found building a
 
 <div class="team-left-bio" markdown="1">
 
-Hi! My name is Kunal, I'm a Bay Area native and a bit of a startup vet. I love discovering new ways to leverage data, product, and engineering to drive business outcomes. 
+Hi! My name is Kunal. I'm a Bay Area native and a bit of a startup vet. 
+
+I love finding new ways to leverage data, product, and engineering to drive business outcomes. 
 
 Most recently, I led growth at Amplitude and an education startup prior to that.
 
