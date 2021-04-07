@@ -40,7 +40,10 @@ const BlogPage = ({
                     <div className="hidden lg:block lg:w-1/4 lg:pr-8">
                         <BlogSidebar />
                     </div>
-                    <div className="w-full lg:w-3/4 lg:pl-8">{nonLatestPosts}</div>
+                    <div className="w-full lg:w-3/4 lg:pl-8">
+                        <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
+                        {nonLatestPosts}
+                    </div>
                 </div>
             </Structure.Section>
         </Layout>
