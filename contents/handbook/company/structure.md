@@ -65,7 +65,7 @@ Eventually, yes. Other companies have a UX team that build components for everyo
 
 ## Can I still [step on toes](/handbook/values)?
 
-Yes. In fact it's actively encouraged. We still expect people to have an understand of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
+Yes. In fact it's actively encouraged. We still expect people to have an understanding of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
 
 You're actively encouraged to raise pull requests or propose changes to stuff that doesn't have anything to do with your small team.
 
