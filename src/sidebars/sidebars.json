@@ -270,9 +270,14 @@
             "handbook/company/branding",
             "handbook/company/team",
             "handbook/company/management",
-            "handbook/company/structure",
             "handbook/company/standups"
-        ]
+        ],
+        "child_entries": ["Teams"]
+    },
+    {
+        "entry": "Teams",
+        "name": "Teams",
+        "items": ["handbook/company/structure", "handbook/company/teams/extensibility"]
     },
     {
         "entry": "People",
