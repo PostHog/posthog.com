@@ -34,7 +34,7 @@ const BlogPage = ({
                 <Structure.SectionHeader title="Blog" titleTag="h1" titleClassName="text-center" />
 
                 {latestPost}
-                <NewsletterForm />
+                <NewsletterForm compact={true} bgColor="#FFFFFF" />
 
                 <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
                     <div className="hidden lg:block lg:w-1/4 lg:pr-8">
