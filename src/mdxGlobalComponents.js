@@ -1,5 +1,7 @@
 // AUTO GENERATED FILE
 
+import { Endpoint } from './components/APIDocs/Endpoint'
+import { MethodTags } from './components/APIDocs/MethodTags'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -58,6 +60,8 @@ import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
+    Endpoint,
+    MethodTags,
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
