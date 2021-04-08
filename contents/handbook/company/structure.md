@@ -17,7 +17,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 # How it works
 
-* The overall goal is for a Small Team to be as close to its own startup as possible, with some centralized processes where it doesn't make sense
+* The overall goal is for a Small Team to be as close to its own startup as possible, with only a handful of centralized processes
 * A Small Team should never be more than six people
 * A Small Team has an Accountable Person responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
 * A Small Team must have (1) a customer (internal or external), (2) a mission and (3) metrics
@@ -25,21 +25,20 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 * Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
 * A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
 * A Small Team will, at some stage, be able to create its own pricing (too complex in immediate future to do this, however)
-
+* Small teams should document what they build.
+ 
 # Small Teams list
 
-This is currently being finalized, something similar to:
-
 * Core Experience (trends, retention, funnels)
-* Website and docs
 * Extensibility (plugins/APIs)
-* Experimentation (feature flags, a/b testing, session recording)
-* Deployment (AMI/VPC/PostHog Cloud)
+* Deployments and Infrastructure (AMI/VPC/PostHog Cloud)
 
 # Functional teams
 
-* People
-* Growth
+* People & Culture
+* Marketing (includes website)
+* Growth Engineering (proactive experiments / activation flow / revenue flow)
+* Design
 
 # FAQ
 
