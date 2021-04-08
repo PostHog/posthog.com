@@ -21,7 +21,7 @@ Get a list of your annotations from PostHog.
 | --- | --- | --- | --- | 
 | `scope` | - `"organization"` <br /> - `"dashboard_item"` | Types of annotations to fetch. Annotations with scope `organization` are available on all charts, whereas `dashboard_item` annotations are associated with one particular chart. | ❌ |
 | `order` | - `"updated_at"`  <br />- `"created_at"`  <br />- `"date_marker"` | Property to be used for sorting the annotations in the response. Adding `-` in front of the value will reverse the order from ascending to descending e.g. `-updated_at`. | ❌ |
-| `deleted` | `boolean` | Filters annotations based on a `deleted` property. `true` will return only deleted annotations, and `false` will return only non-deleted annotations. Ommitting this parameter will return annotations of both types. | ❌ |
+| `deleted` | `boolean` | Filters annotations based on a `deleted` property. `true` will return only deleted annotations, and `false` will return only non-deleted annotations. Omitting this parameter will return annotations of both types. | ❌ |
 
 </HiddenSection>
 
