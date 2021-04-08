@@ -139,7 +139,8 @@
             "docs/api/people",
             "docs/api/trends",
             "docs/api/user",
-            "docs/api/feature-flags"
+            "docs/api/feature-flags",
+            "docs/api/annotations"
         ]
     },
     {
