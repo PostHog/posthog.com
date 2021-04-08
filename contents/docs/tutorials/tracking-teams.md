@@ -1,5 +1,5 @@
 ---
-title: Going Beyond the User Model
+title: Tracking How Teams Use Your Product
 sidebar: Docs
 showTitle: true
 ---
