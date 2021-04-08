@@ -103,3 +103,6 @@ By keeping communication asynchronous and transparent, this is made much easier 
 ## Can a Small Team "own" another Small Team?
 
 Not for now, no. Perhaps when we're much larger this is something to think about.
+
+
+https://playground.posthog.com/insights?insight=TRENDS&interval=day&events=%5B%7B%22id%22%3A%22%24pageview%22%2C%22name%22%3A%22%24pageview%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%7D%5D&filter_test_accounts=true&display=ActionsBarValue&date_from=-90d&properties=%5B%7B%22key%22%3A%22%24os%22%2C%22value%22%3A%5B%22Mac%20OS%20X%22%5D%2C%22operator%22%3A%22exact%22%2C%22type%22%3A%22event%22%7D%5D
