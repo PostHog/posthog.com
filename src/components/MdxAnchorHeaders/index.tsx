@@ -10,24 +10,28 @@ const getAnchor = (text: string) => {
         .replace(/[ ]/g, '-')
 }
 
-const generateHeading = (headingType: Heading, text: string, anchor: string) => {
+const generateHeading = (headingType: Heading, children: string | React.ReactNode, anchor: string) => {
     switch (headingType) {
         case 'h1':
-            return <h1 id={anchor}>{text}</h1>
+            return <h1 id={anchor}>{children}</h1>
         case 'h2':
-            return <h2 id={anchor}>{text}</h2>
+            return <h2 id={anchor}>{children}</h2>
         case 'h3':
-            return <h3 id={anchor}>{text}</h3>
+            return <h3 id={anchor}>{children}</h3>
         case 'h4':
-            return <h4 id={anchor}>{text}</h4>
+            return <h4 id={anchor}>{children}</h4>
         case 'h5':
-            return <h5 id={anchor}>{text}</h5>
+            return <h5 id={anchor}>{children}</h5>
         case 'h6':
-            return <h5 id={anchor}>{text}</h5>
+            return <h5 id={anchor}>{children}</h5>
     }
 }
 
-export const MdxHeader = ({ children, headingType }: { children: string; headingType: Heading }) => {
+export const MdxHeader = ({ children, headingType }: { children: string | React.ReactNode; headingType: Heading }) => {
+    // simplistic handling for when a heading has another element inside of it (e.g. a link)
+    if (!(typeof children === 'string')) {
+        return <>{generateHeading(headingType, children, '')}</>
+    }
     const anchor = getAnchor(children)
     const link = `#${anchor}`
     return (
