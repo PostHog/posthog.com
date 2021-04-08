@@ -1592,3 +1592,10 @@ div::-webkit-scrollbar-thumb:hover {
         background-color: #0f041f;
     }
 }
+
+.anchor-link,
+.post-toc-anchor {
+    svg {
+        filter: invert(83%) sepia(0%) saturate(1327%) hue-rotate(153deg) brightness(92%) contrast(87%);
+    }
+}
