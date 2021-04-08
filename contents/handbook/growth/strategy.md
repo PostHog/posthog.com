@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br>
+<br />
 
 ##Self-serve
 

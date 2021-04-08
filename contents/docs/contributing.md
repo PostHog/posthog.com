@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br>
+<br />
 
 We love contributions to PostHog, big or small.
 
@@ -20,7 +20,7 @@ Please search within our issues before raising a new one to make sure you're not
 
 </blockquote>
 
-<br>
+<br />
 
 ## Writing Code 
 
