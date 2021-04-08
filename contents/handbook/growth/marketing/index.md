@@ -1,138 +1,134 @@
 ---
-title: Strategy
+title: Marketing
 sidebar: Handbook
 showTitle: true
 ---
 
-## Goal: Acquisition
+**AKA: The Acquisition Team**
 
-PostHog is *widely* used by innovative engineering teams, most commonly found in startups.
-
-Specifically targeting:
-
-- YC startups as an alumni, improving on batch adoption percentage
-- Startup School members as a YC alumni, improving on acquisition
-
-## Goal: Awareness
-
-PostHog has the *best* developer community.
-
-Note: Community may be owned by a different team once Small Teams has been rolled out.
-
-- Improve on stars
-- Improve on contributions
-- Improve on how easy it is to contribute
-
-To achieve these goals we'll create resources and provide support for developers.
+Philosophy: Be kind, concise and direct.
 
 
-## Plan
+## Product positioning
 
-Plan to divided and expanded once small teams rolled out.
+An **open source product analytics platform** addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
-**Q1 2021**
+**Free PostHog** is positioned to solve product analytics problems for small non-enterprise teams.
 
-- laying out marketing goals and plan
-- hiring for product and content marketing
-- ad experiments
-- event: StartupSchool AMA
-- community: collaborated on leaderboard
-- metrics: page views for different web properties
-- product marketing:
-  - summarize user interviews before 2021
-  - rapid competitor research
-  - messaging for overview, careers, plugins
-- newsletter:
-  - cleaning and combining multiple lists
-  - wider topics, found successful formula
-  - improved click through rate
-- blog:
-  - copy editing release posts
-  - two new blog posts, one performed well in our newsletter
+**Enterprise PostHog** is positioned to solve product analytics problems for larger teams and enterprises.
 
-**Q2 2021**
+**PostHog Cloud** is positioned to service clients who need less control.
 
-- product marketing:
-  - messaging for feature pages
-  - expand competitor research
-  - create personas
-- content marketing:
- - work up to two posts per week
+**PostHog Self Hosted** is positioned to service clients who need more control.
 
 
+## Target audience
 
-### Product Marketing
+*Innovative technical teams*, more commonly found in startups, who care about:
 
-Product marketing is the foundation upon which other marketing efforts are built. Product marketing consists of the following activities:
+- a unified product analytics platform
+- open source
+- control: hosting, pricing, source, data, privacy and security
 
-- Market research to identify targetable industries and use cases
-- Competitor research
-- Working with our product team to develop a competitive product positioning
-- Developing and maintaining buyer personas
-- Creating product messaging for our website to address our buyer personas
-- Creating gated marketing content and sales collateral: reports, white papers etc
-- Measuring the success of content
+We will expand to non-technical teams when we have achieved technical awareness saturation.
 
-**Hiring**: We're hiring an intermediate technical product marketer **soon** to address developers/startups and will expand the team when we're reaching our capacity (approximately 4-8 months).
 
-### Content Marketing
+## Goals
 
-Content marketers are our story tellers. They excel at creating narrative driven content most commonly found on our blog but can also be in other formats. Using our foundational research and messaging, content marketers have the following responsibilities:
+### Goal 1: User acquisition
 
-- Researching and pitching innovative ideas
-- Creating articles, interviews, case studies, infographics and ebooks
-- Creating engaging timely content around anything trendy
-- Maintaining a content calendar that proportionally addresses our target audiences
-- Measuring the success of content
+Increase:
 
-**Hiring**: We're hiring an intermediate content marketer **now** and will expand the team when we have a product marketing foundation, effective reporting and content, and are close to our content creation capacity (approximately 4-8 months).
+- Open source self hosted installs
+- Premium self hosted leads
+- Free cloud signups
+- Premium cloud signups
 
-### Community
+### Goal 2: Community growth
 
-The PostHog community team works across product, engineering, support, and marketing, ultimately all their efforts go towards community growth and empowerment. Yakko, from our Developer Experience team, has the following responsibilities regarding our community:
+Increase:
 
-- Onboarding YC startups as part of our [Deal for YC companies](https://posthog.com/handbook/growth/sales/yc-onboarding)
-  - We will be expanding our marketing in this area with the goal of onboarding majority of companies in upcoming batches and a large portion of previous batches
-- Running demos
-- PostHog releases: collaborating with our engineering team, doing the release, writing the release post, and working with the rest of marketing to promote
-- Creating documentation and tutorials
-- Supporting contributors to our codebase
-    - Making it easier to contribute
-    - Providing assistance in pull requests
-    - Providing merch for contributions
-    - Empowering contributors and highlighting their contributions
-- [Providing support](/handbook/growth/strategy) for users of our open source product
+- GitHub stars
+- GitHub contributors
+- GitHub contributions
 
-Other community activities that will come up as we grow:
+### Requirements
 
-- Developing community apps and tools to increase growth and support our community
-- Running events and supporting community events
-- Community moderation and/or self-moderation
-- Managing discussions on social channels
+#### Achieve complete tracking
 
-**Hiring**: We will hire additional community team members when Yakko is reaching capacity (end of 2021).
+Tracking marketing efforts that contribute to acquisition and growth.
 
-### Paid
+Going beyond marketing, tracking through the funnel to improve targeting.
 
-Paid marketing will be used to grow revenue or community and include:
+#### Reduce effort to contribute
 
-- Search engine
-- YouTube
-- Social
-- Websites, blogs
-- Newsletters
-- Podcasts, YouTube channels
-- Events
-- Competitions
+Reduce the actions, time or complexity for us and our community to contribute.
 
-**Hiring**: We'll hire this role when we have effective product messaging, content and reporting (end of 2021, early 2022).
+#### Reduce acquisition cost
 
-### Operations
+Reduce cost to acquire users and grow our community.
 
-Marketing operations can encompass a wide range of activities including:
 
-- Development of marketing websites, apps and tools
-- Research and maintenance of our marketing stack
-- Automation of activities on our various channels
+## Functions
 
-**Hiring**: We'll hire this role when we have someone in all our other marketing functions and need operations to be optimised to scale the team further (2022).
+Functions that contribute more to *Acquisition* than another metrics are owned by Marketing.
+
+Documentation contributes more to *Activation* and *Retention* than *Acquisition*. Marketing is a stakeholder in coverage and completeness.
+
+*Activation* and *Retention* contribute more to *Referral* than *Acquisition*.
+
+- Product marketing:
+  - research: market, competitor
+  - product positioning
+  - buyer personas
+  - messaging: website, careers, channel bios, README.md
+- Content marketing:
+  - Blog: product releases, stories (team, product, customer)
+  - Audio: audio stories, podcast series
+  - Video: video stories, vlog series, showcases, tutorials
+  - Newsletter: general, investor
+  - Handbook: team, culture
+- Community:
+  - social: Twitter, LinkedIn
+  - discussions: Slack, HN, StartupSchool, Reddit
+  - onboarding: YC startups
+  - events: online, in-person
+  - networking: open source, analytics
+  - sponsorship: open source
+- Press:
+  - relationships
+  - announcements
+  - media packs
+- Paid:
+  - search
+  - social
+  - communities
+  - newsletters
+  - websites
+  - podcasts
+  - events
+  - video
+- Technical:
+  - reporting
+  - tracking
+  - tooling
+  - SEO
+- Design:
+  - visual identity
+  - web properties
+  - channels
+
+### Team
+
+Prioritizing hiring for functions based on acquisition success and capacity in relation to other functions.
+
+Lead: Sean
+
+- Product marketing: currently hiring
+- Content marketing: Mo
+- Community: hiring next
+- Press: 2022
+- Paid: 2022
+- Technical: hiring next
+
+Design provided as a service by the Design team.
