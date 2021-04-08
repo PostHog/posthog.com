@@ -37,9 +37,9 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 
 ## The Week Before They Join
 
-Charles and the new team member's manager will mostly do this.
+Eltje and the new team member's manager will mostly do this.
 
-<input type="checkbox"/> Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan) <br>
+<input type="checkbox"/> Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan). Once they are on, manually change their profile so their holiday requests are auto-approved. <br>
 <input type="checkbox"/>  (UK only) Send a copy of their HMRC new starter form on CharlieHR to DRG, and include their salary and if they are full or part time <br>
 <input type="checkbox"/>  Send team member a copy of this page so they can check everything has been done <br>
 <input type="checkbox"/>  (US only) Add the team member to [Gusto](https://app.gusto.com) <br>
@@ -52,7 +52,8 @@ Charles and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/people/spending-money) guidelines <br>
 <input type="checkbox"/>  Ask James or Yakko to give them $100 credit to spend on Shopify <br>
 <input type="checkbox"/>  Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them <br>
-<input type="checkbox"/>  Add team member to PostHog <br>
+<input type="checkbox"/>  Add team member to the PostHog app <br>
+<input type="checkbox"/>  Send them an invite to Drata to do security onboarding and their background check <br>
 <input type="checkbox"/>  Add the team member's details to our hiring plan in Pry <br>
 <input type="checkbox"/>  Add the team member's share options to Captable.io (if relevant) <br>
 
