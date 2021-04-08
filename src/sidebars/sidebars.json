@@ -140,7 +140,8 @@
             "docs/api/trends",
             "docs/api/user",
             "docs/api/feature-flags",
-            "docs/api/annotations"
+            "docs/api/annotations",
+            "docs/api/cohorts"
         ]
     },
     {
