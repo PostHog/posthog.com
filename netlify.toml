@@ -7,3 +7,33 @@
   from = "/careers/*"
   to = "/careers"
   status = 200
+
+
+[[redirects]]
+    from = "/docs/api/elements"
+    to = "/docs/api/elements"
+
+
+[[redirects]]
+    from = "/docs/api/events"
+    to = "/docs/api/events"
+
+
+[[redirects]]
+    from = "/docs/api/overview"
+    to = "/docs/api/overview"
+
+
+[[redirects]]
+    from = "/docs/api/people"
+    to = "/docs/api/people"
+
+
+[[redirects]]
+    from = "/docs/api/trends"
+    to = "/docs/api/trends"
+
+
+[[redirects]]
+    from = "/docs/api/user"
+    to = "/docs/api/user"
