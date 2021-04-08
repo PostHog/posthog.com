@@ -33,15 +33,15 @@ const ReadPost = ({ to }: { to: string }) => {
 
 const FeaturedPost = ({ post }: { post: PostType }) => {
     return (
-        <div className="w-full flex flex-col md:flex-row justify-between items-start">
-            <div className="w-full md:w-1/2 md:pr-4 py-24">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center">
+            <div className="w-full md:w-1/2 md:pr-8 py-24">
                 <span className="text-gray-400 text-xs uppercase">Latest Post</span>
                 <header className="text-2xl text-gray-900 font-gosha mt-1">{post.frontmatter.title}</header>
                 <div className="text-gray-500 mt-2">{post.excerpt}</div>
                 <ReadPost to={post.fields.slug} />
             </div>
-            <div className="w-full md:w-1/2 md:pl-4 rounded-lg overflow-hidden">
-                <img className="min-w-full min-h-full" src={dummyPostImg} />
+            <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded-lg overflow-hidden border flex items-center justify-center shadow-lg">
+                <img className="w-full h-auto block" src={dummyPostImg} />
             </div>
         </div>
     )
