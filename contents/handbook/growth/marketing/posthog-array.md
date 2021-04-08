@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br>
+<br />
 
 The PostHog Array is our Newsletter and Blog for new releases. It serves 2 purposes:
 - Letting the community know that a new version has been released and what new features and functionality they can expect if they update. This makes the platform more valuable and builds word of mouth growth.
