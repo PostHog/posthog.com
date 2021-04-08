@@ -10,61 +10,43 @@ Our annotations endpoints allows you to create, update, and fetch annotations fr
 
 ## Endpoints
 
-<Endpoint endpoint='/api/annotation' allowedMethods={['get', 'post']} />
+<Endpoint endpoint='/api/annotation' allowedMethods={['get']} />
 
-<Endpoint endpoint='/api/annotation/<annotation_id:int>' allowedMethods={['get', 'put', 'patch', 'delete']} />
+Get a list of your annotations from PostHog.
 
-## Examples
-
-### Get all annotations
-
-#### Request
-
-```
-GET /api/annotation
-```
-
-##### Optional Query Parameters
-
-| Parameter | Valid Values | 
-| --- | --- | 
-| `scope` | `organization` or `dashboard_item` | 
-| `deleted` | `true` or `false` | 
-| `order` | `updated_at`, `created_at`, or `date_marker`.   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You can also add a `-` in front to reverse the order e.g. `-updated_at`. | 
+<HiddenSection headingType='h4' title='Query Parameters'>
 
 
-#### Response
+| Parameter | Type / Valid Values | Description | Required |
+| --- | --- | --- | --- | 
+| `scope` | - `"organization"` <br /> - `"dashboard_item"` | Types of annotations to fetch. Annotations with scope `organization` are available on all charts, whereas `dashboard_item` annotations are associated with one particular chart. | ❌ |
+| `order` | - `"updated_at"`  <br />- `"created_at"`  <br />- `"date_marker"` | Property to be used for sorting the annotations in the response. Adding `-` in front of the value will reverse the order from ascending to descending e.g. `-updated_at`. | ❌ |
+| `deleted` | `boolean` | Filters annotations based on a `deleted` property. `true` will return only deleted annotations, and `false` will return only non-deleted annotations. Ommitting this parameter will return annotations of both types. | ❌ |
+
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Example'>
+
+##### Request
 
 ```
+GET /api/annotation?deleted=false&scope=organization&order=-date_marker
+```
+
+##### Response
+
+```json
 HTTP 200 OK
 Content-Type: application/json
 
 {
-    "count": 2,
+    "count": 4,
     "next": null,
     "previous": null,
     "results": [
         {
-            "id": 106,
-            "content": "I'm a chart-specific annotation",
-            "date_marker": "2021-04-08T14:47:55.969000Z",
-            "creation_type": "USR",
-            "dashboard_item": 123,
-            "created_by": {
-                "id": 1,
-                "uuid": "0178acc4-8e77-0000-fd90-2ae06832ca61",
-                "distinct_id": "QD0Q97cv0dPHSlQlVGVHNeAZEr6tETA0Eqtbrl_pYXc",
-                "first_name": "Demo User",
-                "email": "demo@posthog.com"
-            },
-            "created_at": "2021-04-08T14:48:00.592850Z",
-            "updated_at": "2021-04-08T14:48:00.593266Z",
-            "deleted": false,
-            "scope": "organization"
-        },
-        {
             "id": 107,
-            "content": "I'm a global annotation",
+            "content": "My annotation",
             "date_marker": "2021-04-08T14:48:17.987000Z",
             "creation_type": "USR",
             "dashboard_item": null,
@@ -79,40 +61,80 @@ Content-Type: application/json
             "updated_at": "2021-04-08T14:48:44.860359Z",
             "deleted": false,
             "scope": "organization"
-        }
+        },
+        {
+            "id": 106,
+            "content": "My other annotation",
+            "date_marker": "2021-04-08T14:47:55.969000Z",
+            "creation_type": "USR",
+            "dashboard_item": null,
+            "created_by": {
+                "id": 1,
+                "uuid": "0178acc4-8e77-0000-fd90-2ae06832ca61",
+                "distinct_id": "QD0Q97cv0dPHSlQlVGVHNeAZEr6tETA0Eqtbrl_pYXc",
+                "first_name": "Demo User",
+                "email": "demo@posthog.com"
+            },
+            "created_at": "2021-04-08T14:48:00.592850Z",
+            "updated_at": "2021-04-08T14:48:00.593266Z",
+            "deleted": false,
+            "scope": "organization"
+        },
     ]
 }
 ```
 
-### Create an annotation
+</HiddenSection>
 
-#### Request
+<hr /><br />
+
+<Endpoint endpoint='/api/annotation' allowedMethods={['post']} />
+
+Create a new annotation.
+
+
+<HiddenSection headingType='h4' title='Request Body'>
+
+
+| Field | Type / Valid Values | Description | Required |
+| --- | --- | --- | --- | 
+| `scope` | - `"organization"` <br /> - `"dashboard_item"` | Annotations with scope `organization` are available on all charts, whereas `dashboard_item` annotations are associated with one particular chart.  | ✅ |
+| `dashboard_item` | `int` | A valid ID for a dashboard item to associate the annotation with. Required only if `scope` is set to `dashboard_item`. | ❌ |
+| `date_marker` | `string` (ISO Timestamp) | Date to associate the annotation with. | ✅ |
+| `content` | `string` | The content of the annotation. | ✅ |
+
+
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Example'>
+
+##### Request
 
 ```
 POST /api/annotation
 ```
 
-##### Request Body
+###### Request Body
 
-| Field | Type / Valid Values | Required |
-| --- | --- | --- | 
-| `scope` | `organization` or `dashboard_item` | ✅ |
-| `content` | `string` | ✅ |
-| `date_marker` | ISO timestamp string | ✅ | 
-| `deleted` | `boolean` | ❌ | 
-| `dashboard_item` | `integer` | ❌ | 
-
-
-#### Response
-
+```json
+{
+    content: "new annotation"
+    dashboard_item: null
+    date_marker: "2021-04-05T00:00:00.000Z"
+    scope: "organization"
+}
 ```
+
+##### Response
+
+```json
 HTTP 201 Created
 Content-Type: application/json
 
 {
     "id": 112,
     "content": "new annotation",
-    "date_marker": "2021-04-29T15:09:00Z",
+    "date_marker": "2021-04-05T00:00:00.000Z",
     "creation_type": "USR",
     "dashboard_item": null,
     "created_by": {
@@ -125,6 +147,76 @@ Content-Type: application/json
     "created_at": "2021-04-08T15:09:42.940208Z",
     "updated_at": "2021-04-08T15:09:42.941011Z",
     "deleted": false,
-    "scope": "dashboard_item"
+    "scope": "organization"
 }
 ```
+
+
+</HiddenSection>
+
+<hr /><br />
+
+<Endpoint endpoint='/api/annotation/<annotation_id:int>' allowedMethods={['patch']} />
+
+Create a new annotation.
+
+
+<HiddenSection headingType='h4' title='Request Body'>
+
+
+| Field | Type / Valid Values | Description | Required |
+| --- | --- | --- | --- | 
+| `scope` | - `"organization"` <br /> - `"dashboard_item"` | Annotations with scope `organization` are available on all charts, whereas `dashboard_item` annotations are associated with one particular chart.  | ❌ |
+| `dashboard_item` | `int` | A valid ID for a dashboard item to associate the annotation with. Required only if `scope` is set to `dashboard_item`. | ❌ |
+| `date_marker` | `string` (ISO Timestamp) | Date to associate the annotation with. | ❌ |
+| `content` | `string` | The content of the annotation. | ❌ |
+| `deleted` | `boolean` | Specifies if an annotation is deleted or not. | ❌ |
+
+
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Example'>
+
+##### Request
+
+```
+PATCH /api/annotation/112
+```
+
+###### Request Body
+
+```json
+{
+    deleted: true
+}
+```
+
+##### Response
+
+```json
+HTTP 201 Created
+Content-Type: application/json
+
+{
+    "id": 112,
+    "content": "new annotation",
+    "date_marker": "2021-04-05T00:00:00.000Z",
+    "creation_type": "USR",
+    "dashboard_item": null,
+    "created_by": {
+        "id": 1,
+        "uuid": "0178acc4-8e77-0000-fd90-2ae06832ca61",
+        "distinct_id": "QD0Q97cv0dPHSlQlVGVHNeAZEr6tETA0Eqtbrl_pYXc",
+        "first_name": "Demo User",
+        "email": "demo@posthog.com"
+    },
+    "created_at": "2021-04-08T15:09:42.940208Z",
+    "updated_at": "2021-04-08T15:09:42.941011Z",
+    "deleted": true,
+    "scope": "organization"
+}
+```
+
+
+</HiddenSection>
+
