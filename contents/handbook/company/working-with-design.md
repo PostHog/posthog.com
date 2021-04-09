@@ -24,7 +24,7 @@ Design tasks are managed with our [GitHub Org project](https://github.com/orgs/P
 
 1. [PostHog app](https://github.com/PostHog/posthog) - open source repo
 1. [posthog.com](https://github.com/PostHog/posthog.com) - website + docs
-1. Internal - higher-level company stragegy
+1. Internal - higher-level company strategy
 
 ### How our Design board works
 
@@ -32,7 +32,7 @@ Cards generally move from left to right.
 
 1. **Design requests** - anyone can post here. (Please follow our Design Request Process below.)
 1. **Backlog** - things on our radar
-1. **This week** - equivelant of our sprint
+1. **This week** - equivalent of our sprint
 1. **In progress** - tasks we've started but haven't completed
 1. **Awaiting implementation** - in development or in review
 1. **Done** - shipped!
