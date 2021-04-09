@@ -36,6 +36,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
@@ -114,6 +115,7 @@ export const shortcodes = {
     FeaturesSelfHost,
     Footer,
     GetStartedModal,
+    GithubIcon,
     HiddenSection,
     Blockquote,
     Features,
