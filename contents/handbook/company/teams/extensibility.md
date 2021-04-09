@@ -12,14 +12,11 @@ showTitle: true
 
 ## Mission
 
-Team Extensibility's job is to take care of the PostHog platform. What does that mean?
+Team Extensibility's job is to turn PostHog into a platform that everyone can integrate with.
 
-We're not called "Team Platform" because "platform" is an ambiguous term. We're not responsible for the entire PostHog 
-platform (aka universe), the one you see when you look at the "features" page and see "this is the platform that we 
-offer: analytics, session, etc".
-
-No, it's the "platform" in the "Plugins turn PostHog into a platform... that everyone can integrate with" that rests on 
-our shoulders.
+- Getting data into PostHog
+- Getting data out of PostHog
+- Making PostHog extensible
 
 ## Responsibilities
 
@@ -28,6 +25,7 @@ Team Extensibility is responsible for:
 - Maintaining and improving the plugin server 
 - Maintaining and improving the ingestion pipeline
 - Maintaining and improving all the integrations to other platforms
+- Maintaining and improving the user experience of things we maintain and improve
 
 ## Priorities
 
@@ -35,14 +33,23 @@ Team Extensibility is responsible for:
   integrity of our systems. We code defensively, prefer allowlists to denylists, always have at least 2 people review
   any piece of code, etc.
 - Priority nr 2: an absolutely fabulous user experience. Connecting things to PostHog either via plugins or integrations
-  should be a joy.
+  should spark joy.
 
 ## Customer
 
-TBD (can be both internal or external)
+- People building plugins / contributors
+- People using our various integration libraries
 
 ## Output metric
 
-- Nr of plugins in active use
-- Nr of plugins installed
+- Nr of plugins installed and/or in active use
 - Used plugin-seconds on cloud, breakdown by team (for billing)
+- Number of integrations and their usage
+
+[Dashboard](https://app.posthog.com/dashboard/1865)
+
+## Meetings
+
+- Monday. 11:00 CET
+- Wednesday. 17:00 CET
+- Friday every other week before release planning
