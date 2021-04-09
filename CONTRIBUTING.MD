@@ -2,7 +2,7 @@
 
 Anyone is free to suggest changes to PostHog's documentation, handbook or website
 
-There is a useful guide on [updating our docs](STYLEGUIDE.md).
+There is a useful guide on [updating our docs](/docs/updating-documentation). Be sure to check out the [Documentation Style Guide](STYLEGUIDE.md).
 
 ## Creating a Pull Request
 
