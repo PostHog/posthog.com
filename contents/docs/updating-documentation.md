@@ -4,10 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br>
+<br />
 
 This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [AWS Amplify](https://aws.amazon.com/amplify/).
-<br>
+<br />
 
 
 ## Finding the Content to Edit
@@ -19,16 +19,16 @@ Once you have cloned the repo, the ```contents``` folder contains a few key area
 * ```blog```&nbsp;= our blog posts
 
 Inside each of these are a series of markdown files for you to edit.
-<br>
-<br>
+<br />
+<br />
 
 ## Deployment
 
 New changes should be created as a Pull Request.
 
 To get changes into production, the website deploys automatically from ```master```. The build takes 5-10 minutes.
-<br>
-<br>
+<br />
+<br />
 
 ## Markdown Details
 

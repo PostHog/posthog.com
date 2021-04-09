@@ -18,7 +18,7 @@ Click on 'People' on the left-hand navigation. This will open a submenu containi
 
 ![Users Page](../../images/features/people/people-page.png)
 
-<br>
+<br />
 
 If you have added properties to your users, these will also appear here. 
 

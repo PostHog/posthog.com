@@ -3,7 +3,7 @@ title: Plugin Architecture
 sidebar: Docs
 showTitle: true
 ---
-<br>
+<br />
 
 When an event is sent to PostHog, it is added to a task queue, after which it is picked up by a worker that processes and ingests the event, storing it into the database. 
 

@@ -124,8 +124,8 @@ Individual software is down to your personal preference, and we encourage you to
 
 ### IDEs
 
-* IDEs range widely in cost. Best in class can cost up to \$700. We remain sceptical if a best in class IDE is worth several days of engineering time. However, we are happy to revisit this policy in the future.
-* Before then, if you wish to spend up to \$100 on an IDE, that is fine. Visual Studio, VIM and Sublime are the most popular within our team.
+* IDEs range widely in cost. Best in class IDE suites can cost up to \$700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
+* Before then, if you wish to spend up to \$200 on an IDE, that is fine. Visual Studio, VIM and PyCharm are the most popular within our team.
 
 ## Work Space
 

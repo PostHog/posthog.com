@@ -3,7 +3,7 @@ title: Enabling Plugins
 sidebar: Docs
 showTitle: true
 ---
-<br>
+<br />
 
 Plugins are currently BETA and require you to opt-in.
 

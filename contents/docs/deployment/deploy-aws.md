@@ -69,7 +69,7 @@ Do this to get the latest and greatest version of posthog. Follow these steps:
 1. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
 
 You can find more details on Amazon's Docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html).
-<br>
+<br />
 
 ## Updating Cloudformation template
 > ⚠️ This may remove your RDS instance and your data with it. Please be sure to make a backup of your RDS instance before you proceed.
@@ -164,14 +164,14 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 
 </blockquote>
 
-<br>
+<br />
 
 ## Important Points
 
 #### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
 PostHog needs to run on HTTPS because if it doesn't:
  
- a) It will fail<br>
+ a) It will fail<br />
  b) Your user data will be at risk
 
 #### Check Your Firewall/Security Group if You Cannot Connect to a Port
@@ -196,15 +196,15 @@ You can read [this tutorial](https://www.digitalocean.com/community/tutorials/ho
 
 Here's a [good AWS Tutorial](https://aws.amazon.com/premiumsupport/knowledge-center/connect-http-https-ec2/) about this.
 
-<br>
+<br />
 
 ## Upgrading Docker on AWS
 
 See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
-<br>
+<br />
 
 ## Useful Tutorials
-<br>
+<br />
 
 ###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br>
+<br />
 
 > **Note:** This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com following the rebrand. 
 
@@ -18,7 +18,7 @@ Refer to this [Figma Project](https://www.figma.com/file/8iM3Damgbl4PyHq6x8JJbu/
 
 To get access to our various logo formats, check out our [Media page](/media).
 
-<br>
+<br />
 
 ## Colors
 
@@ -31,7 +31,7 @@ Our three main colours are Blue, Orange, and Yellow.
 
 ##### <span style="color:#F9BD2B; font-size: 20px">■</span> Yellow: #F9BD2B 
 
-<br>
+<br />
 
 Accompanying these colours are Black and White, as well as a Dark Navy. Navy was introduced to tone down the blue against the yellow and orange, and provides a vintage feel to the page.
 
@@ -41,7 +41,7 @@ Accompanying these colours are Black and White, as well as a Dark Navy. Navy was
 
 ##### <span style="color:#35416B; font-size: 20px">■</span> Dark Navy: #35416B 
 
-<br>
+<br />
 
 If possible, all artwork is to be made with these colours, as well as typography and social media images.
 

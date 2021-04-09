@@ -52,7 +52,8 @@
             "docs/tutorials/spa",
             "docs/tutorials/actions",
             "docs/tutorials/b2b",
-            "docs/tutorials/revenue"
+            "docs/tutorials/revenue",
+            "docs/tutorials/tracking-teams"
         ],
         "child_entries": ["1 Minute Tutorials"]
     },
@@ -139,7 +140,9 @@
             "docs/api/people",
             "docs/api/trends",
             "docs/api/user",
-            "docs/api/feature-flags"
+            "docs/api/feature-flags",
+            "docs/api/annotations",
+            "docs/api/cohorts"
         ]
     },
     {
