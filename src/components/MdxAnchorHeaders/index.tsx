@@ -23,7 +23,7 @@ const generateHeading = (headingType: Heading, children: string | React.ReactNod
         case 'h5':
             return <h5 id={anchor}>{children}</h5>
         case 'h6':
-            return <h5 id={anchor}>{children}</h5>
+            return <h6 id={anchor}>{children}</h6>
     }
 }
 
