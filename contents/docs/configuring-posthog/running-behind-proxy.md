@@ -17,6 +17,20 @@ If PostHog is running behind a proxy, you need to do the following:
 
 <div class='note-block'><b>Note:</b> It is suggested to set up the proxy separately from PostHog's Docker Compose definition.</div>
 
+### Public Endpoints
+
+Posthog's clients require the following urls to be accessible publicly:
+
+| Path | Description |
+| ---- | ---- |
+| `/batch` | capture endpoint |
+| `/decide` |  for feature flags |
+| `/capture` | capture endpoint |
+| `/e` | capture endpoint |
+| `/engage` | capture endpoint |
+| `/s` | capture endpoint for session recording |
+| `/static/array.js` | java-script client downloads this file |
+| `/track` | capture endpoint |
 
 ### Trusted proxies
 
