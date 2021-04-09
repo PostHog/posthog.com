@@ -12,8 +12,8 @@ There are quite a few factors than can contribute to whether your Postgres insta
 - Recurring event ingestion volume (details on that below).
 - Resources (RAM & CPU usage) allocated directly to your Postgres instance.
 - Disk read/write speed. One thing that can really help here is using solid-state disks. Provisioned IOPS (supported with some infrastructure providers, can also help a lot).
-- Number of dashboards (and items on those dashboards that you have). These get recomputed periodically. See [Enviroment variables](/docs/configuring-posthog/environment-variables) for details on how to adjust these.
-- Number of actions & cohorts that you have defined (these too get recomputed periodically). See [Enviroment variables](/docs/configuring-posthog/environment-variables) for details on how to adjust these.
+- Number of dashboards (and items on those dashboards that you have). These get recomputed periodically. See [Environment variables](/docs/configuring-posthog/environment-variables) for details on how to adjust these.
+- Number of actions & cohorts that you have defined (these too get recomputed periodically). See [Environment variables](/docs/configuring-posthog/environment-variables) for details on how to adjust these.
 
 
 Event ingestion volume can be one of the largest contributing factors to your database load. This is because the more events you have, the more data that needs to be scanned & analyzed when doing any sort of querying. We're still testing this out and there are other factors to consider, but based on our experience here's a rule of thumb on what event volume runs well on a Postgres backend.
