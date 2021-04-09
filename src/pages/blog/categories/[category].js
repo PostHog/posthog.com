@@ -6,6 +6,7 @@ import { NewsletterForm } from '../../../components/NewsletterForm'
 import { SEO } from '../../../components/seo'
 import { Structure } from '../../../components/Structure'
 import { BlogSidebar } from '../../../components/Blog/BlogSidebar'
+import { BlogCategories } from '../../../components/Blog/constants/categories'
 
 const BlogCategoryPage = ({
     data: {
@@ -14,26 +15,36 @@ const BlogCategoryPage = ({
     },
     params: { category },
 }) => {
-    // // Standardize position of 'slug' across MDX and MD
-    // const parsedMdxData = allMdx.edges.map((edge) => ({
-    //     ...edge,
-    //     node: { ...edge.node, fields: { slug: `/${edge.node.slug}` } },
-    // }))
+    // Standardize position of 'slug' across MDX and MD
+    console.log(edges)
+    console.log(allMdx)
 
-    // const posts = [...edges, ...parsedMdxData] // Merge MDX and MD data into one array
-    //     .filter((edge) => !!edge.node.frontmatter.date)
-    //     .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
+    const parsedMdxData = allMdx.edges.map((edge) => ({
+        ...edge,
+        node: { ...edge.node, fields: { slug: `/${edge.node.slug}` } },
+    }))
 
-    // const latestPost = <PostCard key={posts[0].node.id} post={posts[0].node} featured={true} />
-    // const nonLatestPosts = posts.slice(1, -1).map((edge) => <PostCard key={edge.node.id} post={edge.node} />)
+    const posts = [...edges, ...parsedMdxData] // Merge MDX and MD data into one array
+        .filter((edge) => {
+            const categories = edge.node.frontmatter.categories || ''
+            return !!edge.node.frontmatter.date && categories.indexOf(category) >= 0
+        })
+        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
+
+    console.log(posts)
+    const latestPost = <PostCard key={posts[0].node.id} post={posts[0].node} featured={true} />
+    const nonLatestPosts = posts.slice(1, -1).map((edge) => <PostCard key={edge.node.id} post={edge.node} />)
+
+    const title = BlogCategories.find((k) => k.slug === category)?.title
 
     return (
         <Layout>
             <SEO title="PostHog Blog" description="What we are up to, every week." />
 
             <Structure.Section className="my-12" width="5xl">
-                <Structure.SectionHeader title={`Blog: ${category}`} titleTag="h1" titleClassName="text-center" />
+                <Structure.SectionHeader title={`Blog: ${title}`} titleTag="h1" titleClassName="text-center" />
 
+                {latestPost}
                 <NewsletterForm compact={true} bgColor="#FFFFFF" />
 
                 <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
@@ -42,6 +53,7 @@ const BlogCategoryPage = ({
                     </div>
                     <div className="w-full lg:w-3/4 lg:pl-8">
                         <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
+                        {nonLatestPosts}
                     </div>
                 </div>
             </Structure.Section>
@@ -52,10 +64,10 @@ const BlogCategoryPage = ({
 export default BlogCategoryPage
 
 export const pageQuery = graphql`
-    query($path: String!) {
+    query {
         allMarkdownRemark(
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: $path } } }
+            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
         ) {
             edges {
                 node {
@@ -68,13 +80,14 @@ export const pageQuery = graphql`
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
+                        categories
                     }
                 }
             }
         }
         allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: $path } } }
+            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
         ) {
             edges {
                 node {
@@ -85,6 +98,7 @@ export const pageQuery = graphql`
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
+                        categories
                     }
                 }
             }
