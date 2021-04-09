@@ -17,21 +17,6 @@ If PostHog is running behind a proxy, you need to do the following:
 
 <div class='note-block'><b>Note:</b> It is suggested to set up the proxy separately from PostHog's Docker Compose definition.</div>
 
-### Public Endpoints
-
-Posthog's clients require the following urls to be accessible publicly:
-
-| Path | Description |
-| ---- | ---- |
-| `/batch` | capture endpoint |
-| `/decide` |  for feature flags |
-| `/capture` | capture endpoint |
-| `/e` | capture endpoint |
-| `/engage` | capture endpoint |
-| `/s` | capture endpoint for session recording |
-| `/static/array.js` | java-script client downloads this file |
-| `/track` | capture endpoint |
-
 ### Trusted proxies
 
 Trusted proxies are used to determine which proxies to consider as valid from the `X-Forwarded-For` HTTP header included in all requests to determine the end user's real IP address. Specifically whitelisting your proxy server's address prevents spoofing of the end user's IP address while ensuring your service works as expected. There are two ways of setting up trusted proxies.
@@ -44,6 +29,21 @@ Trusted proxies are used to determine which proxies to consider as valid from th
 - Some users have reported getting infinite redirects when running behind a proxy. Make sure the `X-Forwarded-Proto` header is set to `https` if you have HTTPS enabled. Alternatively, you can set the `DISABLE_SECURE_SSL_REDIRECT` variable to make PostHog run using HTTP.
   - If you use a load balancer, it is recommended to terminate the SSL connection at the load balancer (remember to set `DISABLE_SECURE_SSL_REDIRECT` to `True`) and connect via HTTP to your PostHog container (make sure your container is behind a firewall or VPC to prevent unauthorized connections), you would then enforce SSL/TLS connections at the load balancer level.
 - If you have IP blocks that are not working and you're running behind a proxy, your instance may be misconfigured, preventing PostHog from determining the connecting IP address.
+
+### Public Endpoints
+
+If your setting up a proxy to protect your PostHog instance and prevent access only through an authorized connection, you should consider there are some endpoints that must always be publicly accessible in order for event ingestion, session recording and feature flags to work properly. These endpoints are listed below.
+
+| Path | Description |
+| ---- | ---- |
+| `/batch` | Endpoint for ingesting/capturing events. |
+| `/decide` |  Endpoint that enables autocapture, session recording, feature flags & compression on events. |
+| `/capture` | Endpoint for ingesting/capturing events. |
+| `/e` | Endpoint for ingesting/capturing events. |
+| `/engage` | Endpoint for ingesting/capturing events. |
+| `/s` | Endpoint for capturing session recordings. |
+| `/static/array.js` | Frontend javascript code that loads `posthog-js`. |
+| `/track` | Endpoint for ingesting/capturing events. |
 
 
 
