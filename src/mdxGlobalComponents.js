@@ -30,6 +30,7 @@ import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
@@ -90,6 +91,7 @@ export const shortcodes = {
     FeaturesNav,
     Footer,
     GetStartedModal,
+    GithubIcon,
     HiddenSection,
     Features,
     Hero,
