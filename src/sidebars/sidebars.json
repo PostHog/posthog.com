@@ -308,13 +308,19 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/community", "handbook/growth/customer-success"],
+        "items": ["handbook/growth/strategy", "handbook/growth/customer-success"],
         "child_entries": ["Marketing", "Sales"]
     },
     {
         "entry": "Marketing",
         "name": "Marketing",
-        "items": ["handbook/growth/marketing", "handbook/growth/marketing/blog", "handbook/growth/marketing/press"]
+        "items": [
+            "handbook/growth/marketing",
+            "handbook/growth/marketing/blog",
+            "handbook/growth/marketing/community",
+            "handbook/growth/marketing/newsletter",
+            "handbook/growth/marketing/press"
+        ]
     },
     {
         "entry": "Sales",
