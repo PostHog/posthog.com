@@ -12,6 +12,7 @@ As a result, we have formulated a loose strategy for how to approach publishing 
 
 #### Suggested Workflow
 
+1. If the content requires a visual element, create a [design request](https://posthog.com/handbook/company/working-with-design) (more than 24 hours in advance) to have a graphic produced. For example, if the content is a YouTube video, we'll make a thumbnail image. If it's a blog post, we'll create a post image that is featured at the top of the post.
 1. Make sure the content is actually live: If it is an article, ensure that the changes are reflected on the website following the merge of the pull request, which might take 10 to 30 minutes.
 1. Post a link to the article/video on our `#editorial` channel in the PostHog Users Slack group. This group should always the first to hear about new content.
 1. Include the article in the **body** of an email and schedule it to be sent the next day via Mailchimp to people in the 'PostHog Newsletter' audience. 
