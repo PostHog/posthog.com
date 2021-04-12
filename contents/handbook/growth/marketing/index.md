@@ -32,26 +32,34 @@ An **open source product analytics platform** addresses the lack of choice and c
 
 We will expand to non-technical teams when we have achieved technical awareness saturation.
 
-
-## Goals
-
 ### Goal 1: User acquisition
 
 Increase:
 
 - Open source self hosted installs
+  - Tracked in [AARRR dashboard](https://app.posthog.com/dashboard/2973)
+  - Page views tracked in [Marketing dashboard](https://app.posthog.com/dashboard/2881)
 - Premium self hosted leads
+  - Todo: needs consolidated tracking
 - Free cloud signups
+  - Todo: needs consolidated tracking
 - Premium cloud signups
+  - Todo: needs consolidated tracking
 
 ### Goal 2: Community growth
 
 Increase:
 
 - GitHub stars
+  -  Tracked in Orbit
 - GitHub contributors
+  -  Tracked in Orbit
 - GitHub contributions
+  - Todo: needs consolidated tracking
   - Plugin contributions
+    - Todo: needs consolidated tracking
+
+See [./community](Community) for community function.
 
 ### Requirements
 
