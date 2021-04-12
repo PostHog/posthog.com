@@ -92,19 +92,19 @@ Documentation contributes more to *Activation* and *Retention* than *Acquisition
   - buyer personas
   - messaging: website, careers, channel bios, README.md
 - Content marketing:
-  - Blog: product releases, stories (team, product, customer)
+  - [Blog](./blog): product releases, stories (team, product, customer)
   - Audio: audio stories, podcast series
-  - Video: video stories, vlog series, showcases, tutorials
-  - Newsletter: general, investor
+  - [Video](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA): video stories, vlog series, showcases, tutorials
+  - [Newsletter](./newsletter): general, investor
   - Handbook: team, culture
-- Community:
+- [Community](./community):
   - social: Twitter, LinkedIn
   - discussions: Slack, HN, StartupSchool, Reddit
   - onboarding: YC startups
   - events: online, in-person
   - networking: open source, analytics
   - sponsorship: open source
-- Press:
+- [Press](./press):
   - relationships
   - announcements
   - media packs
