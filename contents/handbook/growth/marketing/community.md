@@ -17,7 +17,7 @@ See [./](Marketing) for community goals.
 
 Questions to consider about the platforms we use:
 
-- Does it align with our mission and values, e.g. open source and impi
+- Does it align with our mission and values, e.g. open source and its implications
 - Does it exclude people
 - How does it compare in terms of accessibility
 - How does it compare in terms of ease of use
