@@ -20,7 +20,7 @@ You should have been invited to our regular standups as part of your [onboarding
 
 ### Sprint Planning
 
-This is a longer 45min meeting every other Thursday where we review the previous two week sprint and then outline what we want to achieve in the next 2 weeks. We split into Engineering and Not Engineering teams for this, but schedule the meetings sequentially so that anyone can sit in on both if they would like to. 
+This is a longer 45min meeting every other Friday where we review the previous two week sprint and then outline what we want to achieve in the next 2 weeks. We split into Engineering and Not Engineering teams for this, but schedule the meetings sequentially so that anyone can sit in on both if they would like to. 
 
 You will be asked to add your comments to the relevant GitHub planning issue in advance of each meeting on Slack the day before. 
 

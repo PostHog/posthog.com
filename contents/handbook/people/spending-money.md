@@ -100,7 +100,7 @@ We would expect to spend \$250 on a desk, and around the same for a chair.
 
 ### Headphones
 
-If you need to work in a noisy environment and don't already have a noise cancelling headphones with a microphone, feel free to buy a pair.
+If you need to work in a noisy environment and don't already have noise cancelling headphones with a microphone, feel free to buy a pair.
 
 We would expect to spend \$250 on noise cancelling headphones.
 
@@ -112,7 +112,7 @@ We are *strongly opposed* to introducing new software that is designed for colla
 
 The cost of introducing new collaborative software is that it creates another place where todo items / comments / communication can exist. This creates a disproportionate amount of complexity.
 
-Our entire stack for collaborative software is pleasing simple. All we use is:
+Our entire stack for collaborative software is pleasingly simple. All we use is:
 
 * Google Sheets - spreadsheets
 * GitHub - documents, code, discussion
@@ -124,8 +124,8 @@ Individual software is down to your personal preference, and we encourage you to
 
 ### IDEs
 
-* IDEs range widely in cost. Best in class can cost up to \$700. We remain sceptical if a best in class IDE is worth several days of engineering time. However, we are happy to revisit this policy in the future.
-* Before then, if you wish to spend up to \$100 on an IDE, that is fine. Visual Studio, VIM and Sublime are the most popular with our team.
+* IDEs range widely in cost. Best in class IDE suites can cost up to \$700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
+* Before then, if you wish to spend up to \$200 on an IDE, that is fine. Visual Studio, VIM and PyCharm are the most popular within our team.
 
 ## Work Space
 
@@ -143,7 +143,7 @@ It's important to us at PostHog to celebrate team member milestones and achievem
 
 **Birthdays**
 
-We have a budget of $50 for a personalised birthday gift. Eltje will reach out to the team a week before the birtday to start a virtual birthday card and ask for gift ideas. 
+We have a budget of $50 for a personalised birthday gift. Eltje will reach out to the team a week before the birthday to start a virtual birthday card and ask for gift ideas. 
 
 **PostHog anniversaries**
 

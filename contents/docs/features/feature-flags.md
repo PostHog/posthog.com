@@ -77,7 +77,7 @@ To see the feature flags that are currently active for you, you can call:
 posthog.feature_flags.getFlags()
 ```
 
-<br>
+<br />
 
 ## Roll Out the Feature Flag
 
@@ -103,7 +103,7 @@ By combining user properties and percentage of users you can determine something
 
 > "Roll out this feature to 80% of users that have an email set"
 
-<br>
+<br />
 
 ## De-activating Properties
 

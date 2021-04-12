@@ -20,7 +20,7 @@ In the case of involuntary departure, we are unlikely to communicate any reasons
 
 In this case, the team member chooses to leave.
 
-We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work that notice period. This is so we have some time to find someone to hire and to enable a handover.
+We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work during that notice period. This is so we have some time to find someone to hire and to enable a handover.
 
 If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or another trusted team member to discuss your reasons for wanting to leave. We want to ensure that all issues team members are facing are discussed and resolved before a resignation decision has been made.
 

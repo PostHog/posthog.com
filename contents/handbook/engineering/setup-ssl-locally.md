@@ -72,8 +72,8 @@ Also, watch out, network requests can be slow through ngrok:
 
 0. Update openssl if "openssl version" tells you "LibreSSL" or something like that.
 
-In case "brew install openssl" and "brew link openssl" don't work well, just use 
-"/usr/local/opt/openssl/bin/openssl" at the command in the next step.
+In case `brew install openssl` and `brew link openssl` don't work well, use 
+`/usr/local/opt/openssl/bin/openssl` instead of `openssl` in the next step.
 
 1. Create key
 ```

@@ -32,12 +32,12 @@ When enabled, the Toolbar will appear on your website (only for you, of course!)
 ## Uses
 
 Our Toolbar is a versatile feature that allows for:
-<br>
+<br />
 
 ### Inspecting Elements
 
 Inspecting elements with Dev Tools is a bit of a messy experience. With the PostHog Toolbar, you are able to get the `class` and `id` of an element much faster and without any extra noise. Click the element to inspect and you'll have access to everything you need to know about that element.
-<br>
+<br />
 
 
 ### Visualizing the Interactions Ranking
@@ -45,22 +45,22 @@ Inspecting elements with Dev Tools is a bit of a messy experience. With the Post
 Easily see the ranking of which parts of the page your users are interacting with the most:
 
 ![heatmap](../../images/casts/heatmap.gif)
-<br>
+<br />
 
 ### Create Actions
 
 Inspect an element, see how often it has triggered an event, and immediately create an action with that data.
 
 Having to flip back and forth between multiple pages hinders our decision-making process. With the Toolbar, everything you need to tailor your analytics is right in front of you: your website, the user data, and the functionality to create an action.
-<br>
+<br />
 
 ### Statistics
 
 Learn more about how users interact with your webpage. Coming soon!
-<br>
+<br />
 
 ## How to Use the Toolbar
-<br>
+<br />
 
 #### Step 1: Go to your setup page and switch it on:
 

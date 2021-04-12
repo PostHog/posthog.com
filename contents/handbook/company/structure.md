@@ -17,7 +17,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 # How it works
 
-* The overall goal is for a Small Team to be as close to its own startup as possible, with some centralized processes where it doesn't make sense
+* The overall goal is for a Small Team to be as close to its own startup as possible, with only a handful of centralized processes
 * A Small Team should never be more than six people
 * A Small Team has an Accountable Person responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
 * A Small Team must have (1) a customer (internal or external), (2) a mission and (3) metrics
@@ -25,21 +25,20 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 * Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
 * A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
 * A Small Team will, at some stage, be able to create its own pricing (too complex in immediate future to do this, however)
-
+* Small teams should document what they build.
+ 
 # Small Teams list
 
-This is currently being finalized, something similar to:
-
 * Core Experience (trends, retention, funnels)
-* Website and docs
 * Extensibility (plugins/APIs)
-* Experimentation (feature flags, a/b testing, session recording)
-* Deployment (AMI/VPC/PostHog Cloud)
+* Deployments and Infrastructure (AMI/VPC/PostHog Cloud)
 
 # Functional teams
 
-* People
-* Growth
+* People & Culture
+* Marketing (includes website)
+* Growth Engineering (proactive experiments / activation flow / revenue flow)
+* Design
 
 # FAQ
 
@@ -63,6 +62,12 @@ No more than 6 people, but that's the only rule. It could be any group of people
 
 Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
 
+## Can I still [step on toes](/handbook/values)?
+
+Yes. In fact it's actively encouraged. We still expect people to have an understanding of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
+
+You're actively encouraged to raise pull requests or propose changes to stuff that doesn't have anything to do with your small team.
+
 ## Can people change teams?
 
 We try to keep moves infrequent and when needed. We anticipate moving people roughly every 3-9 months. We'd rather hire new people than create gaps by shifting people around.
@@ -70,7 +75,7 @@ We try to keep moves infrequent and when needed. We anticipate moving people rou
 There are two scenarios that will trigger a move:
 
 * The Small Team may realize they no-longer need someone, or that they could really do with someone currently in another Small Team internally.
-* An individual team member may wish to move to developer their skills or experience.
+* An individual team member may wish to move in order to develop their skills or experience.
 
 It is at the discretion of the _manager_ of that person if they can move.
 

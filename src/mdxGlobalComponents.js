@@ -1,13 +1,26 @@
 // AUTO GENERATED FILE
 
+import { Endpoint } from './components/APIDocs/Endpoint'
+import { MethodTags } from './components/APIDocs/MethodTags'
+import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
+import { Benefits } from './components/Careers/Benefits'
+import { CareersHero } from './components/Careers/CareersHero'
+import { Culture } from './components/Careers/Culture'
+import { InterviewProcess } from './components/Careers/InterviewProcess'
+import { OpenRoles } from './components/Careers/OpenRoles'
+import { WhyWereHere } from './components/Careers/WhyWereHere'
+import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { ContributorAvatars } from './components/ContributorAvatars'
+import { ContributorCard } from './components/ContributorCard'
+import { ContributorSearch } from './components/ContributorSearch'
+import { ContributorsChart } from './components/ContributorsChart'
 import { CornerBrackets } from './components/CornerBrackets'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -27,6 +40,7 @@ import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
 import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
+import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
@@ -43,17 +57,31 @@ import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectio
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
+import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
+    Endpoint,
+    MethodTags,
+    AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
     BlogFooter,
     CallToAction,
+    Benefits,
+    CareersHero,
+    Culture,
+    InterviewProcess,
+    OpenRoles,
+    WhyWereHere,
+    WorkingAtPostHog,
     CodeBlock,
     CompensationCalculator,
     Container,
     ContributorAvatars,
+    ContributorCard,
+    ContributorSearch,
+    ContributorsChart,
     CornerBrackets,
     DarkModeToggle,
     DemoScheduler,
@@ -73,6 +101,7 @@ export const shortcodes = {
     Roadmap,
     SocialProof,
     Tutorials,
+    MdxAnchorHeaders,
     NewsletterForm,
     OtherFeaturesBlock,
     PageHeader,
@@ -89,5 +118,6 @@ export const shortcodes = {
     Spacer,
     StarRepoButton,
     StartNowButton,
+    Structure,
     TableOfContents,
 }
