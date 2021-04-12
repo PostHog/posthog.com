@@ -31,7 +31,7 @@ We make things public by default because [transparency is part of Communication,
 
 - _Public_ - most things, including our product, roadmap, handbook and strategy. 
 - _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
-- _Private internally_ - personal team information, ie. compensation, disciplinary issues.
+- _Private internally_ - personal team information, i.e. compensation, disciplinary issues.
 
 Information that is not publicly shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
 
@@ -70,10 +70,10 @@ Please avoid using presentations for internal use. They are a poor substitute fo
 ### Email
 
 1. Internal email should be avoided in nearly all cases. Use GitHub for feature / product discussion, use Slack if you cannot use GitHub, and use Google Docs for anything else.
-1. The only uses we have for internal email are for:
-  1. Obtaining approvals for legal things
-  1. Sending some types of more official company documents (e.g. job offers, payroll forms)
-  1. Communicating with external partners
+1. The only uses we have for internal email are:
+   - Obtaining approvals for legal things
+   - Sending some types of more official company documents (e.g. job offers, payroll forms)
+   - Communicating with external partners
 
 ### Writing Style
 
@@ -93,7 +93,7 @@ Use video calls if you find yourself going back and forth in an issue/via email 
 1. Try to have your video on at all times because it's much more engaging for participants. Having pets, children, significant others, friends, and family visible during video chats is encouraged - please introduce them!
 1. As a remote company we are always striving to have the highest fidelity, collaborative conversations. Use of a headset with a microphone, is strongly recommended - use your company card if you need.
 1. Always advise participants to mute their mics if there is unnecessary background noise to ensure the speaker is able to be heard by all attendees.
-1. You should take notes of the points and to-dos during the meeting. Being able to structure conclusions and follow up actions in real time makes a video call more effective than an in-person meeting. If it is important enough to schedule a meeting, it is important enough to have take notes.
+1. You should take notes of the points and to-dos during the meeting. Being able to structure conclusions and follow-up actions in real time makes a video call more effective than an in-person meeting. If it is important enough to schedule a meeting, it is important enough to have taken notes.
 1. We start on time and do not wait for people. People are expected to join no later than the scheduled minute of the meeting, and we don't spend time bringing latecomers up to speed. 
 1. It can feel rude in video calls to interrupt people. This is because the latency causes you to talk over the speaker for longer than during an in-person meeting. You should not be discouraged by this, as the questions and context provided by interruptions are valuable.
 1. We end on the scheduled time. Again, it might feel rude to end a meeting, but you're actually allowing all attendees to be on time for their next meeting.

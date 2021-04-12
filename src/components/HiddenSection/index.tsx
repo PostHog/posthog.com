@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
+import { Heading } from 'types'
 import './style.scss'
 
 interface HiddenSectionProps {
-    headingType: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+    headingType: Heading
     title: any
     children: any
     endWithDivider?: boolean
+    defaultIsOpen?: boolean
 }
 
-export const HiddenSection = ({ headingType, title, children, endWithDivider = true }: HiddenSectionProps) => {
-    const [isOpen, setIsOpen] = useState(false)
+export const HiddenSection = ({
+    headingType,
+    title,
+    children,
+    endWithDivider = true,
+    defaultIsOpen = false,
+}: HiddenSectionProps) => {
+    const [isOpen, setIsOpen] = useState(defaultIsOpen)
 
     const isLargeHeading = ['h1', 'h2', 'h3'].includes(headingType)
 

@@ -25,7 +25,8 @@ if len(from_paths) > 0 and len(from_paths) == len(to_paths):
     new_redirects = ''
 
     for i in range(len(from_paths)):
-        if from_paths[i] not in netlify_config_text:
+        md_to_mdx = '.mdx' not in from_paths[i] and '.mdx' in to_paths[i]
+        if from_paths[i] not in netlify_config_text and not md_to_mdx:
             new_redirects += redirect_text.format(from_paths[i], to_paths[i])
     
     with open("./netlify.toml", "a") as netlify_config:

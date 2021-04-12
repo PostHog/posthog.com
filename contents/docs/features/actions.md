@@ -27,14 +27,14 @@ If you'd like to watch a video about our Actions feature, check out our demo vid
 ## Accessing Actions
 
 To access the Actions page, go to the 'Events & Actions' section on the left-hand navigation sidebar.
-<br>
+<br />
 
 ## Creating Frontend Actions
 
 ### Pre-Requisites
 
 Before creating an action from an element, you must have provided the domain you will be using PostHog on. This should be the root domain where your application is hosted e.g. http://example.com. You can do this by visiting 'Setup' > 'Setup your PostHog account'.
-<br>
+<br />
 
 ### Getting Started
 
@@ -84,14 +84,14 @@ Our [Autocapture](/docs/integrations/js-integration#autocapture) functionality w
 
 Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/integrations/js-integration#autocapture) for more details.
 
-<br>
+<br />
 
 **Custom Event**
 
 Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/integrations).
-<br>
+<br />
 
-<br> 
+<br /> 
 
 ## Identification Fields
 

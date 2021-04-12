@@ -33,6 +33,7 @@
         "name": "Contributing",
         "items": [
             "docs/contributing",
+            "docs/recognizing-contributions",
             "docs/developing-locally",
             "docs/stack",
             "docs/project-structure",
@@ -51,7 +52,8 @@
             "docs/tutorials/spa",
             "docs/tutorials/actions",
             "docs/tutorials/b2b",
-            "docs/tutorials/revenue"
+            "docs/tutorials/revenue",
+            "docs/tutorials/tracking-teams"
         ],
         "child_entries": ["1 Minute Tutorials"]
     },
@@ -138,7 +140,9 @@
             "docs/api/people",
             "docs/api/trends",
             "docs/api/user",
-            "docs/api/feature-flags"
+            "docs/api/feature-flags",
+            "docs/api/annotations",
+            "docs/api/cohorts"
         ]
     },
     {
@@ -269,6 +273,7 @@
             "handbook/company/branding",
             "handbook/company/team",
             "handbook/company/management",
+            "handbook/company/structure",
             "handbook/company/standups"
         ]
     },
@@ -302,7 +307,8 @@
             "careers/senior-fs-software-engineer",
             "careers/site-reliability-engineer",
             "careers/sales-engineer",
-            "careers/product-marketer"
+            "careers/product-marketer",
+            "careers/senior-product-designer"
         ]
     },
     {

@@ -14,6 +14,8 @@ auth_header = { 'Authorization': f'token {github_token}' }
 repos = requests.get('https://api.github.com/orgs/PostHog/repos?type=all', headers=auth_header).json()
 
 for repo in repos:
+    if repo['fork']:
+        continue
     contributors = requests.get(repo['contributors_url'], headers=auth_header).json()
     for contributor in contributors:
         username = contributor['login']

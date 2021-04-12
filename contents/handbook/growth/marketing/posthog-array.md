@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br>
+<br />
 
 The PostHog Array is our Newsletter and Blog for new releases. It serves 2 purposes:
 - Letting the community know that a new version has been released and what new features and functionality they can expect if they update. This makes the platform more valuable and builds word of mouth growth.
@@ -49,7 +49,7 @@ Refer to more information on [updating our documentation](/docs/updating-documen
 
 ### Content
 
-The first section should always include links to the PostHog Docs regarding [upgrading](/docs/upgrading-posthog).
+The first section should always include links to the PostHog Docs regarding [upgrading](/docs/configuring-posthog/upgrading-posthog).
 
 The sections are as follows, with images and GIFs being preferred in all PostHog updates and some performance updates:
 - Release notes
@@ -59,7 +59,7 @@ The sections are as follows, with images and GIFs being preferred in all PostHog
 - Repo round up
 - PostHog News
 
-Favorite issues should be selected for enhancements brought up by new users, or particlularly in-depth discussions on how to solve specific problems.
+Favorite issues should be selected for enhancements brought up by new users, or particularly in-depth discussions on how to solve specific problems.
 
 PR of the week should highlight a contributor we are particularly thankful for putting the effort in to create a pull request.
 

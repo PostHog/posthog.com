@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Almost all PRs made to repositories on PostHog will need a review from another engineer. We do this because, almost every time we review a PR, we find a bug, a performance issue, unnecessary code or UX that could have been confusing.
+Almost all PRs made to PostHog repositories will need a review from another engineer. We do this because, almost every time we review a PR, we find a bug, a performance issue, unnecessary code or UX that could have been confusing.
 
 ## How to review
 

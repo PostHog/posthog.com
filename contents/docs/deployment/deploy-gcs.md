@@ -3,23 +3,23 @@ title: Deploying to Google Cloud
 sidebar: Docs
 showTitle: true
 ---
-<br>
+<br />
 
 
 ## Why Google Computing Services
 
 [Google Computing Services](https://cloud.google.com/), also known as GCS or Google Cloud, is one of the most well-established Cloud Providers. GCS has a rather intuitive integrated dashboard, as well as an extensive Free Trial.
-<br>
+<br />
 
 ### Deploying to GCS
 
 To deploy on Google Cloud, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
-<br>
+<br />
 
 ## Docker Install: Virtual Machine Setup
 
 The first thing you'll need is a [GCS Account](https://console.cloud.google.com/freetrial). Once you have that up and running, you're good to go!
-<br>
+<br />
 
 ### Step-By-Step
 
@@ -85,7 +85,7 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 
 </blockquote>
 
-<br>
+<br />
 
 
 
@@ -102,7 +102,7 @@ For more information, visit our [dedicated page for running PostHog behind a pro
 #### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
 PostHog needs to run on HTTPS because if it doesn't:
  
- a) It will fail<br>
+ a) It will fail<br />
  b) Your user data will be at risk
 
 #### Check Your Firewall/Security Group if You Cannot Connect to a Port
@@ -127,15 +127,15 @@ You can read [this tutorial](https://www.digitalocean.com/community/tutorials/ho
 
 Here's a [good GCS Tutorial](https://cloud.google.com/vpc/docs/firewalls) about this.
 
-<br>
+<br />
 
 ## Upgrading Docker on Azure
 
 See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
-<br>
+<br />
 
 ## Useful Tutorials
-<br>
+<br />
 
 ###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 

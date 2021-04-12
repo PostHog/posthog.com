@@ -224,7 +224,7 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 Got into software by tinkering with bada OS – if anyone even remembers that! – and just never stopped (though I did move to Android soon and later became an iOS fan).
 
-Before graduating from high school here in Poland – and having some open-source projects under my belt, including [a Discord bot with thousands of users that became my gateway to Python](https://github.com/Twixes/somsiad) – I decided that the most interesting way to grow and meet some great people along the way will be to work on a quality product commercially. 
+Before graduating from high school here in Poland – and having some open-source projects under my belt, including [a Discord bot with thousands of users that became my gateway to Python](https://github.com/Twixes/somsiad) – I decided that the most interesting way to grow and meet some great people along the way will be to work on a quality product commercially.
 
 Happy to report that I ended up joining PostHog, where open-source software, a quality product and great people all mix freely!
 In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [math](https://codepen.io/Twixes/pen/Zwxxdv), [design](https://www.lingscars.com/), [photography](https://unsplash.com/@twixes) and [cinema](https://www.nowehoryzonty.pl/index.do?lang=en). Decidedly a fan of precipitation and overcast weather, I have a secret plan to move to the Nordics or the UK one day.
@@ -388,13 +388,13 @@ In personal life, you can find me in the wilderness looking for geocaches or hik
 
 <div class="team-left-bio" markdown="1">
 
-Born and raised in the United Arab Emirates, I'm half British, half Lebanese, and lived in a variety of places growing up across the Middle East, Africa and Europe. Now based in London, I live with my wife Steph and son Remy, who was serendipitously born right at the beginning of lockdown here in the UK. 
+Born and raised in the United Arab Emirates, I'm half British, half Lebanese, and lived in a variety of places growing up across the Middle East, Africa and Europe. Now based in London, I live with my wife Steph and son Remy, who was serendipitously born right at the beginning of lockdown here in the UK.
 
-I take care of all things business ops-related at Posthog, across finance, people, legal and basically anything else that doesn't involve actually building the product! Posthog is now my 3rd startup - I was previously COO at [Vitl](https://vitl.com), (personalised nutrition), and before that I was Director of Product at [ROLI](https://roli.com) (electronic music products). 
+I take care of all things business ops-related at Posthog, across finance, people, legal and basically anything else that doesn't involve actually building the product! Posthog is now my 3rd startup - I was previously COO at [Vitl](https://vitl.com), (personalised nutrition), and before that I was Director of Product at [ROLI](https://roli.com) (electronic music products).
 
-I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [designer houses](https://www.themodernhouse.com/) I will never live in. I like to occasionally torment my son with my piano playing and spend more time than is probably reasonable making lists of things, à la [High Fidelity](https://en.wikipedia.org/wiki/High_Fidelity_(film)). 
+I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [designer houses](https://www.themodernhouse.com/) I will never live in. I like to occasionally torment my son with my piano playing and spend more time than is probably reasonable making lists of things, à la [High Fidelity](https://en.wikipedia.org/wiki/High_Fidelity_(film)).
 
-[See my README](/handbook/company/team/charles-cook) on tips for how to work with me. 
+[See my README](/handbook/company/team/charles-cook) on tips for how to work with me.
 
 </div>
 
@@ -420,13 +420,13 @@ I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [
 
 <div class="team-left-bio" markdown="1">
 
-Hi, I'm Eltje (_pronounced Elt-ie_), originally from Northern Germany, I moved to the UK in 2017 and I am now based in East London. 
+Hi, I'm Eltje (_pronounced Elt-ie_), originally from Northern Germany, I moved to the UK in 2017 and I am now based in East London.
 
-Just like James, I used to be a professional cyclist until I realised you can’t make a living as a female cyclist. After a short identity crisis, I started university with the goal to become a management consultant. That never happened, I luckily realised my skills and personality are much better suited in a people (I guess non-startup people call it HR) role. 
+Just like James, I used to be a professional cyclist until I realised you can’t make a living as a female cyclist. After a short identity crisis, I started university with the goal to become a management consultant. That never happened, I luckily realised my skills and personality are much better suited in a people (I guess non-startup people call it HR) role.
 
 At PostHog I look after our People and Talent function and my goal is make PostHog THE best company to work for. Previously I worked in very a similar role at a startup called [Farewill](https://farewill.com), who offer services around death (yes, you read right). Prior to that, I worked for a couple of companies later on the scaling journey, like [TransferWise](https://transferwise.com/) and [Xing](https://xing.com).
 
-Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and you can usually find me outdoors - either on my bike or during a long walk. 
+Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and you can usually find me outdoors - either on my bike or during a long walk.
 
 </div>
 
@@ -466,7 +466,70 @@ Our party of 2 became a party of 3 last year. 🎉 Now that I am officially a da
 
 <div class="team-right-image" markdown="1">
 
-![Eltje portrait](../../images/team/Cory.png)
+![Cory portrait](../../images/team/Cory.png)
+
+</div>
+
+</div>
+
+<!--- Sean Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Sean Packham, Marketing Lead
+
+<div class="team-left-bio" markdown="1">
+
+A semi-amateur cyclist who retired early to wrangle code before finding his place leading open source marketing teams. Sean lead content at GitLab and marketing at Rocket.Chat and Purism, and is now on a mission to build the best open source developer community.
+
+Sean grew up in Cape Town, moved to the UK in 2015, and spent the next 5 years ping ponging between Scotland and London before permanently calling Edinburgh home.
+
+When he's not working on awesome PostHog marketing, Sean can be found building and playing video games (mostly old stuff and RPGs like AOE2, D2, Skyrim, Terraria), listening to metal, wrestling kitties (I may go pro), flâneuring, or in deep discussions with his partner over a cup of tea.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Sean portrait](../../images/team/Sean.png)
+
+</div>
+
+</div>
+
+<!--- Kunal Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Kunal Pathak, Growth Engineer
+
+<div class="team-left-bio" markdown="1">
+
+Hi! My name is Kunal. I'm a Bay Area native and a bit of a startup vet. 
+
+I love helping teams discover new ways to apply data, product, and engineering to drive business outcomes. 
+Most recently, I led the growth team at Amplitude and at an education technology startup prior to that.
+
+When I'm not working on growth, you'll find me studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
+
+In terms of cycling– a friend once convinced me to go on a bike ride from San Francisco to Mill Valley. We took the ferry home.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Kunal portrait](../../images/team/Kunal.png)
 
 </div>
 

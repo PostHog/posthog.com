@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br>
+<br />
 
 Welcome to our Tutorials section. Here you will find step-by-step tutorials about how to use PostHog and its features. 
 
