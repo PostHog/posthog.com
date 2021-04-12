@@ -100,7 +100,7 @@ Documentation contributes more to *Activation* and *Retention* than *Acquisition
 - [Community](./community):
   - social: Twitter, LinkedIn
   - discussions: Slack, HN, StartupSchool, Reddit
-  - onboarding: YC startups
+  - [onboarding](https://posthog.com/handbook/growth/sales/yc-onboarding): YC startups
   - events: online, in-person
   - networking: open source, analytics
   - sponsorship: open source
