@@ -123,6 +123,12 @@ docker-compose -f docker-compose.dev.yml up
 
 <br /><hr />
 
+### Running backend, worker, and frontend all together
+
+This script runs the below three scripts concurrently, and automatically sets `DEBUG=1`.
+
+Run `./bin/start`
+
 ### Running backend separately (Django)
 
 Run `DEBUG=1 ./bin/start-backend`
