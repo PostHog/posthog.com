@@ -40,6 +40,7 @@ import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
 import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
+import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
@@ -100,6 +101,7 @@ export const shortcodes = {
     Roadmap,
     SocialProof,
     Tutorials,
+    MdxAnchorHeaders,
     NewsletterForm,
     OtherFeaturesBlock,
     PageHeader,
