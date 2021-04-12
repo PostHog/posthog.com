@@ -51,6 +51,7 @@ Increase:
 - GitHub stars
 - GitHub contributors
 - GitHub contributions
+  - Plugin contributions
 
 ### Requirements
 
