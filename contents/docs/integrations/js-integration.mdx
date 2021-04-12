@@ -204,7 +204,8 @@ For example, take a look at the following call:
 ```js
 posthog.register({
     "icecream pref": "vanilla",
-    "team_id": 22
+    'icecream pref': 'vanilla',
+    team_id: 22,
 })
 ```
 
@@ -260,39 +261,38 @@ Opt a user back in:
 posthog.opt_in_capturing();
 ```
 
-
 ### Feature Flags
 
 PostHog v1.10.0 introduced [Feature Flags](/docs/features/feature-flags), which allow you to safely deploy and roll back new features.
 
 Here's how you can use them:
 
-- Do something when the feature flags load:
+-   Do something when the feature flags load:
 
     The argument `callback(flags: string[])` will be called when the feature flags are loaded.
 
-    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
+    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
 
 ```js
 posthog.onFeatureFlags(callback)
 ```
 
-- Check if a feature is enabled:
+-   Check if a feature is enabled:
 
 ```js
 posthog.isFeatureEnabled('keyword')
 ```
 
-- Trigger a reload of the feature flags:
-    
+-   Trigger a reload of the feature flags:
+
 ```js
 posthog.reloadFeatureFlags()
 ```
 
-- By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
+-   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
 
 ```js
-posthog.isFeatureEnabled('keyword', {send_event: false})
+posthog.isFeatureEnabled('keyword', { send_event: false })
 ```
 
 ### Complete Signup Pseudocode
@@ -302,12 +302,12 @@ As an example, here is how to put some of the above concepts together:
 ```js
 function signup(email) {
     // Your own internal logic for creating an account and getting a user_id
-    let userId = createAccount(email);
+    let userId = createAccount(email)
 
     // Identify user with internal ID
-    posthog.identify(userId);
+    posthog.identify(userId)
     // Set email or any other data
-    posthog.people.set({email: email});
+    posthog.people.set({ email: email })
 }
 ```
 
@@ -315,7 +315,7 @@ function signup(email) {
 
 When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
 
-There are [33 different options](https://github.com/PostHog/posthog-js/blob/master/src/posthog-core.js#L1120-L1206), most of which you do not have to ever worry about.
+There are multiple different configuration options, most of which you do not have to ever worry about. For brevity, only the most relevant ones are used here. However you can view all the configuration options in [posthog-core.js](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L933).
 
 Some of the most relevant options are:
 
@@ -331,7 +331,7 @@ Some of the most relevant options are:
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
 | `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`               | A list of properties that should never be sent with `capture` calls.                                                           |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                     | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
-
+| `advanced_decide_disabled`<br/><br/>**Type:** Boolean<br/>**Default:** `false`    | **Advanced!** Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.       |
 
 <br />
 
@@ -346,21 +346,19 @@ posthog.init('<ph_project_api_key>', {
 });
 ```
 
+### Advanced configuration
+
+
+In this section we describe some additional details on advanced configuration available.
+
+### Disable /decide endpoint
+
+One of the very first things the PostHog library does when `init()` is called is load the `/decide` endpoint from PostHog backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend. This endpoint is required to run most features of the library (detailed below). However, if you're not using any of the described features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.
+
 ## Debugging
 
 In your dev console you can run `posthog.debug()`. This will enable debugging, easily allowing you to see all data that is being sent to PostHog.
 
-
 ## Development
 
-To develop, clone the [repo](https://github.com/PostHog/posthog-js) and run:
-
-```bash
-yarn start
-```
-
-To create a minified production version, run:
-
-```bash
-yarn build
-```
+For instructions on how to run `posthog-js` locally and setup your development environment, please checkout the README on the [posthog-js](https://github.com/PostHog/posthog-js#README) repository.

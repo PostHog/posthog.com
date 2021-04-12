@@ -7,3 +7,9 @@
   from = "/careers/*"
   to = "/careers"
   status = 200
+
+
+[[redirects]]
+  from = "/docs/integrations/javascript-integration"
+  to = "/docs/integrations/js-integration"
+  status = 302
