@@ -20,7 +20,7 @@ Before we do anything else, we must have a thriving community.
 
 We use [Orbit](https://app.orbit.love) as a way of pulling all our community data into one place.
 
-PostHog Users Slack is the primary hub and is the first place [we put out content](/releasing-content).
+PostHog Users Slack is the primary hub and is the first place [we put out content](/handbook/growth/marketing/releasing-content).
 
 Within Slack, we use a [Papercups](https://papercups.io/) integration to reply to questions from users who messaged from within the app asking for support.
 

@@ -10,7 +10,7 @@ In 2021 we're focussing our marketing efforts on "startup" engineering teams and
 
 ### For Engineers
 
-Unlike many analytics solutions that target product managers and other non-engineering roles, we're building PostHog for engineers and we'll support them with content- and community-driven campaigns that empower them to build successful products.
+Unlike many analytics solutions that target product managers and other non-engineering roles, we're building PostHog for engineers and we'll support them with content and community-driven campaigns that empower them to build successful products.
 
 Some themes we've been discussing internally:
 
@@ -21,13 +21,13 @@ Some themes we've been discussing internally:
 
 ### Mass adoption at YC startups
 
-YC is not only one of the most successful and challenging startup accelerators, it's also a strongly supportive network who want to help each other build successful products. Members show their support with advice and generous deals for their respective products - [our deal]() has helped over 50 startups, many who've gone on to be paying customers.
+YC is not only one of the most successful and challenging startup accelerators, it's also a strongly supportive network who want to help each other build successful products. Members show their support with advice and generous deals for their respective products - [our deal](/handbook/growth/sales/yc-onboarding#the-yc-deal) has helped over 50 startups, many who've gone on to be paying customers.
 
 With our marketing team expanding, we're upping the stakes and setting a goal of getting 90%+ of startups in new YC batches and 75% of startups from the last 2 years that have not chosen a product analytics solution, to use PostHog.
 
 We're betting on YC startups because YC acts as strict screening process for successful startups and founders. By supporting these startups, we're aligning ourselves with many future successful companies and expanding our reach and awareness to their rapidly growing network and even further within the wider YC and Hacker News network. We're betting that this will be significantly more effective than any other traditional content or paid strategies.
 
-To incentivise YC startups to choose PostHog for the product analytics, we'll offer:
+To incentivise YC startups to choose PostHog for their product analytics, we'll offer:
 
 - Generously increased usage on PostHog Cloud
 - Extended free premium licenses for on-premise
@@ -311,7 +311,7 @@ Other community activities that will come up as we grow:
 
 ### Paid
 
-Paid marketing will be used to grow revenue or community and include:
+Paid marketing will be used to grow revenue or community and includes:
 
 - Search engine
 - YouTube
