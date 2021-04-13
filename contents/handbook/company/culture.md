@@ -75,7 +75,11 @@ We're big believers in the importance of the [maker's schedule](http://www.paulg
 
 One of the benefits of hiring high-performing, self-sufficient, empowered team members is that we don't need to put in place some of the typical corporate structures and processes that can slow teams down. 
 
+<<<<<<< HEAD
+Right now, our structure is super simple - James H and Tim are the only managers (and people with a 'Chief' in their title), and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and tread on toes, especially if they are not in a 'senior' role. 
+=======
 Right now, our structure is super simple - James H and Tim are the only managers (and people with a 'Chief' in their title), and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+>>>>>>> master
 
 Our team structure will probably have to evolve as we grow, but for now we find this works well for us. 
 
