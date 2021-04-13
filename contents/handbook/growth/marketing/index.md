@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-**AKA: The Acquisition Team**
+**The Marketing/Acquisition Team**
 
 Philosophy: Be kind, concise and direct.
 
@@ -59,7 +59,7 @@ Increase:
   - Plugin contributions
     - Todo: needs consolidated tracking
 
-See [./community](Community) for community function.
+See [Community](./marketing/community) for community function.
 
 ### Requirements
 
@@ -92,19 +92,19 @@ Documentation contributes more to *Activation* and *Retention* than *Acquisition
   - buyer personas
   - messaging: website, careers, channel bios, README.md
 - Content marketing:
-  - [Blog](./blog): product releases, stories (team, product, customer)
+  - [Blog](./marketing/blog): product releases, stories (team, product, customer)
   - Audio: audio stories, podcast series
   - [Video](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA): video stories, vlog series, showcases, tutorials
-  - [Newsletter](./newsletter): general, investor
+  - [Newsletter](./marketing/newsletter): general, investor
   - Handbook: team, culture
-- [Community](./community):
+- [Community](./marketing/community):
   - social: Twitter, LinkedIn
   - discussions: Slack, HN, StartupSchool, Reddit
   - [onboarding](https://posthog.com/handbook/growth/sales/yc-onboarding): YC startups
   - events: online, in-person
   - networking: open source, analytics
   - sponsorship: open source
-- [Press](./press):
+- [Press](./marketing/press):
   - relationships
   - announcements
   - media packs
