@@ -30,7 +30,7 @@ Design tasks are managed with our [GitHub Org project](https://github.com/orgs/P
 
 Cards generally move from left to right.
 
-1. **Design requests** - anyone can post here. (Please follow our Design Request Process below.)
+1. **Design requests** - anyone can post here. (Please follow our [Design Request Process](#design-request-process) below.)
 1. **Backlog** - things on our radar
 1. **This week** - equivalent of our sprint
 1. **In progress** - tasks we've started but haven't completed
@@ -51,6 +51,38 @@ The following format will help us triage incoming requests:
 1. What is the deadline?
 
 **Note:** We may defer some design requests if we're planning a larger overhaul in the near term. For example, if a request is to create an icon, we may suggest an alternate solution (like pulling an icon from The Noun Project) if we have a larger plan for revamping all icons in a section in the near future.
+
+### When to loop in design
+
+Because we hire self-starters, there is no expectation that every project should start by running through design _first_.
+
+Depending on your preferred workflow, there are different ways we can get involved.
+
+When looping in design, be sure to reference a GitHub issue so we have full context of the problem. Threads should primarily be kept on GitHub. If an Issue is time-sensitive, mention the Issue on Slack in `#design-feedback`.
+
+(The scenarios below largely pertain to work on the main PostHog app.)
+
+**If you built something and just need some polish...**
+
+Feel free to share a link (or screenshot) of what you've built. We can provide UX or design feedback for your consideration.
+
+**If you built something and realize it needs some UX love...**
+
+Share a link (or screenshot) of what you've built. Depending on the state of the project, we can either go back to the wireframe stage to rethink some things, or figure out a phased approach to incremental improvement.
+
+**If you designed your own wireframes or mocks...**
+
+Sometimes if you have domain knowledge or have been thinking about something for a while, it might make more sense for you to start the design process. Feel free to share out for a second opinion, or if you're not confident certain UIs or flows are the best.
+
+**If you'd like some design help before you break ground...**
+
+More like a typical product development process, please share the high level goals or spec, or any other documentation you have about a feature or enhancement. Be sure to specify the line for MVP vs nice-to-haves.
+
+**Need help brainstorming a flow?**
+
+Provide as much documentation about the goals of the project. Depending on the project, we may be able to sketch out some ideas and share in the GitHub issue.
+
+In some cases, it may make sense to jump on a Zoom to sketch out some ideas together.
 
 ## Feedback
 
