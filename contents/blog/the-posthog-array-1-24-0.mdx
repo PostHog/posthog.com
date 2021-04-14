@@ -31,8 +31,10 @@ Thank you so much Adrien! Hope you've been enjoying the PostHog merch you accumu
 - **New:** Display a list of cohorts a given user is in on their person page
 - **New:** Custom data attributes support for the toolbar 
 - **New:** Advanced dashboard collaboration features
+- **New:** S3 export plugin
 - **Improvement:** Session recording support for heavy websites
 - **Improvement:** Multiple new configuration options for `posthog-js`
+- **Improvement:** First Time Event Tracker plugin now tracks session starts
 
 <ArrayCTA />
 
@@ -75,6 +77,12 @@ These are enterprise features available to our paying Cloud customers, and to en
 
 If you're interested in having these features on your self-hosted PostHog instance, contact us on <i>sales@posthog.com</i>.
 
+### [S3 export plugin](/plugins/s3-export)
+
+We have a new plugin that sends PostHog events to an S3 bucket.
+
+The plugin works on both PostHog Cloud and self-hosted installations (`1.24.0` minimum) - [check it out here](/plugins/s3-export).
+
 ### [Session recording for heavy websites](https://github.com/PostHog/posthog/pull/3705)
 
 If you tell Karl you found an issue with session recording, he will fix it.
@@ -101,7 +109,12 @@ The new options are:
     - `slimDOMOptions`
     - `collectFonts`
 
-See our [JS Integration page](/docs/integrations/js-integration) for more details
+See our [JS Integration page](/docs/integrations/js-integration) for more details.
+
+### [Track session starts](/plugins/first-time-event-tracker)
+
+Our First Time Event Tracker plugin now also tracks session starts. By enabling it you will get `session_started` events in PostHog, as well as events that started a session will be tagged with property `is_first_event_in_session` set to `true`.
+
 
 ### [User Interviews](calendly.com/posthog-feedback)
 
