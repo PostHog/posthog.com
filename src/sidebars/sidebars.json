@@ -314,7 +314,7 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/community", "handbook/growth/customer-success"],
+        "items": ["handbook/growth/strategy", "handbook/growth/customer-success"],
         "child_entries": ["Marketing", "Sales"]
     },
     {
@@ -322,9 +322,10 @@
         "name": "Marketing",
         "items": [
             "handbook/growth/marketing",
-            "handbook/growth/marketing/content",
-            "handbook/growth/marketing/posthog-array",
-            "handbook/growth/marketing/releasing-content",
+            "handbook/growth/marketing/blog",
+            "handbook/growth/marketing/community",
+            "handbook/growth/marketing/newsletter",
+            "handbook/growth/marketing/paid",
             "handbook/growth/marketing/press"
         ]
     },
