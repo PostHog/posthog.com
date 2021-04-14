@@ -39,13 +39,13 @@ Cards generally move from left to right.
 
 ## Design Request Process
 
-Since design is currently a shared resource, the best way small design requests can be handled is by posting to the **Design request** column on our [GitHub Org project](https://github.com/orgs/PostHog/projects/3).
+Since design is currently a shared resource, the best way design requests can be handled is by creating an issue in the relevant repository, then adding to the _Design_ project.
 
-This is generally designed for small tasks. The best way to provide detail is to create a card, then convert it to an Issue where more detail is provided.
+![image](https://user-images.githubusercontent.com/154479/114764251-b759b500-9d31-11eb-9767-c9fd9aad25b2.png)
 
-(If the project is larger in scope, please don't post to the board. Just create an Issue directly in the relevant repo and we'll move to the board when the project is better-defined.)
+After triaging, the Issue will appear in our [GitHub Org project](https://github.com/orgs/PostHog/projects/3) where we manage our current design projects.
 
-The following format will help us triage incoming requests:
+The following details will help us triage incoming requests:
 
 1. What do you need designed and why?
 1. What is the deadline?
@@ -58,9 +58,9 @@ Because we hire self-starters, there is no expectation that every project should
 
 Depending on your preferred workflow, there are different ways we can get involved.
 
-When looping in design, be sure to reference a GitHub issue so we have full context of the problem. Threads should primarily be kept on GitHub. If an Issue is time-sensitive, mention the Issue on Slack in `#design-feedback`.
+When looping in design, be sure to reference a GitHub issue so we have full context of the problem. Threads should primarily be kept on GitHub. (If an Issue is time-sensitive, mention the Issue on Slack in `#design-feedback`.)
 
-(The scenarios below largely pertain to work on the main PostHog app.)
+_The scenarios below largely pertain to work on the main PostHog app._
 
 **If you built something and just need some polish...**
 
@@ -72,11 +72,11 @@ Share a link (or screenshot) of what you've built. Depending on the state of the
 
 **If you designed your own wireframes or mocks...**
 
-Sometimes if you have domain knowledge or have been thinking about something for a while, it might make more sense for you to start the design process. Feel free to share out for a second opinion, or if you're not confident certain UIs or flows are the best.
+Sometimes if you have domain knowledge or have been thinking about a project for a while, it might make more sense for you to start the design process. Feel free to share with us for a second opinion, or if you think certain UIs or flows are suboptimal.
 
 **If you'd like some design help before you break ground...**
 
-More like a typical product development process, please share the high level goals or spec, or any other documentation you have about a feature or enhancement. Be sure to specify the line for MVP vs nice-to-haves.
+More like a typical product development process, please share the high level goals or spec, or any other documentation you have about a feature or enhancement. Be sure to specify the line between MVP and nice-to-haves.
 
 **Need help brainstorming a flow?**
 
