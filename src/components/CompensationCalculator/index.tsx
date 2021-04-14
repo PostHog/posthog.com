@@ -21,7 +21,7 @@ let formatCur = (val: number, currency: string) => {
 }
 
 export const CompensationCalculator = () => {
-    const [job, setJob] = useState('Engineer')
+    const [job, setJob] = useState('Full Stack Engineer')
     const [country, setCountry] = useState('United States')
     const [region, setRegion] = useState('San Francisco, California')
     const [level, setLevel] = useState('Senior')
