@@ -108,7 +108,7 @@ Documentation contributes more to *Activation* and *Retention* than *Acquisition
   - relationships
   - announcements
   - media packs
-- Paid:
+- [Paid](./marketing/paid):
   - search
   - social
   - communities
