@@ -1,7 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function HTML(props) {
+export interface HTMLProps {
+    htmlAttributes: React.DetailedHTMLProps<React.HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>
+    bodyAttributes: React.DetailedHTMLProps<React.HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>
+    headComponents?: JSX.Element | JSX.Element[] | null
+    preBodyComponents?: JSX.Element | JSX.Element[] | null
+    postBodyComponents?: JSX.Element | JSX.Element[] | null
+    body: string
+}
+
+export default function HTML(props: HTMLProps): JSX.Element {
     return (
         <html {...props.htmlAttributes}>
             <head>
