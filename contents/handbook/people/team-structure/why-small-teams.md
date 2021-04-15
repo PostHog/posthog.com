@@ -1,5 +1,5 @@
 ---
-title: Small Teams
+title: Why Small Teams
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
