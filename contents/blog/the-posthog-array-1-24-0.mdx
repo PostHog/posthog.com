@@ -32,6 +32,7 @@ Thank you so much Adrien! Hope you've been enjoying the PostHog merch you accumu
 - **New:** Custom data attributes support for the toolbar 
 - **New:** Advanced dashboard collaboration features
 - **New:** S3 export plugin
+- **New:** Snowflake export plugin
 - **Improvement:** Session recording support for heavy websites
 - **Improvement:** Multiple new configuration options for `posthog-js`
 - **Improvement:** First Time Event Tracker plugin now tracks session starts
@@ -77,11 +78,13 @@ These are enterprise features available to our paying Cloud customers, and to en
 
 If you're interested in having these features on your self-hosted PostHog instance, contact us on <i>sales@posthog.com</i>.
 
-### [S3 export plugin](/plugins/s3-export)
+### [S3 and Snowflake export plugins](/plugins)
 
-We have a new plugin that sends PostHog events to an S3 bucket.
+We have new plugins to send PostHog events to [S3 buckets](/plugins/s3-export) and [Snowflake](/plugins/snowflake-export) instances!
 
-The plugin works on both PostHog Cloud and self-hosted installations (`1.24.0` minimum) - [check it out here](/plugins/s3-export).
+You have Marius to thank for these - and you really should. Our resident progressive urbanite had to work hard to get around [all sorts of hurdles](https://github.com/PostHog/snowflake-export-plugin#temporary-tables) to get these out.
+
+The plugins work on both PostHog Cloud and self-hosted installations (`1.24.0` minimum) - [check it out here](/plugins/s3-export).
 
 ### [Session recording for heavy websites](https://github.com/PostHog/posthog/pull/3705)
 
