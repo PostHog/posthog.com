@@ -23,6 +23,20 @@
     font-weight: bold;
 }
 
+/* Inter */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/static/Inter-Regular.ttf') format('ttf');
+    font-weight: normal;
+}
+
+/* Inter Bold */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/static/Inter-SemiBold.ttf') format('ttf');
+    font-weight: bold;
+}
+
 html {
     font-family: 'Good Sans' !important;
     -ms-text-size-adjust: 100%;
