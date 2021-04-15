@@ -17,7 +17,7 @@ Self hosting and want to upgrade? [Update your PostHog](/docs/configuring-postho
 
 We've been on a real push the last few weeks to provide libraries for those writing for mobile devices.
 
-We now support [Android](/docs/integrations/android-integration), [iOS](/docs/integrations/ios-integration) and - finally - [React Native](/docs/integrations/react-native-integration)!
+We now support [Android](/docs/libraries/android), [iOS](/docs/libraries/ios) and - finally - [React Native](/docs/libraries/react-native)!
 
 As always, calls are non-blocking and fast with this library. It batches requests and flushes asynchronously. We'd use emojis at this point, if that were our style.
 

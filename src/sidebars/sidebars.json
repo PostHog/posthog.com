@@ -146,8 +146,8 @@
         ]
     },
     {
-        "entry": "Integrations",
-        "name": "Integrations",
+        "entry": "Libraries",
+        "name": "Libraries",
         "items": [
             "docs/libraries",
             "docs/libraries/android",
@@ -160,8 +160,8 @@
             "docs/libraries/flutter",
             "docs/libraries/react-native",
             "docs/libraries/ruby",
-            "docs/libraries/rudderstack-integration",
-            "docs/libraries/segment-integration"
+            "docs/libraries/rudderstack",
+            "docs/libraries/segment"
         ],
         "child_entries": ["Community", "Sending Data Out"]
     },
@@ -170,8 +170,8 @@
         "name": "Community",
         "items": [
             "docs/libraries/community",
-            "docs/libraries/docusaurus-integration",
-            "docs/libraries/gatsby-integration",
+            "docs/libraries/docusaurus",
+            "docs/libraries/gatsby",
             "docs/libraries/elixir"
         ]
     },

@@ -35,11 +35,11 @@ This tutorial is aimed at SPAs, which are websites that only load one time, with
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Be using our [JavaScript integration](/docs/integrations/js-integration) to track your SPA
+1. Be using our [JavaScript integration](/docs/libraries/js) to track your SPA
 
 ### Tracking Navigation Changes in SPAs
 
-If you use PostHog to track a traditional website, our [autocapture](/docs/integrations/js-integration#autocapture) feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
+If you use PostHog to track a traditional website, our [autocapture](/docs/libraries/js#autocapture) feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
 
 As such, in order to accurately capture navigation in SPAs, we need to manually send events, since autocapture is not enough. 
 
@@ -267,7 +267,7 @@ The methods presented here are examples of options to track SPAs with PostHog. H
 
 Given the wide variety of available JavaScript events, you can also set up your navigation tracking in other ways, such as through `mouseover` events, for example. 
 
-In addition, you can also send your own [custom events](/docs/integrations/js-integration/#sending-events) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
+In addition, you can also send your own [custom events](/docs/libraries/js/#sending-events) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
 
 ```js
 posthog.capture(

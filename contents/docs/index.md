@@ -56,7 +56,7 @@ You can also start trying PostHog with no code using [our bookmarklet](/docs/dep
 
 **Integrations**
 
-We provide [15+ integrations](/docs/integrations) for various popular programming languages and tools that you can use to send data to PostHog. 
+We provide [15+ integrations](/docs/libraries) for various popular programming languages and tools that you can use to send data to PostHog. 
 
 **API**
 
@@ -94,9 +94,9 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 ### Integrations
 
-[Integrations](/docs/integrations) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
+[Integrations](/docs/libraries) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
 
-We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrations/segment-integration), [Slack](/docs/integrations/slack), and [Sentry](/docs/integrations/sentry-integration).
+We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/libraries/segment), [Slack](/docs/libraries/slack), and [Sentry](/docs/libraries/sentry).
 
 ### Plugins
 
