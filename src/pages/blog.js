@@ -6,6 +6,7 @@ import { NewsletterForm } from '../components/NewsletterForm'
 import { SEO } from '../components/seo'
 import { Structure } from '../components/Structure'
 import { BlogSidebar } from '../components/Blog/BlogSidebar'
+import { DarkModeToggle } from '../components/DarkModeToggle'
 
 const BlogPage = ({
     data: {
@@ -30,22 +31,25 @@ const BlogPage = ({
         <Layout>
             <SEO title="PostHog Blog" description="What we are up to, every week." />
 
-            <Structure.Section className="my-12" width="5xl">
-                <Structure.SectionHeader title="Blog" titleTag="h1" titleClassName="text-center" />
+            <div className="bg-purple-100 text-gray-900 dark:bg-purple-900 dark:text-white">
+                <DarkModeToggle />
+                <Structure.Section width="5xl" className="my-0 py-12">
+                    <Structure.SectionHeader title="Blog" titleTag="h1" titleClassName="text-center" />
 
-                {latestPost}
-                <NewsletterForm compact={true} bgColor="#FFFFFF" />
+                    {latestPost}
+                    <NewsletterForm compact={true} bgColor="#FFFFFF" />
 
-                <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
-                    <div className="hidden lg:block lg:w-1/4 lg:pr-8">
-                        <BlogSidebar />
+                    <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
+                        <div className="hidden lg:block lg:w-1/4 lg:pr-8">
+                            <BlogSidebar />
+                        </div>
+                        <div className="w-full lg:w-3/4 lg:pl-8">
+                            <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
+                            {nonLatestPosts}
+                        </div>
                     </div>
-                    <div className="w-full lg:w-3/4 lg:pl-8">
-                        <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
-                        {nonLatestPosts}
-                    </div>
-                </div>
-            </Structure.Section>
+                </Structure.Section>
+            </div>
         </Layout>
     )
 }

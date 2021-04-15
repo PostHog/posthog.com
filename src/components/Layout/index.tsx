@@ -18,6 +18,7 @@ import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
 import { BlogFooter } from '../../components/BlogFooter'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { BlogPostLayout } from '../Blog/BlogPostLayout'
 
 interface LayoutProps {
     pageTitle?: string
@@ -27,8 +28,9 @@ interface LayoutProps {
     isBlogArticlePage?: boolean
     children?: any
     className?: string
-    containerStyle?: Object
+    containerStyle?: Record<string, unknown>
     menuActiveKey?: string
+    featuredImage?: string | null
 }
 
 const Layout = ({
@@ -39,6 +41,7 @@ const Layout = ({
     children,
     className = '',
     containerStyle = {},
+    featuredImage = '',
 }: LayoutProps) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -50,8 +53,8 @@ const Layout = ({
 
         const skeletonLoaded = document.getElementsByClassName('skeleton-loading')
 
-        for (var i = 0; i < skeletonLoaded.length; i++) {
-            let el = skeletonLoaded[i]
+        for (let i = 0; i < skeletonLoaded.length; i++) {
+            const el = skeletonLoaded[i]
 
             el.classList.remove('skeleton-loading--250')
             el.classList.remove('skeleton-loading--500')
@@ -60,7 +63,11 @@ const Layout = ({
         }
     }, [])
 
-    return (
+    return isBlogArticlePage ? (
+        <BlogPostLayout pageTitle={pageTitle} featuredImage={featuredImage}>
+            {children}
+        </BlogPostLayout>
+    ) : (
         <>
             <Header onPostPage={onPostPage} />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>

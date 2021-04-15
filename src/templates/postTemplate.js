@@ -52,6 +52,7 @@ function Template({
                     onPostPage={true}
                     isBlogArticlePage={isBlogArticlePage}
                     pageTitle={frontmatter.title}
+                    featuredImage={frontmatter.featuredImage?.publicURL}
                     isHomePage={false}
                     isDocsPage={isDocsPage}
                 >
@@ -90,6 +91,7 @@ function Template({
 
 export default Template
 
+// @todo -> be defensive against null featuredImage
 export const pageQuery = graphql`
     query($path: String!) {
         markdownRemark(fields: { slug: { eq: $path } }) {
@@ -103,6 +105,9 @@ export const pageQuery = graphql`
                 date(formatString: "MMMM DD, YYYY")
                 title
                 sidebar
+                featuredImage {
+                    publicURL
+                }
                 showTitle
                 hideAnchor
             }

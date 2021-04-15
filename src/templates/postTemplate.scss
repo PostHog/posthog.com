@@ -125,7 +125,7 @@ div.post-page {
         color: white;
     }
 
-    img {
+    img:not(.rounded-lg) {
         border-radius: 8px;
     }
 
