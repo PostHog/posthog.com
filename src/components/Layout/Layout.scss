@@ -26,14 +26,14 @@
 /* Inter */
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter/static/Inter-Regular.ttf') format('ttf');
+    src: url('/fonts/Inter-Regular.ttf') format('truetype');
     font-weight: normal;
 }
 
 /* Inter Bold */
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter/static/Inter-SemiBold.ttf') format('ttf');
+    src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
     font-weight: bold;
 }
 
@@ -1268,7 +1268,15 @@ table td {
     right: 50px;
 }
 
-.post-page-wrapper {
+.post-page-wrapper .docsPagesContent,
+.rightBar {
+    p,
+    li,
+    ul,
+    a {
+        font-family: 'Inter', 'Good Sans', 'Arial' !important;
+    }
+
     a img:hover {
         opacity: 0.7;
     }
