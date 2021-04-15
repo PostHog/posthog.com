@@ -31,8 +31,11 @@ Thank you so much Adrien! Hope you've been enjoying the PostHog merch you accumu
 - **New:** Display a list of cohorts a given user is in on their person page
 - **New:** Custom data attributes support for the toolbar 
 - **New:** Advanced dashboard collaboration features
+- **New:** S3 export plugin
+- **New:** Snowflake export plugin
 - **Improvement:** Session recording support for heavy websites
 - **Improvement:** Multiple new configuration options for `posthog-js`
+- **Improvement:** First Time Event Tracker plugin now tracks session starts
 
 <ArrayCTA />
 
@@ -75,6 +78,14 @@ These are enterprise features available to our paying Cloud customers, and to en
 
 If you're interested in having these features on your self-hosted PostHog instance, contact us on <i>sales@posthog.com</i>.
 
+### [S3 and Snowflake export plugins](/plugins)
+
+We have new plugins to send PostHog events to [S3 buckets](/plugins/s3-export) and [Snowflake](/plugins/snowflake-export) instances!
+
+You have Marius to thank for these - and you really should. Our resident progressive urbanite had to work hard to get around [all sorts of hurdles](https://github.com/PostHog/snowflake-export-plugin#temporary-tables) to get these out.
+
+The plugins work on both PostHog Cloud and self-hosted installations (`1.24.0` minimum) - [check it out here](/plugins/s3-export).
+
 ### [Session recording for heavy websites](https://github.com/PostHog/posthog/pull/3705)
 
 If you tell Karl you found an issue with session recording, he will fix it.
@@ -101,7 +112,11 @@ The new options are:
     - `slimDOMOptions`
     - `collectFonts`
 
-See our [JS Integration page](/docs/libraries/js) for more details
+See our [JS Library page](/docs/libraries/js) for more details.
+
+### [Track session starts](/plugins/first-time-event-tracker)
+
+Our First Time Event Tracker plugin now also tracks session starts. By enabling it you will get `session_started` events in PostHog, as well as events that started a session will be tagged with property `is_first_event_in_session` set to `true`.
 
 ### [User Interviews](calendly.com/posthog-feedback)
 
@@ -348,3 +363,4 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Enable plugins for everyone [\#3557](https://github.com/PostHog/posthog/pull/3557) ([Twixes](https://github.com/Twixes))
 - Introduce Dayjs [\#3490](https://github.com/PostHog/posthog/pull/3490) ([timgl](https://github.com/timgl))
 - Plugins access control [\#3486](https://github.com/PostHog/posthog/pull/3486) ([Twixes](https://github.com/Twixes))
+
