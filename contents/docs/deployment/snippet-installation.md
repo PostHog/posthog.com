@@ -44,4 +44,4 @@ PostHog puts a great amount of effort into making sure it doesn't capture any se
 
 ### Alternatives to the snippet
 
-You can choose not to use a JavaScript snippet, and can instead use one of our [many integrations](/docs/libraries) or our [API](/docs/api/overview).
+You can choose not to use a JavaScript snippet, and can instead use one of our [many libraries](/docs/libraries) or our [API](/docs/api/overview).

@@ -40,9 +40,9 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [Push-based event tracking](/docs/features/events#push-based-event-tracking)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | [Real-time event history](/docs/features/events#live-events)                   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
-### Integrations
+### Libraries
 
-**All our integrations work with either the cloud or the self-managed options.**
+**All our libraries work with either the cloud or the self-managed options.**
 
 | Feature                                                            | Status                                       | Client | Server |
 | ------------------------------------------------------------------ | -------------------------------------------- | ------ | ------ |
@@ -51,7 +51,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [iOS client](/docs/libraries/ios)                   | <span style="color: #71AA55">**Live**</span> | ✔      |        |
 | [React Native client](/docs/libraries/react-native) | <span style="color: #71AA55">**Live**</span> | ✔      |        |
 | [Flutter client](/docs/libraries/flutter)           | <span style="color: #71AA55">**Live**</span> | ✔      |        |
-| [Python integration](/docs/libraries/python)        | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Python Library](/docs/libraries/python)        | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [Ruby integration](/docs/libraries/ruby)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [Node integration](/docs/libraries/node)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [Go integration](/docs/libraries/go)                | <span style="color: #71AA55">**Live**</span> |        | ✔      |

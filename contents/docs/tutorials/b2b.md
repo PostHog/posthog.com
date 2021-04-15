@@ -70,7 +70,7 @@ When you onboard a user, you probably want to track their specific usage on the 
 
 In order to track this, you should first ensure you are sending relevant user data to PostHog. For example, when a user signs up, you should consider adding their email as a property to PostHog, as well as other valuable information such as their company name.
 
-With our [JavaScript Integration](/docs/libraries/js), this might look something like this:
+With our [JavaScript Library](/docs/libraries/js), this might look something like this:
 
 ```js
 const login = (userEmail, userPassword, userCompanyName) => {

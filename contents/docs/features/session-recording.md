@@ -15,9 +15,9 @@ Session recording allows you record users navigating through your website and pl
 
 ## Using Session Recording
 
-Session recording can only be used with our [JavaScript Integration](/docs/libraries/js) and requires the feature to be enabled in PostHog's Project Settings (`project/settings`). Once enabled, the JS Integration will start recording sessions by default.  
+Session recording can only be used with our [JavaScript Library](/docs/libraries/js) and requires the feature to be enabled in PostHog's Project Settings (`project/settings`). Once enabled, the JS Library will start recording sessions by default.  
 
-Session recording can be toggled on and off in the JS Integration by appropriately setting the [config](/docs/libraries/js/#config). Users who opt out of event capturing will not have their sessions recorded.
+Session recording can be toggled on and off in the JS Library by appropriately setting the [config](/docs/libraries/js/#config). Users who opt out of event capturing will not have their sessions recorded.
 
 To watch sessions, you can either visit the 'Sessions' page in PostHog ('Events' -> 'Sessions'):
 

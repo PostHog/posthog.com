@@ -61,9 +61,9 @@ Stay tuned for more exciting features that were built during the hackathon.
 
 Based on community feedback, we made it easier for feature flags to be integrated with your backend, in addition to our frontend JavaScript implementation.
 
-We've added feature flag support to our [Python Integration](https://github.com/PostHog/posthog-python/pull/9), as well as [improved the `/decide` endpoint](https://github.com/PostHog/posthog/pull/1592) used by feature flags to make the API experience better.
+We've added feature flag support to our [Python Library](https://github.com/PostHog/posthog-python/pull/9), as well as [improved the `/decide` endpoint](https://github.com/PostHog/posthog/pull/1592) used by feature flags to make the API experience better.
 
-We have ourselves been using feature flags with the Python integration to slowly roll out some exciting new features. 
+We have ourselves been using feature flags with the Python Library to slowly roll out some exciting new features. 
 
 ### [Weekly Report Email](https://github.com/PostHog/posthog/pull/1700)
 

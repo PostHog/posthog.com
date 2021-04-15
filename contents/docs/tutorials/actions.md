@@ -91,7 +91,7 @@ Visit our [dedicated actions page](/docs/features/actions/) for a comprehensive 
 
 Now that we've learned how to sort through events, let's go through how to create events that PostHog doesn't automatically capture for you.
 
-Custom events can be created from any of our [libraries](/docs/libraries), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. We recommend looking through our integrations and only using our API if there isn't a suitable library for you, since using our libraries ensure you are always up-to-date.
+Custom events can be created from any of our [libraries](/docs/libraries), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. We recommend looking through our libraries and only using our API if there isn't a suitable library for you, since using our libraries ensure you are always up-to-date.
 
 **Using JavaScript Event Listeners to Track User Focus and Exceptions**
 

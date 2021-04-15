@@ -61,7 +61,7 @@ However, when the user does something identifiable on your app, like logging in,
 
 In most cases, users are identified using either email, username, or an internal unique identifier. This helps us differentiate between one person and another. 
 
-If you're unfamiliar with how to identify users, here's an example from our JavaScript integration:
+If you're unfamiliar with how to identify users, here's an example from our JavaScript Library:
 
 ```js
 posthog.identify('your desired id')

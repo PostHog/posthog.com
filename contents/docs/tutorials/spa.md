@@ -35,7 +35,7 @@ This tutorial is aimed at SPAs, which are websites that only load one time, with
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Be using our [JavaScript integration](/docs/libraries/js) to track your SPA
+1. Be using our [JavaScript Library](/docs/libraries/js) to track your SPA
 
 ### Tracking Navigation Changes in SPAs
 

@@ -56,7 +56,7 @@ You can also start trying PostHog with no code using [our bookmarklet](/docs/dep
 
 **Integrations**
 
-We provide [15+ integrations](/docs/libraries) for various popular programming languages and tools that you can use to send data to PostHog. 
+We provide [15+ libraries](/docs/libraries) for various popular programming languages and tools that you can use to send data to PostHog. 
 
 **API**
 
