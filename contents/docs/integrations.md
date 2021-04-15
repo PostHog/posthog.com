@@ -1,5 +1,5 @@
 ---
-title: Integrations
+title: Libraries
 sidebar: Docs
 showTitle: true
 ---
@@ -18,26 +18,26 @@ They can all be used to send custom events, update user properties, identify use
 
 ## Sending data into PostHog
 
-- [JS](/docs/integrations/js-integration)
-- [Node](/docs/integrations/node-integration)
-- [Python](/docs/integrations/python-integration)
-- [Ruby](/docs/integrations/ruby-integration)
-- [PHP](/docs/integrations/php-integration)
-- [Go](/docs/integrations/go-integration)
-- [iOS](/docs/integrations/ios-integration)
-- [Android](/docs/integrations/android-integration)
-- [Flutter](/docs/integrations/flutter-integration)
-- [React Native](/docs/integrations/react-native-integration)
-- [Segment](/docs/integrations/segment-integration)
+- [JS](/docs/libraries/js-integration)
+- [Node](/docs/libraries/node-integration)
+- [Python](/docs/libraries/python-integration)
+- [Ruby](/docs/libraries/ruby-integration)
+- [PHP](/docs/libraries/php-integration)
+- [Go](/docs/libraries/go-integration)
+- [iOS](/docs/libraries/ios-integration)
+- [Android](/docs/libraries/android-integration)
+- [Flutter](/docs/libraries/flutter-integration)
+- [React Native](/docs/libraries/react-native-integration)
+- [Segment](/docs/libraries/segment-integration)
 - [API](/docs/api/overview)
-- [Community](/docs/integrations/community)
-  - [Gatsby](/docs/integrations/gatsby-integration)
-  - [Elixir](/docs/integrations/elixir-integration)
-  - [Docusaurus](/docs/integrations/docusaurus-integration)
+- [Community](/docs/libraries/community)
+  - [Gatsby](/docs/libraries/gatsby-integration)
+  - [Elixir](/docs/libraries/elixir-integration)
+  - [Docusaurus](/docs/libraries/docusaurus-integration)
 
 ## Sending Data to Other Systems
 
-- [Slack](/docs/integrations/slack)
-- [Microsoft Teams](/docs/integrations/microsoft-teams)
-- [Message Formatting](/docs/integrations/message-formatting)
-- [Sentry](/docs/integrations/sentry-integration)
+- [Slack](/docs/libraries/slack)
+- [Microsoft Teams](/docs/libraries/microsoft-teams)
+- [Message Formatting](/docs/libraries/message-formatting)
+- [Sentry](/docs/libraries/sentry-integration)
