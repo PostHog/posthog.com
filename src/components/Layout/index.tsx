@@ -31,15 +31,7 @@ interface LayoutProps {
     menuActiveKey?: string
 }
 
-const BlogHeaderContent = ({ title }: { title: string }) => (
-    <>
-        <h1 className="text-gray-900 center">{title}</h1>
-        <p className="text-gray-900 text-base center w-5/6">
-            PostHog is an open source product analytics platform designed to help you understand customers, quantify
-            value, and ship new features faster.
-        </p>
-    </>
-)
+const BlogHeaderContent = ({ title }: { title: string }) => <h1 className="text-gray-900 center">{title}</h1>
 
 const Layout = ({
     onPostPage = false,
