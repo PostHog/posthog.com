@@ -1,5 +1,5 @@
 ---
-title: Team <YOUR TEAM>
+title: Team Example
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
@@ -7,8 +7,8 @@ hideAnchor: true
 
 ## People
 
-- [Marius Andra (Team lead, Full Stack Engineer)](/handbook/company/team/#marius-andra-software-engineer)
-- [Michael Matloka (Full Stack Engineer)](/handbook/company/team/#michael-matloka-software-engineer)
+- [Jane Doe (Team Lead, Full Stack Engineer)](/handbook/company/team/#jane-doe-software-engineer)
+- [Max Mustermann (Full Stack Engineer)](/handbook/company/team/#max-mustermann-software-engineer)
 
 ## Mission
 
@@ -20,4 +20,4 @@ hideAnchor: true
 
 ## Slack channel
 
-[#team-extensibility](https://posthog.slack.com/messages/team-extensibility)
+[#team-example](https://posthog.slack.com/messages/team-example)
