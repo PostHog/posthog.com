@@ -57,7 +57,6 @@ Great execution beats everything.
 
 We believe that rapid iteration, compounding our learnings, and following our experiment process will eventually lead to success. We trust that as long as we are making sound decisions and running great analyses, the right things will happen.
 
-
 ## Slack channel
 
 [#team-growth-engineering](https://posthog.slack.com/messages/team-growth-engineering)
