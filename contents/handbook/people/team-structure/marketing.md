@@ -38,4 +38,4 @@ Be kind, concise and direct.
 
 ## Slack channel
 
-[#team-extensibility](https://posthog.slack.com/messages/team-marketing)
+[#team-marketing](https://posthog.slack.com/messages/team-marketing)
