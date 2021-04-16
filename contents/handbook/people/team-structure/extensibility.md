@@ -14,7 +14,7 @@ hideAnchor: true
 ## Mission
 
 Team Extensibility's job is to turn PostHog into a platform that everyone can integrate with.
-We enable users to:
+In essence, we enable users to:
 - get data _into_ PostHog
 - get data _out of_ PostHog
 - extend PostHog itself according to their needs
