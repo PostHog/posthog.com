@@ -7,96 +7,97 @@ showTitle: true
 hideAnchor: true
 ---
 
-Welcome to The PostHog Array 1.24.0! Quite a lot has changed since we last talked...
+Welcome to The PostHog Array 1.24.0! As per usual we've got many new features and improvements so let’s jump straight in.
 
-### Community MVP 🏆
+In this release:
 
-This release cycle's Community MVP goes to...
+- **New**: Person pages display a list of cohorts they belong to
+- **New**: The Toolbar supports custom search data attributes
+- **New**: Dashboard collaboration features
+- **New**: Plugins available on PostHog Cloud
+- **New**: GeoIP location plugin available to all
+- **New**: S3 export plugin
+- **New**: Snowflake export plugin
+- **Improvement**: First Time Event Tracker plugin now tracks session starts
+- **Improvement**: Session recording support for heavy websites
+- **Improvement**: More configuration options for `posthog-js`
 
-[adrienbrault](https://github.com/adrienbrault)!
+<ArrayCTA />
 
-Adrien has been submitting PRs left and right, helping us improve the core PostHog platform, as well as our libraries and documentation!
 
-As of writing, Adrien is by far the top contributor to PostHog in April, with 11 PRs merged over these first two weeks:
+## Community MVP 🏆
+
+This release's Community MVP is [adrienbrault](https://github.com/adrienbrault)! Adrien has been submitting PRs to PostHog, our libraries and documentation!
+
+As of writing, Adrien is by far the top contributor to PostHog in April, with 11 PRs merged over the past two weeks,
+
+Thank you Adrien for your dedication! You must have an impressive collection of PostHog merch by now! 😆
+
+### Celebrating our community 🎉
+
+To celebrate all of our community’s contributions, [Yakko](https://posthog.com/handbook/company/team#yakko-majuri-technical-writer-and-developer) built a dedicated [contributors page](https://posthog.com/contributors) for our website which automagically:
+
+- Updates the community statistics with fancy charts
+- Awards merch, achievements and levels when a PR is merged
+- Builds and updates individual contributor pages with all their achievements
 
 [![Contributors Stats](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/adrien.png)](/contributors)
 
-Thank you so much Adrien! Hope you've been enjoying the PostHog merch you accumulated.
+If you would like to earn some coveted PostHog merch, [contribute to any one of our repos](https://github.com/PostHog), and be immortalized in the PostHog hall of fame.
 
-> If you haven't seen it yet, we have a [new page dedicated to our contributors](/contributors). Every contributor gets their own digital card, and we provide a leaderboard with stats on the contributions made by each contributor. We also have a bot that sends a gift card for PostHog merch to contributors for every PR merged, and we welcome all types of contributions! 
-
-**In this release:**
-
-- **New:** IP location data available to all PostHog users
-- **New:** Display a list of cohorts a given user is in on their person page
-- **New:** Custom data attributes support for the toolbar 
-- **New:** Advanced dashboard collaboration features
-- **New:** S3 export plugin
-- **New:** Snowflake export plugin
-- **Improvement:** Session recording support for heavy websites
-- **Improvement:** Multiple new configuration options for `posthog-js`
-- **Improvement:** First Time Event Tracker plugin now tracks session starts
-
-<ArrayCTA />
+Thank you to everyone else who contributed to PostHog this release.
 
 
 ## PostHog 1.24.0 Release Notes
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
 
-### [GeoIP plugin for all](https://github.com/PostHog/posthog/pull/3894)
 
-![GeoIP](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/geoip.png)
-
-Plugins are now live on PostHog Cloud, and, as a bonus, we have now added out-of-the-box support for the PostHog GeoIP plugin, which adds location properties to your events, such as country and city, as well as a dozen other values!
-
-The plugin works on both cloud and self-hosted installations (`1.24.0` minimum).
-
-### [New 'Cohorts' tab on person pages](https://github.com/PostHog/posthog/pull/3744)
+### New 'Cohorts' tab on person pages
 
 ![Cohorts tab](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/person-cohorts.png)
 
-When viewing a person's page in PostHog, you can now toggle between a view of their properties and a view of the cohorts this person is in, giving you a lot more context on the user you're looking at.
+When viewing a person's page in PostHog, you can now toggle between a view of their properties and a view of the cohorts they belong to, giving you a lot more context on the user you're looking at.
 
-### [Toolbar support for custom data attributes](https://github.com/PostHog/posthog/pull/3761)
+[Pull request](https://github.com/PostHog/posthog/pull/3744).
+[Cohort documentation](https://posthog.com/docs/features/cohorts).
+
+
+### Toolbar supports custom search data attributes
 
 ![Data attr](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/data-attr.png)
 
-To make the experience of using the PostHog toolbar better, we have recommended that you set `data-attr` on your elements, so that the toolbar can leverage it for finding elements. However, since a lot of our users already used their own data attributes, we now support adding a list of your own data attributes for the toolbar to look for. 
+The PostHog Toolbar is like a browser inspector for your data to view and edit actions, events and more. To give you more control over how the PostHog Toolbar searches for elements, you can now configure a list of data attributes to search for in ‘Project Settings’.
 
-You can configure this in 'Project Settings'.
+[Pull request](https://github.com/PostHog/posthog/pull/3761).
+[Toolbar documentation](https://posthog.com/docs/features/toolbar).
 
-### [Dashboard collaboration features](https://github.com/PostHog/posthog/pull/3756)
 
-![Dashboard collab](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/dashboard-collab.png)
+### Dashboard collaboration features
 
-Our dashboards keep getting better with every new release, and this one is no different!
+![Dashboard collaboration](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/dashboard-collab.png)
 
 Dashboards now support descriptions and tags, making it easier for teams to collaborate when creating internal analytics reports.
 
-These are enterprise features available to our paying Cloud customers, and to enterprise self-hosted users.
+This is an premium feature available to paying Cloud customers and enterprise self-hosted users.
 
-If you're interested in having these features on your self-hosted PostHog instance, contact us on <i>sales@posthog.com</i>.
+If you're interested in these features for self-hosted PostHog, contact [sales@posthog.com](mailto:sales@posthog.com).
 
-### [S3 and Snowflake export plugins](/plugins)
+[Pull request](https://github.com/PostHog/posthog/pull/3756).
+[Dashboard documentation](https://posthog.com/docs/features/dashboards).
 
-We have new plugins to send PostHog events to [S3 buckets](/plugins/s3-export) and [Snowflake](/plugins/snowflake-export) instances!
 
-You have Marius to thank for these - and you really should. Our resident progressive urbanite had to work hard to get around [all sorts of hurdles](https://github.com/PostHog/snowflake-export-plugin#temporary-tables) to get these out.
+### Session recording for heavy websites
 
-The plugins work on both PostHog Cloud and self-hosted installations (`1.24.0` minimum) - [check it out here](/plugins/s3-export).
+[Karl](https://posthog.com/handbook/company/team#karl-aksel-puulmann-software-engineer) dove into the depths of Session Recording to debug issues users were having on heavy websites (e.g. those with a lot of images/CSS). He emerged victorious and PostHog can now handle session recording for even the most demanding web apps and sites.
 
-### [Session recording for heavy websites](https://github.com/PostHog/posthog/pull/3705)
+[Pull request](https://github.com/PostHog/posthog/pull/3705).
+[Session Recording documentation](https://posthog.com/docs/features/session-recording).
 
-If you tell Karl you found an issue with session recording, he will fix it.
 
-Such was the case with session recording for heavy websites (e.g. those with a lot of images/CSS). We were failing to process large snapshots, leading users of these websites unable to get many session recordings.
+### More configuration options for posthog-js
 
-This is now fixed - expect a lot more recordings available to you from now on!
-
-### [New configuration options for posthog-js](https://github.com/PostHog/posthog-js/pull/209)
-
-Following user requests, there are now 10 new config options for `posthog-js`, allowing you to use autocapture with greater privacy for your users, as well as tailor session recording configuration.
+Following user requests, we added 10 new config options for the posthog-js integration to give you more control over [Autocapture](https://posthog.com/docs/integrations#autocapture) privacy and [Session Recording](https://posthog.com/docs/features/session-recording).
 
 The new options are:
 
@@ -112,23 +113,58 @@ The new options are:
     - `slimDOMOptions`
     - `collectFonts`
 
-See our [JS Integration page](/docs/integrations/js-integration) for more details.
+[Pull request](https://github.com/PostHog/posthog-js/pull/209).
+[JavaScript Integration documentation](/docs/integrations/js-integration).
 
-### [Track session starts](/plugins/first-time-event-tracker)
 
-Our First Time Event Tracker plugin now also tracks session starts. By enabling it you will get `session_started` events in PostHog, as well as events that started a session will be tagged with property `is_first_event_in_session` set to `true`.
+### Plugins available in PostHog Cloud
 
-### [User Interviews](calendly.com/posthog-feedback)
+[Plugins](https://posthog.com/plugins/) are now live on PostHog Cloud. This is massive milestone and months of work by [Marius](https://posthog.com/handbook/company/team#marius-andra-software-engineer), [James G](https://posthog.com/handbook/company/team#james-greenhill-software-engineer) and many others in the Extensibility Team.
+
+[Plugin documentation](https://posthog.com/docs/plugins/overview).
+
+
+### PostHog GeoIP plugin for all
+
+![GeoIP](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/geoip.png)
+
+Our [PostHog GeoIP plugin](https://posthog.com/plugins/geoip) adds location properties to events such as country, city, and a dozen other useful values.
+
+We now include a bundled location database so that you don't have to upload your own and can get up and running even faster.
+
+The PostHog GeoIP plugin works on PostHog Cloud and self-hosted installations (1.24.0 minimum).
+
+[Pull request](https://github.com/PostHog/posthog/pull/3894).
+
+
+### S3 and Snowflake export plugins
+
+We have new plugins to send PostHog events to [S3 buckets](https://posthog.com/plugins/s3-export) and [Snowflake](https://posthog.com/plugins/snowflake-export) instances!
+
+You have PostHog's "best dad joke teller" (Marius) to thank for this. He had to work hard to get around [all sorts of hurdles](https://github.com/PostHog/snowflake-export-plugin#temporary-tables) to build them.
+
+Both plugins are available for PostHog Cloud and of course self-hosted installations (`1.24.0` minimum).
+
+
+### Track session starts
+
+Our [First Time Event Tracker plugin](https://posthog.com/plugins/first-time-event-tracker) now tracks session starts.
+
+Enabling the plugin will give you `session_started` events, and the first event of each session will be tagged with the `is_first_event_in_session` property set to `true`.
+
+
+## User Interviews
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product.
 
-If you're interested in helping us out, you can schedule a quick 30min call with us [on Calendly](https://calendly.com/posthog-feedback).
+If you're interested in helping us out, you can schedule a quick 3 min call with us [on Calendly](https://calendly.com/posthog-feedback).
 
-Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
+Oh, and we're giving away awesome [PostHog merch](https://merch.posthog.com) as a thank you!
+
 
 ## Community Shoutouts
 
-Big thanks to the following members of our community who have contributed to PostHog over this release cycle:
+A big thank you to the following community members who contributed to PostHog 1.24:
 
 - [adrienbrault](https://github.com/adrienbrault)
 - [jeduden](https://github.com/jeduden)
