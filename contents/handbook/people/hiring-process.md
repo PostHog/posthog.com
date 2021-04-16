@@ -51,10 +51,8 @@ Make sure you have set an agenda for the meeting in order to be welcoming to the
 The stages of our hiring process are:
 
 - Application
-- Culture interview with Eltje
-- Technical interview with the hiring team 
-   - this is usually Tim and 1 or more PostHog team members interviewing the candidate at the same time who would work closely with the candidate day-to-day
-   - decide if we will do a SuperDay, else give feedback
+- First round culture interview with Eltje
+- Second round culture/in depth interview
 - PostHog SuperDay
 - Offer
 
@@ -94,31 +92,11 @@ This is to allow both PostHog and the candidate to assess whether the candidate 
 
 Candidates who are unsuccessful at this stage should receive a personalized email with feedback. 
 
-### Interview 2 - Technical
+### Interview 2
 
-The second step is the technical interview. This is usually 2 PostHog team members spending an hour with the candidate (at the same time).
+For engineering, this is a 2-part interview. The first part is a half hour interview with Tim about your previous experiences and what motivates you to come join us. The second part is an hour long technical interview with an engineer. This might be architecture design or diving more into past technical experiences.
 
-These interviews will focus on the skills needed to fill the role. 
-
-For a design hire, questions could be:
-- A walk through of an example website page, product or other 
-- Tell me about one of the pieces in your portfolio
-- What does your calendar look like on a day you'd really look forward to - what sort of tasks would be on it?
-- How do you educate yourself on design?
-
-For an engineering hire, this would be things like:
-- Tell me about a project you started from scratch.
-- What was the hardest technical thing you've done in the last month?
-- What did you do on your very best day at work?
-- Tell me about a project that you led that failed. Why did it fail and what did you learn?
-
-For every role that is created on Workable, we create a structured scorecard with questions listed so you don't need to remember them every time! This is intended as a guide, not a script, so feel free to deviate from the scorecard and go off on tangents - a good interview is a conversation, not a questionnaire. Just try to keep the basic structure of your questions consistent, as this makes it easier to compare candidates to each other.
-
-[Here are some more ideas](https://firstround.com/review/40-favorite-interview-questions-from-some-of-the-sharpest-folks-we-know/) for great questions to ask candidates. 
-
-One of the two technical interviewers will lead the discussion. The reason for 2 people is to ensure a deeper, higher quality interview.  
-
-The person interviewing outside their area of expertise is the bar-raiser. The bar-raiser is here to qualify that everyone is truly excited about the candidate and that they're an example of us believing in talent compounds. Everyone should still think this way - or they should be clear in why they don't feel like this as part of their feedback.
+For non engineering there's a combined interview for cultural and skilss fit.
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. 
 
@@ -133,6 +111,8 @@ This gives the candidate a chance to learn how we work, and for us to see the qu
 We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not you can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. In case the candidate is unable to accept pay for the SuperDay, we will donate the amount to a charity of their choice. 
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. For the Full Stack role, the task involves building a small web service (both backend and frontend) over a full day. The task is designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. The tasks should be as close as possible to those that the candidate would be working on every day.
+
+There will also be someone having a casual chat with the candidate. This person is the bar-raiser. The bar-raiser is here to qualify that everyone is truly excited about the candidate and that they're an example of us believing in talent compounds. Everyone should still think this way - or they should be clear in why they don't feel like this as part of their feedback.
 
 In advance of the SuperDay, you will need to do some additional prep to ensure that the candidate has a great experience:
 
