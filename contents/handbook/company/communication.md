@@ -57,7 +57,17 @@ However, it is still important to maintain focus when opening issues by defining
 
 ### Slack
 
-Slack is used for more informal communication, or where it doesn't make sense to create an issue or pull request. Use your judgment to determine the appropriate channel, and whether you should be chatting publicly (default) or privately. 
+Slack is used for more informal communication, or where it doesn't make sense to create an issue or pull request. Use your judgment to determine the appropriate channel, and whether you should be chatting publicly (default) or privately.
+
+Also keep in mind that, as an open source platform, PostHog has contributors who don't have access to Slack. Having too much context in a private location can be detrimental to those who are trying to understand the rationale for a certain decision.
+
+**Slack etiquette**
+
+Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
+
+1. Keep `#general` open for company-wide announcements.
+1. `@channel` or `@here` mentions should be reserved for urgent or time-sensitive posts that require immediate attention by everyone in the channel. (Examples: changing a meeting invite URL just before a meeting, or soliciting urgent help for a service disruption, where you're not sure who is immediately available)
+1. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
 
 ### Google Docs and presentations
 
