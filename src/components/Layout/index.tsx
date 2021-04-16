@@ -31,6 +31,7 @@ interface LayoutProps {
     containerStyle?: Record<string, unknown>
     menuActiveKey?: string
     featuredImage?: string | null
+    headerBackgroundTransparent?: boolean
 }
 
 const Layout = ({
@@ -42,6 +43,7 @@ const Layout = ({
     className = '',
     containerStyle = {},
     featuredImage = '',
+    headerBackgroundTransparent = false,
 }: LayoutProps) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -69,7 +71,7 @@ const Layout = ({
         </BlogPostLayout>
     ) : (
         <>
-            <Header onPostPage={onPostPage} />
+            <Header onPostPage={onPostPage} transparentBackground={headerBackgroundTransparent} />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
                     <AntdLayout.Sider

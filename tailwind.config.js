@@ -41,6 +41,8 @@ module.exports = {
                 purpleish: '#802f6a',
                 'purpleish-dark': '#72286E',
                 orange: '#FFB877',
+                'darkmode-purple': '#220f3f',
+                'offwhite-purple': '#F4F1F8',
             },
             minHeight: {
                 780: '780px',

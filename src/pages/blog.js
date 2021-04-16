@@ -28,29 +28,34 @@ const BlogPage = ({
     const nonLatestPosts = posts.slice(1, -1).map((edge) => <PostCard key={edge.node.id} post={edge.node} />)
 
     return (
-        <Layout>
-            <SEO title="PostHog Blog" description="What we are up to, every week." />
+        <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
+            <Layout headerBackgroundTransparent={true}>
+                <SEO title="PostHog Blog" description="What we are up to, every week." />
 
-            <div className="bg-purple-100 text-gray-900 dark:bg-purple-900 dark:text-white">
-                <DarkModeToggle />
-                <Structure.Section width="5xl" className="my-0 py-12">
-                    <Structure.SectionHeader title="Blog" titleTag="h1" titleClassName="text-center" />
-
-                    {latestPost}
-                    <NewsletterForm compact={true} bgColor="#FFFFFF" />
-
-                    <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
-                        <div className="hidden lg:block lg:w-1/4 lg:pr-8">
-                            <BlogSidebar />
-                        </div>
-                        <div className="w-full lg:w-3/4 lg:pl-8">
-                            <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
-                            {nonLatestPosts}
-                        </div>
+                <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
+                    <div className="mb-12 w-11/12 mx-auto text-right">
+                        <DarkModeToggle />
                     </div>
-                </Structure.Section>
-            </div>
-        </Layout>
+
+                    <Structure.Section width="5xl" className="my-0 py-12">
+                        <Structure.SectionHeader title="Blog" titleTag="h1" titleClassName="text-center" />
+
+                        {latestPost}
+                        <NewsletterForm compact={true} bgColor="#FFFFFF" />
+
+                        <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
+                            <div className="hidden lg:block lg:w-1/4 lg:pr-8">
+                                <BlogSidebar />
+                            </div>
+                            <div className="w-full lg:w-3/4 lg:pl-8">
+                                <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
+                                {nonLatestPosts}
+                            </div>
+                        </div>
+                    </Structure.Section>
+                </div>
+            </Layout>
+        </div>
     )
 }
 
