@@ -7,3 +7,12 @@
   from = "/careers/*"
   to = "/careers"
   status = 200
+
+[[redirects]]
+    from = "/handbook/company/structure"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+
+[[redirects]]
+    from = "/handbook/company/team"
+    to = "/handbook/people/team"

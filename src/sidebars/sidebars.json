@@ -271,9 +271,7 @@
             "handbook/company/communication",
             "handbook/company/security",
             "handbook/company/branding",
-            "handbook/company/team",
             "handbook/company/management",
-            "handbook/company/structure",
             "handbook/company/standups",
             "handbook/company/working-with-design"
         ]
@@ -282,6 +280,7 @@
         "entry": "People",
         "name": "People",
         "items": [
+            "handbook/people/team",
             "handbook/people/hiring-process",
             "handbook/people/compensation",
             "handbook/people/benefits",
@@ -292,6 +291,20 @@
             "handbook/people/feedback",
             "handbook/people/onboarding",
             "handbook/people/offboarding"
+        ],
+        "child_entries": ["Team Structure"]
+    },
+    {
+        "entry": "Team Structure",
+        "name": "Team Structure",
+        "items": [
+            "handbook/people/team-structure/team-structure",
+            "handbook/people/team-structure/why-small-teams",
+            "handbook/people/team-structure/design",
+            "handbook/people/team-structure/extensibility",
+            "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/marketing",
+            "handbook/people/team-structure/people"
         ]
     },
     {
