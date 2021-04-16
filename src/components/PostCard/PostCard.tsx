@@ -13,6 +13,9 @@ interface PostType {
     frontmatter: {
         date: string
         title: string
+        featuredImage: {
+            publicURL: string | null
+        }
     }
 }
 
@@ -42,9 +45,14 @@ const FeaturedPost = ({ post }: { post: PostType }) => {
                 <div className="text-gray-500 dark:text-gray-300 mt-2">{post.excerpt}</div>
                 <ReadPost to={post.fields.slug} />
             </div>
-            <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded-lg overflow-hidden border flex items-center justify-center shadow-lg">
-                <img className="w-full h-auto block" src={dummyPostImg} />
-            </div>
+            {post.frontmatter.featuredImage?.publicURL && (
+                <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded-lg overflow-hidden flex items-center justify-center">
+                    <img
+                        className="w-full h-auto block rounded-lg shadow-lg"
+                        src={post.frontmatter.featuredImage.publicURL}
+                    />
+                </div>
+            )}
         </div>
     )
 }

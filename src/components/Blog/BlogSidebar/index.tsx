@@ -28,13 +28,23 @@ export const BlogSidebar = () => {
             </a>
 
             <header className="mt-12 text-xs text-gray-400 uppercase">Follow Us</header>
-            <a href="/twitter" className={linkClassList}>
+            <a href="https://twitter.com/PostHogHQ" className={linkClassList} target="_blank" rel="noreferrer">
                 Twitter
             </a>
-            <a href="/linked-in" className={linkClassList}>
+            <a
+                href="https://www.linkedin.com/company/posthog/"
+                className={linkClassList}
+                target="_blank"
+                rel="noreferrer"
+            >
                 LinkedIn
             </a>
-            <a href="/youtube" className={linkClassList}>
+            <a
+                href="https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA"
+                className={linkClassList}
+                target="_blank"
+                rel="noreferrer"
+            >
                 YouTube
             </a>
         </div>

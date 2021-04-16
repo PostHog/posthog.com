@@ -78,6 +78,9 @@ export const pageQuery = graphql`
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
+                        featuredImage {
+                            publicURL
+                        }
                     }
                 }
             }
@@ -95,6 +98,9 @@ export const pageQuery = graphql`
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
+                        featuredImage {
+                            publicURL
+                        }
                     }
                 }
             }

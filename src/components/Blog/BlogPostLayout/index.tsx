@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
 import { Header } from '../../Header/Header'
 import { Footer } from '../../Footer/Footer'
@@ -8,6 +8,9 @@ import { BlogFooter } from '../../BlogFooter'
 import { Structure } from '../../Structure'
 import { DarkModeToggle } from '../../DarkModeToggle'
 
+import twitterIcon from '../../../images/icons/twitter.svg'
+import linkedInIcon from '../../../images/icons/linkedin.svg'
+
 interface BlogPostLayoutProps {
     pageTitle: string
     children: any
@@ -15,6 +18,14 @@ interface BlogPostLayoutProps {
 }
 
 export const BlogPostLayout = ({ pageTitle, children, featuredImage }: BlogPostLayoutProps) => {
+    const [currentUrl, setCurrentUrl] = useState('')
+
+    useEffect(() => {
+        if (window?.location?.href) {
+            setCurrentUrl(window.location.href)
+        }
+    }, [])
+
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
             <Header onPostPage={true} transparentBackground={true} />
@@ -29,9 +40,23 @@ export const BlogPostLayout = ({ pageTitle, children, featuredImage }: BlogPostL
                 </div>
                 <DarkModeToggle />
             </div>
-            <Structure.Section width="xl">
+            <Structure.Section width="xl" className="text-center">
                 <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center" />
-                <p className="text-center">Share buttons</p>
+                <a
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img src={linkedInIcon} alt="share on LinkedIn" className="inline-block" />
+                </a>
+                <a
+                    href={`https://twitter.com/intent/tweet?url=${currentUrl}`}
+                    target="_blank"
+                    className="ml-4"
+                    rel="noreferrer"
+                >
+                    <img src={twitterIcon} alt="share on Twitter" className="inline-block" />
+                </a>
             </Structure.Section>
 
             {featuredImage && (
