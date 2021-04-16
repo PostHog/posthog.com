@@ -31,19 +31,19 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-- **Growth engineering**
+- **[Growth engineering](growth-engineering)**
     - Kunal Pathak (Growth Engineer)
 
-## Design
+## [Design](design)
 
 - Cory Watilo (Team lead, Lead Designer)
 - Lottie Coxon (Graphic Designer)
 
-## Marketing
+## [Marketing](marketing)
 
 - Sean Packham (Team lead, Marketing Lead)
 - Mo Shehu (Content Marketer)
 
-## People & Culture
+## [People & Culture](people)
 
 - Eltje Lange (People and Talent)
