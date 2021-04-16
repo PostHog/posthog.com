@@ -6,7 +6,7 @@ showTitle: true
 
 Design is currently a shared resource at PostHog. This explains what we do, our design process, and how we can assist across the PostHog team.
 
-## Design's role at PostHog
+## Design's Role at PostHog
 
 1. Support Small Teams (and contributors) in building better versions of PostHog
 1. Enable customers to build better products (using PostHog)
@@ -18,24 +18,23 @@ Design is currently a shared resource at PostHog. This explains what we do, our 
 1. Support Small Teams in completing their sprint tasks
 1. Iterate based on feedback from customers
 
-## Our process
+## Our Process
 
-Design tasks are managed with our [GitHub Org project](https://github.com/orgs/PostHog/projects/3). This aggregates design-related tasks from the main three repositories for the company:
+Design tasks are managed with our [GitHub Org project](https://github.com/orgs/PostHog/projects/3), otherwise known as our Design Board. This aggregates design-related tasks from the main three repositories for the company:
 
 1. [PostHog app](https://github.com/PostHog/posthog) - open source repo
 1. [posthog.com](https://github.com/PostHog/posthog.com) - website + docs
 1. Internal - higher-level company strategy
 
-### How our Design board works
+### How Our Design Board Works
 
 Cards generally move from left to right.
 
-1. **Design requests** - anyone can post here. (Please follow our [Design Request Process](#design-request-process) below.)
-1. **Backlog** - things on our radar
-1. **This week** - equivalent of our sprint
-1. **In progress** - tasks we've started but haven't completed
-1. **Awaiting implementation** - in development or in review
-1. **Done** - shipped!
+1. **Backlog** - Things on our radar, and where triaged requests will land unless they're urgent enough to pick up immediately
+1. **This week** - Equivalent of our sprint
+1. **In progress** - Tasks we've started but haven't completed
+1. **Awaiting implementation** - In development or in review
+1. **Done** - Shipped! 🚀
 
 ## Design Request Process
 
@@ -52,7 +51,7 @@ The following details will help us triage incoming requests:
 
 **Note:** We may defer some design requests if we're planning a larger overhaul in the near term. For example, if a request is to create an icon, we may suggest an alternate solution (like pulling an icon from The Noun Project) if we have a larger plan for revamping all icons in a section in the near future.
 
-### When to loop in design
+### When to Loop in Design
 
 Because we hire self-starters, there is no expectation that every project should start by running through design _first_.
 
@@ -84,10 +83,38 @@ Provide as much documentation about the goals of the project. Depending on the p
 
 In some cases, it may make sense to jump on a Zoom to sketch out some ideas together.
 
-## Feedback
+## Sharing work in progress
 
-We often use the `#design-feedback` Slack channel for soliciting specific feedback on wireframes or mockups.
+We often share designs in early, unfinished phases. Since our audience is developer-friendly, we have a built-in audience to gut check our designs and solicit feedback.
 
-We do our best to explain the type of feedback we're looking for. (Ex: Overall visual aesthetic, flow, if a design communicates to our developer-focused audience, etc.)
+When providing feedback, it's worth keeping in mind the level of fidelity of the mockup we're sharing for feedback.
 
-This Slack channel isn't limited to the design team. If you're looking for a second opinion on the UX of something you're building, we encourage anyone to share screenshots. If the design requires further collaboration, create an Issue.
+### Wireframes
+
+If an early draft is being shared, we'll build a wireframe in Balsamiq. At this stage, we're mostly focused on laying out content, crafting messaging, and loosely tying in a visual hierarchy and layout. (Don't look too closely at fonts, specific colors, or visualizations - those come later.)
+
+_Note: Balsamiq uses its own Comic Sans-style font. Don't get hung up on this!_
+
+![image](https://user-images.githubusercontent.com/154479/114972248-2b887b80-9e4c-11eb-92fe-bce7bf14c808.png)
+
+### Mockups
+
+Once a design is laid out, we'll move into hi-fidelity mockups built in Figma. This process usually takes a few rounds to perfect, and we often iterate up until the moment the design is passed off for development.
+
+### Providing feedback
+
+We typically share links to mockups in the relevant GitHub Issue.
+
+When we share a design, we do our best to explain the type of feedback we're looking for. (Ex: Overall visual aesthetic, flow, if a design communicates to our developer-focused audience, etc.)
+
+Our main design tools, Balsamiq and Figma, both have built-in commenting. If your feedback is specific to an element on the page, please leave a comment inside the app's comment system. This helps us review and take action on comments later.
+
+If your feedback is higher level, summarize your feedback in the GitHub Issue itself for a higher-level discussion.
+
+## Slack
+
+We often use the `#design-feedback` Slack channel to share updates when we're particularly interested in feedback. We'll always link to the relevant place for discussion. (It's best to keep direct feedback off of Slack.)
+
+This Slack channel isn't limited to the design team. If you're looking for a second opinion on the UX of something you're building, we encourage anyone to share screenshots and a link to Figma or wherever the mockup was produced so we can provide useful feedback or assist in iterating on a design.
+
+If the design requires further collaboration, create an Issue.
