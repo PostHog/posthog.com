@@ -26,7 +26,7 @@ The most easy to use and useful analytics tool/experience to discover insights a
 
 ## Customer
 
-- Any posthog user whether they're an engineer or product manager should be able to effectively analyze their product
+- Any posthog user, whether they're an engineer or product manager, should be able to effectively analyze their product
 
 ## Output metrics
 

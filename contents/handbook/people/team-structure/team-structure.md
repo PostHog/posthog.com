@@ -10,11 +10,11 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 ## Engineering
 
 - **Core experience**
-    - Eric Duong (Team lead, Full Stack Engineer)
-    - Paolo D'Amico (Product Manager)
-    - Buddy Williams (Full Stack Engineer)
-    - Sam Winslow (Full Stack Engineer)
-    - Li Yi Yu (Full Stack Engineer)
+    - [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/company/team/#eric-duong-software-engineer)
+    - [Paolo D'Amico (Product Manager)](/handbook/company/team/)
+    - Buddy Williams, Full Stack Engineer
+    - Sam Winslow, Full Stack Engineer
+    - Li Yi Yu, Full Stack Engineer
 
 <br />
 
