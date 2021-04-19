@@ -16,6 +16,8 @@ Our goal is for users to be able to integrate PostHog with their language and fr
 
 However, certain features like session recording are only available with our JavaScript library. Refer to the table below for an overview of the functionality in each of our libraries.
 
+> We're working to add support for feature flags and autocapture to as many libraries as possible. Please check out the individual library repositories for status on this and let us know if you think we should prioritize support for any specific library.
+
 |                     Library                     |  Type  |  Maintainer  | Autocapture | Session Recording | Feature Flags |
 | :---------------------------------------------: | :----: | :----------: | :---------: | :---------------: | :-----------: |
 |        [JavaScript](/docs/libraries/js)         | Client | PostHog Team |      ✅      |         ✅         |       ✅       |
@@ -39,15 +41,18 @@ However, certain features like session recording are only available with our Jav
 
 ## Integrations
 
-|                    Integration                     |                                          Description                                           |    Maintainer    | Sends data to PostHog? | Pulls data from PostHog? |
-| :------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :--------------: | :--------------------: | :----------------------: |
-|          [Sentry](/docs/libraries/sentry)          | A two-way integration to get PostHog user data into Sentry and Sentry exceptions into PostHog. |   PostHog Team   |           ✅            |            ✅             |
-|         [Segment](/docs/libraries/segment)         |                    Integration to use PostHog as a destination in Segment.                     |   PostHog Team   |           ✅            |            ❌             |
-|       [RudderStack](/docs/libraries/sentry)        |                  Integration to use PostHog as a destination in RudderStack.                   | RudderStack Team |           ✅            |            ❌             |
-|           [Slack](/docs/libraries/slack)           |             PostHog webhooks to receive messages in Slack when an action happens.              |   PostHog Team   |           ❌            |            ✅             |
-| [Microsoft Teams](/docs/libraries/microsoft-teams) |        PostHog webhooks to receive messages in Microsoft Teams when an action happens.         |   PostHog Team   |           ❌            |            ✅             |
-|          [Gatsby](/docs/libraries/gatsby)          |                    A wrapper over `posthog-js` provided as a Gatsby plugin.                    |    Community     |           ✅            |            ❌             |
-|      [Docusaurus](/docs/libraries/docusaurus)      |                  A wrapper over `posthog-js` provided as a Docusaurus plugin.                  |    Community     |           ✅            |            ❌             |
+|                       Integration                        |                                          Description                                           |    Maintainer    | Sends data to PostHog? | Pulls data from PostHog? |
+| :------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :--------------: | :--------------------: | :----------------------: |
+|             [Sentry](/docs/libraries/sentry)             | A two-way integration to get PostHog user data into Sentry and Sentry exceptions into PostHog. |   PostHog Team   |           ✅            |            ✅             |
+|            [Segment](/docs/libraries/segment)            |                    Integration to use PostHog as a destination in Segment.                     |   PostHog Team   |           ✅            |            ❌             |
+|          [RudderStack](/docs/libraries/sentry)           |                  Integration to use PostHog as a destination in RudderStack.                   | RudderStack Team |           ✅            |            ❌             |
+|              [Slack](/docs/libraries/slack)              |             PostHog webhooks to receive messages in Slack when an action happens.              |   PostHog Team   |           ❌            |            ✅             |
+|    [Microsoft Teams](/docs/libraries/microsoft-teams)    |        PostHog webhooks to receive messages in Microsoft Teams when an action happens.         |   PostHog Team   |           ❌            |            ✅             |
+|             [Gatsby](/docs/libraries/gatsby)             |                    A wrapper over `posthog-js` provided as a Gatsby plugin.                    |    Community     |           ✅            |            ❌             |
+|         [Docusaurus](/docs/libraries/docusaurus)         |                  A wrapper over `posthog-js` provided as a Docusaurus plugin.                  |    Community     |           ✅            |            ❌             |
+|  [Zapier](https://zapier.com/apps/posthog/integrations)  |                           Use PostHog triggers in Zapier workflows.                            |   PostHog Team   |           ❌            |            ✅             |
+| [n8n](https://docs.n8n.io/nodes/n8n-nodes-base.postHog/) |                             Use PostHog triggers in n8n workflows.                             |     n8n Team     |           ❌            |            ✅             |
+
 
 ## Plugins
 
