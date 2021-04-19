@@ -555,7 +555,7 @@ and performing amazing acroyoga feats for folks in the park.
 I got started in programming at twelve years old. My grandfather was a 
 retired FFA engineer with access to old decommissioned hardware. He'd 
 bring it home for me to play with. My first computer was a TI-99/4A 
-where you recorded your programs on casette tapes! I fell in love with 
+where you recorded your programs on cassette tapes! I fell in love with 
 programming because I enjoyed both creative and reason based projects. 
 From drawing and crafts to math, science, and philosophy. Programming 
 gave me a big canvas for imaginary worlds, a place for self-expression 
