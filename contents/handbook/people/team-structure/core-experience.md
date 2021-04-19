@@ -15,7 +15,7 @@ hideAnchor: true
 
 ## Mission
 
-To create the easiest way to discover insights about products and users
+To create the easiest way to discover insights about products and its users
 
 ## Responsibilities
 
