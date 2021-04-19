@@ -7,6 +7,7 @@ import { SEO } from '../../../components/seo'
 import { Structure } from '../../../components/Structure'
 import { BlogSidebar } from '../../../components/Blog/BlogSidebar'
 import { BlogCategories } from '../../../components/Blog/constants/categories'
+import { DarkModeToggle } from '../../../components/DarkModeToggle'
 
 const BlogCategoryPage = ({
     data: {
@@ -38,26 +39,34 @@ const BlogCategoryPage = ({
     const title = BlogCategories.find((k) => k.slug === category)?.title
 
     return (
-        <Layout>
-            <SEO title="PostHog Blog" description="What we are up to, every week." />
+        <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
+            <Layout headerBackgroundTransparent={true}>
+                <SEO title="PostHog Blog" description="What we are up to, every week." />
 
-            <Structure.Section className="my-12" width="5xl">
-                <Structure.SectionHeader title={`Blog: ${title}`} titleTag="h1" titleClassName="text-center" />
-
-                {latestPost}
-                <NewsletterForm compact={true} bgColor="#FFFFFF" />
-
-                <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
-                    <div className="hidden lg:block lg:w-1/4 lg:pr-8">
-                        <BlogSidebar />
+                <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
+                    <div className="mb-12 w-11/12 mx-auto text-right">
+                        <DarkModeToggle />
                     </div>
-                    <div className="w-full lg:w-3/4 lg:pl-8">
-                        <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
-                        {nonLatestPosts}
-                    </div>
+
+                    <Structure.Section className="my-12" width="5xl">
+                        <Structure.SectionHeader title={`Blog: ${title}`} titleTag="h1" titleClassName="text-center" />
+
+                        {latestPost}
+                        <NewsletterForm compact={true} bgColor="#FFFFFF" />
+
+                        <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
+                            <div className="hidden lg:block lg:w-1/4 lg:pr-8">
+                                <BlogSidebar />
+                            </div>
+                            <div className="w-full lg:w-3/4 lg:pl-8">
+                                <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
+                                {nonLatestPosts}
+                            </div>
+                        </div>
+                    </Structure.Section>
                 </div>
-            </Structure.Section>
-        </Layout>
+            </Layout>
+        </div>
     )
 }
 
