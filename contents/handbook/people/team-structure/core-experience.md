@@ -7,11 +7,11 @@ hideAnchor: true
 
 ## People
 
-- [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/company/team/#eric-duong-software-engineer)
-- [Paolo D'Amico (Product Manager)](/handbook/company/team/)
-- [Buddy Williams, Full Stack Engineer](/handbook/company/team/#buddy-williams-software-engineer)
+- [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/people/team/#eric-duong-software-engineer)
+- [Paolo D'Amico (Product Manager)](/handbook/people/team#paolo-damico-product-team)
+- [Buddy Williams, Full Stack Engineer](/handbook/people/team/#buddy-williams-software-engineer)
 - Sam Winslow, Full Stack Engineer
-- [Li Yi Yu, Full Stack Engineer]((/handbook/company/team/#li-yi-yu-software-engineer))
+- [Li Yi Yu, Full Stack Engineer]((/handbook/people/team/#li-yi-yu-software-engineer))
 
 ## Mission
 
