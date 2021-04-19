@@ -535,7 +535,7 @@ In terms of cycling– a friend once convinced me to go on a bike ride from San 
 
 </div>
 
-<!--- Marius Andra Bio -->
+<!--- Buddy Williams Bio -->
 
 <div class="team-row" markdown="1">
 
