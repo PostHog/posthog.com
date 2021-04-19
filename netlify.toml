@@ -16,3 +16,98 @@
 [[redirects]]
     from = "/handbook/company/team"
     to = "/handbook/people/team"
+
+
+[[redirects]]
+    from = "/docs/libraries/android"
+    to = "/docs/integrations/android-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/docusaurus"
+    to = "/docs/integrations/docusaurus-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/elixir"
+    to = "/docs/integrations/elixir-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/flutter"
+    to = "/docs/integrations/flutter-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/gatsby"
+    to = "/docs/integrations/gatsby-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/go"
+    to = "/docs/integrations/go-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/ios"
+    to = "/docs/integrations/ios-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/js"
+    to = "/docs/integrations/js-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/message-formatting"
+    to = "/docs/integrations/message-formatting"
+
+
+[[redirects]]
+    from = "/docs/libraries/microsoft-teams"
+    to = "/docs/integrations/microsoft-teams"
+
+
+[[redirects]]
+    from = "/docs/libraries/node"
+    to = "/docs/integrations/node-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/php"
+    to = "/docs/integrations/php-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/python"
+    to = "/docs/integrations/python-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/react-native"
+    to = "/docs/integrations/react-native-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/ruby"
+    to = "/docs/integrations/ruby-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/rudderstack"
+    to = "/docs/integrations/rudderstack-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/segment"
+    to = "/docs/integrations/segment-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/sentry"
+    to = "/docs/integrations/sentry-integration"
+
+
+[[redirects]]
+    from = "/docs/libraries/slack"
+    to = "/docs/integrations/slack"
