@@ -588,6 +588,33 @@ I'm looking forward to all we will accomplish together.
 
 </div>
 
+<!--- Li Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Li Yi Yu, Full Stack Engineer
+
+<div class="team-left-bio" markdown="1">
+
+HI! I'm Li from Brooklyn, NYC. It wasn't until towards the end of college that I fell in love with coding and saw it as a potential career path. After that, I jumped into a programming bootcamp, and here I am today!
+
+Some things I enjoy: karaoke, Switch/PC/board games, DIY stuff, anime, kpop, crying on hikes because I've spent too much time indoors, and exploring the NYC food scene
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Li portrait](../../images/team/Li.png)
+
+</div>
+
+</div>
 <!--- Contributors Section -->
 
 ## Contributors
