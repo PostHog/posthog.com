@@ -10,12 +10,24 @@ export interface Library {
     pullRequests: number
 }
 
+const ONE_HOUR = 1000 * 60 * 60
+
 export const libraryStatsLogic = kea({
     loaders: {
         libraries: [
             [] as Library[],
             {
                 loadLibraryStats: async () => {
+                    // Try to load a cache first to prevent GitHub rate limiting
+
+                    const statsCacheTimestamp = localStorage.getItem('library_stats_timestamp')
+                    if (statsCacheTimestamp && new Date().getTime() - Number(statsCacheTimestamp) < ONE_HOUR) {
+                        const librariesListCache = localStorage.getItem('library_stats_timestamp_cache')
+                        if (librariesListCache) {
+                            return JSON.parse(librariesListCache)
+                        }
+                    }
+
                     for (let i = 0; i < librariesList.length; ++i) {
                         const library = librariesList[i]
                         const repoRes = await (await fetch(`https://api.github.com/repos/${library.path}`)).json()
@@ -45,7 +57,11 @@ export const libraryStatsLogic = kea({
                         }
                     }
 
-                    return librariesList.sort((a, b) => b.stars - a.stars)
+                    const sortedLibraries = librariesList.sort((a, b) => b.stars - a.stars)
+                    localStorage.setItem('library_stats_timestamp_cache', JSON.stringify(sortedLibraries))
+                    localStorage.setItem('library_stats_timestamp', String(new Date().getTime()))
+
+                    return sortedLibraries
                 },
             },
         ],
