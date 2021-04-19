@@ -1,20 +1,30 @@
 import React, { useState } from 'react'
 import { CallToAction } from '../CallToAction'
+import { mergeClassList } from '../../lib/utils'
 
 import checkDark from './images/check-dark.svg'
 
-export const NewsletterForm = ({ compact = false, bgColor = '#08042f' }: { compact?: boolean; bgColor?: string }) => {
+export const NewsletterForm = ({
+    compact = false,
+    bgColor = '#08042f',
+    className = '',
+}: {
+    compact?: boolean
+    bgColor?: string
+    className?: string
+}) => {
     const [email, setEmail] = useState('')
+    const classList = mergeClassList(
+        'rounded-lg flex justify-between flex-col lg:flex-row py-6 px-12 relative z-10 items-center justify-between',
+        className
+    )
 
     return compact ? (
         <div className="w-full mx-auto my-24">
             <div className="bg-neon w-full h-full p-1 rounded">
-                <div
-                    className="rounded-lg flex justify-between flex-col lg:flex-row py-6 px-12 relative z-10 items-center justify-between"
-                    style={{ backgroundColor: bgColor }}
-                >
+                <div className={classList}>
                     <img src={checkDark} alt="sign up for mailing list" className="block lg:mr-3 h-8 mb-0" />
-                    <span className="mt-4 lg:mt-0 font-bold text-gray-900 flex-grow">
+                    <span className="mt-4 lg:mt-0 font-bold flex-grow">
                         Yes, I'd love to receive PostHog updates in my inbox at
                     </span>
                     <form
@@ -29,7 +39,7 @@ export const NewsletterForm = ({ compact = false, bgColor = '#08042f' }: { compa
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full p-2 bg-white text-gray-900 border-b-2 border-gray-800 mt-8 lg:mt-0 lg:mx-6"
+                            className="block w-full p-2 bg-transparent border-b-2 border-gray-600 mt-8 lg:mt-0 lg:mx-6"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"
@@ -45,7 +55,11 @@ export const NewsletterForm = ({ compact = false, bgColor = '#08042f' }: { compa
                                 defaultValue
                             />
                         </div>
-                        <input type="submit" className="button-primary mt-8 lg:mt-0" value="Subscribe" />
+                        <input
+                            type="submit"
+                            className="button-primary mt-8 lg:mt-0 border-none cursor-pointer"
+                            value="Subscribe"
+                        />
                     </form>
                 </div>
             </div>

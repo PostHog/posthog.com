@@ -52,7 +52,10 @@ const BlogCategoryPage = ({
                         <Structure.SectionHeader title={`Blog: ${title}`} titleTag="h1" titleClassName="text-center" />
 
                         {latestPost}
-                        <NewsletterForm compact={true} bgColor="#FFFFFF" />
+                        <NewsletterForm
+                            compact={true}
+                            className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
+                        />
 
                         <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
                             <div className="hidden lg:block lg:w-1/4 lg:pr-8">

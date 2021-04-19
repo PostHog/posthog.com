@@ -8,7 +8,10 @@ import './style.scss'
 export function BlogFooter() {
     return (
         <Structure.Section width="4xl">
-            <NewsletterForm compact={true} bgColor="#FFFFFF" />
+            <NewsletterForm
+                compact={true}
+                className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
+            />
 
             <BlogPosts
                 render={(posts) => {
