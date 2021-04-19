@@ -582,7 +582,7 @@ I'm looking forward to all we will accomplish together.
 
 <div class="team-right-image" markdown="1">
 
-![Marius Andra portrait](../../images/team/Buddy.png)
+![Buddy Williams portrait](../../images/team/Buddy.png)
 
 </div>
 
