@@ -7,11 +7,11 @@ hideAnchor: true
 
 ## People
 
-- [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/company/team/#eric-duong-software-engineer)
-- [Paolo D'Amico (Product Manager)](/handbook/company/team/)
-- Buddy Williams, Full Stack Engineer
+- [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/people/team/#eric-duong-software-engineer)
+- [Paolo D'Amico (Product Manager)](/handbook/people/team#paolo-damico-product-team)
+- [Buddy Williams, Full Stack Engineer](/handbook/people/team/#buddy-williams-software-engineer)
 - Sam Winslow, Full Stack Engineer
-- Li Yi Yu, Full Stack Engineer
+- [Li Yi Yu, Full Stack Engineer]((/handbook/people/team/#li-yi-yu-software-engineer))
 
 ## Mission
 
@@ -20,13 +20,13 @@ The most easy to use and useful analytics tool/experience to discover insights a
 ## Responsibilities
 
 - Extending feature set as suggested by requests, by our own ideas, and by need for parity with other platforms
-- Maintaining data quality and clarify
-- Ensuring performant and clear user experience across all analytic functionality
+- Maintaining data quality and clarity
+- Ensuring performant and clear user experience across all analytics functionality
 
 
 ## Customer
 
-- Any posthog user, whether they're an engineer or product manager, should be able to effectively analyze their product
+- Any PostHog user, whether they're an engineer or a product manager, should be able to effectively analyze their product.
 
 ## Output metrics
 
