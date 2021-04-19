@@ -11,7 +11,7 @@ hideAnchor: true
 - [Paolo D'Amico (Product Manager)](/handbook/company/team/)
 - [Buddy Williams, Full Stack Engineer](/handbook/company/team/#buddy-williams-software-engineer)
 - Sam Winslow, Full Stack Engineer
-- Li Yi Yu, Full Stack Engineer
+- [Li Yi Yu, Full Stack Engineer]((/handbook/company/team/#li-yi-yu-software-engineer))
 
 ## Mission
 
