@@ -34,7 +34,7 @@ export const libraryStatsLogic = kea({
                         librariesList[i]['stars'] = repoRes.stargazers_count
                         librariesList[i]['openIssues'] = 0
                         librariesList[i]['pullRequests'] = 0
-                        librariesList[i]['lastCommit'] = '-'
+                        librariesList[i]['lastCommit'] = new Date(repoRes.pushed_at).toLocaleDateString('en-GB')
 
                         if (typeof repoRes.open_issues_count === 'number' && repoRes.open_issues_count > 0) {
                             const pullRequestsRes = await (
@@ -43,16 +43,6 @@ export const libraryStatsLogic = kea({
 
                             librariesList[i]['openIssues'] = repoRes.open_issues_count - pullRequestsRes.length
                             librariesList[i]['pullRequests'] = pullRequestsRes.length
-                        }
-
-                        const commitsRes = await (
-                            await fetch(`https://api.github.com/repos/${library.path}/commits`)
-                        ).json()
-
-                        if (commitsRes) {
-                            librariesList[i]['lastCommit'] = new Date(
-                                commitsRes[0].commit.author.date
-                            ).toLocaleDateString('en-GB')
                         }
                     }
 
