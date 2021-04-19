@@ -20,13 +20,13 @@ The most easy to use and useful analytics tool/experience to discover insights a
 ## Responsibilities
 
 - Extending feature set as suggested by requests, by our own ideas, and by need for parity with other platforms
-- Maintaining data quality and clarify
+- Maintaining data quality and clarity
 - Ensuring performant and clear user experience across all analytic functionality
 
 
 ## Customer
 
-- Any posthog user whether they're an engineer or product manager should be able to effectively analyze their product
+- Any PostHog user, whether they're an engineer or a product manager, should be able to effectively analyze their product.
 
 ## Output metrics
 
