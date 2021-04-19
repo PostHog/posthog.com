@@ -21,7 +21,7 @@ The most easy to use and useful analytics tool/experience to discover insights a
 
 - Extending feature set as suggested by requests, by our own ideas, and by need for parity with other platforms
 - Maintaining data quality and clarity
-- Ensuring performant and clear user experience across all analytic functionality
+- Ensuring performant and clear user experience across all analytics functionality
 
 
 ## Customer
