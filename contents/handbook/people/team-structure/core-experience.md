@@ -32,6 +32,8 @@ To create the easiest way to discover insights about products and users
 
 - Retention per feature
 
+[Dashboard](https://app.posthog.com/dashboard/1124)
+
 ## Slack channel
 
 [#team-core-experience](https://posthog.slack.com/messages/team-core-experience)
