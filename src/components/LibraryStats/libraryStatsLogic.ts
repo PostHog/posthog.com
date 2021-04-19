@@ -19,7 +19,6 @@ export const libraryStatsLogic = kea({
             {
                 loadLibraryStats: async () => {
                     // Try to load a cache first to prevent GitHub rate limiting
-
                     const statsCacheTimestamp = localStorage.getItem('library_stats_timestamp')
                     if (statsCacheTimestamp && new Date().getTime() - Number(statsCacheTimestamp) < ONE_HOUR) {
                         const librariesListCache = localStorage.getItem('library_stats_timestamp_cache')
