@@ -15,7 +15,7 @@ hideAnchor: true
 
 ## Mission
 
-The most easy to use and useful analytics tool/experience to discover insights about your product and users
+To create the easiest way to discover insights about products and users
 
 ## Responsibilities
 
