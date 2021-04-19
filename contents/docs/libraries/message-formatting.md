@@ -6,25 +6,50 @@ showTitle: true
 
 Message formatting works the same way whether you are using Slack or Microsoft Teams.
 
-Tokens are in the format `[type.prop]`.
+Tokens are in the format `[type.property]`.
 
 Message format can be customised when editing/creating an Action.
 
-# Default
+## Default
 By default, the message format is
 ```
 [action.name] was triggered by [user.name].
 ```
 
-# Types
+## Types
+### Action
+#### Allowed Properties 
 
-## Action
 - `name`: name of triggered action with link.
 
-## Event
+### Event
+#### Allowed Properties
+
 - `name`: name of the event which triggered the Action with link.
 
-## User
+##### Accessing event properties
+
+You can also access any property on the event that triggered the webhook by using `event.properties.your_desired_prop`.
+
+This can be a property set by PostHog, such as `event.properties.ip`, and it can also use any custom properties you set, like `event.properties.username`. 
+
+If a property does not exist on the event, the webhook message will say `undefined` for the property.
+
+For example, the followijg message format:
+
+```
+[user.name] triggered [action.name] from [event.properties.country]
+```
+
+Would yield the a message like the one below, if the property `country` is not set on the event:
+
+```
+John Doe triggered Pageview from undefined
+```
+
+### User
+#### Allowed Properties
+
 - `name`: user's username, email, or distinct ID depending on availability.
 - `ip`: IP address used by user when the action was triggered.
 - `os`: user's Operating System.

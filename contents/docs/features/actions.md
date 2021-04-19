@@ -80,15 +80,15 @@ Page views can match urls containing a string or match exactly.
 
 Frontend Elements are actions based on some element on your website, such as a button or an input. The easiest way to select them is with the 'Inspect element on your site' functionality described above. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
 
-Our [Autocapture](/docs/integrations/js-integration#autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
+Our [Autocapture](/docs/libraries/js#autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
 
-Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/integrations/js-integration#autocapture) for more details.
+Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/libraries/js#autocapture) for more details.
 
 <br />
 
 **Custom Event**
 
-Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/integrations).
+Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/libraries).
 <br />
 
 <br /> 

@@ -36,7 +36,7 @@ You can also click each person/user to view a their entire event history.
 
 You will see in the first pictures on this page that there is a blue 'posthog team' button. That button represents a filter applied to this table.
 
-You can filter events by [properties](/docs/integrations/js-integration#sending-user-information) and [Cohorts](/docs/features/cohorts). In the example picture, 'posthog team' is a cohort made up of users with emails that contain "posthog.com" i.e. our team.
+You can filter events by [properties](/docs/libraries/js#sending-user-information) and [Cohorts](/docs/features/cohorts). In the example picture, 'posthog team' is a cohort made up of users with emails that contain "posthog.com" i.e. our team.
 
 <br />
 
