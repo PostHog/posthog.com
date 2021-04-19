@@ -106,3 +106,13 @@
 [[redirects]]
     from = "/docs/integrations/slack"
     to = "/docs/libraries/slack"
+
+
+[[redirects]]
+    from = "/handbook/company/structure"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+
+[[redirects]]
+    from = "/handbook/company/team"
+    to = "/handbook/people/team"
