@@ -34,24 +34,30 @@ Make using and developing for PostHog as reliable as running water. Wherever you
 
 ## Output metrics
 
-- VPC
-  - Metric: Retention
-  - Objective: Better than cloud
-- Cloud
-  - Metric: Data loss %
-  - Objective: < 0.1%
-  - Metric: Uptime
-  - Objective: > 99.99%
-  - Metric: Speed
-  - Objectives
-    - Event ingestion: TBD
-    - Query response: TBD
-    - Overall: Events should be ingested as we scale and infra should facilitate analytics at speed of click
-  - Metric: Infra Costs 
-  - Objective: Our costs should grow at a rate that is sublinear relative to scale
-- Dev Experience
-  - Metric: Developer experience (relating to infra) (maybe NPS?)
-  - Objective: TBD (maybe NPS?)
+### VPC
+###### Retention 
+- Metric: Retention
+- Objective: Better than cloud
+### Cloud
+###### Data Loss
+- Metric: Data loss %
+- Objective: < 0.1%
+###### Uptime 
+- Metric: Uptime
+- Objective: > 99.99%
+###### Speed 
+- Metric: Speed
+- Objectives
+  - Event ingestion: TBD
+  - Query response: TBD
+- Overall: Events should be ingested as we scale and infra should facilitate analytics at speed of click
+##### Cost 
+- Metric: Infra Costs 
+- Objective: Our costs should grow at a rate that is sublinear relative to scale
+### Dev Experience
+##### Dev Experience NPS (Infra)
+- Metric: Developer experience (relating to infra) (maybe NPS?)
+- Objective: TBD (maybe NPS?)
 
 ## Slack channel
 
