@@ -25,10 +25,10 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-- **Infrastructure and Deployments**
+- **[Infrastructure and Deployments](infrastructure)**
     - [James Greenhill](/handbook/company/team/#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
     - [Karl-Aksel Puulmann](/handbook/company/team/#karl-aksel-puulmann-software-engineer) (Full Stack Engineer)
-karl-aksel-puulmann
+
 <br />
 
 - **[Growth engineering](growth-engineering)**
