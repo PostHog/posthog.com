@@ -25,7 +25,7 @@ export const OpenRoles = () => {
                 <Structure.SectionHeader
                     title="Open roles"
                     titleTag="h2"
-                    leadText="Our team is proactively looking for the following:"
+                    leadText="When you click through some of these jobs might say 'San Francisco' or 'London', but we're hiring all over the world. Our team is proactively looking for the following:"
                     leadTextClassName="opacity-80"
                 />
 
