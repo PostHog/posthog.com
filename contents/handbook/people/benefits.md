@@ -26,7 +26,7 @@ In the US, our medical insurance is provided via UnitedHealthcare and managed vi
 
 PostHog pays 75% of the premium of the platinum plan, and you pay the other 25%. The same conditions apply to added dependents. UnitedHealthcare also offers cheaper Gold and Silver plans at lower cost, which you can choose if you'd like to contribute less. The exact costs depend on factors like age - the People team can create a quote in Gusto. 
 
-In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 excess per policy year) and [Medicash] as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
+In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
 
 ### Mental Health Support
 
