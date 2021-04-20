@@ -16,15 +16,6 @@ hideAnchor: true
 
 Make using and developing for PostHog as reliable as running water. Wherever you want it.
 
-## Responsibilities
-Concrete things we take responsibility over:
-
-- [app.posthog.com](app.posthog.com) and its infrastructure
-- On Prem & Single Tenant deployments
-- CI/CD - How we deploy
-- Data infrastructure (Clickhouse, Kafka)
-- Monitoring and Alerting stack
-
 ## Goals 
 
 - We don't lose events
@@ -34,6 +25,15 @@ Concrete things we take responsibility over:
 - Ship anywhere
 - Stack performs at speed of click
 - Support Small Teams (and contributors) in building and debugging Posthog
+
+## Responsibilities
+Concrete things we take responsibility over:
+
+- [app.posthog.com](app.posthog.com) and its infrastructure
+- On Prem & Single Tenant deployments
+- CI/CD - How we deploy
+- Data infrastructure (Clickhouse, Kafka)
+- Monitoring and Alerting stack
 
 ## Customer
 
