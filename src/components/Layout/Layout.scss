@@ -1,28 +1,47 @@
 @import '../../vars';
 
-// Some comment
-/* latin */
-@font-face {
-    font-family: 'Lato';
-    src: url(https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wXiWtFCc.woff2);
-}
-
-/*Gosha Sans*/
+/* Gosha Sans */
 @font-face {
     font-family: 'Gosha Sans';
     src: url('/fonts/GoshaSans-Bold.woff') format('woff');
     src: url('/fonts/GoshaSans-Bold.woff2') format('woff2');
 }
 
+/* Good Sans */
+@font-face {
+    font-family: 'Good Sans';
+    src: url('/fonts/GoodSans-Medium.woff') format('woff');
+    src: url('/fonts/GoodSans-Medium.woff2') format('woff2');
+    font-weight: normal;
+}
+
+/* Good Sans Bold */
+@font-face {
+    font-family: 'Good Sans';
+    src: url('/fonts/GoodSans-Bold.woff') format('woff');
+    src: url('/fonts/GoodSans-Bold.woff2') formt('woff2');
+    font-weight: bold;
+}
+
+/* Inter */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+/* Inter Bold */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+}
+
 html {
-    font-family: lato !important;
+    font-family: 'Good Sans' !important;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     overscroll-behavior-y: none;
-}
-
-body {
-    margin: 0;
 }
 
 article,
@@ -195,7 +214,6 @@ textarea {
 html {
     font: 112.5%/1.45em georgia, serif;
     box-sizing: border-box;
-    overflow-y: scroll;
 }
 * {
     box-sizing: inherit;
@@ -208,14 +226,17 @@ html {
 }
 body {
     color: hsla(0, 0%, 0%, 0.8);
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-    font-weight: normal;
-    word-wrap: break-word;
+    font-family: 'Good Sans', Helvetica, Arial, sans-serif !important;
     font-kerning: normal;
+    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    font-weight: normal;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    margin: 0;
+    overscroll-behavior: none;
 }
 img {
     max-width: 100%;
@@ -274,7 +295,7 @@ h3 {
     color: inherit;
     font-weight: bold;
     text-rendering: optimizeLegibility;
-    font-size: 32px;
+    font-size: 30px;
     line-height: normal;
     font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
@@ -338,18 +359,6 @@ hgroup {
     padding-top: 0;
     margin-bottom: 1.45rem;
 }
-ul {
-    margin-left: 1.45rem;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    list-style-position: outside;
-    list-style-image: none;
-}
 ol {
     margin-left: 1.45rem;
     margin-right: 0;
@@ -361,6 +370,10 @@ ol {
     margin-bottom: 1.45rem;
     list-style-position: outside;
     list-style-image: none;
+}
+li {
+    font-size: 16px;
+    line-height: 1.5;
 }
 dl {
     margin-left: 0;
@@ -392,7 +405,7 @@ p {
     padding-right: 0;
     padding-top: 0;
     margin-bottom: 1.45rem;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -612,8 +625,7 @@ td:last-child {
     color: rgba(0, 0, 0, 0.85);
     font-size: 18px;
     line-height: 64px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
-        'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: 'Good Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-variant: tabular-nums;
     white-space: nowrap;
     text-decoration: none;
@@ -731,19 +743,7 @@ header {
 
 .sidebarWrapper {
     margin: 0 10px;
-}
-
-.footer-universal {
-    background: #353f6f;
-    color: #fff;
-    position: relative;
-    left: 0px;
-    width: '100%';
-    top: '100%';
-    margin-top: 0;
-    padding-top: 40px;
-    padding-bottom: 80px;
-    height: 100%;
+    font-family: 'Inter', 'Good Sans', 'Arial' !important;
 }
 
 .ant-menu,
@@ -755,7 +755,7 @@ header {
 }
 
 li > .ant-menu-submenu-title span {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .ant-menu-submenu a {
@@ -855,22 +855,6 @@ a.ant-anchor-link-title:hover {
     border-color: #1d4aff !important;
 }
 
-.footer-universal a {
-    color: #fff;
-}
-.footer-links {
-    list-style-type: none;
-    margin-top: 20px;
-    line-height: 1em;
-    text-align: left;
-}
-
-.footer-links-header {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
 .footer-message {
     text-align: left;
 }
@@ -951,18 +935,15 @@ a.ant-anchor-link-title:hover {
 
 .blogHeaderTitle {
     position: relative;
-    height: calc(100% - 64px);
-    top: 0;
     width: 80%;
     color: white;
     vertical-align: bottom;
     left: calc((100% - 960px) * 0.5 + 2.175rem);
+    max-width: 960px;
 }
 
 .blogHeaderTitle h1 {
-    position: absolute;
-    color: white;
-    bottom: 0;
+    margin-top: 24px;
 }
 
 .blog-post p + h2 {
@@ -1278,12 +1259,6 @@ table td {
     text-align: left;
 }
 
-li {
-    margin-bottom: calc(1.45rem / 2);
-    font-size: 18px;
-    color: rgba(0, 0, 0, 0.8);
-}
-
 .post-page-sub-header {
     display: block;
     height: 60px;
@@ -1294,7 +1269,17 @@ li {
     right: 50px;
 }
 
-.post-page-wrapper {
+.post-page-wrapper .docsPagesContent,
+.rightBar {
+    p,
+    li,
+    ul,
+    a,
+    td,
+    th {
+        font-family: 'Inter', 'Good Sans', 'Arial' !important;
+    }
+
     a img:hover {
         opacity: 0.7;
     }
@@ -1379,6 +1364,7 @@ li {
     header.menuHeader {
         width: 100% !important;
         padding: 0 !important;
+        background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
     }
 
     .menuHeaderWrapper {
@@ -1494,7 +1480,7 @@ for all other rows the portrait image wraps above bio*/
 }
 
 .main-nav-cta-dark-bg {
-    background-color: #353f6f;
+    background-color: #222d5b;
     border-color: #fff;
     border-radius: 2px;
     color: #fff;
@@ -1516,8 +1502,8 @@ for all other rows the portrait image wraps above bio*/
 
     .main-nav-cta-dark-bg {
         background-color: #fff !important;
-        color: #353f6f !important;
-        border-color: #353f6f !important;
+        color: #222d5b !important;
+        border-color: #222d5b !important;
     }
 }
 
@@ -1626,6 +1612,15 @@ div::-webkit-scrollbar-thumb:hover {
     }
 }
 
-.text-center {
-    text-align: center;
+.contributor-card-tooltip {
+    .ant-tooltip-inner {
+        background-color: #0f041f;
+    }
+}
+
+.anchor-link,
+.post-toc-anchor {
+    svg {
+        filter: invert(83%) sepia(0%) saturate(1327%) hue-rotate(153deg) brightness(92%) contrast(87%);
+    }
 }

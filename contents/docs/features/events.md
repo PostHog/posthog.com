@@ -20,7 +20,7 @@ To see your live events table, click 'Events' on the left sidebar.
 
 Here you will see a live feed of Events as they are happening. 
 
-<br>
+<br />
 
 ## Event Properties
 
@@ -30,15 +30,15 @@ You can view the properties of each event by clicking on the items in the ‘Eve
 
 You can also click each person/user to view a their entire event history.
 
-<br>
+<br />
 
 ## Event Filtering
 
 You will see in the first pictures on this page that there is a blue 'posthog team' button. That button represents a filter applied to this table.
 
-You can filter events by [properties](/docs/integrations/js-integration#sending-user-information) and [Cohorts](/docs/features/cohorts). In the example picture, 'posthog team' is a cohort made up of users with emails that contain "posthog.com" i.e. our team.
+You can filter events by [properties](/docs/libraries/js#sending-user-information) and [Cohorts](/docs/features/cohorts). In the example picture, 'posthog team' is a cohort made up of users with emails that contain "posthog.com" i.e. our team.
 
-<br>
+<br />
 
 ## Autocapture Event Tracking
 
@@ -57,19 +57,19 @@ Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` a
 As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
 
 If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/features/actions).
-<br>
+<br />
 
 ## Push-based Event Tracking
 
 Most users of PostHog will want to combine their back-end data, such as user information, with the front end actions of those users in their UI.
 
 There are two ways of passing data to PostHog – the API or through the JS snippet.
-<br>
+<br />
 
 ### API
 
 Our API documentation is available [here](/docs/api/overview).
-<br>
+<br />
 
 ### JS Snippet
 

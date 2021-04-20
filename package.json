@@ -13,15 +13,18 @@
     ],
     "scripts": {
         "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
-        "start": "gatsby develop",
+        "start": "gatsby develop -H 0.0.0.0",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "typegen": "kea-typegen write ."
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.22",
+        "@typescript-eslint/eslint-plugin": "^4.20.0",
         "antd": "^3.23.2",
+        "chart.js": "^2.9.4",
         "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
         "eslint-plugin-flowtype": "^2.50.3",
@@ -35,9 +38,10 @@
         "gatsby-plugin-posthog": "^1.0.1",
         "gatsby-plugin-react-helmet": "^3.1.7",
         "gatsby-plugin-remove-trailing-slashes": "^2.3.11",
-        "gatsby-plugin-sass": "^2.3.16",
+        "gatsby-plugin-sass": "^4.2.0",
         "gatsby-plugin-sharp": "^2.2.22",
         "gatsby-plugin-sitemap": "^2.12.0",
+        "gatsby-plugin-smoothscroll": "^1.2.0",
         "gatsby-plugin-typescript": "^2.4.24",
         "gatsby-remark-autolink-headers": "^2.1.10",
         "gatsby-remark-copy-linked-files": "^2.3.2",
@@ -52,10 +56,10 @@
         "kea": "^2.2.2",
         "kea-loaders": "^0.3.0",
         "kea-router": "^0.5.1",
+        "kea-typegen": "^0.5.3",
         "node-fetch": "^2.6.1",
-        "node-sass": "^4.14.1",
         "postcss": "^8.2.6",
-        "prism-react-renderer": "^1.1.1",
+        "prism-react-renderer": "^1.2.0",
         "prismjs": "^1.23.0",
         "query-string": "^6.13.1",
         "react": "^16.13.1",
@@ -69,9 +73,11 @@
         "react-responsive": "^6.1.2",
         "redux": "^4.0.5",
         "reselect": "^4.0.0",
+        "sass": "^1.32.8",
         "typescript": "^4.0.2"
     },
     "devDependencies": {
+        "@types/chart.js": "^2.9.31",
         "@types/mdx-js__react": "^1.5.3",
         "@types/react-helmet": "^6.1.0",
         "@types/react-modal": "^3.10.6",
@@ -86,7 +92,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "node mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
+            "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
     "lint-staged": {

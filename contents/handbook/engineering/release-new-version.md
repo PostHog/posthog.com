@@ -24,7 +24,7 @@ Three days before we release, on Monday, we institute a code freeze. We branch m
 
 <br />
 
-<input type="checkbox"/> Write up the PostHog Array [blog post](posthog-array)
+<input type="checkbox"/> Write up the PostHog Array [blog post](/handbook/growth/marketing/posthog-array)
 
 <input type="checkbox"/> Copy from PostHog Array and write up the changes into `CHANGELOG.md` following the structure of the previous release
   - `git add CHANGELOG.md`

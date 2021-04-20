@@ -3,7 +3,7 @@ title: Plugins
 sidebar: Docs
 showTitle: true
 ---
-<br>
+<br />
 
 > **Important:** Our Plugins functionality is still in **Beta** mode. Please report any issues you find [on GitHub](https://github.com/PostHog/posthog/issues). 
 

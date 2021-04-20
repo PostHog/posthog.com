@@ -25,12 +25,15 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 1. When someone asks for something, reply back with a deadline or by noting that you already did it. Answers like: 'will do,' 'OK,' or 'it is on my to-do list' are not helpful. If it is a small task for you but will unblock someone else, consider spending a few minutes to do the task so the other person can move forward.
 1. By default, avoid creating private groups for internal discussions.
 
-We make things public by default because [transparency is part of Communication, one of our values](/handbook/values/#communication). The only kinds of things that are not public by default include:
+## Public by default
 
-- Security vulnerabilities
-- Financial information
-- Confidential agreements we have with external parties
-- Personal information about our users or the PostHog team.
+We make things public by default because [transparency is part of Communication, one of our values](/handbook/values/#communication). The kinds of information we share falls into one of three buckets:
+
+- _Public_ - most things, including our product, roadmap, handbook and strategy. 
+- _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
+- _Private internally_ - personal team information, i.e. compensation, disciplinary issues.
+
+Information that is not publicly shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
 
 ## Written Communication
 
@@ -88,9 +91,9 @@ Use video calls if you find yourself going back and forth, whether in an issue, 
 1. Most scheduled meetings should have a Google Doc linked or a relevant GitHub issue. This contains an agenda and includes any necessary preparation materials.
 1. Please click 'Guests can modify event' so people can update the time in the calendar instead of having to reach out via other channels. You can configure this to be checked by default under [Event Settings](https://calendar.google.com/calendar/r/settings).
 1. Try to have your video on at all times because it's much more engaging for participants. Having pets, children, significant others, friends, and family visible during video chats is encouraged - please introduce them!
-1. As a remote company, we are always striving to have the highest fidelity, collaborative conversations. Use of a headset with a microphone is strongly recommended - use your company card if you need to get one.
+1. Use of a headset with a microphone is strongly recommended - use your company card if you need to get one.
 1. Always advise participants to mute their mics if there is unnecessary background noise to ensure the speaker can be heard by all attendees.
-1. You should take notes of the points and to-dos during the meeting. Being able to structure conclusions and follow up actions in real-time makes a video call more effective than an in-person meeting. If it is important enough to schedule a meeting, it is important enough to take notes. <!-- This could end "to have taken notes," "to have notes," or even "to take notes." -->
+1. Take notes of the points and to-dos during the meeting. Being able to structure conclusions and follow up actions in real-time makes a video call more effective than an in-person meeting. If it is important enough to schedule a meeting, it is important enough to take notes.
 1. We start on time and do not wait for people. People are expected to join no later than the meeting's scheduled minute, and we don't spend time bringing latecomers up to speed.
 1. It can feel rude in video calls to interrupt people. This is because the latency causes you to talk over the speaker for longer than during an in-person meeting. You should not be discouraged by this, as the questions and context provided by interruptions are valuable.
 1. We end at the scheduled time. Again, it might feel rude to end a meeting, but you're actually allowing all attendees to be on time for their next meeting.

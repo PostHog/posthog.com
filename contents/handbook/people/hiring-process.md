@@ -36,7 +36,7 @@ If you receive an application directly emailed to you or if someone contacts us 
 
 * Forward their email onto our [dedicated Workable email address](mailto:posthog@jobs.workablemail.com) - this is the most effective option.
 * If you think they are a strong candidate but they didn't email, introduce them directly to us via our [careers email address](mailto:careers@posthog.com).
-* As a last resort, ask them to apply via the relevant link on our [Careers page](heeps://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
+* As a last resort, ask them to apply via the relevant link on our [Careers page](https://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
 
 ### Booking meetings
 
@@ -132,17 +132,16 @@ This gives the candidate a chance to learn how we work, and for us to see the qu
 
 We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not you can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. In case the candidate is unable to accept pay for the SuperDay, we will donate the amount to a charity of their choice. 
 
-This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. It should be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. The tasks should be as close as possible to those that the candidate would be working on every day.
+This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. For the Full Stack role, the task involves building a small web service (both backend and frontend) over a full day. The task is designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. The tasks should be as close as possible to those that the candidate would be working on every day.
 
 In advance of the SuperDay, you will need to do some additional prep to ensure that the candidate has a great experience:
 
 * Send them an email in the first instance to schedule the SuperDay - you should do this as soon as possible, as candidates often will need to book a day off work. Use the Workable email template for this. If the task involves them doing 'real' work for PostHog, you should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason. 
-* (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There are different templates for this email in Workable, depending on the role - this will probably need customising. 
+* (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There is a   template for this email in Workable, depending on the role - this will probably need customising. 
 * (One day before the SuperDay) Create a private channel in Slack for the candidate, you and anyone else relevant - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. You may need to add the candidate to one of our systems depending on the role, e.g. Workable for a recruiter SuperDay, but on the whole this should be minimized.
-* (One day before the SuperDay) Invite the candidate to a kickoff meeting with you at the start of the day, and our daily standup at the end. You may also want to have a proper wrap up with them immediately after the team standup. 
-* (One day before the SuperDay) Send the candidate the task - aim to send this late on the day before so that some candidates won't happen to have more time to prepare than others and the process remains fair (you can Schedule Send your email in Gmail for this). 
+* (One day before the SuperDay) Invite the candidate to a kickoff meeting with the hiring manager at the start of the day. On days where we have a [standup](https://posthog.com/handbook/company/standups) scheduled, invite them along. On days without standup, schedule an informal session with some team members to give them a chance to learn more about our culture.  You may also want to have a proper wrap up with them at the end of their day. 
+* (One the SuperDay) Send the candidate the task - aim to send this before the kick-off session. 
 * (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like you need to check in with them - let them get on with the task and trust that they will message you. 
-* (One day after the SuperDay) Schedule in the hiring decision meeting. 
 * (One day after the SuperDay) Pay the candidate using the bank details they provided.
 
 ### Decide if we will hire

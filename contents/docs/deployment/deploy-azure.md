@@ -3,23 +3,23 @@ title: Deploying to Microsoft Azure
 sidebar: Docs
 showTitle: true
 ---
-<br>
+<br />
 
 
 ## Why Azure
 
 [Microsoft Azure](https://azure.microsoft.com/) is one of the most well-established Cloud Providers. It offers a comprehensive dashboard with simple configuration, as well as an extensive Free Trial.
-<br>
+<br />
 
 ### Deploying to Azure
 
 To deploy on Azure, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
-<br>
+<br />
 
 ## Docker Install: Virtual Machine Setup
 
 The first thing you'll need is a [Microsoft Azure account](https://azure.microsoft.com/en-gb/free/). Once you have that up and running, you're good to go!
-<br>
+<br />
 
 ### Step-By-Step
 
@@ -35,7 +35,7 @@ The first thing you'll need is a [Microsoft Azure account](https://azure.microso
     - 2 CPUs
     - 50GB of storage
 
-    <br>
+    <br />
 
     However, this will vary based on the volume you're expecting. If you're expecting a low volume, a lighter instance may do just fine. Conversely, if you are expecting high volume, you should probably scale up from the specs above.
 
@@ -93,7 +93,7 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 
 </blockquote>
 
-<br>
+<br />
 
 ## Running PostHog Behind a Proxy or Load Balancer
 
@@ -106,7 +106,7 @@ For more information, visit our [dedicated page for running PostHog behind a pro
 #### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
 PostHog needs to run on HTTPS because if it doesn't:
  
- a) It will fail<br>
+ a) It will fail<br />
  b) Your user data will be at risk
 
 #### Check Your Firewall/Security Group if You Cannot Connect to a Port
@@ -131,15 +131,15 @@ You can read [this tutorial](https://www.digitalocean.com/community/tutorials/ho
 
 Here's a [good Azure Tutorial](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/nsg-quickstart-portal) about this.
 
-<br>
+<br />
 
 ## Upgrading Docker on Azure
 
 See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
-<br>
+<br />
 
 ## Useful Tutorials
-<br>
+<br />
 
 ###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 

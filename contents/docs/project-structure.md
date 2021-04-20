@@ -145,7 +145,7 @@ python manage.py migrate_clickhouse
 
 #### models
 
-Subdirectory for the models ([Django ORM](https://docs.djangoproject.com/en/3.1/topics/db/models/database)). Interactions with our database are handled by these models. 
+Subdirectory for the models ([Django ORM](https://docs.djangoproject.com/en/3.1/topics/db/models/)). Interactions with our database are handled by these models. 
 
 #### queries
 

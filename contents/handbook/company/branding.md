@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br> <!-- is this HTML element necessary? Wouldn't we be able to achieve the same effect by just pressing enter and leaving the line there? -->
+<br />
 
 > **Note:** This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com following the rebrand. <!-- Is there a date, firm or otherwise, when this rebranding will take place? If so, the date should be listed here. If the rebranding has already happened, this note should be removed. -->
 
@@ -18,7 +18,8 @@ Refer to this [Figma Project](https://www.figma.com/file/8iM3Damgbl4PyHq6x8JJbu/
 
 To get access to our various logo formats, check out our [Media page](/media).
 
-<br> <!-- same comment as above for br flag -->
+<br />
+
 
 ## Colors
 
@@ -30,9 +31,8 @@ Our three primary colours are Blue, Orange, and Yellow.
 
 ##### <span style="color:#F9BD2B; font-size: 20px">■</span> Yellow: #F9BD2B
 
-<br> <!-- same comment as above for br flag -->
-
-Accompanying these colours are Black and White, as well as a Dark Navy. Navy was introduced to tone down the blue against the yellow and orange, <!-- Appears to be an unnecessary comma in a compound predicate; consider removal -->and provides a vintage feel to the page.
+Accompanying these colours are Black and White, as well as a Dark Navy. Navy was introduced to tone down the blue against the yellow and orange. It provides a vintage feel to the page.
+<br />
 
 ##### <span style="color:#000000; font-size: 20px">■</span> Black: #000000
 
@@ -40,7 +40,7 @@ Accompanying these colours are Black and White, as well as a Dark Navy. Navy was
 
 ##### <span style="color:#35416B; font-size: 20px">■</span> Dark Navy: #35416B
 
-<br>
+<br />
 
 All artwork is to be made using these colours, typography, and social media images if possible.
 
@@ -198,7 +198,7 @@ Within the block are the 5 <!-- Consider spelling out the number --> categories:
 
 Underneath these 5 <!-- Consider spelling out the number --> categories are the subsections, which use 'Normal Text,' as defined in the 'Fonts' section.
 
-Side Menus, found on pages such as Docs, are to be a Light Grey (#F0F0F0) and 430px wide. The text and dropdown options should be fixed so that even when reading, <!-- Reading what specifically? The site? A particular page? --> the consumer can still have quick access to other areas within the site.
+Side Menus, found on pages such as Docs, are to be a Light Grey (#F0F0F0) and 430px wide. The text and dropdown options should be fixed so that even when reading the docs, the consumer can still have quick access to other areas within the site.
 
 The text in this sidebar should be 'Extra Large Text.' The arrows that accompany the categories will be in Figma - they are a simple vector, and the stroke needs to be 2.
 

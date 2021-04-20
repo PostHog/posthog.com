@@ -53,7 +53,7 @@ Yes. We support any kind of application.
 Yes. PostHog can be used via:
 
 - An HTML snippet that goes inside your ```<head></head>``` tags.
-- One of our [15+ integrations](/docs/integrations) covering the main programming languages and tools
+- One of our [15+ libraries](/docs/libraries) covering the main programming languages and tools
 - Our [API](/docs/api/overview)
 
 This means that it doesn't matter what your stack is - you can use PostHog with it.
@@ -172,7 +172,7 @@ Our Docs are a top priority to us and are updated **daily**. [Check them out](/d
 
 Absolutely!
 
-You can suggest new features by adding them as issues in our [Github repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
+You can suggest new features by adding them as issues in our [GitHub repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
 
 ### I'm having trouble setting up PostHog. What should I do?
 

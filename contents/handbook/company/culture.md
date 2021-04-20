@@ -33,7 +33,7 @@ As the builders of an open-source product, we believe it is only right that we b
 
 And this isn't just a meaningless corporate statement. Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and our open source handbook explains everything from how we hire and pay team members to how we email investors!
 
-Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improve, which helps increase our responsiveness to the community. 
+Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improved, which helps increase our responsiveness to the community. 
 
 We're committed to much more than just public code. 
 
@@ -75,7 +75,7 @@ We're big believers in the importance of the [maker's schedule](http://www.paulg
 
 One of the benefits of hiring high-performing, self-sufficient, empowered team members is that we don't need to put in place some of the typical corporate structures and processes that can slow teams down. 
 
-Right now, our structure is super simple - James H and Tim are the only managers (and people with a 'Chief' in their title), and everyone else reports into one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and tread on toes, especially if they are not in a 'senior' role. 
+Right now, our structure is super simple - James H and Tim are the only managers (and people with a 'Chief' in their title), and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 
 Our team structure will probably have to evolve as we grow, but for now we find this works well for us. 
 

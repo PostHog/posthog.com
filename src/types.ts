@@ -21,3 +21,35 @@ export interface LibraryPluginType {
     imageLink: string
     maintainer?: string
 }
+
+export interface MenuProps {
+    isBlogArticlePage?: boolean
+    isHomePage?: boolean
+    activeKey: string
+}
+
+export interface MenuQueryNodeType {
+    node: {
+        name: string
+        link: string
+        a: string
+    }
+}
+
+export interface MenuQueryType {
+    allMenuItemsJson: {
+        edges: MenuQueryNodeType[]
+    }
+}
+
+export interface Contributor {
+    login: string
+    name: string
+    avatar_url: string
+    profile: string
+    contributions: string[]
+    level: number
+    mvpWins: number
+}
+
+export type Heading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'

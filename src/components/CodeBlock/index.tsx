@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import { OkaidiaTheme } from '../../lib/okaidia'
+import theme from 'prism-react-renderer/themes/nightOwl'
 import { getCookie, generateRandomHtmlId } from '../../lib/utils'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
+import { CopyOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 
 interface CodeBlockProps {
     children: {
@@ -26,6 +28,9 @@ export const CodeBlock = (props: CodeBlockProps) => {
     const matches = className.match(/language-(?<lang>.*)/)
     const [code, setCode] = useState('')
     const [projectName, setProjectName] = useState('')
+    const [hasBeenCopied, setHasBeenCopied] = useState(false)
+    const [tooltipVisible, setTooltipVisible] = useState(false)
+    const [copyToClipboardAvailable, setCopyToClipboardAvailable] = useState(false)
 
     const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
 
@@ -43,6 +48,9 @@ export const CodeBlock = (props: CodeBlockProps) => {
                     .replace(/<ph_instance_address>/g, 'https://app.posthog.com')
                 setCode(updatedCode)
                 highlightToken(phToken)
+            }
+            if (navigator.clipboard) {
+                setCopyToClipboardAvailable(true)
             }
         }
     }, [props])
@@ -71,15 +79,37 @@ export const CodeBlock = (props: CodeBlockProps) => {
         }
     }
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(code || props.children.props.children.trim())
+        setHasBeenCopied(true)
+        setTooltipVisible(true)
+        setTimeout(() => {
+            setTooltipVisible(false)
+        }, 1000)
+    }
+
     return (
         <Highlight
             {...defaultProps}
             code={code || props.children.props.children.trim()}
             language={language as Language}
-            theme={OkaidiaTheme}
+            theme={theme}
         >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
+                    <Tooltip title="Copied!" visible={tooltipVisible}>
+                        {copyToClipboardAvailable ? (
+                            <CopyOutlined
+                                style={{
+                                    position: 'absolute',
+                                    right: 15,
+                                    color: hasBeenCopied ? '#9c9a9a' : '#fff',
+                                    transitionDuration: '1s',
+                                }}
+                                onClick={copyToClipboard}
+                            />
+                        ) : null}
+                    </Tooltip>
                     {tokens.map((line, i) => (
                         <div key={i} {...getLineProps({ line, key: i })}>
                             {line.map((token, key) => (

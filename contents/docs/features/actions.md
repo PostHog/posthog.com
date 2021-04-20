@@ -8,7 +8,7 @@ showTitle: true
 
 Actions are PostHog’s way of easily cleaning up a large amount of Event data.
 
-Actions consist of one or more events that you have decided to put into a manually-labelled bucket. They're used in PostHog's Insights, as well as in Feature Flags.
+Actions consist of one or more events that you have decided to put into a manually-labeled bucket. They're used in PostHog's Insights, as well as in Feature Flags.
 
 For example, a typical action might be one of the following:
 
@@ -27,14 +27,14 @@ If you'd like to watch a video about our Actions feature, check out our demo vid
 ## Accessing Actions
 
 To access the Actions page, go to the 'Events & Actions' section on the left-hand navigation sidebar.
-<br>
+<br />
 
 ## Creating Frontend Actions
 
 ### Pre-Requisites
 
 Before creating an action from an element, you must have provided the domain you will be using PostHog on. This should be the root domain where your application is hosted e.g. http://example.com. You can do this by visiting 'Setup' > 'Setup your PostHog account'.
-<br>
+<br />
 
 ### Getting Started
 
@@ -80,18 +80,18 @@ Page views can match urls containing a string or match exactly.
 
 Frontend Elements are actions based on some element on your website, such as a button or an input. The easiest way to select them is with the 'Inspect element on your site' functionality described above. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
 
-Our [Autocapture](/docs/integrations/js-integration#autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
+Our [Autocapture](/docs/libraries/js#autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
 
-Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/integrations/js-integration#autocapture) for more details.
+Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/libraries/js#autocapture) for more details.
 
-<br>
+<br />
 
 **Custom Event**
 
-Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/integrations).
-<br>
+Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/libraries).
+<br />
 
-<br> 
+<br /> 
 
 ## Identification Fields
 
@@ -110,4 +110,3 @@ If you have buttons across your site, all saying ‘Sign Up’, you can track AL
 If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
 
 If you have multiple sign up buttons on the same page, all with the same text and you want to track events relating to just one of them, you can use ‘Selector’. If they are technically the same element type **and** have the same classes, then you need to add a new class, `id` or `data-attr` to the button you wish to track separately, and use this to identify it.
-

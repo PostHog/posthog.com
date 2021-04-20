@@ -27,32 +27,32 @@ Below is a table of how we see our product-market fit for various sizes of compa
         <td>Enterprise</td>
     </tr>
     <tr>
-        <td>Engineers / Ex-Developer Product Managers</td>
+        <td>Engineers / PMs with technical expertise</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
-        <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
+        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
+        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
     </tr>
     <tr>
-        <td>Non-Technical Product Managers</td>
+        <td>Non-technical PMs, marketing, sales, business</td>
         <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
     </tr>
     <tr>
         <td>Analysts</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Direct SQL access<br>Plugins for data lakes</td>
-        <td style="background:var(--warning)">Direct SQL access<br>Plugins for data lakes</td>
+        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
+        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
     </tr>
     <tr>
         <td>Enterprise procurement</td>
         <td style="background:var(--muted)"></td>
         <td style="background:var(--muted)"></td>
         <td style="background:var(--muted)"></td>
-        <td style="background:var(--warning)">SOC 2<br>VPC</td>
+        <td style="background:var(--warning)">SOC 2<br />VPC</td>
     </tr>
 </table>
 </span>
@@ -88,8 +88,8 @@ Given scores from 1-5, here's how each type of company stacks up against those t
     <tr>
         <td>Revenue</td>
         <td>Low (1/5)</td>
-        <td>Low (1/5)</td>
-        <td>Mid (3/5)</td>
+        <td>Mid (2/5)</td>
+        <td>High (4/5)</td>
         <td>Very high (5/5)</td>
     </tr>
     <tr>
@@ -124,15 +124,15 @@ We have three options for each box:
     <tr>
         <td>Engineers</td>
         <td style="background:var(--muted)" rowspan="3">Maintain</td>
-        <td style="background:var(--warning)">Grow</td>
+        <td style="background:var(--success)">Build</td>
         <td style="background:var(--success)">Build</td>
         <td style="background:var(--success)">Build</td>
     </tr>
     <tr>
-        <td>Product Managers</td>
-        <td style="background:var(--success)">Build</td>
-        <td style="background:var(--success)">Build</td>
-        <td style="background:var(--success)">Build</td>
+        <td>Non-technical roles</td>
+        <td style="background:var(--muted)">Maintain</td>
+        <td style="background:var(--muted)">Maintain</td>
+        <td style="background:var(--muted)">Maintain</td>
     </tr>
     <tr>
         <td>Analysts</td>
