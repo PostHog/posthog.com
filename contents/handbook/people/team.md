@@ -472,36 +472,6 @@ Our party of 2 became a party of 3 last year. 🎉 Now that I am officially a da
 
 </div>
 
-<!--- Sean Bio -->
-
-<div class="team-row" markdown="1">
-
-<div class="team-left-text" markdown="1">
-
-### Sean Packham, Marketing Lead
-
-<div class="team-left-bio" markdown="1">
-
-A semi-amateur cyclist who retired early to wrangle code before finding his place leading open source marketing teams. Sean lead content at GitLab and marketing at Rocket.Chat and Purism, and is now on a mission to build the best open source developer community.
-
-Sean grew up in Cape Town, moved to the UK in 2015, and spent the next 5 years ping ponging between Scotland and London before permanently calling Edinburgh home.
-
-When he's not working on awesome PostHog marketing, Sean can be found building and playing video games (mostly old stuff and RPGs like AOE2, D2, Skyrim, Terraria), listening to metal, wrestling kitties (I may go pro), flâneuring, or in deep discussions with his partner over a cup of tea.
-
-</div>
-
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-right-image" markdown="1">
-
-![Sean portrait](../../images/team/Sean.png)
-
-</div>
-
-</div>
-
 <!--- Kunal Bio -->
 
 <div class="team-row" markdown="1">
