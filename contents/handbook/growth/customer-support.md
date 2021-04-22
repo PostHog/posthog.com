@@ -1,5 +1,5 @@
 ---
-title: Customer Success
+title: Customer Support
 sidebar: Handbook
 showTitle: true
 ---
