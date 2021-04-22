@@ -1,5 +1,5 @@
 ---
-title: Getting Feedback
+title: Feedback
 sidebar: Handbook
 showTitle: true
 ---
