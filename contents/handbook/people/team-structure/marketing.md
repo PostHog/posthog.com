@@ -7,7 +7,6 @@ hideAnchor: true
 
 ## People
 
-- [Sean Packham (Team lead, Marketing Lead)](/handbook/company/team#sean-packham-marketing-lead)
 - Mo Shehu, Content Marketer
 
 ## Mission
@@ -32,7 +31,7 @@ We will expand to non-technical teams when we have achieved technical awareness 
 
 * Acquisition
 
-## Philosophy
+## Philosophy
 
 Be kind, concise and direct.
 
