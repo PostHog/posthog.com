@@ -472,36 +472,6 @@ Our party of 2 became a party of 3 last year. 🎉 Now that I am officially a da
 
 </div>
 
-<!--- Sean Bio -->
-
-<div class="team-row" markdown="1">
-
-<div class="team-left-text" markdown="1">
-
-### Sean Packham, Marketing Lead
-
-<div class="team-left-bio" markdown="1">
-
-A semi-amateur cyclist who retired early to wrangle code before finding his place leading open source marketing teams. Sean lead content at GitLab and marketing at Rocket.Chat and Purism, and is now on a mission to build the best open source developer community.
-
-Sean grew up in Cape Town, moved to the UK in 2015, and spent the next 5 years ping ponging between Scotland and London before permanently calling Edinburgh home.
-
-When he's not working on awesome PostHog marketing, Sean can be found building and playing video games (mostly old stuff and RPGs like AOE2, D2, Skyrim, Terraria), listening to metal, wrestling kitties (I may go pro), flâneuring, or in deep discussions with his partner over a cup of tea.
-
-</div>
-
-</div>
-
-<div class="team-center-space"></div>
-
-<div class="team-right-image" markdown="1">
-
-![Sean portrait](../../images/team/Sean.png)
-
-</div>
-
-</div>
-
 <!--- Kunal Bio -->
 
 <div class="team-row" markdown="1">
@@ -530,6 +500,59 @@ In terms of cycling– a friend once convinced me to go on a bike ride from San 
 <div class="team-right-image" markdown="1">
 
 ![Kunal portrait](../../images/team/Kunal.png)
+
+</div>
+
+</div>
+
+<!--- Buddy Williams Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Buddy Williams, Software Engineer
+
+<div class="team-left-bio" markdown="1">
+
+Howdy! I live in Atlanta, Georgia with my amazing partner of five years. I have 
+two truly wonderful kids, boy-9 and girl-12 who both level up in July. Oh, 
+geez, I'll have a teenager! I'm a hobbyist: unicycles, juggling, 
+acroyoga, hiking, cooking, rollerblading, skiing, climbing, and 
+lifting. My partner and the kids especially love hiking, playing video games, 
+and performing amazing acroyoga feats for folks in the park.
+​
+I got started in programming at twelve years old. My grandfather was a 
+retired FFA engineer with access to old decommissioned hardware. He'd 
+bring it home for me to play with. My first computer was a TI-99/4A 
+where you recorded your programs on cassette tapes! I fell in love with 
+programming because I enjoyed both creative and reason based projects. 
+From drawing and crafts to math, science, and philosophy. Programming 
+gave me a big canvas for imaginary worlds, a place for self-expression 
+I hadn't found anywhere else.
+​
+I was sixteen when I landed my first programming gig as a frontend engineer 
+for an agency. Afterwards, I helped co-found a radiology software company who 
+ensured patients received follow-up care. These patients were slipping 
+through the cracks, leading to fatal results not to mention expensive legal 
+settlements. From there I worked in big tech where I learned corporate politics 
+were no fun. After a few years of exploring I went back to my roots and founded 
+a tech consultancy. During this time, I had an idea for a revolutionary platform 
+for designers. So, I built a no-code app platform that allowed creatives to 
+design applications rather than code them. It was a wild and exhausting ride! 
+After a few years of catching my breath, I joined up with PostHog to 
+pursue their mission of making more successful products in the world! 
+I'm looking forward to all we will accomplish together.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Buddy Williams portrait](../../images/team/Buddy.png)
 
 </div>
 

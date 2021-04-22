@@ -82,10 +82,10 @@ Go to 'People' > 'Cohorts' in the left-hand navigation (as shown in the beginnin
 <br />
 
 ## Differentiating Team vs. Users Traffic
-From the initial setup, [PostHog is tracking various events](/docs/integrations/js-integration#autocapture) from all users. However, you may want to differentiate between traffic from your team and traffic from your users.
+From the initial setup, [PostHog is tracking various events](/docs/libraries/js#autocapture) from all users. However, you may want to differentiate between traffic from your team and traffic from your users.
 
-To do so, you can identify your team members in PostHog either through a [`posthog.identify`](/docs/integrations/js-integration#identifying-users) (e.g. by setting an email as the ID) call or by [associating properties](/docs/integrations/js-integration#sending-user-information) with your team member users (e.g. `is_team = true`). 
+To do so, you can identify your team members in PostHog either through a [`posthog.identify`](/docs/libraries/js#identifying-users) (e.g. by setting an email as the ID) call or by [associating properties](/docs/libraries/js#sending-user-information) with your team member users (e.g. `is_team = true`). 
 
 With that done, you can then create a cohort of your team and/or a cohort that does not include any of your team members, so that you can continue to gather data on all users, but can differentiate between them when performing your analytics processes.
 
-This is the recommended method for differentiating between team and user traffic if you want to keep receiving events. However, if you wish to stop receiving events on your team altogether, you should consider using [`posthog.opt_out_capturing`](/docs/integrations/js-integration#opt-users-out).
+This is the recommended method for differentiating between team and user traffic if you want to keep receiving events. However, if you wish to stop receiving events on your team altogether, you should consider using [`posthog.opt_out_capturing`](/docs/libraries/js#opt-users-out).

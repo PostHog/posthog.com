@@ -6,7 +6,7 @@
             "Tutorials",
             "Deployment",
             "Configuring PostHog",
-            "Integrations",
+            "Libraries",
             "Features",
             "Plugins",
             "API",
@@ -146,22 +146,22 @@
         ]
     },
     {
-        "entry": "Integrations",
-        "name": "Integrations",
+        "entry": "Libraries",
+        "name": "Libraries",
         "items": [
-            "docs/integrations",
-            "docs/integrations/android-integration",
-            "docs/integrations/go-integration",
-            "docs/integrations/ios-integration",
-            "docs/integrations/js-integration",
-            "docs/integrations/node-integration",
-            "docs/integrations/php-integration",
-            "docs/integrations/python-integration",
-            "docs/integrations/flutter-integration",
-            "docs/integrations/react-native-integration",
-            "docs/integrations/ruby-integration",
-            "docs/integrations/rudderstack-integration",
-            "docs/integrations/segment-integration"
+            "docs/libraries",
+            "docs/libraries/android",
+            "docs/libraries/go",
+            "docs/libraries/ios",
+            "docs/libraries/js",
+            "docs/libraries/node",
+            "docs/libraries/php",
+            "docs/libraries/python",
+            "docs/libraries/flutter",
+            "docs/libraries/react-native",
+            "docs/libraries/ruby",
+            "docs/libraries/rudderstack",
+            "docs/libraries/segment"
         ],
         "child_entries": ["Community", "Sending Data Out"]
     },
@@ -169,20 +169,20 @@
         "entry": "Community",
         "name": "Community",
         "items": [
-            "docs/integrations/community",
-            "docs/integrations/docusaurus-integration",
-            "docs/integrations/gatsby-integration",
-            "docs/integrations/elixir-integration"
+            "docs/libraries/community",
+            "docs/libraries/docusaurus",
+            "docs/libraries/gatsby",
+            "docs/libraries/elixir"
         ]
     },
     {
         "entry": "Sending Data Out",
         "name": "Sending Data Out",
         "items": [
-            "docs/integrations/slack",
-            "docs/integrations/microsoft-teams",
-            "docs/integrations/message-formatting",
-            "docs/integrations/sentry-integration"
+            "docs/libraries/slack",
+            "docs/libraries/microsoft-teams",
+            "docs/libraries/message-formatting",
+            "docs/libraries/sentry"
         ]
     },
     {
@@ -300,6 +300,7 @@
         "items": [
             "handbook/people/team-structure/team-structure",
             "handbook/people/team-structure/why-small-teams",
+            "handbook/people/team-structure/core-experience",
             "handbook/people/team-structure/design",
             "handbook/people/team-structure/extensibility",
             "handbook/people/team-structure/growth-engineering",

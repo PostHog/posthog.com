@@ -1,40 +1,36 @@
 ---
-title: PHP Integration
+title: Ruby Library
 sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-php) for the Posthog-PHP library. This is an optional library you can install if you're working with PHP. 
+This is an optional library you can install if you're working with Ruby. This is an optional library you can install if you're working with Ruby. 
 
-This page of the Docs refers specifically to the Official PostHog PHP Library to capture and send events to any PostHog instance (including posthog.com).
+This page of the Docs refers specifically to the Official PostHog Ruby Library to capture and send events to any PostHog instance (including posthog.com).
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
-## Installation
+## Installation 
 
-Add the following to composer.json:
-```json
-{
-    "require": {
-        "posthog/posthog-php": "1.0.*"
-    }
-}
-```
-And then install the dependencies with the command: `php composer.phar install`
+Add this to your `Gemfile`:
 
-In your app, set your API key before making any calls.
-
-```js
-PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>') // You can remove this line if you're using app.posthog.com
-);
+```bash
+gem "posthog-ruby"
 ```
 
-> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
+In your app, set your api key **before** making any calls.
+
+```c
+posthog = PostHog::Client.new({
+  api_key: "<ph_project_api_key>",
+  api_host: "<ph_instance_address>", # You can remove this line if you're using app.posthog.com
+  on_error: Proc.new { |status, msg| print msg }
+})
+```
 
 You can find your key in the 'Project Settings' page in PostHog.
 
-## Making calls
+## Making Calls
 
 ### Capture
 
@@ -46,19 +42,19 @@ A `capture` call requires:
   * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
 Optionally you can submit:
-- `properties`, which is an array with any information you'd like to add
+- `properties`, which is a dictionary with any information you'd like to add
+- `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
 
 For example:
-
-```js
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    'movieId' => '123',
-    'category' => 'romcom'
-  )
-));
+```c
+posthog.capture({
+    distinct_id: 'distinct id',
+    event: 'movie played',
+    properties: {
+        movie_id: '123',
+        category: 'romcom'
+    }
+})
 ```
 
 #### Setting user properties via an event
@@ -70,15 +66,13 @@ To set properties on your users via an event, you can leverage the event propert
 **Example**
 
 ```c
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    '$set' => array(
-      'userProperty' => 'value'
-    )
-  )
-));
+posthog.capture({
+    distinct_id: 'distinct id',
+    event: 'movie played',
+    properties: {
+        $set: { userProperty: 'value' }
+    }
+})
 ```
 
 **Usage**
@@ -90,41 +84,37 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```c
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    '$set_once' => array(
-      'userProperty' => 'value'
-    )
-  )
-));
+posthog.capture({
+    distinct_id: 'distinct id',
+    event: 'movie played',
+    properties: {
+        $set_once: { userProperty: 'value' }
+    }
+})
 ```
 
 **Usage**
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
-## Identify
+### Identify
 
 Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
 
 An `identify` call requires:
 - `distinct id` which uniquely identifies your user
-- `properties` with a dict with any key: value pairs 
-
+- `properties` with a dict with any key:value pairs 
 
 For example:
-
-```js
-PostHog::identify(array(
-  'distinctId' => 'user:123',
-  'properties' => array(
-    'email' => 'john@doe.com',
-    'proUser' => false
-  )
-));
+```c
+posthog.identify({
+  distinct_id: "user:123",
+  properties: {
+    email: 'john@doe.com',
+    pro_user: false
+  }
+})
 ```
 
 The most obvious place to make this call is whenever a user signs up, or when they update their information.
@@ -137,44 +127,42 @@ In a purely back-end implementation, this means whenever an anonymous user does 
 
 The same concept applies for when a user logs in.
 
-If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
+If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
 
-An alias call requires:
-* `distinct id` the current unique id
-* `alias` the unique ID of the user before
+An `alias` call requires:
+- `previous distinct id`: the unique ID of the user from beforehand
+- `distinct id`: the current unique id
 
 For example:
-
-```js
-PostHog::alias(array(
-  'distinctId' => 'user:123',
-  'alias' => 'user:12345'
-));
+```c
+posthog.alias({
+  distinct_id: "user:123",
+  alias: "user:12345",
+})
 ```
 
 ### Sending Page Views
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
-```js
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => '$pageview',
-  'properties' => array(
-    '$current_url' => 'https://example.com'
-  )
-));
+```c
+posthog.capture({
+    distinct_id: 'distinct id',
+    event: '$pageview',
+    properties: {
+        '$current_url': 'https://example.com'
+    }
+})
 ```
 
 ## Development
-### How to Release
 
-1. Run `VERSION=X.Y.Z make release` (where X.Y.Z is the new version).
-
-That's it! Composer will pick up the new tag and you can see the latest version at [https://packagist.org/packages/posthog/posthog-php](https://packagist.org/packages/posthog/posthog-php).
-
-> **Note:** You might need to install `git-extras` for this to work.
+### How to release
+1. Increase `VERSION` in `posthog/version.py`
+2. run `make release` and `make release_analytics`
+3. `git commit -am "Release X.Y.Z."` (where X.Y.Z is the new version)
+4. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
 
 ## Thank You
 
-This library is largely based on the `analytics-php` package.
+This library is largely based on the `analytics-ruby` package.

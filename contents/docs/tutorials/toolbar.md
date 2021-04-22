@@ -49,9 +49,9 @@ _Prefer to watch a video? Check out the [Toolbar sections of our demo video](htt
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. 
+1. Have added the [PostHog snippet](/docs/libraries/js) to your website. 
 
-> **Note:** Our Toolbar only works with our [JavaScript Integration](/docs/integrations/js-integration), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
+> **Note:** Our Toolbar only works with our [JavaScript Library](/docs/libraries/js), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
 
 ## Why Use the Toolbar
 
