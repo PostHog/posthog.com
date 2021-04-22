@@ -367,7 +367,7 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/customer-success"],
+        "items": ["handbook/growth/strategy", "handbook/growth/customer-support"],
         "child_entries": ["Marketing", "Sales"]
     },
     {
