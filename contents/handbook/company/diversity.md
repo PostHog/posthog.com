@@ -61,4 +61,4 @@ Are you a potential candidate reading this? [Let us know](mailto:careers@posthog
 
 ## Thinking about working here?
 
-Check out our [careers](/careers) page to see if there could be a fit, or drop us [an email](careers@posthog.com).
+Check out our [careers](/careers) page to see if there could be a fit, or drop us [an email](mailto:careers@posthog.com).

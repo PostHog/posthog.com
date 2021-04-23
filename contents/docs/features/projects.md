@@ -8,6 +8,6 @@ To facilitate tracking various products within the same organization, it's possi
 
 You can switch between projects, as well as create new ones, from the top bar. Project settings can be reached from the sidebar.
 
-Each project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/integrations), as well as to connect to our [API](/docs/api/overview).
+Each project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/libraries), as well as to connect to our [API](/docs/api/overview).
 
 > **Note:** Multiple projects within an organization belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://posthog.com/pricing?o=cloud) or contact [sales@posthog.com](mailto:sales@posthog.com) for a self-hosted license.

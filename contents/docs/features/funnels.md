@@ -59,7 +59,7 @@ Once you're satisfied with all the steps you've added, you can then click 'Calcu
 You can also filter funnels by time intervals. By default, funnels will show actions completed over the last 7 days, but this can be changed by selecting the time interval next to 'Add to dashboard'
 
 ![funnels by time](../../images/04/funnels-by-time.gif)
-<br>
+<br />
 
 ## Funnel Drop-off User Breakdown
 

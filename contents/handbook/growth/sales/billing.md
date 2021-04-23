@@ -9,7 +9,7 @@ showTitle: true
 This handbook section is sort of the operation manual for the billing engine. If you're looking for the technical details or need to troubleshoot something check out the relevant [tech docs](https://github.com/PostHog/posthog-cloud#additional-docs)
 
 ### Self-hosted
-For customers with special pricing (i.e. very large volumes or Enterprise & Supported plans), we need to manually set up the billing information on the system. This page contains instructions for setting up billing. Please note this page covers the process after an official PostHog quote has been approved by the customer. For information before this stage, please refer to the [Sales](/handbook/growth/sales) section of the handbook. Contrary to cloud plans, **all self-hosted _paid_ plans must be manually prepared today** (i.e. there's no self-serve option yet). To set up billing for self-hosted, please follow these instructions:
+For customers with special pricing (i.e. very large volumes or Enterprise & Supported plans), we need to manually set up the billing information on the system. This page contains instructions for setting up billing. Please note this page covers the process after an official PostHog quote has been approved by the customer. For information before this stage, please refer to the [Sales](/handbook/growth/sales/sales-operations) section of the handbook. Contrary to cloud plans, **all self-hosted _paid_ plans must be manually prepared today** (i.e. there's no self-serve option yet). To set up billing for self-hosted, please follow these instructions:
 
 #### Pre-setup
 This process only needs to happen once.
@@ -76,7 +76,7 @@ We offer 50% discount to non-profit companies (see [pricing](/pricing#non-profit
 
 
 #### Startup & YC plans
-We offer a deal for certain YC companies & other startups, while the details of this deal change periodically (and are documented in the main website and/or ops repo), here are the details on how to apply the plan for a company. Internally, these plans have special logic handling in the [posthog-cloud][posthog-cloud] repo. If our deal terms changes (current details detailed below), a new plan needs to be added. This custom logic is handled in `multi_tenancy/models.py#handle_post_card_validation`). Currently we only have one plan (`plan_key = startup`) which provides free billing for 1 year and a 20M monthly event allocation.
+We offer [a deal](/handbook/growth/sales/yc-onboarding) for certain YC companies & other startups, while the details of this deal change periodically (and are documented in the main website and/or ops repo), here are the details on how to apply the plan for a company. Internally, these plans have special logic handling in the [posthog-cloud][posthog-cloud] repo. If our deal terms changes (current details detailed below), a new plan needs to be added. This custom logic is handled in `multi_tenancy/models.py#handle_post_card_validation`). Currently we only have one plan (`plan_key = startup`) which provides free billing for 1 year and a 20M monthly event allocation.
 
 **How to apply it**
 - Follow the steps above (Go to Django admin, find the relevant customer, ...).

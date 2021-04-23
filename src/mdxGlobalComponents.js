@@ -1,5 +1,7 @@
 // AUTO GENERATED FILE
 
+import { Endpoint } from './components/APIDocs/Endpoint'
+import { MethodTags } from './components/APIDocs/MethodTags'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -38,6 +40,8 @@ import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
 import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
+import { LibraryStats } from './components/LibraryStats'
+import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
@@ -58,6 +62,8 @@ import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
+    Endpoint,
+    MethodTags,
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
@@ -96,6 +102,8 @@ export const shortcodes = {
     Roadmap,
     SocialProof,
     Tutorials,
+    LibraryStats,
+    MdxAnchorHeaders,
     NewsletterForm,
     OtherFeaturesBlock,
     PageHeader,

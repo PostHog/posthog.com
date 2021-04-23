@@ -47,7 +47,7 @@ If users come to the call with a ready instance, we can focus more on their need
 When doing a demo of PostHog, you should prioritize using the following environments:
 
 1. The client's own instance or PostHog Cloud account (if they have one **and** are OK with this). 
-2. The [PostHog Demo Environment](playground.posthog.com)
+2. The [PostHog Demo Environment](https://playground.posthog.com)
 3. A local environment
 4. PostHog Cloud 
 

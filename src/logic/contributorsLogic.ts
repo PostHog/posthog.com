@@ -42,7 +42,7 @@ export const contributorsLogic = kea({
                     const fileContent = await contributorsRes.text()
                     const parsedContent = JSON.parse(fileContent.replace(/"badgeTemplate": ".*",/, ''))
 
-                    let contributors = parsedContent.contributors.filter(
+                    const contributors = parsedContent.contributors.filter(
                         (contributor: Contributor) => !ignoreContributors.has(contributor.login)
                     )
 
@@ -57,7 +57,7 @@ export const contributorsLogic = kea({
                         levelMap[row[0]] = row[1]
                     }
 
-                    for (let contributor of contributors) {
+                    for (const contributor of contributors) {
                         contributor['level'] = levelMap[contributor.login] || 0
                         contributor['mvpWins'] = mvpWinners[contributor.login] || 0
                     }

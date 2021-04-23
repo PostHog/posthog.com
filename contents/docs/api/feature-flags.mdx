@@ -8,15 +8,26 @@ showTitle: true
 
 PostHog provides you with an API endpoint to create and update your [feature flags](/docs/features/feature-flags). This section refers to that endpoint specifically. 
 
-If you're looking to use feature flags on your application, you can either use our [JavaScript Integration](/docs/integrations/js-integration#feature-flags) or our [dedicated endpoint](/docs/api/post-only-endpoints#feature-flags) for checking if feature flags are enabled for a given user.
+If you're looking to use feature flags on your application, you can either use our [JavaScript Library](/docs/libraries/js#feature-flags) or our [dedicated endpoint](/docs/api/post-only-endpoints#feature-flags) for checking if feature flags are enabled for a given user.
 
-## Create Feature Flags
+## Endpoints
+
+
+<Endpoint endpoint='/api/feature_flag' allowedMethods={['get', 'post']} />
+
+
+<Endpoint endpoint='/api/feature_flag/<flag_id:int>' allowedMethods={['get', 'put', 'patch', 'delete']} />
+
+
+## Examples
+
+### Create Feature Flags
 
 ```shell
 POST /feature_flag/
 ```
 
-### Data
+#### Data
 
 
 | Attribute | Type | Required | Default | Description |
@@ -29,7 +40,7 @@ POST /feature_flag/
 | `personal_api_key` | String | Yes | | Your Personal API Key from the Project Settings page. |
 
 
-### Example Request
+#### Example Request
 
 ```bash
 curl -i -X POST \
@@ -42,7 +53,7 @@ curl -i -X POST \
 -L -v 'https://[your-instance].com/api/feature_flag/'
 ```
 
-### Example Response
+#### Example Response
 
 ```bash
 {
@@ -71,17 +82,17 @@ curl -i -X POST \
 }
 ```
 
-## Get the Details of a Flag
+### Get the Details of a Flag
 
 ```shell
 GET /feature_flag/123/
 ```
 
-### Data
+#### Data
 
 To get the details of a given feature flag, pass its ID directly on the path. You can pass your Personal API Key as an HTTP header, and no additional data is required.
 
-### Example Request
+#### Example Request
 
 ```bash
 curl -i \
@@ -89,7 +100,7 @@ curl -i \
 -L -v "https://[your-instance].com/api/feature_flag/123/"
 ```
 
-### Example Response
+#### Example Response
 
 ```bash
 {
@@ -118,17 +129,17 @@ curl -i \
 }
 ```
 
-## Update the Details of a Flag
+### Update the Details of a Flag
 
 ```shell
 PATCH /feature_flag/123/
 ```
 
-### Data 
+#### Data 
 
 Passing the ID of the flag directly in the path, include any values from the table shown under 'Create Feature Flags' that you wish to update. The `personal_api_key` is the only required field.
 
-### Example Request
+#### Example Request
 
 ```bash
 curl -i -X PATCH \
@@ -138,7 +149,7 @@ curl -i -X PATCH \
 -L -v 'https://[your-instance].com/api/feature_flag/123/'
 ```
 
-### Example Response
+#### Example Response
 
 ```bash
 {

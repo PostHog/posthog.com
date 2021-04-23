@@ -7,3 +7,112 @@
   from = "/careers/*"
   to = "/careers"
   status = 200
+
+[[redirects]]
+    from = "/docs/integrations/android-integration"
+    to = "/docs/libraries/android"
+
+
+[[redirects]]
+    from = "/docs/integrations/community"
+    to = "/docs/libraries/community"
+
+
+[[redirects]]
+    from = "/docs/integrations/docusaurus-integration"
+    to = "/docs/libraries/docusaurus"
+
+
+[[redirects]]
+    from = "/docs/integrations/elixir-integration"
+    to = "/docs/libraries/elixir"
+
+
+[[redirects]]
+    from = "/docs/integrations/flutter-integration"
+    to = "/docs/libraries/flutter"
+
+
+[[redirects]]
+    from = "/docs/integrations/gatsby-integration"
+    to = "/docs/libraries/gatsby"
+
+
+[[redirects]]
+    from = "/docs/integrations/go-integration"
+    to = "/docs/libraries/go"
+
+
+[[redirects]]
+    from = "/docs/integrations/ios-integration"
+    to = "/docs/libraries/ios"
+
+
+[[redirects]]
+    from = "/docs/integrations/js-integration"
+    to = "/docs/libraries/js"
+
+
+[[redirects]]
+    from = "/docs/integrations/message-formatting"
+    to = "/docs/libraries/message-formatting"
+
+
+[[redirects]]
+    from = "/docs/integrations/microsoft-teams"
+    to = "/docs/libraries/microsoft-teams"
+
+
+[[redirects]]
+    from = "/docs/integrations/node-integration"
+    to = "/docs/libraries/node"
+
+
+[[redirects]]
+    from = "/docs/integrations/php-integration"
+    to = "/docs/libraries/php"
+
+
+[[redirects]]
+    from = "/docs/integrations/python-integration"
+    to = "/docs/libraries/python"
+
+
+[[redirects]]
+    from = "/docs/integrations/react-native-integration"
+    to = "/docs/libraries/react-native"
+
+
+[[redirects]]
+    from = "/docs/integrations/ruby-integration"
+    to = "/docs/libraries/ruby"
+
+
+[[redirects]]
+    from = "/docs/integrations/rudderstack-integration"
+    to = "/docs/libraries/rudderstack"
+
+
+[[redirects]]
+    from = "/docs/integrations/segment-integration"
+    to = "/docs/libraries/segment"
+
+
+[[redirects]]
+    from = "/docs/integrations/sentry-integration"
+    to = "/docs/libraries/sentry"
+
+
+[[redirects]]
+    from = "/docs/integrations/slack"
+    to = "/docs/libraries/slack"
+
+
+[[redirects]]
+    from = "/handbook/company/structure"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+
+[[redirects]]
+    from = "/handbook/company/team"
+    to = "/handbook/people/team"

@@ -6,7 +6,7 @@ showTitle: true
 
 Feature flags allow you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
-> **Note:** Feature Flags are currently available with our [JavaScript](/docs/integrations/js-integration#feature-flags) and [Python](/docs/integrations/python-integration) integrations. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
+> **Note:** Feature Flags are currently available with our [JavaScript](/docs/libraries/js#feature-flags) and [Python](/docs/libraries/python) libraries. We're working to support this feature on all of our libraries, but, for the moment, you can also use [our API](/docs/api/overview#feature-flags) to implement feature flags in your backend.
 
 ## Learning Resources
 
@@ -77,7 +77,7 @@ To see the feature flags that are currently active for you, you can call:
 posthog.feature_flags.getFlags()
 ```
 
-<br>
+<br />
 
 ## Roll Out the Feature Flag
 
@@ -103,7 +103,7 @@ By combining user properties and percentage of users you can determine something
 
 > "Roll out this feature to 80% of users that have an email set"
 
-<br>
+<br />
 
 ## De-activating Properties
 

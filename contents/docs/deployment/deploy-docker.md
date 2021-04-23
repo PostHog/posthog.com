@@ -22,8 +22,8 @@ If you are deploying with Docker on AWS or Digital Ocean, you can check our indi
 
 - [Docker Deployment on AWS](/docs/deployment/deploy-aws)
 - [Docker Deployment on Digital Ocean](/docs/deployment/deploy-digital-ocean)
-<br>
-<br>
+<br />
+<br />
 
 #### Generic Docker Installation Tutorial
 
