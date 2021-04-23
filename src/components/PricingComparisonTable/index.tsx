@@ -16,7 +16,7 @@ export const PricingComparisonTable = () => {
                     </th>
                     <th>
                         <img src={imgEnterprise2} alt="" width="50px" />
-                        VPC
+                        Self Hosted (scale)
                     </th>
                     <th>
                         <img src={imgOpenSource} alt="" width="50px" />
@@ -45,7 +45,7 @@ export const PricingComparisonTable = () => {
                 </tr>
                 <tr>
                     <td>Managed by PostHog</td>
-                    <td>Managed by PostHog</td>
+                    <td>Managed by you</td>
                     <td>Managed by you</td>
                 </tr>
                 <tr>
@@ -205,7 +205,7 @@ export const PricingComparisonTable = () => {
             <Col md={12} sm={24}>
                 <div className="p-full-height">
                     <h4 className="p-text-primary p-title-with-icon">
-                        <img src={imgBuilding} alt="" /> VPC
+                        <img src={imgBuilding} alt="" /> Self-hosted Scale
                     </h4>
                     <ul className="p-comparison-list">
                         <li>Recommended if you have large volumes of events or users ({'>10k monthly users'}).</li>
@@ -217,7 +217,11 @@ export const PricingComparisonTable = () => {
                         </li>
                     </ul>
                     <div className="p-comparison-btn">
-                        <Button type="primary" size="large" href="mailto:sales@posthog.com?title=Start vpc deployment">
+                        <Button
+                            type="primary"
+                            size="large"
+                            href="mailto:sales@posthog.com?title=Start scale deployment"
+                        >
                             Contact sales
                         </Button>
                     </div>
