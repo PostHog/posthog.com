@@ -75,7 +75,7 @@ hideAnchor: true
 
 ## Defaults
 
-- Allows you to specifiy default values instead of doing them in the reducers
+- Allows you to specify default values instead of doing them in the reducers
 - Defaults may be a function as well to calculate the default values
 
 ## Connecting kea logic together
