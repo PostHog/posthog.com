@@ -81,5 +81,9 @@ hideAnchor: true
 ## Connecting kea logic together
 
 - You may [connect logics together](https://kea.js.org/docs/guide/additional#connecting-logic-together)
+
+## Useful resources
+
+- [Kea](https://kea.js.org/docs/introduction/what-is-kea)
   
 **[Back: Technologies to learn](../technologies-to-learn)**

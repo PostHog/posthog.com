@@ -11,7 +11,7 @@ The best way to learn TypeScript is to read introductory material then get hands
 
 You can complete the exercises on the [TypeScript Playground](https://www.typescriptlang.org/play)
 
-Please see the [exercises](../exercises/) as starting place.
+You can use the same [exercises for Python](python) as starting place.
 
 ## Great places to learn
 
