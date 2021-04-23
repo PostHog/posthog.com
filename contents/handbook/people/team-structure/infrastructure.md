@@ -23,8 +23,9 @@ Make using and developing for PostHog as reliable as running water. Wherever you
 - Engineers always be able to ship and build
 - Fail fast. Fix faster.
 - Ship anywhere
-- Stack performs at speed of click
+- Stack scales with demand
 - Support Small Teams (and contributors) in building and debugging Posthog
+- Be frugal.
 
 ## Responsibilities
 Concrete things we take responsibility over:
