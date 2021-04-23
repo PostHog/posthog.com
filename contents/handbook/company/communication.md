@@ -27,7 +27,7 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 
 ## Public by default
 
-We make things public by default because [transparency is part of Communication, one of our values](/handbook/values/#communication). The kinds of information we share falls into one of three buckets:
+We make things public by default because [transparency](/handbook/company/culture#transparency) is core to our culture. The kinds of information we share falls into one of three buckets:
 
 - _Public_ - most things, including our product, roadmap, handbook and strategy. 
 - _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
