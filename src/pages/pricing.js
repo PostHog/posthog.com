@@ -291,23 +291,6 @@ const PricingPage = () => {
                                 </ul>
                             </div>
                         )}
-                        {state.planOptions === 'open-source' && (
-                            <div className="pricing-cloud">
-                                <h4>For casual use.</h4>
-                                <div>
-                                    Get simpler features to try it out or to run in production at low volumes for a
-                                    small team. Not suitable for 10K+ monthly users due to a slower performance
-                                    database.
-                                    <br />
-                                    <br />
-                                    <a href="https://posthog.com/docs/deployment">
-                                        <Button type="primary" size="large">
-                                            See docs
-                                        </Button>
-                                    </a>
-                                </div>
-                            </div>
-                        )}
                     </Row>
                     <br />
                     <Row gutter={[24, 24]} style={{ marginTop: '32px' }}>
