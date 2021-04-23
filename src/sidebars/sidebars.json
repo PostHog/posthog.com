@@ -357,6 +357,7 @@
     {
         "entry": "Engineering",
         "name": "Engineering",
+        "child_entries": ["Beginners Guide"],
         "items": [
             "handbook/engineering/development-process",
             "handbook/engineering/how-we-review",
@@ -367,6 +368,17 @@
             "handbook/engineering/ee-setup",
             "handbook/engineering/common-issues",
             "handbook/engineering/mdx"
+        ]
+    },
+    {
+        "entry": "Beginners Guide",
+        "name": "Beginners Guide",
+        "items": [
+            "handbook/engineering/beginners-guide/introduction",
+            "handbook/engineering/beginners-guide/getting-to-know-posthog",
+            "handbook/engineering/beginners-guide/getting-started",
+            "handbook/engineering/beginners-guide/developer-workflow",
+            "handbook/engineering/beginners-guide/technologies-to-learn"
         ]
     },
     {
