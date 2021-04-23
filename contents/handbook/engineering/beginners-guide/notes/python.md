@@ -1,5 +1,5 @@
 ---
-title: Our notes on Python
+title: Our Notes On Python
 sidebar: Handbook
 showTitle: true
 hideAnchor: true

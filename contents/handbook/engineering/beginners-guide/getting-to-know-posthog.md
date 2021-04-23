@@ -1,5 +1,5 @@
 ---
-title: 2. Getting to know PostHog
+title: 2. Getting To Know PostHog
 sidebar: Handbook
 showTitle: true
 hideAnchor: true

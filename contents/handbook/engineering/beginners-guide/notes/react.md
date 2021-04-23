@@ -1,5 +1,5 @@
 ---
-title: Our notes on Docker
+title: Our Notes On Docker
 sidebar: Handbook
 showTitle: true
 hideAnchor: true

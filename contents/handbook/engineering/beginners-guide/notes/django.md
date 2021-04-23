@@ -1,5 +1,5 @@
 ---
-title: Our notes on Django
+title: Our Notes On Django
 sidebar: Handbook
 showTitle: true
 hideAnchor: true

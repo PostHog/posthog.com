@@ -1,5 +1,5 @@
 ---
-title: 5. Technologies to learn
+title: 5. Technologies To Learn
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
@@ -28,6 +28,6 @@ particularly useful. I'd suggest using *our notes* links as you would a cheatshe
 
 ## Useful tech
 
-- [tmux](https://github.com/tmux/tmux/wiki)
-- [fish](https://github.com/fish-shell/fish-shell)
-- [zsh](https://github.com/ohmyzsh/ohmyzsh)
+- [Tmux](https://github.com/tmux/tmux/wiki)
+- [Fish](https://github.com/fish-shell/fish-shell)
+- [Zsh](https://github.com/ohmyzsh/ohmyzsh)
