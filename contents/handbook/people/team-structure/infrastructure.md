@@ -37,9 +37,8 @@ Concrete things we take responsibility over:
 
 ## Customer
 
-- Other Small Teams in making sure they have the tools they need to build
-- End users (Teams building products and using Posthog for Product Analytics)
-- Single tenant customers such as VPC deployment users
+- Other Small Teams in making sure they have the tools (databases, queues, etc) and the ability to deploy effortlessly that they need to build
+- End users (Both cloud and on-prem teams)
 
 ## Output metrics
 
