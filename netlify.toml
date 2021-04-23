@@ -116,3 +116,8 @@
 [[redirects]]
     from = "/handbook/company/team"
     to = "/handbook/people/team"
+
+
+[[redirects]]
+    from = "/handbook/growth/customer-success"
+    to = "/handbook/growth/customer-support"
