@@ -1,9 +1,11 @@
 ---
-title: 1. Introduction
+title: 1. Beginner's Guide
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
 ---
+
+## Introduction 
 
 The *Beginners Guide* started as a project to help me and others get up to speed on PostHog's tech stack. 
 I also wanted to include bits of advice to make the process encouraging to make working on PostHog even better. 

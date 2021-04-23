@@ -7,7 +7,8 @@ hideAnchor: true
 
 If you haven't already, it's worth your time to read [Contributing to PostHog](https://posthog.com/docs/contributing).
 
-IDE's we use: [vscode](https://code.visualstudio.com/) and [pycharm](https://www.jetbrains.com/pycharm/)
+Most developers use either [vscode](https://code.visualstudio.com/) or [pycharm](https://www.jetbrains.com/pycharm/) but 
+you are free to use whatever IDE makes the most sense to you.
 
 ## Backend w/ Vscode
 
