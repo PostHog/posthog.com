@@ -59,7 +59,7 @@ Concrete things we take responsibility over:
 - Objectives
   - Event ingestion: TBD
   - Query response: TBD
-- Overall: Events should be ingested as we scale and infra should facilitate analytics at speed of click
+- Overall: We should anticipate increasing demand (either manually or automatically)
 ##### Cost 
 - Metric: Infra Costs 
 - Objective: Our costs should grow at a rate that is sublinear relative to scale
