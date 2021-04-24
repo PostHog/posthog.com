@@ -360,6 +360,7 @@
         "name": "Engineering",
         "items": [
             "handbook/engineering/development-process",
+            "handbook/engineering/debugging",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
             "handbook/engineering/releasing-python",
