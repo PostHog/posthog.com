@@ -17,7 +17,7 @@ const Logo = ({ logo, alt }: { logo: string; alt: string }) => <img src={logo} a
 
 export const SocialProof = () => {
     return (
-        <div className="mt-24">
+        <div className="mt-24 hero-proof">
             <div className="w-11/12 max-w-3xl mx-auto mb-4 flex justify-center sm:justify-between flex-row flex-wrap">
                 <Logo logo={dataikuLogo} alt="Dataiku" />
                 <Logo logo={hasuraLogo} alt="Hasura" />

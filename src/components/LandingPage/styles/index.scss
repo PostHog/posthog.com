@@ -91,11 +91,37 @@
     transition: none;
 }
 
-.product-features {
-    grid-template-columns: repeat(4, 1fr);
+// cta gets pushed too low on mobile, so we set an order so we can change it
 
-    @media (min-width: 640px) and (max-width: 1023px) {
-        grid-template-columns: repeat(4, 115px);
+.hero-headline {
+    order: 1;
+}
+.hero-icons {
+    order: 2;
+}
+.hero-more-features {
+    order: 3;
+}
+.hero-cta {
+    order: 4;
+    @media (max-width: 639px) {
+        order: 1;
+    }
+}
+.hero-proof {
+    order: 5;
+}
+
+.product-features {
+    grid-template-columns: repeat(1, 1fr);
+
+    @media (max-width: 639px) {
+        // factor offset of left timeline to make things look more center
+        margin-right: -25px;
+    }
+
+    @media (min-width: 640px) and (max-width: 768px) {
+        grid-template-columns: repeat(5, 20%);
     }
 
     @media (min-width: 1024px) {
@@ -116,37 +142,67 @@
         // opacity: 0;
         //width: 115px;
 
-        // timeline plot
+        // dots on timeline
         &:before {
             background: #fff;
             border: solid 3px #27164e;
             border-radius: 16px;
-            bottom: -38px;
             content: '';
             height: 22px;
-            left: calc(50% - 8px);
             position: absolute;
             width: 22px;
             z-index: 10;
+
+            @media (max-width: 639px) {
+                left: -38px;
+                top: 16px;
+            }
+
+            @media (min-width: 640px) {
+                bottom: -38px;
+                left: calc(50% - 8px);
+            }
         }
 
         // background timeline bar
         &:after {
             background: rgba(255, 255, 255, 0.4);
-            bottom: -30px;
             content: '';
-            height: 6px;
-            left: 0;
             position: absolute;
-            right: 0;
+
+            @media (max-width: 639px) {
+                bottom: 0;
+                left: -30px;
+                top: 0;
+                width: 6px;
+            }
+
+            @media (min-width: 640px) {
+                bottom: -30px;
+                height: 6px;
+                left: 0;
+                right: 0;
+            }
         }
 
+        // the first and last timeline items shouldn't have the bar extend past their timeline dots
+
         &:first-child:after {
-            left: 50%;
+            @media (max-width: 639px) {
+                top: 16px;
+            }
+            @media (min-width: 640px) {
+                left: 50%;
+            }
         }
 
         &:last-child:after {
-            right: 50%;
+            @media (max-width: 639px) {
+                bottom: calc(100% - 16px);
+            }
+            @media (min-width: 640px) {
+                right: 50%;
+            }
         }
 
         &:nth-child(1) {
@@ -172,6 +228,12 @@
         }
         &:nth-child(8) {
             animation-delay: 1.2s;
+        }
+    }
+
+    .feature-icon {
+        @media (max-width: 639px) {
+            flex: 0 0 40px;
         }
     }
 }

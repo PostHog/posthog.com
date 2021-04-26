@@ -20,20 +20,24 @@ const ProductFeatureIcon = ({ label, icon, subtitle, expectedLaunchDate }: Produ
     ) : null
 
     return (
-        <div className={`text-center text-baseline leading-snug px-2 mb-4 lg:px-4 flex flex-col ${opacity}`}>
-            <div className="h-12 flex items-center justify-around">
-                <img src={icon} alt={label} className="mb-0 block mx-auto" />
+        <div
+            className={`text-left sm:text-center text-baseline leading-snug px-2 sm:mb-4 pb-4 sm:pb-0 lg:px-4 flex sm:flex-col ${opacity}`}
+        >
+            <div className="h-12 flex items-center mr-4 sm:mr-0 sm:justify-around feature-icon">
+                <img src={icon} alt={label} className="mb-0 block sm:mx-auto" />
             </div>
-            <span className="text-white block mt-1 font-bold">{label}</span>
-            <div className="flex-grow text-white">{subtitle}</div>
-            <div className="flex-grow">{expectedLabel}</div>
+            <div className="">
+                <span className="text-white block mt-1 font-bold">{label}</span>
+                <div className="flex-grow text-white opacity-70">{subtitle}</div>
+                <div className="flex-grow">{expectedLabel}</div>
+            </div>
         </div>
     )
 }
 
 export const ProductFeatureIcons = () => {
     return (
-        <div className="product-features justify-center mt-8 mb-8 lg:my-16 inline-grid">
+        <div className="product-features justify-center my-8 inline-grid">
             <ProductFeatureIcon label="Ingest product data" icon={eventPipelineImg} subtitle="with event pipeline" />
             <ProductFeatureIcon label="Learn" icon={analyticsImg} subtitle="with analytics suite" />
             <ProductFeatureIcon label="Test &amp; iterate" icon={featureFlagsImg} subtitle="with feature flags" />
