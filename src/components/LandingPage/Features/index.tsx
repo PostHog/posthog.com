@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Features = () => {
     return (
-        <div className="lp-features pt-12 text-white text-center">
+        <div className="lp-features text-white text-center">
             <div className="w-11/12 max-w-4xl mx-auto">
                 <h2>A single platform that does it all</h2>
                 <p className="opacity-80 mt-1 text-center mb-12 mx-auto lg:w-9/12">

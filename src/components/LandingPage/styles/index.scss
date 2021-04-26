@@ -274,6 +274,11 @@
     background: linear-gradient(180deg, #2a235b 0%, #08042f 100%);
 }
 
+.blockquote-section {
+    background: #3c3288;
+    // background: linear-gradient(180deg, #3c3288 0%, #3c3288 100%;)
+}
+
 .private-cloud {
     background: url(../images/clouds.png), linear-gradient(180deg, #3c3288 0%, #b75184 100%);
     background-size: cover;
