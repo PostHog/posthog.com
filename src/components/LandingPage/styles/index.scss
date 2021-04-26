@@ -45,6 +45,18 @@
     }
 }
 
+.open-source {
+    &:before {
+        background: url(../images/open-source.svg) no-repeat;
+        content: '';
+        left: -71px;
+        height: 46px;
+        position: absolute;
+        top: -46px;
+        width: 121px;
+    }
+}
+
 @keyframes animateIn100 {
     0% {
         opacity: 0;
@@ -87,7 +99,7 @@
     }
 
     @media (min-width: 1024px) {
-        grid-template-columns: repeat(7, 115px);
+        grid-template-columns: repeat(5, max-content);
     }
 
     > div {
@@ -103,6 +115,39 @@
         position: relative;
         opacity: 0;
         //width: 115px;
+
+        // timeline plot
+        &:before {
+            background: #fff;
+            border: solid 3px #27164e;
+            border-radius: 16px;
+            bottom: -38px;
+            content: '';
+            height: 22px;
+            left: calc(50% - 8px);
+            position: absolute;
+            width: 22px;
+            z-index: 10;
+        }
+
+        // background timeline bar
+        &:after {
+            background: rgba(255, 255, 255, 0.4);
+            bottom: -30px;
+            content: '';
+            height: 6px;
+            left: 0;
+            position: absolute;
+            right: 0;
+        }
+
+        &:first-child:after {
+            left: 50%;
+        }
+
+        &:last-child:after {
+            right: 50%;
+        }
 
         &:nth-child(1) {
             animation-delay: 0.15s;
