@@ -104,16 +104,16 @@
 
     > div {
         &.opacity-100 {
-            animation: animateIn100 0.5s ease;
+            // animation: animateIn100 0.5s ease;
         }
 
         &.opacity-50 {
-            animation: animateIn50 0.5s ease;
+            // animation: animateIn50 0.5s ease;
         }
 
         animation-fill-mode: forwards !important;
         position: relative;
-        opacity: 0;
+        // opacity: 0;
         //width: 115px;
 
         // timeline plot
