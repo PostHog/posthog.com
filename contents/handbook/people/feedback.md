@@ -45,12 +45,12 @@ We currently run performance reviews every 6 months, based on your start date. W
     2. What has not gone well?
     3. What should they focus on next at PostHog?
     4. What would be good for them from a personal development perspective?
-4. We expect every participant to come prepared with 75% constructive [feedback](https://posthog.com/handbook/people/feedback#how-to-give-good-feedback). 
+4. We expect every participant to come prepared with 75% constructive [feedback](/handbook/people/feedback#how-to-give-good-feedback). 
 5. The team member's manager then summarizes the outcome of that meeting in this [document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing).
 6. The team member also writes up their own self-assessment in this [document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing).
 7. Within a week of the feedback meeting, the team member and their manager should have a 30min 1-1 followup discussion to reflect on the feedback and align on next steps.
 
-Part of the followup conversation with your manager will include your [compensation](/handbook/people/compensation), as we directly link this to your level of  experience and your performance. You should not, however, expect every performance review to result in a change to your salary. You will find that your Step will change more frequently than your Level. If your level and step hasn’t changed, your manager will work with you to set up an action plan for the next 6 months. 
+Part of the followup conversation with your manager will include your [compensation](/handbook/people/compensation), as we directly link this to your level of  experience and your performance. You should not, however, expect every performance review to result in a change to your salary. You will find that your Step will change more frequently than your Level. If your Level and Step hasn’t changed, you may want to work with your manager to set up an action plan for the next 6 months. 
 
 8. The manager then communicates back to the People team that the review is complete and what next steps are needed (if any), including around any salary adjustments if the team member's Step or Level should change. The People team will store these docs on Charlie HR for future reference.
 
