@@ -36,14 +36,14 @@ We use GitHub Projects to track the status of Issues in an easily viewable way. 
 
 ## Onboarding 
 
-Our [onboarding checklist](https://posthog.com/handbook/people/onboarding) will take you through all the main admin bits you need to get set up, such as accounts access and payroll. The list will vary slightly depending on where you are based and which Small Team you are in. The People team will create an Issue in the Internal repo to track your personal checklist. 
+Our [onboarding checklist](/handbook/people/onboarding) will take you through all the main admin bits you need to get set up, such as accounts access and payroll. The list will vary slightly depending on where you are based and which Small Team you are in. The People team will create an Issue in the Internal repo to track your personal checklist. 
 
 ### Other useful resources
 
-It is worth trying to at least read the entire Handbook once, even if you skim over the other sections. If you are engineer, the [Engineering](https://posthog.com/handbook/engineering/development-process) section will obviously be useful, but you might want to know how we're approaching our [Marketing](https://posthog.com/handbook/growth/marketing) strategy.
+It is worth trying to at least read the entire Handbook once, even if you skim over the other sections. If you are engineer, the [Engineering](/handbook/engineering/development-process) section will obviously be useful, but you might want to know how we're approaching our [Marketing](/handbook/growth/marketing) strategy.
 
 A few additional pages that may occasionally come in handy:
 
-- [Media](https://posthog.com/media) - official PostHog logos and backgrounds
-- [Customer Support](https://posthog.com/handbook/growth/customer-success) - we don't have a dedicated support team. Learn why!
-- [Benefits](https://posthog.com/handbook/people/benefits) - we are adding more all the time!
+- [Media](/media) - official PostHog logos and backgrounds
+- [Customer Support](/handbook/growth/customer-success) - we don't have a dedicated support team. Learn why!
+- [Benefits](/handbook/people/benefits) - we are adding more all the time!
