@@ -24,7 +24,7 @@ export const NewsletterForm = ({
             <div className="bg-neon inline-flex mx-auto h-full p-1 rounded">
                 <div className={classList}>
                     <img src={checkDark} alt="sign up for mailing list" className="block lg:mr-3 h-8 mb-0" />
-                    <span className="mt-4 lg:mt-0 font-bold flex-grow text-lg md:text-base">
+                    <span className="mt-4 lg:mt-0 font-bold flex-grow text-lg md:text-sm">
                         Yes, I'd love to receive PostHog updates in my inbox at
                     </span>
                     <form
