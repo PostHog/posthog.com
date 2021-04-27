@@ -128,3 +128,12 @@
         from = "(.*)"
         to = "(.*)"
     
+    
+[[redirects]]
+    from = "(.*)"
+    to = "(.*)"
+
+    
+[[redirects]]
+    from = "(.*)"
+    to = "(.*)"
