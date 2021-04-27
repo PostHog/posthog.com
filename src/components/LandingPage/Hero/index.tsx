@@ -15,7 +15,7 @@ export const Hero = () => {
                     </h1>
                 </div>
 
-                <div className="max-w-4xl mx-auto text-center hero-icons  -mx-4 md:mx-0">
+                <div className="max-w-4xl text-center hero-icons -mx-4 md:mx-auto">
                     <ProductFeatureIcons />
                 </div>
 

@@ -38,7 +38,7 @@ const ProductFeatureIcon = ({ label, icon, subtitle, expectedLaunchDate }: Produ
 export const ProductFeatureIcons = () => {
     return (
         <div className="product-features justify-center my-8 inline-grid">
-            <ProductFeatureIcon label="Ingest product data" icon={eventPipelineImg} subtitle="with event pipeline" />
+            <ProductFeatureIcon label="Ingest product data" icon={eventPipelineImg} subtitle="with event pipelines" />
             <ProductFeatureIcon label="Learn" icon={analyticsImg} subtitle="with analytics suite" />
             <ProductFeatureIcon label="Test &amp; iterate" icon={featureFlagsImg} subtitle="with feature flags" />
             <ProductFeatureIcon label="Watch adoption" icon={sessionReplayImg} subtitle="with session recordings" />
