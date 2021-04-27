@@ -20,4 +20,3 @@ As a result, we have formulated a loose strategy for how to approach publishing 
 1. Consider making a post on HackerNews on the same day as the content goes live on Twitter. Not all posts should go on HN, only the ones that make sense for that specific audience. Videos generally do not do well on HackerNews, for example.
 1. Evaluate if the content can also benefit from being published in other mediums, such as LinkedIn, Reddit, or Medium. If unsure, you're generally better to publish it and see what happens.
 1. Create an annotation on [app.posthog.com](https://app.posthog.com) about the content release, so that we can determine if it was the cause of any changes in our metrics.
-
