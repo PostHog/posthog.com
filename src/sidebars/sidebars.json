@@ -263,11 +263,7 @@
     {
         "entry": "Company",
         "name": "Company",
-        "items": [
-            "handbook/company/story",
-            "handbook/people/team",
-            "handbook/strategy/investors"
-        ]
+        "items": ["handbook/company/story", "handbook/people/team", "handbook/strategy/investors"]
     },
     {
         "entry": "Strategy",
@@ -283,9 +279,7 @@
     {
         "entry": "Getting started",
         "name": "Getting started",
-        "items": [
-            "handbook/getting-started"
-        ]
+        "items": ["handbook/getting-started"]
     },
     {
         "entry": "How we work",
@@ -299,9 +293,9 @@
             "handbook/company/security",
             "handbook/company/branding"
         ],
-        "child_entries": ["Team Structure"]  
+        "child_entries": ["Team Structure"]
     },
-     {
+    {
         "entry": "Team Structure",
         "name": "Team Structure",
         "items": [
@@ -328,7 +322,7 @@
             "handbook/people/training",
             "handbook/people/feedback",
             "handbook/people/onboarding",
-            "handbook/people/offboarding",
+            "handbook/people/offboarding"
         ]
     },
     {
