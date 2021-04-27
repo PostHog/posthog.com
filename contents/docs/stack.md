@@ -22,7 +22,7 @@ showTitle: true
 ### Testing
 
 - Frontend E2E Tests: [Cypress](https://www.cypress.io/)
-- Backend Tests: [Django's built-in test suite](https://docs.djangoproject.com/en/3.1/topics/testing/)
+- Backend Tests: [Pytest](https://docs.pytest.org/en/stable/getting-started.html) and [Django's built-in test suite](https://docs.djangoproject.com/en/3.1/topics/testing/)
 
 ### Additional Tools
 

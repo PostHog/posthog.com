@@ -9,6 +9,10 @@ import './styles/pricing.scss'
 import 'antd/lib/collapse/style/css'
 import 'antd/lib/slider/style/css'
 import { plans, faqs } from '../pages-content/pricing-data'
+import imgCloud from '../images/cloud.svg'
+import imgEnterprise1 from '../images/plan-enterprise1.svg'
+import imgOpenSource from '../images/plan-open-source.svg'
+import imgEnterprise2 from '../images/plan-enterprise2.svg'
 
 import { PricingComparisonTable } from 'components/PricingComparisonTable'
 import { PricingSlider } from 'components/PricingSlider'
@@ -64,25 +68,15 @@ const PricingPage = () => {
                                     />{' '}
                                     Cloud
                                 </label>
-                                <label className={state.planOptions === 'vpc' ? 'active' : ''}>
+                                <label className={state.planOptions === 'self-hosted' ? 'active' : ''}>
                                     <input
                                         type="radio"
-                                        value="vpc"
+                                        value="self-hosted"
                                         name="planOptions"
-                                        checked={state.planOptions === 'vpc'}
+                                        checked={state.planOptions === 'self-hosted'}
                                         onChange={(event) => handleSegmentChange(event)}
                                     />{' '}
-                                    VPC
-                                </label>
-                                <label className={state.planOptions === 'open-source' ? 'active' : ''}>
-                                    <input
-                                        type="radio"
-                                        value="open-source"
-                                        name="planOptions"
-                                        checked={state.planOptions === 'open-source'}
-                                        onChange={(event) => handleSegmentChange(event)}
-                                    />{' '}
-                                    Open Source
+                                    Self Hosted
                                 </label>
                             </div>
                         </Col>
@@ -137,14 +131,111 @@ const PricingPage = () => {
                                 </Card>
                             </Col>
                         ))}
-                        {state.planOptions === 'vpc' && (
+                        {state.planOptions === 'self-hosted' && (
                             <div className="pricing-cloud">
-                                <h4>For those with high volume usage or privacy needs.</h4>
+                                <h4>For those that want flexibility.</h4>
+                                <div></div>
                                 <div>
-                                    You host, we manage it. Pricing is logarithmic and gets much less expensive at
-                                    scale. No setup fee.
+                                    <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    <img
+                                                        src={imgOpenSource}
+                                                        alt=""
+                                                        width="50px"
+                                                        style={{ paddingRight: 0 }}
+                                                    />
+                                                    Open Source
+                                                </th>
+                                                <th>
+                                                    <img src={imgEnterprise1} alt="" width="50px" />
+                                                    Scale Free
+                                                </th>
+                                                <th>
+                                                    <img src={imgEnterprise2} alt="" width="50px" />
+                                                    Scale
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={3}>
+                                                    <strong>Scalability</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Postgres database only.
+                                                    <br />
+                                                    ~10k users/month
+                                                </td>
+                                                <td>
+                                                    Clickhouse database. <br />
+                                                    ~1m users/month
+                                                </td>
+                                                <td>Scalable Clickhouse database</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={3}>
+                                                    <strong>Your team</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Unlimited users</td>
+                                                <td>3 users</td>
+                                                <td>Unlimited users</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={3}>
+                                                    <strong>Support</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Community support</td>
+                                                <td>Community support</td>
+                                                <td>Dedicated support</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={3}>
+                                                    <strong>License</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>MIT License</td>
+                                                <td>License key</td>
+                                                <td>License key</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="https://app.posthog.com/signup">
+                                                        <Button type="primary" size="large" href="/docs/deployment">
+                                                            Start free
+                                                        </Button>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <Button
+                                                        type="primary"
+                                                        size="large"
+                                                        href="mailto:sales@posthog.com?title=Free clickhouse deployment"
+                                                    >
+                                                        Contact us
+                                                    </Button>
+                                                </td>
+                                                <td>
+                                                    <Button
+                                                        type="primary"
+                                                        size="large"
+                                                        href="mailto:sales@posthog.com?title=Scale deployment"
+                                                    >
+                                                        Contact sales
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </Row>
                                 </div>
 
+                                <h4>Scale pricing</h4>
                                 <div>
                                     <PricingSlider pricingOption="vpc" />
                                 </div>
@@ -157,6 +248,10 @@ const PricingPage = () => {
                                 </div>
 
                                 <ul className="p-comparison-list">
+                                    <li>
+                                        You want to export product data to your data lake from PostHog on the same
+                                        infrastructure.
+                                    </li>
                                     <li>
                                         Recommended if you have large volumes of events or users ({'>10k monthly users'}
                                         ).
@@ -208,23 +303,6 @@ const PricingPage = () => {
                                     <li>You want an out-of-the-box secure solution.</li>
                                     <li>You want to get automatic updates with all the latest features.</li>
                                 </ul>
-                            </div>
-                        )}
-                        {state.planOptions === 'open-source' && (
-                            <div className="pricing-cloud">
-                                <h4>For casual use.</h4>
-                                <div>
-                                    Get simpler features to try it out or to run in production at low volumes for a
-                                    small team. Not suitable for 10K+ monthly users due to a slower performance
-                                    database.
-                                    <br />
-                                    <br />
-                                    <a href="https://posthog.com/docs/deployment">
-                                        <Button type="primary" size="large">
-                                            See docs
-                                        </Button>
-                                    </a>
-                                </div>
                             </div>
                         )}
                     </Row>

@@ -1,5 +1,5 @@
 ---
-title: Releasing a New Version (Python Integration)
+title: Releasing a New Version (Python Library)
 sidebar: Handbook
 showTitle: true
 ---

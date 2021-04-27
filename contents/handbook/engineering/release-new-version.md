@@ -24,7 +24,7 @@ Three days before we release, on Monday, we institute a code freeze. We branch m
 
 <br />
 
-<input type="checkbox"/> Write up the PostHog Array [blog post](posthog-array)
+<input type="checkbox"/> Write up the PostHog Array [blog post](/handbook/growth/marketing/posthog-array)
 
 <input type="checkbox"/> Copy from PostHog Array and write up the changes into `CHANGELOG.md` following the structure of the previous release
   - `git add CHANGELOG.md`
@@ -54,3 +54,5 @@ Once a new Docker image has been built (see [Docker Hub](https://hub.docker.com)
 3. `git commit -m 'Bump PostHog app version to 1.0.XX, release chart version 1.0.YY'`
 4. `git tag -a 1.0.YY -m "Version 1.0.YY"`
 5. `git push && git push origin head --tags`
+
+Finally to bump the `latest-release` docker image, log to [hub.docker.com](https://hub.docker.com/repository/docker/posthog/posthog/builds) and configure a new automatic build. Set the docker tag to `latest-release` and the source to the tag `1.XX.YY`. Delete any older tag with the same name if present and click "save & build"

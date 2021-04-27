@@ -23,6 +23,20 @@
     font-weight: bold;
 }
 
+/* Inter */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+/* Inter Bold */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+}
+
 html {
     font-family: 'Good Sans' !important;
     -ms-text-size-adjust: 100%;
@@ -729,6 +743,7 @@ header {
 
 .sidebarWrapper {
     margin: 0 10px;
+    font-family: 'Inter', 'Good Sans', 'Arial' !important;
 }
 
 .ant-menu,
@@ -1254,7 +1269,17 @@ table td {
     right: 50px;
 }
 
-.post-page-wrapper {
+.post-page-wrapper .docsPagesContent,
+.rightBar {
+    p,
+    li,
+    ul,
+    a,
+    td,
+    th {
+        font-family: 'Inter', 'Good Sans', 'Arial' !important;
+    }
+
     a img:hover {
         opacity: 0.7;
     }
@@ -1590,5 +1615,12 @@ div::-webkit-scrollbar-thumb:hover {
 .contributor-card-tooltip {
     .ant-tooltip-inner {
         background-color: #0f041f;
+    }
+}
+
+.anchor-link,
+.post-toc-anchor {
+    svg {
+        filter: invert(83%) sepia(0%) saturate(1327%) hue-rotate(153deg) brightness(92%) contrast(87%);
     }
 }

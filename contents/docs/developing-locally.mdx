@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen={true}>
+<HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen>
 
 > **Note:** If you're using the latest generation MacBooks (M1) have a look [at this issue](https://github.com/PostHog/posthog/issues/2916) for info on how to run PostHog.
 
@@ -16,7 +16,7 @@ git clone https://github.com/PostHog/posthog
 ```
 2. Make sure you have Python 3.8 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
 
-#### Setup Databases
+#### Set up databases
 
 <HiddenSection headingType='h5' title='With Docker'>
 
@@ -55,6 +55,13 @@ docker-compose -f docker-compose.dev.yml up -d redis db
     GRANT ALL PRIVILEGES ON DATABASE posthog, posthog_e2e_test TO posthog;
     ```
 
+4. (Optional, if using Homebrew) Create / grant `postgres` role superuser permissions. Homebrew or Postgres.app installations do not create a superuser named `postgres` by default, and instead create a superuser with your login username. If you encounter an error like `FATAL:  role "postgres" does not exist`, you may wish to use your login username instead. If that is not possible, create a new superuser by running:
+    ```bash
+    # macOS (Homebrew)
+    # createuser is located in /opt/homebrew/bin/createuser
+    createuser --superuser postgres
+    ```
+If you ran `brew link postgresql` upon installation, there should be no need to specify the full path to `createuser`.
 
 </HiddenSection>
 
@@ -123,6 +130,12 @@ docker-compose -f docker-compose.dev.yml up
 
 <br /><hr />
 
+### Running backend, worker, and frontend all together
+
+This script runs the below three scripts concurrently, and automatically sets `DEBUG=1`.
+
+Run `./bin/start`
+
 ### Running backend separately (Django)
 
 Run `DEBUG=1 ./bin/start-backend`
@@ -140,3 +153,7 @@ Run `./bin/start-frontend`
 ### Running backend tests
 
 Run `./bin/tests`
+
+### Running end-to-end Cypress tests
+
+Run `./bin/e2e-test-runner`
