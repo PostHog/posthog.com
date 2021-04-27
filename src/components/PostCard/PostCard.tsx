@@ -36,7 +36,7 @@ const ReadPost = ({ to }: { to: string }) => {
 
 const FeaturedPost = ({ post }: { post: PostType }) => {
     return (
-        <div className="w-full flex flex-col md:flex-row justify-between items-center">
+        <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
             <div className="w-full md:w-1/2 md:pr-8 py-4 mx-auto">
                 <span className="text-gray-400 text-xs uppercase">Latest Post</span>
                 <header className="text-4xl text-gray-900 dark:text-gray-100 font-gosha mt-1">
