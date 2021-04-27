@@ -33,13 +33,13 @@ All small teams as well as current, future and past candidates.
 Talent:
 - Hiring progress vs. plan
 - Time to hire 
-- Percentage of hires from under-represented groups
+- Percentage of hires from [under-represented groups](/handbook/company/diversity#how-diversity-helps-us)
 
 People and culture:
-- Team engagement
+- Quarterly Team engagement survey
 - Turnover rate (voluntary and involuntary)
 
 ## Slack channel
 
 [#people](https://posthog.slack.com/messages/people) - internally public, default for most people discussions
-#people_ops - internally confidential, for minority of issues, e.g. salaries, candidate offers
+[#people_ops](https://posthog.slack.com/messages/people_ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
