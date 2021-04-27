@@ -35,7 +35,7 @@ export const BlogPostLayout = ({ pageTitle, children, featuredImage }: BlogPostL
                         to="/blog"
                         className="text-gray-900 hover:text-gray-900 dark:text-white dark:hover:text-white hover:underline"
                     >
-                        Back to blog
+                        &larr; Back to blog
                     </Link>
                 </div>
                 <DarkModeToggle />

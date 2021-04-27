@@ -90,7 +90,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                         {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                             <h1 className="centered">{frontmatter.title}</h1>
                         )}
-                        <div className="docsPagesContent bg-white rounded-lg text-black px-16 py-12 text-black">
+                        <div className="docsPagesContent font-inter">
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>

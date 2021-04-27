@@ -71,7 +71,7 @@ export const CallToAction = ({
     const brackets = type === 'primary' || displayBrackets ? <CornerBrackets /> : null
 
     const widthClass = `w-${width}`
-    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm inline-flex items-center justify-between select-none text-base font-gosha relative`
+    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm inline-flex items-center justify-between select-none text-base font-gosha relative button`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (

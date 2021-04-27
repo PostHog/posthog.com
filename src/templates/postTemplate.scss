@@ -1,3 +1,45 @@
+.light {
+    .post-page {
+        .docsPagesContent {
+            h3,
+            h3 a {
+                color: #000;
+            }
+        }
+    }
+}
+
+.dark {
+    .post-page {
+        blockquote {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border: solid 2px #fff;
+        }
+
+        .docsPagesContent {
+            a:not(.button) {
+                color: #ffb877;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            h3,
+            h3 a {
+                color: #fff !important;
+            }
+
+            p,
+            blockquote,
+            li {
+                font-family: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
+                    'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            }
+        }
+    }
+}
+
 /* Styling for Post Pages ONLY */
 
 div.post-page {
@@ -6,8 +48,6 @@ div.post-page {
     }
 
     blockquote {
-        margin-left: 1.45rem;
-        margin-right: 1.45rem;
         margin-top: 0;
         padding: 20px;
         border-radius: 10px;
