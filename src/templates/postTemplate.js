@@ -71,7 +71,10 @@ function Template({
                             {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                                 <h1 align="center">{frontmatter.title}</h1>
                             )}
-                            <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
+                            <div
+                                className="docsPagesContent bg-white rounded-lg text-black p-16"
+                                dangerouslySetInnerHTML={{ __html: html }}
+                            />
                         </div>
                         {isDocsPage && <DocsPageSurvey />}
                         {(isDocsPage || isHandbookPage) && (

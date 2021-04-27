@@ -30,7 +30,7 @@ export const OpenRoles = () => {
                 <div id="whr_embed_hook"></div>
                 <div className="clear-both"></div>
 
-                <div className="mt-12 max-w-xl mx-auto text-gray-100 text-opacity-90 text-left">
+                <div className="mt-12 max-w-xl mx-auto text-gray-100 text-opacity-90 text-black p-16">
                     <p>
                         We take exceptional people when they come along - and we really mean that! Don’t see a specific
                         role listed? That doesn't mean we won't have a spot for you.

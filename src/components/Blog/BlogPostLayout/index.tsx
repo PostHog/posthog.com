@@ -40,8 +40,8 @@ export const BlogPostLayout = ({ pageTitle, children, featuredImage }: BlogPostL
                 </div>
                 <DarkModeToggle />
             </div>
-            <Structure.Section width="xl" className="text-center">
-                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center" />
+            <Structure.Section width="xl" className="text-center leading-tight">
+                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
                 <a
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`}
                     target="_blank"

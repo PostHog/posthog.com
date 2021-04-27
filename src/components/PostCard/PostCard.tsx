@@ -37,12 +37,12 @@ const ReadPost = ({ to }: { to: string }) => {
 const FeaturedPost = ({ post }: { post: PostType }) => {
     return (
         <div className="w-full flex flex-col md:flex-row justify-between items-center">
-            <div className="w-full md:w-1/2 md:pr-8 py-24">
+            <div className="w-full md:w-1/2 md:pr-8 py-4">
                 <span className="text-gray-400 text-xs uppercase">Latest Post</span>
-                <header className="text-2xl text-gray-900 dark:text-gray-100 font-gosha mt-1">
+                <header className="text-4xl text-gray-900 dark:text-gray-100 font-gosha mt-1">
                     {post.frontmatter.title}
                 </header>
-                <div className="text-gray-500 dark:text-gray-300 mt-2">{post.excerpt}</div>
+                <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-loose">{post.excerpt}</div>
                 <ReadPost to={post.fields.slug} />
             </div>
             {post.frontmatter.featuredImage?.publicURL && (
@@ -69,7 +69,7 @@ const PostCard = ({ post, featured = false }: { post: PostType; featured?: boole
                 >
                     {post.frontmatter.title}
                 </Link>
-                <div className="mt-4">{post.excerpt}</div>
+                <div className="mt-4 leading-loose text-sm text-black px-16 py-16">{post.excerpt}</div>
                 <ReadPost to={post.fields.slug} />
             </div>
         )}
