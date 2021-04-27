@@ -1,5 +1,5 @@
 import re
-import os
+import requests
 
 with open("./pr_diff", "r") as git_diff_file:
     git_diff = git_diff_file.read()
@@ -19,8 +19,7 @@ redirect_text = '''
 '''
 
 if len(from_paths) > 0 and len(from_paths) == len(to_paths):
-    with open("./netlify.toml", "r") as netlify_config:
-        netlify_config_text = netlify_config.read()
+    netlify_config_text = requests.get('https://raw.githubusercontent.com/PostHog/posthog.com/master/netlify.toml').text
     
     new_redirects = ''
 
