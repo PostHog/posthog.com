@@ -150,7 +150,7 @@ const PricingPage = () => {
                                                 </th>
                                                 <th>
                                                     <img src={imgEnterprise1} alt="" width="50px" />
-                                                    Free
+                                                    Scale Free
                                                 </th>
                                                 <th>
                                                     <img src={imgEnterprise2} alt="" width="50px" />
@@ -173,6 +173,16 @@ const PricingPage = () => {
                                                     ~1m users/month
                                                 </td>
                                                 <td>Scalable Clickhouse database</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={3}>
+                                                    <strong>Your team</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Unlimited users</td>
+                                                <td>3 users</td>
+                                                <td>Unlimited users</td>
                                             </tr>
                                             <tr>
                                                 <td colSpan={3}>
@@ -238,6 +248,10 @@ const PricingPage = () => {
                                 </div>
 
                                 <ul className="p-comparison-list">
+                                    <li>
+                                        You want to export product data to your data lake from PostHog on the same
+                                        infrastructure.
+                                    </li>
                                     <li>
                                         Recommended if you have large volumes of events or users ({'>10k monthly users'}
                                         ).
