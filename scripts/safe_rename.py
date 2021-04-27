@@ -1,6 +1,13 @@
 import re
 import requests
 
+redirect_text = '''
+    
+[[redirects]]
+    from = "{}"
+    to = "{}"
+'''
+
 try:
     with open("./pr_diff", "r") as git_diff_file:
         git_diff = git_diff_file.read()
@@ -11,13 +18,6 @@ try:
 
     from_paths = re.findall(rename_from_regex, git_diff)
     to_paths = re.findall(rename_to_regex, git_diff)
-
-    redirect_text = '''
-
-    [[redirects]]
-        from = "{}"
-        to = "{}"
-    '''
 
     if len(from_paths) > 0 and len(from_paths) == len(to_paths):
         netlify_config_text = requests.get('https://raw.githubusercontent.com/PostHog/posthog.com/master/netlify.toml').text
