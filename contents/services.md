@@ -21,7 +21,7 @@ PostHog deployed in your cloud, with our team making sure that it is set up and 
 
 ## PostHog hosting
 
-PostHog hosts your product analytics for you. We can help with the initial setup and integration, as well as making s
+PostHog hosts your product analytics for you. We can help with the initial setup and integration, as well as making sure you're always up-to-date.
 
 * This has the lowest possible workload for your team to get started
 

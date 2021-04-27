@@ -7,7 +7,7 @@ module.exports = {
         description:
             'Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
         url: 'https://posthog.com', // No trailing slash allowed!
-        image: '/cropped-Frame-1-192x192.png', // Path to your image you placed in the 'static' folder
+        image: '/banner.png', // Path to your image you placed in the 'static' folder
         twitterUsername: '@PostHogHQ',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },

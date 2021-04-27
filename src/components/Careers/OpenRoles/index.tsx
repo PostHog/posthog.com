@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Structure } from '../../Structure'
+import './style.scss'
 
 interface WorkableWindow extends Window {
     whr_embed: (id: number, options: Record<string, string>) => void
@@ -12,18 +13,19 @@ export const OpenRoles = () => {
     useEffect(() => {
         if (window && window.whr) {
             window.whr(document).ready(function () {
-                window.whr_embed(456332, { detail: 'titles', base: 'jobs', zoom: 'country', grouping: 'none' })
+                window.whr_embed(456332, { detail: 'titles', base: 'departments', zoom: 'country' })
             })
         }
     })
 
+    // Some of the styling overrides here lives in src/styles/workable-overrides.css
     return (
         <div className="careers-open-roles pt-24 text-white text-center" id="open-roles">
             <Structure.Section width="5xl" className="bg-black bg-opacity-20 rounded-lg p-6 md:p-12 lg:py-24 lg:px-12">
                 <Structure.SectionHeader
                     title="Open roles"
                     titleTag="h2"
-                    leadText="Our team is proactively looking for the following:"
+                    leadText="When you click through some of these jobs might say 'San Francisco' or 'London', but we're hiring all over the world. Our team is proactively looking for the following:"
                     leadTextClassName="opacity-80"
                 />
 

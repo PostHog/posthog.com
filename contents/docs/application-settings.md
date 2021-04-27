@@ -34,7 +34,7 @@ Settings scoped to the current project. These settings can be accessed by clicki
 
 #### Integrations
 - Toolbar settings. Enables or disables the Toolbar for the specific project.
-- Slack / Teams integration. Configure a webhook to receive notifications on Slack or Teams when certain action is received on PostHog (see [Slack integration](/docs/integrations/slack) or [Teams integration](/docs/integrations/microsoft-teams) for more details).
+- Slack / Teams integration. Configure a webhook to receive notifications on Slack or Teams when certain action is received on PostHog (see [Slack integration](/docs/libraries/slack) or [Teams integration](/docs/libraries/microsoft-teams) for more details).
 
 
 ## Personal settings

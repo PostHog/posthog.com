@@ -27,9 +27,19 @@ interface LayoutProps {
     isBlogArticlePage?: boolean
     children?: any
     className?: string
-    containerStyle?: Object
+    containerStyle?: Record<string, any>
     menuActiveKey?: string
 }
+
+const BlogHeaderContent = ({ title }: { title: string }) => (
+    <>
+        <h1 className="text-gray-900 center">{title}</h1>
+        <p className="text-gray-900 text-base center w-5/6">
+            PostHog is an open source product analytics platform designed to help you understand customers, quantify
+            value, and ship new features faster.
+        </p>
+    </>
+)
 
 const Layout = ({
     onPostPage = false,
@@ -50,8 +60,8 @@ const Layout = ({
 
         const skeletonLoaded = document.getElementsByClassName('skeleton-loading')
 
-        for (var i = 0; i < skeletonLoaded.length; i++) {
-            let el = skeletonLoaded[i]
+        for (let i = 0; i < skeletonLoaded.length; i++) {
+            const el = skeletonLoaded[i]
 
             el.classList.remove('skeleton-loading--250')
             el.classList.remove('skeleton-loading--500')
@@ -81,9 +91,11 @@ const Layout = ({
                         </span>
                     )}
                     {isBlogArticlePage && (
-                        <div className="blogHeaderTitle display-desktop">
-                            <h1 className="text-gray-900">{pageTitle}</h1>
-                        </div>
+                        <>
+                            <div className="blogHeaderTitle display-desktop">
+                                <BlogHeaderContent title={pageTitle} />
+                            </div>
+                        </>
                     )}
 
                     {onPostPage &&
@@ -114,7 +126,7 @@ const Layout = ({
                         <AntdLayout.Content>
                             {isBlogArticlePage && (
                                 <div className="display-mobile">
-                                    <h1>{pageTitle}</h1>
+                                    <BlogHeaderContent title={pageTitle} />
                                     <br />
                                 </div>
                             )}

@@ -38,7 +38,7 @@ _Prefer to watch a video? Check out the [Feature Flags section of our demo video
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment)
-1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python integration](/docs/integrations/python-integration), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
+1. Have added the [PostHog snippet](/docs/libraries/js) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python Library](/docs/libraries/python), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
 
 ## Determining a Use Case
 
@@ -123,7 +123,7 @@ if (posthog.isFeatureEnabled('new-beta-feature')) {
 }
 ```
 
-This snippet refers to our [JavaScript Integration](/docs/integrations/js-integration), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Integration](/docs/integrations/python-integration) (we're working to add this functionality to as many of our libraries as possible). 
+This snippet refers to our [JavaScript Library](/docs/libraries/js), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Library](/docs/libraries/python) (we're working to add this functionality to as many of our libraries as possible). 
 
 With that snippet, you can then do whatever you wish inside of it. You might change the CSS of a button, hide an entire section, or move things around. A simple example implementation would be:
 
@@ -158,7 +158,7 @@ posthog.onFeatureFlags(function() {
 
 ### Forcing feature flags to update 
 
-In our JS Integration, the reason we store flags as a cookie is to reduce the load on the server and improve the performance of your app, as it doesn't need to always make an HTTP request, it can simply refer to data stored locally in the browser. 
+In our JS Library, the reason we store flags as a cookie is to reduce the load on the server and improve the performance of your app, as it doesn't need to always make an HTTP request, it can simply refer to data stored locally in the browser. 
 
 While this makes your app faster, it means that if your user does something mid-session which causes the flag to turn on for them, this will not be immediately updated. As such, if you expect your app to have scenarios like this _and_ you want flags to update mid-session, you can reload them yourself, by using the `reloadFeatureFlags` function.
 

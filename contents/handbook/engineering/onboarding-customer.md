@@ -26,9 +26,9 @@ A standard structure you could maintain while doing that call is:
 
 Share your own screen and wizz through a demo of PostHog. The following order tends to work best:
 
-1. Tell them the big picture of how the demo will work "I am going to show you two main things - how we collect data and what we help you do with hit"
+1. Tell them the big picture of how the demo will work "I am going to show you two main things - how we collect data and what we help you do with it"
 1. Go to /events, show raw events coming in and explain how we're different from Mixpanel/Amplitude as we track all clicks, which means no `posthog.track()` calls necessary
-1. Go to /trends, show filtering by url, DAU, breakdown by initial domain referrer, anything else they ask for. It's a good chance to show some knowledge e.g. how to understand where traffic is coming from (UTM tags or referring domain)
+1. Go to /trends, show filtering by url, DAU, breakdown by initial domain referrer, anything else they ask for. It's a good opportunity to share some knowledge e.g. how to understand where traffic is coming from (UTM tags or referring domain)
 1. Go to /funnels, explain how those work and that PostHog specifically allows you to see each user that goes through the funnel, rather than aggregates
 1. Go to /people/retention and explain how the Retention table works
 1. Show off the Toolbar using the "Launch Toolbar" button
