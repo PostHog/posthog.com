@@ -116,3 +116,13 @@
 [[redirects]]
     from = "/handbook/company/team"
     to = "/handbook/people/team"
+
+    [[redirects]]
+        from = "(.*)"
+        to = "(.*)"
+    
+
+    [[redirects]]
+        from = "(.*)"
+        to = "(.*)"
+    
