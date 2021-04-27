@@ -42,4 +42,5 @@ People and culture:
 ## Slack channel
 
 [#people](https://posthog.slack.com/messages/people) - internally public, default for most people discussions
+
 [#people_ops](https://posthog.slack.com/messages/people_ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
