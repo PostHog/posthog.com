@@ -41,9 +41,8 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ## [Marketing](marketing)
 
-- Sean Packham (Team lead, Marketing Lead)
 - Mo Shehu (Content Marketer)
 
 ## [People & Culture](people)
 
-- Eltje Lange (People and Talent)
+- [Eltje Lange](/handbook/people/team#eltje-lange-people-and-talent)(People and Talent)

@@ -6,7 +6,7 @@ showTitle: true
 
 Direct all press enquiries to press@posthog.com
 
-Only James, Tim, Charles or Sean should talk to the press on PostHog's behalf.
+Only James, Tim or Charles should talk to the press on PostHog's behalf.
 
 ## Press releases
 
