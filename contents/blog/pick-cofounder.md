@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-By: [Mohammed Shehu](https://twitter.com/shehuphd), Content @ PostHog
+By: [Mohammed Shehu](https://twitter.com/shehuphd), Content Lead @ PostHog
 
 It's a well-worn trope at this point: a dev thinks of a product idea and bangs out a prototype in a week - but they have no clue how to sell the concept and acquire new users. Do you go it alone and try to grow the company from scratch? Or do you partner with someone who has a knack for sales and marketing and let them handle the business side of things? How much equity do you give them, and how do you pick someone you'll like but who will also pull their weight?
 
@@ -69,7 +69,6 @@ Crucially, have everything in writing. There are too many stories of co-founder 
 
 Lastly, focus on building systems that eventually negate your involvement in day-to-day tasks. As co-founders, you want to be climbing higher up the priority ladder to focus on more high-level problems within the company. Document all your processes, get your team members to own their individual remits, give them the resources they need to succeed, and source regular feedback on whether the systems you've put in place are working. In the long run, recusing yourselves from the day-to-day activities of the business will be a far more effective use of your time.
 
-Loved this? Let us know on Twitter or LinkedIn. Sign up for our newsletter to get more posts on startups, growth, and analytics.
-[insert newsletter subscription box]
+Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
 
 
