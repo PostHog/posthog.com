@@ -33,7 +33,7 @@ PostHog cannot always provide context around why people are leaving when they do
 
 In the case of voluntary departure, we will ask the team member if they wish to share what they're up to next with the team.
 
-In the case of involuntary departure, we are unlikely to communicate any reasons to the rest of the company other than the fact the person has left. Whilst transparency is something we value greatly, this information affects individuals' privacy. 
+In the case of involuntary departure, we will aim to be as transparent as possible about the reasons behind the departure, while respecting the individuals' privacy.
 
 ## The Process for Offboarding
 
