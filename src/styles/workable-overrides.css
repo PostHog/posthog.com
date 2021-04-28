@@ -7,6 +7,9 @@
     @apply inline-block w-full md:w-1/2 md:float-left text-left mt-6 md:px-6 lg:px-12;
 }
 
+.whr-item {
+    display: block !important;
+}
 .whr-title {
     @apply font-sans text-base mb-1;
 }
@@ -20,7 +23,7 @@
 }
 
 .whr-location {
-    @apply text-gray-100 text-opacity-60 text-base-larger;
+    display: none;
 }
 
 .whr-location span {

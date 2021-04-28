@@ -323,6 +323,22 @@
             "handbook/people/feedback",
             "handbook/people/onboarding",
             "handbook/people/offboarding"
+        ],
+        "child_entries": ["Team Structure"]
+    },
+    {
+        "entry": "Team Structure",
+        "name": "Team Structure",
+        "items": [
+            "handbook/people/team-structure/team-structure",
+            "handbook/people/team-structure/why-small-teams",
+            "handbook/people/team-structure/core-experience",
+            "handbook/people/team-structure/design",
+            "handbook/people/team-structure/extensibility",
+            "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/infrastructure",
+            "handbook/people/team-structure/marketing",
+            "handbook/people/team-structure/people"
         ]
     },
     {
@@ -384,6 +400,46 @@
             "handbook/growth/sales/yc-onboarding",
             "handbook/growth/sales/demos",
             "handbook/growth/sales/billing"
+        ]
+    },
+    {
+        "entry": "Engineering",
+        "name": "Engineering",
+        "child_entries": ["Beginners Guide"],
+        "items": [
+            "handbook/engineering/development-process",
+            "handbook/engineering/debugging",
+            "handbook/engineering/how-we-review",
+            "handbook/engineering/release-new-version",
+            "handbook/engineering/releasing-python",
+            "handbook/engineering/onboarding-customer",
+            "handbook/engineering/setup-ssl-locally",
+            "handbook/engineering/ee-setup",
+            "handbook/engineering/common-issues",
+            "handbook/engineering/mdx"
+        ]
+    },
+    {
+        "entry": "Beginners Guide",
+        "name": "Beginners Guide",
+        "items": [
+            "handbook/engineering/beginners-guide/introduction",
+            "handbook/engineering/beginners-guide/getting-to-know-posthog",
+            "handbook/engineering/beginners-guide/getting-started",
+            "handbook/engineering/beginners-guide/developer-workflow",
+            "handbook/engineering/beginners-guide/technologies-to-learn"
+        ]
+    },
+    {
+        "entry": "Strategy",
+        "name": "Strategy",
+        "items": [
+            "handbook/strategy/strategy",
+            "handbook/strategy/business-model",
+            "handbook/strategy/roadmap",
+            "handbook/strategy/prioritization",
+            "handbook/strategy/investors",
+            "handbook/strategy/investor-updates"
         ]
     }
 ]

@@ -34,7 +34,7 @@ The engineering team can people in rather than having to following everything.
 
 ### Social
 
-Speak to Sean or James for access.
+Speak to James for access.
 
 **Channels:**
 
@@ -70,7 +70,7 @@ Discuss sharing specific content with relevant communities:
 
 ### Events
 
-Speak to Sean for access.
+Speak to James for access.
 
 We use Eventbrite to organize events.
 

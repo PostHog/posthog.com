@@ -3,7 +3,7 @@ import { CallToAction } from 'components/CallToAction'
 
 export const LandingPageCallToAction = () => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col hero-cta">
             <CallToAction icon="rocket" href="https://app.posthog.com/signup?src=home-hero" className="mx-auto">
                 Get Started
             </CallToAction>
