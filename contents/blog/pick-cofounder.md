@@ -1,6 +1,6 @@
 ---
 date: 2021-04-28
-title: The techie and the salesman: A story of our devtool company partnership (plus other co-founder selection tips)
+title: An engineer's guide to picking a cofounder
 rootPage: /blog
 sidebar: Blog
 showTitle: true
