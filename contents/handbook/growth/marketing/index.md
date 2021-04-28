@@ -131,8 +131,6 @@ Documentation contributes more to *Activation* and *Retention* than *Acquisition
 
 Prioritizing hiring for functions based on acquisition success and capacity in relation to other functions.
 
-Lead: Sean
-
 - Product marketing: currently hiring
 - Content marketing: Mo
 - Community: hiring next

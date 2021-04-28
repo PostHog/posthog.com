@@ -7,7 +7,6 @@ hideAnchor: true
 
 ## People
 
-- [Sean Packham (Team lead, Marketing Lead)](/handbook/company/team#sean-packham-marketing-lead)
 - Mo Shehu, Content Marketer
 
 ## Mission

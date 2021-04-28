@@ -3,6 +3,7 @@ import React from 'react'
 import { Header } from '../components/Header'
 import { Hero } from '../components/LandingPage/Hero'
 import { Features } from '../components/LandingPage/Features'
+import { Blockquote } from '../components/LandingPage/Blockquote'
 import { PrivateCloud } from '../components/LandingPage/PrivateCloud'
 import { Tutorials } from '../components/LandingPage/Tutorials'
 import { RecentBlogPosts } from '../components/LandingPage/RecentBlogPosts'
@@ -23,6 +24,7 @@ const IndexPage = () => {
             <Header onPostPage={false} isBlogArticlePage={false} isHomePage={true} menuActiveKey="active" />
             <Hero />
             <Features />
+            <Blockquote />
             <PrivateCloud />
             <Tutorials />
             <RecentBlogPosts />

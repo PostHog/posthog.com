@@ -25,9 +25,9 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-- **Infrastructure and Deployments**
-    - James Greenhill (Team lead, Data/Infra Engineer)
-    - Karl-Aksel Puulmann (Full Stack Engineer)
+- **[Infrastructure and Deployments](infrastructure)**
+    - [James Greenhill](/handbook/company/team/#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
+    - [Karl-Aksel Puulmann](/handbook/company/team/#karl-aksel-puulmann-software-engineer) (Full Stack Engineer)
 
 <br />
 
@@ -41,9 +41,8 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ## [Marketing](marketing)
 
-- Sean Packham (Team lead, Marketing Lead)
 - Mo Shehu (Content Marketer)
 
 ## [People & Culture](people)
 
-- Eltje Lange (People and Talent)
+- [Eltje Lange](/handbook/people/team#eltje-lange-people-and-talent) (People and Talent)

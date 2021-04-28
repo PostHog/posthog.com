@@ -6,16 +6,22 @@
 
     &:before {
         background: url(../images/rocket.svg);
-        bottom: -10%;
+        bottom: 10%;
         content: '';
-        display: none;
+        display: block;
         height: 939px;
+        left: -3%;
         position: absolute;
-        left: 3%;
         width: 174px;
+        zoom: 0.5;
 
         @media (min-width: 640px) {
-            display: block;
+            bottom: -40%;
+            zoom: 1;
+        }
+
+        @media (min-width: 1024px) {
+            left: 3%;
         }
     }
 
@@ -42,6 +48,18 @@
             right: -20%;
             zoom: 1;
         }
+    }
+}
+
+.open-source {
+    &:before {
+        background: url(../images/open-source.svg) no-repeat;
+        content: '';
+        left: -71px;
+        height: 46px;
+        position: absolute;
+        top: -46px;
+        width: 121px;
     }
 }
 
@@ -79,30 +97,125 @@
     transition: none;
 }
 
-.product-features {
-    grid-template-columns: repeat(4, 1fr);
+// cta gets pushed too low on mobile, so we set an order so we can change it
 
-    @media (min-width: 640px) and (max-width: 1023px) {
-        grid-template-columns: repeat(4, 115px);
+.hero-headline {
+    order: 1;
+}
+.hero-icons {
+    order: 2;
+}
+.hero-more-features {
+    order: 3;
+}
+.hero-cta {
+    order: 4;
+    @media (max-width: 639px) {
+        order: 1;
+    }
+}
+.hero-proof {
+    order: 5;
+}
+
+.product-features {
+    grid-template-columns: repeat(1, 1fr);
+
+    @media (max-width: 639px) {
+        // factor offset of left timeline to make things look more center
+        margin-right: -25px;
+    }
+
+    // medium
+    @media (min-width: 640px) and (max-width: 768px) {
+        grid-template-columns: repeat(5, 20%);
+    }
+
+    // large
+    @media (min-width: 769px) and (max-width: 1023px) {
+        grid-template-columns: repeat(5, 20%);
     }
 
     @media (min-width: 1024px) {
-        grid-template-columns: repeat(7, 115px);
+        grid-template-columns: repeat(5, max-content);
     }
 
     > div {
         &.opacity-100 {
-            animation: animateIn100 0.5s ease;
+            // animation: animateIn100 0.5s ease;
         }
 
         &.opacity-50 {
-            animation: animateIn50 0.5s ease;
+            // animation: animateIn50 0.5s ease;
         }
 
         animation-fill-mode: forwards !important;
         position: relative;
-        opacity: 0;
+        // opacity: 0;
         //width: 115px;
+
+        // dots on timeline
+        &:before {
+            background: #fff;
+            border: solid 3px #27164e;
+            border-radius: 16px;
+            content: '';
+            height: 22px;
+            position: absolute;
+            width: 22px;
+            z-index: 10;
+
+            @media (max-width: 639px) {
+                left: -38px;
+                top: 16px;
+            }
+
+            @media (min-width: 640px) {
+                bottom: -38px;
+                left: calc(50% - 8px);
+            }
+        }
+
+        // background timeline bar
+        &:after {
+            background: rgba(255, 255, 255, 0.4);
+            content: '';
+            position: absolute;
+
+            @media (max-width: 639px) {
+                bottom: 0;
+                left: -30px;
+                top: 0;
+                width: 6px;
+            }
+
+            @media (min-width: 640px) {
+                bottom: -30px;
+                height: 6px;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        // the first and last timeline items shouldn't have the bar extend past their timeline dots
+
+        &:first-child:after {
+            @media (max-width: 639px) {
+                top: 16px;
+            }
+            @media (min-width: 640px) {
+                left: 50%;
+            }
+        }
+
+        &:last-child:after {
+            @media (max-width: 639px) {
+                bottom: calc(100% - 16px);
+            }
+            @media (min-width: 640px) {
+                right: 50%;
+            }
+        }
 
         &:nth-child(1) {
             animation-delay: 0.15s;
@@ -129,6 +242,12 @@
             animation-delay: 1.2s;
         }
     }
+
+    .feature-icon {
+        @media (max-width: 639px) {
+            flex: 0 0 40px;
+        }
+    }
 }
 
 .spotlight {
@@ -148,10 +267,28 @@
 
 .lp-features {
     background: linear-gradient(180deg, #2c1e60 0%, #3c3288 100%);
+
+    li {
+        display: flex;
+
+        figure {
+            flex: 0 0 auto;
+            margin-right: 0.5em;
+        }
+
+        span {
+            flex: 1;
+        }
+    }
 }
 
 .recent-blog-posts {
     background: linear-gradient(180deg, #2a235b 0%, #08042f 100%);
+}
+
+.blockquote-section {
+    background: #3c3288;
+    // background: linear-gradient(180deg, #3c3288 0%, #3c3288 100%;)
 }
 
 .private-cloud {
