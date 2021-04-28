@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Speak to James, Sean or Yakko for access.
+Speak to James or Yakko for access.
 
 We use Mailchimp for our newsletter.
 

@@ -304,6 +304,7 @@
             "handbook/people/team-structure/design",
             "handbook/people/team-structure/extensibility",
             "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/infrastructure",
             "handbook/people/team-structure/marketing",
             "handbook/people/team-structure/people"
         ]
@@ -357,8 +358,10 @@
     {
         "entry": "Engineering",
         "name": "Engineering",
+        "child_entries": ["Beginners Guide"],
         "items": [
             "handbook/engineering/development-process",
+            "handbook/engineering/debugging",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
             "handbook/engineering/releasing-python",
@@ -367,6 +370,17 @@
             "handbook/engineering/ee-setup",
             "handbook/engineering/common-issues",
             "handbook/engineering/mdx"
+        ]
+    },
+    {
+        "entry": "Beginners Guide",
+        "name": "Beginners Guide",
+        "items": [
+            "handbook/engineering/beginners-guide/introduction",
+            "handbook/engineering/beginners-guide/getting-to-know-posthog",
+            "handbook/engineering/beginners-guide/getting-started",
+            "handbook/engineering/beginners-guide/developer-workflow",
+            "handbook/engineering/beginners-guide/technologies-to-learn"
         ]
     },
     {
