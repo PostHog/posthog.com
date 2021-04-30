@@ -43,7 +43,7 @@ We currently run performance reviews every 6 months, based on your start date. W
 
 While the 360 degree team meeetings are purely feedback-focused, you should aim to spend the bulk of the performance review looking ahead to the next 6 months (and beyond). 
 
-Part of the review will include your [compensation](/handbook/people/compensation), as we directly link this to your level of experience and your performance. You should not, however, expect every performance review to result in a change to your salary. You will find that your Step will change more frequently than your Level. If your Level and Step hasn’t changed, you may want to work with your manager to set up an action plan for the next 6 months. 
+Part of the review will include your [compensation](/handbook/people/compensation), as we directly link this to your level of experience and your performance. You should not, however, expect every performance review to result in a change to your Step or Level - most of the time, they won't. Additionally, you will find that your Step will change more frequently than your Level. 
 
 ### How to Give Good Feedback
 
