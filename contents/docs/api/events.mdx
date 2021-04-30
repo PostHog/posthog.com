@@ -415,6 +415,63 @@ GET /api/event/sessions/?session_recording_id=179221e51743cd-081d4a8b3f0596-103c
 ```json
 HTTP 200 OK
 Content-Type: application/json
+{
+    "result": [
+        {
+            "distinct_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+            "global_session_id": 3,
+            "length": 92,
+            "start_time": "2021-04-30T09:31:21.753000Z",
+            "end_time": "2021-04-30T09:32:53.836000Z",
+            "event_count": 33,
+            "events": [
+                {
+                    "id": "0179221e-5d3c-0000-561f-850d00218ea1",
+                    "distinct_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+                    "properties": {
+                        "$os": "Mac OS X",
+                        "$browser": "Chrome",
+                        "$device_type": "Desktop",
+                        "$current_url": "http://localhost:1313/blog/",
+                        "$host": "localhost:1313",
+                        "$pathname": "/blog/",
+                        "$browser_version": 90,
+                        "$screen_height": 1050,
+                        "$screen_width": 1680,
+                        "$lib": "web",
+                        "$lib_version": "1.9.7",
+                        "$insert_id": "6xs981kee5ym7sak",
+                        "$time": 1619775080.831,
+                        "distinct_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+                        "$device_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+                        "$initial_referrer": "$direct",
+                        "$initial_referring_domain": "$direct",
+                        "$referrer": "$direct",
+                        "$referring_domain": "$direct",
+                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
+                        "$active_feature_flags": [],
+                        "$ip": "49.207.221.188"
+                    },
+                    "event": "$pageview",
+                    "timestamp": "2021-04-30T09:31:21.753000+00:00",
+                    "person": null,
+                    "elements": [],
+                    "elements_chain": ""
+                },
+            ],
+            "properties": {},
+            "matching_events": [],
+            "email": null,
+            "session_recordings": [
+                {
+                    "id": "17921fdada3f5-02688ca8f7c53b8-48183301-1aeaa0-17921fdadb72a2",
+                    "viewed": false
+                }
+            ]
+        }
+    ],
+    "pagination": null
+}
 
 ```
 
