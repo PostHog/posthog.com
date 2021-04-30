@@ -10,7 +10,7 @@ By [Mo](https://twitter.com/shehuphd), Content Lead @ PostHog
 
 So, you’ve decided to build an open-source product.
 
-While your choice is highly commendable, the rabid applause from devs on GitHub and HackerNews won’t pay the bills. At some point, you’ll need to monetize your product to sustain its development (and your team) in the long run.
+While your choice is highly commendable, the resounding applause from devs on GitHub and HackerNews won’t pay the bills. At some point, you’ll need to monetize your product to sustain its development (and your team) in the long run.
 
 Just one thing: **you need to build a community.**
 
@@ -57,7 +57,7 @@ At PostHog, we launched a (paid) hosted version first before moving to an open-c
 <iframe src="https://giphy.com/embed/9Y74y9h95QBizsNfd8" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/paidoff-trutv-paid-off-michael-torpey-9Y74y9h95QBizsNfd8">via GIPHY</a></p>
 
 ## Option #4: Donations
-This approach is great if you’re merely maintaining your product as a hobby and are fine with earning ice cream money each month. It quickly becomes unfeasible if you want to maintain an entire engineering team on donations. You can enjoy quite a bit of success going the donation route if you have a stellar product, but these are outliers and shouldn’t be used as revenue benchmarks. Besides, if you already have a great product that’s raking in donations, you probably shouldn’t be reading this post.
+This approach is great if you created your product as a hobby and are fine with earning a minimal amount of money each month to cover small expenses. It quickly becomes unfeasible if you want to maintain an entire engineering team on donations. You can enjoy quite a bit of success going the donation route if you have a stellar product, but these are outliers and shouldn’t be used as revenue benchmarks. Besides, if you already have a great product that’s raking in donations, you probably shouldn’t be reading this post.
 
 <iframe src="https://giphy.com/embed/3o6Zt3OhbsQ5VLPmBW" width="480" height="338" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/southparkgifs-3o6Zt3OhbsQ5VLPmBW">via GIPHY</a></p>
 
