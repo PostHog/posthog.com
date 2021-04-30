@@ -19,13 +19,13 @@ Get a list of events from PostHog.
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
-| `event` | string | Types of events to fetch. For example, `$pageview`.  |
-| `after` | ISO formatted string | The datetime from which to fetch the events. The value should be in an iso format, for example: `2020-05-25T14:06:33.584171Z`. |  |
-| `before` | ISO formatted string| The datetime up until which to fetch the events. The value hould be in an iso format, for example: `2020-05-25T14:06:33.584171Z`. |  |
-| `person_id` | string | |
-| `action_id` | integer | |
-| `distinct_id` | string | Filters events based on a distinct id of a person, for example: `179138786b071-030d78511284978-48183301-1aeaa0-179138786b1d8a`  |
-| `properties` | array | The key/values that you want to filter. For example: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` |
+| `event` | `string` | Types of events to fetch. For example, `$pageview`.  | ❌ |
+| `after` | ISO formatted string | The datetime from which to fetch the events. The value should be in an iso format, for example: `2020-05-25T14:06:33.584171Z`. | ❌ |
+| `before` | ISO formatted string| The datetime up until which to fetch the events. The value hould be in an iso format, for example: `2020-05-25T14:06:33.584171Z`. | ❌ |
+| `person_id` | `int` (FOSS) or `string` as UUID (EE)  | Unique ID for a person row in the database.  | ❌ |
+| `action_id` | `int` | Unique ID of the action the event should map to. | ❌ |
+| `distinct_id` | `string` | Filters events based on a distinct id of a person, for example: `179138786b071-030d78511284978-48183301-1aeaa0-179138786b1d8a`  | ❌ |
+| `properties` | Array of filters (see next column) | The key/values that you want to filter. For example: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
 
 
 </HiddenSection>
@@ -92,6 +92,7 @@ Content-Type: application/json
 
 </HiddenSection>
 
+
 <Endpoint endpoint='/api/event/sessions' allowedMethods={['get']} />
 
 Get a list sessions for the events from PostHog.
@@ -101,10 +102,10 @@ Get a list sessions for the events from PostHog.
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
-| `pagination` |  |  |
-| `distinct_id` | string |  |Filters for session based on the `distinct_id`. |
-| `duration` | integer | Duration of the session in seconds, for example: `224`. |  |
-| `duration_operator` | string | |
+| `pagination` | `dict` | Object containing information about pagination (e.g. offset, last page info). | ❌ |
+| `distinct_id` | `string` | Filters for session based on the `distinct_id`. | ❌ |
+| `duration` | `int` | Duration of the session in seconds, for example: `224`. | ❌ |
+| `duration_operator` | `lt` or `gt` | Used together with `duration` to specify if the duration to fetch for should be greater than (`gt`) or lower than (`lt`) the specified one. | ❌ |
 
 
 </HiddenSection>
@@ -369,308 +370,6 @@ Content-Type: application/json
                     "elements": [],
                     "elements_chain": ""
                 },
-                {
-                    "id": "017921fe-e1c1-0000-7fb0-209aca306424",
-                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                    "properties": {
-                        "$os": "Mac OS X",
-                        "$browser": "Safari",
-                        "$device_type": "Desktop",
-                        "$current_url": "http://localhost:1313/",
-                        "$host": "localhost:1313",
-                        "$pathname": "/",
-                        "$browser_version": 14,
-                        "$screen_height": 1050,
-                        "$screen_width": 1680,
-                        "$lib": "web",
-                        "$lib_version": "1.9.7",
-                        "$insert_id": "jaxkm562ynvwotqd",
-                        "$time": 1619773019.049,
-                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$initial_referrer": "http://localhost:1313/",
-                        "$initial_referring_domain": "localhost:1313",
-                        "$referrer": "http://localhost:1313/",
-                        "$referring_domain": "localhost:1313",
-                        "$active_feature_flags": [],
-                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
-                        "$ip": "49.207.221.188"
-                    },
-                    "event": "$pageview",
-                    "timestamp": "2021-04-30T08:56:59.612000+00:00",
-                    "person": null,
-                    "elements": [],
-                    "elements_chain": ""
-                },
-                {
-                    "id": "017921ff-4a55-0000-f420-f23414d0203d",
-                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                    "properties": {
-                        "$os": "Mac OS X",
-                        "$browser": "Safari",
-                        "$device_type": "Desktop",
-                        "$current_url": "http://localhost:1313/",
-                        "$host": "localhost:1313",
-                        "$pathname": "/",
-                        "$browser_version": 14,
-                        "$screen_height": 1050,
-                        "$screen_width": 1680,
-                        "$lib": "web",
-                        "$lib_version": "1.9.7",
-                        "$insert_id": "y8o6vthxgr4phhzt",
-                        "$time": 1619773049.152,
-                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$initial_referrer": "http://localhost:1313/",
-                        "$initial_referring_domain": "localhost:1313",
-                        "$referrer": "http://localhost:1313/",
-                        "$referring_domain": "localhost:1313",
-                        "$active_feature_flags": [],
-                        "$event_type": "click",
-                        "$ce_version": 1,
-                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
-                        "$ip": "49.207.221.188"
-                    },
-                    "event": "$autocapture",
-                    "timestamp": "2021-04-30T08:57:29.414000+00:00",
-                    "person": null,
-                    "elements": [
-                        {
-                            "event": null,
-                            "text": "Home",
-                            "tag_name": "a",
-                            "attr_class": null,
-                            "href": "http://localhost:1313/",
-                            "attr_id": null,
-                            "nth_child": 1,
-                            "nth_of_type": 1,
-                            "attributes": {
-                                "attr__href": "http://localhost:1313/",
-                                "attr__style": "font-size: 18px; text-transform: none"
-                            },
-                            "order": 0
-                        },
-                        {
-                            "event": null,
-                            "text": null,
-                            "tag_name": "li",
-                            "attr_class": [
-                                "uk-active"
-                            ],
-                            "href": null,
-                            "attr_id": null,
-                            "nth_child": 1,
-                            "nth_of_type": 1,
-                            "attributes": {
-                                "attr__class": "uk-active "
-                            },
-                            "order": 1
-                        },
-                        {
-                            "event": null,
-                            "text": null,
-                            "tag_name": "ul",
-                            "attr_class": [
-                                "uk-navbar-nav",
-                                "uk-visible@s"
-                            ],
-                            "href": null,
-                            "attr_id": null,
-                            "nth_child": 1,
-                            "nth_of_type": 1,
-                            "attributes": {
-                                "attr__class": "uk-navbar-nav uk-visible@s"
-                            },
-                            "order": 2
-                        },
-                        {
-                            "event": null,
-                            "text": null,
-                            "tag_name": "div",
-                            "attr_class": [
-                                "uk-navbar-right"
-                            ],
-                            "href": null,
-                            "attr_id": null,
-                            "nth_child": 1,
-                            "nth_of_type": 1,
-                            "attributes": {
-                                "attr__class": "uk-navbar-right"
-                            },
-                            "order": 3
-                        },
-                        {
-                            "event": null,
-                            "text": null,
-                            "tag_name": "nav",
-                            "attr_class": [
-                                "uk-margin",
-                                "uk-navbar",
-                                "uk-navbar-container"
-                            ],
-                            "href": null,
-                            "attr_id": null,
-                            "nth_child": 1,
-                            "nth_of_type": 1,
-                            "attributes": {
-                                "attr__class": "uk-navbar-container uk-margin uk-navbar",
-                                "attr__style": "padding-right: 3rem",
-                                "attr__uk-navbar": "mode: click;"
-                            },
-                            "order": 4
-                        },
-                        {
-                            "event": null,
-                            "text": null,
-                            "tag_name": "div",
-                            "attr_class": [
-                                "uk-sticky",
-                                "uk-sticky-fixed"
-                            ],
-                            "href": null,
-                            "attr_id": null,
-                            "nth_child": 1,
-                            "nth_of_type": 1,
-                            "attributes": {
-                                "attr__class": "uk-sticky uk-sticky-fixed",
-                                "attr__style": "position: fixed; top: 0px; width: 1381px;",
-                                "attr__uk-sticky": "sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar"
-                            },
-                            "order": 5
-                        },
-                        {
-                            "event": null,
-                            "text": null,
-                            "tag_name": "div",
-                            "attr_class": [
-                                "wrapper"
-                            ],
-                            "href": null,
-                            "attr_id": null,
-                            "nth_child": 1,
-                            "nth_of_type": 1,
-                            "attributes": {
-                                "attr__class": "wrapper"
-                            },
-                            "order": 6
-                        },
-                        {
-                            "event": null,
-                            "text": null,
-                            "tag_name": "body",
-                            "attr_class": [],
-                            "href": null,
-                            "attr_id": null,
-                            "nth_child": null,
-                            "nth_of_type": null,
-                            "attributes": {
-                                "attr__class": "\"nth-child=",
-                                "2\"nth-of-type": "1"
-                            },
-                            "order": 7
-                        }
-                    ],
-                    "elements_chain": "a:attr__href=\"http://localhost:1313/\"attr__style=\"font-size: 18px; text-transform: none\"href=\"http://localhost:1313/\"nth-child=\"1\"nth-of-type=\"1\"text=\"Home\";li..uk-active:attr__class=\"uk-active \"nth-child=\"1\"nth-of-type=\"1\";ul.uk-navbar-nav.uk-visible@s:attr__class=\"uk-navbar-nav uk-visible@s\"nth-child=\"1\"nth-of-type=\"1\";div.uk-navbar-right:attr__class=\"uk-navbar-right\"nth-child=\"1\"nth-of-type=\"1\";nav.uk-margin.uk-navbar.uk-navbar-container:attr__class=\"uk-navbar-container uk-margin uk-navbar\"attr__style=\"padding-right: 3rem\"attr__uk-navbar=\"mode: click;\"nth-child=\"1\"nth-of-type=\"1\";div.uk-sticky.uk-sticky-fixed:attr__class=\"uk-sticky uk-sticky-fixed\"attr__style=\"position: fixed; top: 0px; width: 1381px;\"attr__uk-sticky=\"sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar\"nth-child=\"1\"nth-of-type=\"1\";div.wrapper:attr__class=\"wrapper\"nth-child=\"1\"nth-of-type=\"1\";body.:attr__class=\"\"nth-child=\"2\"nth-of-type=\"1\""
-                },
-                {
-                    "id": "017921ff-4a59-0000-50c8-6cfee0654df3",
-                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                    "properties": {
-                        "$os": "Mac OS X",
-                        "$browser": "Safari",
-                        "$device_type": "Desktop",
-                        "$current_url": "http://localhost:1313/",
-                        "$host": "localhost:1313",
-                        "$pathname": "/",
-                        "$browser_version": 14,
-                        "$screen_height": 1050,
-                        "$screen_width": 1680,
-                        "$lib": "web",
-                        "$lib_version": "1.9.7",
-                        "$insert_id": "5yslxnkk9cv77iai",
-                        "$time": 1619773049.156,
-                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$initial_referrer": "http://localhost:1313/",
-                        "$initial_referring_domain": "localhost:1313",
-                        "$referrer": "http://localhost:1313/",
-                        "$referring_domain": "localhost:1313",
-                        "$active_feature_flags": [],
-                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
-                        "$ip": "49.207.221.188"
-                    },
-                    "event": "$pageleave",
-                    "timestamp": "2021-04-30T08:57:29.418000+00:00",
-                    "person": null,
-                    "elements": [],
-                    "elements_chain": ""
-                },
-                {
-                    "id": "017921ff-6968-0000-e0f8-9c0f86e4ab94",
-                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                    "properties": {
-                        "$os": "Mac OS X",
-                        "$browser": "Safari",
-                        "$device_type": "Desktop",
-                        "$current_url": "http://localhost:1313/portfolio/",
-                        "$host": "localhost:1313",
-                        "$pathname": "/portfolio/",
-                        "$browser_version": 14,
-                        "$screen_height": 1050,
-                        "$screen_width": 1680,
-                        "$lib": "web",
-                        "$lib_version": "1.9.7",
-                        "$insert_id": "2tz8yehzpajtlgy5",
-                        "$time": 1619773054.055,
-                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$initial_referrer": "http://localhost:1313/",
-                        "$initial_referring_domain": "localhost:1313",
-                        "$referrer": "http://localhost:1313/blog/",
-                        "$referring_domain": "localhost:1313",
-                        "$active_feature_flags": [],
-                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
-                        "$ip": "49.207.221.188"
-                    },
-                    "event": "$pageview",
-                    "timestamp": "2021-04-30T08:57:34.334000+00:00",
-                    "person": null,
-                    "elements": [],
-                    "elements_chain": ""
-                },
-                {
-                    "id": "01792201-6f2e-0000-61c1-0f116904d428",
-                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                    "properties": {
-                        "$os": "Mac OS X",
-                        "$browser": "Safari",
-                        "$device_type": "Desktop",
-                        "$current_url": "http://localhost:1313/portfolio/",
-                        "$host": "localhost:1313",
-                        "$pathname": "/portfolio/",
-                        "$browser_version": 14,
-                        "$screen_height": 1050,
-                        "$screen_width": 1680,
-                        "$lib": "web",
-                        "$lib_version": "1.9.7",
-                        "$insert_id": "uur4qjxkuhj0qndw",
-                        "$time": 1619773186.515,
-                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
-                        "$initial_referrer": "http://localhost:1313/",
-                        "$initial_referring_domain": "localhost:1313",
-                        "$referrer": "http://localhost:1313/blog/",
-                        "$referring_domain": "localhost:1313",
-                        "$active_feature_flags": [],
-                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
-                        "$ip": "49.207.221.188"
-                    },
-                    "event": "$pageview",
-                    "timestamp": "2021-04-30T08:59:46.875000+00:00",
-                    "person": null,
-                    "elements": [],
-                    "elements_chain": ""
-                }
             ],
             "properties": {},
             "matching_events": [],
@@ -698,8 +397,8 @@ Get a list session recordings for the events from PostHog.
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
-| `session_recording_id` | string |   |
-| `save_view` | boolean |  |  |
+| `session_recording_id` | `string` | ID of the session recording for which to request the events on. | ❌ |
+| `save_view` | `boolean` | Wheether to mark this session recording as "viewed". | ❌ |
 
 </HiddenSection>
 
@@ -716,7 +415,6 @@ GET /api/event/sessions/?session_recording_id=179221e51743cd-081d4a8b3f0596-103c
 ```json
 HTTP 200 OK
 Content-Type: application/json
-
 
 ```
 
