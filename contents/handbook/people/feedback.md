@@ -26,35 +26,24 @@ With us growing the team, we will be splitting the session into smaller groups i
 - That being said, avoid piling on and repeating feedback others have given unless you have a different perspective or can add more context. It is ok to say "+1 to what X said about Y" and move on. Do not spend 2min repeating the same point that has already been made by someone else. 
 - Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you). 
 
-## Performance Reviews
+## Performance reviews
 
-In addition to informal day-to-day feedback and the full team 360 degree feedback session, it is important that we enable team members to take a step back every so often and look at their performance in a wider context. This helps us to support a team member's growth and ensure it is aligned with PostHog's needs. 
-
-We have developed a simple performance review process to support this. We strongly believe that [it is _not_ a manager's responsibility](/handbook/company/management) to give their team members feedback, except in their capacity as any other individual contributor. 
+In addition to informal day-to-day feedback and the full team 360 degree feedback session, it is important that we enable team members to take a step back every so often and look at their performance and aspirations in a wider context. This helps us to support a team member's growth and ensure it is aligned with PostHog's needs. 
 
 This process is intended to be self-serve. The People team will ensure the process is kicked off and recorded properly, but it is the individual team member's responsibility to run the process. If you need support, ask your manager, Eltje or Charles for help. 
 
 We currently run performance reviews every 6 months, based on your start date. We will probably need to change this cadence as we scale, but this feels appropriate for our current stage of growth. 
 
-### The Performance Review Process
+### The performance review process
 
 1. The People team adds recurring calendar invites to the calendar of the team member and their manager to kick off the performance review process.  
-2. The team member will schedule a 1 hour feedback meeting, with an open invitation to _anyone_ at PostHog who wants to give feedback. It will be the team member's responsibility to encourage people to join if they would like their feedback. A member of the people team may sit in on the occasional feedback meeting to see how well they are working. 
-3. The feedback meeting will be facilitated by the team members manager. We will go around each person in the session and discuss:
-    1. What has gone well?
-    2. What has not gone well?
-    3. What should they focus on next at PostHog?
-    4. What would be good for them from a personal development perspective?
-4. We expect every participant to come prepared with 75% constructive [feedback](/handbook/people/feedback#how-to-give-good-feedback). 
-5. The team member's manager then summarizes the outcome of that meeting in this [document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing).
-6. The team member also writes up their own self-assessment in this [document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing).
-7. Within a week of the feedback meeting, the team member and their manager should have a 30min 1-1 followup discussion to reflect on the feedback and align on next steps.
+2. The team member will schedule a 1 hour performance review meeting with their manager. A member of the people team may sit in on the occasional feedback meeting to see how well they are working as we get up and running. 
+3. In advance, the team member writes up a self-assessment in [this document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing), and their manager will fill out a similar assessment in [this document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing). You will likely want to include and reflect on feedback you've previously received in a full team 360 degree feedback session. 
+4. Afterwards, the manager communicates back to the People team that the review is complete and what next steps are needed (if any), including around any salary adjustments if the team member's Step or Level should change. The People team will store these docs on Charlie HR for future reference.
 
-Part of the followup conversation with your manager will include your [compensation](/handbook/people/compensation), as we directly link this to your level of  experience and your performance. You should not, however, expect every performance review to result in a change to your salary. You will find that your Step will change more frequently than your Level. If your Level and Step hasn’t changed, you may want to work with your manager to set up an action plan for the next 6 months. 
+While the 360 degree team meeetings are purely feedback-focused, you should aim to spend the bulk of the performance review looking ahead to the next 6 months (and beyond). 
 
-8. The manager then communicates back to the People team that the review is complete and what next steps are needed (if any), including around any salary adjustments if the team member's Step or Level should change. The People team will store these docs on Charlie HR for future reference.
-
-Feedback from the team may be listened to, but you may also actively choose not to act on it, which is what the discussion with your manager should cover. Or, if you do act on it, this also gives you something to work on to improve demonstrably for next time, perhaps to justify an increase in Step or Level.
+Part of the review will include your [compensation](/handbook/people/compensation), as we directly link this to your level of experience and your performance. You should not, however, expect every performance review to result in a change to your salary. You will find that your Step will change more frequently than your Level. If your Level and Step hasn’t changed, you may want to work with your manager to set up an action plan for the next 6 months. 
 
 ### How to Give Good Feedback
 
