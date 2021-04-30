@@ -9,80 +9,54 @@ hideAnchor: true
 
 By: [Mohammed Shehu](https://twitter.com/shehuphd), Content Lead @ PostHog
 
-It's a well-worn trope at this point: a dev thinks of a product idea and bangs out a prototype in a week - but they have no clue how to sell the concept and acquire new users. Do you go it alone and try to grow the company from scratch? Or do you partner with someone who has a knack for sales and marketing and let them handle the business side of things? How much equity do you give them, and how do you pick someone you'll like but who will also pull their weight?
+What could be worse than handing out 50% of your company's equity to a co-founder who doesn't understand the product as much as you do, and all they seem to bring is the ability to talk?
 
-<iframe src="https://giphy.com/embed/xUOxeSLEI50nx56CzK" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/cbc-funny-comedy-xUOxeSLEI50nx56CzK">via GIPHY</a></p>
-
-Technical founders struggle with these questions all the time. It can be terrifying to hand out 50% of your company's equity to a co-founder who doesn't understand the product as much as you do. Likewise, a sales-focused founder might hesitate to commit to writing code and being responsible for shipping regularly. There's a case to be made for and against getting a co-founder, and that's what we'll look at in this post.
+Likewise, a sales-focused founder may be struggling to know what makes you great, or - worse - may not appreciate the importance of development. There's a case to be made for and against getting a co-founder, and that's what we'll look at in this post.
 
 Let's dive in.
 
 ## Do you need a co-founder?
 
-Every technical founder struggles with this question at some point. There are many things to consider before taking the plunge, but one of these factors is your personality. If you're a lone wolf who gets stuff done faster on your own, you might want to retain complete control over the startup and simply hire someone to handle the business side of things. However, if you're a collaborator, you might find it challenging to go it alone without a peer to bounce ideas off of - and that's where a co-founder comes in.
+At PostHog, Tim didn't even know he wanted to start a company, so the answer here was yes!
 
-<iframe src="https://giphy.com/embed/aYQKefB3g8Pcr7jfmW" width="480" height="343" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fallontonight-comedy-jimmy-fallon-tonight-show-aYQKefB3g8Pcr7jfmW">via GIPHY</a></p>
-
-## The case for getting a co-founder
-
-We've recounted [our story](https://posthog.com/blog/inflated-risk-seems-riskier) numerous times across our blog and in conversations with other founders. James has a sales background, while Tim comes from R&D. Both come with complementary skills that cover each other's weak spots, and it was fortunate that they both wanted to build this company with the same level of passion that they had and still have.
+If you're a lone wolf who gets stuff done faster on your own, you might want to retain complete control over your startup and simply hire someone to handle the business side of things. This leads itself to a standard failure mode - not talking to users. You'll find it easy to build, but you'll have a hard time building something people want.
 
 With a co-founder, you can split the load faster and bounce major decisions off a sounding board before going live. At PostHog, James is responsible for bringing in new customers (among his other CEO duties), while Tim is responsible for overseeing engineering as CTO. They both hold each other accountable, ensuring that any off-course outcomes are corrected swiftly.
 
-Startups are hungry toddlers that demand your time, attention, money, and sanity. Having someone to lean on during challenging times - like growth declines, product failures, hiring faux-pas, etc. - greatly helps prop up your mental health and fortitude. This support is beneficial when you're bootstrapping, as you'll also need a founder who can chip in financially to keep the company afloat. Co-founder partnerships also send the right signals to wary venture capital and private equity firms, as they can trust that the company won't flame out due to an overworked founder - which makes them more likely to [hand you cash](https://www.wsj.com/articles/BL-232B-1355).
+Longer term, running a company is stressful - you're creating something out of nothing, and that inherently means you'll question yourself. Perhaps the most basic thing that has worked well at PostHog is James and Tim have managed to continuously rationalize what we're doing - taking it one problem at a time. We pivoted five times in the early days, and this just wouldn't have resulted in what we are today without two people pushing each other to get over each hurdle.
 
-<iframe src="https://giphy.com/embed/lPulSIumQdpgBoUAgB" width="480" height="357" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/memecandy-lPulSIumQdpgBoUAgB">via GIPHY</a></p>
+## How do I know if this salesy cofounder is any good?
 
-## The case against getting a co-founder
+As a salesperson, watching a developer feels like magic. A whirr of terminal windows then suddenly a product makes its way into real life.
 
-Of course, it's not all rosy when you have a co-founder. The first thing to guard against is the unfair distribution of labor - something prevalent in product-led devtool startups where the technical founder may find themselves shouldering the bulk of the load. 
+Likewise, to a developer, the instant relationship-building skill a good salesperson has are important to getting a product off the ground. Both of the above are _table stakes_ . In addition to these respective skills, you'll also need this person to have:
 
-The second argument against getting a co-founder hinges on the speed, as there is now one more person to run things by before shipping or pivoting. This isn't an issue with a co-founder who's deeply aligned with you, but it can cause problems where visions diverge.
+* The ability to get stuff done
+* A product-focused mentality
+* The ability to adapt
 
-The functional-emotional gap is another red flag to watch out for. In any pairing, both founders have the emotional authority to make decisions and exert influence. Their functional authority, however, is inversely correlated to the number of skilled team members who can do their jobs better. The larger the gap between their functional and emotional authority, the greater the chances of trouble down the line.
+And, crucially, you need to like working with each other.
 
-Let me explain with an example. Suppose a dev and a salesperson get together and start a company. The technical founder has some knowledge of coding and tech infrastructure, but the company soon hires a more senior engineer who can do the job 10x better. This isn't ordinarily a bad thing - you generally want to hire people better than you to improve the product. But you also want to be able to shape, critique, and direct their work where necessary, and this is only possible if you have a solid grasp of the subject matter. The less you know about the domain, the less you can steer the team in any new direction when it comes to that subject. This problem compounds as your team expands.
+## Isn't two devs better?
 
-<iframe src="https://giphy.com/embed/9Xh1CGm4Hzo4g" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/kanye-remake-9Xh1CGm4Hzo4g">via GIPHY</a></p>
+If you're comfortable talking with strangers that may often not want to talk to you, then this is probably the best possible setup. One of the things that was noticeable during PostHog's time at YCombinator was how outgoing many of the technical founders were.
 
-## What to look for in a co-founder
+It has been _very_ important that James can do the basics of development. Optimally, both would be kick-ass developers, but that has been less important than selling and communication skills with external parties - users, customers, employees, and investors.
 
-There are a number of key traits and skills to look for in a co-founder. Right at the top is high EQ and communication skills. The last thing you want is a brilliant jerk riding in the cockpit with you - that's a recipe for a glorious plane crash. Find someone who understands the importance of over-communication, who can give and receive feedback, and who can be empathetic with their words, thoughts, and actions.
+## Optimize for not breaking up
 
-Both James and Tim are big on giving and receiving feedback, and that ethos is [enshrined](https://posthog.com/handbook/people/feedback#how-to-give-good-feedback) in our company handbook. While Tim prefers directness and eschews fluff, James lands feedback with a bit more empathy. Both are constantly working on their feedback mechanisms, and hosting feedback sessions tends to unearth even more ways they and the rest of the team could improve.
+Cofounder breakup is a key way for your startup to fail.
 
-<iframe src="https://giphy.com/embed/Y3MnA0GumweHBxki2z" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/paramountnetwork-68whiskey-68whiskeytv-ronhoward-Y3MnA0GumweHBxki2z">via GIPHY</a></p>
+There are a few things PostHog did to guard against this:
 
-The second trait to look for is goal alignment. You and your founders should want to solve the same problems in the long run - whether that's to lower the cost of goods (Amazon), improve home fitness (Peloton), make photo-sharing more accessible and enjoyable (Instagram), or provide insights into what users are doing in your app (PostHog).
-
-The third trait is enablement and empowerment - a near-obsessive desire to improve the lives of the people you work with and for. You want a co-founder who is obsessed with building the best team and product to enable users to solve their problems. 
-
-At PostHog, our culture bears this out. Personal time off is mandated, 2 days out of each week are [meeting-free](https://posthog.com/blog/meetings), employees are empowered to [spend company money like their own](https://posthog.com/handbook/people/spending-money), we have individual bi-annual feedback sessions, and there's a focus on your career progression within the company. This in turn creates an environment where team members can come in and do their best work to create a product that users will love and continue to pay for.
-
-<iframe src="https://giphy.com/embed/dwA8gR8iD4mR1QEURc" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/tvland-tv-land-king-of-queens-kingofqueens-dwA8gR8iD4mR1QEURc">via GIPHY</a></p>
-
-The fourth trait to look for is skill alignment. There are two ways this can play out: either you both have overlapping sets of skills, or you complement each other. Overlapping skills have certain advantages: if you're both devs, you can ship stuff out faster and at a higher quality (or double your sales and marketing ROI if you're both sales-oriented). Conversely, complementary skills help you cover your respective blind spots and balance out the workload. James focuses on sales at PostHog, while Tim handles engineering.
-
-There also needs to be symmetry between the founders in terms of effort, finances, and outlook. Co-founders need to put in a near-equal amount of effort to bring the startup to life. Furthermore, if you're bootstrapping, it's probably best to have both partners contribute an equal amount of money to the company. This lowers the power differential between the co-founders and avoids situations where one cofounder gets away with minimal work merely because they put in more money - which can lead to resentment. Lastly, all cofounders should be clear on how much they're willing to wait for the company to be profitable. If you're focused heavily on profits in the beginning because you need to pay off your mortgage or student loan, but your partner is willing to polish the product for a little longer, this can cause a massive rift between you.
+* Equal equity between cofounders - even if you didn't start on the same day. This can otherwise cause resentment.
+* A culture of direct feedback. James and Tim tell each other when they get frustrated and have [encouraged the team](https://twitter.com/PostHogHQ/status/1385543414511542273) to do this too.
+* Clear individual goals for each week. There was a ton of stuff to build in the early days, so James' job was _everything_ else: getting user meetings, making wireframes, working out how to do taxes and payroll, raising money, or buying food. He even did some paid consultancy to make some money to pay for ads early on. Meanwhile, Tim focused on coding. This is how we got so far so quickly.
+* Both cofounders are involved in key decisions. To stereotype - salesy types tend to be more extroverted and can dominate the direction of a company. James and Tim, even with a team of 20, double up their one-on-ones to 2 hours each week to stay close and remain aligned on key decisions.
+* Work out what you both want out of life. Are you trying to retire early or is it the pure challenge? Go deep to figure out what the company and startup journey means to each of you.
 
 ## Bottom line
 
-Having a co-founder is great - but it's far better to have no co-founder than to have the wrong one. Rot at the top infects the entire body, so keep the cockpit as clean as possible. If you do decide to get a co-founder, vet them thoroughly to increase your odds of success - here's a [handy resource](https://review.firstround.com/the-founder-dating-playbook-heres-the-process-i-used-to-find-my-co-founder) from First Round Review that goes in-depth into how to pick a co-founder.
-
-<iframe src="https://giphy.com/embed/xT5LMwGBmInO6eNhpm" width="480" height="364" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/season-3-the-simpsons-3x5-xT5LMwGBmInO6eNhpm">via GIPHY</a></p>
-
-Work with someone who is aligned with your vision and mission, not necessarily someone who is your best friend. Sure, you should like who you work with - and camaraderie goes a long way towards an enjoyable work environment - but a best mate who doesn't pull his weight or doesn't know his stuff will quickly frustrate you. 
-
-Your mental health is also important, so a high EQ is crucial in your co-founder. Pick someone mature, communicative, and empathetic - not someone who will further enrich your therapist.
-
-As much as decision-making will be collaborative, you also need to be clear on who owns each domain. For example, James and Tim might differ on the sales or marketing approach, but James will ultimately decide which direction the company takes regarding that. Likewise, Tim is the technical guru and will decide which infrastructure would work for PostHog or which engineer would be a better fit for the company.
-
-There's also no need to rush into a partnership - it's perfectly ok to do a trial run with a prospective co-founder before committing to them fully. This lets you see how they work, what they're like, and whether you can see yourself with them in the long run.
-
-Crucially, have everything in writing. There are too many stories of co-founder flameouts that could've been handled much better with an ironclad contract in place. Get a lawyer to review any paperwork before you sign, and seek first to mitigate and mediate disagreements before heading to court.
-
-Lastly, focus on building systems that eventually negate your involvement in day-to-day tasks. As co-founders, you want to be climbing higher up the priority ladder to focus on more high-level problems within the company. Document all your processes, get your team members to own their individual remits, give them the resources they need to succeed, and source regular feedback on whether the systems you've put in place are working. In the long run, recusing yourselves from the day-to-day activities of the business will be a far more effective use of your time.
+Having a co-founder is great - but it's far better to have no co-founder than to have the wrong one. Getting this right is perhaps the most crucial decision you'll take on your road to startup success.
 
 Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
-
-
