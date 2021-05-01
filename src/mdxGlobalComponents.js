@@ -7,6 +7,7 @@ import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
+import { BlogShareButtons } from './components/Blog/BlogShareButtons'
 import { BlogSidebar } from './components/Blog/BlogSidebar'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
@@ -73,6 +74,7 @@ export const shortcodes = {
     BasicHedgehogImage,
     BlogPostLayout,
     BlogPosts,
+    BlogShareButtons,
     BlogSidebar,
     BlogFooter,
     CallToAction,

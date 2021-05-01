@@ -2,6 +2,7 @@ export interface CategoryInterface {
     title: string
     slug: string
     link: string
+    hideFromNavigation?: boolean
 }
 
 export const BlogCategories: CategoryInterface[] = [
@@ -24,5 +25,11 @@ export const BlogCategories: CategoryInterface[] = [
         title: 'Engineering',
         slug: 'engineering',
         link: '/blog/categories/engineering',
+    },
+    {
+        title: 'Release Notes',
+        slug: 'release-notes',
+        link: '/blog/categories/release-notes',
+        hideFromNavigation: true,
     },
 ]

@@ -6,13 +6,15 @@ const linkClassList =
     'block text-gray-900 dark:text-gray-100 my-2 text-sm hover:underline hover:text-gray-900 dark:hover:text-gray-100'
 
 export const BlogSidebar = () => {
-    const blogCategoryLinks = BlogCategories.map((category: CategoryInterface) => {
-        return (
-            <Link to={category.link} key={category.slug} className={linkClassList}>
-                {category.title}
-            </Link>
-        )
-    })
+    const blogCategoryLinks = BlogCategories.filter((cat) => !cat.hideFromNavigation).map(
+        (category: CategoryInterface) => {
+            return (
+                <Link to={category.link} key={category.slug} className={linkClassList}>
+                    {category.title}
+                </Link>
+            )
+        }
+    )
 
     return (
         <div className="w-full">
@@ -20,12 +22,12 @@ export const BlogSidebar = () => {
             {blogCategoryLinks}
 
             <header className="mt-12 text-xs text-gray-400 uppercase">More Reads</header>
-            <a href="/tutorials" className={linkClassList}>
+            <Link to="/docs/tutorials" className={linkClassList}>
                 Tutorials
-            </a>
-            <a href="/release-notes" className={linkClassList}>
+            </Link>
+            <Link to="/blog/categories/release-notes" className={linkClassList}>
                 Release notes
-            </a>
+            </Link>
 
             <header className="mt-12 text-xs text-gray-400 uppercase">Follow Us</header>
             <a href="https://twitter.com/PostHogHQ" className={linkClassList} target="_blank" rel="noreferrer">
