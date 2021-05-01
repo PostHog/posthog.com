@@ -9,7 +9,7 @@ export function BlogFooter() {
     return (
         <Structure.Section width="4xl">
             <NewsletterForm
-                compact={true}
+                compact
                 className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
             />
 

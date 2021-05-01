@@ -24,12 +24,12 @@ const BlogPage = ({
         .filter((edge) => !!edge.node.frontmatter.date)
         .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
 
-    const latestPost = <PostCard key={posts[0].node.id} post={posts[0].node} featured={true} />
-    const nonLatestPosts = posts.slice(1, -1).map((edge) => <PostCard key={edge.node.id} post={edge.node} />)
+    const latestPost = <PostCard key={posts[0].node.id} post={posts[0].node} featured />
+    const nonLatestPosts = posts.slice(1).map((edge) => <PostCard key={edge.node.id} post={edge.node} />)
 
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
-            <Layout headerBackgroundTransparent={true}>
+            <Layout headerBackgroundTransparent>
                 <SEO title="PostHog Blog" description="What we are up to, every week." />
 
                 <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
@@ -42,7 +42,7 @@ const BlogPage = ({
 
                         {latestPost}
                         <NewsletterForm
-                            compact={true}
+                            compact
                             className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
                         />
 
