@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 We're back! 2020 was a hectic year for us and our team put in a whole lot of effort to get PostHog to where it is now. As such, we shut down PostHog for 2 weeks to give everyone a chance to recharge (with a rotation in place to make sure nothing burned down). 

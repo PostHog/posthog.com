@@ -6,6 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/hacktoberfest/hacktoberfest.png
+categories: engineering
 ---
 ### Let the pull requests come in!
 

@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 Our primary goals for this release were to iron out bugs and improve the user experience of our Beta features.
