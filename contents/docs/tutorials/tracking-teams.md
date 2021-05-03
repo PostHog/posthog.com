@@ -41,7 +41,7 @@ In this tutorial, we will explain how to structure your analytics to fit these n
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrations/js-integration), one of our [integrations](/docs/integrations), or our [API](/docs/api/overview).
+1. Have started receiving events via our [snippet](/docs/libraries/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview).
 
 
 ## Identifying Users
@@ -61,7 +61,7 @@ However, when the user does something identifiable on your app, like logging in,
 
 In most cases, users are identified using either email, username, or an internal unique identifier. This helps us differentiate between one person and another. 
 
-If you're unfamiliar with how to identify users, here's an example from our JavaScript integration:
+If you're unfamiliar with how to identify users, here's an example from our JavaScript Library:
 
 ```js
 posthog.identify('your desired id')

@@ -24,6 +24,10 @@ jobs:
                   python -m pip install -U pip
                   python -m pip install git+https://github.com/yakkomajuri/codespell.git
 
+            - name: Install requests with pip
+              run: |
+                  python -m pip install requests
+
             - name: Configure Git
               run: |
                   git fetch origin master:master

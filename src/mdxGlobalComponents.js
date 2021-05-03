@@ -31,6 +31,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { HiddenSection } from './components/HiddenSection'
+import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
@@ -40,6 +41,7 @@ import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
 import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
+import { LibraryStats } from './components/LibraryStats'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
@@ -92,6 +94,7 @@ export const shortcodes = {
     Footer,
     GetStartedModal,
     HiddenSection,
+    Blockquote,
     Features,
     Hero,
     LandingPageCallToAction,
@@ -101,6 +104,7 @@ export const shortcodes = {
     Roadmap,
     SocialProof,
     Tutorials,
+    LibraryStats,
     MdxAnchorHeaders,
     NewsletterForm,
     OtherFeaturesBlock,

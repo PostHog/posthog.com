@@ -41,6 +41,7 @@ Eltje and the new team member's manager will mostly do this.
 
 <input type="checkbox"/> Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan). Once they are on, manually change their profile so their holiday requests are auto-approved. <br />
 <input type="checkbox"/>  (UK only) Send a copy of their HMRC new starter form on CharlieHR to DRG, and include their salary and if they are full or part time <br />
+<input type="checkbox"/>  (UK only) Ask if they want to be part of our [private healthcare](/handbook/people/benefits#private-health-insurance) and if they want to contribute our [pensions](/handbook/people/benefits#pension-and-401k-contributions) <br />
 <input type="checkbox"/>  Send team member a copy of this page so they can check everything has been done <br />
 <input type="checkbox"/>  (US only) Add the team member to [Gusto](https://app.gusto.com) <br />
 <input type="checkbox"/>  (UK only) Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll <br />
@@ -50,7 +51,7 @@ Eltje and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Send team member a link to the [Handbook](/handbook) <br />
 <input type="checkbox"/>  Send team member a digital company card <br />
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/people/spending-money) guidelines <br />
-<input type="checkbox"/>  Ask James or Yakko to give them $100 credit to spend on Shopify <br />
+<input type="checkbox"/>  Ask Charles to give them $100 credit to spend on Shopify <br />
 <input type="checkbox"/>  Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them <br />
 <input type="checkbox"/>  Add team member to the PostHog app <br />
 <input type="checkbox"/>  Send them an invite to Drata to do security onboarding and their background check <br />
@@ -60,6 +61,7 @@ Eltje and the new team member's manager will mostly do this.
 ## On Their First Day
 
 <input type="checkbox"/>  Manager to book a weekly 1:1 with the team member <br />
+<input type="checkbox"/> (UK only) Schedule a [right to work](https://www.gov.uk/guidance/coronavirus-covid-19-right-to-work-checks) check with Eltje 
 <input type="checkbox"/>  Send them these instructions on adding the [team time off cal](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) to their Gcal <br />
 <input type="checkbox"/>  For the first week or so, book extra sessions as appropriate to provide extra help <br />
 <input type="checkbox"/>  Add team member to any relevant Google Groups <br />

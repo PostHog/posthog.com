@@ -131,7 +131,7 @@ export const Footer = ({
                         <FooterListItem to="/docs/deployment">Installation</FooterListItem>
                         <FooterListItem to="/docs">Docs</FooterListItem>
                         <FooterListItem to="/docs/api/overview">API</FooterListItem>
-                        <FooterListItem to="/docs/integrations" border={false}>
+                        <FooterListItem to="/docs/libraries" border={false}>
                             Libraries
                         </FooterListItem>
 

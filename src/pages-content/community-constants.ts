@@ -30,4 +30,5 @@ export const ignoreContributors = new Set([
 export const mvpWinners: Record<string, number> = {
     samcaspus: 1,
     oshura3: 1,
+    adrienbrault: 1,
 }
