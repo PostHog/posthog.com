@@ -29,10 +29,12 @@ To create the easiest way to discover insights about products and its users
 - Any PostHog user, whether they're an engineer or a product manager, should be able to effectively analyze their product.
 
 ## Output metrics
+Our output metrics can be tracked in [Dashboard #3307](https://app.posthog.com/dashboard/3307).
 
-- Retention per feature
-
-[Dashboard](https://app.posthog.com/dashboard/1124)
+#### WAU/MAU ratio
+Ratio of weekly active users versus monthly active users (rolling period) where an active user is someone who *Discovered a Learning* during the period. This signals core product usage without being affected by activation or acquisition activities.
+- Measurements for the purpose of an output metric will be done weekly.
+- More context on the metric can be found in [the relevant issue](https://github.com/PostHog/internal/issues/263).
 
 ## Slack channel
 
