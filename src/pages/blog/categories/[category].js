@@ -44,7 +44,7 @@ const BlogCategoryPage = ({
                         <DarkModeToggle />
                     </div>
 
-                    <Structure.Section className="my-12" width="5xl">
+                    <Structure.Section className="py-12" width="5xl">
                         <Structure.SectionHeader title={`Blog: ${title}`} titleTag="h1" titleClassName="text-center" />
 
                         {latestPost}
