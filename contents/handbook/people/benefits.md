@@ -44,7 +44,7 @@ We also offer generous [parental leave](/handbook/people/time-off#parental-leave
 
 ### Learning and Development
 
-We currently offer a [Training budget](/handbook/training/#training-budget) and [free books](/handbook/people/training#books) - you can find more on the relevant pages.  
+We currently offer a [Training budget](/handbook/people/training#training-budget) and [free books](/handbook/people/training#books) - you can find more on the relevant pages.  
 
 ### Equipment and Co-working
 
