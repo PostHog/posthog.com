@@ -82,7 +82,6 @@
             "docs/deployment/deploy-digital-ocean",
             "docs/deployment/deploy-gcs",
             "docs/deployment/deploy-kubernetes",
-            "docs/deployment/deploy-linode",
             "docs/deployment/deploy-render",
             "docs/deployment/deploy-qovery",
             "docs/deployment/snippet-installation",
