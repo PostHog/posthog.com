@@ -82,7 +82,6 @@
             "docs/deployment/deploy-digital-ocean",
             "docs/deployment/deploy-gcs",
             "docs/deployment/deploy-kubernetes",
-            "docs/deployment/deploy-linode",
             "docs/deployment/deploy-render",
             "docs/deployment/deploy-qovery",
             "docs/deployment/snippet-installation",
@@ -368,6 +367,7 @@
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",
+            "handbook/engineering/tech-talks",
             "handbook/engineering/common-issues",
             "handbook/engineering/mdx"
         ]
