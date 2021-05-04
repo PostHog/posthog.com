@@ -3,7 +3,6 @@ import React from 'react'
 import { CornerBrackets } from '../../CornerBrackets'
 
 import airbalticLogo from '../images/SocialProofLogos/airbaltic.svg'
-import dataikuLogo from '../images/SocialProofLogos/dataiku.svg'
 import landmarkLogo from '../images/SocialProofLogos/landmark.svg'
 import tinkoffLogo from '../images/SocialProofLogos/tinkoff.svg'
 import hasuraLogo from '../images/SocialProofLogos/hasura.svg'
@@ -19,7 +18,6 @@ export const SocialProof = () => {
     return (
         <div className="mt-24 hero-proof">
             <div className="w-11/12 max-w-3xl mx-auto mb-4 flex justify-center sm:justify-between flex-row flex-wrap">
-                <Logo logo={dataikuLogo} alt="Dataiku" />
                 <Logo logo={hasuraLogo} alt="Hasura" />
                 <Logo logo={ycombinatorLogo} alt="Y Combinator" />
                 <Logo logo={staplesLogo} alt="Staples" />
