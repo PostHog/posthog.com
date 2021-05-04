@@ -23,7 +23,7 @@ List below is prioritized.
 1. Reaching parity in terms of features, performance and user experience with leading product analytics solutions, including:
    1. Maintaining data quality and consistency.
    2. Ensuring performant and clear user experience across all analytics functionality.
-   3. Extending core feature set as informed by user feedback, experimentation and strategic moves.
+   3. Extending core feature set as informed by dogfooding, user feedback, experimentation and strategic decisions.
    4. Extending user experience to enable product analytics for non-technical users. 
 2. Maintaining (and improving where applicable) supporting activities for the core experience (this includes: cohorts, persons, sessions *[not session recording]*, annotations, settings, authentication, account management). 
 
