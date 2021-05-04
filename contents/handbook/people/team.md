@@ -570,7 +570,7 @@ I'm looking forward to all we will accomplish together.
 
 HI! I'm Li from NYC. I fell in love with coding towards the end of college, jumped into a programming bootcamp right after, worked at a healthtech company for two years, and here I am today!
 
-Some things I enjoy: karaoke, Switch/PC/board games, a good movie or series, struggling on hikes because I've spent too much time indoors, and exploring the NYC food scene
+Some things I enjoy: karaoke, Switch/PC/board games, a good movie or series, struggling on hikes because I've spent too much time indoors, and exploring the NYC food scene.
 
 </div>
 
@@ -581,6 +581,38 @@ Some things I enjoy: karaoke, Switch/PC/board games, a good movie or series, str
 <div class="team-right-image" markdown="1">
 
 ![Li portrait](../../images/team/Li.png)
+
+</div>
+
+</div>
+
+<!--- Sam Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Sam Winslow, Full Stack Engineer
+
+<div class="team-left-bio" markdown="1">
+
+Hi! I’m Sam. I recently graduated from NYU, where I studied the interaction of media, technology & society. My earliest experiences with programming were building games on a TI-83 calculator and teaching myself BASIC at age 10. The first application I made was an MS Paint clone. I have worked in design, marketing, and software engineering since then.
+
+In my free time, I love building hardware projects, reading about logic & philosophy, cycling around NYC, and taking care of my puppy, Louie.
+
+One of the projects I'm most proud of was a social network for sharing music reviews. We had modest success among college students, and the biggest lesson I learned was that I wanted to spend more time coding new features and less time fighting the analytics tools in order to figure out what to build.
+
+I am always at the beginning of my journey to learn.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Sam portrait](../../images/team/Sam.png)
 
 </div>
 
