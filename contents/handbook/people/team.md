@@ -480,9 +480,9 @@ Our party of 2 became a party of 3 last year. 🎉 Now that I am officially a da
 
 <div class="team-left-bio" markdown="1">
 
-Hi! My name is Kunal. I'm a Bay Area native and a bit of a startup vet. 
+Hi! My name is Kunal. I'm a Bay Area native and a bit of a startup vet.
 
-I love helping teams discover new ways to apply data, product, and engineering to drive business outcomes. 
+I love helping teams discover new ways to apply data, product, and engineering to drive business outcomes.
 Most recently, I led the growth team at Amplitude and at an education technology startup prior to that.
 
 When I'm not working on growth, you'll find me studying the Mamba Mentality, re-learning guitar chords, or making some ravioli (a lasagna if it's going poorly).
@@ -513,33 +513,33 @@ In terms of cycling– a friend once convinced me to go on a bike ride from San 
 
 <div class="team-left-bio" markdown="1">
 
-Howdy! I live in Atlanta, Georgia with my amazing partner of five years. I have 
-two truly wonderful kids, boy-9 and girl-12 who both level up in July. Oh, 
-geez, I'll have a teenager! I'm a hobbyist: unicycles, juggling, 
-acroyoga, hiking, cooking, rollerblading, skiing, climbing, and 
-lifting. My partner and the kids especially love hiking, playing video games, 
+Howdy! I live in Atlanta, Georgia with my amazing partner of five years. I have
+two truly wonderful kids, boy-9 and girl-12 who both level up in July. Oh,
+geez, I'll have a teenager! I'm a hobbyist: unicycles, juggling,
+acroyoga, hiking, cooking, rollerblading, skiing, climbing, and
+lifting. My partner and the kids especially love hiking, playing video games,
 and performing amazing acroyoga feats for folks in the park.
 ​
-I got started in programming at twelve years old. My grandfather was a 
-retired FFA engineer with access to old decommissioned hardware. He'd 
-bring it home for me to play with. My first computer was a TI-99/4A 
-where you recorded your programs on cassette tapes! I fell in love with 
-programming because I enjoyed both creative and reason based projects. 
-From drawing and crafts to math, science, and philosophy. Programming 
-gave me a big canvas for imaginary worlds, a place for self-expression 
+I got started in programming at twelve years old. My grandfather was a
+retired FFA engineer with access to old decommissioned hardware. He'd
+bring it home for me to play with. My first computer was a TI-99/4A
+where you recorded your programs on cassette tapes! I fell in love with
+programming because I enjoyed both creative and reason based projects.
+From drawing and crafts to math, science, and philosophy. Programming
+gave me a big canvas for imaginary worlds, a place for self-expression
 I hadn't found anywhere else.
 ​
-I was sixteen when I landed my first programming gig as a frontend engineer 
-for an agency. Afterwards, I helped co-found a radiology software company who 
-ensured patients received follow-up care. These patients were slipping 
-through the cracks, leading to fatal results not to mention expensive legal 
-settlements. From there I worked in big tech where I learned corporate politics 
-were no fun. After a few years of exploring I went back to my roots and founded 
-a tech consultancy. During this time, I had an idea for a revolutionary platform 
-for designers. So, I built a no-code app platform that allowed creatives to 
-design applications rather than code them. It was a wild and exhausting ride! 
-After a few years of catching my breath, I joined up with PostHog to 
-pursue their mission of making more successful products in the world! 
+I was sixteen when I landed my first programming gig as a frontend engineer
+for an agency. Afterwards, I helped co-found a radiology software company who
+ensured patients received follow-up care. These patients were slipping
+through the cracks, leading to fatal results not to mention expensive legal
+settlements. From there I worked in big tech where I learned corporate politics
+were no fun. After a few years of exploring I went back to my roots and founded
+a tech consultancy. During this time, I had an idea for a revolutionary platform
+for designers. So, I built a no-code app platform that allowed creatives to
+design applications rather than code them. It was a wild and exhausting ride!
+After a few years of catching my breath, I joined up with PostHog to
+pursue their mission of making more successful products in the world!
 I'm looking forward to all we will accomplish together.
 
 </div>
@@ -652,6 +652,38 @@ Fun Fact: I usually find out about "current" affairs ~2-6 months after they happ
 <div class="team-right-image" markdown="1">
 
 ![Neil portrait](../../images/team/Neil.png)
+
+</div>
+
+</div>
+
+<!--- Tiina Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Tiina Turban, Software Engineer
+
+<div class="team-left-bio" markdown="1">
+
+As another Estonian I also first got exposed to coding in high school.
+From there things escalated pretty fast and while my friends were eating ice-cream and enjoying the lovely sunny spring day outside I was in the computer lab programming a Snake game.
+
+During my CS studies I did a quick detour and spent a summer selling books door-to-door in the US, which confirmed my suspicions that software engineering is a much better fit, but left me with an invaluable experience and ticker skin =)
+
+I explored the fabulous life in Silicon Valley working at Facebook for 5 years and Twitter for 1. However I missed Europe and my love/obsession for dancing brought me back, this time to the land of croissants and cheese - Paris, France.
+Outside of work and dancing I am currently on a quest to learn French, like to frequent the gym, and listen to non-fiction audiobooks.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Tiina portrait](../../images/team/Tiina.png)
 
 </div>
 
