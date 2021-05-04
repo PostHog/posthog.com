@@ -1,5 +1,5 @@
 ---
-title: Getting Feedback
+title: Feedback
 sidebar: Handbook
 showTitle: true
 ---
@@ -12,7 +12,7 @@ This includes giving feedback [to each other](/handbook/company/values#step-on-t
 
 'Open and honest' != 'being an asshole' - we expect feedback to be direct, but shared with good intentions and in the spirit of genuinely helping that person and PostHog as a whole to improve. Please make sure your feedback is constructive and based on observations, not _emotions_. If possible, share examples to help the feedback receiver understand the context of the feedback. 
 
-## Full team 360 degree feedback session
+## Full team feedback sessions
 
 We run full team 360 degree feedback session as part of every off-site (we usually do them every 6 months). The session gives everyone the opportunity to give and receive feedback to everyone else.
 
@@ -45,7 +45,7 @@ While the 360 degree team meeetings are purely feedback-focused, you should aim 
 
 Part of the review will include your [compensation](/handbook/people/compensation), as we directly link this to your level of experience and your performance. You should not, however, expect every performance review to result in a change to your Step or Level - most of the time, they won't. Additionally, you will find that your Step will change more frequently than your Level. 
 
-### How to Give Good Feedback
+### How to give good feedback
 
 We know that giving feedback can sometimes be difficult, so here are a few tips on how to give good feedback:
 
@@ -57,7 +57,7 @@ We know that giving feedback can sometimes be difficult, so here are a few tips 
 
 We expect everyone to support each other by giving lots of feedback - it's not ok to stay quiet if you have something constructive to share. 
 
-### How to Receive Feedback Well
+### How to receive feedback well
 
 If someone is making the effort to give you feedback, you should reciprocate by receiving that feedback well. Being a good feedback receiver means that people will be more inclined to give you feedback in the future, which will help you to grow!
 
@@ -67,3 +67,31 @@ Here are a few tips to help you do this:
 - Try not to hear attack - listen for what is behind the words.
 - It can be useful to paraphrase the feedback to ensure you have understood it correctly, or ask questions to clarify. 
 - You do not have to accept all feedback! However, it's probably worth taking time to reflect on it, rather than reacting in the moment. There is a difference between acknowledging feedback and disagreeing with it. 
+
+## Full team feedback sessions
+
+In addition to individual performance reviews, we also hold full team feedback sessions twice a year. These are usually scheduled as part of our offsites. These are super intense and memorable, and create _much_ more trust, transparency and directness. 
+
+### How it works
+
+- Everyone gives feedback to everyone else. We have tried this with first a team of 10 (worked well), and a team of 20 (valuable, but slightly too many people).
+- Feedback could be anything - i.e. designers will give feedback to engineers and vice versa.
+- What you do with the feedback is totally up to you - write down, then choose to accept/discard feedback.
+- Repeat every 6 months.
+
+In the future, we will split the session into groups in order to manage time better. 
+
+### Ground rules
+
+- Everybody participates! You should have a think and prepare in advance - don't try and wing it on the day.
+- Preparation includes reading this page about how to be a good feedback giver and receiver.
+- Aim for your feedback to be 70% constructive - this is an opportunity to help each other to grow. 
+- You are expected to give feedback to everyone, even if you don’t work together directly. It may be very short feedback, which is ok! 
+- That being said, avoid piling on and repeating feedback others have given unless you have a different perspective or can add more context. It is ok to say "+1 to what X said about Y" and move on. Do not spend 2min repeating the same point that has already been made by someone else. 
+- Everyone is responsible for noting down and actioning their own feedback (i.e. the People team won't do this for you). 
+
+### How is this different from individual performance review?
+
+The full team session prioritises openness, breadth and transparency of feedback, as everyone gets to both give and receive feedback in front of the entire team. 
+
+The performance review process centres on a single person for one hour, involves a smaller subset of the team, and is intended to be more of an in-depth conversation.
