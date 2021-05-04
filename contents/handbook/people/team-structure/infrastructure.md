@@ -11,12 +11,13 @@ hideAnchor: true
 
 - [James Greenhill](/handbook/company/team/#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team/#karl-aksel-puulmann-software-engineer) (Full Stack Engineer)
+- [Tiina Turban](/handbook/company/team/#tiina-turban-software-engineer) (Full Stack Engineer)
 
 ## Mission
 
 Make using and developing for PostHog as reliable as running water. Wherever you want it.
 
-## Goals 
+## Goals
 
 - We don't lose events
 - Data is as up to date as possible
@@ -44,24 +45,24 @@ Concrete things we take responsibility over:
 ## Output metrics
 
 ### VPC
-###### Retention 
+###### Retention
 - Metric: Retention
 - Objective: Better than cloud
 ### Cloud
 ###### Data Loss
 - Metric: Data loss %
 - Objective: < 0.1%
-###### Uptime 
+###### Uptime
 - Metric: Uptime
 - Objective: > 99.99%
-###### Speed 
+###### Speed
 - Metric: Speed
 - Objectives
   - Event ingestion: TBD
   - Query response: TBD
 - Overall: We should anticipate increasing demand (either manually or automatically)
-##### Cost 
-- Metric: Infra Costs 
+##### Cost
+- Metric: Infra Costs
 - Objective: Our costs should grow at a rate that is sublinear relative to scale
 ### Dev Experience
 ##### Dev Experience NPS (Infra)
