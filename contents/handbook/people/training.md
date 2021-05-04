@@ -18,12 +18,8 @@ Books do not have to be tied directly to your area, and they only need be loosel
 
 ## Training budget
 
-We have a training budget for every team member, regardless of seniority. The budget can be used for relevant courses, training, formal qualifications, or attending conferences. 
+We have an annual training budget for every team member, regardless of seniority. The budget can be used for relevant courses, training, formal qualifications, or attending conferences. You do not need approval to spend your budget, but you might want to speak to your manager first, in case they have some useful feedback or pointers to a better idea.
 
-The training budget is $1000 per calendar year, but this _isn't_ a hard limit - if you want to spend in excess of this, have a chat with your manager.
+The training budget is $1000 per calendar year, but this _isn't_ a hard limit - if you want to spend in excess of this, have a chat with your manager. Where the costs are higher than $1000, please give Charles a heads-up, so he can increase your card limit. 
 
-If you want to make use of this budget, please have a chat with your  manager first, in case they have some useful feedback or pointers to a better idea. However, everything within the budget doesn't require approval. 
-
-Where the costs are higher than $1000, please give Charles a heads-up, so he can increase your card limit. 
-
-If possible, please share your learnings with the team afterwards! 
+If possible, please share your learnings with the team afterwards!
