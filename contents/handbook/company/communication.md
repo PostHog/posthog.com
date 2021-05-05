@@ -35,6 +35,54 @@ We make things public by default because [transparency](/handbook/company/cultur
 
 Information that is not publicly shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
 
+
+We have two repos to centralize and document all internal communication. These are the source of truth for any internal information, and anything that should be written down (as established in these guidelines) should live here, not on Slack. This will make it easier when having to search for older stuff, sharing context between public and internal information, and for newcomers to have all information readily available.
+
+### Company Internal
+Repository can be found in https://github.com/PostHog/company-internal
+
+Documents any company-wide internal information, in addition to any information related to People, Ops, Legal & Compliance, Finance or Strategy.
+
+**Examples of information that should go here:**
+- ✅ Hiring requests and job profiles
+- ✅ Hiring strategies and plans
+- ✅ Onboarding/offboarding checklists
+- ✅ Non-engineering sprint plannings
+- ✅ Company-wide internal discussions, most likely WIP before we release publicly (e.g. product positioning strategy, customer strategy, board meetings debriefs, ...)
+
+**Examples of information that should NOT go here:**
+- ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
+- ❌ Bug reports, security issues, or any other engineering-related discussions. These should go in the [Product Internal](#product-internal) repo.
+- ❌ Billing issues, product or growth discussions. These should go in the [Product Internal](#product-internal) repo.
+
+
+### Product Internal
+Repository can be found in https://github.com/PostHog/product-internal
+
+Contains internal information related to the PostHog product. Documents any non-public information (as established in these guidelines) that specifically relates to engineering, product, growth or design.
+
+This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldly.  
+
+<blockquote>
+Please be sure to read the README of the repo for guidelines on how to file specific issues.
+</blockquote>
+
+
+**Examples of information that should go here:**
+- ✅ Vulnerabilities (security bugs) reports
+- ✅ Bug reports where most of the context of the report depends on customer's PII. *Some bug reports require screenshots, recordings, or some other information that contains PII and as such can't be public.*
+- ✅ Post-mortems on outages, or other issues affecting a large portion of customers.
+- ✅ Documentation of internal infrastructure, where if it was public knowledge could provide valuable information to an attacker.
+- ✅ Experiment (A/B testing) results
+- ✅ Product or growth strategy discussions (unless they should be public)
+- ✅ Interview exercises or questions for engineering, product, growth or design tasks that should not be public.
+- ✅ Documentation of engineering or product requirements documents that can't be public (these should be quite rare).
+- ✅ Billing or pricing-related discussions that is not yet public.
+
+**Examples of information that should NOT go here:**
+- ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
+- ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo.
+- ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
 ## Written Communication
 
 ### GitHub
