@@ -30,6 +30,8 @@ module.exports = {
                 gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
                 serif: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: ['Good Sans', 'Arial', 'Helvetica', 'sans-serif', 'Inter'],
+                button: ['Osiris'],
+                nav: ['Osiris'],
             },
             fontSize: {
                 '2xs': '0.65rem',
