@@ -74,6 +74,7 @@
         "redux": "^4.0.5",
         "reselect": "^4.0.0",
         "sass": "^1.32.8",
+        "sharp": "^0.27.2",
         "typescript": "^4.0.2"
     },
     "devDependencies": {
@@ -88,6 +89,7 @@
         "lint-staged": "^10.2.12",
         "mem": "^5.1.1",
         "prettier": "^2.1.0",
+        "react-dev-utils": "^11.0.4",
         "tailwindcss": "^2.0.3"
     },
     "husky": {
