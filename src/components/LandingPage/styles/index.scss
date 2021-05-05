@@ -3,52 +3,6 @@
     background-position: center center;
     background-repeat: repeat-x;
     position: relative;
-
-    &:before {
-        background: url(../images/rocket.svg);
-        bottom: 10%;
-        content: '';
-        display: block;
-        height: 939px;
-        left: -3%;
-        position: absolute;
-        width: 174px;
-        zoom: 0.5;
-
-        @media (min-width: 640px) {
-            bottom: -40%;
-            zoom: 1;
-        }
-
-        @media (min-width: 1024px) {
-            left: 3%;
-        }
-    }
-
-    &:after {
-        background: url(../images/moon.png);
-        @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-            background: url(../images/moon@2x.png);
-            background-size: 100%;
-        }
-        content: '';
-        height: 759px;
-        position: absolute;
-        right: -50%;
-        top: -10%;
-        width: 759px;
-        zoom: 0.75;
-
-        @media (min-width: 640px) {
-            right: -25%;
-            top: -10%;
-            zoom: 1;
-        }
-        @media (min-width: 1280px) {
-            right: -20%;
-            zoom: 1;
-        }
-    }
 }
 
 .open-source {
