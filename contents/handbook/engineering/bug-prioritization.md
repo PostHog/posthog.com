@@ -39,6 +39,12 @@ When bugs are reported it's critical to properly gauge the extent and impact to 
 ## Security vulnerabilities
 Security vulnerabilities due to its nature, have a different prioritization schema. This schema is also inline with our internal SOC-2 related policies (Vulnerability Management Policy). When filing vulnerabilities issues, remember to label them correctly. More details on filing can be found in the [README](https://github.com/PostHog/product-internal#README) of the `product-internal` repo.
 
+<blockquote class="warning-note">
+Such information should not be made public until a fix is live and sufficiently (ideally completely) adopted.
+</blockquote>
+
+PostHog security issues include a priority (severity) level. This priority level is based on our self-calculated CVSS score for each specific vulnerability. CVSS is an industry standard vulnerability metric. You can learn more about CVSS at [FIRST.org](https://www.first.org/cvss/user-guide) and calculate it using the FIRST.org [calculator](https://www.first.org/cvss/calculator/3.1).
+
 
 | Github Label | Priority Level | CVSS V3 Score Range | Definition | Examples |
 |---|---|---|---|---|
