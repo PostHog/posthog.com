@@ -4,6 +4,7 @@
 
 @import 'workable-overrides.css';
 @import 'backgrounds.css';
+@import 'buttons.css';
 
 body {
     font-smooth: 1.5px;
@@ -36,62 +37,6 @@ ul {
 .bg-primary-dark {
     background: rgba(218, 72, 16, 0.9);
     border-color: rgba(218, 72, 16, 0.9);
-}
-
-.button-primary,
-.button-secondary {
-    @apply font-button text-white hover:text-white lowercase select-none;
-    -ms-transform: skewX(-20deg);
-    -webkit-transform: skewX(-20deg);
-    transform: skewX(-20deg);
-    transition: 0.25s ease all;
-}
-
-.button-primary {
-    background: linear-gradient(98.18deg, #d66f0f 8.47%, #ef7632 56.29%);
-    box-shadow: 0px 0.125rem 1rem rgba(239, 118, 50, 0.5);
-}
-
-.button-secondary {
-    background: linear-gradient(103.46deg, #1f5879 13.26%, #0c3248 51.69%);
-    box-shadow: 0px 0.125rem 1rem rgba(58, 128, 169, 0.5);
-    border: solid 2px #3a80a9;
-}
-
-.button-primary span,
-.button-secondary span {
-    display: inline-block;
-    -ms-transform: skewX(20deg);
-    -webkit-transform: skewX(20deg);
-    transform: skewX(20deg);
-    @apply relative inline-block;
-}
-
-.button-primary:hover {
-    background: linear-gradient(98.18deg, #d66f0f 8.47%, #fe7a30 56.29%);
-}
-
-.button-primary:active,
-.button-primary:focus {
-    background: linear-gradient(98.18deg, #ce6b0e 8.47%, #ed6f27 56.29%);
-}
-
-.button-secondary:hover {
-    background: linear-gradient(103.46deg, #1f5879 13.26%, #0f405c 51.69%);
-    border: 2px solid #509dca;
-}
-
-.button-secondary:active,
-.button-secondary:focus {
-    background: linear-gradient(103.46deg, #1a5070 13.26%, #093148 51.69%);
-    border: 2px solid #2d79a5;
-}
-
-.button-primary:active span,
-.button-primary:focus span .button-secondary:active span,
-.button-secondary:focus span {
-    left: 1px;
-    top: 1px;
 }
 
 .contributor-images > img {

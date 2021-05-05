@@ -54,7 +54,7 @@ export const CallToAction = ({
     onClick,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
-        <span className="inline-block bg-opacity-10 bg-yellow-100 rounded rounded-sm p-2 mr-8">
+        <span className="icon inline-block bg-opacity-10 bg-yellow-100 rounded rounded-sm p-2 mr-8">
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
         </span>
     ) : null
