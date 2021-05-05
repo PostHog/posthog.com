@@ -5,7 +5,7 @@ import { BlogCategories, CategoryInterface } from '../constants/categories'
 const linkClassList =
     'block text-gray-900 dark:text-gray-100 my-2 text-sm hover:underline hover:text-gray-900 dark:hover:text-gray-100'
 
-export const BlogSidebar = () => {
+export function BlogSidebar(): JSX.Element {
     const blogCategoryLinks = BlogCategories.filter((cat) => !cat.hideFromNavigation).map(
         (category: CategoryInterface) => {
             return (
@@ -25,10 +25,6 @@ export const BlogSidebar = () => {
             <Link to="/docs/tutorials" className={linkClassList}>
                 Tutorials
             </Link>
-            <Link to="/blog/categories/release-notes" className={linkClassList}>
-                Release notes
-            </Link>
-
             <header className="mt-12 text-xs text-gray-400 uppercase">Follow Us</header>
             <a href="https://twitter.com/PostHogHQ" className={linkClassList} target="_blank" rel="noreferrer">
                 Twitter
