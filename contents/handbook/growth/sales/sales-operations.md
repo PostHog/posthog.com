@@ -67,7 +67,7 @@ Make sure you also assign someone as the Contact owner, so it's clear who is res
 
 We manage two pipelines for our deals - _Enterprise_ and _Startup_. This helps us stay organised, given the process is different for each.
 
-Creating a contact should be the first thing you do when you are setting up a deal in HubSpot, if one does not exist already.
+Creating a Company with a Contact should be the _first_ thing you do when you are setting up a deal in HubSpot, if one does not exist already. It's then really easy to add a Deal from within a Company record. 
 
 Creating a new deal is quite intuitive, but here are a few tips:
 - Generally, try to fill out as much information as possible - this is useful for you, but also gives context to other people working with a customer

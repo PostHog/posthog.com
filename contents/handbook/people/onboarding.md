@@ -54,7 +54,7 @@ Eltje and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Ask Charles to give them $100 credit to spend on Shopify <br />
 <input type="checkbox"/>  Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them <br />
 <input type="checkbox"/>  Add team member to the PostHog app <br />
-<input type="checkbox"/>  Send them an invite to Drata to do security onboarding and their background check <br />
+<input type="checkbox"/>  Send them an invite to [Drata](https://app.drata.com) to do security onboarding and their background check <br />
 <input type="checkbox"/>  Add the team member's details to our hiring plan in Pry <br />
 <input type="checkbox"/>  Add the team member's share options to Captable.io (if relevant) <br />
 
@@ -69,6 +69,10 @@ Eltje and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Also add them to the virtual-coffee and standup channels on Slack <br />
 <input type="checkbox"/>  Add team member to PostHog Users Slack <br />
 <input type="checkbox"/>  Add team member to PostHog organization in GitHub <br />
+<input type="checkbox"/>  Share user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit). <br />
+<input type="checkbox"> Team member should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). 
+
+> Not a hard requirement by any means, but we highly recommended that you join a feedback call and/or product demo in your first weeks. It provides great context on our users.
 
 ### Additional Access
 
