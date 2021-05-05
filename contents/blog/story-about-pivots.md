@@ -6,6 +6,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: general,company-and-culture
 ---
 
 PostHog has pivoted _a lot_.

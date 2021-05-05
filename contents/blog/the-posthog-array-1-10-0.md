@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 This is our most exciting release to date. Here we go: 🎉

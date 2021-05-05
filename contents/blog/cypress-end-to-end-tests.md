@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: general,engineering
 ---
 
 ## Moving fast is easy. Moving fast with confidence is hard.

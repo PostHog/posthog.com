@@ -18,6 +18,8 @@ Books do not have to be tied directly to your area, and they only need be loosel
 
 ## Training budget
 
-If you are new in your job role personally (for example, you have just graduated or the role represents something you've never worked on before) *and* PostHog doesn't have someone more experienced in your current role, we are very keen that we give you budget to improve your skills.
+We have an annual training budget for every team member, regardless of seniority. The budget can be used for relevant courses, training, formal qualifications, or attending conferences. You do not need approval to spend your budget, but you might want to speak to your manager first, in case they have some useful feedback or pointers to a better idea.
 
-We are currently trialling this with one team member and will roll it out more broadly if successful. If this would help you in your role, please ask James or Tim. 
+The training budget is \$1000 per calendar year, but this _isn't_ a hard limit - if you want to spend in excess of this, have a chat with your manager. Where the costs are higher than \$1000, please give Charles a heads-up, so he can increase your card limit. 
+
+If possible, please share your learnings with the team afterwards!

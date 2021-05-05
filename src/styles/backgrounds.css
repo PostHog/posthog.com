@@ -50,10 +50,6 @@
     z-index: 1;
 }
 
-.bg-darkmode-purple {
-    background: #220f3f !important;
-}
-
 .bg-lightmode-gray {
     background: rgb(249, 249, 249) none repeat scroll 0% 0%;
 }

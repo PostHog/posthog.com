@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 What's box-fresh in PostHog? Cumulative graphs, better paths, and an upgrade to our actions.

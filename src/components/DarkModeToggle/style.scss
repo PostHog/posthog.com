@@ -4,6 +4,14 @@
     margin-top: 10px;
 }
 
+.dark {
+    .toggle-switch {
+        &-inner:before {
+            background: #4b325a;
+        }
+    }
+}
+
 .toggle-switch {
     position: relative;
     width: 75px;

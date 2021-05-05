@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
