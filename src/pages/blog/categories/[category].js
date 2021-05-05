@@ -29,7 +29,7 @@ const BlogCategoryPage = ({
         })
         .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
 
-    const latestPost = <PostCard key={posts[0].node.id} post={posts[0].node} featured />
+    const latestPost = posts.length ? <PostCard key={posts[0].node.id} post={posts[0].node} featured /> : null
     const nonLatestPosts = posts.slice(1).map((edge) => <PostCard key={edge.node.id} post={edge.node} />)
 
     const title = BlogCategories.find((k) => k.slug === category)?.title
