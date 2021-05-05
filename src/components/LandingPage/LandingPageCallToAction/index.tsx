@@ -3,11 +3,11 @@ import { CallToAction } from 'components/CallToAction'
 
 export const LandingPageCallToAction = () => {
     return (
-        <div className="flex flex-col hero-cta">
-            <CallToAction icon="rocket" href="https://app.posthog.com/signup?src=home-hero" className="mx-auto">
+        <div className="flex flex-col items-center mx-auto sm:flex-row">
+            <CallToAction icon="rocket" href="https://app.posthog.com/signup?src=home-hero">
                 Get Started
             </CallToAction>
-            <CallToAction icon="calendar" type="secondary" className="mt-3 mx-auto" to="/schedule-demo">
+            <CallToAction icon="calendar" type="secondary" className="mt-3 sm:mt-0 sm:ml-4" to="/schedule-demo">
                 Book a demo
             </CallToAction>
         </div>

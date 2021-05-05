@@ -26,10 +26,6 @@ ul {
     list-style: disc;
 }
 
-.bg-primary {
-    background: linear-gradient(91.54deg, rgba(255, 99, 39, 0.9) 0%, rgba(248, 88, 27, 0.9) 100%);
-}
-
 .font-nav {
     @apply lowercase;
 }

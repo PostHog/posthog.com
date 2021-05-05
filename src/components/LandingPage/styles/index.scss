@@ -51,27 +51,6 @@
     transition: none;
 }
 
-// cta gets pushed too low on mobile, so we set an order so we can change it
-
-.hero-headline {
-    order: 1;
-}
-.hero-icons {
-    order: 2;
-}
-.hero-more-features {
-    order: 3;
-}
-.hero-cta {
-    order: 4;
-    @media (max-width: 639px) {
-        order: 1;
-    }
-}
-.hero-proof {
-    order: 5;
-}
-
 .product-features {
     grid-template-columns: repeat(1, 1fr);
 
