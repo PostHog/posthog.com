@@ -69,7 +69,7 @@ Eltje and the new team member's manager will mostly do this.
 <input type="checkbox"/>  Also add them to the virtual-coffee and standup channels on Slack <br />
 <input type="checkbox"/>  Add team member to PostHog Users Slack <br />
 <input type="checkbox"/>  Add team member to PostHog organization in GitHub <br />
-<input type="checkbox"/>  Share historic user interview notes with them - [part 1](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit), [part 2](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), [part 3](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit) <br />
+<input type="checkbox"/>  Share historic user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit). <br />
 
 ### Additional Access
 
