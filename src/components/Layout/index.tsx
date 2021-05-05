@@ -18,6 +18,7 @@ import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
 import { BlogFooter } from '../../components/BlogFooter'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { BlogPostLayout } from '../Blog/BlogPostLayout'
 
 interface LayoutProps {
     pageTitle?: string
@@ -29,6 +30,8 @@ interface LayoutProps {
     className?: string
     containerStyle?: Record<string, any>
     menuActiveKey?: string
+    featuredImage?: string | null
+    headerBackgroundTransparent?: boolean
 }
 
 const BlogHeaderContent = ({ title }: { title: string }) => (
@@ -49,6 +52,8 @@ const Layout = ({
     children,
     className = '',
     containerStyle = {},
+    featuredImage = '',
+    headerBackgroundTransparent = false,
 }: LayoutProps) => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -70,9 +75,13 @@ const Layout = ({
         }
     }, [])
 
-    return (
+    return isBlogArticlePage ? (
+        <BlogPostLayout pageTitle={pageTitle} featuredImage={featuredImage}>
+            {children}
+        </BlogPostLayout>
+    ) : (
         <>
-            <Header onPostPage={onPostPage} />
+            <Header onPostPage={onPostPage} transparentBackground={headerBackgroundTransparent} />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
                     <AntdLayout.Sider

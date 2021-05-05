@@ -5,12 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: ../images/blog/hacktoberfest/hacktoberfest.png
+categories: engineering
 ---
-
-![Hacktoberfest Banner](../images/blog/hacktoberfest/hacktoberfest.png)
-
-<br />
-
 ### Let the pull requests come in!
 
 We're happy to announce that PostHog has joined [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/).

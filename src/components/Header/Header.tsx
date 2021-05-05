@@ -64,8 +64,8 @@ export const Header = ({
 
     const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-purple'
     const backgroundColor = onPostPage ? themeSupportedColor : 'bg-purple-gradient'
-    const logo = onPostPage && websiteTheme === 'light' ? darkLogo : whiteLogo
-    const textLight = !onPostPage || websiteTheme === 'dark'
+    const logo = (onPostPage || transparentBackground) && websiteTheme === 'light' ? darkLogo : whiteLogo
+    const textLight = (!onPostPage && !transparentBackground) || websiteTheme === 'dark'
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (

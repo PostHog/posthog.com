@@ -4,7 +4,7 @@ import React from 'react'
 interface SectionHeaderProps {
     titleTag: string
     title: string
-    leadText: string
+    leadText?: string
     titleClassName?: string
     leadTextClassName?: string
 }
@@ -12,7 +12,7 @@ interface SectionHeaderProps {
 export const SectionHeader = ({
     titleTag,
     title,
-    leadText,
+    leadText = '',
     titleClassName = '',
     leadTextClassName = '',
 }: SectionHeaderProps) => {
@@ -22,7 +22,7 @@ export const SectionHeader = ({
     return (
         <>
             <Header className={titleClassName}>{title}</Header>
-            <p className={leadTextClassList}>{leadText}</p>
+            {leadText ? <p className={leadTextClassList}>{leadText}</p> : null}
         </>
     )
 }
