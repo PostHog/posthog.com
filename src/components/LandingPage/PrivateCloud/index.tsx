@@ -1,7 +1,6 @@
 import React from 'react'
 import { CallToAction } from '../../CallToAction'
 import { Roadmap } from '../Roadmap'
-import { CornerBrackets } from '../../CornerBrackets'
 import { ContributorAvatars } from '../../ContributorAvatars'
 
 import checkImg from '../images/green-check.svg'
@@ -74,7 +73,6 @@ export const PrivateCloud = () => {
                                 width="full"
                                 href="https://github.com/posthog"
                             >
-                                <CornerBrackets color="purpleish" />
                                 Browse GitHub
                             </CallToAction>
                             <CallToAction

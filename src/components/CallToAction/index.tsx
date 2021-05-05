@@ -3,7 +3,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { CornerBrackets } from '../CornerBrackets'
 import { mergeClassList } from '../../lib/utils'
 
 import rocketImg from './images/rocket.svg'
@@ -24,7 +23,6 @@ interface CallToActionProps {
     width?: string
     href?: string
     to?: string
-    displayBrackets?: boolean
 }
 
 const icons = {
@@ -42,8 +40,7 @@ const icons = {
 const buttonTypeClasses = {
     secondary:
         'bg-transparent border-3 border-white border-opacity-30 text-white mt-2 hover:bg-white hover:bg-opacity-10 hover:text-white',
-    primary:
-        'brackets rounded-sm bg-primary border-primary text-white hover:border-primary-dark hover:bg-primary-dark hover:text-white',
+    primary: 'rounded-sm bg-primary text-white hover:text-white',
     custom: '',
 }
 
@@ -56,7 +53,6 @@ export const CallToAction = ({
     href,
     to,
     onClick,
-    displayBrackets = false,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
         <div className="bg-opacity-10 bg-yellow-100 rounded rounded-sm p-2 mr-8">
@@ -64,15 +60,12 @@ export const CallToAction = ({
         </div>
     ) : null
 
-    const brackets = type === 'primary' || displayBrackets ? <CornerBrackets /> : null
-
     const widthClass = `w-${width}`
     const baseClasses = `p-2 ${widthClass} uppercase rounded-sm inline-flex items-center justify-between select-none text-base font-gosha relative`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (
         <>
-            {brackets}
             {iconNode}
             <div className="mr-8 button-label">{children}</div>
             <span></span>

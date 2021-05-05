@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { CornerBrackets } from '../../CornerBrackets'
-
 import airbalticLogo from '../images/SocialProofLogos/airbaltic.svg'
 import dataikuLogo from '../images/SocialProofLogos/dataiku.svg'
 import landmarkLogo from '../images/SocialProofLogos/landmark.svg'
