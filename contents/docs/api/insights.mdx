@@ -19,9 +19,9 @@ Get a list of insights from PostHog.
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
 | `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
-| `saved` | boolean |  | ❌ |
-| `user` | string |  | ❌ |
-| `insight` | string / `SESSIONS`, `PATHS`, `TRENDS`, `FUNNELS`, `RETENTIONS` | | ❌ |
+| `saved` | `boolean` |  | ❌ |
+| `user` | `string` |  | ❌ |
+| `insight` |"SESSIONS", "PATHS", "TRENDS", "FUNNELS", "RETENTIONS" | | ❌ |
 
 </HiddenSection>
 
@@ -102,11 +102,11 @@ Get a list of trends from PostHog.
 | --- | --- | --- | --- |
 | `events` | Array of Events | Basic usage is `[{"id": "$pageview"}]`.<br /><br />For each event, you can specify:<br />- `id` Name of the event<br />- `properties` A Properties object (see below)<br />- `order` (int) order of the event. This is mostly used for funnels | ✅ |
 | `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
-| `interval` | String | Interval of the data. `minute`, `hour`, `day`, `week`, `month` | ❌ |
-| `breakdown_value` | String | Split out all entities by any property value or cohort id. | ❌ |
-| `breakdown_type` | String | Default: `property`. Can be set to `cohort`, in which case you can pass through a cohort_id to `breakdown_value` | ❌ |
-| `from_dashboard` | String | | ❌ |
-| `shown_as` | String / `Volume`, and `Stickiness` |  | ❌ |
+| `interval` | `string` | Interval of the data. `minute`, `hour`, `day`, `week`, `month` | ❌ |
+| `breakdown_value` | `string` | Split out all entities by any property value or cohort id. | ❌ |
+| `breakdown_type` | `string` | Default: `property`. Can be set to `cohort`, in which case you can pass through a cohort_id to `breakdown_value` | ❌ |
+| `from_dashboard` | `string` | | ❌ |
+| `shown_as` | "volume", and "stickiness" |  | ❌ |
 
 
 
@@ -173,7 +173,7 @@ Get a list of sessions from PostHog.
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
 | `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
-| `session` | String |Specifies the type of a session. For example, `avg`, or `dist`. | ❌ |
+| `session` | `string` |Specifies the type of operation to perform on session duration values. For example, `avg`, or `dist`. | ❌ |
 
 
 
@@ -248,8 +248,8 @@ Get a list of paths from PostHog.
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
 | `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
-| `request_type` | String | | ❌ |
-| `start` | String |  | ❌ |
+| `request_type` | `string` | | ❌ |
+| `start` | `string` |  | ❌ |
 
 
 
