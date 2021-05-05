@@ -36,7 +36,7 @@ We make things public by default because [transparency](/handbook/company/cultur
 Information that is not publicly shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
 
 
-We have two repos to centralize and document all internal communication. These are the source of truth for any internal information, and anything that should be written down (as established in these guidelines) should live here, not on Slack. This will make it easier when having to search for older stuff, sharing context between public and internal information, and for newcomers to have all information readily available.
+We have two repos to centralize and document all internal communication. These are the source of truth for any internal information, and anything that should be written down (as established in these guidelines) should live here, not on Slack. This will make it easier when having to search for older stuff, sharing context between public and internal repos, and for newcomers to have all information they might need readily available.
 
 ### Company Internal
 Repository can be found in https://github.com/PostHog/company-internal
