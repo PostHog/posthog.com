@@ -26,6 +26,9 @@ interface MdxQueryData {
             showTitle: boolean
             hideAnchor: boolean
             description: string
+            featuredImage?: {
+                publicURL?: string
+            }
         }
     }
 }
@@ -90,7 +93,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                         {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                             <h1 className="centered">{frontmatter.title}</h1>
                         )}
-                        <div className="docsPagesContent font-inter">
+                        <div className={`docsPagesContent font-inter ${isBlogArticlePage ? 'blogPageContent' : ''}`}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
