@@ -16,7 +16,7 @@ const Logo = ({ logo, alt }: { logo: string; alt: string }) => (
 
 export const SocialProof = () => {
     return (
-        <div className="mt-24 xl:flex xl:justify-center mx-auto">
+        <div className="mt-24 xl:flex xl:justify-center mx-auto relative z-40 pb-12">
             <div className="flex flex-wrap md:flex-nowrap items-center gap-x-6 xl:gap-x-2 justify-center">
                 <Logo logo={hasuraLogo} alt="Hasura" />
                 <Logo logo={ycombinatorLogo} alt="Y Combinator" />

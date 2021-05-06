@@ -1,8 +1,19 @@
 .hero {
-    background: url(../images/hero-bg.svg), linear-gradient(180deg, #220f3f 0%, #2c1e60 100%);
+    background: url(../images/hero-bg.svg), linear-gradient(180deg, #220f3f 0%, #3f086d 100%);
     background-position: center center;
     background-repeat: repeat-x;
     position: relative;
+
+    &:after {
+        background: rgba(2, 116, 123, 0.2);
+        bottom: 0;
+        content: '';
+        filter: blur(242.308px);
+        left: 0;
+        position: absolute;
+        top: 0px;
+        width: 100vw;
+    }
 }
 
 .open-source {
@@ -199,7 +210,18 @@
 }
 
 .lp-features {
-    background: linear-gradient(180deg, #2c1e60 0%, #3c3288 100%);
+    background: linear-gradient(180deg, #180834 0%, #3c3288 100%);
+    position: relative;
+
+    &:before {
+        background: url(../images/purple-mountain-majesty.svg);
+        content: '';
+        height: 160px;
+        left: 0;
+        position: absolute;
+        top: -145px;
+        width: 100%;
+    }
 
     li {
         display: flex;

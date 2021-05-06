@@ -17,7 +17,18 @@ const SequenceGraphic = ({ url, alt }: { url: string; alt: string }) => (
 export const Hero = () => {
     return (
         <div className="hero py-6 text-center lg:text-left lg:py-24">
-            <div className="flex w-11/12 mx-auto mb-16 flex-col lg:flex-row">
+            <div>
+                <style>
+                    {
+                        '\
+                .bg-purple-gradient{\
+                background: none;\
+                }\
+                '
+                    }
+                </style>
+            </div>
+            <div className="flex w-11/12 mx-auto mb-16 flex-col relative z-10 lg:flex-row">
                 <div className="flex-0 mx-auto lg:ml-0 lg:mr-6">
                     <HeroGraphic
                         url={heroGraphic}
@@ -42,7 +53,7 @@ export const Hero = () => {
                 </div>
             </div>
 
-            <div className="px-4">
+            <div className="px-4 relative z-20">
                 <h3 className="text-center text-baby-blue mb-12">An end-to-end data platform</h3>
                 <SequenceGraphic
                     url={sequenceGraphic}
@@ -50,7 +61,7 @@ export const Hero = () => {
                 />
             </div>
 
-            <p className="text-baby-blue text-center font-bold text-sm opacity-75">
+            <p className="text-baby-blue text-center font-bold text-sm opacity-75 relative z-30">
                 + Heatmaps, Session Browsing, Autocapture &amp; more
             </p>
 
