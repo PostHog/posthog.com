@@ -4,15 +4,20 @@ import { SocialProof } from '../SocialProof'
 import { LandingPageCallToAction } from '../LandingPageCallToAction'
 
 import heroGraphic from '../images/hero@2x.png'
+import sequenceGraphic from '../images/sequence@2x.png'
 
 const HeroGraphic = ({ url, alt }: { url: string; alt: string }) => (
     <img src={url} alt={alt} width="404" height="326" className="" />
 )
 
+const SequenceGraphic = ({ url, alt }: { url: string; alt: string }) => (
+    <img src={url} alt={alt} width="1020" height="177" className="mx-auto" />
+)
+
 export const Hero = () => {
     return (
         <div className="hero py-6 text-center lg:text-left lg:py-24">
-            <div className="flex w-11/12 mx-auto flex-col lg:flex-row">
+            <div className="flex w-11/12 mx-auto mb-16 flex-col lg:flex-row">
                 <div className="flex-0 mx-auto lg:ml-0 lg:mr-6">
                     <HeroGraphic
                         url={heroGraphic}
@@ -37,12 +42,16 @@ export const Hero = () => {
                 </div>
             </div>
 
-            <div className="max-w-4xl text-center hero-icons -mx-4 md:mx-auto">
-                <ProductFeatureIcons />
+            <div className="px-4">
+                <h3 className="text-center text-baby-blue mb-12">An end-to-end data platform</h3>
+                <SequenceGraphic
+                    url={sequenceGraphic}
+                    alt="Ingest data with Event Pipelines. Discover insights with Analytics Suite. Test &amp; iterate with Feature Flags. Observe adoption with Session Recordings. Export to Data Lakes."
+                />
             </div>
 
-            <p className="hero-more-features text-white text-center sm:mt-4 max-w-xl mx-auto text-xs md:mb-12">
-                <span className="opacity-70">+ Heatmaps, Session Browsing, Autocapture &amp; more</span>
+            <p className="text-baby-blue text-center font-bold text-sm opacity-75">
+                + Heatmaps, Session Browsing, Autocapture &amp; more
             </p>
 
             <SocialProof />
