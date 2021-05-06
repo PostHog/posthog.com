@@ -30,6 +30,5 @@ export const BlogCategories: CategoryInterface[] = [
         title: 'Release Notes',
         slug: 'release-notes',
         link: '/blog/categories/release-notes',
-        hideFromNavigation: true,
     },
 ]
