@@ -53,3 +53,7 @@
 .bg-lightmode-gray {
     background: rgb(249, 249, 249) none repeat scroll 0% 0%;
 }
+
+.bg-footer {
+    background: #08042f;
+}
