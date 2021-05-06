@@ -13,7 +13,7 @@ Our roadmap for 2021 will do three things:
 
 # 1. Reach parity
 
-PostHog went from 0 to a fully-featured analytics platform in an incredibly short period of time. Realistically, that did mean we had to cut some corners when it came to stability, usability and breath of analytics you could do with PostHog.
+PostHog went from 0 to a fully-featured analytics platform in an incredibly short period of time. Realistically, that did mean we had to cut some corners when it came to stability, usability and depth of analytics you could do with PostHog.
 
 In 2021, we're going to make sure that PostHog has all the features you love from other platforms. That way, self-hosting your product analytics doesn't need to be a compromise.
 
@@ -21,7 +21,7 @@ We're also putting more focus into usability and UX, especially for less technic
 
 # 2. Best developer platform
 
-Developers like using PostHog for many reasons. We're open-source at our core, which has helped gain trust and adoption from the developer community.
+Developers like using PostHog for many reasons. We're open-source at our core, which has helped us gain trust and adoption from the developer community.
 It's easy to debug, you can self-host and PostHog is now starting to become extensible.
 
 This year we're going to lean into that last item. We've kept plugins relatively quiet so far, but we believe plugins will be what will make PostHog the default choice for developers.
@@ -35,6 +35,6 @@ There will be work on three main fronts:
 
 # 3. Make it easy to deploy a scalable version of PostHog, free
 
-When we started PostHog we went with Postgres as our backend. This was a great choice early on as it allowed virtually anyone to deploy PostHog on any platform. Over time, however, the limitations of using Postgres for analytics became obvious, and we spent a chunk of last year converting our cloud offering to use Clickhouse in the backend.
+When we started PostHog we went with Postgres as our backend. This was a great choice early on as it allowed virtually anyone to deploy PostHog on any platform. Over time, however, the limitations of using Postgres for analytics became obvious, and we spent a chunk of 2020 converting our cloud offering to use Clickhouse in the backend.
 
 The next step is offering this super scalable version of PostHog to people who want to self host. We'll need to build tooling, metrics and monitoring to help people who need the power of Clickhouse, but want to maintain control over their data.
