@@ -44,11 +44,11 @@ Repository can be found in https://github.com/PostHog/company-internal
 Documents any company-wide internal information, in addition to any information related to People, Ops, Legal & Compliance, Finance or Strategy.
 
 **Examples of information that should go here:**
-- ✅ Hiring requests and job profiles
-- ✅ Hiring strategies and plans
+- ✅ Hiring plans and discussions before we post a job ad
+- ✅ People discussions, e.g. benefits, pensions, share options, org structure
 - ✅ Onboarding/offboarding checklists
-- ✅ Non-engineering sprint plannings
-- ✅ Company-wide internal discussions, most likely WIP before we release publicly (e.g. product positioning strategy, customer strategy, board meetings debriefs, ...)
+- ✅ Non-engineering team sprint planning
+- ✅ Sensitive discussions around future positioning, customer strategy, fundraising, board meetings
 
 **Examples of information that should NOT go here:**
 - ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
@@ -71,10 +71,10 @@ Please be sure to read the README of the repo for guidelines on how to file spec
 **Examples of information that should go here:**
 - ✅ Vulnerabilities (security bugs) reports
 - ✅ Bug reports where most of the context of the report depends on customer's PII. *Some bug reports require screenshots, recordings, or some other information that contains PII and as such can't be public.*
-- ✅ Post-mortems on outages, or other issues affecting a large portion of customers.
+- ✅ Post-mortems on outages, or other issues affecting a large portion of customers. The results of these should usually be made public though. 
 - ✅ Documentation of internal infrastructure, where if it was public knowledge could provide valuable information to an attacker.
-- ✅ Experiment (A/B testing) results
-- ✅ Product or growth strategy discussions (unless they should be public)
+- ✅ Experiment (A/B testing) results.
+- ✅ Product or growth strategy discussions (unless they should be public).
 - ✅ Interview exercises or questions for engineering, product, growth or design tasks that should not be public.
 - ✅ Documentation of engineering or product requirements documents that can't be public (these should be quite rare).
 - ✅ Billing or pricing-related discussions that is not yet public.
@@ -83,6 +83,7 @@ Please be sure to read the README of the repo for guidelines on how to file spec
 - ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
 - ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo.
 - ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
+
 ## Written Communication
 
 ### GitHub
