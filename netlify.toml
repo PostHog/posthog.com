@@ -3,10 +3,12 @@
   to = "/plugins"
   status = 200
 
+
 [[redirects]]
   from = "/careers/*"
   to = "/careers"
   status = 200
+
 
 [[redirects]]
     from = "/docs/integrations/android-integration"
@@ -116,3 +118,13 @@
 [[redirects]]
     from = "/handbook/company/team"
     to = "/handbook/people/team"
+
+
+[[redirects]]
+    from = "/handbook/growth/customer-success"
+    to = "/handbook/growth/customer-support"
+
+    
+[[redirects]]
+    from = "/handbook/growth/customer-success"
+    to = "/handbook/growth/customer-support"

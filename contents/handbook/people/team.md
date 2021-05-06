@@ -19,7 +19,7 @@ We don't care if you haven't finished (or attended) school, if you were super im
 
 What we do care about is your ability to learn, iterate, and ship.
 
-That's why we have people in Belgium, Brazil, the East and West coast of the US, England, Estonia, the Netherlands, Senegal, among other places. Learn more about [diversity](diversity) at PostHog.
+That's why we have people in Belgium, the East and West coast of the US, England, Estonia, South Africa, the Democratic Republic of Congo, among other places. Learn more about [diversity](diversity) at PostHog.
 
 </div>
 
@@ -28,7 +28,7 @@ That's why we have people in Belgium, Brazil, the East and West coast of the US,
 <div class="team-right-image" markdown="1">
 
 ![Remote work globe animation](../../images/team/team-global.gif)
-<br /><small class="centered">Our team of 13 is distributed across 10 countries and no two team members live in the same city. </small>
+<br /><small class="centered">Our team of 22 is distributed across 10 countries. </small>
 
 </div>
 
@@ -316,7 +316,7 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 <div class="team-left-text" markdown="1">
 
-### Yakko Majuri, Technical Writer and Developer
+### Yakko Majuri, Developer Experience
 
 <div class="team-left-bio" markdown="1">
 
@@ -324,9 +324,7 @@ Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian
 
 Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD).
 
-Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. Most failed, but there are a few I'm very proud of, especially my work in the blockchain space.
-
-For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://yakkomajuri.medium.com) that surpassed 250k views in just 30 days. I then decided writing should be more than a hobby, and so, here I am.
+Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://yakkomajuri.medium.com) that surpassed 250k views in just 30 days. 
 
 When I'm not working, I have been found hitchiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain.
 
@@ -553,6 +551,66 @@ I'm looking forward to all we will accomplish together.
 <div class="team-right-image" markdown="1">
 
 ![Buddy Williams portrait](../../images/team/Buddy.png)
+
+</div>
+
+</div>
+
+<!--- Li Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Li Yi Yu, Full Stack Engineer
+
+<div class="team-left-bio" markdown="1">
+
+HI! I'm Li from NYC. I fell in love with coding towards the end of college, jumped into a programming bootcamp right after, worked at a healthtech company for two years, and here I am today!
+
+Some things I enjoy: karaoke, Switch/PC/board games, a good movie or series, struggling on hikes because I've spent too much time indoors, and exploring the NYC food scene.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Li portrait](../../images/team/Li.png)
+
+</div>
+
+</div>
+
+<!--- Sam Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Sam Winslow, Full Stack Engineer
+
+<div class="team-left-bio" markdown="1">
+
+Hi! I’m Sam. I recently graduated from NYU, where I studied the interaction of media, technology & society. My earliest experiences with programming were building games on a TI-83 calculator and teaching myself BASIC at age 10. The first application I made was an MS Paint clone. I have worked in design, marketing, and software engineering since then.
+
+In my free time, I love building hardware projects, reading about logic & philosophy, cycling around NYC, and taking care of my puppy, Louie.
+
+One of the projects I'm most proud of was a social network for sharing music reviews. We had modest success among college students, and the biggest lesson I learned was that I wanted to spend more time coding new features and less time fighting the analytics tools in order to figure out what to build.
+
+I am always at the beginning of my journey to learn.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Sam portrait](../../images/team/Sam.png)
 
 </div>
 

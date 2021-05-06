@@ -82,7 +82,6 @@
             "docs/deployment/deploy-digital-ocean",
             "docs/deployment/deploy-gcs",
             "docs/deployment/deploy-kubernetes",
-            "docs/deployment/deploy-linode",
             "docs/deployment/deploy-render",
             "docs/deployment/deploy-qovery",
             "docs/deployment/snippet-installation",
@@ -138,7 +137,7 @@
             "docs/api/elements",
             "docs/api/events",
             "docs/api/people",
-            "docs/api/trends",
+            "docs/api/insights",
             "docs/api/user",
             "docs/api/feature-flags",
             "docs/api/annotations",
@@ -258,29 +257,61 @@
     {
         "entry": "Handbook",
         "name": "Handbook",
-        "child_entries": ["Company", "People", "Engineering", "Growth", "Strategy"]
+        "child_entries": ["Company", "Strategy", "Getting started", "How we work", "People", "Engineering", "Growth"]
     },
     {
         "entry": "Company",
         "name": "Company",
+        "items": ["handbook/company/story", "handbook/people/team", "handbook/strategy/investors"]
+    },
+    {
+        "entry": "Strategy",
+        "name": "Strategy",
         "items": [
-            "handbook/company/story",
+            "handbook/strategy/strategy",
+            "handbook/strategy/business-model",
+            "handbook/strategy/roadmap",
+            "handbook/strategy/prioritization",
+            "handbook/strategy/investor-updates"
+        ]
+    },
+    {
+        "entry": "Getting started",
+        "name": "Getting started",
+        "items": ["handbook/getting-started"]
+    },
+    {
+        "entry": "How we work",
+        "name": "How we work",
+        "items": [
             "handbook/company/culture",
             "handbook/company/values",
             "handbook/company/diversity",
             "handbook/company/communication",
-            "handbook/company/security",
-            "handbook/company/branding",
             "handbook/company/management",
-            "handbook/company/standups",
-            "handbook/company/working-with-design"
+            "handbook/company/security",
+            "handbook/company/branding"
+        ],
+        "child_entries": ["Team Structure"]
+    },
+    {
+        "entry": "Team Structure",
+        "name": "Team Structure",
+        "items": [
+            "handbook/people/team-structure/team-structure",
+            "handbook/people/team-structure/why-small-teams",
+            "handbook/people/team-structure/core-experience",
+            "handbook/people/team-structure/design",
+            "handbook/people/team-structure/extensibility",
+            "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/marketing",
+            "handbook/people/team-structure/people"
         ]
     },
     {
         "entry": "People",
         "name": "People",
         "items": [
-            "handbook/people/team",
             "handbook/people/hiring-process",
             "handbook/people/compensation",
             "handbook/people/benefits",
@@ -304,6 +335,7 @@
             "handbook/people/team-structure/design",
             "handbook/people/team-structure/extensibility",
             "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/infrastructure",
             "handbook/people/team-structure/marketing",
             "handbook/people/team-structure/people"
         ]
@@ -327,12 +359,27 @@
         ]
     },
     {
+        "entry": "Engineering",
+        "name": "Engineering",
+        "items": [
+            "handbook/engineering/development-process",
+            "handbook/engineering/how-we-review",
+            "handbook/engineering/release-new-version",
+            "handbook/engineering/releasing-python",
+            "handbook/engineering/onboarding-customer",
+            "handbook/engineering/setup-ssl-locally",
+            "handbook/engineering/ee-setup",
+            "handbook/engineering/common-issues",
+            "handbook/engineering/mdx"
+        ]
+    },
+    {
         "entry": "Growth",
         "name": "Growth",
         "items": [
             "handbook/growth/strategy",
             "handbook/growth/community",
-            "handbook/growth/customer-success",
+            "handbook/growth/customer-support",
             "handbook/growth/developer-relations"
         ],
         "child_entries": ["Marketing", "Sales"]
@@ -346,7 +393,8 @@
             "handbook/growth/marketing/community",
             "handbook/growth/marketing/newsletter",
             "handbook/growth/marketing/paid",
-            "handbook/growth/marketing/press"
+            "handbook/growth/marketing/press",
+            "handbook/growth/marketing/releasing-content"
         ]
     },
     {
@@ -362,16 +410,30 @@
     {
         "entry": "Engineering",
         "name": "Engineering",
+        "child_entries": ["Beginners Guide"],
         "items": [
             "handbook/engineering/development-process",
+            "handbook/engineering/debugging",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
             "handbook/engineering/releasing-python",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",
+            "handbook/engineering/tech-talks",
             "handbook/engineering/common-issues",
             "handbook/engineering/mdx"
+        ]
+    },
+    {
+        "entry": "Beginners Guide",
+        "name": "Beginners Guide",
+        "items": [
+            "handbook/engineering/beginners-guide/introduction",
+            "handbook/engineering/beginners-guide/getting-to-know-posthog",
+            "handbook/engineering/beginners-guide/getting-started",
+            "handbook/engineering/beginners-guide/developer-workflow",
+            "handbook/engineering/beginners-guide/technologies-to-learn"
         ]
     },
     {

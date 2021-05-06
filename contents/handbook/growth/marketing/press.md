@@ -4,25 +4,48 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Direct all press enquiries to press@posthog.com
+## Press enquiries
 
-Only James, Tim, Charles or Sean should talk to the press on PostHog's behalf.
+Any press-related enquiries should be directed to press@posthog.com. Only James, Tim or Charles should be talking to the press on PostHog's behalf. If someone from the press approaches you, please raise with one of them in the first instance. 
 
-## Press releases
+## Managing press releases
 
-For significant milestones we'll collaborate with press to release the news.
+From time to time, we may have significant company news that we want to release via the press, in addition to our usual channels. This is usually for significant company milestones such as funding rounds.
 
-We offer exclusives.
+We have a simple process to ensure that any press releases go smoothly. 
 
-**Checklist:**
+### First steps
 
-- Confirm date and time, content, exclusives and arrange interviews ahead of the release date
-- Distribute press release via BusinessWire (speak to James for access)
-- See our [content](../blog) sharing guidelines
+- [ ] Write up objectives and comms strategy - what is the purpose of the press release? What key message(s) are we trying to get across? 
+- [ ] Set an approximate target date
 
-Todo: create an internal press list or contract a PR firm.
+### Two weeks before release
 
-### Press release template
+- [ ] Confirm key messages and write first draft press release
+- [ ] Finalize target date
+- [ ] Pitch and secure a media exclusive - our investors can help with this
+- [ ] Secure approval for any third party involvement, e.g. quotes we want to use
+
+We currently prefer working with a single media partner on an exclusive basis, as we believe a single, high-quality story is more impactful than taking a broad approach, given our current early stage. 
+
+### One week before release
+
+- [ ] Finalize press release and share with exclusive media partner
+- [ ] Any media prep if interviews have been scheduled
+
+### On the day of release
+
+- [ ] *Wait for the media partner's story to go live first!* Check it carefully and ask for any errors to be amended before proceeding with the below...
+- [ ] Push out the press release via BusinessWire
+- [ ] Submit via YC's social media request from
+- [ ] James to post on his personal LinkedIn (and tag all relevant people)
+- [ ] Post in our PostHog Users Slack
+- [ ] Post in YC Slack
+- [ ] Write post on our blog about the news
+- [ ] Post on PostHog Twitter (and tag all relevant people)
+- [ ] Share links to all of the above to the PostHog team so they can share
+
+## Press release template
 
 Include media and quotes from James, Tim or influential people.
 

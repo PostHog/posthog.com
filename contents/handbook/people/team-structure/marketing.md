@@ -7,16 +7,11 @@ hideAnchor: true
 
 ## People
 
-- [Sean Packham (Team lead, Marketing Lead)](/handbook/company/team#sean-packham-marketing-lead)
 - Mo Shehu, Content Marketer
 
 ## Mission
 
 Make PostHog a ubiquitous developer tool.
-
-## Responsibilities
-
-See a [breakdown by role](/handbook/growth/marketing#functions) within the team.
 
 ## Customer
 
@@ -32,7 +27,7 @@ We will expand to non-technical teams when we have achieved technical awareness 
 
 * Acquisition
 
-## Philosophy
+## Philosophy
 
 Be kind, concise and direct.
 

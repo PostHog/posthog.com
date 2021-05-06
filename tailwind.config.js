@@ -23,13 +23,26 @@ module.exports = {
             ],
         },
     },
-    darkMode: false, // or 'media' or 'class'
+    darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
             fontFamily: {
                 gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
                 serif: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: ['Good Sans', 'Arial', 'Helvetica', 'sans-serif', 'Inter'],
+                inter: [
+                    'Inter',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica',
+                    'Arial',
+                    'sans-serif',
+                    'Apple Color Emoji',
+                    'Segoe UI Emoji',
+                    'Segoe UI Symbol',
+                ],
             },
             fontSize: {
                 '2xs': '0.65rem',
@@ -41,6 +54,9 @@ module.exports = {
                 purpleish: '#802f6a',
                 'purpleish-dark': '#72286E',
                 orange: '#FFB877',
+                'darkmode-purple': '#220f3f',
+                'offwhite-purple': '#F4F1F8',
+                footer: '#08042f',
             },
             minHeight: {
                 780: '780px',

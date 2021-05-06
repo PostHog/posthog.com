@@ -5,6 +5,10 @@ import { MethodTags } from './components/APIDocs/MethodTags'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlogPostLayout } from './components/Blog/BlogPostLayout'
+import { BlogPosts } from './components/Blog/BlogPosts'
+import { BlogShareButtons } from './components/Blog/BlogShareButtons'
+import { BlogSidebar } from './components/Blog/BlogSidebar'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
@@ -31,6 +35,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { HiddenSection } from './components/HiddenSection'
+import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
@@ -67,6 +72,10 @@ export const shortcodes = {
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
+    BlogPostLayout,
+    BlogPosts,
+    BlogShareButtons,
+    BlogSidebar,
     BlogFooter,
     CallToAction,
     Benefits,
@@ -93,6 +102,7 @@ export const shortcodes = {
     Footer,
     GetStartedModal,
     HiddenSection,
+    Blockquote,
     Features,
     Hero,
     LandingPageCallToAction,

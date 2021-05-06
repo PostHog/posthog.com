@@ -44,7 +44,7 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
         <>
             <div className="main-price">
                 <div>
-                    {pricingOption === 'vpc' ? `${additionalUnitPrice}` : '$0.000225'}
+                    {pricingOption === 'vpc' ? `$${additionalUnitPrice}` : '$0.000225'}
                     <span>/additional event ingested</span>
                 </div>
             </div>
