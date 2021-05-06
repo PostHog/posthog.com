@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Slider } from 'antd'
 import { useValues, useActions } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
+import { LogSlider, sliderCurve } from './LogSlider'
 
 interface PricingSliderProps {
     pricingOption: 'cloud' | 'vpc'
@@ -49,17 +49,22 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
                 </div>
             </div>
             <div>
-                <Slider
+                <br />
+                <LogSlider
                     min={10000}
                     max={150000000}
-                    step={20000}
-                    tooltipVisible
-                    tipFormatter={(value) => value.toLocaleString().concat(' events ingested /month')}
-                    onChange={(value) =>
-                        pricingOption === 'vpc' ? calculateVpcPricing(value as number) : setSliderValue(value as number)
-                    }
-                    value={sliderValue}
+                    marks={[10000, 100000, 1000000, 10000000, 100000000]}
+                    stepsInRange={100}
+                    onChange={(value) => {
+                        if (pricingOption === 'vpc') {
+                            calculateVpcPricing(Math.round(sliderCurve(value)))
+                            return
+                        }
+                        setSliderValue(Math.round(sliderCurve(value)))
+                    }}
                 />
+                <br />
+                <br />
                 {pricingOption === 'vpc' ? (
                     <div style={{ fontSize: '1rem', textAlign: 'right' }}>
                         <span className="text-muted">Price:</span> <b>${finalCost}</b>/month
