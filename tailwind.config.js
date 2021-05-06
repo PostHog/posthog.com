@@ -56,6 +56,7 @@ module.exports = {
                 orange: '#FFB877',
                 'darkmode-purple': '#220f3f',
                 'offwhite-purple': '#F4F1F8',
+                footer: '#08042f',
             },
             minHeight: {
                 780: '780px',

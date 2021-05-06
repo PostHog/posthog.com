@@ -51,7 +51,7 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-export const Footer = ({
+export function Footer({
     onPostPage,
     showNewsletter = false,
     backgroundClass = '',
@@ -59,7 +59,7 @@ export const Footer = ({
     onPostPage: boolean
     showNewsletter?: boolean
     backgroundClass?: string
-}) => {
+}): JSX.Element {
     const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
     const { websiteTheme } = useValues(layoutLogic)
     const bgClass = backgroundClass || (onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer')
