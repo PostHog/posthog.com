@@ -365,6 +365,7 @@
             "handbook/engineering/development-process",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
+            "handbook/engineering/bug-prioritization",
             "handbook/engineering/releasing-python",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
