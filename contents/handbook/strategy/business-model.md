@@ -16,7 +16,7 @@ The reality is that paid features can increase our revenue, thus our ability to 
 
 At the moment, 100% of our focus is on the Community Edition of the software.
 
-## Promises
+## Promises
 
 1. We won't introduce features into the open source codebase with a delay.
 1. We will always release and open source all tests we have for an open source feature.
