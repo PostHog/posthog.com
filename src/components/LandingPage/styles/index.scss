@@ -17,36 +17,39 @@
 }
 
 .platform-columns {
-    grid-template-columns: repeat(3, 1fr);
+    //grid-template-columns: repeat(3, 1fr);
+
+    @media (min-width: 840px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
     position: relative;
     z-index: 11;
 
     .insights-column {
         position: relative;
 
-        &:before,
-        &:after {
-            content: '';
-            height: 1px;
-            opacity: 0.5;
-            position: absolute;
-            top: 50%;
-        }
+        @media (min-width: 1092px) {
+            &:before,
+            &:after {
+                content: '';
+                height: 1px;
+                opacity: 0.5;
+                position: absolute;
+                top: 148px;
+            }
 
-        &:before {
-            background: linear-gradient(90deg, #3954c2 0%, #f1764f 100%);
-            left: -14%;
-            right: calc(100% - 14%);
-        }
+            &:before {
+                background: linear-gradient(90deg, #3954c2 0%, #f1764f 100%);
+                left: -14%;
+                right: calc(100% - 14%);
+            }
 
-        &:after {
-            background: linear-gradient(90deg, #d7684b 0%, #ff9900 100%);
-            right: -14%;
-            left: calc(100% - 14%);
+            &:after {
+                background: linear-gradient(90deg, #d7684b 0%, #ff9900 100%);
+                right: -14%;
+                left: calc(100% - 14%);
+            }
         }
-    }
-
-    .not-button {
     }
 
     li {

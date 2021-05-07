@@ -28,15 +28,15 @@ export const Hero = () => {
                     }
                 </style>
             </div>
-            <div className="flex w-11/12 mx-auto mb-16 flex-col relative z-10 lg:flex-row">
-                <div className="flex-0 mx-auto lg:ml-0 lg:mr-6">
+            <div className="flex justify-center w-11/12 mx-auto mb-16 flex-col relative z-10 lg:flex-row">
+                <div className="flex-0 mx-auto md:mr-6 lg:ml-0 lg:mr-14">
                     <HeroGraphic
                         url={heroGraphic}
                         alt="See that data, watch it move. See how it travels effortlessly from your event pipelines, through the PostHog suite, and out to your data lake. Voila!"
                     />
                 </div>
 
-                <div className="flex-1">
+                <div className="flex-0">
                     <div className="max-w-full hero-headline mt-4">
                         <h1 className="text-white leading-tight mb-4">
                             The <span className="relative open-source">platform</span> for
@@ -44,8 +44,8 @@ export const Hero = () => {
                             <span className="text-5xl">building better products</span>
                         </h1>
                         <p className="text-baby-blue text-base">
-                            Analytics, session recordings, feature flags, heatmaps and more - in a single product you
-                            can host yourself.
+                            Analytics, session recordings, feature flags, heatmaps and more - in a single <br />
+                            product you can host yourself.
                         </p>
                     </div>
 
