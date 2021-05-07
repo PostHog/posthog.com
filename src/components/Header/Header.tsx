@@ -67,11 +67,7 @@ export const Header = ({
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
-        <div
-            className={`header-wrapper primary-navbar py-6 ${
-                transparentBackground ? 'bg-transparent' : ''
-            } relative z-20`}
-        >
+        <div className="header-wrapper primary-navbar py-6 relative z-20">
             <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />
