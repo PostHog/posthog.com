@@ -1,10 +1,14 @@
-// AUTO GENERATED FILE
+// AUTO GENERATED FILE 
 
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlogPostLayout } from './components/Blog/BlogPostLayout'
+import { BlogPosts } from './components/Blog/BlogPosts'
+import { BlogShareButtons } from './components/Blog/BlogShareButtons'
+import { BlogSidebar } from './components/Blog/BlogSidebar'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
@@ -31,6 +35,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { HiddenSection } from './components/HiddenSection'
+import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
@@ -40,6 +45,7 @@ import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
 import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
+import { LibraryStats } from './components/LibraryStats'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
@@ -61,63 +67,69 @@ import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
-    AnchorScrollNavbar,
-    ArrayCTA,
-    BasicHedgehogImage,
-    BlogFooter,
-    CallToAction,
-    Benefits,
-    CareersHero,
-    Culture,
-    InterviewProcess,
-    OpenRoles,
-    WhyWereHere,
-    WorkingAtPostHog,
-    CodeBlock,
-    CompensationCalculator,
-    Container,
-    ContributorAvatars,
-    ContributorCard,
-    ContributorSearch,
-    ContributorsChart,
-    CornerBrackets,
-    DarkModeToggle,
-    DemoScheduler,
-    DocsPageSurvey,
-    DocsSearch,
-    FeaturesComparisonTable,
-    FeaturesNav,
-    Footer,
-    GetStartedModal,
-    HiddenSection,
-    Features,
-    Hero,
-    LandingPageCallToAction,
-    PrivateCloud,
-    ProductFeatureIcons,
-    RecentBlogPosts,
-    Roadmap,
-    SocialProof,
-    Tutorials,
-    MdxAnchorHeaders,
-    NewsletterForm,
-    OtherFeaturesBlock,
-    PageHeader,
-    PostCard,
-    PricingComparisonTable,
-    PricingSlider,
-    ResponsiveAnchor,
-    ResponsiveSidebar,
-    ResponsiveTopBar,
-    DesignedForYourStackBlock,
-    FeaturedSectionTextLeft,
-    FeaturedSectionTextRight,
-    FeaturedSectionTripleImage,
-    Spacer,
-    StarRepoButton,
-    StartNowButton,
-    Structure,
-    TableOfContents,
+	Endpoint,
+	MethodTags,
+	AnchorScrollNavbar,
+	ArrayCTA,
+	BasicHedgehogImage,
+	BlogPostLayout,
+	BlogPosts,
+	BlogShareButtons,
+	BlogSidebar,
+	BlogFooter,
+	CallToAction,
+	Benefits,
+	CareersHero,
+	Culture,
+	InterviewProcess,
+	OpenRoles,
+	WhyWereHere,
+	WorkingAtPostHog,
+	CodeBlock,
+	CompensationCalculator,
+	Container,
+	ContributorAvatars,
+	ContributorCard,
+	ContributorSearch,
+	ContributorsChart,
+	CornerBrackets,
+	DarkModeToggle,
+	DemoScheduler,
+	DocsPageSurvey,
+	DocsSearch,
+	FeaturesComparisonTable,
+	FeaturesNav,
+	Footer,
+	GetStartedModal,
+	HiddenSection,
+	Blockquote,
+	Features,
+	Hero,
+	LandingPageCallToAction,
+	PrivateCloud,
+	ProductFeatureIcons,
+	RecentBlogPosts,
+	Roadmap,
+	SocialProof,
+	Tutorials,
+	LibraryStats,
+	MdxAnchorHeaders,
+	NewsletterForm,
+	OtherFeaturesBlock,
+	PageHeader,
+	PostCard,
+	PricingComparisonTable,
+	PricingSlider,
+	ResponsiveAnchor,
+	ResponsiveSidebar,
+	ResponsiveTopBar,
+	DesignedForYourStackBlock,
+	FeaturedSectionTextLeft,
+	FeaturedSectionTextRight,
+	FeaturedSectionTripleImage,
+	Spacer,
+	StarRepoButton,
+	StartNowButton,
+	Structure,
+	TableOfContents
 }

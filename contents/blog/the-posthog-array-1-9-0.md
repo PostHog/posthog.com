@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 First, learn [how PostHog raised \$3M for our open source project](/blog/raising-3m-for-os). We could not have done it without this community - thank you for all your issues, feedback, usage and support!
@@ -43,9 +44,9 @@ What's new? We:
 * [Cached PostHog's yarn builds](https://github.com/PostHog/posthog/pull/927), which took e2e tests down by around 30%.
 * Finally, we now [wait for PostHog to start serving requests](https://github.com/PostHog/posthog/pull/920) rather than the 60 second sleep when running Cypress.
 
-### [Docusaurus integration](https://posthog.com/docs/integrations/docusaurus-integration)
+### [Docusaurus integration](https://posthog.com/docs/libraries/docusaurus)
 
-If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](https://posthog.com/docs/integrations/docusaurus-integration) for that!
+If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](https://posthog.com/docs/libraries/docusaurus) for that!
 
 ### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
 

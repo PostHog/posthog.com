@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 This is our most exciting release to date. Here we go: 🎉
@@ -71,7 +72,7 @@ Learn more about [how to use feature flags](/docs/features/feature-flags), and p
 
 ### Flutter Integration
 
-You asked for it and now [it's here](https://posthog.com/docs/integrations/flutter-integration)!
+You asked for it and now [it's here](https://posthog.com/docs/libraries/flutter)!
 
 ### Retention page
 

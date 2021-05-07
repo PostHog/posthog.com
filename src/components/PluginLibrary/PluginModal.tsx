@@ -34,15 +34,13 @@ export const PluginModal = () => {
                     <Spin size="large" className="centered-spin" />
                 ) : (
                     <>
-                        <div>
-                            <Spacer />
-                            <img src={activePlugin.imageSrc} />
-                            <Markdown source={activePlugin.markdown} linkTarget="_blank" />
-                            <Spacer />
-                            <a className="centered" href={activePlugin.url} target="_blank" rel="noreferrer">
-                                Learn More <ExportOutlined />
-                            </a>
-                        </div>
+                        <Spacer />
+                        <img className="logo" src={activePlugin.imageSrc} />
+                        <Markdown source={activePlugin.markdown} linkTarget="_blank" />
+                        <Spacer />
+                        <a className="centered" href={activePlugin.url} target="_blank" rel="noreferrer">
+                            Learn More <ExportOutlined />
+                        </a>
                         <Button icon="close" onClick={openLibrary} className="modalClose" />
                     </>
                 )}

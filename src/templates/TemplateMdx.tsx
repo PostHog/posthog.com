@@ -26,6 +26,9 @@ interface MdxQueryData {
             showTitle: boolean
             hideAnchor: boolean
             description: string
+            featuredImage?: {
+                publicURL?: string
+            }
         }
     }
 }
@@ -73,6 +76,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                 onPostPage={true}
                 isBlogArticlePage={isBlogArticlePage}
                 pageTitle={frontmatter.title}
+                featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 menuActiveKey={isDocsPage ? 'docs' : ''}
@@ -89,7 +93,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                         {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                             <h1 className="centered">{frontmatter.title}</h1>
                         )}
-                        <div className="docsPagesContent">
+                        <div className={`docsPagesContent font-inter ${isBlogArticlePage ? 'blogPageContent' : ''}`}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
@@ -107,6 +111,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
 
 export default TemplateMdx
 
+// @todo -> be defensive against null featuredImage
 export const query = graphql`
     query MDXQuery($id: String!) {
         mdx(id: { eq: $id }) {
@@ -121,6 +126,9 @@ export const query = graphql`
                 showTitle
                 hideAnchor
                 description
+                featuredImage {
+                    publicURL
+                }
             }
         }
     }

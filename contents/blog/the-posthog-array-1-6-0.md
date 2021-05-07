@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 One of the most fun weeks we've had so far with our UX - resizable and touch-enabled dashboards with a new display mode, Microsoft Teams support, and paths for events. Plus, a ton of performance improvements.
@@ -27,9 +28,9 @@ Now you're able to adjust their colours (including black!) and even to enter 'pr
 
 Finally, your pinned dashboards will appear in the sidebar, so they're easier to get to.
 
-### [Microsoft Teams integration](/docs/integrations/microsoft-teams)
+### [Microsoft Teams integration](/docs/libraries/microsoft-teams)
 
-PostHog already integrates with [Slack](/docs/integrations/slack).
+PostHog already integrates with [Slack](/docs/libraries/slack).
 
 We had a user who said they'd got the webhook working with MS Teams too, so we wrote out how to do that.
 

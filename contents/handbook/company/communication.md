@@ -27,13 +27,62 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 
 ## Public by default
 
-We make things public by default because [transparency is part of Communication, one of our values](/handbook/values/#communication). The kinds of information we share falls into one of three buckets:
+We make things public by default because [transparency](/handbook/company/culture#transparency) is core to our culture. The kinds of information we share falls into one of three buckets:
 
 - _Public_ - most things, including our product, roadmap, handbook and strategy. 
 - _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
 - _Private internally_ - personal team information, i.e. compensation, disciplinary issues.
 
 Information that is not publicly shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
+
+
+We have two repos to centralize and document all internal communication. These are the source of truth for any internal information, and anything that should be written down (as established in these guidelines) should live here, not on Slack. This will make it easier when having to search for older stuff, sharing context between public and internal repos, and for newcomers to have all information they might need readily available.
+
+### Company Internal
+Repository can be found in https://github.com/PostHog/company-internal
+
+Documents any company-wide internal information, in addition to any information related to People, Ops, Legal & Compliance, Finance or Strategy.
+
+**Examples of information that should go here:**
+- ✅ Hiring plans and discussions before we post a job ad
+- ✅ People discussions, e.g. benefits, pensions, share options, org structure
+- ✅ Onboarding/offboarding checklists
+- ✅ Non-engineering team sprint planning
+- ✅ Sensitive discussions around future positioning, customer strategy, fundraising, board meetings
+
+**Examples of information that should NOT go here:**
+- ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
+- ❌ Bug reports, security issues, or any other engineering-related discussions. These should go in the [Product Internal](#product-internal) repo.
+- ❌ Billing issues, product or growth discussions. These should go in the [Product Internal](#product-internal) repo.
+
+
+### Product Internal
+Repository can be found in https://github.com/PostHog/product-internal
+
+Contains internal information related to the PostHog product. Documents any non-public information (as established in these guidelines) that specifically relates to engineering, product, growth or design.
+
+This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldly. More context on [this decision](https://github.com/PostHog/company-internal/issues/262).
+
+<blockquote>
+Please be sure to read the README of the repo for guidelines on how to file specific issues.
+</blockquote>
+
+
+**Examples of information that should go here:**
+- ✅ Vulnerabilities (security bugs) reports
+- ✅ Bug reports where most of the context of the report depends on customer's PII. *Some bug reports require screenshots, recordings, or some other information that contains PII and as such can't be public.*
+- ✅ Post-mortems on outages, or other issues affecting a large portion of customers. The results of these should usually be made public though. 
+- ✅ Documentation of internal infrastructure, where if it was public knowledge could provide valuable information to an attacker.
+- ✅ Experiment (A/B testing) results.
+- ✅ Product or growth strategy discussions (unless they should be public).
+- ✅ Interview exercises or questions for engineering, product, growth or design tasks that should not be public.
+- ✅ Documentation of engineering or product requirements documents that can't be public (these should be quite rare).
+- ✅ Billing or pricing-related discussions that is not yet public.
+
+**Examples of information that should NOT go here:**
+- ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
+- ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo.
+- ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
 
 ## Written Communication
 
@@ -57,7 +106,18 @@ However, it is still important to maintain focus when opening issues by defining
 
 ### Slack
 
-Slack is used for more informal communication, or where it doesn't make sense to create an issue or pull request. Use your judgment to determine the appropriate channel, and whether you should be chatting publicly (default) or privately. 
+Slack is used for more informal communication, or where it doesn't make sense to create an issue or pull request. Use your judgment to determine the appropriate channel, and whether you should be chatting publicly (default) or privately.
+
+Also keep in mind that, as an open source platform, PostHog has contributors who don't have access to Slack. Having too much context in a private location can be detrimental to those who are trying to understand the rationale for a certain decision.
+
+**Slack etiquette**
+
+Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
+
+1. Keep `#general` open for company-wide announcements.
+1. `@channel` or `@here` mentions should be reserved for urgent or time-sensitive posts that require immediate attention by everyone in the channel. (Examples: changing a meeting invite URL just before a meeting, or soliciting urgent help for a service disruption, where you're not sure who is immediately available)
+1. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
+1. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
 
 ### Google Docs and presentations
 

@@ -6,7 +6,7 @@
             "Tutorials",
             "Deployment",
             "Configuring PostHog",
-            "Integrations",
+            "Libraries",
             "Features",
             "Plugins",
             "API",
@@ -82,7 +82,6 @@
             "docs/deployment/deploy-digital-ocean",
             "docs/deployment/deploy-gcs",
             "docs/deployment/deploy-kubernetes",
-            "docs/deployment/deploy-linode",
             "docs/deployment/deploy-render",
             "docs/deployment/deploy-qovery",
             "docs/deployment/snippet-installation",
@@ -138,7 +137,7 @@
             "docs/api/elements",
             "docs/api/events",
             "docs/api/people",
-            "docs/api/trends",
+            "docs/api/insights",
             "docs/api/user",
             "docs/api/feature-flags",
             "docs/api/annotations",
@@ -146,22 +145,22 @@
         ]
     },
     {
-        "entry": "Integrations",
-        "name": "Integrations",
+        "entry": "Libraries",
+        "name": "Libraries",
         "items": [
-            "docs/integrations",
-            "docs/integrations/android-integration",
-            "docs/integrations/go-integration",
-            "docs/integrations/ios-integration",
-            "docs/integrations/js-integration",
-            "docs/integrations/node-integration",
-            "docs/integrations/php-integration",
-            "docs/integrations/python-integration",
-            "docs/integrations/flutter-integration",
-            "docs/integrations/react-native-integration",
-            "docs/integrations/ruby-integration",
-            "docs/integrations/rudderstack-integration",
-            "docs/integrations/segment-integration"
+            "docs/libraries",
+            "docs/libraries/android",
+            "docs/libraries/go",
+            "docs/libraries/ios",
+            "docs/libraries/js",
+            "docs/libraries/node",
+            "docs/libraries/php",
+            "docs/libraries/python",
+            "docs/libraries/flutter",
+            "docs/libraries/react-native",
+            "docs/libraries/ruby",
+            "docs/libraries/rudderstack",
+            "docs/libraries/segment"
         ],
         "child_entries": ["Community", "Sending Data Out"]
     },
@@ -169,20 +168,20 @@
         "entry": "Community",
         "name": "Community",
         "items": [
-            "docs/integrations/community",
-            "docs/integrations/docusaurus-integration",
-            "docs/integrations/gatsby-integration",
-            "docs/integrations/elixir-integration"
+            "docs/libraries/community",
+            "docs/libraries/docusaurus",
+            "docs/libraries/gatsby",
+            "docs/libraries/elixir"
         ]
     },
     {
         "entry": "Sending Data Out",
         "name": "Sending Data Out",
         "items": [
-            "docs/integrations/slack",
-            "docs/integrations/microsoft-teams",
-            "docs/integrations/message-formatting",
-            "docs/integrations/sentry-integration"
+            "docs/libraries/slack",
+            "docs/libraries/microsoft-teams",
+            "docs/libraries/message-formatting",
+            "docs/libraries/sentry"
         ]
     },
     {
@@ -258,23 +257,55 @@
     {
         "entry": "Handbook",
         "name": "Handbook",
-        "child_entries": ["Company", "People", "Engineering", "Growth", "Strategy"]
+        "child_entries": ["Company", "Strategy", "Getting started", "How we work", "People", "Engineering", "Growth"]
     },
     {
         "entry": "Company",
         "name": "Company",
+        "items": ["handbook/company/story", "handbook/people/team", "handbook/strategy/investors"]
+    },
+    {
+        "entry": "Strategy",
+        "name": "Strategy",
         "items": [
-            "handbook/company/story",
+            "handbook/strategy/strategy",
+            "handbook/strategy/business-model",
+            "handbook/strategy/roadmap",
+            "handbook/strategy/prioritization",
+            "handbook/strategy/investor-updates"
+        ]
+    },
+    {
+        "entry": "Getting started",
+        "name": "Getting started",
+        "items": ["handbook/getting-started"]
+    },
+    {
+        "entry": "How we work",
+        "name": "How we work",
+        "items": [
             "handbook/company/culture",
             "handbook/company/values",
             "handbook/company/diversity",
             "handbook/company/communication",
-            "handbook/company/security",
-            "handbook/company/branding",
-            "handbook/company/team",
             "handbook/company/management",
-            "handbook/company/structure",
-            "handbook/company/standups"
+            "handbook/company/security",
+            "handbook/company/branding"
+        ],
+        "child_entries": ["Team Structure"]
+    },
+    {
+        "entry": "Team Structure",
+        "name": "Team Structure",
+        "items": [
+            "handbook/people/team-structure/team-structure",
+            "handbook/people/team-structure/why-small-teams",
+            "handbook/people/team-structure/core-experience",
+            "handbook/people/team-structure/design",
+            "handbook/people/team-structure/extensibility",
+            "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/marketing",
+            "handbook/people/team-structure/people"
         ]
     },
     {
@@ -283,13 +314,30 @@
         "items": [
             "handbook/people/hiring-process",
             "handbook/people/compensation",
+            "handbook/people/benefits",
             "handbook/people/time-off",
             "handbook/people/spending-money",
             "handbook/people/side-gigs",
             "handbook/people/training",
-            "handbook/people/onboarding",
             "handbook/people/feedback",
+            "handbook/people/onboarding",
             "handbook/people/offboarding"
+        ],
+        "child_entries": ["Team Structure"]
+    },
+    {
+        "entry": "Team Structure",
+        "name": "Team Structure",
+        "items": [
+            "handbook/people/team-structure/team-structure",
+            "handbook/people/team-structure/why-small-teams",
+            "handbook/people/team-structure/core-experience",
+            "handbook/people/team-structure/design",
+            "handbook/people/team-structure/extensibility",
+            "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/infrastructure",
+            "handbook/people/team-structure/marketing",
+            "handbook/people/team-structure/people"
         ]
     },
     {
@@ -311,9 +359,25 @@
         ]
     },
     {
+        "entry": "Engineering",
+        "name": "Engineering",
+        "items": [
+            "handbook/engineering/development-process",
+            "handbook/engineering/how-we-review",
+            "handbook/engineering/release-new-version",
+            "handbook/engineering/bug-prioritization",
+            "handbook/engineering/releasing-python",
+            "handbook/engineering/onboarding-customer",
+            "handbook/engineering/setup-ssl-locally",
+            "handbook/engineering/ee-setup",
+            "handbook/engineering/common-issues",
+            "handbook/engineering/mdx"
+        ]
+    },
+    {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/community", "handbook/growth/customer-success"],
+        "items": ["handbook/growth/strategy", "handbook/growth/customer-support"],
         "child_entries": ["Marketing", "Sales"]
     },
     {
@@ -321,10 +385,12 @@
         "name": "Marketing",
         "items": [
             "handbook/growth/marketing",
-            "handbook/growth/marketing/content",
-            "handbook/growth/marketing/posthog-array",
-            "handbook/growth/marketing/releasing-content",
-            "handbook/growth/marketing/press"
+            "handbook/growth/marketing/blog",
+            "handbook/growth/marketing/community",
+            "handbook/growth/marketing/newsletter",
+            "handbook/growth/marketing/paid",
+            "handbook/growth/marketing/press",
+            "handbook/growth/marketing/releasing-content"
         ]
     },
     {
@@ -340,16 +406,30 @@
     {
         "entry": "Engineering",
         "name": "Engineering",
+        "child_entries": ["Beginners Guide"],
         "items": [
             "handbook/engineering/development-process",
+            "handbook/engineering/debugging",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
             "handbook/engineering/releasing-python",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",
+            "handbook/engineering/tech-talks",
             "handbook/engineering/common-issues",
             "handbook/engineering/mdx"
+        ]
+    },
+    {
+        "entry": "Beginners Guide",
+        "name": "Beginners Guide",
+        "items": [
+            "handbook/engineering/beginners-guide/introduction",
+            "handbook/engineering/beginners-guide/getting-to-know-posthog",
+            "handbook/engineering/beginners-guide/getting-started",
+            "handbook/engineering/beginners-guide/developer-workflow",
+            "handbook/engineering/beginners-guide/technologies-to-learn"
         ]
     },
     {

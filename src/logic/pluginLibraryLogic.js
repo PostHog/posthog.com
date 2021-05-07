@@ -101,7 +101,11 @@ export const pluginLibraryLogic = kea({
             if (!markdown.includes('Installation')) {
                 markdown += pluginInstallationMd
             }
-            plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
+            plugin['markdown'] = markdown
+                .split(/!\[.*\]\(.*\)/)
+                .join('')
+                .split(/<img\s+[^>]*>/)
+                .join('')
             plugin['imageSrc'] = getPluginImageSrc(plugin)
             setActivePlugin(plugin)
         },

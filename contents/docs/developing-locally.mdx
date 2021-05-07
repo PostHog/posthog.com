@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-<HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen={true}>
+<HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen>
 
 > **Note:** If you're using the latest generation MacBooks (M1) have a look [at this issue](https://github.com/PostHog/posthog/issues/2916) for info on how to run PostHog.
 
@@ -16,7 +16,7 @@ git clone https://github.com/PostHog/posthog
 ```
 2. Make sure you have Python 3.8 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
 
-#### Setup Databases
+#### Set up databases
 
 <HiddenSection headingType='h5' title='With Docker'>
 
@@ -55,39 +55,79 @@ docker-compose -f docker-compose.dev.yml up -d redis db
     GRANT ALL PRIVILEGES ON DATABASE posthog, posthog_e2e_test TO posthog;
     ```
 
+4. (Optional, if using Homebrew) Create / grant `postgres` role superuser permissions. Homebrew or Postgres.app installations do not create a superuser named `postgres` by default, and instead create a superuser with your login username. If you encounter an error like `FATAL:  role "postgres" does not exist`, you may wish to use your login username instead. If that is not possible, create a new superuser by running:
+    ```bash
+    # macOS (Homebrew)
+    # createuser is located in /opt/homebrew/bin/createuser
+    createuser --superuser postgres
+    ```
+If you ran `brew link postgresql` upon installation, there should be no need to specify the full path to `createuser`.
 
 </HiddenSection>
 
 #### Running PostHog
 
-1. Navigate into the correct folder (project's root directory): `cd posthog`
-2. Run `python3 -m venv env` (creates virtual environment in current directory called 'env')
-3. Run `source env/bin/activate` (activates the virtual environment)
-4. Run `pip install -r requirements.txt`.
+1. Navigate into the correct folder (project's root directory):
+```bash
+cd posthog
+```
 
-    If you have problems with this step (TLS/SSL error), then run `~ brew update && brew upgrade` followed by `python3 -m pip install --upgrade pip`, then retry the requirements.txt install.
+2. Create the virtual environment in current directory called 'env':
+```bash
+python3 -m venv env
+```
 
-5. Install dev requirements: `pip install -r requirements-dev.txt`
-6. Run migrations: `DEBUG=1 python3 manage.py migrate`
+3. Activate the virtual environment:
+```bash
+source env/bin/activate
+```
+
+4. Install requirements with pip
+```bash
+pip install -r requirements.txt
+```
+If you have problems with this step (TLS/SSL error), then run
+```bash
+~ brew update && brew upgrade
+```
+followed by
+```bash
+python3 -m pip install --upgrade pip
+```
+then retry the requirements.txt install.
+
+5. Install dev requirements:
+```bash
+pip install -r requirements-dev.txt
+```
+
+6. Run migrations:
+```bash
+DEBUG=1 python3 manage.py migrate
+```
+
 7. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
-    ```bash
-    # macOS (Homebrew)
-    brew install yarn
-    ```
+```bash
+# macOS (Homebrew)
+brew install yarn
+```
 
 8. Make sure you have [NodeJS installed](https://nodejs.org/en/download/):
 
-    ```bash
-    # macOS (Homebrew)
-    brew install node
-    ```
+```bash
+# macOS (Homebrew)
+brew install node
+```
 
 > **Note:** For Apple Silicon support, please use NodeJS >= v15.0
 
-9. Run `DEBUG=1 ./bin/start` to start the backend, worker and frontend simultaneously
+9. Start the backend, worker, and frontend simultaneously with:
+    ```bash
+    DEBUG=1 ./bin/start
+    ```
 
-    *_Note:_ The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
+* _Note:_ The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
 
 Now open [http://localhost:8000](http://localhost:8000) to see the app.
 
@@ -146,3 +186,7 @@ Run `./bin/start-frontend`
 ### Running backend tests
 
 Run `./bin/tests`
+
+### Running end-to-end Cypress tests
+
+Run `./bin/e2e-test-runner`

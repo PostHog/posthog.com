@@ -11,9 +11,9 @@ import 'antd/lib/tag/style/css'
 import 'antd/lib/radio/style/css'
 import './style.scss'
 
-let formatCur = (val: number, currency: string) => {
+const formatCur = (val: number, currency: string) => {
     currency = currencyData[currency] ? currency : 'USD'
-    var formatter = new Intl.NumberFormat('en-US', {
+    const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency,
     })
@@ -21,7 +21,7 @@ let formatCur = (val: number, currency: string) => {
 }
 
 export const CompensationCalculator = () => {
-    const [job, setJob] = useState('Engineer')
+    const [job, setJob] = useState('Full Stack Engineer')
     const [country, setCountry] = useState('United States')
     const [region, setRegion] = useState('San Francisco, California')
     const [level, setLevel] = useState('Senior')
@@ -65,7 +65,7 @@ export const CompensationCalculator = () => {
         locationFactor.filter((location) => location.country === country && location.area === region)[0]
     const calculatedLocationFactor = location.locationFactor
 
-    let countries = unique(locationFactor.map((l) => l.country))
+    const countries = unique(locationFactor.map((l) => l.country))
 
     return (
         <div style={{ fontSize: '0.85rem' }} className="compensation-calculator ph-no-capture">

@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 Another shiny new integration - PostHog now plays nicely with Android!
@@ -13,15 +14,15 @@ Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading
 
 ## Release notes
 
-### [PostHog Android Library](/docs/integrations/android-integration)
+### [PostHog Android Library](/docs/libraries/android)
 
 ![](../images/04/android-events.gif)
 
 In addition to the work Marius put into the iOS integration, this week you can also capture events in your Android app and send them to PostHog. Like the iOS library you can automatically captures screen changes, and you can capture events as per usual
 
-Check out our [Android docs](/docs/integrations/android-integration) on how to install it on your app.
+Check out our [Android docs](/docs/libraries/android) on how to install it on your app.
 
-### [Gatsby Plugin](/docs/integrations/gatsby-integration)
+### [Gatsby Plugin](/docs/libraries/gatsby)
 
 ![](../images/04/gatsbyplugin.gif)
 

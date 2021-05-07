@@ -63,12 +63,15 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-* If you are in a technical or design role, we recommend a Macbook Pro with an Apple Silicon processor and at least 16GB of RAM.
-* If you are in a non-technical role, we recommend a Macbook Air with an Apple Silicon processor and 8GB of RAM.
+* If you are in an engineering role, we recommend a Macbook Pro with an Intel processor with 32GB of RAM. The processor selection here is important as we want to ensure that you're able to run all the technologies in our stack and several of them have yet to be adapted on the new Apple architecture. Base processor and storage.
+* If you are in a design role, we recommend a Macbook Pro with an Apple Silicon processor and 16GB of RAM. Base processor and storage.
+* If you are in a non-technical role, we recommend a Macbook Air with an Apple Silicon processor and 8GB of RAM. Base processor and storage.
 
-These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above, that is completely fine. 
+These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
+
+When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on brex or ask Tim or Charles. 
 
 You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 

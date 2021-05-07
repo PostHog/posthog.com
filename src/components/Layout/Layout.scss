@@ -23,6 +23,20 @@
     font-weight: bold;
 }
 
+/* Inter */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+/* Inter Bold */
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+}
+
 html {
     font-family: 'Good Sans' !important;
     -ms-text-size-adjust: 100%;
@@ -729,6 +743,7 @@ header {
 
 .sidebarWrapper {
     margin: 0 10px;
+    font-family: 'Inter', 'Good Sans', 'Arial' !important;
 }
 
 .ant-menu,
@@ -897,14 +912,12 @@ a.ant-anchor-link-title:hover {
 
 .docsPages h2,
 .docsPages h3 {
-    color: #000000;
     margin-top: 2rem;
     margin-bottom: 1.45rem;
     left: 0;
 }
 
 .blog-post h2 + h3 {
-    color: #000000 !important;
     margin-top: 0.2rem;
     margin-bottom: 1.45rem;
     left: 0;
@@ -1254,7 +1267,17 @@ table td {
     right: 50px;
 }
 
-.post-page-wrapper {
+.post-page-wrapper .docsPagesContent,
+.rightBar {
+    p,
+    li,
+    ul,
+    a,
+    td,
+    th {
+        font-family: 'Inter', 'Good Sans', 'Arial' !important;
+    }
+
     a img:hover {
         opacity: 0.7;
     }

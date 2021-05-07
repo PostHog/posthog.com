@@ -52,6 +52,7 @@ function Template({
                     onPostPage={true}
                     isBlogArticlePage={isBlogArticlePage}
                     pageTitle={frontmatter.title}
+                    featuredImage={frontmatter.featuredImage?.publicURL}
                     isHomePage={false}
                     isDocsPage={isDocsPage}
                 >
@@ -70,7 +71,10 @@ function Template({
                             {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                                 <h1 align="center">{frontmatter.title}</h1>
                             )}
-                            <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
+                            <div
+                                className="docsPagesContent rounded md:rounded-lg px-4 py-8 md:py-16"
+                                dangerouslySetInnerHTML={{ __html: html }}
+                            />
                         </div>
                         {isDocsPage && <DocsPageSurvey />}
                         {(isDocsPage || isHandbookPage) && (
@@ -90,6 +94,7 @@ function Template({
 
 export default Template
 
+// @todo -> be defensive against null featuredImage
 export const pageQuery = graphql`
     query($path: String!) {
         markdownRemark(fields: { slug: { eq: $path } }) {
@@ -103,6 +108,9 @@ export const pageQuery = graphql`
                 date(formatString: "MMMM DD, YYYY")
                 title
                 sidebar
+                featuredImage {
+                    publicURL
+                }
                 showTitle
                 hideAnchor
             }
