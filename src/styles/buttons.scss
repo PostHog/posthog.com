@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .button-primary,
-.button-secondary
+.button-secondary,
 .button {
     @apply font-button text-white hover:text-white lowercase select-none;
     -ms-transform: skewX(-20deg);
@@ -17,6 +17,12 @@
         -webkit-transform: skewX(20deg);
         transform: skewX(20deg);
         @apply relative inline-block;
+
+        span {
+            -ms-transform: skewX(0deg);
+            -webkit-transform: skewX(0deg);
+            transform: skewX(0deg);
+        }
 
         &.icon {
             -ms-transform: skewX(0deg);
@@ -33,8 +39,12 @@
 }
 
 .button {
-    background: linear-gradient(90deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 100%);
-    border: solid 2px rgba(255,255,255,.3);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+    border: solid 2px rgba(255, 255, 255, 0.3);
+
+    &:hover {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%);
+    }
 }
 
 .button-primary {

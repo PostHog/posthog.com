@@ -12,7 +12,7 @@ export const Tutorials = () => {
             <div className="w-11/12 max-w-3xl mx-auto">
                 <h2 className="text-white text-center">Hop aboard</h2>
                 <p className="text-white opacity-80 mt-1 text-center">
-                    Don’t get left behind. Join 2,700 companies using PostHog.
+                    Don't get left behind. Join 2,700 companies using PostHog.
                 </p>
 
                 <LandingPageCallToAction />
@@ -56,7 +56,7 @@ export const Tutorials = () => {
                     </Link>
                 </div>
 
-                <CallToAction type="button" className="mt-8 mx-auto" to="/docs/tutorials" icon="book" width="72">
+                <CallToAction type="button" className="mt-8 mx-auto" to="/docs/tutorials" icon="book" width="84">
                     See all tutorials
                     <span className="text-xs text-white text-opacity-50 ml-1">13</span>
                 </CallToAction>

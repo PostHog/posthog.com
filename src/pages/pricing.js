@@ -13,6 +13,7 @@ import imgCloud from '../images/cloud.svg'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgOpenSource from '../images/plan-open-source.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
+import { CallToAction } from 'components/CallToAction'
 
 import { PricingComparisonTable } from 'components/PricingComparisonTable'
 import { PricingSlider } from 'components/PricingSlider'
@@ -277,24 +278,26 @@ const PricingPage = () => {
                                     <PricingSlider pricingOption="cloud" />
                                 </div>
 
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    First <b>10,000 events are free</b> every single month.
-                                </div>
+                                <div className="text-center">
+                                    <div style={{ fontSize: 16, marginTop: 16 }}>
+                                        First <b>10,000 events are free</b> every single month.
+                                    </div>
 
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    <a href="https://app.posthog.com/signup">
-                                        <Button type="primary" size="large">
-                                            Get started
-                                        </Button>
-                                    </a>
-                                    <br />
-                                    <br />
-                                    Unsure about your numbers or want to talk?{' '}
-                                    <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
-                                        Contact us
-                                    </a>
-                                    .
+                                    <div style={{ fontSize: 16, marginTop: 16 }}>
+                                        <CallToAction icon="rocket" href="https://app.posthog.com/signup">
+                                            Get Started
+                                        </CallToAction>
+                                        <br />
+                                        <br />
+                                        Unsure about your numbers or want to talk?{' '}
+                                        <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
+                                            Contact us
+                                        </a>
+                                        .
+                                    </div>
                                 </div>
+                                <br />
+                                <br />
 
                                 <ul className="p-comparison-list">
                                     <li>Immediate start</li>

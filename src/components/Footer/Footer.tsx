@@ -29,7 +29,7 @@ const FooterListItem = ({ to = '', border = true, href = '', children }: FooterL
 }
 
 const FooterSubCategory = ({ children }: { children: any }) => (
-    <header className="block gosha text-white mt-8 font-bold text-sm">{children}</header>
+    <header className="block text-white mt-8 mb-2 font-bold text-sm">{children}</header>
 )
 
 const FooterCategory = ({ children, title }: { children: any; title: string }) => {
