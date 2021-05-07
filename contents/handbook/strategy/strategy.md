@@ -10,7 +10,7 @@ showTitle: true
 
 PostHog is *used* by companies of every scale - hobbyists, startups, scale ups and enterprises.
 
-We're *focussed* on companies that _must_ self host their product analytics. These companies:
+We're *focused* on companies that _must_ self host their product analytics. These companies:
 
 * Often have large volumes of events to track. This means we need individual deployments to scale to millions of events.
 * Often use data warehouses. This means working nicely with a data warehouse is important to us.
@@ -23,7 +23,7 @@ For these teams, the alternative to using PostHog is to hire data analysts to wr
 
 The users we prioritize are engineers (often a senior one) or product managers with some technical skills. Our adoption is bottom-up by these users.
 
-We are focussed on [enthusiast or visionary personas](https://en.wikipedia.org/wiki/Crossing_the_Chasm#synopsis). We are _not_ targetting those who want to use more mature technologies.
+We are focused on [enthusiast or visionary personas](https://en.wikipedia.org/wiki/Crossing_the_Chasm#synopsis). We are _not_ targeting those who want to use more mature technologies.
 
 Our users value control and transparency.
 
