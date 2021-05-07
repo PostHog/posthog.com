@@ -9,6 +9,26 @@
     -webkit-transform: skewX(-20deg);
     transform: skewX(-20deg);
     transition: 0.25s ease all;
+
+    span {
+        display: inline-block;
+        -ms-transform: skewX(20deg);
+        -webkit-transform: skewX(20deg);
+        transform: skewX(20deg);
+        @apply relative inline-block;
+
+        &.icon {
+            -ms-transform: skewX(0deg);
+            -webkit-transform: skewX(0deg);
+            transform: skewX(0deg);
+
+            img {
+                -ms-transform: skewX(20deg);
+                -webkit-transform: skewX(20deg);
+                transform: skewX(20deg);
+            }
+        }
+    }
 }
 
 .button-primary {
@@ -30,29 +50,6 @@
         background: linear-gradient(103.46deg, #1f5879 13.26%, #0f405c 51.69%);
         border: 2px solid #509dca;
     }
-}
-
-.button-primary span,
-.button-secondary span {
-    display: inline-block;
-    -ms-transform: skewX(20deg);
-    -webkit-transform: skewX(20deg);
-    transform: skewX(20deg);
-    @apply relative inline-block;
-}
-
-.button-primary span.icon,
-.button-secondary span.icon {
-    -ms-transform: skewX(0deg);
-    -webkit-transform: skewX(0deg);
-    transform: skewX(0deg);
-}
-
-.button-primary span.icon img,
-.button-secondary span.icon img {
-    -ms-transform: skewX(20deg);
-    -webkit-transform: skewX(20deg);
-    transform: skewX(20deg);
 }
 
 .button-primary:focus,
