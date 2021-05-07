@@ -132,3 +132,8 @@
 [[redirects]]
     from = "/handbook/growth/customer-success"
     to = "/handbook/growth/customer-support"
+
+    
+[[redirects]]
+    from = "/handbook/getting-started"
+    to = "/handbook/getting-started/start-here"
