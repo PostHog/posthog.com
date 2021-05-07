@@ -7,7 +7,7 @@ import graphicPlatform from '../images/platform@2x.png'
 export const Features = () => {
     return (
         <div className="lp-features text-white text-center pt-12">
-            <div className="w-11/12 max-w-4xl mx-auto">
+            <div className="w-11/12 max-w-4xl mx-auto relative">
                 <h2>A single platform that does it all</h2>
                 <p className="opacity-60 mt-1 text-center mb-12 mx-auto lg:w-9/12 text-base">
                     Until now, you’d need multiple services to do all this. Plus only PostHog lets you keep customer

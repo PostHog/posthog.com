@@ -18,6 +18,8 @@
 
 .platform-columns {
     grid-template-columns: repeat(3, 1fr);
+    position: relative;
+    z-index: 11;
 
     .insights-column {
         position: relative;
@@ -48,6 +50,7 @@
     }
 
     li {
+        backdrop-filter: blur(5px);
         border: solid 1px rgba(255, 255, 255, 0.2);
         border-radius: 3px;
         color: #8fbcff;
@@ -289,6 +292,30 @@
         position: absolute;
         top: -145px;
         width: 100%;
+    }
+
+    > div {
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+        }
+
+        &:before {
+            background: url(../images/circles-1.svg);
+            bottom: -400px;
+            left: -500px;
+            height: 689px;
+            width: 689px;
+        }
+
+        &:after {
+            background: url(../images/circles-2.svg);
+            height: 886px;
+            left: 65%;
+            top: 300px;
+            width: 886px;
+        }
     }
 }
 
