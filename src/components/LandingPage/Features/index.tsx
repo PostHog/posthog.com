@@ -1,5 +1,9 @@
 import React from 'react'
 
+import graphicAnalytics from '../images/analytics@2x.png'
+import graphicInsights from '../images/insights@2x.png'
+import graphicPlatform from '../images/platform@2x.png'
+
 export const Features = () => {
     return (
         <div className="lp-features text-white text-center pt-12">
@@ -10,10 +14,32 @@ export const Features = () => {
                     data on your own infrastructure.
                 </p>
 
-                <div className="inline-flex flex-col md:flex-row text-left">
-                    <div className="column flex-grow mb-8 lg:mb-0">
-                        <h3>Analytics</h3>
-                        <ul className="list-none pl-0">
+                <div className="grid platform-columns">
+                    <div className="">
+                        <figure className="my-0">
+                            <img
+                                src={graphicAnalytics}
+                                alt="Foobar"
+                                width="296"
+                                height="296"
+                                className="mx-auto my-0"
+                            />
+                        </figure>
+                    </div>
+                    <div className="insights-column">
+                        <figure className="my-0">
+                            <img src={graphicInsights} alt="Foobar" width="296" height="296" className="mx-auto my-0" />
+                        </figure>
+                    </div>
+                    <div className="">
+                        <figure className="my-0">
+                            <img src={graphicPlatform} alt="Foobar" width="296" height="296" className="mx-auto my-0" />
+                        </figure>
+                    </div>
+
+                    <div className="mb-8 lg:mb-0">
+                        <h4 className="font-osiris font-normal lowercase">Analytics</h4>
+                        <ul className="list-none px-4">
                             <li>
                                 <figure>
                                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,14 +116,13 @@ export const Features = () => {
                                         </g>
                                     </svg>
                                 </figure>
-                                <span>Revenue tracking (soon)</span>
+                                <span>Revenue tracking</span>
                             </li>
                         </ul>
                     </div>
-
-                    <div className="column flex-grow mb-8 lg:mb-0 lg:mx-24">
-                        <h3>Insights</h3>
-                        <ul className="list-none pl-0">
+                    <div className="mb-8 lg:mb-0">
+                        <h4 className="font-osiris font-normal lowercase">Insights</h4>
+                        <ul className="list-none px-4">
                             <li>
                                 <figure>
                                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,10 +171,9 @@ export const Features = () => {
                             </li>
                         </ul>
                     </div>
-
-                    <div className="column flex-grow mb-8 lg:mb-0">
-                        <h3>Platform</h3>
-                        <ul className="list-none  pl-0">
+                    <div className="mb-8 lg:mb-0">
+                        <h4 className="font-osiris font-normal lowercase">Platform</h4>
+                        <ul className="list-none px-4">
                             <li>
                                 <figure>
                                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +184,11 @@ export const Features = () => {
                                         />
                                     </svg>
                                 </figure>
-                                <span>Event pipeline</span>
+                                <span>Event pipelines</span>
+                            </li>
+                            <li>
+                                <figure></figure>
+                                <span>SDKs</span>
                             </li>
                             <li>
                                 <figure>
@@ -170,7 +198,7 @@ export const Features = () => {
                                         </g>
                                     </svg>
                                 </figure>
-                                <span>Self-hosting capability</span>
+                                <span>Self-hosting options</span>
                             </li>
                             <li>
                                 <figure>
@@ -236,7 +264,7 @@ export const Features = () => {
                                         </g>
                                     </svg>
                                 </figure>
-                                <span>Export to data lakes</span>
+                                <span>Data lakes export</span>
                             </li>
                         </ul>
                     </div>

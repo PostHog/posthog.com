@@ -16,6 +16,73 @@
     }
 }
 
+.platform-columns {
+    grid-template-columns: repeat(3, 1fr);
+
+    .insights-column {
+        position: relative;
+
+        &:before,
+        &:after {
+            content: '';
+            height: 1px;
+            opacity: 0.5;
+            position: absolute;
+            top: 50%;
+        }
+
+        &:before {
+            background: linear-gradient(90deg, #3954c2 0%, #f1764f 100%);
+            left: -14%;
+            right: calc(100% - 14%);
+        }
+
+        &:after {
+            background: linear-gradient(90deg, #d7684b 0%, #ff9900 100%);
+            right: -14%;
+            left: calc(100% - 14%);
+        }
+    }
+
+    .not-button {
+    }
+
+    li {
+        border: solid 1px rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        color: #8fbcff;
+        display: flex;
+        font-family: 'Osiris';
+        font-size: 1em;
+        margin: 0 auto 0.75rem;
+        max-width: 250px;
+        padding: 0.5rem;
+        text-transform: lowercase;
+
+        -ms-transform: skewX(-20deg);
+        -webkit-transform: skewX(-20deg);
+        transform: skewX(-20deg);
+
+        > * {
+            -ms-transform: skewX(20deg);
+            -webkit-transform: skewX(20deg);
+            transform: skewX(20deg);
+        }
+
+        figure {
+            display: none;
+
+            flex: 0 0 auto;
+            margin: 0 0.5em 0 0;
+        }
+
+        span {
+            flex: 1;
+            // padding-right: 24px;
+        }
+    }
+}
+
 .open-source {
     &:before {
         background: url(../images/open-source.svg) no-repeat;
@@ -210,7 +277,8 @@
 }
 
 .lp-features {
-    background: linear-gradient(180deg, #180834 0%, #3c3288 100%);
+    background: #180834;
+    //background: linear-gradient(180deg, #180834 0%, #3c3288 100%);
     position: relative;
 
     &:before {
@@ -222,19 +290,6 @@
         top: -145px;
         width: 100%;
     }
-
-    li {
-        display: flex;
-
-        figure {
-            flex: 0 0 auto;
-            margin-right: 0.5em;
-        }
-
-        span {
-            flex: 1;
-        }
-    }
 }
 
 .recent-blog-posts {
@@ -242,8 +297,13 @@
 }
 
 .blockquote-section {
-    background: #3c3288;
+    background: linear-gradient(180deg, #180834 0%, #3c3288 100%);
+    // background: #3c3288;
     // background: linear-gradient(180deg, #3c3288 0%, #3c3288 100%;)
+
+    div {
+        background: rgba(255, 255, 255, 0.025);
+    }
 }
 
 .private-cloud {

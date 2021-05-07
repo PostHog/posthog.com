@@ -46,6 +46,7 @@ module.exports = {
                 ],
                 button: ['Osiris'],
                 nav: ['Osiris'],
+                osiris: ['Osiris'],
             },
             fontSize: {
                 '2xs': '0.65rem',
