@@ -6,7 +6,7 @@ showTitle: true
 
 This page will walk you through how we hire at PostHog. The goal is to have a lightweight process that optimizes for speed for the candidate, but above all for quality of the hire.
 
-## Deciding to Hire
+## Deciding to hire
 
 Every hire introduces complexity to the organisation and increases our burn rate. As a result, we think very carefully about each new role, and we set an extremely high bar for the people that we do hire. 
 
@@ -46,7 +46,7 @@ When you book, you have the option of selecting a Google Meet or Zoom call. You 
 
 Make sure you have set an agenda for the meeting in order to be welcoming to the candidate and to let the internal PostHog team member know what they need to cover in the meeting. The person who _books_ the meeting is responsible for setting the agenda.
 
-## Our Hiring Process
+## Our hiring process
 
 The stages of our hiring process are:
 
