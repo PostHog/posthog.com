@@ -36,9 +36,9 @@
                 color: #fff !important;
             }
 
-            p,
-            blockquote,
-            li {
+            .blogPageContent p,
+            .blogPageContent blockquote,
+            .blogPageContent li {
                 font-size: 1.2em;
                 line-height: 1.6;
                 text-align: justify;
@@ -178,4 +178,9 @@ div.post-page {
         font-size: 14px !important;
         line-height: 1;
     }
+}
+
+.tag-label {
+    border-radius: 4px;
+    padding: 4px 16px;
 }

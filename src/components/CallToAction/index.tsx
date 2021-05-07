@@ -43,6 +43,7 @@ const icons = {
 const buttonTypeClasses = {
     primary: 'button-primary rounded text-white hover:text-white',
     secondary: 'button-secondary rounded text-white hover:text-white',
+    button: 'button border rounded text-white hover:text-white',
     custom: '',
 }
 

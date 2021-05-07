@@ -15,7 +15,7 @@ interface BlogPostLayoutProps {
     featuredImage?: string | null | undefined
 }
 
-export const BlogPostLayout = ({ pageTitle, children, featuredImage }: BlogPostLayoutProps) => {
+export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostLayoutProps): JSX.Element {
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
             <Header onPostPage={true} transparentBackground={true} />

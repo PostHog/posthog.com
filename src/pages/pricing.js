@@ -150,7 +150,7 @@ const PricingPage = () => {
                                                 </th>
                                                 <th>
                                                     <img src={imgEnterprise1} alt="" width="50px" />
-                                                    Scale Free
+                                                    Scale (Free)
                                                 </th>
                                                 <th>
                                                     <img src={imgEnterprise2} alt="" width="50px" />
@@ -218,7 +218,7 @@ const PricingPage = () => {
                                                         size="large"
                                                         href="mailto:sales@posthog.com?title=Free clickhouse deployment"
                                                     >
-                                                        Contact us
+                                                        Request access
                                                     </Button>
                                                 </td>
                                                 <td>

@@ -4,7 +4,7 @@
 interface CompensationCalculatorLocation {
     country: string
     area: string
-    locationFactor: Number
+    locationFactor: number
     currency?: string
 }
 
@@ -1709,13 +1709,13 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'France',
         area: 'Paris',
-        locationFactor: 0.65,
+        locationFactor: 0.52,
         currency: 'EUR',
     },
     {
         country: 'France',
         area: 'Everywhere else',
-        locationFactor: 0.54,
+        locationFactor: 0.50,
         currency: 'EUR',
     },
     {
