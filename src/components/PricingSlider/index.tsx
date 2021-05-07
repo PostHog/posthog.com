@@ -54,6 +54,7 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
                 )}
             </div>
             <br />
+            <br />
             <div>
                 <LogSlider
                     min={10000}
@@ -71,12 +72,14 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
                 <br />
                 <br />
                 <div>
-                    <strong>
-                        {pricingOption === 'vpc' ? `$${additionalUnitPrice}` : '$0.000225'}
-                        <span>/additional event ingested</span>
-                    </strong>
+                    {pricingOption === 'vpc' ? `$${additionalUnitPrice}` : '$0.000225'}
+                    <span>/additional event ingested</span>
+
                     {pricingOption === 'vpc' ? (
-                        <span> - decreases as volume grows. See it with the calculator.</span>
+                        <span>
+                            {' '}
+                            - <strong>decreases as volume grows</strong>. Try it with the slider.
+                        </span>
                     ) : null}
                 </div>
                 <br />
