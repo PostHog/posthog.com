@@ -34,7 +34,7 @@ Almost all PRs made to PostHog repositories will need a review from another engi
 
 The emphasis should be on getting something out quickly. Endless review cycles sap energy and enthusiasm.
 
-## Setting up Heroku Test Environment 
+## Setting up Heroku test environment 
 
 1. Go to the pull request you want to QA on. 
 2. Go to the Heroku test environment.
