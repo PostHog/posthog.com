@@ -6,7 +6,7 @@ showTitle: true
 
 At the moment, we release a new version every two weeks ([unless it makes sense not to!](/blog/we-ship-whenever)). This might change in the future.
 
-## Version Numbers
+## Version numbers
 
 Every week we up the 'minor' in `major.minor.patch`. At the moment, we're at version 1 for major. This will only change once we have released sufficient functionality under stage 2 of [our Roadmap](/handbook/strategy/roadmap/).
 
