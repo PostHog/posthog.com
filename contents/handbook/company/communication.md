@@ -106,11 +106,11 @@ However, it is still important to maintain focus when opening issues by defining
 
 #### Keeping on top of reviews, issues and notifications
 
-Keeping on top of issues, reviews and more in github can be daunting, but is needed to make sure your team receives reviews and feedback on a timely manner.
+Keeping track of everything that's happening in GitHub can be daunting, but it's important to make sure your team receives reviews and feedback on a timely manner.
 
-To keep on top of this we suggest going through issues where you've been mentioned regularly. Some tricks which can help are:
-- [Turning on github email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and using filters to file them away.
-- [Using github notifier extension](https://chrome.google.com/webstore/detail/notifier-for-github/lmjdlojahmbbcodnpecnjnmlddbkjhnn?hl=en)
+To keep on top of this, we suggest going through issues where you've been mentioned regularly. Some tricks which can help are:
+- [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and using filters to file them away.
+- [Using the GitHub notifier extension.](https://chrome.google.com/webstore/detail/notifier-for-github/lmjdlojahmbbcodnpecnjnmlddbkjhnn?hl=en)
 
 
 ### Slack
