@@ -9,7 +9,6 @@ hideAnchor: true
 
 - [Cory Watilo (Team lead, Lead Designer)](/handbook/company/team/#cory-watilo-lead-designer)
 - [Lottie Coxon, Graphic Design)](/handbook/company/team#lottie-coxon-graphic-designer)
-- Mike Nicklas, Front End Engineer
 
 ## Mission
 
