@@ -150,11 +150,11 @@ You can also pass two more arguments to `posthog.identify`. Both take objects co
 You can read more about the difference between this [in the previous section](#setting-user-properties-via-an-event).
 
 <blockquote class="warning-note">
-    Warning! You can't call identify straight after an `.init` (as `.init` sends a page view, probably with the user's
-    anonymous ID.
+    Warning! You can't call identify straight after an `.init` (as `.init` sends a pageview event, probably with the user's
+    anonymous ID).
 </blockquote>
 
-To address the issue described above, you can call `.init` with a callback, inside which you can then call identify,
+To address the issue described above, you can call `.init` passing a `loaded` callback function, inside which you can then call identify, like so
 
 ```js
 posthog.init('[your api key]', {
@@ -175,7 +175,7 @@ The original ID will be kept as the default, but any events sent to either will 
 
 ### Reset After Logout
 
-If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`.
+If a user is logged out, you most likely want to call `reset` to unset any `distinct_ids`.
 
 <blockquote class="warning-note">
     This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped
@@ -295,7 +295,7 @@ Here's how you can use them:
 
     The argument `callback(flags: string[])` will be called when the feature flags are loaded.
 
-    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
+    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are re-loaded e.g. after calling `identify` or `reloadFeatureFlags`.
 
 ```js
 posthog.onFeatureFlags(callback)
@@ -375,7 +375,7 @@ posthog.init('<ph_project_api_key>', {
 In this section we describe some additional details on advanced configuration available.
 
 <blockquote class="warning-note">
-    These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are unsure about something, just reach out.
+    These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are unsure about something, just <a href="/slack" target="_blank">reach out</a>.
 </blockquote>
 
 ### Disable /decide endpoint
