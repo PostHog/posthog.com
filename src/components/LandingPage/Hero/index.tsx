@@ -14,9 +14,12 @@ export const Hero = () => {
                 <style>
                     {
                         '\
-                .bg-purple-gradient{\
-                background: none;\
+                body{\
+                background: #220f3f;\
                 }\
+                .bg-purple-gradient{\
+                    background: none;\
+                    }\
                 '
                     }
                 </style>
