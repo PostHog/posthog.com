@@ -51,6 +51,10 @@
 
 
 [[redirects]]
+  from = "/docs/integrations/javascript-integration"
+  to = "/docs/libraries/js"
+
+[[redirects]]
     from = "/docs/integrations/js-integration"
     to = "/docs/libraries/js"
 
