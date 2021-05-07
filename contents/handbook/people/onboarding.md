@@ -4,17 +4,17 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As a remote organisation, doing a great job of welcoming a new member of the PostHog team is really important. You may find that you need to invest extra time and effort into onboarding someone than you might at a company where everyone is physically located together. 
+As a remote organisation, doing a great job of welcoming a new member of the PostHog team is really important. You may find that you need to invest extra time and effort into onboarding someone than you might at a company where everyone is physically located together.
 
 We have members working all around the world, so their onboarding process may look a little different depending on where they are based and what type of contract they are on. We either bring on new people as an employee or contractor (with equivalent terms and benefits as an employee) dependent on the jurisdiction.
 
-If you have any questions on any of this stuff, ask Charles, James or Tim. 
+If you have any questions on any of this stuff, ask Charles, James or Tim.
 
 The best way to run through this checklist is to copy the relevant sections below into an onboarding issue on the [Ops Roadmap](https://github.com/orgs/PostHog/projects/2) in GitHub.
 
 ## Upon Offer Acceptance
 
-Eltje or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.  
+Eltje or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.
 
 ### US Team Member Checklist
 
@@ -47,7 +47,7 @@ Eltje and the new team member's manager will mostly do this.
 <input type="checkbox"/>  (UK only) Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll <br />
 <input type="checkbox"/>  Create GSuite account for the team member <br />
 <input type="checkbox"/>  Add team member to 1password <br />
-<input type="checkbox"/>  Check that the team member is invited to the daily standups and any other regular meetings (e.g. retros, life stories) <br /> 
+<input type="checkbox"/>  Check that the team member is invited to the daily standups and any other regular meetings (e.g. retros, life stories) <br />
 <input type="checkbox"/>  Send team member a link to the [Handbook](/handbook) <br />
 <input type="checkbox"/>  Send team member a digital company card <br />
 <input type="checkbox"/>  Team member to purchase any necessary equipment as per the [spending money](/handbook/people/spending-money) guidelines <br />
@@ -61,16 +61,16 @@ Eltje and the new team member's manager will mostly do this.
 ## On Their First Day
 
 <input type="checkbox"/>  Manager to book a weekly 1:1 with the team member <br />
-<input type="checkbox"/> (UK only) Schedule a [right to work](https://www.gov.uk/guidance/coronavirus-covid-19-right-to-work-checks) check with Eltje 
+<input type="checkbox"/> (UK only) Schedule a [right to work](https://www.gov.uk/guidance/coronavirus-covid-19-right-to-work-checks) check with Eltje
 <input type="checkbox"/>  Send them these instructions on adding the [team time off cal](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) to their Gcal <br />
 <input type="checkbox"/>  For the first week or so, book extra sessions as appropriate to provide extra help <br />
 <input type="checkbox"/>  Add team member to any relevant Google Groups <br />
 <input type="checkbox"/>  Add team member to the internal company Slack (and give them a warm welcome!) <br />
-<input type="checkbox"/>  Also add them to the virtual-coffee and standup channels on Slack <br />
+<input type="checkbox"/>  Also add them to the virtual-coffee channel on Slack <br />
 <input type="checkbox"/>  Add team member to PostHog Users Slack <br />
 <input type="checkbox"/>  Add team member to PostHog organization in GitHub <br />
 <input type="checkbox"/>  Share user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit). <br />
-<input type="checkbox"> Team member should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). 
+<input type="checkbox"> Team member should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t).
 
 > Not a hard requirement by any means, but we highly recommended that you join a feedback call and/or product demo in your first weeks. It provides great context on our users.
 
@@ -97,8 +97,8 @@ Add these if appropriate for the role:
 
 ## PostHog buddy
 
-Starting a new job is really exciting, but it can also be a little bit overwhelming. To make your first few weeks a bit easier, we started a buddy system. 
-The buddy can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help. 
+Starting a new job is really exciting, but it can also be a little bit overwhelming. To make your first few weeks a bit easier, we started a buddy system.
+The buddy can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
 
 We will pair people in similar time zones to make sure you get the most out of each other. The goal is to have a catch up at least once a week during the first few weeks, including time to chat about non-work topics.
 
@@ -107,7 +107,7 @@ We will pair people in similar time zones to make sure you get the most out of e
 We use a number of different tools to organise our work and communicate at PostHog. Below is a summary list of the most important ones - this list is not intended to be exhaustive
 
 ### Everyone
-- Google Suite - Gmail, Google Apps such as Docs, Sheets, Slides 
+- Google Suite - Gmail, Google Apps such as Docs, Sheets, Slides
 - GitHub - most comms and product work
 - Slack - we have an internal workspace and a users Slack as well
 - Brex (US) or Revolut (UK) - company cards and expenses tracking
