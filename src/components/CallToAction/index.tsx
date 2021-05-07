@@ -75,7 +75,7 @@ export const CallToAction = ({
     )
 
     return href ? (
-        <a href={href} target="_blank" className={classList} rel="noreferrer">
+        <a href={href} className={classList}>
             {innerHtml}
         </a>
     ) : to ? (
