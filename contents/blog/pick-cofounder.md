@@ -15,13 +15,17 @@ Likewise, a sales-focused founder may be struggling to know what makes you great
 
 Let's dive in.
 
+<iframe src="https://giphy.com/embed/1dJVNSn8u3BSGftyVm" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/alan-sugar-lord-1dJVNSn8u3BSGftyVm">via GIPHY</a></p>
+
 ## Do you need a co-founder?
 
-At PostHog, Tim didn't even know he wanted to start a company, so the answer here was yes!
+At PostHog, Tim [didn't even know](https://posthog.com/blog/inflated-risk-seems-riskier) he wanted to start a company, so the answer here was yes!
 
 If you're a lone wolf who gets stuff done faster on your own, you might want to retain complete control over your startup and simply hire someone to handle the business side of things. This leads itself to a standard failure mode - not talking to users. You'll find it easy to build, but you'll have a hard time building something people want.
 
 With a co-founder, you can split the load faster and bounce major decisions off a sounding board before going live. At PostHog, James is responsible for bringing in new customers (among his other CEO duties), while Tim is responsible for overseeing engineering as CTO. They both hold each other accountable, ensuring that any off-course outcomes are corrected swiftly.
+
+<iframe src="https://giphy.com/embed/Dnt2VnWFknFNm" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fist-bump-Dnt2VnWFknFNm">via GIPHY</a></p>
 
 Longer term, running a company is stressful - you're creating something out of nothing, and that inherently means you'll question yourself. Perhaps the most basic thing that has worked well at PostHog is James and Tim have managed to continuously rationalize what we're doing - taking it one problem at a time. We pivoted five times in the early days, and this just wouldn't have resulted in what we are today without two people pushing each other to get over each hurdle.
 
@@ -36,6 +40,8 @@ Likewise, to a developer, the instant relationship-building skill a good salespe
 * The ability to adapt
 
 And, crucially, you need to like working with each other.
+
+<iframe src="https://giphy.com/embed/3ohzdEM30dysPGuHFm" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/nickelodeon-hunter-street-3ohzdEM30dysPGuHFm">via GIPHY</a></p>
 
 ## Isn't two devs better?
 
