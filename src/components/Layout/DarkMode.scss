@@ -2,6 +2,7 @@ body.dark {
     background-color: #220f3f;
 
     .site-footer {
+        background-color: #220f3f;
         a {
             color: rgba(255, 255, 255, 0.6) !important;
 
@@ -11,7 +12,19 @@ body.dark {
         }
     }
 
+    .header-wrapper {
+        background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
+    }
+
     .post-page-wrapper {
+        .site-footer {
+            background-color: #220f3f;
+        }
+
+        .header-wrapper {
+            background: #220f3f;
+        }
+
         @media screen and (min-width: 1080px) {
             #docs-sidebar {
                 background-color: #19082f !important;

@@ -46,7 +46,7 @@ export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostL
             <PosthogAnnouncement />
             <GetStartedModal />
             <BlogFooter />
-            <Footer onPostPage={true} />
+            <Footer />
         </div>
     )
 }

@@ -28,7 +28,7 @@ const IndexPage = () => {
             <PrivateCloud />
             <Tutorials />
             <RecentBlogPosts />
-            <Footer showNewsletter={true} />
+            <Footer showNewsletter />
             <GetStartedModal />
         </div>
     )
