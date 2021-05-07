@@ -6,37 +6,36 @@ showTitle: true
 
 > PostHog's mission is to increase the number of successful products in the world.
 
+## Who are we building for
+
+PostHog is *used* by teams of every scale - hobbyists, startups, scale ups and enterprises. 
+
+Out of this group, we're *focussed* on companies that _must_ self host their product analytics. For these teams, the alternative to using PostHog is to hire data analysts to write SQL to understand user behavior. We stop data analysts writing repetitive queries, and enable engineers or product managers to easily answer questions about user behavior by themselves.
+
+* These companies often have large volumes of events to track. This means we need individual deployments to scale to millions of events.
+* These companies often, but not always, use data warehouses. This means working nicely with a data warehouse is important to us.
+* These companies often struggle to get event data out of their product. This means we need great SDKs.
+* These companies are often in industries that care about brand or privacy - scale up tech companies, dev tools, healthcare, fin tech. This is important when we think about content marketing.
+
 ## Meet our users, and their problems
 
-Our best users look a little like this:
+The users we prioritize are engineers (often a senior one) or product managers with some technical skills. Our adoption is bottom-up by these users.
 
-* They are a founder, product manager or an engineer (often a senior one)
-* They may work in a startup, scaleup or enterprise
-* Their company builds software, at least in some capacity, and cares about the end users of their software
+Our users value control and transparency. They don't want to have data silos.
 
-## How we'll meet their needs
+## An open-source, platform-driven approach
 
-We're consolidating a fragmented set of tools in the market that help software teams understand and act on user behavior. Companies already know why product analytics matter.
+PostHog consolidates a fragmented set of tools in the market that help software teams understand and act on user behavior. This gives us the ability to build the next generation of product analytics by leveraging the integrations and data that until today has been siloed in these tools individually.
 
-Being open source uniquely enables this approach - we're the only team able to build a true platform that others can build on, to accelerate our breadth of tools that we consolidate.
-
-This is generating opportunities to redefine the category by strengthening the integrations between these tools.
-
-Breadth does come at the expense of depth. We do not aim to answer 100% of questions a product manager or engineer may have about user behavior, so making it easy to integrate PostHog with an existing stack of tools (such as data lakes) is important, mainly for larger volume users.
-
-## Traction
-
-We've had ~3,000 deployments since we started. 
-
-PostHog helps power products as diverse as those in airlines and banks, to indie gamers making it more fun to protect earth from aliens to underwear startups working on their retention. Across all devices.
+Being open source enables this approach - we're the only team able to build a true platform that others can build on, to accelerate our breadth of tools that we consolidate.
 
 ## The future
 
-Software is a good chunk through eating the World.
+Cloud means the cost of storage and compute have decreased. Data warehouses are coming into companies much earlier than ever before. Products like BigQuery are growing very rapidly.
 
-Product led growth is just getting started with eating software. See Figma, Slack, Dropbox, or Google. Incumbent software companies will either become product led or they'll get disrupted.
+More software in future will be directly powered by data warehouses. Currently, there is no strong solution providing product analytics on top of a data warehouse.
 
-PostHog today is focused on enabling engineering teams and product teams to work together, better. That gives us the foothold to steer decision making in every team in every company. For product led companies, it all starts from their user behavior.
+PostHog will become the standard platform used to extra product data, to provide tools to understand and improve product usage, and to integrate well with a data warehouse.
 
 ## What do we need to do next
 
