@@ -9,7 +9,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ## Engineering
 
-- **Core experience**
+- **[Core experience](core-experience)**
     - [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/people/team/#eric-duong-software-engineer)
     - [Paolo D'Amico (Product Manager)](/handbook/people/team#paolo-damico-product-team)
     - [Buddy Williams, Full Stack Engineer](/handbook/people/team/#buddy-williams-software-engineer)
