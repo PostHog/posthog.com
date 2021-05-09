@@ -14,7 +14,7 @@ With the next step up, 2-3x hobby-dev instances and standard-0 Postgres ($64/mon
 
 If running costs are a concern, AWS is likely to be the cheapest cloud option, especially if you can commit to buying reserved instances for a year. This does come at the cost of ease-of-deployment.
 
-If you've deployed on AWS, please let us know roughly how much you're spending roughly so we can improve this guide. 
+If you've deployed on AWS, please let us know how much you're spending roughly so we can improve this guide. 
 
 
 You can contact us at _[hey@posthog.com](mailto:hey@posthog.com)_ or submit a Pull Request to our [Docs Repository](https://github.com/PostHog/posthog.com) :-).
