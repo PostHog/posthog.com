@@ -22,12 +22,14 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
     - [Marius Andra (Team lead, Full Stack Engineer)](/handbook/company/team/#marius-andra-software-engineer)
     - [Michael Matloka (Full Stack Engineer)](/handbook/company/team/#michael-matloka-software-engineer)
     - [Yakko Majuri (DevRel + Full Stack Engineer)](/handbook/company/team/#yakko-majuri-technical-writer-and-developer)
+    - [Neil Kakkar (Full Stack Engineer)](/handbook/people/team/#neil-kakkar-software-engineer)
 
 <br />
 
 - **[Infrastructure and Deployments](infrastructure)**
     - [James Greenhill](/handbook/company/team/#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
     - [Karl-Aksel Puulmann](/handbook/company/team/#karl-aksel-puulmann-software-engineer) (Full Stack Engineer)
+    - [Tiina Turban](/handbook/company/team/#tiina-turban-software-engineer) (Full Stack Engineer)
 
 <br />
 

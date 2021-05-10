@@ -11,6 +11,7 @@ hideAnchor: true
 
 - [James Greenhill](/handbook/company/team/#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team/#karl-aksel-puulmann-software-engineer) (Full Stack Engineer)
+- [Tiina Turban](/handbook/company/team/#tiina-turban-software-engineer) (Full Stack Engineer)
 
 ## Mission
 

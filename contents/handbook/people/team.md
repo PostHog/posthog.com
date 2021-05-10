@@ -616,6 +616,79 @@ I am always at the beginning of my journey to learn.
 
 </div>
 
+
+<!--- Neil Kakkar Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Neil Kakkar, Software Engineer
+
+<div class="team-left-bio" markdown="1">
+
+There's three things I love:
+
+1. Learning new things
+2. Applying them
+3. Doing something useful
+
+Software happens to tick all those boxes, so there's no wonder I enjoy coding.
+
+Before PostHog, I was at Bloomberg for ~2.5 years, before which I was studying Mathematics and Computing (ouch) at IIT Delhi. I've built a few fun projects, but one of my favourites is a crypto-currency I started in university that aimed to resolve the issues with Bitcoin. Even with a metric-tonne of funding, that didn't work out as expected, which clued me in to learn about non-technical skills and how startups work.
+
+When I'm not coding, I [write my blog](https://neilkakkar.com), which also not surprisingly, ticks all the boxes above. I've had more than a few posts reach the top of HackerNews, which is epic.
+
+When the above two exhaust me, I spend time travelling, bouldering, hiking, or dancing. Sometimes, I swim too, but the only stroke I know is the panic-stroke. Some other times, I spend time meeting interesting people [on Twitter](https://twitter.com/neilkakkar).
+
+Fun Fact: I usually find out about "current" affairs ~2-6 months after they happen. Yes, I learned about Brexit after it happened... ...It happened, right?
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Neil portrait](../../images/team/Neil.png)
+
+</div>
+
+</div>
+
+<!--- Tiina Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Tiina Turban, Software Engineer
+
+<div class="team-left-bio" markdown="1">
+
+As another Estonian I also first got exposed to coding in high school.
+From there things escalated pretty fast and while my friends were eating ice-cream and enjoying the lovely sunny spring day outside I was in the computer lab programming a Snake game.
+
+During my CS studies I did a quick detour and spent a summer selling books door-to-door in the US, which confirmed my suspicions that software engineering is a much better fit, but left me with an invaluable experience and ticker skin =)
+
+I explored the fabulous life in Silicon Valley working at Facebook for 5 years and Twitter for 1. However I missed Europe and my love/obsession for dancing brought me back, this time to the land of croissants and cheese - Paris, France.
+Outside of work and dancing I am currently on a quest to learn French, like to frequent the gym, and listen to non-fiction audiobooks.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Tiina portrait](../../images/team/Tiina.png)
+
+</div>
+
+</div>
+
 <!--- Contributors Section -->
 
 ## Contributors
