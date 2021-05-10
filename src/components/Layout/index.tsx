@@ -86,7 +86,7 @@ const Layout = ({
             <Header
                 onPostPage={onPostPage}
                 transparentBackground={headerBackgroundTransparent}
-                onBlogPage={isBlogArticlePage}
+                onBlogPage={isBlogArticlePage || onBlogPage}
             />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
