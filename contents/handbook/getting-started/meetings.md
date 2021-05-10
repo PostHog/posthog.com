@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[We hate meetings](/blog/meetings). 
+We are [anti-meeting by default](/blog/meetings). 
 
 However, while we default to [written and asynchronous communication](/handbook/company/communication), we find that having a few regular touch points for the whole team to come together on a call useful for sharing certain types of information, strengthening our culture and discussing more dynamic issues in real time. 
 
