@@ -28,7 +28,7 @@ Tangibly, we:
 
 ## Customer
 
-- The other small teams - here is a guide on how to best [work with the Design team](/handbook/company/working-with-design). 
+- The other small teams – [here is a guide on how to best work with the Design team](/handbook/company/working-with-design). 
 
 ## Output metrics
 
