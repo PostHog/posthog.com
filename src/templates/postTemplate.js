@@ -42,7 +42,7 @@ function Template({
     return (
         <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
             <Layout
-                onPostPage={true}
+                onPostPage
                 isBlogArticlePage={isBlogArticlePage}
                 pageTitle={frontmatter.title}
                 featuredImage={frontmatter.featuredImage?.publicURL}

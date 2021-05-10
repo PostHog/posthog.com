@@ -58,25 +58,32 @@ export const Header = ({
     onHomePage = false,
     transparentBackground = false,
     onBlogPage = false,
+    isBlogArticlePage = false,
 }: {
     onPostPage: boolean
     onHomePage?: boolean
     onBlogPage?: boolean
     transparentBackground?: boolean
+    isBlogArticlePage?: boolean
 }) => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
-    const logo = onPostPage && websiteTheme === 'light' ? darkLogo : whiteLogo
+    const logo = onPostPage && websiteTheme === 'light' && !isBlogArticlePage ? darkLogo : whiteLogo
     const textLight =
-        !onPostPage || (onPostPage && websiteTheme === 'dark') || transparentBackground || onHomePage || onBlogPage
+        !onPostPage ||
+        (onPostPage && websiteTheme === 'dark') ||
+        transparentBackground ||
+        onHomePage ||
+        onBlogPage ||
+        isBlogArticlePage
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
         <div
             className={`header-wrapper primary-navbar py-6 relative z-20 ${
                 transparentBackground ? 'transparent-background' : ''
-            }`}
+            } ${isBlogArticlePage ? 'blog-article-header' : ''}`}
         >
             <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">

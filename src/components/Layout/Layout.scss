@@ -1632,7 +1632,7 @@ div::-webkit-scrollbar-thumb:hover {
 }
 
 .post-page-wrapper {
-    .header-wrapper {
+    .header-wrapper:not(.blog-article-header) {
         background: rgb(249, 249, 249) none repeat scroll 0% 0%;
     }
 }

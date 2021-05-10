@@ -18,7 +18,7 @@ interface BlogPostLayoutProps {
 export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostLayoutProps): JSX.Element {
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
-            <Header onPostPage={true} transparentBackground />
+            <Header onPostPage isBlogArticlePage />
             <div className="flex justify-between items-center w-full px-4 mb-12">
                 <div className="flex-grow">
                     <Link
@@ -46,7 +46,7 @@ export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostL
             <PosthogAnnouncement />
             <GetStartedModal />
             <BlogFooter />
-            <Footer />
+            <Footer onPostPage />
         </div>
     )
 }
