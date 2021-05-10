@@ -276,22 +276,19 @@ const PricingPage = () => {
                             <div className="pricing-cloud">
                                 <h4>One Price. Pay only for what you use.</h4>
                                 <div>
-                                    Get all the features with zero-minimum pricing. Pay based on the events you{' '}
-                                    <b>capture</b> every month.
+                                    Get all the features with zero-minimum pricing. Pay based on the events you capture
+                                    every month.
                                 </div>
 
                                 <div>
                                     <PricingSlider pricingOption="cloud" />
                                 </div>
 
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    First <b>10,000 events are free</b> every single month.
-                                </div>
-
+                                <h5>Completely self-serve, get started without a credit card.</h5>
                                 <div style={{ fontSize: 16, marginTop: 16 }}>
                                     <a href="https://app.posthog.com/signup">
                                         <Button type="primary" size="large">
-                                            Get started
+                                            Start free
                                         </Button>
                                     </a>
                                     <br />

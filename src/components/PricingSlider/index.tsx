@@ -14,9 +14,19 @@ export const PricingSlider = () => {
                     {pricingOption === 'self-hosted' ? `$${additionalUnitPrice}` : '$0.000225'}
                     <span>/additional event ingested</span>
                 </div>
+                {pricingOption === 'self-hosted' ? (
+                    <div>
+                        First <b>8,000,000</b> events are included every single month.
+                    </div>
+                ) : (
+                    <div>
+                        First <b>1,000,000 events are free</b> every single month.
+                    </div>
+                )}
             </div>
+            <br />
+            <br />
             <div>
-                <br />
                 <LogSlider
                     min={10000}
                     max={150000000}
@@ -28,6 +38,12 @@ export const PricingSlider = () => {
                 <br />
                 <div style={{ fontSize: '1rem', textAlign: 'right' }}>
                     <span className="text-muted">Price:</span> <b>${finalCost}</b>/month
+                     {pricingOption === 'self-hosted' ? (
+                        <span>
+                            {' '}
+                            - <strong>decreases as volume grows</strong>. Try it with the slider.
+                        </span>
+                    ) : null}
                 </div>
             </div>
         </>
