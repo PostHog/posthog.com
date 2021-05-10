@@ -86,7 +86,7 @@ const Layout = ({
             <Header
                 onPostPage={onPostPage}
                 transparentBackground={headerBackgroundTransparent}
-                onBlogPage={onBlogPage}
+                onBlogPage={isBlogArticlePage}
             />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
                 {onPostPage && !sidebarHide && !isBlogArticlePage && (
@@ -169,7 +169,7 @@ const Layout = ({
             </AntdLayout>
             <AntdLayout style={{ background: '#ffffff' }}>
                 {isBlogArticlePage && <BlogFooter />}
-                <Footer />
+                <Footer onPostPage={onPostPage} />
             </AntdLayout>
             <PosthogAnnouncement />
             <GetStartedModal />
