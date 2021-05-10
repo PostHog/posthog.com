@@ -91,7 +91,7 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
                             <span className="text-muted">Price:</span> <b>${finalCost}</b>/month.
                         </div>
                     ) : (
-                        <div style={{ fontSize: '1rem', textAlign: 'right', marginTop: 5 }}>
+                        <div className="text-right -mt-16 text-base">
                             <span className="text-muted">Price:</span>{' '}
                             <b>${Math.round(Math.max(0, sliderValue - 1000000) * 0.000225).toLocaleString()}</b>/month
                         </div>
