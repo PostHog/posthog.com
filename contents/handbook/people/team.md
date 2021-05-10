@@ -651,7 +651,7 @@ Fun Fact: I usually find out about "current" affairs ~2-6 months after they happ
 
 <div class="team-right-image" markdown="1">
 
-![Neil portrait](../../images/team/neil.png)
+![Neil portrait](../../images/team/Neil.png)
 
 </div>
 
