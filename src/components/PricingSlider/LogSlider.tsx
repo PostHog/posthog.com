@@ -44,7 +44,7 @@ export const LogSlider = ({ min, max, marks, stepsInRange, onChange }: LogSlider
             step={(inverseCurve(max) - inverseCurve(min)) / stepsInRange}
             tipFormatter={(value) => prettyInt(sliderCurve(value))}
             onChange={onChange}
-            className="log-slider"
+            className="log-slider center"
             value={sliderValue}
         />
     )
