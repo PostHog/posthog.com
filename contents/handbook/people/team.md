@@ -635,7 +635,7 @@ There's three things I love:
 
 Software happens to tick all those boxes, so there's no wonder I enjoy coding.
 
-Before PostHog, I was at Bloomberg for ~2.5 years, before which I was studying Mathematics and Computing (ouch) at IIT Delhi.
+Before PostHog, I was at Bloomberg for ~2.5 years, before which I was studying Mathematics and Computing (ouch) at IIT Delhi. I've built a few fun projects, but one of my favourites is a crypto-currency I started in university that aimed to resolve the issues with Bitcoin. Even with a metric-tonne of funding, that didn't work out as expected, which clued me in to learn about non-technical skills and how startups work.
 
 When I'm not coding, I [write my blog](https://neilkakkar.com), which also not surprisingly, ticks all the boxes above. I've had more than a few posts reach the top of HackerNews, which is epic.
 
