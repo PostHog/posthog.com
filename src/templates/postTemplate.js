@@ -48,6 +48,7 @@ function Template({
                 featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
+                onBlogPage={isBlogArticlePage}
             >
                 <SEO
                     title={

@@ -7,13 +7,7 @@ import { CallToAction } from '../../CallToAction'
 export const CareersHero = () => {
     return (
         <div className="careers-hero">
-            <Header
-                onPostPage={false}
-                isBlogArticlePage={false}
-                isHomePage={true}
-                menuActiveKey="active"
-                transparentBackground={true}
-            />
+            <Header onPostPage={false} transparentBackground />
 
             <div className="w-11/12 pt-12 sm:py-24 mx-auto text-center relative z-10 rounded">
                 <div className="max-w-3xl mx-auto">
