@@ -27,6 +27,8 @@ git clone https://github.com/PostHog/posthog
 docker-compose -f docker-compose.dev.yml up -d redis db
 ```
 
+* _Friendly tip:_ You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
+
 </HiddenSection>
 
 
@@ -106,6 +108,8 @@ pip install -r requirements-dev.txt
 DEBUG=1 python3 manage.py migrate
 ```
 
+* _Friendly tip:_ The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
+
 7. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
 ```bash
@@ -128,6 +132,7 @@ brew install node
     ```
 
 * _Note:_ The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
+* _Friendly tip:_ If you run into frontend webpack module errors running `rm -rf node_modules/` might help.
 
 Now open [http://localhost:8000](http://localhost:8000) to see the app.
 

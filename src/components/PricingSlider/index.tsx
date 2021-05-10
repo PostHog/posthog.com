@@ -43,13 +43,19 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
     return (
         <>
             <div className="main-price">
-                <div>
-                    {pricingOption === 'vpc' ? `$${additionalUnitPrice}` : '$0.000225'}
-                    <span>/additional event ingested</span>
-                </div>
+                {pricingOption === 'vpc' ? (
+                    <div>
+                        First <b>8,000,000</b> events are included every single month.
+                    </div>
+                ) : (
+                    <div>
+                        First <b>1,000,000 events are free</b> every single month.
+                    </div>
+                )}
             </div>
+            <br />
+            <br />
             <div>
-                <br />
                 <LogSlider
                     min={10000}
                     max={150000000}
@@ -65,16 +71,32 @@ export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
                 />
                 <br />
                 <br />
-                {pricingOption === 'vpc' ? (
-                    <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                        <span className="text-muted">Price:</span> <b>${finalCost}</b>/month
-                    </div>
-                ) : (
-                    <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                        <span className="text-muted">Price:</span>{' '}
-                        <b>${Math.round((sliderValue - 10000) * 0.000225).toLocaleString()}</b>/month
-                    </div>
-                )}
+                <div>
+                    {pricingOption === 'vpc' ? `$${additionalUnitPrice}` : '$0.000225'}
+                    <span>/additional event ingested</span>
+
+                    {pricingOption === 'vpc' ? (
+                        <span>
+                            {' '}
+                            - <strong>decreases as volume grows</strong>. Try it with the slider.
+                        </span>
+                    ) : null}
+                </div>
+                <br />
+
+                <div>
+                    <br />
+                    {pricingOption === 'vpc' ? (
+                        <div style={{ fontSize: '1rem', textAlign: 'right', marginTop: 5 }}>
+                            <span className="text-muted">Price:</span> <b>${finalCost}</b>/month.
+                        </div>
+                    ) : (
+                        <div style={{ fontSize: '1rem', textAlign: 'right', marginTop: 5 }}>
+                            <span className="text-muted">Price:</span>{' '}
+                            <b>${Math.round(Math.max(0, sliderValue - 1000000) * 0.000225).toLocaleString()}</b>/month
+                        </div>
+                    )}
+                </div>
             </div>
         </>
     )
