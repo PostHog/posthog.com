@@ -5,6 +5,7 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import hamburgerIcon from '../../images/icons/hamburger.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
+import './style.scss'
 
 interface NavbarLinkProps {
     to?: string
@@ -54,25 +55,35 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
 
 export const Header = ({
     onPostPage,
+    onHomePage = false,
     transparentBackground = false,
+    onBlogPage = false,
+    isBlogArticlePage = false,
 }: {
     onPostPage: boolean
+    onHomePage?: boolean
+    onBlogPage?: boolean
     transparentBackground?: boolean
+    isBlogArticlePage?: boolean
 }) => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
-    const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-purple'
-    const backgroundColor = onPostPage ? themeSupportedColor : 'bg-purple-gradient'
-    const logo = (onPostPage || transparentBackground) && websiteTheme === 'light' ? darkLogo : whiteLogo
-    const textLight = (!onPostPage && !transparentBackground) || websiteTheme === 'dark'
+    const logo = onPostPage && websiteTheme === 'light' && !isBlogArticlePage ? darkLogo : whiteLogo
+    const textLight =
+        !onPostPage ||
+        (onPostPage && websiteTheme === 'dark') ||
+        transparentBackground ||
+        onHomePage ||
+        onBlogPage ||
+        isBlogArticlePage
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
         <div
-            className={`primary-navbar py-6 ${
-                transparentBackground ? 'bg-transparent' : backgroundColor
-            } relative z-20`}
+            className={`header-wrapper primary-navbar py-6 relative z-20 ${
+                transparentBackground ? 'transparent-background' : ''
+            } ${isBlogArticlePage ? 'blog-article-header' : ''}`}
         >
             <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">

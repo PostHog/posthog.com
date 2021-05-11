@@ -2,6 +2,8 @@ import React from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import './log-slider.scss'
+import { pricingSliderLogic } from './pricingSliderLogic'
+import { useValues } from 'kea'
 
 // Thanks to https://codesandbox.io/s/rc-slider-log-demo-forked-xffr0
 
@@ -32,14 +34,18 @@ const makeMarks = (marks: number[]): Record<number, string> => {
     }, {} as Record<number, string>)
 }
 
-export const LogSlider = ({ min, max, marks, stepsInRange, onChange }: LogSliderProps): JSX.Element => (
-    <MySlider
-        min={inverseCurve(min)}
-        max={inverseCurve(max)}
-        marks={makeMarks(marks)}
-        step={(inverseCurve(max) - inverseCurve(min)) / stepsInRange}
-        tipFormatter={(value) => prettyInt(sliderCurve(value))}
-        onChange={onChange}
-        className="log-slider"
-    />
-)
+export const LogSlider = ({ min, max, marks, stepsInRange, onChange }: LogSliderProps): JSX.Element => {
+    const { sliderValue } = useValues(pricingSliderLogic)
+    return (
+        <MySlider
+            min={inverseCurve(min)}
+            max={inverseCurve(max)}
+            marks={makeMarks(marks)}
+            step={(inverseCurve(max) - inverseCurve(min)) / stepsInRange}
+            tipFormatter={(value) => prettyInt(sliderCurve(value))}
+            onChange={onChange}
+            className="log-slider center"
+            value={sliderValue}
+        />
+    )
+}

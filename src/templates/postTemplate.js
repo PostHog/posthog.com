@@ -39,55 +39,41 @@ function Template({
     const isBlogArticlePage = frontmatter.sidebar === 'Blog'
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
-    useEffect(() => {
-        if (window) {
-            setRunningInBrowser(true)
-        }
-    })
-
     return (
         <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
-            {runningInBrowser ? (
-                <Layout
-                    onPostPage={true}
-                    isBlogArticlePage={isBlogArticlePage}
-                    pageTitle={frontmatter.title}
-                    featuredImage={frontmatter.featuredImage?.publicURL}
-                    isHomePage={false}
-                    isDocsPage={isDocsPage}
-                >
-                    <SEO
-                        title={
-                            frontmatter.title +
-                            ' - PostHog' +
-                            (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
-                        }
-                        description={frontmatter.description || excerpt}
-                        pathname={markdownRemark.fields.slug}
-                        article
-                    />
-                    <div className="docsPagesContainer">
-                        <div className="docsPages">
-                            {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
-                                <h1 align="center">{frontmatter.title}</h1>
-                            )}
-                            <div
-                                className="docsPagesContent rounded md:rounded-lg px-4 py-8 md:py-16"
-                                dangerouslySetInnerHTML={{ __html: html }}
-                            />
-                        </div>
-                        {isDocsPage && <DocsPageSurvey />}
-                        {(isDocsPage || isHandbookPage) && (
-                            <DocsFooter
-                                filename={`${addIndex(markdownRemark.fields.slug)}.md`}
-                                title={frontmatter.title}
-                            />
+            <Layout
+                onPostPage
+                isBlogArticlePage={isBlogArticlePage}
+                pageTitle={frontmatter.title}
+                featuredImage={frontmatter.featuredImage?.publicURL}
+                isHomePage={false}
+                isDocsPage={isDocsPage}
+                onBlogPage={isBlogArticlePage}
+            >
+                <SEO
+                    title={
+                        frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
+                    }
+                    description={frontmatter.description || excerpt}
+                    pathname={markdownRemark.fields.slug}
+                    article
+                />
+                <div className="docsPagesContainer">
+                    <div className="docsPages">
+                        {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
+                            <h1 align="center">{frontmatter.title}</h1>
                         )}
+                        <div
+                            className="docsPagesContent rounded md:rounded-lg px-4 py-8 md:py-16"
+                            dangerouslySetInnerHTML={{ __html: html }}
+                        />
                     </div>
-                </Layout>
-            ) : (
-                <Spin size="large" style={{ position: 'fixed', top: '50%', left: '50%' }} />
-            )}
+                    {isDocsPage && <DocsPageSurvey />}
+                    {(isDocsPage || isHandbookPage) && (
+                        <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
+                    )}
+                </div>
+            </Layout>
         </div>
     )
 }

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
-import { useValues } from 'kea'
-import { layoutLogic } from '../../logic/layoutLogic'
 
 import { NewsletterForm } from '../NewsletterForm'
 import logo from '../../images/posthog-hog-transparent.svg'
@@ -52,20 +50,16 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
 }
 
 export function Footer({
-    onPostPage,
     showNewsletter = false,
     backgroundClass = '',
 }: {
-    onPostPage: boolean
     showNewsletter?: boolean
     backgroundClass?: string
 }): JSX.Element {
     const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
-    const { websiteTheme } = useValues(layoutLogic)
-    const bgClass = backgroundClass || (onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer')
 
     return (
-        <div className={`${bgClass} site-footer py-24 relative`}>
+        <div className={`${backgroundClass} site-footer py-24 relative`}>
             {newsletterSignup}
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">

@@ -56,12 +56,12 @@ const faqs = [
     {
         q: 'Is there a free trial on paid plans?',
         a:
-            'No - instead we offer a contract with no minimum length. In addition, for Cloud, you will get the first 10k events free permanently. For Self Hosted Scale, you can try all features in Cloud first if needed, and there is no minimum contract length since we charge on usage.',
+            'No - instead we offer a contract with no minimum length. In addition, for Cloud, you will get the first 1M events free permanently. For Self Hosted Scale, you can try all features in Cloud first if needed, and there is no minimum contract length since we charge on usage.',
     },
     {
         q: 'What happens after the data retention period elapses?',
         a:
-            'On the Cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Self Host Scale plan, you control your data retention and what happens to your data afterwards.',
+            'On the Cloud plans, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Self Hosted Scale plan, you control your data retention and what happens to your data afterwards.',
     },
     {
         q: 'Do I pay anything for stored events?',
@@ -71,7 +71,7 @@ const faqs = [
     {
         q: 'Can I switch between the Cloud and Self Hosted plans?',
         a:
-            'You can switch from Cloud to Self Hosted Scale - just email our support team (hey@posthog.com). We will manually transfer your data, free. Likewise, you can switch from Self Hosted Scale to cloud too - email us.',
+            'You can switch from Cloud to Self Hosted Scale - just email our support team (hey@posthog.com). We will manually transfer your data, free. Likewise, you can switch from Self Hosted Scale to Cloud too - email us.',
     },
     {
         q: 'Are there any minimums or annual commitments?',
@@ -95,7 +95,7 @@ const faqs = [
     {
         q: 'Do you offer a discount for non-profits?',
         a:
-            'Yes in most cases - 50% off all pricing for cloud deployment. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 50% off all pricing for Cloud. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
     },
 ]
 
