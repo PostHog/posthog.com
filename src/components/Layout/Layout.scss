@@ -1622,3 +1622,17 @@ div::-webkit-scrollbar-thumb:hover {
         filter: invert(83%) sepia(0%) saturate(1327%) hue-rotate(153deg) brightness(92%) contrast(87%);
     }
 }
+
+.site-footer {
+    background-color: #08042f;
+}
+
+.header-wrapper {
+    background: linear-gradient(180deg, #200c39, #220f3f);
+}
+
+.post-page-wrapper {
+    .header-wrapper:not(.blog-article-header) {
+        background: rgb(249, 249, 249) none repeat scroll 0% 0%;
+    }
+}

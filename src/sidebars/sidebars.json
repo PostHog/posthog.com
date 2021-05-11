@@ -345,24 +345,6 @@
         ]
     },
     {
-        "entry": "Careers",
-        "name": "Careers",
-        "items": ["careers"],
-        "child_entries": ["Open Roles"]
-    },
-    {
-        "entry": "Open Roles",
-        "name": "Open Roles",
-        "items": [
-            "careers/full-stack-software-engineer",
-            "careers/senior-fs-software-engineer",
-            "careers/site-reliability-engineer",
-            "careers/sales-engineer",
-            "careers/product-marketer",
-            "careers/senior-product-designer"
-        ]
-    },
-    {
         "entry": "Engineering",
         "name": "Engineering",
         "items": [
