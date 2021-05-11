@@ -141,7 +141,7 @@ const PricingPage = () => {
                         ))}
                         {state.planOptions === 'self-hosted' && (
                             <div className="pricing-cloud">
-                                <h4>For those that want flexibility.</h4>
+                                <h4>For those who want flexibility.</h4>
                                 <div></div>
                                 <div>
                                     <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>

@@ -248,7 +248,7 @@ export const PricingComparisonTable = () => {
                         <img src={imgCloud} alt="" style={{ paddingRight: 0 }} />
                         Cloud
                     </h4>
-                    <ul className="p-comparison-list">
+                    <ul className="p-comparison-list max-w-sm text-left mx-auto">
                         <li>Immediate start</li>
                         <li>
                             Recommended if you want to get started <b>right now</b>. Start capturing events in under 5
@@ -275,7 +275,7 @@ export const PricingComparisonTable = () => {
                     <h4 className="p-text-primary p-title-with-icon">
                         <img src={imgBuilding} alt="" /> Self Hosted Scale
                     </h4>
-                    <ul className="p-comparison-list">
+                    <ul className="p-comparison-list max-w-sm text-left mx-auto">
                         <li>Recommended if you have large volumes of events or users ({'>10k monthly users'}).</li>
                         <li>You don't want user data to leave your infrastructure (e.g. HIPAA, SOC2).</li>
                         <li>You need full access to the production instance.</li>
