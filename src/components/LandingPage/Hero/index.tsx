@@ -17,7 +17,7 @@ export const Hero = () => {
                 body{\
                 background: #220f3f;\
                 }\
-                .bg-purple-gradient{\
+                .bg-purple-gradient, .header-wrapper, body.dark .header-wrapper{\
                     background: none;\
                     }\
                 '

@@ -288,12 +288,12 @@
     position: relative;
 
     &:before {
-        background: url(../images/purple-mountain-majesty.svg);
+        background: linear-gradient(180deg, rgba(24, 8, 52, 0), rgba(24, 8, 52, 1));
         content: '';
-        height: 160px;
+        height: 400px;
         left: 0;
         position: absolute;
-        top: -145px;
+        top: -400px;
         width: 100%;
     }
 

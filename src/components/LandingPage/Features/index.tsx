@@ -262,7 +262,7 @@ export const Features = () => {
                                             </g>
                                         </svg>
                                     </figure>
-                                    <span>Data lakes export</span>
+                                    <span>Export to data warehouse</span>
                                 </li>
                             </ul>
                         </div>

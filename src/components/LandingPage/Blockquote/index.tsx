@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Blockquote = () => {
     return (
-        <div className="blockquote-section pt-6 pb-4">
+        <div className="blockquote-section pt-6 pb-24">
             &nbsp;
             <div className="w-11/12 max-w-xl mx-auto md:mt-12 bg-opacity-20 rounded p-8 text-center text-white relative">
                 <p className="opacity-80">
