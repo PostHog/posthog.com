@@ -13,6 +13,8 @@ import imgCloud from '../images/cloud.svg'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgOpenSource from '../images/plan-open-source.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
+import { pricingSliderLogic } from 'components/PricingSlider/pricingSliderLogic'
+import { useActions } from 'kea'
 
 import { PricingComparisonTable } from 'components/PricingComparisonTable'
 import { PricingSlider } from 'components/PricingSlider'
@@ -21,21 +23,26 @@ const PricingPage = () => {
     const [state, setState] = useState({ planOptions: 'cloud' })
     const comparisonRef = useRef()
     const location = useLocation()
+    const { setPricingOption } = useActions(pricingSliderLogic)
     const { Panel } = Collapse
 
     const setOptionFromQS = () => {
         // On load, set the correct plan options (if applicable)
         const { o } = queryString.parse(location.search)
-        if (o && o in plans) setState({ ...state, planOptions: o })
+        if (o && ['self-hosted', 'cloud'].includes(o)) {
+            setState({ ...state, planOptions: o })
+            setPricingOption(o)
+        }
     }
 
-    useEffect(setOptionFromQS, [])
+    useEffect(setOptionFromQS, [location])
 
     const handleSegmentChange = (event) => {
         const newOption = event.target.value
         const pushUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?o=${newOption}`
         window.history.pushState({ path: pushUrl }, '', pushUrl)
         setState({ ...state, planOptions: event.target.value })
+        setPricingOption(event.target.value)
     }
 
     const CTAButton = (props) => (
