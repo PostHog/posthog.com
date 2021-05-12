@@ -15,7 +15,7 @@ Likewise, a sales-focused founder may be struggling to know what makes you great
 
 <iframe src="https://giphy.com/embed/1dJVNSn8u3BSGftyVm" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/alan-sugar-lord-1dJVNSn8u3BSGftyVm">via GIPHY</a></p>
 
-## Do you need a co-founder?
+## Do I need a co-founder?
 
 At PostHog, Tim [didn't even know](inflated-risk-seems-riskier) he wanted to start a company, so the answer here was yes!
 
