@@ -1,5 +1,5 @@
 ---
-title: How We Review PRs
+title: How we review PRs
 sidebar: Handbook
 showTitle: true
 ---

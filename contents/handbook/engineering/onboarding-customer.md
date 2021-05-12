@@ -1,5 +1,5 @@
 ---
-title: Onboarding Customers
+title: Onboarding customers
 sidebar: Handbook
 showTitle: true
 ---

@@ -1,5 +1,5 @@
 ---
-title: Releasing a New Version
+title: Releasing a new version
 sidebar: Handbook
 showTitle: true
 ---

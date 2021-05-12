@@ -1,5 +1,5 @@
 ---
-title: Common Issues
+title: Common issues
 sidebar: Handbook
 showTitle: true
 ---
