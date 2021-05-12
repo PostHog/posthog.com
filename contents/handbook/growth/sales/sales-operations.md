@@ -1,10 +1,10 @@
 ---
-title: Sales Operations
+title: Sales operations
 sidebar: Handbook
 showTitle: true
 ---
 
-## The Basics
+## Overview
 
 We use [HubSpot](https://www.hubspot.com/) as our customer relationship management ('CRM') platform. If you need access, you can ask Charles or James H and they will send you an invite to create an account. 
 

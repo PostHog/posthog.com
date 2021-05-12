@@ -6,7 +6,7 @@ showTitle: true
 
 Design is currently a shared resource at PostHog. This explains what we do, our design process, and how we can assist across the PostHog team.
 
-## Design's Role at PostHog
+## Design's role at PostHog
 
 1. Support Small Teams (and contributors) in building better versions of PostHog
 1. Enable customers to build better products (using PostHog)
@@ -18,7 +18,7 @@ Design is currently a shared resource at PostHog. This explains what we do, our 
 1. Support Small Teams in completing their sprint tasks
 1. Iterate based on feedback from customers
 
-## Our Process
+## Our process
 
 Design tasks are managed with our [GitHub Org project](https://github.com/orgs/PostHog/projects/3), otherwise known as our Design Board. This aggregates design-related tasks from the main three repositories for the company:
 
@@ -26,7 +26,7 @@ Design tasks are managed with our [GitHub Org project](https://github.com/orgs/P
 1. [posthog.com](https://github.com/PostHog/posthog.com) - website + docs
 1. Internal - higher-level company strategy
 
-### How Our Design Board Works
+### How our Design Board works
 
 Cards generally move from left to right.
 
@@ -36,7 +36,7 @@ Cards generally move from left to right.
 1. **Awaiting implementation** - In development or in review
 1. **Done** - Shipped! 🚀
 
-## Design Request Process
+## Design request process
 
 Since design is currently a shared resource, the best way design requests can be handled is by creating an issue in the relevant repository, then adding to the _Design_ project.
 
@@ -51,7 +51,7 @@ The following details will help us triage incoming requests:
 
 **Note:** We may defer some design requests if we're planning a larger overhaul in the near term. For example, if a request is to create an icon, we may suggest an alternate solution (like pulling an icon from The Noun Project) if we have a larger plan for revamping all icons in a section in the near future.
 
-### When to Loop in Design
+### When to loop in design
 
 Because we hire self-starters, there is no expectation that every project should start by running through design _first_.
 

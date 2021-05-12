@@ -10,7 +10,7 @@ With team members across several countries, it's important for us to practice cl
 
 To accomplish this, we use **asynchronous communication as a starting point** and stay as open and transparent as we can by communicating on GitHub through public issues and pull requests, as well as in our PostHog User and internal Slack.
 
-## Our Communication Values
+## Our communication values
 
 1. **Assume Positive Intent.** Always coming from a position of positivity and grace.
 1. **Form An Opinion.** We live in different locations and often have very different perspectives. We want to know your thoughts, opinions, and feelings on things.
@@ -84,11 +84,11 @@ Please be sure to read the README of the repo for guidelines on how to file spec
 - ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo.
 - ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
 
-## Written Communication
+## Written communication
 
 ### GitHub
 
-#### Everything Starts with a Pull Request
+#### Everything starts with a pull request
 
 It's best practice to start a discussion where possible with a Pull Request (PR) instead of an issue. A PR is associated with a specific change that is proposed and transparent for everyone to review and openly discuss. The nature of PRs facilitate discussions around a proposed solution to a problem that is actionable. A PR is actionable, while an issue will inevitably lead to a longer period before the problem is addressed.
 
@@ -128,9 +128,9 @@ Slack is used differently in different organizations. Here are some guidelines f
 1. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
 1. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
 
-### Google Docs and presentations
+### Google Docs and Slides
 
-Never use a Google Doc / presentation for something non-confidential that has to end up on the website or this handbook. Work on these edits via commits to a pull request. Then link to the pull request or diff to present the change to people. This prevents a duplication of effort and/or an out of date handbook.
+Never use a Google Doc / Slides for something non-confidential that has to end up on the website or this handbook. Work on these edits via commits to a pull request. Then link to the pull request or diff to present the change to people. This prevents a duplication of effort and/or an out of date handbook.
 
 We mainly use Google Docs to capture internal information like meeting notes or to share company updates and metrics. We always make the doc accessible so you can comment and ask questions. 
 
@@ -144,14 +144,15 @@ Please avoid using presentations for internal use. They are a poor substitute fo
    - Sending some types of more official company documents (e.g. job offers, payroll forms)
    - Communicating with external partners
 
-### Writing Style
+### Writing style
 
 1. We use American English as the standard written language in our public-facing comms, including this handbook. 
 1. Do not use acronyms when you can avoid them. Acronyms have the effect of excluding people from the conversation if they are not familiar with a particular term.
 1. We use the [Oxford comma](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
 1. Do not create links like "here" or "click here". All links should have relevant anchor text that describes what they link to. Using meaningful links is important to both search engine crawlers (SEO) and people with accessibility issues.
+1. We use sentence case for titles.
 
-## Internal Meetings
+## Internal meetings
 
 PostHog uses [Zoom](https://zoom.us/) for video communications. Zoom also has useful plugins for [Google Calendar](https://chrome.google.com/webstore/detail/zoom-scheduler/kgjfgplpablkjnlkjmjdecgdpfankdle?hl=en-US) and Slack which you may wish to use.
 
@@ -170,7 +171,7 @@ Use video calls if you find yourself going back and forth in an issue/via email 
 
 For external meetings, the above is also helpful. We also have separate guidance on [how to run a great demo](/handbook/growth/sales/demos). 
 
-### Indicating Availability
+### Indicating availability
 
 1. Put your planned away time including holidays, vacation, travel time, and other leave in your own calendar.
 1. Set your working hours in your Google Calendar - you can do this under _Settings_ > _Working Hours_. This is helpful as we work across different timezones. 

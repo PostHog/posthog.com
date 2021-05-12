@@ -38,7 +38,7 @@ That's why we have people in Belgium, the East and West coast of the US, England
 
 <div class="team-title" markdown="1">
 
-## Core Team
+## Core team
 
 </div>
 

@@ -20,13 +20,13 @@ You should have been invited to any relevant meetings as part of your [onboardin
 - **Thursday** - Meeting-free - no internal meetings allowed.
 - **Friday** - These alternate between Sprint Planning and Life Stories.
 
-### Sprint Planning
+### Sprint planning
 
-This is a longer 45min meeting every other Friday where we review the previous two week sprint and then outline what we want to achieve in the next 2 weeks. We split into [small teams](/handbook/people/team-structure/team-structure) for this. Not all small teams follow this exact schedule, but you'll find they usually do these types of meetings on a Friday. 
+This is a longer 45min meeting every other Friday where we review the previous two week sprint and then outline what we want to achieve in the next 2 weeks. We split into [Small Teams](/handbook/people/team-structure/team-structure) for this. Not all small teams follow this exact schedule, but you'll find they usually do these types of meetings on a Friday. 
 
 All sprint planning meetings are open to anyone to attend - if you are not a member of that small team, then we ask that you sit in as a non-speaking observer only. 
 
-### Life Stories
+### Life stories
 
 Alternating with Sprint Planning, Life Stories we hear from 1-2 members of the team who share a bit about themselves with us. No particular format - it's one of the few times a presentation makes sense! Each team member has up to 30min, inclusive of Q&A. These are a fun opportunity for us to get to know a bit about the people we work with, what cool things we didn't know about them, and whether or not they believe that pineapple belongs on pizza...
 
