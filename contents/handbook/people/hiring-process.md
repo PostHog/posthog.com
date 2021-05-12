@@ -1,5 +1,5 @@
 ---
-title: Hiring Process
+title: Hiring process
 sidebar: Handbook
 showTitle: true
 ---

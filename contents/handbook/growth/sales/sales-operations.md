@@ -1,5 +1,5 @@
 ---
-title: Sales Operations
+title: Sales operations
 sidebar: Handbook
 showTitle: true
 ---

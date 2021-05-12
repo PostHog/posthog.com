@@ -1,5 +1,5 @@
 ---
-title: Growth Strategy
+title: Growth strategy
 sidebar: Handbook
 showTitle: true
 ---

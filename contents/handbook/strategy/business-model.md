@@ -1,5 +1,5 @@
 ---
-title: Business Model
+title: Business model
 sidebar: Handbook
 showTitle: true
 ---

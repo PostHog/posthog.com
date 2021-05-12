@@ -1,5 +1,5 @@
 ---
-title: YC Onboarding
+title: YC onboarding
 sidebar: Handbook
 showTitle: true
 ---
