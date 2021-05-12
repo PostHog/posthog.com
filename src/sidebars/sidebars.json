@@ -278,7 +278,7 @@
     {
         "entry": "Getting started",
         "name": "Getting started",
-        "items": ["handbook/getting-started"]
+        "items": ["handbook/getting-started/start-here", "handbook/getting-started/meetings"]
     },
     {
         "entry": "How we work",
@@ -304,6 +304,7 @@
             "handbook/people/team-structure/design",
             "handbook/people/team-structure/extensibility",
             "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/infrastructure",
             "handbook/people/team-structure/marketing",
             "handbook/people/team-structure/people"
         ]
@@ -322,40 +323,6 @@
             "handbook/people/feedback",
             "handbook/people/onboarding",
             "handbook/people/offboarding"
-        ],
-        "child_entries": ["Team Structure"]
-    },
-    {
-        "entry": "Team Structure",
-        "name": "Team Structure",
-        "items": [
-            "handbook/people/team-structure/team-structure",
-            "handbook/people/team-structure/why-small-teams",
-            "handbook/people/team-structure/core-experience",
-            "handbook/people/team-structure/design",
-            "handbook/people/team-structure/extensibility",
-            "handbook/people/team-structure/growth-engineering",
-            "handbook/people/team-structure/infrastructure",
-            "handbook/people/team-structure/marketing",
-            "handbook/people/team-structure/people"
-        ]
-    },
-    {
-        "entry": "Careers",
-        "name": "Careers",
-        "items": ["careers"],
-        "child_entries": ["Open Roles"]
-    },
-    {
-        "entry": "Open Roles",
-        "name": "Open Roles",
-        "items": [
-            "careers/full-stack-software-engineer",
-            "careers/senior-fs-software-engineer",
-            "careers/site-reliability-engineer",
-            "careers/sales-engineer",
-            "careers/product-marketer",
-            "careers/senior-product-designer"
         ]
     },
     {

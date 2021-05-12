@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
 <small class="note-block centered">_Estimated Reading Time: 8 minutes ☕☕_</small>
 
 <br />
