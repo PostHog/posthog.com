@@ -1,44 +1,53 @@
 @import '../../vars';
 
-/* Gosha Sans */
+/* Gosha Sans (titles) */
 @font-face {
     font-family: 'Gosha Sans';
     src: url('/fonts/GoshaSans-Bold.woff') format('woff');
     src: url('/fonts/GoshaSans-Bold.woff2') format('woff2');
 }
 
-/* Good Sans */
+/* Osiris (buttons) */
 @font-face {
-    font-family: 'Good Sans';
-    src: url('/fonts/GoodSans-Medium.woff') format('woff');
-    src: url('/fonts/GoodSans-Medium.woff2') format('woff2');
+    font-family: 'Osiris';
+    src: url('/fonts/Osiris.woff2') format('woff2');
     font-weight: normal;
 }
 
-/* Good Sans Bold */
+/* SK Curiosity (body) */
 @font-face {
-    font-family: 'Good Sans';
-    src: url('/fonts/GoodSans-Bold.woff') format('woff');
-    src: url('/fonts/GoodSans-Bold.woff2') formt('woff2');
-    font-weight: bold;
-}
-
-/* Inter */
-@font-face {
-    font-family: 'Inter';
-    src: url('/fonts/Inter-Regular.ttf') format('truetype');
+    font-family: 'SK Curiosity';
+    src: url('/fonts/skcuriosity-medium-webfont.woff') format('woff');
+    src: url('/fonts/skcuriosity-medium-webfont.woff2') formt('woff2');
     font-weight: normal;
+    font-style: normal;
 }
 
-/* Inter Bold */
 @font-face {
-    font-family: 'Inter';
-    src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
+    font-family: 'SK Curiosity';
+    src: url('/fonts/skcuriosity-mediumitalic-webfont.woff') format('woff');
+    src: url('/fonts/skcuriosity-mediumitalic-webfont.woff2') formt('woff2');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SK Curiosity';
+    src: url('/fonts/skcuriosity-heavy-webfont.woff') format('woff');
+    src: url('/fonts/skcuriosity-heavy-webfont.woff2') formt('woff2');
     font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SK Curiosity';
+    src: url('/fonts/skcuriosity-heavyitalic-webfont.woff') format('woff');
+    src: url('/fonts/skcuriosity-heavyitalic-webfont.woff2') formt('woff2');
+    font-weight: bold;
+    font-style: italic;
 }
 
 html {
-    font-family: 'Good Sans' !important;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     overscroll-behavior-y: none;
@@ -226,7 +235,8 @@ html {
 }
 body {
     color: hsla(0, 0%, 0%, 0.8);
-    font-family: 'Good Sans', Helvetica, Arial, sans-serif !important;
+    font-family: 'SK Curiosity', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
+        'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
     font-kerning: normal;
     font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
@@ -743,7 +753,6 @@ header {
 
 .sidebarWrapper {
     margin: 0 10px;
-    font-family: 'Inter', 'Good Sans', 'Arial' !important;
 }
 
 .ant-menu,
@@ -1269,15 +1278,6 @@ table td {
 
 .post-page-wrapper .docsPagesContent,
 .rightBar {
-    p,
-    li,
-    ul,
-    a,
-    td,
-    th {
-        font-family: 'Inter', 'Good Sans', 'Arial' !important;
-    }
-
     a img:hover {
         opacity: 0.7;
     }

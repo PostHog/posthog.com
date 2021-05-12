@@ -22,7 +22,7 @@ interface PostType {
 const ReadPost = ({ to }: { to: string }) => {
     return (
         <CallToAction
-            type="secondary"
+            type="button"
             icon="read-dark"
             iconBg="bg-gray-500 dark:bg-gray-400"
             to={to}

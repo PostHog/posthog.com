@@ -13,6 +13,7 @@ import imgCloud from '../images/cloud.svg'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgOpenSource from '../images/plan-open-source.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
+import { CallToAction } from 'components/CallToAction'
 import { pricingSliderLogic } from 'components/PricingSlider/pricingSliderLogic'
 import { useActions } from 'kea'
 
@@ -140,7 +141,7 @@ const PricingPage = () => {
                         ))}
                         {state.planOptions === 'self-hosted' && (
                             <div className="pricing-cloud">
-                                <h4>For those that want flexibility.</h4>
+                                <h4>For those who want flexibility.</h4>
                                 <div></div>
                                 <div>
                                     <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
@@ -246,15 +247,21 @@ const PricingPage = () => {
                                 <div>
                                     <PricingSlider pricingOption="vpc" />
                                 </div>
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                <div className="text-base text-center mt-8 mb-4">
                                     Minimum price <b>$2,000</b> / month. <b>No setup cost</b>.
                                 </div>
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Want to get started or to discuss?{' '}
-                                    <a href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry">Contact us</a>.
+                                <div className="text-sm text-center mb-8">
+                                    Want to get started or have questions?{' '}
+                                    <a
+                                        href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry"
+                                        className="font-bold"
+                                    >
+                                        Contact us
+                                    </a>
+                                    .
                                 </div>
 
-                                <ul className="p-comparison-list">
+                                <ul className="p-comparison-list max-w-sm text-left mx-auto">
                                     <li>
                                         You want to export product data to your data lake from PostHog on the same
                                         infrastructure.
@@ -284,23 +291,25 @@ const PricingPage = () => {
                                     <PricingSlider pricingOption="cloud" />
                                 </div>
 
-                                <h5>Completely self-serve, get started without a credit card.</h5>
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    <a href="https://app.posthog.com/signup">
-                                        <Button type="primary" size="large">
-                                            Start free
-                                        </Button>
-                                    </a>
-                                    <br />
-                                    <br />
-                                    Unsure about your numbers or want to talk?{' '}
-                                    <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
-                                        Contact us
-                                    </a>
-                                    .
+                                <div className="text-center pt-8">
+                                    <h5>Completely self-serve, get started without a credit card.</h5>
+                                    <div className="text-sm">
+                                        <CallToAction icon="rocket" href="https://app.posthog.com/signup">
+                                            Get Started
+                                        </CallToAction>
+                                        <br />
+                                        <br />
+                                        Unsure about your numbers or want to talk?{' '}
+                                        <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
+                                            Contact us
+                                        </a>
+                                        .
+                                    </div>
                                 </div>
+                                <br />
+                                <br />
 
-                                <ul className="p-comparison-list">
+                                <ul className="p-comparison-list max-w-sm text-left mx-auto">
                                     <li>Immediate start</li>
                                     <li>You don't have significant privacy requirements</li>
                                     <li>You don't want PostHog on your infrastructure</li>

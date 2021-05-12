@@ -278,10 +278,7 @@
     {
         "entry": "Getting started",
         "name": "Getting started",
-        "items": [
-            "handbook/getting-started/start-here",
-            "handbook/getting-started/meetings"     
-                 ]
+        "items": ["handbook/getting-started/start-here", "handbook/getting-started/meetings"]
     },
     {
         "entry": "How we work",

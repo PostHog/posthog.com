@@ -4,7 +4,7 @@
 interface CompensationCalculatorLocation {
     country: string
     area: string
-    locationFactor: Number
+    locationFactor: number
     currency?: string
 }
 

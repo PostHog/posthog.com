@@ -4,6 +4,7 @@
 
 @import 'workable-overrides.css';
 @import 'backgrounds.css';
+@import 'buttons.scss';
 
 body {
     font-smooth: 1.5px;
@@ -25,27 +26,11 @@ ul {
     list-style: disc;
 }
 
-.bg-primary {
-    background: linear-gradient(91.54deg, rgba(255, 99, 39, 0.9) 0%, rgba(248, 88, 27, 0.9) 100%);
+.font-nav {
+    @apply lowercase;
 }
 
 .bg-primary-dark {
-    background: rgba(218, 72, 16, 0.9);
-    border-color: rgba(218, 72, 16, 0.9);
-}
-
-.button-primary {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(2px);
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
-    transition: 0.25s ease all;
-
-    @apply bg-primary px-4 py-2 font-gosha inline-block rounded font-semibold border text-base-larger text-white hover:text-white uppercase;
-}
-
-.button-primary:hover,
-.button-primary:active,
-.button-primary:focus {
     background: rgba(218, 72, 16, 0.9);
     border-color: rgba(218, 72, 16, 0.9);
 }
