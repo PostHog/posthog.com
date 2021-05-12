@@ -56,7 +56,7 @@ Things we do not care about during review:
 
 See: [How we review](/handbook/engineering/how-we-review).
 
-## 7. Merging
+## 6. Merging
 
 Merge anytime. Friday afternoon? Merge.
 
