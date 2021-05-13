@@ -1,0 +1,13 @@
+@mixin star-background($gradient, $bg-position: center) {
+    background: url(../../Careers/images/stars.png), $gradient;
+    background-position: $bg-position;
+
+    @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+        background: url(../../Careers/images/stars@2x.png), $gradient;
+        background-size: 100%;
+    }
+}
+
+.pricing-hero {
+    @include star-background(linear-gradient(180deg, #070822 0%, #070822 100%), left);
+}
