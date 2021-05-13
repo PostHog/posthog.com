@@ -30,16 +30,17 @@ export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostL
                 </div>
                 <DarkModeToggle />
             </div>
+
+            {featuredImage && (
+                <Structure.Section width="3xl -mt-6 md:-mt-2">
+                    <img src={featuredImage} className="w-full rounded-lg shadow-lg" alt={pageTitle} />
+                </Structure.Section>
+            )}
+
             <Structure.Section width="xl" className="text-center leading-tight">
                 <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
                 <BlogShareButtons />
             </Structure.Section>
-
-            {featuredImage && (
-                <Structure.Section width="3xl">
-                    <img src={featuredImage} className="w-full rounded-lg shadow-lg" alt={pageTitle} />
-                </Structure.Section>
-            )}
 
             <Structure.Section width="xl">{children}</Structure.Section>
 
