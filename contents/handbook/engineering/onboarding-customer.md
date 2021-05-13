@@ -1,5 +1,5 @@
 ---
-title: Onboarding Customers
+title: Onboarding customers
 sidebar: Handbook
 showTitle: true
 ---
@@ -10,7 +10,7 @@ Our user notes are not shared publicly. [Read them here](https://docs.google.com
 
 A standard structure you could maintain while doing that call is:
 
-## 1. Introductions / Find Out About Their Business
+## 1. Introductions - find out about them
 
 1. Make sure you introduce yourself and check it's ok if you take notes.
 1. Introduce PostHog: "We're open-source product analytics. Think Mixpanel or Amplitude, but with full control over your data and focused on engineers"

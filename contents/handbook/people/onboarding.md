@@ -12,21 +12,21 @@ If you have any questions on any of this stuff, ask Charles, James or Tim.
 
 The best way to run through this checklist is to copy the relevant sections below into an onboarding issue on the [Ops Roadmap](https://github.com/orgs/PostHog/projects/2) in GitHub.
 
-## Upon Offer Acceptance
+## Upon offer acceptance
 
 Eltje or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.
 
-### US Team Member Checklist
+### US team member checklist
 
 <input type="checkbox"/>  Create a contract using the [Google Docs template](https://docs.google.com/document/d/15cdfWfGj5OWBpVST6VcMwb5TP5qLVPQd9SGWKSnB9bc/edit?usp=sharing) in the Legal Docs shared drive <br />
 <input type="checkbox"/>  If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto as soon as possible, as there can be a long lead time <br />
 
-### UK Team Member Checklist
+### UK team member checklist
 
 <input type="checkbox"/>  Create a contract using the Google Docs templates for [CIIA](https://docs.google.com/document/d/1r7Xc1ALf-JKUrL3g_oyzaQ8H3SOuVchBpJrGp7TINdc/edit?usp=sharing) and [Offer Letter](https://docs.google.com/document/d/1ZzF5hbVmTmKIYKxW7JkXzrBFFNrztkcNvcdO643r6sY/edit?usp=sharing) in the Legal Docs shared drive <br />
 <input type="checkbox"/>  Email Parallel to add them to our pension scheme <br />
 
-### Non-US nor UK Team Member Checklist
+### Non-US nor UK team member checklist
 
 <input type="checkbox"/>  Use [Deel](https://letsdeel.com) to set up as a contractor. Choose 'Create a contract' and select fixed. Follow the instructions. This contract will cover pay, notice period, confidentiality and IP assignment. <br />
 <input type="checkbox"/>  Choose the last day of the month to make payments for ongoing work, else choose something appropriate for a short term contract <br />
@@ -35,7 +35,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 <input type="checkbox"/>  Select for the contractor to be potentially allocated equity in the future (if this has been agreed) <br />
 <input type="checkbox"/>  Under 'Other Specifics' add the following as a special clause: _Contractor agrees to comply with any rules, policies and procedures set out in the Company Handbook, a copy of which is available on the Client's website. To the extent that there is any conflict between the terms of this Agreement and the Company Handbook, the terms which are more favorable to the Contractor shall prevail._ <br />
 
-## The Week Before They Join
+## The week before they join
 
 <table>
   <tr>
@@ -397,7 +397,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 
 
 
-## On Their First Day
+## On their first day
 
 <table>
   <tr>
@@ -535,8 +535,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 
 > Not a hard requirement by any means, but we highly recommended that you join a feedback call and/or product demo in your first weeks. It provides great context on our users.
 
-
-### Additional Access
+### Additional access
 
 Add these if appropriate for the role:
 

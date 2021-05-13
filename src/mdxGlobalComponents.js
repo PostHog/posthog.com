@@ -25,7 +25,6 @@ import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
-import { CornerBrackets } from './components/CornerBrackets'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -98,7 +97,6 @@ export const shortcodes = {
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
-    CornerBrackets,
     DarkModeToggle,
     DemoScheduler,
     DocsPageSurvey,

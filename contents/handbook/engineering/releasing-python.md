@@ -1,10 +1,10 @@
 ---
-title: Releasing a New Version (Python Library)
+title: Releasing a new version (Python library)
 sidebar: Handbook
 showTitle: true
 ---
 
-## How to Release
+## How to release
 1. Increase `VERSION` in `posthog/version.py`
 2. Update `CHANGELOG.md` with a short summary of the changes
 3. run `make release` and `make release_analytics`

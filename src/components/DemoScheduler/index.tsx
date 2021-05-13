@@ -2,7 +2,11 @@ import React from 'react'
 import { Spacer } from '../Spacer'
 import './style.scss'
 
-export const DemoScheduler = ({ iframeSrc = 'https://calendly.com/yakko/yc-onboarding' }: { iframeSrc?: string }) => {
+export const DemoScheduler = ({
+    iframeSrc = 'https://calendly.com/yakko/yc-onboarding-group',
+}: {
+    iframeSrc?: string
+}) => {
     return (
         <>
             <div>

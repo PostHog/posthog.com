@@ -13,7 +13,7 @@ Our mission is to increase the number of successful products in the world.
 
 To achieve this, we will need revenue to be able to re-invest into making a better product.
 
-## How is our Product-Market Fit?
+## How is our product/market fit?
 
 Below is a table of how we see our product-market fit for various sizes of companies and various job roles.
 
