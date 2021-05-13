@@ -16,6 +16,11 @@ const PricingNew = (): JSX.Element => {
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
 
             <PricingHero />
+            <div className="flex justify-center ">
+                {/* needs to tab like in current pricing page */}
+                <div className="px-4 py-2 bg-orange text-white">Cloud</div>
+                <div className="px-4 py-2 bg-white">Self-hosted</div>
+            </div>
             <PricingTable />
             <RocketHorizontalRule />
             <PricingComparison />
