@@ -37,7 +37,7 @@ export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostL
                 </Structure.Section>
             )}
 
-            <Structure.Section width="xl" className="text-center leading-tight">
+            <Structure.Section width="xl" className="text-center leading-tight mb-6">
                 <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
                 <BlogShareButtons />
             </Structure.Section>
