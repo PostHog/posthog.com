@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br />
-
 We aim to regularly publish content in the form of videos and articles as part of providing value [to build a big community](content). 
 
 As a result, we have formulated a loose strategy for how to approach publishing the content produced once it is ready to be exposed to the world.

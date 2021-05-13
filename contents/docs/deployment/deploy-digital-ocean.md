@@ -3,8 +3,6 @@ title: Deploying to Digital Ocean
 sidebar: Docs
 showTitle: true
 ---
-<br />
-
 
 ## Why Digital Ocean
 

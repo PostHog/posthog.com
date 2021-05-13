@@ -7,8 +7,6 @@ showTitle: true
 hideAnchor: true
 ---
 
-<br />
-
 
 We're happy to announce that PostHog is now available as a destination on Segment.
 

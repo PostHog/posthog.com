@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
 PostHog publishes a weekly newsletter.
 
 It contains our latest content:

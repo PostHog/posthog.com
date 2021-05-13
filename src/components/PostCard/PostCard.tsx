@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { CallToAction } from '../CallToAction'
-import dummyPostImg from '../LandingPage/RecentBlogPosts/images/blog-post.png'
 import 'antd/lib/card/style/css'
+import './style.scss'
 
 interface PostType {
     id: string
@@ -48,11 +48,13 @@ const FeaturedPost = ({ post }: { post: PostType }) => {
                 <ReadPost to={post.fields.slug} />
             </div>
             {post.frontmatter.featuredImage?.publicURL && (
-                <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded-lg overflow-hidden flex items-center justify-center">
-                    <img
-                        className="w-full h-auto block rounded-lg shadow-lg"
-                        src={post.frontmatter.featuredImage.publicURL}
-                    />
+                <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded overflow-hidden flex items-center justify-center">
+                    <Link to={post.fields.slug} className="featured-post-img">
+                        <img
+                            className="w-full h-auto block rounded shadow-lg"
+                            src={post.frontmatter.featuredImage.publicURL}
+                        />
+                    </Link>
                 </div>
             )}
         </div>
