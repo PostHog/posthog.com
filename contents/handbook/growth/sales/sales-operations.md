@@ -1,0 +1,71 @@
+---
+title: Sales operations
+sidebar: Handbook
+showTitle: true
+---
+
+## Overview
+
+This page outlines how we generally manage customers, specifically those who are interested in our Scale plans. Our Cloud plan is self-serve, and may be covered by its own section in the future, but doesn't require a specific guide at this stage.
+
+If you are looking for guidance on how to manage customers in HubSpot specifically, visit our [CRM page](/handbook/growth/sales/).
+
+## Process
+
+1. Customer emails us, usually hey@ or sales@, asking about one of our Scale plans (Free or Paid). 
+2. We respond quickly and to-the-point. We give specific and clear answers to questions, and do not hide information behind a call or demo. You should find out:
+    1. Their company's name if not obvious
+    2. Their approximate monthly events and/or MAUs
+    3. Who their cloud provider is - AWS, GCP etc.
+    4. If they have Helm Chart/Kubernetes (k8s) experience
+3. We'll usually do an intro call with Yakko (demo and technical questions) and Charles (setup process and pricing) next. The objective of this call is to help figure out with the customer what the best solution is for them, not to push a sale onto them. We have [demo guidelines here](/handbook/growth/sales/demos). For pricing, the most important things to emphasize are a) month-to-month billing only, no minimum contract and b) cost per event is _massively_ discounted at higher volumes. If multiple technical people are joining on the customer's side and they are a large company, you may want an infra engineer to join - only do this _very_ occasionally. 
+4. If it looks like the customer wants to go for Scale Paid, create [a Deal](/handbook/growth/sales/crm) in HubSpot to keep track of everything. Record your notes and tag the appropriate member of the [Infrastructure & Deployments Team](/handbook/people/team-structure/infrastructure) depending on the customer's timezone. 
+5. You should also set up a shared Slack channel to discuss implementation, as it's the easiest way to resolve any follow up questions. Add as many relevant people on PostHog's side as seems relevant - customers will have a better experience at this stage talking directly to engineers about implementation, not funnelling questions through a single point of contact. 
+6. We track implementation in a [GitHub project](https://github.com/orgs/PostHog/projects/10). The first 1-2 months are spent scaling the instance properly so we don't go too big and waste customers' money. 
+7. Once the customer is ready to begin event ingestion, this is the point at which we will ask for payment details, so we can start tracking usage. Paolo will generate a payment link in Stripe. 
+8. The final part of initial setup is to schedule a call to help them set up their first dashboards and ensure they are getting the most out of PostHog. Ongoing support is provided in the shared Slack channel. 
+
+### Figuring out the best solution for a customer
+
+Assuming PostHog is the best solution for a customer, you should look at their level of scale and if they have any specific privacy or security needs to determine the most appropriate plan for them.  
+
+- _Low volume, less technical_ - start with Cloud, which is free up to 1m monthly events and very fast to get going with. 
+- _Low volume, more technical_ - Open Source will be fine up to 10k MAUs. Beyond that, the product will still work but Postgres limitations at scale means performance will be degraded. 
+- _High volume, less technical_ - Cloud will be the best bet - pricing does increase at scale as we take on hosting costs, but the setup process and ongoing maintenance is very straightforward. 
+- _High volume, more technical_ - either Scale or Cloud. Scale will be more appealing for customers who need to keep control of their data for privacy or corporate policy reasons. The pricing for Scale is greatly discounted at higher volumes vs. Cloud as we don't pay hosting costs. 
+
+### What about Scale Free?
+
+We have recently started rolling out Scale Free. Our plan is to make it widely available as a config option in Open Source, but we're keeping them separate for now. Scale Free will be appealing to customers who need Clickhouse due to volume rather than Postgres, but are happy with 3 logins only and community-based support. 
+
+We have a short waiting list of customers waiting for deployment, so are currently prioritising those with 10k-1m MAUs, are on GCP and are familiar with Helm Charts/k8s. 
+
+## FAQs
+
+_Can I give a Scale customer a free trial?_
+
+No, because we don't need to - they can get up and running with our Scale Free or Cloud plans first if they want to try out PostHog for free. You'll find a lot of inbound customers will do this anyway before talking to us about Scale. 
+
+_Can I give a Scale customer a discount?_
+
+Again, no need - we already have usage-based pricing which is _heavily_ discounted at higher volumes, and we only bill month-to-month, so customers don't need to feel locked in to a longer term contract. 
+
+_How do I work with a customer who wants to sign an MSA?_
+
+This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes. We have a contract version of our standard terms and conditions that we can use for this - ask Charles. 
+
+_How do I find out a customer's usage?_
+
+[Go to this link](https://app.posthog.com/events?properties=%5B%7B%22key%22%3A%22users_who_logged_in__0__email%22%2C%22value%22%3A%22xyz%22%2C%22operator%22%3A%22icontains%22%2C%22type%22%3A%22event%22%7D%5D) and replace 'xyz' with the customer's company name. 
+
+_Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
+
+Unfortunately we don't have a way to do this easily right now. If they have been on a Scale Paid plan, we can do this manually. If they are coming from the Open Source version, we suggest that they just restart on Cloud. 
+
+_Can a customer transfer from Cloud to Scale Paid?_
+
+Yes - we offer 2 months free of Scale Paid so we can run the migration in parallel. 
+
+_A Scale customer has experienced downtime while we're getting set up - have they lost their data?_
+
+Downtime means that queries won't load, but event ingestion will still continue to work fine. 
