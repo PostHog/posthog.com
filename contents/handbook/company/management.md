@@ -57,7 +57,7 @@ That's why it's important for managers to keep practising their craft.
 
 Management tasks do come first, as giving context to your team tends to have a multiplying effect vs getting one more PR out. After that though, it's back to work.
 
-## Anti silos
+## Anti-silos
 
 There are teams at PostHog that need to work across functions, so we have an anti-silo approach when it comes to the tasks that people work on.
 

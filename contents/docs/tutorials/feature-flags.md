@@ -3,7 +3,6 @@ title: How to Safely Roll Out New Features
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 <small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
 

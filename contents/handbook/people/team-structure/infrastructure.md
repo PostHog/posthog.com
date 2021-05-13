@@ -64,8 +64,8 @@ Concrete things we take responsibility over:
 ##### Cost 
 - Metric: Infra Costs 
 - Objective: Our costs should grow at a rate that is sublinear relative to scale
-### Dev Experience
-##### Dev Experience NPS (Infra)
+### Dev experience
+##### Dev experience NPS (Infra)
 - Metric: Developer experience (relating to infra) (maybe NPS?)
 - Objective: TBD (maybe NPS?)
 

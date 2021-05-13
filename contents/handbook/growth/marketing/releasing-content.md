@@ -1,5 +1,5 @@
 ---
-title: Releasing Content
+title: Releasing content
 sidebar: Handbook
 showTitle: true
 ---
@@ -10,7 +10,7 @@ We aim to regularly publish content in the form of videos and articles as part o
 
 As a result, we have formulated a loose strategy for how to approach publishing the content produced once it is ready to be exposed to the world.
 
-#### Suggested Workflow
+#### Suggested workflow
 
 1. If the content requires a visual element, create a [design request](https://posthog.com/handbook/company/working-with-design) (more than 24 hours in advance) to have a graphic produced. For example, if the content is a YouTube video, we'll make a thumbnail image. If it's a blog post, we'll create a post image that is featured at the top of the post.
 1. Make sure the content is actually live: If it is an article, ensure that the changes are reflected on the website following the merge of the pull request, which might take 10 to 30 minutes.

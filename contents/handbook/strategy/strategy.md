@@ -14,7 +14,7 @@ Our best users look a little like this:
 * They may work in a startup, scaleup or enterprise
 * Their company builds software, at least in some capacity, and cares about the end users of their software
 
-## How we'll meet their needs
+## How we'll meet their needs
 
 We're consolidating a fragmented set of tools in the market that help software teams understand and act on user behavior. Companies already know why product analytics matter.
 
@@ -30,7 +30,7 @@ We've had ~3,000 deployments since we started.
 
 PostHog helps power products as diverse as those in airlines and banks, to indie gamers making it more fun to protect earth from aliens to underwear startups working on their retention. Across all devices.
 
-## The future
+## The future
 
 Software is a good chunk through eating the World.
 

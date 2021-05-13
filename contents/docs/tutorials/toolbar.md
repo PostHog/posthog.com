@@ -3,7 +3,6 @@ title: Visualizing User Behavior - Toolbar
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 <small class="note-block centered">_Estimated Reading Time: 6 minutes ☕☕_</small>
 

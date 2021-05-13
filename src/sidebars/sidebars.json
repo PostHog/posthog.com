@@ -271,17 +271,13 @@
             "handbook/strategy/strategy",
             "handbook/strategy/business-model",
             "handbook/strategy/roadmap",
-            "handbook/strategy/prioritization",
-            "handbook/strategy/investor-updates"
+            "handbook/strategy/prioritization"
         ]
     },
     {
         "entry": "Getting started",
         "name": "Getting started",
-        "items": [
-            "handbook/getting-started/start-here",
-            "handbook/getting-started/meetings"     
-                 ]
+        "items": ["handbook/getting-started/start-here", "handbook/getting-started/meetings"]
     },
     {
         "entry": "How we work",
@@ -400,18 +396,6 @@
             "handbook/engineering/beginners-guide/getting-started",
             "handbook/engineering/beginners-guide/developer-workflow",
             "handbook/engineering/beginners-guide/technologies-to-learn"
-        ]
-    },
-    {
-        "entry": "Strategy",
-        "name": "Strategy",
-        "items": [
-            "handbook/strategy/strategy",
-            "handbook/strategy/business-model",
-            "handbook/strategy/roadmap",
-            "handbook/strategy/prioritization",
-            "handbook/strategy/investors",
-            "handbook/strategy/investor-updates"
         ]
     }
 ]

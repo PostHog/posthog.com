@@ -45,6 +45,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 - Mo Shehu (Content Marketer)
 
-## [People & Culture](people)
+## [People & culture](people)
 
 - [Eltje Lange](/handbook/people/team#eltje-lange-people-and-talent) (People and Talent)

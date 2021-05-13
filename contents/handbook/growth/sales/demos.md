@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Giving Great Demos
+## Giving great demos
 
 Always focus on delivering what the customer needs. Sometimes that will mean sending them to a competitor or turning them down. 
 
-### Initial Call
+### Initial call
 
 The purpose of this call is to work out what the potential customer needs. 
 

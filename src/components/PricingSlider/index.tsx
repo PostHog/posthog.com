@@ -44,7 +44,7 @@ export const PricingSlider = () => {
                 </div>
                 <br />
                 <br />
-                <div style={{ fontSize: '1rem', textAlign: 'right' }}>
+                <div className="text-right -mt-16 text-base">
                     <span className="text-muted">Price:</span> <b>${finalCost}</b>/month
                 </div>
             </div>
