@@ -3,7 +3,6 @@ title: Deploying to Microsoft Azure
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 
 ## Why Azure

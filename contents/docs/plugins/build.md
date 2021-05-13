@@ -3,7 +3,6 @@ title: Build Your Own
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 > **Note:** It's worth familiarizing yourself with the [architecture of PostHog plugins](/docs/plugins/architecture) before building your own. 
 

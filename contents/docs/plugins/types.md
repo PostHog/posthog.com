@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
 ## Installation
 
 To use the plugin types in your plugin, you can install them as follows:

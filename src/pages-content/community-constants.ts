@@ -1,5 +1,4 @@
 // org members are private, can't pull this in the frontend without a gh token
-
 export const ignoreContributors = new Set([
     'timgl',
     'mariusandra',
@@ -31,4 +30,5 @@ export const mvpWinners: Record<string, number> = {
     samcaspus: 1,
     oshura3: 1,
     adrienbrault: 1,
+    Rajakavitha1: 1,
 }

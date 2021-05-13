@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br />
-
 > **Note:** This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com following the rebrand. 
 
 ## Resources
