@@ -1,5 +1,5 @@
 ---
-date: 2020-08-03
+date: 2021-05-14
 title: Writing for Developers
 rootPage: /blog
 sidebar: Blog
