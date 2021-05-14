@@ -30,9 +30,9 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 Assuming PostHog is the best solution for a customer, you should look at their level of scale and if they have any specific privacy or security needs to determine the most appropriate plan for them.  
 
 - _Low volume, less technical_ - start with Cloud, which is free up to 1m monthly events and very fast to get going with. 
-- _Low volume, more technical_ - Open Source will be fine up to 10k MAUs. Beyond that, the product will still work but Postgres limitations at scale means performance will be degraded. 
+- _Low volume, more technical_ - Cloud still probably makes sense, unless they have privacy needs in which case Open Source will be fine up to 10k MAUs. Beyond 10k, Open Source will still work but Postgres limitations at scale means performance will be degraded. 
 - _High volume, less technical_ - Cloud will be the best bet - pricing does increase at scale as we take on hosting costs, but the setup process and ongoing maintenance is very straightforward. 
-- _High volume, more technical_ - either Scale or Cloud. Scale will be more appealing for customers who need to keep control of their data for privacy or corporate policy reasons. The pricing for Scale is greatly discounted at higher volumes vs. Cloud as we don't pay hosting costs. 
+- _High volume, more technical_ - Scale, as the price per event is greatly discounted at higher volumes vs. Cloud because we don't pay hosting costs. The only time Cloud makes sense here is if the customers wants absolutely zero hassle, doesn't have privacy needs and aren't budget-focused.
 
 ### What about Scale Free?
 
@@ -52,7 +52,9 @@ Again, no need - we already have usage-based pricing which is _heavily_ discount
 
 _How do I work with a customer who wants to sign an MSA?_
 
-This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes. We have a contract version of our standard terms and conditions that we can use for this - ask Charles. 
+This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes or to have the security of a locked-in contract from a pricing perspective. We have a contract version of our standard terms and conditions that we can use for this - ask Charles. 
+
+We'd only really look to do this with people spending $10k+ per month - we don't do it below this value because of the legal effort required.
 
 _How do I find out a customer's usage?_
 
@@ -64,7 +66,7 @@ Unfortunately we don't have a way to do this easily right now. If they have been
 
 _Can a customer transfer from Cloud to Scale Paid?_
 
-Yes - we offer 2 months free of Scale Paid so we can run the migration in parallel. 
+Yes - we offer 3 months free of Scale Paid so they can run both systems in parallel, tracking events in both places. That means when they switch off Cloud, they'll have 3 months of data to start with in Scale.
 
 _A Scale customer has experienced downtime while we're getting set up - have they lost their data?_
 
