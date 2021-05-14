@@ -1,7 +1,6 @@
 import React from 'react'
 import { CallToAction } from '../../CallToAction'
 import { Roadmap } from '../Roadmap'
-import { CornerBrackets } from '../../CornerBrackets'
 import { ContributorAvatars } from '../../ContributorAvatars'
 
 import checkImg from '../images/green-check.svg'
@@ -20,7 +19,7 @@ const FeatureBenefit = ({ feature, benefit }: { feature: string; benefit: string
 
 export const PrivateCloud = () => {
     return (
-        <div className="private-cloud pt-24 text-white text-center">
+        <div className="private-cloud text-white text-center">
             <div className="w-11/12 max-w-5xl mx-auto">
                 <h2>Host on your own private cloud</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
@@ -74,7 +73,6 @@ export const PrivateCloud = () => {
                                 width="full"
                                 href="https://github.com/posthog"
                             >
-                                <CornerBrackets color="purpleish" />
                                 Browse GitHub
                             </CallToAction>
                             <CallToAction

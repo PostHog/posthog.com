@@ -3,7 +3,6 @@ title: Retention
 sidebar: Docs
 showTitle: true
 ---
-<br />
 PostHog provides a Retention table to show you how many users return on subsequent days after visiting the website.
 <br />
 <br />

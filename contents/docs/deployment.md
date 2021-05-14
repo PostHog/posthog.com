@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
 
 Getting a shiny, running production environment of PostHog is probably one the first things you want to do! 
 

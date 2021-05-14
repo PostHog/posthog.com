@@ -10,6 +10,7 @@ hideAnchor: true
 - [Marius Andra (Team lead, Full Stack Engineer)](/handbook/company/team/#marius-andra-software-engineer)
 - [Michael Matloka (Full Stack Engineer)](/handbook/company/team/#michael-matloka-software-engineer)
 - [Yakko Majuri (DevRel + Full Stack Engineer)](/handbook/company/team/#yakko-majuri-technical-writer-and-developer)
+- [Neil Kakkar (Full Stack Engineer)](/handbook/people/team/#neil-kakkar-software-engineer)
 
 ## Mission
 

@@ -18,7 +18,7 @@ In the UK, we use [Royal London](https://www.royallondon.com/) as our pension pr
 
 [Deel](https://app.letsdeel.com/), our international payroll provider, is currently building a pension product for contractors as well, due for release in Q2 2021. We will aim to provide the same percentages as in the UK.
 
-### Private Health Insurance
+### Private health insurance
 
 We currently provide private health insurance in the US and UK. 
 
@@ -28,7 +28,7 @@ PostHog pays 75% of the premium of the platinum plan, and you pay the other 25%.
 
 In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
 
-### Mental Health Support
+### Mental health support
 
 We know that the world can feel a bit heavy from time to time and we want to make sure everyone gets support, if they need it. 
 
@@ -36,23 +36,23 @@ We launched [Spill](https://www.spill.chat/) in March 2021 to give everyone in t
 
 Spill is 100% free and confidential - they do not share any personal information with PostHog about who is using the service etc. The _only_ exception is if they believe that there is a threat to a person's safety or the safety of others. 
 
-### Unlimited Time off
+### Unlimited time off
 
 Everyone in the team has [unlimited, permissionless time off](/handbook/people/time-off). This means you won't need to ask for permission before requesting time off - our people platform [CharlieHR](https://posthog.charliehr.com/) will autoapprove your request.  
 
 We also offer generous [parental leave](/handbook/people/time-off#parental-leave) for new parents. 
 
-### Learning and Development
+### Learning and development
 
 We currently offer a [Training budget](/handbook/people/training#training-budget) and [free books](/handbook/people/training#books) - you can find more on the relevant pages.  
 
-### Equipment and Co-working
+### Equipment and co-working
 
 As we are fully remote, we provide [all equipment](/handbook/people/spending-money#equipment) you need to have an ergonomic setup at home to be as productive as possible. We provide all team members with a company card for this purpose.
 
 If you ever need change of scenery, we offer $200/month budget towards [coworking or café working](/handbook/people/spending-money#work-space). 
 
-### Off-sites and Team Socials
+### Off-sites and team socials
 
 Ideally, we would like to meet up in person at twice a year. The team was able to meet up in Italy in September 2020, but we haven't been able to travel since, so we are planning a virtual off-site in April 2021 instead (and hopefully a real one on Autumn 2021!).
 

@@ -1,5 +1,5 @@
 ---
-title: Diversity and Inclusion
+title: Diversity and inclusion
 sidebar: Handbook
 showTitle: true
 ---

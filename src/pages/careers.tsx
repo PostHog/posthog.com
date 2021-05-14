@@ -32,7 +32,7 @@ const IndexPage = () => {
                 <WorkingAtPostHog />
                 <OpenRoles />
             </div>
-            <Footer onPostPage={false} showNewsletter={false} backgroundClass="careers-footer" />
+            <Footer showNewsletter={false} backgroundClass="careers-footer" />
             <GetStartedModal />
         </>
     )

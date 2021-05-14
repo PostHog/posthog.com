@@ -1,5 +1,5 @@
 ---
-title: Bug Prioritization
+title: Bug prioritization
 sidebar: Handbook
 showTitle: true
 ---

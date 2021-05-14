@@ -1,3 +1,4 @@
+import { WorkableSnippet } from 'components/WorkableSnippet'
 import React, { useEffect } from 'react'
 import { Structure } from '../../Structure'
 import './style.scss'
@@ -29,7 +30,7 @@ export const OpenRoles = () => {
                     leadTextClassName="opacity-80"
                 />
 
-                <div id="whr_embed_hook"></div>
+                <WorkableSnippet />
                 <div className="clear-both"></div>
 
                 <div className="mt-12 max-w-xl mx-auto text-gray-100 text-opacity-90 text-black p-16">

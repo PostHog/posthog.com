@@ -21,14 +21,14 @@ const IndexPage = () => {
                 title="PostHog - Open-Source Product Analytics"
                 description="Self-hosted product analytics stack, to deploy on your infrastructure."
             />
-            <Header onPostPage={false} isBlogArticlePage={false} isHomePage={true} menuActiveKey="active" />
+            <Header onPostPage={false} menuActiveKey="active" onHomePage />
             <Hero />
             <Features />
             <Blockquote />
             <PrivateCloud />
             <Tutorials />
             <RecentBlogPosts />
-            <Footer showNewsletter={true} />
+            <Footer showNewsletter />
             <GetStartedModal />
         </div>
     )

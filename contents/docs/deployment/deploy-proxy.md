@@ -3,7 +3,6 @@ title: Deploying a Reverse Proxy to Posthog Cloud
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 
 ## Why host this reverse proxy? 

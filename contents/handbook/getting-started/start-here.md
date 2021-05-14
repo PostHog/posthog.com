@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: Start here
 sidebar: Handbook
 showTitle: true
 ---
