@@ -174,11 +174,11 @@ const PricingPage = () => {
                                                 <td>
                                                     Postgres database only.
                                                     <br />
-                                                    ~10k users/month
+                                                    Works well for up to 10k users/month
                                                 </td>
                                                 <td>
                                                     Clickhouse database. <br />
-                                                    ~1m users/month
+                                                    Works well for up to 1m users/month
                                                 </td>
                                                 <td>Scalable Clickhouse database</td>
                                             </tr>
