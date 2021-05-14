@@ -38,7 +38,7 @@ Assuming PostHog is the best solution for a customer, you should look at their l
 
 We have recently started rolling out Scale Free. Our plan is to make it widely available as a config option in Open Source, but we're keeping them separate for now. Scale Free will be appealing to customers who need Clickhouse due to volume rather than Postgres, but are happy with 3 logins only and community-based support. 
 
-We have a short waiting list of customers waiting for deployment, so are currently prioritising those with 10k-1m MAUs, are on GCP and are familiar with Helm Charts/k8s. 
+We have a short waiting list of customers waiting for deployment, so are currently prioritizing those with 10k-1m MAUs, are on GCP and are familiar with Helm Charts/k8s. 
 
 ## FAQs
 
