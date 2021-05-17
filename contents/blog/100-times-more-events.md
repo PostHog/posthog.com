@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-Today, we're announcing that we're giving away 1 million ingested events/month usage on [Cloud](https://app.posthog.com/signup), for free. That's up from 10k/month that we were offering before.
+Today, we're announcing that we're giving away 1 million ingested events/month on [Cloud](https://app.posthog.com/signup), for free. That's up from 10k/month that we were offering before.
 
 ## More free stuff?! You're already pretty generous!
 
@@ -17,9 +17,9 @@ The magic of an [open core business model](https://www.youtube.com/watch?v=L1Ovb
 
 Behold the virtuous circle:
 
-1. Create valuable free product and a community around it. Collaborate with the community. The free product gets more valuable and more popular as a result. The community grows faster and faster.
+1. Create a valuable free product and a community around it. Collaborate with the community. The free product gets more valuable and more popular as a result. The community grows faster and faster.
 1. Larger companies using the free product think the paid product looks valuable. They email asking to buy [PostHog Scale](/pricing) or they increase their usage to 10s or 100s of millions of events/month.
-1. Get money from paid product, to get even [more]()(raising-3m-for-os) [money](posthog-announces-9-million-dollar-series-A) from venture capitalists, go to step 1.
+1. Get money from paid product, to get even [more money (raising-3m-for-os)](/blog/posthog-announces-9-million-dollar-series-A) from venture capitalists, go to step 1.
 
 ## Who we made this change for
 
@@ -44,7 +44,7 @@ If we're doing our jobs right, *your* (!) product may get really popular. Oh no!
 
 We sell to you when you get to this "champagne problem". Word of caution: it qualifies as humble bragging if you come to us because you're getting too popular ;)
 
-When your product is successful, you'll usually have more event volumes, and a larger team - you will need features around collaboration or even compliance if you become a big enterprise one day. At that point, you'll want [PostHog Scale](/pricing).
+When your product is successful, you'll usually have more event volume, and a larger team - you will need features around collaboration or even compliance if you become a big enterprise one day. At that point, you'll want [PostHog Scale](/pricing).
 
 Serious sidenote: we don't lock you in - we're working on making our Open-Source product much more scalable, so you can at least do the basic analytics even with very high usage, without spending anything. That'll come later in the year.
 
@@ -78,7 +78,7 @@ The exception is if you wish to move to [PostHog Scale](/pricing) (paid), in whi
 
 You can do this - we provide a little manual support in this case. Just [speak to us](sales@posthog.com).
 
-## Does this mean PostHog is focussing more on cloud then?
+## Does this mean PostHog is focusing more on cloud then?
 
 Oh subtitle, you couldn't be more wrong.
 
