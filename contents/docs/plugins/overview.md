@@ -48,8 +48,6 @@ By default, PostHog does not enforce schemas on events it receives. However, a p
 
 ## Using Plugins
 
-> **Note:** Plugins are currently only available on self-hosted instances, but we are working to also make them available on PostHog Cloud.
-
 To use plugins on your self-hosted instance, head over to 'Project' -> 'Plugins' on the left sidebar:
 
 ![Plugins Screenshot](../../images/blog/array/plugins.png)
