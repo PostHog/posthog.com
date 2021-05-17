@@ -39,9 +39,14 @@ const FeaturedPost = ({ post }: { post: PostType }) => {
         <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
             <div className="w-full md:w-1/2 md:pr-8 py-4 mx-auto">
                 <span className="text-gray-400 text-xs uppercase">Latest Post</span>
-                <header className="text-4xl text-gray-900 dark:text-gray-100 font-gosha mt-1">
-                    {post.frontmatter.title}
-                </header>
+                <h2 className="text-4xl text-gray-900 dark:text-gray-100 font-gosha my-1">
+                    <Link
+                        to={post.fields.slug}
+                        className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                    >
+                        {post.frontmatter.title}
+                    </Link>
+                </h2>
                 <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed font-inter">
                     {post.excerpt}
                 </div>
