@@ -30,7 +30,8 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `ALLOWED_HOSTS`            | A list of strings representing the host/domain names that Django can serve. [More info](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).  | `*` (all)
 | `STATSD_HOST`              | Host of a running StatsD daemon (e.g. 127.0.0.1)                                                  | `None`
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
-| `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | `None`
+| `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | `""`
+| `CAPTURE_INTERNAL_METRICS` | Send some internal instrumentation to your own posthog instance, exposed via `/instance/status` page. For EE only. | `False`
 | `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing [sign up with GitHub](/docs/features/log-in-with-github-gitlab).                                                      | 
 | `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing [sign up with GitHub](/docs/features/log-in-with-github-gitlab).                                                     | 
 | `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing [sign up with GitLab](/docs/features/log-in-with-github-gitlab).                                                        | 
