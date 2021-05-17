@@ -58,7 +58,7 @@ It costs quite a bit to provide this free usage to people, so this felt fair to 
 
 ### Current open source user -> PostHog Cloud?
 
-If you are currently hosting PostHog Open Source and having read this would rather use PostHog Cloud for greater simplicity and enhanced reliability, then it may make sense to move. First of all, check above if you are one of the users we are targetting with this change.
+If you are currently hosting PostHog Open Source and having read this would rather use PostHog Cloud for greater simplicity and enhanced reliability, then it may make sense to move. First of all, check above if you are one of the users we are targeting with this change.
 
 We _haven't_ built a way to automatically migrate your data over - that would have been non-trivial to build, and we didn't want to bottleneck releasing this change. However, after talking with many of you - our recommended way to migrate is this:
 
