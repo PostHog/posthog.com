@@ -50,7 +50,8 @@ module.exports = {
             },
             fontSize: {
                 '2xs': '0.65rem',
-                'base-larger': '15px',
+                base: '.875rem',
+                'base-larger': '.933rem',
             },
             colors: {
                 primary: 'rgba(255, 99, 39, 0.9)',
@@ -62,6 +63,7 @@ module.exports = {
                 'offwhite-purple': '#F4F1F8',
                 'baby-blue': '#CDD0FF',
                 'deep-blue': '#160431',
+                'royal-blue': '#232D69',
                 footer: '#08042f',
             },
             minHeight: {

@@ -12,21 +12,65 @@ export const PricingTable = () => {
                 {/* start: Cloud plan tab */}
                 <div className="flex justify-center">
                     <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col md:flex-row items-center text-white">
-                        <div className="flex-0 border border-white rounded p-4">
-                            <h3>PostHog Cloud</h3>
+                        <div className="flex-0 border border-white border-opacity-10 rounded p-8 bg-royal-blue">
+                            <svg
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 42 24"
+                                width="42"
+                                height="24"
+                            >
+                                <path
+                                    d="M0 17.143L6.867 24H0v-6.857zm0-1.714L8.583 24h6.867L0 8.572v6.857zm0-8.571L17.166 24h6.866L0 0v6.858zm8.583 0L25.75 24v-6.857L8.583.001v6.857zM17.166 0v6.857l8.583 8.57V8.573L17.166 0z"
+                                    fill="#fff"
+                                />
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M36.51 19.318a6.635 6.635 0 004.689 1.939V24H26.964V9.784l9.547 9.534zm-4.053.567a1.372 1.372 0 11-2.744-.001 1.372 1.372 0 012.744.002z"
+                                    fill="#fff"
+                                />
+                                <path
+                                    d="M0 24h6.866L0 17.143V24zM8.584 8.572L0 0v6.857l8.583 8.57V8.573zM0 8.571v6.857L8.583 24v-6.857L0 8.57zM17.166 8.571L8.583 0v6.857l8.583 8.571V8.571z"
+                                    fill="#fff"
+                                />
+                                <path
+                                    d="M8.582 24h6.866l-6.866-6.857V24zM8.582 8.571v6.857L17.165 24v-6.858l-8.583-8.57z"
+                                    fill="#fff"
+                                />
+                            </svg>
+                            <h3 className="text-lg my-2">PostHog Cloud</h3>
                             <p className="opacity-50">Turnkey, hosted solution</p>
-                            <ul className="list-none mt-4">
-                                <li className="flex align-center">
-                                    <img src={checkIcon} alt="checkmark" className="flex-0 mr-2" />
-                                    <span>Hosted by PostHog</span>
+                            <ul className="list-none text-white text-opacity-70 text-sm pl-0">
+                                <li className="flex align-center mb-2">
+                                    <img
+                                        src={checkIcon}
+                                        alt="checkmark"
+                                        width="20"
+                                        height="20"
+                                        className="flex-0 mr-2"
+                                    />
+                                    <span className="">Hosted by PostHog</span>
+                                </li>
+                                <li className="flex align-center mb-2">
+                                    <img
+                                        src={checkIcon}
+                                        alt="checkmark"
+                                        width="20"
+                                        height="20"
+                                        className="flex-0 mr-2"
+                                    />
+                                    <span className="">Automatic upgrades</span>
                                 </li>
                                 <li className="flex align-center">
-                                    <img src={checkIcon} alt="checkmark" className="flex-0 mr-2" />
-                                    <span>Automatic upgrades</span>
-                                </li>
-                                <li className="flex align-center">
-                                    <img src={checkIcon} alt="checkmark" className="flex-0 mr-2" />
-                                    <span>Start using immediately</span>
+                                    <img
+                                        src={checkIcon}
+                                        alt="checkmark"
+                                        width="20"
+                                        height="20"
+                                        className="flex-0 mr-2"
+                                    />
+                                    <span className="">Start using immediately</span>
                                 </li>
                             </ul>
 
@@ -42,7 +86,7 @@ export const PricingTable = () => {
                                 Get started {/* use 'primary' button, like in landingpage hero */}
                             </div>
 
-                            <div className="text-center text-xs mt-2">
+                            <div className="text-center text-xs text-opacity-75 mt-2">
                                 No credit card required.
                                 <br />
                                 Completely self-serve.
