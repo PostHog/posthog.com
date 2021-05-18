@@ -59,7 +59,9 @@ export const CallToAction = ({
     onClick,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
-        <span className={`${iconBg} icon inline-block bg-opacity-10 bg-yellow-100 rounded rounded-sm px-3 py-2 mr-8`}>
+        <span
+            className={`${iconBg} icon inline-block bg-opacity-10 bg-yellow-100 rounded rounded-sm pl-3 pr-8 py-2 mr-8`}
+        >
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
         </span>
     ) : null
@@ -71,7 +73,7 @@ export const CallToAction = ({
     const innerHtml = (
         <>
             {iconNode}
-            <span className="mx-auto pr-8 button-label">{children}</span>
+            <span className="mx-auto button-label">{children}</span>
         </>
     )
 
