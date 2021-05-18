@@ -16,7 +16,7 @@ This includes giving feedback [to each other](/handbook/company/values#step-on-t
 
 We run full team 360 degree feedback session as part of every off-site (we usually do them every 6 months). The session gives everyone the opportunity to give and receive feedback to everyone else.
 
-With us growing the team, we will be splitting the session into smaller groups in the future, to ensure everyone gets the most ouf of this session. 
+With us growing the team, we will be splitting the session into smaller groups in the future, to ensure everyone gets the most out of this session. 
 
 ### Ground rules
 - Everybody participates! You should have a think and prepare in advance - don't try and wing it on the day.
