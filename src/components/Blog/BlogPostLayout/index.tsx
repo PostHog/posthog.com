@@ -13,12 +13,18 @@ interface BlogPostLayoutProps {
     pageTitle: string
     children: any
     featuredImage?: string | null | undefined
+    blogArticleSlug: string
 }
 
-export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostLayoutProps): JSX.Element {
+export function BlogPostLayout({
+    pageTitle,
+    children,
+    featuredImage,
+    blogArticleSlug,
+}: BlogPostLayoutProps): JSX.Element {
     return (
-        <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
-            <Header onPostPage isBlogArticlePage />
+        <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
+            <Header onPostPage blogArticleSlug={blogArticleSlug} />
             <div className="flex justify-between items-center w-full px-4 mb-12">
                 <div className="flex-grow">
                     <Link
@@ -46,7 +52,7 @@ export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostL
 
             <PosthogAnnouncement />
             <GetStartedModal />
-            <BlogFooter />
+            <BlogFooter blogArticleSlug={blogArticleSlug} />
             <Footer onPostPage />
         </div>
     )

@@ -4,7 +4,7 @@ import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
 import './style.scss'
 
-interface PostType {
+export interface PostType {
     id: string
     excerpt: string
     fields: {
