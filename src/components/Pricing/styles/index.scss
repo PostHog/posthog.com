@@ -1,13 +1,9 @@
-@mixin star-background($gradient, $bg-position: center) {
-    background: url(../../Careers/images/stars.png), $gradient;
-    background-position: $bg-position;
+#gatsby-focus-wrapper > .pricing-hero {
+    background: url(../../../images/pricing-background.png) top center #0e0d3c;
 
-    @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-        background: url(../../Careers/images/stars@2x.png), $gradient;
-        background-size: 100%;
+    h1 {
+        background: -webkit-linear-gradient(#5dc7d8, #0e90a5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
-}
-
-.pricing-hero {
-    @include star-background(linear-gradient(180deg, #070822 0%, #070822 100%), left);
 }

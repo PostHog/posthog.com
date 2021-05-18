@@ -19,7 +19,8 @@ export const PricingHero = () => {
                     title="Simple pricing for powerful analytics"
                     titleTag="h1"
                     titleClassName="mb-2"
-                    leadText="There are different ways to run PostHog, but you’ll get the same product suite."
+                    leadText="There are different ways to run PostHog, but you'll get the same product suite."
+                    style
                 />
             </Structure.Section>
         </div>

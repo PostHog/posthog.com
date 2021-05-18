@@ -57,10 +57,11 @@ module.exports = {
                 'primary-dark': 'rgba(218, 72, 16, 0.9)',
                 purpleish: '#802f6a',
                 'purpleish-dark': '#72286E',
-                orange: '#FFB877',
+                orange: '#EF7632',
                 'darkmode-purple': '#220f3f',
                 'offwhite-purple': '#F4F1F8',
                 'baby-blue': '#CDD0FF',
+                'deep-blue': '#160431',
                 footer: '#08042f',
             },
             minHeight: {

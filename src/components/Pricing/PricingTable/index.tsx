@@ -11,7 +11,7 @@ export const PricingTable = () => {
             <Structure.Section width="4xl" className="py-12">
                 {/* start: Cloud plan tab */}
                 <div className="flex justify-center">
-                    <div className="border border-white rounded p-8 inline-flex flex-col md:flex-row items-center text-white">
+                    <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col md:flex-row items-center text-white">
                         <div className="flex-0 border border-white rounded p-4">
                             <h3>PostHog Cloud</h3>
                             <p className="opacity-50">Turnkey, hosted solution</p>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { SEO } from '../components/seo'
+import { CallToAction } from 'components/CallToAction'
 import { PricingHero } from '../components/Pricing/PricingHero'
 import { PricingTable } from '../components/Pricing/PricingTable'
 import { RocketHorizontalRule } from '../components/RocketHorizontalRule'
@@ -18,8 +19,13 @@ const PricingNew = (): JSX.Element => {
             <PricingHero />
             <div className="flex justify-center ">
                 {/* needs to tab like in current pricing page */}
-                <div className="px-4 py-2 bg-orange text-white">Cloud</div>
-                <div className="px-4 py-2 bg-white">Self-hosted</div>
+                {/* and "active=true" on current tab. need help with if statement in CallToAction (white border unless active=true) */}
+                <CallToAction type="button" active="true" width="auto" icon="none" href="#" className="mr-4">
+                    Cloud
+                </CallToAction>
+                <CallToAction type="button" active="false" width="auto" icon="none" href="#">
+                    Self-hosted
+                </CallToAction>
             </div>
             <PricingTable />
             <RocketHorizontalRule />

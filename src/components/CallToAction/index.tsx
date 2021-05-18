@@ -24,6 +24,7 @@ interface CallToActionProps {
     children: any
     width?: string
     href?: string
+    active?: string
     to?: string
 }
 
@@ -67,8 +68,9 @@ export const CallToAction = ({
     ) : null
 
     const widthClass = `w-${width}`
+    const activeClass = `border-orange bg-none text-orange`
     const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between text-sm relative`
-    const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
+    const classList = mergeClassList(baseClasses, activeClass, buttonTypeClasses[type], className)
 
     const innerHtml = (
         <>
