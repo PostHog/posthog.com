@@ -25,7 +25,7 @@ interface LayoutProps {
     onPostPage?: boolean
     isDocsPage?: boolean
     isHomePage?: boolean
-    isBlogArticlePage?: boolean
+    blogArticleSlug?: string
     children?: any
     className?: string
     containerStyle?: Record<string, any>
@@ -35,7 +35,7 @@ interface LayoutProps {
     onBlogPage?: boolean
 }
 
-const BlogHeaderContent = ({ title }: { title: string }) => (
+const BlogHeaderContent = ({ title }: { title: string }): JSX.Element => (
     <>
         <h1 className="text-gray-900 center">{title}</h1>
         <p className="text-gray-900 text-base center w-5/6">
@@ -49,14 +49,14 @@ const Layout = ({
     onPostPage = false,
     pageTitle = '',
     isDocsPage = false,
-    isBlogArticlePage = false,
+    blogArticleSlug,
     children,
     className = '',
     containerStyle = {},
     featuredImage = '',
     headerBackgroundTransparent = false,
     onBlogPage = false,
-}: LayoutProps) => {
+}: LayoutProps): JSX.Element => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
 
@@ -77,8 +77,8 @@ const Layout = ({
         }
     }, [])
 
-    return isBlogArticlePage ? (
-        <BlogPostLayout pageTitle={pageTitle} featuredImage={featuredImage}>
+    return blogArticleSlug ? (
+        <BlogPostLayout pageTitle={pageTitle} featuredImage={featuredImage} blogArticleSlug={blogArticleSlug}>
             {children}
         </BlogPostLayout>
     ) : (
@@ -86,10 +86,10 @@ const Layout = ({
             <Header
                 onPostPage={onPostPage}
                 transparentBackground={headerBackgroundTransparent}
-                onBlogPage={isBlogArticlePage || onBlogPage}
+                onBlogPage={!!blogArticleSlug || onBlogPage}
             />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
-                {onPostPage && !sidebarHide && !isBlogArticlePage && (
+                {onPostPage && !sidebarHide && !blogArticleSlug && (
                     <AntdLayout.Sider
                         width="300"
                         className="sideBar display-desktop"
@@ -100,12 +100,12 @@ const Layout = ({
                     </AntdLayout.Sider>
                 )}
                 <AntdLayout id="ant-layout-content-wrapper" style={{ background: '#ffffff' }}>
-                    {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
+                    {onPostPage && !blogArticleSlug && (!anchorHide || !sidebarHide) && (
                         <span className="display-mobile">
                             <ResponsiveTopBar />
                         </span>
                     )}
-                    {isBlogArticlePage && (
+                    {blogArticleSlug && (
                         <>
                             <div className="blogHeaderTitle display-desktop">
                                 <BlogHeaderContent title={pageTitle} />
@@ -114,7 +114,7 @@ const Layout = ({
                     )}
 
                     {onPostPage &&
-                        (!isBlogArticlePage ? (
+                        (!blogArticleSlug ? (
                             <div className="post-page-sub-header">
                                 <div className="post-page-sub-header-inner">
                                     <span style={{ paddingRight: isDocsPage ? 5 : 30 }}>
@@ -132,14 +132,14 @@ const Layout = ({
                         className={
                             'layout ' +
                             (onPostPage ? 'docsPageLayout ' : 'notDocsLayout ') +
-                            (isBlogArticlePage ? 'blogPageLayout ' : '') +
+                            (blogArticleSlug ? 'blogPageLayout ' : '') +
                             (isDocsPage && 'docs-only-layout')
                         }
                         id={onPostPage ? 'docs-content-wrapper' : ''}
                         style={{ backgroundColor: '#ffffff' }}
                     >
                         <AntdLayout.Content>
-                            {isBlogArticlePage && (
+                            {blogArticleSlug && (
                                 <div className="display-mobile">
                                     <BlogHeaderContent title={pageTitle} />
                                     <br />
@@ -167,9 +167,8 @@ const Layout = ({
                     </AntdLayout>
                 </AntdLayout>
             </AntdLayout>
-            <AntdLayout style={{ background: '#ffffff' }}>
-                {isBlogArticlePage && <BlogFooter />}
-                <Footer onPostPage={onPostPage} />
+            <AntdLayout>
+                <Footer />
             </AntdLayout>
             <PosthogAnnouncement />
             <GetStartedModal />

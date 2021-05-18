@@ -23,7 +23,7 @@ function Template({
 
     const [runningInBrowser, setRunningInBrowser] = useState(false)
     const { markdownRemark } = data // data.markdownRemark holds our post data
-    const { frontmatter, html, excerpt, id } = markdownRemark
+    const { frontmatter, html, excerpt, id, fields } = markdownRemark
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -36,19 +36,19 @@ function Template({
     if (sidebarEntry !== frontmatter.sidebar) setSidebarContentEntry(frontmatter.sidebar)
 
     const isDocsPage = frontmatter.sidebar === 'Docs'
-    const isBlogArticlePage = frontmatter.sidebar === 'Blog'
+    const blogArticleSlug = frontmatter.sidebar === 'Blog' ? fields.slug : undefined
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
     return (
-        <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
+        <div className={'post-page ' + (!blogArticleSlug ? 'post-page-wrapper' : '')}>
             <Layout
                 onPostPage
-                isBlogArticlePage={isBlogArticlePage}
+                blogArticleSlug={blogArticleSlug}
                 pageTitle={frontmatter.title}
                 featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
-                onBlogPage={isBlogArticlePage}
+                onBlogPage={!!blogArticleSlug}
             >
                 <SEO
                     title={

@@ -23,7 +23,7 @@ export interface LibraryPluginType {
 }
 
 export interface MenuProps {
-    isBlogArticlePage?: boolean
+    blogArticleSlug?: string
     isHomePage?: boolean
     activeKey: string
 }

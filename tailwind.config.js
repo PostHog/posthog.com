@@ -44,9 +44,9 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
-                button: ['Osiris'],
-                nav: ['Osiris'],
-                osiris: ['Osiris'],
+                button: ['Osiris', 'sans-serif'],
+                nav: ['Osiris', 'sans-serif'],
+                osiris: ['Osiris', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',
@@ -61,7 +61,7 @@ module.exports = {
                 'darkmode-purple': '#220f3f',
                 'offwhite-purple': '#F4F1F8',
                 'baby-blue': '#CDD0FF',
-                footer: '#08042f',
+                footer: '#220f3f',
             },
             minHeight: {
                 780: '780px',
