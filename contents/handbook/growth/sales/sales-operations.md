@@ -38,6 +38,9 @@ Assuming PostHog is the best solution for a customer, you should look at their l
 
 We have recently started rolling out Scale Free. Our plan is to make it widely available as a config option in Open Source, but we're keeping them separate for now. Scale Free will be appealing to customers who need Clickhouse due to volume rather than Postgres, but are happy with 3 logins only and community-based support. 
 
+By contrast, Scale Paid is for an entire team to adopt - customers will have engineering and product management all on the platform, and perhaps marketing/execs. Paid has premium features around collaboration - such as user permissions so people can't delete everything, multiple projects to keep data tidy, basically functionality to keep things running smoothly when you have lots of logins.
+
+
 We have a short waiting list of customers waiting for deployment, so are currently prioritizing those with 10k-1m MAUs, are on GCP and are familiar with Helm Charts/k8s. 
 
 ## FAQs
@@ -71,3 +74,20 @@ Yes - we offer 3 months free of Scale Paid so they can run both systems in paral
 _A Scale customer has experienced downtime while we're getting set up - have they lost their data?_
 
 Downtime means that queries won't load, but event ingestion will still continue to work fine. 
+
+_What's the difference between Postgres and Clickhouse?_
+
+Postgres you can write huge volumes to, but for analytics queries it's very slow once a team has thousands of users or more. The advantage is that it's super easy to deploy - so a good way to ie get a small project in a huge enterprise up and running. However, you you can't migrate from Postgres to Clickhouse (since the data format is different later).
+
+_What privacy features does PostHog offer?_
+
+- Self-hosting so no data needs to go to a 3rd party
+- You can block Auto Capture on certain elements
+- You can use PostHog without cookies
+- You can mask IPs
+- We make it trivial to delete a user's data if requested to do so
+
+_What plugins are available?_
+
+We have the [full list here](https://posthog.com/plugins/). We also accept plugins built by the community, which we audit first before adding to the list. 
+
