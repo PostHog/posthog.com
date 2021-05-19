@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br />
-
 ## Self-serve
 
 We believe this approach will lead to the best product for end users, which is how we'll build the best company.

@@ -4,8 +4,13 @@ import { Structure } from '../Structure'
 import { PostCard } from '../PostCard'
 import { BlogPosts } from '../Blog/BlogPosts'
 import './style.scss'
+import { PostType } from '../PostCard/PostCard'
 
-export function BlogFooter() {
+export interface BlogFooterProps {
+    blogArticleSlug: string
+}
+
+export function BlogFooter({ blogArticleSlug }: BlogFooterProps): JSX.Element {
     return (
         <Structure.Section width="4xl">
             <NewsletterForm
@@ -15,7 +20,8 @@ export function BlogFooter() {
 
             <BlogPosts
                 render={(posts) => {
-                    const postCards = posts
+                    const postCards = (posts as { node: PostType }[])
+                        .filter((post) => post.node.fields.slug !== blogArticleSlug)
                         .slice(0, 2)
                         .map((post) => <PostCard key={post.node.id} post={post.node} featured={false} />)
 

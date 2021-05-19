@@ -57,7 +57,7 @@ export const NewsletterForm = ({
                         </div>
                         <input
                             type="submit"
-                            className="button-primary mt-8 lg:mt-0 border-none cursor-pointer"
+                            className="button-primary mt-8 lg:mt-0 border-none cursor-pointer ml-1 px-3 py-2 rounded"
                             value="Subscribe"
                         />
                     </form>

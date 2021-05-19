@@ -44,9 +44,9 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
-                button: ['Osiris'],
-                nav: ['Osiris'],
-                osiris: ['Osiris'],
+                button: ['Osiris', 'sans-serif'],
+                nav: ['Osiris', 'sans-serif'],
+                osiris: ['Osiris', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',

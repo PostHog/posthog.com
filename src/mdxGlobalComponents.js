@@ -73,6 +73,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
+import { WorkableSnippet } from './components/WorkableSnippet'
 
 export const shortcodes = {
     Endpoint,
@@ -148,4 +149,5 @@ export const shortcodes = {
     StartNowButton,
     Structure,
     TableOfContents,
+    WorkableSnippet,
 }

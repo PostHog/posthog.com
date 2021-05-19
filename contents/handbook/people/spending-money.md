@@ -43,7 +43,12 @@ Make sure you forward digital invoices to Brex from your PostHog email address -
 
 - Buy something on your Revolut card.
 - If it's a digital invoice, just forward it to ukinvoices@posthog.com. If it's a physical receipt, take a picture and forward it to the same place.
-- You need to submit receipts for _all_ purchases.  
+- You need to submit receipts for _all_ purchases. 
+
+### Your personal card
+
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Eltje to purchase it for you on theirs in the first instance. 
+- If you do need to use your personal card, just send your receipt to Charles directly and he'll process a manual payment. 
 
 Accidentally bought something on the company card when it was a personal expense? Don't worry! Again, just let Charles know _as soon as you become aware_ and he will provide you with the relevant bank details for you to repay the company. 
 

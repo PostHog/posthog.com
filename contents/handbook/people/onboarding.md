@@ -387,6 +387,21 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
    </td>
    <td>
 <ul>
+  
+<li><code>[ ]</code>
+</li>
+</ul>
+   </td>
+  </tr>
+  <tr>
+   <td>[Sponsor a hedgehog](https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637) on their behalf!
+   </td>
+   <td>All
+   </td>
+   <td>Charles
+   </td>
+   <td>
+<ul>
 
 <li><code>[ ]</code>
 </li>
@@ -553,7 +568,7 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Google Voice - an admin will need to issue them a licence, add the company address and assign them a number, then invite <br />
 <input type="checkbox"/>  Any relevant job boards we advertise on <br />
 <input type="checkbox"/>  Gusto, Deel and/or CharlieHR admin access if they are involved in people ops <br />
-<input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) <br />
+<input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) - get them to [connect their inbox](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails) <br />
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br />
 
 ## PostHog buddy

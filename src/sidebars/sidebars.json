@@ -363,7 +363,9 @@
         "entry": "Sales",
         "name": "Sales",
         "items": [
+            "handbook/growth/sales/overview",
             "handbook/growth/sales/sales-operations",
+            "handbook/growth/sales/crm",
             "handbook/growth/sales/yc-onboarding",
             "handbook/growth/sales/demos",
             "handbook/growth/sales/billing"

@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
 We love contributions to PostHog, big or small.
 
 ## Reporting Bugs or Issues

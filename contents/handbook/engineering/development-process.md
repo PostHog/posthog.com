@@ -62,6 +62,10 @@ Merge anytime. Friday afternoon? Merge.
 
 Our testing, reviewing and building process should be good enough that we're comfortable merging any time.
 
+## 7. Documenting
+
+If you built it, please [document it](https://posthog.com/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
+
 ## How to test
 
 See: [How to test](/docs/contributing#testing).

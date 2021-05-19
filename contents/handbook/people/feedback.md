@@ -16,7 +16,7 @@ This includes giving feedback [to each other](/handbook/company/values#step-on-t
 
 We run full team 360 degree feedback session as part of every off-site (we usually do them every 6 months). The session gives everyone the opportunity to give and receive feedback to everyone else.
 
-With us growing the team, we will be splitting the session into smaller groups in the future, to ensure everyone gets the most ouf of this session. 
+With us growing the team, we will be splitting the session into smaller groups in the future, to ensure everyone gets the most out of this session. 
 
 ### Ground rules
 - Everybody participates! You should have a think and prepare in advance - don't try and wing it on the day.
@@ -38,7 +38,7 @@ We currently run performance reviews every 6 months, based on your start date. W
 
 1. The People team adds recurring calendar invites to the calendar of the team member and their manager to kick off the performance review process.  
 2. The team member will schedule a 1 hour performance review meeting with their manager. A member of the people team may sit in on the occasional feedback meeting to see how well they are working as we get up and running. 
-3. In advance, the team member writes up a self-assessment in [this document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing), and their manager will fill out a similar assessment in [this document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing). You will likely want to include and reflect on feedback you've previously received in a full team 360 degree feedback session. 
+3. In advance, the team member writes up a self-assessment in [this document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing), and their manager will fill out a similar assessment in [this document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing). You will likely want to include and reflect on feedback you've previously received in a full team 360 degree feedback session. 
 4. Afterwards, the manager communicates back to the People team that the review is complete and what next steps are needed (if any), including around any salary adjustments if the team member's Step or Level should change. The People team will store these docs on Charlie HR for future reference.
 
 While the 360 degree team meeetings are purely feedback-focused, you should aim to spend the bulk of the performance review looking ahead to the next 6 months (and beyond). 
