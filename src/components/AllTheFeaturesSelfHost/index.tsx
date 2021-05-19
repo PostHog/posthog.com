@@ -37,7 +37,7 @@ export const AllTheFeaturesSelfHost = () => {
                 </div>
             </div>
 
-            <div className="bg-deep-blue bg-opacity-20 border border-white border-opacity-10 py-4 px-10 mx-auto mt-4 mb-10 max-w-4xl flex flex-col md:flex-row rounded-lg items-baseline">
+            <div className="bg-deep-blue bg-opacity-20 border border-white border-opacity-10 py-4 px-10 mx-auto mt-4 mb-10 max-w-4xl flex flex-col md:flex-row rounded-lg items-baseline backdrop-filter backdrop-blur-sm">
                 <p className="flex-0 md:flex-1 text-left text-white">
                     PostHog self-hosted comes with all product features and platform benefits.
                 </p>

@@ -74,7 +74,7 @@ export const SelfHostedPlanBreakdown = () => {
 
                 <div className="rounded inline-flex flex-col md:flex-row items-center">
                     <div className="flex justify-center">
-                        <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col md:flex-row items-center text-white">
+                        <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col md:flex-row items-center text-white backdrop-filter backdrop-blur-sm">
                             <div className="flex-0 border border-white border-opacity-10 rounded p-8 bg-royal-blue">
                                 <h3 className="text-lg m-0">Scale</h3>
                                 <p className="opacity-50 text-sm">For large userbases or event volume</p>

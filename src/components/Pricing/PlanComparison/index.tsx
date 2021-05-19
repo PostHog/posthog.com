@@ -235,7 +235,7 @@ function classNames(...classes) {
 
 export const PlanComparison = () => {
     return (
-        <div className="max-w-7xl mx-auto bg-royal-blue bg-opacity-50 py-8 rounded-lg sm:py-8 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto bg-royal-blue bg-opacity-50 py-8 rounded-lg sm:py-8 sm:px-6 lg:px-8 backdrop-filter backdrop-blur-sm">
             {/* xs to lg */}
             <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
                 {tiers.map((tier, tierIdx) => (

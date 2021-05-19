@@ -24,6 +24,7 @@
         "@mdx-js/react": "^1.6.22",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "antd": "^3.23.2",
+        "autoprefixer": "^10.2.5",
         "chart.js": "^2.9.4",
         "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
@@ -58,7 +59,7 @@
         "kea-router": "^0.5.1",
         "kea-typegen": "^0.5.3",
         "node-fetch": "^2.6.1",
-        "postcss": "^8.2.6",
+        "postcss": "^8.2.15",
         "postcss-nested": "^5.0.5",
         "prism-react-renderer": "^1.2.0",
         "prismjs": "^1.23.0",
@@ -92,7 +93,7 @@
         "mem": "^5.1.1",
         "prettier": "^2.1.0",
         "react-dev-utils": "^11.0.4",
-        "tailwindcss": "^2.0.3"
+        "tailwindcss": "^2.1.2"
     },
     "husky": {
         "hooks": {

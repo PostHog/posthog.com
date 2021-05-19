@@ -9,7 +9,7 @@ export const CloudVsSelfHost = () => {
         <div className="pricing-hero text-white text-center">
             <Structure.Section width="4xl" className="py-12">
                 <h3 className="text-center text-white">PostHog Cloud vs. self-hosting</h3>
-                <div className="bg-deep-blue bg-opacity-20 border border-white border-opacity-10 py-4 px-10 mx-auto mt-4 mb-10 max-w-4xl rounded-lg items-baseline text-left text-white">
+                <div className="bg-deep-blue bg-opacity-20 border border-white border-opacity-10 py-4 px-10 mx-auto mt-4 mb-10 max-w-4xl rounded-lg items-baseline text-left text-white backdrop-filter backdrop-blur-sm">
                     <dl className="flex flex-col md:flex-row flex-wrap">
                         <dt style={{ flex: '0 0 33%' }}>
                             <h4>PostHog Cloud</h4>
