@@ -52,6 +52,7 @@ module.exports = {
                 '2xs': '0.65rem',
                 base: '.875rem',
                 'base-larger': '.933rem',
+                'text-sm': '.8rem',
             },
             colors: {
                 primary: 'rgba(255, 99, 39, 0.9)',
@@ -64,6 +65,7 @@ module.exports = {
                 'baby-blue': '#CDD0FF',
                 'deep-blue': '#160431',
                 'royal-blue': '#232D69',
+                yellow: '#F7A501',
                 footer: '#08042f',
             },
             minHeight: {

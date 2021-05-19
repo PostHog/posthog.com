@@ -34,7 +34,7 @@ export const CloudPlanBreakdown = () => {
                         </svg>
                         <h3 className="text-lg my-2">PostHog Cloud</h3>
                         <p className="opacity-50">Turnkey, hosted solution</p>
-                        <ul className="list-none text-white text-opacity-70 text-sm pl-0">
+                        <ul className="list-none text-white text-opacity-70 text-sm pl-0 mb-6">
                             <li className="flex align-center mb-2">
                                 <img src={checkIcon} alt="checkmark" width="20" height="20" className="flex-0 mr-2" />
                                 <span className="">Hosted by PostHog</span>
@@ -55,58 +55,70 @@ export const CloudPlanBreakdown = () => {
                             <div className="opacity-50">/mo for&nbsp;</div>
                             <div className="opacity-50">1,000,000 events</div> {/* event value from slider */}
                         </div>
-                        <div className="text-xs">First 1 million events free - every month!</div>
 
-                        <CallToAction
-                            icon="none"
-                            href="https://app.posthog.com/signup?src=pricing-page"
-                            className="my-4"
-                        >
-                            Get started
-                        </CallToAction>
+                        <div className="free-allotment-callout relative text-yellow bg-yellow bg-opacity-10 rounded py-1 px-2 text-xs mt-2 mb-4 inline-flex">
+                            First 1 million events free - every month!
+                        </div>
 
-                        <div className="text-center text-xs text-opacity-75 mt-2">
-                            No credit card required.
-                            <br />
-                            Completely self-serve.
+                        <div>
+                            <CallToAction
+                                icon="none"
+                                href="https://app.posthog.com/signup?src=pricing-page"
+                                className="my-4"
+                            >
+                                Get started
+                            </CallToAction>
+                        </div>
+
+                        <div className="text-center text-xs text-opacity-50 text-white mt-2">
+                            No credit card required. Completely self-serve.
                         </div>
                     </div>
                     <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg">
-                        <h3>Calculate your price</h3>
-                        <p className="text-sm">Pay based on the events you capture each month.</p>
+                        <h3 className="mb-1">Calculate your price</h3>
+                        <p className="text-sm text-white text-opacity-60">
+                            Pay based on the events you capture each month.
+                        </p>
 
                         <div className="mb-4">
                             <div className="flex justify-between items-center">
-                                <h4 className="mb-0 text-base">Monthly event volume</h4>
-                                <div className="font-bold">1,000,000</div> {/* event value from slider */}
+                                <div className="mb-0 text-sm font-bold text-white text-opacity-75">
+                                    Monthly event volume
+                                </div>
+                                <div className="font-bold text-base">1,000,000</div> {/* event value from slider */}
                             </div>
                             slider
                             <br />
-                            <div className="text-sm opacity-50">
+                            <div className="text-xs opacity-50">
                                 &lt;1 million, 1 million, 10 million, 100 million
                                 {/* Ideal: slider labels should be spaced realistically based on values, not evenly */}
                             </div>
                         </div>
 
-                        <div className="p-2 mb-4 border border-white">
-                            <div className="flex justify-between items-center">
-                                <h4 className="mb-0 text-base">Event volume pricing</h4>
-                                <div className="opacity-50 text-xs text-right">Monthly price per event</div>
+                        <div className="mb-4 border border-white border-opacity-10 bg-royal-blue rounded">
+                            <div
+                                className="flex justify-between items-baseline p-2 rounded mb-1"
+                                style={{ backgroundColor: '#1A2460' }}
+                            >
+                                <div className="mb-0 text-xs text-white text-opacity-75">Event volume</div>
+                                <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                             </div>
-                            <dl className="flex justify-between mb-0">
-                                <dt className="mb-0 opacity-75 text-sm">First 1 million</dt>
-                                <dd className="mb-0 font-bold">Free</dd>
+                            <dl className="flex justify-between mb-1 p-2">
+                                <dt className="mb-0 opacity-75 text-xs">First 1 million</dt>
+                                <dd className="mb-0 font-bold text-xs">Free</dd>
                             </dl>
-                            <dl className="flex justify-between mb-0">
-                                <dt className="mb-0 opacity-75 text-sm">More than 1 million</dt>
-                                <dd className="mb-0 font-bold">$0.000225</dd>
+                            <dl className="flex justify-between mb-0 p-2">
+                                <dt className="mb-0 opacity-75 text-xs">More than 1 million</dt>
+                                <dd className="mb-0 font-bold text-xs">$0.000225</dd>
                             </dl>
                         </div>
 
-                        <div className="flex justify-between">
-                            <h4 className="text-base mb-0 text-lg font-bold">Estimated price</h4>
+                        <hr className="border-white border-solid border-opacity-20 border-r-0 border-b-0 border-left-0 mb-2" />
+
+                        <div className="flex justify-between items-baseline">
+                            <div className="text-base mb-0 text-base font-bold">Estimated price</div>
                             <div className="mb-0 font-bold flex items-baseline">
-                                <div className="text-lg">$0</div> {/* price value from slider */}
+                                <div className="text-base">$0</div> {/* price value from slider */}
                                 <div className="opacity-50">/mo</div>
                             </div>
                         </div>
