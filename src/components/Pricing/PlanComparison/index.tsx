@@ -166,7 +166,7 @@ const sections = [
             },
             {
                 name: 'SSO',
-                tiers: { 'PostHog Cloud': 'Limited (??)', 'Open source': false, Free: false, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: false, Scale: true },
             },
             {
                 name: 'API access',
@@ -181,12 +181,8 @@ const sections = [
                 tiers: { 'PostHog Cloud': false, 'Open source': true, Free: true, Scale: true },
             },
             {
-                name: 'HIPAA, SOC2 compliant',
-                tiers: { 'PostHog Cloud': false, 'Open source': '??', Free: '??', Scale: true },
-            },
-            {
                 name: 'Uptime & scalability SLAs',
-                tiers: { 'PostHog Cloud': '??', 'Open source': 'n/a', Free: '??', Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': 'n/a', Free: false, Scale: true },
             },
         ],
     },
@@ -207,7 +203,7 @@ const sections = [
             },
             {
                 name: 'Zapier',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: '??', Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
             },
         ],
     },
@@ -215,7 +211,7 @@ const sections = [
         name: 'Support',
         features: [
             {
-                name: 'Slack (commnunity)',
+                name: 'Slack (community)',
                 tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
             },
             {
