@@ -17,16 +17,6 @@ const PricingNew = (): JSX.Element => {
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
 
             <PricingHero />
-            <div className="flex justify-center ">
-                {/* needs to tab like in current pricing page */}
-                {/* and "active=true" on current tab. need help with if statement in CallToAction (white border unless active=true) */}
-                <CallToAction type="button" active="true" width="auto" icon="none" href="#" className="mr-4">
-                    Cloud
-                </CallToAction>
-                <CallToAction type="button" active="false" width="auto" icon="none" href="#">
-                    Self-hosted
-                </CallToAction>
-            </div>
             <PricingTable />
             <RocketHorizontalRule />
             <PricingComparison />

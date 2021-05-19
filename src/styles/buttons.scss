@@ -42,7 +42,8 @@
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
     border: solid 2px rgba(255, 255, 255, 0.3);
 
-    &:hover {
+    &:hover,
+    &.active {
         background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%);
     }
 }
