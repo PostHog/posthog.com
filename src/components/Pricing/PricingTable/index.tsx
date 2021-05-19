@@ -15,7 +15,7 @@ export const PricingTable = () => {
 
     return (
         <div className="pricing-hero text-white">
-            <Structure.Section width="4xl" className="py-12">
+            <Structure.Section width="4xl" className="">
                 <div className="flex justify-center ">
                     <CallToAction
                         type="button"

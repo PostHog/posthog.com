@@ -14,7 +14,7 @@ export const PricingHero = () => {
                 transparentBackground={true}
             />
 
-            <Structure.Section width="4xl" className="py-12">
+            <Structure.Section width="4xl" className="pt-12">
                 <Structure.SectionHeader
                     title="Simple pricing for powerful analytics"
                     titleTag="h1"
