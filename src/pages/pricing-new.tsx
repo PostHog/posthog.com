@@ -3,8 +3,8 @@ import { SEO } from '../components/seo'
 import { CallToAction } from 'components/CallToAction'
 import { PricingHero } from '../components/Pricing/PricingHero'
 import { PricingTable } from '../components/Pricing/PricingTable'
-import { PricingComparison } from '../components/Pricing/PricingComparison'
 import { CloudVsSelfHost } from '../components/Pricing/CloudVsSelfHost'
+import { PlanComparison } from '../components/Pricing/PlanComparison'
 import { Savings } from '../components/Pricing/Savings'
 import { FAQs } from '../components/Pricing/FAQs'
 import { Footer } from '../components/Footer'
@@ -19,7 +19,7 @@ const PricingNew = (): JSX.Element => {
             <PricingHero />
             <PricingTable />
             <CloudVsSelfHost />
-            <PricingComparison />
+            <PlanComparison />
             <Savings />
             <FAQs />
             <Footer onPostPage={false} transparentBg />

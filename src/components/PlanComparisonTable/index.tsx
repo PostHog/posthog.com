@@ -6,7 +6,7 @@ import imgOpenSource from '../../images/plan-open-source.svg'
 import imgScaleFree from '../../images/plan-enterprise1.svg'
 import imgEnterprise2 from '../../images/plan-enterprise2.svg'
 
-export const PricingComparisonTable = () => {
+export const PlanComparisonTable = () => {
     return (
         <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
             <table>

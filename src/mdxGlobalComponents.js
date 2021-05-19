@@ -51,14 +51,14 @@ import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
+import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
-import { PricingComparison } from './components/Pricing/PricingComparison'
+import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { Savings } from './components/Pricing/Savings'
-import { PricingComparisonTable } from './components/PricingComparisonTable'
 import { PricingSlider } from './components/PricingSlider'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
@@ -126,14 +126,14 @@ export const shortcodes = {
     NewsletterForm,
     OtherFeaturesBlock,
     PageHeader,
+    PlanComparisonTable,
     PostCard,
     CloudVsSelfHost,
     FAQs,
-    PricingComparison,
+    PlanComparison,
     PricingHero,
     PricingTable,
     Savings,
-    PricingComparisonTable,
     PricingSlider,
     ResponsiveAnchor,
     ResponsiveSidebar,

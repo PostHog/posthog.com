@@ -81,4 +81,9 @@
             }
         }
     }
+
+    // plan table where there's no <th> value
+    table th:empty {
+        display: none;
+    }
 }
