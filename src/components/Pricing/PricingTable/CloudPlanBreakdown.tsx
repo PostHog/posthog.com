@@ -57,9 +57,13 @@ export const CloudPlanBreakdown = () => {
                         </div>
                         <div className="text-xs">First 1 million events free - every month!</div>
 
-                        <div className="p-2 border border-white my-4 text-center">
-                            Get started {/* use 'primary' button, like in landingpage hero */}
-                        </div>
+                        <CallToAction
+                            icon="none"
+                            href="https://app.posthog.com/signup?src=pricing-page"
+                            className="my-4"
+                        >
+                            Get started
+                        </CallToAction>
 
                         <div className="text-center text-xs text-opacity-75 mt-2">
                             No credit card required.

@@ -47,9 +47,9 @@ export const SelfHostedPlanBreakdown = () => {
                         {/* this note was a freebie! no calculation needed here. */}
                     </div>
 
-                    <div className="p-2 border border-white my-4 text-center">
-                        Contact us {/* use 'primary' button, like in landingpage hero */}
-                    </div>
+                    <CallToAction icon="none" href="#" className="my-4">
+                        Request access
+                    </CallToAction>
 
                     <div className="text-center text-xs mt-2">No credit card required</div>
                 </div>
@@ -92,9 +92,9 @@ export const SelfHostedPlanBreakdown = () => {
                             <div className="opacity-50">8,000,000 events</div> {/* event value from slider */}
                         </div>
 
-                        <div className="p-2 border border-white my-4 text-center">
-                            Contact us {/* use 'primary' button, like in landingpage hero */}
-                        </div>
+                        <CallToAction icon="none" href="#" className="my-4">
+                            Contact us
+                        </CallToAction>
 
                         <div className="text-center text-xs mt-2">
                             $2,000 monthly minimum
