@@ -75,7 +75,7 @@ export const CloudPlanBreakdown = () => {
                             No credit card required. Completely self-serve.
                         </div>
                     </div>
-                    <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg">
+                    <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg px-4 md:px-0">
                         <h3 className="mb-1 text-lg">Calculate your price</h3>
                         <p className="text-sm text-white text-opacity-60">
                             Pay based on the events you capture each month.

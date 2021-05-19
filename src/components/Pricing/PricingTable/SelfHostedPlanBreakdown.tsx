@@ -18,7 +18,7 @@ export const SelfHostedPlanBreakdown = () => {
                 totally free with community support.
             </p>
             <div className="grid grid-flow-row auto-rows-max md:grid-flow-col md:auto-cols-max justify-center items-center mb-20">
-                <div className="border border-white border-opacity-10 rounded p-4 m-8 ml-0 bg-royal-blue bg-opacity-50 backdrop-filter backdrop-blur-lg">
+                <div className="border border-white border-opacity-10 rounded p-4 mx-12 my-4 md:m-8 md:ml-0 bg-royal-blue bg-opacity-50 backdrop-filter backdrop-blur-lg">
                     <h3 className="text-lg m-0">Free</h3>
                     <p className="opacity-50 text-sm">Great for startups</p>
                     <ul className="list-none pl-0 mb-6">
