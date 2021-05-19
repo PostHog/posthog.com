@@ -8,7 +8,7 @@ import checkIcon from '../../../images/check.svg'
 
 export const SelfHostedPlanBreakdown = () => {
     return (
-        <Structure.Section width="full w-full" className="pt-6 pb-12">
+        <Structure.SectionFullWidth width="full" className="pt-6 pb-12">
             <p className="text-center text-white text-opacity-75 pb-4">
                 Low event volume? Use our{' '}
                 <a href="https://github.com/posthog/posthog" className="text-orange">
@@ -16,10 +16,10 @@ export const SelfHostedPlanBreakdown = () => {
                 </a>{' '}
                 totally free with community support.
             </p>
-            <div className="flex justify-center items-center">
-                <div className="flex-0 border border-white border-opacity-10 rounded p-4 m-8 ml-0">
+            <div className="grid grid-flow-row auto-rows-max md:grid-flow-col md:auto-cols-max justify-center items-center">
+                <div className="border border-white border-opacity-10 rounded p-4 m-8 ml-0 bg-royal-blue bg-opacity-50 backdrop-filter backdrop-blur-lg">
                     <h3 className="text-lg m-0">Free</h3>
-                    <p className="opacity-50 text-sm">Get for startups</p>
+                    <p className="opacity-50 text-sm">Great for startups</p>
                     <ul className="list-none pl-0 mb-6">
                         <li className="mb-1">
                             <span className="text-base font-bold">1 million</span>
@@ -48,6 +48,10 @@ export const SelfHostedPlanBreakdown = () => {
                             <img src={checkIcon} alt="checkmark" width="20" height="20" className="flex-0 mr-2" />
                             <span className="">Community support</span>
                         </li>
+                        <li className="flex align-center mb-2 invisible">
+                            <img src={checkIcon} alt="checkmark" width="20" height="20" className="flex-0 mr-2" />
+                            <span className=""></span>
+                        </li>
                     </ul>
 
                     <div className="opacity-50">Price</div>
@@ -61,7 +65,10 @@ export const SelfHostedPlanBreakdown = () => {
                         </CallToAction>
                     </div>
 
-                    <div className="text-center text-xs text-opacity-50 text-white mt-2">No credit card required</div>
+                    <div className="text-center text-xs text-opacity-50 text-white mt-2">
+                        No credit card required <br />
+                        &nbsp;
+                    </div>
                 </div>
 
                 <div className="rounded inline-flex flex-col md:flex-row items-center">
@@ -140,7 +147,7 @@ export const SelfHostedPlanBreakdown = () => {
                                 </div>
                             </div>
                             <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg">
-                                <h3 className="mb-1">Calculate your price</h3>
+                                <h3 className="mb-1 text-lg">Calculate your price</h3>
                                 <p className="text-sm text-white text-opacity-60">
                                     Pay based on the events you capture each month.
                                 </p>
@@ -169,33 +176,35 @@ export const SelfHostedPlanBreakdown = () => {
                                         <div className="mb-0 text-xs text-white text-opacity-75">Event volume</div>
                                         <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                     </div>
-                                    <dl className="flex justify-between mb-1 p-2">
+                                    <dl className="flex justify-between mb-0 p-2">
                                         <dt className="mb-0 opacity-75 text-xs">First 10 million</dt>
                                         <dd className="mb-0 font-bold text-xs">$0.000225</dd>
                                     </dl>
-                                    <dl className="flex justify-between mb-1 p-2">
+                                    <dl className="flex justify-between mb-0 p-2">
                                         <dt className="mb-0 opacity-75 text-xs">10-100 million</dt>
                                         <dd className="mb-0 font-bold text-xs">$0.000045</dd>
                                     </dl>
-                                    <dl className="flex justify-between mb-1 p-2">
+                                    <dl className="flex justify-between mb-0 p-2">
                                         <dt className="mb-0 opacity-75 text-xs">100 million - 1 billion</dt>
                                         <dd className="mb-0 font-bold text-xs">$0.000009</dd>
                                     </dl>
-                                    <dl className="flex justify-between mb-0 p-2">
-                                        <dt className="mb-0 opacity-75 text-xs">More than 1 million</dt>
+                                    <dl className="flex justify-between mb-0 p-2 pb-3">
+                                        <dt className="mb-0 opacity-75 text-xs">More than 1 billion</dt>
                                         <dd className="mb-0 font-bold text-xs">Even cheaper</dd>
                                     </dl>
                                 </div>
 
                                 <div className="flex justify-between items-baseline">
-                                    <div className="text-base mb-0 text-base font-bold">Monthly minimum price</div>
+                                    <div className="mb-0 text-sm font-bold text-white text-opacity-75">
+                                        Monthly minimum price
+                                    </div>
                                     <div className="mb-0 flex items-baseline">
                                         <div className="text-base">$2,000</div> {/* price value from slider */}
                                         <div className="opacity-50">/mo</div>
                                     </div>
                                 </div>
 
-                                <hr className="border-white border-solid border-opacity-20 border-r-0 border-b-0 border-left-0 mb-2" />
+                                <hr className="border-white border-solid border-opacity-20 border-r-0 border-b-0 border-left-0 my-2" />
 
                                 <div className="flex justify-between items-baseline">
                                     <div className="text-base mb-0 text-base font-bold">Estimated price</div>
@@ -209,6 +218,6 @@ export const SelfHostedPlanBreakdown = () => {
                     </div>
                 </div>
             </div>
-        </Structure.Section>
+        </Structure.SectionFullWidth>
     )
 }

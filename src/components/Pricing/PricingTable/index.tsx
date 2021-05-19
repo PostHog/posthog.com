@@ -15,7 +15,7 @@ export const PricingTable = () => {
 
     return (
         <div className="pricing-hero text-white">
-            <Structure.Section width="4xl" className="">
+            <Structure.SectionFullWidth width="7xl" className="">
                 <div className="flex justify-center ">
                     <CallToAction
                         type="button"
@@ -38,7 +38,7 @@ export const PricingTable = () => {
                 </div>
 
                 {currentPlanBreakdown}
-            </Structure.Section>
+            </Structure.SectionFullWidth>
         </div>
     )
 }
