@@ -39,7 +39,12 @@ const sections = [
         features: [
             {
                 name: 'Plan benefits',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: false, Scale: false },
+                tiers: {
+                    'PostHog Cloud': 'Scales as needed, Constant price',
+                    'Open source': 'Best for low volumes (~10k monthly users), Use with a small team',
+                    Free: 'Free, but limited to 1 million users',
+                    Scale: 'Cheaper at scale',
+                },
             },
             {
                 name: 'Pricing',
@@ -240,6 +245,7 @@ export const PlanComparison = () => {
             <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
                 {tiers.map((tier, tierIdx) => (
                     <section key={tier.name}>
+                        {/* 
                         <div className="px-4 mb-8">
                             <h2 className="text-lg leading-6 font-medium text-white text-opacity-50">{tier.name}</h2>
                             <p className="mt-4">
@@ -256,6 +262,7 @@ export const PlanComparison = () => {
                                 Buy {tier.name}
                             </a>
                         </div>
+                        */}
 
                         {sections.map((section) => (
                             <table key={section.name} className="w-full">
@@ -274,7 +281,7 @@ export const PlanComparison = () => {
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
                                     {section.features.map((feature) => (
-                                        <tr key={feature.name} className="border-t border-gray-200">
+                                        <tr key={feature.name} className="border-white border-opacity-10">
                                             <th
                                                 className="py-5 px-4 text-sm font-normal text-gray-500 text-center border-white border-opacity-10"
                                                 scope="row"
@@ -343,17 +350,24 @@ export const PlanComparison = () => {
                     <caption className="sr-only">Pricing plan comparison</caption>
                     <thead>
                         <tr>
+                            <th className="text-white text-center border-white border-opacity-10">&nbsp;</th>
+                            <th className="text-white text-center border-white border-opacity-10">Hosted solution</th>
+                            <th colSpan="3" className="text-white text-center border-white border-opacity-10">
+                                Self-hosted options
+                            </th>
+                        </tr>
+                        <tr>
                             <th
-                                className="pb-4 px-6 text-sm font-medium text-white text-opacity-50 text-center border-white border-opacity-10"
+                                className="pb-4 px-6 text-sm font-medium text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-50"
                                 scope="col"
                             >
                                 <span className="sr-only">Feature by</span>
-                                <span>Plans</span>
+                                <span className="sr-only">Plans</span>
                             </th>
                             {tiers.map((tier) => (
                                 <th
                                     key={tier.name}
-                                    className="w-1/5 pb-4 px-6 text-lg leading-6 font-medium text-white text-opacity-50 text-center border-white border-opacity-10"
+                                    className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-75"
                                     scope="col"
                                 >
                                     {tier.name}
@@ -361,10 +375,11 @@ export const PlanComparison = () => {
                             ))}
                         </tr>
                     </thead>
-                    <tbody className="border-t border-gray-200 divide-y divide-gray-200">
+                    <tbody className="">
+                        {/* 
                         <tr>
                             <th
-                                className="py-8 px-6 text-sm font-medium text-white text-opacity-50 text-center align-top border-white border-opacity-10"
+                                className="py-8 px-6 text-sm font-medium text-white text-left align-top border-white border-opacity-10"
                                 scope="row"
                             >
                                 Pricing
@@ -392,11 +407,12 @@ export const PlanComparison = () => {
                                 </td>
                             ))}
                         </tr>
+                        */}
                         {sections.map((section) => (
                             <Fragment key={section.name}>
                                 <tr>
                                     <th
-                                        className="bg-transparent pt-6 pb-3 pl-6 text-sm font-bold text-white border-white border-opacity-10"
+                                        className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-white border-white border-opacity-10"
                                         colSpan={5}
                                         scope="colgroup"
                                         style={{ borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
@@ -407,7 +423,7 @@ export const PlanComparison = () => {
                                 {section.features.map((feature) => (
                                     <tr key={feature.name}>
                                         <th
-                                            className="py-5 px-6 text-sm font-bold text-white text-left border-white border-opacity-10"
+                                            className="py-5 px-6 text-sm font-normal text-white text-left border-white border-opacity-10"
                                             scope="row"
                                         >
                                             {feature.name}
@@ -456,12 +472,12 @@ export const PlanComparison = () => {
                         ))}
                     </tbody>
                     <tfoot>
-                        <tr className="border-t border-gray-200">
+                        <tr className="border-t border-white border-opacity-10">
                             <th className="sr-only" scope="row">
                                 Choose your plan
                             </th>
                             {tiers.map((tier) => (
-                                <td key={tier.name} className="pt-5 px-6">
+                                <td key={tier.name} className="pt-5 px-6 border-white border-opacity-10">
                                     <a
                                         href={tier.href}
                                         className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
