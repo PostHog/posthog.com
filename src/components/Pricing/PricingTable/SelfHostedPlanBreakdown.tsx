@@ -3,6 +3,7 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
+import { AllTheFeaturesSelfHost } from '../../AllTheFeaturesSelfHost'
 
 import checkIcon from '../../../images/check.svg'
 
@@ -16,7 +17,7 @@ export const SelfHostedPlanBreakdown = () => {
                 </a>{' '}
                 totally free with community support.
             </p>
-            <div className="grid grid-flow-row auto-rows-max md:grid-flow-col md:auto-cols-max justify-center items-center">
+            <div className="grid grid-flow-row auto-rows-max md:grid-flow-col md:auto-cols-max justify-center items-center mb-20">
                 <div className="border border-white border-opacity-10 rounded p-4 m-8 ml-0 bg-royal-blue bg-opacity-50 backdrop-filter backdrop-blur-lg">
                     <h3 className="text-lg m-0">Free</h3>
                     <p className="opacity-50 text-sm">Great for startups</p>
@@ -218,6 +219,9 @@ export const SelfHostedPlanBreakdown = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Not sure this makes sense to show if Scale has collaboratiaon features */}
+            {/* <AllTheFeaturesSelfHost /> */}
         </Structure.SectionFullWidth>
     )
 }

@@ -2,6 +2,8 @@
 
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
+import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
+import { AllTheFeaturesSelfHost } from './components/AllTheFeaturesSelfHost'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -50,6 +52,7 @@ import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
 import { PostCard } from './components/PostCard'
+import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { PricingComparison } from './components/Pricing/PricingComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
@@ -74,6 +77,8 @@ import { TableOfContents } from './components/TableOfContents'
 export const shortcodes = {
     Endpoint,
     MethodTags,
+    AllTheFeaturesCloud,
+    AllTheFeaturesSelfHost,
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
@@ -122,6 +127,7 @@ export const shortcodes = {
     OtherFeaturesBlock,
     PageHeader,
     PostCard,
+    CloudVsSelfHost,
     FAQs,
     PricingComparison,
     PricingHero,

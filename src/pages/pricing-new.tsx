@@ -3,8 +3,8 @@ import { SEO } from '../components/seo'
 import { CallToAction } from 'components/CallToAction'
 import { PricingHero } from '../components/Pricing/PricingHero'
 import { PricingTable } from '../components/Pricing/PricingTable'
-import { RocketHorizontalRule } from '../components/RocketHorizontalRule'
 import { PricingComparison } from '../components/Pricing/PricingComparison'
+import { CloudVsSelfHost } from '../components/Pricing/CloudVsSelfHost'
 import { Savings } from '../components/Pricing/Savings'
 import { FAQs } from '../components/Pricing/FAQs'
 import { Footer } from '../components/Footer'
@@ -18,7 +18,7 @@ const PricingNew = (): JSX.Element => {
 
             <PricingHero />
             <PricingTable />
-            <RocketHorizontalRule />
+            <CloudVsSelfHost />
             <PricingComparison />
             <Savings />
             <FAQs />

@@ -3,13 +3,14 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
+import { AllTheFeaturesCloud } from '../../AllTheFeaturesCloud'
 
 import checkIcon from '../../../images/check.svg'
 
 export const CloudPlanBreakdown = () => {
     return (
         <Structure.Section width="4xl" className="py-12">
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-20">
                 <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col md:flex-row items-center text-white">
                     <div className="flex-0 border border-white border-opacity-10 rounded p-8 bg-royal-blue">
                         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 24" width="42" height="24">
@@ -125,6 +126,7 @@ export const CloudPlanBreakdown = () => {
                     </div>
                 </div>
             </div>
+            <AllTheFeaturesCloud />
         </Structure.Section>
     )
 }
