@@ -3,7 +3,6 @@
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
 import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
-import { AllTheFeaturesSelfHost } from './components/AllTheFeaturesSelfHost'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -33,6 +32,7 @@ import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
+import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { HiddenSection } from './components/HiddenSection'
@@ -79,7 +79,6 @@ export const shortcodes = {
     Endpoint,
     MethodTags,
     AllTheFeaturesCloud,
-    AllTheFeaturesSelfHost,
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
@@ -109,6 +108,7 @@ export const shortcodes = {
     DocsSearch,
     FeaturesComparisonTable,
     FeaturesNav,
+    FeaturesSelfHost,
     Footer,
     GetStartedModal,
     HiddenSection,

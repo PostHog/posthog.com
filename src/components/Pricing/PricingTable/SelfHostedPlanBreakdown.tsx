@@ -3,7 +3,7 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
-import { AllTheFeaturesSelfHost } from '../../AllTheFeaturesSelfHost'
+import { FeaturesSelfHost } from '../../FeaturesSelfHost'
 
 import checkIcon from '../../../images/check.svg'
 
@@ -220,8 +220,7 @@ export const SelfHostedPlanBreakdown = () => {
                 </div>
             </div>
 
-            {/* Not sure this makes sense to show if Scale has collaboratiaon features */}
-            {/* <AllTheFeaturesSelfHost /> */}
+            <FeaturesSelfHost />
         </Structure.SectionFullWidth>
     )
 }
