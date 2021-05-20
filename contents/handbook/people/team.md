@@ -277,22 +277,20 @@ Before joining PostHog, I lead a product team at Grow Mobility, the largest micr
 
 <div class="team-left-text" markdown="1">
 
-### Lottie Coxon, Graphic Designer 🇨🇬
+### Lottie Coxon, Graphic Designer 🇨🇩
 
 <div class="team-left-bio" markdown="1">
 
 I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin).
 
-I spent my youth trying to master fine art, after my teacher said I was awful and that I should try something else.
+I spent my youth trying to master fine art, after my teacher said I wasn't very good and that I should try something else.
 In my stubbornness I decided to prove her wrong, and here I am - a designer.
 
-I was quite a weird child. I once ran a race with locked legs (Forest Gump style) because I had a dream the night before that I won by doing so. For those who are wondering, no I did not win. But I would rather be the weird child than the boring one.
+After studying art through school, I took Graphic Design at university and graduated this summer with a first class degree. But instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio up on twitter, I was contacted by PostHog a mere 24 hours later, and the rest is history.
 
-I took Graphic Design at university and graduated this summer and instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio on twitter, I was contacted by PostHog a mere 24 hours later.
+I am now their Graphic Designer, and I couldn't be happier. I spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly making PostHog look great.
 
-I am now their Graphic Designer, and spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly drawing hedgehogs with sunglasses on.
-
-On a side note I have decided to move to Senegal (Africa) to be with my boyfriend George. It’s a bold decision really as I cannot speak French, but I will (try) learn.
+Oh and another thing, I live in the DRC (Democratic Republic of Congo) with my boyfriend. We tend to move a lot and for the moment we are here. It’s a bold decision really as I cannot speak French, but I will (try) learn.
 
 *French accent* C’est la Vie
 
