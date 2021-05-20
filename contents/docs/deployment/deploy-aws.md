@@ -76,7 +76,7 @@ You can find more details on Amazon's Docs for [Elastic Container Service](https
 > You can read more about this and how to snapshot RDS on [AWS docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html)
 
 
-Do this to update parameters: to scale different services up/down, update who gets alarms, STMP or more.
+Do this to update parameters: to scale different services up/down, update who gets alarms, SMTP or more.
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 
