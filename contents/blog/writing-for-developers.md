@@ -29,7 +29,7 @@ Do:
 
 * Give character to the _humans_ involved in what you write about. Go into unexpected detail. Tell [stories](https://hbr.org/2014/07/how-to-tell-a-great-story). They don't need to be impressive - the goal is to make things real.
 * Make it real - real life photos, chat logs, social media posts, social media profiles (well, sort of real). 
-* Add humor - be self deprecating. Noone is some perfect corporate being. We make mistakes, and being willing to open up builds trust. 
+* Add humor - be self deprecating. No one is some perfect corporate being. We make mistakes, and being willing to open up builds trust. 
 
 Do not:
 
@@ -64,7 +64,7 @@ Do not:
 
 The world is full of information - if you can get them right, it's more valuable to give recommendations distilled from the information available.
 
-It's especially interesting to read well-reasoned contrarian points of view. For example, at PostHog we focussed on engineering instead of sales from very early on - it's therefore interesting to learn why we did this and the impact it had.
+It's especially interesting to read well-reasoned contrarian points of view. For example, at PostHog we focused on engineering instead of sales from very early on - it's therefore interesting to learn why we did this and the impact it had.
 
 Do:
 
