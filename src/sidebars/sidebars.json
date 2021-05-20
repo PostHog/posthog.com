@@ -312,7 +312,22 @@
         "entry": "People",
         "name": "People",
         "items": [
-            "handbook/people/hiring-process",
+     ],
+        "child_entries": ["Hiring process"]
+    },
+    {
+        "entry": "Hiring Process",
+        "name": "Hiring Process",
+        "items": [
+            "handbook/people/hiring-process/hiring-process",
+            "handbook/people/hiring-process/design-hiring",
+            "handbook/people/hiring-process/engineering-hiring",
+            "handbook/people/hiring-process/exec-hiring",
+            "handbook/people/hiring-process/operations-hiring",
+
+        ]
+    },
+    {
             "handbook/people/compensation",
             "handbook/people/benefits",
             "handbook/people/time-off",
