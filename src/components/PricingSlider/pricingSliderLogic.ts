@@ -1,12 +1,12 @@
 import { kea } from 'kea'
 import { sliderCurve } from './LogSlider'
 
-export type PricingOption = 'vpc' | 'self-hosted'
+export type PricingOptionType = 'vpc' | 'self-hosted' | 'cloud'
 
 export const pricingSliderLogic = kea({
     actions: {
         setSliderValue: (value: number) => ({ value }),
-        setPricingOption: (option: PricingOption) => ({ option }),
+        setPricingOption: (option: PricingOptionType) => ({ option }),
         setAdditionalUnitPrice: (value: number) => ({ value }),
     },
     reducers: {
@@ -55,7 +55,7 @@ export const pricingSliderLogic = kea({
                     }
 
                     actions.setAdditionalUnitPrice(unitPricing)
-                    return Math.round(finalCost)
+                    return Math.round(finalCost).toLocaleString()
                 }
 
                 // Cloud

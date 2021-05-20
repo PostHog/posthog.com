@@ -1,13 +1,17 @@
 import React from 'react'
-
+import { useValues } from 'kea'
 import { Structure } from '../../Structure'
 import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
 import { FeaturesSelfHost } from '../../FeaturesSelfHost'
+import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
 
 import checkIcon from '../../../images/check.svg'
 
 export const SelfHostedPlanBreakdown = () => {
+    const { finalCost, eventNumber } = useValues(pricingSliderLogic)
+    const eventNumberWithDelimiter = eventNumber.toLocaleString()
+
     return (
         <Structure.SectionFullWidth width="full" className="pt-6 pb-12">
             <p className="text-center text-white text-opacity-75 pb-4">
@@ -130,9 +134,9 @@ export const SelfHostedPlanBreakdown = () => {
 
                                 <div className="opacity-50">Monthly estimate</div>
                                 <div className="flex items-baseline">
-                                    <div className="text-lg font-bold">$2,000</div> {/* price value from slider */}
+                                    <div className="text-lg font-bold">${finalCost}</div>
                                     <div className="opacity-50">/mo for&nbsp;</div>
-                                    <div className="opacity-50">8,000,000 events</div> {/* event value from slider */}
+                                    <div className="opacity-50">{eventNumberWithDelimiter} events</div>
                                 </div>
 
                                 <div>
@@ -158,15 +162,13 @@ export const SelfHostedPlanBreakdown = () => {
                                         <div className="mb-0 text-sm font-bold text-white text-opacity-75">
                                             Monthly event volume
                                         </div>
-                                        <div className="font-bold text-base">1,000,000</div>{' '}
-                                        {/* event value from slider */}
+                                        <div className="font-bold text-base">{eventNumberWithDelimiter}</div>
                                     </div>
-                                    slider
-                                    <br />
-                                    <div className="text-xs opacity-50">
-                                        &lt;8 million, 10 million, 100 million, 150 million
-                                        {/* Ideal: slider labels should be spaced realistically based on values, not evenly */}
-                                    </div>
+                                    <PricingSlider
+                                        marks={[8000000, 10000000, 100000000, 150000000]}
+                                        min={8000000}
+                                        max={150000000}
+                                    />
                                 </div>
 
                                 <div className="mb-4 border border-white border-opacity-10 bg-royal-blue rounded">
@@ -200,7 +202,7 @@ export const SelfHostedPlanBreakdown = () => {
                                         Monthly minimum price
                                     </div>
                                     <div className="mb-0 flex items-baseline">
-                                        <div className="text-base">$2,000</div> {/* price value from slider */}
+                                        <div className="text-base">${finalCost}</div>
                                         <div className="opacity-50">/mo</div>
                                     </div>
                                 </div>
@@ -210,7 +212,7 @@ export const SelfHostedPlanBreakdown = () => {
                                 <div className="flex justify-between items-baseline">
                                     <div className="text-base mb-0 text-base font-bold">Estimated price</div>
                                     <div className="mb-0 font-bold flex items-baseline">
-                                        <div className="text-base">$2,000</div> {/* price value from slider */}
+                                        <div className="text-base">${finalCost}</div>
                                         <div className="opacity-50">/mo</div>
                                     </div>
                                 </div>

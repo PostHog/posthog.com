@@ -1,13 +1,17 @@
 import React from 'react'
-
+import { useValues } from 'kea'
 import { Structure } from '../../Structure'
 import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
 import { AllTheFeaturesCloud } from '../../AllTheFeaturesCloud'
+import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
 
 import checkIcon from '../../../images/check.svg'
 
 export const CloudPlanBreakdown = () => {
+    const { finalCost, eventNumber } = useValues(pricingSliderLogic)
+    const eventNumberWithDelimiter = eventNumber.toLocaleString()
+
     return (
         <Structure.Section width="4xl" className="py-12">
             <div className="flex justify-center mb-20">
@@ -52,9 +56,9 @@ export const CloudPlanBreakdown = () => {
 
                         <div className="opacity-50">Monthly estimate</div>
                         <div className="flex items-baseline">
-                            <div className="text-lg font-bold">$0</div> {/* price value from slider */}
+                            <div className="text-lg font-bold">${finalCost}</div>
                             <div className="opacity-50">/mo for&nbsp;</div>
-                            <div className="opacity-50">1,000,000 events</div> {/* event value from slider */}
+                            <div className="opacity-50">{eventNumberWithDelimiter} events</div>
                         </div>
 
                         <div className="free-allotment-callout relative text-yellow bg-yellow bg-opacity-10 rounded py-1 px-2 text-xs mt-2 mb-4 inline-flex">
@@ -86,13 +90,15 @@ export const CloudPlanBreakdown = () => {
                                 <div className="mb-0 text-sm font-bold text-white text-opacity-75">
                                     Monthly event volume
                                 </div>
-                                <div className="font-bold text-base">1,000,000</div> {/* event value from slider */}
+                                <div className="font-bold text-base">{eventNumberWithDelimiter}</div>
                             </div>
-                            slider
-                            <br />
+
                             <div className="text-xs opacity-50">
-                                &lt;1 million, 1 million, 10 million, 100 million
-                                {/* Ideal: slider labels should be spaced realistically based on values, not evenly */}
+                                <PricingSlider
+                                    marks={[10000, 1000000, 10000000, 100000000]}
+                                    min={10000}
+                                    max={100000000}
+                                />
                             </div>
                         </div>
 
@@ -119,7 +125,7 @@ export const CloudPlanBreakdown = () => {
                         <div className="flex justify-between items-baseline">
                             <div className="text-base mb-0 text-base font-bold">Estimated price</div>
                             <div className="mb-0 font-bold flex items-baseline">
-                                <div className="text-base">$0</div> {/* price value from slider */}
+                                <div className="text-base">${finalCost}</div>
                                 <div className="opacity-50">/mo</div>
                             </div>
                         </div>
