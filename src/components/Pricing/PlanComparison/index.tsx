@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Fragment } from 'react'
 //import { CheckIcon, MinusIcon } from '@heroicons/react/solid'
 
@@ -7,6 +7,8 @@ import { Structure } from '../../Structure'
 import checkIcon from '../../../images/check.svg'
 import CheckIcon from '../../../images/check.svg'
 import MinusIcon from '../../../images/x.svg'
+
+import './styles/index.scss'
 
 const tiers = [
     {
@@ -235,6 +237,10 @@ function classNames(...classes) {
 }
 
 export const PlanComparison = () => {
+    const [expanded, setExpanded] = useState(false)
+
+    const displaySections = expanded ? sections : sections.slice(0, 1)
+
     return (
         <div className="max-w-7xl mx-auto bg-royal-blue bg-opacity-50 py-8 rounded-lg sm:py-8 sm:px-6 lg:px-8 backdrop-filter backdrop-blur-sm">
             {/* xs to lg */}
@@ -342,7 +348,11 @@ export const PlanComparison = () => {
 
             {/* lg+ */}
             <div className="hidden lg:block">
-                <table className="w-full h-px table-fixed">
+                <table
+                    className={`w-full h-px table-fixed ${
+                        expanded ? 'pricing-table-expanded' : 'pricing-table-collapsed'
+                    }`}
+                >
                     <caption className="sr-only">Pricing plan comparison</caption>
                     <thead>
                         <tr>
@@ -404,7 +414,7 @@ export const PlanComparison = () => {
                             ))}
                         </tr>
                         */}
-                        {sections.map((section) => (
+                        {displaySections.map((section) => (
                             <Fragment key={section.name}>
                                 <tr>
                                     <th
@@ -467,24 +477,34 @@ export const PlanComparison = () => {
                             </Fragment>
                         ))}
                     </tbody>
-                    <tfoot>
-                        <tr className="border-t border-white border-opacity-10">
-                            <th className="sr-only" scope="row">
-                                Choose your plan
-                            </th>
-                            {tiers.map((tier) => (
-                                <td key={tier.name} className="pt-5 px-6 border-white border-opacity-10">
-                                    <a
-                                        href={tier.href}
-                                        className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
-                                    >
-                                        Buy {tier.name}
-                                    </a>
-                                </td>
-                            ))}
-                        </tr>
-                    </tfoot>
+                    {expanded ? (
+                        <tfoot>
+                            <tr className="border-t border-white border-opacity-10">
+                                <th className="sr-only" scope="row">
+                                    Choose your plan
+                                </th>
+                                {tiers.map((tier) => (
+                                    <td key={tier.name} className="pt-5 px-6 border-white border-opacity-10">
+                                        <a
+                                            href={tier.href}
+                                            className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                                        >
+                                            Buy {tier.name}
+                                        </a>
+                                    </td>
+                                ))}
+                            </tr>
+                        </tfoot>
+                    ) : null}
                 </table>
+                {!expanded ? (
+                    <button
+                        onClick={(_) => setExpanded(true)}
+                        className="-mt-12 bg-white rounded py-4 px-8 mx-auto block shadow-lg"
+                    >
+                        See full comparison
+                    </button>
+                ) : null}
             </div>
         </div>
     )
