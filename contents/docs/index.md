@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
 These Docs explain how to deploy, use, and contribute to PostHog.
 
 ## Philosophy

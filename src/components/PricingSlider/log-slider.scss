@@ -6,3 +6,13 @@
         cursor: pointer;
     }
 }
+
+@media screen and (max-width: 1076px) {
+    .rc-slider {
+        max-width: 90%;
+    }
+
+    .rc-slider-mark-text {
+        font-size: 8px;
+    }
+}

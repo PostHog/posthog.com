@@ -13,12 +13,18 @@ interface BlogPostLayoutProps {
     pageTitle: string
     children: any
     featuredImage?: string | null | undefined
+    blogArticleSlug: string
 }
 
-export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostLayoutProps): JSX.Element {
+export function BlogPostLayout({
+    pageTitle,
+    children,
+    featuredImage,
+    blogArticleSlug,
+}: BlogPostLayoutProps): JSX.Element {
     return (
-        <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
-            <Header onPostPage={true} transparentBackground={true} />
+        <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
+            <Header onPostPage blogArticleSlug={blogArticleSlug} />
             <div className="flex justify-between items-center w-full px-4 mb-12">
                 <div className="flex-grow">
                     <Link
@@ -30,23 +36,24 @@ export function BlogPostLayout({ pageTitle, children, featuredImage }: BlogPostL
                 </div>
                 <DarkModeToggle />
             </div>
-            <Structure.Section width="xl" className="text-center leading-tight">
-                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
-                <BlogShareButtons />
-            </Structure.Section>
 
             {featuredImage && (
-                <Structure.Section width="3xl">
+                <Structure.Section width="3xl -mt-6 md:-mt-2">
                     <img src={featuredImage} className="w-full rounded-lg shadow-lg" alt={pageTitle} />
                 </Structure.Section>
             )}
+
+            <Structure.Section width="xl" className="text-center leading-tight mb-6">
+                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
+                <BlogShareButtons />
+            </Structure.Section>
 
             <Structure.Section width="xl">{children}</Structure.Section>
 
             <PosthogAnnouncement />
             <GetStartedModal />
-            <BlogFooter />
-            <Footer onPostPage={true} />
+            <BlogFooter blogArticleSlug={blogArticleSlug} />
+            <Footer onPostPage />
         </div>
     )
 }

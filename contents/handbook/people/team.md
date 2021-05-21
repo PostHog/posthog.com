@@ -19,7 +19,7 @@ We don't care if you haven't finished (or attended) school, if you were super im
 
 What we do care about is your ability to learn, iterate, and ship.
 
-That's why we have people in Belgium, the East and West coast of the US, England, Estonia, South Africa, the Democratic Republic of Congo, among other places. Learn more about [diversity](diversity) at PostHog.
+That's why we have people in Belgium, the East and West coast of the US, England, Estonia, South Africa, the Democratic Republic of Congo, among other places. Learn more about [diversity](../company/diversity) at PostHog.
 
 </div>
 
@@ -28,7 +28,7 @@ That's why we have people in Belgium, the East and West coast of the US, England
 <div class="team-right-image" markdown="1">
 
 ![Remote work globe animation](../../images/team/team-global.gif)
-<br /><small class="centered">Our team of 22 is distributed across 10 countries. </small>
+<br /><small class="centered">Our team of 22 is distributed across 9 countries. </small>
 
 </div>
 
@@ -38,7 +38,7 @@ That's why we have people in Belgium, the East and West coast of the US, England
 
 <div class="team-title" markdown="1">
 
-## Core Team
+## Core team
 
 </div>
 
@@ -48,7 +48,7 @@ That's why we have people in Belgium, the East and West coast of the US, England
 
 <div class="team-left-text" markdown="1">
 
-### James Hawkins, Co-Founder & CEO
+### James Hawkins, Co-Founder & CEO 🇬🇧
 
 <div class="team-left-bio" markdown="1">
 
@@ -70,7 +70,7 @@ I started working with Tim on a few ideas that didn't work out in August 2019. W
 
 <div class="team-right-image" markdown="1">
 
-![James Hawkins portrait](../../images/team/JamesH.png)
+![James Hawkins portrait](../../images/team/James.png)
 
 </div>
 
@@ -82,7 +82,7 @@ I started working with Tim on a few ideas that didn't work out in August 2019. W
 
 <div class="team-left-text" markdown="1">
 
-### Tim Glaser, Co-Founder & CTO
+### Tim Glaser, Co-Founder & CTO 🇬🇧
 
 <div class="team-left-bio" markdown="1">
 
@@ -116,7 +116,7 @@ In my 'spare' time, I fall down snowy mountains, wrestle in the mud over an egg-
 
 <div class="team-left-text" markdown="1">
 
-### Marius Andra, Software Engineer
+### Marius Andra, Software Engineer 🇧🇪
 
 <div class="team-left-bio" markdown="1">
 
@@ -152,7 +152,7 @@ These days I live in Belgium and code [state management libraries](https://kea.j
 
 <div class="team-left-text" markdown="1">
 
-### Eric Duong, Software Engineer
+### Eric Duong, Software Engineer 🇺🇸
 
 <div class="team-left-bio" markdown="1">
 
@@ -184,7 +184,7 @@ To end with an obligatory "I dO MoRE ThAN COdE" detail: I plan to take advantage
 
 <div class="team-left-text" markdown="1">
 
-### James Greenhill, Software Engineer
+### James Greenhill, Software Engineer 🇺🇸
 
 <div class="team-left-bio" markdown="1">
 
@@ -218,7 +218,7 @@ When I’m not out and about in nature you can find me at home with my cat Tesla
 
 <div class="team-left-text" markdown="1">
 
-### Michael Matloka, Software Engineer
+### Michael Matloka, Software Engineer 🇵🇱
 
 <div class="team-left-bio" markdown="1">
 
@@ -249,7 +249,7 @@ In free time, I dabble in [outer space](https://www.kerbalspaceprogram.com/), [m
 
 <div class="team-left-text" markdown="1">
 
-### Paolo D'Amico, Product Team
+### Paolo D'Amico, Product Team 🇲🇽
 
 <div class="team-left-bio" markdown="1">
 
@@ -277,22 +277,20 @@ Before joining PostHog, I lead a product team at Grow Mobility, the largest micr
 
 <div class="team-left-text" markdown="1">
 
-### Lottie Coxon, Graphic Designer
+### Lottie Coxon, Graphic Designer 🇨🇩
 
 <div class="team-left-bio" markdown="1">
 
 I am from the UK - so by default I love the pub, marmite and tea (but not all at once, that would be a sin).
 
-I spent my youth trying to master fine art, after my teacher said I was awful and that I should try something else.
+I spent my youth trying to master fine art, after my teacher said I wasn't very good and that I should try something else.
 In my stubbornness I decided to prove her wrong, and here I am - a designer.
 
-I was quite a weird child. I once ran a race with locked legs (Forest Gump style) because I had a dream the night before that I won by doing so. For those who are wondering, no I did not win. But I would rather be the weird child than the boring one.
+After studying art through school, I took Graphic Design at university and graduated this summer with a first class degree. But instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio up on twitter, I was contacted by PostHog a mere 24 hours later, and the rest is history.
 
-I took Graphic Design at university and graduated this summer and instead of a summer of fun, I was faced with a crashing economy, a pandemic and and a collapsing job market. But thankfully, after putting my portfolio on twitter, I was contacted by PostHog a mere 24 hours later.
+I am now their Graphic Designer, and I couldn't be happier. I spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly making PostHog look great.
 
-I am now their Graphic Designer, and spend my days composing layouts for the website, designing the product’s aesthetic, and most importantly drawing hedgehogs with sunglasses on.
-
-On a side note I have decided to move to Senegal (Africa) to be with my boyfriend George. It’s a bold decision really as I cannot speak French, but I will (try) learn.
+Oh and another thing, I live in the DRC (Democratic Republic of Congo) with my boyfriend. We tend to move a lot and for the moment we are here. It’s a bold decision really as I cannot speak French, but I will (try) learn.
 
 *French accent* C’est la Vie
 
@@ -316,7 +314,7 @@ On a side note I have decided to move to Senegal (Africa) to be with my boyfrien
 
 <div class="team-left-text" markdown="1">
 
-### Yakko Majuri, Developer Experience
+### Yakko Majuri, Developer Experience 🇧🇷
 
 <div class="team-left-bio" markdown="1">
 
@@ -350,7 +348,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 <div class="team-left-text" markdown="1">
 
-### Karl-Aksel Puulmann, Software Engineer
+### Karl-Aksel Puulmann, Software Engineer 🇪🇪
 
 <div class="team-left-bio" markdown="1">
 
@@ -382,7 +380,7 @@ In personal life, you can find me in the wilderness looking for geocaches or hik
 
 <div class="team-left-text" markdown="1">
 
-### Charles Cook, Business Operations
+### Charles Cook, Business Operations 🇬🇧
 
 <div class="team-left-bio" markdown="1">
 
@@ -414,7 +412,7 @@ I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [
 
 <div class="team-left-text" markdown="1">
 
-### Eltje Lange, People and Talent
+### Eltje Lange, People and Talent 🇬🇧
 
 <div class="team-left-bio" markdown="1">
 
@@ -422,9 +420,11 @@ Hi, I'm Eltje (_pronounced Elt-ie_), originally from Northern Germany, I moved t
 
 Just like James, I used to be a professional cyclist until I realised you can’t make a living as a female cyclist. After a short identity crisis, I started university with the goal to become a management consultant. That never happened, I luckily realised my skills and personality are much better suited in a people (I guess non-startup people call it HR) role.
 
-At PostHog I look after our People and Talent function and my goal is make PostHog THE best company to work for. Previously I worked in very a similar role at a startup called [Farewill](https://farewill.com), who offer services around death (yes, you read right). Prior to that, I worked for a couple of companies later on the scaling journey, like [TransferWise](https://transferwise.com/) and [Xing](https://xing.com).
+At PostHog I look after our People and Talent function and my goal is make PostHog THE best company to work for. Previously I worked in very a similar role at a startup called [Farewill](https://farewill.com), who offer services around death (yes, you read right). Prior to that, I worked for a couple of companies later in their scaling journey, like [TransferWise](https://transferwise.com/) and [Xing](https://xing.com).
 
-Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and you can usually find me outdoors - either on my bike or during a long walk.
+Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/MasterChef) skills and you can usually find me outdoors - either on my bike or during a long walk with a coffee in my hands. 
+
+[Check my README](/handbook/company/team/eltje-lange) to learn more about me and the way I work. 
 
 </div>
 
@@ -446,7 +446,7 @@ Outside of work, I am working on my [Masterchef](https://en.wikipedia.org/wiki/M
 
 <div class="team-left-text" markdown="1">
 
-### Cory Watilo, Lead Designer
+### Cory Watilo, Lead Designer 🇺🇸
 
 <div class="team-left-bio" markdown="1">
 
@@ -476,7 +476,7 @@ Our party of 2 became a party of 3 last year. 🎉 Now that I am officially a da
 
 <div class="team-left-text" markdown="1">
 
-### Kunal Pathak, Growth Engineer
+### Kunal Pathak, Growth Engineer 🇺🇸
 
 <div class="team-left-bio" markdown="1">
 
@@ -509,7 +509,7 @@ In terms of cycling– a friend once convinced me to go on a bike ride from San 
 
 <div class="team-left-text" markdown="1">
 
-### Buddy Williams, Software Engineer
+### Buddy Williams, Software Engineer 🇺🇸
 
 <div class="team-left-bio" markdown="1">
 
@@ -562,7 +562,7 @@ I'm looking forward to all we will accomplish together.
 
 <div class="team-left-text" markdown="1">
 
-### Li Yi Yu, Full Stack Engineer
+### Li Yi Yu, Full Stack Engineer 🇺🇸
 
 <div class="team-left-bio" markdown="1">
 
@@ -590,7 +590,7 @@ Some things I enjoy: karaoke, Switch/PC/board games, a good movie or series, str
 
 <div class="team-left-text" markdown="1">
 
-### Sam Winslow, Full Stack Engineer
+### Sam Winslow, Full Stack Engineer 🇺🇸
 
 <div class="team-left-bio" markdown="1">
 
@@ -611,6 +611,107 @@ I am always at the beginning of my journey to learn.
 <div class="team-right-image" markdown="1">
 
 ![Sam portrait](../../images/team/Sam.png)
+
+</div>
+
+</div>
+
+
+<!--- Neil Kakkar Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Neil Kakkar, Software Engineer 🇬🇧
+
+<div class="team-left-bio" markdown="1">
+
+There's three things I love:
+
+1. Learning new things
+2. Applying them
+3. Doing something useful
+
+Software happens to tick all those boxes, so there's no wonder I enjoy coding.
+
+Before PostHog, I was at Bloomberg for ~2.5 years, before which I was studying Mathematics and Computing (ouch) at IIT Delhi. I've built a few fun projects, but one of my favourites is a crypto-currency I started in university that aimed to resolve the issues with Bitcoin. Even with a metric-tonne of funding, that didn't work out as expected, which clued me in to learn about non-technical skills and how startups work.
+
+When I'm not coding, I [write my blog](https://neilkakkar.com), which also not surprisingly, ticks all the boxes above. I've had more than a few posts reach the top of HackerNews, which is epic.
+
+When the above two exhaust me, I spend time travelling, bouldering, hiking, or dancing. Sometimes, I swim too, but the only stroke I know is the panic-stroke. Some other times, I spend time meeting interesting people [on Twitter](https://twitter.com/neilkakkar).
+
+Fun Fact: I usually find out about "current" affairs ~2-6 months after they happen. Yes, I learned about Brexit after it happened... ...It happened, right?
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Neil portrait](../../images/team/Neil.png)
+
+</div>
+
+</div>
+
+<!--- Tiina Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Tiina Turban, Software Engineer 🇫🇷
+
+<div class="team-left-bio" markdown="1">
+
+As another Estonian I also first got exposed to coding in high school.
+From there things escalated pretty fast and while my friends were eating ice-cream and enjoying the lovely sunny spring day outside I was in the computer lab programming a Snake game.
+
+During my CS studies I did a quick detour and spent a summer selling books door-to-door in the US, which confirmed my suspicions that software engineering is a much better fit, but left me with an invaluable experience and ticker skin =)
+
+I explored the fabulous life in Silicon Valley working at Facebook for 5 years and Twitter for 1. However I missed Europe and my love/obsession for dancing brought me back, this time to the land of croissants and cheese - Paris, France.
+Outside of work and dancing I am currently on a quest to learn French, like to frequent the gym, and listen to non-fiction audiobooks.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Tiina portrait](../../images/team/Tiina.png)
+
+</div>
+
+</div>
+
+<!--- Mo Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Mo Shehu, Content Marketer 🇿🇦
+
+<div class="team-left-bio" markdown="1">
+
+I spent the first quarter-century of my life traveling across Africa collecting academic degrees, languages, and memories. Having zig-zagged from computer science to advertizing to now content marketing, I'm happy I've found a tribe of misfits who also believe that you can build a great company from anywhere in the world — no matter your background.
+
+I spend my time creating content for PostHog, working towards inbox zero, and debating the finer points of pizza toppings with new team members. Outside of work, I enjoy photography, writing, and sinking ever-larger amounts of money into Uber Eats. Send help.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Tiina portrait](../../images/team/Mo.png)
 
 </div>
 

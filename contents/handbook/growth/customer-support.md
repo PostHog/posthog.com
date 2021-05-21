@@ -1,5 +1,5 @@
 ---
-title: Customer Support
+title: Customer support
 sidebar: Handbook
 showTitle: true
 ---

@@ -29,7 +29,7 @@ const BlogPage = ({
 
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
-            <Layout headerBackgroundTransparent>
+            <Layout onBlogPage>
                 <SEO title="PostHog Blog" description="What we are up to, every week." />
 
                 <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">

@@ -13,6 +13,9 @@ import imgCloud from '../images/cloud.svg'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgOpenSource from '../images/plan-open-source.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
+import { CallToAction } from 'components/CallToAction'
+import { pricingSliderLogic } from 'components/PricingSlider/pricingSliderLogic'
+import { useActions } from 'kea'
 
 import { PricingComparisonTable } from 'components/PricingComparisonTable'
 import { PricingSlider } from 'components/PricingSlider'
@@ -21,21 +24,26 @@ const PricingPage = () => {
     const [state, setState] = useState({ planOptions: 'cloud' })
     const comparisonRef = useRef()
     const location = useLocation()
+    const { setPricingOption } = useActions(pricingSliderLogic)
     const { Panel } = Collapse
 
     const setOptionFromQS = () => {
         // On load, set the correct plan options (if applicable)
         const { o } = queryString.parse(location.search)
-        if (o && o in plans) setState({ ...state, planOptions: o })
+        if (o && ['self-hosted', 'cloud'].includes(o)) {
+            setState({ ...state, planOptions: o })
+            setPricingOption(o)
+        }
     }
 
-    useEffect(setOptionFromQS, [])
+    useEffect(setOptionFromQS, [location])
 
     const handleSegmentChange = (event) => {
         const newOption = event.target.value
         const pushUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?o=${newOption}`
         window.history.pushState({ path: pushUrl }, '', pushUrl)
         setState({ ...state, planOptions: event.target.value })
+        setPricingOption(event.target.value)
     }
 
     const CTAButton = (props) => (
@@ -133,7 +141,7 @@ const PricingPage = () => {
                         ))}
                         {state.planOptions === 'self-hosted' && (
                             <div className="pricing-cloud">
-                                <h4>For those that want flexibility.</h4>
+                                <h4>For those who want flexibility.</h4>
                                 <div></div>
                                 <div>
                                     <Row type="flex" gutter={[24, 24]} style={{ paddingLeft: '16px' }}>
@@ -239,15 +247,21 @@ const PricingPage = () => {
                                 <div>
                                     <PricingSlider pricingOption="vpc" />
                                 </div>
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
+                                <div className="text-base text-center mt-8 mb-4">
                                     Minimum price <b>$2,000</b> / month. <b>No setup cost</b>.
                                 </div>
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    Want to get started or to discuss?{' '}
-                                    <a href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry">Contact us</a>.
+                                <div className="text-sm text-center mb-8">
+                                    Want to get started or have questions?{' '}
+                                    <a
+                                        href="mailto:sales@posthog.com?title=VPC%20Volumes%20Enquiry"
+                                        className="font-bold"
+                                    >
+                                        Contact us
+                                    </a>
+                                    .
                                 </div>
 
-                                <ul className="p-comparison-list">
+                                <ul className="p-comparison-list max-w-sm text-left mx-auto">
                                     <li>
                                         You want to export product data to your data lake from PostHog on the same
                                         infrastructure.
@@ -269,34 +283,33 @@ const PricingPage = () => {
                             <div className="pricing-cloud">
                                 <h4>One Price. Pay only for what you use.</h4>
                                 <div>
-                                    Get all the features with zero-minimum pricing. Pay based on the events you{' '}
-                                    <b>capture</b> every month.
+                                    Get all the features with zero-minimum pricing. Pay based on the events you capture
+                                    every month.
                                 </div>
 
                                 <div>
                                     <PricingSlider pricingOption="cloud" />
                                 </div>
 
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    First <b>10,000 events are free</b> every single month.
+                                <div className="text-center pt-8">
+                                    <h5>Completely self-serve, get started without a credit card.</h5>
+                                    <div className="text-sm">
+                                        <CallToAction icon="rocket" href="https://app.posthog.com/signup">
+                                            Get Started
+                                        </CallToAction>
+                                        <br />
+                                        <br />
+                                        Unsure about your numbers or want to talk?{' '}
+                                        <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
+                                            Contact us
+                                        </a>
+                                        .
+                                    </div>
                                 </div>
+                                <br />
+                                <br />
 
-                                <div style={{ fontSize: 16, marginTop: 16 }}>
-                                    <a href="https://app.posthog.com/signup">
-                                        <Button type="primary" size="large">
-                                            Get started
-                                        </Button>
-                                    </a>
-                                    <br />
-                                    <br />
-                                    Unsure about your numbers or want to talk?{' '}
-                                    <a href="mailto:sales@posthog.com?title=Cloud%20Large%20Volumes%20Enquiry">
-                                        Contact us
-                                    </a>
-                                    .
-                                </div>
-
-                                <ul className="p-comparison-list">
+                                <ul className="p-comparison-list max-w-sm text-left mx-auto">
                                     <li>Immediate start</li>
                                     <li>You don't have significant privacy requirements</li>
                                     <li>You don't want PostHog on your infrastructure</li>

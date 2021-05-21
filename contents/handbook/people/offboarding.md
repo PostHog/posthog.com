@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Offboarding team members can be a sensitive time. The aim of this policy is to create transparency around how this process works.
+Offboarding team members is a sensitive time. The aim of this policy is to create transparency around how this process works.
 
 Very infrequently, we may have long term contractors working for PostHog, acting essentially like a permanent employee. In this case, the process below is exactly the same.  This offboarding policy *does not* apply to regular contractors who are doing short term work for us.
 
-## Voluntary Departure
+## Voluntary departure
 
 In this case, the team member chooses to leave PostHog. 
 
@@ -19,7 +19,7 @@ If you are a current team member and you are thinking about resigning from PostH
 If resignation is the only solution after you have discussed your concerns, please communicate your intention to resign to your manager or the people team. We will then start a discussion around what is needed for the handover.
 
 
-## Involuntary Departure
+## Involuntary departure
 
 In this case, we require the team member to leave. 
 
@@ -27,7 +27,7 @@ This is generally for performance reasons or because the company's needs have ch
 
 Once the team member has been with us for 3 months, we will provide a 4-month [notice](https://posthog.com/handbook/people/compensation#severance) (otherwise, it will be a month). We will usually ask the team member to stop working immediately, but still pay them a 4-month severance).
 
-## Communicating Departures
+## Communicating departures
 
 PostHog cannot always provide context around why people are leaving when they do.
 
@@ -35,7 +35,7 @@ In the case of voluntary departure, we will ask the team member if they wish to 
 
 In the case of involuntary departure, we will aim to be as transparent as possible about the reasons behind the departure, while respecting the individual's privacy.
 
-## The Process for Offboarding
+## The offboarding process
 
 For involuntary leavers, we will schedule a call, covering the following points with the team member:
 
@@ -53,7 +53,7 @@ During the call, we will also cover above questions and answer any open question
 
 If the team members works their notice period, we will start an offboarding issue and document the progress and handover in there. 
 
-### Final Pay
+### Final pay
 
 Final pay will be determined based on length of service and the reasons for leaving.
 
@@ -66,19 +66,19 @@ We are likely to ask departing team members to sign a release of claims in order
 
 Please note that if there are local laws which are applicable, we will pay the greater of the above or the legally required minimum.
 
-### Share Options Vested
+### Share options vested
 
 If you have been allocated share options, we will confirm how many have vested and the process by which you may wish to exercise them. We have a team-friendly post-departure exercise window of 10 years, and most team members who leave will be deemed a 'good leaver' unless you have been terminated due to misconduct or negligence. 
 
-### Company Property
+### Company property
 
 You will be required to return any company property to us. PostHog will cover the cost of shipping this.
 
-### Business Expenses
+### Business expenses
 
 We will pay any expenses in line with our policy that are still unpaid.
 
-### Personal Email to the Company
+### Personal email to the company
 
 In the case of voluntary offboarding, you will be offered the chance to send a goodbye email to the company, with relevant contact information as you move on.
 

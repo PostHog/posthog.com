@@ -1,14 +1,14 @@
 ---
-title: YC Onboarding
+title: YC onboarding
 sidebar: Handbook
 showTitle: true
 ---
 
 As a YCombinator company ourselves, we want to be supportive of other YC companies that want to use PostHog. As such, our onboarding process for YC companies is different and more extensive than our general process.
 
-## The YC Deal
+## The YC deal
 
-Our YC Deal provides the following:
+Our YC deal provides the following:
 
 One free year of PostHog Cloud with up to 10 million events per month *or* a one-year enterprise license if they want to self-host PostHog.
 
@@ -22,9 +22,9 @@ For YC W21 companies, we also offer:
 
 > **Note:** Batch-specific deals will be updated here as new batches come along.
 
-## Onboarding Call
+## Onboarding call
 
-### Inbound Request Sources
+### Inbound request sources
 
 YC companies can reach out to us in many ways. Ideally we will steer them towards the [dedicated YC Onboarding page](/yc-onboarding), but they may also reach out to us on _yc@posthog.com_ or _ycdeal@posthog.com_ (as well as individual emails and _hey@posthog.com_).
 
@@ -42,7 +42,7 @@ Before the call, we recommend you sign up to our Cloud version and try your hand
 
 If users come to the call with a ready instance, we can focus more on their needs and setting up relevant views for them than a basic overview of the platform that they could have gotten without us.
 
-### The Demo
+### The demo
 
 When doing a demo of PostHog, you should prioritize using the following environments:
 
@@ -96,6 +96,6 @@ This is where we buy from, in descending order of preference:
 
 When ordering from Apple, put in your email address as the main one for the order, and then add the user's email address under 'Share delivery updates' so they can easily track their order. For Allbirds, you will need to put in your email address and then just forward the receipt to the user for them to track. You should not just put in their email address for the order, as you won't then get a copy of the receipt for expenses. 
 
-## Current Responsibilities
+## Current responsibilities
 
 Yakko currently handles YC onboarding calls while Charles processes merch requests. Paolo is the point of contact for billing issues.

@@ -16,13 +16,13 @@ If you live in the UK, you should use your Revolut card for UK-specific spending
 
 For larger expenses which don't fit into the items here, please **raise a policy suggestion for it as a pull request** in this doc, so we can document our decision making into our policy rather than making everything case by case.
 
-## Trivial Expenses
+## Trivial expenses
 
 Just do it.
 
 This means expenses that are under \$75 one off or under \$20/month recurring that we can cancel easily.
 
-## Saving Receipts
+## Saving receipts
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
@@ -43,11 +43,16 @@ Make sure you forward digital invoices to Brex from your PostHog email address -
 
 - Buy something on your Revolut card.
 - If it's a digital invoice, just forward it to ukinvoices@posthog.com. If it's a physical receipt, take a picture and forward it to the same place.
-- You need to submit receipts for _all_ purchases.  
+- You need to submit receipts for _all_ purchases. 
+
+### Your personal card
+
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Eltje to purchase it for you on theirs in the first instance. 
+- If you do need to use your personal card, just send your receipt to Charles directly and he'll process a manual payment. 
 
 Accidentally bought something on the company card when it was a personal expense? Don't worry! Again, just let Charles know _as soon as you become aware_ and he will provide you with the relevant bank details for you to repay the company. 
 
-## Making Larger Purchases
+## Making larger purchases
 
 If your purchase fits within the policy below, there is no need to ask. We **cannot** pay you back for anything without a receipt if you use your personal card.
 
@@ -83,7 +88,7 @@ For monitors, we suggest you pick one that supports 4K. This means you'll get a 
 
 We would expect to spend \$250 to \$350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
 
-### Keyboard, Mouse, and Laptop Stand
+### Keyboard, mouse, and laptop stand
 
 We'd encourage you to buy a keyboard, mouse and laptop stand.
 
@@ -91,7 +96,7 @@ Again, Apple items for keyboards and mice should be what you default to - refurb
 
 [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
 
-### Chairs and Desks
+### Chairs and desks
 
 We find that most people already have a desk and chair that are comfortable.
 
@@ -130,7 +135,7 @@ Individual software is down to your personal preference, and we encourage you to
 * IDEs range widely in cost. Best in class IDE suites can cost up to \$700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
 * Before then, if you wish to spend up to \$200 on an IDE, that is fine. Visual Studio, VIM and PyCharm are the most popular within our team.
 
-## Work Space
+## Work space
 
 We care about you being healthy, happy and productive. 
 
@@ -156,7 +161,7 @@ For every PostHog anniversary, we will donate $50 to a charity of your choice. A
 
 For events like childbirth, weddings, return to work after extended sick leave or the loss of a loved one, Eltje will send flowers and a gift, the budget is $100. We will also send a virtual card.  
 
-## Client Meetings
+## Client meetings
 
 If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill.
 

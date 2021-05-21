@@ -34,7 +34,7 @@ export const RecentBlogPosts = () => {
                             <p className="mt-1 opacity-70 text-sm">This is that story and what we learned from it.</p>
 
                             <CallToAction
-                                type="secondary"
+                                type="button"
                                 className="mx-0 mt-4"
                                 to="/blog/story-about-pivots"
                                 icon="book"
@@ -83,7 +83,7 @@ export const RecentBlogPosts = () => {
                 </div>
 
                 <div className="flex">
-                    <CallToAction type="secondary" className="mt-12 mx-auto" to="/blog" icon="book">
+                    <CallToAction type="button" className="mt-12 mx-auto" to="/blog" icon="book">
                         Visit Blog
                     </CallToAction>
                 </div>

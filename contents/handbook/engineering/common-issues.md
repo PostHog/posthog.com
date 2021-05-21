@@ -1,12 +1,12 @@
 ---
-title: Common Issues
+title: Common issues
 sidebar: Handbook
 showTitle: true
 ---
 
 A page to host big issues raised by users (rather than small bugs) that we have certain answers for.
 
-### Shopify Event-Logging "Bug"
+### Shopify event-logging "bug"
 
 Admin users who have PostHog setup for Shopify may experience their events being logged for another user. 
 

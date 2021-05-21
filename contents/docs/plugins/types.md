@@ -4,8 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
+PostHog supports TypeScript plugins natively, without you having to compile the TypeScript yourself (although you can also do that).
 
+To build a TypeScript plugin, you'll probably need some types, so read on.
 ## Installation
 
 To use the plugin types in your plugin, you can install them as follows:
@@ -28,58 +29,5 @@ export function processEvent(event: PluginEvent, meta: PluginMeta) {
         event.properties['hello'] = 'world'
     }
     return event
-}
-```
-
-## Types
-
-Here are the TypeScript types that can be used by plugin authors:
-
-```js
-interface PluginEvent {
-    distinct_id: string
-    ip: string
-    site_url: string
-    team_id: number
-    now: string
-    event: string
-    sent_at?: string
-    properties?: Record<string, any>
-}
-
-interface PluginAttachment {
-    content_type: string
-    file_name: string
-    contents: any
-}
-
-interface PluginMeta {
-    cache: CacheExtension
-}
-
-interface PluginConfigSchema {
-    key?: string
-    name?: string
-    type?: 'string' | 'attachment'
-    default?: string
-    hint?: string
-    markdown?: string
-    order?: number
-    required?: boolean
-}
-
-interface CacheExtension {
-    set: (key: string, value: unknown, ttlSeconds?: number) => Promise<void>
-    get: (key: string, defaultValue: unknown) => Promise<unknown>
-    incr: (key: string) => Promise<number>
-    expire: (key: string, ttlSeconds: number) => Promise<boolean>
-}
-
-interface ConsoleExtension {
-    log: (...args: unknown[]) => void
-    error: (...args: unknown[]) => void
-    debug: (...args: unknown[]) => void
-    info: (...args: unknown[]) => void
-    warn: (...args: unknown[]) => void
 }
 ```

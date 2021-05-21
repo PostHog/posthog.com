@@ -1,80 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useValues, useActions } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
-import { LogSlider, sliderCurve } from './LogSlider'
+import { LogSlider } from './LogSlider'
 
-interface PricingSliderProps {
-    pricingOption: 'cloud' | 'vpc'
-}
-
-export const PricingSlider = ({ pricingOption }: PricingSliderProps) => {
-    const { sliderValue } = useValues(pricingSliderLogic)
+export const PricingSlider = () => {
+    const { finalCost, additionalUnitPrice, pricingOption } = useValues(pricingSliderLogic)
     const { setSliderValue } = useActions(pricingSliderLogic)
-
-    const [finalCost, setFinalCost] = useState(0)
-    const [additionalUnitPrice, setAdditionalUnitPrice] = useState(0.000225)
-
-    const calculateVpcPricing = (value: number) => {
-        setSliderValue(value)
-
-        let unitPricing = 0.000225
-
-        const estimatedCost = value * unitPricing
-        let finalCost = estimatedCost > 2000 ? estimatedCost : 2000
-
-        if (value >= 10000000 && value < 100000000) {
-            unitPricing = 0.000045
-            finalCost = 10000000 * 0.000225 + (value - 10000000) * 0.000045
-        } else if (value >= 100000000) {
-            unitPricing = 0.000009
-            finalCost = 10000000 * 0.000225 + 100000000 * 0.000045 + (value - 100000000) * 0.000009
-        }
-
-        setAdditionalUnitPrice(unitPricing)
-        setFinalCost(Math.round(finalCost))
-    }
-
-    useEffect(() => {
-        if (pricingOption === 'vpc') {
-            calculateVpcPricing(sliderValue)
-        }
-    }, [pricingOption])
 
     return (
         <>
             <div className="main-price">
-                <div>
-                    {pricingOption === 'vpc' ? `$${additionalUnitPrice}` : '$0.000225'}
-                    <span>/additional event ingested</span>
-                </div>
+                {pricingOption === 'self-hosted' ? (
+                    <div>
+                        First <b>8,000,000</b> events are included every single month.
+                    </div>
+                ) : (
+                    <div>
+                        First <b>1,000,000 events are free</b> every single month.
+                    </div>
+                )}
             </div>
+            <br />
+            <br />
             <div>
-                <br />
                 <LogSlider
                     min={10000}
                     max={150000000}
                     marks={[10000, 100000, 1000000, 10000000, 100000000]}
                     stepsInRange={100}
-                    onChange={(value) => {
-                        if (pricingOption === 'vpc') {
-                            calculateVpcPricing(Math.round(sliderCurve(value)))
-                            return
-                        }
-                        setSliderValue(Math.round(sliderCurve(value)))
-                    }}
+                    onChange={(value) => setSliderValue(value)}
                 />
                 <br />
                 <br />
-                {pricingOption === 'vpc' ? (
-                    <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                        <span className="text-muted">Price:</span> <b>${finalCost}</b>/month
-                    </div>
-                ) : (
-                    <div style={{ fontSize: '1rem', textAlign: 'right' }}>
-                        <span className="text-muted">Price:</span>{' '}
-                        <b>${Math.round((sliderValue - 10000) * 0.000225).toLocaleString()}</b>/month
-                    </div>
-                )}
+                <div>
+                    {pricingOption === 'self-hosted' ? `$${additionalUnitPrice}` : '$0.000225'}
+                    <span>/additional event ingested</span>
+                    {pricingOption === 'self-hosted' ? (
+                        <span>
+                            {' '}
+                            - <strong>decreases as volume grows</strong>. Try it with the slider.
+                        </span>
+                    ) : null}
+                </div>
+                <br />
+                <br />
+                <div className="text-right -mt-16 text-base">
+                    <span className="text-muted">Price:</span> <b>${finalCost}</b>/month
+                </div>
             </div>
         </>
     )
