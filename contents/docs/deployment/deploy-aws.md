@@ -44,6 +44,8 @@ Jump straight in:
 
 1. After verifying it works, you can disable insecure access by removing the listener for port 80 (HTTP).
 
+1. (Optional) If you've removed the HTTP listener, you may wish to add another listener to redirect HTTP requests to HTTPS for convenience. See more details on [Amazon's docs](https://aws.amazon.com/premiumsupport/knowledge-center/elb-redirect-http-to-https-using-alb/).
+
 ## Updating AWS Fargate
 
 Do this to get the latest and greatest version of posthog. Follow these steps:
