@@ -3,7 +3,7 @@ import { CallToAction } from '../CallToAction'
 
 export const FeaturesSelfHost = () => {
     return (
-        <div className="w-11/12 max-w-6xl mx-auto text-left">
+        <div className="w-11/12 max-w-6xl mx-auto text-left relative">
             <ul className="flex flex-col md:flex-row">
                 <li className="flex-1 flex mb-10 md:mb-0">
                     <figure className="flex-0 mr-3">
