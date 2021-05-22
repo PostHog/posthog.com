@@ -1,5 +1,15 @@
 #gatsby-focus-wrapper > .pricing-hero {
-    background: url(../../../images/pricing-background.png) top center / cover #0e0d3c;
+    position: relative;
+
+    &:before {
+        background: url(../../../images/pricing-background.svg) #0e0d3c top center;
+        bottom: 0;
+        content: '';
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100vw;
+    }
 
     h1 {
         background: -webkit-linear-gradient(#5dc7d8, #0e90a5);

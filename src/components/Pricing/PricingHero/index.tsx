@@ -5,7 +5,7 @@ import { Structure } from '../../Structure'
 
 export const PricingHero = () => {
     return (
-        <div className="pricing-hero text-white text-center">
+        <div className="pricing-hero text-white text-center relative">
             <Header
                 onPostPage={false}
                 isBlogArticlePage={false}
@@ -19,7 +19,7 @@ export const PricingHero = () => {
                     title="Simple pricing for powerful analytics"
                     titleTag="h1"
                     titleClassName="mb-2"
-                    leadText="There are different ways to run PostHog, but you'll get the same product suite."
+                    leadText="Get the same product suite no matter how you run PostHog."
                     style
                 />
             </Structure.Section>
