@@ -7,6 +7,7 @@ import { CloudVsSelfHost } from '../components/Pricing/CloudVsSelfHost'
 import { PlanComparison } from '../components/Pricing/PlanComparison'
 import { Savings } from '../components/Pricing/Savings'
 import { FAQs } from '../components/Pricing/FAQs'
+import { Quote } from '../components/Pricing/Quote'
 import { Footer } from '../components/Footer'
 
 import '../components/Pricing/styles/index.scss'
@@ -20,8 +21,9 @@ const PricingNew = (): JSX.Element => {
             <CloudVsSelfHost />
             <h3 className="relative text-white text-center">Compare plans</h3>
             <PlanComparison />
-            <Savings />
+            {/* <Savings /> */}
             <FAQs />
+            <Quote />
             <Footer onPostPage={false} transparentBg />
         </div>
     )

@@ -58,6 +58,7 @@ import { FAQs } from './components/Pricing/FAQs'
 import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingTable } from './components/Pricing/PricingTable'
+import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { PricingSlider } from './components/PricingSlider'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
@@ -134,6 +135,7 @@ export const shortcodes = {
     PlanComparison,
     PricingHero,
     PricingTable,
+    Quote,
     Savings,
     PricingSlider,
     ResponsiveAnchor,

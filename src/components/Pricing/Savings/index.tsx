@@ -6,7 +6,7 @@ import checkIcon from '../../../images/check.svg'
 
 export const Savings = () => {
     return (
-        <div className="pricing-hero text-white text-center">
+        <div className="pricing-hero text-white text-center relative">
             <Structure.Section width="4xl" className="py-12">
                 <Structure.SectionHeader
                     titleTag="h3"
