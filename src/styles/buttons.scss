@@ -59,6 +59,11 @@
     &:hover,
     &.active {
         background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%);
+        @apply text-orange border-orange;
+    }
+
+    &.active:hover {
+        @apply text-orange border-orange;
     }
 }
 

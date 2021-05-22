@@ -37,7 +37,7 @@ export const PricingTable = () => {
                         width="auto"
                         icon="none"
                         onClick={(e) => setPlanType('self-hosted')}
-                        className={currentPlanType === 'self-hosted' ? 'active' : ''}
+                        className={currentPlanType === 'self-hosted' ? 'active ml-2' : 'ml-2'}
                     >
                         Self-hosted
                     </CallToAction>

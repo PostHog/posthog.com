@@ -24,7 +24,6 @@ interface CallToActionProps {
     children: any
     width?: string
     href?: string
-    active?: string
     to?: string
 }
 
@@ -60,17 +59,14 @@ export const CallToAction = ({
     onClick,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
-        <span
-            className={`${iconBg} icon inline-block bg-opacity-10 bg-yellow-100 rounded rounded-sm pl-3 pr-8 py-2 mr-8`}
-        >
+        <span className={`${iconBg} icon inline-block bg-opacity-10 bg-yellow-100 rounded rounded-sm pl-3 py-2`}>
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
         </span>
     ) : null
 
     const widthClass = `w-${width}`
-    const activeClass = `border-orange bg-none text-orange`
     const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between text-sm relative`
-    const classList = mergeClassList(baseClasses, activeClass, buttonTypeClasses[type], className)
+    const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (
         <>
