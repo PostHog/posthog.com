@@ -15,10 +15,10 @@ const PricingNew = (): JSX.Element => {
     return (
         <div className="pricing-hero">
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
-
             <PricingHero />
             <PricingTable />
             <CloudVsSelfHost />
+            <h3 className="relative text-white text-center">Compare plans</h3>
             <PlanComparison />
             <Savings />
             <FAQs />
