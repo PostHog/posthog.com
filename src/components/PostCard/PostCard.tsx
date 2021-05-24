@@ -66,10 +66,51 @@ const FeaturedPost = ({ post }: { post: PostType }) => {
     )
 }
 
-const PostCard = ({ post, featured = false }: { post: PostType; featured?: boolean }) => (
+const LandingPageLatestPost = ({ post }: { post: PostType }) => {
+    return (
+        <div className="w-full flex flex-col justify-between items-center">
+            {post.frontmatter.featuredImage?.publicURL && (
+                <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
+                    <Link to={post.fields.slug} className="featured-post-img">
+                        <img
+                            className="w-full h-auto block rounded shadow-lg"
+                            src={post.frontmatter.featuredImage.publicURL}
+                        />
+                    </Link>
+                </div>
+            )}
+            <div className="w-full py-4">
+                <h2 className="text-2xl text-gray-900 dark:text-gray-100 font-gosha my-1">
+                    <Link
+                        to={post.fields.slug}
+                        className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                    >
+                        {post.frontmatter.title}
+                    </Link>
+                </h2>
+                <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed font-inter">
+                    {post.excerpt}
+                </div>
+                <ReadPost to={post.fields.slug} />
+            </div>
+        </div>
+    )
+}
+
+const PostCard = ({
+    post,
+    featured = false,
+    landingPage = false,
+}: {
+    post: PostType
+    featured?: boolean
+    landingPage?: boolean
+}) => (
     <div>
         {featured ? (
             <FeaturedPost post={post} />
+        ) : landingPage ? (
+            <LandingPageLatestPost post={post} />
         ) : (
             <div className="flex flex-col mb-12">
                 <h3 className="mb-0">
