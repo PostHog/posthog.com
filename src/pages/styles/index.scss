@@ -1,13 +1,5 @@
 @import 'src/vars';
-.free-allotment-callout:before {
-    background: $yellow;
-    content: '';
-    height: 10px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 10px;
-}
+
 :root {
     --primary: #{$primary};
     --success: #{$success};

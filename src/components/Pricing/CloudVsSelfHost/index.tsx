@@ -6,7 +6,7 @@ import checkIcon from '../../../images/check.svg'
 
 export const CloudVsSelfHost = () => {
     return (
-        <div className="pricing-hero text-white text-center">
+        <div className="pricing-hero text-white text-center relative">
             <Structure.Section width="4xl" className="py-12">
                 <h3 className="text-center text-white">PostHog Cloud vs. self-hosting</h3>
                 <div className="bg-deep-blue bg-opacity-20 border border-white border-opacity-10 py-4 px-6 md:px-10 mx-auto mt-4 mb-10 max-w-4xl rounded-lg items-baseline text-left text-white backdrop-filter backdrop-blur-sm">
