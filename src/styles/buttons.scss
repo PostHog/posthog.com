@@ -18,7 +18,7 @@
 
 .pricing-quote {
     &:after {
-        @apply border-yellow border-opacity-10 absolute;
+        @apply border-white border-opacity-10 absolute;
         border-style: solid;
         border-width: 20px;
         border-left-color: transparent;

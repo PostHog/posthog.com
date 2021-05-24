@@ -119,7 +119,7 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Unlimited',
                     'Open source': '~10k (limited by database)',
-                    Free: '1 million<sup>1</sup>',
+                    Free: '1 million',
                     Scale: 'Unlimited',
                 },
             },
@@ -498,7 +498,7 @@ export const PlanComparison = () => {
                     ) : null}
                 </table>
                 {!expanded ? (
-                    <div className="bg-royal-blue pb-8">
+                    <div className="bg-royal-blue pb-8 -mt-16">
                         <button
                             onClick={(_) => setExpanded(true)}
                             className="bg-white rounded py-3 px-8 mx-auto block shadow-lg button-secondary"

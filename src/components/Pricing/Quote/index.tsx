@@ -13,7 +13,7 @@ export const Quote = () => {
             <div className="text-center text-white mt-10 relative">
                 <img src={quoteAvatar} alt="Jonathan Hyde" width="91" height="91" className="mx-auto mb-2" />
                 <div className="text-lg font-bold">Jonathan Hyde</div>
-                <div className="text-sm text-opacity-75">Former Head of Product, Legl</div>
+                <div className="text-sm text-white text-opacity-60">Former Head of Product, Legl</div>
             </div>
         </div>
     )

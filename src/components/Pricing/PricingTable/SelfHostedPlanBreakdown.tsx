@@ -13,7 +13,7 @@ export const SelfHostedPlanBreakdown = () => {
     const eventNumberWithDelimiter = eventNumber.toLocaleString()
 
     return (
-        <Structure.SectionFullWidth width="full" className="pt-6 pb-12">
+        <Structure.SectionFullWidth width="full" className="pt-6 pb-12 relative">
             <p className="text-center text-white text-opacity-75 pb-4">
                 Low event volume? Use our{' '}
                 <a href="https://github.com/posthog/posthog" className="text-orange">
@@ -21,8 +21,8 @@ export const SelfHostedPlanBreakdown = () => {
                 </a>{' '}
                 totally free with community support.
             </p>
-            <div className="grid grid-flow-row auto-rows-max md:grid-flow-col md:auto-cols-max justify-center items-center mb-20">
-                <div className="border border-white border-opacity-10 rounded p-8 mx-12 my-4 md:m-8 md:ml-0 bg-royal-blue bg-opacity-50 backdrop-filter backdrop-blur-lg">
+            <div className="grid grid-flow-row auto-rows-max mdlg:grid-flow-col mdlg:auto-cols-max justify-center items-start mb-20">
+                <div className="border border-white border-opacity-10 rounded p-8 mx-12 my-4 mdlg:m-8 mdlg:ml-0 bg-royal-blue bg-opacity-50 backdrop-filter backdrop-blur-lg">
                     <h3 className="text-lg m-0">Free</h3>
                     <p className="opacity-50 text-sm">Great for startups</p>
                     <ul className="list-none pl-0 mb-6">
@@ -78,7 +78,7 @@ export const SelfHostedPlanBreakdown = () => {
 
                 <div className="rounded inline-flex flex-col md:flex-row items-center">
                     <div className="flex justify-center">
-                        <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col md:flex-row items-center text-white backdrop-filter backdrop-blur-sm">
+                        <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col xl:flex-row items-center text-white backdrop-filter backdrop-blur-sm">
                             <div className="flex-0 border border-white border-opacity-10 rounded p-8 bg-royal-blue">
                                 <h3 className="text-lg m-0">Scale</h3>
                                 <p className="opacity-50 text-sm">For large userbases or event volume</p>
@@ -151,7 +151,7 @@ export const SelfHostedPlanBreakdown = () => {
                                     No setup costs
                                 </div>
                             </div>
-                            <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg">
+                            <div className="flex-0 mt-8 xl:mt-0 md:ml-8 max-w-lg">
                                 <h3 className="mb-1 text-lg">Calculate your price</h3>
                                 <p className="text-sm text-white text-opacity-60">
                                     Pay based on the events you capture each month.
