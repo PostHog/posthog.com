@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
 import { useActions } from 'kea'
 import { Structure } from '../../Structure'
-import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
 import { CloudPlanBreakdown } from './CloudPlanBreakdown'
 import { SelfHostedPlanBreakdown } from './SelfHostedPlanBreakdown'
 import { pricingSliderLogic, PricingOptionType } from '../../PricingSlider/pricingSliderLogic'
-
-import checkIcon from '../../../images/check.svg'
+import { inverseCurve } from 'components/PricingSlider/LogSlider'
 
 export const PricingTable = () => {
     const [currentPlanType, setCurrentPlanType] = useState('cloud')
     const currentPlanBreakdown = currentPlanType === 'cloud' ? <CloudPlanBreakdown /> : <SelfHostedPlanBreakdown />
-    const { setPricingOption } = useActions(pricingSliderLogic)
+    const { setPricingOption, setSliderValue } = useActions(pricingSliderLogic)
 
-    const setPlanType = (type: PricingOptionType) => {
+    const setPlanType = (type: PricingOptionType, sliderValue: number) => {
         setCurrentPlanType(type)
         setPricingOption(type)
+        setSliderValue(inverseCurve(sliderValue))
     }
 
     return (
@@ -27,7 +26,7 @@ export const PricingTable = () => {
                         type="button"
                         width="auto"
                         icon="none"
-                        onClick={(e) => setPlanType('cloud')}
+                        onClick={(e) => setPlanType('cloud', 10000)}
                         className={currentPlanType === 'cloud' ? 'active' : ''}
                     >
                         Cloud
@@ -36,7 +35,7 @@ export const PricingTable = () => {
                         type="button"
                         width="auto"
                         icon="none"
-                        onClick={(e) => setPlanType('self-hosted')}
+                        onClick={(e) => setPlanType('self-hosted', 8000000)}
                         className={currentPlanType === 'self-hosted' ? 'active ml-2' : 'ml-2'}
                     >
                         Self-hosted
