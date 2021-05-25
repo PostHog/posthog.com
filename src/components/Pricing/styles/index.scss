@@ -138,3 +138,34 @@
         display: none;
     }
 }
+
+.pricing-hero {
+    .ant-collapse-borderless {
+        backdrop-filter: blur(3px);
+        border: none;
+
+        > .ant-collapse-item {
+            border-bottom: none;
+            text-align: left;
+        }
+
+        .ant-collapse-header {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.25em;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        .ant-collapse-content {
+            color: #fff;
+        }
+
+        .ant-collapse-content-box {
+            font-size: 1.2em;
+            opacity: 0.75;
+            padding: 0.5em 3em 1em;
+        }
+    }
+}
