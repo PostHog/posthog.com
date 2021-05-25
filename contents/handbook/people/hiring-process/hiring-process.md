@@ -10,6 +10,7 @@ hideAnchor: true
 Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](https://posthog.com/handbook/people/team-structure/why-small-teams). So our hiring process is designed to optimize for 3 things -  speed, quality and experience! 
 
 
+
 ## Hiring Process
 
 These pages will walk you through how we hire here at PostHog. 
@@ -17,20 +18,16 @@ These pages will walk you through how we hire here at PostHog.
 
 ### Deciding to hire
 
-[‘Talent Compounds’](https://posthog.com/handbook/company/values#talent-compounds) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organisation. We also have an extremely high bar for the people we do hire! 
+[‘Talent Compounds’](https://posthog.com/handbook/company/values#talent-compounds) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
 
-We use [Pry](https://app.pry.co/posthog-core/main/hiringplan/employees) to plan our hiring forecast. We use the hiring forecast as a guide, but we have the ability to iterate on this at any time. 
+We use [Pry](https://app.pry.co/posthog-core/main/hiringplan/employees) to plan our hiring forecast. We use the hiring forecast as a guide, but we have the ability to iterate on this at any time. We are super responsive to changes PostHog's needs. 
 
 For each new role, the first step is to open a new issue on the [Ops & People board project board](https://github.com/orgs/PostHog/projects/2), outlining the reason behind the role, responsibilities, time frame etc., and write up a draft job description. Everyone in the company will have the opportunity to give their feedback on the proposed role. 
 
 
 #### **How to write a great job description**
 
-At the moment, we're not too worried about having precisely defined job specs for every role. PostHog is growing and changing rapidly, so we don’t like to set things in stone! 
-
 We generally structure our job description in the following way, which Workable optimizes for:
-
-
 
 1. Describe the company, role and impact 
 2. Skills needed in order to be successful
@@ -50,8 +47,6 @@ For certain roles, we also publish on other job boards.
 
 **Design**
 
-
-
 *   [Behance](https://www.behance.net/adobetalent)
 *   [Dribbble](https://dribbble.com/jobs/new)
 
@@ -63,14 +58,10 @@ For certain roles, we also publish on other job boards.
 
 **Product**
 
-
-
 *   [Mind the Product](https://www.mindtheproduct.com/)
 *   [ProductHunt](https://www.producthunt.com/)
 
 **Remote**
-
-
 
 *   [WeWorkRemotely](https://weworkremotely.com/) 
     *   High volume of candidates, often low quality.
@@ -84,7 +75,7 @@ Once the role is online, the People team will share the details with the team, t
 
 Every time we open a new role, we will share the details and ideal profile with the team during standup.
 
-If you know someone who would be a great addition to the team, please submit them as a referral. If they're successfully hired, you'll receive a $1000 Referral Bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity.
+If you know someone who would be a great addition to the team, please submit them as a referral. If they're successfully hired, you'll receive a $1,000 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity.
 
 **What counts as a referral?** 
 
@@ -92,17 +83,17 @@ Someone you have a personal or professional relationship with to confidently say
 
 **What's the process?**
 
-
-
 *   If there is an ongoing conversation, please ping Eltje into the email thread with the referred candidate, she will take it over from there.
 *   Otherwise, Send Eltje their CV and contact details. If you don't have their resume, please include a link to their LinkedIn profile.
 *   If they have applied themselves already, let Eltje know within 48 hours of them applying.
 
-**Referral payout process:** The bonus date is 3 months from the new team member's start date and will be processed as part of payroll.
+**Referral payout process:** 
 
-**External referrals** We also welcome external referrals, e.g. from:
+The bonus date is 3 months from the new team member's start date and will be processed as part of payroll.
 
+**External referrals** 
 
+We also welcome external referrals, e.g. from:
 
 *   From our investors
 *   From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
@@ -111,15 +102,14 @@ Someone you have a personal or professional relationship with to confidently say
 As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
 
 
+
 ## Managing candidates
 
 We manage all of our candidates in [Workable](https://posthog.workable.com/backend) - please ask Eltje or Charles for an invite to view candidates, leave feedback, and schedule meetings. 
 
 Make sure you record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog.
 
-Expand: Workable is a pretty intuitive platform to use, but here are a few helpful tips to get you going
-
-
+Workable is a pretty intuitive platform to use, but here are a few helpful tips to get you going
 
 *   [A guide to getting started with the basics](https://help.workable.com/hc/en-us/articles/360038712074-Hiring-Manager-Getting-Started-) - this is pretty much everything you need if you are mainly using Workable to leave feedback on candidates you've met, but are otherwise not involved in the recruitment process.
 *   Link your Gmail account in Settings if you are in direct contact with candidates - this means any emails you send directly from your inbox will automatically be captured on their Workable record for everyone on the hiring team to see.
@@ -127,26 +117,21 @@ Expand: Workable is a pretty intuitive platform to use, but here are a few helpf
 
 If you receive an application directly emailed to you or if someone contacts us through a non-Workable channel like Slack, you can either:
 
-
-
 *   Forward their email onto our dedicated Workable email address - this is the most effective option.
 *   If you think they are a strong candidate but they didn't email, introduce them directly to us via our careers email address.
 *   As a last resort, ask them to apply via the relevant link on our [Careers page](https://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
+
 
 
 ## Sourcing
 
 For most roles, we can’t just rely on incoming applications - direct outreach is a great way to influence the hiring pipeline. Direct outreach has a few advantages:
 
-
-
 *   We can approach people with very specific or relevant experience, even when they are not currently looking for a new role
 *   It allows us to encourage candidates from a wider range of backgrounds to apply
 *   It also helps with building an employer brand and general awareness
 
 It is possible to research a list of potential candidates through:
-
-
 
 *   Workable - [People search](https://help.workable.com/hc/en-us/articles/115012750768-What-is-People-Search-) is a great tool to find profiles, email addresses and social media profiles!
 *   LinkedIn - [Boolean searches](https://www.talentlyft.com/en/blog/article/306/boolean-search-a-simple-guide-for-recruiters) are your friend!
@@ -165,6 +150,7 @@ If you are booking meetings through Workable, you should connect your Google Cal
 When you book, you have the option of selecting a Google Meet or Zoom call. You should default to Zoom unless you are scheduling a meeting that you are not attending yourself, in which case use Google Meet (as Zoom will require you to attend as host).
 
 
+
 ## Our interview process
 
 The general interview process we follow at PostHog is outlined below. We also wrote up specific 
@@ -176,7 +162,7 @@ Read applications and resumes/portfolios carefully and leave your feedback as a 
 
 If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. It is understandable why people don't do this, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
 
-A good rule of thumb when deciding whether not to progress - if the candidate doesn't get a _definite yes_ then it's a _no_. It's almost never worth putting through someone who is a 'maybe'! We provide lots of information about PostHog to enable candidates to put their best application forward.
+> A good rule of thumb when deciding whether not to progress - if the candidate doesn't get a _definite yes_ then it's a _no_. It's almost never worth putting through someone who is a 'maybe'! We provide lots of information about PostHog to enable candidates to put their best application forward.
 
 Candidates who are unsuccessful at this stage will receive automated feedback, unless they personalized their application, in which we will try to send a personalized reply.
 
@@ -188,8 +174,6 @@ We start with an interview which is designed to get the overall picture on what 
 This is to allow both PostHog and the candidate to assess whether the candidate is a great cultural addition to the team (not culture fit), and to dig into any areas of potential misalignment based on the application. We are looking for proactivity, directness, good communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset. 
 
 This round is loosely structured into 4 different sections:
-
-
 
 1. PostHog - mission, vision, team, way of working etc. If it was cold outreach, we provide a little more context up front
 2. Candidate background and mindset
@@ -224,8 +208,6 @@ There will also be someone having a casual chat with the candidate. This person 
 
 In advance of the SuperDay, you will need to do some additional prep to ensure that the candidate has a great experience:
 
-
-
 *   Send them an email in the first instance to schedule the SuperDay - you should do this as soon as possible, as candidates often will need to book a day off work. Use the Workable email template for this. If the task involves them doing 'real' work for PostHog, you should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason.
 *   (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There is a template for this email in Workable, depending on the role - this will probably need customising.
 *   (One day before the SuperDay) Create a private channel in Slack for the candidate, you and anyone else relevant - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. You may need to add the candidate to one of our systems depending on the role, e.g. Workable for a recruiter SuperDay, but on the whole this should be minimized.
@@ -257,11 +239,10 @@ The talent team will then follow up with an offer email, outlining all details.
 Once the candidate accepts, the People team will kick off the [onboarding process](https://posthog.com/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 
 
+
 ## Visa sponsorship
 
 Building a diverse team is at the heart of our culture at PostHog and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We are currently only able to provide visas in the US and the UK.
-
-
 
 *   If you are already in the country on a visa (e.g. employed, youth mobility), or require a new visa to remain in the country (e.g. student converting to employed), we will cover the costs for any employee, new or current.
 *   If you wish to relocate and need a visa, we unfortunately will not cover the cost for obtaining the visa or any relocation costs.
