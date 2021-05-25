@@ -7,38 +7,31 @@ hideAnchor: true
 
 ## Exec hiring at PostHog
 
-We deliberately keep our [structure flat](https://posthog.com/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more senior (‘Executive’) positions. 
+We deliberately keep our [structure flat](https://posthog.com/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more Executive-type positions. 
 
-Currently, we are hiring for a [VP of Customer Success](https://apply.workable.com/posthog/j/2145899877/).
-
-With our exec hiring, more so than normal, we are aiming for speed, and as always, quality. We treat this candidate with the same urgency as if the website has gone down! 
-
+With our exec hiring, moreso than normal, we are aiming for speed, and as always, quality. If a candidate is amazing but doesn't fit with a specific role need we have _right now_, we aim to treat the hiring process with the same urgency as if the website has gone down! 
 
 ### Executive hiring process
 
-Preparation
+#### Preparation
 
 Before we kick-off the hiring process for an Executive role, we make sure to have everything we need for the role prepared: 
 
-
-
-*   James/Tim to write job description, People team to review
-*   Post role - share in network
+*   James or Tim to write job description, People team to review
+*   Post role - share in our networks
 *   Ask investors for referrals
 *   Agree on salary benchmark and equity level
-*   Finalise on interview process
-*   The People team will start building a market map and share it with the leadership team, outreach ideally comes from the founders
+*   Finalise interview process
+*   The People team will build a market map and share it with the leadership team, outreach ideally coming from the founders
 
 
 #### Interview process
 
-In order to ensure speed, we are aiming to finish the process within 5 working days (permitting the candidate has availability). 
+In order to ensure speed, we are aiming to finish the process within 5 working days (assuming the candidate has availability). 
 
 In order to achieve this, the interview process roughly follows this structure: 
 
 **Day 1: Candidate meets Eltje -** _30-45 minutes_
-
-
 
 *   Culture
 *   Important information: time frame, salary expectations (base and Equity), visa, other open processes
@@ -46,15 +39,11 @@ In order to achieve this, the interview process roughly follows this structure:
 
 **Day 2: Candidate meets James and/or Tim** - _45-60 minutes_
 
-
-
-*   History/mission/vision
-*   Role
+*   History, mission, vision
+*   Role responsibilities
 *   Role outlook (team, development etc)
 
 **Day 3: Technical Interview with James/Tim + respective team -** _60 minutes_
-
-
 
 *   Background and experience
 *   Technical Deep-dive
@@ -62,23 +51,17 @@ In order to achieve this, the interview process roughly follows this structure:
 
 **Day 3: Meet rest of the Leadership team - Marcus and Charles -** _30-45 minutes_
 
-
-
-*   Strategy/long term outlook
+*   Strategy and long term outlook
 *   Culture fit
 
 **Day 4: [SuperDay](https://posthog.com/handbook/people/hiring-process#posthog-superday) (_optional_) or meet the team (standup or informal lunch)**
 
 **Day 4: Wrap up call with James and/or Tim -** _30 minutes_
 
-
-
 *   Answer any open questions, potentially talk about offer details already
 *   Eltje to follow up via Email
 
 **Day 5: Offer out**
-
-
 
 *   Eltje to send official offer and comp sheet with James/Tim/Charles in CC
 *   James/Tim/Charles to drop a quick message how excited they are
