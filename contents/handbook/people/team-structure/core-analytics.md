@@ -18,7 +18,7 @@ Make PostHog the best and most performant product analytics platform.
 
 - Make sure data is correct and reliable
 - Make sure queries are quick
-- Increase the types of queries customers can do in PostHog
+- Increase the types of queries customers can do in PostHog (including frontend changes)
 
 ## Customer
 
