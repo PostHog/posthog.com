@@ -9,12 +9,15 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ## Engineering
 
-- **[Core experience](core-experience)**
-    - [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/people/team/#eric-duong-software-engineer)
+- **[User experience](user-experience)**
+    - [Tim Glaser (Team lead, interim)](/handbook/people/team#tim-glaser-co-founder--cto-)
     - [Paolo D'Amico (Product Manager)](/handbook/people/team#paolo-damico-product-team)
-    - [Buddy Williams, Full Stack Engineer](/handbook/people/team/#buddy-williams-software-engineer)
-    - Sam Winslow, Full Stack Engineer
+    - [Sam Winslow, Full Stack Engineer](/handbook/people/team#sam-winslow-full-stack-engineer)
     - [Li Yi Yu, Full Stack Engineer]((/handbook/people/team/#li-yi-yu-software-engineer))
+
+- **[Core analytics](core-analytics)**
+    - [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/people/team/#eric-duong-software-engineer)
+    - [Buddy Williams, Full Stack Engineer](/handbook/people/team/#buddy-williams-software-engineer)
 
 <br />
 
