@@ -9,44 +9,37 @@ hideAnchor: true
 
 Operations at PostHog covers legal, finance, people and culture. 
 
-Operations is our smallest department and we don’t hire very often, but we are currently looking for a [Recruitment and Operations Manager](https://apply.workable.com/posthog/j/D9733DEF01/). 
+Operations is our smallest department and we don’t hire very often. That means that each new hire has a disproportionately high impact compared with other, larger teams. 
 
 
 ### What we are looking for in Operations hires
 
 Outside of the skills listed in the job description, we are generally looking for: 
 
-
-
 *   Proactive and organised, with a strong attention to detail
 *   Ability to prioritize 
-*   You are not afraid to step on toes - you have a bias to action and lots of initiative.
+*   You are not afraid to step on toes - you have a bias to action and lots of initiative
 *   Communication skills
-    *   Do they have writing errors in their cover letter? What does their online presence look like?
+    *   Do they have writing errors in their cover letter? Are they responsive and easy to organize the process with?
     *   More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
 
 
 ### Operations hiring process 
 
-
 #### Culture interview
 
-The [culture interview](https://posthog.com/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](https://posthog.com/handbook/people/team-structure/people). his round is loosely structured into 4 different sections:
+The [culture interview](https://posthog.com/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](https://posthog.com/handbook/people/team-structure/people). This round is loosely structured into 4 different sections:
 
-
-
-1. PostHog - mission, vision, team, way of working etc. If it was cold outreach, we provide a little more context up front
-2. Candidate background and mindset
+1. PostHog - mission, vision, team, way of working etc. If it was cold outreach, we provide a little more context up front.
+2. Candidate background and mindset.
 3. Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned.
-4. Answer any open questions
+4. Answer any open questions.
 
-We are looking for proactivity, directness, good communication skills, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset. 
-
+We are looking for speed, autonomy, directness, good communication skills, an awareness of the impact of the candidate's work, evidence of iteration and a growth mindset. 
 
 #### Technical Interview 
 
 The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](https://posthog.com/handbook/people/team-structure/people) as well as [Charles](https://posthog.com/handbook/people/team#charles-cook-business-operations-). For this round, you can expect questions about your background and scenario-based questions. 
-
 
 #### Operations SuperDay
 
@@ -60,16 +53,13 @@ This gives you the chance to learn how we work, and for us to see your quality a
 
 An Operations SuperDay usually looks like this  (_there is a degree of flexibility due to time zone differences):_
 
-
-
 *   Kick-off session
 *   Meet the founders
-*   Time to focus on the task, we can provide support via your personal slack channel 
+*   Time to focus on the task, we can provide support via your personal Slack channel 
 *   Informal session with a team member (bar raiser, link)
 *   On days where we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 
 You can expect to hear back from us within 2 working days of your SuperDay. We will also make the payment for your SuperDay as soon as possible. 
 
 If we decide to make you an offer, we will most likely arrange a call to discuss feedback and next steps.
-
-In case we won’t make an offer, we will give you as much constructive feedback as possible. 
+If we don’t make an offer, we will give you as much constructive feedback as possible. 
