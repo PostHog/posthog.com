@@ -312,7 +312,6 @@
         "entry": "People",
         "name": "People",
         "items": [
-            "handbook/people/hiring-process",
             "handbook/people/compensation",
             "handbook/people/benefits",
             "handbook/people/time-off",
@@ -322,6 +321,18 @@
             "handbook/people/feedback",
             "handbook/people/onboarding",
             "handbook/people/offboarding"
+        ],
+        "child_entries": ["Hiring Process"]
+    },
+    {
+        "entry": "Hiring Process",
+        "name": "Hiring Process",
+        "items": [
+            "handbook/people/hiring-process/hiring-process",
+            "handbook/people/hiring-process/design-hiring",
+            "handbook/people/hiring-process/engineering-hiring",
+            "handbook/people/hiring-process/exec-hiring",
+            "handbook/people/hiring-process/operations-hiring"
         ]
     },
     {
