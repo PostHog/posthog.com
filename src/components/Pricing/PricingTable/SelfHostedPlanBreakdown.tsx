@@ -16,7 +16,7 @@ export const SelfHostedPlanBreakdown = () => {
         <Structure.SectionFullWidth width="full" className="pt-6 pb-12 relative">
             <p className="text-center text-white text-opacity-75 pb-4">
                 Low event volume? Use our{' '}
-                <a href="https://github.com/posthog/posthog" className="text-orange">
+                <a href="https://github.com/posthog/posthog" target="_blank" rel="noreferrer" className="text-orange">
                     open source version
                 </a>{' '}
                 totally free with community support.

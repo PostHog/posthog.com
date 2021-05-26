@@ -42,7 +42,7 @@ export const AllTheFeaturesCloud = () => {
                     PostHog Cloud comes with all product features and platform benefits.
                 </p>
                 <aside className="flex-0">
-                    <CallToAction icon="none" type="secondary" href="#" className="my-4">
+                    <CallToAction icon="none" type="secondary" href="/product-features" className="my-4">
                         Take the product tour
                     </CallToAction>
                 </aside>

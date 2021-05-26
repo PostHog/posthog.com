@@ -139,8 +139,17 @@
     }
 }
 
-.pricing-hero {
+.plans-comparison-table {
+    table th,
+    table td {
+        border: solid 1px rgba(255, 255, 255, 0.1);
+    }
+}
+
+.plans-comparison-table table th,
+.plans-comparison-table table td .pricing-hero {
     .ant-collapse-borderless {
+        background: none;
         backdrop-filter: blur(3px);
         border: none;
 

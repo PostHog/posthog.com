@@ -17,6 +17,8 @@
 }
 
 .pricing-quote {
+    backdrop-filter: blur(5px);
+
     &:after {
         @apply border-white border-opacity-10 absolute;
         border-style: solid;
