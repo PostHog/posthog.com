@@ -10,7 +10,7 @@ Through Docker, PostHoggers can install specific versions of the app while also 
 
 We currently have [three types of images](https://hub.docker.com/r/posthog/posthog):
 
-- `posthog/posthog:latest` - the edge commit of PostHog (ran by PostHog Cloud)
+- `posthog/posthog:latest` - the edge _commit_ of PostHog
 - `posthog/posthog:latest-release` - the latest version of PostHog
 - `posthog/posthog:release-x.y.z` - specific version x.y.z of PostHog
 
