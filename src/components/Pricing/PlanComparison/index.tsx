@@ -349,7 +349,7 @@ export const PlanComparison = () => {
             {/* lg+ */}
             <div className="hidden lg:block">
                 <table
-                    className={`w-full h-px table-fixed relative mb-0 ${
+                    className={`w-full h-px table-fixed relative mb-0 rounded-lg overflow-hidden ${
                         expanded ? 'pricing-table-expanded' : 'pricing-table-collapsed'
                     }`}
                 >

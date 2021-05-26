@@ -14,7 +14,7 @@ import '../components/Pricing/styles/index.scss'
 
 const PricingNew = (): JSX.Element => {
     return (
-        <div className="pricing-hero">
+        <div className="pricing-hero relative">
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <PricingHero />
             <PricingTable />

@@ -19,7 +19,7 @@ export const PricingTable = () => {
     }
 
     return (
-        <div className="pricing-hero text-white">
+        <div className="pricing-hero text-white relative">
             <Structure.SectionFullWidth width="7xl" className="">
                 <div className="flex justify-center ">
                     <CallToAction
