@@ -180,8 +180,8 @@ export function setupPlugin({ attachments, global }) {
 In essence, it takes an event as a parameter and returns an event as a result. In the process, this event can be:
 
 - Modified
-- Sent somewhere else
-- Not returned (preventing ingestion)
+- Sent somewhere
+- Returned (passing it to next plugin or to the saving step) or discarded (preventing further processing and saving)
 
 It takes an event and an object of type `PluginMeta` as parameters and returns an event.
 
@@ -352,8 +352,3 @@ There are 3 ways to use plugins you build:
 1. Reference the location of the plugin on your local instance (e.g. /Users/yourname/path/to/plugin)
 
 This can be configured in 'Settings' -> 'Project Plugins'. 
-
-
-
-
-
