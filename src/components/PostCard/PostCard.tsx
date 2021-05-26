@@ -34,6 +34,14 @@ const ReadPost = ({ to }: { to: string }) => {
     )
 }
 
+const ReadPostHome = ({ to }: { to: string }) => {
+    return (
+        <CallToAction type="button" icon="book" iconBg="bg-yellow-100" to={to} width="full" className="mt-4">
+            Read Post
+        </CallToAction>
+    )
+}
+
 const FeaturedPost = ({ post }: { post: PostType }) => {
     return (
         <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
@@ -66,10 +74,46 @@ const FeaturedPost = ({ post }: { post: PostType }) => {
     )
 }
 
-const PostCard = ({ post, featured = false }: { post: PostType; featured?: boolean }) => (
+const LandingPageLatestPost = ({ post }: { post: PostType }) => {
+    return (
+        <div className="w-full flex flex-col justify-between items-center">
+            {post.frontmatter.featuredImage?.publicURL && (
+                <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
+                    <Link to={post.fields.slug} className="featured-post-img">
+                        <img
+                            className="w-full h-auto block rounded shadow-lg mb-0"
+                            src={post.frontmatter.featuredImage.publicURL}
+                        />
+                    </Link>
+                </div>
+            )}
+            <div className="w-full py-4">
+                <h2 className="text-2xl text-white font-gosha my-1">
+                    <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
+                        {post.frontmatter.title}
+                    </Link>
+                </h2>
+                <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed font-inter">{post.excerpt}</div>
+                <ReadPostHome to={post.fields.slug} />
+            </div>
+        </div>
+    )
+}
+
+const PostCard = ({
+    post,
+    featured = false,
+    landingPage = false,
+}: {
+    post: PostType
+    featured?: boolean
+    landingPage?: boolean
+}) => (
     <div>
         {featured ? (
             <FeaturedPost post={post} />
+        ) : landingPage ? (
+            <LandingPageLatestPost post={post} />
         ) : (
             <div className="flex flex-col mb-12">
                 <h3 className="mb-0">

@@ -35,7 +35,7 @@ ul {
     border-color: rgba(218, 72, 16, 0.9);
 }
 
-.contributor-images > img {
+.contributor-images > .gatsby-image-wrapper {
     height: 50px;
     width: 50px;
 
