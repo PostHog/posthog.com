@@ -80,7 +80,11 @@ Downtime means that queries won't load, but event ingestion will still continue 
 
 _What's the difference between Postgres and Clickhouse?_
 
-Postgres you can write huge volumes to, but for analytics queries it's very slow once a team has thousands of users or more. The advantage is that it's super easy to deploy - so a good way to ie get a small project in a huge enterprise up and running. However, you you can't migrate from Postgres to Clickhouse (since the data format is different later).
+Postgres you can write huge volumes to, but for analytics queries it's very slow once a team has thousands of users or more. The advantage is that it's super easy to deploy - so a good way to ie get a small project in a huge enterprise up and running. However, you you can't migrate from Postgres to Clickhouse (since the data format is different later). Clickhouse is massively more scalable, but requires a lot more work to deploy, so we provide extra support from our infra team to get everything set up and refined over the first few weeks. 
+
+_What if the customer knows their user volumes but has no idea about number of events?_
+
+A good approach is to point them to our [downsampling plugin](https://posthog.com/plugins/downsampling) and set it to say only captiure 1% of users. If they then go to their [billing page](https://app.posthog.com/organization/billing), they can see the events count. Multiplying this by 100 will indicate their actual likely volume, without creating a ton of risk that they spend too much money.
 
 _What privacy features does PostHog offer?_
 
