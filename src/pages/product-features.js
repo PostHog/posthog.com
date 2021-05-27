@@ -12,7 +12,7 @@ function ProductFeatures() {
             <SEO title="Product Features • PostHog" />
             <PageHeader
                 title="Features"
-                tagline="We know you’re wondering how PostHog compares to other analytics tools, so we have made it easy
+                tagline="We know you’re wondering how PostHog compares to other analytics tools, so we made it easy
                 for you to check out how feature-rich we actually are."
                 styleKey="productFeatures"
                 bgColor="navy"
