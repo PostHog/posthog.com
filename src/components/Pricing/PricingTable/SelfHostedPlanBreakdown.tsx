@@ -65,7 +65,11 @@ export const SelfHostedPlanBreakdown = () => {
                     </div>
 
                     <div>
-                        <CallToAction icon="none" href="#" className="my-4">
+                        <CallToAction
+                            icon="none"
+                            href="mailto:sales@posthog.com?subject=Free%20Clickhouse%20deployment"
+                            className="my-4"
+                        >
                             Request access
                         </CallToAction>
                     </div>
@@ -140,7 +144,11 @@ export const SelfHostedPlanBreakdown = () => {
                                 </div>
 
                                 <div>
-                                    <CallToAction icon="none" href="#" className="my-4">
+                                    <CallToAction
+                                        icon="none"
+                                        href="mailto:sales@posthog.com?subject=Scale%20deployment"
+                                        className="my-4"
+                                    >
                                         Contact us
                                     </CallToAction>
                                 </div>
