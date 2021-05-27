@@ -86,6 +86,14 @@ _What if the customer knows their user volumes but has no idea about number of e
 
 A good approach is to point them to our [downsampling plugin](https://posthog.com/plugins/downsampling) and set it to say only captiure 1% of users. If they then go to their [billing page](https://app.posthog.com/organization/billing), they can see the events count. Multiplying this by 100 will indicate their actual likely volume, without creating a ton of risk that they spend too much money.
 
+_Can we air gap an installation for customers with especially stringent compliance requirements, for example?_
+
+We _can_ do this, but it is really important to stress that this drastically limits our ability to provide proactive support, and expectations need to be really carefully managed. In addition, we then need to rely on customers to self-report usage back to us monthly, as we won't be able to monitor usage ourselves. 
+
+_Do we provide customers with estimated hosting costs if they are self-hosting?_
+
+We are able to provide rough estimates if they give us their anticipated event volumes, but again this needs to be carefully managed. This can vary a lot - depends on things like how complex their queries are - and we'd expect some instability to start with as we get the scaling to be appropriate.
+
 _What privacy features does PostHog offer?_
 
 - Self-hosting so no data needs to go to a 3rd party
