@@ -670,7 +670,7 @@ Fun Fact: I usually find out about "current" affairs ~2-6 months after they happ
 As another Estonian I also first got exposed to coding in high school.
 From there things escalated pretty fast and while my friends were eating ice-cream and enjoying the lovely sunny spring day outside I was in the computer lab programming a Snake game.
 
-During my CS studies I did a quick detour and spent a summer selling books door-to-door in the US, which confirmed my suspicions that software engineering is a much better fit, but left me with an invaluable experience and ticker skin =)
+During my CS studies I did a quick detour and spent a summer selling books door-to-door in the US, which confirmed my suspicions that software engineering is a much better fit, but left me with an invaluable experience and thicker skin =)
 
 I explored the fabulous life in Silicon Valley working at Facebook for 5 years and Twitter for 1. However I missed Europe and my love/obsession for dancing brought me back, this time to the land of croissants and cheese - Paris, France.
 Outside of work and dancing I am currently on a quest to learn French, like to frequent the gym, and listen to non-fiction audiobooks.
@@ -711,7 +711,37 @@ I spend my time creating content for PostHog, working towards inbox zero, and de
 
 <div class="team-right-image" markdown="1">
 
-![Tiina portrait](../../images/team/Mo.png)
+![Mo portrait](../../images/team/Mo.png)
+
+</div>
+
+</div>
+
+<!--- Joe Bio -->
+
+<div class="team-row" markdown="1">
+
+<div class="team-left-text" markdown="1">
+
+### Joe Martin, Product Marketer 🇬🇧
+
+<div class="team-left-bio" markdown="1">
+
+I wanted to be a novelist, but discovered a love of tech when working with my university newspaper. So, I joined a publishing start-up and spent seven years writing about PC hardware and [videogame preservation](https://www.eurogamer.net/authors/902).
+
+Eventually I wanted a change, so I moved into marketing. Since then I've led Product Marketing and Content Marketing at start-ups such as Laundrapp, Pollen and Scoro. It's been a lot of fun!
+
+Unlike everyone else at PostHog, I never learned to ride a bike. I had one when I was young, but sold it to buy games for my Amiga A500+.
+
+</div>
+
+</div>
+
+<div class="team-center-space"></div>
+
+<div class="team-right-image" markdown="1">
+
+![Joe portrait](../../images/team/Joe.png)
 
 </div>
 
