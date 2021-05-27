@@ -242,7 +242,7 @@ export const PlanComparison = () => {
     const displaySections = expanded ? sections : sections.slice(0, 1)
 
     return (
-        <div className="plans-comparison-table max-w-7xl mx-auto bg-royal-blue bg-opacity-50 rounded-lg backdrop-filter backdrop-blur-sm overflow-hidden">
+        <div className="plans-comparison-table max-w-7xl mx-auto bg-royal-blue bg-opacity-50 rounded-lg backdrop-filter backdrop-blur-sm overflow-hidden relative">
             {/* xs to lg */}
             <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
                 {tiers.map((tier, tierIdx) => (
