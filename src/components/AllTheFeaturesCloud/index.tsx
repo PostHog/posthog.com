@@ -37,6 +37,7 @@ export const AllTheFeaturesCloud = () => {
                 </div>
             </div>
 
+            {/*
             <div className="bg-deep-blue bg-opacity-20 border border-white border-opacity-10 p-4 px-4 md:px-10 -mx-3 md:mx-auto mt-4 mb-10 max-w-4xl flex flex-col md:flex-row rounded-lg items-center md:items-baseline backdrop-filter backdrop-blur-sm">
                 <p className="flex-0 md:flex-1 text-center md:text-left text-white mb-0">
                     PostHog Cloud comes with all product features and platform benefits.
@@ -47,6 +48,7 @@ export const AllTheFeaturesCloud = () => {
                     </CallToAction>
                 </aside>
             </div>
+            */}
         </div>
     )
 }
