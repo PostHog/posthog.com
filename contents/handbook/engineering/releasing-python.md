@@ -12,4 +12,4 @@ showTitle: true
     2. Request access to upload to PyPi if you don't already have it
 4. `git commit -am "Release X.Y.Z."` (where X.Y.Z is the new version)
 5. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
-6. Push tags as well: `git push origin X.Y.Z`
+6. Push commit, and tags as well: `git push origin X.Y.Z`
