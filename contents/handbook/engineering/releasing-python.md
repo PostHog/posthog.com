@@ -11,4 +11,4 @@ showTitle: true
     1. You may need to `pip install wheel twine`.
     2. Request access to upload to PyPi if you don't already have it.
 4. Run `git commit -am "Release X.Y.Z." && git push origin` to bump the version in `master` (where X.Y.Z is the new version).
-5. Draft and publish new Release X.Y.Z with tag `X.Y.Z` in GitHub: https://github.com/PostHog/posthog-python/releases. Use the same summary as in `CHANGELOG.md`.
+5. Draft and publish new "X.Y.Z" with tag `X.Y.Z` in GitHub: https://github.com/PostHog/posthog-python/releases. Use the same summary as in `CHANGELOG.md`.
