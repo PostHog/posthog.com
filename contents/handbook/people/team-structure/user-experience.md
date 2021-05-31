@@ -7,10 +7,10 @@ hideAnchor: true
 
 ## People
 
-- [Tim Glaser (Team lead, interim)](/handbook/people/team#tim-glaser-co-founder--cto-)
-- [Paolo D'Amico (Product Manager)](/handbook/people/team#paolo-damico-product-team)
-- [Sam Winslow, Full Stack Engineer](/handbook/people/team#sam-winslow-full-stack-engineer)
-- [Li Yi Yu, Full Stack Engineer]((/handbook/people/team/#li-yi-yu-software-engineer))
+- [Marius Andra](/handbook/people/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
+- [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
+- [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
+- [Li Yi Yu]((/handbook/people/team/#li-yi-yu-software-engineer)) (Full Stack Engineer)
 
 ## Mission
 
