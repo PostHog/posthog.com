@@ -7,9 +7,9 @@ hideAnchor: true
 
 ## People
 
-- [Marius Andra (Team lead, Full Stack Engineer)](/handbook/company/team/#marius-andra-software-engineer)
-- [Michael Matloka (Full Stack Engineer)](/handbook/company/team/#michael-matloka-software-engineer)
-- [Yakko Majuri (DevRel + Full Stack Engineer)](/handbook/company/team/#yakko-majuri-technical-writer-and-developer)
+- [Tim Glaser (Team lead, interim)](/handbook/people/team#tim-glaser-co-founder--cto-)
+- [Michael Matloka (Full Stack Engineer)](/handbook/people/team/#michael-matloka-software-engineer)
+- [Yakko Majuri (DevRel + Full Stack Engineer)](/handbook/people/team/#yakko-majuri-technical-writer-and-developer)
 - [Neil Kakkar (Full Stack Engineer)](/handbook/people/team/#neil-kakkar-software-engineer)
 
 ## Mission
