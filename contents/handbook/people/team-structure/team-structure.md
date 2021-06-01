@@ -9,15 +9,17 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ## Engineering
 
-- **[User experience](user-experience)**
+- **[Core analytics](core-analytics)**
+    - [Eric Duong](/handbook/people/team/#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
+    - [Buddy Williams](/handbook/people/team/#buddy-williams-software-engineer) (Full Stack Engineer)
+
+<br />
+
+- **[Core experience](user-experience)**
     - [Marius Andra](/handbook/people/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
     - [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
     - [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
     - [Li Yi Yu]((/handbook/people/team/#li-yi-yu-software-engineer)) (Full Stack Engineer)
-
-- **[Core analytics](core-analytics)**
-    - [Eric Duong](/handbook/people/team/#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
-    - [Buddy Williams](/handbook/people/team/#buddy-williams-software-engineer) (Full Stack Engineer)
 
 <br />
 
@@ -29,15 +31,15 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
+- **[Growth engineering](growth-engineering)**
+    - Kunal Pathak (Growth Engineer)
+
+<br />
+
 - **[Infrastructure and Deployments](infrastructure)**
     - [James Greenhill](/handbook/people/team/#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
     - [Karl-Aksel Puulmann](/handbook/people/team/#karl-aksel-puulmann-software-engineer) (Full Stack Engineer)
     - [Tiina Turban](/handbook/people/team/#tiina-turban-software-engineer) (Full Stack Engineer)
-
-<br />
-
-- **[Growth engineering](growth-engineering)**
-    - Kunal Pathak (Growth Engineer)
 
 ## [Design](design)
 
