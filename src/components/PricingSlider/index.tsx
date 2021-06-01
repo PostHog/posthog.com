@@ -43,8 +43,7 @@ export const PricingSlider = () => {
                     ) : null}
                 </div>
                 <br />
-                <br />
-                <div className="text-right -mt-16 text-base">
+                <div className="text-right -mt-14 md:-mt-10 text-base">
                     <span className="text-muted">Price:</span> <b>${finalCost}</b>/month
                 </div>
             </div>
