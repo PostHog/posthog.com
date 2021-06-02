@@ -8,6 +8,8 @@ hideAnchor: true
 ---
 By: [Mohammed Shehu](https://twitter.com/shehuphd), Content Lead @ PostHog
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Kz4aX1NIzUQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Great engineers will either get autonomy at your company, or they'll get it somewhere else. Our engineers are encouraged to think about the _what_ and _why_ of what they're building - not just the _how_.
 
 <iframe src="https://giphy.com/embed/SjT8hpyb5t0svSneVW" width="480" height="242" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/wolfentertainment-svu-law-and-order-svu22-SjT8hpyb5t0svSneVW">via GIPHY</a></p>
