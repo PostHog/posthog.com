@@ -5,6 +5,10 @@ import { MethodTags } from './components/APIDocs/MethodTags'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlogPostLayout } from './components/Blog/BlogPostLayout'
+import { BlogPosts } from './components/Blog/BlogPosts'
+import { BlogShareButtons } from './components/Blog/BlogShareButtons'
+import { BlogSidebar } from './components/Blog/BlogSidebar'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
@@ -21,7 +25,6 @@ import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
-import { CornerBrackets } from './components/CornerBrackets'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -61,6 +64,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
+import { WorkableSnippet } from './components/WorkableSnippet'
 
 export const shortcodes = {
     Endpoint,
@@ -68,6 +72,10 @@ export const shortcodes = {
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
+    BlogPostLayout,
+    BlogPosts,
+    BlogShareButtons,
+    BlogSidebar,
     BlogFooter,
     CallToAction,
     Benefits,
@@ -84,7 +92,6 @@ export const shortcodes = {
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
-    CornerBrackets,
     DarkModeToggle,
     DemoScheduler,
     DocsPageSurvey,
@@ -124,4 +131,5 @@ export const shortcodes = {
     StartNowButton,
     Structure,
     TableOfContents,
+    WorkableSnippet,
 }

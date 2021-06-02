@@ -1,12 +1,10 @@
 ---
-title: Growth Strategy
+title: Growth strategy
 sidebar: Handbook
 showTitle: true
 ---
 
-<br />
-
-##Self-serve
+## Self-serve
 
 We believe this approach will lead to the best product for end users, which is how we'll build the best company.
 
@@ -31,7 +29,7 @@ This means the path to revenue starts with adoption of a Free version, then work
 
 As an individual, it is useful for organizing your own API creation activity.
 
-In team mode, it is a way for multiple teams to organize distributed development effort. If you're building across multiple teams with different services, how you coordinate these teams is a big, strategic business problem. By using the same tool with modifications, you can orchestrate this.
+In team mode, it is a way for multiple teams to organize distributed development effort. If you're building across multiple teams with different services, how you coordinate these teams is a big, strategic problem. By using the same tool with modifications, you can orchestrate this.
 
 #### LaunchDarkly
 
@@ -70,13 +68,13 @@ As we grow, it'll get important to work out which teams in PostHog own different
         <td>Customer Solutions Architect</td>
     </tr>
     <tr>
-        <td>Business Ops</td>
-        <td colspan="3" style="text-align: center;">Business Ops</td>
+        <td>Sales Ops</td>
+        <td colspan="3" style="text-align: center;">Sales Ops</td>
     </tr>
 </table>
 
 
-Following the 1-2-3 framework, we are currently focused on building our team in the first and second columns - _Free_ and _Team_ - and already have Developer Experience and Business Ops people in place. Only after we have brought in people to take care of Marketing/Developer Evangelism and Customer Success will we then look at recruiting people into the roles in the third column, _Enterprise_. 
+Following the 1-2-3 framework, we are currently focused on building our team in the first and second columns - _Free_ and _Team_ - and already have Developer Experience and Sales Ops people in place. Only after we have brought in people to take care of Marketing/Developer Evangelism and Customer Success will we then look at recruiting people into the roles in the third column, _Enterprise_. 
 
 ### Structure FAQ
 
@@ -94,6 +92,6 @@ Developer-evangelism is more about adoption of the first users - creating conten
 
 Customer Success is a more commercially-oriented function, focused on inbound sales.
 
-#### What are business ops?
+#### What are sales ops?
 
 It'll be important we have good processes in place to grow usage from free to team and beyond. This means making sure we have a CRM set up, integrated with our product, etc.

@@ -16,7 +16,7 @@ This is to make sure that people can take time off flexibly, whilst not feeling 
 
 The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done.
 
-## Permissionless Time Off
+## Permissionless time off
 
 You do not need to "clear" time off with your manager.
 
@@ -28,7 +28,7 @@ The same rules as above apply regardless of the vacation length.
 
 You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately. 
 
-## When You Should Have Time Off
+## When you should have time off
 
 ### You are sick
 
@@ -38,11 +38,11 @@ Please let your manager know if you need to take off due to illness as soon as y
 
 For extended periods of illness, please speak to us so we can work out a plan. In some countries, we may be required to request a doctor's note from you. 
 
-### Jury Duty / Bereavements / Voting / Child Admin Disasters
+### Jury duty / bereavements / voting / childcare disasters
 
 There are lots of situations where life needs to come first. Please let it - just be communicative with us and fit your work around it as you need.
 
-## Parental Leave
+## Parental leave
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of the way you've become a parent - childbirth, adoption or foster care. 
 

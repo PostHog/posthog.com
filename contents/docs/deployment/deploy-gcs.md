@@ -3,7 +3,6 @@ title: Deploying to Google Cloud
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 
 ## Why Google Computing Services

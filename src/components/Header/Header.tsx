@@ -5,6 +5,7 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import hamburgerIcon from '../../images/icons/hamburger.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
+import './style.scss'
 
 interface NavbarLinkProps {
     to?: string
@@ -15,7 +16,7 @@ interface NavbarLinkProps {
 }
 
 const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLinkProps) => {
-    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 text-xs font-semibold '.concat(className)
+    const baseClasses = 'opacity-80 hover:opacity-100 px-4 py-2 text-xs '.concat(className)
     const classList = textLight
         ? `text-white hover:text-white ${baseClasses}`
         : `text-black hover:text-black ${baseClasses}`
@@ -36,7 +37,7 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 }
 
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
-    const classList = `button-primary ${className} border-none`
+    const classList = `button-primary ${className} border-none px-4 py-2 ml-4 transition-none hover:transition-none text-xs rounded-sm`
 
     return (
         <li className="leading-none">
@@ -52,34 +53,46 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
     )
 }
 
+export interface HeaderProps {
+    onPostPage: boolean
+    onHomePage?: boolean
+    onBlogPage?: boolean
+    transparentBackground?: boolean
+    blogArticleSlug?: string
+}
+
 export const Header = ({
     onPostPage,
+    onHomePage = false,
     transparentBackground = false,
-}: {
-    onPostPage: boolean
-    transparentBackground?: boolean
-}) => {
+    onBlogPage = false,
+    blogArticleSlug,
+}: HeaderProps): JSX.Element => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
-    const themeSupportedColor = websiteTheme === 'light' ? 'bg-lightmode-gray' : 'bg-darkmode-purple'
-    const backgroundColor = onPostPage ? themeSupportedColor : 'bg-purple-gradient'
-    const logo = onPostPage && websiteTheme === 'light' ? darkLogo : whiteLogo
-    const textLight = !onPostPage || websiteTheme === 'dark'
+    const logo = onPostPage && websiteTheme === 'light' && !blogArticleSlug ? darkLogo : whiteLogo
+    const textLight =
+        !onPostPage ||
+        (onPostPage && websiteTheme === 'dark') ||
+        transparentBackground ||
+        onHomePage ||
+        onBlogPage ||
+        !!blogArticleSlug
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
 
     return (
         <div
-            className={`primary-navbar py-6 ${
-                transparentBackground ? 'bg-transparent' : backgroundColor
-            } relative z-20`}
+            className={`header-wrapper primary-navbar py-6 relative z-20 ${
+                transparentBackground ? 'transparent-background' : ''
+            } ${blogArticleSlug ? 'blog-article-header' : ''}`}
         >
             <div className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />
                 </Link>
 
-                <ul className="hidden lg:flex list-none justify-between items-center mb-0">
+                <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav">
                     <NavbarLink to="/product-features" textLight={textLight}>
                         Product
                     </NavbarLink>
@@ -92,20 +105,19 @@ export const Header = ({
                     <NavbarLink to="/pricing" textLight={textLight}>
                         Pricing
                     </NavbarLink>
-                    <NavbarLink to="/blog" textLight={textLight}>
-                        Blog
-                    </NavbarLink>
                     <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
                         GitHub
                     </NavbarLink>
                 </ul>
 
-                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0 text-2xs">
-                    <PrimaryCta>Get Started</PrimaryCta>
+                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0 text-xs">
+                    <PrimaryCta>
+                        <span>Get Started</span>
+                    </PrimaryCta>
                     <NavbarLink
                         href="https://app.posthog.com/login"
                         textLight={textLight}
-                        className="uppercase text-xs"
+                        className="font-nav opacity-80 hover:opacity-100 px-4 py-2 text-xs"
                     >
                         Login
                     </NavbarLink>
@@ -168,7 +180,7 @@ export const Header = ({
                         Login
                     </NavbarLink>
 
-                    <PrimaryCta className="my-2 ml-4 transition-none hover:transition-none">Get Started</PrimaryCta>
+                    <PrimaryCta className=" ">Get Started</PrimaryCta>
                 </ul>
             ) : null}
         </div>

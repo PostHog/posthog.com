@@ -26,6 +26,9 @@ interface MdxQueryData {
             showTitle: boolean
             hideAnchor: boolean
             description: string
+            featuredImage?: {
+                publicURL?: string
+            }
         }
     }
 }
@@ -51,7 +54,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
     const { mdx } = data
-    const { frontmatter, body, excerpt, id } = mdx
+    const { frontmatter, body, excerpt, id, slug } = mdx
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -64,15 +67,16 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     if (sidebarEntry !== frontmatter.sidebar) setSidebarContentEntry(frontmatter.sidebar)
 
     const isDocsPage = frontmatter.sidebar === 'Docs'
-    const isBlogArticlePage = frontmatter.sidebar === 'Blog'
+    const blogArticleSlug = frontmatter.sidebar === 'Blog' ? slug : undefined
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
     return (
-        <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
+        <div className={'post-page ' + (!blogArticleSlug ? 'post-page-wrapper' : '')}>
             <Layout
                 onPostPage={true}
-                isBlogArticlePage={isBlogArticlePage}
+                blogArticleSlug={blogArticleSlug}
                 pageTitle={frontmatter.title}
+                featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 menuActiveKey={isDocsPage ? 'docs' : ''}
@@ -89,7 +93,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                         {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                             <h1 className="centered">{frontmatter.title}</h1>
                         )}
-                        <div className="docsPagesContent">
+                        <div className={`docsPagesContent font-inter ${blogArticleSlug ? 'blogPageContent' : ''}`}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
@@ -107,6 +111,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
 
 export default TemplateMdx
 
+// @todo -> be defensive against null featuredImage
 export const query = graphql`
     query MDXQuery($id: String!) {
         mdx(id: { eq: $id }) {
@@ -121,6 +126,9 @@ export const query = graphql`
                 showTitle
                 hideAnchor
                 description
+                featuredImage {
+                    publicURL
+                }
             }
         }
     }

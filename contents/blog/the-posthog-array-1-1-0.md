@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 Major update time (hence the change to 1.*1*.0) - push-based integrations have been introduced!

@@ -3,7 +3,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { CornerBrackets } from '../CornerBrackets'
 import { mergeClassList } from '../../lib/utils'
 
 import rocketImg from './images/rocket.svg'
@@ -14,17 +13,18 @@ import roadmapImg from './images/roadmap.svg'
 import checkImg from './images/check.svg'
 import bookImg from './images/book.svg'
 import downArrow from './images/down-arrow.svg'
+import readDarkImg from './images/read-dark.svg'
 
 interface CallToActionProps {
     onClick?: () => void
     className?: string
     type?: string
     icon?: string
+    iconBg?: string
     children: any
     width?: string
     href?: string
     to?: string
-    displayBrackets?: boolean
 }
 
 const icons = {
@@ -36,14 +36,14 @@ const icons = {
     check: checkImg,
     book: bookImg,
     'down-arrow': downArrow,
+    'read-dark': readDarkImg,
     none: null,
 }
 
 const buttonTypeClasses = {
-    secondary:
-        'bg-transparent border-3 border-white border-opacity-30 text-white mt-2 hover:bg-white hover:bg-opacity-10 hover:text-white',
-    primary:
-        'brackets rounded-sm bg-primary border-primary text-white hover:border-primary-dark hover:bg-primary-dark hover:text-white',
+    primary: 'button-primary rounded text-white hover:text-white',
+    secondary: 'button-secondary rounded text-white hover:text-white',
+    button: 'button rounded text-white hover:text-white',
     custom: '',
 }
 
@@ -51,36 +51,32 @@ export const CallToAction = ({
     className = '',
     type = 'primary',
     icon = 'none',
+    iconBg = 'bg-yellow-100',
     children,
     width = '64',
     href,
     to,
     onClick,
-    displayBrackets = false,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
-        <div className="bg-opacity-10 bg-yellow-100 rounded rounded-sm p-2 mr-8">
+        <span className={`${iconBg} icon inline-block bg-opacity-10 bg-yellow-100 rounded rounded-sm px-3 py-2 mr-8`}>
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
-        </div>
+        </span>
     ) : null
 
-    const brackets = type === 'primary' || displayBrackets ? <CornerBrackets /> : null
-
     const widthClass = `w-${width}`
-    const baseClasses = `p-2 ${widthClass} uppercase rounded-sm inline-flex items-center justify-between select-none text-base font-gosha relative`
+    const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between text-sm relative`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (
         <>
-            {brackets}
             {iconNode}
-            <div className="mr-8 button-label">{children}</div>
-            <span></span>
+            <span className="mx-auto pr-8 button-label">{children}</span>
         </>
     )
 
     return href ? (
-        <a href={href} target="_blank" className={classList} rel="noreferrer">
+        <a href={href} className={classList}>
             {innerHtml}
         </a>
     ) : to ? (

@@ -3,7 +3,6 @@ title: Session Recording
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 > **Important:** Our Session Recording functionality is still in **Beta** mode. Please report any issues you find [on GitHub](https://github.com/PostHog/posthog/issues). 
 

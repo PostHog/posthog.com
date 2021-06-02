@@ -44,6 +44,8 @@ Jump straight in:
 
 1. After verifying it works, you can disable insecure access by removing the listener for port 80 (HTTP).
 
+While not required for setup, at a later date you may wish to add another listener to redirect HTTP requests to HTTPS for convenience. See more details on [Amazon's docs](https://aws.amazon.com/premiumsupport/knowledge-center/elb-redirect-http-to-https-using-alb/).
+
 ## Updating AWS Fargate
 
 Do this to get the latest and greatest version of posthog. Follow these steps:
@@ -76,7 +78,7 @@ You can find more details on Amazon's Docs for [Elastic Container Service](https
 > You can read more about this and how to snapshot RDS on [AWS docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html)
 
 
-Do this to update parameters: to scale different services up/down, update who gets alarms, STMP or more.
+Do this to update parameters: to scale different services up/down, update who gets alarms, SMTP or more.
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 

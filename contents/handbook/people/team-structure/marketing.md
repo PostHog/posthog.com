@@ -13,10 +13,6 @@ hideAnchor: true
 
 Make PostHog a ubiquitous developer tool.
 
-## Responsibilities
-
-See a [breakdown by role](/handbook/growth/marketing#functions) within the team.
-
 ## Customer
 
 Innovative technical teams, who care about:
@@ -31,7 +27,7 @@ We will expand to non-technical teams when we have achieved technical awareness 
 
 * Acquisition
 
-## Philosophy
+## Philosophy
 
 Be kind, concise and direct.
 

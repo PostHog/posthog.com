@@ -51,6 +51,10 @@
 
 
 [[redirects]]
+  from = "/docs/integrations/javascript-integration"
+  to = "/docs/libraries/js"
+
+[[redirects]]
     from = "/docs/integrations/js-integration"
     to = "/docs/libraries/js"
 
@@ -118,3 +122,28 @@
 [[redirects]]
     from = "/handbook/company/team"
     to = "/handbook/people/team"
+
+
+[[redirects]]
+    from = "/handbook/growth/customer-success"
+    to = "/handbook/growth/customer-support"
+
+    
+[[redirects]]
+    from = "/handbook/growth/customer-success"
+    to = "/handbook/growth/customer-support"
+
+    
+[[redirects]]
+    from = "/handbook/getting-started"
+    to = "/handbook/getting-started/start-here"
+
+    
+[[redirects]]
+    from = "/handbook/getting-started"
+    to = "/handbook/getting-started/start-here"
+
+    
+[[redirects]]
+    from = "/handbook/people/team-structure/user-experience"
+    to = "/handbook/people/team-structure/core-experience"

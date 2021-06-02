@@ -4,13 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-<br />
-
 > **Note:** This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com following the rebrand. 
 
 ## Resources
 
-#### Figma: PostHog Branding
+#### Figma: PostHog branding
 
 Refer to this [Figma Project](https://www.figma.com/file/8iM3Damgbl4PyHq6x8JJbu/PostHog-Branding?node-id=1%3A661) for a comprehensive overview of our colors, fonts, logos, and related resources.
 
@@ -50,7 +48,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 
 # H1 
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 64px
@@ -60,7 +58,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 
 ## H2
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 48px
@@ -70,7 +68,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 
 ### H3
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 36px
@@ -80,7 +78,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 
 #### H4
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 30px
@@ -90,7 +88,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 
 ##### H5
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 20px
@@ -100,7 +98,7 @@ If possible, all artwork is to be made with these colours, as well as typography
 
 ###### H6
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 18px
@@ -108,9 +106,9 @@ If possible, all artwork is to be made with these colours, as well as typography
 * Color: Black
 * Opacity: 100%
 
-#### Normal Text
+#### Normal text
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 16px
@@ -118,9 +116,9 @@ If possible, all artwork is to be made with these colours, as well as typography
 * Color: Black
 * Opacity: 100%
 
-#### Small Text
+#### Small text
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 16px
@@ -138,7 +136,7 @@ The color of text should always be black - with the occasional lowered opacity t
 
 For numbers you have two options, the first being *statement* and the second being *subtle*.
 
-#### Statement Numbers
+#### Statement numbers
 
 Statement numbers tend to be used on the landing page or pages where the product is being explained. Usually accompanied by visuals and a small amount of text.
 
@@ -146,7 +144,7 @@ Statement numbers tend to be used on the landing page or pages where the product
 
 Statement No. Gosha Sans, bold, size 64px, colour - Blue (#1D4AFF), Orange (#F54E00), Yellow (#F9BD2B) alternating, opacity 100%. 
 
-#### Subtle Numbers
+#### Subtle numbers
 
 Subtle numbers are seen within docs and blogs, usually employed to give instructions or list things. 
 
@@ -180,7 +178,7 @@ On the landing page the dividers alternate between the three PostHog colours, Bl
 
 These dividers should be 35px below H2 text, and any body copy text below should be 35px from the divider. 
 
-## Background Textures and Color
+## Background textures and color
 
 To stop the website from looking dull we have employed the use of color and texture to give it some depth. 
 
@@ -190,7 +188,7 @@ Color blocks can be any size, but they must not fill more than one third of the 
 
 On top of the color blocks (or on its own) you could also use the halftone grey panel on opacity 20%. This gives the page some texture without distracting the USER from the text. 
 
-## Menus and Sidebars 
+## Menus and sidebars 
 
 Most of the menus on PostHog will be in tones of grey with pops of color for clicked pages. The most common menu featured on the bottom of the website page holds 5 sections for users to navigate the website. This menu is Mid Grey (#BEBEBE), and its size is  315px in height, while occupying the entire length of the screen in width.
 
@@ -212,7 +210,7 @@ Alongside the text on the left is a line with a small circle to indicate the par
 
 Depending on what section of the text you are reading, the text will turn orange and the circle will be aligned with that selected text. 
 
-## Mobile Content
+## Mobile content
 
 When transforming any desktop page to mobile please use the iPhone 8 frame on Figma. 
 
@@ -224,7 +222,7 @@ The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 3
 
 #### H1
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 18px
@@ -234,7 +232,7 @@ The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 3
 
 #### H2
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 14px
@@ -244,7 +242,7 @@ The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 3
 
 #### H3
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 12px
@@ -254,7 +252,7 @@ The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 3
 
 #### H4
 
-###### Font Specifications 
+###### Font specifications 
 
 * Family: Gosha Sans (Regular)
 * Size: 10px
@@ -266,15 +264,15 @@ The header consists of the logo (206 W x 40.13 H) centered, a menu bar (36 W x 3
 
 Follows the same principles as the Desktop format, using Statement and Subtle numbers. 
 
-**Statement Numbers** 
+**Statement numbers** 
 
 Gosha Sans | Regular | Size 20 | Line Height 20 | Color: Yellow, Orange, or Blue | Opacity: 100% 
 
-**Subtle Numbers**
+**Subtle numbers**
 
 Helvetica Neue | Bold | Size 14 | Line Height 20 | Color: Yellow | Opacity: 100% 
 
-## Shapes and Dividers 
+## Shapes and dividers 
 
 Curved rectangle backgrounds, size (203 W x 170 H), with a curved radius of 20, in either Yellow (#F9BD2B), Orange (#F96132), or Navy (#35416B). These can be overlaid with halftone dots, at 20% pass through. 
 

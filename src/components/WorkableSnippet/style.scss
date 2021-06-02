@@ -1,0 +1,15 @@
+#whr_embed_hook {
+    .whr-location {
+        display: none;
+    }
+
+    .whr-items {
+        display: inline-block !important;
+        width: 100%;
+    }
+
+    .whr-group a {
+        font-size: 30px;
+        color: white;
+    }
+}

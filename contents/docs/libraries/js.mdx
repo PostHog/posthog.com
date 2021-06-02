@@ -7,7 +7,7 @@ showTitle: true
 
 > **Note:** You can just use our [snippet](/docs/deployment/snippet-installation) to start capturing events with our JS.
 
-This page of the Docs refers to our [JS library](https://github.com/PostHog/posthog-js).
+This page of the Docs refers to our [posthog-js](https://github.com/PostHog/posthog-js) library.
 
 ## Why Does This Exist?
 
@@ -59,7 +59,7 @@ Just by calling `posthog.init` above, you're already automatically capturing:
 - **pageviews**, including the URL
 - **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
 
-### Ignore/Censure elements
+### Ignore/censor elements
 PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website. If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
 
 ```html
@@ -68,7 +68,7 @@ PostHog puts a great amount of effort into making sure it doesn't capture any se
 
 <br />
 
-#### Important Note on Autocapture
+#### Important notes on autocapture
 
 While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
 
@@ -77,6 +77,8 @@ Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` a
 As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
 
 If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/features/actions).
+
+Another important thing to note is that disabling autocapture **will not disable session recording**. You can disable session recording too using `disable_session_recording` or by turning it off in your project's settings.
 
 ### Website vs App
 
@@ -147,7 +149,12 @@ You can also pass two more arguments to `posthog.identify`. Both take objects co
 
 You can read more about the difference between this [in the previous section](#setting-user-properties-via-an-event).
 
-Warning! You can't call identify straight after an .init (as .init sends a page view, probably with the user's anonymous id. To combat this, you can call .init with a callback, inside which you can then call identify.
+<blockquote class="warning-note">
+    Warning! You can't call identify straight after an `.init` (as `.init` sends a pageview event, probably with the user's
+    anonymous ID).
+</blockquote>
+
+To address the issue described above, you can call `.init` passing a `loaded` callback function, inside which you can then call identify, like so
 
 ```js
 posthog.init('[your api key]', {
@@ -156,9 +163,26 @@ posthog.init('[your api key]', {
 });
 ```
 
+#### Multiple IDs
+
+If you use multiple distinct IDs for the same user (e.g. a logical ID and a UUID), you may want to set both for the same user. This way, if PostHog receives events for either ID, it will properly match them to the same person. This is also helpful if you want to associate anonymous IDs with an identified person (we actually do this automatically when you call `.identify`). To associate multiple IDs to the same person, you do an **alias** call, as shown below.
+
+```js
+posthog.alias('[new ID]', '[original ID]')
+```
+
+The original ID will be kept as the default, but any events sent to either will be received under the same person.
+
 ### Reset After Logout
 
-If a user is logged out, you probably want to call `reset()` to unset any `distinct_ids`. This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped together into 1 user due to shared cookies between sessions.
+If a user is logged out, you most likely want to call `reset` to unset any `distinct_ids`.
+
+<blockquote class="warning-note">
+    This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped
+    together into a single user due to shared cookies between sessions.
+</blockquote>
+
+**We strongly recommend you do this on logout even if you don't expect users to share a computer.** This can help make sure all your users are properly tracked in the odd case a user logs in with a different account.
 
 You can do that like so:
 ```js
@@ -204,7 +228,7 @@ For example, take a look at the following call:
 ```js
 posthog.register({
     "icecream pref": "vanilla",
-    "team_id": 22
+    team_id: 22,
 })
 ```
 
@@ -260,39 +284,38 @@ Opt a user back in:
 posthog.opt_in_capturing();
 ```
 
-
 ### Feature Flags
 
 PostHog v1.10.0 introduced [Feature Flags](/docs/features/feature-flags), which allow you to safely deploy and roll back new features.
 
 Here's how you can use them:
 
-- Do something when the feature flags load:
+-   Do something when the feature flags load:
 
     The argument `callback(flags: string[])` will be called when the feature flags are loaded.
 
-    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are   re-loaded e.g. after calling `.identify()` or `.reloadFeatureFlags()`.
+    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are re-loaded e.g. after calling `identify` or `reloadFeatureFlags`.
 
 ```js
 posthog.onFeatureFlags(callback)
 ```
 
-- Check if a feature is enabled:
+-   Check if a feature is enabled:
 
 ```js
 posthog.isFeatureEnabled('keyword')
 ```
 
-- Trigger a reload of the feature flags:
-    
+-   Trigger a reload of the feature flags:
+
 ```js
 posthog.reloadFeatureFlags()
 ```
 
-- By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
+-   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
 
 ```js
-posthog.isFeatureEnabled('keyword', {send_event: false})
+posthog.isFeatureEnabled('keyword', { send_event: false })
 ```
 
 ### Complete Signup Pseudocode
@@ -302,12 +325,12 @@ As an example, here is how to put some of the above concepts together:
 ```js
 function signup(email) {
     // Your own internal logic for creating an account and getting a user_id
-    let userId = createAccount(email);
+    let userId = createAccount(email)
 
     // Identify user with internal ID
-    posthog.identify(userId);
+    posthog.identify(userId)
     // Set email or any other data
-    posthog.people.set({email: email});
+    posthog.people.set({ email: email })
 }
 ```
 
@@ -315,7 +338,7 @@ function signup(email) {
 
 When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
 
-There are [33 different options](https://github.com/PostHog/posthog-js/blob/master/src/posthog-core.js#L1120-L1206), most of which you do not have to ever worry about.
+There are multiple different configuration options, most of which you do not have to ever worry about. For brevity, only the most relevant ones are used here. However you can view all the configuration options in [posthog-core.js](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L933).
 
 Some of the most relevant options are:
 
@@ -323,7 +346,7 @@ Some of the most relevant options are:
 | Attribute                                                                         | Description                                                                                                                    |
 | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `api_host`<br/><br/>**Type:** String<br/>**Default:** `https://app.posthog.com`   | URL of your PostHog instance.                                                                                                  |
-| `autocapture`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                  | Determines if PostHog should [autocapture](#autocapture) events. Must be `true` for the toolbar to work.                                                              |
+| `autocapture`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                  | Determines if PostHog should [autocapture](#autocapture) events.                                                               |
 | `capture_pageview`<br/><br/>**Type:** Boolean<br/>**Default:** `true`             | Determines if PostHog should automatically capture pageview events.                                                            |
 | `disable_cookie`<br/><br/>**Type:** Boolean<br/>**Default:** `false`              | Disable persisting user data across pages. This will disable cookies, session storage and local storage.  |
 | `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`    | Determines if users should be opted out of session recording.                                                                  |
@@ -331,10 +354,10 @@ Some of the most relevant options are:
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
 | `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`               | A list of properties that should never be sent with `capture` calls.                                                           |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                     | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
-| `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                     | Prevent PostHog autocapture from capturing any text from your elements.                                             |
-| `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                     | Prevent PostHog autocapture from capturing any attributes from your elements.                                             |
-| `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032)                     | **Advanced feature - use with caution.** Configuration options for `rrweb`.                                  |
-
+| `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Prevent PostHog autocapture from capturing any text from your elements. |
+| `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Prevent PostHog autocapture from capturing any attributes from your elements. |
+| `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | **Advanced feature - use with caution.** Configuration options for `rrweb`. |
+| `advanced_decide_disabled`<br/><br/>**Type:** Boolean<br/>**Default:** `false`    | **Advanced!** Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.       |
 
 <br />
 
@@ -349,21 +372,44 @@ posthog.init('<ph_project_api_key>', {
 });
 ```
 
+### Advanced configuration
+
+In this section we describe some additional details on advanced configuration available.
+
+<blockquote class="warning-note">
+    These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are unsure about something, just <a href="/slack" target="_blank">reach out</a>.
+</blockquote>
+
+### Disable /decide endpoint
+
+<blockquote>
+    This feature was introduced in posthog-js 1.10.0. Previously, disabling autocapture would inherently disable the /decide endpoint altogether. This meant that disabling autocapture would inadvertenly turn off session recording, feature flags, compression and the toolbar too.
+</blockquote>
+
+
+One of the very first things the PostHog library does when `init()` is called is make a request to the `/decide` endpoint on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend. This endpoint is required to run most features of the library (detailed below). However, if you're not using any of the described features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.
+
+The `/decide` endpoint can be disabled by setting `advanced_decide_disabled = true` in PostHog config.
+
+**Resources dependent on /decide**
+
+<blockquote class="warning-note">
+    These are features/resources that will be fully disabled when the /decide endpoint is disabled.
+</blockquote>
+
+
+- **Autocapture**. The `/decide` endpoint contains information on whether autocapture should be enabled or not (apart from local configuration).
+- **Session recording**. The endpoint contains information on where to send relevant session recording events.
+- **Compression**. The endpoint contains information on what compression methods are supported on the backend (e.g. LZ64, gzip) for event payloads.
+- **Feature flags**. The endpoint contains the feature flags enabled for the current person. 
+- **Toolbar**. The endpoint contains authentication information and other toolbar capabilities information required to run it.
+
+Any custom event capturing (`posthog.capture`), `$identify`, `$set`, `$set_once` and basically any other calls not detailed above will work as expected when `/decide` is disabled.
+
 ## Debugging
 
 In your dev console you can run `posthog.debug()`. This will enable debugging, easily allowing you to see all data that is being sent to PostHog.
 
-
 ## Development
 
-To develop, clone the [repo](https://github.com/PostHog/posthog-js) and run:
-
-```bash
-yarn start
-```
-
-To create a minified production version, run:
-
-```bash
-yarn build
-```
+For instructions on how to run `posthog-js` locally and setup your development environment, please checkout the README on the [posthog-js](https://github.com/PostHog/posthog-js#README) repository.

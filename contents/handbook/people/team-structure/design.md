@@ -9,7 +9,6 @@ hideAnchor: true
 
 - [Cory Watilo (Team lead, Lead Designer)](/handbook/company/team/#cory-watilo-lead-designer)
 - [Lottie Coxon, Graphic Design)](/handbook/company/team#lottie-coxon-graphic-designer)
-- Mike Nicklas, Front End Engineer
 
 ## Mission
 
@@ -29,7 +28,7 @@ Tangibly, we:
 
 ## Customer
 
-- The other small teams
+- The other small Teams – [here is a guide on how to best work with the Design team](/handbook/company/working-with-design). 
 
 ## Output metrics
 

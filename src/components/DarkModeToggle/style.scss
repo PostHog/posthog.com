@@ -4,6 +4,14 @@
     margin-top: 10px;
 }
 
+.dark {
+    .toggle-switch {
+        &-inner:before {
+            background: #4b325a;
+        }
+    }
+}
+
 .toggle-switch {
     position: relative;
     width: 75px;
@@ -47,7 +55,7 @@
             content: '🌙';
             text-transform: uppercase;
             padding-left: 10px;
-            background-color: #200133;
+            background-color: #4b325a;
             color: #fff;
         }
         .toggle-switch {
