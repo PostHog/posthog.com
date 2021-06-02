@@ -14,13 +14,13 @@ The worst thing you can do to an engineer is micromanage their every move. Not g
 
 At PostHog, one of our core values is autonomy. New people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days and do a retrospective session at the end of each sprint. New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](https://posthog.com/product-features/session-recording) and [feature flags](https://posthog.com/product-features/feature-flags) - which were ideated during one of our hackathons. When you give engineers the freedom to play around with new ideas, magical things happen.
 
-<iframe src="https://giphy.com/embed/UV4liSdOaKdw3V9HGI" width="360" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/BookCameo-cameo-magic-trick-justin-willman-UV4liSdOaKdw3V9HGI">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/xT5LMqQREdsCvyYcsE" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 ## Speed
 
 At PostHog, your speed of iteration is key - we’d rather you move fast and break things (and fix them just as quickly) than spend eons working on the perfect solution to a problem. Product thinking means accepting that the product will never be perfect - and that’s ok. We also believe that the best way to become a great product manager is to build great products from the start, so we don’t give any special product training to new devs. However, we have a [generous budget](https://posthog.com/handbook/people/spending-money) for books, conferences, and outside training.
 
-<iframe src="https://giphy.com/embed/3ouX6KNb8I430s0Ffz" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/money-shopping-cash-3ouX6KNb8I430s0Ffz">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/DCj3Fg7MsO29nRGjJ6" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 ## Hiring product-minded engineers
 
@@ -30,7 +30,7 @@ You can get a sense of project ownership during the hiring phase. At PostHog, we
 
 Beyond iteration speed, risk-taking, and problem-solving, we’re also looking for _curiosity_ - being willing to ask endless questions about the problem and the solution. For example, is there another way we could structure the dashboard? Do we really need three buttons here or is one enough? Do our users actually care about this feature? These are the types of questions we expect from product-minded engineers.
 
-<iframe src="https://giphy.com/embed/3o7btZ1Gm7ZL25pLMs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reactionseditor-3o7btZ1Gm7ZL25pLMs">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/3o7btZ1Gm7ZL25pLMs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 As of writing, we’ve got 12 engineers and are looking to double that number within a year. Expanding your engineering team introduces all sorts of interesting challenges, from the kind of work each person does to how we distribute ownership of output. We’ve introduced [Small Teams](https://posthog.com/handbook/people/team-structure/why-small-teams) at PostHog over the past few months and have enjoyed immense success with it. More work gets done faster and more problems are spotted early and fixed. Every Small Team has its own leader, and top management provides support and direction.
 
