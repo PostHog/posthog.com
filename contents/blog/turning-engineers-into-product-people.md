@@ -8,17 +8,21 @@ hideAnchor: true
 ---
 By: [Mohammed Shehu](https://twitter.com/shehuphd), Content Lead @ PostHog
 
-The worst thing you can do to an engineer is micromanage their every move. Not giving an engineer the space to contribute and execute their own ideas spells death for any startup that wants to attract and retain the best engineers.
+Great engineers will either get autonomy at your company, or they'll get it somewhere else. Our engineers are encouraged to think about the _what_ and _why_ of what they're building - not just the _how_.
 
 <iframe src="https://giphy.com/embed/SjT8hpyb5t0svSneVW" width="480" height="242" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/wolfentertainment-svu-law-and-order-svu22-SjT8hpyb5t0svSneVW">via GIPHY</a></p>
 
-At PostHog, one of our core values is autonomy. New people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days and do a retrospective session at the end of each sprint. New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](https://posthog.com/product-features/session-recording) and [feature flags](https://posthog.com/product-features/feature-flags) - which were ideated during one of our hackathons. When you give engineers the freedom to play around with new ideas, magical things happen.
+At PostHog, new people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days following a retrospective at the end of each sprint. New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](https://posthog.com/product-features/session-recording) and [feature flags](https://posthog.com/product-features/feature-flags) - which were ideated during one of our hackathons.
+
+When you give engineers the freedom to play around with new ideas, magical things happen.
 
 <iframe src="https://giphy.com/embed/xT5LMqQREdsCvyYcsE" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-## Speed
+## Speed is more important than perfect planning
 
-At PostHog, your speed of iteration is key - we’d rather you move fast and break things (and fix them just as quickly) than spend eons working on the perfect solution to a problem. Product thinking means accepting that the product will never be perfect - and that’s ok. We also believe that the best way to become a great product manager is to build great products from the start, so we don’t give any special product training to new devs. However, we have a [generous budget](https://posthog.com/handbook/people/spending-money) for books, conferences, and outside training.
+At PostHog, your speed of iteration is key - we’d rather you move fast and break things (and fix them just as quickly) than spend eons working on the perfect solution to a problem. Product thinking means accepting shipping small changes frequently will get you to the best result.
+
+We also believe that the best way to learn is by doing. Hence we don’t give any special product training to new devs before they start. However, we have a [generous budget](https://posthog.com/handbook/people/spending-money) for books, conferences, and outside training if someone wants further support.
 
 <iframe src="https://giphy.com/embed/DCj3Fg7MsO29nRGjJ6" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
