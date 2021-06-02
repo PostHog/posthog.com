@@ -8,9 +8,9 @@ hideAnchor: true
 ---
 By: [Mohammed Shehu](https://twitter.com/shehuphd), Content Lead @ PostHog
 
-Great engineers will either get autonomy at your company, or they'll get it somewhere else. Our engineers are encouraged to think about the _what_ and _why_ of what they're building - not just the _how_.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Kz4aX1NIzUQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe src="https://giphy.com/embed/SjT8hpyb5t0svSneVW" width="480" height="242" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/wolfentertainment-svu-law-and-order-svu22-SjT8hpyb5t0svSneVW">via GIPHY</a></p>
+Great engineers will either get autonomy at your company, or they'll get it somewhere else. Our engineers are encouraged to think about the _what_ and _why_ of what they're building - not just the _how_.
 
 At PostHog, new people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days following a retrospective at the end of each sprint. New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](https://posthog.com/product-features/session-recording) and [feature flags](https://posthog.com/product-features/feature-flags) - which were ideated during one of our hackathons.
 
@@ -30,7 +30,9 @@ We also believe that the best way to learn is by doing. Hence we don’t give an
 
 Many companies harm their hiring prospects with their engineering job descriptions. Because autonomy is so critical, engineers are sensitive to certain keywords in job descriptions. For example, ‘close collaboration with product’ might give off the idea that product runs the show and that engineering merely exists to do the PM’s bidding. Calling the engineering team ‘IT’ is another red flag - no engineer wants to be treated like a second-rate citizen.
 
-You can get a sense of project ownership during the hiring phase. At PostHog, we select for entrepreneurial candidates - people who’ve founded companies or worked on side projects in the past. Such people more likely to be [intrapreneurs](https://www.investopedia.com/terms/i/intrapreneur.asp) - out-of-the-box problem solvers who generate profitable solutions with the full backing of their company. We also don't care whether they’ve worked at only one company or job-hopped - just that they learned new stuff, grew continuously, and built better products. Likewise, we don’t care whether you dropped out of college or attained a PhD - experience and entrepreneurship are not tied to qualifications. Most people underestimate the four-year head-start one gets by skipping college, especially for a field like computer science where everything you need to know is a Google search away.
+You can get a sense of project ownership during the hiring phase. At PostHog, we select for entrepreneurial candidates - people who’ve founded companies or worked on side projects in the past. Such people more likely to be [intrapreneurs](https://www.investopedia.com/terms/i/intrapreneur.asp) - out-of-the-box problem solvers who generate profitable solutions with the full backing of their company. 
+
+We also don't care whether they’ve worked at only one company or job-hopped - just that they learned new stuff, grew continuously, and built better products. Likewise, we don’t care whether you dropped out of college or attained a PhD - experience and entrepreneurship are not tied to qualifications. Most people underestimate the four-year head-start one gets by skipping college, especially for a field like computer science where everything you need to know is a Google search away.
 
 Beyond iteration speed, risk-taking, and problem-solving, we’re also looking for _curiosity_ - being willing to ask endless questions about the problem and the solution. For example, is there another way we could structure the dashboard? Do we really need three buttons here or is one enough? Do our users actually care about this feature? These are the types of questions we expect from product-minded engineers.
 
