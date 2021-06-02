@@ -10,9 +10,9 @@ Through Docker, PostHoggers can install specific versions of the app while also 
 
 We currently have [three types of images](https://hub.docker.com/r/posthog/posthog):
 
-- `posthog/posthog:latest` - builds the most up-to-date release
-- `posthog/posthog:release-[version number]` - builds a specific app version
-- `posthog/posthog:preview` - builds a preview image
+- `posthog/posthog:latest` - the edge _commit_ of PostHog
+- `posthog/posthog:latest-release` - the latest version of PostHog
+- `posthog/posthog:release-x.y.z` - specific version x.y.z of PostHog
 
 > We recommend using `posthog/posthog:latest`, so you have the latest features and security updates!
 
@@ -104,16 +104,6 @@ If you're running your Postgres database elsewhere (i.e. RDS, or a different ser
 
 - Set the `DATABASE_URL` property to the location of your database
 - Remove `services -> db` and `depends_on: - db`
-
-### Docker One-Line Preview
-
-If you would like to run the software locally, you can use a Docker preview. Note that this is **not** meant for production use.
-
-Paste the following snippet into your terminal:
-
-```bash
-docker run -t -i --rm --publish 8000:8000 -v postgres:/var/lib/postgresql posthog/posthog:preview
-```
 
 ## Upgrading PostHog with Docker
 
