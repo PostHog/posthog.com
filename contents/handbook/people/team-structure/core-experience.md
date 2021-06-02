@@ -11,6 +11,7 @@ hideAnchor: true
 - [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
 - [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
 - [Li Yi Yu]((/handbook/people/team/#li-yi-yu-software-engineer)) (Full Stack Engineer)
+- Alex Kim (Full Stack Engineer)
 
 ## Mission
 
@@ -31,14 +32,15 @@ In general, any PostHog user, whether they're an engineer, product manager or bu
 ## Output metrics
 Our metrics are aligned to the ordered priorities of our team: 1) delighting 5 focus customers, 2) feature parity and 3) creating the smoothest user experience.
 
-#### Focus customers' delight
+### Focus customers' delight
 Our current team metric comes from the latest company strategy of delighting 5 focus customers. We will be measuring delight (via an adjusted NPS) for the three key stakeholders on each of the companies. The goal is delighting all (or almost all) of them (i.e. they would become very disappointed if PostHog was taken away).
 
-#### Parity progress
+### Parity progress
 Metric details coming soon.
 
-#### Future: WAU/MAU ratio
+### Future: WAU/MAU ratio
 > We are not making use of this metric just yet, based on the latest priority changes.
+
 Ratio of weekly active users versus monthly active users (rolling period) where an active user is someone who *Discovered Learning* during the period. This signals core product usage without being affected by activation or acquisition activities.
 - Measurements for the purpose of an output metric will be done weekly.
 - More context on the metric can be found in [the relevant issue](https://github.com/PostHog/product-internal/issues/1).
