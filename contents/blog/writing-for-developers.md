@@ -9,7 +9,7 @@ hideAnchor: true
 
 By: [James Hawkins](https://twitter.com/james406), Co-Founder/CEO of PostHog
 
-As a technical founder, one of the most valuable skills is hitting the front page of [HackerNews](https://news.ycombinator.com).
+As a founder, one of the most surprsingly important skills I've realized I have is hitting the front page of [HackerNews](https://news.ycombinator.com).
 
 Out of five posts that I hoped would get there, four did. Look mom, lots of traffic:
 
@@ -49,7 +49,7 @@ Most of your time should be spent *re*writing.
 
 *Do:*
 
-* Get to the point as quickly as possible. 
+* [Omit needless words](https://en.wikipedia.org/wiki/The_Elements_of_Style). 
 * Keep sentences short, varying them every now and again.
 
 *Don't:*
@@ -109,3 +109,7 @@ Being concise means giving a lot of information clearly and in a few words. It d
 * "Soon"
 * "Quickly"
 * "Better"
+
+## Start
+
+Whatever you do, make sure you actually get something out. You can't improve something that doesn't exist.
