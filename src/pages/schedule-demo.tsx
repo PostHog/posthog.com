@@ -4,6 +4,7 @@ import { DemoScheduler } from '../components/DemoScheduler'
 import { Spacer } from '../components/Spacer'
 import './styles/yc-onboarding.scss'
 import { SEO } from '../components/seo'
+import { Link } from 'gatsby'
 
 export const ScheduleDemo = () => {
     return (
@@ -13,13 +14,13 @@ export const ScheduleDemo = () => {
                 <Spacer />
                 <h1 className="centered">Schedule Demo</h1>
                 <p>
-                    Use the widget below to schedule a demo call with one of our engineers. We will discuss what you
-                    need, show you the platform, get you set up if possible, and can also give you access to a demo
-                    instance so you can try out PostHog yourself.
+                    Use the widget below to schedule a demo call with one of our engineers. Please note that this is not
+                    a Sales call. For Sales enquiries please email <i>sales@posthog.com</i>.
                 </p>
-                <br />
                 <p>
-                    If none of these times suits you, email <i>yakko@posthog.com</i> and we'll figure something out!
+                    PostHog demos are done in group sessions and are an introduction to the platform. You can also find
+                    a lot of information about the product in our <Link to="/docs">Docs</Link> and{' '}
+                    <a href="https://www.youtube.com/channel/UCoP6ql8QkyOoVpBU4P8LM6w">secondary YouTube channel</a>.
                 </p>
                 <br />
                 <DemoScheduler iframeSrc="https://calendly.com/yakko/demo" />
