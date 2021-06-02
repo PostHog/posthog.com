@@ -26,7 +26,7 @@ List below is prioritized.
 
 
 ## Customer
-In general, any PostHog user, whether they're an engineer, product manager or business person, should be able to effectively analyze their product. However, our focus in the short-term is **product managers at scale-ups that fit our focus customer persona.**
+In general, any PostHog user, whether they're an engineer, product manager or business person, should be able to effectively analyze their product. However, our **focus in the short-term is product managers at scale-ups that fit our focus customer persona.**
 
 ## Output metrics
 Our metrics are aligned to the ordered priorities of our team: 1) delighting 5 focus customers, 2) feature parity and 3) creating the smoothest user experience.
