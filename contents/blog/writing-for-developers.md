@@ -9,7 +9,7 @@ hideAnchor: true
 
 By: [James Hawkins](https://twitter.com/james406), Co-Founder/CEO of PostHog
 
-As a founder, one of the most surprsingly important skills I've realized I have is hitting the front page of [HackerNews](https://news.ycombinator.com).
+As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [HackerNews](https://news.ycombinator.com).
 
 Out of five posts that I hoped would get there, four did. Look mom, lots of traffic:
 
