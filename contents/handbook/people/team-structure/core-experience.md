@@ -11,27 +11,40 @@ hideAnchor: true
 - [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
 - [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
 - [Li Yi Yu]((/handbook/people/team/#li-yi-yu-software-engineer)) (Full Stack Engineer)
+- Alex Kim (Full Stack Engineer)
 
 ## Mission
 
-To create the smoothest user experience.
+To create the smoothest experience when discovering insights about products and its end users.
 
 ## Responsibilities
+List below is prioritized.
 
-- Ensuring performant and clear user experience across all analytics functionality
-- Build and improve frontend features across the app
-- Extending feature set as suggested by requests, by our own ideas, and by need for parity with other platforms
+1. Reaching parity in terms of features, performance and user experience with leading product analytics solutions, including:
+   1. Extending core feature set (particularly on the frontend) as informed by dogfooding, user feedback, experimentation and strategic decisions.
+   2. Extending user experience to enable product analytics for non-technical users. 
+2. Maintaining (and improving where applicable) supporting activities for the core experience (this includes: cohorts, persons, sessions *[not session recording]*, annotations, settings, authentication, account management). 
 
 
 ## Customer
-
-- Product managers at scale-ups
+In general, any PostHog user, whether they're an engineer, product manager or business person, should be able to effectively analyze their product. However, our **focus in the short-term is product managers at scale-ups that fit our focus customer persona.**
 
 ## Output metrics
+Our metrics are aligned to the ordered priorities of our team: 1) delighting 5 focus customers, 2) feature parity and 3) creating the smoothest user experience.
 
-- Retention per feature
+### Focus customers' delight
+Our current team metric comes from the latest company strategy of delighting 5 focus customers. We will be measuring delight (via an adjusted NPS) for the three key stakeholders on each of the companies. The goal is delighting all (or almost all) of them (i.e. they would become very disappointed if PostHog was taken away).
 
-[Dashboard](https://app.posthog.com/dashboard/1124)
+### Parity progress
+Metric details coming soon.
+
+### Future: WAU/MAU ratio
+> We are not making use of this metric just yet, based on the latest priority changes.
+
+Ratio of weekly active users versus monthly active users (rolling period) where an active user is someone who *Discovered Learning* during the period. This signals core product usage without being affected by activation or acquisition activities.
+- Measurements for the purpose of an output metric will be done weekly.
+- More context on the metric can be found in [the relevant issue](https://github.com/PostHog/product-internal/issues/1).
+
 
 ## Slack channel
 
