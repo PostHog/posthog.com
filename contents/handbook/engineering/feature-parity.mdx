@@ -8,20 +8,20 @@ The [Core Experience Team](/handbook/people/team-structure/core-experience) and 
 
 > The goal of this document is providing context on **progress towards feature parity**.
 
-Last updated: **Jun 2, 2021**
+Last updated: **Jun 3, 2021**
 
 -   This page gets updated every 2 weeks after each sprint retrospective and planning.
 -   **This is a high-level list of features.** Issues contain further details.
 -   This page is not used to track down every task, bug or improvement in the product. Each team has its own GitHub project for that. We just track **high-level features** in this page.
 -   Issues might not yet include a comprehensive description of all requirements / specifications.
--   This page does not contain details on PostHog's entire journey to feature parity, but rather starting from the split of Core Experience and Core Analytics [small teams](/handbook/people/team-structure/why-small-teams), May 24, 2021.
--   Because this page contains high-level features, some of this may require multiple sprint/release cycles to be completed. The _shipped on Release_ column details the sprint/release when the feature was finished and shipped.
+-   This page does not contain details on PostHog's entire journey to feature parity, but rather starting from the split of Core Experience and Core Analytics [small teams](/handbook/people/team-structure/why-small-teams), May 21, 2021 (release 26-1).
+-   Because this page contains high-level features, some of this may require multiple sprint/release cycles to be completed. The _Shipping Release_ column details the sprint/release when the feature was finished and shipped.
 
 ### Core Experience
 
--   Working on **3 tasks** during current release cycle (26).
--   To date, **12 tasks** are outstanding.
--   Completed **1 tasks** since May 24th.
+-   Working on **3 tasks** during current release cycle (26-2).
+-   To date, **14 tasks** are outstanding.
+-   Completed **1 task** since May 24th.
 -   Detailed project board: [#9](https://github.com/orgs/PostHog/projects/9)
 
 <table>
@@ -29,24 +29,29 @@ Last updated: **Jun 2, 2021**
         <tr>
             <th>Feature</th>
             <th>Status</th>
-            <th>Shipped on Release</th>
+            <th>Shipping Release</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>Saved reports (#3408)</td>
             <td>✏️ In progress</td>
-            <td>XX (Jun X)</td>
+            <td>27-1 (Jun 18)</td>
         </tr>
         <tr>
             <td>Events &amp; properties taxonomy (#4267, #3228)</td>
             <td>✏️ In progress</td>
-            <td>XX (Jun X)</td>
+            <td>27-1 (Jun 18)</td>
         </tr>
         <tr>
             <td>Insights, graphs &amp; querying UI/UX. Including empty/error states and tooltips</td>
             <td>✏️ In progress</td>
-            <td>XX (Jun X)</td>
+            <td>27-1 (Jun 18)</td>
+        </tr>
+        <tr>
+            <td>Frontend app performance</td>
+            <td>🚀 To do</td>
+            <td></td>
         </tr>
         <tr>
             <td>Saved/named filters (#2895)</td>
@@ -111,19 +116,26 @@ Last updated: **Jun 2, 2021**
             <td>🚀 To do</td>
             <td></td>
         </tr>
+        <tr>
+            <td>
+                UX for supporting activities (environment separation, cohorts, persons, feature flags, settings, ...)
+            </td>
+            <td>🚀 To do</td>
+            <td></td>
+        </tr>
         <tr style={{ color: '#ccc' }}>
             <td>New Querying Experience (#4050)</td>
             <td>✅ Done</td>
-            <td>XX (May XX)</td>
+            <td>26-1 (May 21)</td>
         </tr>
     </tbody>
 </table>
 
 ### Core Analytics
 
--   Working on **1 tasks** during current release cycle (26).
--   To date, **14 tasks** are outstanding.
--   Completed **0 tasks** since May 24th.
+-   Working on **3 tasks** during current release cycle (26).
+-   To date, **12 tasks** are outstanding.
+-   Completed **1 tasks** since May 24th.
 -   Detailed project board: [#12](https://github.com/orgs/PostHog/projects/12)
 
 <table>
@@ -131,14 +143,27 @@ Last updated: **Jun 2, 2021**
         <tr>
             <th>Feature</th>
             <th>Status</th>
-            <th>Shipped on Release</th>
+            <th>Shipping Release</th>
         </tr>
     </thead>
     <tbody>
-         <tr>
+        <tr>
             <td>Engagement measurement [users who performed X action Y times in Z time frame] (#4349, #1690, #1279)</td>
             <td>✏️ In progress</td>
-            <td>XX (Jun XX)</td>
+            <td>26-2 (Jun 4)</td>
+        </tr>
+        <tr>
+            <td>Data quality and consistency. Deliver reliable results (e.g. closed results shouldn't change)</td>
+            <td>✏️ In progress</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Funnels feature parity [ordering options, exclusion steps, conversion time limit, constant properties,
+                time to convert analytics, breakdown] (#2697)
+            </td>
+            <td>✏️ In progress</td>
+            <td></td>
         </tr>
         <tr>
             <td>Session analytics (#4328)</td>
@@ -157,14 +182,6 @@ Last updated: **Jun 2, 2021**
         </tr>
         <tr>
             <td>Retention feature parity [cohorts graphs, unbounded retention, extended timeframe, ...] (#2228)</td>
-            <td>🚀 To do</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                Funnels feature parity [ordering options, exclusion steps, conversion time limit, constant properties,
-                time to convert analytics, breakdown] (#2697)
-            </td>
             <td>🚀 To do</td>
             <td></td>
         </tr>
@@ -188,12 +205,7 @@ Last updated: **Jun 2, 2021**
             <td></td>
         </tr>
         <tr>
-            <td>Query performance. Aspire to have <100ms response times. 1000ms max P99</td>
-            <td>🚀 To do</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Data quality and consistency. Deliver reliable results (e.g. closed results shouldn't change)</td>
+            <td>Query performance. &lt; 100ms response times. 1000ms max P99</td>
             <td>🚀 To do</td>
             <td></td>
         </tr>
@@ -213,9 +225,17 @@ Last updated: **Jun 2, 2021**
             <td></td>
         </tr>
         <tr>
-            <td>High-signal actions / correlation [Signal / Compass in other providers], user predictive clustering & event impact (#1279)</td>
+            <td>
+                High-signal actions / correlation [Signal / Compass in other providers], user predictive clustering &
+                event impact (#1279)
+            </td>
             <td>🚀 To do</td>
             <td></td>
+        </tr>
+        <tr style={{ color: '#ccc' }}>
+            <td>Trailing WAU/MAU (#3638)</td>
+            <td>✅ Done</td>
+            <td>Before 26-1</td>
         </tr>
     </tbody>
 </table>
