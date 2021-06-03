@@ -1,5 +1,5 @@
 ---
-title: Engineering hiring
+title: Engineering Hiring
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
