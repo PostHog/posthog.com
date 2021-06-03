@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import { NewsletterForm } from '../NewsletterForm'
 import logo from '../../images/posthog-hog-transparent.svg'
 
+import { mergeClassList } from '../../lib/utils'
 interface FooterListItemProps {
     to?: string
     href?: string
@@ -52,14 +53,21 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
 export function Footer({
     showNewsletter = false,
     backgroundClass = '',
+    transparentBg = false,
 }: {
     showNewsletter?: boolean
     backgroundClass?: string
+    transparentBg?: boolean
 }): JSX.Element {
     const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
+    const classList = mergeClassList(
+        'site-footer py-24 relative',
+        backgroundClass,
+        transparentBg ? 'site-footer--transparent' : null
+    )
 
     return (
-        <div className={`${backgroundClass} site-footer py-24 relative`}>
+        <div className={classList}>
             {newsletterSignup}
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">

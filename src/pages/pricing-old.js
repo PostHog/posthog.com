@@ -17,7 +17,7 @@ import { CallToAction } from 'components/CallToAction'
 import { pricingSliderLogic } from 'components/PricingSlider/pricingSliderLogic'
 import { useActions } from 'kea'
 
-import { PricingComparisonTable } from 'components/PricingComparisonTable'
+import { PlanComparisonTable } from 'components/PlanComparisonTable'
 import { PricingSlider } from 'components/PricingSlider'
 
 const PricingPage = () => {
@@ -325,7 +325,7 @@ const PricingPage = () => {
                             <div ref={comparisonRef} id="comparison"></div>
                             <h2>Full Comparison</h2>
                         </Col>
-                        <PricingComparisonTable />
+                        <PlanComparisonTable />
                     </Row>
 
                     <Row gutter={[24, 24]} style={{ marginTop: '60px' }}>
