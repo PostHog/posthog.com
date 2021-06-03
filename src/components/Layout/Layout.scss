@@ -1631,3 +1631,9 @@ div::-webkit-scrollbar-thumb:hover {
         background: rgb(249, 249, 249) none repeat scroll 0% 0%;
     }
 }
+
+table th[align='center'],
+table td[align='center'],
+.text-center {
+    text-align: center;
+}
