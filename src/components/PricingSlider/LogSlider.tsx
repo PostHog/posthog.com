@@ -46,7 +46,6 @@ const makeMarks = (marks: number[]): Record<number, string> => {
 }
 
 export const LogSlider = ({ min, max, marks, stepsInRange, onChange }: LogSliderProps): JSX.Element => {
-    console.log(marks, makeMarks(marks))
     const { sliderValue } = useValues(pricingSliderLogic)
     return (
         <MySlider
