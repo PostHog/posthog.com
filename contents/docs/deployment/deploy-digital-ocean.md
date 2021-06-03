@@ -3,27 +3,25 @@ title: Deploying to Digital Ocean
 sidebar: Docs
 showTitle: true
 ---
-<br>
-
 
 ## Why Digital Ocean
 
 [Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running. 
-<br>
+<br />
 
 ### Deploying to Digital Ocean
 
 To deploy on Digital Ocean, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
-<br>
+<br />
 
 ## Docker Install: Droplet Setup
 
 The first thing you'll need is a [Digital Ocean account](https://cloud.digitalocean.com/registrations/new). Once you have that up and running, you're good to go!
-<br>
+<br />
 
 ### Quick Start
 When logged in, click 'Create Docker Droplet' on [this page](https://marketplace.digitalocean.com/apps/docker) and follow the steps to create a droplet.
-<br>
+<br />
 
 ### Step-By-Step Without Quick Start
 
@@ -39,7 +37,7 @@ If quick start did not work for you, do the following after logging in:
 
 > **Note**: You may also create your droplet with a plain Ubuntu distribution (or any other distro) without a one-click app. However, the 'Docker' app ships with the Docker engine and Docker Compose by default on Ubuntu 18.04, which can save you a **lot of time** when setting up.
 
-<br>
+<br />
 
 ## Docker Install: Server Setup
 
@@ -60,7 +58,7 @@ To create a new user, just run (substituting "\<username>" for the name you want
 ```bash
 adduser <username>
 ```
-<br>
+<br />
 
 Then, give it the ability to run commands with `sudo`:
 
@@ -83,7 +81,7 @@ You're all set!
 
 As it currently stands, we can only run Docker on the new user by using `sudo`. This is not necessarily a good idea. To allow Docker to run without `sudo` on a non-root user, check out [this tutorial by Docker](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
 
-<br>
+<br />
 
 ## Deploying PostHog
 
@@ -128,7 +126,7 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 
 </blockquote>
 
-<br>
+<br />
 
 ## Running PostHog Behind a Proxy or Load Balancer
 
@@ -142,7 +140,7 @@ For more information, visit our [dedicated page for running PostHog behind a pro
 #### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
 PostHog needs to run on HTTPS because if it doesn't:
  
- a) It will fail<br>
+ a) It will fail<br />
  b) Your user data will be at risk
 
 #### Check Your Firewall if You Cannot Connect to a Port
@@ -158,15 +156,15 @@ sudo ufw status
 ```
 
 You can read [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04) for more information.
-<br>
+<br />
 
 ## Upgrading Docker on Digital Ocean
 
 See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
-<br>
+<br />
 
 ## Useful Tutorials
-<br>
+<br />
 
 #### - Setting Up SSL on Digital Ocean with [NGINX](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04) or [Apache](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04)
 

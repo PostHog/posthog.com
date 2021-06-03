@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
-
+import { PostCard } from '../../PostCard'
+import { BlogPosts } from '../../Blog/BlogPosts'
+import { PostType } from '../../PostCard/PostCard'
 import { CallToAction } from '../../CallToAction'
 import blogPostImg from './images/blog-post.png'
 
@@ -20,40 +22,27 @@ export const RecentBlogPosts = () => {
                         <div className="w-full ml-2 text-white">
                             <span className="block opacity-70">Latest post</span>
 
-                            <h5 className="mt-3 text-white">A story about pivots</h5>
+                            <BlogPosts
+                                render={(posts) => {
+                                    const postCard = (posts as { node: PostType }[])
+                                        .slice(0, 1)
+                                        .map((post) => <PostCard key={post.node.id} post={post.node} landingPage />)
 
-                            <p className="mt-4 opacity-70 text-sm">PostHog has pivoted a lot.</p>
-
-                            <p className="mt-1 opacity-70 text-sm">
-                                After 5 pivots in 6 months, we got into YCombinator last year, pivoted again whilst we
-                                were there and have now gone from the first commit to thousands of deployments, a team
-                                across 10 countries and $12M raised, in well under a year. We've a long way to go, but
-                                we're delighted at how it has gone so far.
-                            </p>
-
-                            <p className="mt-1 opacity-70 text-sm">This is that story and what we learned from it.</p>
-
-                            <CallToAction
-                                type="secondary"
-                                className="mx-0 mt-4"
-                                to="/blog/story-about-pivots"
-                                icon="book"
-                                width="full"
-                            >
-                                Continue reading
-                            </CallToAction>
+                                    return <>{postCard}</>
+                                }}
+                            />
                         </div>
                     </div>
 
                     <div className="bg-purple-500 bg-opacity-10 p-6 w-full mt-2 lg:mt-0 lg:w-1/3 lg:ml-2 rounded text-white">
-                        <span className="block opacity-70">Popular articles</span>
+                        <span className="block opacity-70">Pinned articles</span>
 
                         <Link
                             to="/blog/posthog-announces-9-million-dollar-series-A"
                             className="block mt-3 text-white hover:text-white hover:underline"
                         >
                             PostHog Raises $12 Million in Funding Led by GV and Y Combinator
-                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
                         </Link>
 
                         <Link
@@ -61,7 +50,7 @@ export const RecentBlogPosts = () => {
                             className="block mt-4 text-white hover:text-white hover:underline"
                         >
                             PostHog Joins Hacktoberfest 2020
-                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
                         </Link>
 
                         <Link
@@ -69,7 +58,7 @@ export const RecentBlogPosts = () => {
                             className="block mt-4 text-white hover:text-white hover:underline"
                         >
                             Should open source projects track you?
-                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
                         </Link>
 
                         <Link
@@ -77,13 +66,13 @@ export const RecentBlogPosts = () => {
                             className="block mt-4 text-white hover:text-white hover:underline"
                         >
                             Building an All-Remote Company from Scratch
-                            <span className="block mt-1 opacity-50 font-sm">8 min read</span>
+                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
                         </Link>
                     </div>
                 </div>
 
                 <div className="flex">
-                    <CallToAction type="secondary" className="mt-12 mx-auto" to="/blog" icon="book">
+                    <CallToAction type="button" className="mt-12 mx-auto" to="/blog" icon="book">
                         Visit Blog
                     </CallToAction>
                 </div>

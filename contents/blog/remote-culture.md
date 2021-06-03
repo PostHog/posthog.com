@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: general,company-and-culture
 ---
 
 ![Remote Work Banner](../images/posthogers-map.png) 

@@ -21,6 +21,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
 | `SENTRY_DSN`               | Used to integrate with [Sentry](https://sentry.io/welcome/) error and event tracking. Ignored when running tests.  | `None`
 | `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
+| `ACTION_EVENT_MAPPING_INTERVAL_SECONDS`| Specify how often (in seconds) PostHog should run a job to match events to actions.       | `300`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
 | `IS_BEHIND_PROXY`          | Specifies if PostHog is running behind a proxy like Apache, NGINX  or ELB. Be sure to properly set [trusted proxies](/docs/configuring-posthog/running-behind-proxy#trusted-proxies).                              | `False`
 | `ALLOWED_IP_BLOCKS`        | Specifies IP blocks allowed to connect to the PostHog instance for management (events will still be allowed from anywhere). Make sure to properly [configure your proxy](/docs/configuring-posthog/running-behind-proxy) if running behind a proxy.                              |  
@@ -29,7 +30,8 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `ALLOWED_HOSTS`            | A list of strings representing the host/domain names that Django can serve. [More info](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).  | `*` (all)
 | `STATSD_HOST`              | Host of a running StatsD daemon (e.g. 127.0.0.1)                                                  | `None`
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
-| `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | `None`
+| `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | `""`
+| `CAPTURE_INTERNAL_METRICS` | Send some internal instrumentation to your own posthog instance, exposed via `/instance/status` page. For EE only. | `False`
 | `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing [sign up with GitHub](/docs/features/log-in-with-github-gitlab).                                                      | 
 | `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing [sign up with GitHub](/docs/features/log-in-with-github-gitlab).                                                     | 
 | `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing [sign up with GitLab](/docs/features/log-in-with-github-gitlab).                                                        | 

@@ -4,10 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br>
 
-
-Getting a shiny, running production environment of PostHog is probably one the first things you want to do! 
+Getting a shiny, running production environment of PostHog is probably one the first things you want to do!
 
 Lucky for you, our platform is incredibly easy to use and affordable to host with any provider. Below, we have several step-by-step guides outlining how to set up hosting on a variety of different services. The quickest way and our recommended option is the [One-Click Heroku Deployment](/docs/deployment/deploy-heroku), but feel free to host on whatever platform fits your needs best.
 
@@ -30,7 +28,6 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [Deploying with Docker](/docs/deployment/deploy-docker)
 - [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
 - [Deploying from Source](/docs/deployment/deploy-source)
-- [Deploying to Linode](/docs/deployment/deploy-linode)
 - [Snippet Installation](/docs/deployment/snippet-installation)
 - [Hosting Costs](/docs/deployment/hosting-costs)
 

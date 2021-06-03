@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
 <small class="note-block centered">_Estimated Reading Time: 12 minutes ☕☕☕_</small>
 
 <br />
@@ -34,7 +32,7 @@ With this tutorial, we'll give you a full guide to getting started with tracking
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrations/js-integration), one of our [integrations](/docs/integrations), or our [API](/docs/api/overview).
+1. Have started receiving events via our [snippet](/docs/libraries/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview).
 
 > **Note:** For sending events with revenue data, we recommend you integrate PostHog in your backend, given that, by nature, client-side code can be modified by the user. 
 

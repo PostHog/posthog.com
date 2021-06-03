@@ -3,10 +3,9 @@ title: Retention
 sidebar: Docs
 showTitle: true
 ---
-<br>
 PostHog provides a Retention table to show you how many users return on subsequent days after visiting the website.
-<br>
-<br>
+<br />
+<br />
 
 
 ## Demo Video
@@ -27,7 +26,7 @@ PostHog provides a Retention table to show you how many users return on subseque
 ## Understanding the Retention Table
 
 The retention table is structured as follows:
-<br>
+<br />
 
 #### Column 1: Cohort
 
@@ -62,7 +61,7 @@ Finally, you should understand that the retention table is filled from the botto
 That's why your Retention Table's left edge will look like a set of stairs. For the last item (the day before the day you are viewing it), there is only one data point available. But as we go further "into the past", there are more data points because more days have passed. Thus, it is more useful to look at the values on the top of the table than the ones at the bottom, because they have more data points (days) available for analysis.
 
 > **Note:** Users are distinct on each cohort, but not across cohorts. A user from the 12th who came back on the 15th will be represented in both rows.
-<br>
+<br />
 
 ## Uses
 
@@ -90,4 +89,4 @@ Rirst time retention cohortizes users based on when they did an event for the fi
 
 The _cohortizing event_ is the event that determines if the user is a part of a cohort or not (i.e. adds the user to the first column). The _retaining event_, on the other hand, is the event retention is being calculated on (i.e. adds the user as a data point to one of the "percentage boxes").
 
-<br>
+<br />

@@ -23,7 +23,7 @@ export interface LibraryPluginType {
 }
 
 export interface MenuProps {
-    isBlogArticlePage?: boolean
+    blogArticleSlug?: string
     isHomePage?: boolean
     activeKey: string
 }
@@ -51,3 +51,5 @@ export interface Contributor {
     level: number
     mvpWins: number
 }
+
+export type Heading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'

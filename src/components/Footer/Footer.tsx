@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
-import { useValues } from 'kea'
-import { layoutLogic } from '../../logic/layoutLogic'
 
 import { NewsletterForm } from '../NewsletterForm'
 import logo from '../../images/posthog-hog-transparent.svg'
 
+import { mergeClassList } from '../../lib/utils'
 interface FooterListItemProps {
     to?: string
     href?: string
@@ -29,7 +28,7 @@ const FooterListItem = ({ to = '', border = true, href = '', children }: FooterL
 }
 
 const FooterSubCategory = ({ children }: { children: any }) => (
-    <header className="block gosha text-white mt-8 font-bold text-sm">{children}</header>
+    <header className="block text-white mt-8 mb-2 font-bold text-sm">{children}</header>
 )
 
 const FooterCategory = ({ children, title }: { children: any; title: string }) => {
@@ -51,21 +50,24 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
     )
 }
 
-export const Footer = ({
-    onPostPage,
+export function Footer({
     showNewsletter = false,
     backgroundClass = '',
+    transparentBg = false,
 }: {
-    onPostPage: boolean
     showNewsletter?: boolean
     backgroundClass?: string
-}) => {
+    transparentBg?: boolean
+}): JSX.Element {
     const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
-    const { websiteTheme } = useValues(layoutLogic)
-    const bgClass = backgroundClass || (onPostPage && websiteTheme === 'dark' ? 'bg-darkmode-purple' : 'bg-footer')
+    const classList = mergeClassList(
+        'site-footer py-24 relative',
+        backgroundClass,
+        transparentBg ? 'site-footer--transparent' : null
+    )
 
     return (
-        <div className={`${bgClass} site-footer py-24 relative`}>
+        <div className={classList}>
             {newsletterSignup}
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">
@@ -131,7 +133,7 @@ export const Footer = ({
                         <FooterListItem to="/docs/deployment">Installation</FooterListItem>
                         <FooterListItem to="/docs">Docs</FooterListItem>
                         <FooterListItem to="/docs/api/overview">API</FooterListItem>
-                        <FooterListItem to="/docs/integrations" border={false}>
+                        <FooterListItem to="/docs/libraries" border={false}>
                             Libraries
                         </FooterListItem>
 

@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 We’re in the thick of our release schedule this week!

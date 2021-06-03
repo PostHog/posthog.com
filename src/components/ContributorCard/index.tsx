@@ -25,7 +25,7 @@ const ContributorCardStructure = ({
     mvpWins,
     contributorLevel,
 }: ContributorCardStructureMeta) => {
-    const handleTooltipContentClick = (e: React.MouseEvent, pageKey: string = '') => {
+    const handleTooltipContentClick = (e: React.MouseEvent, pageKey = '') => {
         if (window) {
             e.preventDefault()
             e.stopPropagation()

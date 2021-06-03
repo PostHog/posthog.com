@@ -3,7 +3,6 @@ title: Analyzing Your Conversion with Funnels
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 <small class="note-block centered">_Estimated Reading Time: 8 minutes ☕☕_</small>
 
@@ -56,7 +55,7 @@ _Prefer to watch a video? Check out the [Funnels section of our demo video](http
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrations/js-integration), one of our [integrations](/docs/integrations), or our [API](/docs/api/overview)
+1. Have started receiving events via our [snippet](/docs/libraries/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
 
 > **Note:** It can also be useful to have some [actions](/docs/tutorials/toolbar#creating-actions) set up, but not necessary.
 

@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-<br>
-
 We love contributions to PostHog, big or small.
 
 ## Reporting Bugs or Issues
@@ -20,9 +18,14 @@ Please search within our issues before raising a new one to make sure you're not
 
 </blockquote>
 
-<br>
+<br />
 
 ## Writing Code 
+
+### How to get started if you're new to Kea, Python, Django, or a new employee
+
+Working in a new codebase can be overwhelming, especially if you're rusty/new to the tech stack. 
+You may find additional help, advice, and exercises by using our [Beginner's Guide](/handbook/engineering/beginners-guide/introduction).
 
 ### Deciding what to work on
 

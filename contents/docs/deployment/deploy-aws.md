@@ -44,6 +44,8 @@ Jump straight in:
 
 1. After verifying it works, you can disable insecure access by removing the listener for port 80 (HTTP).
 
+While not required for setup, at a later date you may wish to add another listener to redirect HTTP requests to HTTPS for convenience. See more details on [Amazon's docs](https://aws.amazon.com/premiumsupport/knowledge-center/elb-redirect-http-to-https-using-alb/).
+
 ## Updating AWS Fargate
 
 Do this to get the latest and greatest version of posthog. Follow these steps:
@@ -69,14 +71,14 @@ Do this to get the latest and greatest version of posthog. Follow these steps:
 1. Click **Update Services** to 🚢 the newest version of PostHog to your ECS cluster!
 
 You can find more details on Amazon's Docs for [Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html).
-<br>
+<br />
 
 ## Updating Cloudformation template
 > ⚠️ This may remove your RDS instance and your data with it. Please be sure to make a backup of your RDS instance before you proceed.
 > You can read more about this and how to snapshot RDS on [AWS docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html)
 
 
-Do this to update parameters: to scale different services up/down, update who gets alarms, STMP or more.
+Do this to update parameters: to scale different services up/down, update who gets alarms, SMTP or more.
 
 1. Go to the CloudFormation page on your AWS [console](https://console.aws.amazon.com/cloudformation/)
 
@@ -164,14 +166,14 @@ Doing this and restarting the service will allow you to access PostHog over HTTP
 
 </blockquote>
 
-<br>
+<br />
 
 ## Important Points
 
 #### ⚠️ Never, Ever, Run PostHog Without TLS/SSL
 PostHog needs to run on HTTPS because if it doesn't:
  
- a) It will fail<br>
+ a) It will fail<br />
  b) Your user data will be at risk
 
 #### Check Your Firewall/Security Group if You Cannot Connect to a Port
@@ -196,15 +198,15 @@ You can read [this tutorial](https://www.digitalocean.com/community/tutorials/ho
 
 Here's a [good AWS Tutorial](https://aws.amazon.com/premiumsupport/knowledge-center/connect-http-https-ec2/) about this.
 
-<br>
+<br />
 
 ## Upgrading Docker on AWS
 
 See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
-<br>
+<br />
 
 ## Useful Tutorials
-<br>
+<br />
 
 ###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
 

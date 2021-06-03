@@ -3,6 +3,7 @@ import React from 'react'
 import { Header } from '../components/Header'
 import { Hero } from '../components/LandingPage/Hero'
 import { Features } from '../components/LandingPage/Features'
+import { Blockquote } from '../components/LandingPage/Blockquote'
 import { PrivateCloud } from '../components/LandingPage/PrivateCloud'
 import { Tutorials } from '../components/LandingPage/Tutorials'
 import { RecentBlogPosts } from '../components/LandingPage/RecentBlogPosts'
@@ -20,13 +21,14 @@ const IndexPage = () => {
                 title="PostHog - Open-Source Product Analytics"
                 description="Self-hosted product analytics stack, to deploy on your infrastructure."
             />
-            <Header onPostPage={false} isBlogArticlePage={false} isHomePage={true} menuActiveKey="active" />
+            <Header onPostPage={false} menuActiveKey="active" onHomePage />
             <Hero />
             <Features />
+            <Blockquote />
             <PrivateCloud />
             <Tutorials />
             <RecentBlogPosts />
-            <Footer showNewsletter={true} />
+            <Footer showNewsletter />
             <GetStartedModal />
         </div>
     )

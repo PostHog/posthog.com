@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { Heading } from 'types'
 import './style.scss'
 
 interface HiddenSectionProps {
-    headingType: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+    headingType: Heading
     title: any
     children: any
     endWithDivider?: boolean

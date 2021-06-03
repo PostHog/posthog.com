@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/features/session-recording) and [Plugins](/docs/features/plugins), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
@@ -27,7 +28,7 @@ With our new [Sentry](https://sentry.io/) integration, you can leverage PostHog 
 
 If you're unfamiliar with Sentry, we highly recommend you to check it out - it is an awesome application monitoring platform of which we're avid users at PostHog.
 
-To set up the integration you can read the step-by-step instructions on the dedicated [Sentry Integration page](/docs/integrations/sentry-integration).
+To set up the integration you can read the step-by-step instructions on the dedicated [Sentry Integration page](/docs/libraries/sentry).
 
 ### [RudderStack Integration](https://docs.rudderstack.com/destinations/posthog)
 

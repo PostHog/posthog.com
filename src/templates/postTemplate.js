@@ -23,7 +23,7 @@ function Template({
 
     const [runningInBrowser, setRunningInBrowser] = useState(false)
     const { markdownRemark } = data // data.markdownRemark holds our post data
-    const { frontmatter, html, excerpt, id } = markdownRemark
+    const { frontmatter, html, excerpt, id, fields } = markdownRemark
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -36,60 +36,51 @@ function Template({
     if (sidebarEntry !== frontmatter.sidebar) setSidebarContentEntry(frontmatter.sidebar)
 
     const isDocsPage = frontmatter.sidebar === 'Docs'
-    const isBlogArticlePage = frontmatter.sidebar === 'Blog'
+    const blogArticleSlug = frontmatter.sidebar === 'Blog' ? fields.slug : undefined
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
-    useEffect(() => {
-        if (window) {
-            setRunningInBrowser(true)
-        }
-    })
-
     return (
-        <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
-            {runningInBrowser ? (
-                <Layout
-                    onPostPage={true}
-                    isBlogArticlePage={isBlogArticlePage}
-                    pageTitle={frontmatter.title}
-                    isHomePage={false}
-                    isDocsPage={isDocsPage}
-                >
-                    <SEO
-                        title={
-                            frontmatter.title +
-                            ' - PostHog' +
-                            (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
-                        }
-                        description={frontmatter.description || excerpt}
-                        pathname={markdownRemark.fields.slug}
-                        article
-                    />
-                    <div className="docsPagesContainer">
-                        <div className="docsPages">
-                            {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
-                                <h1 align="center">{frontmatter.title}</h1>
-                            )}
-                            <div className="docsPagesContent" dangerouslySetInnerHTML={{ __html: html }} />
-                        </div>
-                        {isDocsPage && <DocsPageSurvey />}
-                        {(isDocsPage || isHandbookPage) && (
-                            <DocsFooter
-                                filename={`${addIndex(markdownRemark.fields.slug)}.md`}
-                                title={frontmatter.title}
-                            />
+        <div className={'post-page ' + (!blogArticleSlug ? 'post-page-wrapper' : '')}>
+            <Layout
+                onPostPage
+                blogArticleSlug={blogArticleSlug}
+                pageTitle={frontmatter.title}
+                featuredImage={frontmatter.featuredImage?.publicURL}
+                isHomePage={false}
+                isDocsPage={isDocsPage}
+                onBlogPage={!!blogArticleSlug}
+            >
+                <SEO
+                    title={
+                        frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
+                    }
+                    description={frontmatter.description || excerpt}
+                    pathname={markdownRemark.fields.slug}
+                    article
+                />
+                <div className="docsPagesContainer">
+                    <div className="docsPages">
+                        {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
+                            <h1 align="center">{frontmatter.title}</h1>
                         )}
+                        <div
+                            className="docsPagesContent rounded md:rounded-lg px-4 py-8 md:py-16"
+                            dangerouslySetInnerHTML={{ __html: html }}
+                        />
                     </div>
-                </Layout>
-            ) : (
-                <Spin size="large" style={{ position: 'fixed', top: '50%', left: '50%' }} />
-            )}
+                    {isDocsPage && <DocsPageSurvey />}
+                    {(isDocsPage || isHandbookPage) && (
+                        <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
+                    )}
+                </div>
+            </Layout>
         </div>
     )
 }
 
 export default Template
 
+// @todo -> be defensive against null featuredImage
 export const pageQuery = graphql`
     query($path: String!) {
         markdownRemark(fields: { slug: { eq: $path } }) {
@@ -103,6 +94,9 @@ export const pageQuery = graphql`
                 date(formatString: "MMMM DD, YYYY")
                 title
                 sidebar
+                featuredImage {
+                    publicURL
+                }
                 showTitle
                 hideAnchor
             }

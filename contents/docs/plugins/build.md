@@ -3,7 +3,6 @@ title: Build Your Own
 sidebar: Docs
 showTitle: true
 ---
-<br>
 
 > **Note:** It's worth familiarizing yourself with the [architecture of PostHog plugins](/docs/plugins/architecture) before building your own. 
 
@@ -151,7 +150,9 @@ interface PluginAttachment {
 
 As such, accessing the contents of an uploaded file can be done with `attachments.attachmentName.contents`.
 
+#### jobs
 
+The `jobs` object gives you access to the jobs you specified in your plugin. See [Jobs](#jobs) for more information.
 ### setupPlugin function
 
 `setupPlugin` is a function you can use to dynamically set plugin configuration based on the user's inputs at the configuration step. 
@@ -171,6 +172,8 @@ export function setupPlugin({ attachments, global }) {
 ```
 
 ### processEvent function
+
+> If you were using `processEventBatch` before, you should now use `processEvent`. `processEventBatch` has been **deprecated**.
 
 `processEvent` is the juice of your plugin. 
 
@@ -201,34 +204,35 @@ async function processEvent(event, { config, cache }) {
 
 As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all plugins run).
 
-### processEventBatch function 
+> Please note that `$snapshot` events (used for session recordings) do not go through `processEvent`. Instead, you can access them via the `onSnapshot` function described below.
 
-`processEventBatch` works just like `processEvent`, except it takes a batch of events at once, rather than one event at a time. It also returns an array of events (although not necessarily with the same number of events as the input array). This is especially useful for plugins that export data out of PostHog, so that they do not need to make an HTTP request with every incoming event. 
+### onEvent function
 
-> **Note:** Your plugin can use `processEvent` or `processEventBatch`. Currently, if both are present, `processEventBatch` will not run. 
+> **Minimum Plugin Server version:** 0.19.0
 
-Here's the same example from above, except now using `processEventBatch`: 
+`onEvent` works similarly to `processEvent`, except any returned value is ignored by the plugin server. In other words, `onEvent` can read an event but not modify it. 
+
+In addition, `onEvent` functions will run after all enabled plugins have run `processEvent`. This ensures you will be receiving an event following all possible modifications to it.
+
+This was originally built for and is particularly useful for export plugins. These plugins need to receive the "final form" of an event and send it out of PostHog, without having to modify it.
+
+Here's a quick example:
 
 ```js
-async function processEventBatch(events, { config, cache }) {
-    const counter = await cache.get('counter', 0)
-    cache.set('counter', counter + 1)
+async function onEvent(event) {
+    // do something to the event
+    sendEventToSalesforce(event)
 
-    for (let event of events) {
-      if (event.properties) {
-          event.properties['hello'] = 'world'
-          event.properties['bar'] = config.bar
-          event.properties['$counter'] = counter
-      }
-    }
-
-    return events
+    // no need to return anything
 }
 ```
 
-As you can see, since `events` is an array of events, we iterate over it to access every individual event. 
 
-> **Note:** As of right now, batch size is not yet configurable and still receives only one event (albeit in array form).
+### onSnapshot function
+
+> **Minimum Plugin Server version:** 0.19.0
+
+`onSnapshot` works exactly like `onEvent`. The only difference between the two is that `onSnapshot` receives session recording events, while `onEvent` receives all other events.
 
 ### Scheduled Tasks
 
@@ -260,13 +264,85 @@ async function runEveryMinute({ config }) {
 
 It's worth noting that the plugin server supports debouncing, meaning that the counter for the next task will only start once the previous task finishes. In other words, if a given task that runs "every minute" takes longer than a minute, the next task will only start one minute after the previous task finishes.
 
-#### Limitations
+### Jobs
+
+> **Minimum Plugin Server version:** 0.18.0
+
+Jobs are a way for plugin developers to schedule and run tasks asynchronously using a powerful scheduling API.
+
+Jobs make possible use cases such as retrying failed requests, a key component of plugins that export data out of PostHog.
+
+#### Specifying jobs
+
+To specify jobs, you should export a `jobs` object mapping string keys (job names) to functions (jobs), like so:
+
+```js
+export const jobs = {
+    retryRequest: (request, meta) => {
+        fetch(request.url, request.options)
+    }
+}
+```
+
+Job functions can optionally take a payload as their first argument, which can be of any type. They can also access the `meta` object, which is appended as an argument to all plugin functions, meaning that it will be the second argument in the presence of a payload, and the first (and only) argument in the absence of one.
+
+#### Triggering a job
+
+Jobs are accessed as `jobs` via the `meta` object. Triggering a job works as follows:
+
+```js
+await jobs.retryRequest(request).runIn(30, 'seconds')
+await jobs.retryRequest(request).runNow()
+await jobs.retryRequest(request).runAt(new Date())
+```
+
+Having gotten a job function via its key from the `jobs` object calling the function with the desired payload will return another object with 3 functions that can be used to schedule your job. They are:
+
+- `runNow`: Runs the job now, but does so asynchronously
+- `runAt`: Takes a JavaScript `Date` object that specifies when the job should run
+- `runIn`: Takes a duration as a `number` and a unit as a `string` specifying in how many units of time to run this job (e.g. 1 hour)
+
+> Accepted values for the unit argument of `runIn` are: 'milliseconds', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'quarters', and 'years'. The function will accept these in both singular (e.g. 'second') or plural (e.g. 'seconds') form.
+
+All jobs return a promise that does not resolve to any value. 
+
+#### Full example
+
+```js
+export const jobs = {
+    continueSearchingForTheTeapot: async (request, meta) => {
+        await lookForTheTeapot(request)
+    }
+}
+
+async function lookForTheTeapot (request) {
+    const res = await fetch(request.url)
+    if (res.status !== 418) {
+        await jobs.lookForTheTeapot(request).runIn(30, 'seconds')
+        return
+    }
+    console.log('found the teapot!')
+}
+
+export async function processEvent (event, { jobs }) {
+
+    const request = { url: 'https://www.google.com/teapot' }
+    await lookForTheTeapot(request)
+    
+    return event
+}
+```
+
+### Debugging
+
+Plugins can make use of the JavaScript `console` for logging and debugging. 
+
+These logs can be seen on the 'Logs' page of each plugin, which can be accessed on the 'Plugins' page of the PostHog UI.
+### Limitations
 
 PostHog plugins are still in beta, and our scheduled tasks are the newest feature within plugins. As such, they currently have a few limitations:
 
 1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
-2. We intend to make scheduled tasks via plugins more flexible in the near-future. Keep an eye out for any updates to the API.
-
 ### Publishing Your Plugin
 
 There are 3 ways to use plugins you build:

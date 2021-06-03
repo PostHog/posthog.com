@@ -13,7 +13,7 @@ Our mission is to increase the number of successful products in the world.
 
 To achieve this, we will need revenue to be able to re-invest into making a better product.
 
-## How is our Product-Market Fit?
+## How is our product/market fit?
 
 Below is a table of how we see our product-market fit for various sizes of companies and various job roles.
 
@@ -30,29 +30,29 @@ Below is a table of how we see our product-market fit for various sizes of compa
         <td>Engineers / PMs with technical expertise</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
-        <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
+        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
+        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
     </tr>
     <tr>
         <td>Non-technical PMs, marketing, sales, business</td>
         <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
-        <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
-        <td style="background:var(--warning)">Too technical<br>Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
     </tr>
     <tr>
         <td>Analysts</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Direct SQL access<br>Plugins for data lakes</td>
-        <td style="background:var(--warning)">Direct SQL access<br>Plugins for data lakes</td>
+        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
+        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
     </tr>
     <tr>
         <td>Enterprise procurement</td>
         <td style="background:var(--muted)"></td>
         <td style="background:var(--muted)"></td>
         <td style="background:var(--muted)"></td>
-        <td style="background:var(--warning)">SOC 2<br>VPC</td>
+        <td style="background:var(--warning)">SOC 2<br />VPC</td>
     </tr>
 </table>
 </span>
