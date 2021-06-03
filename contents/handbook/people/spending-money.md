@@ -76,7 +76,7 @@ These are just general guidelines - the most important thing is that you select 
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on brex or ask Tim or Charles. 
+When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on brex or ask Tim or Charles. Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple.
 
 You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
