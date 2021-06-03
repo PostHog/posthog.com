@@ -56,7 +56,7 @@ An Operations SuperDay usually looks like this  (_there is a degree of flexibili
 *   Kick-off session
 *   Meet the founders
 *   Time to focus on the task, we can provide support via your personal Slack channel 
-*   Informal session with a team member (bar raiser, link)
+*   Informal session with a team member 
 *   On days where we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 
 You can expect to hear back from us within 2 working days of your SuperDay. We will also make the payment for your SuperDay as soon as possible. 
