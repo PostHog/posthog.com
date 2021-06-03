@@ -9,7 +9,10 @@ export const AllTheFeaturesCloud = () => {
     return (
         <div className="w-11/12 max-w-4xl mx-auto text-center relative">
             <h3 className="mb-2 text-white">What's in PostHog Cloud?</h3>
-            <p className="text-white text-opacity-75">(Everything. You literally get it all.)</p>
+            <p className="text-white text-opacity-75">
+                Everything. You get the entire product suite, regardless of whether you choose PostHog Cloud or a
+                Self-hosted option.
+            </p>
             <div className="platform-columns grid grid-flow-row auto-rows-max md:grid-flow-col md:auto-cols-max justify-center text-white">
                 <div className="">
                     <figure className="my-0">
