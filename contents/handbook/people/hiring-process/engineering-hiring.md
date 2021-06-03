@@ -1,5 +1,5 @@
 ---
-title: Engineering hiring
+title: Engineering Hiring
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
@@ -11,12 +11,13 @@ Engineers make up around 60% of our team, and we are almost always hiring for En
 
 Currently, we are hiring for the following Engineering roles:
 
+*   [Staff Engineer - Full Stack](https://apply.workable.com/posthog/j/4942F8C181)
 *   [Senior Full Stack Developer](https://apply.workable.com/posthog/j/E3CAF059AB/)
 *   [Front End Developer](https://apply.workable.com/posthog/j/039CA3883F/)
 
 ### What we are looking for in Engineering hires
 
-Beyond the specific skills listed in the job description, we always generally look for: 
+Beyond the specific skills listed in the job description, we generally look for: 
 
 *   Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
     *   While we are generally happy to bring people onboard straight out of college or highschool, we are currently looking for candidates with at least 2-3 years of experience in fast-growing Engineering teams
@@ -64,8 +65,8 @@ This gives you the chance to learn how we work, and for us to see your quality a
 An Engineering SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
 *   Kick-off session with an Engineer and/or [James](https://posthog.com/handbook/people/team#james-hawkins-co-founder--ceo-)
-*   Time to focus on the task, we can provide support via your personal slack channel (link)
-*   Informal session with a team member (bar raiser, link)
+*   Time to focus on the task, we can provide support via your personal slack channel
+*   Informal session with a team member
 *   On days where we have company-wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 *   Depending on the time zone, we might arrange a wrap up session at the end of the day
 

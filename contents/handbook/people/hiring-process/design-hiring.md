@@ -7,8 +7,7 @@ hideAnchor: true
 
 ## Design hiring at PostHog
 
-Our [Design](https://posthog.com/handbook/people/team-structure/design) team is small, but growing. We are currently hiring for a[ Senior Product Designer](https://posthog.workable.com/jobs/1675218/preview?show_description=true). 
-
+Our [Design](https://posthog.com/handbook/people/team-structure/design) team is small, but growing. At the moment, we are hiring for a [Senior Product Designer](https://posthog.workable.com/jobs/1675218/preview?show_description=true). 
 
 ### What we are looking for in Design hires
 
@@ -26,7 +25,7 @@ Beyond the specific skills listed in the job description, we always generally lo
 
 #### 1. Culture interview
 
-The [culture interview](https://posthog.com/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](https://posthog.com/handbook/people/team-structure/people). This round is loosely structured into 4 different sections:
+The [culture interview](/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](/handbook/people/team-structure/people). This round is loosely structured into 4 different sections:
 
 1. PostHog - mission, vision, team, way of working etc. If it was cold outreach, we provide a little more context up front first.
 2. Candidate background and mindset.
@@ -39,13 +38,13 @@ We are looking for proactivity, directness, good communication skills, an awaren
 
 The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round is a 2-part interview, lasting up to 90 minutes in total.
 
-The first half of the interview will be with [Cory](https://posthog.com/handbook/people/team#cory-watilo-lead-designer-) and 1-2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
+The first half of the interview will be with [Cory](/handbook/people/team#cory-watilo-lead-designer-) and 1-2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
 
 The second part of the interview will be a portfolio interview, where you will meet a few other members of the team. You will present a deep dive into your portfolio, covering the end-to-end process from strategy to design to impact.
 
 #### 3. Design SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](https://posthog.com/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
 
 We will share the task with you at the start of the day. The task is representative of the work someone in this role at PostHog is doing, and it is always the same for each candidate, so we can make clear comparisons.
 
@@ -53,12 +52,12 @@ As part of the SuperDay, you will probably work directly on either our App, or t
 
 This gives you the chance to learn how we work, and for us to see your quality and speed of work, as well as the way you communicate. It is a very demanding day of work, but we want you to succeed! 
 
-A Design SuperDay usually looks like this  (_there is a degree of flexibility due to time zone differences):_
+A Design SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences):_
 
-*   Kick-off session with Cory (Lead Designer)
+*   Kick-off session with [Cory](/handbook/people/team#cory-watilo-lead-designer-)(Lead Designer)
 *   Meet the founders - Tim and James
-*   Time to focus on the task, we can provide support via your personal Slack channel (link)
-*   Informal session with a team member (bar raiser, link)
+*   Time to focus on the task, we can provide support via your personal Slack channel
+*   Informal session with a team member
 *   On days where we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company-wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 
 You can expect to hear back from us within 2 working days of your SuperDay. We will also make the payment for your SuperDay as soon as possible. 
