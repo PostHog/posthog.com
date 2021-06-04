@@ -7,8 +7,10 @@ import { SelfHostedPlanBreakdown } from './SelfHostedPlanBreakdown'
 import { pricingSliderLogic, PricingOptionType } from '../../PricingSlider/pricingSliderLogic'
 import { inverseCurve } from 'components/PricingSlider/LogSlider'
 
-export const PricingTable = () => {
-    const [currentPlanType, setCurrentPlanType] = useState('cloud')
+export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefault?: boolean }) => {
+    const CLOUD_PLAN = 'cloud'
+    const SELF_HOSTED_PLAN = 'self-hosted'
+    const [currentPlanType, setCurrentPlanType] = useState(showScaleByDefault ? SELF_HOSTED_PLAN : CLOUD_PLAN)
     const currentPlanBreakdown = currentPlanType === 'cloud' ? <CloudPlanBreakdown /> : <SelfHostedPlanBreakdown />
     const { setPricingOption, setSliderValue } = useActions(pricingSliderLogic)
 
@@ -26,8 +28,8 @@ export const PricingTable = () => {
                         type="button"
                         width="auto"
                         icon="none"
-                        onClick={(e) => setPlanType('cloud', 10000)}
-                        className={currentPlanType === 'cloud' ? 'active' : ''}
+                        onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
+                        className={currentPlanType === CLOUD_PLAN ? 'active' : ''}
                     >
                         Cloud
                     </CallToAction>
@@ -35,8 +37,8 @@ export const PricingTable = () => {
                         type="button"
                         width="auto"
                         icon="none"
-                        onClick={(e) => setPlanType('self-hosted', 8000000)}
-                        className={currentPlanType === 'self-hosted' ? 'active ml-2' : 'ml-2'}
+                        onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 8000000)}
+                        className={currentPlanType === SELF_HOSTED_PLAN ? 'active ml-2' : 'ml-2'}
                     >
                         Self-hosted
                     </CallToAction>
