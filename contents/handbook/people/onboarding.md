@@ -546,7 +546,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
    </td>
   </tr>
     <tr>
-   <td>Identify user as team member in Orbit Love
+   <td>Identify user as team member in <a href="https://app.orbit.love/posthog" target="_blank">Orbit</a>
    </td>
    <td>All
    </td>
@@ -584,7 +584,7 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Any relevant job boards we advertise on <br />
 <input type="checkbox"/>  Gusto, Deel and/or CharlieHR admin access if they are involved in people ops <br />
 <input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) - get them to [connect their inbox](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails) <br />
-<input type="checkbox"/>  Orbit Love for community management<br />
+<input type="checkbox"/>  Orbit (https://orbit.love/) for community management<br />
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br />
 
 ## PostHog buddy
