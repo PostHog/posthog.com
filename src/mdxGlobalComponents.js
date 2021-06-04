@@ -2,6 +2,7 @@
 
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
+import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -31,6 +32,7 @@ import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
+import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { HiddenSection } from './components/HiddenSection'
@@ -49,12 +51,20 @@ import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
+import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
-import { PricingComparisonTable } from './components/PricingComparisonTable'
+import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
+import { FAQs } from './components/Pricing/FAQs'
+import { PlanComparison } from './components/Pricing/PlanComparison'
+import { PricingHero } from './components/Pricing/PricingHero'
+import { PricingTable } from './components/Pricing/PricingTable'
+import { Quote } from './components/Pricing/Quote'
+import { Savings } from './components/Pricing/Savings'
 import { PricingSlider } from './components/PricingSlider'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
 import { ResponsiveTopBar } from './components/ResponsiveTopBar'
+import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
@@ -69,6 +79,7 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 export const shortcodes = {
     Endpoint,
     MethodTags,
+    AllTheFeaturesCloud,
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
@@ -98,6 +109,7 @@ export const shortcodes = {
     DocsSearch,
     FeaturesComparisonTable,
     FeaturesNav,
+    FeaturesSelfHost,
     Footer,
     GetStartedModal,
     HiddenSection,
@@ -116,12 +128,20 @@ export const shortcodes = {
     NewsletterForm,
     OtherFeaturesBlock,
     PageHeader,
+    PlanComparisonTable,
     PostCard,
-    PricingComparisonTable,
+    CloudVsSelfHost,
+    FAQs,
+    PlanComparison,
+    PricingHero,
+    PricingTable,
+    Quote,
+    Savings,
     PricingSlider,
     ResponsiveAnchor,
     ResponsiveSidebar,
     ResponsiveTopBar,
+    RocketHorizontalRule,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,

@@ -5,7 +5,7 @@ import { mergeClassList } from '../../../lib/utils'
 import compensationImg from './images/compensation.svg'
 import equityImg from './images/equity.svg'
 import ptoImg from './images/pto.svg'
-import unlimitedTimeOffImg from './images/unlimited-time-off.svg'
+import meetingFreeDaysImg from './images/meeting-free-days.svg'
 import insuranceImg from './images/insurance.svg'
 import trainingBudgetImg from './images/training-budget.svg'
 import coworkingCreditImg from './images/coworking-credit.svg'
@@ -67,9 +67,9 @@ export const Benefits = () => {
                         details="Time away from work is important, so we’ve got unlimited time off (25 days per year minimum required!), sick leave and generous parental leave."
                     />
                     <Benefit
-                        image={unlimitedTimeOffImg}
-                        title="Unlimited time off"
-                        details="25 days per year minimum required!"
+                        image={meetingFreeDaysImg}
+                        title="Two meeting-free days per week"
+                        details="Distracted by a calendar full of meetings? Not anymore."
                     />
 
                     <Benefit

@@ -27,9 +27,20 @@ const prettyInt = (x: number): string => {
 export const sliderCurve = Math.exp
 export const inverseCurve = Math.log
 
+const SI_SYMBOL = ['', 'k', 'M']
+
+const abbreviateNumber = (number: number): string => {
+    const tier = (Math.log10(Math.abs(number)) / 3) | 0
+    if (tier == 0) return `${number}`
+    const suffix = SI_SYMBOL[tier]
+    const scale = Math.pow(10, tier * 3)
+    const scaled = number / scale
+    return `${scaled.toFixed(0) + suffix}`
+}
+
 const makeMarks = (marks: number[]): Record<number, string> => {
     return marks.reduce((acc, cur) => {
-        acc[inverseCurve(cur)] = prettyInt(cur)
+        acc[inverseCurve(cur)] = abbreviateNumber(cur)
         return acc
     }, {} as Record<number, string>)
 }

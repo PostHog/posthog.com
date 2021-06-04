@@ -19,7 +19,7 @@ export const Features = () => {
                         <figure className="my-0">
                             <img
                                 src={graphicAnalytics}
-                                alt="Foobar"
+                                alt="Analytics"
                                 width="296"
                                 height="296"
                                 className="mx-auto my-0"
@@ -111,7 +111,13 @@ export const Features = () => {
                     </div>
                     <div className="insights-column">
                         <figure className="my-0">
-                            <img src={graphicInsights} alt="Foobar" width="296" height="296" className="mx-auto my-0" />
+                            <img
+                                src={graphicInsights}
+                                alt="Insights"
+                                width="296"
+                                height="296"
+                                className="mx-auto my-0"
+                            />
                         </figure>
                         <div className="mb-8 lg:mb-0">
                             <h4 className="font-osiris font-normal lowercase">Insights</h4>
@@ -167,7 +173,13 @@ export const Features = () => {
                     </div>
                     <div className="">
                         <figure className="my-0">
-                            <img src={graphicPlatform} alt="Foobar" width="296" height="296" className="mx-auto my-0" />
+                            <img
+                                src={graphicPlatform}
+                                alt="Platform"
+                                width="296"
+                                height="296"
+                                className="mx-auto my-0"
+                            />
                         </figure>
                         <div className="mb-8 lg:mb-0">
                             <h4 className="font-osiris font-normal lowercase">Platform</h4>
