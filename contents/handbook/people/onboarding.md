@@ -379,7 +379,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
    </td>
   </tr>
   <tr>
-   <td>Add the team member to <a href="https://app.gusto.com/">Gusto</a>
+   <td>Add the team member to <a href="https://app.gusto.com/" target="_blank">Gusto</a>
    </td>
    <td>US
    </td>
@@ -394,7 +394,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
    </td>
   </tr>
   <tr>
-   <td>[Sponsor a hedgehog](https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637) on their behalf!
+   <td><a href="https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637" target="_blank">Sponsor a hedgehog</a> on their behalf!
    </td>
    <td>All
    </td>
@@ -545,6 +545,21 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 </ul>
    </td>
   </tr>
+    <tr>
+   <td>Identify user as team member in Orbit Love
+   </td>
+   <td>All
+   </td>
+   <td>Anyone
+   </td>
+   <td>
+<ul>
+
+<li><code>[ ]</code>
+</li>
+</ul>
+   </td>
+  </tr>
 </table>
 
 
@@ -558,7 +573,7 @@ Add these if appropriate for the role:
 
 <input type="checkbox"/>  'Team' group in AWS <br />
 <input type="checkbox"/>  PagerDuty and into on-call rotation - make sure the alerts work <br />
-<input type="checkbox"/>  Papercups for customer support <br />
+<input type="checkbox"/>  Papercups. This includes both <a href="https://app.papercups.io" target="_blank">app access</a> and the <a href="https://posthogusers.slack.com/archives/G01JXEDAL22" target="_blank">#customer_support</a> channel on Users Slack<br />
 <input type="checkbox"/>  Heroku <br />
 <input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list) <br />
 
@@ -569,6 +584,7 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Any relevant job boards we advertise on <br />
 <input type="checkbox"/>  Gusto, Deel and/or CharlieHR admin access if they are involved in people ops <br />
 <input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) - get them to [connect their inbox](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails) <br />
+<input type="checkbox"/>  Orbit Love for community management<br />
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br />
 
 ## PostHog buddy
