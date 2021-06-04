@@ -51,7 +51,7 @@ export const pricingSliderLogic = kea({
                     } else if (eventNumber >= 100000000) {
                         unitPricing = 0.000009
                         finalCost =
-                            10_000_000 * 0.000225 + 100_000_000 * 0.000045 + (eventNumber - 100_000_000) * 0.000009
+                            10_000_000 * 0.000225 + 90_000_000 * 0.000045 + (eventNumber - 100_000_000) * 0.000009
                     }
 
                     actions.setAdditionalUnitPrice(unitPricing)
