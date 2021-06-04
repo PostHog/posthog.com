@@ -30,7 +30,7 @@ We've created a [Product Metrics Worksheet](https://docs.google.com/document/d/1
 
 This worksheet is available for everyone to use and is designed to help all teams (even ones that aren't using PostHog! *yet*).
 
-For paying customers, we include a complementary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog.
+For [Scale](/pricing#scale) customers, we include a complementary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog.
 
 ### No dedicated support people
 
