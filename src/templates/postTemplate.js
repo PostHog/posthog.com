@@ -44,6 +44,7 @@ function Template({
             <Layout
                 onPostPage
                 blogArticleSlug={blogArticleSlug}
+                blogDate={frontmatter.date}
                 pageTitle={frontmatter.title}
                 featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
