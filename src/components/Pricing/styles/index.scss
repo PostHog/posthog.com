@@ -2,7 +2,10 @@
     position: relative;
 
     &:before {
-        background: url(../../../images/pricing-background.png) #0e0d3c top center / cover;
+        background: url(../../../images/pricing-background.png) #0e0d3c top center;
+        @media (min-width: 1440px) {
+            background-size: cover;
+        }
         bottom: 0;
         content: '';
         left: 0;
