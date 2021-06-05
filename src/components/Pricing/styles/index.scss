@@ -103,7 +103,7 @@
 
 .pricing-table-collapsed {
     &:after {
-        background: linear-gradient(rgba(35, 45, 105, 0.3) 0%, #232d69 70%);
+        background: linear-gradient(rgba(35, 45, 105, 0.25) 0%, rgba(35, 45, 105, 0.75) 50%);
         border-radius: 1rem;
         bottom: 0;
         content: '';
