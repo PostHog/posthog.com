@@ -243,7 +243,7 @@ export const PlanComparison = () => {
 
     return (
         <div className="mx-4">
-            <div className="plans-comparison-table max-w-7xl mx-auto py-8 md:pt-0 bg-royal-blue bg-opacity-50 rounded-lg backdrop-filter backdrop-blur-sm overflow-hidden relative">
+            <div className="plans-comparison-table max-w-7xl mx-auto pt-2 md:pt-0 bg-royal-blue bg-opacity-50 rounded md:rounded-lg backdrop-filter backdrop-blur-sm overflow-hidden relative ">
                 {/* xs to lg */}
                 <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
                     {tiers.map((tier, tierIdx) => (
@@ -504,7 +504,7 @@ export const PlanComparison = () => {
                         ) : null}
                     </table>
                     {!expanded ? (
-                        <div className="pb-8 -mt-16">
+                        <div className="absolute bottom-4 left-0 right-0">
                             <button
                                 onClick={(_) => setExpanded(true)}
                                 className="bg-white rounded py-3 px-8 mx-auto block shadow-lg button-secondary"
