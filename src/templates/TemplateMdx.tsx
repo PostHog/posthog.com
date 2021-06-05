@@ -87,6 +87,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                     }
                     description={frontmatter.description || excerpt}
                     article
+                    image={frontmatter.featuredImage?.publicURL}
                 />
                 <div className="docsPagesContainer">
                     <div className="docsPages">
