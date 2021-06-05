@@ -2,7 +2,7 @@
     position: relative;
 
     &:before {
-        background: url(../../../images/pricing-background.svg) #0e0d3c top center;
+        background: url(../../../images/pricing-background.png) #0e0d3c top center;
         bottom: 0;
         content: '';
         left: 0;
@@ -150,7 +150,6 @@
 .pricing-hero {
     .ant-collapse-borderless {
         background: none;
-        backdrop-filter: blur(3px);
         border: none;
 
         > .ant-collapse-item {

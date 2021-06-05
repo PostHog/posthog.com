@@ -18,6 +18,13 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <script src="https://www.workable.com/assets/embed.js" type="text/javascript" async></script>
+                <link rel="preload" href="/fonts/GoshaSans-Bold.woff" as="font" type="font/woff" />
+                <link rel="preload" href="/fonts/GoshaSans-Bold.woff2" as="font" type="font/woff2" />
+                <link rel="preload" href="/fonts/Osiris.woff2" as="font" type="font/woff2" />
+                <link rel="preload" href="/fonts/skcuriosity-medium-webfont.woff" as="font" type="font/woff" />
+                <link rel="preload" href="/fonts/skcuriosity-medium-webfont.woff2" as="font" type="font/woff2" />
+                <link rel="preload" href="/fonts/skcuriosity-heavy-webfont.woff" as="font" type="font/woff" />
+                <link rel="preload" href="/fonts/skcuriosity-heavy-webfont.woff2" as="font" type="font/woff2" />
                 {props.headComponents}
             </head>
             <body {...props.bodyAttributes} className="light">
