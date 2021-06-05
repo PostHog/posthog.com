@@ -33,6 +33,7 @@ interface LayoutProps {
     featuredImage?: string | null
     headerBackgroundTransparent?: boolean
     onBlogPage?: boolean
+    blogDate?: string
 }
 
 const BlogHeaderContent = ({ title }: { title: string }): JSX.Element => (
@@ -56,6 +57,7 @@ const Layout = ({
     featuredImage = '',
     headerBackgroundTransparent = false,
     onBlogPage = false,
+    blogDate = '',
 }: LayoutProps): JSX.Element => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -78,7 +80,12 @@ const Layout = ({
     }, [])
 
     return blogArticleSlug ? (
-        <BlogPostLayout pageTitle={pageTitle} featuredImage={featuredImage} blogArticleSlug={blogArticleSlug}>
+        <BlogPostLayout
+            blogDate={blogDate}
+            pageTitle={pageTitle}
+            featuredImage={featuredImage}
+            blogArticleSlug={blogArticleSlug}
+        >
             {children}
         </BlogPostLayout>
     ) : (
