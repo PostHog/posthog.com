@@ -44,6 +44,7 @@ function Template({
             <Layout
                 onPostPage
                 blogArticleSlug={blogArticleSlug}
+                blogDate={frontmatter.date}
                 pageTitle={frontmatter.title}
                 featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
@@ -57,6 +58,7 @@ function Template({
                     description={frontmatter.description || excerpt}
                     pathname={markdownRemark.fields.slug}
                     article
+                    image={frontmatter.featuredImage?.publicURL}
                 />
                 <div className="docsPagesContainer">
                     <div className="docsPages">

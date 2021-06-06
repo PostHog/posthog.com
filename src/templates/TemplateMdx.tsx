@@ -73,6 +73,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     return (
         <div className={'post-page ' + (!blogArticleSlug ? 'post-page-wrapper' : '')}>
             <Layout
+                blogDate={frontmatter.date}
                 onPostPage={true}
                 blogArticleSlug={blogArticleSlug}
                 pageTitle={frontmatter.title}
@@ -87,6 +88,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                     }
                     description={frontmatter.description || excerpt}
                     article
+                    image={frontmatter.featuredImage?.publicURL}
                 />
                 <div className="docsPagesContainer">
                     <div className="docsPages">

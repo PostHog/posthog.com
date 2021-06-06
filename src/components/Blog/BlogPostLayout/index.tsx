@@ -14,6 +14,7 @@ interface BlogPostLayoutProps {
     children: any
     featuredImage?: string | null | undefined
     blogArticleSlug: string
+    blogDate?: string
 }
 
 export function BlogPostLayout({
@@ -21,6 +22,7 @@ export function BlogPostLayout({
     children,
     featuredImage,
     blogArticleSlug,
+    blogDate,
 }: BlogPostLayoutProps): JSX.Element {
     return (
         <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
@@ -44,7 +46,12 @@ export function BlogPostLayout({
             )}
 
             <Structure.Section width="xl" className="text-center leading-tight mb-6">
-                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
+                <Structure.SectionHeader
+                    titleTag="h1"
+                    title={pageTitle}
+                    titleClassName="text-center leading-tight"
+                    leadText={blogDate}
+                />
                 <BlogShareButtons />
             </Structure.Section>
 
