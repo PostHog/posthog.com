@@ -38,7 +38,7 @@ const ReadPost = ({ to }: { to: string }) => {
 
 const ReadPostHome = ({ to }: { to: string }) => {
     return (
-        <CallToAction type="button" icon="book" iconBg="bg-yellow-100" to={to} width="full" className="mt-4">
+        <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="mt-4">
             Read Post
         </CallToAction>
     )

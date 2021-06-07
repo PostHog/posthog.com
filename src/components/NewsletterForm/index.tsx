@@ -118,7 +118,13 @@ export const NewsletterForm = ({
                                     />
                                 </div>
                                 <div className="clear">
-                                    <CallToAction type="button" icon="check" width="full" submit={true}>
+                                    <CallToAction
+                                        type="custom"
+                                        icon="check"
+                                        width="full"
+                                        className="text-white font-osiris border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"
+                                        submit={true}
+                                    >
                                         Join the List
                                     </CallToAction>
                                 </div>

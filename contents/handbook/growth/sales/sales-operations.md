@@ -47,6 +47,12 @@ By contrast, Scale Paid is for an entire team to adopt - customers will have eng
 
 We have a short waiting list of customers waiting for deployment, so are currently prioritizing those with 10k-1m MAUs, are on GCP and are familiar with Helm Charts/k8s. 
 
+### Okay, they're using PostHog. Now what?
+
+Congratulations, this is the best part! Now we focus on making customers successful at unlocking insights into their product. 
+
+Read about how we do this in the dedicated handbook section, [Ensuring Customer Delight at PostHog](/handbook/growth/customer-support). 
+
 ## FAQs
 
 _Can I give a Scale customer a free trial?_
