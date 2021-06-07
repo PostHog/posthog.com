@@ -37,7 +37,7 @@ class FeatureFlagsPoller:
             result = isSimpleFlagEnabled(key, distinctId, flag['rollout_percentage'])
         else:
             # Send a POST request to /decide passing the user distinct_id in the request data
-            # Authenticate with the Project API Ket
+            # Authenticate with the Project API Kept
             response = post('/decide/', data={ 'distinct_id': distinctId  })
             result = key in response.data.featureFlags
         
