@@ -1,5 +1,5 @@
 .hero {
-    background: url(../images/hero-bg.svg), linear-gradient(180deg, #220f3f 0%, #3f086d 100%);
+    background: url(../images/hero-bg.png), linear-gradient(180deg, #220f3f 0%, #3f086d 100%);
     background-position: center center;
     background-repeat: repeat-x;
     position: relative;
@@ -272,7 +272,7 @@
 }
 
 .bg-pipes {
-    background: url(../images/pipes.svg), linear-gradient(180deg, #2b114d 0%, #2a235b 100%);
+    background: url(../images/pipes.png), linear-gradient(180deg, #2b114d 0%, #2a235b 100%);
     background-size: contain;
     background-position: top center;
     background-repeat: no-repeat;
@@ -305,7 +305,7 @@
         }
 
         &:before {
-            background: url(../images/circles-1.svg);
+            background: url(../images/circles-1.png);
             bottom: -400px;
             left: -500px;
             height: 689px;
@@ -313,7 +313,7 @@
         }
 
         &:after {
-            background: url(../images/circles-2.svg);
+            background: url(../images/circles-2.png);
             height: 886px;
             left: 65%;
             top: 300px;
