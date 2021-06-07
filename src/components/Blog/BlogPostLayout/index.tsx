@@ -8,6 +8,8 @@ import { BlogFooter } from '../../BlogFooter'
 import { BlogShareButtons } from '../BlogShareButtons'
 import { Structure } from '../../Structure'
 import { DarkModeToggle } from '../../DarkModeToggle'
+import { AuthorsData } from 'types'
+import BlogAuthor from '../BlogAuthor'
 
 interface BlogPostLayoutProps {
     pageTitle: string
@@ -15,6 +17,7 @@ interface BlogPostLayoutProps {
     featuredImage?: string | null | undefined
     blogArticleSlug: string
     blogDate?: string
+    authorDetails?: AuthorsData
 }
 
 export function BlogPostLayout({
@@ -23,6 +26,7 @@ export function BlogPostLayout({
     featuredImage,
     blogArticleSlug,
     blogDate,
+    authorDetails,
 }: BlogPostLayoutProps): JSX.Element {
     return (
         <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
@@ -54,6 +58,12 @@ export function BlogPostLayout({
                 />
                 <BlogShareButtons />
             </Structure.Section>
+
+            {authorDetails?.handle && (
+                <Structure.Section width="xl">
+                    <BlogAuthor authorDetails={authorDetails} />
+                </Structure.Section>
+            )}
 
             <Structure.Section width="xl">{children}</Structure.Section>
 

@@ -6,6 +6,7 @@ import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlogAuthor } from './components/Blog/BlogAuthor'
 import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
 import { BlogShareButtons } from './components/Blog/BlogShareButtons'
@@ -83,6 +84,7 @@ export const shortcodes = {
     MethodTags,
     ArrayCTA,
     BasicHedgehogImage,
+    BlogAuthor,
     BlogPostLayout,
     BlogPosts,
     BlogShareButtons,

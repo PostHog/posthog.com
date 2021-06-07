@@ -9,21 +9,25 @@ import { layoutLogic } from '../logic/layoutLogic'
 import { useActions, useValues } from 'kea'
 import { DocsPageSurvey } from '../components/DocsPageSurvey'
 import { Spin } from 'antd'
+import { findAuthor } from 'lib/utils'
 
 function addIndex(url) {
     const indexUrls = ['/docs', '/handbook']
     return `${url}${indexUrls.includes(url) ? '/index' : ''}`
 }
 
-function Template({
-    data, // this prop will be injected by the GraphQL query below.
-}) {
+// props will be injected by the GraphQL query below.
+function Template(props) {
+    const {
+        data: { postData: data, authorsData },
+    } = props
     const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
     const [runningInBrowser, setRunningInBrowser] = useState(false)
-    const { markdownRemark } = data // data.markdownRemark holds our post data
-    const { frontmatter, html, excerpt, id, fields } = markdownRemark
+    const { frontmatter, html, excerpt, id, fields } = data // data holds our post data
+
+    const author = findAuthor(authorsData.frontmatter.authors)(frontmatter.author)
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -50,13 +54,14 @@ function Template({
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 onBlogPage={!!blogArticleSlug}
+                authorDetails={author}
             >
                 <SEO
                     title={
                         frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')
                     }
                     description={frontmatter.description || excerpt}
-                    pathname={markdownRemark.fields.slug}
+                    pathname={fields.slug}
                     article
                     image={frontmatter.featuredImage?.publicURL}
                 />
@@ -72,7 +77,7 @@ function Template({
                     </div>
                     {isDocsPage && <DocsPageSurvey />}
                     {(isDocsPage || isHandbookPage) && (
-                        <DocsFooter filename={`${addIndex(markdownRemark.fields.slug)}.md`} title={frontmatter.title} />
+                        <DocsFooter filename={`${addIndex(fields.slug)}.md`} title={frontmatter.title} />
                     )}
                 </div>
             </Layout>
@@ -85,7 +90,7 @@ export default Template
 // @todo -> be defensive against null featuredImage
 export const pageQuery = graphql`
     query($path: String!) {
-        markdownRemark(fields: { slug: { eq: $path } }) {
+        postData: markdownRemark(fields: { slug: { eq: $path } }) {
             fields {
                 slug
             }
@@ -101,7 +106,21 @@ export const pageQuery = graphql`
                 }
                 showTitle
                 hideAnchor
+                author
             }
+        }
+        authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
+            frontmatter {
+                authors {
+                    handle
+                    name
+                    role
+                    image
+                    link_type
+                    link_url
+                }
+            }
+            id
         }
     }
 `
