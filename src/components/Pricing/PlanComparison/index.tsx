@@ -242,271 +242,278 @@ export const PlanComparison = () => {
     const displaySections = expanded ? sections : sections.slice(0, 1)
 
     return (
-        <div className="plans-comparison-table max-w-7xl mx-auto bg-royal-blue bg-opacity-50 rounded-lg backdrop-filter backdrop-blur-sm overflow-hidden relative">
-            {/* xs to lg */}
-            <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
-                {tiers.map((tier, tierIdx) => (
-                    <section key={tier.name}>
-                        <div className="px-3 mb-2 lg:hidden">
-                            <div className="text-lg pt-2 leading-6 text-white text-large font-bold text-opacity-50">
-                                {tier.name}
+        <div className="mx-4">
+            <div className="plans-comparison-table max-w-7xl mx-auto pt-2 md:pt-0 bg-royal-blue bg-opacity-50 rounded md:rounded-lg backdrop-filter backdrop-blur-sm overflow-hidden relative ">
+                {/* xs to lg */}
+                <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
+                    {tiers.map((tier, tierIdx) => (
+                        <section key={tier.name}>
+                            <div className="px-3 mb-2 lg:hidden">
+                                <div className="text-lg pt-2 leading-6 text-white text-large font-bold text-opacity-50">
+                                    {tier.name}
+                                </div>
+                                <p className="mt-4 hidden">
+                                    <span className="text-4xl font-extrabold text-white text-opacity-50">
+                                        ${tier.priceMonthly}
+                                    </span>{' '}
+                                    <span className="text-base font-medium text-gray-500">/mo</span>
+                                </p>
+                                <p className="mt-4 text-sm text-gray-500 hidden">{tier.description}</p>
+                                <a
+                                    href={tier.href}
+                                    className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-white text-center hover:bg-gray-900 hidden"
+                                >
+                                    Buy {tier.name}
+                                </a>
                             </div>
-                            <p className="mt-4 hidden">
-                                <span className="text-4xl font-extrabold text-white text-opacity-50">
-                                    ${tier.priceMonthly}
-                                </span>{' '}
-                                <span className="text-base font-medium text-gray-500">/mo</span>
-                            </p>
-                            <p className="mt-4 text-sm text-gray-500 hidden">{tier.description}</p>
-                            <a
-                                href={tier.href}
-                                className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-white text-center hover:bg-gray-900 hidden"
-                            >
-                                Buy {tier.name}
-                            </a>
-                        </div>
 
-                        {sections.map((section) => (
-                            <table key={section.name} className="w-full mb-0">
-                                <caption className="p-3 mt-4 text-sm font-medium text-white text-opacity-50 font-bold">
-                                    {section.name}
-                                </caption>
-                                <thead>
+                            {sections.map((section) => (
+                                <table key={section.name} className="w-full mb-0">
+                                    <caption className="p-3 mt-4 text-sm font-medium text-white text-opacity-50 font-bold">
+                                        {section.name}
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th className="sr-only" scope="col">
+                                                Feature
+                                            </th>
+                                            <th className="sr-only" scope="col">
+                                                Included
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200">
+                                        {section.features.map((feature) => (
+                                            <tr key={feature.name} className="border-white border-opacity-10">
+                                                <th
+                                                    className="py-5 px-4 text-sm font-normal text-gray-500 border-white border-opacity-10 w-1/2"
+                                                    scope="row"
+                                                >
+                                                    {feature.name}
+                                                </th>
+                                                <td className="py-5 pr-4">
+                                                    {typeof feature.tiers[tier.name] === 'string' ? (
+                                                        <span className="block text-sm text-white text-opacity-75 text-center">
+                                                            {feature.tiers[tier.name]}
+                                                        </span>
+                                                    ) : (
+                                                        <>
+                                                            {feature.tiers[tier.name] === true ? (
+                                                                <img
+                                                                    src={CheckIcon}
+                                                                    alt="Checked"
+                                                                    width="18"
+                                                                    height="18"
+                                                                    className="m-auto h-5 w-5 text-green-500"
+                                                                    aria-hidden="true"
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={MinusIcon}
+                                                                    alt="Checked"
+                                                                    width="18"
+                                                                    height="18"
+                                                                    className="m-auto h-5 w-5 text-red-500"
+                                                                    aria-hidden="true"
+                                                                />
+                                                            )}
+
+                                                            <span className="sr-only">
+                                                                {feature.tiers[tier.name] === true ? 'Yes' : 'No'}
+                                                            </span>
+                                                        </>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ))}
+
+                            <div
+                                className={classNames(
+                                    tierIdx < tiers.length - 1 ? 'py-5 border-b' : 'pt-5',
+                                    'border-gray-200 px-4 hidden'
+                                )}
+                            >
+                                <a
+                                    href={tier.href}
+                                    className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                                >
+                                    Buy {tier.name}
+                                </a>
+                            </div>
+                        </section>
+                    ))}
+                </div>
+
+                {/* lg+ */}
+                <div className="hidden lg:block">
+                    <table
+                        className={`w-full h-px table-fixed relative mb-0 rounded-lg overflow-hidden ${
+                            expanded ? 'pricing-table-expanded' : 'pricing-table-collapsed'
+                        }`}
+                    >
+                        <caption className="sr-only">Pricing plan comparison</caption>
+                        <thead>
+                            <tr>
+                                <th className="text-white text-center border-white border-opacity-10">&nbsp;</th>
+                                <th className="text-white text-center border-white border-opacity-10">
+                                    Hosted solution
+                                </th>
+                                <th colSpan="3" className="text-white text-center border-white border-opacity-10">
+                                    Self-hosted options
+                                </th>
+                            </tr>
+                            <tr>
+                                <th
+                                    className="pb-4 px-6 text-sm font-medium text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-50"
+                                    scope="col"
+                                >
+                                    <span className="sr-only">Feature by</span>
+                                    <span className="sr-only">Plans</span>
+                                </th>
+                                {tiers.map((tier) => (
+                                    <th
+                                        key={tier.name}
+                                        className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-75"
+                                        scope="col"
+                                    >
+                                        {tier.name}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody className="">
+                            {/* 
+                            <tr>
+                                <th
+                                    className="py-8 px-6 text-sm font-medium text-white text-left align-top border-white border-opacity-10"
+                                    scope="row"
+                                >
+                                    Pricing
+                                </th>
+                                {tiers.map((tier) => (
+                                    <td
+                                        key={tier.name}
+                                        className="h-full py-8 px-6 align-top border-white border-opacity-10"
+                                    >
+                                        <div className="relative h-full table">
+                                            <p>
+                                                <span className="text-4xl font-extrabold text-white text-opacity-50">
+                                                    ${tier.priceMonthly}
+                                                </span>{' '}
+                                                <span className="text-base font-medium text-gray-500">/mo</span>
+                                            </p>
+                                            <p className="mt-4 mb-16 text-sm text-gray-500">{tier.description}</p>
+                                            <a
+                                                href={tier.href}
+                                                className="absolute bottom-0 flex-grow block w-full bg-gray-800 border border-gray-800 rounded-md 5 py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                                            >
+                                                Buy {tier.name}
+                                            </a>
+                                        </div>
+                                    </td>
+                                ))}
+                            </tr>
+                            */}
+                            {displaySections.map((section) => (
+                                <Fragment key={section.name}>
                                     <tr>
-                                        <th className="sr-only" scope="col">
-                                            Feature
-                                        </th>
-                                        <th className="sr-only" scope="col">
-                                            Included
+                                        <th
+                                            className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-white border-white border-opacity-10"
+                                            colSpan={5}
+                                            scope="colgroup"
+                                            style={{ borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                                        >
+                                            {section.name}
                                         </th>
                                     </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200">
                                     {section.features.map((feature) => (
-                                        <tr key={feature.name} className="border-white border-opacity-10">
+                                        <tr key={feature.name}>
                                             <th
-                                                className="py-5 px-4 text-sm font-normal text-gray-500 border-white border-opacity-10 w-1/2"
+                                                className="py-5 px-6 text-sm font-normal text-white text-left border-white border-opacity-10"
                                                 scope="row"
                                             >
                                                 {feature.name}
                                             </th>
-                                            <td className="py-5 pr-4">
-                                                {typeof feature.tiers[tier.name] === 'string' ? (
-                                                    <span className="block text-sm text-white text-opacity-75 text-center">
-                                                        {feature.tiers[tier.name]}
-                                                    </span>
-                                                ) : (
-                                                    <>
-                                                        {feature.tiers[tier.name] === true ? (
-                                                            <img
-                                                                src={CheckIcon}
-                                                                alt="Checked"
-                                                                width="18"
-                                                                height="18"
-                                                                className="m-auto h-5 w-5 text-green-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        ) : (
-                                                            <img
-                                                                src={MinusIcon}
-                                                                alt="Checked"
-                                                                width="18"
-                                                                height="18"
-                                                                className="m-auto h-5 w-5 text-red-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        )}
-
-                                                        <span className="sr-only">
-                                                            {feature.tiers[tier.name] === true ? 'Yes' : 'No'}
+                                            {tiers.map((tier) => (
+                                                <td
+                                                    key={tier.name}
+                                                    className="py-5 px-6 border-white border-opacity-10"
+                                                >
+                                                    {typeof feature.tiers[tier.name] === 'string' ? (
+                                                        <span className="block text-sm text-center text-white text-opacity-75">
+                                                            {feature.tiers[tier.name]}
                                                         </span>
-                                                    </>
-                                                )}
-                                            </td>
+                                                    ) : (
+                                                        <>
+                                                            {feature.tiers[tier.name] === true ? (
+                                                                <img
+                                                                    src={CheckIcon}
+                                                                    alt="Checked"
+                                                                    width="18"
+                                                                    height="18"
+                                                                    className="m-auto h-5 w-5 text-green-500"
+                                                                    aria-hidden="true"
+                                                                />
+                                                            ) : (
+                                                                <img
+                                                                    src={MinusIcon}
+                                                                    alt="Checked"
+                                                                    width="18"
+                                                                    height="18"
+                                                                    className="m-auto h-5 w-5 text-red-500"
+                                                                    aria-hidden="true"
+                                                                />
+                                                            )}
+
+                                                            <span className="sr-only">
+                                                                {feature.tiers[tier.name] === true
+                                                                    ? 'Included'
+                                                                    : 'Not included'}{' '}
+                                                                in {tier.name}
+                                                            </span>
+                                                        </>
+                                                    )}
+                                                </td>
+                                            ))}
                                         </tr>
                                     ))}
-                                </tbody>
-                            </table>
-                        ))}
-
-                        <div
-                            className={classNames(
-                                tierIdx < tiers.length - 1 ? 'py-5 border-b' : 'pt-5',
-                                'border-gray-200 px-4 hidden'
-                            )}
-                        >
-                            <a
-                                href={tier.href}
-                                className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
-                            >
-                                Buy {tier.name}
-                            </a>
-                        </div>
-                    </section>
-                ))}
-            </div>
-
-            {/* lg+ */}
-            <div className="hidden lg:block">
-                <table
-                    className={`w-full h-px table-fixed relative mb-0 rounded-lg overflow-hidden ${
-                        expanded ? 'pricing-table-expanded' : 'pricing-table-collapsed'
-                    }`}
-                >
-                    <caption className="sr-only">Pricing plan comparison</caption>
-                    <thead>
-                        <tr>
-                            <th className="text-white text-center border-white border-opacity-10">&nbsp;</th>
-                            <th className="text-white text-center border-white border-opacity-10">Hosted solution</th>
-                            <th colSpan="3" className="text-white text-center border-white border-opacity-10">
-                                Self-hosted options
-                            </th>
-                        </tr>
-                        <tr>
-                            <th
-                                className="pb-4 px-6 text-sm font-medium text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-50"
-                                scope="col"
-                            >
-                                <span className="sr-only">Feature by</span>
-                                <span className="sr-only">Plans</span>
-                            </th>
-                            {tiers.map((tier) => (
-                                <th
-                                    key={tier.name}
-                                    className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-75"
-                                    scope="col"
-                                >
-                                    {tier.name}
-                                </th>
+                                </Fragment>
                             ))}
-                        </tr>
-                    </thead>
-                    <tbody className="">
-                        {/* 
-                        <tr>
-                            <th
-                                className="py-8 px-6 text-sm font-medium text-white text-left align-top border-white border-opacity-10"
-                                scope="row"
-                            >
-                                Pricing
-                            </th>
-                            {tiers.map((tier) => (
-                                <td
-                                    key={tier.name}
-                                    className="h-full py-8 px-6 align-top border-white border-opacity-10"
-                                >
-                                    <div className="relative h-full table">
-                                        <p>
-                                            <span className="text-4xl font-extrabold text-white text-opacity-50">
-                                                ${tier.priceMonthly}
-                                            </span>{' '}
-                                            <span className="text-base font-medium text-gray-500">/mo</span>
-                                        </p>
-                                        <p className="mt-4 mb-16 text-sm text-gray-500">{tier.description}</p>
-                                        <a
-                                            href={tier.href}
-                                            className="absolute bottom-0 flex-grow block w-full bg-gray-800 border border-gray-800 rounded-md 5 py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
-                                        >
-                                            Buy {tier.name}
-                                        </a>
-                                    </div>
-                                </td>
-                            ))}
-                        </tr>
-                        */}
-                        {displaySections.map((section) => (
-                            <Fragment key={section.name}>
-                                <tr>
-                                    <th
-                                        className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-white border-white border-opacity-10"
-                                        colSpan={5}
-                                        scope="colgroup"
-                                        style={{ borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
-                                    >
-                                        {section.name}
+                        </tbody>
+                        {expanded ? (
+                            <tfoot className="hidden">
+                                <tr className="border-t border-white border-opacity-10">
+                                    <th className="sr-only" scope="row">
+                                        Choose your plan
                                     </th>
+                                    {tiers.map((tier) => (
+                                        <td key={tier.name} className="pt-5 px-6 border-white border-opacity-10">
+                                            <a
+                                                href={tier.href}
+                                                className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                                            >
+                                                Buy {tier.name}
+                                            </a>
+                                        </td>
+                                    ))}
                                 </tr>
-                                {section.features.map((feature) => (
-                                    <tr key={feature.name}>
-                                        <th
-                                            className="py-5 px-6 text-sm font-normal text-white text-left border-white border-opacity-10"
-                                            scope="row"
-                                        >
-                                            {feature.name}
-                                        </th>
-                                        {tiers.map((tier) => (
-                                            <td key={tier.name} className="py-5 px-6 border-white border-opacity-10">
-                                                {typeof feature.tiers[tier.name] === 'string' ? (
-                                                    <span className="block text-sm text-center text-white text-opacity-75">
-                                                        {feature.tiers[tier.name]}
-                                                    </span>
-                                                ) : (
-                                                    <>
-                                                        {feature.tiers[tier.name] === true ? (
-                                                            <img
-                                                                src={CheckIcon}
-                                                                alt="Checked"
-                                                                width="18"
-                                                                height="18"
-                                                                className="m-auto h-5 w-5 text-green-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        ) : (
-                                                            <img
-                                                                src={MinusIcon}
-                                                                alt="Checked"
-                                                                width="18"
-                                                                height="18"
-                                                                className="m-auto h-5 w-5 text-red-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        )}
-
-                                                        <span className="sr-only">
-                                                            {feature.tiers[tier.name] === true
-                                                                ? 'Included'
-                                                                : 'Not included'}{' '}
-                                                            in {tier.name}
-                                                        </span>
-                                                    </>
-                                                )}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </Fragment>
-                        ))}
-                    </tbody>
-                    {expanded ? (
-                        <tfoot className="hidden">
-                            <tr className="border-t border-white border-opacity-10">
-                                <th className="sr-only" scope="row">
-                                    Choose your plan
-                                </th>
-                                {tiers.map((tier) => (
-                                    <td key={tier.name} className="pt-5 px-6 border-white border-opacity-10">
-                                        <a
-                                            href={tier.href}
-                                            className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
-                                        >
-                                            Buy {tier.name}
-                                        </a>
-                                    </td>
-                                ))}
-                            </tr>
-                        </tfoot>
+                            </tfoot>
+                        ) : null}
+                    </table>
+                    {!expanded ? (
+                        <div className="absolute bottom-4 left-0 right-0">
+                            <button
+                                onClick={(_) => setExpanded(true)}
+                                className="bg-white rounded py-3 px-8 mx-auto block shadow-lg button-secondary"
+                            >
+                                <span>See full comparison</span>
+                            </button>
+                        </div>
                     ) : null}
-                </table>
-                {!expanded ? (
-                    <div className="bg-royal-blue pb-8 -mt-16">
-                        <button
-                            onClick={(_) => setExpanded(true)}
-                            className="bg-white rounded py-3 px-8 mx-auto block shadow-lg button-secondary"
-                        >
-                            See full comparison
-                        </button>
-                    </div>
-                ) : null}
+                </div>
             </div>
         </div>
     )

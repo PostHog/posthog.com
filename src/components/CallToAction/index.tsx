@@ -51,7 +51,7 @@ export const CallToAction = ({
     className = '',
     type = 'primary',
     icon = 'none',
-    iconBg = 'bg-white',
+    iconBg = 'bg-white relative',
     children,
     width = '64',
     href,
@@ -65,7 +65,7 @@ export const CallToAction = ({
     ) : null
 
     const widthClass = `w-${width}`
-    const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between text-sm relative`
+    const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between text-sm relative select-none font-osiris lowercase`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (
