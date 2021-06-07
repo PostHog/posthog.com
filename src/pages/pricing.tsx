@@ -9,15 +9,17 @@ import { Savings } from '../components/Pricing/Savings'
 import { FAQs } from '../components/Pricing/FAQs'
 import { Quote } from '../components/Pricing/Quote'
 import { Footer } from '../components/Footer'
-
+import { useLocation } from '@reach/router'
 import '../components/Pricing/styles/index.scss'
 
 const PricingNew = (): JSX.Element => {
+    const { hash } = useLocation()
+    const SHOW_SCALE_HASH = '#scale'
     return (
         <div className="pricing-hero relative">
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <PricingHero />
-            <PricingTable />
+            <PricingTable showScaleByDefault={hash === SHOW_SCALE_HASH} />
             <CloudVsSelfHost />
             <h3 className="relative text-white text-center">Compare plans</h3>
             <PlanComparison />
