@@ -28,6 +28,11 @@ const client = new PostHog(
   '<ph_project_api_key>',
   {host: '<ph_instance_address>'} // You can remove this line if you're using app.posthog.com
 )
+
+// On program exit, call shutdown to 
+// stop pending pollers and flush 
+// any remaining events
+client.shutdown()
 ```
 
 
@@ -43,7 +48,8 @@ You can find your key in the 'Project Settings' page in PostHog.
 | `host` | Your PostHog host | `https://app.posthog.com/` |
 | `flushAt` | After how many capture calls we should flush the queue (in one batch). | `20` |
 | `flushInterval` | After how many ms we should flush the queue. | `10000` |
-| `retryCount` | How often to retry sending an event before giving up. | `3` |
+| `personalApiKey` | Required for using feature flags. Find out how to get a Personal API Key from the [dedicated docs section](/api/overview).  | `3` |
+| `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API. | `300000` |
 
 
 > **Note:** If you're using PostHog in an AWS Lambda function or other similar serverless function tools make sure you set `flushAt` and `flushInterval` to `0`.
@@ -171,12 +177,41 @@ client.capture({
 })
 ```
 
-# Development
+### Feature Flags
 
-## How to Release
-1. Run `npm version patch` (or minor/major)
-2. Run `npm publish`
+> Please note that to use feature flags [you need to specify `personalApiKey`](/api/overview) in the options passed when initializing `PostHog`.
 
-## Thank You
+#### Checking if a feature is enabled
 
-This library is largely based on the `analytics-node` package.
+To check if a feature flag is on for a given user, you can call `isFeatureEnabled`, passing the flag's key and the user's distinct ID. You can optionally pass a third argument to override the default result to be returned if the flag is not found. This is set to `false` by default.
+
+```js
+// isFeatureEnabled(key: string, distinctId: string, defaultResult?: boolean): Promise<boolean>
+const isMyFlagEnabledForUser = await client.isFeatureEnabled('flag-key', 'user distinct id')
+
+if (isMyFlagEnabledForUser) {
+  // do something e.g. route an API differently, serve a different response
+}
+```
+
+> Please note that if your feature flag relies entirely on rollout percentage (i.e. it has no filters), `isFeatureEnabled` will provide a fast response, allowing it to be used in the logic for API endpoints, for example. Flags that depend on filters require a call to the PostHog API so will take longer.
+
+#### Reloading feature flags
+
+When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:
+
+```js
+// reloadFeatureFlags(): Promise<void>
+await client.reloadFeatureFlags()
+
+// do something with feature flags
+```
+
+### Shutdown
+
+You should call `shutdown` on your program's exit to exit cleanly:
+
+```js
+// clears feature flags poller and flushes events
+client.shutdown()
+```
