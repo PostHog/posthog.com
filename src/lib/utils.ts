@@ -1,4 +1,4 @@
-import { LibraryPluginType } from 'types'
+import { AuthorsData, LibraryPluginType } from 'types'
 
 export const unsafeHash = (str: string) => {
     let a = 1,
@@ -45,3 +45,6 @@ export const generateRandomHtmlId = () =>
         .substr(2, 10)
 
 export const mergeClassList = (...args: string[]) => args.filter((classList) => !!classList).join(' ')
+
+export const findAuthor = (authors: AuthorsData[]) => (authorKey?: string) =>
+    authors?.find(({ handle }) => handle === authorKey)

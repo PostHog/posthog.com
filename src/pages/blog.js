@@ -7,11 +7,15 @@ import { SEO } from '../components/seo'
 import { Structure } from '../components/Structure'
 import { BlogSidebar } from '../components/Blog/BlogSidebar'
 import { DarkModeToggle } from '../components/DarkModeToggle'
+import { findAuthor } from 'lib/utils'
 
 const BlogPage = ({
     data: {
         allMarkdownRemark: { edges },
         allMdx,
+        markdownRemark: {
+            frontmatter: { authors },
+        },
     },
 }) => {
     // Standardize position of 'slug' across MDX and MD
@@ -24,8 +28,21 @@ const BlogPage = ({
         .filter((edge) => !!edge.node.frontmatter.date)
         .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
 
-    const latestPost = <PostCard key={posts[0].node.id} post={posts[0].node} featured />
-    const nonLatestPosts = posts.slice(1).map((edge) => <PostCard key={edge.node.id} post={edge.node} />)
+    const findAuth = findAuthor(authors)
+
+    const latestPost = (
+        <PostCard
+            key={posts[0].node.id}
+            post={posts[0].node}
+            featured
+            authorDetails={findAuth(posts[0].node.frontmatter.author)}
+        />
+    )
+    const nonLatestPosts = posts
+        .slice(1)
+        .map((edge) => (
+            <PostCard authorDetails={findAuth(edge.node.frontmatter.author)} key={edge.node.id} post={edge.node} />
+        ))
 
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
@@ -84,6 +101,7 @@ export const pageQuery = graphql`
                         featuredImage {
                             publicURL
                         }
+                        author
                     }
                 }
             }
@@ -107,6 +125,19 @@ export const pageQuery = graphql`
                     }
                 }
             }
+        }
+        markdownRemark(fields: { slug: { eq: "/authors" } }) {
+            frontmatter {
+                authors {
+                    handle
+                    name
+                    role
+                    image
+                    link_type
+                    link_url
+                }
+            }
+            id
         }
     }
 `

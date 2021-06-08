@@ -6,6 +6,7 @@ import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlogAuthor } from './components/Blog/BlogAuthor'
 import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
 import { BlogShareButtons } from './components/Blog/BlogShareButtons'
@@ -83,6 +84,7 @@ export const shortcodes = {
     AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
+    BlogAuthor,
     BlogPostLayout,
     BlogPosts,
     BlogShareButtons,

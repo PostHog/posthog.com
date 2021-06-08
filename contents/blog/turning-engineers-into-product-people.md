@@ -5,9 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+author: mo-shehu
 ---
-By: [Mohammed Shehu](https://twitter.com/shehuphd), Content Lead @ PostHog
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kz4aX1NIzUQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Great engineers will either get autonomy at your company, or they'll get it somewhere else. Our engineers are encouraged to think about the _what_ and _why_ of what they're building - not just the _how_.

@@ -19,6 +19,7 @@ import { GetStartedModal } from '../../components/GetStartedModal'
 import { BlogFooter } from '../../components/BlogFooter'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { BlogPostLayout } from '../Blog/BlogPostLayout'
+import { AuthorsData } from 'types'
 
 interface LayoutProps {
     pageTitle?: string
@@ -34,6 +35,7 @@ interface LayoutProps {
     headerBackgroundTransparent?: boolean
     onBlogPage?: boolean
     blogDate?: string
+    authorDetails?: AuthorsData
 }
 
 const BlogHeaderContent = ({ title }: { title: string }): JSX.Element => (
@@ -58,6 +60,7 @@ const Layout = ({
     headerBackgroundTransparent = false,
     onBlogPage = false,
     blogDate = '',
+    authorDetails,
 }: LayoutProps): JSX.Element => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -85,6 +88,7 @@ const Layout = ({
             pageTitle={pageTitle}
             featuredImage={featuredImage}
             blogArticleSlug={blogArticleSlug}
+            authorDetails={authorDetails}
         >
             {children}
         </BlogPostLayout>
