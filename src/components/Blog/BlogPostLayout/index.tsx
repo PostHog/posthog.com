@@ -50,20 +50,19 @@ export function BlogPostLayout({
             )}
 
             <Structure.Section width="xl" className="text-center leading-tight mb-6">
-                <Structure.SectionHeader
-                    titleTag="h1"
-                    title={pageTitle}
-                    titleClassName="text-center leading-tight"
-                    leadText={blogDate}
-                />
-                <BlogShareButtons />
+                <p className="mt-8 mb-2">{blogDate}</p>
+                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
             </Structure.Section>
 
             {authorDetails?.handle && (
-                <Structure.Section width="xl">
+                <Structure.Section width="xl" className="mb-6">
                     <BlogAuthor authorDetails={authorDetails} />
                 </Structure.Section>
             )}
+
+            <Structure.Section width="xl" className="text-center">
+                <BlogShareButtons />
+            </Structure.Section>
 
             <Structure.Section width="xl">{children}</Structure.Section>
 

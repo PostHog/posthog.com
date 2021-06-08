@@ -4,7 +4,7 @@ import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
 import './style.scss'
 import { AuthorsData } from 'types'
-import BlogAuthor from 'components/Blog/BlogAuthor'
+import AuthorIndexView from 'components/Blog/BlogAuthor/AuthorIndexView'
 
 export interface PostType {
     id: string
@@ -57,6 +57,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
                         {post.frontmatter.title}
                     </Link>
                 </h2>
+                <AuthorIndexView authorDetails={authorDetails} />
                 <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed font-inter">
                     {post.excerpt}
                 </div>
@@ -129,7 +130,7 @@ const PostCard = ({
                             {post.frontmatter.title}
                         </Link>
                     </h3>
-                    <BlogAuthor authorDetails={authorDetails} />
+                    <AuthorIndexView authorDetails={authorDetails} />
                     <div className="mt-4 leading-relaxed text-sm font-inter">{post.excerpt}</div>
                     <ReadPost to={post.fields.slug} />
                 </div>
