@@ -50,7 +50,7 @@ export function BlogPostLayout({
             )}
 
             <Structure.Section width="xl" className="text-center leading-tight mb-6">
-                <p className="mt-8 mb-2">{blogDate}</p>
+                <p className="mt-8 mb-2 opacity-50">{blogDate}</p>
                 <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
             </Structure.Section>
 
