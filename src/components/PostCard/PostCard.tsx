@@ -77,7 +77,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
     )
 }
 
-const LandingPageLatestPost = ({ post }: { post: PostType }) => {
+const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col justify-between items-center">
             {post.frontmatter.featuredImage?.publicURL && (
@@ -96,6 +96,7 @@ const LandingPageLatestPost = ({ post }: { post: PostType }) => {
                         {post.frontmatter.title}
                     </Link>
                 </h2>
+                <AuthorIndexView authorDetails={authorDetails} />
                 <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed font-inter">{post.excerpt}</div>
                 <ReadPostHome to={post.fields.slug} />
             </div>
@@ -119,7 +120,7 @@ const PostCard = ({
             {featured ? (
                 <FeaturedPost post={post} authorDetails={authorDetails} />
             ) : landingPage ? (
-                <LandingPageLatestPost post={post} />
+                <LandingPageLatestPost post={post} authorDetails={authorDetails} />
             ) : (
                 <div className="flex flex-col mb-12">
                     <h3 className="mb-0">
