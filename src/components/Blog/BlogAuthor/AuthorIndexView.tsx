@@ -8,7 +8,7 @@ interface AuthorDetails {
 function AuthorIndexView({ authorDetails }: AuthorDetails) {
     if (authorDetails?.handle) {
         const { name } = authorDetails
-        return <h5 className="mt-2 mb-0">{name}</h5>
+        return <div className="mt-1 mb-0">by {name}</div>
     }
     return null
 }

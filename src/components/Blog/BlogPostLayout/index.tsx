@@ -31,7 +31,7 @@ export function BlogPostLayout({
     return (
         <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
             <Header onPostPage blogArticleSlug={blogArticleSlug} />
-            <div className="flex justify-between items-center w-full px-4 mb-12">
+            <div className="flex justify-between items-center w-full px-4 mb-12 mt-6 lg:mt-4">
                 <div className="flex-grow">
                     <Link
                         to="/blog"
@@ -55,16 +55,15 @@ export function BlogPostLayout({
             </Structure.Section>
 
             {authorDetails?.handle && (
-                <Structure.Section width="xl" className="mb-6">
+                <Structure.Section width="xl" className="mb-12">
                     <BlogAuthor authorDetails={authorDetails} />
                 </Structure.Section>
             )}
 
-            <Structure.Section width="xl" className="text-center">
+            <div className="max-w-xl mx-auto relative">
                 <BlogShareButtons />
-            </Structure.Section>
-
-            <Structure.Section width="xl">{children}</Structure.Section>
+                <Structure.Section>{children}</Structure.Section>
+            </div>
 
             <PosthogAnnouncement />
             <GetStartedModal />
