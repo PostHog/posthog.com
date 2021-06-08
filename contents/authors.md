@@ -4,40 +4,22 @@ authors:
       handle: james-hawkins,
       name: James Hawkins,
       role: Co-founder/CEO of PostHog,
-      image: https://posthog.com/static/James-c4a6cbcb0c32043d96dd03abc5c9ff51.png,
+      image: https://posthog.imgix.net/static/James-c4a6cbcb0c32043d96dd03abc5c9ff51.png?w=90,
       link_type: twitter,
       link_url: https://twitter.com/james406
     }
   - {
-      handle: cory-watilo,
-      name: Cory Watilo,
-      role: Workspace Manager,
-      image: https://posthog.com/static/James-c4a6cbcb0c32043d96dd03abc5c9ff51.png,
+      handle: mo-shehu,
+      name: Mo Shehu,
+      role: Content Lead,
+      image: https://posthog.imgix.net/static/Mo-9fac6a2da6848cd8dfa6e1c339e15938.png?w=90,
       link_type: twitter,
-      link_url: https://twitter.com/james406
+      link_url: https://twitter.com/shehuphd
     }
   - {
-      handle: andrew-brinsky,
-      name: Andrew Brinsky,
-      role: Software Engineer at Google,
-      image: https://posthog.com/static/James-c4a6cbcb0c32043d96dd03abc5c9ff51.png,
-      link_type: twitter,
-      link_url: https://twitter.com/james406,
-    }
-  - {
-      handle: cole-white,
-      name: Cole White,
-      role: Internee at Microsoft,
-      image: https://posthog.com/static/James-c4a6cbcb0c32043d96dd03abc5c9ff51.png,
-      link_type: twitter,
-      link_url: https://twitter.com/james406
-    }
-  - {
-      handle: justin-james,
-      name: Justim James,
-      role: Team Lead at Google,
-      image: https://posthog.com/static/James-c4a6cbcb0c32043d96dd03abc5c9ff51.png,
-      link_type: twitter,
-      link_url: https://twitter.com/james406
+      handle: yakko-majuri,
+      name: Yakko Majuri,
+      role: Developer Experience,
+      image: https://posthog.imgix.net/static/Yakko-b545d730831ef193e58da6c654177c5a.png?w=90
     }
 ---
