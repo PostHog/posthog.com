@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way.](/handbook/people/team-structure/why-small-teams).
+We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/people/team-structure/why-small-teams).
 
 ## Engineering
 
@@ -43,12 +43,13 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ## [Design](design)
 
-- Cory Watilo (Team lead, Lead Designer)
-- Lottie Coxon (Graphic Designer)
+- [Cory Watilo](/handbook/people/team#cory-watilo-lead-designer-) (Team lead, Lead Designer)
+- [Lottie Coxon](/handbook/people/team#lottie-coxon-graphic-designer-) (Graphic Designer)
 
 ## [Marketing](marketing)
 
-- Mo Shehu (Content Marketer)
+- [Mo Shehu](/handbook/people/team#mo-shehu-content-marketer-) (Content Marketer)
+- [Joe Martin](https://posthog.com/handbook/people/team#joe-martin-product-marketer-) (Product Marketer)
 
 ## [People & culture](people)
 

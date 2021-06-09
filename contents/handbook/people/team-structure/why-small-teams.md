@@ -29,16 +29,17 @@ We have therefore introduced Small Teams. These are designed to each operate lik
  
 # Small Teams list
 
-* Core Experience (trends, retention, funnels)
-* Extensibility (plugins/APIs)
-* Deployments and Infrastructure (AMI/VPC/PostHog Cloud)
+* [Core Experience](/handbook/people/team-structure/core-experience) (trends, retention, funnels)
+* [Core analytics](/handbook/people/team-structu) (queries)
+* [Extensibility](/handbook/people/team-structure/extensibility) (plugins/APIs)
+* [Deployments and Infrastructure](/handbook/people/team-structure/infrastructure) (AMI/VPC/PostHog Cloud)
 
 # Functional teams
 
-* People & Culture
-* Marketing (includes website)
-* Growth Engineering (proactive experiments / activation flow / revenue flow)
-* Design
+* [People & Culture](/handbook/people/team-structure/people)
+* [Marketing](/handbook/people/team-structure/marketing) (includes website)
+* [Growth Engineering](handbook/people/team-structure/growth-engineering) (proactive experiments / activation flow / revenue flow)
+* [Design](/handbook/people/team-structure/design)
 
 # FAQ
 
