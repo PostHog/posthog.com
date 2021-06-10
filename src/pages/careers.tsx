@@ -3,7 +3,7 @@ import React from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
 import { WhyWereHere } from '../components/Careers/WhyWereHere'
-import { Culture } from '../components/Careers/Culture'
+import { Transparency } from '../components/Careers/Transparency'
 import { InterviewProcess } from '../components/Careers/InterviewProcess'
 import { Benefits } from '../components/Careers/Benefits'
 import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
@@ -26,7 +26,7 @@ const IndexPage = () => {
             <div className="careers-anchor-navbar">
                 <AnchorScrollNavbar />
                 <WhyWereHere />
-                <Culture />
+                <Transparency />
                 <InterviewProcess />
                 <Benefits />
                 <WorkingAtPostHog />
