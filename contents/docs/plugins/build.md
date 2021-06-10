@@ -4,16 +4,77 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** It's worth familiarizing yourself with the [architecture of PostHog plugins](/docs/plugins/architecture) before building your own. 
+## 5 Minute Overview
 
+A great way to understand what you can do with plugins is to understand how data flows throw plugins.
+
+There's 2 big concepts to remember:
+
+1. Every plugin acts on a single event coming in.
+
+2. Plugins act on events before they are stored.
+
+Each plugin can add more information to the event, or even modify existing properties. For example, the [GeoIP plugin](tk link) is a plugin that adds GeoIP information to the event.
+
+Note that the output of one plugin goes into the next plugin. Here's how this looks:
+
+![GeoIP Plugin Example](../../images/plugins/geoip-plugin-example.png)
+
+However, this isn't all. Plugins _don't_ have to modify events at all: they can do other things when an event comes in.
+
+For example, you can send an event to AWS S3 whenever you see it in PostHog. Indeed, the [S3 plugin](tk link) does exactly that.
+
+![S3 Plugin Example](../../images/plugins/s3-plugin-example.png)
+
+Now, how do you make this happen? Every plugin is two files: `index.js` and `plugin.json`. The index file has code for the entire plugin, and the json file has configuration for user inputs. This config is what you see in the PostHog UI:
+
+![Plugin Configuration Example](../../images/plugins/plugin-configuration.png)
+
+We have some special function names that allow you to process an event, like in the GeoIP plugin, or to do something else entirely, like in the S3 export plugin. We expect `index.js` to export these special function names.
+
+Two notable ones are `processEvent` and `onEvent`. Both of them take in a single event and the meta object. More details on the meta object below, but one key property is `meta.config`, which allows your code to read the configuration values set by users. Yes, the same configuration you set via `plugin.json`.
+
+If you want to add new properties to your event, like in the GeoIP Plugin, you'd use the `processEvent` function. Here's a sample plugin that adds the `hello` property to the event.
+
+```js
+/* Runs on every event */
+export function processEvent(event, meta) {
+    // Some events (like $identify) don't have properties
+    if (event.properties) {
+        event.properties['hello'] = `Hello ${meta.config.name || 'world'}`
+    }
+    // Return the event to ingest, return nothing to discard  
+    return event
+}
+```
+
+Note how you need to return the event to ensure the chain continues. If you return `null` or `undefined`, you're telling us to discard this event.
+
+`onEvent` is what you'd use to do something else, like exporting to S3. For example, the below plugin logs the current URL on $pageview type events:
+
+TK: find a better phrase for "do something else"
+
+```js
+/* Runs on every event */
+export function onEvent(event, meta) {
+
+    if (event.event === "$pageview") {
+        console.log(event.$current_url)
+    }
+
+    // Don't need to return event, any return value is discarded, and the event is not modified
+}
+```
+
+As you can imagine, this plugin is pretty useless, since PostHog can already show you this information. But it serves to explain how things work. Note how you can choose what kind of events you want to operate on, using the existing event properties.
+
+That's all for the crash course. There's a lot you can do with plugins, like running specific jobs every hour, hitting random HTTP endpoints, modifying events coming in, etc.Below you'll find indepth information on all the special functions which allow you to do this.
 ## Pre-Requisites
 
 1. A self-hosted PostHog instance (or a local development environment)
 1. Knowledge of JavaScript (or TypeScript)
 
 ## Main Components
-
-A PostHog plugin is composed of 3 main parts:
 
 ### plugin.json file
 
@@ -112,7 +173,7 @@ Gives you access to the plugin config values as described in `plugin.json` and c
 
 #### cache
 
-A way to store values that persist across `processEvent` calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
+A way to store values that persist across special function calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
 
 The `cache` type is defined as follows:
 
@@ -134,7 +195,7 @@ You can also use `cache.incr` to increment numerical values by 1, and `cache.exp
 
 #### global
 
-Global is used for sharing functionality between `setupPlugin` and `processEvent` or `processEventBatch`, since global scope does not work in the context of PostHog plugins. 
+Global is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog plugins. 
 
 #### attachments
 
@@ -153,6 +214,7 @@ As such, accessing the contents of an uploaded file can be done with `attachment
 #### jobs
 
 The `jobs` object gives you access to the jobs you specified in your plugin. See [Jobs](#jobs) for more information.
+
 ### setupPlugin function
 
 `setupPlugin` is a function you can use to dynamically set plugin configuration based on the user's inputs at the configuration step. 
