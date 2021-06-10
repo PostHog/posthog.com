@@ -4,38 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Design is currently a shared resource at PostHog. This explains what we do, our design process, and how we can assist across the PostHog team.
-
-## Design's role at PostHog
-
-1. Support Small Teams (and contributors) in building better versions of PostHog
-1. Enable customers to build better products (using PostHog)
-1. Communicate to prospective customers the value we provide
-
-### Tangibly, we:
-
-1. Initiate new projects to support the roles listed above
-1. Support Small Teams in completing their sprint tasks
-1. Iterate based on feedback from customers
-
-## Our process
-
-Design tasks are managed with our [GitHub Org project](https://github.com/orgs/PostHog/projects/3), otherwise known as our Design Board. This aggregates design-related tasks from the main three repositories for the company:
-
-1. [PostHog app](https://github.com/PostHog/posthog) - open source repo
-1. [posthog.com](https://github.com/PostHog/posthog.com) - website + docs
-1. Internal - higher-level company strategy
-
-### How our Design Board works
-
-Cards generally move from left to right.
-
-1. **Backlog** - Things on our radar, and where triaged requests will land unless they're urgent enough to pick up immediately
-1. **This week** - Equivalent of our sprint
-1. **In progress** - Tasks we've started but haven't completed
-1. **Awaiting implementation** - In development or in review
-1. **Done** - Shipped! 🚀
-
 ## Design request process
 
 Since design is currently a shared resource, the best way design requests can be handled is by creating an issue in the relevant repository, then adding to the _Design_ project.
@@ -83,38 +51,8 @@ Provide as much documentation about the goals of the project. Depending on the p
 
 In some cases, it may make sense to jump on a Zoom to sketch out some ideas together.
 
-## Sharing work in progress
+## Using Slack for feedback
 
-We often share designs in early, unfinished phases. Since our audience is developer-friendly, we have a built-in audience to gut check our designs and solicit feedback.
-
-When providing feedback, it's worth keeping in mind the level of fidelity of the mockup we're sharing for feedback.
-
-### Wireframes
-
-If an early draft is being shared, we'll build a wireframe in Balsamiq. At this stage, we're mostly focused on laying out content, crafting messaging, and loosely tying in a visual hierarchy and layout. (Don't look too closely at fonts, specific colors, or visualizations - those come later.)
-
-_Note: Balsamiq uses its own Comic Sans-style font. Don't get hung up on this!_
-
-![image](https://user-images.githubusercontent.com/154479/114972248-2b887b80-9e4c-11eb-92fe-bce7bf14c808.png)
-
-### Mockups
-
-Once a design is laid out, we'll move into hi-fidelity mockups built in Figma. This process usually takes a few rounds to perfect, and we often iterate up until the moment the design is passed off for development.
-
-### Providing feedback
-
-We typically share links to mockups in the relevant GitHub Issue.
-
-When we share a design, we do our best to explain the type of feedback we're looking for. (Ex: Overall visual aesthetic, flow, if a design communicates to our developer-focused audience, etc.)
-
-Our main design tools, Balsamiq and Figma, both have built-in commenting. If your feedback is specific to an element on the page, please leave a comment inside the app's comment system. This helps us review and take action on comments later.
-
-If your feedback is higher level, summarize your feedback in the GitHub Issue itself for a higher-level discussion.
-
-## Slack
-
-We often use the `#design-feedback` Slack channel to share updates when we're particularly interested in feedback. We'll always link to the relevant place for discussion. (It's best to keep direct feedback off of Slack.)
+We often use the [`#design-feedback`](https://posthog.slack.com/messages/design-feedback) Slack channel to share updates when we're particularly interested in feedback. We'll always link to the relevant place for discussion. (It's best to keep direct feedback off of Slack.)
 
 This Slack channel isn't limited to the design team. If you're looking for a second opinion on the UX of something you're building, we encourage anyone to share screenshots and a link to Figma or wherever the mockup was produced so we can provide useful feedback or assist in iterating on a design.
-
-If the design requires further collaboration, create an Issue.
