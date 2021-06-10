@@ -44,6 +44,7 @@ We currently prefer working with a single media partner on an exclusive basis, a
 - [ ] Write post on our blog about the news
 - [ ] Post on PostHog Twitter (and tag all relevant people)
 - [ ] Share links to all of the above to the PostHog team so they can share
+- [ ] Update any relevant online company profiles; Crunchbase, Pitchbook, Glassdoor.
 
 ## Press release template
 
