@@ -1432,6 +1432,9 @@ table td {
 }
 
 body.dark {
+    .team-right-image {
+        color: white;
+    }
     .team-row {
         svg {
             fill: white;
