@@ -20,6 +20,16 @@ authors:
       handle: yakko-majuri,
       name: Yakko Majuri,
       role: Developer Experience,
-      image: https://posthog.imgix.net/static/Yakko-b545d730831ef193e58da6c654177c5a.png?w=90
+      image: https://posthog.imgix.net/static/Yakko-b545d730831ef193e58da6c654177c5a.png?w=90,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/yakko-majuri
+    }
+  - {
+      handle: joe-martin,
+      name: Joe Martin,
+      role: Product Marketer,
+      image: https://posthog.imgix.net/static/Joe-f2e083daf326ebcc6080ff807f2280b2.png?w=90,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/joemartinwords
     }
 ---

@@ -400,7 +400,8 @@
             "handbook/engineering/ee-setup",
             "handbook/engineering/tech-talks",
             "handbook/engineering/common-issues",
-            "handbook/engineering/mdx"
+            "handbook/engineering/mdx",
+            "handbook/engineering/feature-flags-spec"
         ]
     },
     {
