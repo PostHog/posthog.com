@@ -120,8 +120,8 @@
 
 
 [[redirects]]
-    from = "/handbook/company/team"
-    to = "/handbook/people/team"
+    from = "/handbook/people/team"
+    to = "/handbook/company/team"
 
 
 [[redirects]]

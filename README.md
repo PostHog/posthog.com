@@ -23,6 +23,8 @@ Please feel free to suggest any changes. See our [contributing guide](https://gi
     yarn start
     ```
 
+    Tip: Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `gatsby build && gatsby serve`
+
 1.  **Open the Source Code and Start Editing!**
 
     Your site is now running at `http://localhost:8000`!
