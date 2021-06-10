@@ -33,7 +33,8 @@ PostHog is an open source, product analytics platform. PostHog enables software 
 
 Founded in 2020 by James Hawkins and Tim Glaser, PostHog was a member of Y Combinator's Winter 2020 batch, and has subsequently raised $27m in funding from GV, Y Combinator, and notable angel investors including Jason Warner (CTO, GitHub), Solomon Hykes (Founder, Docker), and David Cramer (Founder, Sentry).
 
-About Y Combinator Continuity Fund
+### About Y Combinator Continuity Fund
+
 YC Continuity is an investment fund dedicated to supporting founders as they scale their companies. Our primary goal is to support YC alumni companies by investing in their subsequent funding rounds, though we occasionally invest in non-YC companies as well.
 
 Like YC's early-stage partners, the entire YC Continuity team has strong operating experience. We work to create opportunities for founders to continue their personal growth and scale their companies successfully.
