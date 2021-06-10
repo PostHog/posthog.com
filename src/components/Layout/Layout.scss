@@ -1431,6 +1431,14 @@ table td {
     justify-content: center;
 }
 
+body.dark {
+    .team-row {
+        svg {
+            fill: white;
+        }
+    }
+}
+
 /*the globe wraps below the intro text
 for all other rows the portrait image wraps above bio*/
 .team-row.intro {
