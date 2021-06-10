@@ -42,7 +42,7 @@ const TransparencyFeature = ({ image, title, children, titleColor, className = '
 
     return (
         <div className={classList}>
-            <div className="flex-shrink-0 sm:mx-auto md:mr-8 flex justify-center items-start w-auto bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid">
+            <div className="flex-shrink-0 mx-auto md:mr-8 flex justify-center items-start w-auto bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid">
                 <img src={image} alt={title} className="max-w-full block mb-0 h-24 w-24 p-4" />
             </div>
             <div className="flex-grow text-left">
