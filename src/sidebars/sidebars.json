@@ -120,7 +120,18 @@
     {
         "entry": "Plugins",
         "name": "Plugins",
-        "items": ["docs/plugins/overview", "docs/plugins/enabling", "docs/plugins/build", "docs/plugins/types"]
+        "items": ["docs/plugins/overview", "docs/plugins/enabling"],
+        "child_entries": ["Build Your Own"]
+    },
+    {
+        "entry": "Build Your Own",
+        "name": "Build Your Own",
+        "items": [
+            "docs/plugins/build/overview",
+            "docs/plugins/build/tutorial",
+            "docs/plugins/build/types",
+            "docs/plugins/build/reference"
+        ]
     },
     {
         "entry": "API",

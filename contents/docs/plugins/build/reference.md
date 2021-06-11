@@ -1,82 +1,12 @@
 ---
-title: Build Your Own
+title: Plugins Developer Reference
 sidebar: Docs
 showTitle: true
 ---
 
-## 5 Minute Overview
+> **Note:** It's worth reading the [Building Plugins Overview](./overview) for a quick introduction to how to build your own plugin.
 
-A great way to understand what you can do with plugins is to understand how data flows throw plugins.
-
-There's 2 big concepts to remember:
-
-1. Every plugin acts on a single event coming in.
-
-2. Plugins act on events before they are stored.
-
-Each plugin can add more information to the event, or even modify existing properties. For example, the [GeoIP plugin](tk link) is a plugin that adds GeoIP information to the event.
-
-Note that the output of one plugin goes into the next plugin. Here's how this looks:
-
-![GeoIP Plugin Example](../../images/plugins/geoip-plugin-example.png)
-
-However, this isn't all. Plugins _don't_ have to modify events at all: they can do other things when an event comes in.
-
-For example, you can send an event to AWS S3 whenever you see it in PostHog. Indeed, the [S3 plugin](tk link) does exactly that.
-
-![S3 Plugin Example](../../images/plugins/s3-plugin-example.png)
-
-Now, how do you make this happen? Every plugin is two files: `index.js` and `plugin.json`. The index file has code for the entire plugin, and the json file has configuration for user inputs. This config is what you see in the PostHog UI:
-
-![Plugin Configuration Example](../../images/plugins/plugin-configuration.png)
-
-We have some special function names that allow you to process an event, like in the GeoIP plugin, or to do something else entirely, like in the S3 export plugin. We expect `index.js` to export these special function names.
-
-Two notable ones are `processEvent` and `onEvent`. Both of them take in a single event and the meta object. More details on the meta object below, but one key property is `meta.config`, which allows your code to read the configuration values set by users. Yes, the same configuration you set via `plugin.json`.
-
-If you want to add new properties to your event, like in the GeoIP Plugin, you'd use the `processEvent` function. Here's a sample plugin that adds the `hello` property to the event.
-
-```js
-/* Runs on every event */
-export function processEvent(event, meta) {
-    // Some events (like $identify) don't have properties
-    if (event.properties) {
-        event.properties['hello'] = `Hello ${meta.config.name || 'world'}`
-    }
-    // Return the event to ingest, return nothing to discard  
-    return event
-}
-```
-
-Note how you need to return the event to ensure the chain continues. If you return `null` or `undefined`, you're telling us to discard this event.
-
-`onEvent` is what you'd use to do something else, like exporting to S3. For example, the below plugin logs the current URL on $pageview type events:
-
-TK: find a better phrase for "do something else"
-
-```js
-/* Runs on every event */
-export function onEvent(event, meta) {
-
-    if (event.event === "$pageview") {
-        console.log(event.$current_url)
-    }
-
-    // Don't need to return event, any return value is discarded, and the event is not modified
-}
-```
-
-As you can imagine, this plugin is pretty useless, since PostHog can already show you this information. But it serves to explain how things work. Note how you can choose what kind of events you want to operate on, using the existing event properties.
-
-That's all for the crash course. There's a lot you can do with plugins, like running specific jobs every hour, hitting random HTTP endpoints, modifying events coming in, etc.Below you'll find indepth information on all the special functions which allow you to do this.
-## Pre-Requisites
-
-1. A self-hosted PostHog instance (or a local development environment)
-1. Knowledge of JavaScript (or TypeScript)
-
-## Main Components
-
-### plugin.json file
+## plugin.json file
 
 A `plugin.json` file is structured as follows:
 
@@ -135,11 +65,11 @@ Here's an example `plugin.json` file from our ['Hello World Plugin'](https://git
 
 Most options in this file are self-explanatory, but there are a few worth exploring further:
 
-#### main
+### main
 
 `main` determines the entry point for your plugin, where your `setupPlugin` and `processEvent` functions are. More on these later.
 
-#### config
+### config
 
 `config` consists of an array of objects that each pertain to a specific configuration field or markdown explanation for your plugin.
 
@@ -159,7 +89,8 @@ Each object in a config can have the following properties:
 | choices  |                  `string[]`                   |                           Only accepted on configs with `type` equal to `"choice"` - an array of choices (of type `string`) to be presented to the user                            |
 
 > **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your plugin but can be placed anywhere in the `config` array and is useful for customizing the content of your plugin's configuration step in the PostHog UI.
-### PluginMeta
+
+## PluginMeta
 
 > Check out [Plugin Types](/docs/plugins/types) for a full spec of types for plugin authors.
 
@@ -167,11 +98,11 @@ Each object in a config can have the following properties:
 
 Here's what they do:
 
-#### config
+### config
 
 Gives you access to the plugin config values as described in `plugin.json` and configured via the PostHog interface.
 
-#### cache
+### cache
 
 A way to store values that persist across special function calls. The values are stored in [Redis](https://redis.io/), an in-memory store.
 
@@ -193,11 +124,11 @@ Retrieving values uses `cache.get`, which takes the key of the value to be retri
 You can also use `cache.incr` to increment numerical values by 1, and `cache.expire` to make [keys volatile](https://redis.io/commands/expire), meaning they will expire after the specified number of seconds.
 
 
-#### global
+### global
 
 Global is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog plugins. 
 
-#### attachments
+### attachments
 
 Attachments gives access to files uploaded by the user for config parameters of type `attachment`. An `attachment` has the following type definition:
 
@@ -211,11 +142,11 @@ interface PluginAttachment {
 
 As such, accessing the contents of an uploaded file can be done with `attachments.attachmentName.contents`.
 
-#### jobs
+### jobs
 
 The `jobs` object gives you access to the jobs you specified in your plugin. See [Jobs](#jobs) for more information.
 
-### setupPlugin function
+## setupPlugin function
 
 `setupPlugin` is a function you can use to dynamically set plugin configuration based on the user's inputs at the configuration step. 
 
@@ -233,7 +164,7 @@ export function setupPlugin({ attachments, global }) {
 }
 ```
 
-### processEvent function
+## processEvent function
 
 > If you were using `processEventBatch` before, you should now use `processEvent`. `processEventBatch` has been **deprecated**.
 
@@ -268,7 +199,7 @@ As you can see, the function receives the event before it is ingested by PostHog
 
 > Please note that `$snapshot` events (used for session recordings) do not go through `processEvent`. Instead, you can access them via the `onSnapshot` function described below.
 
-### onEvent function
+## onEvent function
 
 > **Minimum Plugin Server version:** 0.19.0
 
@@ -290,13 +221,13 @@ async function onEvent(event) {
 ```
 
 
-### onSnapshot function
+## onSnapshot function
 
 > **Minimum Plugin Server version:** 0.19.0
 
 `onSnapshot` works exactly like `onEvent`. The only difference between the two is that `onSnapshot` receives session recording events, while `onEvent` receives all other events.
 
-### Scheduled Tasks
+## Scheduled Tasks
 
 Plugins can also run scheduled tasks through the functions:
 
@@ -326,7 +257,7 @@ async function runEveryMinute({ config }) {
 
 It's worth noting that the plugin server supports debouncing, meaning that the counter for the next task will only start once the previous task finishes. In other words, if a given task that runs "every minute" takes longer than a minute, the next task will only start one minute after the previous task finishes.
 
-### Jobs
+## Jobs
 
 > **Minimum Plugin Server version:** 0.18.0
 
@@ -334,7 +265,7 @@ Jobs are a way for plugin developers to schedule and run tasks asynchronously us
 
 Jobs make possible use cases such as retrying failed requests, a key component of plugins that export data out of PostHog.
 
-#### Specifying jobs
+### Specifying jobs
 
 To specify jobs, you should export a `jobs` object mapping string keys (job names) to functions (jobs), like so:
 
@@ -348,7 +279,7 @@ export const jobs = {
 
 Job functions can optionally take a payload as their first argument, which can be of any type. They can also access the `meta` object, which is appended as an argument to all plugin functions, meaning that it will be the second argument in the presence of a payload, and the first (and only) argument in the absence of one.
 
-#### Triggering a job
+### Triggering a job
 
 Jobs are accessed as `jobs` via the `meta` object. Triggering a job works as follows:
 
@@ -368,7 +299,7 @@ Having gotten a job function via its key from the `jobs` object calling the func
 
 All jobs return a promise that does not resolve to any value. 
 
-#### Full example
+### Full example
 
 ```js
 export const jobs = {
@@ -394,28 +325,3 @@ export async function processEvent (event, { jobs }) {
     return event
 }
 ```
-
-### Debugging
-
-Plugins can make use of the JavaScript `console` for logging and debugging. 
-
-These logs can be seen on the 'Logs' page of each plugin, which can be accessed on the 'Plugins' page of the PostHog UI.
-### Limitations
-
-PostHog plugins are still in beta, and our scheduled tasks are the newest feature within plugins. As such, they currently have a few limitations:
-
-1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
-### Publishing Your Plugin
-
-There are 3 ways to use plugins you build:
-
-1. Publish the plugin to `npm` and install it with the url from `npmjs.com` 
-1. If the plugin is built with JavaScript only (not TypeScript), you can add it via its repository URL (e.g. GitHub/GitLab)
-1. Reference the location of the plugin on your local instance (e.g. /Users/yourname/path/to/plugin)
-
-This can be configured in 'Settings' -> 'Project Plugins'. 
-
-
-
-
-
