@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-This tutorial explains the development workflow and best practices using a hello world plugin. We go from zero to publishing your plugin in the official PostHog repository.
+This tutorial explains the development workflow and best practices, using a hello world plugin. We go from zero to publishing your plugin in the official PostHog repository.
 
 ## Pre-Requisites
 
@@ -13,17 +13,70 @@ This tutorial explains the development workflow and best practices using a hello
 
 ## The Plugin
 
+Every plugin begins with either the PostHog Plugin Source Editor, or a new GitHub repository. In both cases, our plugin source code will look like this:
+
+```js
+/* Runs on every event */
+export function processEvent(event, meta) {
+    // Some events (like $identify) don't have properties
+    if (event.properties) {
+        event.properties['hello'] = `Hello ${meta.config.name || 'world'}`
+    }
+    // Return the event to ingest, return nothing to discard  
+    return event
+}
+```
+
+and our config would look like:
+
+```js
+[
+  {
+    "key": "name", // name of key to be accessed using meta. Check value using `meta.config.name`
+    "name": "Person to greet",
+    "type": "string",
+    "hint": "Used to personalise the property `hello`",
+    "default": "",
+    "required": false
+  }
+]
+```
+
+For information on what code to write and what special functions to use, check out [the overview](./overview) and [the developer reference](./reference).
 ### Using the Plugin Source Editor
 
-Every plugin begins with either the [PostHog Plugin Source Editor](TK image), or simply a new GitHub repository.
+Go to Plugins -> Advanced Tab -> Plugin Editor -> Start Coding
 
-### Converting to a GitHub Repository
+![Plugin Editor Location](../../../images/plugins/plugin-editor-location.png)
 
-Use the "basic plugin template" -> install locally -> test -> commit -> submit
+Then, click on "Edit Source", and you're good to go. Copy your code and config into the editor, and you're ready to [test the plugin.](#testing)
+
+### Using a GitHub Repository
+
+We have a [GitHub Template](https://github.com/PostHog/posthog-plugin-starter-kit) which helps you create a new repository with all the right files. There are only two files which make up the entire plugin: the `index.js` and `plugin.json`. Your code goes into `index.js`, and your configuration goes into `plugin.json`.
+
+Other than this, there's the `index.test.js` file for tests, and `package.json` for package dependencies and metadata.
+
+Remember to update `package.json` with the appropriate metadata, like name, description, and maintainer.
+
+Once you've written the code in this new repository, you can run it by installing it locally in PostHog. [See testing for more information.](#testing)
+
+### Converting a Source Plugin to a GitHub Repository
+
+If you wish to submit your plugin to the official repository, you need to convert it into a GitHub repository. The easiest way to do this is to start with [the plugin template](https://github.com/PostHog/posthog-plugin-starter-kit) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
+
+[See submission instructions](#submitting-your-plugin) for how to submit the plugin to the PostHog Repository.
 
 ## Testing
 
-TODO
+For now, the best way to test plugins is to install them locally. 
+
+- If you're writing a plugin in the Plugin Source Editor, this is as easy as clicking "Save".
+- If you're writing a plugin in a GitHub repository, install it locally using the "Install Local Plugin" option in the Advanced Tab.
+
+![Install Plugin Location](../../../images/plugins/install-plugin-location.png)
+
+This allows you to tweak your plugin and see that everything works fine.
 
 ## Debugging
 
@@ -31,21 +84,16 @@ Plugins can make use of the JavaScript `console` for logging and debugging.
 
 These logs can be seen on the 'Logs' page of each plugin, which can be accessed on the 'Plugins' page of the PostHog UI.
 
-## Limitations
-
-PostHog plugins are still in beta, and our scheduled tasks are the newest feature within plugins. As such, they currently have a few limitations:
-
-1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
-
 ## Publishing Your Plugin
 
-There are 3 ways to use plugins you build:
+There are 4 ways to use plugins you build:
 
 1. Publish the plugin to `npm` and install it with the url from `npmjs.com` 
 1. You can add it via its repository URL (e.g. GitHub/GitLab)
 1. Reference the location of the plugin on your local instance (e.g. /Users/yourname/path/to/plugin)  
 
-    This can be configured in 'Settings' -> 'Project Plugins'. 
+    This can be configured in 'Settings' -> 'Project Plugins'.
+1. Submit it to the official repository. [See below](#submitting-your-plugin) 
 
 ## Submitting Your Plugin
 
@@ -53,4 +101,4 @@ If you wish to, you can contribute back to the PostHog community by submitting y
 
 To submit, simply raise a pull request, adding your plugin to [repository.json](https://github.com/PostHog/plugin-repository/blob/main/repository.json)
 
-<!-- TK button to make this PR for you from a GitHub url? - to come when ready -->
+<!-- TK button to make this PR for you from a GitHub url - to come when ready -->

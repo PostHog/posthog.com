@@ -325,3 +325,9 @@ export async function processEvent (event, { jobs }) {
     return event
 }
 ```
+
+## Limitations
+
+PostHog plugins are still in beta, and our scheduled tasks are the newest feature within plugins. As such, they currently have a few limitations:
+
+1. The time intervals (e.g. "every minute" / "every hour") are promises, not guarantees. A worker may be down for 2 seconds because of a restart and miss the task. We're working to add better timing guarantees in the upcoming releases.
