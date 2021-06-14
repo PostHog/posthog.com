@@ -15,9 +15,9 @@ import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
-import { Culture } from './components/Careers/Culture'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
 import { OpenRoles } from './components/Careers/OpenRoles'
+import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { CodeBlock } from './components/CodeBlock'
@@ -36,6 +36,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
@@ -93,9 +94,9 @@ export const shortcodes = {
     CallToAction,
     Benefits,
     CareersHero,
-    Culture,
     InterviewProcess,
     OpenRoles,
+    Transparency,
     WhyWereHere,
     WorkingAtPostHog,
     CodeBlock,
@@ -114,6 +115,7 @@ export const shortcodes = {
     FeaturesSelfHost,
     Footer,
     GetStartedModal,
+    GithubIcon,
     HiddenSection,
     Blockquote,
     Features,

@@ -30,9 +30,16 @@ Our most active repositories (aka 'repos') are:
 
 - [PostHog](https://github.com/PostHog/posthog) - main app
 - [PostHog.com](https://github.com/PostHog/posthog.com) - website
-- [Internal](https://github.com/PostHog/internal) - company-facing issues (private)
+- [Product Internal](https://github.com/PostHog/product-internal) - product-related issues that need to be kept internal, e.g. security issues, customer-specific issues (private)
+- [Company Internal](https://github.com/PostHog/company-internal) - company-facing issues, e.g. internal processes, hiring planning (private)
 
-We use GitHub Projects to track the status of Issues in an easily viewable way. It is up to each Small Team to decide how to manage their tasks, and you'll find most have a dedicated Project - [full list here](https://github.com/orgs/PostHog/projects) - and run two week sprints. As part of onboarding, you will be invited to the relevant planning meetings. 
+When you have a new Issue or want to submit a Pull Request, you do that in the relevant repo. 
+
+We use GitHub Projects to track the status of Issues in an easily viewable way. When you create an Issue, you can assign it to a Project - think of a Project as a way of organising and filtering Issues in a particular view. This makes it easy for Small Teams to easily track what they are working on without having to jump between different repos. Some Issues may be assigned to multiple Projects if they involve the work of more than one team.
+
+You can also assign an Issue to a specific person, and tag it with a relevant label - use these to help people filter more easily.
+
+Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
 
 ## Onboarding 
 

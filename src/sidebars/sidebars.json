@@ -267,7 +267,7 @@
     {
         "entry": "Company",
         "name": "Company",
-        "items": ["handbook/company/story", "handbook/people/team", "handbook/strategy/investors"]
+        "items": ["handbook/company/story", "handbook/company/team", "handbook/strategy/investors"]
     },
     {
         "entry": "Strategy",
