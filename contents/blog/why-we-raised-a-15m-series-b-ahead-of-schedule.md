@@ -6,9 +6,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+author: joe-martin
 ---
-
-By: [Joe Martin](https://www.linkedin.com/in/joemartinwords/), Product Marketing
 
 Last week we proudly announced we’d successfully raised $15 million in a Series B funding round, with support from Y Combinator Continuity Fund and GV (formerly Google Ventures). You may have seen [the news on VentureBeat](https://venturebeat.com/2021/06/10/open-source-product-analytics-platform-posthog-raises-15m/).
 
