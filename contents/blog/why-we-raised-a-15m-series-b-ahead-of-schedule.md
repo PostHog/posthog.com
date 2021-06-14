@@ -22,6 +22,6 @@ In short, we had an opportunity to accelerate, so we decided to take it.
 
 You may be curious what we’ll spend the money on. Our aim is to double the size of the team to 47 people by the end of the year, then double again in 2022. Right now we’re recruiting for Full Stack Engineers and Front End Developers, but we remain open to speculative applications too. [If you’re interested, get in touch!](https://posthog.com/careers)
 
-Other plans for the future include enhancing connectivity with data warehouses and merging improvements from PostHog Free into our open source product. It will take a few months to get there, but we ultimately want to create an open source offering which is free and suitable for everyone from individual hobbyists to enterprise teams. 
+Other plans for the future include enhancing connectivity with data warehouses and merging improvements from PostHog Free into our open source product. It will take a few months to get there, but we ultimately want to create an open source offering which is free and scalable for everyone from individual hobbyists to enterprise teams. 
 
 We’d like to thank our thousands of users and our community of contributors for their continuing support in helping us reach this milestone, and for joining us in taking this next step. If you’re interested in what else we have planned for the future, [check out our roadmap](https://github.com/orgs/PostHog/projects/1)!
