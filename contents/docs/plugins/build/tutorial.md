@@ -53,7 +53,7 @@ Then, click on "Edit Source", and you're good to go. Copy your code and config i
 
 ### Using a GitHub Repository
 
-We have a [GitHub Template](https://github.com/PostHog/posthog-plugin-starter-kit) which helps you create a new repository with all the right files. There are only two files which make up the entire plugin: the `index.js` and `plugin.json`. Your code goes into `index.js`, and your configuration goes into `plugin.json`.
+We have a [GitHub Template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) which helps you create a new repository with all the right files. There are only two files which make up the entire plugin: the `index.js` and `plugin.json`. Your code goes into `index.js`, and your configuration goes into `plugin.json`.
 
 Other than this, there's the `index.test.js` file for tests, and `package.json` for package dependencies and metadata.
 
@@ -63,7 +63,7 @@ Once you've written the code in this new repository, you can run it by installin
 
 ### Converting a Source Plugin to a GitHub Repository
 
-If you wish to submit your plugin to the official repository, you need to convert it into a GitHub repository. The easiest way to do this is to start with [the plugin template](https://github.com/PostHog/posthog-plugin-starter-kit) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
+If you wish to submit your plugin to the official repository, you need to convert it into a GitHub repository. The easiest way to do this is to start with [the plugin template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
 
 [See submission instructions](#submitting-your-plugin) for how to submit the plugin to the PostHog Repository.
 
@@ -97,8 +97,10 @@ There are 4 ways to use plugins you build:
 
 ## Submitting Your Plugin
 
-If you wish to, you can contribute back to the PostHog community by submitting your plugin to the [official Plugin Repository](https://github.com/PostHog/plugin-repository). This means everyone else can use your plugin, too!
+If you wish to, you can contribute back to the PostHog community by submitting your plugin to the [official Plugin Repository](/plugins). This means everyone else can use your plugin, too!
 
-To submit, simply raise a pull request, adding your plugin to [repository.json](https://github.com/PostHog/plugin-repository/blob/main/repository.json)
+If you built a plugin inside the PostHog editor, first [convert it to a GitHub repository](#converting-a-source-plugin-to-a-github-repository)
+
+To submit, [email your plugin GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A)
 
 <!-- TK button to make this PR for you from a GitHub url - to come when ready -->
