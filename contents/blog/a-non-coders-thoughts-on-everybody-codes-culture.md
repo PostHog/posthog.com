@@ -18,7 +18,7 @@ As someone who recently joined PostHog, there were three things which helped set
 ## Getting started early
 There’s a lot to be done when joining a new company and intimidating tasks can end up deprioritized - especially if they’d normally fall outside your remit. 
 
-One of the best things PostHog’s team did was push against this and get me started with coding as soon as possible. This included sharing videos about GitHub fundamentals before I started and setting up tools such as Microsoft Visual Studio with me. It was clear this needed to be a point of focus. 
+One of the best things PostHog’s team did was push against this and get me started with coding as soon as possible. This included sharing videos about GitHub fundamentals before I started and setting up tools such as Visual Studio Code with me. It was clear this needed to be a point of focus. 
 
 As a result, I set out to update the Team page as a test of my abilities. It only required editing a single .md file, but was a way to build confidence and do a first pull request. We’ve since added this task to our onboarding process too, so future team members will have a similar experience.
 
