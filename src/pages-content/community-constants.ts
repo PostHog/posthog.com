@@ -31,4 +31,5 @@ export const mvpWinners: Record<string, number> = {
     oshura3: 1,
     adrienbrault: 1,
     Rajakavitha1: 1,
+    imhmdb: 1,
 }
