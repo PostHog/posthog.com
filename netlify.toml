@@ -157,3 +157,13 @@
 [[redirects]]
     from = "/docs/plugins/types"
     to = "/docs/plugins/build/types"
+
+    
+[[redirects]]
+    from = "/docs/plugins/build"
+    to = "/docs/plugins/build/reference"
+
+    
+[[redirects]]
+    from = "/docs/plugins/types"
+    to = "/docs/plugins/build/types"
