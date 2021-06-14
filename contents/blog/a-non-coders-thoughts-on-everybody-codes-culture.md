@@ -30,7 +30,7 @@ I experienced this when [my next update](https://github.com/PostHog/posthog.com/
 Thankfully, our Engineering team is amazingly communicative and supportive. They helped me understand the problem and, more importantly, when I should be delegating. Setting realistic limits and building a supportive atmosphere are crucial for a successful coding culture.
 
 ## Making mistakes
-An additional element of our culture is that w[e always bias for action](https://posthog.com/handbook/company/culture), but this can be daunting when you’re doing something for the first time. What if you get it wrong? What if you break the website or create a product bug?
+An additional element of our culture is that [we always bias for action](https://posthog.com/handbook/company/culture), but this can be daunting when you’re doing something for the first time. What if you get it wrong? What if you break the website or create a product bug?
 
 This isn’t the way it works, of course. GitHub has reviews built in so that it’s hard to make such big mistakes and easy to roll back if needed. What feels high-risk to a novice isn’t actually risky at all and we can afford to be bullish as a result. 
 
