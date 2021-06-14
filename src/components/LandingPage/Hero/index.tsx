@@ -1,9 +1,9 @@
 import React from 'react'
-import { ProductFeatureIcons } from '../ProductFeatureIcons'
+// import { ProductFeatureIcons } from '../ProductFeatureIcons'
 import { SocialProof } from '../SocialProof'
 import { LandingPageCallToAction } from '../LandingPageCallToAction'
 
-import heroGraphic from '../images/hero@2x.png'
+// import heroGraphic from '../images/hero@2x.png'
 import sequenceGraphic from '../images/sequence@2x.png'
 import sequenceMobileGraphic from '../images/sequence-mobile@2x.png'
 
@@ -48,6 +48,7 @@ export const Hero = () => {
                             width="339"
                             height="580"
                             className="mx-auto"
+                            loading="lazy"
                         />
                     </div>
                     <div className="hidden md:block">
@@ -57,6 +58,7 @@ export const Hero = () => {
                             width="1020"
                             height="177"
                             className="mx-auto"
+                            loading="lazy"
                         />
                     </div>
                 </div>

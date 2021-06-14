@@ -1,8 +1,8 @@
 import React from 'react'
-import mountainsImg from '../images/mountains.png'
-import sunImg from '../images/sun.png'
-import cityImg from '../images/city.png'
-import timelineImg from '../images/timeline.png'
+import mountainsImg from '../images/mountains.svg'
+import sunImg from '../images/sun-min.png'
+import cityImg from '../images/city-min.png'
+import timelineImg from '../images/timeline.svg'
 import { CallToAction } from '../../CallToAction'
 
 export const Roadmap = () => (
@@ -26,14 +26,21 @@ export const Roadmap = () => (
                         Explore Roadmap
                     </CallToAction>
                 </div>
-                <img src={mountainsImg} className="w-screen mx-auto relative z-10 mountains" />
+                <img
+                    src={mountainsImg}
+                    className="w-screen mx-auto relative z-10 mountains"
+                    alt="Mountains"
+                    loading="lazy"
+                    width="1440"
+                    height="838"
+                />
 
-                <img src={sunImg} className="sun absolute" />
+                <img src={sunImg} className="sun absolute" alt="Sun" loading="lazy" width="2518" height="2517" />
             </div>
 
             <div className="timeline-wrapper">
-                <img src={timelineImg} className="timeline" />
-                <img src={cityImg} className="city" />
+                <img src={timelineImg} className="timeline" alt="Timeline" loading="lazy" width="1440" height="499" />
+                <img src={cityImg} className="city" alt="City" loading="lazy" width="2881" height="1160" />
             </div>
         </div>
     </div>

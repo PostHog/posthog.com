@@ -4,7 +4,7 @@ import { PostCard } from '../../PostCard'
 import { BlogPosts } from '../../Blog/BlogPosts'
 import { PostType } from '../../PostCard/PostCard'
 import { CallToAction } from '../../CallToAction'
-import blogPostImg from './images/blog-post.png'
+import blogPostImg from './images/blog-post-min.png'
 
 export const RecentBlogPosts = () => {
     return (
@@ -16,7 +16,7 @@ export const RecentBlogPosts = () => {
                 <div className="mt-12 flex flex-col lg:flex-row justify-between">
                     <div className="bg-purple-500 bg-opacity-10 p-6 w-full lg:w-2/3 lg:mr-2 rounded flex flex-col lg:flex-row justify-between items-stretch">
                         <div className="w-full lg:w-1/3 mr-2 hidden">
-                            <img src={blogPostImg} className="w-full mb-0" />
+                            <img src={blogPostImg} className="w-full mb-0" width="310" height="374" loading="lazy" />
                         </div>
 
                         <div className="w-full ml-2 text-white">
