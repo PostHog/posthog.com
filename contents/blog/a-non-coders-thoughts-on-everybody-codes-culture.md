@@ -1,6 +1,6 @@
 ---
 date: 2021-06-14
-title: A non-coders thoughts on an everybody codes culture
+title: A non-coder's thoughts on an everybody codes culture
 author: joe-martin
 rootPage: /blog 
 sidebar: Blog 
@@ -13,7 +13,7 @@ One of PostHog’s core values is that everybody codes. That doesn’t mean ever
 
 When we’re hiring developers this isn’t an issue. However it can be intimidating for candidates who don’t have developer experience, even if they are otherwise technically literate. This is because our tools are centralized around GitHub, so even writing this blogpost involves knowing how to submit Pull Requests. 
 
-As someone who recently joined PostHog, there were three things which helped set me up for success when using these tools for the first time. 
+Having recently joined PostHog as a Product Marketer, I definitely fall into this non-coding cohort. My previous experience may have been reasonably technical, but my coding knowledge is limited to a smattering of HTML and product marketers are better known for their presentation decks than their pull requests. Thankfully, there were three things which helped set me up for success when using these tools and processes for the first time. 
 
 ## Getting started early
 There’s a lot to be done when joining a new company and intimidating tasks can end up deprioritized - especially if they’d normally fall outside your remit. 
