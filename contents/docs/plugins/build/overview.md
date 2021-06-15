@@ -20,7 +20,7 @@ Note that the output of one plugin goes into the next plugin. Here's how this lo
 
 However, this isn't all. Plugins _don't_ have to modify events at all: they can do other things when an event comes in.
 
-For example, you can send an event to AWS S3 whenever you see it in PostHog. Indeed, the [S3 plugin](https://posthog.com/plugins/s3-export) does exactly that.
+For example, you can send an event to AWS S3 whenever you see it in PostHog. Indeed, the [S3 plugin](https://posthog.com/plugins/s3-export) does exactly that. In this case, it doesn't matter if the S3 export succeeds or not, the event will always be stored.
 
 ![S3 Plugin Example](../../../images/plugins/s3-plugin-example.png)
 

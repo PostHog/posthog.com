@@ -61,6 +61,10 @@ Remember to update `package.json` with the appropriate metadata, like name, desc
 
 Once you've written the code in this new repository, you can run it by installing it locally in PostHog. [See testing for more information.](#testing)
 
+#### Plugin Naming Conventions
+
+When creating your repository, follow the naming convention of `posthog-<plugin-name>-plugin`. For example, the hello world plugin repository would be called `posthog-hello-world-plugin`.
+
 ### Converting a Source Plugin to a GitHub Repository
 
 If you wish to submit your plugin to the official repository, you need to convert it into a GitHub repository. The easiest way to do this is to start with [the plugin template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
