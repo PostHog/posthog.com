@@ -1,34 +1,45 @@
 ---
-date: 2021-05-17
+date: 2021-06-15
 title: How We Do Customer Support At Our Open-Source DevTool Company
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+author: mo-shehu
 ---
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6giGcTSdkAc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-By: [Mohammed Shehu](https://twitter.com/shehuphd), Content Lead @ PostHog
+## Thinner docs, better products
 
-Customer support is a critical function of any startup, especially if you offer a highly technical product like we do. [Charles Cook](https://www.linkedin.com/in/charlescook1/), Business Head at PostHog, shared his thoughts on how CS was carried out at his previous companies (VITL and Roli) and how customer support has evolved here at PostHog over the past few months. 
+The highest priority for any company is shortening the feedback loop between your customers and your product team. The fastest way to achieve this is by having your product builders interface directly with your customers (like we do at PostHog). This gives you an idea of the types of problems that keep cropping up and lets you decide how much help content you need to create - but most importantly, it tells you how to improve and simplify the product experience to reduce the need for thicker help docs and extensive tutorials.
 
-[Roli](http://www.roli.com/) sells musical instruments and production software. Because the company deals with creators, the customer support team consists of qualified technical musicians, producers, and composers in their own right. Reflecting the makeup of your customer base is key to ensuring your CS team can relate to the problems that your customers face and provide better, more effective solutions.
+## A little background
 
-[VITL](https://vitl.com/) was a similar story: the company provides personalized nutrition, tailor-made supplements, and at-home nutrition tests to its customers. During Charles' time there, the team was more hybrid, with some of the CS staffers spending 100% of their time on customer support and others splitting their time between support and working on nutrition. Again, this meant that the support team consisted of qualified professionals who could nail down problems and serve up credible solutions.
+Our very first support staff members were the founders, James and Tim, due to the limited resources and staff we had at the time. Having all hands on deck made a big difference, as you can’t afford to designate customer support to just one person in the early days. 
 
-## Customer support at PostHog
+As of writing, customer support at PostHog happens in [“rotas”](https://posthog.com/handbook/growth/customer-support) - pre-planned, two-week cycles where one dev team member drops all development work and handles incoming user queries. Called a ‘Support Hero,’ this team member monitors all our channels - from GitHub and Slack to social media where applicable - and either solves the issues that surface or ropes in other team members for assistance. That last point is important, as having a support hero doesn’t abdicate everyone else from responding to customers. At PostHog, we firmly believe in “stepping on toes”: if you spot a problem that falls under someone else’s purview, just solve it.
 
-Early-stage startups are typically light on people and heavy on bugs, which means the founding devs handle customer support queries alongside their daily development duties. This was also the case at PostHog, and GitHub was a major source of communication between the team and our users. There also wasn't much structure in the beginning.
+## Removing friction
 
-Our customers are engineers, and engineers want to talk to and get solutions from other engineers. We also discovered that having our engineers involved in customer support not only turned up solutions for our users faster but also vastly improved the product development process. Contrast this to most devtool startups that go down the 'dedicated, separate customer support team' route too early, which disconnects what you're building from what the user actually needs.
+We don’t offer any special customer support training for our engineers beyond basic communication tips and tool guides. We serve other engineers - people who believe in honest, open communication sans the stifling friction and formality of typical consumer product companies. It’s also why we don’t use chatbots, internal triaging systems, or anything that would add an extra step between the user and our support heroes. In addition, we don’t tier our support based on the product edition you use. [Complex deployments](https://posthog.com/pricing) may receive a little extra effort, but we otherwise treat every support ticket with the same urgency.
 
-We also use an open-source product support tool called [Paper Cups](https://papercups.io/) that's open-source, lightweight, and packed with tons of useful features. We've integrated it into Slack and email so that we get notifications whenever any new issues pop up and can respond directly in Slack. We've also instituted a Support Hero system that changes every two weeks, with one member of our dev team taking over support queries during each run.
+Naturally, it would be harder for a company that started with frictional systems to move to a model like ours. Inertia is a powerful force, and stripping a support team of its crutches - fancy chatbot algorithms, ticket queuing systems, a large team - in favor of a smaller, leaner, and more focused team can be disruptive. If you run a devtool company, we recommend starting with the support hero model right from the start and building on from there.
 
-## Tweaking the template
+## Tools and platforms: Papercups, Slack, email, and social
 
-Our system works for us, but any other company copying our blueprint needs to balance their support needs against available resources and the model's potential for scalability. Sure, you could always double up on Support Heroes during your sprints or route all support queries through a chatbot first, but keep in mind that a bit of friction is what makes this whole thing work. Startups that try to abstract away all customer support friction lose out on potentially brilliant insights and ideas for product development and create a distance between their users and dev team. It's also harder for a company that doesn't adopt this model of customer support right from the beginning to switch to it later
+[Papercups](https://papercups.io) is a lightweight customer support tool that we chose for several reasons:
+It’s open-source, which aligns with our business philosophy.
+Its core UX is delightful and straightforward to use, making it easy to onboard new support heroes.
+It syncs all support tickets to Slack so our team can respond directly from the platform. Customer support teams are exempt from our [meeting-free days](https://posthog.com/blog/meetings) policy.
+It tracks stats around the number and types of tickets we receive (about 30 a day), how long it takes us to close each ticket (about an hour on average, accounting for complexity and time zones), and other useful analytics.
 
-And of course, the type of company that runs this model plays a big role in its success. A technical product (like devtool product analytics) is better suited to this model, but our style of customer support might not scale well with a mass consumer product (say, a mobile streaming platform). Of course, the usual approaches still work for those cases - focus groups, in-app surveys, social media feedback, community forums, etc. Balance your support needs against your available channels and resources to find what works for you.
+Beyond Papercups and our [external Slack channel](https://posthog.com/slack), we also receive support queries via email (sent to hey@posthog.com), GitHub (where our team spends most of their time), and very rarely via [social media](https://twitter.com/posthoghq). We’ve found that within the context of businesses like ours, social media queries are usually a sign that normal communication or helpdesk channels have failed - and startups should avoid this as much as possible.
+
+## Are open-source support models expensive?
+
+The beauty of open source is that it’s built on a passionate community of contributors who have an innate interest in seeing the product succeed. This voluntary dedication of time and energy means that problems get solved faster than they would with a dedicated team - and [our repo](https://github.com/posthog) is an excellent example of that. There’ve been plenty of instances where a user posts a question about the product or a challenge they’re facing, and one of our contributors chimes in to assist. When you’ve effectively generated extra support team members through your GitHub repo or Slack channel, you can spend less time responding to common queries and more time improving your product to prevent those queries cropping up again.
+
+Would we do things differently if we were starting over? Barely. We might hone in on Slack as our main comms channel earlier in our journey, but we’re otherwise happy with how customer support at PostHog has evolved.
 
 <hr/>
-
 Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
