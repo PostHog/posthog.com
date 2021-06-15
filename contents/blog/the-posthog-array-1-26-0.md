@@ -82,7 +82,7 @@ Thanks a lot for building this [c3ho](https://github.com/c3ho)!
 
 Continuing on the libraries theme, a much-requested feature is now live for `posthog-js`: retries!
 
-Requests that fail because of, for example, the client's network connection, or PostHog being down will now be retried up to 10 times within an hour, making sure you miss as few events as possible. So if your user's internet goes down and comes back up, you'll still receive the events that happened when they were offline.
+Requests that fail because of for example, the client's network connection, will now be retried up to 10 times within an hour, making sure you miss as few events as possible. So if your user's internet goes down and comes back up, you'll still receive the events that happened when they were offline.
 
 Also, Neil fixed a bug that sent requests to a wrong endpoint (with no impact on tracking). You can read about how Neil solved this issue on his [blog](https://neilkakkar.com/debugging-open-source.html).
 
@@ -116,7 +116,7 @@ We onboarded so many people this cycle that we decided to to make a table for it
 
 |  Name  |        Role         | 🍍 on 🍕? |                                                                                        Interesting Fact                                                                                        |
 | :----: | :-----------------: | :-----: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|  Joe   |  Product Marketer   |    😍    |                   _"Jobs I had before I moved into marketing include (in order): Clown, Waiter, Hospital & Morgue Cleaner, Chainsaw Salesman, and Videogame Journalist."_                   |
+|  Joe   |  Product Marketer   |    😍    |                   _"Jobs I had before I moved into marketing include (in order): clown, waiter, hospital & morgue cleaner, chainsaw salesman, and videogame journalist."_                   |
 | Marcus |    VP of Product    |    🤮    |                                                  _"Jointly hold the world record for Most People Dressed As Santa Doing A Zip Line In One Hour."_                                                  |
 |  Alex  | Fullstack Developer |    😍    |                                                    _"I've visited all of NYC's secret subway stations without getting caught (yet)."_                                                    |
 |  Phil  | Developer Relations |    😍    | _"I made national press coverage (The Times, The Sun, The Mirror, Radio 5 Live... The Gainsborough Today :smirk:) in 2006 after creating a David Beckham website called 'Bring Back Beckham.'"_ |
