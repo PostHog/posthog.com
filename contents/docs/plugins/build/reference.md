@@ -144,7 +144,7 @@ As such, accessing the contents of an uploaded file can be done with `attachment
 
 ### jobs
 
-The `jobs` object gives you access to the jobs you specified in your plugin. See [Jobs](#jobs) for more information.
+The `jobs` object gives you access to the jobs you specified in your plugin. See [Jobs](#jobs-1) for more information.
 
 ## setupPlugin function
 

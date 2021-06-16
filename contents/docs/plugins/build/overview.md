@@ -24,6 +24,7 @@ For example, you can send an event to AWS S3 whenever you see it in PostHog. Ind
 
 ![S3 Plugin Example](../../../images/plugins/s3-plugin-example.png)
 
+There's also some plugins that enqueue jobs to run in the future. More information about jobs in [the developer reference](./reference#jobs-1).
 
 Now, how do you make all of this happen? Every plugin is two files: `index.js` and `plugin.json`. The index file has code for the entire plugin, and the json file has configuration for user inputs. This config is what you see in the PostHog UI:
 
