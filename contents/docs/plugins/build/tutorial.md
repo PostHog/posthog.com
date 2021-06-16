@@ -4,16 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-This tutorial explains the development workflow and best practices, using a hello world plugin. We go from zero to publishing your plugin in the official PostHog repository.
+This tutorial explains the development workflow and best practices, using an example 'Hello World' plugin. We go from zero to publishing your plugin in the official PostHog repository.
 
 ## Pre-Requisites
 
 1. A self-hosted PostHog instance (or a local development environment)
-1. Knowledge of JavaScript (or TypeScript)
+1. Some knowledge of JavaScript (or TypeScript)
 
 ## The Plugin
 
-Every plugin begins with either the PostHog Plugin Source Editor, or a new GitHub repository. In both cases, our plugin source code will look like this:
+Every plugin begins with either the PostHog Plugin [Source Editor](#using-the-plugin-source-editor), or a new GitHub repository. In both cases, our plugin source code will look like this:
 
 ```js
 /* Runs on every event */
@@ -27,7 +27,7 @@ export function processEvent(event, meta) {
 }
 ```
 
-and our config would look like:
+And our config would look like:
 
 ```js
 [
@@ -42,10 +42,10 @@ and our config would look like:
 ]
 ```
 
-For information on what code to write and what special functions to use, check out [the overview](./overview) and [the developer reference](./reference).
+For information on what code to write and what special functions to use, check out [the overview](/docs/plugins/build/overview) and [the developer reference](/docs/plugins/build/reference).
 ### Using the Plugin Source Editor
 
-Go to Plugins -> Advanced Tab -> Plugin Editor -> Start Coding
+Go to Plugins -> Advanced Tab -> Plugin Editor -> Start Coding.
 
 ![Plugin Editor Location](../../../images/plugins/plugin-editor-location.png)
 
@@ -107,4 +107,4 @@ If you built a plugin inside the PostHog editor, first [convert it to a GitHub r
 
 To submit, [email your plugin GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A)
 
-<!-- TK button to make this PR for you from a GitHub url - to come when ready -->
+Once we get your email, we review the plugin to ensure it's secure, performant, and adheres to best practices. Then, we add it to our official repository and make it available for everyone to use.

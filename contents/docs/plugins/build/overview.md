@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-A great way to understand what you can do with plugins is to understand how data flows throw plugins.
+A great way to understand what you can do with [plugins](/docs/plugins/overview) is to understand how data flows throw plugins.
 
-There's 2 big concepts to remember:
+There are 2 big concepts to remember:
 
 1. Every plugin acts on a single event coming in.
 
@@ -24,15 +24,15 @@ For example, you can send an event to AWS S3 whenever you see it in PostHog. Ind
 
 ![S3 Plugin Example](../../../images/plugins/s3-plugin-example.png)
 
-There's also some plugins that enqueue jobs to run in the future. More information about jobs in [the developer reference](./reference#jobs-1).
+There's also some plugins that enqueue jobs to run in the future. More information about jobs in [the developer reference](/docs/plugins/build/reference#jobs-1).
 
-Now, how do you make all of this happen? Every plugin is two files: `index.js` and `plugin.json`. The index file has code for the entire plugin, and the json file has configuration for user inputs. This config is what you see in the PostHog UI:
+Now, how do you make all of this happen? Every plugin has two files: `index.js` and `plugin.json`. The index file has code for the entire plugin, and the JSON file has configuration for user inputs. This config is what you see in the PostHog UI:
 
 ![Plugin Configuration Example](../../../images/plugins/plugin-configuration.png)
 
 We have some special function names that allow you to process an event, like in the GeoIP plugin, or to do something else entirely, like in the S3 export plugin. We expect `index.js` to export these special functions.
 
-Two notable ones are `processEvent` and `onEvent`. Both of them take in a single event and the meta object. More details on the meta object [in the developer reference](./reference#pluginmeta), but one key property is `meta.config`, which allows your code to read the configuration values set by users. Yes, the same configuration you set via `plugin.json`.
+Two notable ones are `processEvent` and `onEvent`. Both of them take in a single event and the meta object. More details on the meta object [in the developer reference](/docs/plugins/build/reference#pluginmeta), but one key property is `meta.config`, which allows your code to read the configuration values set by users. Yes, the same configuration you set via `plugin.json`.
 
 If you want to add new properties to your event, like in the GeoIP Plugin, you'd use the `processEvent` function. Here's a sample plugin that adds the `hello` property to the event.
 
@@ -48,7 +48,7 @@ export function processEvent(event, meta) {
 }
 ```
 
-Note how you need to return the event to ensure the chain continues. If you return `null` or `undefined`, you're telling us to discard this event.
+Note how you need to return the event to ensure the chain continues. If you return `null` or `undefined`, you're telling us to discard this event. For example, the [Schema Enforcer Plugin](https://github.com/PostHog/posthog-schema-enforcer-plugin) does precisely this for events that don't adhere to a schema.
 
 `onEvent` is what you'd use to do something else, like exporting to S3. For example, the below plugin logs the current URL on $pageview type events:
 
@@ -57,6 +57,7 @@ Note how you need to return the event to ensure the chain continues. If you retu
 export function onEvent(event, meta) {
 
     if (event.event === "$pageview") {
+        // these logs appear in the UI
         console.log(event.$current_url)
     }
 
@@ -66,9 +67,9 @@ export function onEvent(event, meta) {
 
 As you can imagine, this plugin is pretty useless, since PostHog can already show you this information. But it serves to explain how things work. Note how you can choose what kind of events you want to operate on, using the existing event properties.
 
-That's all for the crash course. There's a lot you can do with plugins, like running specific jobs every hour, POSTing events to HTTP endpoints, modifying events coming in before they're stored, etc. 
+That's all for the crash course. There's a lot you can do with plugins, like running specific jobs every hour, sending events elsewhere via HTTP endpoints, modifying events coming in before they're stored, etc. 
 
 ## Next Steps
 
-1. For indepth information on all the special functions which allow you to do this, check out [the developer reference](./reference)
-2. For building your own plugin from start to finish, check out [the tutorial](./tutorial)
+1. For in-depth information on all the special functions which allow you to do this, check out [the developer reference](/docs/plugins/build/reference)
+2. For building your own plugin from start to finish, check out [the tutorial](/docs/plugins/build/tutorial)
