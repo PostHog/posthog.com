@@ -61,7 +61,7 @@ export const InterviewProcess = () => {
                         title="2. Culture interview"
                         titleColor="#FF2F93"
                         image={cultureInterviewImg}
-                        className=""
+                        className="mt-12 md:mt-0"
                     >
                         <p className="text-opacity-75 mb-2">
                             If we think there could be a fit, we’ll set up a 30-minute video call.
@@ -76,7 +76,7 @@ export const InterviewProcess = () => {
                         title="3. Technical interview"
                         titleColor="#E74B12"
                         image={technicalInterviewImg}
-                        className=""
+                        className="mt-12 md:mt-0"
                     >
                         <p className="mb-0 text-white text-opacity-75">
                             Next is a 45-minute technical interview, depending on role. You'll meet the hiring team who
@@ -84,14 +84,14 @@ export const InterviewProcess = () => {
                         </p>
                     </InterviewStep>
 
-                    <InterviewStep title="4. PostHog SuperDay" titleColor="#B25F20" image={superdayImg} className="">
+                    <InterviewStep title="4. PostHog SuperDay" titleColor="#B25F20" image={superdayImg} className="mt-12 md:mt-0">
                         <p className="mb-0 text-white text-opacity-75">
                             The final stage is a paid SuperDay! You’ll join standup, meet the team, and work on a task
                             related to your role, offering a realistic view of what it’s like working at PostHog.
                         </p>
                     </InterviewStep>
 
-                    <InterviewStep title="5. Offer" titleColor="#F7A501" image={offerImg} className="mt-12">
+                    <InterviewStep title="5. Offer" titleColor="#F7A501" image={offerImg} className="mt-12 md:mt-0">
                         <p className="mb-0 text-white text-opacity-75">
                             That’s it! If everyone’s happy, we’ll make you an offer to join us - YAY!
                         </p>
