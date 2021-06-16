@@ -104,7 +104,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
 
                     <TransparencyFeature
-                        title="Constructive feedbaack"
+                        title="Constructive feedback"
                         titleColor="#FFC102"
                         image={feedbackImg}
                         className=""
