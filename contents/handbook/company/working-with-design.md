@@ -6,26 +6,26 @@ showTitle: true
 
 ## Design request process
 
-Since design is currently a shared resource, the best way design requests can be handled is by creating an issue in the relevant repository, then adding to the _Design_ project.
+Since design is currently a shared resource, the most efficient process is to add the _Design_ project to your existing issue.
 
 ![image](https://user-images.githubusercontent.com/154479/114764251-b759b500-9d31-11eb-9767-c9fd9aad25b2.png)
 
-After triaging, the Issue will appear in our [GitHub Org project](https://github.com/orgs/PostHog/projects/3) where we manage our current design projects.
+After triaging, the issue will appear in our [GitHub Org project](https://github.com/orgs/PostHog/projects/3) where we manage our current design projects.
 
 The following details will help us triage incoming requests:
 
 1. What do you need designed and why?
 1. What is the deadline?
 
-**Note:** We may defer some design requests if we're planning a larger overhaul in the near term. For example, if a request is to create an icon, we may suggest an alternate solution (like pulling an icon from The Noun Project) if we have a larger plan for revamping all icons in a section in the near future.
+**Working on a blog post?**  No need to create a separate issue just for artwork - the full context in the main useful may be useful to us! Just provide the deadline in a comment.
+
+**When looping in design, be sure to reference a GitHub issue so we have full context of the problem.** Threads should primarily be kept on GitHub. (If an Issue is time-sensitive, mention the Issue on Slack in `#design-feedback`.)
 
 ### When to loop in design
 
 Because we hire self-starters, there is no expectation that every project should start by running through design _first_.
 
 Depending on your preferred workflow, there are different ways we can get involved.
-
-When looping in design, be sure to reference a GitHub issue so we have full context of the problem. Threads should primarily be kept on GitHub. (If an Issue is time-sensitive, mention the Issue on Slack in `#design-feedback`.)
 
 _The scenarios below largely pertain to work on the main PostHog app._
 
