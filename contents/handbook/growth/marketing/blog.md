@@ -34,6 +34,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - with a new Markdown file (md, mdx) in `/contents/blog/`
 - any assets [optimized]((/docs/updating-documentation)) and added to a new folder under `contents/images/blog/`
 - the post added to relevant sidebar in `src/sidebars/sidebars.json`
+- add the author of the post ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)
 
 Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
 
