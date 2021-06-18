@@ -120,12 +120,17 @@
     {
         "entry": "Plugins",
         "name": "Plugins",
+        "items": ["docs/plugins/overview", "docs/plugins/enabling"],
+        "child_entries": ["Build Your Own"]
+    },
+    {
+        "entry": "Build Your Own",
+        "name": "Build Your Own",
         "items": [
-            "docs/plugins/overview",
-            "docs/plugins/enabling",
-            "docs/plugins/architecture",
-            "docs/plugins/build",
-            "docs/plugins/types"
+            "docs/plugins/build/overview",
+            "docs/plugins/build/tutorial",
+            "docs/plugins/build/types",
+            "docs/plugins/build/reference"
         ]
     },
     {
@@ -203,6 +208,11 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-26-0",
+            "blog/the-posthog-array-1-25-0",
+            "blog/the-posthog-array-1-24-0",
+            "blog/the-posthog-array-1-23-0",
+            "blog/the-posthog-array-1-22-0",
             "blog/the-posthog-array-1-21-0",
             "blog/the-posthog-array-1-20-0",
             "blog/the-posthog-array-1-19-0",
@@ -262,7 +272,7 @@
     {
         "entry": "Company",
         "name": "Company",
-        "items": ["handbook/company/story", "handbook/people/team", "handbook/strategy/investors"]
+        "items": ["handbook/company/story", "handbook/company/team", "handbook/strategy/investors"]
     },
     {
         "entry": "Strategy",
@@ -400,7 +410,8 @@
             "handbook/engineering/ee-setup",
             "handbook/engineering/tech-talks",
             "handbook/engineering/common-issues",
-            "handbook/engineering/mdx"
+            "handbook/engineering/mdx",
+            "handbook/engineering/feature-flags-spec"
         ]
     },
     {

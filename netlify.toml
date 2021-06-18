@@ -120,8 +120,8 @@
 
 
 [[redirects]]
-    from = "/handbook/company/team"
-    to = "/handbook/people/team"
+    from = "/handbook/people/team"
+    to = "/handbook/company/team"
 
 
 [[redirects]]
@@ -147,3 +147,23 @@
 [[redirects]]
     from = "/handbook/people/team-structure/user-experience"
     to = "/handbook/people/team-structure/core-experience"
+
+    
+[[redirects]]
+    from = "/docs/plugins/build"
+    to = "/docs/plugins/build/reference"
+
+    
+[[redirects]]
+    from = "/docs/plugins/types"
+    to = "/docs/plugins/build/types"
+
+    
+[[redirects]]
+    from = "/docs/plugins/build"
+    to = "/docs/plugins/build/reference"
+
+    
+[[redirects]]
+    from = "/docs/plugins/types"
+    to = "/docs/plugins/build/types"

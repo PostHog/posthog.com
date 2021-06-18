@@ -39,8 +39,8 @@ const inPageLinks = [
         section: 'why-were-here',
     },
     {
-        label: 'Our culture',
-        section: 'culture',
+        label: 'Transparency',
+        section: 'transparency',
     },
     {
         label: 'Interview process',
@@ -76,7 +76,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
 
         const scrollHandler = () => {
             const sections = {
-                culture: document.getElementById('culture')!.offsetTop,
+                transparency: document.getElementById('transparency')!.offsetTop,
                 interviewProcess: document.getElementById('interview-process')!.offsetTop,
                 benefits: document.getElementById('benefits')!.offsetTop,
                 workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
@@ -84,10 +84,10 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             }
             const offset = window.scrollY
 
-            if (offset < sections.culture - scrollThreshold) {
+            if (offset < sections.transparency - scrollThreshold) {
                 setCurrentSection('why-were-here')
             } else if (offset < sections.interviewProcess - scrollThreshold) {
-                setCurrentSection('culture')
+                setCurrentSection('transparency')
             } else if (offset < sections.benefits - scrollThreshold) {
                 setCurrentSection('interview-process')
             } else if (offset < sections.workingAtPosthog - scrollThreshold) {

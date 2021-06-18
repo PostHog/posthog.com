@@ -13,8 +13,11 @@ import { MDXProvider } from '@mdx-js/react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import { AuthorsData } from 'types'
+import { findAuthor } from 'lib/utils'
+
 interface MdxQueryData {
-    mdx: {
+    postData: {
         id: string
         slug: string
         body: any
@@ -29,7 +32,14 @@ interface MdxQueryData {
             featuredImage?: {
                 publicURL?: string
             }
+            author?: string
         }
+    }
+    authorsData: {
+        frontmatter: {
+            authors: AuthorsData[]
+        }
+        id: string
     }
 }
 
@@ -50,11 +60,14 @@ function addIndex(url: string) {
 }
 
 function TemplateMdx({ data }: { data: MdxQueryData }) {
+    const { postData: mdx, authorsData } = data
     const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
-    const { mdx } = data
+    // const { mdx } = data
     const { frontmatter, body, excerpt, id, slug } = mdx
+
+    const author = findAuthor(authorsData.frontmatter.authors)(frontmatter.author)
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -81,6 +94,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 menuActiveKey={isDocsPage ? 'docs' : ''}
+                authorDetails={author}
             >
                 <SEO
                     title={
@@ -103,7 +117,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                     </div>
                     {isDocsPage && <DocsPageSurvey />}
                     {(isDocsPage || isHandbookPage) && (
-                        <DocsFooter filename={`/${addIndex(mdx.slug)}.mdx`} title={frontmatter.title} />
+                        <DocsFooter filename={`/${addIndex(slug)}.mdx`} title={frontmatter.title} />
                     )}
                 </div>
             </Layout>
@@ -116,7 +130,7 @@ export default TemplateMdx
 // @todo -> be defensive against null featuredImage
 export const query = graphql`
     query MDXQuery($id: String!) {
-        mdx(id: { eq: $id }) {
+        postData: mdx(id: { eq: $id }) {
             id
             slug
             body
@@ -132,6 +146,19 @@ export const query = graphql`
                     publicURL
                 }
             }
+        }
+        authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
+            frontmatter {
+                authors {
+                    handle
+                    name
+                    role
+                    image
+                    link_type
+                    link_url
+                }
+            }
+            id
         }
     }
 `

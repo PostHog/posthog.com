@@ -3,6 +3,8 @@ import { Link } from 'gatsby'
 import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
 import './style.scss'
+import { AuthorsData } from 'types'
+import AuthorIndexView from 'components/Blog/BlogAuthor/AuthorIndexView'
 
 export interface PostType {
     id: string
@@ -42,7 +44,7 @@ const ReadPostHome = ({ to }: { to: string }) => {
     )
 }
 
-const FeaturedPost = ({ post }: { post: PostType }) => {
+const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
             <div className="w-full md:w-1/2 md:pr-8 py-4 mx-auto">
@@ -55,6 +57,7 @@ const FeaturedPost = ({ post }: { post: PostType }) => {
                         {post.frontmatter.title}
                     </Link>
                 </h2>
+                <AuthorIndexView authorDetails={authorDetails} />
                 <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed font-inter">
                     {post.excerpt}
                 </div>
@@ -74,7 +77,7 @@ const FeaturedPost = ({ post }: { post: PostType }) => {
     )
 }
 
-const LandingPageLatestPost = ({ post }: { post: PostType }) => {
+const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col justify-between items-center">
             {post.frontmatter.featuredImage?.publicURL && (
@@ -93,6 +96,7 @@ const LandingPageLatestPost = ({ post }: { post: PostType }) => {
                         {post.frontmatter.title}
                     </Link>
                 </h2>
+                <AuthorIndexView authorDetails={authorDetails} />
                 <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed font-inter">{post.excerpt}</div>
                 <ReadPostHome to={post.fields.slug} />
             </div>
@@ -104,31 +108,36 @@ const PostCard = ({
     post,
     featured = false,
     landingPage = false,
+    authorDetails,
 }: {
     post: PostType
     featured?: boolean
     landingPage?: boolean
-}) => (
-    <div>
-        {featured ? (
-            <FeaturedPost post={post} />
-        ) : landingPage ? (
-            <LandingPageLatestPost post={post} />
-        ) : (
-            <div className="flex flex-col mb-12">
-                <h3 className="mb-0">
-                    <Link
-                        to={post.fields.slug}
-                        className="font-bold font-gosha text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
-                    >
-                        {post.frontmatter.title}
-                    </Link>
-                </h3>
-                <div className="mt-4 leading-relaxed text-sm font-inter">{post.excerpt}</div>
-                <ReadPost to={post.fields.slug} />
-            </div>
-        )}
-    </div>
-)
+    authorDetails?: AuthorsData
+}) => {
+    return (
+        <div>
+            {featured ? (
+                <FeaturedPost post={post} authorDetails={authorDetails} />
+            ) : landingPage ? (
+                <LandingPageLatestPost post={post} authorDetails={authorDetails} />
+            ) : (
+                <div className="flex flex-col mb-12">
+                    <h3 className="mb-0">
+                        <Link
+                            to={post.fields.slug}
+                            className="font-bold font-gosha text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                        >
+                            {post.frontmatter.title}
+                        </Link>
+                    </h3>
+                    <AuthorIndexView authorDetails={authorDetails} />
+                    <div className="mt-4 leading-relaxed text-sm font-inter">{post.excerpt}</div>
+                    <ReadPost to={post.fields.slug} />
+                </div>
+            )}
+        </div>
+    )
+}
 
 export default PostCard

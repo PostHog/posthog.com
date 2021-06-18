@@ -5,9 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+author: james-hawkins
 ---
-
-By: [James Hawkins](https://twitter.com/james406), Co-Founder/CEO of PostHog
 
 As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [HackerNews](https://news.ycombinator.com).
 

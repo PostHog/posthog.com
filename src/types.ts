@@ -52,4 +52,13 @@ export interface Contributor {
     mvpWins: number
 }
 
+export interface AuthorsData {
+    handle: string
+    image: string
+    link_type: 'twitter' | 'linkedin'
+    link_url: string
+    name: string
+    role: string
+}
+
 export type Heading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'

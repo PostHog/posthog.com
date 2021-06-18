@@ -1,11 +1,12 @@
 // AUTO GENERATED FILE
 
-import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
-import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
+import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
+import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
+import { BlogAuthor } from './components/Blog/BlogAuthor'
 import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
 import { BlogShareButtons } from './components/Blog/BlogShareButtons'
@@ -14,9 +15,9 @@ import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
-import { Culture } from './components/Careers/Culture'
 import { InterviewProcess } from './components/Careers/InterviewProcess'
 import { OpenRoles } from './components/Careers/OpenRoles'
+import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { CodeBlock } from './components/CodeBlock'
@@ -24,8 +25,8 @@ import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
-import { ContributorsChart } from './components/ContributorsChart'
 import { ContributorSearch } from './components/ContributorSearch'
+import { ContributorsChart } from './components/ContributorsChart'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -35,6 +36,7 @@ import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
+import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
@@ -77,12 +79,13 @@ import { TableOfContents } from './components/TableOfContents'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
 export const shortcodes = {
-    AllTheFeaturesCloud,
-    AnchorScrollNavbar,
     Endpoint,
     MethodTags,
+    AllTheFeaturesCloud,
+    AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
+    BlogAuthor,
     BlogPostLayout,
     BlogPosts,
     BlogShareButtons,
@@ -91,9 +94,9 @@ export const shortcodes = {
     CallToAction,
     Benefits,
     CareersHero,
-    Culture,
     InterviewProcess,
     OpenRoles,
+    Transparency,
     WhyWereHere,
     WorkingAtPostHog,
     CodeBlock,
@@ -101,8 +104,8 @@ export const shortcodes = {
     Container,
     ContributorAvatars,
     ContributorCard,
-    ContributorsChart,
     ContributorSearch,
+    ContributorsChart,
     DarkModeToggle,
     DemoScheduler,
     DocsPageSurvey,
@@ -112,6 +115,7 @@ export const shortcodes = {
     FeaturesSelfHost,
     Footer,
     GetStartedModal,
+    GithubIcon,
     HiddenSection,
     Blockquote,
     Features,
