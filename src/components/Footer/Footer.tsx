@@ -93,7 +93,7 @@ export function Footer({
                         <FooterListItem to="/product-features/plugins">Plugins</FooterListItem>
                         <FooterListItem to="/product-features/self-hosted">Data portability</FooterListItem>
                         <FooterListItem to="/product-features/self-hosted" border={false}>
-                            Private cloud deployment
+                            Self-hosting options
                         </FooterListItem>
                     </FooterCategory>
                 </div>
@@ -114,7 +114,7 @@ export function Footer({
                         </FooterListItem>
 
                         <FooterSubCategory>Get involved</FooterSubCategory>
-                        <FooterListItem href="https://github.com/orgs/PostHog/projects/1">Roadmap</FooterListItem>
+                        <FooterListItem href="/handbook/strategy/roadmap">Roadmap</FooterListItem>
                         <FooterListItem to="/contributors">Contributors</FooterListItem>
                         <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
                             Merch
