@@ -11,13 +11,15 @@ author: mo-shehu
 
 ## Thinner docs, better products
 
-The highest priority for any company is shortening the feedback loop between your customers and your product team. The fastest way to achieve this is by having your product builders interface directly with your customers (like we do at PostHog). This gives you an idea of the types of problems that keep cropping up and lets you decide how much help content you need to create - but most importantly, it tells you how to improve and simplify the product experience to reduce the need for thicker help docs and extensive tutorials.
+The highest priority for support at any company is shortening the feedback loop between your customers and your product team. The fastest way to achieve this is by having your product builders interface directly with your customers (like we do at PostHog). This gives you an idea of the types of problems that keep cropping up and lets you decide how much help content you need to create - but most importantly, it tells you how to improve and simplify the product experience to reduce the need for thicker help docs and extensive tutorials.
 
 ## A little background
 
 Our very first support staff members were the founders, James and Tim, due to the limited resources and staff we had at the time. Having all hands on deck made a big difference, as you can’t afford to designate customer support to just one person in the early days. 
 
 As of writing, customer support at PostHog happens in [“rotas”](https://posthog.com/handbook/growth/customer-support) - pre-planned, two-week cycles where one dev team member drops all development work and handles incoming user queries. Called a ‘Support Hero,’ this team member monitors all our channels - from GitHub and Slack to social media where applicable - and either solves the issues that surface or ropes in other team members for assistance. That last point is important, as having a support hero doesn’t abdicate everyone else from responding to customers. At PostHog, we firmly believe in “stepping on toes”: if you spot a problem that falls under someone else’s purview, just solve it.
+
+We do not hire support people at PostHog. Instead, support is something that all of our engineers do on a rota basis. Yes, Tim as CTO still does it too.
 
 ## Removing friction
 
