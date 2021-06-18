@@ -51,8 +51,8 @@ Our customers are a combination of users, businesses and the products themselves
 
 
 *   **Introduction:** A new product with a small number of early adopters using it, yet to achieve product market fit
-*   **Growth:** A product which has found initial product market fit with a limited audience and focussed on expanding their reach
-*   **Maturity:** A product which has saturated its audiences and is focussed on retaining users
+*   **Growth:** A product which has found initial product market fit with a limited audience and focused on expanding their reach
+*   **Maturity:** A product which has saturated its audiences and is focused on retaining users
 *   **Decline:** A product which is losing market share and needs to be phased out or pivoted
 
 <table>
