@@ -96,7 +96,7 @@ Candidates who are unsuccessful at this stage should receive a personalized emai
 
 For engineering, this is a 2-part interview. The first part is a half hour interview with Tim about your previous experiences and what motivates you to come join us. The second part is an hour long technical interview with an engineer. This might be architecture design or diving more into past technical experiences.
 
-For non engineering there's a combined interview for cultural and skilss fit.
+For non engineering there's a combined interview for cultural and skills fit.
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. 
 
