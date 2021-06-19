@@ -234,5 +234,148 @@ module.exports = {
                 },
             },
         },
+        {
+            resolve: `gatsby-plugin-feed`,
+            options: {
+                query: `
+                {
+                  site {
+                    siteMetadata {
+                      title
+                      description
+                      siteUrl
+                    }
+                  }
+                }
+              `,
+                feeds: [
+                    {
+                        serialize: ({ query: { site, allMarkdownRemark, authorsData, allMdx } }) => {
+                            let {
+                                siteMetadata: { siteUrl },
+                            } = site
+
+                            let findRelevantAuthor = (authorKey) =>
+                                authorsData.frontmatter.authors.find(({ handle }) => handle === authorKey)
+
+                            let allMarkdowns = allMarkdownRemark.edges.map((edge) => {
+                                let { node } = edge
+                                let { frontmatter, excerpt, fields, id, html } = node
+                                let { date, title, author, featuredImage } = frontmatter
+                                let authorsData = findRelevantAuthor(author)
+                                let newAuthorData = []
+                                if (authorsData) {
+                                    Object.keys(authorsData).forEach((key) => {
+                                        let newKey = key.replace('_', '')
+                                        newAuthorData.push({
+                                            [`author${newKey}:encoded`]: authorsData[key],
+                                        })
+                                    })
+                                }
+                                return {
+                                    description: excerpt,
+                                    date,
+                                    title,
+                                    url: siteUrl + fields.slug,
+                                    guid: id,
+                                    author: authorsData ? authorsData.name : null,
+                                    custom_elements: [{ 'content:encoded': html }, ...newAuthorData],
+                                    enclosure: {
+                                        url: featuredImage ? featuredImage.publicURL : null,
+                                    },
+                                }
+                            })
+                            let allMdxs = allMdx.edges.map((edge) => {
+                                let { node } = edge
+                                let { frontmatter, excerpt, slug, id, body } = node
+                                let { date, title, featuredImage } = frontmatter
+                                return {
+                                    description: excerpt,
+                                    date,
+                                    title,
+                                    url: `${siteUrl}/${slug}`,
+                                    guid: id,
+                                    custom_elements: [{ 'content:encoded': body }],
+                                    enclosure: {
+                                        url: featuredImage ? featuredImage.publicURL : null,
+                                    },
+                                }
+                            })
+
+                            return [...allMarkdowns, ...allMdxs]
+                        },
+                        query: `
+                        {
+                            allMarkdownRemark(
+                              sort: { order: DESC, fields: [frontmatter___date] }
+                              filter: { frontmatter: { rootPage: { eq: "/blog" } } }
+                            ) {
+                              edges {
+                                node {
+                                  id
+                                  excerpt(pruneLength: 150)
+                                  html
+                                  fields {
+                                    slug
+                                  }
+                                  frontmatter {
+                                    date(formatString: "MMMM DD, YYYY")
+                                    title
+                                    featuredImage {
+                                      publicURL
+                                    }
+                                    author
+                                  }
+                                }
+                              }
+                            }
+                            allMdx(
+                              sort: { order: DESC, fields: [frontmatter___date] }
+                              filter: { frontmatter: { rootPage: { eq: "/blog" } } }
+                            ) {
+                              edges {
+                                node {
+                                  id
+                                  slug
+                                  body
+                                  excerpt(pruneLength: 150)
+                                  frontmatter {
+                                    date(formatString: "MMMM DD, YYYY")
+                                    title
+                                    featuredImage {
+                                      publicURL
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                            authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
+                              frontmatter {
+                                authors {
+                                  handle
+                                  name
+                                  role
+                                  image
+                                  link_type
+                                  link_url
+                                }
+                              }
+                              id
+                            }
+                          }
+                        `,
+                        output: '/rss.xml',
+                        title: "PostHog's RSS Feed",
+                        // optional configuration to insert feed reference in pages:
+                        // if `string` is used, it will be used to create RegExp and then test if pathname of
+                        // current page satisfied this regular expression;
+                        // if not provided or `undefined`, all pages will have feed reference inserted
+                        match: '^/blog/',
+                        // optional configuration to specify external rss feed, such as feedburner
+                        link: 'https://posthog.com/blog',
+                    },
+                ],
+            },
+        },
     ],
 }
