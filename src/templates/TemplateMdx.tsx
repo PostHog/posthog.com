@@ -13,15 +13,15 @@ import { MDXProvider } from '@mdx-js/react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
-import { AuthorsData } from 'types'
+import { AuthorsData, TableContent } from 'types'
 import { findAuthor } from 'lib/utils'
-
 interface MdxQueryData {
     postData: {
         id: string
         slug: string
         body: any
         excerpt: string
+        tableOfContents?: { items: TableContent[] }
         frontmatter: {
             date: string
             title: string
@@ -65,7 +65,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
     // const { mdx } = data
-    const { frontmatter, body, excerpt, id, slug } = mdx
+    const { frontmatter, body, excerpt, id, slug, tableOfContents } = mdx
 
     const author = findAuthor(authorsData.frontmatter.authors)(frontmatter.author)
 
@@ -95,6 +95,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                 isDocsPage={isDocsPage}
                 menuActiveKey={isDocsPage ? 'docs' : ''}
                 authorDetails={author}
+                tableOfContents={tableOfContents}
             >
                 <SEO
                     title={
@@ -135,6 +136,7 @@ export const query = graphql`
             slug
             body
             excerpt(pruneLength: 150)
+            tableOfContents
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
                 title

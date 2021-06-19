@@ -37,12 +37,29 @@ const constructTree = (list) => {
     deleteNode.sort((a, b) => b - a).forEach((index) => list.splice(index, 1))
 }
 
-function TableOfContents({ offsetTop, affix }) {
+const constructCollection = (incomingItems) => {
+    let idsArray = []
+    console.log({ incomingItems })
+    incomingItems.forEach((item) => {
+        let { url, title, items } = item
+        idsArray.push({
+            href: url,
+            title,
+            children: constructCollection(items || []),
+        })
+    })
+    return idsArray
+}
+
+function TableOfContents({ offsetTop, affix, tableOfContents }) {
     const [anchors, setAnchors] = useState([])
 
     useEffect(() => {
-        const anchors = document.getElementsByClassName('post-toc-anchor')
-        setAnchors(filterAnchorDetails(anchors))
+        if (tableOfContents?.items?.length) setAnchors(constructCollection(tableOfContents.items))
+        else {
+            let anchors = document.getElementsByClassName('post-toc-anchor')
+            setAnchors(filterAnchorDetails(anchors))
+        }
     }, [])
 
     const { setAnchorOpen } = useActions(layoutLogic)

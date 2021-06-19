@@ -19,7 +19,7 @@ import { GetStartedModal } from '../../components/GetStartedModal'
 import { BlogFooter } from '../../components/BlogFooter'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { BlogPostLayout } from '../Blog/BlogPostLayout'
-import { AuthorsData } from 'types'
+import { AuthorsData, TableContent } from 'types'
 
 interface LayoutProps {
     pageTitle?: string
@@ -36,6 +36,7 @@ interface LayoutProps {
     onBlogPage?: boolean
     blogDate?: string
     authorDetails?: AuthorsData
+    tableOfContents?: { items: TableContent[] }
 }
 
 const BlogHeaderContent = ({ title }: { title: string }): JSX.Element => (
@@ -61,6 +62,7 @@ const Layout = ({
     onBlogPage = false,
     blogDate = '',
     authorDetails,
+    tableOfContents,
 }: LayoutProps): JSX.Element => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -172,7 +174,7 @@ const Layout = ({
                                 id="right-navbar"
                                 style={{ background: '#ffffff' }}
                             >
-                                <ResponsiveAnchor />
+                                <ResponsiveAnchor tableOfContents={tableOfContents} />
                             </AntdLayout.Sider>
                         )}
                     </AntdLayout>
