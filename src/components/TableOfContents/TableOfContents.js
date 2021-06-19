@@ -39,7 +39,6 @@ const constructTree = (list) => {
 
 const constructCollection = (incomingItems) => {
     let idsArray = []
-    console.log({ incomingItems })
     incomingItems.forEach((item) => {
         let { url, title, items } = item
         idsArray.push({
