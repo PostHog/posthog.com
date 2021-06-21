@@ -45,3 +45,14 @@ Currently for internal use only.
   - Tests:
       - All the same, except skip `DEBUG=1` in the env settings.
       - Set as the "target" in run configuration `ee/clickhouse`
+
+### Running everything but ClickHouse locally
+- Follow the [local development setup without Docker](/docs/developing-locally)
+- Run `docker-compose -f ee/docker-compose.ch.yml up clickhouse`
+- In `/etc/hosts`, add a line with `127.0.0.1       kafka clickhouse`
+- Set environment variables:
+  - `export PRIMARY_DB=clickhouse`
+  - `export CLICKHOUSE_SECURE=False`
+  - `export KAFKA_ENABLED=true`
+  - `export KAFKA_HOSTS=localhost:9092`
+- Run PostHog: `./bin/start`
