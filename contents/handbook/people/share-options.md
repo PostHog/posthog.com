@@ -37,7 +37,9 @@ This simply means you decide to buy the shares at the price agreed in your optio
  
 ### What if I leave PostHog before this exit event happens?
  
-Luckily we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have until June 2031 to exercise them. The industry standard is to only give you 90 days to exercise after leaving, which we think is bogus. 
+Luckily we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have until June 2031 to exercise them. This date applies to share options granted in June 2021 - in future, there will probably be different dates for different grants which we will list out here.  
+
+The industry standard is to only give you 90 days to exercise after leaving, which we think is bogus. 
 
  
 ### Does it make any difference how I leave PostHog - what if I am fired or made redundant?
