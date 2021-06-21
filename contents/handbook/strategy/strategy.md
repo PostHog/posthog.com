@@ -5,11 +5,15 @@ showTitle: true
 ---
 
 ## TL;DR
-Our mission is to **_“Increase the number of successful products in the world”_**. Our first step on their journey is to prove product market fit with 5 reference customers. Today we're closest to PMF with products which need to self-host and are in the growth phase of their lifecycle; they need us to absolutely "Nail Funnels" in order to make their products successful.
+Our mission is to “Increase the number of successful products in the world”.
+
+We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recordings, feature flags and many more features. Within a year we had thousands of customers using us and we started generating revenue.
+
+Our next step on our journey is to prove a deeper level of product-market fit with 5 reference customers. Today we're closest to product market fit with products which need to self-host and are in the growth phase of their lifecycle; they need us to absolutely "Nail Funnels" in order to make their products successful.
 
 ### Context
 
-We’ve grown a lot, but it’s clear that the majority of our users use us *despite* a bad experience - bugs, instability, lots of maintenance or confusing UX. This is a great problem to have. It means we’re solving a hair on fire problem - product analytics that you can self host.
+We’ve grown a lot, but it’s clear that the many of our users use us *despite* a bad experience - bugs, instability, lots of maintenance or confusing UX. This is a great problem to have. It means we’re solving a hair on fire problem - product analytics that you can self host.
 
 For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or - in future - sales teams to succeed.
 
