@@ -23,13 +23,11 @@ _Unlike traditional analytics tools, PostHog offers self-hosted deployments so t
 
 An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
-**PostHog Open Source** is positioned to service hobbyists and very small non-enterprise teams who may want to retain control of their data. 
+**PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
 
-**PostHog Free** is positioned to service small non-enterprise teams who need to retain control of their data.
+**PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
 
-**PostHog Scale** is positioned to service large teams and enterprises who need to retain control of their data.
-
-**PostHog Cloud** is positioned to service teams of any size who need less control.
+**PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
 
 ## Target audience
