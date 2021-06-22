@@ -29,7 +29,6 @@ An **open source product analytics platform**, PostHog addresses the lack of cho
 
 **PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
-
 ## Target audience
 
 *Innovative technical teams*, more commonly found in startups, who care about:
