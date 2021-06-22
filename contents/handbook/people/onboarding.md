@@ -74,21 +74,22 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Identify user as team member in [Orbit](https://app.orbit.love/login) - _Anyone_
 *   [ ] Share user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit) - _Manager_
 
-## New joiner checklist - to be done during their first week
+## During their first week
 
-*   [ ] Read the ‘[Getting started](https://posthog.com/handbook/getting-started/start-here)’ and ‘[How we work section](https://posthog.com/handbook/company/culture)’ of the handbook
-*   [ ] [Book time](https://posthog.com/handbook/getting-started/meetings) with relevant teams
+The below checklist is for the new team member to complete _themselves_ - make sure this is shared with them on their first day. 
+
+*   [ ] Read the ‘[Getting started](https://posthog.com/handbook/getting-started/start-here)’ and ‘[How we work section](https://posthog.com/handbook/company/culture)’ of the Handbook carefully
+*   [ ] [Book time](https://posthog.com/handbook/getting-started/meetings) with relevant team members - we encourage you to do as many of these intros as possible to get to know everyone!
 *   [ ] Join CharlieHR and fill in your profile (including payroll details, contact details, emergency contacts and upload a picture of your passport)
-*   [ ] _(UK only)_ Please also upload your P45 to CharlieHR, as soon as possible
+*   [ ] _(UK only)_ Upload your P45 to CharlieHR as soon as possible
 *   [ ] _(US only)_ Join [Gusto](https://gusto.com/) and fill in your payroll information 
 *   [ ] Add the [team time off calendar](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) to your Gcal
 *   [ ] Add yourself to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t)
-*   [ ] Join any other [tools / software](https://posthog.com/handbook/people/onboarding#tools-we-use) you've been invited to
-*   [ ] Go through Security Onboarding and background checks on [Drata](https://app.drata.com/)
-*   [ ] Send Lottie a picture of you. Once you have a pixelated version, add yourself to the [team page](https://posthog.com/handbook/company/team)
+*   [ ] Join any other [tools / software](https://posthog.com/handbook/people/onboarding#tools-we-use) you've been invited to, and flag any you think are missing
+*   [ ] Go through all of the security onboarding and background checks on [Drata](https://app.drata.com/) - you need to complete _all_ of the Drata onboarding steps
+*   [ ] Send Lottie a picture of you. Once you get a pixelated version back, add yourself to the [team page](https://posthog.com/handbook/company/team)
 *   [ ] New joiner announement: interview with Mo
-
-> Not a hard requirement by any means, but we highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users.
+*   [ ] We also highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users - ask Paolo. 
 
 ### Additional access
 
