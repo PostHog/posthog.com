@@ -40,7 +40,7 @@ Assuming PostHog is the best solution for a customer, you should look at their l
 
 ### What about Scale Free?
 
-We have recently started rolling out Scale Free. Our plan is to make it widely available as a config option in Open Source, but we're keeping them separate for now. Scale Free will be appealing to customers who need Clickhouse due to volume rather than Postgres, but are happy with 3 logins only and community-based support. 
+We have recently started rolling out Scale Free. Our plan is to make it widely available as a config option in Open Source, but we're keeping them separate for now. Scale Free will be appealing to customers who need ClickHouse due to volume rather than Postgres, but are happy with 3 logins only and community-based support. 
 
 By contrast, Scale Paid is for an entire team to adopt - customers will have engineering and product management all on the platform, and perhaps marketing/execs. Paid has premium features around collaboration - such as user permissions so people can't delete everything, multiple projects to keep data tidy, basically functionality to keep things running smoothly when you have lots of logins.
 
@@ -85,9 +85,9 @@ _A Scale customer has experienced downtime while we're getting set up - have the
 
 Downtime means that queries won't load, but event ingestion will still continue to work fine. 
 
-_What's the difference between Postgres and Clickhouse?_
+_What's the difference between Postgres and ClickHouse?_
 
-Postgres you can write huge volumes to, but for analytics queries it's very slow once a team has thousands of users or more. The advantage is that it's super easy to deploy - so a good way to ie get a small project in a huge enterprise up and running. However, you you can't migrate from Postgres to Clickhouse (since the data format is different later). Clickhouse is massively more scalable, but requires a lot more work to deploy, so we provide extra support from our infra team to get everything set up and refined over the first few weeks. 
+Postgres you can write huge volumes to, but for analytics queries it's very slow once a team has thousands of users or more. The advantage is that it's super easy to deploy - so a good way to ie get a small project in a huge enterprise up and running. However, you you can't migrate from Postgres to ClickHouse (since the data format is different later). ClickHouse is massively more scalable, but requires a lot more work to deploy, so we provide extra support from our infra team to get everything set up and refined over the first few weeks. 
 
 _What if the customer knows their user volumes but has no idea about number of events?_
 
