@@ -10,7 +10,7 @@ I'm from Cambridge in the UK.
 
 I started off as a bad professional cyclist, became a worse developer, bootstrapped an online marketing company, wound up as a VP Sales at an enterprise software company, then got into YC where PostHog was born.
 
-I tend to work 9am to 5pm with an hour for lumch, then I have a gap to have dinner with my family, then 9pm to around 11pm ish.
+I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinner with my family, then 9pm to around 11pm ish.
 
 ## Areas of responsibility
 
