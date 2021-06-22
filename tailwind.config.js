@@ -44,6 +44,11 @@ module.exports = {
             '2xl': '1536px',
             // => @media (min-width: 1536px) { ... }
         },
+        flex: {
+            '1/3': '0 0 33%',
+            '2/3': '0 0 67%',
+            '100%': '0 0 100%',
+        },
         extend: {
             fontFamily: {
                 gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
