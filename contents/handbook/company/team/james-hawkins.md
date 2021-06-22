@@ -54,18 +54,18 @@ I tend to work 9am to 5pm with an hour for lumch, then I have a gap to have dinn
 
 I'm going into tactical mode as we're working on deepening product market fit for our paid product, as part of our short term strategy to Nail Funnels.
 
-- Strategy
-  - Make sure we have product market fit with our focus segment
-  - Do nothing else
-- Execution - in next 6 weeks I want:
-  - Work to onboard existing users properly to turn them into 5 reference customers
-    - Get meetings / build relationships with them in order to make sure they’re up and running with funnels properly (activation is defined clearly, they’re using us for the list of “jobs to be done” that we’re supposed to be enabling.
-    - Clear pricing model
-    - Internal guidance on what is free versus paid
-  - Sustain existing success
-    - Get them to use funnels for the full list of jobs to be done
-  - Don’t get distracted outside of the above
-    - Make sure that my direct reports have goals that they can focus on autonomously
+### Strategy
+- Make sure we have product market fit with our focus segment
+- Do nothing else
+### Execution - in next 6 weeks I want:
+- Work to onboard existing users properly to turn them into 5 reference customers
+  - Get meetings / build relationships with them in order to make sure they’re up and running with funnels properly (activation is defined clearly, they’re using us for the list of “jobs to be done” that we’re supposed to be enabling.
+  - Clear pricing model
+  - Internal guidance on what is free versus paid
+- Sustain existing success
+  - Get them to use funnels for the full list of jobs to be done
+- Don’t get distracted outside of the above
+  - Make sure that my direct reports have goals that they can focus on autonomously
 - Personal
   - Do 1 bike ride a week
   - Exchange on house
