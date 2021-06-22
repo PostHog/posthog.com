@@ -86,6 +86,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Join any other [tools / software](https://posthog.com/handbook/people/onboarding#tools-we-use) you've been invited to
 *   [ ] Go through Security Onboarding and background checks on [Drata](https://app.drata.com/)
 *   [ ] Send Lottie a picture of you. Once you have a pixelated version, add yourself to the [team page](https://posthog.com/handbook/company/team)
+*   [ ] New joiner announement: interview with Mo
 
 > Not a hard requirement by any means, but we highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users.
 
