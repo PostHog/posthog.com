@@ -1,7 +1,8 @@
 ---
 date: 2021-05-20
-title: Writing for Developers
+title: Writing for developers
 rootPage: /blog
+featuredImage: ../images/blog/writing-for-developers/writing-for-developers.png
 sidebar: Blog
 showTitle: true
 hideAnchor: true
