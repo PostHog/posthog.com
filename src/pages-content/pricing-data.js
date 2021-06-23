@@ -17,7 +17,7 @@ const plans = {
             },
             benefits: [
                 '<span class="p-plan-benefit-lg">Everything in Open Source, plus:</span>',
-                'Clickhouse database for Petabyte scale',
+                'ClickHouse database for Petabyte scale',
                 'Integrations with services like Zapier',
                 'Permissioning and multiple projects',
                 'Dedicated support',

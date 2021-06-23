@@ -88,7 +88,7 @@ A key goal is to provide a more reliable PostHog for _all_ users.
 
 We view [Cloud](https://app.posthog.com/signup) as a way of generating awareness (charging high volume cloud users to cover its hosting costs) and improving scalability, and Self-Host as a way of generating high volume users that we retain very well and who may end up paying one day.
 
-For those that self-host, we are putting a ton of engineering work into enabling Clickhouse in our open source product. That means users that self-host will be able to use PostHog at much greater scale, bug free, for free or paid depending on which features they need.
+For those that self-host, we are putting a ton of engineering work into enabling ClickHouse in our open source product. That means users that self-host will be able to use PostHog at much greater scale, bug free, for free or paid depending on which features they need.
 
 For teams with smaller volume and less of a focus on user privacy, this is where today's change comes in.
 
