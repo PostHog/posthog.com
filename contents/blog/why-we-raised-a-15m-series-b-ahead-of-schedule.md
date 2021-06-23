@@ -2,6 +2,7 @@
 date: 2021-06-14
 title: Why we raised a $15m Series B ahead of schedule
 author: joe-martin
+featuredImage: ../images/blog/series-b/series-b-baby.png
 rootPage: /blog
 sidebar: Blog
 showTitle: true
