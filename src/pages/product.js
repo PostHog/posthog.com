@@ -18,25 +18,73 @@ function ProductPage() {
                 bgColor="navy"
             />
 
-            <div className="flex flex-wrap ">
+            <div className="flex flex-wrap justify-between bg-purple p-4">
                 <ProductFeature
                     orientation="foo"
-                    width="1/3"
-                    name="Track events automatically"
-                    description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
+                    width="full"
+                    categoryIcon=""
+                    category="Open source"
+                    name="Open source product analytics"
+                    description="Check out our source code, request new features or get involved with the product directly."
                     docsUrl="#"
                     image="#"
-                    klass="productFeatures"
+                    klass=""
                 />
 
                 <ProductFeature
                     orientation="foo"
-                    width="2/3"
+                    width="half"
+                    categoryIcon=""
+                    category="Event autocapture"
                     name="Track events automatically"
                     description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
                     docsUrl="#"
                     image="#"
-                    klass="productFeatures"
+                    klass=""
+                />
+
+                <ProductFeature
+                    orientation="foo"
+                    width="half"
+                    categoryIcon=""
+                    category="Dashboards"
+                    name="Monitor core metrics"
+                    description="Build dashboards with everyday metrics like sign-ups, purchases and conversions."
+                    docsUrl="#"
+                    image="#"
+                    klass=""
+                />
+
+                <div className="placeholder-pipelines-warehouse text-white" style={{ flex: '0 0 100%' }}>
+                    pipelines/warehouse placeholder (2 items)
+                </div>
+
+                <div className="placeholder-hosting-flexibility text-white" style={{ flex: '0 0 100%' }}>
+                    hosting flexibility placeholder (3 items)
+                </div>
+
+                <ProductFeature
+                    orientation="foo"
+                    width="half"
+                    categoryIcon=""
+                    category="Data privacy"
+                    name="Compliance-friendly"
+                    description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
+                    docsUrl="#"
+                    image="#"
+                    klass=""
+                />
+
+                <ProductFeature
+                    orientation="foo"
+                    width="half"
+                    categoryIcon=""
+                    category="API"
+                    name="Full access to your data"
+                    description="Our API and direct SQL access allow full access to your production instance."
+                    docsUrl="#"
+                    image="#"
+                    klass=""
                 />
             </div>
 

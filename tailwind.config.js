@@ -46,9 +46,13 @@ module.exports = {
         },
         flex: {
             '1/3': '0 0 33%',
-            '2/3': '0 0 67%',
-            '100%': '0 0 100%',
+            '2/3': '0 0 66%',
+            half: '0 0 49%',
+            full: '0 0 100%',
         },
+        backgroundColor: (theme) => ({
+            purple: '#2A0B46',
+        }),
         extend: {
             fontFamily: {
                 gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
