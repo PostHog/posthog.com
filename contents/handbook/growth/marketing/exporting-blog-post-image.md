@@ -21,6 +21,7 @@ Install the [TinyImage Compressor](https://www.figma.com/community/plugin/789009
 ### Now let's export that image
 
 1. Rename the frame of the image to closely match the blog post title in a slug format. (Ex: `writing-for-developers`, where we remove capital letters and punctuation, and replace spaces with hyphens. This will become the filename that is uploaded to the server.)
+1. Choose an export option (1x, PNG) but _don't_ export the image.
 1. Select the frame and go to `Plugins > TinyImage Compressor`.
 1. Make sure only the _one_ image is selected. (Sometimes it will select multiple images by default.)
 1. Keep the default quality (90) and choose `Compress images (1)`
