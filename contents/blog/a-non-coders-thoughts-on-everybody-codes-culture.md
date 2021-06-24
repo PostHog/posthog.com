@@ -6,6 +6,7 @@ rootPage: /blog
 sidebar: Blog 
 showTitle: true 
 hideAnchor: true 
+featuredImage: ../images/blog/non-coders-thoughts/non-coders-thoughts.jpeg
 ---
 By: [Joe Martin](https://www.linkedin.com/in/joemartinwords/), Product Marketing
 
