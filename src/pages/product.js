@@ -7,6 +7,8 @@ import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 
+import { ProductFeatureNew } from 'components/ProductFeatureNew'
+
 function ProductPage() {
     return (
         <Layout>
@@ -18,7 +20,18 @@ function ProductPage() {
                 bgColor="navy"
             />
 
-            <div className="flex flex-wrap justify-between bg-purple p-4">
+            <div className="grid justify-between bg-purple p-4">
+                <ProductFeatureNew
+                    icon="rocket"
+                    type="half"
+                    size="large"
+                    // href="#"
+                    className=""
+                    //to="/moo"
+                >
+                    Get Started
+                </ProductFeatureNew>
+
                 <ProductFeature
                     orientation="foo"
                     width="full"
