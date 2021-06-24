@@ -49,7 +49,7 @@ We’re also big on autonomy. A candidate who isn’t comfortable with autonomy 
 
 #### Next steps
 
-After the intro interview, the next step is a technical interview based on the role. New engineering hires might undergo a 90-minute, 2-part interview with Tim and one of the other engineers. New design hires might chat to Cory and undergo a portfolio review, while new marketing hires might chat to James, Mo, and Joe.
+For engineering roles, the next step is a 2-part interview. This includes a 30-minute chat with Tim, to learn more about the experience and motivation of the candidate. The second part is a 60-minute technical interview with one of our engineers. For design roles, there will be a portfolio interview, while marketing candidates might chat to James, Mo and Joe.
 
 The final stage of the interview process is the PostHog SuperDay, which is a paid day of work that exposes the prospective hire to our team, workflow, and some of the projects they can expect to work on once hired. We understand that taking a full day off for an interview can be difficult due to familial, professional, and personal obligations, but we’re flexible around time zones and willing to accommodate a candidate’s schedule. During the SuperDay, we’re specifically assessing a candidate’s communication skills and how they document their day, their findings, and any problems they encounter and solutions they try.
 
@@ -110,3 +110,5 @@ Another way companies can support their HR teams is to lead by example company-w
 ## Hire better
 
 Write more inclusive job descriptions, hire for traits over skills, pay people well, foster closeness often, encourage diversity (of people and ideas), and push for more transparency in your organization. That’s our secret sauce.
+
+_Loved this? Follow us on [Twitter](https://twitter.com/posthoghq) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on startups, growth, and product analytics._
