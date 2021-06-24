@@ -9,7 +9,7 @@ hideAnchor: true
 ---
 Our main selling point as a company is transparency. Being an [open-source company](https://posthog.com/blog/open-source-eating-saas), this isn’t surprising: our code, designs, and content are all largely available [online](https://github.com/posthog), for free, even while still a work in progress. This transparency also extends to HR functions from our salary ranges to our employment processes - all of which you can view in our [company handbook](https://posthog.com/handbook/company/story). Such openness has attracted candidates from all over the world who believe in and want to build on this level of transparency.
 
-As of writing, a third of our staff is based in the US, another third in the UK, and the rest spread out across the globe in places like South Africa, Brazil, the Ukraine, Congo, and Russia. This is deliberate, as diverse backgrounds contribute new viewpoints, generate fresh ideas, and unearth new ways of solving problems with our product, marketing, and community-building.
+As of writing, a third of our staff is based in the US, another third in the UK, and the rest spread out across the globe in places like South Africa, Brazil, Belgium, Poland, Congo, and Estonia. This is deliberate, as diverse backgrounds contribute new viewpoints, generate fresh ideas, and unearth new ways of solving problems with our product, marketing, and community-building.
 
 ## How we hire
 
