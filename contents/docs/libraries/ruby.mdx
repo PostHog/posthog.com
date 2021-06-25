@@ -155,13 +155,35 @@ posthog.capture({
 })
 ```
 
-## Development
+### Feature Flags
 
-### How to release
-1. Increase `VERSION` in `posthog/version.py`
-2. run `make release` and `make release_analytics`
-3. `git commit -am "Release X.Y.Z."` (where X.Y.Z is the new version)
-4. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
+> Note that to use feature flags you must specify `personal_api_key` when initializing PostHog.
+
+#### Checking if a feature is enabled
+
+To check if a feature flag is on for a given user, you can call `is_feature_enabled`, passing the flag's key and the user's distinct ID. You can optionally pass a third argument to override the default result to be returned if the flag is not found. This is set to `false` by default.
+
+```ruby
+# If a flag is not found, the default return value is `false`.
+# You can override this by passing `true` as the third argument to is_feature_enabled
+is_my_flag_enabled = posthog.is_feature_enabled('flag-key', 'user distinct id')
+
+if is_my_flag_enabled
+  # Do something differently for this user
+end
+```
+
+> If your feature flag relies entirely on rollout percentage (i.e. it has no filters), `is_feature_enabled` will provide a fast response, allowing it to be used in the logic for API endpoints, for example. Flags that depend on filters require a call to the PostHog API so will take longer.
+
+#### Reloading feature flags
+
+When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:
+
+```js
+posthog.reload_feature_flags()
+
+// Do something with feature flags here
+```
 
 ## Thank You
 

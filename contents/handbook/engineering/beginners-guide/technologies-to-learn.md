@@ -15,7 +15,7 @@ particularly useful. I'd suggest using *our notes* links as you would a cheatshe
 - [Django](https://www.djangoproject.com/) ([our notes on Django](notes/django))
 - [Django Testing](https://docs.djangoproject.com/en/3.1/intro/tutorial05/)
 - [Pytest](https://docs.pytest.org/en/stable/getting-started.html)
-- [Clickhouse](https://clickhouse.tech/) (enterprise database)
+- [ClickHouse](https://clickhouse.tech/) (enterprise database)
 - [Celery](https://docs.celeryproject.org/en/stable/) (we use Redis as Celery's message broker)
 - [Docker](https://www.docker.com/) ([our notes on Docker](notes/docker))
 

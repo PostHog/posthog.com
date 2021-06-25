@@ -10,14 +10,14 @@ Integrating PostHog with Retool.
 
 ## Why is this useful?
 
-[Retool](retool.com/) is a platform you can use to quickly build internal tools that leverage your data from different sources with little to no-code.
+[Retool](https://retool.com/) is a platform you can use to quickly build internal tools that leverage your data from different sources with little to no-code.
 
 ## Pre-Requisites
 
 To follow this tutorial along, you should:
 
 1. Have [deployed PostHog](/docs/deployment). 
-2. Have a [Retool account](login.retool.com/auth/signup)
+2. Have a [Retool account](https://login.retool.com/auth/signup)
 
 ## Step-By-Step Instructions
 

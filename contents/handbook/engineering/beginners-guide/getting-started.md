@@ -9,7 +9,7 @@ hideAnchor: true
 
 1. Set up your dev environment and configure with your IDE
 2. Get PostHog running locally on Postgres: [http://localhost:8000](http://localhost:8000). You'll need postgres, redis, celery, and django running.
-3. Successfully run PostHog tests: `bin/tests posthog` (which omits Clickhouse tests)
+3. Successfully run PostHog tests: `bin/tests posthog` (which omits ClickHouse tests)
 4. Create [your first PR](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) 
    and have it be approved. If you work for PostHog someone (Tim or small team lead) will suggest the 
    first assignment.
