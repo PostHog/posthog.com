@@ -177,10 +177,10 @@ const PricingPage = () => {
                                                     ~10k users/month
                                                 </td>
                                                 <td>
-                                                    Clickhouse database. <br />
+                                                    ClickHouse database. <br />
                                                     ~1m users/month
                                                 </td>
-                                                <td>Scalable Clickhouse database</td>
+                                                <td>Scalable ClickHouse database</td>
                                             </tr>
                                             <tr>
                                                 <td colSpan={3}>
