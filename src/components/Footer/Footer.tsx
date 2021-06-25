@@ -61,7 +61,7 @@ export function Footer({
 }): JSX.Element {
     const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
     const classList = mergeClassList(
-        'site-footer py-24 relative',
+        'site-footer py-24',
         backgroundClass,
         transparentBg ? 'site-footer--transparent' : null
     )
