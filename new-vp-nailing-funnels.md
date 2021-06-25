@@ -1,12 +1,11 @@
 ---
 date: 2021-07-01
-title: <title>
+title: How PostHog's New VP Focused The Company On Nailing Funnels In His First Week
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: marcus-hyett
-featuredImage: ../contents/images/blog/<filename>
 ---
 Ramping up fast in any senior product role requires understanding as much context as possible across 3 axes (Market, Product and People). I’ll talk you through my process of going from zero understanding in these three areas, to landing a clear, ambitious long-term strategy across the company in just one week.
 
