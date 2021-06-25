@@ -37,14 +37,14 @@ const constructTree = (list) => {
     deleteNode.sort((a, b) => b - a).forEach((index) => list.splice(index, 1))
 }
 
-const constructCollection = (incomingItems) => {
+const constructMdxAnchorsCollection = (incomingItems) => {
     let idsArray = []
     incomingItems.forEach((item) => {
         let { url, title, items } = item
         idsArray.push({
             href: url,
             title,
-            children: constructCollection(items || []),
+            children: constructMdxAnchorsCollection(items || []),
         })
     })
     return idsArray
@@ -54,8 +54,9 @@ function TableOfContents({ offsetTop, affix, tableOfContents }) {
     const [anchors, setAnchors] = useState([])
 
     useEffect(() => {
-        if (tableOfContents?.items?.length) setAnchors(constructCollection(tableOfContents.items))
-        else {
+        if (tableOfContents?.items?.length) {
+            setAnchors(constructMdxAnchorsCollection(tableOfContents.items))
+        } else {
             let anchors = document.getElementsByClassName('post-toc-anchor')
             setAnchors(filterAnchorDetails(anchors))
         }
