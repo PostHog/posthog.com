@@ -63,7 +63,7 @@ export function Footer({
     const classList = mergeClassList(
         'site-footer py-24',
         backgroundClass,
-        transparentBg ? 'site-footer--transparent' : null
+        transparentBg ? 'site-footer--transparent relative' : null
     )
 
     return (
