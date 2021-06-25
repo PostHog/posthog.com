@@ -7,8 +7,6 @@ import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 
-import { ProductFeatureNew } from 'components/ProductFeatureNew'
-
 function ProductPage() {
     return (
         <Layout>
@@ -20,52 +18,38 @@ function ProductPage() {
                 bgColor="navy"
             />
 
-            <div className="grid justify-between bg-purple p-4">
-                <ProductFeatureNew
-                    icon="rocket"
-                    type="half"
-                    size="large"
-                    // href="#"
-                    className=""
-                    //to="/moo"
-                >
-                    Get Started
-                </ProductFeatureNew>
-
+            <div className="grid features-grid justify-between bg-purple p-4">
                 <ProductFeature
-                    orientation="foo"
-                    width="full"
-                    categoryIcon=""
-                    category="Open source"
-                    name="Open source product analytics"
+                    layout="standard"
+                    featureIcon=""
+                    featureName="Open source"
+                    title="Open source product analytics"
                     description="Check out our source code, request new features or get involved with the product directly."
                     docsUrl="#"
                     image="#"
-                    klass=""
+                    classes=""
                 />
 
                 <ProductFeature
-                    orientation="foo"
-                    width="half"
-                    categoryIcon=""
-                    category="Event autocapture"
-                    name="Track events automatically"
+                    layout="reversed"
+                    featureIcon=""
+                    featureName="Event autocapture"
+                    title="Track events automatically"
                     description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
                     docsUrl="#"
                     image="#"
-                    klass=""
+                    classes=""
                 />
 
                 <ProductFeature
-                    orientation="foo"
-                    width="half"
-                    categoryIcon=""
-                    category="Dashboards"
-                    name="Monitor core metrics"
+                    layout="standard"
+                    featureIcon=""
+                    featureName="Dashboards"
+                    title="Monitor core metrics"
                     description="Build dashboards with everyday metrics like sign-ups, purchases and conversions."
                     docsUrl="#"
                     image="#"
-                    klass=""
+                    classes=""
                 />
 
                 <div className="placeholder-pipelines-warehouse text-white" style={{ flex: '0 0 100%' }}>
@@ -77,27 +61,25 @@ function ProductPage() {
                 </div>
 
                 <ProductFeature
-                    orientation="foo"
-                    width="half"
-                    categoryIcon=""
-                    category="Data privacy"
-                    name="Compliance-friendly"
+                    layout="standard"
+                    featureIcon=""
+                    featureName="Data privacy"
+                    title="Compliance-friendly"
                     description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
                     docsUrl="#"
                     image="#"
-                    klass=""
+                    classes=""
                 />
 
                 <ProductFeature
-                    orientation="foo"
-                    width="half"
-                    categoryIcon=""
-                    category="API"
-                    name="Full access to your data"
-                    description="Our API and direct SQL access allow full access to your production instance."
+                    layout="reversed"
+                    featureIcon=""
+                    featureName="API"
+                    title="Full access to your data"
+                    description="<p>Our API and direct SQL access allow full access to your production instance.</p><p>Another paragraph!</p>"
                     docsUrl="#"
-                    image="#"
-                    klass=""
+                    bgImage="#"
+                    classes=""
                 />
             </div>
 

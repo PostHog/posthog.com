@@ -5,6 +5,13 @@
 .productFeature {
     background: linear-gradient(180deg, #3f086d 0%, #32134e 100%);
     border-radius: 20px;
+
+    &.reversed {
+        > div {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
 }
 
 // OLD (<2021)
