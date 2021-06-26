@@ -11,10 +11,64 @@ showTitle: true
 
 ### Deploying to Digital Ocean
 
-To deploy on Digital Ocean, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
+## Deploying Posthog backed by Clickhouse
+
+To deploy on Digital Ocean, our suggested method is using kubernetes to deploy Posthog backed by Clickhouse. If you would rather not use k8s or not want Clickhouse, you can consider using [docker for Postgres backed Posthog deployment](/docs/deployment/deploy-digital-ocean#deploying-posthog-backed-by-postgres), [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws). 
+
+> **Note**: The minimal setup costs about 80$/month (40$ for k8s nodes, 30$ for load balancers and 7$ for volumes)
+
+### K8s Setup
+
+The first thing you'll need is a [Digital Ocean account](https://cloud.digitalocean.com/registrations/new). Once you have that up and running, you're good to go!
 <br />
 
-## Docker Install: Droplet Setup
+Do the following after logging in:
+
+1. Create a new project using the left-hand sidebar on your dashboard
+1. Give the project any name you prefer
+1. From the green Create button on the top right select 'Kubernetes: Create Kubernetes clusters'
+1. When choosing cluster capacity we recommend minimally selecting 2 nodes for 20$/month production plan providing 2.5GB or RAM and 2 vCPUs each
+1. Follow the overview guide provided to get access to your cluster and 
+
+<br />
+
+### Deploying Posthog
+
+We'll be using [Helm](https://helm.sh/) to deploy Posthog. Make sure you have Helm >= v3.
+
+In order for Posthog to work well there are a couple of values we need you to provide, here's an example `values.yaml` file that you should fill with your info. Specifically we'll need
+1. domain (a free option is available via (freenom)[https://www.freenom.com]
+2. email user and pass for outgoing emails (e.g. password reset)
+
+```yaml
+cloud: "do"
+ingress:
+  hostname: "<your hostname here where you'll access the posthog UI>"
+
+email:
+  user: "<TODO>"
+  password: "<TODO>"
+```
+
+Then run given your `values.yaml`
+```
+helm repo add posthog https://posthog.github.io/charts-clickhouse/
+helm repo update
+helm install -f values.yaml --timeout 20m --create-namespace --namespace posthog posthog posthog/posthog
+```
+
+Now that we have Posthog running we'll need to update the DNS to link your domain to the IP where we can reach Posthog. First look lets look up the IP
+```
+kubectl get svc posthog-ingress-nginx-controller -n posthog
+```
+Update DNS records to link to the external IP and you should be able to connect to posthog from your hostname.
+
+## Deploying Posthog backed by Postgres
+
+Deploying with Docker, which we'll explain in detail on this page. 
+<br />
+
+### Docker Install: Droplet Setup
 
 The first thing you'll need is a [Digital Ocean account](https://cloud.digitalocean.com/registrations/new). Once you have that up and running, you're good to go!
 <br />
