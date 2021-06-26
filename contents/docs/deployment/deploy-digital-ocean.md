@@ -9,8 +9,6 @@ showTitle: true
 [Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running. 
 <br />
 
-### Deploying to Digital Ocean
-
 ## Deploying Posthog backed by Clickhouse
 
 To deploy on Digital Ocean, our suggested method is using kubernetes to deploy Posthog backed by Clickhouse. If you would rather not use k8s or not want Clickhouse, you can consider using [docker for Postgres backed Posthog deployment](/docs/deployment/deploy-digital-ocean#deploying-posthog-backed-by-postgres), [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws). 
@@ -28,7 +26,7 @@ Do the following after logging in:
 1. Give the project any name you prefer
 1. From the green Create button on the top right select 'Kubernetes: Create Kubernetes clusters'
 1. When choosing cluster capacity we recommend minimally selecting 2 nodes for 20$/month production plan providing 2.5GB or RAM and 2 vCPUs each
-1. Follow the overview guide provided to get access to your cluster and 
+1. Follow the overview guide provided to get access to your cluster
 
 <br />
 
@@ -37,7 +35,7 @@ Do the following after logging in:
 We'll be using [Helm](https://helm.sh/) to deploy Posthog. Make sure you have Helm >= v3.
 
 In order for Posthog to work well there are a couple of values we need you to provide, here's an example `values.yaml` file that you should fill with your info. Specifically we'll need
-1. domain (a free option is available via (freenom)[https://www.freenom.com]
+1. domain (a free option is available via [freenom](https://www.freenom.com))
 2. email user and pass for outgoing emails (e.g. password reset)
 
 ```yaml
@@ -62,6 +60,8 @@ Now that we have Posthog running we'll need to update the DNS to link your domai
 kubectl get svc posthog-ingress-nginx-controller -n posthog
 ```
 Update DNS records to link to the external IP and you should be able to connect to posthog from your hostname.
+<br />
+<br />
 
 ## Deploying Posthog backed by Postgres
 
