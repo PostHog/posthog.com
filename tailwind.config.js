@@ -107,6 +107,8 @@ module.exports = {
             },
             borderWidth: {
                 3: '3px',
+                8: '8px',
+                12: '12px',
                 16: '16px',
             },
             padding: {

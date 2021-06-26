@@ -6,6 +6,12 @@
     background: linear-gradient(180deg, #3f086d 0%, #32134e 100%);
     border-radius: 20px;
 
+    // @apply mb-2 md:mb-0
+    margin-bottom: 2em;
+    @media (min-width: 768px) {
+        margin-bottom: 0;
+    }
+
     .reversed {
         display: flex;
         flex-direction: column-reverse;
@@ -17,19 +23,20 @@
 }
 
 .features-grid {
-    display: grid;
-    grid-template-areas:
-        'open-source open-source'
-        'event-autocapture dashboards'
-        'data-in-out data-in-out'
-        'hosting-flexibility hosting-flexibility'
-        'data-privacy api';
+    @media (min-width: 768px) {
+        grid-template-areas:
+            'open-source open-source'
+            'event-autocapture dashboards'
+            'data-in-out data-in-out'
+            'hosting-flexibility hosting-flexibility'
+            'data-privacy api';
+    }
 
     .feature-open-source {
         grid-area: open-source;
 
         // override global height set for all images
-        .h-48 {
+        .md\:h-48 {
             height: auto;
         }
     }

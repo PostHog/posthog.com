@@ -25,7 +25,7 @@ function ProductPage() {
                 bgColor="navy"
             />
 
-            <div className="features-grid grid grid-cols-2 gap-6 justify-between bg-purple p-4">
+            <div className="features-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
                 <div className="productFeature text-white text-center feature-open-source">
                     <ProductFeature
                         layout="reversed"
@@ -35,7 +35,7 @@ function ProductPage() {
                         description="Check out our source code, request new features or get involved with the product directly."
                         docsUrl="#"
                         image={`${imageOpenSource}`}
-                        imageClasses="max-w-screen-md -mb-16 border-white border-16 border-solid rounded-tl-3xl rounded-tr-3xl"
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
                 </div>
@@ -67,7 +67,7 @@ function ProductPage() {
                 </div>
 
                 <div className="productFeature text-white text-center feature-data-in-out">
-                    <div className="grid grid-cols-2 gap-3 text-white py-12 px-8 relative">
+                    <div className="md:grid grid-cols-2 gap-3 text-white py-12 px-8 relative">
                         <ProductFeature
                             layout="standard"
                             featureIcon=""
@@ -88,7 +88,7 @@ function ProductPage() {
                             classes=""
                         />
                     </div>
-                    <div className="-mt-16 mx-12 mb-12">
+                    <div className="-mt-16 mx-12 mb-12 flex justify-center">
                         <img src={imageDataInOut} />
                     </div>
                 </div>
@@ -98,7 +98,7 @@ function ProductPage() {
                         <div>(i)</div>
                         <div className="font-bold text-pink">Hosting flexibility</div>
                     </div>
-                    <div className="grid grid-cols-3 text-white">
+                    <div className="md:grid grid-cols-3 text-white">
                         <ProductFeature
                             layout="standard"
                             title="Managed cloud hosting"
