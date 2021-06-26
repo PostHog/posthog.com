@@ -52,6 +52,7 @@ module.exports = {
         },
         backgroundColor: (theme) => ({
             purple: '#2A0B46',
+            white: '#fff',
         }),
         extend: {
             fontFamily: {
@@ -95,6 +96,7 @@ module.exports = {
                 'royal-blue': '#232D69',
                 yellow: '#F7A501',
                 footer: '#08042f',
+                pink: '#A970DC',
             },
             minHeight: {
                 780: '780px',
