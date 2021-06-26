@@ -107,6 +107,7 @@ module.exports = {
             },
             borderWidth: {
                 3: '3px',
+                16: '16px',
             },
             padding: {
                 'fluid-video': '56.25%',

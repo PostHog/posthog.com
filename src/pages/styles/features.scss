@@ -9,6 +9,10 @@
     .reversed {
         display: flex;
         flex-direction: column-reverse;
+
+        figure {
+            margin-top: 3em;
+        }
     }
 }
 
@@ -23,6 +27,11 @@
 
     .feature-open-source {
         grid-area: open-source;
+
+        // override global height set for all images
+        .h-48 {
+            height: auto;
+        }
     }
 
     .feature-event-autocapture {

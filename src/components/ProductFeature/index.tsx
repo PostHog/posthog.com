@@ -9,11 +9,11 @@ interface ProductFeatureProps {
     description: string
     docsUrl: string
     image?: string
+    imageClasses?: string
     bgImage?: string
 }
 
 export const ProductFeature = ({
-    gridArea,
     layout,
     featureName,
     featureIcon,
@@ -21,22 +21,25 @@ export const ProductFeature = ({
     description,
     docsUrl,
     image,
+    imageClasses,
     bgImage,
     bgColor = 'navy',
 }: ProductFeatureProps) => {
     // const backgroundColorClass = `bg-${bgColor}`
     return (
-        <div className={`py-6 px-4 ${layout} ${gridArea}`}>
+        <div className={`py-12 px-8 ${layout}`}>
             {/* only render if {image} exists */}
-            <figure className="flex justify-center">
-                <img src="{image}" />
+            <figure className="flex justify-center items-center h-48">
+                <img src={`${image}`} className={imageClasses} style={{ height: 'max-content' }} />
             </figure>
 
             <div>
-                <div className="flex justify-center items-center gap-4 mb-2">
+                {/* only render if featureName exists */}
+                <div className="flex justify-center items-center gap-2 mb-2">
                     <div>{featureIcon}</div>
                     <div className="font-bold text-pink">{featureName}</div>
                 </div>
+
                 <h3 className="mb-2 font-osiris font-normal text-2xl">{title}</h3>
                 <div className="text-white text-opacity-70">
                     <p>{description}</p>
