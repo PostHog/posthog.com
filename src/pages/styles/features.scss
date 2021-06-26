@@ -2,7 +2,7 @@
 
 // NEW (2021)
 
-.productFeature {
+.product-feature {
     background: linear-gradient(180deg, #3f086d 0%, #32134e 100%);
     border-radius: 20px;
 
@@ -18,6 +18,13 @@
 
         figure {
             margin-top: 3em;
+        }
+    }
+
+    .feature-name {
+        img {
+            height: 18px;
+            width: 18px;
         }
     }
 }

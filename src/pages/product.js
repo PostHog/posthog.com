@@ -7,12 +7,14 @@ import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 
-import imageOpenSource from '../images/features/screenshot-dashboard@2x.png'
-import imageAutocapture from '../images/features/feature-event-autocapture.svg'
-import imageDashboards from '../images/features/feature-dashboards.svg'
-import imageDataInOut from '../images/features/feature-data-in-out.svg'
-import imageApi from '../images/features/feature-api.svg'
-import imageDataPrivacy from '../images/features/feature-data-privacy.svg'
+import imageOpenSource from '../components/productFeature/images/screenshot-dashboard@2x.png'
+import imageAutocapture from '../components/productFeature/images/feature-event-autocapture.svg'
+import imageDashboards from '../components/productFeature/images/feature-dashboards.svg'
+import imageDataInOut from '../components/productFeature/images/feature-data-in-out.svg'
+import imageApi from '../components/productFeature/images/feature-api.svg'
+import imageDataPrivacy from '../components/productFeature/images/feature-data-privacy.svg'
+
+import iconOpenSource from '../components/productFeature/images/icons/open-source.svg'
 
 function ProductPage() {
     return (
@@ -26,10 +28,10 @@ function ProductPage() {
             />
 
             <div className="features-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
-                <div className="productFeature text-white text-center feature-open-source">
+                <div className="product-feature text-white text-center feature-open-source">
                     <ProductFeature
                         layout="reversed"
-                        featureIcon=""
+                        featureIcon={`${iconOpenSource}`}
                         featureName="Open source"
                         title="Open source product analytics"
                         description="Check out our source code, request new features or get involved with the product directly."
@@ -40,7 +42,7 @@ function ProductPage() {
                     />
                 </div>
 
-                <div className="productFeature text-white text-center feature-event-autocapture">
+                <div className="product-feature text-white text-center feature-event-autocapture">
                     <ProductFeature
                         layout="standard"
                         featureIcon=""
@@ -53,7 +55,7 @@ function ProductPage() {
                     />
                 </div>
 
-                <div className="productFeature text-white text-center feature-dashboards">
+                <div className="product-feature text-white text-center feature-dashboards">
                     <ProductFeature
                         layout="standard"
                         featureIcon=""
@@ -66,7 +68,7 @@ function ProductPage() {
                     />
                 </div>
 
-                <div className="productFeature text-white text-center feature-data-in-out">
+                <div className="product-feature text-white text-center feature-data-in-out">
                     <div className="md:grid grid-cols-2 gap-3 text-white py-12 px-8 relative">
                         <ProductFeature
                             layout="standard"
@@ -93,7 +95,7 @@ function ProductPage() {
                     </div>
                 </div>
 
-                <div className="productFeature text-white text-center feature-hosting-flexibility py-12 px-4">
+                <div className="product-feature text-white text-center feature-hosting-flexibility py-12 px-4">
                     <div className="flex justify-center items-center gap-2 mb-2">
                         <div>(i)</div>
                         <div className="font-bold text-pink">Hosting flexibility</div>
@@ -127,7 +129,7 @@ function ProductPage() {
                     </div>
                 </div>
 
-                <div className="productFeature text-white text-center feature-data-privacy">
+                <div className="product-feature text-white text-center feature-data-privacy">
                     <ProductFeature
                         layout="standard"
                         featureIcon=""
@@ -140,7 +142,7 @@ function ProductPage() {
                     />
                 </div>
 
-                <div className="productFeature text-white text-center feature-api">
+                <div className="product-feature text-white text-center feature-api">
                     <ProductFeature
                         layout="standard"
                         featureIcon=""

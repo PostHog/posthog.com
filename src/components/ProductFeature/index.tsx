@@ -35,12 +35,12 @@ export const ProductFeature = ({
 
             <div>
                 {/* only render if featureName exists */}
-                <div className="flex justify-center items-center gap-2 mb-2">
-                    <div>{featureIcon}</div>
+                <div className="feature-name flex justify-center items-center gap-2 mb-2">
+                    <img src={`${featureIcon}`} alt={`${featureName} icon`} />
                     <div className="font-bold text-pink">{featureName}</div>
                 </div>
 
-                <h3 className="mb-2 font-osiris font-normal text-2xl">{title}</h3>
+                <h3 className="mb-2 font-osiris font-normal text-2xl lowercase">{title}</h3>
                 <div className="text-white text-opacity-70">
                     <p>{description}</p>
                 </div>
