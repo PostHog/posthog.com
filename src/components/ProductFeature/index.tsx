@@ -27,7 +27,7 @@ export const ProductFeature = ({
 }: ProductFeatureProps) => {
     // const backgroundColorClass = `bg-${bgColor}`
     return (
-        <div className={`py-12 px-8 ${layout}`}>
+        <div className={`py-12 px-8 ${layout}`} style={{ backgroundImage: '' }}>
             {/* only render if {image} exists */}
             <figure className="flex justify-center items-center md:h-48">
                 <img src={`${image}`} className={imageClasses} style={{ height: 'max-content' }} />
