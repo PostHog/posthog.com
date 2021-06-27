@@ -15,6 +15,13 @@ import imageApi from '../components/productFeature/images/feature-api.svg'
 import imageDataPrivacy from '../components/productFeature/images/feature-data-privacy.svg'
 
 import iconOpenSource from '../components/productFeature/images/icons/open-source.svg'
+import iconEventAutocapture from '../components/productFeature/images/icons/event-autocapture.svg'
+import iconDashboards from '../components/productFeature/images/icons/dashboards.svg'
+import iconDataPipelines from '../components/productFeature/images/icons/data-pipelines.svg'
+import iconDataWarehouse from '../components/productFeature/images/icons/data-warehouse.svg'
+import iconHostingFlexibility from '../components/productFeature/images/icons/hosting-flexibility.svg'
+import iconDataPrivacy from '../components/productFeature/images/icons/data-privacy.svg'
+import iconApi from '../components/productFeature/images/icons/api.svg'
 
 function ProductPage() {
     return (
@@ -45,7 +52,7 @@ function ProductPage() {
                 <div className="product-feature text-white text-center feature-event-autocapture">
                     <ProductFeature
                         layout="standard"
-                        featureIcon=""
+                        featureIcon={`${iconEventAutocapture}`}
                         featureName="Event autocapture"
                         title="Track events automatically"
                         description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
@@ -58,7 +65,7 @@ function ProductPage() {
                 <div className="product-feature text-white text-center feature-dashboards">
                     <ProductFeature
                         layout="standard"
-                        featureIcon=""
+                        featureIcon={`${iconDashboards}`}
                         featureName="Dashboards"
                         title="Monitor core metrics"
                         description="Build dashboards with everyday metrics like sign-ups, purchases and conversions."
@@ -72,20 +79,20 @@ function ProductPage() {
                     <div className="md:grid grid-cols-2 gap-3 text-white py-12 px-8 relative">
                         <ProductFeature
                             layout="standard"
-                            featureIcon=""
-                            featureName="Export to data warehouse"
-                            title="Normalize & push data anywhere"
-                            description="Move data through PostHog to BigQuery, S3, Snowflake, or Redshift."
+                            featureIcon={`${iconDataPipelines}`}
+                            featureName="Data pipelines"
+                            title="Ingest data from multiple sources"
+                            description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
                             docsUrl="#"
                             classes=""
                         />
 
                         <ProductFeature
                             layout="standard"
-                            featureIcon=""
-                            featureName="Data pipelines"
-                            title="Ingest data from multiple sources"
-                            description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
+                            featureIcon={`${iconDataWarehouse}`}
+                            featureName="Export to data warehouse"
+                            title="Normalize & push data anywhere"
+                            description="Move data through PostHog to BigQuery, S3, Snowflake, or Redshift."
                             docsUrl="#"
                             classes=""
                         />
@@ -96,8 +103,8 @@ function ProductPage() {
                 </div>
 
                 <div className="product-feature text-white text-center feature-hosting-flexibility py-12 px-4">
-                    <div className="flex justify-center items-center gap-2 mb-2">
-                        <div>(i)</div>
+                    <div className="feature-name flex justify-center items-center gap-2 mb-2">
+                        <img src={`${iconHostingFlexibility}`} alt="Hosting flexibility icon" />
                         <div className="font-bold text-pink">Hosting flexibility</div>
                     </div>
                     <div className="md:grid grid-cols-3 text-white">
@@ -132,7 +139,7 @@ function ProductPage() {
                 <div className="product-feature text-white text-center feature-data-privacy">
                     <ProductFeature
                         layout="standard"
-                        featureIcon=""
+                        featureIcon={`${iconDataPrivacy}`}
                         featureName="Data privacy"
                         title="Compliance-friendly"
                         description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
@@ -145,7 +152,7 @@ function ProductPage() {
                 <div className="product-feature text-white text-center feature-api">
                     <ProductFeature
                         layout="standard"
-                        featureIcon=""
+                        featureIcon={`${iconApi}`}
                         featureName="API"
                         title="Full access to your data"
                         description="<p>Our API and direct SQL access allow full access to your production instance.</p><p>Another paragraph!</p>"
