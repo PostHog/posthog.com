@@ -62,13 +62,13 @@ This means that it doesn't matter what your stack is - you can use PostHog with 
 
 Yes. We are in very [active development](https://github.com/PostHog/posthog/graphs/commit-activity). 
 
-PostHog is a [well-funded](/handbook/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/handbook/company/team) and our active community.
+PostHog is a [well-funded](/handbook/strategy/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/handbook/company/team) and our active community.
 
 ## About the Software
 
 ### How popular is the software?
 
-Very. We have thousands of users, over [3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/investors).
+Very. We have thousands of users, over [3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/strategy/investors).
 
 ### Is the software updated regularly?
 
