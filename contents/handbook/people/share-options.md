@@ -34,6 +34,9 @@ These can be financially very lucrative, because PostHog will give you the oppor
  
 This simply means you decide to buy the shares at the price agreed in your option agreement. You should be careful here, as you may have personal tax implications in doing this. For this reason, most people only do this at the time of an exit event, i.e. sale to another company or going public. 
 
+### What are my share options actually worth?
+
+You can use [this handy calculator](https://docs.google.com/spreadsheets/d/1mj-5Uy3IB5I09ml-zFH9VXxssqfGUgif1SURcsTFZRU/edit?usp=sharing) to find out, as well as to model what they might be worth in the future. You'll need to make a copy first, and be signed in with your PostHog email address. 
  
 ### What if I leave PostHog before this exit event happens?
  

@@ -62,17 +62,17 @@ This means that it doesn't matter what your stack is - you can use PostHog with 
 
 Yes. We are in very [active development](https://github.com/PostHog/posthog/graphs/commit-activity). 
 
-PostHog is a [well-funded](/handbook/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/handbook/company/team) and our active community.
+PostHog is a [well-funded](/handbook/strategy/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/handbook/company/team) and our active community.
 
 ## About the Software
 
 ### How popular is the software?
 
-Very. We have thousands of users, over [3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/investors).
+Very. We have thousands of users, over [3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/strategy/investors).
 
 ### Is the software updated regularly?
 
-Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](docs/upgrading-posthog), and the software will alert you to new updates within the application.
+Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/configuring-posthog/upgrading-posthog), and the software will alert you to new updates within the application.
 
 Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) or join our [Slack](/slack) to keep up with our latest features.
 
@@ -118,7 +118,7 @@ Want to set it up differently? [Raise an issue](https://github.com/PostHog/posth
 
 ### Will this scale?
 
-Yes. Check out [Scaling PostHog](docs/configuring-posthog/scaling-posthog) for more information on this.
+Yes. Check out [Scaling PostHog](/docs/configuring-posthog/scaling-posthog) for more information on this.
 
 ### Is there an enterprise offering?
 

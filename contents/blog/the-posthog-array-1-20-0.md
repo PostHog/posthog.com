@@ -178,7 +178,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Instrument toolbar [\#2859](https://github.com/PostHog/posthog/pull/2859) ([paolodamico](https://github.com/paolodamico))
 - Add missing paths viz condition [\#2858](https://github.com/PostHog/posthog/pull/2858) ([EDsCODE](https://github.com/EDsCODE))
 - Fix bug from query-selector-shadow-dom update [\#2856](https://github.com/PostHog/posthog/pull/2856) ([mariusandra](https://github.com/mariusandra))
-- Clickhouse caching [\#2855](https://github.com/PostHog/posthog/pull/2855) ([EDsCODE](https://github.com/EDsCODE))
+- ClickHouse caching [\#2855](https://github.com/PostHog/posthog/pull/2855) ([EDsCODE](https://github.com/EDsCODE))
 - Custom NPM packages under @posthog [\#2854](https://github.com/PostHog/posthog/pull/2854) ([mariusandra](https://github.com/mariusandra))
 - Index session recording events by team\_id, timestamp [\#2853](https://github.com/PostHog/posthog/pull/2853) ([macobo](https://github.com/macobo))
 - Plugin storage model [\#2852](https://github.com/PostHog/posthog/pull/2852) ([mariusandra](https://github.com/mariusandra))

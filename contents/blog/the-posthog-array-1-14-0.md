@@ -131,7 +131,7 @@ Based on user feedback, we determined that it was essential to allow multiple te
 
 ## PostHog News
 
-We made a significant progress with our migration to Clickhouse on the Enterprise Edition. Stay tuned for more news about this.
+We made a significant progress with our migration to ClickHouse on the Enterprise Edition. Stay tuned for more news about this.
 
 Two of our engineers, Marius and Karl, have welcomed a new member into their families! We wish them and their families all the best. 
 
