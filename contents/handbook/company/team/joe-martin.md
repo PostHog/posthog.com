@@ -10,7 +10,7 @@ I'm engaged and live just outside of London. I'm passionate about punk music, vi
 - I can help you figure out the right way to communicate something, to anyone, no matter how technical. 
 - I can help you with a broad range of marketing tasks, including sales enablement. 
 - I can help you understand our customers, our competitors or the press. 
-- I can help with literally anything involving writng, editing or proof-reading. 
+- I can help with literally anything involving writing, editing or proof-reading. 
 - I can help you find new videogames to play.
 
 # How to work with me
