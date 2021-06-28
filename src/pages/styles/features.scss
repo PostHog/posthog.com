@@ -30,13 +30,30 @@
 }
 
 .features-grid {
-    @media (min-width: 768px) {
-        grid-template-areas:
-            'open-source open-source'
-            'event-autocapture dashboards'
-            'data-in-out data-in-out'
-            'hosting-flexibility hosting-flexibility'
-            'data-privacy api';
+    &.two-column-grid {
+        @media (min-width: 768px) {
+            grid-template-areas:
+                'open-source open-source'
+                'event-autocapture dashboards'
+                'data-in-out data-in-out'
+                'hosting-flexibility hosting-flexibility'
+                'data-privacy api'
+                'trends trends'
+                'funnels paths'
+                'cohorts paths'
+                'user-sessions user-sessions'
+                'retention revenue-tracking';
+        }
+    }
+
+    &.three-column-grid {
+        @media (min-width: 768px) {
+            grid-template-areas:
+                'feature-flags feature-flags annotations'
+                'heatmaps session-recordings session-recordings'
+                'data-export data-export data-filtering'
+                'custom-plugins data-enrichment data-enrichment';
+        }
     }
 
     .feature-open-source {
@@ -51,25 +68,68 @@
     .feature-event-autocapture {
         grid-area: event-autocapture;
     }
-
     .feature-dashboards {
         grid-area: dashboards;
     }
-
     .feature-data-in-out {
         grid-area: data-in-out;
     }
-
     .feature-hosting-flexibility {
         grid-area: hosting-flexibility;
     }
-
     .feature-data-privacy {
         grid-area: data-privacy;
     }
-
     .feature-api {
         grid-area: api;
+    }
+
+    .feature-trends {
+        grid-area: trends;
+    }
+    .feature-funnels {
+        grid-area: funnels;
+    }
+    .feature-paths {
+        grid-area: paths;
+    }
+    .feature-cohorts {
+        grid-area: cohorts;
+    }
+    .feature-user-sessions {
+        grid-area: user-sessions;
+    }
+    .feature-retention {
+        grid-area: retention;
+    }
+    .feature-revenue-tracking {
+        grid-area: revenue-tracking;
+    }
+
+    .feature-feature-flags {
+        grid-area: feature-flags;
+    }
+    .feature-annotations {
+        grid-area: annotations;
+    }
+    .feature-heatmaps {
+        grid-area: heatmaps;
+    }
+    .feature-session-recordings {
+        grid-area: session-recordings;
+    }
+
+    .feature-data-export {
+        grid-area: data-export;
+    }
+    .feature-data-filtering {
+        grid-area: data-filtering;
+    }
+    .feature-custom-plugins {
+        grid-area: custom-plugins;
+    }
+    .feature-data-enrichment {
+        grid-area: data-enrichment;
     }
 }
 

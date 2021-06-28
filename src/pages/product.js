@@ -14,6 +14,27 @@ import imageDataInOut from '../components/productFeature/images/feature-data-in-
 import imageApi from '../components/productFeature/images/feature-api.svg'
 import imageDataPrivacy from '../components/productFeature/images/feature-data-privacy.svg'
 
+import imageTrends from '../components/productFeature/images/feature-trends@2x.png'
+import imageFunnels from '../components/productFeature/images/placeholder@2x.png'
+import imagePaths from '../components/productFeature/images/feature-paths@2x.png'
+import imageCohorts from '../components/productFeature/images/feature-cohorts@2x.png'
+import imageUserSessions from '../components/productFeature/images/feature-user-sessions@2x.png'
+import imageRetention from '../components/productFeature/images/feature-retention@2x.png'
+import imageRevenueTracking from '../components/productFeature/images/feature-revenue-tracking@2x.png'
+
+// import imageFeatureFlags from '../components/productFeature/images/feature-feature-flags.svg'
+// import imageAnnotations from '../components/productFeature/images/feature-annotations.svg'
+// import imageHeatmaps from '../components/productFeature/images/feature-heatmaps.svg'
+// import imageSessionRecordings from '../components/productFeature/images/feature-session-recordings.svg'
+
+import imageFeatureFlags from '../components/productFeature/images/placeholder@2x.png'
+import imageAnnotations from '../components/productFeature/images/placeholder@2x.png'
+import imageHeatmaps from '../components/productFeature/images/placeholder@2x.png'
+import imageSessionRecordings from '../components/productFeature/images/placeholder@2x.png'
+
+import imageDataFiltering from '../components/productFeature/images/feature-data-filtering.svg'
+import imageCustomPlugins from '../components/productFeature/images/feature-custom-plugins.svg'
+
 import iconOpenSource from '../components/productFeature/images/icons/open-source.svg'
 import iconEventAutocapture from '../components/productFeature/images/icons/event-autocapture.svg'
 import iconDashboards from '../components/productFeature/images/icons/dashboards.svg'
@@ -22,6 +43,24 @@ import iconDataWarehouse from '../components/productFeature/images/icons/data-wa
 import iconHostingFlexibility from '../components/productFeature/images/icons/hosting-flexibility.svg'
 import iconDataPrivacy from '../components/productFeature/images/icons/data-privacy.svg'
 import iconApi from '../components/productFeature/images/icons/api.svg'
+
+import iconTrends from '../components/productFeature/images/icons/trends.svg'
+import iconFunnels from '../components/productFeature/images/icons/funnels.svg'
+import iconPaths from '../components/productFeature/images/icons/paths.svg'
+import iconCohorts from '../components/productFeature/images/icons/cohorts.svg'
+import iconUserSessions from '../components/productFeature/images/icons/user-sessions.svg'
+import iconRetention from '../components/productFeature/images/icons/retention.svg'
+import iconRevenueTracking from '../components/productFeature/images/icons/revenue-tracking.svg'
+
+import iconFeatureFlags from '../components/productFeature/images/icons/feature-flags.svg'
+import iconAnnotations from '../components/productFeature/images/icons/annotations.svg'
+import iconHeatmaps from '../components/productFeature/images/icons/heatmaps.svg'
+import iconSessionRecordings from '../components/productFeature/images/icons/session-recordings.svg'
+
+import iconDataExport from '../components/productFeature/images/icons/data-export.svg'
+import iconDataFiltering from '../components/productFeature/images/icons/data-filtering.svg'
+import iconCustomPlugins from '../components/productFeature/images/icons/custom-plugins.svg'
+import iconDataEnrichment from '../components/productFeature/images/icons/data-enrichment.svg'
 
 function ProductPage() {
     return (
@@ -34,7 +73,7 @@ function ProductPage() {
                 bgColor="navy"
             />
 
-            <div className="features-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
+            <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
                 <div className="product-feature text-white text-center feature-open-source">
                     <ProductFeature
                         layout="reversed"
@@ -182,8 +221,210 @@ function ProductPage() {
                         classes=""
                     />
                 </div>
+
+                <div className="product-feature text-white text-center feature-trends">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconTrends}`}
+                        featureName="Trends"
+                        title="Monitor engagement. <br />Create actionable insights."
+                        description="<p>2 columns of text with HTML</p>"
+                        docsUrl="#"
+                        image={`${imageTrends}`}
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-funnels">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconFunnels}`}
+                        featureName="Funnels"
+                        title="Identify <strike>dropoff</strike> opportunity"
+                        description="<p>Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment.</p>"
+                        docsUrl="#"
+                        backgroundImage={`${imageFunnels}`}
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-paths">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconPaths}`}
+                        featureName="Paths"
+                        title="Visualize how traffic flows"
+                        description="<p>See common user paths and discover how visitors arrived at their outcome.</p>"
+                        docsUrl="#"
+                        image={`${imagePaths}`}
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-cohorts">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconCohorts}`}
+                        featureName="Cohorts"
+                        title="Insights by association"
+                        description="<p>Use common traits to identify inflection points.</p>"
+                        docsUrl="#"
+                        image={`${imageCohorts}`}
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-user-sessions">
+                    <ProductFeature
+                        layout="standard"
+                        featureIcon={`${iconUserSessions}`}
+                        featureName="User sessions"
+                        title="See a timeline of a user's activity"
+                        description="<p>User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context.</p>"
+                        docsUrl="#"
+                        image={`${imageUserSessions}`}
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-retention">
+                    <ProductFeature
+                        layout="standard"
+                        featureIcon={`${iconRetention}`}
+                        featureName="Retention"
+                        title="Group users by lifecycle"
+                        description="<p>Drill down into activity of individual users within a cohort. Further break down a bucket of users to identify root causes of behavior.</p>"
+                        docsUrl="#"
+                        image={`${imageRetention}`}
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-revenue-tracking">
+                    <ProductFeature
+                        layout="standard"
+                        featureIcon={`${iconRevenueTracking}`}
+                        featureName="Revenue tracking"
+                        title="KPIs by LTV"
+                        description="<p>By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon.</p>"
+                        docsUrl="#"
+                        image={`${imageRevenueTracking}`}
+                        classes=""
+                    />
+                </div>
             </div>
 
+            <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
+                <div className="product-feature text-white text-center feature-feature-flags">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconFeatureFlags}`}
+                        featureName="Feature flags"
+                        title="Roll out features strategically"
+                        description="Toggle features for cohorts or individuals to test the impact."
+                        docsUrl="#"
+                        image={`${imageFeatureFlags}`}
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-annotations">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconAnnotations}`}
+                        featureName="Annotations"
+                        title="“Why did our traffic spike?”"
+                        description="Mark new releases and more in your data, so you can understand their impact later."
+                        docsUrl="#"
+                        image={`${imageAnnotations}`}
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-heatmaps">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconHeatmaps}`}
+                        featureName="Heatmaps"
+                        title="Visualize what’s working"
+                        description="Trace every click and see what catches users attention."
+                        docsUrl="#"
+                        image={`${imageHeatmaps}`}
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-session-recordings">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconSessionRecordings}`}
+                        featureName="Session recordings"
+                        title="See customers using your product"
+                        description="Watch exactly what users are doing without infringing their privacy."
+                        docsUrl="#"
+                        image={`${imageSessionRecordings}`}
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-data-export">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconDataExport}`}
+                        featureName="Data export"
+                        title="Send data where you need it"
+                        description="Export data for long-term storage or make your customer data available in other tools. list of integrations here"
+                        docsUrl="#"
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-data-filtering">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconDataFiltering}`}
+                        featureName="Data filtering"
+                        title="Whip that data into shape"
+                        description="Enforce schemas, parse data based on fields, and standardise taxonomies."
+                        docsUrl="#"
+                        image={`${imageDataFiltering}`}
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-custom-plugins">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconCustomPlugins}`}
+                        featureName="Custom plugins"
+                        title="Create your own plugins"
+                        description="Our APIs make it easy to access your data to use it however you need it."
+                        docsUrl="#"
+                        image={`${imageCustomPlugins}`}
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+
+                <div className="product-feature text-white text-center feature-data-enrichment">
+                    <ProductFeature
+                        layout="reversed"
+                        featureIcon={`${iconDataEnrichment}`}
+                        featureName="Data enrichment"
+                        title="Enrich your data with external signals"
+                        description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why. grid of sources goes here"
+                        docsUrl="#"
+                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        classes=""
+                    />
+                </div>
+            </div>
             <FeaturesNav />
             <FeaturesComparisonTable />
         </Layout>
