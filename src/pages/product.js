@@ -3,9 +3,12 @@ import './styles/features.scss'
 import Layout from '../components/Layout'
 import { PageHeader } from '../components/PageHeader'
 import { ProductFeature } from '../components/ProductFeature'
+import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
+
+import heroAnimation from '../components/productFeature/images/hero.svg'
 
 import imageOpenSource from '../components/productFeature/images/screenshot-dashboard@2x.png'
 import imageAutocapture from '../components/productFeature/images/feature-event-autocapture.svg'
@@ -72,6 +75,8 @@ function ProductPage() {
                 styleKey="productFeatures"
                 bgColor="navy"
             />
+
+            {`${heroAnimation}`}
 
             <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
                 <div className="product-feature text-white text-center feature-open-source">
@@ -402,6 +407,14 @@ function ProductPage() {
                         imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
+
+                    <ul className="grid grid-cols-4 gap-4 p-0 list-none text-center">
+                        <ProductFeaturePlugin name="S3" handle="s3" />
+                        <ProductFeaturePlugin name="PostgreSQL" handle="postgresql" />
+                        <ProductFeaturePlugin name="BigQuery" handle="bigquery" />
+                        <ProductFeaturePlugin name="Redshift" handle="redshift" />
+                        <ProductFeaturePlugin name="Snowflake" handle="snowflake" />
+                    </ul>
                 </div>
             </div>
             <FeaturesNav />
