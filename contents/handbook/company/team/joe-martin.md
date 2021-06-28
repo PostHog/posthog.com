@@ -14,7 +14,7 @@ I'm engaged and live just outside of London. I'm passionate about punk music, vi
 - I can help you find new videogames to play.
 
 # How to work with me
-- In meetings I default to listening, rather than speaking. Its rare for me to interupt, so you may need to ask me for my thoughts if you want them.
+- In meetings I default to listening, rather than speaking. Its rare for me to interrupt, so you may need to ask me for my thoughts if you want them.
 - I fidget constantly, often without realising it. If it bothers you then please let me know. 
 - I'll sometimes repeat things back to you ('_It sounds like..._') to make sure I understand. If I'm wrong, I need you to tell me. 
 - I'm truly uncomfortable with public praise or attention. A private thanks is better than a spotlight.
