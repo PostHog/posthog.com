@@ -32,7 +32,7 @@ Todo: organize the blog post ideas into topic categories and priority list.
 Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) with the following content:
 
 - With a new Markdown file (md, mdx) in `/contents/blog/`
-- Any assets [optimized](/docs/updating-documentation) and added to a new folder under `contents/images/blog/`
+- Any assets [optimized](/docs/contributing/updating-documentation) and added to a new folder under `contents/images/blog/`
 - Each post should have a `featuredImage`. (Team Design will create it at `1200x630` and optimize it for you.) Request one using our [Design Request](https://posthog.com/handbook/company/working-with-design) process, then be sure to add the asset as described above after the image is added to your issue.
 - The post added to relevant sidebar in `src/sidebars/sidebars.json`
 - Add the author of the post ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)

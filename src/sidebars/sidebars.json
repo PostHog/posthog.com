@@ -33,11 +33,11 @@
         "name": "Contributing",
         "items": [
             "docs/contributing",
-            "docs/recognizing-contributions",
-            "docs/developing-locally",
-            "docs/stack",
-            "docs/project-structure",
-            "docs/updating-documentation"
+            "docs/contributing/recognizing-contributions",
+            "docs/contributing/developing-locally",
+            "docs/contributing/stack",
+            "docs/contributing/project-structure",
+            "docs/contributing/updating-documentation"
         ]
     },
     {

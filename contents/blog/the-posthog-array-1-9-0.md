@@ -56,7 +56,7 @@ You can now install PostHog in just a click or two via AWS' marketplace.
 
 This is just as easy as Heroku and fractionally less expensive!
 
-### [Develop PostHog with Porter](https://posthog.com/docs/developing-locally#using-porter)
+### [Develop PostHog with Porter](https://posthog.com/docs/contributing/developing-locally#using-porter)
 
 This was an amazing PR to receive - you can now developer PostHog in the cloud, using Porter. Thank you to [Porter's team](https://getporter.dev/) for doing the work here. 
 
