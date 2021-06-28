@@ -4,11 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-<HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen>
+<HiddenSection headingType='h2' className="post-toc-anchor" title='Using virtualenv' defaultIsOpen>
 
 > **Note:** If you're using the latest generation MacBooks (M1) have a look [at this issue](https://github.com/PostHog/posthog/issues/2916) for info on how to run PostHog.
 
-#### Clone PostHog
+### Clone PostHog
 
 1. Clone the repository:
 ```bash
@@ -16,9 +16,9 @@ git clone https://github.com/PostHog/posthog
 ```
 2. Make sure you have Python 3.8 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
 
-#### Set up databases
+### Set up databases
 
-<HiddenSection headingType='h5' title='With Docker'>
+<HiddenSection headingType='h4' title='With Docker' id='dbs-with-docker'>
 
 1. Make sure you have Docker and Docker Compose installed
 2. Run:
@@ -32,7 +32,7 @@ docker-compose -f docker-compose.dev.yml up -d redis db
 </HiddenSection>
 
 
-<HiddenSection headingType='h5' title='Without Docker'>
+<HiddenSection headingType='h4' title='Without Docker' id='dbs-without-docker'>
 
 1. Make sure you have [Redis installed](https://redis.io/download) and running. We recommend using version 5 or higher.
 
@@ -63,11 +63,12 @@ docker-compose -f docker-compose.dev.yml up -d redis db
     # createuser is located in /opt/homebrew/bin/createuser
     createuser --superuser postgres
     ```
+
 If you ran `brew link postgresql` upon installation, there should be no need to specify the full path to `createuser`.
 
 </HiddenSection>
 
-#### Running PostHog
+### Running PostHog
 
 1. Navigate into the correct folder (project's root directory):
 ```bash
@@ -165,8 +166,9 @@ docker-compose -f docker-compose.dev.yml up
 </HiddenSection>
 
 
-
 <br /><hr />
+
+## Useful commands
 
 ### Running backend, worker, and frontend all together
 
@@ -196,11 +198,11 @@ Run `./bin/tests`
 
 Run `./bin/e2e-test-runner`
     
-## Debugging the backend in PyCharm
+### Debugging the backend in PyCharm
     
 With [PyCharm's](https://posthog.com/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request. 
     
-### Configuring the debugger
+#### Configuring the debugger
 
 1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
 2. Click Edit Configuration to edit the Django Server configuration you just created.
