@@ -1,6 +1,7 @@
 ---
 date: 2021-05-28
 title: How to turn your engineers into product people
+featuredImage: ../images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
 rootPage: /blog
 sidebar: Blog
 showTitle: true

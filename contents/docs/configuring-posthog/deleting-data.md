@@ -8,10 +8,10 @@ showTitle: true
 
 <br />
 
-To delete bulk data from your database (e.g. all events), the current suggested way is to directly interact with the PostgreSQL or Clickhouse instance and use SQL queries to delete the desired data.
+To delete bulk data from your database (e.g. all events), the current suggested way is to directly interact with the PostgreSQL or ClickHouse instance and use SQL queries to delete the desired data.
 
 * [PostgreSQL Docs](https://www.postgresql.org/docs/8.2/sql-delete.html)
-* [Clickhouse Docs](https://clickhouse.tech/docs/en/sql-reference/statements/alter/delete/)
+* [ClickHouse Docs](https://clickhouse.tech/docs/en/sql-reference/statements/alter/delete/)
 
 Alternatively, one of our [contributors](https://github.com/FUSAKLA/) has suggested the following [Python script](https://gist.github.com/FUSAKLA/3f322d478839cabef7ace64a4be9177a) for deleting data:
 
