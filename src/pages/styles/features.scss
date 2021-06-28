@@ -89,6 +89,18 @@
     }
     .feature-funnels {
         grid-area: funnels;
+
+        position: relative;
+
+        &:before {
+            background: url('../../components/productFeature/images/feature-funnels@2x.png') 0 100% / contain no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
     }
     .feature-paths {
         grid-area: paths;

@@ -18,7 +18,7 @@ import imageApi from '../components/productFeature/images/feature-api.svg'
 import imageDataPrivacy from '../components/productFeature/images/feature-data-privacy.svg'
 
 import imageTrends from '../components/productFeature/images/feature-trends@2x.png'
-import imageFunnels from '../components/productFeature/images/placeholder@2x.png'
+// import imageFunnels from '../components/productFeature/images/feature-funnels@2x.png' imported with css instead
 import imagePaths from '../components/productFeature/images/feature-paths@2x.png'
 import imageCohorts from '../components/productFeature/images/feature-cohorts@2x.png'
 import imageUserSessions from '../components/productFeature/images/feature-user-sessions@2x.png'
@@ -188,6 +188,7 @@ function ProductPage() {
                         title="Compliance-friendly"
                         description="<p>Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around.</p>"
                         docsUrl="#"
+                        figureClasses="md:h-48"
                         image={`${imageDataPrivacy}`}
                         classes=""
                     />
@@ -201,6 +202,7 @@ function ProductPage() {
                         title="Full access to your data"
                         description="<p>Our API and direct SQL access allow full access to your production instance.</p><p>Another paragraph!</p>"
                         docsUrl="#"
+                        figureClasses="md:h-48"
                         image={`${imageApi}`}
                         classes=""
                     />
@@ -212,22 +214,48 @@ function ProductPage() {
                         featureIcon={`${iconTrends}`}
                         featureName="Trends"
                         title="Monitor engagement. <br />Create actionable insights."
-                        description="<p>2 columns of text with HTML</p>"
+                        description="
+                            <div class='md:grid gap-12 grid-cols-2 max-w-screen-md mx-auto mt-8 mb-4'>
+                                <div>
+                                    <strong class='text-white'>Segmentation</strong>
+                                    <p class='text-sm'>Monitor the impact of product changes - by customer plan, traffic source, or any other user property.</p>
+                                </div>
+                                <div>
+                                    <strong class='text-white'>Annotations</strong>
+                                    <p class='text-sm'>No longer will ask, “Why did this chart spike?”
+                                    App-wide annotations provide context to the data you’re analyzing.</p>
+                                </div>
+                            </div>
+                        "
                         docsUrl="#"
                         image={`${imageTrends}`}
+                        imageWidth="1051"
+                        imageHeight="576"
+                        imageClasses="w-full max-w-screen-md -mb-16  rounded-tl-xl rounded-tr-xl "
                         classes=""
                     />
                 </div>
 
                 <div className="product-feature text-white text-center feature-funnels">
+                    {/*
+                    style={{  
+                        backgroundImage: "url(" + `${imageFunnels}` + ")",
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        display: 'flex',
+                        alignItems: 'flex-start'
+                    }}
+                    */}
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconFunnels}`}
                         featureName="Funnels"
-                        title="Identify <strike>dropoff</strike> opportunity"
+                        title="Identify <strike class='opacity-50'>dropoff</strike> opportunity"
                         description="<p>Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment.</p>"
                         docsUrl="#"
-                        backgroundImage={`${imageFunnels}`}
+                        //bgImage={`${imageFunnels}`}
+                        bgImagePosition="bottom center / 100%"
                         classes=""
                     />
                 </div>
@@ -260,12 +288,13 @@ function ProductPage() {
 
                 <div className="product-feature text-white text-center feature-user-sessions">
                     <ProductFeature
-                        layout="standard"
+                        layout="reversed"
                         featureIcon={`${iconUserSessions}`}
                         featureName="User sessions"
                         title="See a timeline of a user's activity"
                         description="<p>User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context.</p>"
                         docsUrl="#"
+                        figureClasses="-mb-12"
                         image={`${imageUserSessions}`}
                         classes=""
                     />

@@ -2,12 +2,14 @@ import React from 'react'
 
 interface ProductFeatureProps {
     layout?: string
+    classes?: string
     gridArea?: string
     featureName: string
     featureIcon?: string
     title: string
     description: string
     docsUrl?: string
+    figureClasses?: string
     image?: string
     imageClasses?: string
     bgImage?: string
@@ -16,11 +18,13 @@ interface ProductFeatureProps {
 export const ProductFeature = ({
     // bgColor = 'navy',
     layout,
+    classes,
     featureName,
     featureIcon,
     title,
     description,
     docsUrl,
+    figureClasses,
     image,
     imageClasses,
     bgImage,
@@ -28,11 +32,11 @@ export const ProductFeature = ({
     // const backgroundColorClass = `bg-${bgColor}`
     return (
         <div
-            className={`py-12 px-8 ${layout}`}
+            className={`py-12 px-8 ${layout} ${classes}`}
             style={
                 bgImage
                     ? {
-                          background: `url(${bgImage}) no-repeat center center`,
+                          background: `url(${bgImage}) no-repeat`,
                           backgroundSize: 'cover',
                       }
                     : undefined
@@ -40,7 +44,7 @@ export const ProductFeature = ({
         >
             {/* only render if {image} exists */}
             {image && (
-                <figure className="flex justify-center items-center md:h-48">
+                <figure className={`${figureClasses} flex justify-center items-center`}>
                     <img src={`${image}`} className={imageClasses} style={{ height: 'max-content' }} />
                 </figure>
             )}
