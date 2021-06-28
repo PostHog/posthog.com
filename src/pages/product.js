@@ -7,6 +7,9 @@ import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 
+import heroAnimation from '../components/productFeature/images/hero.svg'
+import pluginsSprite from '../components/ProductFeature/images/sprite-plugins.svg'
+
 import imageOpenSource from '../components/productFeature/images/screenshot-dashboard@2x.png'
 import imageAutocapture from '../components/productFeature/images/feature-event-autocapture.svg'
 import imageDashboards from '../components/productFeature/images/feature-dashboards.svg'
@@ -72,6 +75,8 @@ function ProductPage() {
                 styleKey="productFeatures"
                 bgColor="navy"
             />
+
+            {`${heroAnimation}`}
 
             <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
                 <div className="product-feature text-white text-center feature-open-source">
@@ -402,6 +407,18 @@ function ProductPage() {
                         imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
+
+                    <ul className="grid grid-cols-4 gap-4 p-0 list-none text-center">
+                        <li>
+                            <svg
+                                className="icon top-[-113px] width-[32px] height-[32px] mx-auto"
+                                style={{ width: '32px', height: '32px' }}
+                            >
+                                <use href={pluginsSprite + '#plugins-aws'} />
+                            </svg>
+                            <span className="text-white text-opacity-70">S3</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <FeaturesNav />
