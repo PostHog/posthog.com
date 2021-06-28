@@ -1,4 +1,9 @@
-export const librariesList: Record<string, any>[] = [
+interface LibrariesListInterface {
+    name: string
+    path: string
+}
+
+export const librariesList: LibrariesListInterface[] = [
     {
         name: 'JavaScript',
         path: 'PostHog/posthog-js',

@@ -5,6 +5,7 @@ import './style.scss'
 
 interface WorkableWindow extends Window {
     whr_embed: (id: number, options: Record<string, string>) => void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     whr: (document: Document) => any
 }
 

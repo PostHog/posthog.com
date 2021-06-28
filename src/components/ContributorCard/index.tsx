@@ -63,7 +63,7 @@ const ContributorCardStructure = ({
                     <Tag color="transparent" style={{ maxWidth: '30%', position: 'absolute', right: 15, top: 15 }}>
                         <ContributorCardTooltip title={`Community MVP ${mvpWins}x`} pageKey="community-mvps">
                             <h4>
-                                {Array.from({ length: mvpWins }).map((_: any, i: number) => (
+                                {Array.from({ length: mvpWins }).map((_: unknown, i: number) => (
                                     <span key={`trophy_${i}`}>🏆</span>
                                 ))}
                             </h4>

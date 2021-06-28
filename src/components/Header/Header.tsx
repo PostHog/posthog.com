@@ -10,7 +10,7 @@ import './style.scss'
 interface NavbarLinkProps {
     to?: string
     href?: string
-    children: any
+    children: React.ReactNode
     textLight: boolean
     className?: string
 }
@@ -36,7 +36,7 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
     )
 }
 
-const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
+const PrimaryCta = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     const classList = `button-primary ${className} border-none px-4 py-2 ml-4 transition-none hover:transition-none text-xs rounded-sm`
 
     return (

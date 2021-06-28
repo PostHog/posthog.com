@@ -20,7 +20,7 @@ interface MdxQueryData {
     postData: {
         id: string
         slug: string
-        body: any
+        body: string
         excerpt: string
         frontmatter: {
             date: string
