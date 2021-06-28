@@ -52,7 +52,7 @@ _For product managers who need to understand their users, PostHog is the only op
 _Unlike traditional tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._
 
 ## Alternative
-There are some alternative softwares which PostHog's users may consider. We split these into strong (e.g. regularly cited, competitive on multiple features) and weak (e.g. irregularly cited, competitive on few features). 
+There are some alternative software which PostHog's users may consider. We split these into strong (e.g. regularly cited, competitive on multiple features) and weak (e.g. irregularly cited, competitive on few features). 
 
 _Strong:_ Heap Analytics, MixPanel, Amplitude, Pendo
 
