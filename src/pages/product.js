@@ -3,12 +3,12 @@ import './styles/features.scss'
 import Layout from '../components/Layout'
 import { PageHeader } from '../components/PageHeader'
 import { ProductFeature } from '../components/ProductFeature'
+import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 
 import heroAnimation from '../components/productFeature/images/hero.svg'
-import pluginsSprite from '../components/ProductFeature/images/sprite-plugins.svg'
 
 import imageOpenSource from '../components/productFeature/images/screenshot-dashboard@2x.png'
 import imageAutocapture from '../components/productFeature/images/feature-event-autocapture.svg'
@@ -409,15 +409,11 @@ function ProductPage() {
                     />
 
                     <ul className="grid grid-cols-4 gap-4 p-0 list-none text-center">
-                        <li>
-                            <svg
-                                className="icon top-[-113px] width-[32px] height-[32px] mx-auto"
-                                style={{ width: '32px', height: '32px' }}
-                            >
-                                <use href={pluginsSprite + '#plugins-aws'} />
-                            </svg>
-                            <span className="text-white text-opacity-70">S3</span>
-                        </li>
+                        <ProductFeaturePlugin name="S3" handle="s3" />
+                        <ProductFeaturePlugin name="PostgreSQL" handle="postgresql" />
+                        <ProductFeaturePlugin name="BigQuery" handle="bigquery" />
+                        <ProductFeaturePlugin name="Redshift" handle="redshift" />
+                        <ProductFeaturePlugin name="Snowflake" handle="snowflake" />
                     </ul>
                 </div>
             </div>

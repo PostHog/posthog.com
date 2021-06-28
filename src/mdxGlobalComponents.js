@@ -64,6 +64,7 @@ import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { PricingSlider } from './components/PricingSlider'
 import { ProductFeature } from './components/ProductFeature'
+import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
 import { ResponsiveTopBar } from './components/ResponsiveTopBar'
@@ -144,6 +145,7 @@ export const shortcodes = {
     Savings,
     PricingSlider,
     ProductFeature,
+    ProductFeaturePlugin,
     ResponsiveAnchor,
     ResponsiveSidebar,
     ResponsiveTopBar,
