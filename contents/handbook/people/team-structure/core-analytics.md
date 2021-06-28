@@ -7,8 +7,8 @@ hideAnchor: true
 
 ## People
 
-- [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/people/team/#eric-duong-software-engineer)
-- [Buddy Williams, Full Stack Engineer](/handbook/people/team/#buddy-williams-software-engineer)
+- [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team Lead, Full Stack Engineer)
+- [Buddy Williams](/handbook/people/team#buddy-williams-software-engineer) (Full Stack Engineer)
 
 ## Mission
 
