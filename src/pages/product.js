@@ -80,12 +80,7 @@ function ProductPage() {
                         featureIcon={`${iconOpenSource}`}
                         featureName="Open source"
                         title="Open source product analytics"
-                        description={
-                            <p>
-                                Check out our source code, request new features or get involved with the product
-                                directly.
-                            </p>
-                        }
+                        description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
                         docsUrl="#"
                         image={`${imageOpenSource}`}
                         imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
@@ -174,18 +169,7 @@ function ProductPage() {
                         <ProductFeature
                             layout="standard"
                             title="Host on your infrastructure"
-                            description={
-                                <>
-                                    <p>
-                                        Customer data stays on your servers. You’re in total control of your PostHog
-                                        instance.
-                                    </p>
-                                    <p>
-                                        With self-hosting, you can also circumvent ad blockers and browser privacy
-                                        features.
-                                    </p>
-                                </>
-                            }
+                            description="<p>Customer data stays on your servers. You’re in total control of your PostHog instance.</p><p>With self-hosting, you can also circumvent ad blockers and browser privacyfeatures.</p>"
                             classes=""
                         />
                     </div>
@@ -197,7 +181,7 @@ function ProductPage() {
                         featureIcon={`${iconDataPrivacy}`}
                         featureName="Data privacy"
                         title="Compliance-friendly"
-                        description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
+                        description="<p>Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around.</p>"
                         docsUrl="#"
                         image={`${imageDataPrivacy}`}
                         classes=""
@@ -210,12 +194,7 @@ function ProductPage() {
                         featureIcon={`${iconApi}`}
                         featureName="API"
                         title="Full access to your data"
-                        description={
-                            <>
-                                <p>Our API and direct SQL access allow full access to your production instance.</p>
-                                <p>Another paragraph!</p>
-                            </>
-                        }
+                        description="<p>Our API and direct SQL access allow full access to your production instance.</p><p>Another paragraph!</p>"
                         docsUrl="#"
                         image={`${imageApi}`}
                         classes=""

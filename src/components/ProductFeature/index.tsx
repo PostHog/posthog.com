@@ -6,7 +6,7 @@ interface ProductFeatureProps {
     featureName: string
     featureIcon?: string
     title: string
-    description: string | JSX.Element
+    description: string
     docsUrl?: string
     image?: string
     imageClasses?: string
@@ -54,10 +54,16 @@ export const ProductFeature = ({
                     </div>
                 )}
 
-                <h3 className="mb-2 font-osiris font-normal text-2xl lowercase">{title}</h3>
-                <div className="text-white text-opacity-70">
-                    {React.isValidElement(description) ? description : <p>{description}</p>}
-                </div>
+                <h3
+                    className="mb-2 font-osiris font-normal text-2xl lowercase"
+                    dangerouslySetInnerHTML={{ __html: title }}
+                />
+                <div
+                    className="text-white text-opacity-70"
+                    dangerouslySetInnerHTML={{
+                        __html: description?.includes('<p>') ? description : `<p>${description}</p>`,
+                    }}
+                />
 
                 {/* only render if {docsUrl} exists */}
                 {docsUrl && (
