@@ -14,6 +14,12 @@ Currently for internal use only.
 ### Fixing broken frontend build
 `docker run ee_web yarn build`
 
+### Running Backend in Docker and Frontend locally
+
+This setup is best if you want to iterate quickly on frontend changes. You get the benefits of hot reloading locally while keeping the backend dockerized.
+
+`yarn start-ch-dev`
+
 ### Running Python + Webpack locally
 - Run all the services
   - Stop local kafka, clickhouse and zookeeper instances if you have them
@@ -45,3 +51,12 @@ Currently for internal use only.
   - Tests:
       - All the same, except skip `DEBUG=1` in the env settings.
       - Set as the "target" in run configuration `ee/clickhouse`
+
+### Post Development Cleanup
+
+Awesome! You've made your awesome fix/feature/contribution and you're ready to call it day. Make sure to `docker-compose down` your app and manually clean up your Clickhouse database:
+
+```
+docker compose -f ee/docker-compose.ch.yml down
+DEBUG=1;DJANGO_SETTINGS_MODULE=posthog.settings;PRIMARY_DB=clickhouse;CLICKHOUSE_HOST=clickhouse;CLICKHOUSE_DATABASE=posthog;CLICKHOUSE_SECURE=false;CLICKHOUSE_VERIFY=false python migrate.py migrate_clickhouse
+```
