@@ -3,11 +3,11 @@
         cursor: pointer;
     }
 
-    .hidden-section-wrapper .hidden-section-open:before {
+    .hidden-section-open:before {
         content: '▼';
     }
 
-    .hidden-section-wrapper .hidden-section-closed:before {
+    .hidden-section-closed:before {
         content: '▶';
     }
 }
