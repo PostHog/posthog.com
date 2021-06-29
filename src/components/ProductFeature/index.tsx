@@ -81,7 +81,10 @@ export const ProductFeature = ({
 
                 {/* only render if {docsUrl} exists */}
                 {docsUrl && (
-                    <a href={docsUrl} className="p-2 bg-white bg-opacity-10 rounded text-white">
+                    <a
+                        href={docsUrl}
+                        className="px-2 py-1 text-white hover:text-white text-opacity-75 hover:text-opacity-100 text-xs rounded-full whitespace-nowrap border-white border-2 border-solid border-opacity-10 hover:border-opacity-20"
+                    >
                         Docs &rarr;
                     </a>
                 )}

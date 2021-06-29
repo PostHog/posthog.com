@@ -87,9 +87,9 @@ function ProductPage() {
                         title="Open source product analytics"
                         description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
                         docsUrl="#"
-                        figureClasses="-mb-12 md:-mb-16"
+                        figureClasses="-mb-12"
                         image={`${imageOpenSource}`}
-                        imageClasses="w-full max-w-screen-md border-white border-12 md:border-16 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        imageClasses="w-full max-w-screen-md border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
                 </div>
