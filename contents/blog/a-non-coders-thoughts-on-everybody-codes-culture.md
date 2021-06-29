@@ -1,6 +1,6 @@
 ---
 date: 2021-06-14
-title: A non-coder's thoughts on an everybody codes culture
+title: A non-coder's thoughts on an 'Everybody Codes' culture
 author: joe-martin
 rootPage: /blog 
 sidebar: Blog 
@@ -39,4 +39,4 @@ I’ve made [many minor mistakes](https://github.com/PostHog/posthog.com/pull/14
 
 Ultimately, while I was initially nervous about the ‘everyone codes’ culture at PostHog, it hasn’t taken me long to start seeing benefits. As a team, we can move faster; and as individuals, we can have greater impact with less bureaucracy - as shown when I made [my first product update](https://github.com/PostHog/posthog/pull/4584) in only my second week.
 
-Loved this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
+_Loved this? Follow us on [Twitter](https://twitter.com/posthoghq) and [LinkedIn](https://linkedin.com/company/posthog) and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
