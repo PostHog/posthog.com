@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## People
 
-- [Kunal Pathak (Team lead, Growth Engineer)](/handbook/company/team#kunal-pathak-growth-engineer)
+- [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
 
 ## Mission
 
