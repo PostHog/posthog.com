@@ -8,7 +8,6 @@ showTitle: true
 hideAnchor: true 
 featuredImage: ../images/blog/non-coders-thoughts/non-coders-thoughts.jpeg
 ---
-By: [Joe Martin](https://www.linkedin.com/in/joemartinwords/), Product Marketing
 
 One of PostHog’s core values is that everybody codes. That doesn’t mean everyone needs previous experience as a software developer, but we encourage everyone to learn and practice the basics of shipping, no matter their role. 
 
