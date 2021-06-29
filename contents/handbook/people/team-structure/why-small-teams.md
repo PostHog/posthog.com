@@ -30,7 +30,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 # Small Teams list
 
 * [Core Experience](/handbook/people/team-structure/core-experience) (trends, retention, funnels)
-* [Core analytics](/handbook/people/team-structu) (queries)
+* [Core Analytics](/handbook/people/team-structure/core-analytics) (queries)
 * [Extensibility](/handbook/people/team-structure/extensibility) (plugins/APIs)
 * [Deployments and Infrastructure](/handbook/people/team-structure/infrastructure) (AMI/VPC/PostHog Cloud)
 
@@ -38,7 +38,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 * [People & Culture](/handbook/people/team-structure/people)
 * [Marketing](/handbook/people/team-structure/marketing) (includes website)
-* [Growth Engineering](handbook/people/team-structure/growth-engineering) (proactive experiments / activation flow / revenue flow)
+* [Growth Engineering](/handbook/people/team-structure/growth-engineering) (proactive experiments / activation flow / revenue flow)
 * [Design](/handbook/people/team-structure/design)
 
 # FAQ
@@ -47,7 +47,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 The Accountable Person has the final say in a given Small Team's decision making - they decide what to build / work on.
 
-Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that management at PostHog is [very minimalistic](management) - it's critical that managers don't set tasks for those in Small Teams.
+Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that [management at PostHog](/handbook/company/management) is very minimalistic - it's critical that managers don't set tasks for those in Small Teams.
 
 Think of the Small Team as the company you work for, and your line manager as your coach.
 
@@ -63,7 +63,7 @@ No more than 6 people, but that's the only rule. It could be any group of people
 
 Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
 
-## Can I still [step on toes](/handbook/values)?
+## Can I still [step on toes](/handbook/company/values)?
 
 Yes. In fact it's actively encouraged. We still expect people to have an understanding of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
 
