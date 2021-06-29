@@ -29,7 +29,7 @@ PostHog is a product analytics tool, so I was able to get set-up and analyse the
 
 **Mission**
 
-Posthog’s mission to “Increase the number of successful products in the world” was a big reason I joined the company and provided context to building out a long-term direction.
+Posthog’s mission to `"Increase the number of successful products in the world"` was a big reason I joined the company, and that phrase provided context to building out a long-term direction.
 
 Dogfooding
 
