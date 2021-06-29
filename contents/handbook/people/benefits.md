@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Beyond [pay and equity](handbook/people/compensation), we offer several additional benefits to our team.
+Beyond [pay and equity](/handbook/people/compensation), we offer several additional benefits to our team.
 
 With everyone being distributed across the world, we do our best to provide the same benefits to everyone, but they might vary slightly by country depending on the services that are available and local regulations. 
 

@@ -9,18 +9,25 @@ showTitle: true
 Philosophy: Be kind, concise and direct.
 
 
+## Positioning statement
+
+We use a positioning statement based on a template by Geoffrey Moore, which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools.
+
+Our positioning statement is:
+
+_For product managers and software engineers who need to understand their users, PostHog is the only open source analytics platform which enables you to discover insights and run experiments._ 
+
+_Unlike traditional analytics tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._ 
+
 ## Product positioning
 
-An **open source product analytics platform** addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
+An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
-**Free PostHog** is positioned to solve product analytics problems for small non-enterprise teams.
+**PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
 
-**Enterprise PostHog** is positioned to solve product analytics problems for larger teams and enterprises.
+**PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
 
-**PostHog Cloud** is positioned to service clients who need less control.
-
-**PostHog Self Hosted** is positioned to service clients who need more control.
-
+**PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
 ## Target audience
 
@@ -131,9 +138,9 @@ Documentation contributes more to *Activation* and *Retention* than *Acquisition
 
 Prioritizing hiring for functions based on acquisition success and capacity in relation to other functions.
 
-- Product marketing: currently hiring
-- Content marketing: Mo
-- Community: hiring next
+- Product marketing: Joe Martin
+- Content marketing: Mo Shehu
+- Community: Phil Leggetter
 - Press: 2022
 - Paid: 2022
 - Technical: hiring next

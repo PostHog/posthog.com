@@ -34,7 +34,7 @@ Concrete things we take responsibility over:
 - [app.posthog.com](app.posthog.com) and its infrastructure
 - On Prem & Single Tenant deployments
 - CI/CD - How we deploy
-- Data infrastructure (Clickhouse, Kafka)
+- Data infrastructure (ClickHouse, Kafka)
 - Monitoring and Alerting stack
 
 ## Customer
