@@ -47,7 +47,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 The Accountable Person has the final say in a given Small Team's decision making - they decide what to build / work on.
 
-Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that management at PostHog is [very minimalistic](/handbook/company/management) - it's critical that managers don't set tasks for those in Small Teams.
+Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that [management at PostHog](/handbook/company/management) is very minimalistic - it's critical that managers don't set tasks for those in Small Teams.
 
 Think of the Small Team as the company you work for, and your line manager as your coach.
 
