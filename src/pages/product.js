@@ -95,7 +95,7 @@ function ProductPage() {
                         classes=""
                     />
 
-                    <Doodle type="triangle" color="pink" />
+                    <Doodle type="circle" color="white" classes="top-0 left-0" />
                 </div>
 
                 <div className="product-feature text-white text-center feature-event-autocapture">
@@ -387,7 +387,7 @@ function ProductPage() {
                     />
                 </div>
 
-                <div className="product-feature text-white text-center overflow-hidden flex items-center feature-heatmaps pr-16 xl:pr-32">
+                <div className="product-feature text-white text-center flex items-center feature-heatmaps pr-16 xl:pr-32">
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconHeatmaps}`}
@@ -444,7 +444,7 @@ function ProductPage() {
                     </ul>
                 </div>
 
-                <div className="product-feature text-white text-center overflow-hidden feature-data-filtering">
+                <div className="product-feature text-white text-center feature-data-filtering">
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconDataFiltering}`}
@@ -461,7 +461,7 @@ function ProductPage() {
                     />
                 </div>
 
-                <div className="product-feature text-white text-center overflow-hidden feature-custom-plugins">
+                <div className="product-feature text-white text-center feature-custom-plugins">
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconCustomPlugins}`}

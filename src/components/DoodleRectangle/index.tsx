@@ -2,11 +2,19 @@ import React from 'react'
 
 interface DoodleRectangle {
     color?: string
+    classes?: string
 }
 
-export const DoodleRectangle = ({ color }: DoodleRectangleProps) => {
+export const DoodleRectangle = ({ color, classes }: DoodleRectangleProps) => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="68" height="742" fill="none" viewBox="0 0 68 742">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="68"
+            height="742"
+            fill="none"
+            viewBox="0 0 68 742"
+            className={`absolute ${classes}`}
+        >
             <path
                 stroke="url(#RectangleGradient)"
                 strokeLinecap="round"

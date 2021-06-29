@@ -2,11 +2,19 @@ import React from 'react'
 
 interface DoodleZigzag {
     color?: string
+    classes?: string
 }
 
-export const DoodleZigzag = ({ color }: DoodleZigzagProps) => {
+export const DoodleZigzag = ({ color, classes }: DoodleZigzagProps) => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="117" height="461" fill="none" viewBox="0 0 117 461">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="117"
+            height="461"
+            fill="none"
+            viewBox="0 0 117 461"
+            className={`absolute ${classes}`}
+        >
             <path
                 stroke="url(#ZigzagGradient)"
                 strokeLinecap="round"

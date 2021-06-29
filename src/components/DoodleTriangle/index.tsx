@@ -2,11 +2,19 @@ import React from 'react'
 
 interface DoodleTriangle {
     color?: string
+    classes?: string
 }
 
-export const DoodleTriangle = ({ color }: DoodleTriangleProps) => {
+export const DoodleTriangle = ({ color, classes }: DoodleTriangleProps) => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="208" height="219" fill="none" viewBox="0 0 208 219">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="208"
+            height="219"
+            fill="none"
+            viewBox="0 0 208 219"
+            className={`absolute ${classes}`}
+        >
             <path
                 fill={color}
                 d="M90.175 69.241l2.563 1.558-1.558 2.564-2.563-1.558zM85.5 76.932l2.564 1.558-1.558 2.564-2.563-1.558zm-4.674 7.691l2.563 1.558-1.558 2.564-2.563-1.559zm-4.674 7.69l2.564 1.558-1.558 2.564-2.564-1.558zm-4.675 7.691l2.564 1.558-1.558 2.564-2.564-1.558zm-4.674 7.691l2.564 1.558-1.559 2.564-2.563-1.558zm-4.675 7.691l2.564 1.558-1.558 2.564-2.564-1.559z"
