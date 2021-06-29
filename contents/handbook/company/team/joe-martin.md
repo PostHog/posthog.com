@@ -1,3 +1,9 @@
+---
+title: Joe Martin's README
+sidebar: Handbook
+showTitle: true
+---
+
 # Bio
 
 [This is my fifth start-up](https://www.linkedin.com/in/joemartinwords/). 
