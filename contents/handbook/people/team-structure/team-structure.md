@@ -11,7 +11,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 - **[Core analytics](core-analytics)**
     - [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
-    - [Buddy Williams](/handbook/people/team#buddy-williams-software-engineer) (Full Stack Engineer)
 
 <br />
 
