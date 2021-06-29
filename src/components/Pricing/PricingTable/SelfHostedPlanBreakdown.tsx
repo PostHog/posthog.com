@@ -67,7 +67,7 @@ export const SelfHostedPlanBreakdown = () => {
                     <div>
                         <CallToAction
                             icon="none"
-                            href="mailto:sales@posthog.com?subject=Free%20Clickhouse%20deployment"
+                            href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
                             className="my-4"
                         >
                             Request access

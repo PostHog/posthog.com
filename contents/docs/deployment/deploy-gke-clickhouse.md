@@ -47,7 +47,7 @@ This helm chart sets up posthog on your cluster, with the following components:
 helm plugin install https://github.com/hypnoglow/helm-s3.git
 helm repo add posthog-vpc s3://posthog-vpc-helm/charts
 helm repo update
-helm install posthog posthog-vpc/posthog -n posthog -f values.yaml
+helm install --timeout 20m posthog posthog-vpc/posthog -n posthog -f values.yaml
 ```
 
 ### Example values.yaml file

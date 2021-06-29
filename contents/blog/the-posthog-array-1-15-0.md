@@ -22,7 +22,7 @@ So let's get into it: what does super scalable mean and what else did we do sinc
 
 ### [ClickHouse 👆🏠](https://github.com/PostHog/posthog/pulls?page=1&q=is%3Apr+clickhouse+is%3Aclosed)
 
-![Clickhouse Screenshot](../images/blog/array/clickhouse.png)
+![ClickHouse Screenshot](../images/blog/array/clickhouse.png)
 <small class="centered">_A ClickHouse query completing in a fifth of a second (Click image to expand)_</small>
 
 
