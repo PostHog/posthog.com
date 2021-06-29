@@ -1,5 +1,5 @@
 module.exports = {
-    mode: 'jit',
+    //mode: 'jit',
     purge: {
         content: ['./src/**/*.{js,jsx,ts,tsx}'],
         options: {
@@ -7,15 +7,18 @@ module.exports = {
                 'justify-start',
                 'h-full',
                 'flex',
+                'gap-y-4',
                 '-mt-2',
                 '-ml-2',
                 '-mr-2',
                 '-mb-2',
                 '-mt-4',
                 '-mr-4',
+                '-mr-8',
                 '-mb-4',
                 '-ml-4',
                 '-mb-12',
+                'pr-32',
                 'max-w-xl',
                 'max-w-2xl',
                 'max-w-3xl',

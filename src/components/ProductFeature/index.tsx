@@ -12,6 +12,8 @@ interface ProductFeatureProps {
     figureClasses?: string
     image?: string
     imageClasses?: string
+    imageWidth?: string
+    imageHeight?: string
     bgImage?: string
 }
 
@@ -27,6 +29,8 @@ export const ProductFeature = ({
     figureClasses,
     image,
     imageClasses,
+    imageWidth,
+    imageHeight,
     bgImage,
 }: ProductFeatureProps) => {
     // const backgroundColorClass = `bg-${bgColor}`
@@ -44,8 +48,14 @@ export const ProductFeature = ({
         >
             {/* only render if {image} exists */}
             {image && (
-                <figure className={`${figureClasses} flex justify-center items-center`}>
-                    <img src={`${image}`} className={imageClasses} style={{ height: 'max-content' }} />
+                <figure className={`flex justify-center items-center ${figureClasses}`}>
+                    <img
+                        src={`${image}`}
+                        className={imageClasses}
+                        width={imageWidth}
+                        height={imageHeight}
+                        style={{ height: 'max-content' }}
+                    />
                 </figure>
             )}
 

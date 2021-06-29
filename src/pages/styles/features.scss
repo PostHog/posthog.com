@@ -89,11 +89,14 @@
     }
     .feature-funnels {
         grid-area: funnels;
-
+        min-height: 400px;
+        overflow: hidden;
         position: relative;
 
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
         &:before {
-            background: url('../../components/productFeature/images/feature-funnels@2x.png') 0 100% / contain no-repeat;
+            background: url('../../components/productFeature/images/feature-funnels@2x.png') 0 100% / cover no-repeat;
             content: '';
             height: 100%;
             left: 0;
@@ -113,9 +116,17 @@
     }
     .feature-retention {
         grid-area: retention;
+
+        > div {
+            padding-bottom: 0;
+        }
     }
     .feature-revenue-tracking {
         grid-area: revenue-tracking;
+
+        > div {
+            padding-bottom: 0;
+        }
     }
 
     .feature-feature-flags {
@@ -123,9 +134,36 @@
     }
     .feature-annotations {
         grid-area: annotations;
+        min-height: 400px;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../components/productFeature/images/feature-annotations.svg') 100% / cover no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
     }
     .feature-heatmaps {
         grid-area: heatmaps;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../components/productFeature/images/feature-heatmaps@2x.png') 100% 0 / contain no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
     }
     .feature-session-recordings {
         grid-area: session-recordings;
@@ -139,6 +177,19 @@
     }
     .feature-custom-plugins {
         grid-area: custom-plugins;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../components/productFeature/images/feature-custom-plugins.svg') -40px 105% / contain no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
     }
     .feature-data-enrichment {
         grid-area: data-enrichment;

@@ -8,11 +8,11 @@ interface ProductFeaturePluginProps {
 
 export const ProductFeaturePlugin = ({ handle, name }: ProductFeaturePluginProps) => {
     return (
-        <li>
+        <li style={{ maxWidth: '120px' }}>
             <svg className="icon width-[32px] height-[32px] mx-auto" style={{ width: '32px', height: '32px' }}>
                 <use href={pluginsSprite + '#plugins-' + `${handle}`} />
             </svg>
-            <span className="text-white text-opacity-70">{name}</span>
+            <span className="text-white text-sm text-opacity-70 leading-tight">{name}</span>
         </li>
     )
 }
