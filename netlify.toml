@@ -157,3 +157,27 @@
 [[redirects]]
     from = "/docs/plugins/types"
     to = "/docs/plugins/build/types"
+    
+[[redirects]]
+    from = "/docs/developing-locally"
+    to = "/docs/contributing/developing-locally"
+
+    
+[[redirects]]
+    from = "/docs/project-structure"
+    to = "/docs/contributing/project-structure"
+
+    
+[[redirects]]
+    from = "/docs/recognizing-contributions"
+    to = "/docs/contributing/recognizing-contributions"
+
+    
+[[redirects]]
+    from = "/docs/stack"
+    to = "/docs/contributing/stack"
+
+    
+[[redirects]]
+    from = "/docs/updating-documentation"
+    to = "/docs/contributing/updating-documentation"
