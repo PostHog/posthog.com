@@ -29,7 +29,14 @@ export const Tutorials = () => {
                         to="/docs/tutorials/feature-flags"
                         className="w-full lg:w-1/3 lg:mr-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
                     >
-                        <img src={featuresImg} className="w-full mb-4" alt="How to safely rollout new features" />
+                        <img
+                            src={featuresImg}
+                            className="w-full mb-4"
+                            alt="How to safely rollout new features"
+                            loading="lazy"
+                            width="336"
+                            height="190"
+                        />
 
                         <strong className="block text-center text-white">How to Safely Rollout New Features</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">7 min read</span>
@@ -39,7 +46,14 @@ export const Tutorials = () => {
                         to="/docs/tutorials/toolbar"
                         className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:mx-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
                     >
-                        <img src={userBehaviorImg} className="w-full mb-4" alt="Visualizing User Behavior - Toolbar" />
+                        <img
+                            src={userBehaviorImg}
+                            className="w-full mb-4"
+                            alt="Visualizing User Behavior - Toolbar"
+                            loading="lazy"
+                            width="336"
+                            height="190"
+                        />
 
                         <strong className="block text-center text-white">Visualizing User Behavior - Toolbar</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">6 min read</span>
@@ -49,7 +63,14 @@ export const Tutorials = () => {
                         to="/docs/tutorials/funnels"
                         className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:ml-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
                     >
-                        <img src={funnelsImg} className="w-full mb-4" alt="Analyzing Your Conversion with Funnels" />
+                        <img
+                            src={funnelsImg}
+                            className="w-full mb-4"
+                            alt="Analyzing Your Conversion with Funnels"
+                            loading="lazy"
+                            width="336"
+                            height="190"
+                        />
 
                         <strong className="block text-center text-white">Analyzing Your Conversion with Funnels</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">8 min read</span>

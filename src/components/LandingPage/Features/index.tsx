@@ -23,6 +23,7 @@ export const Features = () => {
                                 width="296"
                                 height="296"
                                 className="mx-auto my-0"
+                                loading="lazy"
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
@@ -117,6 +118,7 @@ export const Features = () => {
                                 width="296"
                                 height="296"
                                 className="mx-auto my-0"
+                                loading="lazy"
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
@@ -179,6 +181,7 @@ export const Features = () => {
                                 width="296"
                                 height="296"
                                 className="mx-auto my-0"
+                                loading="lazy"
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
