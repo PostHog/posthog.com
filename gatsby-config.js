@@ -237,6 +237,12 @@ module.exports = {
         {
             resolve: `gatsby-plugin-feed`,
             options: {
+                setup: (options) => ({
+                    ...options,
+                    custom_namespaces: {
+                        blog: 'https://posthog.com/blog',
+                    },
+                }),
                 query: `
                 {
                   site {
@@ -265,11 +271,9 @@ module.exports = {
                                 let authorsData = findRelevantAuthor(author)
                                 let newAuthorData = []
                                 if (authorsData) {
-                                    Object.keys(authorsData).forEach((key) => {
+                                    newAuthorData = Object.keys(authorsData).map((key) => {
                                         let newKey = key.replace('_', '')
-                                        newAuthorData.push({
-                                            [`author${newKey}:encoded`]: authorsData[key],
-                                        })
+                                        return { [`blog:${newKey}`]: authorsData[key] }
                                     })
                                 }
                                 return {
@@ -281,7 +285,7 @@ module.exports = {
                                     author: authorsData ? authorsData.name : null,
                                     custom_elements: [{ 'content:encoded': html }, ...newAuthorData],
                                     enclosure: {
-                                        url: featuredImage ? featuredImage.publicURL : null,
+                                        url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
                                     },
                                 }
                             })
@@ -297,7 +301,7 @@ module.exports = {
                                     guid: id,
                                     custom_elements: [{ 'content:encoded': body }],
                                     enclosure: {
-                                        url: featuredImage ? featuredImage.publicURL : null,
+                                        url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
                                     },
                                 }
                             })
