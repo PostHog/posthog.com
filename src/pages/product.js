@@ -4,6 +4,8 @@ import Layout from '../components/Layout'
 import { PageHeader } from '../components/PageHeader'
 import { ProductFeature } from '../components/ProductFeature'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
+import { HostingOption } from '../components/HostingOption'
+
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
@@ -172,6 +174,14 @@ function ProductPage() {
                                     running on Heroku with a one-click install.
                                 </p>
                             </div>
+                            <ul className="inline-grid grid-cols-2 md:grid-cols-3 grid-rows-auto gap-x-2 gap-y-4 p-0 list-none text-center">
+                                <HostingOption name="Heroku" handle="heroku" url="#" />
+                                <HostingOption name="AWS" handle="aws" url="#" />
+                                <HostingOption name="Google Cloud" handle="google-cloud" url="#" />
+                                <HostingOption name="Docker" handle="aws" url="#" />
+                                <HostingOption name="Azure" handle="azure" url="#" />
+                                <HostingOption name="Source" handle="source-code" url="#" />
+                            </ul>
                         </div>
 
                         <ProductFeature
@@ -235,7 +245,7 @@ function ProductPage() {
                         figureClasses="-mb-12"
                         imageWidth="1051"
                         imageHeight="576"
-                        imageClasses="w-full max-w-screen-lg rounded-tl-xl rounded-tr-xl"
+                        imageClasses="w-screen-md max-w-content rounded-tl-xl rounded-tr-xl"
                         classes=""
                     />
                 </div>
@@ -373,7 +383,7 @@ function ProductPage() {
                     />
                 </div>
 
-                <div className="product-feature text-white text-center overflow-hidden flex items-center feature-heatmaps pr-32">
+                <div className="product-feature text-white text-center overflow-hidden flex items-center feature-heatmaps pr-16 xl:pr-32">
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconHeatmaps}`}
@@ -398,7 +408,7 @@ function ProductPage() {
                         image={`${imageSessionRecordings}`}
                         imageWidth="356"
                         imageHeight="174"
-                        imageClasses="max-w-screen-md"
+                        imageClasses="w-screen-md max-w-content"
                         classes=""
                     />
                 </div>
@@ -411,11 +421,11 @@ function ProductPage() {
                         title="Send data where you need it"
                         description="Export data for long-term storage or make your customer data available in other tools. list of integrations here"
                         docsUrl="#"
-                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
 
-                    <ul className="inline-grid grid-cols-3 md:grid-cols-5 grid-rows-auto gap-8 p-0 list-none text-center">
+                    <ul className="inline-grid grid-cols-2 md:grid-cols-5 grid-rows-auto gap-8 p-0 list-none text-center">
                         <ProductFeaturePlugin name="S3" handle="s3" />
                         <ProductFeaturePlugin name="PostgreSQL" handle="postgresql" />
                         <ProductFeaturePlugin name="BigQuery" handle="bigquery" />
@@ -442,7 +452,7 @@ function ProductPage() {
                         image={`${imageDataFiltering}`}
                         imageWidth="352"
                         imageHeight="126"
-                        imageClasses="w-full max-w-screen-md -mr-8"
+                        imageClasses="w-screen-md max-w-content -mr-8"
                         classes=" "
                     />
                 </div>
@@ -467,7 +477,7 @@ function ProductPage() {
                         title="Enrich your data with external signals"
                         description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why. grid of sources goes here"
                         docsUrl="#"
-                        imageClasses="w-full max-w-screen-md -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
 
