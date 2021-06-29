@@ -174,7 +174,7 @@ function ProductPage() {
                                     running on Heroku with a one-click install.
                                 </p>
                             </div>
-                            <ul className="inline-grid grid-cols-2 md:grid-cols-3 grid-rows-auto gap-x-2 gap-y-4 p-0 list-none text-center">
+                            <ul className="flex justify-center flex-wrap p-0 list-none text-center">
                                 <HostingOption name="Heroku" handle="heroku" url="#" />
                                 <HostingOption name="AWS" handle="aws" url="#" />
                                 <HostingOption name="Google Cloud" handle="google-cloud" url="#" />
