@@ -31,6 +31,7 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
+import { Doodle } from './components/Doodle'
 import { DoodleCircle } from './components/DoodleCircle'
 import { DoodleRectangle } from './components/DoodleRectangle'
 import { DoodleTriangle } from './components/DoodleTriangle'
@@ -117,6 +118,7 @@ export const shortcodes = {
     DemoScheduler,
     DocsPageSurvey,
     DocsSearch,
+    Doodle,
     DoodleCircle,
     DoodleRectangle,
     DoodleTriangle,

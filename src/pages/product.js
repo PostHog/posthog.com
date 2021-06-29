@@ -6,10 +6,7 @@ import { ProductFeature } from '../components/ProductFeature'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
 
-import { DoodleCircle } from '../components/DoodleCircle'
-import { DoodleRectangle } from '../components/DoodleRectangle'
-import { DoodleTriangle } from '../components/DoodleTriangle'
-import { DoodleZigzag } from '../components/DoodleZigzag'
+import { Doodle } from '../components/Doodle'
 
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
@@ -97,10 +94,8 @@ function ProductPage() {
                         imageClasses="w-full max-w-screen-md border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
-                    <DoodleCircle color="red" />
-                    <DoodleTriangle color="white" />
-                    <DoodleRectangle color="blue" />
-                    <DoodleZigzag color="yellow" />
+
+                    <Doodle type="triangle" color="pink" />
                 </div>
 
                 <div className="product-feature text-white text-center feature-event-autocapture">
