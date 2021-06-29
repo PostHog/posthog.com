@@ -52,16 +52,6 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
       - All the same, except skip `DEBUG=1` in the env settings.
       - Set as the "target" in run configuration `ee/clickhouse`
 
-
-### Post Development Cleanup
-
-Awesome! You've made your awesome fix/feature/contribution and you're ready to call it day. Make sure to `docker-compose down` your app and manually clean up your Clickhouse database:
-
-```
-docker compose -f ee/docker-compose.ch.yml down
-DEBUG=1;DJANGO_SETTINGS_MODULE=posthog.settings;PRIMARY_DB=clickhouse;CLICKHOUSE_HOST=clickhouse;CLICKHOUSE_DATABASE=posthog;CLICKHOUSE_SECURE=false;CLICKHOUSE_VERIFY=false python migrate.py migrate_clickhouse
-```
-
 ### Running everything but ClickHouse locally
 - Follow the [local development setup without Docker](/docs/developing-locally)
 - Run `docker-compose -f ee/docker-compose.ch.yml up clickhouse`
@@ -72,3 +62,9 @@ DEBUG=1;DJANGO_SETTINGS_MODULE=posthog.settings;PRIMARY_DB=clickhouse;CLICKHOUSE
   - `export KAFKA_ENABLED=true`
   - `export KAFKA_HOSTS=localhost:9092`
 - Run PostHog: `./bin/start`
+
+### Post Development Cleanup
+
+Awesome! You've made your fix/feature/contribution and you're ready to call it day. Follow proper Docker etiquette and make sure to `docker-compose down` your app to setup a blank slate for the next time you develop with Docker.
+
+`docker compose -f ee/docker-compose.ch.yml down`
