@@ -368,20 +368,7 @@
         "entry": "Growth",
         "name": "Growth",
         "items": ["handbook/growth/strategy", "handbook/growth/customer-support"],
-        "child_entries": ["Customer Success"]
-    },
-
-    {
-        "entry": "Customer Success",
-        "name": "Customer Success",
-        "items": [
-            "handbook/growth/sales/overview",
-            "handbook/growth/sales/sales-operations",
-            "handbook/growth/sales/crm",
-            "handbook/growth/sales/yc-onboarding",
-            "handbook/growth/sales/demos",
-            "handbook/growth/sales/billing"
-        ]
+        "child_entries": ["Marketing", "Sales"]
     },
     {
         "entry": "Marketing",
@@ -395,6 +382,18 @@
             "handbook/growth/marketing/press",
             "handbook/growth/marketing/releasing-content",
             "handbook/growth/marketing/developer-relations"
+        ]
+    },
+    {
+        "entry": "Sales",
+        "name": "Sales",
+        "items": [
+            "handbook/growth/sales/overview",
+            "handbook/growth/sales/sales-operations",
+            "handbook/growth/sales/crm",
+            "handbook/growth/sales/yc-onboarding",
+            "handbook/growth/sales/demos",
+            "handbook/growth/sales/billing"
         ]
     },
     {
