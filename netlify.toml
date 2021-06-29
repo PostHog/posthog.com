@@ -147,3 +147,8 @@
 [[redirects]]
     from = "/handbook/people/team-structure/user-experience"
     to = "/handbook/people/team-structure/core-experience"
+
+    
+[[redirects]]
+    from = "/docs/plugins/build/reference"
+    to = "/docs/plugins/build"
