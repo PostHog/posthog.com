@@ -182,7 +182,7 @@ export const Header = ({
                         Login
                     </NavbarLink>
 
-                    <PrimaryCta className=" ">Get Started</PrimaryCta>
+                    <PrimaryCta className="mt-4">Get Started</PrimaryCta>
                 </ul>
             ) : null}
         </div>
