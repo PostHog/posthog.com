@@ -131,7 +131,7 @@ export const Header = ({
             </header>
 
             {expanded ? (
-                <ul className="w-11/12 mx-auto mt-8 block lg:hidden list-none">
+                <ul className="w-11/12 mx-auto mt-8 block lg:hidden list-none p-0">
                     <NavbarLink
                         to="/product-features"
                         textLight={textLight}
