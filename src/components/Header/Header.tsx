@@ -88,11 +88,13 @@ export const Header = ({
             } ${blogArticleSlug ? 'blog-article-header' : ''}`}
         >
             <header className={`${layoutWidth} flex justify-between items-center`}>
-                <Link id="logo" to="/" className="block">
-                    <img alt="logo" src={logo} />
-                </Link>
+                <div className="flex-1">
+                    <Link id="logo" to="/" className="block">
+                        <img alt="logo" src={logo} />
+                    </Link>
+                </div>
                 <nav>
-                    <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav">
+                    <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav p-0">
                         <NavbarLink to="/product-features" textLight={textLight}>
                             Product
                         </NavbarLink>
@@ -110,7 +112,7 @@ export const Header = ({
                         </NavbarLink>
                     </ul>
                 </nav>
-                <ul className="hidden lg:flex list-none justify-between items-center mb-0 text-xs">
+                <ul className="hidden lg:flex list-none justify-end items-center mb-0 text-xs p-0 flex-1">
                     <PrimaryCta>
                         <span>Get Started</span>
                     </PrimaryCta>
