@@ -1,4 +1,5 @@
 import React from 'react'
+// import spritedIcons from './images/icons/sprited-icons.svg'
 
 interface ProductFeatureProps {
     layout?: string
@@ -63,7 +64,14 @@ export const ProductFeature = ({
                 {/* only render if featureName exists */}
                 {featureName && (
                     <div className="feature-name flex justify-center items-center gap-2 mb-2">
-                        {featureIcon && <img src={`${featureIcon}`} alt={`${featureName} icon`} />}
+                        {featureIcon && (
+                            // Uncomment this peice of code to use svg sprite file
+                            // <svg>
+                            //     <use href={`${spritedIcons}#${featureIcon}`} />
+                            // </svg>
+
+                            <img src={`${featureIcon}`} alt={`${featureName} icon`} />
+                        )}
                         <div className="font-bold text-pink">{featureName}</div>
                     </div>
                 )}
