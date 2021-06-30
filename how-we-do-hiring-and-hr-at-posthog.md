@@ -5,6 +5,7 @@ author: mo-shehu
 rootPage: /blog
 sidebar: Blog
 showTitle: true
+featuredImage: ../contents/images/blog/how-we-do-hr/how-we-do-hr.png
 hideAnchor: true
 ---
 Our main selling point as a company is transparency. Being an [open-source company](https://posthog.com/blog/open-source-eating-saas), this isn’t surprising: our code, designs, and content are all largely available [online](https://github.com/posthog), for free, even while still a work in progress. This transparency also extends to HR functions from our salary ranges to our employment processes - all of which you can view in our [company handbook](https://posthog.com/handbook/company/story). Such openness has attracted candidates from all over the world who believe in and want to build on this level of transparency.
