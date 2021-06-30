@@ -14,6 +14,12 @@ Currently for internal use only.
 ### Fixing broken frontend build
 `docker run ee_web yarn build`
 
+### Running Backend in Docker and Frontend locally
+
+This setup is best if you want to iterate quickly on frontend changes. You get the benefits of hot reloading locally while keeping the backend dockerized.
+
+`yarn start-ch-dev`
+
 ### Running Python + Webpack locally
 - Run all the services
   - Stop local kafka, clickhouse and zookeeper instances if you have them
@@ -56,3 +62,9 @@ Currently for internal use only.
   - `export KAFKA_ENABLED=true`
   - `export KAFKA_HOSTS=localhost:9092`
 - Run PostHog: `./bin/start`
+
+### Post Development Cleanup
+
+Awesome! You've made your fix/feature/contribution and you're ready to call it day. Follow proper Docker etiquette and make sure to `docker-compose down` your app to setup a blank slate for the next time you develop with Docker.
+
+`docker compose -f ee/docker-compose.ch.yml down`
