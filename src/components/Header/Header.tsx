@@ -110,7 +110,7 @@ export const Header = ({
                     </NavbarLink>
                 </ul>
 
-                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0 text-xs">
+                <ul className="hidden lg:flex list-none justify-between items-center mb-0 text-xs">
                     <PrimaryCta>
                         <span>Get Started</span>
                     </PrimaryCta>
