@@ -1,9 +1,9 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
+import { Endpoint } from './components/APIDocs/Endpoint'
+import { MethodTags } from './components/APIDocs/MethodTags'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
@@ -25,12 +25,17 @@ import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
-import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { ContributorSearch } from './components/ContributorSearch'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
+import { Doodle } from './components/Doodle'
+import { DoodleCircle } from './components/DoodleCircle'
+import { DoodleRectangle } from './components/DoodleRectangle'
+import { DoodleTriangle } from './components/DoodleTriangle'
+import { DoodleZigzag } from './components/DoodleZigzag'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -38,6 +43,7 @@ import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
+import { HostingOption } from './components/HostingOption'
 import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
@@ -81,10 +87,10 @@ import { TableOfContents } from './components/TableOfContents'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     AllTheFeaturesCloud,
     AnchorScrollNavbar,
+    Endpoint,
+    MethodTags,
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
@@ -106,12 +112,17 @@ export const shortcodes = {
     Container,
     ContributorAvatars,
     ContributorCard,
-    ContributorSearch,
     ContributorsChart,
+    ContributorSearch,
     DarkModeToggle,
     DemoScheduler,
     DocsPageSurvey,
     DocsSearch,
+    Doodle,
+    DoodleCircle,
+    DoodleRectangle,
+    DoodleTriangle,
+    DoodleZigzag,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -119,6 +130,7 @@ export const shortcodes = {
     GetStartedModal,
     GithubIcon,
     HiddenSection,
+    HostingOption,
     Blockquote,
     Features,
     Hero,

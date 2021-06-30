@@ -2,37 +2,45 @@ import React from 'react'
 
 interface ProductFeatureProps {
     layout?: string
+    classes?: string
     gridArea?: string
     featureName: string
     featureIcon?: string
     title: string
     description: string
     docsUrl?: string
+    figureClasses?: string
     image?: string
     imageClasses?: string
+    imageWidth?: string
+    imageHeight?: string
     bgImage?: string
 }
 
 export const ProductFeature = ({
     // bgColor = 'navy',
     layout,
+    classes,
     featureName,
     featureIcon,
     title,
     description,
     docsUrl,
+    figureClasses,
     image,
     imageClasses,
+    imageWidth,
+    imageHeight,
     bgImage,
 }: ProductFeatureProps) => {
     // const backgroundColorClass = `bg-${bgColor}`
     return (
         <div
-            className={`py-12 px-8 ${layout}`}
+            className={`py-12 px-8 ${layout} ${classes}`}
             style={
                 bgImage
                     ? {
-                          background: `url(${bgImage}) no-repeat center center`,
+                          background: `url(${bgImage}) no-repeat`,
                           backgroundSize: 'cover',
                       }
                     : undefined
@@ -40,8 +48,14 @@ export const ProductFeature = ({
         >
             {/* only render if {image} exists */}
             {image && (
-                <figure className="flex justify-center items-center md:h-48">
-                    <img src={`${image}`} className={imageClasses} style={{ height: 'max-content' }} />
+                <figure className={`flex justify-center items-center ${figureClasses}`}>
+                    <img
+                        src={`${image}`}
+                        className={imageClasses}
+                        width={imageWidth}
+                        height={imageHeight}
+                        style={{ height: 'max-content' }}
+                    />
                 </figure>
             )}
 
@@ -67,7 +81,10 @@ export const ProductFeature = ({
 
                 {/* only render if {docsUrl} exists */}
                 {docsUrl && (
-                    <a href={docsUrl} className="p-2 bg-white bg-opacity-10 rounded text-white">
+                    <a
+                        href={docsUrl}
+                        className="px-2 py-1 text-white hover:text-white text-opacity-75 hover:text-opacity-100 text-xs rounded-full whitespace-nowrap border-white border-2 border-solid border-opacity-10 hover:border-opacity-20"
+                    >
                         Docs &rarr;
                     </a>
                 )}
