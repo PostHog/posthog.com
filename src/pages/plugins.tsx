@@ -48,17 +48,22 @@ export const PluginLibraryPage = () => {
                     </Tabs>
                     <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
                         {filteredPlugins.length > 0 ? (
-                            filteredPlugins.map((plugin: LibraryPluginType) => (
-                                <PluginCard
-                                    key={plugin.name}
-                                    name={plugin.name}
-                                    description={plugin.description || ''}
-                                    link={plugin.url}
-                                    imageSrc={getPluginImageSrc(plugin) || ''}
-                                    isCommunityPlugin={plugin.maintainer === 'community'}
-                                    onClick={() => openPlugin(plugin.name)}
-                                />
-                            ))
+                            filteredPlugins.map((plugin: LibraryPluginType) => {
+                                const id = plugin.url.split('/').pop() || ''
+                                // may need checking for question mark or trailing slash
+                                const link = !id ? plugin.url : `/plugins/${id}`
+                                return (
+                                    <PluginCard
+                                        key={id}
+                                        name={plugin.name}
+                                        description={plugin.description || ''}
+                                        link={link}
+                                        imageSrc={getPluginImageSrc(plugin) || ''}
+                                        isCommunityPlugin={plugin.maintainer === 'community'}
+                                        // onClick={() => openPlugin(plugin.name)}
+                                    />
+                                )
+                            })
                         ) : (
                             <Spin />
                         )}
