@@ -8,7 +8,7 @@ showTitle: true
 
 [This is my fifth start-up](https://www.linkedin.com/in/joemartinwords/). 
 
-Before I took up Product Marketing I was a Content Marketer, a Copywriter and a Journalist. Before _that_ I was clown, a chainsaw salesman and a cleaner in a morgue. I've had a strange life. 
+Before I took up Product Marketing I was a Content Marketer, a Copywriter and a Journalist. Before _that_ I was a clown, a chainsaw salesman and a cleaner in a morgue. I've had a strange life. 
 
 I'm engaged and live just outside of London. I'm passionate about punk music, videogame preservation and garlic. I can't ride a bike. 
 
