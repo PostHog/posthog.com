@@ -91,25 +91,25 @@ export const Header = ({
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />
                 </Link>
-
-                <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav">
-                    <NavbarLink to="/product-features" textLight={textLight}>
-                        Product
-                    </NavbarLink>
-                    <NavbarLink to="/docs" textLight={textLight}>
-                        Docs
-                    </NavbarLink>
-                    <NavbarLink to="/handbook/company/story" textLight={textLight}>
-                        Company
-                    </NavbarLink>
-                    <NavbarLink to="/pricing" textLight={textLight}>
-                        Pricing
-                    </NavbarLink>
-                    <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
-                        GitHub
-                    </NavbarLink>
-                </ul>
-
+                <nav>
+                    <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav">
+                        <NavbarLink to="/product-features" textLight={textLight}>
+                            Product
+                        </NavbarLink>
+                        <NavbarLink to="/docs" textLight={textLight}>
+                            Docs
+                        </NavbarLink>
+                        <NavbarLink to="/handbook/company/story" textLight={textLight}>
+                            Company
+                        </NavbarLink>
+                        <NavbarLink to="/pricing" textLight={textLight}>
+                            Pricing
+                        </NavbarLink>
+                        <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
+                            GitHub
+                        </NavbarLink>
+                    </ul>
+                </nav>
                 <ul className="hidden lg:flex list-none justify-between items-center mb-0 text-xs">
                     <PrimaryCta>
                         <span>Get Started</span>
