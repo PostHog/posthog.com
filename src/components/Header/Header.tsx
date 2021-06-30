@@ -87,7 +87,7 @@ export const Header = ({
                 transparentBackground ? 'transparent-background' : ''
             } ${blogArticleSlug ? 'blog-article-header' : ''}`}
         >
-            <div className={`${layoutWidth} flex justify-between items-center`}>
+            <header className={`${layoutWidth} flex justify-between items-center`}>
                 <Link id="logo" to="/" className="block">
                     <img alt="logo" src={logo} />
                 </Link>
@@ -126,7 +126,7 @@ export const Header = ({
                 <button className="text-white h-4 w-4 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
                     <img src={hamburgerIcon} className="block" />
                 </button>
-            </div>
+            </header>
 
             {expanded ? (
                 <ul className="w-11/12 mx-auto mt-8 block lg:hidden list-none">
