@@ -16,7 +16,8 @@
         "start": "gatsby develop -H 0.0.0.0",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "typegen": "kea-typegen write ."
+        "typegen": "kea-typegen write .",
+        "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg"
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
@@ -38,6 +39,7 @@
         "gatsby-plugin-postcss": "^3.7.0",
         "gatsby-plugin-posthog": "^1.0.1",
         "gatsby-plugin-react-helmet": "^3.1.7",
+        "gatsby-plugin-react-svg": "^3.0.1",
         "gatsby-plugin-remove-trailing-slashes": "^2.3.11",
         "gatsby-plugin-sass": "^4.2.0",
         "gatsby-plugin-sharp": "^2.2.22",
@@ -78,6 +80,7 @@
         "reselect": "^4.0.0",
         "sass": "^1.32.8",
         "sharp": "^0.27.2",
+        "svg-sprite": "^1.5.0",
         "typescript": "^4.0.2"
     },
     "devDependencies": {

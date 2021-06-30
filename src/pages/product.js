@@ -12,7 +12,7 @@ import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 
-import heroAnimation from '../components/productFeature/images/hero.svg'
+import HeroAnimation from '../components/productFeature/images/svgs/hero.svg'
 
 import imageOpenSource from '../components/productFeature/images/screenshot-dashboard@2x.png'
 import imageAutocapture from '../components/productFeature/images/feature-event-autocapture.svg'
@@ -78,13 +78,16 @@ function ProductPage() {
                 bgColor="navy"
             />
 
-            {`${heroAnimation}`}
+            <HeroAnimation />
+
+            {/* Uncomment feature icon ids individually to use svg sprite */}
 
             <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
                 <div className="product-feature text-white text-center feature-open-source">
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconOpenSource}`}
+                        // featureIcon="open-source"
                         featureName="Open source"
                         title="Open source product analytics"
                         description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
@@ -102,6 +105,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="standard"
                         featureIcon={`${iconEventAutocapture}`}
+                        // featureIcon="event-autocapture"
                         featureName="Event autocapture"
                         title="Track events automatically"
                         description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
@@ -118,6 +122,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="standard"
                         featureIcon={`${iconDashboards}`}
+                        // featureIcon="dashboards"
                         featureName="Dashboards"
                         title="Monitor core metrics"
                         description="Build dashboards with everyday metrics like sign-ups, purchases and conversions."
@@ -135,6 +140,7 @@ function ProductPage() {
                         <ProductFeature
                             layout="standard"
                             featureIcon={`${iconDataPipelines}`}
+                            // featureIcon="data-pipelines"
                             featureName="Data pipelines"
                             title="Ingest data from multiple sources"
                             description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
@@ -145,6 +151,7 @@ function ProductPage() {
                         <ProductFeature
                             layout="standard"
                             featureIcon={`${iconDataWarehouse}`}
+                            // featureIcon="data-warehouse"
                             featureName="Export to data warehouse"
                             title="Normalize & push data anywhere"
                             description="Move data through PostHog to BigQuery, S3, Snowflake, or Redshift."
@@ -201,6 +208,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="standard"
                         featureIcon={`${iconDataPrivacy}`}
+                        // featureIcon="data-privacy"
                         featureName="Data privacy"
                         title="Compliance-friendly"
                         description="<p>Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around.</p>"
@@ -215,6 +223,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="standard"
                         featureIcon={`${iconApi}`}
+                        // featureIcon="api"
                         featureName="API"
                         title="Full access to your data"
                         description="Our API and direct SQL access allow full access to your production instance."
@@ -229,6 +238,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconTrends}`}
+                        // featureIcon="trends"
                         featureName="Trends"
                         title="Monitor engagement. <br />Create actionable insights."
                         description="
@@ -268,6 +278,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconFunnels}`}
+                        // featureIcon="funnels"
                         featureName="Funnels"
                         title="Identify <strike class='opacity-50'>dropoff</strike> opportunity"
                         description="<p>Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment.</p>"
@@ -282,6 +293,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconPaths}`}
+                        // featureIcon="paths"
                         featureName="Paths"
                         title="Visualize how traffic flows"
                         description="<p>See common user paths and discover how visitors arrived at their outcome.</p>"
@@ -297,6 +309,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconCohorts}`}
+                        // featureIcon="cohorts"
                         featureName="Cohorts"
                         title="Insights by association"
                         description="Use common traits to identify inflection points."
@@ -313,6 +326,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconUserSessions}`}
+                        // featureIcon="user-sessions"
                         featureName="User sessions"
                         title="See a timeline of a user's activity"
                         description="User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context."
@@ -330,6 +344,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconRetention}`}
+                        // featureIcon="retention"
                         featureName="Retention"
                         title="Group users by lifecycle"
                         description="Drill down into activity of individual users within a cohort. Further break down a bucket of users to identify root causes of behavior."
@@ -346,6 +361,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconRevenueTracking}`}
+                        // featureIcon="revenue-tracking"
                         featureName="Revenue tracking"
                         title="KPIs by LTV"
                         description="By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon."
@@ -364,6 +380,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="standard"
                         featureIcon={`${iconFeatureFlags}`}
+                        // featureIcon="feature-flags"
                         featureName="Feature flags"
                         title="Roll out features strategically"
                         description="Toggle features for cohorts or individuals to test the impact."
@@ -379,6 +396,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="standard"
                         featureIcon={`${iconAnnotations}`}
+                        // featureIcon="annotations"
                         featureName="Annotations"
                         title="“Why did our traffic spike?”"
                         description="Mark new releases and more in your data, so you can understand their impact later."
@@ -391,6 +409,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconHeatmaps}`}
+                        // featureIcon="heatmaps"
                         featureName="Heatmaps"
                         title="Visualize what’s working"
                         description="Trace every click and see what catches users attention."
@@ -404,6 +423,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="standard"
                         featureIcon={`${iconSessionRecordings}`}
+                        // featureIcon="session-recordings"
                         featureName="Session recordings"
                         title="See customers using your product"
                         description="Watch exactly what users are doing without infringing their privacy."
@@ -421,6 +441,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconDataExport}`}
+                        // featureIcon="data-export"
                         featureName="Data export"
                         title="Send data where you need it"
                         description="Export data for long-term storage or make your customer data available in other tools. list of integrations here"
@@ -448,6 +469,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconDataFiltering}`}
+                        // featureIcon="data-filtering"
                         featureName="Data filtering"
                         title="Whip that data into shape"
                         description="Enforce schemas, parse data based on fields, and standardise taxonomies."
@@ -465,6 +487,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconCustomPlugins}`}
+                        // featureIcon="custom-plugins"
                         featureName="Custom plugins"
                         title="Create your own plugins"
                         description="Our APIs make it easy to access your data to use it however you need it."
@@ -477,6 +500,7 @@ function ProductPage() {
                     <ProductFeature
                         layout="reversed"
                         featureIcon={`${iconDataEnrichment}`}
+                        // featureIcon="data-enrichment"
                         featureName="Data enrichment"
                         title="Enrich your data with external signals"
                         description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why. grid of sources goes here"
