@@ -81,7 +81,7 @@ _Private:_ Deploy on your infrastructure and don’t share data with anyone. Not
 _Control:_ Control everything, from when to upgrade to how and where to deploy. 
 
 **3 - Extensible**
-_Open Source:_ Join the 263+ people who have contributed to our source code.  
+_Open Source:_ Contribute to our code and join the 10k+ developers in our community 
 _Plug-ins:_ Enhance PostHog data with plug-ins for 25+ different tools or data sources.
 _Data Export:_ Export data to 10+ tools, including BigQuery, S3, Snowflake, and Redshift.
 
