@@ -62,7 +62,7 @@ module.exports = {
             full: '0 0 100%',
         },
         backgroundColor: (theme) => ({
-            purple: '#2A0B46',
+            purple: '#220f3f',
             white: '#fff',
         }),
         extend: {

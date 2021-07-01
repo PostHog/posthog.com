@@ -10,6 +10,16 @@
     padding-bottom: 54%;
     height: 0;
 
+    &:after {
+        background: linear-gradient(rgba(34, 15, 63, 0), rgba(34, 15, 63, 1));
+        bottom: 0;
+        content: '';
+        height: 300px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+
     > svg {
         height: 100%;
         left: 0;
