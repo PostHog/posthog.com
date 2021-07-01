@@ -2,6 +2,23 @@
 
 // NEW (2021)
 
+.productHero {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 54%;
+    height: 0;
+
+    > svg {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
+
 .product-feature {
     background: linear-gradient(180deg, #3f086d 0%, #32134e 100%);
     border-radius: 20px;
@@ -134,6 +151,21 @@
 
     .feature-feature-flags {
         grid-area: feature-flags;
+        min-height: 400px;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../components/productFeature/images/feature-feature-flags@2x.png') 100% 30px / contain
+                no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
     }
     .feature-annotations {
         grid-area: annotations;
