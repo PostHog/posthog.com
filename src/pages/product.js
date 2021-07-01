@@ -91,11 +91,17 @@ function ProductPage() {
                         docsUrl="#"
                         figureClasses="-mb-12"
                         image={`${imageOpenSource}`}
-                        imageClasses="w-full max-w-screen-md border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                        imageClasses="relative z-10 w-full max-w-screen-md border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                         classes=""
                     />
 
-                    <Doodle type="circle" color="white" classes="top-0 left-0" />
+                    <Doodle type="rectangle" color="#5D96C4" classes="hidden md:block top-12 left-0" />
+                    <Doodle type="circle" color="#FEB7A2" classes="hidden md:block -top-12 -right-24" />
+                    <Doodle
+                        type="triangle"
+                        color="#E5C47D"
+                        classes="hidden md:block bottom-0 -right-12 transform -rotate-31"
+                    />
                 </div>
 
                 <div className="product-feature text-white text-center feature-event-autocapture">

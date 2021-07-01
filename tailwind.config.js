@@ -33,6 +33,9 @@ module.exports = {
     },
     darkMode: 'class', // or 'media' or 'class'
     theme: {
+        rotate: {
+            '-31': '-31deg',
+        },
         screens: {
             sm: '640px',
             // => @media (min-width: 640px) { ... }
