@@ -23,7 +23,7 @@ The following page outline how we hire here at PostHog.
 
 We use [Pry](https://app.pry.co/posthog-core/main/hiringplan/employees) to plan our hiring forecast. We use the hiring forecast as a guide, but we have the ability to iterate on this at any time. We are super responsive to changes PostHog's needs. 
 
-For each new role, please fill out the [new hire form](https://docs.google.com/spreadsheets/d/1F9vUYOXA4NnMSgUx3KOzAqVBbh0_ZmP3btYJ88sf3AU/edit?usp=sharing) (make a copy of the template, please) and link to it in a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2). Everyone in the company will have the opportunity to give their feedback on the proposed role, before we officially open ot. 
+For each new role, please open a new issue on the [Ops & People project board](https://github.com/orgs/PostHog/projects/2) and add all the requested information from the [new hire form](https://github.com/PostHog/company-internal/issues/new?assignees=eltjehelene&labels=people&template=new-hire-request.md&title=Proposed+New+Hire+%5BROLE%5D). Everyone in the company will have the opportunity to give their feedback on the proposed role, before we officially open ot. 
 
 #### **How to write a great job description**
 
