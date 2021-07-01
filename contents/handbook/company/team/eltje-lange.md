@@ -45,7 +45,7 @@ Also, as someone who went through a period of burnout, I made it my personal mis
 *   I do a lot of context switching, which can get very tiring. If you catch me towards the end of my working day, the chances are high that my energy levels are a bit lower. 
 *   My Slack status usually indicates what I am currently doing. I am less responsive when the status is on ‘focus time’ or calls. Otherwise, I’ll usually get back to people relatively quickly. 
 *   I hate unread notifications and I archive emails if there is no to do for me. If you message me, the lower the amount of individual notifications, the better.
-*   I use grammarly a lot. Unfortunately, grammarly doesn’t work on Markdown. I often pre-write things on google docs and use an add-on to translate it into markdown. _If you spot a mistake, it would be great if you could just correct it, instead of writing a comment to point it out. Better use of time and headspace! _
+*   I use grammarly a lot. Unfortunately, grammarly doesn’t work on Markdown. I often pre-write things on google docs and use an add-on to translate it into markdown. _If you spot a mistake, it would be great if you could just correct it, instead of writing a comment to point it out. Better use of time and headspace!_
 *   I don’t have Slack on my phone, so when I’m off, I’m off! 
 
 ## Favourite podcasts
