@@ -37,7 +37,7 @@ export const ProductFeature = ({
     // const backgroundColorClass = `bg-${bgColor}`
     return (
         <div
-            className={`py-12 px-8 ${layout} ${classes}`}
+            className={`py-6 px-4 md:py-12 md:px-8 ${layout} ${classes}`}
             style={
                 bgImage
                     ? {
@@ -63,7 +63,7 @@ export const ProductFeature = ({
             <div>
                 {/* only render if featureName exists */}
                 {featureName && (
-                    <div className="feature-name flex justify-center items-start gap-2 mb-2">
+                    <div className="feature-name flex justify-center items-start gap-2 -mx-8 mb-2">
                         {featureIcon && (
                             // Uncomment this peice of code to use svg sprite file
                             <svg>

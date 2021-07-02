@@ -2,6 +2,7 @@ import React from 'react'
 import './styles/features.scss'
 import Layout from '../components/Layout'
 import { ProductHero } from '../components/ProductHero'
+import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
@@ -106,7 +107,7 @@ function ProductPage() {
                     </div>
 
                     <div className="product-feature text-white text-center feature-data-in-out">
-                        <div className="md:grid grid-cols-2 gap-3 text-white py-12 px-8 relative">
+                        <div className="md:grid grid-cols-2 gap-3 text-white py-6 px-4 md:py-12 md:px-8 relative">
                             <ProductFeature
                                 layout="standard"
                                 featureIcon="data-pipelines"
@@ -145,7 +146,7 @@ function ProductPage() {
                                 classes=""
                             />
 
-                            <div className="py-12 px-0">
+                            <div className="py-12 px-2">
                                 <h3 className="mb-2 font-osiris font-normal text-2xl">Private cloud deployment</h3>
                                 <div className="text-white text-opacity-70">
                                     <p>
@@ -464,7 +465,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-custom-plugins">
+                    <div className="product-feature text-white text-center feature-custom-plugins min-h-[350px]">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="custom-plugins"
@@ -504,6 +505,14 @@ function ProductPage() {
                         <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
                 </div>
+
+                <ProductFooter
+                    title="Start building better products"
+                    tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
+                    componentKey="productHero"
+                    disclaimer="<p class='text-xs'>*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>.</p>"
+                    bgColor="navy"
+                />
             </div>
         </Layout>
     )

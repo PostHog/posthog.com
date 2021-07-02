@@ -43,13 +43,15 @@ export const ProductHero = ({
                     <div
                         className="text-white text-opacity-70 mt-4 text-xs"
                         dangerouslySetInnerHTML={{
-                            __html: disclaimer?.includes('<p>') ? disclaimer : `<p>${disclaimer}</p>`,
+                            __html: disclaimer?.includes('<p>')
+                                ? disclaimer
+                                : `<p className="max-w-3xl>${disclaimer}</p>`,
                         }}
                     />
                 </div>
             </div>
 
-            <a href="#" className="absolute bottom-0 sm:bottom-4 sm:mb-12 xl:mb-4 z-20 p-4 sm:p-8">
+            <a href="#" className="absolute bottom-0 sm:mb-12 xl:mb-4 z-20 p-4 sm:p-8">
                 <span className="chevron"></span>
             </a>
 

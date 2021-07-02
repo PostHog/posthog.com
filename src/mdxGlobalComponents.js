@@ -71,6 +71,7 @@ import { Savings } from './components/Pricing/Savings'
 import { PricingSlider } from './components/PricingSlider'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
+import { ProductFooter } from './components/ProductFooter'
 import { ProductHero } from './components/ProductHero'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
@@ -159,6 +160,7 @@ export const shortcodes = {
     PricingSlider,
     ProductFeature,
     ProductFeaturePlugin,
+    ProductFooter,
     ProductHero,
     ResponsiveAnchor,
     ResponsiveSidebar,
