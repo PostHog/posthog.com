@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: mo-shehu
-featureImage: ../images/blog/yc-top-companies/yc-top-companies-july-2021-ig.png
+featuredImage: ../images/blog/yc-top-companies/yc-top-companies.png
 ---
 
 YCombinator has [listed](https://www.ycombinator.com/topcompanies) PostHog as number 157 out of its top 159 companies by valuations and exits as of July 2021.
