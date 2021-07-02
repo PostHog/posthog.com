@@ -47,7 +47,11 @@ export const ProductHero = ({
                 </div>
             </div>
 
-            <HeroAnimation />
+            <a href="#" className="absolute bottom-4 mb-12 z-20 p-8">
+                <span className="chevron"></span>
+            </a>
+
+            <HeroAnimation className="absolute h-full w-full top-0 left-0" />
         </div>
     )
 }
