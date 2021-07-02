@@ -1,5 +1,5 @@
 ---
-date: 2021-xx-xx
+date: 2021-07-02
 title: YC Names PostHog No. 157 On List Of 159 Top Valued Companies For July 2021
 rootPage: /blog
 sidebar: Blog
