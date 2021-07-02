@@ -131,7 +131,7 @@ And after making your own migrations or running `git pull` after new migrations,
 python manage.py migrate
 ```
 
-#### Clickhouse Migrations
+#### ClickHouse Migrations
 
 To create boilerplate for clickhouse migrations use 
 ```

@@ -26,5 +26,5 @@ Event ingestion volume can be one of the largest contributing factors to your da
 
 The downside of ClickHouse is that it takes more work to set up and configure correctly when compared to Postgres. This is why we currently only offer ClickHouse as part of PostHog Cloud, on select VPC deployments or with a license from us. If you want to self-host PostHog and use ClickHouse, we do offer a free license (with certain restrictions) so you can handle large volumes. Please note that this will require more technical expertise on ClickHouse and infrastructure management in general (not only setup but maintenance too).
 
-If you have large event volumes and would like to use a more scalable and efficient version of PostHog, please email us at _[sales@posthog.com](mailto:sales@posthog.com)_ to discuss details. Reach out too if you want to get a free Clickhouse license.
+If you have large event volumes and would like to use a more scalable and efficient version of PostHog, please email us at _[sales@posthog.com](mailto:sales@posthog.com)_ to discuss details. Reach out too if you want to get a free ClickHouse license.
 

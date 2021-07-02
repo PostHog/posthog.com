@@ -35,6 +35,6 @@ There will be work on three main fronts:
 
 # 3. Make it easy to deploy a scalable version of PostHog, free
 
-When we started PostHog we went with Postgres as our backend. This was a great choice early on as it allowed virtually anyone to deploy PostHog on any platform. Over time, however, the limitations of using Postgres for analytics became obvious, and we spent a chunk of 2020 converting our cloud offering to use Clickhouse in the backend.
+When we started PostHog we went with Postgres as our backend. This was a great choice early on as it allowed virtually anyone to deploy PostHog on any platform. Over time, however, the limitations of using Postgres for analytics became obvious, and we spent a chunk of 2020 converting our cloud offering to use ClickHouse in the backend.
 
-The next step is offering this super scalable version of PostHog to people who want to self host. We'll need to build tooling, metrics and monitoring to help people who need the power of Clickhouse, but want to maintain control over their data.
+The next step is offering this super scalable version of PostHog to people who want to self host. We'll need to build tooling, metrics and monitoring to help people who need the power of ClickHouse, but want to maintain control over their data.
