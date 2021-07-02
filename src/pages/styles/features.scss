@@ -2,12 +2,21 @@
 
 // NEW (2021)
 
+// Hero animation
+// Animated SVG was created with SVGator. We use different sizes depending on screen size. (Square on mobile, 1920x1080 on normal desktops, 1920x720 on very wide screens. (We don't want the content pushed too far down.) Note: These are viewBox dimensions for the SVG.
+// To add/remove an SVG at a breakpoint:
+// 1. In this file, adjust padding-bottom on .productHero (this is a proportional video hack)
+// 2. in ProductHero/index.tsx, adjust content wrapper (mt-[54%] xl:mt-[37.5%]), then add HeroAnimation_____ (size) at bottom of page after adding asset and referencing
+
 .productHero {
     align-items: center;
     display: flex;
     justify-content: center;
     position: relative;
     padding-bottom: 54%;
+    @media (min-width: 1280px) {
+        padding-bottom: 37.5%;
+    }
     height: 0;
 
     &:after {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { LandingPageCallToAction } from '../LandingPage/LandingPageCallToAction'
-import HeroAnimation from '../productFeature/images/svgs/hero.svg'
+import HeroAnimation1920x1080 from '../productFeature/images/svgs/hero-1920x1080.svg'
+import HeroAnimation1920x720 from '../productFeature/images/svgs/hero-1920x720.svg'
 
 interface ProductHeroProps {
     preTitle?: string
@@ -22,7 +23,7 @@ export const ProductHero = ({
     const backgroundColorClass = `bg-${bgColor}`
     return (
         <div className={`${componentKey}`}>
-            <div className="mt-[54%]">
+            <div className="mt-[54%] xl:mt-[37.5%]">
                 <div className="flex justify-center w-11/12 mx-auto mb-8 pt-12 flex-col relative z-10 text-center">
                     <div className="max-w-full hero-headline mt-4">
                         <div className="font-osiris lowercase text-base mb-4 text-white text-opacity-75">
@@ -47,11 +48,12 @@ export const ProductHero = ({
                 </div>
             </div>
 
-            <a href="#" className="absolute bottom-4 mb-12 z-20 p-8">
+            <a href="#" className="absolute bottom-4 mb-12 xl:mb-4 z-20 p-8">
                 <span className="chevron"></span>
             </a>
 
-            <HeroAnimation className="absolute h-full w-full top-0 left-0" />
+            <HeroAnimation1920x1080 className="xl:hidden absolute h-full w-full top-0 left-0" />
+            <HeroAnimation1920x720 className="hidden xl:block absolute h-full w-full top-0 left-0" />
         </div>
     )
 }
