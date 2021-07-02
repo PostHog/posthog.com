@@ -1,5 +1,5 @@
 module.exports = {
-    //mode: 'jit',
+    mode: 'jit',
     purge: {
         content: ['./src/**/*.{js,jsx,ts,tsx}'],
         options: {
@@ -33,6 +33,9 @@ module.exports = {
     },
     darkMode: 'class', // or 'media' or 'class'
     theme: {
+        rotate: {
+            '-31': '-31deg',
+        },
         screens: {
             sm: '640px',
             // => @media (min-width: 640px) { ... }
@@ -59,7 +62,7 @@ module.exports = {
             full: '0 0 100%',
         },
         backgroundColor: (theme) => ({
-            purple: '#2A0B46',
+            purple: '#220f3f',
             white: '#fff',
         }),
         extend: {
