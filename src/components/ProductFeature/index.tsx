@@ -63,7 +63,7 @@ export const ProductFeature = ({
             <div>
                 {/* only render if featureName exists */}
                 {featureName && (
-                    <div className="feature-name flex justify-center items-center gap-2 mb-2">
+                    <div className="feature-name flex justify-center items-start gap-2 mb-2">
                         {featureIcon && (
                             // Uncomment this peice of code to use svg sprite file
                             <svg>
