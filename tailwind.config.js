@@ -19,6 +19,8 @@ module.exports = {
                 '-ml-4',
                 '-mb-12',
                 'pr-32',
+                'rotate-45',
+                'rotate-90',
                 'max-w-xl',
                 'max-w-2xl',
                 'max-w-3xl',
@@ -54,6 +56,9 @@ module.exports = {
 
             '2xl': '1536px',
             // => @media (min-width: 1536px) { ... }
+        },
+        scale: {
+            '-1': '-1',
         },
         flex: {
             '1/3': '0 0 33%',

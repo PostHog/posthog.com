@@ -83,7 +83,9 @@ export const ProductFeature = ({
                 <div
                     className="text-white text-opacity-70"
                     dangerouslySetInnerHTML={{
-                        __html: description?.includes('<p>') ? description : `<p>${description}</p>`,
+                        __html: description?.includes('<p class="max-w-md mx-auto">')
+                            ? description
+                            : `<p class="max-w-md mx-auto">${description}</p>`,
                     }}
                 />
 

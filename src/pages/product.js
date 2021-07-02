@@ -216,12 +216,12 @@ function ProductPage() {
                             title="Monitor engagement. <br />Create actionable insights."
                             description="
                                 <div class='md:grid gap-12 grid-cols-2 max-w-screen-md mx-auto mt-8 mb-4'>
-                                    <div>
-                                        <strong class='text-white'>Segmentation</strong>
+                                    <div class='top-hr mt-4'>
+                                        <strong class='text-white mb-1'>Segmentation</strong>
                                         <p class='text-sm'>Monitor the impact of product changes - by customer plan, traffic source, or any other user property.</p>
                                     </div>
-                                    <div>
-                                        <strong class='text-white'>Annotations</strong>
+                                    <div class='top-hr mt-4'>
+                                        <strong class='text-white mb-1'>Annotations</strong>
                                         <p class='text-sm'>No longer will ask, “Why did this chart spike?”
                                         App-wide annotations provide context to the data you’re analyzing.</p>
                                     </div>
@@ -232,8 +232,24 @@ function ProductPage() {
                             figureClasses="-mb-12"
                             imageWidth="1051"
                             imageHeight="576"
-                            imageClasses="w-screen-md max-w-content rounded-tl-xl rounded-tr-xl"
+                            imageClasses="w-screen-md max-w-content rounded-tl-xl rounded-tr-xl relative z-20"
                             classes=""
+                        />
+
+                        <Doodle
+                            type="rectangle"
+                            color="#5D96C4"
+                            classes="hidden md:block top-12 right-3 transform -scale-x-1"
+                        />
+                        <Doodle
+                            type="circle"
+                            color="#FEB7A2"
+                            classes="hidden md:block -top-12 -left-24 transform -scale-x-1 rotate-180"
+                        />
+                        <Doodle
+                            type="triangle"
+                            color="#E5C47D"
+                            classes="hidden md:block bottom-0 -left-12 transform -rotate-31"
                         />
                     </div>
 
@@ -274,6 +290,11 @@ function ProductPage() {
                             imageHeight="620"
                             classes=""
                         />
+                        <Doodle
+                            type="rectangle"
+                            color="#5D96C4"
+                            classes="hidden md:block bottom-6 left-6 transform -scale-x-1"
+                        />
                     </div>
 
                     <div className="product-feature text-white text-center feature-cohorts">
@@ -304,9 +325,11 @@ function ProductPage() {
                             image={`${imageUserSessions}`}
                             imageWidth="1410"
                             imageHeight="914"
-                            imageClasses="w-full max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                            imageClasses="w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
                         />
+                        <Doodle type="zigzag" color="#FFCF72" classes="hidden md:block -top-4 left-6" />
+                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
 
                     <div className="product-feature text-white text-center feature-retention">
@@ -342,7 +365,7 @@ function ProductPage() {
                 </div>
 
                 <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
-                    <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start pr-40">
+                    <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start pr-50">
                         <ProductFeature
                             layout="standard"
                             featureIcon="feature-flags"
@@ -367,7 +390,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center flex items-center feature-heatmaps pr-16 xl:pr-32">
+                    <div className="product-feature text-white text-center flex items-center feature-heatmaps pr-24 xl:pr-32">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="heatmaps"
@@ -476,6 +499,9 @@ function ProductPage() {
                             <ProductFeaturePlugin name="GitLab release tracker" handle="gitlab-release" />
                             <ProductFeaturePlugin name="Bitbucket release tracker" handle="bitbucket-release" />
                         </ul>
+
+                        <Doodle type="rectangle" classes="hidden md:block top-12 -left-6" />
+                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
                 </div>
             </div>

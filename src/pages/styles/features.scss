@@ -113,6 +113,21 @@
             width: 18px;
         }
     }
+
+    .top-hr {
+        position: relative;
+
+        &:before {
+            background: rgba(255, 255, 255, 0.2);
+            content: '';
+            border-radius: 10px;
+            height: 3px;
+            left: calc(50% - 15px);
+            position: absolute;
+            top: -20px;
+            width: 30px;
+        }
+    }
 }
 
 .features-grid {
@@ -223,7 +238,7 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-feature-flags@2x.png') 100% 30px / contain
+            background: url('../../components/productFeature/images/feature-feature-flags@2x.png') bottom right / 40%
                 no-repeat;
             content: '';
             height: 100%;
