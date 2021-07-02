@@ -509,7 +509,7 @@ function ProductPage() {
                 <ProductFooter
                     title="Start building better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
-                    componentKey="productHero"
+                    componentKey="productFooter"
                     disclaimer="<p class='text-xs'>*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>.</p>"
                     bgColor="navy"
                 />

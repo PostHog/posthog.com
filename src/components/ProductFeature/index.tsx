@@ -37,7 +37,7 @@ export const ProductFeature = ({
     // const backgroundColorClass = `bg-${bgColor}`
     return (
         <div
-            className={`py-6 px-4 md:py-12 md:px-8 ${layout} ${classes}`}
+            className={`py-6 px-4 sm:py-12 sm:px-8 ${layout} ${classes}`}
             style={
                 bgImage
                     ? {

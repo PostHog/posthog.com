@@ -25,7 +25,7 @@ export const ProductHero = ({
     return (
         <div className={`${componentKey}`}>
             <div className="mt-[180%] sm:mt-[54%] xl:mt-[37.5%]">
-                <div className="flex justify-center w-11/12 mx-auto mb-8 pt-12 flex-col relative z-10 text-center">
+                <div className="flex justify-center w-11/12 mx-auto pb-8 pt-12 flex-col relative z-10 text-center">
                     <div className="max-w-full hero-headline mt-4">
                         <div className="font-osiris lowercase text-base mb-4 text-white text-opacity-75">
                             {preTitle}
@@ -33,7 +33,7 @@ export const ProductHero = ({
                         <h1 className="text-white leading-tight mb-4 font-osiris lowercase font-normal">
                             <span className="text-5xl">{title}</span>
                         </h1>
-                        <p className="text-baby-blue text-base">{tagline}</p>
+                        <p className="text-baby-blue text-base mx-auto">{tagline}</p>
                     </div>
 
                     <div className="relative">
