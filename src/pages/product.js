@@ -2,6 +2,7 @@ import React from 'react'
 import './styles/features.scss'
 import Layout from '../components/Layout'
 import { ProductHero } from '../components/ProductHero'
+import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
@@ -63,7 +64,6 @@ function ProductPage() {
                             featureName="Open source"
                             title="Open source product analytics"
                             description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
-                            docsUrl="#"
                             figureClasses="-mb-12"
                             image={`${imageOpenSource}`}
                             imageClasses="relative z-10 w-full max-w-screen-md border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
@@ -86,7 +86,7 @@ function ProductPage() {
                             featureName="Event autocapture"
                             title="Track events automatically"
                             description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
-                            docsUrl="#"
+                            docsUrl="/docs/features/events#autocapture-event-tracking"
                             figureClasses="mb-8"
                             image={`${imageAutocapture}`}
                             imageWidth="253"
@@ -102,7 +102,7 @@ function ProductPage() {
                             featureName="Dashboards"
                             title="Monitor core metrics"
                             description="Build dashboards with everyday metrics like sign-ups, purchases and conversions."
-                            docsUrl="#"
+                            docsUrl="/docs/features/dashboards"
                             figureClasses="mb-8"
                             image={`${imageDashboards}`}
                             imageWidth="234"
@@ -112,14 +112,14 @@ function ProductPage() {
                     </div>
 
                     <div className="product-feature text-white text-center feature-data-in-out">
-                        <div className="md:grid grid-cols-2 gap-3 text-white py-12 px-8 relative">
+                        <div className="md:grid grid-cols-2 gap-3 text-white py-6 px-4 md:py-12 md:px-8 relative">
                             <ProductFeature
                                 layout="standard"
                                 featureIcon="data-pipelines"
                                 featureName="Data pipelines"
                                 title="Ingest data from multiple sources"
                                 description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
-                                docsUrl="#"
+                                docsUrl="/docs/libraries"
                                 classes=""
                             />
 
@@ -129,7 +129,7 @@ function ProductPage() {
                                 featureName="Export to data warehouse"
                                 title="Normalize & push data anywhere"
                                 description="Move data through PostHog to BigQuery, S3, Snowflake, or Redshift."
-                                docsUrl="#"
+                                docsUrl="/docs/features/plugins#example-use-cases"
                                 classes=""
                             />
                         </div>
@@ -139,7 +139,7 @@ function ProductPage() {
                     </div>
 
                     <div className="product-feature text-white text-center feature-hosting-flexibility pt-12 px-4">
-                        <div className="feature-name flex justify-center items-center gap-2 -mb-6">
+                        <div className="feature-name flex justify-center items-start gap-2 -mb-6">
                             <img src={`${iconHostingFlexibility}`} alt="Hosting flexibility icon" />
                             <div className="font-bold text-pink">Hosting flexibility</div>
                         </div>
@@ -151,7 +151,7 @@ function ProductPage() {
                                 classes=""
                             />
 
-                            <div className="py-12 px-0">
+                            <div className="py-12 px-2">
                                 <h3 className="mb-2 font-osiris font-normal text-2xl">Private cloud deployment</h3>
                                 <div className="text-white text-opacity-70">
                                     <p>
@@ -160,12 +160,21 @@ function ProductPage() {
                                     </p>
                                 </div>
                                 <ul className="flex justify-center flex-wrap p-0 list-none text-center">
-                                    <HostingOption name="Heroku" handle="heroku" url="#" />
-                                    <HostingOption name="AWS" handle="aws" url="#" />
-                                    <HostingOption name="Google Cloud" handle="google-cloud" url="#" />
-                                    <HostingOption name="Docker" handle="aws" url="#" />
-                                    <HostingOption name="Azure" handle="azure" url="#" />
-                                    <HostingOption name="Source" handle="source-code" url="#" />
+                                    <HostingOption name="Heroku" handle="heroku" url="/docs/deployment/deploy-heroku" />
+                                    <HostingOption name="AWS" handle="aws" url="/docs/deployment/deploy-aws" />
+                                    <HostingOption
+                                        name="Google Cloud"
+                                        handle="google-cloud"
+                                        url="/docs/deployment/deploy-gcs"
+                                    />
+                                    <HostingOption name="Docker" handle="aws" url="/docs/deployment/deploy-docker" />
+                                    <HostingOption name="Azure" handle="azure" url="/docs/deployment/deploy-azure" />
+                                    <HostingOption
+                                        name="Source"
+                                        handle="source-code"
+                                        url="/docs/deployment/deploy-source"
+                                    />
+                                    <HostingOption name="More" handle="more" url="/docs/deployment" />
                                 </ul>
                             </div>
 
@@ -185,7 +194,6 @@ function ProductPage() {
                             featureName="Data privacy"
                             title="Compliance-friendly"
                             description="<p>Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around.</p>"
-                            docsUrl="#"
                             figureClasses="md:h-48"
                             image={`${imageDataPrivacy}`}
                             classes=""
@@ -199,7 +207,7 @@ function ProductPage() {
                             featureName="API"
                             title="Full access to your data"
                             description="Our API and direct SQL access allow full access to your production instance."
-                            docsUrl="#"
+                            docsUrl="/docs/api/overview"
                             figureClasses="md:h-48"
                             image={`${imageApi}`}
                             classes=""
@@ -216,24 +224,40 @@ function ProductPage() {
                             title="Monitor engagement. <br />Create actionable insights."
                             description="
                                 <div class='md:grid gap-12 grid-cols-2 max-w-screen-md mx-auto mt-8 mb-4'>
-                                    <div>
-                                        <strong class='text-white'>Segmentation</strong>
+                                    <div class='top-hr mt-4'>
+                                        <strong class='text-white mb-1'>Segmentation</strong>
                                         <p class='text-sm'>Monitor the impact of product changes - by customer plan, traffic source, or any other user property.</p>
                                     </div>
-                                    <div>
-                                        <strong class='text-white'>Annotations</strong>
+                                    <div class='top-hr mt-4'>
+                                        <strong class='text-white mb-1'>Annotations</strong>
                                         <p class='text-sm'>No longer will ask, “Why did this chart spike?”
                                         App-wide annotations provide context to the data you’re analyzing.</p>
                                     </div>
                                 </div>
                             "
-                            docsUrl="#"
+                            docsUrl="/docs/features/trends"
                             image={`${imageTrends}`}
                             figureClasses="-mb-12"
                             imageWidth="1051"
                             imageHeight="576"
-                            imageClasses="w-screen-md max-w-content rounded-tl-xl rounded-tr-xl"
+                            imageClasses="w-screen-md max-w-content rounded-tl-xl rounded-tr-xl relative z-20"
                             classes=""
+                        />
+
+                        <Doodle
+                            type="rectangle"
+                            color="#5D96C4"
+                            classes="hidden md:block top-12 right-3 transform -scale-x-1"
+                        />
+                        <Doodle
+                            type="circle"
+                            color="#FEB7A2"
+                            classes="hidden md:block -top-12 -left-24 transform -scale-x-1 rotate-180"
+                        />
+                        <Doodle
+                            type="triangle"
+                            color="#E5C47D"
+                            classes="hidden md:block bottom-0 -left-12 transform -rotate-31"
                         />
                     </div>
 
@@ -254,7 +278,7 @@ function ProductPage() {
                             featureName="Funnels"
                             title="Identify <strike class='opacity-50'>dropoff</strike> opportunity"
                             description="<p>Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment.</p>"
-                            docsUrl="#"
+                            docsUrl="/docs/features/funnels"
                             //bgImage={`${imageFunnels}`}
                             bgImagePosition="bottom center / 100%"
                             classes=""
@@ -268,11 +292,16 @@ function ProductPage() {
                             featureName="Paths"
                             title="Visualize how traffic flows"
                             description="<p>See common user paths and discover how visitors arrived at their outcome.</p>"
-                            docsUrl="#"
+                            docsUrl="/docs/features/paths"
                             image={`${imagePaths}`}
                             imageWidth="320"
                             imageHeight="620"
                             classes=""
+                        />
+                        <Doodle
+                            type="rectangle"
+                            color="#5D96C4"
+                            classes="hidden md:block bottom-6 left-6 transform -scale-x-1"
                         />
                     </div>
 
@@ -283,7 +312,7 @@ function ProductPage() {
                             featureName="Cohorts"
                             title="Insights by association"
                             description="Use common traits to identify inflection points."
-                            docsUrl="#"
+                            docsUrl="/docs/features/cohorts"
                             figureClasses="-mb-8"
                             image={`${imageCohorts}`}
                             imageWidth="479"
@@ -299,14 +328,16 @@ function ProductPage() {
                             featureName="User sessions"
                             title="See a timeline of a user's activity"
                             description="User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context."
-                            docsUrl="#"
+                            docsUrl="/docs/features/sessions"
                             figureClasses="-mb-12"
                             image={`${imageUserSessions}`}
                             imageWidth="1410"
                             imageHeight="914"
-                            imageClasses="w-full max-w-screen-lg rounded-tl-xl rounded-tr-xl"
+                            imageClasses="w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
                         />
+                        <Doodle type="zigzag" color="#FFCF72" classes="hidden md:block -top-4 left-6" />
+                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
 
                     <div className="product-feature text-white text-center feature-retention">
@@ -316,8 +347,8 @@ function ProductPage() {
                             featureName="Retention"
                             title="Group users by lifecycle"
                             description="Drill down into activity of individual users within a cohort. Further break down a bucket of users to identify root causes of behavior."
-                            docsUrl="#"
-                            figureClasses=""
+                            docsUrl="/docs/features/retention"
+                            figureClasses="mb-0"
                             image={`${imageRetention}`}
                             imageWidth="455"
                             imageHeight="210"
@@ -332,7 +363,6 @@ function ProductPage() {
                             featureName="Revenue tracking"
                             title="KPIs by LTV"
                             description="By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon."
-                            docsUrl="#"
                             figureClasses=""
                             image={`${imageRevenueTracking}`}
                             imageWidth="253"
@@ -343,14 +373,14 @@ function ProductPage() {
                 </div>
 
                 <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
-                    <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start mr-32">
+                    <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start pr-50">
                         <ProductFeature
                             layout="standard"
                             featureIcon="feature-flags"
                             featureName="Feature flags"
                             title="Roll out features <br />strategically"
                             description="Toggle features for cohorts or individuals to test the impact."
-                            docsUrl="#"
+                            docsUrl="/docs/features/feature-flags#"
                             figureClasses=""
                             classes="-mb-4"
                         />
@@ -363,19 +393,19 @@ function ProductPage() {
                             featureName="Annotations"
                             title="“Why did our traffic spike?”"
                             description="Mark new releases and more in your data, so you can understand their impact later."
-                            docsUrl="#"
+                            docsUrl="/docs/features/annotations"
                             classes="relative -mb-4"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center flex items-center feature-heatmaps pr-16 xl:pr-32">
+                    <div className="product-feature text-white text-center flex items-center feature-heatmaps pr-24 xl:pr-32">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="heatmaps"
                             featureName="Heatmaps"
                             title="Visualize what’s working"
                             description="Trace every click and see what catches users attention."
-                            docsUrl="#"
+                            docsUrl="/docs/tutorials/toolbar"
                             //image={`${imageHeatmaps}`}
                             classes="relative "
                         />
@@ -388,7 +418,7 @@ function ProductPage() {
                             featureName="Session recordings"
                             title="See customers using your product"
                             description="Watch exactly what users are doing without infringing their privacy."
-                            docsUrl="#"
+                            docsUrl="/docs/features/session-recording"
                             figureClasses="mb-8"
                             image={`${imageSessionRecordings}`}
                             imageWidth="356"
@@ -405,7 +435,7 @@ function ProductPage() {
                             featureName="Data export"
                             title="Send data where you need it"
                             description="Export data for long-term storage or make your customer data available in other tools. list of integrations here"
-                            docsUrl="#"
+                            docsUrl="/docs/plugins/overview"
                             imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
                         />
@@ -432,7 +462,7 @@ function ProductPage() {
                             featureName="Data filtering"
                             title="Whip that data into shape"
                             description="Enforce schemas, parse data based on fields, and standardise taxonomies."
-                            docsUrl="#"
+                            docsUrl="/docs/plugins/overview"
                             figureClasses="text-right"
                             image={`${imageDataFiltering}`}
                             imageWidth="352"
@@ -442,7 +472,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-custom-plugins">
+                    <div className="product-feature text-white text-center feature-custom-plugins min-h-[350px]">
                         {/* Plugin Section starts here */}
                         <ProductFeature
                             id="plugin"
@@ -451,7 +481,7 @@ function ProductPage() {
                             featureName="Custom plugins"
                             title="Create your own plugins"
                             description="Our APIs make it easy to access your data to use it however you need it."
-                            docsUrl="#"
+                            docsUrl="/docs/plugins/build/overview"
                             classes="relative"
                         />
                     </div>
@@ -463,7 +493,7 @@ function ProductPage() {
                             featureName="Data enrichment"
                             title="Enrich your data with external signals"
                             description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why. grid of sources goes here"
-                            docsUrl="#"
+                            docsUrl="/docs/plugins/overview"
                             imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
                         />
@@ -479,8 +509,19 @@ function ProductPage() {
                             <ProductFeaturePlugin name="GitLab release tracker" handle="gitlab-release" />
                             <ProductFeaturePlugin name="Bitbucket release tracker" handle="bitbucket-release" />
                         </ul>
+
+                        <Doodle type="rectangle" classes="hidden md:block top-12 -left-6" />
+                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
                 </div>
+
+                <ProductFooter
+                    title="Start building better products"
+                    tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
+                    componentKey="productFooter"
+                    disclaimer="<p class='text-xs'>*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>.</p>"
+                    bgColor="navy"
+                />
             </div>
         </Layout>
     )

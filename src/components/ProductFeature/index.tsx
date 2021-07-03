@@ -40,7 +40,7 @@ export const ProductFeature = ({
     return (
         <div
             id={id} // ID applied to navigate using navbar (must be passed only for starting elements)
-            className={`py-12 px-8 ${layout} ${classes}`}
+            className={`py-6 px-4 sm:py-12 sm:px-8 ${layout} ${classes}`}
             style={
                 bgImage
                     ? {
@@ -66,7 +66,7 @@ export const ProductFeature = ({
             <div>
                 {/* only render if featureName exists */}
                 {featureName && (
-                    <div className="feature-name flex justify-center items-center gap-2 mb-2">
+                    <div className="feature-name flex justify-center items-start gap-2 -mx-8 mb-2">
                         {featureIcon && (
                             // Uncomment this peice of code to use svg sprite file
                             <svg>
@@ -86,7 +86,9 @@ export const ProductFeature = ({
                 <div
                     className="text-white text-opacity-70"
                     dangerouslySetInnerHTML={{
-                        __html: description?.includes('<p>') ? description : `<p>${description}</p>`,
+                        __html: description?.includes('<p class="max-w-md mx-auto">')
+                            ? description
+                            : `<p class="max-w-md mx-auto">${description}</p>`,
                     }}
                 />
 

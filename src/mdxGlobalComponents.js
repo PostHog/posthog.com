@@ -1,9 +1,9 @@
 // AUTO GENERATED FILE
 
-import { Endpoint } from './components/APIDocs/Endpoint'
-import { MethodTags } from './components/APIDocs/MethodTags'
 import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
+import { Endpoint } from './components/APIDocs/Endpoint'
+import { MethodTags } from './components/APIDocs/MethodTags'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
@@ -25,8 +25,8 @@ import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
-import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { ContributorSearch } from './components/ContributorSearch'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -72,6 +72,7 @@ import { PricingSlider } from './components/PricingSlider'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
+import { ProductFooter } from './components/ProductFooter'
 import { ProductHero } from './components/ProductHero'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
@@ -89,10 +90,10 @@ import { TableOfContents } from './components/TableOfContents'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
 export const shortcodes = {
-    Endpoint,
-    MethodTags,
     AllTheFeaturesCloud,
     AnchorScrollNavbar,
+    Endpoint,
+    MethodTags,
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
@@ -114,8 +115,8 @@ export const shortcodes = {
     Container,
     ContributorAvatars,
     ContributorCard,
-    ContributorSearch,
     ContributorsChart,
+    ContributorSearch,
     DarkModeToggle,
     DemoScheduler,
     DocsPageSurvey,
@@ -161,6 +162,7 @@ export const shortcodes = {
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
+    ProductFooter,
     ProductHero,
     ResponsiveAnchor,
     ResponsiveSidebar,

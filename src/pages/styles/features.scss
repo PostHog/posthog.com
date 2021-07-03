@@ -2,12 +2,24 @@
 
 // NEW (2021)
 
+// Hero animation
+// Animated SVG was created with SVGator. We use different sizes depending on screen size. (720x1300 on mobile, 1920x1080 on normal desktops, 1920x720 on very wide screens. (We don't want the content pushed too far down.) Note: These are viewBox dimensions for the SVG.
+// To add/remove an SVG at a breakpoint:
+// 1. In this file, adjust padding-bottom on .productHero (this is a proportional video hack)
+// 2. in ProductHero/index.tsx, adjust content wrapper (mt-[54%] xl:mt-[37.5%]), then add HeroAnimation_____ (size) at bottom of page after adding asset and referencing
+
 .productHero {
     align-items: center;
     display: flex;
     justify-content: center;
     position: relative;
-    padding-bottom: 54%;
+    padding-bottom: 180%;
+    @media (min-width: 640px) {
+        padding-bottom: 54%;
+    }
+    @media (min-width: 1280px) {
+        padding-bottom: 37.5%;
+    }
     height: 0;
 
     &:after {
@@ -20,12 +32,56 @@
         width: 100%;
     }
 
-    > svg {
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
+    .chevron {
+        background-image: url('../../images/chevron.svg') !important;
+        display: inline-block;
+        height: 11px;
+        width: 18px;
+
+        -webkit-animation: ca3_fade_move_down 2s ease-in-out infinite;
+        -moz-animation: ca3_fade_move_down 2s ease-in-out infinite;
+        animation: ca3_fade_move_down 2s ease-in-out infinite;
+    }
+}
+
+/*animated scroll arrow animation*/
+@-webkit-keyframes ca3_fade_move_down {
+    0% {
+        -webkit-transform: translate(0, -20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translate(0, 20px);
+        opacity: 0;
+    }
+}
+@-moz-keyframes ca3_fade_move_down {
+    0% {
+        -moz-transform: translate(0, -20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        -moz-transform: translate(0, 20px);
+        opacity: 0;
+    }
+}
+@keyframes ca3_fade_move_down {
+    0% {
+        transform: translate(0, -20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 20px);
+        opacity: 0;
     }
 }
 
@@ -55,6 +111,21 @@
         svg {
             height: 18px;
             width: 18px;
+        }
+    }
+
+    .top-hr {
+        position: relative;
+
+        &:before {
+            background: rgba(255, 255, 255, 0.2);
+            content: '';
+            border-radius: 10px;
+            height: 3px;
+            left: calc(50% - 15px);
+            position: absolute;
+            top: -20px;
+            width: 30px;
         }
     }
 }
@@ -167,7 +238,7 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-feature-flags@2x.png') 100% 30px / contain
+            background: url('../../components/productFeature/images/feature-feature-flags@2x.png') bottom right / 40%
                 no-repeat;
             content: '';
             height: 100%;
@@ -201,7 +272,7 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-heatmaps.png') 180% 20px / contain no-repeat;
+            background: url('../../components/productFeature/images/feature-heatmaps.png') 100% 20px / contain no-repeat;
 
             @media (min-width: 1024px) {
                 background: url('../../components/productFeature/images/feature-heatmaps@2x.png') 140% 0 / contain
