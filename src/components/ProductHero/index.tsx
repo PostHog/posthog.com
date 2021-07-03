@@ -9,6 +9,7 @@ interface ProductHeroProps {
     disclaimer?: string
     componentKey: string
     bgColor?: string
+    id?: 'platform' | undefined
 }
 
 export const ProductHero = ({
@@ -18,10 +19,14 @@ export const ProductHero = ({
     componentKey,
     bgColor = 'navy',
     disclaimer,
+    id,
 }: ProductHeroProps) => {
     const backgroundColorClass = `bg-${bgColor}`
     return (
-        <div className={`${componentKey}`}>
+        <div
+            className={`${componentKey}`}
+            id={id} // ID applied to navigate using navbar
+        >
             <div className="mt-[54%]">
                 <div className="flex justify-center w-11/12 mx-auto mb-8 pt-12 flex-col relative z-10 text-center">
                     <div className="max-w-full hero-headline mt-4">
