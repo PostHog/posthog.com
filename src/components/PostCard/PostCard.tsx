@@ -104,15 +104,42 @@ const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; author
     )
 }
 
+const LandingPageSnippet = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
+    return (
+        <div className="w-full flex flex-col justify-between items-center">
+            {post.frontmatter.featuredImage?.publicURL && (
+                <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
+                    <Link to={post.fields.slug} className="featured-post-img">
+                        <img
+                            className="w-full h-auto block rounded shadow-lg mb-0"
+                            src={post.frontmatter.featuredImage.publicURL}
+                        />
+                    </Link>
+                </div>
+            )}
+            <div className="w-full py-4">
+                <h2 className="text-2xl text-white font-gosha my-1">
+                    <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
+                        {post.frontmatter.title}
+                    </Link>
+                </h2>
+                <AuthorIndexView authorDetails={authorDetails} />
+            </div>
+        </div>
+    )
+}
+
 const PostCard = ({
     post,
     featured = false,
     landingPage = false,
+    snippet = false,
     authorDetails,
 }: {
     post: PostType
     featured?: boolean
     landingPage?: boolean
+    snippet?: boolean
     authorDetails?: AuthorsData
 }) => {
     return (
@@ -121,6 +148,8 @@ const PostCard = ({
                 <FeaturedPost post={post} authorDetails={authorDetails} />
             ) : landingPage ? (
                 <LandingPageLatestPost post={post} authorDetails={authorDetails} />
+            ) : snippet ? (
+                <LandingPageSnippet post={post} authorDetails={authorDetails} />
             ) : (
                 <div className="flex flex-col mb-12">
                     <h3 className="mb-0">
