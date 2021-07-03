@@ -35,39 +35,17 @@ export const RecentBlogPosts = () => {
                     </div>
 
                     <div className="bg-purple-500 bg-opacity-10 p-6 w-full mt-2 lg:mt-0 lg:w-1/3 lg:ml-2 rounded text-white">
-                        <span className="block opacity-70">Pinned articles</span>
+                        <span className="block opacity-70">Recent Posts</span>
 
-                        <Link
-                            to="/blog/posthog-announces-9-million-dollar-series-A"
-                            className="block mt-3 text-white hover:text-white hover:underline"
-                        >
-                            PostHog Raises $12 Million in Funding Led by GV and Y Combinator
-                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
-                        </Link>
+                        <BlogPosts
+                            render={(posts) => {
+                                const postCard = (posts as { node: PostType }[])
+                                    .slice(1, 4)
+                                    .map((post) => <PostCard key={post.node.id} post={post.node} snippet />)
 
-                        <Link
-                            to="/blog/hacktoberfest-2020"
-                            className="block mt-4 text-white hover:text-white hover:underline"
-                        >
-                            PostHog Joins Hacktoberfest 2020
-                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
-                        </Link>
-
-                        <Link
-                            to="/blog/open-source-telemetry-ethical"
-                            className="block mt-4 text-white hover:text-white hover:underline"
-                        >
-                            Should open source projects track you?
-                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
-                        </Link>
-
-                        <Link
-                            to="/blog/remote-culture"
-                            className="block mt-4 text-white hover:text-white hover:underline"
-                        >
-                            Building an All-Remote Company from Scratch
-                            <span className="block mt-1 opacity-50 font-sm hidden">8 min read</span>
-                        </Link>
+                                return <>{postCard}</>
+                            }}
+                        />
                     </div>
                 </div>
 

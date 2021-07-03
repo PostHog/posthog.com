@@ -135,6 +135,20 @@
     transition: none;
 }
 
+.post-preview-fade {
+    position: relative;
+
+    &:after {
+        background: linear-gradient(rgba(30, 23, 79, 0), rgba(30, 23, 79, 1));
+        bottom: 0;
+        content: '';
+        left: 0;
+        height: 250px;
+        position: absolute;
+        width: 100%;
+    }
+}
+
 .product-features {
     grid-template-columns: repeat(1, 1fr);
 
