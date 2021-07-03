@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import { ProductHero } from '../components/ProductHero'
 import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
+import ProductImage from '../components/ProductFeature/ProductImage'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
 import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
@@ -13,30 +14,6 @@ import { Doodle } from '../components/Doodle'
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
-
-import imageOpenSource from '../components/productFeature/images/screenshot-dashboard@2x.png'
-import imageAutocapture from '../components/productFeature/images/feature-event-autocapture.svg'
-import imageDashboards from '../components/productFeature/images/feature-dashboards.svg'
-import imageDataInOut from '../components/productFeature/images/feature-data-in-out.svg'
-import imageApi from '../components/productFeature/images/feature-api.svg'
-import imageDataPrivacy from '../components/productFeature/images/feature-data-privacy.svg'
-
-import imageTrends from '../components/productFeature/images/feature-trends@2x.png'
-// import imageFunnels from '../components/productFeature/images/feature-funnels@2x.png' imported with css instead
-import imagePaths from '../components/productFeature/images/feature-paths@2x.png'
-import imageCohorts from '../components/productFeature/images/feature-cohorts@2x.png'
-import imageUserSessions from '../components/productFeature/images/feature-user-sessions@2x.png'
-import imageRetention from '../components/productFeature/images/feature-retention@2x.png'
-import imageRevenueTracking from '../components/productFeature/images/feature-revenue-tracking@2x.png'
-
-import imageFeatureFlags from '../components/productFeature/images/feature-feature-flags@2x.png'
-import imageHeatmaps from '../components/productFeature/images/feature-heatmaps@2x.png'
-import imageSessionRecordings from '../components/productFeature/images/feature-session-recordings@2x.png'
-
-import imageDataFiltering from '../components/productFeature/images/feature-data-filtering.svg'
-// import imageCustomPlugins from '../components/productFeature/images/feature-custom-plugins.svg' via css
-
-import iconHostingFlexibility from '../components/productFeature/images/icons/hosting-flexibility.svg'
 
 function ProductPage() {
     return (
@@ -65,8 +42,7 @@ function ProductPage() {
                             title="Open source product analytics"
                             description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
                             figureClasses="-mb-12"
-                            image={`${imageOpenSource}`}
-                            // image="screenshot-dashboard@2x.png"
+                            image="screenshot-dashboard@2x.png"
                             imageClasses="relative z-10 w-full max-w-screen-md border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
                         />
@@ -89,7 +65,7 @@ function ProductPage() {
                             description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
                             docsUrl="/docs/features/events#autocapture-event-tracking"
                             figureClasses="mb-8"
-                            image={`${imageAutocapture}`}
+                            image="feature-event-autocapture.svg"
                             imageWidth="253"
                             imageHeight="147"
                             classes=""
@@ -105,7 +81,7 @@ function ProductPage() {
                             description="Build dashboards with everyday metrics like sign-ups, purchases and conversions."
                             docsUrl="/docs/features/dashboards"
                             figureClasses="mb-8"
-                            image={`${imageDashboards}`}
+                            image="feature-dashboards.svg"
                             imageWidth="234"
                             imageHeight="141"
                             classes=""
@@ -135,13 +111,13 @@ function ProductPage() {
                             />
                         </div>
                         <div className="-mt-16 mx-12 mb-12 flex justify-center">
-                            <img src={imageDataInOut} />
+                            <ProductImage imageName="feature-data-in-out.svg" />
                         </div>
                     </div>
 
                     <div className="product-feature text-white text-center feature-hosting-flexibility pt-12 px-4">
                         <div className="feature-name flex justify-center items-start gap-2 -mb-6">
-                            <img src={`${iconHostingFlexibility}`} alt="Hosting flexibility icon" />
+                            <ProductImage imageName="hosting-flexibility.svg" alt="Hosting flexibility icon" isIcon />
                             <div className="font-bold text-pink">Hosting flexibility</div>
                         </div>
                         <div className="md:grid grid-cols-3 gap-4 text-white">
@@ -196,7 +172,7 @@ function ProductPage() {
                             title="Compliance-friendly"
                             description="<p>Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around.</p>"
                             figureClasses="md:h-48"
-                            image={`${imageDataPrivacy}`}
+                            image="feature-data-privacy.svg"
                             classes=""
                         />
                     </div>
@@ -210,8 +186,7 @@ function ProductPage() {
                             description="Our API and direct SQL access allow full access to your production instance."
                             docsUrl="/docs/api/overview"
                             figureClasses="md:h-48"
-                            image={`${imageApi}`}
-                            // image="feature-api.svg"
+                            image="feature-api.svg"
                             classes=""
                         />
                     </div>
@@ -238,7 +213,7 @@ function ProductPage() {
                                 </div>
                             "
                             docsUrl="/docs/features/trends"
-                            image={`${imageTrends}`}
+                            image="feature-trends@2x.png"
                             figureClasses="-mb-12"
                             imageWidth="1051"
                             imageHeight="576"
@@ -295,7 +270,7 @@ function ProductPage() {
                             title="Visualize how traffic flows"
                             description="<p>See common user paths and discover how visitors arrived at their outcome.</p>"
                             docsUrl="/docs/features/paths"
-                            image={`${imagePaths}`}
+                            image="feature-paths@2x.png"
                             imageWidth="320"
                             imageHeight="620"
                             classes=""
@@ -316,7 +291,7 @@ function ProductPage() {
                             description="Use common traits to identify inflection points."
                             docsUrl="/docs/features/cohorts"
                             figureClasses="-mb-8"
-                            image={`${imageCohorts}`}
+                            image="feature-cohorts@2x.png"
                             imageWidth="479"
                             imageHeight="284"
                             classes=""
@@ -332,7 +307,7 @@ function ProductPage() {
                             description="User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context."
                             docsUrl="/docs/features/sessions"
                             figureClasses="-mb-12"
-                            image={`${imageUserSessions}`}
+                            image="feature-user-sessions@2x.png"
                             imageWidth="1410"
                             imageHeight="914"
                             imageClasses="w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
@@ -351,7 +326,7 @@ function ProductPage() {
                             description="Drill down into activity of individual users within a cohort. Further break down a bucket of users to identify root causes of behavior."
                             docsUrl="/docs/features/retention"
                             figureClasses="mb-0"
-                            image={`${imageRetention}`}
+                            image="feature-retention@2x.png"
                             imageWidth="455"
                             imageHeight="210"
                             classes=""
@@ -366,7 +341,7 @@ function ProductPage() {
                             title="KPIs by LTV"
                             description="By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon."
                             figureClasses=""
-                            image={`${imageRevenueTracking}`}
+                            image="feature-revenue-tracking@2x.png"
                             imageWidth="253"
                             imageHeight="136"
                             classes=""
@@ -422,7 +397,7 @@ function ProductPage() {
                             description="Watch exactly what users are doing without infringing their privacy."
                             docsUrl="/docs/features/session-recording"
                             figureClasses="mb-8"
-                            image={`${imageSessionRecordings}`}
+                            image="feature-session-recordings@2x.png"
                             imageWidth="356"
                             imageHeight="174"
                             imageClasses="w-screen-md max-w-content"
@@ -466,7 +441,7 @@ function ProductPage() {
                             description="Enforce schemas, parse data based on fields, and standardise taxonomies."
                             docsUrl="/docs/plugins/overview"
                             figureClasses="text-right"
-                            image={`${imageDataFiltering}`}
+                            image="feature-data-filtering.svg"
                             imageWidth="352"
                             imageHeight="126"
                             imageClasses="w-screen-md max-w-content -mr-8"
