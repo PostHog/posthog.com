@@ -1,5 +1,6 @@
 import React from 'react'
 import spritedIcons from './images/icons/sprited-icons.svg'
+import ProductImage from './ProductImage'
 
 interface ProductFeatureProps {
     layout?: string
@@ -52,10 +53,8 @@ export const ProductFeature = ({
             {/* only render if {image} exists */}
             {image && (
                 <figure className={`flex justify-center items-center ${figureClasses}`}>
-                    <img
-                        // Uncomment this to use import images dynamically wrt their names. Pass filename with extension in props (must be in images folder)
-                        // src={require(`./images/${image}`)}
-                        src={`${image}`}
+                    <ProductImage
+                        imageName={image}
                         className={imageClasses}
                         width={imageWidth}
                         height={imageHeight}
