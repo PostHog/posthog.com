@@ -53,6 +53,8 @@ export const ProductFeature = ({
             {image && (
                 <figure className={`flex justify-center items-center ${figureClasses}`}>
                     <img
+                        // Uncomment this to use import images dynamically wrt their names. Pass filename with extension in props (must be in images folder)
+                        // src={require(`./images/${image}`)}
                         src={`${image}`}
                         className={imageClasses}
                         width={imageWidth}
