@@ -11,6 +11,7 @@ interface ProductHeroProps {
     disclaimer?: string
     componentKey: string
     bgColor?: string
+    id?: 'platform' | undefined
 }
 
 export const ProductHero = ({
@@ -20,6 +21,7 @@ export const ProductHero = ({
     componentKey,
     bgColor = 'navy',
     disclaimer,
+    id,
 }: ProductHeroProps) => {
     const backgroundColorClass = `bg-${bgColor}`
     return (

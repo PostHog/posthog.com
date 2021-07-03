@@ -16,6 +16,7 @@ interface ProductFeatureProps {
     imageWidth?: string
     imageHeight?: string
     bgImage?: string
+    id?: 'analytics' | 'insights' | 'plugin' | undefined
 }
 
 export const ProductFeature = ({
@@ -33,6 +34,7 @@ export const ProductFeature = ({
     imageWidth,
     imageHeight,
     bgImage,
+    id,
 }: ProductFeatureProps) => {
     // const backgroundColorClass = `bg-${bgColor}`
     return (
