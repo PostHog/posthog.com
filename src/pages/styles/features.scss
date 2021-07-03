@@ -33,7 +33,7 @@
     }
 
     .chevron {
-        background-image: url('../../images/chevron.svg') !important;
+        background-image: url('../../images/chevron.svg');
         display: inline-block;
         height: 11px;
         width: 18px;
@@ -197,7 +197,7 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-funnels@2x.png') 0 100% / cover no-repeat;
+            background: url('../../images/features/feature-funnels@2x.png') 0 100% / cover no-repeat;
             content: '';
             height: 100%;
             left: 0;
@@ -238,8 +238,7 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-feature-flags@2x.png') bottom right / 40%
-                no-repeat;
+            background: url('../../images/features/feature-feature-flags@2x.png') bottom right / 40% no-repeat;
             content: '';
             height: 100%;
             left: 0;
@@ -256,7 +255,7 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-annotations.svg') 100% / cover no-repeat;
+            background: url('../../images/features/feature-annotations.svg') 100% / cover no-repeat;
             content: '';
             height: 100%;
             left: 0;
@@ -272,16 +271,14 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-heatmaps.png') 100% 20px / contain no-repeat;
+            background: url('../../images/features/feature-heatmaps.png') 100% 20px / contain no-repeat;
 
             @media (min-width: 1024px) {
-                background: url('../../components/productFeature/images/feature-heatmaps@2x.png') 140% 0 / contain
-                    no-repeat;
+                background: url('../../images/features/feature-heatmaps@2x.png') 140% 0 / contain no-repeat;
             }
 
             @media (min-width: 1280px) {
-                background: url('../../components/productFeature/images/feature-heatmaps@2x.png') 120% 0 / contain
-                    no-repeat;
+                background: url('../../images/features/feature-heatmaps@2x.png') 120% 0 / contain no-repeat;
             }
             content: '';
             height: 100%;
@@ -308,7 +305,7 @@
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../components/productFeature/images/feature-custom-plugins.svg') -40px 105% / contain no-repeat;
+            background: url('../../images/features/feature-custom-plugins.svg') -40px 105% / contain no-repeat;
             content: '';
             height: 100%;
             left: 0;
