@@ -1,8 +1,9 @@
 import React from 'react'
 import { LandingPageCallToAction } from '../LandingPage/LandingPageCallToAction'
-import HeroAnimation720x1300 from '../productFeature/images/svgs/hero-720x1300.svg'
-import HeroAnimation1920x1080 from '../productFeature/images/svgs/hero-1920x1080.svg'
-import HeroAnimation1920x720 from '../productFeature/images/svgs/hero-1920x720.svg'
+
+import HeroAnimation720x1300 from './images/hero-720x1300.svg'
+import HeroAnimation1920x1080 from './images/hero-1920x1080.svg'
+import HeroAnimation1920x720 from './images/hero-1920x720.svg'
 
 interface ProductHeroProps {
     preTitle?: string
