@@ -38,7 +38,7 @@ const ReadPost = ({ to }: { to: string }) => {
 
 const ReadPostHome = ({ to }: { to: string }) => {
     return (
-        <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="mt-4">
+        <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="">
             Read Post
         </CallToAction>
     )
@@ -58,9 +58,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
                     </Link>
                 </h2>
                 <AuthorIndexView authorDetails={authorDetails} />
-                <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed font-inter">
-                    {post.excerpt}
-                </div>
+                <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed">{post.excerpt}</div>
                 <ReadPost to={post.fields.slug} />
             </div>
             {post.frontmatter.featuredImage?.publicURL && (
@@ -97,7 +95,9 @@ const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; author
                     </Link>
                 </h2>
                 <AuthorIndexView authorDetails={authorDetails} />
-                <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed font-inter">{post.excerpt}</div>
+                <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed post-preview-fade">
+                    {post.excerpt}
+                </div>
                 <ReadPostHome to={post.fields.slug} />
             </div>
         </div>
@@ -117,8 +117,8 @@ const LandingPageSnippet = ({ post, authorDetails }: { post: PostType; authorDet
                     </Link>
                 </div>
             )}
-            <div className="w-full py-4">
-                <h2 className="text-2xl text-white font-gosha my-1">
+            <div className="w-full py-2">
+                <h2 className="text-lg text-white font-gosha my-1 leading-tight">
                     <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
                         {post.frontmatter.title}
                     </Link>
@@ -161,7 +161,7 @@ const PostCard = ({
                         </Link>
                     </h3>
                     <AuthorIndexView authorDetails={authorDetails} />
-                    <div className="mt-4 leading-relaxed text-sm font-inter">{post.excerpt}</div>
+                    <div className="mt-4 leading-relaxed text-sm">{post.excerpt}</div>
                     <ReadPost to={post.fields.slug} />
                 </div>
             )}

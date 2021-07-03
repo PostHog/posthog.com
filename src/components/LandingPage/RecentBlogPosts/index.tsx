@@ -35,7 +35,7 @@ export const RecentBlogPosts = () => {
                     </div>
 
                     <div className="bg-purple-500 bg-opacity-10 p-6 w-full mt-2 lg:mt-0 lg:w-1/3 lg:ml-2 rounded text-white">
-                        <span className="block opacity-70">Latest Posts</span>
+                        <span className="block opacity-70">Recent Posts</span>
 
                         <BlogPosts
                             render={(posts) => {
