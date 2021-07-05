@@ -153,7 +153,7 @@
     from = "/docs/plugins/build"
     to = "/docs/plugins/build/overview"
 
-    
+
 [[redirects]]
     from = "/docs/plugins/types"
     to = "/docs/plugins/build/types"
