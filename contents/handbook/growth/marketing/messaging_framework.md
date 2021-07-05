@@ -71,16 +71,16 @@ It may be tempting to ask of the second point: why we don’t describe this as �
 Supporting messages are the key features/benefits which back up each pillar and can be used to prove its validity to customers. Where possible, these should tie to hard data. 
 
 **1 - All-in-one**
-_Analyze:_ Auto-capture events and analyze retroactively through funnel analysis, retention tables, path tracking, and more. 
-_Experiment:_ Test ideas with feature flags that target specific users, cohorts, or selected groups based on personas. 
-_Solve:_ Dive into session recordings to identify bugs or contextualize quantitative data with new perspectives. 
+- Analyze: Auto-capture events and analyze retroactively through funnel analysis, retention tables, path tracking, and more. 
+- Experiment: Test ideas with feature flags that target specific users, cohorts, or selected groups based on personas. 
+- Solve: Dive into session recordings to identify bugs or contextualize quantitative data with new perspectives. 
 
 **2 - Self-hosted**
-_Insights:_ Overcome ad-blockers that detect third-party cookies, giving you better data.
-_Private:_ Deploy on your infrastructure and don’t share data with anyone. Not even us.
-_Control:_ Control everything, from when to upgrade to how and where to deploy. 
+- Insights: Overcome ad-blockers that detect third-party cookies, giving you better data.
+- Private: Deploy on your infrastructure and don’t share data with anyone. Not even us.
+- Control: Control everything, from when to upgrade to how and where to deploy. 
 
 **3 - Extensible**
-_Open Source:_ Contribute to our code and join the 10k+ developers in our community 
-_Plug-ins:_ Enhance PostHog data with plug-ins for 25+ different tools or data sources.
-_Data Export:_ Export data to 10+ tools, including BigQuery, S3, Snowflake, and Redshift.
+- Open Source: Contribute to our code and join the 10k+ developers in our community 
+- Plug-ins: Enhance PostHog data with plug-ins for 25+ different tools or data sources.
+- Data Export: Export data to 10+ tools, including BigQuery, S3, Snowflake, and Redshift.
