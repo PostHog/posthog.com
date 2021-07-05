@@ -65,7 +65,7 @@ Messaging pillars are our three core benefits or points of differentiation; poin
 **Self-hosted** — PostHog can be deployed onto a clients’ own infrastructure
 **Extensible** — PostHog’s value can be extended beyond core metrics
 
-It may be tempting to ask of the second point: why we don’t describe this as ‘hosting flexibility’ or ‘hosting options’ given that PostHog can also be deployed on a cloud? The answer is that many alternative soplutions can be deployed on a cloud. Only PostHog can be self-hosted. 
+It may be tempting to ask of the second point: why we don’t describe this as ‘hosting flexibility’ or ‘hosting options’ given that PostHog can also be deployed on a cloud? The answer is that many alternative solutions can be deployed to the cloud. Only PostHog can be self-hosted. 
 
 ## Supporting messages
 Supporting messages are the key features/benefits which back up each pillar and can be used to prove its validity to customers. Where possible, these should tie to hard data. 
