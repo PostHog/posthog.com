@@ -61,26 +61,26 @@ _Weak:_ HotJar (session recording), Optimizely (experimentation), Smartlook (ana
 ## Messaging pillars
 Messaging pillars are our three core benefits or points of differentiation; points that define our product and our positioning; ideas which we own fully and reinforce regularly. The niches we dominate. 
 
-**All-in-one** — PostHog combines multiple types of analytics tools
-**Self-hosted** — PostHog can be deployed onto a clients’ own infrastructure
-**Extensible** — PostHog’s value can be extended beyond core metrics
+- **All-in-one:** PostHog combines multiple types of analytics tools
+- **Self-hosted:** PostHog can be deployed onto a clients’ own infrastructure
+- **Extensible:** PostHog’s value can be extended beyond core metrics
 
 It may be tempting to ask of the second point: why we don’t describe this as ‘hosting flexibility’ or ‘hosting options’ given that PostHog can also be deployed on a cloud? The answer is that many alternative solutions can be deployed to the cloud. Only PostHog can be self-hosted. 
 
 ## Supporting messages
 Supporting messages are the key features/benefits which back up each pillar and can be used to prove its validity to customers. Where possible, these should tie to hard data. 
 
-**1 - All-in-one**
+### 1 - All-in-one
 - Analyze: Auto-capture events and analyze retroactively through funnel analysis, retention tables, path tracking, and more. 
 - Experiment: Test ideas with feature flags that target specific users, cohorts, or selected groups based on personas. 
 - Solve: Dive into session recordings to identify bugs or contextualize quantitative data with new perspectives. 
 
-**2 - Self-hosted**
+### 2 - Self-hosted
 - Insights: Overcome ad-blockers that detect third-party cookies, giving you better data.
 - Private: Deploy on your infrastructure and don’t share data with anyone. Not even us.
 - Control: Control everything, from when to upgrade to how and where to deploy. 
 
-**3 - Extensible**
+### 3 - Extensible
 - Open Source: Contribute to our code and join the 10k+ developers in our community 
 - Plug-ins: Enhance PostHog data with plug-ins for 25+ different tools or data sources.
 - Data Export: Export data to 10+ tools, including BigQuery, S3, Snowflake, and Redshift.
