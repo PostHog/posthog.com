@@ -10,7 +10,7 @@ Philosophy: Be kind, concise and direct.
 
 ## Positioning statement
 
-We use a positioning statement based on a template by Geoffrey Moore, which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools.
+We use a positioning statement based on [a template by Geoffrey Moore](https://gist.github.com/JoshSmith/2041454), which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools.
 
 Our positioning statement is:
 
@@ -18,7 +18,7 @@ _For product managers who need to understand their users, PostHog is the only op
 
 _Unlike traditional tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._ 
 
-See [our messaging framework for more information](./marketing/messaging_framework.md) about positioning and how we bring it to life. 
+See [our messaging framework for more information](/handbook/growth/marketing/messaging_framework) about positioning and how we bring it to life. 
 
 ## Products
 
