@@ -20,9 +20,7 @@ function ProductPage() {
         <Layout>
             <SEO title="Product • PostHog" />
             <div className="bg-purple">
-                {/* Product Section starts here */}
                 <ProductHero
-                    id="platform"
                     preTitle="The all-in-one platform to"
                     title="Build better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
@@ -33,9 +31,9 @@ function ProductPage() {
                 <ProductAnchorNavbar />
                 <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
                     <div className="product-feature text-white text-center feature-open-source">
-                        {/* Analytics Section starts here */}
+                        {/* Platform section starts here */}
                         <ProductFeature
-                            id="analytics"
+                            id="platform"
                             layout="reversed"
                             featureIcon="open-source"
                             featureName="Open source"
@@ -192,9 +190,9 @@ function ProductPage() {
                     </div>
 
                     <div className="product-feature text-white text-center feature-trends">
-                        {/* Insights Section starts here */}
+                        {/* Analytics section starts here */}
                         <ProductFeature
-                            id="insights"
+                            id="analytics"
                             layout="reversed"
                             featureIcon="trends"
                             featureName="Trends"
@@ -351,7 +349,9 @@ function ProductPage() {
 
                 <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
                     <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start pr-50">
+                        {/* Insights section starts here */}
                         <ProductFeature
+                            id="insights"
                             layout="standard"
                             featureIcon="feature-flags"
                             featureName="Feature flags"
