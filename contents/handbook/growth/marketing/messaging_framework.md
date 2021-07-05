@@ -28,7 +28,7 @@ We are most successful when targeting technically experienced individuals, espec
 We also see strong adoption with co-founders or business leadership, though usually on the basis that these individuals are de facto product managers with the needed technical expertise. Such personas act as a secondary audience.
 
 ## Audience pain-points
-Users within this audience may seek PostHog out because they need to:
+Users within this audience may seek PostHog out because they:
 
 - Need to quickly get core product metrics (e.g. MAUs) onto a dashboard they can check regularly.
 - Gather data about how a product is used, especially drop-offs and retention. 
@@ -84,4 +84,3 @@ _Control:_ Control everything, from when to upgrade to how and where to deploy.
 _Open Source:_ Contribute to our code and join the 10k+ developers in our community 
 _Plug-ins:_ Enhance PostHog data with plug-ins for 25+ different tools or data sources.
 _Data Export:_ Export data to 10+ tools, including BigQuery, S3, Snowflake, and Redshift.
-
