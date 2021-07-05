@@ -12,11 +12,12 @@ const ButtonLink = ({
     currentSection: string
     children: any
 }) => {
-    const baseClasses = 'px-3 py-2 rounded'
+    const baseClasses =
+        'rounded inline-flex text-xs relative select-none font-osiris lowercase bg-transparent button rounded text-white hover:text-white px-3 py-2 mx-1 border-half'
     const classList =
         section == currentSection
-            ? baseClasses.concat(' bg-primary text-white hover:text-white')
-            : baseClasses.concat(' text-white text-opacity-80 hover:bg-gray-100 hover:bg-opacity-10 hover:text-white')
+            ? baseClasses.concat(' nav-current')
+            : baseClasses.concat(' bg-black bg-opacity-25 text-opacity-75 ')
     const sectionSelector = `#${section}`
 
     const clickHandler = (e: { preventDefault: () => void }) => {
@@ -26,7 +27,7 @@ const ButtonLink = ({
 
     return (
         <Link to={sectionSelector} className={classList} onClick={clickHandler}>
-            {children}
+            <span>{children}</span>
         </Link>
     )
 }
@@ -45,13 +46,13 @@ const inPageLinks: { label: string; section: string }[] = [
         section: 'insights',
     },
     {
-        label: 'Plugin',
-        section: 'plugin',
+        label: 'Plugins',
+        section: 'plugins',
     },
 ]
 
 export const ProductAnchorNavbar = () => {
-    const baseClasses = 'rounded w-11/12 max-w-3xl mx-auto justify-between items-stetch p-3 fixed z-20 hidden lg:flex'
+    const baseClasses = 'rounded w-full mx-auto justify-center p-3 sticky -mt-16 top-2 z-20 hidden lg:flex'
 
     const [currentSection, setCurrentSection] = useState('platform')
 
@@ -78,11 +79,7 @@ export const ProductAnchorNavbar = () => {
         }
     }, [])
 
-    const positionStyles = {
-        left: '50%',
-        transform: 'translateX(-50%)',
-        bottom: 50,
-    }
+    const positionStyles = {}
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
         <ButtonLink section={section} currentSection={currentSection} key={section}>
@@ -101,7 +98,7 @@ export const ProductAnchorNavbar = () => {
             <div
                 className={baseClasses}
                 style={{
-                    backgroundColor: '#202038',
+                    // border: 'solid 1px rgba(255,255,255,.25)',
                     ...positionStyles,
                 }}
             >

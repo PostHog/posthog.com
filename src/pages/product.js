@@ -19,7 +19,6 @@ function ProductPage() {
     return (
         <Layout>
             <SEO title="Product • PostHog" />
-            <ProductAnchorNavbar />
             <div className="bg-purple">
                 {/* Product Section starts here */}
                 <ProductHero
@@ -31,6 +30,7 @@ function ProductPage() {
                     disclaimer="<p class='text-xs'>*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>.</p>"
                     bgColor="navy"
                 />
+                <ProductAnchorNavbar />
                 <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
                     <div className="product-feature text-white text-center feature-open-source">
                         {/* Analytics Section starts here */}
@@ -407,6 +407,7 @@ function ProductPage() {
 
                     <div className="product-feature text-white text-center feature-data-export">
                         <ProductFeature
+                            id="plugins"
                             layout="reversed"
                             featureIcon="data-export"
                             featureName="Data export"
@@ -451,7 +452,6 @@ function ProductPage() {
 
                     <div className="product-feature text-white text-center feature-custom-plugins min-h-[350px]">
                         <ProductFeature
-                            id="plugin"
                             layout="reversed"
                             featureIcon="custom-plugins"
                             featureName="Custom plugins"

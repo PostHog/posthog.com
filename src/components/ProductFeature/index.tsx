@@ -17,7 +17,7 @@ interface ProductFeatureProps {
     imageWidth?: string
     imageHeight?: string
     bgImage?: string
-    id?: 'analytics' | 'insights' | 'plugin' | undefined
+    id?: 'analytics' | 'insights' | 'plugins' | undefined
 }
 
 export const ProductFeature = ({
@@ -40,6 +40,7 @@ export const ProductFeature = ({
     // const backgroundColorClass = `bg-${bgColor}`
     return (
         <div
+            id={id} // ID applied to navigate using navbar (must be passed only for starting elements)
             className={`py-6 px-4 sm:py-12 sm:px-8 ${layout} ${classes}`}
             style={
                 bgImage

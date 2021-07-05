@@ -69,6 +69,7 @@ module.exports = {
         backgroundColor: (theme) => ({
             purple: '#220f3f',
             white: '#fff',
+            black: '#000',
         }),
         extend: {
             fontFamily: {
@@ -122,6 +123,7 @@ module.exports = {
                 lg: '20px',
             },
             borderWidth: {
+                half: '.5px',
                 3: '3px',
                 8: '8px',
                 12: '12px',
