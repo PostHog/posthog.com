@@ -15,7 +15,8 @@ export const ScheduleDemo = () => {
                 <h1 className="centered">Schedule Demo</h1>
                 <p>
                     Use the widget below to schedule a demo call with one of our engineers. Please note that this is not
-                    a Sales call. For Sales enquiries please email <i>sales@posthog.com</i>.
+                    a Sales call. For sales enquiries, please{' '}
+                    <a href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">contact us</a>.
                 </p>
                 <br />
                 <p>
