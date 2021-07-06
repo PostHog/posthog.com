@@ -51,7 +51,7 @@ Documents any company-wide internal information, in addition to any information 
 - ✅ Sensitive discussions around future positioning, customer strategy, fundraising, board meetings
 
 **Examples of information that should NOT go here:**
-- ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
+- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
 - ❌ Bug reports, security issues, or any other engineering-related discussions. These should go in the [Product Internal](#product-internal) repo.
 - ❌ Billing issues, product or growth discussions. These should go in the [Product Internal](#product-internal) repo.
 
@@ -80,7 +80,7 @@ Please be sure to read the README of the repo for guidelines on how to file spec
 - ✅ Billing or pricing-related discussions that is not yet public.
 
 **Examples of information that should NOT go here:**
-- ❌ Any information that should be public (see guidelines on [public by default](http://localhost:8000/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
+- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, ...).
 - ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo.
 - ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
 

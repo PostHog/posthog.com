@@ -25,7 +25,7 @@ On the day of the spike, we have 2 saved annotations. If I hover over them, I ca
 
 <br />
 
-On that day, PostHog was listed on GitHub's trending page, and there was an even more relevant event: our article ['Why You May Not Need a Sales Team'](http://localhost:8000/blog/product-led-growth/) was ranked #1 on [HackerNews](https://news.ycombinator.com/), which brought a lot of new viewers to our blog.
+On that day, PostHog was listed on GitHub's trending page, and there was an even more relevant event: our article ['Why You May Not Need a Sales Team'](/blog/product-led-growth/) was ranked #1 on [HackerNews](https://news.ycombinator.com/), which brought a lot of new viewers to our blog.
 
 In this case, the annotations were done after the fact (the next day), which makes them useful for future reference. However, annotations are especially powerful if you create a habit of annotating events you think _could_ be relevant, and then analyzing their impact. 
 
