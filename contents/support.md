@@ -28,4 +28,4 @@ Email [hey@posthog.com](mailto:hey@posthog.com) with any miscellaneous questions
 
 ## Sales enquiries
 
-Interested in PostHog's team providing support? We can help you manage your deployment. Email [sales@posthog.com](mailto:sales@posthog.com).
+Interested in PostHog's team providing support? [Contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) for help managing your deployment.

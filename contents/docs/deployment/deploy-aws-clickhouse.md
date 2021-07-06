@@ -11,7 +11,7 @@ This deployment mechanism is targeted towards larger installations (above 2M eve
 
 As opposed to the open source version, this deployment uses ClickHouse instead of PostgreSQL as the underlying database. ClickHouse is [a highly scalable database that was designed for performant analytical queries](https://clickhouse.tech/).
 
-> Warning: This deployment mechanism is still experimental, not yet publicly accessible and you will currently need a license to use clickhouse. To get a license, please message [sales@posthog.com](mailto:sales@posthog.com)
+> Warning: This deployment mechanism is still experimental, not yet publicly accessible and you will currently need a license to use ClickHouse. To get a license, please message [sales@posthog.com](mailto:sales@posthog.com)
 
 ## How it works
 

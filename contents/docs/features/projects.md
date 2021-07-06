@@ -10,4 +10,4 @@ You can switch between projects, as well as create new ones, from the top bar. P
 
 Each project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/libraries), as well as to connect to our [API](/docs/api/overview).
 
-> **Note:** Multiple projects within an organization belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://posthog.com/pricing?o=cloud) or contact [sales@posthog.com](mailto:sales@posthog.com) for a self-hosted license.
+> **Note:** Multiple projects within an organization belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://posthog.com/pricing?o=cloud) or [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) for a self-hosted license.
