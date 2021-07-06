@@ -38,7 +38,7 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Scales as needed, Constant price',
                     'Open source': 'Great for small teams',
-                    Scale: 'Cheaper at scale',
+                    Scale: 'Cheaper at scale, Enterprise features',
                 },
             },
             {
