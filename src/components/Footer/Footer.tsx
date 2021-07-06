@@ -109,8 +109,8 @@ export function Footer({
                         <FooterListItem to="/slack">Slack</FooterListItem>
                         <FooterListItem href="https://github.com/PostHog/posthog/issues">Issues</FooterListItem>
                         <FooterListItem to="/support">Support</FooterListItem>
-                        <FooterListItem href="mailto:sales@posthog.com" border={false}>
-                            Contact sales
+                        <FooterListItem href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u" border={false}>
+                            Contact Sales
                         </FooterListItem>
 
                         <FooterSubCategory>Get involved</FooterSubCategory>
@@ -166,7 +166,9 @@ export function Footer({
                         </FooterListItem>
 
                         <FooterSubCategory>Get in touch</FooterSubCategory>
-                        <FooterListItem href="mailto:sales@posthog.com">Contact sales</FooterListItem>
+                        <FooterListItem href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
+                            Contact Sales
+                        </FooterListItem>
                         <FooterListItem href="https://posthog.com/support" border={false}>
                             Support
                         </FooterListItem>
