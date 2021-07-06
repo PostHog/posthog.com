@@ -44,6 +44,7 @@ export const Hero = () => {
                             src="../images/sequence-mobile@2x.png"
                             alt="Ingest data with Event Pipelines. Discover insights with Analytics Suite. Test &amp; iterate with Feature Flags. Observe adoption with Session Recordings. Export to Data Lakes."
                             loading="eager"
+                            placeholder="blurred"
                             width={339}
                             height={580}
                             quality={100}
