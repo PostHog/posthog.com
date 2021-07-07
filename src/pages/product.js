@@ -26,7 +26,7 @@ function ProductPage() {
                     title="Build better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
                     componentKey="productHero"
-                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>."
+                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='mailto:sales@posthog.com?subject=Scale%20deployment' class='text-orange'>request a sales call</a>."
                     bgColor="navy"
                 />
                 <ProductAnchorNavbar />
@@ -88,7 +88,7 @@ function ProductPage() {
                     </div>
 
                     <div className="product-feature text-white text-center feature-data-in-out">
-                        <div className="md:grid grid-cols-2 gap-3 text-white py-6 px-4 md:py-12 md:px-8 relative">
+                        <div className="md:grid grid-cols-2 gap-3 text-white pt-6 px-4 pb-24 md:py-12 md:px-8 relative">
                             <ProductFeature
                                 layout="standard"
                                 featureIcon="data-pipelines"
@@ -109,25 +109,25 @@ function ProductPage() {
                                 classes=""
                             />
                         </div>
-                        <div className="-mt-16 mx-12 mb-12 flex justify-center">
+                        <div className="-mt-16 mx-1 md:mx-12 mb-12 flex justify-center">
                             <ProductImage imageName="feature-data-in-out.svg" />
                         </div>
                     </div>
 
                     <div className="product-feature text-white text-center feature-hosting-flexibility pt-12 px-4">
-                        <div className="feature-name flex justify-center items-start gap-2 -mb-6">
+                        <div className="feature-name flex justify-center items-start gap-2 md:-mb-6">
                             <ProductImage imageName="hosting-flexibility.svg" alt="Hosting flexibility icon" isIcon />
                             <div className="font-bold text-pink">Hosting flexibility</div>
                         </div>
                         <div className="md:grid grid-cols-3 gap-4 text-white">
                             <ProductFeature
                                 layout="standard"
-                                title="Managed cloud hosting"
-                                description="PostHog Cloud is our hosted solution that scales to billions of events per month, receives automatic upgrades, and is managed by our team."
+                                title="PostHog Cloud"
+                                description="Our hosted solution scales to billions of events per month, receives automatic upgrades, and is managed by our team."
                                 classes=""
                             />
 
-                            <div className="py-12 px-2">
+                            <div className="md:py-12 px-2">
                                 <h3 className="mb-2 font-osiris font-normal text-2xl">Private cloud deployment</h3>
                                 <div className="text-white text-opacity-70">
                                     <p>
@@ -156,7 +156,7 @@ function ProductPage() {
 
                             <ProductFeature
                                 layout="standard"
-                                title="Host on your infrastructure"
+                                title="Keep data on your infrastructure"
                                 description="<p>Customer data stays on your servers. You’re in total control of your PostHog instance.</p><p>With self-hosting, you can also circumvent ad blockers and browser privacy features.</p>"
                                 classes=""
                             />
@@ -241,7 +241,7 @@ function ProductPage() {
                             layout="reversed"
                             featureIcon="funnels"
                             featureName="Funnels"
-                            title="Identify <strike class='opacity-50'>dropoff</strike> opportunity"
+                            title="Identify <strike class='opacity-50'>dropoff</strike> <br />opportunity"
                             description="<p>Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment.</p>"
                             docsUrl="/docs/features/funnels"
                             //bgImage={`${imageFunnels}`}
@@ -487,7 +487,7 @@ function ProductPage() {
                     title="Start building better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
                     componentKey="productFooter"
-                    disclaimer="<p class='text-xs'>*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>.</p>"
+                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='mailto:sales@posthog.com?subject=Scale%20deployment' class='text-orange'>request a sales call</a>."
                     bgColor="navy"
                 />
             </div>

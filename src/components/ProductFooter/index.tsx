@@ -15,9 +15,9 @@ export const ProductFooter = ({ title, tagline, componentKey, bgColor = 'navy', 
         <div className={`${componentKey}`}>
             <div className="flex justify-center w-11/12 mx-auto pb-8 pt-12 flex-col relative z-10 text-center">
                 <div className="max-w-full hero-headline mt-4">
-                    <h1 className="text-white leading-tight mb-4 font-osiris lowercase font-normal">
+                    <div className="text-white leading-tight mb-4 font-osiris lowercase font-normal">
                         <span className="text-3xl">{title}</span>
-                    </h1>
+                    </div>
                     <p className="text-baby-blue text-base max-w-3xl mx-auto">{tagline}</p>
                 </div>
 
@@ -26,9 +26,11 @@ export const ProductFooter = ({ title, tagline, componentKey, bgColor = 'navy', 
                 </div>
 
                 <div
-                    className="text-white text-opacity-70 mt-4 text-xs"
+                    className="text-white text-opacity-70 mt-6 text-xs"
                     dangerouslySetInnerHTML={{
-                        __html: disclaimer?.includes('<p>') ? disclaimer : `<p>${disclaimer}</p>`,
+                        __html: disclaimer?.includes('<p class="max-w-3xl mx-auto">')
+                            ? disclaimer
+                            : `<p class="max-w-3xl mx-auto text-xs text-baby-blue">${disclaimer}</p>`,
                     }}
                 />
             </div>
