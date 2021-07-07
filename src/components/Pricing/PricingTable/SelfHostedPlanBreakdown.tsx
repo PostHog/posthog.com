@@ -146,7 +146,7 @@ export const SelfHostedPlanBreakdown = () => {
                                 <div>
                                     <CallToAction
                                         icon="none"
-                                        href="mailto:sales@posthog.com?subject=Scale%20deployment"
+                                        href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
                                         className="my-4"
                                     >
                                         Contact us
