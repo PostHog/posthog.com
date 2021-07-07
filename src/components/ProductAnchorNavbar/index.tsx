@@ -105,10 +105,15 @@ export const ProductAnchorNavbar = () => {
                 {navbarLinks}
             </div>
 
-            <div className="w-11/12 fixed mx-auto block max-w-3xl lg:hidden z-20" style={positionStyles}>
+            {/* mobile-only menu */}
+
+            <div className="w-11/12 sticky top-2 mx-auto block max-w-3xl lg:hidden z-20" style={positionStyles}>
                 <select
-                    className="appearance-none text-white block p-3 w-full rounded"
-                    style={{ backgroundColor: '#202038' }}
+                    className="appearance-none text-white block p-3 w-full rounded border border-white border-half border-opacity-10 text-center"
+                    style={{
+                        background: '#3F086D',
+                        textAlignLast: 'center',
+                    }}
                     value={currentSection}
                     onChange={(e) => scrollTo(`#${e.target.value}`)}
                 >

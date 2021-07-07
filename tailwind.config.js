@@ -18,6 +18,8 @@ module.exports = {
                 '-mb-4',
                 '-ml-4',
                 '-mb-12',
+                'mt-16',
+                'mb-4',
                 'pr-32',
                 'rotate-45',
                 'rotate-90',

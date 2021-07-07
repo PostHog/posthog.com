@@ -8,6 +8,7 @@ import ProductImage from '../components/ProductFeature/ProductImage'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
 import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
+import { ProductSectionHeader } from '../components/ProductSectionHeader'
 
 import { Doodle } from '../components/Doodle'
 
@@ -30,10 +31,10 @@ function ProductPage() {
                 />
                 <ProductAnchorNavbar />
                 <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
+                    <ProductSectionHeader name="Platform" id="platform" />
                     <div className="product-feature text-white text-center feature-open-source">
                         {/* Platform section starts here */}
                         <ProductFeature
-                            id="platform"
                             layout="reversed"
                             featureIcon="open-source"
                             featureName="Open source"
@@ -189,10 +190,11 @@ function ProductPage() {
                         />
                     </div>
 
+                    <ProductSectionHeader name="Analytics" id="analytics" />
+
                     <div className="product-feature text-white text-center feature-trends">
                         {/* Analytics section starts here */}
                         <ProductFeature
-                            id="analytics"
                             layout="reversed"
                             featureIcon="trends"
                             featureName="Trends"
@@ -347,11 +349,12 @@ function ProductPage() {
                     </div>
                 </div>
 
+                <ProductSectionHeader name="Insights" id="insights" />
+
                 <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
                     <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start pr-50">
                         {/* Insights section starts here */}
                         <ProductFeature
-                            id="insights"
                             layout="standard"
                             featureIcon="feature-flags"
                             featureName="Feature flags"
@@ -405,9 +408,10 @@ function ProductPage() {
                         />
                     </div>
 
+                    <ProductSectionHeader name="Plugins" id="plugins" />
+
                     <div className="product-feature text-white text-center feature-data-export">
                         <ProductFeature
-                            id="plugins"
                             layout="reversed"
                             featureIcon="data-export"
                             featureName="Data export"
