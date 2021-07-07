@@ -48,7 +48,7 @@ export const ProductHero = ({
                         dangerouslySetInnerHTML={{
                             __html: disclaimer?.includes('<p>')
                                 ? disclaimer
-                                : `<p className="max-w-3xl>${disclaimer}</p>`,
+                                : `<p className="max-w-3xl text-xs>${disclaimer}</p>`,
                         }}
                     />
                 </div>

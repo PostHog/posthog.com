@@ -23,10 +23,10 @@ function ProductPage() {
             <div className="bg-purple">
                 <ProductHero
                     preTitle="The all-in-one platform to"
-                    title="Build better products"
+                    title="Build better demos"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
                     componentKey="productHero"
-                    disclaimer="<p class='text-xs'>*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>.</p>"
+                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='#' class='text-orange'>request a sales call</a>."
                     bgColor="navy"
                 />
                 <ProductAnchorNavbar />
