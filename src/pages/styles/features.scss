@@ -145,11 +145,13 @@
     &.two-column-grid {
         @media (min-width: 768px) {
             grid-template-areas:
+                'h2-platform h2-platform'
                 'open-source open-source'
                 'event-autocapture dashboards'
                 'data-in-out data-in-out'
                 'hosting-flexibility hosting-flexibility'
                 'data-privacy api'
+                'h2-analytics h2-analytics'
                 'trends trends'
                 'funnels paths'
                 'cohorts paths'
@@ -161,11 +163,26 @@
     &.three-column-grid {
         @media (min-width: 768px) {
             grid-template-areas:
+                'h2-insights h2-insights h2-insights'
                 'feature-flags feature-flags annotations'
                 'heatmaps session-recordings session-recordings'
+                'h2-plugins h2-plugins h2-plugins'
                 'data-export data-export data-filtering'
                 'custom-plugins data-enrichment data-enrichment';
         }
+    }
+
+    .header-platform {
+        grid-area: h2-platform;
+    }
+    .header-analytics {
+        grid-area: h2-analytics;
+    }
+    .header-insights {
+        grid-area: h2-insights;
+    }
+    .header-plugins {
+        grid-area: h2-plugins;
     }
 
     .feature-open-source {
@@ -337,18 +354,6 @@
 @media screen and (min-width: 1440px) {
     .featuresWrapper {
         padding: 0 calc((100vw - 1440px) / 2);
-    }
-}
-
-@media screen and (max-width: 834px) {
-    h1,
-    h2 {
-        font-size: 40px !important;
-        line-height: 1.2em !important;
-    }
-    p {
-        font-size: 16px !important;
-        line-height: 1.5em !important;
     }
 }
 

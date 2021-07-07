@@ -257,72 +257,36 @@ img {
     padding-right: 0;
     padding-top: 0;
 }
-h1 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 2rem;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
     color: inherit;
-    font-weight: bold;
+    font-weight: normal;
+    text-transform: lowercase;
     text-rendering: optimizeLegibility;
+}
+h1 {
     font-size: 48px;
     line-height: 150%;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
 
 h2 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0 !important;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    color: inherit;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
     font-size: 40px;
     line-height: normal;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
-    font-style: normal;
 }
 h3 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    color: inherit;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
     font-size: 30px;
     line-height: normal;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
 h4 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    color: inherit;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
     font-size: 24px;
     line-height: 45px;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
 h5 {
@@ -335,11 +299,10 @@ h5 {
     padding-top: 0;
     margin-bottom: 1.45rem;
     color: inherit;
-    font-weight: 400;
     text-rendering: optimizeLegibility;
     font-size: 20px;
     line-height: 1.5;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
+    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
 }
 h6 {
     margin-left: 0;
@@ -351,11 +314,10 @@ h6 {
     padding-top: 0;
     margin-bottom: 1.45rem;
     color: inherit;
-    font-weight: 400;
     text-rendering: optimizeLegibility;
     font-size: 18px;
     line-height: 1.5;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
+    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
 }
 hgroup {
     margin-left: 0;
