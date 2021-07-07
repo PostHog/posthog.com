@@ -124,21 +124,6 @@
             width: 18px;
         }
     }
-
-    .top-hr {
-        position: relative;
-
-        &:before {
-            background: rgba(255, 255, 255, 0.2);
-            content: '';
-            border-radius: 10px;
-            height: 3px;
-            left: calc(50% - 15px);
-            position: absolute;
-            top: -20px;
-            width: 30px;
-        }
-    }
 }
 
 .features-grid {

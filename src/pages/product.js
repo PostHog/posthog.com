@@ -199,19 +199,7 @@ function ProductPage() {
                             featureIcon="trends"
                             featureName="Trends"
                             title="Monitor engagement. <br />Create actionable insights."
-                            description="
-                                <div class='md:grid gap-12 grid-cols-2 max-w-screen-md mx-auto mt-8 mb-4'>
-                                    <div class='top-hr mt-4'>
-                                        <strong class='text-white mb-1'>Segmentation</strong>
-                                        <p class='text-sm'>Monitor the impact of product changes - by customer plan, traffic source, or any other user property.</p>
-                                    </div>
-                                    <div class='top-hr mt-4'>
-                                        <strong class='text-white mb-1'>Annotations</strong>
-                                        <p class='text-sm'>No longer will ask, “Why did this chart spike?”
-                                        App-wide annotations provide context to the data you’re analyzing.</p>
-                                    </div>
-                                </div>
-                            "
+                            description="Monitor the impact of product changes - by customer plan, traffic source, or any other user property."
                             docsUrl="/docs/features/trends"
                             image="feature-trends@2x.png"
                             figureClasses="-mb-12"
@@ -442,7 +430,7 @@ function ProductPage() {
                             layout="reversed"
                             featureIcon="data-filtering"
                             featureName="Data filtering"
-                            title="Whip that data into shape"
+                            title="Get your data into shape"
                             description="Enforce schemas, parse data based on fields, and standardise taxonomies."
                             docsUrl="/docs/plugins/overview"
                             figureClasses="text-right"

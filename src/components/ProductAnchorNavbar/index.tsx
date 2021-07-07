@@ -13,7 +13,7 @@ const ButtonLink = ({
     children: any
 }) => {
     const baseClasses =
-        'rounded inline-flex text-xs relative select-none font-osiris lowercase bg-transparent button rounded text-white hover:text-white px-3 py-2 mx-1 border-half'
+        'rounded inline-flex text-xs relative select-none font-osiris lowercase bg-transparent button rounded text-white hover:text-white px-3 py-2 mx-1 border-half backdrop-filter backdrop-blur-sm'
     const classList =
         section == currentSection
             ? baseClasses.concat(' nav-current')
@@ -52,7 +52,7 @@ const inPageLinks: { label: string; section: string }[] = [
 ]
 
 export const ProductAnchorNavbar = () => {
-    const baseClasses = 'rounded w-full mx-auto justify-center p-3 sticky -mt-16 top-2 z-20 hidden lg:flex'
+    const baseClasses = 'rounded w-full mx-auto justify-center p-3 sticky -mt-16 top-2 z-30 hidden lg:flex'
 
     const [currentSection, setCurrentSection] = useState('platform')
 
@@ -107,7 +107,7 @@ export const ProductAnchorNavbar = () => {
 
             {/* mobile-only menu */}
 
-            <div className="w-11/12 sticky top-2 mx-auto block max-w-3xl lg:hidden z-20" style={positionStyles}>
+            <div className="w-11/12 sticky top-2 mx-auto block max-w-3xl lg:hidden z-30" style={positionStyles}>
                 <select
                     className="appearance-none text-white block p-3 w-full rounded border border-white border-half border-opacity-10 text-center"
                     style={{
