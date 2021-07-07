@@ -64,7 +64,7 @@ export const CallToAction = ({
         </span>
     ) : null
 
-    const widthClass = `w-${width}`
+    const widthClass = `w-full sm:w-${width}`
     const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between text-sm relative select-none font-osiris lowercase`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
