@@ -1,9 +1,9 @@
 // AUTO GENERATED FILE
 
-import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
-import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
+import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
+import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
@@ -25,8 +25,8 @@ import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
 import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
-import { ContributorsChart } from './components/ContributorsChart'
 import { ContributorSearch } from './components/ContributorSearch'
+import { ContributorsChart } from './components/ContributorsChart'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -91,10 +91,10 @@ import { TableOfContents } from './components/TableOfContents'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
 export const shortcodes = {
-    AllTheFeaturesCloud,
-    AnchorScrollNavbar,
     Endpoint,
     MethodTags,
+    AllTheFeaturesCloud,
+    AnchorScrollNavbar,
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
@@ -116,8 +116,8 @@ export const shortcodes = {
     Container,
     ContributorAvatars,
     ContributorCard,
-    ContributorsChart,
     ContributorSearch,
+    ContributorsChart,
     DarkModeToggle,
     DemoScheduler,
     DocsPageSurvey,
