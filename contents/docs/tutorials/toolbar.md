@@ -56,7 +56,7 @@ To follow this tutorial along, you need to:
 
 Before we go right into how to use the PostHog Toolbar, it's useful to understand why you'd want to do so.
 
-Our toolbar is still in Beta, and there are exciting new features for it on our roadmap. However, in it's current form, it can:
+Our toolbar is still in Beta, and there are exciting new features for it on our roadmap. However, in its current form, it can:
 
 
 1. Display user clicks on your website/web app in a visual way
@@ -78,7 +78,7 @@ To launch the toolbar, you can just access your website and it should appear for
 
 This will prompt you to select the URL you'd like to launch it on (in case you are tracking multiple websites). Once you've clicked the desired URL, you will then be taken to a new tab where your website will load with the toolbar enabled.
 
-<div class='note-block'><b>Note:</b> The toolbar is now enabled for all new PostHog users by default, even though it is still in Beta. However, if you are an user from before our 1.13.0 release, you might need to enable the toolbar in 'Settings' -> 'Setup'.</div><br />
+<div class='note-block'><b>Note:</b> The toolbar is now enabled for all new PostHog users by default, even though it is still in Beta. However, if you are a user from before our 1.13.0 release, you might need to enable the toolbar in 'Settings' -> 'Setup'.</div><br />
 
 ## Using the Heatmap
 
