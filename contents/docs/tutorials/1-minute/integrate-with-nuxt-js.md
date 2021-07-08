@@ -25,7 +25,7 @@ To follow this tutorial along, you need to:
 We are going to implement PostHog as a [Nuxt.js plugin](https://nuxtjs.org/docs/2.x/directory-structure/plugins) which gives us the possibility to inject
 the posthog object and make it available across our application.
 
-The first thing you want to do is to install the [posthog-js library]((/docs/libraries/js)) in your project - so add it using your package manager:
+The first thing you want to do is to install the [posthog-js library](/docs/libraries/js) in your project - so add it using your package manager:
 
 ```
 yarn add posthog-js
