@@ -10,7 +10,7 @@ Giving a new joiner a great experience is very important to us, especially given
 
 We have members working all around the world, so their onboarding process may look a little different depending on where they are based and which team they are in. 
 
-The people team will copy the relevant sections of the checklist into an onboarding issue on the [People&Ops Roadmap](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
+The people team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
 
 As always, this is a living document and it changes every now and then, so it's worth keeping an eye on this page. 
 
