@@ -21,8 +21,8 @@ In the event of substantive changes to this document, please be sure to update o
 Build better products by discovering and testing insights through an open-source self-hostable analytics platform which has unlimited potential to scale. 
 
 ## Target audience
-**Buyer & Decision Makers:** Product Managers / Technical Leadership
-**Buyer & Decision Makers & Influencers:** Engineers 
+- **Buyer & Decision Makers:** Product Managers / Technical Leadership
+- **Buyer & Decision Makers & Influencers:** Engineers 
 
 We are primarily targeting Product Managers and Engineers in growth-stage businesses built around digital products; primarily web-based or software products. Apps are also viable but have less product fit due to current feature gaps (e.g. session recording, auto-capture).
 
