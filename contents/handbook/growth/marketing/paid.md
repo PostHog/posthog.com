@@ -51,6 +51,7 @@ Bear in mind a lot of our users will use ad-blocking of some kind - this is why 
 
 We also may occasionally use LinkedIn for paid recruitment ads, but that is a separate topic not covered here.
 
+
 ### Google Ads
 
 - Focus: TBD - likely broad
