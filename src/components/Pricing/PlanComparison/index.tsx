@@ -80,7 +80,7 @@ const sections = [
             },
             {
                 name: 'Self-hosted database',
-                tiers: { 'PostHog Cloud': 'n/a', 'Open source': 'Postgres', Scale: 'ClickHouse' },
+                tiers: { 'PostHog Cloud': 'n/a', 'Open source': 'Postgres or ClickHouse', Scale: 'ClickHouse' },
             },
             {
                 name: 'Server management',
