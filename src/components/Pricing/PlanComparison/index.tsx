@@ -53,7 +53,7 @@ const sections = [
                 name: 'Scales to...',
                 tiers: {
                     'PostHog Cloud': 'Millions of users/mo',
-                    'Open source': '~1m users/mo (limited by database) ',
+                    'Open source': '~1m users/mo',
                     Scale: 'Millions of users/mo',
                 },
             },
