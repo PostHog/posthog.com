@@ -1,8 +1,5 @@
+import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-
-import graphicAnalytics from '../images/analytics@2x.png'
-import graphicInsights from '../images/insights@2x.png'
-import graphicPlatform from '../images/platform@2x.png'
 
 export const Features = () => {
     return (
@@ -17,11 +14,13 @@ export const Features = () => {
                 <div className="grid platform-columns">
                     <div className="">
                         <figure className="my-0">
-                            <img
-                                src={graphicAnalytics}
+                            <StaticImage
+                                src="../LandingPage/images/analytics@2x.png"
+                                loading="eager"
                                 alt="Analytics"
-                                width="296"
-                                height="296"
+                                quality={100}
+                                width={296}
+                                height={296}
                                 className="mx-auto my-0"
                             />
                         </figure>
@@ -111,11 +110,13 @@ export const Features = () => {
                     </div>
                     <div className="insights-column">
                         <figure className="my-0">
-                            <img
-                                src={graphicInsights}
+                            <StaticImage
+                                src="../LandingPage/images/insights@2x.png"
+                                loading="eager"
                                 alt="Insights"
-                                width="296"
-                                height="296"
+                                quality={100}
+                                width={296}
+                                height={296}
                                 className="mx-auto my-0"
                             />
                         </figure>
@@ -173,11 +174,13 @@ export const Features = () => {
                     </div>
                     <div className="">
                         <figure className="my-0">
-                            <img
-                                src={graphicPlatform}
+                            <StaticImage
+                                src="../LandingPage/images/platform@2x.png"
+                                loading="eager"
                                 alt="Platform"
-                                width="296"
-                                height="296"
+                                quality={100}
+                                width={296}
+                                height={296}
                                 className="mx-auto my-0"
                             />
                         </figure>

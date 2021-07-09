@@ -1,9 +1,6 @@
+import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { CallToAction } from '../CallToAction'
-
-import graphicAnalytics from '../LandingPage/images/analytics@2x.png'
-import graphicInsights from '../LandingPage/images/insights@2x.png'
-import graphicPlatform from '../LandingPage/images/platform@2x.png'
 
 export const AllTheFeaturesCloud = () => {
     return (
@@ -16,7 +13,14 @@ export const AllTheFeaturesCloud = () => {
             <div className="platform-columns grid grid-flow-row auto-rows-max md:grid-flow-col md:auto-cols-max justify-center text-white">
                 <div className="">
                     <figure className="my-0">
-                        <img src={graphicAnalytics} alt="Analytics" width="296" height="296" className="mx-auto my-0" />
+                        <StaticImage
+                            src="../LandingPage/images/analytics@2x.png"
+                            alt="Analytics"
+                            quality={100}
+                            width={296}
+                            height={296}
+                            className="mx-auto my-0"
+                        />
                     </figure>
                     <div className="mb-8 lg:mb-0">
                         <h4 className="font-osiris font-normal lowercase">Analytics</h4>
@@ -24,7 +28,14 @@ export const AllTheFeaturesCloud = () => {
                 </div>
                 <div className="insights-column">
                     <figure className="my-0">
-                        <img src={graphicInsights} alt="Insights" width="296" height="296" className="mx-auto my-0" />
+                        <StaticImage
+                            src="../LandingPage/images/insights@2x.png"
+                            alt="Insights"
+                            quality={100}
+                            width={296}
+                            height={296}
+                            className="mx-auto my-0"
+                        />
                     </figure>
                     <div className="mb-8 lg:mb-0">
                         <h4 className="font-osiris font-normal lowercase">Insights</h4>
@@ -32,7 +43,14 @@ export const AllTheFeaturesCloud = () => {
                 </div>
                 <div className="">
                     <figure className="my-0">
-                        <img src={graphicPlatform} alt="Platform" width="296" height="296" className="mx-auto my-0" />
+                        <StaticImage
+                            src="../LandingPage/images/platform@2x.png"
+                            alt="Platform"
+                            quality={100}
+                            width={296}
+                            height={296}
+                            className="mx-auto my-0"
+                        />
                     </figure>
                     <div className="mb-8 lg:mb-0">
                         <h4 className="font-osiris font-normal lowercase">Platform</h4>
