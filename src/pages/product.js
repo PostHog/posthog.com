@@ -39,10 +39,10 @@ function ProductPage() {
                             featureIcon="open-source"
                             featureName="Open source"
                             title="Open source product analytics"
-                            description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
+                            description="<p>Check out our source code, request new features or get involved with the product directly.s</p>"
                             figureClasses="-mb-12"
-                            image="screenshot-dashboard@2x.png"
-                            imageClasses="relative z-10 w-full max-w-screen-md border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                            image="feature-dashboard.png"
+                            imageClasses="relative z-10 w-full max-w-screen-lg shadow-xl"
                             classes=""
                         />
 
@@ -201,11 +201,9 @@ function ProductPage() {
                             title="Monitor engagement. <br />Create actionable insights."
                             description="Monitor the impact of product changes - by customer plan, traffic source, or any other user property."
                             docsUrl="/docs/features/trends"
-                            image="feature-trends@2x.png"
+                            image="feature-insights.png"
                             figureClasses="-mb-12"
-                            imageWidth="1051"
-                            imageHeight="576"
-                            imageClasses="w-screen-md max-w-content rounded-tl-xl rounded-tr-xl relative z-20"
+                            imageClasses="w-full max-w-screen-lg relative z-20"
                             classes=""
                         />
 
