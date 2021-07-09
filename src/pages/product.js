@@ -39,7 +39,7 @@ function ProductPage() {
                             featureIcon="open-source"
                             featureName="Open source"
                             title="Open source product analytics"
-                            description="<p>Check out our source code, request new features or get involved with the product directly.s</p>"
+                            description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
                             figureClasses="-mb-12"
                             image="feature-dashboard.png"
                             imageClasses="relative z-10 w-full max-w-screen-lg shadow-xl"
