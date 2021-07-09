@@ -12,7 +12,7 @@ const ButtonLink = ({
 }: {
     section: string
     currentSection: string
-    children: any
+    children: React.ReactNode
 }) => {
     const baseClasses = 'px-3 py-2 rounded'
     const classList =

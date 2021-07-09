@@ -13,7 +13,7 @@ import BlogAuthor from '../BlogAuthor'
 
 interface BlogPostLayoutProps {
     pageTitle: string
-    children: any
+    children: React.ReactNode
     featuredImage?: string | null | undefined
     blogArticleSlug: string
     blogDate?: string

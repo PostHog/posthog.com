@@ -7,7 +7,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 interface SEOProps {
     title: string
     description?: string
-    image?: any
+    image?: string
     article?: boolean
     canonicalUrl?: string
 }

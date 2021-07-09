@@ -27,9 +27,9 @@ interface LayoutProps {
     isDocsPage?: boolean
     isHomePage?: boolean
     blogArticleSlug?: string
-    children?: any
+    children?: React.ReactNode
     className?: string
-    containerStyle?: Record<string, any>
+    containerStyle?: Record<string, unknown>
     menuActiveKey?: string
     featuredImage?: string | null
     headerBackgroundTransparent?: boolean
@@ -67,6 +67,7 @@ const Layout = ({
 
     useEffect(() => {
         if (window && posthog) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             posthog.people.set({ preferred_theme: (window as any).__theme })
         }
 

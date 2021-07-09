@@ -8,7 +8,7 @@ export const SectionFullWidth = ({
 }: {
     className?: string
     width?: string
-    children?: any
+    children?: React.ReactNode
 }) => {
     const baseClasses = `max-w-${width} mx-auto`
     const classList = mergeClassList(baseClasses, className)

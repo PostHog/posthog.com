@@ -3,8 +3,8 @@ import React from 'react'
 interface ContainerProps {
     onPostPage: boolean
     className: string
-    containerStyle?: any
-    children: any
+    containerStyle?: Record<string, unknown>
+    children: React.ReactNode
 }
 
 export const Container = ({ onPostPage, className, containerStyle = {}, children }: ContainerProps) => {
