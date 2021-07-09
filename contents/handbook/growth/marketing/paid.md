@@ -17,7 +17,6 @@ We have made certain hypotheses for what we think will be most effective on each
 
 These will evolve over time:
 - Show, don't tell - share genuinely interesting content and let the user discover the product themselves. If you wouldn't click on the link, why do you think our users would?
-- Always follow our [messaging framework](https://posthog.com/handbook/growth/marketing/messaging_framework) to ensure consistency across channels.
 - Use our very distinctive brand of graphic art as much as possible - it tells a story that draws people in better than screenshots of graphs. 
 - Better to be opinionated and a bit divisive than unmemorable.
 - No bullshit - double down on our open/transparent product and culture.
@@ -25,6 +24,11 @@ These will evolve over time:
 - Don't be afraid to use humor, coding jokes etc. 
 
 Bear in mind a lot of our users will use ad-blocking of some kind - this is why our other channels such as [developer relations](https://posthog.com/handbook/growth/marketing/developer-relations) are especially important. 
+
+## Brand guidelines
+
+- Always follow our [messaging framework](/handbook/growth/marketing/messaging_framework) to ensure consistency across channels.
+- We have [a handy set of assets](https://www.figma.com/file/MRmFaOSXV1zYTGnOODGyCc/Social-Media?node-id=1307%3A13884) that you can use, together with guidelines for each platform. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
 
 ## Platforms
 
