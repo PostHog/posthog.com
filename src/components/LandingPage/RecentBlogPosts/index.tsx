@@ -9,7 +9,7 @@ import blogPostImg from './images/blog-post.png'
 export const RecentBlogPosts = () => {
     return (
         <div className="recent-blog-posts py-24">
-            <div className="w-11/12 max-w-4xl mx-auto">
+            <div className="w-11/12 max-w-4xl mx-auto relative">
                 <h2 className="text-white text-center text-3xl mb-0">News &amp; Blog</h2>
                 <p className="text-white opacity-80 text-center mt-2 text-sm">Follow our journey as we grow</p>
 
@@ -49,8 +49,8 @@ export const RecentBlogPosts = () => {
                     </div>
                 </div>
 
-                <div className="flex">
-                    <CallToAction type="button" className="mt-12 mx-auto" to="/blog" icon="book">
+                <div className="flex relative z-10">
+                    <CallToAction type="button" className="mt-12 max-w-sm mx-auto" to="/blog" icon="book">
                         Visit Blog
                     </CallToAction>
                 </div>

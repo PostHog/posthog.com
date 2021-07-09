@@ -49,7 +49,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
         <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
             <div className="w-full md:w-1/2 md:pr-8 py-4 mx-auto">
                 <span className="text-gray-400 text-xs uppercase">Latest Post</span>
-                <h2 className="text-4xl text-gray-900 dark:text-gray-100 font-gosha my-1">
+                <h2 className="text-4xl text-gray-900 dark:text-gray-100 font-sans normal-case my-1">
                     <Link
                         to={post.fields.slug}
                         className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
@@ -89,7 +89,7 @@ const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; author
                 </div>
             )}
             <div className="w-full py-4">
-                <h2 className="text-2xl text-white font-gosha my-1">
+                <h2 className="text-2xl text-white font-sans normal-case my-1">
                     <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
                         {post.frontmatter.title}
                     </Link>
@@ -118,7 +118,7 @@ const LandingPageSnippet = ({ post, authorDetails }: { post: PostType; authorDet
                 </div>
             )}
             <div className="w-full py-2">
-                <h2 className="text-lg text-white font-gosha my-1 leading-tight">
+                <h2 className="text-lg text-white font-sans normal-case my-1 leading-tight">
                     <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
                         {post.frontmatter.title}
                     </Link>
@@ -155,7 +155,7 @@ const PostCard = ({
                     <h3 className="mb-0">
                         <Link
                             to={post.fields.slug}
-                            className="font-bold font-gosha text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                            className="font-bold font-sans normal-case text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
                         >
                             {post.frontmatter.title}
                         </Link>

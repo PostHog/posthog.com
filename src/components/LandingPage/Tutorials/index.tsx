@@ -58,7 +58,7 @@ export const Tutorials = () => {
 
                 <CallToAction type="button" className="mt-8 mx-auto" to="/docs/tutorials" icon="book" width="84">
                     &nbsp;&nbsp;See all tutorials
-                    <span className="text-xs text-white text-opacity-50 ml-1">13</span>
+                    <span className="text-xs text-white max-w-sm text-opacity-50 ml-1">13</span>
                 </CallToAction>
             </div>
         </div>

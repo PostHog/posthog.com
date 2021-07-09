@@ -74,6 +74,16 @@ module.exports = {
             white: '#fff',
             black: '#000',
             orange: '#EF7632',
+            purpleish: '#802f6a',
+            'purpleish-dark': '#72286E',
+            'darkmode-purple': '#220f3f',
+            'offwhite-purple': '#F4F1F8',
+            'baby-blue': '#CDD0FF',
+            'deep-blue': '#160431',
+            'royal-blue': '#232D69',
+            yellow: '#F7A501',
+            footer: '#08042f',
+            pink: '#A970DC',
         }),
         extend: {
             fontFamily: {
