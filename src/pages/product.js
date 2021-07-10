@@ -369,7 +369,7 @@ function ProductPage() {
                             description="By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon."
                             staticImage={
                                 <StaticImage
-                                    className="mx-auto mt-6 max-w-[253px]"
+                                    className="mx-auto mt-6 mb-6 max-w-[253px]"
                                     src="../components/ProductFeature/images/feature-revenue-tracking@2x.png"
                                 />
                             }
