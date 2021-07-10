@@ -1,9 +1,7 @@
 import React from 'react'
 import { LandingPageCallToAction } from '../LandingPage/LandingPageCallToAction'
 
-import HeroAnimation720x1300 from './svgs/hero-720x1300.svg'
-import HeroAnimation1920x1080 from './svgs/hero-1920x1080.svg'
-import HeroAnimation1920x720 from './svgs/hero-1920x720.svg'
+import HeroImage from './HeroImage'
 
 interface ProductHeroProps {
     preTitle?: string
@@ -61,9 +59,7 @@ export const ProductHero = ({
                 <span className="chevron"></span>
             </a>
 
-            <HeroAnimation720x1300 className="sm:hidden absolute h-full w-full top-0 left-0" />
-            <HeroAnimation1920x1080 className="hidden sm:block xl:hidden absolute h-full w-full top-0 left-0" />
-            <HeroAnimation1920x720 className="hidden xl:block absolute h-full w-full top-0 left-0" />
+            <HeroImage />
         </div>
     )
 }
