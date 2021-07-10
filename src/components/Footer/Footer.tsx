@@ -74,8 +74,8 @@ export function Footer({
                 <div className="w-full md:w-1/4 md:pr-8">
                     <FooterCategory title="Product">
                         <FooterSubCategory>Overview</FooterSubCategory>
-                        <FooterListItem to="/product-features" border={false}>
-                            Product overview &amp; comparison
+                        <FooterListItem to="/product" border={false}>
+                            Product
                         </FooterListItem>
 
                         <FooterSubCategory>Product suite</FooterSubCategory>

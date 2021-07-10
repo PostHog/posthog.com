@@ -42,7 +42,7 @@ We track user behavior across your website and applications.
 	* [Session Recording](/docs/features/session-recording)
 	* [Plugins](/docs/features/plugins)
 
-You can read more about our available features on the dedicated [Product Features page](/product-features).
+You can read more about our available features on the dedicated [Product page](/product).
 
 ### Does it work for mobile and web?
 

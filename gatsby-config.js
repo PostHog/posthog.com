@@ -196,7 +196,7 @@ module.exports = {
                             } else {
                                 changefreq = 'yearly'
                             }
-                        } else if (path.includes('product-features')) {
+                        } else if (path.includes('product')) {
                             priority = 0.8
                         } else if (path.includes('docs')) {
                             priority = 0.9
@@ -231,6 +231,14 @@ module.exports = {
                     }))
 
                     return [...allQueriedPages, ...plugins]
+                },
+            },
+        },
+        {
+            resolve: `gatsby-plugin-react-svg`,
+            options: {
+                rule: {
+                    include: /svgs/,
                 },
             },
         },
