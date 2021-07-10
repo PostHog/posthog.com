@@ -83,18 +83,8 @@ export const ProductFeature = ({
                     </div>
                 )}
 
-                <h3
-                    className="mb-2 font-osiris font-normal text-2xl lowercase"
-                    dangerouslySetInnerHTML={{ __html: title }}
-                />
-                <div
-                    className="text-white text-opacity-70"
-                    dangerouslySetInnerHTML={{
-                        __html: description?.includes('<p class="max-w-md mx-auto">')
-                            ? description
-                            : `<p class="max-w-md mx-auto">${description}</p>`,
-                    }}
-                />
+                <h3 className="mb-2 font-osiris font-normal text-2xl lowercase">{title}</h3>
+                <p className="max-w-md mx-auto text-white text-opacity-70">{description}</p>
 
                 {/* only render if {docsUrl} exists */}
                 {docsUrl && (

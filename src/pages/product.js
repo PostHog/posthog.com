@@ -27,7 +27,15 @@ function ProductPage() {
                     title="Build better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
                     componentKey="productHero"
-                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='mailto:sales@posthog.com?subject=Scale%20deployment' class='text-orange'>request a sales call</a>."
+                    disclaimer={
+                        <span>
+                            *Demos are provided by actual PostHog engineers! You can also{' '}
+                            <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
+                                request a sales call
+                            </a>
+                            .
+                        </span>
+                    }
                     bgColor="navy"
                 />
                 <ProductAnchorNavbar />
@@ -40,7 +48,7 @@ function ProductPage() {
                             featureIcon="open-source"
                             featureName="Open source"
                             title="Open source product analytics"
-                            description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
+                            description="Check out our source code, request new features or get involved with the product directly."
                             staticImage={
                                 <StaticImage
                                     className="relative z-10 w-full max-w-screen-lg shadow-xl mx-auto -mb-12 mt-6"
@@ -160,7 +168,18 @@ function ProductPage() {
                             <ProductFeature
                                 layout="standard"
                                 title="Keep data on your infrastructure"
-                                description="<p>Customer data stays on your servers. You’re in total control of your PostHog instance.</p><p>With self-hosting, you can also circumvent ad blockers and browser privacy features.</p>"
+                                description={
+                                    <>
+                                        <p>
+                                            Customer data stays on your servers. You’re in total control of your PostHog
+                                            instance.
+                                        </p>
+                                        <p>
+                                            With self-hosting, you can also circumvent ad blockers and browser privacy
+                                            features.
+                                        </p>
+                                    </>
+                                }
                                 classes=""
                             />
                         </div>
@@ -172,7 +191,7 @@ function ProductPage() {
                             featureIcon="data-privacy"
                             featureName="Data privacy"
                             title="Compliance-friendly"
-                            description="<p>Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around.</p>"
+                            description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
                             figureClasses="md:h-48"
                             image="feature-data-privacy.svg"
                             classes=""
@@ -201,7 +220,12 @@ function ProductPage() {
                             layout="reversed"
                             featureIcon="trends"
                             featureName="Trends"
-                            title="Monitor engagement. <br />Create actionable insights."
+                            title={
+                                <span>
+                                    Monitor engagement. <br />
+                                    Create actionable insights.
+                                </span>
+                            }
                             description="Monitor the impact of product changes - by customer plan, traffic source, or any other user property."
                             docsUrl="/docs/features/trends"
                             staticImage={
@@ -244,8 +268,13 @@ function ProductPage() {
                             layout="reversed"
                             featureIcon="funnels"
                             featureName="Funnels"
-                            title="Identify <strike class='opacity-50'>dropoff</strike> <br />opportunity"
-                            description="<p>Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment.</p>"
+                            title={
+                                <span>
+                                    Identify <strike className="opacity-50">dropoff</strike> <br />
+                                    opportunity
+                                </span>
+                            }
+                            description="Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment."
                             docsUrl="/docs/features/funnels"
                             //bgImage={`${imageFunnels}`}
                             bgImagePosition="bottom center / 100%"
@@ -259,7 +288,7 @@ function ProductPage() {
                             featureIcon="paths"
                             featureName="Paths"
                             title="Visualize how traffic flows"
-                            description="<p>See common user paths and discover how visitors arrived at their outcome.</p>"
+                            description="See common user paths and discover how visitors arrived at their outcome."
                             docsUrl="/docs/features/paths"
                             staticImage={
                                 <StaticImage
@@ -357,7 +386,12 @@ function ProductPage() {
                             layout="standard"
                             featureIcon="feature-flags"
                             featureName="Feature flags"
-                            title="Roll out features <br />strategically"
+                            title={
+                                <span>
+                                    Roll out features <br />
+                                    strategically
+                                </span>
+                            }
                             description="Toggle features for cohorts or individuals to test the impact."
                             docsUrl="/docs/features/feature-flags#"
                             figureClasses=""
@@ -498,7 +532,15 @@ function ProductPage() {
                     title="Start building better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
                     componentKey="productFooter"
-                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='mailto:sales@posthog.com?subject=Scale%20deployment' class='text-orange'>request a sales call</a>."
+                    disclaimer={
+                        <span>
+                            *Demos are provided by actual PostHog engineers! You can also{' '}
+                            <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
+                                request a sales call
+                            </a>
+                            .
+                        </span>
+                    }
                     bgColor="navy"
                 />
             </div>
