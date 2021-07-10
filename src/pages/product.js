@@ -9,12 +9,13 @@ import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
 import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
 import { ProductSectionHeader } from '../components/ProductSectionHeader'
-
 import { Doodle } from '../components/Doodle'
 
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
+import { useStaticQuery, graphql } from 'gatsby'
+import { StaticImage } from 'gatsby-plugin-image'
 
 function ProductPage() {
     return (
@@ -26,7 +27,15 @@ function ProductPage() {
                     title="Build better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
                     componentKey="productHero"
-                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='mailto:sales@posthog.com?subject=Scale%20deployment' class='text-orange'>request a sales call</a>."
+                    disclaimer={
+                        <span>
+                            *Demos are provided by actual PostHog engineers! You can also{' '}
+                            <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
+                                request a sales call
+                            </a>
+                            .
+                        </span>
+                    }
                     bgColor="navy"
                 />
                 <ProductAnchorNavbar />
@@ -39,11 +48,13 @@ function ProductPage() {
                             featureIcon="open-source"
                             featureName="Open source"
                             title="Open source product analytics"
-                            description="<p>Check out our source code, request new features or get involved with the product directly.</p>"
-                            figureClasses="-mb-12"
-                            image="feature-dashboard.png"
-                            imageClasses="relative z-10 w-full max-w-screen-lg shadow-xl"
-                            classes=""
+                            description="Check out our source code, request new features or get involved with the product directly."
+                            staticImage={
+                                <StaticImage
+                                    className="relative z-10 w-full max-w-screen-lg shadow-xl mx-auto -mb-12 mt-6"
+                                    src="../components/ProductFeature/images/feature-dashboard.png"
+                                />
+                            }
                         />
 
                         <Doodle type="rectangle" color="#5D96C4" classes="hidden md:block top-12 left-0" />
@@ -157,7 +168,18 @@ function ProductPage() {
                             <ProductFeature
                                 layout="standard"
                                 title="Keep data on your infrastructure"
-                                description="<p>Customer data stays on your servers. You’re in total control of your PostHog instance.</p><p>With self-hosting, you can also circumvent ad blockers and browser privacy features.</p>"
+                                description={
+                                    <>
+                                        <p>
+                                            Customer data stays on your servers. You’re in total control of your PostHog
+                                            instance.
+                                        </p>
+                                        <p>
+                                            With self-hosting, you can also circumvent ad blockers and browser privacy
+                                            features.
+                                        </p>
+                                    </>
+                                }
                                 classes=""
                             />
                         </div>
@@ -169,7 +191,7 @@ function ProductPage() {
                             featureIcon="data-privacy"
                             featureName="Data privacy"
                             title="Compliance-friendly"
-                            description="<p>Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around.</p>"
+                            description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
                             figureClasses="md:h-48"
                             image="feature-data-privacy.svg"
                             classes=""
@@ -198,13 +220,20 @@ function ProductPage() {
                             layout="reversed"
                             featureIcon="trends"
                             featureName="Trends"
-                            title="Monitor engagement. <br />Create actionable insights."
+                            title={
+                                <span>
+                                    Monitor engagement. <br />
+                                    Create actionable insights.
+                                </span>
+                            }
                             description="Monitor the impact of product changes - by customer plan, traffic source, or any other user property."
                             docsUrl="/docs/features/trends"
-                            image="feature-insights.png"
-                            figureClasses="-mb-12"
-                            imageClasses="w-full max-w-screen-lg relative z-20"
-                            classes=""
+                            staticImage={
+                                <StaticImage
+                                    className="w-full max-w-screen-lg relative z-20 mx-auto -mb-12 mt-6"
+                                    src="../components/ProductFeature/images/feature-insights.png"
+                                />
+                            }
                         />
 
                         <Doodle
@@ -239,8 +268,13 @@ function ProductPage() {
                             layout="reversed"
                             featureIcon="funnels"
                             featureName="Funnels"
-                            title="Identify <strike class='opacity-50'>dropoff</strike> <br />opportunity"
-                            description="<p>Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment.</p>"
+                            title={
+                                <span>
+                                    Identify <strike className="opacity-50">dropoff</strike> <br />
+                                    opportunity
+                                </span>
+                            }
+                            description="Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment."
                             docsUrl="/docs/features/funnels"
                             //bgImage={`${imageFunnels}`}
                             bgImagePosition="bottom center / 100%"
@@ -254,12 +288,17 @@ function ProductPage() {
                             featureIcon="paths"
                             featureName="Paths"
                             title="Visualize how traffic flows"
-                            description="<p>See common user paths and discover how visitors arrived at their outcome.</p>"
+                            description="See common user paths and discover how visitors arrived at their outcome."
                             docsUrl="/docs/features/paths"
-                            image="feature-paths@2x.png"
+                            staticImage={
+                                <StaticImage
+                                    className="max-w-[320px] mx-auto mt-6"
+                                    src="../components/ProductFeature/images/feature-paths@2x.png"
+                                />
+                            }
                             imageWidth="320"
                             imageHeight="620"
-                            classes=""
+                            classes="justify-between h-full"
                         />
                         <Doodle
                             type="rectangle"
@@ -276,11 +315,12 @@ function ProductPage() {
                             title="Insights by association"
                             description="Use common traits to identify inflection points."
                             docsUrl="/docs/features/cohorts"
-                            figureClasses="-mb-8"
-                            image="feature-cohorts@2x.png"
-                            imageWidth="479"
-                            imageHeight="284"
-                            classes=""
+                            staticImage={
+                                <StaticImage
+                                    className="max-w-[479px] -mb-8 mx-auto"
+                                    src="../components/ProductFeature/images/feature-cohorts@2x.png"
+                                />
+                            }
                         />
                     </div>
 
@@ -292,12 +332,12 @@ function ProductPage() {
                             title="See a timeline of a user's activity"
                             description="User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context."
                             docsUrl="/docs/features/sessions"
-                            figureClasses="-mb-12"
-                            image="feature-user-sessions@2x.png"
-                            imageWidth="1410"
-                            imageHeight="914"
-                            imageClasses="w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
-                            classes=""
+                            staticImage={
+                                <StaticImage
+                                    className="mt-6 -mb-12 mx-auto w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                                    src="../components/ProductFeature/images/feature-user-sessions@2x.png"
+                                />
+                            }
                         />
                         <Doodle type="zigzag" color="#FFCF72" classes="hidden md:block -top-4 left-6" />
                         <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
@@ -311,11 +351,12 @@ function ProductPage() {
                             title="Group users by lifecycle"
                             description="Drill down into activity of individual users within a cohort. Further break down a bucket of users to identify root causes of behavior."
                             docsUrl="/docs/features/retention"
-                            figureClasses="mb-0"
-                            image="feature-retention@2x.png"
-                            imageWidth="455"
-                            imageHeight="210"
-                            classes=""
+                            staticImage={
+                                <StaticImage
+                                    className="mx-auto mt-6 max-w-[455px]"
+                                    src="../components/ProductFeature/images/feature-retention@2x.png"
+                                />
+                            }
                         />
                     </div>
 
@@ -326,11 +367,12 @@ function ProductPage() {
                             featureName="Revenue tracking"
                             title="KPIs by LTV"
                             description="By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon."
-                            figureClasses=""
-                            image="feature-revenue-tracking@2x.png"
-                            imageWidth="253"
-                            imageHeight="136"
-                            classes=""
+                            staticImage={
+                                <StaticImage
+                                    className="mx-auto mt-6 mb-6 max-w-[253px]"
+                                    src="../components/ProductFeature/images/feature-revenue-tracking@2x.png"
+                                />
+                            }
                         />
                     </div>
                 </div>
@@ -344,7 +386,12 @@ function ProductPage() {
                             layout="standard"
                             featureIcon="feature-flags"
                             featureName="Feature flags"
-                            title="Roll out features <br />strategically"
+                            title={
+                                <span>
+                                    Roll out features <br />
+                                    strategically
+                                </span>
+                            }
                             description="Toggle features for cohorts or individuals to test the impact."
                             docsUrl="/docs/features/feature-flags#"
                             figureClasses=""
@@ -385,12 +432,12 @@ function ProductPage() {
                             title="See customers using your product"
                             description="Watch exactly what users are doing without infringing their privacy."
                             docsUrl="/docs/features/session-recording"
-                            figureClasses="mb-8"
-                            image="feature-session-recordings@2x.png"
-                            imageWidth="356"
-                            imageHeight="174"
-                            imageClasses="w-screen-md max-w-content"
-                            classes=""
+                            staticImage={
+                                <StaticImage
+                                    className="max-w-[356px] mx-auto mb-6"
+                                    src="../components/ProductFeature/images/feature-session-recordings@2x.png"
+                                />
+                            }
                         />
                     </div>
 
@@ -485,7 +532,15 @@ function ProductPage() {
                     title="Start building better products"
                     tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
                     componentKey="productFooter"
-                    disclaimer="*Demos are provided by actual PostHog engineers! You can also <a href='mailto:sales@posthog.com?subject=Scale%20deployment' class='text-orange'>request a sales call</a>."
+                    disclaimer={
+                        <span>
+                            *Demos are provided by actual PostHog engineers! You can also{' '}
+                            <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
+                                request a sales call
+                            </a>
+                            .
+                        </span>
+                    }
                     bgColor="navy"
                 />
             </div>
