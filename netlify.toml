@@ -181,3 +181,11 @@
 [[redirects]]
     from = "/docs/updating-documentation"
     to = "/docs/contributing/updating-documentation"
+
+[[redirects]]
+    from = "/docs/deployment"
+    to = "/docs/self-hosting/overview#deploy"
+
+[[redirects]]
+    from = "/docs/configuring-posthog"
+    to = "/docs/self-hosting/overview#configure"

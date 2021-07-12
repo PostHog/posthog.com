@@ -2,35 +2,29 @@
     {
         "entry": "Docs",
         "name": "Docs",
-        "child_entries": [
-            "Tutorials",
-            "Deployment",
-            "Configuring PostHog",
-            "Libraries",
-            "Features",
-            "Plugins",
-            "API",
-            "Contributing",
-            "Platform Structure"
-        ]
+        "child_entries": ["Self-Hosting", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
     },
     {
-        "entry": "Configuring PostHog",
-        "name": "Configuring PostHog",
+        "entry": "Self-Hosting",
+        "name": "Self-Hosting",
+        "items": ["docs/self-hosting/overview"],
+        "child_entries": ["Deploy", "Configure"]
+    },
+    {
+        "entry": "Configure",
+        "name": "Configure",
         "items": [
-            "docs/configuring-posthog",
             "docs/configuring-posthog/environment-variables",
-            "docs/configuring-posthog/upgrading-posthog",
             "docs/configuring-posthog/scaling-posthog",
             "docs/configuring-posthog/securing-posthog",
             "docs/configuring-posthog/running-behind-proxy",
             "docs/configuring-posthog/email",
-            "docs/configuring-posthog/deleting-data"
+            "docs/configuring-posthog/upgrading-posthog"
         ]
     },
     {
-        "entry": "Contributing",
-        "name": "Contributing",
+        "entry": "Contribute",
+        "name": "Contribute",
         "items": [
             "docs/contributing",
             "docs/contributing/recognizing-contributions",
@@ -53,28 +47,15 @@
             "docs/tutorials/actions",
             "docs/tutorials/b2b",
             "docs/tutorials/revenue",
-            "docs/tutorials/tracking-teams"
-        ],
-        "child_entries": ["1 Minute Tutorials"]
-    },
-    {
-        "entry": "1 Minute Tutorials",
-        "name": "1 Minute Tutorials",
-        "items": [
-            "docs/tutorials/1-minute/integrate-with-wordpress",
-            "docs/tutorials/1-minute/integrate-with-shopify",
-            "docs/tutorials/1-minute/integrate-with-metabase",
+            "docs/tutorials/tracking-teams",
             "docs/tutorials/1-minute/survey",
-            "docs/tutorials/1-minute/integrate-with-gtm",
-            "docs/tutorials/1-minute/integrate-with-retool",
-            "docs/tutorials/1-minute/integrate-with-nuxt-js"
+            "docs/configuring-posthog/deleting-data"
         ]
     },
     {
-        "entry": "Deployment",
-        "name": "Deployment",
+        "entry": "Deploy",
+        "name": "Deploy",
         "items": [
-            "docs/deployment",
             "docs/deployment/deploy-heroku",
             "docs/deployment/deploy-aws",
             "docs/deployment/deploy-docker",
@@ -85,19 +66,14 @@
             "docs/deployment/deploy-kubernetes",
             "docs/deployment/deploy-render",
             "docs/deployment/deploy-qovery",
-            "docs/deployment/snippet-installation",
             "docs/deployment/hosting-costs"
         ]
     },
     {
-        "entry": "Platform Structure",
-        "name": "Platform Structure",
-        "items": ["docs/application-settings", "docs/data-model", "docs/navigation"]
-    },
-    {
-        "entry": "Features",
-        "name": "Features",
+        "entry": "User Guides",
+        "name": "User Guides",
         "items": [
+            "docs/application-settings",
             "docs/features/actions",
             "docs/features/annotations",
             "docs/features/cohorts",
@@ -105,7 +81,7 @@
             "docs/features/events",
             "docs/features/feature-flags",
             "docs/features/funnels",
-            "docs/features/log-in-with-github-gitlab",
+            "docs/user-guides/log-in-with-sso",
             "docs/features/organizations",
             "docs/features/projects",
             "docs/features/paths",
@@ -147,53 +123,61 @@
             "docs/api/user",
             "docs/api/feature-flags",
             "docs/api/annotations",
-            "docs/api/cohorts"
+            "docs/api/cohorts",
+            "docs/data-model"
         ]
     },
     {
-        "entry": "Libraries",
-        "name": "Libraries",
+        "entry": "Integrate",
+        "name": "Integrate",
+        "items": ["docs/libraries"],
+        "child_entries": ["Client Libraries", "Server Libraries", "Third Parties", "Webhooks"]
+    },
+    {
+        "entry": "Client Libraries",
+        "name": "Client Libraries",
         "items": [
-            "docs/libraries",
+            "docs/deployment/snippet-installation",
             "docs/libraries/android",
-            "docs/libraries/go",
             "docs/libraries/ios",
             "docs/libraries/js",
+            "docs/libraries/flutter",
+            "docs/libraries/react-native"
+        ]
+    },
+    {
+        "entry": "Server Libraries",
+        "name": "Server Libraries",
+        "items": [
+            "docs/libraries/elixir",
+            "docs/libraries/go",
             "docs/libraries/node",
             "docs/libraries/php",
             "docs/libraries/python",
-            "docs/libraries/flutter",
-            "docs/libraries/react-native",
-            "docs/libraries/ruby",
-            "docs/libraries/rudderstack",
-            "docs/libraries/segment"
-        ],
-        "child_entries": ["Community", "Sending Data Out"]
+            "docs/libraries/ruby"
+        ]
     },
     {
-        "entry": "Community",
-        "name": "Community",
+        "entry": "Third Parties",
+        "name": "Third Parties",
         "items": [
-            "docs/libraries/community",
             "docs/libraries/docusaurus",
             "docs/libraries/gatsby",
-            "docs/libraries/elixir"
+            "docs/tutorials/1-minute/integrate-with-gtm",
+            "docs/tutorials/1-minute/integrate-with-metabase",
+            "docs/tutorials/1-minute/integrate-with-nuxt-js",
+            "docs/tutorials/1-minute/integrate-with-retool",
+            "docs/libraries/rudderstack",
+            "docs/libraries/segment",
+            "docs/libraries/sentry",
+            "docs/tutorials/1-minute/integrate-with-shopify",
+            "docs/tutorials/1-minute/integrate-with-wordpress"
         ]
     },
     {
-        "entry": "Sending Data Out",
-        "name": "Sending Data Out",
-        "items": [
-            "docs/libraries/slack",
-            "docs/libraries/microsoft-teams",
-            "docs/libraries/message-formatting",
-            "docs/libraries/sentry"
-        ]
-    },
-    {
-        "entry": "Get Started",
-        "name": "Get Started",
-        "items": ["docs/get-started/introduction", "docs/get-started/quick-start"]
+        "entry": "Webhooks",
+        "name": "Webhooks",
+        "items": ["docs/libraries/message-formatting", "docs/libraries/microsoft-teams", "docs/libraries/slack"]
     },
     {
         "entry": "Guide",

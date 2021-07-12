@@ -1,10 +1,12 @@
 ---
-title: Login with GitHub or GitLab
+title: Login with SSO
 sidebar: Docs
 showTitle: true
 ---
 
-If you want to make it really easy for your users to log in, you can add one-click login with GitHub or GitLab.
+If you want to make it really easy for your users to log in, you can add one-click login with SSO.
+
+PostHog currently supports the following SSO providers:
 
 ## GitHub
 

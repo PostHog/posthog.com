@@ -1,5 +1,5 @@
 ---
-title: Configuring PostHog
+title: Overview
 sidebar: Docs
 showTitle: true
 ---

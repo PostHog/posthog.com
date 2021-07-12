@@ -1,5 +1,5 @@
 ---
-title: Contributing to PostHog
+title: Overview
 sidebar: Docs
 showTitle: true
 ---

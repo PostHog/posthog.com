@@ -1,9 +1,11 @@
 ---
-title: Deploying PostHog
+title: Overview
 sidebar: Docs
 showTitle: true
 ---
 
+
+## Deploy
 
 Getting a shiny, running production environment of PostHog is probably one the first things you want to do!
 
@@ -13,7 +15,7 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 
 ||||
 | --- | --- | --- | --- |
-| [![](../../src/images/deploy-docker.svg)](/docs/deployment/deploy-docker) | [![](../../src/images/deploy-kubernetes.svg)](/docs/deployment/deploy-kubernetes) | [![](../../src/images/deploy-aws.svg)](/docs/deployment/deploy-aws) | [![](../../src/images/deploy-source.svg)](/docs/deployment/deploy-source) |
+| [![](../../../src/images/deploy-docker.svg)](/docs/deployment/deploy-docker) | [![](../../../src/images/deploy-kubernetes.svg)](/docs/deployment/deploy-kubernetes) | [![](../../../src/images/deploy-aws.svg)](/docs/deployment/deploy-aws) | [![](../../../src/images/deploy-source.svg)](/docs/deployment/deploy-source) |
 
 </span>
 
@@ -43,13 +45,13 @@ Other options include:
 - [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
 - [Deploying from Source](/docs/deployment/deploy-source)
 
+## Configure
 
-### **You May Also Be Interested In:**
+There are various ways to configure and personalize your PostHog instance to better suit your needs. In this section you will find all the information you need about settings and options you can configure to get what you need out of PostHog.
 
 - [Environment Variables](/docs/configuring-posthog/environment-variables)
 - [Upgrading PostHog](/docs/configuring-posthog/upgrading-posthog)
 - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
 - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
 - [Running Behind Proxy](/docs/configuring-posthog/running-behind-proxy)
-- [Configuring Email](/docs/configuring-posthog/email)
-- [Hosting Costs](/docs/deployment/hosting-costs)
+- [Email Configuration](/docs/configuring-posthog/email)
