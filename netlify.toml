@@ -189,3 +189,12 @@
 [[redirects]]
     from = "/docs/configuring-posthog"
     to = "/docs/self-hosting/overview#configure"
+    
+[[redirects]]
+    from = "/docs/deployment"
+    to = "/docs/self-hosting/overview"
+
+    
+[[redirects]]
+    from = "/docs/features/log-in-with-github-gitlab"
+    to = "/docs/user-guides/log-in-with-sso"
