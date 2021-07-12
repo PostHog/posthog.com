@@ -1,0 +1,21 @@
+---
+date: 2021-07-13
+title: Introducing Phil Leggetter, our new head of Developer Relations
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author: mo-shehu
+---
+
+We’re proud to announce a new hire to the PostHog team; Phil Leggetter will head up Developer Relations at PostHog.
+
+Developer relations sits at the intersection of product development, engineering, and marketing. The role serves communities of core and secondary customers through content, tutorials, events, and sponsorships. At PostHog, we’ve been blessed with a highly engaged community of [contributors](https://posthog.com/contributors), and we hope to improve our product to suit our users’ needs over the long run.
+
+Before joining PostHog, Phil managed developer at [tru.ID](https://tru.id/) (a mobile authentication platform), [Vonage](https://www.vonage.com/) (a communications API company), Nexmo (later acquired by Vonage), [Pusher](https://pusher.com/), and other tech startups (see [his LinkedIn profile](https://www.linkedin.com/in/leggetter/) for a full list). While at Nexmo, he built the developer relations team to 42 diverse, inclusive, and multifunctional individuals who worked everywhere from San Francisco to Singapore. He has also written a book on real-time web sockets, is currently reviewing another book on developer relations, and is now an advisor at several startups.
+
+Over the next few months, Phil aims to help our users get the most out of PostHog through more official programs, hosting more sessions, and tightening the bond between our users and engineering team. 
+
+The highly organized father of three works out of his color-coordinated shed in Scotland, helping savvy companies build engaged communities across the dev world. A techno-dance fan who admits he once obsessed over NSYNC and the Backstreet Boys, Phil also used to be into football, going so far as to create a website in 2006 called ‘Bring Back Beckham’ after David Beckham was dropped from the England squad. On a non-football-related front, Phil has also tweaked the popular AARRR framework to ‘AARRRP’ to include developer relations, helping companies to map their business goals to what dev relations can do for them.
+
+You can find Phil online @leggetter on GitHub, Twitter and LinkedIn, and at leggetter.co.uk online.
