@@ -106,7 +106,7 @@ If there's something you need in PostHog that we haven't built yet, you can [req
 
 We love all contributions to PostHog, big or small.
 
-Check out our [Contributing Docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/developing-locally), what our [stack](/docs/stack) is, and how the [project is structured](/docs/project-structure).
+Check out our [Contributing Docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/contributing/developing-locally), what our [stack](/docs/contributing/stack) is, and how the [project is structured](/docs/contributing/project-structure).
 
 ### Platform Structure
 
