@@ -41,7 +41,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Create GSuite account for the team member - _Eltje_ 
 *   [ ] Add team member to any relevant Google Groups - _Eltje_ 
 *   [ ] Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan). Once they are on, manually change their profile so their holiday requests are auto-approved - _Eltje_
-*   [ ] Add team member to 1password - _Charles_
+*   [ ] Add team member to 1Password - _Charles_
 *   [ ] Send team member a digital company card - _Eltje_
 *   [ ] Team member to purchase any necessary equipment as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines - _Team member_
 *   [ ] Give them $100 credit to spend on Shopify - _Charles_ 
