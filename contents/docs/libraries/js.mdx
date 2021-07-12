@@ -135,7 +135,7 @@ To make sure you understand which user is performing actions within your app, yo
 The ID can by anything, but is usually the unique ID that you identify users by in the database.
 Normally, you would put this below `posthog.init` if you have the information there.
 
-If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and after they signed up will be shown under the same user.
+If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and they signed up will be shown under the same user.
 
 ```js
 posthog.identify(
@@ -203,8 +203,6 @@ You can make this call on every page view to make sure this information is up-to
 ```js
 posthog.people.set({email: 'john@gmail.com'});
 ```
-
-*Note: you can call this function at any point, but it'll only be sent after the `posthog.identify` call*
 
 ### One-Page Apps and Page Views
 This JS snippet automatically sends `pageview` events whenever it gets loaded. If you have a one-page app, that means it'll only send a pageview once, when your app loads.
