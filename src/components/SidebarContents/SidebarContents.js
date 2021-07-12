@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import Menu from 'antd/lib/menu'
+import { HeartOutlined } from '@ant-design/icons'
 import 'antd/lib/menu/style/css'
 import './SidebarContents.scss'
 import { useActions, useValues } from 'kea'
@@ -41,6 +42,7 @@ function SidebarContents() {
                             id
                             frontmatter {
                                 title
+                                tags
                             }
                         }
                     }
@@ -67,11 +69,13 @@ function SidebarContents() {
                     if (!entry) {
                         return
                     }
+
                     const rootEntry = getEntry(entry)
                     const child_dir = rootEntry?.child_entries?.map((item) => convertToTree(item, rootEntry.id))
                     let children = itemToNode(rootEntry)
                     if (children && child_dir) children = children.concat(child_dir)
                     else if (children === null) children = child_dir
+
                     const node = {
                         key: rootEntry.id,
                         title: rootEntry.name,
@@ -109,12 +113,14 @@ function SidebarContents() {
                                 path: pages[item].fields.slug,
                                 key: pages[item].id,
                                 title: pages[item].frontmatter.title,
+                                tags: pages[item].frontmatter.tags || [],
                                 parent: parent,
                             }
                             dir.push(node)
                             return node
                         }
                     }
+                    console.warn(`Could not find page for path ${path}`)
                     return null
                 }
 
@@ -150,6 +156,9 @@ function SidebarContents() {
                                             style={{ float: 'left' }}
                                         >
                                             {item.title.length <= 36 ? item.title : item.title.slice(0, 34) + '…'}
+                                            {item.tags.includes('community') && (
+                                                <HeartOutlined className="community-icon" />
+                                            )}
                                         </Link>
                                     </Menu.Item>
                                 )
