@@ -63,6 +63,23 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
   - `export KAFKA_HOSTS=localhost:9092`
 - Run PostHog: `./bin/start`
 
+### Running ClickHouse, Kafka and Zookeeper on a Cloud Server
+
+This is useful if you have a Apple Silicon Mac.
+
+1. Get SSH access to any cloud server, e.g. a droplet from Digital Ocean.
+2. `ssh -L 8123:localhost:8123 -L 9000:localhost:9000 -L 9440:localhost:9440 -L 9009:localhost:9009 -L 9092:localhost:9092 root@DROPLET.IP.ADDRESS`
+3. `apt update && apt -y upgrade`
+4. `apt install -y docker.io docker-compose git`
+5. `git clone https://github.com/PostHog/posthog`
+6. `cd posthog`
+7. Run the commands:
+  - start: `docker-compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse`
+  - stop: `docker-compose -f ee/docker-compose.ch.yml down`
+  - cleanup: `docker-compose -f ee/docker-compose.ch.yml rm -v zookeeper kafka clickhouse`
+
+While the SSH connection is active, ports from Kafka and ClickHouse are forwarded to your computer and behave just as the services are running locally.
+
 ### Post Development Cleanup
 
 Awesome! You've made your fix/feature/contribution and you're ready to call it day. Follow proper Docker etiquette and make sure to `docker-compose down` your app to setup a blank slate for the next time you develop with Docker.
