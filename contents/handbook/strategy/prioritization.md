@@ -19,11 +19,11 @@ To achieve this, we will need revenue to be able to re-invest into making a bett
 
 ## Our current focus / milestone
 
-We're currenly focussed on ["Nailing Funnels"](/handbook/strategy/strategy)
+We're currently focused on ["Nailing Funnels"](/handbook/strategy/strategy)
 
 ## How do we shift focus between priorities?
 
-We want to move fast and make sure we’re always focussed on building what pushes us towards our vision. However, we also recognize that rapidly changing course or excessively pivoting can lead to incomplete or ineffective features and be demotivating.
+We want to move fast and make sure we’re always focused on building what pushes us towards our vision. However, we also recognize that rapidly changing course or excessively pivoting can lead to incomplete or ineffective features and be demotivating.
 
 We’re always looking to make the right decisions for the long term. However, we don’t believe in planning too far ahead as we’re continuously gathering new context.
 
