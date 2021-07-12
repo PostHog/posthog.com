@@ -406,7 +406,6 @@
             "handbook/engineering/debugging",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
-            "handbook/engineering/releasing-python",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",
