@@ -5,7 +5,7 @@ author: mo-shehu
 rootPage: /blog
 sidebar: Blog
 showTitle: true
-featuredImage: ../../images/blog/how-we-do-hr/how-we-do-hr.png
+featuredImage: ../images/blog/how-we-do-hr/how-we-do-hr.png
 hideAnchor: true
 ---
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gMYWond64lM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
