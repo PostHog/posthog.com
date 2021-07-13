@@ -184,11 +184,6 @@
         ]
     },
     {
-        "entry": "Guide",
-        "name": "Guide",
-        "items": ["docs/guide/anchor", "docs/guide/contents", "docs/guide/menu-items", "docs/guide/sidebar"]
-    },
-    {
         "entry": "Blog",
         "name": "Blog",
         "child_entries": ["Releases", "Company Blog", "Engineering Blog"]
