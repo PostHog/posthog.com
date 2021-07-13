@@ -42,11 +42,11 @@ To us, this is a really strong indicator of the potential that funnels have for 
 
 ## Our other features heavily compliment funnels
 
-PostHog offers an [entire toolkit](https://posthog.com/docs/features) to understand the success of your product today. We’ll be able to tightly integrate these other tools into the Funnels experience to make it trivial to get to the bottom of your user activation challenges.
+PostHog offers an [entire toolkit](/docs/user-guides/overview) to understand the success of your product today. We’ll be able to tightly integrate these other tools into the Funnels experience to make it trivial to get to the bottom of your user activation challenges.
 
 For example, imagine you’re looking at your onboarding funnel and you see a bunch of people dropping-off before the second page of your signup form. You’ll be able to quickly look at a sample set of screen recordings and understand what happened causing them to drop off — perhaps the next button isn’t rendering correcting in their browser or they’re getting an unusual error message?
 
-We’re really excited to build out our Funnels product over the next few weeks and cannot wait to share it with our community. Check out our tutorial on how to get started with the Funnels feature [here](https://posthog.com/docs/tutorials/funnels).
+We’re really excited to build out our Funnels product over the next few weeks and cannot wait to share it with our community. Check out our tutorial on how to get started with the Funnels feature [here](/docs/tutorials/funnels).
 
 _Loved this? Follow us on [Twitter](https://twitter.com/posthoghq) and [LinkedIn](https://linkedin.com/company/posthog) for more insights on startups, growth, and product analytics._
 

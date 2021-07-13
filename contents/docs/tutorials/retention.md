@@ -29,7 +29,7 @@ This tutorial will introduce you to the basic concepts of retention and churn an
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview)
 
 
 #### Determining How Your Business Should Measure Retention

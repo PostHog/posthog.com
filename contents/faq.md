@@ -53,7 +53,7 @@ Yes. We support any kind of application.
 Yes. PostHog can be used via:
 
 - An HTML snippet that goes inside your ```<head></head>``` tags.
-- One of our [15+ libraries](/docs/libraries) covering the main programming languages and tools
+- One of our [15+ libraries](/docs/tutorials/overview) covering the main programming languages and tools
 - Our [API](/docs/api/overview)
 
 This means that it doesn't matter what your stack is - you can use PostHog with it.

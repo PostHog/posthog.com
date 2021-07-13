@@ -1,5 +1,6 @@
 ---
-title: Features
+title: User Guides
+sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---

@@ -106,7 +106,7 @@ function ProductPage() {
                                 featureName="Data pipelines"
                                 title="Ingest data from multiple sources"
                                 description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
-                                docsUrl="/docs/libraries"
+                                docsUrl="/docs/integrate/overview"
                                 classes=""
                             />
 

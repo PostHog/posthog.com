@@ -1,5 +1,6 @@
 ---
 title: Tutorials
+sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---

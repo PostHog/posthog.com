@@ -54,7 +54,7 @@ You can also start trying PostHog with no code using [our bookmarklet](/docs/int
 
 **Integrations**
 
-We provide [15+ libraries](/docs/libraries) for various popular programming languages and tools that you can use to send data to PostHog. 
+We provide [15+ libraries](/docs/integrate/overview) for various popular programming languages and tools that you can use to send data to PostHog. 
 
 **API**
 
@@ -88,11 +88,11 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 ### Configuring PostHog
 
-[Configuring PostHog](/docs/configuring-posthog) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/self-host/configure/scaling-posthog), [security](/docs/self-host/configure/securing-posthog), and [upgrade methods](/docs/self-host/configure/upgrading-posthog).
+[Configuring PostHog](/docs/self-host/configure/overview) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/self-host/configure/scaling-posthog), [security](/docs/self-host/configure/securing-posthog), and [upgrade methods](/docs/self-host/configure/upgrading-posthog).
 
 ### Integrations
 
-[Integrations](/docs/libraries) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
+[Integrations](/docs/integrate/overview) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
 
 We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrate/third-party/segment), [Slack](/docs/integrate/webhooks/slack), and [Sentry](/docs/integrate/third-party/sentry).
 

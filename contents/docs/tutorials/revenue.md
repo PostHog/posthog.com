@@ -32,7 +32,7 @@ With this tutorial, we'll give you a full guide to getting started with tracking
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview).
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview).
 
 > **Note:** For sending events with revenue data, we recommend you integrate PostHog in your backend, given that, by nature, client-side code can be modified by the user. 
 

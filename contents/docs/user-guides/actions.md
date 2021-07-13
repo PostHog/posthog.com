@@ -88,7 +88,7 @@ Autocapture is also conservative regarding `input` tags to prevent grabbing sens
 
 **Custom Event**
 
-Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/libraries).
+Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/integrate/overview).
 <br />
 
 <br /> 

@@ -50,7 +50,7 @@ We’ll try to ensure we don’t make such oversights again. In the meantime, at
 
 We’ve wanted to increase the number of integrations. This is why we’re highlighting this issue – having people request something helps us prioritize better.
 
-[Integrations-wise](/docs/libraries), we already have JS, Node, Python, Ruby, PHP and Go – let us know if we’re missing something that you would like.
+[Integrations-wise](/docs/integrate/overview), we already have JS, Node, Python, Ruby, PHP and Go – let us know if we’re missing something that you would like.
 
 Thank you [victorbordo](https://github.com/victorbordo) for raising it.
 

@@ -27,7 +27,7 @@ As such, this tutorial will walk you through how to track usage of your B2B prod
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview)
 
 > **Pro Tip:** To make the most out of this tutorial, we recommend that you have some [actions](/docs/tutorials/actions#sorting-through-your-events-with-actions) set up, as well as have tried sending some [custom events](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors). These are explained in detail in our [Complete Guide to Event Tracking](/docs/tutorials/actions). Additionally, it is also beneficial to be familiar with [Cohorts](/docs/tutorials/cohorts).
  

@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Self-Host PostHog
+sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
