@@ -46,7 +46,7 @@ export function BlogPostLayout({
             {featuredImage && (
                 <div className="w-full h-full relative flex items-center justify-center blog-image">
                     <figure
-                        className="bg-no-repeat"
+                        className="bg-no-repeat bg-cover"
                         style={{
                             backgroundImage: 'url(' + featuredImage + ')',
                         }}
