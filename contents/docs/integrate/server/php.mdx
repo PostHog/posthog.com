@@ -106,7 +106,7 @@ PostHog::capture(array(
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
-## Identify
+### Identify
 
 Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
@@ -167,14 +167,16 @@ PostHog::capture(array(
 ));
 ```
 
-## Development
-### How to Release
+### Feature Flags
 
-1. Run `VERSION=X.Y.Z make release` (where X.Y.Z is the new version).
+To check if a feature flag is enabled for a given user, use `isFeatureEnabled`, like so:
 
-That's it! Composer will pick up the new tag and you can see the latest version at [https://packagist.org/packages/posthog/posthog-php](https://packagist.org/packages/posthog/posthog-php).
+```php
+if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
+    // do something here
+}
+```
 
-> **Note:** You might need to install `git-extras` for this to work.
 
 ## Thank You
 
