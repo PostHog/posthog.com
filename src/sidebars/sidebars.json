@@ -362,7 +362,9 @@
             "handbook/engineering/ee-setup",
             "handbook/engineering/common-issues",
             "handbook/engineering/feature-parity",
-            "handbook/engineering/mdx"
+            "handbook/engineering/mdx",
+            "handbook/engineering/aws",
+            "handbook/engineering/gcp"
         ]
     },
     {
