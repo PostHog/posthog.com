@@ -559,3 +559,8 @@
 [[redirects]]
     from = "/docs/features"
     to = "/docs/user-guides/overview"
+
+# Added: 2021-07-13
+[[redirects]]
+    from = "/docs/tutorials/1-minute/survey"
+    to = "/docs/tutorials/survey"
