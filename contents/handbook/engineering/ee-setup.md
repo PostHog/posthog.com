@@ -77,6 +77,7 @@ This is useful if you have a Apple Silicon Mac.
   - start: `docker-compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse`
   - stop: `docker-compose -f ee/docker-compose.ch.yml down`
   - cleanup: `docker-compose -f ee/docker-compose.ch.yml rm -v zookeeper kafka clickhouse`
+8. Run migrations: `DEBUG=1 python manage.py migrate_clickhouse`
 
 While the SSH connection is active, ports from Kafka and ClickHouse are forwarded to your computer and behave just as the services are running locally.
 
