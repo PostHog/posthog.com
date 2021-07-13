@@ -1,5 +1,6 @@
 ---
-title: Deploying to Google Cloud
+title: Deploying to Google Cloud Services
+sidebarTitle: Google Cloud Services
 sidebar: Docs
 showTitle: true
 ---

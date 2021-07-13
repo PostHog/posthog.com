@@ -1,5 +1,6 @@
 ---
 title: Deploying to Render
+sidebarTitle: Render
 sidebar: Docs
 showTitle: true
 ---

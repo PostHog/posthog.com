@@ -1,7 +1,10 @@
 ---
 title: Deploying to AWS
+sidebarTitle: AWS
 sidebar: Docs
 showTitle: true
+tags:
+    - aws
 ---
 
 ## Why AWS

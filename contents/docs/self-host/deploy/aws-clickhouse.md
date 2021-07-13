@@ -1,5 +1,6 @@
 ---
-title: Deploying to AWS with ClickHouse
+title: Deploy to AWS with ClickHouse
+sidebarTitle: AWS with ClickHouse
 sidebar: Docs
 showTitle: true
 ---

@@ -1,5 +1,6 @@
 ---
 title: Deploying with Docker
+sidebarTitle: With Docker
 sidebar: Docs
 showTitle: true
 ---

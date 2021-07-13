@@ -1,5 +1,6 @@
 ---
 title: Deploying to Digital Ocean
+sidebarTitle: Digital Ocean
 sidebar: Docs
 showTitle: true
 ---

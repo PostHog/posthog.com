@@ -33,6 +33,8 @@ function SidebarContents() {
                             id
                             frontmatter {
                                 title
+                                sidebarTitle
+                                tags
                             }
                         }
                     }
@@ -42,6 +44,7 @@ function SidebarContents() {
                             id
                             frontmatter {
                                 title
+                                sidebarTitle
                                 tags
                             }
                         }
@@ -109,10 +112,11 @@ function SidebarContents() {
                 const getPage = (path, parent) => {
                     for (let item in pages) {
                         if (pages[item].fields.slug === path) {
+                            console.log('pages[item].frontmatter', pages[item].frontmatter)
                             const node = {
                                 path: pages[item].fields.slug,
                                 key: pages[item].id,
-                                title: pages[item].frontmatter.title,
+                                title: pages[item].frontmatter.sidebarTitle || pages[item].frontmatter.title,
                                 tags: pages[item].frontmatter.tags || [],
                                 parent: parent,
                             }

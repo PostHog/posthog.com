@@ -1,5 +1,6 @@
 ---
 title: Deploying to Qovery
+sidebarTitle: Qovery
 sidebar: Docs
 showTitle: true
 ---

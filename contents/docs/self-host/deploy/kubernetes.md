@@ -1,5 +1,6 @@
 ---
 title: Deploying with Helm Chart (Kubernetes)
+sidebarTitle: Helm Chart (Kubernetes)
 sidebar: Docs
 showTitle: true
 ---

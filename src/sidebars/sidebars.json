@@ -14,16 +14,16 @@
         "entry": "Deploy",
         "name": "Deploy",
         "items": [
-            "docs/self-host/deploy/heroku",
             "docs/self-host/deploy/aws",
-            "docs/self-host/deploy/docker",
-            "docs/self-host/deploy/source",
             "docs/self-host/deploy/azure",
             "docs/self-host/deploy/digital-ocean",
             "docs/self-host/deploy/google-cloud-services",
-            "docs/self-host/deploy/kubernetes",
-            "docs/self-host/deploy/render",
+            "docs/self-host/deploy/heroku",
             "docs/self-host/deploy/qovery",
+            "docs/self-host/deploy/render",
+            "docs/self-host/deploy/kubernetes",
+            "docs/self-host/deploy/docker",
+            "docs/self-host/deploy/source",
             "docs/self-host/deploy/hosting-costs"
         ]
     },

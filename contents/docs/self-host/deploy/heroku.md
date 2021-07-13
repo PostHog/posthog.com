@@ -1,5 +1,6 @@
 ---
 title: Deploying to Heroku
+sidebarTitle: Heroku
 sidebar: Docs
 showTitle: true
 ---

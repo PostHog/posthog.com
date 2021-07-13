@@ -1,5 +1,6 @@
 ---
 title: Deploying to Microsoft Azure
+sidebarTitle: Microsoft Azure
 sidebar: Docs
 showTitle: true
 ---

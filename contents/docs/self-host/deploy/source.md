@@ -1,5 +1,6 @@
 ---
 title: Deploying from Source
+sidebarTitle: From Source
 sidebar: Docs
 showTitle: true
 ---

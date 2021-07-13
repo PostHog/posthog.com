@@ -25,9 +25,10 @@ interface MdxQueryData {
         frontmatter: {
             date: string
             title: string
+            sidebarTitle?: string
             sidebar: string
             showTitle: boolean
-            tags: string[]
+            tags?: string[]
             hideAnchor: boolean
             description: string
             featuredImage?: {
