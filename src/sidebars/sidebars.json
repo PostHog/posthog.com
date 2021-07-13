@@ -20,7 +20,7 @@
             "docs/self-host/deploy/source",
             "docs/self-host/deploy/azure",
             "docs/self-host/deploy/digital-ocean",
-            "docs/self-host/deploy/google-cloud-platform",
+            "docs/self-host/deploy/google-cloud-services",
             "docs/self-host/deploy/kubernetes",
             "docs/self-host/deploy/render",
             "docs/self-host/deploy/qovery",
