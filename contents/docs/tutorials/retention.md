@@ -29,7 +29,7 @@ This tutorial will introduce you to the basic concepts of retention and churn an
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/libraries/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
 
 
 #### Determining How Your Business Should Measure Retention
@@ -108,7 +108,7 @@ The first thing you can do is select any action or event to track retention on. 
 
 - A website visit: Shows you if your users are coming back repeatedly
 - A button click: Can be used to track usage of important features you want users to use often, such as comment on a post 
-- A custom event: Anything you want users to do regularly (see [custom events](/docs/libraries/js/#sending-events))
+- A custom event: Anything you want users to do regularly (see [custom events](/docs/integrate/client/js/#sending-events))
 
 Remember that here you are tracking how often users come and do the same thing again over a period of time. To track subsequent actions or events, you should use [funnels](/docs/user-guides/funnels).
 

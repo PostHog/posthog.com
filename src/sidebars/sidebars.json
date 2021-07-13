@@ -130,31 +130,31 @@
     {
         "entry": "Integrate",
         "name": "Integrate",
-        "items": ["docs/libraries"],
+        "items": ["docs/integrate/overview"],
         "child_entries": ["Client Libraries", "Server Libraries", "Third Parties", "Webhooks"]
     },
     {
         "entry": "Client Libraries",
         "name": "Client Libraries",
         "items": [
-            "docs/self-host/deploy/snippet-installation",
-            "docs/libraries/android",
-            "docs/libraries/ios",
-            "docs/libraries/js",
-            "docs/libraries/flutter",
-            "docs/libraries/react-native"
+            "docs/integrate/client/snippet-installation",
+            "docs/integrate/client/android",
+            "docs/integrate/client/ios",
+            "docs/integrate/client/js",
+            "docs/integrate/client/flutter",
+            "docs/integrate/client/react-native"
         ]
     },
     {
         "entry": "Server Libraries",
         "name": "Server Libraries",
         "items": [
-            "docs/libraries/elixir",
-            "docs/libraries/go",
-            "docs/libraries/node",
-            "docs/libraries/php",
-            "docs/libraries/python",
-            "docs/libraries/ruby"
+            "docs/integrate/server/elixir",
+            "docs/integrate/server/go",
+            "docs/integrate/server/node",
+            "docs/integrate/server/php",
+            "docs/integrate/server/python",
+            "docs/integrate/server/ruby"
         ]
     },
     {

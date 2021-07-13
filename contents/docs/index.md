@@ -48,9 +48,9 @@ You can capture events and send data to PostHog in 3 different ways:
 
 **Snippet**
 
-Using our [HTML snippet](/docs/deployment/snippet-installation) is the quickest way to get started if you're using PostHog to track a website. 
+Using our [HTML snippet](/docs/integrate/client/snippet-installation) is the quickest way to get started if you're using PostHog to track a website. 
 
-You can also start trying PostHog with no code using [our bookmarklet](/docs/deployment/snippet-installation#get-started-with-no-code).
+You can also start trying PostHog with no code using [our bookmarklet](/docs/integrate/client/snippet-installation#get-started-with-no-code).
 
 **Integrations**
 

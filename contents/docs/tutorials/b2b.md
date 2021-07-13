@@ -27,7 +27,7 @@ As such, this tutorial will walk you through how to track usage of your B2B prod
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/libraries/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
 
 > **Pro Tip:** To make the most out of this tutorial, we recommend that you have some [actions](/docs/tutorials/actions#sorting-through-your-events-with-actions) set up, as well as have tried sending some [custom events](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors). These are explained in detail in our [Complete Guide to Event Tracking](/docs/tutorials/actions). Additionally, it is also beneficial to be familiar with [Cohorts](/docs/tutorials/cohorts).
  
@@ -48,7 +48,7 @@ This can be the case if you use PostHog to track multiple websites or applicatio
 
 At PostHog, for example, we set a filter for 'Current URL does not contain `https://posthog.com`'. This filters out pageviews from our website so that we can focus on actual product usage.
 
-Next, you might also want to filter your own team out of the data. The best way to do so is by using a [Cohort](/docs/tutorials/cohorts). Your cohort can define who your team is or isn't by matching properties such as `company_name`, `email`, or `team_id`, depending on the logic you use to identify users. Keep in mind that these are [properties that you have to set yourself](/docs/libraries/js#sending-user-information).
+Next, you might also want to filter your own team out of the data. The best way to do so is by using a [Cohort](/docs/tutorials/cohorts). Your cohort can define who your team is or isn't by matching properties such as `company_name`, `email`, or `team_id`, depending on the logic you use to identify users. Keep in mind that these are [properties that you have to set yourself](/docs/integrate/client/js#sending-user-information).
 
 Here's what your chart might look like after the aforementioned setup:
 
@@ -68,7 +68,7 @@ When you onboard a user, you probably want to track their specific usage on the 
 
 In order to track this, you should first ensure you are sending relevant user data to PostHog. For example, when a user signs up, you should consider adding their email as a property to PostHog, as well as other valuable information such as their company name.
 
-With our [JavaScript Library](/docs/libraries/js), this might look something like this:
+With our [JavaScript Library](/docs/integrate/client/js), this might look something like this:
 
 ```js
 const login = (userEmail, userPassword, userCompanyName) => {

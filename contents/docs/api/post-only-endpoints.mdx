@@ -11,7 +11,7 @@ showTitle: true
 
 As explained in our [API Overview](/docs/api/overview) page, PostHog provides two different APIs.
 
-This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/libraries/js). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance.
+This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrate/client/js). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance.
 
 > **Note:** For this API, you should use your 'Project API Key' from the 'Project' page in PostHog. This is the same key used in your frontend snippet.
 
@@ -23,7 +23,7 @@ As such, to create feature flags, you will need to use another endpoint, which w
 
 #### /decide
 
-`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript Library's](/docs/libraries/js) methods for feature flags.
+`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript Library's](/docs/integrate/client/js) methods for feature flags.
 
 To get the feature flags that are enabled for a given user, you will need to perform the following request:
 

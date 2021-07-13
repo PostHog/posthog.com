@@ -14,13 +14,13 @@ Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading
 
 ## Release notes
 
-### [PostHog Android Library](/docs/libraries/android)
+### [PostHog Android Library](/docs/integrate/client/android)
 
 ![](../images/04/android-events.gif)
 
 In addition to the work Marius put into the iOS integration, this week you can also capture events in your Android app and send them to PostHog. Like the iOS library you can automatically captures screen changes, and you can capture events as per usual
 
-Check out our [Android docs](/docs/libraries/android) on how to install it on your app.
+Check out our [Android docs](/docs/integrate/client/android) on how to install it on your app.
 
 ### [Gatsby Plugin](/docs/libraries/gatsby)
 
