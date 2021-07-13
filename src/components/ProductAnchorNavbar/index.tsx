@@ -22,7 +22,7 @@ const ButtonLink = ({
 
     const clickHandler = (e: { preventDefault: () => void }) => {
         e.preventDefault()
-        scrollWithOffset(sectionSelector)
+        scrollWithOffset(sectionSelector, -90)
     }
 
     return (
@@ -116,7 +116,7 @@ export const ProductAnchorNavbar = () => {
                         textAlignLast: 'center',
                     }}
                     value={currentSection}
-                    onChange={(e) => scrollWithOffset(`#${e.target.value}`)}
+                    onChange={(e) => scrollWithOffset(`#${e.target.value}`, -90)}
                 >
                     {selectOptions}
                 </select>

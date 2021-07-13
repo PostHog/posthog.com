@@ -50,7 +50,7 @@ export const ProductHero = ({
 
             <div
                 className="absolute sm:hidden md:hidden lg:block bottom-0 sm:mb-12 xl:mb-4 z-20 p-4 sm:p-8 cursor-pointer"
-                onClick={() => scrollWithOffset('#platform')}
+                onClick={() => scrollWithOffset('#platform', -90)}
             >
                 <span className="chevron"></span>
             </div>
