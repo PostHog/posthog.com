@@ -76,7 +76,7 @@ Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` a
 
 As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
 
-If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/features/actions).
+If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/user-guides/actions).
 
 Another important thing to note is that disabling autocapture **will not disable session recording**. You can disable session recording too using `disable_session_recording` or by turning it off in your project's settings.
 
@@ -260,7 +260,7 @@ PostHog JS offers a function to opt users out based on your cookie settings defi
 
 This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in.
 
-If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/features/cohorts#differentiating-team-vs-users-traffic).
+If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
 
 With PostHog, you can:
 
@@ -284,7 +284,7 @@ posthog.opt_in_capturing();
 
 ### Feature Flags
 
-PostHog v1.10.0 introduced [Feature Flags](/docs/features/feature-flags), which allow you to safely deploy and roll back new features.
+PostHog v1.10.0 introduced [Feature Flags](/docs/user-guides/feature-flags), which allow you to safely deploy and roll back new features.
 
 Here's how you can use them:
 

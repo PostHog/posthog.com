@@ -10,35 +10,35 @@ Below you will find a comprehensive list of all the features that comprise the P
 
 | Feature                                     | Status                                       | Cloud | Self-managed |
 | ------------------------------------------- | -------------------------------------------- | ----- | ------------ |
-| [Cohort analysis](/docs/features/cohorts)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Session analysis](/docs/features/sessions) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Path analysis](/docs/features/paths)       | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Trends](/docs/features/trends)             | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Cohort analysis](/docs/user-guides/cohorts)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Session analysis](/docs/user-guides/sessions) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Path analysis](/docs/user-guides/paths)       | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Trends](/docs/user-guides/trends)             | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 | UTM segmentation                            | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
 ### Visualisation features
 
 | Feature                                         | Status                                       | Cloud | Self-managed |
 | ----------------------------------------------- | -------------------------------------------- | ----- | ------------ |
-| [Action history](/docs/features/actions)        | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Custom dashboards](/docs/features/dashboards)  | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [User tracking & history](/docs/features/users) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Action history](/docs/user-guides/actions)        | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Custom dashboards](/docs/user-guides/dashboards)  | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [User tracking & history](/docs/user-guides/users) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
 ### Optimisation features
 
 | Feature                                                      | Status                                                 | Cloud | Self-managed |
 | ------------------------------------------------------------ | ------------------------------------------------------ | ----- | ------------ |
-| [Feature flags](/docs/features/feature-flags)                | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
-| [Conversion rate optimisation](/docs/features/funnels)       | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
+| [Feature flags](/docs/user-guides/feature-flags)                | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
+| [Conversion rate optimisation](/docs/user-guides/funnels)       | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | [A/B Testing](https://github.com/PostHog/posthog/issues/182) | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
 
 ### Tracking features
 
 | Feature                                                                        | Status                                       | Cloud | Self-managed |
 | ------------------------------------------------------------------------------ | -------------------------------------------- | ----- | ------------ |
-| [Autocapture event tracking](/docs/features/events#autocapture-event-tracking) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Push-based event tracking](/docs/features/events#push-based-event-tracking)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
-| [Real-time event history](/docs/features/events#live-events)                   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Autocapture event tracking](/docs/user-guides/events#autocapture-event-tracking) | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Push-based event tracking](/docs/user-guides/events#push-based-event-tracking)   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
+| [Real-time event history](/docs/user-guides/events#live-events)                   | <span style="color: #71AA55">**Live**</span> | ✔     | ✔            |
 
 ### Libraries
 

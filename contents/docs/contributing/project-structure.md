@@ -95,7 +95,7 @@ Components referring to specific pages of the PostHog app. Mostly non-reusable.
 
 ##### toolbar
 
-All code related exclusively to the [PostHog Toolbar](/docs/features/toolbar).
+All code related exclusively to the [PostHog Toolbar](/docs/user-guides/toolbar).
 
 ## posthog
 
@@ -149,7 +149,7 @@ Subdirectory for the models ([Django ORM](https://docs.djangoproject.com/en/3.1/
 
 #### queries
 
-Hosts the queries used to query data from our database, which will be used by our various features, such as [Retention](/docs/features/retention) and [Trends](/docs/features/trends). 
+Hosts the queries used to query data from our database, which will be used by our various features, such as [Retention](/docs/user-guides/retention) and [Trends](/docs/user-guides/trends). 
 
 #### tasks
 

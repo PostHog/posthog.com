@@ -173,7 +173,7 @@ In our case, feature flags are a great example:
 
 ![Feature Flags Tracking](../../images/tutorials/b2b/feature-flags.png)
 
-Originally rolled out as an experimental feature, our [feature flags](/docs/features/feature-flags) functionality has seen its usage grow consistently month after month, indicating to us that it is worth improving and expanding the feature - something we have been doing actively.
+Originally rolled out as an experimental feature, our [feature flags](/docs/user-guides/feature-flags) functionality has seen its usage grow consistently month after month, indicating to us that it is worth improving and expanding the feature - something we have been doing actively.
 
 ##### Are there features we should drop?
 
@@ -216,7 +216,7 @@ Any chart, table, funnel, and graph from our 'Insights' can be added to a dashbo
 
 Dashboards can be customized as you wish - you can change the color, size, and name of panels, as well as you can update their content whenever you want. You are also able to pin dashboards that you especially care about to the sidebar, as well as create a shareable link for each dashboard. These links can be used to share dashboards across teams, such as between Sales and Marketing teams within your company.
 
-> **Note:** If you want to learn more about dashboards, check out our [dedicated Dashboards page](/docs/features/dashboards).
+> **Note:** If you want to learn more about dashboards, check out our [dedicated Dashboards page](/docs/user-guides/dashboards).
 
 ### Helping your teams stay on top of usage
 

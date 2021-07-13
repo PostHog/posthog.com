@@ -30,17 +30,17 @@ We track user behavior across your website and applications.
 * Event capture for both frontend and backend events.
 * Event tracking at an identifiable user level (if you choose to identify your users).
 * A full product analytics UX, including:
-	* [Trends](/docs/features/trends)
-	* [Funnels](/docs/features/funnels)
-	* [Cohorts](/docs/features/cohorts)
-	* [Retention](/docs/features/retention)
-	* [Paths]((/docs/features/paths))
-	* [User histories](/docs/features/users)
+	* [Trends](/docs/user-guides/trends)
+	* [Funnels](/docs/user-guides/funnels)
+	* [Cohorts](/docs/user-guides/cohorts)
+	* [Retention](/docs/user-guides/retention)
+	* [Paths]((/docs/user-guides/paths))
+	* [User histories](/docs/user-guides/users)
 * Data visualization and product experimentation tools, such as:
-	* [Heatmaps](/docs/features/toolbar)
-	* [Feature Flags](/docs/features/feature-flags)
-	* [Session Recording](/docs/features/session-recording)
-	* [Plugins](/docs/features/plugins)
+	* [Heatmaps](/docs/user-guides/toolbar)
+	* [Feature Flags](/docs/user-guides/feature-flags)
+	* [Session Recording](/docs/user-guides/session-recording)
+	* [Plugins](/docs/user-guides/plugins)
 
 You can read more about our available features on the dedicated [Product page](/product).
 

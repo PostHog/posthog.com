@@ -36,7 +36,7 @@ You can also click each person/user to view a their entire event history.
 
 You will see in the first pictures on this page that there is a blue 'posthog team' button. That button represents a filter applied to this table.
 
-You can filter events by [properties](/docs/libraries/js#sending-user-information) and [Cohorts](/docs/features/cohorts). In the example picture, 'posthog team' is a cohort made up of users with emails that contain "posthog.com" i.e. our team.
+You can filter events by [properties](/docs/libraries/js#sending-user-information) and [Cohorts](/docs/user-guides/cohorts). In the example picture, 'posthog team' is a cohort made up of users with emails that contain "posthog.com" i.e. our team.
 
 <br />
 
@@ -56,7 +56,7 @@ Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` a
 
 As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
 
-If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/features/actions).
+If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/user-guides/actions).
 <br />
 
 ## Push-based Event Tracking

@@ -129,7 +129,7 @@ If you click the 'Add to Dashboard' button on the top right, this will open up t
 
 Here you can set a name for your funnel and add the funnel to one of your dashboards (or create a new one).
 
-Once on the dashboard, you can resize panels as you wish, change colors, or share the dashboard publicly. To learn more about how to use our Dashboards feature you should visit our [dedicated page](/docs/features/dashboards). 
+Once on the dashboard, you can resize panels as you wish, change colors, or share the dashboard publicly. To learn more about how to use our Dashboards feature you should visit our [dedicated page](/docs/user-guides/dashboards). 
 
 ## Putting Your Funnel to Use
 
@@ -162,7 +162,7 @@ This can be especially useful for companies with a focus on outbound Sales, for 
 
 Filtering is a functionality present on all of PostHog's features, and it can be particularly useful for funnels. 
 
-You can use filtering to, for instance, compare funnels across [Cohorts](/docs/features/cohorts) or user groups with shared properties. You can then determine what groups have better conversion rates, and investigate why.
+You can use filtering to, for instance, compare funnels across [Cohorts](/docs/user-guides/cohorts) or user groups with shared properties. You can then determine what groups have better conversion rates, and investigate why.
 
 For example, if you find that conversion is about the same across all browsers, but extremely low for Internet Explorer, you might wonder if your website is actually working correctly on IE.
 

@@ -152,7 +152,7 @@ posthog.alias('anonymous session id', 'distinct id')
 
 > **Note:** To use feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
 
-PostHog's [Feature Flags](/docs/features/feature-flags) allow you to safely deploy and roll back new features.
+PostHog's [Feature Flags](/docs/user-guides/feature-flags) allow you to safely deploy and roll back new features.
 
 When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
 
@@ -172,7 +172,7 @@ def homepage(request):
     return render_template(template, request=request)
 ```
 
-> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/features/feature-flags#feature-flag-persistence). 
+> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence). 
 
 ### Sending Page Views
 

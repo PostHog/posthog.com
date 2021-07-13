@@ -174,7 +174,7 @@ If you override the default property, your events table will look like this:
 
 Instead of a the automatically captured URL, your events table will show your custom value under 'URL / Screen'.
 
-Additionally, you will also be able to use our [paths](/docs/features/paths) feature with your custom URLs.
+Additionally, you will also be able to use our [paths](/docs/user-guides/paths) feature with your custom URLs.
 
 > **Note:** If your page does not refresh but the URL changes with navigation, PostHog's default 'Current URL' may still be useful. Otherwise, if your URL _never_ changes, you should definitely override the prop with your own values - just make sure to follow a good naming system!
 

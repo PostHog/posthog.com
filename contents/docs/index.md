@@ -110,4 +110,4 @@ Check out our [Contributing Docs](/docs/contributing) for information on how to 
 
 ### Platform Structure
 
-[Platform Structure](/docs/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.
+[Platform Structure](/docs/user-guides/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.

@@ -102,7 +102,7 @@ To do this, select 'Shown As' and click 'Stickiness'.
 ![Trend Stickiness](../../images/features/trends/trend-stickiness.png)
 <br />
 
-This pairs nicely with [Retention](/docs/features/retention), which is essentially a stickiness metric that is date-specific. In other words, trend stickiness does not care about when an action or event happened, just about what happened on the following days after the first time. Retention, on the other hand, is measured specifically based on when a certain event happened.
+This pairs nicely with [Retention](/docs/user-guides/retention), which is essentially a stickiness metric that is date-specific. In other words, trend stickiness does not care about when an action or event happened, just about what happened on the following days after the first time. Retention, on the other hand, is measured specifically based on when a certain event happened.
 
 <br />
 

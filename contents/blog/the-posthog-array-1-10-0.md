@@ -68,7 +68,7 @@ Why use it? For now, this lets you carefully release big changes to gather early
 
 In the long run, we intend on improving the connection between feature flags and the rest of the stats. If you see a cool use case, let us know about.
 
-Learn more about [how to use feature flags](/docs/features/feature-flags), and please give us any [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) for these that you would like to see in a future edition.
+Learn more about [how to use feature flags](/docs/user-guides/feature-flags), and please give us any [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) for these that you would like to see in a future edition.
 
 ### Flutter Integration
 

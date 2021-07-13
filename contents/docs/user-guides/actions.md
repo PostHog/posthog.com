@@ -46,7 +46,7 @@ We have a full [step-by-step tutorial](/docs/tutorials/toolbar) available about 
 
 #### From event or pageview
 
-Alternatively you can create an event based on `pageview` or an existing [event](/docs/features/events) on your website.
+Alternatively you can create an event based on `pageview` or an existing [event](/docs/user-guides/events) on your website.
 
 To do so, click 'Create new action' and the following modal should appear (without the red rectangle):
 

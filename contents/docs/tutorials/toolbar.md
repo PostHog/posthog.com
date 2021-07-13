@@ -108,7 +108,7 @@ With the heatmap enabled, if you then click on an element, you will also be able
 
 ## Creating Actions
 
-Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/features/actions). 
+Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/user-guides/actions). 
 
 ### Step 1: Using 'Inspect'
 
@@ -164,7 +164,7 @@ This is an `OR` operation, meaning that the action will be recorded if Element A
 
 This is useful if you have various buttons that take you to the same page, for instance, and just care that the user clicks one of them.
 
-A good use case for this is leveraging the action as a [funnel step](/docs/features/funnels). 
+A good use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
 
 ### Step 2: Seeing your existing actions
 
