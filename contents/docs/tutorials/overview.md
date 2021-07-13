@@ -22,10 +22,4 @@ If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to
 - [Complete Guide to Event Tracking](/docs/tutorials/actions)
 - [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
 - [Sales and Revenue Tracking](/docs/tutorials/revenue)
-
-**1 Minute Tutorials**
-
-- [Integrate PostHog with Shopify](//docs/integrate/third-party/shopify)
-- [Integrate PostHog with Metabase](/docs/tutorials/1-minute/integrate-with-metabase)
-- [Running Simple Surveys with No Backend](/docs/tutorials/1-minute/survey)
-- [Integrate PostHog with Google Tag Manager](/docs/integrate/third-party/google-tag-manager)
+- [Running Simple Surveys with No Backend](/docs/tutorials/survey)

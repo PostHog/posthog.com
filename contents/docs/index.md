@@ -75,15 +75,13 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 - [Complete Guide to Event Tracking](/docs/tutorials/actions)
 - [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
 - [Sales and Revenue Tracking](/docs/tutorials/revenue)
-- [Running Surveys with No Backend ⏱️](/docs/tutorials/1-minute/survey)
+- [Running Surveys with No Backend](/docs/tutorials/survey)
 
 **Integrating PostHog with Other Tools**
 
-- [Integrate PostHog with Shopify ⏱️](//docs/integrate/third-party/shopify) 
-- [Integrate PostHog with Metabase ⏱️](/docs/tutorials/1-minute/integrate-with-metabase) 
-- [Integrate PostHog with Google Tag Manager ⏱️](/docs/integrate/third-party/google-tag-manager) 
-
-> The ⏱️ emoji denotes tutorials in our '1 Minute Tutorials' section
+- [Integrate PostHog with Shopify](//docs/integrate/third-party/shopify) 
+- [Integrate PostHog with Metabase](/docs/integrate/third-party/metabase) 
+- [Integrate PostHog with Google Tag Manager](/docs/integrate/third-party/google-tag-manager) 
 
 
 ### Configuring PostHog
