@@ -33,14 +33,16 @@ At the top of the file, it is necessary to have the following for the page to ap
 ```markdown
 ---
 title: Example Title
+sidebarTitle: Example title shown in sidebar
 sidebar: Example Sidebar
 showTitle: true
 ---
 ```
 
-The `sidebar` is the sidebar menu that the page will attach to. You can see a list of available sidebars in `/src/sidebars/sidebars.json`. You can choose not to have a sidebar by setting this to `null`.
-
-The property `showTitle` should always be set to `true`.
+- `title`: the page title
+- `sidebar`: the sidebar menu that the page will attach to. You can see a list of available sidebars in `/src/sidebars/sidebars.json`. You can choose not to have a sidebar by setting this to `null`.
+- `sidebarTitle`: the title shown in the sidebar. If this value isn't provided the `title` property is used.
+- `showTitle` should always be set to `true`.
 
 #### Images / GIFs
 
