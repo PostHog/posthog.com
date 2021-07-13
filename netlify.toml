@@ -549,3 +549,13 @@
 [[redirects]]
     from = "/docs/features/users"
     to = "/docs/user-guides/users"
+
+# Added: 2021-07-13
+[[redirects]]
+    from = "/docs/tutorials"
+    to = "/docs/tutorials/overview"
+
+# Added: 2021-07-13
+[[redirects]]
+    from = "/docs/features"
+    to = "/docs/user-guides/overview"
