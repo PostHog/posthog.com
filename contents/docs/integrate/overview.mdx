@@ -11,11 +11,13 @@ We have put a significant effort into providing as many of these integrations as
 
 Our goal is for users to be able to integrate PostHog with their language, framework or platform of choosing, without having to adapt their stack.
 
-## Client Libraries
+## Libraries
 
-**All of PostHog's libraries support event capturing and user identification.**
+Refer to the table below for an overview of the functionality in each of our libraries.
 
-However, certain features like session recording are only available with our JavaScript library. Refer to the table below for an overview of the functionality in each of our libraries.
+### Client Libraries
+
+Some features such as session recording are only available with our JavaScript library.
 
 > We're working to add support for feature flags and autocapture to as many libraries as possible. Please check out the individual library repositories for status on this and let us know if you think we should prioritize support for any specific library.
 
@@ -27,9 +29,9 @@ However, certain features like session recording are only available with our Jav
 |       [Flutter](/docs/integrate/client/flutter)         | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
 |  [React Native](/docs/integrate/client/react-native)    | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
 
-## Server Libraries
+### Server Libraries
 
-> **Note:** Session recording is impossible on server-side libraries.
+> **Note:** Session recording is not possible on server-side libraries.
 
 |                     Library                             | Maintainer   | Event Capture | User Identification | Feature Flags |
 | :-----------------------------------------------------: | :----------: | :-----------: | :-----------------: |:------------: |
@@ -43,7 +45,7 @@ However, certain features like session recording are only available with our Jav
 
 
 
-<HiddenSection headingType='h2' title='Library Activity Stats' >
+<HiddenSection headingType='h3' title='Library Activity Stats' >
 
 <LibraryStats />
 
