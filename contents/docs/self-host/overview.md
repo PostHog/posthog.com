@@ -15,7 +15,7 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 
 ||||
 | --- | --- | --- | --- |
-| [![](../../../src/images/deploy-docker.svg)](/docs/deployment/deploy-docker) | [![](../../../src/images/deploy-kubernetes.svg)](/docs/deployment/deploy-kubernetes) | [![](../../../src/images/deploy-aws.svg)](/docs/deployment/deploy-aws) | [![](../../../src/images/deploy-source.svg)](/docs/deployment/deploy-source) |
+| [![](../../../src/images/deploy-docker.svg)](/docs/self-host/deploy/docker) | [![](../../../src/images/deploy-kubernetes.svg)](/docs/self-host/deploy/kubernetes) | [![](../../../src/images/deploy-aws.svg)](/docs/self-host/deploy/aws) | [![](../../../src/images/deploy-source.svg)](/docs/self-host/deploy/source) |
 
 </span>
 
@@ -32,18 +32,18 @@ All these options are backed by Postgres which is great up to about 1k tracked m
 
 We recommend:
 
-- [Deploying to AWS](/docs/deployment/deploy-aws)
-- [Deploying to GCS](/docs/deployment/deploy-gcs)
-- [Deploying to Digital Ocean](/docs/deployment/deploy-digital-ocean)
+- [Deploying to AWS](/docs/self-host/deploy/aws)
+- [Deploying to GCS](/docs/self-host/deploy/gcs)
+- [Deploying to Digital Ocean](/docs/self-host/deploy/digital-ocean)
 
 Other options include: 
 
-- [Deploying to Heroku](/docs/deployment/deploy-heroku)
-- [Deploying to Microsoft Azure](/docs/deployment/deploy-azure)
-- [Deploying to Qovery](/docs/deployment/deploy-qovery)
-- [Deploying with Docker](/docs/deployment/deploy-docker)
-- [Deploying with Kubernetes/Helm Chart](/docs/deployment/deploy-kubernetes)
-- [Deploying from Source](/docs/deployment/deploy-source)
+- [Deploying to Heroku](/docs/self-host/deploy/heroku)
+- [Deploying to Microsoft Azure](/docs/self-host/deploy/azure)
+- [Deploying to Qovery](/docs/self-host/deploy/qovery)
+- [Deploying with Docker](/docs/self-host/deploy/docker)
+- [Deploying with Kubernetes/Helm Chart](/docs/self-host/deploy/kubernetes)
+- [Deploying from Source](/docs/self-host/deploy/source)
 
 ## Configure
 

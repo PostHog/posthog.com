@@ -15,9 +15,9 @@ If you need help, feel free to create an issue, or [join our Slack](/slack).
 
 Follow these tutorials for upgrading PostHog if you've deployed with any of the following options:
 
-- [Heroku](/docs/deployment/deploy-heroku#upgrading-posthog-on-heroku)
-- [AWS Fargate](/docs/deployment/deploy-aws#updating-aws-fargate)
-- [Docker](/docs/deployment/deploy-docker#upgrading-posthog-with-docker)
-- [Linode](/docs/deployment/deploy-linode#updating-your-posthog)
-- [Helm Charts](/docs/deployment/deploy-kubernetes#updating-your-posthog)
+- [Heroku](/docs/self-host/deploy/heroku#upgrading-posthog-on-heroku)
+- [AWS Fargate](/docs/self-host/deploy/aws#updating-aws-fargate)
+- [Docker](/docs/self-host/deploy/docker#upgrading-posthog-with-docker)
+- [Linode](/docs/self-host/deploy/linode#updating-your-posthog)
+- [Helm Charts](/docs/self-host/deploy/kubernetes#updating-your-posthog)
 

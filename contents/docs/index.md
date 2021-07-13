@@ -38,7 +38,7 @@ Check out our [Deployment page](/docs/deployment).
 
 **Want to get up and running immediately?** 
 
-Use our one-click [Heroku deployment](/docs/deployment/deploy-heroku):
+Use our one-click [Heroku deployment](/docs/self-host/deploy/heroku):
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
 

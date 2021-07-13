@@ -147,19 +147,19 @@ function ProductPage() {
                                     </p>
                                 </div>
                                 <ul className="flex justify-center flex-wrap p-0 list-none text-center">
-                                    <HostingOption name="Heroku" handle="heroku" url="/docs/deployment/deploy-heroku" />
-                                    <HostingOption name="AWS" handle="aws" url="/docs/deployment/deploy-aws" />
+                                    <HostingOption name="Heroku" handle="heroku" url="/docs/self-host/deploy/heroku" />
+                                    <HostingOption name="AWS" handle="aws" url="/docs/self-host/deploy/aws" />
                                     <HostingOption
                                         name="Google Cloud"
                                         handle="google-cloud"
-                                        url="/docs/deployment/deploy-gcs"
+                                        url="/docs/self-host/deploy/gcs"
                                     />
-                                    <HostingOption name="Docker" handle="aws" url="/docs/deployment/deploy-docker" />
-                                    <HostingOption name="Azure" handle="azure" url="/docs/deployment/deploy-azure" />
+                                    <HostingOption name="Docker" handle="aws" url="/docs/self-host/deploy/docker" />
+                                    <HostingOption name="Azure" handle="azure" url="/docs/self-host/deploy/azure" />
                                     <HostingOption
                                         name="Source"
                                         handle="source-code"
-                                        url="/docs/deployment/deploy-source"
+                                        url="/docs/self-host/deploy/source"
                                     />
                                     <HostingOption name="More" handle="more" url="/docs/deployment" />
                                 </ul>

@@ -16,7 +16,7 @@ Although it may be time consuming and difficult to manage, installing from sourc
 
 In short, installing from source gives you access to enhanced customization but **takes a lot of effort**. On the other hand, installation from a a pre-pacakged binary (e.g. Heroku One-Click Install or Docker Image) is easier but you can't **customize** as you wish.
 
-If there is no desire to customize your source, we strongly recommend other deployment options like [Heroku](/docs/deployment/deploy-heroku), [Docker](/docs/deployment/deploy-docker), etc.
+If there is no desire to customize your source, we strongly recommend other deployment options like [Heroku](/docs/self-host/deploy/heroku), [Docker](/docs/self-host/deploy/docker), etc.
 
 ## Prerequisites
 

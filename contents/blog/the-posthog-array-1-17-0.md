@@ -76,7 +76,7 @@ On this page, you'll be able to manage everything related to your events, from i
 
 ### [Improved AWS CloudFormation Deployment](https://github.com/PostHog/deployment/pulls?q=is%3Apr+is%3Aclosed)
 
-Following a lot of great user feedback, we have now significantly improved our [AWS CloudFormation Deployment](/docs/deployment/deploy-aws).
+Following a lot of great user feedback, we have now significantly improved our [AWS CloudFormation Deployment](/docs/self-host/deploy/aws).
 
 We have now added configuration for relevant alerts and RDS disk size, as well as improved the setup flow and added automatic `SECRET_KEY` generation. If you're happy with the standard config, deploying with AWS is now just a matter of "click, click, click", as described by Karl, one of our engineers.
 

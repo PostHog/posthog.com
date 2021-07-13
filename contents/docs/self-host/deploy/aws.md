@@ -6,7 +6,7 @@ showTitle: true
 
 ## Why AWS
 
-AWS provides a similar containerized PostHog environment to [Docker deployment](/docs/deployment/deploy-docker). Through the use of AWS Fargate, we are able to provide a *"pay for what you use"* platform to prevent you from overpaying!
+AWS provides a similar containerized PostHog environment to [Docker deployment](/docs/self-host/deploy/docker). Through the use of AWS Fargate, we are able to provide a *"pay for what you use"* platform to prevent you from overpaying!
 
 Likewise, we maintain a CloudFormation [config](https://github.com/PostHog/deployment/blob/master/aws/cloudformation/ecs/posthog.yaml) to deploy PostHog with Redis and Postgres on an AWS stack.
 
@@ -90,7 +90,7 @@ Do this to update parameters: to scale different services up/down, update who ge
 
 ## AWS Deployment with Docker
 
-If instead of using our CloudFormation config or AWS Marketplace app you would rather go through the deployment yourself, here's how to do it. We'll be using Docker for this tutorial but you could also [deploy from source](/docs/deployment/deploy-source) if you wanted to.
+If instead of using our CloudFormation config or AWS Marketplace app you would rather go through the deployment yourself, here's how to do it. We'll be using Docker for this tutorial but you could also [deploy from source](/docs/self-host/deploy/source) if you wanted to.
 
 #### EC2 Setup
 
@@ -202,7 +202,7 @@ Here's a [good AWS Tutorial](https://aws.amazon.com/premiumsupport/knowledge-cen
 
 ## Upgrading Docker on AWS
 
-See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
+See [this PostHog tutorial](/docs/self-host/deploy/docker#upgrading-docker) about upgrading your PostHog version with Docker.
 <br />
 
 ## Useful Tutorials

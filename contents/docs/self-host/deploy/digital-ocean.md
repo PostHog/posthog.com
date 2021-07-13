@@ -11,7 +11,7 @@ showTitle: true
 
 ### Deploying to Digital Ocean
 
-To deploy on Digital Ocean, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/deployment/deploy-source), as well as other providers with one-click installs, like [Heroku](/docs/deployment/deploy-heroku) or [AWS](/docs/deployment/deploy-aws).
+To deploy on Digital Ocean, our suggested method is deploying with Docker, which we'll explain in detail on this page. If you would rather not use Docker, you can consider [deploying from source](/docs/self-host/deploy/source), as well as other providers with one-click installs, like [Heroku](/docs/self-host/deploy/heroku) or [AWS](/docs/self-host/deploy/aws).
 <br />
 
 ## Docker Install: Droplet Setup
@@ -160,7 +160,7 @@ You can read [this tutorial](https://www.digitalocean.com/community/tutorials/ho
 
 ## Upgrading Docker on Digital Ocean
 
-See [this PostHog tutorial](/docs/deployment/deploy-docker#upgrading-docker) about upgrading your PostHog version with Docker.
+See [this PostHog tutorial](/docs/self-host/deploy/docker#upgrading-docker) about upgrading your PostHog version with Docker.
 <br />
 
 ## Useful Tutorials

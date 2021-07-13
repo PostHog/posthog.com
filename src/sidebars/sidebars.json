@@ -2,12 +2,12 @@
     {
         "entry": "Docs",
         "name": "Docs",
-        "child_entries": ["Self-Hosting", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
+        "child_entries": ["Self-Host", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
     },
     {
-        "entry": "Self-Hosting",
-        "name": "Self-Hosting",
-        "items": ["docs/self-hosting/overview"],
+        "entry": "Self-Host",
+        "name": "Self-Host",
+        "items": ["docs/self-host/overview"],
         "child_entries": ["Deploy", "Configure"]
     },
     {
@@ -56,17 +56,17 @@
         "entry": "Deploy",
         "name": "Deploy",
         "items": [
-            "docs/deployment/deploy-heroku",
-            "docs/deployment/deploy-aws",
-            "docs/deployment/deploy-docker",
-            "docs/deployment/deploy-source",
-            "docs/deployment/deploy-azure",
-            "docs/deployment/deploy-digital-ocean",
-            "docs/deployment/deploy-gcs",
-            "docs/deployment/deploy-kubernetes",
-            "docs/deployment/deploy-render",
-            "docs/deployment/deploy-qovery",
-            "docs/deployment/hosting-costs"
+            "docs/self-host/deploy/heroku",
+            "docs/self-host/deploy/aws",
+            "docs/self-host/deploy/docker",
+            "docs/self-host/deploy/source",
+            "docs/self-host/deploy/azure",
+            "docs/self-host/deploy/digital-ocean",
+            "docs/self-host/deploy/google-cloud-platform",
+            "docs/self-host/deploy/kubernetes",
+            "docs/self-host/deploy/render",
+            "docs/self-host/deploy/qovery",
+            "docs/self-host/deploy/hosting-costs"
         ]
     },
     {
@@ -137,7 +137,7 @@
         "entry": "Client Libraries",
         "name": "Client Libraries",
         "items": [
-            "docs/deployment/snippet-installation",
+            "docs/self-host/deploy/snippet-installation",
             "docs/libraries/android",
             "docs/libraries/ios",
             "docs/libraries/js",
