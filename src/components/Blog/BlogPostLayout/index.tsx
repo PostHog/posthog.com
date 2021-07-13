@@ -31,7 +31,7 @@ export function BlogPostLayout({
     return (
         <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
             <Header onPostPage blogArticleSlug={blogArticleSlug} />
-            <div className="flex justify-between items-center w-full px-4 mb-12 mt-6 lg:mt-4">
+            <div className="flex justify-between items-center w-full px-4 mb-4 mt-6 lg:mt-4">
                 <div className="flex-grow">
                     <Link
                         to="/blog"
@@ -44,9 +44,29 @@ export function BlogPostLayout({
             </div>
 
             {featuredImage && (
-                <Structure.Section width="3xl -mt-6 md:-mt-2">
-                    <img src={featuredImage} className="w-full shadow-lg" alt={pageTitle} />
-                </Structure.Section>
+                <div className="w-full h-full relative flex items-center justify-center blog-image">
+                    <figure
+                        className="bg-no-repeat"
+                        style={{
+                            backgroundImage: 'url(' + featuredImage + ')',
+                        }}
+                    ></figure>
+
+                    <div className="absolute top-0 w-full left-0 bottom-0 leading-tight z-10 flex justify-center items-center flex-col ">
+                        <time className="opacity-50 w-full max-w-xl mb-2">{blogDate}</time>
+                        <Structure.SectionHeader
+                            titleTag="h1"
+                            title={pageTitle}
+                            titleClassName="font-sans normal-case leading-tight w-full max-w-xl my-0"
+                        />
+
+                        {authorDetails?.handle && (
+                            <div className="w-full max-w-xl mt-6">
+                                <BlogAuthor authorDetails={authorDetails} />
+                            </div>
+                        )}
+                    </div>
+                </div>
             )}
 
             <Structure.Section width="xl" className="text-center leading-tight mb-6">
@@ -60,7 +80,7 @@ export function BlogPostLayout({
                 </Structure.Section>
             )}
 
-            <div className="max-w-xl mx-auto relative">
+            <div className="max-w-xl mx-auto relative pt-12 blog-post-content">
                 <BlogShareButtons />
                 <Structure.Section>{children}</Structure.Section>
             </div>
