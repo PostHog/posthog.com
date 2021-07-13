@@ -1,5 +1,6 @@
 ---
 title: Sentry Integration
+sidebarTitle: Sentry
 sidebar: Docs
 showTitle: true
 ---

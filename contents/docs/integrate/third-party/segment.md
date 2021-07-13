@@ -1,5 +1,6 @@
 ---
 title: Segment Integration
+sidebarTitle: Segment
 sidebar: Docs
 showTitle: true
 ---

@@ -1,5 +1,6 @@
 ---
 title: Integrate PostHog with Retool
+sidebarTitle: Retool
 sidebar: Docs
 showTitle: true
 ---

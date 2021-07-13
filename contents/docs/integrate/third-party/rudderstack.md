@@ -1,5 +1,6 @@
 ---
 title: RudderStack Integration
+sidebarTitle: RudderStack
 sidebar: Docs
 showTitle: true
 ---

@@ -1,5 +1,6 @@
 ---
 title: Integrate PostHog with WordPress
+sidebarTitle: WordPress
 sidebar: Docs
 showTitle: true
 ---

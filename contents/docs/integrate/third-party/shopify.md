@@ -1,5 +1,6 @@
 ---
 title: Integrate PostHog with Shopify
+sidebarTitle: Shopify
 sidebar: Docs
 showTitle: true
 ---

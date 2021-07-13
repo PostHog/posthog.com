@@ -1,5 +1,6 @@
 ---
 title: Tracking Nuxt.js apps
+sidebarTitle: Nuxt.js
 sidebar: Docs
 showTitle: true
 ---

@@ -1,5 +1,6 @@
 ---
 title: Integrate PostHog with Google Tag Manager
+sidebarTitle: Google Tag Manager
 sidebar: Docs
 showTitle: true
 ---

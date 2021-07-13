@@ -1,5 +1,6 @@
 ---
 title: Integrate PostHog with Metabase
+sidebarTitle: Metabase
 sidebar: Docs
 showTitle: true
 ---
