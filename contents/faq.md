@@ -42,7 +42,7 @@ We track user behavior across your website and applications.
 	* [Session Recording](/docs/features/session-recording)
 	* [Plugins](/docs/features/plugins)
 
-You can read more about our available features on the dedicated [Product Features page](/product-features).
+You can read more about our available features on the dedicated [Product page](/product).
 
 ### Does it work for mobile and web?
 
@@ -94,7 +94,7 @@ If you have any [issues or feature requests](https://github.com/PostHog/posthog/
 
 No. If you want to get started quickly you can use our [cloud version](https://app.posthog.com/signup), but we also have various [1-click deployment](/docs/deployment) options if you decide to self-host. 
 
-Additionally, if your company has a very large userbase and you need help with scalability and managing your setup, we can offer [paid help](mailto:sales@posthog.com) here.
+Additionally, if your company has a very large userbase and you need help with scalability and managing your setup, we can offer [paid help](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) here.
  
 ## Deployment
 
@@ -108,7 +108,7 @@ There are three options:
 
 1. [PostHog Cloud](https://app.posthog.com/signup).
 2. [Self Deployment](/docs/deployment).
-3. [Managed Deployment](mailto:sales@posthog.com).
+3. [Managed Deployment](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).
 
 ### Can I get it live with my favorite hosting method?
 

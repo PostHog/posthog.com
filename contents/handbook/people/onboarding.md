@@ -10,7 +10,7 @@ Giving a new joiner a great experience is very important to us, especially given
 
 We have members working all around the world, so their onboarding process may look a little different depending on where they are based and which team they are in. 
 
-The people team will copy the relevant sections of the checklist into an onboarding issue on the [People&Ops Roadmap](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
+The people team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
 
 As always, this is a living document and it changes every now and then, so it's worth keeping an eye on this page. 
 
@@ -73,6 +73,8 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Team members should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t) - _Team member_
 *   [ ] Identify user as team member in [Orbit](https://app.orbit.love/login) - _Anyone_
 *   [ ] Share user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit) - _Manager_
+*   [ ] Tell Mo that they're new to the team so he can schedule their intro interviews - _Anyone_
+
 
 ## During their first week
 

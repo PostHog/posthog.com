@@ -24,12 +24,6 @@ const tiers = [
         description: 'Quis eleifend a tincidunt pellentesque. A tempor in sed.',
     },
     {
-        name: 'Free',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
         name: 'Scale',
         href: '#',
         priceMonthly: 59,
@@ -43,9 +37,8 @@ const sections = [
                 name: 'Plan benefits',
                 tiers: {
                     'PostHog Cloud': 'Scales as needed, Constant price',
-                    'Open source': 'Best for low volumes (~10k monthly users), Use with a small team',
-                    Free: 'Free, but limited to 1 million users',
-                    Scale: 'Cheaper at scale',
+                    'Open source': 'Great for small teams',
+                    Scale: 'Cheaper at scale, Enterprise features',
                 },
             },
             {
@@ -53,7 +46,6 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Free (up to 1 million events), then $0.000225/event',
                     'Open source': 'Free',
-                    Free: 'Free',
                     Scale: '$0.000225/event, $2k/mo minimum. (Discounts after 10 mil events)',
                 },
             },
@@ -61,8 +53,7 @@ const sections = [
                 name: 'Scales to...',
                 tiers: {
                     'PostHog Cloud': 'Millions of users/mo',
-                    'Open source': '~10k users/mo (limited by database) ',
-                    Free: '1 million users/mo',
+                    'Open source': '~1m users/mo',
                     Scale: 'Millions of users/mo',
                 },
             },
@@ -73,30 +64,29 @@ const sections = [
         features: [
             {
                 name: 'Hosting',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: false, Scale: false },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: false },
             },
             {
                 name: 'User data stays on your infrastructure',
-                tiers: { 'PostHog Cloud': false, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true },
             },
             {
                 name: 'Initial setup',
-                tiers: { 'PostHog Cloud': 'Instant', 'Open source': 'Instant', Free: '1-3 days', Scale: '1-3 days' },
+                tiers: { 'PostHog Cloud': 'Instant', 'Open source': 'Instant', Scale: '1-3 days' },
             },
             {
                 name: 'Automatic updates',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
             },
             {
                 name: 'Self-hosted database',
-                tiers: { 'PostHog Cloud': 'n/a', 'Open source': 'Postgres', Free: 'ClickHouse', Scale: 'ClickHouse' },
+                tiers: { 'PostHog Cloud': 'n/a', 'Open source': 'Postgres or ClickHouse', Scale: 'ClickHouse' },
             },
             {
                 name: 'Server management',
                 tiers: {
                     'PostHog Cloud': 'Managed by PostHog',
                     'Open source': 'Managed by you',
-                    Free: 'Managed by you',
                     Scale: 'We help you manage',
                 },
             },
@@ -110,7 +100,6 @@ const sections = [
                 tiers: {
                     'PostHog Cloud': 'Unlimited',
                     'Open source': 'Unlimited',
-                    Free: 'Unlimited',
                     Scale: 'Unlimited',
                 },
             },
@@ -118,21 +107,19 @@ const sections = [
                 name: 'Tracked users',
                 tiers: {
                     'PostHog Cloud': 'Unlimited',
-                    'Open source': '~10k (limited by database)',
-                    Free: '1 million',
+                    'Open source': '~1m (limited by database)',
                     Scale: 'Unlimited',
                 },
             },
             {
                 name: 'Projects',
-                tiers: { 'PostHog Cloud': 'Multiple', 'Open source': '1', Free: '1', Scale: 'Multiple' },
+                tiers: { 'PostHog Cloud': 'Multiple', 'Open source': '1', Scale: 'Multiple' },
             },
             {
                 name: 'Data retention',
                 tiers: {
                     'PostHog Cloud': '7 years',
                     'Open source': 'Unlimited',
-                    Free: 'Unlimited',
                     Scale: 'Unlimited',
                 },
             },
@@ -143,19 +130,19 @@ const sections = [
         features: [
             {
                 name: 'Analytics suite',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'Session recordings',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'Feature flags',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'Plugins',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
         ],
     },
@@ -164,27 +151,27 @@ const sections = [
         features: [
             {
                 name: 'Team members',
-                tiers: { 'PostHog Cloud': 'Unlimited', 'Open source': 'Unlimited', Free: '3', Scale: 'Unlimited' },
+                tiers: { 'PostHog Cloud': 'Unlimited', 'Open source': 'Unlimited', Scale: 'Unlimited' },
             },
             {
                 name: 'SSO',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: false, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
             },
             {
                 name: 'API access',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'User permissions',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: false, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
             },
             {
                 name: 'Ad blocker-resistant',
-                tiers: { 'PostHog Cloud': false, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': false, 'Open source': true, Scale: true },
             },
             {
                 name: 'Uptime & scalability SLAs',
-                tiers: { 'PostHog Cloud': true, 'Open source': 'n/a', Free: false, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
             },
         ],
     },
@@ -193,19 +180,19 @@ const sections = [
         features: [
             {
                 name: 'Slack',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'Teams',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'Discord',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'Zapier',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
         ],
     },
@@ -214,19 +201,19 @@ const sections = [
         features: [
             {
                 name: 'Slack (community)',
-                tiers: { 'PostHog Cloud': true, 'Open source': true, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': true, Scale: true },
             },
             {
                 name: 'Slack (dedicated channel)',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Free: false, Scale: true },
+                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: true },
             },
             {
                 name: 'Account manager',
-                tiers: { 'PostHog Cloud': false, 'Open source': false, Free: false, Scale: true },
+                tiers: { 'PostHog Cloud': false, 'Open source': false, Scale: true },
             },
             {
                 name: 'Email',
-                tiers: { 'PostHog Cloud': true, 'Open source': false, Free: true, Scale: true },
+                tiers: { 'PostHog Cloud': true, 'Open source': false, Scale: true },
             },
         ],
     },
@@ -361,7 +348,7 @@ export const PlanComparison = () => {
                                 <th className="text-white text-center border-white border-opacity-10">
                                     Hosted solution
                                 </th>
-                                <th colSpan="3" className="text-white text-center border-white border-opacity-10">
+                                <th colSpan="2" className="text-white text-center border-white border-opacity-10">
                                     Self-hosted options
                                 </th>
                             </tr>
@@ -422,7 +409,7 @@ export const PlanComparison = () => {
                                     <tr>
                                         <th
                                             className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-white border-white border-opacity-10"
-                                            colSpan={5}
+                                            colSpan={4}
                                             scope="colgroup"
                                             style={{ borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
                                         >

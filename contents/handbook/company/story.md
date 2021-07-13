@@ -56,3 +56,11 @@ We've now people in 10 countries around the world, and still feel like it's day 
 
 Everyone takes a mandatory two weeks off over Christmas to relax.
 
+## $15m Series B - June, 2021
+
+We raised a $15m Series B [a little ahead of schedule](../../blog/why-we-raised-a-15m-series-b-ahead-of-schedule), led by existing investors Y Combinator. 
+
+We're now focused on achieving strong product-market fit with our [target segment](../../handbook/strategy/strategy#target-audience-for-2021) in 2021. 
+
+Our team has now grown to 25 people in 10 countries. 
+

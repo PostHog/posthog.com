@@ -289,7 +289,7 @@ export const PlanComparisonTable = () => {
                         <Button
                             type="primary"
                             size="large"
-                            href="mailto:sales@posthog.com?title=Start scale deployment"
+                            href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
                         >
                             Contact sales
                         </Button>

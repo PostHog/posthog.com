@@ -78,7 +78,7 @@ The exception is if you wish to move to [PostHog Scale](/pricing) (paid), in whi
 
 ### PostHog Cloud -> PostHog Scale
 
-You can do this - we provide a little manual support in this case. Just [speak to us](sales@posthog.com).
+You can do this - we provide a little manual support in this case. Just [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).
 
 ## Does this mean PostHog is focusing more on cloud then?
 

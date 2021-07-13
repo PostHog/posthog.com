@@ -93,7 +93,7 @@ export const Header = ({
                 </Link>
 
                 <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav">
-                    <NavbarLink to="/product-features" textLight={textLight}>
+                    <NavbarLink to="/product" textLight={textLight}>
                         Product
                     </NavbarLink>
                     <NavbarLink to="/docs" textLight={textLight}>
@@ -131,7 +131,7 @@ export const Header = ({
             {expanded ? (
                 <ul className="w-11/12 mx-auto mt-8 block lg:hidden list-none">
                     <NavbarLink
-                        to="/product-features"
+                        to="/product"
                         textLight={textLight}
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >
