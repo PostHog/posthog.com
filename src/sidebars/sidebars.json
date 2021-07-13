@@ -26,12 +26,12 @@
         "entry": "Contribute",
         "name": "Contribute",
         "items": [
-            "docs/contributing",
-            "docs/contributing/recognizing-contributions",
-            "docs/contributing/developing-locally",
-            "docs/contributing/stack",
-            "docs/contributing/project-structure",
-            "docs/contributing/updating-documentation"
+            "docs/contribute/overview",
+            "docs/contribute/recognizing-contributions",
+            "docs/contribute/developing-locally",
+            "docs/contribute/stack",
+            "docs/contribute/project-structure",
+            "docs/contribute/updating-documentation"
         ]
     },
     {

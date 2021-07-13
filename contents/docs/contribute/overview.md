@@ -33,13 +33,13 @@ We maintain [a list of good first issues](https://github.com/PostHog/posthog/iss
 
 Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to raise a PR directly.
 
-Alternatively, you can also [update PostHog's documentation](/docs/contributing/updating-documentation). To do so, take a look at our [Styleguide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
+Alternatively, you can also [update PostHog's documentation](/docs/contribute/updating-documentation). To do so, take a look at our [Styleguide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
 
 If you're planning to work on a bigger feature that is not on the list of issues, please raise an issue first so we can check whether that feature makes sense for PostHog as a whole.
 
 ### Setting up your local environment
 
-[See this page for information](/docs/contributing/developing-locally).
+[See this page for information](/docs/contribute/developing-locally).
 
 ### Testing
 

@@ -111,7 +111,7 @@ export const ContributorsChart = () => {
             ) : (
                 <>
                     <h5 style={{ margin: 0, color: '#efefef' }}>Top 15 PostHog Contributors</h5>
-                    <Link to="/docs/contributing/recognizing-contributions">
+                    <Link to="/docs/contribute/recognizing-contributions">
                         <small style={{ color: '#dedede' }}>
                             ⚠️ Only displaying contributions from after 29/03/2021
                         </small>
