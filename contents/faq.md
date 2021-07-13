@@ -72,7 +72,7 @@ Very. We have thousands of users, over [3k stars](https://github.com/PostHog/pos
 
 ### Is the software updated regularly?
 
-Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/configuring-posthog/upgrading-posthog), and the software will alert you to new updates within the application.
+Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/self-host/configure/upgrading-posthog), and the software will alert you to new updates within the application.
 
 Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) or join our [Slack](/slack) to keep up with our latest features.
 
@@ -118,7 +118,7 @@ Want to set it up differently? [Raise an issue](https://github.com/PostHog/posth
 
 ### Will this scale?
 
-Yes. Check out [Scaling PostHog](/docs/configuring-posthog/scaling-posthog) for more information on this.
+Yes. Check out [Scaling PostHog](/docs/self-host/configure/scaling-posthog) for more information on this.
 
 ### Is there an enterprise offering?
 

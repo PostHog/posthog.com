@@ -146,6 +146,10 @@ function SidebarContents() {
                 const loop = (root) => {
                     if (root.children) {
                         return root.children.map((item) => {
+                            if (!item) {
+                                console.warn('item is null or undefined within collection', root.children)
+                            }
+
                             if (item.path) {
                                 return (
                                     <Menu.Item key={item.key} className="keySelected">

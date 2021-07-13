@@ -100,10 +100,10 @@ To avoid this, we strongly recommend upgrading to at least a "Hobby" dyno:
 
 ## Running PostHog Behind a Proxy or Load Balancer
 
-If you're running PostHog behind a proxy or load balancer, you need to set the `IS_BEHIND_PROXY` environment variable to `True`. Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/configuring-posthog/environment-variables).
+If you're running PostHog behind a proxy or load balancer, you need to set the `IS_BEHIND_PROXY` environment variable to `True`. Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/self-host/configure/environment-variables).
 
 
-For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/self-host/configure/running-behind-proxy).
 
 ## Scaling Heroku Redis
 

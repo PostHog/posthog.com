@@ -23,8 +23,8 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
 | `ACTION_EVENT_MAPPING_INTERVAL_SECONDS`| Specify how often (in seconds) PostHog should run a job to match events to actions.       | `300`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
-| `IS_BEHIND_PROXY`          | Specifies if PostHog is running behind a proxy like Apache, NGINX  or ELB. Be sure to properly set [trusted proxies](/docs/configuring-posthog/running-behind-proxy#trusted-proxies).                              | `False`
-| `ALLOWED_IP_BLOCKS`        | Specifies IP blocks allowed to connect to the PostHog instance for management (events will still be allowed from anywhere). Make sure to properly [configure your proxy](/docs/configuring-posthog/running-behind-proxy) if running behind a proxy.                              |  
+| `IS_BEHIND_PROXY`          | Specifies if PostHog is running behind a proxy like Apache, NGINX  or ELB. Be sure to properly set [trusted proxies](/docs/self-host/configure/running-behind-proxy#trusted-proxies).                              | `False`
+| `ALLOWED_IP_BLOCKS`        | Specifies IP blocks allowed to connect to the PostHog instance for management (events will still be allowed from anywhere). Make sure to properly [configure your proxy](/docs/self-host/configure/running-behind-proxy) if running behind a proxy.                              |  
 | `TRUSTED_PROXIES`          | Specifies the IPs of proxies that can be trusted.                                                 | `None`
 | `TRUST_ALL_PROXIES`        | Determines if all proxies can be trusted.                                                         | `False`
 | `ALLOWED_HOSTS`            | A list of strings representing the host/domain names that Django can serve. [More info](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).  | `*` (all)
@@ -48,18 +48,18 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `POSTHOG_POSTGRES_CLI_SSL_CRT`| Location of the SSL certificate file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
 | `POSTHOG_POSTGRES_CLI_SSL_KEY`| Location of the SSL key file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
 | `REDIS_URL`| [Redis URL](https://redis-py.readthedocs.io/en/stable/#redis.ConnectionPool.from_url) pointing to your Redis instance. | `redis://localhost/` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
-| `EMAIL_HOST` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.     | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-| `EMAIL_PORT` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-| `EMAIL_HOST_USER` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.                                | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-| `EMAIL_HOST_PASSWORD` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.               | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-| `EMAIL_USE_TLS` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.       | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-| `EMAIL_USE_TLS` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.         | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-| `EMAIL_DEFAULT_FROM` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
-| `EMAIL_ENABLED` | Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.| Please see [configuring email](/docs/configuring-posthog/email#general-configuration) for details.
+| `EMAIL_HOST` | Please see [configuring email] for details.     | Please see [configuring email] for details.
+| `EMAIL_PORT` | Please see [configuring email] for details.                                | Please see [configuring email] for details.
+| `EMAIL_HOST_USER` | Please see [configuring email] for details.                                | Please see [configuring email] for details.
+| `EMAIL_HOST_PASSWORD` | Please see [configuring email] for details.               | Please see [configuring email] for details.
+| `EMAIL_USE_TLS` | Please see [configuring email] for details.       | Please see [configuring email] for details.
+| `EMAIL_USE_TLS` | Please see [configuring email] for details.         | Please see [configuring email] for details.
+| `EMAIL_DEFAULT_FROM` | Please see [configuring email] for details.| Please see [configuring email] for details.
+| `EMAIL_ENABLED` | Please see [configuring email] for details.| Please see [configuring email] for details.
 | `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
 | `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 
-
+[configuring email]: /docs/self-host/configure/email#general-configuration
 
 

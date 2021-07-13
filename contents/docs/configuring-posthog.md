@@ -8,9 +8,9 @@ There are various ways to configure and personalize your PostHog instance to bet
 
 ## **In This Section:**
 
-- [Environment Variables](/docs/configuring-posthog/environment-variables)
-- [Upgrading PostHog](/docs/configuring-posthog/upgrading-posthog)
-- [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
-- [Securing PostHog](/docs/configuring-posthog/securing-posthog)
-- [Running Behind Proxy](/docs/configuring-posthog/running-behind-proxy)
-- [Email Configuration](/docs/configuring-posthog/email)
+- [Environment Variables](/docs/self-host/configure/environment-variables)
+- [Upgrading PostHog](/docs/self-host/configure/upgrading-posthog)
+- [Scaling PostHog](/docs/self-host/configure/scaling-posthog)
+- [Securing PostHog](/docs/self-host/configure/securing-posthog)
+- [Running Behind Proxy](/docs/self-host/configure/running-behind-proxy)
+- [Email Configuration](/docs/self-host/configure/email)

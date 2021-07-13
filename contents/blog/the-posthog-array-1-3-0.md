@@ -10,7 +10,7 @@ categories: release-notes
 
 Another shiny new integration - PostHog now plays nicely with Android!
 
-Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
 
 ## Release notes
 

@@ -112,7 +112,7 @@ However, this will vary based on the volume you're expecting. If you're expectin
 
 If you're running PostHog behind a proxy or load balancer like [ELB](https://aws.amazon.com/elasticloadbalancing/?elb-whats-new.sort-by=item.additionalFields.postDateTime&elb-whats-new.sort-order=desc), you need to set the `IS_BEHIND_PROXY` environment variable to `True`.
 
-For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/self-host/configure/running-behind-proxy).
 
 #### Docker Installation
 
@@ -138,7 +138,7 @@ git clone https://github.com/posthog/posthog.git && cd posthog
 ```
 1. You'll then need to generate a `SECRET_KEY` that is unique to your instance. 
 
-    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/configuring-posthog/securing-posthog).**
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/self-host/configure/securing-posthog).**
 
     First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
 
@@ -208,8 +208,8 @@ See [this PostHog tutorial](/docs/self-host/deploy/docker#upgrading-docker) abou
 ## Useful Tutorials
 <br />
 
-###### - [Suggested NGINX Configuration for PostHog](/docs/configuring-posthog/running-behind-proxy)
+###### - [Suggested NGINX Configuration for PostHog](/docs/self-host/configure/running-behind-proxy)
 
-###### - [Securing PostHog](/docs/configuring-posthog/securing-posthog)
+###### - [Securing PostHog](/docs/self-host/configure/securing-posthog)
 
-###### - [Scaling PostHog](/docs/configuring-posthog/scaling-posthog)
+###### - [Scaling PostHog](/docs/self-host/configure/scaling-posthog)

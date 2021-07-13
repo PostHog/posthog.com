@@ -10,7 +10,7 @@ categories: release-notes
 
 This week's update brings a React Native integration, time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.
 
-Self hosting and want to upgrade? [Update your PostHog](/docs/configuring-posthog/upgrading-posthog).
+Self hosting and want to upgrade? [Update your PostHog](/docs/self-host/configure/upgrading-posthog).
 
 ## Release notes
 

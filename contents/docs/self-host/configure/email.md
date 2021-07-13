@@ -16,7 +16,7 @@ To prevent spam, most email providers have very complex systems in place that va
 
 ## General configuration
 
-To configure a remote email server, you will need to set up the following [environment variables](/docs/configuring-posthog/environment-variables):
+To configure a remote email server, you will need to set up the following [environment variables](/docs/self-host/configure/environment-variables):
 - `EMAIL_HOST`: Defaults to `None`. Hostname to connect to for establishing SMTP connections.
 - `EMAIL_PORT`: Defaults to `25`. Port that should be used to connect to the host.
 - `EMAIL_HOST_USER`: Defaults to `null`. Credentials to connect to the host.

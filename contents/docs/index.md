@@ -88,7 +88,7 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 ### Configuring PostHog
 
-[Configuring PostHog](/docs/configuring-posthog) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/configuring-posthog/scaling-posthog), [security](/docs/configuring-posthog/securing-posthog), and [upgrade methods](/docs/configuring-posthog/upgrading-posthog).
+[Configuring PostHog](/docs/configuring-posthog) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/self-host/configure/scaling-posthog), [security](/docs/self-host/configure/securing-posthog), and [upgrade methods](/docs/self-host/configure/upgrading-posthog).
 
 ### Integrations
 

@@ -14,12 +14,12 @@
         "entry": "Configure",
         "name": "Configure",
         "items": [
-            "docs/configuring-posthog/environment-variables",
-            "docs/configuring-posthog/scaling-posthog",
-            "docs/configuring-posthog/securing-posthog",
-            "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/email",
-            "docs/configuring-posthog/upgrading-posthog"
+            "docs/self-host/configure/environment-variables",
+            "docs/self-host/configure/scaling-posthog",
+            "docs/self-host/configure/securing-posthog",
+            "docs/self-host/configure/running-behind-proxy",
+            "docs/self-host/configure/email",
+            "docs/self-host/configure/upgrading-posthog"
         ]
     },
     {
@@ -49,7 +49,7 @@
             "docs/tutorials/revenue",
             "docs/tutorials/tracking-teams",
             "docs/tutorials/1-minute/survey",
-            "docs/configuring-posthog/deleting-data"
+            "docs/tutorials/deleting-data"
         ]
     },
     {

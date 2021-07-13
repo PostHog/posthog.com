@@ -40,7 +40,7 @@ git clone https://github.com/posthog/posthog.git && cd posthog
 ```
 1. Generate a `SECRET_KEY` that is unique to your instance. 
 
-    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/configuring-posthog/securing-posthog).**
+    **⚠️ Note: Do not use our placeholder key! Read more about the importance of this key [here](/docs/self-host/configure/securing-posthog).**
 
     First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
 
@@ -109,7 +109,7 @@ If you're running your Postgres database elsewhere (i.e. RDS, or a different ser
 
 Upgrading PostHog with Docker depends on how you've deployed with Docker.
 
-> **Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/configuring-posthog/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
+> **Note:** You may need to store your secret key and update the `docker-compose.yml` file after upgrading. [Here's](/docs/self-host/configure/securing-posthog#secret-key-with-docker-compose) how to setup your secret key with Docker Compose.
 
 - For docker-compose, run `docker-compose pull web`
 
@@ -120,4 +120,4 @@ If you've pinned a version, see [CHANGELOG.md](https://github.com/PostHog/postho
 
 If you're running PostHog on Docker behind a proxy or load balancer, you should use the `docker-compose-config.py` script to expose the appropriate port in `docker-compose.yml`. By default port 80 is exposed, causing a port conflict between the PostHog Docker container and the proxy.
 
-For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/configuring-posthog/running-behind-proxy).
+For more information, visit our [dedicated page for running PostHog behind a proxy](/docs/self-host/configure/running-behind-proxy).
