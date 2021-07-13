@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> For message formatting instructions, see [this dedicated page](/docs/libraries/message-formatting).
+> For message formatting instructions, see [this dedicated page](/docs/integrate/webhooks/message-formatting).
 ## 1. Create an incoming webhook in Teams
 
 1. Navigate to the channel where you want to add the webhook and select (•••) More Options from the top navigation bar.

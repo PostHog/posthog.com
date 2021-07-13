@@ -22,7 +22,7 @@ In addition to the work Marius put into the iOS integration, this week you can a
 
 Check out our [Android docs](/docs/integrate/client/android) on how to install it on your app.
 
-### [Gatsby Plugin](/docs/libraries/gatsby)
+### [Gatsby Plugin](/docs/integrate/third-party/gatsby)
 
 ![](../images/04/gatsbyplugin.gif)
 

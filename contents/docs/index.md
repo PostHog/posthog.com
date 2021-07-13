@@ -79,9 +79,9 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 **Integrating PostHog with Other Tools**
 
-- [Integrate PostHog with Shopify ⏱️](/docs/tutorials/1-minute/integrate-with-shopify) 
+- [Integrate PostHog with Shopify ⏱️](//docs/integrate/third-party/shopify) 
 - [Integrate PostHog with Metabase ⏱️](/docs/tutorials/1-minute/integrate-with-metabase) 
-- [Integrate PostHog with Google Tag Manager ⏱️](/docs/tutorials/1-minute/integrate-with-gtm) 
+- [Integrate PostHog with Google Tag Manager ⏱️](/docs/integrate/third-party/google-tag-manager) 
 
 > The ⏱️ emoji denotes tutorials in our '1 Minute Tutorials' section
 
@@ -94,7 +94,7 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 [Integrations](/docs/libraries) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
 
-We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/libraries/segment), [Slack](/docs/libraries/slack), and [Sentry](/docs/libraries/sentry).
+We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrate/third-party/segment), [Slack](/docs/integrate/webhooks/slack), and [Sentry](/docs/integrate/third-party/sentry).
 
 ### Plugins
 

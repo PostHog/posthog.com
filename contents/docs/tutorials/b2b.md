@@ -222,7 +222,7 @@ Dashboards can be customized as you wish - you can change the color, size, and n
 
 If you want to stay on top of new signups (or any other specific action), you can use webhooks to send messages to platforms like Slack and Microsoft Teams.
 
-> **Note:** To set up webhooks, visit our dedicated documentation pages for [Slack](/docs/libraries/slack) and [Microsoft Teams](/docs/libraries/microsoft-teams)
+> **Note:** To set up webhooks, visit our dedicated documentation pages for [Slack](/docs/integrate/webhooks/slack) and [Microsoft Teams](/docs/integrate/webhooks/microsoft-teams)
 
 Once configured in setup, you are able to set custom messages to be sent to you when a certain action is triggered. You can set this on each new action that you create, on the action creation page:
 

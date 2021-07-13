@@ -131,7 +131,7 @@
         "entry": "Integrate",
         "name": "Integrate",
         "items": ["docs/integrate/overview"],
-        "child_entries": ["Client Libraries", "Server Libraries", "Third Parties", "Webhooks"]
+        "child_entries": ["Client Libraries", "Server Libraries", "Third Party", "Webhooks"]
     },
     {
         "entry": "Client Libraries",
@@ -158,26 +158,30 @@
         ]
     },
     {
-        "entry": "Third Parties",
-        "name": "Third Parties",
+        "entry": "Third Party",
+        "name": "Third Party",
         "items": [
-            "docs/libraries/docusaurus",
-            "docs/libraries/gatsby",
-            "docs/tutorials/1-minute/integrate-with-gtm",
-            "docs/tutorials/1-minute/integrate-with-metabase",
-            "docs/tutorials/1-minute/integrate-with-nuxt-js",
-            "docs/tutorials/1-minute/integrate-with-retool",
-            "docs/libraries/rudderstack",
-            "docs/libraries/segment",
-            "docs/libraries/sentry",
-            "docs/tutorials/1-minute/integrate-with-shopify",
-            "docs/tutorials/1-minute/integrate-with-wordpress"
+            "docs/integrate/third-party/docusaurus",
+            "docs/integrate/third-party/gatsby",
+            "docs/integrate/third-party/google-tag-manager",
+            "docs/integrate/third-party/metabase",
+            "docs/integrate/third-party/nuxt-js",
+            "docs/integrate/third-party/retool",
+            "docs/integrate/third-party/rudderstack",
+            "docs/integrate/third-party/segment",
+            "docs/integrate/third-party/sentry",
+            "docs/integrate/third-party/shopify",
+            "docs/integrate/third-party/wordpress"
         ]
     },
     {
         "entry": "Webhooks",
         "name": "Webhooks",
-        "items": ["docs/libraries/message-formatting", "docs/libraries/microsoft-teams", "docs/libraries/slack"]
+        "items": [
+            "docs/integrate/webhooks/message-formatting",
+            "docs/integrate/webhooks/microsoft-teams",
+            "docs/integrate/webhooks/slack"
+        ]
     },
     {
         "entry": "Guide",
