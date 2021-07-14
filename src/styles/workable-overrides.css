@@ -1,0 +1,31 @@
+.whr-items,
+.whr-info {
+    @apply list-none px-0 py-0 mx-0 my-0;
+}
+
+.whr-item {
+    @apply inline-block w-full md:w-1/2 md:float-left text-left mt-6 md:px-6 lg:px-12;
+}
+
+.whr-item {
+    display: block !important;
+}
+.whr-title {
+    @apply font-sans text-base mb-1;
+}
+
+.whr-title a {
+    @apply text-yellow hover:underline hover:text-yellow;
+}
+
+.whr-date {
+    @apply hidden;
+}
+
+.whr-location {
+    display: none;
+}
+
+.whr-location span {
+    @apply hidden;
+}

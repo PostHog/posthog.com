@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
 ---
 
 
@@ -12,7 +13,7 @@ hideAnchor: true
 
 Shared dashboards, global annotations, retention table improvements and a metric ton of bug fixes. This week's PostHog array has it all.
 
-If you're self hosting and want these features - [update your PostHog](/docs/configuring-posthog/upgrading-posthog).
+If you're self hosting and want these features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
 
 Please also update your `posthog-js` version to at least `1.3.5` if you have it installed via NPM. If you're using the snippet, you're good to go!  
 

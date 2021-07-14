@@ -1,0 +1,13 @@
+.hidden-section-wrapper {
+    .hidden-section-title:hover {
+        cursor: pointer;
+    }
+
+    .hidden-section-open:before {
+        content: '▼';
+    }
+
+    .hidden-section-closed:before {
+        content: '▶';
+    }
+}

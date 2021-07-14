@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Giving Great Demos
+## Giving great demos
 
 Always focus on delivering what the customer needs. Sometimes that will mean sending them to a competitor or turning them down. 
 
-### Initial Call
+### Initial call
 
 The purpose of this call is to work out what the potential customer needs. 
 
@@ -17,7 +17,7 @@ Don’t be presumptive - ask why they reached out. It’s often a very quick way
 You are trying to work out:
 
 - Does the client prefer ease over saving money or vice versa?
-- How should the client deploy (i.e. hosted or self-hosted with support). This will depend on their volume and price sensitivity.
+- How should the client deploy (i.e. cloud or self-hosted with support). This will depend on their volume and price sensitivity.
 - Does our functionality meet their use case? Would it be worth going ahead with what we have now?
 - Is the client going to need us to do most of the work? If this is the case, support is really important e.g. because they’re growing very fast.
 - How much analytics experience does the client have? More experience means you should focus more on how we are different, less experience means you should try to keep things simple.
@@ -34,7 +34,7 @@ When doing a demo of PostHog, you should prioritize using the following environm
    
     This is the best way to do a demo because you can help the client with their exact needs and you show them how to do what they want with their own data, so they immediately see the value.
 
-2. The [PostHog Demo Environment](playground.posthog.com)
+2. The [PostHog Demo Environment](https://playground.posthog.com)
 
     The demo instance was designed to be an environment with a significant amount of "good" demo data that showcases the multiple features of PostHog and allows clients to log in and run the demo themselves (while following your instructions).
 

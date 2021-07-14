@@ -12,8 +12,12 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
+import { AuthorsData } from 'types'
+import { findAuthor } from 'lib/utils'
+
 interface MdxQueryData {
-    mdx: {
+    postData: {
         id: string
         slug: string
         body: any
@@ -21,15 +25,33 @@ interface MdxQueryData {
         frontmatter: {
             date: string
             title: string
+            sidebarTitle?: string
             sidebar: string
             showTitle: boolean
+            tags?: string[]
             hideAnchor: boolean
             description: string
+            featuredImage?: {
+                publicURL?: string
+            }
+            author?: string
         }
+    }
+    authorsData: {
+        frontmatter: {
+            authors: AuthorsData[]
+        }
+        id: string
     }
 }
 
 const components = {
+    h1: H1,
+    h2: H2,
+    h3: H3,
+    h4: H4,
+    h5: H5,
+    h6: H6,
     pre: CodeBlock,
     ...shortcodes,
 }
@@ -40,11 +62,14 @@ function addIndex(url: string) {
 }
 
 function TemplateMdx({ data }: { data: MdxQueryData }) {
+    const { postData: mdx, authorsData } = data
     const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
-    const { mdx } = data
-    const { frontmatter, body, excerpt, id } = mdx
+    // const { mdx } = data
+    const { frontmatter, body, excerpt, id, slug } = mdx
+
+    const author = findAuthor(authorsData.frontmatter.authors)(frontmatter.author)
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -57,18 +82,21 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     if (sidebarEntry !== frontmatter.sidebar) setSidebarContentEntry(frontmatter.sidebar)
 
     const isDocsPage = frontmatter.sidebar === 'Docs'
-    const isBlogArticlePage = frontmatter.sidebar === 'Blog'
+    const blogArticleSlug = frontmatter.sidebar === 'Blog' ? slug : undefined
     const isHandbookPage = frontmatter.sidebar === 'Handbook'
 
     return (
-        <div className={'post-page ' + (!isBlogArticlePage ? 'post-page-wrapper' : '')}>
+        <div className={'post-page ' + (!blogArticleSlug ? 'post-page-wrapper' : '')}>
             <Layout
+                blogDate={frontmatter.date}
                 onPostPage={true}
-                isBlogArticlePage={isBlogArticlePage}
+                blogArticleSlug={blogArticleSlug}
                 pageTitle={frontmatter.title}
+                featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 menuActiveKey={isDocsPage ? 'docs' : ''}
+                authorDetails={author}
             >
                 <SEO
                     title={
@@ -76,13 +104,14 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                     }
                     description={frontmatter.description || excerpt}
                     article
+                    image={frontmatter.featuredImage?.publicURL}
                 />
                 <div className="docsPagesContainer">
                     <div className="docsPages">
                         {frontmatter.showTitle && frontmatter.sidebar !== 'Blog' && (
                             <h1 className="centered">{frontmatter.title}</h1>
                         )}
-                        <div className="docsPagesContent">
+                        <div className={`docsPagesContent font-inter ${blogArticleSlug ? 'blogPageContent' : ''}`}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
@@ -90,7 +119,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                     </div>
                     {isDocsPage && <DocsPageSurvey />}
                     {(isDocsPage || isHandbookPage) && (
-                        <DocsFooter filename={`${addIndex(mdx.slug)}.md`} title={frontmatter.title} />
+                        <DocsFooter filename={`/${addIndex(slug)}.mdx`} title={frontmatter.title} />
                     )}
                 </div>
             </Layout>
@@ -100,9 +129,10 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
 
 export default TemplateMdx
 
+// @todo -> be defensive against null featuredImage
 export const query = graphql`
     query MDXQuery($id: String!) {
-        mdx(id: { eq: $id }) {
+        postData: mdx(id: { eq: $id }) {
             id
             slug
             body
@@ -112,9 +142,26 @@ export const query = graphql`
                 title
                 sidebar
                 showTitle
+                tags
                 hideAnchor
                 description
+                featuredImage {
+                    publicURL
+                }
             }
+        }
+        authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
+            frontmatter {
+                authors {
+                    handle
+                    name
+                    role
+                    image
+                    link_type
+                    link_url
+                }
+            }
+            id
         }
     }
 `

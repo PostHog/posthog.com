@@ -23,11 +23,31 @@ Please feel free to suggest any changes. See our [contributing guide](https://gi
     yarn start
     ```
 
+    Tip: Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `gatsby build && gatsby serve`
+
 1.  **Open the Source Code and Start Editing!**
 
     Your site is now running at `http://localhost:8000`!
     
     *Note: You'll also see a second link: `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).*
+
+If you are using Apple M1 ([read this for more](https://github.com/lovell/sharp/issues/2460)):
+```bash
+rm -rf ./node_modules
+brew install vips
+yarn install
+```
+
+It is also possible to use docker:
+
+```bash
+docker run -it --rm \
+    -w /app -v "$PWD":/app \
+    -p 8000-8001:8000-8001 \
+    -e INTERNAL_STATUS_PORT=8001 \
+    node:14-slim \
+    sh -c 'yarn && yarn start'
+```    
 
 ## Questions?
 

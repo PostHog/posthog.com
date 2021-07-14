@@ -11,4 +11,6 @@ yarn-error.log
 .idea
 
 package-lock.json
+pr_diff
 
+recipe-server.log

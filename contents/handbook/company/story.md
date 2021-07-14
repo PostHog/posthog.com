@@ -10,11 +10,11 @@ PostHog was founded by James and Tim on January 23rd, 2020.
 
 We started working together on a startup in August 2019 with the first idea being to help engineers manage technical debt. It didn't work out, but we realized the power of treating growth as an engineering problem. We also knew that many engineers struggle to understand their impact on their users.
 
-There are plenty of product analytics tools out there, but all the alternatives are SAAS-based. While they are very powerful, they can be frustrating for developers. From our perspective, these tools can be problematic because:
+There are plenty of product analytics tools out there, but all the alternatives are SaaS-based. While they are very powerful, they can be frustrating for developers. From our perspective, these tools can be problematic because:
 
 * We didn't want to send all our user data to 3rd parties.
-* It's frustrating to integrate with a tool that charges on usage - you have no idea what it will end up costing, even if it starts out free.
 * We wanted full underlying data access.
+* They don't give you choice and control over pricing.
 
 ## Launch - February, 2020
 
@@ -55,4 +55,12 @@ Our focus remains firmly product, engineering and design oriented, so we're incr
 We've now people in 10 countries around the world, and still feel like it's day one.
 
 Everyone takes a mandatory two weeks off over Christmas to relax.
+
+## $15m Series B - June, 2021
+
+We raised a $15m Series B [a little ahead of schedule](../../blog/why-we-raised-a-15m-series-b-ahead-of-schedule), led by existing investors Y Combinator. 
+
+We're now focused on achieving strong product-market fit with our [target segment](../../handbook/strategy/strategy#target-audience-for-2021) in 2021. 
+
+Our team has now grown to 25 people in 10 countries. 
 

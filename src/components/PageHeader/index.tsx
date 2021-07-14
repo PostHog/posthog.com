@@ -12,7 +12,7 @@ export const PageHeader = ({ title, tagline, styleKey, bgColor = 'navy' }: PageH
     const backgroundColorClass = `bg-${bgColor}`
     return (
         <div className="page-header-container">
-            <div className={`head ${styleKey} ${backgroundColorClass}`}>
+            <div className={`head ${styleKey}`}>
                 <div className="tagline">
                     <h1>{title}</h1>
                     <p>{tagline}</p>

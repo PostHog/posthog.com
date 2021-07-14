@@ -3,7 +3,6 @@ title: Enabling Plugins
 sidebar: Docs
 showTitle: true
 ---
-<br>
 
 Plugins are currently BETA and require you to opt-in.
 
@@ -39,7 +38,7 @@ or run the default `worker` dyno, which includes both of them.
 
 #### AWS CloudFormation
 
-Please [upgrade to the latest CloudFormation config](/docs/deployment/deploy-aws#updating-cloudformation-template) 
+Please [upgrade to the latest CloudFormation config](/docs/self-host/deploy/aws#updating-cloudformation-template) 
 that combines all background workers into one task and activates the plugin server.
 
 Previously we had separate tasks for `worker-beat` and `worker-celery`. In the latest version there is just one `worker`

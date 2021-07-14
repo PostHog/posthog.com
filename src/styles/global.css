@@ -2,10 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'workable-overrides.css';
+@import 'backgrounds.css';
+@import 'buttons.scss';
+
+body {
+    font-smooth: 1.5px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
 ol,
 ul {
     margin: initial;
-    padding: initial;
+    padding-left: 14px;
 }
 
 ol {
@@ -14,4 +24,26 @@ ol {
 
 ul {
     list-style: disc;
+}
+
+.font-nav {
+    @apply lowercase;
+}
+
+.bg-primary-dark {
+    background: rgba(218, 72, 16, 0.9);
+    border-color: rgba(218, 72, 16, 0.9);
+}
+
+.contributor-images > .gatsby-image-wrapper {
+    height: 50px;
+    width: 50px;
+
+    @apply rounded m-1;
+}
+
+.appearance-none {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }

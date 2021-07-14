@@ -3,12 +3,13 @@
     background: #ffffff;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 20px;
+    padding: 1rem calc(1rem + 14vw);
     z-index: 9001;
     box-shadow: 0px 12px 12px rgba(0, 40, 66, 0.25);
     border-radius: 24px;
     width: 80vw;
     height: 80vh;
+
     h1 {
         font-size: 28px;
     }
@@ -27,50 +28,21 @@
     h6 {
         font-size: 12px;
     }
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    li {
-        margin-left: 20vh;
-        margin-right: 20vh;
-    }
 
-    img {
+    .logo {
         max-width: 100px;
-        margin-left: 20vh;
     }
 
     pre {
-        max-width: 600px;
-        margin-left: 20%;
-        background: #464646;
+        max-width: 120ch;
+        background: #222;
     }
 
-    ul li li,
-    ol li li {
-        margin-left: 0 !important;
+    pre > code {
+        color: #fff;
     }
 
     @media screen and (max-width: 1080px) {
-        p,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        li,
-        img {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-
-        pre {
-            margin-left: 5px;
-        }
+        padding: 1rem;
     }
 }

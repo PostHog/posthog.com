@@ -3,7 +3,6 @@ title: How to Safely Roll Out New Features
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
 <small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
 
@@ -38,7 +37,7 @@ _Prefer to watch a video? Check out the [Feature Flags section of our demo video
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment)
-1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python integration](/docs/integrations/python-integration), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
+1. Have added the [PostHog snippet](/docs/integrate/client/js) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python Library](docs/integrate/server/python), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
 
 ## Determining a Use Case
 
@@ -70,7 +69,7 @@ A memorable name for you and your team to refer to the flag.
 
 **Key**
 
-Used to refer to your flag in your codebase. While the flag name does not affect the implementation, the key does. When adding the feature flag to your code, you will always use the key, never the name. In addition, changing a flag key may [affect the persistence of your flag](/docs/features/feature-flags#feature-flag-persistence).
+Used to refer to your flag in your codebase. While the flag name does not affect the implementation, the key does. When adding the feature flag to your code, you will always use the key, never the name. In addition, changing a flag key may [affect the persistence of your flag](/docs/user-guides/feature-flags#feature-flag-persistence).
 
 <div class='note-block'><b>Pro tip:</b> Make sure you choose a key for your flag that is descriptive and styled consistently with your codebase. Changing a flag key will require you to update your codebase and may harm persistence, so it's best to avoid doing so.</div><br />
 
@@ -123,7 +122,7 @@ if (posthog.isFeatureEnabled('new-beta-feature')) {
 }
 ```
 
-This snippet refers to our [JavaScript Integration](/docs/integrations/js-integration), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Integration](/docs/integrations/python-integration) (we're working to add this functionality to as many of our libraries as possible). 
+This snippet refers to our [JavaScript Library](/docs/integrate/client/js), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Library](docs/integrate/server/python) (we're working to add this functionality to as many of our libraries as possible). 
 
 With that snippet, you can then do whatever you wish inside of it. You might change the CSS of a button, hide an entire section, or move things around. A simple example implementation would be:
 
@@ -158,7 +157,7 @@ posthog.onFeatureFlags(function() {
 
 ### Forcing feature flags to update 
 
-In our JS Integration, the reason we store flags as a cookie is to reduce the load on the server and improve the performance of your app, as it doesn't need to always make an HTTP request, it can simply refer to data stored locally in the browser. 
+In our JS Library, the reason we store flags as a cookie is to reduce the load on the server and improve the performance of your app, as it doesn't need to always make an HTTP request, it can simply refer to data stored locally in the browser. 
 
 While this makes your app faster, it means that if your user does something mid-session which causes the flag to turn on for them, this will not be immediately updated. As such, if you expect your app to have scenarios like this _and_ you want flags to update mid-session, you can reload them yourself, by using the `reloadFeatureFlags` function.
 
@@ -186,7 +185,7 @@ In simple terms, A/B testing is a method for determining how to provide the best
 
 This could be used to answer questions such as "Do users click a button more often if it is blue or red?" or more complex questions like "How does our conversion rate for free trial users becoming paid users change if we double the number of CTAs on the page?".
 
-A great way to do this is by using [Cohorts](/docs/features/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different user groups. 
+A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different user groups. 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 

@@ -1,7 +1,7 @@
-import { LibraryPluginType } from 'types'
+import { AuthorsData, LibraryPluginType } from 'types'
 
 export const unsafeHash = (str: string) => {
-    var a = 1,
+    let a = 1,
         c = 0,
         h,
         o
@@ -23,11 +23,11 @@ export const getPluginImageSrc = (plugin: LibraryPluginType) =>
         : null
 
 export const getCookie = (name: string) => {
-    var cookieValue = null
+    let cookieValue = null
     if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';')
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim()
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim()
             // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) === name + '=') {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
@@ -43,3 +43,18 @@ export const generateRandomHtmlId = () =>
         .toString(36)
         .replace(/[^a-z]+/g, '')
         .substr(2, 10)
+
+export const mergeClassList = (...args: string[]) => args.filter((classList) => !!classList).join(' ')
+
+export const findAuthor = (authors: AuthorsData[]) => (authorKey?: string) =>
+    authors?.find(({ handle }) => handle === authorKey)
+
+// custom function to add scroll offset in the top of section
+export const scrollWithOffset = (id: string, offset: number) => {
+    const element = document.querySelector(id)
+    if (element) {
+        const offsetY = offset || -90 // scroll offset (default = -90)
+        const y = element.getBoundingClientRect().top + window.pageYOffset + offsetY
+        window.scrollTo({ top: y, behavior: 'smooth' })
+    }
+}

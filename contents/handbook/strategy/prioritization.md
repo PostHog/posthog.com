@@ -9,11 +9,28 @@ As there is a lot of autonomy at PostHog, it's useful to have a common framework
 
 ## Our mission
 
-Our mission is to increase the number of successful products in the world.
+> Our mission is to increase the number of successful products in the world.
 
 To achieve this, we will need revenue to be able to re-invest into making a better product.
 
-## How is our Product-Market Fit?
+## Our Vision (for 2023)
+
+“Everyone building a product has a clear path to making it successful without losing control of their data”
+
+## Our current focus / milestone
+
+We're currently focused on ["Nailing Funnels"](/handbook/strategy/strategy)
+
+## How do we shift focus between priorities?
+
+We want to move fast and make sure we’re always focused on building what pushes us towards our vision. However, we also recognize that rapidly changing course or excessively pivoting can lead to incomplete or ineffective features and be demotivating.
+
+We’re always looking to make the right decisions for the long term. However, we don’t believe in planning too far ahead as we’re continuously gathering new context.
+
+After we’ve made significant progress towards our current milestone we will build a clear understanding of what we need to focus on next and why, at the end of each sprint we’ll ask ourselves if we’re likely to achieve the goal of our current milestone in the coming sprint. If so, we’ll also start preparing the context we need to move on to our next focus in the following sprint. 
+
+
+## How is our product/market fit?
 
 Below is a table of how we see our product-market fit for various sizes of companies and various job roles.
 
@@ -27,32 +44,32 @@ Below is a table of how we see our product-market fit for various sizes of compa
         <td>Enterprise</td>
     </tr>
     <tr>
-        <td>Engineers / Ex-Developer Product Managers</td>
+        <td>Engineers / PMs with technical expertise</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
-        <td style="background:var(--warning)">Scalability<br>Advanced analytics</td>
+        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
+        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
     </tr>
     <tr>
-        <td>Non-Technical Product Managers</td>
+        <td>Non-technical PMs, marketing, sales, business</td>
         <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
+        <td style="background:var(--warning)">Too technical<br />Feature set / integrations</td>
     </tr>
     <tr>
         <td>Analysts</td>
         <td style="background:var(--success)"></td>
         <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Direct SQL access<br>Plugins for data lakes</td>
-        <td style="background:var(--warning)">Direct SQL access<br>Plugins for data lakes</td>
+        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
+        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
     </tr>
     <tr>
         <td>Enterprise procurement</td>
         <td style="background:var(--muted)"></td>
         <td style="background:var(--muted)"></td>
         <td style="background:var(--muted)"></td>
-        <td style="background:var(--warning)">SOC 2<br>VPC</td>
+        <td style="background:var(--warning)">SOC 2<br />VPC</td>
     </tr>
 </table>
 </span>
@@ -88,8 +105,8 @@ Given scores from 1-5, here's how each type of company stacks up against those t
     <tr>
         <td>Revenue</td>
         <td>Low (1/5)</td>
-        <td>Low (1/5)</td>
-        <td>Mid (3/5)</td>
+        <td>Mid (2/5)</td>
+        <td>High (4/5)</td>
         <td>Very high (5/5)</td>
     </tr>
     <tr>
@@ -124,15 +141,15 @@ We have three options for each box:
     <tr>
         <td>Engineers</td>
         <td style="background:var(--muted)" rowspan="3">Maintain</td>
-        <td style="background:var(--warning)">Grow</td>
+        <td style="background:var(--success)">Build</td>
         <td style="background:var(--success)">Build</td>
         <td style="background:var(--success)">Build</td>
     </tr>
     <tr>
-        <td>Product Managers</td>
-        <td style="background:var(--success)">Build</td>
-        <td style="background:var(--success)">Build</td>
-        <td style="background:var(--success)">Build</td>
+        <td>Non-technical roles</td>
+        <td style="background:var(--muted)">Maintain</td>
+        <td style="background:var(--muted)">Maintain</td>
+        <td style="background:var(--muted)">Maintain</td>
     </tr>
     <tr>
         <td>Analysts</td>

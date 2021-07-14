@@ -4,20 +4,24 @@ import { sfBenchmark } from './compensation_data/sf_benchmark'
 import { Select, Statistic, Tag, Radio } from 'antd'
 import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
+import { currencyData } from './compensation_data/currency'
+
 import 'antd/lib/statistic/style/css'
 import 'antd/lib/tag/style/css'
 import 'antd/lib/radio/style/css'
 import './style.scss'
 
-var formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-})
-
-let formatCur = (val: number) => formatter.format(val).replace('.00', '')
+const formatCur = (val: number, currency: string) => {
+    currency = currencyData[currency] ? currency : 'USD'
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency,
+    })
+    return formatter.format(Math.round(val * (currencyData[currency] || 1))).replace('.00', '')
+}
 
 export const CompensationCalculator = () => {
-    const [job, setJob] = useState('Engineer')
+    const [job, setJob] = useState('Full Stack Engineer')
     const [country, setCountry] = useState('United States')
     const [region, setRegion] = useState('San Francisco, California')
     const [level, setLevel] = useState('Senior')
@@ -25,11 +29,14 @@ export const CompensationCalculator = () => {
 
     useEffect(() => {
         if (window) {
-            if (localStorage.getItem('job')) setJob(localStorage.getItem('job') || 'Engineer')
+            if (localStorage.getItem('job') && sfBenchmark[localStorage.getItem('job')])
+                setJob(localStorage.getItem('job'))
             if (localStorage.getItem('country')) setCountry(localStorage.getItem('country') || 'United States')
             if (localStorage.getItem('region')) setRegion(localStorage.getItem('region') || 'San Francisco, California')
-            if (localStorage.getItem('level')) setLevel(localStorage.getItem('level') || 'Senior')
-            if (localStorage.getItem('step')) setStep(localStorage.getItem('step') || 'Thriving')
+            if (localStorage.getItem('level') && levelModifier[localStorage.getItem('level')])
+                setLevel(localStorage.getItem('level') || 'Senior')
+            if (localStorage.getItem('step') && stepModifier[localStorage.getItem('step')])
+                setStep(localStorage.getItem('step') || 'Thriving')
         }
     }, [])
 
@@ -51,29 +58,25 @@ export const CompensationCalculator = () => {
         }
     }
 
-    const calculatedLocationFactor =
+    const location =
         country &&
         region &&
         region !== 'false' &&
-        locationFactor.filter((location) => location.country === country && location.area === region)[0].locationFactor
+        locationFactor.filter((location) => location.country === country && location.area === region)[0]
+    const calculatedLocationFactor = location.locationFactor
 
-    let countries = unique(locationFactor.map((l) => l.country))
+    const countries = unique(locationFactor.map((l) => l.country))
 
     return (
         <div style={{ fontSize: '0.85rem' }} className="compensation-calculator ph-no-capture">
             <p>Select a role</p>
-            <Radio.Group
-                style={{ width: '100%', marginBottom: '0.75rem' }}
-                value={job}
-                buttonStyle="solid"
-                onChange={(e) => setItem('job')(e.target.value)}
-            >
+            <Select style={{ width: '100%', marginBottom: '0.75rem' }} value={job} onChange={setItem('job')}>
                 {Object.keys(sfBenchmark).map((job) => (
-                    <Radio.Button value={job} key={job}>
+                    <Select.Option value={job} key={job}>
                         {job}
-                    </Radio.Button>
+                    </Select.Option>
                 ))}
-            </Radio.Group>
+            </Select>
             <p>Country</p>
             <Select
                 showSearch
@@ -116,24 +119,31 @@ export const CompensationCalculator = () => {
                 ))}
             </Radio.Group>
             <p>Step</p>
-            <Radio.Group
-                style={{ width: '100%', marginBottom: '0.75rem' }}
-                value={step}
-                buttonStyle="solid"
-                onChange={(e) => setItem('step')(e.target.value)}
-            >
+            <Select style={{ width: '100%', marginBottom: '0.75rem' }} value={step} onChange={setItem('step')}>
                 {Object.entries(stepModifier).map(([step, modifier]) => (
-                    <Radio.Button value={step} key={step}>
-                        {step} <span>{modifier}</span>
-                    </Radio.Button>
+                    <Select.Option value={step} key={step}>
+                        {step} {modifier[0]} - {modifier[1]}
+                    </Select.Option>
                 ))}
-            </Radio.Group>
+            </Select>
             <Statistic
                 title={<p>Base salary</p>}
                 value={
-                    job && country && region && typeof calculatedLocationFactor === 'number'
+                    job && country && region && location && typeof calculatedLocationFactor === 'number'
                         ? formatCur(
-                              sfBenchmark[job] * calculatedLocationFactor * levelModifier[level] * stepModifier[step]
+                              sfBenchmark[job] *
+                                  calculatedLocationFactor *
+                                  levelModifier[level] *
+                                  stepModifier[step][0],
+                              location?.currency
+                          ) +
+                          ' - ' +
+                          formatCur(
+                              sfBenchmark[job] *
+                                  calculatedLocationFactor *
+                                  levelModifier[level] *
+                                  stepModifier[step][1],
+                              location?.currency
                           )
                         : '--'
                 }
@@ -142,7 +152,10 @@ export const CompensationCalculator = () => {
                 <div>
                     <Tag>SF Benchmark: {formatCur(sfBenchmark[job])}</Tag> x{' '}
                     <Tag>Location factor: {calculatedLocationFactor}</Tag> x{' '}
-                    <Tag>Level modifier: {levelModifier[level]}</Tag>x <Tag>Step modifier: {stepModifier[step]}</Tag>
+                    <Tag>Level modifier: {levelModifier[level]}</Tag>x{' '}
+                    <Tag>
+                        Step modifier: {stepModifier[step][0]} - {stepModifier[step][1]}
+                    </Tag>
                 </div>
             )}
             <br />

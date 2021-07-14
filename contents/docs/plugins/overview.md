@@ -1,9 +1,9 @@
 ---
-title: Overview
+title: Plugins
+sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
-<br>
 
 > **Important:** Our Plugins functionality is still in **Beta** mode. Please report any issues you find [on GitHub](https://github.com/PostHog/posthog/issues). 
 
@@ -37,7 +37,7 @@ Plugins can pull in information like exchange rates, GeoIP location data, online
  
 **Adding your own data from other sources to PostHog**
 
-In addition to pulling data from third-parties, you might also want to bring in data from your own sources, such other tools and platforms you use. 
+In addition to pulling data from third-parties, you might also want to bring in data from your own sources, such as other tools and platforms you use. 
 
 **Labeling events**
 
@@ -48,8 +48,6 @@ In order to facilitate sorting through your events, plugins can be used to deter
 By default, PostHog does not enforce schemas on events it receives. However, a plugin could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.
 
 ## Using Plugins
-
-> **Note:** Plugins are currently only available on self-hosted instances, but we are working to also make them available on PostHog Cloud.
 
 To use plugins on your self-hosted instance, head over to 'Project' -> 'Plugins' on the left sidebar:
 

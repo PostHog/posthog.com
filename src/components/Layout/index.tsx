@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
+import { Header } from '../Header/Header'
+import { Footer } from '../Footer/Footer'
 import { ResponsiveSidebar } from '../ResponsiveSidebar'
 import { Container } from '../Container'
 import ResponsiveAnchor from '../ResponsiveAnchor'
@@ -12,35 +12,55 @@ import { DocsSearch } from '../DocsSearch'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { Spacer } from '../../components/Spacer'
 import './Layout.scss'
+import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
-import { BlogFooter } from '../../components/BlogFooter'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { BlogPostLayout } from '../Blog/BlogPostLayout'
+import { AuthorsData } from 'types'
 
 interface LayoutProps {
     pageTitle?: string
     onPostPage?: boolean
     isDocsPage?: boolean
     isHomePage?: boolean
-    isBlogArticlePage?: boolean
+    blogArticleSlug?: string
     children?: any
     className?: string
-    containerStyle?: Object
+    containerStyle?: Record<string, any>
     menuActiveKey?: string
+    featuredImage?: string | null
+    headerBackgroundTransparent?: boolean
+    onBlogPage?: boolean
+    blogDate?: string
+    authorDetails?: AuthorsData
 }
+
+const BlogHeaderContent = ({ title }: { title: string }): JSX.Element => (
+    <>
+        <h1 className="text-gray-900 center">{title}</h1>
+        <p className="text-gray-900 text-base center w-5/6">
+            PostHog is an open source product analytics platform designed to help you understand customers, quantify
+            value, and ship new features faster.
+        </p>
+    </>
+)
 
 const Layout = ({
     onPostPage = false,
     pageTitle = '',
     isDocsPage = false,
-    isHomePage = false,
-    isBlogArticlePage = false,
+    blogArticleSlug,
     children,
     className = '',
     containerStyle = {},
-    menuActiveKey = '',
-}: LayoutProps) => {
+    featuredImage = '',
+    headerBackgroundTransparent = false,
+    onBlogPage = false,
+    blogDate = '',
+    authorDetails,
+}: LayoutProps): JSX.Element => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
 
@@ -48,12 +68,38 @@ const Layout = ({
         if (window && posthog) {
             posthog.people.set({ preferred_theme: (window as any).__theme })
         }
+
+        const skeletonLoaded = document.getElementsByClassName('skeleton-loading')
+
+        for (let i = 0; i < skeletonLoaded.length; i++) {
+            const el = skeletonLoaded[i]
+
+            el.classList.remove('skeleton-loading--250')
+            el.classList.remove('skeleton-loading--500')
+            el.classList.remove('skeleton-loading--750')
+            el.classList.remove('skeleton-loading--1000')
+        }
     }, [])
 
-    return (
+    return blogArticleSlug ? (
+        <BlogPostLayout
+            blogDate={blogDate}
+            pageTitle={pageTitle}
+            featuredImage={featuredImage}
+            blogArticleSlug={blogArticleSlug}
+            authorDetails={authorDetails}
+        >
+            {children}
+        </BlogPostLayout>
+    ) : (
         <>
+            <Header
+                onPostPage={onPostPage}
+                transparentBackground={headerBackgroundTransparent}
+                onBlogPage={!!blogArticleSlug || onBlogPage}
+            />
             <AntdLayout id="antd-main-layout-wrapper" hasSider>
-                {onPostPage && !sidebarHide && !isBlogArticlePage && (
+                {onPostPage && !sidebarHide && !blogArticleSlug && (
                     <AntdLayout.Sider
                         width="300"
                         className="sideBar display-desktop"
@@ -64,31 +110,21 @@ const Layout = ({
                     </AntdLayout.Sider>
                 )}
                 <AntdLayout id="ant-layout-content-wrapper" style={{ background: '#ffffff' }}>
-                    <AntdLayout.Header
-                        className={'menuHeader ' + (onPostPage && 'docsHeader ') + (isBlogArticlePage && 'blogHeader')}
-                        id="menu-header"
-                        style={{ background: '#ffffff' }}
-                    >
-                        <Header
-                            onPostPage={onPostPage}
-                            isBlogArticlePage={isBlogArticlePage}
-                            isHomePage={isHomePage}
-                            menuActiveKey={menuActiveKey ? menuActiveKey : isDocsPage ? 'docs' : ''}
-                        />
-                        {onPostPage && !isBlogArticlePage && (!anchorHide || !sidebarHide) && (
-                            <span className="display-mobile">
-                                <ResponsiveTopBar />
-                            </span>
-                        )}
-                        {isBlogArticlePage && (
+                    {onPostPage && !blogArticleSlug && (!anchorHide || !sidebarHide) && (
+                        <span className="display-mobile">
+                            <ResponsiveTopBar />
+                        </span>
+                    )}
+                    {blogArticleSlug && (
+                        <>
                             <div className="blogHeaderTitle display-desktop">
-                                <h1>{pageTitle}</h1>
+                                <BlogHeaderContent title={pageTitle} />
                             </div>
-                        )}
-                    </AntdLayout.Header>
+                        </>
+                    )}
 
                     {onPostPage &&
-                        (!isBlogArticlePage ? (
+                        (!blogArticleSlug ? (
                             <div className="post-page-sub-header">
                                 <div className="post-page-sub-header-inner">
                                     <span style={{ paddingRight: isDocsPage ? 5 : 30 }}>
@@ -98,7 +134,7 @@ const Layout = ({
                                 </div>
                             </div>
                         ) : (
-                            <Spacer onlyDesktop={true} />
+                            <Spacer onlyDesktop={true} height={5} />
                         ))}
 
                     {/* content */}
@@ -106,16 +142,16 @@ const Layout = ({
                         className={
                             'layout ' +
                             (onPostPage ? 'docsPageLayout ' : 'notDocsLayout ') +
-                            (isBlogArticlePage ? 'blogPageLayout ' : '') +
+                            (blogArticleSlug ? 'blogPageLayout ' : '') +
                             (isDocsPage && 'docs-only-layout')
                         }
                         id={onPostPage ? 'docs-content-wrapper' : ''}
                         style={{ backgroundColor: '#ffffff' }}
                     >
                         <AntdLayout.Content>
-                            {isBlogArticlePage && (
+                            {blogArticleSlug && (
                                 <div className="display-mobile">
-                                    <h1>{pageTitle}</h1>
+                                    <BlogHeaderContent title={pageTitle} />
                                     <br />
                                 </div>
                             )}
@@ -141,9 +177,8 @@ const Layout = ({
                     </AntdLayout>
                 </AntdLayout>
             </AntdLayout>
-            <AntdLayout style={{ background: '#ffffff' }}>
-                {isBlogArticlePage && <BlogFooter />}
-                <Footer onPostPage={onPostPage} />
+            <AntdLayout>
+                <Footer />
             </AntdLayout>
             <PosthogAnnouncement />
             <GetStartedModal />

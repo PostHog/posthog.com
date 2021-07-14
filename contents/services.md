@@ -8,7 +8,7 @@ PostHog is something you can deploy yourself.
 
 However, many people want someone else to manage it for them.
 
-If you would like any of the following, please [reach out](mailto:sales@posthog.com).
+If you would like any of the following, please [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).
 
 ## Managed hosting in your cloud, by PostHog's team
 
@@ -21,10 +21,10 @@ PostHog deployed in your cloud, with our team making sure that it is set up and 
 
 ## PostHog hosting
 
-PostHog hosts your product analytics for you. We can help with the initial setup and integration, as well as making s
+PostHog hosts your product analytics for you. We can help with the initial setup and integration, as well as making sure you're always up-to-date.
 
 * This has the lowest possible workload for your team to get started
 
 ## Something else?
 
-We're friendly, just [ask](mailto:sales@posthog.com).
+We're friendly, just [get in touch](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).

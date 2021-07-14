@@ -1,133 +1,149 @@
 ---
-title: Strategy
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
 
-## Strategy
+**The Marketing/Acquisition Team**
 
-In 2021 we're focussing our marketing efforts on "startup" engineering teams and enthusiasts, stages 1-2 of our [Growth Strategy](https://posthog.com/handbook/growth/strategy) and columns 1-2 of our company [Strategy Prioritization](https://posthog.com/handbook/strategy/prioritization#how-is-our-product-market-fit), supplemented with Enterprise (stage 3) campaigns and experiments that synergise with learnings from our early enterprise customers. This does not mean that you won't get more "startup-like" engineering teams at larger companies. We've already validated that there are engineering teams at scale-ups and enterprises that seek the best technology to iterate quicker. Our early enterprise customers will enable us to connect with more traditional enterprise engineering teams through accurate product messaging, case studies and more.  
+Philosophy: Be kind, concise and direct.
 
-### "For Engineers"
+## Positioning statement
 
-Unlike many analytics solutions, that target product managers and other non-engineering roles, we're building PostHog for engineers and we'll support them with content- and community-driven campaigns that empower them to build successful products.
+We use a positioning statement based on [a template by Geoffrey Moore](https://gist.github.com/JoshSmith/2041454), which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools.
 
-Some themes we've been discussing internally:
+Our positioning statement is:
 
-- Product analytics and validation for engineers
-- Marketing and sales for engineers
-- Getting your first customers
-- How to start an open source startup
+_For product managers who need to understand their users, PostHog is the only open-source, all-in-one analytics platform that offers everything from funnel analysis and cohort tracking, to feature flags and session recording._ 
 
-#### Mass adoption at YC startups
+_Unlike traditional tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._ 
 
-YC is not only one of the most successful and challenging startup accelerators, it's also a strongly supportive network who want to help each other build successful products. Members show their support with advice and generous deals for their respective products - [our deal]() has helped over 50 startups, many who've gone on to be paying customers.
+See [our messaging framework for more information](/handbook/growth/marketing/messaging_framework) about positioning and how we bring it to life. 
 
-With our marketing team expanding, we're upping the stakes and setting a goal of getting 90%+ of startups in new YC batches and 75% of startups from the last 2 years that have not chosen a product analytics solution, to use PostHog.
+## Products
 
-We're betting on YC startups because YC acts as strict screening process for successful startups and founders. By supporting these startups, we're aligning ourselves with many future successful companies and expanding our reach and awareness to their rapidly growing network and even further within the wider YC and Hacker News network. We're betting that this will be significantly more effective than any other traditional content or paid strategies. 
+An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
-To incentivise YC startups to choose PostHog for the product analytics, we'll offer:
+**PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
 
-- Generously increased usage on PostHog Cloud
-- Extended free premium licenses for on-premise
-- Free VPC setup
-- Free support hours
-- Free onboarding, training and advice calls to get your demo day ready
-- Additional free licenses, hardware etc to be determined
-- Access to our growing library of tutorials and other resources in our docs
+**PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
 
-#### The best developer community
+**PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
-We want to build the most active and supportive developer community around, by supporting and celebrating our community's contributions more than any other community.
+## Target audience
 
-We'll create resources to make it easier to contribute to different areas of PostHot, whatever your level of experience.
+*Innovative technical teams*, more commonly found in startups, who care about:
 
-We'll create tools and apps that celebrate our community's growth and members' contributions.
+- a unified product analytics platform
+- open source
+- control: hosting, pricing, source, data, privacy and security
 
-We'll thank substantial contributions with swag and other sponsorships.
+We will expand to non-technical teams when we have achieved technical awareness saturation.
 
-We'll financially support community lead events.
+### Goal 1: User acquisition
+
+Increase:
+
+- Open source self hosted installs
+  - Tracked in [AARRR dashboard](https://app.posthog.com/dashboard/2973)
+  - Page views tracked in [Marketing dashboard](https://app.posthog.com/dashboard/2881)
+- Premium self hosted leads
+  - Todo: needs consolidated tracking
+- Free cloud signups
+  - Todo: needs consolidated tracking
+- Premium cloud signups
+  - Todo: needs consolidated tracking
+
+### Goal 2: Community growth
+
+Increase:
+
+- GitHub stars
+  -  Tracked in Orbit
+- GitHub contributors
+  -  Tracked in Orbit
+- GitHub contributions
+  - Todo: needs consolidated tracking
+  - Plugin contributions
+    - Todo: needs consolidated tracking
+
+See [Community](./marketing/community) for community function.
+
+### Requirements
+
+#### Achieve complete tracking
+
+Tracking marketing efforts that contribute to acquisition and growth.
+
+Going beyond marketing, tracking through the funnel to improve targeting.
+
+#### Reduce effort to contribute
+
+Reduce the actions, time or complexity for us and our community to contribute.
+
+#### Reduce acquisition cost
+
+Reduce cost to acquire users and grow our community.
 
 
-## Marketing Functions
+## Functions
 
-We're in the process of building a cross-functional marketing team to initially convert technical teams and individuals developers at startups, thereafter expanding to other business functions and scale-ups and enterprises.
+Functions that contribute more to *Acquisition* than another metrics are owned by Marketing.
 
-Our marketing functions will include product marketing, content marketing, community, paid and operations but as a team we work closely with the product team, engineering and specifically growth engineering to improve AARRR, support and sales.
+Documentation contributes more to *Activation* and *Retention* than *Acquisition*. Marketing is a stakeholder in coverage and completeness.
 
-### Product Marketing
+*Activation* and *Retention* contribute more to *Referral* than *Acquisition*.
 
-Product marketing is the foundation upon which other marketing efforts are built. Product marketing consists of the following activities:
+- Product marketing:
+  - research: market, competitor
+  - product positioning
+  - buyer personas
+  - messaging: website, careers, channel bios, README.md
+- Content marketing:
+  - [Blog](./marketing/blog): product releases, stories (team, product, customer)
+  - Audio: audio stories, podcast series
+  - [Video](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA): video stories, vlog series, showcases, tutorials
+  - [Newsletter](./marketing/newsletter): general, investor
+  - Handbook: team, culture
+- [Community](./marketing/community):
+  - social: Twitter, LinkedIn
+  - discussions: Slack, HN, StartupSchool, Reddit
+  - [onboarding](https://posthog.com/handbook/growth/sales/yc-onboarding): YC startups
+  - events: online, in-person
+  - networking: open source, analytics
+  - sponsorship: open source
+- [Press](./marketing/press):
+  - relationships
+  - announcements
+  - media packs
+- [Paid](./marketing/paid):
+  - search
+  - social
+  - communities
+  - newsletters
+  - websites
+  - podcasts
+  - events
+  - video
+- Technical:
+  - reporting
+  - tracking
+  - tooling
+  - SEO
+- Design:
+  - visual identity
+  - web properties
+  - channels
 
-- Market research to identify targetable industries and use cases
-- Competitor research
-- Working with our product team to develop a competitive product positioning
-- Developing and maintaining buyer personas
-- Creating product messaging for our website to address our buyer personas
-- Creating gated marketing content and sales collateral: reports, white papers etc
-- Measuring the success of content
+### Team
 
-**Hiring**: We're hiring an intermediate technical product marketer **soon** to address developers/startups and will expand the team when we're reaching our capacity (approximately 4-8 months).
+Prioritizing hiring for functions based on acquisition success and capacity in relation to other functions.
 
-### Content Marketing
+- Product marketing: Joe Martin
+- Content marketing: Mo Shehu
+- Community: Phil Leggetter
+- Press: 2022
+- Paid: 2022
+- Technical: hiring next
 
-Content marketers are our story tellers. They excel at creating narrative driven content most commonly found on our blog but can also be in other formats. Using our foundational research and messaging, content marketers have the following responsibilities:
-
-- Researching and pitching innovative ideas
-- Creating articles, interviews, case studies, infographics and ebooks
-- Creating engaging timely content around anything trendy
-- Maintaining a content calendar that proportionally addresses our target audiences
-- Measuring the success of content
-
-**Hiring**: We're hiring an intermediate content marketer **now** and will expand the team when we have a product marketing foundation, effective reporting and content, and are close to our content creation capacity (approximately 4-8 months).
-
-### Community
-
-The PostHog community team works across product, engineering, support, and marketing, ultimately all their efforts go towards community growth and empowerment. Yakko, from our Developer Experience team, has the following responsibilities regarding our community:
-
-- Onboarding YC startups as part of our [Deal for YC companies](https://posthog.com/handbook/growth/sales/yc-onboarding)
-  - We will be expanding our marketing in this area with the goal of onboarding majority of companies in upcoming batches and a large portion of previous batches
-- Running demos
-- PostHog releases: collaborating with our engineering team, doing the release, writing the release post, and working with the rest of marketing to promote
-- Creating documentation and tutorials
-- Supporting contributors to our codebase
-    - Making it easier to contribute 
-    - Providing assistance in pull requests
-    - Providing merch for contributions
-    - Empowering contributors and highlighting their contributions
-- [Providing support](/handbook/growth/strategy) for users of our open source product
-
-Other community activities that will come up as we grow:
-
-- Developing community apps and tools to increase growth and support our community
-- Running events and supporting community events
-- Community moderation and/or self-moderation
-- Managing discussions on social channels
-
-**Hiring**: We will hire additional community team members when Yakko is reaching capacity (end of 2021).
-
-### Paid
-
-Paid marketing will be used to grow revenue or community and include:
-
-- Search engine
-- YouTube 
-- Social
-- Websites, blogs
-- Newsletters
-- Podcasts, YouTube channels
-- Events
-- Competitions
-
-**Hiring**: We'll hire this role when we have effective product messaging, content and reporting (end of 2021, early 2022).
-
-### Operations
-
-Marketing operations can encompass a wide range of activities including:
-
-- Development of marketing websites, apps and tools
-- Research and maintenance of our marketing stack
-- Automation of activities on our various channels 
-
-**Hiring**: We'll hire this role when we have someone in all our other marketing functions and need operations to be optimised to scale the team further (2022).
+Design provided as a service by the Design team.

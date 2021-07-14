@@ -44,17 +44,29 @@ We currently prefer working with a single media partner on an exclusive basis, a
 - [ ] Write post on our blog about the news
 - [ ] Post on PostHog Twitter (and tag all relevant people)
 - [ ] Share links to all of the above to the PostHog team so they can share
+- [ ] Update any relevant online company profiles; Crunchbase, Pitchbook, Glassdoor.
 
-## Basic press release guidance
+## Press release template
 
-The purpose of a press release is to present our key messages in a clear and understandable way for any interested media to be able to pick up the story. 
+Include media and quotes from James, Tim or influential people.
 
-A few basic tips:
+```
+# Headline
 
-- [ ] The title and opening couple of sentences are by far the most important sections of the press release. You should spend a disproportionate amount of time writing these.
-- [ ] It is tempting to try and cram in lots of messages - don't! Keep it simple - 2 or 3 key messages at the most. A press release does not need to 
-- [ ] We will usually want a quote from James or Tim in there, depending on the content. It is also good to include a quote from relevant third parties, e.g. an investor participating in a new round of funding. 
-- [ ] Include a press contact at the end - press@posthog.com
-- [ ] All press releases should include our boilerplate (this will change over time) - usually this section is titled 'About PostHog': 
+News
 
-> PostHog is an open source, product analytics platform. PostHog enables software teams to understand user behavior – auto-capturing events, performing product analytics and dashboarding, enabling video replays, and rolling out new features behind feature flags, all based on their single open source platform. The product’s open source approach enables companies to self-host, removing the need to send data externally. Founded in 2020 by James Hawkins and Tim Glaser, PostHog was a member of Y Combinator’s Winter 2020 batch, and has subsequent raised $12m in funding from GV, Y Combinator and notable angel investors including Jason Warner (CTO, GitHub), Solomon Hykes (Founder, Docker) and David Cramer (Founder, Sentry).
+## About PostHog
+
+PostHog is an open source, product analytics platform. PostHog enables software teams to understand user behavior – auto-capturing events, performing product analytics and dashboarding, enabling video replays, and rolling out new features behind feature flags, all based on their single open source platform. The product’s open source approach enables companies to self-host, removing the need to send data externally.
+
+Founded in 2020 by James Hawkins and Tim Glaser, PostHog was a member of Y Combinator’s Winter 2020 batch, and has subsequent raised $12m in funding from GV, Y Combinator and notable angel investors including Jason Warner (CTO, GitHub), Solomon Hykes (Founder, Docker) and David Cramer (Founder, Sentry).
+
+## About Y Combinator Continuity Fund
+
+YC Continuity is an investment fund dedicated to supporting founders as they scale their companies. Our primary goal is to support YC alumni companies by investing in their subsequent funding rounds, though we occasionally invest in non-YC companies as well.
+
+Like YC’s early-stage partners, the entire YC Continuity team has strong operating experience. We work to create opportunities for founders to continue their personal growth and scale their companies successfully.
+
+We also run the YC Growth Program, which brings together founder-CEOs who are leading rapidly growing companies.
+
+```

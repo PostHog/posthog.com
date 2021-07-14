@@ -1,19 +1,19 @@
 ---
-title: Development Process
+title: Development process
 sidebar: Handbook
 showTitle: true
 ---
 
 > _**Note:** This guide is aimed at people who work for PostHog. If you want to contribute, [see our Contributing Guide](/docs/contributing)._
 
-<br>
+<br />
 
 Any process is a balance between speed and control. If we have a long process that requires extensive QA and 10 approvals, we will never make mistakes because we will never release anything.
 
 However, if we have no checks in place, we will release quickly but everything will be broken.
 
 
-## 1. How to Decide What to Build
+## 1. How to decide what to build
 
 There are 3 places that work comes from.
 
@@ -22,13 +22,13 @@ There are 3 places that work comes from.
 - "This should be better"
 
 
-## 2. Sizing a Task
+## 2. Sizing a task
 
-When picking up a task, it should be doable in a day, including code review and QA. If it's not, you need to break it down into smaller chunks until it is. Tasks of this size are easy to test, easy to deploy, won't often cause merge conflicts and should still deliver some kind of value.
+When picking up a task, it should be doable in a day, including code review and QA. If it's not, you need to break it down into smaller chunks until it is. Tasks of this size are easy to test, easy to deploy, less likely to cause merge conflicts, and should still deliver some kind of value.
 
 Even if you're contributing, this is helpful as it means you'll be able to contribute to PostHog faster.
 
-## 3. Writing Code
+## 3. Writing code
 
 We're big fans of Test Driven Development (TDD). We've tried to create test infrastructure that helps you rather than annoys you. If that isn't the case, please raise an issue! Keeping tests on point is a high priority to keep developer productivity high.
 
@@ -42,7 +42,7 @@ To make sure our issues are linked correctly to the PRs, you can tag the issue i
 git commit -m "Closes #289 add posthog logo to website"
 ```
 
-## 5. Code Review
+## 5. Code review
 
 When we review a PR, we'll look at the following things:
 - Does the PR actually solve the issue?
@@ -56,17 +56,21 @@ Things we do not care about during review:
 
 See: [How we review](/handbook/engineering/how-we-review).
 
-## 7. Merging
+## 6. Merging
 
 Merge anytime. Friday afternoon? Merge.
 
 Our testing, reviewing and building process should be good enough that we're comfortable merging any time.
 
-## How to Test
+## 7. Documenting
+
+If you built it, please [document it](https://posthog.com/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
+
+## How to test
 
 See: [How to test](/docs/contributing#testing).
 
-## How we Review
+## How we review
 
 See: [How we review](/handbook/engineering/how-we-review).
 

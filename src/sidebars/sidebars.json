@@ -2,47 +2,146 @@
     {
         "entry": "Docs",
         "name": "Docs",
-        "child_entries": [
-            "Tutorials",
-            "Deployment",
-            "Configuring PostHog",
-            "Integrations",
-            "Features",
-            "Plugins",
-            "API",
-            "Contributing",
-            "Platform Structure"
+        "child_entries": ["Self-Host", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
+    },
+    {
+        "entry": "Self-Host",
+        "name": "Self-Host",
+        "items": ["docs/self-host/overview"],
+        "child_entries": ["Deploy", "Configure"]
+    },
+    {
+        "entry": "Deploy",
+        "name": "Deploy",
+        "items": [
+            "docs/self-host/deploy/aws",
+            "docs/self-host/deploy/azure",
+            "docs/self-host/deploy/digital-ocean",
+            "docs/self-host/deploy/google-cloud-services",
+            "docs/self-host/deploy/heroku",
+            "docs/self-host/deploy/qovery",
+            "docs/self-host/deploy/render",
+            "docs/self-host/deploy/kubernetes",
+            "docs/self-host/deploy/docker",
+            "docs/self-host/deploy/source",
+            "docs/self-host/deploy/hosting-costs"
         ]
     },
     {
-        "entry": "Configuring PostHog",
-        "name": "Configuring PostHog",
+        "entry": "Configure",
+        "name": "Configure",
         "items": [
-            "docs/configuring-posthog",
-            "docs/configuring-posthog/environment-variables",
-            "docs/configuring-posthog/upgrading-posthog",
-            "docs/configuring-posthog/scaling-posthog",
-            "docs/configuring-posthog/securing-posthog",
-            "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/email",
-            "docs/configuring-posthog/deleting-data"
+            "docs/self-host/configure/environment-variables",
+            "docs/self-host/configure/scaling-posthog",
+            "docs/self-host/configure/securing-posthog",
+            "docs/self-host/configure/running-behind-proxy",
+            "docs/self-host/configure/email",
+            "docs/self-host/configure/upgrading-posthog"
         ]
     },
     {
-        "entry": "Contributing",
-        "name": "Contributing",
+        "entry": "Integrate",
+        "name": "Integrate",
+        "items": ["docs/integrate/overview"],
+        "child_entries": ["Client Libraries", "Server Libraries", "Third Party", "Webhooks"]
+    },
+    {
+        "entry": "Client Libraries",
+        "name": "Client Libraries",
         "items": [
-            "docs/contributing",
-            "docs/developing-locally",
-            "docs/stack",
-            "docs/project-structure",
-            "docs/updating-documentation"
+            "docs/integrate/client/snippet-installation",
+            "docs/integrate/client/android",
+            "docs/integrate/client/ios",
+            "docs/integrate/client/js",
+            "docs/integrate/client/flutter",
+            "docs/integrate/client/react-native"
+        ]
+    },
+    {
+        "entry": "Server Libraries",
+        "name": "Server Libraries",
+        "items": [
+            "docs/integrate/server/elixir",
+            "docs/integrate/server/go",
+            "docs/integrate/server/node",
+            "docs/integrate/server/php",
+            "docs/integrate/server/python",
+            "docs/integrate/server/ruby"
+        ]
+    },
+    {
+        "entry": "Third Party",
+        "name": "Third Party",
+        "items": [
+            "docs/integrate/third-party/docusaurus",
+            "docs/integrate/third-party/gatsby",
+            "docs/integrate/third-party/google-tag-manager",
+            "docs/integrate/third-party/metabase",
+            "docs/integrate/third-party/nuxt-js",
+            "docs/integrate/third-party/retool",
+            "docs/integrate/third-party/rudderstack",
+            "docs/integrate/third-party/segment",
+            "docs/integrate/third-party/sentry",
+            "docs/integrate/third-party/shopify",
+            "docs/integrate/third-party/wordpress"
+        ]
+    },
+    {
+        "entry": "Webhooks",
+        "name": "Webhooks",
+        "items": [
+            "docs/integrate/webhooks/message-formatting",
+            "docs/integrate/webhooks/microsoft-teams",
+            "docs/integrate/webhooks/slack"
+        ]
+    },
+    {
+        "entry": "User Guides",
+        "name": "User Guides",
+        "items": [
+            "docs/user-guides/overview",
+            "docs/user-guides/application-settings",
+            "docs/user-guides/actions",
+            "docs/user-guides/annotations",
+            "docs/user-guides/cohorts",
+            "docs/user-guides/dashboards",
+            "docs/user-guides/events",
+            "docs/user-guides/feature-flags",
+            "docs/user-guides/funnels",
+            "docs/user-guides/log-in-with-sso",
+            "docs/user-guides/organizations",
+            "docs/user-guides/projects",
+            "docs/user-guides/paths",
+            "docs/user-guides/plugins",
+            "docs/user-guides/retention",
+            "docs/user-guides/sessions",
+            "docs/user-guides/session-recording",
+            "docs/user-guides/toolbar",
+            "docs/user-guides/trends",
+            "docs/user-guides/users"
+        ]
+    },
+    {
+        "entry": "Plugins",
+        "name": "Plugins",
+        "items": ["docs/plugins/overview", "docs/plugins/enabling"],
+        "child_entries": ["Build Your Own"]
+    },
+    {
+        "entry": "Build Your Own",
+        "name": "Build Your Own",
+        "items": [
+            "docs/plugins/build/overview",
+            "docs/plugins/build/tutorial",
+            "docs/plugins/build/types",
+            "docs/plugins/build/reference"
         ]
     },
     {
         "entry": "Tutorials",
         "name": "Tutorials",
         "items": [
+            "docs/tutorials/overview",
             "docs/tutorials/feature-flags",
             "docs/tutorials/toolbar",
             "docs/tutorials/funnels",
@@ -51,80 +150,10 @@
             "docs/tutorials/spa",
             "docs/tutorials/actions",
             "docs/tutorials/b2b",
-            "docs/tutorials/revenue"
-        ],
-        "child_entries": ["1 Minute Tutorials"]
-    },
-    {
-        "entry": "1 Minute Tutorials",
-        "name": "1 Minute Tutorials",
-        "items": [
-            "docs/tutorials/1-minute/integrate-with-shopify",
-            "docs/tutorials/1-minute/integrate-with-metabase",
-            "docs/tutorials/1-minute/survey",
-            "docs/tutorials/1-minute/integrate-with-gtm",
-            "docs/tutorials/1-minute/integrate-with-retool",
-            "docs/tutorials/1-minute/integrate-with-nuxt-js"
-        ]
-    },
-    {
-        "entry": "Deployment",
-        "name": "Deployment",
-        "items": [
-            "docs/deployment",
-            "docs/deployment/deploy-heroku",
-            "docs/deployment/deploy-aws",
-            "docs/deployment/deploy-docker",
-            "docs/deployment/deploy-source",
-            "docs/deployment/deploy-azure",
-            "docs/deployment/deploy-digital-ocean",
-            "docs/deployment/deploy-gcs",
-            "docs/deployment/deploy-kubernetes",
-            "docs/deployment/deploy-linode",
-            "docs/deployment/deploy-render",
-            "docs/deployment/deploy-qovery",
-            "docs/deployment/snippet-installation",
-            "docs/deployment/hosting-costs"
-        ]
-    },
-    {
-        "entry": "Platform Structure",
-        "name": "Platform Structure",
-        "items": ["docs/application-settings", "docs/data-model", "docs/navigation"]
-    },
-    {
-        "entry": "Features",
-        "name": "Features",
-        "items": [
-            "docs/features/actions",
-            "docs/features/annotations",
-            "docs/features/cohorts",
-            "docs/features/dashboards",
-            "docs/features/events",
-            "docs/features/feature-flags",
-            "docs/features/funnels",
-            "docs/features/log-in-with-github-gitlab",
-            "docs/features/organizations",
-            "docs/features/projects",
-            "docs/features/paths",
-            "docs/features/plugins",
-            "docs/features/retention",
-            "docs/features/sessions",
-            "docs/features/session-recording",
-            "docs/features/toolbar",
-            "docs/features/trends",
-            "docs/features/users"
-        ]
-    },
-    {
-        "entry": "Plugins",
-        "name": "Plugins",
-        "items": [
-            "docs/plugins/overview",
-            "docs/plugins/enabling",
-            "docs/plugins/architecture",
-            "docs/plugins/build",
-            "docs/plugins/types"
+            "docs/tutorials/revenue",
+            "docs/tutorials/tracking-teams",
+            "docs/tutorials/survey",
+            "docs/tutorials/deleting-data"
         ]
     },
     {
@@ -136,60 +165,25 @@
             "docs/api/elements",
             "docs/api/events",
             "docs/api/people",
-            "docs/api/trends",
+            "docs/api/insights",
             "docs/api/user",
-            "docs/api/feature-flags"
+            "docs/api/feature-flags",
+            "docs/api/annotations",
+            "docs/api/cohorts",
+            "docs/data-model"
         ]
     },
     {
-        "entry": "Integrations",
-        "name": "Integrations",
+        "entry": "Contribute",
+        "name": "Contribute",
         "items": [
-            "docs/integrations",
-            "docs/integrations/android-integration",
-            "docs/integrations/go-integration",
-            "docs/integrations/ios-integration",
-            "docs/integrations/js-integration",
-            "docs/integrations/node-integration",
-            "docs/integrations/php-integration",
-            "docs/integrations/python-integration",
-            "docs/integrations/flutter-integration",
-            "docs/integrations/react-native-integration",
-            "docs/integrations/ruby-integration",
-            "docs/integrations/rudderstack-integration",
-            "docs/integrations/segment-integration"
-        ],
-        "child_entries": ["Community", "Sending Data Out"]
-    },
-    {
-        "entry": "Community",
-        "name": "Community",
-        "items": [
-            "docs/integrations/community",
-            "docs/integrations/docusaurus-integration",
-            "docs/integrations/gatsby-integration",
-            "docs/integrations/elixir-integration"
+            "docs/contribute/overview",
+            "docs/contribute/recognizing-contributions",
+            "docs/contribute/developing-locally",
+            "docs/contribute/stack",
+            "docs/contribute/project-structure",
+            "docs/contribute/updating-documentation"
         ]
-    },
-    {
-        "entry": "Sending Data Out",
-        "name": "Sending Data Out",
-        "items": [
-            "docs/integrations/slack",
-            "docs/integrations/microsoft-teams",
-            "docs/integrations/message-formatting",
-            "docs/integrations/sentry-integration"
-        ]
-    },
-    {
-        "entry": "Get Started",
-        "name": "Get Started",
-        "items": ["docs/get-started/introduction", "docs/get-started/quick-start"]
-    },
-    {
-        "entry": "Guide",
-        "name": "Guide",
-        "items": ["docs/guide/anchor", "docs/guide/contents", "docs/guide/menu-items", "docs/guide/sidebar"]
     },
     {
         "entry": "Blog",
@@ -200,6 +194,11 @@
         "entry": "Releases",
         "name": "Releases",
         "items": [
+            "blog/the-posthog-array-1-26-0",
+            "blog/the-posthog-array-1-25-0",
+            "blog/the-posthog-array-1-24-0",
+            "blog/the-posthog-array-1-23-0",
+            "blog/the-posthog-array-1-22-0",
             "blog/the-posthog-array-1-21-0",
             "blog/the-posthog-array-1-20-0",
             "blog/the-posthog-array-1-19-0",
@@ -254,81 +253,84 @@
     {
         "entry": "Handbook",
         "name": "Handbook",
-        "child_entries": ["Company", "People", "Engineering", "Growth", "Strategy"]
+        "child_entries": ["Company", "Strategy", "Getting started", "How we work", "People", "Engineering", "Growth"]
     },
     {
         "entry": "Company",
         "name": "Company",
+        "items": ["handbook/company/story", "handbook/company/team", "handbook/strategy/investors"]
+    },
+    {
+        "entry": "Strategy",
+        "name": "Strategy",
         "items": [
-            "handbook/company/story",
+            "handbook/strategy/strategy",
+            "handbook/strategy/business-model",
+            "handbook/strategy/roadmap",
+            "handbook/strategy/prioritization"
+        ]
+    },
+    {
+        "entry": "Getting started",
+        "name": "Getting started",
+        "items": ["handbook/getting-started/start-here", "handbook/getting-started/meetings"]
+    },
+    {
+        "entry": "How we work",
+        "name": "How we work",
+        "items": [
             "handbook/company/culture",
             "handbook/company/values",
             "handbook/company/diversity",
             "handbook/company/communication",
-            "handbook/company/security",
-            "handbook/company/branding",
-            "handbook/company/team",
             "handbook/company/management",
-            "handbook/company/standups"
+            "handbook/company/security",
+            "handbook/company/branding"
+        ],
+        "child_entries": ["Team Structure"]
+    },
+    {
+        "entry": "Team Structure",
+        "name": "Team Structure",
+        "items": [
+            "handbook/people/team-structure/team-structure",
+            "handbook/people/team-structure/why-small-teams",
+            "handbook/people/team-structure/core-analytics",
+            "handbook/people/team-structure/core-experience",
+            "handbook/people/team-structure/design",
+            "handbook/people/team-structure/extensibility",
+            "handbook/people/team-structure/growth-engineering",
+            "handbook/people/team-structure/infrastructure",
+            "handbook/people/team-structure/marketing",
+            "handbook/people/team-structure/people"
         ]
     },
     {
         "entry": "People",
         "name": "People",
         "items": [
-            "handbook/people/hiring-process",
             "handbook/people/compensation",
+            "handbook/people/share-options",
+            "handbook/people/benefits",
             "handbook/people/time-off",
             "handbook/people/spending-money",
             "handbook/people/side-gigs",
             "handbook/people/training",
+            "handbook/people/feedback",
             "handbook/people/onboarding",
             "handbook/people/offboarding"
-        ]
+        ],
+        "child_entries": ["Hiring Process"]
     },
     {
-        "entry": "Careers",
-        "name": "Careers",
-        "items": ["careers"],
-        "child_entries": ["Open Roles"]
-    },
-    {
-        "entry": "Open Roles",
-        "name": "Open Roles",
+        "entry": "Hiring Process",
+        "name": "Hiring Process",
         "items": [
-            "careers/full-stack-software-engineer",
-            "careers/senior-fs-software-engineer",
-            "careers/site-reliability-engineer",
-            "careers/customer-success-lead",
-            "careers/content-marketer",
-            "careers/product-marketer"
-        ]
-    },
-    {
-        "entry": "Growth",
-        "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/community", "handbook/growth/customer-success"],
-        "child_entries": ["Marketing", "Sales"]
-    },
-    {
-        "entry": "Marketing",
-        "name": "Marketing",
-        "items": [
-            "handbook/growth/marketing",
-            "handbook/growth/marketing/content",
-            "handbook/growth/marketing/posthog-array",
-            "handbook/growth/marketing/releasing-content",
-            "handbook/growth/marketing/press"
-        ]
-    },
-    {
-        "entry": "Sales",
-        "name": "Sales",
-        "items": [
-            "handbook/growth/sales/sales-operations",
-            "handbook/growth/sales/yc-onboarding",
-            "handbook/growth/sales/demos",
-            "handbook/growth/sales/billing"
+            "handbook/people/hiring-process/hiring-process",
+            "handbook/people/hiring-process/design-hiring",
+            "handbook/people/hiring-process/engineering-hiring",
+            "handbook/people/hiring-process/exec-hiring",
+            "handbook/people/hiring-process/operations-hiring"
         ]
     },
     {
@@ -338,24 +340,76 @@
             "handbook/engineering/development-process",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
-            "handbook/engineering/releasing-python",
+            "handbook/engineering/bug-prioritization",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",
             "handbook/engineering/common-issues",
-            "handbook/engineering/mdx"
+            "handbook/engineering/feature-parity",
+            "handbook/engineering/mdx",
+            "handbook/engineering/aws",
+            "handbook/engineering/gcp"
         ]
     },
     {
-        "entry": "Strategy",
-        "name": "Strategy",
+        "entry": "Growth",
+        "name": "Growth",
+        "items": ["handbook/growth/strategy", "handbook/growth/customer-support"],
+        "child_entries": ["Marketing", "Sales"]
+    },
+    {
+        "entry": "Marketing",
+        "name": "Marketing",
         "items": [
-            "handbook/strategy/strategy",
-            "handbook/strategy/business-model",
-            "handbook/strategy/roadmap",
-            "handbook/strategy/prioritization",
-            "handbook/strategy/investors",
-            "handbook/strategy/investor-updates"
+            "handbook/growth/marketing",
+            "handbook/growth/marketing/blog",
+            "handbook/growth/marketing/community",
+            "handbook/growth/marketing/newsletter",
+            "handbook/growth/marketing/paid",
+            "handbook/growth/marketing/press",
+            "handbook/growth/marketing/releasing-content",
+            "handbook/growth/marketing/developer-relations"
+        ]
+    },
+    {
+        "entry": "Sales",
+        "name": "Sales",
+        "items": [
+            "handbook/growth/sales/overview",
+            "handbook/growth/sales/sales-operations",
+            "handbook/growth/sales/crm",
+            "handbook/growth/sales/yc-onboarding",
+            "handbook/growth/sales/demos",
+            "handbook/growth/sales/billing"
+        ]
+    },
+    {
+        "entry": "Engineering",
+        "name": "Engineering",
+        "child_entries": ["Beginners Guide"],
+        "items": [
+            "handbook/engineering/development-process",
+            "handbook/engineering/debugging",
+            "handbook/engineering/how-we-review",
+            "handbook/engineering/release-new-version",
+            "handbook/engineering/onboarding-customer",
+            "handbook/engineering/setup-ssl-locally",
+            "handbook/engineering/ee-setup",
+            "handbook/engineering/tech-talks",
+            "handbook/engineering/common-issues",
+            "handbook/engineering/mdx",
+            "handbook/engineering/feature-flags-spec"
+        ]
+    },
+    {
+        "entry": "Beginners Guide",
+        "name": "Beginners Guide",
+        "items": [
+            "handbook/engineering/beginners-guide/introduction",
+            "handbook/engineering/beginners-guide/getting-to-know-posthog",
+            "handbook/engineering/beginners-guide/getting-started",
+            "handbook/engineering/beginners-guide/developer-workflow",
+            "handbook/engineering/beginners-guide/technologies-to-learn"
         ]
     }
 ]

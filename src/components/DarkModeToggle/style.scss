@@ -1,7 +1,14 @@
 .toggle-wrapper {
     display: inline-block;
     text-align: center;
-    margin-top: 10px;
+}
+
+.dark {
+    .toggle-switch {
+        &-inner:before {
+            background: #4b325a;
+        }
+    }
 }
 
 .toggle-switch {
@@ -47,7 +54,7 @@
             content: '🌙';
             text-transform: uppercase;
             padding-left: 10px;
-            background-color: #28292b;
+            background-color: #4b325a;
             color: #fff;
         }
         .toggle-switch {
@@ -92,7 +99,7 @@
                     content: '🌙';
                     text-transform: uppercase;
                     padding-left: 10px;
-                    background-color: #28292b;
+                    background-color: #200133;
                     color: #fff;
                 }
             }
@@ -108,7 +115,7 @@
                 content: '☀️';
                 text-transform: uppercase;
                 padding-right: 10px;
-                background-color: #353f6f;
+                background-color: #222d5b;
                 color: #fff;
                 text-align: right;
             }
@@ -147,7 +154,7 @@
         content: '☀️';
         text-transform: uppercase;
         padding-right: 10px;
-        background-color: #353f6f;
+        background-color: #222d5b;
         color: #fff;
         text-align: right;
     }
