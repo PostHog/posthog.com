@@ -22,7 +22,7 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
 
 ### Running Python + Webpack locally
 - Run all the services
-  - Stop local kafka, clickhouse and zookeeper instances if you have them
+  - Stop local postgres, kafka, clickhouse and zookeeper instances if you have them
   - Same for redis, though it doesn't really matter much
   - `docker-compose -f ee/docker-compose.ch.yml up db redis zookeeper kafka clickhouse`
 - Run the frontend
@@ -31,7 +31,7 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
 - Run the backend
   - `export DEBUG=1`
   - `export PRIMARY_DB=clickhouse`
-  - `export DATABASE_URL=postgres://posthog:posthog@localhost:5439/posthog` (note the `9` in `5439`)
+  - `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`
   - `export KAFKA_ENABLED=true`
   - `export KAFKA_HOSTS=localhost:9092`
   - Run migrations: `python manage.py migrate && python manage.py migrate_clickhouse`
@@ -39,7 +39,7 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
   - Run the worker: `./bin/start-worker`
 - Setting up PyCharm debugging
   - Copy the env when needed:
-      - `;DEBUG=1;PRIMARY_DB=clickhouse;DATABASE_URL=postgres://posthog:posthog@localhost:5439/posthog`
+      - `;DEBUG=1;PRIMARY_DB=clickhouse;DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`
   - Backend config:
       - Set up a `Django Server`
       - For django support, set the project folder to the project root
