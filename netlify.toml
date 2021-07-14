@@ -566,6 +566,7 @@
     to = "/docs/tutorials/survey"
     
 # Added: 2021-07-14
+# To improve the website's intuitive navigation experience
 [[redirects]]
     from = "/features"
     to = "/product"
