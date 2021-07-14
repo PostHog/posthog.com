@@ -564,3 +564,8 @@
 [[redirects]]
     from = "/docs/tutorials/1-minute/survey"
     to = "/docs/tutorials/survey"
+    
+# Added: 2021-07-14
+[[redirects]]
+    from = "/features"
+    to = "/product"
