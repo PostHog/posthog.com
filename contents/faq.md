@@ -30,17 +30,17 @@ We track user behavior across your website and applications.
 * Event capture for both frontend and backend events.
 * Event tracking at an identifiable user level (if you choose to identify your users).
 * A full product analytics UX, including:
-	* [Trends](/docs/features/trends)
-	* [Funnels](/docs/features/funnels)
-	* [Cohorts](/docs/features/cohorts)
-	* [Retention](/docs/features/retention)
-	* [Paths]((/docs/features/paths))
-	* [User histories](/docs/features/users)
+	* [Trends](/docs/user-guides/trends)
+	* [Funnels](/docs/user-guides/funnels)
+	* [Cohorts](/docs/user-guides/cohorts)
+	* [Retention](/docs/user-guides/retention)
+	* [Paths]((/docs/user-guides/paths))
+	* [User histories](/docs/user-guides/users)
 * Data visualization and product experimentation tools, such as:
-	* [Heatmaps](/docs/features/toolbar)
-	* [Feature Flags](/docs/features/feature-flags)
-	* [Session Recording](/docs/features/session-recording)
-	* [Plugins](/docs/features/plugins)
+	* [Heatmaps](/docs/user-guides/toolbar)
+	* [Feature Flags](/docs/user-guides/feature-flags)
+	* [Session Recording](/docs/user-guides/session-recording)
+	* [Plugins](/docs/user-guides/plugins)
 
 You can read more about our available features on the dedicated [Product page](/product).
 
@@ -53,7 +53,7 @@ Yes. We support any kind of application.
 Yes. PostHog can be used via:
 
 - An HTML snippet that goes inside your ```<head></head>``` tags.
-- One of our [15+ libraries](/docs/libraries) covering the main programming languages and tools
+- One of our [15+ libraries](/docs/tutorials/overview) covering the main programming languages and tools
 - Our [API](/docs/api/overview)
 
 This means that it doesn't matter what your stack is - you can use PostHog with it.
@@ -72,7 +72,7 @@ Very. We have thousands of users, over [3k stars](https://github.com/PostHog/pos
 
 ### Is the software updated regularly?
 
-Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/configuring-posthog/upgrading-posthog), and the software will alert you to new updates within the application.
+Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/self-host/configure/upgrading-posthog), and the software will alert you to new updates within the application.
 
 Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) or join our [Slack](/slack) to keep up with our latest features.
 
@@ -118,7 +118,7 @@ Want to set it up differently? [Raise an issue](https://github.com/PostHog/posth
 
 ### Will this scale?
 
-Yes. Check out [Scaling PostHog](/docs/configuring-posthog/scaling-posthog) for more information on this.
+Yes. Check out [Scaling PostHog](/docs/self-host/configure/scaling-posthog) for more information on this.
 
 ### Is there an enterprise offering?
 

@@ -16,7 +16,7 @@ Feature flags have also come out! If you're a developer and thinking of tweaking
 
 On top of that (yep, there is more), we have a better retention view, deployment on platform.sh, new ways to edit our code with Porter, and a whole load of performance improvements as always.
 
-If you're self hosting and desire these features - [update your PostHog](/docs/configuring-posthog/upgrading-posthog).
+If you're self hosting and desire these features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
 
 Please also update your `posthog-js` version to at least `1.2.4` if you have it installed via NPM. If you're using the snippet, you're good to go!  
 
@@ -68,11 +68,11 @@ Why use it? For now, this lets you carefully release big changes to gather early
 
 In the long run, we intend on improving the connection between feature flags and the rest of the stats. If you see a cool use case, let us know about.
 
-Learn more about [how to use feature flags](/docs/features/feature-flags), and please give us any [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) for these that you would like to see in a future edition.
+Learn more about [how to use feature flags](/docs/user-guides/feature-flags), and please give us any [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) for these that you would like to see in a future edition.
 
 ### Flutter Integration
 
-You asked for it and now [it's here](https://posthog.com/docs/libraries/flutter)!
+You asked for it and now [it's here](https://posthog.com/docs/integrate/client/flutter)!
 
 ### Retention page
 

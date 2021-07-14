@@ -56,7 +56,13 @@ export const Tutorials = () => {
                     </Link>
                 </div>
 
-                <CallToAction type="button" className="mt-8 mx-auto" to="/docs/tutorials" icon="book" width="84">
+                <CallToAction
+                    type="button"
+                    className="mt-8 mx-auto"
+                    to="/docs/tutorials/overview"
+                    icon="book"
+                    width="84"
+                >
                     &nbsp;&nbsp;See all tutorials
                     <span className="text-xs text-white max-w-sm text-opacity-50 ml-1">13</span>
                 </CallToAction>

@@ -24,7 +24,7 @@ This release cycle's Community MVP goes to...
 
 [imhmdb](https://github.com/imhmdb)!
 
-Mohamad submitted a [500+ line PR](https://github.com/PostHog/posthog-php/pull/12) implementing feature flags in our [PHP library](/docs/libraries/php). The PR is still under review but we anticipate it'll be merged soon.
+Mohamad submitted a [500+ line PR](https://github.com/PostHog/posthog-php/pull/12) implementing feature flags in our [PHP library](docs/integrate/server/php). The PR is still under review but we anticipate it'll be merged soon.
 
 Awesome work and thanks again Mohamad!
 
@@ -44,7 +44,7 @@ Awesome work and thanks again Mohamad!
 
 ## PostHog 1.26.0 Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 
 ### Feature flags for Node.js and Go

@@ -57,6 +57,7 @@ import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
@@ -148,6 +149,7 @@ export const shortcodes = {
     LibraryStats,
     MdxAnchorHeaders,
     NewsletterForm,
+    NotFoundPage,
     OtherFeaturesBlock,
     PageHeader,
     PlanComparisonTable,
