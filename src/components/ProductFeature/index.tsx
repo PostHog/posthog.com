@@ -1,6 +1,7 @@
 import React from 'react'
 import spritedIcons from './images/icons/sprited-icons.svg'
 import ProductImage from './ProductImage'
+import { Link } from 'gatsby'
 
 interface ProductFeatureProps {
     layout?: string
@@ -88,12 +89,12 @@ export const ProductFeature = ({
 
                 {/* only render if {docsUrl} exists */}
                 {docsUrl && (
-                    <a
-                        href={docsUrl}
+                    <Link
+                        to={docsUrl}
                         className="px-2 py-1 text-white hover:text-white text-opacity-75 hover:text-opacity-100 text-xs rounded-full whitespace-nowrap border-white border-2 border-solid border-opacity-10 hover:bg-orange hover:border-orange"
                     >
                         Docs &rarr;
-                    </a>
+                    </Link>
                 )}
             </div>
         </div>

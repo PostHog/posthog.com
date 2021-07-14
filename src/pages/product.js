@@ -278,7 +278,7 @@ function ProductPage() {
                             docsUrl="/docs/user-guides/funnels"
                             //bgImage={`${imageFunnels}`}
                             bgImagePosition="bottom center / 100%"
-                            classes=""
+                            classes="relative"
                         />
                     </div>
 
@@ -395,7 +395,7 @@ function ProductPage() {
                             description="Toggle features for cohorts or individuals to test the impact."
                             docsUrl="/docs/user-guides/feature-flags#"
                             figureClasses=""
-                            classes="-mb-4"
+                            classes="-mb-4 relative"
                         />
                     </div>
 
