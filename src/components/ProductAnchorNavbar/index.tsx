@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
-import scrollTo from 'gatsby-plugin-smoothscroll'
 import downIcon from '../../images/icons/down-caret.svg'
+import { scrollWithOffset } from 'lib/utils'
 
 const ButtonLink = ({
     section,
@@ -22,7 +22,7 @@ const ButtonLink = ({
 
     const clickHandler = (e: { preventDefault: () => void }) => {
         e.preventDefault()
-        scrollTo(sectionSelector)
+        scrollWithOffset(sectionSelector, -90)
     }
 
     return (
@@ -116,7 +116,7 @@ export const ProductAnchorNavbar = () => {
                         textAlignLast: 'center',
                     }}
                     value={currentSection}
-                    onChange={(e) => scrollTo(`#${e.target.value}`)}
+                    onChange={(e) => scrollWithOffset(`#${e.target.value}`, -90)}
                 >
                     {selectOptions}
                 </select>
