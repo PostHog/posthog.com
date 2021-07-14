@@ -67,7 +67,9 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
 
 This is useful if you have a Apple Silicon Mac.
 
-1. Get SSH access to any cloud server, e.g. a droplet from Digital Ocean.
+The following commands set up ClickHouse, Kafka and Zookeeper to run on a cloud server, and forward their ports to `localhost`. For your app it will look like all these services are running locally.
+
+1. Get SSH access to any recent Ubuntu cloud server, e.g. a droplet from Digital Ocean.
 2. `ssh -L 8123:localhost:8123 -L 9000:localhost:9000 -L 9440:localhost:9440 -L 9009:localhost:9009 -L 9092:localhost:9092 root@DROPLET.IP.ADDRESS`
 3. `apt update && apt -y upgrade`
 4. `apt install -y docker.io docker-compose git`
@@ -80,6 +82,10 @@ This is useful if you have a Apple Silicon Mac.
 8. Run migrations: `DEBUG=1 python manage.py migrate_clickhouse`
 
 While the SSH connection is active, ports from Kafka and ClickHouse are forwarded to your computer and behave just as the services are running locally.
+
+In case you also want to run Postgres and Redis on the cloud, append `-L 5432:localhost:5432 -L 6379:localhost:6379` to the SSH command and the `db redis` services to the `docker-compose` commands.
+
+Please note that stale persons in Postgres may affect ingestion to ClickHouse. E.g. persons already seen in postgres won't be added to ClickHouse, resulting in broken analytics. If this happens, either run all services in the cloud or dump your `posthog_person*` tables.  
 
 ### Post Development Cleanup
 
