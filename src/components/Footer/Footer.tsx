@@ -114,6 +114,7 @@ export function Footer({
                         </FooterListItem>
 
                         <FooterSubCategory>Get involved</FooterSubCategory>
+                        <FooterListItem href="/docs/contribute/code-of-conduct">Code of conduct</FooterListItem>
                         <FooterListItem href="/handbook/strategy/roadmap">Roadmap</FooterListItem>
                         <FooterListItem to="/contributors">Contributors</FooterListItem>
                         <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
