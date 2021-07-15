@@ -7,6 +7,10 @@ showTitle: true
 
 We love contributions to PostHog, big or small.
 
+## Code of Conduct
+
+We have an awesome, diverse, and inclusive community. In order to maintain and grow this, all community members must adhere to our [Code of Conduct](/docs/contribute/code-of-conduct).
+
 ## Reporting Bugs or Issues
 
 Bug reports help us make PostHog better for everyone. When you create a bug, the description will automatically be filled with a template that makes is very clear what we'd like you to add.

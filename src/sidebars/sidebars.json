@@ -178,6 +178,7 @@
         "name": "Contribute",
         "items": [
             "docs/contribute/overview",
+            "docs/contribute/code-of-conduct",
             "docs/contribute/recognizing-contributions",
             "docs/contribute/developing-locally",
             "docs/contribute/stack",
