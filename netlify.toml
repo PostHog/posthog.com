@@ -192,7 +192,7 @@
 
 [[redirects]]
     from = "/docs/self-host/configure"
-    to = "/docs/self-host/configure/environment-variables"
+    to = "/docs/self-host/overview#configure"
 
 [[redirects]]
     from = "/docs/configuring-posthog"
