@@ -75,11 +75,14 @@ The following commands set up ClickHouse, Kafka and Zookeeper to run on a cloud 
 4. `apt install -y docker.io docker-compose git`
 5. `git clone https://github.com/PostHog/posthog`
 6. `cd posthog`
-7. Run the commands:
+7. Run the commands on the server:
   - start: `docker-compose -f ee/docker-compose.ch.yml up zookeeper kafka clickhouse`
   - stop: `docker-compose -f ee/docker-compose.ch.yml down`
   - cleanup: `docker-compose -f ee/docker-compose.ch.yml rm -v zookeeper kafka clickhouse`
-8. Run migrations: `DEBUG=1 python manage.py migrate_clickhouse`
+
+8. Add `127.0.0.1 kafka clickhouse redis db` to your local `/etc/hosts` file.
+9. Make sure you have set these envs locally: `export KAFKA_ENABLED=1` and `export KAFKA_HOSTS=localhost:9092`
+10. To migrate ClickHouse locally: `DEBUG=1 python manage.py migrate_clickhouse`
 
 While the SSH connection is active, ports from Kafka and ClickHouse are forwarded to your computer and behave just as the services are running locally.
 
