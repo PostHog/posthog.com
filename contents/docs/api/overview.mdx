@@ -54,6 +54,16 @@ There are three options:
 
 Any one of these methods works, but only the value encountered first (in the order above) will be used for authenticaition!
 
+##### Specifying a project when using the API
+
+By default, if you're accessing the API, PostHog will return results from the last project you visited in the UI. To override this behavior, you can pass in your Project API Key (public token) as a query parameter in the request. This ensures you will get data from the project associated with that token.
+
+**Example**
+
+```
+api/event/?token=my_project_api_key
+```
+
 #### cURL example
 ```bash
 POSTHOG_PERSONAL_API_KEY=qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0

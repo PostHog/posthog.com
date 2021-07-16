@@ -110,10 +110,13 @@ The `cache` type is defined as follows:
 
 ```js
 interface CacheExtension {
-    set: (key: string, value: unknown, ttlSeconds?: number) => Promise<void>
-    get: (key: string, defaultValue: unknown) => Promise<unknown>
+    set: (key: string, value: unknown, ttlSeconds?: number, options?: CacheOptions) => Promise<void>
+    get: (key: string, defaultValue: unknown, options?: CacheOptions) => Promise<unknown>
     incr: (key: string) => Promise<number>
     expire: (key: string, ttlSeconds: number) => Promise<boolean>
+    lpush: (key: string, elementOrArray: unknown[]) => Promise<number>
+    lrange: (key: string, startIndex: number, endIndex: number) => Promise<string[]>
+    llen: (key: string) => Promise<number>
 }
 ```
 
@@ -122,6 +125,12 @@ Storing values is done via `cache.set`, which takes a key and a value, as well a
 Retrieving values uses `cache.get`, which takes the key of the value to be retrieved, as well as a default value in case the key does not exist.
 
 You can also use `cache.incr` to increment numerical values by 1, and `cache.expire` to make [keys volatile](https://redis.io/commands/expire), meaning they will expire after the specified number of seconds.
+
+The `lpush`, `lrange`, and `llen` methods are a representation of their equivalent Redis commands. Docs:
+
+- [LPUSH](https://redis.io/commands/lpush)
+- [LRANGE](https://redis.io/commands/lrange)
+- [LLEN](https://redis.io/commands/llen)
 
 
 ### global
