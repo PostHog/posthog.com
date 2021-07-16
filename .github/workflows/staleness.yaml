@@ -1,4 +1,4 @@
-name: 'Notify if PRs are stale'
+name: 'Handle stale issues and PRs'
 on:
   schedule:
     - cron: '30 1 * * *'
