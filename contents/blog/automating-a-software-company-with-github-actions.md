@@ -44,7 +44,7 @@ of GitHub since before the dotcom bubble – hence the focus of this article.
 ### Unit testing
 
 Unit tests are crucial for ensuring reliability of software. Don't skip writing them if you're building anything
-for real! But after that make sure that you don't skip also _running_ them, and you can do that by just running
+for real! But after that make sure that you don't skip also _running_ them. The latter you can do that by just running
 them _on each PR_ as it's being worked on. This used to be called ["extreme programming"](https://en.wikipedia.org/wiki/Extreme_programming), but today it's a standard practice.
 
 Here's a relevant basic workflow for Django: it checks whether a migration is missing, then runs test.
@@ -139,8 +139,7 @@ on:
 
 jobs:
     code-quality:
-        runs-on: ubuntu-20.04
-
+        runs-on: ubuntu-latest
         steps:
             - name: Check out the repository 
               uses: actions/checkout@v2
@@ -174,8 +173,7 @@ on:
 
 jobs:
     build-and-deploy-production:
-        if: github.repository == 'PostHog/posthog'
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
         steps:
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v1
@@ -245,12 +243,12 @@ jobs:
 
 ### Verifying build
 
-Docker is now a standard way of building images of software to be deployed. We use it too quite happilly…
-but a few times we broke the build. Make a mistake somewhere, and the image may just not build at all. So we're taken
+Docker is now a standard way of building images of software to be deployed. We use it too, quite happily…
+but a few times we broke the build. Make a mistake somewhere, and the image may just not build at all. So we've taken
 to testing image building _ahead_ of time – that is before `master` is broken – on every PR push.
 
-We also lint the Dockerfiles here, using [`hadolint`](https://github.com/hadolint/hadolint), which has been giving us
-some really useful tips for maximum reliability of our build process.
+We also _lint_ the Dockerfiles using [`hadolint`](https://github.com/hadolint/hadolint), which has been giving us
+some really useful tips for maximum reliability of our Docker-based build process.
 
 ```YAML
 name: Docker
@@ -259,10 +257,8 @@ on:
     - pull_request
 
 jobs:
-    build:
-        name: Test Docker image build
-        runs-on: ubuntu-20.04
-
+    test-image-build:
+        runs-on: ubuntu-latest
         steps:
             - name: Check out the repository
               uses: actions/checkout@v2
@@ -289,7 +285,6 @@ jobs:
               uses: docker/build-push-action@v2
               with:
                   push: false
-                  tags: posthog/posthog:latest
 
             - name: Echo image digest
               run: echo ${{ steps.docker_build.outputs.digest }}
@@ -308,7 +303,6 @@ on:
 
 jobs:
     label-version-bump:
-        name: Bump version based on PR label
         runs-on: ubuntu-latest
         if: |
             github.event.pull_request.merged
@@ -318,11 +312,10 @@ jobs:
                 || contains(github.event.pull_request.labels.*.name, 'bump major')
             )
         steps:
-            - name: Check out repository
+            - name: Check out the repository
               uses: actions/checkout@v2
               with:
                   ref: ${{ github.event.pull_request.base.ref }}
-                  token: ${{ secrets.POSTHOG_BOT_GITHUB_TOKEN }}
 
             - name: Detect version bump type
               id: bump-type
@@ -373,7 +366,7 @@ In fact, this very post is a Markdown file in the repository's `/contents/blog/`
 is under `/contents/`.  
 All that text is being written by humans… And that poses a problem, because humans make mistkes. Sometimes they just mix letters up, which doesn't look great.
 
-That's why we on every pull request commit we with try to fix any typos noticed. For that we use
+That's why we on every pull request commit we try to fix any typos noticed. For that we use the lovely
 [`codespell`](https://github.com/codespell-project/codespell), in an action looking like this:
 
 ```YAML
@@ -474,7 +467,7 @@ jobs:
                   source_branch: 'master'
                   destination_repo: 'https://posthog-bot:${{ secrets.POSTHOG_BOT_GITHUB_TOKEN }}@github.com/posthog/posthog-foss.git'
                   destination_branch: 'master'
-            - name: Checkout posthog-foss
+            - name: Check out posthog-foss
               if: github.repository == 'PostHog/posthog'
               uses: actions/checkout@v2
               with:
@@ -509,7 +502,7 @@ on:
 jobs:
     update:
         name: Perform regular update
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
 
         steps:
             - name: Check out the repo
