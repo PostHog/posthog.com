@@ -32,4 +32,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/joemartinwords
     }
+  - {
+      handle: michael-matloka,
+      name: Michael Matloka,
+      role: Software Engineer,
+      image: https://gravatar.com/avatar/b67a96b30e928a91163ddfbd70110818?s=90,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/matlokam
+    }
 ---
