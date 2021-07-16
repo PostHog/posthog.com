@@ -3,6 +3,7 @@ import TableOfContents from '../TableOfContents'
 
 class ResponsiveAnchor extends Component {
     render() {
+        const { tableOfContents } = this.props
         return (
             <div
                 style={{
@@ -24,7 +25,7 @@ class ResponsiveAnchor extends Component {
                         bottom: 0,
                     }}
                 >
-                    <TableOfContents offsetTop={80} affix={true} />
+                    <TableOfContents offsetTop={80} affix={true} tableOfContents={tableOfContents} />
                 </div>
             </div>
         )

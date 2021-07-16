@@ -60,5 +60,10 @@ export interface AuthorsData {
     name: string
     role: string
 }
+export interface TableContent {
+    url: string
+    title: string
+    items?: TableContent[]
+}
 
 export type Heading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
