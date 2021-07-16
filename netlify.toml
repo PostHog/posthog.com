@@ -574,7 +574,22 @@
     to = "/docs/tutorials/survey"
 
 # Added: 2021-07-14
-# To improve the website's intuitive navigation experience
+# Not due to a rename, but to improve the website's navigation experience
 [[redirects]]
     from = "/features"
     to = "/product"
+
+# Added: 2021-07-16
+[[redirects]]
+    from = "/docs/integrate"
+    to = "/docs/integrate/overview"
+
+# Added: 2021-07-16
+[[redirects]]
+    from = "/docs/integrations"
+    to = "/docs/integrate/overview"
+
+# Added: 2021-07-16
+[[redirects]]
+    from = "/docs/libraries"
+    to = "/docs/integrate/overview"
