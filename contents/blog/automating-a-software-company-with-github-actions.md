@@ -160,7 +160,7 @@ jobs:
               run: yarn eslint .
 ```
 
-### Deploying continously
+### Deploying continuously
 
 We utilize [continuous deployment](https://www.atlassian.com/continuous-delivery/continuous-deployment)
 for PostHog Cloud and we've been very happy with the results – our Amazon ECS-based stack is deployed automatically
@@ -371,7 +371,7 @@ jobs:
 Our website is in a GitHub repository: [PostHog/posthog.com](https://github.com/PostHog/posthog.com).
 In fact, this very post is a Markdown file in the repository's `/contents/blog/` directory. Copy in general
 is under `/contents/`.  
-All that text is being written by humans… And that poses a problem, becasue humans make mistkes. Sometimes they just mix letters up, which doesn't look great.
+All that text is being written by humans… And that poses a problem, because humans make mistkes. Sometimes they just mix letters up, which doesn't look great.
 
 That's why we on every pull request commit we with try to fix any typos noticed. For that we use
 [`codespell`](https://github.com/codespell-project/codespell), in an action looking like this:
@@ -384,7 +384,7 @@ jobs:
     spellcheck:
         runs-on: ubuntu-latest
         steps:
-            - name: Check out the repostiory
+            - name: Check out the repository
             - uses: actions/checkout@v2
 
             - name: Set up Python
