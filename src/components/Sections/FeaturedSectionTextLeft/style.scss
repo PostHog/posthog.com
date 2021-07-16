@@ -38,7 +38,9 @@
             left: calc(5 / 24 * 1440px);
         }
         .fs-left-paragraph {
-            width: calc(1 / 5 * 1440px) !important;
+            // removed !important to display text correctly on 4k screens
+            // Issue bug #1404
+            width: calc(1 / 5 * 1440px);
         }
     }
 
