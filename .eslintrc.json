@@ -22,7 +22,6 @@
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
         "no-const-assign": "off",
-        "no-undef": "off",
-        "@typescript-eslint/no-explicit-any": "error"
+        "no-undef": "off"
     }
 }
