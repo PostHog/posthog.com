@@ -593,3 +593,9 @@
 [[redirects]]
     from = "/docs/libraries"
     to = "/docs/integrate/overview"
+    
+# Added: 2021-07-17
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/signup"
+    to = "/pricing"
