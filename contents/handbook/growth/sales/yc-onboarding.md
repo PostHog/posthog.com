@@ -57,7 +57,7 @@ Read more about running demos on our [dedicated page](/handbook/growth/yc-onboar
 
 A super cool way of doing demos for websites and web apps is using the PostHog bookmarklet. This way you can set up funnels, charts, and other views for the user (or, ideally, have them set it up themselves) by leveraging their *own data*. If done on their own instance, some of these views might even be ready for them to start analyzing user data once "real events" start coming in.
 
-To learn more about the bookmarklet, check out our [Snippet Installation](/docs/deployment/snippet-installation#get-started-with-no-code) page.
+To learn more about the bookmarklet, check out our [Snippet Installation](/docs/integrate/client/snippet-installation#get-started-with-no-code) page.
 
 #### Let the user drive
 
@@ -74,9 +74,9 @@ You should:
     - You should add Yakko, James, Tim, Paolo, and a random engineer to each group.
 - Send them a link to [the merch form](https://forms.gle/K61bhD6uLxaaTqoK6).
     - Let them know that if they refer another company, they will get another set of merch. All the other company needs to do is say that "Company X" referred them. We'll double merch for both of them. 
-- If they will use PostHog Cloud, [update their plan to the Startup plan](http://localhost:8000/handbook/growth/sales/billing) using the Django Admin panel.
+- If they will use PostHog Cloud, [update their plan to the Startup plan](/handbook/growth/sales/billing) using the Django Admin panel.
     - Also set `should_setup_billing` to `True` - this will prompt them to add card details (but ensure them they won't get charged!)
-- If they will self-host PostHog, set them up with a [one-year EE license](http://localhost:8000/handbook/growth/sales/billing) (Paolo can help with this).
+- If they will self-host PostHog, set them up with a [one-year EE license](/handbook/growth/sales/billing) (Paolo can help with this).
 - Ask them to confirm they've tagged themselves as using us, and send a direct link [to the deal](https://bookface.ycombinator.com/deals/687), so this is easy.
 - If they refer another company, use Shopify to send them a $50 voucher at [our store](https://merch.posthog.com).
 - After they've gotten set up, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations)

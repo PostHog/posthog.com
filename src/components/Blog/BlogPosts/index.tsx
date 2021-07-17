@@ -28,7 +28,7 @@ const query = graphql`
                         slug
                     }
                     id
-                    excerpt(pruneLength: 250)
+                    excerpt(pruneLength: 750)
                     frontmatter {
                         date(formatString: "MMMM DD, YYYY")
                         title

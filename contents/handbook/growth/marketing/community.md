@@ -59,7 +59,7 @@ Discuss sharing specific content with relevant communities:
   - [/r/analytics](https://www.reddit.com/r/analytics/)
   - [/r/businessintelligence](https://www.reddit.com/r/businessintelligence/)
   - [/r/opensource](https://www.reddit.com/r/opensource/)
-  - [/r/programing](https://www.reddit.com/r/programing/)
+  - [/r/programming](https://www.reddit.com/r/programming/)
   - [/r/python](https://www.reddit.com/r/python/)
   - [/r/django](https://www.reddit.com/r/django/)
   - [/r/startups](https://www.reddit.com/r/startups/)

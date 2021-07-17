@@ -135,7 +135,7 @@ The idea is: you've done some work, either individually or as a team, and it fee
 
 This can mean a blog post, a tweet, or a new software version. If a failure wouldn't have massive consequences, just put out your work. Once it's live, you can review it, gather feedback, and improve upon it. We do this **a lot**. 
 
-At PostHog, on a small scale, this means not waiting for our designer to make an amazing blog illustration to put our a new post, or waiting for QA to change a typo on the website. On a larger scale, it can also mean not waiting for a feature to be perfect to launch it to our users. The [PostHog Toolbar](/docs/features/toolbar) is a perfect example of this.
+At PostHog, on a small scale, this means not waiting for our designer to make an amazing blog illustration to put our a new post, or waiting for QA to change a typo on the website. On a larger scale, it can also mean not waiting for a feature to be perfect to launch it to our users. The [PostHog Toolbar](/docs/user-guides/toolbar) is a perfect example of this.
 
 The key to this is a culture of iteration, as well as giving the team a sense of autonomy and responsibility. You should always aim to unblock yourself if you feel it's right and can do it without serious negative consequences.
 

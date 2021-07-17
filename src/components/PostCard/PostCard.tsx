@@ -38,7 +38,7 @@ const ReadPost = ({ to }: { to: string }) => {
 
 const ReadPostHome = ({ to }: { to: string }) => {
     return (
-        <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="mt-4">
+        <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="">
             Read Post
         </CallToAction>
     )
@@ -49,7 +49,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
         <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
             <div className="w-full md:w-1/2 md:pr-8 py-4 mx-auto">
                 <span className="text-gray-400 text-xs uppercase">Latest Post</span>
-                <h2 className="text-4xl text-gray-900 dark:text-gray-100 font-gosha my-1">
+                <h2 className="text-4xl text-gray-900 dark:text-gray-100 font-sans normal-case my-1">
                     <Link
                         to={post.fields.slug}
                         className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
@@ -58,9 +58,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
                     </Link>
                 </h2>
                 <AuthorIndexView authorDetails={authorDetails} />
-                <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed font-inter">
-                    {post.excerpt}
-                </div>
+                <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed">{post.excerpt}</div>
                 <ReadPost to={post.fields.slug} />
             </div>
             {post.frontmatter.featuredImage?.publicURL && (
@@ -91,14 +89,41 @@ const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; author
                 </div>
             )}
             <div className="w-full py-4">
-                <h2 className="text-2xl text-white font-gosha my-1">
+                <h2 className="text-2xl text-white font-sans normal-case my-1">
                     <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
                         {post.frontmatter.title}
                     </Link>
                 </h2>
                 <AuthorIndexView authorDetails={authorDetails} />
-                <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed font-inter">{post.excerpt}</div>
+                <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed post-preview-fade">
+                    {post.excerpt}
+                </div>
                 <ReadPostHome to={post.fields.slug} />
+            </div>
+        </div>
+    )
+}
+
+const LandingPageSnippet = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
+    return (
+        <div className="w-full flex flex-col justify-between items-center">
+            {post.frontmatter.featuredImage?.publicURL && (
+                <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
+                    <Link to={post.fields.slug} className="featured-post-img">
+                        <img
+                            className="w-full h-auto block rounded shadow-lg mb-0"
+                            src={post.frontmatter.featuredImage.publicURL}
+                        />
+                    </Link>
+                </div>
+            )}
+            <div className="w-full py-2">
+                <h2 className="text-lg text-white font-sans normal-case my-1 leading-tight">
+                    <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
+                        {post.frontmatter.title}
+                    </Link>
+                </h2>
+                <AuthorIndexView authorDetails={authorDetails} />
             </div>
         </div>
     )
@@ -108,11 +133,13 @@ const PostCard = ({
     post,
     featured = false,
     landingPage = false,
+    snippet = false,
     authorDetails,
 }: {
     post: PostType
     featured?: boolean
     landingPage?: boolean
+    snippet?: boolean
     authorDetails?: AuthorsData
 }) => {
     return (
@@ -121,18 +148,20 @@ const PostCard = ({
                 <FeaturedPost post={post} authorDetails={authorDetails} />
             ) : landingPage ? (
                 <LandingPageLatestPost post={post} authorDetails={authorDetails} />
+            ) : snippet ? (
+                <LandingPageSnippet post={post} authorDetails={authorDetails} />
             ) : (
                 <div className="flex flex-col mb-12">
                     <h3 className="mb-0">
                         <Link
                             to={post.fields.slug}
-                            className="font-bold font-gosha text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                            className="font-bold font-sans normal-case text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
                         >
                             {post.frontmatter.title}
                         </Link>
                     </h3>
                     <AuthorIndexView authorDetails={authorDetails} />
-                    <div className="mt-4 leading-relaxed text-sm font-inter">{post.excerpt}</div>
+                    <div className="mt-4 leading-relaxed text-sm">{post.excerpt}</div>
                     <ReadPost to={post.fields.slug} />
                 </div>
             )}

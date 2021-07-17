@@ -31,6 +31,11 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
+import { Doodle } from './components/Doodle'
+import { DoodleCircle } from './components/DoodleCircle'
+import { DoodleRectangle } from './components/DoodleRectangle'
+import { DoodleTriangle } from './components/DoodleTriangle'
+import { DoodleZigzag } from './components/DoodleZigzag'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -38,6 +43,7 @@ import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
+import { HostingOption } from './components/HostingOption'
 import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
@@ -51,6 +57,7 @@ import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
@@ -63,6 +70,12 @@ import { PricingTable } from './components/Pricing/PricingTable'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { PricingSlider } from './components/PricingSlider'
+import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
+import { ProductFeature } from './components/ProductFeature'
+import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
+import { ProductFooter } from './components/ProductFooter'
+import { ProductHero } from './components/ProductHero'
+import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
 import { ResponsiveTopBar } from './components/ResponsiveTopBar'
@@ -110,6 +123,11 @@ export const shortcodes = {
     DemoScheduler,
     DocsPageSurvey,
     DocsSearch,
+    Doodle,
+    DoodleCircle,
+    DoodleRectangle,
+    DoodleTriangle,
+    DoodleZigzag,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -117,6 +135,7 @@ export const shortcodes = {
     GetStartedModal,
     GithubIcon,
     HiddenSection,
+    HostingOption,
     Blockquote,
     Features,
     Hero,
@@ -130,6 +149,7 @@ export const shortcodes = {
     LibraryStats,
     MdxAnchorHeaders,
     NewsletterForm,
+    NotFoundPage,
     OtherFeaturesBlock,
     PageHeader,
     PlanComparisonTable,
@@ -142,6 +162,12 @@ export const shortcodes = {
     Quote,
     Savings,
     PricingSlider,
+    ProductAnchorNavbar,
+    ProductFeature,
+    ProductFeaturePlugin,
+    ProductFooter,
+    ProductHero,
+    ProductSectionHeader,
     ResponsiveAnchor,
     ResponsiveSidebar,
     ResponsiveTopBar,
