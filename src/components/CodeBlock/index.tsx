@@ -18,7 +18,7 @@ interface CodeBlockProps {
             mdxType: string
             children: string
         }
-        [extraProps: string]: unknown // 'children' has other props that we don't use here
+        [extraProps: string]: any // 'children' has other props that we don't use here
     }
 }
 

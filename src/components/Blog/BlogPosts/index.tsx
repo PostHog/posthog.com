@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-export const BlogPosts = ({ render }: { render: (posts: Array<unknown>) => JSX.Element }) => {
+export const BlogPosts = ({ render }: { render: (posts: Array<any>) => JSX.Element }) => {
     const postData = useStaticQuery(query)
 
     const parsedMdxData = postData.allMdx.edges.map((edge) => ({

@@ -36,7 +36,7 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
     )
 }
 
-const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
+const PrimaryCta = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     const classList = `button-primary ${className} border-none px-4 py-2 ml-2 lg:ml-4 mt-4 lg:mt-0 transition-none hover:transition-none text-xs rounded-sm`
 
     return (

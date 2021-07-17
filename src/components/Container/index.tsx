@@ -3,7 +3,7 @@ import React from 'react'
 interface ContainerProps {
     onPostPage: boolean
     className: string
-    containerStyle?: Record<string, unknown>
+    containerStyle?: any
     children: React.ReactNode
 }
 
