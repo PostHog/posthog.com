@@ -79,14 +79,14 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 **Integrating PostHog with Other Tools**
 
-- [Integrate PostHog with Shopify](//docs/integrate/third-party/shopify) 
+- [Integrate PostHog with Shopify](/docs/integrate/third-party/shopify) 
 - [Integrate PostHog with Metabase](/docs/integrate/third-party/metabase) 
 - [Integrate PostHog with Google Tag Manager](/docs/integrate/third-party/google-tag-manager) 
 
 
 ### Configuring PostHog
 
-[Configuring PostHog](/docs/self-host/configure/overview) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/self-host/configure/scaling-posthog), [security](/docs/self-host/configure/securing-posthog), and [upgrade methods](/docs/self-host/configure/upgrading-posthog).
+[Configuring PostHog](/docs/self-host/overview) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/self-host/configure/scaling-posthog), [security](/docs/self-host/configure/securing-posthog), and [upgrade methods](/docs/self-host/configure/upgrading-posthog).
 
 ### Integrations
 
