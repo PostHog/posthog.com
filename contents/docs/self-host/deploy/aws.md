@@ -19,7 +19,7 @@ Likewise, we maintain a CloudFormation [config](https://github.com/PostHog/deplo
 
 Jump straight in:
 
-[![Launch AWS Stack](../../../src/images/deploy-button-aws.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Posthog&templateURL=https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml)
+[![Launch AWS Stack](../../../../src/images/deploy-button-aws.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Posthog&templateURL=https://deployments-posthog.s3-us-west-2.amazonaws.com/cloudformation/ecs/fargate/posthog.yaml)
 
 1. After clicking "Next" you'll have the option to review the parameters. You will need to update these if you want to modify default behaviors, get alarms, or setup SMTP configs as described below.
 
