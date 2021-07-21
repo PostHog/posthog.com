@@ -50,7 +50,7 @@ We currently offer a [Training budget](/handbook/people/training#training-budget
 
 As we are fully remote, we provide [all equipment](/handbook/people/spending-money#equipment) you need to have an ergonomic setup at home to be as productive as possible. We provide all team members with a company card for this purpose.
 
-If you ever need change of scenery, we offer $200/month budget towards [coworking or café working](/handbook/people/spending-money#work-space). 
+If you ever need change of scenery, we offer $200/month budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access). 
 
 ### Off-sites and team socials
 

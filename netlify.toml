@@ -143,7 +143,6 @@
     from = "/handbook/getting-started"
     to = "/handbook/getting-started/start-here"
 
-
 [[redirects]]
     from = "/handbook/people/team-structure/user-experience"
     to = "/handbook/people/team-structure/core-experience"
@@ -183,13 +182,20 @@
     to = "/docs/contributing/updating-documentation"
 
 [[redirects]]
+    from = "/docs/self-host"
+    to = "/docs/self-host/overview"
+
+[[redirects]]
     from = "/docs/deployment"
-    to = "/docs/self-hosting/overview#deploy"
+    to = "/docs/self-host/overview#deploy"
+
+[[redirects]]
+    from = "/docs/self-host/configure"
+    to = "/docs/self-host/overview#configure"
 
 [[redirects]]
     from = "/docs/configuring-posthog"
-    to = "/docs/self-hosting/overview#configure"
-
+    to = "/docs/self-host/configure"
 
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
@@ -561,7 +567,28 @@
     to = "/docs/tutorials/survey"
 
 # Added: 2021-07-14
-# To improve the website's intuitive navigation experience
+# Not due to a rename, but to improve the website's navigation experience
 [[redirects]]
     from = "/features"
     to = "/product"
+
+# Added: 2021-07-16
+[[redirects]]
+    from = "/docs/integrate"
+    to = "/docs/integrate/overview"
+
+# Added: 2021-07-16
+[[redirects]]
+    from = "/docs/integrations"
+    to = "/docs/integrate/overview"
+
+# Added: 2021-07-16
+[[redirects]]
+    from = "/docs/libraries"
+    to = "/docs/integrate/overview"
+    
+# Added: 2021-07-17
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/signup"
+    to = "/pricing"
