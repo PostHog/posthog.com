@@ -197,7 +197,6 @@
     from = "/docs/configuring-posthog"
     to = "/docs/self-host/configure"
 
-
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
     to = "/docs/user-guides/log-in-with-sso"
@@ -376,11 +375,6 @@
 [[redirects]]
     from = "/docs/configuring-posthog/running-behind-proxy"
     to = "/docs/self-host/configure/running-behind-proxy"
-
-# Added: 2021-07-13
-[[redirects]]
-    from = "/docs/configuring-posthog/scaling-posthog"
-    to = "/docs/self-host/configure/scaling-posthog"
 
 # Added: 2021-07-13
 [[redirects]]
