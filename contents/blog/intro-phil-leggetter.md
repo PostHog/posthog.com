@@ -1,11 +1,12 @@
 ---
-date: 2021-07-13
+date: 2021-07-21
 title: Introducing Phil Leggetter, our new head of Developer Relations
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: mo-shehu
+featuredImage: ../contents/images/blog/intro-phil.png
 ---
 
 We’re proud to announce a new hire; Phil Leggetter will head up Developer Relations at PostHog.
