@@ -73,7 +73,7 @@ function ProductPage() {
                             featureName="Event autocapture"
                             title="Track events automatically"
                             description="Define any clicks or pageviews retroactively and see historical data since you installed PostHog."
-                            docsUrl="/docs/features/events#autocapture-event-tracking"
+                            docsUrl="/docs/user-guides/events#autocapture-event-tracking"
                             figureClasses="mb-8"
                             image="feature-event-autocapture.svg"
                             imageWidth="253"
@@ -89,7 +89,7 @@ function ProductPage() {
                             featureName="Dashboards"
                             title="Monitor core metrics"
                             description="Build dashboards with everyday metrics like sign-ups, purchases and conversions."
-                            docsUrl="/docs/features/dashboards"
+                            docsUrl="/docs/user-guides/dashboards"
                             figureClasses="mb-8"
                             image="feature-dashboards.svg"
                             imageWidth="234"
@@ -106,7 +106,7 @@ function ProductPage() {
                                 featureName="Data pipelines"
                                 title="Ingest data from multiple sources"
                                 description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
-                                docsUrl="/docs/libraries"
+                                docsUrl="/docs/integrate/overview"
                                 classes=""
                             />
 
@@ -116,7 +116,7 @@ function ProductPage() {
                                 featureName="Export to data warehouse"
                                 title="Normalize & push data anywhere"
                                 description="Move data through PostHog to BigQuery, S3, Snowflake, or Redshift."
-                                docsUrl="/docs/features/plugins#example-use-cases"
+                                docsUrl="/docs/user-guides/plugins#example-use-cases"
                                 classes=""
                             />
                         </div>
@@ -147,19 +147,19 @@ function ProductPage() {
                                     </p>
                                 </div>
                                 <ul className="flex justify-center flex-wrap p-0 list-none text-center">
-                                    <HostingOption name="Heroku" handle="heroku" url="/docs/deployment/deploy-heroku" />
-                                    <HostingOption name="AWS" handle="aws" url="/docs/deployment/deploy-aws" />
+                                    <HostingOption name="Heroku" handle="heroku" url="/docs/self-host/deploy/heroku" />
+                                    <HostingOption name="AWS" handle="aws" url="/docs/self-host/deploy/aws" />
                                     <HostingOption
                                         name="Google Cloud"
                                         handle="google-cloud"
-                                        url="/docs/deployment/deploy-gcs"
+                                        url="/docs/self-host/deploy/gcs"
                                     />
-                                    <HostingOption name="Docker" handle="aws" url="/docs/deployment/deploy-docker" />
-                                    <HostingOption name="Azure" handle="azure" url="/docs/deployment/deploy-azure" />
+                                    <HostingOption name="Docker" handle="aws" url="/docs/self-host/deploy/docker" />
+                                    <HostingOption name="Azure" handle="azure" url="/docs/self-host/deploy/azure" />
                                     <HostingOption
                                         name="Source"
                                         handle="source-code"
-                                        url="/docs/deployment/deploy-source"
+                                        url="/docs/self-host/deploy/source"
                                     />
                                     <HostingOption name="More" handle="more" url="/docs/deployment" />
                                 </ul>
@@ -227,7 +227,7 @@ function ProductPage() {
                                 </span>
                             }
                             description="Monitor the impact of product changes - by customer plan, traffic source, or any other user property."
-                            docsUrl="/docs/features/trends"
+                            docsUrl="/docs/user-guides/trends"
                             staticImage={
                                 <StaticImage
                                     className="w-full max-w-screen-lg relative z-20 mx-auto -mb-12 mt-6"
@@ -275,10 +275,10 @@ function ProductPage() {
                                 </span>
                             }
                             description="Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment."
-                            docsUrl="/docs/features/funnels"
+                            docsUrl="/docs/user-guides/funnels"
                             //bgImage={`${imageFunnels}`}
                             bgImagePosition="bottom center / 100%"
-                            classes=""
+                            classes="relative"
                         />
                     </div>
 
@@ -289,7 +289,7 @@ function ProductPage() {
                             featureName="Paths"
                             title="Visualize how traffic flows"
                             description="See common user paths and discover how visitors arrived at their outcome."
-                            docsUrl="/docs/features/paths"
+                            docsUrl="/docs/user-guides/paths"
                             staticImage={
                                 <StaticImage
                                     className="max-w-[320px] mx-auto mt-6"
@@ -314,7 +314,7 @@ function ProductPage() {
                             featureName="Cohorts"
                             title="Insights by association"
                             description="Use common traits to identify inflection points."
-                            docsUrl="/docs/features/cohorts"
+                            docsUrl="/docs/user-guides/cohorts"
                             staticImage={
                                 <StaticImage
                                     className="max-w-[479px] -mb-8 mx-auto"
@@ -331,7 +331,7 @@ function ProductPage() {
                             featureName="User sessions"
                             title="See a timeline of a user's activity"
                             description="User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context."
-                            docsUrl="/docs/features/sessions"
+                            docsUrl="/docs/user-guides/sessions"
                             staticImage={
                                 <StaticImage
                                     className="mt-6 -mb-12 mx-auto w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
@@ -350,7 +350,7 @@ function ProductPage() {
                             featureName="Retention"
                             title="Group users by lifecycle"
                             description="Drill down into activity of individual users within a cohort. Further break down a bucket of users to identify root causes of behavior."
-                            docsUrl="/docs/features/retention"
+                            docsUrl="/docs/user-guides/retention"
                             staticImage={
                                 <StaticImage
                                     className="mx-auto mt-6 max-w-[455px]"
@@ -393,9 +393,9 @@ function ProductPage() {
                                 </span>
                             }
                             description="Toggle features for cohorts or individuals to test the impact."
-                            docsUrl="/docs/features/feature-flags#"
+                            docsUrl="/docs/user-guides/feature-flags#"
                             figureClasses=""
-                            classes="-mb-4"
+                            classes="-mb-4 relative"
                         />
                     </div>
 
@@ -406,7 +406,7 @@ function ProductPage() {
                             featureName="Annotations"
                             title="“Why did our traffic spike?”"
                             description="Mark new releases and more in your data, so you can understand their impact later."
-                            docsUrl="/docs/features/annotations"
+                            docsUrl="/docs/user-guides/annotations"
                             classes="relative -mb-4"
                         />
                     </div>
@@ -431,7 +431,7 @@ function ProductPage() {
                             featureName="Session recordings"
                             title="See customers using your product"
                             description="Watch exactly what users are doing without infringing their privacy."
-                            docsUrl="/docs/features/session-recording"
+                            docsUrl="/docs/user-guides/session-recording"
                             staticImage={
                                 <StaticImage
                                     className="max-w-[356px] mx-auto mb-6"
@@ -449,7 +449,7 @@ function ProductPage() {
                             featureIcon="data-export"
                             featureName="Data export"
                             title="Send data where you need it"
-                            description="Export data for long-term storage or make your customer data available in other tools. list of integrations here"
+                            description="Export data for long-term storage or make your customer data available in other tools."
                             docsUrl="/docs/plugins/overview"
                             imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
@@ -505,7 +505,7 @@ function ProductPage() {
                             featureIcon="data-enrichment"
                             featureName="Data enrichment"
                             title="Enrich your data with external signals"
-                            description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why. grid of sources goes here"
+                            description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why."
                             docsUrl="/docs/plugins/overview"
                             imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""

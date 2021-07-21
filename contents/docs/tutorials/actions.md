@@ -36,7 +36,7 @@ To follow this tutorial along, you need to:
 
 ### Sorting Through Your Events with Actions
 
-With the goal of making it easier to sort through your events, PostHog introduced the concept of [actions](/docs/features/actions), which are a way to tag and combine events you care about. They are an important part of other features in PostHog, such as Cohorts. <!-- Link to Cohorts Tutorial Here -->
+With the goal of making it easier to sort through your events, PostHog introduced the concept of [actions](/docs/user-guides/actions), which are a way to tag and combine events you care about. They are an important part of other features in PostHog, such as Cohorts. <!-- Link to Cohorts Tutorial Here -->
 
 The relationship between events and actions can be both one-to-one or many-to-one. What this means is that you can create an action from one event only, such as a "Pageview" action for a `$pageview` event, as well as an action targeting multiple events, like a "Sign Up" action targeting the events `clicked button with text "Sign Up"` and `clicked button with text "Sign Up Now"`.
 
@@ -83,13 +83,13 @@ Lastly, you can of course create actions from the 'Actions' page under 'Events':
 
 **Action Options**
 
-Visit our [dedicated actions page](/docs/features/actions/) for a comprehensive explanation of all the options available when creating an action.
+Visit our [dedicated actions page](/docs/user-guides/actions/) for a comprehensive explanation of all the options available when creating an action.
 
 ### Using Custom Events to Track Advanced Behaviors 
 
 Now that we've learned how to sort through events, let's go through how to create events that PostHog doesn't automatically capture for you.
 
-Custom events can be created from any of our [libraries](/docs/libraries), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. We recommend looking through our libraries and only using our API if there isn't a suitable library for you, since using our libraries ensure you are always up-to-date.
+Custom events can be created from any of our [libraries](/docs/integrate/overview), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. We recommend looking through our libraries and only using our API if there isn't a suitable library for you, since using our libraries ensure you are always up-to-date.
 
 **Using JavaScript Event Listeners to Track User Focus and Exceptions**
 
@@ -120,7 +120,7 @@ window.onerror = (errorMsg, url, lineNumber) => {
 }
 ```
 
-These exceptions can then be correlated with [feature flags](/docs/features/feature-flags) and app usage, to determine if a new feature increased the incidence of exceptions, or if a certain exception harms conversion in a funnel, for example. 
+These exceptions can then be correlated with [feature flags](/docs/user-guides/feature-flags) and app usage, to determine if a new feature increased the incidence of exceptions, or if a certain exception harms conversion in a funnel, for example. 
 
 Essentially, it's entirely up to you what events you capture and what properties you pass to them. You can also add more complex logic to determine when to trigger an event, as well as what properties to pass to it.
 
@@ -167,7 +167,7 @@ m.NotFound(func(req *http.Request) string) {
 
 > **Note:** Unlike exception tracking platforms such as [Sentry](https://sentry.io/) (which we use), tracking exceptions with PostHog is beneficial to correlate error metrics with your product's UX and usage rather than for debugging purposes.
 
-Once again, you can track anything that you like, and you can do so with any of our 10+ [integrations](/docs/libraries), as well as our [API](/docs/api).
+Once again, you can track anything that you like, and you can do so with any of our 10+ [integrations](/docs/integrate/overview), as well as our [API](/docs/api).
 
 **Using custom events in PostHog**
 

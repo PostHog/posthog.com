@@ -57,7 +57,7 @@ Read more about running demos on our [dedicated page](/handbook/growth/yc-onboar
 
 A super cool way of doing demos for websites and web apps is using the PostHog bookmarklet. This way you can set up funnels, charts, and other views for the user (or, ideally, have them set it up themselves) by leveraging their *own data*. If done on their own instance, some of these views might even be ready for them to start analyzing user data once "real events" start coming in.
 
-To learn more about the bookmarklet, check out our [Snippet Installation](/docs/deployment/snippet-installation#get-started-with-no-code) page.
+To learn more about the bookmarklet, check out our [Snippet Installation](/docs/integrate/client/snippet-installation#get-started-with-no-code) page.
 
 #### Let the user drive
 

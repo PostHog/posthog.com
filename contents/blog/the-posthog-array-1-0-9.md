@@ -10,7 +10,7 @@ categories: release-notes
 
 We’re in the thick of our release schedule this week!
 
-Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
 
 First our updates and new features.
 

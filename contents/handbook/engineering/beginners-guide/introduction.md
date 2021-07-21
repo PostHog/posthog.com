@@ -48,7 +48,7 @@ why they are being said. There our goal is to *develop a solid mental model for 
 > “You don’t care about the answer until you have the question.” - Unknown
 
 - On my first day, I was given an assignment to work on. It began the process of showing me what I needed to learn. Struggling to complete the assignment helped me to *have the question* from the quote above.
-- Reading the [project structure doc](/docs/contributing/project-structure)
+- Reading the [project structure doc](/docs/contribute/project-structure)
 - Browsing the [issues in GitHub](https://github.com/PostHog/posthog/issues) by playing with the various labels. This helped me get a better feel for PostHog's communication style and open-mindedness.
 - Pairing with Tim & Eric. They used devtools to examine network traffic, console.log, and I was able to ask specific questions. It was basic stuff and reminded me to use the basic tools I've been using for years. I guess the anxiety of a new job confused my brain a little.
 - Reading the kea docs. This is *clutch* to understand the frontend. It's a rather nice library but you won't make progress without understanding Kea.

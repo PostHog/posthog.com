@@ -1,3 +1,4 @@
+import { scrollWithOffset } from 'lib/utils'
 import React from 'react'
 import { LandingPageCallToAction } from '../LandingPage/LandingPageCallToAction'
 
@@ -47,12 +48,12 @@ export const ProductHero = ({
                 </div>
             </div>
 
-            <a
-                href="#platform"
-                className="absolute sm:hidden md:hidden lg:block bottom-0 sm:mb-12 xl:mb-4 z-20 p-4 sm:p-8"
+            <div
+                className="absolute sm:hidden md:hidden lg:block bottom-0 sm:mb-12 xl:mb-4 z-20 p-4 sm:p-8 cursor-pointer"
+                onClick={() => scrollWithOffset('#platform', -90)}
             >
                 <span className="chevron"></span>
-            </a>
+            </div>
 
             <HeroImage />
         </div>

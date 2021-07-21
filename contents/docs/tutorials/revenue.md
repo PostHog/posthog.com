@@ -32,7 +32,7 @@ With this tutorial, we'll give you a full guide to getting started with tracking
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/libraries/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview).
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview).
 
 > **Note:** For sending events with revenue data, we recommend you integrate PostHog in your backend, given that, by nature, client-side code can be modified by the user. 
 
@@ -66,7 +66,7 @@ In the example above, `_sale_completed` would be called after your existing logi
 
 ### Visualizing your revenue over time
 
-Having started to send events that track sales to PostHog, the first thing to do is visualize your revenue over time. This can be done in ['Trends'](/docs/features/trends), and might look something like this:
+Having started to send events that track sales to PostHog, the first thing to do is visualize your revenue over time. This can be done in ['Trends'](/docs/user-guides/trends), and might look something like this:
 
 ![Revenue Over Time Chart](../../images/tutorials/revenue/revenue-over-time.png)
 
@@ -89,7 +89,7 @@ However, the last four options target numerical properties on events. When track
 - The largest (and smallest) purchase per time period
 - The average purchase value per time period
 
-Here are is an example [dashboard](/docs/features/dashboards) combining charts that use all four of the numerical operations:
+Here are is an example [dashboard](/docs/user-guides/dashboards) combining charts that use all four of the numerical operations:
 
 ![Operations Dashboard Image](../../images/tutorials/revenue/operations-dashboard.png)
 
