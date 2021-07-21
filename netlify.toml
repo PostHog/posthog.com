@@ -128,27 +128,27 @@
     from = "/handbook/growth/customer-success"
     to = "/handbook/growth/customer-support"
 
-    
+
 [[redirects]]
     from = "/handbook/growth/customer-success"
     to = "/handbook/growth/customer-support"
 
-    
+
 [[redirects]]
     from = "/handbook/getting-started"
     to = "/handbook/getting-started/start-here"
 
-    
+
 [[redirects]]
     from = "/handbook/getting-started"
     to = "/handbook/getting-started/start-here"
 
-    
+
 [[redirects]]
     from = "/handbook/people/team-structure/user-experience"
     to = "/handbook/people/team-structure/core-experience"
 
-    
+
 [[redirects]]
     from = "/docs/plugins/build"
     to = "/docs/plugins/build/overview"
@@ -157,27 +157,27 @@
 [[redirects]]
     from = "/docs/plugins/types"
     to = "/docs/plugins/build/types"
-    
+
 [[redirects]]
     from = "/docs/developing-locally"
     to = "/docs/contributing/developing-locally"
 
-    
+
 [[redirects]]
     from = "/docs/project-structure"
     to = "/docs/contributing/project-structure"
 
-    
+
 [[redirects]]
     from = "/docs/recognizing-contributions"
     to = "/docs/contributing/recognizing-contributions"
 
-    
+
 [[redirects]]
     from = "/docs/stack"
     to = "/docs/contributing/stack"
 
-    
+
 [[redirects]]
     from = "/docs/updating-documentation"
     to = "/docs/contributing/updating-documentation"
@@ -190,7 +190,7 @@
     from = "/docs/configuring-posthog"
     to = "/docs/self-hosting/overview#configure"
 
-    
+
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
     to = "/docs/user-guides/log-in-with-sso"
@@ -369,11 +369,6 @@
 [[redirects]]
     from = "/docs/configuring-posthog/running-behind-proxy"
     to = "/docs/self-host/configure/running-behind-proxy"
-
-# Added: 2021-07-13
-[[redirects]]
-    from = "/docs/configuring-posthog/scaling-posthog"
-    to = "/docs/self-host/configure/scaling-posthog"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -564,7 +559,7 @@
 [[redirects]]
     from = "/docs/tutorials/1-minute/survey"
     to = "/docs/tutorials/survey"
-    
+
 # Added: 2021-07-14
 # To improve the website's intuitive navigation experience
 [[redirects]]
