@@ -135,6 +135,20 @@
     transition: none;
 }
 
+.post-preview-fade {
+    position: relative;
+
+    &:after {
+        background: linear-gradient(rgba(30, 23, 79, 0), rgba(30, 23, 79, 1));
+        bottom: 0;
+        content: '';
+        left: 0;
+        height: 250px;
+        position: absolute;
+        width: 100%;
+    }
+}
+
 .product-features {
     grid-template-columns: repeat(1, 1fr);
 
@@ -323,7 +337,27 @@
 }
 
 .recent-blog-posts {
-    background: linear-gradient(180deg, #2a235b 0%, #08042f 100%);
+    background: #1e174f;
+    position: relative;
+
+    &:before {
+        background: linear-gradient(180deg, #2a235b 0%, #1e174f 100%);
+        content: '';
+        height: 200px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &:after {
+        background: linear-gradient(180deg, #1e174f 0%, #220f3f 100%);
+        bottom: 0;
+        content: '';
+        height: 200px;
+        position: absolute;
+        width: 100%;
+    }
 }
 
 .blockquote-section {

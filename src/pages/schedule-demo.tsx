@@ -15,7 +15,8 @@ export const ScheduleDemo = () => {
                 <h1 className="centered">Schedule Demo</h1>
                 <p>
                     Use the widget below to schedule a demo call with one of our engineers. Please note that this is not
-                    a Sales call. For Sales enquiries please email <i>sales@posthog.com</i>.
+                    a Sales call. For sales enquiries, please{' '}
+                    <a href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">contact us</a>.
                 </p>
                 <br />
                 <p>
@@ -24,7 +25,7 @@ export const ScheduleDemo = () => {
                     <a href="https://www.youtube.com/channel/UCoP6ql8QkyOoVpBU4P8LM6w">secondary YouTube channel</a>.
                 </p>
                 <br />
-                <DemoScheduler iframeSrc="https://calendly.com/yakko/demo" />
+                <DemoScheduler iframeSrc="https://calendly.com/jamesefhawkins/posthog-demo" />
             </div>
         </Layout>
     )

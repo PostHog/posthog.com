@@ -1,5 +1,5 @@
 ---
-date: 2021-06-14
+date: 2021-06-25
 title: A non-coder's thoughts on an 'Everybody Codes' culture
 author: joe-martin
 rootPage: /blog 
@@ -9,7 +9,7 @@ hideAnchor: true
 featuredImage: ../images/blog/non-coders-thoughts/non-coders-thoughts.jpeg
 ---
 
-One of PostHog’s core values is that everybody codes. That doesn’t mean everyone needs previous experience as a software developer, but we encourage everyone to learn and practice the basics of shipping, no matter their role. 
+One of PostHog’s core values is that everybody codes. That doesn’t mean everyone needs previous experience as a developer or engineer, but we encourage everyone to learn and practice the basics of shipping, no matter their role. 
 
 When we’re hiring developers, this isn’t an issue. However, it can be intimidating for candidates who don’t have coding experience, even if they are otherwise technically literate. This is because our tools are centered around GitHub, so even writing this blog post requires knowing how to submit [Pull Requests](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests). 
 

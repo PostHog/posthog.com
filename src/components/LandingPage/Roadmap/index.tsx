@@ -16,15 +16,17 @@ export const Roadmap = () => (
                         Everything we build is based off your feedback.
                     </p>
 
-                    <CallToAction
-                        icon="roadmap"
-                        to="/handbook/strategy/roadmap"
-                        type="custom"
-                        width="72"
-                        className="bg-purpleish text-white hover:bg-purpleish-dark hover:text-white border-purpleish-dark mx-auto"
-                    >
-                        Explore Roadmap
-                    </CallToAction>
+                    <div className="max-w-xs mx-auto">
+                        <CallToAction
+                            icon="roadmap"
+                            to="/handbook/strategy/roadmap"
+                            type="custom"
+                            width="72"
+                            className="bg-purpleish text-white hover:bg-purpleish-dark hover:text-white border border-white mx-auto"
+                        >
+                            Explore Roadmap
+                        </CallToAction>
+                    </div>
                 </div>
                 <img src={mountainsImg} className="w-screen mx-auto relative z-10 mountains" />
 

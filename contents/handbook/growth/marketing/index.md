@@ -8,18 +8,19 @@ showTitle: true
 
 Philosophy: Be kind, concise and direct.
 
-
 ## Positioning statement
 
-We use a positioning statement based on a template by Geoffrey Moore, which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools.
+We use a positioning statement based on [a template by Geoffrey Moore](https://gist.github.com/JoshSmith/2041454), which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools.
 
 Our positioning statement is:
 
-_For product managers and software engineers who need to understand their users, PostHog is the only open source analytics platform which enables you to discover insights and run experiments._ 
+_For product managers who need to understand their users, PostHog is the only open-source, all-in-one analytics platform that offers everything from funnel analysis and cohort tracking, to feature flags and session recording._ 
 
-_Unlike traditional analytics tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._ 
+_Unlike traditional tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._ 
 
-## Product positioning
+See [our messaging framework for more information](/handbook/growth/marketing/messaging_framework) about positioning and how we bring it to life. 
+
+## Products
 
 An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
