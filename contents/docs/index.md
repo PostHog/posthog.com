@@ -33,7 +33,7 @@ Start using [PostHog Cloud for free](https://app.posthog.com).
 
 **Do you want to self-host PostHog?**
 
-Check out our [Deployment page](/docs/deployment).
+Check out our [Deployment page](/docs/self-host/overview#deploy).
 
 ### Capturing Events with PostHog
 
