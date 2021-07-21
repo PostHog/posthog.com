@@ -8,7 +8,6 @@ hideAnchor: true
 ## People & culture
 
 - [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent)
-- [Recruitment and Operations Coordinator](https://apply.workable.com/posthog/j/554EC800BE/) (currently hiring!)
 
 ## Mission
 

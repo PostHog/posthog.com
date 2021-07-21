@@ -6,9 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/100x/100x.png
+author: james-hawkins
 ---
-
-By: [James Hawkins](https://twitter.com/james406), Co-Founder / CEO @ PostHog
 
 Today, we're announcing that we're giving away 1 million ingested events/month on [Cloud](https://app.posthog.com/signup), for free. That's up from 10k/month that we were offering before.
 
@@ -79,7 +78,7 @@ The exception is if you wish to move to [PostHog Scale](/pricing) (paid), in whi
 
 ### PostHog Cloud -> PostHog Scale
 
-You can do this - we provide a little manual support in this case. Just [speak to us](sales@posthog.com).
+You can do this - we provide a little manual support in this case. Just [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).
 
 ## Does this mean PostHog is focusing more on cloud then?
 
@@ -89,7 +88,7 @@ A key goal is to provide a more reliable PostHog for _all_ users.
 
 We view [Cloud](https://app.posthog.com/signup) as a way of generating awareness (charging high volume cloud users to cover its hosting costs) and improving scalability, and Self-Host as a way of generating high volume users that we retain very well and who may end up paying one day.
 
-For those that self-host, we are putting a ton of engineering work into enabling Clickhouse in our open source product. That means users that self-host will be able to use PostHog at much greater scale, bug free, for free or paid depending on which features they need.
+For those that self-host, we are putting a ton of engineering work into enabling ClickHouse in our open source product. That means users that self-host will be able to use PostHog at much greater scale, bug free, for free or paid depending on which features they need.
 
 For teams with smaller volume and less of a focus on user privacy, this is where today's change comes in.
 

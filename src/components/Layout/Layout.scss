@@ -85,7 +85,6 @@ template {
     display: none;
 }
 a {
-    background-color: transparent;
     -webkit-text-decoration-skip: objects;
     color: #1d4aff;
 }
@@ -257,74 +256,37 @@ img {
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    margin-bottom: 1.45rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
+    color: inherit;
+    font-weight: normal;
+    text-transform: lowercase;
+    text-rendering: optimizeLegibility;
 }
 h1 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 2rem;
-    color: inherit;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
     font-size: 48px;
     line-height: 150%;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
 }
 
 h2 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0 !important;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    color: inherit;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
     font-size: 40px;
     line-height: normal;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
-    font-style: normal;
 }
 h3 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    color: inherit;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
     font-size: 30px;
     line-height: normal;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
 h4 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    color: inherit;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
     font-size: 24px;
     line-height: 45px;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
     font-style: normal;
 }
 h5 {
@@ -337,11 +299,10 @@ h5 {
     padding-top: 0;
     margin-bottom: 1.45rem;
     color: inherit;
-    font-weight: 400;
     text-rendering: optimizeLegibility;
     font-size: 20px;
     line-height: 1.5;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
+    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
 }
 h6 {
     margin-left: 0;
@@ -353,11 +314,10 @@ h6 {
     padding-top: 0;
     margin-bottom: 1.45rem;
     color: inherit;
-    font-weight: 400;
     text-rendering: optimizeLegibility;
     font-size: 18px;
     line-height: 1.5;
-    font-family: 'Gosha Sans', Helvetica, Arial, Sans-Serif;
+    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
 }
 hgroup {
     margin-left: 0;
@@ -1087,14 +1047,6 @@ a.middle {
     background-color: #f96132 !important;
 }
 
-.bg-yellow {
-    background-color: #f7a501 !important;
-}
-
-.bg-white {
-    background-color: #ffffff !important;
-}
-
 .bg-zambezi {
     background-color: #595959 !important;
 }
@@ -1335,9 +1287,6 @@ table td {
     .menuHeaderWrapper.noLogo {
         justify-content: space-between;
     }
-    .toggle-wrapper {
-        display: none !important;
-    }
     .post-page-sub-header {
         position: relative;
         z-index: 1;
@@ -1443,6 +1392,17 @@ table td {
     justify-content: center;
 }
 
+body.dark {
+    .team-right-image {
+        color: white;
+    }
+    .team-row {
+        svg {
+            fill: white;
+        }
+    }
+}
+
 /*the globe wraps below the intro text
 for all other rows the portrait image wraps above bio*/
 .team-row.intro {
@@ -1524,10 +1484,6 @@ for all other rows the portrait image wraps above bio*/
     .team-left-text,
     .team-right-text {
         width: 100%;
-    }
-    .team-left-image,
-    .team-right-image {
-        width: 60%;
     }
     .team-center-space {
         display: none;
@@ -1627,6 +1583,10 @@ div::-webkit-scrollbar-thumb:hover {
     background-color: #08042f;
 }
 
+.site-footer--transparent {
+    background-color: transparent !important;
+}
+
 .header-wrapper {
     background: linear-gradient(180deg, #200c39, #220f3f);
 }
@@ -1635,4 +1595,10 @@ div::-webkit-scrollbar-thumb:hover {
     .header-wrapper:not(.blog-article-header) {
         background: rgb(249, 249, 249) none repeat scroll 0% 0%;
     }
+}
+
+table th[align='center'],
+table td[align='center'],
+.text-center {
+    text-align: center;
 }

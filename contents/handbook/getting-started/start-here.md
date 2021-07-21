@@ -10,7 +10,7 @@ Welcome to the PostHog Handbook! If you are a new starter, this page will help y
 
 We encourage everyone to start at the beginning first before diving in. We have a strong bias for action, but it is still worth taking a step back and looking at the 'why' first. This helps ensure sure you have the right context and are working on the right things. 
 
-You should start with the '[Company](/handbook/company/story)' section and work your way through everything there. It is not a lot to read. In particular, the sections on our [Strategy](handbook/strategy/strategy) and [Roadmap](/handbook/strategy/roadmap) are a must-read for everyone. 
+You should start with the '[Company](/handbook/company/story)' section and work your way through everything there. It is not a lot to read. In particular, the sections on our [Strategy](/handbook/strategy/strategy) and [Roadmap](/handbook/strategy/roadmap) are a must-read for everyone. 
 
 Next, familiarise yourself with our approach to [Culture](/handbook/company/culture) and our [Values](/handbook/company/values). You might take a bit of time to adjust to PostHog's way of working, and that's ok! In addition to bias for action, you may find that you have a lot more autonomy than you are used to here - you'll realise very quickly that you _shouldn't_ be asking for permission for most things. 
 
@@ -30,9 +30,16 @@ Our most active repositories (aka 'repos') are:
 
 - [PostHog](https://github.com/PostHog/posthog) - main app
 - [PostHog.com](https://github.com/PostHog/posthog.com) - website
-- [Internal](https://github.com/PostHog/internal) - company-facing issues (private)
+- [Product Internal](https://github.com/PostHog/product-internal) - product-related issues that need to be kept internal, e.g. security issues, customer-specific issues (private)
+- [Company Internal](https://github.com/PostHog/company-internal) - company-facing issues, e.g. internal processes, hiring planning (private)
 
-We use GitHub Projects to track the status of Issues in an easily viewable way. It is up to each Small Team to decide how to manage their tasks, and you'll find most have a dedicated Project - [full list here](https://github.com/orgs/PostHog/projects) - and run two week sprints. As part of onboarding, you will be invited to the relevant planning meetings. 
+When you have a new Issue or want to submit a Pull Request, you do that in the relevant repo. 
+
+We use GitHub Projects to track the status of Issues in an easily viewable way. When you create an Issue, you can assign it to a Project - think of a Project as a way of organising and filtering Issues in a particular view. This makes it easy for Small Teams to easily track what they are working on without having to jump between different repos. Some Issues may be assigned to multiple Projects if they involve the work of more than one team.
+
+You can also assign an Issue to a specific person, and tag it with a relevant label - use these to help people filter more easily.
+
+Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
 
 ## Onboarding 
 
@@ -45,5 +52,5 @@ It is worth trying to at least read the entire Handbook once, even if you skim o
 A few additional pages that may occasionally come in handy:
 
 - [Media](/media) - official PostHog logos and backgrounds
-- [Customer Support](/handbook/growth/customer-success) - we don't have a dedicated support team. Learn why!
+- [Customer Support](/handbook/growth/customer-support) - we don't have a dedicated support team. Learn why!
 - [Benefits](/handbook/people/benefits) - we are adding more all the time!

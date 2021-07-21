@@ -28,11 +28,14 @@ const query = graphql`
                         slug
                     }
                     id
-                    excerpt(pruneLength: 250)
+                    excerpt(pruneLength: 750)
                     frontmatter {
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
+                        featuredImage {
+                            publicURL
+                        }
                     }
                 }
             }
@@ -50,6 +53,9 @@ const query = graphql`
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
+                        featuredImage {
+                            publicURL
+                        }
                     }
                 }
             }

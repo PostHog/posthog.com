@@ -7,7 +7,8 @@ hideAnchor: true
 
 ## People
 
-- Mo Shehu, Content Marketer
+- [Mo Shehu](/handbook/people/team#mo-shehu-content-marketer), Content Marketer
+- [Joe Martin](/handbook/people/team#joe-martin-product-marketer), Product Marketer
 
 ## Mission
 

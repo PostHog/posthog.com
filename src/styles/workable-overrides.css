@@ -15,7 +15,7 @@
 }
 
 .whr-title a {
-    @apply text-yellow-400 hover:underline hover:text-yellow-400;
+    @apply text-yellow hover:underline hover:text-yellow;
 }
 
 .whr-date {

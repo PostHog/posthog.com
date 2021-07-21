@@ -7,32 +7,45 @@ hideAnchor: true
 
 ## People
 
-- [Eric Duong (Team Lead, Full Stack Engineer)](/handbook/people/team/#eric-duong-software-engineer)
-- [Paolo D'Amico (Product Manager)](/handbook/people/team#paolo-damico-product-team)
-- [Buddy Williams, Full Stack Engineer](/handbook/people/team/#buddy-williams-software-engineer)
-- [Sam Winslow, Full Stack Engineer](/handbook/people/team#sam-winslow-full-stack-engineer)
-- [Li Yi Yu, Full Stack Engineer]((/handbook/people/team/#li-yi-yu-software-engineer))
+- [Marius Andra](/handbook/people/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
+- [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
+- [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
+- [Li Yi Yu](/handbook/people/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
+- Alex Kim (Full Stack Engineer)
 
 ## Mission
 
-To create the easiest way to discover insights about products and its users
+To create the smoothest experience when discovering insights about products and its end users.
 
 ## Responsibilities
+List below is prioritized.
 
-- Extending feature set as suggested by requests, by our own ideas, and by need for parity with other platforms
-- Maintaining data quality and clarity
-- Ensuring performant and clear user experience across all analytics functionality
+1. Reaching parity in terms of features, performance and user experience with leading product analytics solutions, including:
+   1. Extending core feature set (particularly on the frontend) as informed by dogfooding, user feedback, experimentation and strategic decisions.
+   2. Extending user experience to enable product analytics for non-technical users. 
+2. Maintaining (and improving where applicable) supporting activities for the core experience (this includes: cohorts, persons, sessions *[not session recording]*, annotations, settings, authentication, account management). 
 
 
 ## Customer
-
-- Any PostHog user, whether they're an engineer or a product manager, should be able to effectively analyze their product.
+Our current focus is making Product Managers at scale-ups (e.g. Big 5) successful.
+We'll still strive to **maintain** success with technical users.
 
 ## Output metrics
+Our metrics are aligned to the ordered priorities of our team: 1) delighting 5 focus customers, 2) feature parity and 3) creating the smoothest user experience.
 
-- Retention per feature
+### Focus customers' delight
+Our current team metric comes from the latest company strategy of delighting 5 focus customers. We will be measuring delight (via an adjusted NPS) for the three key stakeholders on each of the companies. The goal is delighting all (or almost all) of them (i.e. they would become very disappointed if PostHog was taken away).
 
-[Dashboard](https://app.posthog.com/dashboard/1124)
+### Parity progress
+Metric details coming soon.
+
+### Future: WAU/MAU ratio
+> We are not making use of this metric just yet, based on the latest priority changes.
+
+Ratio of weekly active users versus monthly active users (rolling period) where an active user is someone who *Discovered Learning* during the period. This signals core product usage without being affected by activation or acquisition activities.
+- Measurements for the purpose of an output metric will be done weekly.
+- More context on the metric can be found in [the relevant issue](https://github.com/PostHog/product-internal/issues/1).
+
 
 ## Slack channel
 

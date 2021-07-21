@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, StaticQuery, Link } from 'gatsby'
 import Menu from 'antd/lib/menu'
+import { HeartOutlined } from '@ant-design/icons'
 import 'antd/lib/menu/style/css'
 import './SidebarContents.scss'
 import { useActions, useValues } from 'kea'
@@ -32,6 +33,8 @@ function SidebarContents() {
                             id
                             frontmatter {
                                 title
+                                sidebarTitle
+                                tags
                             }
                         }
                     }
@@ -41,6 +44,8 @@ function SidebarContents() {
                             id
                             frontmatter {
                                 title
+                                sidebarTitle
+                                tags
                             }
                         }
                     }
@@ -67,11 +72,13 @@ function SidebarContents() {
                     if (!entry) {
                         return
                     }
+
                     const rootEntry = getEntry(entry)
                     const child_dir = rootEntry?.child_entries?.map((item) => convertToTree(item, rootEntry.id))
                     let children = itemToNode(rootEntry)
                     if (children && child_dir) children = children.concat(child_dir)
                     else if (children === null) children = child_dir
+
                     const node = {
                         key: rootEntry.id,
                         title: rootEntry.name,
@@ -105,16 +112,19 @@ function SidebarContents() {
                 const getPage = (path, parent) => {
                     for (let item in pages) {
                         if (pages[item].fields.slug === path) {
+                            console.log('pages[item].frontmatter', pages[item].frontmatter)
                             const node = {
                                 path: pages[item].fields.slug,
                                 key: pages[item].id,
-                                title: pages[item].frontmatter.title,
+                                title: pages[item].frontmatter.sidebarTitle || pages[item].frontmatter.title,
+                                tags: pages[item].frontmatter.tags || [],
                                 parent: parent,
                             }
                             dir.push(node)
                             return node
                         }
                     }
+                    console.warn(`Could not find page for path ${path}`)
                     return null
                 }
 
@@ -140,6 +150,10 @@ function SidebarContents() {
                 const loop = (root) => {
                     if (root.children) {
                         return root.children.map((item) => {
+                            if (!item) {
+                                console.warn('item is null or undefined within collection', root.children)
+                            }
+
                             if (item.path) {
                                 return (
                                     <Menu.Item key={item.key} className="keySelected">
@@ -150,6 +164,9 @@ function SidebarContents() {
                                             style={{ float: 'left' }}
                                         >
                                             {item.title.length <= 36 ? item.title : item.title.slice(0, 34) + '…'}
+                                            {item.tags.includes('community') && (
+                                                <HeartOutlined className="community-icon" />
+                                            )}
                                         </Link>
                                     </Menu.Item>
                                 )

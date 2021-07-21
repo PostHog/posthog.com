@@ -15,7 +15,7 @@ We did a bunch of interviews with users and had a lot of discussions with the co
 
 The result is a release with new features and a ton of bug fixes, aimed at making PostHog better, faster, and more secure for our users. 
 
-If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ## Release Notes
 
@@ -59,7 +59,7 @@ Thus, after a lot of brainstorming and [calls with the likes of Sid Sijbrandij](
 
 This led to the creation of two key things: an `ee` subdirectory on our [main repo](https://github.com/PostHog/posthog), and a new repository called [posthog-foss](https://github.com/PostHog/posthog-foss). We'll be explaining these in more detail in the future, but, for now, you should know that to run fully MIT-licensed software, you can either clone the main repo and delete the `ee` subdirectory (without any consequences), or clone our posthog-foss repo, which is a mirror of the main repository without proprietary code.
 
-In addition, if you're an enterprise customer looking for added functionality and improved performance, contact us at _[sales@posthog.com](mailto:sales@posthog.com)_ to discuss the license for using our proprietary features. 
+In addition, if you're an enterprise customer looking for added functionality and improved performance, contact us at _[sales@posthog.com](mailto:sales@posthog.com)_ or via [this form](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) to discuss the license for using our proprietary features. 
 
 ### [Secret Key Requirement](https://github.com/PostHog/posthog/pull/1426)
 
@@ -67,9 +67,9 @@ To ensure the security of your PostHog instance, it's important that you use a r
 
 Prior to this version, we denoted the importance of this in our Docs, but did not enforce it in our software. Now, to enhance security, PostHog will not allow you to run the server without setting it.
 
-Many of our deployments generate and set this key by default, so that you will not need to worry about it. This is the case with our [Heroku One-Click deployment](/docs/deployment/deploy-heroku), for example. However, other methods may not automatically do this (we're working on it!). As such, if you run into any issues when updating PostHog, make sure you have a unique `SECRET_KEY` set. 
+Many of our deployments generate and set this key by default, so that you will not need to worry about it. This is the case with our [Heroku One-Click deployment](/docs/self-host/deploy/heroku), for example. However, other methods may not automatically do this (we're working on it!). As such, if you run into any issues when updating PostHog, make sure you have a unique `SECRET_KEY` set. 
 
-You can find more information about this on our ['Securing PostHog' page](/docs/configuring-posthog/securing-posthog#secret-key) and should always feel welcome to ask any questions on our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ).
+You can find more information about this on our ['Securing PostHog' page](/docs/self-host/configure/securing-posthog#secret-key) and should always feel welcome to ask any questions on our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ).
 
 
 ## Bug Fixes and Performance Improvements
@@ -131,7 +131,7 @@ Based on user feedback, we determined that it was essential to allow multiple te
 
 ## PostHog News
 
-We made a significant progress with our migration to Clickhouse on the Enterprise Edition. Stay tuned for more news about this.
+We made a significant progress with our migration to ClickHouse on the Enterprise Edition. Stay tuned for more news about this.
 
 Two of our engineers, Marius and Karl, have welcomed a new member into their families! We wish them and their families all the best. 
 

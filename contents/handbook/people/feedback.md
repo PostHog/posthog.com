@@ -39,11 +39,11 @@ We currently run performance reviews every 6 months, based on your start date. W
 1. The People team adds recurring calendar invites to the calendar of the team member and their manager to kick off the performance review process.  
 2. The team member will schedule a 1 hour performance review meeting with their manager. A member of the people team may sit in on the occasional feedback meeting to see how well they are working as we get up and running. 
 3. In advance, the team member writes up a self-assessment in [this document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing), and their manager will fill out a similar assessment in [this document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing). You will likely want to include and reflect on feedback you've previously received in a full team 360 degree feedback session. 
-4. Afterwards, the manager communicates back to the People team that the review is complete and what next steps are needed (if any), including around any salary adjustments if the team member's Step or Level should change. The People team will store these docs on Charlie HR for future reference.
+4. Afterwards, the team member communicates back to the People team that the review is complete and what next steps are needed (if any). We store the docs on [Google Drive](https://drive.google.com/drive/folders/1ElPt_fB79qgB-6tQTI8BTKStUHhy_NcS). You should then share your doc publicly with the team, for transparency and so they have the opportunity to share any additional feedback. 
 
 While the 360 degree team meeetings are purely feedback-focused, you should aim to spend the bulk of the performance review looking ahead to the next 6 months (and beyond). 
 
-Part of the review will include your [compensation](/handbook/people/compensation), as we directly link this to your level of experience and your performance. You should not, however, expect every performance review to result in a change to your Step or Level - most of the time, they won't. Additionally, you will find that your Step will change more frequently than your Level. 
+Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more repsonsive to changes in the market and people's roles. 
 
 ### How to give good feedback
 
@@ -94,4 +94,4 @@ In the future, we will split the session into groups in order to manage time bet
 
 The full team session prioritises openness, breadth and transparency of feedback, as everyone gets to both give and receive feedback in front of the entire team. 
 
-The performance review process centres on a single person for one hour, involves a smaller subset of the team, and is intended to be more of an in-depth conversation.
+The performance review process centres on a single person for one hour, involves their manager only, and is intended to be more of an in-depth conversation about the future.

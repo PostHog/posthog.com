@@ -37,7 +37,7 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 }
 
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
-    const classList = `button-primary ${className} border-none px-4 py-2 ml-4 transition-none hover:transition-none text-xs rounded-sm`
+    const classList = `button-primary ${className} border-none px-4 py-2 ml-2 lg:ml-4 mt-4 lg:mt-0 transition-none hover:transition-none text-xs rounded-sm`
 
     return (
         <li className="leading-none">
@@ -93,7 +93,7 @@ export const Header = ({
                 </Link>
 
                 <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav">
-                    <NavbarLink to="/product-features" textLight={textLight}>
+                    <NavbarLink to="/product" textLight={textLight}>
                         Product
                     </NavbarLink>
                     <NavbarLink to="/docs" textLight={textLight}>
@@ -131,7 +131,7 @@ export const Header = ({
             {expanded ? (
                 <ul className="w-11/12 mx-auto mt-8 block lg:hidden list-none">
                     <NavbarLink
-                        to="/product-features"
+                        to="/product"
                         textLight={textLight}
                         className="block my-2 py-2 border-b border-white border-opacity-10"
                     >

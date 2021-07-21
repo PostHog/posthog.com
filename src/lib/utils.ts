@@ -1,4 +1,4 @@
-import { LibraryPluginType } from 'types'
+import { AuthorsData, LibraryPluginType } from 'types'
 
 export const unsafeHash = (str: string) => {
     let a = 1,
@@ -45,3 +45,16 @@ export const generateRandomHtmlId = () =>
         .substr(2, 10)
 
 export const mergeClassList = (...args: string[]) => args.filter((classList) => !!classList).join(' ')
+
+export const findAuthor = (authors: AuthorsData[]) => (authorKey?: string) =>
+    authors?.find(({ handle }) => handle === authorKey)
+
+// custom function to add scroll offset in the top of section
+export const scrollWithOffset = (id: string, offset: number) => {
+    const element = document.querySelector(id)
+    if (element) {
+        const offsetY = offset || -90 // scroll offset (default = -90)
+        const y = element.getBoundingClientRect().top + window.pageYOffset + offsetY
+        window.scrollTo({ top: y, behavior: 'smooth' })
+    }
+}

@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import { NewsletterForm } from '../NewsletterForm'
 import logo from '../../images/posthog-hog-transparent.svg'
 
+import { mergeClassList } from '../../lib/utils'
 interface FooterListItemProps {
     to?: string
     href?: string
@@ -52,22 +53,29 @@ const FooterCategory = ({ children, title }: { children: any; title: string }) =
 export function Footer({
     showNewsletter = false,
     backgroundClass = '',
+    transparentBg = false,
 }: {
     showNewsletter?: boolean
     backgroundClass?: string
+    transparentBg?: boolean
 }): JSX.Element {
     const newsletterSignup = showNewsletter ? <NewsletterForm /> : null
+    const classList = mergeClassList(
+        'site-footer py-24 relative',
+        backgroundClass,
+        transparentBg ? 'site-footer--transparent' : null
+    )
 
     return (
-        <div className={`${backgroundClass} site-footer py-24 relative`}>
+        <div className={classList}>
             {newsletterSignup}
             <img src={logo} className="mx-auto block text-center" />
             <div className="w-11/12 max-w-5xl flex flex-col md:flex-row justify-between mx-auto mt-24">
                 <div className="w-full md:w-1/4 md:pr-8">
                     <FooterCategory title="Product">
                         <FooterSubCategory>Overview</FooterSubCategory>
-                        <FooterListItem to="/product-features" border={false}>
-                            Product overview &amp; comparison
+                        <FooterListItem to="/product" border={false}>
+                            Product
                         </FooterListItem>
 
                         <FooterSubCategory>Product suite</FooterSubCategory>
@@ -85,7 +93,7 @@ export function Footer({
                         <FooterListItem to="/product-features/plugins">Plugins</FooterListItem>
                         <FooterListItem to="/product-features/self-hosted">Data portability</FooterListItem>
                         <FooterListItem to="/product-features/self-hosted" border={false}>
-                            Private cloud deployment
+                            Self-hosting options
                         </FooterListItem>
                     </FooterCategory>
                 </div>
@@ -101,12 +109,13 @@ export function Footer({
                         <FooterListItem to="/slack">Slack</FooterListItem>
                         <FooterListItem href="https://github.com/PostHog/posthog/issues">Issues</FooterListItem>
                         <FooterListItem to="/support">Support</FooterListItem>
-                        <FooterListItem href="mailto:sales@posthog.com" border={false}>
-                            Contact sales
+                        <FooterListItem href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u" border={false}>
+                            Contact Sales
                         </FooterListItem>
 
                         <FooterSubCategory>Get involved</FooterSubCategory>
-                        <FooterListItem href="https://github.com/orgs/PostHog/projects/1">Roadmap</FooterListItem>
+                        <FooterListItem href="/docs/contribute/code-of-conduct">Code of conduct</FooterListItem>
+                        <FooterListItem href="/handbook/strategy/roadmap">Roadmap</FooterListItem>
                         <FooterListItem to="/contributors">Contributors</FooterListItem>
                         <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
                             Merch
@@ -117,22 +126,22 @@ export function Footer({
                     <FooterCategory title="Docs">
                         <FooterSubCategory>Getting started</FooterSubCategory>
                         <FooterListItem href="https://app.posthog.com/signup">PostHog cloud</FooterListItem>
-                        <FooterListItem to="/docs/deployment" border={false}>
+                        <FooterListItem to="/docs/self-host/deploy/overview" border={false}>
                             Deploying PostHog
                         </FooterListItem>
 
                         <FooterSubCategory>Configuring PostHog</FooterSubCategory>
-                        <FooterListItem to="/docs/deployment">Installation</FooterListItem>
+                        <FooterListItem to="/docs/self-host/configure">Installation</FooterListItem>
                         <FooterListItem to="/docs">Docs</FooterListItem>
                         <FooterListItem to="/docs/api/overview">API</FooterListItem>
-                        <FooterListItem to="/docs/libraries" border={false}>
+                        <FooterListItem to="/docs/integrate/overview" border={false}>
                             Libraries
                         </FooterListItem>
 
                         <FooterSubCategory>Using PostHog</FooterSubCategory>
-                        <FooterListItem to="/docs/features">Features</FooterListItem>
+                        <FooterListItem to="/docs/user-guides/overview">Features</FooterListItem>
                         <FooterListItem to="/docs/plugins/overview">Plugins</FooterListItem>
-                        <FooterListItem to="/docs/tutorials">Tutorials</FooterListItem>
+                        <FooterListItem to="/docs/tutorials/overview">Tutorials</FooterListItem>
                         <FooterListItem to="/faq" border={false}>
                             FAQ
                         </FooterListItem>
@@ -158,7 +167,9 @@ export function Footer({
                         </FooterListItem>
 
                         <FooterSubCategory>Get in touch</FooterSubCategory>
-                        <FooterListItem href="mailto:sales@posthog.com">Contact sales</FooterListItem>
+                        <FooterListItem href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
+                            Contact Sales
+                        </FooterListItem>
                         <FooterListItem href="https://posthog.com/support" border={false}>
                             Support
                         </FooterListItem>

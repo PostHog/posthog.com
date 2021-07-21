@@ -16,9 +16,9 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
-import { BlogFooter } from '../../components/BlogFooter'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { BlogPostLayout } from '../Blog/BlogPostLayout'
+import { AuthorsData } from 'types'
 
 interface LayoutProps {
     pageTitle?: string
@@ -33,6 +33,8 @@ interface LayoutProps {
     featuredImage?: string | null
     headerBackgroundTransparent?: boolean
     onBlogPage?: boolean
+    blogDate?: string
+    authorDetails?: AuthorsData
 }
 
 const BlogHeaderContent = ({ title }: { title: string }): JSX.Element => (
@@ -56,6 +58,8 @@ const Layout = ({
     featuredImage = '',
     headerBackgroundTransparent = false,
     onBlogPage = false,
+    blogDate = '',
+    authorDetails,
 }: LayoutProps): JSX.Element => {
     const { sidebarHide, anchorHide } = useValues(layoutLogic)
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -78,7 +82,13 @@ const Layout = ({
     }, [])
 
     return blogArticleSlug ? (
-        <BlogPostLayout pageTitle={pageTitle} featuredImage={featuredImage} blogArticleSlug={blogArticleSlug}>
+        <BlogPostLayout
+            blogDate={blogDate}
+            pageTitle={pageTitle}
+            featuredImage={featuredImage}
+            blogArticleSlug={blogArticleSlug}
+            authorDetails={authorDetails}
+        >
             {children}
         </BlogPostLayout>
     ) : (

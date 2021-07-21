@@ -1,5 +1,5 @@
 .hero {
-    background: url(../images/hero-bg.svg), linear-gradient(180deg, #220f3f 0%, #3f086d 100%);
+    background: url(../images/hero-bg.png), linear-gradient(180deg, #220f3f 0%, #3f086d 100%);
     background-position: center center;
     background-repeat: repeat-x;
     position: relative;
@@ -133,6 +133,20 @@
 
 .primary-navbar button {
     transition: none;
+}
+
+.post-preview-fade {
+    position: relative;
+
+    &:after {
+        background: linear-gradient(rgba(30, 23, 79, 0), rgba(30, 23, 79, 1));
+        bottom: 0;
+        content: '';
+        left: 0;
+        height: 250px;
+        position: absolute;
+        width: 100%;
+    }
 }
 
 .product-features {
@@ -272,7 +286,7 @@
 }
 
 .bg-pipes {
-    background: url(../images/pipes.svg), linear-gradient(180deg, #2b114d 0%, #2a235b 100%);
+    background: url(../images/pipes.png), linear-gradient(180deg, #2b114d 0%, #2a235b 100%);
     background-size: contain;
     background-position: top center;
     background-repeat: no-repeat;
@@ -305,7 +319,7 @@
         }
 
         &:before {
-            background: url(../images/circles-1.svg);
+            background: url(../images/circles-1.png);
             bottom: -400px;
             left: -500px;
             height: 689px;
@@ -313,7 +327,7 @@
         }
 
         &:after {
-            background: url(../images/circles-2.svg);
+            background: url(../images/circles-2.png);
             height: 886px;
             left: 65%;
             top: 300px;
@@ -323,7 +337,27 @@
 }
 
 .recent-blog-posts {
-    background: linear-gradient(180deg, #2a235b 0%, #08042f 100%);
+    background: #1e174f;
+    position: relative;
+
+    &:before {
+        background: linear-gradient(180deg, #2a235b 0%, #1e174f 100%);
+        content: '';
+        height: 200px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &:after {
+        background: linear-gradient(180deg, #1e174f 0%, #220f3f 100%);
+        bottom: 0;
+        content: '';
+        height: 200px;
+        position: absolute;
+        width: 100%;
+    }
 }
 
 .blockquote-section {

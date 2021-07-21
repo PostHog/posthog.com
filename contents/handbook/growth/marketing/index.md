@@ -8,19 +8,27 @@ showTitle: true
 
 Philosophy: Be kind, concise and direct.
 
+## Positioning statement
 
-## Product positioning
+We use a positioning statement based on [a template by Geoffrey Moore](https://gist.github.com/JoshSmith/2041454), which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools.
 
-An **open source product analytics platform** addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
+Our positioning statement is:
 
-**Free PostHog** is positioned to solve product analytics problems for small non-enterprise teams.
+_For product managers who need to understand their users, PostHog is the only open-source, all-in-one analytics platform that offers everything from funnel analysis and cohort tracking, to feature flags and session recording._ 
 
-**Enterprise PostHog** is positioned to solve product analytics problems for larger teams and enterprises.
+_Unlike traditional tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._ 
 
-**PostHog Cloud** is positioned to service clients who need less control.
+See [our messaging framework for more information](/handbook/growth/marketing/messaging_framework) about positioning and how we bring it to life. 
 
-**PostHog Self Hosted** is positioned to service clients who need more control.
+## Products
 
+An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
+
+**PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
+
+**PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
+
+**PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
 ## Target audience
 
@@ -131,9 +139,9 @@ Documentation contributes more to *Activation* and *Retention* than *Acquisition
 
 Prioritizing hiring for functions based on acquisition success and capacity in relation to other functions.
 
-- Product marketing: currently hiring
-- Content marketing: Mo
-- Community: hiring next
+- Product marketing: Joe Martin
+- Content marketing: Mo Shehu
+- Community: Phil Leggetter
 - Press: 2022
 - Paid: 2022
 - Technical: hiring next

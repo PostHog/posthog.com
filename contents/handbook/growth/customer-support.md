@@ -21,6 +21,17 @@ These are the ways in which customers can currently reach us, in order of popula
 - **Papercups** - we provide in-app support chat via the [Papercups](https://papercups.io/) widget
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
+### Tutorials and workshops
+
+Product analytics are only as valuable as the questions you ask. We’re committed to helping teams of all sizes learn how to ask the right questions to grow their product. To this end, we’re constantly producing new content in the form of [tutorials](https://posthog.com/docs/tutorials), [blog posts](https://posthog.com/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA). 
+
+#### Product analytics worksheet
+We've created a [Product Metrics Worksheet](https://docs.google.com/document/d/1mXKS08ngcJlbJdaYihikHO7RDY8dbxyChmsUneOwrfw/edit?usp=sharing) that systematically lays out how to define, implement, and track core product and business metrics (Acquisition, Activation, Retention, Referral, Revenue) all within PostHog.
+
+This worksheet is available for everyone to use and is designed to help all teams (even ones that aren't using PostHog! *yet*).
+
+For [Scale](/pricing#scale) customers, we include a complementary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog.
+
 ### No dedicated support people
 
 We intentionally have not hired a single person dedicated to customer support. The direct interaction between our engineering team and our users is _hugely_ valuable, and an important part of building trust in our community is the ability for users to talk directly with the people who are actually building the product. 
@@ -30,6 +41,8 @@ Providing support is a responsibility shared across our team - we expect everyon
 This does mean sometimes that, especially when we are particularly busy, customer success can take a bit of a back seat. 
 
 This is why, in addition, one person takes on the **Support Hero** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+
+You can view the Support Hero rota [in PagerDuty here](https://posthog.pagerduty.com/schedules#PPLGE4G). 
 
 ### Simple, lightweight tools
 

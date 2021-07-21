@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Plugins
+sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
@@ -36,7 +37,7 @@ Plugins can pull in information like exchange rates, GeoIP location data, online
  
 **Adding your own data from other sources to PostHog**
 
-In addition to pulling data from third-parties, you might also want to bring in data from your own sources, such other tools and platforms you use. 
+In addition to pulling data from third-parties, you might also want to bring in data from your own sources, such as other tools and platforms you use. 
 
 **Labeling events**
 
