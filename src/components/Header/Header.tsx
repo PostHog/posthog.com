@@ -95,7 +95,7 @@ export const Header = ({
                 </div>
                 <nav>
                     <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav p-0">
-                        <NavbarLink to="/product-features" textLight={textLight}>
+                        <NavbarLink to="/product" textLight={textLight}>
                             Product
                         </NavbarLink>
                         <NavbarLink to="/docs" textLight={textLight}>
