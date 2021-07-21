@@ -592,3 +592,8 @@
 [[redirects]]
     from = "/signup"
     to = "/pricing"
+
+# Added: 2021-07-21
+[[redirects]]
+    from = "/docs/self-host/configure/scaling-posthog"
+    to = "/docs/self-host/postgres-vs-clickhouse"
