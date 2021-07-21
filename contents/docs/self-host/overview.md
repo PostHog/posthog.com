@@ -14,9 +14,9 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 
 ### **Deployment Options (ClickHouse):**
 
-If (i) you're looking to track more than 1k users/month, or (ii) you're planning on doing lots of queries, or (iii) you may in future want to upgrade an existing instance to PostHog Scale (our paid product for growth stage or enterprise users), you're better off using PostHog backed by ClickHouse, see [Postgres vs Clickhouse](/docs/self-host/postgres-vs-clickhouse). If you are not comfortable with deploying Helm charts we recommend either using Postgres (see below) or [PostHog Cloud](/pricing)
+If (i) you're looking to track more than 1k users/month, or (ii) you're planning on doing lots of queries, or (iii) you may in future want to upgrade an existing instance to PostHog Scale (our paid product for growth stage or enterprise users), you're better off using PostHog backed by ClickHouse, see [Postgres vs ClickHouse](/docs/self-host/postgres-vs-clickhouse). If you are not comfortable with deploying Helm charts we recommend either using Postgres (see below) or [PostHog Cloud](/pricing)
 
-- [1-click on Digital Ocean](https://marketplace.digitalocean.com/apps/posthog-1) 
+- [1-click on DigitalOcean](https://marketplace.digitalocean.com/apps/posthog-1)
 - [Using Helm chart](https://github.com/PostHog/charts-clickhouse)
 
 ### **Deployment Options (Postgres):**

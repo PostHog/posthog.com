@@ -1,5 +1,5 @@
 ---
-title: Postgres vs Clickhouse
+title: Postgres vs ClickHouse
 sidebar: Docs
 showTitle: true
 ---
