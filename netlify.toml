@@ -143,7 +143,6 @@
     from = "/handbook/getting-started"
     to = "/handbook/getting-started/start-here"
 
-
 [[redirects]]
     from = "/handbook/people/team-structure/user-experience"
     to = "/handbook/people/team-structure/core-experience"
