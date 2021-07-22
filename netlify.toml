@@ -596,3 +596,9 @@
 [[redirects]]
     from = "/signup"
     to = "/pricing"
+
+# Added: 2021-07-21
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/product-features"
+    to = "/product"
