@@ -18,7 +18,7 @@ function BlogAuthor({ authorDetails, className }: AuthorDetails) {
                     </div>
                     <div>
                         <h6 className="mb-0 font-sans normal-case font-bold">{name}</h6>
-                        <p className="text-white text-opacity-75 mb-2 text-sm">{role}</p>
+                        <p className="text-opacity-75 mb-2 text-sm">{role}</p>
                         <a
                             href={link_url}
                             target="_blank"
