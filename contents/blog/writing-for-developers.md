@@ -7,6 +7,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: james-hawkins
+featuredImageType: full
 ---
 
 As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [HackerNews](https://news.ycombinator.com).
