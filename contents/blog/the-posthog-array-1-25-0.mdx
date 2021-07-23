@@ -7,14 +7,15 @@ showTitle: true
 hideAnchor: true
 categories: release-notes
 featuredImage: ../images/blog/array/1-25-0.png
+featuredImageType: standard
 excerpt: PostHog 1.25.0 is here! Read about our new features, why we're giving 1M events for free to everyone, and find out who are the 6 new team members we've onboarded.
 ---
 
-PostHog 1.25.0 is here! 
+PostHog 1.25.0 is here!
 
-Since the last release, we've now onboarded 6 new team members, all of them awesome. 
+Since the last release, we've now onboarded 6 new team members, all of them awesome.
 
-For our users, what this means is: 
+For our users, what this means is:
 
 ```
 Awesome new team members == Better product
@@ -25,10 +26,10 @@ Awesome new team members == Better product
 We have increased our free volume on [PostHog Cloud](app.posthog.com) to 1 million events per month for free, instead of the previous 10k.
 
 That means your next PostHog bill will be up to 225$/month cheaper!
- 
-It's important to us that you have enough room to determine if PostHog is the right fit for you, before committing to the platform. 
 
-This change is also retroactive, so existing PostHog users have already had this change applied to their accounts. 
+It's important to us that you have enough room to determine if PostHog is the right fit for you, before committing to the platform.
+
+This change is also retroactive, so existing PostHog users have already had this change applied to their accounts.
 
 Enjoy!
 
@@ -38,27 +39,26 @@ This release cycle's Community MVP goes to...
 
 [Rajakavitha1](https://github.com/Rajakavitha1)!
 
-Rajakavitha dug into our codebase and helped us document 2 new API endpoints, as well as submitting other suggestions and changes to our documentation pages. 
+Rajakavitha dug into our codebase and helped us document 2 new API endpoints, as well as submitting other suggestions and changes to our documentation pages.
 
 Thanks a lot for all your help - hope you're enjoying your PostHog merch!
 
-> If you haven't seen it yet, we have a [new page dedicated to our contributors](/contributors). Every contributor gets their own digital card, and we provide a leaderboard with stats on the contributions made by each contributor. We also have a bot that sends a gift card for PostHog merch to contributors for every PR merged, and we welcome all types of contributions! 
+> If you haven't seen it yet, we have a [new page dedicated to our contributors](/contributors). Every contributor gets their own digital card, and we provide a leaderboard with stats on the contributions made by each contributor. We also have a bot that sends a gift card for PostHog merch to contributors for every PR merged, and we welcome all types of contributions!
 
 **In this release:**
 
-- **New:** Plugin logs
-- **New:** 'Trends' legends
-- **New:** Lifecycle toggles
-- **New:** Resizable table columns
-- **New:** Job queues for plugins
-- **Improvement:** Fuzzy search for properties
+-   **New:** Plugin logs
+-   **New:** 'Trends' legends
+-   **New:** Lifecycle toggles
+-   **New:** Resizable table columns
+-   **New:** Job queues for plugins
+-   **Improvement:** Fuzzy search for properties
 
 <ArrayCTA />
 
 ## PostHog 1.25.0 Release Notes
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
-
 
 ### [Legends for charts in 'Trends'](https://github.com/PostHog/posthog/pull/3434)
 
@@ -78,9 +78,9 @@ Plugins are now able to use the JavaScript `console` API to specify errors that 
 
 ![Lifecycle Toggles](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/lifecycle-toggles.png)
 
-Li joined us this cycle and started making an impact from day 1! 
+Li joined us this cycle and started making an impact from day 1!
 
-As a result of her work, you can now toggle different sections of lifecycle graphs on and off, in order to dig into the metrics that matter most to you. 
+As a result of her work, you can now toggle different sections of lifecycle graphs on and off, in order to dig into the metrics that matter most to you.
 
 This change also came with an addition of more in-product hints about the lifecycle functionality.
 
@@ -96,7 +96,7 @@ This cycle, in addition to picking up a variety of product fixes and improvement
 
 Plugins keep getting more and more powerful every new release, and this cycle was no exception.
 
-Plugin developers can now leverage job queues to implement a variety of asynchronous tasks, including retry mechanisms. 
+Plugin developers can now leverage job queues to implement a variety of asynchronous tasks, including retry mechanisms.
 
 In addition, plugins can now leverage have two more functions: `onEvent` and `onSnapshot`.
 
@@ -124,35 +124,35 @@ We onboarded so many people this cycle that it makes sense to make a table for i
 
 ### New joiners
 
-| Name | Role | 🍍 on 🍕? | Interesting Fact | 
-| :---: | :---: | :---: | :---: | 
-| Buddy | Fullstack Developer | 🤮 | _"I practice AcroYoga."_ |
-| Li | Fullstack Developer | 😍 | _"I'm in the top 3% of all North American League of Legends players."_ |
-| Mo | Content Marketer | 😍 | _"I was a radio presenter in a previous life. A producer walked past me at a career fair, heard me speak, asked me to follow her to the studio, and put a mic in front of me. The rest is history."_ |
-| Neil | Fullstack Developer | 🤮 | _"There was a time I travelled using nothing but paper maps for directions. As a result, I developed excellent sense of direction and photographic memory for maps. Now I subconsciously try to figure out which way is North, wherever I am, so I can navigate using the map in my brain. Thanks to this I never get confused between taking an Eastbound or Westbound tube 😂"_ |
-| Sam | Fullstack Developer | 😍 | _"In my apartment, I have a self-sustaining compost bin with worms inside. It keeps food scraps out of the landfill and makes excellent soil!"_ |
-| Tiina | Fullstack Developer | 😍 | _"I spent a summer selling books door-to-door in Utah. I appreciate sales/customer service folks much more since then - their job is so hard."_ |
+| Name  |        Role         | 🍍 on 🍕? |                                                                                                                                                                                 Interesting Fact                                                                                                                                                                                  |
+| :---: | :-----------------: | :-------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Buddy | Fullstack Developer |    🤮     |                                                                                                                                                                             _"I practice AcroYoga."_                                                                                                                                                                              |
+|  Li   | Fullstack Developer |    😍     |                                                                                                                                                      _"I'm in the top 3% of all North American League of Legends players."_                                                                                                                                                       |
+|  Mo   |  Content Marketer   |    😍     |                                                                                       _"I was a radio presenter in a previous life. A producer walked past me at a career fair, heard me speak, asked me to follow her to the studio, and put a mic in front of me. The rest is history."_                                                                                        |
+| Neil  | Fullstack Developer |    🤮     | _"There was a time I travelled using nothing but paper maps for directions. As a result, I developed excellent sense of direction and photographic memory for maps. Now I subconsciously try to figure out which way is North, wherever I am, so I can navigate using the map in my brain. Thanks to this I never get confused between taking an Eastbound or Westbound tube 😂"_ |
+|  Sam  | Fullstack Developer |    😍     |                                                                                                                  _"In my apartment, I have a self-sustaining compost bin with worms inside. It keeps food scraps out of the landfill and makes excellent soil!"_                                                                                                                  |
+| Tiina | Fullstack Developer |    😍     |                                                                                                                  _"I spent a summer selling books door-to-door in Utah. I appreciate sales/customer service folks much more since then - their job is so hard."_                                                                                                                  |
 
 ## Community Shoutouts
 
 Big thanks to the following members of our community who have contributed to PostHog over this release cycle:
 
-- [Rajakavitha1](https://github.com/Rajakavitha1)
-- [leggetter](https://github.com/leggetter)
-- [gesposito](https://github.com/gesposito)
-- [adrienbrault](https://github.com/adrienbrault)
-- [sankalpdomore](https://github.com/sankalpdomore)
-- [gagantrivedi](https://github.com/gagantrivedi)
-- [thedeveloperr](https://github.com/thedeveloperr)
-- [bard](https://github.com/bard)
-- [swong194](https://github.com/swong194)
-- [afterwind-io](https://github.com/afterwind-io)
-- [kevinhu](https://github.com/kevinhu)
-- [j-fuentes](https://github.com/j-fuentes)
-- [daviddanielarch](https://github.com/daviddanielarch)
-- [angelahuang89](https://github.com/angelahuang89)
-- [akshayagarwal](https://github.com/akshayagarwal)
-- [JeffreyQ](https://github.com/JeffreyQ)
+-   [Rajakavitha1](https://github.com/Rajakavitha1)
+-   [leggetter](https://github.com/leggetter)
+-   [gesposito](https://github.com/gesposito)
+-   [adrienbrault](https://github.com/adrienbrault)
+-   [sankalpdomore](https://github.com/sankalpdomore)
+-   [gagantrivedi](https://github.com/gagantrivedi)
+-   [thedeveloperr](https://github.com/thedeveloperr)
+-   [bard](https://github.com/bard)
+-   [swong194](https://github.com/swong194)
+-   [afterwind-io](https://github.com/afterwind-io)
+-   [kevinhu](https://github.com/kevinhu)
+-   [j-fuentes](https://github.com/j-fuentes)
+-   [daviddanielarch](https://github.com/daviddanielarch)
+-   [angelahuang89](https://github.com/angelahuang89)
+-   [akshayagarwal](https://github.com/akshayagarwal)
+-   [JeffreyQ](https://github.com/JeffreyQ)
 
 ## Open Roles
 
@@ -160,30 +160,26 @@ If you'd love to help us build PostHog, we have a lot of openings available!
 
 We're looking for:
 
-- Customer Success Lead
-- VP Customer Success
-- Ex-Founders (Engineering)
-- Front End Developer (Remote)
-- Senior Full Stack Engineer
-- Senior Full Stack Engineer - EMEA
-- Senior Mobile Engineer
-- Site Reliability Engineer
-- Recruitment & Operations Manager
-- Senior Product Designer
-- Any role you think you'd be a great fit for
-
+-   Customer Success Lead
+-   VP Customer Success
+-   Ex-Founders (Engineering)
+-   Front End Developer (Remote)
+-   Senior Full Stack Engineer
+-   Senior Full Stack Engineer - EMEA
+-   Senior Mobile Engineer
+-   Site Reliability Engineer
+-   Recruitment & Operations Manager
+-   Senior Product Designer
+-   Any role you think you'd be a great fit for
 
 Check out our [Careers page](https://posthog.com/careers) for more info.
-
 
 ## Bug Fixes and Performance Improvements
 
 In addition to the highlights listed above, we also merged a bunch of PRs improving PostHog's performance and fixing bugs. Here are some of the highlights:
 
-- `PostHog/posthog`: [228 PRs merged / commits](https://github.com/PostHog/posthog/commits/master)
-- `PostHog/plugin-server`: [66 PRs merged / commits](https://github.com/PostHog/plugin-server/commits/master)
-- `PostHog/posthog-python`: [13 PRs merged / commits](https://github.com/PostHog/posthog-python/commits/master)
-- `PostHog/posthog-cloud`: [7 PRs merged / commits](https://github.com/PostHog/posthog-cloud/commits/master)
-- `PostHog/posthog-js`: [7 PRs merged / commits](https://github.com/PostHog/posthog-js/commits/master)
-
-
+-   `PostHog/posthog`: [228 PRs merged / commits](https://github.com/PostHog/posthog/commits/master)
+-   `PostHog/plugin-server`: [66 PRs merged / commits](https://github.com/PostHog/plugin-server/commits/master)
+-   `PostHog/posthog-python`: [13 PRs merged / commits](https://github.com/PostHog/posthog-python/commits/master)
+-   `PostHog/posthog-cloud`: [7 PRs merged / commits](https://github.com/PostHog/posthog-cloud/commits/master)
+-   `PostHog/posthog-js`: [7 PRs merged / commits](https://github.com/PostHog/posthog-js/commits/master)
