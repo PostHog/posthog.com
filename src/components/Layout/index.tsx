@@ -32,6 +32,7 @@ interface LayoutProps {
     containerStyle?: Record<string, any>
     menuActiveKey?: string
     featuredImage?: string | null
+    featuredImageType?: string
     headerBackgroundTransparent?: boolean
     onBlogPage?: boolean
     blogDate?: string
@@ -57,6 +58,7 @@ const Layout = ({
     className = '',
     containerStyle = {},
     featuredImage = '',
+    featuredImageType = '',
     headerBackgroundTransparent = false,
     onBlogPage = false,
     blogDate = '',
@@ -87,6 +89,7 @@ const Layout = ({
             blogDate={blogDate}
             pageTitle={pageTitle}
             featuredImage={featuredImage}
+            featuredImageType={featuredImageType}
             blogArticleSlug={blogArticleSlug}
             authorDetails={authorDetails}
         >
