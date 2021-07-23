@@ -29,6 +29,7 @@ interface MdxQueryData {
             showTitle: boolean
             hideAnchor: boolean
             description: string
+            featuredImageType?: string
             featuredImage?: {
                 publicURL?: string
             }
@@ -90,6 +91,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                 onPostPage={true}
                 blogArticleSlug={blogArticleSlug}
                 pageTitle={frontmatter.title}
+                featuredImageType={frontmatter.featuredImageType}
                 featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
@@ -142,6 +144,7 @@ export const query = graphql`
                 showTitle
                 hideAnchor
                 description
+                featuredImageType
                 featuredImage {
                     publicURL
                 }

@@ -9,12 +9,13 @@ import { BlogShareButtons } from '../BlogShareButtons'
 import { Structure } from '../../Structure'
 import { DarkModeToggle } from '../../DarkModeToggle'
 import { AuthorsData } from 'types'
-import BlogAuthor from '../BlogAuthor'
+import { BlogIntro } from '../BlogIntro'
 
 interface BlogPostLayoutProps {
     pageTitle: string
     children: any
     featuredImage?: string | null | undefined
+    featuredImageType?: string
     blogArticleSlug: string
     blogDate?: string
     authorDetails?: AuthorsData
@@ -24,6 +25,7 @@ export function BlogPostLayout({
     pageTitle,
     children,
     featuredImage,
+    featuredImageType,
     blogArticleSlug,
     blogDate,
     authorDetails,
@@ -43,42 +45,13 @@ export function BlogPostLayout({
                 <DarkModeToggle />
             </div>
 
-            {featuredImage && (
-                <div className="w-full h-full relative flex items-center justify-center blog-image">
-                    <figure
-                        className="bg-no-repeat bg-cover"
-                        style={{
-                            backgroundImage: 'url(' + featuredImage + ')',
-                        }}
-                    ></figure>
-
-                    <div className="absolute top-0 w-full left-0 bottom-0 leading-tight z-10 flex justify-center items-center flex-col ">
-                        <time className="opacity-50 w-full max-w-xl mb-2">{blogDate}</time>
-                        <Structure.SectionHeader
-                            titleTag="h1"
-                            title={pageTitle}
-                            titleClassName="font-sans normal-case leading-tight w-full max-w-xl my-0"
-                        />
-
-                        {authorDetails?.handle && (
-                            <div className="w-full max-w-xl mt-6">
-                                <BlogAuthor authorDetails={authorDetails} />
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            <Structure.Section width="xl" className="text-center leading-tight mb-6">
-                <p className="mt-8 mb-2 opacity-50">{blogDate}</p>
-                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
-            </Structure.Section>
-
-            {authorDetails?.handle && (
-                <Structure.Section width="xl" className="mb-12">
-                    <BlogAuthor authorDetails={authorDetails} />
-                </Structure.Section>
-            )}
+            <BlogIntro
+                authorDetails={authorDetails}
+                featuredImageType={featuredImageType}
+                featuredImage={featuredImage}
+                pageTitle={pageTitle}
+                blogDate={blogDate}
+            />
 
             <div className="max-w-xl mx-auto relative pt-12 blog-post-content">
                 <BlogShareButtons />

@@ -145,6 +145,7 @@ module.exports = {
             },
             padding: {
                 'fluid-video': '56.25%',
+                '1/2': '50%',
             },
         },
     },
