@@ -143,8 +143,6 @@ While PostHog will use the money saved from not having office space for real lif
 
 You can spend up to \$200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
 
-If you live in the US, a particularly good way to use this budget is to cover the cost of Amex Platinum which provides WeWork access. Outside of the US, you may sign your own agreement or buy day vouchers as needed. We will not cover costs beyond this amount of money.
-
 ## Celebrations and life events
 
 It's important to us at PostHog to celebrate team member milestones and achievements.
