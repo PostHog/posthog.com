@@ -22,7 +22,7 @@ export function BlogSidebar(): JSX.Element {
             {blogCategoryLinks}
 
             <header className="mt-12 text-xs text-gray-400 uppercase">More Reads</header>
-            <Link to="/docs/tutorials" className={linkClassList}>
+            <Link to="/docs/tutorials/overview" className={linkClassList}>
                 Tutorials
             </Link>
             <header className="mt-12 text-xs text-gray-400 uppercase">Follow Us</header>

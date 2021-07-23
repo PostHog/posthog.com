@@ -33,11 +33,11 @@ This tutorial is aimed at SPAs, which are websites that only load one time, with
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Be using our [JavaScript Library](/docs/libraries/js) to track your SPA
+1. Be using our [JavaScript Library](/docs/integrate/client/js) to track your SPA
 
 ### Tracking Navigation Changes in SPAs
 
-If you use PostHog to track a traditional website, our [autocapture](/docs/libraries/js#autocapture) feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
+If you use PostHog to track a traditional website, our [autocapture](/docs/integrate/client/js#autocapture) feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
 
 As such, in order to accurately capture navigation in SPAs, we need to manually send events, since autocapture is not enough. 
 
@@ -174,7 +174,7 @@ If you override the default property, your events table will look like this:
 
 Instead of a the automatically captured URL, your events table will show your custom value under 'URL / Screen'.
 
-Additionally, you will also be able to use our [paths](/docs/features/paths) feature with your custom URLs.
+Additionally, you will also be able to use our [paths](/docs/user-guides/paths) feature with your custom URLs.
 
 > **Note:** If your page does not refresh but the URL changes with navigation, PostHog's default 'Current URL' may still be useful. Otherwise, if your URL _never_ changes, you should definitely override the prop with your own values - just make sure to follow a good naming system!
 
@@ -265,7 +265,7 @@ The methods presented here are examples of options to track SPAs with PostHog. H
 
 Given the wide variety of available JavaScript events, you can also set up your navigation tracking in other ways, such as through `mouseover` events, for example. 
 
-In addition, you can also send your own [custom events](/docs/libraries/js/#sending-events) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
+In addition, you can also send your own [custom events](/docs/integrate/client/js/#sending-events) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
 
 ```js
 posthog.capture(

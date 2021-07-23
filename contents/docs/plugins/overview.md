@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Plugins
+sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---

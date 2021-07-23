@@ -1,0 +1,70 @@
+---
+title: Integrate PostHog
+sidebarTitle: Overview
+sidebar: Docs
+showTitle: true
+---
+
+PostHog provides multiple integrations to send events from your apps and use the API of your PostHog instance.
+
+We have put a significant effort into providing as many of these integrations as possible, in order to make your experience better.
+
+Our goal is for users to be able to integrate PostHog with their language, framework or platform of choosing, without having to adapt their stack.
+
+## Libraries
+
+Refer to the table below for an overview of the functionality in each of our libraries.
+
+### Client Libraries
+
+Some features such as session recording are only available with our JavaScript library.
+
+> We're working to add support for feature flags and autocapture to as many libraries as possible. Please check out the individual library repositories for status on this and let us know if you think we should prioritize support for any specific library.
+
+|                     Library                             | Maintainer   | Event Capture | User Identification | Autocapture | Session Recording |                         Feature Flags                         |
+| :-----------------------------------------------------: | :----------: | :-----------: | :-----------------: | :---------: | :---------------: | :-----------------------------------------------------------: |
+|        [JavaScript](/docs/integrate/client/js)          | PostHog Team |       ✅      |          ✅          |    ✅      |        ✅          |                              ✅                               |
+|       [Android](/docs/integrate/client/android)         | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
+|           [iOS](/docs/integrate/client/ios)             | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
+|       [Flutter](/docs/integrate/client/flutter)         | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
+|  [React Native](/docs/integrate/client/react-native)    | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
+
+### Server Libraries
+
+> **Note:** Session recording is not possible on server-side libraries.
+
+|                     Library                             | Maintainer   | Event Capture | User Identification | Feature Flags |
+| :-----------------------------------------------------: | :----------: | :-----------: | :-----------------: |:------------: |
+|         [NodeJS](/docs/integrate/server/node)            | PostHog Team |       ✅      |          ✅          |      ✅       |
+|        [Python](/docs/integrate/server/python)           | PostHog Team |       ✅      |          ✅          |      ✅       |
+|           [PHP](/docs/integrate/server/php)              | PostHog Team |       ✅      |          ✅          |      ✅       |
+|          [Ruby](/docs/integrate/server/ruby)             | PostHog Team |       ✅      |          ✅          |      ✅       |
+|          [Golang](/docs/integrate/server/go)             | PostHog Team |       ✅      |          ✅          |      ✅       |
+|        [Elixir](/docs/integrate/server/elixir)           |  Community   |       ✅      |          ✅          |      ❌       |
+| [Nim](https://github.com/Yardanico/posthog-nim)         |  Community   |       ✅      |          ✅          |      ❌       |
+
+
+
+<HiddenSection headingType='h3' title='Library Activity Stats' >
+
+<LibraryStats />
+
+</HiddenSection>
+
+## Integrations
+
+|                       Integration                        |                                          Description                                           |    Maintainer    | Sends data to PostHog? | Pulls data from PostHog? |
+| :------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :--------------: | :--------------------: | :----------------------: |
+|             [Sentry](/docs/integrate/third-party/sentry)             | A two-way integration to get PostHog user data into Sentry and Sentry exceptions into PostHog. |   PostHog Team   |           ✅           |            ✅            |
+|            [Segment](/docs/integrate/third-party/segment)            |                    Integration to use PostHog as a destination in Segment.                     |   PostHog Team   |           ✅           |            ❌            |
+|          [RudderStack](/docs/integrate/third-party/sentry)           |                  Integration to use PostHog as a destination in RudderStack.                   | RudderStack Team |           ✅           |            ❌            |
+|              [Slack](/docs/integrate/webhooks/slack)              |             PostHog webhooks to receive messages in Slack when an action happens.              |   PostHog Team   |           ❌           |            ✅            |
+|    [Microsoft Teams](/docs/integrate/webhooks/microsoft-teams)    |        PostHog webhooks to receive messages in Microsoft Teams when an action happens.         |   PostHog Team   |           ❌           |            ✅            |
+|             [Gatsby](/docs/integrate/third-party/gatsby)             |                    A wrapper over `posthog-js` provided as a Gatsby plugin.                    |    Community     |           ✅           |            ❌            |
+|         [Docusaurus](/docs/integrate/third-party/docusaurus)         |                  A wrapper over `posthog-js` provided as a Docusaurus plugin.                  |    Community     |           ✅           |            ❌            |
+|  [Zapier](https://zapier.com/apps/posthog/integrations)  |                           Use PostHog triggers in Zapier workflows.                            |   PostHog Team   |           ❌           |            ✅            |
+| [n8n](https://docs.n8n.io/nodes/n8n-nodes-base.postHog/) |                             Use PostHog triggers in n8n workflows.                             |     n8n Team     |           ❌           |            ✅            |
+
+## Plugins
+
+Visit our [plugins section](/docs/plugins/overview) for more information.

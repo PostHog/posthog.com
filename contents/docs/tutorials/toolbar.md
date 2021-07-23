@@ -48,9 +48,9 @@ _Prefer to watch a video? Check out the [Toolbar sections of our demo video](htt
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have added the [PostHog snippet](/docs/libraries/js) to your website. 
+1. Have added the [PostHog snippet](/docs/integrate/client/js) to your website. 
 
-> **Note:** Our Toolbar only works with our [JavaScript Library](/docs/libraries/js), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
+> **Note:** Our Toolbar only works with our [JavaScript Library](/docs/integrate/client/js), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
 
 ## Why Use the Toolbar
 
@@ -108,7 +108,7 @@ With the heatmap enabled, if you then click on an element, you will also be able
 
 ## Creating Actions
 
-Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/features/actions). 
+Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/user-guides/actions). 
 
 ### Step 1: Using 'Inspect'
 
@@ -164,7 +164,7 @@ This is an `OR` operation, meaning that the action will be recorded if Element A
 
 This is useful if you have various buttons that take you to the same page, for instance, and just care that the user clicks one of them.
 
-A good use case for this is leveraging the action as a [funnel step](/docs/features/funnels). 
+A good use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
 
 ### Step 2: Seeing your existing actions
 

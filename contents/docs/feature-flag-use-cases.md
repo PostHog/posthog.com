@@ -14,7 +14,7 @@ In simple terms, A/B testing is a method for determining how to provide the best
 
 This could be used to answer questions such as "Do users click a button more often if it is blue or red?" or more complex questions like "How much more time do active users who have signed up for a free trial spend on our blog pages if we add a banner image?".
 
-A great way to do this is by using [Cohorts](/docs/features/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different cohorts. 
+A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different cohorts. 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 

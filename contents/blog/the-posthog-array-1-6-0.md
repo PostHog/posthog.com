@@ -10,7 +10,7 @@ categories: release-notes
 
 One of the most fun weeks we've had so far with our UX - resizable and touch-enabled dashboards with a new display mode, Microsoft Teams support, and paths for events. Plus, a ton of performance improvements.
 
-Want to try this out and self hosting? [Update your PostHog](/docs/configuring-posthog/upgrading-posthog).
+Want to try this out and self hosting? [Update your PostHog](/docs/self-host/configure/upgrading-posthog).
 
 ## Release notes
 
@@ -28,9 +28,9 @@ Now you're able to adjust their colours (including black!) and even to enter 'pr
 
 Finally, your pinned dashboards will appear in the sidebar, so they're easier to get to.
 
-### [Microsoft Teams integration](/docs/libraries/microsoft-teams)
+### [Microsoft Teams integration](/docs/integrate/webhooks/microsoft-teams)
 
-PostHog already integrates with [Slack](/docs/libraries/slack).
+PostHog already integrates with [Slack](/docs/integrate/webhooks/slack).
 
 We had a user who said they'd got the webhook working with MS Teams too, so we wrote out how to do that.
 

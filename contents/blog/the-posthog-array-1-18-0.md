@@ -16,7 +16,7 @@ Finally, thank you to everyone who helped us out with feedback and contributions
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [New Event Selection Box](https://github.com/PostHog/posthog/pull/2394)
 

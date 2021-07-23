@@ -27,7 +27,7 @@ As such, this tutorial will walk you through how to track usage of your B2B prod
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/libraries/js), one of our [integrations](/docs/libraries), or our [API](/docs/api/overview)
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview)
 
 > **Pro Tip:** To make the most out of this tutorial, we recommend that you have some [actions](/docs/tutorials/actions#sorting-through-your-events-with-actions) set up, as well as have tried sending some [custom events](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors). These are explained in detail in our [Complete Guide to Event Tracking](/docs/tutorials/actions). Additionally, it is also beneficial to be familiar with [Cohorts](/docs/tutorials/cohorts).
  
@@ -48,7 +48,7 @@ This can be the case if you use PostHog to track multiple websites or applicatio
 
 At PostHog, for example, we set a filter for 'Current URL does not contain `https://posthog.com`'. This filters out pageviews from our website so that we can focus on actual product usage.
 
-Next, you might also want to filter your own team out of the data. The best way to do so is by using a [Cohort](/docs/tutorials/cohorts). Your cohort can define who your team is or isn't by matching properties such as `company_name`, `email`, or `team_id`, depending on the logic you use to identify users. Keep in mind that these are [properties that you have to set yourself](/docs/libraries/js#sending-user-information).
+Next, you might also want to filter your own team out of the data. The best way to do so is by using a [Cohort](/docs/tutorials/cohorts). Your cohort can define who your team is or isn't by matching properties such as `company_name`, `email`, or `team_id`, depending on the logic you use to identify users. Keep in mind that these are [properties that you have to set yourself](/docs/integrate/client/js#sending-user-information).
 
 Here's what your chart might look like after the aforementioned setup:
 
@@ -68,7 +68,7 @@ When you onboard a user, you probably want to track their specific usage on the 
 
 In order to track this, you should first ensure you are sending relevant user data to PostHog. For example, when a user signs up, you should consider adding their email as a property to PostHog, as well as other valuable information such as their company name.
 
-With our [JavaScript Library](/docs/libraries/js), this might look something like this:
+With our [JavaScript Library](/docs/integrate/client/js), this might look something like this:
 
 ```js
 const login = (userEmail, userPassword, userCompanyName) => {
@@ -173,7 +173,7 @@ In our case, feature flags are a great example:
 
 ![Feature Flags Tracking](../../images/tutorials/b2b/feature-flags.png)
 
-Originally rolled out as an experimental feature, our [feature flags](/docs/features/feature-flags) functionality has seen its usage grow consistently month after month, indicating to us that it is worth improving and expanding the feature - something we have been doing actively.
+Originally rolled out as an experimental feature, our [feature flags](/docs/user-guides/feature-flags) functionality has seen its usage grow consistently month after month, indicating to us that it is worth improving and expanding the feature - something we have been doing actively.
 
 ##### Are there features we should drop?
 
@@ -216,13 +216,13 @@ Any chart, table, funnel, and graph from our 'Insights' can be added to a dashbo
 
 Dashboards can be customized as you wish - you can change the color, size, and name of panels, as well as you can update their content whenever you want. You are also able to pin dashboards that you especially care about to the sidebar, as well as create a shareable link for each dashboard. These links can be used to share dashboards across teams, such as between Sales and Marketing teams within your company.
 
-> **Note:** If you want to learn more about dashboards, check out our [dedicated Dashboards page](/docs/features/dashboards).
+> **Note:** If you want to learn more about dashboards, check out our [dedicated Dashboards page](/docs/user-guides/dashboards).
 
 ### Helping your teams stay on top of usage
 
 If you want to stay on top of new signups (or any other specific action), you can use webhooks to send messages to platforms like Slack and Microsoft Teams.
 
-> **Note:** To set up webhooks, visit our dedicated documentation pages for [Slack](/docs/libraries/slack) and [Microsoft Teams](/docs/libraries/microsoft-teams)
+> **Note:** To set up webhooks, visit our dedicated documentation pages for [Slack](/docs/integrate/webhooks/slack) and [Microsoft Teams](/docs/integrate/webhooks/microsoft-teams)
 
 Once configured in setup, you are able to set custom messages to be sent to you when a certain action is triggered. You can set this on each new action that you create, on the action creation page:
 

@@ -10,11 +10,11 @@ categories: release-notes
 
 Big new integration - PostHog now has a library for iOS!
 
-Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
 
 ## Release notes
 
-### [PostHog iOS Library](/docs/libraries/ios)
+### [PostHog iOS Library](/docs/integrate/client/ios)
 
 ![](../images/04/ioslibrary1.gif)
 
@@ -22,7 +22,7 @@ You can now capture events in your iOS app and send them to PostHog. It automati
 
 Marius has been working on a lot of our libraries (starting with [Ruby](https://github.com/PostHog/posthog-ruby)) but we knew that our mobile support was a big gap.
 
-See our [iOS docs](/docs/libraries/ios) for how to install it on your app.
+See our [iOS docs](/docs/integrate/client/ios) for how to install it on your app.
 
 ### [Session Information](https://github.com/PostHog/posthog/pull/586)
 

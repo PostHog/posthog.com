@@ -25,8 +25,10 @@ interface MdxQueryData {
         frontmatter: {
             date: string
             title: string
+            sidebarTitle?: string
             sidebar: string
             showTitle: boolean
+            tags?: string[]
             hideAnchor: boolean
             description: string
             featuredImageType?: string
@@ -142,6 +144,7 @@ export const query = graphql`
                 title
                 sidebar
                 showTitle
+                tags
                 hideAnchor
                 description
                 featuredImageType

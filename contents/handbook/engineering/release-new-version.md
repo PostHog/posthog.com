@@ -4,17 +4,17 @@ sidebar: Handbook
 showTitle: true
 ---
 
-At the moment, we release a new version every two weeks ([unless it makes sense not to!](/blog/we-ship-whenever)). This might change in the future.
+At the moment, we release a new version every month ([unless it makes sense not to!](/blog/we-ship-whenever)). This might change in the future.
 
 ## Version numbers
 
-Every week we up the 'minor' in `major.minor.patch`. At the moment, we're at version 1 for major. This will only change once we have released sufficient functionality under stage 2 of [our Roadmap](/handbook/strategy/roadmap/).
+Every month we bump the `minor` in `major.minor.patch`. At the moment, we're at version 1 for major. This will only change once we have released sufficient functionality under stage 2 of [our Roadmap](/handbook/strategy/roadmap/).
 
 Hopefully we will not have to do many patch versions, but if between versions we discover a breaking bug, we will.
 
 ## Timeline
 
-Three days before we release, on Monday, we institute a code freeze. We branch master into release-[version] and deploy that to our production environment (app.posthog.com). Only bugfixes are allowed to be merged into this branch (and thus put on production) between Monday and the release going out. This gives us about three days to test if this release has any bugs.
+Three days before we release, on Monday, we institute a code freeze. We branch master into release-[version] and deploy that to our playground environment (playground.posthog.com). Only bugfixes are allowed to be merged into this branch (and thus put on production) between Monday and the release going out. This gives us about three days to test if this release has any bugs.
 
 ## Checklist
 
@@ -44,8 +44,8 @@ Three days before we release, on Monday, we institute a code freeze. We branch m
   - `git tag -a [version] -m "Version [version]"`
   - `git push origin head --tags`
 
-  
-Once a new Docker image has been built (see [Docker Hub](https://hub.docker.com), password in 1password) for the new version, open the [charts](https://github.com/PostHog/charts) repo and make the changes:
+
+Once a new Docker image has been built (see [Docker Hub](https://hub.docker.com), password in 1Password) for the new version, open the [charts](https://github.com/PostHog/charts) repo and make the changes:
 
 1. Edit the **two** Chart files: [Chart.yaml](https://github.com/PostHog/charts/blob/master/charts/posthog/Chart.yaml) and [ChartV3.yaml](https://github.com/PostHog/charts/blob/master/charts/posthog/ChartV3.yaml), in both: 
     - Bump `appVersion` to the latest app version (same number as on the docker image).

@@ -17,7 +17,8 @@
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
-        "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg"
+        "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
+        "generate-redirects": "rm pr_diff && git fetch && git diff origin/master $(git branch --show-current) > pr_diff && python3 ./scripts/safe_rename.py"
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
