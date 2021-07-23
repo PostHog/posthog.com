@@ -65,7 +65,7 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
 
 ### Running ClickHouse, Kafka and Zookeeper on a Cloud Server
 
-This is useful if you have a Apple Silicon Mac.
+This is useful if you have an Apple Silicon Mac.
 
 The following commands set up ClickHouse, Kafka and Zookeeper to run on a cloud server, and forward their ports to `localhost`. For your app it will look like all these services are running locally.
 
@@ -81,14 +81,23 @@ The following commands set up ClickHouse, Kafka and Zookeeper to run on a cloud 
   - cleanup: `docker-compose -f ee/docker-compose.ch.yml rm -v zookeeper kafka clickhouse`
 
 8. Add `127.0.0.1 kafka clickhouse redis db` to your local `/etc/hosts` file.
-9. Make sure you have set these envs locally: `export KAFKA_ENABLED=1` and `export KAFKA_HOSTS=localhost:9092`
+9. Set local environment variables:
+  - `export DEBUG=1`
+  - `export PRIMARY_DB=clickhouse`
+  - `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`
+  - `export KAFKA_ENABLED=true`
+  - `export KAFKA_HOSTS=localhost:9092`
 10. To migrate ClickHouse locally: `DEBUG=1 python manage.py migrate_clickhouse`
 
 While the SSH connection is active, ports from Kafka and ClickHouse are forwarded to your computer and behave just as the services are running locally.
 
 In case you also want to run Postgres and Redis on the cloud, append `-L 5432:localhost:5432 -L 6379:localhost:6379` to the SSH command and the `db redis` services to the `docker-compose` commands.
 
-Please note that stale persons in Postgres may affect ingestion to ClickHouse. E.g. persons already seen in postgres won't be added to ClickHouse, resulting in broken analytics. If this happens, either run all services in the cloud or dump your `posthog_person*` tables.  
+Caveats:
+
+- Please note that stale persons in Postgres may affect ingestion to ClickHouse. E.g. persons already seen in postgres won't be added to ClickHouse, resulting in broken analytics. If this happens, either run all services in the cloud or dump your `posthog_person*` tables.
+- Using SSH to tunnel into ports which are not open on the remote host may result in many INFO-level messages like `channel 5: open failed: connect failed: Connection refused`. While it may be useful to know that all your services may not be running, it will interfere with your terminal session significantly. You may wish to set the logging level to QUIET with `-q` or any other level with `-o`.
+- If you encounter `ECONNRESET` or `EAI_AGAIN` errors, you may need to flush your DNS cache. On MacOS, run `sudo dscacheutil -flushcache`.
 
 ### Post Development Cleanup
 
