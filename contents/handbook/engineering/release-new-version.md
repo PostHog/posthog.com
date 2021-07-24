@@ -20,7 +20,8 @@ Three days before we release, on Monday, we institute a code freeze. We branch m
 
 <input type="checkbox"/> Figure out what's updated in this release
   - `git checkout release-[version]`
-  - `git log --pretty=format:%s [old-version]..head`
+  - `git log --pretty=format:"%s %ae" [old-version]..head > log.txt`
+The command above will output the entire commit list to `log.txt`. You can use this list to obtain external contributions to highlight in the Array.
 
 <br />
 
