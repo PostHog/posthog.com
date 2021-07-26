@@ -62,11 +62,17 @@ Going beyond averages, the new **Time to Convert** view shows a distribution of 
 
 The legend table for Insights has received a major styling revamp, including nicer formatting for dates and numbers and clearer identification of breakdown values.
 
+![Funnel time conversion](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/insights-table.png)
+
 New tooltips allow you to scan and compare multiple values at a glance.
+
+![Funnel time conversion](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/tooltips.png)
 
 ### New filter experience
 
 It's now easier than ever to find the event, user, or cohort definitions you're looking for when adding a filter to a query. This change also causes Insights to load significantly faster.
+
+![Funnel time conversion](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/unified-search.png)
 
 ### Clickhouse is now free to use!
 
