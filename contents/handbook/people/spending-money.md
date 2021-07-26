@@ -147,7 +147,7 @@ If you live in the US, a particularly good way to use this budget is to cover th
 
 ## Meetups
 
-As a global, all-remote team, we don't get many regular opportunities to socialise with each other outside of our bi-annual off-sites.
+As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our bi-annual offsites.
 
 We encourage team members to try and meet up with each other when practical, and provide everyone with an $250 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company. Any unused budget does not roll over each month. 
 
