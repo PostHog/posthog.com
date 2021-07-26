@@ -7,6 +7,8 @@ import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
+import { BlogFeaturedImage } from './components/Blog/BlogFeaturedImage'
+import { BlogIntro } from './components/Blog/BlogIntro'
 import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
 import { BlogShareButtons } from './components/Blog/BlogShareButtons'
@@ -99,6 +101,8 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
+    BlogFeaturedImage,
+    BlogIntro,
     BlogPostLayout,
     BlogPosts,
     BlogShareButtons,

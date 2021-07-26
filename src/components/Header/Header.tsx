@@ -113,7 +113,6 @@ export const Header = ({
                     </ul>
                 </nav>
                 <ul className="hidden lg:flex list-none justify-end items-center mb-0 text-xs p-0 flex-1">
-
                     <PrimaryCta>
                         <span>Get Started</span>
                     </PrimaryCta>
