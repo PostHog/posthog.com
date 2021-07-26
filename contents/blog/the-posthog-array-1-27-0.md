@@ -12,7 +12,7 @@ excerpt: PostHog 1.27.0 is here! Excerpt goes here
 
 Welcome PostHog 1.27.0! 
 
-Intro blurb here
+We’ve added engagement cohorts, upgraded our Django base, and added persistent feature flags.
 
 ### Community MVP 🏆
 
@@ -20,7 +20,9 @@ Thanks to all our community members for helping move PostHog forward! This relea
 
 [DimitrisMazarakis](https://github.com/DimitrisMazarakis)!
 
-Dimitris added an option to automatically refresh dashboards every couple of minutes. You can now have your PostHog dashboards in separate monitors or your conference room TV always in sync! Thanks for driving this forward Dimitris!
+Dimitris added an option to automatically refresh dashboards every couple of minutes. You can now have your PostHog dashboards in separate monitors or your conference room TV always in sync! Thanks for driving this forward, Dimitris!
+
+> _If you haven't seen it yet, we have a [new page](https://posthog.com/contributors) dedicated to our contributors. Every contributor gets their own digital card, and we provide a leaderboard with stats on each person's contributions. We also have a bot that sends a gift card for [PostHog merch](https://merch.posthog.com) to contributors for every PR merged, and we welcome all types of contributions!_
 
 ### Help Us Improve PostHog
 
@@ -34,10 +36,32 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
-
 **In this release:**
 
-- Pending
+NEW:
+
+- NPS prompt
+- Event query class
+- Updated gunicorn
+- Engagement cohorts
+- Added plugins to Django admin
+- Upgraded to Django 3.1.12, urllib & requests
+- Send duration + pathname for failed requests
+- Added app context + persistent feature flags + joy
+
+IMPROVEMENTS:
+
+- Frontend Models
+- Posthog-js to v1.11.2
+- NPS adjustment & release
+- Updated plugin server to v0.21.20
+- Removed annotations from stickiness
+- Frontend fixes for App and sceneLogic
+- Supported funnel trends conversion window
+- Cypress component test fix + style refactor
+- Reduced db queries made on capture by 50% if no feature flags used by team
+
+_`[insert screenshots and blurbs about the top features we’ve introduced or improved in this release]`_
 
 ### New Funnels Experience
 
@@ -47,12 +71,11 @@ Pending
 
 Pending
 
-
 ## PostHog News
 
 Welcome [Chris Clark](https://posthog.com/handbook/company/team#chris-clark-product-designer)! Chris joined our Core Experience Team to help us level up our product experience! You can already see a ton of his work in our new funnels feature. Chris is pro-pinneaple on pizza (🍍 on 🍕) "but generally accepting of all pizza views and requirements". 
 
-> I once impulse purchased a baby goose.
+> I once impulse-purchased a baby goose.
 
 ## Community Shoutouts
 
@@ -83,7 +106,6 @@ Join us in helping make more products successful! We're currently hiring for the
 
 Don't see a role for you? We're always looking for exceptional people, reach out! Check out our [Careers page](https://posthog.com/careers) for more info.
 
-
 ## Bug Fixes and Performance Improvements
 
 In addition to the highlights listed above, we also merged a bunch of PRs to improve PostHog's experience, performance and reliability. Plus we fixed a ton of bugs. Check out all our main repos for details:
@@ -97,4 +119,4 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 
 <hr/>
 
-Follow us on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
+_Follow us on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
