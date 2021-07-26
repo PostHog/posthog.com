@@ -40,29 +40,10 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 NEW:
 
-- NPS prompt
-- Event query class
-- Updated gunicorn
-- Engagement cohorts
-- Added plugins to Django admin
-- Upgraded to Django 3.1.12, urllib & requests
-- Send duration + pathname for failed requests
-- Added app context + persistent feature flags + joy
-
-IMPROVEMENTS:
-
-- Frontend Models
-- Posthog-js to v1.11.2
-- NPS adjustment & release
-- Updated plugin server to v0.21.20
-- Removed annotations from stickiness
-- Frontend fixes for App and sceneLogic
-- Supported funnel trends conversion window
-- Cypress component test fix + style refactor
-- Reduced db queries made on capture by 50% if no feature flags used by team
-
-_`[insert screenshots and blurbs about the top features we’ve introduced or improved in this release]`_
-
+- Brand-new funnels experience.
+- Significant revamp on the legends table & tooltips for insights.
+- New action, event, cohorts & properties selector.
+- Clickhouse is now open-source and free to use.
 ### New Funnels Experience
 
 Pending
@@ -70,6 +51,26 @@ Pending
 ### Feature Two
 
 Pending
+
+### Improvements & Fixes
+
+- Domain whitelist to allow self-serve signup with social providers (#5111).
+- Better errors & empty states when generating insights.
+- Plugins UI revamp (#5137, #4871).
+- You can now pass a Personal API key to API requests to work with different projects (#5044).
+- Your instance can now be multi-org (premium feature) by setting `MULTI_ORG_ENABLED` environment variable (#5108)/
+- Performance improvements around insight requests and caching to optimize resource usage.
+- Support spaces and brackets when creating actions (#5070).
+- Improvements around internal metrics to better track your instance performance.
+- Fixes around navigation throughout the app.
+- API endpoint to get feature flags for a user, /api/feature_flags/user_status?distinct_id=ID.
+- See specific list of matched events when searching sessions.
+- Export or create cohorts from list of persons in insights.
+- Auto-refresh dashboards every 2 minutes so you can always have them up-to-date in your office screens.
+- 400+ other improvements & bug fixes.
+
+
+### Deprecation Notice
 
 ## PostHog News
 
