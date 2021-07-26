@@ -182,8 +182,8 @@
     to = "/docs/contributing/updating-documentation"
     
 [[redirects]]
-    from = "/docs/self-host/postgres-vs-clickhouse"
-    to = "/docs/configuring-posthog/scaling-posthog"
+    from = "/docs/configuring-posthog/scaling-posthog"
+    to = "/docs/self-host/postgres-vs-clickhouse"
 
 [[redirects]]
     from = "/docs/self-host"
