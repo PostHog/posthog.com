@@ -8,6 +8,7 @@ hideAnchor: true
 author: mo-shehu
 featuredImage: ../images/blog/leo-anthias-interview.png
 ---
+_(Welcome to another episode of PostHog's Community Conversations where we chat to our contributors and users.)_
 
 Unlike most tech founders, Leo Anthias didn’t study computer science at university. Instead, he took Persian History and Modern American Drama after a chance encounter with a professor who made medieval history fascinating. Despite his non-tech academic background, however, Leo has been coding for years, from early roles writing Perl scripts for freelance clients to his current job as CEO and co-founder of Datapane.
 
@@ -33,7 +34,7 @@ This obsession with fit extends to hiring, too. Leo looks for humility in candid
 
 > Sometimes you're interviewing someone and it becomes very obvious that it was everyone else's fault every step of their career where something didn't go a certain way. It's good to have constructive criticism of previous places you've worked, but with some people, it does seem there is a history of them being toxic or negative about previous employers, which isn't really what you want to hear in an interview.
 
-Calling in from his home in [From](https://www.discoverfrome.co.uk/frome), about 45mins away from Bristol, England, Leo is a vintage keyboard enthusiast who struggles to find time to play his instruments. 
+Calling in from his home in [Frome](https://www.discoverfrome.co.uk/frome), about 45mins away from Bristol, England, Leo is a vintage keyboard enthusiast who struggles to find time to play his instruments. 
 
 > I would like to play them more, but I find that the more things you have and the more clutter, it's actually harder to produce anything useful.
 
