@@ -163,7 +163,7 @@ These goals and key results are suggestions for now, teams across the company sh
     *   **Our customers have a rapid and reliable experience**
         *   Key results, for example: P95 end-to-end query time for funnels &lt; 3 seconds, no usability bugs filed
 
-**Once Sentence Version**
+**One Sentence Version**
 
 To get 5 reference customers in the controlled data / growth product segment we need to nail funnels.
 
@@ -171,14 +171,14 @@ To get 5 reference customers in the controlled data / growth product segment we 
 
 “Nail Funnels”
 
-### Milestone 2 (Eary August Onwards)
+### Milestone 2 (Early August Onwards)
 
-After nailing funnels, our primary focus should transition to Diagnosing causes, since our customers will now be able to understand when problems are happening with their nailed funnels but to address these issues they must go one step deeper and understand why they are occurring.
+After nailing funnels, our primary focus should transition to _Diagnosing Causes_, since our customers will now be able to understand when problems are happening with their nailed funnels but to address these issues they must go one step deeper and understand why they are occurring.
 
 In parallel we should spin-up evergreen investments around growth and our core platform (Performance, Reliability and Extensibility) to ensure we are reaching as many organizations as possible (increasing the number of successful products in the world) and so we don’t lose trust with existing users due to issues underpinning our platform.
 
-**Once Sentence Version**
-Nailing funnels means people will find problems with their products, next we need to enable them to Diagnose Causes so they can fix these problems and make their product successful.
+**One Sentence Version**
+Nailing funnels means people will find problems with their products, next we need to enable them to _Diagnose Causes_ so they can fix these problems and make their product successful.
 
 **Two Word Version**
 Nail Diagnosis
@@ -191,7 +191,7 @@ Nail Diagnosis
 * We have seen demand for experimentation capabilities, but the value of experiments are heavily constrained by the quality of the hypothesis people can generate from diagnosing causes
 
 
-## What are the high level needs of our target audience?
+## What are the needs of our target audience?
 
 At a very high level these are the core needs to solve for and some examples of what that might look like in practice.
 
