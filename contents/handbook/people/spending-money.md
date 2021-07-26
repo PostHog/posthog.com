@@ -145,6 +145,14 @@ You can spend up to \$200/month to work in cafés or coworking spaces if working
 
 If you live in the US, a particularly good way to use this budget is to cover the cost of Amex Platinum which provides WeWork access. Outside of the US, you may sign your own agreement or buy day vouchers as needed. We will not cover costs beyond this amount of money.
 
+## Meetups
+
+As a global, all-remote team, we don't get many regular opportunities to socialise with each other outside of our bi-annual off-sites.
+
+We encourage team members to try and meet up with each other when practical, and provide everyone with an $250 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in good faith and like it is your own. Any unused budget does not roll over each month. 
+
+We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in Slack and see who is available to meet up!
+
 ## Celebrations and life events
 
 It's important to us at PostHog to celebrate team member milestones and achievements.
