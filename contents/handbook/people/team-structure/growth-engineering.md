@@ -15,7 +15,7 @@ hideAnchor: true
 
 ## Mission
 
-Generate scalable growth by applying focused efforts of product, data, and engineering to our website, docs and signup flow. 
+Generate scalable growth by applying focused efforts of product, data, and engineering to our website, docs and activation flow. 
 
 ## Responsibilities
 
@@ -63,4 +63,4 @@ We believe that rapid iteration, compounding our learnings, and following our ex
 
 ## Slack channel
 
-[#team-growth-engineering](https://posthog.slack.com/messages/team-growth-engineering)
+[#team-growth](https://posthog.slack.com/messages/team-growth)
