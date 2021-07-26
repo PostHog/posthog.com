@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: release-notes
 featuredImage: ../images/blog/array/1-27-0.png
-excerpt: PostHog 1.27.0 is here! Excerpt goes here
+excerpt: PostHog 1.27.0 is here!
 ---
 
 PostHog 1.27.0 is here! 
