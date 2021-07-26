@@ -34,6 +34,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - With a new Markdown file (md, mdx) in `/contents/blog/`
 - Any assets [optimized](docs/contribute/updating-documentation) and added to a new folder under `contents/images/blog/`
 - Each post should have a `featuredImage`. Request one using our [Design Request](/handbook/company/working-with-design) process. (Team Design will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
+- You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to relevant sidebar in `src/sidebars/sidebars.json`
 - Add the author of the post ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)
 - Set the date of the blog post to the intended publishing date. (This gives Team Design a heads up on how much time we have to produce a post image.)
