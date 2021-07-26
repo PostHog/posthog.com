@@ -42,15 +42,31 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 - [Clickhouse is now free to use](#clickhouse-is-now-free-to-use).
 ### New Funnels Experience
 
-Pending
+Funnels have a new bar-chart visualization and show more comprehensive metrics. You can now choose whether to display conversion rates for the full funnel or from each step to the next.
+
+![Funnel steps](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/funnel-steps.png)
+
+Breakdowns are now supported on funnels! This allows you to identify how user and event properties (for instance, browser or referral source) affect your conversions.
+
+![Funnel breakdowns](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/funnel-breakdowns.png)
+
+Clicking on a funnel step will reveal a list of persons who have continued or dropped off at that step. From there, you can easily view their sessions (provided you have Session Recording enabled) to find unknown problems or opportunities that would otherwise be hidden in the data.
+
+![Persons modal](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/person-modal-original.png)
+
+Going beyond averages, the new **Time to Convert** view shows a distribution of time spent between steps or for the whole funnel.
+
+![Funnel time conversion](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/funnel-steps.png)
 
 ### Revamp of legend table & insight tooltips
 
-Pending
+The legend table for Insights has received a major styling revamp, including nicer formatting for dates and numbers and clearer identification of breakdown values.
+
+New tooltips allow you to scan and compare multiple values at a glance.
 
 ### New filter experience
 
-Pending
+It's now easier than ever to find the event, user, or cohort definitions you're looking for when adding a filter to a query. This change also causes Insights to load significantly faster.
 
 ### Clickhouse is now free to use!
 
