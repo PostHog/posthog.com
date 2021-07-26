@@ -8,7 +8,7 @@ There are many occasions when you will need to spend company money.
 
 PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
-Please just spend company money like it's your own.
+Please spend money in a way that you think is in the best interests of the company. 
 
 If it's a trivial expense, just buy it. We provide you with a company card with a \$1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with a Revolut card. 
 
@@ -149,7 +149,7 @@ If you live in the US, a particularly good way to use this budget is to cover th
 
 As a global, all-remote team, we don't get many regular opportunities to socialise with each other outside of our bi-annual off-sites.
 
-We encourage team members to try and meet up with each other when practical, and provide everyone with an $250 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in good faith and like it is your own. Any unused budget does not roll over each month. 
+We encourage team members to try and meet up with each other when practical, and provide everyone with an $250 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company. Any unused budget does not roll over each month. 
 
 We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in Slack and see who is available to meet up!
 
