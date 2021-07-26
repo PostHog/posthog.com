@@ -39,7 +39,7 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 - [Brand-new funnels experience](#new-funnels-experience).
 - [Significant revamp on the legend table & tooltips on insights](#revamp-of-legend-table--insight-tooltips).
 - [New action, event, cohorts & properties selector](#new-filter-experience).
-- [Clickhouse is now open-source and free to use](#clickhouse-is-now-open-source).
+- [Clickhouse is now free to use](#clickhouse-is-now-free-to-use).
 ### New Funnels Experience
 
 Pending
@@ -52,9 +52,14 @@ Pending
 
 Pending
 
-### Clickhouse is now open source!
+### Clickhouse is now free to use!
 
-Pending
+A few months after PostHog we started hitting limitations on some operations running on Postgres. We then decided to develop full support for a <a rel="noreferrer noopener" target="_blank" href="https://clickhouse.tech/">Clickhouse</a> backend. Clickhouse is a very powerful OLAP database that works specially well at computing analytics for huge volumes of data. At first this Clickhouse backend was launched as a premium feature requiring an Enterprise license. Some weeks ago we decided to offer a free version with a restriction of 3 team members to serve as trial for the feature.
+
+Since then, we have ironed out all the details and have now decided to make this feature **fully free** now, no longer requiring a license nor having any additional restrictions. This comes from our commitment to supporting teams and companies of any size, so you can continue using PostHog for free even if your event volume increases significantly.
+
+Clickhouse is deployed a bit differently than our [traditional deployment options](/docs/self-host/overview#deploy), you can find full deployment instructions here: <a rel="noreferrer noopener" target="_blank" href="https://github.com/PostHog/charts-clickhouse/">https://github.com/PostHog/charts-clickhouse/</a>
+
 
 ### Improvements & Fixes
 
@@ -62,12 +67,12 @@ Pending
 - Better errors & empty states when generating insights.
 - Plugins UI revamp (#5137, #4871).
 - You can now pass a Personal API key to API requests to work with different projects (#5044).
-- Your instance can now be multi-org (premium feature) by setting `MULTI_ORG_ENABLED` environment variable (#5108)/
+- Your instance can now be multi-org (premium feature) by setting `MULTI_ORG_ENABLED` environment variable (#5108).
 - Performance improvements around insight requests and caching to optimize resource usage.
 - Support spaces and brackets when creating actions (#5070).
 - Improvements around internal metrics to better track your instance performance.
 - Fixes around navigation throughout the app.
-- API endpoint to get feature flags for a user, /api/feature_flags/user_status?distinct_id=ID.
+- API endpoint to get feature flags for a user, `/api/feature_flags/user_status?distinct_id=ID`.
 - See specific list of matched events when searching sessions.
 - Export or create cohorts from list of persons in insights.
 - Auto-refresh dashboards every 2 minutes so you can always have them up-to-date in your office screens.
