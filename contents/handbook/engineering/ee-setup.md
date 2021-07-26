@@ -4,23 +4,31 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Rough instructions on how to "get the EE version running in all its glory".
+Rough instructions on how to "get the EE version running in all its glory". **Currently for internal use only.**
 
-Currently for internal use only.
 
-### Getting it up and running
-`docker-compose -f ee/docker-compose.ch.yml up`
+There are multiple ways to run your EE setup depending on your preferences and needs.
 
-### Fixing broken frontend build
-`docker run ee_web yarn build`
+### Option A (Recommended). Docker-based.
+Use our handy command prebuilt command to run. Everything will run on Docker. Frontend will be built and KEA typegen will be run on the background so you can work on the frontend too.
 
-### Running Backend in Docker and Frontend locally
+```
+yarn start-ch-dev
+```
+
+If you're running into problems, such as Kafka connection errors, frontend not building, etc. we recommend starting fresh by cleaning your Docker installation.
+
+```
+docker system prune -a
+```
+
+### Option B. Running Backend in Docker and Frontend locally
 
 This setup is best if you want to iterate quickly on frontend changes. You get the benefits of hot reloading locally while keeping the backend dockerized.
 
 `yarn start-ch-dev`
 
-### Running Python + Webpack locally
+### Option C. Running Python + Webpack locally
 - Run all the services
   - Stop local postgres, kafka, clickhouse and zookeeper instances if you have them
   - Same for redis, though it doesn't really matter much
@@ -52,7 +60,7 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
       - All the same, except skip `DEBUG=1` in the env settings.
       - Set as the "target" in run configuration `ee/clickhouse`
 
-### Running everything but ClickHouse locally
+### Option D. Running everything but ClickHouse locally
 - Follow the [local development setup without Docker](/docs/developing-locally)
 - Run `docker-compose -f ee/docker-compose.ch.yml up clickhouse`
 - In `/etc/hosts`, add a line with `127.0.0.1       kafka clickhouse`
@@ -63,7 +71,7 @@ This setup is best if you want to iterate quickly on frontend changes. You get t
   - `export KAFKA_HOSTS=localhost:9092`
 - Run PostHog: `./bin/start`
 
-### Running ClickHouse, Kafka and Zookeeper on a Cloud Server
+### Option E. Running ClickHouse, Kafka and Zookeeper on a Cloud Server
 
 This is useful if you have an Apple Silicon Mac.
 
