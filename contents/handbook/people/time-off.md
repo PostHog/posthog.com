@@ -28,6 +28,10 @@ The same rules as above apply regardless of the vacation length.
 
 You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately. 
 
+### Sabbaticals
+
+As we have unlimited, permissionless time off, PostHog doesn’t offer ‘sabbaticals’ in the way that some companies do. Instead, we strongly encourage team members to use our existing policy to take a full month off every 3-4 years. We only ask that you organise this thoughtfully with your team by giving them enough notice to plan.
+
 ## When you should have time off
 
 ### You are sick
