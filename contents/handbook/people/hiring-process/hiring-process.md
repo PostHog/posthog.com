@@ -45,6 +45,8 @@ Workable will automatically add the role on our [careers page](https://posthog.c
 
 For certain roles, we also publish on other job boards. 
 
+> In Q3 we are trialing to _not_ widely publish our roles. We are currently limiting posting our roles to our careers page and a small number of specific job boards, in favour of more direct ourtrach to candidates. 
+
 **Design**
 
 *   [Behance](https://www.behance.net/adobetalent)
