@@ -425,6 +425,11 @@
     from = "/docs/deployment/deploy-gcs"
     to = "/docs/self-host/deploy/google-cloud-services"
 
+# Fixes orphan link(s)
+[[redirects]]
+    from = "/docs/self-host/deploy/gcs"
+    to = "/docs/self-host/deploy/google-cloud-services"
+
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/deployment/deploy-heroku"
