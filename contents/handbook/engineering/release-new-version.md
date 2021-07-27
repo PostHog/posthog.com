@@ -59,4 +59,4 @@ Once a new Docker image has been built (see [Docker Hub](https://hub.docker.com)
 Next step is to bump the `latest-release` Docker image. Log in to [hub.docker.com](https://hub.docker.com/repository/docker/posthog/posthog/builds) and configure a new automatic build by going to https://hub.docker.com/repository/docker/posthog/posthog/builds/edit. Delete any older tag with the same name if present. Add a new Build rule, set the source to the tag `1.XX.YY` and the Docker tag to `latest-release`. Finally, click "Save and Build".
 
 
-Final step is to send the newsletter with the PostHog Array. We do this through Mailchimp. You can use the template for the previous sent newsletter. You may need to ask someone with access to help with this last part.
+Final step is to post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped as well as send the newsletter with the PostHog Array. We do this through Mailchimp. You can use the template for the previous sent newsletter. You may need to ask someone with access to help with this last part.
