@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Design hiring at PostHog
 
-Our [Design](https://posthog.com/handbook/people/team-structure/design) team is small, but growing. However, we currently aren't hiring for anyone to join our Design team.
+Our [Design](https://posthog.com/handbook/people/team-structure/design) team is small and we don't hire into this team very often. 
 
 ### What we are looking for in Design hires
 
