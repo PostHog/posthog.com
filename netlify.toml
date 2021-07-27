@@ -183,7 +183,7 @@
     
 [[redirects]]
     from = "/docs/configuring-posthog/scaling-posthog"
-    to = "/docs/self-host/postgres-vs-clickhouse"
+    to = "/docs/self-host/overview"
 
 [[redirects]]
     from = "/docs/self-host"
