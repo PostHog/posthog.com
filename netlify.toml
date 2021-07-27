@@ -180,7 +180,11 @@
 [[redirects]]
     from = "/docs/updating-documentation"
     to = "/docs/contributing/updating-documentation"
-    
+
+[[redirects]]
+    from = "/docs/self-host/configure/scaling-posthog"
+    to = "/docs/self-host/overview"
+
 [[redirects]]
     from = "/docs/configuring-posthog/scaling-posthog"
     to = "/docs/self-host/overview"
