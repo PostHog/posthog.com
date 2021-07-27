@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Design hiring at PostHog
 
-Our [Design](https://posthog.com/handbook/people/team-structure/design) team is small, but growing. At the moment, we are hiring for a [Senior Product Designer](https://posthog.workable.com/jobs/1675218/preview?show_description=true). 
+Our [Design](https://posthog.com/handbook/people/team-structure/design) team is small, but growing. However, we currently aren't hiring for anyone to join our Design team.
 
 ### What we are looking for in Design hires
 
