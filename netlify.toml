@@ -182,8 +182,8 @@
     to = "/docs/contributing/updating-documentation"
     
 [[redirects]]
-    from = "/docs/self-host/postgres-vs-clickhouse"
-    to = "/docs/configuring-posthog/scaling-posthog"
+    from = "/docs/configuring-posthog/scaling-posthog"
+    to = "/docs/self-host/overview"
 
 [[redirects]]
     from = "/docs/self-host"
@@ -423,6 +423,11 @@
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/deployment/deploy-gcs"
+    to = "/docs/self-host/deploy/google-cloud-services"
+
+# Fixes orphan link(s)
+[[redirects]]
+    from = "/docs/self-host/deploy/gcs"
     to = "/docs/self-host/deploy/google-cloud-services"
 
 # Added: 2021-07-13

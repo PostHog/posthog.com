@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 author: mo-shehu
 featuredImage: ../images/blog/intro-phil.png
+featuredImageType: full
 ---
 
 We’re proud to announce a new hire; Phil Leggetter will head up Developer Relations at PostHog.

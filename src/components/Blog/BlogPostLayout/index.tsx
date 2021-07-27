@@ -9,12 +9,13 @@ import { BlogShareButtons } from '../BlogShareButtons'
 import { Structure } from '../../Structure'
 import { DarkModeToggle } from '../../DarkModeToggle'
 import { AuthorsData } from 'types'
-import BlogAuthor from '../BlogAuthor'
+import { BlogIntro } from '../BlogIntro'
 
 interface BlogPostLayoutProps {
     pageTitle: string
     children: any
     featuredImage?: string | null | undefined
+    featuredImageType?: string
     blogArticleSlug: string
     blogDate?: string
     authorDetails?: AuthorsData
@@ -24,6 +25,7 @@ export function BlogPostLayout({
     pageTitle,
     children,
     featuredImage,
+    featuredImageType,
     blogArticleSlug,
     blogDate,
     authorDetails,
@@ -31,7 +33,7 @@ export function BlogPostLayout({
     return (
         <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
             <Header onPostPage blogArticleSlug={blogArticleSlug} />
-            <div className="flex justify-between items-center w-full px-4 mb-12 mt-6 lg:mt-4">
+            <div className="flex justify-between items-center w-full px-4 mb-4 mt-6 lg:mt-4">
                 <div className="flex-grow">
                     <Link
                         to="/blog"
@@ -43,24 +45,15 @@ export function BlogPostLayout({
                 <DarkModeToggle />
             </div>
 
-            {featuredImage && (
-                <Structure.Section width="3xl -mt-6 md:-mt-2">
-                    <img src={featuredImage} className="w-full shadow-lg" alt={pageTitle} />
-                </Structure.Section>
-            )}
+            <BlogIntro
+                authorDetails={authorDetails}
+                featuredImageType={featuredImageType}
+                featuredImage={featuredImage}
+                pageTitle={pageTitle}
+                blogDate={blogDate}
+            />
 
-            <Structure.Section width="xl" className="text-center leading-tight mb-6">
-                <p className="mt-8 mb-2 opacity-50">{blogDate}</p>
-                <Structure.SectionHeader titleTag="h1" title={pageTitle} titleClassName="text-center leading-tight" />
-            </Structure.Section>
-
-            {authorDetails?.handle && (
-                <Structure.Section width="xl" className="mb-12">
-                    <BlogAuthor authorDetails={authorDetails} />
-                </Structure.Section>
-            )}
-
-            <div className="max-w-xl mx-auto relative">
+            <div className="max-w-xl mx-auto relative pt-12 blog-post-content">
                 <BlogShareButtons />
                 <Structure.Section>{children}</Structure.Section>
             </div>

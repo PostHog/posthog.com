@@ -7,7 +7,8 @@ hideAnchor: true
 
 ## People & culture
 
-- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent)
+- [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent), People & Talent Lead
+- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops
 
 ## Mission
 
