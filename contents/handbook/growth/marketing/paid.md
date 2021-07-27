@@ -7,8 +7,9 @@ showTitle: true
 The objective of our paid advertising is to increase the number of [relevant developers](https://posthog.com/handbook/strategy/strategy#target-audience-for-2021) who are aware of PostHog. As we believe in [product-led growth](https://posthog.com/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy. Instead, we see them as a way to complement and amplify the work we are doing in other areas of marketing and product. 
 
 We are beginning to run a series of limited experiments to understand which combination of content, platforms and audience are likely to be most effective for us:
-- We launch 1-2 experiments each week
+- We launch 1-2 experiments each week (on a Tuesday)
 - Each experiment runs for 2 weeks
+- We report on how it performed (on a Thursday)
 - We aim to spend ~$2,000 per week
 
 We have made certain hypotheses for what we think will be most effective on each platform. As there are many combinations of experiment we can run, we are focusing on a targeted list of platforms for now. 
