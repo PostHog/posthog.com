@@ -186,7 +186,7 @@ Nail Diagnosis
 ## Why should we focus on Diagnosing Causes?
 
 
-* Our current focus on funnels is generating significant demand from users for going deeper, to understand why people are and are not successful (we’re seeing a number of customerrequests in this direction)
+* Our current focus on funnels is generating significant demand from users for going deeper, to understand why people are and are not successful (we’re seeing a number of customer requests in this direction)
 * We currently have a number of tools in our suite (e.g. sessions, trends, paths) that can be evolved and tightly integrated to enable our users to go deeper and understand why issues are occurring
 * We have seen demand for experimentation capabilities, but the value of experiments are heavily constrained by the quality of the hypothesis people can generate from diagnosing causes
 
