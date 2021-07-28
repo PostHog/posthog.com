@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-modal'
 import './SignupModal.scss'
 import { Button, Input } from 'antd'
+import { ButtonBlock } from 'components/ButtonBlock/ButtonBlock'
 
 export const SignupModal = (): JSX.Element => {
     return (
@@ -21,9 +22,7 @@ export const SignupModal = (): JSX.Element => {
             >
                 <p>What's your email?</p>
                 <Input name="email" type="email" autoFocus className="signup-email-field" placeholder="Email address" />
-                <Button htmlType="submit" type="primary" block>
-                    Next
-                </Button>
+                <ButtonBlock htmlType="submit">Next</ButtonBlock>
                 <div className="bottom-actions">
                     <Button htmlType="submit" type="link">
                         <strong>Next: </strong> Choose your edition
