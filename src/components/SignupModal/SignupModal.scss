@@ -1,0 +1,20 @@
+.modalContent {
+    border-radius: 6px;
+    background: #eee;
+    width: 386px;
+    height: unset;
+    padding: 36px 24px;
+    display: block;
+
+    h3 {
+        text-align: center;
+    }
+
+    p {
+        margin: 0.5rem 0;
+    }
+}
+
+.modalOverlay {
+    background: rgba(42, 11, 70, 0.3);
+}

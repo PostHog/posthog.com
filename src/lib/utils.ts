@@ -44,7 +44,8 @@ export const generateRandomHtmlId = () =>
         .replace(/[^a-z]+/g, '')
         .substr(2, 10)
 
-export const mergeClassList = (...args: string[]) => args.filter((classList) => !!classList).join(' ')
+export const mergeClassList = (...args: (string | null | undefined | false)[]): string =>
+    args.filter((classList) => !!classList).join(' ')
 
 export const findAuthor = (authors: AuthorsData[]) => (authorKey?: string) =>
     authors?.find(({ handle }) => handle === authorKey)
