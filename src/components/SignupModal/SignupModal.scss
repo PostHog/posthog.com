@@ -28,6 +28,11 @@
             padding: 0;
             color: inherit;
             opacity: 0.6;
+
+            &:hover,
+            &:focus {
+                color: #7735ae;
+            }
         }
     }
 
@@ -44,6 +49,11 @@
         height: 52px;
         font-family: 'Osiris', sans-serif;
         font-size: 15px;
+
+        &:hover,
+        &:focus {
+            background: linear-gradient(180deg, #7735ae 0%, #611e98 150%);
+        }
     }
 }
 

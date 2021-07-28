@@ -20,7 +20,7 @@ export const SignupModal = (): JSX.Element => {
                 }}
             >
                 <p>What's your email?</p>
-                <Input name="email" type="email" className="signup-email-field" placeholder="Email address" />
+                <Input name="email" type="email" autoFocus className="signup-email-field" placeholder="Email address" />
                 <Button htmlType="submit" type="primary" block>
                     Next
                 </Button>
