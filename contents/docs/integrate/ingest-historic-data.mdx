@@ -30,9 +30,9 @@ The following factors are important in the export and then import process:
 
 With the above factors in mind it's recommended that you break the process up into steps such as the following:
 
-1. Sequencially export selective data from the data source that represent key events keeping track of where you are in the sequence so that you can restart the process from the last successful point if any problems occur
+1. Sequentially export selective data from the data source that represent key events keeping track of where you are in the sequence so that you can restart the process from the last successful point if any problems occur
 2. Store the selected exported data to a new data storage for faster access in future steps
-3. Transform the data to the format you will use with PostHog and again save to a storage mechamism for faster access in later steps.
+3. Transform the data to the format you will use with PostHog and again save to a storage mechanism for faster access in later steps.
 
     The data format should be:
     ```json
@@ -55,7 +55,7 @@ With the above factors in mind it's recommended that you break the process up in
     1. Ensure that the `timestamp` is a converted version of the original timestamp is ISO 8601 format so that PostHog correctly identifies when the original event occurred
     1. You may want to set an additional property within `properties` that identifies the original event within the data source
 
-4. Sequencially import the events into PostHog keeping track of the last successfuly imported event so that you can restart the process from the last successful point if any problems occur
+4. Sequentially import the events into PostHog keeping track of the last successfully imported event so that you can restart the process from the last successful point if any problems occur
 
 ## Importing events
 
