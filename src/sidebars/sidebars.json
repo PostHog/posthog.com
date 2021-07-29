@@ -41,7 +41,7 @@
     {
         "entry": "Integrate",
         "name": "Integrate",
-        "items": ["docs/integrate/overview"],
+        "items": ["docs/integrate/overview", "docs/integrate/ingest-live-data", "docs/integrate/ingest-historic-data"],
         "child_entries": ["Client Libraries", "Server Libraries", "Third Party", "Webhooks"]
     },
     {

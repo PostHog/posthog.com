@@ -5,21 +5,42 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog provides multiple integrations to send events from your apps and use the API of your PostHog instance.
+PostHog provides multiple integrations to send events from your apps, use the API, and ingest historical data into your PostHog instance.
 
-We have put a significant effort into providing as many of these integrations as possible, in order to make your experience better.
+Our goal is for you to be able to integrate PostHog with you language, framework ,or platform of choosing, without having to adapt your technology stack.
 
-Our goal is for users to be able to integrate PostHog with their language, framework or platform of choosing, without having to adapt their stack.
+There are two common phases of integration with PostHog:
+
+1. Live (real-time) events from an application in development, test, or deployed to production
+2. Historical events from an existing data source such as a data warehouse
+
+## Live events
+
+Live (real-time) events can be integrated using [client libraries](#client-libraries), [server libraries](#server-libraries), and [third-party platform integrations](#integrations).
+
+The fastest way to get started with PostHog on the web is via the using the [JavaScript snippet](/docs/integrate/client/snippet-installation).
+
+For more information read the [live data ingestion guide](/docs/integrate/ingest-live-data).
+
+## Historical events
+
+By ingesting historical data into PostHog you can apply the same analysis to your historical and real-time data.
+
+Historical events need to be integrated using a PostHog [server library](#server-libraries) or directly via the [PostHog API](/docs/api/overview).
+
+For more information read the [historical data ingestion guide](/docs/integrate/ingest-historic-data).
 
 ## Libraries
 
-Refer to the table below for an overview of the functionality in each of our libraries.
+Refer to the tables below for an overview of the functionality in each of our client and server libraries.
 
 ### Client Libraries
 
 Some features such as session recording are only available with our JavaScript library.
 
 > We're working to add support for feature flags and autocapture to as many libraries as possible. Please check out the individual library repositories for status on this and let us know if you think we should prioritize support for any specific library.
+
+<OverflowXSection>
 
 |                     Library                             | Maintainer   | Event Capture | User Identification | Autocapture | Session Recording |                         Feature Flags                         |
 | :-----------------------------------------------------: | :----------: | :-----------: | :-----------------: | :---------: | :---------------: | :-----------------------------------------------------------: |
@@ -28,6 +49,8 @@ Some features such as session recording are only available with our JavaScript l
 |           [iOS](/docs/integrate/client/ios)             | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
 |       [Flutter](/docs/integrate/client/flutter)         | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
 |  [React Native](/docs/integrate/client/react-native)    | PostHog Team |       ✅      |          ✅          |    ❌      |        ❌          |                              ❌                               |
+
+</OverflowXSection>
 
 ### Server Libraries
 
