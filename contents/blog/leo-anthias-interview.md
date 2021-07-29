@@ -16,7 +16,7 @@ A former YC alumnus, his fondest memory from that time is the absolute focus and
 
 > It's really nice to just focus on one thing. For the last two or three days, I've really only focused on our onboarding flows for guides and tutorials for new users. And being able to just focus on that one thing has meant that probably I've gotten a lot more done than if I tried to do that while at the same time running a hiring process, while at the same time having a fundraising process, whatever. Even though all of those things are of equal importance, it's really key to just pick one of them at a time.
 
-After returning to the UK, Leo co-founded another company: a data science model deployment platform. Their goal was to make it easy for engineers to publish a model to the cloud, scale it, and integrate it. Part of that service was a library they built for their customers, which they eventually spun out into a separate product - Datapane.
+After returning to the UK, Leo co-founded another company: a data science model deployment platform. Their goal was to make it easy for engineers to publish a model to the cloud, scale it, and integrate it. Part of that service was a library they built for their customers, which they eventually spun out into a separate product - Datapane. Datapane is an open-source library which makes it easy for data scientists to create interactive data science reports using Python which they can share with their team or community.
 
 ![image](https://user-images.githubusercontent.com/40317687/127475264-c5910fcf-4194-440e-be11-1f72e6f6a093.png)
 
