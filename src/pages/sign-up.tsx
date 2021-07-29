@@ -5,9 +5,8 @@ import Header from 'components/Header'
 import funnelsScreenshot from '/src/images/product-screenshots/browserframe-screenshot-new-funnels.png'
 import { SignupModal } from 'components/SignupModal'
 import { useActions, useValues } from 'kea'
-import { DeploymentType, signupLogic, SignupModalView } from 'logic/signupLogic'
+import { Realm, signupLogic, SignupModalView } from 'logic/signupLogic'
 import { Button } from 'antd'
-import { Link } from 'gatsby'
 
 const SignUpPage = (): JSX.Element => {
     const { modalView, email } = useValues(signupLogic)
@@ -33,20 +32,20 @@ const SignUpPage = (): JSX.Element => {
                 {modalView === SignupModalView.DEPLOYMENT_OPTIONS && (
                     <>
                         <Button>
-                            <Link
-                                to="/docs/self-host/overview"
-                                onClick={() => reportDeploymentTypeSelected(DeploymentType.SELF_HOSTED)}
+                            <a
+                                href="/docs/self-host/overview"
+                                onClick={() => reportDeploymentTypeSelected(Realm.hosted)}
                             >
                                 Link to self-host
-                            </Link>
+                            </a>
                         </Button>
                         <Button>
-                            <Link
-                                to={`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`}
-                                onClick={() => reportDeploymentTypeSelected(DeploymentType.CLOUD)}
+                            <a
+                                href={`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`}
+                                onClick={() => reportDeploymentTypeSelected(Realm.cloud)}
                             >
                                 Link to Cloud
-                            </Link>
+                            </a>
                         </Button>
                     </>
                 )}

@@ -7,9 +7,9 @@ export enum SignupModalView {
     DEPLOYMENT_OPTIONS = 'DEPLOYMENT_OPTIONS',
 }
 
-export enum DeploymentType {
-    SELF_HOSTED = 'SELF_HOSTED',
-    CLOUD = 'CLOUD',
+export enum Realm {
+    hosted = 'hosted',
+    cloud = 'cloud',
 }
 
 export const signupLogic = kea({
@@ -17,7 +17,7 @@ export const signupLogic = kea({
         setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
         submitForm: true,
-        reportDeploymentTypeSelected: (type: DeploymentType) => ({ type }),
+        reportRealmSelected: (realm: Realm) => ({ realm }),
     },
     reducers: {
         modalView: [
@@ -40,12 +40,12 @@ export const signupLogic = kea({
         submitForm: async () => {
             const { posthog, email } = values
             if (email && isValidEmailAddress(email)) {
-                posthog?.identify(email)
+                posthog?.identify(email, { email }) // use email as distinct ID; also set it as property
                 actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
             }
         },
-        reportDeploymentTypeSelected: async ({ type }) => {
-            console.log({ type })
+        reportRealmSelected: async ({ realm }) => {
+            values.posthog?.send('selected deployment realm', { realm })
         },
     }),
 })
