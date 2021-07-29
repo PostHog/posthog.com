@@ -611,3 +611,13 @@
 [[redirects]]
     from = "/product-features"
     to = "/product"
+
+# Added: 2021-07-28
+[[redirects]]
+    from = "/docs/self-host/deploy/render"
+    to = "/docs/self-host/deploy/other#render"
+
+# Added: 2021-07-28
+[[redirects]]
+    from = "/docs/self-host/deploy/qovery"
+    to = "/docs/self-host/deploy/other"
