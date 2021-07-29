@@ -1,5 +1,9 @@
 const fetch = require(`node-fetch`)
 
+require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
     siteMetadata: {
         title: 'PostHog',
@@ -147,7 +151,9 @@ module.exports = {
             resolve: `gatsby-plugin-posthog`,
             options: {
                 // Specify the API key for your Posthog Project (required)
-                apiKey: 'sTMFPsFhdP1Ssg',
+                apiKey: process.env.GATSBY_POSTHOG_API_KEY,
+                // Specify the API host (http://app.posthog.com/ unless in development)
+                apiHost: process.env.GATSBY_POSTHOG_API_HOST,
                 // Puts tracking script in the head instead of the body (optional, default: true)
                 head: true,
                 // Enable posthog analytics tracking during development (optional, default: false)

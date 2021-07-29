@@ -30,6 +30,7 @@
         "chart.js": "^2.9.4",
         "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
+        "dotenv": "^10.0.0",
         "eslint-plugin-flowtype": "^2.50.3",
         "gatsby": "^2.24.80",
         "gatsby-cli": "^2.12.111",
