@@ -1,16 +1,27 @@
 import { kea } from 'kea'
+import { isValidEmailAddress } from 'lib/utils'
+import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
-export type SignupModalView = 'emailPrompt' | 'deploymentOptions'
+export enum SignupModalView {
+    EMAIL_PROMPT = 'EMAIL_PROMPT',
+    DEPLOYMENT_OPTIONS = 'DEPLOYMENT_OPTIONS',
+}
+
+export enum DeploymentType {
+    SELF_HOSTED = 'SELF_HOSTED',
+    CLOUD = 'CLOUD',
+}
 
 export const signupLogic = kea({
     actions: {
         setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
         submitForm: true,
+        reportDeploymentTypeSelected: (type: DeploymentType) => ({ type }),
     },
     reducers: {
         modalView: [
-            'emailPrompt' as SignupModalView,
+            SignupModalView.EMAIL_PROMPT as SignupModalView,
             {
                 setModalView: (_, { view }: { view: SignupModalView }) => view,
             },
@@ -22,9 +33,19 @@ export const signupLogic = kea({
             },
         ],
     },
+    connect: {
+        values: [posthogAnalyticsLogic, ['posthog']],
+    },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
-            // TODO
+            const { posthog, email } = values
+            if (email && isValidEmailAddress(email)) {
+                posthog?.identify(email)
+                actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
+            }
+        },
+        reportDeploymentTypeSelected: async ({ type }) => {
+            console.log({ type })
         },
     }),
 })
