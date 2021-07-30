@@ -6,107 +6,91 @@ showTitle: true
 
 > Would you rather go through a tutorial about actions instead of this feature reference? Check out our [Complete Guide to Event Tracking](/docs/tutorials/actions#sorting-through-your-events-with-actions).
 
-Actions are PostHog’s way of easily cleaning up a large amount of Event data.
+Actions are PostHog’s way of easily cleaning up a large amount of event data.
 
-Actions consist of one or more events that you have decided to put into a manually-labeled bucket. They're used in PostHog's Insights, as well as in Feature Flags.
+Actions consist of one or more events that you have decided to put into a deliberately-labeled bucket. They're used in insights and dashboards.
 
 For example, a typical action might be one of the following:
 
-* ‘Sign up button – clicked’
-* ‘Profile page – viewed’
-* ‘Post submit – clicked’
-* ‘Pricing page – viewed’
-* ‘Watch movie – clicked’
+* ‘Clicked sign up button’
+* ‘User created account’
+* ‘Viewed pricing page’
+* ‘Submitted billing form’
 
-### Demo Video
 
-If you'd like to watch a video about our Actions feature, check out our demo video below. It is set to start on the Actions section:
+To access the Actions page, go to the Event section on the left-hand navigation sidebar and then click on the Actions tab.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50?start=40" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## Creating actions
 
-## Accessing Actions
-
-To access the Actions page, go to the 'Events & Actions' section on the left-hand navigation sidebar.
-<br />
-
-## Creating Frontend Actions
-
-### Pre-Requisites
-
-Before creating an action from an element, you must have provided the domain you will be using PostHog on. This should be the root domain where your application is hosted e.g. http://example.com. You can do this by visiting 'Setup' > 'Setup your PostHog account'.
-<br />
-
-### Getting Started
+### Select element on site
 
 The simplest way to create a frontend-based action is to visit your application and use the PostHog Toolbar to tag the elements that are relevant.
 
-#### Inspect element on your site
-
 We have a full [step-by-step tutorial](/docs/tutorials/toolbar) available about using our Toolbar, with a specific section dedicated to [creating actions from frontend elements](/docs/tutorials/toolbar#creating-actions).
 
-#### From event or pageview
 
-Alternatively you can create an event based on `pageview` or an existing [event](/docs/user-guides/events) on your website.
+### Autocapture-based actions
 
-To do so, click 'Create new action' and the following modal should appear (without the red rectangle):
-
-![Action modal image](../../images/features/actions/action-modal.png)
-
-<br />
-
-If you select the 'From event or pageview' option, you will be taken to the following page, where you can then set up your action from existing events:
-
-![Action from event image](../../images/features/actions/action-from-event.png)
-
-<br />
-
- 
-#### Note: Actions Containing Multiple Events 
-
-It is possible for an action to match multiple events. To do this, click ‘Add another match group’ when you are creating your action (see picture above).
-
-Actions with multiple events work based on `OR` operations. That means that an action like _"Clicked Read More Button" OR "Clicked More Information Button"_ will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
-
-## Action Types
-
-As shown above, there 3 types of Actions you can record:
-
-**Pageview**
-
-Page views can match urls containing a string or match exactly.
-
-
-**Frontend Element**
-
-Frontend Elements are actions based on some element on your website, such as a button or an input. The easiest way to select them is with the 'Inspect element on your site' functionality described above. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
+Autocapture-based actions are based on frontend elements from your website, such as a button or an input. The easiest way to select them is with the 'Inspect element on your site' functionality described above. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
 
 Our [Autocapture](/docs/integrate/client/js#autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
 
-Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/integrate/client/js#autocapture) for more details.
+> Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/integrate/client/js#autocapture) for more details.
 
-<br />
 
-**Custom Event**
+There are three ways to match your elements:
 
-Custom Events can be sent to your PostHog instance by API we have several libraries to allow you to do [this](/docs/integrate/overview).
-<br />
+> You **can have more than one match type** selected. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
 
-<br /> 
-
-## Identification Fields
-
-There are three identification fields that you can use for most elements:
-
-* Text: The text on the element, if applicable
-* Selector: The type of element it is
-* Only match if URL contains: The URL where this action needs to take place. 
+1. Text: The text on the element, if applicable. If you have buttons across your site, all saying ‘Sign Up’, you can track ALL of them, site-wide, as the same action, by choosing `Text: "Sign Up"` and not matching the URL.
+2. Only match if URL contains: The URL where this action needs to take place. If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
+3. Selector: details below.
  
-You can have 1 or more identification fields selected. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
 
-### Identification Field: Example Uses
+#### Matching selectors
 
-If you have buttons across your site, all saying ‘Sign Up’, you can track ALL of them, site-wide, as the same action, by choosing `Text: "Sign Up"` and not matching the URL.
+You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">standard basic CSS selectors </a> to uniquely identify the elements you care about. The following types of selectors are supported:
+<ul>
+    <li>
+        <b>Recommended.</b> Attribute selectors. Example:
+        <code>[data-attr="value"]</code> will match elements that have the
+        given attribute and value.
+        <blockquote>
+            Please note that special attribute operators (e.g. <code>*</code>, <code>~</code>
+            <code>|</code>, ...) are currently <b>not</b> supported. Combining multiple attribute selectors is also <b>not</b> supported.
+        </blockquote>
+    </li>
+    <li>
+        ID selectors. Example: <code>#special-link</code> will match
+        elements with ID "special-link".
+    </li>
+    <li>
+        Class selectors. Example: <code>.important-link</code> will match
+        elements with CSS class "important-link".
+    </li>
+    <li>
+        Type selectors. Example: <code>input</code> will match any
+        <code>&lt;input&gt;</code> elements.
+    </li>
+    <li>
+        Combinators are also supported (e.g. descendant or child combinators).
+        <a
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#combinators"
+            target="_blank"
+            rel="noopener"
+        >
+            Learn more
+        </a>
+        about combinators. Examples: <code>form > [data-attr="submit"]</code> or <code>button span</code>.
+    </li>
+</ul>
 
-If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
+### Custom events & page views
+Page views can match urls containing a string or match exactly.
 
-If you have multiple sign up buttons on the same page, all with the same text and you want to track events relating to just one of them, you can use ‘Selector’. If they are technically the same element type **and** have the same classes, then you need to add a new class, `id` or `data-attr` to the button you wish to track separately, and use this to identify it.
+Custom Events can be sent to your PostHog instance via our API or one of our [several libraries](/docs/integrate/overview).
+
+
+<blockquote class='warning-note'>
+It is possible for an action to match multiple events. To do this, click ‘Add another match group’ when you are creating your action. Actions with multiple events work based on OR operations. That means that an action like "Clicked Read More Button" OR "Clicked More Information Button" will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
+</blockquote>
