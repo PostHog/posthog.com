@@ -1,6 +1,7 @@
 .pricing-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 1rem;
+    margin-bottom: 4rem;
 
     @media (max-width: 767px) {
         grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -8,7 +9,7 @@
 
     @media (min-width: 768px) {
         width: max(67vw, 736px);
-        margin: 0 auto;
+        margin: 0 auto 4rem auto;
     }
 
     .pricing-card {
@@ -22,9 +23,35 @@
             color: #fff;
             font-size: 1rem;
             padding: 20px 32px;
+            display: flex;
+            align-items: center;
 
             &.bg-blue {
                 background: #0062f5;
+            }
+
+            .custom-icon {
+                margin-right: 0.5em;
+            }
+        }
+
+        .icon-flex-row {
+            display: flex;
+            margin-bottom: 20px;
+
+            .icon-lockup:not(:last-child) {
+                margin-right: 32px;
+            }
+
+            .icon-badge-wrapper,
+            .posthog-icon {
+                margin-bottom: 6px;
+            }
+
+            h3 {
+                font-size: 15px;
+                font-weight: 700;
+                margin-bottom: 0;
             }
         }
 
@@ -35,6 +62,7 @@
             p {
                 margin-bottom: 0.75em;
                 opacity: 0.5;
+                font-size: 14px;
             }
 
             ul {
@@ -42,6 +70,9 @@
                 padding-left: 0;
 
                 li {
+                    color: rgba(0, 0, 0, 0.7);
+                    font-size: 14px;
+                    font-weight: 700;
                     padding: 6px 0;
                     position: relative;
 
