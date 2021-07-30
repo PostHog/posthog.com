@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> Would you rather go through a tutorial about actions instead of this feature reference? Check out our [Complete Guide to Event Tracking](/docs/tutorials/actions#sorting-through-your-events-with-actions).
+> Would you rather go through a tutorial about actions instead of this feature reference? Check out our [Complete Guide to Event Tracking](/docs/tutorials/event-tracking-guide#sorting-through-your-events-with-actions).
 
 Actions are PostHog’s way of easily cleaning up a large amount of event data.
 
