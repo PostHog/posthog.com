@@ -52,3 +52,4 @@ export const SignupModal = (): JSX.Element => {
 }
 
 export { SignupBorderGraphic } from './SignupBorderGraphic'
+export { SignupCircleGraphic } from './SignupCircleGraphic'

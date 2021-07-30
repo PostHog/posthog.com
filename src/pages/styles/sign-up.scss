@@ -8,6 +8,10 @@
     border-left: 3px solid rgba(196, 196, 196, 0.4);
     padding-left: 0.5em;
 
+    @media (max-width: 576px) {
+        display: none;
+    }
+
     .text-badge {
         font-weight: 800;
         font-size: 80%;
@@ -19,15 +23,31 @@
     }
 }
 
-.signup-callout-message,
-.signup-border-graphic {
+.signup-callout-message {
     z-index: 9010; // above react-modal
 }
 
-.signup-border-graphic {
+.signup-border-graphic,
+.signup-circle-graphic {
+    z-index: -1;
     position: fixed;
+}
+
+.signup-modal-view-email .signup-border-graphic {
     top: 36px;
     right: 20px;
+}
+
+.signup-modal-view-deployment .signup-border-graphic {
+    top: 36px;
+    left: 20px;
+    transform: scaleX(-1);
+}
+
+.signup-circle-graphic {
+    position: fixed;
+    top: 0;
+    right: 0;
 }
 
 .pricing-grid {
