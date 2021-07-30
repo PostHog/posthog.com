@@ -115,6 +115,12 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Orbit (https://orbit.love/) for community management<br />
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br />
 
+#### Marketing
+
+<input type="checkbox"/>  Google Analytics and Google Search Console <br />
+<input type="checkbox"/>  Any social media platforms we have a presence on <br />
+<input type="checkbox"/>  Any other third party analytics tools we use (e.g. HootSuite, RivalIQ, etc.) <br />
+
 ## Tools we use
 
 We use a number of different tools to organise our work and communicate at PostHog. Below is a summary list of the most important ones - this list is not intended to be exhaustive
