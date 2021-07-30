@@ -17,6 +17,8 @@ The three main factors to consider are:
 - [Importing events](#importing-events): Sending the events captured in the third-party data source into PostHog as custom events
 - [User identification](#user-identification): How to identify users within PostHog and ties those users back to the user within original data source
 
+Historical data is sent to PostHog using either a [server library](/docs/integrate/overview#server-libraries) or the [PostHog API](/docs/api/overview). For more information see the [Importing events section](#importing-events).
+
 ## Data ingestion process
 
 PostHog doesn't presently offer any specific tools to import or migrate historical data from third-party data sources. However, since the third-party data source is highly likely to offer an API you can use the power of software to import the data from one or more sources to PostHog.
