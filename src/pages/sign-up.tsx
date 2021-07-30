@@ -3,7 +3,7 @@ import { SEO } from '../components/seo'
 import '../components/Pricing/styles/index.scss'
 import Header from 'components/Header'
 import funnelsScreenshot from '/src/images/product-screenshots/browserframe-screenshot-new-funnels.png'
-import { SignupModal } from 'components/SignupModal'
+import { SignupModal, SignupBorderGraphic } from 'components/SignupModal'
 import { useValues } from 'kea'
 import { signupLogic, SignupModalView } from 'logic/signupLogic'
 import './styles/sign-up.scss'
@@ -30,6 +30,7 @@ const SignUpPage = (): JSX.Element => {
                             Unlock a deeper level of insights with Funnels 2.0{' '}
                             <strong className="text-badge">New</strong>
                         </div>
+                        <SignupBorderGraphic />
                         <SignupModal />
                     </>
                 )}

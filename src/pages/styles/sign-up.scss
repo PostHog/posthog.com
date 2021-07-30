@@ -3,7 +3,6 @@
     bottom: 100px;
     right: 100px;
     color: #fff;
-    z-index: 9010; // above react-modal
     max-width: 18em;
     font-weight: 600;
     border-left: 3px solid rgba(196, 196, 196, 0.4);
@@ -18,6 +17,17 @@
         border-radius: 0.25em;
         margin: 0 0.25em;
     }
+}
+
+.signup-callout-message,
+.signup-border-graphic {
+    z-index: 9010; // above react-modal
+}
+
+.signup-border-graphic {
+    position: fixed;
+    top: 36px;
+    right: 20px;
 }
 
 .pricing-grid {

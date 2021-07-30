@@ -33,6 +33,7 @@ export const SignupModal = (): JSX.Element => {
                     autoFocus
                     className="signup-email-field"
                     placeholder="Email address"
+                    required
                     value={email}
                     onChange={({ target: { value } }) => setEmail(value)}
                 />
@@ -49,3 +50,5 @@ export const SignupModal = (): JSX.Element => {
         </Modal>
     )
 }
+
+export { SignupBorderGraphic } from './SignupBorderGraphic'
