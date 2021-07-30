@@ -645,3 +645,43 @@
 [[redirects]]
     from = "/signup"
     to = "/pricing"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/api/overview"
+    to = "/docs/api/index"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/contribute/overview"
+    to = "/docs/contribute/index"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/integrate/overview"
+    to = "/docs/integrate/index"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/plugins/build/overview"
+    to = "/docs/plugins/build/index"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/plugins/overview"
+    to = "/docs/plugins/index"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/self-host/overview"
+    to = "/docs/self-host/index"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/tutorials/overview"
+    to = "/docs/tutorials/index"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/user-guides/overview"
+    to = "/docs/user-guides/index"
