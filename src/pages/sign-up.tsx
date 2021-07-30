@@ -26,6 +26,10 @@ const SignUpPage = (): JSX.Element => {
                             alt="PostHog Insights interface showing new Funnels features"
                             style={{ maxWidth: '75vw' }}
                         />
+                        <div className="signup-callout-message">
+                            Unlock a deeper level of insights with Funnels 2.0{' '}
+                            <strong className="text-badge">New</strong>
+                        </div>
                         <SignupModal />
                     </>
                 )}

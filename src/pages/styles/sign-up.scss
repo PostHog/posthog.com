@@ -1,3 +1,25 @@
+.signup-callout-message {
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    color: #fff;
+    z-index: 9010; // above react-modal
+    max-width: 18em;
+    font-weight: 600;
+    border-left: 3px solid rgba(196, 196, 196, 0.4);
+    padding-left: 0.5em;
+
+    .text-badge {
+        font-weight: 800;
+        font-size: 80%;
+        text-transform: uppercase;
+        background-color: #f35d26;
+        padding: 0.1em 0.25em;
+        border-radius: 0.25em;
+        margin: 0 0.25em;
+    }
+}
+
 .pricing-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 1rem;
