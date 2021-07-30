@@ -12,6 +12,24 @@ export enum Realm {
     cloud = 'cloud',
 }
 
+async function createContact(email: string) {
+    const url = process.env.GATSBY_POSTHOG_API_HOST + '/create_web_contact'
+    const body = { email }
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        })
+        console.log(response)
+    } catch (err) {
+        console.error(err)
+    }
+    return {}
+}
+
 export const signupLogic = kea({
     actions: {
         setModalView: (view: SignupModalView) => ({ view }),
@@ -41,6 +59,8 @@ export const signupLogic = kea({
             const { posthog, email } = values
             if (email && isValidEmailAddress(email)) {
                 posthog?.identify(email, { email }) // use email as distinct ID; also set it as property
+                const response = await createContact(email)
+                // TODO implement backend
                 actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
             }
         },
