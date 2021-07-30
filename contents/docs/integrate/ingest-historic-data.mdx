@@ -38,8 +38,8 @@ With the above factors in mind it's recommended that you break the process up in
     ```json
     {
         "event": "[event name]",
+        "distinct_id": "[your users' distinct id]",
         "properties": {
-            "distinct_id": "[your users' distinct id]",
             "key1": "value1",
             "key2": "value2"
         },
@@ -69,8 +69,8 @@ As mentioned above, the data should be in the following format:
 ```json
 {
     "event": "[event name]",
+    "distinct_id": "[your users' distinct id]",
     "properties": {
-        "distinct_id": "[your users' distinct id]",
         "key1": "value1",
         "key2": "value2"
     },
@@ -79,8 +79,11 @@ As mentioned above, the data should be in the following format:
 ```
 
 import NodeCapture from './server/node/snippets/capture.mdx'
+import PythonCapture from './server/python/snippets/capture.mdx'
 import PHPCapture from './server/php/snippets/capture.mdx'
-import APICapture from './server/api/snippets/capture.mdx'
+import GoCapture from './server/go/snippets/capture.mdx'
+import RubyCapture from './server/ruby/snippets/capture.mdx'
+import CURLCapture from './server/curl/snippets/capture.mdx'
 
 > The server libraries handle batching capture requests. If you decide to use the API directly you will need to manage this yourself.
 
@@ -88,26 +91,51 @@ import APICapture from './server/api/snippets/capture.mdx'
     <TabPane tab="Node.js" key="1">
         <NodeCapture />
     </TabPane>
-    <TabPane tab="PHP" key="2">
+    <TabPane tab="Python" key="2">
+        <PythonCapture />
+    </TabPane>
+    <TabPane tab="PHP" key="3">
         <PHPCapture />
     </TabPane>
-    <TabPane tab="API" key="3">
-        <APICapture />
+    <TabPane tab="Go" key="4">
+        <GoCapture />
+    </TabPane>
+    <TabPane tab="Ruby" key="5">
+        <RubyCapture />
+    </TabPane>    
+    <TabPane tab="cURL" key="6">
+        <CURLCapture />
     </TabPane>
 </Tabs>
 
 ## User identification
 
-As discussed within the [data ingestion process section](#data-ingestion-process), a unique user identifier should be set for each event. In addition to setting the user with each event you can enrich information about that user by adding more properties:
+As discussed within the [data ingestion process section](#data-ingestion-process), a unique user identifier `distinct_id` should be set for each event. In addition to setting the user with each event you can enrich information about that user by adding more properties:
 
 import NodeIdentify from './server/node/snippets/identify.mdx'
+import PythonIdentify from './server/python/snippets/identify.mdx'
 import PHPIdentify from './server/php/snippets/identify.mdx'
+import GoIdentify from './server/go/snippets/identify.mdx'
+import RubyIdentify from './server/ruby/snippets/identify.mdx'
+import CURLIdentify from './server/curl/snippets/identify.mdx'
 
 <Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
     <TabPane tab="Node.js" key="1">
         <NodeIdentify />
     </TabPane>
-    <TabPane tab="PHP" key="2">
+    <TabPane tab="Python" key="2">
+        <PythonIdentify />
+    </TabPane>
+    <TabPane tab="PHP" key="3">
         <PHPIdentify />
+    </TabPane>
+        <TabPane tab="Go" key="4">
+        <GoIdentify />
+    </TabPane>
+    <TabPane tab="Ruby" key="5">
+        <RubyIdentify />
+    </TabPane>    
+    <TabPane tab="cURL" key="6">
+        <CURLIdentify />
     </TabPane>
 </Tabs>
