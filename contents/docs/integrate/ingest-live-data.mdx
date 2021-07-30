@@ -3,3 +3,47 @@ title: Ingest Live Data
 sidebar: Docs
 showTitle: true
 ---
+
+import { Tabs } from 'antd'
+export const TabPane = Tabs.TabPane
+
+Live data ingestion, opposed to [historical data ingestions](/docs/integrate/ingest-historical-data), is the process of sending events from your applications to PostHog in real-time; as they happen.
+
+Live (real-time) events can be integrated using [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), and [third-party platform integrations](/docs/integrate/overview#integrations).
+
+The purpose of this guide is to help you understand some key concepts with a goal of ingesting live data into PostHog. For the purposes of the guide we'll focus on the client libraries as a means for data ingestion.
+
+The guide covers the following:
+
+- [Installing and initializing a PostHog library](#installing-a-library)
+- [How to identify and associate users with events](#identifying-users)
+- [How to send events to PostHog](#sending-events)
+- [How Autocapture works in PostHog](#how-autocapture-works) (JavaScript only)
+
+If you prefer to learn by doing, you can get started on the web with the [JavaScript snippet](/docs/integrate/client/snippet-installation).
+
+# Installing a Library
+
+Install the library for the platform you are building your application for.
+
+import JSInstall from './client/js/snippets/install.mdx'
+
+<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
+    <TabPane tab="JavaScript" key="1">
+        <JSInstall />
+    </TabPane>
+    <TabPane tab="Android" key="2">
+    </TabPane>
+    <TabPane tab="iOS" key="3">
+    </TabPane>
+    <TabPane tab="Flutter" key="4">
+    </TabPane>
+    <TabPane tab="React Native" key="5">
+    </TabPane>
+</Tabs>
+
+# Identifying Users
+
+# Sending Events
+
+# How Autocapture works
