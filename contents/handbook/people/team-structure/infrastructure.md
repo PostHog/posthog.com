@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-![Image of Cloud Infrastructure](https://github.com/PostHog/posthog-cloud/blob/master/docs/images/infra.png?raw=true)
+<a class="ignore-external" href="https://github.com/PostHog/posthog-cloud/blob/master/docs/images/infra.png?raw=true"><img alt="Image of Cloud Infrastructure" title="Image of Cloud Infrastructure" src="https://github.com/PostHog/posthog-cloud/blob/master/docs/images/infra.png?raw=true"/></a>
 
 ## People
 

@@ -10,12 +10,12 @@ Go to the [Slack page to create apps](https://api.slack.com/apps?new_app=1) and 
 
 Feel free to use an image from [here](/media) as the app's logo.
 
-![image](https://user-images.githubusercontent.com/53387/78574619-86939580-782a-11ea-8617-caf1ffe2783a.png)
+<a class="ignore-external" href="https://user-images.githubusercontent.com/53387/78574619-86939580-782a-11ea-8617-caf1ffe2783a.png"><img src="https://user-images.githubusercontent.com/53387/78574619-86939580-782a-11ea-8617-caf1ffe2783a.png"/></a>
 
 ## 2. Create Webhook
 Go to the 'Incoming Webhooks' page for your newly-created app and toggle 'Activate Incoming Webhooks' to turn it on. Then click on 'Add New Webhook to Workspace' and select the channel that the notifications will be posted to:
 
-![image](https://user-images.githubusercontent.com/53387/78574881-ec801d00-782a-11ea-9b87-8a40e49dd912.png)
+<a class="ignore-external" href="https://user-images.githubusercontent.com/53387/78574881-ec801d00-782a-11ea-9b87-8a40e49dd912.png"><img src="https://user-images.githubusercontent.com/53387/78574881-ec801d00-782a-11ea-9b87-8a40e49dd912.png"/></a>
 
 ## 3. Setup Webhook in PostHog
 Copy the Webhook URL into the PostHog Setup page:

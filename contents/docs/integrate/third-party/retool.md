@@ -40,11 +40,7 @@ API access is significantly slower, especially since we need to setup a way for 
 
 To see the difference in speed, check out our [demo Retool app](https://phtesting.retool.com/embedded/public/6f20bb59-4199-4c75-ac7d-eee38a7b6b71):
 
-<a href="https://phtesting.retool.com/embedded/public/6f20bb59-4199-4c75-ac7d-eee38a7b6b71" target="_blank">
-
-![Retool Demo App](../../../images/tutorials/retool/demo-app.png)
-
-</a>
+<a class="ignore-external" href="https://phtesting.retool.com/embedded/public/6f20bb59-4199-4c75-ac7d-eee38a7b6b71" target="_blank"><img alt="Retool Demo App" title="Retool Demo App" src="../../../images/tutorials/retool/demo-app.png"/></a>
 
 ### Integrating directly with PostgreSQL
 
