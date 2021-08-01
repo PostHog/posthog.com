@@ -2,6 +2,16 @@
     iframe {
         max-width: 100%;
     }
+    $ignoreParentSelectors: '.contributor-faces';
+    $ignoreRootSelectors: '.ignore-external, .github-user-link';
+    *:not(#{$ignoreParentSelectors}) a:not(#{$ignoreRootSelectors}) {
+        &[href^="http://"], &[href^="https://"]
+        {
+            &:not([href*='posthog.com']):after {
+                content: ' \2197';
+            }
+        }
+    }
 }
 
 .light {

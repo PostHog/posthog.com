@@ -85,7 +85,7 @@ If an early draft is being shared, we'll likely build a low fidelity wireframe i
 
 *Note: Balsamiq uses its own Comic Sans-style font. Don't get hung up on this!*
 
-![image](https://user-images.githubusercontent.com/154479/114972248-2b887b80-9e4c-11eb-92fe-bce7bf14c808.png)
+<a class="ignore-external" href="https://user-images.githubusercontent.com/154479/114972248-2b887b80-9e4c-11eb-92fe-bce7bf14c808.png"><img src="https://user-images.githubusercontent.com/154479/114972248-2b887b80-9e4c-11eb-92fe-bce7bf14c808.png"/></a>
 
 Once a design is laid out, we'll move into hi-fidelity mockups built in Figma. This process usually takes a few rounds to perfect, and we often iterate up until the moment the design is passed off for development.
 
