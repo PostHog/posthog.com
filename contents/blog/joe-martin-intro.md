@@ -16,18 +16,16 @@ The former tech and games journalist previously did everything on PC, but joinin
 
 >_”The first thing I did was have to get a new mouse because I couldn't cope with the old one, and my other main takeaway is how expensive all the adapters are. But other than that, getting by okay.”_
 
-Joe isn’t new to adjustments - he’s been making them his whole career ever since he started out as a freelance journalist. Before PostHog, he ran product and content marketing for [Scoro](https://www.scoro.com/), a work management solution for creative and professional services. Prior to Scoro, he was senior product marketing manager for Europe at [Pollen](https://pollen.co/), which curates travel experiences through tech and a global network of partners. 
+Joe isn’t new to adjustments - he’s been making them his whole career ever since he started out as a freelance journalist. Before PostHog, he ran product and content marketing for [Scoro](https://www.scoro.com/), a work management solution for creative and professional services. Prior to Scoro, he was Senior Product Marketing Manager at [Pollen](https://pollen.co/), which curates travel experiences through a global network of partners. 
 
-Before Pollen, Joe held several freelance and full-time content-related jobs at [Laundrapp](http://www.laundrapp.com/) (an on-demand laundry and dry cleaning service), as a lead copywriter at [Truphone](http://www.truphone.com/) (a sim-tech company), and as a Games Editor and writer at [Dennis Publishing](http://www.dennis.co.uk/) (a London-based media company).
-
-And even then - he only pivoted into content and product marketing after stints in dry cleaning, music festivals, and a few weeks as a professional clown. 
+Before Pollen, Joe held several freelance and full-time content-related jobs, including as Content Marketing Manager at [Laundrapp](http://www.laundrapp.com/) (an on-demand laundry and dry cleaning service), as a Lead Copywriter at [Truphone](http://www.truphone.com/) (a sim-tech company), and as Games Editor at [Dennis Publishing](http://www.dennis.co.uk/) (a London-based media company). He also used to be a professional clown.
 
 Talk about range.
 
 ## What *is* product marketing?
 
-Product marketing sits at the intersection of marketing, customer service, and product development. It involves two main things: 
-* pPutting together value propositions and messaging frameworks to inform go-to-market plans, and 
+Product marketing sits at the intersection of marketing, customer advocacy, and product development. It involves two main activities: 
+* Putting together value propositions and messaging frameworks to inform go-to-market plans, and 
 * Thinking about the positioning of the brand within the broader market.
 
 As a collaborative and supportive function, product marketing can involve putting together specific pieces of sales enablement collateral, documentation, case studies and other marketing collateral, and understanding a business’ users as well.
