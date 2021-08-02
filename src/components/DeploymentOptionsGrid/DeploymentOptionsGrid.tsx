@@ -69,9 +69,7 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                             ]}
                         />
                         <ButtonBlock
-                            as="a"
-                            href="/docs/self-host/overview"
-                            onClick={() => reportDeploymentTypeSelected(Realm.hosted)}
+                            onClick={() => reportDeploymentTypeSelected(Realm.hosted, '/docs/self-host/overview')}
                         >
                             Select
                         </ButtonBlock>
@@ -100,9 +98,12 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                             ]}
                         />
                         <ButtonBlock
-                            as="a"
-                            href={`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`}
-                            onClick={() => reportDeploymentTypeSelected(Realm.cloud)}
+                            onClick={() =>
+                                reportDeploymentTypeSelected(
+                                    Realm.cloud,
+                                    `https://app.posthog.com/signup?email=${encodeURIComponent(email)}`
+                                )
+                            }
                         >
                             Select
                         </ButtonBlock>

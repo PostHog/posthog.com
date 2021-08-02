@@ -14,16 +14,33 @@ export enum Realm {
 
 async function createContact(email: string) {
     const url = process.env.GATSBY_POSTHOG_API_HOST + '/create_web_contact'
-    const body = { email }
+    const body = new FormData()
+    body.append('email', email)
     try {
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
+            body,
         })
-        console.log(response)
+        return response
+    } catch (err) {
+        console.error(err)
+    }
+    return {}
+}
+
+async function updateContact(email: string, properties: Record<string, string>) {
+    const url = process.env.GATSBY_POSTHOG_API_HOST + '/update_web_contact'
+    const body = new FormData()
+    body.append('email', email)
+    for (const [property, value] of Object.entries(properties)) {
+        body.append(property, value)
+    }
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body,
+        })
+        return response
     } catch (err) {
         console.error(err)
     }
@@ -35,7 +52,7 @@ export const signupLogic = kea({
         setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
         submitForm: true,
-        reportRealmSelected: (realm: Realm) => ({ realm }),
+        reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({ deploymentType, nextHref }),
     },
     reducers: {
         modalView: [
@@ -59,13 +76,20 @@ export const signupLogic = kea({
             const { posthog, email } = values
             if (email && isValidEmailAddress(email)) {
                 posthog?.identify(email, { email }) // use email as distinct ID; also set it as property
+                posthog?.capture('signup: submit email')
                 const response = await createContact(email)
-                // TODO implement backend
+                // TODO send additional events
                 actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
             }
         },
-        reportRealmSelected: async ({ realm }) => {
-            values.posthog?.send('selected deployment realm', { realm })
+        reportDeploymentTypeSelected: async ({ deploymentType, nextHref }) => {
+            const { posthog, email } = values
+            posthog?.capture('signup: deployment type selected', { selected_deployment_type: deploymentType })
+            const response = await updateContact(email, { selected_deployment_type: deploymentType })
+            if (nextHref) {
+                window.location.replace(nextHref)
+            }
+            // TODO send additional events
         },
     }),
 })
