@@ -1,3 +1,5 @@
+$base_font_stack: 'SK Curiosity', Helvetica, Arial, Sans-Serif; // TODO centralize this var
+
 .modalContent {
     border-radius: 6px;
     background: #eee;
@@ -7,6 +9,8 @@
     display: block;
 
     h3 {
+        font-family: $base_font_stack;
+        text-transform: none;
         text-align: center;
     }
 

@@ -56,7 +56,7 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                                 >
                                     <UpAndToTheRightIcon />
                                 </BadgeWrapper>
-                                <h3 className="font-sans">Enterprise</h3>
+                                <h3>Enterprise</h3>
                                 <p>From $2k/mo</p>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                         <div className="icon-flex-row">
                             <div className="icon-lockup">
                                 <img src={posthogIcon} style={{ height: 36 }} className="posthog-icon" />
-                                <h3 className="font-sans">PostHog Cloud</h3>
+                                <h3>PostHog Cloud</h3>
                                 <p>Pay per event</p>
                             </div>
                         </div>

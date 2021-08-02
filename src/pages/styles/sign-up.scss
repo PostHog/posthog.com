@@ -1,3 +1,5 @@
+$base_font_stack: 'SK Curiosity', Helvetica, Arial, Sans-Serif; // TODO centralize this var
+
 .signup-callout-message {
     position: fixed;
     bottom: 100px;
@@ -101,6 +103,8 @@
             }
 
             h3 {
+                font-family: $base_font_stack;
+                text-transform: none;
                 font-size: 15px;
                 font-weight: 700;
                 margin-bottom: 0;
