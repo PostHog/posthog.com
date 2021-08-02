@@ -49,7 +49,7 @@ There are three ways to match your elements:
 
 #### Matching selectors
 
-You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">standard basic CSS selectors </a> to uniquely identify the elements you care about. The following types of selectors are supported:
+You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">standard basic CSS selectors</a> to uniquely identify the elements you care about. The following types of selectors are supported:
 <ul>
     <li>
         <b>Recommended.</b> Attribute selectors. Example:
@@ -88,7 +88,7 @@ You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Select
 ### Custom events & page views
 Page views can match urls containing a string or match exactly.
 
-Custom Events can be sent to your PostHog instance via our API or one of our [several libraries](/docs/integrate/overview).
+Custom Events can be sent to your PostHog instance via our API or one of our [libraries](/docs/integrate/overview).
 
 
 <blockquote class='warning-note'>
