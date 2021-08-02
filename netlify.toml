@@ -620,26 +620,37 @@
     from = "/docs/self-host/deploy/qovery"
     to = "/docs/self-host/deploy/other"
 
+    
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/tutorials/actions"
+    to = "/docs/tutorials/event-tracking-guide"
+
+
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/plugins/overview"
     to = "/docs/plugins"
+
 
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/api/overview"
     to = "/docs/api"
 
+
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/contribute/overview"
     to = "/docs/contribute"
 
+
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/user-guides/overview"
     to = "/docs/user-guides"
-    
+  
+  
 # Added: 2021-07-17
 # Not due to a rename, but to improve the website's navigation experience
 [[redirects]]
