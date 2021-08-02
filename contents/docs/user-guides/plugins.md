@@ -77,24 +77,26 @@ In order to facilitate sorting through your events, plugins can be used to deter
 
 By default, PostHog does not enforce schemas on events it receives. However, a plugin could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.
 
-## Using Plugins
+## Using plugins
 
-To use plugins on your self-hosted instance, head over to 'Project' -> 'Plugins' on the left sidebar:
-
-![Plugins Screenshot](../../images/plugins.png)
-
-Here you will be able to install our default plugins to test out the functionality or install a custom plugin by pasting a link to its public repository. 
-
-Given that plugins are still in **Beta**, our default library is currently limited to test plugins. We are working to expand the number of plugins available and will soon release tutorials on how to build your own plugin. 
-
-In the meanwhile, you can [follow our progress on GitHub](https://github.com/PostHog/posthog/issues/1896).
+To use plugins, go to the Plugins page using the navigation sidebar.
+The possibilities differ slightly between self-hosetd PostHog and PostHog Cloud:
+- On self-hosted access every organization starts out with only the basic preinstalled plugins (like GeoIP).  
+  Preinstalled plugins are enabled by default for new projects.  
+  Additional plugins can be freely installed from the Plugin Repository, or from npm/GitHub/GitLab, or even written
+  directly in the PostHog app using a built-in code editor. They can then be enabled, configured, disabled, and also
+  updated or uninstalled as desired.
+- On PostHog Cloud every organization has access to verified plugins from the Plugin Repository, managed by PostHog.  
+  That means all available plugins are guaranteed to be safe and sound, but installation of non-verified ones is
+  not possible due to system safety considerations.  
+  Such managed plugins can also be freely enabled, configured, and disabled. The update schedule on the other hand
+  is managed by PostHog in this case.
 
 ### Installing plugins from private sources
 
-To install plugins from private sources, like private npm packages or private repositories, you can either:
+To install plugins from private sources, like private npm packages or private repositories, you can:
 
-1. Use the following environment variables:
-
+1. Either use the following environment variables:
 
 | Variable                   | Description                           | Default Value         |
 | :------------------------: | :------------------------------------ | :-------------------: |
@@ -102,8 +104,7 @@ To install plugins from private sources, like private npm packages or private re
 | `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 
-
-1. Append `?private_token=<YOUR_TOKEN>` to the plugin URL
+1. Or append `?private_token=<YOUR_TOKEN>` to the plugin URL
 
 ### Reordering plugins
 
