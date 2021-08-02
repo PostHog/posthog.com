@@ -22,7 +22,7 @@ We aim to include at least one new blog post in every newsletter - ideally 2-4 p
 Our current newsletter structure looks roughly as follows:
 - Title/Heading
 - List of #New and #Improved features
-- Screenshot of one of the new/improved features
+- Screenshot of one of the new/improved features - ideally the same image used in the array post
 - List of new blog posts or other news, with blurbs and links
 - Roles we're currently hiring for
 - Social media links
