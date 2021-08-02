@@ -39,7 +39,7 @@ If you want to make it really easy for your users to log in, or have some compli
 
 When you enable automatic user provisioning you set a list of **whitelisted domains**. Whenever a user logs in for the first using the third-party provider you enabled, if their provider-validated email address matches your whitelisted domain, an account will be automatically created for them in the organization.
 
-To enable this, navigate to your organization settings (/organization/settings#domain-whitelist) and add the domains for which you want to enable automatic user provisioning.
+To enable this, navigate to your organization settings (`/organization/settings#domain-whitelist`) and add the domains for which you want to enable automatic user provisioning.
 
 
 ## Providers
