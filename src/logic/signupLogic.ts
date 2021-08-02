@@ -58,6 +58,7 @@ export const signupLogic = kea({
         setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
         submitForm: true,
+        skipEmailEntry: true,
         reportModalShown: true,
         reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({ deploymentType, nextHref }),
     },
@@ -92,6 +93,11 @@ export const signupLogic = kea({
                 }
             }
         },
+        skipEmailEntry: async () => {
+            const { posthog } = values
+            posthog?.capture('signup: email modal skipped')
+            actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
+        },
         reportModalShown: async () => {
             const { posthog } = values
             posthog?.capture('signup: email modal shown')
@@ -107,7 +113,6 @@ export const signupLogic = kea({
             if (nextHref) {
                 window.location.replace(nextHref)
             }
-            // TODO send additional events
         },
     }),
 })

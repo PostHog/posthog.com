@@ -4,11 +4,11 @@ import { useValues, useActions } from 'kea'
 import './SignupModal.scss'
 import { Button, Input } from 'antd'
 import { ButtonBlock } from 'components/ButtonBlock/ButtonBlock'
-import { signupLogic, SignupModalView } from 'logic/signupLogic'
+import { signupLogic } from 'logic/signupLogic'
 
 export const SignupModal = (): JSX.Element => {
     const { email } = useValues(signupLogic)
-    const { setEmail, submitForm, setModalView } = useActions(signupLogic)
+    const { setEmail, submitForm, skipEmailEntry } = useActions(signupLogic)
 
     return (
         <Modal
@@ -42,7 +42,7 @@ export const SignupModal = (): JSX.Element => {
                     <Button htmlType="submit" type="link">
                         <strong>Next: </strong> Choose your edition
                     </Button>
-                    <Button type="link" onClick={() => setModalView(SignupModalView.DEPLOYMENT_OPTIONS)}>
+                    <Button type="link" onClick={() => skipEmailEntry()}>
                         Skip
                     </Button>
                 </div>
