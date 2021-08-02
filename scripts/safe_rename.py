@@ -33,12 +33,17 @@ try:
 
         for i in range(len(from_paths)):
             md_to_mdx = '.mdx' not in from_paths[i] and '.mdx' in to_paths[i]
+
+            # handle index default directory files. /path/index will become /path
+            to_paths[i] = re.sub("\/index$", "", to_paths[i])
+            
             new_redirect = redirect_text.format(from_paths[i], to_paths[i])
+
             if not md_to_mdx and from_paths[i] != '(.*)' and new_redirect not in local_netlify_config_text:
                 print("Creating redirect: ", new_redirect)
                 new_redirects += redirect_with_date_comment_text.format(date.today(), new_redirect)
             else:
-                print('Not including existing redirect:', new_redirect)
+                print('Not including redirect:', new_redirect)
         
         with open("./netlify.toml", "a") as netlify_config:
             netlify_config.write(new_redirects)

@@ -7,7 +7,7 @@
     {
         "entry": "Self-Host",
         "name": "Self-Host",
-        "items": ["docs/self-host/overview", "docs/self-host/postgres-vs-clickhouse"],
+        "items": ["docs/self-host", "docs/self-host/postgres-vs-clickhouse"],
         "child_entries": ["Deploy (Postgres)", "Configure"]
     },
     {
@@ -40,7 +40,7 @@
     {
         "entry": "Integrate",
         "name": "Integrate",
-        "items": ["docs/integrate/overview"],
+        "items": ["docs/integrate"],
         "child_entries": ["Client Libraries", "Server Libraries", "Third Party", "Webhooks"]
     },
     {
@@ -97,7 +97,7 @@
         "entry": "User Guides",
         "name": "User Guides",
         "items": [
-            "docs/user-guides/overview",
+            "docs/user-guides",
             "docs/user-guides/application-settings",
             "docs/user-guides/actions",
             "docs/user-guides/annotations",
@@ -122,14 +122,14 @@
     {
         "entry": "Plugins",
         "name": "Plugins",
-        "items": ["docs/plugins/overview", "docs/plugins/enabling"],
+        "items": ["docs/plugins", "docs/plugins/enabling"],
         "child_entries": ["Build Your Own"]
     },
     {
         "entry": "Build Your Own",
         "name": "Build Your Own",
         "items": [
-            "docs/plugins/build/overview",
+            "docs/plugins/build",
             "docs/plugins/build/tutorial",
             "docs/plugins/build/types",
             "docs/plugins/build/reference"
@@ -139,7 +139,7 @@
         "entry": "Tutorials",
         "name": "Tutorials",
         "items": [
-            "docs/tutorials/overview",
+            "docs/tutorials",
             "docs/tutorials/feature-flags",
             "docs/tutorials/toolbar",
             "docs/tutorials/funnels",
@@ -158,7 +158,7 @@
         "entry": "API",
         "name": "API",
         "items": [
-            "docs/api/overview",
+            "docs/api",
             "docs/api/post-only-endpoints",
             "docs/api/elements",
             "docs/api/events",
@@ -175,7 +175,7 @@
         "entry": "Contribute",
         "name": "Contribute",
         "items": [
-            "docs/contribute/overview",
+            "docs/contribute",
             "docs/contribute/code-of-conduct",
             "docs/contribute/recognizing-contributions",
             "docs/contribute/developing-locally",
