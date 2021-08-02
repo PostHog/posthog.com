@@ -5,8 +5,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Important:** Our Plugins functionality is still in **Beta** mode. Please report any issues you find [on GitHub](https://github.com/PostHog/posthog/issues). 
-
 _Interested in what plugins we have available? Check out our [Plugin Library](/plugins)._
 
 <hr /><br />
