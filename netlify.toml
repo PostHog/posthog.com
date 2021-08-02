@@ -621,6 +621,7 @@
 [[redirects]]
     from = "/docs/self-host/deploy/qovery"
     to = "/docs/self-host/deploy/other"
+    
 # Added: 2021-07-30
 [[redirects]]
     from = "/docs/tutorials/actions"
