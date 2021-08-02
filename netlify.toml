@@ -143,7 +143,6 @@
     from = "/handbook/getting-started"
     to = "/handbook/getting-started/start-here"
 
-
 [[redirects]]
     from = "/handbook/people/team-structure/user-experience"
     to = "/handbook/people/team-structure/core-experience"
@@ -183,6 +182,14 @@
     to = "/docs/contributing/updating-documentation"
 
 [[redirects]]
+    from = "/docs/self-host/configure/scaling-posthog"
+    to = "/docs/self-host/overview"
+
+[[redirects]]
+    from = "/docs/configuring-posthog/scaling-posthog"
+    to = "/docs/self-host/overview"
+
+[[redirects]]
     from = "/docs/self-host"
     to = "/docs/self-host/overview"
 
@@ -197,7 +204,6 @@
 [[redirects]]
     from = "/docs/configuring-posthog"
     to = "/docs/self-host/configure"
-
 
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
@@ -380,11 +386,6 @@
 
 # Added: 2021-07-13
 [[redirects]]
-    from = "/docs/configuring-posthog/scaling-posthog"
-    to = "/docs/self-host/configure/scaling-posthog"
-
-# Added: 2021-07-13
-[[redirects]]
     from = "/docs/configuring-posthog/securing-posthog"
     to = "/docs/self-host/configure/securing-posthog"
 
@@ -426,6 +427,11 @@
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/deployment/deploy-gcs"
+    to = "/docs/self-host/deploy/google-cloud-services"
+
+# Fixes orphan link(s)
+[[redirects]]
+    from = "/docs/self-host/deploy/gcs"
     to = "/docs/self-host/deploy/google-cloud-services"
 
 # Added: 2021-07-13
@@ -593,3 +599,25 @@
 [[redirects]]
     from = "/docs/libraries"
     to = "/docs/integrate/overview"
+    
+# Added: 2021-07-17
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/signup"
+    to = "/pricing"
+
+# Added: 2021-07-21
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/product-features"
+    to = "/product"
+
+# Added: 2021-07-28
+[[redirects]]
+    from = "/docs/self-host/deploy/render"
+    to = "/docs/self-host/deploy/other#render"
+
+# Added: 2021-07-28
+[[redirects]]
+    from = "/docs/self-host/deploy/qovery"
+    to = "/docs/self-host/deploy/other"

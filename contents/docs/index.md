@@ -22,11 +22,10 @@ PostHog solves that. We let every person in the company have easy access to prod
 
 ### Deployment
 
-There are 3 ways of using PostHog:
+There are 2 ways of using PostHog:
 
-* PostHog Open Source
-* PostHog Enterprise
 * PostHog Cloud
+* Self-Hosted
 
 **Do you want to get started quickly without having to deploy PostHog yourself?**
 
@@ -34,13 +33,7 @@ Start using [PostHog Cloud for free](https://app.posthog.com).
 
 **Do you want to self-host PostHog?**
 
-Check out our [Deployment page](/docs/deployment).
-
-**Want to get up and running immediately?** 
-
-Use our one-click [Heroku deployment](/docs/self-host/deploy/heroku):
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
+Check out our [Deployment page](/docs/self-host/overview#deploy).
 
 ### Capturing Events with PostHog
 
@@ -79,14 +72,9 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 
 **Integrating PostHog with Other Tools**
 
-- [Integrate PostHog with Shopify](//docs/integrate/third-party/shopify) 
+- [Integrate PostHog with Shopify](/docs/integrate/third-party/shopify) 
 - [Integrate PostHog with Metabase](/docs/integrate/third-party/metabase) 
 - [Integrate PostHog with Google Tag Manager](/docs/integrate/third-party/google-tag-manager) 
-
-
-### Configuring PostHog
-
-[Configuring PostHog](/docs/self-host/configure/overview) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/self-host/configure/scaling-posthog), [security](/docs/self-host/configure/securing-posthog), and [upgrade methods](/docs/self-host/configure/upgrading-posthog).
 
 ### Integrations
 

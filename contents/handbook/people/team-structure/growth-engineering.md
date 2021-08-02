@@ -1,5 +1,5 @@
 ---
-title: Team Growth Engineering
+title: Team Growth
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
@@ -8,10 +8,14 @@ hideAnchor: true
 ## People
 
 - [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
+- [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Lead Designer)
+- [Joe Martin](/handbook/people/team#joe-martin-product-marketer) (Product Marketer)
+- [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
+- [Phil Leggetter](/handbook/people/team#phil-leggetter-developer-relations) (Developer Relations)
 
 ## Mission
 
-Generate scalable growth by applying focused efforts of product, data, and engineering to specific areas of our business.
+Generate scalable growth by applying focused efforts of product, data, and engineering to our website, docs and activation flow. 
 
 ## Responsibilities
 
@@ -59,4 +63,4 @@ We believe that rapid iteration, compounding our learnings, and following our ex
 
 ## Slack channel
 
-[#team-growth-engineering](https://posthog.slack.com/messages/team-growth-engineering)
+[#team-growth](https://posthog.slack.com/messages/team-growth)

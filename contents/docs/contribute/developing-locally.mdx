@@ -198,27 +198,37 @@ Run `./bin/tests`
 ### Running end-to-end Cypress tests
 
 Run `./bin/e2e-test-runner`
-    
+
 ### Debugging the backend in PyCharm
-    
-With [PyCharm's](https://posthog.com/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request. 
-    
+
+With [PyCharm's](https://posthog.com/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
+
 #### Configuring the debugger
 
 1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
 2. Click Edit Configuration to edit the Django Server configuration you just created.
 3. Point PyCharm to the project root (`posthog/`) and settings (`posthog/posthog/settings.py`) file.
 4. Add these two environment variables
-    
+
 ```
 DEBUG=1;
 DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
 ```
 
 ### Let's spin it up!
-    
+
 1. Run `./bin/start-frontend`
 2. Run `./bin/start-worker`
 3. Set some breakpoints
 4. In the top toolbar, select the config you just created and click the green bug icon.
     - This runs `python manage.py runserver` with extra parameters that enable debugging.
+
+
+<br /><hr />
+
+## Testing ingestion and feature flags
+
+
+> **Note:** When developing locally and setting environment variable `DEBUG=1`, the local server is treated as what would be "PostHog Cloud". This means that all analytics that are captured from the usage of PostHog are sent to this same local instance (can be quite useful to generate test data too). In addition, feature flags are considered based on the local instance. 
+
+Add feature flags to your [local instance](http://localhost:8000/feature_flags/new) to use them while developing locally. For example, let's say you want to test the using the `my-feature-flag` flag locally - you would create a new flag with the name `my-feature-flag` and release that flag to the user account used for testing. Learn more about using feature flags in the [Feature Flags User Guide](https://posthog.com/docs/user-guides/feature-flags).

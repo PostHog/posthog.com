@@ -7,20 +7,19 @@
     {
         "entry": "Self-Host",
         "name": "Self-Host",
-        "items": ["docs/self-host/overview"],
-        "child_entries": ["Deploy", "Configure"]
+        "items": ["docs/self-host/overview", "docs/self-host/postgres-vs-clickhouse"],
+        "child_entries": ["Deploy (Postgres)", "Configure"]
     },
     {
-        "entry": "Deploy",
-        "name": "Deploy",
+        "entry": "Deploy (Postgres)",
+        "name": "Deploy (Postgres)",
         "items": [
             "docs/self-host/deploy/aws",
             "docs/self-host/deploy/azure",
             "docs/self-host/deploy/digital-ocean",
             "docs/self-host/deploy/google-cloud-services",
             "docs/self-host/deploy/heroku",
-            "docs/self-host/deploy/qovery",
-            "docs/self-host/deploy/render",
+            "docs/self-host/deploy/other",
             "docs/self-host/deploy/kubernetes",
             "docs/self-host/deploy/docker",
             "docs/self-host/deploy/source",
@@ -32,7 +31,6 @@
         "name": "Configure",
         "items": [
             "docs/self-host/configure/environment-variables",
-            "docs/self-host/configure/scaling-posthog",
             "docs/self-host/configure/securing-posthog",
             "docs/self-host/configure/running-behind-proxy",
             "docs/self-host/configure/email",
