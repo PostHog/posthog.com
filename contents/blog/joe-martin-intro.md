@@ -16,7 +16,7 @@ The former tech and games journalist previously did everything on PC, but joinin
 
 >_”The first thing I did was have to get a new mouse because I couldn't cope with the old one, and my other main takeaway is how expensive all the adapters are. But other than that, getting by okay.”_
 
-Joe isn’t new to adjustments - he’s been making them his whole career ever since he started out as a freelance journalist. Before PostHog, he ran product and content marketing for [Scoro](https://www.scoro.com/), a UK-based work management solution for creative and professional services. Prior to Scoro, he was senior product marketing manager for Europe at [Pollen](https://pollen.co/), which curates travel experiences through tech and a global network of partners. 
+Joe isn’t new to adjustments - he’s been making them his whole career ever since he started out as a freelance journalist. Before PostHog, he ran product and content marketing for [Scoro](https://www.scoro.com/), a work management solution for creative and professional services. Prior to Scoro, he was senior product marketing manager for Europe at [Pollen](https://pollen.co/), which curates travel experiences through tech and a global network of partners. 
 
 Before Pollen, Joe held several freelance and full-time content-related jobs at [Laundrapp](http://www.laundrapp.com/) (an on-demand laundry and dry cleaning service), as a lead copywriter at [Truphone](http://www.truphone.com/) (a sim-tech company), and as a Games Editor and writer at [Dennis Publishing](http://www.dennis.co.uk/) (a London-based media company).
 
