@@ -12,20 +12,30 @@ export enum Realm {
     cloud = 'cloud',
 }
 
+type HubSpotContact = {
+    id: string // Hubspot contact ID (number as string)
+    properties: Record<string, string>
+    created_at: string // ISO 8601
+    updated_at: string // ISO 8601
+    archived: boolean
+    archived_at: string | null // ISO 8601
+}
+
+export type HubSpotContactResponse = {
+    success: boolean
+    result: string | HubSpotContact
+}
+
 async function createContact(email: string) {
     const url = process.env.GATSBY_POSTHOG_API_HOST + '/create_web_contact'
     const body = new FormData()
     body.append('email', email)
-    try {
-        const response = await fetch(url, {
+    return (
+        await fetch(url, {
             method: 'POST',
             body,
         })
-        return response
-    } catch (err) {
-        console.error(err)
-    }
-    return {}
+    ).json() as Promise<HubSpotContactResponse>
 }
 
 async function updateContact(email: string, properties: Record<string, string>) {
@@ -35,16 +45,12 @@ async function updateContact(email: string, properties: Record<string, string>) 
     for (const [property, value] of Object.entries(properties)) {
         body.append(property, value)
     }
-    try {
-        const response = await fetch(url, {
+    return (
+        await fetch(url, {
             method: 'POST',
             body,
         })
-        return response
-    } catch (err) {
-        console.error(err)
-    }
-    return {}
+    ).json() as Promise<HubSpotContactResponse>
 }
 
 export const signupLogic = kea({
@@ -52,6 +58,7 @@ export const signupLogic = kea({
         setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
         submitForm: true,
+        reportModalShown: true,
         reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({ deploymentType, nextHref }),
     },
     reducers: {
@@ -75,17 +82,28 @@ export const signupLogic = kea({
         submitForm: async () => {
             const { posthog, email } = values
             if (email && isValidEmailAddress(email)) {
-                posthog?.identify(email, { email }) // use email as distinct ID; also set it as property
-                posthog?.capture('signup: submit email')
-                const response = await createContact(email)
-                // TODO send additional events
-                actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
+                try {
+                    posthog?.identify(email, { email }) // use email as distinct ID; also set it as property
+                    posthog?.capture('signup: submit email')
+                    await createContact(email)
+                    actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
+                } catch (err) {
+                    posthog?.capture('signup: failed to create contact', { message: err })
+                }
             }
+        },
+        reportModalShown: async () => {
+            const { posthog } = values
+            posthog?.capture('signup: email modal shown')
         },
         reportDeploymentTypeSelected: async ({ deploymentType, nextHref }) => {
             const { posthog, email } = values
-            posthog?.capture('signup: deployment type selected', { selected_deployment_type: deploymentType })
-            const response = await updateContact(email, { selected_deployment_type: deploymentType })
+            try {
+                posthog?.capture('signup: deployment type selected', { selected_deployment_type: deploymentType })
+                await updateContact(email, { selected_deployment_type: deploymentType })
+            } catch (err) {
+                posthog?.capture('signup: failed to update contact', { message: err })
+            }
             if (nextHref) {
                 window.location.replace(nextHref)
             }

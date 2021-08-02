@@ -4,13 +4,20 @@ import '../components/Pricing/styles/index.scss'
 import Header from 'components/Header'
 import funnelsScreenshot from '/src/images/product-screenshots/browserframe-screenshot-new-funnels.png'
 import { SignupModal, SignupBorderGraphic, SignupCircleGraphic } from 'components/SignupModal'
-import { useValues } from 'kea'
+import { useActions, useValues } from 'kea'
 import { signupLogic, SignupModalView } from 'logic/signupLogic'
 import './styles/sign-up.scss'
 import { DeploymentOptionsGrid } from 'components/DeploymentOptionsGrid/DeploymentOptionsGrid'
+import { useEffect } from 'react'
 
 const SignUpPage = (): JSX.Element => {
     const { modalView } = useValues(signupLogic)
+    const { reportModalShown } = useActions(signupLogic)
+
+    useEffect(() => {
+        reportModalShown()
+    }, [])
+
     return (
         <div>
             <SEO
