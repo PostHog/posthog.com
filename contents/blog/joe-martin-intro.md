@@ -1,0 +1,47 @@
+---
+date: 2021-08-06
+title: Introducing Joe Martin - Our first product marketer
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author: mo-shehu
+featuredImage: ../images/blog/<folder>/<filename>
+featuredImageType: full
+---
+
+Before joining PostHog, [Joe Martin](https://posthog.com/handbook/company/team#joe-martin-product-marketer) had never owned a Mac.
+
+The former tech and games journalist previously did everything on PC, but joining PostHog’s [Apple-dominated](https://posthog.com/handbook/people/spending-money#laptop) culture came with a few… necessary adjustments.
+
+>_”The first thing I did was have to get a new mouse because I couldn't cope with the old one, and my other main takeaway is how expensive all the adapters are. But other than that, getting by okay.”_
+
+Joe isn’t new to adjustments - he’s been making them his whole career ever since he started out as a freelance journalist. Before PostHog, he ran product and content marketing for [Scoro](https://www.scoro.com/), a UK-based work management solution for creative and professional services. Prior to Scoro, he was senior product marketing manager for Europe at [Pollen](https://pollen.co/), which curates travel experiences through tech and a global network of partners. 
+
+Before Pollen, Joe held several freelance and full-time content-related jobs at [Laundrapp](http://www.laundrapp.com/) (an on-demand laundry and dry cleaning service), as a lead copywriter at [Truphone](http://www.truphone.com/) (a sim-tech company), and as a Games Editor and writer at [Dennis Publishing](http://www.dennis.co.uk/) (a London-based media company).
+
+And even then - he only pivoted into content and product marketing after stints in dry cleaning, music festivals, and a few weeks as a professional clown. 
+
+Talk about range.
+
+## What *is* product marketing?
+
+Product marketing sits at the intersection of marketing, customer service, and product development. It involves two main things: 
+* pPutting together value propositions and messaging frameworks to inform go-to-market plans, and 
+* Thinking about the positioning of the brand within the broader market.
+
+As a collaborative and supportive function, product marketing can involve putting together specific pieces of sales enablement collateral, documentation, case studies and other marketing collateral, and understanding a business’ users as well.
+
+>_”I like to think of [product marketing] as the ‘license to meddle,’ and you get to just talk to everybody in the company - you talk to product, you talk to marketing, you talk to the engineers, you take everything that everyone's saying, you mix it all up, and then you find ways to use that information to help each department differently.”_
+
+`## Product marketing keywords:
+Positioning - “What’s our position in the market? How do we stand out from the competition?”
+Messaging: “How can we translate our positioning into marketing collateral across our different channels? Which benefits should we emphasize?”`
+
+Joe has found his match in PostHog: the company is well-known for [pivoting](https://posthog.com/blog/story-about-pivots) frequently, and this has presented him with an interesting challenge regarding his plans for the company.
+
+>_”A quick goal is [to upgrade] some of the pages on our website to communicate product features more clearly and in more depth. The follow-on goal from that [will] be working backwards to create the framework about how we communicate those features across other channels.”_
+
+Connect with Joe on [LinkedIn](https://www.linkedin.com/in/joemartinwords/), [Twitter], and [online](https://joemartin.work), and check out his current read on [Amazon](https://www.amazon.com/House-Leaves-Mark-Z-Danielewski/dp/0375703764).
+
+_Loved this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
