@@ -55,7 +55,7 @@ We don't just state that we care - these are some of the things we've implemente
 * [Training budget](/handbook/people/training#training-budget) for those in roles where we don't have lots of existing experience as a company.
 * Life story Fridays (when we have a new team member, we'll ask them to present their life story for an hour on a Friday) - so you have more context on the points of views of others in the team.
 * [Sponsored visas](/handbook/people/hiring-process#visa-sponsorship) for those who need them.
-* [Health insurance](https://posthog.com/handbook/people/benefits#pension-and-401k-contributions) for those from countries that do not provide this freely.
+* [Health insurance](/handbook/people/benefits#pension-and-401k-contributions) for those from countries that do not provide this freely.
 * Mental Health Counselling provided via our partner [Spill](https://www.spill.chat/). 
 
 Are you a potential candidate reading this? [Let us know](mailto:careers@posthog.com) how we can do a better job!
