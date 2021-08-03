@@ -74,7 +74,7 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                             Select
                         </ButtonBlock>
                     </div>
-                    <footer>Self serve. Deploy with Docker, AWS, GCS + more</footer>
+                    <footer>Self-serve. Deploy on GCP, AWS, DigitalOcean + more</footer>
                 </div>
                 <div className="pricing-card">
                     <h2 className="bg-blue">
@@ -92,7 +92,7 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                         <p>Benefits</p>
                         <BenefitsList
                             items={[
-                                'Scales to billions of monthly events',
+                                'Automatically scales as you grow',
                                 'Automatic upgrades',
                                 'Start using immediately',
                             ]}
@@ -108,7 +108,7 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                             Select
                         </ButtonBlock>
                     </div>
-                    <footer>Self serve. Hosted & managed by PostHog.</footer>
+                    <footer>Self-serve. Hosted &amp; managed by PostHog.</footer>
                 </div>
             </div>
         </div>

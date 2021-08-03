@@ -84,31 +84,31 @@ export const signupLogic = kea({
             const { posthog, email } = values
             if (email && isValidEmailAddress(email)) {
                 try {
-                    posthog?.identify(email, { email }) // use email as distinct ID; also set it as property
-                    posthog?.capture('signup: submit email')
+                    posthog.identify(email, { email: email.toLowerCase() }) // use email as distinct ID; also set it as property
+                    posthog.capture('signup: submit email')
                     await createContact(email)
                     actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
                 } catch (err) {
-                    posthog?.capture('signup: failed to create contact', { message: err })
+                    posthog.capture('signup: failed to create contact', { message: err })
                 }
             }
         },
         skipEmailEntry: async () => {
             const { posthog } = values
-            posthog?.capture('signup: email modal skipped')
+            posthog.capture('signup: email modal skipped')
             actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
         },
         reportModalShown: async () => {
             const { posthog } = values
-            posthog?.capture('signup: email modal shown')
+            posthog.capture('signup: email modal shown')
         },
         reportDeploymentTypeSelected: async ({ deploymentType, nextHref }) => {
             const { posthog, email } = values
             try {
-                posthog?.capture('signup: deployment type selected', { selected_deployment_type: deploymentType })
+                posthog.capture('signup: deployment type selected', { selected_deployment_type: deploymentType })
                 await updateContact(email, { selected_deployment_type: deploymentType })
             } catch (err) {
-                posthog?.capture('signup: failed to update contact', { message: err })
+                posthog.capture('signup: failed to update contact', { message: err })
             }
             if (nextHref) {
                 window.location.replace(nextHref)
