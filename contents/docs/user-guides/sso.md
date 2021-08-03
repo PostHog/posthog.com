@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you want to make it really easy for your users to log in, or have some compliance requirements around user access / provisioning you can add one-click login with single sign-on (SSO). In addition to supporting log in with third-party providers, we also allow automatic provision of users. This means that your team members can create their account self-serve (see below).
-
+If you want to make it really easy for your users to log in, or have some compliance requirements around user access/provisioning you can add one-click login with single sign-on (SSO). In addition to supporting log in with third-party providers, we also allow automatic provision of users. This means that your team members can create their account self-serve (see below).
 
 <table>
     <thead>
@@ -34,18 +33,16 @@ If you want to make it really easy for your users to log in, or have some compli
     </tbody>
 </table>
 
-
 ### Automatic user provisioning
 
 When you enable automatic user provisioning you set a list of **whitelisted domains**. Whenever a user logs in for the first using the third-party provider you enabled, if their provider-validated email address matches your whitelisted domain, an account will be automatically created for them in the organization.
 
 To enable this, navigate to your organization settings (`/organization/settings#domain-whitelist`) and add the domains for which you want to enable automatic user provisioning.
 
-
 ## Providers
 
-PostHog currently supports the following SSO providers. Looking for a different provider? [Reach out](https://posthog.com/support) we might be able to help!
-
+PostHog currently supports the SSO providers listed below.  
+Looking for a provider and it's in here? [Reach out to us](https://posthog.com/support), we might be able to help.
 
 <blockquote>
 Please note that you will <b>not</b> be able to use SSO with the first user of your instance. You will have to create a user with a regular password and you will later be able to log in with SSO (even for that first user).
@@ -81,11 +78,10 @@ Please note that you will <b>not</b> be able to use SSO with the first user of y
 
 4. Add those two settings as `SOCIAL_AUTH_GITLAB_KEY` and `SOCIAL_AUTH_GITHUB_SECRET`. If you're hosting GitLab yourself you'll also need to add `SOCIAL_AUTH_GITLAB_API_URL`, which is the full URL to your GitLab instance.
 
-
 ### Google
 
 <blockquote class="warning-note">
-<b>Please note SSO with Google is a 🔒 premium feature in PostHog</b> and requires either a PostHog Cloud plan (with a credit card registered) or a Scale plan.
+<b>Please note SSO with Google is a 🔒 premium feature of PostHog</b> and requires either a PostHog Cloud plan (credit card connected) or a PostHog Scale license.
 </blockquote>
 
 To set up Google SSO please follow these instructions:
