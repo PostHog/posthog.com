@@ -54,7 +54,7 @@ With access to your server, you should then consider a few things to make it mor
 
 ###### Create a New User
 
-To create a new user, just run (substituting "\<username>" for the name you want to create):
+To create a new user, just run (substituting `<username>` for the name you want to create):
 
 ```bash
 adduser <username>

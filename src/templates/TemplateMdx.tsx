@@ -151,6 +151,7 @@ export const query = graphql`
                 featuredImage {
                     publicURL
                 }
+                author
             }
         }
         authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {

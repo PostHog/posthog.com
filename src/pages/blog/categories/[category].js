@@ -12,26 +12,19 @@ import { findAuthor } from 'lib/utils'
 
 const BlogCategoryPage = ({
     data: {
-        allMarkdownRemark: { edges },
-        allMdx,
+        allMdx: { edges },
         markdownRemark: {
             frontmatter: { authors },
         },
     },
     params: { category },
 }) => {
-    // Standardize position of 'slug' across MDX and MD
-    const parsedMdxData = allMdx.edges.map((edge) => ({
-        ...edge,
-        node: { ...edge.node, fields: { slug: `/${edge.node.slug}` } },
-    }))
-
-    const posts = [...edges, ...parsedMdxData] // Merge MDX and MD data into one array
+    const posts = edges
         .filter((edge) => {
             const categories = edge.node.frontmatter.categories || ''
             return !!edge.node.frontmatter.date && categories.indexOf(category) >= 0
         })
-        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
+        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date))
 
     const findAuth = findAuthor(authors)
 
@@ -90,7 +83,7 @@ export default BlogCategoryPage
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark(
+        allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { frontmatter: { rootPage: { eq: "/blog" } } }
         ) {
@@ -99,25 +92,6 @@ export const pageQuery = graphql`
                     fields {
                         slug
                     }
-                    id
-                    excerpt(pruneLength: 250)
-                    frontmatter {
-                        date(formatString: "MMMM DD, YYYY")
-                        title
-                        rootPage
-                        categories
-                        author
-                    }
-                }
-            }
-        }
-        allMdx(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
-        ) {
-            edges {
-                node {
-                    slug
                     id
                     excerpt(pruneLength: 250)
                     frontmatter {

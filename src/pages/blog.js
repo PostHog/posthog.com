@@ -11,22 +11,15 @@ import { findAuthor } from 'lib/utils'
 
 const BlogPage = ({
     data: {
-        allMarkdownRemark: { edges },
-        allMdx,
+        allMdx: { edges },
         markdownRemark: {
             frontmatter: { authors },
         },
     },
 }) => {
-    // Standardize position of 'slug' across MDX and MD
-    const parsedMdxData = allMdx.edges.map((edge) => ({
-        ...edge,
-        node: { ...edge.node, fields: { slug: `/${edge.node.slug}` } },
-    }))
-
-    const posts = [...edges, ...parsedMdxData] // Merge MDX and MD data into one array
+    const posts = edges
         .filter((edge) => !!edge.node.frontmatter.date)
-        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
+        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date))
 
     const findAuth = findAuthor(authors)
 
@@ -83,7 +76,7 @@ export default BlogPage
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark(
+        allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { frontmatter: { rootPage: { eq: "/blog" } } }
         ) {
@@ -102,26 +95,6 @@ export const pageQuery = graphql`
                             publicURL
                         }
                         author
-                    }
-                }
-            }
-        }
-        allMdx(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
-        ) {
-            edges {
-                node {
-                    slug
-                    id
-                    excerpt(pruneLength: 250)
-                    frontmatter {
-                        date(formatString: "MMMM DD, YYYY")
-                        title
-                        rootPage
-                        featuredImage {
-                            publicURL
-                        }
                     }
                 }
             }
