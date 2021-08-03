@@ -23,16 +23,12 @@ import JSInstall from './js/snippets/install.mdx'
 ## Usage
 ### Autocapture
 
-Just by calling `posthog.init` above, you're already automatically capturing:
-- **pageviews**, including the URL
-- **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
+import JSAutoCapture from './js/snippets/autocapture.mdx'
+import JSCaptureIgnoreElements from './js/snippets/capture-ignore-elements.mdx'
 
-### Ignore/censor elements
-PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website. If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
+<JSAutoCapture />
 
-```html
-<button class='ph-no-capture'>Sensitive information here</button>
-```
+<JSCaptureIgnoreElements />
 
 <br />
 
