@@ -26,7 +26,13 @@ When you pick a date(s) to have off, please enter it into [CharlieHR](https://po
 
 The same rules as above apply regardless of the vacation length.
 
-You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately. 
+You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately.
+
+## Flexible working
+
+We operate on a trust basis and we don't count hours or days worked. We trust everyone to manage their own time. 
+
+Whether you have an appointment with your doctor, school run with your kids or you want to finish an hour early to meet friends or family - we don't mind and you don't need to tell us. Please just add it to your calendar and if you are customer-facing, please make sure you have cover. 
 
 ## When you should have time off
 
