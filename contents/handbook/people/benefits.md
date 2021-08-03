@@ -62,7 +62,7 @@ For any work-related travel, we use [Project Wren](https://www.wren.co/) for car
 
 ### Team socials
 
-As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our bi-annual offsites.
+As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our offsites.
 
 We encourage team members to try and meet up with each other when practical, and provide everyone with an $250 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company. Any unused budget does not roll over each month.
 
