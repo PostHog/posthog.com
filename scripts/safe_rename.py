@@ -67,12 +67,12 @@ try:
             
             new_redirect = redirect_text.format(from_paths[i], to_paths[i])
 
+            print(f'Testing if redirects are required for: "{from_paths[i]}" to "{to_paths[i]}"')
             skip_redirect = False
             for skip_rule in skip_rules:
                 if(not skip_redirect):
-                    print(f'Testing rule "{skip_rule.__name__}" with "{from_paths[i]}" to "{to_paths[i]}"')
                     skip_redirect = skip_rule(from_paths[i], to_paths[i], new_redirect)
-                    print('skip_redirect?', skip_redirect)
+                    print(f'Rule: "{skip_rule.__name__}"', 'skip_redirect?', skip_redirect)
                     
             if not skip_redirect:
                 print("Creating redirect: ", new_redirect)
