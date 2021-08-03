@@ -226,7 +226,7 @@ export const Features = () => {
                                             </defs>
                                         </svg>
                                     </figure>
-                                    <span>Plugins library</span>
+                                    <span>Plugin Library</span>
                                 </li>
                                 <li>
                                     <figure>

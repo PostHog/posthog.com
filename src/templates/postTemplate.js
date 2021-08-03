@@ -51,6 +51,7 @@ function Template(props) {
                 blogDate={frontmatter.date}
                 pageTitle={frontmatter.title}
                 featuredImage={frontmatter.featuredImage?.publicURL}
+                featuredImageType={frontmatter.featuredImageType}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 onBlogPage={!!blogArticleSlug}
@@ -89,7 +90,7 @@ export default Template
 
 // @todo -> be defensive against null featuredImage
 export const pageQuery = graphql`
-    query($path: String!) {
+    query ($path: String!) {
         postData: markdownRemark(fields: { slug: { eq: $path } }) {
             fields {
                 slug
@@ -101,6 +102,7 @@ export const pageQuery = graphql`
                 date(formatString: "MMMM DD, YYYY")
                 title
                 sidebar
+                featuredImageType
                 featuredImage {
                     publicURL
                 }

@@ -264,12 +264,35 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
     color: inherit;
     font-weight: normal;
-    text-transform: lowercase;
     text-rendering: optimizeLegibility;
 }
+
+:not(.post-page-wrapper) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
+        text-transform: lowercase;
+    }
+}
+
+.post-page-wrapper {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'SK Curiosity', Helvetica, Arial, Sans-Serif;
+        text-transform: none;
+    }
+}
+
 h1 {
     font-size: 48px;
     line-height: 150%;
@@ -629,6 +652,27 @@ header {
     background-size: cover;
     height: 240px !important;
     margin-bottom: 30px;
+}
+
+.blog-image {
+    &:before {
+        background: linear-gradient(rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.25) 100%);
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+}
+
+.blog-post-content {
+    p {
+        font-size: 1.25em;
+        line-height: 1.75em;
+        opacity: 0.9;
+    }
 }
 
 .menuHeaderWrapper {

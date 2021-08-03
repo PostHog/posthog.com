@@ -13,7 +13,7 @@
     ],
     "scripts": {
         "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
-        "start": "gatsby develop -H 0.0.0.0",
+        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
@@ -26,7 +26,7 @@
         "@mdx-js/react": "^1.6.22",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "antd": "^3.23.2",
-        "autoprefixer": "^10.2.6",
+        "autoprefixer": "^10.3.1",
         "chart.js": "^2.9.4",
         "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
