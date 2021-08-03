@@ -32,9 +32,11 @@ As a collaborative and supportive function, product marketing can involve puttin
 
 >_”I like to think of [product marketing] as the ‘license to meddle,’ and you get to just talk to everybody in the company - you talk to product, you talk to marketing, you talk to the engineers, you take everything that everyone's saying, you mix it all up, and then you find ways to use that information to help each department differently.”_
 
-`## Product marketing keywords:
-Positioning - “What’s our position in the market? How do we stand out from the competition?”
-Messaging: “How can we translate our positioning into marketing collateral across our different channels? Which benefits should we emphasize?”`
+**`Product marketing keywords:`**
+
+**`Positioning:`** “What’s our position in the market? How do we stand out from the competition?”
+
+**`Messaging:`** “How can we translate our positioning into marketing collateral across our different channels? Which benefits should we emphasize?”
 
 Joe has found his match in PostHog: the company is well-known for [pivoting](https://posthog.com/blog/story-about-pivots) frequently, and this has presented him with an interesting challenge regarding his plans for the company.
 
