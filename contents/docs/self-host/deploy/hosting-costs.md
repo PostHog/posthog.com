@@ -11,7 +11,7 @@ Charges on various platforms can be confusing to understand as loadbalancers (wh
 See [DigitalOcean Kubernetes pricing](https://www.digitalocean.com/pricing#kubernetes).
 
 At the time of writing the suggested default setup comes around 
-1. 40$ for compute (2x smalles prod nodes)
+1. 40$ for compute (2x smallest prod nodes)
 1. 6.4$ for storage (64Gi block storage)
 1. 10$ for load balancer (1x small LB)
 

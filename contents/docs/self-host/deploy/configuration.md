@@ -102,7 +102,7 @@ kafka:
     size: 30Gi
   logRetentionBytes: _22_000_000_000
 
-# Enable horizontal autoscaling for serivces
+# Enable horizontal autoscaling for services
 pgbouncer:
   hpa:
     enabled: true
