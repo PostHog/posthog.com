@@ -203,9 +203,10 @@
     from = "/docs/configuring-posthog"
     to = "/docs/self-host/configure"
 
+# Modified: 2021-08-03
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
-    to = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -656,3 +657,8 @@
 [[redirects]]
     from = "/signup"
     to = "/pricing"
+
+# Added: 2021-08-02
+[[redirects]]
+    from = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
