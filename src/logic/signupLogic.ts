@@ -60,6 +60,7 @@ export const signupLogic = kea({
         submitForm: true,
         skipEmailEntry: true,
         reportModalShown: true,
+        reportDeploymentOptionsShown: true,
         reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({ deploymentType, nextHref }),
     },
     reducers: {
@@ -101,6 +102,19 @@ export const signupLogic = kea({
         reportModalShown: async () => {
             const { posthog } = values
             posthog.capture('signup: email modal shown')
+        },
+        reportDeploymentOptionsShown: async () => {
+            const { posthog } = values
+            posthog.capture('signup: deployment options shown')
+        },
+        setModalView: async ({ view }) => {
+            switch (view) {
+                case SignupModalView.EMAIL_PROMPT:
+                    return actions.reportModalShown()
+                case SignupModalView.DEPLOYMENT_OPTIONS:
+                default:
+                    return actions.reportDeploymentOptionsShown()
+            }
         },
         reportDeploymentTypeSelected: async ({ deploymentType, nextHref }) => {
             const { posthog, email } = values
