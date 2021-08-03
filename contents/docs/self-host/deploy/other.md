@@ -1,17 +1,22 @@
 ---
-title: Deploying to AWS
-sidebarTitle: AWS
+title: Deploying with helm directly
+sidebarTitle: Other
 sidebar: Docs
 showTitle: true
-tags:
-    - aws
 ---
 
-First we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). The default nodes (2x m5.large) work well for running Posthog.
+For all other platforms we suggest setting up Kubernetes first and using the helm chart directly to deploy a Posthog instance with Nginx ingress controller.
+
+## Prerequisites
+- [Kubernetes](http://kubernetes.io) 1.4+ with Beta APIs enabled
+- [Helm](https://helm.sh) >= v3
+
+
+## Installing the chart
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 ```yaml
-cloud: "aws"
+cloud: <your-deployment-platform>
 ingress:
   hostname: <your-hostname>
   nginx:
@@ -20,8 +25,6 @@ certManager:
   enabled: true
 ```
 
-### Installing the chart
-
 To install the chart with the release name `posthog` in `posthog` namespace, run the following:
 
 ```console
@@ -29,17 +32,19 @@ helm repo add posthog https://posthog.github.io/charts-clickhouse/
 helm repo update
 helm install -f values.yaml --timeout 20m --create-namespace --namespace posthog posthog posthog/posthog
 ```
-    
+
 ### Lookup external IP
 
 ```console
 kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
+
 ### Setting up DNS
 
-Create a `CNAME` record from your desired hostname to the external IP.
+Create a record from your desired hostname to the external IP.
 
 ### I cannot connect to my PostHog instance after creation
+
 As a troubleshooting tool, you can allow HTTP access by setting these values in your `values.yaml`, but we recommend always accessing PostHog via https.
 ```yaml
 ingress:
@@ -83,3 +88,4 @@ The command above removes all the Kubernetes components associated with the char
 ```console
 kubectl delete namespace posthog
 ```
+

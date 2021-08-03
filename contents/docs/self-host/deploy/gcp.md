@@ -1,23 +1,23 @@
 ---
-title: Deploying to AWS
-sidebarTitle: AWS
+title: Deploying to Google Cloud Platform
+sidebarTitle: Google Cloud Platform
 sidebar: Docs
 showTitle: true
 tags:
-    - aws
+  - gcp
 ---
 
-First we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). The default nodes (2x m5.large) work well for running Posthog.
+First we need to set up a Kubernetes Cluster, see [Google Cloud Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/).
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 ```yaml
-cloud: "aws"
+cloud: "gcp"
 ingress:
   hostname: <your-hostname>
   nginx:
-    enabled: true
+    enabled: false
 certManager:
-  enabled: true
+  enabled: false
 ```
 
 ### Installing the chart
@@ -29,32 +29,36 @@ helm repo add posthog https://posthog.github.io/charts-clickhouse/
 helm repo update
 helm install -f values.yaml --timeout 20m --create-namespace --namespace posthog posthog posthog/posthog
 ```
-    
-### Lookup external IP
+
+### Set up a static IP
+
+1. Open the Google Cloud Console
+1. Go to VPC Networks > [External IP addresses](https://console.cloud.google.com/networking/addresses/list)
+1. Add new static IP with the name `posthog`
+
+After the chart has started, you can look up the external ip via the following command:
 
 ```console
-kubectl get svc --namespace posthog posthog-ingress-nginx-controller
+kubectl get svc posthog --namespace posthog
 ```
+
 ### Setting up DNS
 
-Create a `CNAME` record from your desired hostname to the external IP.
+Create a record from your desired hostname to the external IP.
 
 ### I cannot connect to my PostHog instance after creation
-As a troubleshooting tool, you can allow HTTP access by setting these values in your `values.yaml`, but we recommend always accessing PostHog via https.
-```yaml
-ingress:
-  nginx:
-    redirectToTLS: false
-  letsencrypt: false
-web:
-  secureCookies: false
+
+If DNS has been updated properly, check whether the SSL certificate was created successfully.
+
+This can be done via the following command:
+
+```console
+gcloud beta --project yourproject compute ssl-certificates list
 ```
 
-After upgrading you can run the following to get the IP to access Posthog.
-```console
-export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-echo "Visit http://$INGRESS_IP to use PostHog\!"
-```
+If running the command shows the SSL cert as `PROVISIONING`, that means that the certificate is still being created. [Read more on how to troubleshoot Google SSL certificates here](https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting)
+
+As a troubleshooting tool, you can allow HTTP access by setting `ingress.gcp.forceHttps` and `web.secureCookies` both to false, but we recommend always accessing PostHog via https.
 
 ## Upgrading the chart
 

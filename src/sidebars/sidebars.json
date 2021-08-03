@@ -2,27 +2,25 @@
     {
         "entry": "Docs",
         "name": "Docs",
-        "child_entries": ["Self-Host", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
+        "child_entries": ["Self-Host", "Cloud", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
     },
     {
         "entry": "Self-Host",
         "name": "Self-Host",
         "items": ["docs/self-host", "docs/self-host/postgres-vs-clickhouse"],
-        "child_entries": ["Deploy (Postgres)", "Configure"]
+        "child_entries": ["Deploy", "Configure"]
     },
     {
-        "entry": "Deploy (Postgres)",
-        "name": "Deploy (Postgres)",
+        "entry": "Deploy",
+        "name": "Deploy",
         "items": [
-            "docs/self-host/deploy/aws",
-            "docs/self-host/deploy/azure",
             "docs/self-host/deploy/digital-ocean",
-            "docs/self-host/deploy/google-cloud-services",
-            "docs/self-host/deploy/heroku",
+            "docs/self-host/deploy/gcp",
+            "docs/self-host/deploy/aws",
             "docs/self-host/deploy/other",
-            "docs/self-host/deploy/kubernetes",
-            "docs/self-host/deploy/docker",
-            "docs/self-host/deploy/source",
+            "docs/self-host/deploy/configuration",
+            "docs/self-host/deploy/troubleshooting",
+            "docs/self-host/deploy/upgrade-notes",
             "docs/self-host/deploy/hosting-costs"
         ]
     },
@@ -36,6 +34,11 @@
             "docs/self-host/configure/email",
             "docs/self-host/configure/upgrading-posthog"
         ]
+    },
+    {
+        "entry": "Cloud",
+        "name": "Cloud",
+        "items": ["docs/cloud/proxy"]
     },
     {
         "entry": "Integrate",
