@@ -33,6 +33,7 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
+                extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [`gatsby-remark-static-images`],
                 plugins: [`gatsby-remark-static-images`],
             },
@@ -264,7 +265,7 @@ module.exports = {
               `,
                 feeds: [
                     {
-                        serialize: ({ query: { site, allMarkdownRemark, authorsData, allMdx } }) => {
+                        serialize: ({ query: { site, authorsData, allMdx } }) => {
                             let {
                                 siteMetadata: { siteUrl },
                             } = site
@@ -272,9 +273,9 @@ module.exports = {
                             let findRelevantAuthor = (authorKey) =>
                                 authorsData.frontmatter.authors.find(({ handle }) => handle === authorKey)
 
-                            let allMarkdowns = allMarkdownRemark.edges.map((edge) => {
+                            let allMdxs = allMdx.edges.map((edge) => {
                                 let { node } = edge
-                                let { frontmatter, excerpt, fields, id, html } = node
+                                let { frontmatter, excerpt, slug, id, body } = node
                                 let { date, title, author, featuredImage } = frontmatter
                                 let authorsData = findRelevantAuthor(author)
                                 let newAuthorData = []
@@ -288,25 +289,9 @@ module.exports = {
                                     description: excerpt,
                                     date,
                                     title,
-                                    url: siteUrl + fields.slug,
-                                    guid: id,
-                                    author: authorsData ? authorsData.name : null,
-                                    custom_elements: [{ 'content:encoded': html }, ...newAuthorData],
-                                    enclosure: {
-                                        url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
-                                    },
-                                }
-                            })
-                            let allMdxs = allMdx.edges.map((edge) => {
-                                let { node } = edge
-                                let { frontmatter, excerpt, slug, id, body } = node
-                                let { date, title, featuredImage } = frontmatter
-                                return {
-                                    description: excerpt,
-                                    date,
-                                    title,
                                     url: `${siteUrl}/${slug}`,
                                     guid: id,
+                                    author: authorsData ? authorsData.name : null,
                                     custom_elements: [{ 'content:encoded': body }],
                                     enclosure: {
                                         url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
@@ -314,33 +299,10 @@ module.exports = {
                                 }
                             })
 
-                            return [...allMarkdowns, ...allMdxs]
+                            return allMdxs
                         },
                         query: `
                         {
-                            allMarkdownRemark(
-                              sort: { order: DESC, fields: [frontmatter___date] }
-                              filter: { frontmatter: { rootPage: { eq: "/blog" } } }
-                            ) {
-                              edges {
-                                node {
-                                  id
-                                  excerpt(pruneLength: 150)
-                                  html
-                                  fields {
-                                    slug
-                                  }
-                                  frontmatter {
-                                    date(formatString: "MMMM DD, YYYY")
-                                    title
-                                    featuredImage {
-                                      publicURL
-                                    }
-                                    author
-                                  }
-                                }
-                              }
-                            }
                             allMdx(
                               sort: { order: DESC, fields: [frontmatter___date] }
                               filter: { frontmatter: { rootPage: { eq: "/blog" } } }
@@ -357,6 +319,7 @@ module.exports = {
                                     featuredImage {
                                       publicURL
                                     }
+                                    author
                                   }
                                 }
                               }

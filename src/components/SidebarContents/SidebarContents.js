@@ -25,19 +25,6 @@ function SidebarContents() {
         <StaticQuery
             query={graphql`
                 query sidebarContentQuery {
-                    allMarkdownRemark(sort: { order: ASC, fields: [fields___slug] }) {
-                        nodes {
-                            fields {
-                                slug
-                            }
-                            id
-                            frontmatter {
-                                title
-                                sidebarTitle
-                                tags
-                            }
-                        }
-                    }
                     allMdx(sort: { order: ASC, fields: [fields___slug] }) {
                         nodes {
                             fields {
@@ -64,7 +51,7 @@ function SidebarContents() {
             `}
             render={(data) => {
                 const entries = data.allSidebarsJson.nodes
-                const pages = [...data.allMarkdownRemark.nodes, ...data.allMdx.nodes]
+                const pages = data.allMdx.nodes
                 let dir = []
                 let tree = null
                 let defaultOpenKeys = []
