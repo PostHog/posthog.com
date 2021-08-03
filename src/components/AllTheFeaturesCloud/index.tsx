@@ -19,7 +19,7 @@ export const AllTheFeaturesCloud = () => {
                         <img src={graphicAnalytics} alt="Analytics" width="296" height="296" className="mx-auto my-0" />
                     </figure>
                     <div className="mb-8 lg:mb-0">
-                        <h4 className="font-osiris font-normal lowercase">Analytics</h4>
+                        <h4>Analytics</h4>
                     </div>
                 </div>
                 <div className="insights-column">
@@ -27,7 +27,7 @@ export const AllTheFeaturesCloud = () => {
                         <img src={graphicInsights} alt="Insights" width="296" height="296" className="mx-auto my-0" />
                     </figure>
                     <div className="mb-8 lg:mb-0">
-                        <h4 className="font-osiris font-normal lowercase">Insights</h4>
+                        <h4>Insights</h4>
                     </div>
                 </div>
                 <div className="">
@@ -35,7 +35,7 @@ export const AllTheFeaturesCloud = () => {
                         <img src={graphicPlatform} alt="Platform" width="296" height="296" className="mx-auto my-0" />
                     </figure>
                     <div className="mb-8 lg:mb-0">
-                        <h4 className="font-osiris font-normal lowercase">Platform</h4>
+                        <h4>Platform</h4>
                     </div>
                 </div>
             </div>
