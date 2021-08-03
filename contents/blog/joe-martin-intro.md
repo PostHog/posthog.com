@@ -1,6 +1,6 @@
 ---
 date: 2021-08-06
-title: Introducing Joe Martin - Our first product marketer
+title: Introducing Joe Martin - Our first Product Marketer
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -42,6 +42,6 @@ Joe has found his match in PostHog: the company is well-known for [pivoting](htt
 
 >_”A quick goal is [to upgrade] some of the pages on our website to communicate product features more clearly and in more depth. The follow-on goal from that [will] be working backwards to create the framework about how we communicate those features across other channels.”_
 
-Connect with Joe on [LinkedIn](https://www.linkedin.com/in/joemartinwords/), [Twitter], and [online](https://joemartin.work), and check out his current read on [Amazon](https://www.amazon.com/House-Leaves-Mark-Z-Danielewski/dp/0375703764).
+Connect with Joe on [LinkedIn](https://www.linkedin.com/in/joemartinwords/) and [online](https://joemartin.work), and check out his current read on [Amazon](https://www.amazon.com/House-Leaves-Mark-Z-Danielewski/dp/0375703764).
 
 _Loved this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
