@@ -650,23 +650,3 @@
 [[redirects]]
     from = "/signup"
     to = "/pricing"
-
-# Added: 2021-08-03
-[[redirects]]
-    from = "/docs/integrate/client/android"
-    to = "/docs/integrate/client/android"
-
-# Added: 2021-08-03
-[[redirects]]
-    from = "/docs/integrate/client/flutter"
-    to = "/docs/integrate/client/flutter/snippets/install"
-
-# Added: 2021-08-03
-[[redirects]]
-    from = "/docs/integrate/client/ios"
-    to = "/docs/integrate/client/ios"
-
-# Added: 2021-08-03
-[[redirects]]
-    from = "/docs/integrate/client/js"
-    to = "/docs/integrate/client/js"
