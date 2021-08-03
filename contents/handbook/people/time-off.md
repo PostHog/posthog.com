@@ -38,9 +38,15 @@ Please let your manager know if you need to take off due to illness as soon as y
 
 For extended periods of illness, please speak to us so we can work out a plan. In some countries, we may be required to request a doctor's note from you. 
 
-### Jury duty / bereavements / voting / childcare disasters
+### Jury duty / voting / childcare disasters
 
 There are lots of situations where life needs to come first. Please let it - just be communicative with us and fit your work around it as you need.
+
+### Bereavements / Child loss 
+
+We do not define “closeness” and we won't ask about your relationship to the person or what they meant to you. Take as much time as you need, just give us a quick update every now and then. 
+
+We extended our bereavement policy to also cover pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. In case you need additional time for physical or mental health reasons, we will treat it as extended sick leave.
 
 ## Parental leave
 
