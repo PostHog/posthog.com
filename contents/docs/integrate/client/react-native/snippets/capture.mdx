@@ -20,33 +20,3 @@ PostHog.capture('Button B Clicked', {
     icon: "new2-final"
 })
 ```
-
-
-#### Setting user properties via an event
-
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-##### $set
-
-**Example**
-
-```js
-PostHog.capture('some event', { $set: { userProperty: 'value' } });
-```
-
-**Usage**
-
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-
-##### $set_once
-
-**Example**
-
-```js
-PostHog.capture('some event', { $set_once: { userProperty: 'value' } });
-```
-
-**Usage**
-
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.

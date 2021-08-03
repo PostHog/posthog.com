@@ -17,7 +17,7 @@ The guide covers the following:
 
 - [Installing and initializing a PostHog library](#install-a-library)
 - [How to identify and associate users with events](#identify-users)
-- [How to send events to PostHog](#send-events)
+- [How to capture data with PostHog](#capture)
 - [How Autocapture works in PostHog](#how-autocapture-works) (JavaScript only)
 
 If you prefer to learn by doing, you can get started on the web with the [JavaScript snippet](/docs/integrate/client/snippet-installation).
@@ -76,14 +76,14 @@ import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
       <IOSIdentify />
     </TabPane>
     <TabPane tab="Flutter" key="4">
-      See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
+      <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
     </TabPane>
     <TabPane tab="React Native" key="5">
       <ReactNativeIdentify />
     </TabPane>
 </Tabs>
 
-# Send Events
+# Capture
 
 import JSCapture from './client/js/snippets/capture.mdx'
 import AndroidCapture from './client/android/snippets/capture.mdx'
@@ -93,18 +93,22 @@ import ReactNativeCapture from './client/react-native/snippets/capture.mdx'
 <Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
     <TabPane tab="JavaScript" key="1">
       <JSCapture />
+      <p>For more information see the <a href="/docs/integrate/client/js#capture">JavaScript docs</a>.</p>
     </TabPane>
     <TabPane tab="Android" key="2">
       <AndroidCapture />
+      <p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p>
     </TabPane>
     <TabPane tab="iOS" key="3">
       <IOSCapture />
+      <p>For more information see the <a href="/docs/integrate/client/ios">iOS docs</a>.</p>
     </TabPane>
     <TabPane tab="Flutter" key="4">
-      See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
+      <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
     </TabPane>
     <TabPane tab="React Native" key="5">
       <ReactNativeCapture />
+      <p>For more information see the <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.</p>
     </TabPane>
 </Tabs>
 

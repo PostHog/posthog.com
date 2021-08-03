@@ -34,6 +34,50 @@ import AndroidCapture from './android/snippets/capture.mdx'
 
 <AndroidCapture />
 
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set", userProps));
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set_once", userProps));
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+
 ### Flush
 
 You can set the number of events in the configuration that should queue before flushing. 
