@@ -86,8 +86,8 @@ export const signupLogic = kea({
                 try {
                     posthog.identify(email, { email: email.toLowerCase() }) // use email as distinct ID; also set it as property
                     posthog.capture('signup: submit email')
-                    await createContact(email)
                     actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
+                    await createContact(email)
                 } catch (err) {
                     posthog.capture('signup: failed to create contact', { message: err })
                 }
