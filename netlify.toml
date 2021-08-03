@@ -201,9 +201,10 @@
     from = "/docs/configuring-posthog"
     to = "/docs/self-host/configure"
 
+# Modified: 2021-08-03
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
-    to = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -599,45 +600,5 @@
 
 # Added: 2021-08-02
 [[redirects]]
-    from = "/docs/api/index"
-    to = "/docs/api/overview"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/contribute/index"
-    to = "/docs/contribute/overview"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/integrate/index"
-    to = "/docs/integrate/overview"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/plugins/build/index"
-    to = "/docs/plugins/build/overview"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/plugins/index"
-    to = "/docs/plugins/overview"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/self-host/index"
-    to = "/docs/self-host/overview"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/tutorials/event-tracking-guide"
-    to = "/docs/tutorials/actions"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/tutorials/index"
-    to = "/docs/tutorials/overview"
-
-# Added: 2021-08-02
-[[redirects]]
-    from = "/docs/user-guides/index"
-    to = "/docs/user-guides/overview"
+    from = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
