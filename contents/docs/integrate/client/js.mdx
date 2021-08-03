@@ -56,80 +56,15 @@ We recommend putting PostHog both on your homepage and your application if appli
 
 ### Sending Events
 
-This allows you to send more context than the default event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may wish to add.
+import JSCapture from './js/snippets/capture.mdx'
 
-```javascript
-posthog.capture('[event-name]', {property1: 'value', property2: 'another value'});
-```
-
-#### Setting user properties via an event
-
-To set properties on a user, you can use the `posthog.people.set` and `posthog.people.set_once` methods.
-
-However, you can also leverage the event properties `$set` and `$set_once` to do this via an event.
-
-##### $set
-
-**Example**
-
-```js
-posthog.capture('some event', { $set: { userProperty: 'value' } });
-```
-
-**Usage**
-
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-This works the same way as `posthog.people.set`.
-
-##### $set_once
-
-**Example**
-
-```js
-posthog.capture('some event', { $set_once: { userProperty: 'value' } });
-```
-
-**Usage**
-
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
-
-This works the same way as `posthog.people.set_once`.
+<JSCapture />
 
 ### Identifying Users
 
-To make sure you understand which user is performing actions within your app, you can identify users at any point. From the moment you make this call, all events will be identified with that distinct id.
+import JSIdentify from './js/snippets/identify.mdx'
 
-The ID can by anything, but is usually the unique ID that you identify users by in the database.
-Normally, you would put this below `posthog.init` if you have the information there.
-
-If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and after they signed up will be shown under the same user.
-
-```js
-posthog.identify(
-    '[user unique id]', // distinct_id, required
-    { userProperty: 'value1' }, // $set, optional
-    { anotherUserProperty: 'value2' } // $set_once, optional
-);
-```
-
-You can also pass two more arguments to `posthog.identify`. Both take objects consisting of as many properties as you want to be set on that user's profile. The difference is that the second argument will use the `$set` mechanism, whereas the third argument will use `$set_once`. 
-
-You can read more about the difference between this [in the previous section](#setting-user-properties-via-an-event).
-
-<blockquote class="warning-note">
-    Warning! You can't call identify straight after an `.init` (as `.init` sends a pageview event, probably with the user's
-    anonymous ID).
-</blockquote>
-
-To address the issue described above, you can call `.init` passing a `loaded` callback function, inside which you can then call identify, like so
-
-```js
-posthog.init('[your api key]', {
-    api_host: 'https://posthog.[your-domain].com',
-    loaded: function(posthog) { posthog.identify('[user unique id]'); }
-});
-```
+<JSIdentify />
 
 #### Multiple IDs
 

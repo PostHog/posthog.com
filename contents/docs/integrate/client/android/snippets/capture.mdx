@@ -1,0 +1,64 @@
+Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find 
+patterns in usage, work out which features to improve, or find out where people are giving up.
+
+A `capture` call requires:
+
+* `event` to specify the event name
+  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+
+Optionally you can submit:
+
+* `properties`, which can be an array with any information you'd like to add
+
+For example:
+
+```js
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("icon", "new2-final"));
+```
+
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set", userProps));
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set_once", userProps));
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.

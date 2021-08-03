@@ -1,0 +1,63 @@
+Capture allows you to send events related to anything a user does within your system, which you can later use in PostHog to find 
+patterns in usage, work out which features to improve, or find out where people are giving up.
+
+A `capture` call requires:
+
+* `event name` to specify the event
+  * We recommend using [noun] [verb], like `movie played` or `movie updated` to easily identify what your events mean later on.
+
+Optionally you can submit:
+
+* `properties`, which can be an array with any information you'd like to add
+
+For example:
+
+```objectivec
+// in objective-c
+[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
+```
+
+```js
+// in swift
+posthog.capture("Signed Up", properties: ["plan": "Pro++"])
+```
+
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+// in objective-c
+[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"userProp": "value1" } }];
+```
+
+```c
+// in swift
+posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set": ["userProp": "value1"] ])
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+// in objective-c
+[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"userProp": "value1" } }];
+```
+
+```c
+// in swift
+posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set_once": ["userProp": "value1"] ])
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.

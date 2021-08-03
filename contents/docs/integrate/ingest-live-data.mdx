@@ -15,35 +15,97 @@ The purpose of this guide is to help you understand some key concepts with a goa
 
 The guide covers the following:
 
-- [Installing and initializing a PostHog library](#installing-a-library)
-- [How to identify and associate users with events](#identifying-users)
-- [How to send events to PostHog](#sending-events)
+- [Installing and initializing a PostHog library](#install-a-library)
+- [How to identify and associate users with events](#identify-users)
+- [How to send events to PostHog](#send-events)
 - [How Autocapture works in PostHog](#how-autocapture-works) (JavaScript only)
 
 If you prefer to learn by doing, you can get started on the web with the [JavaScript snippet](/docs/integrate/client/snippet-installation).
 
-# Installing a Library
+# Install a Library
 
 Install the library for the platform you are building your application for.
 
 import JSInstall from './client/js/snippets/install.mdx'
+import AndroidInstall from './client/android/snippets/install.mdx'
+import AndroidConfigure from './client/android/snippets/configure.mdx'
+import IOSInstall from './client/ios/snippets/install.mdx'
+import IOSConfigure from './client/ios/snippets/configure.mdx'
+import FlutterPackage from './client/flutter/snippets/package.mdx'
+import FlutterInstall from './client/flutter/snippets/install.mdx'
+import ReactNativeInstall from './client/react-native/snippets/install.mdx'
+import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
 
 <Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
     <TabPane tab="JavaScript" key="1">
         <JSInstall />
     </TabPane>
     <TabPane tab="Android" key="2">
+        <AndroidInstall />
+        <AndroidConfigure />
     </TabPane>
     <TabPane tab="iOS" key="3">
+      <IOSInstall />
+      <IOSConfigure />
     </TabPane>
     <TabPane tab="Flutter" key="4">
+      <FlutterPackage />
+      <FlutterInstall />
     </TabPane>
     <TabPane tab="React Native" key="5">
+      <ReactNativeInstall />
+      <ReactNativeConfigure />
     </TabPane>
 </Tabs>
 
-# Identifying Users
+# Identify Users
 
-# Sending Events
+import JSIdentify from './client/js/snippets/identify.mdx'
+import AndroidIdentify from './client/android/snippets/identify.mdx'
+import IOSIdentify from './client/ios/snippets/identify.mdx'
+import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
+
+<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
+    <TabPane tab="JavaScript" key="1">
+      <JSIdentify />
+    </TabPane>
+    <TabPane tab="Android" key="2">
+      <AndroidIdentify />
+    </TabPane>
+    <TabPane tab="iOS" key="3">
+      <IOSIdentify />
+    </TabPane>
+    <TabPane tab="Flutter" key="4">
+      See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
+    </TabPane>
+    <TabPane tab="React Native" key="5">
+      <ReactNativeIdentify />
+    </TabPane>
+</Tabs>
+
+# Send Events
+
+import JSCapture from './client/js/snippets/capture.mdx'
+import AndroidCapture from './client/android/snippets/capture.mdx'
+import IOSCapture from './client/ios/snippets/capture.mdx'
+import ReactNativeCapture from './client/react-native/snippets/capture.mdx'
+
+<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
+    <TabPane tab="JavaScript" key="1">
+      <JSCapture />
+    </TabPane>
+    <TabPane tab="Android" key="2">
+      <AndroidCapture />
+    </TabPane>
+    <TabPane tab="iOS" key="3">
+      <IOSCapture />
+    </TabPane>
+    <TabPane tab="Flutter" key="4">
+      See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
+    </TabPane>
+    <TabPane tab="React Native" key="5">
+      <ReactNativeCapture />
+    </TabPane>
+</Tabs>
 
 # How Autocapture works
