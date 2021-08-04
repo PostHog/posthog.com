@@ -32,6 +32,12 @@ export const posthogAnalyticsLogic = kea({
             if (posthog.onFeatureFlags) {
                 posthog.onFeatureFlags(actions.setFeatureFlags)
             }
+            const variant = Math.round(Math.random() * 100)
+            posthog.capture('set experiment variant', {
+                $set_once: {
+                    experiment_variant: variant,
+                },
+            })
         },
     }),
 
