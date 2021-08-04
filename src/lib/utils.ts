@@ -44,7 +44,8 @@ export const generateRandomHtmlId = () =>
         .replace(/[^a-z]+/g, '')
         .substr(2, 10)
 
-export const mergeClassList = (...args: string[]) => args.filter((classList) => !!classList).join(' ')
+export const mergeClassList = (...args: (string | null | undefined | false)[]): string =>
+    args.filter((classList) => !!classList).join(' ')
 
 export const findAuthor = (authors: AuthorsData[]) => (authorKey?: string) =>
     authors?.find(({ handle }) => handle === authorKey)
@@ -58,3 +59,8 @@ export const scrollWithOffset = (id: string, offset: number) => {
         window.scrollTo({ top: y, behavior: 'smooth' })
     }
 }
+
+const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g // eslint-disable-line no-control-regex
+
+// tests email address for RFC 5322 compliance
+export const isValidEmailAddress = (email: string): boolean => emailRegex.test(email)
