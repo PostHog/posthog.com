@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: mo-shehu
-featuredImage: ../images/blog/<folder>/<filename>
+featuredImage: ../images/blog/joe-martin-intro.png
 featuredImageType: full
 ---
 
