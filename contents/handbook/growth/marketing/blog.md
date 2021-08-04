@@ -1,31 +1,16 @@
 ---
-title: Blog
+title: Content
 sidebar: Handbook
 showTitle: true
 ---
 
-The [blog](/blog) is for telling PostHog stories and updates around our product positioning.
+The [blog](/blog) is for telling PostHog stories and sharing updates around our product. We feature a combination of PostHog company news, deep dives on specific product-related topics, PostHog app highlights and stories about company building and the team. 
 
-Accessible content with jokes, memes and gifs have done well.
+We currently aim to ship 2 pieces of content per week, one that is product-focused and one that is company-related. Mo writes the company-related content, while product-related content is written by a relevant team member (e.g. developer, product manager) and then edited by Mo. 
 
-## Successful Hacker News topics
+We manage an upcoming monthly list of content on a rolling basis [in this sheet](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit?copiedFromTrash#gid=0). We use a list of [the most common keywords](https://github.com/PostHog/meta/issues/14) driving people to PostHog as indicators of which content would be valuable. 
 
-A successful post on Hacker News can currently increase traffic by 5-10%.
-
-Stories about PostHog's early hustling days have done well.
-
-- Feb 20, 2020 [Launch HN: PostHog (YC W20) – open-source product analytics](https://news.ycombinator.com/item?id=22376732)
-- Feb 28, 2020 [Our experience moving to SF to do YC](https://posthog.com/blog/moving-to-sf/)
-- Jun 2020 [How we raised $3M for an open source project](https://posthog.com/blog/raising-3m-for-os)
-- Jan 2020 [A story about pivots](https://posthog.com/blog/story-about-pivots)
-
-## Future topic areas
-
-We want to start writing stories about our team, customers and community.
-
-To view and contribute blog post ideas join our #ideas-for-blog-post Slack channel.
-
-Todo: organize the blog post ideas into topic categories and priority list.
+If you have any good blog post ideas join our #ideas-for-blog-post Slack channel - the more opinionated the better!
 
 ## Publishing
 
@@ -43,7 +28,11 @@ Create an annotation on [app.posthog.com](https://app.posthog.com) for the conte
 
 Share the live content with out PostHog Users Slack group first, in the `#editorial` channel.
 
+## Distribution
+
 Arrange further promotion via the newsletter, social channels and 3rd party communities.
+
+This section excludes Paid Ads, which are covered elsewhere in the Handbook.
 
 ## PostHog Array
 
