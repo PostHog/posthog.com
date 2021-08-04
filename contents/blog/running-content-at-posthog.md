@@ -31,7 +31,7 @@ This ultimately lessens the workload on Marketing, giving them more time to thin
 ## Types of content you can create
  
 We’ve experimented with a bunch of different content types over the years. Here are some content types you can include in your content mix:
-* **Blog posts:** These can inform and educate in one go, and are best suited for dense information that a dev can [scan quickly](https://posthog.com/blog/writing-for-developers). 
+* **Blog posts:** These can inform and educate in one go, and are best suited for dense information that a dev can [scan quickly](/blog/writing-for-developers). 
 * **YouTube videos:** For the visually inclined, YouTube provides a place to binge-watch content about different topics related to the product and company. It also gives your audience an opportunity to get to know your team better - from mannerisms and tone to body language and facial expressions.
 * **Podcast episodes:** Some people prefer consuming content on the go - and podcasts are the perfect format for that. In the beginning, your podcast can simply be an archive of the audio versions of your videos, and you can later invest in better production once you’ve got the time and resources to do so.
 * **Email newsletters:** Email is still a great way to keep in touch with your customers, and you can bundle your content with your changelogs (or split them if desired). Keep emails short and sweet, add content blurbs to encourage clickthroughs, and speak naturally - nobody likes overly sales-y emails.
