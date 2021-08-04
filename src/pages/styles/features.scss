@@ -1,5 +1,15 @@
 /* GENERAL */
 
+/* Overide for Layout
+- overides the default "overflow-x: hidden"
+- and allows "position: sticky" to work on any of the pages
+*/
+
+.ant-layout.ant-layout-has-sider > .ant-layout,
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+    overflow-x: clip !important;
+}
+
 // Hero animation
 // Animated SVG was created with SVGator. We use different sizes depending on screen size. (720x1300 on mobile, 1920x1080 on normal desktops, 1920x720 on very wide screens. (We don't want the content pushed too far down.) Note: These are viewBox dimensions for the SVG.
 // To add/remove an SVG at a breakpoint:
