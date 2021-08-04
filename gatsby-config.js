@@ -81,7 +81,12 @@ module.exports = {
                             destinationDir: `images`,
                         },
                     },
-                    `gatsby-remark-katex`,
+                    {
+                        resolve: `gatsby-remark-katex`,
+                        options: {
+                            throwOnError: false,
+                        },
+                    },
                     {
                         resolve: `gatsby-remark-autolink-headers`,
                         options: {
