@@ -44,10 +44,6 @@ async function updateContact(email: string, properties: Record<string, string>) 
     ).json() as Promise<HubSpotContactResponse>
 }
 
-function navigateToSignup(email: string) {
-    window.location.replace(`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`)
-}
-
 export const signupLogic = kea({
     actions: {
         setModalView: (view: SignupModalView) => ({ view }),
@@ -56,6 +52,7 @@ export const signupLogic = kea({
         skipEmailEntry: true,
         reportModalShown: true,
         reportDeploymentOptionsShown: true,
+        onRenderSignupPage: true,
         reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({ deploymentType, nextHref }),
     },
     reducers: {
@@ -73,7 +70,8 @@ export const signupLogic = kea({
         ],
     },
     connect: {
-        values: [posthogAnalyticsLogic, ['posthog', 'activeFeatureFlags']],
+        values: [posthogAnalyticsLogic, ['posthog', 'activeFeatureFlags', 'isLoggedIn']],
+        actions: [posthogAnalyticsLogic, ['posthogFound']],
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
@@ -86,11 +84,12 @@ export const signupLogic = kea({
                     if (!skipDeploymentOptions) {
                         actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
                     }
+                    await createContact(email)
                 } catch (err) {
                     posthog.capture('signup: failed to create contact', { message: err })
                 } finally {
                     if (skipDeploymentOptions) {
-                        navigateToSignup(email)
+                        window.location.replace(`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`)
                     }
                 }
             }
@@ -129,6 +128,15 @@ export const signupLogic = kea({
                 window.location.replace(nextHref)
             }
         },
+        onRenderSignupPage: () => {
+            if (typeof window !== 'undefined') {
+                if (values.shouldAutoRedirect) {
+                    window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
+                } else {
+                    actions.reportModalShown()
+                }
+            }
+        },
     }),
     selectors: {
         hasEmailGatedSignup: [
@@ -136,5 +144,18 @@ export const signupLogic = kea({
             (activeFeatureFlags: string[]) =>
                 activeFeatureFlags.some((flag) => flag.includes(EMAIL_GATED_SIGNUP_PREFIX)),
         ],
+        shouldAutoRedirect: [
+            (s) => [s.hasEmailGatedSignup, s.isLoggedIn],
+            (hasEmailGatedSignup: boolean, isLoggedIn: boolean) => {
+                return !hasEmailGatedSignup || isLoggedIn
+            },
+        ],
     },
+    events: ({ actions }) => ({
+        afterMount: () => {
+            if ((window as any).posthog) {
+                actions.posthogFound((window as any).posthog)
+            }
+        },
+    }),
 })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SEO } from '../components/seo'
 import '../components/Pricing/styles/index.scss'
 import Header from 'components/Header'
@@ -8,14 +8,13 @@ import { useActions, useValues } from 'kea'
 import { signupLogic, SignupModalView } from 'logic/signupLogic'
 import './styles/sign-up.scss'
 import { DeploymentOptionsGrid } from 'components/DeploymentOptionsGrid/DeploymentOptionsGrid'
-import { useEffect } from 'react'
 
 const SignUpPage = (): JSX.Element => {
     const { modalView } = useValues(signupLogic)
-    const { reportModalShown } = useActions(signupLogic)
+    const { onRenderSignupPage } = useActions(signupLogic)
 
     useEffect(() => {
-        reportModalShown()
+        onRenderSignupPage()
     }, [])
 
     return (
