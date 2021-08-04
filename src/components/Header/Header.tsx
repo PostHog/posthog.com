@@ -7,6 +7,8 @@ import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
 import './style.scss'
 import { mergeClassList } from 'lib/utils'
+import { signupLogic } from 'logic/signupLogic'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 
 interface NavbarLinkProps {
     to?: string
@@ -38,13 +40,21 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 }
 
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
+    const { hasEmailGatedSignup } = useValues(signupLogic)
+    const { isLoggedIn } = useValues(posthogAnalyticsLogic)
+    const showEmailGatedLink = hasEmailGatedSignup && !isLoggedIn
+
     const classList = `button-primary ${className} border-none px-4 py-2 ml-2 lg:ml-4 mt-4 lg:mt-0 transition-none hover:transition-none text-xs rounded-sm`
 
     return (
         <li className="leading-none">
             <button
                 onClick={() => {
-                    window.location.href = 'https://app.posthog.com/signup?src=header'
+                    if (showEmailGatedLink) {
+                        window.location.pathname = '/sign-up'
+                    } else {
+                        window.location.href = 'https://app.posthog.com/signup?src=header'
+                    }
                 }}
                 className={classList}
             >

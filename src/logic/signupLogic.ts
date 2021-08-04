@@ -1,4 +1,5 @@
 import { kea } from 'kea'
+import { EMAIL_GATED_SIGNUP_PREFIX } from 'lib/constants'
 import { isValidEmailAddress } from 'lib/utils'
 import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
@@ -68,7 +69,7 @@ export const signupLogic = kea({
         ],
     },
     connect: {
-        values: [posthogAnalyticsLogic, ['posthog']],
+        values: [posthogAnalyticsLogic, ['posthog', 'activeFeatureFlags']],
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
@@ -119,4 +120,11 @@ export const signupLogic = kea({
             }
         },
     }),
+    selectors: {
+        hasEmailGatedSignup: [
+            (s) => [s.activeFeatureFlags],
+            (activeFeatureFlags: string[]) =>
+                activeFeatureFlags.some((flag) => flag.includes(EMAIL_GATED_SIGNUP_PREFIX)),
+        ],
+    },
 })
