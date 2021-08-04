@@ -12,18 +12,8 @@ export enum Realm {
     cloud = 'cloud',
 }
 
-type HubSpotContact = {
-    id: string // Hubspot contact ID (number as string)
-    properties: Record<string, string>
-    created_at: string // ISO 8601
-    updated_at: string // ISO 8601
-    archived: boolean
-    archived_at: string | null // ISO 8601
-}
-
 export type HubSpotContactResponse = {
     success: boolean
-    result: string | HubSpotContact
 }
 
 async function createContact(email: string) {
