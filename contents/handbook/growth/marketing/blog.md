@@ -12,6 +12,21 @@ We manage an upcoming monthly list of content on a rolling basis [in this sheet]
 
 If you have any good blog post ideas join our #ideas-for-blog-post Slack channel - the more opinionated the better!
 
+## Workflow
+
+Our content production workflow is as follows:
+
+* **Shoot a video (optional):** This could be an interview, talk, panel discussion, or tutorial recording. We’ll eventually edit this down to about half or a third of its size.
+  * Content interviews usually take 40-60 minutes, and we generate 20-30 questions for each interviewee. These questions range from their career history to their current role and product, plus a few personal questions to add flavor to the interview. Here’s [an example](https://www.youtube.com/watch?v=gMYWond64lM) of one we did with Eltje.
+  * We also do intro interviews, which is where we get to know new hires. These can take anywhere from 15-30 minutes and have fewer questions than a content interview.
+  * HogTalks are Zoom sessions where we invite an expert to speak on a specific topic. We package these videos for upload to our YouTube channel - no blog post required, just a transcript where appropriate. Here’s [an example](https://www.youtube.com/watch?v=JvjK-YA9Ieo). 
+  * The engineering team sometimes creates tutorials that we use to explain certain PostHog features. These can be turned into blog posts in their own right. Here’s [an example](https://www.youtube.com/watch?v=3_yH24Bh0HE). 
+* **Get the transcript:** We use [Rev.com](https://rev.com) to pull the transcript from the video. Rev also lets you get a quick draft in just a few minutes, though we recommend waiting for the proper version, which can take anywhere from a few hours if ‘rushed’ - which costs extra - to a day or two.
+* **Write the blog post:** Using the transcript, we write up a concise blog post about the discussion or tutorial. This is where we add more context to the topic and include links to other content for further reading. The length of a blog post can vary wildly depending on how long the video is (which is a function of how thoughtful and in-depth the questions are), but a 60-minute interview usually yields a ~1,500-word blog post. This is also the part where we publish it to GitHub for feedback and request artwork from our design team.
+* **Extract the audio from the edited video:** This goes into the podcast.
+* **Post to social media:** After the blog post is complete, we pull snippets from it and schedule them for publishing across your platforms.
+* **Share it via email:** We bundle our latest posts (as blurbs with links) for addition to our next email newsletter edition.
+
 ## Publishing
 
 Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) with the following content:
