@@ -1,5 +1,5 @@
 import { kea } from 'kea'
-import { EMAIL_GATED_SIGNUP_PREFIX } from 'lib/constants'
+import { EMAIL_GATED_SIGNUP_PREFIX, FEATURE_FLAGS } from 'lib/constants'
 import { isValidEmailAddress } from 'lib/utils'
 import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
@@ -44,6 +44,10 @@ async function updateContact(email: string, properties: Record<string, string>) 
     ).json() as Promise<HubSpotContactResponse>
 }
 
+function navigateToSignup(email: string) {
+    window.location.replace(`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`)
+}
+
 export const signupLogic = kea({
     actions: {
         setModalView: (view: SignupModalView) => ({ view }),
@@ -73,15 +77,21 @@ export const signupLogic = kea({
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
-            const { posthog, email } = values
+            const { posthog, email, activeFeatureFlags } = values
+            const skipDeploymentOptions = activeFeatureFlags.includes(FEATURE_FLAGS.EMAIL_GATED_SIGNUP_OLD_FLOW)
             if (email && isValidEmailAddress(email)) {
                 try {
                     posthog.identify(email, { email: email.toLowerCase() }) // use email as distinct ID; also set it as property
                     posthog.capture('signup: submit email')
-                    actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
-                    await createContact(email)
+                    if (!skipDeploymentOptions) {
+                        actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
+                    }
                 } catch (err) {
                     posthog.capture('signup: failed to create contact', { message: err })
+                } finally {
+                    if (skipDeploymentOptions) {
+                        navigateToSignup(email)
+                    }
                 }
             }
         },
