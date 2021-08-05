@@ -17,7 +17,7 @@ const ButtonLink = ({
     const baseClasses = 'px-3 py-2 rounded'
     const classList =
         section == currentSection
-            ? baseClasses.concat(' bg-primary text-white hover:text-white')
+            ? baseClasses.concat(' bg-primary text-white font-bold hover:text-white')
             : baseClasses.concat(' text-white text-opacity-80 hover:bg-gray-100 hover:bg-opacity-10 hover:text-white')
     const sectionSelector = `#${section}`
 
