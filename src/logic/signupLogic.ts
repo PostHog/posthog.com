@@ -109,8 +109,8 @@ export const signupLogic = kea({
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
-            const { posthog, email, activeFeatureFlags } = values
-            const skipDeploymentOptions = activeFeatureFlags.includes(FEATURE_FLAGS.EMAIL_GATED_SIGNUP_OLD_FLOW)
+            const { posthog, email, activeVariant } = values
+            const skipDeploymentOptions = activeVariant === FEATURE_FLAGS.EMAIL_GATED_SIGNUP_OLD_FLOW
             if (email && isValidEmailAddress(email)) {
                 try {
                     posthog.identify(email, { email: email.toLowerCase() }) // use email as distinct ID; also set it as property
@@ -167,8 +167,7 @@ export const signupLogic = kea({
         onRenderSignupPage: () => {
             if (typeof window !== 'undefined') {
                 if (values.shouldAutoRedirect) {
-                    // window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
-                    // TODO change logic of hasEmailGatedSignup, which causes this to be called
+                    window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
                 } else {
                     actions.reportModalShown()
                 }
@@ -203,14 +202,22 @@ export const signupLogic = kea({
     }),
     selectors: {
         hasEmailGatedSignup: [
-            (s) => [s.activeFeatureFlags],
-            (activeFeatureFlags: string[]) =>
-                activeFeatureFlags.some((flag) => flag.includes(EMAIL_GATED_SIGNUP_PREFIX)),
+            (s) => [s.activeVariant],
+            (activeVariant: string | null) =>
+                activeVariant && activeVariant !== FEATURE_FLAGS.EMAIL_GATED_SIGNUP_CONTROL,
         ],
         shouldAutoRedirect: [
             (s) => [s.hasEmailGatedSignup, s.isLoggedIn],
             (hasEmailGatedSignup: boolean, isLoggedIn: boolean) => {
                 return !hasEmailGatedSignup || isLoggedIn
+            },
+        ],
+        activeVariant: [
+            (s) => [s.experimentVariants],
+            (experimentVariants: Record<string, boolean>) => {
+                const variantEntries: [string, boolean][] = Object.entries(experimentVariants)
+                const [name] = variantEntries.find(([, value]) => value) || []
+                return name || null
             },
         ],
     },
