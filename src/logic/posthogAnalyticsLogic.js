@@ -39,10 +39,6 @@ export const posthogAnalyticsLogic = kea({
             if (posthog.onFeatureFlags) {
                 posthog.onFeatureFlags(actions.setFeatureFlags)
             }
-            setTimeout(() => {
-                // still may not work, non-deterministic result
-                posthog.reloadFeatureFlags()
-            }, 2000)
         },
     }),
 
@@ -80,9 +76,10 @@ export const posthogAnalyticsLogic = kea({
         isLoggedIn: [
             (s) => [s.posthog],
             (posthog) => {
-                const token = posthog?.config.token
+                const token = posthog?.config?.token
                 if (token) {
                     const rawCookie = getCookie(`ph_${token}_posthog`)
+                    if (!rawCookie) return false
                     const cookie = JSON.parse(rawCookie)
                     return !!cookie['$user_id']
                 }

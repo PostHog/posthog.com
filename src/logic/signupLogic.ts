@@ -45,6 +45,7 @@ async function updateContact(email: string, properties: Record<string, string>) 
 }
 
 export const signupLogic = kea({
+    path: () => ['signup'],
     actions: {
         setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
@@ -54,6 +55,8 @@ export const signupLogic = kea({
         reportDeploymentOptionsShown: true,
         onRenderSignupPage: true,
         reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({ deploymentType, nextHref }),
+        setVariants: (newVariants: string[]) => ({ newVariants }),
+        setActiveVariant: (activeVariant: string) => ({ activeVariant }),
     },
     reducers: {
         modalView: [
@@ -66,6 +69,31 @@ export const signupLogic = kea({
             '',
             {
                 setEmail: (_, { email }: { email: string }) => email,
+            },
+        ],
+        experimentVariants: [
+            {} as Record<string, boolean>,
+            { persist: true },
+            {
+                setVariants: (state: Record<string, boolean>, { newVariants }: { newVariants: string[] }) => {
+                    const nextState = {} as Record<string, boolean>
+                    const existingVariants = Object.keys(state)
+                    newVariants.forEach((variant) => {
+                        if (existingVariants.includes(variant)) {
+                            // Don't overwrite an existing value
+                            nextState[variant] = state[variant]
+                        } else {
+                            nextState[variant] = false
+                        }
+                    })
+                },
+                setActiveVariant: (state: Record<string, boolean>, { activeVariant }: { activeVariant: string }) => {
+                    const nextState = {} as Record<string, boolean>
+                    const existingVariants = Object.keys(state)
+                    existingVariants.forEach((variant) => {
+                        nextState[variant] = variant === activeVariant
+                    })
+                },
             },
         ],
     },
@@ -134,6 +162,15 @@ export const signupLogic = kea({
                 } else {
                     actions.reportModalShown()
                 }
+            }
+        },
+        setVariants: () => {
+            const variantEntries: [string, boolean][] = Object.entries(values.experimentVariants)
+            if (!variantEntries.some(([, status]) => status === true)) {
+                // If all available variants are inactive, we need to randomly pick one to activate.
+                const randomIndex = Math.floor(Math.random() * variantEntries.length)
+                const [name] = variantEntries[randomIndex]
+                actions.setActiveVariant(name)
             }
         },
     }),
