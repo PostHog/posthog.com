@@ -45,7 +45,7 @@ async function updateContact(email: string, properties: Record<string, string>) 
 }
 
 export const signupLogic = kea({
-    path: () => ['signup'],
+    path: typeof window === undefined ? undefined : () => ['signup'],
     actions: {
         setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
@@ -54,9 +54,13 @@ export const signupLogic = kea({
         reportModalShown: true,
         reportDeploymentOptionsShown: true,
         onRenderSignupPage: true,
-        reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({ deploymentType, nextHref }),
+        reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({
+            deploymentType,
+            nextHref,
+        }),
         setVariants: (newVariants: string[]) => ({ newVariants }),
         setActiveVariant: (activeVariant: string) => ({ activeVariant }),
+        updateAvailableVariants: true,
     },
     reducers: {
         modalView: [
@@ -86,6 +90,7 @@ export const signupLogic = kea({
                             nextState[variant] = false
                         }
                     })
+                    return nextState
                 },
                 setActiveVariant: (state: Record<string, boolean>, { activeVariant }: { activeVariant: string }) => {
                     const nextState = {} as Record<string, boolean>
@@ -93,12 +98,14 @@ export const signupLogic = kea({
                     existingVariants.forEach((variant) => {
                         nextState[variant] = variant === activeVariant
                     })
+                    return nextState
                 },
             },
         ],
     },
     connect: {
         values: [posthogAnalyticsLogic, ['posthog', 'activeFeatureFlags', 'isLoggedIn']],
+        actions: [posthogAnalyticsLogic, ['setFeatureFlags']],
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
@@ -146,7 +153,9 @@ export const signupLogic = kea({
         reportDeploymentTypeSelected: async ({ deploymentType, nextHref }) => {
             const { posthog, email } = values
             try {
-                posthog.capture('signup: deployment type selected', { selected_deployment_type: deploymentType })
+                posthog.capture('signup: deployment type selected', {
+                    selected_deployment_type: deploymentType,
+                })
                 await updateContact(email, { selected_deployment_type: deploymentType })
             } catch (err) {
                 posthog.capture('signup: failed to update contact', { message: err })
@@ -158,7 +167,8 @@ export const signupLogic = kea({
         onRenderSignupPage: () => {
             if (typeof window !== 'undefined') {
                 if (values.shouldAutoRedirect) {
-                    window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
+                    // window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
+                    // TODO change logic of hasEmailGatedSignup, which causes this to be called
                 } else {
                     actions.reportModalShown()
                 }
@@ -171,6 +181,23 @@ export const signupLogic = kea({
                 const randomIndex = Math.floor(Math.random() * variantEntries.length)
                 const [name] = variantEntries[randomIndex]
                 actions.setActiveVariant(name)
+            }
+        },
+        updateAvailableVariants: () => {
+            const { activeFeatureFlags } = values
+            const variantFlags: string[] = activeFeatureFlags.filter((flag: string) =>
+                flag.includes(EMAIL_GATED_SIGNUP_PREFIX)
+            )
+            actions.setVariants(variantFlags)
+        },
+        [actions.setFeatureFlags]: () => {
+            actions.updateAvailableVariants()
+        },
+    }),
+    events: ({ actions, values }) => ({
+        afterMount: () => {
+            if (typeof window !== undefined && !!values.posthog) {
+                actions.updateAvailableVariants()
             }
         },
     }),

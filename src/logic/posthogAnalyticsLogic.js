@@ -30,12 +30,6 @@ export const posthogAnalyticsLogic = kea({
 
     listeners: ({ actions }) => ({
         posthogFound: ({ posthog }) => {
-            const variant = Math.round(Math.random() * 100)
-            posthog.capture('set experiment variant', {
-                $set_once: {
-                    experiment_variant: variant,
-                },
-            })
             if (posthog.onFeatureFlags) {
                 posthog.onFeatureFlags(actions.setFeatureFlags)
             }
