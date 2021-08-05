@@ -126,6 +126,7 @@ module.exports = {
                 yellow: '#F7A501',
                 footer: '#08042f',
                 pink: '#A970DC',
+                'light-purple': '#A393B0',
             },
             minHeight: {
                 780: '780px',
