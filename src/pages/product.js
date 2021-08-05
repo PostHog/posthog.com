@@ -1,6 +1,5 @@
 import React from 'react'
 import './styles/features.scss'
-import Layout from '../components/Layout'
 import { ProductHero } from '../components/ProductHero'
 import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
@@ -16,10 +15,13 @@ import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 import { useStaticQuery, graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
+import Header from 'components/Header'
+import Footer from 'components/Footer'
 
 function ProductPage() {
     return (
-        <Layout>
+        <>
+            <Header />
             <SEO title="Product • PostHog" />
             <div className="bg-purple">
                 <ProductHero
@@ -544,7 +546,8 @@ function ProductPage() {
                     bgColor="navy"
                 />
             </div>
-        </Layout>
+            <Footer />
+        </>
     )
 }
 
