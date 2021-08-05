@@ -6,6 +6,8 @@ import { Link } from 'gatsby'
 import { Disclosure } from '@headlessui/react'
 import Scrollspy from 'react-scrollspy'
 import planets from '../images/planets.svg'
+import { DarkModeToggle } from '../components/DarkModeToggle'
+import '../styles/handbook.scss'
 
 const nav = [
     {
@@ -150,6 +152,31 @@ function InternalSidebar(props) {
 
 const A = (props) => <a {...props} className="dark:text-yellow font-bold" />
 
+function SearchBar(props) {
+    return (
+        <div className="pl-[200px] max-w-screen-2xl mx-auto handbook-search ">
+            <div className="mt-14 max-w-3xl w-full flex space-x-3 sticky top-10 text-base items-center text-white py-3 rounded px-5 bg-[#371A51] shadow-2xl">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+                <input className="bg-[#371A51] w-full outline-none" placeholder="Search handbook" />
+                <DarkModeToggle />
+            </div>
+        </div>
+    )
+}
+
 export default function Handbook({ data: { post } }) {
     const {
         body,
@@ -180,6 +207,7 @@ export default function Handbook({ data: { post } }) {
     return (
         <>
             <Header className="max-w-screen-2xl" />
+            <SearchBar />
             <div className="relative px-5">
                 <div className="dark:text-white pt-16 flex max-w-screen-2xl mx-auto items-start">
                     <aside className="flex-shrink-0 max-w-[200px] w-full sticky top-10 pr-5">
