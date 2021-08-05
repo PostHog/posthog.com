@@ -264,12 +264,35 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
     color: inherit;
     font-weight: normal;
-    text-transform: lowercase;
     text-rendering: optimizeLegibility;
 }
+
+:not(.post-page-wrapper) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
+        text-transform: lowercase;
+    }
+}
+
+.post-page-wrapper {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'SK Curiosity', Helvetica, Arial, Sans-Serif;
+        text-transform: none;
+    }
+}
+
 h1 {
     font-size: 48px;
     line-height: 150%;

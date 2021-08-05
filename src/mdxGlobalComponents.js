@@ -86,6 +86,7 @@ import { DesignedForYourStackBlock } from './components/Sections/DesignedForYour
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SignupModal } from './components/SignupModal'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
@@ -180,6 +181,7 @@ export const shortcodes = {
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SignupModal,
     Spacer,
     StarRepoButton,
     StartNowButton,

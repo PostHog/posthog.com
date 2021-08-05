@@ -32,11 +32,13 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
 | `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | `""`
 | `CAPTURE_INTERNAL_METRICS` | Send some internal instrumentation to your own posthog instance, exposed via `/instance/status` page. For EE only. | `False`
-| `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing [sign up with GitHub](/docs/user-guides/log-in-with-github-gitlab).                                                      | 
-| `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing [sign up with GitHub](/docs/user-guides/log-in-with-github-gitlab).                                                     | 
-| `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing [sign up with GitLab](/docs/user-guides/log-in-with-github-gitlab).                                                        | 
-| `SOCIAL_AUTH_GITLAB_SECRET`| GitLab secret for allowing [sign up with GitLab](/docs/user-guides/log-in-with-github-gitlab).                                                     | 
-| `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for GitLab authentication. Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
+| `SOCIAL_AUTH_GITHUB_KEY`   | GitHub key for allowing [sign up with GitHub](/docs/user-guides/sso#github).                                                      | 
+| `SOCIAL_AUTH_GITHUB_SECRET`| GitHub secret for allowing [sign up with GitHub](/docs/user-guides/sso#github).                                                     | 
+| `SOCIAL_AUTH_GITLAB_KEY`   | GitLab key for allowing [sign up with GitLab](/docs/user-guides/sso#gitlab).                                                        | 
+| `SOCIAL_AUTH_GITLAB_SECRET`| GitLab secret for allowing [sign up with GitLab](/docs/user-guides/sso#gitlab).                                                     | 
+| `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for [GitLab authentication](/docs/user-guides/sso#gitlab). Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
+| `SOCIAL_AUTH_GOOGLE_OAUTH2_KEY`   | Google client ID for allowing [SSO with Google](/docs/user-guides/sso#google).                                                      | 
+| `SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET`| Google client secret for allowing [SSO with Google](/docs/user-guides/sso#google).
 | `DATABASE_URL`| [Database URL](https://github.com/jacobian/dj-database-url#url-schema) pointing to your PostgreSQL instance.  | `postgres://localhost:5432/posthog` if PostHog is running in DEBUG or TEST mode, must be specified otherwise.
 | `POSTHOG_DB_NAME`| Database name. | Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_DB_USER`| Database user name. | `postgres` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
@@ -59,7 +61,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
 | `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
 | `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
-
+| `MULTI_ORG_ENABLED` | Allows creating multiple organizations in your instance (multi-tenancy). **Requires a premium license.** | `False`
 [configuring email]: /docs/self-host/configure/email#general-configuration
 
 

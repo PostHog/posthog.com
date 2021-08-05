@@ -13,7 +13,7 @@
     ],
     "scripts": {
         "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
-        "start": "gatsby develop -H 0.0.0.0",
+        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
@@ -30,6 +30,7 @@
         "chart.js": "^2.9.4",
         "cross-env": "^7.0.3",
         "docsearch.js": "^2.6.3",
+        "dotenv": "^10.0.0",
         "eslint-plugin-flowtype": "^2.50.3",
         "gatsby": "^2.24.80",
         "gatsby-cli": "^2.12.111",
