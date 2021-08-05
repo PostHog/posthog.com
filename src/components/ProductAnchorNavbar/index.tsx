@@ -13,7 +13,7 @@ const ButtonLink = ({
     children: any
 }) => {
     const baseClasses =
-        'rounded inline-flex text-xs relative select-none font-osiris lowercase bg-transparent button rounded text-white hover:text-white px-3 py-2 mx-1 border-half backdrop-filter backdrop-blur-sm'
+        'rounded inline-flex text-xs relative select-none bg-transparent button rounded text-white hover:text-white px-3 py-2 mx-1 border-half backdrop-filter backdrop-blur-sm'
     const classList =
         section == currentSection
             ? baseClasses.concat(' nav-current')

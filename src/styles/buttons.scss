@@ -37,7 +37,7 @@
 .button-primary,
 .button-secondary,
 .button {
-    @apply font-button text-white hover:text-white lowercase select-none;
+    @apply text-white font-bold hover:text-white select-none;
     -ms-transform: skewX(-20deg);
     -webkit-transform: skewX(-20deg);
     transform: skewX(-20deg);
