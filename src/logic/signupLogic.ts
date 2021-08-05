@@ -71,7 +71,6 @@ export const signupLogic = kea({
     },
     connect: {
         values: [posthogAnalyticsLogic, ['posthog', 'activeFeatureFlags', 'isLoggedIn']],
-        actions: [posthogAnalyticsLogic, ['posthogFound']],
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
@@ -151,11 +150,4 @@ export const signupLogic = kea({
             },
         ],
     },
-    events: ({ actions }) => ({
-        afterMount: () => {
-            if ((window as any).posthog) {
-                actions.posthogFound((window as any).posthog)
-            }
-        },
-    }),
 })

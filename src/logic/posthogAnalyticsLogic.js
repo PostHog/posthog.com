@@ -39,6 +39,10 @@ export const posthogAnalyticsLogic = kea({
             if (posthog.onFeatureFlags) {
                 posthog.onFeatureFlags(actions.setFeatureFlags)
             }
+            setTimeout(() => {
+                // still may not work, non-deterministic result
+                posthog.reloadFeatureFlags()
+            }, 2000)
         },
     }),
 
