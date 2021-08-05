@@ -34,6 +34,10 @@ We operate on a trust basis and we don't count hours or days worked. We trust ev
 
 Whether you have an appointment with your doctor, school run with your kids or you want to finish an hour early to meet friends or family - we don't mind and you don't need to tell us. Please just add it to your calendar and if you are customer-facing, please make sure you have cover. 
 
+### Sabbaticals
+
+As we have unlimited, permissionless time off, PostHog doesn’t offer ‘sabbaticals’ in the way that some companies do. Instead, we strongly encourage team members to use our existing policy to take a full month off every 3-4 years. We only ask that you organise this thoughtfully with your team by giving them enough notice to plan.
+
 ## When you should have time off
 
 ### You are sick
