@@ -1,0 +1,57 @@
+Setup the PostHog React native SDK as follows:
+
+```js
+import PostHog from 'posthog-react-native'
+
+await PostHog.setup('<ph_project_api_key>', {
+    // PostHog API host
+    host: '<ph_instance_address>',
+
+    // Record certain application events automatically! (off/false by default)
+    captureApplicationLifecycleEvents: true,
+
+    // Capture deep links as part of the screen call. (off by default)
+    captureDeepLinks: true,
+
+    // Record screen views automatically! (off/false by default)
+    recordScreenViews: true,
+
+    // Max delay before flushing the queue (30 seconds)
+    flushInterval: 30,
+
+    // Maximum number of events to keep in queue before flushing (20)
+    flushAt: 20,
+
+    // Used only for Android
+    android: {
+        // Enable or disable collection of ANDROID_ID (true)
+        collectDeviceId: true,
+    },
+
+    // Used only for iOS
+    iOS: {
+        // Automatically capture in-app purchases from the App Store
+        captureInAppPurchases: false,
+
+        // Capture push notifications
+        capturePushNotifications: false,
+
+        // The maximum number of items to queue before starting to drop old ones.
+        maxQueueSize: 1000,
+
+        // Record bluetooth information.
+        shouldUseBluetooth: false,
+
+        // Use location services. Will ask for permissions.
+        shouldUseLocationServices: false
+    }
+})
+```
+
+See the [iOS integration](https://posthog.com/docs/integrate/client/ios) and 
+[Android integration](https://posthog.com/docs/integrate/client/android) pages for more details on
+some of these options.
+
+The `PostHog.setup()` call returns a promise, which resolves once the initialisation
+has finished. All calls to functions (e.g. `capture`) will be queued and dispatched once
+initialisation has finished. 

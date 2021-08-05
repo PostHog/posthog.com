@@ -16,56 +16,19 @@ The reason this exists is that whilst the default snippet captures every click o
 
 ## Installation
 
-You can either load the snippet as a script in your HTML:
-```html
-<script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('<ph_project_api_key>', {api_host: '<ph_instance_address>'})
-</script>
-```
+import JSInstall from './snippets/install.mdx'
 
-Place the snippet in the `<head>` tags of your website, ideally just above the closing `</head>` tag. You will need to do this for all pages that you wish to track.
-
-Or you can include it using npm, by doing either:
-
-```bash
-yarn add posthog-js
-```
-
-or:
-
-```bash
-npm install --save posthog-js
-```
-
-And then include it in your files:
-
-```js
-import posthog from 'posthog-js';
-posthog.init("<ph_project_api_key>", {api_host: '<ph_instance_address>'});
-```
-
-If you don't want to send a bunch of test data while you're developing, you could do the following:
-
-```js
-if (!window.location.href.includes('127.0.0.1')) {
-    posthog.init("<ph_project_api_key>", {api_host: '<ph_instance_address>'})
-}
-```
+<JSInstall />
 
 ## Usage
 ### Autocapture
 
-Just by calling `posthog.init` above, you're already automatically capturing:
-- **pageviews**, including the URL
-- **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
+import JSAutoCapture from './snippets/autocapture.mdx'
+import JSCaptureIgnoreElements from './snippets/capture-ignore-elements.mdx'
 
-### Ignore/censor elements
-PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website. If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
+<JSAutoCapture />
 
-```html
-<button class='ph-no-capture'>Sensitive information here</button>
-```
+<JSCaptureIgnoreElements />
 
 <br />
 
@@ -87,13 +50,11 @@ We recommend putting PostHog both on your homepage and your application if appli
 
 > PostHog automatically sets a cross-domain cookie, so if your website is `yourapp.com` and your app is on `app.yourapp.com` users will be followed when they go from one to the other.
 
-### Sending Events
+### Capture
 
-This allows you to send more context than the default event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may wish to add.
+import JSCapture from './snippets/capture.mdx'
 
-```javascript
-posthog.capture('[event-name]', {property1: 'value', property2: 'another value'});
-```
+<JSCapture />
 
 #### Setting user properties via an event
 
@@ -131,38 +92,9 @@ This works the same way as `posthog.people.set_once`.
 
 ### Identifying Users
 
-To make sure you understand which user is performing actions within your app, you can identify users at any point. From the moment you make this call, all events will be identified with that distinct id.
+import JSIdentify from './snippets/identify.mdx'
 
-The ID can by anything, but is usually the unique ID that you identify users by in the database.
-Normally, you would put this below `posthog.init` if you have the information there.
-
-If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and after they signed up will be shown under the same user.
-
-```js
-posthog.identify(
-    '[user unique id]', // distinct_id, required
-    { userProperty: 'value1' }, // $set, optional
-    { anotherUserProperty: 'value2' } // $set_once, optional
-);
-```
-
-You can also pass two more arguments to `posthog.identify`. Both take objects consisting of as many properties as you want to be set on that user's profile. The difference is that the second argument will use the `$set` mechanism, whereas the third argument will use `$set_once`. 
-
-You can read more about the difference between this [in the previous section](#setting-user-properties-via-an-event).
-
-<blockquote class="warning-note">
-    Warning! You can't call identify straight after an `.init` (as `.init` sends a pageview event, probably with the user's
-    anonymous ID).
-</blockquote>
-
-To address the issue described above, you can call `.init` passing a `loaded` callback function, inside which you can then call identify, like so
-
-```js
-posthog.init('[your api key]', {
-    api_host: 'https://posthog.[your-domain].com',
-    loaded: function(posthog) { posthog.identify('[user unique id]'); }
-});
-```
+<JSIdentify />
 
 #### Multiple IDs
 

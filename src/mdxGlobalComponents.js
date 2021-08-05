@@ -61,6 +61,7 @@ import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
+import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
@@ -156,6 +157,7 @@ export const shortcodes = {
     NewsletterForm,
     NotFoundPage,
     OtherFeaturesBlock,
+    OverflowXSection,
     PageHeader,
     PlanComparisonTable,
     PostCard,
