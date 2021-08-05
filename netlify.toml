@@ -662,3 +662,27 @@
 [[redirects]]
     from = "/docs/user-guides/log-in-with-sso"
     to = "/docs/user-guides/sso"
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/data-model"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/android/index"
+    to = "/docs/integrate/client/android"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/flutter/snippets/install"
+    to = "/docs/integrate/client/flutter"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/ios/index"
+    to = "/docs/integrate/client/ios"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/js/index"
+    to = "/docs/integrate/client/js"
