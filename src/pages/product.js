@@ -141,7 +141,7 @@ function ProductPage() {
                             />
 
                             <div className="md:py-12 px-2">
-                                <h3 className="mb-2 font-osiris font-normal text-2xl">Private cloud deployment</h3>
+                                <h3 className="mb-2 text-2xl">Private cloud deployment</h3>
                                 <div className="text-white text-opacity-70">
                                     <p>
                                         Run PostHog on your own private cloud with one of our install scripts, or get

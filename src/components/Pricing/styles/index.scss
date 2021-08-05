@@ -1,26 +1,3 @@
-#gatsby-focus-wrapper > .pricing-hero {
-    position: relative;
-
-    &:before {
-        background: url(../../../images/pricing-background.png) #0e0d3c top center;
-        @media (min-width: 1440px) {
-            background-size: cover;
-        }
-        bottom: 0;
-        content: '';
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100vw;
-    }
-
-    h1 {
-        background: -webkit-linear-gradient(#5dc7d8, #0e90a5);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-}
-
 #gatsby-focus-wrapper .pricing-hero {
     .platform-columns {
         //grid-template-columns: repeat(3, 1fr);
@@ -64,12 +41,10 @@
             border-radius: 3px;
             color: #8fbcff;
             display: flex;
-            font-family: 'Osiris';
             font-size: 1em;
             margin: 0 auto 0.75rem;
             max-width: 250px;
             padding: 0.5rem;
-            text-transform: lowercase;
 
             -ms-transform: skewX(-20deg);
             -webkit-transform: skewX(-20deg);
