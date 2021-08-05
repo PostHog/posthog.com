@@ -177,6 +177,78 @@ function SearchBar(props) {
     )
 }
 
+function Footer({ contributors }) {
+    return (
+        <footer className="bg-[#200935] dark:text-white pb-52">
+            <div className="bg-[#371A51] px-5">
+                <div className="py-14 max-w-screen-2xl mx-auto ">
+                    <div className="ml-[200px] max-w-3xl w-full">
+                        <h2>Reach out</h2>
+                        <p>
+                            If you need help on any of the above, feel free to create an issue on our repo, or join our
+                            Slack where a member of our team can assist you! Chances are that if you have a problem or
+                            question, someone else does too - so please don't hesitate to create a new issue or ask us a
+                            question.
+                        </p>
+                        <div className="my-10">
+                            <h3 className="text-base">Contributors</h3>
+                            <ul className="list-none m-0 p-0 flex space-x-2 mt-2">
+                                {contributors.map((contributor, index) => {
+                                    const { avatar_url, html_url, login } = contributor.author
+                                    return (
+                                        <li key={index}>
+                                            <a href={html_url}>
+                                                <img className="rounded-full max-w-[37px]" src={avatar_url} />
+                                            </a>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <h3 className="text-base">Docs</h3>
+                                <ul className="m-0 p-0 list-none">
+                                    <li>
+                                        <a className="dark:text-white" href="">
+                                            Edit this page
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className="dark:text-white" href="">
+                                            Raise an issue
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 className="text-base">Community & support</h3>
+                                <ul className="m-0 p-0 list-none">
+                                    <li>
+                                        <a className="dark:text-yellow" href="">
+                                            Join our Slack community
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className="dark:text-yellow" href="">
+                                            Add a feature request
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className="dark:text-yellow" href="">
+                                            Email us at hey@posthog.com
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    )
+}
+
 export default function Handbook({ data: { post } }) {
     const {
         body,
@@ -239,73 +311,7 @@ export default function Handbook({ data: { post } }) {
                 </div>
                 <img className="absolute top-0 right-0 w-[35vw]" src={planets} />
             </div>
-            <footer className="bg-[#200935] dark:text-white pb-52">
-                <div className="bg-[#371A51] px-5">
-                    <div className="py-14 max-w-screen-2xl mx-auto ">
-                        <div className="ml-[200px] max-w-3xl w-full">
-                            <h2>Reach out</h2>
-                            <p>
-                                If you need help on any of the above, feel free to create an issue on our repo, or join
-                                our Slack where a member of our team can assist you! Chances are that if you have a
-                                problem or question, someone else does too - so please don't hesitate to create a new
-                                issue or ask us a question.
-                            </p>
-                            <div className="my-10">
-                                <h3 className="text-base">Contributors</h3>
-                                <ul className="list-none m-0 p-0 flex space-x-2 mt-2">
-                                    {contributors.map((contributor, index) => {
-                                        const { avatar_url, html_url, login } = contributor.author
-                                        return (
-                                            <li key={index}>
-                                                <a href={html_url}>
-                                                    <img className="rounded-full max-w-[37px]" src={avatar_url} />
-                                                </a>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <h3 className="text-base">Docs</h3>
-                                    <ul className="m-0 p-0 list-none">
-                                        <li>
-                                            <a className="dark:text-white" href="">
-                                                Edit this page
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="dark:text-white" href="">
-                                                Raise an issue
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h3 className="text-base">Community & support</h3>
-                                    <ul className="m-0 p-0 list-none">
-                                        <li>
-                                            <a className="dark:text-yellow" href="">
-                                                Join our Slack community
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="dark:text-yellow" href="">
-                                                Add a feature request
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="dark:text-yellow" href="">
-                                                Email us at hey@posthog.com
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer contributors={contributors} />
         </>
     )
 }
