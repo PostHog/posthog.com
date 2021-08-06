@@ -11,6 +11,8 @@ featuredImageType: full
 ---
 _(Welcome to another episode of PostHog's Community Conversations where we chat to our contributors and users.)_
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dL-GaQlA6bo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Unlike most tech founders, Leo Anthias didn’t study computer science at university. Instead, he took Persian History and Modern American Drama after a chance encounter with a professor who made medieval history fascinating. Despite his non-tech academic background, however, Leo has been coding for years, from early roles as CTO of Kivo, a YC-backed document collaboration start-up, to his current job as CEO and co-founder of Datapane.
 
 A former YC alumnus, his fondest memory from that time is the absolute focus and discipline that was needed to perfect one’s product strategy, ideal customer profile, and marketing and distribution. His strongest productivity tip to date is to focus on optimizing one thing at a time, and this pairs well with his ability to perform well under pressure - especially when running against externally imposed client deadlines.
