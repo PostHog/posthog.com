@@ -175,7 +175,7 @@ export const signupLogic = kea({
         },
         setVariants: () => {
             const variantEntries: [string, boolean][] = Object.entries(values.experimentVariants)
-            if (!variantEntries.some(([, status]) => status === true)) {
+            if (variantEntries.length && !variantEntries.some(([, status]) => status === true)) {
                 // If all available variants are inactive, we need to randomly pick one to activate.
                 const randomIndex = Math.floor(Math.random() * variantEntries.length)
                 const [name] = variantEntries[randomIndex]
