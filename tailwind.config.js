@@ -87,10 +87,9 @@ module.exports = {
         }),
         extend: {
             fontFamily: {
-                gosha: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
-                serif: ['Gosha Sans', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['DM Sans', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
-                    'SK Curiosity',
+                    'DM Sans',
                     '-apple-system',
                     'BlinkMacSystemFont',
                     'avenir next',
@@ -104,9 +103,8 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
-                button: ['Osiris', 'sans-serif'],
-                nav: ['Osiris', 'sans-serif'],
-                osiris: ['Osiris', 'sans-serif'],
+                button: ['DM Sans', 'sans-serif'],
+                nav: ['DM Sans', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',
@@ -145,6 +143,7 @@ module.exports = {
             },
             padding: {
                 'fluid-video': '56.25%',
+                '1/2': '50%',
             },
         },
     },

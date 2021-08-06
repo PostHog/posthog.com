@@ -122,7 +122,7 @@ export const NewsletterForm = ({
                                         type="custom"
                                         icon="check"
                                         width="full"
-                                        className="text-white font-osiris border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"
+                                        className="text-white border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"
                                         submit={true}
                                     >
                                         Join the List

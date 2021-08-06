@@ -25,7 +25,7 @@ export const ScheduleDemo = () => {
                     <a href="https://www.youtube.com/channel/UCoP6ql8QkyOoVpBU4P8LM6w">secondary YouTube channel</a>.
                 </p>
                 <br />
-                <DemoScheduler iframeSrc="https://calendly.com/jamesefhawkins/posthog-demo" />
+                <DemoScheduler iframeSrc="https://calendly.com/yakko/demo" />
             </div>
         </Layout>
     )

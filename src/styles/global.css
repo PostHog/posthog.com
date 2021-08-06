@@ -26,10 +26,6 @@ ul {
     list-style: disc;
 }
 
-.font-nav {
-    @apply lowercase;
-}
-
 .bg-primary-dark {
     background: rgba(218, 72, 16, 0.9);
     border-color: rgba(218, 72, 16, 0.9);
