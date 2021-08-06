@@ -174,12 +174,18 @@ export const signupLogic = kea({
             }
         },
         setVariants: () => {
-            const variantEntries: [string, boolean][] = Object.entries(values.experimentVariants)
+            const { experimentVariants, posthog } = values
+            const variantEntries: [string, boolean][] = Object.entries(experimentVariants)
             if (variantEntries.length && !variantEntries.some(([, status]) => status === true)) {
                 // If all available variants are inactive, we need to randomly pick one to activate.
                 const randomIndex = Math.floor(Math.random() * variantEntries.length)
                 const [name] = variantEntries[randomIndex]
                 actions.setActiveVariant(name)
+                posthog?.capture('set experiment variant', {
+                    $set_once: {
+                        experiment_variant: name,
+                    },
+                })
             }
         },
         updateAvailableVariants: () => {
