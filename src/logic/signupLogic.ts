@@ -181,9 +181,10 @@ export const signupLogic = kea({
                 const randomIndex = Math.floor(Math.random() * variantEntries.length)
                 const [name] = variantEntries[randomIndex]
                 actions.setActiveVariant(name)
-                posthog?.capture('set experiment variant', {
+                posthog.capture('set email experiment variant', {
+                    variant: name,
                     $set_once: {
-                        experiment_variant: name,
+                        email_experiment_variant: name,
                     },
                 })
             }
