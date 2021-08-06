@@ -1,12 +1,13 @@
 ---
-date: 2021-07-20
+date: 2021-08-06
 title: Running content at a devtool company
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: mo-shehu
-featuredImage: ../images/blog/<folder>/<filename>
+featuredImage: ../images/blog/running-content.png
+featuredImageType: full
 ---
 
 ## Why you need content
