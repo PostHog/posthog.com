@@ -37,7 +37,7 @@ kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
 ### Setting up DNS
 
-Create a `CNAME` record from your desired hostname to the external IP.
+Create a `CNAME` record from your desired hostname to the hostname associated with the AWS LB.
 
 ### I cannot connect to my PostHog instance after creation
 As a troubleshooting tool, you can allow HTTP access by setting these values in your `values.yaml`, but we recommend always accessing PostHog via https.
