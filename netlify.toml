@@ -602,3 +602,73 @@
 [[redirects]]
     from = "/product-features"
     to = "/product"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/api/index"
+    to = "/docs/api/overview"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/contribute/index"
+    to = "/docs/contribute/overview"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/data-model"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/integrate/client/android/index"
+    to = "/docs/integrate/client/android"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/integrate/client/flutter/snippets/install"
+    to = "/docs/integrate/client/flutter"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/integrate/client/ios/index"
+    to = "/docs/integrate/client/ios"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/integrate/client/js/index"
+    to = "/docs/integrate/client/js"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/integrate/index"
+    to = "/docs/integrate/overview"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/plugins/build/index"
+    to = "/docs/plugins/build/overview"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/plugins/index"
+    to = "/docs/plugins/overview"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/self-host/index"
+    to = "/docs/self-host/overview"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/tutorials/event-tracking-guide"
+    to = "/docs/tutorials/actions"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/tutorials/index"
+    to = "/docs/tutorials/overview"
+
+# Added: 2021-08-06
+[[redirects]]
+    from = "/docs/user-guides/index"
+    to = "/docs/user-guides/overview"
