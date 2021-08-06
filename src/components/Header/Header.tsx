@@ -7,6 +7,7 @@ import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
 import './style.scss'
 import { mergeClassList } from 'lib/utils'
+import { signupLogic } from 'logic/signupLogic'
 
 interface NavbarLinkProps {
     to?: string
@@ -38,13 +39,19 @@ const NavbarLink = ({ to, href, children, textLight, className = '' }: NavbarLin
 }
 
 const PrimaryCta = ({ children, className = '' }: { children: any; className?: string }) => {
+    const { shouldAutoRedirect } = useValues(signupLogic)
+    console.log(shouldAutoRedirect)
     const classList = `button-primary ${className} border-none px-4 py-2 ml-2 lg:ml-4 mt-4 lg:mt-0 transition-none hover:transition-none text-xs rounded-sm`
 
     return (
         <li className="leading-none">
             <button
                 onClick={() => {
-                    window.location.pathname = '/sign-up'
+                    if (shouldAutoRedirect) {
+                        window.location.href = 'https://app.posthog.com/signup?src=header'
+                    } else {
+                        window.location.pathname = '/sign-up'
+                    }
                 }}
                 className={classList}
             >

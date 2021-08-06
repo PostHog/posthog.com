@@ -167,6 +167,7 @@ export const signupLogic = kea({
         onRenderSignupPage: () => {
             if (typeof window !== 'undefined') {
                 if (values.shouldAutoRedirect) {
+                    // TODO remove this block if we can get the logic to mount properly
                     window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
                 } else {
                     actions.reportModalShown()
@@ -216,7 +217,7 @@ export const signupLogic = kea({
         shouldAutoRedirect: [
             (s) => [s.hasEmailGatedSignup, s.isLoggedIn],
             (hasEmailGatedSignup: boolean, isLoggedIn: boolean) => {
-                return !hasEmailGatedSignup || isLoggedIn
+                return (typeof window !== undefined && !hasEmailGatedSignup) || isLoggedIn
             },
         ],
         activeVariant: [
