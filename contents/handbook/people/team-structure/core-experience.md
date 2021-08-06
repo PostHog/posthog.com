@@ -11,6 +11,7 @@ hideAnchor: true
 - [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
 - [Li Yi Yu](/handbook/people/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 - Alex Kim (Full Stack Engineer)
+- [Chris Clark](/handbook/company/team#chris-clark-product-designer) (Product Designer)
 
 ## Mission
 
