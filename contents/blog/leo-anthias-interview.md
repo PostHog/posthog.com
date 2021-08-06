@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: mo-shehu
-featuredImage: ../images/blog/leo-anthias-interview.png
+featuredImage: ../images/blog/leo-anthias.png
 ---
 _(Welcome to another episode of PostHog's Community Conversations where we chat to our contributors and users.)_
 
