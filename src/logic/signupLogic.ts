@@ -197,8 +197,13 @@ export const signupLogic = kea({
             )
             actions.setVariants(variantFlags)
         },
-        [actions.setFeatureFlags]: () => {
-            actions.updateAvailableVariants()
+    }),
+    sharedListeners: ({ actions }) => ({
+        onSetFeatureFlags: (_payload, _breakpoint, action) => {
+            if (action.type === actions.setFeatureFlags.toString()) {
+                // BUG: This is never called for some reason; it should
+                actions.updateAvailableVariants()
+            }
         },
     }),
     events: ({ actions, values }) => ({
