@@ -265,7 +265,7 @@ The methods presented here are examples of options to track SPAs with PostHog. H
 
 Given the wide variety of available JavaScript events, you can also set up your navigation tracking in other ways, such as through `mouseover` events, for example. 
 
-In addition, you can also send your own [custom events](/docs/integrate/client/js/#sending-events) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
+In addition, you can also send your own [custom events](/docs/integrate/client/js/#capture) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
 
 ```js
 posthog.capture(

@@ -6,6 +6,7 @@ import hamburgerIcon from '../../images/icons/hamburger.svg'
 import whiteLogo from '../../images/posthog-logo-white.svg'
 import darkLogo from '../../images/posthog-logo-150x29.svg'
 import './style.scss'
+import { mergeClassList } from 'lib/utils'
 
 interface NavbarLinkProps {
     to?: string
@@ -59,6 +60,7 @@ export interface HeaderProps {
     onBlogPage?: boolean
     transparentBackground?: boolean
     blogArticleSlug?: string
+    logoOnly?: boolean
 }
 
 export const Header = ({
@@ -67,6 +69,7 @@ export const Header = ({
     transparentBackground = false,
     onBlogPage = false,
     blogArticleSlug,
+    logoOnly = false,
 }: HeaderProps): JSX.Element => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
@@ -80,6 +83,7 @@ export const Header = ({
         onBlogPage ||
         !!blogArticleSlug
     const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
+    const justify = logoOnly ? 'justify-center' : 'justify-between'
 
     return (
         <div
@@ -87,49 +91,55 @@ export const Header = ({
                 transparentBackground ? 'transparent-background' : ''
             } ${blogArticleSlug ? 'blog-article-header' : ''}`}
         >
-            <div className={`${layoutWidth} flex justify-between items-center`}>
-                <Link id="logo" to="/" className="block">
-                    <img alt="logo" src={logo} />
-                </Link>
+            <header className={mergeClassList(layoutWidth, justify, logoOnly && 'opacity-50', 'flex', 'items-center')}>
+                <div className="flex-1">
+                    <Link id="logo" to="/" className="block">
+                        <img alt="logo" src={logo} />
+                    </Link>
+                </div>
+                {!logoOnly && (
+                    <>
+                        <nav>
+                            <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav p-0">
+                                <NavbarLink to="/product" textLight={textLight}>
+                                    Product
+                                </NavbarLink>
+                                <NavbarLink to="/docs" textLight={textLight}>
+                                    Docs
+                                </NavbarLink>
+                                <NavbarLink to="/handbook/company/story" textLight={textLight}>
+                                    Company
+                                </NavbarLink>
+                                <NavbarLink to="/pricing" textLight={textLight}>
+                                    Pricing
+                                </NavbarLink>
+                                <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
+                                    GitHub
+                                </NavbarLink>
+                            </ul>
+                        </nav>
+                        <ul className="hidden lg:flex list-none justify-end items-center mb-0 text-xs p-0 flex-1">
+                            <PrimaryCta>
+                                <span>Get Started</span>
+                            </PrimaryCta>
+                            <NavbarLink
+                                href="https://app.posthog.com/login"
+                                textLight={textLight}
+                                className="font-nav opacity-80 hover:opacity-100 px-4 py-2 text-xs"
+                            >
+                                Login
+                            </NavbarLink>
+                        </ul>
 
-                <ul className="hidden lg:flex list-none justify-between items-center mb-0 font-nav">
-                    <NavbarLink to="/product" textLight={textLight}>
-                        Product
-                    </NavbarLink>
-                    <NavbarLink to="/docs" textLight={textLight}>
-                        Docs
-                    </NavbarLink>
-                    <NavbarLink to="/handbook/company/story" textLight={textLight}>
-                        Company
-                    </NavbarLink>
-                    <NavbarLink to="/pricing" textLight={textLight}>
-                        Pricing
-                    </NavbarLink>
-                    <NavbarLink href="https://github.com/posthog/posthog" textLight={textLight}>
-                        GitHub
-                    </NavbarLink>
-                </ul>
-
-                <ul className="hidden lg:flex list-none flex justify-between items-center mb-0 text-xs">
-                    <PrimaryCta>
-                        <span>Get Started</span>
-                    </PrimaryCta>
-                    <NavbarLink
-                        href="https://app.posthog.com/login"
-                        textLight={textLight}
-                        className="font-nav opacity-80 hover:opacity-100 px-4 py-2 text-xs"
-                    >
-                        Login
-                    </NavbarLink>
-                </ul>
-
-                <button className="text-white h-4 w-4 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
-                    <img src={hamburgerIcon} className="block" />
-                </button>
-            </div>
+                        <button className="text-white h-4 w-4 lg:hidden mt-1" onClick={() => expandMenu(!expanded)}>
+                            <img src={hamburgerIcon} className="block" />
+                        </button>
+                    </>
+                )}
+            </header>
 
             {expanded ? (
-                <ul className="w-11/12 mx-auto mt-8 block lg:hidden list-none">
+                <ul className="w-11/12 mx-auto mt-8 block lg:hidden list-none p-0">
                     <NavbarLink
                         to="/product"
                         textLight={textLight}
@@ -180,7 +190,7 @@ export const Header = ({
                         Login
                     </NavbarLink>
 
-                    <PrimaryCta className=" ">Get Started</PrimaryCta>
+                    <PrimaryCta className="mt-4">Get Started</PrimaryCta>
                 </ul>
             ) : null}
         </div>

@@ -75,7 +75,7 @@ Once the role is online, the People team will share the details with the team, t
 
 Every time we open a new role, we will share the details and ideal profile with the team during standup.
 
-If you know someone who would be a great addition to the team, please submit them as a referral. If they're successfully hired, you'll receive a $1,000 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity.
+If you know someone who would be a great addition to the team, please submit them as a referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice (and we will match the amount). You can also split the amount between you and the charity.
 
 **What counts as a referral?** 
 
@@ -89,7 +89,7 @@ Someone you have a personal or professional relationship with to confidently say
 
 **Referral payout process:** 
 
-The bonus date is 3 months from the new team member's start date and will be processed as part of payroll.
+The bonus date is 3 months from the new team member's start date and will be processed as part of payroll (you might be liable for income tax on the bonus). 
 
 **External referrals** 
 

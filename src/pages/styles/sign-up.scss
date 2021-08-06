@@ -1,0 +1,159 @@
+$base_font_stack: 'SK Curiosity', Helvetica, Arial, Sans-Serif; // TODO centralize this var
+
+.signup-callout-message {
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    color: #fff;
+    max-width: 18em;
+    font-weight: 600;
+    border-left: 3px solid rgba(196, 196, 196, 0.4);
+    padding-left: 0.5em;
+
+    @media (max-width: 576px) {
+        display: none;
+    }
+
+    .text-badge {
+        font-weight: 800;
+        font-size: 80%;
+        text-transform: uppercase;
+        background-color: #f35d26;
+        padding: 0.1em 0.25em;
+        border-radius: 0.25em;
+        margin: 0 0.25em;
+    }
+}
+
+.signup-callout-message {
+    z-index: 9010; // above react-modal
+}
+
+.signup-border-graphic,
+.signup-circle-graphic {
+    z-index: -1;
+    position: fixed;
+}
+
+.signup-modal-view-email .signup-border-graphic {
+    top: 36px;
+    right: 20px;
+}
+
+.signup-modal-view-deployment .signup-border-graphic {
+    top: 36px;
+    left: 20px;
+    transform: scaleX(-1);
+}
+
+.signup-circle-graphic {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 1rem;
+    margin-bottom: 4rem;
+
+    @media (max-width: 767px) {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    @media (min-width: 768px) {
+        width: max(67vw, 736px);
+        margin: 0 auto 4rem auto;
+    }
+
+    .pricing-card {
+        background: #fff;
+        border-radius: 6px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            color: #fff;
+            font-size: 1rem;
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+
+            &.bg-blue {
+                background: #0062f5;
+            }
+
+            .custom-icon {
+                margin-right: 0.5em;
+            }
+        }
+
+        .icon-flex-row {
+            display: flex;
+            margin-bottom: 20px;
+
+            .icon-lockup:not(:last-child) {
+                margin-right: 32px;
+            }
+
+            .icon-badge-wrapper,
+            .posthog-icon {
+                margin-bottom: 6px;
+            }
+
+            h3 {
+                font-family: $base_font_stack;
+                text-transform: none;
+                font-size: 15px;
+                font-weight: 700;
+                margin-bottom: 0;
+            }
+        }
+
+        .card-body {
+            flex-grow: 1;
+            padding: 32px;
+
+            p {
+                margin-bottom: 0.75em;
+                opacity: 0.5;
+                font-size: 14px;
+            }
+
+            ul {
+                list-style-type: none;
+                padding-left: 0;
+
+                li {
+                    color: rgba(0, 0, 0, 0.7);
+                    font-size: 14px;
+                    font-weight: 700;
+                    padding: 6px 0;
+                    position: relative;
+
+                    .separator-line {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 30px;
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+                    }
+
+                    &:first-child .separator-line {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        footer {
+            justify-self: flex-end;
+            margin-top: auto;
+            margin-bottom: 0;
+            padding: 20px 24px;
+            background: rgba(0, 0, 0, 0.05);
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+}

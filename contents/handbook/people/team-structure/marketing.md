@@ -7,30 +7,23 @@ hideAnchor: true
 
 ## People
 
+- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops
 - [Mo Shehu](/handbook/people/team#mo-shehu-content-marketer), Content Marketer
-- [Joe Martin](/handbook/people/team#joe-martin-product-marketer), Product Marketer
+- [Lottie Coxon](/handbook/people/team#lottie-coxon-graphic-designer), Product Marketer
 
 ## Mission
 
-Make PostHog a ubiquitous developer tool.
+Increase the number of [relevant](https://posthog.com/handbook/strategy/strategy#target-audience-for-2021) visitors to our website. 
 
-## Customer
-
-Innovative technical teams, who care about:
-
-* a unified product analytics platform
-* open source
-* control: hosting, pricing, source, data, privacy and security
-
-We will expand to non-technical teams when we have achieved technical awareness saturation.
+## Responsibilities
+- Content, including the [Blog](/handbook/growth/marketing/blog)
+- [Email marketing](/handbook/growth/marketing/newsletter)
+- [Paid Ads](/handbook/growth/marketing/paid)
+- [Press](/handbook/growth/marketing/press)
 
 ## Output metrics
 
 * Acquisition
-
-## Philosophy
-
-Be kind, concise and direct.
 
 ## Slack channel
 
