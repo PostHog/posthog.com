@@ -4,45 +4,45 @@ Setup the PostHog React native SDK as follows:
 import PostHog from 'posthog-react-native'
 
 await PostHog.setup('<ph_project_api_key>', {
-    // PostHog API host
+    // PostHog API host (https://app.posthog.com by default)
     host: '<ph_instance_address>',
 
-    // Record certain application events automatically! (off/false by default)
+    // Record certain application events automatically! (Disabled by default)
     captureApplicationLifecycleEvents: true,
 
-    // Capture deep links as part of the screen call. (off by default)
+    // Capture deep links as part of the screen call. (Disabled by default)
     captureDeepLinks: true,
 
-    // Record screen views automatically! (off/false by default)
+    // Record screen views automatically! (Disabled by default)
     recordScreenViews: true,
 
-    // Max delay before flushing the queue (30 seconds)
+    // Max delay before flushing the queue (30 seconds by default)
     flushInterval: 30,
 
-    // Maximum number of events to keep in queue before flushing (20)
+    // Maximum number of events to keep in queue before flushing (20 by default)
     flushAt: 20,
 
     // Used only for Android
     android: {
-        // Enable or disable collection of ANDROID_ID (true)
+        // Enable or disable collection of ANDROID_ID (Enabled by default)
         collectDeviceId: true,
     },
 
     // Used only for iOS
     iOS: {
-        // Automatically capture in-app purchases from the App Store
+        // Automatically capture in-app purchases from the App Store (Disabled by default)
         captureInAppPurchases: false,
 
-        // Capture push notifications
+        // Capture push notifications (Disabled by default)
         capturePushNotifications: false,
 
-        // The maximum number of items to queue before starting to drop old ones.
+        // The maximum number of items to queue before starting to drop old ones. (1000 by default)
         maxQueueSize: 1000,
 
-        // Record bluetooth information.
+        // Record bluetooth information. (Disabled by default)
         shouldUseBluetooth: false,
 
-        // Use location services. Will ask for permissions.
+        // Use location services. Will ask for permissions. (Disabled by default)
         shouldUseLocationServices: false
     }
 })
