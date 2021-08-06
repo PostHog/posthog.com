@@ -89,7 +89,7 @@ Someone you have a personal or professional relationship with to confidently say
 
 **Referral payout process:** 
 
-The bonus date is 3 months from the new team member's start date and will be processed as part of payroll.
+The bonus date is 3 months from the new team member's start date and will be processed as part of payroll (you might be liable for income tax on the bonus). 
 
 **External referrals** 
 
