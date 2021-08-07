@@ -3,113 +3,85 @@ import Header from 'components/Header'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { Link } from 'gatsby'
-import { Disclosure } from '@headlessui/react'
+import { Transition } from '@headlessui/react'
 import Scrollspy from 'react-scrollspy'
 import planets from '../images/planets.svg'
 import { DarkModeToggle } from '../components/DarkModeToggle'
 import '../styles/handbook.scss'
 
-const nav = [
-    {
-        name: 'Company',
-        url: '/handbook/company/story',
-        children: [
-            {
-                name: 'Story',
-                url: '/handbook/company/story',
-            },
-            { name: 'Team', url: '/handbook/company/team' },
-            { name: 'Investors', url: '/handbook/strategy/investors' },
-        ],
-    },
-    {
-        name: 'Strategy',
-        url: '/handbook/strategy/strategy',
-        children: [
-            { name: 'Strategy overview', url: '/handbook/strategy/strategy' },
-            { name: 'Business model', url: '/handbook/strategy/business-model' },
-            { name: 'Roadmap', url: '/handbook/strategy/roadmap' },
-            { name: 'Prioritization', url: '/handbook/strategy/prioritization' },
-        ],
-    },
-    {
-        name: 'Getting started',
-        url: '/handbook/getting-started/start-here',
-        children: [
-            { name: 'Start here', url: '/handbook/getting-started/start-here' },
-            { name: 'Meetings', url: '/handbook/getting-started/meetings' },
-        ],
-    },
-    {
-        name: 'How we work',
-        url: '/handbook/company/culture',
-        children: [
-            { name: 'Culture', url: '/handbook/company/culture' },
-            { name: 'Values', url: '/handbook/company/values' },
-            { name: 'Diversity and inclusion', url: '/handbook/company/diversity' },
-            { name: 'Communication', url: '/handbook/company/communication' },
-            { name: 'Management at PostHog', url: '/handbook/company/management' },
-            { name: 'Security', url: '/handbook/company/security' },
-            { name: 'Branding', url: '/handbook/company/branding' },
-            {
-                name: 'Team Structure',
-                url: '/handbook/people/team-structure/team-structure',
-                children: [
-                    { name: 'Team structure', url: '/handbook/people/team-structure/team-structure' },
-                    { name: 'Why Small Teams', url: '/handbook/people/team-structure/why-small-teams' },
-                    { name: 'Team Core Analytics', url: '/handbook/people/team-structure/core-analytics' },
-                    { name: 'Team Core Experience', url: '/handbook/people/team-structure/core-experience' },
-                    { name: 'Team Design', url: '/handbook/people/team-structure/design' },
-                    { name: 'Team Extensibility', url: '/handbook/people/team-structure/extensibility' },
-                    { name: 'Team Growth', url: '/handbook/people/team-structure/growth-engineering' },
-                    {
-                        name: 'Team Infrastructure & Deployments',
-                        url: '/handbook/people/team-structure/infrastructure',
-                    },
-                    { name: 'Team Marketing', url: '/handbook/people/team-structure/marketing' },
-                    { name: 'Team People', url: '/handbook/people/team-structure/people' },
-                ],
-            },
-        ],
-    },
-]
-
-function MainSidebar(props) {
-    const { slug } = props
+function MenuItem({ item, slug }) {
     const isActive = (children) => {
-        return children.some((child) => {
-            return child.url === slug || (child.children && isActive(child.children))
-        })
-    }
-    const Menu = ({ menu, sub }) => {
         return (
-            <Disclosure as="ul" className={`flex flex-col space-y-2 list-none p-0 my-0 ${sub ? 'ml-2' : ''}`}>
-                {menu.map((child, index) => {
-                    const active = child.children && isActive(child.children)
-                    return (
-                        <Disclosure.Button as="li" key={index}>
-                            <Link
-                                className={`dark:text-white dark:hover:text-white opacity-${
-                                    active || slug === child.url ? '100' : '20'
-                                } hover:opacity-100`}
-                                to={child.url}
-                            >
-                                {child.name}
-                            </Link>
-                            {active && (
-                                <Disclosure.Panel className="mt-2" static>
-                                    <Menu menu={child.children} sub />
-                                </Disclosure.Panel>
-                            )}
-                        </Disclosure.Button>
-                    )
-                })}
-            </Disclosure>
+            children &&
+            children.some((child) => {
+                return child.url === slug || isActive(child.children)
+            })
         )
     }
+    const opacity = item.url === slug || isActive(item.children) ? '1' : '.2'
+    const [open, setOpen] = useState(isActive(item.children))
+    const handleClick = () => setOpen(!open)
     return (
-        <nav>
-            <Menu menu={nav} />
+        <li>
+            <div className="flex items-center justify-between">
+                {item.url ? (
+                    <Link
+                        style={{ opacity }}
+                        className={`transition-opacity dark:text-white dark:hover:text-white hover:opacity-100`}
+                        to={item.url}
+                    >
+                        {item.name}
+                    </Link>
+                ) : (
+                    <button
+                        style={{ opacity }}
+                        onClick={handleClick}
+                        className={`dark:text-white dark:hover:text-white`}
+                    >
+                        {item.name}
+                    </button>
+                )}
+
+                {item.children && (
+                    <button className="transition-opacity opacity-0 group-hover:opacity-100" onClick={handleClick}>
+                        <svg
+                            style={{ transform: `rotate(${open ? '180deg' : '0deg'})`, opacity }}
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`h-5 w-5 transition-transform`}
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                )}
+            </div>
+            <div style={{ display: open ? 'block' : 'none' }}>
+                <Menu slug={slug} className="mt-2" menu={item.children} sub />
+            </div>
+        </li>
+    )
+}
+
+function Menu({ menu, sub, className, slug }) {
+    return (
+        <ul className={`${className} flex flex-col space-y-2 list-none p-0 my-0 ${sub ? 'ml-2' : ''}`}>
+            {menu &&
+                menu.map((item, index) => {
+                    return <MenuItem key={index} slug={slug} item={item} />
+                })}
+        </ul>
+    )
+}
+
+function MainSidebar({ slug, menu }) {
+    return (
+        <nav className="group">
+            <Menu menu={menu} slug={slug} />
         </nav>
     )
 }
@@ -155,23 +127,25 @@ const A = (props) => <a {...props} className="dark:text-yellow font-bold" />
 function SearchBar(props) {
     return (
         <div className="pl-[200px] max-w-screen-2xl mx-auto handbook-search ">
-            <div className="mt-14 max-w-3xl w-full flex space-x-3 sticky top-10 text-base items-center text-white py-3 rounded px-5 bg-[#371A51] shadow-2xl">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                </svg>
-                <input className="bg-[#371A51] w-full outline-none" placeholder="Search handbook" />
-                <DarkModeToggle />
+            <div className="mt-14 max-w-4xl w-full pr-16">
+                <div className="flex space-x-3 text-base items-center text-white py-3 rounded px-5 bg-[#371A51] shadow-2xl">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        />
+                    </svg>
+                    <input className="bg-[#371A51] w-full outline-none" placeholder="Search handbook" />
+                    <DarkModeToggle />
+                </div>
             </div>
         </div>
     )
@@ -182,7 +156,7 @@ function Footer({ contributors }) {
         <footer className="bg-[#200935] dark:text-white pb-52">
             <div className="bg-[#371A51] px-5">
                 <div className="py-14 max-w-screen-2xl mx-auto ">
-                    <div className="ml-[200px] max-w-3xl w-full">
+                    <div className="ml-[200px] max-w-4xl w-full">
                         <h2>Reach out</h2>
                         <p>
                             If you need help on any of the above, feel free to create an issue on our repo, or join our
@@ -249,7 +223,7 @@ function Footer({ contributors }) {
     )
 }
 
-export default function Handbook({ data: { post } }) {
+export default function Handbook({ data: { post }, pageContext: { menu, next } }) {
     const {
         body,
         frontmatter,
@@ -283,10 +257,10 @@ export default function Handbook({ data: { post } }) {
             <div className="relative px-5">
                 <div className="dark:text-white pt-16 flex max-w-screen-2xl mx-auto items-start">
                     <aside className="flex-shrink-0 max-w-[200px] w-full sticky top-10 pr-5">
-                        <MainSidebar slug={slug} />
+                        <MainSidebar menu={menu} slug={slug} />
                     </aside>
-                    <main className="flex flex-grow space-x-16 relative items-start">
-                        <div className="max-w-3xl w-full relative  pb-14">
+                    <main className="flex flex-grow relative items-start">
+                        <article className="max-w-4xl w-full relative  pb-14">
                             <section className="mb-16">
                                 <h1 className="dark:text-white text-5xl m-0">{title}</h1>
                                 <p className="dark:text-light-purple mt-1 mb-0">
@@ -294,16 +268,44 @@ export default function Handbook({ data: { post } }) {
                                 </p>
                             </section>
                             <article>
-                                <MDXProvider components={components}>
-                                    <MDXRenderer>{body}</MDXRenderer>
-                                </MDXProvider>
+                                <div className="pr-16">
+                                    <MDXProvider components={components}>
+                                        <MDXRenderer>{body}</MDXRenderer>
+                                    </MDXProvider>
+                                </div>
                             </article>
 
                             <div
                                 style={{ height: 'calc(100% - 35vh)' }}
-                                className="w-[1px] absolute bottom-0 -right-16 bg-[#765494] flex justify-center"
+                                className="w-[1px] absolute bottom-0 right-0 bg-[#765494] flex justify-center"
                             />
-                        </div>
+                            {next && (
+                                <section className="pt-9 mt-9 border-t border-[#765494]">
+                                    <p className="dark:text-white opacity-70 font-bold m-0">NEXT UP</p>
+
+                                    <Link
+                                        className="dark:text-yellow text-lg flex items-center space-x-1"
+                                        to={next.url}
+                                    >
+                                        <span>{next.name}</span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-6 w-6"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                            />
+                                        </svg>
+                                    </Link>
+                                </section>
+                            )}
+                        </article>
                         <aside className="max-w-[350px] flex-shrink-0 sticky top-10 mt-[35vh] pl-6">
                             <InternalSidebar tableOfContents={tocFlattened} />
                         </aside>

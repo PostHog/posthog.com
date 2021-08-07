@@ -1,0 +1,137 @@
+{
+    "handbook": [
+        {
+            "name": "Company",
+            "url": "",
+            "children": [
+                {
+                    "name": "Story",
+                    "url": "/handbook/company/story"
+                },
+                {
+                    "name": "Team",
+                    "url": "/handbook/company/team"
+                },
+                {
+                    "name": "Investors",
+                    "url": "/handbook/strategy/investors"
+                }
+            ]
+        },
+        {
+            "name": "Strategy",
+            "url": "",
+            "children": [
+                {
+                    "name": "Strategy overview",
+                    "url": "/handbook/strategy/strategy"
+                },
+                {
+                    "name": "Business model",
+                    "url": "/handbook/strategy/business-model"
+                },
+                {
+                    "name": "Roadmap",
+                    "url": "/handbook/strategy/roadmap"
+                },
+                {
+                    "name": "Prioritization",
+                    "url": "/handbook/strategy/prioritization"
+                }
+            ]
+        },
+        {
+            "name": "Getting started",
+            "children": [
+                {
+                    "name": "Start here",
+                    "url": "/handbook/getting-started/start-here"
+                },
+                {
+                    "name": "Meetings",
+                    "url": "/handbook/getting-started/meetings"
+                }
+            ]
+        },
+        {
+            "name": "How we work",
+            "url": "",
+            "children": [
+                {
+                    "name": "Culture",
+                    "url": "/handbook/company/culture"
+                },
+                {
+                    "name": "Values",
+                    "url": "/handbook/company/values"
+                },
+                {
+                    "name": "Diversity and inclusion",
+                    "url": "/handbook/company/diversity"
+                },
+                {
+                    "name": "Communication",
+                    "url": "/handbook/company/communication"
+                },
+                {
+                    "name": "Management at PostHog",
+                    "url": "/handbook/company/management"
+                },
+                {
+                    "name": "Security",
+                    "url": "/handbook/company/security"
+                },
+                {
+                    "name": "Branding",
+                    "url": "/handbook/company/branding"
+                },
+                {
+                    "name": "Team Structure",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Team structure",
+                            "url": "/handbook/people/team-structure/team-structure"
+                        },
+                        {
+                            "name": "Why Small Teams",
+                            "url": "/handbook/people/team-structure/why-small-teams"
+                        },
+                        {
+                            "name": "Team Core Analytics",
+                            "url": "/handbook/people/team-structure/core-analytics"
+                        },
+                        {
+                            "name": "Team Core Experience",
+                            "url": "/handbook/people/team-structure/core-experience"
+                        },
+                        {
+                            "name": "Team Design",
+                            "url": "/handbook/people/team-structure/design"
+                        },
+                        {
+                            "name": "Team Extensibility",
+                            "url": "/handbook/people/team-structure/extensibility"
+                        },
+                        {
+                            "name": "Team Growth",
+                            "url": "/handbook/people/team-structure/growth-engineering"
+                        },
+                        {
+                            "name": "Team Infrastructure & Deployments",
+                            "url": "/handbook/people/team-structure/infrastructure"
+                        },
+                        {
+                            "name": "Team Marketing",
+                            "url": "/handbook/people/team-structure/marketing"
+                        },
+                        {
+                            "name": "Team People",
+                            "url": "/handbook/people/team-structure/people"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

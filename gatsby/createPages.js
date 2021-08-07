@@ -21,12 +21,30 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
+            sidebars: file(absolutePath: { regex: "//sidebars/sidebars-new.json$/" }) {
+                childSidebarsJson {
+                    handbook {
+                        children {
+                            children {
+                                name
+                                url
+                            }
+                            name
+                            url
+                        }
+                        name
+                        url
+                    }
+                }
+            }
         }
     `)
 
     if (result.errors) {
         return Promise.reject(mdPagesResult.errors)
     }
+
+    const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
 
     result.data.allMdx.nodes.forEach((node) => {
         createPage({
@@ -39,11 +57,31 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     })
 
     result.data.handbook.nodes.forEach((node) => {
+        const { slug } = node.fields
+        let next = null
+        const findNext = (menu, previousNext) => {
+            for (let [index, item] of menu.entries()) {
+                const { url } = item
+                const nextMenu = menu[index + 1]
+                const nextItem = nextMenu?.url ? nextMenu : nextMenu?.children[0]
+                if (url === slug) {
+                    next = nextItem || previousNext
+                    break
+                }
+                if (item.children) {
+                    findNext(item.children, nextItem)
+                }
+            }
+        }
+        findNext(handbookMenu)
+
         createPage({
             path: replacePath(node.fields.slug),
             component: HandbookTemplate,
             context: {
                 id: node.id,
+                next,
+                menu: handbookMenu,
             },
         })
     })
