@@ -3,7 +3,6 @@ import Header from 'components/Header'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { Link } from 'gatsby'
-import { Transition } from '@headlessui/react'
 import Scrollspy from 'react-scrollspy'
 import planets from '../images/planets.svg'
 import { DarkModeToggle } from '../components/DarkModeToggle'
@@ -89,28 +88,34 @@ function MainSidebar({ slug, menu }) {
 function InternalSidebar(props) {
     const { tableOfContents } = props
     const [navBallLocation, setNavBallLocation] = useState(null)
-    const handleInternalNavUpdate = () => {
-        const el = document.querySelector('.active-link')
+    const [activeId, setActiveId] = useState(null)
+    const handleInternalNavUpdate = (el) => {
         if (el) {
-            setNavBallLocation(el.offsetTop + 7)
+            const activeEl = document.querySelector('.active-link')
+            setActiveId(el.id)
+            setNavBallLocation(activeEl.offsetTop + 7)
         }
     }
     return (
         <div className="relative">
             <div
                 style={{ top: navBallLocation || 0 }}
-                className="bg-white rounded-full w-2 h-2 z-10 absolute -left-7 transition-all"
+                className="bg-white rounded-full w-2 h-2 z-10 absolute -left-7 transition-all hidden lg:block"
             />
             <p className="text-light-purple text-base mt-0 mb-2">On this page</p>
             <Scrollspy
                 onUpdate={handleInternalNavUpdate}
                 className="list-none m-0 p-0 flex flex-col space-y-2"
                 items={tableOfContents?.map((navItem) => navItem.url)}
-                currentClassName="active-link opacity-100"
+                currentClassName="active-link"
             >
                 {tableOfContents?.map((navItem, index) => {
                     return (
-                        <li className="hover:opacity-100 opacity-50" key={index}>
+                        <li
+                            style={activeId === navItem.url ? { opacity: '1' } : {}}
+                            className="hover:opacity-100 lg:opacity-60"
+                            key={index}
+                        >
                             <a className={`dark:text-white dark:hover:text-white`} href={`#${navItem.url}`}>
                                 {navItem.name}
                             </a>
@@ -126,8 +131,8 @@ const A = (props) => <a {...props} className="dark:text-yellow font-bold" />
 
 function SearchBar(props) {
     return (
-        <div className="pl-[200px] max-w-screen-2xl mx-auto handbook-search ">
-            <div className="mt-14 max-w-4xl w-full pr-16">
+        <div className="lg:pl-[200px] max-w-screen-2xl mx-auto handbook-search px-5">
+            <div className="mt-14 max-w-4xl w-full lg:pr-16">
                 <div className="flex space-x-3 text-base items-center text-white py-3 rounded px-5 bg-[#371A51] shadow-2xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +161,7 @@ function Footer({ contributors }) {
         <footer className="bg-[#200935] dark:text-white pb-52">
             <div className="bg-[#371A51] px-5">
                 <div className="py-14 max-w-screen-2xl mx-auto ">
-                    <div className="ml-[200px] max-w-4xl w-full">
+                    <div className="lg:pl-[200px] max-w-4xl w-full">
                         <h2>Reach out</h2>
                         <p>
                             If you need help on any of the above, feel free to create an issue on our repo, or join our
@@ -179,7 +184,7 @@ function Footer({ contributors }) {
                                 })}
                             </ul>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <h3 className="text-base">Docs</h3>
                                 <ul className="m-0 p-0 list-none">
@@ -256,10 +261,10 @@ export default function Handbook({ data: { post }, pageContext: { menu, next } }
             <SearchBar />
             <div className="relative px-5">
                 <div className="dark:text-white pt-16 flex max-w-screen-2xl mx-auto items-start">
-                    <aside className="flex-shrink-0 max-w-[200px] w-full sticky top-10 pr-5">
+                    <aside className="flex-shrink-0 max-w-[200px] w-full sticky top-10 pr-5 mb-14 hidden sm:block">
                         <MainSidebar menu={menu} slug={slug} />
                     </aside>
-                    <main className="flex flex-grow relative items-start">
+                    <main className="flex flex-grow relative items-start flex-col-reverse lg:flex-row">
                         <article className="max-w-4xl w-full relative  pb-14">
                             <section className="mb-16">
                                 <h1 className="dark:text-white text-5xl m-0">{title}</h1>
@@ -267,17 +272,14 @@ export default function Handbook({ data: { post }, pageContext: { menu, next } }
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             </section>
-                            <article>
-                                <div className="pr-16">
-                                    <MDXProvider components={components}>
-                                        <MDXRenderer>{body}</MDXRenderer>
-                                    </MDXProvider>
-                                </div>
-                            </article>
-
+                            <div className="lg:pr-16">
+                                <MDXProvider components={components}>
+                                    <MDXRenderer>{body}</MDXRenderer>
+                                </MDXProvider>
+                            </div>
                             <div
                                 style={{ height: 'calc(100% - 35vh)' }}
-                                className="w-[1px] absolute bottom-0 right-0 bg-[#765494] flex justify-center"
+                                className="w-[1px] absolute bottom-0 right-0 bg-[#765494] hidden lg:flex justify-center"
                             />
                             {next && (
                                 <section className="pt-9 mt-9 border-t border-[#765494]">
@@ -306,7 +308,7 @@ export default function Handbook({ data: { post }, pageContext: { menu, next } }
                                 </section>
                             )}
                         </article>
-                        <aside className="max-w-[350px] flex-shrink-0 sticky top-10 mt-[35vh] pl-6">
+                        <aside className="lg:max-w-[350px] lg:flex-shrink-0 lg:sticky lg:top-10 lg:mt-[35vh] lg:pl-6 mb-14">
                             <InternalSidebar tableOfContents={tocFlattened} />
                         </aside>
                     </main>

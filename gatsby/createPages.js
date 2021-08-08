@@ -62,8 +62,8 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         const findNext = (menu, previousNext) => {
             for (let [index, item] of menu.entries()) {
                 const { url } = item
-                const nextMenu = menu[index + 1]
-                const nextItem = nextMenu?.url ? nextMenu : nextMenu?.children[0]
+                const nextIndex = menu[index + 1]
+                const nextItem = nextIndex?.url ? nextIndex : nextIndex?.children[0]
                 if (url === slug) {
                     next = nextItem || previousNext
                     break
