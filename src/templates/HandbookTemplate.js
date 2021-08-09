@@ -230,7 +230,7 @@ function Footer({ contributors }) {
     )
 }
 
-export default function Handbook({ data: { post }, pageContext: { menu, next } }) {
+export default function Handbook({ data: { post }, pageContext: { menu, next, breadcrumb = [] } }) {
     const {
         body,
         frontmatter,
@@ -268,8 +268,35 @@ export default function Handbook({ data: { post }, pageContext: { menu, next } }
                     </aside>
                     <main className="flex flex-grow relative items-start flex-col-reverse lg:flex-row">
                         <article className="max-w-4xl w-full relative  pb-14">
-                            <section className="mb-16">
-                                <h1 className="dark:text-white text-5xl m-0">{title}</h1>
+                            <section className="mb-16 relative">
+                                {breadcrumb && (
+                                    <ul className="text-[#765494] list-none p-0 m-0 flex font-semibold space-x-2 mb-2 -mt-2 absolute -top-4">
+                                        {breadcrumb.map((crumb, index) => {
+                                            return (
+                                                <li key={index} className="flex items-center space-x-2">
+                                                    <span>{crumb}</span>
+                                                    {breadcrumb[index + 1] && (
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className="h-4 w-4"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                                            />
+                                                        </svg>
+                                                    )}
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                )}
+                                <h1 className="dark:text-white text-5xl mt-0 mb-2">{title}</h1>
                                 <p className="dark:text-light-purple mt-1 mb-0">
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>

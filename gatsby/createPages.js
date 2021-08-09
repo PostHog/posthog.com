@@ -44,7 +44,20 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         return Promise.reject(mdPagesResult.errors)
     }
 
+    function flattenMenu(items, breadcrumb = []) {
+        return items.reduce((acc, item) => {
+            if (item.url) {
+                acc.push({ url: item.url, name: item.name, breadcrumb })
+            }
+            if (item.children) {
+                acc.push(...flattenMenu(item.children, [...breadcrumb, item.name]))
+            }
+            return acc
+        }, [])
+    }
+
     const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
+    const handbookMenuFlattened = flattenMenu(handbookMenu)
 
     result.data.allMdx.nodes.forEach((node) => {
         createPage({
@@ -59,21 +72,14 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     result.data.handbook.nodes.forEach((node) => {
         const { slug } = node.fields
         let next = null
-        const findNext = (menu, previousNext) => {
-            for (let [index, item] of menu.entries()) {
-                const { url } = item
-                const nextIndex = menu[index + 1]
-                const nextItem = nextIndex?.url ? nextIndex : nextIndex?.children[0]
-                if (url === slug) {
-                    next = nextItem || previousNext
-                    break
-                }
-                if (item.children) {
-                    findNext(item.children, nextItem)
-                }
+        let breadcrumb = null
+        handbookMenuFlattened.some((item, index) => {
+            if (item.url === slug) {
+                next = handbookMenuFlattened[index + 1]
+                breadcrumb = item.breadcrumb
+                return true
             }
-        }
-        findNext(handbookMenu)
+        })
 
         createPage({
             path: replacePath(node.fields.slug),
@@ -82,6 +88,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 id: node.id,
                 next,
                 menu: handbookMenu,
+                breadcrumb,
             },
         })
     })
