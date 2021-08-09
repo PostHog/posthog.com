@@ -7,7 +7,7 @@ tags:
   - gcp
 ---
 
-First we need to set up a Kubernetes Cluster, see [Google Cloud Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/).
+First, we need to set up a Kubernetes Cluster. See [Google Cloud Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/).
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 ```yaml
@@ -56,7 +56,7 @@ This can be done via the following command:
 gcloud beta --project yourproject compute ssl-certificates list
 ```
 
-If running the command shows the SSL cert as `PROVISIONING`, that means that the certificate is still being created. [Read more on how to troubleshoot Google SSL certificates here](https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting)
+If running the command shows the SSL cert as `PROVISIONING`, that means that the certificate is still being created. [Read more on how to troubleshoot Google SSL certificates here](https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting).
 
 As a troubleshooting tool, you can allow HTTP access by setting `ingress.gcp.forceHttps` and `web.secureCookies` both to false, but we recommend always accessing PostHog via https.
 
@@ -71,7 +71,7 @@ helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/po
 
 > See [the Helm docs](https://helm.sh/docs/helm/helm_upgrade/) for documentation on the `helm upgrade` command.
 
-When upgrading major versions, see [Upgrade notes](/docs/self-host/deploy/upgrade-notes)
+When upgrading major versions, see [Upgrade notes](/docs/self-host/deploy/upgrade-notes).
 
 
 ## Uninstalling the Chart
@@ -83,7 +83,7 @@ $ helm uninstall posthog --namespace posthog
 
 > See [the Helm docs](https://helm.sh/docs/helm/helm_uninstall/) for documentation on the `helm uninstall` command.
 
-The command above removes all the Kubernetes components associated with the chart and deletes the release. Sometimes everything doesn't get properly removed, if that happens try deleting the namespace
+The command above removes all the Kubernetes components associated with the chart and deletes the release. Sometimes everything doesn't get properly removed. If that happens try deleting the namespace
 ```console
 kubectl delete namespace posthog
 ```

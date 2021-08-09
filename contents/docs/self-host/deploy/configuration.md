@@ -1,6 +1,6 @@
 ---
 title: Posthog Clickhouse Chart Configuration
-sidebarTitle: Configuration
+sidebarTitle: Chart Configuration
 sidebar: Docs
 showTitle: true
 ---
@@ -21,16 +21,16 @@ There is optional support for the following additional dependencies:
 - [prometheus-community/prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
 - [prometheus-community/prometheus-statsd-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-statsd-exporter)
 
-See the [Configuration](#configuration) section for how to enable and configure each.
+See the [Chart configuration](#chart-configuration) section for how to enable and configure each.
 
-## Configuration
+## Chart configuration
 
-Dependent charts can also have values overwritten. Preface values with `postgresql.*`, see options for each chart in [ALL_VALUES.md](ALL_VALUES.md) or under each charts repos in [Dependencies](#dependencies).
+Dependent charts can also have values overwritten. Preface values with `postgresql.*`, see options for each chart in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or under each charts repos in [Dependencies](#dependencies).
 
-All configuration options can be found in [ALL_VALUES.md](ALL_VALUES.md) or in [values.yaml](values.yaml) file.
+All configuration options can be found in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or in [values.yaml](values.yaml) file.
 
 ### Setting up email
-Outgoing email is used for password reset for example. For posthog to be able to send emails we need a login and password. Add these settings to your `values.yaml`:
+Outgoing email is used for password reset. For PostHog to be able to send emails we need a login and password. Add these settings to your `values.yaml`:
 ```yaml
 email:
   user: <your STMP login user>
@@ -134,7 +134,7 @@ By default, ClickHouse is installed as a part of the chart, powered by [clickhou
 
 To use an external `ClickHouse` cluster, set `clickhouseOperator.enabled` to `false` and set `clickhouse.host`, `clickhouse.database`, `clickhouse.user` and `clickhouse.password`.
 
-_See [ALL_VALUES.md](ALL_VALUES.md) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
 ### [PostgreSQL](https://www.postgresql.org/)
 
@@ -142,34 +142,34 @@ _See [ALL_VALUES.md](ALL_VALUES.md) for full configuration options._
 
 By default, PostgreSQL is installed as part of the chart. To use an external PostgreSQL server set `postgresql.enabled` to `false` and then set `postgresql.postgresHost` and `postgresql.postgresqlPassword`. The other options (`postgresql.postgresqlDatabase`, `postgresql.postgresqlUsername` and `postgresql.postgresqlPort`) may also want changing from their default values.
 
-To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See https://github.com/helm/charts/tree/master/stable/postgresql#upgrade for more detail.
+To avoid issues when upgrading this chart, provide `postgresql.postgresqlPassword` for subsequent upgrades. This is due to an issue in the PostgreSQL chart where password will be overwritten with randomly generated passwords otherwise. See [PostgreSQL#upgrade](https://github.com/helm/charts/tree/master/stable/postgresql#upgrade) for more detail.
 
-_See [ALL_VALUES.md](ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) for full configuration options._
 
 ### [Redis](https://redis.io/)
 
-By default, Redis is installed as part of the chart. To use an external Redis server/cluster set `redis.enabled` to `false` and then set `redis.host`. If your redis cluster uses password define it with `redis.password`, otherwise just omit it. Check the table above for more configuration options.
+By default, Redis is installed as part of the chart. To use an external Redis server/cluster set `redis.enabled` to `false` and then set `redis.host`. If your Redis cluster uses a password define it with `redis.password`, otherwise just omit it.
 
-To avoid issues when upgrading this chart, provide `redis.password` for subsequent upgrades. Otherwise the redis pods will get recreated on every update, potentially incurring some downtime.
+To avoid issues when upgrading this chart, provide `redis.password` for subsequent upgrades. Otherwise, the Redis pods will get recreated on every update, potentially incurring some downtime.
 
-_See [ALL_VALUES.md](ALL_VALUES.md) and [redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
 
 ### [Kafka](https://kafka.apache.org/)
 
-By default, Kafka is installed as part of the chart. Kafka is used as a queue between the posthog web application and posthog plugin server to manage data ingestion as well as for ingesting data into ClickHouse.
+By default, Kafka is installed as part of the chart. Kafka is used as a queue between the PostHog web application and PostHog plugin server to manage data ingestion as well as for ingesting data into ClickHouse.
 
-_See [ALL_VALUES.md](ALL_VALUES.md) and [kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
+_See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and [kafka chart](https://github.com/bitnami/charts/tree/master/bitnami/kafka) for full configuration options._
 
 
 ### [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 
-This chart provides support for Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.nginx.enabled` to true or `ingress.type` and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
+This chart provides support for the Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.nginx.enabled` to true or `ingress.type` and choose an `ingress.hostname` for the URL. Then, you should be able to access the installation using that address.
 
 ### [Prometheus](https://prometheus.io/docs/introduction/overview/)
 
 This chart supports alerting. Set `prometheus.enabled` to true and set `prometheus.alertmanagerFiles` to the right configuration.
 
-Read more at https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus and https://prometheus.io/docs/alerting/latest/configuration/
+Read more at [Prometheus chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) and [Prometheus configuration](https://prometheus.io/docs/alerting/latest/configuration/)
 
 #### Example configuration ([PagerDuty](https://www.pagerduty.com/))
 
@@ -195,5 +195,4 @@ prometheus:
 This might be useful when checking out metrics. Figure out your `prometheus-server` pod name via `kubectl get pods --namespace NS` and run:
 `kubectl --namespace NS port-forward posthog-prometheus-server-XXX 9090`.
 
-After this you should be able to access prometheus server on `localhost`.
-
+After this, you should be able to access Prometheus server on `localhost`.

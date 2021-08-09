@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-For all other platforms we suggest setting up Kubernetes first and using the helm chart directly to deploy a Posthog instance with Nginx ingress controller.
+For all other platforms, we suggest setting up Kubernetes first and using the helm chart directly to deploy a PostHog instance with Nginx ingress controller.
 
 ## Prerequisites
 - [Kubernetes](http://kubernetes.io) 1.4+ with Beta APIs enabled
@@ -55,7 +55,7 @@ web:
   secureCookies: false
 ```
 
-After upgrading you can run the following to get the IP to access Posthog.
+After upgrading you can run the following to get the IP to access PostHog:
 ```console
 export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 echo "Visit http://$INGRESS_IP to use PostHog\!"
@@ -72,7 +72,7 @@ helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/po
 
 > See [the Helm docs](https://helm.sh/docs/helm/helm_upgrade/) for documentation on the `helm upgrade` command.
 
-When upgrading major versions, see [Upgrade notes](/docs/self-host/deploy/upgrade-notes)
+When upgrading major versions, see [Upgrade notes](/docs/self-host/deploy/upgrade-notes).
 
 
 ## Uninstalling the Chart
@@ -84,8 +84,7 @@ $ helm uninstall posthog --namespace posthog
 
 > See [the Helm docs](https://helm.sh/docs/helm/helm_uninstall/) for documentation on the `helm uninstall` command.
 
-The command above removes all the Kubernetes components associated with the chart and deletes the release. Sometimes everything doesn't get properly removed, if that happens try deleting the namespace
+The command above removes all the Kubernetes components associated with the chart and deletes the release. Sometimes everything doesn't get properly removed. If that happens try deleting the namespace:
 ```console
 kubectl delete namespace posthog
 ```
-

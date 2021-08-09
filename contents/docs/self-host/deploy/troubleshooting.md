@@ -15,9 +15,9 @@ You might see one of these errors from `helm install`:
 Error: failed post-install: timed out waiting for the condition
 Error: failed pre-install: timed out waiting for the condition
 ```
-One of the potential causes is that we couldn't find enough resources to schedule all the services Posthog needs to run. To know if resources are a problem we can check pod status and errors while the `helm install` command is still running.
-1. check the output for `kubectl get pods -n posthog` if you see any pending pods for a long time then that could be the problem
-2. check if the pending pod has scheduling errors `kubectl describe pod <podname> -n posthog`. For example at the end in events section we could see that we didn't have enough memory to schedule the pod.
+One of the potential causes is that we couldn't find enough resources to schedule all the services Posthog needs to run. To know if resources are a problem we can check pod status and errors while the `helm install` command is still running:
+1. check the output for `kubectl get pods -n posthog` and if you see any pending pods for a long time then that could be the problem
+2. check if the pending pod has scheduling errors using `kubectl describe pod <podname> -n posthog`. For example, at the end of the events section we could see that we didn't have enough memory to schedule the pod.
 ```
 Events:
   Type     Reason             Age                  From                Message
@@ -30,7 +30,7 @@ Events:
 
 ### Connection is not secure
 
-First check that DNS is set up properly
+First, check that DNS is set up properly:
 ```console
 nslookup <your-hostname> 1.1.1.1
 ```
