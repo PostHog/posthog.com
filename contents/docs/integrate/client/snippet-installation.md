@@ -18,7 +18,7 @@ Here's a 25-second video showing how to use the bookmarklet to capture events in
 
 This snippet will be provided to you during setup, but, if you need to access it afterwards, you can find it under 'Project' -> 'Settings':
 
-![Snippet Settings Screenshot](../../images/features/snippet/snippet-settings.png)
+![Snippet Settings Screenshot](../../../images/features/snippet/snippet-settings.png)
 
 
 ### Adding the snippet to your website

@@ -7,6 +7,8 @@ import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
+import { BlogFeaturedImage } from './components/Blog/BlogFeaturedImage'
+import { BlogIntro } from './components/Blog/BlogIntro'
 import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
 import { BlogShareButtons } from './components/Blog/BlogShareButtons'
@@ -59,6 +61,7 @@ import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
+import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
@@ -84,6 +87,7 @@ import { DesignedForYourStackBlock } from './components/Sections/DesignedForYour
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SignupModal } from './components/SignupModal'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
@@ -99,6 +103,8 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
+    BlogFeaturedImage,
+    BlogIntro,
     BlogPostLayout,
     BlogPosts,
     BlogShareButtons,
@@ -151,6 +157,7 @@ export const shortcodes = {
     NewsletterForm,
     NotFoundPage,
     OtherFeaturesBlock,
+    OverflowXSection,
     PageHeader,
     PlanComparisonTable,
     PostCard,
@@ -176,6 +183,7 @@ export const shortcodes = {
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SignupModal,
     Spacer,
     StarRepoButton,
     StartNowButton,

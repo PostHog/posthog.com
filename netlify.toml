@@ -128,82 +128,95 @@
     from = "/handbook/growth/customer-success"
     to = "/handbook/growth/customer-support"
 
-    
+
 [[redirects]]
     from = "/handbook/growth/customer-success"
     to = "/handbook/growth/customer-support"
 
-    
+
 [[redirects]]
     from = "/handbook/getting-started"
     to = "/handbook/getting-started/start-here"
 
-    
+
 [[redirects]]
     from = "/handbook/getting-started"
     to = "/handbook/getting-started/start-here"
 
-    
 [[redirects]]
     from = "/handbook/people/team-structure/user-experience"
     to = "/handbook/people/team-structure/core-experience"
 
-    
+
 [[redirects]]
-    from = "/docs/plugins/build"
-    to = "/docs/plugins/build/overview"
+    from = "/docs/plugins/build/overview"
+    to = "/docs/plugins/build"
 
 
 [[redirects]]
     from = "/docs/plugins/types"
     to = "/docs/plugins/build/types"
-    
+
 [[redirects]]
     from = "/docs/developing-locally"
     to = "/docs/contributing/developing-locally"
 
-    
+
 [[redirects]]
     from = "/docs/project-structure"
     to = "/docs/contributing/project-structure"
 
-    
+
 [[redirects]]
     from = "/docs/recognizing-contributions"
     to = "/docs/contributing/recognizing-contributions"
 
-    
+
 [[redirects]]
     from = "/docs/stack"
     to = "/docs/contributing/stack"
 
-    
+
 [[redirects]]
     from = "/docs/updating-documentation"
     to = "/docs/contributing/updating-documentation"
 
+
+[[redirects]]
+    from = "/docs/configuring-posthog/scaling-posthog"
+    to = "/docs/self-host"
+
+[[redirects]]
+    from = "/docs/self-host/overview"
+    to = "/docs/self-host"
+
+
 [[redirects]]
     from = "/docs/deployment"
-    to = "/docs/self-hosting/overview#deploy"
+    to = "/docs/self-host#deploy"
+
+[[redirects]]
+    from = "/docs/self-host/configure"
+    to = "/docs/self-host#configure"
 
 [[redirects]]
     from = "/docs/configuring-posthog"
-    to = "/docs/self-hosting/overview#configure"
+    to = "/docs/self-host/configure"
 
-    
+# Modified: 2021-08-03
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
-    to = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
 
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/contributing/developing-locally"
     to = "/docs/contribute/developing-locally"
 
-# Added: 2021-07-13
+# Added: 2021-07-13 Updated: 2021-07-17
 [[redirects]]
     from = "/docs/contributing"
-    to = "/docs/contribute/overview"
+    to = "/docs/contribute"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -372,11 +385,6 @@
 
 # Added: 2021-07-13
 [[redirects]]
-    from = "/docs/configuring-posthog/scaling-posthog"
-    to = "/docs/self-host/configure/scaling-posthog"
-
-# Added: 2021-07-13
-[[redirects]]
     from = "/docs/configuring-posthog/securing-posthog"
     to = "/docs/self-host/configure/securing-posthog"
 
@@ -418,6 +426,11 @@
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/deployment/deploy-gcs"
+    to = "/docs/self-host/deploy/google-cloud-services"
+
+# Fixes orphan link(s)
+[[redirects]]
+    from = "/docs/self-host/deploy/gcs"
     to = "/docs/self-host/deploy/google-cloud-services"
 
 # Added: 2021-07-13
@@ -550,23 +563,120 @@
     from = "/docs/features/users"
     to = "/docs/user-guides/users"
 
-# Added: 2021-07-13
+# Added: 2021-07-13 Updated: 2021-07-17
 [[redirects]]
-    from = "/docs/tutorials"
-    to = "/docs/tutorials/overview"
+    from = "/docs/tutorials/overview"
+    to = "/docs/tutorials"
 
-# Added: 2021-07-13
+# Added: 2021-07-13 Updated: 2021-07-17
 [[redirects]]
     from = "/docs/features"
-    to = "/docs/user-guides/overview"
+    to = "/docs/user-guides"
 
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/tutorials/1-minute/survey"
     to = "/docs/tutorials/survey"
-    
+
 # Added: 2021-07-14
-# To improve the website's intuitive navigation experience
+# Not due to a rename, but to improve the website's navigation experience
 [[redirects]]
     from = "/features"
     to = "/product"
+
+# Added: 2021-07-16 Updated: 2021-07-17
+[[redirects]]
+    from = "/docs/integrate/overview"
+    to = "/docs/integrate"
+
+# Added: 2021-07-16 Updated: 2021-07-17
+[[redirects]]
+    from = "/docs/integrations"
+    to = "/docs/integrate"
+
+# Added: 2021-07-16
+[[redirects]]
+    from = "/docs/libraries"
+    to = "/docs/integrate"
+    
+# Added: 2021-07-17
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/signup"
+    to = "/pricing"
+
+# Added: 2021-07-21
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/product-features"
+    to = "/product"
+
+# Added: 2021-07-28
+[[redirects]]
+    from = "/docs/self-host/deploy/render"
+    to = "/docs/self-host/deploy/other#render"
+
+# Added: 2021-07-28
+[[redirects]]
+    from = "/docs/self-host/deploy/qovery"
+    to = "/docs/self-host/deploy/other"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/tutorials/actions"
+    to = "/docs/tutorials/event-tracking-guide"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/plugins/overview"
+    to = "/docs/plugins"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/api/overview"
+    to = "/docs/api"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/contribute/overview"
+    to = "/docs/contribute"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/user-guides/overview"
+    to = "/docs/user-guides"
+
+# Added: 2021-07-17
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/signup"
+    to = "/pricing"
+
+# Added: 2021-08-02
+[[redirects]]
+    from = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/data-model"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/android/index"
+    to = "/docs/integrate/client/android"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/flutter/snippets/install"
+    to = "/docs/integrate/client/flutter"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/ios/index"
+    to = "/docs/integrate/client/ios"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/js/index"
+    to = "/docs/integrate/client/js"

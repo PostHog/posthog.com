@@ -51,6 +51,7 @@ function Template(props) {
                 blogDate={frontmatter.date}
                 pageTitle={frontmatter.title}
                 featuredImage={frontmatter.featuredImage?.publicURL}
+                featuredImageType={frontmatter.featuredImageType}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 onBlogPage={!!blogArticleSlug}
@@ -101,6 +102,7 @@ export const pageQuery = graphql`
                 date(formatString: "MMMM DD, YYYY")
                 title
                 sidebar
+                featuredImageType
                 featuredImage {
                     publicURL
                 }

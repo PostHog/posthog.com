@@ -1,6 +1,5 @@
 import React from 'react'
 import './styles/features.scss'
-import Layout from '../components/Layout'
 import { ProductHero } from '../components/ProductHero'
 import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
@@ -16,10 +15,13 @@ import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 import { useStaticQuery, graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
+import Header from 'components/Header'
+import Footer from 'components/Footer'
 
 function ProductPage() {
     return (
-        <Layout>
+        <>
+            <Header />
             <SEO title="Product • PostHog" />
             <div className="bg-purple">
                 <ProductHero
@@ -139,7 +141,7 @@ function ProductPage() {
                             />
 
                             <div className="md:py-12 px-2">
-                                <h3 className="mb-2 font-osiris font-normal text-2xl">Private cloud deployment</h3>
+                                <h3 className="mb-2 text-2xl">Private cloud deployment</h3>
                                 <div className="text-white text-opacity-70">
                                     <p>
                                         Run PostHog on your own private cloud with one of our install scripts, or get
@@ -449,7 +451,7 @@ function ProductPage() {
                             featureIcon="data-export"
                             featureName="Data export"
                             title="Send data where you need it"
-                            description="Export data for long-term storage or make your customer data available in other tools. list of integrations here"
+                            description="Export data for long-term storage or make your customer data available in other tools."
                             docsUrl="/docs/plugins/overview"
                             imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
@@ -505,7 +507,7 @@ function ProductPage() {
                             featureIcon="data-enrichment"
                             featureName="Data enrichment"
                             title="Enrich your data with external signals"
-                            description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why. grid of sources goes here"
+                            description="Ingest ancillary data from other sources that are helpful in creating a more complete picture of what happened and why."
                             docsUrl="/docs/plugins/overview"
                             imageClasses="w-screen-md max-w-content -mb-16 border-white border-12 md:border-16 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
                             classes=""
@@ -544,7 +546,8 @@ function ProductPage() {
                     bgColor="navy"
                 />
             </div>
-        </Layout>
+            <Footer />
+        </>
     )
 }
 

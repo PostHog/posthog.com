@@ -12,7 +12,7 @@ If you have any ideas for how we can improve our benefits offering, then please 
 
 ### Pension and 401k contributions
 
-We are currently in the process of setting up a 401k for our US team members, and are aiming to roll this out in Q2 2021. 
+We are currently in the process of setting up a 401k for our US team members, and are aiming to roll this out in Q3 2021. 
 
 In the UK, we use [Royal London](https://www.royallondon.com/) as our pension provider. Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you like, in case you would rather manage your own private pension. 
 
@@ -50,12 +50,22 @@ We currently offer a [Training budget](/handbook/people/training#training-budget
 
 As we are fully remote, we provide [all equipment](/handbook/people/spending-money#equipment) you need to have an ergonomic setup at home to be as productive as possible. We provide all team members with a company card for this purpose.
 
-If you ever need change of scenery, we offer $200/month budget towards [coworking or café working](/handbook/people/spending-money#work-space). 
+If you ever need change of scenery, we offer $200/month budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access). 
 
-### Off-sites and team socials
+> If you are in the US, we have a WeWork discount via Brex. Please message Eltje or Charles to get a code. 
 
-Ideally, we would like to meet up in person at twice a year. The team was able to meet up in Italy in September 2020, but we haven't been able to travel since, so we are planning a virtual off-site in April 2021 instead (and hopefully a real one on Autumn 2021!).
+### Off-sites 
+
+Ideally, we would like to meet up in person at twice a year. The team was able to meet up in Italy in September 2020, and we are heading to Portugal in August 2021.
 
 For any work-related travel, we use [Project Wren](https://www.wren.co/) for carbon offsetting. 
+
+### Team socials
+
+As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our offsites.
+
+We encourage team members to try and meet up with each other when practical, and provide everyone with an $250 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company. Any unused budget does not roll over each month.
+
+We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in the #whereintheworld channel in Slack and see who is available to meet up!
 
 We also have biweekly coffee catch-ups as a team, and we use the [Donut](https://www.donut.com/?ref=slackdirectory) Slack app to pair you up with random colleague on Slack. Simply join the #virtual-coffee channel on Slack and be paired up with someone on the team to meet for a virtual coffee/tea etc. 
