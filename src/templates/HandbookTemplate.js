@@ -260,7 +260,7 @@ export default function Handbook({ data: { post }, pageContext: { menu, next } }
             <Header className="max-w-screen-2xl" />
             <SearchBar />
             <div className="relative px-5">
-                <div className="dark:text-white pt-16 flex max-w-screen-2xl mx-auto items-start">
+                <div className="dark:text-white pt-16 flex max-w-screen-2xl mx-auto items-start relative z-10">
                     <aside className="flex-shrink-0 max-w-[200px] w-full sticky top-10 pr-5 mb-14 hidden sm:block">
                         <MainSidebar menu={menu} slug={slug} />
                     </aside>
