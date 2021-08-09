@@ -5,6 +5,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { Link } from 'gatsby'
 import Scrollspy from 'react-scrollspy'
 import planets from '../images/planets.svg'
+import footerLogo from '../images/posthog-logo-footer.svg'
 import { DarkModeToggle } from '../components/DarkModeToggle'
 import '../styles/handbook.scss'
 
@@ -161,7 +162,8 @@ function Footer({ contributors }) {
         <footer className="bg-[#200935] dark:text-white pb-52">
             <div className="bg-[#371A51] px-5">
                 <div className="py-14 max-w-screen-2xl mx-auto ">
-                    <div className="lg:pl-[200px] max-w-4xl w-full">
+                    <div className="lg:pl-[200px] max-w-4xl w-full relative">
+                        <img className="absolute -top-20" src={footerLogo} />
                         <h2>Reach out</h2>
                         <p>
                             If you need help on any of the above, feel free to create an issue on our repo, or join our
