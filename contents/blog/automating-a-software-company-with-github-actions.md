@@ -458,7 +458,7 @@ Here's what this looks like in GitHub's workflow visualization feature:
 <img alt="Visualization 1. Autobump" src="../images/blog/github-actions/1-autobump.png" width=287 height=167/>
 
 This is just the starting point though! That's because on every commit to `master` we check whether the version has been
-incremented, and if it has, all of the aforementioned relase tasks run automatically. It's magically effortless.
+incremented, and if it has, all of the aforementioned release tasks run automatically. It's magically effortless.
 
 In fact, there are so many tasks that run automatically that the workflow would take up too much space in this post,
 but you can take a look at one such full example over in our
