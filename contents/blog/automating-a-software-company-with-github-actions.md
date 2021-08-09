@@ -1,5 +1,5 @@
 ---
-date: 2077-01-01
+date: 2021-08-16
 title: Automating a Software Company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
@@ -9,20 +9,29 @@ categories: engineering
 author: michael-matloka
 ---
 
-When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure,
-launching new systems, phasing out deprecated solutions, ensuring security, keeping track of dependencies…
-Whew. And that is just the pure code part, product and people considerations aside.
+**This post shows how a good CI solution can automate your development workflow and help you focus on actual challenges
+instead of chores.  
+PostHog does the same for your product workflow: we're a product analytics platform that helps you discover
+how users use your product, and what could make their journey better.  
+[Try PostHog out for free.](https://posthog.com/product?utm_medium=blog&utm_campaign=github-actions-post)**
 
-Some of the above work requires a human brain every single time – software is all 1s and 0s, but (un)fortunately
-in the end it serves human purposes. Until a massive breakthrough in artificial intelligence occurs, figuring out
+When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure,
+launching new systems, phasing deprecated solutions out, ensuring security, keeping track of dependencies…
+Whew. And that's just the pure code part, product and people considerations aside.
+
+Now, some of the above work requires a human brain every single time – software is all 1s and 0s, but (un)fortunately
+in the end it serves human purposes. Without a massive breakthrough in artificial intelligence, figuring out
 features that compile AND suit human needs programmatically remains a pipe dream.
 
 What about… all these tedious tasks though? Running tests, publishing releases, deploying services,
 keeping the repository clean. Plain chores – boring and following the same pattern every time.
-All still important though!  
-We don't need any sort of AI for that. All we need is to define jobs that need to be done, and have those jobs run
-based on certain triggers. Non-AI software can do this.  
-And if our jobs software is integrated with version control? Things become just so easy.
+All still important though!
+
+We don't need intelligence (artificial or otherwise) for that every single time. We just need it once to define the jobs
+to be done, and have those jobs run based on some triggers. Sounds vaguely practical already?
+Let's take it more concrete: any programming language you want, any supporting services you need, ready-made solutions
+up for grabs, and great integration with a version control platform. That's how things become _really_ smoother –
+and so does your _actual_ job at the same time.
 
 ## Automation 101
 
@@ -35,19 +44,19 @@ for ultimate flexibility, and a multitude of them is freely available on
 the [GitHub Marketplace](https://github.com/marketplace?type=actions)
 
 This sounds pretty powerful already. But let's see where all this can truly take us with some concrete examples
-[right out of PostHog](https://github.com/PostHog).
+right out of [PostHog GitHub](https://github.com/PostHog).
 
-Mind you, similar things can be achieved with competing solutions such as GitLab CI/CD or Jenkins. GitHub Actions
+> Mind you, similar things can be achieved with competing solutions such as GitLab CI/CD or even Jenkins. GitHub Actions
 do have a seriously robust ecosystem though, despite being a relative newcomer, and at PostHog we've been avid users
-of GitHub since before the dotcom bubble – hence the focus of this article.
+of GitHub since its early ARPANET days – hence the focus of this article.
 
 ### Unit testing
 
 Unit tests are crucial for ensuring reliability of software. Don't skip writing them if you're building anything
-for real! But after that make sure that you don't skip also _running_ them. The latter you can do that by just running
-them _on each PR_ as it's being worked on. This used to be called ["extreme programming"](https://en.wikipedia.org/wiki/Extreme_programming), but today it's a standard practice.
+for real! But after that, make sure that you don't skip also _running_ them. The latter you can do that by just running
+them _on each PR_ as it's being worked on. This used to be called ["extreme programming"](https://en.wikipedia.org/wiki/Extreme_programming), but today it's standard practice.
 
-Here's a relevant basic workflow for Django: it checks whether a migration is missing, then runs test.
+Here's a basic Django-oriented workflow: it checks whether a migration is missing, then runs tests.
 
 Note how by defining a **matrix** we make this happen for three specified Python versions in parallel! This way
 we guarantee support of a range of versions.
@@ -86,8 +95,9 @@ jobs:
 
 ### End-to-end testing
 
-Some tests should cover not just the building blocks, but the assembled machine that your users expect
-to work as expected, well, end-to-end. We use [Cypress](https://www.cypress.io/) for that, and while not perfect,
+It's good to have the building blocks of your software covered with unit tests, but your users need the whole assembled
+machine to work, and that's why it's equally important to run end-to-end tests often.
+We use [Cypress](https://www.cypress.io/) for these, and while not perfect,
 [it's been a boon for us](/blog/cypress-end-to-end-tests). Here's the essence of our Cypress CI workflow:
 
 ```YAML
@@ -539,3 +549,31 @@ jobs:
               with:
                   message: Update MMDB on schedule
 ```
+
+### Stale PRs
+
+```YAML
+name: 'Handle stale PRs'
+on:
+    schedule:
+        - cron: '30 7 * * 1-5'
+
+jobs:
+    stale:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/stale@v4
+              with:
+                  only: pulls
+                  stale-pr-message: "This PR hasn't seen activity in a week! Should it be merged, closed, or further worked on? If you want to keep it open, post a comment or remove the `stale` label – otherwise this will be closed in another week."
+                  close-pr-message: 'This PR was closed due to 2 weeks of inactivity. Feel free to reopen it if still relevant.'
+                  days-before-pr-stale: 7
+                  days-before-pr-close: 7
+                  stale-issue-label: stale
+                  stale-pr-label: stale
+```
+
+## Summing Up
+
+Hopefully these real-life examples inspire you to build the right workflow for your work, spending a bit of time _once_
+to then reap the rewards of saved time/money (one and the same!) constantly.
