@@ -43,7 +43,7 @@
     {
         "entry": "Integrate",
         "name": "Integrate",
-        "items": ["docs/integrate"],
+        "items": ["docs/integrate", "docs/integrate/ingest-live-data", "docs/integrate/ingest-historic-data"],
         "child_entries": ["Client Libraries", "Server Libraries", "Third Party", "Webhooks"]
     },
     {
@@ -356,7 +356,11 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/customer-support"],
+        "items": [
+            "handbook/growth/strategy",
+            "handbook/growth/customer-support",
+            "handbook/growth/developer-relations"
+        ],
         "child_entries": ["Marketing", "Sales"]
     },
     {
@@ -369,8 +373,7 @@
             "handbook/growth/marketing/newsletter",
             "handbook/growth/marketing/paid",
             "handbook/growth/marketing/press",
-            "handbook/growth/marketing/releasing-content",
-            "handbook/growth/marketing/developer-relations"
+            "handbook/growth/marketing/releasing-content"
         ]
     },
     {

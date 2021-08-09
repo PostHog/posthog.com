@@ -8,12 +8,16 @@ showTitle: true
 
 > **Note:** If you're using the latest generation MacBooks (M1) have a look [at this issue](https://github.com/PostHog/posthog/issues/2916) for info on how to run PostHog.
 
+> If you want to run your development instance using **Clickhouse**, check out our [EE setup](/handbook/engineering/ee-setup) section (currently intended for internal use only).
+
 ### Clone PostHog
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/PostHog/posthog
 ```
+
 2. Make sure you have Python 3.8 installed `python3 --version`. [pyenv](https://github.com/pyenv/pyenv) is recommended to manage multiple Python versions and make sure you don't use the system version.
 
 ### Set up databases
@@ -30,7 +34,6 @@ docker-compose -f docker-compose.dev.yml up -d redis db
 > **Friendly tip:** You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
 
 </HiddenSection>
-
 
 <HiddenSection headingType='h4' title='Without Docker' id='dbs-without-docker'>
 
@@ -49,6 +52,7 @@ docker-compose -f docker-compose.dev.yml up -d redis db
     ```
 
 3. Create the Postgres database with the command `createdb posthog` on the shell or by using the Postgres interactive terminal:
+
     ```
     psql -d postgres
     CREATE DATABASE posthog;
@@ -57,7 +61,7 @@ docker-compose -f docker-compose.dev.yml up -d redis db
     GRANT ALL PRIVILEGES ON DATABASE posthog, posthog_e2e_test TO posthog;
     ```
 
-4. (Optional, if using Homebrew) Create / grant `postgres` role superuser permissions. Homebrew or Postgres.app installations do not create a superuser named `postgres` by default, and instead create a superuser with your login username. If you encounter an error like `FATAL:  role "postgres" does not exist`, you may wish to use your login username instead. If that is not possible, create a new superuser by running:
+4. (Optional, if using Homebrew) Create / grant `postgres` role superuser permissions. Homebrew or Postgres.app installations do not create a superuser named `postgres` by default, and instead create a superuser with your login username. If you encounter an error like `FATAL: role "postgres" does not exist`, you may wish to use your login username instead. If that is not possible, create a new superuser by running:
     ```bash
     # macOS (Homebrew)
     # createuser is located in /opt/homebrew/bin/createuser
@@ -71,40 +75,51 @@ If you ran `brew link postgresql` upon installation, there should be no need to 
 ### Running PostHog
 
 1. Navigate into the correct folder (project's root directory):
+
 ```bash
 cd posthog
 ```
 
 2. Create the virtual environment in current directory called 'env':
+
 ```bash
 python3 -m venv env
 ```
 
 3. Activate the virtual environment:
+
 ```bash
 source env/bin/activate
 ```
 
 4. Install requirements with pip
+
 ```bash
 pip install -r requirements.txt
 ```
+
 If you have problems with this step (TLS/SSL error), then run
+
 ```bash
 ~ brew update && brew upgrade
 ```
+
 followed by
+
 ```bash
 python3 -m pip install --upgrade pip
 ```
+
 then retry the requirements.txt install.
 
 5. Install dev requirements:
+
 ```bash
 pip install -r requirements-dev.txt
 ```
 
 6. Run migrations:
+
 ```bash
 DEBUG=1 python3 manage.py migrate
 ```
@@ -132,7 +147,7 @@ brew install node
     ./bin/start
     ```
 
->  **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.*
+> **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.\*
 
 > **Friendly tip:** If you run into frontend webpack module errors running `rm -rf node_modules/` might help.
 
@@ -144,7 +159,6 @@ To see some data on the frontend, you should go to the `http://localhost:8000/de
 
 </HiddenSection>
 
-
 <HiddenSection headingType='h2' title='Using Docker'>
 
 > **Note:** Currently Docker does not support Apple Silicon. Please use the virtualenv setup instead.
@@ -152,6 +166,7 @@ To see some data on the frontend, you should go to the `http://localhost:8000/de
 > **Note:** Developing with Docker may be very slow. If you're planning on doing more than a few simple changes we'd recommend you use the virtualenv setup.
 
 First clone the repository:
+
 ```bash
 git clone https://github.com/PostHog/posthog
 ```
@@ -166,8 +181,8 @@ docker-compose -f docker-compose.dev.yml up
 
 </HiddenSection>
 
-
-<br /><hr />
+<br />
+<hr />
 
 ## Useful commands
 
@@ -223,12 +238,11 @@ DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
 4. In the top toolbar, select the config you just created and click the green bug icon.
     - This runs `python manage.py runserver` with extra parameters that enable debugging.
 
-
-<br /><hr />
+<br />
+<hr />
 
 ## Testing ingestion and feature flags
 
-
-> **Note:** When developing locally and setting environment variable `DEBUG=1`, the local server is treated as what would be "PostHog Cloud". This means that all analytics that are captured from the usage of PostHog are sent to this same local instance (can be quite useful to generate test data too). In addition, feature flags are considered based on the local instance. 
+> **Note:** When developing locally and setting environment variable `DEBUG=1`, the local server is treated as what would be "PostHog Cloud". This means that all analytics that are captured from the usage of PostHog are sent to this same local instance (can be quite useful to generate test data too). In addition, feature flags are considered based on the local instance.
 
 Add feature flags to your [local instance](http://localhost:8000/feature_flags/new) to use them while developing locally. For example, let's say you want to test the using the `my-feature-flag` flag locally - you would create a new flag with the name `my-feature-flag` and release that flag to the user account used for testing. Learn more about using feature flags in the [Feature Flags User Guide](https://posthog.com/docs/user-guides/feature-flags).
