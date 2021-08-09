@@ -13,30 +13,35 @@ featuredImageType: full
 
 **This post shows how a good CI solution can automate your engineering workflow and help you focus on actual challenges instead of chores. PostHog does the same for your product workflow: we're a product analytics platform that helps you discover how users use your product, and what could make their journey better. [Try PostHog today for free.](https://posthog.com/product?utm_medium=blog&utm_campaign=github-actions-post)**
 
-When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure, launching new systems, phasing deprecated solutions out, ensuring security, keeping track of dependencies, and more. And that's before we get to the overall product and people strategy.
+When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure, launching new systems, phasing deprecated solutions out, ensuring security, keeping track of dependencies… Whew. And that's before we get to product, people, or ops considerations.
 
 Some of the above work requires a human brain constantly – software is all 1s and 0s, but in the end it serves human purposes. Without a massive breakthrough in artificial intelligence, figuring out features that compile AND suit human needs programmatically remains a pipe dream.
 
-However, certain tedious, repetitive tasks are still essential: Running tests, publishing releases, deploying services, and keeping the repository clean. We don't need intelligence (artificial or otherwise) for those tasks every single time - we just need it once to define the jobs to be done, and have those jobs run based on some triggers. Any programming language you want, any supporting services you need, ready-made solutions up for grabs, and deep integration with the version control platform.
+What about all the tedious tasks though? Running tests, publishing releases, deploying services,
+keeping the repository clean. Plain chores – boring and following the same pattern every time.
+They still are important though!
+
+We don't need intelligence (artificial or otherwise) for those tasks every single time. We just need it once to define the jobs to be done, and have those jobs run based on some triggers. Actually, let's take this further: any programming language you want, any supporting services you need, ready-made solutions up for grabs, and deep integration with the version control platform.
 
 ## Actions 101
 
-This is where GitHub Actions come in. With Actions, you can define per-repository **workflows** which run on robust **runner** virtual machines. They run every time a specific type of event happens – say, pushing to `main`, committing a pull request, adding an issue label, or dispatching a manual workflow. 
+This is where GitHub Actions come in. With Actions, you can define per-repository **workflows** which run on robust **runner** virtual machines. They run every time a specific type of event happens – say, a push to `main`, push to a pull request, addition of an issue label, or manual workflow dispatch.
 
-A workflow consists of any number of **jobs**, each job being a series of **steps** that run a shell script _or_ a standalone action. Standalone actions can be run directly if written in TypeScript, or with the overhead of a Docker container for ultimate flexibility, and many of them are freely available on
+A workflow consists of any number of **jobs**, each job being a series of **steps** that run a shell script _or_ a standalone action. Standalone actions can be ran directly if written in TypeScript, or with the overhead of a Docker container for ultimate flexibility, and a multitude of them is freely available on
 the [GitHub Marketplace](https://github.com/marketplace?type=actions).
 
-This sounds pretty powerful in theory, but let's see where all this can take us in practice, thanks to some concrete examples right out of [PostHog's GitHub repo](https://github.com/PostHog).
+This sounds pretty powerful already. But let's see where all this can take us in practice, with some
+concrete examples right out of [PostHog GitHub](https://github.com/PostHog).
 
-> Mind you, similar things can be achieved with competing solutions such as GitLab CI/CD or even [Jenkins](https://www.jenkins.io). Despite being relatively new, GitHub Actions have a robust ecosystem, and we've been avid users of GitHub since its early ARPANET days.
+> Mind you, similar things can be achieved with competing solutions such as [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) or even [Jenkins](https://www.jenkins.io). GitHub Actions do have a seriously robust ecosystem though, despite being a relative newcomer, and at PostHog we've been avid users of GitHub since its early ARPANET days.
 
 ### Unit testing
 
-Unit tests are crucial for ensuring software reliability - don't skip writing or _running_ them. You can run unit tests _on each PR_ as you're working on them - something that used to be called ["extreme programming"](https://en.wikipedia.org/wiki/Extreme_programming) but which is standard practice today as a component of [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration).
+Unit tests are crucial for ensuring reliability of software - don't skip writing them, but also don't skip _running_ them. The best way to do that is to run them on each PR that is being worked on. That used to be called ["extreme programming"](https://en.wikipedia.org/wiki/Extreme_programming) back in the day, but today it's standard practice as a component of [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration).
 
-Below is a basic Django-oriented workflow that checks whether a database schema migration is missing, then runs tests.
+Below is a basic Django-oriented workflow that checks whether a database schema migration is missing and then runs tests.
 
-> Note how by defining a **matrix** we make this happen for three specified Python versions in parallel! This way we guarantee support for a range of versions with one line.
+> Note how by defining a **matrix** we make this happen for three specified Python versions in parallel! This way we guarantee support for a range of versions with a single line.
 
 ```YAML
 on:
@@ -110,16 +115,18 @@ jobs:
 ```
 
 I've skipped app-specific setup steps and services, but there are a couple of interesting things in this:
-1. The workflow is made so simple by Cypress's ready-made suite runner action – [`cypress-io/github-action`](https://github.com/marketplace/actions/cypress-io). It smartly takes care of the task including integration with the [Cypress Dashboard](https://www.cypress.io/dashboard) and test parallelization - much better than shell scripts.
-2. GitHub Actions have a feature called "artifacts" which is storage provided by GitHub to temporarily store files resulting from job runs and allows downloading these files. In this case, it's screenshots from failed tests that [`actions/upload-artifact`](https://github.com/marketplace/actions/upload-a-build-artifact) are uploaded for us to view.
+1. The workflow is made so simple by Cypress's ready-made suite runner action – [`cypress-io/github-action`](https://github.com/marketplace/actions/cypress-io). It smartly takes care of the task including test parallelization and integration with the [Cypress Dashboard](https://www.cypress.io/dashboard) - much better than shell scripts.
+2. GitHub Actions have a feature called "artifacts". It's storage provided by GitHub that temporarily stores files resulting from job runs and allows downloading these files. In this case it's screenshots from failed tests that [`actions/upload-artifact`](https://github.com/marketplace/actions/upload-a-build-artifact) uploads for us to view.
 
 ### Linting and formatting
 
-Unit and end-to-end tests verify that things _work_ as expected. It's great to have code that works, but having code that's _written well_ is even greater. To ensure we don't add _overly_ messy spaghetti with every new feature, we use the following:
-- Linters, to ensure coding best practices and that nothing funky slips through,
-- Formatters, to standardize our code and make it readable.
+Functionality tests verify that things _work_ as expected. It's great to have code that works, but having code that's _written well_ is even greater, otherwise development gets harder and harder over time.
 
-As with tests, it's great to run this on every PR to ensure the code that lands in `master` is of high quality.
+To ensure that we don't add _overly_ messy spaghetti with every new feature, we use:
+- linters, for making sure that best practices are used in the code and nothing funky is slipping through,
+- formatters, for standardizing the look of our code and making it readable.
+
+As with tests, it's great to run this on every PR to keep the quality of code landing in `master` high.
 
 ```YAML
 on:
@@ -147,16 +154,17 @@ jobs:
               run: yarn eslint .
 ```
 
-> Running workflows on every PR gives us 2 things:
-> 1. The practical UI shows us details of the task's state at a glance.
+> One thing we've not covered yet is what running jobs on every PR gives us in practice.
+> It's two things:
+> 1. Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.
 >   <img alt="Bump labels" src="../images/blog/github-actions/pr.png" width=839 height=196/>
-> 2. Individual or all PR checks can be made mandatory, preventing merging until all required checks turn green.
+> 2. Select PR checks can be made required, in which case merging is prevented until all required checks turn green.
 
 ### Keeping stale PRs in check
 
-As our team has grown, so has the number of PRs open across repositories. Especially with our [pull requests over issues](https://posthog.com/handbook/company/values#step-on-toes) approach, some PRs are left lingering for a bit - maybe because the work is blocked by something else, awaiting review, deprioritized, or only a proof-of-concept. In any case, the longer a PR sits unattended, the harder it is to come back to, and it just causes more confusion later on.
+As our team has grown, so has the number of PRs open across repositories. Especially with our [pull requests over issues](https://posthog.com/handbook/company/values#step-on-toes) approach, some PRs are left lingering for a bit – maybe because the work is blocked by something else, awaiting review, deprioritized, or only a proof-of-concept. In any case, the longer a PR sits unattended, the harder it is to come back to, and it just causes more confusion later on.
 
-To minimize that, we've added a simple workflow to scan PRs for inactivity:
+To minimize that, we've added a very simple workflow to scan PRs for inactivity:
 
 ```YAML
 name: 'Handle stale PRs'
@@ -179,20 +187,21 @@ jobs:
                   stale-pr-label: stale
 ```
 
-While it's just one additional step in our workflow, all the heavy lifting is done by the official [`actions/stale`](https://github.com/marketplace/actions/close-stale-issues) action.
+It looks trivial – it's just one step – but that's because all the heavy lifting is done by the official
+[`actions/stale`](https://github.com/marketplace/actions/close-stale-issues) action.
 
-Curiously, while the action can handle stale issues in an analogous way, we've found it to be awfully more noisy than valuable so we recommend against that. If an old issue is not on our radar at the moment, a bot alert won't make it relevant.
+Curiously, while the action can handle stale issues in an analogous way, we've found it to be awfully more noisy than valuable, so we recommend against that. If an old issue is not on our radar at the moment, a bot alert won't make it relevant.
 
-> Wondering what all those `@v1`, `@v2`, `@v4` tags mean?  
-> This is simply pinning against Git tags. Because ready-made actions are just GitHub repositories, they are specified the same way
-as repositories in all other contexts – you can specify a revision (commit hash, branch name, Git tag…) - otherwise the latest revision of the default branch is used.  
+> Wondering what all those `@v1`, `@v2`, `@v4` mean?  
+> This is simply pinning against Git tags. Because ready-made actions are just GitHub repositories, they are specified the same way as repositories in all other contexts – you can specify a revision (commit hash, branch name, Git tag…) - otherwise the latest revision of the default branch is used.  
 > Tags are particularly nice, because they are created when publishing a release using GitHub's UI.
 
 ### Deploying continuously
 
-We use [continuous deployment](https://www.atlassian.com/continuous-delivery/continuous-deployment) for PostHog Cloud and we've been very happy with the results – our Amazon ECS-based stack is deployed automatically on each push to `master` (in most cases: a PR being merged) and it's made our developer lives easier.
+We use [continuous deployment](https://www.atlassian.com/continuous-delivery/continuous-deployment) for PostHog Cloud and we've been very happy with the results – our Amazon ECS-based stack is deployed automatically on each push to `master` (in most cases: a PR being merged) and it's made our developer lives so much easier.
 
-The human element becomes removed from deployment and you can be sure that within 20 minutes of merging, your code is live.
+The human element is removed from deployment. You can simply be sure that within 20 minutes of merging,
+your code be live, every time.
 
 ```YAML
 on:
@@ -270,11 +279,12 @@ jobs:
                   cluster: production-cluster
 ```
 
-How you structure your containerized app will determine which adjustments you need to make.
+Every containerized app is structured in its way, so this workflow won't do without your own adjustments,
+but it should give you the right idea.
 
 ### Verifying build
 
-Docker is now a standard way of building deployment-ready software images. We use it too, but we've broken the build a few times - make a mistake somewhere and the image might not build at all. So we've taken to testing image building _ahead_ of time – before `master` is broken – on every PR.
+Docker is now a standard way of building deployment-ready software images. We use it too, quite happily. But we've broken the build a few times - make a mistake somewhere and the image may fail to build. So we've taken to testing image building _ahead_ of time – before `master` is broken – on every PR.
 
 We also _lint_ the Docker files using [`hadolint`](https://github.com/hadolint/hadolint), which has given us really useful tips for maximum reliability of our Docker-based build process.
 
@@ -318,16 +328,14 @@ jobs:
               run: echo ${{ steps.docker_build.outputs.digest }}
 ```
 
-Hint: since Docker Hub has [removed free autobuilds](https://www.docker.com/blog/changes-to-docker-hub-autobuilds/) but GitHub Actions are free for public repositories (with limits for private ones), you can build Docker images and push them to Docker Hub similar to the above workflow.
-Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning and set `push` to `false` _et voila,_ you are now pushing.
+Hint: Since Docker Hub has [removed free autobuilds](https://www.docker.com/blog/changes-to-docker-hub-autobuilds/), but GitHub Actions are still free for public repositories (and with limits for private ones), you can build Docker images and then push them to Docker Hub very similar to the above workflow.
+Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning, set `push` to `false`, _et voila_, now you are pushing.
 
 ### Putting releases out
 
-Something particularly tedious we eliminated was incrementing package versions.
+Something particularly tedious we eliminated is incrementing package versions. Alright, not really – but the days of having to open `package.json`, edit, commit, push, build, publish, and tag are over.
 
-Incrementing versions is still a thing, but the days of having to open `package.json`, edit, commit, push, build, publish, and tag are over.
-
-The only thing an engineer has to do is give a PR the right label:
+What gives? Well, these days the only thing an engineer has to do is give their PR the right label:
 
 <img alt="Bump labels" src="../images/blog/github-actions/bump-labels.png" width=297 height=249/>
 
@@ -412,9 +420,12 @@ That workflow has a fascinating visualization – which, remember, is actually a
 
 ### Fixing typos
 
-This entire website, posthog.com, is stored in a GitHub repository: [PostHog/posthog.com](https://github.com/PostHog/posthog.com). This very post is nothing more than a Markdown file in the repository's `/contents/blog/` directory.
+This entire website, posthog.com, is stored in a GitHub repository: [PostHog/posthog.com](https://github.com/PostHog/posthog.com). In fact, very post is nothing more than a Markdown file in the repository's `/contents/blog/` directory.
 
-All in all, we've got quite a bit of copy. All that text is written by humans, which poses a problem because humans make mistkes. Leters get mixed up and that isn't always easy to spot. However, it'd be a waste of time for a human to spend time spotting and fixing typos instead of thinking about the actual style and substance of the text. To fix any typos in each PR, we use [`codespell`](https://github.com/codespell-project/codespell) in an action looking like this:
+All in all, we've got quite a bit of copy. All that text is written by humans… And that poses a problem, because humans make mistkes. Leters get mixed up, which isn't always easy to spot. It's also a bit of a waste of time for a human to
+be spending time looking for that, instead of thinking about the actual style and substance of the text.
+
+For these reasons on every PR we try to fix any typos noticed. For that we use [`codespell`](https://github.com/codespell-project/codespell), in an action looking like this:
 
 ```YAML
 on:
@@ -442,11 +453,13 @@ jobs:
               uses: EndBug/add-and-commit@v7
 ```
 
-It's not perfect, but it's extremely helpful.
+Admittedly, some typos still sneak in occasionally, but this is still very helpful.
 
 ### Ensuring PR descriptions
 
-At PostHog, we collectively create lots of PRs daily. One problem we've seen is contributors or team members skipping PR descriptions beyond the title - which results in lost context. That's why we created a simple bot that points out newly-opened PRs that lack descriptions:
+At PostHog, we collectively create lots of PRs daily. One issue we've seen is contributors or team members forgetting to write PR descriptions. This usually results in clarifications that could easily be avoided, and in lost context.
+
+That's why with a simple workflow we created a bot that points out newly-opened PRs that lack a description:
 
 ```YAML
 on:
@@ -481,7 +494,7 @@ jobs:
 
 ### Syncing repositories
 
-One last case we'll discuss is syncing one repository's contents from another. In our case, we have a main product repo: https://github.com/PostHog/posthog. However, parts of it – enteprise-feature code – are non-FOSS, which means their code is not under a free license. We are happy to offer a purely FOSS version of PostHog with https://github.com/PostHog/posthog-foss, which is just like the main repo but with non-free portions removed.
+One last case we'll discuss is syncing one repository's contents from another. In our case, we have a main product repo: https://github.com/PostHog/posthog. However, parts of it – enteprise features code – are non-FOSS, which means their code is not under a free license. We are happy to offer a purely FOSS version of PostHog with https://github.com/PostHog/posthog-foss, which is just like the main repo but with non-free portions removed.
 
 Keeping `posthog-foss` in sync with `posthog` manually would be awful work though. So we've automated it:
 
@@ -526,6 +539,6 @@ jobs:
             - run: echo # Empty step so that GitHub doesn't complain about an empty job on forks
 ```
 
-## Automate your workflows
+## Automate your day-to-day
 
 Hopefully these real-life examples inspire you to build the right workflow for your work, spending a bit of time _once_ to reap the rewards of saved time indefinitely.
