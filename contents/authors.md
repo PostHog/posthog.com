@@ -13,8 +13,6 @@ authors:
       name: Mo Shehu,
       role: Content Lead,
       image: https://posthog.imgix.net/static/Mo-9fac6a2da6848cd8dfa6e1c339e15938.png?w=90,
-      link_type: twitter,
-      link_url: https://twitter.com/shehuphd,
       link_type: linkedin,
       link_url: https://linkedin.com/in/shehuphd
     }
