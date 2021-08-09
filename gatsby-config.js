@@ -38,7 +38,10 @@ module.exports = {
             resolve: 'gatsby-plugin-mdx',
             options: {
                 extensions: ['.mdx', '.md'],
-                gatsbyRemarkPlugins: [`gatsby-remark-static-images`, 'gatsby-remark-autolink-headers'],
+                gatsbyRemarkPlugins: [
+                    `gatsby-remark-static-images`,
+                    { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
+                ],
                 plugins: [`gatsby-remark-static-images`],
             },
         },
