@@ -18,7 +18,7 @@ function MenuItem({ item, slug }) {
             })
         )
     }
-    const opacity = item.url === slug || isActive(item.children) ? '1' : '.2'
+    const opacity = item.url === slug || isActive(item.children) ? '1' : '.4'
     const [open, setOpen] = useState(isActive(item.children))
     const handleClick = () => setOpen(!open)
     return (
@@ -27,7 +27,7 @@ function MenuItem({ item, slug }) {
                 {item.url ? (
                     <Link
                         style={{ opacity }}
-                        className={`transition-opacity dark:text-white dark:hover:text-white hover:opacity-100`}
+                        className={`transition-opacity text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white hover:opacity-100`}
                         to={item.url}
                     >
                         {item.name}
@@ -101,7 +101,7 @@ function InternalSidebar(props) {
         <div className="relative">
             <div
                 style={{ top: navBallLocation || 0 }}
-                className="bg-white rounded-full w-2 h-2 z-10 absolute -left-7 transition-all hidden lg:block"
+                className="bg-[#200935] dark:bg-white rounded-full w-2 h-2 z-10 absolute -left-7 transition-all hidden lg:block"
             />
             <p className="text-light-purple text-base mt-0 mb-2">On this page</p>
             <Scrollspy
@@ -117,7 +117,10 @@ function InternalSidebar(props) {
                             className="hover:opacity-100 lg:opacity-60"
                             key={index}
                         >
-                            <a className={`dark:text-white dark:hover:text-white`} href={`#${navItem.url}`}>
+                            <a
+                                className={`text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white`}
+                                href={`#${navItem.url}`}
+                            >
                                 {navItem.name}
                             </a>
                         </li>
@@ -128,13 +131,13 @@ function InternalSidebar(props) {
     )
 }
 
-const A = (props) => <a {...props} className="dark:text-yellow font-bold" />
+const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 
 function SearchBar(props) {
     return (
-        <div className="lg:pl-[200px] max-w-screen-2xl mx-auto handbook-search px-5">
+        <div className="lg:pl-[200px] max-w-screen-2xl mx-auto handbook-search px-4">
             <div className="mt-14 max-w-4xl w-full lg:pr-16">
-                <div className="flex space-x-3 text-base items-center text-white py-3 rounded px-5 bg-[#371A51] shadow-2xl">
+                <div className="flex space-x-3 text-base items-center text-[#c4b7d1] dark:text-white py-3 rounded px-4 bg-[#e4e0e9] dark:bg-[#371A51] shadow-xl dark:shadow-2xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-4 w-4"
@@ -149,7 +152,10 @@ function SearchBar(props) {
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                         />
                     </svg>
-                    <input className="bg-[#371A51] w-full outline-none" placeholder="Search handbook" />
+                    <input
+                        className="bg-[#e4e0e9] dark:bg-[#371A51] w-full outline-none"
+                        placeholder="Search handbook"
+                    />
                     <DarkModeToggle />
                 </div>
             </div>
@@ -159,8 +165,8 @@ function SearchBar(props) {
 
 function Footer({ contributors }) {
     return (
-        <footer className="bg-[#200935] dark:text-white pb-52">
-            <div className="bg-[#371A51] px-5">
+        <footer className=" text-white pb-52">
+            <div className="bg-[#371A51] px-4">
                 <div className="py-14 max-w-screen-2xl mx-auto ">
                     <div className="lg:pl-[200px] max-w-4xl w-full relative">
                         <img className="absolute -top-20" src={footerLogo} />
@@ -191,12 +197,12 @@ function Footer({ contributors }) {
                                 <h3 className="text-base">Docs</h3>
                                 <ul className="m-0 p-0 list-none">
                                     <li>
-                                        <a className="dark:text-white" href="">
+                                        <a className="text-white hover:text-white" href="">
                                             Edit this page
                                         </a>
                                     </li>
                                     <li>
-                                        <a className="dark:text-white" href="">
+                                        <a className="text-white hover:text-white" href="">
                                             Raise an issue
                                         </a>
                                     </li>
@@ -206,17 +212,17 @@ function Footer({ contributors }) {
                                 <h3 className="text-base">Community & support</h3>
                                 <ul className="m-0 p-0 list-none">
                                     <li>
-                                        <a className="dark:text-yellow" href="">
+                                        <a className="text-yellow hover:text-yellow" href="">
                                             Join our Slack community
                                         </a>
                                     </li>
                                     <li>
-                                        <a className="dark:text-yellow" href="">
+                                        <a className="text-yellow hover:text-yellow" href="">
                                             Add a feature request
                                         </a>
                                     </li>
                                     <li>
-                                        <a className="dark:text-yellow" href="">
+                                        <a className="text-yellow hover:text-yellow" href="">
                                             Email us at hey@posthog.com
                                         </a>
                                     </li>
@@ -258,10 +264,10 @@ export default function Handbook({ data: { post }, pageContext: { menu, next, br
     const tocFlattened = tableOfContents.items && flatten(tableOfContents.items)
 
     return (
-        <>
-            <Header className="max-w-screen-2xl" />
+        <div className="bg-white dark:bg-[#220f3f] handbook-container">
+            <Header onPostPage className="max-w-screen-2xl mx-auto" />
             <SearchBar />
-            <div className="relative px-5">
+            <div className="relative px-4">
                 <div className="dark:text-white pt-16 flex max-w-screen-2xl mx-auto items-start relative z-10">
                     <aside className="flex-shrink-0 max-w-[200px] w-full sticky top-10 pr-5 mb-14 hidden sm:block">
                         <MainSidebar menu={menu} slug={slug} />
@@ -315,7 +321,7 @@ export default function Handbook({ data: { post }, pageContext: { menu, next, br
                                     <p className="dark:text-white opacity-70 font-bold m-0">NEXT UP</p>
 
                                     <Link
-                                        className="dark:text-yellow text-lg flex items-center space-x-1"
+                                        className="text-yellow hover:text-yellow text-lg flex items-center space-x-1"
                                         to={next.url}
                                     >
                                         <span>{next.name}</span>
@@ -345,7 +351,7 @@ export default function Handbook({ data: { post }, pageContext: { menu, next, br
                 <img className="absolute top-0 right-0 w-[35vw]" src={planets} />
             </div>
             <Footer contributors={contributors} />
-        </>
+        </div>
     )
 }
 

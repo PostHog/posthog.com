@@ -1561,3 +1561,14 @@ table td[align='center'],
 .text-center {
     text-align: center;
 }
+
+body.light {
+    .handbook-container {
+        .header-wrapper {
+            background: white;
+            a {
+                color: hsla(0, 0%, 0%, 0.8);
+            }
+        }
+    }
+}

@@ -84,12 +84,12 @@ export const Header = ({
         onHomePage ||
         onBlogPage ||
         !!blogArticleSlug
-    const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
+    const layoutWidth = onPostPage ? 'w-full' : 'w-11/12 mx-auto'
     const justify = logoOnly ? 'justify-center' : 'justify-between'
 
     return (
         <div
-            className={`header-wrapper primary-navbar py-6 relative z-20 ${
+            className={`px-4 header-wrapper primary-navbar py-6 relative z-20 ${
                 transparentBackground ? 'transparent-background' : ''
             } ${blogArticleSlug ? 'blog-article-header' : ''}`}
         >
