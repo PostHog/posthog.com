@@ -19,8 +19,7 @@ yarn start-ch-dev
 If you're running into problems, such as Kafka connection errors, frontend not building, etc. we recommend starting fresh by cleaning your Docker installation.
 
 ```
-docker compose -f ee/docker-compose.ch.yml stop
-docker compose -f ee/docker-compose.ch.yml rm -v
+yarn clear-ch-dev
 ```
 ### Option B. Running Python + Webpack locally
 - Run all the services
