@@ -156,7 +156,7 @@ jobs:
 
 > One thing we've not covered yet is what running jobs on every PR gives us in practice.
 > It's two things:
-> 1. <p>Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.</p>
+> 1. Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.
 >   <img alt="Bump labels" src="../images/blog/github-actions/pr.png" width=839 height=196/>
 > 2. Select PR checks can be made required, in which case merging is prevented until all required checks turn green.
 
