@@ -49,7 +49,13 @@ const HeaderNode = ({
     )
 }
 
-export const MdxHeader = ({ children, headingType }: { children: string | React.ReactNode; headingType: Heading }) => {
+export function MdxHeader({
+    children,
+    headingType,
+}: {
+    children: string | React.ReactNode
+    headingType: Heading
+}): JSX.Element {
     const anchor = getAnchor(children)
     const link = `#${anchor}`
 
