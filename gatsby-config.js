@@ -60,6 +60,7 @@ module.exports = {
                 path: `${__dirname}/src/sidebars`,
             },
         },
+        `gatsby-transformer-gitinfo`,
         `gatsby-plugin-image`,
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',

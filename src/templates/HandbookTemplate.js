@@ -244,7 +244,7 @@ export default function Handbook({ data: { post }, pageContext: { menu, next, br
         fields: { slug, contributors },
     } = post
     const { title } = frontmatter
-    const lastUpdated = post.parent.mtime
+    const lastUpdated = post.parent.fields.gitLogLatestDate
     const components = {
         a: A,
     }
@@ -376,7 +376,9 @@ export const query = graphql`
             }
             parent {
                 ... on File {
-                    mtime(formatString: "MMM D, YYYY")
+                    fields {
+                        gitLogLatestDate(formatString: "MMM D, YYYY")
+                    }
                 }
             }
         }
