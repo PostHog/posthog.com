@@ -89,6 +89,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 next,
                 menu: handbookMenu,
                 breadcrumb,
+                breadcrumbBase: 'Handbook',
             },
         })
     })

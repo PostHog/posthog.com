@@ -1572,3 +1572,26 @@ body.light {
         }
     }
 }
+
+.handbook-container {
+    .contributor-faces {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    article {
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            letter-spacing: 0.02em;
+            margin-top: 2rem;
+        }
+        .article-content {
+            p,
+            li {
+                line-height: 1.75;
+            }
+        }
+    }
+}

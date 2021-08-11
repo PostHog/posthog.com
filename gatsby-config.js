@@ -16,6 +16,18 @@ module.exports = {
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
     plugins: [
+        {
+            resolve: 'gatsby-plugin-breakpoints',
+            options: {
+                queries: {
+                    xs: '(max-width: 320px)',
+                    sm: '(max-width: 720px)',
+                    md: '(max-width: 1024px)',
+                    lg: '(max-width: 1280px)',
+                    xl: '(max-width: 1536px)',
+                },
+            },
+        },
         'gatsby-plugin-react-helmet',
         `gatsby-plugin-sass`,
         `gatsby-plugin-typescript`,
