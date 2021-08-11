@@ -329,7 +329,7 @@ jobs:
 ```
 
 Hint: Since Docker Hub has [removed free autobuilds](https://www.docker.com/blog/changes-to-docker-hub-autobuilds/), but GitHub Actions are still free for public repositories (and with limits for private ones), you can build Docker images and then push them to Docker Hub very similar to the above workflow.
-Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning, set `push` to `false`, _et voila_, now you are pushing.
+Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning, set `push` to `true`, _et voila_, now you are pushing.
 
 ### Putting releases out
 
