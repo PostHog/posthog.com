@@ -4,7 +4,7 @@ const path = require('path')
 module.exports = exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
     const TemplateMdx = path.resolve(`src/templates/TemplateMdx.tsx`)
-    const HandbookTemplate = path.resolve(`src/templates/HandbookTemplate.js`)
+    const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
     const result = await graphql(`
         {
             allMdx(filter: { fields: { slug: { regex: "/(^/docs|^/blog)/" } } }, limit: 1000) {
@@ -16,6 +16,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             handbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook/" } } }) {
                 nodes {
                     id
+                    tableOfContents
                     fields {
                         slug
                     }
@@ -56,6 +57,18 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         }, [])
     }
 
+    function flattenToc(items) {
+        return items.reduce((acc, item) => {
+            if (item.url) {
+                acc.push({ url: item.url.slice(1), name: item.title })
+            }
+            if (item.items) {
+                acc.push(...flattenToc(item.items))
+            }
+            return acc
+        }, [])
+    }
+
     const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
     const handbookMenuFlattened = flattenMenu(handbookMenu)
 
@@ -73,6 +86,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
         const { slug } = node.fields
         let next = null
         let breadcrumb = null
+        const tableOfContents = node.tableOfContents.items && flattenToc(node.tableOfContents.items)
         handbookMenuFlattened.some((item, index) => {
             if (item.url === slug) {
                 next = handbookMenuFlattened[index + 1]
@@ -90,6 +104,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 menu: handbookMenu,
                 breadcrumb,
                 breadcrumbBase: 'Handbook',
+                tableOfContents,
             },
         })
     })

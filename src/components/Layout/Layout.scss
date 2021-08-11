@@ -1594,4 +1594,9 @@ body.light {
             }
         }
     }
+    .breadcrumbs-container > li:not(:last-of-type)::after {
+        content: url('/images/right-arrow.svg');
+        width: 1.25rem;
+        height: 1.25rem;
+    }
 }
