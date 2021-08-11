@@ -72,7 +72,7 @@ function Template(props) {
                             <h1 align="center">{frontmatter.title}</h1>
                         )}
                         <div
-                            className="docsPagesContent rounded md:rounded-lg px-4 pb-8 md:pb-16"
+                            className="docsPagesContent rounded md:rounded-lg md:pb-8"
                             dangerouslySetInnerHTML={{ __html: html }}
                         />
                     </div>
