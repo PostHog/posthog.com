@@ -9,6 +9,7 @@ import footerLogo from '../images/posthog-logo-footer.svg'
 import { DarkModeToggle } from '../components/DarkModeToggle'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import AnimateHeight from 'react-animate-height'
 import '../styles/handbook.scss'
 
 function MenuItem({ item, slug }) {
@@ -23,6 +24,7 @@ function MenuItem({ item, slug }) {
     const opacity = item.url === slug || isActive(item.children) ? '1' : '40'
     const [open, setOpen] = useState(isActive(item.children))
     const handleClick = () => setOpen(!open)
+    const height = open ? 'auto' : 0
     return (
         <li>
             <div className="flex items-center justify-between space-x-16">
@@ -62,9 +64,9 @@ function MenuItem({ item, slug }) {
                     </button>
                 )}
             </div>
-            <div style={{ display: open ? 'block' : 'none' }}>
+            <AnimateHeight duration={150} height={height}>
                 <Menu slug={slug} className="mt-2" menu={item.children} sub />
-            </div>
+            </AnimateHeight>
         </li>
     )
 }
