@@ -400,7 +400,7 @@ export default function Handbook({ data: { post }, pageContext: { menu, next, br
                             <section className="pb-8 xl:mb-16 relative">
                                 {breadcrumb && (
                                     <ul className="text-[#765494] list-none p-0 m-0 flex font-semibold space-x-2 mb-2 -mt-2 absolute -top-4">
-                                        <li className="flex items-center space-x-2">
+                                        <li className="flex items-center space-x-1 md:space-x-2 text-xs md:text-base">
                                             <span>{breadcrumbBase}</span>
 
                                             <svg
@@ -420,7 +420,10 @@ export default function Handbook({ data: { post }, pageContext: { menu, next, br
                                         </li>
                                         {breadcrumb.map((crumb, index) => {
                                             return (
-                                                <li key={index} className="flex items-center space-x-2">
+                                                <li
+                                                    key={index}
+                                                    className="flex items-center space-x-1 md:space-x-2 text-xs md:text-base"
+                                                >
                                                     <span>{crumb}</span>
                                                     {breadcrumb[index + 1] && (
                                                         <svg
