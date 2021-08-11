@@ -5,7 +5,7 @@ import PostCard from '../../../components/PostCard'
 import { NewsletterForm } from '../../../components/NewsletterForm'
 import { SEO } from '../../../components/seo'
 import { Structure } from '../../../components/Structure'
-import { BlogSidebar } from '../../../components/Blog/BlogSidebar'
+import { BlogCategoriesList } from '../../../components/Blog/BlogCategoriesList'
 import { BlogCategories } from '../../../components/Blog/constants/categories'
 import { DarkModeToggle } from '../../../components/DarkModeToggle'
 import { findAuthor } from 'lib/utils'
@@ -72,7 +72,7 @@ const BlogCategoryPage = ({
 
                         <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
                             <div className="hidden lg:block lg:w-1/4 lg:pr-8">
-                                <BlogSidebar />
+                                <BlogCategoriesList />
                             </div>
                             <div className="w-full lg:w-3/4 lg:pl-8">
                                 <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
