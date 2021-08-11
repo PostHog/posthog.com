@@ -58,7 +58,6 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
                     </Link>
                 </h2>
                 <AuthorIndexView authorDetails={authorDetails} />
-                <ReadPost to={post.fields.slug} />
             </div>
             {post.frontmatter.featuredImage?.publicURL && (
                 <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded overflow-hidden flex items-center justify-center">
@@ -156,11 +155,20 @@ const PostCard = ({
                             to={post.fields.slug}
                             className="font-bold font-sans normal-case text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
                         >
+                            <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
+                                <Link to={post.fields.slug} className="featured-post-img">
+                                    {post.frontmatter.featuredImage?.publicURL && (
+                                        <img
+                                            className="w-full h-auto block rounded shadow-lg"
+                                            src={post.frontmatter.featuredImage.publicURL}
+                                        />
+                                    )}
+                                </Link>
+                            </div>
                             {post.frontmatter.title}
                         </Link>
                     </h3>
                     <AuthorIndexView authorDetails={authorDetails} />
-                    <ReadPost to={post.fields.slug} />
                 </div>
             )}
         </div>
