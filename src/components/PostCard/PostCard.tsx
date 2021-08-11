@@ -58,7 +58,6 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
                     </Link>
                 </h2>
                 <AuthorIndexView authorDetails={authorDetails} />
-                <div className="text-gray-500 dark:text-gray-300 mt-2 text-sm leading-relaxed">{post.excerpt}</div>
                 <ReadPost to={post.fields.slug} />
             </div>
             {post.frontmatter.featuredImage?.publicURL && (
@@ -161,7 +160,6 @@ const PostCard = ({
                         </Link>
                     </h3>
                     <AuthorIndexView authorDetails={authorDetails} />
-                    <div className="mt-4 leading-relaxed text-sm">{post.excerpt}</div>
                     <ReadPost to={post.fields.slug} />
                 </div>
             )}
