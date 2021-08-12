@@ -4,7 +4,7 @@ on:
     - pull_request
 
 jobs:
-    spell-check:
+    standard_checks:
         name: Standard Checks
         runs-on: ubuntu-latest
         if: github.event.pull_request.head.repo.full_name == github.repository
@@ -52,3 +52,25 @@ jobs:
             - name: Push changes
               run: |
                   git push
+
+    js_checks:
+        name: JS Checks
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '16'
+            - uses: borales/actions-yarn@v2.3.0
+              with:
+                  cmd: install -g jest
+            - uses: borales/actions-yarn@v2.3.0
+              with:
+                  cmd: test
+            - run: yarn install -g jest
+            - run: yarn test
+            - run: generate-redirects-js
+            - run: |
+                  rm pr_diff
+                  #git add .
+                  #[ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
