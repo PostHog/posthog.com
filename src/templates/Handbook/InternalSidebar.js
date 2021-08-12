@@ -19,7 +19,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                     style={{ top: navBallLocation || 0, left: -5 }}
                     className="bg-[#200935] dark:bg-white rounded-full w-2 h-2 z-10 absolute transition-all hidden xl:block"
                 />
-                <p className="text-light-purple text-base mt-0 mb-4">On this page</p>
+                <p className="text-light-purple text-base mt-0 mb-4 font-bold">On this page</p>
                 <Scrollspy
                     onUpdate={handleInternalNavUpdate}
                     className="list-none m-0 p-0 flex flex-col space-y-2"
