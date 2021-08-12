@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-export default function NextArticle({ hideAnchor, breakpoint, next }) {
+export default function NextArticle({ hideAnchor, breakpoints, next }) {
     return (
         <>
             <hr
-                style={{ width: hideAnchor || breakpoint ? '100%' : 'calc(100% + 8rem)' }}
+                style={{
+                    width: hideAnchor || breakpoints.lg ? '100%' : `calc(100% + ${breakpoints.xl ? '4rem' : '8rem'})`,
+                }}
                 className="bg-[#765494] my-9"
             />
             <section className="">

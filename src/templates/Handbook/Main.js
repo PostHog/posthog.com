@@ -41,9 +41,9 @@ export default function Main({
                 <MainSidebar
                     menu={menu}
                     slug={slug}
-                    className="hidden md:block flex-shrink-0 2xl:flex-1 sticky top-10 mb-14 max-w-[224px] transition-opacity md:opacity-40 hover:opacity-100"
+                    className="hidden md:block flex-shrink-0 xl:flex-1 sticky top-10 mb-14 w-full max-w-[224px] transition-opacity md:opacity-40 hover:opacity-100"
                 />
-                <main className="relative md:pl-16 xl:px-32">
+                <main className="relative md:pl-16 xl:px-16 2xl:px-32">
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
                         <section className="mb-8 xl:mb-14 relative">
                             {breadcrumb && <Breadcrumbs crumbs={breadcrumb} base={breadcrumbBase} />}
@@ -69,12 +69,12 @@ export default function Main({
                                 className="w-[1px] absolute bottom-0  right-0 bg-[#765494] hidden xl:flex justify-center"
                             />
                         )}
-                        {next && <NextArticle next={next} hideAnchor={hideAnchor} breakpoint={breakpoints.lg} />}
+                        {next && <NextArticle next={next} hideAnchor={hideAnchor} breakpoints={breakpoints} />}
                     </article>
                 </main>
                 {!breakpoints.lg && !hideAnchor && (
                     <InternalSidebar
-                        className="flex-shrink-0 2xl:flex-1 sticky top-10 mt-[35vh] mb-14"
+                        className="flex-shrink-0 xl:flex-1 sticky top-10 mt-[35vh] mb-14"
                         tableOfContents={tableOfContents}
                     />
                 )}
