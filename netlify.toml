@@ -149,8 +149,8 @@
 
 
 [[redirects]]
-    from = "/docs/plugins/build"
-    to = "/docs/plugins/build/overview"
+    from = "/docs/plugins/build/overview"
+    to = "/docs/plugins/build"
 
 
 [[redirects]]
@@ -181,43 +181,42 @@
     from = "/docs/updating-documentation"
     to = "/docs/contributing/updating-documentation"
 
-[[redirects]]
-    from = "/docs/self-host/configure/scaling-posthog"
-    to = "/docs/self-host/overview"
 
 [[redirects]]
     from = "/docs/configuring-posthog/scaling-posthog"
-    to = "/docs/self-host/overview"
+    to = "/docs/self-host"
 
 [[redirects]]
-    from = "/docs/self-host"
-    to = "/docs/self-host/overview"
+    from = "/docs/self-host/overview"
+    to = "/docs/self-host"
+
 
 [[redirects]]
     from = "/docs/deployment"
-    to = "/docs/self-host/overview#deploy"
+    to = "/docs/self-host#deploy"
 
 [[redirects]]
     from = "/docs/self-host/configure"
-    to = "/docs/self-host/overview#configure"
+    to = "/docs/self-host#configure"
 
 [[redirects]]
     from = "/docs/configuring-posthog"
     to = "/docs/self-host/configure"
 
+# Modified: 2021-08-03
 [[redirects]]
     from = "/docs/features/log-in-with-github-gitlab"
-    to = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
 
 # Added: 2021-07-13
 [[redirects]]
     from = "/docs/contributing/developing-locally"
     to = "/docs/contribute/developing-locally"
 
-# Added: 2021-07-13
+# Added: 2021-07-13 Updated: 2021-07-17
 [[redirects]]
     from = "/docs/contributing"
-    to = "/docs/contribute/overview"
+    to = "/docs/contribute"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -564,15 +563,15 @@
     from = "/docs/features/users"
     to = "/docs/user-guides/users"
 
-# Added: 2021-07-13
+# Added: 2021-07-13 Updated: 2021-07-17
 [[redirects]]
-    from = "/docs/tutorials"
-    to = "/docs/tutorials/overview"
+    from = "/docs/tutorials/overview"
+    to = "/docs/tutorials"
 
-# Added: 2021-07-13
+# Added: 2021-07-13 Updated: 2021-07-17
 [[redirects]]
     from = "/docs/features"
-    to = "/docs/user-guides/overview"
+    to = "/docs/user-guides"
 
 # Added: 2021-07-13
 [[redirects]]
@@ -585,21 +584,21 @@
     from = "/features"
     to = "/product"
 
-# Added: 2021-07-16
+# Added: 2021-07-16 Updated: 2021-07-17
 [[redirects]]
-    from = "/docs/integrate"
-    to = "/docs/integrate/overview"
+    from = "/docs/integrate/overview"
+    to = "/docs/integrate"
 
-# Added: 2021-07-16
+# Added: 2021-07-16 Updated: 2021-07-17
 [[redirects]]
     from = "/docs/integrations"
-    to = "/docs/integrate/overview"
+    to = "/docs/integrate"
 
 # Added: 2021-07-16
 [[redirects]]
     from = "/docs/libraries"
-    to = "/docs/integrate/overview"
-    
+    to = "/docs/integrate"
+
 # Added: 2021-07-17
 # Not due to a rename, but to improve the website's navigation experience
 [[redirects]]
@@ -612,47 +611,88 @@
     from = "/product-features"
     to = "/product"
 
-# Added: 2021-08-02
+# Added: 2021-07-28
 [[redirects]]
-    from = "/docs/api/index"
-    to = "/docs/api/overview"
+    from = "/docs/self-host/deploy/render"
+    to = "/docs/self-host/deploy/other#render"
+
+# Added: 2021-07-28
+[[redirects]]
+    from = "/docs/self-host/deploy/qovery"
+    to = "/docs/self-host/deploy/other"
+
+# Added: 2021-07-30
+[[redirects]]
+    from = "/docs/tutorials/actions"
+    to = "/docs/tutorials/event-tracking-guide"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/plugins/overview"
+    to = "/docs/plugins"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/api/overview"
+    to = "/docs/api"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/contribute/overview"
+    to = "/docs/contribute"
+
+# Added: 2021-07-17
+[[redirects]]
+    from = "/docs/user-guides/overview"
+    to = "/docs/user-guides"
+
+# Added: 2021-07-17
+# Not due to a rename, but to improve the website's navigation experience
+[[redirects]]
+    from = "/signup"
+    to = "/pricing"
 
 # Added: 2021-08-02
 [[redirects]]
-    from = "/docs/contribute/index"
-    to = "/docs/contribute/overview"
+    from = "/docs/user-guides/log-in-with-sso"
+    to = "/docs/user-guides/sso"
 
-# Added: 2021-08-02
+# Added: 2021-08-03
 [[redirects]]
-    from = "/docs/integrate/index"
-    to = "/docs/integrate/overview"
+    from = "/docs/self-host/deploy/azure"
+    to = "/docs/self-host/deploy/other"
 
-# Added: 2021-08-02
+# Added: 2021-08-03
 [[redirects]]
-    from = "/docs/plugins/build/index"
-    to = "/docs/plugins/build/overview"
+    from = "/docs/self-host/deploy/docker"
+    to = "/docs/self-host/deploy/other"
 
-# Added: 2021-08-02
+# Added: 2021-08-03
 [[redirects]]
-    from = "/docs/plugins/index"
-    to = "/docs/plugins/overview"
+    from = "/docs/self-host/deploy/google-cloud-services"
+    to = "/docs/self-host/deploy/gcp"
 
-# Added: 2021-08-02
+# Added: 2021-08-03
 [[redirects]]
-    from = "/docs/self-host/index"
-    to = "/docs/self-host/overview"
+    from = "/docs/self-host/deploy/heroku"
+    to = "/docs/self-host/deploy/digital-ocean"
 
-# Added: 2021-08-02
+# Added: 2021-08-03
 [[redirects]]
-    from = "/docs/tutorials/event-tracking-guide"
-    to = "/docs/tutorials/actions"
+    from = "/docs/self-host/deploy/kubernetes"
+    to = "/docs/self-host/deploy/other"
 
-# Added: 2021-08-02
+# Added: 2021-08-03
 [[redirects]]
-    from = "/docs/tutorials/index"
-    to = "/docs/tutorials/overview"
+    from = "/docs/self-host/deploy/source"
+    to = "/docs/self-host/deploy/other"
 
-# Added: 2021-08-02
+# Added: 2021-08-03
 [[redirects]]
-    from = "/docs/user-guides/index"
-    to = "/docs/user-guides/overview"
+    from = "/docs/self-host/deploy/proxy"
+    to = "/docs/cloud/proxy"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/data-model"
