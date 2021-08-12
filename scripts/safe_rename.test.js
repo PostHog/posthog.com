@@ -1,4 +1,5 @@
-import { getRedirects } from './safe_rename'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const getRedirects = require('./safe_rename').getRedirects
 
 const debug = false
 
