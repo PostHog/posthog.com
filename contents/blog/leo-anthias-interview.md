@@ -1,6 +1,6 @@
 ---
 date: 2021-08-06
-title: Towards Open Source Data Science - An interview with Datapane CEO, Leo Anthias
+title: How To Build An Open Source Data Science Publishing Platform - An interview with Datapane CEO, Leo Anthias
 rootPage: /blog
 sidebar: Blog
 showTitle: true
