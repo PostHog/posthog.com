@@ -267,7 +267,16 @@
     {
         "entry": "Handbook",
         "name": "Handbook",
-        "child_entries": ["Company", "Strategy", "Getting started", "How we work", "People", "Engineering", "Growth"]
+        "child_entries": [
+            "Company",
+            "Strategy",
+            "Getting started",
+            "How we work",
+            "People",
+            "Engineering",
+            "Marketing",
+            "Growth"
+        ]
     },
     {
         "entry": "Company",
