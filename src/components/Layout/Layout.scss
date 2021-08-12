@@ -1,52 +1,5 @@
 @import '../../vars';
 
-/* Gosha Sans (titles) */
-@font-face {
-    font-family: 'Gosha Sans';
-    src: url('/fonts/GoshaSans-Bold.woff') format('woff');
-    src: url('/fonts/GoshaSans-Bold.woff2') format('woff2');
-}
-
-/* Osiris (buttons) */
-@font-face {
-    font-family: 'Osiris';
-    src: url('/fonts/Osiris.woff2') format('woff2');
-    font-weight: normal;
-}
-
-/* SK Curiosity (body) */
-@font-face {
-    font-family: 'SK Curiosity';
-    src: url('/fonts/skcuriosity-medium-webfont.woff') format('woff');
-    src: url('/fonts/skcuriosity-medium-webfont.woff2') formt('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SK Curiosity';
-    src: url('/fonts/skcuriosity-mediumitalic-webfont.woff') format('woff');
-    src: url('/fonts/skcuriosity-mediumitalic-webfont.woff2') formt('woff2');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'SK Curiosity';
-    src: url('/fonts/skcuriosity-heavy-webfont.woff') format('woff');
-    src: url('/fonts/skcuriosity-heavy-webfont.woff2') formt('woff2');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SK Curiosity';
-    src: url('/fonts/skcuriosity-heavyitalic-webfont.woff') format('woff');
-    src: url('/fonts/skcuriosity-heavyitalic-webfont.woff2') formt('woff2');
-    font-weight: bold;
-    font-style: italic;
-}
-
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -99,8 +52,6 @@ abbr[title] {
 }
 b,
 strong {
-    font-weight: inherit;
-    font-weight: bolder;
 }
 dfn {
     font-style: italic;
@@ -234,14 +185,14 @@ html {
 }
 body {
     color: hsla(0, 0%, 0%, 0.8);
-    font-family: 'SK Curiosity', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
-        'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
+    background: #200935;
+    font-family: 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui', 'helvetica neue',
+        'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
     font-kerning: normal;
     font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    font-weight: normal;
     overflow-x: hidden;
     word-wrap: break-word;
     margin: 0;
@@ -265,32 +216,8 @@ h4,
 h5,
 h6 {
     color: inherit;
-    font-weight: normal;
+    font-weight: bold; // override ant
     text-rendering: optimizeLegibility;
-}
-
-:not(.post-page-wrapper) {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
-        text-transform: lowercase;
-    }
-}
-
-.post-page-wrapper {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: 'SK Curiosity', Helvetica, Arial, Sans-Serif;
-        text-transform: none;
-    }
 }
 
 h1 {
@@ -305,12 +232,10 @@ h2 {
 h3 {
     font-size: 30px;
     line-height: normal;
-    font-style: normal;
 }
 h4 {
     font-size: 24px;
     line-height: 45px;
-    font-style: normal;
 }
 h5 {
     margin-left: 0;
@@ -325,7 +250,6 @@ h5 {
     text-rendering: optimizeLegibility;
     font-size: 20px;
     line-height: 1.5;
-    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
 }
 h6 {
     margin-left: 0;
@@ -340,7 +264,6 @@ h6 {
     text-rendering: optimizeLegibility;
     font-size: 18px;
     line-height: 1.5;
-    font-family: 'Osiris', Helvetica, Arial, Sans-Serif;
 }
 hgroup {
     margin-left: 0;
@@ -399,7 +322,6 @@ p {
     padding-top: 0;
     margin-bottom: 1.45rem;
     font-size: 16px;
-    font-weight: 400;
     line-height: 1.5;
 }
 figure {
@@ -546,6 +468,9 @@ p *:last-child {
 li > p {
     margin-bottom: calc(1.45rem / 2);
 }
+li > img {
+    margin-top: calc(1.45rem / 2);
+}
 kbd {
     font-size: 0.85rem;
     line-height: 1.45rem;
@@ -673,6 +598,9 @@ header {
         line-height: 1.75em;
         opacity: 0.9;
     }
+    li {
+        margin-bottom: calc(1.45rem / 2);
+    }
 }
 
 .menuHeaderWrapper {
@@ -781,22 +709,16 @@ li > .ant-menu-submenu-title span {
 
 /* Targets submenu titles */
 .ant-menu-submenu-title span {
-    font-weight: 400 !important;
+    font-weight: bold !important;
 }
 
 /* Targets submenu titles inside a submenu e.g. 1 min tutorials */
 ul ul .ant-menu-submenu-title span {
     font-size: 15px !important;
-    font-weight: 500 !important;
-}
-
-.ant-menu-submenu-selected > .ant-menu-submenu-title span {
-    font-weight: 600 !important;
 }
 
 aside.sidebar {
     background: #f0f0f0;
-    font-weight: 400 !important;
 }
 
 .ant-menu-item > a {
@@ -1384,7 +1306,6 @@ table td {
     }
 
     .mobileHeaderItem a {
-        font-weight: 400;
         font-size: 20px;
         line-height: 32px;
     }

@@ -598,7 +598,7 @@
 [[redirects]]
     from = "/docs/libraries"
     to = "/docs/integrate"
-    
+
 # Added: 2021-07-17
 # Not due to a rename, but to improve the website's navigation experience
 [[redirects]]
@@ -621,37 +621,31 @@
     from = "/docs/self-host/deploy/qovery"
     to = "/docs/self-host/deploy/other"
 
-    
 # Added: 2021-07-30
 [[redirects]]
     from = "/docs/tutorials/actions"
     to = "/docs/tutorials/event-tracking-guide"
-
 
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/plugins/overview"
     to = "/docs/plugins"
 
-
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/api/overview"
     to = "/docs/api"
-
 
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/contribute/overview"
     to = "/docs/contribute"
 
-
 # Added: 2021-07-17
 [[redirects]]
     from = "/docs/user-guides/overview"
     to = "/docs/user-guides"
-  
-  
+
 # Added: 2021-07-17
 # Not due to a rename, but to improve the website's navigation experience
 [[redirects]]
@@ -662,3 +656,63 @@
 [[redirects]]
     from = "/docs/user-guides/log-in-with-sso"
     to = "/docs/user-guides/sso"
+
+# Added: 2021-08-03
+[[redirects]]
+    from = "/docs/self-host/deploy/azure"
+    to = "/docs/self-host/deploy/other"
+
+# Added: 2021-08-03
+[[redirects]]
+    from = "/docs/self-host/deploy/docker"
+    to = "/docs/self-host/deploy/other"
+
+# Added: 2021-08-03
+[[redirects]]
+    from = "/docs/self-host/deploy/google-cloud-services"
+    to = "/docs/self-host/deploy/gcp"
+
+# Added: 2021-08-03
+[[redirects]]
+    from = "/docs/self-host/deploy/heroku"
+    to = "/docs/self-host/deploy/digital-ocean"
+
+# Added: 2021-08-03
+[[redirects]]
+    from = "/docs/self-host/deploy/kubernetes"
+    to = "/docs/self-host/deploy/other"
+
+# Added: 2021-08-03
+[[redirects]]
+    from = "/docs/self-host/deploy/source"
+    to = "/docs/self-host/deploy/other"
+
+# Added: 2021-08-03
+[[redirects]]
+    from = "/docs/self-host/deploy/proxy"
+    to = "/docs/cloud/proxy"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/data-model"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/android/index"
+    to = "/docs/integrate/client/android"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/flutter/snippets/install"
+    to = "/docs/integrate/client/flutter"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/ios/index"
+    to = "/docs/integrate/client/ios"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/js/index"
+    to = "/docs/integrate/client/js"

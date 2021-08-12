@@ -26,7 +26,7 @@ export const Features = () => {
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
-                            <h4 className="font-osiris font-normal lowercase">Analytics</h4>
+                            <h4>Analytics</h4>
                             <ul className="list-none px-4">
                                 <li>
                                     <figure>
@@ -120,7 +120,7 @@ export const Features = () => {
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
-                            <h4 className="font-osiris font-normal lowercase">Insights</h4>
+                            <h4>Insights</h4>
                             <ul className="list-none px-4">
                                 <li>
                                     <figure>
@@ -182,7 +182,7 @@ export const Features = () => {
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
-                            <h4 className="font-osiris font-normal lowercase">Platform</h4>
+                            <h4>Platform</h4>
                             <ul className="list-none px-4">
                                 <li>
                                     <figure>
