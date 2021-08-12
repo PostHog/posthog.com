@@ -16,7 +16,6 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../components/GetStartedModal'
-import { BlogFooter } from '../../components/BlogFooter'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { BlogPostLayout } from '../Blog/BlogPostLayout'
 import { AuthorsData } from 'types'
@@ -32,6 +31,7 @@ interface LayoutProps {
     containerStyle?: Record<string, any>
     menuActiveKey?: string
     featuredImage?: string | null
+    featuredImageType?: string
     headerBackgroundTransparent?: boolean
     onBlogPage?: boolean
     blogDate?: string
@@ -57,6 +57,7 @@ const Layout = ({
     className = '',
     containerStyle = {},
     featuredImage = '',
+    featuredImageType = '',
     headerBackgroundTransparent = false,
     onBlogPage = false,
     blogDate = '',
@@ -87,6 +88,7 @@ const Layout = ({
             blogDate={blogDate}
             pageTitle={pageTitle}
             featuredImage={featuredImage}
+            featuredImageType={featuredImageType}
             blogArticleSlug={blogArticleSlug}
             authorDetails={authorDetails}
         >

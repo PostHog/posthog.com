@@ -10,17 +10,17 @@ categories: release-notes
 
 Major update time (hence the change to 1.*1*.0) - push-based integrations have been introduced!
 
-Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
 
 First our updates and new features.
 
 ## Release notes
 
-### [PostHog integrates with Slack](/docs/libraries/slack)
+### [PostHog integrates with Slack](/docs/integrate/webhooks/slack)
 
 ![](../images/04/Slack_____slackupdates___PostHog.png)
 
-This update allows you to send push notifications to Slack when an Action is triggered. Our docs show you how you can [integrate Slack](/docs/libraries/slack) with your own PostHog instance.
+This update allows you to send push notifications to Slack when an Action is triggered. Our docs show you how you can [integrate Slack](/docs/integrate/webhooks/slack) with your own PostHog instance.
 
 It’s exciting because PostHog can now update you in real time when key actions are triggered – so if people were for instance having an issue installing your app you can reach out to them immediately. 
 

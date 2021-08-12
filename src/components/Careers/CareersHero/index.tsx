@@ -15,15 +15,17 @@ export const CareersHero = () => {
                         We’re working to increase the number of successful products in the world
                     </h1>
 
-                    <CallToAction
-                        icon="down-arrow"
-                        onClick={() => scrollTo('#open-roles')}
-                        type="primary"
-                        width="72"
-                        className="my-12"
-                    >
-                        View open roles
-                    </CallToAction>
+                    <div className="w-full sm:w-72 mx-auto">
+                        <CallToAction
+                            icon="down-arrow"
+                            onClick={() => scrollTo('#open-roles')}
+                            type="primary"
+                            width="72"
+                            className="my-12"
+                        >
+                            View open roles
+                        </CallToAction>
+                    </div>
                 </div>
             </div>
         </div>

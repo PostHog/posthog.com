@@ -25,10 +25,13 @@ interface MdxQueryData {
         frontmatter: {
             date: string
             title: string
+            sidebarTitle?: string
             sidebar: string
             showTitle: boolean
+            tags?: string[]
             hideAnchor: boolean
             description: string
+            featuredImageType?: string
             featuredImage?: {
                 publicURL?: string
             }
@@ -90,6 +93,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                 onPostPage={true}
                 blogArticleSlug={blogArticleSlug}
                 pageTitle={frontmatter.title}
+                featuredImageType={frontmatter.featuredImageType}
                 featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
@@ -140,8 +144,10 @@ export const query = graphql`
                 title
                 sidebar
                 showTitle
+                tags
                 hideAnchor
                 description
+                featuredImageType
                 featuredImage {
                     publicURL
                 }

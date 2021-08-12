@@ -14,16 +14,9 @@ export const SelfHostedPlanBreakdown = () => {
 
     return (
         <Structure.SectionFullWidth width="full" className="pt-6 pb-12 relative">
-            <p className="text-center text-white text-opacity-75 pb-4">
-                Less than 10k tracked users? Our{' '}
-                <a href="https://github.com/posthog/posthog" target="_blank" rel="noreferrer" className="text-orange">
-                    open source version
-                </a>{' '}
-                is totally free with community support.
-            </p>
             <div className="grid grid-flow-row auto-rows-max mdlg:grid-flow-col mdlg:auto-cols-max justify-center items-start mb-20">
                 <div className="border border-white border-opacity-10 rounded p-8 mx-12 my-4 mdlg:m-8 mdlg:ml-0 bg-royal-blue bg-opacity-50 backdrop-filter backdrop-blur-lg">
-                    <h3 className="text-lg m-0">Free</h3>
+                    <h3 className="text-lg m-0">Open Source</h3>
                     <p className="opacity-50 text-sm">Great for startups</p>
                     <ul className="list-none pl-0 mb-6">
                         <li className="mb-1">
@@ -37,7 +30,7 @@ export const SelfHostedPlanBreakdown = () => {
                             <span className="text-sm text-white text-opacity-75">project</span>
                         </li>
                         <li className="mb-1">
-                            <span className="text-base font-bold">3</span>
+                            <span className="text-base font-bold">Unlimited</span>
                             &nbsp;
                             <span className="text-sm text-white text-opacity-75">team members</span>
                         </li>
@@ -65,12 +58,8 @@ export const SelfHostedPlanBreakdown = () => {
                     </div>
 
                     <div>
-                        <CallToAction
-                            icon="none"
-                            href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
-                            className="my-4"
-                        >
-                            Request access
+                        <CallToAction icon="none" href="/docs/deployment" className="my-4">
+                            Deploy now
                         </CallToAction>
                     </div>
 

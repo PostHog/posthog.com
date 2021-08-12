@@ -4,17 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Plugins are currently BETA and require you to opt-in.
 
-When you open "Settings" / "Project Plugins" in PostHog, you will see a screen
-such as this:
-
-![Opt In to Plugins](../../images/plugins/opt-in.png)
-
-### Enabling Plugins
-
-To enable plugins, make sure the [plugin server](https://github.com/PostHog/posthog-plugin-server) is online, tick 
-the checkbox and click the button to enable plugins.
 
 ### Plugin Server is Offline
 
@@ -38,7 +28,7 @@ or run the default `worker` dyno, which includes both of them.
 
 #### AWS CloudFormation
 
-Please [upgrade to the latest CloudFormation config](/docs/deployment/deploy-aws#updating-cloudformation-template) 
+Please [upgrade to the latest CloudFormation config](/docs/self-host/deploy/aws#updating-cloudformation-template) 
 that combines all background workers into one task and activates the plugin server.
 
 Previously we had separate tasks for `worker-beat` and `worker-celery`. In the latest version there is just one `worker`

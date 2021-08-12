@@ -6,7 +6,7 @@ showTitle: true
 
 
 In PostHog, there is an API endpoint available to do XXXXX.
-For more information on XXXX, see [XXXX](/docs/features/…)
+For more information on XXXX, see [XXXX](/docs/user-guides/…)
 
 ## Pagination
 

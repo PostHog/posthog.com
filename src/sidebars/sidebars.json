@@ -2,142 +2,166 @@
     {
         "entry": "Docs",
         "name": "Docs",
-        "child_entries": [
-            "Tutorials",
-            "Deployment",
-            "Configuring PostHog",
-            "Libraries",
-            "Features",
-            "Plugins",
-            "API",
-            "Contributing",
-            "Platform Structure"
+        "child_entries": ["Self-Host", "Cloud", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
+    },
+    {
+        "entry": "Self-Host",
+        "name": "Self-Host",
+        "items": ["docs/self-host", "docs/self-host/postgres-vs-clickhouse"],
+        "child_entries": ["Deploy", "Configure"]
+    },
+    {
+        "entry": "Deploy",
+        "name": "Deploy",
+        "items": [
+            "docs/self-host/deploy/digital-ocean",
+            "docs/self-host/deploy/gcp",
+            "docs/self-host/deploy/aws",
+            "docs/self-host/deploy/other",
+            "docs/self-host/deploy/configuration",
+            "docs/self-host/deploy/troubleshooting",
+            "docs/self-host/deploy/upgrade-notes",
+            "docs/self-host/deploy/hosting-costs"
         ]
     },
     {
-        "entry": "Configuring PostHog",
-        "name": "Configuring PostHog",
+        "entry": "Configure",
+        "name": "Configure",
         "items": [
-            "docs/configuring-posthog",
-            "docs/configuring-posthog/environment-variables",
-            "docs/configuring-posthog/upgrading-posthog",
-            "docs/configuring-posthog/scaling-posthog",
-            "docs/configuring-posthog/securing-posthog",
-            "docs/configuring-posthog/running-behind-proxy",
-            "docs/configuring-posthog/email",
-            "docs/configuring-posthog/deleting-data"
+            "docs/self-host/configure/environment-variables",
+            "docs/self-host/configure/securing-posthog",
+            "docs/self-host/configure/running-behind-proxy",
+            "docs/self-host/configure/email",
+            "docs/self-host/configure/upgrading-posthog"
         ]
     },
     {
-        "entry": "Contributing",
-        "name": "Contributing",
+        "entry": "Cloud",
+        "name": "Cloud",
+        "items": ["docs/cloud/proxy"]
+    },
+    {
+        "entry": "Integrate",
+        "name": "Integrate",
+        "items": ["docs/integrate", "docs/integrate/ingest-live-data", "docs/integrate/ingest-historic-data"],
+        "child_entries": ["Client Libraries", "Server Libraries", "Third Party", "Webhooks"]
+    },
+    {
+        "entry": "Client Libraries",
+        "name": "Client Libraries",
         "items": [
-            "docs/contributing",
-            "docs/recognizing-contributions",
-            "docs/developing-locally",
-            "docs/stack",
-            "docs/project-structure",
-            "docs/updating-documentation"
+            "docs/integrate/client/snippet-installation",
+            "docs/integrate/client/android",
+            "docs/integrate/client/ios",
+            "docs/integrate/client/js",
+            "docs/integrate/client/flutter",
+            "docs/integrate/client/react-native"
         ]
     },
     {
-        "entry": "Tutorials",
-        "name": "Tutorials",
+        "entry": "Server Libraries",
+        "name": "Server Libraries",
         "items": [
-            "docs/tutorials/feature-flags",
-            "docs/tutorials/toolbar",
-            "docs/tutorials/funnels",
-            "docs/tutorials/cohorts",
-            "docs/tutorials/retention",
-            "docs/tutorials/spa",
-            "docs/tutorials/actions",
-            "docs/tutorials/b2b",
-            "docs/tutorials/revenue",
-            "docs/tutorials/tracking-teams"
-        ],
-        "child_entries": ["1 Minute Tutorials"]
-    },
-    {
-        "entry": "1 Minute Tutorials",
-        "name": "1 Minute Tutorials",
-        "items": [
-            "docs/tutorials/1-minute/integrate-with-shopify",
-            "docs/tutorials/1-minute/integrate-with-metabase",
-            "docs/tutorials/1-minute/survey",
-            "docs/tutorials/1-minute/integrate-with-gtm",
-            "docs/tutorials/1-minute/integrate-with-retool",
-            "docs/tutorials/1-minute/integrate-with-nuxt-js"
+            "docs/integrate/server/elixir",
+            "docs/integrate/server/go",
+            "docs/integrate/server/node",
+            "docs/integrate/server/php",
+            "docs/integrate/server/python",
+            "docs/integrate/server/ruby"
         ]
     },
     {
-        "entry": "Deployment",
-        "name": "Deployment",
+        "entry": "Third Party",
+        "name": "Third Party",
         "items": [
-            "docs/deployment",
-            "docs/deployment/deploy-heroku",
-            "docs/deployment/deploy-aws",
-            "docs/deployment/deploy-docker",
-            "docs/deployment/deploy-source",
-            "docs/deployment/deploy-azure",
-            "docs/deployment/deploy-digital-ocean",
-            "docs/deployment/deploy-gcs",
-            "docs/deployment/deploy-kubernetes",
-            "docs/deployment/deploy-render",
-            "docs/deployment/deploy-qovery",
-            "docs/deployment/snippet-installation",
-            "docs/deployment/hosting-costs"
+            "docs/integrate/third-party/docusaurus",
+            "docs/integrate/third-party/gatsby",
+            "docs/integrate/third-party/google-tag-manager",
+            "docs/integrate/third-party/metabase",
+            "docs/integrate/third-party/nuxt-js",
+            "docs/integrate/third-party/retool",
+            "docs/integrate/third-party/rudderstack",
+            "docs/integrate/third-party/segment",
+            "docs/integrate/third-party/sentry",
+            "docs/integrate/third-party/shopify",
+            "docs/integrate/third-party/wordpress"
         ]
     },
     {
-        "entry": "Platform Structure",
-        "name": "Platform Structure",
-        "items": ["docs/application-settings", "docs/data-model", "docs/navigation"]
+        "entry": "Webhooks",
+        "name": "Webhooks",
+        "items": [
+            "docs/integrate/webhooks/message-formatting",
+            "docs/integrate/webhooks/microsoft-teams",
+            "docs/integrate/webhooks/slack"
+        ]
     },
     {
-        "entry": "Features",
-        "name": "Features",
+        "entry": "User Guides",
+        "name": "User Guides",
         "items": [
-            "docs/features/actions",
-            "docs/features/annotations",
-            "docs/features/cohorts",
-            "docs/features/dashboards",
-            "docs/features/events",
-            "docs/features/feature-flags",
-            "docs/features/funnels",
-            "docs/features/log-in-with-github-gitlab",
-            "docs/features/organizations",
-            "docs/features/projects",
-            "docs/features/paths",
-            "docs/features/plugins",
-            "docs/features/retention",
-            "docs/features/sessions",
-            "docs/features/session-recording",
-            "docs/features/toolbar",
-            "docs/features/trends",
-            "docs/features/users"
+            "docs/user-guides",
+            "docs/user-guides/application-settings",
+            "docs/user-guides/actions",
+            "docs/user-guides/annotations",
+            "docs/user-guides/cohorts",
+            "docs/user-guides/dashboards",
+            "docs/user-guides/events",
+            "docs/user-guides/feature-flags",
+            "docs/user-guides/funnels",
+            "docs/user-guides/sso",
+            "docs/user-guides/organizations",
+            "docs/user-guides/projects",
+            "docs/user-guides/paths",
+            "docs/user-guides/plugins",
+            "docs/user-guides/retention",
+            "docs/user-guides/sessions",
+            "docs/user-guides/session-recording",
+            "docs/user-guides/toolbar",
+            "docs/user-guides/trends",
+            "docs/user-guides/users"
         ]
     },
     {
         "entry": "Plugins",
         "name": "Plugins",
-        "items": ["docs/plugins/overview", "docs/plugins/enabling"],
+        "items": ["docs/plugins", "docs/plugins/enabling"],
         "child_entries": ["Build Your Own"]
     },
     {
         "entry": "Build Your Own",
         "name": "Build Your Own",
         "items": [
-            "docs/plugins/build/overview",
+            "docs/plugins/build",
             "docs/plugins/build/tutorial",
             "docs/plugins/build/types",
             "docs/plugins/build/reference"
         ]
     },
     {
+        "entry": "Tutorials",
+        "name": "Tutorials",
+        "items": [
+            "docs/tutorials",
+            "docs/tutorials/feature-flags",
+            "docs/tutorials/toolbar",
+            "docs/tutorials/funnels",
+            "docs/tutorials/cohorts",
+            "docs/tutorials/retention",
+            "docs/tutorials/spa",
+            "docs/tutorials/event-tracking-guide",
+            "docs/tutorials/b2b",
+            "docs/tutorials/revenue",
+            "docs/tutorials/tracking-teams",
+            "docs/tutorials/survey",
+            "docs/tutorials/deleting-data"
+        ]
+    },
+    {
         "entry": "API",
         "name": "API",
         "items": [
-            "docs/api/overview",
+            "docs/api",
             "docs/api/post-only-endpoints",
             "docs/api/elements",
             "docs/api/events",
@@ -146,58 +170,22 @@
             "docs/api/user",
             "docs/api/feature-flags",
             "docs/api/annotations",
-            "docs/api/cohorts"
+            "docs/api/cohorts",
+            "docs/data-model"
         ]
     },
     {
-        "entry": "Libraries",
-        "name": "Libraries",
+        "entry": "Contribute",
+        "name": "Contribute",
         "items": [
-            "docs/libraries",
-            "docs/libraries/android",
-            "docs/libraries/go",
-            "docs/libraries/ios",
-            "docs/libraries/js",
-            "docs/libraries/node",
-            "docs/libraries/php",
-            "docs/libraries/python",
-            "docs/libraries/flutter",
-            "docs/libraries/react-native",
-            "docs/libraries/ruby",
-            "docs/libraries/rudderstack",
-            "docs/libraries/segment"
-        ],
-        "child_entries": ["Community", "Sending Data Out"]
-    },
-    {
-        "entry": "Community",
-        "name": "Community",
-        "items": [
-            "docs/libraries/community",
-            "docs/libraries/docusaurus",
-            "docs/libraries/gatsby",
-            "docs/libraries/elixir"
+            "docs/contribute",
+            "docs/contribute/code-of-conduct",
+            "docs/contribute/recognizing-contributions",
+            "docs/contribute/developing-locally",
+            "docs/contribute/stack",
+            "docs/contribute/project-structure",
+            "docs/contribute/updating-documentation"
         ]
-    },
-    {
-        "entry": "Sending Data Out",
-        "name": "Sending Data Out",
-        "items": [
-            "docs/libraries/slack",
-            "docs/libraries/microsoft-teams",
-            "docs/libraries/message-formatting",
-            "docs/libraries/sentry"
-        ]
-    },
-    {
-        "entry": "Get Started",
-        "name": "Get Started",
-        "items": ["docs/get-started/introduction", "docs/get-started/quick-start"]
-    },
-    {
-        "entry": "Guide",
-        "name": "Guide",
-        "items": ["docs/guide/anchor", "docs/guide/contents", "docs/guide/menu-items", "docs/guide/sidebar"]
     },
     {
         "entry": "Blog",
@@ -349,7 +337,7 @@
         "entry": "Hiring Process",
         "name": "Hiring Process",
         "items": [
-            "handbook/people/hiring-process/hiring-process",
+            "handbook/people/hiring-process",
             "handbook/people/hiring-process/design-hiring",
             "handbook/people/hiring-process/engineering-hiring",
             "handbook/people/hiring-process/exec-hiring",
@@ -364,13 +352,14 @@
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
             "handbook/engineering/bug-prioritization",
-            "handbook/engineering/releasing-python",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",
             "handbook/engineering/common-issues",
             "handbook/engineering/feature-parity",
-            "handbook/engineering/mdx"
+            "handbook/engineering/mdx",
+            "handbook/engineering/aws",
+            "handbook/engineering/gcp"
         ]
     },
     {
@@ -383,14 +372,13 @@
             "handbook/growth/marketing/newsletter",
             "handbook/growth/marketing/paid",
             "handbook/growth/marketing/press",
-            "handbook/growth/marketing/releasing-content",
-            "handbook/growth/marketing/developer-relations"
+            "handbook/growth/marketing/releasing-content"
         ]
     },
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/customer-support"],
+        "items": ["handbook/growth/strategy", "handbook/growth/customer-support", "handbook/growth/developer-relations"],
         "child_entries": ["Customer Success"]
     },
     {
@@ -414,7 +402,6 @@
             "handbook/engineering/debugging",
             "handbook/engineering/how-we-review",
             "handbook/engineering/release-new-version",
-            "handbook/engineering/releasing-python",
             "handbook/engineering/onboarding-customer",
             "handbook/engineering/setup-ssl-locally",
             "handbook/engineering/ee-setup",

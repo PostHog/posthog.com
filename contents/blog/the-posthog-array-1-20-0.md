@@ -14,7 +14,7 @@ We're back! 2020 was a hectic year for us and our team put in a whole lot of eff
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [Plugins, Plugins, and more Plugins](/plugins)
 

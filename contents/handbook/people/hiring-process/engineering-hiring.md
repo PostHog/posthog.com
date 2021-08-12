@@ -13,7 +13,8 @@ Currently, we are hiring for the following Engineering roles:
 
 *   [Staff Engineer - Full Stack](https://apply.workable.com/posthog/j/4942F8C181)
 *   [Senior Full Stack Developer](https://apply.workable.com/posthog/j/E3CAF059AB/)
-*   [Front End Developer](https://apply.workable.com/posthog/j/039CA3883F/)
+*   [Senior Software Engineer - Back End focus](https://apply.workable.com/posthog/j/346444F37C/) 
+*   [Site Reliability Engineer](https://apply.workable.com/posthog/j/8114629AE3/)
 
 ### What we are looking for in Engineering hires
 

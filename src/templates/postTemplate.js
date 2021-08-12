@@ -51,6 +51,7 @@ function Template(props) {
                 blogDate={frontmatter.date}
                 pageTitle={frontmatter.title}
                 featuredImage={frontmatter.featuredImage?.publicURL}
+                featuredImageType={frontmatter.featuredImageType}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
                 onBlogPage={!!blogArticleSlug}
@@ -71,7 +72,7 @@ function Template(props) {
                             <h1 align="center">{frontmatter.title}</h1>
                         )}
                         <div
-                            className="docsPagesContent rounded md:rounded-lg px-4 pb-8 md:pb-16"
+                            className="docsPagesContent rounded md:rounded-lg md:pb-8"
                             dangerouslySetInnerHTML={{ __html: html }}
                         />
                     </div>
@@ -101,6 +102,7 @@ export const pageQuery = graphql`
                 date(formatString: "MMMM DD, YYYY")
                 title
                 sidebar
+                featuredImageType
                 featuredImage {
                     publicURL
                 }

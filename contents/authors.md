@@ -13,8 +13,8 @@ authors:
       name: Mo Shehu,
       role: Content Lead,
       image: https://posthog.imgix.net/static/Mo-9fac6a2da6848cd8dfa6e1c339e15938.png?w=90,
-      link_type: twitter,
-      link_url: https://twitter.com/shehuphd
+      link_type: linkedin,
+      link_url: https://linkedin.com/in/shehuphd
     }
   - {
       handle: yakko-majuri,
@@ -31,5 +31,13 @@ authors:
       image: https://posthog.imgix.net/static/Joe-f2e083daf326ebcc6080ff807f2280b2.png?w=90,
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/joemartinwords
+    }
+  - {
+      handle: michael-matloka,
+      name: Michael Matloka,
+      role: Software Engineer,
+      image: https://gravatar.com/avatar/b67a96b30e928a91163ddfbd70110818?s=90,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/matlokam
     }
 ---

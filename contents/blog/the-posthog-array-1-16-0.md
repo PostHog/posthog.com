@@ -15,7 +15,7 @@ So, without further ado, here they are:
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [Session Recording (Beta)](https://github.com/PostHog/posthog/issues/1846)
 

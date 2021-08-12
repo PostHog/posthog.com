@@ -30,7 +30,7 @@ const ContributorCardStructure = ({
             e.preventDefault()
             e.stopPropagation()
             window.open(
-                `${window.location.protocol}//${window.location.host}/docs/recognizing-contributions#${pageKey}`,
+                `${window.location.protocol}//${window.location.host}/docs/contribute/recognizing-contributions#${pageKey}`,
                 '_blank'
             )
         }

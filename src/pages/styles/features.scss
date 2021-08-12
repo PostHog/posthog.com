@@ -1,24 +1,337 @@
 /* GENERAL */
 
+// Hero animation
+// Animated SVG was created with SVGator. We use different sizes depending on screen size. (720x1300 on mobile, 1920x1080 on normal desktops, 1920x720 on very wide screens. (We don't want the content pushed too far down.) Note: These are viewBox dimensions for the SVG.
+// To add/remove an SVG at a breakpoint:
+// 1. In this file, adjust padding-bottom on .productHero (this is a proportional video hack)
+// 2. in ProductHero/index.tsx, adjust content wrapper (mt-[54%] xl:mt-[37.5%]), then add HeroAnimation_____ (size) at bottom of page after adding asset and referencing
+
+.productHero {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 180%;
+    @media (min-width: 640px) {
+        padding-bottom: 54%;
+    }
+    @media (min-width: 1280px) {
+        padding-bottom: 37.5%;
+    }
+    height: 0;
+
+    &:after {
+        background: linear-gradient(rgba(34, 15, 63, 0), rgba(34, 15, 63, 1));
+        bottom: 0;
+        content: '';
+        height: 300px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    .chevron {
+        background-image: url('../../images/chevron.svg');
+        display: inline-block;
+        height: 11px;
+        width: 18px;
+
+        -webkit-animation: ca3_fade_move_down 2s ease-in-out infinite;
+        -moz-animation: ca3_fade_move_down 2s ease-in-out infinite;
+        animation: ca3_fade_move_down 2s ease-in-out infinite;
+    }
+}
+
+.nav-current {
+    background: linear-gradient(89.94deg, #51a0cd 2.12%, #3c8ebc 89.27%);
+    border: 0.5px solid #62c6ff;
+    box-shadow: 0px 0px 15px rgba(86, 123, 219, 0.49);
+}
+
+/*animated scroll arrow animation*/
+@-webkit-keyframes ca3_fade_move_down {
+    0% {
+        -webkit-transform: translate(0, -20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translate(0, 20px);
+        opacity: 0;
+    }
+}
+@-moz-keyframes ca3_fade_move_down {
+    0% {
+        -moz-transform: translate(0, -20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        -moz-transform: translate(0, 20px);
+        opacity: 0;
+    }
+}
+@keyframes ca3_fade_move_down {
+    0% {
+        transform: translate(0, -20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 20px);
+        opacity: 0;
+    }
+}
+
+.product-feature {
+    background: linear-gradient(180deg, #3f086d 0%, #32134e 100%);
+    border-radius: 20px;
+
+    // @apply mb-2 md:mb-0, relative, overflow-hidden
+    margin-bottom: 2em;
+    overflow: hidden;
+    position: relative;
+    @media (min-width: 768px) {
+        margin-bottom: 0;
+    }
+
+    .reversed {
+        display: flex;
+        flex-direction: column-reverse;
+
+        figure {
+            margin-top: 3em;
+        }
+    }
+
+    .feature-name {
+        img,
+        svg {
+            height: 18px;
+            width: 18px;
+        }
+    }
+}
+
+.features-grid {
+    &.two-column-grid {
+        @media (min-width: 768px) {
+            grid-template-areas:
+                'h2-platform h2-platform'
+                'open-source open-source'
+                'event-autocapture dashboards'
+                'data-in-out data-in-out'
+                'hosting-flexibility hosting-flexibility'
+                'data-privacy api'
+                'h2-analytics h2-analytics'
+                'trends trends'
+                'funnels paths'
+                'cohorts paths'
+                'user-sessions user-sessions'
+                'retention revenue-tracking';
+        }
+    }
+
+    &.three-column-grid {
+        @media (min-width: 768px) {
+            grid-template-areas:
+                'h2-insights h2-insights h2-insights'
+                'feature-flags feature-flags annotations'
+                'heatmaps session-recordings session-recordings'
+                'h2-plugins h2-plugins h2-plugins'
+                'data-export data-export data-filtering'
+                'custom-plugins data-enrichment data-enrichment';
+        }
+    }
+
+    .header-platform {
+        grid-area: h2-platform;
+    }
+    .header-analytics {
+        grid-area: h2-analytics;
+    }
+    .header-insights {
+        grid-area: h2-insights;
+    }
+    .header-plugins {
+        grid-area: h2-plugins;
+    }
+
+    .feature-open-source {
+        grid-area: open-source;
+
+        // override global height set for all images
+        .md\:h-48 {
+            height: auto;
+        }
+    }
+
+    .feature-event-autocapture {
+        grid-area: event-autocapture;
+    }
+    .feature-dashboards {
+        grid-area: dashboards;
+    }
+    .feature-data-in-out {
+        grid-area: data-in-out;
+    }
+    .feature-hosting-flexibility {
+        grid-area: hosting-flexibility;
+    }
+    .feature-data-privacy {
+        grid-area: data-privacy;
+    }
+    .feature-api {
+        grid-area: api;
+    }
+
+    .feature-trends {
+        grid-area: trends;
+    }
+    .feature-funnels {
+        grid-area: funnels;
+        min-height: 400px;
+        overflow: hidden;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../images/features/feature-funnels@2x.png') 0 100% / cover no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
+    }
+    .feature-paths {
+        grid-area: paths;
+    }
+    .feature-cohorts {
+        grid-area: cohorts;
+    }
+    .feature-user-sessions {
+        grid-area: user-sessions;
+    }
+    .feature-retention {
+        grid-area: retention;
+
+        > div {
+            padding-bottom: 0;
+        }
+    }
+    .feature-revenue-tracking {
+        grid-area: revenue-tracking;
+
+        > div {
+            padding-bottom: 0;
+        }
+    }
+
+    .feature-feature-flags {
+        grid-area: feature-flags;
+        min-height: 400px;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../images/features/feature-feature-flags@2x.png') bottom right / 40% no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
+    }
+    .feature-annotations {
+        grid-area: annotations;
+        min-height: 400px;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../images/features/feature-annotations.svg') 100% / cover no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
+    }
+    .feature-heatmaps {
+        grid-area: heatmaps;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../images/features/feature-heatmaps.png') 100% 20px / contain no-repeat;
+
+            @media (min-width: 1024px) {
+                background: url('../../images/features/feature-heatmaps@2x.png') 140% 0 / contain no-repeat;
+            }
+
+            @media (min-width: 1280px) {
+                background: url('../../images/features/feature-heatmaps@2x.png') 120% 0 / contain no-repeat;
+            }
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
+    }
+    .feature-session-recordings {
+        grid-area: session-recordings;
+    }
+
+    .feature-data-export {
+        grid-area: data-export;
+    }
+    .feature-data-filtering {
+        grid-area: data-filtering;
+    }
+    .feature-custom-plugins {
+        grid-area: custom-plugins;
+        position: relative;
+
+        // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
+
+        &:before {
+            background: url('../../images/features/feature-custom-plugins.svg') -40px 105% / contain no-repeat;
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
+    }
+    .feature-data-enrichment {
+        grid-area: data-enrichment;
+    }
+}
+
+// OLD (<2021)
+
 /* - MAIN PAGE + ELEMENTS */
 
 @media screen and (min-width: 1440px) {
     .featuresWrapper {
         padding: 0 calc((100vw - 1440px) / 2);
-    }
-}
-
-@media screen and (max-width: 834px) {
-    .features-nav-container {
-        h1,
-        h2 {
-            font-size: 40px !important;
-            line-height: 1.2em !important;
-        }
-        p {
-            font-size: 16px !important;
-            line-height: 1.5em !important;
-        }
     }
 }
 

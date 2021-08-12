@@ -22,11 +22,10 @@ PostHog solves that. We let every person in the company have easy access to prod
 
 ### Deployment
 
-There are 3 ways of using PostHog:
+There are 2 ways of using PostHog:
 
-* PostHog Open Source
-* PostHog Enterprise
 * PostHog Cloud
+* Self-Hosted
 
 **Do you want to get started quickly without having to deploy PostHog yourself?**
 
@@ -34,13 +33,7 @@ Start using [PostHog Cloud for free](https://app.posthog.com).
 
 **Do you want to self-host PostHog?**
 
-Check out our [Deployment page](/docs/deployment).
-
-**Want to get up and running immediately?** 
-
-Use our one-click [Heroku deployment](/docs/deployment/deploy-heroku):
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
+Check out our [Deployment page](/docs/self-host/overview#deploy).
 
 ### Capturing Events with PostHog
 
@@ -48,13 +41,13 @@ You can capture events and send data to PostHog in 3 different ways:
 
 **Snippet**
 
-Using our [HTML snippet](/docs/deployment/snippet-installation) is the quickest way to get started if you're using PostHog to track a website. 
+Using our [HTML snippet](/docs/integrate/client/snippet-installation) is the quickest way to get started if you're using PostHog to track a website. 
 
-You can also start trying PostHog with no code using [our bookmarklet](/docs/deployment/snippet-installation#get-started-with-no-code).
+You can also start trying PostHog with no code using [our bookmarklet](/docs/integrate/client/snippet-installation#get-started-with-no-code).
 
 **Integrations**
 
-We provide [15+ libraries](/docs/libraries) for various popular programming languages and tools that you can use to send data to PostHog. 
+We provide [15+ libraries](/docs/integrate/overview) for various popular programming languages and tools that you can use to send data to PostHog. 
 
 **API**
 
@@ -75,26 +68,19 @@ Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many fe
 - [Complete Guide to Event Tracking](/docs/tutorials/actions)
 - [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
 - [Sales and Revenue Tracking](/docs/tutorials/revenue)
-- [Running Surveys with No Backend ⏱️](/docs/tutorials/1-minute/survey)
+- [Running Surveys with No Backend](/docs/tutorials/survey)
 
 **Integrating PostHog with Other Tools**
 
-- [Integrate PostHog with Shopify ⏱️](/docs/tutorials/1-minute/integrate-with-shopify) 
-- [Integrate PostHog with Metabase ⏱️](/docs/tutorials/1-minute/integrate-with-metabase) 
-- [Integrate PostHog with Google Tag Manager ⏱️](/docs/tutorials/1-minute/integrate-with-gtm) 
-
-> The ⏱️ emoji denotes tutorials in our '1 Minute Tutorials' section
-
-
-### Configuring PostHog
-
-[Configuring PostHog](/docs/configuring-posthog) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/configuring-posthog/scaling-posthog), [security](/docs/configuring-posthog/securing-posthog), and [upgrade methods](/docs/configuring-posthog/upgrading-posthog).
+- [Integrate PostHog with Shopify](/docs/integrate/third-party/shopify) 
+- [Integrate PostHog with Metabase](/docs/integrate/third-party/metabase) 
+- [Integrate PostHog with Google Tag Manager](/docs/integrate/third-party/google-tag-manager) 
 
 ### Integrations
 
-[Integrations](/docs/libraries) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
+[Integrations](/docs/integrate/overview) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
 
-We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/libraries/segment), [Slack](/docs/libraries/slack), and [Sentry](/docs/libraries/sentry).
+We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrate/third-party/segment), [Slack](/docs/integrate/webhooks/slack), and [Sentry](/docs/integrate/third-party/sentry).
 
 ### Plugins
 
@@ -106,8 +92,8 @@ If there's something you need in PostHog that we haven't built yet, you can [req
 
 We love all contributions to PostHog, big or small.
 
-Check out our [Contributing Docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/developing-locally), what our [stack](/docs/stack) is, and how the [project is structured](/docs/project-structure).
+Check out our [Contributing Docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/contribute/developing-locally), what our [stack](/docs/contribute/stack) is, and how the [project is structured](/docs/contribute/project-structure).
 
 ### Platform Structure
 
-[Platform Structure](/docs/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.
+[Platform Structure](/docs/user-guides/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.

@@ -14,7 +14,7 @@ Once again, we were heavily driven by feedback, having done a bunch of calls wit
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [Scheduled Plugins and Editor](https://github.com/PostHog/posthog/pull/2743)
 
@@ -74,7 +74,7 @@ Also, while on the topic of session recording, have you been keeping up with the
 
 ![New Actions UX Screenshot](../images/blog/array/actions-ux.png)
 
-This might not be news to all of you, since we have been experimenting with our actions UX using [feature flags](/docs/features/feature-flags). However, we're now rolling out a new UX for creating actions to all PostHog users, so try it out let us know what you think!
+This might not be news to all of you, since we have been experimenting with our actions UX using [feature flags](/docs/user-guides/feature-flags). However, we're now rolling out a new UX for creating actions to all PostHog users, so try it out let us know what you think!
 
 
 ### [New operations for numerical properties](https://github.com/PostHog/posthog/pull/2630)

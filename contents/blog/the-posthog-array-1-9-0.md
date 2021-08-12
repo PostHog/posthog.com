@@ -14,7 +14,7 @@ So, what have we been doing with the money?
 
 Since last time - AWS marketplace deployment, docusaurus integration, much better testing, a shiny new user sessions view, and see a ton of bug fixes and improvements to our testing. This Array is almost emoji-worthy. Almost.
 
-If you're self hosting and desire these features - [update your PostHog](/docs/configuring-posthog/upgrading-posthog).
+If you're self hosting and desire these features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
 
 ## Release notes
 
@@ -44,9 +44,9 @@ What's new? We:
 * [Cached PostHog's yarn builds](https://github.com/PostHog/posthog/pull/927), which took e2e tests down by around 30%.
 * Finally, we now [wait for PostHog to start serving requests](https://github.com/PostHog/posthog/pull/920) rather than the 60 second sleep when running Cypress.
 
-### [Docusaurus integration](https://posthog.com/docs/libraries/docusaurus)
+### [Docusaurus integration](/docs/integrate/third-party/docusaurus)
 
-If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](https://posthog.com/docs/libraries/docusaurus) for that!
+If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](/docs/integrate/third-party/docusaurus) for that!
 
 ### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
 
@@ -56,9 +56,9 @@ You can now install PostHog in just a click or two via AWS' marketplace.
 
 This is just as easy as Heroku and fractionally less expensive!
 
-### [Develop PostHog with Porter](https://posthog.com/docs/developing-locally#using-porter)
+### [Develop PostHog with Porter](/docs/contribute/developing-locally#using-porter)
 
-This was an amazing PR to receive - you can now developer PostHog in the cloud, using Porter. Thank you to [Porter's team](https://getporter.dev/) for doing the work here. 
+This was an amazing PR to receive - you can now develop PostHog in the cloud, using Porter. Thank you to [Porter's team](https://getporter.dev/) for doing the work here. 
 
 ### [Management command for millions of events](https://github.com/PostHog/posthog/pull/475)
 

@@ -59,13 +59,13 @@ export const CallToAction = ({
     onClick,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
-        <span className={`${iconBg} icon inline-block bg-opacity-10 rounded rounded-sm px-3 py-2`}>
+        <span className={`${iconBg} icon inline-block mr-3 bg-opacity-10 rounded rounded-sm px-3 py-2`}>
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
         </span>
     ) : null
 
-    const widthClass = `w-${width}`
-    const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between text-sm relative select-none font-osiris lowercase`
+    const widthClass = `w-full sm:w-${width}`
+    const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between font-bold text-sm relative select-none`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (

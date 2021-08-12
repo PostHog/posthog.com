@@ -58,12 +58,10 @@
         border-radius: 3px;
         color: #8fbcff;
         display: flex;
-        font-family: 'Osiris', sans-serif;
         font-size: 1em;
         margin: 0 auto 0.75rem;
         max-width: 250px;
         padding: 0.5rem;
-        text-transform: lowercase;
 
         -ms-transform: skewX(-20deg);
         -webkit-transform: skewX(-20deg);
@@ -337,7 +335,27 @@
 }
 
 .recent-blog-posts {
-    background: linear-gradient(180deg, #2a235b 0%, #08042f 100%);
+    background: #1e174f;
+    position: relative;
+
+    &:before {
+        background: linear-gradient(180deg, #2a235b 0%, #1e174f 100%);
+        content: '';
+        height: 200px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &:after {
+        background: linear-gradient(180deg, #1e174f 0%, #220f3f 100%);
+        bottom: 0;
+        content: '';
+        height: 200px;
+        position: absolute;
+        width: 100%;
+    }
 }
 
 .blockquote-section {

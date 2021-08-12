@@ -74,8 +74,8 @@ export function Footer({
                 <div className="w-full md:w-1/4 md:pr-8">
                     <FooterCategory title="Product">
                         <FooterSubCategory>Overview</FooterSubCategory>
-                        <FooterListItem to="/product-features" border={false}>
-                            Product overview &amp; comparison
+                        <FooterListItem to="/product" border={false}>
+                            Product
                         </FooterListItem>
 
                         <FooterSubCategory>Product suite</FooterSubCategory>
@@ -114,6 +114,7 @@ export function Footer({
                         </FooterListItem>
 
                         <FooterSubCategory>Get involved</FooterSubCategory>
+                        <FooterListItem href="/docs/contribute/code-of-conduct">Code of conduct</FooterListItem>
                         <FooterListItem href="/handbook/strategy/roadmap">Roadmap</FooterListItem>
                         <FooterListItem to="/contributors">Contributors</FooterListItem>
                         <FooterListItem href="https://merch.posthog.com/collections/all" border={false}>
@@ -125,21 +126,21 @@ export function Footer({
                     <FooterCategory title="Docs">
                         <FooterSubCategory>Getting started</FooterSubCategory>
                         <FooterListItem href="https://app.posthog.com/signup">PostHog cloud</FooterListItem>
-                        <FooterListItem to="/docs/deployment" border={false}>
+                        <FooterListItem to="/docs/self-host" border={false}>
                             Deploying PostHog
                         </FooterListItem>
 
                         <FooterSubCategory>Configuring PostHog</FooterSubCategory>
-                        <FooterListItem to="/docs/deployment">Installation</FooterListItem>
+                        <FooterListItem to="/docs/self-host/configure">Installation</FooterListItem>
                         <FooterListItem to="/docs">Docs</FooterListItem>
-                        <FooterListItem to="/docs/api/overview">API</FooterListItem>
-                        <FooterListItem to="/docs/libraries" border={false}>
+                        <FooterListItem to="/docs/api">API</FooterListItem>
+                        <FooterListItem to="/docs/integrate" border={false}>
                             Libraries
                         </FooterListItem>
 
                         <FooterSubCategory>Using PostHog</FooterSubCategory>
-                        <FooterListItem to="/docs/features">Features</FooterListItem>
-                        <FooterListItem to="/docs/plugins/overview">Plugins</FooterListItem>
+                        <FooterListItem to="/docs/user-guides">Features</FooterListItem>
+                        <FooterListItem to="/docs/plugins">Plugins</FooterListItem>
                         <FooterListItem to="/docs/tutorials">Tutorials</FooterListItem>
                         <FooterListItem to="/faq" border={false}>
                             FAQ

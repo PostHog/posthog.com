@@ -1,4 +1,9 @@
-# Messaging framework
+---
+title: Messaging Framework
+sidebar: Handbook
+showTitle: true
+---
+
 ## What is this document for?
 This is an internal document created to enable consistent messaging which establishes PostHog’s position relative to alternatives in the market. This messaging is reflective of the customers’ experience, rather than the company’s perspective. 
 
@@ -9,15 +14,15 @@ This document is not intended to be used verbatim in customer communications or 
 In the event of substantive changes to this document, please be sure to update other main channels to be consistent with the changes, including:
 
 - Main web pages: Homepage, Features Page, Pricing Page
-- Social media bios: LinkedIn, Twitter
-- Review sites and listings: G2, Crunchbase, Pitchbook
+- Social media bios: LinkedIn, Twitter, YouTube
+- Review sites and listings: G2, Crunchbase, Pitchbook, Stackshare
 
 ## Value proposition
 Build better products by discovering and testing insights through an open-source self-hostable analytics platform which has unlimited potential to scale. 
 
 ## Target audience
-**Buyer & Decision Makers:** Product Managers / Technical Leadership
-**Buyer & Decision Makers & Influencers:** Engineers 
+- **Buyer & Decision Makers:** Product Managers / Technical Leadership
+- **Buyer & Decision Makers & Influencers:** Engineers 
 
 We are primarily targeting Product Managers and Engineers in growth-stage businesses built around digital products; primarily web-based or software products. Apps are also viable but have less product fit due to current feature gaps (e.g. session recording, auto-capture).
 

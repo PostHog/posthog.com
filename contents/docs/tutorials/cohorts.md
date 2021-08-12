@@ -78,7 +78,7 @@ Here, you have a few options:
 
 **Action**
 
-You can group users by an [action](/docs/features/actions) they have in common, as well as the timeframe they performed that action in. This means that users who have performed that action at least once in the specified time period will be added to the cohort.
+You can group users by an [action](/docs/user-guides/actions) they have in common, as well as the timeframe they performed that action in. This means that users who have performed that action at least once in the specified time period will be added to the cohort.
 
 **Property**
 
@@ -118,7 +118,7 @@ Not only are you able to roll out features by cohort, but you are also able to c
 
 </span>
 
-Cohorts can be used on filters on all PostHog Insights, and they can also be used for breakdowns in [Trends](/docs/features/trends).
+Cohorts can be used on filters on all PostHog Insights, and they can also be used for breakdowns in [Trends](/docs/user-guides/trends).
 
 Regarding business metrics, cohorts are especially useful to determine retention and conversion of different groups. They can help answer questions like:
 
@@ -131,10 +131,10 @@ To answer questions like these, just filter your queries by cohort when using In
 
 This will give you the same query as before but only including events from users in that specific cohort.
 
-Additionally, if you want to see comparisons across cohorts side-by-side, you can add the designated panels to a dashboard, creating a view like the picture below, which works for charts, tables, and [funnels](/docs/features/funnels).
+Additionally, if you want to see comparisons across cohorts side-by-side, you can add the designated panels to a dashboard, creating a view like the picture below, which works for charts, tables, and [funnels](/docs/user-guides/funnels).
 
 ![Cohort Dashboard Funnels](../../images/tutorials/cohorts/dashboard.png)
-<small class='center'>[_Access a full dashboards tutorial here_](/docs/features/dashboards/)  </small>
+<small class='center'>[_Access a full dashboards tutorial here_](/docs/user-guides/dashboards/)  </small>
 
 Finally, you are also able to see how different cohorts perform on the same chart/table when in 'Trends'.
 

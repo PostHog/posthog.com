@@ -7,6 +7,8 @@ import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
+import { BlogFeaturedImage } from './components/Blog/BlogFeaturedImage'
+import { BlogIntro } from './components/Blog/BlogIntro'
 import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
 import { BlogShareButtons } from './components/Blog/BlogShareButtons'
@@ -31,6 +33,11 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
+import { Doodle } from './components/Doodle'
+import { DoodleCircle } from './components/DoodleCircle'
+import { DoodleRectangle } from './components/DoodleRectangle'
+import { DoodleTriangle } from './components/DoodleTriangle'
+import { DoodleZigzag } from './components/DoodleZigzag'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -38,6 +45,7 @@ import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
+import { HostingOption } from './components/HostingOption'
 import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
 import { Hero } from './components/LandingPage/Hero'
@@ -51,7 +59,9 @@ import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
+import { OverflowXSection } from './components/OverflowXSection'
 import { PageHeader } from './components/PageHeader'
 import { PlanComparisonTable } from './components/PlanComparisonTable'
 import { PostCard } from './components/PostCard'
@@ -63,6 +73,12 @@ import { PricingTable } from './components/Pricing/PricingTable'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { PricingSlider } from './components/PricingSlider'
+import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
+import { ProductFeature } from './components/ProductFeature'
+import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
+import { ProductFooter } from './components/ProductFooter'
+import { ProductHero } from './components/ProductHero'
+import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
 import { ResponsiveTopBar } from './components/ResponsiveTopBar'
@@ -71,6 +87,7 @@ import { DesignedForYourStackBlock } from './components/Sections/DesignedForYour
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SignupModal } from './components/SignupModal'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
@@ -86,6 +103,8 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
+    BlogFeaturedImage,
+    BlogIntro,
     BlogPostLayout,
     BlogPosts,
     BlogShareButtons,
@@ -110,6 +129,11 @@ export const shortcodes = {
     DemoScheduler,
     DocsPageSurvey,
     DocsSearch,
+    Doodle,
+    DoodleCircle,
+    DoodleRectangle,
+    DoodleTriangle,
+    DoodleZigzag,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -117,6 +141,7 @@ export const shortcodes = {
     GetStartedModal,
     GithubIcon,
     HiddenSection,
+    HostingOption,
     Blockquote,
     Features,
     Hero,
@@ -130,7 +155,9 @@ export const shortcodes = {
     LibraryStats,
     MdxAnchorHeaders,
     NewsletterForm,
+    NotFoundPage,
     OtherFeaturesBlock,
+    OverflowXSection,
     PageHeader,
     PlanComparisonTable,
     PostCard,
@@ -142,6 +169,12 @@ export const shortcodes = {
     Quote,
     Savings,
     PricingSlider,
+    ProductAnchorNavbar,
+    ProductFeature,
+    ProductFeaturePlugin,
+    ProductFooter,
+    ProductHero,
+    ProductSectionHeader,
     ResponsiveAnchor,
     ResponsiveSidebar,
     ResponsiveTopBar,
@@ -150,6 +183,7 @@ export const shortcodes = {
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SignupModal,
     Spacer,
     StarRepoButton,
     StartNowButton,

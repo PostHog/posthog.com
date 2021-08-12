@@ -10,7 +10,7 @@ Giving a new joiner a great experience is very important to us, especially given
 
 We have members working all around the world, so their onboarding process may look a little different depending on where they are based and which team they are in. 
 
-The people team will copy the relevant sections of the checklist into an onboarding issue on the [People&Ops Roadmap](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
+The people team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
 
 As always, this is a living document and it changes every now and then, so it's worth keeping an eye on this page. 
 
@@ -41,7 +41,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Create GSuite account for the team member - _Eltje_ 
 *   [ ] Add team member to any relevant Google Groups - _Eltje_ 
 *   [ ] Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan). Once they are on, manually change their profile so their holiday requests are auto-approved - _Eltje_
-*   [ ] Add team member to 1password - _Charles_
+*   [ ] Add team member to 1Password - _Charles_
 *   [ ] Send team member a digital company card - _Eltje_
 *   [ ] Team member to purchase any necessary equipment as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines - _Team member_
 *   [ ] Give them $100 credit to spend on Shopify - _Charles_ 
@@ -73,6 +73,8 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Team members should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t) - _Team member_
 *   [ ] Identify user as team member in [Orbit](https://app.orbit.love/login) - _Anyone_
 *   [ ] Share user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit) - _Manager_
+*   [ ] Tell Mo that they're new to the team so he can schedule their intro interviews - _Anyone_
+
 
 ## During their first week
 
@@ -112,6 +114,12 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) - get them to [connect their inbox](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails) <br />
 <input type="checkbox"/>  Orbit (https://orbit.love/) for community management<br />
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br />
+
+#### Marketing
+
+<input type="checkbox"/>  Google Analytics and Google Search Console <br />
+<input type="checkbox"/>  Any social media platforms we have a presence on <br />
+<input type="checkbox"/>  Any other third party analytics tools we use (e.g. HootSuite, RivalIQ, etc.) <br />
 
 ## Tools we use
 
