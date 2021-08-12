@@ -63,13 +63,13 @@ jobs:
                   node-version: '16'
             - uses: borales/actions-yarn@v2.3.0
               with:
-                  cmd: install -g jest
+                  cmd: global add jest
             - uses: borales/actions-yarn@v2.3.0
               with:
                   cmd: test
-            - run: yarn install -g jest
-            - run: yarn test
-            - run: generate-redirects-js
+            - uses: borales/actions-yarn@v2.3.0
+              with:
+                  cmd: generate-redirects-js
             - run: |
                   rm pr_diff
                   #git add .
