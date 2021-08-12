@@ -63,6 +63,7 @@ try:
             local_netlify_config_file.close()
 
             # handle index default directory files. /path/index will become /path
+            from_paths[i] = re.sub("\/index$", "", from_paths[i])
             to_paths[i] = re.sub("\/index$", "", to_paths[i])
             
             new_redirect = redirect_text.format(from_paths[i], to_paths[i])
