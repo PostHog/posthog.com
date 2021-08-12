@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
 import './style.scss'
@@ -17,6 +17,14 @@ export interface PostType {
         title: string
         featuredImage: {
             publicURL: string | null
+        } | null
+    }
+}
+
+type PostTypeWithImage = PostType & {
+    frontmatter: PostType['frontmatter'] & {
+        featuredImage: {
+            publicURL: string
         }
     }
 }
@@ -44,7 +52,7 @@ const ReadPostHome = ({ to }: { to: string }) => {
     )
 }
 
-const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
+const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
             <div className="w-full md:w-1/2 md:pr-8 py-4 mx-auto">
@@ -59,33 +67,29 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostType; authorDetails?:
                 </h2>
                 <AuthorIndexView authorDetails={authorDetails} />
             </div>
-            {post.frontmatter.featuredImage?.publicURL && (
-                <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded overflow-hidden flex items-center justify-center">
-                    <Link to={post.fields.slug} className="featured-post-img">
-                        <img
-                            className="w-full h-auto block rounded shadow-lg"
-                            src={post.frontmatter.featuredImage.publicURL}
-                        />
-                    </Link>
-                </div>
-            )}
+            <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded overflow-hidden flex items-center justify-center">
+                <Link to={post.fields.slug} className="featured-post-img">
+                    <img
+                        className="w-full h-auto block rounded shadow-lg"
+                        src={post.frontmatter.featuredImage.publicURL}
+                    />
+                </Link>
+            </div>
         </div>
     )
 }
 
-const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
+const LandingPageLatestPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col justify-between items-center">
-            {post.frontmatter.featuredImage?.publicURL && (
-                <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
-                    <Link to={post.fields.slug} className="featured-post-img">
-                        <img
-                            className="w-full h-auto block rounded shadow-lg mb-0"
-                            src={post.frontmatter.featuredImage.publicURL}
-                        />
-                    </Link>
-                </div>
-            )}
+            <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
+                <Link to={post.fields.slug} className="featured-post-img">
+                    <img
+                        className="w-full h-auto block rounded shadow-lg mb-0"
+                        src={post.frontmatter.featuredImage.publicURL}
+                    />
+                </Link>
+            </div>
             <div className="w-full py-4">
                 <h2 className="text-2xl text-white font-sans normal-case my-1">
                     <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
@@ -102,19 +106,17 @@ const LandingPageLatestPost = ({ post, authorDetails }: { post: PostType; author
     )
 }
 
-const LandingPageSnippet = ({ post, authorDetails }: { post: PostType; authorDetails?: AuthorsData }) => {
+const LandingPageSnippet = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
     return (
         <div className="w-full flex flex-col justify-between items-center">
-            {post.frontmatter.featuredImage?.publicURL && (
-                <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
-                    <Link to={post.fields.slug} className="featured-post-img">
-                        <img
-                            className="w-full h-auto block rounded shadow-lg mb-0"
-                            src={post.frontmatter.featuredImage.publicURL}
-                        />
-                    </Link>
-                </div>
-            )}
+            <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
+                <Link to={post.fields.slug} className="featured-post-img">
+                    <img
+                        className="w-full h-auto block rounded shadow-lg mb-0"
+                        src={post.frontmatter.featuredImage.publicURL}
+                    />
+                </Link>
+            </div>
             <div className="w-full py-2">
                 <h2 className="text-lg text-white font-sans normal-case my-1 leading-tight">
                     <Link to={post.fields.slug} className="text-white hover:text-white hover:underline">
@@ -127,8 +129,19 @@ const LandingPageSnippet = ({ post, authorDetails }: { post: PostType; authorDet
     )
 }
 
+const addDefaultImage = (post: PostType, defaultImage: string): PostTypeWithImage => ({
+    ...(post || {}),
+    frontmatter: {
+        ...(post.frontmatter || {}),
+        featuredImage: {
+            ...(post.frontmatter.featuredImage || {}),
+            publicURL: post.frontmatter.featuredImage?.publicURL || defaultImage,
+        },
+    },
+})
+
 const PostCard = ({
-    post,
+    post: sourcePost,
     featured = false,
     landingPage = false,
     snippet = false,
@@ -139,7 +152,12 @@ const PostCard = ({
     landingPage?: boolean
     snippet?: boolean
     authorDetails?: AuthorsData
-}) => {
+}): JSX.Element => {
+    const { site } = useStaticQuery(query)
+    const { defaultImage } = site.siteMetadata
+    console.log({ sourcePost })
+    const post = addDefaultImage(sourcePost, defaultImage)
+
     return (
         <div>
             {featured ? (
@@ -157,12 +175,10 @@ const PostCard = ({
                         >
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
                                 <Link to={post.fields.slug} className="featured-post-img">
-                                    {post.frontmatter.featuredImage?.publicURL && (
-                                        <img
-                                            className="w-full h-auto block rounded shadow-lg"
-                                            src={post.frontmatter.featuredImage.publicURL}
-                                        />
-                                    )}
+                                    <img
+                                        className="w-full h-auto block rounded shadow-lg"
+                                        src={post.frontmatter.featuredImage.publicURL || defaultImage}
+                                    />
                                 </Link>
                             </div>
                             {post.frontmatter.title}
@@ -174,5 +190,15 @@ const PostCard = ({
         </div>
     )
 }
+
+const query = graphql`
+    query DefaultMetaImage {
+        site {
+            siteMetadata {
+                defaultImage: image
+            }
+        }
+    }
+`
 
 export default PostCard
