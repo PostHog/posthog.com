@@ -696,8 +696,3 @@
 [[redirects]]
     from = "/docs/data-model"
     to = "/docs/data-model"
-
-# Added: 2021-08-10
-[[redirects]]
-    from = "/docs/cloud/proxy"
-    to = "/docs/self-host/deploy/proxy"
