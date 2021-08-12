@@ -9,7 +9,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                 zIndex: 1001,
                 transform: menuOpen ? 'translate3d(calc(100vw - 80px), 0px, 0px)' : 'none',
             }}
-            className="max-w-[800px] p-4 pb-0 lg:p-0 lg:mt-8 backdrop-blur-sm sm:backdrop-blur-0 mx-auto handbook-search  z-20 sticky top-0 lg:top-10"
+            className="max-w-[800px] p-4 pb-0 lg:p-0 lg:mt-8 backdrop-blur-sm sm:backdrop-blur-0 mx-auto handbook-search  z-20 sticky top-0 lg:top-4"
         >
             <div className="w-full flex space-x-2 md:space-x-0 text-[#c4b7d1] ">
                 <button
