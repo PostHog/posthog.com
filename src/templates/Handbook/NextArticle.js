@@ -11,7 +11,7 @@ export default function NextArticle({ hideAnchor, breakpoints, next }) {
                 className="bg-[#765494] my-9"
             />
             <section className="">
-                <p className="dark:text-white opacity-70 font-bold m-0 text-base">NEXT UP</p>
+                <p className="dark:text-white opacity-70 font-bold m-0 text-base mb-1">NEXT UP</p>
 
                 <Link
                     className="text-yellow hover:text-yellow flex items-center space-x-1 text-base font-bold"
