@@ -24,7 +24,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                     onUpdate={handleInternalNavUpdate}
                     className="list-none m-0 p-0 flex flex-col space-y-2"
                     items={tableOfContents?.map((navItem) => navItem.url)}
-                    currentClassName="active-link font-bold"
+                    currentClassName="active-link"
                 >
                     {tableOfContents?.map((navItem, index) => {
                         return (
@@ -34,7 +34,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                                 key={index}
                             >
                                 <a
-                                    className={`text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white font-bold`}
+                                    className={`text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white`}
                                     onClick={() => scrollTo(`[id="${navItem.url}"]`)}
                                 >
                                     {navItem.name}

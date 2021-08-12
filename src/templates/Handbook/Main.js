@@ -36,12 +36,12 @@ export default function Main({
     }
     const breakpoints = useBreakpoint()
     return (
-        <div className="relative">
-            <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10 px-4">
+        <div className="relative px-4">
+            <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
                 <MainSidebar
                     menu={menu}
                     slug={slug}
-                    className="hidden md:block flex-shrink-0 2xl:flex-1 sticky top-10 mb-14 max-w-[224px]"
+                    className="hidden md:block flex-shrink-0 2xl:flex-1 sticky top-10 mb-14 max-w-[224px] transition-opacity md:opacity-40 hover:opacity-100"
                 />
                 <main className="relative md:pl-16 xl:px-32">
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
