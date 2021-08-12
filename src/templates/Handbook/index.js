@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Header from 'components/Header'
+import SearchBar from './SearchBar'
 import Main from './Main'
 import Footer from './Footer'
 import MainSidebar from './MainSidebar'
@@ -37,7 +38,7 @@ export default function Handbook({
             <Header onPostPage className="max-w-screen-2xl mx-auto" />
             <div id="handbook-menu-wrapper">
                 <Menu
-                    width="80vw"
+                    width="calc(100vw - 80px)"
                     onClose={() => setMenuOpen(false)}
                     customBurgerIcon={false}
                     customCrossIcon={false}
@@ -49,6 +50,12 @@ export default function Handbook({
                 >
                     <MainSidebar menu={menu} slug={slug} className="p-5 pb-32" />
                 </Menu>
+                <SearchBar
+                    menuOpen={menuOpen}
+                    handleMobileMenuClick={handleMobileMenuClick}
+                    filePath={filePath}
+                    title={title}
+                />
                 <div id="handbook-content-menu-wrapper">
                     <Main
                         {...{

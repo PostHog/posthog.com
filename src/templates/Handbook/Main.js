@@ -36,9 +36,8 @@ export default function Main({
     }
     const breakpoints = useBreakpoint()
     return (
-        <div className="relative px-4 pt-8 md:pt-14">
-            <SearchBar handleMobileMenuClick={handleMobileMenuClick} filePath={filePath} title={title} />
-            <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
+        <div className="relative">
+            <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10 px-4">
                 <MainSidebar
                     menu={menu}
                     slug={slug}

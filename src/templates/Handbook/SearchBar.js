@@ -1,15 +1,29 @@
 import React from 'react'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 
-export default function SearchBar({ filePath, title, handleMobileMenuClick }) {
+export default function SearchBar({ filePath, title, handleMobileMenuClick, style, menuOpen }) {
     return (
-        <div className="max-w-[800px] mx-auto handbook-search relative z-10">
+        <div
+            style={{
+                transition: 'all 0.5s ease 0s',
+                zIndex: 1001,
+                transform: menuOpen ? 'translate3d(calc(100vw - 80px), 0px, 0px)' : 'none',
+            }}
+            className="max-w-[800px] p-4 pb-0 lg:p-0 lg:mt-8 backdrop-blur-sm sm:backdrop-blur-0 mx-auto handbook-search  z-20 sticky top-0"
+        >
             <div className="w-full flex space-x-2 md:space-x-0 text-[#c4b7d1] ">
                 <button
                     onClick={handleMobileMenuClick}
                     className="bg-[#e4e0e9] dark:bg-[#371A51] rounded px-4 flex-shrink-0 block md:hidden shadow-xl dark:shadow-2xl"
                 >
-                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        style={{ transform: `rotate(${menuOpen ? '180deg' : '0deg'})` }}
+                        width="18"
+                        height="16"
+                        viewBox="0 0 18 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
                         <g opacity="0.5">
                             <path
                                 d="M8.99992 0C9.70943 0 10.2878 0.578406 10.2878 1.28792C10.2878 1.99743 9.70943 2.57583 8.99992 2.57583H1.28784C0.578331 2.57583 -7.62939e-05 1.99743 -7.62939e-05 1.28792C-7.62939e-05 0.578406 0.578331 0 1.28784 0H8.99992Z"
