@@ -66,7 +66,7 @@ jobs:
                   cmd: global add jest
             - uses: borales/actions-yarn@v2.3.0
               with:
-                  cmd: test
+                  cmd: test-generate-redirects
             - uses: borales/actions-yarn@v2.3.0
               with:
                   cmd: generate-redirects-js
