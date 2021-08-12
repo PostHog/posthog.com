@@ -298,11 +298,11 @@
             "handbook/company/security",
             "handbook/company/branding"
         ],
-        "child_entries": ["Team Structure"]
+        "child_entries": ["Team structure"]
     },
     {
-        "entry": "Team Structure",
-        "name": "Team Structure",
+        "entry": "Team structure",
+        "name": "Team structure",
         "items": [
             "handbook/people/team-structure/team-structure",
             "handbook/people/team-structure/why-small-teams",
@@ -378,12 +378,16 @@
     {
         "entry": "Growth",
         "name": "Growth",
-        "items": ["handbook/growth/strategy", "handbook/growth/customer-support", "handbook/growth/developer-relations"],
-        "child_entries": ["Customer Success"]
+        "items": [
+            "handbook/growth/strategy",
+            "handbook/growth/customer-support",
+            "handbook/growth/developer-relations"
+        ],
+        "child_entries": ["Customer success"]
     },
     {
-        "entry": "Customer Success",
-        "name": "Customer Success",
+        "entry": "Customer success",
+        "name": "Customer success",
         "items": [
             "handbook/growth/sales/overview",
             "handbook/growth/sales/sales-operations",

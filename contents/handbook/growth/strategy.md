@@ -90,7 +90,7 @@ Developer-evangelism is more about adoption of the first users - creating conten
 
 #### What's the difference between Customer Success and Developer Experience?
 
-Customer Success is a more commercially-oriented function, focused on inbound sales.
+Customer success is a more commercially-oriented function, focused on inbound sales.
 
 #### What are sales ops?
 
