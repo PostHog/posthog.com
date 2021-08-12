@@ -1,14 +1,14 @@
-import { readdirSync, lstatSync, writeFileSync } from 'fs'
+const fs = require('fs')
 
 const baseDir = './src/components'
 const componentsToIgnore = new Set(['Layout', 'SidebarContents', 'Header', 'Menu', 'UserLogosCarousel'])
 
 const getComponentsInDir = (dir, components = []) => {
-    const dirContents = readdirSync(dir)
+    const dirContents = fs.readdirSync(dir)
     let subdirectories = []
     let indexFileInDir = false
     for (let f of dirContents) {
-        if (lstatSync(`${dir}/${f}`).isDirectory() && !componentsToIgnore.has(f)) {
+        if (fs.lstatSync(`${dir}/${f}`).isDirectory() && !componentsToIgnore.has(f)) {
             subdirectories.push(f)
             continue
         }
@@ -36,7 +36,7 @@ const generateFile = () => {
         componentNames.push(componentName)
     }
     imports += '\nexport const shortcodes = {\n\t' + componentNames.join(',\n\t') + '\n}'
-    writeFileSync('./src/mdxGlobalComponents.js', imports)
+    fs.writeFileSync('./src/mdxGlobalComponents.js', imports)
 }
 
 generateFile()

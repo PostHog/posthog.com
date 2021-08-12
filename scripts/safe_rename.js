@@ -1,5 +1,6 @@
-import { promises } from 'fs'
-import fetch from 'node-fetch'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const fs = require('fs')
+const fetch = require('node-fetch')
 
 let DEBUG = false
 
@@ -65,14 +66,14 @@ const getRemoteConfig = async () => {
 
 // # Load existing redirect file to be used to avoid duplicates
 const getLocalConfig = async () => {
-    return await promises.readFile('./netlify.toml', 'utf8')
+    return await fs.promises.readFile('./netlify.toml', 'utf8')
 }
 
 const appendToLocalConfig = async (newRedirects) => {
-    await promises.appendFile('./netlify.toml', newRedirects)
+    await fs.promises.appendFile('./netlify.toml', newRedirects)
 }
 
-export const getRedirects = async ({ gitDiff, localConfig, remoteConfig, debug = false }) => {
+const getRedirects = async ({ gitDiff, localConfig, remoteConfig, debug = false }) => {
     DEBUG = debug
     log(gitDiff)
 
@@ -118,7 +119,7 @@ export const getRedirects = async ({ gitDiff, localConfig, remoteConfig, debug =
 
 const main = async () => {
     try {
-        const gitDiff = await promises.readFile('./pr_diff', 'utf8')
+        const gitDiff = await fs.promises.readFile('./pr_diff', 'utf8')
 
         const remoteConfig = await getRemoteConfig()
         const localConfig = await getLocalConfig()
@@ -134,4 +135,8 @@ const main = async () => {
 
 if (process.env.RUN_AS_SCRIPT === 'true') {
     main()
+}
+
+module.exports = {
+    getRedirects,
 }
