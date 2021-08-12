@@ -62,7 +62,7 @@ jobs:
               with:
                   node-version: '16'
             - name: Install dependencies
-              run: npm install --only=dev
+              run: npm install --production=false
             - name: Run tests
               run: npm run test-generate-redirects
             - name: Add safe redirects
