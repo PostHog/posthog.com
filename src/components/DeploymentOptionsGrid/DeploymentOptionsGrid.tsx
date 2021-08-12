@@ -68,9 +68,7 @@ export const DeploymentOptionsGrid = (): JSX.Element => {
                                 'No third-party cookies',
                             ]}
                         />
-                        <ButtonBlock
-                            onClick={() => reportDeploymentTypeSelected(Realm.hosted, '/docs/self-host/overview')}
-                        >
+                        <ButtonBlock onClick={() => reportDeploymentTypeSelected(Realm.hosted, '/docs/self-host')}>
                             Select
                         </ButtonBlock>
                     </div>
