@@ -1,5 +1,6 @@
 ---
 title: Hiring process
+sidebarTitle: Overview
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
