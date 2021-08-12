@@ -53,7 +53,7 @@ export default function Main({
                                 Last updated: <time>{lastUpdated}</time>
                             </p>
                         </section>
-                        {breakpoints.lg && !hideAnchor && (
+                        {breakpoints.lg && showToc && (
                             <InternalSidebar
                                 className="bg-[#e4e0e9] dark:bg-white p-4 rounded dark:bg-opacity-10 mb-10"
                                 tableOfContents={tableOfContents}
