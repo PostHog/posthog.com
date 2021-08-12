@@ -8,7 +8,7 @@ import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 import './NotFoundPage.scss'
 
-export default function NotFoundPage() {
+export default function NotFoundPage(): JSX.Element {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
     useEffect(() => {
