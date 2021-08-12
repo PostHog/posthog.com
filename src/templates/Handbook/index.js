@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
+import { SEO } from 'components/seo'
 import Header from 'components/Header'
 import SearchBar from './SearchBar'
 import Main from './Main'
@@ -19,8 +20,8 @@ export default function Handbook({
         frontmatter,
         fields: { slug, contributors },
     } = post
-    const { title, hideAnchor } = frontmatter
-    const { parent } = post
+    const { title, hideAnchor, description, featuredImage } = frontmatter
+    const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
 
@@ -35,50 +36,58 @@ export default function Handbook({
     }
 
     return (
-        <div className="bg-white dark:bg-[#220f3f] handbook-container">
-            <Header onPostPage className="max-w-screen-2xl mx-auto" />
-            <div id="handbook-menu-wrapper">
-                <Menu
-                    width="calc(100vw - 80px)"
-                    onClose={() => setMenuOpen(false)}
-                    customBurgerIcon={false}
-                    customCrossIcon={false}
-                    styles={styles}
-                    pageWrapId="handbook-content-menu-wrapper"
-                    outerContainerId="handbook-menu-wrapper"
-                    overlayClassName="backdrop-blur"
-                    isOpen={menuOpen}
-                >
-                    <MainSidebar menu={menu} slug={slug} className="p-5 pb-32" />
-                </Menu>
-                <SearchBar
-                    menuOpen={menuOpen}
-                    handleMobileMenuClick={handleMobileMenuClick}
-                    filePath={filePath}
-                    title={title}
-                />
-                <div id="handbook-content-menu-wrapper">
-                    <Main
-                        {...{
-                            handleMobileMenuClick,
-                            filePath,
-                            title,
-                            lastUpdated,
-                            menu,
-                            slug,
-                            breadcrumb,
-                            breadcrumbBase,
-                            hideAnchor,
-                            tableOfContents,
-                            body,
-                            next,
-                        }}
+        <>
+            <SEO
+                title={`${title} - Posthog ${breadcrumbBase.name}`}
+                description={description || excerpt}
+                article
+                image={featuredImage?.publicURL}
+            />
+            <div className="bg-white dark:bg-[#220f3f] handbook-container">
+                <Header onPostPage className="max-w-screen-2xl mx-auto" />
+                <div id="handbook-menu-wrapper">
+                    <Menu
+                        width="calc(100vw - 80px)"
+                        onClose={() => setMenuOpen(false)}
+                        customBurgerIcon={false}
+                        customCrossIcon={false}
+                        styles={styles}
+                        pageWrapId="handbook-content-menu-wrapper"
+                        outerContainerId="handbook-menu-wrapper"
+                        overlayClassName="backdrop-blur"
+                        isOpen={menuOpen}
+                    >
+                        <MainSidebar menu={menu} slug={slug} className="p-5 pb-32" />
+                    </Menu>
+                    <SearchBar
+                        menuOpen={menuOpen}
+                        handleMobileMenuClick={handleMobileMenuClick}
+                        filePath={filePath}
+                        title={title}
                     />
+                    <div id="handbook-content-menu-wrapper">
+                        <Main
+                            {...{
+                                handleMobileMenuClick,
+                                filePath,
+                                title,
+                                lastUpdated,
+                                menu,
+                                slug,
+                                breadcrumb,
+                                breadcrumbBase,
+                                hideAnchor,
+                                tableOfContents,
+                                body,
+                                next,
+                            }}
+                        />
+                    </div>
                 </div>
+                <ArticleFooter title={title} filePath={filePath} contributors={contributors} />
+                <Footer />
             </div>
-            <ArticleFooter title={title} filePath={filePath} contributors={contributors} />
-            <Footer />
-        </div>
+        </>
     )
 }
 
@@ -87,6 +96,7 @@ export const query = graphql`
         post: mdx(id: { eq: $id }) {
             id
             body
+            excerpt(pruneLength: 150)
             fields {
                 slug
                 contributors {
@@ -100,6 +110,10 @@ export const query = graphql`
             frontmatter {
                 title
                 hideAnchor
+                description
+                featuredImage {
+                    publicURL
+                }
             }
             parent {
                 ... on File {
