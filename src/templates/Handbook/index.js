@@ -3,7 +3,8 @@ import { graphql } from 'gatsby'
 import Header from 'components/Header'
 import SearchBar from './SearchBar'
 import Main from './Main'
-import Footer from './Footer'
+import ArticleFooter from './Footer'
+import Footer from 'components/Footer'
 import MainSidebar from './MainSidebar'
 import { push as Menu } from 'react-burger-menu'
 import '../../styles/handbook.scss'
@@ -73,9 +74,10 @@ export default function Handbook({
                             next,
                         }}
                     />
-                    <Footer title={title} filePath={filePath} contributors={contributors} />
                 </div>
             </div>
+            <ArticleFooter title={title} filePath={filePath} contributors={contributors} />
+            <Footer />
         </div>
     )
 }

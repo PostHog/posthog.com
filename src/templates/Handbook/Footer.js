@@ -4,7 +4,7 @@ import footerLogo from '../../images/posthog-logo-footer.svg'
 
 export default function Footer({ contributors, filePath, title }) {
     return (
-        <footer className=" text-white pb-52">
+        <footer className="text-white">
             <div className="bg-[#371A51] px-4">
                 <div className="py-14 max-w-[650px] 2xl:max-w-[800px] mx-auto relative">
                     <img className="absolute -top-6" src={footerLogo} />
