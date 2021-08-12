@@ -126,7 +126,7 @@ export function Footer({
                     <FooterCategory title="Docs">
                         <FooterSubCategory>Getting started</FooterSubCategory>
                         <FooterListItem href="https://app.posthog.com/signup">PostHog cloud</FooterListItem>
-                        <FooterListItem to="/docs/self-host/deploy/overview" border={false}>
+                        <FooterListItem to="/docs/self-host/overview" border={false}>
                             Deploying PostHog
                         </FooterListItem>
 
