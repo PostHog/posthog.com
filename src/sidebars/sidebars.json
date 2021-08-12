@@ -255,7 +255,16 @@
     {
         "entry": "Handbook",
         "name": "Handbook",
-        "child_entries": ["Company", "Strategy", "Getting started", "How we work", "People", "Engineering", "Growth"]
+        "child_entries": [
+            "Company",
+            "Strategy",
+            "Getting started",
+            "How we work",
+            "People",
+            "Engineering",
+            "Marketing",
+            "Growth"
+        ]
     },
     {
         "entry": "Company",
@@ -354,16 +363,6 @@
         ]
     },
     {
-        "entry": "Growth",
-        "name": "Growth",
-        "items": [
-            "handbook/growth/strategy",
-            "handbook/growth/customer-support",
-            "handbook/growth/developer-relations"
-        ],
-        "child_entries": ["Marketing", "Sales"]
-    },
-    {
         "entry": "Marketing",
         "name": "Marketing",
         "items": [
@@ -377,8 +376,14 @@
         ]
     },
     {
-        "entry": "Sales",
-        "name": "Sales",
+        "entry": "Growth",
+        "name": "Growth",
+        "items": ["handbook/growth/strategy", "handbook/growth/customer-support", "handbook/growth/developer-relations"],
+        "child_entries": ["Customer Success"]
+    },
+    {
+        "entry": "Customer Success",
+        "name": "Customer Success",
         "items": [
             "handbook/growth/sales/overview",
             "handbook/growth/sales/sales-operations",
