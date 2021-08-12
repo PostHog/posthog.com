@@ -11,37 +11,33 @@ function MenuItem({ item, slug }) {
             })
         )
     }
-    const opacity = item.url === slug || isActive(item.children) ? '1' : '40'
-    const [open, setOpen] = useState(isActive(item.children))
+    const { name, url, children } = item
+    const opacity = url === slug || isActive(children) ? '1' : '40'
+    const [open, setOpen] = useState(isActive(children))
     const handleClick = () => setOpen(!open)
     const height = open ? 'auto' : 0
+    const classes = `flex-grow text-left transition-opacity text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white opacity-${opacity} group-hover:opacity-75 ${
+        children ? 'font-bold' : 'text-[15px]'
+    }`
     return (
         <li>
-            <div className="flex items-center justify-between space-x-16 text-[#200935] dark:text-white">
-                {item.url ? (
-                    <Link
-                        className={`transition-opacity text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white opacity-${opacity} hover:opacity-75 ${
-                            item.children ? 'font-bold' : 'text-[15px]'
-                        }`}
-                        to={item.url}
-                    >
-                        {item.name}
+            <div className="flex items-center justify-between text-[#200935] dark:text-white group">
+                {url ? (
+                    <Link className={classes} to={url}>
+                        {name}
                     </Link>
                 ) : (
-                    <button
-                        onClick={handleClick}
-                        className={`dark:text-white dark:hover:text-white font-bold opacity-${opacity} hover:opacity-75 transition-opacity md:text-base text-[15px]`}
-                    >
-                        {item.name}
+                    <button onClick={handleClick} className={classes}>
+                        {name}
                     </button>
                 )}
 
-                {item.children && (
+                {children && (
                     <button onClick={handleClick}>
                         <svg
                             style={{ transform: `rotate(${open ? '180deg' : '0deg'})` }}
                             xmlns="http://www.w3.org/2000/svg"
-                            className={`h-5 w-5 transition-transform opacity-${opacity} hover:opacity-75 transition-opacity`}
+                            className={`h-5 w-5 transition-transform opacity-${opacity} group-hover:opacity-75 transition-opacity`}
                             viewBox="0 0 20 20"
                             fill="currentColor"
                         >
