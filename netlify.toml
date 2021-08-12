@@ -699,5 +699,10 @@
 
 # Added: 2021-08-12
 [[redirects]]
+    from = "/handbook/people/hiring-process/hiring-process"
+    to = "/handbook/people/hiring-process"
+
+# Added: 2021-08-12
+[[redirects]]
     from = "/docs/self-host/deploy/overview"
-    to = "/docs/self-host/deploy"
+    to = "/docs/self-host"
