@@ -1,5 +1,5 @@
 ---
-title: Share Options
+title: Share options
 sidebar: Handbook
 showTitle: true
 ---
