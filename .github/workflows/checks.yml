@@ -61,16 +61,23 @@ jobs:
             - uses: actions/setup-node@v2
               with:
                   node-version: '16'
-            - uses: borales/actions-yarn@v2.3.0
+            - name: Install posthog.com dependencies
+              uses: borales/actions-yarn@v2.3.0
               with:
-                  cmd: global add jest
-            - uses: borales/actions-yarn@v2.3.0
+                  # Installing all the dependencies seems like overkill. But will start with this to get things working
+                  cmd: install
+            - name: Run tests
+              uses: borales/actions-yarn@v2.3.0
               with:
                   cmd: test-generate-redirects
-            - uses: borales/actions-yarn@v2.3.0
+            - name: Add safe redirects
+              if: ${{ github.base_ref == 'master' }}
+              uses: borales/actions-yarn@v2.3.0
               with:
                   cmd: generate-redirects-js
-            - run: |
+            - name: Cleanup and commit
+              if: ${{ github.base_ref == 'master' }}
+              run: |
                   rm pr_diff
                   #git add .
                   #[ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
