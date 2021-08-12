@@ -35,6 +35,7 @@ export default function Main({
         iframe: Iframe,
     }
     const breakpoints = useBreakpoint()
+    const showToc = !hideAnchor && tableOfContents?.length
     return (
         <div className="relative px-4">
             <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
@@ -63,7 +64,7 @@ export default function Main({
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
                         </section>
-                        {!hideAnchor && (
+                        {showToc && (
                             <div
                                 style={{ height: 'calc(100% - 35vh)' }}
                                 className="w-[1px] absolute bottom-0  right-0 bg-[#765494] hidden xl:flex justify-center"
@@ -72,7 +73,7 @@ export default function Main({
                         {next && <NextArticle next={next} hideAnchor={hideAnchor} breakpoints={breakpoints} />}
                     </article>
                 </main>
-                {!breakpoints.lg && !hideAnchor && (
+                {!breakpoints.lg && showToc && (
                     <InternalSidebar
                         className="flex-shrink-0 xl:flex-1 sticky top-10 mt-[35vh] mb-14"
                         tableOfContents={tableOfContents}
