@@ -17,7 +17,7 @@ function MenuItem({ item, slug }) {
     const height = open ? 'auto' : 0
     return (
         <li>
-            <div className="flex items-center justify-between space-x-16">
+            <div className="flex items-center justify-between space-x-16 text-[#200935] dark:text-white">
                 {item.url ? (
                     <Link
                         className={`transition-opacity text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white opacity-${opacity} hover:opacity-75 ${
@@ -30,7 +30,7 @@ function MenuItem({ item, slug }) {
                 ) : (
                     <button
                         onClick={handleClick}
-                        className={`dark:text-white dark:hover:text-white font-bold opacity-${opacity} hover:opacity-75 transition-opacity`}
+                        className={`dark:text-white dark:hover:text-white font-bold opacity-${opacity} hover:opacity-75 transition-opacity md:text-base text-[15px]`}
                     >
                         {item.name}
                     </button>

@@ -17,6 +17,7 @@ const Iframe = (props) => (
 )
 
 export default function Main({
+    handleMobileMenuClick,
     filePath,
     title,
     lastUpdated,
@@ -35,13 +36,17 @@ export default function Main({
     }
     const breakpoints = useBreakpoint()
     return (
-        <div className="relative px-4">
-            <SearchBar filePath={filePath} title={title} />
-            <div className="dark:text-white pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
-                <MainSidebar menu={menu} slug={slug} />
+        <div className="relative px-4 pt-8 md:pt-14">
+            <SearchBar handleMobileMenuClick={handleMobileMenuClick} filePath={filePath} title={title} />
+            <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
+                <MainSidebar
+                    menu={menu}
+                    slug={slug}
+                    className="hidden md:block flex-shrink-0 2xl:flex-1 sticky top-10 mb-14 max-w-[224px]"
+                />
                 <main className="relative md:pl-16 xl:px-32">
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
-                        <section className="pb-8 xl:mb-16 relative">
+                        <section className="mb-8 xl:mb-14 relative">
                             {breadcrumb && <Breadcrumbs crumbs={breadcrumb} base={breadcrumbBase} />}
                             <h1 className="dark:text-white text-5xl mt-0 mb-2">{title}</h1>
                             <p className="dark:text-light-purple mt-1 mb-0">

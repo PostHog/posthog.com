@@ -1,9 +1,9 @@
 import React from 'react'
 import Menu from './Menu'
 
-export default function MainSidebar({ slug, menu }) {
+export default function MainSidebar({ slug, menu, className }) {
     return (
-        <aside className="hidden md:block flex-shrink-0 2xl:flex-1 sticky top-10 mb-14 max-w-[224px]">
+        <aside className={className}>
             <nav className="transition-opacity opacity-40 hover:opacity-100">
                 <Menu menu={menu} slug={slug} />
             </nav>
