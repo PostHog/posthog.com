@@ -65,6 +65,11 @@ jobs:
               run: yarn
             - name: Run tests
               run: yarn test-generate-redirects
+            - name: Configure Git
+              run: |
+                  git fetch origin master:master
+                  git config user.name PostHog Bot
+                  git config user.email hey@posthog.com
             - name: Add safe redirects
               if: ${{ github.base_ref == 'master' }}
               run: yarn generate-redirects-js
