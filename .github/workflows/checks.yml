@@ -61,15 +61,10 @@ jobs:
             - uses: actions/setup-node@v2
               with:
                   node-version: '16'
-            - name: Install posthog.com dependencies
-              uses: borales/actions-yarn@v2.3.0
-              with:
-                  # Installing all the dependencies seems like overkill. But will start with this to get things working
-                  cmd: install
+            - name: Install dependencies
+              run: npm install --only=dev
             - name: Run tests
-              uses: borales/actions-yarn@v2.3.0
-              with:
-                  cmd: test-generate-redirects
+              run: npm run test-generate-redirects
             - name: Add safe redirects
               if: ${{ github.base_ref == 'master' }}
               uses: borales/actions-yarn@v2.3.0
