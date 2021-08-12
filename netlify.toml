@@ -716,3 +716,8 @@
 [[redirects]]
     from = "/docs/integrate/client/js/index"
     to = "/docs/integrate/client/js"
+
+# Added: 2021-08-12
+[[redirects]]
+    from = "/handbook/people/hiring-process/hiring-process"
+    to = "/handbook/people/hiring-process"
