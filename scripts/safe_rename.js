@@ -72,7 +72,7 @@ const appendToLocalConfig = async (newRedirects) => {
     await promises.appendFile('./netlify.toml', newRedirects)
 }
 
-const getRedirects = async ({ gitDiff, localConfig, remoteConfig, debug = false }) => {
+export const getRedirects = async ({ gitDiff, localConfig, remoteConfig, debug = false }) => {
     DEBUG = debug
     log(gitDiff)
 
@@ -134,9 +134,4 @@ const main = async () => {
 
 if (process.env.RUN_AS_SCRIPT === 'true') {
     main()
-}
-
-export default {
-    getRedirects,
-    skipRules,
 }
