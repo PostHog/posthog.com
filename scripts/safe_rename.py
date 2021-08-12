@@ -24,7 +24,7 @@ def md_to_mdx(from_path, to_path, new_redirect):
     return from_path.endswith('.md') and to_path.endswith('.mdx')
 
 def redirect_exists(from_path, to_path, new_redirect):
-    return new_redirect in local_netlify_config_text
+    return new_redirect.strip() in local_netlify_config_text
 
 def from_dot_star(from_path, to_path, new_redirect):
     return from_path == '(.*)'
