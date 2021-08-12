@@ -51,7 +51,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 acc.push({ url: item.url, name: item.name, breadcrumb })
             }
             if (item.children) {
-                acc.push(...flattenMenu(item.children, [...breadcrumb, item.name]))
+                acc.push(...flattenMenu(item.children, [...breadcrumb, { name: item.name, url: item.url }]))
             }
             return acc
         }, [])
@@ -103,7 +103,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 next,
                 menu: handbookMenu,
                 breadcrumb,
-                breadcrumbBase: 'Handbook',
+                breadcrumbBase: { name: 'Handbook', url: '/handbook' },
                 tableOfContents,
             },
         })
