@@ -1,7 +1,7 @@
 module.exports = {
     mode: 'jit',
     purge: {
-        content: ['./src/**/*.{js,jsx,ts,tsx}'],
+        content: ['./src/**/*.{js,jsx,ts,tsx}', './safelist.txt'],
         options: {
             safelist: [
                 'justify-start',
@@ -33,6 +33,8 @@ module.exports = {
                 'w-56',
                 'w-64',
                 'w-72',
+                'opacity-40',
+                'opacity-1',
             ],
         },
     },
