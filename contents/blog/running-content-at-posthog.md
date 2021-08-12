@@ -1,6 +1,6 @@
 ---
 date: 2021-08-06
-title: Running content at a devtool company
+title: Content marketing strategy for devtool companies - How we do it at PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
