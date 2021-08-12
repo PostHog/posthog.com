@@ -62,14 +62,12 @@ jobs:
               with:
                   node-version: '16'
             - name: Install dependencies
-              run: npm install --production=false
+              run: yarn
             - name: Run tests
-              run: npm run test-generate-redirects
+              run: yarn test-generate-redirects
             - name: Add safe redirects
               if: ${{ github.base_ref == 'master' }}
-              uses: borales/actions-yarn@v2.3.0
-              with:
-                  cmd: generate-redirects-js
+              run: yarn generate-redirects-js
             - name: Cleanup and commit
               if: ${{ github.base_ref == 'master' }}
               run: |
