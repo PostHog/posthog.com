@@ -92,6 +92,9 @@ export const pageQuery = graphql`
                         rootPage
                         featuredImage {
                             publicURL
+                            childImageSharp {
+                                gatsbyImageData
+                            }
                         }
                         author
                     }
@@ -113,6 +116,9 @@ export const pageQuery = graphql`
                         rootPage
                         featuredImage {
                             publicURL
+                            childImageSharp {
+                                gatsbyImageData
+                            }
                         }
                     }
                 }

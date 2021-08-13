@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
+import { GatsbyImage, GatsbyImageProps, IGatsbyImageData } from 'gatsby-plugin-image'
 import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
 import './style.scss'
@@ -17,6 +18,9 @@ export interface PostType {
         title: string
         featuredImage: {
             publicURL: string | null
+            childImageSharp: {
+                gatsbyImageData: IGatsbyImageData
+            } | null
         } | null
     }
 }
@@ -44,9 +48,6 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                 to={post.fields.slug}
                 className="featured-post-img text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
             >
-                {/* <img
-                    className="w-full h-auto block rounded shadow-lg"
-                /> */}
                 <div
                     className="w-full py-4 mx-auto rounded shadow-lg overflow-hidden relative"
                     style={{
@@ -135,6 +136,7 @@ const addDefaultImage = (post: PostType, defaultImage: string): PostTypeWithImag
         featuredImage: {
             ...(post.frontmatter.featuredImage || {}),
             publicURL: post.frontmatter.featuredImage?.publicURL || defaultImage,
+            childImageSharp: post.frontmatter.featuredImage?.childImageSharp || null,
         },
     },
 })
@@ -155,6 +157,8 @@ const PostCard = ({
     const { site } = useStaticQuery(query)
     const { defaultImage } = site.siteMetadata
     const post = addDefaultImage(sourcePost, defaultImage)
+    const staticImageSrc = post.frontmatter.featuredImage.publicURL || defaultImage
+    const { gatsbyImageData } = post.frontmatter.featuredImage?.childImageSharp || {}
 
     return (
         <div>
@@ -173,10 +177,15 @@ const PostCard = ({
                         >
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
                                 <Link to={post.fields.slug} className="featured-post-img overflow-hidden">
-                                    <img
-                                        className="w-full rounded shadow-lg mb-1"
-                                        src={post.frontmatter.featuredImage.publicURL || defaultImage}
-                                    />
+                                    {gatsbyImageData ? (
+                                        <GatsbyImage
+                                            className="w-full rounded shadow-lg mb-1"
+                                            image={gatsbyImageData}
+                                            alt={post.excerpt}
+                                        />
+                                    ) : (
+                                        <img className="w-full rounded shadow-lg mb-1" src={staticImageSrc} />
+                                    )}
                                 </Link>
                             </div>
                             {post.frontmatter.title}
