@@ -58,7 +58,7 @@ function MenuItem({ item, slug, topLevel }) {
     )
 }
 
-export default function Menu({ menu, sub, className, slug, topLevel }) {
+export default function Menu({ menu, sub, className = '', slug, topLevel }) {
     return (
         <ul className={`${className} flex flex-col space-y-2 list-none p-0 my-0 ${sub ? 'ml-2' : ''}`}>
             {menu &&
