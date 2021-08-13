@@ -29,21 +29,6 @@ type PostTypeWithImage = PostType & {
     }
 }
 
-const ReadPost = ({ to }: { to: string }) => {
-    return (
-        <CallToAction
-            type="button"
-            icon="read-dark"
-            iconBg="bg-gray-500 dark:bg-gray-400"
-            to={to}
-            width="full"
-            className="mt-8 border-gray-800 text-gray-600 dark:border-gray-400 dark:text-gray-200 hover:border-gray-900 dark:hover:text-gray-100 hover:text-gray-900"
-        >
-            Read Post
-        </CallToAction>
-    )
-}
-
 const ReadPostHome = ({ to }: { to: string }) => {
     return (
         <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="">
@@ -155,7 +140,6 @@ const PostCard = ({
 }): JSX.Element => {
     const { site } = useStaticQuery(query)
     const { defaultImage } = site.siteMetadata
-    console.log({ sourcePost })
     const post = addDefaultImage(sourcePost, defaultImage)
 
     return (
@@ -167,23 +151,23 @@ const PostCard = ({
             ) : snippet ? (
                 <LandingPageSnippet post={post} authorDetails={authorDetails} />
             ) : (
-                <div className="flex flex-col mb-12">
-                    <h3 className="mb-0">
+                <div className="flex flex-col mb-6">
+                    <h5 className="mb-0 font-bold font-sans normal-case leading-tight">
                         <Link
                             to={post.fields.slug}
-                            className="font-bold font-sans normal-case text-2xl text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                            className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
                         >
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
-                                <Link to={post.fields.slug} className="featured-post-img">
+                                <Link to={post.fields.slug} className="featured-post-img overflow-hidden">
                                     <img
-                                        className="w-full h-auto block rounded shadow-lg"
+                                        className="w-full rounded shadow-lg mb-1"
                                         src={post.frontmatter.featuredImage.publicURL || defaultImage}
                                     />
                                 </Link>
                             </div>
                             {post.frontmatter.title}
                         </Link>
-                    </h3>
+                    </h5>
                     <AuthorIndexView authorDetails={authorDetails} />
                 </div>
             )}
