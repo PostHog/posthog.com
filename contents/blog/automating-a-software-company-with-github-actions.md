@@ -1,5 +1,5 @@
 ---
-date: 2021-08-16
+date: 2021-08-09
 title: Automating a Software Company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
