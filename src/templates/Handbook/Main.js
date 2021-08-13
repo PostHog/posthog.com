@@ -8,6 +8,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import planets from '../../images/planets.svg'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { shortcodes } from '../../mdxGlobalComponents'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -33,6 +34,7 @@ export default function Main({
     const components = {
         a: A,
         iframe: Iframe,
+        ...shortcodes,
     }
     const breakpoints = useBreakpoint()
     const showToc = !hideAnchor && tableOfContents?.length
