@@ -269,6 +269,18 @@ function signup(email) {
 
 When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
 
+
+To configure these options, pass them as an object to the `posthog.init` call, like so:
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    loaded: function(posthog) { posthog.identify('[user unique id]'); },
+    autocapture: false
+    // ... more options
+});
+```
+
 There are multiple different configuration options, most of which you do not have to ever worry about. For brevity, only the most relevant ones are used here. However you can view all the configuration options in [posthog-core.js](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L933).
 
 Some of the most relevant options are:
@@ -289,19 +301,6 @@ Some of the most relevant options are:
 | `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Prevent PostHog autocapture from capturing any attributes from your elements. |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | **Advanced feature - use with caution.** Configuration options for `rrweb`. |
 | `advanced_decide_disabled`<br/><br/>**Type:** Boolean<br/>**Default:** `false`    | **Advanced!** Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.       |
-
-<br />
-
-To configure these options, pass them as an object to the `posthog.init` call, like so:
-
-```js
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    loaded: function(posthog) { posthog.identify('[user unique id]'); },
-    autocapture: false
-    // ... more options
-});
-```
 
 ### Advanced configuration
 
