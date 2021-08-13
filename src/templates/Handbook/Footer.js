@@ -26,7 +26,7 @@ export default function Footer({ contributors, filePath, title }) {
                                     <li key={index}>
                                         <a href={url}>
                                             <GatsbyImage
-                                                className="rounded-full max-w-[37px]"
+                                                imgClassName="rounded-full max-w-[37px]"
                                                 image={image}
                                                 alt={username}
                                                 title={username}
