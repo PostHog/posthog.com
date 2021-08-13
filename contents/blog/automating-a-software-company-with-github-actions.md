@@ -542,3 +542,5 @@ jobs:
 ## Automate your day-to-day
 
 Hopefully these real-life examples inspire you to build the right workflow for your work, spending a bit of time _once_ to reap the rewards of saved time indefinitely.
+
+_Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
