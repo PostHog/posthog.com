@@ -126,22 +126,22 @@ export function Footer({
                     <FooterCategory title="Docs">
                         <FooterSubCategory>Getting started</FooterSubCategory>
                         <FooterListItem href="https://app.posthog.com/signup">PostHog cloud</FooterListItem>
-                        <FooterListItem to="/docs/self-host/deploy/overview" border={false}>
+                        <FooterListItem to="/docs/self-host" border={false}>
                             Deploying PostHog
                         </FooterListItem>
 
                         <FooterSubCategory>Configuring PostHog</FooterSubCategory>
                         <FooterListItem to="/docs/self-host/configure">Installation</FooterListItem>
                         <FooterListItem to="/docs">Docs</FooterListItem>
-                        <FooterListItem to="/docs/api/overview">API</FooterListItem>
-                        <FooterListItem to="/docs/integrate/overview" border={false}>
+                        <FooterListItem to="/docs/api">API</FooterListItem>
+                        <FooterListItem to="/docs/integrate" border={false}>
                             Libraries
                         </FooterListItem>
 
                         <FooterSubCategory>Using PostHog</FooterSubCategory>
-                        <FooterListItem to="/docs/user-guides/overview">Features</FooterListItem>
-                        <FooterListItem to="/docs/plugins/overview">Plugins</FooterListItem>
-                        <FooterListItem to="/docs/tutorials/overview">Tutorials</FooterListItem>
+                        <FooterListItem to="/docs/user-guides">Features</FooterListItem>
+                        <FooterListItem to="/docs/plugins">Plugins</FooterListItem>
+                        <FooterListItem to="/docs/tutorials">Tutorials</FooterListItem>
                         <FooterListItem to="/faq" border={false}>
                             FAQ
                         </FooterListItem>

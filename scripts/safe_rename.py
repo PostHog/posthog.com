@@ -24,7 +24,7 @@ def md_to_mdx(from_path, to_path, new_redirect):
     return from_path.endswith('.md') and to_path.endswith('.mdx')
 
 def redirect_exists(from_path, to_path, new_redirect):
-    return new_redirect in local_netlify_config_text
+    return new_redirect.strip() in local_netlify_config_text
 
 def from_dot_star(from_path, to_path, new_redirect):
     return from_path == '(.*)'
@@ -63,6 +63,7 @@ try:
             local_netlify_config_file.close()
 
             # handle index default directory files. /path/index will become /path
+            from_paths[i] = re.sub("\/index$", "", from_paths[i])
             to_paths[i] = re.sub("\/index$", "", to_paths[i])
             
             new_redirect = redirect_text.format(from_paths[i], to_paths[i])
