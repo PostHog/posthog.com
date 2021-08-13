@@ -19,17 +19,17 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 ## Golden rules
 
 1. Use **asynchronous communication** when possible: pull requests (preferred) or issues. Announcements happen on the appropriate Slack channels and [people should be able to do their work without getting interrupted by chat](https://m.signalvnoise.com/is-group-chat-making-you-sweat-744659addf7d#.21t7089jk).
-1. Discussion in GitHub issues or pull requests is preferred over everything else. If you need a response urgently, you can Slack someone with a link to your comment on an issue or pull request, asking them to respond there. However, be aware that they still may not see it straight away (and that's OK in our book). 
+1. Discussion in GitHub issues or pull requests is preferred over everything else. If you need a response urgently, you can Slack someone with a link to your comment on an issue or pull request, asking them to respond there. However, be aware that they still may not see it straight away (and that's OK in our book).
 1. You are not expected to be available all the time. There is **no** expectation to respond to messages outside of your planned working hours.
 1. It is 100% OK to ask as many questions as you have - please ask in public channels! If someone sends you a handbook link, that means they are proud that we have the answer documented - they don't mean that you should have found that yourself or that this is the complete answer. If the answer to a question isn't documented yet please immediately make a pull request to add it to the handbook in a place you have looked for it.
-1. When someone asks for something, reply back with a deadline or by noting that you already did it. Answers like: 'will do', 'OK', or 'it is on my todo list' are not helpful. If it is small task for you but will unblock someone else, consider spending a few minutes to do the task so the other person can move forward.
-1. By default, avoid creating private groups for internal discussions. 
+1. When someone asks for something, reply back with a deadline or by noting that you already did it. Answers like: 'will do', 'OK', or 'it is on my todo list' are not helpful. If it is a small task for you but will unblock someone else, consider spending a few minutes to do the task so the other person can move forward.
+1. By default, avoid creating private groups for internal discussions.
 
 ## Public by default
 
 We make things public by default because [transparency](/handbook/company/culture#transparency) is core to our culture. The kinds of information we share falls into one of three buckets:
 
-- _Public_ - most things, including our product, roadmap, handbook and strategy. 
+- _Public_ - most things, including our product, roadmap, handbook and strategy.
 - _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
 - _Private internally_ - personal team information, i.e. compensation, disciplinary issues.
 
@@ -71,7 +71,7 @@ Please be sure to read the README of the repo for guidelines on how to file spec
 **Examples of information that should go here:**
 - ✅ Vulnerabilities (security bugs) reports
 - ✅ Bug reports where most of the context of the report depends on customer's PII. *Some bug reports require screenshots, recordings, or some other information that contains PII and as such can't be public.*
-- ✅ Post-mortems on outages, or other issues affecting a large portion of customers. The results of these should usually be made public though. 
+- ✅ Post-mortems on outages, or other issues affecting a large portion of customers. The results of these should usually be made public though.
 - ✅ Documentation of internal infrastructure, where if it was public knowledge could provide valuable information to an attacker.
 - ✅ Experiment (A/B testing) results.
 - ✅ Product or growth strategy discussions (unless they should be public).
@@ -100,7 +100,7 @@ Not every solution will solve the problem at hand. Keep discussions focused by _
 
 #### Issues
 
-GitHub Issues are useful when there isn't a specific code change that is being proposed or needed. For example, you may want to start an issue for tracking progress or for project management purposes that do not pertain to code commits. This can be particularly useful when tracking team tasks and creating issue boards. 
+GitHub Issues are useful when there isn't a specific code change that is being proposed or needed. For example, you may want to start an issue for tracking progress or for project management purposes that do not pertain to code commits. This can be particularly useful when tracking team tasks and creating issue boards.
 
 However, it is still important to maintain focus when opening issues by defining a single specific topic of discussion as well as defining the desired outcome that would result in the resolution of the issue. The point is to not keep issues open-ended and to prevent issues from going stale due to lack of resolution. For example, a team member may open an issue to track the progress of a blog post with associated to-do items that need to be completed by a certain date (e.g. first draft, peer review, publish). Once the specific items are completed, the issue can successfully be closed.
 
@@ -132,7 +132,7 @@ Slack is used differently in different organizations. Here are some guidelines f
 
 Never use a Google Doc / Slides for something non-confidential that has to end up on the website or this handbook. Work on these edits via commits to a pull request. Then link to the pull request or diff to present the change to people. This prevents a duplication of effort and/or an out of date handbook.
 
-We mainly use Google Docs to capture internal information like meeting notes or to share company updates and metrics. We always make the doc accessible so you can comment and ask questions. 
+We mainly use Google Docs to capture internal information like meeting notes or to share company updates and metrics. We always make the doc accessible so you can comment and ask questions.
 
 Please avoid using presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
 
@@ -146,7 +146,7 @@ Please avoid using presentations for internal use. They are a poor substitute fo
 
 ### Writing style
 
-1. We use American English as the standard written language in our public-facing comms, including this handbook. 
+1. We use American English as the standard written language in our public-facing comms, including this handbook.
 1. Do not use acronyms when you can avoid them. Acronyms have the effect of excluding people from the conversation if they are not familiar with a particular term.
 1. We use the [Oxford comma](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
 1. Do not create links like "here" or "click here". All links should have relevant anchor text that describes what they link to. Using meaningful links is important to both search engine crawlers (SEO) and people with accessibility issues.
@@ -164,17 +164,17 @@ Use video calls if you find yourself going back and forth in an issue/via email 
 1. As a remote company we are always striving to have the highest fidelity, collaborative conversations. Use of a headset with a microphone, is strongly recommended - use your company card if you need.
 1. Always advise participants to mute their mics if there is unnecessary background noise to ensure the speaker is able to be heard by all attendees.
 1. You should take notes of the points and to-dos during the meeting. Being able to structure conclusions and follow-up actions in real time makes a video call more effective than an in-person meeting. If it is important enough to schedule a meeting, it is important enough to have taken notes.
-1. We start on time and do not wait for people. People are expected to join no later than the scheduled minute of the meeting, and we don't spend time bringing latecomers up to speed. 
+1. We start on time and do not wait for people. People are expected to join no later than the scheduled minute of the meeting, and we don't spend time bringing latecomers up to speed.
 1. It can feel rude in video calls to interrupt people. This is because the latency causes you to talk over the speaker for longer than during an in-person meeting. You should not be discouraged by this, as the questions and context provided by interruptions are valuable.
 1. We end on the scheduled time. Again, it might feel rude to end a meeting, but you're actually allowing all attendees to be on time for their next meeting.
-1. It is unusual to smoke or vape in an open office, and the same goes for video calls - please don't do this out of respect for others on the call. 
+1. It is unusual to smoke or vape in an open office, and the same goes for video calls - please don't do this out of respect for others on the call.
 
-For external meetings, the above is also helpful. We also have separate guidance on [how to run a great demo](/handbook/growth/sales/demos). 
+For external meetings, the above is also helpful. We also have separate guidance on [how to run a great demo](/handbook/growth/sales/demos).
 
 ### Indicating availability
 
 1. Put your planned away time including holidays, vacation, travel time, and other leave in your own calendar.
-1. Set your working hours in your Google Calendar - you can do this under _Settings_ > _Working Hours_. This is helpful as we work across different timezones. 
+1. Set your working hours in your Google Calendar - you can do this under _Settings_ > _Working Hours_. This is helpful as we work across different timezones.
 
 ### Google Calendar
 
