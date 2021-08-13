@@ -42,7 +42,7 @@ export default function Main({
                 <MainSidebar
                     menu={menu}
                     slug={slug}
-                    className="hidden md:block flex-shrink-0 xl:flex-1 sticky top-4 mb-14 w-full max-w-[224px] transition-opacity md:opacity-40 hover:opacity-100"
+                    className="hidden md:block flex-1 sticky top-4 mb-14 w-full transition-opacity md:opacity-40 hover:opacity-100"
                 />
                 <main className="relative md:pl-16 xl:px-16 2xl:px-32">
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
@@ -75,7 +75,7 @@ export default function Main({
                 </main>
                 {!breakpoints.lg && showToc && (
                     <InternalSidebar
-                        className="flex-shrink-0 xl:flex-1 sticky top-4 mt-[35vh] mb-14"
+                        className="flex-1 sticky top-4 mt-[35vh] mb-14"
                         tableOfContents={tableOfContents}
                     />
                 )}
