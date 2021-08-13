@@ -9,9 +9,9 @@ author: mo-shehu
 featuredImage: ../images/blog/filename.png
 featuredImageType: full
 ---
-We're pleased to introduce ClickHouse as the underlying database for our event analytics. 
+We're excited to announce a major under-the-hood upgrade for PostHog Open Source! Over the past few weeks, our team have been hard at work moving over from Postgres to ClickHouse, the same database that powers PostHog Cloud.
 
-[insert any other context here]
+This means that anyone can now get started using PostHog for free at scale - you'll no longer be limited to 10k monthly active users. Read on to find about more about the benefits and how we did this!
 
 ## Why ClickHouse?
 
@@ -27,5 +27,6 @@ There are several benefits to using ClickHouse over PostgreSQL, such as:
 
 # Why we’ll continue using PostgreSQL alongside ClickHouse
 
-PostgreSQL is great for managing frequently updated data like users and [insert other examples], but for telemetry and event data we’ll default to ClickHouse. And while our app updates ClickHouse with data changes, the source of truth remains PostgreSQL. At the same time, we’ll work hard with existing users and early enthusiasts to migrate over to ClickHouse. 
+PostgreSQL is great for managing frequently updated data like users and [insert other examples], but for telemetry and event data we’ll default to ClickHouse. And while our app updates ClickHouse with data changes, the source of truth remains PostgreSQL. At the same time, we’ll work hard with existing users and early enthusiasts to migrate over to ClickHouse.
+
 Check out [PostHog](https://posthog.com/docs/self-host) Free today.
