@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { Link } from 'gatsby'
 
-function MenuItem({ item, slug }) {
+function MenuItem({ item, slug, topLevel }) {
     const isActive = (children) => {
         return (
             children &&
@@ -18,7 +18,7 @@ function MenuItem({ item, slug }) {
     const handleClick = () => setOpen(!open)
     const height = open ? 'auto' : 0
     const classes = `flex-grow text-left transition-opacity text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white opacity-${opacity} group-hover:opacity-75 ${
-        children || currentPage ? 'font-bold' : 'text-[15px]'
+        topLevel || children || currentPage ? 'font-bold' : 'text-[15px]'
     }`
     return (
         <li>
@@ -58,12 +58,12 @@ function MenuItem({ item, slug }) {
     )
 }
 
-export default function Menu({ menu, sub, className, slug }) {
+export default function Menu({ menu, sub, className, slug, topLevel }) {
     return (
         <ul className={`${className} flex flex-col space-y-2 list-none p-0 my-0 ${sub ? 'ml-2' : ''}`}>
             {menu &&
                 menu.map((item, index) => {
-                    return <MenuItem key={index} slug={slug} item={item} />
+                    return <MenuItem key={index} slug={slug} item={item} topLevel={topLevel} />
                 })}
         </ul>
     )

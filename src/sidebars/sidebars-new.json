@@ -1,6 +1,10 @@
 {
     "handbook": [
         {
+            "name": "Handbook",
+            "url": "/handbook"
+        },
+        {
             "name": "Company",
             "url": "",
             "children": [

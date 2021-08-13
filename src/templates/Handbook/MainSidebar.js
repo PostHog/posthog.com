@@ -5,7 +5,7 @@ export default function MainSidebar({ slug, menu, className }) {
     return (
         <aside className={className}>
             <nav className="w-[224px]">
-                <Menu menu={menu} slug={slug} />
+                <Menu menu={menu} slug={slug} topLevel />
             </nav>
         </aside>
     )
