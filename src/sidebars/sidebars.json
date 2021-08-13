@@ -2,27 +2,25 @@
     {
         "entry": "Docs",
         "name": "Docs",
-        "child_entries": ["Self-Host", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
+        "child_entries": ["Self-Host", "Cloud", "Integrate", "User Guides", "Plugins", "Tutorials", "API", "Contribute"]
     },
     {
         "entry": "Self-Host",
         "name": "Self-Host",
         "items": ["docs/self-host", "docs/self-host/postgres-vs-clickhouse"],
-        "child_entries": ["Deploy (Postgres)", "Configure"]
+        "child_entries": ["Deploy", "Configure"]
     },
     {
-        "entry": "Deploy (Postgres)",
-        "name": "Deploy (Postgres)",
+        "entry": "Deploy",
+        "name": "Deploy",
         "items": [
-            "docs/self-host/deploy/aws",
-            "docs/self-host/deploy/azure",
             "docs/self-host/deploy/digital-ocean",
-            "docs/self-host/deploy/google-cloud-services",
-            "docs/self-host/deploy/heroku",
+            "docs/self-host/deploy/gcp",
+            "docs/self-host/deploy/aws",
             "docs/self-host/deploy/other",
-            "docs/self-host/deploy/kubernetes",
-            "docs/self-host/deploy/docker",
-            "docs/self-host/deploy/source",
+            "docs/self-host/deploy/configuration",
+            "docs/self-host/deploy/troubleshooting",
+            "docs/self-host/deploy/upgrade-notes",
             "docs/self-host/deploy/hosting-costs"
         ]
     },
@@ -36,6 +34,11 @@
             "docs/self-host/configure/email",
             "docs/self-host/configure/upgrading-posthog"
         ]
+    },
+    {
+        "entry": "Cloud",
+        "name": "Cloud",
+        "items": ["docs/cloud/proxy"]
     },
     {
         "entry": "Integrate",
@@ -252,7 +255,16 @@
     {
         "entry": "Handbook",
         "name": "Handbook",
-        "child_entries": ["Company", "Strategy", "Getting started", "How we work", "People", "Engineering", "Growth"]
+        "child_entries": [
+            "Company",
+            "Strategy",
+            "Getting started",
+            "How we work",
+            "People",
+            "Engineering",
+            "Marketing",
+            "Growth"
+        ]
     },
     {
         "entry": "Company",
@@ -286,11 +298,11 @@
             "handbook/company/security",
             "handbook/company/branding"
         ],
-        "child_entries": ["Team Structure"]
+        "child_entries": ["Team structure"]
     },
     {
-        "entry": "Team Structure",
-        "name": "Team Structure",
+        "entry": "Team structure",
+        "name": "Team structure",
         "items": [
             "handbook/people/team-structure/team-structure",
             "handbook/people/team-structure/why-small-teams",
@@ -325,7 +337,7 @@
         "entry": "Hiring Process",
         "name": "Hiring Process",
         "items": [
-            "handbook/people/hiring-process/hiring-process",
+            "handbook/people/hiring-process",
             "handbook/people/hiring-process/design-hiring",
             "handbook/people/hiring-process/engineering-hiring",
             "handbook/people/hiring-process/exec-hiring",
@@ -351,16 +363,6 @@
         ]
     },
     {
-        "entry": "Growth",
-        "name": "Growth",
-        "items": [
-            "handbook/growth/strategy",
-            "handbook/growth/customer-support",
-            "handbook/growth/developer-relations"
-        ],
-        "child_entries": ["Marketing", "Sales"]
-    },
-    {
         "entry": "Marketing",
         "name": "Marketing",
         "items": [
@@ -374,8 +376,18 @@
         ]
     },
     {
-        "entry": "Sales",
-        "name": "Sales",
+        "entry": "Growth",
+        "name": "Growth",
+        "items": [
+            "handbook/growth/strategy",
+            "handbook/growth/customer-support",
+            "handbook/growth/developer-relations"
+        ],
+        "child_entries": ["Customer success"]
+    },
+    {
+        "entry": "Customer success",
+        "name": "Customer success",
         "items": [
             "handbook/growth/sales/overview",
             "handbook/growth/sales/sales-operations",

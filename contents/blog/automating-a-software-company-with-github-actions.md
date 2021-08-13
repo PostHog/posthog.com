@@ -156,7 +156,7 @@ jobs:
 
 > One thing we've not covered yet is what running jobs on every PR gives us in practice.
 > It's two things:
-> 1. <p>Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.</p>
+> 1. Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.
 >   <img alt="Bump labels" src="../images/blog/github-actions/pr.png" width=839 height=196/>
 > 2. Select PR checks can be made required, in which case merging is prevented until all required checks turn green.
 
@@ -329,7 +329,7 @@ jobs:
 ```
 
 Hint: Since Docker Hub has [removed free autobuilds](https://www.docker.com/blog/changes-to-docker-hub-autobuilds/), but GitHub Actions are still free for public repositories (and with limits for private ones), you can build Docker images and then push them to Docker Hub very similar to the above workflow.
-Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning, set `push` to `false`, _et voila_, now you are pushing.
+Just add the login action [`docker/login-action`](https://github.com/marketplace/actions/docker-login) at the beginning, set `push` to `true`, _et voila_, now you are pushing.
 
 ### Putting releases out
 

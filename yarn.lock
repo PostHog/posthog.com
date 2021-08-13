@@ -3932,9 +3932,9 @@ caniuse-lite@^1.0.30001219:
   integrity sha512-QQmLOGJ3DEgokHbMSA8cj2a+geXqmnpyOFT0lhQV6P3/YOJvGDEwoedcwxEQ30gJIwIIunHIicunJ2rzK5gB2A==
 
 caniuse-lite@^1.0.30001243:
-  version "1.0.30001248"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001248.tgz#26ab45e340f155ea5da2920dadb76a533cb8ebce"
-  integrity sha512-NwlQbJkxUFJ8nMErnGtT0QTM2TJ33xgz4KXJSMIrjXIbDVdaYueGyjOrLKRtJC+rTiWfi6j5cnZN1NBiSBJGNw==
+  version "1.0.30001249"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001249.tgz#90a330057f8ff75bfe97a94d047d5e14fabb2ee8"
+  integrity sha512-vcX4U8lwVXPdqzPWi6cAJ3FnQaqXbBqy/GZseKNQzRj37J7qZdGcBtxq/QLFNLLlfsoXLUdHw8Iwenri86Tagw==
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -10434,6 +10434,11 @@ kea-loaders@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/kea-loaders/-/kea-loaders-0.3.0.tgz"
   integrity sha512-aXrUjQf/GdJVDQqLtTWoY4gF1F+dTXv5U1LfCLffPhgrWRYHGTnaBV/K6pWxy1Qh+vMbepy80Nx9hFiK1owtHw==
+
+kea-localstorage@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/kea-localstorage/-/kea-localstorage-1.1.1.tgz#6edf69476779e002708fb10f2360e48333707406"
+  integrity sha512-YijSF33Y1QpfHAq1hGvulWWoGC9Kckd4lVa+XStHar4t7GfoaDa1aWnTeJxzz9bWnJovfk+MnG8ekP4rWIqINA==
 
 kea-router@^0.5.1:
   version "0.5.2"

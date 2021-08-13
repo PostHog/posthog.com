@@ -1,4 +1,5 @@
 import { kea } from 'kea'
+import { getCookie } from 'lib/utils'
 
 export const posthogAnalyticsLogic = kea({
     actions: {
@@ -57,4 +58,26 @@ export const posthogAnalyticsLogic = kea({
             }
         },
     }),
+
+    selectors: {
+        activeFeatureFlags: [
+            (s) => [s.featureFlags],
+            (featureFlags) =>
+                Object.entries(featureFlags)
+                    .filter(([, value]) => !!value)
+                    .map(([key]) => key),
+        ],
+        isLoggedIn: [
+            (s) => [s.posthog],
+            (posthog) => {
+                const token = posthog?.config?.token
+                if (token) {
+                    const rawCookie = getCookie(`ph_${token}_posthog`)
+                    if (!rawCookie) return false
+                    const cookie = JSON.parse(rawCookie)
+                    return !!cookie['$user_id']
+                }
+            },
+        ],
+    },
 })
