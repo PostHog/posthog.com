@@ -1,5 +1,5 @@
 ---
-date: 2021-08-16
+date: 2021-08-09
 title: Automating a Software Company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: engineering
 author: michael-matloka
-featuredImage: ../images/blog/appropriate_filename.png
+featuredImage: ../images/blog/robot-hedgehogs.png
 featuredImageType: full
 ---
 
@@ -542,3 +542,5 @@ jobs:
 ## Automate your day-to-day
 
 Hopefully these real-life examples inspire you to build the right workflow for your work, spending a bit of time _once_ to reap the rewards of saved time indefinitely.
+
+_Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
