@@ -41,7 +41,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             const contributorsNode = await Promise.all(
                 uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
                     const { author } = contributor
-                    const imageUrl = author?.avatar_url
+                    const imageUrl = author && author.avatar_url
                     let fileNode =
                         imageUrl &&
                         (await createRemoteFileNode({
@@ -53,9 +53,9 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                             store,
                         }))
                     return {
-                        avatar___NODE: fileNode?.id,
-                        url: author?.html_url,
-                        username: author?.login,
+                        avatar___NODE: fileNode && fileNode.id,
+                        url: author && author.html_url,
+                        username: author && author.login,
                     }
                 })
             )
