@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { BlogCategories, CategoryInterface } from '../constants/categories'
 
 const linkClassList =
-    'border-2 rounded-lg px-2 py-1 mx-1 my-2 text-sm hover:bg-white hover:bg-opacity-50 transition-colors'
+    'inline-block leading-loose border-2 rounded-lg px-2 mx-1 my-1 text-sm hover:bg-white hover:bg-opacity-50 transition-colors'
 
 export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: string }): JSX.Element {
     const listObjects = [
@@ -16,7 +16,7 @@ export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: strin
     ]
 
     return (
-        <div className="text-center mb-2">
+        <div className="text-center mb-4">
             {listObjects
                 .filter((cat) => !cat.hideFromNavigation)
                 .map((category: CategoryInterface) => {

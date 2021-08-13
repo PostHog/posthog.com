@@ -53,7 +53,7 @@ const BlogCategoryPage = ({
 
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
-            <Layout headerBackgroundTransparent>
+            <Layout onBlogPage headerBackgroundTransparent>
                 <SEO title="PostHog Blog" description="What we are up to, every week." />
 
                 <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
@@ -70,12 +70,8 @@ const BlogCategoryPage = ({
                             className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
                         />
 
-                        <div className="max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
-                            <div className="w-full lg:w-3/4 lg:pl-8">
-                                <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
-                                {nonLatestPosts}
-                            </div>
-                        </div>
+                        <header className="text-xs text-gray-400 uppercase mb-8">Recent Posts</header>
+                        <section className="grid grid-cols-3 gap-4">{nonLatestPosts}</section>
                     </Structure.Section>
                 </div>
             </Layout>

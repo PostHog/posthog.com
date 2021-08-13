@@ -39,27 +39,41 @@ const ReadPostHome = ({ to }: { to: string }) => {
 
 const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
     return (
-        <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center">
-            <div className="w-full md:w-1/2 md:pr-8 py-4 mx-auto">
-                <span className="text-gray-400 text-xs uppercase">Latest Post</span>
-                <h2 className="text-4xl text-gray-900 dark:text-gray-100 font-sans normal-case my-1">
-                    <Link
-                        to={post.fields.slug}
-                        className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+        <div className="w-full my-8">
+            <Link
+                to={post.fields.slug}
+                className="featured-post-img text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+            >
+                {/* <img
+                    className="w-full h-auto block rounded shadow-lg"
+                /> */}
+                <div
+                    className="w-full py-4 mx-auto rounded shadow-lg overflow-hidden relative"
+                    style={{
+                        backgroundImage: `url(${post.frontmatter.featuredImage.publicURL})`,
+                        paddingTop: '52.25%',
+                        textDecoration: 'inherit',
+                    }}
+                >
+                    <div
+                        className="absolute bottom-0 left-0 backdrop-blur lg:max-w-xl"
+                        style={{
+                            background: 'rgba(25, 123, 165, 0.8)',
+                            borderTopRightRadius: '1.5rem',
+                            padding: '2rem 4rem',
+                            textDecoration: 'inherit',
+                        }}
                     >
-                        {post.frontmatter.title}
-                    </Link>
-                </h2>
-                <AuthorIndexView authorDetails={authorDetails} />
-            </div>
-            <div className="w-full md:ml-8 md:w-1/2 md:h-96 rounded overflow-hidden flex items-center justify-center">
-                <Link to={post.fields.slug} className="featured-post-img">
-                    <img
-                        className="w-full h-auto block rounded shadow-lg"
-                        src={post.frontmatter.featuredImage.publicURL}
-                    />
-                </Link>
-            </div>
+                        <h2
+                            className="text-2xl text-gray-900 dark:text-gray-100 font-sans normal-case my-1"
+                            style={{ textDecoration: 'inherit' }}
+                        >
+                            {post.frontmatter.title}
+                        </h2>
+                        <AuthorIndexView authorDetails={authorDetails} />
+                    </div>
+                </div>
+            </Link>
         </div>
     )
 }
