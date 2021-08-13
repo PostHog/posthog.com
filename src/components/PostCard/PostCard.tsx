@@ -4,7 +4,7 @@ import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
 import './style.scss'
 import { AuthorsData } from 'types'
-import AuthorIndexView from 'components/Blog/BlogAuthor/AuthorIndexView'
+import Byline from 'components/Blog/BlogAuthor/Byline'
 
 export interface PostType {
     id: string
@@ -70,7 +70,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                         >
                             {post.frontmatter.title}
                         </h2>
-                        <AuthorIndexView authorDetails={authorDetails} />
+                        <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
                     </div>
                 </div>
             </Link>
@@ -95,7 +95,7 @@ const LandingPageLatestPost = ({ post, authorDetails }: { post: PostTypeWithImag
                         {post.frontmatter.title}
                     </Link>
                 </h2>
-                <AuthorIndexView authorDetails={authorDetails} />
+                <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
                 <div className="text-white text-opacity-75 mt-2 text-sm leading-relaxed post-preview-fade">
                     {post.excerpt}
                 </div>
@@ -122,7 +122,7 @@ const LandingPageSnippet = ({ post, authorDetails }: { post: PostTypeWithImage; 
                         {post.frontmatter.title}
                     </Link>
                 </h2>
-                <AuthorIndexView authorDetails={authorDetails} />
+                <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
             </div>
         </div>
     )
@@ -182,7 +182,7 @@ const PostCard = ({
                             {post.frontmatter.title}
                         </Link>
                     </h5>
-                    <AuthorIndexView authorDetails={authorDetails} />
+                    <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
                 </div>
             )}
         </div>
