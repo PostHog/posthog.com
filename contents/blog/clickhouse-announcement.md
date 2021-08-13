@@ -1,6 +1,6 @@
 ---
 date: 2021-08-13
-title: Why we’re moving you to ClickHouse - Benefits and tradeoffs
+title: We just made PostHog Open Source 1000x more scalable via ClickHouse
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -19,7 +19,7 @@ ClickHouse is a database designed to enable fast, efficient analytics computatio
 There are several benefits to using ClickHouse over PostgreSQL, such as:
 * Speed: ClickHouse is orders of magnitude faster than most other databases, mainly because of how tightly it couples storage and computing power, resulting in significantly quicker query response times.
 * Cost: With more efficient use of processing power, memory, and storage (plus horizontal scaling), you can use cheaper commodity boxes versus having to scale up using specialized (read: costlier) software.
-* Migrations: Moving over from another database? ClickHouse lets you create materialized versions of your data thanks to its advanced engine, resulting in exponentially faster migrations between deployments.
+* Migrations: Moving over from another database? ClickHouse lets you create materialized versions of your data thanks to its advanced engine, resulting in exponentially faster migrations between deployments. In future, we'll also enable you to more easily migrate between PostHog Cloud and PostHog Self Hosted as both are backed by ClickHouse now.
 * Scalability: Clickhouse features a column-based database structure, meaning that [insert more context here that explains the concept simply]. Because of this, scaling and maintaining a ClickHouse cluster is pretty easy as long as you’re sharding, replicating, and distributing your tables correctly.
 * Deployment: Other database systems depend on a storage layer, a compute layer, and a resource scheduler (like YARN) to be deployed properly. ClickHouse is just one binary - meaning that [insert more context]. As such, deployment is a breeze.
 * Documentation - [ClickHouse’s documentation](https://clickhouse.tech/docs/en/) has come a long way in the last few years, and Altinity, a company that supports the ecosystem, has excellent [documentation](https://docs.altinity.com/ available as well.
