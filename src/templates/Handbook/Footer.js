@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import footerLogo from '../../images/posthog-logo-footer.svg'
 
 export default function Footer({ contributors, filePath, title }) {
@@ -19,11 +20,17 @@ export default function Footer({ contributors, filePath, title }) {
                         <h3 className="text-base">Contributors</h3>
                         <ul className="list-none m-0 p-0 flex space-x-2 mt-2 flex-wrap">
                             {contributors.map((contributor, index) => {
-                                const { avatar_url, html_url, login } = contributor.author
+                                const { avatar, url, username } = contributor
+                                const image = getImage(avatar)
                                 return (
                                     <li key={index}>
-                                        <a href={html_url}>
-                                            <img className="rounded-full max-w-[37px]" src={avatar_url} />
+                                        <a href={url}>
+                                            <GatsbyImage
+                                                className="rounded-full max-w-[37px]"
+                                                image={image}
+                                                alt={username}
+                                                title={username}
+                                            />
                                         </a>
                                     </li>
                                 )

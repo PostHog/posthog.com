@@ -100,10 +100,12 @@ export const query = graphql`
             fields {
                 slug
                 contributors {
-                    author {
-                        avatar_url
-                        html_url
-                        login
+                    url
+                    username
+                    avatar {
+                        childImageSharp {
+                            gatsbyImageData(width: 37, placeholder: BLURRED)
+                        }
                     }
                 }
             }
