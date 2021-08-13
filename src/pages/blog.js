@@ -62,10 +62,8 @@ const BlogPage = ({
                             compact
                             className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
                         />
-                        <div className="max-w-3xl mx-auto">
-                            <header className="text-xs text-gray-400 uppercase mb-8">Recent Posts</header>
-                            <section className="grid grid-cols-3 gap-4">{nonLatestPosts}</section>
-                        </div>
+                        <header className="text-xs text-gray-400 uppercase mb-8">Recent Posts</header>
+                        <section className="grid grid-cols-3 gap-4">{nonLatestPosts}</section>
                     </Structure.Section>
                 </div>
             </Layout>
