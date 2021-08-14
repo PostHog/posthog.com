@@ -1567,3 +1567,8 @@ table td[align='center'],
 .text-center {
     text-align: center;
 }
+
+.ant-tabs-top > .ant-tabs-nav::before,
+.ant-tabs-top > div > .ant-tabs-nav::before {
+    display: none;
+}

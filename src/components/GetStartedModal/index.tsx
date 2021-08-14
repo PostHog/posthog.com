@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import modalSaasCloud from '../../images/modal-saas-cloud.svg'
 import modalSelfDeploy from '../../images/modal-self-deploy.svg'
+import { CloseOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Modal from 'react-modal'
 import { useValues, useActions } from 'kea'
@@ -58,7 +59,7 @@ export const GetStartedModal = () => {
                     </div>
                 </a>
             </div>
-            <Button icon="close" onClick={() => setIsGetStartedModalOpen(false)} className="modalClose" />
+            <Button icon={<CloseOutlined />} onClick={() => setIsGetStartedModalOpen(false)} className="modalClose" />
         </Modal>
     )
 }

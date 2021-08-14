@@ -25,7 +25,7 @@
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.22",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
-        "antd": "^3.23.2",
+        "antd": "^4.0.0",
         "autoprefixer": "^10.3.1",
         "chart.js": "^2.9.4",
         "cross-env": "^7.0.3",

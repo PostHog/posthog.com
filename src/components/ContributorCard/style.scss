@@ -1,4 +1,4 @@
-.contributor-card-wrapper {
+.contributors-page-wrapper {
     .ant-card-bordered {
         border: 1px solid #653c9a !important;
         border-radius: 20px;
@@ -8,5 +8,8 @@
     .tooltip-content:hover span {
         background-color: #271046 !important;
         cursor: pointer;
+    }
+    .ant-col {
+        width: 100%;
     }
 }

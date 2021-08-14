@@ -17,7 +17,7 @@ body.dark {
     }
 
     .docsPagesContent {
-        .ant-tabs-tab-arrow-show,
+        .ant-tabs-nav-more,
         .ant-tabs-content {
             color: white;
         }
@@ -89,11 +89,16 @@ body.dark {
                 color: #b78aff !important;
             }
 
-            .ant-menu-submenu-title {
+            .ant-menu-submenu-title,
+            .ant-menu-submenu-arrow {
                 color: #f3f3f3;
             }
 
             .ant-menu-submenu-title:hover {
+                color: #b78aff !important;
+            }
+            .ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-expand-icon,
+            .ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow {
                 color: #b78aff !important;
             }
 

@@ -11,6 +11,7 @@ interface ContributorCardStructureMeta {
     contributions: string[]
     mvpWins: number
     contributorLevel: number
+    link: string
 }
 
 interface ContributorCardMeta extends ContributorCardStructureMeta {
@@ -24,6 +25,7 @@ const ContributorCardStructure = ({
     contributions,
     mvpWins,
     contributorLevel,
+    link,
 }: ContributorCardStructureMeta) => {
     const handleTooltipContentClick = (e: React.MouseEvent, pageKey = '') => {
         if (window) {
@@ -59,56 +61,58 @@ const ContributorCardStructure = ({
                 bodyStyle={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
                 className="card-elevated"
             >
-                {mvpWins > 0 ? (
-                    <Tag color="transparent" style={{ maxWidth: '30%', position: 'absolute', right: 15, top: 15 }}>
-                        <ContributorCardTooltip title={`Community MVP ${mvpWins}x`} pageKey="community-mvps">
-                            <h4>
-                                {Array.from({ length: mvpWins }).map((_: any, i: number) => (
-                                    <span key={`trophy_${i}`}>🏆</span>
-                                ))}
-                            </h4>
-                        </ContributorCardTooltip>
-                    </Tag>
-                ) : null}
+                <a href={link}>
+                    {mvpWins > 0 ? (
+                        <Tag color="transparent" style={{ maxWidth: '30%', position: 'absolute', right: 15, top: 15 }}>
+                            <ContributorCardTooltip title={`Community MVP ${mvpWins}x`} pageKey="community-mvps">
+                                <h4>
+                                    {Array.from({ length: mvpWins }).map((_: any, i: number) => (
+                                        <span key={`trophy_${i}`}>🏆</span>
+                                    ))}
+                                </h4>
+                            </ContributorCardTooltip>
+                        </Tag>
+                    ) : null}
 
-                <img
-                    src={imageSrc}
-                    style={{ maxWidth: 60, maxHeight: 60, marginBottom: 0, borderRadius: 10 }}
-                    className="center"
-                    alt="contributor image"
-                />
-
-                <br />
-
-                <h5 className="centered" style={{ color: '#fff' }}>
-                    {name}
-                </h5>
-                <ContributorCardTooltip title="Number of PRs merged" pageKey="level">
-                    <p style={{ color: 'rgb(231 184 250)', marginBottom: 5 }}>lvl {contributorLevel}</p>
-                    <Progress
-                        strokeColor={{
-                            '0%': '#220f3f',
-                            '100%': '#ab75ff',
-                        }}
-                        percent={contributorLevel >= 50 ? 50 : (100 * contributorLevel) / 50}
-                        className="progress-bar"
-                        showInfo={false}
+                    <img
+                        src={imageSrc}
+                        style={{ maxWidth: 60, maxHeight: 60, marginBottom: 0, borderRadius: 10 }}
+                        className="center"
+                        alt="contributor image"
                     />
-                </ContributorCardTooltip>
-                <Spacer height={40} />
-                <ContributorCardTooltip title="Types of contributions made" pageKey="powers">
-                    <p style={{ color: 'rgb(231 184 250)', fontSize: 20, marginBottom: 0 }}>Powers</p>
-                </ContributorCardTooltip>
-                <Spacer height={20} />
-                <h2>
-                    {contributions.map((key) => (
-                        <span key={key}>
-                            <ContributorCardTooltip title={emojiKey[key].description} pageKey="powers">
-                                {emojiKey[key].symbol}
-                            </ContributorCardTooltip>{' '}
-                        </span>
-                    ))}
-                </h2>
+
+                    <br />
+
+                    <h5 className="centered" style={{ color: '#fff' }}>
+                        {name}
+                    </h5>
+                    <ContributorCardTooltip title="Number of PRs merged" pageKey="level">
+                        <p style={{ color: 'rgb(231 184 250)', marginBottom: 5 }}>lvl {contributorLevel}</p>
+                        <Progress
+                            strokeColor={{
+                                '0%': '#220f3f',
+                                '100%': '#ab75ff',
+                            }}
+                            percent={contributorLevel >= 50 ? 50 : (100 * contributorLevel) / 50}
+                            className="progress-bar"
+                            showInfo={false}
+                        />
+                    </ContributorCardTooltip>
+                    <Spacer height={40} />
+                    <ContributorCardTooltip title="Types of contributions made" pageKey="powers">
+                        <p style={{ color: 'rgb(231 184 250)', fontSize: 20, marginBottom: 0 }}>Powers</p>
+                    </ContributorCardTooltip>
+                    <Spacer height={20} />
+                    <h2>
+                        {contributions.map((key) => (
+                            <span key={key}>
+                                <ContributorCardTooltip title={emojiKey[key].description} pageKey="powers">
+                                    {emojiKey[key].symbol}
+                                </ContributorCardTooltip>{' '}
+                            </span>
+                        ))}
+                    </h2>
+                </a>
             </Card>
         </Col>
     )
@@ -123,8 +127,9 @@ export const ContributorCard = ({
     mvpWins,
     contributorLevel,
 }: ContributorCardMeta) => {
-    const ContributorDetails = () => (
+    const ContributorDetails = ({ link }) => (
         <ContributorCardStructure
+            link={link}
             name={name}
             imageSrc={imageSrc}
             contributions={contributions}
@@ -133,21 +138,5 @@ export const ContributorCard = ({
         />
     )
 
-    return (
-        <div className="contributor-card-wrapper">
-            {onClick ? (
-                <span onClick={onClick}>
-                    <ContributorDetails />
-                </span>
-            ) : link.includes('.') ? (
-                <a href={link}>
-                    <ContributorDetails />
-                </a>
-            ) : (
-                <Link to={link}>
-                    <ContributorDetails />
-                </Link>
-            )}
-        </div>
-    )
+    return <ContributorDetails link={link} />
 }

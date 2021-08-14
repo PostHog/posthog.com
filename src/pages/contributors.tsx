@@ -37,7 +37,7 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
-                    <Tabs activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
+                    <Tabs centered activeKey={activeTab} onChange={(key) => handleTabClick(key)}>
                         <TabPane tab="List" key="list" />
                         <TabPane tab="Stats" key="stats" />
                     </Tabs>

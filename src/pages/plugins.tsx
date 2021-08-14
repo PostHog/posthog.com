@@ -36,6 +36,7 @@ export const PluginLibraryPage = () => {
                         <Link to="/docs/plugins/overview">Learn more about plugins on our dedicated Docs section.</Link>
                     </p>
                     <Tabs
+                        centered
                         activeKey={!filter ? 'default' : filter}
                         onChange={(key) => {
                             setFilter(key)

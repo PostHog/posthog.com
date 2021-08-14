@@ -23,9 +23,13 @@
         }
     }
 
-    .ant-tabs-nav .ant-tabs-tab-active,
-    .ant-tabs-tab:hover {
-        color: #cca6ff !important;
+    .ant-tabs-tab:hover,
+    .ant-tabs-nav {
+        .ant-tabs-tab-btn:active,
+        .ant-tabs-tab-active > div:hover,
+        .ant-tabs-tab-active > div {
+            color: #cca6ff !important;
+        }
     }
 
     .ant-tabs-ink-bar {
@@ -34,5 +38,17 @@
 
     .ant-tabs-tab {
         color: #b485f1;
+    }
+
+    .contributor-search button {
+        background: #2c1450;
+        color: #cc8ef1 !important;
+        border: 1px solid #683f9e;
+        border-left: none;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

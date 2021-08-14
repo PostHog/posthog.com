@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import Layout from '../components/Layout'
-import { Row, Col, Button, Icon } from 'antd'
+import { CloudFilled, HddFilled } from '@ant-design/icons'
+import { Row, Col, Button } from 'antd'
 import { SEO } from '../components/seo'
 import './styles/trial.scss'
 
@@ -18,7 +19,7 @@ const TrialPage = () => (
                 <Row gutter={[16, 96]} className="card-row">
                     <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
                         <h2>
-                            <Icon type="cloud" theme="filled" /> Cloud
+                            <CloudFilled /> Cloud
                         </h2>
                         <h3>Just create an account.</h3>
                         <p>
@@ -35,7 +36,7 @@ const TrialPage = () => (
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12} className="card-col">
                         <h2>
-                            <Icon type="hdd" theme="filled" /> Open Source
+                            <HddFilled /> Open Source
                         </h2>
                         <h3>Host your own instance.</h3>
                         <p>

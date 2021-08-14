@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import { Spacer } from '../Spacer'
 import Markdown from 'react-markdown'
 import { Button, Spin } from 'antd'
-import { ExportOutlined } from '@ant-design/icons'
+import { CloseOutlined, ExportOutlined } from '@ant-design/icons'
 import { useActions, useValues } from 'kea'
 import { pluginLibraryLogic, toPathName } from '../../logic/pluginLibraryLogic'
 import { SEO } from '../seo'
@@ -41,7 +41,7 @@ export const PluginModal = () => {
                         <a className="centered" href={activePlugin.url} target="_blank" rel="noreferrer">
                             Learn More <ExportOutlined />
                         </a>
-                        <Button icon="close" onClick={openLibrary} className="modalClose" />
+                        <Button icon={<CloseOutlined />} onClick={openLibrary} className="modalClose" />
                     </>
                 )}
             </Modal>

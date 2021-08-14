@@ -21,7 +21,7 @@ export const DocsPageSurvey = () => {
             <br />
             <hr />
             <Col>
-                <Row>
+                <Row justify="center">
                     <div className="centered">
                         <h4 style={{ color: '#0a0a0a' }}>Was this page helpful?</h4>
                         {submittedResponse ? (

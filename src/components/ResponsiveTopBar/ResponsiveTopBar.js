@@ -5,6 +5,7 @@ import SidebarContents from '../SidebarContents'
 import TableOfContents from '../TableOfContents'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
+import { CloseOutlined, BarsOutlined } from '@ant-design/icons'
 
 function ResponsiveTopBar() {
     const { anchorOpen, sidebarOpen, sidebarHide } = useValues(layoutLogic)
@@ -16,9 +17,17 @@ function ResponsiveTopBar() {
                 {!anchorOpen && !sidebarHide && (
                     <div className="sidebarButtonWrapper">
                         {sidebarOpen ? (
-                            <Button className="sidebarButton" icon="close" onClick={() => setSidebarOpen(false)} />
+                            <Button
+                                className="sidebarButton"
+                                icon={<CloseOutlined />}
+                                onClick={() => setSidebarOpen(false)}
+                            />
                         ) : (
-                            <Button className="sidebarButton" icon="bars" onClick={() => setSidebarOpen(true)} />
+                            <Button
+                                className="sidebarButton"
+                                icon={<BarsOutlined />}
+                                onClick={() => setSidebarOpen(true)}
+                            />
                         )}
                     </div>
                 )}

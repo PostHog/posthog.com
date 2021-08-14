@@ -10,12 +10,15 @@ export function DocsFooter({ filename, title }: DocsFooterProps) {
     return (
         <div className="docs-footer">
             <Row>
-                <h3>Reach out</h3>
-                If you need help on any of the above, feel free to create an issue on{' '}
-                <a href="https://github.com/PostHog/posthog">our repo</a>, or <a href="/slack">join our Slack</a> where
-                a member of our team can assist you! Chances are that if you have a problem or question, someone else
-                does too - so please don't hesitate to create a new issue or ask us a question. <br />
-                <br />
+                <div>
+                    <h3>Reach out</h3>
+                    If you need help on any of the above, feel free to create an issue on{' '}
+                    <a href="https://github.com/PostHog/posthog">our repo</a>, or <a href="/slack">join our Slack</a>{' '}
+                    where a member of our team can assist you! Chances are that if you have a problem or question,
+                    someone else does too - so please don't hesitate to create a new issue or ask us a question. <br />
+                    <br />
+                </div>
+
                 <Col span={12}>
                     <strong>Docs</strong>
                     <br />
