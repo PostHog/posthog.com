@@ -69,7 +69,7 @@ export default function Main({
                                 className="w-[1px] absolute bottom-0  right-0 bg-[#765494] hidden xl:flex justify-center"
                             />
                         )}
-                        {next && <NextArticle next={next} hideAnchor={hideAnchor} breakpoints={breakpoints} />}
+                        {next && <NextArticle next={next} hideAnchor={!showToc} breakpoints={breakpoints} />}
                     </article>
                 </main>
                 {!breakpoints.lg && showToc && (
