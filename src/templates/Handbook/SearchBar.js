@@ -11,7 +11,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                 zIndex: 1001,
                 transform: menuOpen ? 'translate3d(calc(100vw - 80px), 0px, 0px)' : 'none',
             }}
-            className="2xl:max-w-[800px] max-w-[650px] p-4 pb-0 lg:p-0 lg:mt-8 backdrop-blur-sm sm:backdrop-blur-0 mx-auto handbook-search  z-20 sticky top-0 lg:top-4"
+            className="2xl:max-w-[800px] max-w-full md:max-w-[calc(100%-224px-4rem)] xl:max-w-[650px] py-4 px-4 pb-0 lg:py-0 xl:px-0 lg:mt-8 backdrop-blur-sm sm:backdrop-blur-0 mr-0 ml-auto xl:mr-auto handbook-search  z-20 sticky top-0 lg:top-4"
         >
             <div className="w-full flex space-x-2 md:space-x-0 text-[#c4b7d1] ">
                 <button
@@ -67,7 +67,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                     />
                     <div className="flex space-x-3 flex-shrink-0">
                         <a
-                            className="text-[#c4b7d1] hover:text-[#c4b7d1] hidden sm:flex items-center space-x-1"
+                            className="text-[#c4b7d1] hover:text-[#c4b7d1] hidden lg:flex items-center space-x-1"
                             href={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
                         >
                             <svg
