@@ -57,7 +57,7 @@ export default function Handbook({
                         overlayClassName="backdrop-blur"
                         isOpen={menuOpen}
                     >
-                        <MainSidebar menu={menu} slug={slug} className="p-5 pb-32" />
+                        <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32" />
                     </Menu>
                     <SearchBar
                         menuOpen={menuOpen}

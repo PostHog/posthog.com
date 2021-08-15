@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import MainSidebar from './MainSidebar'
 import InternalSidebar from './InternalSidebar'
 import Breadcrumbs from './Breadcrumbs'
@@ -35,15 +35,17 @@ export default function Main({
     }
     const breakpoints = useBreakpoint()
     const showToc = !hideAnchor && tableOfContents?.length
+    const mainEl = useRef()
     return (
         <div className="relative px-4">
             <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
                 <MainSidebar
+                    mainEl={mainEl}
                     menu={menu}
                     slug={slug}
                     className="hidden md:block flex-1 sticky top-4 mb-14 w-full transition-opacity md:opacity-40 hover:opacity-100"
                 />
-                <main className={`relative md:pl-16 xl:px-16 2xl:px-32 ${showToc ? '' : 'flex-grow'}`}>
+                <main ref={mainEl} className={`relative md:pl-16 xl:px-16 2xl:px-32 ${showToc ? '' : 'flex-grow'}`}>
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
                         <section className="mb-8 xl:mb-14 relative">
                             {breadcrumb && <Breadcrumbs crumbs={breadcrumb} base={breadcrumbBase} />}
