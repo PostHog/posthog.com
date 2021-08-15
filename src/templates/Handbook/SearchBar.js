@@ -1,7 +1,9 @@
 import React from 'react'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 export default function SearchBar({ filePath, title, handleMobileMenuClick, style, menuOpen }) {
+    const breakpoints = useBreakpoint()
     return (
         <div
             style={{
@@ -61,7 +63,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
 
                     <input
                         className="bg-[#e4e0e9] w-full dark:bg-[#371A51] outline-none"
-                        placeholder="Search handbook"
+                        placeholder={`Search ${breakpoints.xs ? '' : 'handbook'}`}
                     />
                     <div className="flex space-x-3 flex-shrink-0">
                         <a
