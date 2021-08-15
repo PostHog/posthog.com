@@ -85,6 +85,7 @@
         "react-modal": "^3.11.2",
         "react-redux": "^7.2.1",
         "react-responsive": "^8.2.0",
+        "react-scroll": "^1.8.3",
         "react-scrollspy": "^3.4.3",
         "redux": "^4.0.5",
         "reselect": "^4.0.0",

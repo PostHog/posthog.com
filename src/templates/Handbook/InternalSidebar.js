@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Scrollspy from 'react-scrollspy'
-import scrollTo from 'gatsby-plugin-smoothscroll'
+import { Link } from 'react-scroll'
 
 export default function InternalSidebar({ tableOfContents, className = '' }) {
     const [navBallLocation, setNavBallLocation] = useState(null)
@@ -21,6 +21,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                 />
                 <p className="text-light-purple text-base mt-0 mb-4 font-bold">On this page</p>
                 <Scrollspy
+                    offset={-88}
                     onUpdate={handleInternalNavUpdate}
                     className="list-none m-0 p-0 flex flex-col space-y-2"
                     items={tableOfContents?.map((navItem) => navItem.url)}
@@ -33,12 +34,15 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                                 className="hover:opacity-100 lg:opacity-60 text-[15px]"
                                 key={index}
                             >
-                                <a
+                                <Link
+                                    offset={-88}
+                                    smooth
+                                    duration={300}
+                                    to={navItem.url}
                                     className={`text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white`}
-                                    onClick={() => scrollTo(`[id="${navItem.url}"]`)}
                                 >
                                     {navItem.name}
-                                </a>
+                                </Link>
                             </li>
                         )
                     })}
