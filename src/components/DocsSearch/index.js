@@ -17,6 +17,9 @@ export const DocsSearch = ({ className = '', backgroundColor = '#ffffff' }) => {
                     apiKey: '45e80dec3e5b55c400663a5cba911c4c',
                     indexName: 'posthog',
                     inputSelector: '#doc-search',
+                    algoliaOptions: {
+                        facetFilters: ['tags:docs'],
+                    },
                 })
             })
 
