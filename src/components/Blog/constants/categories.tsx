@@ -19,7 +19,7 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/general',
     },
     {
-        title: 'Company & Culture',
+        title: 'Company & culture',
         slug: 'company-and-culture',
         link: '/blog/categories/company-and-culture',
     },
@@ -29,7 +29,7 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/engineering',
     },
     {
-        title: 'Release Notes',
+        title: 'Release notes',
         slug: 'release-notes',
         link: '/blog/categories/release-notes',
     },

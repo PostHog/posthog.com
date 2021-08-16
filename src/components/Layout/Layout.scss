@@ -1556,23 +1556,23 @@ for all other rows the portrait image wraps above bio*/
 }
 
 /* width */
-div::-webkit-scrollbar {
+div:not(.default-scrollbar)::-webkit-scrollbar {
     width: 10px;
     margin-left: 20px;
 }
 
 /* track */
-div::-webkit-scrollbar-track {
+div:not(.default-scrollbar)::-webkit-scrollbar-track {
     background: #eceff1;
 }
 
 /* handle */
-div::-webkit-scrollbar-thumb {
+div:not(.default-scrollbar)::-webkit-scrollbar-thumb {
     background: #cfd8dc;
 }
 
 /* handle on hover */
-div::-webkit-scrollbar-thumb:hover {
+div:not(.default-scrollbar)::-webkit-scrollbar-thumb:hover {
     background: #b0bec5;
 }
 
