@@ -56,7 +56,9 @@ const BlogPage = ({
 
                     <Structure.Section width="5xl" className="my-0">
                         <Structure.SectionHeader title="Blog" titleTag="h1" titleClassName="text-center" />
-                        <BlogCategoriesList />
+                    </Structure.Section>
+                    <BlogCategoriesList />
+                    <Structure.Section width="5xl" className="my-0">
                         {latestPost}
                         <NewsletterForm
                             compact

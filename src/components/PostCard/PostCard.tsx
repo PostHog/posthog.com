@@ -42,6 +42,21 @@ const ReadPostHome = ({ to }: { to: string }) => {
 }
 
 const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
+    const MetaContent = ({ className }: { className: string }): JSX.Element => (
+        <div
+            className={`lg:max-w-xl backdrop-blur ${className}`}
+            style={{
+                background: 'rgba(25, 123, 165, 0.8)',
+                padding: 'min(2rem, 4vw) min(4rem, 8vw)',
+                textDecoration: 'inherit',
+            }}
+        >
+            <h2 className="text-2xl text-gray-100 font-sans normal-case my-1" style={{ textDecoration: 'inherit' }}>
+                {post.frontmatter.title}
+            </h2>
+            <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
+        </div>
+    )
     return (
         <div className="w-full my-8">
             <Link
@@ -49,7 +64,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                 className="featured-post-img text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
             >
                 <div
-                    className="w-full py-4 mx-auto rounded shadow-lg overflow-hidden relative"
+                    className="w-full py-4 mx-auto rounded-t md:rounded-b shadow-lg overflow-hidden relative"
                     style={{
                         backgroundImage: `url(${post.frontmatter.featuredImage.publicURL})`,
                         backgroundSize: 'cover',
@@ -57,24 +72,9 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                         textDecoration: 'inherit',
                     }}
                 >
-                    <div
-                        className="absolute bottom-0 left-0 backdrop-blur lg:max-w-xl"
-                        style={{
-                            background: 'rgba(25, 123, 165, 0.8)',
-                            borderTopRightRadius: '1.5rem',
-                            padding: 'min(2rem, 4vw) min(4rem, 8vw)',
-                            textDecoration: 'inherit',
-                        }}
-                    >
-                        <h2
-                            className="text-2xl text-gray-100 font-sans normal-case my-1"
-                            style={{ textDecoration: 'inherit' }}
-                        >
-                            {post.frontmatter.title}
-                        </h2>
-                        <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
-                    </div>
+                    <MetaContent className="hidden md:block absolute bottom-0 left-0 rounded-tr-3xl" />
                 </div>
+                <MetaContent className="block md:hidden rounded-b" />
             </Link>
         </div>
     )
