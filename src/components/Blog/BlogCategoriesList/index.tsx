@@ -8,7 +8,7 @@ const linkClassList =
 export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: string }): JSX.Element {
     return (
         <div className="flex justify-center mb-4">
-            <div className="flex flex-nowrap overflow-x-auto">
+            <div className="flex flex-nowrap overflow-x-auto pb-1 default-scrollbar">
                 {BlogCategories.filter((cat) => !cat.hideFromNavigation).map((category: CategoryInterface) => {
                     const isActive = category.slug === activeSlug
                     const statefulClasses = isActive
