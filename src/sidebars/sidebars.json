@@ -38,7 +38,7 @@
     {
         "entry": "Cloud",
         "name": "Cloud",
-        "items": ["docs/cloud/proxy"]
+        "items": ["docs/cloud", "docs/cloud/proxy"]
     },
     {
         "entry": "Integrate",
