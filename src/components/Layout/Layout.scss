@@ -11,14 +11,12 @@
     */
 
     /* PRODUCTION */
-    src: url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff')
+    src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff')
             format('woff supports variations'),
-        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff')
-            format('woff-variations'),
-        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff') format('woff-variations'),
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
             format('woff2 supports variations'),
-        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
-            format('woff2-variations');
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2') format('woff2-variations');
     font-style: normal;
     font-weight: 300 900;
 }
