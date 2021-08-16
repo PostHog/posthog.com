@@ -7,7 +7,7 @@ interface AuthorDetails {
     className?: string
 }
 
-function BlogAuthor({ authorDetails, className }: AuthorDetails) {
+export function BlogAuthor({ authorDetails, className }: AuthorDetails): JSX.Element | null {
     if (authorDetails?.handle) {
         const { image, name, link_type, link_url, role } = authorDetails
         return (

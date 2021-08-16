@@ -44,7 +44,7 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
         <li className="leading-none">
             <button
                 onClick={() => {
-                    window.location.href = 'https://app.posthog.com/signup?src=header'
+                    window.location.pathname = '/sign-up'
                 }}
                 className={classList}
             >

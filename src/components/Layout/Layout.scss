@@ -519,6 +519,9 @@ p *:last-child {
 li > p {
     margin-bottom: calc(1.45rem / 2);
 }
+li > img {
+    margin-top: calc(1.45rem / 2);
+}
 kbd {
     font-size: 0.85rem;
     line-height: 1.45rem;
@@ -645,6 +648,9 @@ header {
         font-size: 1.25em;
         line-height: 1.75em;
         opacity: 0.9;
+    }
+    li {
+        margin-bottom: calc(1.45rem / 2);
     }
 }
 

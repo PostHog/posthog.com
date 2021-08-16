@@ -9,12 +9,15 @@ import { Tutorials } from '../components/LandingPage/Tutorials'
 import { RecentBlogPosts } from '../components/LandingPage/RecentBlogPosts'
 import { Footer } from '../components/Footer/Footer'
 import { GetStartedModal } from 'components/GetStartedModal'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import { useValues } from 'kea'
 
 import { SEO } from '../components/seo'
 
 import '../components/LandingPage/styles/index.scss'
 
 const IndexPage = () => {
+    useValues(posthogAnalyticsLogic) // mount this logic
     return (
         <div className="w-screen overflow-x-hidden">
             <SEO
