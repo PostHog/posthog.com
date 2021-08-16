@@ -10,7 +10,7 @@ showTitle: true
 [Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running. 
 <br />
 
-The first thing you'll need is a get a Digital Ocean account. You can click on the badge below to get $100 in credit over 60 days (i.e. run Posthog for free for 2 months).
+The first thing you'll need is a get a Digital Ocean account. You can click on the badge below to get $100 in credit over 60 days (i.e. run PostHog for free for 2 months).
 <br />
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=6a26a2c395b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
@@ -19,9 +19,9 @@ The first thing you'll need is a get a Digital Ocean account. You can click on t
 ## 1-click install
 
 ### Marketplace UI
-There is a [1-click option to deploy Posthog](https://marketplace.digitalocean.com/apps/posthog-1) on DigitalOcean Marketplace UI. The minimal suggested cluster capacity is 2 smallest production nodes.
+There is a [1-click option to deploy PostHog](https://marketplace.digitalocean.com/apps/posthog-1) on DigitalOcean Marketplace UI. The minimal suggested cluster capacity is 2 smallest production nodes.
 
-Follow the getting started guide to setup kubeconfig, which we will need later to secure Posthog. Note that if you skipped it earlier use the _"Remind me how to do this"_ link on the Kubernetes cluster tab.
+Follow the getting started guide to setup kubeconfig, which we will need later to secure PostHog. Note that if you skipped it earlier use the _"Remind me how to do this"_ link on the Kubernetes cluster tab.
 
 ### CLI
 Alternatively use `doctl` which also sets up kubeconfig for you.
@@ -30,7 +30,7 @@ Alternatively use `doctl` which also sets up kubeconfig for you.
 doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" --region=sfo3 --1-clicks=posthog
 ```
 
-### Accessing Posthog
+### Accessing PostHog
 
 After deploying PostHog to your Kubernetes cluster you can get the IP to connect to one of two ways:
 1. Navigate to the IP address of the load balancer created by Kubernetes using your web browser. You can grab this by using the DigitalOcean web console ([networking tab](https://cloud.digitalocean.com/networking/load_balancers)).
@@ -40,13 +40,13 @@ export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath=
 echo "Visit http://$INGRESS_IP to use PostHog\!"
 ```
 
-Congrats, you have a working Posthog instance =)
+Congrats, you have a working PostHog instance =)
 
 But there's one more important step before using it in production: making sure the data is not at risk, see the next section.
 
 ### Securing your 1-click install
 
-Sadly it's not possible to provide parameters to DigitalOcean yet, so we need post-install steps to enable TLS.
+It's not possible to provide parameters to DigitalOcean yet, so we need a post-install steps to enable TLS.
  
 #### 1. Lookup external IP
 
@@ -57,7 +57,7 @@ kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 
 Create an `A` record from your desired hostname to the external IP.
 
-#### 3. Update Posthog
+#### 3. Update PostHog
 Create `values.yaml`
 ```yaml
 cloud: "do"
@@ -82,7 +82,7 @@ Alternatively, to install the chart manually using [Helm >= v3](https://helm.sh/
 
 ### 1. Set up K8s cluster
   
-First, we need to set up a Kubernetes Cluster. See [Kubernetes quickstart](https://docs.digitalocean.com/products/kubernetes/quickstart/). Note that the minimum total resource requirements to run Posthog are 4vcpu and 4G of memory. 
+First, we need to set up a Kubernetes Cluster. See [Kubernetes quickstart](https://docs.digitalocean.com/products/kubernetes/quickstart/). Note that the minimum total resource requirements to run PostHog are 4vcpu and 4G of memory. 
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 ```yaml
