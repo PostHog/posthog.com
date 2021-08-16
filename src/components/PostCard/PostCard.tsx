@@ -62,12 +62,12 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                         style={{
                             background: 'rgba(25, 123, 165, 0.8)',
                             borderTopRightRadius: '1.5rem',
-                            padding: '2rem 4rem',
+                            padding: 'min(2rem, 4vw) min(4rem, 8vw)',
                             textDecoration: 'inherit',
                         }}
                     >
                         <h2
-                            className="text-2xl text-gray-900 dark:text-gray-100 font-sans normal-case my-1"
+                            className="text-2xl text-gray-100 font-sans normal-case my-1"
                             style={{ textDecoration: 'inherit' }}
                         >
                             {post.frontmatter.title}
