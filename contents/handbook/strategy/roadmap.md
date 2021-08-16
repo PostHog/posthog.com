@@ -49,4 +49,4 @@ There will be work on three main fronts:
 - Promote adoption of these plugins
 # 4. Experimentation
 
-In order to validate the imapct of any change you make, its key to be able to measure the effects on the metrics you care about. We intend aim to provide the foundational tools you need to run an A/B or multi-variate test and get a feel for how confident you can be about the results being positive or negative, without overcomplicating the experience with lots of raw and complex statistical analysis techniques.
+In order to validate the impact of any change you make, its key to be able to measure the effects on the metrics you care about. We intend aim to provide the foundational tools you need to run an A/B or multi-variate test and get a feel for how confident you can be about the results being positive or negative, without overcomplicating the experience with lots of raw and complex statistical analysis techniques.
