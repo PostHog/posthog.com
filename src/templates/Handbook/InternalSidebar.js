@@ -31,7 +31,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                         return (
                             <li
                                 style={activeId === navItem.url ? { opacity: '1' } : {}}
-                                className="hover:opacity-100 lg:opacity-60 text-[15px]"
+                                className="hover:opacity-100 xl:opacity-60 text-[15px]"
                                 key={index}
                             >
                                 <Link
