@@ -4,20 +4,6 @@ const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesyst
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
 
-exports.createSchemaCustomization = ({ actions }) => {
-    const { createTypes } = actions
-    createTypes(`
-      type Mdx implements Node {
-        contributors: Contributors
-      }
-      type Contributors {
-        title: String!
-        featuredImgUrl: String
-        featuredImgAlt: String
-      }
-    `)
-}
-
 module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
     const { createNodeField, createNode } = actions
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
