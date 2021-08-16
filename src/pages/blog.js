@@ -5,7 +5,7 @@ import PostCard from '../components/PostCard'
 import { NewsletterForm } from '../components/NewsletterForm'
 import { SEO } from '../components/seo'
 import { Structure } from '../components/Structure'
-import { BlogSidebar } from '../components/Blog/BlogSidebar'
+import { BlogCategoriesList } from '../components/Blog/BlogCategoriesList'
 import { DarkModeToggle } from '../components/DarkModeToggle'
 import { findAuthor } from 'lib/utils'
 
@@ -56,22 +56,16 @@ const BlogPage = ({
 
                     <Structure.Section width="5xl" className="my-0">
                         <Structure.SectionHeader title="Blog" titleTag="h1" titleClassName="text-center" />
-
+                    </Structure.Section>
+                    <BlogCategoriesList />
+                    <Structure.Section width="5xl" className="my-0">
                         {latestPost}
                         <NewsletterForm
                             compact
                             className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
                         />
-
-                        <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
-                            <div className="hidden lg:block lg:w-1/4 lg:pr-8">
-                                <BlogSidebar />
-                            </div>
-                            <div className="w-full lg:w-3/4 lg:pl-8">
-                                <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
-                                {nonLatestPosts}
-                            </div>
-                        </div>
+                        <header className="text-xs text-gray-400 text-center uppercase mb-8">Recent Posts</header>
+                        <section className="grid md:grid-cols-3 gap-4">{nonLatestPosts}</section>
                     </Structure.Section>
                 </div>
             </Layout>
@@ -100,6 +94,9 @@ export const pageQuery = graphql`
                         rootPage
                         featuredImage {
                             publicURL
+                            childImageSharp {
+                                gatsbyImageData(width: 1200, height: 630)
+                            }
                         }
                         author
                     }
@@ -121,6 +118,9 @@ export const pageQuery = graphql`
                         rootPage
                         featuredImage {
                             publicURL
+                            childImageSharp {
+                                gatsbyImageData(width: 1200, height: 630)
+                            }
                         }
                     }
                 }
