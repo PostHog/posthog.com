@@ -1,9 +1,58 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import 'docsearch.js/dist/cdn/docsearch.min.css'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { useValues } from 'kea'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 export default function SearchBar({ filePath, title, handleMobileMenuClick, style, menuOpen }) {
     const breakpoints = useBreakpoint()
+    const { posthog } = useValues(posthogAnalyticsLogic)
+    useEffect(() => {
+        if (window) {
+            import('docsearch.js').then(({ default: docsearch }) => {
+                docsearch({
+                    apiKey: '45e80dec3e5b55c400663a5cba911c4c',
+                    indexName: 'posthog',
+                    inputSelector: '#handbook-search',
+                    algoliaOptions: {
+                        facetFilters: ['tags:handbook'],
+                    },
+                })
+            })
+
+            const doc = window.document
+            const docSearchBarElement = doc.getElementById('handbook-search-wrapper')
+            const docSearchInputElement = doc.getElementById('handbook-search')
+
+            if (window.screen.width > 1080) {
+                docSearchInputElement.placeholder += window.navigator.platform.includes('Mac') ? ' (⌘K)' : ' (Ctrl + K)'
+            }
+
+            const handleSearchBarUsed = (openMethod) => {
+                let isFirstUse = false
+                if (!window.localStorage['hasUsedSearchBar']) {
+                    window.localStorage['hasUsedSearchBar'] = 'true'
+                    isFirstUse = true
+                }
+
+                // Track search bar usage
+                posthog?.capture('docs_search_used', { is_first_use: isFirstUse, open_method: openMethod })
+                if (isFirstUse) posthog?.people.set({ used_docs_search: true })
+            }
+
+            docSearchBarElement.addEventListener('click', () => handleSearchBarUsed('click'))
+
+            doc.addEventListener('keydown', (e) => {
+                // ⌘K opens bar on Mac and Ctrl + K opens it on everything else
+                if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault()
+                    docSearchInputElement.focus()
+                    handleSearchBarUsed('shortcut')
+                }
+            })
+        }
+    }, [])
     return (
         <div
             style={{
@@ -43,7 +92,10 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                     </svg>
                 </button>
 
-                <div className="flex space-x-3 text-[14px] items-center  py-3 rounded px-4 bg-[#e4e0e9] dark:bg-[#371A51] shadow-xl dark:shadow-2xl flex-grow">
+                <div
+                    id="handbook-search-wrapper"
+                    className="flex space-x-3 text-[14px] items-center  py-3 rounded px-4 bg-[#e4e0e9] dark:bg-[#371A51] shadow-xl dark:shadow-2xl flex-grow"
+                >
                     <span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -60,8 +112,8 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                             />
                         </svg>
                     </span>
-
                     <input
+                        id="handbook-search"
                         className="bg-[#e4e0e9] w-full dark:bg-[#371A51] outline-none"
                         placeholder={`Search ${breakpoints.xs ? '' : 'handbook'}`}
                     />

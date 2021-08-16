@@ -1600,3 +1600,10 @@ body.light {
         height: 1.25rem;
     }
 }
+
+#handbook-search-wrapper {
+    .algolia-autocomplete {
+        height: auto;
+        width: 100%;
+    }
+}
