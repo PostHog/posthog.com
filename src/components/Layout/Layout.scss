@@ -1,5 +1,61 @@
 @import '../../vars';
 
+@font-face {
+    font-family: 'MatterVF';
+    /* LOCAL DEVELOPMENT */
+    /*
+    src: url('/fonts/MatterSQVF.woff') format('woff supports variations'),
+         url('/fonts/MatterSQVF.woff') format('woff-variations'),
+         url('/fonts/MatterSQVF.woff2') format('woff2 supports variations'),
+         url('/fonts/MatterSQVF.woff2') format('woff2-variations');
+    */
+
+    /* PRODUCTION */
+    src: url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff')
+            format('woff supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff')
+            format('woff-variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
+            format('woff2 supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
+            format('woff2-variations');
+    font-style: normal;
+    font-weight: 300 900;
+}
+
+@font-face {
+    font-family: 'MatterVF';
+    /* LOCAL DEVELOPMENT */
+    /*
+    src: url('/fonts/MatterSQItalicVF.woff') format('woff supports variations'),
+         url('/fonts/MatterSQItalicVF.woff') format('woff-variations'),
+         url('/fonts/MatterSQItalicVF.woff2') format('woff2 supports variations'),
+         url('/fonts/MatterSQItalicVF.woff2') format('woff2-variations');
+    */
+
+    /* PRODUCTION */
+    src: url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+            format('woff supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+            format('woff-variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+            format('woff2 supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+            format('woff2-variations');
+    font-style: italic;
+    font-weight: 300 900;
+}
+
+body {
+    font-variant: none;
+    font-feature-settings: unset;
+}
+
+p {
+    font-variation-settings: 'wght' 475;
+    opacity: 0.9;
+}
+
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -186,13 +242,8 @@ html {
 body {
     color: hsla(0, 0%, 0%, 0.8);
     background: #200935;
-    font-family: 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui', 'helvetica neue',
-        'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
-    font-kerning: normal;
-    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    font-family: 'MatterVF', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
+        'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
     overflow-x: hidden;
     word-wrap: break-word;
     margin: 0;
@@ -216,7 +267,7 @@ h4,
 h5,
 h6 {
     color: inherit;
-    font-weight: bold; // override ant
+    font-variation-settings: 'wght' 800; // override ant
     text-rendering: optimizeLegibility;
 }
 
@@ -1584,7 +1635,7 @@ body.light {
         h4,
         h5,
         h6 {
-            letter-spacing: 0.02em;
+            letter-spacing: -0.015em;
             margin-top: 2rem;
         }
         .article-content {
