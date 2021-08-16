@@ -34,13 +34,7 @@ helm install -f values.yaml --timeout 20m --create-namespace --namespace posthog
 
 1. Open the Google Cloud Console
 1. Go to VPC Networks > [External IP addresses](https://console.cloud.google.com/networking/addresses/list)
-1. Add new static IP with the name `posthog`
-
-After the chart has started, you can look up the external ip via the following command:
-
-```console
-kubectl get svc posthog --namespace posthog
-```
+1. Add a new global static IP with the name `posthog`
 
 ### Setting up DNS
 
