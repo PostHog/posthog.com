@@ -3,13 +3,46 @@
 @font-face {
     font-family: 'MatterVF';
     /* LOCAL DEVELOPMENT */
-    src: url('/fonts/MatterVF.woff2') format('woff2 supports variations'),
-        url('/fonts/MatterVF.woff2') format('woff2-variations');
-    /* PRODUCTION */
     /*
-    src: url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterVF.woff2') format('woff2 supports variations'),
-         url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterVF.woff2') format('woff2-variations');
+    src: url('/fonts/MatterSQVF.woff') format('woff supports variations'),
+         url('/fonts/MatterSQVF.woff') format('woff-variations'),
+         url('/fonts/MatterSQVF.woff2') format('woff2 supports variations'),
+         url('/fonts/MatterSQVF.woff2') format('woff2-variations');
     */
+
+    /* PRODUCTION */
+    src: url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff')
+            format('woff supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff')
+            format('woff-variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
+            format('woff2 supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
+            format('woff2-variations');
+    font-style: normal;
+    font-weight: 300 900;
+}
+
+@font-face {
+    font-family: 'MatterVF';
+    /* LOCAL DEVELOPMENT */
+    /*
+    src: url('/fonts/MatterSQItalicVF.woff') format('woff supports variations'),
+         url('/fonts/MatterSQItalicVF.woff') format('woff-variations'),
+         url('/fonts/MatterSQItalicVF.woff2') format('woff2 supports variations'),
+         url('/fonts/MatterSQItalicVF.woff2') format('woff2-variations');
+    */
+
+    /* PRODUCTION */
+    src: url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+            format('woff supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+            format('woff-variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+            format('woff2 supports variations'),
+        url('//posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+            format('woff2-variations');
+    font-style: italic;
     font-weight: 300 900;
 }
 
