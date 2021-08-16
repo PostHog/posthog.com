@@ -18,7 +18,8 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors },
+        contributors,
+        fields: { slug },
     } = post
     const { title, hideAnchor, description, featuredImage } = frontmatter
     const { parent, excerpt } = post
@@ -99,13 +100,13 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
-                contributors {
-                    url
-                    username
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 37, placeholder: BLURRED)
-                        }
+            }
+            contributors {
+                url
+                username
+                avatar {
+                    childImageSharp {
+                        gatsbyImageData(width: 37, placeholder: BLURRED)
                     }
                 }
             }

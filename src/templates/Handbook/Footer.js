@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import footerLogo from '../../images/posthog-logo-footer.svg'
+import Contributors from './Contributors'
 
 export default function Footer({ contributors, filePath, title }) {
     return (
@@ -16,27 +16,20 @@ export default function Footer({ contributors, filePath, title }) {
                         question, someone else does too - so please don't hesitate to create a new issue or ask us a
                         question.
                     </p>
-                    <div className="my-10">
-                        <h3 className="text-base">Contributors</h3>
-                        <ul className="list-none m-0 p-0 flex space-x-2 mt-2 flex-wrap">
-                            {contributors.map((contributor, index) => {
-                                const { avatar, url, username } = contributor
-                                const image = getImage(avatar)
-                                return (
-                                    <li key={index}>
-                                        <a href={url}>
-                                            <GatsbyImage
-                                                imgClassName="rounded-full max-w-[37px]"
-                                                image={image}
-                                                alt={username}
-                                                title={username}
-                                            />
-                                        </a>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
+                    {
+                        // In order to show contributors, a valid GitHub API key
+                        // must be added as an environment variable GITHUB_API_KEY.
+                        // If no contributors are found, this section shows nothing.
+                        contributors && (
+                            <div className="my-10">
+                                <h3 className="text-base">Contributors</h3>
+                                <Contributors
+                                    className="list-none m-0 p-0 flex space-x-2 mt-2 flex-wrap"
+                                    contributors={contributors}
+                                />
+                            </div>
+                        )
+                    }
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <h3 className="text-base">Docs</h3>

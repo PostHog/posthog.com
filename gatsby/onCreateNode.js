@@ -3,6 +3,9 @@ const replacePath = require('./utils')
 const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
+require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
     const { createNodeField, createNode } = actions
@@ -14,7 +17,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             value: replacePath(slug),
         })
         // Create GitHub contributor nodes for handbook
-        if (slug.startsWith('/handbook/')) {
+        if (slug.startsWith('/handbook/') && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents${slug.replace(
                 /\/$/,
                 ''
@@ -45,11 +48,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                     }
                 })
             )
-            createNodeField({
-                node,
-                name: `contributors`,
-                value: contributorsNode,
-            })
+            node.contributors = contributorsNode
         }
     }
 }
