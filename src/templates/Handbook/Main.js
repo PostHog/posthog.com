@@ -78,7 +78,7 @@ export default function Main({
                 </main>
                 {!breakpoints.lg && showToc && (
                     <InternalSidebar
-                        className="flex-1 sticky top-4 mt-[35vh] mb-14"
+                        className="flex-1 sticky top-4 mt-[35vh] mb-14 hidden xl:block"
                         tableOfContents={tableOfContents}
                     />
                 )}
