@@ -22,6 +22,9 @@ interface MdxQueryData {
         slug: string
         body: any
         excerpt: string
+        parent: {
+            relativePath: string
+        }
         frontmatter: {
             date: string
             title: string
@@ -68,7 +71,9 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
     // const { mdx } = data
-    const { frontmatter, body, excerpt, id, slug } = mdx
+    const { frontmatter, parent, body, excerpt, id, slug } = mdx
+
+    const filePath = `/${parent?.relativePath}`
 
     const author = findAuthor(authorsData.frontmatter.authors)(frontmatter.author)
 
@@ -120,9 +125,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                         </div>
                     </div>
                     {isDocsPage && <DocsPageSurvey />}
-                    {(isDocsPage || isHandbookPage) && (
-                        <DocsFooter filename={`/${addIndex(slug)}.mdx`} title={frontmatter.title} />
-                    )}
+                    {(isDocsPage || isHandbookPage) && <DocsFooter filename={filePath} title={frontmatter.title} />}
                 </div>
             </Layout>
         </div>
@@ -152,6 +155,11 @@ export const query = graphql`
                     publicURL
                 }
                 author
+            }
+            parent {
+                ... on File {
+                    relativePath
+                }
             }
         }
         authorsData: markdownRemark(fields: { slug: { eq: "/authors" } }) {
