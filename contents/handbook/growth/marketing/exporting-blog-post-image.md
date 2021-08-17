@@ -35,5 +35,6 @@ The image should be uploaded by the person creating the blog post.
 
 ## Adding to a blog post
 
+1. Upload the file to `/contents/images/blog`
 1. Use the `featuredImage` field that appears in the meta information of the post like in [this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md).
 1. Make sure the filename matches the reference to the image in the .md file.
