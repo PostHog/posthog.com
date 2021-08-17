@@ -23,9 +23,13 @@ Our content production workflow is as follows:
   * The engineering team sometimes creates tutorials that we use to explain certain PostHog features. These can be turned into blog posts in their own right. Here’s [an example](https://www.youtube.com/watch?v=3_yH24Bh0HE). 
 * **Get the transcript:** We use [Rev.com](https://rev.com) to pull the transcript from the video. Rev also lets you get a quick draft in just a few minutes, though we recommend waiting for the proper version, which can take anywhere from a few hours if ‘rushed’ - which costs extra - to a day or two.
 * **Write the blog post:** Using the transcript, we write up a concise blog post about the discussion or tutorial. This is where we add more context to the topic and include links to other content for further reading. The length of a blog post can vary wildly depending on how long the video is (which is a function of how thoughtful and in-depth the questions are), but a 60-minute interview usually yields a ~1,500-word blog post. This is also the part where we publish it to GitHub for feedback and request artwork from our design team.
+* **Design requests:** If the content requires a visual element, create a [design request](https://posthog.com/handbook/company/working-with-design) (at least 2 days in advance) to have a graphic produced. For example, if the content is a YouTube video, we'll make a thumbnail image. If it's a blog post, we'll create a post image that is featured at the top of the post.
+
 * **Extract the audio from the edited video:** This goes into the podcast.
-* **Post to social media:** After the blog post is complete, we pull snippets from it and schedule them for publishing across your platforms.
-* **Share it via email:** We bundle our latest posts (as blurbs with links) for addition to our next email newsletter edition.
+* **Post to social media:** After the blog post is complete, we pull snippets from it and schedule them for publishing across your platforms. Post a link to the article/video on our `#editorial` channel in the PostHog Users Slack group. This group should always the first to hear about new content.
+
+
+
 
 ## Publishing
 
@@ -47,23 +51,4 @@ Share the live content with out PostHog Users Slack group first, in the `#editor
 
 Arrange further promotion via the newsletter, social channels and 3rd party communities.
 
-This section excludes Paid Ads, which are covered elsewhere in the Handbook.
-
-## PostHog Array
-
-The PostHog Array is our product release series.
-
-It's named the PostHog Array, because hedgehogs are collectively known as an *array* of hedgehogs.
-
-Yakko adds new items to the Array ;) by gathering changes and highlights from PRs and the engineering team.
-
-Each array includes:
-- a community MVP
-- a summary of new features, improvements and fixes
-- important announcements e.g. deprecations
-- detailed overview of each change with an image/video
-- community shoutout for other contributors
-- open roles
-- complete list of PRs included
-
-Before merging and distributing the release post, check with Tim that the new version has been released.
+This section excludes [Paid Ads](/handbook/growth/marketing/paid), which are covered elsewhere in the Handbook.

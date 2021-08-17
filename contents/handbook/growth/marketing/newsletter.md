@@ -1,8 +1,10 @@
 ---
-title: Newsletter
+title: Email
 sidebar: Handbook
 showTitle: true
 ---
+
+We do not currently do email marketing, beyond product announcements via newsletter. In the future, we will probably want to grow this channel. 
 
 Speak to James, Yakko, or Mo for access to our Mailchimp dashboard.
 
@@ -33,7 +35,3 @@ Feel free to use a few emojis and 1-2 images.
 For reference, here's an [example](https://us19.campaign-archive.com/?e=__test_email__&u=292207b434c26e77b45153b96&id=a60742692b) of a previous newsletter.
 
 Note: Within the Mailchimp dashboard, users are automatically tagged to indicate where they came from e.g. Newsletter Subscribers, Deployed Posthog, Eventbrite, etc.
-
-### Investors
-
-James manually manages our list of interested investors - please reach out to him for assistance.
