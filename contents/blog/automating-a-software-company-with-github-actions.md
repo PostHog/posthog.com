@@ -157,7 +157,7 @@ jobs:
 > One thing we've not covered yet is what running jobs on every PR gives us in practice.
 > It's two things:
 > 1. Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.
->   <img alt="Bump labels" src="../images/blog/github-actions/pr.png" width=839 height=196/>
+>   <img alt="Bump labels" src="../images/blog/github-actions/pr.png" width="839" height="196"/>
 > 2. Select PR checks can be made required, in which case merging is prevented until all required checks turn green.
 
 ### Keeping stale PRs in check
@@ -337,7 +337,7 @@ Something particularly tedious we eliminated is incrementing package versions. A
 
 What gives? Well, these days the only thing an engineer has to do is give their PR the right label:
 
-<img alt="Bump labels" src="../images/blog/github-actions/bump-labels.png" width=297 height=249/>
+<img alt="Bump labels" src="../images/blog/github-actions/bump-labels.png" width="297" height="249"/>
 
 Right after that PR gets merged, the package version gets incremented in `master`:
 
@@ -408,7 +408,7 @@ jobs:
 
 Here's what this looks like in GitHub's workflow visualization feature:
 
-<img alt="Visualization 1. Autobump" src="../images/blog/github-actions/1-autobump.png" width=287 height=167/>
+<img alt="Visualization 1. Autobump" src="../images/blog/github-actions/1-autobump.png" width="287" height="167"/>
 
 But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all of the aforementioned release tasks run automatically.
 
@@ -416,7 +416,7 @@ In fact, there are so many tasks that run automatically that the workflow would 
 
 That workflow has a fascinating visualization – which, remember, is actually an extension of the previous autobump workflow.
 
-<img alt="Visualization 2. Autorelease" src="../images/blog/github-actions/2-autorelease.png" width=922 height=273/>
+<img alt="Visualization 2. Autorelease" src="../images/blog/github-actions/2-autorelease.png" width="922" height="273"/>
 
 ### Fixing typos
 
