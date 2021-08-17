@@ -92,6 +92,12 @@ export const pageQuery = graphql`
                         title
                         rootPage
                         categories
+                        featuredImage {
+                            publicURL
+                            childImageSharp {
+                                gatsbyImageData(width: 1200, height: 630)
+                            }
+                        }
                     }
                 }
             }
