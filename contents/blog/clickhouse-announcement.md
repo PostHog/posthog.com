@@ -11,15 +11,15 @@ featuredImageType: full
 ---
 We're excited to announce a major under-the-hood upgrade for PostHog Open Source! Over the past few weeks, our team have been hard at work moving over from Postgres to ClickHouse, the same database that powers PostHog Cloud.
 
-This means that anyone can now get started using PostHog for free at scale - you'll no longer be limited to 10k monthly active users. Read on to find about more about the benefits and how we did this!
+This means you can now use PostHog Open Source for free without being limited to 10k monthly active users. Read on to find about more about the benefits and how we did this!
 
 ## Why ClickHouse?
 
-ClickHouse is a database designed to enable fast, efficient analytics computations across multiple machines. We are moving [PostHog Open Source]() from PostgreSQL to ClickHouse because ClickHouse is a better overall experience on every level. Postgres runs out of capacity quickly and doesn’t support the advanced analytics we need for our product, and there is no way to scale PostgreSQL beyond a certain point.
+ClickHouse is a database designed to enable fast, efficient analytics computations across multiple machines. We are moving [PostHog Open Source](https://github.com/PostHog/posthog) from PostgreSQL because it doesn't support some features we need and struggles to scale beyond 10k monthly active users. ClickHouse, on the other hand, offers all the functionality we need and offers a much better experience with large volumes of data.
 There are several benefits to using ClickHouse over PostgreSQL, such as:
 * Speed: ClickHouse is orders of magnitude faster than most other databases, mainly because of how tightly it couples storage and computing power, resulting in significantly quicker query response times.
 * Cost: With more efficient use of processing power, memory, and storage (plus horizontal scaling), you can use cheaper commodity boxes versus having to scale up using specialized (read: costlier) software.
-* Migrations: Moving over from another database? ClickHouse lets you create materialized versions of your data thanks to its advanced engine, resulting in exponentially faster migrations between deployments. In future, we'll also enable you to more easily migrate between PostHog Cloud and PostHog Self Hosted as both are backed by ClickHouse now.
+* Migrations: Moving over from another database? ClickHouse enables you to create materialized versions of your data thanks to its advanced engine, resulting in exponentially faster migrations between deployments. In future, we'll also enable you to more easily migrate between PostHog Cloud and PostHog Self Hosted as both are backed by ClickHouse now.
 * Scalability: Clickhouse features a column-based database structure, meaning that [insert more context here that explains the concept simply]. Because of this, scaling and maintaining a ClickHouse cluster is pretty easy as long as you’re sharding, replicating, and distributing your tables correctly.
 * Deployment: Other database systems depend on a storage layer, a compute layer, and a resource scheduler (like YARN) to be deployed properly. ClickHouse is just one binary - meaning that [insert more context]. As such, deployment is a breeze.
 * Documentation - [ClickHouse’s documentation](https://clickhouse.tech/docs/en/) has come a long way in the last few years, and Altinity, a company that supports the ecosystem, has excellent [documentation](https://docs.altinity.com/ available as well.
