@@ -94,7 +94,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
 
                 <div
                     id="handbook-search-wrapper"
-                    className="flex space-x-3 text-[14px] items-center  py-3 rounded px-4 bg-[#e4e0e9] dark:bg-[#371A51] shadow-xl dark:shadow-2xl flex-grow"
+                    className="flex space-x-3 text-[14px] items-center  py-3 rounded px-4 bg-[#f0f0f0] dark:bg-[#371A51] flex-grow"
                 >
                     <span>
                         <svg
@@ -114,12 +114,12 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                     </span>
                     <input
                         id="handbook-search"
-                        className="bg-[#e4e0e9] w-full dark:bg-[#371A51] outline-none"
+                        className="bg-[#f0f0f0] w-full dark:bg-[#371A51] outline-none text-[#555] dark:text-[#fff] focus:text-[#000] dark:focus:text-[#fff]"
                         placeholder={`Search ${breakpoints.xs ? '' : 'handbook'}`}
                     />
                     <div className="flex space-x-3 flex-shrink-0">
                         <a
-                            className="text-[#c4b7d1] hover:text-[#c4b7d1] hidden lg:flex items-center space-x-1"
+                            className="text-[#777] hover:text-[#555] hidden lg:flex items-center space-x-1"
                             href={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
                         >
                             <svg
@@ -149,7 +149,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                             <span>Edit this page</span>
                         </a>
                         <a
-                            className="text-[#c4b7d1] hover:text-[#c4b7d1] hidden sm:flex items-center space-x-2"
+                            className="text-[#777] hover:text-[#555] hidden sm:flex items-center space-x-2"
                             href={`https://github.com/PostHog/posthog.com/issues/new?title=Docs feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
                         >
                             <svg
