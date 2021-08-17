@@ -40,4 +40,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/matlokam
     }
+  - {
+      handle: paolodamico,
+      name: Paolo D'Amico,
+      role: Product,
+      image: https://avatars.githubusercontent.com/u/5864173?v=4,
+      link_type: github,
+      link_url: https://www.github.com/paolodamico
+    }
 ---
