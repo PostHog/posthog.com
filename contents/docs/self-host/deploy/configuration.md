@@ -1,6 +1,6 @@
 ---
-title: Posthog ClickHouse Chart Configuration
-sidebarTitle: Chart Configuration
+title: Posthog ClickHouse chart configuration
+sidebarTitle: Chart configuration
 sidebar: Docs
 showTitle: true
 ---
