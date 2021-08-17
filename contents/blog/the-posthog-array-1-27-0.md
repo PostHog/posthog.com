@@ -39,7 +39,7 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 - [Brand-new funnels experience](#new-funnels-experience).
 - [Significant revamp on the legend table & tooltips on insights](#revamp-of-legend-table--insight-tooltips).
 - [New action, event, cohorts & properties selector](#new-filter-experience).
-- [Clickhouse is now free to use](#clickhouse-is-now-free-to-use).
+- [ClickHouse is now free to use](#clickhouse-is-now-free-to-use).
 ### New Funnels Experience
 
 Funnels have a new bar-chart visualization and show more comprehensive metrics. You can now choose whether to display conversion rates for the full funnel or from each step to the next.
@@ -74,13 +74,13 @@ It's now easier than ever to find the event, user, or cohort definitions you're 
 
 ![Funnel time conversion](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/unified-search.png)
 
-### Clickhouse is now free to use!
+### ClickHouse is now free to use!
 
-A few months after PostHog we started hitting limitations on some operations running on Postgres. We then decided to develop full support for a <a rel="noreferrer noopener" target="_blank" href="https://clickhouse.tech/">Clickhouse</a> backend. Clickhouse is a very powerful OLAP database that works specially well at computing analytics for huge volumes of data. At first this Clickhouse backend was launched as a premium feature requiring an Enterprise license. Some weeks ago we decided to offer a free version with a restriction of 3 team members to serve as trial for the feature.
+A few months after PostHog we started hitting limitations on some operations running on Postgres. We then decided to develop full support for a <a rel="noreferrer noopener" target="_blank" href="https://clickhouse.tech/">ClickHouse</a> backend. ClickHouse is a very powerful OLAP database that works specially well at computing analytics for huge volumes of data. At first this ClickHouse backend was launched as a premium feature requiring an Enterprise license. Some weeks ago we decided to offer a free version with a restriction of 3 team members to serve as trial for the feature.
 
 Since then, we have ironed out all the details and have now decided to make this feature **fully free** now, no longer requiring a license nor having any additional restrictions. This comes from our commitment to supporting teams and companies of any size, so you can continue using PostHog for free even if your event volume increases significantly.
 
-Clickhouse is deployed a bit differently than our [traditional deployment options](/docs/self-host/overview#deploy), you can find full deployment instructions here: <a rel="noreferrer noopener" target="_blank" href="https://github.com/PostHog/charts-clickhouse/">https://github.com/PostHog/charts-clickhouse/</a>
+ClickHouse is deployed a bit differently than our [traditional deployment options](/docs/self-host/overview#deploy), you can find full deployment instructions here: <a rel="noreferrer noopener" target="_blank" href="https://github.com/PostHog/charts-clickhouse/">https://github.com/PostHog/charts-clickhouse/</a>
 
 
 ### Improvements & Fixes
