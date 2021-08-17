@@ -37,7 +37,7 @@ Especially early on, VC is buying into your potential value. This makes sense - 
 
 The way to pitch open source to VCs is that it is easier to get into production, and there is less of a sense of vendor lock in, which puts off many developers from trying out a new SaaS product. SaaS may be "less work" to manage, but there's probably no reason you can't also provide your own product, hosted. The end result is that your open source repo could get used at huge companies. They probably have needs your free product can't deliver (uptime, better features, support), which you can make money from meeting (through providing services, hosting or premium features), to invest back into the project.
 
-The downside of this VC route is that you risk hype<>reality disonance!
+The downside of this VC route is that you risk hype`<>`reality disonance!
 
 If you can't achieve results with the money you raised, whilst increasing your burn rate, you are at the mercy of those funding you if you will survive. Not cool, but you took this route!
 
@@ -79,11 +79,11 @@ From this point on, we're going to explain how we raised venture capital in this
 
 This is a contraversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
 
-## Product<>Community versus Product<>Market fit
+## Product`<>`Community versus Product`<>`Market fit
 
 We'd advocate that the best way to build a really ambitious, fundable open source project is to get something to ubiquity before anything else.
 
-In SaaS, there is a lot of advice to charge money even before you have a product. It is almost becoming a standard approach. You somehow have to jump to product<>market fit in one leap to achieve this - you need to have a product concept that is so strong people will pay upfront. That means getting to product<>market fit is incredibly hard since there are too many variables to know how to solve the puzzle except through trial and error. However, when you get there, making money is easy.
+In SaaS, there is a lot of advice to charge money even before you have a product. It is almost becoming a standard approach. You somehow have to jump to product`<>`market fit in one leap to achieve this - you need to have a product concept that is so strong people will pay upfront. That means getting to product`<>`market fit is incredibly hard since there are too many variables to know how to solve the puzzle except through trial and error. However, when you get there, making money is easy.
 
 Open source creates a different route. You need to (i) build something useful THEN (ii) work out how to make money. You'll get much, much more feedback from open source - it's an approach that is more developer-friendly and thus will tend to get you a lot more growth and adoption if you are getting close to something useful. That makes it a lot easier to build something useful for a community.
 
@@ -91,13 +91,13 @@ However, making money is harder. You will need to do that to sustain and grow th
 
 The good news is that inbound interest is much, much easier to close, and you don't have to waste time sending hundreds of cold emails to generate it - you can focus on the free product.
 
-This can definitely go wrong - you could run out of cash before you reach product<>market fit. You might accidentally build a free product that has no viable commercial route. You may find that the market you are building for is too small for VCs to be able to invest into it.
+This can definitely go wrong - you could run out of cash before you reach product`<>`market fit. You might accidentally build a free product that has no viable commercial route. You may find that the market you are building for is too small for VCs to be able to invest into it.
 
-When we raised money, VCs asked about the commercial side, but the ones that invested generally just have the belief that product<>market fit is easy once you get product<>community fit. We were upfront about our paid version - we don't know how it would work yet, but we have a plan for how we'd approach it.
+When we raised money, VCs asked about the commercial side, but the ones that invested generally just have the belief that product`<>`market fit is easy once you get product{`<>`}community fit. We were upfront about our paid version - we don't know how it would work yet, but we have a plan for how we'd approach it.
  
 ## Making money
 
-You'll need some way of making money, at some point. That'll come after product<>community fit.
+You'll need some way of making money, at some point. That'll come after product`<>`community fit.
 
 There are three popular ways of doing this, either:
 

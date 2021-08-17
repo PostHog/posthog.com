@@ -1,7 +1,7 @@
 module.exports = {
     mode: 'jit',
     purge: {
-        content: ['./src/**/*.{js,jsx,ts,tsx}'],
+        content: ['./src/**/*.{js,jsx,ts,tsx}', './safelist.txt'],
         options: {
             safelist: [
                 'justify-start',
@@ -33,6 +33,8 @@ module.exports = {
                 'w-56',
                 'w-64',
                 'w-72',
+                'opacity-40',
+                'opacity-1',
             ],
         },
     },
@@ -64,6 +66,7 @@ module.exports = {
             '-1': '-1',
         },
         flex: {
+            1: '1',
             '1/3': '0 0 33%',
             '2/3': '0 0 66%',
             half: '0 0 49%',
@@ -87,9 +90,9 @@ module.exports = {
         }),
         extend: {
             fontFamily: {
-                serif: ['DM Sans', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
-                    'DM Sans',
+                    'MatterVF',
                     '-apple-system',
                     'BlinkMacSystemFont',
                     'avenir next',
@@ -103,8 +106,8 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
-                button: ['DM Sans', 'sans-serif'],
-                nav: ['DM Sans', 'sans-serif'],
+                button: ['MatterVF', 'sans-serif'],
+                nav: ['MatterVF', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',
@@ -126,6 +129,7 @@ module.exports = {
                 yellow: '#F7A501',
                 footer: '#08042f',
                 pink: '#A970DC',
+                'light-purple': '#A393B0',
             },
             minHeight: {
                 780: '780px',
