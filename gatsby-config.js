@@ -51,10 +51,9 @@ module.exports = {
             options: {
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
-                    `gatsby-remark-static-images`,
+                    'gatsby-remark-images',
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                 ],
-                plugins: [`gatsby-remark-static-images`],
             },
         },
         `gatsby-transformer-json`,
