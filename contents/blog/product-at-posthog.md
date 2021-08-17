@@ -10,8 +10,6 @@ featuredImage: ../images/blog/product-at-posthog.png
 featuredImageType: full
 ---
 
-
-
 We’ve talked before about [product-minded engineers](https://posthog.com/blog/turning-engineers-into-product-people) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the what (prioritization) and the how (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. Let’s quickly look at the product development workflow at PostHog, the responsibilities of the Product Team, the benefits & results of this approach, the foundations required to build a team like this, and some pitfalls and learnings we’ve acquired along the way.
 
 ## Product development workflow
@@ -22,7 +20,7 @@ The product process starts with the product strategy. Our product strategy direc
 
 For example, our current company goal is to achieve deep product-market fit by finding a handful of customers who absolutely love PostHog. With this in mind, we set out to create different product strategies that align towards this goal. An example of this was our [Nail Funnels](https://posthog.com/blog/new-vp-nailing-funnels) strategy, where we set out to enable our customers to dive deep into their metrics to understand conversion across different contexts.
 
-Note that while these strategies come from Product, the process is highly collaborative. At PostHog, a strategy gets proposed complemented with a strong rationale and details about the opportunity cost of doing it. Everyone at PostHog is encouraged to challenge and provide [feedback](https://tbd.posthog.com) on the proposal to improve it.
+Note that while these strategies come from Product, the process is highly collaborative. At PostHog, a strategy gets proposed with a strong rationale and details about the opportunity cost of doing it. Everyone at PostHog is encouraged to challenge and provide [feedback](https://posthog.com/handbook/people/feedback) on the proposal to improve it.
 
 ### Execution
 
@@ -52,7 +50,6 @@ So if Engineering handles the roadmap and prioritization, and speccing out solut
 - **Provide feedback** & ensure product quality: We want to both build new product features and ensure we’re constantly raising the bar. We do this by doing continuous quality testing, dogfooding our own product, and challenging engineers to sand the rough edges even in the smallest ways. We’re also always on the lookout for remote edge cases that are easy to miss.
 - Help **set up metrics and challenge continuous tracking**: Building things is rewarding in its own right, as you can very clearly see and judge your output. It’s tempting to ignore actual numbers informing you whether what you build is actually successful or not - but remember, it’s about outcome, not output. Even if you created the most amazing product with the smoothest experience, if no one’s using it or they’re using it incorrectly, it’s a failure (and a learning). As the Product Team, we’re constantly challenging ourselves and engineers to set up the right metrics that measure actual progress towards our goals. Doing this right also contributes more context for the next product iteration.
 
-
 A note on removing blockers. It is typically the responsibility of a PM to remove blockers for the engineering team. As a dev, you come to your daily standup, mention that you’re blocked because stakeholder X has not sent you something you need, and the PM goes to raise hell all around to get you unblocked as quickly as possible. When you have a very strong and autonomous engineering team, this doesn’t need to happen at all. As an autonomous engineer I own my features, if I get blocked I’ll go do whatever I need to do to get myself unblocked. At best Product provides some context on who to talk to or suggestions on how to get unblocked.
 
 ## Benefits & Results
@@ -68,11 +65,11 @@ A note on removing blockers. It is typically the responsibility of a PM to remov
 Decentralized, product-minded engineering organizations are not easy to build and can be rare, even in startups. One of the biggest challenges is avoiding the common trap of PMs becoming dictators and engineers becoming code monkeys (check out our [original post](https://posthog.com/blog/turning-engineers-into-product-people)). We’ve found three essential elements your team needs to operate properly: 
 
 1. *Product-minded engineers*: As an engineer, if you’re not constantly thinking about who you’re building this for, why you’re building this, and what are you trying to accomplish, you won’t be able to execute a product vision autonomously.
-1. *Empowered and decentralized team members*: where a designer can spot a problem, same as an engineer; where everyone can give feedback on anything; and where anyone can challenge everyone else’s assumptions and solutions.
-1. *Team members with solid judgement*: Because everyone is constantly making decisions (and quite impactful ones at that), you need people who have good judgement.
-
+2. *Empowered and decentralized team members*: where a designer can spot a problem, same as an engineer; where everyone can give feedback on anything; and where anyone can challenge everyone else’s assumptions and solutions.
+3. *Team members with solid judgement*: Because everyone is constantly making decisions (and quite impactful ones at that), you need people who have good judgement.
 
 ## Pitfalls
+
 Finally, I’d like to share some mistakes we’ve made in our iterative journey to improve the Product team, and how to avoid them.
 - *Prescribing solutions:* Discussions and proposals can be simpler when talking about specific solutions instead of higher level problems/hypotheticals. The problem is that coming up with solutions rather than problems removes ownership and restricts the scope of potential solutions.
 - *Lack of strategic and tactical direction:* It’s tempting to skip having strategic direction or defining specific tasks under said strategy, but doing so will manifest in poor, unfocused decisions. 
