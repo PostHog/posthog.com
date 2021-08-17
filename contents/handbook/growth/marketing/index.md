@@ -46,7 +46,7 @@ We are in the process of building more specific user personas.
 
 We have identified a number of acquisition channels that we are prioritising based on our target user. These are split into scalable and non-scalable channels. Some of these are not owned by Marketing, but are closely linked:
 
-<img width="1140" alt="Screenshot 2021-08-17 at 15 43 45" src="https://user-images.githubusercontent.com/70321811/129747467-549d0547-4cb6-43da-a83e-0411dc1c6001.png">
+<img width="1140" alt="Screenshot 2021-08-17 at 15 43 45" src="https://user-images.githubusercontent.com/70321811/129747467-549d0547-4cb6-43da-a83e-0411dc1c6001.png" />
 
 ### Team
 
