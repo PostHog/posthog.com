@@ -346,6 +346,12 @@ Plugins have access to some special objects in the global scope, as well as a va
 
 #### `fetch`
 
+<blockquote class="warning-note">
+
+⚠️ Be very careful when using `fetch` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed plugins and could potentially lead to an infinite loop of event generation.
+
+</blockquote>
+
 Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch)
 
 #### posthog
