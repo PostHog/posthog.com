@@ -222,7 +222,7 @@ At a very high level these are the core needs to solve for and some examples of 
    </td>
    <td>Understanding what successful and unsuccessful users have in common
 <p>
-<em>(e.g. correlation of events and user properties with success and failure)</em>
+<em>(e.g. correlation of events and user properties with success and failure)</em></p>
    </td>
    <td>Low
    </td>
@@ -234,7 +234,7 @@ At a very high level these are the core needs to solve for and some examples of 
    </td>
    <td>Understand what events might have caused the user to drop-off
 <p>
-<em>(e.g. reviewing prioritized events from around the time of drop-off)</em>
+<em>(e.g. reviewing prioritized events from around the time of drop-off)</em></p>
    </td>
    <td>Mid
    </td>
@@ -246,7 +246,7 @@ At a very high level these are the core needs to solve for and some examples of 
    </td>
    <td>Understand what path people took before and after they were successful or unsuccessful
 <p>
-<em>(e.g. extended and enhanced paths capability)</em>
+<em>(e.g. extended and enhanced paths capability)</em></p>
    </td>
    <td>Mid
    </td>
@@ -258,7 +258,7 @@ At a very high level these are the core needs to solve for and some examples of 
    </td>
    <td>Backtest hypothesis to build supporting evidence
 <p>
-<em>(e.g. ad-hoc trends queries leverage insights found)</em>
+<em>(e.g. ad-hoc trends queries leverage insights found)</em></p>
    </td>
    <td>Mid
    </td>

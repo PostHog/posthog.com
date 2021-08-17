@@ -61,6 +61,7 @@ export interface HeaderProps {
     transparentBackground?: boolean
     blogArticleSlug?: string
     logoOnly?: boolean
+    className?: string
 }
 
 export const Header = ({
@@ -70,6 +71,7 @@ export const Header = ({
     onBlogPage = false,
     blogArticleSlug,
     logoOnly = false,
+    className,
 }: HeaderProps): JSX.Element => {
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
@@ -82,16 +84,25 @@ export const Header = ({
         onHomePage ||
         onBlogPage ||
         !!blogArticleSlug
-    const layoutWidth = onPostPage ? 'w-full px-4' : 'w-11/12 mx-auto'
+    const layoutWidth = onPostPage ? 'w-full' : 'w-11/12 mx-auto'
     const justify = logoOnly ? 'justify-center' : 'justify-between'
 
     return (
         <div
-            className={`header-wrapper primary-navbar py-6 relative z-20 ${
+            className={`px-4 header-wrapper primary-navbar py-6 relative z-20 ${
                 transparentBackground ? 'transparent-background' : ''
             } ${blogArticleSlug ? 'blog-article-header' : ''}`}
         >
-            <header className={mergeClassList(layoutWidth, justify, logoOnly && 'opacity-50', 'flex', 'items-center')}>
+            <header
+                className={mergeClassList(
+                    layoutWidth,
+                    justify,
+                    className,
+                    logoOnly && 'opacity-50',
+                    'flex',
+                    'items-center'
+                )}
+            >
                 <div className="flex-1">
                     <Link id="logo" to="/" className="block">
                         <img alt="logo" src={logo} />
