@@ -24,7 +24,7 @@ Install the [TinyImage Compressor](https://www.figma.com/community/plugin/789009
 1. Create a Frame at `1200x630`.
 2. Paste (or design) content into frame and make sure artwork fills the entire frame.
 3. Ensure frame doesn't have a border.
-4. Rename the frame of the image to closely match the blog post title in a slug format. (Ex: `writing-for-developers`, where we remove capital letters and punctuation, and replace spaces with hyphens. This will become the filename that is uploaded to the server.)
+4. Rename the frame of the image to closely match the blog post title in a slug format. (Ex: `writing-for-developers`, where we remove capital letters and punctuation, and replace spaces with hyphens. This will become the filename that is uploaded to the server.) It's best to omit articles (a, and, the).
 5. Choose an export option (1x, PNG) but _don't_ export the image.
 6. Select the frame and go to `Plugins > TinyImage Compressor`.
 7. Make sure only the _one_ image is selected. (Sometimes it will select multiple images by default.)
