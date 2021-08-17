@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: engineering
 author: michael-matloka
-featuredImage: ../images/blog/robot-hedgehogs.png
+featuredImage: ../images/blog/automating-software-company-github-actions.png
 featuredImageType: full
 ---
 
