@@ -272,10 +272,6 @@
                     "url": "/handbook/growth/marketing/blog"
                 },
                 {
-                    "name": "Community",
-                    "url": "/handbook/growth/marketing/community"
-                },
-                {
                     "name": "Newsletter",
                     "url": "/handbook/growth/marketing/newsletter"
                 },
@@ -286,10 +282,6 @@
                 {
                     "name": "Press",
                     "url": "/handbook/growth/marketing/press"
-                },
-                {
-                    "name": "Releasing content",
-                    "url": "/handbook/growth/marketing/releasing-content"
                 }
             ]
         },
