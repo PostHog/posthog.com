@@ -1,6 +1,6 @@
 ---
-date: 2021-08-18
-title: TBD (Product at PostHog)
+date: 2021-08-19
+title: Role of Product Team at an engineering-led organization
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -67,14 +67,17 @@ A note on removing blockers. It is typically the responsibility of a PM to remov
 ## Prerequisites
 Decentralized, product-minded engineering organizations are not easy to build and can be rare, even in startups. One of the biggest challenges is avoiding the common trap of PMs becoming dictators and engineers becoming code monkeys (check out our [original post](https://posthog.com/blog/turning-engineers-into-product-people)). We’ve found three essential elements your team needs to operate properly: 
 
-1. Product-minded engineers: As an engineer, if you’re not constantly thinking about who you’re building this for, why you’re building this, and what are you trying to accomplish, you won’t be able to execute a product vision autonomously.
-1. Empowered and decentralized team members - where a designer can spot a problem, same as an engineer; where everyone can give feedback on anything; and where anyone can challenge everyone else’s assumptions and solutions.
-1. Team members with solid judgement. Because everyone is constantly making decisions (and quite impactful ones at that), you need people who have good judgement.
+1. *Product-minded engineers*: As an engineer, if you’re not constantly thinking about who you’re building this for, why you’re building this, and what are you trying to accomplish, you won’t be able to execute a product vision autonomously.
+1. *Empowered and decentralized team members*: where a designer can spot a problem, same as an engineer; where everyone can give feedback on anything; and where anyone can challenge everyone else’s assumptions and solutions.
+1. *Team members with solid judgement*: Because everyone is constantly making decisions (and quite impactful ones at that), you need people who have good judgement.
 
 
 ## Pitfalls
-On a final note, I’d like to share some mistakes we’ve made in our iterative journey to improve the Product team, and how to avoid them.
-- Prescribing solutions. When building products, it’s so easy to bring solutions instead of problems. It’s intuitive to jump into the specifics of what or how to build things. Discussions and proposals can be simpler when talking about specific solutions instead of higher level problems/hypotheticals. The problem is that coming up with solutions for discussion rather than problems removes ownership and restricts the scope of potential solutions (better ways to solve a problem). It removes a lot of the benefits of having engineering-led product development.
-- Lack of strategic and tactical direction. It’s tempting to skip having strategic direction or defining specific tasks under said strategy, but doing so will manifest in poor, unfocused decisions. 
-- Projects with no engineering involvement. It’s easy to start a discussion without engineering. You have an idea on how to improve the product, gather some context, explore it, and arrive at a fully spec’d out solution with nary an engineer in sight. Two big problems come from this: a) you don’t reach the best solution because you lack necessary perspective, and b) you now have a project ready to be implemented, but it hangs around until you convince an engineer to pick it up. When working on ideas, however crazy, it’s important to make a conscious effort to involve engineering from the start, and ideally have an engineer co-own this idea with you. 
-- Strongly linked dependencies. This can happen when you have processes that rely on a bunch of different people (e.g. design having to review every single view that goes into the app) or heavily defined scopes (e.g. if you’re a frontend engineer that can’t touch the backend). When this is present, it’s quite hard to be autonomous and effective, because you constantly get blocked by other people. Blurring scopes and removing dependencies can make it easier and faster to ship things. Remember, you have a capable team with good judgement, no need to encumber the creative process.
+Finally, I’d like to share some mistakes we’ve made in our iterative journey to improve the Product team, and how to avoid them.
+- *Prescribing solutions:* Discussions and proposals can be simpler when talking about specific solutions instead of higher level problems/hypotheticals. The problem is that coming up with solutions rather than problems removes ownership and restricts the scope of potential solutions.
+- *Lack of strategic and tactical direction:* It’s tempting to skip having strategic direction or defining specific tasks under said strategy, but doing so will manifest in poor, unfocused decisions. 
+- *Projects with little to no engineering involvement:* You get a spontaneous idea on how to improve the product, gather some context, explore it, and arrive at a fully spec’d out solution with nary an engineer in sight (usually by accident). Two big problems come from this: a) you don’t reach the best solution because you lack important context, and b) you now have a project ready to be implemented but no engineer to pick it up. When working on ideas, however crazy, always involve engineering from the start, and ideally have an engineer co-own the idea with you. 
+- *Strongly linked dependencies:* This can happen when you have processes that rely on a bunch of different people (e.g. design having to review every view that goes into the app) or heavily defined scopes (e.g. if you’re a frontend engineer that can’t touch the backend). When this is present, it’s quite hard to be autonomous and effective because you constantly get blocked by other people. Blurring scopes and removing dependencies can make it easier and faster to ship things. Remember, you have a capable team with good judgement, so no need to encumber the creative process.
+
+_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, product, growth, and analytics._
+
