@@ -352,7 +352,7 @@ Plugins have access to some special objects in the global scope, as well as a va
 
 </blockquote>
 
-Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch)
+Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch).
 
 #### posthog
 
