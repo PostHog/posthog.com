@@ -46,9 +46,9 @@ Over the past two weeks, our [Plugins](/docs/plugins/overview) feature was exten
 
 One of the main changes was the addition of plugin attachments, which allow you to upload files that are used in the configuration of the plugin, vastly expanding the realm of possibilities of what plugins can do. 
 
-As a result of this, we built the [PostHog MaxMind Plugin](/docs/plugins/maxmind), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
+As a result of this, we built the [PostHog MaxMind Plugin](https://github.com/PostHog/maxmind-plugin), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
 
-> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](/docs/plugins/maxmind). If you want to build your own plugin, check out our [fresh new guide](/docs/plugins/build) on how to do so.
+> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](https://github.com/PostHog/maxmind-plugin). If you want to build your own plugin, check out our [fresh new guide](/docs/plugins/build) on how to do so.
 
 ### [Retentions & Paths Dashboard Panels](https://github.com/PostHog/posthog/pull/2201)
 
@@ -80,7 +80,7 @@ Following a lot of great user feedback, we have now significantly improved our [
 
 We have now added configuration for relevant alerts and RDS disk size, as well as improved the setup flow and added automatic `SECRET_KEY` generation. If you're happy with the standard config, deploying with AWS is now just a matter of "click, click, click", as described by Karl, one of our engineers.
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

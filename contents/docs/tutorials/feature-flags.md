@@ -37,7 +37,7 @@ _Prefer to watch a video? Check out the [Feature Flags section of our demo video
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment)
-1. Have added the [PostHog snippet](/docs/integrate/client/js) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python Library](docs/integrate/server/python), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
+1. Have added the [PostHog snippet](/docs/integrate/client/js) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python Library](/docs/integrate/server/python), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
 
 ## Determining a Use Case
 
@@ -122,7 +122,7 @@ if (posthog.isFeatureEnabled('new-beta-feature')) {
 }
 ```
 
-This snippet refers to our [JavaScript Library](/docs/integrate/client/js), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Library](docs/integrate/server/python) (we're working to add this functionality to as many of our libraries as possible). 
+This snippet refers to our [JavaScript Library](/docs/integrate/client/js), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Library](/docs/integrate/server/python) (we're working to add this functionality to as many of our libraries as possible). 
 
 With that snippet, you can then do whatever you wish inside of it. You might change the CSS of a button, hide an entire section, or move things around. A simple example implementation would be:
 

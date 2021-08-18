@@ -81,7 +81,7 @@ This might not be news to all of you, since we have been experimenting with our 
 
 In addition to the average, sum, maximum, and minimum operations available to numerical properties in trends, we now also support median, and 90th, 95th, and 99th percentiles.
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

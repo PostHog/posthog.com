@@ -31,7 +31,7 @@ Make using and developing for PostHog as reliable as running water. Wherever you
 ## Responsibilities
 Concrete things we take responsibility over:
 
-- [app.posthog.com](app.posthog.com) and its infrastructure
+- [app.posthog.com](https://app.posthog.com) and its infrastructure
 - On Prem & Single Tenant deployments
 - CI/CD - How we deploy
 - Data infrastructure (ClickHouse, Kafka)

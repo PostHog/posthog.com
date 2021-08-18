@@ -27,7 +27,7 @@ See the [Chart configuration](#chart-configuration) section for how to enable an
 
 Dependent charts can also have values overwritten. Preface values with `postgresql.*`, see options for each chart in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or under each charts repos in [Dependencies](#dependencies).
 
-All configuration options can be found in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or in [values.yaml](values.yaml) file.
+All configuration options can be found in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or in values.yaml file.
 
 ### Setting up email
 Outgoing email is used for password reset. For PostHog to be able to send emails we need a login and password. Add these settings to your `values.yaml`:

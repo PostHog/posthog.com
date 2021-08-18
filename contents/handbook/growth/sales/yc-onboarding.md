@@ -51,7 +51,7 @@ When doing a demo of PostHog, you should prioritize using the following environm
 3. A local environment
 4. PostHog Cloud 
 
-Read more about running demos on our [dedicated page](/handbook/growth/yc-onboarding).
+Read more about running demos on our [dedicated page](/handbook/growth/sales/demos).
 
 #### Bookmarklet
 

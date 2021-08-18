@@ -46,8 +46,8 @@ We don't just state that we care - these are some of the things we've implemente
 * [All remote](/handbook/company/team) - so we can hire people from any country in the world. We have people in ~10 countries, with no office. We also provide everyone  with $200/month to use on a [coworking space](/handbook/people/spending-money/#work-space) of their choice, and $250/month to [meet up with other team members](/handbook/people/spending-money/#meetups). 
 * [Asynchronous and transparent communication](/handbook/company/communication) - so people can get the context they need to work effectively across multiple time zones and on schedules that suit them.
 * [Unlimited vacation policy](/handbook/people/time-off/#permissionless-time-off) with mandatory minimum time off - so you can fit work around your life.
-* [Flexible hours](https://posthog.com/handbook/people/flexible-working) - so you can do the daily school run, or schedule a Denist appointment. 
-* Very [generous parental leave](/handbook/people/time-off/#parental-leave) - so those raising families can do so while still working for us. We also extended our bereavement leave to cover [pragnancy loss](/handbook/people/time-off/bereavements), as sometimes live doesn't work as we plan it.  
+* [Flexible hours](/handbook/people/time-off#flexible-working) - so you can do the daily school run, or schedule a Denist appointment. 
+* Very [generous parental leave](/handbook/people/time-off/#parental-leave) - so those raising families can do so while still working for us. We also extended our bereavement leave to cover [pragnancy loss](/handbook/people/time-off#bereavements--child-loss), as sometimes live doesn't work as we plan it.  
 * Very generous and [transparent pay](/handbook/people/compensation) - to reduce the financial stress that often comes with working for startups, or prevents many from even applying.
 * Proactive recruitment to encourage underrepresented groups of people to apply - so we are meeting with a balanced group of applicants for every role.
 * Anyone can contribute to [our handbook](/handbook/) - so if we miss something, others can ask for a change in our policy!
