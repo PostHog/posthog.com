@@ -11,6 +11,8 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 - **[Core analytics](core-analytics)**
     - [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
+    - [Karl-Aksel Puulmann](/handbook/people/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
+
 
 <br />
 
@@ -25,7 +27,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - **[Extensibility](extensibility)**
     - [Tim Glaser](/handbook/people/team#tim-glaser-cofounder--cto) (Team lead, interim, Full Stack Engineer)
     - [Michael Matloka](/handbook/people/team#michael-matloka-software-engineer) (Full Stack Engineer)
-    - [Yakko Majuri](/handbook/people/team#yakko-majuri-developer-experience) (DevRel + Full Stack Engineer)
     - [Neil Kakkar](/handbook/people/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 
 <br />
@@ -35,10 +36,11 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-- **[Infrastructure and Deployments](infrastructure)**
+- **[Platform](platform)**
     - [James Greenhill](/handbook/people/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
-    - [Karl-Aksel Puulmann](/handbook/people/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
     - [Tiina Turban](/handbook/people/team#tiina-turban-software-engineer) (Full Stack Engineer)
+    - [Yakko Majuri](/handbook/people/team#yakko-majuri-software-engineer) (Full Stack Engineer)
+
 
 ## [Design](design)
 

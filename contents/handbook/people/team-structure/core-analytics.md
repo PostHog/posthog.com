@@ -8,6 +8,8 @@ hideAnchor: true
 ## People
 
 - [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team Lead, Full Stack Engineer)
+- [Karl-Aksel Puulmann](/handbook/people/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
+
 
 ## Mission
 
