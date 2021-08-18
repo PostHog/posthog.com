@@ -370,8 +370,13 @@ Calling `posthog.capture` allows you to capture a new event under the same proje
 
 It takes 2 arguments, the first one being an event name (required), and the second one being an object with properties to set on the event (optional).
 
-Plugins can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "Plugin Server" person
+Plugins can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "Plugin Server" person.
 
+Method signature:
+
+```js
+capture(event: string, properties?: Record<string, any>) => void
+```
 ##### api
 
 <blockquote class="warning-note">
@@ -528,6 +533,8 @@ export async function processEvent (event, { jobs }) {
 
 > **Minimum PostHog version:** 1.27.0
 
+![exportEvents Metrics Example](../../../images/plugins/exportEvents-metrics.png)
+
 Plugin metrics allow plugin developers to provide metrics for users about plugin performance. They will appear in a chart on the plugins page, which is made visible by clicking the chart icon for a specific plugin. 
 
 This could be tracking the number of errors and successes when exporting events to another service, or the maximum amount of time taken for a request to a third-party API to complete, for example.
@@ -545,6 +552,7 @@ export const metrics = {
 
 The supported metric operations are `sum`, `max`, and `min`. If you're using TypeScript, a handy enum is provided for you in `@posthog/plugin-scaffold`, called `MetricsOperation`. 
 
+The metric operations correspond to property aggregation operations you can use in a PostHog trends graph. `sum` metrics will show a graph where all the values for the metric during the period will be added together. `max` and `min`, on the other hand, will create a graph showing the maximum or minimum values the property had in each time period.  
 ### Updating metrics
 
 Each metric type has an operation it is allowed to perform. This is as follows:
@@ -573,9 +581,9 @@ export function processEvent(event, { metrics }) {
 
 If your plugin uses `exportEvents`, some metrics will be automatically provided for you. These are:
 
- - `events_seen`
- - `events_delivered_successfully`
- - `other_errors`
- - `retry_errors`
- - `undelivered_events`
+- `events_seen`: How many events the `exportEvents` function has received for processing
+- `events_delivered_successfully`: The number of events that were processed by the `exportEvents` function and no error was thrown
+- `retry_errors`: The number of explicit errors of type `RetryError` thrown by the `exportEvents` function. These errors trigger retries to ensure the payload gets delivered.
+- `other_errors`: Unexpected errors thrown by the `exportEvents` function. Any error beyond a `RetryError` is considered unexpected
+- `undelivered_events`: The total number of events that could not be delivered at all. Events will count towards this total if `exportEvents` throws an unexpected error or the plugin exhausts all the retries triggered by a `RetryError`
 
