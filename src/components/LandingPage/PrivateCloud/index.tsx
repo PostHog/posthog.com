@@ -21,10 +21,10 @@ export const PrivateCloud = () => {
     return (
         <div className="private-cloud text-white text-center">
             <div className="w-11/12 max-w-5xl mx-auto">
-                <h2>Host on your own private cloud</h2>
+                <h2>Stay in control of your user data</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
-                    Optionally host PostHog yourself with a private cloud deployment - a great solution for
-                    privacy-conscious and compliance-oriented companies.
+                    Deploy PostHog into your infrastructure so there's no need to share sensitive data outside your
+                    organization.
                 </p>
 
                 <div className="flex justify-between items-stretch flex-col md:flex-row flex-wrap">
@@ -37,8 +37,8 @@ export const PrivateCloud = () => {
                         benefit="No limits or overages with a flat fee licensing model for our largest customers"
                     />
                     <FeatureBenefit
-                        feature="Managed deployments"
-                        benefit="Get PostHog updates automatically, without giving us access to your data"
+                        feature="Simple deployment"
+                        benefit="You can get up and running in minutes, free."
                     />
                     <FeatureBenefit
                         feature="Ad blocker-resistant"
