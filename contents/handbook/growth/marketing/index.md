@@ -26,11 +26,9 @@ We have used our messaging framework to then articulate a series of [value propo
 
 An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
-**PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
-
-**PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
-
-**PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
+- **PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
+- **PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
+- **PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
 ## Target audience
 
