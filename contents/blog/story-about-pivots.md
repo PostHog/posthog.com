@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: general,company-and-culture
+featuredImage: ../images/blog/story-about-pivots.png
+featuredImageType: full
 ---
 
 PostHog has pivoted _a lot_.

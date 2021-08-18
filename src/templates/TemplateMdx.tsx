@@ -19,9 +19,11 @@ import { findAuthor } from 'lib/utils'
 interface MdxQueryData {
     postData: {
         id: string
-        slug: string
         body: any
         excerpt: string
+        fields: {
+            slug: string
+        }
         parent: {
             relativePath: string
         }
@@ -71,7 +73,8 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
     // const { mdx } = data
-    const { frontmatter, parent, body, excerpt, id, slug } = mdx
+    const { frontmatter, parent, body, excerpt, id, fields } = mdx
+    const { slug } = fields
 
     const filePath = `/${parent?.relativePath}`
 
@@ -139,9 +142,11 @@ export const query = graphql`
     query MDXQuery($id: String!) {
         postData: mdx(id: { eq: $id }) {
             id
-            slug
             body
             excerpt(pruneLength: 150)
+            fields {
+                slug
+            }
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
                 title
