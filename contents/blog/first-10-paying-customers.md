@@ -1,12 +1,12 @@
 ---
-date: 2021-08-24
-title: Getting The First 10 Paying Customers For Your DevTool (And Other Customer Acquisition Tips)
+date: 2021-08-18
+title: How To Get The First 10 Paying Customers For Your DevTool Company (And Other Customer Acquisition Tips)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: mo-shehu
-featuredImage: ../images/blog/filename.png
+featuredImage: ../images/blog/first-10-customers.png
 featuredImageType: full
 ---
 
