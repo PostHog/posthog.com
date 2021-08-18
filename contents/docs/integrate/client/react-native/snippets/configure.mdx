@@ -4,45 +4,45 @@ Setup the PostHog React native SDK as follows:
 import PostHog from 'posthog-react-native'
 
 await PostHog.setup('<ph_project_api_key>', {
-    // PostHog API host
+    // PostHog API host (https://app.posthog.com by default)
     host: '<ph_instance_address>',
 
-    // Record certain application events automatically! (off/false by default)
-    captureApplicationLifecycleEvents: true,
+    // Record certain application events automatically! (false by default)
+    captureApplicationLifecycleEvents: false,
 
-    // Capture deep links as part of the screen call. (off by default)
-    captureDeepLinks: true,
+    // Capture deep links as part of the screen call. (false by default)
+    captureDeepLinks: false,
 
-    // Record screen views automatically! (off/false by default)
-    recordScreenViews: true,
+    // Record screen views automatically! (false by default)
+    recordScreenViews: false,
 
-    // Max delay before flushing the queue (30 seconds)
+    // Max delay before flushing the queue (30 seconds by default)
     flushInterval: 30,
 
-    // Maximum number of events to keep in queue before flushing (20)
+    // Maximum number of events to keep in queue before flushing (20 by default)
     flushAt: 20,
 
     // Used only for Android
     android: {
-        // Enable or disable collection of ANDROID_ID (true)
+        // Enable or disable collection of ANDROID_ID (true by default)
         collectDeviceId: true,
     },
 
     // Used only for iOS
     iOS: {
-        // Automatically capture in-app purchases from the App Store
+        // Automatically capture in-app purchases from the App Store (false by default)
         captureInAppPurchases: false,
 
-        // Capture push notifications
+        // Capture push notifications (false by default)
         capturePushNotifications: false,
 
-        // The maximum number of items to queue before starting to drop old ones.
+        // The maximum number of items to queue before starting to drop old ones. (1000 by default)
         maxQueueSize: 1000,
 
-        // Record bluetooth information.
+        // Record bluetooth information. (false by default)
         shouldUseBluetooth: false,
 
-        // Use location services. Will ask for permissions.
+        // Use location services. Will ask for permissions. (false by default)
         shouldUseLocationServices: false
     }
 })
@@ -52,6 +52,6 @@ See the [iOS integration](https://posthog.com/docs/integrate/client/ios) and
 [Android integration](https://posthog.com/docs/integrate/client/android) pages for more details on
 some of these options.
 
-The `PostHog.setup()` call returns a promise, which resolves once the initialisation
+The `PostHog.setup()` call returns a promise, which resolves once the initialization
 has finished. All calls to functions (e.g. `capture`) will be queued and dispatched once
-initialisation has finished. 
+initialization has finished. 
