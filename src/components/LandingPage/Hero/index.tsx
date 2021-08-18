@@ -29,10 +29,10 @@ export const Hero = () => {
                     <h1 className="text-white leading-tight mb-4">
                         Host your own
                         <br />
-                        Product Analytics suite
+                        product analytics suite
                     </h1>
                     <p className="text-baby-blue text-base">
-                        Let your entire company answer their own questions about user behavior
+                        Let your entire company answer their own questions about user behavior.
                         <br />
                         Eliminate repetitive requests for SQL.
                     </p>

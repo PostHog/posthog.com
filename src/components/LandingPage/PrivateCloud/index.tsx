@@ -37,7 +37,7 @@ export const PrivateCloud = () => {
                         benefit="No limits or overages with a flat fee licensing model for our largest customers"
                     />
                     <FeatureBenefit
-                        feature="Simple Deployment"
+                        feature="Simple deployment"
                         benefit="You can get up and running in minutes, free."
                     />
                     <FeatureBenefit
