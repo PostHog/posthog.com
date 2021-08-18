@@ -7,7 +7,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
     const result = await graphql(`
         {
-            allMdx(filter: { fields: { slug: { regex: "/(^/docs|^/blog)/" } } }, limit: 1000) {
+            allMdx(limit: 1000) {
                 nodes {
                     id
                     slug
