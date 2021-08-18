@@ -21,6 +21,7 @@ async function createContact(email: string) {
     const url = process.env.GATSBY_POSTHOG_API_HOST + '/create_web_contact'
     const body = new FormData()
     body.append('email', email)
+    body.append('lead_source', 'website-get-started')
     return (
         await fetch(url, {
             method: 'POST',
