@@ -31,21 +31,15 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
     - [Tiina Turban](/handbook/people/team#tiina-turban-software-engineer) (Full Stack Engineer)
     - [Yakko Majuri](/handbook/people/team#yakko-majuri-developer-experience) (DevRel + Full Stack Engineer)
 
-## [Design](design)
-
-- [Cory Watilo](/handbook/people/team#cory-watilo-lead-designer) (Team lead, Lead Designer)
-- [Lottie Coxon](/handbook/people/team#lottie-coxon-graphic-designer) (Graphic Designer)
-
-
 ## [Growth](growth)
 - [Kunal Pathak](/handbook/people/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
+- [Cory Watilo](/handbook/people/team#cory-watilo-lead-designer) (Team lead, Lead Designer)
 - [Phil Legetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
 - [Joe Martin](/handbook/people/team#joe-martin-product-marketer) (Product Marketer)
 - [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
 - [Eli Kinsey](/handbook/people/team#eli-kinsey-frontend-engineer) (Frontend Engineer)
 
 <br />
-
 
 ## [Marketing](marketing)
 
