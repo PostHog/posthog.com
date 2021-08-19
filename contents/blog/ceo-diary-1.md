@@ -52,7 +52,7 @@ From this exercise, we learned we had to level up our UX around funnels. So we [
 
 # A board meeting happened
 
-This mainly focussed on what our reference customers have in common.
+This mainly focused on what our reference customers have in common.
 
 They appeared to be from a wide range of industries, so we thought about the _Needs_ and the _Haves_ they've got in common. 
 
