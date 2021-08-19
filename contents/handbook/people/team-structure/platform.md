@@ -37,6 +37,8 @@ Concrete things we take responsibility over:
 - CI/CD - How we deploy
 - Data infrastructure (ClickHouse, Kafka)
 - Monitoring and Alerting stack
+- Event ingestion
+- Extensibility: Plugin server, plugins, and libraries
 
 ## Customer
 

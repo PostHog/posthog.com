@@ -12,7 +12,8 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - **[Core analytics](core-analytics)**
     - [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
     - [Karl-Aksel Puulmann](/handbook/people/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
-
+    - [Neil Kakkar](/handbook/people/team#neil-kakkar-software-engineer) (Full Stack Engineer)
+    - [Li Yi Yu](/handbook/people/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 
 <br />
 
@@ -20,18 +21,11 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
     - [Marius Andra](/handbook/people/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
     - [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
     - [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
-    - [Li Yi Yu](/handbook/people/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-
-<br />
-
-- **[Extensibility](extensibility)**
-    - [Tim Glaser](/handbook/people/team#tim-glaser-cofounder--cto) (Team lead, interim, Full Stack Engineer)
     - [Michael Matloka](/handbook/people/team#michael-matloka-software-engineer) (Full Stack Engineer)
-    - [Neil Kakkar](/handbook/people/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 
 <br />
 
-- **[Growth engineering](growth-engineering)**
+- **[Growth](growth-engineering)**
     - [Kunal Pathak](/handbook/people/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
 
 <br />
@@ -40,7 +34,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
     - [James Greenhill](/handbook/people/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
     - [Tiina Turban](/handbook/people/team#tiina-turban-software-engineer) (Full Stack Engineer)
     - [Yakko Majuri](/handbook/people/team#yakko-majuri-software-engineer) (Full Stack Engineer)
-
 
 ## [Design](design)
 
