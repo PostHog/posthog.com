@@ -6,7 +6,7 @@ showTitle: true
 
 ## ClickHouse
 
-!> We strongly recommend ClickHouse as the most futureproof deployment option. In future, we will remove support for Postgres
+> We **strongly recommend ClickHouse** as the most futureproof deployment option. In future, we may remove support for Postgres
 
 [ClickHouse](https://clickhouse.tech) is an open-source, Apache 2.0 licensed OLAP database. It is very fast at doing analytical queries on large volumes of data. It also stores this data much more efficiently than Postgres does, and we've seen a 70% reduction in the amount of disk space needed to store the same data.
 
