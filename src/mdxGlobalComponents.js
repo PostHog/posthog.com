@@ -57,6 +57,7 @@ import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
+import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
@@ -153,6 +154,7 @@ export const shortcodes = {
     SocialProof,
     Tutorials,
     LibraryStats,
+    MainNav,
     MdxAnchorHeaders,
     NewsletterForm,
     NotFoundPage,

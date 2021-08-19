@@ -42,6 +42,8 @@ module.exports = {
     theme: {
         rotate: {
             '-31': '-31deg',
+            45: '45deg',
+            '-45': '-45deg',
         },
         screens: {
             sm: '640px',
@@ -87,12 +89,13 @@ module.exports = {
             yellow: '#F7A501',
             footer: '#08042f',
             pink: '#A970DC',
+            transparent: 'transparent',
         }),
         extend: {
             fontFamily: {
-                serif: ['MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['Matter SQ', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
-                    'MatterVF',
+                    'Matter SQ',
                     '-apple-system',
                     'BlinkMacSystemFont',
                     'avenir next',
@@ -106,8 +109,8 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
-                button: ['MatterVF', 'sans-serif'],
-                nav: ['MatterVF', 'sans-serif'],
+                button: ['Matter SQ', 'sans-serif'],
+                nav: ['Matter SQ', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',
@@ -130,6 +133,8 @@ module.exports = {
                 footer: '#08042f',
                 pink: '#A970DC',
                 'light-purple': '#A393B0',
+                'dark-yellow': '#DC9300',
+                'light-yellow': '#F1A82C',
             },
             minHeight: {
                 780: '780px',

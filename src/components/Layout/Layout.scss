@@ -1,7 +1,7 @@
 @import '../../vars';
 
 @font-face {
-    font-family: 'MatterVF';
+    font-family: 'Matter SQ';
     /* LOCAL DEVELOPMENT */
     /*
     src: url('/fonts/MatterSQVF.woff') format('woff supports variations'),
@@ -22,7 +22,7 @@
 }
 
 @font-face {
-    font-family: 'MatterVF';
+    font-family: 'Matter SQ';
     /* LOCAL DEVELOPMENT */
     /*
     src: url('/fonts/MatterSQItalicVF.woff') format('woff supports variations'),
@@ -240,7 +240,7 @@ html {
 body {
     color: hsla(0, 0%, 0%, 0.8);
     background: #200935;
-    font-family: 'MatterVF', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
+    font-family: 'Matter SQ', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
         'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
     overflow-x: hidden;
     word-wrap: break-word;
