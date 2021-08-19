@@ -721,3 +721,8 @@
 [[redirects]]
     from = "/docs/self-host/deploy/overview"
     to = "/docs/self-host"
+
+# Added: 2021-08-18
+[[redirects]]
+    from = "/handbook/people/team-structure/infrastructure"
+    to = "/handbook/people/team-structure/platform"
