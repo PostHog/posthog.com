@@ -31,16 +31,16 @@ When designing ads or other content with non-paragraph text, use *Semibold* inst
 
 We have a handful of licenses for desktop use of Matter. Contact Cory if you need the desktop fonts (OTFs).
 
-| Name                                  | Weight   | Size       | Letter spacing |
-|---------------------------------------|----------|------------|----------------|
-| h1                                    | Bold     | 64px       | -1%            |
-| h2                                    | Bold     | 48px       | -1%            |
-| h3                                    | Bold     | 30px       | -2%            |
-| h4                                    | Bold     | 24px       | -2%            |
-| h5                                    | Bold     | 20px       | -2%            |
-| h6                                    | Bold     | Not in use |                |
-| Paragraphs accompanying large headers | Semibold | 20px       | -1%            |
-| p                                     | Regular  | 17px       |                |
+| Name                                  | Weight   | Size       | Letter spacing | Line height |
+|---------------------------------------|----------|------------|----------------|-------------|
+| h1                                    | Bold     | 64px       | -1%            | 100%        |
+| h2                                    | Bold     | 48px       | -1%            | 120%        |
+| h3                                    | Bold     | 30px       | -2%            | 140%        |
+| h4                                    | Bold     | 24px       | -2%            |             |
+| h5                                    | Bold     | 20px       | -2%            |             |
+| h6                                    | Bold     | Not in use |                |             |
+| Paragraphs accompanying large headers | Semibold | 20px       | -1%            | 125%        |
+| p                                     | Regular  | 17px       |                | 175%        |
 
 ## Colors
 
