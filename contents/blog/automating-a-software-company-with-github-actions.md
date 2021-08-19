@@ -1,6 +1,6 @@
 ---
 date: 2021-08-09
-title: Automating a Software Company with GitHub Actions
+title: Automating a software company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,7 +11,7 @@ featuredImage: ../images/blog/automating-software-company-github-actions.png
 featuredImageType: full
 ---
 
-**This post shows how a good CI solution can automate your engineering workflow and help you focus on actual challenges instead of chores. PostHog does the same for your product workflow: we're a product analytics platform that helps you discover how users use your product, and what could make their journey better. [Try PostHog today for free.](https://posthog.com/product?utm_medium=blog&utm_campaign=github-actions-post)**
+**This post shows how a good CI solution can automate your engineering workflow and help you focus on actual challenges instead of chores. PostHog does the same for your product workflow: we're a self-hostable product analytics platform that helps you discover how users use your product, and what could make their journey better. [Try PostHog today for free.](https://posthog.com/?utm_medium=blog&utm_campaign=github-actions-post)**
 
 When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure, launching new systems, phasing deprecated solutions out, ensuring security, keeping track of dependencies… Whew. And that's before we get to product, people, or ops considerations.
 
