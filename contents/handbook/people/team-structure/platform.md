@@ -11,7 +11,8 @@ hideAnchor: true
 
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
-- [Yakko Majuri](/handbook/people/team#yakko-majuri-developer-experience) (DevRel + Full Stack Engineer)
+- [Yakko Majuri](/handbook/people/team#yakko-majuri-software-engineer) (Full Stack Engineer)
+
 
 ## Mission
 
@@ -36,6 +37,8 @@ Concrete things we take responsibility over:
 - CI/CD - How we deploy
 - Data infrastructure (ClickHouse, Kafka)
 - Monitoring and Alerting stack
+- Event ingestion
+- Extensibility: Plugin server, plugins, and libraries
 
 ## Customer
 

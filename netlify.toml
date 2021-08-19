@@ -722,12 +722,16 @@
     from = "/docs/self-host/deploy/overview"
     to = "/docs/self-host"
 
+<<<<<<< HEAD
 # Added: 2021-08-19
 [[redirects]]
     from = "/handbook/people/team-structure/growth-engineering"
     to = "/handbook/people/team-structure/growth"
 
 # Added: 2021-08-19
+=======
+# Added: 2021-08-18
+>>>>>>> update-platform-team
 [[redirects]]
     from = "/handbook/people/team-structure/infrastructure"
     to = "/handbook/people/team-structure/platform"

@@ -29,9 +29,10 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - **[Platform](platform)**
     - [James Greenhill](/handbook/people/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
     - [Tiina Turban](/handbook/people/team#tiina-turban-software-engineer) (Full Stack Engineer)
-    - [Yakko Majuri](/handbook/people/team#yakko-majuri-developer-experience) (DevRel + Full Stack Engineer)
+    - [Yakko Majuri](/handbook/people/team#yakko-majuri-software-engineer) (Full Stack Engineer)
 
 ## [Growth](growth)
+
 - [Kunal Pathak](/handbook/people/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
 - [Cory Watilo](/handbook/people/team#cory-watilo-lead-designer) (Team lead, Lead Designer)
 - [Phil Legetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
