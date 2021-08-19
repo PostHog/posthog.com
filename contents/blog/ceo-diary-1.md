@@ -18,7 +18,7 @@ Product analytics is a busy space. It reminds me of the _front_ entrance to Live
 
 PostHog Fact: Tim (my cofounder) incorrectly believes this is the side entrance - it's one of our greatest disagreements.
 
-There are tons of competitors [who shall not be named](https://en.wikipedia.org/wiki/Lord_Voldemort#:~:text=Voldemort%20is%20the%20archenemy%20of,to%20vanquish%20the%20Dark%20Lord%22.&text=Nearly%20every%20witch%20or%20wizard,or%20%22the%20Dark%20Lord%22.), and definitely not linked to!
+There are tons of competitors in product analytics, and they've pretty much all got 300+ person teams, around $100M or more in funding, and years and years of headstart. Yet, we're totally confident we can win as a late mover.
 
 A losing strategy for late movers:
 
