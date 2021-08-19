@@ -22,12 +22,14 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     as="font"
                     type="font/woff2"
                     href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2"
+                    crossOrigin="anonymous"
                 />
                 <link
                     rel="preload"
                     as="font"
                     type="font/woff2"
                     href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2"
+                    crossOrigin="anonymous"
                 />
                 <script src="https://www.workable.com/assets/embed.js" type="text/javascript" async></script>
 
