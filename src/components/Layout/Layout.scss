@@ -51,6 +51,11 @@ body {
     font-feature-settings: unset;
 }
 
+em, i {
+    font-variant: none;
+    font-feature-settings: unset;
+}
+
 p {
     font-variation-settings: 'wght' 475;
     opacity: 0.9;
