@@ -18,7 +18,9 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
-        "generate-redirects": "rm pr_diff && git fetch && git diff origin/master $(git branch --show-current) > pr_diff && python3 ./scripts/safe_rename.py"
+        "generate-redirects": "rm pr_diff && git fetch && git diff origin/master $(git branch --show-current) > pr_diff && python3 ./scripts/safe_rename.py",
+        "generate-redirects-js": "git diff origin/master $(git branch --show-current) > pr_diff && node ./scripts/safe_rename.js RUN_AS_SCRIPT=true",
+        "test-generate-redirects": "jest"
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
@@ -106,6 +108,7 @@
         "eslint": "^7.9.0",
         "eslint-plugin-react": "^7.20.6",
         "husky": "^4.2.5",
+        "jest": "^27.0.6",
         "lint-staged": "^10.2.12",
         "mem": "^5.1.1",
         "prettier": "^2.1.0",

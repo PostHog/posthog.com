@@ -1,6 +1,6 @@
 import React from 'react'
 
-import airbalticLogo from '../images/SocialProofLogos/airbaltic.svg'
+import outbrainLogo from '../images/SocialProofLogos/outbrain.svg'
 import landmarkLogo from '../images/SocialProofLogos/landmark.svg'
 import tinkoffLogo from '../images/SocialProofLogos/tinkoff.svg'
 import hasuraLogo from '../images/SocialProofLogos/hasura.svg'
@@ -27,7 +27,7 @@ export const SocialProof = () => {
                 <Logo logo={grafanaLogo} alt="Grafana" />
                 <Logo logo={webinyLogo} alt="Webiny" />
                 <Logo logo={landmarkLogo} alt="Landmark Group" />
-                <Logo logo={airbalticLogo} alt="Airbaltic" />
+                <Logo logo={outbrainLogo} alt="Outbrain" />
                 <Logo logo={tinkoffLogo} alt="Tinkoff" />
             </div>
         </div>

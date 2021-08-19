@@ -15,6 +15,9 @@ const Iframe = (props) => (
         <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
     </div>
 )
+const InlineCode = (props) => (
+    <code {...props} className="dark:bg-[#4c3e62] dark:text-white bg-[#e8e8e8] text-inherit p-1 rounded" />
+)
 
 export default function Main({
     handleMobileMenuClick,
@@ -33,6 +36,7 @@ export default function Main({
     const components = {
         a: A,
         iframe: Iframe,
+        inlineCode: InlineCode,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
