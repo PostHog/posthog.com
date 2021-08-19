@@ -129,7 +129,15 @@
     .ant-collapse-borderless {
         background: none;
         border: none;
+        .ant-collapse-header {
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
 
+            i {
+                margin-right: 1rem;
+            }
+        }
         > .ant-collapse-item {
             border-bottom: none;
             text-align: left;

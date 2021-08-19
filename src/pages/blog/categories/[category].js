@@ -5,33 +5,26 @@ import PostCard from '../../../components/PostCard'
 import { NewsletterForm } from '../../../components/NewsletterForm'
 import { SEO } from '../../../components/seo'
 import { Structure } from '../../../components/Structure'
-import { BlogSidebar } from '../../../components/Blog/BlogSidebar'
+import { BlogCategoriesList } from '../../../components/Blog/BlogCategoriesList'
 import { BlogCategories } from '../../../components/Blog/constants/categories'
 import { DarkModeToggle } from '../../../components/DarkModeToggle'
 import { findAuthor } from 'lib/utils'
 
 const BlogCategoryPage = ({
     data: {
-        allMarkdownRemark: { edges },
-        allMdx,
+        allMdx: { edges },
         markdownRemark: {
             frontmatter: { authors },
         },
     },
     params: { category },
 }) => {
-    // Standardize position of 'slug' across MDX and MD
-    const parsedMdxData = allMdx.edges.map((edge) => ({
-        ...edge,
-        node: { ...edge.node, fields: { slug: `/${edge.node.slug}` } },
-    }))
-
-    const posts = [...edges, ...parsedMdxData] // Merge MDX and MD data into one array
+    const posts = edges
         .filter((edge) => {
             const categories = edge.node.frontmatter.categories || ''
             return !!edge.node.frontmatter.date && categories.indexOf(category) >= 0
         })
-        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date)) // Resort based on dates following merge
+        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date))
 
     const findAuth = findAuthor(authors)
 
@@ -53,7 +46,7 @@ const BlogCategoryPage = ({
 
     return (
         <div className="bg-offwhite-purple text-gray-900 dark:bg-darkmode-purple dark:text-white">
-            <Layout headerBackgroundTransparent>
+            <Layout onBlogPage>
                 <SEO title="PostHog Blog" description="What we are up to, every week." />
 
                 <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
@@ -61,24 +54,17 @@ const BlogCategoryPage = ({
                         <DarkModeToggle />
                     </div>
 
-                    <Structure.Section className="py-12" width="5xl">
+                    <Structure.Section width="5xl">
                         <Structure.SectionHeader title={`Blog: ${title}`} titleTag="h1" titleClassName="text-center" />
-
+                        <BlogCategoriesList activeSlug={category} />
                         {latestPost}
                         <NewsletterForm
                             compact
                             className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
                         />
 
-                        <div className="w-11/12 max-w-3xl mx-auto flex flex-col lg:flex-row justify-between items-start">
-                            <div className="hidden lg:block lg:w-1/4 lg:pr-8">
-                                <BlogSidebar />
-                            </div>
-                            <div className="w-full lg:w-3/4 lg:pl-8">
-                                <header className="text-xs text-gray-400 uppercase">Recent Posts</header>
-                                {nonLatestPosts}
-                            </div>
-                        </div>
+                        <header className="text-xs text-gray-400 uppercase mb-8">Recent Posts</header>
+                        <section className="grid md:grid-cols-3 gap-4">{nonLatestPosts}</section>
                     </Structure.Section>
                 </div>
             </Layout>
@@ -90,7 +76,7 @@ export default BlogCategoryPage
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark(
+        allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { frontmatter: { rootPage: { eq: "/blog" } } }
         ) {
@@ -106,25 +92,12 @@ export const pageQuery = graphql`
                         title
                         rootPage
                         categories
-                        author
-                    }
-                }
-            }
-        }
-        allMdx(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
-        ) {
-            edges {
-                node {
-                    slug
-                    id
-                    excerpt(pruneLength: 250)
-                    frontmatter {
-                        date(formatString: "MMMM DD, YYYY")
-                        title
-                        rootPage
-                        categories
+                        featuredImage {
+                            publicURL
+                            childImageSharp {
+                                gatsbyImageData(width: 1200, height: 630)
+                            }
+                        }
                     }
                 }
             }

@@ -1,6 +1,6 @@
 ---
-title: Posthog Clickhouse Chart Configuration
-sidebarTitle: Chart Configuration
+title: Posthog ClickHouse chart configuration
+sidebarTitle: Chart configuration
 sidebar: Docs
 showTitle: true
 ---
@@ -41,7 +41,7 @@ email:
 The default configuration is geared towards minimizing costs. Here are example extra values overrides to use for scaling up:
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for <1M events/month</b>
+    <b> Additional values to `values.yaml` for {`<`} 1M events/month</b>
   </summary>
 
 <br />
@@ -77,7 +77,7 @@ plugins:
 
 <details>
   <summary>
-    <b> Additional values to `values.yaml` for >1M events/month</b>
+    <b> Additional values to `values.yaml` for > 1M events/month</b>
   </summary>
 
 <br />

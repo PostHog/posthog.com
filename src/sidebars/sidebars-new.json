@@ -1,0 +1,337 @@
+{
+    "handbook": [
+        {
+            "name": "Handbook",
+            "url": "/handbook"
+        },
+        {
+            "name": "Company",
+            "url": "",
+            "children": [
+                {
+                    "name": "Story",
+                    "url": "/handbook/company/story"
+                },
+                {
+                    "name": "Team",
+                    "url": "/handbook/company/team"
+                },
+                {
+                    "name": "Investors",
+                    "url": "/handbook/strategy/investors"
+                }
+            ]
+        },
+        {
+            "name": "Strategy",
+            "url": "",
+            "children": [
+                {
+                    "name": "Strategy overview",
+                    "url": "/handbook/strategy/strategy"
+                },
+                {
+                    "name": "Business model",
+                    "url": "/handbook/strategy/business-model"
+                },
+                {
+                    "name": "Roadmap",
+                    "url": "/handbook/strategy/roadmap"
+                },
+                {
+                    "name": "Prioritization",
+                    "url": "/handbook/strategy/prioritization"
+                }
+            ]
+        },
+        {
+            "name": "Getting started",
+            "children": [
+                {
+                    "name": "Start here",
+                    "url": "/handbook/getting-started/start-here"
+                },
+                {
+                    "name": "Meetings",
+                    "url": "/handbook/getting-started/meetings"
+                }
+            ]
+        },
+        {
+            "name": "How we work",
+            "url": "",
+            "children": [
+                {
+                    "name": "Culture",
+                    "url": "/handbook/company/culture"
+                },
+                {
+                    "name": "Values",
+                    "url": "/handbook/company/values"
+                },
+                {
+                    "name": "Diversity and inclusion",
+                    "url": "/handbook/company/diversity"
+                },
+                {
+                    "name": "Communication",
+                    "url": "/handbook/company/communication"
+                },
+                {
+                    "name": "Management at PostHog",
+                    "url": "/handbook/company/management"
+                },
+                {
+                    "name": "Security",
+                    "url": "/handbook/company/security"
+                },
+                {
+                    "name": "Branding",
+                    "url": "/handbook/company/branding"
+                },
+                {
+                    "name": "Team Structure",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Team structure",
+                            "url": "/handbook/people/team-structure/team-structure"
+                        },
+                        {
+                            "name": "Why Small Teams",
+                            "url": "/handbook/people/team-structure/why-small-teams"
+                        },
+                        {
+                            "name": "Team Core Analytics",
+                            "url": "/handbook/people/team-structure/core-analytics"
+                        },
+                        {
+                            "name": "Team Core Experience",
+                            "url": "/handbook/people/team-structure/core-experience"
+                        },
+                        {
+                            "name": "Team Design",
+                            "url": "/handbook/people/team-structure/design"
+                        },
+                        {
+                            "name": "Team Extensibility",
+                            "url": "/handbook/people/team-structure/extensibility"
+                        },
+                        {
+                            "name": "Team Growth",
+                            "url": "/handbook/people/team-structure/growth-engineering"
+                        },
+                        {
+                            "name": "Team Infrastructure & Deployments",
+                            "url": "/handbook/people/team-structure/infrastructure"
+                        },
+                        {
+                            "name": "Team Marketing",
+                            "url": "/handbook/people/team-structure/marketing"
+                        },
+                        {
+                            "name": "Team People",
+                            "url": "/handbook/people/team-structure/people"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "People",
+            "url": "",
+            "children": [
+                {
+                    "name": "Compensation",
+                    "url": "/handbook/people/compensation"
+                },
+                {
+                    "name": "Share options",
+                    "url": "/handbook/people/share-options"
+                },
+                {
+                    "name": "Benefits",
+                    "url": "/handbook/people/benefits"
+                },
+                {
+                    "name": "Time off",
+                    "url": "/handbook/people/time-off"
+                },
+                {
+                    "name": "Spending money",
+                    "url": "/handbook/people/spending-money"
+                },
+                {
+                    "name": "Training",
+                    "url": "/handbook/people/training"
+                },
+                {
+                    "name": "Feedback",
+                    "url": "/handbook/people/feedback"
+                },
+                {
+                    "name": "Onboarding",
+                    "url": "/handbook/people/onboarding"
+                },
+                {
+                    "name": "Offboarding",
+                    "url": "/handbook/people/offboarding"
+                },
+                {
+                    "name": "Hiring Process",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/handbook/people/hiring-process"
+                        },
+                        {
+                            "name": "Design Hiring",
+                            "url": "/handbook/people/hiring-process/design-hiring"
+                        },
+                        {
+                            "name": "Engineering Hiring",
+                            "url": "/handbook/people/hiring-process/engineering-hiring"
+                        },
+                        {
+                            "name": "Exec Hiring",
+                            "url": "/handbook/people/hiring-process/exec-hiring"
+                        },
+                        {
+                            "name": "Operations Hiring",
+                            "url": "/handbook/people/hiring-process/operations-hiring"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Engineering",
+            "url": "",
+            "children": [
+                {
+                    "name": "Development process",
+                    "url": "/handbook/engineering/development-process"
+                },
+                {
+                    "name": "How we review PRs",
+                    "url": "/handbook/engineering/how-we-review"
+                },
+                {
+                    "name": "Releasing a new version",
+                    "url": "/handbook/engineering/release-new-version"
+                },
+                {
+                    "name": "Bug prioritization",
+                    "url": "/handbook/engineering/bug-prioritization"
+                },
+                {
+                    "name": "Onboarding customers",
+                    "url": "/handbook/engineering/onboarding-customer"
+                },
+                {
+                    "name": "Setup SSL locally",
+                    "url": "/handbook/engineering/setup-ssl-locally"
+                },
+                {
+                    "name": "Setting up PostHog EE",
+                    "url": "/handbook/engineering/ee-setup"
+                },
+                {
+                    "name": "Common issues",
+                    "url": "/handbook/engineering/common-issues"
+                },
+                {
+                    "name": "Feature Parity",
+                    "url": "/handbook/engineering/feature-parity"
+                },
+                {
+                    "name": "Website MDX setup",
+                    "url": "/handbook/engineering/mdx"
+                },
+                {
+                    "name": "AWS tips and faq",
+                    "url": "/handbook/engineering/aws"
+                },
+                {
+                    "name": "GCP tips and faq",
+                    "url": "/handbook/engineering/gcp"
+                }
+            ]
+        },
+        {
+            "name": "Marketing",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/handbook/growth/marketing"
+                },
+                {
+                    "name": "Content",
+                    "url": "/handbook/growth/marketing/blog"
+                },
+                {
+                    "name": "Email",
+                    "url": "/handbook/growth/marketing/newsletter"
+                },
+                {
+                    "name": "Paid & SEO",
+                    "url": "/handbook/growth/marketing/paid"
+                },
+                {
+                    "name": "Press",
+                    "url": "/handbook/growth/marketing/press"
+                }
+            ]
+        },
+        {
+            "name": "Growth",
+            "url": "",
+            "children": [
+                {
+                    "name": "Growth strategy",
+                    "url": "/handbook/growth/strategy"
+                },
+                {
+                    "name": "Customer support",
+                    "url": "/handbook/growth/customer-support"
+                },
+                {
+                    "name": "Developer relations",
+                    "url": "/handbook/growth/developer-relations"
+                },
+                {
+                    "name": "Customer success",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Sales overview",
+                            "url": "/handbook/growth/sales/overview"
+                        },
+                        {
+                            "name": "Sales operations",
+                            "url": "/handbook/growth/sales/sales-operations"
+                        },
+                        {
+                            "name": "Managing our CRM",
+                            "url": "/handbook/growth/sales/crm"
+                        },
+                        {
+                            "name": "YC onboarding",
+                            "url": "/handbook/growth/sales/yc-onboarding"
+                        },
+                        {
+                            "name": "Demos",
+                            "url": "/handbook/growth/sales/demos"
+                        },
+                        {
+                            "name": "Billing",
+                            "url": "/handbook/growth/sales/billing"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

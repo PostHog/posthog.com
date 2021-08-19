@@ -704,5 +704,20 @@
 
 # Added: 2021-08-12
 [[redirects]]
+    from = "/docs/integrate/client/ios/index"
+    to = "/docs/integrate/client/ios"
+
+# Added: 2021-08-05
+[[redirects]]
+    from = "/docs/integrate/client/js/index"
+    to = "/docs/integrate/client/js"
+
+# Added: 2021-08-12
+[[redirects]]
+    from = "/handbook/people/hiring-process/index"
+    to = "/handbook/people/hiring-process/hiring-process"
+
+# Added: 2021-08-12
+[[redirects]]
     from = "/docs/self-host/deploy/overview"
     to = "/docs/self-host"

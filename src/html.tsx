@@ -17,14 +17,19 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <script src="https://www.workable.com/assets/embed.js" type="text/javascript" async></script>
-
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
                 <link
-                    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap"
-                    rel="stylesheet"
-                ></link>
+                    rel="preload"
+                    as="font"
+                    type="font/woff2"
+                    href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2"
+                />
+                <link
+                    rel="preload"
+                    as="font"
+                    type="font/woff2"
+                    href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2"
+                />
+                <script src="https://www.workable.com/assets/embed.js" type="text/javascript" async></script>
 
                 {props.headComponents}
             </head>

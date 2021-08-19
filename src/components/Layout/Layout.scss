@@ -1,5 +1,61 @@
 @import '../../vars';
 
+@font-face {
+    font-family: 'MatterVF';
+    /* LOCAL DEVELOPMENT */
+    /*
+    src: url('/fonts/MatterSQVF.woff') format('woff supports variations'),
+         url('/fonts/MatterSQVF.woff') format('woff-variations'),
+         url('/fonts/MatterSQVF.woff2') format('woff2 supports variations'),
+         url('/fonts/MatterSQVF.woff2') format('woff2-variations');
+    */
+
+    /* PRODUCTION */
+    src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff')
+            format('woff supports variations'),
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff') format('woff-variations'),
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
+            format('woff2 supports variations'),
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2') format('woff2-variations');
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MatterVF';
+    /* LOCAL DEVELOPMENT */
+    /*
+    src: url('/fonts/MatterSQItalicVF.woff') format('woff supports variations'),
+         url('/fonts/MatterSQItalicVF.woff') format('woff-variations'),
+         url('/fonts/MatterSQItalicVF.woff2') format('woff2 supports variations'),
+         url('/fonts/MatterSQItalicVF.woff2') format('woff2-variations');
+    */
+
+    /* PRODUCTION */
+    src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+            format('woff supports variations'),
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
+            format('woff-variations'),
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+            format('woff2 supports variations'),
+        url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
+            format('woff2-variations');
+    font-style: italic;
+    font-weight: 300 900;
+    font-display: swap;
+}
+
+body {
+    font-variant: none;
+    font-feature-settings: unset;
+}
+
+p {
+    font-variation-settings: 'wght' 475;
+    opacity: 0.9;
+}
+
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -186,13 +242,8 @@ html {
 body {
     color: hsla(0, 0%, 0%, 0.8);
     background: #200935;
-    font-family: 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui', 'helvetica neue',
-        'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
-    font-kerning: normal;
-    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    font-family: 'MatterVF', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
+        'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif';
     overflow-x: hidden;
     word-wrap: break-word;
     margin: 0;
@@ -216,7 +267,7 @@ h4,
 h5,
 h6 {
     color: inherit;
-    font-weight: bold; // override ant
+    font-variation-settings: 'wght' 800; // override ant
     text-rendering: optimizeLegibility;
 }
 
@@ -1505,23 +1556,23 @@ for all other rows the portrait image wraps above bio*/
 }
 
 /* width */
-div::-webkit-scrollbar {
+div:not(.default-scrollbar)::-webkit-scrollbar {
     width: 10px;
     margin-left: 20px;
 }
 
 /* track */
-div::-webkit-scrollbar-track {
+div:not(.default-scrollbar)::-webkit-scrollbar-track {
     background: #eceff1;
 }
 
 /* handle */
-div::-webkit-scrollbar-thumb {
+div:not(.default-scrollbar)::-webkit-scrollbar-thumb {
     background: #cfd8dc;
 }
 
 /* handle on hover */
-div::-webkit-scrollbar-thumb:hover {
+div:not(.default-scrollbar)::-webkit-scrollbar-thumb:hover {
     background: #b0bec5;
 }
 
@@ -1566,4 +1617,50 @@ table th[align='center'],
 table td[align='center'],
 .text-center {
     text-align: center;
+}
+
+body.light {
+    .handbook-container {
+        .header-wrapper {
+            background: white;
+            a {
+                color: hsla(0, 0%, 0%, 0.8);
+            }
+        }
+    }
+}
+
+.handbook-container {
+    .contributor-faces {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    article {
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            letter-spacing: -0.015em;
+            margin-top: 2rem;
+        }
+        .article-content {
+            p,
+            li {
+                line-height: 1.75;
+            }
+        }
+    }
+    .breadcrumbs-container > li:not(:last-of-type)::after {
+        content: url('/images/right-arrow.svg');
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}
+
+#handbook-search-wrapper {
+    .algolia-autocomplete {
+        height: auto;
+        width: 100%;
+    }
 }
