@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ceo-diaries
 ---
 
 I'm [James](https://twitter.com/james406), and I work with [Tim](https://twitter.com/timgl). We are the co-founders of PostHog - a current batch YC company.

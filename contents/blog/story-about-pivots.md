@@ -8,6 +8,7 @@ hideAnchor: true
 categories: general,company-and-culture
 featuredImage: ../images/blog/story-about-pivots.png
 featuredImageType: full
+categories: ceo-diaries
 ---
 
 PostHog has pivoted _a lot_.

@@ -1,10 +1,11 @@
 ---
 date: 2021-08-19
-title: Winning from the back - CEO Diary 1
+title: Winning from the back - late mover advantage
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ceo-diaries
 author: james-hawkins
 ---
 
