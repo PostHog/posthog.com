@@ -26,7 +26,7 @@ export const Hero = () => {
             </div>
             <div className="flex justify-center w-11/12 mx-auto mb-8 pt-12 flex-col relative z-10">
                 <div className="max-w-full hero-headline mt-4">
-                    <h1 className="text-white leading-tight mb-4">
+                    <h1 className="text-white leading-none mb-4 text-5xl">
                         Host your own
                         <br />
                         product analytics suite
