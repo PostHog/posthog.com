@@ -65,7 +65,7 @@ Colors denoted with an asterisk (*) are the same between palettes.
 
 ### Use `opacity` over more colors
 
-When possible, use opacity to modify colors. This allows us to use fewer colors in our palette, which is lightyears easier when working with two color schemes.
+When possible, use opacity to modify colors. This allows us to use fewer colors in our palette, which is light years easier when working with two color schemes.
 
 | Paragraph text | `rgba($value, 90%)`                 |
 |----------------|-------------------------------------|
