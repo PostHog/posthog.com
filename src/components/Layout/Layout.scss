@@ -477,17 +477,11 @@ address {
     padding-top: 0;
     margin-bottom: 1.45rem;
 }
-b {
-    font-weight: bold;
-}
-strong {
-    font-weight: bold;
-}
-dt {
-    font-weight: bold;
-}
+b,
+strong,
+dt,
 th {
-    font-weight: bold;
+    font-variation-settings: 'wght' 800;
 }
 ol li {
     padding-left: 0;
@@ -758,7 +752,7 @@ li > .ant-menu-submenu-title span {
 
 /* Targets submenu titles */
 .ant-menu-submenu-title span {
-    font-weight: bold !important;
+    font-variation-settings: 'wght' 800;
 }
 
 /* Targets submenu titles inside a submenu e.g. 1 min tutorials */
