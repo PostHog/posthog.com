@@ -2,20 +2,37 @@
 title: Branding
 sidebar: Handbook
 showTitle: true
-hideAnchor: true
+hideAnchor: false
 ---
 
 > <em>This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com.</em>
 
 ## Typography
 
-We use Displaay's font called *Matter SQ*. (SQ = square dots)
+We use Displaay's typeface called *Matter SQ*. (SQ = square dots)
 
 ### Building for web
 
-On posthog.com, we use Matter's variable font. This allows us to specify our own font weights, which we do for paragraph text.
+On posthog.com, we use the [variable font](https://web.dev/variable-fonts/) version. This allows us to specify our own font weights, which we do for paragraph text.
 
 Context: *Matter Regular*'s weight is `430` and the next step up is *Matter Medium* at `570`, so we use our own weight of `475` for paragraph text.
+
+### Developing locally
+
+Fonts are hosted outside of our posthog.com GitHub repo (due to licensing reasons). To protect the font files, they are restricted to loading on posthog.com and are not currently used for local development. Contributors will see the system default font load in place of Matter.
+
+**Workaround for local development**
+
+Restricted to PostHog employees, it's possible to reference the font locally to see an exact replication of what will be published on posthog.com.
+
+[Layout.scss](https://github.com/PostHog/posthog.com/blob/master/src/components/Layout/Layout.scss) contains some commented out code which can be used, in conjunction with the [variable webfont files](https://github.com/PostHog/company-internal/blob/master/MatterSQVF.zip) (restricted to PostHog organization members). Here's how to use them:
+
+1. Download the webfont files from the zip above
+1. Extract the files and place them in `/public/fonts`
+1. In `Layout.scss`, comment out the `src` for both fonts with production (Cloudfront) URLs and uncomment the relative URLs.
+1. Optionally use `.gitignore` to keep the files locally without inadvertently checking them in
+
+Note: When submitting a PR, be sure to revert changes made to `Layout.scss`
 
 ### Designing on desktop
 
