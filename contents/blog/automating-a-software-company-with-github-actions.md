@@ -1,6 +1,6 @@
 ---
 date: 2021-08-09
-title: Automating a Software Company with GitHub Actions
+title: Automating a software company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
 showTitle: true
