@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 One of the most fun weeks we've had so far with our UX - resizable and touch-enabled dashboards with a new display mode, Microsoft Teams support, and paths for events. Plus, a ton of performance improvements.
