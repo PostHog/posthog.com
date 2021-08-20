@@ -36,21 +36,18 @@ export const PrivateCloud = () => {
                         feature="Unlimited usage, no surprises"
                         benefit="No limits or overages with a flat fee licensing model for our largest customers"
                     />
-                    <FeatureBenefit
-                        feature="Simple deployment"
-                        benefit="You can get up and running in minutes, free."
-                    />
+                    <FeatureBenefit feature="Simple deployment" benefit="Get up and running in minutes, for free" />
                     <FeatureBenefit
                         feature="Ad blocker-resistant"
                         benefit="Eliminate dependencies on 3rd party solutions that are flagged for tracking"
                     />
                     <FeatureBenefit
                         feature="Compliance comes standard"
-                        benefit="Makes HIPAA and SOC2 audits a breeze when you host on your own stack"
+                        benefit="Make HIPAA and SOC2 audits a breeze by hosting on your own stack"
                     />
                     <FeatureBenefit
                         feature="Dedicated support"
-                        benefit="Connect with our team for getting the best value or regular touch points"
+                        benefit="Connect with our team to get the best value or regular touch points"
                     />
                 </div>
 
