@@ -52,7 +52,7 @@ export default function SubmenuItem({ item }) {
                                     return (
                                         <li key={index}>
                                             <Link
-                                                className="text-white transition-colors hover:text-white p-2 hover:bg-[#6C5085] rounded flex items-center space-x-2"
+                                                className="text-white font-semibold transition-colors hover:text-white p-2 hover:bg-[#6C5085] rounded flex items-center space-x-2 text-[14px]"
                                                 to={url}
                                             >
                                                 {icon && (
