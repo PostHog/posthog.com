@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 This new release is a great mix between old and new, with significant improvements to both our newer features, as well as our core analytics stack. 
