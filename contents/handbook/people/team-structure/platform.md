@@ -1,5 +1,5 @@
 ---
-title: Team Infrastructure & Deployments
+title: Team Platform
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
@@ -9,9 +9,7 @@ hideAnchor: true
 
 ## People
 
-- [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
-- [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
-- [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
+[See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
 
@@ -36,6 +34,8 @@ Concrete things we take responsibility over:
 - CI/CD - How we deploy
 - Data infrastructure (ClickHouse, Kafka)
 - Monitoring and Alerting stack
+- Event ingestion
+- Extensibility: Plugin server, plugins, and libraries
 
 ## Customer
 

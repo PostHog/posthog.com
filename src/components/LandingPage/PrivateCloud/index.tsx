@@ -21,10 +21,10 @@ export const PrivateCloud = () => {
     return (
         <div className="private-cloud text-white text-center">
             <div className="w-11/12 max-w-5xl mx-auto">
-                <h2>Host on your own private cloud</h2>
+                <h2>Stay in control of your user data</h2>
                 <p className="opacity-80 mt-1 text-center max-w-4xl mx-auto">
-                    Optionally host PostHog yourself with a private cloud deployment - a great solution for
-                    privacy-conscious and compliance-oriented companies.
+                    Deploy PostHog into your infrastructure so there's no need to share sensitive data outside your
+                    organization.
                 </p>
 
                 <div className="flex justify-between items-stretch flex-col md:flex-row flex-wrap">
@@ -36,21 +36,18 @@ export const PrivateCloud = () => {
                         feature="Unlimited usage, no surprises"
                         benefit="No limits or overages with a flat fee licensing model for our largest customers"
                     />
-                    <FeatureBenefit
-                        feature="Managed deployments"
-                        benefit="Get PostHog updates automatically, without giving us access to your data"
-                    />
+                    <FeatureBenefit feature="Simple deployment" benefit="Get up and running in minutes, for free" />
                     <FeatureBenefit
                         feature="Ad blocker-resistant"
                         benefit="Eliminate dependencies on 3rd party solutions that are flagged for tracking"
                     />
                     <FeatureBenefit
                         feature="Compliance comes standard"
-                        benefit="Makes HIPAA and SOC2 audits a breeze when you host on your own stack"
+                        benefit="Make HIPAA and SOC2 audits a breeze by hosting on your own stack"
                     />
                     <FeatureBenefit
                         feature="Dedicated support"
-                        benefit="Connect with our team for getting the best value or regular touch points"
+                        benefit="Connect with our team to get the best value or regular touch points"
                     />
                 </div>
 

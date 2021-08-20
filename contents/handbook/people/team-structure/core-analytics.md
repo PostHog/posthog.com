@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## People
 
-- [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team Lead, Full Stack Engineer)
+[See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
 
