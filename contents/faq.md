@@ -34,7 +34,7 @@ We track user behavior across your website and applications.
 	* [Funnels](/docs/user-guides/funnels)
 	* [Cohorts](/docs/user-guides/cohorts)
 	* [Retention](/docs/user-guides/retention)
-	* [Paths]((/docs/user-guides/paths))
+	* [Paths](/docs/user-guides/paths)
 	* [User histories](/docs/user-guides/users)
 * Data visualization and product experimentation tools, such as:
 	* [Heatmaps](/docs/user-guides/toolbar)
@@ -118,7 +118,7 @@ Want to set it up differently? [Raise an issue](https://github.com/PostHog/posth
 
 ### Will this scale?
 
-Yes. Check out [Scaling PostHog](/docs/self-host/configure/scaling-posthog) for more information on this.
+Yes. Check out [Scaling PostHog](/docs/self-host/deploy/configuration#scaling-up) for more information on this.
 
 ### Is there an enterprise offering?
 

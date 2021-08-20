@@ -135,5 +135,5 @@ We’re very excited to be growing the group and this is the first of what we ho
 
 ## PostHog news
 
-* It’s been a big week at PostHog towers, this was another really big release and now our [future updates](https://github.com/PostHog/posthog/projects/5) will be focusing on [our roadmap](/handbook/roadmap). James has put a lot of work in ensuring PostHog abides by its [values](/handbook/values) and remains transparent  – if you have thoughts write an issue or create a pr.
+* It’s been a big week at PostHog towers, this was another really big release and now our [future updates](https://github.com/PostHog/posthog/projects/5) will be focusing on [our roadmap](/handbook/strategy/roadmap). James has put a lot of work in ensuring PostHog abides by its [values](/handbook/company/values) and remains transparent  – if you have thoughts write an issue or create a pr.
 * PostHog is now Aaron, Eric, James, and Tim. A big welcome to the team – watch this space for more new joiners

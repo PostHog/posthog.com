@@ -8,7 +8,7 @@ showTitle: true
 
 This page outlines how we generally manage customers, specifically those who are interested in our Scale plans. Our Cloud plan is self-serve, and may be covered by its own section in the future, but doesn't require a specific guide at this stage.
 
-If you are looking for guidance on how to manage customers in HubSpot specifically, visit our [CRM page](/handbook/growth/sales/).
+If you are looking for guidance on how to manage customers in HubSpot specifically, visit our [CRM page](/handbook/growth/sales/overview).
 
 ## Process
 

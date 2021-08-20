@@ -52,11 +52,11 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [iOS client](/docs/integrate/client/ios)                   | <span style="color: #71AA55">**Live**</span> | ✔      |        |
 | [React Native client](/docs/integrate/client/react-native) | <span style="color: #71AA55">**Live**</span> | ✔      |        |
 | [Flutter client](/docs/integrate/client/flutter)           | <span style="color: #71AA55">**Live**</span> | ✔      |        |
-| [Python Library](docs/integrate/server/python)        | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Ruby integration](docs/integrate/server/ruby)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Node integration](docs/integrate/server/node)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Go integration](docs/integrate/server/go)                | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [PHP integration](docs/integrate/server/php)              | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Python Library](/docs/integrate/server/python)        | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Ruby integration](/docs/integrate/server/ruby)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Node integration](/docs/integrate/server/node)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Go integration](/docs/integrate/server/go)                | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [PHP integration](/docs/integrate/server/php)              | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [Full REST API](/docs/api/overview)                            | <span style="color: #71AA55">**Live**</span> | ✔      | ✔      |
 
 ### Additional features

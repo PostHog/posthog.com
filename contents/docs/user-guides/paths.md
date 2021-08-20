@@ -34,6 +34,6 @@ If you want us to help improve 'Paths', you can take a look at [this issue](http
 
 ### Multiple Domains
 
-Paths work across subdomains, even with the basic snippet installation. We see it's common for a website to be the landing page, then traffic to move into app.example.com, once a user starts interacting with the product. Just set up the root domain as the URL in your [tracking settings](/snippet-installation).
+Paths work across subdomains, even with the basic snippet installation. We see it's common for a website to be the landing page, then traffic to move into app.example.com, once a user starts interacting with the product. Just set up the root domain as the URL in your [tracking settings](/docs/integrate/client/snippet-installation).
 
 We recommend tracking across everything so you can understand where your most engaged users come from.

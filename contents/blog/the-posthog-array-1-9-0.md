@@ -34,7 +34,7 @@ Want to try it? Find Sessions under the Events menu on the left hand navigation.
 
 ### Far better testing
 
-We put a huge amount of work into our tooling this week - to get an overview, see [our blog post on Cypress end-to-end tests](/blog/cypress-end-toe-end-tests).
+We put a huge amount of work into our tooling this week - to get an overview, see [our blog post on Cypress end-to-end tests](/blog/cypress-end-to-end-tests).
 
 What's new? We:
 

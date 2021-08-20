@@ -67,4 +67,4 @@ Also, as someone who went through a period of burnout, I made it my personal mis
 *   To be more [compassionate](https://en.wikipedia.org/wiki/Compassion-focused_therapy) with myself 
 
 
-> _**Note:** I'm always up for a chat - no matter if it's about work or personal things! You can drop me an [email](eltje@posthog.com), find me on Slack or [LinkedIn](https://www.linkedin.com/in/eltje-lange/)_
+> _**Note:** I'm always up for a chat - no matter if it's about work or personal things! You can drop me an [email](mailto:eltje@posthog.com), find me on Slack or [LinkedIn](https://www.linkedin.com/in/eltje-lange/)_
