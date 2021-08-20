@@ -54,7 +54,7 @@ Integrating Retool with PostgreSQL directly is rather simple.
 2. This will prompt you to enter your database details, which are the same authentication parameters you use to connect the database to PostHog. 
 3. With the connection complete, you are now able to run SQL queries on your PostHog database and use the result on Retool tables, charts, and any other component available. Retool also makes the database tables and their respective schemas available to you, making the process of writing queries easier. 
 
-> **Note:** Where your Database credentials will be available to you is dependent on the deployment method you used. If you deployed PostHog on Heroku, you can find them on the settings for the 'Heroku Postgres' add-on. In the case of AWS CloudFormation, these are available on the RDS settings. And, most importantly, if you **deployed PostHog using Docker**, some additional setup is required to allow Retool to connect to the database. We have [instructions available here](/docs/docs/integrate/third-party/metabase#for-posthog-docker-deployments) on what to do in this case.
+> **Note:** Where your Database credentials will be available to you is dependent on the deployment method you used. If you deployed PostHog on Heroku, you can find them on the settings for the 'Heroku Postgres' add-on. In the case of AWS CloudFormation, these are available on the RDS settings. And, most importantly, if you **deployed PostHog using Docker**, some additional setup is required to allow Retool to connect to the database. We have [instructions available here](/docs/integrate/third-party/metabase) on what to do in this case.
 
 ### Integrating via API
 

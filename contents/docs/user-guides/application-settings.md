@@ -3,7 +3,7 @@ title: Application Settings
 sidebar: Docs
 showTitle: true
 ---
-This page documents all the application settings and configuration available on PostHog. These settings are generally available for both PostHog Cloud and PostHog Enterprise versions and should not be confused with instance settings (see [Configuring PostHog](/docs/self-host/configure/overview)) for more details. Each subsection is represented as a tab in the user interface.
+This page documents all the application settings and configuration available on PostHog. These settings are generally available for both PostHog Cloud and PostHog Enterprise versions and should not be confused with instance settings (see [Configuring PostHog](/docs/self-host/)) for more details. Each subsection is represented as a tab in the user interface.
 
 ## Organization settings
 Settings pertaining to the entire organization and/or instance. These settings can be accessed by opening the account dropdown on the right corner of the top navigation bar and then clicking on "Organization settings & billing". Contains the following settings:

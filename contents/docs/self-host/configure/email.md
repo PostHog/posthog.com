@@ -49,7 +49,7 @@ With Sendgrid you have 2 different configuration options.
 
 1. On sender authentication, select the option to authenticate a domain, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/domain/create](https://app.sendgrid.com/settings/sender_auth/domain/create).
 
-1. Fill out the required details for the domain you wish to configure. We recommend using the default configuration. If you do not use the advanced settings option please be sure to properly configure [DKIM][dkim] and [SPF][spf] records to ensure deliverability.
+1. Fill out the required details for the domain you wish to configure. We recommend using the default configuration. If you do not use the advanced settings option please be sure to properly configure [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail) and [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) records to ensure deliverability.
 
 1. You will receive now a list of DNS records that need to be added to your domain. After adding them, be sure to verify them on Sendgrid. You are now ready to start sending emails.
 
@@ -95,11 +95,11 @@ After you have set up your sending configuration, you can continue below to set 
 
 ## Mailgun
 1. After you have created an account, go to Sending > [Domains](https://app.mailgun.com/app/sending/domains), and click on "Add New Domain".
-1. Enter a domain name that you own. Using a subdomain is recommended (e.g. `m.posthog.com` instead of `posthog.com`). We strongly recommend selecting "Create DKIM Authority" (and using 2048 bits) to prevent spoofing with your domains (read more about [DKIM][dkim]). See sample configuration below:
+1. Enter a domain name that you own. Using a subdomain is recommended (e.g. `m.posthog.com` instead of `posthog.com`). We strongly recommend selecting "Create DKIM Authority" (and using 2048 bits) to prevent spoofing with your domains (read more about [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail)). See sample configuration below:
 
     ![](../../../images/configuring-posthog/mailgun-1.png)
 
-1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability. If not provided, we also recommend adding the following [SPF](spf) record to prevent email forgery with your domain.
+1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability. If not provided, we also recommend adding the following [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) record to prevent email forgery with your domain.
 
     ```
     TXT @ v=spf1 include:mailgun.org ~all
