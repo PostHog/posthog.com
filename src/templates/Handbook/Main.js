@@ -5,9 +5,9 @@ import Breadcrumbs from './Breadcrumbs'
 import NextArticle from './NextArticle'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import planets from '../../images/planets.svg'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { shortcodes } from '../../mdxGlobalComponents'
+import Planets from './Planets'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -87,7 +87,7 @@ export default function Main({
                     />
                 )}
             </div>
-            <img className="absolute top-0 right-0 w-[35vw] hidden lg:block" src={planets} />
+            <Planets className="w-[35vw] absolute top-0 right-0 hidden lg:block dark:text-white text-[#220f3f]" />
         </div>
     )
 }
