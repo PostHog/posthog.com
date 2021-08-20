@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { CallToAction } from '../../CallToAction'
-import featuresImg from '../images/safe-features.png'
-import userBehaviorImg from '../images/user-behavior.png'
-import funnelsImg from '../images/funnels.png'
 import { LandingPageCallToAction } from '../LandingPageCallToAction'
+import { StaticImage } from 'gatsby-plugin-image'
 
 export const Tutorials = () => {
     return (
@@ -29,8 +27,12 @@ export const Tutorials = () => {
                         to="/docs/tutorials/feature-flags"
                         className="w-full lg:w-1/3 lg:mr-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
                     >
-                        <img src={featuresImg} className="w-full mb-4" alt="How to safely rollout new features" />
-
+                        <StaticImage
+                            layout="fullWidth"
+                            src="../images/safe-features.png"
+                            className="w-full mb-4"
+                            alt="How to safely rollout new features"
+                        />
                         <strong className="block text-center text-white">How to Safely Rollout New Features</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">7 min read</span>
                     </Link>
@@ -39,7 +41,12 @@ export const Tutorials = () => {
                         to="/docs/tutorials/toolbar"
                         className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:mx-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
                     >
-                        <img src={userBehaviorImg} className="w-full mb-4" alt="Visualizing User Behavior - Toolbar" />
+                        <StaticImage
+                            layout="fullWidth"
+                            src="../images/user-behavior.png"
+                            className="w-full mb-4"
+                            alt="Visualizing User Behavior - Toolbar"
+                        />
 
                         <strong className="block text-center text-white">Visualizing User Behavior - Toolbar</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">6 min read</span>
@@ -49,7 +56,12 @@ export const Tutorials = () => {
                         to="/docs/tutorials/funnels"
                         className="w-full mt-8 lg:mt-0 lg:w-1/3 lg:ml-2 bg-purple-400 bg-opacity-30 hover:bg-opacity-40 rounded p-3"
                     >
-                        <img src={funnelsImg} className="w-full mb-4" alt="Analyzing Your Conversion with Funnels" />
+                        <StaticImage
+                            layout="fullWidth"
+                            src="../images/funnels.png"
+                            className="w-full mb-4"
+                            alt="Analyzing Your Conversion with Funnels"
+                        />
 
                         <strong className="block text-center text-white">Analyzing Your Conversion with Funnels</strong>
                         <span className="text-center text-white opacity-60 mt-2 block text-xs">8 min read</span>

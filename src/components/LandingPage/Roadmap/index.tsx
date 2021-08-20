@@ -1,9 +1,8 @@
 import React from 'react'
-import mountainsImg from '../images/mountains.png'
-import sunImg from '../images/sun.png'
-import cityImg from '../images/city.png'
+import cityImg from ''
 import timelineImg from '../images/timeline.png'
 import { CallToAction } from '../../CallToAction'
+import { StaticImage } from 'gatsby-plugin-image'
 
 export const Roadmap = () => (
     <div className="w-screen mt-24 relative">
@@ -28,14 +27,21 @@ export const Roadmap = () => (
                         </CallToAction>
                     </div>
                 </div>
-                <img src={mountainsImg} className="w-screen mx-auto relative z-10 mountains" />
-
-                <img src={sunImg} className="sun absolute" />
+                <StaticImage
+                    placeholder="tracedSVG"
+                    className="w-screen mx-auto relative z-10 mountains"
+                    src="../images/mountains.png"
+                />
+                <div className="sun absolute">
+                    <StaticImage placeholder="tracedSVG" src="../images/sun.png" />
+                </div>
             </div>
 
             <div className="timeline-wrapper">
-                <img src={timelineImg} className="timeline" />
-                <img src={cityImg} className="city" />
+                <StaticImage placeholder="tracedSVG" className="timeline" src="../images/timeline.png" />
+                <div className="city">
+                    <StaticImage placeholder="tracedSVG" src="../images/city.png" />
+                </div>
             </div>
         </div>
     </div>

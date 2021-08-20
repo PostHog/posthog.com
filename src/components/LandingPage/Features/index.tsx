@@ -1,8 +1,5 @@
 import React from 'react'
-
-import graphicAnalytics from '../images/analytics@2x.png'
-import graphicInsights from '../images/insights@2x.png'
-import graphicPlatform from '../images/platform@2x.png'
+import { StaticImage } from 'gatsby-plugin-image'
 
 export const Features = () => {
     return (
@@ -17,15 +14,13 @@ export const Features = () => {
 
                 <div className="grid platform-columns">
                     <div className="">
-                        <figure className="my-0">
-                            <img
-                                src={graphicAnalytics}
-                                alt="Analytics"
-                                width="296"
-                                height="296"
-                                className="mx-auto my-0"
-                            />
-                        </figure>
+                        <StaticImage
+                            alt="Analytics"
+                            width={296}
+                            height={296}
+                            src="../images/analytics@2x.png"
+                            imgClassName="mx-auto my-0"
+                        />
                         <div className="mb-8 lg:mb-0">
                             <h4>Analytics</h4>
                             <ul className="list-none px-4">
@@ -111,15 +106,7 @@ export const Features = () => {
                         </div>
                     </div>
                     <div className="insights-column">
-                        <figure className="my-0">
-                            <img
-                                src={graphicInsights}
-                                alt="Insights"
-                                width="296"
-                                height="296"
-                                className="mx-auto my-0"
-                            />
-                        </figure>
+                        <StaticImage alt="Insights" width={296} height={296} src="../images/insights@2x.png" />
                         <div className="mb-8 lg:mb-0">
                             <h4>Insights</h4>
                             <ul className="list-none px-4">
@@ -173,15 +160,7 @@ export const Features = () => {
                         </div>
                     </div>
                     <div className="">
-                        <figure className="my-0">
-                            <img
-                                src={graphicPlatform}
-                                alt="Platform"
-                                width="296"
-                                height="296"
-                                className="mx-auto my-0"
-                            />
-                        </figure>
+                        <StaticImage src="../images/platform@2x.png" alt="Platform" width={296} height={296} />
                         <div className="mb-8 lg:mb-0">
                             <h4>Platform</h4>
                             <ul className="list-none px-4">

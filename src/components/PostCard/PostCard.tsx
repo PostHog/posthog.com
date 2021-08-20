@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
-import { GatsbyImage, GatsbyImageProps, IGatsbyImageData } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
 import './style.scss'
@@ -81,14 +81,12 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
 }
 
 const LandingPageLatestPost = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
+    const image = getImage(post.frontmatter.featuredImage)
     return (
         <div className="w-full flex flex-col justify-between items-center">
             <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
                 <Link to={post.fields.slug} className="featured-post-img">
-                    <img
-                        className="w-full h-auto block rounded shadow-lg mb-0"
-                        src={post.frontmatter.featuredImage.publicURL}
-                    />
+                    <GatsbyImage className="w-full h-auto block rounded shadow-lg mb-0" image={image} />
                 </Link>
             </div>
             <div className="w-full py-4">
@@ -108,14 +106,12 @@ const LandingPageLatestPost = ({ post, authorDetails }: { post: PostTypeWithImag
 }
 
 const LandingPageSnippet = ({ post, authorDetails }: { post: PostTypeWithImage; authorDetails?: AuthorsData }) => {
+    const image = getImage(post.frontmatter.featuredImage)
     return (
         <div className="w-full flex flex-col justify-between items-center">
             <div className="w-full rounded overflow-hidden flex items-center justify-center pt-4">
                 <Link to={post.fields.slug} className="featured-post-img">
-                    <img
-                        className="w-full h-auto block rounded shadow-lg mb-0"
-                        src={post.frontmatter.featuredImage.publicURL}
-                    />
+                    <GatsbyImage className="w-full h-auto block rounded shadow-lg mb-0" image={image} />
                 </Link>
             </div>
             <div className="w-full py-2">

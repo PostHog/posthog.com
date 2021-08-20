@@ -28,6 +28,9 @@ const query = graphql`
                         rootPage
                         featuredImage {
                             publicURL
+                            childImageSharp {
+                                gatsbyImageData
+                            }
                         }
                     }
                 }
