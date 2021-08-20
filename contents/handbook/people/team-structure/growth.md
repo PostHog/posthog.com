@@ -7,11 +7,7 @@ hideAnchor: true
 
 ## People
 
-- [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
-- [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Lead Designer)
-- [Joe Martin](/handbook/people/team#joe-martin-product-marketer) (Product Marketer)
-- [Sam Winslow](/handbook/people/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
-- [Phil Leggetter](/handbook/people/team#phil-leggetter-developer-relations) (Developer Relations)
+[See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
 
