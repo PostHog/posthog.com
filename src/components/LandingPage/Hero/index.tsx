@@ -32,9 +32,9 @@ export const Hero = () => {
                         product analytics suite
                     </h1>
                     <p className="text-baby-blue text-base">
-                        Let your entire company answer their own questions about user behavior.
+                        Enable your entire company to analyse user behavior.
                         <br />
-                        Eliminate repetitive requests for SQL.
+                        Eliminate repetitive SQL requests.
                     </p>
                 </div>
 
