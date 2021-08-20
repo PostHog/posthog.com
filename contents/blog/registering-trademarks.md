@@ -9,8 +9,9 @@ author: mo-shehu
 featuredImage: ../images/blog/filename.png
 featuredImageType: full
 ---
-
 _**Disclaimer:** This is intended as a short, tactical guide to getting your trademarks sorted out for the first time, on a minimal budget. This is *not* legal advice and we are not lawyers - this is just what has worked for us._
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Xui-bm6bBFM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Don't bother securing your trademarks in the early days of your business - wait until you've raised a seed round first.
 
