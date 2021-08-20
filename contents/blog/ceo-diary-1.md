@@ -41,7 +41,7 @@ PostHog started off as an open source project. We started getting emails like th
 
 ![An email from a potential customer saying they have extreme interest](../images/blog/CEO-diary-1/extreme-interest.jpg)
 
-We felt we provide a _worse_ experience to paying customers like this than to free users. Whoah, did we just say that?!
+We felt we provided a _worse_ experience to paying customers like this than to free users. Whoah, did we just say that?!
 
 Larger companies have a wider range of stakeholders and generally more users on the platform. They have a broader range of users than just developers, and these other user profiles (like product managers or growth managers) (i) tend to want more detailed analytics views (ii) don't have the same willingness to tolerate bugs.
 
