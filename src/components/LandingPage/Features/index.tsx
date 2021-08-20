@@ -10,9 +10,9 @@ export const Features = () => {
             <div className="w-11/12 max-w-4xl mx-auto relative">
                 <h2>Everything product-led teams need in one place</h2>
                 <p className="opacity-60 mt-1 text-center mb-12 mx-auto lg:w-9/12 text-base">
-                    One platform for analytics, session recording and feature flags.
+                    An all-in-one platform for analytics, session recording and feature flags.
                     <br />
-                    Understand what users are doing, understand why, and roll out changes safely.
+                    See what users are doing, understand why, and roll out changes safely.
                 </p>
 
                 <div className="grid platform-columns">
