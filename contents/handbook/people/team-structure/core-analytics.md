@@ -7,10 +7,7 @@ hideAnchor: true
 
 ## People
 
-- [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
-- [Neil Kakkar](/handbook/people/team#neil-kakkar-software-engineer) (Full Stack Engineer)
-- [Li Yi Yu](/handbook/people/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- [Karl-Aksel Puulmann](/handbook/people/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
+[See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
 

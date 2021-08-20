@@ -9,10 +9,7 @@ hideAnchor: true
 
 ## People
 
-- [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
-- [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
-- [Yakko Majuri](/handbook/people/team#yakko-majuri-software-engineer) (Full Stack Engineer)
-
+[See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
 

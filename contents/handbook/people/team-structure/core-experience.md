@@ -7,12 +7,7 @@ hideAnchor: true
 
 ## People
 
-
-- [Marius Andra](/handbook/people/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
-- [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
-- [Alex Kim](/handbook/people/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
-- [Michael Matloka](/handbook/people/team#michael-matloka-software-engineer) (Full Stack Engineer)
-- [Chris Clark](/handbook/people/team#chris-clark-product-designer) (Product Designer)
+[See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
 
