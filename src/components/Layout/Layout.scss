@@ -51,7 +51,8 @@ body {
     font-feature-settings: unset;
 }
 
-em, i {
+em,
+i {
     font-variant: none;
     font-feature-settings: unset;
 }
@@ -1602,10 +1603,6 @@ div:not(.default-scrollbar)::-webkit-scrollbar-thumb:hover {
     background-color: transparent !important;
 }
 
-.header-wrapper {
-    background: linear-gradient(180deg, #200c39, #220f3f);
-}
-
 .post-page-wrapper {
     .header-wrapper:not(.blog-article-header) {
         background: rgb(249, 249, 249) none repeat scroll 0% 0%;
@@ -1622,9 +1619,6 @@ body.light {
     .handbook-container {
         .header-wrapper {
             background: white;
-            a {
-                color: hsla(0, 0%, 0%, 0.8);
-            }
         }
     }
 }

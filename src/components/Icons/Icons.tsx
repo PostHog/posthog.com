@@ -84,12 +84,8 @@ export const RightArrow = ({ className }: { className: string }): JSX.Element =>
     </svg>
 )
 
-export const Plus = ({ open }: { open: boolean }): JSX.Element => {
-    return open ? (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
-        </svg>
-    ) : (
+export const Plus = ({ render }: { render: (icon: JSX.Element) => JSX.Element }): JSX.Element => {
+    const Icon = (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path
                 fillRule="evenodd"
@@ -98,13 +94,39 @@ export const Plus = ({ open }: { open: boolean }): JSX.Element => {
             />
         </svg>
     )
+    return render ? render(Icon) : Icon
 }
 
-export const Chevron = ({ className }: { className: string }): JSX.Element => (
-    <svg className={className} width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z"
-            fill="currentColor"
-        />
-    </svg>
-)
+export const Minus = ({ render }: { render: (icon: JSX.Element) => JSX.Element }): JSX.Element => {
+    const Icon = (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
+        </svg>
+    )
+    return render ? render(Icon) : Icon
+}
+
+export const Chevron = ({
+    className,
+    render,
+}: {
+    className: string
+    render: (icon: JSX.Element) => JSX.Element
+}): JSX.Element => {
+    const Icon = (
+        <svg
+            className={className}
+            width="10"
+            height="7"
+            viewBox="0 0 10 7"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z"
+                fill="currentColor"
+            />
+        </svg>
+    )
+    return render ? render(Icon) : Icon
+}

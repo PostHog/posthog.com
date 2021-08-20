@@ -1,0 +1,292 @@
+{
+    "main": [
+        {
+            "title": "Product",
+            "url": "/product"
+        },
+        {
+            "title": "Docs",
+            "url": "/docs",
+            "sub": {
+                "title": "Docs",
+                "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started.",
+                "items": [
+                    {
+                        "title": "1. Self Hosting",
+                        "link": {
+                            "title": "Overview",
+                            "url": "/docs/self-host"
+                        },
+                        "sections": [
+                            {
+                                "title": "Deploy via",
+                                "link": {
+                                    "title": "View All (13)",
+                                    "url": "https://posthog.com/docs/self-host"
+                                },
+                                "items": [
+                                    {
+                                        "icon": "aws",
+                                        "title": "AWS",
+                                        "url": "/docs/self-host/deploy/aws"
+                                    },
+                                    {
+                                        "icon": "gcs",
+                                        "title": "Google Cloud",
+                                        "url": "/docs/self-host/deploy/gcp"
+                                    },
+                                    {
+                                        "icon": "docker",
+                                        "title": "Docker",
+                                        "url": "/docs/contribute/developing-locally"
+                                    },
+                                    {
+                                        "icon": "helm chart",
+                                        "title": "Helm Chart",
+                                        "url": "/docs/self-host/deploy/other"
+                                    },
+                                    {
+                                        "icon": "digital ocean",
+                                        "title": "Digital Ocean",
+                                        "url": "/docs/self-host/deploy/digital-ocean"
+                                    },
+                                    {
+                                        "icon": "github",
+                                        "title": "Source",
+                                        "url": "https://github.com/PostHog/posthog"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Top articles",
+                                "items": [
+                                    {
+                                        "title": "Configuring PostHog",
+                                        "url": "/docs/self-host#configure"
+                                    },
+                                    {
+                                        "title": "Hosting Costs",
+                                        "url": "/docs/self-host/deploy/hosting-costs"
+                                    },
+                                    {
+                                        "title": "Upgrade Guide",
+                                        "url": "/docs/self-host/configure/upgrading-posthog"
+                                    },
+                                    {
+                                        "title": "Self Host vs. PostHogCloud",
+                                        "url": "/docs/user-guides/organizations"
+                                    },
+                                    {
+                                        "title": "Clickhouse",
+                                        "url": "/docs/self-host/deploy/"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "title": "2. Install & integrate",
+                        "link": {
+                            "title": "Overview",
+                            "url": "/docs/integrate"
+                        },
+                        "sections": [
+                            {
+                                "title": "Top libraries",
+                                "items": [
+                                    {
+                                        "icon": "js",
+                                        "title": "JavaScript",
+                                        "url": "/docs/integrate/client/js"
+                                    },
+                                    {
+                                        "icon": "nodejs",
+                                        "title": "NodeJS",
+                                        "url": "/docs/integrate/server/node"
+                                    },
+                                    {
+                                        "icon": "ruby",
+                                        "title": "Ruby",
+                                        "url": "/docs/integrate/server/ruby"
+                                    },
+                                    {
+                                        "icon": "react",
+                                        "title": "React Native",
+                                        "url": "/docs/integrate/client/react-native"
+                                    },
+                                    {
+                                        "icon": "ios",
+                                        "title": "iOS",
+                                        "url": "/docs/integrate/client/ios"
+                                    },
+                                    {
+                                        "icon": "android",
+                                        "title": "Android",
+                                        "url": "/docs/integrate/client/android"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Top integrations",
+                                "items": [
+                                    {
+                                        "icon": "segment",
+                                        "title": "Segment",
+                                        "url": "/docs/integrate/third-party/segment"
+                                    },
+                                    {
+                                        "icon": "sentry",
+                                        "title": "Sentry",
+                                        "url": "/docs/integrate/third-party/sentry"
+                                    },
+                                    {
+                                        "icon": "slack",
+                                        "title": "Slack",
+                                        "url": "/docs/integrate/webhooks/slack"
+                                    },
+                                    {
+                                        "icon": "shopify",
+                                        "title": "Shopify",
+                                        "url": "/docs/integrate/third-party/shopify"
+                                    },
+                                    {
+                                        "icon": "wordpress",
+                                        "title": "WordPress",
+                                        "url": "/docs/integrate/third-party/wordpress"
+                                    }
+                                ]
+                            }
+                        ],
+                        "footerLinks": [
+                            {
+                                "title": "Plugins",
+                                "url": "/plugins"
+                            },
+                            {
+                                "title": "Build your own plugin",
+                                "url": "/docs/plugins/build"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "3. User guides",
+                        "link": {
+                            "title": "Overview",
+                            "url": "/docs/user-guides"
+                        },
+                        "sections": [
+                            {
+                                "title": "Analytics",
+                                "items": [
+                                    {
+                                        "title": "Cohorts",
+                                        "url": "/docs/user-guides/cohorts"
+                                    },
+                                    {
+                                        "title": "Funnels",
+                                        "url": "/docs/user-guides/funnels"
+                                    },
+                                    {
+                                        "title": "Paths",
+                                        "url": "/docs/user-guides/paths"
+                                    },
+                                    {
+                                        "title": "Retention",
+                                        "url": "/docs/user-guides/retention"
+                                    },
+                                    {
+                                        "title": "Sessions",
+                                        "url": "/docs/user-guides/sessions"
+                                    },
+                                    {
+                                        "title": "Trends",
+                                        "url": "/docs/user-guides/trends"
+                                    },
+                                    {
+                                        "title": "Users",
+                                        "url": "/docs/user-guides/users"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Apps",
+                                "items": [
+                                    {
+                                        "title": "Feature flags",
+                                        "url": "/docs/user-guides/feature-flags"
+                                    },
+                                    {
+                                        "title": "Session recordings",
+                                        "url": "/docs/user-guides/session-recording"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Platform",
+                                "items": [
+                                    {
+                                        "title": "Application settings",
+                                        "url": "/docs/user-guides/application-settings"
+                                    },
+                                    {
+                                        "title": "Dashboards",
+                                        "url": "/docs/user-guides/dashboards"
+                                    },
+                                    {
+                                        "title": "Organizations",
+                                        "url": "/docs/user-guides/organizations"
+                                    },
+                                    {
+                                        "title": "Plugins",
+                                        "url": "/docs/user-guides/plugins"
+                                    },
+                                    {
+                                        "title": "Projects",
+                                        "url": "/docs/user-guides/projects"
+                                    },
+                                    {
+                                        "title": "SSO",
+                                        "url": "/docs/user-guides/sso"
+                                    },
+                                    {
+                                        "title": "Toolbar",
+                                        "url": "/docs/user-guides/toolbar"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Data",
+                                "items": [
+                                    {
+                                        "title": "Actions",
+                                        "url": "/docs/user-guides/actions"
+                                    },
+                                    {
+                                        "title": "Annotations",
+                                        "url": "/docs/user-guides/annotations"
+                                    },
+                                    {
+                                        "title": "Events",
+                                        "url": "/docs/user-guides/events"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "title": "Company",
+            "url": "/handbook/company/story"
+        },
+        {
+            "title": "Pricing",
+            "url": "/pricing"
+        },
+        {
+            "title": "Github",
+            "url": "https://github.com/posthog/posthog"
+        }
+    ]
+}

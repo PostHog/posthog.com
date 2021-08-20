@@ -47,3 +47,5 @@ lg:grid-cols-3
 lg:grid-cols-4
 rotate-45
 -rotate-45
+text-light-yellow
+hover:text-light-yellow
