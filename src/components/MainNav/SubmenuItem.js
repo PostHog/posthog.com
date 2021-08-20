@@ -40,7 +40,7 @@ export default function SubmenuItem({ item }) {
                                 )}
                             </div>
                             <ul
-                                className={`list-none p-0 m-0 mt-4 grid lg:gap-x-20 ${
+                                className={`list-none p-0 m-0 mt-4 grid lg:gap-x-4 ${
                                     cols > 3
                                         ? `grid-cols-1`
                                         : `grid-cols-1 xs:grid-cols-2 xs:grid-flow-col grid-rows-${rows}`
