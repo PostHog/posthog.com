@@ -49,7 +49,7 @@ export default function Main({
                     mainEl={mainEl}
                     menu={menu}
                     slug={slug}
-                    className="hidden md:block flex-1 sticky top-4 w-full transition-opacity md:opacity-40 hover:opacity-100"
+                    className="hidden md:block flex-1 sticky top-4 w-full transition-opacity md:opacity-60 hover:opacity-100"
                 />
                 <main ref={mainEl} className={`relative md:pl-16 xl:px-16 2xl:px-32 ${showToc ? '' : 'flex-grow'}`}>
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">

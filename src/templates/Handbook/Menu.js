@@ -13,11 +13,11 @@ function MenuItem({ item, slug, topLevel }) {
     }
     const { name, url, children } = item
     const currentPage = url === slug
-    const opacity = currentPage || isActive(children) ? '1' : '40'
+    const opacity = currentPage || isActive(children) ? '1' : '75'
     const [open, setOpen] = useState(isActive(children))
     const handleClick = () => setOpen(!open)
     const height = open ? 'auto' : 0
-    const classes = `flex-grow text-left transition-opacity text-[#555] hover:text-[#333] dark:text-white dark:hover:text-white opacity-${opacity} group-hover:opacity-75 ${
+    const classes = `flex-grow text-left transition-opacity text-[#555] hover:text-[#222] dark:text-white dark:hover:text-white opacity-${opacity} group-hover:opacity-75 ${
         topLevel || children || currentPage ? 'font-bold' : 'text-[15px]'
     }`
     return (
