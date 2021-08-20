@@ -13,7 +13,7 @@ function MenuItem({ item, slug, topLevel }) {
     }
     const { name, url, children } = item
     const currentPage = url === slug
-    const opacity = currentPage || isActive(children) ? '1' : '75'
+    const opacity = currentPage || isActive(children) ? '1' : '60'
     const [open, setOpen] = useState(isActive(children))
     const handleClick = () => setOpen(!open)
     const height = open ? 'auto' : 0
