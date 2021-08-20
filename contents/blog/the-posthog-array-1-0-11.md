@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
