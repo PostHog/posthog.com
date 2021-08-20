@@ -18,6 +18,7 @@ const Iframe = (props) => (
 const InlineCode = (props) => (
     <code {...props} className="dark:bg-[#4c3e62] dark:text-white bg-[#e8e8e8] text-inherit p-1 rounded" />
 )
+const Blockquote = (props) => <blockquote {...props} className="p-6 rounded bg-[#f0f0f0] dark:bg-[#371A51]" />
 
 export default function Main({
     handleMobileMenuClick,
@@ -37,6 +38,7 @@ export default function Main({
         a: A,
         iframe: Iframe,
         inlineCode: InlineCode,
+        blockquote: Blockquote,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
