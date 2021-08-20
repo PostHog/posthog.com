@@ -23,17 +23,17 @@ There are tons of competitors in product analytics, and they've pretty much all 
 
 A losing strategy for late movers:
 
-- We'll hire lots of salespeople
-- We'll build features that the salespeople need to sell to big companies, which will make our product feel the same as everyone else's
-- Since the product is built for selling and not using, it'll be annoying to use
-- We will churn lots of customers, and thus will put even more energy into selling. Go back to step 1.
+1. We'll hire lots of salespeople
+2. We'll build features that the salespeople need to sell to big companies, which will make our product feel the same as everyone else's
+3. Since the product is built for selling and not using, it'll be annoying to use
+4. We will churn lots of customers, and thus will put even more energy into selling. Go back to step 1.
 
 A winning strategy for late movers:
 
-- We'll double down investing in our open source project
-- It gets more and more popular so developers at big companies will find and deploy us
-- Since the product is good, it'll roll out across the rest of the company
-- Big companies end up happily paying for the valuable product they're using. Go back to step 1.
+1. We'll double down investing in our open source project
+2. It gets more and more popular so developers at big companies will find and deploy us
+3. Since the product is good, it'll roll out across the rest of the company
+4. Big companies end up happily paying for the valuable product they're using. Go back to step 1.
 
 # So what are we doing about the above?
 
