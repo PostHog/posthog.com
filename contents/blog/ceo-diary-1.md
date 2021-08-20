@@ -49,7 +49,7 @@ We wanted to try out selling to companies like this so we could complete the ope
 
 Thus we decided to get [Five Reference Customers](../handbook/strategy/strategy), despite having >100 subscribers (on top of thousands of open source deployments). This means customers who are (i) genuinely delighted (ii) using PostHog meaningfully (iii) paying full price.
 
-From this exercise, we learned we had to level up our UX around funnels. So we [Nailed Funnels](new-vp-nailing-funnels). Next up, we're working on [Nailing Diagnosis](../handbook/strategy/roadmap). This is particularly cool as we're starting to see how our broad approach (with analytics, session recording and feature flags), lets us uniquely let users visualize their funnels, understand _why_ funnel performance is bad, and release changes to safely to improve it.
+From this exercise, we learned we had to level up our UX around funnels. So we [Nailed Funnels](new-vp-nailing-funnels). Next up, we're working on [Nailing Diagnosis](../handbook/strategy/roadmap). This is particularly cool as we're starting to see how our broad approach (with analytics, session recording and feature flags), uniquely lets users visualize their funnels, understand _why_ funnel performance is bad, and release changes to safely improve it.
 
 # A board meeting happened
 
