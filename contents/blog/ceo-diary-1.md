@@ -9,7 +9,7 @@ categories: ceo-diaries
 author: james-hawkins
 ---
 
-We are open source is [literally our top value](../handbook/company/values)... and what better way to be transparent than to share a diary!
+_We are open source_ is [literally our top value](../handbook/company/values)... and what better way to be transparent than to share a diary!
 
 # Late mover advantage
 
