@@ -2,12 +2,17 @@ import React from 'react'
 import Link from '../Link'
 import { RightArrow } from '../Icons/Icons'
 import SubmenuItemFooter from './SubmenuItemFooter'
+import { motion } from 'framer-motion'
 
 export default function SubmenuItem({ item }) {
     const { sections, title, link, footerLinks } = item
     const cols = sections.length
+    const variants = {
+        hidden: { y: -40, opacity: 0 },
+        shown: { y: 0, opacity: 1, transition: { duration: 0.5, type: 'spring' } },
+    }
     return (
-        <div className="lg:mt-12 mt-6 font-bold">
+        <motion.li tran variants={variants} className="lg:mt-12 mt-6 font-bold">
             <div className="flex items-center justify-between">
                 <h2 className="text-lg lg:text-xl font-bold">{title}</h2>
                 {link && (
@@ -24,7 +29,7 @@ export default function SubmenuItem({ item }) {
             <div
                 className={`grid grid-cols-1 xs:grid-cols-${
                     cols > 3 ? '2' : '1'
-                } lg:grid-cols-${cols} lg:divide-x-2 divide-white divide-opacity-10 bg-white bg-opacity-10 rounded lg:py-0 py-5`}
+                } lg:grid-cols-${cols} lg:divide-x-2 divide-white divide-opacity-10 bg-[#4b3163] rounded lg:py-0 py-5`}
             >
                 {sections.map((section, index) => {
                     const { title, link, items } = section
@@ -71,6 +76,6 @@ export default function SubmenuItem({ item }) {
                 })}
                 {footerLinks && <SubmenuItemFooter links={footerLinks} />}
             </div>
-        </div>
+        </motion.li>
     )
 }
