@@ -32,7 +32,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 - [ ] Choose the last day of the month to make payments for ongoing work, else choose something appropriate for a short term contract
 - [ ] Select a notice period of 30 days 
 - [ ] Select for the contractor to upload necessary compliance documents
-- [ ] elect for the contractor to be potentially allocated equity in the future (if this has been agreed)
+- [ ] Select for the contractor to be potentially allocated equity in the future (if this has been agreed)
 - [ ] Under 'Other Specifics' add the following as a special clause: _Contractor agrees to comply with any rules, policies and procedures set out in the Company Handbook, a copy of which is available on the Client's website. To the extent that there is any conflict between the terms of this Agreement and the Company Handbook, the terms which are more favorable to the Contractor shall prevail._
 
 ## The week before they join
