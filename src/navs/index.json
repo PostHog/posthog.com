@@ -12,7 +12,7 @@
                 "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started.",
                 "items": [
                     {
-                        "title": "1. Self Hosting",
+                        "title": "1. Self hosting",
                         "link": {
                             "title": "Overview",
                             "url": "/docs/self-host"
@@ -65,19 +65,19 @@
                                         "url": "/docs/self-host#configure"
                                     },
                                     {
-                                        "title": "Hosting Costs",
+                                        "title": "Hosting costs",
                                         "url": "/docs/self-host/deploy/hosting-costs"
                                     },
                                     {
-                                        "title": "Upgrade Guide",
+                                        "title": "Upgrade guide",
                                         "url": "/docs/self-host/configure/upgrading-posthog"
                                     },
                                     {
-                                        "title": "Self Host vs. PostHogCloud",
+                                        "title": "Self host vs. PostHogCloud",
                                         "url": "/docs/user-guides/organizations"
                                     },
                                     {
-                                        "title": "Clickhouse",
+                                        "title": "ClickHouse",
                                         "url": "/docs/self-host/deploy/"
                                     }
                                 ]
