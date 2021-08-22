@@ -78,7 +78,7 @@
                                     },
                                     {
                                         "title": "ClickHouse",
-                                        "url": "/docs/self-host/deploy/"
+                                        "url": "/docs/self-host/postgres-vs-clickhouse#clickhouse"
                                     }
                                 ]
                             }
