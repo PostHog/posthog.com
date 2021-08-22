@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 ```
 
-### Tracking custom events
+### Tracking Custom Events
 
 ```jsx
 const handleOnBuy = () => {
