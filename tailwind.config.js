@@ -34,6 +34,8 @@ module.exports = {
                 'w-64',
                 'w-72',
                 'opacity-40',
+                'opacity-60',
+                'opacity-75',
                 'opacity-1',
             ],
         },

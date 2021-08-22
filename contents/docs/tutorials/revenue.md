@@ -130,7 +130,7 @@ This can also be visualized as a pie, in order to see more clearly the actual _c
 
 ![Pie Plan Breakdown Image](../../images/tutorials/revenue/pie-plan-breakdown.png)
 
-> **Note:** If you have revenue data in various currencies, or simply want to convert your values to another currency, you can use our [Currency Normalization Plugin](/docs/plugins/currency-normalization) to do so.
+> **Note:** If you have revenue data in various currencies, or simply want to convert your values to another currency, you can use our [Currency Normalization Plugin](/plugins/currency-normalization) to do so.
 
 ### Conversion Funnels
 

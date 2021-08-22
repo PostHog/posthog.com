@@ -84,7 +84,7 @@ At PostHog, we follow a Product-led Growth approach. And we'll tell you, this ha
 
 Don't make a sale if your product is not a good fit for the customer. 
 
-From the first paragraph of [PostHog's Handbook Sales page](/handbook/growth/sales):
+From the first paragraph of [PostHog's Handbook Sales page](/handbook/growth/sales/overview):
 
 <blockquote class="blog-quote">
 

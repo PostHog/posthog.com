@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 We're back! 2020 was a hectic year for us and our team put in a whole lot of effort to get PostHog to where it is now. As such, we shut down PostHog for 2 weeks to give everyone a chance to recharge (with a rotation in place to make sure nothing burned down). 
@@ -66,7 +68,7 @@ Since joining us, Karl has been submitting performance improvement after perform
 
 This time, as session recordings are being used more and more by our users, it was time to speed up the loading of the sessions list, which now loads 10x faster!
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

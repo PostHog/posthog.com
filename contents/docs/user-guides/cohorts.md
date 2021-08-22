@@ -47,7 +47,7 @@ There are three key settings for a cohort: 'action', 'property', and 'New group'
 
 **Group Users by Actions**
 
-You can group users who have performed certain [actions](/features/actions). You need to already have configured actions for that to work.
+You can group users who have performed certain [actions](/docs/user-guides/actions). You need to already have configured actions for that to work.
 
 **Group Users by Property**
 

@@ -49,3 +49,5 @@ rotate-45
 -rotate-45
 text-light-yellow
 hover:text-light-yellow
+opacity-60
+opacity-75

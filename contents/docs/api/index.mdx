@@ -9,7 +9,7 @@ This section of our Docs explains how to pull or push data from/to our API. Post
 
 Please note that PostHog makes use of two different APIs, serving different purposes and using different mechanisms for authentication.
 
-One API is used for pushing data into PostHog. This uses the 'Team API Key' that is included in the [frontend snippet](/docs/integration/js). This API Key is **public**, and is what we use in our frontend integration to push events into PostHog, as well as to check for feature flags, for instance.
+One API is used for pushing data into PostHog. This uses the 'Team API Key' that is included in the [frontend snippet](/docs/integrate/client/js). This API Key is **public**, and is what we use in our frontend integration to push events into PostHog, as well as to check for feature flags, for instance.
 
 The other API is more powerful and allows you to perform any action as if you were an authenticated user utilizing the PostHog UI. It is mostly used for getting data out of PostHog, as well as other private actions such as creating a feature flag. This uses a 'Personal API Key' which you need to create manually (instructions [below](#authentication)). This API Key is **private** and you should not make it public nor share it with anyone. It gives you access to all the data held by your PostHog instance, which includes sensitive information.
 
@@ -77,17 +77,19 @@ https://posthog.example.com/api/person/
 ```
 
 #### cURL example for PostHog Cloud
+
 ```bash
 POSTHOG_PERSONAL_API_KEY=qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
 curl \
 --header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
 https://app.posthog.com/api/person/
 ```
+
 <br />
 
 ## Tips
 
-The [`/users/@me/` endpoint](./user) gives you useful information about the current user.
+The [`/users/@me/` endpoint](/docs/api/user) gives you useful information about the current user.
 The `/api/event_definition/` and `/api/property_definition` endpoints provide the possible event names and properties you can use throughout the rest of the API.
 
 <br />

@@ -5,9 +5,9 @@ import Breadcrumbs from './Breadcrumbs'
 import NextArticle from './NextArticle'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import planets from '../../images/planets.svg'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { shortcodes } from '../../mdxGlobalComponents'
+import Planets from './Planets'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -18,6 +18,7 @@ const Iframe = (props) => (
 const InlineCode = (props) => (
     <code {...props} className="dark:bg-[#4c3e62] dark:text-white bg-[#e8e8e8] text-inherit p-1 rounded" />
 )
+const Blockquote = (props) => <blockquote {...props} className="p-6 rounded bg-[#f0f0f0] dark:bg-[#371A51]" />
 
 export default function Main({
     handleMobileMenuClick,
@@ -37,6 +38,7 @@ export default function Main({
         a: A,
         iframe: Iframe,
         inlineCode: InlineCode,
+        blockquote: Blockquote,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
@@ -49,7 +51,7 @@ export default function Main({
                     mainEl={mainEl}
                     menu={menu}
                     slug={slug}
-                    className="hidden md:block flex-1 sticky top-4 w-full transition-opacity md:opacity-40 hover:opacity-100"
+                    className="hidden md:block flex-1 sticky top-4 w-full transition-opacity md:opacity-60 hover:opacity-100"
                 />
                 <main ref={mainEl} className={`relative md:pl-16 xl:px-16 2xl:px-32 ${showToc ? '' : 'flex-grow'}`}>
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
@@ -62,7 +64,7 @@ export default function Main({
                         </section>
                         {breakpoints.lg && showToc && (
                             <InternalSidebar
-                                className="bg-[#e4e0e9] dark:bg-white p-4 rounded dark:bg-opacity-10 mb-10"
+                                className="bg-[#f0f0f0] dark:bg-white p-4 rounded dark:bg-opacity-10 mb-10"
                                 tableOfContents={tableOfContents}
                             />
                         )}
@@ -87,7 +89,7 @@ export default function Main({
                     />
                 )}
             </div>
-            <img className="absolute top-0 right-0 w-[35vw] hidden lg:block" src={planets} />
+            <Planets className="w-[35vw] absolute top-0 right-0 hidden lg:block dark:text-white text-[#220f3f]" />
         </div>
     )
 }

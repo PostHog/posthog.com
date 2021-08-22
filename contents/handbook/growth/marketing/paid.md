@@ -18,7 +18,7 @@ These will evolve over time:
 - _Definitely_ no unfounded technical claims or feature promises.
 - Don't be afraid to use humor, coding jokes etc. 
 
-Bear in mind a lot of our users will use ad-blocking of some kind - this is why our other channels such as [developer relations](https://posthog.com/handbook/growth/marketing/developer-relations) are especially important. 
+Bear in mind a lot of our users will use ad-blocking of some kind - this is why our other channels such as [developer relations](/handbook/growth/developer-relations) are especially important. 
 
 ## Brand guidelines
 

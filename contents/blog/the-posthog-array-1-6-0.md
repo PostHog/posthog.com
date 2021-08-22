@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 One of the most fun weeks we've had so far with our UX - resizable and touch-enabled dashboards with a new display mode, Microsoft Teams support, and paths for events. Plus, a ton of performance improvements.
@@ -53,7 +55,7 @@ Now, you can visualize any series of page views or events! This means you can ea
 * We fixed [property filter array issue](https://github.com/PostHog/posthog/pull/769)
 * [Optimize funnel rendering](https://github.com/PostHog/posthog/pull/792) is a major improvement in speed for those with many events - now 1 order of magnitude faster. 
 * [Multiple filters with same key](https://github.com/PostHog/posthog/pull/738), fixed a bug that means you can now have multiple filters that are the same ie ```$current_url doesn't equal A``` and ```$current_url doesn't equal B```
-* [Event partioning](https://github.com/PostHog/posthog/pull/733), which speeds up trends and paths pages in particular. Learn more about [scaling PostHog](/docs/scaling-posthog).
+* [Event partioning](https://github.com/PostHog/posthog/pull/733), which speeds up trends and paths pages in particular. Learn more about [scaling PostHog](/docs/self-host/deploy/configuration#scaling-up).
 * The component ```Deletewithundo``` wasn't working because of property mixup, [now it is](https://github.com/PostHog/posthog/pull/750)!
 * [Funnels](https://github.com/PostHog/posthog/pull/751) and [Actions](https://github.com/PostHog/posthog/pull/757) now use Ant Design
 * We temporarily [removed stickiness breakdowns](https://github.com/PostHog/posthog/pull/774), as they were causing issues. We'll put this back into our roadmap and will priortize depending on user feedback.
@@ -68,7 +70,7 @@ Now, you can visualize any series of page views or events! This means you can ea
 
 ### [Dev toolbar](https://github.com/PostHog/posthog/issues/741)
 
-Last week was a call for discussion, now there's some really good commentary on how this should look and feel. We'd love you to weigh in or upvote what you like, to help us shape up [phase 2 of the roadmap](/handbook/roadmap).
+Last week was a call for discussion, now there's some really good commentary on how this should look and feel. We'd love you to weigh in or upvote what you like, to help us shape up [phase 2 of the roadmap](/handbook/strategy/roadmap).
 
 ## Weekly round up
 

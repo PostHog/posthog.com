@@ -24,7 +24,7 @@ This release cycle's Community MVP goes to...
 
 [imhmdb](https://github.com/imhmdb)!
 
-Mohamad submitted a [500+ line PR](https://github.com/PostHog/posthog-php/pull/12) implementing feature flags in our [PHP library](docs/integrate/server/php). The PR is still under review but we anticipate it'll be merged soon.
+Mohamad submitted a [500+ line PR](https://github.com/PostHog/posthog-php/pull/12) implementing feature flags in our [PHP library](/docs/integrate/server/php). The PR is still under review but we anticipate it'll be merged soon.
 
 Awesome work and thanks again Mohamad!
 
@@ -100,7 +100,7 @@ We've redesigned and significantly improved the performance of the query builder
 
 Let us know what you think about it on [Slack](/slack).
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product.
 

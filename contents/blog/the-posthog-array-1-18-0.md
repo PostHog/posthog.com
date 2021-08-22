@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Our primary goals for this release were to iron out bugs and improve the user experience of our Beta features.
@@ -58,7 +60,7 @@ As described by Michael, one of our engineers:
 
 _"They don't do anything, yet we thank them for their existence."_
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

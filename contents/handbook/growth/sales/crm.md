@@ -47,7 +47,7 @@ We have lots of handy templates you can use as well - just select _Templates_ i
 
 If an inbound email is about our Scale Paid plan, you should create a Deal - more on this below. _Deals are only used for managing Scale Paid customers - you do not need to create a deal for Cloud or Scale Free customers._
 
-In addition to hey@posthog.com and sales@posthog.com, we sometimes create special one-off email addresses to use for specific groups, such as for an event or promotion. If you create a Google group and you want messages to flow into HubSpot to be managed, make sure you add our [HubSpot inbox email address](hello-1@posthoginc.hs-inbox.com) to your group as a member.
+In addition to hey@posthog.com and sales@posthog.com, we sometimes create special one-off email addresses to use for specific groups, such as for an event or promotion. If you create a Google group and you want messages to flow into HubSpot to be managed, make sure you add our [HubSpot inbox email address](mailto:hello-1@posthoginc.hs-inbox.com) to your group as a member.
 
 ### New PostHog signups
 
@@ -100,7 +100,7 @@ The process is fairly straightforward. A couple of points to note:
 
 ### Billing
 
-Once a customer is ready to proceed, you should create a payment link in Stripe and generating a license key for them. See instructions on how to do this on the [Billing](/handbook/growth/billing) page. Paolo takes care of these right now. 
+Once a customer is ready to proceed, you should create a payment link in Stripe and generating a license key for them. See instructions on how to do this on the [Billing](/handbook/growth/sales/billing) page. Paolo takes care of these right now. 
 
 ## All done - now what?
 
