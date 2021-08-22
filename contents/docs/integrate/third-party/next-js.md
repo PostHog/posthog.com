@@ -21,7 +21,7 @@ To follow this tutorial along, you need to:
 1. Have [deployed PostHog](/docs/deployment).
 2. Have a running Next.js application
 
-### Setup and tracking page views
+### Setup And Tracking Page Views
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
