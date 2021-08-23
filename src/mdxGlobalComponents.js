@@ -4,6 +4,7 @@ import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
 import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
+import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
@@ -57,6 +58,8 @@ import { Roadmap } from './components/LandingPage/Roadmap'
 import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
+import { Link } from './components/Link'
+import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
@@ -100,6 +103,7 @@ export const shortcodes = {
     MethodTags,
     AllTheFeaturesCloud,
     AnchorScrollNavbar,
+    AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
@@ -153,6 +157,8 @@ export const shortcodes = {
     SocialProof,
     Tutorials,
     LibraryStats,
+    Link,
+    MainNav,
     MdxAnchorHeaders,
     NewsletterForm,
     NotFoundPage,

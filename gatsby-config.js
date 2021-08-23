@@ -22,7 +22,7 @@ module.exports = {
                 queries: {
                     xs: '(max-width: 390px)',
                     sm: '(max-width: 720px)',
-                    md: '(max-width: 1024px)',
+                    md: '(max-width: 1023px)',
                     lg: '(max-width: 1279px)',
                     xl: '(max-width: 1535px)',
                 },
@@ -70,6 +70,13 @@ module.exports = {
             options: {
                 name: `sidebars`,
                 path: `${__dirname}/src/sidebars`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `navs`,
+                path: `${__dirname}/src/navs`,
             },
         },
         `gatsby-transformer-gitinfo`,

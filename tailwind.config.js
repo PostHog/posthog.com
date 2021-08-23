@@ -44,8 +44,11 @@ module.exports = {
     theme: {
         rotate: {
             '-31': '-31deg',
+            45: '45deg',
+            '-45': '-45deg',
         },
         screens: {
+            xs: '482px',
             sm: '640px',
             // => @media (min-width: 640px) { ... }
 
@@ -89,6 +92,11 @@ module.exports = {
             yellow: '#F7A501',
             footer: '#08042f',
             pink: '#A970DC',
+            transparent: 'transparent',
+            'dark-yellow': '#DC9300',
+            'light-yellow': '#F1A82C',
+            'almost-black': '#151515',
+            tan: '#EEEFE9',
         }),
         extend: {
             fontFamily: {
@@ -132,6 +140,10 @@ module.exports = {
                 footer: '#08042f',
                 pink: '#A970DC',
                 'light-purple': '#A393B0',
+                'dark-yellow': '#DC9300',
+                'light-yellow': '#F1A82C',
+                'almost-black': '#151515',
+                tan: '#EEEFE9',
             },
             minHeight: {
                 780: '780px',
