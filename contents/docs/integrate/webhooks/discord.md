@@ -11,7 +11,7 @@ showTitle: true
 1. Select 'Integerations' option from the left navigation pane. 
 1. If Creating Webhook for first time, click "Create Webhook" button. 
 1. If you have other webhooks, click "View Webhooks" and now click "New Webhook". 
-1. Give any name you prefer(say PostHog). 
+1. Give any name you prefer (say PostHog). 
 1. Your preferred channel would be appearing in 'Channel' option, If not select you preferred channel from drop-down menu.
 1. Click "Copy Webhook URL" button to copy webhook into clipboard.  
 
