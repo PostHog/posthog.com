@@ -22,7 +22,7 @@
                                 "title": "Deploy via",
                                 "link": {
                                     "title": "View all (13)",
-                                    "url": "https://posthog.com/docs/self-host"
+                                    "url": "/docs/self-host"
                                 },
                                 "items": [
                                     {
