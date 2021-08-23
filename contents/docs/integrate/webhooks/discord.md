@@ -22,7 +22,7 @@ It would look something like this.
 
 For more information see the [Discord webhook docs](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 
-## 2. Setup Webhook in PostHog
+## 2. Setup webhook in PostHog
 
 1. Copy the Webhook URL into the PostHog Setup page:
 
@@ -32,7 +32,7 @@ For more information see the [Discord webhook docs](https://support.discord.com/
 
 ## 3. Add to Action
 
-For each action that should be posted to Discord, select "Post to webhook when this action is triggered":
+For each Action that should be posted to Discord, select "Post to webhook when this action is triggered":
 
 ![PostHog Edit Action](../../../images/post-action-slack.png)
 

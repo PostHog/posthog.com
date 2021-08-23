@@ -16,7 +16,7 @@ showTitle: true
 
 [See the Microsoft Teams documentation for more info](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel).
 
-## 2. Setup Webhook in PostHog
+## 2. Setup webhook in PostHog
 
 Copy the Webhook URL into the PostHog Setup page:
 
@@ -24,7 +24,7 @@ Copy the Webhook URL into the PostHog Setup page:
 
 ## 3. Add to Action
 
-For each action that should be posted to Teams, select "Post to webhook when this action is triggered":
+For each Action that should be posted to Teams, select "Post to webhook when this action is triggered":
 
 ![PostHog Edit Action](../../../images/post-action-slack.png)
 

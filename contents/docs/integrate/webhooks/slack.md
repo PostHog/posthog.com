@@ -18,7 +18,7 @@ Go to the 'Incoming Webhooks' page for your newly-created app and toggle 'Activa
 
 ![image](https://user-images.githubusercontent.com/53387/78574881-ec801d00-782a-11ea-9b87-8a40e49dd912.png)
 
-## 3. Setup Webhook in PostHog
+## 3. Setup webhook in PostHog
 Copy the Webhook URL into the PostHog Setup page:
 
 ![PostHog Add Webhook](../../../images/add-webhook.png)
