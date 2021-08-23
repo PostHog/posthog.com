@@ -24,9 +24,10 @@ jobs:
                   python -m pip install -U pip
                   python -m pip install git+https://github.com/yakkomajuri/codespell.git
 
-            - name: Install requests with pip
-              run: |
-                  python -m pip install requests
+            # Replaced by JS checks (remove when sure JS checks are working)
+            # - name: Install requests with pip
+            #   run: |
+            #       python -m pip install requests
 
             - name: Configure Git
               run: |
@@ -34,14 +35,15 @@ jobs:
                   git config user.name PostHog Bot
                   git config user.email hey@posthog.com
 
-            - name: Add safe redirects
-              if: ${{ github.base_ref == 'master' }}
-              run: |
-                  git diff ${{ github.base_ref }} ${{ github.head_ref }} > pr_diff
-                  python3 ./scripts/safe_rename.py
-                  rm pr_diff
-                  git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
+            # Replaced by JS checks (remove when sure JS checks are working)
+            # - name: Add safe redirects
+            #   if: ${{ github.base_ref == 'master' }}
+            #   run: |
+            #       git diff ${{ github.base_ref }} ${{ github.head_ref }} > pr_diff
+            #       python3 ./scripts/safe_rename.py
+            #       rm pr_diff
+            #       git add .
+            #       [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
 
             - name: Fix typos
               run: |
@@ -79,3 +81,6 @@ jobs:
                   rm pr_diff
                   git add .
                   [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects (JS)"
+            - name: Push changes
+              run: |
+                  git push
