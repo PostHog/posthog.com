@@ -100,9 +100,9 @@ module.exports = {
         }),
         extend: {
             fontFamily: {
-                serif: ['Matter SQ', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
-                    'Matter SQ',
+                    'MatterVF',
                     '-apple-system',
                     'BlinkMacSystemFont',
                     'avenir next',
@@ -116,8 +116,8 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
-                button: ['Matter SQ', 'sans-serif'],
-                nav: ['Matter SQ', 'sans-serif'],
+                button: ['MatterVF', 'sans-serif'],
+                nav: ['MatterVF', 'sans-serif'],
             },
             fontSize: {
                 '2xs': '0.65rem',
