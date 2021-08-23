@@ -5,6 +5,7 @@ showTitle: true
 ---
 
 > For message formatting instructions, see [this dedicated page](/docs/integrate/webhooks/message-formatting).
+
 ## 1. Create app
 Go to the [Slack page to create apps](https://api.slack.com/apps?new_app=1) and create a new app. Call it "PostHog" and connect it to the workspace of your choice.
 
