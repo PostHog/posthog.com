@@ -5,7 +5,7 @@ on:
 
 jobs:
     standard_checks:
-        name: Standard Checks
+        name: Spelling
         runs-on: ubuntu-latest
         if: github.event.pull_request.head.repo.full_name == github.repository
 
@@ -56,7 +56,7 @@ jobs:
                   git push
 
     js_checks:
-        name: JS Checks
+        name: Safe Redirects
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
