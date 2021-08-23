@@ -9,8 +9,8 @@ showTitle: true
 ## 1. Create an incoming webhook in Discord 
 
 1. Navigate to the channel where you want to add the webhook and select the 'Edit Channel' option from left navigation pane. 
-1. Select the 'Integerations' option from the left navigation pane. 
-1. If creating a webhook for first time, click the "Create Webhook" button. 
+1. Select the 'Integrations' option from the left navigation pane. 
+1. If creating a webhook for the first time, click the "Create Webhook" button. 
 1. If you have other webhooks, click "View Webhooks" and now click "New Webhook". 
 1. Give the webhook any name you prefer (say PostHog). 
 1. Select the channel where the message should be posted from the drop-down.
