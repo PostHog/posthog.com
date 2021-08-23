@@ -29,10 +29,8 @@ export const ProductHero = ({
             <div className="mt-[180%] sm:mt-[54%] xl:mt-[37.5%]">
                 <div className="flex justify-center w-11/12 mx-auto pb-8 pt-12 flex-col relative z-10 text-center">
                     <div className="max-w-full hero-headline mt-4">
-                        <div className="font-osiris lowercase text-base mb-0 text-white text-opacity-75">
-                            {preTitle}
-                        </div>
-                        <h1 className="text-white leading-none my-4 font-osiris lowercase font-normal">
+                        <div className="text-base mb-0 text-white text-opacity-75">{preTitle}</div>
+                        <h1 className="text-white leading-none my-4">
                             <span className="text-5xl">{title}</span>
                         </h1>
                         <p className="text-baby-blue text-base max-w-3xl mx-auto">{tagline}</p>

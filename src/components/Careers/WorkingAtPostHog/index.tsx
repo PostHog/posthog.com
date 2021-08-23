@@ -22,7 +22,7 @@ const Quote = ({ image, name, position, details, className = '' }: QuoteProps) =
         <div className={classList}>
             <img src={image} className="max-w-full w-36 h-auto mx-auto" alt={name} />
 
-            <header className="text-white text-lg mt-4">{name}</header>
+            <header className="text-white text-lg mt-4 font-bold">{name}</header>
             <span className="text-white text-opacity-40 block mt-1">{position}</span>
             <p className="mt-1 max-w-lg mx-auto">{details}</p>
         </div>

@@ -12,7 +12,7 @@ export const NewsletterForm = ({
     compact?: boolean
     bgColor?: string
     className?: string
-}) => {
+}): JSX.Element => {
     const [email, setEmail] = useState('')
     const classList = mergeClassList(
         'rounded-lg flex justify-between flex-col lg:flex-row py-6 px-6 md:px-12 relative z-10 items-center justify-between',
@@ -20,11 +20,11 @@ export const NewsletterForm = ({
     )
 
     return compact ? (
-        <div className="w-full mx-auto my-24 text-center">
+        <div className="w-full mx-auto my-12 text-center">
             <div className="bg-neon inline-flex mx-auto h-full p-1 rounded">
                 <div className={classList}>
                     <img src={checkDark} alt="sign up for mailing list" className="block lg:mr-3 h-8 mb-0" />
-                    <span className="mt-4 lg:mt-0 font-bold flex-grow text-lg md:text-sm">
+                    <span className="mt-2 lg:mt-0 font-bold flex-grow text-lg md:text-sm lg:text-left">
                         Yes, I'd love to receive PostHog updates in my inbox at
                     </span>
                     <form
@@ -32,14 +32,14 @@ export const NewsletterForm = ({
                         method="post"
                         id="mc-embedded-subscribe-form"
                         name="mc-embedded-subscribe-form"
-                        className="validate flex flex-col lg:flex-row items-center mb-0"
+                        className="validate w-full flex flex-col lg:flex-row items-center mb-0"
                         target="_blank"
                         noValidate
                     >
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full p-2 bg-transparent border-b-2 border-gray-600 mt-8 lg:mt-0 lg:mx-2"
+                            className="block w-full p-2 bg-transparent border-b-2 border-gray-600 mt-2 lg:mt-0 lg:mx-2 text-black"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"
@@ -57,7 +57,7 @@ export const NewsletterForm = ({
                         </div>
                         <input
                             type="submit"
-                            className="button-primary mt-8 lg:mt-0 border-none cursor-pointer ml-1 px-3 py-2 rounded"
+                            className="button-primary mt-2 lg:mt-0 border-none cursor-pointer ml-1 px-3 py-2 rounded"
                             value="Subscribe"
                         />
                     </form>
@@ -122,7 +122,7 @@ export const NewsletterForm = ({
                                         type="custom"
                                         icon="check"
                                         width="full"
-                                        className="text-white font-osiris border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"
+                                        className="text-white border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"
                                         submit={true}
                                     >
                                         Join the List

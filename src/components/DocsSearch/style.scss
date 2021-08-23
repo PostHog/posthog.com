@@ -83,7 +83,7 @@ override external docsearch css file*/
 
     /* Title (eg. Bootstrap CDN) */
     .algolia-autocomplete .algolia-docsearch-suggestion--title {
-        font-weight: bold;
+        font-variation-settings: 'wght' 800;
         color: black;
     }
 
@@ -109,40 +109,38 @@ override external docsearch css file*/
 }
 
 #docs-search-container.dark {
-    @media screen and (min-width: 1080px) {
-        .algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
-            color: gray;
-        }
+    .algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
+        color: gray;
+    }
 
-        /* Title (eg. Bootstrap CDN) */
-        .algolia-autocomplete .algolia-docsearch-suggestion--title {
-            font-weight: bold;
-            color: black;
-        }
+    /* Title (eg. Bootstrap CDN) */
+    .algolia-autocomplete .algolia-docsearch-suggestion--title {
+        font-variation-settings: 'wght' 800;
+        color: black;
+    }
 
-        /* Description description (eg. Bootstrap currently works...) */
-        .algolia-autocomplete .algolia-docsearch-suggestion--text {
-            font-size: 0.8rem;
-            color: gray;
-        }
+    /* Description description (eg. Bootstrap currently works...) */
+    .algolia-autocomplete .algolia-docsearch-suggestion--text {
+        font-size: 0.8rem;
+        color: gray;
+    }
 
-        /* Highlighted text */
-        .algolia-autocomplete .algolia-docsearch-suggestion--highlight {
-            color: blue;
-        }
+    /* Highlighted text */
+    .algolia-autocomplete .algolia-docsearch-suggestion--highlight {
+        color: blue;
+    }
 
-        #doc-search {
-            background-color: #3d3f41;
-            color: gray;
-        }
+    #doc-search {
+        background-color: #3d3f41;
+        color: gray;
+    }
 
-        .docSearchWrapper {
-            background-color: #3d3f41;
-        }
+    .docSearchWrapper {
+        background-color: #3d3f41;
+    }
 
-        svg,
-        input {
-            color: rgb(221, 221, 221) !important;
-        }
+    svg,
+    input {
+        color: rgb(221, 221, 221) !important;
     }
 }

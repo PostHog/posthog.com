@@ -20,15 +20,15 @@ Go to the 'Incoming Webhooks' page for your newly-created app and toggle 'Activa
 ## 3. Setup Webhook in PostHog
 Copy the Webhook URL into the PostHog Setup page:
 
-![PostHog Add Webhook](../../images/add-webhook.png)
+![PostHog Add Webhook](../../../images/add-webhook.png)
 
 ## 4. Add to Action
 
 For each action that should be posted to Slack, select "Post to Slack/Teams when this action is triggered":
 
-![PostHog Edit Action](../../images/post-action-slack.png)
+![PostHog Edit Action](../../../images/post-action-slack.png)
 
 ## 5. Celebrate!
 
-![Slack Message](../../images/slack-message.png)
+![Slack Message](../../../images/slack-message.png)
 

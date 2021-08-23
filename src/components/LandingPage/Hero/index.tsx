@@ -26,15 +26,15 @@ export const Hero = () => {
             </div>
             <div className="flex justify-center w-11/12 mx-auto mb-8 pt-12 flex-col relative z-10">
                 <div className="max-w-full hero-headline mt-4">
-                    <h1 className="text-white leading-tight mb-4">
-                        The <span className="relative open-source">platform</span> for
+                    <h1 className="text-white leading-none mb-4 text-5xl">
+                        Host your own
                         <br />
-                        <span className="text-5xl">building better products</span>
+                        product analytics suite
                     </h1>
                     <p className="text-baby-blue text-base">
-                        Analytics with autocapture, session recordings, feature flags, heatmaps and more.
+                        Enable your entire company to analyze user behavior.
                         <br />
-                        In a single product you can host yourself.
+                        Eliminate repetitive SQL requests.
                     </p>
                 </div>
 

@@ -8,10 +8,11 @@ export const Features = () => {
     return (
         <div className="lp-features text-white text-center pt-4">
             <div className="w-11/12 max-w-4xl mx-auto relative">
-                <h2>A single platform that does it all</h2>
+                <h2>Everything product-led teams need in one place</h2>
                 <p className="opacity-60 mt-1 text-center mb-12 mx-auto lg:w-9/12 text-base">
-                    Until now, you'd need multiple services to do all this. Plus only PostHog lets you keep customer
-                    data on your own infrastructure.
+                    One platform for analytics, session recording and feature flags.
+                    <br />
+                    Understand what users are doing, understand why, and roll out changes safely.
                 </p>
 
                 <div className="grid platform-columns">
@@ -26,7 +27,7 @@ export const Features = () => {
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
-                            <h4 className="font-osiris font-normal lowercase">Analytics</h4>
+                            <h4>Analytics</h4>
                             <ul className="list-none px-4">
                                 <li>
                                     <figure>
@@ -120,7 +121,7 @@ export const Features = () => {
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
-                            <h4 className="font-osiris font-normal lowercase">Insights</h4>
+                            <h4>Insights</h4>
                             <ul className="list-none px-4">
                                 <li>
                                     <figure>
@@ -182,7 +183,7 @@ export const Features = () => {
                             />
                         </figure>
                         <div className="mb-8 lg:mb-0">
-                            <h4 className="font-osiris font-normal lowercase">Platform</h4>
+                            <h4>Platform</h4>
                             <ul className="list-none px-4">
                                 <li>
                                     <figure>
@@ -226,7 +227,7 @@ export const Features = () => {
                                             </defs>
                                         </svg>
                                     </figure>
-                                    <span>Plugins library</span>
+                                    <span>Plugin Library</span>
                                 </li>
                                 <li>
                                     <figure>

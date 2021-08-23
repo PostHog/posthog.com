@@ -32,7 +32,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 - [ ] Choose the last day of the month to make payments for ongoing work, else choose something appropriate for a short term contract
 - [ ] Select a notice period of 30 days 
 - [ ] Select for the contractor to upload necessary compliance documents
-- [ ] elect for the contractor to be potentially allocated equity in the future (if this has been agreed)
+- [ ] Select for the contractor to be potentially allocated equity in the future (if this has been agreed)
 - [ ] Under 'Other Specifics' add the following as a special clause: _Contractor agrees to comply with any rules, policies and procedures set out in the Company Handbook, a copy of which is available on the Client's website. To the extent that there is any conflict between the terms of this Agreement and the Company Handbook, the terms which are more favorable to the Contractor shall prevail._
 
 ## The week before they join
@@ -114,6 +114,12 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) - get them to [connect their inbox](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails) <br />
 <input type="checkbox"/>  Orbit (https://orbit.love/) for community management<br />
 <input type="checkbox"/>  Any relevant banking or accounting software (very unlikely) <br />
+
+#### Marketing
+
+<input type="checkbox"/>  Google Analytics and Google Search Console <br />
+<input type="checkbox"/>  Any social media platforms we have a presence on <br />
+<input type="checkbox"/>  Any other third party analytics tools we use (e.g. HootSuite, RivalIQ, etc.) <br />
 
 ## Tools we use
 

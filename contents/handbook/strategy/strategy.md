@@ -142,7 +142,7 @@ There are a number of reasons to focus on these types of products:
 5. We need analysis to be fast to keep pace with our growing business
 
 
-### First Milestone (Now until Friday 6th Aug)
+### First Milestone (Now until Early August)
 
 In order to achieve product market fit with this segment we need to start by solving a limited number of problems exceptionally well for a small number of customers (5) and then expand.
 
@@ -163,10 +163,118 @@ These goals and key results are suggestions for now, teams across the company sh
     *   **Our customers have a rapid and reliable experience**
         *   Key results, for example: P95 end-to-end query time for funnels &lt; 3 seconds, no usability bugs filed
 
-**Once Sentence Version**
+**One Sentence Version**
 
 To get 5 reference customers in the controlled data / growth product segment we need to nail funnels.
 
 **Two Word Version**
 
 “Nail Funnels”
+
+### Milestone 2 (Early August Onwards)
+
+After nailing funnels, our primary focus should transition to _Diagnosing Causes_, since our customers will now be able to understand when problems are happening with their nailed funnels but to address these issues they must go one step deeper and understand why they are occurring.
+
+In parallel we should spin-up evergreen investments around growth and our core platform (Performance, Reliability and Extensibility) to ensure we are reaching as many organizations as possible (increasing the number of successful products in the world) and so we don’t lose trust with existing users due to issues underpinning our platform.
+
+**One Sentence Version**
+Nailing funnels means people will find problems with their products, next we need to enable them to _Diagnose Causes_ so they can fix these problems and make their product successful.
+
+**Two Word Version**
+Nail Diagnosis
+
+## Why should we focus on Diagnosing Causes?
+
+
+* Our current focus on funnels is generating significant demand from users for going deeper, to understand why people are and are not successful (we’re seeing a number of customer requests in this direction)
+* We currently have a number of tools in our suite (e.g. sessions, trends, paths) that can be evolved and tightly integrated to enable our users to go deeper and understand why issues are occurring
+* We have seen demand for experimentation capabilities, but the value of experiments are heavily constrained by the quality of the hypothesis people can generate from diagnosing causes
+
+
+## What are the needs of our target audience?
+
+At a very high level these are the core needs to solve for and some examples of what that might look like in practice.
+
+
+<table>
+  <tr>
+   <td><strong>Priority</strong>
+   </td>
+   <td><strong>Description of Need</strong>
+   </td>
+   <td><strong>Current progress</strong>
+   </td>
+   <td><strong>Unique ability to execute</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>P0
+   </td>
+   <td>Understand what users were doing when they dropped-off <em>(e.g. reliable session recording and playback, seamless to find the right sessions, etc.)</em>
+   </td>
+   <td>Mid
+   </td>
+   <td>Very High
+   </td>
+  </tr>
+  <tr>
+   <td>P0
+   </td>
+   <td>Understanding what successful and unsuccessful users have in common
+<p>
+<em>(e.g. correlation of events and user properties with success and failure)</em></p>
+   </td>
+   <td>Low
+   </td>
+   <td>High
+   </td>
+  </tr>
+  <tr>
+   <td>P1
+   </td>
+   <td>Understand what events might have caused the user to drop-off
+<p>
+<em>(e.g. reviewing prioritized events from around the time of drop-off)</em></p>
+   </td>
+   <td>Mid
+   </td>
+   <td>Mid
+   </td>
+  </tr>
+  <tr>
+   <td>P1
+   </td>
+   <td>Understand what path people took before and after they were successful or unsuccessful
+<p>
+<em>(e.g. extended and enhanced paths capability)</em></p>
+   </td>
+   <td>Mid
+   </td>
+   <td>High
+   </td>
+  </tr>
+  <tr>
+   <td>P1
+   </td>
+   <td>Backtest hypothesis to build supporting evidence
+<p>
+<em>(e.g. ad-hoc trends queries leverage insights found)</em></p>
+   </td>
+   <td>Mid
+   </td>
+   <td>High
+   </td>
+  </tr>
+  <tr>
+   <td>P2
+   </td>
+   <td>Collect all evidence together into shareable hypotheses
+   </td>
+   <td>Low
+   </td>
+   <td>Mid
+   </td>
+  </tr>
+</table>
+
+We should use this grid as a starting point to prioritize building out detailed problems to solve for users.

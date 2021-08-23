@@ -9,7 +9,7 @@ export const Section = ({
     className?: string
     width?: string
     children?: React.ReactNode
-}) => {
+}): JSX.Element => {
     const baseClasses = `w-11/12 max-w-${width} mx-auto`
     const classList = mergeClassList(baseClasses, className)
 

@@ -25,22 +25,11 @@ function SidebarContents() {
         <StaticQuery
             query={graphql`
                 query sidebarContentQuery {
-                    allMarkdownRemark(sort: { order: ASC, fields: [fields___slug] }) {
+                    allMdx(sort: { order: ASC, fields: [fields___slug] }) {
                         nodes {
                             fields {
                                 slug
                             }
-                            id
-                            frontmatter {
-                                title
-                                sidebarTitle
-                                tags
-                            }
-                        }
-                    }
-                    allMdx(sort: { order: ASC, fields: slug }) {
-                        nodes {
-                            slug
                             id
                             frontmatter {
                                 title
@@ -61,9 +50,8 @@ function SidebarContents() {
                 }
             `}
             render={(data) => {
-                const parsedMdxData = data.allMdx.nodes.map((node) => ({ ...node, fields: { slug: `/${node.slug}` } }))
                 const entries = data.allSidebarsJson.nodes
-                const pages = [...data.allMarkdownRemark.nodes, ...parsedMdxData]
+                const pages = data.allMdx.nodes
                 let dir = []
                 let tree = null
                 let defaultOpenKeys = []
@@ -112,7 +100,6 @@ function SidebarContents() {
                 const getPage = (path, parent) => {
                     for (let item in pages) {
                         if (pages[item].fields.slug === path) {
-                            console.log('pages[item].frontmatter', pages[item].frontmatter)
                             const node = {
                                 path: pages[item].fields.slug,
                                 key: pages[item].id,

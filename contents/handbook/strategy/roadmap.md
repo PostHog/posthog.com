@@ -4,37 +4,47 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our mission is to increase the number of successful products in the world. 
+Our mission is to 
 
-Our roadmap for 2021 will do three things:
-1. Reach parity with other product analytics tools, but better
-2. Ensure we have the best developer platform for event-based analytics
-3. Make it easy to deploy and maintain a scalable version of PostHog, for free
+> "Increase the number of successful products in the world."
 
-# 1. Reach parity
+Our vision for 2023 is:
 
-PostHog went from 0 to a fully-featured analytics platform in an incredibly short period of time. Realistically, that did mean we had to cut some corners when it came to stability, usability and depth of analytics you could do with PostHog.
+> “Everyone building a product has a clear path to making it successful without losing control of their data.”
 
-In 2021, we're going to make sure that PostHog has all the features you love from other platforms. That way, self-hosting your product analytics doesn't need to be a compromise.
+Our roadmap for the second half of 2021 will do three things:
+1. Diagnosing causes
+2. Collaboration
+3. Easy to deploy, maintain, and extend
+4. Experimentation
 
-We're also putting more focus into usability and UX, especially for less technical users.
+# 1. Diagnosing Causes
 
-# 2. Best developer platform
+We've already shipped an incredibly powerful funnels product this year. However, as soon as you can see people dropping off in your funnel all you want to know is "why?". 
 
-Developers like using PostHog for many reasons. We're open-source at our core, which has helped us gain trust and adoption from the developer community.
-It's easy to debug, you can self-host and PostHog is now starting to become extensible.
+We aim to build a suite of tools that enable you two answer ths question of why through multiple methods:
+* Individual Qualitative: Observing session recordings and surveying users
+* Aggregated Qualitiative: Combining together hundreds of sessions to review behaviors of successful and unsuccessful users at scale
+* Quantitative: Analyzing patterns of successful and unsuccessful users to highlight clear opportunities to improve your product
 
-This year we're going to lean into that last item. We've kept plugins relatively quiet so far, but we believe plugins will be what will make PostHog the default choice for developers.
+# 2. Collaboration
 
-We see a ton of usecases, like integrating PostHog into an existing data warehouse, pulling in stats from other APIs and pushing data into other services.
+As larger teams and more complex organizations grow on PostHog, they need to work together to share insights and make decisions. Our focus on collaobration is key, not only to improve the quality and quantity of insights every user gets from PostHog, but also to ensure that users of PostHog get access to **only** the sensitive data which they **need** to access, ensuring user privacy.
+
+Collaboration is also key to ensure all team members (including those less-technical) can access, interpret, and share insights about their product.
+
+# 3. Easy to deploy, scale, and extend
+
+We now offer ClickHouse to everyone as a way to super-scale your PostHog deployment - and unlock a ton of new more complex analytics capabilities (e.g. breakdowns in funnels). We intend to continue to focus on making PostHog easier to deploy and maintain for everyone hosting themselves. 
+
+We are continually investing in performance an reliability to ensure that PostHog can scale further and further without diminishing performance for our users.
+
+We see a ton of usecases, like integrating PostHog into an existing data warehouse, pulling in stats from other APIs, and pushing data into other services.
 
 There will be work on three main fronts:
 - Building plugins ourselves
 - Giving our community the tools to create their own
 - Promote adoption of these plugins
+# 4. Experimentation
 
-# 3. Make it easy to deploy a scalable version of PostHog, free
-
-When we started PostHog we went with Postgres as our backend. This was a great choice early on as it allowed virtually anyone to deploy PostHog on any platform. Over time, however, the limitations of using Postgres for analytics became obvious, and we spent a chunk of 2020 converting our cloud offering to use ClickHouse in the backend.
-
-The next step is offering this super scalable version of PostHog to people who want to self host. We'll need to build tooling, metrics and monitoring to help people who need the power of ClickHouse, but want to maintain control over their data.
+In order to validate the impact of any change you make, its key to be able to measure the effects on the metrics you care about. We intend aim to provide the foundational tools you need to run an A/B or multi-variate test and get a feel for how confident you can be about the results being positive or negative, without overcomplicating the experience with lots of raw and complex statistical analysis techniques.

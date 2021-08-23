@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* this overrides Tailwind's built-in font-weight classes to work with our variable font */
+@layer utilities {
+    .font-thin {
+        font-variation-settings: 'wght' 100;
+    }
+    .font-extralight {
+        font-variation-settings: 'wght' 200;
+    }
+    .font-light {
+        font-variation-settings: 'wght' 300;
+    }
+    .font-normal {
+        font-variation-settings: 'wght' 475;
+    }
+    .font-medium {
+        font-variation-settings: 'wght' 500;
+    }
+    .font-semibold {
+        font-variation-settings: 'wght' 600;
+    }
+    .font-bold {
+        font-variation-settings: 'wght' 800;
+    }
+    .font-extrabold {
+        font-variation-settings: 'wght' 850;
+    }
+    .font-black {
+        font-variation-settings: 'wght' 900;
+    }
+}
+
 @import 'workable-overrides.css';
 @import 'backgrounds.css';
 @import 'buttons.scss';
@@ -24,10 +55,6 @@ ol {
 
 ul {
     list-style: disc;
-}
-
-.font-nav {
-    @apply lowercase;
 }
 
 .bg-primary-dark {

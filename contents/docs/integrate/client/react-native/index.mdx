@@ -1,0 +1,130 @@
+---
+title: React Native Library
+sidebarTitle: React Native
+sidebar: Docs
+showTitle: true
+---
+
+[Click here](https://github.com/PostHog/posthog-react-native) for the PostHog React Native library. This is an optional library you can install if you're working with React Native. 
+
+This page of the Docs refers specifically to the Official PostHog React Native Library to capture and send events to any PostHog instance (including posthog.com).
+
+This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, 
+making it perfect to use in any part of your mobile app.
+
+## Installation
+
+import ReactNativeInstall from './snippets/install.mdx'
+
+<ReactNativeInstall />
+
+## Configuration
+
+import ReactNativeConfigure from './snippets/configure.mdx'
+
+<ReactNativeConfigure />
+
+## Making calls
+
+### Identify
+
+import ReactNativeIdentify from './snippets/identify.mdx'
+
+<ReactNativeIdentify />
+
+### Capture
+
+import ReactNativeCapture from './snippets/capture.mdx'
+
+<ReactNativeCapture />
+
+#### Setting user properties via an event
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set
+
+**Example**
+
+```js
+PostHog.capture('some event', { $set: { userProperty: 'value' } });
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+
+##### $set_once
+
+**Example**
+
+```js
+PostHog.capture('some event', { $set_once: { userProperty: 'value' } });
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+
+### Flush
+
+You can set the number of events in the configuration that should queue before flushing. 
+Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
+
+You can also configure the flush interval. By default we flush all events after `30` seconds,
+no matter how many events have gathered.
+
+You can also manually flush the queue, like so:
+
+```javascript
+import PostHog from 'posthog-react-native'
+
+PostHog.flush()
+```
+
+### Reset
+
+To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
+
+```javascript
+import PostHog from 'posthog-react-native'
+
+PostHog.reset()
+```
+
+### Opt In/Out
+
+To Opt In/Out of tracking, use the following calls:
+
+```javascript
+import PostHog from 'posthog-react-native'
+
+PostHog.enable() // opt in
+PostHog.disable() // opt out
+```
+
+This is the suggested way to prevent capturing data from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in. 
+
+If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
+
+### Sending screen views
+
+With `recordScreenViews`, PostHog will try to record all screen changes automatically.
+
+If you want to manually send a new screen capture event, use the `screen` function.
+
+This function requires a `name`. You may also pass in an optional `properties` object.
+
+```javascript
+import PostHog from 'posthog-react-native'
+
+PostHog.screen("Dashboard", {
+    background: 'blue',
+    hero: 'superhog'
+})
+```
+
+## Thank You
+
+This library is largely based on the `analytics-react-native` package.

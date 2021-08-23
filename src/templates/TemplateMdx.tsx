@@ -19,9 +19,14 @@ import { findAuthor } from 'lib/utils'
 interface MdxQueryData {
     postData: {
         id: string
-        slug: string
-        body: string
+        body: any
         excerpt: string
+        fields: {
+            slug: string
+        }
+        parent: {
+            relativePath: string
+        }
         frontmatter: {
             date: string
             title: string
@@ -31,6 +36,7 @@ interface MdxQueryData {
             tags?: string[]
             hideAnchor: boolean
             description: string
+            featuredImageType?: string
             featuredImage?: {
                 publicURL?: string
             }
@@ -67,7 +73,10 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
     // const { mdx } = data
-    const { frontmatter, body, excerpt, id, slug } = mdx
+    const { frontmatter, parent, body, excerpt, id, fields } = mdx
+    const { slug } = fields
+
+    const filePath = `/${parent?.relativePath}`
 
     const author = findAuthor(authorsData.frontmatter.authors)(frontmatter.author)
 
@@ -92,6 +101,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                 onPostPage={true}
                 blogArticleSlug={blogArticleSlug}
                 pageTitle={frontmatter.title}
+                featuredImageType={frontmatter.featuredImageType}
                 featuredImage={frontmatter.featuredImage?.publicURL}
                 isHomePage={false}
                 isDocsPage={isDocsPage}
@@ -118,9 +128,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
                         </div>
                     </div>
                     {isDocsPage && <DocsPageSurvey />}
-                    {(isDocsPage || isHandbookPage) && (
-                        <DocsFooter filename={`/${addIndex(slug)}.mdx`} title={frontmatter.title} />
-                    )}
+                    {(isDocsPage || isHandbookPage) && <DocsFooter filename={filePath} title={frontmatter.title} />}
                 </div>
             </Layout>
         </div>
@@ -134,9 +142,11 @@ export const query = graphql`
     query MDXQuery($id: String!) {
         postData: mdx(id: { eq: $id }) {
             id
-            slug
             body
             excerpt(pruneLength: 150)
+            fields {
+                slug
+            }
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
                 title
@@ -145,8 +155,15 @@ export const query = graphql`
                 tags
                 hideAnchor
                 description
+                featuredImageType
                 featuredImage {
                     publicURL
+                }
+                author
+            }
+            parent {
+                ... on File {
+                    relativePath
                 }
             }
         }

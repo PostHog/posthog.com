@@ -49,7 +49,7 @@ With Sendgrid you have 2 different configuration options.
 
 1. On sender authentication, select the option to authenticate a domain, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/domain/create](https://app.sendgrid.com/settings/sender_auth/domain/create).
 
-1. Fill out the required details for the domain you wish to configure. We recommend using the default configuration. If you do not use the advanced settings option please be sure to properly configure [DKIM][dkim] and [SPF][spf] records to ensure deliverability.
+1. Fill out the required details for the domain you wish to configure. We recommend using the default configuration. If you do not use the advanced settings option please be sure to properly configure [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail) and [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) records to ensure deliverability.
 
 1. You will receive now a list of DNS records that need to be added to your domain. After adding them, be sure to verify them on Sendgrid. You are now ready to start sending emails.
 
@@ -61,7 +61,7 @@ As an alternative you can do [single sender verification](https://sendgrid.com/d
 
 1. Fill out the form with the required details, see an example below.
 
-![Configuring Sendgrid](../../images/configuring-posthog/sendgrid-2.png)
+![Configuring Sendgrid](../../../images/configuring-posthog/sendgrid-2.png)
 
 1. Validate the email address by clicking on the link you will receive.
 
@@ -71,7 +71,7 @@ After you have set up your sending configuration, you can continue below to set 
 
 1. Set a name for your API key, we recommend using "PostHog", and select the "Restricted Key" option. You will need to enable the "Mail Send" permission as detailed below. Copy the key directly to your environment configuration.
 
-![API Sendgrid](../../images/configuring-posthog/sendgrid-3.png)
+![API Sendgrid](../../../images/configuring-posthog/sendgrid-3.png)
 
 1. With the key you created above, you can now set your environment configuration in PostHog:
     ```yaml
@@ -91,15 +91,15 @@ After you have set up your sending configuration, you can continue below to set 
 
 1. As an additional optional step, we recommend turning off 'open & click tracking' to avoid having weird-looking links and increase deliverability (there's little value in having this data). You can do so by going to [tracking settings](https://app.sendgrid.com/settings/tracking).
 
-![Sendgrid Config](../../images/configuring-posthog/sendgrid-4.png)
+![Sendgrid Config](../../../images/configuring-posthog/sendgrid-4.png)
 
 ## Mailgun
 1. After you have created an account, go to Sending > [Domains](https://app.mailgun.com/app/sending/domains), and click on "Add New Domain".
-1. Enter a domain name that you own. Using a subdomain is recommended (e.g. `m.posthog.com` instead of `posthog.com`). We strongly recommend selecting "Create DKIM Authority" (and using 2048 bits) to prevent spoofing with your domains (read more about [DKIM][dkim]). See sample configuration below:
+1. Enter a domain name that you own. Using a subdomain is recommended (e.g. `m.posthog.com` instead of `posthog.com`). We strongly recommend selecting "Create DKIM Authority" (and using 2048 bits) to prevent spoofing with your domains (read more about [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail)). See sample configuration below:
 
-    ![](../../images/configuring-posthog/mailgun-1.png)
+    ![](../../../images/configuring-posthog/mailgun-1.png)
 
-1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability. If not provided, we also recommend adding the following [SPF](spf) record to prevent email forgery with your domain.
+1. You will now be given instructions to set up certain DNS records in your domain. Please be sure to add **all requested records** to ensure proper email deliverability. If not provided, we also recommend adding the following [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) record to prevent email forgery with your domain.
 
     ```
     TXT @ v=spf1 include:mailgun.org ~all

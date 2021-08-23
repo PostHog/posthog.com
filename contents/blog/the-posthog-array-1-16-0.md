@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Following our largest release to date, we are now back on a more regular release schedule. And, given that scalability was the focus of the previous release, we thought it was time for some fresh new features. 
@@ -95,7 +97,7 @@ We have been working hard to improve our product documentation and had a few big
 
 If you have any suggestions for new tutorials or improvements to our documentation, [do not hesitate to let us know!](https://github.com/PostHog/posthog.com/issues)
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

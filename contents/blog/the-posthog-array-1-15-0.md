@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Hey there! It's been a while...
@@ -89,7 +91,7 @@ As a result, we have now [tagged some good first issues](https://github.com/Post
 
 By submitting a pull request that gets merged for one of these issues (or any other issues on our [main repo](https://github.com/PostHog/posthog)), we will send you some [PostHog merch](https://merch.posthog.com) and you'll be able to count that contribution towards the 4 PRs you need to get the Hacktoberfest shirt.
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

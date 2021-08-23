@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 This week's update brings a React Native integration, time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.
