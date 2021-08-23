@@ -13,7 +13,7 @@ showTitle: true
 1. If you have other webhooks, click "View Webhooks" and now click "New Webhook". 
 1. Give any name you prefer (say PostHog). 
 1. Your preferred channel would be appearing in 'Channel' option, If not select you preferred channel from drop-down menu.
-1. Click "Copy Webhook URL" button to copy webhook into clipboard.  
+1. Click the "Copy Webhook URL" button to copy the webhook URL into the clipboard.  
 
 It would look something like this. 
 
