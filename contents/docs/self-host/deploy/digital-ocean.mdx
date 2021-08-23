@@ -5,6 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+import DOIPAddressSnippet from './snippets/do-ip-address'
+
 ## Why Digital Ocean
 
 [Digital Ocean](https://digitalocean.com) is one of the most well-established Cloud Providers. Compared to AWS, where the amount of options and configuration can be overwhelming, Digital Ocean is generally simpler to use and faster to get running. 
@@ -44,11 +46,7 @@ After deploying PostHog to your Kubernetes cluster you can get the IP to connect
 
 1. Navigate to the IP address of the load balancer created by Kubernetes using your web browser. You can grab this by using the DigitalOcean web console ([networking tab](https://cloud.digitalocean.com/networking/load_balancers)).
 2. If you have `kubectl` installed and configured for the cluster that PostHog is deployed to then run these commands to get your installation location:
-    ```console
-    export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-    echo "Your PostHog IP address is $INGRESS_IP"
-    echo "Visit http://$INGRESS_IP to use PostHog\!"
-    ```
+    <DOIPAddressSnippet />
 
 Congrats, you have a working PostHog instance =)
 
@@ -70,10 +68,7 @@ As above, you can get the IP to connect to one of two ways:
 
 1. Navigate to the IP address of the load balancer created by Kubernetes using your web browser. You can grab this by using the DigitalOcean web console ([networking tab](https://cloud.digitalocean.com/networking/load_balancers)).
 2. If you have `kubectl` installed and configured for the cluster that PostHog is deployed to then run these commands to get your installation location:
-    ```console
-    export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-    echo "Your PostHog IP address is $INGRESS_IP"
-    ```
+    <DOIPAddressSnippet />
 
 #### 2. Set up DNS
 
@@ -136,10 +131,7 @@ You can lookup the external IP address in two ways:
 
 1. Navigate to the IP address of the load balancer created by Kubernetes using your web browser. You can grab this by using the DigitalOcean web console ([networking tab](https://cloud.digitalocean.com/networking/load_balancers)).
 2. If you have `kubectl` installed and configured for the cluster that PostHog is deployed to then run these commands to get your installation location:
-    ```console
-    export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-    echo "Your PostHog IP address is $INGRESS_IP"
-    ```
+    <DOIPAddressSnippet />
 
 ### 4. Set up DNS
 
@@ -160,10 +152,7 @@ web:
 
 After upgrading you can run the following to get the IP to access PostHog.
 
-```console
-export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-echo "Visit http://$INGRESS_IP to use PostHog\!"
-```
+<DOIPAddressSnippet />
 
 ## Upgrading the chart
 
