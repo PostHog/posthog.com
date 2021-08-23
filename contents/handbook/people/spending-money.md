@@ -69,7 +69,7 @@ PostHog will provide you with office equipment. Please note that it remains Post
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
 * If you are in an engineering role, we recommend a Macbook Pro with an Intel processor with 32GB of RAM. The processor selection here is important as we want to ensure that you're able to run all the technologies in our stack and several of them have yet to be adapted on the new Apple architecture. Base processor and storage.
-* If you are in a design or a non-technical role, we recommend a Macbook Pro with an Apple Silicon processor and 16GB of RAM. Base processor and storage.
+* If you are in a design or a non-technical role, we recommend a Macbook Air with an Apple Silicon processor and 16GB of RAM. Base processor and storage.
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
 
