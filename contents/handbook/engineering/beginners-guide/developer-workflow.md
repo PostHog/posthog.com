@@ -23,7 +23,7 @@ you are free to use whatever IDE makes the most sense to you.
     - Use [print()](https://realpython.com/python-print/) as needed for debugging
     - Some developers prefer [Pycharm](https://www.jetbrains.com/pycharm/) for local development
 8. Run backend tests
-    - `bin/tests posthog` runs only posthog tests excluding PostHog Scale tests
+    - `bin/tests posthog` runs only the tests within the `./posthog` directory. Excludes the tests within the `./ee` (PostHog Scale) directory.
     - `./bin/tests ee/clickhouse/queries/test/test_trends.py -k test_active_user_math` for specific tests
 9. Commit changes to git branch
 10. Open PR for review
