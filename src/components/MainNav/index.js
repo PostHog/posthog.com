@@ -51,7 +51,7 @@ export default function MainNav({ expanded }) {
     return (
         (expanded || !breakpoints.md) && (
             <motion.nav
-                className="lg:static absolute lg:w-auto w-full left-0 top-full lg:overflow-visible overflow-hidden"
+                className="lg:static absolute lg:w-auto w-full left-0 top-full lg:overflow-visible overflow-hidden hidden lg:block"
                 variants={breakpoints.md && variants}
                 initial="hidden"
                 animate="shown"
