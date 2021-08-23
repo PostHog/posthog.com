@@ -5,23 +5,23 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you are using Next.js and want to track your application using PostHog this tutorial might help you out. 
+If you are using [Next.js](https://nextjs.org/) and want to track your application using PostHog this tutorial might help you out. 
 
 It will guide you through an example integration of PostHog using Next.js and the [posthog-js library](/docs/integrate/client/js). 
 
-### Is This Tutorial For Me?
+### Is this tutorial for me?
 
 This tutorial is aimed at Next.js users. 
 We are going to look at some minimal example code which should get you started quickly.
 
-### Pre-Requisites
+### Pre-requisites
 
 To follow this tutorial along, you need to:
 
-1. Have [deployed PostHog](/docs/deployment).
+1. Have a [self-hosted instance of PostHog](/docs/self-host) or use [PostHog Cloud](/docs/cloud).
 2. Have a running Next.js application
 
-### Setup And Tracking Page Views
+### Setup and tracking page views
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
@@ -35,7 +35,7 @@ or
 npm install --save posthog-js
 ```
 
-After that we want to initialize the PostHog instance in `pages/_app.js`
+After that, we want to initialize the PostHog instance in `pages/_app.js`
 
 ```jsx
 import { useRouter } from 'next/router';
@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 ```
 
-### Tracking Custom Events
+### Tracking custom events
 
 ```jsx
 const handleOnBuy = () => {
