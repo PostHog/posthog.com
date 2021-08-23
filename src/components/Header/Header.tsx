@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import whiteLogo from '../../images/posthog-logo-white.svg'
@@ -14,16 +14,14 @@ const PrimaryCta = ({ children, className = '' }: { children: any; className?: s
     const classList = `button-primary ${className} border-none px-4 py-2 ml-2 lg:ml-4 mt-4 lg:mt-0 transition-none hover:transition-none text-xs rounded-sm`
 
     return (
-        <li className="leading-none">
-            <button
-                onClick={() => {
-                    window.location.pathname = '/sign-up'
-                }}
-                className={classList}
-            >
-                {children}
-            </button>
-        </li>
+        <button
+            onClick={() => {
+                window.location.pathname = '/sign-up'
+            }}
+            className={classList}
+        >
+            {children}
+        </button>
     )
 }
 
@@ -79,7 +77,7 @@ export const Header = ({
                     <>
                         <MainNav expanded={expanded} />
                         <ul className="hidden lg:flex list-none justify-end items-center mb-0 text-xs p-0 flex-1">
-                            <li>
+                            <li className="leading-none">
                                 <PrimaryCta>
                                     <span>Get Started</span>
                                 </PrimaryCta>
