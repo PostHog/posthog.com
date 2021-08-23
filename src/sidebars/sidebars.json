@@ -94,7 +94,8 @@
         "items": [
             "docs/integrate/webhooks/message-formatting",
             "docs/integrate/webhooks/microsoft-teams",
-            "docs/integrate/webhooks/slack"
+            "docs/integrate/webhooks/slack",
+            "docs/integrate/webhooks/discord"
         ]
     },
     {
