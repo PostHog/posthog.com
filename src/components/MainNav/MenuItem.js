@@ -6,9 +6,8 @@ import Submenu from './Submenu'
 
 export default function MenuItem({ menuItem }) {
     const [hovered, setHovered] = useState(false)
-    const { title, url, sub } = menuItem
+    const { title, url, sub, classes = '' } = menuItem
     const breakpoints = useBreakpoint()
-
     const handleSubClick = () => {
         setHovered(!hovered)
     }
@@ -18,13 +17,13 @@ export default function MenuItem({ menuItem }) {
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="group w-full"
+            className="group whitespace-nowrap"
         >
             <span ref={referenceElement} className="flex justify-between items-center space-x-2">
                 <Link
                     onClick={breakpoints.md && sub && handleSubClick}
                     to={url}
-                    className="lg:opacity-50 opacity-100 group-hover:opacity-100 text-[15px] text-white hover:text-white lg:dark:text-white lg:dark:hover:text-white lg:text-almost-black lg:hover:text-almost-black transition-opacity"
+                    className={`${classes} font-semibold text-[15px] text-almost-black hover:text-almost-black`}
                 >
                     {title}
                 </Link>
@@ -32,14 +31,17 @@ export default function MenuItem({ menuItem }) {
                     (breakpoints.md ? (
                         <Plus
                             render={(icon) => (
-                                <button className="flex-grow flex justify-end" onClick={handleSubClick}>
+                                <button
+                                    className="text-almost-black flex-grow flex justify-end"
+                                    onClick={handleSubClick}
+                                >
                                     {hovered ? <Minus /> : icon}
                                 </button>
                             )}
                             open={hovered}
                         />
                     ) : (
-                        <Chevron className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                        <Chevron className="text-almost-black" />
                     ))}
             </span>
 

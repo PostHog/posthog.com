@@ -4,6 +4,15 @@
             "title": "Product",
             "url": "/product"
         },
+
+        {
+            "title": "Customers",
+            "url": "/customers"
+        },
+        {
+            "title": "Pricing",
+            "url": "/pricing"
+        },
         {
             "title": "Docs",
             "url": "/docs",
@@ -277,16 +286,21 @@
             }
         },
         {
+            "title": "Blog",
+            "url": "/blog"
+        },
+        {
             "title": "Company",
             "url": "/handbook/company/story"
         },
         {
-            "title": "Pricing",
-            "url": "/pricing"
+            "title": "Get Started",
+            "classes": "cta",
+            "url": "/handbook/company/story"
         },
         {
-            "title": "Github",
-            "url": "https://github.com/posthog/posthog"
+            "title": "Login",
+            "url": "/handbook/company/story"
         }
     ]
 }

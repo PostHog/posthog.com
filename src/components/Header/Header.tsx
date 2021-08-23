@@ -46,55 +46,13 @@ export const Header = ({
     const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
-    const logo = (onPostPage || onBlogPage) && websiteTheme === 'light' ? darkLogo : whiteLogo
-    const layoutWidth = onPostPage ? 'w-full' : 'w-11/12 mx-auto'
-    const justify = logoOnly ? 'justify-center' : 'justify-between'
-
     return (
-        <div
-            style={{ zIndex: 1002 }}
-            className={`px-4 header-wrapper primary-navbar py-6 relative z-50 ${
-                transparentBackground ? 'transparent-background' : ''
-            } ${blogArticleSlug ? 'blog-article-header' : ''}`}
-        >
+        <>
             <Sprites />
-            <header
-                className={mergeClassList(
-                    layoutWidth,
-                    justify,
-                    className,
-                    logoOnly && 'opacity-50',
-                    'flex',
-                    'items-center'
-                )}
-            >
-                <div className="lg:flex-1">
-                    <Link id="logo" to="/" className="block">
-                        <img alt="logo" src={logo} />
-                    </Link>
-                </div>
-                {!logoOnly && (
-                    <>
-                        <MainNav expanded={expanded} />
-                        <ul className="hidden lg:flex list-none justify-end items-center mb-0 text-xs p-0 flex-1">
-                            <li className="leading-none">
-                                <PrimaryCta>
-                                    <span>Get Started</span>
-                                </PrimaryCta>
-                            </li>
-                            <li className="leading-none">
-                                <Link
-                                    to="https://app.posthog.com/login"
-                                    className="font-nav opacity-80 hover:opacity-100 px-4 py-2 text-xs dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black"
-                                >
-                                    Login
-                                </Link>
-                            </li>
-                        </ul>
-                        <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
-                    </>
-                )}
+            <header className="relative z-50 p-5">
+                <MainNav expanded={expanded} />
+                <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
             </header>
-        </div>
+        </>
     )
 }
