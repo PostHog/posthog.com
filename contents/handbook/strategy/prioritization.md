@@ -13,7 +13,7 @@ As there is a lot of autonomy at PostHog, it's useful to have a common framework
 
 To achieve this, we will need revenue to be able to re-invest into making a better product.
 
-## Our Vision (for 2023)
+## Our vision (for 2023)
 
 “Everyone building a product has a clear path to making it successful without losing control of their data”
 
