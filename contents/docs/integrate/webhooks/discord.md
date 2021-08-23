@@ -10,7 +10,7 @@ showTitle: true
 1. Navigate to the channel where you want to add the webhook and select 'Edit Channel' option from left navigation pane. 
 1. Select 'Integerations' option from the left navigation pane. 
 1. If Creating Webhook for first time, click "Create Webhook" button. 
-1. If You have other webhooks, click "View Webhooks" and now click "New Webhook". 
+1. If you have other webhooks, click "View Webhooks" and now click "New Webhook". 
 1. Give any name you prefer(say PostHog). 
 1. Your preferred channel would be appearing in 'Channel' option, If not select you preferred channel from drop-down menu.
 1. Click "Copy Webhook URL" button to copy webhook into clipboard.  
