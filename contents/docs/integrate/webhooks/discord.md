@@ -27,7 +27,7 @@ For more information see the [Discord webhook docs](https://support.discord.com/
 
     ![PostHog Add Webhook](../../../images/discord-add-webhook.png)
 
-1. Click "Test & Save" and you should receive a message on discord. 
+1. Click "Test & Save" and you should receive a message on Discord. 
 
 ## 3. Add to Action
 
