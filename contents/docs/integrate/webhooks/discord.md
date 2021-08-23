@@ -25,7 +25,7 @@ It would look something like this.
 
     ![PostHog Add Webhook](../../../images/discord-add-webhook.png)
 
-1. Click "Test & Save" and you should receive message on discord. 
+1. Click "Test & Save" and you should receive a message on discord. 
 
 ## 3. Add to Action
 
