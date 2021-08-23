@@ -17,6 +17,7 @@ export default function SubmenuItem({ item }) {
                 <h2 className="text-lg lg:text-xl font-bold">{title}</h2>
                 {link && (
                     <Link
+                        disablePrefetch
                         to={link.url}
                         className="flex items-center space-x-1 text-light-yellow hover:text-light-yellow"
                     >
@@ -39,7 +40,11 @@ export default function SubmenuItem({ item }) {
                             <div className="flex justify-between items-center">
                                 <h3 className="text-[14px] m-0 font-bold opacity-50">{title}</h3>
                                 {link && (
-                                    <Link className="text-light-yellow hover:text-light-yellow" to={link.url}>
+                                    <Link
+                                        disablePrefetch
+                                        className="text-light-yellow hover:text-light-yellow"
+                                        to={link.url}
+                                    >
                                         {link.title}
                                     </Link>
                                 )}
@@ -57,6 +62,7 @@ export default function SubmenuItem({ item }) {
                                     return (
                                         <li key={index}>
                                             <Link
+                                                disablePrefetch
                                                 className="text-white font-semibold transition-colors hover:text-white p-2 hover:bg-[#6C5085] rounded flex items-center space-x-2 text-[14px]"
                                                 to={url}
                                             >

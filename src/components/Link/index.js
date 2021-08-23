@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 
-export default function Link({ to, children, className = '', onClick, ...other }) {
-    const internal = /^\/(?!\/)/.test(to)
+export default function Link({ to, children, className = '', onClick, disablePrefetch, ...other }) {
+    const internal = !disablePrefetch && /^\/(?!\/)/.test(to)
     return onClick ? (
         <button onClick={onClick} className={className}>
             {children}
