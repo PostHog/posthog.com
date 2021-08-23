@@ -17,6 +17,8 @@ showTitle: true
 
 It would look something like this. 
 
+For more information see the [Discord webhook docs](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
+
 ![Discord Webhook Setup](../../../images/discord-webhook.png)
 
 ## 2. Setup Webhook in PostHog
