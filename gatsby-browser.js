@@ -12,8 +12,32 @@ initKea(false)
 
 export const wrapRootElement = wrapElement
 export const onRouteUpdate = ({ location }) => {
-    const setBodyClass = (className) => (document.body.className = className)
-    const theme = localStorage.getItem('theme')
-    const slug = location.pathname.substring(1)
-    setBodyClass((/^handbook|^docs|^blog/.test(slug) && theme) || 'dark')
+    if (typeof window !== 'undefined') {
+        window.__onThemeChange = function () {}
+        function setTheme(newTheme) {
+            window.__theme = newTheme
+            preferredTheme = newTheme
+            document.body.className = newTheme
+            window.__onThemeChange(newTheme)
+        }
+        var preferredTheme
+        var slug = location.pathname.substring(1)
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
+        darkQuery.addListener(function (e) {
+            window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        })
+        try {
+            preferredTheme =
+                (/^handbook|^docs|^blog/.test(slug) &&
+                    (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
+                'dark'
+        } catch (err) {}
+        window.__setPreferredTheme = function (newTheme) {
+            setTheme(newTheme)
+            try {
+                localStorage.setItem('theme', newTheme)
+            } catch (err) {}
+        }
+        setTheme(preferredTheme)
+    }
 }

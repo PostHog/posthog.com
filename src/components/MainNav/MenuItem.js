@@ -22,7 +22,6 @@ export default function MenuItem({ menuItem }) {
         >
             <span ref={referenceElement} className="flex justify-between items-center space-x-2">
                 <Link
-                    disablePrefetch
                     onClick={breakpoints.md && sub && handleSubClick}
                     to={url}
                     className="lg:opacity-50 opacity-100 group-hover:opacity-100 text-[15px] text-white hover:text-white lg:dark:text-white lg:dark:hover:text-white lg:text-almost-black lg:hover:text-almost-black transition-opacity"
