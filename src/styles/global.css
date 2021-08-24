@@ -78,3 +78,15 @@ ul {
 .cta {
     @apply bg-almost-black px-5 py-2 rounded-full text-white;
 }
+
+.rc-slider.log-slider .rc-slider-track {
+    @apply bg-yellow;
+}
+
+.rc-slider.log-slider .rc-slider-handle {
+    @apply bg-yellow border-3 border-white h-4 w-4;
+}
+
+.rc-slider.log-slider .rc-slider-handle:active {
+    @apply shadow-none;
+}

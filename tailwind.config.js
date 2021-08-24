@@ -97,6 +97,8 @@ module.exports = {
             'light-yellow': '#F1A82C',
             'almost-black': '#151515',
             tan: '#EEEFE9',
+            'gray-accent-dark': '#2C2C2C',
+            'gray-accent-light': '#E5E7E0',
         }),
         extend: {
             fontFamily: {
@@ -126,8 +128,8 @@ module.exports = {
                 'text-sm': '.8rem',
             },
             colors: {
-                primary: 'rgba(255, 99, 39, 0.9)',
-                'primary-dark': 'rgba(218, 72, 16, 0.9)',
+                primary: '#151515',
+                'primary-dark': '#151515',
                 purpleish: '#802f6a',
                 'purpleish-dark': '#72286E',
                 orange: '#EF7632',
@@ -144,6 +146,9 @@ module.exports = {
                 'light-yellow': '#F1A82C',
                 'almost-black': '#151515',
                 tan: '#EEEFE9',
+                'gray-accent-dark': '#2C2C2C',
+                'gray-accent-light': '#E5E7E0',
+                red: '#EA4335',
             },
             minHeight: {
                 780: '780px',

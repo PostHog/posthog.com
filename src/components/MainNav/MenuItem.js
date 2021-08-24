@@ -17,7 +17,7 @@ export default function MenuItem({ menuItem }) {
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="group whitespace-nowrap"
+            className="group whitespace-nowrap w-32 flex justify-center"
         >
             <span ref={referenceElement} className="flex justify-between items-center space-x-2">
                 <Link

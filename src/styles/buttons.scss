@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .free-allotment-callout:before {
-    @apply border-white border-opacity-10 absolute;
+    @apply border-white border-opacity-30 absolute;
     border-style: solid;
     border-width: 8px;
     border-left-color: transparent;
@@ -37,93 +37,26 @@
 .button-primary,
 .button-secondary,
 .button {
-    @apply text-white font-bold hover:text-white select-none;
-    -ms-transform: skewX(-20deg);
-    -webkit-transform: skewX(-20deg);
-    transform: skewX(-20deg);
+    @apply text-white font-bold hover:text-white select-none px-4 py-2 rounded-full;
+    &.outline {
+        @apply border-3 border-gray-accent-light text-gray-accent-dark;
+        &.active {
+            @apply bg-almost-black border-almost-black text-white;
+        }
+    }
     transition: 0.25s ease all;
 
     span {
         display: inline-block;
-        -ms-transform: skewX(20deg);
-        -webkit-transform: skewX(20deg);
-        transform: skewX(20deg);
+
         @apply relative inline-block;
-
-        span {
-            -ms-transform: skewX(0deg);
-            -webkit-transform: skewX(0deg);
-            transform: skewX(0deg);
-        }
-
-        &.icon {
-            -ms-transform: skewX(0deg);
-            -webkit-transform: skewX(0deg);
-            transform: skewX(0deg);
-
-            img {
-                -ms-transform: skewX(20deg);
-                -webkit-transform: skewX(20deg);
-                transform: skewX(20deg);
-            }
-        }
-    }
-}
-
-.button {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-    border: solid 2px rgba(255, 255, 255, 0.3);
-
-    &:hover,
-    &.active {
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%);
-        @apply text-orange border-orange;
-    }
-
-    &.active:hover {
-        @apply text-orange border-orange;
     }
 }
 
 .button-primary {
-    background: linear-gradient(98.18deg, #d66f0f 8.47%, #ef7632 56.29%);
-    box-shadow: 0px 0.125rem 1rem rgba(239, 118, 50, 0.5);
-    border: solid 2px transparent;
-
-    &:hover {
-        background: linear-gradient(98.18deg, #d66f0f 8.47%, #fe7a30 56.29%);
-    }
+    @apply bg-almost-black;
 }
 
 .button-secondary {
-    background: linear-gradient(103.46deg, #1f5879 13.26%, #0c3248 51.69%);
-    box-shadow: 0px 0.125rem 1rem rgba(58, 128, 169, 0.5);
-    border: solid 2px #3a80a9;
-
-    &:hover {
-        background: linear-gradient(103.46deg, #1f5879 13.26%, #0f405c 51.69%);
-        border: 2px solid #509dca;
-    }
-}
-
-.button-primary:focus,
-.button-secondary:focus {
-    outline: 5px auto -webkit-focus-ring-color;
-}
-.button-primary:active,
-.button-primary:focus {
-    background: linear-gradient(98.18deg, #ce6b0e 8.47%, #ed6f27 56.29%);
-}
-
-.button-secondary:active,
-.button-secondary:focus {
-    background: linear-gradient(103.46deg, #1a5070 13.26%, #093148 51.69%);
-    border: 2px solid #2d79a5;
-}
-
-.button-primary:active span,
-.button-primary:focus span .button-secondary:active span,
-.button-secondary:focus span {
-    left: 1px;
-    top: 1px;
+    @apply bg-white text-almost-black hover:text-almost-black;
 }

@@ -7,6 +7,7 @@ import { Structure } from '../../Structure'
 import checkIcon from '../../../images/check.svg'
 import CheckIcon from '../../../images/check.svg'
 import MinusIcon from '../../../images/x.svg'
+import { CallToAction } from 'components/CallToAction'
 
 import './styles/index.scss'
 
@@ -223,24 +224,24 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const PlanComparison = () => {
+export const PlanComparison = ({ className = '' }) => {
     const [expanded, setExpanded] = useState(false)
 
     const displaySections = expanded ? sections : sections.slice(0, 1)
 
     return (
-        <div className="mx-4">
-            <div className="plans-comparison-table max-w-7xl mx-auto pt-2 md:pt-0 bg-royal-blue bg-opacity-50 rounded md:rounded-lg backdrop-filter backdrop-blur-sm overflow-hidden relative ">
+        <section className={className}>
+            <div className="plans-comparison-table max-w-7xl mx-auto pt-2 md:pt-0 overflow-hidden relative ">
                 {/* xs to lg */}
                 <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
                     {tiers.map((tier, tierIdx) => (
                         <section key={tier.name}>
                             <div className="px-3 mb-2 lg:hidden">
-                                <div className="text-lg pt-2 leading-6 text-white text-large font-bold text-opacity-50">
+                                <div className="text-lg pt-2 leading-6 text-almost-black text-large font-bold text-opacity-50">
                                     {tier.name}
                                 </div>
                                 <p className="mt-4 hidden">
-                                    <span className="text-4xl font-extrabold text-white text-opacity-50">
+                                    <span className="text-4xl font-extrabold text-almost-black text-opacity-50">
                                         ${tier.priceMonthly}
                                     </span>{' '}
                                     <span className="text-base font-medium text-gray-500">/mo</span>
@@ -248,7 +249,7 @@ export const PlanComparison = () => {
                                 <p className="mt-4 text-sm text-gray-500 hidden">{tier.description}</p>
                                 <a
                                     href={tier.href}
-                                    className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-white text-center hover:bg-gray-900 hidden"
+                                    className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900 hidden"
                                 >
                                     Buy {tier.name}
                                 </a>
@@ -256,7 +257,10 @@ export const PlanComparison = () => {
 
                             {sections.map((section) => (
                                 <table key={section.name} className="w-full mb-0">
-                                    <caption className="p-3 mt-4 text-sm font-medium text-white text-opacity-50 font-bold">
+                                    <caption
+                                        style={{ captionSide: 'top' }}
+                                        className="p-3 mt-4 text-sm font-medium text-almost-black font-bold"
+                                    >
                                         {section.name}
                                     </caption>
                                     <thead>
@@ -280,7 +284,7 @@ export const PlanComparison = () => {
                                                 </th>
                                                 <td className="py-5 pr-4">
                                                     {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-sm text-white text-opacity-75 text-center">
+                                                        <span className="block text-sm text-almost-black text-center">
                                                             {feature.tiers[tier.name]}
                                                         </span>
                                                     ) : (
@@ -325,7 +329,7 @@ export const PlanComparison = () => {
                             >
                                 <a
                                     href={tier.href}
-                                    className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                                    className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900"
                                 >
                                     Buy {tier.name}
                                 </a>
@@ -344,17 +348,22 @@ export const PlanComparison = () => {
                         <caption className="sr-only">Pricing plan comparison</caption>
                         <thead>
                             <tr>
-                                <th className="text-white text-center border-white border-opacity-10">&nbsp;</th>
-                                <th className="text-white text-center border-white border-opacity-10">
+                                <th style={{ border: 0 }} className="text-almost-black text-center">
+                                    &nbsp;
+                                </th>
+                                <th className="text-almost-black text-center border-white border-opacity-10">
                                     Hosted solution
                                 </th>
-                                <th colSpan="2" className="text-white text-center border-white border-opacity-10">
+                                <th
+                                    colSpan="2"
+                                    className="text-almost-black text-center border-white border-opacity-10"
+                                >
                                     Self-hosted options
                                 </th>
                             </tr>
                             <tr>
                                 <th
-                                    className="pb-4 px-6 text-sm font-medium text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-50"
+                                    className="pb-4 px-6 text-sm font-medium text-almost-black text-center border-white border-opacity-10 sticky top-0  z-10 bg-opacity-50"
                                     scope="col"
                                 >
                                     <span className="sr-only">Feature by</span>
@@ -363,7 +372,7 @@ export const PlanComparison = () => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-white text-center border-white border-opacity-10 sticky top-0 bg-royal-blue backdrop-filter backdrop-blur z-10 bg-opacity-75"
+                                        className="w-1/5 pb-2 px-6 leading-6 text-base font-bold text-almost-black text-center border-white border-opacity-10 sticky top-0  z-10 bg-opacity-75"
                                         scope="col"
                                     >
                                         {tier.name}
@@ -375,7 +384,7 @@ export const PlanComparison = () => {
                             {/* 
                             <tr>
                                 <th
-                                    className="py-8 px-6 text-sm font-medium text-white text-left align-top border-white border-opacity-10"
+                                    className="py-8 px-6 text-sm font-medium text-almost-black text-left align-top border-white border-opacity-10"
                                     scope="row"
                                 >
                                     Pricing
@@ -387,7 +396,7 @@ export const PlanComparison = () => {
                                     >
                                         <div className="relative h-full table">
                                             <p>
-                                                <span className="text-4xl font-extrabold text-white text-opacity-50">
+                                                <span className="text-4xl font-extrabold text-almost-black text-opacity-50">
                                                     ${tier.priceMonthly}
                                                 </span>{' '}
                                                 <span className="text-base font-medium text-gray-500">/mo</span>
@@ -395,7 +404,7 @@ export const PlanComparison = () => {
                                             <p className="mt-4 mb-16 text-sm text-gray-500">{tier.description}</p>
                                             <a
                                                 href={tier.href}
-                                                className="absolute bottom-0 flex-grow block w-full bg-gray-800 border border-gray-800 rounded-md 5 py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                                                className="absolute bottom-0 flex-grow block w-full bg-gray-800 border border-gray-800 rounded-md 5 py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900"
                                             >
                                                 Buy {tier.name}
                                             </a>
@@ -406,20 +415,25 @@ export const PlanComparison = () => {
                             */}
                             {displaySections.map((section) => (
                                 <Fragment key={section.name}>
-                                    <tr>
-                                        <th
-                                            className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-white border-white border-opacity-10"
-                                            colSpan={4}
-                                            scope="colgroup"
-                                            style={{ borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
-                                        >
-                                            {section.name}
-                                        </th>
-                                    </tr>
+                                    {section.name && (
+                                        <tr>
+                                            <th
+                                                className="bg-transparent pt-6 pb-3 pl-6 text-lg font-bold text-almost-black border-white border-opacity-10"
+                                                colSpan={4}
+                                                scope="colgroup"
+                                                style={{
+                                                    borderLeftColor: 'transparent',
+                                                    borderRightColor: 'transparent',
+                                                }}
+                                            >
+                                                {section.name}
+                                            </th>
+                                        </tr>
+                                    )}
                                     {section.features.map((feature) => (
                                         <tr key={feature.name}>
                                             <th
-                                                className="py-5 px-6 text-sm font-normal text-white text-left border-white border-opacity-10"
+                                                className="py-5 px-6 text-sm font-normal text-almost-black text-left border-white border-opacity-10"
                                                 scope="row"
                                             >
                                                 {feature.name}
@@ -430,7 +444,7 @@ export const PlanComparison = () => {
                                                     className="py-5 px-6 border-white border-opacity-10"
                                                 >
                                                     {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-sm text-center text-white text-opacity-75">
+                                                        <span className="block text-sm text-center text-almost-black text-opacity-75">
                                                             {feature.tiers[tier.name]}
                                                         </span>
                                                     ) : (
@@ -480,7 +494,7 @@ export const PlanComparison = () => {
                                         <td key={tier.name} className="pt-5 px-6 border-white border-opacity-10">
                                             <a
                                                 href={tier.href}
-                                                className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                                                className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900"
                                             >
                                                 Buy {tier.name}
                                             </a>
@@ -491,17 +505,14 @@ export const PlanComparison = () => {
                         ) : null}
                     </table>
                     {!expanded ? (
-                        <div className="absolute bottom-4 left-0 right-0">
-                            <button
-                                onClick={(_) => setExpanded(true)}
-                                className="bg-white rounded py-3 px-8 mx-auto block shadow-lg button-secondary"
-                            >
+                        <div className="absolute bottom-4 left-0 w-full text-center">
+                            <button onClick={(_) => setExpanded(true)} className="button-secondary">
                                 <span>See full comparison</span>
                             </button>
                         </div>
                     ) : null}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }

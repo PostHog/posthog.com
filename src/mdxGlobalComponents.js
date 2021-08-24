@@ -59,6 +59,7 @@ import { SocialProof } from './components/LandingPage/SocialProof'
 import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
+import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
@@ -158,6 +159,7 @@ export const shortcodes = {
     Tutorials,
     LibraryStats,
     Link,
+    Logo,
     MainNav,
     MdxAnchorHeaders,
     NewsletterForm,

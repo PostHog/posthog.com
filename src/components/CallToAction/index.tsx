@@ -25,6 +25,7 @@ interface CallToActionProps {
     width?: string
     href?: string
     to?: string
+    outline?: boolean
 }
 
 const icons = {
@@ -41,9 +42,9 @@ const icons = {
 }
 
 const buttonTypeClasses = {
-    primary: 'button-primary rounded text-white hover:text-white',
-    secondary: 'button-secondary rounded text-white hover:text-white',
-    button: 'button rounded text-white hover:text-white',
+    primary: 'button-primary',
+    secondary: 'button-secondary',
+    button: 'button',
     custom: '',
 }
 
@@ -56,6 +57,7 @@ export const CallToAction = ({
     width = '64',
     href,
     to,
+    outline,
     onClick,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
@@ -65,7 +67,9 @@ export const CallToAction = ({
     ) : null
 
     const widthClass = `w-full sm:w-${width}`
-    const baseClasses = `px-4 py-2 ${widthClass} rounded inline-flex items-center justify-between font-bold text-sm relative select-none`
+    const baseClasses = `${widthClass} ${
+        outline ? 'outline' : ''
+    } inline-flex items-center justify-between font-bold text-sm relative select-none`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
 
     const innerHtml = (

@@ -21,13 +21,14 @@ export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefaul
     }
 
     return (
-        <div className="pricing-hero text-white relative">
+        <div className="pricing-hero text-white relative ">
             <Structure.SectionFullWidth width="7xl" className="">
-                <div className="flex justify-center max-w-md mx-auto">
+                <div className="flex justify-center max-w-md mx-auto mb-20">
                     <CallToAction
                         type="button"
                         width="auto"
                         icon="none"
+                        outline
                         onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
                         className={currentPlanType === CLOUD_PLAN ? 'active' : ''}
                     >
@@ -37,6 +38,7 @@ export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefaul
                         type="button"
                         width="auto"
                         icon="none"
+                        outline
                         onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 8000000)}
                         className={currentPlanType === SELF_HOSTED_PLAN ? 'active ml-2' : 'ml-2'}
                     >
