@@ -33,6 +33,11 @@ export const BlogCategories: CategoryInterface[] = [
         slug: 'release-notes',
         link: '/blog/categories/release-notes',
     },
+    {
+        title: 'CEO diary',
+        slug: 'ceo-diaries',
+        link: '/blog/categories/ceo-diaries',
+    },
 ]
 
 interface LinksInterface {
