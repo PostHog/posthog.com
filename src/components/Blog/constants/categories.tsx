@@ -1,5 +1,6 @@
 import twitterIcon from '../../../images/icons/twitter.svg'
 import linkedInIcon from '../../../images/icons/linkedin.svg'
+import githubIcon from '../../../images/icons/github.svg'
 export interface CategoryInterface {
     title: string
     slug: string
@@ -51,4 +52,5 @@ interface SocialLinksInterface {
 export const socialLinks: SocialLinksInterface = {
     twitter: { icon: twitterIcon, label: 'Twitter' },
     linkedin: { icon: linkedInIcon, label: 'LinkedIn' },
+    github: { icon: githubIcon, label: 'GitHub' },
 }
