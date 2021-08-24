@@ -1,5 +1,5 @@
 ---
-date: 2021-08-19
+date: 2021-08-26
 title: What's the Role of a Product Team at an Engineering-Led Organization?
 rootPage: /blog
 sidebar: Blog
