@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Message formatting works the same way whether you are using Slack or Microsoft Teams.
+Message formatting works the same way whether you are using Slack, Microsoft Teams, or Discord.
 
 Tokens are in the format `[type.property]`.
 
