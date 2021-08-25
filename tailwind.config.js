@@ -123,7 +123,7 @@ module.exports = {
             },
             fontSize: {
                 '2xs': '0.65rem',
-                base: '.875rem',
+                base: '16px',
                 'base-larger': '.933rem',
                 'text-sm': '.8rem',
             },
@@ -146,6 +146,7 @@ module.exports = {
                 'light-yellow': '#F1A82C',
                 'almost-black': '#151515',
                 tan: '#EEEFE9',
+                gray: '#BFBFBC',
                 'gray-accent-dark': '#2C2C2C',
                 'gray-accent-light': '#E5E7E0',
                 red: '#EA4335',
