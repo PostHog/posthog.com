@@ -89,16 +89,22 @@
     }
 }
 
-.product-feature {
-    background: linear-gradient(180deg, #3f086d 0%, #32134e 100%);
+div[class^='feature-'] {
     border-radius: 20px;
 
     // @apply mb-2 md:mb-0, relative, overflow-hidden
     margin-bottom: 2em;
     overflow: hidden;
     position: relative;
+
     @media (min-width: 768px) {
         margin-bottom: 0;
+    }
+
+    img,
+    svg {
+        height: 18px;
+        width: 18px;
     }
 
     .reversed {
@@ -107,14 +113,6 @@
 
         figure {
             margin-top: 3em;
-        }
-    }
-
-    .feature-name {
-        img,
-        svg {
-            height: 18px;
-            width: 18px;
         }
     }
 }

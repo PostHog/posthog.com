@@ -85,7 +85,7 @@ export const ProductFeature = ({
                 )}
 
                 <h3 className="mb-2 text-2xl">{title}</h3>
-                <p className="max-w-md mx-auto text-white text-opacity-70">{description}</p>
+                <p className="max-w-md mx-auto">{description}</p>
 
                 {/* only render if {docsUrl} exists */}
                 {docsUrl && (
