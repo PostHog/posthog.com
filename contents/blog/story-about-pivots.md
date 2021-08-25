@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: general,company-and-culture
+categories: general,company-and-culture,ceo-diaries
 featuredImage: ../images/blog/story-about-pivots.png
 featuredImageType: full
 ---

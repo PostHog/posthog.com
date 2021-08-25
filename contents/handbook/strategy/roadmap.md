@@ -22,7 +22,7 @@ Our roadmap for the second half of 2021 will do three things:
 
 We've already shipped an incredibly powerful funnels product this year. However, as soon as you can see people dropping off in your funnel all you want to know is "why?". 
 
-We aim to build a suite of tools that enable you two answer ths question of why through multiple methods:
+We aim to build a suite of tools that enable you two answer this question of why through multiple methods:
 * Individual Qualitative: Observing session recordings and surveying users
 * Aggregated Qualitiative: Combining together hundreds of sessions to review behaviors of successful and unsuccessful users at scale
 * Quantitative: Analyzing patterns of successful and unsuccessful users to highlight clear opportunities to improve your product

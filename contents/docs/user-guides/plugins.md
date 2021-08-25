@@ -21,6 +21,7 @@ Plugins serve three key purposes:
 ![Plugins Diagram](../images/../../images/plugins-diagram.svg)
 
 > **Note:** We now have a [dedicated Plugins section](/docs/plugins/overview) in our Docs with a lot more information about the functionality.
+
 ## Architecture
 
 When an event is sent to PostHog, it is added to a task queue, after which it is picked up by a worker that processes and ingests the event, storing it into the database. 

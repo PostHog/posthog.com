@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ceo-diaries
 ---
 
 We submitted the application, then got back to work. We couldn't work out how long it'd take to hear back, but then we did.

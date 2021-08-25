@@ -40,4 +40,20 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/matlokam
     }
+  - {
+      handle: paolodamico,
+      name: Paolo D'Amico,
+      role: Product,
+      image: https://avatars.githubusercontent.com/u/5864173?v=4,
+      link_type: github,
+      link_url: https://github.com/paolodamico
+    }
+  - {
+      handle: marcus-hyett,
+      name: Marcus Hyett,
+      role: VP Product,
+      image: https://avatars.githubusercontent.com/u/85295485?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/marcus-hyett/
+    }
 ---
