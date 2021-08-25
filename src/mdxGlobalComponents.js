@@ -81,7 +81,6 @@ import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
-import { ProductHero } from './components/ProductHero'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
@@ -181,7 +180,6 @@ export const shortcodes = {
     ProductFeature,
     ProductFeaturePlugin,
     ProductFooter,
-    ProductHero,
     ProductSectionHeader,
     ResponsiveAnchor,
     ResponsiveSidebar,
