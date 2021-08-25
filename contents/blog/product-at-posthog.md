@@ -1,6 +1,6 @@
 ---
 date: 2021-08-26
-title: What's the Role of a Product Team at an Engineering-Led Organization?
+title: What's the true role of a product team at an engineering-led organization?
 rootPage: /blog
 sidebar: Blog
 showTitle: true
