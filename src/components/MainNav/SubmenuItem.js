@@ -30,7 +30,7 @@ export default function SubmenuItem({ item }) {
             <div
                 className={`grid grid-cols-1 xs:grid-cols-${
                     cols > 3 ? '2' : '1'
-                } lg:grid-cols-${cols} lg:divide-x-2 divide-white divide-opacity-10 bg-[#4b3163] rounded lg:py-0 py-5`}
+                } lg:grid-cols-${cols} lg:divide-x-2 divide-gray-accent-light bg-gray-accent-light divide-dashed bg-opacity-20 rounded lg:py-0 py-5`}
             >
                 {sections.map((section, index) => {
                     const { title, link, items } = section
@@ -63,7 +63,7 @@ export default function SubmenuItem({ item }) {
                                         <li key={index}>
                                             <Link
                                                 disablePrefetch
-                                                className="text-white font-semibold transition-colors hover:text-white p-2 hover:bg-[#6C5085] rounded flex items-center space-x-2 text-[14px]"
+                                                className="text-almost-black font-semibold transition-colors hover:text-almost-black p-2 hover:bg-gray-accent-light rounded flex items-center space-x-2 text-[14px]"
                                                 to={url}
                                             >
                                                 {icon && (
