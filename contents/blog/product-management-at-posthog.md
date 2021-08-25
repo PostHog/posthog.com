@@ -1,6 +1,6 @@
 ---
 date: 2021-08-19
-title: What's the Role of a Product Team at an Engineering-Led Organization?
+title: Is your product manager still necessary?
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -20,7 +20,7 @@ The product process starts with the product strategy. Our product strategy direc
 
 For example, our current company goal is to achieve deep product-market fit by finding a handful of customers who absolutely love PostHog. With this in mind, we set out to create different product strategies that align towards this goal. An example of this was our [Nail Funnels](https://posthog.com/blog/new-vp-nailing-funnels) strategy, where we set out to enable our customers to dive deep into their metrics to understand conversion across different contexts.
 
-Note that while these strategies come from Product, the process is highly collaborative. At PostHog, a strategy gets proposed with a strong rationale and details about the opportunity cost of doing it. Everyone at PostHog is encouraged to challenge and provide [feedback](https://posthog.com/handbook/people/feedback) on the proposal to improve it.
+>Note that while these strategies come from Product, the process is highly collaborative. At PostHog, a strategy gets proposed with a strong rationale and details about the opportunity cost of doing it. Everyone at PostHog is encouraged to challenge and provide [feedback](https://posthog.com/handbook/people/feedback) on the proposal to improve it.
 
 ### Execution
 
@@ -50,7 +50,9 @@ So if Engineering handles the roadmap and prioritization, and speccing out solut
 - **Provide feedback** & ensure product quality: We want to both build new product features and ensure we’re constantly raising the bar. We do this by doing continuous quality testing, dogfooding our own product, and challenging engineers to sand the rough edges even in the smallest ways. We’re also always on the lookout for remote edge cases that are easy to miss.
 - Help **set up metrics and challenge continuous tracking**: Building things is rewarding in its own right, as you can very clearly see and judge your output. It’s tempting to ignore actual numbers informing you whether what you build is actually successful or not - but remember, it’s about outcome, not output. Even if you created the most amazing product with the smoothest experience, if no one’s using it or they’re using it incorrectly, it’s a failure (and a learning). As the Product Team, we’re constantly challenging ourselves and engineers to set up the right metrics that measure actual progress towards our goals. Doing this right also contributes more context for the next product iteration.
 
-A note on removing blockers. It is typically the responsibility of a PM to remove blockers for the engineering team. As a dev, you come to your daily standup, mention that you’re blocked because stakeholder X has not sent you something you need, and the PM goes to raise hell all around to get you unblocked as quickly as possible. When you have a very strong and autonomous engineering team, this doesn’t need to happen at all. As an autonomous engineer I own my features, if I get blocked I’ll go do whatever I need to do to get myself unblocked. At best Product provides some context on who to talk to or suggestions on how to get unblocked.
+> **A note on removing blockers:**
+> It is typically the responsibility of a PM to remove blockers for the engineering team. As a dev, you come to your daily standup, mention that you’re blocked because stakeholder X has not sent you something you need, and the PM goes to raise hell all around to get you unblocked as quickly as possible. 
+> When you have a very strong and autonomous engineering team, this doesn’t need to happen at all. As an autonomous engineer I own my features, if I get blocked I’ll go do whatever I need to do to get myself unblocked. At best Product provides some context on who to talk to or suggestions on how to get unblocked.
 
 ## Benefits & Results
 
