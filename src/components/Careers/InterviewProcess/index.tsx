@@ -84,7 +84,12 @@ export const InterviewProcess = () => {
                         </p>
                     </InterviewStep>
 
-                    <InterviewStep title="4. PostHog SuperDay" titleColor="#B25F20" image={superdayImg} className="mt-12 md:mt-0">
+                    <InterviewStep
+                        title="4. PostHog SuperDay"
+                        titleColor="#B25F20"
+                        image={superdayImg}
+                        className="mt-12 md:mt-0"
+                    >
                         <p className="mb-0 text-white text-opacity-75">
                             The final stage is a paid SuperDay! You’ll join standup, meet the team, and work on a task
                             related to your role, offering a realistic view of what it’s like working at PostHog.
