@@ -17,9 +17,11 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
             <div className="xl:pl-7">
                 <div
                     style={{ top: navBallLocation || 0, left: -5 }}
-                    className="bg-[#200935] dark:bg-white rounded-full w-2 h-2 z-10 absolute transition-all hidden xl:block"
+                    className="bg-almost-black dark:bg-white rounded-full w-2 h-2 z-10 absolute transition-all hidden xl:block"
                 />
-                <p className="text-[#999] dark:text-light-purple text-base mt-0 mb-4 font-bold">On this page</p>
+                <p className="text-gray opacity-100 dark:text-light-purple text-base mt-0 mb-4 font-bold">
+                    On this page
+                </p>
                 <Scrollspy
                     offset={-88}
                     onUpdate={handleInternalNavUpdate}
@@ -39,7 +41,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                                     smooth
                                     duration={300}
                                     to={navItem.url}
-                                    className={`text-[#200935] hover:text-[#200935] dark:text-white dark:hover:text-white`}
+                                    className={`text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white`}
                                 >
                                     {navItem.name}
                                 </Link>

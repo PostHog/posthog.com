@@ -7,7 +7,6 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { shortcodes } from '../../mdxGlobalComponents'
-import Planets from './Planets'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -76,7 +75,7 @@ export default function Main({
                         {showToc && (
                             <div
                                 style={{ height: 'calc(100% - 35vh)' }}
-                                className="w-[1px] absolute bottom-0  right-0 bg-[#765494] hidden xl:flex justify-center"
+                                className="border-2 border-dashed border-gray-accent-light absolute bottom-0  right-0 hidden xl:flex justify-center"
                             />
                         )}
                         {next && <NextArticle next={next} hideAnchor={!showToc} breakpoints={breakpoints} />}
@@ -89,7 +88,6 @@ export default function Main({
                     />
                 )}
             </div>
-            <Planets className="w-[35vw] absolute top-0 right-0 hidden lg:block dark:text-white text-[#220f3f]" />
         </div>
     )
 }
