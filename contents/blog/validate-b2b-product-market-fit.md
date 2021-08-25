@@ -50,7 +50,7 @@ The following pitfalls can lull you into thinking you have product market fit wh
 - **Wrong market:** Great fit within a highly niche market or one with limited spending power may hamper your company’s growth.
 - **Discounts:** It can be tempting to discount your product for your first few customers, but this harms any product validation tests. Good-fit customers should be willing to pay full price for your product - although getting pricing right can be hard.
 - **Novelty effects:** People using a new product or seeing a new feature for the first time might react differently than people who've been using the product for a long time. It’s important to give users time to get used to these new features (and perhaps stop deriving value from them) before calling product market fit.
-- **Friends and family:** Although these two groups can be a great way to kick-start adoption and get early feedback on your product, it’s important to determine whether their success with the product is due to knowing you or because the product actually solves their needs. Ensure your product passes the [Mom Test](http://momtestbook.com/ before calling product-market fit.
+- **Friends and family:** Although these two groups can be a great way to kick-start adoption and get early feedback on your product, it’s important to determine whether their success with the product is due to knowing you or because the product actually solves their needs. Ensure your product passes the [Mom Test](http://momtestbook.com/) before calling product-market fit.
 
 > From the reviews...
 > 
