@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { SEO } from 'components/seo'
-import Header from 'components/Header'
 import SearchBar from './SearchBar'
 import Main from './Main'
 import ArticleFooter from './Footer'
-import Footer from 'components/Footer'
 import MainSidebar from './MainSidebar'
 import { push as Menu } from 'react-burger-menu'
 import '../../styles/handbook.scss'
+import Layout from 'components/Layout'
+import Navigation from './Navigation'
 
 export default function Handbook({
     data: { post },
@@ -32,6 +32,8 @@ export default function Handbook({
         },
     }
 
+    console.log(breadcrumb)
+
     const handleMobileMenuClick = () => {
         setMenuOpen(!menuOpen)
     }
@@ -44,50 +46,56 @@ export default function Handbook({
                 article
                 image={featuredImage?.publicURL}
             />
-            <div className="bg-white dark:bg-[#220f3f] handbook-container">
-                <Header onPostPage className="max-w-screen-2xl mx-auto" />
-                <div id="handbook-menu-wrapper">
-                    <Menu
-                        width="calc(100vw - 80px)"
-                        onClose={() => setMenuOpen(false)}
-                        customBurgerIcon={false}
-                        customCrossIcon={false}
-                        styles={styles}
-                        pageWrapId="handbook-content-menu-wrapper"
-                        outerContainerId="handbook-menu-wrapper"
-                        overlayClassName="backdrop-blur"
-                        isOpen={menuOpen}
-                    >
-                        <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32" />
-                    </Menu>
-                    <SearchBar
-                        menuOpen={menuOpen}
-                        handleMobileMenuClick={handleMobileMenuClick}
-                        filePath={filePath}
-                        title={title}
-                    />
-                    <div id="handbook-content-menu-wrapper">
-                        <Main
-                            {...{
-                                handleMobileMenuClick,
-                                filePath,
-                                title,
-                                lastUpdated,
-                                menu,
-                                slug,
-                                breadcrumb,
-                                breadcrumbBase,
-                                hideAnchor,
-                                tableOfContents,
-                                body,
-                                next,
-                            }}
+            <Layout>
+                <div className="handbook-container">
+                    <div id="handbook-menu-wrapper">
+                        <Navigation
+                            title={title}
+                            filePath={filePath}
+                            breadcrumb={breadcrumb}
+                            breadcrumbBase={breadcrumbBase}
                         />
+                        <Menu
+                            width="calc(100vw - 80px)"
+                            onClose={() => setMenuOpen(false)}
+                            customBurgerIcon={false}
+                            customCrossIcon={false}
+                            styles={styles}
+                            pageWrapId="handbook-content-menu-wrapper"
+                            outerContainerId="handbook-menu-wrapper"
+                            overlayClassName="backdrop-blur"
+                            isOpen={menuOpen}
+                        >
+                            <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32" />
+                        </Menu>
+                        <SearchBar
+                            menuOpen={menuOpen}
+                            handleMobileMenuClick={handleMobileMenuClick}
+                            filePath={filePath}
+                            title={title}
+                        />
+                        <div id="handbook-content-menu-wrapper">
+                            <Main
+                                {...{
+                                    handleMobileMenuClick,
+                                    filePath,
+                                    title,
+                                    lastUpdated,
+                                    menu,
+                                    slug,
+                                    breadcrumb,
+                                    breadcrumbBase,
+                                    hideAnchor,
+                                    tableOfContents,
+                                    body,
+                                    next,
+                                }}
+                            />
+                        </div>
                     </div>
+                    <ArticleFooter title={title} filePath={filePath} contributors={contributors} />
                 </div>
-                <ArticleFooter title={title} filePath={filePath} contributors={contributors} />
-                <Footer />
-            </div>
+            </Layout>
         </>
     )
 }
