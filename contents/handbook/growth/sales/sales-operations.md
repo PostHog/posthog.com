@@ -76,7 +76,11 @@ Unfortunately we don't have a way to do this easily right now. If they have been
 
 _Can a customer transfer from Cloud to Scale?_
 
-Yes - we offer 3 months free of Scale so they can run both systems in parallel, tracking events in both places. That means when they switch off Cloud, they'll have 3 months of data to start with in Scale.
+We offer plugins for customers to export all their data to a data warehouse. Then they can [bulk import historical data](https://posthog.com/docs/integrate/ingest-historic-data).
+
+They will _lose_ their dashboard and configuration - this will just retain their events, but usually that's the principal concern.
+
+If they need a more complex migration with many pre-made dashboards and lots of users and actions, we are currently trialling a partnership with another company to do this for them for a one off fee. Speak to James H if you have a client interested in this.
 
 _A Scale customer has experienced downtime while we're getting set up - have they lost their data?_
 
