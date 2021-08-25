@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import twitterIcon from '../../../images/icons/twitter.svg'
 import linkedInIcon from '../../../images/icons/linkedin.svg'
 
-export const BlogShareButtons = () => {
+export const BlogShareButtons = (): JSX.Element => {
     const [currentUrl, setCurrentUrl] = useState('')
 
     useEffect(() => {

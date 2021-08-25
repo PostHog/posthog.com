@@ -1,6 +1,7 @@
-import twitterIcon from '../../../images/icons/twitter.svg'
-import linkedInIcon from '../../../images/icons/linkedin.svg'
-import githubIcon from '../../../images/icons/github.svg'
+import twitterIcon from '../../../images/icons/twitter-white.svg'
+import linkedInIcon from '../../../images/icons/linkedin-white.svg'
+import githubIcon from '../../../images/icons/github-white.svg'
+
 export interface CategoryInterface {
     title: string
     slug: string
