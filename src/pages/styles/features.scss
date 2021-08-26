@@ -1,47 +1,4 @@
 /* GENERAL */
-
-// Hero animation
-// Animated SVG was created with SVGator. We use different sizes depending on screen size. (720x1300 on mobile, 1920x1080 on normal desktops, 1920x720 on very wide screens. (We don't want the content pushed too far down.) Note: These are viewBox dimensions for the SVG.
-// To add/remove an SVG at a breakpoint:
-// 1. In this file, adjust padding-bottom on .productHero (this is a proportional video hack)
-// 2. in ProductHero/index.tsx, adjust content wrapper (mt-[54%] xl:mt-[37.5%]), then add HeroAnimation_____ (size) at bottom of page after adding asset and referencing
-
-.productHero {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    padding-bottom: 180%;
-    @media (min-width: 640px) {
-        padding-bottom: 54%;
-    }
-    @media (min-width: 1280px) {
-        padding-bottom: 37.5%;
-    }
-    height: 0;
-
-    &:after {
-        background: linear-gradient(rgba(34, 15, 63, 0), rgba(34, 15, 63, 1));
-        bottom: 0;
-        content: '';
-        height: 300px;
-        left: 0;
-        position: absolute;
-        width: 100%;
-    }
-
-    .chevron {
-        background-image: url('../../images/chevron.svg');
-        display: inline-block;
-        height: 11px;
-        width: 18px;
-
-        -webkit-animation: ca3_fade_move_down 2s ease-in-out infinite;
-        -moz-animation: ca3_fade_move_down 2s ease-in-out infinite;
-        animation: ca3_fade_move_down 2s ease-in-out infinite;
-    }
-}
-
 .nav-current {
     background: linear-gradient(89.94deg, #51a0cd 2.12%, #3c8ebc 89.27%);
     border: 0.5px solid #62c6ff;
