@@ -44,7 +44,7 @@ export const ProductFeature = ({
     return (
         <div
             id={id} // ID applied to navigate using navbar (must be passed only for starting elements)
-            className={`py-6 px-4 sm:py-12 sm:px-8 ${layout} ${classes}`}
+            className={`foo1 ${layout} ${classes}`}
             // Not being used
             style={
                 bgImage
@@ -71,7 +71,7 @@ export const ProductFeature = ({
             <div>
                 {/* only render if featureName exists */}
                 {featureName && (
-                    <div className="feature-name flex justify-center items-start gap-2 -mx-8 mb-2">
+                    <div className="feature-name flex items-start gap-2 mb-2">
                         {featureIcon && (
                             // Uncomment this peice of code to use svg sprite file
                             <svg>
@@ -85,15 +85,15 @@ export const ProductFeature = ({
                 )}
 
                 <h3 className="mb-2 text-2xl">{title}</h3>
-                <p className="max-w-md mx-auto">{description}</p>
+                <p className="max-w-md">{description}</p>
 
                 {/* only render if {docsUrl} exists */}
                 {docsUrl && (
                     <Link
                         to={docsUrl}
-                        className="px-2 py-1 text-opacity-75 hover:text-opacity-100 text-xs rounded-full whitespace-nowrap bg-white border-gray border-2 border-solid border-opacity-10"
+                        className="p-1 -ml-1 text-opacity-75 hover:text-opacity-100 text-sm whitespace-nowrap"
                     >
-                        Docs &rarr;
+                        Docs <span className="text-gray">&rarr;</span>
                     </Link>
                 )}
             </div>
