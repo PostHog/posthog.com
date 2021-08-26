@@ -21,11 +21,11 @@ function ProductPage() {
         <>
             <Header />
             <SEO title="Product • PostHog" />
-            <div className="bg-purple">
+            <div className="text-primary">
                 <ProductAnchorNavbar />
                 <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
                     <ProductSectionHeader name="Platform" id="platform" />
-                    <div className=" text-center feature-open-source">
+                    <div className="feature-open-source bg-gray-accent-light text-center">
                         {/* Platform section starts here */}
                         <ProductFeature
                             layout="reversed"
@@ -42,7 +42,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-event-autocapture">
+                    <div className="feature-event-autocapture bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="standard"
                             featureIcon="event-autocapture"
@@ -58,7 +58,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-dashboards">
+                    <div className="feature-dashboards bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="standard"
                             featureIcon="dashboards"
@@ -74,7 +74,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-data-in-out">
+                    <div className="feature-data-in-out bg-gray-accent-light text-center">
                         <div className="md:grid grid-cols-2 gap-3  pt-6 px-4 pb-24 md:py-12 md:px-8 relative">
                             <ProductFeature
                                 layout="standard"
@@ -101,7 +101,7 @@ function ProductPage() {
                         </div>
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-hosting-flexibility pt-12 px-4">
+                    <div className="feature-hosting-flexibility  bg-gray-accent-light text-center pt-12 px-4">
                         <div className="feature-name flex justify-center items-start gap-2 md:-mb-6">
                             <ProductImage imageName="hosting-flexibility.svg" alt="Hosting flexibility icon" isIcon />
                             <div className="font-bold text-pink">Hosting flexibility</div>
@@ -161,7 +161,7 @@ function ProductPage() {
                         </div>
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-data-privacy">
+                    <div className="feature-data-privacy bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="standard"
                             featureIcon="data-privacy"
@@ -174,7 +174,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-api">
+                    <div className="feature-api bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="standard"
                             featureIcon="api"
@@ -190,7 +190,7 @@ function ProductPage() {
 
                     <ProductSectionHeader name="Analytics" id="analytics" />
 
-                    <div className="bg-gray-accent-light  text-center feature-trends">
+                    <div className="feature-trends bg-gray-accent-light text-center">
                         {/* Analytics section starts here */}
                         <ProductFeature
                             layout="reversed"
@@ -213,7 +213,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-funnels">
+                    <div className="feature-funnels bg-gray-accent-light text-center">
                         {/*
                         style={{  
                             backgroundImage: "url(" + `${imageFunnels}` + ")",
@@ -242,7 +242,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-paths">
+                    <div className="feature-paths bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="paths"
@@ -262,7 +262,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-cohorts">
+                    <div className="feature-cohorts bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="cohorts"
@@ -279,7 +279,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-user-sessions">
+                    <div className="feature-user-sessions bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="user-sessions"
@@ -296,7 +296,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-retention">
+                    <div className="feature-retention bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="retention"
@@ -313,7 +313,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-revenue-tracking">
+                    <div className="feature-revenue-tracking bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="revenue-tracking"
@@ -333,7 +333,7 @@ function ProductPage() {
                 <ProductSectionHeader name="Insights" id="insights" />
 
                 <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
-                    <div className="bg-gray-accent-light  text-center feature-feature-flags flex items-center justify-start pr-50">
+                    <div className="feature-feature-flags bg-gray-accent-light text-center flex items-center justify-start pr-50">
                         {/* Insights section starts here */}
                         <ProductFeature
                             layout="standard"
@@ -352,7 +352,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-annotations flex items-end">
+                    <div className="feature-annotations flex items-end bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="standard"
                             featureIcon="annotations"
@@ -364,7 +364,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center flex items-center feature-heatmaps pr-24 xl:pr-32">
+                    <div className="flex items-center feature-heatmaps bg-gray-accent-light text-center pr-24 xl:pr-32">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="heatmaps"
@@ -377,7 +377,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-session-recordings">
+                    <div className="feature-session-recordings bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="standard"
                             featureIcon="session-recordings"
@@ -396,7 +396,7 @@ function ProductPage() {
 
                     <ProductSectionHeader name="Plugins" id="plugins" />
 
-                    <div className="bg-gray-accent-light  text-center feature-data-export">
+                    <div className="feature-data-export bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-export"
@@ -423,7 +423,7 @@ function ProductPage() {
                         </ul>
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-data-filtering">
+                    <div className="feature-data-filtering bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-filtering"
@@ -440,7 +440,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-custom-plugins min-h-[350px]">
+                    <div className="feature-custom-plugins bg-gray-accent-light text-center min-h-[350px]">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="custom-plugins"
@@ -452,7 +452,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="bg-gray-accent-light  text-center feature-data-enrichment">
+                    <div className="feature-data-enrichment bg-gray-accent-light text-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-enrichment"

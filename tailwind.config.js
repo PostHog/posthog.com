@@ -94,8 +94,6 @@ module.exports = {
             tan: '#EEEFE9',
             'gray-accent-dark': '#2C2C2C',
             'gray-accent-light': '#E5E7E0',
-            'dashed-line-dark': '#4B4B4B',
-            'dashed-line-light': '#D0D1C9',
         }),
         extend: {
             fontFamily: {
@@ -142,6 +140,8 @@ module.exports = {
                 'gray-accent-dark': '#2C2C2C',
                 'gray-accent-light': '#E5E7E0',
                 red: '#EA4335',
+                'dashed-line-dark': '#4B4B4B',
+                'dashed-line-light': '#D0D1C9',
             },
             minHeight: {
                 780: '780px',
@@ -152,6 +152,7 @@ module.exports = {
             },
             borderWidth: {
                 half: '.5px',
+                1: '1px',
                 3: '3px',
                 8: '8px',
                 12: '12px',

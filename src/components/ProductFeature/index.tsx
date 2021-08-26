@@ -80,7 +80,7 @@ export const ProductFeature = ({
 
                             // <img src={`${featureIcon}`} alt={`${featureName} icon`} />
                         )}
-                        <div className="font-bold text-pink">{featureName}</div>
+                        <div className="font-bold">{featureName}</div>
                     </div>
                 )}
 
@@ -91,7 +91,7 @@ export const ProductFeature = ({
                 {docsUrl && (
                     <Link
                         to={docsUrl}
-                        className="px-2 py-1 text-white hover:text-white text-opacity-75 hover:text-opacity-100 text-xs rounded-full whitespace-nowrap border-white border-2 border-solid border-opacity-10 hover:bg-orange hover:border-orange"
+                        className="px-2 py-1 text-opacity-75 hover:text-opacity-100 text-xs rounded-full whitespace-nowrap bg-white border-gray border-2 border-solid border-opacity-10"
                     >
                         Docs &rarr;
                     </Link>
