@@ -81,7 +81,7 @@ jobs:
               if: ${{ github.base_ref == 'master' }}
               run: |
                   rm pr_diff
-                  git add .
+                  git add netlify.toml
                   [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects (JS)"
             - name: Push changes
               run: |
