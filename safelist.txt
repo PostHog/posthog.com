@@ -51,3 +51,7 @@ text-light-yellow
 hover:text-light-yellow
 opacity-60
 opacity-75
+border-opacity-75
+border-opacity-100
+text-opacity-50
+text-opacity-100
