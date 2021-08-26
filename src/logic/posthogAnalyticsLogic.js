@@ -1,6 +1,8 @@
 import { kea } from 'kea'
 import { getCookie } from 'lib/utils'
 
+const decide_api_version = process.env.GATSBY_POSTHOG_DECIDE_API_VERSION
+
 export const posthogAnalyticsLogic = kea({
     actions: {
         posthogFound: (posthog) => ({ posthog }),
@@ -12,9 +14,13 @@ export const posthogAnalyticsLogic = kea({
             {},
             {
                 setFeatureFlags: (state, { featureFlags }) => {
-                    const flags = {}
-                    for (const flag of featureFlags) {
-                        flags[flag] = true
+                    let flags = {}
+                    if (decide_api_version < 2 || Array.isArray(featureFlags)) {
+                        for (const flag of featureFlags) {
+                            flags[flag] = true
+                        }
+                    } else {
+                        flags = featureFlags
                     }
                     return flags
                 },
@@ -64,7 +70,7 @@ export const posthogAnalyticsLogic = kea({
             (s) => [s.featureFlags],
             (featureFlags) =>
                 Object.entries(featureFlags)
-                    .filter(([, value]) => !!value)
+                    .filter(([, value]) => value === true) // exclude non-boolean flags
                     .map(([key]) => key),
         ],
         isLoggedIn: [

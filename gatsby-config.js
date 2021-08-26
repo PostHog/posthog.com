@@ -189,6 +189,8 @@ module.exports = {
                 isEnabledDevMode: true,
                 initOptions: {
                     _capture_metrics: true,
+                    // Specify Decide API version (v2 adds multivariate flags)
+                    decide_api_version: process.env.GATSBY_POSTHOG_DECIDE_API_VERSION,
                 },
             },
         },
