@@ -55,10 +55,6 @@ body {
 a {
     color: black;
     font-weight: semibold;
-
-    &:hover {
-        color: black !important; // override antd
-    }
 }
 
 em,

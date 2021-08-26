@@ -150,6 +150,10 @@ module.exports = {
             minHeight: {
                 780: '780px',
             },
+            borderColor: {
+                'dashed-line-dark': '#4B4B4B',
+                'dashed-line-light': '#D0D1C9',
+            },
             borderRadius: {
                 sm: '4px',
                 lg: '20px',

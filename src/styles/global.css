@@ -28,6 +28,11 @@ div[class^='feature-'].text-center {
     @apply border-gray border-dashed border-1 md:mb-0 relative overflow-hidden;
 }
 
+.feature-event-autocapture {
+    /* @apply border-r border-gray border-dashed; */
+    background: url('../images/dash-vertical.svg') 100% / 1px repeat-y;
+}
+
 /* this overrides Tailwind's built-in font-weight classes to work with our variable font */
 @layer utilities {
     .font-thin {
