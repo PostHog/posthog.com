@@ -40,7 +40,7 @@ Monitor how people are using your product,  as they may be getting stuck when tr
 
 You can use PostHog to monitor user behaviors through metrics across your product using our [trends tool](https://posthog.com/product-features/trends).
 
-## Session Recordings
+## Session recordings
 There is no substitute for observing a user use your product in their natural environment. As long as you randomly sample customers you’re likely to get unbiased results here - the users will not change their behavior due to your presence. Watching session recordings can give valuable insights into why people are failing to achieve something with your product: perhaps they’re accessing your product through their mobile browser and it’s much harder to use. Watching session recordings provides a lot of context for this type of issue, and Posthog can [record and replay user sessions](https://posthog.com/docs/user-guides/session-recording) in your product.
 
 ## Competitive research
