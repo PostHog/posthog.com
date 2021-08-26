@@ -24,18 +24,19 @@ export default function Navigation({
                             {breadcrumbBase.name}
                         </Link>
                     </li>
-                    {breadcrumb.map((crumb, index) => {
-                        return (
-                            <li
-                                key={index}
-                                className="py-2 px-5 border-r-2 border-gray-accent-light dark:border-gray-accent-dark border-dashed"
-                            >
-                                <Link className="text-yellow hover:text-yellow font-bold" to={crumb.url}>
-                                    {crumb.name}
-                                </Link>
-                            </li>
-                        )
-                    })}
+                    {breadcrumb &&
+                        breadcrumb.map((crumb, index) => {
+                            return (
+                                <li
+                                    key={index}
+                                    className="py-2 px-5 border-r-2 border-gray-accent-light dark:border-gray-accent-dark border-dashed"
+                                >
+                                    <Link className="text-yellow hover:text-yellow font-bold" to={crumb.url}>
+                                        {crumb.name}
+                                    </Link>
+                                </li>
+                            )
+                        })}
                     <li className="py-2 px-5 text-almost-black dark:text-white font-bold">{title}</li>
                 </ul>
                 <ul className="list-none p-0 m-0 hidden md:flex ml-auto">
