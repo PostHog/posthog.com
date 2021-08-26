@@ -253,9 +253,19 @@ body {
     margin: 0;
     overscroll-behavior: none;
 }
-body.light,
-body.dark {
+body.light {
     background-color: #eeefe9;
+}
+body.dark {
+    background-color: #151515;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: white;
+    }
 }
 
 img {

@@ -49,7 +49,7 @@ export const Header = ({
     return (
         <>
             <Sprites />
-            <header className="relative z-50 p-5">
+            <header className="relative z-[1002] p-5">
                 <MainNav expanded={expanded} />
                 <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
             </header>

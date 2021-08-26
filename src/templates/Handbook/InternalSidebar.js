@@ -19,9 +19,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                     style={{ top: navBallLocation || 0, left: -5 }}
                     className="bg-almost-black dark:bg-white rounded-full w-2 h-2 z-10 absolute transition-all hidden xl:block"
                 />
-                <p className="text-gray opacity-100 dark:text-light-purple text-base mt-0 mb-4 font-bold">
-                    On this page
-                </p>
+                <p className="text-gray opacity-100 dark:text-white text-base mt-0 mb-4 font-bold">On this page</p>
                 <Scrollspy
                     offset={-88}
                     onUpdate={handleInternalNavUpdate}

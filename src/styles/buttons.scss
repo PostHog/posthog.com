@@ -54,7 +54,7 @@
 }
 
 .button-primary {
-    @apply bg-almost-black;
+    @apply bg-almost-black dark:bg-white dark:text-almost-black;
 }
 
 .button-secondary {

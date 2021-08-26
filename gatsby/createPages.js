@@ -85,11 +85,13 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     result.data.handbook.nodes.forEach((node) => {
         const { slug } = node.fields
         let next = null
+        let previous = null
         let breadcrumb = null
         const tableOfContents = node.tableOfContents.items && flattenToc(node.tableOfContents.items)
         handbookMenuFlattened.some((item, index) => {
             if (item.url === slug) {
                 next = handbookMenuFlattened[index + 1]
+                previous = handbookMenuFlattened[index - 1]
                 breadcrumb = item.breadcrumb
                 return true
             }
@@ -101,6 +103,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             context: {
                 id: node.id,
                 next,
+                previous,
                 menu: handbookMenu,
                 breadcrumb,
                 breadcrumbBase: { name: 'Handbook', url: '/handbook' },

@@ -5,7 +5,7 @@ import { useValues } from 'kea'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
-export default function SearchBar({ filePath, title, handleMobileMenuClick, style, menuOpen }) {
+export default function SearchBar({ className, filePath, title, handleMobileMenuClick, style, menuOpen }) {
     const breakpoints = useBreakpoint()
     const { posthog } = useValues(posthogAnalyticsLogic)
     useEffect(() => {
@@ -60,12 +60,12 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                 zIndex: 1001,
                 transform: menuOpen ? 'translate3d(calc(100vw - 80px), 0px, 0px)' : 'none',
             }}
-            className="2xl:max-w-[800px] max-w-full md:max-w-[calc(100%-224px-4rem)] xl:max-w-[650px] py-4 px-4 pb-0 lg:py-0 xl:px-0 lg:mt-8 backdrop-blur-sm sm:backdrop-blur-0 mr-0 ml-auto xl:mr-auto handbook-search  z-20 sticky top-0 lg:top-4"
+            className={`py-4 pb-0 lg:py-0 xl:px-0 backdrop-blur-sm sm:backdrop-blur-0 handbook-search  z-20 sticky top-0 lg:top-4 ${className}`}
         >
-            <div className="w-full flex space-x-2 md:space-x-0 text-gray ">
+            <div className="w-full flex space-x-2 md:space-x-0 text-gray dark:text-gray-accent-light">
                 <button
                     onClick={handleMobileMenuClick}
-                    className="bg-white dark:bg-[#371A51] rounded-full px-4 flex-shrink-0 block md:hidden shadow-xl dark:shadow-2xl"
+                    className="bg-white dark:bg-gray rounded-full px-4 flex-shrink-0 block md:hidden shadow-xl dark:shadow-2xl"
                 >
                     <svg
                         style={{ transform: `rotate(${menuOpen ? '180deg' : '0deg'})` }}
@@ -94,7 +94,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
 
                 <div
                     id="handbook-search-wrapper"
-                    className="flex space-x-3 text-[14px] items-center  py-3 rounded-full px-4 bg-white dark:bg-[#371A51] flex-grow border-2 border-gray"
+                    className="flex space-x-3 text-[14px] items-center  py-3 rounded-full px-4 bg-white dark:bg-gray flex-grow border-2 border-gray dark:border-black"
                 >
                     <span>
                         <svg
@@ -114,7 +114,7 @@ export default function SearchBar({ filePath, title, handleMobileMenuClick, styl
                     </span>
                     <input
                         id="handbook-search"
-                        className="bg-white w-full dark:bg-[#371A51] outline-none text-gray dark:text-[#fff] focus:text-[#000] dark:focus:text-[#fff]"
+                        className="bg-white w-full dark:bg-gray outline-none text-gray dark:text-almost-black "
                         placeholder={`Search ${breakpoints.xs ? '' : 'handbook'}`}
                     />
                 </div>

@@ -30,7 +30,7 @@ export const onRouteUpdate = ({ location }) => {
             preferredTheme =
                 (/^handbook|^docs|^blog/.test(slug) &&
                     (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
-                'dark'
+                'light'
         } catch (err) {}
         window.__setPreferredTheme = function (newTheme) {
             setTheme(newTheme)

@@ -47,6 +47,7 @@ lg:grid-cols-3
 lg:grid-cols-4
 rotate-45
 -rotate-45
+rotate-180
 text-light-yellow
 hover:text-light-yellow
 opacity-60

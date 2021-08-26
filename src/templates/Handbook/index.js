@@ -12,7 +12,7 @@ import Navigation from './Navigation'
 
 export default function Handbook({
     data: { post },
-    pageContext: { menu, next, breadcrumb = [], breadcrumbBase, tableOfContents },
+    pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
 }) {
     const [menuOpen, setMenuOpen] = useState(false)
     const {
@@ -32,8 +32,6 @@ export default function Handbook({
         },
     }
 
-    console.log(breadcrumb)
-
     const handleMobileMenuClick = () => {
         setMenuOpen(!menuOpen)
     }
@@ -47,13 +45,17 @@ export default function Handbook({
                 image={featuredImage?.publicURL}
             />
             <Layout>
-                <div className="handbook-container">
+                <div className="handbook-container px-4">
                     <div id="handbook-menu-wrapper">
                         <Navigation
+                            next={next}
+                            previous={previous}
                             title={title}
                             filePath={filePath}
                             breadcrumb={breadcrumb}
                             breadcrumbBase={breadcrumbBase}
+                            menuOpen={menuOpen}
+                            handleMobileMenuClick={handleMobileMenuClick}
                         />
                         <Menu
                             width="calc(100vw - 80px)"
@@ -68,12 +70,6 @@ export default function Handbook({
                         >
                             <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32" />
                         </Menu>
-                        <SearchBar
-                            menuOpen={menuOpen}
-                            handleMobileMenuClick={handleMobileMenuClick}
-                            filePath={filePath}
-                            title={title}
-                        />
                         <div id="handbook-content-menu-wrapper">
                             <Main
                                 {...{
@@ -89,6 +85,7 @@ export default function Handbook({
                                     tableOfContents,
                                     body,
                                     next,
+                                    previous,
                                 }}
                             />
                         </div>

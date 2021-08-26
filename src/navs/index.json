@@ -295,7 +295,7 @@
         },
         {
             "title": "Get Started",
-            "classes": "cta",
+            "classes": "text-white font-bold hover:text-white select-none px-4 py-2 rounded-full bg-almost-black dark:bg-white dark:text-almost-black dark:hover:text-almost-black",
             "url": "/handbook/company/story"
         },
         {

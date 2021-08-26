@@ -75,10 +75,6 @@ ul {
     -moz-appearance: none;
 }
 
-.cta {
-    @apply bg-almost-black px-5 py-2 rounded-full text-white;
-}
-
 .rc-slider.log-slider .rc-slider-track {
     @apply bg-yellow;
 }

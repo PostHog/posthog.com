@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import MainSidebar from './MainSidebar'
 import InternalSidebar from './InternalSidebar'
-import Breadcrumbs from './Breadcrumbs'
-import NextArticle from './NextArticle'
+import SectionLinks from './SectionLinks'
+import SectionLink from './SectionLink'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -32,6 +32,7 @@ export default function Main({
     tableOfContents,
     body,
     next,
+    previous,
 }) {
     const components = {
         a: A,
@@ -44,8 +45,8 @@ export default function Main({
     const showToc = !hideAnchor && tableOfContents?.length
     const mainEl = useRef()
     return (
-        <div className="relative px-4">
-            <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
+        <div className="relative">
+            <div className="dark:text-white flex max-w-screen-2xl mx-auto items-start relative z-10">
                 <MainSidebar
                     mainEl={mainEl}
                     menu={menu}
@@ -55,15 +56,14 @@ export default function Main({
                 <main ref={mainEl} className={`relative md:pl-16 xl:px-16 2xl:px-32 ${showToc ? '' : 'flex-grow'}`}>
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
                         <section className="mb-8 xl:mb-14 relative">
-                            {breadcrumb && <Breadcrumbs crumbs={breadcrumb} base={breadcrumbBase} />}
                             <h1 className="dark:text-white text-5xl mt-0 mb-2">{title}</h1>
-                            <p className="dark:text-light-purple mt-1 mb-0">
+                            <p className=" mt-1 mb-0">
                                 Last updated: <time>{lastUpdated}</time>
                             </p>
                         </section>
                         {breakpoints.lg && showToc && (
                             <InternalSidebar
-                                className="bg-[#f0f0f0] dark:bg-white p-4 rounded dark:bg-opacity-10 mb-10"
+                                className="bg-gray-accent-light dark:bg-gray-accent-dark p-4 rounded dark:bg-opacity-10 mb-10"
                                 tableOfContents={tableOfContents}
                             />
                         )}
@@ -75,10 +75,17 @@ export default function Main({
                         {showToc && (
                             <div
                                 style={{ height: 'calc(100% - 35vh)' }}
-                                className="border-2 border-dashed border-gray-accent-light absolute bottom-0  right-0 hidden xl:flex justify-center"
+                                className="border-r-2 border-dashed border-gray-accent-light dark:border-gray-accent-dark absolute bottom-0  right-0 hidden xl:flex justify-center"
                             />
                         )}
-                        {next && <NextArticle next={next} hideAnchor={!showToc} breakpoints={breakpoints} />}
+                        {next && (
+                            <SectionLinks
+                                previous={previous}
+                                next={next}
+                                hideAnchor={!showToc}
+                                breakpoints={breakpoints}
+                            />
+                        )}
                     </article>
                 </main>
                 {!breakpoints.lg && showToc && (

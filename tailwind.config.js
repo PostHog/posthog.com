@@ -24,6 +24,7 @@ module.exports = {
                 'pr-32',
                 'rotate-45',
                 'rotate-90',
+                'rotate-180',
                 'max-w-xl',
                 'max-w-2xl',
                 'max-w-3xl',
@@ -42,10 +43,16 @@ module.exports = {
     },
     darkMode: 'class', // or 'media' or 'class'
     theme: {
+        fill: {
+            current: 'currentColor',
+            'almost-black': '#151515',
+            white: 'white',
+        },
         rotate: {
             '-31': '-31deg',
             45: '45deg',
             '-45': '-45deg',
+            180: '180deg',
         },
         screens: {
             xs: '482px',
@@ -97,6 +104,7 @@ module.exports = {
             'light-yellow': '#F1A82C',
             'almost-black': '#151515',
             tan: '#EEEFE9',
+            gray: '#BFBFBC',
             'gray-accent-dark': '#2C2C2C',
             'gray-accent-light': '#E5E7E0',
         }),

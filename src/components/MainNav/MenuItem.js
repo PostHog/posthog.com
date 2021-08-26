@@ -23,7 +23,7 @@ export default function MenuItem({ menuItem }) {
                 <Link
                     onClick={breakpoints.md && sub && handleSubClick}
                     to={url}
-                    className={`${classes} font-semibold text-[15px] text-almost-black hover:text-almost-black`}
+                    className={`font-semibold text-[15px] transition-colors dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black ${classes}`}
                 >
                     {title}
                 </Link>
@@ -41,7 +41,7 @@ export default function MenuItem({ menuItem }) {
                             open={hovered}
                         />
                     ) : (
-                        <Chevron className="text-almost-black" />
+                        <Chevron className="text-gray" />
                     ))}
             </span>
 

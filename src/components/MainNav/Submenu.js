@@ -28,12 +28,12 @@ export default function Submenu({ referenceElement, menu, open }) {
         <div className="z-10 top-[50px] lg:pt-[40px] lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 mx-auto w-full max-w-screen-xl lg:block text-almost-black">
             <span
                 style={{ transform: `translate(calc(-50% - ${offset}px), -17px) rotate(45deg)` }}
-                className="w-8 h-8 bg-white absolute left-1/2 hidden lg:block rounded-tl border-2 border-almost-black border-b-0 border-r-0"
+                className="w-8 h-8 bg-white dark:bg-gray-accent-dark absolute left-1/2 hidden lg:block rounded-tl border-2 border-almost-black border-b-0 border-r-0"
             />
-            <div className="lg:bg-white text-[14px] lg:p-12 p-0 rounded lg:border-2 border-almost-black">
+            <div className="lg:bg-white lg:dark:bg-gray-accent-dark text-[14px] lg:p-12 p-0 rounded lg:border-2 border-almost-black">
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
                     <h1 className="hidden lg:block text-4xl m-0 font-bold">{menu.title}</h1>
-                    <p className="hidden lg:block my-3 ">{menu.description}</p>
+                    <p className="hidden lg:block my-3 text-almost-black dark:text-white">{menu.description}</p>
                 </motion.div>
 
                 <motion.ul initial="hidden" an imate="shown" variants={variants} className="list-none p-0 m-0">
