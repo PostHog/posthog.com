@@ -94,6 +94,8 @@ module.exports = {
             tan: '#EEEFE9',
             'gray-accent-dark': '#2C2C2C',
             'gray-accent-light': '#E5E7E0',
+            'dashed-line-dark': '#4B4B4B',
+            'dashed-line-light': '#D0D1C9',
         }),
         extend: {
             fontFamily: {

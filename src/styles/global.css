@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+div[class^='feature-'] {
+    @apply border-black border-dashed border-2 md:mb-0 relative overflow-hidden;
+}
+
 /* this overrides Tailwind's built-in font-weight classes to work with our variable font */
 @layer utilities {
     .font-thin {

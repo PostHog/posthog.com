@@ -90,16 +90,7 @@
 }
 
 div[class^='feature-'] {
-    border-radius: 20px;
-
-    // @apply mb-2 md:mb-0, relative, overflow-hidden
-    margin-bottom: 2em;
-    overflow: hidden;
-    position: relative;
-
-    @media (min-width: 768px) {
-        margin-bottom: 0;
-    }
+    // @apply is in global.css (@todo)
 
     img,
     svg {

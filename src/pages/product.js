@@ -25,7 +25,7 @@ function ProductPage() {
                 <ProductAnchorNavbar />
                 <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
                     <ProductSectionHeader name="Platform" id="platform" />
-                    <div className="bg-gray-accent-light  text-center feature-open-source">
+                    <div className=" text-center feature-open-source">
                         {/* Platform section starts here */}
                         <ProductFeature
                             layout="reversed"
