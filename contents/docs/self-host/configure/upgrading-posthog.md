@@ -18,5 +18,5 @@ Find the relevant upgrade instructions in the corresponding deployment info page
 - [AWS](/docs/self-host/deploy/aws#upgrading-the-chart)
 - [Using Helm chart](https://github.com/PostHog/charts-clickhouse#upgrading-the-chart)
 
-We recommend for all new installs to use PostHog backed by ClickHouse, in case your running PostHog backed by Postgres the upgrade instructions they can be found [here](https://github.com/PostHog/posthog.com/tree/ee01390744dffdb32f2f78b49572c606becb03b9/contents/docs/self-host/deploy).
+We recommend for all new installs to use PostHog backed by ClickHouse. In case you are running PostHog backed by Postgres you can find the upgrade instructions [here](https://github.com/PostHog/posthog.com/tree/ee01390744dffdb32f2f78b49572c606becb03b9/contents/docs/self-host/deploy).
 
