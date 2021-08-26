@@ -34,11 +34,6 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
-import { Doodle } from './components/Doodle'
-import { DoodleCircle } from './components/DoodleCircle'
-import { DoodleRectangle } from './components/DoodleRectangle'
-import { DoodleTriangle } from './components/DoodleTriangle'
-import { DoodleZigzag } from './components/DoodleZigzag'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -81,7 +76,6 @@ import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
-import { ProductHero } from './components/ProductHero'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
 import { ResponsiveSidebar } from './components/ResponsiveSidebar'
@@ -134,11 +128,6 @@ export const shortcodes = {
     DemoScheduler,
     DocsPageSurvey,
     DocsSearch,
-    Doodle,
-    DoodleCircle,
-    DoodleRectangle,
-    DoodleTriangle,
-    DoodleZigzag,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -181,7 +170,6 @@ export const shortcodes = {
     ProductFeature,
     ProductFeaturePlugin,
     ProductFooter,
-    ProductHero,
     ProductSectionHeader,
     ResponsiveAnchor,
     ResponsiveSidebar,

@@ -1,6 +1,5 @@
 import React from 'react'
 import './styles/features.scss'
-import { ProductHero } from '../components/ProductHero'
 import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
 import ProductImage from '../components/ProductFeature/ProductImage'
@@ -8,7 +7,6 @@ import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
 import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
 import { ProductSectionHeader } from '../components/ProductSectionHeader'
-import { Doodle } from '../components/Doodle'
 
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
@@ -23,27 +21,11 @@ function ProductPage() {
         <>
             <Header />
             <SEO title="Product • PostHog" />
-            <div className="bg-purple">
-                <ProductHero
-                    preTitle="The all-in-one platform to"
-                    title="Build better products"
-                    tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
-                    componentKey="productHero"
-                    disclaimer={
-                        <span>
-                            *Demos are provided by actual PostHog engineers! You can also{' '}
-                            <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
-                                request a sales call
-                            </a>
-                            .
-                        </span>
-                    }
-                    bgColor="navy"
-                />
+            <div className="text-primary">
                 <ProductAnchorNavbar />
                 <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
                     <ProductSectionHeader name="Platform" id="platform" />
-                    <div className="product-feature text-white text-center feature-open-source">
+                    <div className="feature-open-source">
                         {/* Platform section starts here */}
                         <ProductFeature
                             layout="reversed"
@@ -58,17 +40,9 @@ function ProductPage() {
                                 />
                             }
                         />
-
-                        <Doodle type="rectangle" color="#5D96C4" classes="hidden md:block top-12 left-0" />
-                        <Doodle type="circle" color="#FEB7A2" classes="hidden md:block -top-12 -right-24" />
-                        <Doodle
-                            type="triangle"
-                            color="#E5C47D"
-                            classes="hidden md:block bottom-0 -right-12 transform -rotate-31"
-                        />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-event-autocapture">
+                    <div className="feature-event-autocapture">
                         <ProductFeature
                             layout="standard"
                             featureIcon="event-autocapture"
@@ -84,7 +58,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-dashboards">
+                    <div className="feature-dashboards">
                         <ProductFeature
                             layout="standard"
                             featureIcon="dashboards"
@@ -100,8 +74,8 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-in-out">
-                        <div className="md:grid grid-cols-2 gap-3 text-white pt-6 px-4 pb-24 md:py-12 md:px-8 relative">
+                    <div className="feature-data-in-out">
+                        <div className="md:grid grid-cols-2 gap-3  pt-6 px-4 pb-24 md:py-12 md:px-8 relative">
                             <ProductFeature
                                 layout="standard"
                                 featureIcon="data-pipelines"
@@ -127,12 +101,12 @@ function ProductPage() {
                         </div>
                     </div>
 
-                    <div className="product-feature text-white text-center feature-hosting-flexibility pt-12 px-4">
-                        <div className="feature-name flex justify-center items-start gap-2 md:-mb-6">
+                    <div className="feature-hosting-flexibility  pt-12 px-4">
+                        <div className="feature-name flex items-start gap-2 md:-mb-6">
                             <ProductImage imageName="hosting-flexibility.svg" alt="Hosting flexibility icon" isIcon />
                             <div className="font-bold text-pink">Hosting flexibility</div>
                         </div>
-                        <div className="md:grid grid-cols-3 gap-4 text-white">
+                        <div className="md:grid grid-cols-3 gap-4 ">
                             <ProductFeature
                                 layout="standard"
                                 title="PostHog Cloud"
@@ -142,7 +116,7 @@ function ProductPage() {
 
                             <div className="md:py-12 px-2">
                                 <h3 className="mb-2 text-2xl">Private cloud deployment</h3>
-                                <div className="text-white text-opacity-70">
+                                <div className=" text-opacity-70">
                                     <p>
                                         Run PostHog on your own private cloud with one of our install scripts, or get
                                         running on Heroku with a one-click install.
@@ -187,7 +161,7 @@ function ProductPage() {
                         </div>
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-privacy">
+                    <div className="feature-data-privacy">
                         <ProductFeature
                             layout="standard"
                             featureIcon="data-privacy"
@@ -200,7 +174,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-api">
+                    <div className="feature-api">
                         <ProductFeature
                             layout="standard"
                             featureIcon="api"
@@ -216,7 +190,7 @@ function ProductPage() {
 
                     <ProductSectionHeader name="Analytics" id="analytics" />
 
-                    <div className="product-feature text-white text-center feature-trends">
+                    <div className="feature-trends">
                         {/* Analytics section starts here */}
                         <ProductFeature
                             layout="reversed"
@@ -237,25 +211,9 @@ function ProductPage() {
                                 />
                             }
                         />
-
-                        <Doodle
-                            type="rectangle"
-                            color="#5D96C4"
-                            classes="hidden md:block top-12 right-3 transform -scale-x-1"
-                        />
-                        <Doodle
-                            type="circle"
-                            color="#FEB7A2"
-                            classes="hidden md:block -top-12 -left-24 transform -scale-x-1 rotate-180"
-                        />
-                        <Doodle
-                            type="triangle"
-                            color="#E5C47D"
-                            classes="hidden md:block bottom-0 -left-12 transform -rotate-31"
-                        />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-funnels">
+                    <div className="feature-funnels">
                         {/*
                         style={{  
                             backgroundImage: "url(" + `${imageFunnels}` + ")",
@@ -284,7 +242,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-paths">
+                    <div className="feature-paths">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="paths"
@@ -302,14 +260,9 @@ function ProductPage() {
                             imageHeight="620"
                             classes="justify-between h-full"
                         />
-                        <Doodle
-                            type="rectangle"
-                            color="#5D96C4"
-                            classes="hidden md:block bottom-6 left-6 transform -scale-x-1"
-                        />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-cohorts">
+                    <div className="feature-cohorts">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="cohorts"
@@ -326,7 +279,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-user-sessions">
+                    <div className="feature-user-sessions">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="user-sessions"
@@ -341,11 +294,9 @@ function ProductPage() {
                                 />
                             }
                         />
-                        <Doodle type="zigzag" color="#FFCF72" classes="hidden md:block -top-4 left-6" />
-                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-retention">
+                    <div className="feature-retention">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="retention"
@@ -362,7 +313,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-revenue-tracking">
+                    <div className="feature-revenue-tracking">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="revenue-tracking"
@@ -382,7 +333,7 @@ function ProductPage() {
                 <ProductSectionHeader name="Insights" id="insights" />
 
                 <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
-                    <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start pr-50">
+                    <div className="feature-feature-flags flex items-center justify-start pr-50">
                         {/* Insights section starts here */}
                         <ProductFeature
                             layout="standard"
@@ -401,7 +352,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-annotations flex items-end">
+                    <div className="feature-annotations flex items-end">
                         <ProductFeature
                             layout="standard"
                             featureIcon="annotations"
@@ -413,7 +364,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center flex items-center feature-heatmaps pr-24 xl:pr-32">
+                    <div className="flex items-center feature-heatmaps pr-24 xl:pr-32">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="heatmaps"
@@ -426,7 +377,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-session-recordings">
+                    <div className="feature-session-recordings">
                         <ProductFeature
                             layout="standard"
                             featureIcon="session-recordings"
@@ -445,7 +396,7 @@ function ProductPage() {
 
                     <ProductSectionHeader name="Plugins" id="plugins" />
 
-                    <div className="product-feature text-white text-center feature-data-export">
+                    <div className="feature-data-export">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-export"
@@ -472,7 +423,7 @@ function ProductPage() {
                         </ul>
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-filtering">
+                    <div className="feature-data-filtering">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-filtering"
@@ -489,7 +440,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-custom-plugins min-h-[350px]">
+                    <div className="feature-custom-plugins min-h-[350px]">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="custom-plugins"
@@ -501,7 +452,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-enrichment">
+                    <div className="feature-data-enrichment">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-enrichment"
@@ -524,9 +475,6 @@ function ProductPage() {
                             <ProductFeaturePlugin name="GitLab release tracker" handle="gitlab-release" />
                             <ProductFeaturePlugin name="Bitbucket release tracker" handle="bitbucket-release" />
                         </ul>
-
-                        <Doodle type="rectangle" classes="hidden md:block top-12 -left-6" />
-                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
                 </div>
 

@@ -89,17 +89,8 @@
     }
 }
 
-.product-feature {
-    background: linear-gradient(180deg, #3f086d 0%, #32134e 100%);
-    border-radius: 20px;
-
-    // @apply mb-2 md:mb-0, relative, overflow-hidden
-    margin-bottom: 2em;
-    overflow: hidden;
-    position: relative;
-    @media (min-width: 768px) {
-        margin-bottom: 0;
-    }
+div[class^='feature-'] {
+    // @apply is in global.css (@todo)
 
     .reversed {
         display: flex;
@@ -109,13 +100,13 @@
             margin-top: 3em;
         }
     }
+}
 
-    .feature-name {
-        img,
-        svg {
-            height: 18px;
-            width: 18px;
-        }
+.feature-name {
+    img,
+    svg {
+        height: 18px;
+        width: 18px;
     }
 }
 

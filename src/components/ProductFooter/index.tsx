@@ -25,7 +25,7 @@ export const ProductFooter = ({ title, tagline, componentKey, bgColor = 'navy', 
                     <LandingPageCallToAction />
                 </div>
 
-                <div className="text-white text-opacity-70 mt-6 text-xs">
+                <div className="mt-6 text-xs">
                     <p className="max-w-3xl mx-auto text-xs text-baby-blue">{disclaimer}</p>
                 </div>
             </div>

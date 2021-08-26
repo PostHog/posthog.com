@@ -88,7 +88,7 @@ export const SelfHostedPlanBreakdown = () => {
                                     <span className="text-sm text-white text-opacity-75">team members</span>
                                 </li>
                             </ul>
-                            <ul className="list-none text-white text-opacity-70 text-sm pl-0 mb-6">
+                            <ul className="list-none text-sm pl-0 mb-6">
                                 <li className="flex items-center mb-2 space-x-2">
                                     <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
                                     <span className="">Collaboration features</span>
