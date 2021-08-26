@@ -13,7 +13,7 @@ featuredImageType: full
 Product testing is essential, but your testing won’t always pick up the small sources of friction which build up over time and frustrate your users. This is where ‘dogfooding’ comes in - regularly using your product to get the full picture and build empathy with your users.
 
 ## How empathy improves prioritization
-It’s logical to deprioritize a “small UX bug” when you have big stratic new features to implement - but the only way to ensure that “small UX bug” doesn’t lead to high churn for your product is to put yourself in your users’ shoes. Doing this over time leads to better feature prioritization and more effective product decisions.
+It’s logical to deprioritize a “small UX bug” when you have big strategic new features to implement - but the only way to ensure that “small UX bug” doesn’t lead to high churn for your product is to put yourself in your users’ shoes. Doing this over time leads to better feature prioritization and more effective product decisions.
 
 ## Dogfooding puts you in the right context
 You might be the product manager for a product that isn’t designed to be used in your office. After all, I used to build mobile apps for people who replaced railway tracks in the middle of the night. Lab testing will still surface problems with your product - but they might lack context. Nothing beats dogfooding a product under real world conditions - if you’re out on the railway at 2am, you’re likely to have a vastly different product experience to a PM using it in their office during daytime. Setting aside 30 mins every day or a few times a week to test a product “in the field” is significantly more valuable than using it in isolation somewhere else.
