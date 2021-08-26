@@ -63,7 +63,7 @@ export default function SubmenuItem({ item }) {
                                         <li key={index}>
                                             <Link
                                                 disablePrefetch
-                                                className="text-almost-black font-semibold transition-colors hover:text-almost-black p-2 hover:bg-gray-accent-light rounded flex items-center space-x-2 text-[14px]"
+                                                className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold transition-colors p-2 hover:bg-gray-accent-light rounded flex items-center space-x-2 text-[14px]"
                                                 to={url}
                                             >
                                                 {icon && (
