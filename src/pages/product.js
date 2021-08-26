@@ -22,25 +22,22 @@ function ProductPage() {
             <Header />
             <SEO title="Product • PostHog" />
             <div className="text-primary">
+                <div className="text-center mb-12">
+                    <StaticImage
+                        className="product-hero-image relative z-10 w-full max-w-screen-lg mx-auto mt-6"
+                        src="../components/ProductFeature/images/feature-dashboard.png"
+                    />
+                    <h1 className="mb-0">Open source product analytics</h1>
+                    <p>
+                        PostHog keeps you in control of customer data. Works with your event pipelines and data
+                        warehouse.
+                    </p>
+                </div>
+
                 <ProductAnchorNavbar />
+
                 <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
                     <ProductSectionHeader name="Platform" id="platform" />
-                    <div className="feature-open-source">
-                        {/* Platform section starts here */}
-                        <ProductFeature
-                            layout="reversed"
-                            featureIcon="open-source"
-                            featureName="Open source"
-                            title="Open source product analytics"
-                            description="Check out our source code, request new features or get involved with the product directly."
-                            staticImage={
-                                <StaticImage
-                                    className="relative z-10 w-full max-w-screen-lg shadow-xl mx-auto -mb-12 mt-6"
-                                    src="../components/ProductFeature/images/feature-dashboard.png"
-                                />
-                            }
-                        />
-                    </div>
 
                     <div className="feature-event-autocapture">
                         <ProductFeature

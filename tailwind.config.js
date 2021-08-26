@@ -34,10 +34,14 @@ module.exports = {
                 'w-56',
                 'w-64',
                 'w-72',
+                'text-opacity-50',
+                'text-opacity-100',
                 'opacity-40',
                 'opacity-60',
                 'opacity-75',
-                'opacity-1',
+                'opacity-100',
+                'border-opacity-75',
+                'border-opacity-100',
             ],
         },
     },
@@ -153,6 +157,10 @@ module.exports = {
             },
             minHeight: {
                 780: '780px',
+            },
+            borderColor: {
+                'dashed-line-dark': '#4B4B4B',
+                'dashed-line-light': '#D0D1C9',
             },
             borderRadius: {
                 sm: '4px',
