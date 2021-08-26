@@ -41,3 +41,24 @@ Note that when using a browser there are various layers of caching and other log
 ### How can I increase storage size?
   
 Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
+
+### Are the errors I'm seeing important?
+
+Here are some examples of log spam we know that currently exists in our app and is safe to ignore:
+
+The following messages in the ClickHouse pod happen, when clickhouse reshuffles how it consumes from the topics, so anytime clickhouse restarts or kafka restarts we'll get a bit of noise. As long as events are coming in things are good.
+```
+<Error> TCPHandler: Code: 60, e.displayText() = DB::Exception: Table posthog.sharded_events doesn't exist.
+...
+<Warning> StorageKafka (kafka_session_recording_events): Can't get assignment. It can be caused by some issue with consumer group (not enough partitions?). Will keep trying.
+```
+
+
+This error shows up in Sentry as well. Its coming from some low-priority celery tasks and we haven't see any actual impact.
+```
+TooManyConnections: too many connections
+  File "posthog/celery.py",
+  ...
+  File "clickhouse_pool/pool.py", line 102, in pull
+    raise TooManyConnections("too many connections")
+```
