@@ -28,15 +28,15 @@ function ProductPage() {
                         src="../components/ProductFeature/images/feature-dashboard.png"
                     />
                     <h1 className="mb-0">Open source product analytics</h1>
-                    <p>
+                    <h5>
                         PostHog keeps you in control of customer data. Works with your event pipelines and data
                         warehouse.
-                    </p>
+                    </h5>
                 </div>
 
                 <ProductAnchorNavbar />
 
-                <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
+                <div className="features-grid two-column-grid md:grid md:grid-cols-2 justify-between max-w-screen-2xl mx-auto mt[-50]">
                     <ProductSectionHeader name="Platform" id="platform" />
 
                     <div className="feature-event-autocapture">
@@ -49,9 +49,9 @@ function ProductPage() {
                             docsUrl="/docs/user-guides/events#autocapture-event-tracking"
                             figureClasses="mb-8"
                             image="feature-event-autocapture.svg"
-                            imageWidth="253"
-                            imageHeight="147"
-                            classes=""
+                            imageWidth="439"
+                            imageHeight="90"
+                            classes="max-w-md mx-auto"
                         />
                     </div>
 
@@ -67,12 +67,12 @@ function ProductPage() {
                             image="feature-dashboards.svg"
                             imageWidth="234"
                             imageHeight="141"
-                            classes=""
+                            classes="max-w-md mx-auto"
                         />
                     </div>
 
                     <div className="feature-data-in-out">
-                        <div className="md:grid grid-cols-2 gap-3  pt-6 px-4 pb-24 md:py-12 md:px-8 relative">
+                        <div className="md:grid grid-cols-2 gap-3 pt-6 px-4 md:pt-12 md:px-8 relative border-gray-accent-light border-dashed border-t-2">
                             <ProductFeature
                                 layout="standard"
                                 featureIcon="data-pipelines"
@@ -80,7 +80,7 @@ function ProductPage() {
                                 title="Ingest data from multiple sources"
                                 description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
                                 docsUrl="/docs/integrate/overview"
-                                classes=""
+                                classes="max-w-md mx-auto"
                             />
 
                             <ProductFeature
@@ -90,36 +90,38 @@ function ProductPage() {
                                 title="Normalize & push data anywhere"
                                 description="Move data through PostHog to BigQuery, S3, Snowflake, or Redshift."
                                 docsUrl="/docs/user-guides/plugins#example-use-cases"
-                                classes=""
+                                classes="max-w-md mx-auto"
                             />
                         </div>
-                        <div className="-mt-16 mx-1 md:mx-12 mb-12 flex justify-center">
+
+                        <div className="mx-1 md:mx-12 mb-6 flex justify-center">
                             <ProductImage imageName="feature-data-in-out.svg" />
                         </div>
                     </div>
 
-                    <div className="feature-hosting-flexibility  pt-12 px-4">
-                        <div className="feature-name flex items-start gap-2 md:-mb-6">
-                            <ProductImage imageName="hosting-flexibility.svg" alt="Hosting flexibility icon" isIcon />
-                            <div className="font-bold text-pink">Hosting flexibility</div>
+                    <div className="feature-hosting-flexibility mt-4 py-12 px-4 border-gray-accent-light border-dashed border-t-2 border-b-2">
+                        <div className="feature-name flex items-start gap-2 border-gray-accent-light border-dashed border-b-2 pb-2 mb-4">
+                            <ProductImage imageName="hosting-flexibility.svg" alt="Hosting options icon" isIcon />
+                            <div className="font-bold">Hosting options</div>
                         </div>
+
                         <div className="md:grid grid-cols-3 gap-4 ">
                             <ProductFeature
                                 layout="standard"
                                 title="PostHog Cloud"
                                 description="Our hosted solution scales to billions of events per month, receives automatic upgrades, and is managed by our team."
-                                classes=""
+                                classes="max-w-sm mx-auto"
                             />
 
-                            <div className="md:py-12 px-2">
+                            <div className="md:py-8 px-2 max-w-sm mx-auto">
                                 <h3 className="mb-2 text-2xl">Private cloud deployment</h3>
-                                <div className=" text-opacity-70">
+                                <div className="text-opacity-70">
                                     <p>
                                         Run PostHog on your own private cloud with one of our install scripts, or get
                                         running on Heroku with a one-click install.
                                     </p>
                                 </div>
-                                <ul className="flex justify-center flex-wrap p-0 list-none text-center">
+                                <ul className="flex flex-wrap p-0 list-none text-center">
                                     <HostingOption name="Heroku" handle="heroku" url="/docs/self-host/deploy/heroku" />
                                     <HostingOption name="AWS" handle="aws" url="/docs/self-host/deploy/aws" />
                                     <HostingOption
@@ -153,14 +155,14 @@ function ProductPage() {
                                         </p>
                                     </>
                                 }
-                                classes=""
+                                classes="max-w-sm mx-auto"
                             />
                         </div>
                     </div>
 
                     <div className="feature-data-privacy">
                         <ProductFeature
-                            layout="standard"
+                            layout="reversed"
                             featureIcon="data-privacy"
                             featureName="Data privacy"
                             title="Compliance-friendly"
@@ -173,7 +175,7 @@ function ProductPage() {
 
                     <div className="feature-api">
                         <ProductFeature
-                            layout="standard"
+                            layout="reversed"
                             featureIcon="api"
                             featureName="API"
                             title="Full access to your data"
@@ -187,26 +189,24 @@ function ProductPage() {
 
                     <ProductSectionHeader name="Analytics" id="analytics" />
 
-                    <div className="feature-trends">
+                    <div className="feature-trends flex flex-col md:flex-row mt-4 items-center border-gray-accent-light border-dashed border-b-2">
                         {/* Analytics section starts here */}
+
+                        <div className="product-hero-image relative">
+                            <StaticImage
+                                className="w-full max-w-screen-lg relative z-20 mx-auto"
+                                src="../components/ProductFeature/images/feature-insights.png"
+                            />
+                        </div>
+
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="trends"
                             featureName="Trends"
-                            title={
-                                <span>
-                                    Monitor engagement. <br />
-                                    Create actionable insights.
-                                </span>
-                            }
-                            description="Monitor the impact of product changes - by customer plan, traffic source, or any other user property."
+                            title={<span>Monitor the impact of product changes</span>}
+                            description="Group data by customer plan, traffic source, or any other user property."
                             docsUrl="/docs/user-guides/trends"
-                            staticImage={
-                                <StaticImage
-                                    className="w-full max-w-screen-lg relative z-20 mx-auto -mb-12 mt-6"
-                                    src="../components/ProductFeature/images/feature-insights.png"
-                                />
-                            }
+                            classes="px-16 pt-16"
                         />
                     </div>
 
@@ -227,21 +227,20 @@ function ProductPage() {
                             featureName="Funnels"
                             title={
                                 <span>
-                                    Identify <strike className="opacity-50">dropoff</strike> <br />
-                                    opportunity
+                                    Identify <strike className="opacity-50">dropoff</strike> opportunity
                                 </span>
                             }
                             description="Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment."
                             docsUrl="/docs/user-guides/funnels"
                             //bgImage={`${imageFunnels}`}
                             bgImagePosition="bottom center / 100%"
-                            classes="relative"
+                            classes="relative max-w-md mx-auto pt-16"
                         />
                     </div>
 
-                    <div className="feature-paths">
+                    <div className="feature-paths border-gray-accent-light border-dashed border-l-2">
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="paths"
                             featureName="Paths"
                             title="Visualize how traffic flows"
@@ -255,7 +254,7 @@ function ProductPage() {
                             }
                             imageWidth="320"
                             imageHeight="620"
-                            classes="justify-between h-full"
+                            classes="justify-between h-full max-w-md mx-auto pt-16"
                         />
                     </div>
 
@@ -273,10 +272,11 @@ function ProductPage() {
                                     src="../components/ProductFeature/images/feature-cohorts@2x.png"
                                 />
                             }
+                            classes="mt-16 max-w-md mx-auto"
                         />
                     </div>
 
-                    <div className="feature-user-sessions">
+                    <div className="feature-user-sessions flex flex-col md:flex-row items-center p-16 border-gray-accent-light border-dashed border-t-2 border-b-2">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="user-sessions"
@@ -284,18 +284,17 @@ function ProductPage() {
                             title="See a timeline of a user's activity"
                             description="User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context."
                             docsUrl="/docs/user-guides/sessions"
-                            staticImage={
-                                <StaticImage
-                                    className="mt-6 -mb-12 mx-auto w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
-                                    src="../components/ProductFeature/images/feature-user-sessions@2x.png"
-                                />
-                            }
+                        />
+
+                        <StaticImage
+                            className="mt-6 mx-auto w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
+                            src="../components/ProductFeature/images/feature-user-sessions@2x.png"
                         />
                     </div>
 
-                    <div className="feature-retention">
+                    <div className="feature-retention border-gray-accent-light border-dashed border-r-2">
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="retention"
                             featureName="Retention"
                             title="Group users by lifecycle"
@@ -303,26 +302,28 @@ function ProductPage() {
                             docsUrl="/docs/user-guides/retention"
                             staticImage={
                                 <StaticImage
-                                    className="mx-auto mt-6 max-w-[455px]"
+                                    className="mt-6 max-w-[455px]"
                                     src="../components/ProductFeature/images/feature-retention@2x.png"
                                 />
                             }
+                            classes="max-w-md mx-auto"
                         />
                     </div>
 
                     <div className="feature-revenue-tracking">
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="revenue-tracking"
                             featureName="Revenue tracking"
                             title="KPIs by LTV"
                             description="By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon."
                             staticImage={
                                 <StaticImage
-                                    className="mx-auto mt-6 mb-6 max-w-[253px]"
+                                    className="mt-6 mb-6 max-w-[253px]"
                                     src="../components/ProductFeature/images/feature-revenue-tracking@2x.png"
                                 />
                             }
+                            classes="max-w-md mx-auto"
                         />
                     </div>
                 </div>

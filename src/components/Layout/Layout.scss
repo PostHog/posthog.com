@@ -48,8 +48,9 @@
 }
 
 body {
-    font-variant: none;
-    font-feature-settings: unset;
+    font-variant-numeric: proportional-nums !important;
+    font-feature-settings: unset !important;
+    font-variant-numeric: initial !important;
 }
 
 a {

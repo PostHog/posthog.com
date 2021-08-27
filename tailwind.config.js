@@ -105,7 +105,7 @@ module.exports = {
             tan: '#EEEFE9',
             gray: '#BFBFBC',
             'gray-accent-dark': '#2C2C2C',
-            'gray-accent-light': '#E5E7E0',
+            'gray-accent-light': '#f00',
         }),
         extend: {
             fontFamily: {
@@ -150,7 +150,7 @@ module.exports = {
                 tan: '#EEEFE9',
                 gray: '#BFBFBC',
                 'gray-accent-dark': '#2C2C2C',
-                'gray-accent-light': '#E5E7E0',
+                'gray-accent-light': '#BFBFBC',
                 red: '#EA4335',
                 'dashed-line-dark': '#4B4B4B',
                 'dashed-line-light': '#D0D1C9',

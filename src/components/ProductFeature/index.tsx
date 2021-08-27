@@ -44,7 +44,7 @@ export const ProductFeature = ({
     return (
         <div
             id={id} // ID applied to navigate using navbar (must be passed only for starting elements)
-            className={`foo1 ${layout} ${classes}`}
+            className={`px-4 py-8 ${layout} ${classes}`}
             // Not being used
             style={
                 bgImage
@@ -55,32 +55,19 @@ export const ProductFeature = ({
                     : undefined
             }
         >
-            {/* only render if {image} exists */}
-            {image && (
-                <figure className={`flex justify-center items-center ${figureClasses}`}>
-                    <ProductImage
-                        imageName={image}
-                        className={imageClasses}
-                        width={imageWidth}
-                        height={imageHeight}
-                        style={{ height: 'max-content' }}
-                    />
-                </figure>
-            )}
-            {staticImage}
-            <div>
+            <div className="flex flex-col">
                 {/* only render if featureName exists */}
                 {featureName && (
-                    <div className="feature-name flex items-start gap-2 mb-2">
+                    <div className="feature-name text-black text-opacity-40 flex items-start gap-2 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t-0 border-b-2 pb-2 mb-8">
                         {featureIcon && (
-                            // Uncomment this peice of code to use svg sprite file
-                            <svg>
+                            // Uncomment this piece of code to use svg sprite file
+                            <svg className="fill-current">
                                 <use href={`${spritedIcons}#${featureIcon}`} />
                             </svg>
 
                             // <img src={`${featureIcon}`} alt={`${featureName} icon`} />
                         )}
-                        <div className="font-bold">{featureName}</div>
+                        <div className="font-semibold text-base">{featureName}</div>
                     </div>
                 )}
 
@@ -96,6 +83,20 @@ export const ProductFeature = ({
                         Docs <span className="text-gray">&rarr;</span>
                     </Link>
                 )}
+
+                {/* only render if {image} exists */}
+                {image && (
+                    <figure className={`mt-8 ${figureClasses}`}>
+                        <ProductImage
+                            imageName={image}
+                            className={imageClasses}
+                            width={imageWidth}
+                            height={imageHeight}
+                            style={{ height: 'max-content' }}
+                        />
+                    </figure>
+                )}
+                {staticImage}
             </div>
         </div>
     )
