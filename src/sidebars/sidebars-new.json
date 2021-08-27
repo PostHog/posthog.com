@@ -226,6 +226,10 @@
                     "url": "/handbook/engineering/bug-prioritization"
                 },
                 {
+                    "name": "Enterprise prioritization",
+                    "url": "/handbook/engineering/enterprise-prioritization"
+                },
+                {
                     "name": "Onboarding customers",
                     "url": "/handbook/engineering/onboarding-customer"
                 },
