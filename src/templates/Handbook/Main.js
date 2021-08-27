@@ -46,13 +46,16 @@ export default function Main({
     const mainEl = useRef()
     return (
         <div className="relative">
-            <div className="dark:text-white flex max-w-screen-2xl mx-auto items-start relative z-10">
-                <MainSidebar
-                    mainEl={mainEl}
-                    menu={menu}
-                    slug={slug}
-                    className="hidden md:block flex-1 sticky top-4 w-full transition-opacity md:opacity-60 hover:opacity-100"
-                />
+            <div className="dark:text-white flex max-w-screen-2xl mx-auto items-start relative z-10 mt-8">
+                <div className="sticky top-20 flex-1">
+                    <SectionLink link={previous} iconClass="transform rotate-180" className="hidden md:flex mb-8" />
+                    <MainSidebar
+                        mainEl={mainEl}
+                        menu={menu}
+                        slug={slug}
+                        className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100"
+                    />
+                </div>
                 <main ref={mainEl} className={`relative md:pl-16 xl:px-16 2xl:px-32 ${showToc ? '' : 'flex-grow'}`}>
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
                         <section className="mb-8 xl:mb-14 relative">
@@ -74,7 +77,7 @@ export default function Main({
                         </section>
                         {showToc && (
                             <div
-                                style={{ height: 'calc(100% - 35vh)' }}
+                                style={{ height: 'calc(100% - 22vh)' }}
                                 className="border-r-2 border-dashed border-gray-accent-light dark:border-gray-accent-dark absolute bottom-0  right-0 hidden xl:flex justify-center"
                             />
                         )}
@@ -88,12 +91,16 @@ export default function Main({
                         )}
                     </article>
                 </main>
-                {!breakpoints.lg && showToc && (
-                    <InternalSidebar
-                        className="flex-1 sticky top-4 mt-[35vh] mb-14 hidden xl:block"
-                        tableOfContents={tableOfContents}
-                    />
-                )}
+
+                <div className="sticky top-20 flex-1">
+                    <SectionLink className="hidden md:flex justify-end absolute top-0 right-0" link={next} />
+                    {!breakpoints.lg && showToc && (
+                        <InternalSidebar
+                            className="mt-[20vh] mb-14 hidden xl:block"
+                            tableOfContents={tableOfContents}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     )

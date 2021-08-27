@@ -56,3 +56,7 @@ border-opacity-75
 border-opacity-100
 text-opacity-50
 text-opacity-100
+text-almost-black
+hover:text-almost-black
+dark:text-almost-black
+dark:hover:text-almost-black

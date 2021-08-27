@@ -23,7 +23,10 @@ export default function MenuItem({ menuItem }) {
                 <Link
                     onClick={breakpoints.md && sub && handleSubClick}
                     to={url}
-                    className={`font-semibold text-[15px] transition-colors dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black ${classes}`}
+                    className={
+                        classes ||
+                        'font-semibold text-[15px] transition-colors dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
+                    }
                 >
                     {title}
                 </Link>

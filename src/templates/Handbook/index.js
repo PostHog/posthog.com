@@ -47,16 +47,6 @@ export default function Handbook({
             <Layout>
                 <div className="handbook-container px-4">
                     <div id="handbook-menu-wrapper">
-                        <Navigation
-                            next={next}
-                            previous={previous}
-                            title={title}
-                            filePath={filePath}
-                            breadcrumb={breadcrumb}
-                            breadcrumbBase={breadcrumbBase}
-                            menuOpen={menuOpen}
-                            handleMobileMenuClick={handleMobileMenuClick}
-                        />
                         <Menu
                             width="calc(100vw - 80px)"
                             onClose={() => setMenuOpen(false)}
@@ -70,6 +60,16 @@ export default function Handbook({
                         >
                             <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32" />
                         </Menu>
+                        <Navigation
+                            next={next}
+                            previous={previous}
+                            title={title}
+                            filePath={filePath}
+                            breadcrumb={breadcrumb}
+                            breadcrumbBase={breadcrumbBase}
+                            menuOpen={menuOpen}
+                            handleMobileMenuClick={handleMobileMenuClick}
+                        />
                         <div id="handbook-content-menu-wrapper">
                             <Main
                                 {...{
