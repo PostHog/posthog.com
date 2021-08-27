@@ -31,7 +31,7 @@ const Quote = ({ image, name, position, details, className = '' }: QuoteProps) =
 
 export const WorkingAtPostHog = () => {
     return (
-        <div className="careers-working-at-posthog pt-24 text-white text-center" id="working-at-posthog">
+        <div className="pt-24 text-white text-center" id="working-at-posthog">
             <Structure.Section width="5xl">
                 <Structure.SectionHeader
                     title="Working at PostHog"

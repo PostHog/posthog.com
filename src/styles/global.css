@@ -18,9 +18,8 @@ p {
 
 .product-hero-image {
     &:after {
-        @apply absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-tan;
+        @apply absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-tan z-20;
         content: '';
-        /* height: 200px; */
     }
 }
 
@@ -33,6 +32,18 @@ div[class^='feature-'].text-center {
     background: url('../images/dash-vertical.svg') 100% / 1px repeat-y;
 }
 
+/* Careers page */
+
+.benefits-grid {
+    > div {
+        @apply border-gray-accent-light border-r border-b border-dashed;
+
+        &:nth-child(4n) {
+            @apply border-r-0;
+        }
+    }
+}
+
 /* this overrides Tailwind's built-in font-weight classes to work with our variable font */
 @layer utilities {
     .font-thin {
@@ -43,6 +54,9 @@ div[class^='feature-'].text-center {
     }
     .font-light {
         font-variation-settings: 'wght' 300;
+    }
+    .font-lightish {
+        font-variation-settings: 'wght' 400;
     }
     .font-normal {
         font-variation-settings: 'wght' 475;

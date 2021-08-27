@@ -91,6 +91,7 @@ module.exports = {
         backgroundColor: (theme) => ({
             white: '#fff',
             black: '#000',
+            primary: '#151515',
             orange: '#EF7632',
             'baby-blue': '#CDD0FF',
             'deep-blue': '#160431',
@@ -105,7 +106,7 @@ module.exports = {
             tan: '#EEEFE9',
             gray: '#BFBFBC',
             'gray-accent-dark': '#2C2C2C',
-            'gray-accent-light': '#E5E7E0',
+            'gray-accent-light': '#f00',
         }),
         extend: {
             fontFamily: {
@@ -129,10 +130,10 @@ module.exports = {
                 nav: ['MatterVF', 'sans-serif'],
             },
             fontSize: {
-                '2xs': '0.65rem',
-                base: '16px',
-                'base-larger': '.933rem',
-                'text-sm': '.8rem',
+                // '2xs': '0.65rem',
+                // base: '16px',
+                // 'base-larger': '.933rem',
+                // 'text-sm': '.8rem',
             },
             colors: {
                 primary: '#151515',
@@ -150,7 +151,7 @@ module.exports = {
                 tan: '#EEEFE9',
                 gray: '#BFBFBC',
                 'gray-accent-dark': '#2C2C2C',
-                'gray-accent-light': '#E5E7E0',
+                'gray-accent-light': '#BFBFBC',
                 red: '#EA4335',
                 'dashed-line-dark': '#4B4B4B',
                 'dashed-line-light': '#D0D1C9',

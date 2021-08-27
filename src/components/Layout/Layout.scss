@@ -48,8 +48,9 @@
 }
 
 body {
-    font-variant: none;
-    font-feature-settings: unset;
+    font-variant-numeric: proportional-nums !important;
+    font-feature-settings: unset !important;
+    font-variant-numeric: initial !important;
 }
 
 a {
@@ -293,6 +294,7 @@ h5,
 h6 {
     color: inherit;
     font-variation-settings: 'wght' 800; // override ant
+    letter-spacing: -0.02em;
     text-rendering: optimizeLegibility;
 }
 
