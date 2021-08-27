@@ -8,7 +8,7 @@ import { mergeClassList } from '../../lib/utils'
 interface FooterListItemProps {
     to?: string
     href?: string
-    children: any
+    children: React.ReactNode
     border?: boolean
 }
 
@@ -27,11 +27,11 @@ const FooterListItem = ({ to = '', border = true, href = '', children }: FooterL
     )
 }
 
-const FooterSubCategory = ({ children }: { children: any }) => (
+const FooterSubCategory = ({ children }: { children: React.ReactNode }) => (
     <header className="block text-white mt-8 mb-2 font-bold text-sm">{children}</header>
 )
 
-const FooterCategory = ({ children, title }: { children: any; title: string }) => {
+const FooterCategory = ({ children, title }: { children: React.ReactNode; title: string }) => {
     const [expanded, setExpanded] = useState(false)
 
     return (

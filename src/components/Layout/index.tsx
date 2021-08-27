@@ -26,7 +26,7 @@ interface LayoutProps {
     isDocsPage?: boolean
     isHomePage?: boolean
     blogArticleSlug?: string
-    children?: any
+    children?: React.ReactNode
     className?: string
     containerStyle?: Record<string, any>
     menuActiveKey?: string

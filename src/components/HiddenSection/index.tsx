@@ -5,8 +5,8 @@ import './style.scss'
 
 interface HiddenSectionProps {
     headingType: Heading
-    title: any
-    children: any
+    title: string
+    children: React.ReactNode
     endWithDivider?: boolean
     defaultIsOpen?: boolean
 }
