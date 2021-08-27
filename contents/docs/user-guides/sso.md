@@ -183,7 +183,7 @@ If your IdP does not send these attributes based on the default name on PostHog 
 Do not enforce SAML until you have tested everything works correctly or you'll be locked out. Disable enforcing and visit <code>/login</code> if you get locked out.
 </blockquote>
 
-To remove the burden of having to manage users in multiple places and/or compliance, you may want to make sure access to PostHog is limited only through SAML authentication. This is quite easy to accomplish, just set the [environment variable][env-vars]: `SAML_ENFORCED = True`. Only do this after you've made sure SAML works as expected.
+To remove the burden of having to manage users in multiple places or if your company has certain internal policies or IT compliance requirements, you may want to make sure access to PostHog is limited only through SAML authentication. This is quite easy to accomplish, just set the [environment variable][env-vars]: `SAML_ENFORCED = True`. Only do this after you've made sure SAML works as expected.
 
 Finally, please do consider [warning #2](#warnings) above. Enforcing SAML will **not prevent Personal API Key** usage. It will only disable password-based login.
 
