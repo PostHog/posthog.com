@@ -7,7 +7,7 @@ tags:
     - aws
 ---
 
-First, we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). The default nodes (2x m5.large) work well for running Posthog.
+First, we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). Follow the "Managed nodes - Linux" guide. The default nodes (2x m5.large) work well for running Posthog.
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 ```yaml
