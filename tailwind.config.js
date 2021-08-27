@@ -91,6 +91,7 @@ module.exports = {
         backgroundColor: (theme) => ({
             white: '#fff',
             black: '#000',
+            primary: '#151515',
             orange: '#EF7632',
             'baby-blue': '#CDD0FF',
             'deep-blue': '#160431',
@@ -129,10 +130,10 @@ module.exports = {
                 nav: ['MatterVF', 'sans-serif'],
             },
             fontSize: {
-                '2xs': '0.65rem',
-                base: '16px',
-                'base-larger': '.933rem',
-                'text-sm': '.8rem',
+                // '2xs': '0.65rem',
+                // base: '16px',
+                // 'base-larger': '.933rem',
+                // 'text-sm': '.8rem',
             },
             colors: {
                 primary: '#151515',
