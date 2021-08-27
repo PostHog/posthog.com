@@ -1,12 +1,12 @@
 ---
-title: AWS tips and faq
+title: AWS tips and FAQ
 sidebar: Handbook
 showTitle: true
 ---
 
 ### How do I get access?
 
-Ask in slack in #team-deployments-and-infrastructure as someone needs to add you. Though note that anyone who has edit access can do it.
+Ask in slack in #team-platform as someone needs to add you. Though note that anyone who has edit access can do it.
 
 To give someone access: navigate to [IAM](https://console.aws.amazon.com/iamv2/home#/users) and use the Add Users button at the top right to add their posthog email as user name, pick "AWS Management Console access" and add them to the "Team" group, then slack them the sign-in URL, User name and password.
 
