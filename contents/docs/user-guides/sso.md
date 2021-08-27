@@ -123,7 +123,7 @@ When using SAML to authenticate your users in PostHog there are a few considerat
 4. When you enable or enforce SAML, any existing user passwords are preserved. This means if you ever want to go back (or something breaks down with your authentication), you can just stop enforcing SAML and you'll be able to log in with your existing credentials.
 
 ### Setting up SAML
-For SAML to work your IdP and PostHog (SP) need to exchange information. To do this, you need to set up some settings in your IdP and on PostHog. Depending on your IdP you might need to pass PostHog information first, or the other way around. See details below.
+For SAML to work your IdP and PostHog (SP) need to exchange information. To do this, you need to configure some settings in your IdP and on PostHog. Depending on your IdP you might need to pass PostHog information first, or the other way around. See details below.
 1. Make sure you have properly set up your `SITE_URL` [environment variable][env-vars] configuration.
 2. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/`)
     - **Single Sign On URL** (also called ACS Consumer URL): `<yourdomain>/complete/saml/`
@@ -166,12 +166,12 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
 
 If your IdP does not send these attributes based on the default name on PostHog you have two options. Either adjust your IdP configuration to send the attributes with PostHog's default name, or set the respective environment variable (as noted above) to the attribute name your provider uses.
 
-3. You will now need to obtain some parameters from your IdP and set them up in PostHog as [environment variables][env-vars]. Depending on your provider, they may only provide this information as an XML metadata file. If this is the case, you can open the file in a text editor and obtain the required values from there.
+3. You will now need to obtain some parameters from your IdP and configure them in PostHog as [environment variables][env-vars]. Depending on your provider, they may only provide this information as an XML metadata file. If this is the case, you can open the file in a text editor and obtain the required values from there.
     - `SAML_ENTITY_ID`: Will be identified as EntityID or IdP issuer. This can vary greatly between providers, but it usually looks like a URL.
-    - `SAML_ACS_URL`: It's the endpoint to which the SAML requests are posted. It's usually called SAML endpoint  or IdP sign-on URL.
-    - `SAML_X509_CERT`: It's the public certificate used to validate SAML assertions from your IdP. It must be in X509 (almost all providers will provide it in this format). If your provider gives you the certificate as a file (usually `.pem`), just open it with a text editor to get the contents. When setting this certificate be sure to keep any spaces and new lines (don't format it). The first and last line of the certificate (`-----BEGIN CERTIFICATE-----`) are optional.
+    - `SAML_ACS_URL`: The endpoint to which the SAML requests are posted. It's usually called SAML endpoint  or IdP sign-on URL.
+    - `SAML_X509_CERT`: The public certificate used to validate SAML assertions from your IdP. It must be in X509 (almost all providers will provide it in this format). If your provider gives you the certificate as a file (usually `.pem`), just open it with a text editor to get the contents. When setting this certificate be sure to keep any spaces and new lines (don't format it). The first and last line of the certificate (`-----BEGIN CERTIFICATE-----`) are optional.
 
-4. Once you've set up all the settings above, you can now visit `<yourdomain>/login/saml/?idp=posthog_custom` (note the trailing slash and the query string) and you should be redirected to your IdP's login page. Upon completion, you'll find yourself in PostHog, fully authenticated.
+4. Once you've configured all the settings above, you can now visit `<yourdomain>/login/saml/?idp=posthog_custom` (note the trailing slash and the query string) and you should be redirected to your IdP's login page. Upon completion, you'll find yourself in PostHog, fully authenticated.
 
 5. For security reasons, we don't output errors directly in your browser when something goes wrong. If you get an error in the process and you need to debug on PostHog's side you have two options:
     - **Recommended**. Check your app logs (this varies depending on your deployment). Any errors will be logged there.
@@ -193,16 +193,17 @@ We're working with the OneLogin team to add PostHog to their Catalog and simplif
 
 1. In OneLogin admin, go to Applications and click on "Add App".
 2. Search for "SAML" and select "SAML Custom Connector (Advanced)". Set name to "PostHog".
-3. Go to "Configuration" tab and edit the following attributes (leave everything else as default)
+3. Go to the "Configuration" tab and edit the following attributes (leave everything else as default)
     - RelayState: Set to `posthog_custom`
-    - Audience (EntityID): Set to the exact value as your `SITE_URL` environment variable.
+    - Audience (EntityID): Set to the exact 
+    same value as your `SITE_URL` environment variable.
     - ACS (Consumer) URL Validator: Set to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/app.posthog.com\/complete\/saml\/$`
     - ACS (Consumer) URL: Set to `<yourdomain>/complete/saml/`.
-4. Go to "Parameters" tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
+4. Go to the "Parameters" tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
     - `email` to match the user's email ("Email")
     - `first_name` to match the user's first name ("First Name")
     - `last_name` to match the user's last name ("Last Name")
-5. Go to "SSO" tab. This is where you'll obtain the information you need to pass to PostHog.
+5. Go to the "SSO" tab. This is where you'll obtain the information you need to pass to PostHog.
     - "Issuer URL" needs to be set as `SAML_ENTITY_ID`.
     - "SAML 2.0 Endpoint (HTTP)" needs to be set as `SAML_ACS_URL`.
     - On "X.509 Certificate" click on "View Details". Copy the full certificate, removing the first and last lines and set it as `SAML_X509_CERT`
@@ -213,10 +214,10 @@ We're working with the OneLogin team to add PostHog to their Catalog and simplif
 We're working with the Okta team to add PostHog to their Integration Catalog and simplify your set up experience. In the meantime, you'll find some pointers on how to connect Okta to PostHog below.
 
 1. In Okta admin, go to Applications and click on "Create App Integration".
-2. Select "SAML 2.0" option. In the next step, set "PostHog" as the name.
-3. Fill in the following attributes in SAML settings. Do not click next yet.
+2. Select the "SAML 2.0" option. In the next step, set "PostHog" as the name.
+3. Fill in the following attributes in the SAML settings. Do not click next yet.
     - In "Single sign on URL" enter `<yourdomain>/complete/saml/`.
-    - In "Audience URI (SP Entity ID)" enter the exact value as your `SITE_URL` environment variable.
+    - In "Audience URI (SP Entity ID)" enter the exact same value as your `SITE_URL` environment variable.
     - In "Default RelayState" type `posthog_custom`.
 4. In the "Attribute Statements" section, you'll add the following attributes.
     - `email` with value `user.email`
