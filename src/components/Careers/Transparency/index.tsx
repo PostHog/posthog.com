@@ -11,7 +11,6 @@ interface TransparencyFeatureProps {
     image: string
     title: string
     children: any
-    titleColor: string
     className?: string
 }
 
@@ -34,21 +33,16 @@ const TransparencyMattersItem = ({ title, description, className = '' }: Transpa
     )
 }
 
-const TransparencyFeature = ({ image, title, children, titleColor, className = '' }: TransparencyFeatureProps) => {
-    const classList = mergeClassList(
-        'flex flex-col md:flex-row w-full justify-between items-start text-center md:text-left',
-        className
-    )
+const TransparencyFeature = ({ image, title, children, className = '' }: TransparencyFeatureProps) => {
+    const classList = mergeClassList('flex flex-col w-full justify-between items-start', className)
 
     return (
         <div className={classList}>
-            <div className="flex-shrink-0 mx-auto md:mr-8 flex justify-center items-start w-auto bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid">
+            <div className="flex-shrink-0 flex justify-center items-start w-auto">
                 <img src={image} alt={title} className="max-w-full block mb-0 h-24 w-24 p-4" />
             </div>
             <div className="flex-grow text-left">
-                <h4 className="mb-0 font-sans font-normal text-lg mt-4 md:mt-0" style={{ color: titleColor }}>
-                    {title}
-                </h4>
+                <h3 className="my-2 text-xl">{title}</h3>
 
                 {children}
             </div>
@@ -58,18 +52,19 @@ const TransparencyFeature = ({ image, title, children, titleColor, className = '
 
 export const Transparency = () => {
     return (
-        <div className="careers-transparency pt-24 text-white text-center" id="transparency">
+        <div className="careers-transparency pt-24 text-center" id="transparency">
             <Structure.Section width="4xl">
                 <Structure.SectionHeader
                     title="The most transparent company, ever"
+                    titleClassName="text-4xl"
                     titleTag="h2"
                     leadText="We're open-source and fully remote. In order to enable teams to make great decisions, we share as much information as we can. This includes:"
                     leadTextClassName="opacity-80"
                 />
 
-                <div className="w-full bg-black bg-opacity-20 rounded-lg p-4 mb-16 md:p-8 lg:p-12 text-left grid sm:grid-cols-2 gap-12">
-                    <TransparencyFeature title="Compensation" titleColor="#FF3636" image={compensationImg}>
-                        <p className="mb-0 text-white text-opacity-75">
+                <div className="w-full mb-16 md:p-8 lg:p-12 text-left grid sm:grid-cols-2 gap-12">
+                    <TransparencyFeature title="Compensation" image={compensationImg}>
+                        <p className="mb-0">
                             We pay top of the market and built a{' '}
                             <a href="/handbook/people/compensation" style={{ color: '#FFB053' }}>
                                 compensation calculator
@@ -79,37 +74,22 @@ export const Transparency = () => {
                         </p>
                     </TransparencyFeature>
 
-                    <TransparencyFeature
-                        title="Board meetings"
-                        titleColor="#FF8B20"
-                        image={boardMeetingsImg}
-                        className=""
-                    >
-                        <p className="mb-0 text-white text-opacity-75">
+                    <TransparencyFeature title="Board meetings" image={boardMeetingsImg} className="">
+                        <p className="mb-0">
                             We share slides from each board meeting internally. When everyone knows the direction we're
                             headed and the obstacles we face, they can decide where their time is best spent.
                         </p>
                     </TransparencyFeature>
 
-                    <TransparencyFeature
-                        title="Fundraising & finances"
-                        titleColor="#FF2CF7"
-                        image={financesImg}
-                        className=""
-                    >
-                        <p className="mb-0 text-white text-opacity-75">
+                    <TransparencyFeature title="Fundraising & finances" image={financesImg} className="">
+                        <p className="mb-0">
                             We keep our team informed about fundraising and share a monthly report covering revenue,
                             runway, and more. It's nice when you can see your hard work paying off (literally).
                         </p>
                     </TransparencyFeature>
 
-                    <TransparencyFeature
-                        title="Constructive feedback"
-                        titleColor="#FFC102"
-                        image={feedbackImg}
-                        className=""
-                    >
-                        <p className="mb-0 text-white text-opacity-75">
+                    <TransparencyFeature title="Constructive feedback" image={feedbackImg} className="">
+                        <p className="mb-0">
                             Transparency is a two-way street. We encourage individual feedback and run regular
                             360-degree group sessions with the whole company, so everyone can improve.
                         </p>

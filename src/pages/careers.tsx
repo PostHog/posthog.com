@@ -19,13 +19,14 @@ const IndexPage = () => {
         <>
             <SEO
                 title="Careers - PostHog"
-                description="Why We're Here PostHog is increasing the number of successful products in the world. We do that by providing a platform for open-source product…"
+                description="We're working to increase the number of successful products in the world.
+                We could use your help."
             />
 
             <CareersHero />
             <div className="careers-anchor-navbar">
-                <AnchorScrollNavbar />
                 <WhyWereHere />
+                <AnchorScrollNavbar />
                 <Transparency />
                 <InterviewProcess />
                 <Benefits />

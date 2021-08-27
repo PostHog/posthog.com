@@ -40,7 +40,7 @@ const InterviewStep = ({ image, title, children, titleColor, className = '' }: I
 
 export const InterviewProcess = () => {
     return (
-        <div className="careers-interview-process pt-24 text-white text-center" id="interview-process">
+        <div className="pt-24 text-white text-center" id="interviewing">
             <Structure.Section width="3xl">
                 <Structure.SectionHeader
                     title="Interview process"

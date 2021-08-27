@@ -41,7 +41,7 @@ const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
 
 export const Benefits = () => {
     return (
-        <div className="careers-benefits pt-24 text-white text-center" id="benefits">
+        <div className="pt-24 text-white text-center" id="benefits">
             <Structure.Section>
                 <Structure.SectionHeader
                     title="Benefits"

@@ -53,8 +53,7 @@ const inPageLinks: { label: string; section: string }[] = [
 ]
 
 export const ProductAnchorNavbar = () => {
-    const baseClasses =
-        'rounded w-full mx-auto justify-center p-3 sticky -mt-16 lg:-mt-4 top-2 z-30 hidden lg:inline-flex'
+    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden lg:inline-flex'
 
     const [currentSection, setCurrentSection] = useState('platform')
 

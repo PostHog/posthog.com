@@ -14,11 +14,14 @@ const ButtonLink = ({
     currentSection: string
     children: any
 }) => {
-    const baseClasses = 'px-3 py-2 rounded'
+    const baseClasses =
+        'leading-loose border-2 dark:border-white rounded-lg px-2 mx-1 my-1 text-sm transition-colors select-none'
     const classList =
         section == currentSection
-            ? baseClasses.concat(' bg-primary text-white font-bold hover:text-white')
-            : baseClasses.concat(' text-white text-opacity-80 hover:bg-gray-100 hover:bg-opacity-10 hover:text-white')
+            ? baseClasses.concat(' bg-black text-white border-black hover:text-white dark:bg-white dark:text-black')
+            : baseClasses.concat(
+                  ' bg-tan text-black text-opacity-50 hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
+              )
     const sectionSelector = `#${section}`
 
     const clickHandler = (e: { preventDefault: () => void }) => {
@@ -35,24 +38,16 @@ const ButtonLink = ({
 
 const inPageLinks = [
     {
-        label: "Why we're here",
-        section: 'why-were-here',
-    },
-    {
         label: 'Transparency',
         section: 'transparency',
     },
     {
-        label: 'Interview process',
-        section: 'interview-process',
+        label: 'Interviewing',
+        section: 'interviewing',
     },
     {
         label: 'Benefits',
         section: 'benefits',
-    },
-    {
-        label: 'Working at PostHog',
-        section: 'working-at-posthog',
     },
     {
         label: 'Open roles',
@@ -65,8 +60,7 @@ interface AnchorScrollNavbarProps {
 }
 
 export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses =
-        'rounded w-11/12 max-w-3xl mx-auto justify-between items-stetch p-3 sticky top-3 z-10 hidden lg:flex'
+    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden lg:inline-flex'
     const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
@@ -77,7 +71,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
         const scrollHandler = () => {
             const sections = {
                 transparency: document.getElementById('transparency')!.offsetTop,
-                interviewProcess: document.getElementById('interview-process')!.offsetTop,
+                interviewProcess: document.getElementById('interviewing')!.offsetTop,
                 benefits: document.getElementById('benefits')!.offsetTop,
                 workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
                 openRoles: document.getElementById('open-roles')!.offsetTop,
@@ -89,7 +83,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             } else if (offset < sections.interviewProcess - scrollThreshold) {
                 setCurrentSection('transparency')
             } else if (offset < sections.benefits - scrollThreshold) {
-                setCurrentSection('interview-process')
+                setCurrentSection('interviewing')
             } else if (offset < sections.workingAtPosthog - scrollThreshold) {
                 setCurrentSection('benefits')
             } else if (offset < sections.openRoles - scrollThreshold) {
@@ -122,14 +116,11 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
 
     return (
         <>
-            <div className={classList} style={{ backgroundColor: '#202038' }}>
-                {navbarLinks}
-            </div>
+            <div className={classList}>{navbarLinks}</div>
 
             <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl lg:hidden">
                 <select
                     className="appearance-none text-white block p-3 w-full rounded"
-                    style={{ backgroundColor: '#202038' }}
                     value={currentSection}
                     onChange={(e) => scrollTo(`#${e.target.value}`)}
                 >

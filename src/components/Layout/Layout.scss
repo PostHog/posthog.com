@@ -294,6 +294,7 @@ h5,
 h6 {
     color: inherit;
     font-variation-settings: 'wght' 800; // override ant
+    letter-spacing: -0.02em;
     text-rendering: optimizeLegibility;
 }
 

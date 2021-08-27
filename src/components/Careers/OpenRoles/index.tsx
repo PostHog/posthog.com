@@ -21,7 +21,7 @@ export const OpenRoles = () => {
 
     // Some of the styling overrides here lives in src/styles/workable-overrides.css
     return (
-        <div className="careers-open-roles pt-24 text-white text-center" id="open-roles">
+        <div className="pt-24 text-white text-center" id="open-roles">
             <Structure.Section width="5xl" className="bg-black bg-opacity-20 rounded-lg p-6 md:p-12 lg:py-24 lg:px-12">
                 <Structure.SectionHeader
                     title="Open roles"
