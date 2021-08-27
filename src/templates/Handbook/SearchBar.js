@@ -5,7 +5,7 @@ import { useValues } from 'kea'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
-export default function SearchBar({ render }) {
+export default function SearchBar() {
     const breakpoints = useBreakpoint()
     const { posthog } = useValues(posthogAnalyticsLogic)
     useEffect(() => {

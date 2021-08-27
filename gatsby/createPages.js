@@ -22,9 +22,30 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+                nodes {
+                    id
+                    tableOfContents
+                    fields {
+                        slug
+                    }
+                }
+            }
             sidebars: file(absolutePath: { regex: "//sidebars/sidebars-new.json$/" }) {
                 childSidebarsJson {
                     handbook {
+                        children {
+                            children {
+                                name
+                                url
+                            }
+                            name
+                            url
+                        }
+                        name
+                        url
+                    }
+                    docs {
                         children {
                             children {
                                 name
@@ -76,6 +97,8 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
 
     const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
     const handbookMenuFlattened = flattenMenu(handbookMenu)
+    const docsMenu = result.data.sidebars.childSidebarsJson.docs
+    const docsMenuFlattened = flattenMenu(docsMenu)
 
     result.data.allMdx.nodes.forEach((node) => {
         createPage({
@@ -112,6 +135,36 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 menu: handbookMenu,
                 breadcrumb,
                 breadcrumbBase: { name: 'Handbook', url: '/handbook' },
+                tableOfContents,
+            },
+        })
+    })
+
+    result.data.docs.nodes.forEach((node) => {
+        const { slug } = node.fields
+        let next = null
+        let previous = null
+        let breadcrumb = null
+        const tableOfContents = node.tableOfContents.items && flattenToc(node.tableOfContents.items)
+        docsMenuFlattened.some((item, index) => {
+            if (item.url === slug) {
+                next = docsMenuFlattened[index + 1]
+                previous = docsMenuFlattened[index - 1]
+                breadcrumb = item.breadcrumb
+                return true
+            }
+        })
+
+        createPage({
+            path: replacePath(node.fields.slug),
+            component: HandbookTemplate,
+            context: {
+                id: node.id,
+                next,
+                previous,
+                menu: docsMenu,
+                breadcrumb,
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
                 tableOfContents,
             },
         })

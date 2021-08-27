@@ -10,18 +10,16 @@ require('dotenv').config({
 module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
     const { createNodeField, createNode } = actions
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
+        const parent = getNode(node.parent)
         const slug = createFilePath({ node, getNode, basePath: `pages` })
         createNodeField({
             node,
             name: `slug`,
             value: replacePath(slug),
         })
-        // Create GitHub contributor nodes for handbook
-        if (slug.startsWith('/handbook/') && process.env.GITHUB_API_KEY) {
-            const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents${slug.replace(
-                /\/$/,
-                ''
-            )}.md`
+        // Create GitHub contributor nodes for handbook & docs
+        if (/^\/handbook|^\/docs/.test(slug) && process.env.GITHUB_API_KEY) {
+            const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
             const contributors = await fetch(url, {
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,

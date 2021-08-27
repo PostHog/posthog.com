@@ -42,8 +42,8 @@ const icons = {
 }
 
 const buttonTypeClasses = {
-    primary: 'button-primary',
-    secondary: 'button-secondary',
+    primary: 'button-primary bg-almost-black dark:bg-white text-white dark:text-almost-black',
+    secondary: 'button-secondary bg-white dark:bg-almost-black text-almost-black dark:text-white',
     button: 'button',
     custom: '',
 }
@@ -54,7 +54,7 @@ export const CallToAction = ({
     icon = 'none',
     iconBg = 'bg-white relative',
     children,
-    width = '64',
+    width = 'auto',
     href,
     to,
     outline,
@@ -66,8 +66,7 @@ export const CallToAction = ({
         </span>
     ) : null
 
-    const widthClass = `w-full sm:w-${width}`
-    const baseClasses = `${widthClass} ${
+    const baseClasses = `w-${width} ${
         outline ? 'outline' : ''
     } inline-flex items-center justify-between font-bold text-sm relative select-none`
     const classList = mergeClassList(baseClasses, buttonTypeClasses[type], className)
