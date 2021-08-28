@@ -7,11 +7,6 @@ export const WhyWereHere = () => {
         <div className="careers-why-were-here" id="why-were-here">
             <div className="text-left">
                 <Structure.Section width="2xl" className="text-base">
-                    <p className=" mt-1 text-left text-xl font-semibold">
-                        We’re a small (but growing) team building an open source platform that empowers customers to
-                        create successful products.
-                    </p>
-
                     <div className="text-opacity-80 text-gray-100">
                         <div className="mb-8 flex flex-col md:flex-row">
                             <div>
