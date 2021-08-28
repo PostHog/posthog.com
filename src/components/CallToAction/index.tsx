@@ -42,7 +42,8 @@ const icons = {
 }
 
 const buttonTypeClasses = {
-    primary: 'button-primary bg-almost-black dark:bg-white text-white dark:text-almost-black',
+    primary:
+        'button-primary bg-almost-black bg-opacity-90 hover:bg-opacity-100 dark:bg-white text-white dark:text-almost-black',
     secondary: 'button-secondary bg-white dark:bg-almost-black text-almost-black dark:text-white',
     button: 'button',
     custom: '',
@@ -61,7 +62,7 @@ export const CallToAction = ({
     onClick,
 }: CallToActionProps) => {
     const iconNode = icons[icon] ? (
-        <span className={`${iconBg} icon inline-block mr-3 bg-opacity-10 rounded rounded-sm px-3 py-2`}>
+        <span className={`${iconBg} icon inline-block mr-3 bg-opacity-10 rounded rounded-full p-2`}>
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
         </span>
     ) : null
