@@ -24,8 +24,8 @@ export const OpenRoles = () => {
             <Structure.Section width="5xl" className="">
                 <h2 className="text-center mb-12">Open roles</h2>
 
-                <div className="flex">
-                    <div className="flex-1 max-w-md mr-16">
+                <div className="md:flex">
+                    <div className="flex-1 max-w-md md:mr-16 mb-12 md:mb-0 mx-auto">
                         <p>We take exceptional people when they come along - and we really mean that!</p>
                         <p>
                             <strong>Don’t see a specific role listed?</strong> That doesn't mean we won't have a spot
@@ -43,7 +43,7 @@ export const OpenRoles = () => {
                             </em>
                         </p>
                     </div>
-                    <div className="flex-1 max-w-md">
+                    <div className="flex-1 max-w-md mx-auto">
                         <WorkableSnippet />
                     </div>
                 </div>

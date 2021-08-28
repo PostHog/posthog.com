@@ -11,7 +11,7 @@ export const CareersHero = () => {
 
             <div className="w-11/12 pt-12 sm:pt-24 mx-auto text-center relative z-10 rounded">
                 <div className="max-w-3xl mx-auto">
-                    <h1 className="mb-0 pb-0 text-4xl">
+                    <h1 className="mb-0 pb-0 text-2xl md:text-4xl">
                         We're working to increase the number of successful products in the world.
                         <br />
                         <span className="text-red">We could use your help.</span>

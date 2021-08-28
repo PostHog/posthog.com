@@ -46,7 +46,7 @@ export const WhyWereHere = () => {
                                 </p>
                             </div>
 
-                            <aside className="bg-white px-8 md:mr-8">test</aside>
+                            <aside className="bg-white px-8 md:mr-8 mt-4 md:mt-0">test</aside>
                         </div>
                     </div>
                 </Structure.Section>

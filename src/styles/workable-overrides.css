@@ -6,7 +6,7 @@
 
 /* section title */
 .whr-group {
-    @apply text-2xl m-0 font-bold;
+    @apply text-2xl m-0 text-center md:text-left;
 
     a {
         @apply cursor-default;

@@ -38,8 +38,11 @@ div[class^='feature-'].text-center {
     > div {
         @apply border-gray-accent-light border-r border-b border-dashed;
 
+        &:nth-child(2n) {
+            @apply sm:border-r-0 lg:border-r-1;
+        }
         &:nth-child(4n) {
-            @apply border-r-0;
+            @apply md:border-r-0;
         }
     }
 }

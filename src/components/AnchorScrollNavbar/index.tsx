@@ -42,8 +42,8 @@ const inPageLinks = [
         section: 'transparency',
     },
     {
-        label: 'Interviewing',
-        section: 'interviewing',
+        label: 'Interview process',
+        section: 'interview-process',
     },
     {
         label: 'Benefits',
@@ -60,7 +60,7 @@ interface AnchorScrollNavbarProps {
 }
 
 export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden lg:inline-flex'
+    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex'
     const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
@@ -71,7 +71,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
         const scrollHandler = () => {
             const sections = {
                 transparency: document.getElementById('transparency')!.offsetTop,
-                interviewProcess: document.getElementById('interviewing')!.offsetTop,
+                interviewProcess: document.getElementById('interview-process')!.offsetTop,
                 benefits: document.getElementById('benefits')!.offsetTop,
                 workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
                 openRoles: document.getElementById('open-roles')!.offsetTop,
@@ -83,7 +83,7 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             } else if (offset < sections.interviewProcess - scrollThreshold) {
                 setCurrentSection('transparency')
             } else if (offset < sections.benefits - scrollThreshold) {
-                setCurrentSection('interviewing')
+                setCurrentSection('interview-process')
             } else if (offset < sections.workingAtPosthog - scrollThreshold) {
                 setCurrentSection('benefits')
             } else if (offset < sections.openRoles - scrollThreshold) {
@@ -118,9 +118,9 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
         <>
             <div className={classList}>{navbarLinks}</div>
 
-            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl lg:hidden">
+            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl md:hidden border border-1 border-tan rounded border-opacity-25">
                 <select
-                    className="appearance-none text-white block p-3 w-full rounded"
+                    className="appearance-none text-white bg-primary block p-3 w-full rounded font-bold"
                     value={currentSection}
                     onChange={(e) => scrollTo(`#${e.target.value}`)}
                 >
