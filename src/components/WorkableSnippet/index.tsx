@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import './style.scss'
 
 interface WorkableWindow extends Window {
     whr_embed: (id: number, options: Record<string, string>) => void
