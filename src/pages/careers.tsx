@@ -12,6 +12,7 @@ import { OpenRoles } from '../components/Careers/OpenRoles'
 import { Footer } from '../components/Footer/Footer'
 import { GetStartedModal } from 'components/GetStartedModal'
 import { SEO } from '../components/seo'
+import { TeamQuote } from '../components/TeamQuote'
 
 import '../components/Careers/styles/index.scss'
 
@@ -29,34 +30,55 @@ const IndexPage = () => {
                 <WhyWereHere />
                 <AnchorScrollNavbar />
                 <Transparency />
-                <div className="bg-primary">
-                    <blockquote className="max-w-4xl mx-auto py-16">
-                        <h4 className="leading-snug text-white">
-                            I love PostHog's level of autonomy and transparency.{' '}
-                            <span className="text-red">We have a lot of freedom and trust in the team,</span> but we
-                            also hold each other accountable and don’t shy away from giving (and receiving) a lot of
-                            feedback. Plus the team helped me to pick up some basic coding skills, which is amazing!
-                        </h4>
-                        <footer className="flex mt-4">
-                            <div className="flex-0 mr-4">
-                                <StaticImage
-                                    width={100}
-                                    height={100}
-                                    alt="Eltje Lange, People & Talent"
-                                    src="../../contents/images/team/Eltje.png"
-                                    className="rounded-full bg-tan"
-                                />
-                            </div>
-                            <div className="flex-1 flex flex-col justify-center">
-                                <h4 className="text-white mb-0 leading-tight">Eltje Lange</h4>
-                                <h4 className="text-white text-opacity-50 mb-0 leading-tight">People &amp; Talent</h4>
-                            </div>
-                        </footer>
-                    </blockquote>
-                </div>
+                <TeamQuote
+                    backgroundColor="bg-primary"
+                    textColor="text-white"
+                    fontSize=""
+                    width="max-w-4xl"
+                    value="I love PostHog's level of autonomy and transparency.
+                    <span class='text-red'>We have a lot of freedom and trust in the team,</span> but we also hold each other accountable and don’t shy away from giving (and receiving) a lot of feedback. Plus the team helped me to pick up some basic coding skills, which is amazing!"
+                    author="Eltje Lange"
+                    role="People & Talent"
+                    img="eltjeImg"
+                    imgBackground="bg-tan"
+                />
                 <InterviewProcess />
+                <TeamQuote
+                    backgroundColor="bg-primary"
+                    textColor="text-tan"
+                    fontSize=""
+                    width="max-w-2xl"
+                    value="I hate how much I enjoy working at PostHog.  
+                    <span class='text-red'>It has ruined all other companies for me.</span> Thanks a lot."
+                    author="Charles Cook"
+                    role="Business Operations"
+                    img="charlesImg"
+                    imgBackground="bg-red"
+                />
                 <Benefits />
+                <TeamQuote
+                    backgroundColor=""
+                    textColor="text-primary"
+                    fontSize="text-2xl"
+                    width="max-w-3xl"
+                    value="It's a lot of fun and a unique experience to get to <span class='text-red'>work with people from all over the world</span> around a unified goal."
+                    author="Kunal Pathak"
+                    role="Growth Engineer"
+                    img="charlesImg"
+                    imgBackground="bg-yellow"
+                />
                 <WorkingAtPostHog />
+                <TeamQuote
+                    backgroundColor=""
+                    textColor="text-primary"
+                    fontSize="text-2xl"
+                    width="max-w-4xl"
+                    value="Working at PostHog <span class='text-red'>feels like successfully having a lot of cooks in the kitchen.</span> (People might not believe this or find it alarming, so proceed with caution!)"
+                    author="Eric Duong"
+                    role="Software Engineer"
+                    img="ericImg"
+                    imgBackground="bg-blue"
+                />
                 <OpenRoles />
             </div>
             <Footer showNewsletter={false} backgroundClass="careers-footer" />
