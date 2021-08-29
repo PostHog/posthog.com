@@ -43,7 +43,11 @@ If you're on EE, we still use Postgres for certain types of data which you could
 
 1. After you've create your user, Metabase will prompt you with a screen to connect to a database:
 
-    <br />![Metabase Setup](../../../images/tutorials/metabase/setup.png)<br />
+    <br />
+    
+    ![Metabase Setup](../../../images/tutorials/metabase/setup.png)
+    
+    <br />
 
 1. On this screen, you should select 'PostgreSQL' as the database, and add the details of your PostHog instance.
 
@@ -65,7 +69,11 @@ If you're on EE, we still use Postgres for certain types of data which you could
 
 1. Finish the setup and you're ready to start using Metabase! By default, the platform will already give you some views for the available data, but it's up to you how to go from there.
 
-    <br />![Metabase Dashboard](../../../images/tutorials/metabase/dashboard.png)<br />
+    <br />
+    
+    ![Metabase Dashboard](../../../images/tutorials/metabase/dashboard.png)
+    
+    <br />
 
 
 #### For PostHog Docker Deployments

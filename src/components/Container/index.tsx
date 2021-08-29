@@ -4,7 +4,7 @@ interface ContainerProps {
     onPostPage: boolean
     className: string
     containerStyle?: any
-    children: any
+    children: React.ReactNode
 }
 
 export const Container = ({ onPostPage, className, containerStyle = {}, children }: ContainerProps) => {

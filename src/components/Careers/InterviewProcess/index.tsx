@@ -11,7 +11,7 @@ import offerImg from './images/offer.svg'
 interface InterviewStepProps {
     image: string
     title: string
-    children: any
+    children: React.ReactNode
     titleColor: string
     className?: string
 }

@@ -10,7 +10,7 @@ import feedbackImg from './images/feedback.svg'
 interface TransparencyFeatureProps {
     image: string
     title: string
-    children: any
+    children: React.ReactNode
     titleColor: string
     className?: string
 }

@@ -226,6 +226,10 @@
                     "url": "/handbook/engineering/bug-prioritization"
                 },
                 {
+                    "name": "Enterprise prioritization",
+                    "url": "/handbook/engineering/enterprise-prioritization"
+                },
+                {
                     "name": "Onboarding customers",
                     "url": "/handbook/engineering/onboarding-customer"
                 },
@@ -250,11 +254,11 @@
                     "url": "/handbook/engineering/mdx"
                 },
                 {
-                    "name": "AWS tips and faq",
+                    "name": "AWS tips and FAQ",
                     "url": "/handbook/engineering/aws"
                 },
                 {
-                    "name": "GCP tips and faq",
+                    "name": "GCP tips and FAQ",
                     "url": "/handbook/engineering/gcp"
                 }
             ]
