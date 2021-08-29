@@ -13,12 +13,10 @@
 
 .toggle-switch {
     position: relative;
-    width: 75px;
+    width: 60px;
     display: inline-block;
     vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
     text-align: left;
     &-checkbox {
         display: none;
@@ -58,12 +56,10 @@
         }
         .toggle-switch {
             position: relative;
-            width: 75px;
+            width: 60px;
             display: inline-block;
             vertical-align: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            user-select: none;
             text-align: left;
             &-checkbox {
                 display: none;
@@ -166,7 +162,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        right: 48px;
+        right: 33px;
         border: 0 solid #bbb;
         border-radius: 20px;
         transition: all 0.3s ease-in 0s;
