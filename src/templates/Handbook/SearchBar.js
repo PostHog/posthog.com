@@ -54,11 +54,8 @@ export default function SearchBar() {
         }
     }, [])
     return (
-        <div
-            id="handbook-search-wrapper"
-            className="flex space-x-3 w-full text-[14px] items-center  py-2 px-4 flex-grow"
-        >
-            <span>
+        <div id="handbook-search-wrapper" className="flex space-x-3 w-full text-[14px] items-center flex-grow relative">
+            <span className="absolute top-2 left-3">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -76,7 +73,7 @@ export default function SearchBar() {
             </span>
             <input
                 id="handbook-search"
-                className="w-full outline-none bg-transparent"
+                className="w-full text-sm text-primary outline-none bg-transparent py-2 pl-5 placeholder-primary-50::placeholder"
                 placeholder={`Search ${breakpoints.xs ? '' : 'handbook'}`}
             />
         </div>
