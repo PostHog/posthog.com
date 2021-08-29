@@ -78,7 +78,7 @@ export default function Main({
                         {showToc && (
                             <div
                                 style={{ height: 'calc(100% - 22vh)' }}
-                                className="border-r-2 border-dashed border-gray-accent-light dark:border-gray-accent-dark absolute bottom-0  right-0 hidden xl:flex justify-center"
+                                className="border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark absolute bottom-0  right-0 hidden xl:flex justify-center"
                             />
                         )}
                         {next && (
