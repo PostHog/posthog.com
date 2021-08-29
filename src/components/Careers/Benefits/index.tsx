@@ -52,7 +52,7 @@ export const Benefits = () => {
                     />
                 </div>
 
-                <div className="benefits-grid grid grid-cols-4 grid-rows-auto border-gray-accent-light border border-dashed border-b-0">
+                <div className="benefits-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-auto border-gray-accent-light border border-dashed border-b-0 border-r-0 sm:border-r-1">
                     <Benefit
                         image={compensationImg}
                         title="Generous, transparent compensation"

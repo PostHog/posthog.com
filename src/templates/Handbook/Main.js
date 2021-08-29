@@ -60,13 +60,13 @@ export default function Main({
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
                         <section className="mb-8 xl:mb-14 relative">
                             <h1 className="dark:text-white text-5xl mt-0 mb-2">{title}</h1>
-                            <p className=" mt-1 mb-0">
+                            <p className="mt-1 mb-0 opacity-75">
                                 Last updated: <time>{lastUpdated}</time>
                             </p>
                         </section>
                         {breakpoints.lg && showToc && (
                             <InternalSidebar
-                                className="bg-gray-accent-light dark:bg-gray-accent-dark p-4 rounded dark:bg-opacity-10 mb-10"
+                                className="py-4 mb-10 border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b"
                                 tableOfContents={tableOfContents}
                             />
                         )}

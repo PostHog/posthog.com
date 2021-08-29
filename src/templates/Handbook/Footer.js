@@ -14,7 +14,7 @@ export default function Footer({ contributors, filePath, title }) {
     return (
         <footer className="text-white">
             <div className="bg-almost-black dark:bg-gray-accent-dark max-w-screen-2xl mx-auto rounded-lg relative overflow-hidden">
-                <div className="py-14 2xl:max-w-[800px] max-w-full md:max-w-[calc(100%-224px-6rem)] xl:max-w-[650px] w-full xl:mx-auto ml-auto md:border-l-2 border-opacity-30 border-gray-accent-light border-dashed px-8 md:box-content">
+                <div className="py-14 2xl:max-w-[800px] max-w-full md:max-w-[calc(100%-224px-6rem)] xl:max-w-[650px] w-full xl:mx-auto ml-auto md:border-l border-opacity-30 border-gray-accent-light border-dashed px-8 md:box-content">
                     <h2 className="text-white">Reach out</h2>
                     <p>
                         If you need help on any of the above, feel free to create an issue on our repo, or join our

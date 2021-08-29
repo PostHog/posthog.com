@@ -7,9 +7,9 @@ export const WorkingAtPostHog = () => {
         <div id="working-at-posthog">
             <Structure.Section
                 width="4xl"
-                className="py-12 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t border-b flex items-center"
+                className="py-12 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t border-b md:flex items-center"
             >
-                <div className="flex-0 max-w-xs mr-4">
+                <div className="flex-0 text-center mb-12 md:mb-0 md:text-left md:max-w-xs md:mr-4">
                     <h3 className="text-4xl">
                         Watch a day in the life of our graphic designer, <span className="text-orange">Lottie!</span>
                     </h3>

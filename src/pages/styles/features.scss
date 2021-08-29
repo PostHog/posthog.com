@@ -192,7 +192,7 @@ div[class^='feature-'] {
         // we need this to fill the feature box, but the only container already has a background image on it (linear-gradient), so we have to layer this on top
 
         &:before {
-            background: url('../../images/features/feature-feature-flags@2x.png') bottom right / 40% no-repeat;
+            background: url('../../images/features/feature-feature-flags@2x.png') bottom right / 50% no-repeat;
             content: '';
             height: 100%;
             left: 0;

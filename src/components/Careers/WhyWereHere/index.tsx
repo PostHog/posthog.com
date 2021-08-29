@@ -1,16 +1,12 @@
 import React from 'react'
 import { Structure } from '../../Structure'
+import { StaticImage } from 'gatsby-plugin-image'
 
 export const WhyWereHere = () => {
     return (
         <div className="careers-why-were-here" id="why-were-here">
             <div className="text-left">
                 <Structure.Section width="2xl" className="text-base">
-                    <p className=" mt-1 text-left text-xl font-semibold">
-                        We’re a small (but growing) team building an open source platform that empowers customers to
-                        create successful products.
-                    </p>
-
                     <div className="text-opacity-80 text-gray-100">
                         <div className="mb-8 flex flex-col md:flex-row">
                             <div>
@@ -30,7 +26,14 @@ export const WhyWereHere = () => {
                                 </p>
                             </div>
 
-                            <aside className="bg-white px-8 md:ml-8">test</aside>
+                            <aside className="bg-white py-4 px-8 md:ml-8 md:-mr-16 w-full flex justify-center items-center">
+                                <StaticImage
+                                    src="images/office-hogs-1.png"
+                                    alt="Just some office hogs"
+                                    height={264}
+                                    width={390}
+                                />
+                            </aside>
                         </div>
 
                         <div className="mb-8 flex flex-col md:flex-row-reverse">
@@ -46,7 +49,14 @@ export const WhyWereHere = () => {
                                 </p>
                             </div>
 
-                            <aside className="bg-white px-8 md:mr-8">test</aside>
+                            <aside className="bg-white py-4 px-8 md:mr-8 mt-4 md:mt-0 md:-ml-16 w-full flex justify-center items-center">
+                                <StaticImage
+                                    src="images/office-hogs-2.png"
+                                    alt="Just some office hogs"
+                                    height={353}
+                                    width={349}
+                                />
+                            </aside>
                         </div>
                     </div>
                 </Structure.Section>

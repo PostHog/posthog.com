@@ -14,7 +14,7 @@ export const SelfHostedPlanBreakdown = () => {
 
     return (
         <div className="grid grid-flow-row auto-rows-max mdlg:grid-flow-col mdlg:auto-cols-max justify-center items-start mb-20">
-            <div className="border flex flex-col self-stretch border-white border-opacity-10 rounded p-8 mx-12 mdlg:ml-0 bg-almost-black bg-opacity-50 ">
+            <div className="border flex flex-col self-stretch border-white border-opacity-10 rounded-xl p-8 mx-6 mdlg:ml-0 bg-almost-black bg-opacity-50 ">
                 <h3 className="text-lg m-0 text-white">Open Source</h3>
                 <p className="opacity-50 text-sm">Great for startups</p>
                 <ul className="list-none pl-0 mb-6">
@@ -65,13 +65,13 @@ export const SelfHostedPlanBreakdown = () => {
                 </div>
             </div>
 
-            <div className="rounded inline-flex flex-col md:flex-row items-center">
+            <div className="rounded-xl inline-flex flex-col md:flex-row items-center">
                 <div className="flex justify-center">
                     <div className="inline-flex flex-col xl:flex-row items-center text-almost-black">
-                        <div className="flex-0 border border-white border-opacity-10 rounded p-8 bg-almost-black">
+                        <div className="flex-0 border border-white border-opacity-10 rounded-xl p-8 bg-almost-black">
                             <h3 className="text-lg m-0 text-white">Scale</h3>
                             <p className="opacity-50 text-sm text-white">For large userbases or event volume</p>
-                            <ul className="list-none pl-0 mb-6">
+                            <ul className="list-none pl-0 mb-6 ">
                                 <li className="mb-1 text-white">
                                     <span className="text-base font-bold">Unlimited</span>
                                     &nbsp;
@@ -88,7 +88,7 @@ export const SelfHostedPlanBreakdown = () => {
                                     <span className="text-sm text-white text-opacity-75">team members</span>
                                 </li>
                             </ul>
-                            <ul className="list-none text-sm pl-0 mb-6">
+                            <ul className="list-none text-sm pl-0 mb-6 text-white text-opacity-70">
                                 <li className="flex items-center mb-2 space-x-2">
                                     <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
                                     <span className="">Collaboration features</span>

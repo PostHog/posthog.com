@@ -53,7 +53,7 @@ const inPageLinks: { label: string; section: string }[] = [
 ]
 
 export const ProductAnchorNavbar = () => {
-    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden lg:inline-flex'
+    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 mb-12 z-30 hidden lg:inline-flex'
 
     const [currentSection, setCurrentSection] = useState('platform')
 
@@ -108,13 +108,9 @@ export const ProductAnchorNavbar = () => {
 
             {/* mobile-only menu */}
 
-            <div className="w-11/12 sticky top-2 mx-auto block max-w-3xl lg:hidden z-30" style={positionStyles}>
+            <div className="w-11/12 sticky top-2 mx-auto block max-w-3xl lg:hidden z-30 mb-12" style={positionStyles}>
                 <select
-                    className="appearance-none text-white block p-3 w-full rounded border border-white border-half border-opacity-10 text-center"
-                    style={{
-                        background: '#3F086D',
-                        textAlignLast: 'center',
-                    }}
+                    className="appearance-none text-white block p-3 w-full rounded border border-white border-half border-opacity-10 bg-primary font-bold"
                     value={currentSection}
                     onChange={(e) => scrollWithOffset(`#${e.target.value}`, -90)}
                 >

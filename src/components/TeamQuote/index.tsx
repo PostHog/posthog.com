@@ -23,7 +23,7 @@ interface CallToActionProps {
 export const TeamQuote = ({ backgroundColor, textColor, fontSize, width, value, author, role, img, imgBackground }) => {
     return (
         <div className={`${backgroundColor}`}>
-            <blockquote className={`${backgroundColor} ${width} mx-auto py-16`}>
+            <blockquote className={`${backgroundColor} ${width} mx-auto px-8 xl:px-0 py-16`}>
                 <h4 className={`${textColor} ${fontSize} leading-snug`} dangerouslySetInnerHTML={{ __html: value }} />
                 <footer className="flex mt-4">
                     <div className="flex-0 mr-4">
