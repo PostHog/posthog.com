@@ -42,7 +42,7 @@ const PricingNew = (): JSX.Element => {
                         width={100}
                         height={100}
                         alt="Jonathan Hyde - Former Head of Product, Legl"
-                        src="../../../images/jonathan-hyde-plain.png"
+                        src="../images/jonathan-hyde-plain.png"
                     />
                 }
                 quote={

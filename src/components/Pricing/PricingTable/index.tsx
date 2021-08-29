@@ -30,7 +30,9 @@ export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefaul
                         icon="none"
                         outline
                         onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
-                        className={currentPlanType === CLOUD_PLAN ? 'active' : ''}
+                        className={
+                            currentPlanType === CLOUD_PLAN ? 'active' : 'hover:text-almost-black text-almost-black'
+                        }
                     >
                         Cloud
                     </CallToAction>
@@ -40,7 +42,11 @@ export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefaul
                         icon="none"
                         outline
                         onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 8000000)}
-                        className={currentPlanType === SELF_HOSTED_PLAN ? 'active ml-2' : 'ml-2'}
+                        className={
+                            currentPlanType === SELF_HOSTED_PLAN
+                                ? 'active ml-2'
+                                : 'ml-2 hover:text-almost-black text-almost-black'
+                        }
                     >
                         Self-hosted
                     </CallToAction>
