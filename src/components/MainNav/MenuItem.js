@@ -17,7 +17,7 @@ export default function MenuItem({ menuItem }) {
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="group whitespace-nowrap w-full lg:w-32 lg:flex lg:justify-center"
+            className="group whitespace-nowrap lg:flex lg:justify-center"
         >
             <span ref={referenceElement} className="flex justify-between items-center space-x-2">
                 <Link
@@ -25,7 +25,7 @@ export default function MenuItem({ menuItem }) {
                     to={url}
                     className={
                         classes ||
-                        'font-semibold text-[15px] transition-colors dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
+                        'font-semibold px-4 py-2 text-[15px] transition-colors dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
                     }
                 >
                     {title}

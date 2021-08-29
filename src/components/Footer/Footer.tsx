@@ -59,20 +59,20 @@ export function Footer({
 }): JSX.Element {
     return (
         <footer className="max-w-screen-2xl mx-auto mt-20 pb-9">
-            <div className="py-5 border-2 border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
+            <div className="py-2 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
                 <ul className="list-none p-0 m-0 flex space-x-16 items-center flex-wrap">
                     <div className="w-full sm:w-auto flex justify-center">
                         <Logo noText />
                     </div>
-                    <FooterMenuItem className="md:text-lg" title="About" url="/" />
-                    <FooterMenuItem className="md:text-lg" title="Blog" url="/" />
-                    <FooterMenuItem className="md:text-lg" title="Careers" url="/" />
-                    <FooterMenuItem className="lg:!ml-auto md:text-lg" title="Support" url="/" />
-                    <FooterMenuItem className="md:text-lg" title="Contact sales" url="/" />
+                    <FooterMenuItem className="md:text-base" title="About" url="/" />
+                    <FooterMenuItem className="md:text-base" title="Blog" url="/" />
+                    <FooterMenuItem className="md:text-base" title="Careers" url="/" />
+                    <FooterMenuItem className="lg:!ml-auto md:text-base" title="Support" url="/" />
+                    <FooterMenuItem className="md:text-base" title="Contact sales" url="/" />
                 </ul>
             </div>
             <div className="mt-9 grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto">
-                <div className="col-span-2 border-b-2 lg:border-r-2 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pb-7">
+                <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pb-7">
                     <h3 className="text-xl">Product analytics</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
@@ -104,7 +104,7 @@ export function Footer({
                         </div>
                     </div>
                 </div>
-                <div className="col-span-1 border-b-2 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:px-10 pb-7 lg:pt-0 pt-7">
+                <div className="col-span-1 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:px-10 pb-7 lg:pt-0 pt-7">
                     <h3 className="text-xl">Company</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -128,7 +128,7 @@ export function Footer({
                         </div>
                     </div>
                 </div>
-                <div className="col-span-2 lg:border-r-2 border-b-2 lg:border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pt-7 pb-7 lg:pb-0">
+                <div className="col-span-2 lg:border-r-1 border-b-1 lg:border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pt-7 pb-7 lg:pb-0">
                     <h3 className="text-xl">Docs</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
@@ -186,15 +186,13 @@ export function Footer({
                     </div>
                 </div>
             </div>
-            <div className="flex py-5 border-2 border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 mt-9 items-center">
-                <small className="sm:text-base text-xs font-bold dark:text-gray">
-                    &copy; {new Date().getFullYear()} PostHog, Inc.
-                </small>
-                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-16 space-x-4">
+            <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 mt-9 items-center text-base">
+                <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
+                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4 text-base">
                     <li>
                         <Link
                             to=""
-                            className="sm:text-base text-xs font-bold text-almost-black hover:text-almost-black dark:text-gray darkhover:text-gray"
+                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark hover:text-gray"
                         >
                             Privacy
                         </Link>
@@ -202,7 +200,7 @@ export function Footer({
                     <li>
                         <Link
                             to=""
-                            className="sm:text-base text-xs font-bold text-almost-black hover:text-almost-black dark:text-gray darkhover:text-gray"
+                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark hover:text-gray"
                         >
                             Terms
                         </Link>
