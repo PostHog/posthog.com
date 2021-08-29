@@ -230,3 +230,33 @@ export const MobileMenu = ({ className, style }: { className: string; style: any
         </svg>
     )
 }
+
+export const SliderNav = ({
+    className,
+    style,
+    bgColor,
+    arrowColor,
+}: {
+    bgColor: string
+    arrowColor: string
+    className: string
+    style: any
+}): JSX.Element => {
+    return (
+        <svg
+            className={className}
+            style={style}
+            width="42"
+            height="34"
+            viewBox="0 0 42 34"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <rect width="42" height="34" rx="6" fill={bgColor} />
+            <path
+                d="M29.1709 16.0995L23.8975 10.8253C23.4116 10.3395 22.6016 10.3395 22.1158 10.8253C21.6299 11.3112 21.6299 12.1212 22.1158 12.607L25.2292 15.7394H13.7092C13.0075 15.7394 12.4492 16.2977 12.4492 16.9994C12.4492 17.7011 13.0075 18.2594 13.7092 18.2594H25.2292L22.115 21.3736C21.6292 21.8594 21.6292 22.6694 22.115 23.1553C22.3668 23.407 22.6909 23.5336 23.015 23.5336C23.3392 23.5336 23.6633 23.4077 23.915 23.1553L29.1709 17.8995C29.405 17.6653 29.5491 17.3412 29.5491 16.9995C29.5491 16.6578 29.4233 16.3336 29.1709 16.0995L29.1709 16.0995Z"
+                fill={arrowColor}
+            />
+        </svg>
+    )
+}

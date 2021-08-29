@@ -12,6 +12,7 @@ import { Footer } from '../components/Footer'
 import { useLocation } from '@reach/router'
 import '../components/Pricing/styles/index.scss'
 import Layout from 'components/Layout'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const PricingNew = (): JSX.Element => {
     const { hash } = useLocation()
@@ -32,7 +33,26 @@ const PricingNew = (): JSX.Element => {
             <PlanComparison className="mx-4 mb-28" />
             {/* <Savings /> */}
             <FAQs className="mx-auto px-5" />
-            <Quote className="my-24 md:my-32 px-5" />
+            <Quote
+                className="my-24 md:my-32 px-5"
+                name="Jonathan Hyde"
+                title="Former Head of Product, Legl"
+                image={
+                    <StaticImage
+                        width={100}
+                        height={100}
+                        alt="Jonathan Hyde - Former Head of Product, Legl"
+                        src="../../../images/jonathan-hyde-plain.png"
+                    />
+                }
+                quote={
+                    <span>
+                        Posthog is the first analytics platform where{' '}
+                        <span className="text-red">I can be 100% confident in the data.</span> I've finally got the data
+                        insight platform I've always wanted as a Product person.
+                    </span>
+                }
+            />
         </Layout>
     )
 }

@@ -60,3 +60,4 @@ text-almost-black
 hover:text-almost-black
 dark:text-almost-black
 dark:hover:text-almost-black
+border-red

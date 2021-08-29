@@ -4,6 +4,7 @@ import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
 import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
+import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -99,6 +100,7 @@ export const shortcodes = {
     MethodTags,
     AllTheFeaturesCloud,
     AnchorScrollNavbar,
+    AnimateIntoView,
     AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,

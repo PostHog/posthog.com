@@ -39,7 +39,7 @@
 .button {
     @apply text-white font-bold hover:text-white select-none px-4 py-2 rounded-full;
     &.outline {
-        @apply border-3 border-gray-accent-light text-gray-accent-dark;
+        @apply border-3 border-gray-accent-light;
         &.active {
             @apply bg-almost-black border-almost-black text-white;
         }
