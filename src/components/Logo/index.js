@@ -1,8 +1,9 @@
 import React from 'react'
 
-export default function Logo({ noText }) {
+export default function Logo({ noText, white, className }) {
     return (
         <svg
+            className={className}
             xmlns="http://www.w3.org/2000/svg"
             width={noText ? '50' : '150'}
             height="30"

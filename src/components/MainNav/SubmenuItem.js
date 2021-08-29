@@ -12,7 +12,7 @@ export default function SubmenuItem({ item }) {
         shown: { y: 0, opacity: 1, transition: { duration: 0.5, type: 'spring' } },
     }
     return (
-        <motion.li tran variants={variants} className="lg:mt-12 mt-6 font-bold">
+        <motion.li variants={variants} className="lg:mt-12 mt-6 font-bold">
             <div className="flex items-center justify-between">
                 <h2 className="text-lg lg:text-xl font-bold">{title}</h2>
                 {link && (
