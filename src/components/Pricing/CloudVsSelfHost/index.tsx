@@ -7,7 +7,7 @@ import checkIcon from '../../../images/check.svg'
 export const CloudVsSelfHost = ({ className = '' }) => {
     return (
         <section
-            className={`${className} px-4 box-content grid md:grid-cols-2 grid-cols-1  md:border-t-2 border-dashed border-gray-accent-light max-w-screen-lg mx-auto relative md:gap-40 text-center font-bold text-almost-black`}
+            className={`${className} px-4 box-content grid md:grid-cols-2 grid-cols-1  md:border-t border-dashed border-gray-accent-light max-w-screen-lg mx-auto relative md:gap-40 text-center font-bold text-almost-black`}
         >
             <div className="md:after:block after:hidden after:absolute after:h-[60%] after:border-dashed after:border-gray-accent-light after:border-2 after:left-1/2 after:transform after:-translate-x-1/2 after:bottom-0">
                 <h3 className="sm:text-3xl md:mb-16 flex items-center justify-center space-x-2">

@@ -72,7 +72,7 @@ function ProductPage() {
                     </div>
 
                     <div className="feature-data-in-out">
-                        <div className="md:grid grid-cols-2 gap-3 pt-6 px-4 md:pt-12 md:px-8 relative border-gray-accent-light border-dashed border-t-2">
+                        <div className="md:grid grid-cols-2 gap-3 pt-6 px-4 md:pt-12 md:px-8 relative border-gray-accent-light border-dashed border-t">
                             <ProductFeature
                                 layout="standard"
                                 featureIcon="data-pipelines"
@@ -99,8 +99,8 @@ function ProductPage() {
                         </div>
                     </div>
 
-                    <div className="feature-hosting-flexibility mt-4 py-12 px-4 border-gray-accent-light border-dashed border-t-2 border-b-2">
-                        <div className="feature-name flex items-start gap-2 border-gray-accent-light border-dashed border-b-2 pb-2 mb-4">
+                    <div className="feature-hosting-flexibility mt-4 py-12 px-4 border-gray-accent-light border-dashed border-t border-b">
+                        <div className="feature-name flex items-start gap-2 border-gray-accent-light border-dashed border-b pb-2 mb-4">
                             <ProductImage imageName="hosting-flexibility.svg" alt="Hosting options icon" isIcon />
                             <div className="font-bold">Hosting options</div>
                         </div>
@@ -276,7 +276,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="feature-user-sessions flex flex-col md:flex-row items-center p-16 border-gray-accent-light border-dashed border-t-2 border-b-2">
+                    <div className="feature-user-sessions flex flex-col md:flex-row items-center p-16 border-gray-accent-light border-dashed border-t border-b">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="user-sessions"
