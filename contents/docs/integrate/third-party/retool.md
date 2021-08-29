@@ -61,7 +61,11 @@ Integrating Retool with PostgreSQL directly is rather simple.
 1. When creating a new resource, select "REST API". 
 2. This will open a configuration page for the API resource:
 
-    <br />![Retool REST](../../../images/tutorials/retool/rest.png)<br />
+    <br />
+    
+    ![Retool REST](../../../images/tutorials/retool/rest.png)
+    
+    <br />
 
 3. On the configuration page, use `https://app.posthog.com/api/` for the 'Base URL' if you're using PostHog Cloud. Otherwise use the address of your PostHog instance, followed by `/api/`. Then, on the 'Headers' section, configure a header called `Authorization` with value `Bearer <YOUR_PERSONAL_API_KEY>`. For more information on API authentication, see our [dedicated page for this](/docs/api/overview#authentication). 
 4. Click 'Create Resource' and you should now be able to connect to PostHog endpoints through Retool queries. For information on our endpoints, see our [API Documentation](/docs/api/overview).
@@ -76,7 +80,11 @@ To handle pagination in Retool and show results beyond the first "page", we need
 1. First, create a new query that uses the PostHog API resource and input the endpoint you want to use. 
 2. Then, add a 'URL parameter' called `cursor` and set its value to `{{cursor}}`. Here's what the config will look like:
 
-    <br />![Retool Magic](../../../images/tutorials/retool/magic.png)<br />
+    <br />
+    
+    ![Retool Magic](../../../images/tutorials/retool/magic.png)
+    
+    <br />
 
 3. Retool will complain about `cursor` not being defined, but that's OK. This is the [recommended way to handle paginated API endpoints](https://community.retool.com/t/returning-all-results-for-a-cursor-based-paginated-api/3387) while that isn't supported natively. "Save and run" your query. It will fail as expected.
 4. Now, create a new query, using the 'Run JS Code (javascript)' resource. On the text editor, paste the following:
