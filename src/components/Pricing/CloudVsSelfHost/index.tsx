@@ -9,7 +9,7 @@ export const CloudVsSelfHost = ({ className = '' }) => {
         <section
             className={`${className} px-4 box-content grid md:grid-cols-2 grid-cols-1  md:border-t border-dashed border-gray-accent-light max-w-screen-lg mx-auto relative md:gap-40 text-center font-bold text-almost-black`}
         >
-            <div className="md:after:block after:hidden after:absolute after:h-[60%] after:border-dashed after:border-gray-accent-light after:border-2 after:left-1/2 after:transform after:-translate-x-1/2 after:bottom-0">
+            <div className="md:after:block after:hidden after:absolute after:h-[60%] after:border-dashed after:border-gray-accent-light after:border-l after:left-1/2 after:transform after:-translate-x-1/2 after:bottom-0">
                 <h3 className="sm:text-3xl md:mb-16 flex items-center justify-center space-x-2">
                     <span className="flex-grow-0">
                         <Logo noText />
@@ -18,7 +18,7 @@ export const CloudVsSelfHost = ({ className = '' }) => {
                 </h3>
                 <ul className="list-none m-0 p-0">
                     <li className="py-4 sm:text-lg md:text-xl">Hosted & managed by PostHog</li>
-                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border-2 border-l-0 border-r-0">
+                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border border-l-0 border-r-0">
                         Start using immediately
                     </li>
                     <li className="pt-4 sm:text-lg md:text-xl">Automatic upgrades</li>
@@ -28,7 +28,7 @@ export const CloudVsSelfHost = ({ className = '' }) => {
                 <h3 className="sm:text-3xl md:mb-16">Self-hosting</h3>
                 <ul className="list-none m-0 p-0">
                     <li className="py-4 sm:text-lg md:text-xl">User data stays on your infrastructure</li>
-                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border-2 border-l-0 border-r-0">
+                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border border-l-0 border-r-0">
                         Full access to production instance
                     </li>
                     <li className="pt-4 sm:text-lg md:text-xl">

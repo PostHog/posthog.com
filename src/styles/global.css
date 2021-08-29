@@ -32,6 +32,13 @@ div[class^='feature-'].text-center {
     background: url('../images/dash-vertical.svg') 100% / 1px repeat-y;
 }
 
+/* Pricing page */
+
+.rc-slider-step {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 100px;
+}
+
 /* Careers page */
 
 .benefits-grid {

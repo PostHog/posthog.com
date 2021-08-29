@@ -16,7 +16,7 @@ export const CloudPlanBreakdown = () => {
         <>
             <div className="flex justify-center mb-20">
                 <div className="inline-flex flex-col md:flex-row items-center text-almost-black backdrop-filter backdrop-blur-sm">
-                    <div className="flex-0 border border-white border-opacity-10 rounded p-8 bg-almost-black text-white">
+                    <div className="flex-0 border border-white border-opacity-10 rounded-xl p-8 bg-almost-black text-white">
                         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 24" width="42" height="24">
                             <path
                                 d="M0 17.143L6.867 24H0v-6.857zm0-1.714L8.583 24h6.867L0 8.572v6.857zm0-8.571L17.166 24h6.866L0 0v6.858zm8.583 0L25.75 24v-6.857L8.583.001v6.857zM17.166 0v6.857l8.583 8.57V8.573L17.166 0z"
