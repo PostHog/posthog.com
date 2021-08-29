@@ -39,7 +39,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                                     smooth
                                     duration={300}
                                     to={navItem.url}
-                                    className={`text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white`}
+                                    className={`jumpTo pl-6 xl:pl-0 text-almost-black hover:text-orange dark:text-white dark:hover:text-orange`}
                                 >
                                     {navItem.name}
                                 </Link>

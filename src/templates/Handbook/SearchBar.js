@@ -73,7 +73,7 @@ export default function SearchBar() {
             </span>
             <input
                 id="handbook-search"
-                className="w-full text-sm text-primary outline-none bg-transparent py-2 pl-5 placeholder-primary-50::placeholder"
+                className="w-full text-sm text-primary dark:text-primary-dark outline-none bg-transparent py-2 pl-5 placeholder-primary-50::placeholder dark:placeholder-primary-dark-50::placeholder"
                 placeholder={`Search ${breakpoints.xs ? '' : 'handbook'}`}
             />
         </div>
