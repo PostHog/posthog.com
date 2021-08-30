@@ -47,7 +47,7 @@ const Icon = ({ name, className }) => (
 
 const Feature = ({ title, icon }) => {
     return (
-        <div className="flex whitespace-nowrap py-4 md:py-6 space-x-1 md:space-x-4  font-bold items-center justify-center border-r-2 border-dashed border-gray-accent-light">
+        <div className="flex whitespace-nowrap py-4 md:py-6 space-x-1 md:space-x-4 font-bold text-almost-black hover:text-almost-black items-center justify-center border-r-2 border-dashed border-gray-accent-light">
             <Icon className={'w-6 h-6'} name={icon} />
             <span className="text-[12px] md:text-[16px]">{title}</span>
         </div>
@@ -56,8 +56,8 @@ const Feature = ({ title, icon }) => {
 
 const Customer = ({ company }) => {
     return (
-        <li>
-            <svg className="icon w-full h-[10vw] py-[2vw] px-[2vw] xl:py-0 xl:h-auto xl:px-8 border-t-2 border-l-2 border-dashed border-gray-accent-light">
+        <li className="border-t border-l border-dashed border-gray-accent-light">
+            <svg className="icon w-full h-full py-2 px-4  md:py-6 md:px-8  lg:py-10 lg:px-16 " height="40">
                 <use xlinkHref={`/images/home-sprite.svg#${company}`}></use>
             </svg>
         </li>
@@ -67,7 +67,7 @@ const Customer = ({ company }) => {
 const SliderItem = ({ image, description, icon, feature }) => {
     return (
         <div>
-            <div className="p-6 sm:p-10 border-r-2 border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
+            <div className="p-6 sm:p-10 border-r border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
                 {image}
                 <p className="font-semibold mt-2 before:border-l-4 before:border-gray before:rounded before:mr-2 mb-0">
                     {description} <Icon className="w-8 h-8 inline-block" name={icon} /> {feature}
@@ -139,7 +139,7 @@ const PlatformFeatures = () => {
                     <SliderNav bgColor="black" arrowColor="#EEEFE9" />
                 </button>
             </div>
-            <div className="max-w-screen-2xl mx-auto border-t-2 border-b-2 border-dashed border-gray-accent-light">
+            <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...settings}>
                     <SliderItem
                         image={<StaticImage quality={100} height={500} width={890} src="../images/funnels-slide.jpg" />}
@@ -195,7 +195,7 @@ const PlatformFeatures = () => {
                 <CallToAction
                     type="button"
                     outline
-                    to="/pricing"
+                    to="/product"
                     className="bg-tan text-almost-black hover:text-almost-black"
                 >
                     Explore all features
@@ -386,7 +386,7 @@ const IndexPage = () => {
                         These industry leaders <span className="text-blue">self-host</span> their product analytics
                     </h2>
                     <div className="mt-8 md:mt-20">
-                        <ul className="list-none m-0 p-0 grid grid-cols-4 border-b-2 border-r-2 border-dashed border-gray-accent-light">
+                        <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
                             <Customer company="y-combinator" />
                             <Customer company="staples" />
                             <Customer company="spacex" />
