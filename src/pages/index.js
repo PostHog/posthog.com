@@ -36,44 +36,6 @@ const exampleCode = `SELECT entrance_period_start,
                           FROM (
                                 SELECT person_id,
                                        timestamp,
-                                       step_0,
-                                       latest_0,
-                                       step_1,
-                                       min(latest_1) over (PARTITION by person_id ORDER BY timestamp DESC ROWS BETWEEN UNBOUNDED PRECEDING AND 0 PRECEDING) latest_1
-                                  FROM (
-                                        SELECT person_id,
-                                               timestamp,
-                                               if(event = 'user signed up', 1, 0) as step_0,
-                                               if(step_0 = 1, timestamp, null) as latest_0,
-                                               if(event = 'user updated', 1, 0) as step_1,
-                                               if(step_1 = 1, timestamp, null) as latest_1
-                                          FROM (
-                                                SELECT e.event as event,
-                                                       e.team_id as team_id,
-                                                       e.distinct_id as distinct_id,
-                                                       e.timestamp as timestamp,
-                                                       pdi.person_id as person_id
-                                                  FROM events e
-                                                 WHERE team_id = 0000
-                                                   AND event IN ['user signed up', 'user updated']
-                                                   AND timestamp >= '2021-08-10 00:00:00'
-                                                   AND timestamp <= '2021-08-24 23:59:59'
-                                               ) events
-                                         WHERE (step_0 = 1 OR step_1 = 1)
-                                       )
-                               )
-                         WHERE step_0 = 1
-                       )
-                 GROUP BY person_id,
-                          entrance_period_start
-               )
-         GROUP BY entrance_period_start
-       ) data
- RIGHT OUTER JOIN (
-        SELECT toStartOfDay(toDateTime('2021-08-10 00:00:00') + toIntervalDay(number)) AS entrance_period_start
-          FROM numbers(dateDiff('day', toDateTime('2021-08-10 00:00:00'), toDateTime('2021-08-24 00:00:00')) + 1) AS period_offsets
-       ) fill USING (entrance_period_start)
- ORDER BY entrance_period_start ASC
 `
 
 const Icon = ({ name, className }) => (
