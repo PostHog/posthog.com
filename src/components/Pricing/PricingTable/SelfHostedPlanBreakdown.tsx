@@ -14,27 +14,27 @@ export const SelfHostedPlanBreakdown = () => {
 
     return (
         <div className="grid grid-flow-row auto-rows-max mdlg:grid-flow-col mdlg:auto-cols-max justify-center items-start mb-20">
-            <div className="border flex flex-col self-stretch border-white border-opacity-10 rounded-xl p-8 mx-6 mdlg:ml-0 bg-almost-black bg-opacity-50 ">
-                <h3 className="text-lg m-0 text-white">Open Source</h3>
+            <div className="flex flex-col self-stretch border-2 border-gray rounded-xl p-8 mx-6 mdlg:ml-0">
+                <h3 className="text-lg m-0">Open Source</h3>
                 <p className="opacity-50 text-sm">Great for startups</p>
                 <ul className="list-none pl-0 mb-6">
                     <li className="mb-1">
                         <span className="text-base font-bold">1 million</span>
                         &nbsp;
-                        <span className="text-sm text-white text-opacity-75">tracked users</span>
+                        <span className="text-sm text-opacity-75">tracked users</span>
                     </li>
                     <li className="mb-1">
                         <span className="text-base font-bold">1</span>
                         &nbsp;
-                        <span className="text-sm text-white text-opacity-75">project</span>
+                        <span className="text-sm text-opacity-75">project</span>
                     </li>
                     <li className="mb-1">
                         <span className="text-base font-bold">Unlimited</span>
                         &nbsp;
-                        <span className="text-sm text-white text-opacity-75">team members</span>
+                        <span className="text-sm text-opacity-75">team members</span>
                     </li>
                 </ul>
-                <ul className="list-none text-white text-opacity-70 text-sm pl-0 mb-6">
+                <ul className="list-none text-opacity-70 text-sm pl-0 mb-6">
                     <li className="flex items-center mb-2 space-x-2">
                         <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
                         <span className="">
@@ -58,7 +58,7 @@ export const SelfHostedPlanBreakdown = () => {
                         </CallToAction>
                     </div>
 
-                    <div className="text-center text-xs text-opacity-50 text-white mt-2">
+                    <div className="text-xs text-center text-opacity-50 mt-2">
                         No credit card required <br />
                         &nbsp;
                     </div>
