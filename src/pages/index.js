@@ -281,7 +281,6 @@ const CodeBlock = () => {
 }
 
 const heading = (size = 'lg', color = 'primary', classes = '') => {
-    console.log(size, color, classes)
     const options = {
         lg: 'text-4xl md:text-6xl',
         md: 'text-3xl lg:text-5xl',

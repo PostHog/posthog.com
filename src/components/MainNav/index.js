@@ -61,25 +61,24 @@ export default function MainNav({ expanded }) {
                 initial="hidden"
                 animate="shown"
             >
-                <ul className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row lg:space-y-0 space-y-6 bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent list-none mb-0 font-nav lg:px-0 px-5 lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-3xl -ml-4 3xl:mx-auto">
-                    {menu.map((menuItem, index) => {
-                        return (
-                            <>
-                                <MenuItem key={index} menuItem={menuItem} />
-                                {index + 1 === halfMenu && (
-                                    <li style={{ margin: '0 auto' }} className="w-[30%] justify-center hidden lg:flex">
-                                        <Link
-                                            className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white"
-                                            to="/"
-                                        >
-                                            <Logo />
-                                        </Link>
-                                    </li>
-                                )}
-                            </>
-                        )
-                    })}
-                </ul>
+                <div className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent font-nav lg:px-0 px-5 lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-2xl mx-auto">
+                    <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full lg:w-auto">
+                        {menu.slice(0, halfMenu).map((menuItem, index) => {
+                            return <MenuItem key={index} menuItem={menuItem} />
+                        })}
+                    </ul>
+                    <Link
+                        className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark hidden lg:block"
+                        to="/"
+                    >
+                        <Logo />
+                    </Link>
+                    <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full lg:w-auto justify-end">
+                        {menu.slice(halfMenu, menu.length).map((menuItem, index) => {
+                            return <MenuItem key={index} menuItem={menuItem} />
+                        })}
+                    </ul>
+                </div>
             </motion.nav>
         )
     )
