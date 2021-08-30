@@ -1668,7 +1668,8 @@ body.light {
     }
 }
 
-#handbook-search-wrapper {
+#handbook-search-wrapper,
+#docs-search-wrapper {
     .algolia-autocomplete {
         height: auto;
         width: 100%;

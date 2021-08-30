@@ -54,7 +54,7 @@ export default function Navigation({
 
                 <div className="flex-grow border-r border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
                     <div className="w-full flex space-x-2 md:space-x-0 text-gray dark:text-gray-accent-light">
-                        <SearchBar />
+                        <SearchBar base={breadcrumbBase.name.toLowerCase()} />
                     </div>
                 </div>
 
