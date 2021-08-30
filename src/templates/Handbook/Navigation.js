@@ -22,7 +22,7 @@ export default function Navigation({
                 zIndex: 1001,
                 transform: menuOpen ? 'translate3d(calc(100vw - 80px), 0px, 0px)' : 'none',
             }}
-            className="max-w-screen-2xl mx-auto sticky top-0 "
+            className="max-w-screen-3xl mx-auto sticky -top-1"
         >
             <div className="bg-tan dark:bg-almost-black flex items-center mt-4 border border-gray-accent-light dark:border-gray-accent-dark border-dashed border-l-0 border-r-0 ">
                 <button onClick={handleMobileMenuClick} className="py-2 px-3 block md:hidden">

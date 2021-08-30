@@ -46,7 +46,7 @@ export default function Main({
     const mainEl = useRef()
     return (
         <div className="relative">
-            <div className="dark:text-white flex max-w-screen-2xl mx-auto items-start relative z-10 mt-8">
+            <div className="dark:text-white flex max-w-screen-3xl mx-auto items-start relative z-10 mt-8">
                 <div className="sticky top-20 flex-1">
                     <SectionLink link={previous} iconClass="transform rotate-180" className="hidden md:flex mb-8" />
                     <MainSidebar
@@ -60,7 +60,7 @@ export default function Main({
                     <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
                         <section className="mb-8 xl:mb-14 relative">
                             <h1 className="dark:text-white text-5xl mt-0 mb-2">{title}</h1>
-                            <p className="mt-1 mb-0 opacity-75">
+                            <p className="mt-1 mb-0 opacity-50">
                                 Last updated: <time>{lastUpdated}</time>
                             </p>
                         </section>

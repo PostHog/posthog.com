@@ -28,7 +28,7 @@ const PricingNew = (): JSX.Element => {
 
                 <PricingTable showScaleByDefault={hash === SHOW_SCALE_HASH} />
             </section>
-            <CloudVsSelfHost className="mt-28 md:mt-40 mb-28 md:pt-28 md:pb-14" />
+            <CloudVsSelfHost className="mb-28 md:pt-28 md:pb-14" />
             <h3 className="relative text-almost-black text-center mb-6">Compare plans</h3>
             <PlanComparison className="mx-4 mb-28" />
             {/* <Savings /> */}
