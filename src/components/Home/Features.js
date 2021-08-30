@@ -6,7 +6,7 @@ import { SliderNav } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import { section, heading } from './classes'
 
-const FeatureButton = ({ title, index, activeFeature }) => {
+const FeatureButton = ({ title, index, activeFeature, sliderRef }) => {
     const borderColor = index === activeFeature ? 'red' : 'gray'
     const textColor = index === activeFeature ? 'red' : 'primary'
     const handClick = () => {
@@ -73,10 +73,34 @@ export default function Features() {
                     Everything product-led teams need <span className="text-yellow">in one place</span>
                 </h2>
                 <h3 className="text-base md:text-2xl text-center mt-4 md:mt-8">
-                    One platform for <FeatureButton index={0} title="funnel analysis" />,{' '}
-                    <FeatureButton activeFeature={activeFeature} index={1} title="product usage trends" />,{' '}
-                    <FeatureButton activeFeature={activeFeature} title="session recordings" index={2} /> &{' '}
-                    <FeatureButton activeFeature={activeFeature} index={3} title="feature flags" />
+                    One platform for{' '}
+                    <FeatureButton
+                        sliderRef={sliderRef}
+                        activeFeature={activeFeature}
+                        index={0}
+                        title="funnel analysis"
+                    />
+                    ,{' '}
+                    <FeatureButton
+                        sliderRef={sliderRef}
+                        activeFeature={activeFeature}
+                        index={1}
+                        title="product usage trends"
+                    />
+                    ,{' '}
+                    <FeatureButton
+                        sliderRef={sliderRef}
+                        activeFeature={activeFeature}
+                        title="session recordings"
+                        index={2}
+                    />{' '}
+                    &{' '}
+                    <FeatureButton
+                        sliderRef={sliderRef}
+                        activeFeature={activeFeature}
+                        index={3}
+                        title="feature flags"
+                    />
                 </h3>
             </div>
 
