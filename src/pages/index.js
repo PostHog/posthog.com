@@ -57,7 +57,7 @@ const Feature = ({ title, icon }) => {
 const Customer = ({ company }) => {
     return (
         <li className="border-t border-l border-dashed border-gray-accent-light">
-            <svg className="icon w-full h-full py-2 px-4  md:py-6 md:px-8  lg:py-10 lg:px-16 h-[40px]">
+            <svg className="icon w-full h-full py-2 px-4  md:py-6 md:px-8  lg:py-10 lg:px-16 " height="40">
                 <use xlinkHref={`/images/home-sprite.svg#${company}`}></use>
             </svg>
         </li>
