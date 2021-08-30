@@ -43,7 +43,7 @@ export default function Features() {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         variableWidth: true,
         adaptiveHeight: true,
         responsive: [
