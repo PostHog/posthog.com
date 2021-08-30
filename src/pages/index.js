@@ -47,7 +47,7 @@ const Icon = ({ name, className }) => (
 
 const Feature = ({ title, icon }) => {
     return (
-        <div className="flex whitespace-nowrap py-4 md:py-6 space-x-1 md:space-x-4  font-bold text-almost-black hover:text-almost-black items-center justify-center border-r-2 border-dashed border-gray-accent-light">
+        <div className="flex whitespace-nowrap py-4 md:py-6 space-x-1 md:space-x-4  font-bold items-center justify-center border-r-2 border-dashed border-gray-accent-light">
             <Icon className={'w-6 h-6'} name={icon} />
             <span className="text-[12px] md:text-[16px]">{title}</span>
         </div>
@@ -69,7 +69,7 @@ const SliderItem = ({ image, description, icon, feature }) => {
         <div>
             <div className="p-6 sm:p-10 border-r-2 border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
                 {image}
-                <p className="font-semibold text-almost-black mt-2 before:border-l-4 before:border-gray before:rounded before:mr-2 mb-0">
+                <p className="font-semibold mt-2 before:border-l-4 before:border-gray before:rounded before:mr-2 mb-0">
                     {description} <Icon className="w-8 h-8 inline-block" name={icon} /> {feature}
                 </p>
             </div>
@@ -123,7 +123,7 @@ const PlatformFeatures = () => {
                 <h2 className={heading('lg', 'almost-black', 'max-w-[1100px] mx-auto')}>
                     Everything product-led teams need <span className="text-yellow">in one place</span>
                 </h2>
-                <h3 className="text-base md:text-2xl text-center mt-4 md:mt-8 text-almost-black">
+                <h3 className="text-base md:text-2xl text-center mt-4 md:mt-8">
                     One platform for <FeatureButton index={0} title="funnel analysis" />,{' '}
                     <FeatureButton index={1} title="product usage trends" />,{' '}
                     <FeatureButton title="session recordings" index={2} /> &{' '}
@@ -185,13 +185,11 @@ const PlatformFeatures = () => {
                 </Slider>
             </div>
             <div className="px-4 text-center my-16">
-                <h4 className="text-3xl font-bold mb-8 text-almost-black">
-                    <span className="text-almost-black opacity-40">Plus</span> cohorts, user paths, retention, session
-                    browsing
+                <h4 className="text-3xl font-bold mb-8">
+                    <span className="opacity-40">Plus</span> cohorts, user paths, retention, session browsing
                     <br />{' '}
                     <span className="text-xl">
-                        & synced annotations{' '}
-                        <span className="text-almost-black opacity-40">across every view in the platform</span>
+                        & synced annotations <span className="opacity-40">across every view in the platform</span>
                     </span>
                 </h4>
                 <CallToAction
@@ -211,7 +209,7 @@ const Chip = ({ icon, title, className }) => {
     return (
         <div className={`bg-gray-accent-light flex space-x-2 py-2 px-4 rounded-lg items-center mt-2 ${className}`}>
             <Icon className="w-5 h-5" name={icon} />
-            <span className="text-sm sm:text-base font-bold text-almost-black">{title}</span>
+            <span className="text-sm sm:text-base font-bold">{title}</span>
         </div>
     )
 }
@@ -237,7 +235,7 @@ const PipelineGraphic = () => {
             <div className="flex justify-center items-center lg:flex-col relative lg:col-span-3">
                 <div className="absolute left-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 w-full -top-8 z-10">
                     <Icon name="logo-bullet" className="w-16 h-16 mx-auto" />
-                    <h5 className="text-2xl font-bold lg:block hidden text-almost-black">
+                    <h5 className="text-2xl font-bold lg:block hidden">
                         Self-serve product analytics for 90% of your product questions
                     </h5>
                 </div>
@@ -282,7 +280,7 @@ const CodeBlock = () => {
     )
 }
 
-const heading = (size = 'lg', color = 'almost-black', classes = '') => {
+const heading = (size = 'lg', color = 'primary', classes = '') => {
     console.log(size, color, classes)
     const options = {
         lg: 'text-4xl md:text-6xl',
@@ -370,7 +368,7 @@ const IndexPage = () => {
                             </CallToAction>
                         </div>
                     </div>
-                    <p className="md:mt-auto my-10 md:mb-12 text-almost-black font-semibold">
+                    <p className="md:mt-auto my-10 md:mb-12 font-semibold">
                         Don’t need to self host? Try <Link to="/sign-up">PostHog Cloud</Link>
                     </p>
                     <div className="bg-[#DFE0DA] bg-opacity-70 w-full">

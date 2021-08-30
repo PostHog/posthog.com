@@ -125,6 +125,14 @@ body {
     -moz-osx-font-smoothing: auto;
 }
 
+body.light {
+    @apply text-primary;
+}
+
+body.dark {
+    @apply text-primary-dark;
+}
+
 ol,
 ul {
     margin: initial;
