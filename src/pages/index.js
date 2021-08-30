@@ -347,7 +347,7 @@ const IndexPage = () => {
             />
             <section className="md:h-[calc(100vh-87px)] flex flex-col justify-center items-center">
                 <div className="text-center mt-6 md:mt-auto px-4">
-                    <h1 className="text-4xl md:text-6xl m-0">
+                    <h1 className={heading()}>
                         Host your own
                         <br /> product analytics suite
                     </h1>
