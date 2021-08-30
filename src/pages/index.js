@@ -16,6 +16,7 @@ import outlinedChart from '../images/outlined-chart.svg'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import factoBlurb from '../images/facto-blurb.svg'
 import AnimateIntoView from 'components/AnimateIntoView'
+import cntl from 'cntl'
 
 const exampleCode = `SELECT entrance_period_start,
        reached_from_step_count,
@@ -117,9 +118,9 @@ const PlatformFeatures = () => {
     }
 
     return (
-        <section className="my-16 md:mt-36">
-            <div className="px-4">
-                <h2 className="text-4xl md:text-6xl m-0 text-center">
+        <section className={section()}>
+            <div>
+                <h2 className={heading()}>
                     Everything product-led teams need <span className="text-yellow">in one place</span>
                 </h2>
                 <h3 className="text-base md:text-2xl text-center mt-4 md:mt-8">
@@ -279,6 +280,30 @@ const CodeBlock = () => {
     )
 }
 
+const heading = (size = 'lg', color = 'almost-black', classes = '') => {
+    const options = {
+        lg: 'text-4xl md:text-6xl',
+        md: 'text-3xl lg:text-5xl',
+        sm: 'text-base md:text-xl font-semibold mt-2 lg:mt-4',
+    }
+    return cntl`
+        m-0
+        text-center
+        ${options[size]}
+        text-${color}
+        ${classes}
+    `
+}
+
+const section = (className = '') => cntl`
+    max-w-screen-2xl
+    mx-auto
+    my-16
+    md:my-32
+    px-4
+    ${className}
+`
+
 const IndexPage = () => {
     const settings = {
         dots: false,
@@ -323,7 +348,7 @@ const IndexPage = () => {
                         Host your own
                         <br /> product analytics suite
                     </h1>
-                    <h2 className="text-base md:text-xl m-0 my-6 font-semibold">
+                    <h2 className={heading('sm', null, 'my-6')}>
                         With our open source platform, customer data never has to leave your infrastructure
                     </h2>
                     <div className="flex flex-col justify-center items-center space-y-2 md:space-y-4">
@@ -354,11 +379,11 @@ const IndexPage = () => {
                     </Slider>
                 </div>
             </section>
-            <section className="text-center my-16 md:my-36 max-w-screen-2xl mx-auto px-4">
-                <h2 className="text-2xl lg:text-4xl mb-8 md:mb-20">
+            <section className={section()}>
+                <h2 className={heading('md')}>
                     These industry leaders <span className="text-blue">self-host</span> their product analytics
                 </h2>
-                <div>
+                <div className="mt-8 md:mt-20">
                     <ul className="list-none m-0 p-0 grid grid-cols-4 border-b-2 border-r-2 border-dashed border-gray-accent-light">
                         <Customer company="y-combinator" />
                         <Customer company="staples" />
@@ -372,7 +397,7 @@ const IndexPage = () => {
                 </div>
             </section>
             <section className="px-4">
-                <div className="bg-almost-black max-w-screen-2xl mx-auto rounded-lg p-4 lg:p-12 lg:pt-32">
+                <div className={section('bg-almost-black rounded-lg p-4 lg:p-12 lg:pt-32')}>
                     <div className="flex items-center flex-col md:flex-row space-x-4">
                         <div className="relative">
                             <AnimateIntoView className="absolute -right-16">
@@ -417,9 +442,9 @@ const IndexPage = () => {
                 </div>
             </section>
             <PlatformFeatures />
-            <section className="my-16 md:mt-36 text-center max-w-screen-2xl px-4 mx-auto">
-                <h2 className="text-4xl md:text-6xl m-0">Event pipelines</h2>
-                <h3 className="text-base md:text-xl m-0 my-6 font-semibold">
+            <section className={section('text-center')}>
+                <h2 className={heading()}>Event pipelines</h2>
+                <h3 className={heading('sm')}>
                     Reliably ingest data at any scale to build a holistic view of your customers.
                 </h3>
                 <div className="lg:block flex">
@@ -470,7 +495,7 @@ const IndexPage = () => {
                     {breakpoints.md && <PipelineGraphic />}
                 </div>
             </section>
-            <section className="my-16 md:mt-36 px-4">
+            <section className={section('text-left')}>
                 <Quote
                     name="Ben White"
                     title="@benjackwhite"
@@ -494,14 +519,12 @@ const IndexPage = () => {
                     }
                 />
             </section>
-            <section className="max-w-screen-2xl mx-auto my-16 md:my-32 px-4 text-center">
+            <section className={section('text-center')}>
                 <div className="bg-almost-black w-full rounded-lg px-4 py-16">
-                    <h2 className="text-white text-2xl lg:text-4xl m-0">
+                    <h2 className={heading('md', 'white')}>
                         Join our <span className="text-red">huuuuge*</span> open source community
                     </h2>
-                    <h3 className="m-0 text-tan text-lg lg:text-xl font-semibold mt-2 lg:mt-4">
-                        *4,600+ stars on GitHub
-                    </h3>
+                    <h3 className={heading('sm', 'tan')}>*4,600+ stars on GitHub</h3>
                     <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-20 divide-gray-accent-light divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-dashed">
                         <CommunityStat title="15k+" description="Developer community" />
                         <CommunityStat title="140" description="Contributors" />
@@ -512,12 +535,10 @@ const IndexPage = () => {
                     </CallToAction>
                 </div>
             </section>
-            <section className="max-w-screen-2xl mx-auto px-4 text-center">
+            <section className={section('text-center')}>
                 <div className="bg-blue w-full rounded-lg px-4 py-28">
-                    <h2 className="text-white text-4xl md:text-6xl m-0">Give it a try</h2>
-                    <h3 className="m-0 text-tan text-lg lg:text-xl font-semibold mt-3 lg:mt-4">
-                        Join 5,500 companies already using PostHog.
-                    </h3>
+                    <h2 className={heading('lg', 'white')}>Give it a try</h2>
+                    <h3 className={heading('sm', 'white')}>Join 5,500 companies already using PostHog.</h3>
                     <div className="mt-12 flex flex-col space-y-4 items-center justify-center">
                         <CallToAction type="button" width="56" className="bg-white text-blue border-2 border-white">
                             Get started
