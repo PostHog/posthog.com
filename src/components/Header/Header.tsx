@@ -43,15 +43,13 @@ export const Header = ({
     logoOnly = false,
     className,
 }: HeaderProps): JSX.Element => {
-    const [expanded, expandMenu] = useState(false)
     const { websiteTheme } = useValues(layoutLogic)
 
     return (
         <>
             <Sprites />
             <header className="relative z-[1002] p-5">
-                <MainNav expanded={expanded} />
-                <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
+                <MainNav />
             </header>
         </>
     )
