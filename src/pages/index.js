@@ -93,8 +93,8 @@ const Feature = ({ title, icon }) => {
 
 const Customer = ({ company }) => {
     return (
-        <li>
-            <svg className="icon w-full h-[10vw] py-[2vw] px-[2vw] xl:py-0 xl:h-auto xl:px-8 border-t-2 border-l-2 border-dashed border-gray-accent-light">
+        <li className="border-t border-l border-dashed border-gray-accent-light ">
+            <svg className="icon w-full h-full py-2 px-16">
                 <use xlinkHref={`/images/home-sprite.svg#${company}`}></use>
             </svg>
         </li>
@@ -104,7 +104,7 @@ const Customer = ({ company }) => {
 const SliderItem = ({ image, description, icon, feature }) => {
     return (
         <div>
-            <div className="p-6 sm:p-10 border-r-2 border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
+            <div className="p-6 sm:p-10 border-r border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
                 {image}
                 <p className="font-semibold text-almost-black mt-2 before:border-l-4 before:border-gray before:rounded before:mr-2 mb-0">
                     {description} <Icon className="w-8 h-8 inline-block" name={icon} /> {feature}
@@ -156,7 +156,7 @@ const PlatformFeatures = () => {
 
     return (
         <section className="my-16 md:mt-36">
-            <div className="px-4">
+            <div className="px-4 max-w-4xl mx-auto">
                 <h2 className="text-4xl md:text-6xl m-0 text-center">
                     Everything product-led teams need <span className="text-yellow">in one place</span>
                 </h2>
@@ -176,7 +176,7 @@ const PlatformFeatures = () => {
                     <SliderNav bgColor="black" arrowColor="#EEEFE9" />
                 </button>
             </div>
-            <div className="max-w-screen-2xl mx-auto border-t-2 border-b-2 border-dashed border-gray-accent-light">
+            <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...settings}>
                     <SliderItem
                         image={<StaticImage quality={100} height={500} width={890} src="../images/funnels-slide.jpg" />}
@@ -223,16 +223,20 @@ const PlatformFeatures = () => {
             </div>
             <div className="px-4 text-center my-16">
                 <h4 className="text-3xl font-bold mb-8">
-                    <span className="text-gray">Plus</span> cohorts, user paths, retention, session browsing
+                    <span className="text-primary dark:text-primary-dark text-opacity-50">Plus</span> cohorts, user
+                    paths, retention, session browsing
                     <br />{' '}
                     <span className="text-xl">
-                        & synced annotations <span className="text-gray">across every view in the platform</span>
+                        & synced annotations{' '}
+                        <span className="text-primary dark:text-primary-dark text-opacity-50">
+                            across every view in the platform
+                        </span>
                     </span>
                 </h4>
                 <CallToAction
                     type="button"
                     outline
-                    to="/pricing"
+                    to="/product"
                     className="bg-tan text-almost-black hover:text-almost-black"
                 >
                     Explore all features
@@ -397,7 +401,7 @@ const IndexPage = () => {
                     These industry leaders <span className="text-blue">self-host</span> their product analytics
                 </h2>
                 <div>
-                    <ul className="list-none m-0 p-0 grid grid-cols-4 border-b-2 border-r-2 border-dashed border-gray-accent-light">
+                    <ul className="list-none m-0 p-0 grid grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
                         <Customer company="y-combinator" />
                         <Customer company="staples" />
                         <Customer company="spacex" />
@@ -540,7 +544,7 @@ const IndexPage = () => {
                     <h3 className="m-0 text-tan text-lg lg:text-xl font-semibold mt-2 lg:mt-4">
                         *4,600+ stars on GitHub
                     </h3>
-                    <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-20 divide-gray-accent-light divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-dashed">
+                    <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-12 divide-gray-accent-light divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-dashed">
                         <CommunityStat title="15k+" description="Developer community" />
                         <CommunityStat title="140" description="Contributors" />
                         <CommunityStat title="10b" description="Events tracked" />

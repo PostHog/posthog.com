@@ -138,7 +138,7 @@ module.exports = {
             },
             colors: {
                 primary: '#151515',
-                'primary-dark': '#fff',
+                'primary-dark': '#EEEFE9',
                 orange: '#EF7632',
                 'deep-blue': '#160431',
                 'royal-blue': '#232D69',

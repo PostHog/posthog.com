@@ -39,7 +39,7 @@ const FooterMenuItem = ({ title, url, className = '' }) => {
     return (
         <li className={className}>
             <Link
-                className={`text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold leading-loose transition-colors`}
+                className={`text-primary hover:text-primary dark:text-primary-dark dark:hover:text-white text-sm font-bold leading-loose transition-colors`}
                 to={url}
             >
                 {title}
@@ -59,8 +59,8 @@ export function Footer({
 }): JSX.Element {
     return (
         <footer className="max-w-screen-2xl mx-auto mt-20 pb-9">
-            <div className="py-2 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
-                <ul className="list-none p-0 m-0 flex space-x-16 items-center flex-wrap">
+            <div className="py-2 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 max-w-6xl mx-auto">
+                <ul className="list-none p-0 m-0 flex space-x-12 items-center flex-wrap">
                     <div className="w-full sm:w-auto flex justify-center">
                         <Logo noText />
                     </div>
@@ -76,8 +76,12 @@ export function Footer({
                     <h3 className="text-xl">Product analytics</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <h4 className="text-base">Product tour</h4>
-                            <h5 className="text-base dark:text-gray m-0">Analytics</h5>
+                            <h4 className="text-base mb-3">
+                                <a href="/product" className="font-bold">
+                                    Product tour
+                                </a>
+                            </h4>
+                            <h5 className="text-sm text-gray">Analytics</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Trends" url="/" />
                                 <FooterMenuItem title="Funnels" url="/" />
@@ -85,8 +89,12 @@ export function Footer({
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-base">Pricing</h4>
-                            <h5 className="text-base dark:text-gray m-0">Apps</h5>
+                            <h4 className="text-base mb-3">
+                                <a href="/pricing" className="font-bold">
+                                    Pricing
+                                </a>
+                            </h4>
+                            <h5 className="text-sm text-gray">Apps</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Session recordings" url="/" />
                                 <FooterMenuItem title="Feature flags" url="/" />
@@ -94,8 +102,12 @@ export function Footer({
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-base">Customers</h4>
-                            <h5 className="text-base dark:text-gray m-0">Top features</h5>
+                            <h4 className="text-base mb-4 invisible">
+                                <a href="/customers" className="font-bold">
+                                    Customers
+                                </a>
+                            </h4>
+                            <h5 className="text-sm text-gray">Top features</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Event autocapture" url="/" />
                                 <FooterMenuItem title="Self-hosting" url="/" />
@@ -108,7 +120,7 @@ export function Footer({
                     <h3 className="text-xl">Company</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <h5 className="text-base dark:text-gray m-0">About</h5>
+                            <h5 className="text-sm text-gray">About</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Our story" url="" />
                                 <FooterMenuItem title="Team" url="" />
@@ -118,7 +130,7 @@ export function Footer({
                             </ul>
                         </div>
                         <div>
-                            <h5 className="text-base dark:text-gray m-0">Resources</h5>
+                            <h5 className="text-sm text-gray">Resources</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Blog" url="" />
                                 <FooterMenuItem title="Media" url="" />
@@ -132,7 +144,7 @@ export function Footer({
                     <h3 className="text-xl">Docs</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <h5 className="text-base dark:text-gray m-0">Getting started</h5>
+                            <h5 className="text-sm text-gray">Getting started</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="PostHog Cloud" url="" />
                                 <FooterMenuItem title="Self hosting" url="" />
@@ -140,7 +152,7 @@ export function Footer({
                             </ul>
                         </div>
                         <div>
-                            <h5 className="text-base dark:text-gray m-0">Install & integrate</h5>
+                            <h5 className="text-sm text-gray">Install & integrate</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Installation" url="" />
                                 <FooterMenuItem title="Docs" url="" />
@@ -149,7 +161,7 @@ export function Footer({
                             </ul>
                         </div>
                         <div>
-                            <h5 className="text-base dark:text-gray m-0">User guides</h5>
+                            <h5 className="text-sm text-gray">User guides</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Analytics" url="" />
                                 <FooterMenuItem title="Apps" url="" />
@@ -166,7 +178,7 @@ export function Footer({
                     <h3 className="text-xl">Community</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <h5 className="text-base dark:text-gray m-0">Discussion</h5>
+                            <h5 className="text-sm text-gray">Discussion</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Slack" url="" />
                                 <FooterMenuItem title="Issues" url="" />
@@ -175,7 +187,7 @@ export function Footer({
                             </ul>
                         </div>
                         <div>
-                            <h5 className="text-base dark:text-gray m-0">Get involved</h5>
+                            <h5 className="text-sm text-gray">Get involved</h5>
                             <ul className="list-none p-0 m-0">
                                 <FooterMenuItem title="Roadmap" url="" />
                                 <FooterMenuItem title="Contributors" url="" />
@@ -186,7 +198,7 @@ export function Footer({
                     </div>
                 </div>
             </div>
-            <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 mt-9 items-center text-base">
+            <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 mt-9 items-center text-base max-w-6xl mx-auto">
                 <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
                 <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4 text-base">
                     <li>
