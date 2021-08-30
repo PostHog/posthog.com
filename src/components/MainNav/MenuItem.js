@@ -25,7 +25,7 @@ export default function MenuItem({ menuItem }) {
                     to={url}
                     className={
                         classes ||
-                        'font-semibold px-4 py-2 text-[15px] transition-colors dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
+                        'font-semibold px-4 py-3 lg:py-2 text-[15px] transition-colors dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
                     }
                 >
                     {title}

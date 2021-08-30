@@ -61,3 +61,4 @@ hover:text-almost-black
 dark:text-almost-black
 dark:hover:text-almost-black
 border-red
+lg:my-0
