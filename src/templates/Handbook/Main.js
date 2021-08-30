@@ -58,7 +58,6 @@ export default function Main({
     previous,
 }) {
     const components = {
-        a: A,
         iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -80,36 +79,35 @@ export default function Main({
                         className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14"
                     />
                 </div>
-                <main ref={mainEl} className="overflow-scroll">
-                    <article
-                        style={!showToc ? { maxWidth: '100%', paddingRight: 0 } : {}}
-                        className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content"
-                    >
-                        <section className="mb-8 xl:mb-14 relative">
-                            <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
-                            <p className="mt-1 mb-0 opacity-50">
-                                Last updated: <time>{lastUpdated}</time>
-                            </p>
-                        </section>
-                        {breakpoints.lg && showToc && (
-                            <InternalSidebar
-                                className="py-4 mb-10 border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b"
-                                tableOfContents={tableOfContents}
-                            />
-                        )}
-                        <section className="article-content">
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </section>
-                        {showToc && (
-                            <div
-                                style={{ height: 'calc(100% - 22vh)' }}
-                                className="border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark absolute bottom-0  right-0 hidden xl:flex justify-center"
-                            />
-                        )}
-                    </article>
-                </main>
+                <article
+                    ref={mainEl}
+                    style={!showToc ? { maxWidth: '100%', paddingRight: 0 } : {}}
+                    className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content overflow-scroll"
+                >
+                    <section className="mb-8 xl:mb-14 relative">
+                        <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
+                        <p className="mt-1 mb-0 opacity-50">
+                            Last updated: <time>{lastUpdated}</time>
+                        </p>
+                    </section>
+                    {breakpoints.lg && showToc && (
+                        <InternalSidebar
+                            className="py-4 mb-10 border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b"
+                            tableOfContents={tableOfContents}
+                        />
+                    )}
+                    <section className="article-content">
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </section>
+                    {showToc && (
+                        <div
+                            style={{ height: 'calc(100% - 22vh)' }}
+                            className="border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark absolute bottom-0  right-0 hidden xl:flex justify-center"
+                        />
+                    )}
+                </article>
 
                 <div className="sticky top-20 flex-1">
                     {!breakpoints.lg && showToc && (

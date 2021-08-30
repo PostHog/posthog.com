@@ -51,7 +51,10 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                 textDecoration: 'inherit',
             }}
         >
-            <h2 className="text-2xl text-gray-100 font-sans normal-case my-1" style={{ textDecoration: 'inherit' }}>
+            <h2
+                className="dark:text-primary-dark text-primary text-2xl text-gray-100 font-sans normal-case my-1"
+                style={{ textDecoration: 'inherit' }}
+            >
                 {post.frontmatter.title}
             </h2>
             <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
@@ -61,7 +64,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
         <div className="w-full my-8">
             <Link
                 to={post.fields.slug}
-                className="featured-post-img text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                className="featured-post-img text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100"
             >
                 <div
                     className="w-full py-4 mx-auto rounded-t md:rounded-b shadow-lg overflow-hidden relative"
@@ -172,10 +175,7 @@ const PostCard = ({
             ) : (
                 <div className="flex flex-col mb-6">
                     <h5 className="mb-0 font-bold font-sans normal-case leading-tight">
-                        <Link
-                            to={post.fields.slug}
-                            className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
-                        >
+                        <Link to={post.fields.slug} className="dark:text-primary-dark text-primary hover:underline">
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
                                 <Link to={post.fields.slug} className="featured-post-img overflow-hidden">
                                     {gatsbyImageData ? (

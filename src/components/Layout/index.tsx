@@ -66,7 +66,7 @@ const Layout = ({
     ) : (
         <>
             <Header />
-            <div>{children}</div>
+            <main>{children}</main>
             <Footer />
             <PosthogAnnouncement />
             <GetStartedModal />
