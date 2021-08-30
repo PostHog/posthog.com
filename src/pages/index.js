@@ -120,7 +120,7 @@ const PlatformFeatures = () => {
     return (
         <section className={section()}>
             <div>
-                <h2 className={heading()}>
+                <h2 className={heading('lg', 'almost-black', 'max-w-[1100px] mx-auto')}>
                     Everything product-led teams need <span className="text-yellow">in one place</span>
                 </h2>
                 <h3 className="text-base md:text-2xl text-center mt-4 md:mt-8">
@@ -283,6 +283,7 @@ const CodeBlock = () => {
 }
 
 const heading = (size = 'lg', color = 'almost-black', classes = '') => {
+    console.log(size, color, classes)
     const options = {
         lg: 'text-4xl md:text-6xl',
         md: 'text-3xl lg:text-5xl',
@@ -350,7 +351,7 @@ const IndexPage = () => {
                         Host your own
                         <br /> product analytics suite
                     </h1>
-                    <h2 className={heading('sm', null, 'my-6')}>
+                    <h2 className={heading('sm', 'almost-black', 'my-6')}>
                         With our open source platform, customer data never has to leave your infrastructure
                     </h2>
                     <div className="flex flex-col justify-center items-center space-y-2 md:space-y-4">
@@ -368,7 +369,7 @@ const IndexPage = () => {
                         </CallToAction>
                     </div>
                 </div>
-                <p className="md:mt-auto my-10 md:mb-14">
+                <p className="md:mt-auto my-10 md:mb-12">
                     Don’t need to self host? Try <Link to="/sign-up">PostHog Cloud</Link>
                 </p>
                 <div className="bg-[#DFE0DA] bg-opacity-70 w-full">
