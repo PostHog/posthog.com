@@ -52,7 +52,7 @@ export default function MainNav({ expanded }) {
         shown: { height: 'auto' },
     }
     const menuLength = menu.length
-    const halfMenu = Math.ceil(menuLength / 2)
+    const halfMenu = Math.floor(menuLength / 2)
     return (
         (expanded || !breakpoints.md) && (
             <motion.nav
