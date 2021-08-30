@@ -7,9 +7,9 @@ import Slider from 'react-slick'
 
 const Feature = ({ title, icon }) => {
     return (
-        <div className="flex px-2 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-center border-r-2 border-dashed border-gray-accent-light">
+        <div className="flex px-2 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-center">
             <Icon className={'w-6 h-6'} name={icon} />
-            <span className="text-[12px] md:text-[16px]">{title}</span>
+            <span className="text-[12px] lg:text-[16px]">{title}</span>
         </div>
     )
 }
@@ -72,14 +72,12 @@ export default function Hero() {
             <p className="md:mt-auto my-10 md:mb-12 font-semibold">
                 Don’t need to self host? Try <Link to="/sign-up">PostHog Cloud</Link>
             </p>
-            <div className="bg-[#DFE0DA] bg-opacity-70 w-full">
-                <Slider {...sliderSettings} className="list-none m-0 p-0">
-                    <Feature icon="event-pipelines" title="Event pipelines" />
-                    <Feature icon="analytics" title="Analytics" />
-                    <Feature icon="session-recordings" title="Session recordings" />
-                    <Feature icon="feature-flags" title="Feature flags" />
-                    <Feature icon="data-warehouse" title="Export to data warehouse" />
-                </Slider>
+            <div className="bg-[#DFE0DA] bg-opacity-70 w-full grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed">
+                <Feature icon="event-pipelines" title="Event pipelines" />
+                <Feature icon="analytics" title="Analytics" />
+                <Feature icon="session-recordings" title="Session recordings" />
+                <Feature icon="feature-flags" title="Feature flags" />
+                <Feature icon="data-warehouse" title="Export to data warehouse" />
             </div>
         </section>
     )
