@@ -19,7 +19,7 @@ export default function NextArticle({ hideAnchor, breakpoints, next, previous })
                     className="my-9 bg-transparent border-t-2 border-r-0 border-l-0 border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark"
                 />
                 <div className="flex justify-between">
-                    <SectionLink link={previous} iconClass="transform rotate-180" />
+                    <SectionLink link={previous} previous />
                     <SectionLink link={next} />
                 </div>
             </section>

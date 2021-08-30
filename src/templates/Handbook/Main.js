@@ -48,7 +48,7 @@ export default function Main({
         <div className="relative">
             <div className="dark:text-white flex max-w-screen-3xl mx-auto items-start relative z-10 mt-8">
                 <div className="sticky top-20 flex-1">
-                    <SectionLink link={previous} iconClass="transform rotate-180" className="hidden md:flex mb-8" />
+                    <SectionLink link={previous} previous className="hidden md:flex mb-8" />
                     <MainSidebar
                         mainEl={mainEl}
                         menu={menu}

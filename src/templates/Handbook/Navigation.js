@@ -3,7 +3,6 @@ import Link from 'components/Link'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import SearchBar from './SearchBar'
 import { CircleArrow, Edit, Issue, MobileMenu } from 'components/Icons/Icons'
-import SectionLink from './SectionLink'
 
 export default function Navigation({
     breadcrumb,
