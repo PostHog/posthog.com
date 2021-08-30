@@ -6,8 +6,8 @@ import { section, heading } from './classes'
 const Chip = ({ icon, title, className }) => {
     return (
         <div className={`bg-gray-accent-light flex space-x-2 py-2 px-4 rounded-lg items-center mt-2 ${className}`}>
-            <Icon className="w-5 h-5" name={icon} />
-            <span className="text-sm sm:text-base font-bold">{title}</span>
+            <Icon className="w-4 h-4" name={icon} />
+            <span className="text-sm sm:text-[16px] font-bold">{title}</span>
         </div>
     )
 }

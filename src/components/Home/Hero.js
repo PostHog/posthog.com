@@ -3,47 +3,17 @@ import { CallToAction } from '../CallToAction'
 import Icon from './Icon'
 import Link from '../Link'
 import { heading } from './classes'
-import Slider from 'react-slick'
 
 const Feature = ({ title, icon }) => {
     return (
-        <div className="flex px-2 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-center">
+        <li className="flex px-2 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-center">
             <Icon className={'w-6 h-6'} name={icon} />
             <span className="text-[12px] lg:text-[16px]">{title}</span>
-        </div>
+        </li>
     )
 }
 
 export default function Hero() {
-    const sliderSettings = {
-        dots: false,
-        infinite: true,
-        arrows: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplay: true,
-        responsive: [
-            {
-                breakpoint: 1400,
-                settings: {
-                    slidesToShow: 4,
-                },
-            },
-            {
-                breakpoint: 1090,
-                settings: {
-                    slidesToShow: 3,
-                },
-            },
-            {
-                breakpoint: 650,
-                settings: {
-                    slidesToShow: 2,
-                },
-            },
-        ],
-    }
     return (
         <section className="md:h-[calc(100vh-87px)] flex flex-col justify-center items-center">
             <div className="text-center mt-6 md:mt-auto px-4">
@@ -72,13 +42,13 @@ export default function Hero() {
             <p className="md:mt-auto my-10 md:mb-12 font-semibold">
                 Don’t need to self host? Try <Link to="/sign-up">PostHog Cloud</Link>
             </p>
-            <div className="bg-[#DFE0DA] bg-opacity-70 w-full grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed">
+            <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed">
                 <Feature icon="event-pipelines" title="Event pipelines" />
                 <Feature icon="analytics" title="Analytics" />
                 <Feature icon="session-recordings" title="Session recordings" />
                 <Feature icon="feature-flags" title="Feature flags" />
                 <Feature icon="data-warehouse" title="Export to data warehouse" />
-            </div>
+            </ul>
         </section>
     )
 }
