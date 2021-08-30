@@ -39,7 +39,7 @@ const FooterMenuItem = ({ title, url, className = '' }) => {
     return (
         <li className={className}>
             <Link
-                className={`text-primary hover:text-primary dark:text-primary-dark dark:hover:text-white text-sm font-bold leading-loose transition-colors`}
+                className={`text-primary hover:text-primary dark:text-primary-dark dark:hover:text-white text-sm font-bold leading-loose`}
                 to={url}
             >
                 {title}
