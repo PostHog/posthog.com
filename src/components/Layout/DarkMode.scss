@@ -14,11 +14,9 @@ body.dark {
         background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
     }
 
-    .docsPagesContent {
-        .ant-tabs-tab-arrow-show,
-        .ant-tabs-content {
-            color: white;
-        }
+    .ant-tabs-tab-arrow-show,
+    .ant-tabs-content {
+        color: white;
     }
 
     .post-page-wrapper {
