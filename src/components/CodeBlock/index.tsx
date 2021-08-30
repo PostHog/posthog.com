@@ -42,7 +42,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
             setProjectName(getCookie('ph_current_project_name') || '')
             const phToken = getCookie('ph_current_project_token')
             if (phToken) {
-                let updatedCode = props.children.props.children
+                const updatedCode = props.children.props.children
                     .trim()
                     .replace(/<ph_project_api_key>/g, phToken)
                     .replace(/<ph_instance_address>/g, 'https://app.posthog.com')
@@ -71,7 +71,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
         )
         const tokenHighlightHtml = `<span class='code-block-ph-token' data-tooltip='This is the API key of your ${projectName} project in PostHog Cloud.'>${token}</span>`
         const tokenMatchRegex = new RegExp(token, 'g')
-        let snapshotIndex = 0
+        const snapshotIndex = 0
         let node: HTMLElement | null = phTokenElements.snapshotItem(snapshotIndex) as HTMLElement
         while (node) {
             node.innerHTML = node.innerHTML.replace(tokenMatchRegex, tokenHighlightHtml)
@@ -96,7 +96,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
             theme={theme}
         >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
+                <pre className={className} style={{ ...style, padding: '20px', position: 'relative' }} id={codeBlockId}>
                     <Tooltip title="Copied!" visible={tooltipVisible}>
                         {copyToClipboardAvailable ? (
                             <CopyOutlined

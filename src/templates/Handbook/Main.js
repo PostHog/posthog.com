@@ -7,6 +7,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { shortcodes } from '../../mdxGlobalComponents'
+import { CodeBlock } from 'components/CodeBlock'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -15,9 +16,14 @@ const Iframe = (props) => (
     </div>
 )
 const InlineCode = (props) => (
-    <code {...props} className="dark:bg-[#4c3e62] dark:text-white bg-[#e8e8e8] text-inherit p-1 rounded" />
+    <code
+        {...props}
+        className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded"
+    />
 )
-const Blockquote = (props) => <blockquote {...props} className="p-6 rounded bg-[#f0f0f0] dark:bg-[#371A51]" />
+const Blockquote = (props) => (
+    <blockquote {...props} className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark" />
+)
 
 export default function Main({
     handleMobileMenuClick,
@@ -39,6 +45,7 @@ export default function Main({
         iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
+        pre: CodeBlock,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
