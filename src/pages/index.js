@@ -186,10 +186,12 @@ const PlatformFeatures = () => {
             </div>
             <div className="px-4 text-center my-16">
                 <h4 className="text-3xl font-bold mb-8">
-                    <span className="text-gray">Plus</span> cohorts, user paths, retention, session browsing
+                    <span className="text-almost-black opacity-40">Plus</span> cohorts, user paths, retention, session
+                    browsing
                     <br />{' '}
                     <span className="text-xl">
-                        & synced annotations <span className="text-gray">across every view in the platform</span>
+                        & synced annotations{' '}
+                        <span className="text-almost-black opacity-40">across every view in the platform</span>
                     </span>
                 </h4>
                 <CallToAction
@@ -495,30 +497,29 @@ const IndexPage = () => {
                     {breakpoints.md && <PipelineGraphic />}
                 </div>
             </section>
-            <section className={section('text-left')}>
-                <Quote
-                    name="Ben White"
-                    title="@benjackwhite"
-                    image={
-                        <StaticImage
-                            width={100}
-                            height={100}
-                            alt="Ben White - @benjackwhite"
-                            src="../images/ben-white.png"
-                        />
-                    }
-                    quote={
-                        <span>
-                            PostHog is what I always wanted a Product Analytics SaaS to be.{' '}
-                            <span className="text-red">Private cloud option</span> so GDPR becomes way more manageable,{' '}
-                            <span className="text-red">
-                                features built based on direct community feedback, focus on simplicity and usefulness
-                            </span>{' '}
-                            over vanity features...Great job people!
-                        </span>
-                    }
-                />
-            </section>
+            <Quote
+                className={section('text-left')}
+                name="Ben White"
+                title="@benjackwhite"
+                image={
+                    <StaticImage
+                        width={100}
+                        height={100}
+                        alt="Ben White - @benjackwhite"
+                        src="../images/ben-white.png"
+                    />
+                }
+                quote={
+                    <span>
+                        PostHog is what I always wanted a Product Analytics SaaS to be.{' '}
+                        <span className="text-red">Private cloud option</span> so GDPR becomes way more manageable,{' '}
+                        <span className="text-red">
+                            features built based on direct community feedback, focus on simplicity and usefulness
+                        </span>{' '}
+                        over vanity features...Great job people!
+                    </span>
+                }
+            />
             <section className={section('text-center')}>
                 <div className="bg-almost-black w-full rounded-lg px-4 py-16">
                     <h2 className={heading('md', 'white')}>
