@@ -51,6 +51,10 @@ module.exports = {
             current: 'currentColor',
             'almost-black': '#151515',
             white: 'white',
+            blue: '#1D4AFF',
+            yellow: '#F7A501',
+            red: '#F54E00',
+            primary: '#151515',
         },
         rotate: {
             '-31': '-31deg',
