@@ -231,7 +231,7 @@ export const MobileMenu = ({ className, style }: { className: string; style: any
     )
 }
 
-export const SliderNav = ({
+export const SliderNavArrow = ({
     className,
     style,
     bgColor,

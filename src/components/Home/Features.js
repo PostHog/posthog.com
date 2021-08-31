@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react'
 import Slider from 'react-slick'
 import { StaticImage } from 'gatsby-plugin-image'
 import Icon from './Icon'
-import { SliderNav } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import { section, heading } from './classes'
+import SliderNav from 'components/SliderNav'
 
 const FeatureButton = ({ title, index, activeFeature, sliderRef }) => {
     const borderColor = index === activeFeature ? 'red' : 'gray'
@@ -103,15 +103,12 @@ export default function Features() {
                     />
                 </h3>
             </div>
-
-            <div className="flex justify-center space-x-2 my-8">
-                <button onClick={() => sliderRef.current.slickPrev()}>
-                    <SliderNav className="transform rotate-180" bgColor="#E5E7E0" arrowColor="#BFBFBC" />
-                </button>
-                <button onClick={() => sliderRef.current.slickNext()}>
-                    <SliderNav bgColor="black" arrowColor="#EEEFE9" />
-                </button>
-            </div>
+            <SliderNav
+                handlePrevious={() => sliderRef.current.slickPrev()}
+                handleNext={() => sliderRef.current.slickNext()}
+                currentIndex={activeFeature}
+                length={3}
+            />
             <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
                     <SliderItem
