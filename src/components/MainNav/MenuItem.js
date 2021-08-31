@@ -44,7 +44,7 @@ export default function MenuItem({ menuItem }) {
                             open={hovered}
                         />
                     ) : (
-                        <Chevron className="text-gray mt-1" />
+                        <Chevron className="text-gray mt-1 -ml-3" />
                     ))}
             </span>
 

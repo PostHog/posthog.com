@@ -72,7 +72,7 @@ export default function MainNav() {
                     initial="hidden"
                     animate="shown"
                 >
-                    <div className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent font-nav lg:px-0 px-5 lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-2xl mx-auto">
+                    <div className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent font-nav lg:px-0 px-5 lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-3xl mx-auto">
                         <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full lg:w-auto">
                             {menu.slice(0, halfMenu).map((menuItem, index) => {
                                 return <MenuItem key={index} menuItem={menuItem} />

@@ -5,7 +5,7 @@ import { Structure } from '../../Structure'
 
 export const Quote = ({ quote, name, title, image, className }) => {
     return (
-        <section className={`max-w-screen-lg mx-auto text-almost-black font-bold ${className}`}>
+        <section className={`!max-w-screen-lg mx-auto text-almost-black font-bold ${className}`}>
             <blockquote className="text-xl md:text-[32px] md:leading-[48px]">
                 {quote}
                 <footer className="flex space-x-8 items-center mt-9">

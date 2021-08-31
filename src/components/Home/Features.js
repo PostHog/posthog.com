@@ -72,7 +72,7 @@ export default function Features() {
                 <h2 className={heading('lg', 'primary', 'max-w-[1100px] mx-auto')}>
                     Everything product-led teams need <span className="text-yellow">in one place</span>
                 </h2>
-                <h3 className="text-base md:text-2xl text-center mt-4 md:mt-8">
+                <h3 className="text-lg md:text-2xl text-center mt-4 md:mt-8">
                     One platform for{' '}
                     <FeatureButton
                         sliderRef={sliderRef}
@@ -144,7 +144,7 @@ export default function Features() {
                 <h4 className="text-3xl font-bold mb-8">
                     <span className="opacity-40">Plus</span> cohorts, user paths, retention, session browsing
                     <br />{' '}
-                    <span className="text-xl">
+                    <span className="text-xl block leading-tight mt-2">
                         & synced annotations <span className="opacity-40">across every view in the platform</span>
                     </span>
                 </h4>
