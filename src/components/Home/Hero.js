@@ -6,9 +6,9 @@ import { heading } from './classes'
 
 const Feature = ({ title, icon }) => {
     return (
-        <li className="flex px-2 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-center">
-            <Icon className={'w-6 h-6'} name={icon} />
-            <span className="text-[12px] lg:text-[16px]">{title}</span>
+        <li className="flex px-6 md:px-2 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-start md:justify-center">
+            <Icon className="w-6 h-6 mr-4 md:mr-0" name={icon} />
+            <span className="lg:text-[16px] leading-tight">{title}</span>
         </li>
     )
 }
@@ -42,7 +42,7 @@ export default function Hero() {
             <p className="md:mt-auto my-10 md:mb-12 font-semibold">
                 Don’t need to self host? Try <Link to="/sign-up">PostHog Cloud</Link>
             </p>
-            <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed">
+            <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
                 <Feature icon="event-pipelines" title="Event pipelines" />
                 <Feature icon="analytics" title="Analytics" />
                 <Feature icon="session-recordings" title="Session recordings" />

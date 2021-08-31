@@ -11,7 +11,7 @@ import tinkoff from './images/tinkoff.svg'
 
 const Customer = ({ image }) => {
     return (
-        <li className="border-t border-l border-dashed border-gray-accent-light">
+        <li className="p-4 md:p-0 border-t border-l border-dashed border-gray-accent-light">
             <img className="icon w-full py-2 px-4 md:py-6 md:px-8 lg:py-10 lg:px-16 m-0" src={image} />
         </li>
     )

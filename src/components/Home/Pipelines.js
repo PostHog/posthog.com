@@ -33,7 +33,7 @@ const PipelineGraphic = () => {
             <div className="flex justify-center items-center lg:flex-col relative lg:col-span-3">
                 <div className="absolute left-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 w-full -top-8 z-10">
                     <Icon name="logo-bullet" className="w-16 h-16 mx-auto" />
-                    <h5 className="text-2xl font-bold lg:block hidden">
+                    <h5 className="text-base font-bold hidden bg-tan border border-gray border-opacity-50 px-4 py-2 lg:inline-flex rounded-full border-solid leading-none">
                         Self-serve product analytics for 90% of your product questions
                     </h5>
                 </div>
@@ -68,7 +68,7 @@ export default function Pipelines() {
                         </div>
                     </div>
                     <div>
-                        <h4 className="text-2xl m-0 text-red">Push from data warehouse</h4>
+                        <h4 className="text-2xl m-0 text-red">In-product usage</h4>
                         <p className="text-base font-semibold">JavaScript, server-side and mobile SDKs</p>
                         <div className="flex space-x-2 justify-center items-center flex-wrap">
                             <Chip icon="pageviews" title="Pageviews" />
