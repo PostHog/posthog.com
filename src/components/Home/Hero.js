@@ -2,7 +2,7 @@ import React from 'react'
 import { CallToAction } from '../CallToAction'
 import Icon from './Icon'
 import Link from '../Link'
-import { heading } from './classes'
+import { heading, section } from './classes'
 
 const Feature = ({ title, icon }) => {
     return (
@@ -15,8 +15,8 @@ const Feature = ({ title, icon }) => {
 
 export default function Hero() {
     return (
-        <section className="md:h-[calc(100vh-87px)] min-h-[550px] flex flex-col justify-center items-center">
-            <div className="text-center mt-16 md:mt-auto px-4">
+        <section className="flex flex-col justify-center items-center">
+            <div className={section()}>
                 <h1 className={heading()}>
                     Host your own
                     <br /> product analytics suite
