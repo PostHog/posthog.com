@@ -6,6 +6,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const TemplateMdx = path.resolve(`src/templates/TemplateMdx.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
+    const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const result = await graphql(`
         {
             allMdx(limit: 1000) {
@@ -112,7 +113,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     result.data.allMdx.nodes.forEach((node) => {
         createPage({
             path: replacePath(node.slug),
-            component: TemplateMdx,
+            component: PlainTemplate,
             context: {
                 id: node.id,
             },
