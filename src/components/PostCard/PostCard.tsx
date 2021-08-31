@@ -57,7 +57,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
             >
                 {post.frontmatter.title}
             </h2>
-            <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
+            <Byline date={post.frontmatter.date} authorDetails={authorDetails} classes="text-white" />
         </div>
     )
     return (
@@ -175,7 +175,7 @@ const PostCard = ({
             ) : (
                 <div className="flex flex-col mb-6">
                     <h5 className="mb-0 font-bold font-sans normal-case leading-tight">
-                        <Link to={post.fields.slug} className="dark:text-primary-dark text-primary hover:underline">
+                        <Link to={post.fields.slug} className="dark:text-primary-dark text-primary">
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
                                 <Link to={post.fields.slug} className="featured-post-img overflow-hidden">
                                     {gatsbyImageData ? (
