@@ -336,6 +336,10 @@
     ],
     "docs": [
         {
+            "name": "Docs",
+            "url": "/docs"
+        },
+        {
             "name": "Self-Host",
             "url": "",
             "children": [

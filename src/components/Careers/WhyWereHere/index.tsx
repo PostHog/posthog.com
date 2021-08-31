@@ -26,7 +26,7 @@ export const WhyWereHere = () => {
                                 </p>
                             </div>
 
-                            <aside className="bg-white py-4 px-8 md:ml-8 md:-mr-16 w-full flex justify-center items-center">
+                            <aside className="py-4 px-8 md:ml-8 md:-mr-16 w-full flex justify-center items-center">
                                 <StaticImage
                                     src="images/office-hogs-1.png"
                                     alt="Just some office hogs"
@@ -49,7 +49,7 @@ export const WhyWereHere = () => {
                                 </p>
                             </div>
 
-                            <aside className="bg-white py-4 px-8 md:mr-8 mt-4 md:mt-0 md:-ml-16 w-full flex justify-center items-center">
+                            <aside className="py-4 px-8 md:mr-8 mt-4 md:mt-0 md:-ml-16 w-full flex justify-center items-center">
                                 <StaticImage
                                     src="images/office-hogs-2.png"
                                     alt="Just some office hogs"

@@ -13,13 +13,11 @@ import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 import { useStaticQuery, graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-import Header from 'components/Header'
-import Footer from 'components/Footer'
+import Layout from '../components/Layout'
 
 function ProductPage() {
     return (
-        <>
-            <Header />
+        <Layout>
             <SEO title="Product • PostHog" />
             <div className="text-primary">
                 <div className="text-center mb-12 mx-4 lg:mx-0">
@@ -498,8 +496,7 @@ function ProductPage() {
                     bgColor="navy"
                 />
             </div>
-            <Footer />
-        </>
+        </Layout>
     )
 }
 

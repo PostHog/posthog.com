@@ -51,6 +51,10 @@ module.exports = {
             current: 'currentColor',
             'almost-black': '#151515',
             white: 'white',
+            blue: '#1D4AFF',
+            yellow: '#F7A501',
+            red: '#F54E00',
+            primary: '#151515',
         },
         rotate: {
             '-31': '-31deg',
@@ -131,10 +135,10 @@ module.exports = {
                 nav: ['MatterVF', 'sans-serif'],
             },
             fontSize: {
-                // '2xs': '0.65rem',
-                // base: '16px',
-                // 'base-larger': '.933rem',
-                // 'text-sm': '.8rem',
+                '2xs': '0.65rem',
+                base: '16px',
+                'base-larger': '.933rem',
+                'text-sm': '.8rem',
             },
             colors: {
                 primary: '#151515',

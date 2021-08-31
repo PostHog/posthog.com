@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-    @apply text-black font-semibold; /* override antd */
-}
-
-p a {
-    @apply text-orange font-semibold !important; /* override antd */
+main a {
+    @apply text-orange hover:text-orange font-semibold;
 }
 
 p {

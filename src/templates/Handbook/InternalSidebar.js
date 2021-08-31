@@ -29,17 +29,14 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                 >
                     {tableOfContents?.map((navItem, index) => {
                         return (
-                            <li
-                                style={activeId === navItem.url ? { opacity: '1' } : {}}
-                                className="hover:opacity-100 xl:opacity-60 text-[15px]"
-                                key={index}
-                            >
+                            <li key={index}>
                                 <Link
+                                    style={activeId === navItem.url ? { opacity: '1' } : {}}
                                     offset={-88}
                                     smooth
                                     duration={300}
                                     to={navItem.url}
-                                    className={`jumpTo pl-6 xl:pl-0 text-almost-black hover:text-orange dark:text-white dark:hover:text-orange`}
+                                    className={`jumpTo hover:opacity-100 xl:opacity-60 text-[15px] pl-6 xl:pl-0 text-almost-black hover:text-orange dark:text-white dark:hover:text-orange transition-all`}
                                 >
                                     {navItem.name}
                                 </Link>

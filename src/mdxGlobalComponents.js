@@ -2,6 +2,7 @@
 
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
+import { Accordion } from './components/Accordion'
 import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -42,6 +43,7 @@ import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
+import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
 import { Blockquote } from './components/LandingPage/Blockquote'
 import { Features } from './components/LandingPage/Features'
@@ -98,6 +100,7 @@ import { WorkableSnippet } from './components/WorkableSnippet'
 export const shortcodes = {
     Endpoint,
     MethodTags,
+    Accordion,
     AllTheFeaturesCloud,
     AnchorScrollNavbar,
     AnimateIntoView,
@@ -138,6 +141,7 @@ export const shortcodes = {
     GetStartedModal,
     GithubIcon,
     HiddenSection,
+    Home,
     HostingOption,
     Blockquote,
     Features,

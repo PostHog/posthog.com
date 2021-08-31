@@ -531,9 +531,6 @@ li > ul {
 blockquote *:last-child {
     margin-bottom: 0;
 }
-li *:last-child {
-    margin-bottom: 0;
-}
 p *:last-child {
     margin-bottom: 0;
 }
@@ -1671,7 +1668,8 @@ body.light {
     }
 }
 
-#handbook-search-wrapper {
+#handbook-search-wrapper,
+#docs-search-wrapper {
     .algolia-autocomplete {
         height: auto;
         width: 100%;

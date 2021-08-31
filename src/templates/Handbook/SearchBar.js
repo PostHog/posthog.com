@@ -5,7 +5,7 @@ import { useValues } from 'kea'
 import { DarkModeToggle } from '../../components/DarkModeToggle'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
-export default function SearchBar() {
+export default function SearchBar({ base }) {
     const breakpoints = useBreakpoint()
     const { posthog } = useValues(posthogAnalyticsLogic)
     useEffect(() => {
@@ -14,16 +14,16 @@ export default function SearchBar() {
                 docsearch({
                     apiKey: '45e80dec3e5b55c400663a5cba911c4c',
                     indexName: 'posthog',
-                    inputSelector: '#handbook-search',
+                    inputSelector: `#${base}-search`,
                     algoliaOptions: {
-                        facetFilters: ['tags:handbook'],
+                        facetFilters: [`tags:${base}`],
                     },
                 })
             })
 
             const doc = window.document
-            const docSearchBarElement = doc.getElementById('handbook-search-wrapper')
-            const docSearchInputElement = doc.getElementById('handbook-search')
+            const docSearchBarElement = doc.getElementById(`${base}-search-wrapper`)
+            const docSearchInputElement = doc.getElementById(`${base}-search`)
 
             if (window.screen.width > 1080) {
                 docSearchInputElement.placeholder += window.navigator.platform.includes('Mac') ? ' (⌘K)' : ' (Ctrl + K)'
@@ -54,7 +54,10 @@ export default function SearchBar() {
         }
     }, [])
     return (
-        <div id="handbook-search-wrapper" className="flex space-x-3 w-full text-[14px] items-center flex-grow relative">
+        <div
+            id={`${base}-search-wrapper`}
+            className="flex space-x-3 w-full text-[14px] items-center flex-grow relative"
+        >
             <span className="absolute top-2 left-3">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -72,9 +75,9 @@ export default function SearchBar() {
                 </svg>
             </span>
             <input
-                id="handbook-search"
+                id={`${base}-search`}
                 className="w-full text-sm text-primary dark:text-primary-dark outline-none bg-transparent py-2 pl-5 placeholder-primary-50::placeholder dark:placeholder-primary-dark-50::placeholder"
-                placeholder={`Search ${breakpoints.xs ? '' : 'handbook'}`}
+                placeholder={`Search ${breakpoints.xs ? '' : base}`}
             />
         </div>
     )
