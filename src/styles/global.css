@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-main a {
+main a,
+.blog-post-content a {
     @apply text-orange hover:text-orange font-semibold;
 }
 
@@ -13,6 +14,7 @@ p {
 /* Footer */
 
 .handbook-container main article a,
+.blog-post-content a,
 footer a {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
         linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
@@ -141,10 +143,41 @@ body {
 
 body.light {
     @apply text-primary;
+
+    .post-page {
+        .docsPagesContent {
+            a:not(.button) {
+                @apply text-orange;
+            }
+        }
+    }
 }
 
 body.dark {
     @apply text-primary-dark;
+
+    .ant-layout {
+        background: #220f3f !important;
+        color: #f0f2f5;
+    }
+
+    .post-page {
+        blockquote {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border: solid 2px #fff;
+        }
+
+        .docsPagesContent {
+            a:not(.button) {
+                @apply text-orange;
+            }
+
+            h3,
+            h3 a {
+                color: #fff !important;
+            }
+        }
+    }
 }
 
 ol,

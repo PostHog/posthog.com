@@ -13,7 +13,7 @@ export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: strin
                     const isActive = category.slug === activeSlug
                     const statefulClasses = isActive
                         ? 'bg-black text-white border-black hover:text-white dark:bg-white dark:text-black'
-                        : 'text-black text-opacity-50 hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
+                        : 'text-black hover:text-opacity-100 hover:text-black border-gray border-opacity-75 hover:border-opacity-100 dark:text-white text-opacity-50'
                     return (
                         <Link
                             to={category.link}
