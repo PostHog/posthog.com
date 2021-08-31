@@ -24,3 +24,15 @@ export const section = (className = '') => cntl`
     px-4
     ${className}
 `
+
+export const gradientWrapper = cntl`
+    relative
+    before:bg-gradient-to-t
+    before:from-primary
+    before:absolute
+    before:w-full
+    before:h-1/3
+    before:bottom-0
+    before:left-0
+    before:z-10
+`

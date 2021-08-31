@@ -4,7 +4,7 @@ import { ReactCompareSlider, ReactCompareSliderHandle } from 'react-compare-slid
 import AnimateIntoView from '../AnimateIntoView'
 import Logo from '../Logo'
 import CodeBlock from './CodeBlock'
-import { section } from './classes'
+import { section, gradientWrapper } from './classes'
 import factoBlurb from '../../images/facto-blurb.svg'
 import outlinedChart from '../../images/outlined-chart.svg'
 
@@ -32,7 +32,7 @@ const exampleCode = `SELECT entrance_period_start,
 export default function BeforeAndAfter() {
     return (
         <section className="px-4">
-            <div className={section('bg-primary rounded-lg p-4 pb-0 lg:p-12 lg:pt-32')}>
+            <div className={section('bg-primary rounded-lg p-4 pb-0 lg:pb-0 lg:p-12 lg:pt-32')}>
                 <div className="flex items-center flex-col md:flex-row space-x-4">
                     <div className="relative">
                         <AnimateIntoView className="absolute -right-16">
@@ -57,23 +57,25 @@ export default function BeforeAndAfter() {
                         <span>PostHog</span>
                     </h4>
                 </div>
-                <ReactCompareSlider
-                    handle={
-                        <ReactCompareSliderHandle
-                            buttonStyle={{ background: 'black', backdropFilter: 'none', width: 36, height: 36 }}
-                        />
-                    }
-                    itemOne={
-                        <div className="w-full">
-                            <CodeBlock code={exampleCode} language="sql" />
-                        </div>
-                    }
-                    itemTwo={
-                        <div className="w-full">
-                            <img className="float-right" src={outlinedChart} />
-                        </div>
-                    }
-                />
+                <div className={gradientWrapper}>
+                    <ReactCompareSlider
+                        handle={
+                            <ReactCompareSliderHandle
+                                buttonStyle={{ background: 'black', backdropFilter: 'none', width: 36, height: 36 }}
+                            />
+                        }
+                        itemOne={
+                            <div className="w-full">
+                                <CodeBlock code={exampleCode} language="sql" />
+                            </div>
+                        }
+                        itemTwo={
+                            <div className="w-full">
+                                <img className="float-right" src={outlinedChart} />
+                            </div>
+                        }
+                    />
+                </div>
             </div>
         </section>
     )
