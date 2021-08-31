@@ -3,7 +3,7 @@ import { Plus, Minus } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
-export default function Accordion({ title, children }) {
+export default function Accordion({ title, titleClasses, children }) {
     const [open, setOpen] = useState(false)
     const variants = {
         hidden: { height: 0 },
@@ -16,7 +16,7 @@ export default function Accordion({ title, children }) {
                 style={!breakpoints.md || open ? {} : { margin: 0 }}
                 role={breakpoints.md ? 'button' : 'heading'}
                 onClick={() => setOpen(!open)}
-                className="text-xl flex justify-between items-center"
+                className={titleClasses}
             >
                 <span>{title}</span>
                 {breakpoints.md && (open ? <Minus /> : <Plus />)}
