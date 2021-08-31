@@ -5,6 +5,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
     const TemplateMdx = path.resolve(`src/templates/TemplateMdx.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
+    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const result = await graphql(`
         {
             allMdx(limit: 1000) {
@@ -26,6 +27,14 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 nodes {
                     id
                     tableOfContents
+                    fields {
+                        slug
+                    }
+                }
+            }
+            blogPosts: allMdx(filter: { fields: { slug: { regex: "/^/blog/" } } }) {
+                nodes {
+                    id
                     fields {
                         slug
                     }
@@ -166,6 +175,17 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                 breadcrumb,
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
                 tableOfContents,
+            },
+        })
+    })
+
+    result.data.blogPosts.nodes.forEach((node) => {
+        const { slug } = node.fields
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
             },
         })
     })
