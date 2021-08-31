@@ -35,7 +35,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
 
                 {props.headComponents}
             </head>
-            <body {...props.bodyAttributes} className="dark">
+            <body {...props.bodyAttributes} className="light">
                 {props.preBodyComponents}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
                 {props.postBodyComponents}
