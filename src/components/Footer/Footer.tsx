@@ -1,39 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'components/Link'
-import { NewsletterForm } from '../NewsletterForm'
-import logo from '../../images/posthog-hog-transparent.svg'
-
-import { mergeClassList } from '../../lib/utils'
 import Logo from 'components/Logo'
-interface FooterListItemProps {
-    to?: string
-    href?: string
-    children: any
-    border?: boolean
-}
-
-const FooterSubCategory = ({ children }: { children: any }) => (
-    <header className="block text-white mt-8 mb-2 font-bold text-sm">{children}</header>
-)
-
-const FooterCategory = ({ children, title }: { children: any; title: string }) => {
-    const [expanded, setExpanded] = useState(false)
-
-    return (
-        <div>
-            <h5
-                className="md:hidden cursor-pointer text-white text-lg border-b border-gray-accent-light-600 py-2 my-2"
-                onClick={() => setExpanded(!expanded)}
-            >
-                {title}
-
-                <span className="float-right block text-2xl">{expanded ? '-' : '+'}</span>
-            </h5>
-            <h5 className="hidden md:block text-white text-lg">{title}</h5>
-            <div className={expanded ? 'block' : 'hidden md:block'}>{children}</div>
-        </div>
-    )
-}
+import Accordion from 'components/Accordion'
 
 const FooterMenuItem = ({ title, url, className = '' }) => {
     return (
@@ -58,144 +26,176 @@ export function Footer({
     transparentBg?: boolean
 }): JSX.Element {
     return (
-        <footer className="max-w-screen-2xl mx-auto mt-20 pb-9">
+        <footer className="max-w-screen-2xl mx-auto mt-20 pb-9 px-4">
             <div className="py-2 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 max-w-6xl mx-auto">
-                <ul className="list-none p-0 m-0 flex space-x-12 items-center flex-wrap">
+                <ul className="list-none p-0 m-0 flex justify-between sm:space-x-12 items-center flex-wrap">
                     <div className="w-full sm:w-auto flex justify-center">
                         <Logo noText />
                     </div>
-                    <FooterMenuItem className="md:text-base" title="About" url="/" />
-                    <FooterMenuItem className="md:text-base" title="Blog" url="/" />
-                    <FooterMenuItem className="md:text-base" title="Careers" url="/" />
-                    <FooterMenuItem className="lg:!ml-auto md:text-base" title="Support" url="/" />
-                    <FooterMenuItem className="md:text-base" title="Contact sales" url="/" />
+                    <FooterMenuItem className="md:text-base" title="About" url="/handbook/company/story" />
+                    <FooterMenuItem className="md:text-base" title="Blog" url="/blog" />
+                    <FooterMenuItem className="md:text-base" title="Careers" url="/careers" />
+                    <FooterMenuItem className="lg:!ml-auto md:text-base" title="Support" url="/support" />
+                    <FooterMenuItem
+                        className="md:text-base"
+                        title="Contact sales"
+                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                    />
                 </ul>
             </div>
             <div className="mt-9 grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto">
-                <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pb-7">
-                    <h3 className="text-xl">Product analytics</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <h4 className="text-base mb-3">
-                                <a href="/product" className="font-bold">
-                                    Product tour
-                                </a>
-                            </h4>
-                            <h5 className="text-sm text-gray">Analytics</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Trends" url="/" />
-                                <FooterMenuItem title="Funnels" url="/" />
-                                <FooterMenuItem title="Retention" url="/" />
-                            </ul>
+                <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pb-4 lg:pb-7">
+                    <Accordion title={'Product analytics'}>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                            <div>
+                                <h4 className="text-base mb-3">
+                                    <Link
+                                        to="/product"
+                                        className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
+                                    >
+                                        Product tour
+                                    </Link>
+                                </h4>
+                                <h5 className="text-sm text-gray">Analytics</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Trends" url="/product-features/trends" />
+                                    <FooterMenuItem title="Funnels" url="/product-features/funnels" />
+                                    <FooterMenuItem title="Retention" url="/product-features/retention" />
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="text-base mb-3">
+                                    <Link
+                                        href="/pricing"
+                                        className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
+                                    >
+                                        Pricing
+                                    </Link>
+                                </h4>
+                                <h5 className="text-sm text-gray">Apps</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem
+                                        title="Session recordings"
+                                        url="/product-features/session-recording"
+                                    />
+                                    <FooterMenuItem title="Feature flags" url="/product-features/feature-flags" />
+                                    <FooterMenuItem title="Plugins library" url="/plugins" />
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-sm text-gray">Top features</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem
+                                        title="Event autocapture"
+                                        url="/product-features/event-autocapture"
+                                    />
+                                    <FooterMenuItem title="Self-hosting" url="/product-features/self-hosted" />
+                                    <FooterMenuItem title="Open source" url="https://github.com/posthog/posthog" />
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <h4 className="text-base mb-3">
-                                <a href="/pricing" className="font-bold">
-                                    Pricing
-                                </a>
-                            </h4>
-                            <h5 className="text-sm text-gray">Apps</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Session recordings" url="/" />
-                                <FooterMenuItem title="Feature flags" url="/" />
-                                <FooterMenuItem title="Plugins library" url="/" />
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="text-base mb-4 invisible">
-                                <a href="/customers" className="font-bold">
-                                    Customers
-                                </a>
-                            </h4>
-                            <h5 className="text-sm text-gray">Top features</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Event autocapture" url="/" />
-                                <FooterMenuItem title="Self-hosting" url="/" />
-                                <FooterMenuItem title="Open source" url="/" />
-                            </ul>
-                        </div>
-                    </div>
+                    </Accordion>
                 </div>
-                <div className="col-span-1 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:px-10 pb-7 lg:pt-0 pt-7">
-                    <h3 className="text-xl">Company</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <h5 className="text-sm text-gray">About</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Our story" url="" />
-                                <FooterMenuItem title="Team" url="" />
-                                <FooterMenuItem title="Handbook" url="" />
-                                <FooterMenuItem title="Investors" url="" />
-                                <FooterMenuItem title="Careers" url="" />
-                            </ul>
+                <div className="col-span-1 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:px-10 pb-4 lg:pb-7 lg:pt-0 pt-4">
+                    <Accordion title="Company">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h5 className="text-sm text-gray">About</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Our story" url="/handbook/company/story" />
+                                    <FooterMenuItem title="Team" url="/handbook/company/team" />
+                                    <FooterMenuItem title="Handbook" url="/handbook" />
+                                    <FooterMenuItem title="Investors" url="/handbook/strategy/investors" />
+                                    <FooterMenuItem title="Careers" url="/careers" />
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-sm text-gray">Resources</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Blog" url="/blog" />
+                                    <FooterMenuItem title="Media" url="/media" />
+                                    <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
+                                    <FooterMenuItem
+                                        title="YouTube"
+                                        url="https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA"
+                                    />
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <h5 className="text-sm text-gray">Resources</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Blog" url="" />
-                                <FooterMenuItem title="Media" url="" />
-                                <FooterMenuItem title="Merch" url="" />
-                                <FooterMenuItem title="YouTube" url="" />
-                            </ul>
-                        </div>
-                    </div>
+                    </Accordion>
                 </div>
-                <div className="col-span-2 lg:border-r-1 border-b-1 lg:border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pt-7 pb-7 lg:pb-0">
-                    <h3 className="text-xl">Docs</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <h5 className="text-sm text-gray">Getting started</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="PostHog Cloud" url="" />
-                                <FooterMenuItem title="Self hosting" url="" />
-                                <FooterMenuItem title="Compare options" url="" />
-                            </ul>
+                <div className="col-span-2 lg:border-r-1 border-b-1 lg:border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 pt-4 lg:pt-7 pb-4 lg:pb-0">
+                    <Accordion title="Docs">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <h5 className="text-sm text-gray">Getting started</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="PostHog Cloud" url="https://app.posthog.com/signup" />
+                                    <FooterMenuItem title="Self hosting" url="/docs/self-host" />
+                                    <FooterMenuItem
+                                        title="Compare options"
+                                        url="/docs/user-guides/organizations#cloud-vs-selfhosted"
+                                    />
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-sm text-gray">Install & integrate</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem
+                                        title="Installation"
+                                        url="/docs/integrate/client/snippet-installation#docs-content-wrapper"
+                                    />
+                                    <FooterMenuItem title="Docs" url="/docs" />
+                                    <FooterMenuItem title="API" url="/docs/api#docs-content-wrapper" />
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-sm text-gray">User guides</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Cohorts" url="/docs/user-guides/cohorts" />
+                                    <FooterMenuItem title="Funnels" url="/docs/user-guides/funnels" />
+                                    <FooterMenuItem title="Sessions" url="/docs/user-guides/sessions" />
+                                    <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
+                                    <FooterMenuItem title="Plugins" url="/docs/user-guides/plugins" />
+                                    <FooterMenuItem title="Events" url="/docs/user-guides/events" />
+                                    <FooterMenuItem title="FAQ" url="/faq" />
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <h5 className="text-sm text-gray">Install & integrate</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Installation" url="" />
-                                <FooterMenuItem title="Docs" url="" />
-                                <FooterMenuItem title="API" url="" />
-                                <FooterMenuItem title="Libraries" url="" />
-                            </ul>
-                        </div>
-                        <div>
-                            <h5 className="text-sm text-gray">User guides</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Analytics" url="" />
-                                <FooterMenuItem title="Apps" url="" />
-                                <FooterMenuItem title="Platform" url="" />
-                                <FooterMenuItem title="Data" url="" />
-                                <FooterMenuItem title="Plugins" url="" />
-                                <FooterMenuItem title="Tutorials" url="" />
-                                <FooterMenuItem title="FAQ" url="" />
-                            </ul>
-                        </div>
-                    </div>
+                    </Accordion>
                 </div>
-                <div className="col-span-1 lg:px-10 pt-7">
-                    <h3 className="text-xl">Community</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <h5 className="text-sm text-gray">Discussion</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Slack" url="" />
-                                <FooterMenuItem title="Issues" url="" />
-                                <FooterMenuItem title="Support" url="" />
-                                <FooterMenuItem title="Contact sales" url="" />
-                            </ul>
+                <div className="col-span-1 lg:px-10 pt-4 lg:pt-7">
+                    <Accordion title="Community">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h5 className="text-sm text-gray">Discussion</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Slack" url="/slack" />
+                                    <FooterMenuItem
+                                        title="Issues"
+                                        url="https://github.com/PostHog/posthog.com/issues"
+                                    />
+                                    <FooterMenuItem title="Support" url="/support" />
+                                    <FooterMenuItem
+                                        title="Contact sales"
+                                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                                    />
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-sm text-gray">Get involved</h5>
+                                <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="Roadmap" url="/handbook/strategy/roadmap" />
+                                    <FooterMenuItem title="Contributors" url="/contributors" />
+                                    <FooterMenuItem
+                                        title="Code of conduct"
+                                        url="/handbook/company/security#security-policies"
+                                    />
+                                    <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <h5 className="text-sm text-gray">Get involved</h5>
-                            <ul className="list-none p-0 m-0">
-                                <FooterMenuItem title="Roadmap" url="" />
-                                <FooterMenuItem title="Contributors" url="" />
-                                <FooterMenuItem title="Code of conduct" url="" />
-                                <FooterMenuItem title="Merch" url="" />
-                            </ul>
-                        </div>
-                    </div>
+                    </Accordion>
                 </div>
             </div>
             <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 mt-9 items-center text-base max-w-6xl mx-auto">
