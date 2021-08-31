@@ -32,7 +32,7 @@ const exampleCode = `SELECT entrance_period_start,
 export default function BeforeAndAfter() {
     return (
         <section className="px-4">
-            <div className={section('bg-primary rounded-lg p-4 lg:p-12 lg:pt-32')}>
+            <div className={section('bg-primary rounded-lg p-4 pb-0 lg:p-12 lg:pt-32')}>
                 <div className="flex items-center flex-col md:flex-row space-x-4">
                     <div className="relative">
                         <AnimateIntoView className="absolute -right-16">
