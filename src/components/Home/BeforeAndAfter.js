@@ -71,7 +71,7 @@ export default function BeforeAndAfter() {
                         }
                         itemTwo={
                             <div className="w-full">
-                                <img className="float-right" src={outlinedChart} />
+                                <img width={1023} height={414} className="float-right" src={outlinedChart} />
                             </div>
                         }
                     />

@@ -38,7 +38,7 @@ export default function Features() {
 
     const sliderSettings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         arrows: false,
         speed: 500,
         slidesToShow: 1,

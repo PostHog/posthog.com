@@ -25,7 +25,7 @@ const linksHeadingLg = cntl`
     mb-5
 `
 
-const link = cntl`
+const link = (marginBottom = '1') => cntl`
     leading-tight
     text-primary
     hover:text-primary
@@ -33,14 +33,14 @@ const link = cntl`
     dark:hover:text-white
     text-sm
     font-bold
-    mb-1
+    mb-${marginBottom}
     inline-block
 `
 
-const FooterMenuItem = ({ title, url, className = '' }) => {
+const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
     return (
         <li className={className}>
-            <Link className={link} to={url}>
+            <Link className={link(marginBottom)} to={url}>
                 {title}
             </Link>
         </li>
@@ -52,14 +52,25 @@ export function Footer(): JSX.Element {
         <footer className="max-w-screen-2xl mx-auto mt-20 pb-9 px-4 leading">
             <div className="py-2 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 max-w-6xl mx-auto">
                 <ul className="list-none p-0 m-0 flex justify-between sm:space-x-12 items-center flex-wrap">
-                    <div className="w-full sm:w-auto flex justify-center mb-2 lg:mb-0">
+                    <li className="w-full sm:w-auto flex justify-center mb-2 lg:mb-0">
                         <Logo noText />
-                    </div>
-                    <FooterMenuItem className="md:text-base" title="About" url="/handbook/company/story" />
-                    <FooterMenuItem className="md:text-base" title="Blog" url="/blog" />
-                    <FooterMenuItem className="md:text-base" title="Careers" url="/careers" />
-                    <FooterMenuItem className="lg:!ml-auto md:text-base" title="Support" url="/support" />
+                    </li>
                     <FooterMenuItem
+                        marginBottom="0"
+                        className="md:text-base"
+                        title="About"
+                        url="/handbook/company/story"
+                    />
+                    <FooterMenuItem marginBottom="0" className="md:text-base" title="Blog" url="/blog" />
+                    <FooterMenuItem marginBottom="0" className="md:text-base" title="Careers" url="/careers" />
+                    <FooterMenuItem
+                        marginBottom="0"
+                        className="lg:!ml-auto md:text-base"
+                        title="Support"
+                        url="/support"
+                    />
+                    <FooterMenuItem
+                        marginBottom="0"
                         className="md:text-base"
                         title="Contact sales"
                         url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
@@ -226,7 +237,7 @@ export function Footer(): JSX.Element {
                 <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4 text-base">
                     <li>
                         <Link
-                            to=""
+                            to="/privacy"
                             className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Privacy
@@ -234,7 +245,7 @@ export function Footer(): JSX.Element {
                     </li>
                     <li>
                         <Link
-                            to=""
+                            to="/terms"
                             className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Terms
