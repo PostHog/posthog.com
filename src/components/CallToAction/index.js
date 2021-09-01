@@ -38,7 +38,7 @@ const button = (type = 'primary', width = 'auto', className = '') => cntl`
     px-5
     text-center
     font-bold
-    text-sm
+    text-[18px]
     select-none
     border-3
     rounded-full
