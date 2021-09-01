@@ -24,15 +24,17 @@ git clone https://github.com/PostHog/posthog
 
 <HiddenSection headingType='h4' title='With Docker' id='dbs-with-docker'>
 
-1. Make sure you have Docker and Docker Compose installed
+1. Make sure you have Docker and Docker Compose installed and Docker Engine is running
 2. Run:
 
 ```bash
 docker-compose -f docker-compose.dev.yml up -d redis db
 ```
 
-> **Friendly tip:** You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
+> **Friendly tip:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:` likely Docker Engine isn't running.
 
+> **Friendly tip:** You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
+    
 </HiddenSection>
 
 <HiddenSection headingType='h4' title='Without Docker' id='dbs-without-docker'>
