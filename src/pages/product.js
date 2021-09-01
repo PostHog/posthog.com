@@ -127,17 +127,9 @@ function ProductPage() {
                                 <ul className="flex flex-wrap p-0 list-none text-center">
                                     <HostingOption name="Heroku" handle="heroku" url="/docs/self-host/deploy/heroku" />
                                     <HostingOption name="AWS" handle="aws" url="/docs/self-host/deploy/aws" />
-                                    <HostingOption
-                                        name="Google Cloud"
-                                        handle="google-cloud"
-                                        url="/docs/self-host/deploy/gcs"
-                                    />
+                                    <HostingOption name="Google Cloud" handle="gcs" url="/docs/self-host/deploy/gcs" />
                                     <HostingOption name="Azure" handle="azure" url="/docs/self-host/deploy/azure" />
-                                    <HostingOption
-                                        name="Source"
-                                        handle="source-code"
-                                        url="/docs/self-host/deploy/source"
-                                    />
+                                    <HostingOption name="Source" handle="github" url="/docs/self-host/deploy/source" />
                                     <HostingOption name="More" handle="more" url="/docs/deployment" />
                                 </ul>
                             </div>

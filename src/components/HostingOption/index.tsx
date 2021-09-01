@@ -19,7 +19,7 @@ export const HostingOption = ({ handle, name, url }: HostingOptionProps) => {
                     className="icon width-[18px] height-[18px] mr-1 fill-current"
                     style={{ width: '18px', height: '18px' }}
                 >
-                    <use href={hostingSprite + '#hosting-' + `${handle}`} />
+                    <use xlinkHref={`#${handle}`} />
                 </svg>
                 <span className="text-black text-xs text-opacity-70 leading-tight">{name}</span>
             </Link>
