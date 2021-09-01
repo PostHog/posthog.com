@@ -30,24 +30,34 @@ export default function Meetups() {
                         <h3 className="text-blue text-center">London</h3>
                         <div className="text-center">Logo</div>
                         <div className="px-16 py-8">
-                            Join us in December to hear our Platform Lead, James Greenhill and how Vendasta’s Product
-                            team use PostHog to support over 25 products at once.
+                            Our London HostHog in March will be hosted by our VP of Product, Marcus Hyett. Hear how
+                            companies such as Mention Me use PostHog to drive experimentation.
                         </div>
                         <MeetupDate date="Friday 22 Dec 2022" />
-                        <MeetupVenue venue="The Bell Centre, London" />
+                        <MeetupVenue venue="The Bell Centre" />
                         <FindOutMore link="/hosthog/london-2022" />
                     </div>
                     <div className="pt-8">
                         <h3 className="text-orange text-center">San Franciso</h3>
-                        <MeetupDate date="Friday 22 Dec 2022" />
-                        <MeetupVenue venue="The Bell Centre, London" />
-                        <FindOutMore link="/hosthog/london-2022" />
+                        <div className="text-center">Logo</div>
+                        <div className="px-16 py-8">
+                            Join us in December to hear our Platform Lead, James Greenhill and how Vendasta’s Product
+                            team use PostHog to support over 25 products at once.
+                        </div>
+                        <MeetupDate date="Friday 18 Mar 2022" />
+                        <MeetupVenue venue="Lardon Hotel" />
+                        <FindOutMore link="/hosthog/sf-2022" />
                     </div>
                     <div className="border-l border-dashed pt-8">
                         <h3 className="text-yellow text-center">Berlin</h3>
-                        <MeetupDate date="Friday 22 Dec 2022" />
-                        <MeetupVenue venue="The Bell Centre, London" />
-                        <FindOutMore link="/hosthog/london-2022" />
+                        <div className="text-center">Logo</div>
+                        <div className="px-16 py-8">
+                            PostHog CTO Tim Glaser will host our Berlin HostHog in June, where n8n will join to explain
+                            how they’ve integrated PostHog into their product stack.
+                        </div>
+                        <MeetupDate date="Friday 14 Jun 2022" />
+                        <MeetupVenue venue="Radison Blue Hotel" />
+                        <FindOutMore link="/hosthog/berlin-2022" />
                     </div>
                 </div>
             </div>
