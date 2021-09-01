@@ -100,7 +100,7 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h4 className={linksHeadingMd}>
                                     <Link
-                                        href="/pricing"
+                                        to="/pricing"
                                         className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
                                     >
                                         Pricing
