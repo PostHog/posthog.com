@@ -20,7 +20,7 @@ const ButtonLink = ({
         section == currentSection
             ? baseClasses.concat(' bg-black text-white border-black hover:text-white dark:bg-white dark:text-black')
             : baseClasses.concat(
-                  ' bg-tan text-black text-opacity-50 hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
+                  ' bg-tan text-black text-opacity-50 hover:text-black hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
               )
     const sectionSelector = `#${section}`
 

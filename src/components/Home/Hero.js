@@ -40,7 +40,7 @@ export default function Hero() {
                 </div>
             </div>
             <p className="md:mt-auto my-10 md:mb-12 font-semibold">
-                Don’t need to self host? Try <Link to="/sign-up">PostHog Cloud</Link>
+                Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
             </p>
             <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
                 <Feature icon="event-pipelines" title="Event pipelines" />
