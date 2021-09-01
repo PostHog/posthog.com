@@ -104,6 +104,16 @@ GitHub Issues are useful when there isn't a specific code change that is being p
 
 However, it is still important to maintain focus when opening issues by defining a single specific topic of discussion as well as defining the desired outcome that would result in the resolution of the issue. The point is to not keep issues open-ended and to prevent issues from going stale due to lack of resolution. For example, a team member may open an issue to track the progress of a blog post with associated to-do items that need to be completed by a certain date (e.g. first draft, peer review, publish). Once the specific items are completed, the issue can successfully be closed.
 
+### Product Definitions & Decisions
+
+It's best practice to get feedback from other members of the team when making a product decision or defining a complex problem that needs to be solved. This may start with an issue, but it's essential that these issues do not sprial out of control - as soon as an issue has more than 5 comments - it becomes difficult for someone to "catch up". To avoid this probem, when we're documenting a decision or a definintion for a project or project, we should start with a pull request.
+
+The general practice should be by adding a markdown file into to a public repo (e.g. posthog/meta) and adding people you need feedback from as a reviewer. On the rare occasion that this cannot be public, create the PR in the product-internal repo.
+
+If you see an issue which is spiraling out of control with comments, you are empowred to call this out and direct the owner of the issue to move this to a pull request.
+
+When a decision is fully aligned on the pull request should be merged to the repo.
+
 #### Keeping on top of reviews, issues and notifications
 
 Keeping track of everything that's happening in GitHub can be daunting, but it's important to make sure your team receives reviews and feedback on a timely manner.
