@@ -3,6 +3,7 @@ import { CallToAction } from '../CallToAction'
 import Icon from './Icon'
 import Link from '../Link'
 import { heading, section } from './classes'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const Feature = ({ title, icon }) => {
     return (
@@ -16,30 +17,53 @@ const Feature = ({ title, icon }) => {
 export default function Hero() {
     return (
         <section className="flex flex-col justify-center items-center">
-            <div className={section()}>
-                <h1 className={heading()}>
-                    Host your own
-                    <br /> product analytics suite
-                </h1>
-                <h2 className={heading('sm', 'primary', 'my-6')}>
-                    With our open source platform, customer data never has to leave your infrastructure
-                </h2>
-                <div className="flex flex-col justify-center items-center space-y-2 md:space-y-4">
-                    <CallToAction type="button" className="bg-primary border border-primary" width="56" to="/sign-up">
-                        Get started
-                    </CallToAction>
-                    <CallToAction
-                        type="button"
-                        width="56"
-                        outline
-                        to="/schedule-demo"
-                        className="bg-tan text-primary hover:text-primary"
-                    >
-                        Schedule a demo
-                    </CallToAction>
+            <div className="relative w-full z-10">
+                <div className={section('z-10 relative')}>
+                    <h1 className={heading()}>
+                        Host your own
+                        <br /> product analytics suite
+                    </h1>
+                    <h2 className={heading('sm', 'primary', 'my-6')}>
+                        With our open source platform, customer data never has to leave your infrastructure
+                    </h2>
+                    <div className="flex flex-col justify-center items-center space-y-2 md:space-y-4">
+                        <CallToAction
+                            type="button"
+                            className="bg-primary border border-primary"
+                            width="56"
+                            to="/sign-up"
+                        >
+                            Get started
+                        </CallToAction>
+                        <CallToAction
+                            type="button"
+                            width="56"
+                            outline
+                            to="/schedule-demo"
+                            className="bg-tan text-primary hover:text-primary"
+                        >
+                            Schedule a demo
+                        </CallToAction>
+                    </div>
+                </div>
+                <div className="absolute w-full h-full flex justify-between -bottom-32 sm:-bottom-11 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
+                    <StaticImage
+                        width={283}
+                        imgClassName="h-auto"
+                        className="h-full max-w-[150px] md:max-w-[235px] xl:max-w-none ml-[-44px] sm:ml-4"
+                        objectFit="contain"
+                        src="./images/hero-left.png"
+                    />
+                    <StaticImage
+                        width={357}
+                        imgClassName="h-auto"
+                        className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-90px] sm:mr-[-75px]"
+                        objectFit="contain"
+                        src="./images/hero-right.png"
+                    />
                 </div>
             </div>
-            <p className="md:mt-auto my-10 md:mb-12 font-semibold">
+            <p className="w-full mt-20 sm:mt-auto py-10 px-4 font-semibold text-center bg-gradient-to-t from-tan to-[#E4E5DF]">
                 Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
             </p>
             <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
