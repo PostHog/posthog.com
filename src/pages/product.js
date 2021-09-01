@@ -162,7 +162,7 @@ function ProductPage() {
                         </div>
                     </div>
 
-                    <div className="feature-data-privacy">
+                    <div className="feature-data-privacy border-gray-accent-light border-dashed md:border-r">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-privacy"
@@ -171,7 +171,7 @@ function ProductPage() {
                             description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
                             figureClasses="md:h-48"
                             image="feature-data-privacy.svg"
-                            classes=""
+                            classes="px-4 py-8 standard max-w-md mx-auto"
                         />
                     </div>
 
@@ -185,7 +185,7 @@ function ProductPage() {
                             docsUrl="/docs/api/overview"
                             figureClasses="md:h-48"
                             image="feature-api.svg"
-                            classes=""
+                            classes="px-4 py-8 standard max-w-md mx-auto"
                         />
                     </div>
 
