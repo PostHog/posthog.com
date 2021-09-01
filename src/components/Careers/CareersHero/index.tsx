@@ -17,7 +17,6 @@ export const CareersHero = () => {
 
                     <div className="w-full sm:w-72 mx-auto">
                         <CallToAction
-                            icon="down-arrow"
                             onClick={() => scrollTo('#open-roles')}
                             type="primary"
                             width="72"

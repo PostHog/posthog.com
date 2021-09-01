@@ -119,7 +119,7 @@ export const NewsletterForm = ({
                                 </div>
                                 <div className="clear">
                                     <CallToAction
-                                        type="custom"
+                                        type="primary"
                                         icon="check"
                                         width="full"
                                         className="text-white border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"

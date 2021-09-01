@@ -10,7 +10,7 @@ export default function CTA() {
                 <h3 className={heading('sm', 'white')}>Join 5,500 companies already using PostHog.</h3>
                 <div className="mt-12 flex flex-col space-y-4 items-center justify-center">
                     <CallToAction
-                        type="button"
+                        type="custom"
                         width="56"
                         className="bg-white text-blue hover:text-blue border-2 border-white"
                         to="/sign-up"
@@ -18,7 +18,7 @@ export default function CTA() {
                         Get started
                     </CallToAction>
                     <CallToAction
-                        type="button"
+                        type="custom"
                         width="56"
                         className="bg-blue text-white border-2 rounded-full border-white"
                         to="/schedule-demo"

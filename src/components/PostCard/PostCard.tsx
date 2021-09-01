@@ -35,7 +35,7 @@ type PostTypeWithImage = PostType & {
 
 const ReadPostHome = ({ to }: { to: string }) => {
     return (
-        <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="">
+        <CallToAction type="primary" icon="book" iconBg="bg-white relative" to={to} width="full" className="">
             Read Post
         </CallToAction>
     )

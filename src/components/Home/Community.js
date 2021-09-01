@@ -16,7 +16,7 @@ const CommunityStat = ({ title, description }) => {
 export default function Community() {
     return (
         <section className={section('text-center')}>
-            <div className="bg-primary w-full rounded-lg px-4 py-16">
+            <div className="bg-primary w-full rounded-lg px-4 py-16 dark">
                 <h2 className={heading('md', 'white')}>
                     Join our <span className="text-red">huuuuge*</span> open source community
                 </h2>
@@ -26,7 +26,7 @@ export default function Community() {
                     <CommunityStat title="140" description="Contributors" />
                     <CommunityStat title="10b" description="Events tracked" />
                 </ul>
-                <CallToAction outline className="bg-primary text-white" href="https://github.com/PostHog/posthog">
+                <CallToAction type="outline" width="56" href="https://github.com/PostHog/posthog">
                     Browse on GitHub
                 </CallToAction>
             </div>

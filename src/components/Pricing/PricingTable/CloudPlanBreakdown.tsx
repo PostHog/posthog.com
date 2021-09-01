@@ -67,7 +67,6 @@ export const CloudPlanBreakdown = () => {
                         <div>
                             <CallToAction
                                 type="secondary"
-                                icon="none"
                                 href="https://app.posthog.com/signup?src=pricing-page"
                                 className="my-4"
                             >

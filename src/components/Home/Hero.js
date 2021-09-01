@@ -27,21 +27,10 @@ export default function Hero() {
                         With our open source platform, customer data never has to leave your infrastructure
                     </h2>
                     <div className="flex flex-col justify-center items-center space-y-2 md:space-y-4">
-                        <CallToAction
-                            type="button"
-                            className="bg-primary border border-primary"
-                            width="56"
-                            to="/sign-up"
-                        >
+                        <CallToAction type="primary" width="56" to="/sign-up">
                             Get started
                         </CallToAction>
-                        <CallToAction
-                            type="button"
-                            width="56"
-                            outline
-                            to="/schedule-demo"
-                            className="bg-tan text-primary hover:text-primary"
-                        >
+                        <CallToAction type="outline" width="56" to="/schedule-demo">
                             Schedule a demo
                         </CallToAction>
                     </div>

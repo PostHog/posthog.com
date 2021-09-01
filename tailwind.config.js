@@ -96,6 +96,7 @@ module.exports = {
             white: '#fff',
             black: '#000',
             primary: '#151515',
+            'primary-dark': '#EEEFE9',
             orange: '#EF7632',
             'deep-blue': '#160431',
             'royal-blue': '#232D69',
