@@ -48,6 +48,8 @@ export default function Hero() {
                 </div>
                 <div className="absolute w-full h-full flex justify-between -bottom-32 sm:-bottom-11 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
                     <StaticImage
+                        loading="eager"
+                        placeholder="none"
                         width={283}
                         imgClassName="h-auto"
                         className="h-full max-w-[150px] md:max-w-[235px] xl:max-w-none ml-[-44px] sm:ml-4"
@@ -55,6 +57,8 @@ export default function Hero() {
                         src="./images/hero-left.png"
                     />
                     <StaticImage
+                        loading="eager"
+                        placeholder="none"
                         width={357}
                         imgClassName="h-auto"
                         className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-90px] sm:mr-[-75px]"
