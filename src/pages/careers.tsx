@@ -30,35 +30,9 @@ const IndexPage = () => {
                 <Transparency />
                 <TeamQuote
                     backgroundColor="bg-primary"
-                    textColor="text-white"
-                    fontSize=""
-                    width="max-w-4xl"
-                    value={
-                        <>
-                            I love PostHog's level of autonomy and transparency.{' '}
-                            <span className="text-red"> We have a lot of freedom and trust in the team,</span> but we
-                            also hold each other accountable and don’t shy away from giving (and receiving) a lot of
-                            feedback. Plus the team helped me to pick up some basic coding skills, which is amazing!"
-                        </>
-                    }
-                    author="Eltje Lange"
-                    role="People & Talent"
-                    img={
-                        <StaticImage
-                            width={100}
-                            height={100}
-                            className="rounded-full bg-tan"
-                            alt={`Eltje Lange - People & Talent`}
-                            src="../components/TeamQuote/images/Eltje.png"
-                        />
-                    }
-                />
-                <InterviewProcess />
-                <TeamQuote
-                    backgroundColor="bg-primary"
                     textColor="text-tan"
-                    fontSize=""
-                    width="max-w-2xl"
+                    fontSize="text-4xl"
+                    width="max-w-4xl"
                     value={
                         <>
                             I hate how much I enjoy working at PostHog.{' '}
@@ -77,10 +51,10 @@ const IndexPage = () => {
                         />
                     }
                 />
-                <Benefits />
+                <InterviewProcess />
                 <TeamQuote
-                    backgroundColor=""
-                    textColor="text-primary"
+                    backgroundColor="bg-primary"
+                    textColor="text-white"
                     fontSize="text-2xl"
                     width="max-w-3xl"
                     value={
@@ -102,7 +76,7 @@ const IndexPage = () => {
                         />
                     }
                 />
-                <WorkingAtPostHog />
+                <Benefits />
                 <TeamQuote
                     backgroundColor=""
                     textColor="text-primary"
@@ -126,6 +100,32 @@ const IndexPage = () => {
                             className="rounded-full bg-blue"
                             alt={`Eric Duong - Software Engineer`}
                             src="../components/TeamQuote/images/Eric.png"
+                        />
+                    }
+                />
+                <WorkingAtPostHog />
+                <TeamQuote
+                    backgroundColor=""
+                    textColor="text-primary"
+                    fontSize=""
+                    width="max-w-4xl"
+                    value={
+                        <>
+                            I love PostHog's level of autonomy and transparency.{' '}
+                            <span className="text-red"> We have a lot of freedom and trust in the team,</span> but we
+                            also hold each other accountable and don’t shy away from giving (and receiving) a lot of
+                            feedback. Plus the team helped me to pick up some basic coding skills, which is amazing!"
+                        </>
+                    }
+                    author="Eltje Lange"
+                    role="People & Talent"
+                    img={
+                        <StaticImage
+                            width={100}
+                            height={100}
+                            className="rounded-full bg-tan"
+                            alt={`Eltje Lange - People & Talent`}
+                            src="../components/TeamQuote/images/Eltje.png"
                         />
                     }
                 />

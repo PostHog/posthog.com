@@ -106,7 +106,7 @@ export function Footer(): JSX.Element {
                                         Pricing
                                     </Link>
                                 </h4>
-                                <h5 className={linksHeadingSm}>Apps</h5>
+                                <h5 className={linksHeadingSm}>Features</h5>
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem
                                         title="Session recordings"
@@ -117,7 +117,7 @@ export function Footer(): JSX.Element {
                                 </ul>
                             </div>
                             <div>
-                                <h5 className={linksHeadingSm}>Top features</h5>
+                                <h5 className={linksHeadingSm}>Platform</h5>
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem
                                         title="Event autocapture"

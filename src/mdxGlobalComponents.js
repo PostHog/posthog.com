@@ -3,7 +3,6 @@
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
 import { Accordion } from './components/Accordion'
-import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
@@ -45,16 +44,7 @@ import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
-import { Blockquote } from './components/LandingPage/Blockquote'
-import { Features } from './components/LandingPage/Features'
-import { Hero } from './components/LandingPage/Hero'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
-import { PrivateCloud } from './components/LandingPage/PrivateCloud'
-import { ProductFeatureIcons } from './components/LandingPage/ProductFeatureIcons'
-import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
-import { Roadmap } from './components/LandingPage/Roadmap'
-import { SocialProof } from './components/LandingPage/SocialProof'
-import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
@@ -102,7 +92,6 @@ export const shortcodes = {
     Endpoint,
     MethodTags,
     Accordion,
-    AllTheFeaturesCloud,
     AnchorScrollNavbar,
     AnimateIntoView,
     AnimatedBurger,
@@ -144,16 +133,7 @@ export const shortcodes = {
     HiddenSection,
     Home,
     HostingOption,
-    Blockquote,
-    Features,
-    Hero,
     LandingPageCallToAction,
-    PrivateCloud,
-    ProductFeatureIcons,
-    RecentBlogPosts,
-    Roadmap,
-    SocialProof,
-    Tutorials,
     LibraryStats,
     Link,
     Logo,
