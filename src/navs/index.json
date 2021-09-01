@@ -40,11 +40,6 @@
                                         "url": "/docs/self-host/deploy/gcp"
                                     },
                                     {
-                                        "icon": "docker",
-                                        "title": "Docker",
-                                        "url": "/docs/contribute/developing-locally"
-                                    },
-                                    {
                                         "icon": "helm chart",
                                         "title": "Helm Chart",
                                         "url": "/docs/self-host/deploy/other"

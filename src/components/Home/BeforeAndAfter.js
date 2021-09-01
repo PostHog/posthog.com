@@ -32,7 +32,7 @@ const exampleCode = `SELECT entrance_period_start,
 export default function BeforeAndAfter() {
     return (
         <section className="px-4">
-            <div className={section('bg-primary rounded-lg p-4 pb-0 lg:pb-0 lg:p-12 lg:pt-32')}>
+            <div className={section('bg-primary rounded-lg p-4 pb-0 md:pt-16 lg:pb-0 lg:p-12 lg:pt-32')}>
                 <div className="flex items-center flex-col md:flex-row space-x-4">
                     <div className="relative">
                         <AnimateIntoView className="absolute -right-16">
@@ -41,11 +41,11 @@ export default function BeforeAndAfter() {
                         <StaticImage className="max-w-[200px] md:max-w-full" src="../../images/facto-home.png" />
                     </div>
                     <div>
-                        <h2 className="text-white m-0 text-2xl sm:text-4xl md:text-3xl leading-none xl:text-6xl">
+                        <h2 className="text-white m-0 text-2xl sm:text-4xl md:text-5xl leading-none xl:text-6xl">
                             <span className="text-red">Quit writing SQL</span>
                             <br /> to answer product questions
                         </h2>
-                        <h3 className="m-0 mt-2 md:mt-4 text-base sm:text-lg  xl:text-2xl text-gray">
+                        <h3 className="m-0 mt-2 md:mt-4 text-base sm:text-lg md:text-xl xl:text-2xl text-gray">
                             PostHog can answer 90% of them, out of the box.
                         </h3>
                     </div>

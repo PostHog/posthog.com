@@ -132,7 +132,6 @@ function ProductPage() {
                                         handle="google-cloud"
                                         url="/docs/self-host/deploy/gcs"
                                     />
-                                    <HostingOption name="Docker" handle="aws" url="/docs/self-host/deploy/docker" />
                                     <HostingOption name="Azure" handle="azure" url="/docs/self-host/deploy/azure" />
                                     <HostingOption
                                         name="Source"
