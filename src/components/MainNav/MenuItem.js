@@ -17,7 +17,7 @@ export default function MenuItem({ menuItem }) {
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="group whitespace-nowrap lg:flex lg:justify-center"
+            className="group lg:flex lg:justify-center"
         >
             <span ref={referenceElement} className="flex justify-between items-center">
                 <Link
@@ -48,7 +48,7 @@ export default function MenuItem({ menuItem }) {
                     ))}
             </span>
 
-            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} />}
+            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}
         </li>
     )
 }

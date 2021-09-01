@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .text-shadow-none {
+        text-shadow: none;
+    }
+}
+
 main a,
 .blog-post-content a {
     @apply text-orange hover:text-orange font-semibold;

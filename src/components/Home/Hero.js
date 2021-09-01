@@ -27,27 +27,19 @@ export default function Hero() {
                         With our open source platform, customer data never has to leave your infrastructure
                     </h2>
                     <div className="flex flex-col justify-center items-center space-y-2 md:space-y-4">
-                        <CallToAction
-                            type="button"
-                            className="bg-primary border border-primary"
-                            width="56"
-                            to="/sign-up"
-                        >
+                        <CallToAction type="primary" width="56" to="/sign-up">
                             Get started
                         </CallToAction>
-                        <CallToAction
-                            type="button"
-                            width="56"
-                            outline
-                            to="/schedule-demo"
-                            className="bg-tan text-primary hover:text-primary"
-                        >
+                        <CallToAction type="outline" width="56" to="/schedule-demo">
                             Schedule a demo
                         </CallToAction>
                     </div>
                 </div>
-                <div className="absolute w-full h-full flex justify-between -bottom-32 sm:-bottom-11 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
+                <div className="absolute w-full h-full flex justify-between bottom-[-6.8rem] sm:-bottom-11 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
                     <StaticImage
+                        objectPosition="bottom"
+                        loading="eager"
+                        placeholder="none"
                         width={283}
                         imgClassName="h-auto"
                         className="h-full max-w-[150px] md:max-w-[235px] xl:max-w-none ml-[-44px] sm:ml-4"
@@ -55,6 +47,9 @@ export default function Hero() {
                         src="./images/hero-left.png"
                     />
                     <StaticImage
+                        objectPosition="bottom"
+                        loading="eager"
+                        placeholder="none"
                         width={357}
                         imgClassName="h-auto"
                         className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-90px] sm:mr-[-75px]"
@@ -63,7 +58,7 @@ export default function Hero() {
                     />
                 </div>
             </div>
-            <p className="w-full mt-20 sm:mt-auto py-10 px-4 font-semibold text-center bg-gradient-to-t from-tan to-[#E4E5DF]">
+            <p className="w-full mt-20 sm:mt-auto mb-0 py-6 sm:py-10 px-4 font-semibold text-center bg-gradient-to-t from-tan to-[#E4E5DF]">
                 Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
             </p>
             <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">

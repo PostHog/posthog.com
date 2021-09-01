@@ -148,12 +148,7 @@ export default function Features() {
                         & synced annotations <span className="opacity-40">across every view in the platform</span>
                     </span>
                 </h4>
-                <CallToAction
-                    type="button"
-                    outline
-                    to="/docs/user-guides"
-                    className="bg-tan text-primary hover:text-primary"
-                >
+                <CallToAction width="56" type="outline" to="/docs/user-guides">
                     Explore all features
                 </CallToAction>
             </div>
