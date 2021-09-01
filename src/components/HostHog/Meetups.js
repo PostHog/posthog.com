@@ -29,7 +29,7 @@ export default function Meetups() {
                     <div className="border-r border-dashed pt-8">
                         <h3 className="text-blue text-center">London</h3>
                         <div className="text-center">Logo</div>
-                        <div className="px-16 py-8">
+                        <div className="px-16 py-8 h-32">
                             Our London HostHog in March will be hosted by our VP of Product, Marcus Hyett. Hear how
                             companies such as Mention Me use PostHog to drive experimentation.
                         </div>
@@ -40,7 +40,7 @@ export default function Meetups() {
                     <div className="pt-8">
                         <h3 className="text-orange text-center">San Franciso</h3>
                         <div className="text-center">Logo</div>
-                        <div className="px-16 py-8">
+                        <div className="px-16 py-8 h-32">
                             Join us in December to hear our Platform Lead, James Greenhill and how Vendasta’s Product
                             team use PostHog to support over 25 products at once.
                         </div>
@@ -51,7 +51,7 @@ export default function Meetups() {
                     <div className="border-l border-dashed pt-8">
                         <h3 className="text-yellow text-center">Berlin</h3>
                         <div className="text-center">Logo</div>
-                        <div className="px-16 py-8">
+                        <div className="px-16 py-8 h-32">
                             PostHog CTO Tim Glaser will host our Berlin HostHog in June, where n8n will join to explain
                             how they’ve integrated PostHog into their product stack.
                         </div>
