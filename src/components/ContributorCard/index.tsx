@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card, Col, Progress, Tag, Tooltip } from 'antd'
 import { Link } from 'gatsby'
-import './style.scss'
 import { emojiKey } from './emojiKey'
 import { Spacer } from 'components/Spacer'
+import tooltipIcon from './images/tooltip.svg'
 
 interface ContributorCardStructureMeta {
     name: string
@@ -57,48 +57,65 @@ const ContributorCardStructure = ({
             <Card
                 style={{ height: 450, display: 'flex', marginBottom: 20 }}
                 bodyStyle={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-                className="card-elevated"
+                className="card-elevated hover:shadow-none"
             >
                 {mvpWins > 0 ? (
                     <Tag color="transparent" style={{ maxWidth: '30%', position: 'absolute', right: 15, top: 15 }}>
-                        <ContributorCardTooltip title={`Community MVP ${mvpWins}x`} pageKey="community-mvps">
-                            <h4>
+                        <h4>
+                            <ContributorCardTooltip title={`Community MVP ${mvpWins}x`} pageKey="community-mvps">
                                 {Array.from({ length: mvpWins }).map((_: any, i: number) => (
                                     <span key={`trophy_${i}`}>🏆</span>
                                 ))}
-                            </h4>
-                        </ContributorCardTooltip>
+                            </ContributorCardTooltip>
+                        </h4>
                     </Tag>
                 ) : null}
 
                 <img
                     src={imageSrc}
-                    style={{ maxWidth: 60, maxHeight: 60, marginBottom: 0, borderRadius: 10 }}
-                    className="center"
+                    style={{ maxWidth: 60, maxHeight: 60, marginBottom: 0 }}
+                    className="center rounded-full overflow-hidden"
                     alt="contributor image"
                 />
 
-                <br />
+                <h4 className="centered">{name}</h4>
 
-                <h5 className="centered" style={{ color: '#fff' }}>
-                    {name}
-                </h5>
-                <ContributorCardTooltip title="Number of PRs merged" pageKey="level">
-                    <p style={{ color: 'rgb(231 184 250)', marginBottom: 5 }}>lvl {contributorLevel}</p>
-                    <Progress
-                        strokeColor={{
-                            '0%': '#220f3f',
-                            '100%': '#ab75ff',
-                        }}
-                        percent={contributorLevel >= 50 ? 50 : (100 * contributorLevel) / 50}
-                        className="progress-bar"
-                        showInfo={false}
-                    />
-                </ContributorCardTooltip>
+                <h6>
+                    Level {contributorLevel}
+                    <ContributorCardTooltip title="Number of PRs merged" pageKey="level">
+                        <img
+                            src={tooltipIcon}
+                            width="18"
+                            height="18"
+                            alt="More info"
+                            className="inline-block opacity-25 hover:opacity-50 ml-1"
+                        />
+                    </ContributorCardTooltip>
+                </h6>
+                <Progress
+                    strokeColor={{
+                        '0%': '#F1A82C',
+                        '100%': '#F54E00',
+                    }}
+                    percent={contributorLevel >= 50 ? 50 : (100 * contributorLevel) / 50}
+                    className="progress-bar rounded-full overflow-hidden bg-gray-accent-light"
+                    showInfo={false}
+                />
                 <Spacer height={40} />
-                <ContributorCardTooltip title="Types of contributions made" pageKey="powers">
-                    <p style={{ color: 'rgb(231 184 250)', fontSize: 20, marginBottom: 0 }}>Powers</p>
-                </ContributorCardTooltip>
+
+                <h6>
+                    Powers
+                    <ContributorCardTooltip title="Types of contributions made" pageKey="powers">
+                        <img
+                            src={tooltipIcon}
+                            width="18"
+                            height="18"
+                            alt="More info"
+                            className="inline-block opacity-25 hover:opacity-50 ml-1"
+                        />
+                    </ContributorCardTooltip>
+                </h6>
+
                 <Spacer height={20} />
                 <h2>
                     {contributions.map((key) => (
