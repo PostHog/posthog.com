@@ -8,16 +8,15 @@ import { InterviewProcess } from '../components/Careers/InterviewProcess'
 import { Benefits } from '../components/Careers/Benefits'
 import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 import { OpenRoles } from '../components/Careers/OpenRoles'
-import { Footer } from '../components/Footer/Footer'
 import { GetStartedModal } from 'components/GetStartedModal'
 import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
-
+import Layout from 'components/Layout'
 import '../components/Careers/styles/index.scss'
 
 const IndexPage = () => {
     return (
-        <>
+        <Layout>
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
@@ -132,23 +131,9 @@ const IndexPage = () => {
                 />
                 <OpenRoles />
             </div>
-            <Footer showNewsletter={false} backgroundClass="careers-footer" />
             <GetStartedModal />
-        </>
+        </Layout>
     )
 }
-
-// import charlesImg from './images/Charles.png'
-// import eltjeImg from './images/Eltje.png'
-// import ericImg from './images/Eric.png'
-// import kunalImg from './images/Kunal.png'
-
-// <img
-//                             src={img}
-//                             width="100"
-//                             height="100"
-//                             alt="{author}, {role}"
-//                             className={`${imgBackground} rounded-full`}
-//                         />
 
 export default IndexPage
