@@ -514,6 +514,14 @@ export default function Sprites() {
                     fill="#FF4A00"
                 ></path>
             </symbol>
+            <symbol xmlns="http://www.w3.org/2000/svg" id="more" fill="none" viewBox="0 0 19 4">
+                <path
+                    fill="#000"
+                    fillRule="evenodd"
+                    d="M4.06 2a2 2 0 11-4 0 2 2 0 014 0zm7 0a2 2 0 11-4 0 2 2 0 014 0zm5 2a2 2 0 100-4 2 2 0 000 4z"
+                    clipRule="evenodd"
+                />
+            </symbol>
         </svg>
     )
 }
