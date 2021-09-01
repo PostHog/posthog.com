@@ -44,6 +44,7 @@ import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
@@ -132,6 +133,7 @@ export const shortcodes = {
     HiddenSection,
     Home,
     HostingOption,
+    LandingPageCallToAction,
     LibraryStats,
     Link,
     Logo,

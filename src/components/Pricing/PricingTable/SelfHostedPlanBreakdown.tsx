@@ -3,7 +3,6 @@ import { useValues } from 'kea'
 import { Structure } from '../../Structure'
 import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
-import { FeaturesSelfHost } from '../../FeaturesSelfHost'
 import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
 
 import checkIcon from '../../../images/check.svg'
