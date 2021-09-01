@@ -74,12 +74,12 @@ export const Benefits = () => {
                         details="Distracted by a calendar full of meetings? Not anymore."
                     />
 
+                    <Benefit image={insuranceImg} title="Medical, Dental and Vision Insurance" details="US & UK only" />
                     <Benefit
-                        image={insuranceImg}
-                        title="Medical, Dental and Vision Insurance"
-                        details="US & UK only."
+                        image={trainingBudgetImg}
+                        title="Training budget"
+                        details="Free books and Audible subscription"
                     />
-                    <Benefit image={trainingBudgetImg} title="Training budget" details="and free books" />
                     <Benefit
                         image={coworkingCreditImg}
                         title="Coworking Credit"
