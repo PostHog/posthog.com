@@ -25,7 +25,7 @@
                             {
                                 "title": "Deploy via",
                                 "link": {
-                                    "title": "View all (13)",
+                                    "title": "",
                                     "url": "/docs/self-host"
                                 },
                                 "items": [
@@ -213,7 +213,7 @@
                                 ]
                             },
                             {
-                                "title": "Apps",
+                                "title": "Features",
                                 "items": [
                                     {
                                         "title": "Feature flags",
