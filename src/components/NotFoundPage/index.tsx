@@ -37,14 +37,14 @@ export default function NotFoundPage(): JSX.Element {
                 <h4>Does pineapple belong on pizza?</h4>
 
                 <p>
-                    We're looking forward to hearing your response on{' '}
+                    We looki forward to hearing your response on{' '}
                     <a href="//twitter.com/posthog" target="_blank" rel="noreferrer">
                         Twitter
                     </a>
                     .
                 </p>
 
-                <div className="hedgehog">
+                <div className="hedgehog mb-8">
                     <BasicHedgehogImage />
                 </div>
 

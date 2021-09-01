@@ -68,11 +68,9 @@ export const Transparency = () => {
                     <TransparencyFeature title="Compensation" image={compensationImg} className="max-w-md mx-auto">
                         <p className="mb-0 text-base text-black font-lightish">
                             We pay top of the market and built a{' '}
-                            <a href="/handbook/people/compensation" style={{ color: '#FFB053' }}>
-                                compensation calculator
-                            </a>{' '}
-                            to keep salary discussions simple and fair. You’ll know your approximate starting salary
-                            before you even apply.
+                            <a href="/handbook/people/compensation">compensation calculator</a> to keep salary
+                            discussions simple and fair. You’ll know your approximate starting salary before you even
+                            apply.
                         </p>
                     </TransparencyFeature>
                 </div>
