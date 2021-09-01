@@ -13,7 +13,7 @@
             "url": "/docs",
             "sub": {
                 "title": "Docs",
-                "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started.",
+                "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started, or visit the <a href='/docs'>Docs overview</a>.",
                 "items": [
                     {
                         "title": "1. Self hosting",

@@ -3,20 +3,20 @@
 @font-face {
     font-family: 'MatterVF';
     /* LOCAL DEVELOPMENT */
-    /*
     src: url('/fonts/MatterSQVF.woff') format('woff supports variations'),
         url('/fonts/MatterSQVF.woff') format('woff-variations'),
         url('/fonts/MatterSQVF.woff2') format('woff2 supports variations'),
         url('/fonts/MatterSQVF.woff2') format('woff2-variations');
-    */
 
     /* PRODUCTION */
+    /*
     src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2')
             format('woff2 supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2') format('woff2-variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff')
             format('woff supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff') format('woff-variations');
+    */
 
     font-style: normal;
     font-weight: 300 900;
@@ -26,14 +26,13 @@
 @font-face {
     font-family: 'MatterVF';
     /* LOCAL DEVELOPMENT */
-    /*
     src: url('/fonts/MatterSQItalicVF.woff') format('woff supports variations'),
         url('/fonts/MatterSQItalicVF.woff') format('woff-variations'),
         url('/fonts/MatterSQItalicVF.woff2') format('woff2 supports variations'),
         url('/fonts/MatterSQItalicVF.woff2') format('woff2-variations');
-    */
 
     /* PRODUCTION */
+    /*
     src: url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
             format('woff2 supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2')
@@ -42,10 +41,27 @@
             format('woff supports variations'),
         url('//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff')
             format('woff-variations');
-
+    */
     font-style: italic;
     font-weight: 300 900;
     font-display: swap;
+}
+
+.posthog-scrollbars::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+}
+.posthog-scrollbars::-webkit-scrollbar-thumb {
+    background: #bfbfbc !important;
+    border-radius: 30px !important;
+}
+.posthog-scrollbars::-webkit-scrollbar-thumb:hover {
+    background: #878387 !important;
+}
+.posthog-scrollbars::-webkit-scrollbar-track {
+    background: #fff !important;
+    border-radius: 0px !important;
+    box-shadow: inset 0px 0px 0px 0px #f0f0f0 !important;
 }
 
 body {

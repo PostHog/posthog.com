@@ -82,7 +82,7 @@ export default function Main({
                 <article
                     ref={mainEl}
                     style={!showToc ? { maxWidth: '100%', paddingRight: 0 } : {}}
-                    className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content overflow-scroll"
+                    className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content overflow-auto"
                 >
                     <section className="mb-8 xl:mb-14 relative">
                         <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>

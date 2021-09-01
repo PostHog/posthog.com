@@ -25,22 +25,20 @@ export default function Submenu({ referenceElement, menu, open }) {
         return () => window.removeEventListener('resize', getOffset)
     }, [])
     return (
-        <div className="z-10 top-[50px] lg:pt-[40px] lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 mx-auto w-full max-w-screen-xl lg:block text-almost-black">
-            <span
-                style={{ transform: `translate(calc(-50% - ${offset}px), -17px) rotate(45deg)` }}
-                className="w-8 h-8 bg-white dark:bg-gray-accent-dark absolute left-1/2 hidden lg:block rounded-tl border-2 border-almost-black border-b-0 border-r-0"
-            />
-            <div className="lg:bg-white lg:dark:bg-gray-accent-dark text-[14px] lg:p-12 p-0 rounded lg:border-2 border-almost-black">
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
-                    <h1 className="hidden lg:block text-4xl m-0 font-bold">{menu.title}</h1>
-                    <p className="hidden lg:block my-3 text-almost-black dark:text-white">{menu.description}</p>
-                </motion.div>
+        <div className="z-10 top-[50px] lg:pt-[40px] lg:absolute lg:left-10 lg:right-10 max-w-screen-3xl lg:block text-almost-black">
+            <div className="lg:bg-white lg:rounded-xl lg:max-h-[calc(100vh-120px)] lg:overflow-auto posthog-scrollbars">
+                <div className="lg:dark:bg-gray-accent-dark text-[14px] lg:p-12 p-0 max-w-screen-xl mx-auto">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+                        <h1 className="hidden lg:block text-4xl m-0 font-bold">{menu.title}</h1>
+                        <p className="hidden lg:block my-3 text-almost-black dark:text-white">{menu.description}</p>
+                    </motion.div>
 
-                <motion.ul initial="hidden" an imate="shown" variants={variants} className="list-none p-0 m-0">
-                    {menu.items.map((item, index) => (
-                        <SubmenuItem item={item} key={index} />
-                    ))}
-                </motion.ul>
+                    <motion.ul initial="hidden" an imate="shown" variants={variants} className="list-none p-0 m-0">
+                        {menu.items.map((item, index) => (
+                            <SubmenuItem item={item} key={index} />
+                        ))}
+                    </motion.ul>
+                </div>
             </div>
         </div>
     )
