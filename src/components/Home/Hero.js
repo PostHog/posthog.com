@@ -35,8 +35,9 @@ export default function Hero() {
                         </CallToAction>
                     </div>
                 </div>
-                <div className="absolute w-full h-full flex justify-between -bottom-32 sm:-bottom-11 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
+                <div className="absolute w-full h-full flex justify-between bottom-[-6.8rem] sm:-bottom-11 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
                     <StaticImage
+                        objectPosition="bottom"
                         loading="eager"
                         placeholder="none"
                         width={283}
@@ -46,6 +47,7 @@ export default function Hero() {
                         src="./images/hero-left.png"
                     />
                     <StaticImage
+                        objectPosition="bottom"
                         loading="eager"
                         placeholder="none"
                         width={357}
@@ -56,7 +58,7 @@ export default function Hero() {
                     />
                 </div>
             </div>
-            <p className="w-full mt-20 sm:mt-auto py-10 px-4 font-semibold text-center bg-gradient-to-t from-tan to-[#E4E5DF]">
+            <p className="w-full mt-20 sm:mt-auto mb-0 py-6 sm:py-10 px-4 font-semibold text-center bg-gradient-to-t from-tan to-[#E4E5DF]">
                 Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
             </p>
             <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
