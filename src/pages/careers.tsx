@@ -58,8 +58,8 @@ const IndexPage = () => {
                 <TeamQuote
                     backgroundColor="bg-primary"
                     textColor="text-tan"
-                    fontSize=""
-                    width="max-w-2xl"
+                    fontSize="text-4xl"
+                    width="max-w-4xl"
                     value={
                         <>
                             I hate how much I enjoy working at PostHog.{' '}

@@ -44,7 +44,7 @@ const SliderItem = ({ image, title, subtitle, description }) => {
         <div className="flex flex-col max-w-xs py-5 px-10 items-start border-r border-dashed border-gray-accent-light">
             <img className="mb-9" src={image} />
             <h4 className="text-primary m-0">{title}</h4>
-            <h5 className="text-primary mt-1 mb-2">{subtitle}</h5>
+            <h5 className="text-primary font-semibold mb-3 leading-tight">{subtitle}</h5>
             <p className="text-[15px] text-primary m-0">{description}</p>
         </div>
     )
@@ -82,12 +82,7 @@ export const InterviewProcess = () => {
                 currentIndex={currentSlide}
                 length={4}
             />
-            <Slider
-                beforeChange={handleChange}
-                className="text-left max-w-6xl mx-auto"
-                ref={sliderRef}
-                {...sliderSettings}
-            >
+            <Slider beforeChange={handleChange} className="text-left" ref={sliderRef} {...sliderSettings}>
                 <SliderItem
                     image={application}
                     title="1. Application"
