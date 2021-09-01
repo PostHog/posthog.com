@@ -12,7 +12,7 @@ interface ProductFooterProps {
 export const ProductFooter = ({ title, tagline, componentKey, bgColor = 'navy', disclaimer }: ProductFooterProps) => {
     const backgroundColorClass = `bg-${bgColor}`
     return (
-        <div className={`${componentKey} max-w-2xl mx-auto pt-16 text-center`}>
+        <div className={`${componentKey} max-w-2xl mx-auto pt-32 pb-16 text-center`}>
             <h2 className="mb-4">{title}</h2>
 
             <div className="relative mt-6 mb-4">

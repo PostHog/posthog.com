@@ -212,7 +212,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="feature-funnels">
+                    <div className="feature-funnels border-gray-accent-light border-dashed border-b">
                         {/*
                         style={{  
                             backgroundImage: "url(" + `${imageFunnels}` + ")",
@@ -492,7 +492,6 @@ function ProductPage() {
                             .
                         </span>
                     }
-                    bgColor="navy"
                 />
             </div>
         </Layout>
