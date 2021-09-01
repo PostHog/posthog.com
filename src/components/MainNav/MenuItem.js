@@ -48,7 +48,7 @@ export default function MenuItem({ menuItem }) {
                     ))}
             </span>
 
-            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} />}
+            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}
         </li>
     )
 }
