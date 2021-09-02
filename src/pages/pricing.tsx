@@ -20,7 +20,7 @@ const PricingNew = (): JSX.Element => {
     return (
         <Layout>
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
-            <section className="mt-24 px-5">
+            <section className="mt-12 md:mt-24 px-5">
                 <h1 className="text-center mt-0 mb-4">Pricing</h1>
                 <h2 className="text-center text-lg m-0 mb-7 opacity-75">
                     Pay per event after a free allocation every month.

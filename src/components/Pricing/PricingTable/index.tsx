@@ -23,7 +23,7 @@ export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefaul
     return (
         <div className="pricing-hero relative ">
             <Structure.SectionFullWidth width="7xl" className="">
-                <div className="flex justify-center max-w-md mx-auto mb-20">
+                <div className="flex justify-center max-w-md mx-auto mb-12 md:mb-20">
                     <CallToAction
                         type="button"
                         width="auto"

@@ -23,8 +23,15 @@ const secondary = cntl`
 const outline = cntl`
     bg-transparent
     text-primary
+    text-opacity-80
+    hover:text-opacity-100
     dark:text-primary-dark
     hover:text-primary
+    border-opacity-10
+    hover:border-opacity-25
+    active:border-opacity-50
+    border-primary
+    dark:border-primary-dark
 `
 
 const buttonTypes = {
@@ -38,7 +45,7 @@ const button = (type = 'primary', width = 'auto', className = '') => cntl`
     px-5
     text-center
     font-bold
-    text-[18px]
+    text-[17px]
     select-none
     border-3
     rounded-full

@@ -50,7 +50,7 @@ export default function BeforeAndAfter() {
                         </h3>
                     </div>
                 </div>
-                <div className="grid grid-cols-2 text-center dark mb-4 md:mb-8 mt-12 md:mt-24 items-center">
+                <div className="grid grid-cols-2 text-center dark mb-4 md:mb-8 mt-12 items-center">
                     <h4 className="text-white text-xs sm:text-base md:text-xl m-0">Before PostHog</h4>
                     <h4 className="text-white flex items-center space-x-1 sm:space-x-4 justify-center text-xs sm:text-base md:text-xl m-0">
                         <span>With</span> <Logo className="max-w-[25px] sm:max-w-[40px] md:w-auto" allWhite noText />{' '}

@@ -189,7 +189,7 @@ body.dark {
 ol,
 ul {
     margin: initial;
-    padding-left: 14px;
+    padding-left: 2em;
 }
 
 ol {

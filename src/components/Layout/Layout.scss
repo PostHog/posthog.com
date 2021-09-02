@@ -69,6 +69,7 @@ body {
     font-variant-numeric: proportional-nums !important;
     font-feature-settings: unset !important;
     font-variant-numeric: initial !important;
+    font-variation-settings: 'wght' 475;
 }
 
 a {
@@ -83,7 +84,6 @@ i {
 }
 
 p {
-    font-variation-settings: 'wght' 475;
     opacity: 0.9;
 }
 
@@ -680,7 +680,8 @@ header {
 }
 
 .blog-post-content {
-    p {
+    p,
+    li {
         font-size: 1.25em;
         line-height: 1.75em;
         opacity: 0.9;

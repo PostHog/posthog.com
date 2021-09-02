@@ -286,7 +286,7 @@
         {
             "title": "Get started",
             "classes": "text-white font-bold hover:text-white select-none px-4 py-2 my-3 lg:my-0 rounded-full bg-almost-black dark:bg-white dark:text-almost-black dark:hover:text-almost-black",
-            "url": "/sign-up"
+            "url": "/docs/self-host"
         },
         {
             "title": "Login",
