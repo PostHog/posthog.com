@@ -17,6 +17,7 @@ We think HostHogs will be of particular interest to people in the following role
 
 - Product Engineer
 - Senior/Lead Engineer
+- Tech Lead
 - Technical Product Manager
 
 ## How do we make these valuable for attendees?
