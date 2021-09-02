@@ -52,7 +52,7 @@ export const SelfHostedPlanBreakdown = () => {
                     </div>
 
                     <div>
-                        <CallToAction icon="none" href="/docs/deployment" className="my-4 !w-full">
+                        <CallToAction icon="none" href="/docs/self-host" className="my-4 !w-full">
                             Deploy now
                         </CallToAction>
                     </div>
