@@ -46,7 +46,7 @@ export default function Meetups() {
                         </div>
                         <MeetupDate date="Friday 18 Mar 2022" />
                         <MeetupVenue venue="Lardon Hotel" />
-                        <FindOutMore link="/hosthog/sf-2022" />
+                        <FindOutMore link="#" />
                     </div>
                     <div className="border-l border-dashed pt-8">
                         <h3 className="text-yellow text-center">Berlin</h3>
@@ -57,7 +57,7 @@ export default function Meetups() {
                         </div>
                         <MeetupDate date="Friday 14 Jun 2022" />
                         <MeetupVenue venue="Radison Blue Hotel" />
-                        <FindOutMore link="/hosthog/berlin-2022" />
+                        <FindOutMore link="#" />
                     </div>
                 </div>
             </div>
