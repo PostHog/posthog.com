@@ -23,7 +23,7 @@ const FindOutMore = ({ link }) => {
 export default function Meetups() {
     return (
         <section className="flex flex-col justify-center items-center max-w-screen-2xl my-8 md:my-16">
-            <p>We’re constantly planning new HostHogs, so check out often to find out about new events near you.</p>
+            <p>We’re constantly planning new HostHogs, so check back often to find out about new events near you.</p>
             <div className="w-full border-t border-dashed mt-8">
                 <div className="grid grid-cols-3">
                     <div className="border-r border-dashed pt-8">

@@ -44,6 +44,7 @@ import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
+import { HostHogEvent } from './components/HostHogEvent'
 import { HostHogHub } from './components/HostHogHub'
 import { HostingOption } from './components/HostingOption'
 import { Blockquote } from './components/LandingPage/Blockquote'
@@ -144,6 +145,7 @@ export const shortcodes = {
     GithubIcon,
     HiddenSection,
     Home,
+    HostHogEvent,
     HostHogHub,
     HostingOption,
     Blockquote,
