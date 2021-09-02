@@ -23,17 +23,17 @@ interface BenefitProps {
 }
 
 const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
-    const classList = mergeClassList('w-full md:w-1/2 lg:w-1/4 p-2 md:p-4 mb-8 md:mb-0', className)
+    const classList = mergeClassList('p-8', className)
 
     return (
         <div className={classList}>
-            <div className="mx-auto flex justify-center items-center w-24 h-24 p-2 bg-gray-100 bg-opacity-10 rounded border-3 border-white border-opacity-30 border-solid">
+            <div className="flex w-16 h-16">
                 <img src={image} alt={title} className="max-w-full block mb-0" />
             </div>
             <div className="flex-grow mt-4">
-                <h4 className="mb-0 font-sans font-normal text-base leading-tight">{title}</h4>
+                <h4 className="mb-0 text-lg leading-tight">{title}</h4>
 
-                <div className="text-opacity-80 text-gray-100 mt-2">{details}</div>
+                <p className="mt-2">{details}</p>
             </div>
         </div>
     )
@@ -41,16 +41,18 @@ const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
 
 export const Benefits = () => {
     return (
-        <div className="careers-benefits pt-24 text-white text-center" id="benefits">
-            <Structure.Section>
-                <Structure.SectionHeader
-                    title="Benefits"
-                    titleTag="h2"
-                    leadText="We’re always looking to expand our benefits to offer meaningful value to our team who make all of this possible."
-                    leadTextClassName="opacity-80"
-                />
+        <div className="pt-24" id="benefits">
+            <Structure.Section width="8xl">
+                <div className="text-center">
+                    <Structure.SectionHeader
+                        title="Benefits"
+                        titleTag="h2"
+                        leadText="We’re always looking to expand our benefits to offer meaningful value to our team who make all of this possible."
+                        leadTextClassName="opacity-80 mb-8"
+                    />
+                </div>
 
-                <div className="flex flex-col md:flex-row md:flex-wrap">
+                <div className="benefits-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-auto border-gray-accent-light border border-dashed border-b-0 border-r-0 sm:border-r-1">
                     <Benefit
                         image={compensationImg}
                         title="Generous, transparent compensation"
@@ -72,12 +74,12 @@ export const Benefits = () => {
                         details="Distracted by a calendar full of meetings? Not anymore."
                     />
 
+                    <Benefit image={insuranceImg} title="Medical, Dental and Vision Insurance" details="US & UK only" />
                     <Benefit
-                        image={insuranceImg}
-                        title="Medical, Dental and Vision Insurance"
-                        details="US & UK only."
+                        image={trainingBudgetImg}
+                        title="Training budget"
+                        details="Free books and Audible subscription"
                     />
-                    <Benefit image={trainingBudgetImg} title="Training budget" details="and free books" />
                     <Benefit
                         image={coworkingCreditImg}
                         title="Coworking Credit"

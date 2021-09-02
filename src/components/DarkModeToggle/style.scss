@@ -6,20 +6,17 @@
 .dark {
     .toggle-switch {
         &-inner:before {
-            background: #4b325a;
+            background: #bfbfbc;
         }
     }
 }
 
 .toggle-switch {
     position: relative;
-    width: 75px;
-    margin-top: 10px;
+    width: 60px;
     display: inline-block;
     vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
     text-align: left;
     &-checkbox {
         display: none;
@@ -54,17 +51,15 @@
             content: '🌙';
             text-transform: uppercase;
             padding-left: 10px;
-            background-color: #4b325a;
+            background-color: #bfbfbc;
             color: #fff;
         }
         .toggle-switch {
             position: relative;
-            width: 75px;
+            width: 60px;
             display: inline-block;
             vertical-align: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            user-select: none;
             text-align: left;
             &-checkbox {
                 display: none;
@@ -154,19 +149,20 @@
         content: '☀️';
         text-transform: uppercase;
         padding-right: 10px;
-        background-color: #222d5b;
+        background-color: white;
         color: #fff;
         text-align: right;
     }
     &-switch {
         display: block;
-        width: 24px;
+        width: 16px;
+        height: 16px;
         margin: 5px;
-        background: #fff;
+        background: #0e0e0e;
         position: absolute;
         top: 0;
         bottom: 0;
-        right: 40px;
+        right: 33px;
         border: 0 solid #bbb;
         border-radius: 20px;
         transition: all 0.3s ease-in 0s;

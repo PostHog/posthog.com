@@ -12,7 +12,7 @@ export default function SubmenuItem({ item }) {
         shown: { y: 0, opacity: 1, transition: { duration: 0.5, type: 'spring' } },
     }
     return (
-        <motion.li tran variants={variants} className="lg:mt-12 mt-6 font-bold">
+        <motion.li variants={variants} className="lg:mt-12 mt-6 font-bold">
             <div className="flex items-center justify-between">
                 <h2 className="text-lg lg:text-xl font-bold">{title}</h2>
                 {link && (
@@ -30,7 +30,7 @@ export default function SubmenuItem({ item }) {
             <div
                 className={`grid grid-cols-1 xs:grid-cols-${
                     cols > 3 ? '2' : '1'
-                } lg:grid-cols-${cols} lg:divide-x-2 divide-white divide-opacity-10 bg-[#4b3163] rounded lg:py-0 py-5`}
+                } lg:grid-cols-${cols} lg:divide-x-1 divide-gray-accent-light bg-tan bg-opacity-50 dark:bg-opacity-20 divide-dashed rounded lg:py-0 py-5`}
             >
                 {sections.map((section, index) => {
                     const { title, link, items } = section
@@ -63,7 +63,7 @@ export default function SubmenuItem({ item }) {
                                         <li key={index}>
                                             <Link
                                                 disablePrefetch
-                                                className="text-white font-semibold transition-colors hover:text-white p-2 hover:bg-[#6C5085] rounded flex items-center space-x-2 text-[14px]"
+                                                className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent-light dark:hover:bg-opacity-10 rounded flex items-center space-x-2 text-[14px]"
                                                 to={url}
                                             >
                                                 {icon && (

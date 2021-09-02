@@ -5,11 +5,15 @@
             "url": "/product"
         },
         {
+            "title": "Pricing",
+            "url": "/pricing"
+        },
+        {
             "title": "Docs",
             "url": "/docs",
             "sub": {
                 "title": "Docs",
-                "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started.",
+                "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started, or visit the <a class='text-yellow hover:text-yellow font-bold' href='/docs'>Docs overview</a>.",
                 "items": [
                     {
                         "title": "1. Self hosting",
@@ -21,7 +25,7 @@
                             {
                                 "title": "Deploy via",
                                 "link": {
-                                    "title": "View all (13)",
+                                    "title": "",
                                     "url": "/docs/self-host"
                                 },
                                 "items": [
@@ -34,11 +38,6 @@
                                         "icon": "gcs",
                                         "title": "Google Cloud",
                                         "url": "/docs/self-host/deploy/gcp"
-                                    },
-                                    {
-                                        "icon": "docker",
-                                        "title": "Docker",
-                                        "url": "/docs/contribute/developing-locally"
                                     },
                                     {
                                         "icon": "helm chart",
@@ -209,7 +208,7 @@
                                 ]
                             },
                             {
-                                "title": "Apps",
+                                "title": "Features",
                                 "items": [
                                     {
                                         "title": "Feature flags",
@@ -277,16 +276,21 @@
             }
         },
         {
+            "title": "Blog",
+            "url": "/blog"
+        },
+        {
             "title": "Company",
             "url": "/handbook/company/story"
         },
         {
-            "title": "Pricing",
-            "url": "/pricing"
+            "title": "Get started",
+            "classes": "text-white font-bold hover:text-white select-none px-4 py-2 my-3 lg:my-0 rounded-full bg-almost-black dark:bg-white dark:text-almost-black dark:hover:text-almost-black",
+            "url": "/docs/self-host"
         },
         {
-            "title": "Github",
-            "url": "https://github.com/posthog/posthog"
+            "title": "Login",
+            "url": "https://app.posthog.com/login"
         }
     ]
 }

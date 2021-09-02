@@ -17,7 +17,7 @@ export function BlogAuthor({ authorDetails, className }: AuthorDetails): JSX.Ele
                         <img src={image} className="w-10 h-10 rounded-full bg-white block m-auto shadow-2xl" />
                     </div>
                     <div>
-                        <h6 className="mb-0 font-sans normal-case opacity-80 font-bold">{name}</h6>
+                        <h6 className="mb-0 text-white font-sans normal-case opacity-80 font-bold">{name}</h6>
                         <p className="opacity-65 mb-2 text-sm">{role}</p>
                         <a
                             href={link_url}

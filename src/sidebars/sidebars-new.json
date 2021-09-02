@@ -337,5 +337,521 @@
                 }
             ]
         }
+    ],
+    "docs": [
+        {
+            "name": "Docs",
+            "url": "/docs"
+        },
+        {
+            "name": "Self-Host",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/self-host"
+                },
+                {
+                    "name": "Postgres vs ClickHouse",
+                    "url": "/docs/self-host/postgres-vs-clickhouse"
+                },
+                {
+                    "name": "Deploy",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Digital Ocean",
+                            "url": "/docs/self-host/deploy/digital-ocean"
+                        },
+                        {
+                            "name": "Google Cloud Platform",
+                            "url": "/docs/self-host/deploy/gcp"
+                        },
+                        {
+                            "name": "AWS",
+                            "url": "/docs/self-host/deploy/aws"
+                        },
+                        {
+                            "name": "Other",
+                            "url": "/docs/self-host/deploy/other"
+                        },
+                        {
+                            "name": "Chart configuration",
+                            "url": "/docs/self-host/deploy/configuration"
+                        },
+                        {
+                            "name": "Troubleshooting and FAQ",
+                            "url": "/docs/self-host/deploy/troubleshooting"
+                        },
+                        {
+                            "name": "Upgrade Notes",
+                            "url": "/docs/self-host/deploy/upgrade-notes"
+                        },
+                        {
+                            "name": "Hosting Costs",
+                            "url": "/docs/self-host/deploy/hosting-costs"
+                        }
+                    ]
+                },
+                {
+                    "name": "Configure",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Environment Variables",
+                            "url": "/docs/self-host/configure/environment-variables"
+                        },
+                        {
+                            "name": "Securing PostHog",
+                            "url": "/docs/self-host/configure/securing-posthog"
+                        },
+                        {
+                            "name": "Running Behind a Proxy",
+                            "url": "/docs/self-host/configure/running-behind-proxy"
+                        },
+                        {
+                            "name": "Configuring Email",
+                            "url": "/docs/self-host/configure/email"
+                        },
+                        {
+                            "name": "Upgrading PostHog",
+                            "url": "/docs/self-host/configure/upgrading-posthog"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cloud",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/cloud"
+                },
+                {
+                    "name": "Deploying a Reverse Proxy to Posth…",
+                    "url": "/docs/cloud/proxy"
+                }
+            ]
+        },
+        {
+            "name": "Integrate",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/integrate"
+                },
+                {
+                    "name": "Ingest Live Data",
+                    "url": "/docs/integrate/ingest-live-data"
+                },
+                {
+                    "name": "Ingest Historical Data",
+                    "url": "/docs/integrate/ingest-historic-data"
+                },
+                {
+                    "name": "Client Libraries",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Snippet Installation",
+                            "url": "/docs/integrate/client/snippet-installation"
+                        },
+                        {
+                            "name": "Android",
+                            "url": "/docs/integrate/client/android"
+                        },
+                        {
+                            "name": "iOS",
+                            "url": "/docs/integrate/client/ios"
+                        },
+                        {
+                            "name": "JavaScript",
+                            "url": "/docs/integrate/client/js"
+                        },
+                        {
+                            "name": "Flutter",
+                            "url": "/docs/integrate/client/flutter"
+                        },
+                        {
+                            "name": "React Native",
+                            "url": "/docs/integrate/client/react-native"
+                        }
+                    ]
+                },
+                {
+                    "name": "Server Libraries",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Elixir",
+                            "url": "/docs/integrate/server/elixir"
+                        },
+                        {
+                            "name": "Go",
+                            "url": "/docs/integrate/server/go"
+                        },
+                        {
+                            "name": "Node.js",
+                            "url": "/docs/integrate/server/node"
+                        },
+                        {
+                            "name": "PHP",
+                            "url": "/docs/integrate/server/php"
+                        },
+                        {
+                            "name": "Python",
+                            "url": "/docs/integrate/server/python"
+                        },
+                        {
+                            "name": "Ruby",
+                            "url": "/docs/integrate/server/ruby"
+                        }
+                    ]
+                },
+                {
+                    "name": "Third Party",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Docusaurus v2",
+                            "url": "/docs/integrate/third-party/docusaurus"
+                        },
+                        {
+                            "name": "Gatsby",
+                            "url": "/docs/integrate/third-party/gatsby"
+                        },
+                        {
+                            "name": "Google Tag Manager",
+                            "url": "/docs/integrate/third-party/google-tag-manager"
+                        },
+                        {
+                            "name": "Metabase",
+                            "url": "/docs/integrate/third-party/metabase"
+                        },
+                        {
+                            "name": "Next.js",
+                            "url": "/docs/integrate/third-party/next-js"
+                        },
+                        {
+                            "name": "Nuxt.js",
+                            "url": "/docs/integrate/third-party/nuxt-js"
+                        },
+                        {
+                            "name": "Retool",
+                            "url": "/docs/integrate/third-party/retool"
+                        },
+                        {
+                            "name": "RudderStack",
+                            "url": "/docs/integrate/third-party/rudderstack"
+                        },
+                        {
+                            "name": "Segment",
+                            "url": "/docs/integrate/third-party/segment"
+                        },
+                        {
+                            "name": "Sentry",
+                            "url": "/docs/integrate/third-party/sentry"
+                        },
+                        {
+                            "name": "Shopify",
+                            "url": "/docs/integrate/third-party/shopify"
+                        },
+                        {
+                            "name": "WordPress",
+                            "url": "/docs/integrate/third-party/wordpress"
+                        }
+                    ]
+                },
+                {
+                    "name": "Webhooks",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Message Formatting",
+                            "url": "/docs/integrate/webhooks/message-formatting"
+                        },
+                        {
+                            "name": "Microsoft Teams",
+                            "url": "/docs/integrate/webhooks/microsoft-teams"
+                        },
+                        {
+                            "name": "Slack",
+                            "url": "/docs/integrate/webhooks/slack"
+                        },
+                        {
+                            "name": "Discord",
+                            "url": "/docs/integrate/webhooks/discord"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "User Guides",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/user-guides"
+                },
+                {
+                    "name": "Application Settings",
+                    "url": "/docs/user-guides/application-settings"
+                },
+                {
+                    "name": "Actions",
+                    "url": "/docs/user-guides/actions"
+                },
+                {
+                    "name": "Annotations",
+                    "url": "/docs/user-guides/annotations"
+                },
+                {
+                    "name": "Cohorts",
+                    "url": "/docs/user-guides/cohorts"
+                },
+                {
+                    "name": "Dashboards",
+                    "url": "/docs/user-guides/dashboards"
+                },
+                {
+                    "name": "Events",
+                    "url": "/docs/user-guides/events"
+                },
+                {
+                    "name": "Feature Flags",
+                    "url": "/docs/user-guides/feature-flags"
+                },
+                {
+                    "name": "Funnels",
+                    "url": "/docs/user-guides/funnels"
+                },
+                {
+                    "name": "Single sign-on authentication",
+                    "url": "/docs/user-guides/sso"
+                },
+                {
+                    "name": "Organizations",
+                    "url": "/docs/user-guides/organizations"
+                },
+                {
+                    "name": "Projects",
+                    "url": "/docs/user-guides/projects"
+                },
+                {
+                    "name": "Paths",
+                    "url": "/docs/user-guides/paths"
+                },
+                {
+                    "name": "Plugins",
+                    "url": "/docs/user-guides/plugins"
+                },
+                {
+                    "name": "Retention",
+                    "url": "/docs/user-guides/retention"
+                },
+                {
+                    "name": "Sessions",
+                    "url": "/docs/user-guides/sessions"
+                },
+                {
+                    "name": "Session Recording",
+                    "url": "/docs/user-guides/session-recording"
+                },
+                {
+                    "name": "Toolbar",
+                    "url": "/docs/user-guides/toolbar"
+                },
+                {
+                    "name": "Trends",
+                    "url": "/docs/user-guides/trends"
+                },
+                {
+                    "name": "Users / People",
+                    "url": "/docs/user-guides/users"
+                }
+            ]
+        },
+        {
+            "name": "Plugins",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/plugins"
+                },
+                {
+                    "name": "Enabling Plugins",
+                    "url": "/docs/plugins/enabling"
+                },
+                {
+                    "name": "Build Your Own",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/plugins/build"
+                        },
+                        {
+                            "name": "Tutorial",
+                            "url": "/docs/plugins/build/tutorial"
+                        },
+                        {
+                            "name": "TypeScript Types",
+                            "url": "/docs/plugins/build/types"
+                        },
+                        {
+                            "name": "Plugins Developer Reference",
+                            "url": "/docs/plugins/build/reference"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Tutorials",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/tutorials"
+                },
+                {
+                    "name": "How to Safely Roll Out New Features",
+                    "url": "/docs/tutorials/feature-flags"
+                },
+                {
+                    "name": "Visualizing User Behavior - Toolbar",
+                    "url": "/docs/tutorials/toolbar"
+                },
+                {
+                    "name": "Analyzing Your Conversion with Fun…",
+                    "url": "/docs/tutorials/funnels"
+                },
+                {
+                    "name": "Analyzing User Behavior with Cohorts",
+                    "url": "/docs/tutorials/cohorts"
+                },
+                {
+                    "name": "Measuring Retention and Tracking C…",
+                    "url": "/docs/tutorials/retention"
+                },
+                {
+                    "name": "Tracking Single Page Apps",
+                    "url": "/docs/tutorials/spa"
+                },
+                {
+                    "name": "Complete Guide to Event Tracking",
+                    "url": "/docs/tutorials/event-tracking-guide"
+                },
+                {
+                    "name": "Tracking Key B2B Product Metrics",
+                    "url": "/docs/tutorials/b2b"
+                },
+                {
+                    "name": "Sales and Revenue Tracking",
+                    "url": "/docs/tutorials/revenue"
+                },
+                {
+                    "name": "Tracking How Teams Use Your Product",
+                    "url": "/docs/tutorials/tracking-teams"
+                },
+                {
+                    "name": "Running Surveys with No Backend",
+                    "url": "/docs/tutorials/survey"
+                },
+                {
+                    "name": "Deleting Bulk Data",
+                    "url": "/docs/tutorials/deleting-data"
+                }
+            ]
+        },
+        {
+            "name": "API",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/api"
+                },
+                {
+                    "name": "POST-Only Public Endpoints",
+                    "url": "/docs/api/post-only-endpoints"
+                },
+                {
+                    "name": "Elements",
+                    "url": "/docs/api/elements"
+                },
+                {
+                    "name": "Events",
+                    "url": "/docs/api/events"
+                },
+                {
+                    "name": "People",
+                    "url": "/docs/api/people"
+                },
+                {
+                    "name": "Insights",
+                    "url": "/docs/api/insights"
+                },
+                {
+                    "name": "User",
+                    "url": "/docs/api/user"
+                },
+                {
+                    "name": "Feature Flags",
+                    "url": "/docs/api/feature-flags"
+                },
+                {
+                    "name": "Annotations",
+                    "url": "/docs/api/annotations"
+                },
+                {
+                    "name": "Cohorts",
+                    "url": "/docs/api/cohorts"
+                },
+                {
+                    "name": "Data model",
+                    "url": "/docs/data-model"
+                }
+            ]
+        },
+        {
+            "name": "Contribute",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/contribute"
+                },
+                {
+                    "name": "Code of Conduct",
+                    "url": "/docs/contribute/code-of-conduct"
+                },
+                {
+                    "name": "Recognizing Contributions",
+                    "url": "/docs/contribute/recognizing-contributions"
+                },
+                {
+                    "name": "Developing Locally",
+                    "url": "/docs/contribute/developing-locally"
+                },
+                {
+                    "name": "Tech Stack",
+                    "url": "/docs/contribute/stack"
+                },
+                {
+                    "name": "Project Structure",
+                    "url": "/docs/contribute/project-structure"
+                },
+                {
+                    "name": "Updating Documentation",
+                    "url": "/docs/contribute/updating-documentation"
+                }
+            ]
+        }
     ]
 }

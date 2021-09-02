@@ -1,45 +1,5 @@
-@mixin star-background($gradient, $bg-position: center) {
-    background: url(../images/stars.png), $gradient;
-    background-position: $bg-position;
-
-    @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-        background: url(../images/stars@2x.png), $gradient;
-        background-size: 100%;
-    }
-}
-
 .careers-anchor-navbar {
-    @include star-background(linear-gradient(180deg, #070822 0%, #070822 100%), left);
-}
-
-.careers-hero {
-    @include star-background(linear-gradient(180deg, #03061f 0%, #070822 100%));
-}
-
-.careers-why-were-here {
-    @include star-background(linear-gradient(180deg, #070822 0%, #0d0928 100%), right);
-}
-
-.careers-culture {
-    @include star-background(linear-gradient(180deg, #0d0928 0%, #150b30 100%));
-}
-
-.careers-interview-process {
-    @include star-background(linear-gradient(180deg, #150b30 0%, #1c0c36 100%), left);
-}
-
-.careers-benefits {
-    @include star-background(linear-gradient(180deg, #1c0c36 0%, #21103d 100%));
-}
-
-.careers-working-at-posthog {
-    @include star-background(linear-gradient(180deg, #21103d 0%, #241b4b 100%), right);
-}
-
-.careers-open-roles {
-    @include star-background(linear-gradient(180deg, #241b4b 0%, #262354 100%));
 }
 
 .careers-footer {
-    @include star-background(linear-gradient(180deg, #262354 0%, #282b5f 100%), left);
 }

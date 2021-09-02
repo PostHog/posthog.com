@@ -21,7 +21,7 @@ const PluginCardStructure = ({ name, description, imageSrc, isCommunityPlugin }:
             <Card
                 style={{ height: '100%', display: 'flex', marginBottom: 20 }}
                 bodyStyle={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-                className="card-elevated"
+                className="text-center"
             >
                 <Tag
                     color={isCommunityPlugin ? 'green' : 'blue'}
@@ -30,11 +30,9 @@ const PluginCardStructure = ({ name, description, imageSrc, isCommunityPlugin }:
                     {isCommunityPlugin ? 'Community' : 'Core Team'}
                 </Tag>
                 <PluginImage imageSrc={imageSrc} />
-                <div className="center" style={{ marginBottom: 16 }}>
-                    <b>{name}</b>
-                </div>
-                <div style={{ flexGrow: 1, paddingBottom: 16, height: 80 }} className="center">
-                    {description}
+                <div className="flex-grow">
+                    <h5>{name}</h5>
+                    <p className="text-sm">{description}</p>
                 </div>
             </Card>
         </Col>

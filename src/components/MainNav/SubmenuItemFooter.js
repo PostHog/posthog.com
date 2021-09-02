@@ -5,7 +5,7 @@ export default function SubmenuItemFooter({ links }) {
     return (
         <div
             style={{ borderLeft: 0 }}
-            className="flex flex-wrap space-x-10 px-5 pt-5 lg:pb-5 col-span-1 lg:col-span-2 border-t-2"
+            className="flex flex-wrap space-x-10 px-5 pt-5 lg:pb-5 col-span-1 lg:col-span-2 border-t"
         >
             {links.map((link, index) => {
                 return (

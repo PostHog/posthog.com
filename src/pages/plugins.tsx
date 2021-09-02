@@ -33,7 +33,7 @@ export const PluginLibraryPage = () => {
                     <Spacer />
                     <h1 className="center">Plugin Library</h1>
                     <p className="center">
-                        <Link to="/docs/plugins/overview">Learn more about plugins on our dedicated Docs section.</Link>
+                        Learn more about plugins on our dedicated <Link to="/docs/plugins/overview">Docs section</Link>.
                     </p>
                     <Tabs
                         activeKey={!filter ? 'default' : filter}
