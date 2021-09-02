@@ -23,7 +23,12 @@ The PostHog integration with RudderStack gives you access to everything our [JS 
 1. [Integrate a RudderStack source for your events](https://docs.rudderstack.com/how-to-guides/adding-source-and-destination-rudderstack)
 1. Select PostHog as your _destination_ for the selected source from the step above
 1. Add your PostHog token and host details:
-    <br/>![RudderStack Dashboard](../../../images/rs-posthog-config.png)<br/>
+    <br/>
+    
+    ![RudderStack Dashboard](../../../images/rs-posthog-config.png)
+    
+    <br/>
+    
     > 'Team API Key' refers to your PostHog 'Project API Key' (token), that can be found in 'Project Settings'. **Do not use a Personal API Key for this.** 'Your Instance' refers to the address of your PostHog instance, which is `https://app.posthog.com` if you're on PostHog Cloud.
 1. You're all set!
 

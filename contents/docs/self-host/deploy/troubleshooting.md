@@ -35,7 +35,27 @@ First, check that DNS is set up properly:
 nslookup <your-hostname> 1.1.1.1
 ```
 Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if its not correctly set up.
-  
+
+### Kafka crash looping (disk full)
+
+You might see an error similar to this one in the kafka pod
+```
+Error while writing to checkpoint file /bitnami/kafka/data/...
+java.io.IOException: No space left on device
+```
+
+This tells us that the disk is full. The fastest fix here is to increase the Kafka volume size (this can be done by changing `kafka.persistence.size` in your `values.yaml` and running a [`helm upgrade`](docs/self-host/configure/upgrading-posthog#upgrade-instructions). Note: you might want to avoid applying other changes if you haven't upgraded recently).
+
+#### Why did we run into this problem and how to avoid it in the future?
+
+There isn't a way for us to say "if there's less than X% of disk space left, then nuke the oldest data". Instead we have two conditions that restrict, when stuff can be deleted:
+- size (`logRetentionBytes: _22_000_000_000`) for the minimum size of data on disk before allowed deletion.
+- time (`logRetentionHours: 24`) for the minimum age before allowed deletion.
+
+We need to configure these well, but monitoring disk util can help catch this problem before we end up in a crash loop.
+
+See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
+
 ## FAQ
   
 ### How can I increase storage size?

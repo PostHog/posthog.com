@@ -65,7 +65,11 @@ On setting the cohort to 'user has *action*', you will be presented with the fol
 <br />
 
 
-<span class='centered'>![cohort - user action date range selection](../../images/features/cohorts/cohort-time-frame.png)</span>
+<span class='centered'>
+
+![cohort - user action date range selection](../../images/features/cohorts/cohort-time-frame.png)
+
+</span>
 
 <br />
 

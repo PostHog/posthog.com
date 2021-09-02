@@ -12,7 +12,7 @@ import { BlogIntro } from '../BlogIntro'
 
 interface BlogPostLayoutProps {
     pageTitle: string
-    children: any
+    children: React.ReactNode
     featuredImage?: string | null | undefined
     featuredImageType?: string
     blogArticleSlug: string

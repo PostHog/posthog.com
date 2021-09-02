@@ -12,7 +12,7 @@ const ButtonLink = ({
 }: {
     section: string
     currentSection: string
-    children: any
+    children: React.ReactNode
 }) => {
     const baseClasses =
         'leading-loose border-2 dark:border-white rounded-lg px-2 mx-1 my-1 text-sm transition-colors select-none'

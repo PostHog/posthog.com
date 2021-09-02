@@ -12,7 +12,7 @@ import SliderNav from '../../SliderNav'
 interface InterviewStepProps {
     image: string
     title: string
-    children: any
+    children: React.ReactNode
     titleColor: string
     className?: string
 }

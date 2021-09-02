@@ -42,7 +42,11 @@ The instructions below detail how to use the WordPress built-in functionality fo
 3. Go to 'Appearance' -> 'Theme Editor'.
 4. Select your theme in the editor drop-down menu to the right and click the `header.php` file in the file column to the right (see image below).
 
-    <br />![Wordpress Theme Editor](../../../images/tutorials/wordpress/wordpress-header-edit.png)<br />
+    <br />
+    
+    ![Wordpress Theme Editor](../../../images/tutorials/wordpress/wordpress-header-edit.png)
+    
+    <br />
 5. You should now see the contents of the `header.php` template file in the code editing view. It is recommended that you copy all the text/code and save it somewhere as a back-up.
 6. Find the closing `</head>` in the code editor and paste the PostHog snippet before it (see above image).
 7. Click the 'Update File' button at the bottom. You're good to go - PostHog should now be working on your WordPress website!

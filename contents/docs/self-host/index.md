@@ -17,7 +17,7 @@ Lucky for you, our platform is incredibly easy to use and affordable to host wit
 - [DigitalOcean](/docs/self-host/deploy/digital-ocean)
 - [Google Cloud Platform](/docs/self-host/deploy/gcp)
 - [AWS](/docs/self-host/deploy/aws)
-- [Using Helm chart](https://github.com/PostHog/charts-clickhouse)
+- [Using Helm chart](/docs/self-host/deploy/other)
 
 ## Configure
 
