@@ -12,7 +12,10 @@ export default function ClimatePledge() {
                     We’re committed to making MeetHogs as carbon neutral as possible. We use Project Wren to offset the
                     carbon footprint for all speakers and don’t use any single-use plastics in our merch. For popular
                     events we sometimes charge a small attendance fee, which we use to{' '}
-                    <Link to="https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637">
+                    <Link
+                        to="https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637"
+                        className="text-white"
+                    >
                         sponsor incredibly cute hedgehogs
                     </Link>
                     .

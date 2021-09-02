@@ -25,7 +25,7 @@ export default function Meetups() {
         <section className="flex flex-col justify-center items-center max-w-screen-2xl my-8 md:my-16">
             <p>We’re constantly planning new HostHogs, so check out often to find out about new events near you.</p>
             <div className="w-full border-t border-dashed mt-8">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3">
                     <div className="border-r border-dashed pt-8">
                         <h3 className="text-blue text-center">London</h3>
                         <div className="text-center">Logo</div>
