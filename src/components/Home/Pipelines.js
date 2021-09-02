@@ -69,7 +69,9 @@ export default function Pipelines() {
                     </div>
                     <div>
                         <h4 className="text-2xl m-0 text-red">In-product usage</h4>
-                        <p className="text-base font-semibold">JavaScript, server-side and mobile SDKs</p>
+                        <p className="text-base font-semibold">
+                            Libraries for JavaScript, server-side and mobile SDKs, built and maintained by PostHog
+                        </p>
                         <div className="flex space-x-2 justify-center items-center flex-wrap">
                             <Chip icon="pageviews" title="Pageviews" />
                             <Chip icon="clicks" title="Clicks" />
