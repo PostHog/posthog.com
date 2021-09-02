@@ -42,7 +42,7 @@ export default function Hero() {
                         placeholder="none"
                         width={357}
                         imgClassName="h-auto"
-                        className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-90px] sm:mr-[-75px]"
+                        className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-60px] md:mr-[-75px]"
                         objectFit="contain"
                         src="./images/hero-right.png"
                     />
