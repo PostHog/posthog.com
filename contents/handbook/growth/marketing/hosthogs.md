@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-HostHogs are our global series of meetups. The mission of HostHogs is to support and grow the PostHog community through targeted in-person events that offer an opportunity for like-minded members and potential members of the community to meet and benefit from deeper conversations than are usually possible in GitHub or Slack. 
+HostHogs are our global series of meetups. The mission of HostHogs is to create an opportunity for the PostHog community to meet like-minded members and benefit from deeper conversations with our team and the community - and to influence our product roadmap with their ideas!
 
 Specific product metrics that this supports (in order):
 1. Retention
