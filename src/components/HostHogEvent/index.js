@@ -7,6 +7,7 @@ import Hero from './Hero'
 import ClimatePledge from '../HostHogHub/ClimatePledge'
 import CodeOfConduct from '../HostHogHub/CodeOfConduct'
 import Agenda from './Agenda'
+import RegisterInterest from './RegisterInterest'
 
 const HostHog = () => {
     useValues(posthogAnalyticsLogic) // mount this logic
@@ -17,6 +18,7 @@ const HostHog = () => {
             <main>
                 <Hero />
                 <Agenda />
+                <RegisterInterest />
                 <ClimatePledge />
                 <CodeOfConduct />
             </main>
