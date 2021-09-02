@@ -8,12 +8,12 @@ export default function CTA() {
             <div className="bg-blue w-full rounded-lg px-4 py-28">
                 <h2 className={heading('lg', 'white')}>Give it a try</h2>
                 <h3 className={heading('sm', 'white')}>Join 5,500 companies already using PostHog.</h3>
-                <div className="mt-12 flex flex-col space-y-4 items-center justify-center">
+                <div className="mt-12 flex flex-col space-y-2 md:space-y-3 items-center justify-center">
                     <CallToAction
                         type="custom"
                         width="56"
                         className="bg-white text-blue hover:text-blue border-2 border-white"
-                        to="/sign-up"
+                        to="/docs/self-host"
                     >
                         Get started
                     </CallToAction>

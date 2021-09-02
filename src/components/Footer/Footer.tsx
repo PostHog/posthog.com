@@ -79,7 +79,7 @@ export function Footer(): JSX.Element {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto my-9 lg:my-0">
                 <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 py-4 lg:py-7">
-                    <Accordion title={'Product analytics'} titleClasses={linksHeadingLg}>
+                    <Accordion title={'Product analytics suite'} titleClasses={linksHeadingLg}>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                             <div>
                                 <h4 className={linksHeadingMd}>
@@ -92,9 +92,9 @@ export function Footer(): JSX.Element {
                                 </h4>
                                 <h5 className={linksHeadingSm}>Analytics</h5>
                                 <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Trends" url="/product-features/trends" />
-                                    <FooterMenuItem title="Funnels" url="/product-features/funnels" />
-                                    <FooterMenuItem title="Retention" url="/product-features/retention" />
+                                    <FooterMenuItem title="Trends" url="/product/#analytics" />
+                                    <FooterMenuItem title="Funnels" url="/product/#analytics" />
+                                    <FooterMenuItem title="Retention" url="/product/#analytics" />
                                 </ul>
                             </div>
                             <div>

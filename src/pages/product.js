@@ -26,7 +26,7 @@ function ProductPage() {
                         src="../components/ProductFeature/images/feature-dashboard.png"
                     />
                     <h1 className="mb-4">Open source product analytics</h1>
-                    <h5 className="text-primary text-opacity-70">
+                    <h5 className="text-primary text-opacity-70 font-semibold">
                         PostHog keeps you in control of customer data. Works with your event pipelines and data
                         warehouse.
                     </h5>

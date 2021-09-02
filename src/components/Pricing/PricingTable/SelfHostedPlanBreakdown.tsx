@@ -52,7 +52,7 @@ export const SelfHostedPlanBreakdown = () => {
                     </div>
 
                     <div>
-                        <CallToAction icon="none" href="/docs/deployment" className="my-4">
+                        <CallToAction icon="none" href="/docs/deployment" className="my-4 !w-full">
                             Deploy now
                         </CallToAction>
                     </div>
@@ -113,7 +113,7 @@ export const SelfHostedPlanBreakdown = () => {
                                 <CallToAction
                                     icon="none"
                                     href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
-                                    className="my-4"
+                                    className="my-4 !w-full"
                                     type="secondary"
                                 >
                                     Contact us

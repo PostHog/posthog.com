@@ -26,8 +26,8 @@ export default function Hero() {
                     <h2 className={heading('sm', 'primary', 'my-6', 'max-w-xl', 'mx-auto')}>
                         With our open source platform, customer data never has to leave your infrastructure
                     </h2>
-                    <div className="flex flex-col justify-center items-center space-y-2 md:space-y-4">
-                        <CallToAction type="primary" width="56" to="/sign-up">
+                    <div className="flex flex-col justify-center items-center space-y-2 md:space-y-3">
+                        <CallToAction type="primary" width="56" to="/docs/self-host/">
                             Get started
                         </CallToAction>
                         <CallToAction type="outline" width="56" to="/schedule-demo">

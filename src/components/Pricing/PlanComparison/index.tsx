@@ -506,9 +506,14 @@ export const PlanComparison = ({ className = '' }) => {
                     </table>
                     {!expanded ? (
                         <div className="absolute bottom-4 left-0 w-full text-center">
-                            <button onClick={(_) => setExpanded(true)} className="button-secondary">
-                                <span>See full comparison</span>
-                            </button>
+                            <CallToAction
+                                type="primary"
+                                width="56"
+                                to="/docs/self-host/"
+                                onClick={(_) => setExpanded(true)}
+                            >
+                                See full comparison
+                            </CallToAction>
                         </div>
                     ) : null}
                 </div>
