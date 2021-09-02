@@ -6,6 +6,7 @@ import Layout from '../Layout'
 import Hero from './Hero'
 import ClimatePledge from '../HostHogHub/ClimatePledge'
 import CodeOfConduct from '../HostHogHub/CodeOfConduct'
+import Agenda from './Agenda'
 
 const HostHog = () => {
     useValues(posthogAnalyticsLogic) // mount this logic
@@ -15,6 +16,7 @@ const HostHog = () => {
             <SEO title="HostHog London 2021" description="" />
             <main>
                 <Hero />
+                <Agenda />
                 <ClimatePledge />
                 <CodeOfConduct />
             </main>
