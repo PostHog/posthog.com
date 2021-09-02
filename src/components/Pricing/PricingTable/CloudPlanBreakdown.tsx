@@ -14,8 +14,8 @@ export const CloudPlanBreakdown = () => {
     return (
         <>
             <div className="flex justify-center mb-20">
-                <div className="inline-flex flex-col md:flex-row items-center text-almost-black backdrop-filter backdrop-blur-sm">
-                    <div className="flex-0 border border-white border-opacity-10 rounded-xl p-8 bg-almost-black text-white">
+                <div className="inline-flex flex-col md:flex-row items-center text-almost-black">
+                    <div className="flex-0 w-full border border-white border-opacity-10 rounded-xl p-8 bg-almost-black text-white min-w-[320px]">
                         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 24" width="42" height="24">
                             <path
                                 d="M0 17.143L6.867 24H0v-6.857zm0-1.714L8.583 24h6.867L0 8.572v6.857zm0-8.571L17.166 24h6.866L0 0v6.858zm8.583 0L25.75 24v-6.857L8.583.001v6.857zM17.166 0v6.857l8.583 8.57V8.573L17.166 0z"
@@ -78,7 +78,7 @@ export const CloudPlanBreakdown = () => {
                             {eventNumber === 10000 ? 'Self-serve. No credit card required.' : 'Completely self-serve'}
                         </div>
                     </div>
-                    <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg px-4 md:px-0">
+                    <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg px-4 md:px-0 min-w-[320px]">
                         <h3 className="mb-1 text-lg">Calculate your price</h3>
                         <p className="text-sm text-almost-black text-opacity-60">
                             Pay based on the events you capture each month.

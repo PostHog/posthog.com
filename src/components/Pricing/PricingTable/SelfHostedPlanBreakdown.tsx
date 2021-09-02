@@ -13,7 +13,7 @@ export const SelfHostedPlanBreakdown = () => {
 
     return (
         <div className="grid grid-flow-row auto-rows-max mdlg:grid-flow-col mdlg:auto-cols-max justify-center items-start mb-20">
-            <div className="flex flex-col self-stretch border-2 border-gray rounded-xl p-8 mx-6 mdlg:ml-0">
+            <div className="flex flex-col border border-gray rounded-xl p-8 mb-8 mdlg:ml-0 mdlg:mr-8 min-w-[320px]">
                 <h3 className="text-lg m-0">Open Source</h3>
                 <p className="opacity-50 text-sm">Great for startups</p>
                 <ul className="list-none pl-0 mb-6">
@@ -64,10 +64,10 @@ export const SelfHostedPlanBreakdown = () => {
                 </div>
             </div>
 
-            <div className="rounded-xl inline-flex flex-col md:flex-row items-center">
+            <div className="rounded-xl inline-flex flex-col md:flex-row items-center md:items-start">
                 <div className="flex justify-center">
-                    <div className="inline-flex flex-col xl:flex-row items-center text-almost-black">
-                        <div className="flex-0 border border-white border-opacity-10 rounded-xl p-8 bg-almost-black">
+                    <div className="inline-flex flex-col xl:flex-row items-center text-primary">
+                        <div className="flex-0 border border-white border-opacity-10 rounded-xl p-8 md:mr-8 bg-primary w-full mdlg:min-w-[350px]">
                             <h3 className="text-lg m-0 text-white">Scale</h3>
                             <p className="opacity-50 text-sm text-white">For large userbases or event volume</p>
                             <ul className="list-none pl-0 mb-6 ">
@@ -126,7 +126,7 @@ export const SelfHostedPlanBreakdown = () => {
                                 No setup costs
                             </div>
                         </div>
-                        <div className="flex-0 mt-8 xl:mt-0 md:ml-8 max-w-lg">
+                        <div className="flex-0 mt-8 xl:mt-0 max-w-lg min-w-[350px]">
                             <h3 className="mb-1 text-lg">Calculate your price</h3>
                             <p className="text-sm text-almost-black text-opacity-60">
                                 Pay based on the events you capture each month.
@@ -179,7 +179,7 @@ export const SelfHostedPlanBreakdown = () => {
                                 </div>
                             </div>
 
-                            <hr className="border-gray-accent-light bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2" />
+                            <hr className="border-gray-accent-light bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2 border-t" />
 
                             <div className="flex justify-between items-baseline">
                                 <div className="text-base mb-0 text-base font-bold">Estimated price</div>
