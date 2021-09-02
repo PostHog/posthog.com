@@ -35,7 +35,7 @@ export default function Hero() {
                         </CallToAction>
                     </div>
                 </div>
-                <div className="absolute w-full h-full flex justify-end bottom-[-6.8rem] sm:-bottom-24 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
+                <div className="absolute h-full flex justify-end bottom-[-6.8rem] sm:-bottom-24 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
                     <StaticImage
                         objectPosition="bottom"
                         loading="eager"
