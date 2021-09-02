@@ -13,7 +13,7 @@ const HostHog = () => {
 
     return (
         <Layout>
-            <SEO title="HostHog - PostHog Meetups" description="" />
+            <SEO title="HostHog - PostHog HostHogs" description="" />
             <main>
                 <Hero />
                 <Meetups />

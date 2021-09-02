@@ -33,9 +33,9 @@ export default function Meetups() {
                             Our London HostHog in March will be hosted by our VP of Product, Marcus Hyett. Hear how
                             companies such as Mention Me use PostHog to drive experimentation.
                         </div>
-                        <MeetupDate date="Friday 22 Dec 2022" />
+                        <MeetupDate date="Friday 22 Dec 2021" />
                         <MeetupVenue venue="The Bell Centre" />
-                        <FindOutMore link="/hosthog/london-2022" />
+                        <FindOutMore link="/hosthogs/london-2021" />
                     </div>
                     <div className="pt-8">
                         <h3 className="text-orange text-center">San Franciso</h3>
