@@ -4,7 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-import 'prismjs/themes/prism-okaidia.css'
 import { wrapElement, initKea } from './kea'
 import './src/styles/global.css'
 
