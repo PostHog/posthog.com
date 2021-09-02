@@ -106,7 +106,7 @@ However, it is still important to maintain focus when opening issues by defining
 
 ### Product definitions & decisions
 
-It's best practice to get feedback from other members of the team when making a product decision or defining a complex problem that needs to be solved. This may start with an Issue, but it's essential that these do not sprial out of control - as soon as an issue has more than 5 comments, it becomes difficult for someone to "catch up". To avoid this problem, when we're documenting a decision or a definition for a project or project, we should start with a pull request.
+It's best practice to get feedback from other members of the team when making a product decision or defining a complex problem that needs to be solved. This may start with an Issue, but it's essential that these do not spiral out of control - as soon as an issue has more than 5 comments, it becomes difficult for someone to "catch up". To avoid this problem, when we're documenting a decision or a definition for a project or project, we should start with a Pull Request.
 
 You should start by adding a markdown file into to a public repo (e.g. posthog/meta) and adding people you need feedback from as a reviewer. On the rare occasion that this cannot be public, create the PR in the product-internal repo.
 
