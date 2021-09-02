@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-HostHogs are our global series of meetups. The mission of HostHogs is to support and grow the PostHog community through targeted in-person events that offer an opportunity for like-minded members and potential members of the community to meet and benefit from deeper conversations than are usually possible in our existing GitHub and Slack communities. 
+HostHogs are our global series of meetups. The mission of HostHogs is to support and grow the PostHog community through targeted in-person events that offer an opportunity for like-minded members and potential members of the community to meet and benefit from deeper conversations than are usually possible in GitHub or Slack. 
 
 Specific product metrics that this supports (in order):
 1. Retention
@@ -34,7 +34,7 @@ Each meetup is ~3 hours long and follows the same format:
 2. Guest talk from a member of the community
 3. Free time for attendees to chat and meet the PostHog team
 
-We're aiming for 20-40 guests, with 5 members of the PostHog team also joining. 
+We're aiming for 20-40 guests, with around 5 members of the PostHog team also attending. 
 
 ## Deliverables and approximate budget
 
