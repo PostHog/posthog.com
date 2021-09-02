@@ -20,6 +20,14 @@ const FindOutMore = ({ link }) => {
     )
 }
 
+const ComingSoon = () => {
+    return (
+        <div className="text-center border-t border-dashed py-8">
+            <p>More information coming soon...</p>
+        </div>
+    )
+}
+
 export default function Meetups() {
     return (
         <section className="flex flex-col justify-center items-center max-w-screen-2xl my-8 md:my-16">
@@ -46,7 +54,7 @@ export default function Meetups() {
                         </div>
                         <MeetupDate date="Friday 18 Mar 2022" />
                         <MeetupVenue venue="Lardon Hotel" />
-                        <FindOutMore link="#" />
+                        <ComingSoon />
                     </div>
                     <div className="border-l border-dashed pt-8">
                         <h3 className="text-yellow text-center">Berlin</h3>
@@ -57,7 +65,7 @@ export default function Meetups() {
                         </div>
                         <MeetupDate date="Friday 14 Jun 2022" />
                         <MeetupVenue venue="Radison Blue Hotel" />
-                        <FindOutMore link="#" />
+                        <ComingSoon />
                     </div>
                 </div>
             </div>
