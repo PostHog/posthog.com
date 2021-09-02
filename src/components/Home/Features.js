@@ -112,28 +112,28 @@ export default function Features() {
             <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
                     <SliderItem
-                        image={<StaticImage {...sliderImageProps} src="../../images/funnels-slide.jpg" />}
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-funnels.png" />}
                         description="Identify dropoff and prioritize product changes with"
                         icon="funnels"
                         feature="Funnels"
                     />
                     <SliderItem
                         width={890}
-                        image={<StaticImage {...sliderImageProps} src="../../images/trends-slide.jpg" />}
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-trends.jpg" />}
                         description="See changes in product usage with"
                         icon="trends"
                         feature="Trends"
                     />
                     <SliderItem
                         width={890}
-                        image={<StaticImage {...sliderImageProps} src="../../images/session-recordings-slide.jpg" />}
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-session-recordings.jpg" />}
                         description="Understand why with"
                         icon="session-recordings-with-bg"
                         feature="Session recordings"
                     />
                     <SliderItem
                         width={890}
-                        image={<StaticImage {...sliderImageProps} src="../../images/feature-flags-slide.jpg" />}
+                        image={<StaticImage {...sliderImageProps} src="./images/slide-feature-flags.jpg" />}
                         description="Roll out changes safely with"
                         icon="feature-flags-with-bg"
                         feature="Feature flags"
