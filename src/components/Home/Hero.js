@@ -7,7 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const Feature = ({ title, icon }) => {
     return (
-        <li className="flex px-6 md:px-2 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-start md:justify-center">
+        <li className="flex px-6 md:px-6 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-start md:justify-center">
             <Icon className="w-6 h-6 mr-4 md:mr-0" name={icon} />
             <span className="lg:text-[16px] leading-tight">{title}</span>
         </li>
@@ -35,17 +35,7 @@ export default function Hero() {
                         </CallToAction>
                     </div>
                 </div>
-                <div className="absolute w-full h-full flex justify-between bottom-[-6.8rem] sm:-bottom-11 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
-                    <StaticImage
-                        objectPosition="bottom"
-                        loading="eager"
-                        placeholder="none"
-                        width={283}
-                        imgClassName="h-auto"
-                        className="h-full max-w-[150px] md:max-w-[235px] xl:max-w-none ml-[-44px] sm:ml-4"
-                        objectFit="contain"
-                        src="./images/hero-left.png"
-                    />
+                <div className="absolute w-full h-full flex justify-end bottom-[-6.8rem] sm:-bottom-24 left-0 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
                     <StaticImage
                         objectPosition="bottom"
                         loading="eager"
