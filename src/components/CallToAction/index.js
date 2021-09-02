@@ -21,7 +21,9 @@ const secondary = cntl`
 `
 
 const outline = cntl`
-    bg-transparent
+    bg-tan
+    bg-opacity-75
+    dark:bg-primary
     text-primary
     text-opacity-80
     hover:text-opacity-100

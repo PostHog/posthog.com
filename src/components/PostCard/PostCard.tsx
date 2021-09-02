@@ -67,7 +67,7 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                 className="featured-post-img text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100"
             >
                 <div
-                    className="w-full py-4 mx-auto rounded-t md:rounded-b shadow-lg overflow-hidden relative"
+                    className="w-full py-4 mx-auto rounded-t md:rounded-lg shadow-lg overflow-hidden relative"
                     style={{
                         backgroundImage: `url(${post.frontmatter.featuredImage.publicURL})`,
                         backgroundSize: 'cover',
