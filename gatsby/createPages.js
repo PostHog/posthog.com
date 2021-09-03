@@ -41,7 +41,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                     }
                 }
             }
-            sidebars: file(absolutePath: { regex: "//sidebars/sidebars-new.json$/" }) {
+            sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
                 childSidebarsJson {
                     handbook {
                         children {
