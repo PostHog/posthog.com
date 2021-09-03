@@ -4,9 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-This tutorial will help you send the right events into PostHog to get a deep understanding of 
-
-Getting the taxonomy right for Acquisition will help your product and growth teams understand very deeply how to find more users.
+This tutorial will help you send the _right_ events into PostHog so your product and growth teams can answer the most important questions about user acquisition.
 
 # Pre-Requisites
 
@@ -17,16 +15,22 @@ To follow this tutorial along, you need to:
 
 # Taxonomy
 
-- User acqusition
-  - Users - traffic
-    - Users - traffic - by utm_source
-    - Users - traffic - by utm_medium
-    - Users - traffic - by utm_campaign
-    - Users - traffic - by utm_content
-    - Users - traffic - by utm_term
-    - Users - traffic - by initial referring domain
-  - Users - sign ups - conversion rate
-  - Optional: Users - sign ups - non-funnel
+This is the set of dashboard items that will help your team get a quick overview of performance, with the ability to deep dive to diagnose fluctuations.
+
+This list neither exhaustive nor universally applicable, but should be considered a rough framework for how to structure your dashboards and the Insights or Funnels stored in each for Acquistion.
+
+You need to take this, then apply the concepts to your product to figure out if you're sending the right events to produce these visualizations.
+
+- User acqusition (this should be placed alongside Activation, Retention, Referral and Revenue - tutorials for those to come another time)
+  - [Users - traffic](#users--traffic)
+    - [Users - traffic - by utm_source](#users--traffic--by-utmsource)
+    - [Users - traffic - by utm_medium](#users--traffic--by-utmmedium)
+    - [Users - traffic - by utm_campaign]((#users--traffic--by-utmcampaign))
+    - [Users - traffic - by utm_content]((#users--traffic--by-utmcontent))
+    - [Users - traffic - by utm_term](#users--traffic--by-utmterm)
+    - [Users - traffic - by initial referring domain](#users--traffic--by-initial-referring-domain)
+  - [Users - sign ups - conversion rate](#users--sign-ups--conversion-rate)
+  - Optional: [Users - sign ups - non-funnel](#users--signups--nonfunnel)
  
 ## Taxonomy definitions
 
@@ -76,7 +80,7 @@ You won't always have UTM tags for inbound traffic, for example - imagine a blog
 
 Seeing traffic by initial referring domain helps you understand how these link sources that you don't control are performing.
 
-### Non funnel users
+### Users - signups - non-funnel
 
 You may be signing up users outside of your funnel. Typical examples of when this happens:
 
