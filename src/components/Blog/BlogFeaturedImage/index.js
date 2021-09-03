@@ -16,22 +16,34 @@ export function FeaturedImageStandard({ pageTitle, featuredImage, blogDate, auth
 
 export function FeaturedImageFull({ pageTitle, featuredImage, blogDate, authorDetails }) {
     return (
-        <div className="w-full h-full relative flex items-center justify-center md:pt-1/2 blog-image">
-            <img className="h-full w-full absolute object-cover top-0" src={featuredImage} />
+        <div className="md:mx-8 md:rounded-lg md:overflow-hidden">
+            <div
+                className="w-full h-full relative flex items-center justify-center md:pt-1/2 blog-image
+            before:h-full
+            before:left-0
+            before:right-0
+            before:top-0
+            before:z-[1]
+            before:content-['']
+            before:absolute
+            "
+            >
+                <img className="h-full w-full absolute object-cover top-0 shadow-lg" src={featuredImage} />
 
-            <div className="md:absolute p-8 top-0 w-full left-0 bottom-0 leading-tight z-10 flex justify-center items-center flex-col ">
-                <time className="opacity-50 text-base w-full max-w-xl mb-2 text-white">{blogDate}</time>
-                <Structure.SectionHeader
-                    titleTag="h1"
-                    title={pageTitle}
-                    titleClassName="font-sans normal-case leading-tight w-full max-w-xl my-0 text-white text-2xl md:text-4xl"
-                />
+                <div className="md:absolute p-8 top-0 w-full left-0 bottom-0 leading-tight z-10 flex justify-center items-center flex-col">
+                    <time className="opacity-50 text-base w-full max-w-xl mb-2 text-white">{blogDate}</time>
+                    <Structure.SectionHeader
+                        titleTag="h1"
+                        title={pageTitle}
+                        titleClassName="font-sans normal-case leading-tight w-full max-w-xl my-0 text-white text-2xl md:text-4xl"
+                    />
 
-                {authorDetails?.handle && (
-                    <div className="w-full max-w-xl mt-2 md:mt-6">
-                        <BlogAuthor className="flex space-x-4 text-white" authorDetails={authorDetails} />
-                    </div>
-                )}
+                    {authorDetails?.handle && (
+                        <div className="w-full max-w-xl mt-2 md:mt-6">
+                            <BlogAuthor className="flex space-x-4 text-white" authorDetails={authorDetails} />
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )

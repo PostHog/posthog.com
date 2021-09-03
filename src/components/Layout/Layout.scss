@@ -669,13 +669,6 @@ header {
 .blog-image {
     &:before {
         background: linear-gradient(rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.25) 100%);
-        content: '';
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 1;
     }
 }
 
