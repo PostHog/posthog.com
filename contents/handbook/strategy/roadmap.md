@@ -18,7 +18,7 @@ Our roadmap for the second half of 2021 will do three things:
 3. Easy to deploy, maintain, and extend
 4. Experimentation
 
-# 1. Diagnosing Causes
+# 1. Diagnosing causes
 
 We've already shipped an incredibly powerful funnels product this year. However, as soon as you can see people dropping off in your funnel all you want to know is "why?". 
 
