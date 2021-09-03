@@ -314,6 +314,10 @@ h6 {
     font-variation-settings: 'wght' 800; // override ant
     letter-spacing: -0.02em;
     text-rendering: optimizeLegibility;
+
+    a {
+        font-variation-settings: 'wght' 800; // override ant
+    }
 }
 
 h1 {

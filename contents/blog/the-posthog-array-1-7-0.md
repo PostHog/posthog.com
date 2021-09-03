@@ -28,7 +28,7 @@ As always, calls are non-blocking and fast with this library. It batches request
 
 We benefited from many discounts as a startup ourselves. Now it's time for us to do the same.
 
-The details are [available here](/startups). We'll provide a more generous free hosting tier (up to 20 million events per month) or a supported self deployment. You must have raised less than \$5M and you have to be under 3 years old.
+The details are [available here](/startups). We'll provide a more generous free hosting tier (up to 20 million events per month) or a supported self deployment. You must have raised less than $5M and you have to be under 3 years old.
 
 Tell your friends, or apply yourself.
 

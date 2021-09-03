@@ -12,7 +12,7 @@ Diversity refers to the traits and characteristics that make people unique. Whil
 
 Inclusion refers to the behaviours and social norms that make people feel welcome. This includes everyone being treated fairly and with respect, and ensuring that everyone has equal access to opportunities and being able to contribute fully to the company’s success.  
 
-We are aware that Diversity & Inclusion  efforts are a lifelong work and that we will never have it all figured out and ‘done’. This means we will have to constantly learn and develop. This also means we will make mistakes - the important thing is that we learn from them. At PostHog, everyone is committed to building a culture of diversity, inclusivity and belonging.
+We are aware that diversity & inclusion  efforts are a lifelong work and that we will never have it all figured out and ‘done’. This means we will have to constantly learn and develop. This also means we will make mistakes - the important thing is that we learn from them. At PostHog, everyone is committed to building a culture of diversity, inclusivity and belonging.
 
 
 ## How diversity helps us

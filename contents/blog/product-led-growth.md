@@ -141,7 +141,7 @@ Facebook and Slack are great examples of this. 
 Facebook, in fact, actually grew fast early on, while following a primarily PLG approach. This goes on to show that it is possible
 to grow fast despite following a Product-led Growth approach, or, perhaps even because of it. When you're an industry disruptor, your product speaks for itself, since it is something new, rather than an improvement on something that already exists. As such, your product can potentially drive your growth even if you don't explicitly follow a PLG strategy.
 
-Tesla is another example of a company that lets its disruptive product do the talking. They reportedly spend a [whopping 0\$ on advertising](https://www.forbes.com/sites/johnkoetsier/2019/05/06/tesla-spends-zero-on-ads-heres-where-bmw-toyota-ford-and-porsche-spend-digital-ad-dollars/#4a574ec911d4), yet have a brand that is known worldwide, and a [stock price that seems to just keep on rising](https://finance.yahoo.com/quote/TSLA/). 
+Tesla is another example of a company that lets its disruptive product do the talking. They reportedly spend a [whopping 0$ on advertising](https://www.forbes.com/sites/johnkoetsier/2019/05/06/tesla-spends-zero-on-ads-heres-where-bmw-toyota-ford-and-porsche-spend-digital-ad-dollars/#4a574ec911d4), yet have a brand that is known worldwide, and a [stock price that seems to just keep on rising](https://finance.yahoo.com/quote/TSLA/). 
 
 ### Revenue 
 Since the initial focus is on building a product rather than selling it, you will likely make less money in the short-run.

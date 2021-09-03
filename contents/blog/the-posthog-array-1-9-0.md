@@ -10,7 +10,7 @@ featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
 
-First, learn [how PostHog raised \$3M for our open source project](/blog/raising-3m-for-os). We could not have done it without this community - thank you for all your issues, feedback, usage and support!
+First, learn [how PostHog raised $3M for our open source project](/blog/raising-3m-for-os). We could not have done it without this community - thank you for all your issues, feedback, usage and support!
 
 So, what have we been doing with the money?
 
@@ -92,7 +92,7 @@ This is especially useful for doing a/b testing. Make sure you upgrade posthog-j
 * Trends page [UX improvement](https://github.com/PostHog/posthog/pull/919)
 * [Improved filtering](https://github.com/PostHog/posthog/pull/986) on elements
 * We fixed [a race condition](https://github.com/PostHog/posthog/pull/973/commits/953af2326dff94e8ae1d75cd6ea0fc2c64567857)
-* [We don't rely](https://github.com/PostHog/posthog/pull/949) on \$ to separate PostHog's events
+* [We don't rely](https://github.com/PostHog/posthog/pull/949) on $ to separate PostHog's events
 * We [removed the redundant math selector](https://github.com/PostHog/posthog/pull/950) on funnels - it didn't do anything!
 * [Django upgraded to 3.0.7](https://github.com/PostHog/posthog/pull/932)
 * We [made HTTPS work locally](https://github.com/PostHog/posthog/pull/910) - we had lots of community issues raised, so that should make it easier to get started with!
@@ -111,12 +111,12 @@ We had a lot of fun this week thinking about how the PostHog brand looks and fee
 
 From our own blog:
 
-* [How we raised \$3M for an open source project](/blog/raising-3m-for-os) - we hope this helps other open source projects.
+* [How we raised $3M for an open source project](/blog/raising-3m-for-os) - we hope this helps other open source projects.
 * [Super fast testing with Cypress and GitHub actions](/blog/cypress-end-to-end-tests) - an example of the focus we have on investing in dev tooling.
 
 Other cool stuff from around the web:
 
-* [Funding for moonshots](https://apolloprojects.com/) - get your own \$3M.
+* [Funding for moonshots](https://apolloprojects.com/) - get your own $3M.
 * [Strandbeest](https://www.strandbeest.com/) - wooden, walking sculptures… they're pretty weird.
 
 ## PostHog news

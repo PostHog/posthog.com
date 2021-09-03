@@ -19,7 +19,7 @@ Today, PostHog enables software teams to understand user behavior – auto-captu
 
 James Hawkins, co-founder and CEO, said: “Our goal is to increase the number of successful products in the world. That starts with empowering engineers to improve a business’ metrics and consolidating the disparate set of tools out there today to understand user behavior. We also now offer PostHog Enterprise, which is a more scalable version of our platform, designed to support tens of thousands to tens of millions of users.”
 
-PostHog raised an initial \$3M seed round in March 2020, as COVID-19 caused many parts of the U.S. to go into lockdown. Unimpeded by the shift to remote work, the company then closed a $9M Series A from GV and Y Combinator’s Continuity Fund in July. The latest round, led by GV, has enabled PostHog to further build the team, expand the breadth of use cases, and to launch a scalable enterprise version.
+PostHog raised an initial $3M seed round in March 2020, as COVID-19 caused many parts of the U.S. to go into lockdown. Unimpeded by the shift to remote work, the company then closed a $9M Series A from GV and Y Combinator’s Continuity Fund in July. The latest round, led by GV, has enabled PostHog to further build the team, expand the breadth of use cases, and to launch a scalable enterprise version.
 
 Tyson Clark, General Partner at GV said: “PostHog’s approach to open source product analytics for developers addresses a large market opportunity in product analytics. PostHog has seen strong early traction from the developer community, and we continue to be impressed with the execution and vision of the co-founding team.” 
 

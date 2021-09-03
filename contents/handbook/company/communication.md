@@ -12,9 +12,9 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 
 ## Our communication values
 
-1. **Assume Positive Intent.** Always coming from a position of positivity and grace.
-1. **Form An Opinion.** We live in different locations and often have very different perspectives. We want to know your thoughts, opinions, and feelings on things.
-1. **Feedback is Essential.** Help everyone up their game in a direct but constructive way.
+1. **Assume positive intent.** Always coming from a position of positivity and grace.
+1. **Form an opinion.** We live in different locations and often have very different perspectives. We want to know your thoughts, opinions, and feelings on things.
+1. **Feedback is essential.** Help everyone up their game in a direct but constructive way.
 
 ## Golden rules
 

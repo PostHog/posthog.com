@@ -42,11 +42,11 @@ Aaron joined us to help get us in front of more users, and to help us manage the
 
 The induction week also included our first group office hours. There are a lot of companies, so we were split into groups of 5-6. You get to know each other really well during the program, and it’s fun to follow each other’s progress. You learn a lot from watching the others too.
 
-I used to run sales teams, my job was to try to give a realistic figure for how much our revenue would increase. Any experienced VP Sales will play down the number – most would prefer hitting a \$20M target, over missing a \$22M number by \$1M and ending up at a higher number. That’s how you optimize for not getting fired.
+I used to run sales teams, my job was to try to give a realistic figure for how much our revenue would increase. Any experienced VP Sales will play down the number – most would prefer hitting a $20M target, over missing a $22M number by $1M and ending up at a higher number. That’s how you optimize for not getting fired.
 
-The office hours were not like this. They pushed us. All of us were at under \$1K MRR at the time. We went around the room setting goals for where we would be by demo day in 3 months time. These varied from \$30K MRR to \$100K MRR.
+The office hours were not like this. They pushed us. All of us were at under $1K MRR at the time. We went around the room setting goals for where we would be by demo day in 3 months time. These varied from $30K MRR to $100K MRR.
 
-They know we’ll probably miss these targets, but that’s not the point. Some companies actually will hit them – take a swing, think bigger. This was a theme of our time in YC – we met CEOs of \$4Bn companies that told us to think bigger than them, when we had no revenue. It made us (try to) work out how to do that.
+They know we’ll probably miss these targets, but that’s not the point. Some companies actually will hit them – take a swing, think bigger. This was a theme of our time in YC – we met CEOs of $4Bn companies that told us to think bigger than them, when we had no revenue. It made us (try to) work out how to do that.
 
 We started working long hours, but we made time to go out to walk, think and decompress.  We ended up on some really long walks. The weather in San Francisco looks pretty average online, but when you realize it’s rarely windy and usually sunny, going outside is a lot more inviting than London in January. We walked to the Golden Gate bridge from Castro, and back.
 
