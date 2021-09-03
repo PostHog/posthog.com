@@ -17,14 +17,14 @@ Currently, we are hiring for the following Engineering roles:
 
 Beyond the specific skills listed in the job description, we generally look for: 
 
-*   [DevRel at PostHog](https://posthog.com/handbook/growth/developer-relations) is excuted with an ethos of empathy and collaboration. Any DevRel hire must clearly demonstrate this.
+*   [DevRel at PostHog](https://posthog.com/handbook/growth/developer-relations) is undertaken with an ethos of empathy and collaboration. Any DevRel hire must clearly demonstrate this.
 *   Has built something from scratch, ideally with minimal outside help
     *   You may have been the founder of a startup, or built an impressive side project. You may have also worked on a project at work where you were the only developer. 
 *   Communication skills
     *   Are there any writing errors in their cover letter? What does their online presence look like?
     *   More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
 *   Community focus
-    *   Our DevRel team works very closely with our customers - they do customer support, demos, and help with installation and integration. All potential hires need to be driven by delivering the best possible experience for their customers. 
+    *   Our DevRel team works very closely with our customers - they do community support, demos, and help with installation and integration. All potential hires need to be driven by delivering the best possible experience for their customers. 
 
 ### DevRel hiring process 
 
@@ -64,12 +64,14 @@ This gives you the chance to learn how we work, and for us to see your quality a
 
 An DevRel SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
-*   Kick-off and ideation session with [Phil](/handbook/company/team#phil-leggetter-developer-relations) where we'll define the specific deliveravles for the Super
-*   Time to focus on the task, we can provide support via your personal slack channel
+*   Kick-off and ideation session with [Phil](/handbook/company/team#phil-leggetter-developer-relations) where we'll define the specific deliverables for the Super Day. These will most likely include:
+    * GitHub repo with code and README (we'll create and setup a private)
+    * Written or video tutorial
+*   Time to focus on the task, we can provide support via your personal Slack channel
 *   On days where we have company-wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 *   Depending on the time zone, we might arrange a wrap up session at the end of the day
 
-You can expect to hear back from us within 2 working days of your SuperDay. We will also make the payment for your SuperDay as soon as possible. 
+You can expect to hear back from us within two working days of your SuperDay. We will also make the payment for your SuperDay as soon as possible. 
 
 If we decide to make you an offer, we will most likely arrange a call to discuss feedback and next steps.
 
