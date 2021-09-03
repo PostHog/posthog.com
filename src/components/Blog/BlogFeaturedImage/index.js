@@ -7,7 +7,7 @@ export function FeaturedImageStandard({ pageTitle, featuredImage, blogDate, auth
     return (
         <>
             <Structure.Section width="3xl -mt-6 md:-mt-2">
-                <img src={featuredImage} className="w-full shadow-lg" alt={pageTitle} />
+                <img src={featuredImage} className="w-full md:rounded-lg" alt={pageTitle} />
             </Structure.Section>
             <PlainIntro blogDate={blogDate} pageTitle={pageTitle} authorDetails={authorDetails} />
         </>
