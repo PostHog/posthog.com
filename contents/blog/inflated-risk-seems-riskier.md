@@ -67,7 +67,7 @@ We brainstormed the least enterprise things we could do, pink Comic Sans typogra
 
 ## Ramen millionaire
 
-Five months later, we got into YC and received the standard \$120k cheque for 7%, valuing PostHog at nearly \$2M. If you were a solo founder, technically you’d be a millionaire, whilst still eating ramen and scrambling for freebies. We kept things very frugal during YC - your runway is determined by living costs. I had long given up up my fancy [Jaguar XE](https://en.wikipedia.org/wiki/Jaguar_XE) and got a 2008 [Ford Mondeo](https://en.wikipedia.org/wiki/Ford_Mondeo_(third_generation)#/media/File:Cool-gray_Ford_Mondeo_Mk_IV_Estate-003-rear.jpg) (sidenote: it was pleasing not feeling like my car was compensating for some insecurity or another), and I had a personal runway spreadsheet with all my spending on it.
+Five months later, we got into YC and received the standard $120k cheque for 7%, valuing PostHog at nearly $2M. If you were a solo founder, technically you’d be a millionaire, whilst still eating ramen and scrambling for freebies. We kept things very frugal during YC - your runway is determined by living costs. I had long given up up my fancy [Jaguar XE](https://en.wikipedia.org/wiki/Jaguar_XE) and got a 2008 [Ford Mondeo](https://en.wikipedia.org/wiki/Ford_Mondeo_(third_generation)#/media/File:Cool-gray_Ford_Mondeo_Mk_IV_Estate-003-rear.jpg) (sidenote: it was pleasing not feeling like my car was compensating for some insecurity or another), and I had a personal runway spreadsheet with all my spending on it.
 
 Applying to YC was a challenging time and we’d like to help you have the best shot getting in. James [recently did an AmA on applying to YC that you can watch here](https://www.youtube.com/watch?v=t8ym94dOkYs).
 

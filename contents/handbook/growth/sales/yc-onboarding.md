@@ -12,7 +12,7 @@ Our YC deal provides the following:
 
 One free year of PostHog Cloud with up to 10 million events per month *or* a one-year enterprise license if they want to self-host PostHog.
 
-Companies also get a \$50 gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
+Companies also get a $50 gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
 
 For YC W21 companies, we also offer:
 

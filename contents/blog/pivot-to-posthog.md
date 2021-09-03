@@ -10,7 +10,7 @@ categories: ceo-diaries
 
 YC has been running for 15 years, and getting bigger every year.
 
-That means there are more than 2,000 companies in their network. Many are still small, many are dead, but many of them are huge – 102 are valued at more than \$150M. The reason this is awesome if you are in the YC network is that it gives you a lot of customers that are slightly more likely to be friendly.
+That means there are more than 2,000 companies in their network. Many are still small, many are dead, but many of them are huge – 102 are valued at more than $150M. The reason this is awesome if you are in the YC network is that it gives you a lot of customers that are slightly more likely to be friendly.
 
 We focused on building pipeline, again – aiming for our 2 meetings a day routine. We went to as many of the meetings as we could in person.
 
@@ -18,9 +18,9 @@ A lot of these meetings went well – the product was getting stronger. We start
 
 That’s when we realized, we had a problem.
 
-We had 5 friendly companies in a row turn us down on price. We wanted to charge \$39/month/user, but had clients telling us they’d pay just \$5/month/developer. We could build a business like that, but it’d be tough to reach the kind of growth we wanted.
+We had 5 friendly companies in a row turn us down on price. We wanted to charge $39/month/user, but had clients telling us they’d pay just $5/month/developer. We could build a business like that, but it’d be tough to reach the kind of growth we wanted.
 
-The final straw was when we dropped to \$300/month for a team of 30 with one of the teams that was the most positive in the meeting (all based in SF, where the average software engineer salary is around \$150K) and got told there was “no chance” of that working. Refusing to pay \$10/month to power a \$150,000 employee meant to us that our solution wasn’t good enough.
+The final straw was when we dropped to $300/month for a team of 30 with one of the teams that was the most positive in the meeting (all based in SF, where the average software engineer salary is around $150K) and got told there was “no chance” of that working. Refusing to pay $10/month to power a $150,000 employee meant to us that our solution wasn’t good enough.
 
 We came to the next group office hours saying we thought we needed to pivot – we couldn’t see a way to make the product more valuable. At the time, we decided we would produce a roadmap for tech debt – created by the engineering team, using surveys. The group convinced us to focus on using the surveys for engineering retention.
 
@@ -56,7 +56,7 @@ Our partners encouraged us to speak to the best people in the world at running o
 
 We emailed or met the founders of GitLab, Mattermost, and Docker, on top of the meeting with the folks from Sentry we’d already had. They helped us understand how open source business models work. They also made us realize that we needed to work on the community before anything else – that with a lot of usage, and a vibrant community, what follows is inbound interest.
 
-In parallel, we took \$1K, and spent it on some paid ads on a few display networks online. We wanted to get the product in more people’s hands to iron out some bugs. We got really positive feedback from the developer community, and a few constructive ideas, which we put into the product before the Hacker News launch.
+In parallel, we took $1K, and spent it on some paid ads on a few display networks online. We wanted to get the product in more people’s hands to iron out some bugs. We got really positive feedback from the developer community, and a few constructive ideas, which we put into the product before the Hacker News launch.
 
 January 23rd was when we started writing code for PostHog. We set a deadline for the Hacker News launch of February 20th. We had one day off in this period – we went hiking at the hills around Stinson Beach with friends:
 
