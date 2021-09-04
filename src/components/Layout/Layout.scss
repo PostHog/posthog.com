@@ -75,6 +75,7 @@ body {
 a {
     color: black;
     font-weight: semibold;
+    transition: none !important; /* unfortunately necessary until antd is removed */
 }
 
 em,
@@ -1677,6 +1678,7 @@ body.light {
     }
     .breadcrumbs-container > li:not(:last-of-type)::after {
         content: url('/images/right-arrow.svg');
+        fill: currentColor;
         width: 1.25rem;
         height: 1.25rem;
     }

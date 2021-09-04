@@ -51,7 +51,7 @@ export default function Navigation({
                     <li className="py-2 px-3 text-xs text-primary dark:text-primary-dark font-bold">{title}</li>
                 </ul>
 
-                <div className="flex-grow border-r border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                <div className="flex-grow border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
                     <div className="w-full flex space-x-2 md:space-x-0 text-gray dark:text-gray-accent-light">
                         <SearchBar base={breadcrumbBase.name.toLowerCase()} />
                     </div>
@@ -60,7 +60,7 @@ export default function Navigation({
                 <ul className="list-none p-0 m-0 hidden lg:flex ml-auto border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
                     <li className="py-2 px-3">
                         <a
-                            className="text-gray text-xs hover:text-almost-black dark:hover:text-white flex items-center space-x-1"
+                            className="text-xs text-gray hover:text-gray-2 dark:hover:text-white flex items-center font-normal space-x-1"
                             href={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
                         >
                             <Edit />
@@ -69,7 +69,7 @@ export default function Navigation({
                     </li>
                     <li className="py-2 px-3">
                         <a
-                            className="text-gray text-xs hover:text-almost-black dark:hover:text-white flex items-center space-x-2"
+                            className="text-gray text-xs hover:text-almost-black dark:hover:text-white flex items-center font-normal space-x-2"
                             href={`https://github.com/PostHog/posthog.com/issues/new?title=Docs feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
                         >
                             <Issue />

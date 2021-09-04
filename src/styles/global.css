@@ -28,7 +28,7 @@ footer a {
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
     padding-bottom: 0.2rem;
-    transition: background-size 400ms;
+    transition: background-size 400ms !important; /* unfortunately necessary until antd is removed */
 
     &:hover,
     &:focus {

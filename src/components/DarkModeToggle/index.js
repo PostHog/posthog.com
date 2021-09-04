@@ -22,7 +22,7 @@ export const DarkModeToggle = () => {
     }, [])
 
     return (
-        <div className="ml-auto md:ml-0 pl-3 flex items-center text-[#777] dark:text-[#999]">
+        <div className="ml-auto md:ml-0 pl-3 flex items-center text-gray dark:text-[#999]">
             <svg
                 className="fill-current mr-3"
                 width="18"
