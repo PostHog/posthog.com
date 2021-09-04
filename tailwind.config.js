@@ -158,7 +158,7 @@ module.exports = {
                 'gray-accent-dark': '#2C2C2C',
                 'gray-accent-light': '#BFBFBC',
                 red: '#F54E00',
-                'dashed-line-dark': '#5b5b5b',
+                'dashed-line-dark': '#4b4b4b',
                 'dashed-line-light': '#D0D1C9',
                 blue: '#1D4AFF',
             },
