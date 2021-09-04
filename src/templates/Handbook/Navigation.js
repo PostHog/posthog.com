@@ -17,7 +17,6 @@ export default function Navigation({
     return (
         <div
             style={{
-                transition: 'all 0.5s ease 0s',
                 zIndex: 1001,
                 transform: menuOpen ? 'translate3d(calc(100vw - 80px), 0px, 0px)' : 'none',
             }}
@@ -58,7 +57,7 @@ export default function Navigation({
                     </div>
                 </div>
 
-                <ul className="list-none p-0 m-0 hidden lg:flex ml-auto">
+                <ul className="list-none p-0 m-0 hidden lg:flex ml-auto border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
                     <li className="py-2 px-3">
                         <a
                             className="text-gray text-xs hover:text-almost-black dark:hover:text-white flex items-center space-x-1"
