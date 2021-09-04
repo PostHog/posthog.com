@@ -55,6 +55,27 @@ div[class^='feature-'].text-center {
 }
 
 /* Handbook + Docs */
+aside.hidden nav > ul {
+    position: relative;
+
+    &:after {
+        background: linear-gradient(to bottom, rgba(238, 239, 233, 0) 0%, rgba(238, 239, 233, 0.75) 100%);
+        content: '';
+        bottom: 0;
+        height: 200px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        transition: opacity 5s ease;
+    }
+
+    &:hover {
+        &:after {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    }
+}
 
 .chapters-menu {
     /*
