@@ -37,7 +37,7 @@ export default function NotFoundPage(): JSX.Element {
                 <h4>Does pineapple belong on pizza?</h4>
 
                 <p>
-                    We looki forward to hearing your response on{' '}
+                    We look forward to hearing your response on{' '}
                     <a href="//twitter.com/posthog" target="_blank" rel="noreferrer">
                         Twitter
                     </a>
