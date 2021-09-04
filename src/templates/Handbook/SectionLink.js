@@ -9,7 +9,7 @@ export default function SectionLink({ link, previous, className }) {
         <div className={className}>
             {link && (
                 <Link
-                    className={`whitespace-nowrap text-[15px] flex items-center space-x-2 text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-bold ${linkClasses}`}
+                    className={`whitespace-nowrap text-[15px] flex items-center space-x-2 text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-bold tracking-tight ${linkClasses}`}
                     to={link.url}
                 >
                     <span>{link.name}</span>

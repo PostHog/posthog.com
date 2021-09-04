@@ -56,6 +56,58 @@ div[class^='feature-'].text-center {
 
 /* Handbook + Docs */
 
+.chapters-menu {
+    /*
+    .current, .not-current{
+        @apply border-transparent border-solid border;
+
+        &:hover {
+            @apply border-gray-accent-light border-solid border;
+        }
+    }
+    */
+
+    .current {
+        opacity: 0.6;
+    }
+
+    .chapters-menu {
+        .current {
+            opacity: 1;
+        }
+    }
+
+    .not-current {
+        opacity: 0.2;
+        transition: opacity 5s ease;
+    }
+
+    svg {
+        opacity: 0;
+        transition: opacity 5s ease;
+    }
+
+    &:hover {
+        .current {
+            opacity: 1;
+        }
+
+        .not-current {
+            opacity: 0.5;
+            transition: opacity 0.25s ease;
+
+            &:hover {
+                opacity: 0.75;
+                transition: opacity 0.1s ease;
+            }
+        }
+
+        svg {
+            opacity: 1;
+            transition: opacity 0.25s ease-in;
+        }
+    }
+}
 .jumpTo {
     position: relative;
 
@@ -121,13 +173,13 @@ div[class^='feature-'].text-center {
         font-variation-settings: 'wght' 475;
     }
     .font-medium {
-        font-variation-settings: 'wght' 500;
+        font-variation-settings: 'wght' 570;
     }
     .font-semibold {
-        font-variation-settings: 'wght' 600;
+        font-variation-settings: 'wght' 670;
     }
     .font-bold {
-        font-variation-settings: 'wght' 800;
+        font-variation-settings: 'wght' 790;
     }
     .font-extrabold {
         font-variation-settings: 'wght' 850;

@@ -13,23 +13,23 @@ function MenuItem({ item, slug, topLevel }) {
     }
     const { name, url, children } = item
     const currentPage = url === slug
-    const opacity = currentPage || isActive(children) ? '1' : '60'
+    const isCurrent = currentPage || isActive(children) ? 'current' : 'not-current'
     const [open, setOpen] = useState(isActive(children))
     const handleClick = () => setOpen(!open)
     const height = open ? 'auto' : 0
-    const linkClasses = `flex-grow text-left transition-opacity text-gray-accent-dark hover:text-almost-black dark:text-white dark:hover:text-white opacity-${opacity} group-hover:opacity-75 ${
+    const linkClasses = `flex-grow text-left text-primary hover:text-almost-black dark:text-white dark:hover:text-white ${
         topLevel || children || currentPage ? 'font-bold' : 'text-[15px]'
     }`
     return (
         <li>
-            <div className="flex items-center justify-between text-gray-accent-dark dark:text-white group">
+            <div className={`${isCurrent} flex items-center justify-between text-primary dark:text-white group`}>
                 {url ? (
                     <Link className={linkClasses} to={url}>
                         {name}
                     </Link>
                 ) : (
                     <button onClick={handleClick} className={linkClasses}>
-                        {name}
+                        <span>{name}</span>
                     </button>
                 )}
 
@@ -38,7 +38,7 @@ function MenuItem({ item, slug, topLevel }) {
                         <svg
                             style={{ transform: `rotate(${open ? '180deg' : '0deg'})` }}
                             xmlns="http://www.w3.org/2000/svg"
-                            className={`h-5 w-5 transition-transform opacity-${opacity} group-hover:opacity-75 transition-opacity`}
+                            className={`h-5 w-5 transition-transform`}
                             viewBox="0 0 20 20"
                             fill="currentColor"
                         >
@@ -60,7 +60,7 @@ function MenuItem({ item, slug, topLevel }) {
 
 export default function Menu({ menu, sub, className = '', slug, topLevel }) {
     return (
-        <ul className={`${className} flex flex-col space-y-2 list-none p-0 my-0 ${sub ? 'ml-2' : ''}`}>
+        <ul className={`${className} chapters-menu flex flex-col space-y-2 list-none p-0 my-0 ${sub ? 'ml-2' : ''}`}>
             {menu &&
                 menu.map((item, index) => {
                     return <MenuItem key={index} slug={slug} item={item} topLevel={topLevel} />

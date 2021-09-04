@@ -72,12 +72,7 @@ export default function Main({
             <SectionLinksTop next={next} previous={previous} />
             <div className="dark:text-white flex max-w-screen-3xl mx-auto items-start relative z-10 mt-8">
                 <div className="sticky top-20 flex-1">
-                    <MainSidebar
-                        mainEl={mainEl}
-                        menu={menu}
-                        slug={slug}
-                        className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14"
-                    />
+                    <MainSidebar mainEl={mainEl} menu={menu} slug={slug} className="hidden md:block w-full mb-14" />
                 </div>
                 <article
                     ref={mainEl}
