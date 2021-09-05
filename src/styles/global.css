@@ -88,6 +88,12 @@ div[class^='feature-'].text-center {
     }
 }
 
+article .article-content {
+    blockquote {
+        @apply text-base;
+    }
+}
+
 /* Careers page */
 
 .benefits-grid {
