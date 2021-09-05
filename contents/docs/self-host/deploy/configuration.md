@@ -1,5 +1,5 @@
 ---
-title: Posthog ClickHouse chart configuration
+title: PostHog ClickHouse chart configuration
 sidebarTitle: Chart configuration
 sidebar: Docs
 showTitle: true

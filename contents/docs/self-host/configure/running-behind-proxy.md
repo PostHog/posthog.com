@@ -1,9 +1,8 @@
 ---
-title: Running Behind a Proxy
+title: Running behind a proxy
 sidebar: Docs
 showTitle: true
 ---
-
 
 If you're running PostHog behind a proxy, there are a few more things you need to do to make sure PostHog works. You usually need this if running behind a web server like Apache or NGINX, a load balancer (like ELB), or a DDoS protection service (like Cloudflare).
 
@@ -30,7 +29,7 @@ Trusted proxies are used to determine which proxies to consider as valid from th
   - If you use a load balancer, it is recommended to terminate the SSL connection at the load balancer (remember to set `DISABLE_SECURE_SSL_REDIRECT` to `True`) and connect via HTTP to your PostHog container (make sure your container is behind a firewall or VPC to prevent unauthorized connections), you would then enforce SSL/TLS connections at the load balancer level.
 - If you have IP blocks that are not working and you're running behind a proxy, your instance may be misconfigured, preventing PostHog from determining the connecting IP address.
 
-### Public Endpoints
+### Public endpoints
 
 If your setting up a proxy to protect your PostHog instance and prevent access only through an authorized connection, you should consider there are some endpoints that must always be publicly accessible in order for event ingestion, session recording and feature flags to work properly. These endpoints are listed below.
 
@@ -47,7 +46,7 @@ If your setting up a proxy to protect your PostHog instance and prevent access o
 
 
 
-## NGINX Config (Recommended)
+## NGINX config (Recommended)
 
 You need to make sure your proxy server is sending `X-Forwarded-For` headers. For NGINX, that config should look something like this:
 
@@ -61,7 +60,7 @@ You need to make sure your proxy server is sending `X-Forwarded-For` headers. Fo
     }
 ```
 
-## Apache2 Config
+## Apache2 config
 
 You need the `proxy` `proxy_http` and `proxy_html` modules enabled. 
 To do this, run `sudo a2enmod proxy proxy_http proxy_html`.

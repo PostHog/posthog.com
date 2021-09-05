@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-_Interested in what plugins we have available? Check out our [Plugin Library](/plugins)._
+_Interested in what plugins we have available? Check out our [Plugin library](/plugins)._
 
 <hr /><br />
 
@@ -21,9 +21,9 @@ They serve three key purposes:
 
 ![Plugins Diagram](../images/../../images/plugins-diagram.svg)
 
-## Example Use-Cases
+## Example use-cases
 
-Plugins can be used for a wide variety of use-cases, such as:
+Plugins can be used for a wide variety of use cases, such as:
 
 **Sending the event data to a data warehouse**
 
@@ -45,11 +45,11 @@ In order to facilitate sorting through your events, plugins can be used to deter
 
 By default, PostHog does not enforce schemas on events it receives. However, a plugin could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.
 
-## Using Plugins
+## Using plugins
 
 To use plugins on your self-hosted instance, head over to 'Project' -> 'Plugins' on the left sidebar:
 
-![Plugins Screenshot](../../images/blog/array/plugins.png)
+![Plugins screenshot](../../images/blog/array/plugins.png)
 
 Here you will be able to install our default plugins to test out the functionality or install a custom plugin by pasting a link to its public repository. 
 
@@ -85,9 +85,9 @@ This order determines the sequence in which your plugins will run. For example, 
 5. Events returned from Plugin 3 are ingested (inserted into the database)
 
 Plugin ordering is important if you have a plugin that depends on another. For example, Plugin A might add the company name based on the email of the user, while Plugin B adds company data to the event based on the company name.
-### Updating Plugins
+### Updating plugins
 
-![Plugins Update Screenshot](../../images/plugin-update.png)
+![Plugins update screenshot](../../images/plugin-update.png)
 
 Plugins can be updated to the latest version directly on the PostHog UI.
 

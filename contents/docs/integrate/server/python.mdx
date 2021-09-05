@@ -5,7 +5,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/posthog/posthog-python) for the Posthog Python Library. This is an optional library you can install if you're working with Python. 
+This is an optional library you can install if you're working with Python. 
+
+<CallToAction icon="none" href="https://github.com/PostHog/posthog-python" className="mb-4">
+    Browse library (Python)
+</CallToAction>
 
 This page of the Docs refers specifically to the Official PostHog Python Library to capture and send events to any PostHog instance (including posthog.com).
 
@@ -32,7 +36,7 @@ posthog.personal_api_key = '<ph_personal_api_key>'
 posthog.host = '<ph_instance_address>'
 ```
 
-You can read more about the differences between the project and personal API keys in the dedicated [API Authentication section](/docs/api/overview#authentication) of the Docs. 
+You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs. 
 
 > **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
@@ -149,7 +153,7 @@ For example:
 posthog.alias('anonymous session id', 'distinct id')
 ```
 
-### Feature Flags
+### Feature flags
 
 > **Note:** To use feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
 
@@ -163,7 +167,7 @@ When using them with one of libraries, you should check if a feature flag is ena
 posthog.feature_enabled('beta-feature', 'distinct id')
 ```
 
-**Example Use Case**
+**Example use case**
 
 Here's how you might send different users a different version of your homepage, for example:
 
@@ -175,7 +179,7 @@ def homepage(request):
 
 > **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence). 
 
-### Sending Page Views
+### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend
 
@@ -214,7 +218,7 @@ def purchase(request):
 
 When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles. 
 
-### Example Implementation
+### Example implementation
 
 ```python
 from posthog.sentry import update_posthog
@@ -231,7 +235,7 @@ with configure_scope() as scope:
     scope.set_tag('posthog_distinct_id', 'some distinct id')
 ```
 
-### Example Implementation with Django
+### Example implementation with Django
 
 This can be made automatic in Dejango, by adding the following middleware and settings to `settings.py`:
 
@@ -246,10 +250,10 @@ POSTHOG_DJANGO = {
 }
 ```
 
-## Alternative Name
+## Alternative name
 
 As our open source project [PostHog](https://github.com/PostHog/posthog) shares the same module name, we created a special `posthoganalytics` package, mostly for internal use to avoid module collision. It is the exact same.
 
-## Thank You
+## Thank you
 
 This library is largely based on the `analytics-python` package.

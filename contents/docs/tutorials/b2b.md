@@ -1,20 +1,12 @@
 ---
-title: Tracking Key B2B Product Metrics
+title: Tracking key B2B product metrics
 sidebar: Docs
 showTitle: true
 ---
 
-<small class="note-block centered">_Estimated Reading Time: 12 minutes ☕☕☕_</small>
-
-<br />
-
-<span class="larger-image">
+_Estimated reading time: 12 minutes_ ☕☕☕
 
 ![B2B Tutorial Banner Image](../../images/tutorials/banners/b2b.png)
-
-</span>
-
-<br />
 
 If you run a B2B business, it is especially important to track group usage of your product, since, by definition, you have multiple clearly-defined groups as your clients. 
 
@@ -22,19 +14,18 @@ Since usage may vary from company to company in your clients list, digging deepe
 
 As such, this tutorial will walk you through how to track usage of your B2B product, going over key metrics and how you can set up your analytics views to reflect them.
 
-### Pre-Requisites
+### Prerequisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
 1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview)
 
-> **Pro Tip:** To make the most out of this tutorial, we recommend that you have some [actions](/docs/tutorials/actions#sorting-through-your-events-with-actions) set up, as well as have tried sending some [custom events](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors). These are explained in detail in our [Complete Guide to Event Tracking](/docs/tutorials/actions). Additionally, it is also beneficial to be familiar with [Cohorts](/docs/tutorials/cohorts).
+> **Pro tip:** To make the most out of this tutorial, we recommend that you have some [actions](/docs/tutorials/actions#sorting-through-your-events-with-actions) set up, as well as have tried sending some [custom events](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors). These are explained in detail in our [Complete guide to event tracking](/docs/tutorials/actions). Additionally, it is also beneficial to be familiar with [Cohorts](/docs/tutorials/cohorts).
  
+### Determining B2B product/market fit
 
-### Determining B2B Product-Market Fit
-
-Determining product-market fit is a key step to making your product successful, and, in order to do so, you need to understand if your product is being used, who is using it, and how it's being used. 
+Determining product/market fit is a key step to making your product successful, and, in order to do so, you need to understand if your product is being used, who is using it, and how it's being used. 
 
 #### Is my product being used?
 
@@ -56,7 +47,7 @@ Here's what your chart might look like after the aforementioned setup:
 
 Depending on your PostHog setup, you might need or want to narrow this view even further. For this, you can set as many filters you like, to ensure you're measuring users that really did use your product. For example, you might want to filter based on a specific URL, or change the event from `$pageview` to a custom action that you set up. You could, for instance, determine that to count an active user, the user needs to use a certain part of your product. As such, you could represent that by a button click or [custom event](/docs/tutorials/actions#using-custom-events-to-track-advanced-behaviors).
 
-##### We set up a free trial for a user, have they been using the product?
+##### We set up a free trial for a user. Have they been using the product?
 
 ###### Individual Users
 
@@ -193,7 +184,7 @@ B2B businesses can also greatly benefit from using feature flags.
 
 If you're unaware, feature flags are a PostHog feature that allows you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 
-Feature flags make sense especially for B2B businesses because they allow you to roll out features by company, in order to meet the specific use-cases of your clients. For example, a company might need a feature quickly and be willing to be a Beta tester for it, 
+Feature flags make sense especially for B2B businesses because they allow you to roll out features by company, in order to meet the specific use cases of your clients. For example, a company might need a feature quickly and be willing to be a Beta tester for it, 
 while another company might be more conservative and want to always be using a stable version of your product.
 
 As such, you can roll out certain features to some companies first, as well as roll them back easily if there's ever an issue.
@@ -202,21 +193,21 @@ You can then see how the new feature impacted your key retention, conversion, an
 
 At PostHog, we rolled out our session recording feature using feature flags.
 
-### Your Key Metrics in One Place
+### Your key metrics in one place
 
 Rather than flipping back and forth between tabs, you probably want to have your key metrics in one place, so you can quickly get an overview of how your product is performing. 
 
 What should be in each of your dashboards is entirely up to you, and they could look something like this:
 
-![Demo Dashboard Screenshot](../../images/tutorials/b2b/demo-dashboard.png)
+![Demo dashboard screenshot](../../images/tutorials/b2b/demo-dashboard.png)
 
 Any chart, table, funnel, and graph from our 'Insights' can be added to a dashboard. To do so, once you are happy with a certain view you created, just click 'Add to Dashboard' on the top-right corner. This will let you select what dashboard you want to add the panel to. 
 
-> **Pro Tip:** We found it very useful to create a dashboard to represent AARRR metrics - Acquisition, Activation, Retention, Referral, and Revenue. You need to determine how to track each of these metrics for your product, but it provides a great overview of performance and is a good first step for setting context-specific KPIs. 
+> **Pro tip:** We found it very useful to create a dashboard to represent AARRR metrics - Acquisition, Activation, Retention, Referral, and Revenue. You need to determine how to track each of these metrics for your product, but it provides a great overview of performance and is a good first step for setting context-specific KPIs. 
 
 Dashboards can be customized as you wish - you can change the color, size, and name of panels, as well as you can update their content whenever you want. You are also able to pin dashboards that you especially care about to the sidebar, as well as create a shareable link for each dashboard. These links can be used to share dashboards across teams, such as between Sales and Marketing teams within your company.
 
-> **Note:** If you want to learn more about dashboards, check out our [dedicated Dashboards page](/docs/user-guides/dashboards).
+> **Note:** If you want to learn more about dashboards, check out our [Dedicated Dashboards page](/docs/user-guides/dashboards).
 
 ### Helping your teams stay on top of usage
 
@@ -226,13 +217,13 @@ If you want to stay on top of new signups (or any other specific action), you ca
 
 Once configured in setup, you are able to set custom messages to be sent to you when a certain action is triggered. You can set this on each new action that you create, on the action creation page:
 
-![Demo Dashboard Screenshot](../../images/tutorials/b2b/slack.png)
+![Demo Dashboard screenshot](../../images/tutorials/b2b/slack.png)
 
 If you create actions with our [Toolbar](/docs/tutorials/toolbar), you can set this up by clicking on the desired action from the 'Actions' page ('Events' -> 'Actions').
 
 With everything configured, you will start receiving messages like these:
 
-![Slack Message](../../images/slack-message.png)
+![Slack message](../../images/slack-message.png)
 
 These messages can help keep your team up-to-date with key user events such as signups without leaving the team's chat platform. For example, it can be useful for:
 
@@ -248,10 +239,9 @@ If you serve a few large enterprise clients, you can do this via setting up pers
 
 However, to do this dynamically, you can also use our [API](/docs/api/overview) to pull relevant data that you then display to your clients as you wish. This is yet to be documented as an established use-case, but our team will be happy to help you set this up if it is something you think would be particularly valuable to you. You can contact us on [Slack](/slack) for more information.
 
-### Conversion and Retention
+### Conversion and retention
 
 Finally, two important metrics you should have a grasp of are retention and conversion. If you would like some help setting these up, you can refer to our step-by-step tutorials:
 
-- [Measuring Retention and Tracking Churn](/docs/tutorials/retention)
-- [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
-
+- [Measuring retention and tracking churn](/docs/tutorials/retention)
+- [Analyzing your conversion with Funnels](/docs/tutorials/funnels)

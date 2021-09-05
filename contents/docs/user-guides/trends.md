@@ -8,11 +8,11 @@ Trends are a very powerful way to visualize how actions or events are varying ov
 
 These are useful for monitoring which parts of your products are being used repeatedly, how usage is changing as well as the engagement levels of your users.
 
-## Demo Video
+## Demo video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kyGgDbNQto4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Accessing Trends
+## Accessing trends
 
 1. Click 'Insights' on the left sidebar
 2. Click the 'Trends' tab (default)
@@ -21,7 +21,7 @@ These are useful for monitoring which parts of your products are being used repe
 
 <br />
 
-## Using Trends
+## Using trends
 
 Select the actions or events you want to see trends of in the menu:
 
@@ -36,7 +36,7 @@ You can now see the trend in these actions over time.
 Dotted lines show data collected so far but that which is not determined by the time interval selected.
 
 
-## Trend Filtering
+## Trend filtering
 
 There are a few ways to filter this information.
 
@@ -60,7 +60,7 @@ Filtering by property can be selected underneath the actions or events you have 
 
 ![Filter by property](../../images/features/trends/trend-filtering.png)
 
-### Filtering Trend graphs by Active Users 
+### Filtering trend graphs by active users 
 
 When selecting actions or trends PostHog will display the total count of those actions or events. 
 
@@ -73,7 +73,7 @@ Click on 'Total Volume' next to the selected event or action to reveal a dropdow
 * Minimum
 * Maximum
 
-## Trend Segmentation
+## Trend segmentation
 
 It is possible to segment the data using the ‘Breakdown by’ menu. This allows you to see how trends in Actions vary by the Event properties.
 
@@ -83,17 +83,15 @@ For example, one of the Event properties is the UTM tags – which allows you as
 
 Another example is that as a product-person, you can see if different devices or different browsers affect usage. Maybe people using your web-based application on mobiles are generally inactive because the interface is hard to use:
 
-<br />
-
 You can filter the event data too, based on the Event property. This means instead of breaking out more lines or rows in the table, you can just display the exact Action trends you care about when the Event property is something specific.
 
 You can also use this at the same time as the ‘Breakdown by’ option.
 
-### Trend Segmentation by Event Property
+### Trend segmentation by event property
 
 For example, if you ran a movie streaming service, you could monitor ‘Play button – clicked’ for just one movie at a particular URL.
 
-### Trend Segmentation by Stickiness
+### Trend segmentation by stickiness
 
 Trend graphs will show numbers by volume as default, it is possible to show this as stickiness. Instead of the total number of times this action had been completed it will chart the graph as the number of consecutive days a unique user has performed that action. This will allow you to optimize for repeatable actions. 
 
@@ -106,11 +104,11 @@ This pairs nicely with [Retention](/docs/user-guides/retention), which is essent
 
 <br />
 
-### Trend Segmentation by User
+### Trend segmentation by user
 
 When in trends, you can click on data points to reveal a modal with a table of all the unique users that make up that data. 
 
-![Segment By User](../../images/features/trends/segment-by-user.png)
+![Segment by user](../../images/features/trends/segment-by-user.png)
 
 This way, you not only have access to the aggregate values, but can always inspect further and determine what users compose each data point.
 

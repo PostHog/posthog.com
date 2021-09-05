@@ -9,7 +9,7 @@ tags:
 
 import UpgradingSnippet from './snippets/upgrading'
 
-First, we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). Follow the "Managed nodes - Linux" guide. The default nodes (2x m5.large) work well for running Posthog.
+First, we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). Follow the "Managed nodes - Linux" guide. The default nodes (2x m5.large) work well for running PostHog.
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 ```yaml
@@ -52,7 +52,8 @@ web:
   secureCookies: false
 ```
 
-After upgrading you can run the following to get the IP to access Posthog.
+After upgrading you can run the following to get the IP to access PostHog.
+
 ```console
 export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 echo "Visit http://$INGRESS_IP to use PostHog\!"
@@ -61,7 +62,7 @@ echo "Visit http://$INGRESS_IP to use PostHog\!"
 <UpgradingSnippet />
 
 
-## Uninstalling the Chart
+## Uninstalling the chart
 
 To uninstall the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, run the following:
 ```console

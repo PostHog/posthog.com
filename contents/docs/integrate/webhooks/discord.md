@@ -18,7 +18,7 @@ showTitle: true
 
 It would look something like this. 
 
-![Discord Webhook Setup](../../../images/discord-webhook.png)
+![Discord Webhook setup](../../../images/discord-webhook.png)
 
 For more information see the [Discord webhook docs](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 
@@ -26,15 +26,15 @@ For more information see the [Discord webhook docs](https://support.discord.com/
 
 1. Copy the Webhook URL into the PostHog Setup page:
 
-    ![PostHog Add Webhook](../../../images/discord-add-webhook.png)
+    ![PostHog add webhook](../../../images/discord-add-webhook.png)
 
 1. Click "Test & Save" and you should receive a message on Discord. 
 
-## 3. Add to Action
+## 3. Add to action
 
 For each Action that should be posted to Discord, select "Post to webhook when this action is triggered":
 
-![PostHog Edit Action](../../../images/post-action-slack.png)
+![PostHog edit action](../../../images/post-action-slack.png)
 
 ## 4. Celebrate
 ![](../../../images/discord-message.png)

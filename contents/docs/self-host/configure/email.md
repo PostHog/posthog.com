@@ -1,5 +1,5 @@
 ---
-title: Configuring Email
+title: Configuring email
 sidebar: Docs
 showTitle: true
 ---
@@ -44,7 +44,7 @@ Below you will find details on how to configure the most common email providers 
 ## Twilio's Sendgrid
 With Sendgrid you have 2 different configuration options. 
 
-### Option A [Recommended]. Domain Authentication 
+### Option A: Domain authentication (Recommended)
 [Domain authentication](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/#setting-up-domain-authentication) allows you to send emails from any address within your validated domain. It is the best option to guarantee email deliverability because it establishes DNS records on your domain that validate your identity.
 
 1. On sender authentication, select the option to authenticate a domain, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/domain/create](https://app.sendgrid.com/settings/sender_auth/domain/create).
@@ -54,7 +54,7 @@ With Sendgrid you have 2 different configuration options.
 1. You will receive now a list of DNS records that need to be added to your domain. After adding them, be sure to verify them on Sendgrid. You are now ready to start sending emails.
 
 
-### Option B. Single sender authentication
+### Option B: Single sender authentication
 As an alternative you can do [single sender verification](https://sendgrid.com/docs/ui/sending-email/sender-verification/) which is the easiest option to configure. You will only need to be able to receive emails on the address you want to use as sender. **Please note this method is only recommended as a starting point, or for small scale usage.**
 
 1. On sender authentication, select the option to create a new sender profile, you can also go directly to [https://app.sendgrid.com/settings/sender_auth/senders/new](https://app.sendgrid.com/settings/sender_auth/senders/new).

@@ -1,9 +1,8 @@
 ---
-title: Deploying a Reverse Proxy to Posthog Cloud 
+title: Deploying a reverse proxy to PostHog Cloud 
 sidebar: Docs
 showTitle: true
 ---
-
 
 ## Why host this reverse proxy? 
 

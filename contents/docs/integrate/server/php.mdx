@@ -1,11 +1,15 @@
 ---
-title: PHP Library
+title: PHP library
 sidebarTitle: PHP
 sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-php) for the Posthog-PHP library. This is an optional library you can install if you're working with PHP. 
+This is an optional library you can install if you're working with PHP. 
+
+<CallToAction icon="none" href="https://github.com/PostHog/posthog-php" className="mb-4">
+    Browse library (PHP)
+</CallToAction>
 
 This page of the Docs refers specifically to the Official PostHog PHP Library to capture and send events to any PostHog instance (including posthog.com).
 
@@ -153,7 +157,7 @@ PostHog::alias(array(
 ));
 ```
 
-### Sending Page Views
+### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
@@ -167,7 +171,7 @@ PostHog::capture(array(
 ));
 ```
 
-### Feature Flags
+### Feature flags
 
 To check if a feature flag is enabled for a given user, use `isFeatureEnabled`, like so:
 
@@ -177,7 +181,6 @@ if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
 }
 ```
 
-
-## Thank You
+## Thank you
 
 This library is largely based on the `analytics-php` package.

@@ -31,7 +31,7 @@ posthog = PostHog::Client.new({
 
 You can find your key in the 'Project Settings' page in PostHog.
 
-## Making Calls
+## Making calls
 
 ### Capture
 
@@ -142,7 +142,7 @@ posthog.alias({
 })
 ```
 
-### Sending Page Views
+### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
@@ -156,7 +156,7 @@ posthog.capture({
 })
 ```
 
-### Feature Flags
+### Feature flags
 
 > Note that to use feature flags you must specify `personal_api_key` when initializing PostHog.
 
@@ -186,6 +186,6 @@ posthog.reload_feature_flags()
 // Do something with feature flags here
 ```
 
-## Thank You
+## Thank you
 
 This library is largely based on the `analytics-ruby` package.

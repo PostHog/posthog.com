@@ -1,11 +1,15 @@
 ---
-title: Go Library
+title: Go library
 sidebarTitle: Go
 sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-go) for the Posthog-Go Library. This is the official PostHog Go library to capture and send events to any PostHog instance (including posthog.com).
+This is the official PostHog Go library to capture and send events to any PostHog instance (including posthog.com).
+
+<CallToAction icon="none" href="https://github.com/PostHog/posthog-go" className="mb-4">
+    Browse library (Go)
+</CallToAction>
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
@@ -40,7 +44,7 @@ func main() {
 
 ```
 
-## Making Calls
+## Making calls
 
 ### Capture
 
@@ -160,7 +164,7 @@ client.Enqueue(posthog.Alias{
   Alias: "user:12345",
 })
 ```
-### Sending Page Views
+### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send page views from your backend, like so:
 
@@ -173,7 +177,7 @@ client.Enqueue(posthog.Capture{
 })
 ```
 
-### Feature Flags
+### Feature flags
 
 > Note that to use feature flags you must specify `PersonalApiKey` in the [options passed to `posthog.NewWithConfig`](#usage).
 
@@ -202,6 +206,6 @@ client.ReloadFeatureFlags()
 // Do something with feature flags here
 ```
 
-## Thank You
+## Thank you
 
 This library is largely based on the `analytics-go` package.
