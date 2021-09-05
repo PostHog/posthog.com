@@ -318,6 +318,10 @@ h6 {
     a {
         font-variation-settings: 'wght' 800; // override ant
     }
+
+    code {
+        font-weight: bold;
+    }
 }
 
 h1 {
@@ -335,7 +339,6 @@ h3 {
 }
 h4 {
     font-size: 24px;
-    line-height: 45px;
 }
 h5 {
     margin-left: 0;
@@ -549,6 +552,7 @@ li > ul {
     margin-left: 1.45rem;
     margin-bottom: calc(1.45rem / 2);
     margin-top: calc(1.45rem / 2);
+    padding-bottom: 1rem;
 }
 blockquote *:last-child {
     margin-bottom: 0;
