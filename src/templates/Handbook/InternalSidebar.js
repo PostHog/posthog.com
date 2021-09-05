@@ -36,7 +36,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                                     smooth
                                     duration={300}
                                     to={navItem.url}
-                                    className={`jumpTo hover:opacity-100 xl:opacity-60 text-[15px] pl-6 xl:pl-0 text-almost-black hover:text-orange dark:text-white dark:hover:text-orange transition-all`}
+                                    className={`jumpTo hover:opacity-100 xl:opacity-60 text-[15px] pl-6 xl:pl-0 text-almost-black hover:text-orange dark:text-white dark:hover:text-orange`}
                                 >
                                     {navItem.name}
                                 </Link>
