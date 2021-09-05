@@ -1,6 +1,6 @@
 ---
 date: 2021-04-30
-title: How We Monetized Our Open Source DevTool
+title: How we monetized our open source devtool
 rootPage: /blog
 sidebar: Blog
 showTitle: true

@@ -1,6 +1,6 @@
 ---
 date: 2021-07-01
-title: How PostHog's New VP Focused The Company On Nailing Funnels In His First Week
+title: How PostHog's new VP focused the company on nailing funnels in his first week
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,7 +11,7 @@ featuredImage: ../images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
 
 Ramping up fast in any senior product role requires understanding as much context as possible across 3 axes (Market, Product and People). I’ll talk you through my process of going from zero understanding in these three areas, to landing a clear, ambitious long-term strategy across the company in just one week.
 
-## Phase 1: Understanding Context
+## Phase 1: Understanding context
 
 ### Market
 
@@ -31,7 +31,7 @@ PostHog is a product analytics tool, so I was able to get set-up and analyse the
 
 **Mission**
 
-Posthog’s mission to **"Increase the number of successful products in the world"** was a big reason I joined the company, and that phrase provided context to building out a long-term direction.
+PostHog's mission to **"Increase the number of successful products in the world"** was a big reason I joined the company, and that phrase provided context to building out a long-term direction.
 
 Dogfooding
 
@@ -59,21 +59,21 @@ Based on these interviews, I aggregated the key themes as a collection of insigh
 
 ## Phase 2: Building the strategy 
 
-### Long Term Direction & Audience
+### Long-term direction & audience
 
 The cornerstone of every strategy is having a long-term direction to point everything else towards. It was easy to build a long term vision for 2023 with insights from the intro interviews and leveraging PostHog’s existing mission. We identified a segment that resonated well with our existing successful customers and has a lot of growth potential.
 
-### First Milestone
+### First milestone
 
 With a long term vision, clear focused audience, and a ton of context about our customers, their needs, the market and how our product is used today, we identified one thing we needed to get right before anything else: funnels. 
 
 ## Phase 3: Landing the strategy
 
-### Feedback & Iteration
+### Feedback & iteration
 
 To get buy-in, it was crucial for me to share the draft with the entire company and get as much feedback as possible. The feedback was comprehensive and enabled me to quickly iterate on the first version. To make the strategy easy to remember and execute, we came up with a memorable two-word version of our top priority: “nail funnels” (thanks to [Tim](https://posthog.com/handbook/company/team/marcus-hyett)). 
 
-But you can’t just assume everyone will buy into the strategy because you posted it somewhere and they gave it a thumbs up. You have to talk people through it 1:1 and communicate the message via different channels. We discussed the new strategy in all our small team standups, company all-hands, and uploaded it to our website.
+But you can't just assume everyone will buy into the strategy because you posted it somewhere and they gave it a thumbs up. You have to talk people through it 1:1 and communicate the message via different channels. We discussed the new strategy in all our small team standups, company all-hands, and uploaded it to our website.
 
 Read more about our strategy [here](https://posthog.com/handbook/company/team/marcus-hyett).
 

@@ -1,6 +1,6 @@
 ---
 date: 2020-12-17
-title:  PostHog Raises $12 Million in Funding Led by GV and Y Combinator
+title:  PostHog raises $12 million in funding led by GV and Y Combinator
 rootPage: /blog
 sidebar: Blog
 showTitle: true

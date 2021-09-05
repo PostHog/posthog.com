@@ -1,6 +1,6 @@
 ---
 date: 2021-03-23
-title: The Startup Ops Toolkit
+title: The startup ops toolkit
 rootPage: /blog
 sidebar: Blog
 showTitle: true

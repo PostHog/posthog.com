@@ -1,6 +1,6 @@
 ---
 date: 2020-09-01
-title: Building an All-Remote Company from Scratch
+title: Building an all-remote company from scratch
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -9,9 +9,7 @@ categories: general,company-and-culture
 ---
 
 ![Remote Work Banner](../images/posthogers-map.png) 
-<br /><small class="centered">The [PostHog Team](/handbook/company/team) around the world.</small>
-
-
+<small class="centered">The [PostHog Team](/handbook/company/team) around the world.</small>
 <br />
 
 Many companies are currently having to adjust to remote work, but what about the ones that started this way from scratch?
@@ -22,11 +20,7 @@ So, what's it like building an all-remote company from the very first day?
 
 ## Communication 
 
-<br />
-
 ![GitHub Chat](../images/blog/remote-culture/github-chat.png) 
-
-<br />
 
 Communication is perhaps the single most important value for us at PostHog. In our view, getting this right is essential to running an all-remote company successfully. As such, we highly value the following concepts:
 
@@ -70,11 +64,7 @@ At PostHog, a large part of our async and transparent culture is underpinned by 
 
 ## Socializing
 
-<br />
-
 ![Virtual Coffee Bot](../images/blog/remote-culture/virtual-coffee.png) 
-
-<br />
 
 Being all-remote, our team is unable to grab a beer together after a week of hard work. 
 
@@ -93,11 +83,7 @@ We're big fans of our Friday event, and it's brought us closer as a result.
 
 ## Flexibility
 
-<br />
-
 ![Slack do not disturb](../images/blog/remote-culture/do-not-disturb.png) 
-
-<br />
 
 At PostHog we simply don't track hours at all. All we care about is output.
 
@@ -115,15 +101,12 @@ As a result, it's not uncommon to hear something along the lines off "I'm rentin
 
 It all comes down to trust. We hire people we believe in and give them autonomy and flexibility to drive us forward. 
 
+## Ship, iterate, ship
 
-## Ship, Iterate, Ship
-
-![Remote Work Banner](../images/blog/remote-culture/ship.jpg) 
-
+![Remote work banner](../images/blog/remote-culture/ship.jpg) 
 
 <small class="centered">Photo by Shaah Shahidh
 </small>
-
 
 <br />
 
@@ -139,11 +122,9 @@ At PostHog, on a small scale, this means not waiting for our designer to make an
 
 The key to this is a culture of iteration, as well as giving the team a sense of autonomy and responsibility. You should always aim to unblock yourself if you feel it's right and can do it without serious negative consequences.
 
-## Pull Requests > Issues
+## Pull requests > Issues
 
 ![GitHub PR](../images/blog/remote-culture/github-pr.png) 
-
-<br />
 
 At PostHog, we try our best to create a culture of submitting pull requests over opening issues. 
 
@@ -156,11 +137,7 @@ However, with such a culture in place, you build a team of doers who are consist
 
 ## Diversity
 
-<br />
-
 ![Dakar Couchsurf](../images/blog/remote-culture/dakar-couchsurf.png) 
-
-<br />
 
 In addition to having access to a much broader talent pool, building an all-remote team across various countries gives you the unique chance to get people on board who have distinct backgrounds, speak different languages, and most importantly: think differently.
 
@@ -171,6 +148,7 @@ Since our goal is to build an innovative product, it's important to be exposed t
 At PostHog, for example, we currently have people based in the US, Brazil, England, Senegal, Belgium, Estonia, Germany, and many other countries. As a result, we consistently get exposed to perspectives we may not have come across before, growing both as individuals and as a company. 
 
 ## It's in our DNA 🧬
+
 PostHog has been remote from day 1, and we don't intend on changing that. 
 
 It's been a journey full of "Wait, so where are you right now?" questions, through which we've managed to put together a world-class team to build an ambitious product. 
@@ -178,4 +156,3 @@ It's been a journey full of "Wait, so where are you right now?" questions, throu
 And while it hasn't been the easiest, sometimes because of bureaucracy, sometimes because of bad internet connections, we wouldn't trade it for anything. 
 
 After all, we want to continue hiring talented 18-year-olds from Poland and experienced founders from Mexico. Because remote isn't what we do - it's who we are. 
-

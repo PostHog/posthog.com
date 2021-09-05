@@ -20,7 +20,7 @@ Let's look at how product development workflow at PostHog, the responsibilities 
 
 The product process starts with the product strategy. Our product strategy derives from our company’s goals and informs the high-level approach to Product. It may be tempting to skip this step, but doing so causes immediate problems in the execution (see pitfalls below).
 
-For example, our current company goal is to achieve deep product-market fit by finding a handful of customers who absolutely love PostHog. With this in mind, we set out to create different product strategies that align towards this goal. An example of this was our [Nail Funnels](https://posthog.com/blog/new-vp-nailing-funnels) strategy, where we set out to enable our customers to dive deep into their metrics to understand conversion across different contexts.
+For example, our current company goal is to achieve deep product/market fit by finding a handful of customers who absolutely love PostHog. With this in mind, we set out to create different product strategies that align towards this goal. An example of this was our [Nail Funnels](https://posthog.com/blog/new-vp-nailing-funnels) strategy, where we set out to enable our customers to dive deep into their metrics to understand conversion across different contexts.
 
 Note that while these strategies come from Product, the process is highly collaborative. At PostHog, a strategy gets proposed with a strong rationale and details about the opportunity cost of doing it. Everyone at PostHog is encouraged to challenge and provide [feedback](https://posthog.com/handbook/people/feedback) on the proposal to improve it.
 
