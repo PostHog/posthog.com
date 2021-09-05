@@ -13,9 +13,6 @@ It contains our latest content:
 * Blog Posts
 * PostHog News
 
-
-<br /><br />
-
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css" />
 <div id="mc_embed_signup">
 <form action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&amp;id=97194afa0a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
