@@ -1,15 +1,20 @@
 ---
-title: iOS Library
+title: iOS library
 sidebarTitle: iOS
 sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-ios) for the Posthog-iOS Library. This is the official PostHog iOS library 
-to capture and send events to any PostHog instance (including posthog.com).
+<div className="md:flex justify-between items-center w-full p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark mb-5">
+<p className="mb-0 md:mr-4" style={{lineHeight: '1.5'}}>
+This is the official <strong>PostHog library for iOS</strong> to capture and send events to any PostHog instance (including posthog.com).
+</p>
+<CallToAction icon="none" href="https://github.com/PostHog/posthog-ios" className="whitespace-nowrap">
+Browse on GitHub
+</CallToAction>
+</div>
 
-This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, 
-making it perfect to use in any part of your mobile app.
+This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
 ## Installation
 
@@ -24,7 +29,7 @@ import IOSCapture from './snippets/capture.mdx'
 
 <IOSConfigure />
 
-## Making Calls
+## Making calls
 
 ### Identify
 
@@ -134,8 +139,7 @@ Starting with iOS 14, Apple will further restrict apps that track users. Any ref
 
 Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework. 
 
-
-## All Configuration options
+## All configuration options
 
 The `configuration` element contains several other settings you can toggle:
 
@@ -207,6 +211,6 @@ configuration.capturePushNotifications = NO;
 configuration.captureDeepLinks = NO;
 ``` 
 
-## Thank You
+## Thank you
 
 This library is largely based on the `analytics-ios` package.
