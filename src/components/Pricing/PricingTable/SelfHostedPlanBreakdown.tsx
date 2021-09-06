@@ -6,6 +6,9 @@ import { CallToAction } from '../../CallToAction'
 import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
 
 import checkIcon from '../../../images/check.svg'
+import { InfoCircleOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
+import './pricing.scss'
 
 export const SelfHostedPlanBreakdown = () => {
     const { finalCost, eventNumber } = useValues(pricingSliderLogic)
@@ -18,9 +21,16 @@ export const SelfHostedPlanBreakdown = () => {
                 <p className="opacity-50 text-sm">Great for startups</p>
                 <ul className="list-none pl-0 mb-6">
                     <li className="mb-1">
-                        <span className="text-base font-bold">1 million</span>
+                        <span className="text-base font-bold">~1 million</span>
                         &nbsp;
                         <span className="text-sm text-opacity-75">tracked users</span>
+                        <Tooltip
+                            className="pl-1"
+                            openClassName="max-w-[100px] border-gray"
+                            title="The scale plan includes advanced tools and support to scale PostHog beyond 1 million users"
+                        >
+                            <InfoCircleOutlined style={{ verticalAlign: 0 }} />
+                        </Tooltip>
                     </li>
                     <li className="mb-1">
                         <span className="text-base font-bold">1</span>

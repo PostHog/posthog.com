@@ -1,0 +1,34 @@
+.ant-tooltip {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #000000d9;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: 'tnum';
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    max-width: 250px;
+    visibility: visible;
+}
+.ant-tooltip-hidden {
+    display: none;
+}
+.ant-tooltip-inner {
+    min-width: 30px;
+    min-height: 32px;
+    padding: 6px 8px;
+    color: #fff;
+    text-align: left;
+    text-decoration: none;
+    word-wrap: break-word;
+    background-color: #000000bf;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+}
