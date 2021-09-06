@@ -71,8 +71,6 @@ import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
-import { ResponsiveSidebar } from './components/ResponsiveSidebar'
-import { ResponsiveTopBar } from './components/ResponsiveTopBar'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
@@ -160,8 +158,6 @@ export const shortcodes = {
     ProductFooter,
     ProductSectionHeader,
     ResponsiveAnchor,
-    ResponsiveSidebar,
-    ResponsiveTopBar,
     RocketHorizontalRule,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
