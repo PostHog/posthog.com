@@ -1,5 +1,5 @@
 ---
-title: Setting up PostHog EE
+title: Setting up Clickhouse for development
 sidebar: Handbook
 showTitle: true
 ---
