@@ -1,11 +1,11 @@
 ---
 date: 2021-09-06
-title: How PostHog offsets carbon emissions during offsites
+title: How PostHog uses Wren to offset carbon emissions during offsites
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: joemartin
+author: joe-martin
 featuredImage: 
 featuredImageType: full
 ---
