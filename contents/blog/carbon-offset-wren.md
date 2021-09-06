@@ -1,5 +1,5 @@
 ---
-date: 2021-08-26
+date: 2021-09-06
 title: How PostHog offsets carbon emissions during offsites
 rootPage: /blog
 sidebar: Blog
