@@ -26,7 +26,7 @@ Build better products by discovering and testing insights through an open-source
 
 We are primarily targeting Product Managers and Engineers in growth-stage businesses built around digital products; primarily web-based or software products. Apps are also viable but have less product fit due to current feature gaps (e.g. session recording, auto-capture).
 
-We define growth-stage businesses as those which appear to have discovered product-market fit and which are now focused on growing, rather than early-stage businesses or MVPs. We do see a strong response and resonance with these audiences, but they are not a primary focus.   
+We define growth-stage businesses as those which appear to have discovered product/market fit and which are now focused on growing, rather than early-stage businesses or MVPs. We do see a strong response and resonance with these audiences, but they are not a primary focus.   
 
 We are most successful when targeting technically experienced individuals, especially those who understand the open-source context of our product or who are able to deploy successfully.
 

@@ -174,7 +174,7 @@
                     "url": "/handbook/people/offboarding"
                 },
                 {
-                    "name": "Hiring Process",
+                    "name": "Hiring process",
                     "url": "",
                     "children": [
                         {
@@ -182,19 +182,19 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
-                            "name": "Design Hiring",
+                            "name": "Design hiring",
                             "url": "/handbook/people/hiring-process/design-hiring"
                         },
                         {
-                            "name": "Engineering Hiring",
+                            "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
                         },
                         {
-                            "name": "Exec Hiring",
+                            "name": "Exec hiring",
                             "url": "/handbook/people/hiring-process/exec-hiring"
                         },
                         {
-                            "name": "Operations Hiring",
+                            "name": "Operations hiring",
                             "url": "/handbook/people/hiring-process/operations-hiring"
                         }
                     ]
@@ -340,7 +340,7 @@
             "url": "/docs"
         },
         {
-            "name": "Self-Host",
+            "name": "Self-host",
             "url": "",
             "children": [
                 {
@@ -394,7 +394,7 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Environment Variables",
+                            "name": "Environment variables",
                             "url": "/docs/self-host/configure/environment-variables"
                         },
                         {
@@ -402,11 +402,11 @@
                             "url": "/docs/self-host/configure/securing-posthog"
                         },
                         {
-                            "name": "Running Behind a Proxy",
+                            "name": "Running behind a proxy",
                             "url": "/docs/self-host/configure/running-behind-proxy"
                         },
                         {
-                            "name": "Configuring Email",
+                            "name": "Configuring email",
                             "url": "/docs/self-host/configure/email"
                         },
                         {
@@ -426,7 +426,7 @@
                     "url": "/docs/cloud"
                 },
                 {
-                    "name": "Deploying a Reverse Proxy to Posth…",
+                    "name": "Deploying a reverse proxy to PostHog Cloud",
                     "url": "/docs/cloud/proxy"
                 }
             ]
@@ -440,19 +440,19 @@
                     "url": "/docs/integrate"
                 },
                 {
-                    "name": "Ingest Live Data",
+                    "name": "Ingest live data",
                     "url": "/docs/integrate/ingest-live-data"
                 },
                 {
-                    "name": "Ingest Historical Data",
+                    "name": "Ingest historical data",
                     "url": "/docs/integrate/ingest-historic-data"
                 },
                 {
-                    "name": "Client Libraries",
+                    "name": "Client libraries",
                     "url": "",
                     "children": [
                         {
-                            "name": "Snippet Installation",
+                            "name": "Snippet installation",
                             "url": "/docs/integrate/client/snippet-installation"
                         },
                         {
@@ -478,7 +478,7 @@
                     ]
                 },
                 {
-                    "name": "Server Libraries",
+                    "name": "Server libraries",
                     "url": "",
                     "children": [
                         {
@@ -508,7 +508,7 @@
                     ]
                 },
                 {
-                    "name": "Third Party",
+                    "name": "Third party",
                     "url": "",
                     "children": [
                         {
@@ -566,7 +566,7 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Message Formatting",
+                            "name": "Message formatting",
                             "url": "/docs/integrate/webhooks/message-formatting"
                         },
                         {
@@ -586,7 +586,7 @@
             ]
         },
         {
-            "name": "User Guides",
+            "name": "User guides",
             "url": "",
             "children": [
                 {
@@ -594,7 +594,7 @@
                     "url": "/docs/user-guides"
                 },
                 {
-                    "name": "Application Settings",
+                    "name": "Application settings",
                     "url": "/docs/user-guides/application-settings"
                 },
                 {
@@ -666,7 +666,7 @@
                     "url": "/docs/user-guides/trends"
                 },
                 {
-                    "name": "Users / People",
+                    "name": "Users/People",
                     "url": "/docs/user-guides/users"
                 }
             ]
@@ -680,11 +680,11 @@
                     "url": "/docs/plugins"
                 },
                 {
-                    "name": "Enabling Plugins",
+                    "name": "Enabling plugins",
                     "url": "/docs/plugins/enabling"
                 },
                 {
-                    "name": "Build Your Own",
+                    "name": "Build your own",
                     "url": "",
                     "children": [
                         {
@@ -696,11 +696,11 @@
                             "url": "/docs/plugins/build/tutorial"
                         },
                         {
-                            "name": "TypeScript Types",
+                            "name": "TypeScript types",
                             "url": "/docs/plugins/build/types"
                         },
                         {
-                            "name": "Plugins Developer Reference",
+                            "name": "Plugins developer reference",
                             "url": "/docs/plugins/build/reference"
                         }
                     ]
@@ -716,51 +716,51 @@
                     "url": "/docs/tutorials"
                 },
                 {
-                    "name": "How to Safely Roll Out New Features",
+                    "name": "How to safely roll out new features",
                     "url": "/docs/tutorials/feature-flags"
                 },
                 {
-                    "name": "Visualizing User Behavior - Toolbar",
+                    "name": "Visualizing user behavior - Toolbar",
                     "url": "/docs/tutorials/toolbar"
                 },
                 {
-                    "name": "Analyzing Your Conversion with Fun…",
+                    "name": "Analyzing your conversion with Fun…",
                     "url": "/docs/tutorials/funnels"
                 },
                 {
-                    "name": "Analyzing User Behavior with Cohorts",
+                    "name": "Analyzing user behavior with Cohorts",
                     "url": "/docs/tutorials/cohorts"
                 },
                 {
-                    "name": "Measuring Retention and Tracking C…",
+                    "name": "Measuring retention and tracking c…",
                     "url": "/docs/tutorials/retention"
                 },
                 {
-                    "name": "Tracking Single Page Apps",
+                    "name": "Tracking single page apps",
                     "url": "/docs/tutorials/spa"
                 },
                 {
-                    "name": "Complete Guide to Event Tracking",
+                    "name": "Complete guide to event tracking",
                     "url": "/docs/tutorials/event-tracking-guide"
                 },
                 {
-                    "name": "Tracking Key B2B Product Metrics",
+                    "name": "Tracking key B2B product metrics",
                     "url": "/docs/tutorials/b2b"
                 },
                 {
-                    "name": "Sales and Revenue Tracking",
+                    "name": "Sales and revenue tracking",
                     "url": "/docs/tutorials/revenue"
                 },
                 {
-                    "name": "Tracking How Teams Use Your Product",
+                    "name": "Tracking how teams use your product",
                     "url": "/docs/tutorials/tracking-teams"
                 },
                 {
-                    "name": "Running Surveys with No Backend",
+                    "name": "Running surveys with no backend",
                     "url": "/docs/tutorials/survey"
                 },
                 {
-                    "name": "Deleting Bulk Data",
+                    "name": "Deleting bulk data",
                     "url": "/docs/tutorials/deleting-data"
                 }
             ]
@@ -774,7 +774,7 @@
                     "url": "/docs/api"
                 },
                 {
-                    "name": "POST-Only Public Endpoints",
+                    "name": "POST-only public endpoints",
                     "url": "/docs/api/post-only-endpoints"
                 },
                 {
@@ -824,27 +824,27 @@
                     "url": "/docs/contribute"
                 },
                 {
-                    "name": "Code of Conduct",
+                    "name": "Code of conduct",
                     "url": "/docs/contribute/code-of-conduct"
                 },
                 {
-                    "name": "Recognizing Contributions",
+                    "name": "Recognizing contributions",
                     "url": "/docs/contribute/recognizing-contributions"
                 },
                 {
-                    "name": "Developing Locally",
+                    "name": "Developing locally",
                     "url": "/docs/contribute/developing-locally"
                 },
                 {
-                    "name": "Tech Stack",
+                    "name": "Tech stack",
                     "url": "/docs/contribute/stack"
                 },
                 {
-                    "name": "Project Structure",
+                    "name": "Project structure",
                     "url": "/docs/contribute/project-structure"
                 },
                 {
-                    "name": "Updating Documentation",
+                    "name": "Updating documentation",
                     "url": "/docs/contribute/updating-documentation"
                 }
             ]

@@ -21,7 +21,7 @@ If you're self-hosting and want to upgrade for a better experience with nicer fe
 
 ## Release Notes
 
-### [PostHog is Now Available on Segment!](/blog/posthog-segment-integration)
+### [PostHog is now available on Segment!](/blog/posthog-segment-integration)
 
 ![](../images/posthog-segment.png)
 

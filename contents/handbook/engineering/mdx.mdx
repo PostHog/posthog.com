@@ -46,6 +46,7 @@ The GraphQL query will return everything we need, from content to frontmatter, a
 In this case, we pass references to components that can then be used without imports directly on MDX pages, like this hedgehog:
 
 <BasicHedgehogImage />
+<br />
 
 Because of the components passed to `MDXProvider`, I can include this hedgehog by just adding `<BasicHedgehogImage />` in my 
 MDX file - no import needed. 
@@ -53,10 +54,6 @@ MDX file - no import needed.
 However, if I want to include something from a module, I can also do so. Here's a spinner component from AntD:
 
 <Spin />
-
-<br />
-<br />
-
 
 ```js
 

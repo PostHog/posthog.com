@@ -14,9 +14,9 @@ When enabled, the Toolbar will appear on your website (only for you, of course!)
 
 ![inspect](../../images/casts/inspect.gif)
 
-## Learning Resources
+## Learning resources
 
-### Demo Video
+### Demo video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LD5TsEs5G-o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -34,33 +34,30 @@ When enabled, the Toolbar will appear on your website (only for you, of course!)
 Our Toolbar is a versatile feature that allows for:
 <br />
 
-### Inspecting Elements
+### Inspecting elements
 
 Inspecting elements with Dev Tools is a bit of a messy experience. With the PostHog Toolbar, you are able to get the `class` and `id` of an element much faster and without any extra noise. Click the element to inspect and you'll have access to everything you need to know about that element.
 <br />
 
 
-### Visualizing the Interactions Ranking
+### Visualizing the interactions ranking
 
 Easily see the ranking of which parts of the page your users are interacting with the most:
 
 ![heatmap](../../images/casts/heatmap.gif)
 <br />
 
-### Create Actions
+### Create actions
 
 Inspect an element, see how often it has triggered an event, and immediately create an action with that data.
 
 Having to flip back and forth between multiple pages hinders our decision-making process. With the Toolbar, everything you need to tailor your analytics is right in front of you: your website, the user data, and the functionality to create an action.
-<br />
 
 ### Statistics
 
 Learn more about how users interact with your webpage. Coming soon!
-<br />
 
-## How to Use the Toolbar
-<br />
+## How to use the toolbar
 
 #### Step 1: Go to your setup page and switch it on:
 
@@ -74,7 +71,7 @@ Once authenticated, hover over him to get started!
 
 ![toolbar dance](../../images/casts/dance.gif)
 
-## Fair Warning: It's BETA! Really!
+## Fair warning: It's BETA! Really!
 
 The toolbar is now in public Beta! No, not "Gmail Beta", **real** BETA! There's still a lot of work to be done ([follow along here!](https://github.com/PostHog/posthog/projects/7)). It **will** feel like a bumpy ride on an unpolished road, *especially* when you click the mysterious "dock" icon! 👀
 

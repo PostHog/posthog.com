@@ -7,19 +7,19 @@ showTitle: true
 
 ## Objective
 
-Integrating PostHog with your Shopify store.
+Integrating PostHog with your Shopify store
 
 ## Why is this useful?
 
 Tracking how users use your [Shopify](https://www.shopify.com/) store can help you improve the user experience and increase conversion rates on your e-shop.  
 
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you should:
 
 1. Have [deployed PostHog](/docs/deployment) or be using PostHog Cloud.
 
-## Step-By-Step Instructions
+## Step-by-step instructions
 
 1. Get your [PostHog snippet](/docs/integrate/client/snippet-installation) from your 'Project Settings' or the initial PostHog setup
 1. Login to your Shopify dashboard

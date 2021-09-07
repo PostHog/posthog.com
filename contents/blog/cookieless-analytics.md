@@ -1,6 +1,6 @@
 ---
 date: 2021-08-23
-title: Google Is About To Make It A Lot Harder To Track Website and App Users Without Third-Party Cookies
+title: Google is about to make it a lot harder to track website and app Users without third-party cookies
 rootPage: /blog
 sidebar: Blog
 showTitle: true

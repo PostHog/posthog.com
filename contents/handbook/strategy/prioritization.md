@@ -32,7 +32,7 @@ After we’ve made significant progress towards our current milestone we will bu
 
 ## How is our product/market fit?
 
-Below is a table of how we see our product-market fit for various sizes of companies and various job roles.
+Below is a table of how we see our product/market fit for various sizes of companies and various job roles.
 
 <span class="table-borders">
 <table>
@@ -75,7 +75,7 @@ Below is a table of how we see our product-market fit for various sizes of compa
 </span>
 
 
-As you can see, we have good product-market fit with engineers generally, and specifically for enthusiasts and startups. 
+As you can see, we have good product/market fit with engineers generally, and specifically for enthusiasts and startups. 
 
 ## Value
 
@@ -121,7 +121,7 @@ Given scores from 1-5, here's how each type of company stacks up against those t
 
 ## Putting it together
 
-When thinking of building a new feature, we can combine the product-market fit table and the priority table into one.
+When thinking of building a new feature, we can combine the product/market fit table and the priority table into one.
 
 We have three options for each box:
 - Deprecate: stop supporting

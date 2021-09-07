@@ -13,16 +13,16 @@ Integrating PostHog with Retool.
 
 [Retool](https://retool.com/) is a platform you can use to quickly build internal tools that leverage your data from different sources with little to no-code.
 
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you should:
 
 1. Have [deployed PostHog](/docs/deployment). 
 2. Have a [Retool account](https://login.retool.com/auth/signup)
 
-## Step-By-Step Instructions
+## Step-by-step instructions
 
-### Retool App Setup
+### Retool app setup
 
 First, create a new app from the Retool dashboard:
 
@@ -71,7 +71,7 @@ Integrating Retool with PostgreSQL directly is rather simple.
 4. Click 'Create Resource' and you should now be able to connect to PostHog endpoints through Retool queries. For information on our endpoints, see our [API Documentation](/docs/api/overview).
 5. For some of our endpoints, this configuration is enough. However, endpoints like `/event` and `/person` have pagination, which Retool does not support out of the box. As such, follow the next steps for instructions on how to handle PostHog's pagination with Retool.
 
-### Handling Pagination with Retool
+### Handling pagination with Retool
 
 To handle pagination in Retool and show results beyond the first "page", we need to do some Retool magic.
 

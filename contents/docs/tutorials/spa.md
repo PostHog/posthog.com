@@ -1,26 +1,18 @@
 ---
-title: Tracking Single Page Apps
+title: Tracking single page apps
 sidebar: Docs
 showTitle: true
 ---
 
-<small class="note-block centered">_Estimated Reading Time: 8 minutes ☕☕_</small>
+_Estimated reading time: 8 minutes_ ☕☕
 
-<br />
-
-<span class="larger-image">
-
-![SPA Banner Image](../../images/tutorials/banners/spa.png)
-
-</span>
-
-<br />
+![SPA banner image](../../images/tutorials/banners/spa.png)
 
 If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further. 
 
 This tutorial will guide you through multiple methods you can use to ensure you capture navigation in your SPA website. 
 
-### Is This Tutorial For Me?
+### Is this tutorial for me?
 
 This tutorial is aimed at SPAs, which are websites that only load one time, with all content either being loaded at once or dynamically as the user browses (without a page refresh). However, it may also provide relevant insights for:
 
@@ -28,14 +20,14 @@ This tutorial is aimed at SPAs, which are websites that only load one time, with
 - Tracking apps/Websites with non-standard navigation
 - Those looking to capture additional `$pageview` events
 
-### Pre-Requisites
+### Prerequisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
 1. Be using our [JavaScript Library](/docs/integrate/client/js) to track your SPA
 
-### Tracking Navigation Changes in SPAs
+### Tracking navigation changes in SPAs
 
 If you use PostHog to track a traditional website, our [autocapture](/docs/integrate/client/js#autocapture) feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
 
@@ -43,7 +35,7 @@ As such, in order to accurately capture navigation in SPAs, we need to manually 
 
 This tutorial will now take you through various methods that use events to track navigation, which can be used by themselves or in combination with the others.
 
-### Navigation via Clicks
+### Navigation via clicks
 
 The most straightforward way to track navigation in SPAs is to set triggers for clicks that coordinate the navigation and use them to determine what "page" the user is now on.
 
@@ -67,7 +59,7 @@ Since PostHog captures the 'Current URL' property from `window.location.href` an
 
 As such, to track navigation via clicks, one simply needs to set event listeners for the all the relevant clicks and capture a `$pageview` on those events. Provided that the clicks change the URL (`window.location.href`), this method will work with no additional tweaks needed. However, we will still go through how you can update the URL yourself.
 
-### Tracking Visible Elements on the Page
+### Tracking visible elements on the page
 
 While tracking pageviews from clicks is a good first step, the approach is not ideal for a lot of SPAs. 
 
@@ -77,7 +69,7 @@ In this case, clicks are not enough: we need to track what elements are visible 
 
 To do so, we need a few things.
 
-**Checking if an element is visible to the user**
+#### Checking if an element is visible to the user
 
 To check if an element is visible to the user, we can use the following helper function:
 
@@ -104,7 +96,7 @@ The function above takes a reference to a DOM element as a parameter and returns
 
 We will be using this function to periodically check if certain elements are visible as the user goes through the page.
 
-**Determining elements that represent new sections**
+#### Determining elements that represent new sections
 
 The next step is to decide what elements in our SPA constitute a new section/screen. We will use these to trigger pageviews when they are visible for the user.
 
@@ -129,7 +121,7 @@ let elementsToTrack = [
 
 This structure will be useful for the next step, but you can of course customize this entire solution as you wish.
 
-**Listening for changes to the window to trigger page views**
+#### Listening for changes to the window to trigger page views
 
 With the structure in place, let's now actually listen for changes and capture events.
 
@@ -178,7 +170,7 @@ Additionally, you will also be able to use our [paths](/docs/user-guides/paths) 
 
 > **Note:** If your page does not refresh but the URL changes with navigation, PostHog's default 'Current URL' may still be useful. Otherwise, if your URL _never_ changes, you should definitely override the prop with your own values - just make sure to follow a good naming system!
 
-**Setting the relevant listeners**
+#### Setting the relevant listeners
 
 Finally, we need to listen for the relevant changes to window that might lead to a new page view:
 
@@ -197,8 +189,7 @@ Here, we are listening for window events that may cause a new section to come in
 
 However, if you have reason to do so, you can listen for window `load` events and/or `DOMContentLoaded` events. The latter triggers when the DOM structure is ready (i.e. HTML and CSS loaded), whereas the former triggers when images and frames finish loading.
 
-
-**Full Snippet**
+#### Full snippet
 
 Putting everything together, here's what the final snippet looks like (without comments):
 
@@ -259,7 +250,7 @@ This snippet is written in Vanilla JS and can be included at the bottom of your 
 Additionally, if you are using a web framework like React, you can either set this logic on a `useEffect` hook or `componentDidMount` call on a wrapper/layout component, as well as you can also track navigation based on when certain components render. 
 
 
-### Additional Methods
+#### Additional methods
 
 The methods presented here are examples of options to track SPAs with PostHog. However, with an understanding of how to go about setting up tracking, you can also explore other methods.
 

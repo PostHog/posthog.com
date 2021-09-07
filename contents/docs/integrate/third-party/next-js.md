@@ -14,7 +14,7 @@ It will guide you through an example integration of PostHog using Next.js and th
 This tutorial is aimed at Next.js users. 
 We are going to look at some minimal example code which should get you started quickly.
 
-### Pre-requisites
+### Prerequisites
 
 To follow this tutorial along, you need to:
 

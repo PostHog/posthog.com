@@ -146,11 +146,14 @@ Please avoid using presentations for internal use. They are a poor substitute fo
 
 ### Writing style
 
-1. We use American English as the standard written language in our public-facing comms, including this handbook.
+1. We use American English as the standard written language in our public-facing comms, including this handbook. This extends to date formats (September 4, 2021) and defaulting pricing to the US Dollar ($42).
 1. Do not use acronyms when you can avoid them. Acronyms have the effect of excluding people from the conversation if they are not familiar with a particular term.
+1. Common terms can be abbreviated without periods unless absolutely necessary, as it's more friendly to read on a screen. (Ex: _USA_ instead of _U.S.A._, or _vs_ over _vs._)
 1. We use the [Oxford comma](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
 1. Do not create links like "here" or "click here". All links should have relevant anchor text that describes what they link to. Using meaningful links is important to both search engine crawlers (SEO) and people with accessibility issues.
 1. We use sentence case for titles.
+1. When writing numbers in the thousands to the billions, it's acceptable to abbreviate them (like 10M or 100B - capital letter, no space). If you write out the full number, use commas (like 15,000,000).
+
 
 ## Internal meetings
 

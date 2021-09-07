@@ -14,11 +14,11 @@ The kind of ways Paths can be helpful are as follows:
 
 We provide a visual representation of the paths taken by users on your product, so that you can easily identify these patterns.
 
-## Viewing Paths
+## Viewing paths
 
 Go to the 'User Paths' tab after visiting 'Insights' in the left-hand navigation:
 
-![Paths Page](../../images/features/paths/paths-page.png)
+![Paths page](../../images/features/paths/paths-page.png)
 
 There is no set up in the PostHog UX needed for paths - they appear automatically if you are tracking pageviews with our snippet, or pushing page view events.
 
@@ -32,7 +32,7 @@ Filters can also be combined in order to define more complex groups, creating st
 
 If you want us to help improve 'Paths', you can take a look at [this issue](https://github.com/PostHog/posthog/issues/223). Feel free to comment, upvote, or pick up this as a PR.
 
-### Multiple Domains
+### Multiple domains
 
 Paths work across subdomains, even with the basic snippet installation. We see it's common for a website to be the landing page, then traffic to move into app.example.com, once a user starts interacting with the product. Just set up the root domain as the URL in your [tracking settings](/docs/integrate/client/snippet-installation).
 
