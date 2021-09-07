@@ -60,7 +60,9 @@ export const PluginLibraryPage = () => {
                                 />
                             ))
                         ) : (
-                            <Spin />
+                            <div className="col-span-full">
+                                <Spin />
+                            </div>
                         )}
                     </div>
                 </div>
