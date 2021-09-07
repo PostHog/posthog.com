@@ -76,7 +76,7 @@ export default function SearchBar({ base }) {
             </span>
             <input
                 id={`${base}-search`}
-                className="w-full text-sm text-primary dark:text-primary-dark outline-none bg-transparent py-2 pl-5 placeholder-primary-50::placeholder dark:placeholder-primary-dark-50::placeholder"
+                className="w-full text-xs text-primary dark:text-primary-dark outline-none bg-transparent py-2 pl-6 placeholder-primary-50::placeholder dark:placeholder-primary-dark-50::placeholder"
                 placeholder={`Search ${breakpoints.xs ? '' : base}`}
             />
         </div>
