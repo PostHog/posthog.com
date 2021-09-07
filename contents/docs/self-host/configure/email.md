@@ -39,6 +39,18 @@ EMAIL_DEFAULT_FROM: no-reply@example.com
 SITE_URL: https://posthog.example.com
 ```
 
+The above sample configuration would be set in your `values.yaml` this way:
+```yaml
+email:
+  from_email: no-reply@example.com
+  host: smtp.example.com
+  port: 587
+  user: postmaster@example.com
+  password: password
+  use_tls: false
+  use_ssl: true
+```
+
 Below you will find details on how to configure the most common email providers (not in any particular order). 
 
 ## Twilio's Sendgrid
