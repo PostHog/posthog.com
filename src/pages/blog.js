@@ -43,7 +43,7 @@ const BlogPage = ({
                 <SEO title="PostHog Blog" description="What we are up to, every week." />
 
                 <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
-                    <div className="w-11/12 mx-auto text-right">
+                    <div className="flex justify-end items-center w-full px-4 mb-4 mt-6 lg:mt-4">
                         <DarkModeToggle />
                     </div>
 
