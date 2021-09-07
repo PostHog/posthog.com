@@ -7,12 +7,8 @@ export default function MainSidebar({ slug, menu, className, mainEl, height }) {
     useEffect(() => {
         const isBrowser = typeof window !== 'undefined'
         if (!height && mainEl && isBrowser) {
-            const offSet = 90
-            const distanceFromTop = navEl.current.getBoundingClientRect().top
-            const navHeight = Math.min(
-                window.innerHeight - distanceFromTop - offSet,
-                mainEl.current.getBoundingClientRect().height
-            )
+            const offset = 153 // Sticky top (90) + margin bottom (63)
+            const navHeight = Math.min(window.innerHeight - offset, mainEl.current.getBoundingClientRect().height)
             setNavHeight(navHeight)
         }
     }, [])
