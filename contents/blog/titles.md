@@ -1,6 +1,6 @@
 ---
 date: 2021-09-10
-title: You're doing titles all wrong\: How to set job titles in your early-stage startup
+title: You are doing titles all wrong - How to set job titles in your early stage startup
 rootPage: /blog
 sidebar: Blog
 showTitle: true
