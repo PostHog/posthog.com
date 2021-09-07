@@ -8,7 +8,7 @@ showTitle: true
 
 Ask in slack in #team-deployments-and-infrastructure as someone needs to add you. Though note that anyone who is an owner in the Posthog team can do it.
 
-To give someone access: navigate to [Posthog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the Invite Members button.
+To give someone access: Navigate to [Posthog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the `Invite Members` button to add their Posthog email address.
 
 ### Deploying Posthog
 
