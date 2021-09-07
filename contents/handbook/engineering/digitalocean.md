@@ -12,7 +12,7 @@ To give someone access: Navigate to [Posthog team settings page](https://cloud.d
 
 ### Edit 1-Click app info
 
-This can be done in the [vendor portal](https://cloud.digitalocean.com/vendorportal/), click on `PostHog` with Appoved status to edit the listing.
+This can be done in the [vendor portal](https://cloud.digitalocean.com/vendorportal/), click on `PostHog` with Approved status to edit the listing.
 
 The code and setup files are in [digitalocean/marketplace-kubernetes repository](https://github.com/digitalocean/marketplace-kubernetes/tree/master/stacks/posthog).
 
