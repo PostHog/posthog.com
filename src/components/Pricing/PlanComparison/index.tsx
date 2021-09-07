@@ -13,12 +13,6 @@ import './styles/index.scss'
 
 const tiers = [
     {
-        name: 'PostHog Cloud',
-        href: '#',
-        priceMonthly: 9,
-        description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
-    },
-    {
         name: 'Open source',
         href: '#',
         priceMonthly: 29,
@@ -29,6 +23,12 @@ const tiers = [
         href: '#',
         priceMonthly: 59,
         description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
+    },
+    {
+        name: 'PostHog Cloud',
+        href: '#',
+        priceMonthly: 9,
+        description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
     },
 ]
 const sections = [
@@ -351,14 +351,14 @@ export const PlanComparison = ({ className = '' }) => {
                                 <th style={{ border: 0 }} className="text-almost-black text-center">
                                     &nbsp;
                                 </th>
-                                <th className="text-almost-black text-center border-white border-opacity-10">
-                                    Hosted solution
-                                </th>
                                 <th
                                     colSpan="2"
                                     className="text-almost-black text-center border-white border-opacity-10"
                                 >
                                     Self-hosted options
+                                </th>
+                                <th className="text-almost-black text-center border-white border-opacity-10">
+                                    Hosted solution
                                 </th>
                             </tr>
                             <tr>
