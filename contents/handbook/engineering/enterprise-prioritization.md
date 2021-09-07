@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+> We use the following [GitHub Board](https://github.com/orgs/PostHog/projects/16) to track enterprise features.
+
 PostHog is becoming increasingly used by large corporations who, in general, have different product requirements from hobbyists and startups - particularly around compliance and collaboration. Our milestones for the foreseeable future target improvements around the product rather than these supporting activities. However, we want to make sure these customers can use PostHog unemcumbered, as they're becoming increasingly critical for us. These requirements can usually be seen as important but not urgent (until they are). To make sure we keep delivering on these requirements, we've developed the framework below.
 
 Each sprint, we ask the following questions around each requirement. If the answer is "yes" to any of them, we prioritize those for the sprint. If all are "no", we keep them in the backlog.
