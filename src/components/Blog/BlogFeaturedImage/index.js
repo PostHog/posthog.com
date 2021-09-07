@@ -2,6 +2,19 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import BlogAuthor from '../BlogAuthor'
 import { PlainIntro } from '../BlogIntro'
+import cntl from 'cntl'
+
+const bgGradient = cntl`
+    before:h-full
+    before:left-0
+    before:right-0
+    before:top-0
+    before:z-[1]
+    before:absolute
+    before:bg-gradient-to-b
+    before:from-black/75
+    before:to-black/25
+`
 
 export function FeaturedImageStandard({ pageTitle, featuredImage, blogDate, authorDetails }) {
     return (
@@ -17,17 +30,7 @@ export function FeaturedImageStandard({ pageTitle, featuredImage, blogDate, auth
 export function FeaturedImageFull({ pageTitle, featuredImage, blogDate, authorDetails }) {
     return (
         <div className="md:mx-8 md:rounded-lg md:overflow-hidden">
-            <div
-                className="w-full h-full relative flex items-center justify-center md:pt-1/2 blog-image
-            before:h-full
-            before:left-0
-            before:right-0
-            before:top-0
-            before:z-[1]
-            before:content-['']
-            before:absolute
-            "
-            >
+            <div className={`w-full h-full relative flex items-center justify-center md:pt-1/2 ${bgGradient}`}>
                 <img className="h-full w-full absolute object-cover top-0 shadow-lg" src={featuredImage} />
 
                 <div className="md:absolute p-8 top-0 w-full left-0 bottom-0 leading-tight z-10 flex justify-center items-center flex-col">
