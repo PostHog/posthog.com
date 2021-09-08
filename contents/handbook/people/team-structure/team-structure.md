@@ -59,15 +59,18 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see core values) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the small teams plane. To make the changes smoother for everyone, here’s the checklist we use:
 
-- [ ] Discuss with concerned team leads (and/or managers if applicable)
-- [ ] Discuss with concerned team member(s)
-- [ ] Open a PR on PostHog.com documenting the change on the handbook
-    - Update the [Team Structure](https://posthog.com/handbook/people/team-structure/team-structure) page.
-    - Update the relevant small teams pages’.
-- [ ] Let everyone else in the company know in the next PostHog News session
+- [ ] Discuss with concerned team leads (and/or managers if applicable).
+- [ ] Discuss with concerned team member(s).
+- [ ] Open a PR on `posthog.com` documenting the change on the handbook.
+    - Update the [Team Structure](/handbook/people/team-structure/team-structure) page.
+    - Update the relevant small teams pages'.
+- [ ] Let everyone else in the company know in the next PostHog News session.
+- [ ] Add/remove from relevant [Sentry teams](https://sentry.io/settings/posthog/teams/)
+- [ ] Add/remove from relevant [GitHub teams](https://github.com/orgs/PostHog/teams)
+- [ ] Add/remove from Slack `@` team name mentions (e.g. `@core-experience`)
 
 
 ### Team Lead Checklist
-- [ ] Onboarding 1:1 with new team member
-- [ ] Add to stand-ups, planning sessions & any other team rituals
-- [ ] Update Slack channel description & invite to Slack channel if needed
+- [ ] Onboarding 1:1 with new team member.
+- [ ] Add to stand-ups, planning sessions & any other team rituals.
+- [ ] Update Slack channel description & invite to Slack channel if needed.
