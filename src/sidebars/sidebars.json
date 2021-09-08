@@ -348,6 +348,10 @@
                     "url": "/docs/self-host"
                 },
                 {
+                    "name": "Architecture",
+                    "url": "/docs/architecture"
+                },
+                {
                     "name": "Postgres vs ClickHouse",
                     "url": "/docs/self-host/postgres-vs-clickhouse"
                 },
