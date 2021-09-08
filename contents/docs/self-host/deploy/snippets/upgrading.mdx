@@ -4,7 +4,7 @@ To upgrade the chart using [Helm >= v3](https://helm.sh/) with the release name 
 
 ```console
 helm repo update
-helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog
+helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog --atomic
 ```
 
 **When upgrading major versions, see [Upgrade notes](/docs/self-host/deploy/upgrade-notes).**
