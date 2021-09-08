@@ -222,8 +222,8 @@
                     "url": "/handbook/engineering/bug-prioritization"
                 },
                 {
-                    "name": "Enterprise prioritization",
-                    "url": "/handbook/engineering/enterprise-prioritization"
+                    "name": "Scale features prioritization",
+                    "url": "/handbook/engineering/scale-features-prioritization"
                 },
                 {
                     "name": "Onboarding customers",
