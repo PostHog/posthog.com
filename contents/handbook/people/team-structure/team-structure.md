@@ -1,9 +1,11 @@
 ---
-title: Team structure
+title: Team Structure
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
 ---
+
+# Small Teams
 
 We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/people/team-structure/why-small-teams).
 
@@ -51,3 +53,21 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 ## [People & culture](people)
 
 - [Eltje Lange](/handbook/people/team#eltje-lange-people-and-talent) (People and Talent)
+
+
+# Organization changes
+
+We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see core values) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the small teams plane. To make the changes smoother for everyone, here’s the checklist we use:
+
+- [ ] Discuss with concerned team leads (and/or managers if applicable)
+- [ ] Discuss with concerned team member(s)
+- [ ] Open a PR on PostHog.com documenting the change on the handbook
+    - Update the [Team Structure](https://posthog.com/handbook/people/team-structure/team-structure) page.
+    - Update the relevant small teams pages’.
+- [ ] Let everyone else in the company know in the next PostHog News session
+
+
+### Team Lead Checklist
+- [ ] Onboarding 1:1 with new team member
+- [ ] Add to stand-ups, planning sessions & any other team rituals
+- [ ] Update Slack channel description & invite to Slack channel if needed
