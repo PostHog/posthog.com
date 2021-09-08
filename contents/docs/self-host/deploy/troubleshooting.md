@@ -44,7 +44,7 @@ Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, w
 
 ### Are the errors I'm seeing important?
 
-Here are some examples of log spam we know that currently exists in our app and is safe to ignore:
+Here are some examples of log spam that currently exists in our app and is safe to ignore:
 
 The following messages in the ClickHouse pod happen when ClickHouse reshuffles how it consumes from the topics. So, anytime ClickHouse or Kafka restarts we'll get a bit of noise and the following log entries are safe to ignore:
 ```
