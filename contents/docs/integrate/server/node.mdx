@@ -1,13 +1,13 @@
 ---
-title: Node.js Library
+title: Node.js library
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
 ---
 
-If you're working with Node.js, the official [posthog-node](https://www.npmjs.com/package/posthog-node) library is the simple way to integrate your software with PostHog.
+<VisitLibrary name="Node.js" to="https://github.com/PostHog/posthog-node" official />
 
-This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
+If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
 
 ## Installation 
 
@@ -51,7 +51,7 @@ You can find your key in the 'Project Settings' page in PostHog.
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` and `flushInterval` to `0`.
 
-## Making Calls
+## Making calls
 
 ### Capture
 
@@ -163,7 +163,7 @@ client.alias({
 })
 ```
 
-### Sending Page Views
+### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend, like so:
 
@@ -177,7 +177,7 @@ client.capture({
 })
 ```
 
-### Feature Flags
+### Feature flags
 
 > Note that to use feature flags you must specify `personalApiKey` in [options passed to the `PostHog` constructor](#options).
 

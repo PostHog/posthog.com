@@ -1,7 +1,15 @@
 import React from 'react'
-import { Card, Col, Tag } from 'antd'
 import { PluginImage } from './PluginImage'
 import { Link } from 'gatsby'
+import cntl from 'cntl'
+
+const wrapper = cntl`
+    bg-white
+    rounded
+    cursor-pointer
+    p-4
+    relative
+`
 
 interface PluginCardStructureMeta {
     name: string
@@ -15,27 +23,22 @@ interface PluginCardMeta extends PluginCardStructureMeta {
     onClick?: () => void | undefined
 }
 
+const Tag = ({ color, children }: { color: string; children: string }) => {
+    return (
+        <div className={`bg-${color} text-white px-3 py-1 absolute right-2 top-2 rounded-full text-xs`}>{children}</div>
+    )
+}
+
 const PluginCardStructure = ({ name, description, imageSrc, isCommunityPlugin }: PluginCardStructureMeta) => {
     return (
-        <Col sm={12} md={12} lg={8} xl={6} style={{ marginBottom: 20 }}>
-            <Card
-                style={{ height: '100%', display: 'flex', marginBottom: 20 }}
-                bodyStyle={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-                className="text-center"
-            >
-                <Tag
-                    color={isCommunityPlugin ? 'green' : 'blue'}
-                    style={{ maxWidth: '30%', position: 'absolute', right: 15, top: 15 }}
-                >
-                    {isCommunityPlugin ? 'Community' : 'Core Team'}
-                </Tag>
-                <PluginImage imageSrc={imageSrc} />
-                <div className="flex-grow">
-                    <h5>{name}</h5>
-                    <p className="text-sm">{description}</p>
-                </div>
-            </Card>
-        </Col>
+        <div>
+            <Tag color={isCommunityPlugin ? 'yellow' : 'blue'}>{isCommunityPlugin ? 'Community' : 'Core Team'}</Tag>
+            <PluginImage imageSrc={imageSrc} />
+            <div>
+                <h5>{name}</h5>
+                <p className="text-sm">{description}</p>
+            </div>
+        </div>
     )
 }
 
@@ -52,15 +55,15 @@ export const PluginCard = ({ name, description, link, imageSrc, isCommunityPlugi
     return (
         <>
             {onClick ? (
-                <span onClick={onClick}>
+                <span onClick={onClick} className={wrapper}>
                     <PluginDetails />
                 </span>
             ) : link.includes('.') ? (
-                <a href={link}>
+                <a href={link} className={wrapper}>
                     <PluginDetails />
                 </a>
             ) : (
-                <Link to={link}>
+                <Link to={link} className={wrapper}>
                     <PluginDetails />
                 </Link>
             )}

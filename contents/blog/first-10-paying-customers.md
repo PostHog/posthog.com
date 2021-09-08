@@ -1,6 +1,6 @@
 ---
 date: 2021-08-18
-title: How To Get The First 10 Paying Customers For Your DevTool Company (And Other Customer Acquisition Tips)
+title: How to get the first 10 paying customers for your devtool company (and other customer acquisition tips)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -30,7 +30,7 @@ Also, set manageable goals for this stuff. While he was pounding the streets (an
 Set one meeting in the morning and one in the afternoon — or if you’re like Tim, cluster all your meetings around the same time so you can carry the feedback of the first daily meeting into the next. To simplify this process even further, use Calendly and let your prospects pick a time that suits them best.
 
 ## Frame each conversation properly
-Depending on where you are in terms of product-market fit, it’s critically important to frame your conversations with every prospect in the right way. If you frame it as "I have an idea, can I get advice?", lots of people will respond - but not many will buy. Instead, apply the Mom Test to these calls to figure out if your business idea is a viable one. The basic steps of the Mom test are as follows:
+Depending on where you are in terms of product/market fit, it’s critically important to frame your conversations with every prospect in the right way. If you frame it as "I have an idea, can I get advice?", lots of people will respond - but not many will buy. Instead, apply the Mom Test to these calls to figure out if your business idea is a viable one. The basic steps of the Mom test are as follows:
 * Ask for specifics. Avoid questions like “Would you buy this product?” Those are vague and unproductive. Instead, ask them how they solved their problems and what other solutions they tried. E.g., _“I wanted to touch on your point about struggling to track user flow on a single landing page — could you tell me more about that?”_
 * Find the true motivation behind feature requests. Sure, they want you to add another widget to your app that might solve a problem — but _why_ do they want that specific widget? How else could you accomplish the same task? E.g., “Sure, we can add a Google Analytics integration — but what exactly do you want to see from GA that would move the needle for you?”
 * Question the assumptions around your business. If you incorrectly assume something to be a pain point when it’s not, you’re setting yourself up for failure. The reverse is also true — the correct assumptions about a set of problems could prove lucrative for you and your investors. E.g., _“I know I mentioned that we solve X, Y, and Z — are these actual problems you’re facing right now? If not, what’s the real issue you’re struggling with?”_

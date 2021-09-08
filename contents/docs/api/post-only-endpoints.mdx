@@ -1,21 +1,18 @@
 ---
-title: POST-Only Public Endpoints
+title: POST-only public endpoints
 sidebar: Docs
 showTitle: true
 ---
 
-> **Update:** These endpoints can now be accessed with either your Team API Key or your [Personal API Key](/docs/api/overview).
+> **Update:** These endpoints can now be accessed with either your Team API key or your [personal API key](/docs/api/overview).
 
-<br />
-
-
-As explained in our [API Overview](/docs/api/overview) page, PostHog provides two different APIs.
+As explained in our [API overview](/docs/api/overview) page, PostHog provides two different APIs.
 
 This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrate/client/js). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance.
 
 > **Note:** For this API, you should use your 'Project API Key' from the 'Project' page in PostHog. This is the same key used in your frontend snippet.
 
-## Feature Flags
+## Feature flags
 
 PostHog offers support for [feature flags](/docs/user-guides/feature-flags), and you can use our APIs to create and make use of feature flags. However, it is important to note that while creating a feature flag is a private action that only your team should be able to perform, checking if a feature flag is active is not.
 
@@ -37,9 +34,9 @@ Body:
 }
 ```
 
-##### Example Request & Response
+### Example request & response
 
-**Request**
+#### Request
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
@@ -48,7 +45,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
 }' https://app.posthog.com/decide/
 ```
 
-**Response**
+#### Response
 
 ```shell
 {
@@ -69,7 +66,6 @@ curl -v -L --header "Content-Type: application/json" -d '  {
 ```
 
 From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `"featureFlags"` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
-
 
 ## Sending events
 
@@ -124,7 +120,7 @@ Body:
 }
 ```
 
-## Sample Requests
+## Sample requests
 
 Here are some sample `curl` queries for each event type. Do note that you need to insert your API key into the `api_key` field.
 

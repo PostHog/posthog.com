@@ -1,22 +1,14 @@
 ---
-title: Sales and Revenue Tracking
+title: Sales and revenue tracking
 sidebar: Docs
 showTitle: true
 ---
 
-<small class="note-block centered">_Estimated Reading Time: 12 minutes ☕☕☕_</small>
+_Estimated reading time: 12 minutes_ ☕☕☕
 
-<br />
+![Revenue tracking banner image](../../images/tutorials/banners/revenue.png)
 
-<span class="larger-image">
-
-![Revenue Tracking Banner Image](../../images/tutorials/banners/revenue.png)
-
-</span>
-
-<br />
-
-To determine the quality of your product, and if you have a good product-market fit, one of the best metrics you can use is:
+To determine the quality of your product, and if you have a good product/market fit, one of the best metrics you can use is:
 
 _Are people paying for it?_
 
@@ -27,7 +19,7 @@ With this tutorial, we'll give you a full guide to getting started with tracking
 - Analyze your revenue and its main sources
 - Track conversion and retention across subscription plans
 
-### Pre-Requisites
+### Prerequisites
 
 To follow this tutorial along, you need to:
 
@@ -93,8 +85,7 @@ Here are is an example [dashboard](/docs/user-guides/dashboards) combining chart
 
 ![Operations Dashboard Image](../../images/tutorials/revenue/operations-dashboard.png)
 
-
-### Total Revenue In The Last Month
+### Total revenue in the last month
 
 If you want to see agreggate values for periods, you can change the time frame on line charts, or you can also display data as a table or pie chart, which combines the aggregate values of the periods and displays it as one value. 
 
@@ -106,7 +97,7 @@ Here's what a dashboard with these views might look like:
 
 > **Note:** With a view like this, you can then fire up your ad platform of choice to work out your ROIs, or better yet, [build a plugin](/docs/plugins/overview) to automate this.
 
-### Breaking Down Revenue By Source
+### Breaking down revenue by source
 
 Another important metric is determining the contribution of each revenue source to your total revenue.
 
@@ -122,7 +113,7 @@ For example, for a company with the following pricing structure:
 
 We can break down revenue by the property `plan` and see how each plan is performing:
 
-![Plan Breakdown Image](../../images/tutorials/revenue/plan-breakdown.png)
+![Plan breakdown image](../../images/tutorials/revenue/plan-breakdown.png)
 
 If, rather than plans, your company has different revenue sources altogether, you could, for instance, substitute the `plan` property for `source`. This would allow you to have the same view, broken down by source, such as `in_app` or `desktop`.
 
@@ -132,7 +123,7 @@ This can also be visualized as a pie, in order to see more clearly the actual _c
 
 > **Note:** If you have revenue data in various currencies, or simply want to convert your values to another currency, you can use our [Currency Normalization Plugin](/plugins/currency-normalization) to do so.
 
-### Conversion Funnels
+### Conversion funnels
 
 When tracking revenue, there are various useful conversion metrics to explore. Here are some examples:
 
@@ -151,7 +142,7 @@ This gives you the following view:
 
 The funnel above shows us that, out of all unique users who paid for a plan (had a `$purchase` event), 33.4% pick plan `basic`.
 
-#### Measuring Conversion to Paid Plans
+#### Measuring conversion to paid plans
 
 Let's answer the following two questions with funnels:
 
@@ -160,9 +151,9 @@ Let's answer the following two questions with funnels:
 
 Here's an example dashboard that answers these questions: 
 
-![Conversion Dashboard Image](../../images/tutorials/revenue/funnels-dashboard.png)
+![Conversion Dashboard image](../../images/tutorials/revenue/funnels-dashboard.png)
 
-##### Pageview -> Free Trial -> Purchase -> Premium Plan
+##### Pageview -> Free trial -> Purchase -> Premium plan
 
 The top funnel in blue shows us the journey of our users from pageview to upgrading to a premium plan. It was created with the following steps:
 
@@ -177,7 +168,7 @@ From this funnel we can establish that:
 - ~60% of the total users made a purchase
 - ~20% of our users purchased the premium plan
 
-##### Free Trial -> Purchase
+##### Free trial -> Purchase
 
 This funnel in purple on the bottom left was created from some of the same steps as the main funnel, but it is more concise. It targets:
 
@@ -186,7 +177,7 @@ This funnel in purple on the bottom left was created from some of the same steps
 
 From it, we can determine that 77% of our free trial users from the last 30 days signed up for a paid plan, which is a great conversion rate.
 
-##### Free Trial -> Growth Plan
+##### Free trial -> Growth plan
 
 Lastly, this funnel is the most specific out of the three, giving us the conversion from the free trial to a specific plan. It was built as follows:
 
@@ -195,7 +186,7 @@ Lastly, this funnel is the most specific out of the three, giving us the convers
 
 It shows us that in the last 30 days, ~25% of our users who had a free trial signed up for a growth plan afterwards.
 
-### Measuring Retention Per Subscription Plan
+### Measuring retention per subscription plan
 
 Having users pay you for your product is great, however, if you have a subscription plan, it is just as important to keep a customer as it is to acquire a customer. 
 
@@ -203,7 +194,7 @@ For this, we need to calculate retention. This can be done either on purchases a
 
 Here's an example of a monthly retention table (recurring) for a specific plan:
 
-![Retention Growth Plan Image](../../images/tutorials/revenue/retention-growth.png)
+![Retention growth plan image](../../images/tutorials/revenue/retention-growth.png)
 
 Here we can see the retention on the 'Growth' plan, which appears to be improving over time.
 
@@ -223,7 +214,7 @@ However, you can have great insights from correlating revenue data with your ove
 
 Tracking revenue is just the start.
 
-### Other Relevant Tutorials
+### Other relevant tutorials
 
-- [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
-- [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
+- [How to safely roll out new features](/docs/tutorials/feature-flags)
+- [Analyzing your conversion with Funnels](/docs/tutorials/funnels)

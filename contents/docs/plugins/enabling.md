@@ -1,15 +1,12 @@
 ---
-title: Enabling Plugins
+title: Enabling plugins
 sidebar: Docs
 showTitle: true
 ---
 
+### Plugin server is offline
 
-
-### Plugin Server is Offline
-
-If the plugin server is offline, you need to update your PostHog deployment and/or manually start
-the plugin server.
+If the plugin server is offline, you need to update your PostHog deployment and/or manually start the plugin server.
 
 #### Heroku
 
@@ -34,11 +31,11 @@ that combines all background workers into one task and activates the plugin serv
 Previously we had separate tasks for `worker-beat` and `worker-celery`. In the latest version there is just one `worker`
 that starts all three services: celery, celery-beat and plugins.
 
-#### Helm / Kubernetes
+#### Helm/Kubernetes
 
 Please upgrade to at least version `1.4.0` of the PostHog helm chart to add the `plugins` deployment.
 
-#### Manual / Other
+#### Manual/other
 
 You must run the `bin/plugin-server` script to start the plugin server.
 

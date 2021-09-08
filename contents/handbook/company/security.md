@@ -16,7 +16,7 @@ All of our policies can be found in our Drata portal, so this section of the Han
 - [Asset Management Policy](https://drive.google.com/file/d/14Z3Isvffwg7Y8X_ZHMvp_7gdvDujAwRe/view?usp=sharing)
 - [Backup Policy](https://drive.google.com/file/d/19fKnj20U48rmkDPpes2wA_hK7hYH45aP/view?usp=sharing)
 - [Business Continuity Plan](https://drive.google.com/file/d/1sJWpNr9U2aONrKOJyrbgKqxDi-h8Z3hx/view?usp=sharing)
-- [Code of Conduct](https://drive.google.com/file/d/1qVtkxDBmKCMFUX3cgichKEsW0IylliQG/view?usp=sharing)
+- [Code of conduct](https://drive.google.com/file/d/1qVtkxDBmKCMFUX3cgichKEsW0IylliQG/view?usp=sharing)
 - [Data Classification Policy](https://drive.google.com/file/d/1VFoba8mrDiTHo0A0po1hLWWZ5gsfTSM6/view?usp=sharing)
 - [Data Deletion Policy](https://drive.google.com/file/d/1FBNFBC0lZHi6VE1z-PYjlYHzERIkKBmX/view?usp=sharing)
 - [Data Protection Policy](https://drive.google.com/file/d/1C-P0QxxaayEHgOdoUEiSvwY_VwriaFHo/view?usp=sharing)

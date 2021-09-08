@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).
+> For instructions on how to authenticate to use this endpoint, see [API overview](/docs/api/overview).
 
 In PostHog, there is an API endpoint available to fetch the DOM elements captured by the autocapture functionality.
 The most interesting usecase for this is to be able to get all elements we have for a specific page, and how often that element has been interacted with.
@@ -13,7 +13,7 @@ The most interesting usecase for this is to be able to get all elements we have 
 
 This endpoint has pagination. See [Pagination](/docs/api/overview#pagination) for more info.
 
-## Element Stats
+## Element stats
 
 `/stats` gives you an aggregate count of the number of events for each element. Internally we use this in the toolbar to show you a heatmap.
 
@@ -22,7 +22,6 @@ GET /element/stats/
 GET /element/stats/?properties=[{"key":"$browser","value":"Chrome"}]
 GET /element/stats/?properties=[{"key":"$browser","value":"Chrome"}]&date_from=-2d
 ```
-
 
 | Attribute | Type | Required | Description |
 | --- | --- | --- | ------------------------------------------------------------------------------ |

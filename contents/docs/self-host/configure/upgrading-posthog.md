@@ -10,7 +10,7 @@ Because some data migrations require touching the Events table which can get ver
 
 If you need help, feel free to create an issue, or [join our Slack](/slack).
 
-## Upgrade Instructions
+## Upgrade instructions
 
 Find the relevant upgrade instructions in the corresponding deployment info page:
 - [DigitalOcean](/docs/self-host/deploy/digital-ocean#upgrading-the-chart)

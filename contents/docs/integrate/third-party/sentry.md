@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-## Why Does This Exist?
+## Why does this exist?
 
 Our Sentry integration is a two-way integration. Once installed, it will:
 - Add a direct link in Sentry to the profile of the person affected in PostHog

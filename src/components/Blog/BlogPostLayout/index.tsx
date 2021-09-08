@@ -30,17 +30,19 @@ export function BlogPostLayout({
     authorDetails,
 }: BlogPostLayoutProps): JSX.Element {
     return (
-        <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
-            <div className="flex justify-between items-center w-full px-4 mb-4 mt-6 lg:mt-4">
-                <div className="flex-grow">
-                    <Link
-                        to="/blog"
-                        className="text-gray-900 hover:text-gray-900 dark:text-white dark:hover:text-white hover:underline"
-                    >
-                        &larr; Back to blog
-                    </Link>
+        <div className="text-primary dark:text-primary-dark">
+            <div className="md:mx-8">
+                <div className="flex justify-between items-center w-full px-4 md:px-0 mb-4 md:mb-6 mt-6 lg:mt-4">
+                    <div className="flex-grow">
+                        <Link
+                            to="/blog"
+                            className="text-gray-900 hover:text-gray-900 dark:text-white dark:hover:text-white hover:underline"
+                        >
+                            &larr; Back to blog
+                        </Link>
+                    </div>
+                    <DarkModeToggle />
                 </div>
-                <DarkModeToggle />
             </div>
 
             <BlogIntro

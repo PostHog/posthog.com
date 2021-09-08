@@ -1,6 +1,6 @@
 ---
 date: 2021-06-23
-title: How We Do Hiring and HR at PostHog
+title: How we do hiring & HR at PostHog
 author: mo-shehu
 rootPage: /blog
 sidebar: Blog

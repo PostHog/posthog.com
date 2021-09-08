@@ -1,12 +1,10 @@
 ---
-title: Deleting Bulk Data
+title: Deleting bulk data
 sidebar: Docs
 showTitle: true
 ---
 
-<div class="note-block"><b>Important:</b> Bulk data deletion is done at your own risk. We do not yet provide a standard way to delete data in bulk, so you must be extremely careful when performing such an operation. We do not take responsibility for any loss of data as a result of this process.</div>
-
-<br />
+> <strong>Important:</strong> Bulk data deletion is done at your own risk. We do not yet provide a standard way to delete data in bulk, so you must be extremely careful when performing such an operation. We do not take responsibility for any loss of data as a result of this process.
 
 To delete bulk data from your database (e.g. all events), the current suggested way is to directly interact with the PostgreSQL or ClickHouse instance and use SQL queries to delete the desired data.
 

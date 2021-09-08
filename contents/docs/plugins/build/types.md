@@ -1,5 +1,5 @@
 ---
-title: TypeScript Types 
+title: TypeScript types 
 sidebar: Docs
 showTitle: true
 ---

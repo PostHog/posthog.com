@@ -9,7 +9,7 @@ Our mission is to “Increase the number of successful products in the world”.
 
 We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recordings, feature flags and many more features. Within a year we had thousands of customers using us and we started generating revenue.
 
-Our next step on our journey is to prove a deeper level of product-market fit with 5 reference customers. Today we're closest to product market fit with products which need to self-host and are in the growth phase of their lifecycle; they need us to absolutely "Nail Funnels" in order to make their products successful.
+Our next step on our journey is to prove a deeper level of product/market fit with 5 reference customers. Today we're closest to product market fit with products which need to self-host and are in the growth phase of their lifecycle; they need us to absolutely "Nail Funnels" in order to make their products successful.
 
 ### Context
 

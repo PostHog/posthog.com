@@ -10,7 +10,7 @@ import { inverseCurve } from 'components/PricingSlider/LogSlider'
 export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefault?: boolean }) => {
     const CLOUD_PLAN = 'cloud'
     const SELF_HOSTED_PLAN = 'self-hosted'
-    const [currentPlanType, setCurrentPlanType] = useState(showScaleByDefault ? SELF_HOSTED_PLAN : CLOUD_PLAN)
+    const [currentPlanType, setCurrentPlanType] = useState(SELF_HOSTED_PLAN)
     const currentPlanBreakdown = currentPlanType === 'cloud' ? <CloudPlanBreakdown /> : <SelfHostedPlanBreakdown />
     const { setPricingOption, setSliderValue } = useActions(pricingSliderLogic)
 
@@ -29,28 +29,28 @@ export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefaul
                         width="auto"
                         icon="none"
                         outline
-                        onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
+                        onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 8000000)}
                         className={
-                            currentPlanType === CLOUD_PLAN
+                            currentPlanType === SELF_HOSTED_PLAN
                                 ? 'active'
-                                : 'select-none text-primary text-opacity-50 hover:text-primary hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
+                                : 'select-none text-primary text-opacity-50 hover:text-primary hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-primary-dark'
                         }
                     >
-                        Cloud
+                        Self-hosted
                     </CallToAction>
                     <CallToAction
                         type="button"
                         width="auto"
                         icon="none"
                         outline
-                        onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 8000000)}
+                        onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
                         className={
-                            currentPlanType === SELF_HOSTED_PLAN
-                                ? 'active ml-2'
-                                : 'ml-2 select-none text-primary text-opacity-50 hover:text-primary hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-primary-dark'
+                            currentPlanType === CLOUD_PLAN
+                                ? 'active  ml-2'
+                                : 'ml-2 select-none text-primary text-opacity-50 hover:text-primary hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
                         }
                     >
-                        Self-hosted
+                        Cloud
                     </CallToAction>
                 </div>
 

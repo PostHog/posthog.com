@@ -11,15 +11,15 @@ This is a new section of our Docs and we appreciate any suggestions you may have
 
 If you do submit a tutorial, we'll be happy to send over a custom PostHog mug to you!
 
-## In This Section
+## In this section
 
-- [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
-- [Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
-- [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
-- [Analyzing User Behavior with Cohorts](/docs/tutorials/cohorts)
-- [Measuring Retention and Tracking Churn](/docs/tutorials/retention)
-- [Tracking Single Page Apps](/docs/tutorials/spa)
-- [Complete Guide to Event Tracking](/docs/tutorials/actions)
-- [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
-- [Sales and Revenue Tracking](/docs/tutorials/revenue)
-- [Running Simple Surveys with No Backend](/docs/tutorials/survey)
+- [How to safely roll out new features](/docs/tutorials/feature-flags)
+- [Visualizing user behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
+- [Analyzing your conversion with Funnels](/docs/tutorials/funnels)
+- [Analyzing user behavior with Cohorts](/docs/tutorials/cohorts)
+- [Measuring retention and tracking churn](/docs/tutorials/retention)
+- [Tracking single page apps](/docs/tutorials/spa)
+- [Complete guide to event tracking](/docs/tutorials/actions)
+- [Tracking key B2B product metrics](/docs/tutorials/b2b)
+- [Sales and revenue tracking](/docs/tutorials/revenue)
+- [Running simple surveys with no backend](/docs/tutorials/survey)

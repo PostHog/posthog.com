@@ -23,7 +23,7 @@ Make using and developing for PostHog as reliable as running water. Wherever you
 - Fail fast. Fix faster.
 - Ship anywhere
 - Stack scales with demand
-- Support Small Teams (and contributors) in building and debugging Posthog
+- Support Small Teams (and contributors) in building and debugging PostHog
 - Be frugal.
 
 ## Responsibilities

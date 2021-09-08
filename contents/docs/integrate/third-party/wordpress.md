@@ -13,7 +13,7 @@ Integrating PostHog with your WordPress site.
 
 Tracking how users use your [WordPress](https://www.wordpress.org/) website can help you improve the user experience, increase conversion rates, gain new insights, and identify what your users find most valuable.
 
-## TLDR, the short version
+## TL;DR: (the short version)
 
 1. [Deploy PostHog](/docs/deployment) or [signup for PostHog Cloud](https://app.posthog.com/signup).
 
@@ -25,7 +25,7 @@ Tracking how users use your [WordPress](https://www.wordpress.org/) website can 
 
 Read on for additional information.
 
-## Pre-requisites
+## Prerequisites
 
 To follow this tutorial, you should:
 

@@ -1,6 +1,6 @@
 ---
 date: 2020-08-18
-title: Why You May Not Need a Sales Team
+title: Why you may not need a sales team
 rootPage: /blog
 sidebar: Blog
 showTitle: true

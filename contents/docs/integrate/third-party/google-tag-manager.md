@@ -15,24 +15,20 @@ Integrating PostHog into your website using Google Tag Manager.
 
 It is an easy way to integrate PostHog into your website without having to update your codebase. 
 
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you should:
 
 1. Have [deployed PostHog](/docs/deployment) or be using PostHog Cloud.
 
-## Step-By-Step Instructions
+## Step-by-step instructions
 
 1. Get your [PostHog snippet](/docs/integrate/client/snippet-installation) from your 'Project Settings' or the initial PostHog setup
-2. Access your [Google Tag Manager Dashboard](https://tagmanager.google.com/) and navigate to the desired account/container that is integrated with the website you want to add PostHog tracking to
+2. Access your [Google Tag Manager dashboard](https://tagmanager.google.com/) and navigate to the desired account/container that is integrated with the website you want to add PostHog tracking to
 3. Click to add a new tag:
-
-    <br />
     
     ![GTM Dashboard](../../../images/tutorials/gtm/dashboard.png)
     
-    <br />
-
 4. On the page to configure a new tag, add your PostHog snippet as a 'Custom HTML Tag' under 'Tag Configuration'
 5. For the trigger, select the default "All Pages - Page View" trigger and then click 'Save' on the top right corner of the drawer
 6. Back on the main dashboard, click 'Submit' to update your website with the new PostHog tag

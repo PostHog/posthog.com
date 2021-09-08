@@ -35,22 +35,27 @@ export default function Hero() {
                         </CallToAction>
                     </div>
                 </div>
-                <div className="absolute h-full flex justify-end bottom-[-6.8rem] sm:-bottom-24 right-0 max-w-screen-2xl mx-auto overflow-x-hidden 2xl:overflow-x-visible">
-                    <StaticImage
-                        objectPosition="bottom"
-                        loading="eager"
-                        placeholder="none"
-                        width={357}
-                        imgClassName="h-auto"
-                        className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-60px] md:mr-[-75px]"
-                        objectFit="contain"
-                        src="./images/hero-right.png"
-                    />
+            </div>
+            <div className="w-full mt-20 sm:mt-auto py-6 sm:py-10 bg-gradient-to-t from-tan to-[#E4E5DF]">
+                <p className="px-4 font-semibold text-center z-10 relative mb-0">
+                    Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
+                </p>
+                <div className="max-w-screen-2xl mx-auto w-full relative">
+                    <span className="absolute bottom-3 md:-bottom-12 right-0 overflow-x-hidden 2xl:overflow-x-visible">
+                        <StaticImage
+                            objectPosition="bottom"
+                            loading="eager"
+                            placeholder="none"
+                            width={357}
+                            imgClassName="h-auto"
+                            className="h-full max-w-[200px] md:max-w-[310px] xl:max-w-none mr-[-60px] md:mr-[-75px]"
+                            objectFit="contain"
+                            src="./images/hero-right.png"
+                        />
+                    </span>
                 </div>
             </div>
-            <p className="w-full mt-20 sm:mt-auto mb-0 py-6 sm:py-10 px-4 font-semibold text-center bg-gradient-to-t from-tan to-[#E4E5DF]">
-                Don't need to self host? Try <Link to="//app.posthog.com/signup">PostHog Cloud</Link>
-            </p>
+
             <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
                 <Feature icon="event-pipelines" title="Event pipelines" />
                 <Feature icon="analytics" title="Analytics" />

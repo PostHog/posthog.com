@@ -60,6 +60,10 @@
                                 "title": "Top articles",
                                 "items": [
                                     {
+                                        "title": "Architecture",
+                                        "url": "/docs/self-host/architecture"
+                                    },
+                                    {
                                         "title": "Configuring PostHog",
                                         "url": "/docs/self-host#configure"
                                     },

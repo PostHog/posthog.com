@@ -19,7 +19,7 @@ function Byline({ authorDetails, date, classes }: AuthorDetails): JSX.Element {
     }
     // TODO: Add "N minute read" when reading length plugin is installed
     const bylineText = fragments.join(' ')
-    return <div className={`${classes} mt-2 mb-0 opacity-50`}>{bylineText}</div>
+    return <div className={`${classes} mt-1 mb-0 opacity-50`}>{bylineText}</div>
 }
 
 export default Byline

@@ -33,3 +33,7 @@ export AWS_SESSION_TOKEN=example-session-token-as-in-previous-output
 ```
 unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKEN
 ```
+
+### Deploying Posthog
+
+See docs [here](https://posthog.com/docs/self-host/deploy/aws).

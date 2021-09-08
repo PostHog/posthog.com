@@ -13,15 +13,15 @@ One API is used for pushing data into PostHog. This uses the 'Team API Key' that
 
 The other API is more powerful and allows you to perform any action as if you were an authenticated user utilizing the PostHog UI. It is mostly used for getting data out of PostHog, as well as other private actions such as creating a feature flag. This uses a 'Personal API Key' which you need to create manually (instructions [below](#authentication)). This API Key is **private** and you should not make it public nor share it with anyone. It gives you access to all the data held by your PostHog instance, which includes sensitive information.
 
-These API Docs refer mostly to the **private API**, performing authentication as outlined below. The only exception is the [POST-Only Public Endpoints](/docs/api/post-only-endpoints) section. This section explicitly informs you on how to perform authentication. For endpoints in all other sections, authentication is done as described below.
+These API Docs refer mostly to the **private API**, performing authentication as outlined below. The only exception is the [POST-only public endpoints](/docs/api/post-only-endpoints) section. This section explicitly informs you on how to perform authentication. For endpoints in all other sections, authentication is done as described below.
 
 ## Authentication
 
-### Personal API Keys (Recommended)
+### Personal API keys (Recommended)
 
 Personal API keys allow full access to your account, just like e-mail address and password, but you can create any number of them and each one can invalidated individually at any moment. This makes for greater control for you and improved security of stored data.
 
-#### How to Obtain a Personal API key
+#### How to obtain a personal API key
 
 1. Click on your name/avatar on the top right.
 1. Click on 'My account'
@@ -31,7 +31,7 @@ Personal API keys allow full access to your account, just like e-mail address an
 1. Click 'Create Key'.
 1. There you go! At the top of the list you should now be seeing your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page. But don't worry if you forget to copy it – you can delete and create keys as much as you want.
 
-#### How to Use a Personal API key
+#### How to use a personal API key
 
 There are three options:
 
@@ -85,14 +85,10 @@ curl \
 https://app.posthog.com/api/person/
 ```
 
-<br />
-
 ## Tips
 
 The [`/users/@me/` endpoint](/docs/api/user) gives you useful information about the current user.
 The `/api/event_definition/` and `/api/property_definition` endpoints provide the possible event names and properties you can use throughout the rest of the API.
-
-<br />
 
 ## Pagination
 

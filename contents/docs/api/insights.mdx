@@ -4,17 +4,19 @@ sidebar: Docs
 showTitle: true
 ---
 
-> For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).
+> For instructions on how to authenticate to use this endpoint, see [API overview](/docs/api/overview).
 
 The `/api/insight/` endpoints allow you to fetch insights that provides advanced analytics on the data from PostHog.
 
 ## Endpoints
+
+### Insight 
+
 <Endpoint endpoint='/api/insight' allowedMethods={['get']} />
 
 Get a list of insights from PostHog.
 
-<HiddenSection headingType='h4' title='Query Parameters'>
-
+<HiddenSection headingType='h4' title='Query parameters'>
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
@@ -91,12 +93,13 @@ Content-Type: application/json
 
 </HiddenSection>
 
+### Trend
+
 <Endpoint endpoint='/api/insight/trend' allowedMethods={['get']} />
 
 Get a list of trends from PostHog.
 
-<HiddenSection headingType='h4' title='Query Parameters'>
-
+<HiddenSection headingType='h4' title='Query parameters'>
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
@@ -107,8 +110,6 @@ Get a list of trends from PostHog.
 | `breakdown_type` | `string` | Default: `property`. Can be set to `cohort`, in which case you can pass through a cohort_id to `breakdown_value` | ❌ |
 | `from_dashboard` | `string` | | ❌ |
 | `shown_as` | - `"volume"` <br /> - `"stickiness"` |  | ❌ |
-
-
 
 </HiddenSection>
 
@@ -163,19 +164,18 @@ Content-Type: application/json
 
 </HiddenSection>
 
+### Session
+
 <Endpoint endpoint='/api/insight/session' allowedMethods={['get']} />
 
 Get a list of sessions from PostHog.
 
-<HiddenSection headingType='h4' title='Query Parameters'>
-
+<HiddenSection headingType='h4' title='Query parameters'>
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
 | `properties` | Array of Properties | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
 | `session` | `string` |Specifies the type of operation to perform on session duration values. For example, `avg`, or `dist`. | ❌ |
-
-
 
 </HiddenSection>
 
@@ -238,11 +238,13 @@ Content-Type: application/json
 
 </HiddenSection>
 
+### Path
+
 <Endpoint endpoint='/api/insight/path' allowedMethods={['get']} />
 
 Get a list of paths from PostHog.
 
-<HiddenSection headingType='h4' title='Query Parameters'>
+<HiddenSection headingType='h4' title='Query parameters'>
 
 
 | Parameter | Type / Valid Values | Description | Required |

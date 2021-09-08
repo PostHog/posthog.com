@@ -1,5 +1,5 @@
 ---
-title: Upgrade Notes
+title: Upgrade notes
 sidebar: Docs
 showTitle: true
 ---

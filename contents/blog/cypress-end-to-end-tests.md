@@ -16,7 +16,7 @@ What we have found that works really well is nothing terribly novel by itself: a
 
 ### Unit & Integration tests
 
-In our Django codebase you'll find good number of [Django tests](https://github.com/PostHog/posthog/tree/master/posthog/test) that help keep us honest as we hack away at the backend of Posthog that keeps track of all the 1's and 0's that our customers depend on for making product decisions. These are our frontline defenders that let us know that something might be up before we even get to the point of creating a PR.
+In our Django codebase you'll find good number of [Django tests](https://github.com/PostHog/posthog/tree/master/posthog/test) that help keep us honest as we hack away at the backend of PostHog that keeps track of all the 1's and 0's that our customers depend on for making product decisions. These are our frontline defenders that let us know that something might be up before we even get to the point of creating a PR.
 
 For this we do lean heavily on the standard Django test runner.
 

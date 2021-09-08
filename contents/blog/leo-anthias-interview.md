@@ -39,9 +39,9 @@ Besides the usual founder tasks like admin and hiring, Leo spends most of his ti
 
 > _"I spend probably the majority of my day talking to users in some kind of capacity. That could be in a sales, support, or evangelism context. But yeah, that's pretty much what I do. Maybe I have a bias because that's the stuff I enjoy the most."_ **- Leo Anthias**
 
-Datapane’s product philosophy focuses more on iterating quickly, building on existing work (i.e. not reinventing the wheel), building for their own users first and foremost, and nailing product-market fit.
+Datapane’s product philosophy focuses more on iterating quickly, building on existing work (i.e. not reinventing the wheel), building for their own users first and foremost, and nailing product/market fit.
 
-> _"I think that product-market fit above all else has embodied everything we do from how code is built and written and released, to how we talk to users, to how we work with customers."_ **- Leo Anthias**
+> _"I think that product/market fit above all else has embodied everything we do from how code is built and written and released, to how we talk to users, to how we work with customers."_ **- Leo Anthias**
 
 This obsession with fit extends to hiring, too. Leo looks for humility in candidates - being able to admit limited knowledge and work well with others to fill those knowledge gaps. On the flip side, trash-talking one’s previous employers is a huge red flag for him.
 

@@ -49,7 +49,7 @@ When you enable automatic user provisioning you set a list of **whitelisted doma
 
 To enable this, navigate to your organization settings (`/organization/settings#domain-whitelist`) and add the domains for which you want to enable automatic user provisioning.
 
-## Third-party Providers
+## Third-party providers
 
 PostHog currently supports the SSO providers listed below.  
 Looking for a provider and it's in here? [Reach out to us](https://posthog.com/support), we might be able to help.
@@ -110,7 +110,7 @@ To set up Google SSO please follow these instructions:
 ## SAML
 
 <blockquote class="warning-note">
-<b>Please note SSO with SAML is a 🔒 premium feature of PostHog</b> and requires a <a href="https://posthog.com/pricing" target="_blank" rel="noopener">PostHog Scale</a> license. In addition, <b>SAML is only supported on PostHog Self-Hosted</b>.
+<b>Please note SSO with SAML is a 🔒 premium feature of PostHog</b> and requires a <a href="https://posthog.com/pricing" target="_blank" rel="noopener">PostHog Scale</a> license. In addition, <b>SAML is only supported on PostHog self-hosted</b>.
 </blockquote>
 
 SAML (Security Assertion Markup Language) enables users to have a single set of credentials to access multiple systems. It also has the benefits of centralizing user management to aid maintenance. If your company has an Identity Provider (IdP) that uses SAML, you can integrate it with PostHog (Service Provider, SP) so your users can authenticate through your SAML portal instead of having an additional password for PostHog.
