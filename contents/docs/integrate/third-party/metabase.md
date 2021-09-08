@@ -13,7 +13,7 @@ Integrating PostHog with your Metabase instance.
 
 [Metabase](https://www.metabase.com/) is an open-source data explorer and Business Intelligence tool that lets you derive insights and build charts from your data with ease.
 
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you should:
 
@@ -25,7 +25,7 @@ Integrating with Metabase currently works only for self-hosted PostHog instances
 
 If you're on EE, we still use Postgres for certain types of data which you could explore with Metabase, but you'll have no access to event data, for example. If using Metabase is essential to you, you could export the ClickHouse data to another Metabase-supported database. 
 
-## Step-By-Step Instructions
+## Step-by-step instructions
 
 ### Metabase Setup
 
@@ -43,7 +43,11 @@ If you're on EE, we still use Postgres for certain types of data which you could
 
 1. After you've create your user, Metabase will prompt you with a screen to connect to a database:
 
-    <br />![Metabase Setup](../../../images/tutorials/metabase/setup.png)<br />
+    <br />
+    
+    ![Metabase Setup](../../../images/tutorials/metabase/setup.png)
+    
+    <br />
 
 1. On this screen, you should select 'PostgreSQL' as the database, and add the details of your PostHog instance.
 
@@ -65,10 +69,14 @@ If you're on EE, we still use Postgres for certain types of data which you could
 
 1. Finish the setup and you're ready to start using Metabase! By default, the platform will already give you some views for the available data, but it's up to you how to go from there.
 
-    <br />![Metabase Dashboard](../../../images/tutorials/metabase/dashboard.png)<br />
+    <br />
+    
+    ![Metabase Dashboard](../../../images/tutorials/metabase/dashboard.png)
+    
+    <br />
 
 
-#### For PostHog Docker Deployments
+#### For PostHog Docker deployments
     
 If you deployed PostHog with Docker, some additional setup is necessary to make the connection with Metabase work. 
 

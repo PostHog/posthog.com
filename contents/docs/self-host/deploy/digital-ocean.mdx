@@ -6,6 +6,7 @@ showTitle: true
 ---
 
 import DOIPAddressSnippet from './snippets/do-ip-address'
+import UpgradingSnippet from './snippets/upgrading'
 
 ## Why Digital Ocean
 
@@ -154,21 +155,9 @@ After upgrading you can run the following to get the IP to access PostHog.
 
 <DOIPAddressSnippet />
 
-## Upgrading the chart
+<UpgradingSnippet />
 
-To upgrade the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, run the following:
-
-```console
-helm repo update
-helm upgrade -f values.yaml --timeout 20m --namespace posthog posthog posthog/posthog
-```
-
-> See [the Helm docs](https://helm.sh/docs/helm/helm_upgrade/) for documentation on the `helm upgrade` command.
-
-When upgrading major versions, see [Upgrade notes](/docs/self-host/deploy/upgrade-notes).
-
-
-## Uninstalling the Chart
+## Uninstalling the chart
 
 To uninstall the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, run the following:
 ```console

@@ -1,6 +1,6 @@
 ---
 date: 2021-03-23
-title: The Startup Ops Toolkit
+title: The startup ops toolkit
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -28,13 +28,13 @@ You’re going to be hiring people either as permanent employees or as contracto
 
 ### Permanent employees
 
-I like <a target="_blank" rel="noopener noreferrer nofollow" href="https://gusto.com/">Gusto</a> a lot (US only). They make the process pretty seamless for you and your new hire, offer tantalizing discounts for early stage startups, and integrate things like state tax registrations, healthcare benefits and mandatory insurance quite nicely. Their phone support is great, but avoid email or chat. Gusto charge \$39/month plus \$6 per employee.
+I like <a target="_blank" rel="noopener noreferrer nofollow" href="https://gusto.com/">Gusto</a> a lot (US only). They make the process pretty seamless for you and your new hire, offer tantalizing discounts for early stage startups, and integrate things like state tax registrations, healthcare benefits and mandatory insurance quite nicely. Their phone support is great, but avoid email or chat. Gusto charge $39/month plus $6 per employee.
 
-Time suck alert - online state registration laws vary and all of their websites are garbage. Gusto have a ton of useful documentation on this, but bear in mind you will probably spend 3 hours registering in each state the first time you employ someone there. <a target="_blank" rel="noopener noreferrer nofollow" href="https://agent.middesk.com/">Middesk</a> can handle this for you for \$99, but I haven’t used it (yet).
+Time suck alert - online state registration laws vary and all of their websites are garbage. Gusto have a ton of useful documentation on this, but bear in mind you will probably spend 3 hours registering in each state the first time you employ someone there. <a target="_blank" rel="noopener noreferrer nofollow" href="https://agent.middesk.com/">Middesk</a> can handle this for you for $99, but I haven’t used it (yet).
 
 ### Contractors
 
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://www.letsdeel.com/">Deel</a> is the only way to go. They cover pretty much any country and currency you’ll need, handle all the compliance stuff for you, and generally make the process way more pleasant than it has any right to be. Plus their support is insanely responsive and helpful. It’s probably my favorite ops product. Deel charge \$35/month per contractor.
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://www.letsdeel.com/">Deel</a> is the only way to go. They cover pretty much any country and currency you’ll need, handle all the compliance stuff for you, and generally make the process way more pleasant than it has any right to be. Plus their support is insanely responsive and helpful. It’s probably my favorite ops product. Deel charge $35/month per contractor.
 
 If you need an Employer of Record service, Deel now offer this too - super useful if you are hiring permanent employees outside the US in a country where you don’t have a legal presence.
 
@@ -69,7 +69,7 @@ Don’t spend too much time making financial forecasts at an early stage - your 
 
 A relatively new tool called <a target="_blank" rel="noopener noreferrer nofollow" href="http://pry.co/">Pry</a> has been a game-changer for us. Yes, we all know you can “just” do it in Excel (which you will want to if you have a finance background), but a tool like Pry makes it so much easier. And you can skip the 2 years chained to your desk at Goldman!
 
-Pry connects seamlessly with your accounting software, and you then just fill out assumptions manually or using very simple formulae. Pry also has neat dashboards for visualizing everything, as well as scenario modeling. They currently charge \$100/month, though worth asking for a discount if you are a startup...
+Pry connects seamlessly with your accounting software, and you then just fill out assumptions manually or using very simple formulae. Pry also has neat dashboards for visualizing everything, as well as scenario modeling. They currently charge $100/month, though worth asking for a discount if you are a startup...
 
 ## Where to put the money
 
@@ -87,9 +87,9 @@ Recruitment? Sales? HR? Business planning? You may or may not consider these ops
 
 You can do these perfectly fine in a well-organized Google Doc or Sheet. Just be disciplined and keep it up to date. Once you start spending half a day per week on these things, then you should invest in:
 
-- <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.workable.com/">Workable</a> for recruitment. \$99 per role per month, pay as you go.
+- <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.workable.com/">Workable</a> for recruitment. $99 per role per month, pay as you go.
 - <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.hubspot.com/">HubSpot</a> for sales. Various tiers and combos available, starting from free. Free doesn’t mean you should start there though.
-- Something like <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.charliehr.com/">Charlie</a> or <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.hibob.com/">Bob</a> for things like recording salaries, addresses etc.. Around \$6 per employee per month usually.
+- Something like <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.charliehr.com/">Charlie</a> or <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.hibob.com/">Bob</a> for things like recording salaries, addresses etc.. Around $6 per employee per month usually.
 
 For business planning (setting OKRs etc.), I’m yet to find a tool that genuinely convinces me of its value over a well-organized Google Sheet. The number one challenge I’ve found is effectively communicating and tracking the output of business planning, and people really don’t like having to use another multiple platforms to track what they’re doing.
 

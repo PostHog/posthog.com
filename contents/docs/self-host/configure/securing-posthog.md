@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-## Restrict Access by IP
+## Restrict access by IP
 
 You can restrict access to PostHog by IP by passing `ALLOWED_IP_BLOCKS`. This is a comma separated list, and can either be individual IP addresses or subnets. For example:
 
@@ -30,7 +30,7 @@ TRUST_ALL_PROXIES=True
 
 > If you're on Heroku, you are behind a proxy by default, so you'll need to add `IS_BEHIND_PROXY=True`. Heroku automatically overrides `X-Forwarded-For`, so you can use `TRUST_ALL_PROXIES=True`.
 
-## Secure Cookies
+## Secure cookies
 
 Starting with PostHog 1.13.0, we introduced a `SECURE_COOKIES` flag. This defaults to "False" when PostHog is running on `DEBUG` or `TEST` mode (generally the case when running locally) and "True" in production (when those modes are not on).
 
@@ -44,7 +44,7 @@ For most users, toggling this flag will not be necessary, as PostHog handles mos
 
 For more information on Django security features, you can check out [Django's Official Docs](https://docs.djangoproject.com/en/3.1/topics/security/), which discuss secure cookies. 
 
-## Secret Key
+## Secret key
 
 **Important: PostHog will not work if you do not set your own unique `SECRET_KEY`.**
 
@@ -56,11 +56,11 @@ openssl rand -hex 32
 
 This `SECRET_KEY` must be passed to PostHog as an environment variable. One-click deploys automatically set a secure key for you, but deployments from source and using Docker currently require you to manually set this. 
 
-### Secret Key with Docker Compose
+### Secret key with Docker Compose
 
 When using Docker Compose, you will need to manually update the `docker-compose.yml` file with a secret key that is unique to your instance.
 
-#### Step-By-Step
+#### Step-by-step
 
 First, run: `openssl rand -hex 32`. This will generate a new key for you. You'll need this in the next step.
 

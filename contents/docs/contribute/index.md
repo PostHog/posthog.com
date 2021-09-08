@@ -7,11 +7,11 @@ showTitle: true
 
 We love contributions to PostHog, big or small.
 
-## Code of Conduct
+## Code of conduct
 
-We have an awesome, diverse, and inclusive community. In order to maintain and grow this, all community members must adhere to our [Code of Conduct](/docs/contribute/code-of-conduct).
+We have an awesome, diverse, and inclusive community. In order to maintain and grow this, all community members must adhere to our [Code of conduct](/docs/contribute/code-of-conduct).
 
-## Reporting Bugs or Issues
+## Reporting bugs or issues
 
 Bug reports help us make PostHog better for everyone. When you create a bug, the description will automatically be filled with a template that makes is very clear what we'd like you to add.
 
@@ -19,13 +19,11 @@ Please search within our issues before raising a new one to make sure you're not
 
 <blockquote class='warning-note'>
 
-**Note:** If you've found a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
+**Note:** If you find a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
 
 </blockquote>
 
-<br />
-
-## Writing Code 
+## Writing code 
 
 ### How to get started if you're new to Kea, Python, Django, or a new employee
 
@@ -56,7 +54,7 @@ We use [Cypress](https://www.cypress.io/) for functional frontend tests. Cypress
 
 We follow the "given, when, then" framework. Each test should provide a given (initial setup for the flow or feature being tested), when (an action performed), and then (an assertion that verifies resulting behavior). To keep our components flexible and easily maintainable within tests, we use a `data-attr` pattern where we add a page-unique identifier prop to react components for testing purposes. Then, to identify an element in a Cypress tests we use `cy.get('[dataattr=some-identifier]')`. 
 
-### Cypress Component tests
+### Cypress component tests
 
 0. Run `yarn install`, `yarn global add cypress`
 1. Run `npx cypress open`. This will open cypress test runner, component tests are bundled together with source under `frontend/src`.
@@ -72,13 +70,13 @@ We follow the "given, when, then" framework. Each test should provide a given (i
 
 This is a quick start guide for using Cypress in our environment. Any further questions regarding how to use cypress can be answered on the [Cypress Docs](https://docs.cypress.io/). 
 
-## Branch and Commit Message
+## Branch and commit message
 
 If your pull request is related to an issue, please mention that issue in the pull request: `git checkout -b 263-logout-button`.
 
 In your initial commit message, mention the issue number again: `git commit -m "Closes #263 adds logout button"`. This way the corresponding ticket will automatically be closed once your pull request gets merged.
 
-## Review Process
+## Review process
 
 When we review a PR, we'll look at the following things:
 - Does the PR actually solve the issue?

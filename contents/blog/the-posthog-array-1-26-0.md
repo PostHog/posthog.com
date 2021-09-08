@@ -12,9 +12,9 @@ excerpt: PostHog 1.26.0 is here! Read about our Series B raise, our new features
 
 PostHog 1.26.0 is here! 
 
-We've raised another \$15M, our libraries have leveled up, and we've brought on even more great people. Not bad if you ask me. 
+We've raised another $15M, our libraries have leveled up, and we've brought on even more great people. Not bad if you ask me. 
 
-### [We've raised a \$15M Series B](/blog/15-million-series-b)
+### [We've raised a $15M Series B](/blog/15-million-series-b)
 
 Some exciting news in PostHog land! [Read our blog post about this latest round](https://posthog.com/blog/15-million-series-b).
 

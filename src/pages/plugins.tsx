@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import { Spacer } from '../components/Spacer'
 import { PluginCard } from '../components/PluginLibrary/PluginCard'
-import { Row, Tabs } from 'antd'
+import { Tabs } from 'antd'
 import { useActions, useValues } from 'kea'
 import { pluginLibraryLogic } from '../logic/pluginLibraryLogic'
 import { Spin } from 'antd'
@@ -28,12 +28,12 @@ export const PluginLibraryPage = () => {
                     description="Plugins for getting data in and out of PostHog, the open source product analytics platform."
                     image={pluginLibraryOgImage}
                 />
-                <div className="centered" style={{ margin: 'auto' }}>
+                <div className="centered px-4" style={{ margin: 'auto' }}>
                     <PluginModal />
                     <Spacer />
                     <h1 className="center">Plugin Library</h1>
                     <p className="center">
-                        <Link to="/docs/plugins/overview">Learn more about plugins on our dedicated Docs section.</Link>
+                        Learn more about plugins on our dedicated <Link to="/docs/plugins/overview">Docs section</Link>.
                     </p>
                     <Tabs
                         activeKey={!filter ? 'default' : filter}
@@ -46,7 +46,7 @@ export const PluginLibraryPage = () => {
                         <TabPane tab="Data Exporting" key="data_out" />
                         <TabPane tab="Ingestion Filtering" key="ingestion_filtering" />
                     </Tabs>
-                    <Row gutter={16} style={{ marginTop: 16, marginRight: 10, marginLeft: 10, minHeight: 600 }}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 items-stretch">
                         {filteredPlugins.length > 0 ? (
                             filteredPlugins.map((plugin: LibraryPluginType) => (
                                 <PluginCard
@@ -60,9 +60,11 @@ export const PluginLibraryPage = () => {
                                 />
                             ))
                         ) : (
-                            <Spin />
+                            <div className="col-span-full">
+                                <Spin />
+                            </div>
                         )}
-                    </Row>
+                    </div>
                 </div>
                 <Spacer />
             </Layout>

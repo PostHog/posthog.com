@@ -3,7 +3,6 @@ import { useValues } from 'kea'
 import { Structure } from '../../Structure'
 import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
-import { AllTheFeaturesCloud } from '../../AllTheFeaturesCloud'
 import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
 
 import checkIcon from '../../../images/check.svg'
@@ -13,10 +12,10 @@ export const CloudPlanBreakdown = () => {
     const eventNumberWithDelimiter = eventNumber.toLocaleString()
 
     return (
-        <Structure.Section width="4xl" className="py-12">
+        <>
             <div className="flex justify-center mb-20">
-                <div className="bg-deep-blue bg-opacity-30 rounded-lg p-8 inline-flex flex-col md:flex-row items-center text-white backdrop-filter backdrop-blur-sm">
-                    <div className="flex-0 border border-white border-opacity-10 rounded p-8 bg-royal-blue">
+                <div className="inline-flex flex-col md:flex-row items-center text-almost-black">
+                    <div className="flex-0 w-full border border-white border-opacity-10 rounded-xl p-8 bg-almost-black text-white min-w-[320px]">
                         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 24" width="42" height="24">
                             <path
                                 d="M0 17.143L6.867 24H0v-6.857zm0-1.714L8.583 24h6.867L0 8.572v6.857zm0-8.571L17.166 24h6.866L0 0v6.858zm8.583 0L25.75 24v-6.857L8.583.001v6.857zM17.166 0v6.857l8.583 8.57V8.573L17.166 0z"
@@ -37,19 +36,19 @@ export const CloudPlanBreakdown = () => {
                                 fill="#fff"
                             />
                         </svg>
-                        <h3 className="text-lg my-2">PostHog Cloud</h3>
+                        <h3 className="text-lg my-2 text-white">PostHog Cloud</h3>
                         <p className="opacity-50">Turnkey, hosted solution</p>
                         <ul className="list-none text-white text-opacity-70 text-sm pl-0 mb-6">
-                            <li className="flex align-center mb-2">
-                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="flex-0 mr-2" />
+                            <li className="flex items-center mb-2 space-x-2">
+                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
                                 <span className="">Hosted by PostHog</span>
                             </li>
-                            <li className="flex align-center mb-2">
-                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="flex-0 mr-2" />
+                            <li className="flex items-center mb-2 space-x-2">
+                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
                                 <span className="">Automatic upgrades</span>
                             </li>
-                            <li className="flex align-center">
-                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="flex-0 mr-2" />
+                            <li className="flex items-center space-x-2">
+                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
                                 <span className="">Start using immediately</span>
                             </li>
                         </ul>
@@ -61,15 +60,15 @@ export const CloudPlanBreakdown = () => {
                             <div className="opacity-50">{eventNumberWithDelimiter} events</div>
                         </div>
 
-                        <div className="free-allotment-callout relative text-yellow bg-yellow bg-opacity-10 rounded py-1 px-2 text-xs mt-2 mb-4 inline-flex">
+                        <div className="free-allotment-callout relative text-white bg-white bg-opacity-30 rounded py-1 px-2 text-xs mt-2 mb-4 inline-flex">
                             First 1 million events free - every month!
                         </div>
 
                         <div>
                             <CallToAction
-                                icon="none"
+                                type="secondary"
                                 href="https://app.posthog.com/signup?src=pricing-page"
-                                className="my-4"
+                                className="my-4 !w-full"
                             >
                                 Get started
                             </CallToAction>
@@ -79,21 +78,21 @@ export const CloudPlanBreakdown = () => {
                             {eventNumber === 10000 ? 'Self-serve. No credit card required.' : 'Completely self-serve'}
                         </div>
                     </div>
-                    <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg px-4 md:px-0">
+                    <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg px-4 md:px-0 min-w-[320px]">
                         <h3 className="mb-1 text-lg">Calculate your price</h3>
-                        <p className="text-sm text-white text-opacity-60">
+                        <p className="text-sm text-almost-black text-opacity-60">
                             Pay based on the events you capture each month.
                         </p>
 
                         <div className="mb-4">
                             <div className="flex justify-between items-center">
-                                <div className="mb-0 text-sm font-bold text-white text-opacity-75">
+                                <div className="mb-0 text-sm font-bold text-almost-black text-opacity-75">
                                     Monthly event volume
                                 </div>
                                 <div className="font-bold text-base">{eventNumberWithDelimiter}</div>
                             </div>
 
-                            <div className="text-xs opacity-50">
+                            <div className="text-xs">
                                 <PricingSlider
                                     marks={[10000, 1000000, 10000000, 100000000]}
                                     min={10000}
@@ -102,12 +101,9 @@ export const CloudPlanBreakdown = () => {
                             </div>
                         </div>
 
-                        <div className="mb-4 border border-white border-opacity-10 bg-royal-blue rounded">
-                            <div
-                                className="flex justify-between items-baseline p-2 rounded mb-1"
-                                style={{ backgroundColor: '#1A2460' }}
-                            >
-                                <div className="mb-0 text-xs text-white text-opacity-75">Event volume</div>
+                        <div className="mb-4 border border-white border-opacity-10  rounded">
+                            <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
+                                <div className="mb-0 text-xs text-almost-black text-opacity-75">Event volume</div>
                                 <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                             </div>
                             <dl className="flex justify-between mb-1 p-2">
@@ -120,7 +116,7 @@ export const CloudPlanBreakdown = () => {
                             </dl>
                         </div>
 
-                        <hr className="border-white border-solid border-opacity-20 border-r-0 border-b-0 border-left-0 mb-2" />
+                        <hr className="border-gray-accent-light bg-transparent border-dashed border-r-0 border-b-0 border-left-0 mb-2" />
 
                         <div className="flex justify-between items-baseline">
                             <div className="text-base mb-0 text-base font-bold">Estimated price</div>
@@ -132,7 +128,6 @@ export const CloudPlanBreakdown = () => {
                     </div>
                 </div>
             </div>
-            <AllTheFeaturesCloud />
-        </Structure.Section>
+        </>
     )
 }

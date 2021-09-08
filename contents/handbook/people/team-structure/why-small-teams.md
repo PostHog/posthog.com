@@ -2,7 +2,7 @@
 title: Why small teams
 sidebar: Handbook
 showTitle: true
-hideAnchor: true
+hideAnchor: false
 ---
 
 PostHog is structured for speed, autonomy and innovation.

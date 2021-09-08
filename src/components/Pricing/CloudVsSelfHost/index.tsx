@@ -1,34 +1,41 @@
 import React from 'react'
-
+import Logo from 'components/Logo'
 import { Structure } from '../../Structure'
 
 import checkIcon from '../../../images/check.svg'
 
-export const CloudVsSelfHost = () => {
+export const CloudVsSelfHost = ({ className = '' }) => {
     return (
-        <div className="pricing-hero text-white text-center relative">
-            <Structure.Section width="4xl" className="py-12">
-                <h3 className="text-center text-white">PostHog Cloud vs. Self-hosted</h3>
-                <div className="bg-deep-blue bg-opacity-20 border border-white border-opacity-10 py-4 px-6 md:px-10 mx-auto mt-4 mb-10 max-w-4xl rounded-lg items-baseline text-left text-white backdrop-filter backdrop-blur">
-                    <dl className="flex flex-col md:flex-row flex-wrap">
-                        <dt style={{ flex: '0 0 33%' }}>
-                            <h4 className="mb-0">PostHog Cloud</h4>
-                        </dt>
-                        <dd className="text-base" style={{ flexBasis: '67%' }}>
-                            <strong className="block mb-2 pt-2">Hosted and managed by PostHog.</strong>
-                            Start using immediately and receive automatic upgrades as we release new features.
-                        </dd>
-                        <dt style={{ flex: '0 0 33%' }}>
-                            <h4 className="mb-0">Self-hosted</h4>
-                        </dt>
-                        <dd className="text-base mb-0" style={{ flexBasis: '67%' }}>
-                            <strong className="block mb-2 pt-2">User data stays on your infrastructure.</strong>
-                            Get full access to your production instance. This is a great option if you’re concerned
-                            missing customer data due to browser privacy features, ad blockers or third-party cookies.
-                        </dd>
-                    </dl>
-                </div>
-            </Structure.Section>
-        </div>
+        <section
+            className={`${className} px-4 box-content grid md:grid-cols-2 grid-cols-1 md:border-t border-dashed border-gray-accent-light max-w-screen-lg mx-auto relative md:gap-20 text-center font-bold text-almost-black`}
+        >
+            <div className="md:after:block after:hidden after:absolute after:h-[60%] after:border-dashed after:border-gray-accent-light after:border-l after:left-1/2 after:transform after:-translate-x-1/2 after:bottom-0">
+                <h3 className="sm:text-3xl md:mb-16">Self-hosting</h3>
+                <ul className="list-none m-0 p-0">
+                    <li className="py-4 sm:text-lg md:text-xl">User data stays on your infrastructure</li>
+                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border border-l-0 border-r-0">
+                        Full access to production instance
+                    </li>
+                    <li className="pt-4 sm:text-lg md:text-xl">
+                        First-party cookies bypass privacy features & ad blockers
+                    </li>
+                </ul>
+            </div>
+            <div className="before:my-14 md:before:my-0 before:w-12 before:h-12 before:bg-almost-black before:rounded-full before:text-white md:before:absolute before:flex before:items-center before:justify-center md:before:left-1/2 md:before:transform md:before:-translate-x-1/2 before:text-2xl before:mx-auto md:before:content-['vs.'] before:content-['vs.']">
+                <h3 className="sm:text-3xl md:mb-16 flex items-center justify-center space-x-2">
+                    <span className="flex-grow-0">
+                        <Logo noText />
+                    </span>
+                    <span className="flex-grow-1">PostHog Cloud</span>
+                </h3>
+                <ul className="list-none m-0 p-0">
+                    <li className="py-4 sm:text-lg md:text-xl">Hosted & managed by PostHog</li>
+                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border border-l-0 border-r-0">
+                        Start using immediately
+                    </li>
+                    <li className="pt-4 sm:text-lg md:text-xl">Automatic upgrades</li>
+                </ul>
+            </div>
+        </section>
     )
 }

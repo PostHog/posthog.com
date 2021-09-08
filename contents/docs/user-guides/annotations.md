@@ -25,13 +25,13 @@ On the day of the spike, we have 2 saved annotations. If I hover over them, I ca
 
 <br />
 
-On that day, PostHog was listed on GitHub's trending page, and there was an even more relevant event: our article ['Why You May Not Need a Sales Team'](/blog/product-led-growth/) was ranked #1 on [HackerNews](https://news.ycombinator.com/), which brought a lot of new viewers to our blog.
+On that day, PostHog was listed on GitHub's trending page, and there was an even more relevant event: our article ['Why you may not nNeed a sales team'](/blog/product-led-growth/) was ranked #1 on [HackerNews](https://news.ycombinator.com/), which brought a lot of new viewers to our blog.
 
 In this case, the annotations were done after the fact (the next day), which makes them useful for future reference. However, annotations are especially powerful if you create a habit of annotating events you think _could_ be relevant, and then analyzing their impact. 
 
 This could help you determine a specific version release that caused you to lose or gain a lot of users, for example.
 
-## Creating an Annotation
+## Creating an annotation
 
 When editing a chart in Trends or Sessions (or a chart from Trends/Sessions on a Dashboard), hover your cursor over the dates at the bottom of the chart to reveal a button with a `+` symbol. Clicking it will then open up a modal where you can create your annotation, as well as choose to have it specifically for the current chart or all of your charts.
 

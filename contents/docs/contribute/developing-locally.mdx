@@ -1,5 +1,5 @@
 ---
-title: Developing Locally
+title: Developing locally
 sidebar: Docs
 showTitle: true
 ---
@@ -24,15 +24,17 @@ git clone https://github.com/PostHog/posthog
 
 <HiddenSection headingType='h4' title='With Docker' id='dbs-with-docker'>
 
-1. Make sure you have Docker and Docker Compose installed
+1. Make sure you have Docker and Docker Compose installed and Docker Engine is running
 2. Run:
 
-```bash
-docker-compose -f docker-compose.dev.yml up -d redis db
-```
+  ```bash
+  docker-compose -f docker-compose.dev.yml up -d redis db
+  ```
+
+> **Friendly tip:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:` likely Docker Engine isn't running.
 
 > **Friendly tip:** You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
-
+    
 </HiddenSection>
 
 <HiddenSection headingType='h4' title='Without Docker' id='dbs-without-docker'>
@@ -76,71 +78,71 @@ If you ran `brew link postgresql` upon installation, there should be no need to 
 
 1. Navigate into the correct folder (project's root directory):
 
-```bash
-cd posthog
-```
+  ```bash
+  cd posthog
+  ```
 
 2. Create the virtual environment in current directory called 'env':
 
-```bash
-python3 -m venv env
-```
+  ```bash
+  python3 -m venv env
+  ```
 
 3. Activate the virtual environment:
 
-```bash
-source env/bin/activate
-```
+  ```bash
+  source env/bin/activate
+  ```
 
 4. Install requirements with pip
 
-```bash
-pip install -r requirements.txt
-```
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 If you have problems with this step (TLS/SSL error), then run
 
-```bash
-~ brew update && brew upgrade
-```
+  ```bash
+  ~ brew update && brew upgrade
+  ```
 
 followed by
 
-```bash
-python3 -m pip install --upgrade pip
-```
+  ```bash
+  python3 -m pip install --upgrade pip
+  ```
 
 then retry the requirements.txt install.
 
 5. Install dev requirements:
 
-```bash
-pip install -r requirements-dev.txt
-```
+  ```bash
+  pip install -r requirements-dev.txt
+  ```
 
 6. Run migrations:
 
-```bash
-DEBUG=1 python3 manage.py migrate
-```
+  ```bash
+  DEBUG=1 python3 manage.py migrate
+  ```
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
 7. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
-```bash
-# macOS (Homebrew)
-brew install yarn
-```
+  ```bash
+  # macOS (Homebrew)
+  brew install yarn
+  ```
 
 8. Make sure you have [NodeJS installed](https://nodejs.org/en/download/):
 
-```bash
-# macOS (Homebrew)
-brew install node
-```
+  ```bash
+  # macOS (Homebrew)
+  brew install node
+  ```
 
-> **Note:** For Apple Silicon support, please use NodeJS >= v15.0
+  > **Note:** For Apple Silicon support, please use NodeJS >= v15.0
 
 9. Start the backend, worker, and frontend simultaneously with:
     ```bash
@@ -225,10 +227,10 @@ With [PyCharm's](https://posthog.com/handbook/engineering/beginners-guide/develo
 3. Point PyCharm to the project root (`posthog/`) and settings (`posthog/posthog/settings.py`) file.
 4. Add these two environment variables
 
-```
-DEBUG=1;
-DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
-```
+  ```
+  DEBUG=1;
+  DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
+  ```
 
 ### Let's spin it up!
 
@@ -236,13 +238,10 @@ DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
 2. Run `./bin/start-worker`
 3. Set some breakpoints
 4. In the top toolbar, select the config you just created and click the green bug icon.
-    - This runs `python manage.py runserver` with extra parameters that enable debugging.
-
-<br />
-<hr />
+  - This runs `python manage.py runserver` with extra parameters that enable debugging.
 
 ## Testing ingestion and feature flags
 
 > **Note:** When developing locally and setting environment variable `DEBUG=1`, the local server is treated as what would be "PostHog Cloud". This means that all analytics that are captured from the usage of PostHog are sent to this same local instance (can be quite useful to generate test data too). In addition, feature flags are considered based on the local instance.
 
-Add feature flags to your [local instance](http://localhost:8000/feature_flags/new) to use them while developing locally. For example, let's say you want to test the using the `my-feature-flag` flag locally - you would create a new flag with the name `my-feature-flag` and release that flag to the user account used for testing. Learn more about using feature flags in the [Feature Flags User Guide](https://posthog.com/docs/user-guides/feature-flags).
+Add feature flags to your [local instance](http://localhost:8000/feature_flags/new) to use them while developing locally. For example, let's say you want to test the using the `my-feature-flag` flag locally - you would create a new flag with the name `my-feature-flag` and release that flag to the user account used for testing. Learn more about using feature flags in the [Feature Flags user guide](//posthog.com/docs/user-guides/feature-flags).

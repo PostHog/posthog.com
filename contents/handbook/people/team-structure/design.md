@@ -2,7 +2,7 @@
 title: Team Design
 sidebar: Handbook
 showTitle: true
-hideAnchor: true
+hideAnchor: false
 ---
 
 > Looking for our brand style guide? [Look no further.](/handbook/company/branding)

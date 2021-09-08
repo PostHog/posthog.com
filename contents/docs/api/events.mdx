@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).
+> For instructions on how to authenticate to use this endpoint, see [API overview](/docs/api/overview).
 
 The `/api/event/` endpoints allow you to fetch events from PostHog.
 
@@ -14,12 +14,13 @@ This endpoint has pagination. See [Pagination](/docs/api/overview#pagination) fo
 
 ## Endpoints
 
+### Event
+
 <Endpoint endpoint='/api/event' allowedMethods={['get']} />
 
 Get a list of events from PostHog.
 
-<HiddenSection headingType='h4' title='Query Parameters'>
-
+<HiddenSection headingType='h4' title='Query parameters'>
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
@@ -96,13 +97,13 @@ Content-Type: application/json
 
 </HiddenSection>
 
+### Sessions
 
 <Endpoint endpoint='/api/event/sessions' allowedMethods={['get']} />
 
 Get a list of sessions and the events they contain.
 
-<HiddenSection headingType='h4' title='Query Parameters'>
-
+<HiddenSection headingType='h4' title='Query parameters'>
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
@@ -111,12 +112,13 @@ Get a list of sessions and the events they contain.
 | `duration` | `int` | Duration of the session in seconds, for example: `224`. | ❌ |
 | `duration_operator` | `lt` or `gt` | Used together with `duration` to specify if the duration to fetch for should be greater than (`gt`) or lower than (`lt`) the specified one. | ❌ |
 
-
 </HiddenSection>
 
 <HiddenSection headingType='h4' title='Example'>
 
 ##### Request
+
+### Sessions
 
 ```
 GET /api/event/sessions/?distinct_id=1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a
@@ -392,12 +394,14 @@ Content-Type: application/json
 
 </HiddenSection>
 
+
+### Session recording
+
 <Endpoint endpoint='/api/event/session_recording' allowedMethods={['get']} />
 
 Get a list session recordings for the events from PostHog.
 
-<HiddenSection headingType='h4' title='Query Parameters'>
-
+<HiddenSection headingType='h4' title='Query parameters'>
 
 | Parameter | Type / Valid Values | Description | Required |
 | --- | --- | --- | --- |
@@ -407,6 +411,8 @@ Get a list session recordings for the events from PostHog.
 </HiddenSection>
 
 <HiddenSection headingType='h4' title='Example'>
+
+### Sessions
 
 ##### Request
 

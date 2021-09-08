@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line no-redeclare
 /* global __dirname, require, module */
+
 const visit = require('unist-util-visit')
 const imageSize = require(`probe-image-size`)
 const fs = require(`fs-extra`)

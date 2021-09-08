@@ -12,13 +12,16 @@ const ButtonLink = ({
 }: {
     section: string
     currentSection: string
-    children: any
+    children: React.ReactNode
 }) => {
-    const baseClasses = 'px-3 py-2 rounded'
+    const baseClasses =
+        'leading-loose border-2 dark:border-white rounded-lg px-2 mx-1 my-1 text-sm transition-colors select-none'
     const classList =
         section == currentSection
-            ? baseClasses.concat(' bg-primary text-white font-bold hover:text-white')
-            : baseClasses.concat(' text-white text-opacity-80 hover:bg-gray-100 hover:bg-opacity-10 hover:text-white')
+            ? baseClasses.concat(' bg-black text-white border-black hover:text-white dark:bg-white dark:text-black')
+            : baseClasses.concat(
+                  ' bg-tan text-black text-opacity-50 hover:text-black hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
+              )
     const sectionSelector = `#${section}`
 
     const clickHandler = (e: { preventDefault: () => void }) => {
@@ -35,10 +38,6 @@ const ButtonLink = ({
 
 const inPageLinks = [
     {
-        label: "Why we're here",
-        section: 'why-were-here',
-    },
-    {
         label: 'Transparency',
         section: 'transparency',
     },
@@ -51,10 +50,6 @@ const inPageLinks = [
         section: 'benefits',
     },
     {
-        label: 'Working at PostHog',
-        section: 'working-at-posthog',
-    },
-    {
         label: 'Open roles',
         section: 'open-roles',
     },
@@ -65,8 +60,7 @@ interface AnchorScrollNavbarProps {
 }
 
 export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses =
-        'rounded w-11/12 max-w-3xl mx-auto justify-between items-stetch p-3 sticky top-3 z-10 hidden lg:flex'
+    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex'
     const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
@@ -122,14 +116,11 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
 
     return (
         <>
-            <div className={classList} style={{ backgroundColor: '#202038' }}>
-                {navbarLinks}
-            </div>
+            <div className={classList}>{navbarLinks}</div>
 
-            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl lg:hidden">
+            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl md:hidden border border-1 border-tan rounded border-opacity-25">
                 <select
-                    className="appearance-none text-white block p-3 w-full rounded"
-                    style={{ backgroundColor: '#202038' }}
+                    className="appearance-none text-white bg-primary block p-3 w-full rounded font-bold"
                     value={currentSection}
                     onChange={(e) => scrollTo(`#${e.target.value}`)}
                 >

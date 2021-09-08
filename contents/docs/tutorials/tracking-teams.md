@@ -1,20 +1,12 @@
 ---
-title: Tracking How Teams Use Your Product
+title: Tracking how teams use your product
 sidebar: Docs
 showTitle: true
 ---
 
-<small class="note-block centered">_Estimated Reading Time: 12 minutes ☕☕☕_</small>
+_Estimated reading time: 12 minutes_ ☕☕☕
 
-<br />
-
-<span class="larger-image">
-
-![Revenue Tracking Banner Image](../../images/tutorials/banners/user-model.png)
-
-</span>
-
-<br />
+![Revenue tracking banner image](../../images/tutorials/banners/user-model.png)
 
 When using PostHog or any other product analytics tool, there are two key entities that underpin all of your analytics: events and users.
 
@@ -33,16 +25,14 @@ In this tutorial, we will explain how to structure your analytics to fit these n
 - What is the average revenue per organization?
 - How many organizations are there at each pricing tier? 
 
-
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
 1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview).
 
-
-## Identifying Users
+## Identifying users
 
 Every event in PostHog has an associated distinct ID, which determines which user the event "belongs" to.
 
@@ -109,7 +99,7 @@ posthog.register({ personEmail: user.email })
 
 With this in place, let's now look at how we can visualize our organization metrics in PostHog.
 
-## Total Number of Organizations and Persons
+## Total number of organizations and persons
 
 Having set up our modified identifying mechanism to group all persons in one organization together, let's now start sending events to our organization.
 
@@ -145,7 +135,8 @@ Finally, to get the average number of users per organization, we can then use a 
 This `account_created` event can also work as a basis for other valuable metrics, such as number of new organizations per month.
 
 To get that, we can select the total volume of `account_created` events, and then filter it by `is_first_user = true`.
-## Total Projects
+
+## Total projects
 
 In PostHog Cloud, organizations are composed of multiple users, and these users can create various projects. 
 
@@ -185,7 +176,7 @@ If we were to average this, it would give us the average number of projects per 
 
 Another thing we can do is get the maximum number of projects any organization has created:
 
-![Chart Image](../../images/tutorials/user-model/project_max.png)
+![Chart image](../../images/tutorials/user-model/project_max.png)
 
 This could be useful in informing architectural decisions, as you can have an idea of what the limits of your platform should be. 
 
@@ -197,7 +188,7 @@ Exploratory questions that could come out of this include:
 
 To answer these questions, you could then, for example, create a cohort of organizations with `project_total > 30` , and analyze how their usage of the platforms differs from everyone else.
 
-## Revenue Analysis
+## Revenue analysis
 
 Another very useful thing to track on an organization basis is revenue. So how do we answer the following questions in PostHog:
 
@@ -233,13 +224,13 @@ This can then be displayed in a format just like the pie chart above.
 
 Now, to find the average purchase value, there are two approaches in this case:
 
-**1. Average of the `purchase_value` property**
+#### 1. Average of the `purchase_value` property
 
 ![Chart Image](../../images/tutorials/user-model/average-revenue.png)
 
 With the graph above, we're using PostHog's built-in mathematical operations to get the average purchase value per month. 
 
-**2. Sum of purchases divided by total purchases**
+#### 2. Sum of purchases divided by total purchases
 
 ![Chart Image](../../images/tutorials/user-model/average-revenue-2.png)
 

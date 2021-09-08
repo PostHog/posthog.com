@@ -11,7 +11,7 @@ export const pricingSliderLogic = kea({
     },
     reducers: {
         eventNumber: [
-            10000,
+            8000000,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
             },
@@ -23,7 +23,7 @@ export const pricingSliderLogic = kea({
             },
         ],
         pricingOption: [
-            'cloud',
+            'self-hosted',
             {
                 setPricingOption: (_: null, { option }: { option: string }) => option,
             },

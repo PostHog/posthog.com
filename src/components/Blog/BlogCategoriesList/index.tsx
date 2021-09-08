@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { BlogCategories, CategoryInterface } from '../constants/categories'
 
 const linkClassList =
-    'leading-loose border-2 border-black dark:border-white rounded-lg px-2 mx-1 my-1 text-sm hover:bg-black dark:hover:bg-white dark:hover:bg-opacity-50 hover:bg-opacity-20 transition-colors hover:text-black dark:hover:text-white'
+    'leading-loose border-2 dark:border-white rounded-lg px-2 mx-1 my-1 text-sm transition-colors select-none'
 
 export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: string }): JSX.Element {
     return (
@@ -12,8 +12,8 @@ export function BlogCategoriesList({ activeSlug = 'blog' }: { activeSlug?: strin
                 {BlogCategories.filter((cat) => !cat.hideFromNavigation).map((category: CategoryInterface) => {
                     const isActive = category.slug === activeSlug
                     const statefulClasses = isActive
-                        ? 'bg-black text-white dark:bg-white dark:text-black hover:bg-opacity-50'
-                        : 'text-black dark:text-white opacity-75'
+                        ? 'bg-black text-white border-black hover:text-white dark:bg-white dark:text-black'
+                        : 'text-black hover:text-opacity-100 hover:text-black border-gray border-opacity-75 hover:border-opacity-100 dark:text-white text-opacity-50'
                     return (
                         <Link
                             to={category.link}

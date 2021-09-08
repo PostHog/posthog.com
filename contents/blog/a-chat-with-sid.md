@@ -4,12 +4,11 @@ title: The Early Days of GitLab - A Chat with Sid Sijbrandij
 rootPage: /blog
 sidebar: Blog
 showTitle: true
+author: james-hawkins
 hideAnchor: true
 ---
 
-By: [James Hawkins](https://twitter.com/james406), Co-Founder/CEO of PostHog
-
-It gets pretty easy to idolize the superstars of tech. One of the coolest things we've learned is that many of the most successful founders will find time to talk with you. To put this in context, GitLab is one of the world's leading open core companies, worth \$2.75B. Kind of a big deal. We wanted to learn even more than we could discern from their handbook.
+It gets pretty easy to idolize the superstars of tech. One of the coolest things we've learned is that many of the most successful founders will find time to talk with you. To put this in context, GitLab is one of the world's leading open core companies, worth $2.75B. Kind of a big deal. We wanted to learn even more than we could discern from their handbook.
 
 [Sid Sijbrandij](https://twitter.com/sytses), founder and CEO of GitLab, and has always been an inspiration to PostHog. Their culture gave us the confidence to build PostHog all-remote, and it influenced the style of product we're building. Once we saw Sid had [liked a few of our releases](https://twitter.com/PostHogHQ/status/1288563434641072131) on Twitter, we thought we'd ask a friend of a friend to connect us.
 
@@ -23,9 +22,9 @@ We focused the discussion on things we couldn't learn from the web, where the to
 
 ## Making money
 
-It transpires that even VC-backed companies have to do this, at some point. In GitLab's case, they've reached \$100M ARR in 2020, growing 50x in 4 years. In other words, they smashed that.
+It transpires that even VC-backed companies have to do this, at some point. In GitLab's case, they've reached $100M ARR in 2020, growing 50x in 4 years. In other words, they smashed that.
 
-### The first \$1M in ARR - when and how?
+### The first $1M in ARR - when and how?
 
 GitLab started off bootstrapped for a long time. They already had 100K users when they started to raise money and revenue became more important.
 
@@ -86,7 +85,7 @@ We agree.
 
 ## Don't ask what I did
 
-"Being the pricing genius I am, I charged a (more than \$100Bn valuation) company \$1,500 per annum for 5,000 seats. The insurance to cover the contract was significantly more than the contract itself". Stay humble!
+"Being the pricing genius I am, I charged a (more than $100Bn valuation) company $1,500 per annum for 5,000 seats. The insurance to cover the contract was significantly more than the contract itself". Stay humble!
 
 Sid summed up the call perfectly - "don't ask so much about what I did, but ask how I'd approach things now".
 

@@ -24,7 +24,7 @@ We decided that was too risky - it'd be binary, either a couple of upvotes or a 
 
 Instead, we worked out that if we could find a repeatable approach to generating users, we were guaranteed to be able to make progress. That felt achievable.
 
-We took \$2K of our \$8K and set up ad campaigns on every display network - because there aren't many other platforms that tackle tech debt, so search traffic doesn't exist, yet.
+We took $2K of our $8K and set up ad campaigns on every display network - because there aren't many other platforms that tackle tech debt, so search traffic doesn't exist, yet.
 
 We started getting a trickle of leads. They all bounced.
 
@@ -40,7 +40,7 @@ The week before, we booked practice sessions with everyone we thought was releva
 
 We made these sessions realistic - we told them to cut us off, to interrupt if we weren't getting to the point, and to trip us up.
 
-We focused on clarity. We had achieved a lot fast. We had signed up 400 people in just three weeks, for \$10 per user (the cost came down a lot per user after a lot of tweaking, so the more recent ones were way less expensive). Given we'd charge \$10 per month per user, the unit economics looked really good. We hadn't yet generated revenue, but we had 2 companies who said they would pay (and, a few weeks after the interview, they both did, which got us to our first \$600 MRR).
+We focused on clarity. We had achieved a lot fast. We had signed up 400 people in just three weeks, for $10 per user (the cost came down a lot per user after a lot of tweaking, so the more recent ones were way less expensive). Given we'd charge $10 per month per user, the unit economics looked really good. We hadn't yet generated revenue, but we had 2 companies who said they would pay (and, a few weeks after the interview, they both did, which got us to our first $600 MRR).
 
 Tim and I got the Eurostar from Kings Cross to France the night before. That evening, we went out for a beer and caught up with an old friend.
 

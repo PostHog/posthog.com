@@ -21,7 +21,7 @@ interface CallToActionProps {
     type?: string
     icon?: string
     iconBg?: string
-    children: any
+    children: React.ReactNode
     width?: string
     href?: string
     to?: string

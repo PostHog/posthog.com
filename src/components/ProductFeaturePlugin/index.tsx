@@ -12,7 +12,7 @@ export const ProductFeaturePlugin = ({ handle, name }: ProductFeaturePluginProps
             <svg className="icon width-[32px] height-[32px] mx-auto" style={{ width: '32px', height: '32px' }}>
                 <use href={pluginsSprite + '#plugins-' + `${handle}`} />
             </svg>
-            <span className="text-white text-sm text-opacity-70 leading-tight">{name}</span>
+            <span className="text-sm font-semibold text-opacity-50 leading-none">{name}</span>
         </li>
     )
 }

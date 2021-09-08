@@ -20,13 +20,13 @@ showTitle: true
 
 Copy the Webhook URL into the PostHog Setup page:
 
-![PostHog Add Webhook](../../../images/add-webhook.png)
+![PostHog add webhook](../../../images/add-webhook.png)
 
-## 3. Add to Action
+## 3. Add to action
 
 For each Action that should be posted to Teams, select "Post to webhook when this action is triggered":
 
-![PostHog Edit Action](../../../images/post-action-slack.png)
+![PostHog edit action](../../../images/post-action-slack.png)
 
 
 ## 4. Celebrate!

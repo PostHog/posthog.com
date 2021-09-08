@@ -10,13 +10,13 @@ Because some data migrations require touching the Events table which can get ver
 
 If you need help, feel free to create an issue, or [join our Slack](/slack).
 
-## Upgrade Instructions
+## Upgrade instructions
 
 Find the relevant upgrade instructions in the corresponding deployment info page:
 - [DigitalOcean](/docs/self-host/deploy/digital-ocean#upgrading-the-chart)
 - [Google Cloud Platform](/docs/self-host/deploy/gcp#upgrading-the-chart)
 - [AWS](/docs/self-host/deploy/aws#upgrading-the-chart)
-- [Using Helm chart](https://github.com/PostHog/charts-clickhouse#upgrading-the-chart)
+- [Using Helm chart](/docs/self-host/deploy/other#upgrading-the-chart)
 
 We recommend for all new installs to use PostHog backed by ClickHouse. In case you are running PostHog backed by Postgres you can find the upgrade instructions [here](https://github.com/PostHog/posthog.com/tree/ee01390744dffdb32f2f78b49572c606becb03b9/contents/docs/self-host/deploy).
 

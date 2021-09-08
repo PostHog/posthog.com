@@ -1,11 +1,13 @@
 ---
-title: Gatsby Integration
+title: Gatsby integration
 sidebarTitle: Gatsby
 sidebar: Docs
 showTitle: true
 ---
 
-Thanks to [Ritesh Kadmawala](https://github.com/kgritesh) for building this! GitHub: [posthog/gatsby-plugin-posthog](https://github.com/posthog/gatsby-plugin-posthog)!
+Thanks to [Ritesh Kadmawala](https://github.com/kgritesh) for building this! 
+
+GitHub: [posthog/gatsby-plugin-posthog](https://github.com/posthog/gatsby-plugin-posthog)
 
 Gatsby behaves like a single-page app which means to track `$pageview` events special care is needed. This plugin takes care of that.
 
@@ -30,7 +32,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-posthog`,
       options: {
-        // Specify the API key for your Posthog Project (required)
+        // Specify the API key for your PostHog Project (required)
         apiKey: "<ph_project_api_key>",
         // Specify the app host if self-hosting (optional, default: https://app.posthog.com)
         apiHost: "<ph_instance_address>",
@@ -46,7 +48,6 @@ module.exports = {
 
 This will automatically start tracking pageviews, clicks and more.
 
-
 In your code you can access posthog via `window.posthog`.
 
-For instructions on the JS library itself, see [JS Library](/docs/integrate/client/js).
+For instructions on the JS library itself, see [JS library](/docs/integrate/client/js).

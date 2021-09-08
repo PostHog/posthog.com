@@ -16,13 +16,13 @@ You can use the cohorts to:
   * "Are people at company X using the app much?"
   * "Is the number of Daily Active Users going up or down over time?"
 
-## Demo Video
+## Demo video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GtSSxmOdyk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Creating a New Cohort
+## Creating a new cohort
 
-**Step 1:** Go to 'People' in the left hand navigation:
+**Step 1:** Navigate to the 'People' page:
 
 ![left hand navigation for cohorts](../../images/features/cohorts/cohorts-page.png)
 
@@ -33,7 +33,7 @@ You can use the cohorts to:
 <br />
 
 
-## Cohort Settings
+## Cohort settings
 
 There are three key settings for a cohort: 'action', 'property', and 'New group'. See below:
 
@@ -45,18 +45,18 @@ There are three key settings for a cohort: 'action', 'property', and 'New group'
 
 <br />
 
-**Group Users by Actions**
+**Group users by actions**
 
 You can group users who have performed certain [actions](/docs/user-guides/actions). You need to already have configured actions for that to work.
 
-**Group Users by Property**
+**Group users by property**
 
 You can also group users who have a certain property in common. Commonly, this used to combine users at a certain team, from a certain marketing campaign (via their UTM tags), or whatever other static property you need:
 
 <br />
 
 
-## Adjusting Time Frames
+## Adjusting time frames
 
 You may only want users who have performed a certain action within a certain timeframe.
 
@@ -65,7 +65,11 @@ On setting the cohort to 'user has *action*', you will be presented with the fol
 <br />
 
 
-<span class='centered'>![cohort - user action date range selection](../../images/features/cohorts/cohort-time-frame.png)</span>
+<span class='centered'>
+
+![cohort - user action date range selection](../../images/features/cohorts/cohort-time-frame.png)
+
+</span>
 
 <br />
 
@@ -75,13 +79,13 @@ Currently, our time filtering for cohorts has 3 options, but we are working to [
 <br />
 
 
-## Viewing Users in a Cohort
+## Viewing users in a cohort
 
 Go to 'People' > 'Cohorts' in the left-hand navigation (as shown in the beginning of this page) and select the cohort you want to view by clicking it, and you'll be presented with a list
 
 <br />
 
-## Differentiating Team vs. Users Traffic
+## Differentiating team vs. users traffic
 From the initial setup, [PostHog is tracking various events](/docs/integrate/client/js#autocapture) from all users. However, you may want to differentiate between traffic from your team and traffic from your users.
 
 To do so, you can identify your team members in PostHog either through a [`posthog.identify`](/docs/integrate/client/js#identifying-users) (e.g. by setting an email as the ID) call or by [associating properties](/docs/integrate/client/js#sending-user-information) with your team member users (e.g. `is_team = true`). 

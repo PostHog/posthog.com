@@ -9,19 +9,19 @@ If you are using Nuxt.js and want to track your application using PostHog this t
 
 It will guide you through an example integration of PostHog using Nuxt.js plugins. 
 
-### Is This Tutorial For Me?
+### Is this tutorial for me?
 
 This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. 
 We are going to look at some minimal example code which should get you started quickly and provide a base for further customization.
 
-### Pre-Requisites
+### Prerequisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
 2. Have a running Nuxt.js application
 
-### Minimal Example
+### Minimal example
 
 We are going to implement PostHog as a [Nuxt.js plugin](https://nuxtjs.org/docs/2.x/directory-structure/plugins) which gives us the possibility to inject
 the posthog object and make it available across our application.
@@ -81,7 +81,7 @@ plugins: [
 
 ### Using the plugin
 
-By using the example code above you can now use Posthog across your app with `this.$posthog` or `app.$posthog` - depending on the context. 
+By using the example code above you can now use PostHog across your app with `this.$posthog` or `app.$posthog` - depending on the context. 
 Compare with the [Nuxt.js docs](https://nuxtjs.org/docs/2.x/directory-structure/plugins#inject-in-root--context) on further details when to use `app.$posthog` or `this.$posthog`.
 
 Let's say for example the user makes a purchase you could track an event like that:

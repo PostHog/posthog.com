@@ -20,9 +20,9 @@ This helm chart sets up posthog on your cluster, with the following components:
 1. ClickHouse operator
 1. PostgreSQL, Redis and pgbouncer
 1. Zookeeper and Kafka
-1. Posthog web pods
-1. Posthog plugin server
-1. Posthog worker
+1. PostHog web pods
+1. PostHog plugin server
+1. PostHog worker
 
 
 ## Prerequisites

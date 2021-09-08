@@ -10,13 +10,13 @@ This privacy policy (“Privacy Policy”) applies to all visitors and users of 
 
 PostHog is an open source project and collaborative community, as well as a company. This means that many portions of our Websites, including information you voluntarily provide, will be public-facing for the open sharing of innovative developments, ideas, and information that makes our collaborative community so great. While we are committed to open sharing, we strive to respect the privacy of individual community members and will minimize the information we collect and share. If you do not want to share your information, including personally identifiable information, with other community members and the public, please be thoughtful as to how you interact with our Websites and what information you provide through the Websites (for example, through creating a public profile, project contributions, comments, and blog posts).
 
-### Data Protection
+### Data protection
 
 Oversight of Data Security is handled by PostHog's respective Data Protection Officers. Should you wish to make modifications, deletions, or additions to any personal data you believe to be captured by PostHog, or if you have any general security concerns, please contact us at [privacy@posthog.com](mailto:privacy@posthog.com).
 
-## What Information PostHog Collects and Why
+## What Information PostHog collects and why
 
-### Information from Website Visitors
+### Information from website visitors
 
 Like most website operators, PostHog collects basic non-personally-identifying information from Website visitors of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. We collect this information to better understand how visitors use the Website, to improve our Websites and experience for visitors, and to monitor the security of the Websites. From time to time, PostHog may publicly release non-personally-identifying information collected from Website visitors in the aggregate, e.g., by publishing a report on trends in the usage of the Website.
 
@@ -24,19 +24,19 @@ PostHog also collects potentially personally-identifying information like Intern
 
 PostHog may collect statistics about the behavior of visitors to our Websites. For instance, PostHog may reveal how many downloads a particular version got using aggregated statistics that contain anonymous user information only.
 
-### Usage Data Information from Self-managed PostHog Instances
+### Usage data information from self-managed PostHog instances
 
 PostHog collects information about usage from each self-managed PostHog instance (Community Edition and Enterprise Edition). It is possible to opt out of personally identifiable information being transferred, and for self-managed PostHog instances, we do not track your end users' at all. PostHog tracks the usage of these instances at an aggregate level - it is also possible to prevent this through modifiying the code, which is made available to you.
 
-### Personally-Identifying Information
+### Personally-identifying information
 
 Users of the Websites may choose to interact with PostHog in ways that provide us with their personally-identifying information. In some instances, a User ID is generated for form and url tracking, page views, page pings and usage counts in order to ascertain product performance and development. The amount and type of information that PostHog gathers depends on the nature of your interaction with us, as well as the amount of information you choose to share. For example, we ask visitors who use our community slack group to provide a username and email address. We will also collect the information you provide with us in connection with creating an account on the Website. Profile information is shared publicly, as well as activity under your profile. If you report a security vulnerability to PostHog and request public acknowledgement, then we may publicly disclose the personal information you provided to us in connection with the report, including your name to fulfill your request for acknowledgement. In each case, PostHog collects such personally-identifiable information only insofar as is necessary or appropriate to fulfill the purpose of the user’s interaction with or request of PostHog. We will not disclose personally-identifying information other than as described in this Privacy Policy.
 
 Visitors can always refuse to supply personally-identifying information, with the caveat that it may prevent you from engaging in certain Website-related activities or being able to access and use certain features and services.
 
-For details about what information is collected and with whom it is shared, please go to Tech Stack Applications.
+For details about what information is collected and with whom it is shared, please go to Tech stack applications.
 
-## Information PostHog Does Not Collect
+## Information PostHog does not collect
 
 PostHog does not intentionally collect sensitive personal information, such as social security numbers, genetic data, health information, or religious information. Although PostHog does not request or intentionally collect any sensitive personal information, we realize that users might store this kind of information in a PostHog instance by pushing it to us through our libraries or API. If you store any sensitive personal information on PostHog’s servers, you are consenting to our storage of that information on our servers, which are located in the United States.
 
@@ -44,7 +44,7 @@ If you're a child under the age of 13, you may not have an account on the Websit
 
 Other countries may have different minimum age limits. If you are below the minimum age for providing consent for data collection in your country, you may not use PostHog.
 
-## Basis for Processing Your Information
+## Basis for processing your information
 
 Performance of a contract. The use of your information may be necessary to perform the contract that you have with us. For example, if you use our Websites to purchase PostHog product subscriptions or services, contribute to a project, create a profile, post and comment through our Websites, or request information through our Websites, we will use your information to carry out our obligation to complete and administer that contract or request.
 
@@ -52,9 +52,9 @@ Legitimate interests. We use your information for our legitimate interests, such
 
 Consent. We may rely on your consent to use your personal information for certain direct marketing purposes, such as sending you newsletter updates about PostHog products. You may withdraw your consent at any time through the unsubscribe feature provided with each marketing email or by contacting us at the addresses given at the end of this Privacy Policy.
 
-## How PostHog Uses and Protects Personally-Identifying Information
+## How PostHog uses and protects personally-identifying information
 
-### Sharing Your Information
+### Sharing your information
 
 PostHog only discloses potentially personally-identifying and personally-identifying information to those of its employees, contractors, and affiliated organizations that (i) need to know that information in order to process it on PostHog's behalf or to provide services available on the Website, and (ii) that have agreed not to disclose it to others.
 
@@ -66,17 +66,17 @@ PostHog takes measures reasonably necessary to protect against the unauthorized 
 
 PostHog at its sole discretion may make use of company logos where those companies are using the software that we provide. If you have concerns over the use of your logo, please email logos@posthog.com.
 
-### International Transfer of Information
+### International transfer of information
 
 The Website is hosted in the United States and information we collect will be stored and processed on our servers in the United States. Our employees, contractors and affiliated organizations that process information for us as described above may be located in the United States or in other countries outside of your home country; by using the Website, you consent to the international transfer of your information by PostHog.
 
-### PostHog Communications with You
+### PostHog communications with you
 
 If you are a registered user of the Websites and have supplied your email address, PostHog may occasionally send you an email to tell you about security, system information, new features, solicit your feedback, or just keep you up to date with what's going on with PostHog and our products. We primarily use our blog to communicate this type of information, so we expect to keep this type of email to a minimum. There's an unsubscribe link located at the bottom of each of the marketing emails we send you so you can stop receiving such emails at any time.
 
 If you send us a request (for example via a support email or via one of our feedback mechanisms), we reserve the right to publish your request in order to help us clarify or respond to your request or to help us support other users. We will not publish your personally-identifiable information in connection with your request.
 
-## Cookies, Tracking Technologies and Do Not Track
+## Cookies, tracking technologies and Do Not Track
 
 ### Cookies
 
@@ -84,7 +84,7 @@ A cookie is a string of information that a website stores on a visitor's compute
 
 Certain pages on the Website may set other third party cookies. For example, we may embed content, such as videos, from another site that sets a cookie. These sites set their own cookies and we do not have access or control over these cookies. The use of cookies by third parties is not covered by our Privacy Policy.
 
-### Tracking Technologies
+### Tracking technologies
 
 We may use third party tracking services, but we don’t use these services to track you individually or collect your personally identifiable-information. We may use these services to collect information about how the Website performs and how users navigate through and use the Website so we can monitor and improve our content and Website performance.
 
@@ -94,7 +94,7 @@ Third party tracking services gather certain simple, non-personally identifying 
 
 "Do Not Track" is a privacy preference you can set in your browser if you do not want online services to collect and share certain kinds of information about your online activity from third party tracking services. PostHog does not track your online browsing activity on other online services over time and we do not permit third-party services to track your activity on our site beyond our basic tracking, which you may opt out of. Because we do not share this kind of data with third party services or permit this kind of third party data collection for any of our users, and we do not track our users on third-party websites ourselves, we do not need to respond differently to an individual browser's Do Not Track setting.
 
-## Global Privacy Practices
+## Global privacy practices
 
 Information we collect will be stored and processed in the United States in accordance with this Privacy Policy but we understand that users from other countries may have different expectations and rights with regard to their privacy. For all Website visitors and users, no matter their country of location, we will:
 
@@ -120,7 +120,7 @@ Additional rights that may apply to you in certain instances:
 
 To exercise your privacy rights, you can email us at the address given below in the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy.
 
-## Data Retention and Deletion
+## Data retention and deletion
 
 If you already have an account on the Websites, you may access, update, alter, or delete your basic user profile information by logging into your account and updating profile settings.
 
@@ -128,13 +128,13 @@ PostHog will retain your information for as long as your account is active or as
 
 Please note that due to the open source nature of our products, services, and community, we may retain limited personally-identifiable information indefinitely in order to ensure transactional integrity and nonrepudiation. For example, if you provide your information in connection with a blog post, GitHub issue or comment, we may display that information even if you have deleted your account as we do not automatically delete community posts. Also, as described in our Terms of Use, if you contribute to a PostHog project and provide your personal information in connection with that contribution, that information (including your name) will be embedded and publicly displayed with your contribution and we will not be able to delete or erase it because doing so would break the project code.
 
-## Contacting PostHog About Your Privacy
+## Contacting PostHog about your privacy
 
 If you have questions or concerns about the way we are handling your information, or would like to exercise your privacy rights, please email us with the subject line "Privacy Concern" at [privacy@posthog.com](mailto:privacy@posthog.com).
 
 We will respond within 30 days of receiving your message at the latest but please note for promptest response, we recommend emailing us.
 
-## Privacy Policy Changes
+## Privacy policy changes
 
 Although most changes are likely to be minor, PostHog may change its privacy policy from time to time, and in PostHog's sole discretion.
 

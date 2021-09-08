@@ -1,6 +1,5 @@
 import React from 'react'
 import './styles/features.scss'
-import { ProductHero } from '../components/ProductHero'
 import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
 import ProductImage from '../components/ProductFeature/ProductImage'
@@ -8,67 +7,37 @@ import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
 import { HostingOption } from '../components/HostingOption'
 import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
 import { ProductSectionHeader } from '../components/ProductSectionHeader'
-import { Doodle } from '../components/Doodle'
 
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
 import { SEO } from '../components/seo'
 import { useStaticQuery, graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-import Header from 'components/Header'
-import Footer from 'components/Footer'
+import Layout from '../components/Layout'
 
 function ProductPage() {
     return (
-        <>
-            <Header />
+        <Layout>
             <SEO title="Product • PostHog" />
-            <div className="bg-purple">
-                <ProductHero
-                    preTitle="The all-in-one platform to"
-                    title="Build better products"
-                    tagline="The only way to build something amazing is by understanding your users. That’s where we come in, with the only open source product analytics platform."
-                    componentKey="productHero"
-                    disclaimer={
-                        <span>
-                            *Demos are provided by actual PostHog engineers! You can also{' '}
-                            <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
-                                request a sales call
-                            </a>
-                            .
-                        </span>
-                    }
-                    bgColor="navy"
-                />
+            <div className="text-primary">
+                <div className="text-center mb-12 mx-4 lg:mx-0">
+                    <StaticImage
+                        className="product-hero-image relative z-10 w-full max-w-screen-lg mt-6 mx-auto"
+                        src="../components/ProductFeature/images/feature-dashboard.png"
+                    />
+                    <h1 className="mb-4">Open source product analytics</h1>
+                    <h5 className="text-primary text-opacity-70 font-semibold">
+                        PostHog keeps you in control of customer data. Works with your event pipelines and data
+                        warehouse.
+                    </h5>
+                </div>
+
                 <ProductAnchorNavbar />
-                <div className="features-grid two-column-grid md:grid md:grid-cols-2 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 mt[-50]">
+
+                <div className="features-grid two-column-grid md:grid md:grid-cols-2 justify-between max-w-screen-2xl mx-auto mt[-50]">
                     <ProductSectionHeader name="Platform" id="platform" />
-                    <div className="product-feature text-white text-center feature-open-source">
-                        {/* Platform section starts here */}
-                        <ProductFeature
-                            layout="reversed"
-                            featureIcon="open-source"
-                            featureName="Open source"
-                            title="Open source product analytics"
-                            description="Check out our source code, request new features or get involved with the product directly."
-                            staticImage={
-                                <StaticImage
-                                    className="relative z-10 w-full max-w-screen-lg shadow-xl mx-auto -mb-12 mt-6"
-                                    src="../components/ProductFeature/images/feature-dashboard.png"
-                                />
-                            }
-                        />
 
-                        <Doodle type="rectangle" color="#5D96C4" classes="hidden md:block top-12 left-0" />
-                        <Doodle type="circle" color="#FEB7A2" classes="hidden md:block -top-12 -right-24" />
-                        <Doodle
-                            type="triangle"
-                            color="#E5C47D"
-                            classes="hidden md:block bottom-0 -right-12 transform -rotate-31"
-                        />
-                    </div>
-
-                    <div className="product-feature text-white text-center feature-event-autocapture">
+                    <div className="feature-event-autocapture">
                         <ProductFeature
                             layout="standard"
                             featureIcon="event-autocapture"
@@ -78,13 +47,13 @@ function ProductPage() {
                             docsUrl="/docs/user-guides/events#autocapture-event-tracking"
                             figureClasses="mb-8"
                             image="feature-event-autocapture.svg"
-                            imageWidth="253"
-                            imageHeight="147"
-                            classes=""
+                            imageWidth="439"
+                            imageHeight="90"
+                            classes="max-w-md mx-auto"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-dashboards">
+                    <div className="feature-dashboards">
                         <ProductFeature
                             layout="standard"
                             featureIcon="dashboards"
@@ -96,12 +65,12 @@ function ProductPage() {
                             image="feature-dashboards.svg"
                             imageWidth="234"
                             imageHeight="141"
-                            classes=""
+                            classes="max-w-md mx-auto"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-in-out">
-                        <div className="md:grid grid-cols-2 gap-3 text-white pt-6 px-4 pb-24 md:py-12 md:px-8 relative">
+                    <div className="feature-data-in-out">
+                        <div className="md:grid grid-cols-2 gap-3 pt-6 px-4 md:pt-12 md:px-8 relative border-gray-accent-light border-dashed border-t">
                             <ProductFeature
                                 layout="standard"
                                 featureIcon="data-pipelines"
@@ -109,7 +78,7 @@ function ProductPage() {
                                 title="Ingest data from multiple sources"
                                 description="Reliably ingest data at any scale, parsing and filtering to build a holistic view of your customers."
                                 docsUrl="/docs/integrate/overview"
-                                classes=""
+                                classes="max-w-md mx-auto"
                             />
 
                             <ProductFeature
@@ -119,50 +88,48 @@ function ProductPage() {
                                 title="Normalize & push data anywhere"
                                 description="Move data through PostHog to BigQuery, S3, Snowflake, or Redshift."
                                 docsUrl="/docs/user-guides/plugins#example-use-cases"
-                                classes=""
+                                classes="max-w-md mx-auto"
                             />
                         </div>
-                        <div className="-mt-16 mx-1 md:mx-12 mb-12 flex justify-center">
+
+                        <div className="mx-1 md:mx-12 mb-6 flex justify-center">
                             <ProductImage imageName="feature-data-in-out.svg" />
                         </div>
                     </div>
 
-                    <div className="product-feature text-white text-center feature-hosting-flexibility pt-12 px-4">
-                        <div className="feature-name flex justify-center items-start gap-2 md:-mb-6">
-                            <ProductImage imageName="hosting-flexibility.svg" alt="Hosting flexibility icon" isIcon />
-                            <div className="font-bold text-pink">Hosting flexibility</div>
+                    <div className="feature-hosting-flexibility mt-4 pt-12 border-gray-accent-light border-dashed border-t border-b">
+                        <div className="feature-name flex items-start gap-2 border-gray-accent-light border-dashed border-b pb-2 mb-4 flex items-center mx-4">
+                            <ProductImage
+                                imageName="hosting-flexibility.svg"
+                                alt="Hosting options icon"
+                                isIcon
+                                className="opacity-50"
+                            />
+                            <div className="font-semibold text-base text-black text-opacity-40">Hosting options</div>
                         </div>
-                        <div className="md:grid grid-cols-3 gap-4 text-white">
+
+                        <div className="md:grid grid-cols-3 gap-4">
                             <ProductFeature
                                 layout="standard"
                                 title="PostHog Cloud"
                                 description="Our hosted solution scales to billions of events per month, receives automatic upgrades, and is managed by our team."
-                                classes=""
+                                classes="max-w-sm mx-auto"
                             />
 
-                            <div className="md:py-12 px-2">
+                            <div className="py-0 md:py-8 md:px-2 mx-4 max-w-sm md:mx-auto">
                                 <h3 className="mb-2 text-2xl">Private cloud deployment</h3>
-                                <div className="text-white text-opacity-70">
+                                <div className="text-opacity-70">
                                     <p>
                                         Run PostHog on your own private cloud with one of our install scripts, or get
                                         running on Heroku with a one-click install.
                                     </p>
                                 </div>
-                                <ul className="flex justify-center flex-wrap p-0 list-none text-center">
+                                <ul className="flex flex-wrap p-0 list-none text-center">
                                     <HostingOption name="Heroku" handle="heroku" url="/docs/self-host/deploy/heroku" />
                                     <HostingOption name="AWS" handle="aws" url="/docs/self-host/deploy/aws" />
-                                    <HostingOption
-                                        name="Google Cloud"
-                                        handle="google-cloud"
-                                        url="/docs/self-host/deploy/gcs"
-                                    />
-                                    <HostingOption name="Docker" handle="aws" url="/docs/self-host/deploy/docker" />
+                                    <HostingOption name="Google Cloud" handle="gcs" url="/docs/self-host/deploy/gcs" />
                                     <HostingOption name="Azure" handle="azure" url="/docs/self-host/deploy/azure" />
-                                    <HostingOption
-                                        name="Source"
-                                        handle="source-code"
-                                        url="/docs/self-host/deploy/source"
-                                    />
+                                    <HostingOption name="Source" handle="github" url="/docs/self-host/deploy/source" />
                                     <HostingOption name="More" handle="more" url="/docs/deployment" />
                                 </ul>
                             </div>
@@ -182,27 +149,27 @@ function ProductPage() {
                                         </p>
                                     </>
                                 }
-                                classes=""
+                                classes="max-w-sm mx-auto"
                             />
                         </div>
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-privacy">
+                    <div className="feature-data-privacy border-gray-accent-light border-dashed md:border-r">
                         <ProductFeature
-                            layout="standard"
+                            layout="reversed"
                             featureIcon="data-privacy"
                             featureName="Data privacy"
                             title="Compliance-friendly"
                             description="Rely on fewer third-party subprocessors. Host in any region on the planet. Optionally self-host to keeps customer data on your infrastructure. Reduce the burden when audit season rolls around."
                             figureClasses="md:h-48"
                             image="feature-data-privacy.svg"
-                            classes=""
+                            classes="px-4 py-8 standard max-w-md mx-auto"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-api">
+                    <div className="feature-api">
                         <ProductFeature
-                            layout="standard"
+                            layout="reversed"
                             featureIcon="api"
                             featureName="API"
                             title="Full access to your data"
@@ -210,52 +177,34 @@ function ProductPage() {
                             docsUrl="/docs/api/overview"
                             figureClasses="md:h-48"
                             image="feature-api.svg"
-                            classes=""
+                            classes="px-4 py-8 standard max-w-md mx-auto"
                         />
                     </div>
 
                     <ProductSectionHeader name="Analytics" id="analytics" />
 
-                    <div className="product-feature text-white text-center feature-trends">
+                    <div className="feature-trends flex flex-col md:flex-row mt-4 items-center border-gray-accent-light border-dashed border-b">
                         {/* Analytics section starts here */}
+
+                        <div className="product-hero-image relative">
+                            <StaticImage
+                                className="w-full max-w-screen-lg relative z-20 mx-auto"
+                                src="../components/ProductFeature/images/feature-insights.png"
+                            />
+                        </div>
+
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="trends"
                             featureName="Trends"
-                            title={
-                                <span>
-                                    Monitor engagement. <br />
-                                    Create actionable insights.
-                                </span>
-                            }
-                            description="Monitor the impact of product changes - by customer plan, traffic source, or any other user property."
+                            title={<span>Monitor the impact of product changes</span>}
+                            description="Group data by customer plan, traffic source, or any other user property."
                             docsUrl="/docs/user-guides/trends"
-                            staticImage={
-                                <StaticImage
-                                    className="w-full max-w-screen-lg relative z-20 mx-auto -mb-12 mt-6"
-                                    src="../components/ProductFeature/images/feature-insights.png"
-                                />
-                            }
-                        />
-
-                        <Doodle
-                            type="rectangle"
-                            color="#5D96C4"
-                            classes="hidden md:block top-12 right-3 transform -scale-x-1"
-                        />
-                        <Doodle
-                            type="circle"
-                            color="#FEB7A2"
-                            classes="hidden md:block -top-12 -left-24 transform -scale-x-1 rotate-180"
-                        />
-                        <Doodle
-                            type="triangle"
-                            color="#E5C47D"
-                            classes="hidden md:block bottom-0 -left-12 transform -rotate-31"
+                            classes="md:px-16 md:pt-16"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-funnels">
+                    <div className="feature-funnels border-gray-accent-light border-dashed border-b">
                         {/*
                         style={{  
                             backgroundImage: "url(" + `${imageFunnels}` + ")",
@@ -272,21 +221,20 @@ function ProductPage() {
                             featureName="Funnels"
                             title={
                                 <span>
-                                    Identify <strike className="opacity-50">dropoff</strike> <br />
-                                    opportunity
+                                    Identify <strike className="opacity-50">dropoff</strike> opportunity
                                 </span>
                             }
                             description="Bucket groups of users who completed (or didn’t complete) a step. Switch over to another PostHog app for further analysis into a user segment."
                             docsUrl="/docs/user-guides/funnels"
                             //bgImage={`${imageFunnels}`}
                             bgImagePosition="bottom center / 100%"
-                            classes="relative"
+                            classes="relative max-w-md mx-auto pt-16"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-paths">
+                    <div className="feature-paths border-gray-accent-light border-dashed border-l">
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="paths"
                             featureName="Paths"
                             title="Visualize how traffic flows"
@@ -300,16 +248,11 @@ function ProductPage() {
                             }
                             imageWidth="320"
                             imageHeight="620"
-                            classes="justify-between h-full"
-                        />
-                        <Doodle
-                            type="rectangle"
-                            color="#5D96C4"
-                            classes="hidden md:block bottom-6 left-6 transform -scale-x-1"
+                            classes="justify-between h-full max-w-md mx-auto pt-16"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-cohorts">
+                    <div className="feature-cohorts">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="cohorts"
@@ -323,10 +266,11 @@ function ProductPage() {
                                     src="../components/ProductFeature/images/feature-cohorts@2x.png"
                                 />
                             }
+                            classes="md:mt-16 max-w-md mx-auto"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-user-sessions">
+                    <div className="feature-user-sessions flex flex-col md:flex-row items-center md:p-8 pb-0 md:pb-0 border-gray-accent-light border-dashed border-t border-b">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="user-sessions"
@@ -334,20 +278,20 @@ function ProductPage() {
                             title="See a timeline of a user's activity"
                             description="User timelines offer a full history of what happened and how they got there - valuable for debugging issues and understanding context."
                             docsUrl="/docs/user-guides/sessions"
-                            staticImage={
-                                <StaticImage
-                                    className="mt-6 -mb-12 mx-auto w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:rounded-tr-3xl"
-                                    src="../components/ProductFeature/images/feature-user-sessions@2x.png"
-                                />
-                            }
+                            classes="pb-0 md:pb-8"
                         />
-                        <Doodle type="zigzag" color="#FFCF72" classes="hidden md:block -top-4 left-6" />
-                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
+
+                        <div className="mx-4 leading-[0]">
+                            <StaticImage
+                                className="mt-6 md:mx-auto w-full relative z-20 max-w-screen-lg border-white border-12 border-b-0 border-solid rounded-tl-xl rounded-tr-xl md:rounded-tl-3xl md:ml-4 md:rounded-tr-3xl"
+                                src="../components/ProductFeature/images/feature-user-sessions@2x.png"
+                            />
+                        </div>
                     </div>
 
-                    <div className="product-feature text-white text-center feature-retention">
+                    <div className="feature-retention border-gray-accent-light border-dashed border-r mb-8 md:mb-0">
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="retention"
                             featureName="Retention"
                             title="Group users by lifecycle"
@@ -355,53 +299,51 @@ function ProductPage() {
                             docsUrl="/docs/user-guides/retention"
                             staticImage={
                                 <StaticImage
-                                    className="mx-auto mt-6 max-w-[455px]"
+                                    className="mt-6 max-w-[455px]"
                                     src="../components/ProductFeature/images/feature-retention@2x.png"
                                 />
                             }
+                            classes="max-w-md mx-auto"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-revenue-tracking">
+                    <div className="feature-revenue-tracking mb-8 md:mb-0">
                         <ProductFeature
-                            layout="reversed"
+                            layout="standard"
                             featureIcon="revenue-tracking"
                             featureName="Revenue tracking"
                             title="KPIs by LTV"
                             description="By tracking revenue for individual users, you can attribute a dollar amount to feature usage. Coming soon."
                             staticImage={
                                 <StaticImage
-                                    className="mx-auto mt-6 mb-6 max-w-[253px]"
+                                    className="mt-6 mb-6 max-w-[253px]"
                                     src="../components/ProductFeature/images/feature-revenue-tracking@2x.png"
                                 />
                             }
+                            classes="max-w-md mx-auto"
                         />
                     </div>
                 </div>
 
                 <ProductSectionHeader name="Insights" id="insights" />
 
-                <div className="features-grid three-column-grid md:grid md:grid-cols-3 md:gap-6 justify-between max-w-screen-2xl mx-auto p-4 bg-purple">
-                    <div className="product-feature text-white text-center feature-feature-flags flex items-center justify-start pr-50">
+                <div className="features-grid three-column-grid md:grid md:grid-cols-3 justify-between max-w-screen-2xl mx-auto">
+                    <div className="feature-feature-flags flex items-center justify-start md:pl-4 md:pr-64 border-gray-accent-light border-dashed md:border-r border-b">
                         {/* Insights section starts here */}
                         <ProductFeature
                             layout="standard"
                             featureIcon="feature-flags"
                             featureName="Feature flags"
-                            title={
-                                <span>
-                                    Roll out features <br />
-                                    strategically
-                                </span>
-                            }
+                            title={<span>Roll out features safely</span>}
                             description="Toggle features for cohorts or individuals to test the impact."
                             docsUrl="/docs/user-guides/feature-flags#"
                             figureClasses=""
-                            classes="-mb-4 relative"
+                            //classes="-mb-4"
+                            classes="max-w-md relative"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-annotations flex items-end">
+                    <div className="feature-annotations flex items-end md:p-4 border-gray-accent-light border-dashed border-b">
                         <ProductFeature
                             layout="standard"
                             featureIcon="annotations"
@@ -409,11 +351,12 @@ function ProductPage() {
                             title="“Why did our traffic spike?”"
                             description="Mark new releases and more in your data, so you can understand their impact later."
                             docsUrl="/docs/user-guides/annotations"
-                            classes="relative -mb-4"
+                            classes="max-w-md mx-auto relative"
+                            //classes="-mb-4"
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center flex items-center feature-heatmaps pr-24 xl:pr-32">
+                    <div className="flex items-center feature-heatmaps my-8 md:my-0 pr-24 xl:pr-32 border-gray-accent-light border-dashed md:border-r border-b md:border-b-0">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="heatmaps"
@@ -426,7 +369,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-session-recordings">
+                    <div className="feature-session-recordings md:px-8">
                         <ProductFeature
                             layout="standard"
                             featureIcon="session-recordings"
@@ -434,9 +377,10 @@ function ProductPage() {
                             title="See customers using your product"
                             description="Watch exactly what users are doing without infringing their privacy."
                             docsUrl="/docs/user-guides/session-recording"
+                            imageClasses="bg-white rounded p-4 mt-4"
                             staticImage={
                                 <StaticImage
-                                    className="max-w-[356px] mx-auto mb-6"
+                                    className="max-w-[356px]"
                                     src="../components/ProductFeature/images/feature-session-recordings@2x.png"
                                 />
                             }
@@ -445,7 +389,7 @@ function ProductPage() {
 
                     <ProductSectionHeader name="Plugins" id="plugins" />
 
-                    <div className="product-feature text-white text-center feature-data-export">
+                    <div className="feature-data-export border-gray-accent-light border-dashed md:border-r border-b md:px-4 md:pb-8 flex flex-col justify-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-export"
@@ -472,7 +416,7 @@ function ProductPage() {
                         </ul>
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-filtering">
+                    <div className="feature-data-filtering md:px-4 border-gray-accent-light border-dashed border-b">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-filtering"
@@ -480,7 +424,7 @@ function ProductPage() {
                             title="Get your data into shape"
                             description="Enforce schemas, parse data based on fields, and standardise taxonomies."
                             docsUrl="/docs/plugins/overview"
-                            figureClasses="text-right"
+                            figureClasses="text-right -mr-8"
                             image="feature-data-filtering.svg"
                             imageWidth="352"
                             imageHeight="126"
@@ -489,7 +433,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-custom-plugins min-h-[350px]">
+                    <div className="feature-custom-plugins min-h-[350px] border-gray-accent-light border-dashed md:border-r border-b md:px-4 my-8 md:my-0">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="custom-plugins"
@@ -501,7 +445,7 @@ function ProductPage() {
                         />
                     </div>
 
-                    <div className="product-feature text-white text-center feature-data-enrichment">
+                    <div className="feature-data-enrichment border-gray-accent-light border-dashed border-b md:px-8 flex flex-col justify-center">
                         <ProductFeature
                             layout="reversed"
                             featureIcon="data-enrichment"
@@ -513,7 +457,7 @@ function ProductPage() {
                             classes=""
                         />
 
-                        <ul className="inline-grid grid-cols-2 md:grid-cols-4 grid-rows-auto gap-x-8 gap-y-4 p-0 mb-8 list-none text-center">
+                        <ul className="inline-grid grid-cols-2 md:grid-cols-4 grid-rows-auto gap-x-8 gap-y-4 p-0 mx-auto mb-8 list-none text-center">
                             <ProductFeaturePlugin name="GeoIP" handle="geoip" />
                             <ProductFeaturePlugin name="Twitter" handle="twitter" />
                             <ProductFeaturePlugin name="Email scoring" handle="email-scoring" />
@@ -524,9 +468,6 @@ function ProductPage() {
                             <ProductFeaturePlugin name="GitLab release tracker" handle="gitlab-release" />
                             <ProductFeaturePlugin name="Bitbucket release tracker" handle="bitbucket-release" />
                         </ul>
-
-                        <Doodle type="rectangle" classes="hidden md:block top-12 -left-6" />
-                        <Doodle type="circle" color="#5D96C4" classes="hidden md:block -top-24 -right-32" />
                     </div>
                 </div>
 
@@ -536,18 +477,16 @@ function ProductPage() {
                     componentKey="productFooter"
                     disclaimer={
                         <span>
-                            *Demos are provided by actual PostHog engineers! You can also{' '}
+                            (Demos are provided by actual PostHog engineers!) You can also{' '}
                             <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
                                 request a sales call
                             </a>
                             .
                         </span>
                     }
-                    bgColor="navy"
                 />
             </div>
-            <Footer />
-        </>
+        </Layout>
     )
 }
 

@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 
 import { Structure } from '../../Structure'
 import { mergeClassList } from '../../../lib/utils'
-import applicationImg from './images/application.svg'
-import cultureInterviewImg from './images/culture-interview.svg'
-import technicalInterviewImg from './images/technical-interview.svg'
-import superdayImg from './images/superday.svg'
-import offerImg from './images/offer.svg'
-
+import Slider from 'react-slick'
+import application from './images/application.svg'
+import culture from './images/culture.svg'
+import technical from './images/technical.svg'
+import superday from './images/superday.svg'
+import offer from './images/offer.svg'
+import SliderNav from '../../SliderNav'
 interface InterviewStepProps {
     image: string
     title: string
-    children: any
+    children: React.ReactNode
     titleColor: string
     className?: string
 }
@@ -38,9 +39,35 @@ const InterviewStep = ({ image, title, children, titleColor, className = '' }: I
     )
 }
 
-export const InterviewProcess = () => {
+const SliderItem = ({ image, title, subtitle, description }) => {
     return (
-        <div className="careers-interview-process pt-24 text-white text-center" id="interview-process">
+        <div className="flex flex-col max-w-xs py-5 px-10 items-start border-r border-dashed border-gray-accent-light">
+            <img className="mb-9" src={image} />
+            <h4 className="text-primary m-0">{title}</h4>
+            <h5 className="text-primary font-semibold mb-3 leading-tight">{subtitle}</h5>
+            <p className="text-[15px] text-primary m-0">{description}</p>
+        </div>
+    )
+}
+
+export const InterviewProcess = () => {
+    const sliderRef = useRef(null)
+    const [currentSlide, setCurrentSlide] = useState(0)
+    const sliderSettings = {
+        dots: false,
+        infinite: false,
+        arrows: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: false,
+        variableWidth: true,
+    }
+    const handleChange = (_oldIndex, newIndex) => {
+        setCurrentSlide(newIndex)
+    }
+    return (
+        <div className="pt-24 mb-16 text-center" id="interview-process">
             <Structure.Section width="3xl">
                 <Structure.SectionHeader
                     title="Interview process"
@@ -48,61 +75,45 @@ export const InterviewProcess = () => {
                     leadText="You can expect a fast, yet thorough process. While it differs by role, we usually follow a structure of the following stages:"
                     leadTextClassName="opacity-80"
                 />
-
-                <div className="w-full bg-black bg-opacity-20 rounded-lg p-4 md:p-8 lg:p-12 text-left grid sm:grid-cols-2 md:grid-cols-1 sm:gap-12 md:gap-8">
-                    <InterviewStep title="1. Application" titleColor="#E83DEC" image={applicationImg}>
-                        <p className="mb-0 text-opacity-75">
-                            Our talent team will review your application to see how your skills and experience align
-                            with our needs.
-                        </p>
-                    </InterviewStep>
-
-                    <InterviewStep
-                        title="2. Culture interview"
-                        titleColor="#FF2F93"
-                        image={cultureInterviewImg}
-                        className="mt-12 md:mt-0"
-                    >
-                        <p className="text-opacity-75 mb-2">
-                            If we think there could be a fit, we’ll set up a 30-minute video call.
-                        </p>
-                        <p className="mb-0 text-white text-opacity-75">
-                            Our goal is to explore your motivations to join our team, learn why you’d be a great fit,
-                            and answer questions about us.
-                        </p>
-                    </InterviewStep>
-
-                    <InterviewStep
-                        title="3. Technical interview"
-                        titleColor="#E74B12"
-                        image={technicalInterviewImg}
-                        className="mt-12 md:mt-0"
-                    >
-                        <p className="mb-0 text-white text-opacity-75">
-                            Next is a 45-minute technical interview, depending on role. You'll meet the hiring team who
-                            will evaluate skills needed to be successful in your role.
-                        </p>
-                    </InterviewStep>
-
-                    <InterviewStep
-                        title="4. PostHog SuperDay"
-                        titleColor="#B25F20"
-                        image={superdayImg}
-                        className="mt-12 md:mt-0"
-                    >
-                        <p className="mb-0 text-white text-opacity-75">
-                            The final stage is a paid SuperDay! You’ll join standup, meet the team, and work on a task
-                            related to your role, offering a realistic view of what it’s like working at PostHog.
-                        </p>
-                    </InterviewStep>
-
-                    <InterviewStep title="5. Offer" titleColor="#F7A501" image={offerImg} className="mt-12 md:mt-0">
-                        <p className="mb-0 text-white text-opacity-75">
-                            That’s it! If everyone’s happy, we’ll make you an offer to join us - YAY!
-                        </p>
-                    </InterviewStep>
-                </div>
             </Structure.Section>
+            <SliderNav
+                handlePrevious={() => sliderRef.current.slickPrev()}
+                handleNext={() => sliderRef.current.slickNext()}
+                currentIndex={currentSlide}
+                length={4}
+            />
+            <Slider beforeChange={handleChange} className="text-left" ref={sliderRef} {...sliderSettings}>
+                <SliderItem
+                    image={application}
+                    title="1. Application"
+                    subtitle="Our talent team will review your application"
+                    description="We’re looking to see how your skills and experience align with our needs."
+                />
+                <SliderItem
+                    image={culture}
+                    title="2. Culture interview"
+                    subtitle="A 30-minute video call"
+                    description="Our goal is to explore your motivations to join our team, learn why you’d be a great fit, and answer questions about us."
+                />
+                <SliderItem
+                    image={technical}
+                    title="3. Technical interview"
+                    subtitle="45 minutes, varies by role"
+                    description="You'll meet the hiring team who will evaluate skills needed to be successful in your role."
+                />
+                <SliderItem
+                    image={superday}
+                    title="4. PostHog SuperDay"
+                    subtitle="Paid day of work"
+                    description="You’ll join standup, meet the team, and work on a task related to your role, offering a realistic view of what it’s like working at PostHog."
+                />
+                <SliderItem
+                    image={offer}
+                    title="5. Offer"
+                    subtitle="Pop the champagne (after you sign)"
+                    description="If everyone’s happy, we’ll make you an offer to join us - YAY!"
+                />
+            </Slider>
         </div>
     )
 }
