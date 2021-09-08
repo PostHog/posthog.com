@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Scrollspy from 'react-scrollspy'
-import { Link } from 'react-scroll'
+import { Link, animateScroll as scroll } from 'react-scroll'
+import { useLocation } from '@reach/router'
 
 export default function InternalSidebar({ tableOfContents, className = '' }) {
     const [navBallLocation, setNavBallLocation] = useState(null)
     const [activeId, setActiveId] = useState(null)
+    const { hash } = useLocation()
     const handleInternalNavUpdate = (el) => {
         if (el) {
             const activeEl = document.querySelector('.active-link')
@@ -12,6 +14,12 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
             setNavBallLocation(activeEl.offsetTop + 7)
         }
     }
+    useEffect(() => {
+        if (hash) {
+            scroll.scrollMore(-50)
+        }
+    }, [])
+
     return (
         <aside className={`relative ${className}`}>
             <div className="xl:pl-7">
@@ -21,7 +29,7 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                 />
                 <p className="text-gray opacity-100 dark:text-white text-base mt-0 mb-4 font-bold">On this page</p>
                 <Scrollspy
-                    offset={-88}
+                    offset={-50}
                     onUpdate={handleInternalNavUpdate}
                     className="list-none m-0 p-0 flex flex-col space-y-2"
                     items={tableOfContents?.map((navItem) => navItem.url)}
@@ -32,10 +40,11 @@ export default function InternalSidebar({ tableOfContents, className = '' }) {
                             <li key={index}>
                                 <Link
                                     style={activeId === navItem.url ? { opacity: '1' } : {}}
-                                    offset={-88}
+                                    offset={-50}
                                     smooth
                                     duration={300}
                                     to={navItem.url}
+                                    hashSpy
                                     className={`jumpTo hover:opacity-100 xl:opacity-60 text-[15px] pl-6 xl:pl-0 text-almost-black hover:text-orange dark:text-white dark:hover:text-orange`}
                                 >
                                     {navItem.name}
