@@ -16,8 +16,14 @@ export function SEO({ title, description, image, article, canonicalUrl }: SEOPro
     const { pathname } = useLocation()
     const { site } = useStaticQuery(query)
 
-    const { defaultTitle, titleTemplate, defaultDescription, siteUrl, defaultImage, twitterUsername } =
-        site.siteMetadata
+    const {
+        defaultTitle,
+        titleTemplate,
+        defaultDescription,
+        siteUrl,
+        defaultImage,
+        twitterUsername,
+    } = site.siteMetadata
 
     const seo = {
         title: title || defaultTitle,
