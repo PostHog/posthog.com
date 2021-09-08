@@ -56,6 +56,7 @@ export default function Main({
     body,
     next,
     previous,
+    hideLastUpdated,
 }) {
     const components = {
         iframe: Iframe,
@@ -86,9 +87,11 @@ export default function Main({
                 >
                     <section className="mb-8 xl:mb-14 relative">
                         <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
-                        <p className="mt-1 mb-0 opacity-50">
-                            Last updated: <time>{lastUpdated}</time>
-                        </p>
+                        {!hideLastUpdated && (
+                            <p className="mt-1 mb-0 opacity-50">
+                                Last updated: <time>{lastUpdated}</time>
+                            </p>
+                        )}
                     </section>
                     {breakpoints.lg && showToc && (
                         <InternalSidebar

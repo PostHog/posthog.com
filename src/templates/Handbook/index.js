@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { SEO } from 'components/seo'
-import SearchBar from './SearchBar'
 import Main from './Main'
 import ArticleFooter from './Footer'
 import MainSidebar from './MainSidebar'
@@ -21,7 +20,7 @@ export default function Handbook({
         contributors,
         fields: { slug },
     } = post
-    const { title, hideAnchor, description, featuredImage } = frontmatter
+    const { title, hideAnchor, description, featuredImage, hideLastUpdated } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const filePath = `/${parent?.relativePath}`
@@ -86,6 +85,7 @@ export default function Handbook({
                                     body,
                                     next,
                                     previous,
+                                    hideLastUpdated,
                                 }}
                             />
                         </div>
@@ -119,6 +119,7 @@ export const query = graphql`
                 title
                 hideAnchor
                 description
+                hideLastUpdated
                 featuredImage {
                     publicURL
                 }
