@@ -730,3 +730,9 @@
 [[redirects]]
     from = "/handbook/people/team-structure/infrastructure"
     to = "/handbook/people/team-structure/platform"
+
+
+# Added: 2021-09-08
+[[redirects]]
+    from = "/handbook/engineering/enterprise-prioritization"
+    to = "/handbook/engineering/scale-features-prioritization"
