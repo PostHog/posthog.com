@@ -65,7 +65,7 @@ This gives you the chance to learn how we work, and for us to see your quality a
 An DevRel SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
 *   Kick-off and ideation session with [Phil](/handbook/company/team#phil-leggetter-developer-relations) where we'll define the specific deliverables for the Super Day. These will most likely include:
-    * GitHub repo with code and README (we'll create and setup a private)
+    * GitHub repo with code and README (we'll create and setup a private repo)
     * Written or video tutorial
 *   Time to focus on the task, we can provide support via your personal Slack channel
 *   On days where we have company-wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
