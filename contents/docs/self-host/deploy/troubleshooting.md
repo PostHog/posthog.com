@@ -46,7 +46,7 @@ Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, w
 
 Here are some examples of log spam we know that currently exists in our app and is safe to ignore:
 
-The following messages in the ClickHouse pod happen, when clickhouse reshuffles how it consumes from the topics, so anytime clickhouse restarts or kafka restarts we'll get a bit of noise. As long as events are coming in things are good.
+The following messages in the ClickHouse pod happen when ClickHouse reshuffles how it consumes from the topics. So, anytime ClickHouse or Kafka restarts we'll get a bit of noise and the following log entries are safe to ignore:
 ```
 <Error> TCPHandler: Code: 60, e.displayText() = DB::Exception: Table posthog.sharded_events doesn't exist.
 ...
@@ -54,7 +54,7 @@ The following messages in the ClickHouse pod happen, when clickhouse reshuffles 
 ```
 
 
-This error shows up in Sentry as well. Its coming from some low-priority celery tasks and we haven't see any actual impact.
+The following error is produced by some low-priority celery tasks and we haven't seen any actual impact so can safely be ignored. It shows up in Sentry as well.
 ```
 TooManyConnections: too many connections
   File "posthog/celery.py",
