@@ -256,6 +256,10 @@
                 {
                     "name": "GCP tips and FAQ",
                     "url": "/handbook/engineering/gcp"
+                },
+                {
+                    "name": "DigitalOcean tips and FAQ",
+                    "url": "/handbook/engineering/digitalocean"
                 }
             ]
         },
