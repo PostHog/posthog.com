@@ -8,7 +8,7 @@ hideAnchor: false
 
 ## Logo
 
-If you're looking for the PostHog logo, you came to the right place. Please keep the logo in tact. SVG is always preferred as it will infinitely scale with no loss of quality.
+If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
 
 <OverflowXSection>
 
