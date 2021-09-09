@@ -1,0 +1,2104 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1900" height="582" onload="init(evt)" viewBox="0 0 1900 582" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
+<!-- NOTES:  -->
+<defs>
+	<linearGradient id="background" y1="0" y2="1" x1="0" x2="0" >
+		<stop stop-color="#eeeeee" offset="5%" />
+		<stop stop-color="#eeeeb0" offset="95%" />
+	</linearGradient>
+</defs>
+<style type="text/css">
+	text { font-family:Verdana; font-size:12px; fill:rgb(0,0,0); }
+	#search, #ignorecase { opacity:0.1; cursor:pointer; }
+	#search:hover, #search.show, #ignorecase:hover, #ignorecase.show { opacity:1; }
+	#subtitle { text-anchor:middle; font-color:rgb(160,160,160); }
+	#title { text-anchor:middle; font-size:17px}
+	#unzoom { cursor:pointer; }
+	#frames > *:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+	.hide { display:none; }
+	.parent { opacity:0.5; }
+</style>
+<script type="text/ecmascript">
+<![CDATA[
+	"use strict";
+	var details, searchbtn, unzoombtn, matchedtxt, svg, searching, currentSearchTerm, ignorecase, ignorecaseBtn;
+	function init(evt) {
+		details = document.getElementById("details").firstChild;
+		searchbtn = document.getElementById("search");
+		ignorecaseBtn = document.getElementById("ignorecase");
+		unzoombtn = document.getElementById("unzoom");
+		matchedtxt = document.getElementById("matched");
+		svg = document.getElementsByTagName("svg")[0];
+		searching = 0;
+		currentSearchTerm = null;
+	}
+
+	window.addEventListener("click", function(e) {
+		var target = find_group(e.target);
+		if (target) {
+			if (target.nodeName == "a") {
+				if (e.ctrlKey === false) return;
+				e.preventDefault();
+			}
+			if (target.classList.contains("parent")) unzoom();
+			zoom(target);
+		}
+		else if (e.target.id == "unzoom") unzoom();
+		else if (e.target.id == "search") search_prompt();
+		else if (e.target.id == "ignorecase") toggle_ignorecase();
+	}, false)
+
+	// mouse-over for info
+	// show
+	window.addEventListener("mouseover", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = "CPU " + g_to_text(target);
+	}, false)
+
+	// clear
+	window.addEventListener("mouseout", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = ' ';
+	}, false)
+
+	// ctrl-F for search
+	window.addEventListener("keydown",function (e) {
+		if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+			e.preventDefault();
+			search_prompt();
+		}
+	}, false)
+
+	// ctrl-I to toggle case-sensitive search
+	window.addEventListener("keydown",function (e) {
+		if (e.ctrlKey && e.keyCode === 73) {
+			e.preventDefault();
+			toggle_ignorecase();
+		}
+	}, false)
+
+	// functions
+	function find_child(node, selector) {
+		var children = node.querySelectorAll(selector);
+		if (children.length) return children[0];
+		return;
+	}
+	function find_group(node) {
+		var parent = node.parentElement;
+		if (!parent) return;
+		if (parent.id == "frames") return node;
+		return find_group(parent);
+	}
+	function orig_save(e, attr, val) {
+		if (e.attributes["_orig_" + attr] != undefined) return;
+		if (e.attributes[attr] == undefined) return;
+		if (val == undefined) val = e.attributes[attr].value;
+		e.setAttribute("_orig_" + attr, val);
+	}
+	function orig_load(e, attr) {
+		if (e.attributes["_orig_"+attr] == undefined) return;
+		e.attributes[attr].value = e.attributes["_orig_" + attr].value;
+		e.removeAttribute("_orig_"+attr);
+	}
+	function g_to_text(e) {
+		var text = find_child(e, "title").firstChild.nodeValue;
+		return (text)
+	}
+	function g_to_func(e) {
+		var func = g_to_text(e);
+		// if there's any manipulation we want to do to the function
+		// name before it's searched, do it here before returning.
+		return (func);
+	}
+	function update_text(e) {
+		var r = find_child(e, "rect");
+		var t = find_child(e, "text");
+		var w = parseFloat(r.attributes.width.value) -3;
+		var txt = find_child(e, "title").textContent.replace(/\([^(]*\)$/,"");
+		t.attributes.x.value = parseFloat(r.attributes.x.value) + 3;
+
+		// Smaller than this size won't fit anything
+		if (w < 2 * 12 * 0.59) {
+			t.textContent = "";
+			return;
+		}
+
+		t.textContent = txt;
+		// Fit in full text width
+		if (/^ *$/.test(txt) || t.getSubStringLength(0, txt.length) < w)
+			return;
+
+		for (var x = txt.length - 2; x > 0; x--) {
+			if (t.getSubStringLength(0, x + 2) <= w) {
+				t.textContent = txt.substring(0, x) + "..";
+				return;
+			}
+		}
+		t.textContent = "";
+	}
+
+	// zoom
+	function zoom_reset(e) {
+		if (e.attributes != undefined) {
+			orig_load(e, "x");
+			orig_load(e, "width");
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_reset(c[i]);
+		}
+	}
+	function zoom_child(e, x, ratio) {
+		if (e.attributes != undefined) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = (parseFloat(e.attributes.x.value) - x - 10) * ratio + 10;
+				if (e.tagName == "text")
+					e.attributes.x.value = find_child(e.parentNode, "rect[x]").attributes.x.value + 3;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseFloat(e.attributes.width.value) * ratio;
+			}
+		}
+
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_child(c[i], x - 10, ratio);
+		}
+	}
+	function zoom_parent(e) {
+		if (e.attributes) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = 10;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseInt(svg.width.baseVal.value) - (10 * 2);
+			}
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_parent(c[i]);
+		}
+	}
+	function zoom(node) {
+		var attr = find_child(node, "rect").attributes;
+		var width = parseFloat(attr.width.value);
+		var xmin = parseFloat(attr.x.value);
+		var xmax = parseFloat(xmin + width);
+		var ymin = parseFloat(attr.y.value);
+		var ratio = (svg.width.baseVal.value - 2 * 10) / width;
+
+		// XXX: Workaround for JavaScript float issues (fix me)
+		var fudge = 0.0001;
+
+		unzoombtn.classList.remove("hide");
+
+		var el = document.getElementById("frames").children;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var a = find_child(e, "rect").attributes;
+			var ex = parseFloat(a.x.value);
+			var ew = parseFloat(a.width.value);
+			var upstack;
+			// Is it an ancestor
+			if (0 == 0) {
+				upstack = parseFloat(a.y.value) > ymin;
+			} else {
+				upstack = parseFloat(a.y.value) < ymin;
+			}
+			if (upstack) {
+				// Direct ancestor
+				if (ex <= xmin && (ex+ew+fudge) >= xmax) {
+					e.classList.add("parent");
+					zoom_parent(e);
+					update_text(e);
+				}
+				// not in current path
+				else
+					e.classList.add("hide");
+			}
+			// Children maybe
+			else {
+				// no common path
+				if (ex < xmin || ex + fudge >= xmax) {
+					e.classList.add("hide");
+				}
+				else {
+					zoom_child(e, xmin, ratio);
+					update_text(e);
+				}
+			}
+		}
+		search();
+	}
+	function unzoom() {
+		unzoombtn.classList.add("hide");
+		var el = document.getElementById("frames").children;
+		for(var i = 0; i < el.length; i++) {
+			el[i].classList.remove("parent");
+			el[i].classList.remove("hide");
+			zoom_reset(el[i]);
+			update_text(el[i]);
+		}
+		search();
+	}
+
+	// search
+	function toggle_ignorecase() {
+		ignorecase = !ignorecase;
+		if (ignorecase) {
+			ignorecaseBtn.classList.add("show");
+		} else {
+			ignorecaseBtn.classList.remove("show");
+		}
+		reset_search();
+		search();
+	}
+	function reset_search() {
+		var el = document.querySelectorAll("#frames rect");
+		for (var i = 0; i < el.length; i++) {
+			orig_load(el[i], "fill")
+		}
+	}
+	function search_prompt() {
+		if (!searching) {
+			var term = prompt("Enter a search term (regexp " +
+			    "allowed, eg: ^ext4_)"
+			    + (ignorecase ? ", ignoring case" : "")
+			    + "\nPress Ctrl-i to toggle case sensitivity", "");
+			if (term != null) {
+				currentSearchTerm = term;
+				search();
+			}
+		} else {
+			reset_search();
+			searching = 0;
+			currentSearchTerm = null;
+			searchbtn.classList.remove("show");
+			searchbtn.firstChild.nodeValue = "Search"
+			matchedtxt.classList.add("hide");
+			matchedtxt.firstChild.nodeValue = ""
+		}
+	}
+	function search(term) {
+		if (currentSearchTerm === null) return;
+		var term = currentSearchTerm;
+
+		var re = new RegExp(term, ignorecase ? 'i' : '');
+		var el = document.getElementById("frames").children;
+		var matches = new Object();
+		var maxwidth = 0;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var func = g_to_func(e);
+			var rect = find_child(e, "rect");
+			if (func == null || rect == null)
+				continue;
+
+			// Save max width. Only works as we have a root frame
+			var w = parseFloat(rect.attributes.width.value);
+			if (w > maxwidth)
+				maxwidth = w;
+
+			if (func.match(re)) {
+				// highlight
+				var x = parseFloat(rect.attributes.x.value);
+				orig_save(rect, "fill");
+				rect.attributes.fill.value = "rgb(230,0,230)";
+
+				// remember matches
+				if (matches[x] == undefined) {
+					matches[x] = w;
+				} else {
+					if (w > matches[x]) {
+						// overwrite with parent
+						matches[x] = w;
+					}
+				}
+				searching = 1;
+			}
+		}
+		if (!searching)
+			return;
+
+		searchbtn.classList.add("show");
+		searchbtn.firstChild.nodeValue = "Reset Search";
+
+		// calculate percent matched, excluding vertical overlap
+		var count = 0;
+		var lastx = -1;
+		var lastw = 0;
+		var keys = Array();
+		for (k in matches) {
+			if (matches.hasOwnProperty(k))
+				keys.push(k);
+		}
+		// sort the matched frames by their x location
+		// ascending, then width descending
+		keys.sort(function(a, b){
+			return a - b;
+		});
+		// Step through frames saving only the biggest bottom-up frames
+		// thanks to the sort order. This relies on the tree property
+		// where children are always smaller than their parents.
+		var fudge = 0.0001;	// JavaScript floating point
+		for (var k in keys) {
+			var x = parseFloat(keys[k]);
+			var w = matches[keys[k]];
+			if (x >= lastx + lastw - fudge) {
+				count += w;
+				lastx = x;
+				lastw = w;
+			}
+		}
+		// display matched percent
+		matchedtxt.classList.remove("hide");
+		var pct = 100 * count / maxwidth;
+		if (pct != 100) pct = pct.toFixed(1)
+		matchedtxt.firstChild.nodeValue = "Matched: " + pct + "%";
+	}
+]]>
+</script>
+<rect x="0.0" y="0" width="1900.0" height="582.0" fill="url(#background)"  />
+<text id="title" x="950.00" y="24" >Query with JSONExtractString flamegraph</text>
+<text id="details" x="10.00" y="565" > </text>
+<text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
+<text id="search" x="1790.00" y="24" >Search</text>
+<text id="ignorecase" x="1874.00" y="24" >ic</text>
+<text id="matched" x="1790.00" y="565" > </text>
+<g id="frames">
+<g >
+<title>DB::FunctionJSON&lt;DB::NameJSONExtractRaw, DB::JSONExtractRawImpl&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (1,400 samples, 68.16%)</title><rect x="111.6" y="277" width="1281.4" height="15.0" fill="rgb(229,33,0)" rx="2" ry="2" />
+<text  x="114.60" y="287.5" >DB::FunctionJSON&lt;DB::NameJSONExtractRaw, DB::JSONExtractRawImpl&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;,..</text>
+</g>
+<g >
+<title># (11 samples, 0.54%)</title><rect x="29.2" y="437" width="10.1" height="15.0" fill="rgb(211,179,48)" rx="2" ry="2" />
+<text  x="32.22" y="447.5" ></text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="1396.7" y="117" width="0.9" height="15.0" fill="rgb(215,156,10)" rx="2" ry="2" />
+<text  x="1399.66" y="127.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (11 samples, 0.54%)</title><rect x="1771.0" y="117" width="10.1" height="15.0" fill="rgb(207,5,15)" rx="2" ry="2" />
+<text  x="1774.01" y="127.5" ></text>
+</g>
+<g >
+<title>DB::PipelineExecutor::executeStepImpl(unsigned long, unsigned long, std::__1::atomic&lt;bool&gt;*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="437" width="0.9" height="15.0" fill="rgb(205,208,20)" rx="2" ry="2" />
+<text  x="1876.52" y="447.5" ></text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="49.4" y="133" width="0.9" height="15.0" fill="rgb(207,132,51)" rx="2" ry="2" />
+<text  x="52.36" y="143.5" ></text>
+</g>
+<g >
+<title>DB::NativeBlockInputStream::readImpl()#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="405" width="2.8" height="15.0" fill="rgb(253,138,48)" rx="2" ry="2" />
+<text  x="1882.93" y="415.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="85" width="0.9" height="15.0" fill="rgb(222,53,32)" rx="2" ry="2" />
+<text  x="13.92" y="95.5" ></text>
+</g>
+<g >
+<title>CityHash_v1_0_2::CityHash128WithSeed(char const*, unsigned long, std::__1::pair&lt;unsigned long, unsigned long&gt;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1781.1" y="101" width="1.8" height="15.0" fill="rgb(241,173,24)" rx="2" ry="2" />
+<text  x="1784.08" y="111.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;false, false&gt;::allocNoTrack(unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1404.9" y="245" width="0.9" height="15.0" fill="rgb(217,90,24)" rx="2" ry="2" />
+<text  x="1407.90" y="255.5" ></text>
+</g>
+<g >
+<title>DB::IExecutableFunction::executeWithoutLowCardinalityColumns(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, bool) const#/usr/bin/clickhouse (1,701 samples, 82.81%)</title><rect x="57.6" y="309" width="1556.9" height="15.0" fill="rgb(250,0,15)" rx="2" ry="2" />
+<text  x="60.59" y="319.5" >DB::IExecutableFunction::executeWithoutLowCardinalityColumns(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsig..</text>
+</g>
+<g >
+<title>DB::ReplaceRegexpImpl&lt;false&gt;::processString(re2_st::StringPiece const&amp;, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;, unsigned long&amp;, re2_st::RE2&amp;, int, std::__1::vector&lt;std::__1::pair&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt; const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="309" width="0.9" height="15.0" fill="rgb(236,119,28)" rx="2" ry="2" />
+<text  x="13.92" y="319.5" ></text>
+</g>
+<g >
+<title># (11 samples, 0.54%)</title><rect x="29.2" y="421" width="10.1" height="15.0" fill="rgb(217,78,5)" rx="2" ry="2" />
+<text  x="32.22" y="431.5" ></text>
+</g>
+<g >
+<title>DB::FunctionToExecutableFunctionAdaptor::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1857.0" y="181" width="1.0" height="15.0" fill="rgb(223,64,28)" rx="2" ry="2" />
+<text  x="1860.05" y="191.5" ></text>
+</g>
+<g >
+<title>__libc_realloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="51.2" y="309" width="0.9" height="15.0" fill="rgb(243,128,5)" rx="2" ry="2" />
+<text  x="54.19" y="319.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="485" width="0.9" height="15.0" fill="rgb(235,76,33)" rx="2" ry="2" />
+<text  x="1876.52" y="495.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1878.1" y="373" width="0.9" height="15.0" fill="rgb(242,45,19)" rx="2" ry="2" />
+<text  x="1881.10" y="383.5" ></text>
+</g>
+<g >
+<title>tcache_alloc_small_hard#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="208.6" y="213" width="0.9" height="15.0" fill="rgb(232,20,9)" rx="2" ry="2" />
+<text  x="211.62" y="223.5" ></text>
+</g>
+<g >
+<title>malloc_default#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="213" width="0.9" height="15.0" fill="rgb(229,21,24)" rx="2" ry="2" />
+<text  x="89.88" y="223.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeReaderWide::readData(DB::NameAndTypePair const&amp;, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;&amp;, unsigned long, bool, unsigned long, std::__1::unordered_map&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt; &gt;&amp;)#/usr/bin/clickhouse (144 samples, 7.01%)</title><rect x="1724.3" y="229" width="131.8" height="15.0" fill="rgb(227,22,35)" rx="2" ry="2" />
+<text  x="1727.33" y="239.5" >DB::MergeTreeRea..</text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="53.9" y="325" width="0.9" height="15.0" fill="rgb(251,92,31)" rx="2" ry="2" />
+<text  x="56.93" y="335.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::executePrewhereActionsAndFilterColumns(DB::MergeTreeRangeReader::ReadResult&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1856.1" y="261" width="1.9" height="15.0" fill="rgb(248,142,0)" rx="2" ry="2" />
+<text  x="1859.13" y="271.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="181" width="0.9" height="15.0" fill="rgb(207,85,42)" rx="2" ry="2" />
+<text  x="1617.50" y="191.5" ></text>
+</g>
+<g >
+<title>tcache_alloc_small_hard#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="245" width="0.9" height="15.0" fill="rgb(235,122,28)" rx="2" ry="2" />
+<text  x="1617.50" y="255.5" ></text>
+</g>
+<g >
+<title>malloc_default#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1404.9" y="229" width="0.9" height="15.0" fill="rgb(234,217,46)" rx="2" ry="2" />
+<text  x="1407.90" y="239.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1619.1" y="325" width="1.8" height="15.0" fill="rgb(209,133,13)" rx="2" ry="2" />
+<text  x="1622.07" y="335.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libc-2.31.so (10 samples, 0.49%)</title><rect x="194.9" y="229" width="9.1" height="15.0" fill="rgb(215,225,27)" rx="2" ry="2" />
+<text  x="197.89" y="239.5" ></text>
+</g>
+<g >
+<title>re2_st::Compiler::Finish(re2_st::Regexp*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="213" width="0.9" height="15.0" fill="rgb(234,104,23)" rx="2" ry="2" />
+<text  x="13.92" y="223.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1393.0" y="261" width="3.7" height="15.0" fill="rgb(211,104,30)" rx="2" ry="2" />
+<text  x="1396.00" y="271.5" ></text>
+</g>
+<g >
+<title>arena_tcache_fill_small#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="208.6" y="197" width="0.9" height="15.0" fill="rgb(217,114,51)" rx="2" ry="2" />
+<text  x="211.62" y="207.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeBaseSelectProcessor::readFromPartImpl()#/usr/bin/clickhouse (146 samples, 7.11%)</title><rect x="1724.3" y="309" width="133.7" height="15.0" fill="rgb(249,139,30)" rx="2" ry="2" />
+<text  x="1727.33" y="319.5" >DB::MergeTreeBas..</text>
+</g>
+<g >
+<title>re2_st::DFA::WorkqToCachedState(re2_st::DFA::Workq*, re2_st::DFA::Workq*, unsigned int)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="82.3" y="149" width="0.9" height="15.0" fill="rgb(247,24,14)" rx="2" ry="2" />
+<text  x="85.31" y="159.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="293" width="0.9" height="15.0" fill="rgb(220,133,54)" rx="2" ry="2" />
+<text  x="1617.50" y="303.5" ></text>
+</g>
+<g >
+<title>DB::ISource::work()#/usr/bin/clickhouse (146 samples, 7.11%)</title><rect x="1724.3" y="373" width="133.7" height="15.0" fill="rgb(224,208,44)" rx="2" ry="2" />
+<text  x="1727.33" y="383.5" >DB::ISource::wor..</text>
+</g>
+<g >
+<title>Poco::Net::SocketImpl::pollImpl(Poco::Timespan&amp;, int)#/usr/bin/clickhouse (6 samples, 0.29%)</title><rect x="1882.7" y="373" width="5.5" height="15.0" fill="rgb(239,122,35)" rx="2" ry="2" />
+<text  x="1885.68" y="383.5" ></text>
+</g>
+<g >
+<title>LZ4::decompress(char const*, char*, unsigned long, unsigned long, LZ4::PerformanceStatistics&amp;)#/usr/bin/clickhouse (46 samples, 2.24%)</title><rect x="1787.5" y="117" width="42.1" height="15.0" fill="rgb(211,35,25)" rx="2" ry="2" />
+<text  x="1790.49" y="127.5" >LZ4..</text>
+</g>
+<g >
+<title>large_dalloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="277" width="1.0" height="15.0" fill="rgb(225,188,50)" rx="2" ry="2" />
+<text  x="57.85" y="287.5" ></text>
+</g>
+<g >
+<title>DB::FunctionComparison&lt;DB::EqualsOp, DB::NameEquals&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="106.1" y="277" width="1.8" height="15.0" fill="rgb(224,54,28)" rx="2" ry="2" />
+<text  x="109.11" y="287.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="133" width="0.9" height="15.0" fill="rgb(212,112,6)" rx="2" ry="2" />
+<text  x="1399.66" y="143.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;true, true&gt;::allocNoTrack(unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="45.7" y="325" width="0.9" height="15.0" fill="rgb(241,142,18)" rx="2" ry="2" />
+<text  x="48.70" y="335.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="165" width="0.9" height="15.0" fill="rgb(251,151,10)" rx="2" ry="2" />
+<text  x="1399.66" y="175.5" ></text>
+</g>
+<g >
+<title>DB::ExpressionActions::execute(DB::Block&amp;, bool) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1857.0" y="245" width="1.0" height="15.0" fill="rgb(244,194,22)" rx="2" ry="2" />
+<text  x="1860.05" y="255.5" ></text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="54.8" y="181" width="1.0" height="15.0" fill="rgb(205,6,32)" rx="2" ry="2" />
+<text  x="57.85" y="191.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1,980 samples, 96.40%)</title><rect x="45.7" y="437" width="1812.3" height="15.0" fill="rgb(208,160,10)" rx="2" ry="2" />
+<text  x="48.70" y="447.5" >#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>bool DB::FunctionJSONHelpers::performMoves&lt;DB::SimdJSONParser&gt;(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, unsigned long, DB::SimdJSONParser::Element const&amp;, std::__1::vector&lt;DB::FunctionJSONHelpers::Move, std::__1::allocator&lt;DB::FunctionJSONHelpers::Move&gt; &gt; const&amp;, DB::SimdJSONParser::Element&amp;, std::__1::basic_string_view&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)#/usr/bin/clickhouse (87 samples, 4.24%)</title><rect x="124.4" y="245" width="79.6" height="15.0" fill="rgb(221,138,53)" rx="2" ry="2" />
+<text  x="127.41" y="255.5" >bool DB::..</text>
+</g>
+<g >
+<title>DB::FunctionsLogicalDetail::FunctionAnyArityLogical&lt;DB::FunctionsLogicalDetail::AndImpl, DB::NameAnd&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (5 samples, 0.24%)</title><rect x="1393.0" y="277" width="4.6" height="15.0" fill="rgb(238,4,15)" rx="2" ry="2" />
+<text  x="1396.00" y="287.5" ></text>
+</g>
+<g >
+<title>DB::ReadBuffer::readStrict(char*, unsigned long)#/usr/bin/clickhouse (5 samples, 0.24%)</title><rect x="1782.9" y="117" width="4.6" height="15.0" fill="rgb(212,99,43)" rx="2" ry="2" />
+<text  x="1785.91" y="127.5" ></text>
+</g>
+<g >
+<title>DB::CompressedReadBufferFromFile::nextImpl()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="165" width="0.9" height="15.0" fill="rgb(210,149,32)" rx="2" ry="2" />
+<text  x="1876.52" y="175.5" ></text>
+</g>
+<g >
+<title>malloc_default#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="261" width="0.9" height="15.0" fill="rgb(217,227,2)" rx="2" ry="2" />
+<text  x="1617.50" y="271.5" ></text>
+</g>
+<g >
+<title>DB::ReplaceRegexpImpl&lt;false&gt;::processString(re2_st::StringPiece const&amp;, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;, unsigned long&amp;, re2_st::RE2&amp;, int, std::__1::vector&lt;std::__1::pair&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt; const&amp;)#/usr/bin/clickhouse (23 samples, 1.12%)</title><rect x="64.0" y="245" width="21.1" height="15.0" fill="rgb(245,139,20)" rx="2" ry="2" />
+<text  x="67.00" y="255.5" ></text>
+</g>
+<g >
+<title>DB::Memory&lt;Allocator&lt;false, false&gt; &gt;::alloc()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="149" width="0.9" height="15.0" fill="rgb(248,48,47)" rx="2" ry="2" />
+<text  x="1876.52" y="159.5" ></text>
+</g>
+<g >
+<title>re2_st::RE2::Init(re2_st::StringPiece const&amp;, re2_st::RE2::Options const&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="85.1" y="229" width="1.8" height="15.0" fill="rgb(229,92,32)" rx="2" ry="2" />
+<text  x="88.05" y="239.5" ></text>
+</g>
+<g >
+<title>arena_ralloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="51.2" y="293" width="0.9" height="15.0" fill="rgb(212,126,8)" rx="2" ry="2" />
+<text  x="54.19" y="303.5" ></text>
+</g>
+<g >
+<title>DB::ColumnVector&lt;char8_t&gt;::~ColumnVector()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="261" width="0.9" height="15.0" fill="rgb(252,151,47)" rx="2" ry="2" />
+<text  x="1399.66" y="271.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1873.5" y="37" width="0.9" height="15.0" fill="rgb(236,4,34)" rx="2" ry="2" />
+<text  x="1876.52" y="47.5" ></text>
+</g>
+<g >
+<title>operator new(unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="165" width="0.9" height="15.0" fill="rgb(222,43,22)" rx="2" ry="2" />
+<text  x="88.97" y="175.5" ></text>
+</g>
+<g >
+<title>re2_st::Compiler::Compile(re2_st::Regexp*, bool, long)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="85.1" y="213" width="1.8" height="15.0" fill="rgb(207,0,38)" rx="2" ry="2" />
+<text  x="88.05" y="223.5" ></text>
+</g>
+<g >
+<title>DB::ColumnVector&lt;StrongTypedef&lt;wide::integer&lt;128ul, unsigned int&gt;, DB::UUIDTag&gt; &gt;::filter(DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, long) const#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="52.1" y="341" width="1.8" height="15.0" fill="rgb(234,120,51)" rx="2" ry="2" />
+<text  x="55.10" y="351.5" ></text>
+</g>
+<g >
+<title>StackTrace::StackTrace()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="101" width="0.9" height="15.0" fill="rgb(217,15,8)" rx="2" ry="2" />
+<text  x="1876.52" y="111.5" ></text>
+</g>
+<g >
+<title>DB::Aggregator::executeOnBlock(std::__1::vector&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt;, unsigned long, DB::AggregatedDataVariants&amp;, std::__1::vector&lt;DB::IColumn const*, std::__1::allocator&lt;DB::IColumn const*&gt; &gt;&amp;, std::__1::vector&lt;std::__1::vector&lt;DB::IColumn const*, std::__1::allocator&lt;DB::IColumn const*&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;DB::IColumn const*, std::__1::allocator&lt;DB::IColumn const*&gt; &gt; &gt; &gt;&amp;, bool&amp;)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="46.6" y="357" width="3.7" height="15.0" fill="rgb(245,130,5)" rx="2" ry="2" />
+<text  x="49.61" y="367.5" ></text>
+</g>
+<g >
+<title>DB::FunctionConvertFromString&lt;DB::DataTypeNumber&lt;double&gt;, DB::NameToFloat64OrNull, (DB::ConvertFromStringExceptionMode)2, (DB::ConvertFromStringParsingMode)0&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="107.9" y="277" width="3.7" height="15.0" fill="rgb(233,115,3)" rx="2" ry="2" />
+<text  x="110.94" y="287.5" ></text>
+</g>
+<g >
+<title>CPU (2,054 samples, 100.00%)</title><rect x="10.0" y="517" width="1880.0" height="15.0" fill="rgb(239,70,18)" rx="2" ry="2" />
+<text  x="13.00" y="527.5" >CPU</text>
+</g>
+<g >
+<title>DB::RemoteQueryExecutorRoutine::operator()(boost::context::fiber&amp;&amp;) const#/usr/bin/clickhouse (12 samples, 0.58%)</title><rect x="1878.1" y="485" width="11.0" height="15.0" fill="rgb(242,5,47)" rx="2" ry="2" />
+<text  x="1881.10" y="495.5" ></text>
+</g>
+<g >
+<title>DB::ColumnVector&lt;long&gt;::replicate(DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1723.4" y="325" width="0.9" height="15.0" fill="rgb(251,133,10)" rx="2" ry="2" />
+<text  x="1726.42" y="335.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (6 samples, 0.29%)</title><rect x="1882.7" y="357" width="5.5" height="15.0" fill="rgb(221,137,41)" rx="2" ry="2" />
+<text  x="1885.68" y="367.5" ></text>
+</g>
+<g >
+<title>re2_st::RE2::Match(re2_st::StringPiece const&amp;, unsigned long, unsigned long, re2_st::RE2::Anchor, re2_st::StringPiece*, int) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="293" width="0.9" height="15.0" fill="rgb(250,137,28)" rx="2" ry="2" />
+<text  x="13.92" y="303.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="245" width="0.9" height="15.0" fill="rgb(249,223,45)" rx="2" ry="2" />
+<text  x="49.61" y="255.5" ></text>
+</g>
+<g >
+<title>DB::PipelineExecutor::executeStepImpl(unsigned long, unsigned long, std::__1::atomic&lt;bool&gt;*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="485" width="0.9" height="15.0" fill="rgb(213,136,51)" rx="2" ry="2" />
+<text  x="13.92" y="495.5" ></text>
+</g>
+<g >
+<title>tcache_bin_flush_large#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="117" width="0.9" height="15.0" fill="rgb(252,74,26)" rx="2" ry="2" />
+<text  x="88.97" y="127.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1,980 samples, 96.40%)</title><rect x="45.7" y="469" width="1812.3" height="15.0" fill="rgb(212,130,10)" rx="2" ry="2" />
+<text  x="48.70" y="479.5" >#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="375.2" y="181" width="0.9" height="15.0" fill="rgb(239,49,20)" rx="2" ry="2" />
+<text  x="378.20" y="191.5" ></text>
+</g>
+<g >
+<title># (6 samples, 0.29%)</title><rect x="1882.7" y="277" width="5.5" height="15.0" fill="rgb(220,142,54)" rx="2" ry="2" />
+<text  x="1885.68" y="287.5" ></text>
+</g>
+<g >
+<title>StackTrace::StackTrace(ucontext_t const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1878.1" y="437" width="0.9" height="15.0" fill="rgb(223,224,33)" rx="2" ry="2" />
+<text  x="1881.10" y="447.5" ></text>
+</g>
+<g >
+<title>DB::ICompressionCodec::decompress(char const*, unsigned int, char*) const#/usr/bin/clickhouse (46 samples, 2.24%)</title><rect x="1787.5" y="133" width="42.1" height="15.0" fill="rgb(210,88,4)" rx="2" ry="2" />
+<text  x="1790.49" y="143.5" >DB:..</text>
+</g>
+<g >
+<title>DB::ColumnDecimal&lt;DB::DateTime64&gt;::replicate(DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1620.9" y="325" width="0.9" height="15.0" fill="rgb(231,140,21)" rx="2" ry="2" />
+<text  x="1623.91" y="335.5" ></text>
+</g>
+<g >
+<title>DB::Expected::add(DB::TokenIterator, char const*)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="261" width="2.8" height="15.0" fill="rgb(240,152,47)" rx="2" ry="2" />
+<text  x="1882.93" y="271.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="53" width="0.9" height="15.0" fill="rgb(211,35,31)" rx="2" ry="2" />
+<text  x="13.92" y="63.5" ></text>
+</g>
+<g >
+<title>DB::JSONExtractRawImpl&lt;DB::SimdJSONParser&gt;::insertResultToColumn(DB::IColumn&amp;, DB::SimdJSONParser::Element const&amp;, std::__1::basic_string_view&lt;char, std::__1::char_traits&lt;char&gt; &gt; const&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="122.6" y="245" width="1.8" height="15.0" fill="rgb(232,50,28)" rx="2" ry="2" />
+<text  x="125.58" y="255.5" ></text>
+</g>
+<g >
+<title>DB::IBlockInputStream::read()#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1879.0" y="421" width="3.7" height="15.0" fill="rgb(238,116,19)" rx="2" ry="2" />
+<text  x="1882.02" y="431.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeReaderWide::readData(DB::NameAndTypePair const&amp;, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;&amp;, unsigned long, bool, unsigned long, std::__1::unordered_map&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt; &gt;&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="245" width="0.9" height="15.0" fill="rgb(235,11,19)" rx="2" ry="2" />
+<text  x="1876.52" y="255.5" ></text>
+</g>
+<g >
+<title>DB::VolnitskyBase&lt;true, true, DB::StringSearcher&lt;true, true&gt; &gt;::search(char8_t const*, unsigned long) const#/usr/bin/clickhouse (223 samples, 10.86%)</title><rect x="1408.6" y="245" width="204.1" height="15.0" fill="rgb(249,30,10)" rx="2" ry="2" />
+<text  x="1411.56" y="255.5" >DB::VolnitskyBase&lt;true, tr..</text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::read(unsigned long, std::__1::deque&lt;DB::MarkRange, std::__1::allocator&lt;DB::MarkRange&gt; &gt;&amp;)#/usr/bin/clickhouse (146 samples, 7.11%)</title><rect x="1724.3" y="293" width="133.7" height="15.0" fill="rgb(210,22,25)" rx="2" ry="2" />
+<text  x="1727.33" y="303.5" >DB::MergeTreeRan..</text>
+</g>
+<g >
+<title>re2_st::Prog::Optimize()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="181" width="0.9" height="15.0" fill="rgb(226,128,46)" rx="2" ry="2" />
+<text  x="88.97" y="191.5" ></text>
+</g>
+<g >
+<title>DB::ReadBufferFromFileDescriptor::nextImpl()#/usr/bin/clickhouse (5 samples, 0.24%)</title><rect x="1782.9" y="101" width="4.6" height="15.0" fill="rgb(230,127,3)" rx="2" ry="2" />
+<text  x="1785.91" y="111.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="149" width="0.9" height="15.0" fill="rgb(207,122,45)" rx="2" ry="2" />
+<text  x="89.88" y="159.5" ></text>
+</g>
+<g >
+<title>arena_ralloc#/usr/bin/clickhouse (28 samples, 1.36%)</title><rect x="1830.5" y="117" width="25.6" height="15.0" fill="rgb(206,227,29)" rx="2" ry="2" />
+<text  x="1833.51" y="127.5" >a..</text>
+</g>
+<g >
+<title>extent_dalloc_wrapper#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="69" width="0.9" height="15.0" fill="rgb(227,25,45)" rx="2" ry="2" />
+<text  x="13.92" y="79.5" ></text>
+</g>
+<g >
+<title>DB::JoiningTransform::transform(DB::Chunk&amp;)#/usr/bin/clickhouse (115 samples, 5.60%)</title><rect x="1619.1" y="373" width="105.2" height="15.0" fill="rgb(239,209,45)" rx="2" ry="2" />
+<text  x="1622.07" y="383.5" >DB::JoiningT..</text>
+</g>
+<g >
+<title>DB::SourceWithProgress::work()#/usr/bin/clickhouse (146 samples, 7.11%)</title><rect x="1724.3" y="389" width="133.7" height="15.0" fill="rgb(250,34,12)" rx="2" ry="2" />
+<text  x="1727.33" y="399.5" >DB::SourceWithPr..</text>
+</g>
+<g >
+<title>simdjson::haswell::dom_parser_implementation::parse(unsigned char const*, unsigned long, simdjson::dom::document&amp;)#/usr/bin/clickhouse (403 samples, 19.62%)</title><rect x="377.0" y="229" width="368.9" height="15.0" fill="rgb(231,154,47)" rx="2" ry="2" />
+<text  x="380.03" y="239.5" >simdjson::haswell::dom_parser_implementation::pars..</text>
+</g>
+<g >
+<title>malloc_default#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="208.6" y="229" width="0.9" height="15.0" fill="rgb(241,9,22)" rx="2" ry="2" />
+<text  x="211.62" y="239.5" ></text>
+</g>
+<g >
+<title>DB::PipelineExecutor::executeStepImpl(unsigned long, unsigned long, std::__1::atomic&lt;bool&gt;*)#/usr/bin/clickhouse (1,980 samples, 96.40%)</title><rect x="45.7" y="421" width="1812.3" height="15.0" fill="rgb(232,188,44)" rx="2" ry="2" />
+<text  x="48.70" y="431.5" >DB::PipelineExecutor::executeStepImpl(unsigned long, unsigned long, std::__1::atomic&lt;bool&gt;*)#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>large_dalloc#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="374.3" y="213" width="1.8" height="15.0" fill="rgb(230,121,52)" rx="2" ry="2" />
+<text  x="377.28" y="223.5" ></text>
+</g>
+<g >
+<title>read#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="1770.1" y="101" width="0.9" height="15.0" fill="rgb(215,121,29)" rx="2" ry="2" />
+<text  x="1773.10" y="111.5" ></text>
+</g>
+<g >
+<title>__libc_malloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="85.1" y="149" width="0.9" height="15.0" fill="rgb(208,26,23)" rx="2" ry="2" />
+<text  x="88.05" y="159.5" ></text>
+</g>
+<g >
+<title>bool re2_st::DFA::InlinedSearchLoop&lt;false, false, false&gt;(re2_st::DFA::SearchParams*)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="80.5" y="181" width="2.7" height="15.0" fill="rgb(236,162,54)" rx="2" ry="2" />
+<text  x="83.48" y="191.5" ></text>
+</g>
+<g >
+<title>DB::ExtractParamToStringImpl&lt;DB::ExtractRaw&gt;::vector(DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;, DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;)#/usr/bin/clickhouse (232 samples, 11.30%)</title><rect x="1402.2" y="261" width="212.3" height="15.0" fill="rgb(254,36,36)" rx="2" ry="2" />
+<text  x="1405.15" y="271.5" >DB::ExtractParamToStringImp..</text>
+</g>
+<g >
+<title>DB::AggregatingTransform::initGenerate()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="45.7" y="389" width="0.9" height="15.0" fill="rgb(205,7,46)" rx="2" ry="2" />
+<text  x="48.70" y="399.5" ></text>
+</g>
+<g >
+<title>DB::CompressedReadBufferFromFile::nextImpl()#/usr/bin/clickhouse (12 samples, 0.58%)</title><rect x="1770.1" y="165" width="11.0" height="15.0" fill="rgb(249,181,51)" rx="2" ry="2" />
+<text  x="1773.10" y="175.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="181" width="0.9" height="15.0" fill="rgb(252,9,7)" rx="2" ry="2" />
+<text  x="89.88" y="191.5" ></text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="46.6" y="181" width="0.9" height="15.0" fill="rgb(248,220,45)" rx="2" ry="2" />
+<text  x="49.61" y="191.5" ></text>
+</g>
+<g >
+<title>StackTrace::StackTrace(ucontext_t const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1860.7" y="453" width="0.9" height="15.0" fill="rgb(248,76,35)" rx="2" ry="2" />
+<text  x="1863.71" y="463.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeReaderStream::seekToMark(unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="197" width="0.9" height="15.0" fill="rgb(228,201,46)" rx="2" ry="2" />
+<text  x="1876.52" y="207.5" ></text>
+</g>
+<g >
+<title>void DB::Aggregator::executeImpl&lt;DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt; &gt;(DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;, DB::Arena*, unsigned long, std::__1::vector&lt;DB::IColumn const*, std::__1::allocator&lt;DB::IColumn const*&gt; &gt;&amp;, DB::Aggregator::AggregateFunctionInstruction*, bool, char*) const#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="47.5" y="341" width="2.8" height="15.0" fill="rgb(210,46,10)" rx="2" ry="2" />
+<text  x="50.53" y="351.5" ></text>
+</g>
+<g >
+<title>DB::AggregatedDataVariants::convertToTwoLevel()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="341" width="0.9" height="15.0" fill="rgb(225,154,37)" rx="2" ry="2" />
+<text  x="49.61" y="351.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="45.7" y="293" width="0.9" height="15.0" fill="rgb(218,197,23)" rx="2" ry="2" />
+<text  x="48.70" y="303.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="469" width="0.9" height="15.0" fill="rgb(217,124,54)" rx="2" ry="2" />
+<text  x="13.92" y="479.5" ></text>
+</g>
+<g >
+<title>recv#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="1888.2" y="389" width="0.9" height="15.0" fill="rgb(212,88,27)" rx="2" ry="2" />
+<text  x="1891.17" y="399.5" ></text>
+</g>
+<g >
+<title>void DB::Aggregator::executeImplBatch&lt;false, DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt; &gt;(DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;, DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;::State&amp;, DB::Arena*, unsigned long, DB::Aggregator::AggregateFunctionInstruction*, char*) const#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="47.5" y="325" width="2.8" height="15.0" fill="rgb(213,185,19)" rx="2" ry="2" />
+<text  x="50.53" y="335.5" ></text>
+</g>
+<g >
+<title>extent_dalloc_wrapper#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="374.3" y="149" width="0.9" height="15.0" fill="rgb(219,42,6)" rx="2" ry="2" />
+<text  x="377.28" y="159.5" ></text>
+</g>
+<g >
+<title>DB::Block::getByName(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1856.1" y="245" width="0.9" height="15.0" fill="rgb(227,86,42)" rx="2" ry="2" />
+<text  x="1859.13" y="255.5" ></text>
+</g>
+<g >
+<title>void DB::HashJoin::joinBlockImpl&lt;(DB::ASTTableJoin::Kind)0, (DB::ASTTableJoin::Strictness)3, DB::HashJoin::MapsTemplate&lt;DB::RowRefList&gt; &gt;(DB::Block&amp;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; const&amp;, DB::Block const&amp;, DB::HashJoin::MapsTemplate&lt;DB::RowRefList&gt; const&amp;, bool) const#/usr/bin/clickhouse (115 samples, 5.60%)</title><rect x="1619.1" y="341" width="105.2" height="15.0" fill="rgb(220,193,25)" rx="2" ry="2" />
+<text  x="1622.07" y="351.5" >void DB::Has..</text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="1614.5" y="149" width="0.9" height="15.0" fill="rgb(216,34,1)" rx="2" ry="2" />
+<text  x="1617.50" y="159.5" ></text>
+</g>
+<g >
+<title>DB::parseQueryAndMovePosition(DB::IParser&amp;, char const*&amp;, char const*, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, bool, unsigned long, unsigned long)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="373" width="2.8" height="15.0" fill="rgb(250,207,37)" rx="2" ry="2" />
+<text  x="1882.93" y="383.5" ></text>
+</g>
+<g >
+<title>DB::ISource::work()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="389" width="0.9" height="15.0" fill="rgb(254,220,10)" rx="2" ry="2" />
+<text  x="1876.52" y="399.5" ></text>
+</g>
+<g >
+<title>__libc_realloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1719.8" y="293" width="0.9" height="15.0" fill="rgb(231,198,47)" rx="2" ry="2" />
+<text  x="1722.76" y="303.5" ></text>
+</g>
+<g >
+<title>Poco::Net::SocketImpl::receiveBytes(void*, int, int)#/usr/bin/clickhouse (7 samples, 0.34%)</title><rect x="1882.7" y="405" width="6.4" height="15.0" fill="rgb(234,125,24)" rx="2" ry="2" />
+<text  x="1885.68" y="415.5" ></text>
+</g>
+<g >
+<title>sallocx#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1613.6" y="229" width="0.9" height="15.0" fill="rgb(251,90,8)" rx="2" ry="2" />
+<text  x="1616.58" y="239.5" ></text>
+</g>
+<g >
+<title>__libc_realloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="277" width="0.9" height="15.0" fill="rgb(251,134,50)" rx="2" ry="2" />
+<text  x="52.36" y="287.5" ></text>
+</g>
+<g >
+<title>DB::FunctionToExecutableFunctionAdaptor::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (1,701 samples, 82.81%)</title><rect x="57.6" y="293" width="1556.9" height="15.0" fill="rgb(236,62,13)" rx="2" ry="2" />
+<text  x="60.59" y="303.5" >DB::FunctionToExecutableFunctionAdaptor::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long..</text>
+</g>
+<g >
+<title>DB::ReadBuffer::readStrict(char*, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1770.1" y="133" width="0.9" height="15.0" fill="rgb(223,218,52)" rx="2" ry="2" />
+<text  x="1773.10" y="143.5" ></text>
+</g>
+<g >
+<title>void DB::readVarUIntImpl&lt;false&gt;(unsigned long&amp;, DB::ReadBuffer&amp;)#/usr/bin/clickhouse (7 samples, 0.34%)</title><rect x="1882.7" y="437" width="6.4" height="15.0" fill="rgb(209,17,46)" rx="2" ry="2" />
+<text  x="1885.68" y="447.5" ></text>
+</g>
+<g >
+<title>TwoLevelHashTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;, 8ul&gt;::TwoLevelHashTable&lt;HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, HashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt; &gt;(HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, HashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt; const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="45.7" y="341" width="0.9" height="15.0" fill="rgb(216,117,29)" rx="2" ry="2" />
+<text  x="48.70" y="351.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="213" width="0.9" height="15.0" fill="rgb(244,163,35)" rx="2" ry="2" />
+<text  x="49.61" y="223.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="213" width="0.9" height="15.0" fill="rgb(221,64,47)" rx="2" ry="2" />
+<text  x="1617.50" y="223.5" ></text>
+</g>
+<g >
+<title>DB::QueryProfilerCpu::signalHandler(int, siginfo_t*, void*)#/usr/bin/clickhouse (19 samples, 0.93%)</title><rect x="11.8" y="485" width="17.4" height="15.0" fill="rgb(237,70,32)" rx="2" ry="2" />
+<text  x="14.83" y="495.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1612.7" y="197" width="0.9" height="15.0" fill="rgb(243,137,47)" rx="2" ry="2" />
+<text  x="1615.67" y="207.5" ></text>
+</g>
+<g >
+<title>Poco::Net::SocketImpl::poll(Poco::Timespan const&amp;, int)#/usr/bin/clickhouse (6 samples, 0.29%)</title><rect x="1882.7" y="389" width="5.5" height="15.0" fill="rgb(235,98,4)" rx="2" ry="2" />
+<text  x="1885.68" y="399.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::read(unsigned long, std::__1::deque&lt;DB::MarkRange, std::__1::allocator&lt;DB::MarkRange&gt; &gt;&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="309" width="0.9" height="15.0" fill="rgb(246,92,40)" rx="2" ry="2" />
+<text  x="1876.52" y="319.5" ></text>
+</g>
+<g >
+<title>large_palloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="245" width="0.9" height="15.0" fill="rgb(223,120,6)" rx="2" ry="2" />
+<text  x="52.36" y="255.5" ></text>
+</g>
+<g >
+<title>arena_decay#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="229" width="0.9" height="15.0" fill="rgb(250,183,30)" rx="2" ry="2" />
+<text  x="52.36" y="239.5" ></text>
+</g>
+<g >
+<title>DB::ColumnString::operator[](unsigned long) const#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="40.2" y="501" width="1.8" height="15.0" fill="rgb(252,87,13)" rx="2" ry="2" />
+<text  x="43.20" y="511.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (6 samples, 0.29%)</title><rect x="1882.7" y="341" width="5.5" height="15.0" fill="rgb(231,188,38)" rx="2" ry="2" />
+<text  x="1885.68" y="351.5" ></text>
+</g>
+<g >
+<title># (6 samples, 0.29%)</title><rect x="1882.7" y="229" width="5.5" height="15.0" fill="rgb(251,70,37)" rx="2" ry="2" />
+<text  x="1885.68" y="239.5" ></text>
+</g>
+<g >
+<title>DB::AggregatingTransform::work()#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="46.6" y="389" width="3.7" height="15.0" fill="rgb(214,12,26)" rx="2" ry="2" />
+<text  x="49.61" y="399.5" ></text>
+</g>
+<g >
+<title>DB::FunctionArrayIndex&lt;DB::HasAction, DB::NameHas&gt;::executeOnNonNullable(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;) const#/usr/bin/clickhouse (20 samples, 0.97%)</title><rect x="87.8" y="261" width="18.3" height="15.0" fill="rgb(223,172,6)" rx="2" ry="2" />
+<text  x="90.80" y="271.5" ></text>
+</g>
+<g >
+<title>re2_st::Compiler::Finish(re2_st::Regexp*)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="85.1" y="197" width="1.8" height="15.0" fill="rgb(252,123,18)" rx="2" ry="2" />
+<text  x="88.05" y="207.5" ></text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="86.9" y="101" width="0.9" height="15.0" fill="rgb(237,52,42)" rx="2" ry="2" />
+<text  x="89.88" y="111.5" ></text>
+</g>
+<g >
+<title>operator new(unsigned long)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="229" width="2.8" height="15.0" fill="rgb(251,135,40)" rx="2" ry="2" />
+<text  x="1882.93" y="239.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (30 samples, 1.46%)</title><rect x="11.8" y="501" width="27.5" height="15.0" fill="rgb(249,52,21)" rx="2" ry="2" />
+<text  x="14.83" y="511.5" >#..</text>
+</g>
+<g >
+<title>syscall#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="1612.7" y="181" width="0.9" height="15.0" fill="rgb(229,80,20)" rx="2" ry="2" />
+<text  x="1615.67" y="191.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::continueReadingChain(DB::MergeTreeRangeReader::ReadResult&amp;, unsigned long&amp;)#/usr/bin/clickhouse (144 samples, 7.01%)</title><rect x="1724.3" y="277" width="131.8" height="15.0" fill="rgb(230,220,36)" rx="2" ry="2" />
+<text  x="1727.33" y="287.5" >DB::MergeTreeRan..</text>
+</g>
+<g >
+<title>DB::FunctionComparison&lt;DB::EqualsOp, DB::NameEquals&gt;::executeString(DB::IColumn const*, DB::IColumn const*) const#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="106.1" y="261" width="1.8" height="15.0" fill="rgb(239,25,28)" rx="2" ry="2" />
+<text  x="109.11" y="271.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="117" width="0.9" height="15.0" fill="rgb(213,172,4)" rx="2" ry="2" />
+<text  x="13.92" y="127.5" ></text>
+</g>
+<g >
+<title>LZ4::PerformanceStatistics::select()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1828.7" y="101" width="0.9" height="15.0" fill="rgb(238,202,47)" rx="2" ry="2" />
+<text  x="1831.68" y="111.5" ></text>
+</g>
+<g >
+<title>pthread_mutex_trylock#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="86.0" y="37" width="0.9" height="15.0" fill="rgb(249,199,8)" rx="2" ry="2" />
+<text  x="88.97" y="47.5" ></text>
+</g>
+<g >
+<title>simdjson::haswell::dom_parser_implementation::stage2(simdjson::dom::document&amp;)#/usr/bin/clickhouse (707 samples, 34.42%)</title><rect x="745.9" y="229" width="647.1" height="15.0" fill="rgb(244,194,31)" rx="2" ry="2" />
+<text  x="748.89" y="239.5" >simdjson::haswell::dom_parser_implementation::stage2(simdjson::dom::document&amp;)#/usr/bin/c..</text>
+</g>
+<g >
+<title>DB::MultiplexedConnections::receivePacketUnlocked(std::__1::function&lt;void (int, Poco::Timespan, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;)&gt;)#/usr/bin/clickhouse (11 samples, 0.54%)</title><rect x="1879.0" y="469" width="10.1" height="15.0" fill="rgb(227,172,27)" rx="2" ry="2" />
+<text  x="1882.02" y="479.5" ></text>
+</g>
+<g >
+<title># (11 samples, 0.54%)</title><rect x="29.2" y="405" width="10.1" height="15.0" fill="rgb(209,15,42)" rx="2" ry="2" />
+<text  x="32.22" y="415.5" ></text>
+</g>
+<g >
+<title>DB::Aggregator::mergeAndConvertOneBucketToBlock(std::__1::vector&lt;std::__1::shared_ptr&lt;DB::AggregatedDataVariants&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;DB::AggregatedDataVariants&gt; &gt; &gt;&amp;, DB::Arena*, bool, unsigned long, std::__1::atomic&lt;bool&gt;*) const#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="341" width="3.7" height="15.0" fill="rgb(240,191,44)" rx="2" ry="2" />
+<text  x="1618.41" y="351.5" ></text>
+</g>
+<g >
+<title>read#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (5 samples, 0.24%)</title><rect x="1782.9" y="85" width="4.6" height="15.0" fill="rgb(232,201,13)" rx="2" ry="2" />
+<text  x="1785.91" y="95.5" ></text>
+</g>
+<g >
+<title>DB::ISimpleTransform::work()#/usr/bin/clickhouse (1,708 samples, 83.15%)</title><rect x="52.1" y="389" width="1563.3" height="15.0" fill="rgb(250,224,53)" rx="2" ry="2" />
+<text  x="55.10" y="399.5" >DB::ISimpleTransform::work()#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="50.3" y="357" width="1.8" height="15.0" fill="rgb(220,19,7)" rx="2" ry="2" />
+<text  x="53.27" y="367.5" ></text>
+</g>
+<g >
+<title>DB::ReadBufferFromPocoSocket::nextImpl()#/usr/bin/clickhouse (7 samples, 0.34%)</title><rect x="1882.7" y="421" width="6.4" height="15.0" fill="rgb(243,46,27)" rx="2" ry="2" />
+<text  x="1885.68" y="431.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="213" width="0.9" height="15.0" fill="rgb(222,123,8)" rx="2" ry="2" />
+<text  x="52.36" y="223.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeReaderWide::readRows(unsigned long, bool, unsigned long, std::__1::vector&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;)#/usr/bin/clickhouse (144 samples, 7.01%)</title><rect x="1724.3" y="245" width="131.8" height="15.0" fill="rgb(206,126,4)" rx="2" ry="2" />
+<text  x="1727.33" y="255.5" >DB::MergeTreeRea..</text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1860.7" y="373" width="0.9" height="15.0" fill="rgb(207,35,8)" rx="2" ry="2" />
+<text  x="1863.71" y="383.5" ></text>
+</g>
+<g >
+<title>DB::ISimpleTransform::work()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="453" width="0.9" height="15.0" fill="rgb(241,66,0)" rx="2" ry="2" />
+<text  x="13.92" y="463.5" ></text>
+</g>
+<g >
+<title># (11 samples, 0.54%)</title><rect x="29.2" y="453" width="10.1" height="15.0" fill="rgb(223,206,48)" rx="2" ry="2" />
+<text  x="32.22" y="463.5" ></text>
+</g>
+<g >
+<title>HashTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;::resize(unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="309" width="0.9" height="15.0" fill="rgb(245,176,3)" rx="2" ry="2" />
+<text  x="52.36" y="319.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="421" width="0.9" height="15.0" fill="rgb(222,110,52)" rx="2" ry="2" />
+<text  x="1876.52" y="431.5" ></text>
+</g>
+<g >
+<title>tcache_event_hard#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="229" width="0.9" height="15.0" fill="rgb(205,126,53)" rx="2" ry="2" />
+<text  x="1399.66" y="239.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="204.0" y="229" width="1.0" height="15.0" fill="rgb(215,17,17)" rx="2" ry="2" />
+<text  x="207.04" y="239.5" ></text>
+</g>
+<g >
+<title>void DB::PODArrayBase&lt;1ul, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;::resize&lt;&gt;(unsigned long)#/usr/bin/clickhouse (29 samples, 1.41%)</title><rect x="1829.6" y="165" width="26.5" height="15.0" fill="rgb(243,135,19)" rx="2" ry="2" />
+<text  x="1832.59" y="175.5" >v..</text>
+</g>
+<g >
+<title>large_ralloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1719.8" y="261" width="0.9" height="15.0" fill="rgb(218,100,43)" rx="2" ry="2" />
+<text  x="1722.76" y="271.5" ></text>
+</g>
+<g >
+<title>std::__1::__call_once(unsigned long volatile&amp;, void*, void (*)(void*))# (1 samples, 0.05%)</title><rect x="10.9" y="261" width="0.9" height="15.0" fill="rgb(214,101,54)" rx="2" ry="2" />
+<text  x="13.92" y="271.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="56.7" y="309" width="0.9" height="15.0" fill="rgb(225,203,42)" rx="2" ry="2" />
+<text  x="59.68" y="319.5" ></text>
+</g>
+<g >
+<title>DB::IBlockInputStream::progressImpl(DB::Progress const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1879.0" y="405" width="0.9" height="15.0" fill="rgb(247,158,54)" rx="2" ry="2" />
+<text  x="1882.02" y="415.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="165" width="0.9" height="15.0" fill="rgb(243,75,14)" rx="2" ry="2" />
+<text  x="52.36" y="175.5" ></text>
+</g>
+<g >
+<title>void HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;::forEachValue&lt;void DB::Aggregator::convertToBlockImplFinal&lt;DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt; &gt;(DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;&amp;, std::__1::vector&lt;DB::IColumn*, std::__1::allocator&lt;DB::IColumn*&gt; &gt;, std::__1::vector&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;, DB::Arena*) const::'lambda'(DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt; const&amp;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;&amp;)&gt;(DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;&amp;)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="277" width="3.7" height="15.0" fill="rgb(209,178,31)" rx="2" ry="2" />
+<text  x="1618.41" y="287.5" ></text>
+</g>
+<g >
+<title>re2_st::Prog::SearchDFA(re2_st::StringPiece const&amp;, re2_st::StringPiece const&amp;, re2_st::Prog::Anchor, re2_st::Prog::MatchKind, re2_st::StringPiece*, bool*, re2_st::SparseSetT&lt;void&gt;*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1862.5" y="501" width="1.0" height="15.0" fill="rgb(233,163,0)" rx="2" ry="2" />
+<text  x="1865.54" y="511.5" ></text>
+</g>
+<g >
+<title>DB::ColumnConst::cloneResized(unsigned long) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="55.8" y="325" width="0.9" height="15.0" fill="rgb(209,91,13)" rx="2" ry="2" />
+<text  x="58.76" y="335.5" ></text>
+</g>
+<g >
+<title>DB::ISimpleTransform::transform(DB::Chunk&amp;, DB::Chunk&amp;)#/usr/bin/clickhouse (1,708 samples, 83.15%)</title><rect x="52.1" y="373" width="1563.3" height="15.0" fill="rgb(232,181,35)" rx="2" ry="2" />
+<text  x="55.10" y="383.5" >DB::ISimpleTransform::transform(DB::Chunk&amp;, DB::Chunk&amp;)#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>void DB::PODArrayBase&lt;1ul, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;::resize&lt;&gt;(unsigned long)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1874.4" y="501" width="3.7" height="15.0" fill="rgb(231,120,32)" rx="2" ry="2" />
+<text  x="1877.44" y="511.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (144 samples, 7.01%)</title><rect x="1724.3" y="181" width="131.8" height="15.0" fill="rgb(245,115,0)" rx="2" ry="2" />
+<text  x="1727.33" y="191.5" >#/usr/bin/clickh..</text>
+</g>
+<g >
+<title>DB::HashJoin::addJoinedBlock(DB::Block const&amp;, bool)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="50.3" y="373" width="1.8" height="15.0" fill="rgb(253,122,20)" rx="2" ry="2" />
+<text  x="53.27" y="383.5" ></text>
+</g>
+<g >
+<title>extent_dalloc_wrapper#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="133" width="0.9" height="15.0" fill="rgb(228,87,34)" rx="2" ry="2" />
+<text  x="89.88" y="143.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::DelayedStream::finalize(std::__1::vector&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="277" width="0.9" height="15.0" fill="rgb(239,138,1)" rx="2" ry="2" />
+<text  x="1876.52" y="287.5" ></text>
+</g>
+<g >
+<title>DB::ISource::tryGenerate()#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="373" width="3.7" height="15.0" fill="rgb(249,24,5)" rx="2" ry="2" />
+<text  x="1618.41" y="383.5" ></text>
+</g>
+<g >
+<title># (9 samples, 0.44%)</title><rect x="31.1" y="389" width="8.2" height="15.0" fill="rgb(211,207,20)" rx="2" ry="2" />
+<text  x="34.05" y="399.5" ></text>
+</g>
+<g >
+<title>DB::Connection::receiveDataImpl(std::__1::shared_ptr&lt;DB::IBlockInputStream&gt;&amp;)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1879.0" y="437" width="3.7" height="15.0" fill="rgb(229,118,47)" rx="2" ry="2" />
+<text  x="1882.02" y="447.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="208.6" y="165" width="0.9" height="15.0" fill="rgb(251,228,5)" rx="2" ry="2" />
+<text  x="211.62" y="175.5" ></text>
+</g>
+<g >
+<title>DB::writeJSONString(char const*, char const*, DB::WriteBuffer&amp;, DB::FormatSettings const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="123.5" y="213" width="0.9" height="15.0" fill="rgb(208,126,50)" rx="2" ry="2" />
+<text  x="126.50" y="223.5" ></text>
+</g>
+<g >
+<title>arena_extents_dirty_dalloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="375.2" y="197" width="0.9" height="15.0" fill="rgb(219,10,53)" rx="2" ry="2" />
+<text  x="378.20" y="207.5" ></text>
+</g>
+<g >
+<title>extent_dalloc_wrapper#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="213" width="1.0" height="15.0" fill="rgb(208,117,8)" rx="2" ry="2" />
+<text  x="57.85" y="223.5" ></text>
+</g>
+<g >
+<title>DB::JoiningTransform::work()#/usr/bin/clickhouse (115 samples, 5.60%)</title><rect x="1619.1" y="389" width="105.2" height="15.0" fill="rgb(252,14,18)" rx="2" ry="2" />
+<text  x="1622.07" y="399.5" >DB::JoiningT..</text>
+</g>
+<g >
+<title>DB::IParserBase::parse(DB::IParser::Pos&amp;, std::__1::shared_ptr&lt;DB::IAST&gt;&amp;, DB::Expected&amp;)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="277" width="2.8" height="15.0" fill="rgb(223,191,32)" rx="2" ry="2" />
+<text  x="1882.93" y="287.5" ></text>
+</g>
+<g >
+<title>DB::Field::~Field()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="103.4" y="229" width="0.9" height="15.0" fill="rgb(240,79,16)" rx="2" ry="2" />
+<text  x="106.36" y="239.5" ></text>
+</g>
+<g >
+<title>DB::CompressedReadBufferBase::readCompressedData(unsigned long&amp;, unsigned long&amp;, bool)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1770.1" y="149" width="0.9" height="15.0" fill="rgb(253,41,52)" rx="2" ry="2" />
+<text  x="1773.10" y="159.5" ></text>
+</g>
+<g >
+<title>DB::ISerialization::deserializeBinaryBulkWithMultipleStreams(COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;&amp;, unsigned long, DB::ISerialization::DeserializeBinaryBulkSettings&amp;, std::__1::shared_ptr&lt;DB::ISerialization::DeserializeBinaryBulkState&gt;&amp;, std::__1::unordered_map&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt; &gt;*) const#/usr/bin/clickhouse (144 samples, 7.01%)</title><rect x="1724.3" y="213" width="131.8" height="15.0" fill="rgb(254,199,26)" rx="2" ry="2" />
+<text  x="1727.33" y="223.5" >DB::ISerializati..</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="213" width="0.9" height="15.0" fill="rgb(219,93,48)" rx="2" ry="2" />
+<text  x="1876.52" y="223.5" ></text>
+</g>
+<g >
+<title>ThreadPoolImpl&lt;std::__1::thread&gt;::worker(std::__1::__list_iterator&lt;std::__1::thread, void*&gt;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="469" width="0.9" height="15.0" fill="rgb(212,43,45)" rx="2" ry="2" />
+<text  x="1876.52" y="479.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="53" width="0.9" height="15.0" fill="rgb(246,90,22)" rx="2" ry="2" />
+<text  x="88.97" y="63.5" ></text>
+</g>
+<g >
+<title>DB::TokenIterator::get()#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="245" width="2.8" height="15.0" fill="rgb(249,142,4)" rx="2" ry="2" />
+<text  x="1882.93" y="255.5" ></text>
+</g>
+<g >
+<title>DB::ColumnVector&lt;StrongTypedef&lt;wide::integer&lt;128ul, unsigned int&gt;, DB::UUIDTag&gt; &gt;::deserializeAndInsertFromArena(char const*)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1617.2" y="261" width="1.9" height="15.0" fill="rgb(238,74,27)" rx="2" ry="2" />
+<text  x="1620.24" y="271.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::continueReadingChain(DB::MergeTreeRangeReader::ReadResult&amp;, unsigned long&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="293" width="0.9" height="15.0" fill="rgb(225,108,17)" rx="2" ry="2" />
+<text  x="1876.52" y="303.5" ></text>
+</g>
+<g >
+<title>DB::IParserBase::parse(DB::IParser::Pos&amp;, std::__1::shared_ptr&lt;DB::IAST&gt;&amp;, DB::Expected&amp;)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="341" width="2.8" height="15.0" fill="rgb(216,17,6)" rx="2" ry="2" />
+<text  x="1882.93" y="351.5" ></text>
+</g>
+<g >
+<title>start_thread#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1,980 samples, 96.40%)</title><rect x="45.7" y="485" width="1812.3" height="15.0" fill="rgb(242,31,53)" rx="2" ry="2" />
+<text  x="48.70" y="495.5" >start_thread#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so</text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1873.5" y="85" width="0.9" height="15.0" fill="rgb(248,36,29)" rx="2" ry="2" />
+<text  x="1876.52" y="95.5" ></text>
+</g>
+<g >
+<title>re2_st::DFA::RunStateOnByte(re2_st::DFA::State*, int)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="82.3" y="165" width="0.9" height="15.0" fill="rgb(215,139,3)" rx="2" ry="2" />
+<text  x="85.31" y="175.5" ></text>
+</g>
+<g >
+<title>StackTrace::StackTrace(ucontext_t const&amp;)#/usr/bin/clickhouse (11 samples, 0.54%)</title><rect x="29.2" y="469" width="10.1" height="15.0" fill="rgb(229,174,2)" rx="2" ry="2" />
+<text  x="32.22" y="479.5" ></text>
+</g>
+<g >
+<title>DB::FunctionsStringSearchToString&lt;DB::ExtractParamToStringImpl&lt;DB::ExtractRaw&gt;, DB::NameVisitParamExtractRaw&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (232 samples, 11.30%)</title><rect x="1402.2" y="277" width="212.3" height="15.0" fill="rgb(228,135,28)" rx="2" ry="2" />
+<text  x="1405.15" y="287.5" >DB::FunctionsStringSearchTo..</text>
+</g>
+<g >
+<title>std::__1::pair&lt;std::__1::__hash_iterator&lt;std::__1::__hash_node&lt;re2_st::DFA::State*, void*&gt;*&gt;, bool&gt; std::__1::__hash_table&lt;re2_st::DFA::State*, re2_st::DFA::StateHash, re2_st::DFA::StateEqual, std::__1::allocator&lt;re2_st::DFA::State*&gt; &gt;::__emplace_unique_key_args&lt;re2_st::DFA::State*, re2_st::DFA::State* const&amp;&gt;(re2_st::DFA::State* const&amp;, re2_st::DFA::State* const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="82.3" y="117" width="0.9" height="15.0" fill="rgb(221,48,21)" rx="2" ry="2" />
+<text  x="85.31" y="127.5" ></text>
+</g>
+<g >
+<title>DB::ReplaceRegexpImpl&lt;false&gt;::vector(DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;, DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="325" width="0.9" height="15.0" fill="rgb(244,150,24)" rx="2" ry="2" />
+<text  x="13.92" y="335.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="208.6" y="133" width="0.9" height="15.0" fill="rgb(231,221,22)" rx="2" ry="2" />
+<text  x="211.62" y="143.5" ></text>
+</g>
+<g >
+<title>re2_st::Compiler::Compile(re2_st::Regexp*, bool, long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="229" width="0.9" height="15.0" fill="rgb(205,98,40)" rx="2" ry="2" />
+<text  x="13.92" y="239.5" ></text>
+</g>
+<g >
+<title>DB::Connection::receivePacket()#/usr/bin/clickhouse (11 samples, 0.54%)</title><rect x="1879.0" y="453" width="10.1" height="15.0" fill="rgb(238,50,32)" rx="2" ry="2" />
+<text  x="1882.02" y="463.5" ></text>
+</g>
+<g >
+<title>tcache_event_hard#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="133" width="0.9" height="15.0" fill="rgb(251,105,52)" rx="2" ry="2" />
+<text  x="88.97" y="143.5" ></text>
+</g>
+<g >
+<title>DB::SerializationString::deserializeBinaryBulk(DB::IColumn&amp;, DB::ReadBuffer&amp;, unsigned long, double) const#/usr/bin/clickhouse (144 samples, 7.01%)</title><rect x="1724.3" y="197" width="131.8" height="15.0" fill="rgb(210,127,51)" rx="2" ry="2" />
+<text  x="1727.33" y="207.5" >DB::Serializatio..</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="208.6" y="181" width="0.9" height="15.0" fill="rgb(230,87,21)" rx="2" ry="2" />
+<text  x="211.62" y="191.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;false, false&gt;::allocNoTrack(unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="229" width="0.9" height="15.0" fill="rgb(241,182,27)" rx="2" ry="2" />
+<text  x="89.88" y="239.5" ></text>
+</g>
+<g >
+<title>operator new(unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="85.1" y="165" width="0.9" height="15.0" fill="rgb(226,0,43)" rx="2" ry="2" />
+<text  x="88.05" y="175.5" ></text>
+</g>
+<g >
+<title>DB::CompressedReadBufferFromFile::seek(unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="181" width="0.9" height="15.0" fill="rgb(218,13,45)" rx="2" ry="2" />
+<text  x="1876.52" y="191.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="181" width="0.9" height="15.0" fill="rgb(216,140,14)" rx="2" ry="2" />
+<text  x="52.36" y="191.5" ></text>
+</g>
+<g >
+<title>LZ4::decompress(char const*, char*, unsigned long, unsigned long, LZ4::PerformanceStatistics&amp;)#/usr/bin/clickhouse (11 samples, 0.54%)</title><rect x="1771.0" y="133" width="10.1" height="15.0" fill="rgb(234,166,46)" rx="2" ry="2" />
+<text  x="1774.01" y="143.5" ></text>
+</g>
+<g >
+<title>tcache_alloc_small_hard#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="277" width="0.9" height="15.0" fill="rgb(235,65,42)" rx="2" ry="2" />
+<text  x="49.61" y="287.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="101" width="0.9" height="15.0" fill="rgb(233,43,35)" rx="2" ry="2" />
+<text  x="13.92" y="111.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;false, false&gt;::realloc(void*, unsigned long, unsigned long, unsigned long)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1719.8" y="309" width="3.6" height="15.0" fill="rgb(214,92,6)" rx="2" ry="2" />
+<text  x="1722.76" y="319.5" ></text>
+</g>
+<g >
+<title>operator new(unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="181" width="0.9" height="15.0" fill="rgb(213,172,23)" rx="2" ry="2" />
+<text  x="13.92" y="191.5" ></text>
+</g>
+<g >
+<title>std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt;::vector(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="309" width="0.9" height="15.0" fill="rgb(231,156,22)" rx="2" ry="2" />
+<text  x="1617.50" y="319.5" ></text>
+</g>
+<g >
+<title>MemoryTracker::alloc(long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="133" width="0.9" height="15.0" fill="rgb(236,19,45)" rx="2" ry="2" />
+<text  x="1876.52" y="143.5" ></text>
+</g>
+<g >
+<title>TwoLevelHashTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;, 8ul&gt;::TwoLevelHashTable&lt;HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, HashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt; &gt;(HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, HashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt; const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="325" width="0.9" height="15.0" fill="rgb(235,130,41)" rx="2" ry="2" />
+<text  x="49.61" y="335.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="205.0" y="213" width="0.9" height="15.0" fill="rgb(237,91,40)" rx="2" ry="2" />
+<text  x="207.96" y="223.5" ></text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="208.6" y="117" width="0.9" height="15.0" fill="rgb(229,140,22)" rx="2" ry="2" />
+<text  x="211.62" y="127.5" ></text>
+</g>
+<g >
+<title>DB::ISimpleTransform::transform(DB::Chunk&amp;, DB::Chunk&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="437" width="0.9" height="15.0" fill="rgb(218,71,38)" rx="2" ry="2" />
+<text  x="13.92" y="447.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="375.2" y="165" width="0.9" height="15.0" fill="rgb(209,128,54)" rx="2" ry="2" />
+<text  x="378.20" y="175.5" ></text>
+</g>
+<g >
+<title>re2_st::Prog::Flatten()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="85.1" y="181" width="0.9" height="15.0" fill="rgb(219,178,13)" rx="2" ry="2" />
+<text  x="88.05" y="191.5" ></text>
+</g>
+<g >
+<title>MemoryTracker::alloc(long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="117" width="0.9" height="15.0" fill="rgb(206,173,10)" rx="2" ry="2" />
+<text  x="1876.52" y="127.5" ></text>
+</g>
+<g >
+<title>DB::QueryProfilerReal::signalHandler(int, siginfo_t*, void*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1878.1" y="453" width="0.9" height="15.0" fill="rgb(205,218,13)" rx="2" ry="2" />
+<text  x="1881.10" y="463.5" ></text>
+</g>
+<g >
+<title>DB::ExpressionActions::execute(DB::Block&amp;, unsigned long&amp;, bool) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1857.0" y="229" width="1.0" height="15.0" fill="rgb(207,15,20)" rx="2" ry="2" />
+<text  x="1860.05" y="239.5" ></text>
+</g>
+<g >
+<title>large_dalloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1619.1" y="293" width="0.9" height="15.0" fill="rgb(208,217,20)" rx="2" ry="2" />
+<text  x="1622.07" y="303.5" ></text>
+</g>
+<g >
+<title>DB::FunctionArrayIndex&lt;DB::HasAction, DB::NameHas&gt;::executeConst(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;)#/usr/bin/clickhouse (20 samples, 0.97%)</title><rect x="87.8" y="245" width="18.3" height="15.0" fill="rgb(219,100,16)" rx="2" ry="2" />
+<text  x="90.80" y="255.5" ></text>
+</g>
+<g >
+<title>bool DB::readFloatTextFastImpl&lt;double, bool&gt;(double&amp;, DB::ReadBuffer&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1860.7" y="501" width="0.9" height="15.0" fill="rgb(243,204,38)" rx="2" ry="2" />
+<text  x="1863.71" y="511.5" ></text>
+</g>
+<g >
+<title>DB::ConvertingAggregatedToChunksSource::generate()#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="357" width="3.7" height="15.0" fill="rgb(247,175,2)" rx="2" ry="2" />
+<text  x="1618.41" y="367.5" ></text>
+</g>
+<g >
+<title>large_palloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1404.9" y="213" width="0.9" height="15.0" fill="rgb(220,77,44)" rx="2" ry="2" />
+<text  x="1407.90" y="223.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeBaseSelectProcessor::readFromPart()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="341" width="0.9" height="15.0" fill="rgb(254,160,13)" rx="2" ry="2" />
+<text  x="1876.52" y="351.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="245" width="0.9" height="15.0" fill="rgb(247,204,33)" rx="2" ry="2" />
+<text  x="13.92" y="255.5" ></text>
+</g>
+<g >
+<title>operator delete[](void*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1613.6" y="245" width="0.9" height="15.0" fill="rgb(234,86,8)" rx="2" ry="2" />
+<text  x="1616.58" y="255.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="69" width="0.9" height="15.0" fill="rgb(253,79,30)" rx="2" ry="2" />
+<text  x="88.97" y="79.5" ></text>
+</g>
+<g >
+<title>DB::JoiningTransform::readExecute(DB::Chunk&amp;)#/usr/bin/clickhouse (115 samples, 5.60%)</title><rect x="1619.1" y="357" width="105.2" height="15.0" fill="rgb(224,60,13)" rx="2" ry="2" />
+<text  x="1622.07" y="367.5" >DB::JoiningT..</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (5 samples, 0.24%)</title><rect x="1397.6" y="261" width="4.6" height="15.0" fill="rgb(244,13,2)" rx="2" ry="2" />
+<text  x="1400.58" y="271.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="205.0" y="197" width="0.9" height="15.0" fill="rgb(217,33,11)" rx="2" ry="2" />
+<text  x="207.96" y="207.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="341" width="0.9" height="15.0" fill="rgb(232,34,25)" rx="2" ry="2" />
+<text  x="13.92" y="351.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="1860.7" y="485" width="0.9" height="15.0" fill="rgb(211,119,54)" rx="2" ry="2" />
+<text  x="1863.71" y="495.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1878.1" y="389" width="0.9" height="15.0" fill="rgb(213,30,2)" rx="2" ry="2" />
+<text  x="1881.10" y="399.5" ></text>
+</g>
+<g >
+<title># (6 samples, 0.29%)</title><rect x="1882.7" y="245" width="5.5" height="15.0" fill="rgb(225,40,10)" rx="2" ry="2" />
+<text  x="1885.68" y="255.5" ></text>
+</g>
+<g >
+<title>memcpy#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1720.7" y="293" width="2.7" height="15.0" fill="rgb(241,175,4)" rx="2" ry="2" />
+<text  x="1723.67" y="303.5" ></text>
+</g>
+<g >
+<title>DB::FillingRightJoinSideTransform::work()#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="50.3" y="389" width="1.8" height="15.0" fill="rgb(225,123,50)" rx="2" ry="2" />
+<text  x="53.27" y="399.5" ></text>
+</g>
+<g >
+<title>MemoryTracker::alloc(long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1612.7" y="245" width="0.9" height="15.0" fill="rgb(221,221,51)" rx="2" ry="2" />
+<text  x="1615.67" y="255.5" ></text>
+</g>
+<g >
+<title>re2_st::DFA::CachedState(int*, int, unsigned int)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="82.3" y="133" width="0.9" height="15.0" fill="rgb(216,75,14)" rx="2" ry="2" />
+<text  x="85.31" y="143.5" ></text>
+</g>
+<g >
+<title>DB::Block DB::Aggregator::prepareBlockAndFill&lt;DB::Block DB::Aggregator::convertOneBucketToBlock&lt;DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt; &gt;(DB::AggregatedDataVariants&amp;, DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;, DB::Arena*, bool, unsigned long) const::'lambda'(std::__1::vector&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;, std::__1::vector&lt;DB::PODArray&lt;char*, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;*, std::__1::allocator&lt;DB::PODArray&lt;char*, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;*&gt; &gt;&amp;, std::__1::vector&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;, bool)&gt;(DB::AggregatedDataVariants&amp;, bool, unsigned long, DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;&amp;) const#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="325" width="3.7" height="15.0" fill="rgb(244,94,23)" rx="2" ry="2" />
+<text  x="1618.41" y="335.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="117" width="0.9" height="15.0" fill="rgb(235,4,16)" rx="2" ry="2" />
+<text  x="89.88" y="127.5" ></text>
+</g>
+<g >
+<title>DB::DateTimeTransformImpl&lt;DB::DataTypeDateTime64, DB::DataTypeDateTime, DB::TransformDateTime64&lt;DB::ToStartOfDayImpl&gt; const&gt;::execute(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, DB::TransformDateTime64&lt;DB::ToStartOfDayImpl&gt; const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1857.0" y="149" width="1.0" height="15.0" fill="rgb(233,200,28)" rx="2" ry="2" />
+<text  x="1860.05" y="159.5" ></text>
+</g>
+<g >
+<title>re2_st::RE2::Match(re2_st::StringPiece const&amp;, unsigned long, unsigned long, re2_st::RE2::Anchor, re2_st::StringPiece*, int) const#/usr/bin/clickhouse (9 samples, 0.44%)</title><rect x="76.8" y="229" width="8.3" height="15.0" fill="rgb(208,41,38)" rx="2" ry="2" />
+<text  x="79.82" y="239.5" ></text>
+</g>
+<g >
+<title>re2_st::RE2::ReverseProg() const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="277" width="0.9" height="15.0" fill="rgb(224,17,16)" rx="2" ry="2" />
+<text  x="13.92" y="287.5" ></text>
+</g>
+<g >
+<title>simdjson::dom::document::allocate(unsigned long)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="373.4" y="229" width="3.6" height="15.0" fill="rgb(222,142,27)" rx="2" ry="2" />
+<text  x="376.37" y="239.5" ></text>
+</g>
+<g >
+<title>DB::ReplaceRegexpImpl&lt;false&gt;::processString(re2_st::StringPiece const&amp;, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;, unsigned long&amp;, re2_st::RE2&amp;, int, std::__1::vector&lt;std::__1::pair&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt; const&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="44.8" y="501" width="0.9" height="15.0" fill="rgb(217,206,48)" rx="2" ry="2" />
+<text  x="47.78" y="511.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="84.1" y="165" width="1.0" height="15.0" fill="rgb(220,144,50)" rx="2" ry="2" />
+<text  x="87.14" y="175.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="10.0" y="501" width="0.9" height="15.0" fill="rgb(228,47,26)" rx="2" ry="2" />
+<text  x="13.00" y="511.5" ></text>
+</g>
+<g >
+<title>arena_extents_dirty_dalloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="205.0" y="229" width="0.9" height="15.0" fill="rgb(248,2,12)" rx="2" ry="2" />
+<text  x="207.96" y="239.5" ></text>
+</g>
+<g >
+<title>DB::CompressedReadBufferFromFile::nextImpl()#/usr/bin/clickhouse (53 samples, 2.58%)</title><rect x="1781.1" y="149" width="48.5" height="15.0" fill="rgb(220,204,3)" rx="2" ry="2" />
+<text  x="1784.08" y="159.5" >DB::..</text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1878.1" y="405" width="0.9" height="15.0" fill="rgb(211,13,10)" rx="2" ry="2" />
+<text  x="1881.10" y="415.5" ></text>
+</g>
+<g >
+<title>DB::ReadBuffer::readStrict(char*, unsigned long)#/usr/bin/clickhouse (53 samples, 2.58%)</title><rect x="1781.1" y="165" width="48.5" height="15.0" fill="rgb(211,50,20)" rx="2" ry="2" />
+<text  x="1784.08" y="175.5" >DB::..</text>
+</g>
+<g >
+<title>__libc_calloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="293" width="0.9" height="15.0" fill="rgb(221,38,31)" rx="2" ry="2" />
+<text  x="49.61" y="303.5" ></text>
+</g>
+<g >
+<title>large_ralloc#/usr/bin/clickhouse (28 samples, 1.36%)</title><rect x="1830.5" y="101" width="25.6" height="15.0" fill="rgb(205,77,24)" rx="2" ry="2" />
+<text  x="1833.51" y="111.5" >l..</text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="1878.1" y="469" width="0.9" height="15.0" fill="rgb(248,200,26)" rx="2" ry="2" />
+<text  x="1881.10" y="479.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1860.7" y="437" width="0.9" height="15.0" fill="rgb(248,200,48)" rx="2" ry="2" />
+<text  x="1863.71" y="447.5" ></text>
+</g>
+<g >
+<title>__clone#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1,980 samples, 96.40%)</title><rect x="45.7" y="501" width="1812.3" height="15.0" fill="rgb(253,186,2)" rx="2" ry="2" />
+<text  x="48.70" y="511.5" >__clone#/usr/lib/x86_64-linux-gnu/libc-2.31.so</text>
+</g>
+<g >
+<title>DB::DataTypeFactory::get(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="389" width="2.8" height="15.0" fill="rgb(210,105,8)" rx="2" ry="2" />
+<text  x="1882.93" y="399.5" ></text>
+</g>
+<g >
+<title>arena_extents_dirty_dalloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="101" width="0.9" height="15.0" fill="rgb(235,52,18)" rx="2" ry="2" />
+<text  x="88.97" y="111.5" ></text>
+</g>
+<g >
+<title>memcpy#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1616.3" y="245" width="0.9" height="15.0" fill="rgb(246,189,33)" rx="2" ry="2" />
+<text  x="1619.33" y="255.5" ></text>
+</g>
+<g >
+<title>DB::IExecutableFunction::executeWithoutLowCardinalityColumns(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, bool) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="373" width="0.9" height="15.0" fill="rgb(206,214,47)" rx="2" ry="2" />
+<text  x="13.92" y="383.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="205.0" y="181" width="0.9" height="15.0" fill="rgb(223,204,21)" rx="2" ry="2" />
+<text  x="207.96" y="191.5" ></text>
+</g>
+<g >
+<title>DB::ParserNestedTable::parseImpl(DB::IParser::Pos&amp;, std::__1::shared_ptr&lt;DB::IAST&gt;&amp;, DB::Expected&amp;)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="293" width="2.8" height="15.0" fill="rgb(246,34,41)" rx="2" ry="2" />
+<text  x="1882.93" y="303.5" ></text>
+</g>
+<g >
+<title>simdjson::haswell::dom_parser_implementation::stage1(unsigned char const*, unsigned long, simdjson::stage1_mode)#/usr/bin/clickhouse (402 samples, 19.57%)</title><rect x="377.9" y="213" width="368.0" height="15.0" fill="rgb(225,105,37)" rx="2" ry="2" />
+<text  x="380.95" y="223.5" >simdjson::haswell::dom_parser_implementation::sta..</text>
+</g>
+<g >
+<title>CurrentMemoryTracker::alloc(long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="373.4" y="213" width="0.9" height="15.0" fill="rgb(254,40,54)" rx="2" ry="2" />
+<text  x="376.37" y="223.5" ></text>
+</g>
+<g >
+<title>DB::ColumnString::insertDefault()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="39.3" y="501" width="0.9" height="15.0" fill="rgb(225,24,34)" rx="2" ry="2" />
+<text  x="42.29" y="511.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1860.7" y="421" width="0.9" height="15.0" fill="rgb(209,87,0)" rx="2" ry="2" />
+<text  x="1863.71" y="431.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1,708 samples, 83.15%)</title><rect x="52.1" y="357" width="1563.3" height="15.0" fill="rgb(251,170,2)" rx="2" ry="2" />
+<text  x="55.10" y="367.5" >#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>DB::MergeTreeBaseSelectProcessor::readFromPartImpl()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="325" width="0.9" height="15.0" fill="rgb(221,52,30)" rx="2" ry="2" />
+<text  x="1876.52" y="335.5" ></text>
+</g>
+<g >
+<title>DB::ExpressionActions::execute(DB::Block&amp;, unsigned long&amp;, bool) const#/usr/bin/clickhouse (1,706 samples, 83.06%)</title><rect x="53.9" y="341" width="1561.5" height="15.0" fill="rgb(244,2,24)" rx="2" ry="2" />
+<text  x="56.93" y="351.5" >DB::ExpressionActions::execute(DB::Block&amp;, unsigned long&amp;, bool) const#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>DB::MergeTreeBaseSelectProcessor::readFromPart()#/usr/bin/clickhouse (146 samples, 7.11%)</title><rect x="1724.3" y="325" width="133.7" height="15.0" fill="rgb(224,225,30)" rx="2" ry="2" />
+<text  x="1727.33" y="335.5" >DB::MergeTreeBas..</text>
+</g>
+<g >
+<title>Allocator&lt;false, false&gt;::free(void*, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="293" width="1.0" height="15.0" fill="rgb(221,135,40)" rx="2" ry="2" />
+<text  x="57.85" y="303.5" ></text>
+</g>
+<g >
+<title>DB::QueryProfilerReal::signalHandler(int, siginfo_t*, void*)#/usr/bin/clickhouse (11 samples, 0.54%)</title><rect x="29.2" y="485" width="10.1" height="15.0" fill="rgb(235,5,21)" rx="2" ry="2" />
+<text  x="32.22" y="495.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="149" width="0.9" height="15.0" fill="rgb(235,102,6)" rx="2" ry="2" />
+<text  x="52.36" y="159.5" ></text>
+</g>
+<g >
+<title>pthread_mutex_trylock#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="1861.6" y="501" width="0.9" height="15.0" fill="rgb(233,7,11)" rx="2" ry="2" />
+<text  x="1864.63" y="511.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="165" width="0.9" height="15.0" fill="rgb(205,62,15)" rx="2" ry="2" />
+<text  x="89.88" y="175.5" ></text>
+</g>
+<g >
+<title>DB::IExecutableFunction::execute(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, bool) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1857.0" y="213" width="1.0" height="15.0" fill="rgb(209,64,42)" rx="2" ry="2" />
+<text  x="1860.05" y="223.5" ></text>
+</g>
+<g >
+<title>tcache_bin_flush_small#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="213" width="0.9" height="15.0" fill="rgb(250,23,46)" rx="2" ry="2" />
+<text  x="1399.66" y="223.5" ></text>
+</g>
+<g >
+<title>arena_ralloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="261" width="0.9" height="15.0" fill="rgb(212,15,43)" rx="2" ry="2" />
+<text  x="52.36" y="271.5" ></text>
+</g>
+<g >
+<title>simdjson::haswell::dom_parser_implementation::stage1(unsigned char const*, unsigned long, simdjson::stage1_mode)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1864.4" y="501" width="1.8" height="15.0" fill="rgb(224,121,24)" rx="2" ry="2" />
+<text  x="1867.37" y="511.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="261" width="1.0" height="15.0" fill="rgb(231,218,44)" rx="2" ry="2" />
+<text  x="57.85" y="271.5" ></text>
+</g>
+<g >
+<title>bool DB::readFloatTextFastImpl&lt;double, bool&gt;(double&amp;, DB::ReadBuffer&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="109.8" y="245" width="1.8" height="15.0" fill="rgb(242,205,19)" rx="2" ry="2" />
+<text  x="112.77" y="255.5" ></text>
+</g>
+<g >
+<title>auto DB::Field::dispatch&lt;auto auto DB::applyVisitor&lt;DB::FieldVisitorAccurateEquals, DB::Field&amp;, DB::Field const&amp;&gt;(DB::FieldVisitorAccurateEquals&amp;&amp;, DB::Field&amp;, DB::Field const&amp;)::'lambda'(DB::FieldVisitorAccurateEquals&amp;)::operator()&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;(DB::FieldVisitorAccurateEquals&amp;) const::'lambda'(DB::FieldVisitorAccurateEquals&amp;), DB::Field const&amp;&gt;(DB::FieldVisitorAccurateEquals&amp;&amp;, DB::Field&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="104.3" y="213" width="1.8" height="15.0" fill="rgb(214,128,15)" rx="2" ry="2" />
+<text  x="107.27" y="223.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="181" width="0.9" height="15.0" fill="rgb(208,5,12)" rx="2" ry="2" />
+<text  x="1399.66" y="191.5" ></text>
+</g>
+<g >
+<title>large_ralloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="51.2" y="277" width="0.9" height="15.0" fill="rgb(208,135,22)" rx="2" ry="2" />
+<text  x="54.19" y="287.5" ></text>
+</g>
+<g >
+<title>DB::FunctionJSONHelpers::Executor&lt;DB::NameJSONExtractRaw, DB::JSONExtractRawImpl, DB::SimdJSONParser&gt;::run(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long)#/usr/bin/clickhouse (1,400 samples, 68.16%)</title><rect x="111.6" y="261" width="1281.4" height="15.0" fill="rgb(218,203,1)" rx="2" ry="2" />
+<text  x="114.60" y="271.5" >DB::FunctionJSONHelpers::Executor&lt;DB::NameJSONExtractRaw, DB::JSONExtractRawImpl, DB::SimdJSONParser&gt;::run(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::Col..</text>
+</g>
+<g >
+<title># (6 samples, 0.29%)</title><rect x="1882.7" y="293" width="5.5" height="15.0" fill="rgb(231,47,13)" rx="2" ry="2" />
+<text  x="1885.68" y="303.5" ></text>
+</g>
+<g >
+<title>large_palloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="197" width="0.9" height="15.0" fill="rgb(250,38,6)" rx="2" ry="2" />
+<text  x="89.88" y="207.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1401.2" y="245" width="1.0" height="15.0" fill="rgb(243,50,32)" rx="2" ry="2" />
+<text  x="1404.24" y="255.5" ></text>
+</g>
+<g >
+<title># (6 samples, 0.29%)</title><rect x="1882.7" y="261" width="5.5" height="15.0" fill="rgb(219,211,27)" rx="2" ry="2" />
+<text  x="1885.68" y="271.5" ></text>
+</g>
+<g >
+<title>__libc_realloc#/usr/bin/clickhouse (28 samples, 1.36%)</title><rect x="1830.5" y="133" width="25.6" height="15.0" fill="rgb(205,219,48)" rx="2" ry="2" />
+<text  x="1833.51" y="143.5" >_..</text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="10.9" y="37" width="0.9" height="15.0" fill="rgb(232,65,22)" rx="2" ry="2" />
+<text  x="13.92" y="47.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="374.3" y="133" width="0.9" height="15.0" fill="rgb(215,223,46)" rx="2" ry="2" />
+<text  x="377.28" y="143.5" ></text>
+</g>
+<g >
+<title>DB::Block::clear()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="325" width="1.0" height="15.0" fill="rgb(225,62,1)" rx="2" ry="2" />
+<text  x="57.85" y="335.5" ></text>
+</g>
+<g >
+<title>DB::ISerialization::deserializeBinaryBulkWithMultipleStreams(COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;&amp;, unsigned long, DB::ISerialization::DeserializeBinaryBulkSettings&amp;, std::__1::shared_ptr&lt;DB::ISerialization::DeserializeBinaryBulkState&gt;&amp;, std::__1::unordered_map&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const, COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt; &gt;*) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="229" width="0.9" height="15.0" fill="rgb(247,172,4)" rx="2" ry="2" />
+<text  x="1876.52" y="239.5" ></text>
+</g>
+<g >
+<title>StackTrace::StackTrace(ucontext_t const&amp;)#/usr/bin/clickhouse (6 samples, 0.29%)</title><rect x="1882.7" y="309" width="5.5" height="15.0" fill="rgb(243,54,10)" rx="2" ry="2" />
+<text  x="1885.68" y="319.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (33 samples, 1.61%)</title><rect x="57.6" y="277" width="30.2" height="15.0" fill="rgb(245,99,13)" rx="2" ry="2" />
+<text  x="60.59" y="287.5" >#/..</text>
+</g>
+<g >
+<title>DB::SourceWithProgress::work()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="405" width="0.9" height="15.0" fill="rgb(249,145,33)" rx="2" ry="2" />
+<text  x="1876.52" y="415.5" ></text>
+</g>
+<g >
+<title>malloc_default#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="376.1" y="213" width="0.9" height="15.0" fill="rgb(240,221,33)" rx="2" ry="2" />
+<text  x="379.11" y="223.5" ></text>
+</g>
+<g >
+<title>DB::StringEqualsImpl&lt;true&gt;::string_vector_constant(DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, unsigned long, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="106.1" y="245" width="1.8" height="15.0" fill="rgb(239,34,5)" rx="2" ry="2" />
+<text  x="109.11" y="255.5" ></text>
+</g>
+<g >
+<title>memcpy#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="51.2" y="261" width="0.9" height="15.0" fill="rgb(212,155,30)" rx="2" ry="2" />
+<text  x="54.19" y="271.5" ></text>
+</g>
+<g >
+<title>CurrentMemoryTracker::alloc(long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1405.8" y="245" width="0.9" height="15.0" fill="rgb(240,105,16)" rx="2" ry="2" />
+<text  x="1408.81" y="255.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="205.0" y="165" width="0.9" height="15.0" fill="rgb(208,160,47)" rx="2" ry="2" />
+<text  x="207.96" y="175.5" ></text>
+</g>
+<g >
+<title>void DB::Aggregator::convertToBlockImplFinal&lt;DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt; &gt;(DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;&amp;, std::__1::vector&lt;DB::IColumn*, std::__1::allocator&lt;DB::IColumn*&gt; &gt;, std::__1::vector&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;, DB::Arena*) const#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="293" width="3.7" height="15.0" fill="rgb(233,177,28)" rx="2" ry="2" />
+<text  x="1618.41" y="303.5" ></text>
+</g>
+<g >
+<title>COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; DB::ConvertThroughParsing&lt;DB::DataTypeString, DB::DataTypeNumber&lt;double&gt;, DB::NameToFloat64OrNull, (DB::ConvertFromStringExceptionMode)2, (DB::ConvertFromStringParsingMode)0&gt;::execute&lt;unsigned int&gt;(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, unsigned int)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="107.9" y="261" width="3.7" height="15.0" fill="rgb(232,78,2)" rx="2" ry="2" />
+<text  x="110.94" y="271.5" ></text>
+</g>
+<g >
+<title>DB::ColumnString::deserializeAndInsertFromArena(char const*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1616.3" y="261" width="0.9" height="15.0" fill="rgb(235,193,20)" rx="2" ry="2" />
+<text  x="1619.33" y="271.5" ></text>
+</g>
+<g >
+<title>DB::QueryProfilerReal::signalHandler(int, siginfo_t*, void*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1860.7" y="469" width="0.9" height="15.0" fill="rgb(228,2,36)" rx="2" ry="2" />
+<text  x="1863.71" y="479.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;false, false&gt;::free(void*, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1619.1" y="309" width="0.9" height="15.0" fill="rgb(223,68,44)" rx="2" ry="2" />
+<text  x="1622.07" y="319.5" ></text>
+</g>
+<g >
+<title>auto DB::Field::dispatch&lt;auto DB::applyVisitor&lt;DB::FieldVisitorAccurateEquals, DB::Field&amp;, DB::Field const&amp;&gt;(DB::FieldVisitorAccurateEquals&amp;&amp;, DB::Field&amp;, DB::Field const&amp;)::'lambda'(DB::FieldVisitorAccurateEquals&amp;), DB::Field&amp;&gt;(DB::FieldVisitorAccurateEquals&amp;&amp;, DB::Field&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="104.3" y="229" width="1.8" height="15.0" fill="rgb(239,39,41)" rx="2" ry="2" />
+<text  x="107.27" y="239.5" ></text>
+</g>
+<g >
+<title>start_thread#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="1873.5" y="501" width="0.9" height="15.0" fill="rgb(242,215,13)" rx="2" ry="2" />
+<text  x="1876.52" y="511.5" ></text>
+</g>
+<g >
+<title>DB::tryParseQuery(DB::IParser&amp;, char const*&amp;, char const*, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;&amp;, bool, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, bool, unsigned long, unsigned long)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="357" width="2.8" height="15.0" fill="rgb(244,110,6)" rx="2" ry="2" />
+<text  x="1882.93" y="367.5" ></text>
+</g>
+<g >
+<title>DB::ISource::work()#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="389" width="3.7" height="15.0" fill="rgb(252,101,5)" rx="2" ry="2" />
+<text  x="1618.41" y="399.5" ></text>
+</g>
+<g >
+<title>std::__1::__hash_const_iterator&lt;std::__1::__hash_node&lt;std::__1::__hash_value_type&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, unsigned long&gt;, void*&gt;*&gt; std::__1::__hash_table&lt;std::__1::__hash_value_type&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, unsigned long&gt;, std::__1::__unordered_map_hasher&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::__hash_value_type&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, unsigned long&gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, true&gt;, std::__1::__unordered_map_equal&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::__hash_value_type&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, unsigned long&gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, true&gt;, std::__1::allocator&lt;std::__1::__hash_value_type&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, unsigned long&gt; &gt; &gt;::find&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1856.1" y="229" width="0.9" height="15.0" fill="rgb(219,124,37)" rx="2" ry="2" />
+<text  x="1859.13" y="239.5" ></text>
+</g>
+<g >
+<title>StackTrace::StackTrace()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1612.7" y="213" width="0.9" height="15.0" fill="rgb(217,37,42)" rx="2" ry="2" />
+<text  x="1615.67" y="223.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1873.5" y="69" width="0.9" height="15.0" fill="rgb(216,32,8)" rx="2" ry="2" />
+<text  x="1876.52" y="79.5" ></text>
+</g>
+<g >
+<title>re2_st::Prog::SearchDFA(re2_st::StringPiece const&amp;, re2_st::StringPiece const&amp;, re2_st::Prog::Anchor, re2_st::Prog::MatchKind, re2_st::StringPiece*, bool*, re2_st::SparseSetT&lt;void&gt;*)#/usr/bin/clickhouse (8 samples, 0.39%)</title><rect x="77.7" y="213" width="7.4" height="15.0" fill="rgb(216,145,36)" rx="2" ry="2" />
+<text  x="80.73" y="223.5" ></text>
+</g>
+<g >
+<title>DB::Aggregator::prepareVariantsToMerge(std::__1::vector&lt;std::__1::shared_ptr&lt;DB::AggregatedDataVariants&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;DB::AggregatedDataVariants&gt; &gt; &gt;&amp;) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="45.7" y="373" width="0.9" height="15.0" fill="rgb(251,130,22)" rx="2" ry="2" />
+<text  x="48.70" y="383.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="85" width="0.9" height="15.0" fill="rgb(247,214,4)" rx="2" ry="2" />
+<text  x="88.97" y="95.5" ></text>
+</g>
+<g >
+<title>DB::ReadBufferFromFileDescriptor::nextImpl()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1770.1" y="117" width="0.9" height="15.0" fill="rgb(235,55,52)" rx="2" ry="2" />
+<text  x="1773.10" y="127.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::DelayedStream::finalize(std::__1::vector&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;)#/usr/bin/clickhouse (144 samples, 7.01%)</title><rect x="1724.3" y="261" width="131.8" height="15.0" fill="rgb(237,24,21)" rx="2" ry="2" />
+<text  x="1727.33" y="271.5" >DB::MergeTreeRan..</text>
+</g>
+<g >
+<title>simdjson::dom::parser::parse_into_document(simdjson::dom::document&amp;, unsigned char const*, unsigned long, bool) &amp;#/usr/bin/clickhouse (1,297 samples, 63.15%)</title><rect x="205.9" y="245" width="1187.1" height="15.0" fill="rgb(239,150,20)" rx="2" ry="2" />
+<text  x="208.87" y="255.5" >simdjson::dom::parser::parse_into_document(simdjson::dom::document&amp;, unsigned char const*, unsigned long, bool) &amp;#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>DB::CompressedReadBufferBase::readCompressedData(unsigned long&amp;, unsigned long&amp;, bool)#/usr/bin/clickhouse (7 samples, 0.34%)</title><rect x="1781.1" y="133" width="6.4" height="15.0" fill="rgb(224,147,0)" rx="2" ry="2" />
+<text  x="1784.08" y="143.5" ></text>
+</g>
+<g >
+<title>arena_tcache_fill_small#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="261" width="0.9" height="15.0" fill="rgb(221,11,19)" rx="2" ry="2" />
+<text  x="49.61" y="271.5" ></text>
+</g>
+<g >
+<title>bool DB::FunctionJSONHelpers::performMoves&lt;DB::SimdJSONParser&gt;(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, unsigned long, DB::SimdJSONParser::Element const&amp;, std::__1::vector&lt;DB::FunctionJSONHelpers::Move, std::__1::allocator&lt;DB::FunctionJSONHelpers::Move&gt; &gt; const&amp;, DB::SimdJSONParser::Element&amp;, std::__1::basic_string_view&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1859.8" y="501" width="0.9" height="15.0" fill="rgb(233,179,26)" rx="2" ry="2" />
+<text  x="1862.80" y="511.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;true, true&gt;::realloc(void*, unsigned long, unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="51.2" y="325" width="0.9" height="15.0" fill="rgb(246,125,51)" rx="2" ry="2" />
+<text  x="54.19" y="335.5" ></text>
+</g>
+<g >
+<title>tcache_event_hard#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="149" width="0.9" height="15.0" fill="rgb(237,51,29)" rx="2" ry="2" />
+<text  x="13.92" y="159.5" ></text>
+</g>
+<g >
+<title>DB::IExecutableFunction::execute(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, bool) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="389" width="0.9" height="15.0" fill="rgb(226,181,10)" rx="2" ry="2" />
+<text  x="13.92" y="399.5" ></text>
+</g>
+<g >
+<title>DB::FunctionArrayIndex&lt;DB::HasAction, DB::NameHas&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (20 samples, 0.97%)</title><rect x="87.8" y="277" width="18.3" height="15.0" fill="rgb(233,60,16)" rx="2" ry="2" />
+<text  x="90.80" y="287.5" ></text>
+</g>
+<g >
+<title>memcpy#/usr/bin/clickhouse (28 samples, 1.36%)</title><rect x="1830.5" y="85" width="25.6" height="15.0" fill="rgb(223,141,27)" rx="2" ry="2" />
+<text  x="1833.51" y="95.5" >m..</text>
+</g>
+<g >
+<title>all (2,054 samples, 100%)</title><rect x="10.0" y="533" width="1880.0" height="15.0" fill="rgb(244,40,5)" rx="2" ry="2" />
+<text  x="13.00" y="543.5" ></text>
+</g>
+<g >
+<title>DB::FunctionToExecutableFunctionAdaptor::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="357" width="0.9" height="15.0" fill="rgb(209,66,38)" rx="2" ry="2" />
+<text  x="13.92" y="367.5" ></text>
+</g>
+<g >
+<title>DB::ColumnString::~ColumnString()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="309" width="1.0" height="15.0" fill="rgb(248,98,5)" rx="2" ry="2" />
+<text  x="57.85" y="319.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeRangeReader::read(unsigned long, std::__1::deque&lt;DB::MarkRange, std::__1::allocator&lt;DB::MarkRange&gt; &gt;&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1856.1" y="277" width="1.9" height="15.0" fill="rgb(233,165,43)" rx="2" ry="2" />
+<text  x="1859.13" y="287.5" ></text>
+</g>
+<g >
+<title>CityHash_v1_0_2::CityHash128(char const*, unsigned long)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1781.1" y="117" width="1.8" height="15.0" fill="rgb(245,130,50)" rx="2" ry="2" />
+<text  x="1784.08" y="127.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="245" width="1.0" height="15.0" fill="rgb(226,45,13)" rx="2" ry="2" />
+<text  x="57.85" y="255.5" ></text>
+</g>
+<g >
+<title>DB::JSONExtractRawImpl&lt;DB::SimdJSONParser&gt;::traverse(DB::SimdJSONParser::Element const&amp;, DB::WriteBuffer&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="122.6" y="229" width="1.8" height="15.0" fill="rgb(244,213,36)" rx="2" ry="2" />
+<text  x="125.58" y="239.5" ></text>
+</g>
+<g >
+<title>DB::ISource::tryGenerate()#/usr/bin/clickhouse (146 samples, 7.11%)</title><rect x="1724.3" y="357" width="133.7" height="15.0" fill="rgb(245,80,45)" rx="2" ry="2" />
+<text  x="1727.33" y="367.5" >DB::ISource::try..</text>
+</g>
+<g >
+<title>DB::ColumnString::replicate(DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;) const#/usr/bin/clickhouse (111 samples, 5.40%)</title><rect x="1621.8" y="325" width="101.6" height="15.0" fill="rgb(253,97,26)" rx="2" ry="2" />
+<text  x="1624.82" y="335.5" >DB::ColumnSt..</text>
+</g>
+<g >
+<title>DB::AggregatedDataVariants::convertToTwoLevel()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="45.7" y="357" width="0.9" height="15.0" fill="rgb(228,165,3)" rx="2" ry="2" />
+<text  x="48.70" y="367.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1860.7" y="389" width="0.9" height="15.0" fill="rgb(228,94,8)" rx="2" ry="2" />
+<text  x="1863.71" y="399.5" ></text>
+</g>
+<g >
+<title>memcpy#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="743.1" y="197" width="2.8" height="15.0" fill="rgb(212,6,31)" rx="2" ry="2" />
+<text  x="746.15" y="207.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1,980 samples, 96.40%)</title><rect x="45.7" y="405" width="1812.3" height="15.0" fill="rgb(246,177,43)" rx="2" ry="2" />
+<text  x="48.70" y="415.5" >#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>re2_st::Prog::Optimize()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="197" width="0.9" height="15.0" fill="rgb(218,143,5)" rx="2" ry="2" />
+<text  x="13.92" y="207.5" ></text>
+</g>
+<g >
+<title>tcache_bin_flush_small#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="133" width="0.9" height="15.0" fill="rgb(245,163,54)" rx="2" ry="2" />
+<text  x="13.92" y="143.5" ></text>
+</g>
+<g >
+<title>arena_ralloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1719.8" y="277" width="0.9" height="15.0" fill="rgb(253,117,2)" rx="2" ry="2" />
+<text  x="1722.76" y="287.5" ></text>
+</g>
+<g >
+<title>DB::IExecutableFunction::execute(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, bool) const#/usr/bin/clickhouse (1,703 samples, 82.91%)</title><rect x="56.7" y="325" width="1558.7" height="15.0" fill="rgb(242,227,42)" rx="2" ry="2" />
+<text  x="59.68" y="335.5" >DB::IExecutableFunction::execute(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, bool) const#/usr/bi..</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="229" width="0.9" height="15.0" fill="rgb(210,141,34)" rx="2" ry="2" />
+<text  x="49.61" y="239.5" ></text>
+</g>
+<g >
+<title>HashTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, DB::RowRefList, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, HashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;::resize(unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="51.2" y="341" width="0.9" height="15.0" fill="rgb(212,61,22)" rx="2" ry="2" />
+<text  x="54.19" y="351.5" ></text>
+</g>
+<g >
+<title>DB::QueryProfilerReal::signalHandler(int, siginfo_t*, void*)#/usr/bin/clickhouse (6 samples, 0.29%)</title><rect x="1882.7" y="325" width="5.5" height="15.0" fill="rgb(250,83,9)" rx="2" ry="2" />
+<text  x="1885.68" y="335.5" ></text>
+</g>
+<g >
+<title>__madvise#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="374.3" y="117" width="0.9" height="15.0" fill="rgb(253,71,11)" rx="2" ry="2" />
+<text  x="377.28" y="127.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="374.3" y="165" width="0.9" height="15.0" fill="rgb(214,202,21)" rx="2" ry="2" />
+<text  x="377.28" y="175.5" ></text>
+</g>
+<g >
+<title>DB::IParserBase::parse(DB::IParser::Pos&amp;, std::__1::shared_ptr&lt;DB::IAST&gt;&amp;, DB::Expected&amp;)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="309" width="2.8" height="15.0" fill="rgb(227,132,19)" rx="2" ry="2" />
+<text  x="1882.93" y="319.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="197" width="0.9" height="15.0" fill="rgb(209,150,40)" rx="2" ry="2" />
+<text  x="1399.66" y="207.5" ></text>
+</g>
+<g >
+<title>DB::FunctionsLogicalDetail::FunctionAnyArityLogical&lt;DB::FunctionsLogicalDetail::OrImpl, DB::NameOr&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (5 samples, 0.24%)</title><rect x="1397.6" y="277" width="4.6" height="15.0" fill="rgb(216,161,29)" rx="2" ry="2" />
+<text  x="1400.58" y="287.5" ></text>
+</g>
+<g >
+<title>DB::ColumnString::insertDefault()#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="120.7" y="245" width="1.9" height="15.0" fill="rgb(235,199,38)" rx="2" ry="2" />
+<text  x="123.75" y="255.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="374.3" y="197" width="0.9" height="15.0" fill="rgb(232,204,17)" rx="2" ry="2" />
+<text  x="377.28" y="207.5" ></text>
+</g>
+<g >
+<title>MemoryTracker::alloc(long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1612.7" y="229" width="0.9" height="15.0" fill="rgb(220,6,44)" rx="2" ry="2" />
+<text  x="1615.67" y="239.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (45 samples, 2.19%)</title><rect x="1787.5" y="101" width="41.2" height="15.0" fill="rgb(232,95,50)" rx="2" ry="2" />
+<text  x="1790.49" y="111.5" >#/u..</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="165" width="0.9" height="15.0" fill="rgb(232,32,53)" rx="2" ry="2" />
+<text  x="1617.50" y="175.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libc-2.31.so (1 samples, 0.05%)</title><rect x="742.2" y="197" width="0.9" height="15.0" fill="rgb(217,214,35)" rx="2" ry="2" />
+<text  x="745.23" y="207.5" ></text>
+</g>
+<g >
+<title>arena_extent_alloc_large#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1404.9" y="197" width="0.9" height="15.0" fill="rgb(233,33,3)" rx="2" ry="2" />
+<text  x="1407.90" y="207.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="421" width="0.9" height="15.0" fill="rgb(217,52,20)" rx="2" ry="2" />
+<text  x="13.92" y="431.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="453" width="0.9" height="15.0" fill="rgb(222,69,43)" rx="2" ry="2" />
+<text  x="1876.52" y="463.5" ></text>
+</g>
+<g >
+<title>DB::ParserDataType::parseImpl(DB::IParser::Pos&amp;, std::__1::shared_ptr&lt;DB::IAST&gt;&amp;, DB::Expected&amp;)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="325" width="2.8" height="15.0" fill="rgb(216,161,11)" rx="2" ry="2" />
+<text  x="1882.93" y="335.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;true, true&gt;::allocNoTrack(unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="309" width="0.9" height="15.0" fill="rgb(235,24,45)" rx="2" ry="2" />
+<text  x="49.61" y="319.5" ></text>
+</g>
+<g >
+<title>extent_dalloc_wrapper#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="149" width="0.9" height="15.0" fill="rgb(223,10,45)" rx="2" ry="2" />
+<text  x="1399.66" y="159.5" ></text>
+</g>
+<g >
+<title>malloc_default#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="165" width="0.9" height="15.0" fill="rgb(211,53,1)" rx="2" ry="2" />
+<text  x="13.92" y="175.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1878.1" y="357" width="0.9" height="15.0" fill="rgb(221,118,6)" rx="2" ry="2" />
+<text  x="1881.10" y="367.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;false, false&gt;::free(void*, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1396.7" y="245" width="0.9" height="15.0" fill="rgb(237,83,27)" rx="2" ry="2" />
+<text  x="1399.66" y="255.5" ></text>
+</g>
+<g >
+<title>DB::Field::~Field()#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="42.0" y="501" width="2.8" height="15.0" fill="rgb(236,164,52)" rx="2" ry="2" />
+<text  x="45.04" y="511.5" ></text>
+</g>
+<g >
+<title>DB::ColumnVector&lt;StrongTypedef&lt;wide::integer&lt;128ul, unsigned int&gt;, DB::UUIDTag&gt; &gt;::insertFrom(DB::IColumn const&amp;, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1620.0" y="309" width="0.9" height="15.0" fill="rgb(231,83,29)" rx="2" ry="2" />
+<text  x="1622.99" y="319.5" ></text>
+</g>
+<g >
+<title>bool re2_st::DFA::InlinedSearchLoop&lt;true, false, true&gt;(re2_st::DFA::SearchParams*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="84.1" y="181" width="1.0" height="15.0" fill="rgb(205,109,22)" rx="2" ry="2" />
+<text  x="87.14" y="191.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;false, false&gt;::realloc(void*, unsigned long, unsigned long, unsigned long)#/usr/bin/clickhouse (28 samples, 1.36%)</title><rect x="1830.5" y="149" width="25.6" height="15.0" fill="rgb(220,136,13)" rx="2" ry="2" />
+<text  x="1833.51" y="159.5" >A..</text>
+</g>
+<g >
+<title>DB::ICompressionCodec::decompress(char const*, unsigned int, char*) const#/usr/bin/clickhouse (11 samples, 0.54%)</title><rect x="1771.0" y="149" width="10.1" height="15.0" fill="rgb(230,137,6)" rx="2" ry="2" />
+<text  x="1774.01" y="159.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeBaseSelectProcessor::generate()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="357" width="0.9" height="15.0" fill="rgb(211,13,32)" rx="2" ry="2" />
+<text  x="1876.52" y="367.5" ></text>
+</g>
+<g >
+<title>DB::MergeTreeBaseSelectProcessor::generate()#/usr/bin/clickhouse (146 samples, 7.11%)</title><rect x="1724.3" y="341" width="133.7" height="15.0" fill="rgb(211,110,3)" rx="2" ry="2" />
+<text  x="1727.33" y="351.5" >DB::MergeTreeBas..</text>
+</g>
+<g >
+<title>DB::MergeTreeReaderWide::readRows(unsigned long, bool, unsigned long, std::__1::vector&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="261" width="0.9" height="15.0" fill="rgb(243,146,12)" rx="2" ry="2" />
+<text  x="1876.52" y="271.5" ></text>
+</g>
+<g >
+<title>void DB::PODArrayBase&lt;8ul, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;::resize&lt;&gt;(unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.9" y="245" width="0.9" height="15.0" fill="rgb(234,34,0)" rx="2" ry="2" />
+<text  x="89.88" y="255.5" ></text>
+</g>
+<g >
+<title>DB::IExecutableFunction::executeWithoutLowCardinalityColumns(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long, bool) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1857.0" y="197" width="1.0" height="15.0" fill="rgb(235,38,33)" rx="2" ry="2" />
+<text  x="1860.05" y="207.5" ></text>
+</g>
+<g >
+<title>DB::ColumnConst::ColumnConst(COW&lt;DB::IColumn&gt;::immutable_ptr&lt;DB::IColumn&gt; const&amp;, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="55.8" y="309" width="0.9" height="15.0" fill="rgb(233,182,15)" rx="2" ry="2" />
+<text  x="58.76" y="319.5" ></text>
+</g>
+<g >
+<title>void boost::context::detail::fiber_entry&lt;boost::context::detail::fiber_record&lt;boost::context::fiber, FiberStack&amp;, DB::RemoteQueryExecutorRoutine&gt; &gt;(boost::context::detail::transfer_t)#/usr/bin/clickhouse (12 samples, 0.58%)</title><rect x="1878.1" y="501" width="11.0" height="15.0" fill="rgb(243,107,46)" rx="2" ry="2" />
+<text  x="1881.10" y="511.5" ></text>
+</g>
+<g >
+<title>DB::VolnitskyBase&lt;true, true, DB::StringSearcher&lt;true, true&gt; &gt;::VolnitskyBase(char const*, unsigned long, unsigned long)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1406.7" y="245" width="1.9" height="15.0" fill="rgb(213,225,5)" rx="2" ry="2" />
+<text  x="1409.73" y="255.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="374.3" y="181" width="0.9" height="15.0" fill="rgb(250,215,27)" rx="2" ry="2" />
+<text  x="377.28" y="191.5" ></text>
+</g>
+<g >
+<title>auto DB::Field::dispatch&lt;auto auto DB::applyVisitor&lt;DB::FieldVisitorAccurateEquals, DB::Field&amp;, DB::Field const&amp;&gt;(DB::FieldVisitorAccurateEquals&amp;&amp;, DB::Field&amp;, DB::Field const&amp;)::'lambda'(DB::FieldVisitorAccurateEquals&amp;)::operator()&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;(DB::FieldVisitorAccurateEquals&amp;) const::'lambda'(DB::FieldVisitorAccurateEquals&amp;), DB::Field const&amp;&gt;(DB::FieldVisitorAccurateEquals&amp;&amp;, DB::Field&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1858.0" y="501" width="1.8" height="15.0" fill="rgb(205,193,0)" rx="2" ry="2" />
+<text  x="1860.96" y="511.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="197" width="1.0" height="15.0" fill="rgb(210,24,26)" rx="2" ry="2" />
+<text  x="57.85" y="207.5" ></text>
+</g>
+<g >
+<title>malloc_default#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="86.0" y="149" width="0.9" height="15.0" fill="rgb(246,179,49)" rx="2" ry="2" />
+<text  x="88.97" y="159.5" ></text>
+</g>
+<g >
+<title>CurrentMemoryTracker::alloc(long)#/usr/bin/clickhouse (3 samples, 0.15%)</title><rect x="1879.9" y="213" width="2.8" height="15.0" fill="rgb(242,90,42)" rx="2" ry="2" />
+<text  x="1882.93" y="223.5" ></text>
+</g>
+<g >
+<title>void DB::Aggregator::convertToBlockImpl&lt;DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt; &gt;(DB::AggregationMethodSerialized&lt;TwoLevelHashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt;, HashMapTable&gt; &gt;&amp;, HashMapTable&lt;StringRef, HashMapCellWithSavedHash&lt;StringRef, char*, DefaultHash&lt;StringRef, void&gt;, HashTableNoState&gt;, DefaultHash&lt;StringRef, void&gt;, TwoLevelHashTableGrower&lt;8ul&gt;, Allocator&lt;true, true&gt; &gt;&amp;, std::__1::vector&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;, std::__1::vector&lt;DB::PODArray&lt;char*, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;*, std::__1::allocator&lt;DB::PODArray&lt;char*, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;*&gt; &gt;&amp;, std::__1::vector&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt;, std::__1::allocator&lt;COW&lt;DB::IColumn&gt;::mutable_ptr&lt;DB::IColumn&gt; &gt; &gt;&amp;, DB::Arena*, bool) const#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="1615.4" y="309" width="3.7" height="15.0" fill="rgb(236,175,47)" rx="2" ry="2" />
+<text  x="1618.41" y="319.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="1394.8" y="245" width="1.9" height="15.0" fill="rgb(207,110,10)" rx="2" ry="2" />
+<text  x="1397.83" y="255.5" ></text>
+</g>
+<g >
+<title>DB::FunctionDateOrDateTimeToSomething&lt;DB::DataTypeDateTime, DB::ToStartOfDayImpl&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1857.0" y="165" width="1.0" height="15.0" fill="rgb(224,165,54)" rx="2" ry="2" />
+<text  x="1860.05" y="175.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="54.8" y="229" width="1.0" height="15.0" fill="rgb(224,197,2)" rx="2" ry="2" />
+<text  x="57.85" y="239.5" ></text>
+</g>
+<g >
+<title>bool re2_st::DFA::InlinedSearchLoop&lt;false, false, true&gt;(re2_st::DFA::SearchParams*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="83.2" y="181" width="0.9" height="15.0" fill="rgb(205,99,9)" rx="2" ry="2" />
+<text  x="86.22" y="191.5" ></text>
+</g>
+<g >
+<title>pthread_mutex_trylock#/usr/lib/x86_64-linux-gnu/libpthread-2.31.so (1 samples, 0.05%)</title><rect x="205.0" y="149" width="0.9" height="15.0" fill="rgb(219,74,27)" rx="2" ry="2" />
+<text  x="207.96" y="159.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="197" width="0.9" height="15.0" fill="rgb(221,150,45)" rx="2" ry="2" />
+<text  x="52.36" y="207.5" ></text>
+</g>
+<g >
+<title>void std::__1::allocator_traits&lt;AllocatorWithMemoryTracking&lt;DB::Field&gt; &gt;::__destroy&lt;DB::Field&gt;(std::__1::integral_constant&lt;bool, false&gt;, AllocatorWithMemoryTracking&lt;DB::Field&gt;&amp;, DB::Field*)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1889.1" y="501" width="0.9" height="15.0" fill="rgb(229,63,40)" rx="2" ry="2" />
+<text  x="1892.08" y="511.5" ></text>
+</g>
+<g >
+<title>Allocator&lt;true, true&gt;::realloc(void*, unsigned long, unsigned long, unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="49.4" y="293" width="0.9" height="15.0" fill="rgb(237,77,37)" rx="2" ry="2" />
+<text  x="52.36" y="303.5" ></text>
+</g>
+<g >
+<title>DB::ISource::tryGenerate()#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1873.5" y="373" width="0.9" height="15.0" fill="rgb(247,38,51)" rx="2" ry="2" />
+<text  x="1876.52" y="383.5" ></text>
+</g>
+<g >
+<title>#/usr/lib/x86_64-linux-gnu/libc-2.31.so (2 samples, 0.10%)</title><rect x="1406.7" y="229" width="1.9" height="15.0" fill="rgb(215,228,26)" rx="2" ry="2" />
+<text  x="1409.73" y="239.5" ></text>
+</g>
+<g >
+<title>simdjson::haswell::dom_parser_implementation::stage2(simdjson::dom::document&amp;)#/usr/bin/clickhouse (8 samples, 0.39%)</title><rect x="1866.2" y="501" width="7.3" height="15.0" fill="rgb(227,62,12)" rx="2" ry="2" />
+<text  x="1869.20" y="511.5" ></text>
+</g>
+<g >
+<title>re2_st::RE2::RE2(re2_st::StringPiece const&amp;, re2_st::RE2::Options const&amp;)#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="85.1" y="245" width="1.8" height="15.0" fill="rgb(228,36,11)" rx="2" ry="2" />
+<text  x="88.05" y="255.5" ></text>
+</g>
+<g >
+<title>DB::ReplaceRegexpImpl&lt;false&gt;::vector(DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt; const&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, DB::PODArray&lt;char8_t, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;, DB::PODArray&lt;unsigned long, 4096ul, Allocator&lt;false, false&gt;, 15ul, 16ul&gt;&amp;)#/usr/bin/clickhouse (33 samples, 1.61%)</title><rect x="57.6" y="261" width="30.2" height="15.0" fill="rgb(250,197,44)" rx="2" ry="2" />
+<text  x="60.59" y="271.5" >DB..</text>
+</g>
+<g >
+<title>__libc_calloc#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="45.7" y="309" width="0.9" height="15.0" fill="rgb(234,52,51)" rx="2" ry="2" />
+<text  x="48.70" y="319.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1873.5" y="53" width="0.9" height="15.0" fill="rgb(251,184,49)" rx="2" ry="2" />
+<text  x="1876.52" y="63.5" ></text>
+</g>
+<g >
+<title>ThreadPoolImpl&lt;std::__1::thread&gt;::worker(std::__1::__list_iterator&lt;std::__1::thread, void*&gt;)#/usr/bin/clickhouse (1,980 samples, 96.40%)</title><rect x="45.7" y="453" width="1812.3" height="15.0" fill="rgb(252,50,15)" rx="2" ry="2" />
+<text  x="48.70" y="463.5" >ThreadPoolImpl&lt;std::__1::thread&gt;::worker(std::__1::__list_iterator&lt;std::__1::thread, void*&gt;)#/usr/bin/clickhouse</text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="501" width="0.9" height="15.0" fill="rgb(226,15,47)" rx="2" ry="2" />
+<text  x="13.92" y="511.5" ></text>
+</g>
+<g >
+<title>DB::ColumnString::operator[](unsigned long) const#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="101.5" y="229" width="1.9" height="15.0" fill="rgb(237,176,2)" rx="2" ry="2" />
+<text  x="104.53" y="239.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="375.2" y="149" width="0.9" height="15.0" fill="rgb(254,46,19)" rx="2" ry="2" />
+<text  x="378.20" y="159.5" ></text>
+</g>
+<g >
+<title>arena_tcache_fill_small#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="229" width="0.9" height="15.0" fill="rgb(220,43,47)" rx="2" ry="2" />
+<text  x="1617.50" y="239.5" ></text>
+</g>
+<g >
+<title>memcpy#/usr/bin/clickhouse (179 samples, 8.71%)</title><rect x="209.5" y="229" width="163.9" height="15.0" fill="rgb(238,104,0)" rx="2" ry="2" />
+<text  x="212.53" y="239.5" >memcpy#/usr/bin/click..</text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1860.7" y="405" width="0.9" height="15.0" fill="rgb(213,33,26)" rx="2" ry="2" />
+<text  x="1863.71" y="415.5" ></text>
+</g>
+<g >
+<title>DB::AggregatingTransform::consume(DB::Chunk)#/usr/bin/clickhouse (4 samples, 0.19%)</title><rect x="46.6" y="373" width="3.7" height="15.0" fill="rgb(250,20,39)" rx="2" ry="2" />
+<text  x="49.61" y="383.5" ></text>
+</g>
+<g >
+<title>memcpy#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1719.8" y="245" width="0.9" height="15.0" fill="rgb(253,224,54)" rx="2" ry="2" />
+<text  x="1722.76" y="255.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="46.6" y="197" width="0.9" height="15.0" fill="rgb(242,120,13)" rx="2" ry="2" />
+<text  x="49.61" y="207.5" ></text>
+</g>
+<g >
+<title>large_dalloc#/usr/bin/clickhouse (2 samples, 0.10%)</title><rect x="204.0" y="245" width="1.9" height="15.0" fill="rgb(240,13,8)" rx="2" ry="2" />
+<text  x="207.04" y="255.5" ></text>
+</g>
+<g >
+<title># (1 samples, 0.05%)</title><rect x="1878.1" y="421" width="0.9" height="15.0" fill="rgb(218,86,15)" rx="2" ry="2" />
+<text  x="1881.10" y="431.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="197" width="0.9" height="15.0" fill="rgb(237,96,11)" rx="2" ry="2" />
+<text  x="1617.50" y="207.5" ></text>
+</g>
+<g >
+<title>operator new(unsigned long)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1614.5" y="277" width="0.9" height="15.0" fill="rgb(238,106,48)" rx="2" ry="2" />
+<text  x="1617.50" y="287.5" ></text>
+</g>
+<g >
+<title>DB::ExpressionActions::execute(DB::Block&amp;, unsigned long&amp;, bool) const#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="10.9" y="405" width="0.9" height="15.0" fill="rgb(245,190,30)" rx="2" ry="2" />
+<text  x="13.92" y="415.5" ></text>
+</g>
+<g >
+<title>re2_st::DFA::Search(re2_st::StringPiece const&amp;, re2_st::StringPiece const&amp;, bool, bool, bool, bool*, char const**, re2_st::SparseSetT&lt;void&gt;*)#/usr/bin/clickhouse (7 samples, 0.34%)</title><rect x="78.6" y="197" width="6.5" height="15.0" fill="rgb(232,223,33)" rx="2" ry="2" />
+<text  x="81.65" y="207.5" ></text>
+</g>
+<g >
+<title>simdjson::haswell::dom_parser_implementation::parse(unsigned char const*, unsigned long, simdjson::dom::document&amp;)#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="1863.5" y="501" width="0.9" height="15.0" fill="rgb(254,117,53)" rx="2" ry="2" />
+<text  x="1866.46" y="511.5" ></text>
+</g>
+<g >
+<title>#/usr/bin/clickhouse (1 samples, 0.05%)</title><rect x="208.6" y="149" width="0.9" height="15.0" fill="rgb(205,121,0)" rx="2" ry="2" />
+<text  x="211.62" y="159.5" ></text>
+</g>
+</g>
+</svg>
