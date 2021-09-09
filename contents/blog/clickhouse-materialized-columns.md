@@ -15,7 +15,7 @@ One quite obscure feature of ClickHouse is Materialized Columns, which allows dy
 
 Consider the following schema:
 
-```SQL
+```sql
 CREATE TABLE events (
     uuid UUID,
     event VARCHAR,
@@ -33,7 +33,7 @@ This table can be used to store a lot of analytics data and is similar to what w
 
 If we wanted to query login page pageviews in August, the query would look like this:
 
-```SQL
+```sql
 SELECT count(*)
 FROM events
 WHERE event = '$pageview'
@@ -44,7 +44,7 @@ WHERE event = '$pageview'
 
 On a large test dataset this query takes a while complete, while without the url filter the query is almost instant. Adding even more filters just makes the query slower and slower. Let’s dig in why!
 
-Looking at flamegraphs
+## Looking at flamegraphs
 
 ClickHouse has great tools for introspecting queries. Looking at `system.query_log`  we can see that the query:
 
@@ -53,9 +53,7 @@ ClickHouse has great tools for introspecting queries. Looking at `system.query_l
 
 To dig even deeper, we can use clickhouse-flamegraph to peek into what the CPU is doing during query execution.
 
-
-![](../images/clickhouse-materialized-columns/query-json-extract.svg)
-
+[![Flamegraph](../images/blog/clickhouse-materialized-columns/query-json-extract-CPU.svg)](../images/blog/clickhouse-materialized-columns/query-json-extract-CPU.svg)
 
 From this we can see that the clickhouse node CPU is spending most of its time parsing JSON.
 
@@ -67,11 +65,11 @@ However, in this particular case it wouldn’t work because:
 2. This would complicate live data ingestion a lot, introducing new and exciting race conditions
 
 
-Enter materialized columns
+## Enter materialized columns
 
 A less known feature of ClickHouse is the concept of materialized columns. You can add one as follows:
 
-```SQL
+```sql
 ALTER TABLE events
 ADD COLUMN mat_$current_url
 VARCHAR MATERIALIZED JSONExtractString(properties_json, '$current_url')
@@ -81,13 +79,13 @@ This will create a new column that will be automatically filled for incoming dat
 
 Running the query again would immediately not yet speed up the query since historical data is unaffected. The way around this is running an [OPTIMIZE](https://clickhouse.tech/docs/en/sql-reference/statements/optimize/) command [1] :
 
-```SQL
+```sql
 OPTIMIZE TABLE events FINAL
 ```
 
 Running the updated query speeds things up significantly:
 
-```SQL
+```sql
 SELECT count(*)
 FROM events
 WHERE event = '$pageview'
@@ -104,7 +102,7 @@ Looking at `system.query_log`, the new query:
 The wins are even more magnified if more than one property filter is used at a time.
 
 
-Usage at PostHog
+## Usage at PostHog
 
 PostHog as an analytics tool allows users to slice and dice their data in many ways across huge time ranges and datasets. This also means that performance when investigating things is of key importance but also that we currently do nearly no preaggregation.
 
