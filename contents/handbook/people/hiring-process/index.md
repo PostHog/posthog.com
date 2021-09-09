@@ -15,7 +15,7 @@ Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity)
 
 The following page outline how we hire here at PostHog. 
 
-> This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring) and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
+> This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring), and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
 
 
 ### Deciding to hire
