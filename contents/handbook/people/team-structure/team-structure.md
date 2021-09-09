@@ -19,7 +19,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 - **[Core experience](core-experience)**
     - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
-    - [Paolo D'Amico](/handbook/company/team#paolo-damico-product-team) (Product Manager)
+    - [Paolo D'Amico](/handbook/company/team#paolo-damico-product) (Product Manager)
     - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
     - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
     - [Chris Clark](/handbook/company/team#chris-clark-product-designer) (Product Designer)
