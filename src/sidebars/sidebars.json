@@ -90,7 +90,7 @@
                     "url": "/handbook/company/branding"
                 },
                 {
-                    "name": "Team Structure",
+                    "name": "Team structure",
                     "url": "",
                     "children": [
                         {
@@ -115,7 +115,7 @@
                         },
                         {
                             "name": "Team Growth",
-                            "url": "/handbook/people/team-structure/growth-engineering"
+                            "url": "/handbook/people/team-structure/growth"
                         },
                         {
                             "name": "Team Platform",
