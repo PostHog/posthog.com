@@ -57,7 +57,7 @@ To dig even deeper, we can use clickhouse-flamegraph to peek into what the CPU i
 
 [![Flamegraph](../images/blog/clickhouse-materialized-columns/query-json-extract-CPU.svg)](../images/blog/clickhouse-materialized-columns/query-json-extract-CPU.svg)
 
-From this we can see that the clickhouse node CPU is spending most of its time parsing JSON.
+From this we can see that the ClickHouse server CPU is spending most of its time parsing JSON.
 
 The typical solution would be to extract $current_url to a separate column. This would get rid of the JSON parsing and reduce the amount of data read from disk.
 
@@ -79,7 +79,7 @@ VARCHAR MATERIALIZED JSONExtractString(properties_json, '$current_url')
 
 This will create a new column that will be automatically filled for incoming data, creating a new file on disk. The data is automatically filled during `INSERT` statements, so data ingestion does not need to change.
 
-The trade-off is more data being stored on disk. In practice clickhouse compresses data very well, making this a worthwhile trade-off. On our test dataset, mat_$current_url is only 1.5% the size of `properties_json` on disk with a 10x compression ratio. Other properties which have lower cardinality can achieve even better compression (we’ve seen up to 100x)!
+The trade-off is more data being stored on disk. In practice ClickHouse compresses data very well, making this a worthwhile trade-off. On our test dataset, mat_$current_url is only 1.5% the size of `properties_json` on disk with a 10x compression ratio. Other properties which have lower cardinality can achieve even better compression (we’ve seen up to 100x)!
 
 Just creating the column is not enough, since for old data queries would still resort to using a `JSONExtract`. For this reason, you want to backfill data. The easiest way currently is to run [OPTIMIZE](https://clickhouse.tech/docs/en/sql-reference/statements/optimize/) command:
 
