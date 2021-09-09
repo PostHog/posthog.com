@@ -8,9 +8,9 @@ Welcome to PostHog!
 
 Giving a new joiner a great onboarding experience is super important to us. We want new joiners to feel they’ve made the right decision to join us, and that they are excited and committed to what we’re doing as a company. 
 
-Our [team](https://posthog.com/handbook/company/team) is spread across the world, so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining. 
+Our [team](https://posthog.com/handbook/company/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining. 
 
-Below we are lining out some general steps for each new joiner's onboarding process. The people team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
+Below we are lining out some general steps for each new joiner's onboarding process. The People team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
 
 As always, this is a living document and it changes every now and then, so it's worth keeping an eye on this page. 
 
@@ -98,15 +98,15 @@ The below checklist is for the new team member to complete _themselves_ - make s
 *   [ ] New joiner announement: interview with Mo
 *   [ ] We also highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users - ask Paolo. 
 
-## Onboarding Buddy
+## Onboarding buddy
 
-Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. The onboarding buddy is usually a member of the team a new joiner is joining and they can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
+Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. The onboarding buddy is usually a member of the team a new joiner is joining - ideally the team lead - and they can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
 
 ### Guidance for onboarding buddies
 
 - Once we have decided which team a new joiner will join, Eltje will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
 - Eltje will intro the new joiner and the onboarding buddy via email, please say Hi and decide together where and when the in person onboarding will happen. 
- > In case any travel is needed for the in-person onboarding, please check our [Spending Money page](https://posthog.com/handbook/people/spending-money) and book your travel accordingly. _You don't need to let the people/ops team know, just use your Brex/Revolut card._
+ > In case any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let the people/ops team know, just use your Brex/Revolut card._
 - Please make sure you spend at least 3 days together, work through the first week onboarding list and spend time working on any role specific tasks that are outlined in the new joiners personal onboarding issue. 
 - You will remain the new joiners main point of contact for the first few weeks, please continue to check in with them at least once a week for the first month. 
 
