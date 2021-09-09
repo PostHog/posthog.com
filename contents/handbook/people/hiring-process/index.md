@@ -200,7 +200,7 @@ This day will be _the same_ task each time for a given role, to be shared with t
 
 There will also be someone having a casual chat with the candidate. This person is the bar-raiser. The bar-raiser is here to qualify that everyone is truly excited about the candidate and that they're an example of us believing in talent compounds. Everyone should still think this way - or they should be clear in why they don't feel like this as part of their feedback.
 
-Overall, the candidate should aim to spend at least 80% of their time and energy on the task and less than 20% on meeting people, as we will base our decision on the output of the. day. 
+Overall, the candidate should aim to spend at least 80% of their time and energy on the task and less than 20% on meeting people, as we will base our decision on the output of the day. 
 
 In advance of the SuperDay, we will need to do some additional prep to ensure that the candidate has a great experience:
 
