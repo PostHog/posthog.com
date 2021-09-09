@@ -70,7 +70,7 @@ We’re still an early stage company, and so is our product. We strongly value m
 - [ ] Add/remove from Slack `@` team name mentions (e.g. `@core-experience`)
 
 
-### Team Lead Checklist
+### Team Lead checklist
 - [ ] Onboarding 1:1 with new team member.
 - [ ] Add to stand-ups, planning sessions, and any other team rituals.
 - [ ] Update Slack channel description, and invite to Slack channel if needed.
