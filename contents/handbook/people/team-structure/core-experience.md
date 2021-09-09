@@ -14,7 +14,7 @@ is not called "Team App", but "Team Core Experience".
 
 Obviously one team can't do all of this alone. PostHog consists of multiple small teams who are specialised in various
 slices of the app, such as [Team Core Analytics](/handbook/people/team-structure/core-analytics) (analytic queries at scale), 
-[Team Growth](/handbook/people/team-structure/growth-engineering) (feature flags, AB testing), and 
+[Team Growth](/handbook/people/team-structure/growth-engineering) (experimentation, activation), and 
 [Team Platform](/handbook/people/team-structure/platform) (plugins, deployments). 
 
 In addition to working on features ourselves, Team Core Experience provides technical alignment to the rest of the 
@@ -41,7 +41,7 @@ With the work above, we aim to solve the following meta-goals:
 
 - Part of our vision: It should be unbelievably easy and intuitive for anyone to use PostHog to get answers to  questions they have, and even find the answers to questions they had not considered asking.
 
-- To make our tech worthy of the religious following that is emerging around PostHog.
+- To make our tech worthy of the fanatical following that is emerging around PostHog.
 - Build the next generation of engineers and engineering leaders, who would be running things when we are at 100 developers.
 - Remain a highly flexible team, ready to adapt to changing business requirements.
 - Be part of formalizing "the PostHog way", and writing a book about it.
@@ -49,7 +49,7 @@ With the work above, we aim to solve the following meta-goals:
 - Zero TypeScript errors, code covered by logic tests, all scenes in Storybook, etc.
 - To do a damn good job at all of the above.
 
-In short, if you want a crash course at how to build large and complicated webapps, at scale, while retaining a maintainable codebase and high customer satisfaction, and touch every part of the stack, this is the team to work with.
+In short, if you want a crash course at how to build large and complex webapps, at scale, while retaining a maintainable codebase and high customer satisfaction, and touch every part of the stack, this is the team to work with.
 
 
 
