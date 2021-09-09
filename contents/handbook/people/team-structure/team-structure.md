@@ -57,7 +57,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 # Organization changes
 
-We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see core values) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the small teams plane. To make the changes smoother for everyone, here’s the checklist we use:
+We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see [core values](/handbook/company/values)) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the [small teams](/handbook/people/team-structure/why-small-teams) plane. To make the changes smoother for everyone, here’s the checklist we use:
 
 - [ ] Discuss with relevant team leads (and/or managers if applicable).
 - [ ] Discuss with relevant team member(s).
@@ -72,5 +72,5 @@ We’re still an early stage company, and so is our product. We strongly value m
 
 ### Team Lead Checklist
 - [ ] Onboarding 1:1 with new team member.
-- [ ] Add to stand-ups, planning sessions & any other team rituals.
-- [ ] Update Slack channel description & invite to Slack channel if needed.
+- [ ] Add to stand-ups, planning sessions, and any other team rituals.
+- [ ] Update Slack channel description, and invite to Slack channel if needed.
