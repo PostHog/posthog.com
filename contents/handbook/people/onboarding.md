@@ -6,22 +6,17 @@ showTitle: true
 
 Welcome to PostHog! 
 
-Giving a new joiner a great experience is very important to us, especially given our remote nature. It is always easier to onboard someone while being physically in the same location, so we might to invest some extra time to make sure everyone has all the information and support they need during their first few weeks.  
+Giving a new joiner a great onboarding experience is super important to us. We want new joiners to feel they’ve made the right decision to join us, and that they are excited and committed to what we’re doing as a company. 
 
-We have members working all around the world, so their onboarding process may look a little different depending on where they are based and which team they are in. 
+Our [team](https://posthog.com/handbook/company/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining. 
 
-The people team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
+Below we are lining out some general steps for each new joiner's onboarding process. The People team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
 
 As always, this is a living document and it changes every now and then, so it's worth keeping an eye on this page. 
 
 ## Upon offer acceptance
 
 Eltje or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.
-
-### Everyone
-
-*   [ ] Confirm which team this person will be in - _Eltje_
-*   [ ] See if in-person onboarding is an option and book it. (People should book their own travel but Eltje to ask them for availability) - _Eltje_ 
 
 ### US team member checklist
 - [ ] Create a contract using the Google Docs templates for [CIIA](https://docs.google.com/document/d/1r7Xc1ALf-JKUrL3g_oyzaQ8H3SOuVchBpJrGp7TINdc/edit?usp=sharing) and [Offer Letter](https://docs.google.com/document/d/1ZzF5hbVmTmKIYKxW7JkXzrBFFNrztkcNvcdO643r6sY/edit?usp=sharing) in the Legal Docs shared drive 
@@ -40,8 +35,12 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 - [ ] Select for the contractor to be potentially allocated equity in the future (if this has been agreed)
 - [ ] Under 'Other Specifics' add the following as a special clause: _Contractor agrees to comply with any rules, policies and procedures set out in the Company Handbook, a copy of which is available on the Client's website. To the extent that there is any conflict between the terms of this Agreement and the Company Handbook, the terms which are more favorable to the Contractor shall prevail._
 
-## Two weeks before they join
+### Everyone
 
+*   [ ] Confirm which team this person will be in - _Eltje_
+*   [ ] See if in-person onboarding is an option and book it. (People should book their own travel but Eltje to ask them for availability) - _Eltje_ 
+
+## Two weeks before they join
 
 *   [ ] Send team member a link to the [Handbook](https://posthog.com/handbook) and a copy of this page so they can check everything has been done - _Eltje_  
 *   [ ] Create GSuite account for the team member - _Eltje_ 
@@ -81,11 +80,11 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Share user interview notes with them, found in [this doc](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). If the person is particularly interested in more historical context, here are the notes from [Q4-2020](https://docs.google.com/document/d/1gJlsUDrlW7ur8zT5scqRvXZhapm_0JdvKGiw68Iyx9E/edit), and [Q3-2020](https://docs.google.com/document/d/1vrwn-owF320otkm3oODCFjvqj7gptF6QaFFO6v-_RhY/edit) - _Manager_
 *   [ ] Tell Mo that they're new to the team so he can schedule their intro interviews - _Anyone_
 
-
 ## During their first week
 
 The below checklist is for the new team member to complete _themselves_ - make sure this is shared with them on their first day. 
 
+*   [ ] Meet in person with your onboarding buddy
 *   [ ] Read the ‘[Getting started](https://posthog.com/handbook/getting-started/start-here)’ and ‘[How we work section](https://posthog.com/handbook/company/culture)’ of the Handbook carefully
 *   [ ] [Book time](https://posthog.com/handbook/getting-started/meetings) with relevant team members - we encourage you to do as many of these intros as possible to get to know everyone!
 *   [ ] Join CharlieHR and fill in your profile (including payroll details, contact details, emergency contacts and upload a picture of your passport)
@@ -98,6 +97,18 @@ The below checklist is for the new team member to complete _themselves_ - make s
 *   [ ] Send Lottie a picture of you. Once you get a pixelated version back, add yourself to the [team page](https://posthog.com/handbook/company/team)
 *   [ ] New joiner announement: interview with Mo
 *   [ ] We also highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users - ask Paolo. 
+
+## Onboarding buddy
+
+Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. The onboarding buddy is usually a member of the team a new joiner is joining - ideally the team lead - and they can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
+
+### Guidance for onboarding buddies
+
+- Once we have decided which team a new joiner will join, Eltje will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
+- Eltje will intro the new joiner and the onboarding buddy via email, please say Hi and decide together where and when the in person onboarding will happen. 
+ > In case any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let the people/ops team know, just use your Brex/Revolut card._
+- Please make sure you spend at least 3 days together, work through the first week onboarding list and spend time working on any role specific tasks that are outlined in the new joiners personal onboarding issue. 
+- You will remain the new joiners main point of contact for the first few weeks, please continue to check in with them at least once a week for the first month. 
 
 ### Additional access
 
