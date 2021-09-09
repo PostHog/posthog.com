@@ -12,7 +12,7 @@ It all started with the world map.
 
 As the story unfolds, it's October 2020. We follow a group of 9 engineers, hot off the heels of implementing Clickhouse support, as they brave the pandemic, and gather at a company retreat in Italy. The company is not even a year old, and while nobody is terribly sure what's going to happen next, there's contagious optimism in the air.
 
-After a session where we [formalise our values](/handbook/company/values) ("we haven't built our defining feature yet"), it's time to discuss what defining features to build next. 
+After a session where we [formalize our values](/handbook/company/values) ("we haven't built our defining feature yet"), it's time to discuss what defining features to build next. 
 
 Literally next, in the next hour.
 
@@ -24,7 +24,7 @@ You see, I've been dogfooding PostHog on a personal site, and the only thing I m
 
 ![The World Map, as Google sees it](https://www.klipfolio.com/sites/default/files/gallery/klip-template/where-is-organic-traffic-coming-from.png)
 
-The map visualisation is the easy part. The hard part is getting the data that feeds it. Since not everyone wants IP geolocation, and there are many different providers of such services, I immediately think of generic plugins that would augment your events.
+The map visualization is the easy part. The hard part is getting the data that feeds it. Since not everyone wants IP geolocation, and there are many different providers of such services, I immediately think of generic plugins that would augment your events.
 
 The idea gathers support.
 
