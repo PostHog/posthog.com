@@ -74,14 +74,17 @@ There are 3 access levels in PostHog, each with more privileges than the one bel
 
 2. **Administrator** – elevated level, like Member plus:
   - can always create and delete projects
-  - cam manage access levels of other members
-  - can add and remove other members from projects (if per-project access mode enabled)
-  - can remove other members from the organization
+  - can change project and organization settings
+  - cam manage access levels of other members (except the Owner)
+  - can add and remove lower-level members from projects (if per-project access mode enabled)
+  - can remove other members from the organization (except the Owner)
 
 3. **Owner** – unique top level, like Administrator plus:
   - can delete the organization
   - cannot leave the organization
-  - can pass ownership to someone else, ridding themselves of it
+  - can pass ownership to someone else (downgrading themselves to Administrator in the process)
+
+Access levels can be viewed and changed in Members section of organization settings (and project settings if [Per-project access](#per-project-access) is enabled).
 
 ### Per-project access
 
@@ -91,3 +94,5 @@ With **Per-project access** enabled, nothing changes for organization members at
 Access to each project can then be granted individually only for members who need it, in project settings.
 
 In this mode you can also grant members project-specific access level that is _above_ their organization-wide one. In such case they will have privileges of the higher level, but only for that specific project.
+
+> **Note:** Per-project access belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://posthog.com/pricing) or [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) for a self-hosted license.
