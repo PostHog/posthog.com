@@ -1,5 +1,5 @@
 ---
-title: Team Structure
+title: Team structure
 sidebar: Handbook
 showTitle: true
 hideAnchor: true

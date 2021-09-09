@@ -90,7 +90,7 @@
                     "url": "/handbook/company/branding"
                 },
                 {
-                    "name": "Team Structure",
+                    "name": "Team structure",
                     "url": "",
                     "children": [
                         {
@@ -98,7 +98,7 @@
                             "url": "/handbook/people/team-structure/team-structure"
                         },
                         {
-                            "name": "Why Small Teams",
+                            "name": "Why small seams",
                             "url": "/handbook/people/team-structure/why-small-teams"
                         },
                         {
@@ -115,11 +115,11 @@
                         },
                         {
                             "name": "Team Growth",
-                            "url": "/handbook/people/team-structure/growth-engineering"
+                            "url": "/handbook/people/team-structure/growth"
                         },
                         {
-                            "name": "Team Infrastructure & Deployments",
-                            "url": "/handbook/people/team-structure/infrastructure"
+                            "name": "Team Platform",
+                            "url": "/handbook/people/team-structure/platform"
                         },
                         {
                             "name": "Team Marketing",
