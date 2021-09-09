@@ -18,7 +18,7 @@ Otherwise you'll become the Owner of a new organization created just for you, ba
 
 To switch between organizations, to go the current organization's settings, or to create new projects, use the account dropdown on the right of the top bar.
 
-> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. For self-hosted PostHog, however, multiple organizations belong to our premium team-oriented offering. To use this feature, [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) for a self-hosted license.
+> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. For self-hosted PostHog, however, multiple organizations belong to our premium team-oriented offering. To use this feature, [contact us for a self-hosted license](https://posthog.com/pricing).
 
 ### Notifications
 
@@ -44,7 +44,7 @@ Every new organization (including the one created for you on account creation) c
 
 To switch between projects, to go their settings, or to create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
 
-> **Note:** Multiple projects within an organization belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://posthog.com/pricing) or [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) for a self-hosted license.
+> **Note:** Multiple projects within an organization belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](https://posthog.com/pricing).
 
 ### Ways of organizing projects
 
@@ -53,6 +53,8 @@ There are several practical ways of using projects:
 - A project per environment – you may want to test out analytics instrumentation in development or staging environments, while keeping that test data separate from production.
 - A project per product – if you have several unlinked products, it makes sense to reflect that separation in PostHog too.
 - A project per multiple products or the whole company – if your offerring is interlinked or you want to track the user journey holistically (e.g. how many company blog readers convert to paid product users), you can use a single project for all that.
+
+Which way is the best fit for you depends on the characteristics of your product and business.
 
 ## Permissioning
 
@@ -88,11 +90,13 @@ Access levels can be viewed and changed in Members section of organization setti
 
 ### Per-project access
 
-If you'd like to restrict access to data within the organization to only those who need it, you can easily do that by enabling setting **Per-project access** in organization settings.
+If you'd like to restrict access to data within the organization to only those who need it, we've got you covered.
 
-With **Per-project access** enabled, nothing changes for organization members at or above Administrator level, but those below – ordinary Members – lose default access to projects.
-Access to each project can then be granted individually only for members who need it, in project settings.
+**Per-project access** is a switch in organization settings that can be enabled (or disabled) at any time by organization-wide Administrators and the Owner.
+
+With **Per-project access** enabled, organization-wide Administrators and the Owner still have the same access, but those below – ordinary Members – _lose_ default access to projects.
+Access to each project must then be granted individually (e.g. only for members who need it) in project settings. This way project settings have a list of members too.
 
 In this mode you can also grant members project-specific access level that is _above_ their organization-wide one. In such case they will have privileges of the higher level, but only for that specific project.
 
-> **Note:** Per-project access belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://posthog.com/pricing) or [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) for a self-hosted license.
+> **Note:** Per-project access belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](https://posthog.com/pricing).
