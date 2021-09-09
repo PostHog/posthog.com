@@ -56,7 +56,7 @@ There are several practical ways of using projects:
 
 ## Permissioning
 
-Each organization member has an organization-wide access level dictating their ability to perform certain actions.
+Each organization member has an organization-wide [access level](#access-levels) dictating their ability to perform certain actions.
 
 By default all organization members have access to all its projects, at their organization-wide access level.
 This makes for the smoothest collaboration. However, if you require access to data to be more granular, see section [Per-project access](#per-project-access) below.
@@ -65,23 +65,23 @@ This makes for the smoothest collaboration. However, if you require access to da
 
 There are 3 access levels in PostHog, each with more privileges than the one below it. From the bottom up:
 
-1. **Member** – plain member:
+1. **Member** – default level:
   - has full access to analytics features
-  - can create projects, but not delete them
-  - can leave the organization/project
-  - can invite others, but not remove them
+  - can create projects (if per-project access not enabled), but not delete them 
+  - can leave the organization
+  - can invite new members to the organization, but not remove them
   - has access to billing management
 
-2. **Administrator** – high-level member, like Member plus:
-  - can delete projects
-  - cam manage access levels of all members besides themselves and the Owner
-  - can remove other members
+2. **Administrator** – elevated level, like Member plus:
+  - can always create and delete projects
+  - cam manage access levels of other members
+  - can add and remove other members from projects (if per-project access mode enabled)
+  - can remove other members from the organization
 
-3. **Owner** – unique top-level organization-only member, like Administrator plus:
-  - can delete the organization/project
-  - cannot leave the organization/project
-  - can pass ownership to someone else, ridding themselves of ownership
-
+3. **Owner** – unique top level, like Administrator plus:
+  - can delete the organization
+  - cannot leave the organization
+  - can pass ownership to someone else, ridding themselves of it
 
 ### Per-project access
 
