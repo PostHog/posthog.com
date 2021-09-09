@@ -19,7 +19,7 @@ The following details will help us triage incoming requests:
 1. What do you need designed and why?
 1. What is the deadline?
 
-**When looping in design, be sure to reference a GitHub issue so we have full context of the problem.** Threads should primarily be kept on GitHub. (If an Issue is time-sensitive, mention the Issue on Slack in `#design-feedback`.)
+**When looping in design, be sure to reference a GitHub issue so we have full context of the problem.** Threads should primarily be kept on GitHub. (If an Issue is time-sensitive, please be sure to add in the deadline date to the [PostHog Content Calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=482712771).)
 
 ### When to loop in design
 
