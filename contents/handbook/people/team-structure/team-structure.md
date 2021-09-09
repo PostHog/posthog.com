@@ -5,13 +5,13 @@ showTitle: true
 hideAnchor: true
 ---
 
-# Small Teams
+# Small teams
 
 We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/people/team-structure/why-small-teams).
 
 ## Engineering
 
-- **[Core analytics](core-analytics)**
+- **[Core Analytics](core-analytics)**
     - [Eric Duong](/handbook/people/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
     - [Neil Kakkar](/handbook/people/team#neil-kakkar-software-engineer) (Full Stack Engineer)
     - [Li Yi Yu](/handbook/people/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
@@ -19,7 +19,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-- **[Core experience](core-experience)**
+- **[Core Experience](core-experience)**
     - [Marius Andra](/handbook/people/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
     - [Paolo D'Amico](/handbook/people/team#paolo-damico-product-team) (Product Manager)
     - [Alex Kim](/handbook/people/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
@@ -59,11 +59,11 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see core values) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the small teams plane. To make the changes smoother for everyone, here’s the checklist we use:
 
-- [ ] Discuss with concerned team leads (and/or managers if applicable).
-- [ ] Discuss with concerned team member(s).
+- [ ] Discuss with relevant team leads (and/or managers if applicable).
+- [ ] Discuss with relevant team member(s).
 - [ ] Open a PR on `posthog.com` documenting the change on the handbook.
-    - Update the [Team Structure](/handbook/people/team-structure/team-structure) page.
-    - Update the relevant small teams pages'.
+    - Update the [Team structure](/handbook/people/team-structure/team-structure) page.
+    - Update the relevant small teams pages.
 - [ ] Let everyone else in the company know in the next PostHog News session.
 - [ ] Add/remove from relevant [Sentry teams](https://sentry.io/settings/posthog/teams/)
 - [ ] Add/remove from relevant [GitHub teams](https://github.com/orgs/PostHog/teams)
