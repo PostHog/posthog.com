@@ -18,6 +18,11 @@ As always, this is a living document and it changes every now and then, so it's 
 
 Eltje or Charles will create the contract needed, depending on who is joining. Only James and Tim are allowed to sign on behalf of the company.
 
+### Everyone
+
+*   [ ] Confirm which team this person will be in - _Eltje_
+*   [ ] See if in-person onboarding is an option and book it. (People should book their own travel but Eltje to ask them for availability) - _Eltje_ 
+
 ### US team member checklist
 - [ ] Create a contract using the Google Docs templates for [CIIA](https://docs.google.com/document/d/1r7Xc1ALf-JKUrL3g_oyzaQ8H3SOuVchBpJrGp7TINdc/edit?usp=sharing) and [Offer Letter](https://docs.google.com/document/d/1ZzF5hbVmTmKIYKxW7JkXzrBFFNrztkcNvcdO643r6sY/edit?usp=sharing) in the Legal Docs shared drive 
 - [ ] If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto as soon as possible, as there can be a long lead time. We use [Middesk Agent] to help with the registration, log in details are in the People Ops vault on 1Password. 
@@ -35,7 +40,8 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 - [ ] Select for the contractor to be potentially allocated equity in the future (if this has been agreed)
 - [ ] Under 'Other Specifics' add the following as a special clause: _Contractor agrees to comply with any rules, policies and procedures set out in the Company Handbook, a copy of which is available on the Client's website. To the extent that there is any conflict between the terms of this Agreement and the Company Handbook, the terms which are more favorable to the Contractor shall prevail._
 
-## The week before they join
+## Two weeks before they join
+
 
 *   [ ] Send team member a link to the [Handbook](https://posthog.com/handbook) and a copy of this page so they can check everything has been done - _Eltje_  
 *   [ ] Create GSuite account for the team member - _Eltje_ 
