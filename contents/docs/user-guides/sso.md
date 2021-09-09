@@ -123,6 +123,8 @@ When using SAML to authenticate your users in PostHog there are a few considerat
 4. When you enable or enforce SAML, any existing user passwords are preserved. This means if you ever want to go back (or something breaks down with your authentication), you can just stop enforcing SAML and you'll be able to log in with your existing credentials.
 
 ### Setting up SAML
+The first step to enable SAML in your installation is set the environment variable `SAML_AVAILABLE=1` and **redeploy**. SAML requires certain C dependencies that are installed at the OS-level, so the Docker image must be fully rebuilt and redeployed before SAML will be available. 
+
 For SAML to work your IdP and PostHog (SP) need to exchange information. To do this, you need to configure some settings in your IdP and on PostHog. Depending on your IdP you might need to pass PostHog information first, or the other way around. See details below.
 1. Make sure you have properly set up your `SITE_URL` [environment variable][env-vars] configuration.
 2. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/`)
