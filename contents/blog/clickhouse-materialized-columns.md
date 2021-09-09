@@ -11,7 +11,9 @@ featuredImage: ../images/blog/automating-software-company-github-actions.png
 featuredImageType: full
 ---
 
-One quite obscure feature of ClickHouse is Materialized Columns, which allows dynamically creating columns using an expression. In this post, I’ll walk through an example query optimization in which materialized columns work well.
+Did you know ClickHouse supports speeding up queries up to an order of magnitude by using Materialized Columns? This rarely-used feature can be used to create new columns on the fly from existing data, speeding up queries.
+
+In this post, I’ll walk through an example query optimization in which materialized columns are well suited.
 
 Consider the following schema:
 
@@ -67,7 +69,7 @@ However, in this particular case it wouldn’t work because:
 
 ## Enter materialized columns
 
-A less known feature of ClickHouse is the concept of materialized columns. You can add one as follows:
+Turns out, that's exactly the problems materialized columns can help solve.
 
 ```sql
 ALTER TABLE events
@@ -75,15 +77,17 @@ ADD COLUMN mat_$current_url
 VARCHAR MATERIALIZED JSONExtractString(properties_json, '$current_url')
 ```
 
-This will create a new column that will be automatically filled for incoming data. Under the hood ClickHouse stores the
+This will create a new column that will be automatically filled for incoming data, creating a new file on disk. The data is automatically filled during `INSERT` statements, so data ingestion does not need to change.
 
-Running the query again would immediately not yet speed up the query since historical data is unaffected. The way around this is running an [OPTIMIZE](https://clickhouse.tech/docs/en/sql-reference/statements/optimize/) command [1] :
+The trade-off being more data being stored on disk, however in practice clickhouse compresses lower cardinality very well. [2]
+
+Just creating the column is not enough, since for old data queries would still resort to using a `JSONExtract`. For this reason, you want to backfill data. The easiest way currently is to run [OPTIMIZE](https://clickhouse.tech/docs/en/sql-reference/statements/optimize/) command [1] :
 
 ```sql
 OPTIMIZE TABLE events FINAL
 ```
 
-Running the updated query speeds things up significantly:
+After backfilling, running the updated query speeds things up significantly:
 
 ```sql
 SELECT count(*)
@@ -96,8 +100,8 @@ WHERE event = '$pageview'
 
 Looking at `system.query_log`, the new query:
 
-- took 980ms (**71% improvement**)
-- read 14.36 GiB from disk (**81% improvement**) [2]
+- took 980ms (**71%/3.4x improvement**)
+- read 14.36 GiB from disk (**81%/5x improvement improvement**)
 
 The wins are even more magnified if more than one property filter is used at a time.
 
@@ -108,19 +112,15 @@ PostHog as an analytics tool allows users to slice and dice their data in many w
 
 Rather than materialize all columns, built a solution which looks at recent slow queries using `system.query_log`, determines which properties need materializing from there and backfills the data on a weekend. [3] [4]
 
-After implementing and materializing our top 100 columns we took a look at queries we consider slow (> 3 seconds long) and found on average a 55% improvement in query times with materialized columns, with the p99 being 25x improvement.
+After implementing and materializing our top 100 columns we took a look at queries we consider slow (> 3 seconds long) and found on average a 55% improvement in query times with materialized columns, with 99th percentile improvement being **25x**.
 
+As a product we're only scratching the surface of what ClickHouse can do to power product analytics. If you're interested in helping us with these kinds of problems, we're hiring!
 
-Interested on working on problems like this? We’re hiring!
 
 [1]: This is really expensive and there’s a feature request on [Github](https://github.com/ClickHouse/ClickHouse/issues/27730) for adding specific commands for this. As a work-around you can temporarily set the column to use `DEFAULT` instead and backfill part of the data using `ALTER TABLE events UPDATE mat_$current_url = mat_$current_url WHERE timestamp >= '2021-08-01'`
 
-[2]: Inspecting `system.column_parts`, mat_$current_url is only 1.5% the size of `properties_json` on disk with a 10x compression ratio. Other properties which have lower cardinality can achieve even better compression (we’ve seen up to 100x)!
+[2]: On our test dataset, mat_$current_url is only 1.5% the size of `properties_json` on disk with a 10x compression ratio. Other properties which have lower cardinality can achieve even better compression (we’ve seen up to 100x)!
 
 [3]: This works well because not every query needs optimizing and a small subset of properties make up most of what’s being queried.
 
 [4]: We also needed to rebuild parts of our query builder to query the right columns and avoid querying `properties`  if it wasn’t actually used.
-
-
-_Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
-
