@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 import downIcon from '../../images/icons/down-caret.svg'
 import { scrollWithOffset } from 'lib/utils'
+import Chip from 'components/Chip'
 
 const ButtonLink = ({
     section,
@@ -12,24 +12,16 @@ const ButtonLink = ({
     currentSection: string
     children: any
 }) => {
-    const baseClasses = 'leading-loose border-2 rounded-lg px-2 mx-1 my-1 text-sm transition-colors select-none'
-    const classList =
-        section == currentSection
-            ? baseClasses.concat(' bg-black text-white border-black hover:text-white')
-            : baseClasses.concat(
-                  ' bg-tan text-black text-opacity-50 hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 '
-              )
     const sectionSelector = `#${section}`
-
     const clickHandler = (e: { preventDefault: () => void }) => {
         e.preventDefault()
         scrollWithOffset(sectionSelector, -90)
     }
 
     return (
-        <Link to={sectionSelector} className={classList} onClick={clickHandler}>
+        <Chip active={section == currentSection} onClick={clickHandler}>
             <span>{children}</span>
-        </Link>
+        </Chip>
     )
 }
 
@@ -53,7 +45,7 @@ const inPageLinks: { label: string; section: string }[] = [
 ]
 
 export const ProductAnchorNavbar = () => {
-    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 mb-12 z-30 hidden lg:inline-flex'
+    const baseClasses = 'w-full space-x-2 mx-auto justify-center p-3 sticky top-2 mb-12 z-30 hidden lg:inline-flex'
 
     const [currentSection, setCurrentSection] = useState('platform')
 

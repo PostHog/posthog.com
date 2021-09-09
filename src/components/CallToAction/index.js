@@ -2,6 +2,23 @@ import React from 'react'
 import Link from 'components/Link'
 import cntl from 'cntl'
 
+const sizes = {
+    sm: {
+        text: 'small',
+        font: 'semibold',
+        px: '2',
+        py: '1',
+        border: '2',
+    },
+    md: {
+        text: '[17px]',
+        font: 'bold',
+        px: '5',
+        py: '2',
+        border: '3',
+    },
+}
+
 const primary = cntl`
     bg-primary
     dark:bg-primary-dark
@@ -42,25 +59,34 @@ const buttonTypes = {
     outline,
 }
 
-const button = (type = 'primary', width = 'auto', className = '') => cntl`
-    py-2
-    px-5
+const button = (type = 'primary', width = 'auto', className = '', size = 'md') => cntl`
     text-center
-    font-bold
-    text-[17px]
     select-none
-    border-3
     rounded-full
     inline-block
     w-${width}
     ${buttonTypes[type] || ''}
+    font-${sizes[size].font}
+    text-${sizes[size].text}
+    px-${sizes[size].px}
+    py-${sizes[size].py}
+    border-${sizes[size].border}
     ${className}
 `
 
-export const CallToAction = ({ type = 'primary', width = 'auto', href, to, onClick, children, className }) => {
+export const CallToAction = ({
+    type = 'primary',
+    width = 'auto',
+    size = 'md',
+    href,
+    to,
+    onClick,
+    children,
+    className,
+}) => {
     const url = to || href
     return (
-        <Link className={button(type, width, className)} onClick={onClick} to={url}>
+        <Link className={button(type, width, className, size)} onClick={onClick} to={url}>
             {children}
         </Link>
     )

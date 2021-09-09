@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useActions } from 'kea'
 import { Structure } from '../../Structure'
-import { CallToAction } from '../../CallToAction'
 import { CloudPlanBreakdown } from './CloudPlanBreakdown'
 import { SelfHostedPlanBreakdown } from './SelfHostedPlanBreakdown'
 import { pricingSliderLogic, PricingOptionType } from '../../PricingSlider/pricingSliderLogic'
 import { inverseCurve } from 'components/PricingSlider/LogSlider'
+import Chip from 'components/Chip'
 
 export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefault?: boolean }) => {
     const CLOUD_PLAN = 'cloud'
@@ -23,35 +23,21 @@ export const PricingTable = ({ showScaleByDefault = false }: { showScaleByDefaul
     return (
         <div className="pricing-hero relative ">
             <Structure.SectionFullWidth width="7xl" className="">
-                <div className="flex justify-center max-w-md mx-auto mb-12 md:mb-20">
-                    <CallToAction
-                        type="button"
-                        width="auto"
-                        icon="none"
-                        outline
+                <div className="flex justify-center space-x-2 max-w-md mx-auto mb-12 md:mb-20">
+                    <Chip
+                        size="md"
                         onClick={(e) => setPlanType(SELF_HOSTED_PLAN, 8000000)}
-                        className={
-                            currentPlanType === SELF_HOSTED_PLAN
-                                ? 'active'
-                                : 'select-none text-primary text-opacity-50 hover:text-primary hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-primary-dark'
-                        }
+                        active={currentPlanType === SELF_HOSTED_PLAN}
                     >
                         Self-hosted
-                    </CallToAction>
-                    <CallToAction
-                        type="button"
-                        width="auto"
-                        icon="none"
-                        outline
+                    </Chip>
+                    <Chip
+                        size="md"
                         onClick={(e) => setPlanType(CLOUD_PLAN, 10000)}
-                        className={
-                            currentPlanType === CLOUD_PLAN
-                                ? 'active  ml-2'
-                                : 'ml-2 select-none text-primary text-opacity-50 hover:text-primary hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
-                        }
+                        active={currentPlanType === CLOUD_PLAN}
                     >
                         Cloud
-                    </CallToAction>
+                    </Chip>
                 </div>
 
                 {currentPlanBreakdown}
