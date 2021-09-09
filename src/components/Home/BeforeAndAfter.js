@@ -57,25 +57,23 @@ export default function BeforeAndAfter() {
                         <span>PostHog</span>
                     </h4>
                 </div>
-                <div className={gradientWrapper}>
-                    <ReactCompareSlider
-                        handle={
-                            <ReactCompareSliderHandle
-                                buttonStyle={{ background: 'black', backdropFilter: 'none', width: 36, height: 36 }}
-                            />
-                        }
-                        itemOne={
-                            <div className="w-full">
-                                <CodeBlock code={exampleCode} language="sql" />
-                            </div>
-                        }
-                        itemTwo={
-                            <div className="w-full">
-                                <img width={1023} height={414} className="float-right" src={outlinedChart} />
-                            </div>
-                        }
-                    />
-                </div>
+                <ReactCompareSlider
+                    handle={
+                        <ReactCompareSliderHandle
+                            buttonStyle={{ background: 'black', backdropFilter: 'none', width: 36, height: 36 }}
+                        />
+                    }
+                    itemOne={
+                        <div className={`w-full ${gradientWrapper}`}>
+                            <CodeBlock code={exampleCode} language="sql" />
+                        </div>
+                    }
+                    itemTwo={
+                        <div className="w-full">
+                            <img width={1023} height={414} className="float-right" src={outlinedChart} />
+                        </div>
+                    }
+                />
             </div>
         </section>
     )
