@@ -57,7 +57,7 @@ To dig even deeper, we can use clickhouse-flamegraph to peek into what the CPU d
 
 From this we can see that the ClickHouse server CPU is spending most of its time parsing JSON.
 
-The typical solution would be to extract $current_url to a separate column. This would get rid of the JSON parsing and reduce the amount of data read from disk.
+The typical solution would be to extract `$current_url` to a separate column. This would get rid of the JSON parsing and reduce the amount of data read from disk.
 
 However, in this particular case it wouldn’t work because:
 
@@ -76,7 +76,7 @@ VARCHAR MATERIALIZED JSONExtractString(properties_json, '$current_url')
 
 The above query creates a new column that is automatically filled for incoming data, creating a new file on disk. The data is automatically filled during `INSERT` statements, so data ingestion doesn't need to change.
 
-The trade-off is more data being stored on disk. In practice, ClickHouse compresses data well, making this a worthwhile trade-off. On our test dataset, mat_$current_url is only 1.5% the size of `properties_json` on disk with a 10x compression ratio. Other properties which have lower cardinality can achieve even better compression (we’ve seen up to 100x)!
+The trade-off is more data being stored on disk. In practice, ClickHouse compresses data well, making this a worthwhile trade-off. On our test dataset, `mat_$current_url` is only 1.5% the size of `properties_json` on disk with a 10x compression ratio. Other properties which have lower cardinality can achieve even better compression (we’ve seen up to 100x)!
 
 Just creating the column is not enough though, since old data queries would still resort to using a `JSONExtract`. For this reason, you want to backfill data. The easiest way currently is to run the [OPTIMIZE](https://clickhouse.tech/docs/en/sql-reference/statements/optimize/) command:
 
@@ -137,7 +137,7 @@ Rather than materialize all columns, we built a solution that looks at recent sl
 
 You can find the code for this [here](https://github.com/PostHog/posthog/blob/c23704b3909ae8ebb827e6a43453e32b3d3487bd/ee/clickhouse/materialized_columns/analyze.py#L42-L119) and [here](https://github.com/PostHog/posthog/blob/c23704b3909ae8ebb827e6a43453e32b3d3487bd/ee/clickhouse/materialized_columns/columns.py#L37-L130).
 
-After materializing our top 100 properties and updating our queries, we analyzed slow queries (>3 seconds long). **The average a 55% improvement in our query times was 55%, with 99th percentile improvement being 25x.**
+After materializing our top 100 properties and updating our queries, we analyzed slow queries (>3 seconds long). **The average improvement in our query times was 55%, with 99th percentile improvement being 25x.**
 
 As a product, we're only scratching the surface of what ClickHouse can do to power product analytics. If you're interested in helping us with these kinds of problems, [we're hiring](https://posthog.com/careers)!
 
