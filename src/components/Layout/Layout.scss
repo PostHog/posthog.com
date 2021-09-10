@@ -633,25 +633,6 @@ td:last-child {
     margin-top: 96;
 }
 
-#logo {
-    padding-left: 40px;
-    overflow: hidden;
-    color: rgba(0, 0, 0, 0.85);
-    font-size: 18px;
-    line-height: 64px;
-    font-family: 'Good Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    font-variant: tabular-nums;
-    white-space: nowrap;
-    text-decoration: none;
-}
-
-#logo img {
-    vertical-align: top !important;
-    position: relative;
-    height: 32px;
-    margin: 0;
-}
-
 .logoWrapperSidebar {
     width: 300px;
     padding: 0 40px;
@@ -758,13 +739,6 @@ header {
     width: 100%;
     float: left;
     background-color: #ffffff;
-}
-
-#logo {
-    height: 32px;
-    width: 150px;
-    margin: 0;
-    padding: 0;
 }
 
 .sidebarWrapper {

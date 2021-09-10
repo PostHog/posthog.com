@@ -740,3 +740,8 @@
 [[redirects]]
     from = "/docs/user-guides/organizations"
     to = "/docs/user-guides/organizations-and-projects"
+
+# Added: 2021-09-08
+[[redirects]]
+    from = "/handbook/engineering/enterprise-prioritization"
+    to = "/handbook/engineering/scale-features-prioritization"
