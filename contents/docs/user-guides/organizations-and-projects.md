@@ -64,7 +64,7 @@ This makes for the smoothest collaboration. However, if you require access to da
 
 ### Access levels
 
-There are 3 access levels in PostHog, each with more privileges than the one below it. There can be any number of members at each level, except Owner, of which there can only be one in the organization.
+There are three access levels in PostHog, each with more privileges than the one below it. There can be any number of members at each level, except Owner, of which there can only be one in the organization.
 
 Levels from the bottom up:
 
