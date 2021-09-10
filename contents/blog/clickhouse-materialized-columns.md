@@ -117,7 +117,7 @@ Using `OPTIMIZE TABLE` after adding columns is often not a good idea, since it w
 
 As of writing, there's a feature request on [Github](https://github.com/ClickHouse/ClickHouse/issues/27730) for adding specific commands for materializing specific columns on ClickHouse data parts.
 
-Alternatively, `DEFAULT` type columns can be used for backfilling data.
+Here's how you can use `DEFAULT` type columns to backfill more efficiently:
 
 ```sql
 ALTER TABLE events
@@ -132,7 +132,7 @@ ALTER COLUMN mat_$current_url
 VARCHAR MATERIALIZED JSONExtractString(properties_json, '$current_url');
 ```
 
-This will compute and store only the `mat_$current_url` in our time range, making it much cheaper.
+This will compute and store only the `mat_$current_url` in our time range and is much more efficient than `OPTIMIZE TABLE`.
 
 Be aware though that this will:
 1. Break your `INSERT` statements if you don't specify column names explicitly
