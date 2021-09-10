@@ -110,14 +110,28 @@ The wins are even more magnified if more than one property filter is used at a t
 
 Using `OPTIMIZE TABLE` after adding columns is often not a good idea, since it will involve a lot of I/O as the whole table gets rewritten.
 
-As of writing, there's a a feature request on [Github](https://github.com/ClickHouse/ClickHouse/issues/27730) for adding specific commands for this.
+As of writing, there's a a feature request on [Github](https://github.com/ClickHouse/ClickHouse/issues/27730) for adding specific commands for materializing specific columns on ClickHouse data parts.
 
-As a work-around you can:
-1. Temporarily set the column to use `DEFAULT` instead of `MATERIALIZED`
-2. Backfill part of the data using `ALTER TABLE events UPDATE mat_$current_url = mat_$current_url WHERE timestamp >= '2021-08-01'`
-3. Set the column back to `MATERIALIZED`
+As an alternative, `DEFAULT` type columns can be used for backfilling data.
 
-Note that hacky work-around has [implications](https://clickhouse.tech/docs/en/sql-reference/statements/create/table/#materialized) for your `INSERT` and `SELECT *` queries.
+```sql
+ALTER TABLE events
+ALTER COLUMN mat_$current_url
+VARCHAR DEFAULT JSONExtractString(properties_json, '$current_url');
+
+ALTER TABLE events UPDATE mat_$current_url = mat_$current_url WHERE timestamp >= '2021-08-01';
+
+-- Wait for mutations to finish before running this
+ALTER TABLE events
+ALTER COLUMN mat_$current_url
+VARCHAR MATERIALIZED JSONExtractString(properties_json, '$current_url');
+```
+
+This will compute and store only the `mat_$current_url` in our time range, making it much cheaper.
+
+Be aware though, this will:
+1. break your `INSERT` statements if you don't specify column names explicitly
+2. alter behavior of `SELECT *` queries
 
 
 ## Usage at PostHog
