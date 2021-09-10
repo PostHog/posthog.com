@@ -4,13 +4,14 @@ sidebar: Docs
 showTitle: true
 ---
 
-For a user experience that scales for all your needs, PostHog implements the concepts of organizations and projects.
+PostHog gives you tools for data access control and logical separation of data: organizations and projects.
 
 ## Organizations
 
-An organization is the largest building block of PostHog's structure: it's made up of projects and has PostHog users as members.
+An organization is the largest building block of PostHog's structure: it's made up of projects and has PostHog users as members. 
+Each organization member has an organization-wide [access level](#access-levels) dictating their ability to perform certain actions.
 
-Most commonly a PostHog organization represents a real-world company. But this isn't a requirement and you are free to gather people any way you see fit.
+Most commonly a PostHog organization represents a real-world company, but this isn't a requirement and you are free to gather people any way you see fit.
 
 As a brand new PostHog user you'll always find yourself in a single organization upon account creation.
 If you've joined from an invite, that will be the organization you've been invited to.
@@ -58,14 +59,14 @@ Which way is the best fit for you depends on the characteristics of your product
 
 ## Permissioning
 
-Each organization member has an organization-wide [access level](#access-levels) dictating their ability to perform certain actions.
-
 By default all organization members have access to all its projects, at their organization-wide access level.
 This makes for the smoothest collaboration. However, if you require access to data to be more granular, see section [Per-project access](#per-project-access) below.
 
 ### Access levels
 
-There are 3 access levels in PostHog, each with more privileges than the one below it. From the bottom up:
+There are 3 access levels in PostHog, each with more privileges than the one below it. There can be any number of members at each level, except Owner, of which there can only be one in the organization.
+
+Levels from the bottom up:
 
 1. **Member** – default level:
   - has full access to analytics features
