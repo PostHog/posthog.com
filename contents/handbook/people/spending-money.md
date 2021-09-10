@@ -139,7 +139,7 @@ Individual software is down to your personal preference, and we encourage you to
 
 The PostHog platform wouldn't be possible without open-source software. We are standing on the shoulders of giants. As such, we feel it's important to support the software we benefit from through monetary contributions.
 
-To enable our team to do this we use [Open Collective](https://opencollective.com/) and have a budget of $100/month (**amount to be confirmed**) that can be contributed per team member.
+To enable our team to do this we use [Open Collective](https://opencollective.com/) and have a budget of $100/month that can be contributed per team member.
 
 To get setup with Open Collective get in touch with [Phil](phil-leggetter-developer-relations) who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make contributions as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
 
