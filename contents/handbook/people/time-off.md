@@ -6,18 +6,18 @@ showTitle: true
 
 At PostHog, we encourage everyone to take time off to recharge, spend time with loved ones, or explore new things.  
 
-We offer our team unlimited time off, but with an expectation that you take _at least 25 days off a year_, inclusive of national holidays. This is to make sure that people can take time off flexibly, whilst not feeling guilty about taking time off.
+We offer our team unlimited time off, but with an expectation that you take _at least 25 days off a year_, including national holidays. This is to make sure that people can take time off flexibly while not feeling guilty about being on vacation.
 
-> We have added the main national holidays to our team calendar, but this won't cover everyone. Please decide yourself if you want to take time off. If you do, please remember to book the day off in CharlieHR and hand over any work, if you work customer-facing.  
+> We have added some national holidays to our team calendar, but these won't cover everyone. Please decide yourself if you want to take those specific days off. If you do, please remember to book the day off in CharlieHR and hand over any work, especially if you are doing anything customer-facing.  
 
-The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The people team will pull reports on holiday usage every now and then, but _only_ to encourage people who haven't taken enough leave to do so.
+The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People team will look holiday usage occasionally but _only_ to encourage people who haven't taken enough time off to do so. The 25 days is a minimum, not a guide. 
 
 
 ## Permissionless time off
 
 You do not need to "clear" time off with your manager.
 
-We care about your results, not how long you work. Whilst no approval is needed, it shouldn't be at the expense of business getting done. For example, having the entire technical team off means we can't be responsive to community issues. Please coordinate with your team.
+We care about your results, not how long you work. Whilst no approval is needed, it shouldn't be completely at the expense of business getting done. For example, having the entire engineering team off means we can't be responsive to community issues. Please coordinate with your team.
 
 When you pick a date(s) to have off, please enter it into [CharlieHR](https://posthog.charliehr.com/) and it will be automatically approved and added to the team time off calendar. Remember to set an out of office message on your email.
 
