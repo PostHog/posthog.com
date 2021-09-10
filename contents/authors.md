@@ -56,4 +56,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/marcus-hyett/
     }
+  - {
+      handle: marius-andra,
+      name: Marius Andra,
+      role: Software Engineer,
+      image: https://avatars.githubusercontent.com/u/53387?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/mariusandra/
+    }
 ---
