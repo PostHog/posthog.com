@@ -16,7 +16,7 @@ export default function MainSidebar({ slug, menu, className, mainEl, height }) {
         <aside className={className}>
             <nav
                 ref={navEl}
-                style={{ height: navHeight || 'auto' }}
+                style={{ maxHeight: navHeight || 'auto' }}
                 className="w-[224px] overflow-y-auto overflow-x-hidden"
             >
                 <Menu menu={menu} slug={slug} topLevel />
