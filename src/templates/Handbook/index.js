@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
+import { useLocation } from '@reach/router'
+import { push as Menu } from 'react-burger-menu'
+import { animateScroll as scroll } from 'react-scroll'
 import { SEO } from 'components/seo'
 import Main from './Main'
 import ArticleFooter from './Footer'
 import MainSidebar from './MainSidebar'
-import { push as Menu } from 'react-burger-menu'
-import '../../styles/handbook.scss'
 import Layout from 'components/Layout'
 import Navigation from './Navigation'
+import '../../styles/handbook.scss'
 
 export default function Handbook({
     data: { post },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
 }) {
+    const { hash } = useLocation()
     const [menuOpen, setMenuOpen] = useState(false)
     const {
         body,
@@ -34,6 +37,12 @@ export default function Handbook({
     const handleMobileMenuClick = () => {
         setMenuOpen(!menuOpen)
     }
+
+    useEffect(() => {
+        if (hash) {
+            scroll.scrollMore(-50)
+        }
+    }, [])
 
     return (
         <>

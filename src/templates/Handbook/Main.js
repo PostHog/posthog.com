@@ -1,13 +1,13 @@
 import React, { useRef } from 'react'
 import MainSidebar from './MainSidebar'
-import InternalSidebar from './InternalSidebar'
 import SectionLinks from './SectionLinks'
-import SectionLink from './SectionLink'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { shortcodes } from '../../mdxGlobalComponents'
 import { CodeBlock } from 'components/CodeBlock'
+import StickySidebar from './StickySidebar'
+import MobileSidebar from './MobileSidebar'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -93,33 +93,15 @@ export default function Main({
                             </p>
                         )}
                     </section>
-                    {breakpoints.lg && showToc && (
-                        <InternalSidebar
-                            className="py-4 mb-10 border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b"
-                            tableOfContents={tableOfContents}
-                        />
-                    )}
+                    {breakpoints.lg && showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                     <section className="article-content">
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </section>
-                    {showToc && (
-                        <div
-                            style={{ height: 'calc(100% - 22vh)' }}
-                            className="border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark absolute bottom-0  right-0 hidden xl:flex justify-center"
-                        />
-                    )}
                 </article>
 
-                <div className="sticky top-20 flex-1">
-                    {!breakpoints.lg && showToc && (
-                        <InternalSidebar
-                            className="mt-[20vh] mb-14 hidden xl:block"
-                            tableOfContents={tableOfContents}
-                        />
-                    )}
-                </div>
+                {!breakpoints.lg && showToc && <StickySidebar tableOfContents={tableOfContents} />}
             </div>
             {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>
