@@ -4,17 +4,14 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog encourages its team to take time off to recharge.
+At PostHog, we encourage everyone to take time off to recharge, spend time with loved ones, or explore new things.  
 
-We have a flexible time off policy. Sometimes you need an extra day or two.
+We offer our team unlimited time off, but with an expectation that you take _at least 25 days off a year_, inclusive of national holidays. This is to make sure that people can take time off flexibly, whilst not feeling guilty about taking time off.
 
-We believe people need 20 days off a year plus a sprinkling of national holidays to have meaningful time with their families, to explore or just to relax.
+> We have added the main national holidays to our team calendar, but this won't cover everyone. Please decide yourself if you want to take time off. If you do, please remember to book the day off in CharlieHR and hand over any work, if you work customer-facing.  
 
-PostHog therefore offer unlimited time off, but with an expectation that you take _at least 25 days off a year_, inclusive of national holidays.
+The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The people team will pull reports on holiday usage every now and then, but _only_ to encourage people who haven't taken enough leave to do so.
 
-This is to make sure that people can take time off flexibly, whilst not feeling guilty about taking time off.
-
-The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done.
 
 ## Permissionless time off
 
