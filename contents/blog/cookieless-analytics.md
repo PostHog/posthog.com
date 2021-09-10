@@ -12,7 +12,7 @@ featuredImageType: full
 
 Google [says](https://blog.google/products/chrome/updated-timeline-privacy-sandbox-milestones/) they intend to deprecate the use of third-party cookies in 2023. But why is this important, and how will this affect product analytics?
 
-## What are 3rd party cookies?
+## What are third-party cookies?
 
 Cookies are small files stored on a user’s machine, helping you identify a repeat user to your product or website. This makes things like staying logged in over multiple days possible, but it also makes it possible to track whether the person who followed an ad yesterday came back today to purchase something. 
 
