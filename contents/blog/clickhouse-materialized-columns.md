@@ -53,10 +53,13 @@ ClickHouse has great tools for introspecting queries. Looking at `system.query_l
 
 To dig even deeper, we can use [`clickhouse-flamegraph`](https://github.com/Slach/clickhouse-flamegraph) to peek into what the CPU did during query execution.
 
+<div class="relative mt-2 mb-4" style="width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+
 import FlameGraph from "../images/blog/clickhouse-materialized-columns/svgs/query-json-extract-CPU.inline.svg"
 
-
 <FlameGraph />
+
+</div>
 
 From this we can see that the ClickHouse server CPU is spending most of its time parsing JSON.
 
