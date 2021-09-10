@@ -17,6 +17,7 @@
 	#title { text-anchor:middle; font-size:17px}
 	#unzoom { cursor:pointer; }
 	#frames > *:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+	#frames > .highlight { stroke:black; stroke-width:0.5; cursor:pointer; }
 	.hide { display:none; }
 	.parent { opacity:0.5; }
 </style>
@@ -372,7 +373,7 @@
 <text id="ignorecase" x="1874.00" y="24" >ic</text>
 <text id="matched" x="1790.00" y="565" > </text>
 <g id="frames">
-<g >
+<g class="highlight">
 <title>DB::FunctionJSON&lt;DB::NameJSONExtractRaw, DB::JSONExtractRawImpl&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;, std::__1::shared_ptr&lt;DB::IDataType const&gt; const&amp;, unsigned long) const#/usr/bin/clickhouse (1,400 samples, 68.16%)</title><rect x="111.6" y="277" width="1281.4" height="15.0" fill="rgb(229,33,0)" rx="2" ry="2" />
 <text  x="114.60" y="287.5" >DB::FunctionJSON&lt;DB::NameJSONExtractRaw, DB::JSONExtractRawImpl&gt;::executeImpl(std::__1::vector&lt;DB::ColumnWithTypeAndName, std::__1::allocator&lt;DB::ColumnWithTypeAndName&gt; &gt; const&amp;,..</text>
 </g>
