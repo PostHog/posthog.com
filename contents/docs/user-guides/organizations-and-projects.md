@@ -14,11 +14,11 @@ Most commonly a PostHog organization represents a real-world company. But this i
 
 As a brand new PostHog user you'll always find yourself in a single organization upon account creation.
 If you've joined from an invite, that will be the organization you've been invited to.
-Otherwise you'll become the Owner of a new organization created just for you, based on the company name you provided when creating the account.
+Otherwise, you'll become the Owner of a new organization created just for you, based on the company name you provided when creating the account.
 
-To switch between organizations, to go the current organization's settings, or to create new projects, use the account dropdown on the right of the top bar.
+To switch between organizations, navigate to the current organization's settings, or to create new projects, use the account dropdown on the right of the top bar.
 
-> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. For self-hosted PostHog, however, multiple organizations belong to our premium team-oriented offering. To use this feature, [contact us for a self-hosted license](https://posthog.com/pricing).
+> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. For self-hosted PostHog, however, multiple organizations belong to our premium team-oriented offering. To use this feature, [contact us for a self-hosted license](/pricing).
 
 ### Notifications
 
@@ -30,7 +30,7 @@ If you'd rather not get such notifications however, you can simply disable setti
 
 Any organization member can create organization invites. Such an invite is valid **for 3 days** after creation and **only for the specified email**.
 
-If there's no account associated with that email, the invited person will have to create an account. Otherwise they'll be able to join with their existing account.
+If there's no account associated with that email, the invited person will have to create an account. Otherwise, they'll be able to join with their existing account.
 
 Newly-joined users get the basic Member access level.
 
@@ -40,11 +40,11 @@ A project is a silo of data within PostHog. All data belongs to a single project
 
 Every project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/integrate), as well as to connect to our [API](/docs/api). You can always regenerate this token, but keep in mind that the old one will be immediately revoked.
 
-Every new organization (including the one created for you on account creation) comes with a fresh project named "Default Project". You can then rename or delete it as you see fit.
+Every new organization (including the one created for you on account creation) comes with a fresh project named "Default Project". You can rename or delete it as you see fit.
 
-To switch between projects, to go their settings, or to create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
+To switch between projects, navigate to project settings, or to create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
 
-> **Note:** Multiple projects within an organization belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](https://posthog.com/pricing).
+> **Note:** Multiple projects within an organization belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](/pricing).
 
 ### Ways of organizing projects
 
@@ -52,7 +52,7 @@ There are several practical ways of using projects:
 
 - A project per environment – you may want to test out analytics instrumentation in development or staging environments, while keeping that test data separate from production.
 - A project per product – if you have several unlinked products, it makes sense to reflect that separation in PostHog too.
-- A project per multiple products or the whole company – if your offerring is interlinked or you want to track the user journey holistically (e.g. how many company blog readers convert to paid product users), you can use a single project for all that.
+- A project per multiple products or the whole company – if your offering is interlinked or you want to track the user journey holistically (e.g. how many company blog readers convert to paid product users), you can use a single project for all digital assets.
 
 Which way is the best fit for you depends on the characteristics of your product and business.
 
@@ -77,7 +77,7 @@ There are 3 access levels in PostHog, each with more privileges than the one bel
 2. **Administrator** – elevated level, like Member plus:
   - can always create and delete projects
   - can change project and organization settings
-  - cam manage access levels of other members (except the Owner)
+  - can manage access levels of other members (except the Owner)
   - can add and remove lower-level members from projects (if per-project access mode enabled)
   - can remove other members from the organization (except the Owner)
 
@@ -99,4 +99,4 @@ Access to each project must then be granted individually (e.g. only for members 
 
 In this mode you can also grant members project-specific access level that is _above_ their organization-wide one. In such case they will have privileges of the higher level, but only for that specific project.
 
-> **Note:** Per-project access belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](https://posthog.com/pricing).
+> **Note:** Per-project access belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](/pricing).
