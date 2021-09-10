@@ -51,7 +51,7 @@ ClickHouse has great tools for introspecting queries. Looking at `system.query_l
 - Took 3,433 ms
 - Read 79.17 GiB from disk
 
-To dig even deeper, we can use clickhouse-flamegraph to peek into what the CPU did during query execution.
+To dig even deeper, we can use [`clickhouse-flamegraph`](https://github.com/Slach/clickhouse-flamegraph) to peek into what the CPU did during query execution.
 
 import FlameGraph from "../images/blog/clickhouse-materialized-columns/svgs/query-json-extract-CPU.inline.svg"
 
