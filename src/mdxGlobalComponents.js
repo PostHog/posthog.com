@@ -33,6 +33,7 @@ import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
+import { Disclosure } from './components/Disclosure'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
@@ -121,6 +122,7 @@ export const shortcodes = {
     ContributorsChart,
     DarkModeToggle,
     DemoScheduler,
+    Disclosure,
     DocsPageSurvey,
     DocsSearch,
     FeaturesComparisonTable,
