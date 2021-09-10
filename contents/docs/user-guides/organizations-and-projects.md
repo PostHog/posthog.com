@@ -25,7 +25,7 @@ To switch between organizations, navigate to the current organization's settings
 
 By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
 
-If you'd rather not get such notifications however, you can simply disable setting "Email all current members when a new member joins" in section "Notification Preferences" of organization settings.
+If you'd rather not get such notifications, you can disable setting "Email all current members when a new member joins" in the "Notification Preferences" section of organization settings.
 
 ### Adding new members
 
