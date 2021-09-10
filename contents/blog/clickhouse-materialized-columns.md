@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: engineering
 author: karl-aksel-puulmann
-featuredImage: ../images/blog/clickhouse-materialized-columns.png
+featuredImage: ../images/blog/automating-software-company-github-actions.png # :TODO:
 featuredImageType: full
 ---
 
