@@ -13,7 +13,7 @@ featuredImageType: full
 
 It all started with the world map.
 
-October 2020. We follow a group of 9 engineers, hot off the heels of implementing ClickHouse support, as they brave the pandemic and gather at a company retreat in Italy. The company is not even a year old, and while nobody is terribly sure what's going to happen next, there's contagious optimism in the air.
+October 2020. We follow a group of 9 engineers, hot off the heels of [implementing ClickHouse support](https://posthog.com/blog/clickhouse-announcement), as they brave the pandemic and gather at a company retreat in Italy. The company is not even a year old, and while nobody is terribly sure what's going to happen next, there's contagious optimism in the air.
 
 After a session where we [formalize our values](/handbook/company/values) ("We haven't built our defining feature yet"), it's time to discuss what defining features to build next - within the hour.
 
