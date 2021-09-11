@@ -4,14 +4,17 @@ import { getCookie } from 'lib/utils'
 export const posthogAnalyticsLogic = kea({
     actions: {
         posthogFound: (posthog) => ({ posthog }),
-        setFeatureFlags: (featureFlags) => ({ featureFlags }),
+        setFeatureFlags: (featureFlags, featureFlagVariants) => ({ featureFlags, featureFlagVariants }),
     },
 
     reducers: {
         featureFlags: [
             {},
             {
-                setFeatureFlags: (state, { featureFlags }) => {
+                setFeatureFlags: (state, { featureFlags, featureFlagVariants }) => {
+                    if (featureFlagVariants) {
+                        return featureFlagVariants
+                    }
                     const flags = {}
                     for (const flag of featureFlags) {
                         flags[flag] = true
