@@ -42,7 +42,7 @@ How many users created an account so you can identify them.
 
 These users do not need to have activated.
 
-If you're a B2B company focussed on product-led growth, we'd suggest focussing on _users_ not _customers_. This is because by focussing on building for end users, you will build a product that users want to use, and from that revenue will follow.
+If you're a B2B company focused on product-led growth, we'd suggest focussing on _users_ not _customers_. This is because by focussing on building for end users, you will build a product that users want to use, and from that revenue will follow.
 
 ### Users - traffic
 
