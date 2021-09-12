@@ -1,5 +1,5 @@
 ---
-date: 2021-09-10
+date: 2021-09-14
 title: How to choose job titles in your early stage startup
 rootPage: /blog
 sidebar: Blog
