@@ -1,36 +1,51 @@
 ---
-title: Setting up an Acquisition Taxonomy
+title: Set up Deep Dive Acquisition Dashboards
 sidebar: Docs
 showTitle: true
 ---
 
-This tutorial will help you send the _right_ events into PostHog so your product and growth teams can answer the most important questions about user acquisition.
+This tutorial will help you:
+
+1. send the _right_ events into PostHog, and:
+1. set up dasbhoards
+
+so your product and growth teams can answer the most important questions about user acquisition.
 
 # Pre-Requisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), or our [API](/docs/api/overview)
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), via pushing from a data warehouse, or our [API](/docs/api/overview).
 
-# Taxonomy
+# Dashboard setup
 
-This is the set of dashboard items that will help your team get a quick overview of performance, with the ability to deep dive to diagnose fluctuations.
+This tutorial recommends three levels of dashboard:
 
-This list is neither exhaustive nor universally applicable, but should be considered a rough framework for how to structure your dashboards and the Insights or Funnels stored in each for Acquistion.
+- Acquisition (amongst other key metrics - Activation, Retention, Revenue and Referral)
+  - Deep dive: acquisition. This details Where acqusition is coming from (ie a change to conversion/traffic/untracked conversions)
+    - Deep dive: traffic. This details where traffic is coming from.
 
-You need to take this, then apply the concepts to your product to figure out if you're sending the right events to produce these visualizations.
+Note - we only break down traffic further, we don't do the same for conversion or untracked conversions.
 
-- User acqusition (this should be placed alongside Activation, Retention, Referral and Revenue - tutorials for those to come another time)
-  - [Users - traffic](#users--traffic)
-    - [Users - traffic - by utm_source](#users--traffic--by-utmsource)
-    - [Users - traffic - by utm_medium](#users--traffic--by-utmmedium)
-    - [Users - traffic - by utm_campaign]((#users--traffic--by-utmcampaign))
-    - [Users - traffic - by utm_content]((#users--traffic--by-utmcontent))
-    - [Users - traffic - by utm_term](#users--traffic--by-utmterm)
-    - [Users - traffic - by initial referring domain](#users--traffic--by-initial-referring-domain)
-  - [Users - sign ups - conversion rate](#users--sign-ups--conversion-rate)
-  - Optional: [Users - sign ups - non-funnel](#users--signups--nonfunnel)
+# Event taxonomy required
+
+Now you've a sense of how to breakdown acquisition, it's time to figure out which dashboard _items_ (ie the range of graphs that appear within a dashboard) should look.
+
+!> All of the following should be plotted as a time series. That means you can understand which metric moved, causing another metric to move.
+
+You need to define these events within your product, and to push them to PostHog. For example, "traffic" may mean people visiting your website, visiting an individual landing page and so on. Or show both if either could be relevant.
+
+- _Acquisition dashboard:_ [User acqusition](#user-acquisition) over time (this should be placed alongside Activation, Retention, Referral and Revenue - tutorials for those to come another time).
+  - _Deep dive: Acquisition dashboard:_ [Users - traffic](#users--traffic)
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_source](#users--traffic--by-utmsource)
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_medium](#users--traffic--by-utmmedium)
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_campaign]((#users--traffic--by-utmcampaign))
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_content]((#users--traffic--by-utmcontent))
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_term](#users--traffic--by-utmterm)
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by initial referring domain](#users--traffic--by-initial-referring-domain)
+  - _Deep dive: acqusition dashboard:_ [Users - sign ups - conversion rate](#users--sign-ups--conversion-rate)
+  - _Deep dive: acqusition dashboard:_ Optional: [Users - sign ups - non-funnel](#users--signups--nonfunnel)
  
 ## Taxonomy definitions
 
@@ -42,7 +57,7 @@ How many users created an account so you can identify them.
 
 These users do not need to have activated.
 
-If you're a B2B company focused on product-led growth, we'd suggest focussing on _users_ not _customers_. This is because by focussing on building for end users, you will build a product that users want to use, and from that revenue will follow.
+If you're a B2B company focused on product-led growth, we'd suggest focusing on _users_ not _customers_. This is because by focusing on building for end users, you will build a product that users want to use, and from that revenue will follow.
 
 ### Users - traffic
 
@@ -52,13 +67,13 @@ You should use _unique_ pageviews for this, as the volume of users appearing is 
 
 You also have the option of considering traffic _only_ on the top part of your funnel, _or_ traffic to your overall website.
 
-If you take an overall traffic approach, you should consider that your funnel's top step needs to include _every_ page you count here, _or_
+If you take an overall traffic approach, which we'd recommend (especially if you do lots of top of funnel awareness-building content), you should consider that your funnel's top step needs to include _every_ page you count here, _and_ it's then worth also including a dashboard item to show traffic to specific pages on which people can sign up. You could even include a funnel showing your conversion from _any_ landing page without a signup action to pages _with_ a signup action.
 
 ### Users - traffic - by utm_source
 
 Same as [Users - traffic](#users--traffic), but broken down by utm_source.
 
-If users land on your website with utm parameters passed to the url (ie example.com/?utm_source=google), PostHog will automatically capture their values.
+If users land on your website with [utm parameters](https://blog.hootsuite.com/how-to-use-utm-parameters/) passed to the url (ie example.com/?utm_source=google), PostHog will automatically capture their values (if you're using our javascript snippet).
 
 utm_source is typically used to track the traffic source - ie Bing/Google/Facebook/Instagram.
 
@@ -76,7 +91,7 @@ utm_campaign is designed to track which marketing efforts led to this user findi
 
 ### Users - traffic - by initial referring domain
 
-You won't always have UTM tags for inbound traffic, for example - imagine a blogger had dropped a link to your website from theirs, or if you get traffic from Google.
+You won't always have utm parameters for inbound traffic, for example - imagine a blogger had organically dropped a link to your website from theirs, or if you get traffic from search engines.
 
 Seeing traffic by initial referring domain helps you understand how these link sources that you don't control are performing.
 
@@ -84,5 +99,5 @@ Seeing traffic by initial referring domain helps you understand how these link s
 
 You may be signing up users outside of your funnel. Typical examples of when this happens:
 
-* Your own team creates these manually.
-* For B2B, the second, third, fourth, etc users added into an existing team may come through a dif
+* Your own team creates these manually. This happens with many companies who don't have a self serve signup process.
+* For B2B, the second, third, fourth, etc users added into an existing team may come through the rest of their team using your platform already. We'll write future tutorials about how to track referrals like this.

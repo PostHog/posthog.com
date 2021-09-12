@@ -145,6 +145,7 @@
         "name": "Tutorials",
         "items": [
             "docs/tutorials",
+            "docs/tutorials/taxonomy-acquisition",
             "docs/tutorials/feature-flags",
             "docs/tutorials/toolbar",
             "docs/tutorials/funnels",
