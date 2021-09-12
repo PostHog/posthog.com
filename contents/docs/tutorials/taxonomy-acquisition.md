@@ -17,7 +17,7 @@ To follow this tutorial along, you need to:
 
 This is the set of dashboard items that will help your team get a quick overview of performance, with the ability to deep dive to diagnose fluctuations.
 
-This list neither exhaustive nor universally applicable, but should be considered a rough framework for how to structure your dashboards and the Insights or Funnels stored in each for Acquistion.
+This list is neither exhaustive nor universally applicable, but should be considered a rough framework for how to structure your dashboards and the Insights or Funnels stored in each for Acquistion.
 
 You need to take this, then apply the concepts to your product to figure out if you're sending the right events to produce these visualizations.
 
