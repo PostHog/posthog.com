@@ -1,5 +1,5 @@
 ---
-date: 2021-08-27
+date: 2021-09-13
 title: The importance of dogfooding - Why product managers should use their product as much as their users
 rootPage: /blog
 sidebar: Blog
