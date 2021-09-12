@@ -3,20 +3,8 @@ import Link from 'components/Link'
 import cntl from 'cntl'
 
 const sizes = {
-    sm: {
-        text: 'small',
-        font: 'semibold',
-        px: '2',
-        py: '1',
-        border: '2',
-    },
-    md: {
-        text: '[17px]',
-        font: 'bold',
-        px: '5',
-        py: '2',
-        border: '3',
-    },
+    sm: 'text-small font-semibold px-2 py-1 border-2',
+    md: 'text-[17px] font-bold px-5 py-2 border-3',
 }
 
 const primary = cntl`
@@ -66,11 +54,7 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'md') =
     inline-block
     w-${width}
     ${buttonTypes[type] || ''}
-    font-${sizes[size].font}
-    text-${sizes[size].text}
-    px-${sizes[size].px}
-    py-${sizes[size].py}
-    border-${sizes[size].border}
+    ${sizes[size]}
     ${className}
 `
 
