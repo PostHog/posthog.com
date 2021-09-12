@@ -23,7 +23,7 @@ Around [20% of the YC funded startups have a founder leave](http://paulgraham.co
 
 So, I took an action, as any good PostHog offsite attendee does, to cover what Tim and I are doing to not break up.
 
-# We have reduced opportunities for things to get into a bad spiral
+# Three simple things so problems don't spiral
 
 We talk frequently and at length:
 - We talk 1/1 for at least an hour a week, although often, far more.
@@ -38,11 +38,9 @@ We are clear who is doing what.
 - There are a handful of things we _both_ want to be involved in. People is one, Strategy is another. We think both of us being involved leads to the best decisions here.
 - Other things we have clear boundaries. Tim codes and works with engineering, I sell and work with design and our marketing team on positioning.
 
-# Check you value the same things
+# ... and one thing we're lucky to have in common
 
-It's tempting to claim we talked about this in advance (#visionaries), but we got lucky that we both heavily value many similar philosophies around work, which means we find it easy to work together.
-
-In our case we like:
+It's tempting to claim we talked about this in advance (#visionaries), but we got lucky that we both heavily value many similar philosophies around work, which means we find it easy to work together:
 
 - speed
 - individual contribution
@@ -56,3 +54,11 @@ We don't like:
 - fluffy enterprise sales BS
 - hypothetical plans where no one does anything
 - meetings
+
+# Remember
+
+PostHog is VC-backed; we're going big or going home. That means we're playing offense not defense.
+
+When I wanted to get Tim to join me on the PostHog adventure, my personal goal was not to try to maximize the fraction of the pie I receive, it was building a pie so damn big that everyone wins.
+
+This happens when you focus on building a successful company, not on bargaining with each other.
