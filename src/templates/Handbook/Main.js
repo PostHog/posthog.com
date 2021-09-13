@@ -72,14 +72,14 @@ export default function Main({
         <div className="relative">
             <SectionLinksTop next={next} previous={previous} />
             <div className="dark:text-white flex max-w-screen-3xl mx-auto items-start relative z-10 mt-8">
-                <div className="sticky top-20 flex-1">
-                    <MainSidebar
-                        mainEl={mainEl}
-                        menu={menu}
-                        slug={slug}
-                        className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14"
-                    />
-                </div>
+                <MainSidebar
+                    sticky
+                    top={90}
+                    mainEl={mainEl}
+                    menu={menu}
+                    slug={slug}
+                    className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14 flex-1"
+                />
                 <article
                     ref={mainEl}
                     style={!showToc ? { maxWidth: '100%', paddingRight: 0 } : {}}
@@ -101,7 +101,7 @@ export default function Main({
                     </section>
                 </article>
 
-                {!breakpoints.lg && showToc && <StickySidebar tableOfContents={tableOfContents} />}
+                {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}
             </div>
             {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>

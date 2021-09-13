@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from './InternalSidebarLink'
 
-export default function StickySidebar({ tableOfContents, className = '' }) {
+export default function StickySidebar({ tableOfContents, className = '', top = 0 }) {
     const [navBallLocation, setNavBallLocation] = useState(null)
     const [navStyle, setNavStyle] = useState(null)
     const [activeId, setActiveId] = useState(null)
@@ -18,16 +18,16 @@ export default function StickySidebar({ tableOfContents, className = '' }) {
     useEffect(() => {
         const isBrowser = typeof window !== 'undefined'
         if (navRef && contentRef && isBrowser) {
-            const offset = 153 // padding bottom + 90 (top position of other sidebar)
+            const offset = top * 2
             const contentHeight = contentRef.current.offsetHeight
             const windowHeight = window.innerHeight
             const willOverflow = contentHeight > windowHeight - offset
             const height =
                 windowHeight - (willOverflow ? offset : navRef.current.getBoundingClientRect().top + window.scrollY)
-            const top = willOverflow ? 90 : -height - -contentHeight + offset
+            const topPosition = willOverflow ? top : -height - -contentHeight + offset
             const style = {
                 height,
-                top,
+                top: topPosition,
             }
             setNavStyle(style)
         }
