@@ -121,7 +121,7 @@ PostHog 1.28 introduces support for A/B feature flags which can return string va
 
 ### Creating an A/B feature flag with multiple variants
 
-Create an A/B feature flag just like you would a standard flag, and then change the "Served value" option to "a string variant". You will then be prompted to enter a few keys with optional descriptions and set the distribution percentages for each. Check out the [feature flags tutorial](/docs/tutorials/feature-flags) for a more detailed walk-through.
+Create an A/B feature flag just like you would a standard flag, and then change the "Served value" option to "a string variant". You will then be prompted to enter a few keys with optional descriptions and set the distribution percentages for each.
 
 Note that the rollout percentage of feature flag variants must add up to 100%. If you wish to exclude some users from your A/B test, configure the **release condition groups**. While the release condition groups determine how many users will be bucketed into **any** of the given variants, the rollout percentage of each variant determines the portion of the overall release group that will be assigned to that particular variant.
 
