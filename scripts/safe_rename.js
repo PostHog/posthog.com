@@ -24,6 +24,7 @@ const redirectText = (from, to) => {
 
 const redirectWithDateCommentText = (date, redirect) => {
     return `
+
 # Added: ${formatDate(date)}${redirect}`
 }
 
@@ -113,7 +114,6 @@ const getRedirects = async ({ gitDiff, localConfig, remoteConfig, debug = false 
         }
     }
 
-    log(newRedirects)
     return newRedirects
 }
 
@@ -123,10 +123,12 @@ const main = async () => {
 
         const remoteConfig = await getRemoteConfig()
         const localConfig = await getLocalConfig()
-        const redirects = getRedirects({ gitDiff, localConfig, remoteConfig })
+        const debug = process.env.DEBUG
+        const redirects = await getRedirects({ gitDiff, localConfig, remoteConfig, debug })
 
         if (redirects.length > 0) {
-            appendToLocalConfig(redirects.join(''))
+            log('Writing', redirects)
+            await appendToLocalConfig(redirects.join(''))
         }
     } catch (error) {
         console.error(error)

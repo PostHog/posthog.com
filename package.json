@@ -19,7 +19,7 @@
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "generate-redirects": "rm pr_diff && git fetch && git diff origin/master $(git branch --show-current) > pr_diff && python3 ./scripts/safe_rename.py",
-        "generate-redirects-js": "git diff origin/master $(git branch --show-current) > pr_diff && node ./scripts/safe_rename.js RUN_AS_SCRIPT=true",
+        "generate-redirects-js": "git diff origin/master $(git branch --show-current) > pr_diff && DEBUG=true RUN_AS_SCRIPT=true node ./scripts/safe_rename.js",
         "test-generate-redirects": "jest"
     },
     "dependencies": {
