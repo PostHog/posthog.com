@@ -127,7 +127,7 @@ Note that the rollout percentage of feature flag variants must add up to 100%. I
 
 ### Using A/B feature flags in your code
 
-Getting the value of an A/B feature flag for the current user is quite simple. With the latest version of our JavaScript library, you can call:
+Getting the value of an A/B flag for the current user is quite simple. With the latest version of our JS library, you can call:
 
 ```js
 if(posthog.getFeatureFlag('checkout-button-color') === 'black') {
@@ -135,9 +135,14 @@ if(posthog.getFeatureFlag('checkout-button-color') === 'black') {
 }
 ```
 
-The `getFeatureFlag` method also returns true or false for standard (Boolean) feature flags, meaning that `posthog.isFeatureEnabled('new-beta-feature')` is equivalent to `posthog.getFeatureFlag('new-beta-feature') === true`.
+The `getFeatureFlag` method also returns true or false for standard (Boolean) feature flags, meaning that the following statements are equivalent:
 
-### `getFlagVariants()` and `onFeatureFlags()`
+```js
+posthog.isFeatureEnabled('new-beta-feature')
+posthog.getFeatureFlag('new-beta-feature') === true
+```
+
+### `getFlagVariants`
 
 Just as you can call `getFlags()` to return an array of feature flags that are currently active, you can call:
 
@@ -153,6 +158,8 @@ which returns an object:
     "checkout-button-color": "black",
 }
 ```
+
+### `onFeatureFlags`
 
 `onFeatureFlags(callback)` now passes the feature flag variants object as the second argument to `callback`, which looks like this:
 
