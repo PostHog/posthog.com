@@ -172,3 +172,13 @@ posthog.onFeatureFlags(function(flags, flagVariants) {
 ```
 
 Note that `getFlags()` and the callback argument `flags` will include the key names of all truthy feature flags, including active A/B feature flags.
+
+### Querying data by A/B feature flag values
+
+With the latest version of our JS snippet, we send each feature flag's value as a separate property on every event. This makes it easy to use in filters and breakdowns in Insights queries, or however else you may choose to filter incoming events.
+
+We send the event properties as `$feature/your-feature-name`, for example `$feature/checkout-button-color`.
+
+For example, if you have a Trends graph of button click events and you'd like to narrow it down to clicks only when the checkout button is blue, apply a filter to your graph series such that `$feature/checkout-button-color = blue`.
+
+If you'd like to compare all variants for which we have data in one graph, apply a breakdown by `$feature/checkout-button-color`.
