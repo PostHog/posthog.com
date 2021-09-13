@@ -188,6 +188,11 @@ To remove the burden of having to manage users in multiple places or if your com
 Finally, please do consider [warning #2](#warnings) above. Enforcing SAML will **not prevent Personal API Key** usage. It will only disable password-based login.
 
 
+### SAML user provisioning
+When a user (team member) logs in using SAML, we'll use their email address (and IdP's `nameID`, if different from email address) to match with their PostHog account. If the user has no account in your PostHog instance, we'll create one for them. Different from other SSO providers that PostHog supports, users who log in with SAML will **always get an account created.**
+
+By default, users will be signed up to the default organization in the instance. If you want users to be added to a specific organization instead, you can either set a domain whitelist for the relevant org or send an invite to the specific user.
+
 ### Example: OneLogin
 We're working with the OneLogin team to add PostHog to their Catalog and simplify your set up experience. In the meantime, you'll find some pointers on how to connect OneLogin to PostHog below.
 
