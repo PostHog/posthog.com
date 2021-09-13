@@ -112,6 +112,8 @@ const getRedirects = async ({ gitDiff, localConfig, remoteConfig, debug = false 
                 log('Not including redirect', redirect)
             }
         }
+    } else {
+        log('No path changes found')
     }
 
     return newRedirects
