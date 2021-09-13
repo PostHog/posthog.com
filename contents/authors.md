@@ -79,5 +79,12 @@ authors:
       image: https://www.gravatar.com/avatar/ecc56977271e781991b6172c16248459?w=90,
       link_type: twitter,
       link_url: https://twitter.com/leggetter
+  - {
+      handle: lottie-coxon,
+      name: Lottie Coxon,
+      role: Graphic Designer,
+      image: https://avatars.githubusercontent.com/u/65415371?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/charlotte-coxon/
     }
 ---
