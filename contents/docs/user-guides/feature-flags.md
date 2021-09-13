@@ -114,3 +114,54 @@ For feature flags that filter by user properties only, a given flag will always 
 However, for flags using a rollout percentage mechanism (either by itself or in combination with user properties), the flag will persist for a given user as long as the rollout percentage and the flag key are not changed. 
 
 As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way. 
+
+## A/B testing with feature flags (beta)
+
+PostHog 1.28 introduces support for A/B feature flags which can return string values according to a specified distribution. This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
+
+### Creating an A/B feature flag with multiple variants
+
+Create an A/B feature flag just like you would a standard flag, and then change the "Served value" option to "a string variant". You will then be prompted to enter a few keys with optional descriptions and set the distribution percentages for each. Check out the [feature flags tutorial](/docs/tutorials/feature-flags) for a more detailed walk-through.
+
+Note that the rollout percentage of feature flag variants must add up to 100%. If you wish to exclude some users from your A/B test, configure the **release condition groups**. While the release condition groups determine how many users will be bucketed into **any** of the given variants, the rollout percentage of each variant determines the portion of the overall release group that will be assigned to that particular variant.
+
+### Using A/B feature flags in your code
+
+Getting the value of an A/B feature flag for the current user is quite simple. With the latest version of our JavaScript library, you can call:
+
+```js
+if(posthog.getFeatureFlag('checkout-button-color') === 'black') {
+    // do something
+}
+```
+
+The `getFeatureFlag` method also returns true or false for standard (Boolean) feature flags, meaning that `posthog.isFeatureEnabled('new-beta-feature')` is equivalent to `posthog.getFeatureFlag('new-beta-feature') === true`.
+
+### `getFlagVariants()` and `onFeatureFlags()`
+
+Just as you can call `getFlags()` to return an array of feature flags that are currently active, you can call:
+
+```js
+posthog.feature_flags.getFlagVariants()
+```
+
+which returns an object:
+
+```json
+{
+    "new-beta-feature": true,
+    "checkout-button-color": "black",
+}
+```
+
+`onFeatureFlags(callback)` now passes the feature flag variants object as the second argument to `callback`, which looks like this:
+
+```js
+posthog.onFeatureFlags(function(flags, flagVariants) {
+    // do something useful
+    console.log(flags)         // ["new-beta-feature", "checkout-button-color"]
+    console.log(flagVariants)  // { "new-beta-feature": true, "checkout-button-color": "black" }
+})
+```
+
+Note that `getFlags()` and the callback argument `flags` will include the key names of all truthy feature flags, including active A/B feature flags.
