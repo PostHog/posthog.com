@@ -150,7 +150,7 @@ Just as you can call `getFlags()` to return an array of feature flags that are c
 posthog.feature_flags.getFlagVariants()
 ```
 
-which returns an object:
+`getFlagVariants` returns an object:
 
 ```json
 {
