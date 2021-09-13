@@ -40,7 +40,7 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 Description here.
 
-### Feature 2
+### SAML support
 Description here.
 
 
@@ -59,7 +59,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 
 ### Breaking changes
 
-⚠️ The `/api/user` endpoint has [been removed](/docs/api/user#user--deprecated) since this version (1.28.0)
+⚠️ The previously deprecated `/api/user` endpoint has been removed since this version (1.28.0). Head over to the [User API](https://posthog.com/docs/api/user) docs for details on how to upgrade.
 
 ## PostHog News
 
@@ -67,7 +67,10 @@ Welcome all new team members who will help us take PostHog to the next level!
 
 | Name  |        Role         | 🍍 on 🍕 |   Interesting Fact           |
 | :---: | :-----------------: | :-------: | :-------------------------: |
-| [Eli Kinsey](/handbook/company/team#eli-kinsey-front-end-developer) | Frontend Developer |  🤮  |   _"My fact here"_
+| [Eli Kinsey](/handbook/company/team#eli-kinsey-front-end-developer) | Frontend Developer |  Pineapple gang represent  |   _"I.... have never had a bloody nose?"_
+| Rick Marron | Full Stack Engineer |  👎  |   _"I'm part of the ~1% who can lick their elbow. (Although the ability is slowly going away with age)"_
+| Paul D'Ambra | Full Stack Engineer |   Tasty but forbidden (like drinking in church)  |   _"I was nearly arrested at a pagan wedding"_
+| Guido Laquinti | Site Reliability Engineer |   Can't say it's acceptable without having my passport revoked 🇮🇹  |   _"When I was a kid, my parents asked me to find a name for our new kitten. We called him “Password” 🔐🐕‍🦺"_
 
 
 ## Community shoutouts
