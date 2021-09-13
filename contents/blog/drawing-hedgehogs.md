@@ -12,7 +12,7 @@ featuredImageType: full
 
 Creating mascots goes beyond just putting iPencil to iPad. It’s a long, confusing and sometimes frustrating process which requires a lot of patience and a tolerance for drawing hedgehogs 12 hours a day. 
 
-A successful mascot should go far beyond representating what a company does. It should build and strengthen a brand's identity by representing it's tone of voice and overall vibe. Think about GitHub's octocat mascot, which is now a familiar figure in memes, merch, and even statues. 
+A successful mascot should go far beyond representing what a company does. It should build and strengthen a brand's identity by representing it's tone of voice and overall vibe. Think about GitHub's octocat mascot, which is now a familiar figure in memes, merch, and even statues. 
 
 **[insert image of octocat statue]**
 
