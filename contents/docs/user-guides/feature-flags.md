@@ -117,7 +117,7 @@ As a result, keep in mind that changing those values will result in flags being 
 
 ## A/B testing with feature flags (beta)
 
-PostHog 1.28 introduces support for A/B feature flags which can return string values according to a specified distribution. This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
+PostHog 1.28 introduces support for A/B feature flags which can return string values according to a specified distribution. (Some examples for a 3-variant case would be 33/33/34%, 50/25/25%, 70/20/10%, and so on.) This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
 
 ### Creating an A/B feature flag with multiple variants
 
@@ -127,7 +127,7 @@ Note that the rollout percentage of feature flag variants must add up to 100%. I
 
 ### Using A/B feature flags in your code
 
-Getting the value of an A/B flag for the current user is quite simple. With the latest version of our JS library, you can call:
+With the latest version of our JS library, you can call:
 
 ```js
 if(posthog.getFeatureFlag('checkout-button-color') === 'black') {
@@ -135,7 +135,7 @@ if(posthog.getFeatureFlag('checkout-button-color') === 'black') {
 }
 ```
 
-The `getFeatureFlag` method also returns true or false for standard (Boolean) feature flags, meaning that the following statements are equivalent:
+`getFeatureFlag` also returns true or false for standard (Boolean) feature flags, meaning that the following statements are equivalent:
 
 ```js
 posthog.isFeatureEnabled('new-beta-feature')
@@ -175,7 +175,7 @@ Note that `getFlags()` and the callback argument `flags` will include the key na
 
 ### Querying data by A/B feature flag values
 
-With the latest version of our JS snippet, we send each feature flag's value as a separate property on every event. This makes it easy to use in filters and breakdowns in Insights queries, or however else you may choose to filter incoming events.
+With the latest version of our JS library, we send each feature flag's value as a separate property on every event. This means it can be used in filters and breakdowns in Insights queries or wherever else you may choose to filter incoming events.
 
 We send the event properties as `$feature/your-feature-name`, for example `$feature/checkout-button-color`.
 
