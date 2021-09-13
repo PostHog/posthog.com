@@ -739,5 +739,5 @@
 
 # Added: 2021-9-13
 [[redirects]]
-    from = "/blog/startup-job-titles"
-    to = "/blog/titles"
+    from = "/blog/titles"
+    to = "/blog/startup-job-titles"
