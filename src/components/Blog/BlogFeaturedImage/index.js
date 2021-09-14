@@ -43,7 +43,12 @@ export function FeaturedImageFull({ pageTitle, featuredImage, blogDate, authorDe
 
                     {authorDetails?.handle && (
                         <div className="w-full max-w-xl mt-2 md:mt-6">
-                            <BlogAuthor className="flex space-x-4 text-white" authorDetails={authorDetails} />
+                            <BlogAuthor
+                                className="flex space-x-4"
+                                color={'primary-dark'}
+                                colorDark={'primary-dark'}
+                                authorDetails={authorDetails}
+                            />
                         </div>
                     )}
                 </div>

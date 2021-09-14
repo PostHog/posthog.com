@@ -32,17 +32,12 @@ export default function MenuItem({ menuItem }) {
                 </Link>
                 {sub &&
                     (breakpoints.md ? (
-                        <Plus
-                            render={(icon) => (
-                                <button
-                                    className="text-primary dark:text-primary-dark flex-grow flex justify-end"
-                                    onClick={handleSubClick}
-                                >
-                                    {hovered ? <Minus /> : icon}
-                                </button>
-                            )}
-                            open={hovered}
-                        />
+                        <button
+                            className="text-primary dark:text-primary-dark flex-grow flex justify-end"
+                            onClick={handleSubClick}
+                        >
+                            {hovered ? <Minus /> : <Plus />}
+                        </button>
                     ) : (
                         <Chevron className="text-gray mt-1 -ml-3" />
                     ))}
