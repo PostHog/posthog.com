@@ -1,17 +1,45 @@
+.docsPagesContent {
+    iframe {
+        max-width: 100%;
+    }
+}
+
+.light {
+    .post-page {
+        .docsPagesContent {
+            h3,
+            h3 a {
+                color: #000;
+            }
+        }
+    }
+}
+
+.dark {
+    .post-page {
+        blockquote {
+        }
+
+        .docsPagesContent {
+            .blogPageContent p,
+            .blogPageContent blockquote,
+            .blogPageContent li {
+                font-size: 1.2em;
+                line-height: 1.6;
+                text-align: justify;
+            }
+        }
+    }
+}
+
 /* Styling for Post Pages ONLY */
 
 div.post-page {
-    .small-line-height * {
-        line-height: 0 !important;
-    }
-
     blockquote {
-        margin-left: 1.45rem;
-        margin-right: 1.45rem;
         margin-top: 0;
         padding: 20px;
         border-radius: 10px;
-        background-color: #fff7ea;
+        background-color: #e9e7f1;
         margin-bottom: 1.45rem;
     }
 
@@ -110,9 +138,10 @@ div.post-page {
         font-size: 20px;
     }
 
-    .contributor-faces {
-        width: 50px;
+    .contributor-faces > a > img {
+        display: inline-block;
         height: 50px;
+        width: 50px;
     }
 
     .hacktoberfest {
@@ -124,14 +153,15 @@ div.post-page {
         color: white;
     }
 
-    img {
-        border-radius: 8px;
-    }
-
     .small-inner-text a,
     .small-inner-text p,
     .small-inner-text li {
         font-size: 14px !important;
         line-height: 1;
     }
+}
+
+.tag-label {
+    border-radius: 4px;
+    padding: 4px 16px;
 }

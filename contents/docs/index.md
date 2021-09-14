@@ -1,10 +1,8 @@
 ---
-title: PostHog Documentation
+title: PostHog documentation
 sidebar: Docs
 showTitle: true
 ---
-
-<br />
 
 These Docs explain how to deploy, use, and contribute to PostHog.
 
@@ -12,7 +10,7 @@ These Docs explain how to deploy, use, and contribute to PostHog.
 
 We believe the era of third-party product analytics software will eventually come to end.
 
-In our view, third-party analytics doesn't work anymore in a world of Cookie Laws, GDPR, CCPA, and many other four-letter acronyms. There should be an alternative to sending all of your customers' personal information and usage data to third-parties like Google.
+In our view, third-party analytics doesn't work anymore in a world of cookie laws, GDPR, CCPA, and many other four-letter acronyms. There should be an alternative to sending all of your customers' personal information and usage data to third-parties like Google.
 
 PostHog gives you full control over all the data from your users, while allowing you to do powerful analytics.
 
@@ -20,43 +18,36 @@ We have seen multiple larger companies who cannot send their data to third-party
 
 PostHog solves that. We let every person in the company have easy access to product analytics that they can understand and use independently, even at a massive scale, all without sending data to third-parties.
 
-## Documentation Structure
+## Documentation structure
 
 ### Deployment
 
-There are 3 ways of using PostHog:
+There are 2 ways of using PostHog:
 
-* PostHog Open Source
-* PostHog Enterprise
 * PostHog Cloud
+* Self-Hosted
 
 **Do you want to get started quickly without having to deploy PostHog yourself?**
 
-Start using [PostHog Cloud for free](app.posthog.com).
+Start using [PostHog Cloud for free](https://app.posthog.com).
 
 **Do you want to self-host PostHog?**
 
-Check out our [Deployment page](/docs/deployment).
+Check out our [deployment page](/docs/self-host/overview#deploy).
 
-**Want to get up and running immediately?** 
-
-Use our one-click [Heroku deployment](/docs/deployment/deploy-heroku):
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/posthog/posthog)
-
-### Capturing Events with PostHog
+### Capturing events with PostHog
 
 You can capture events and send data to PostHog in 3 different ways:
 
 **Snippet**
 
-Using our [HTML snippet](/docs/deployment/snippet-installation) is the quickest way to get started if you're using PostHog to track a website. 
+Using our [HTML snippet](/docs/integrate/client/snippet-installation) is the quickest way to get started if you're using PostHog to track a website. 
 
-You can also start trying PostHog with no code using [our bookmarklet](/docs/deployment/snippet-installation#get-started-with-no-code).
+You can also start trying PostHog with no code using [our bookmarklet](/docs/integrate/client/snippet-installation#get-started-with-no-code).
 
 **Integrations**
 
-We provide [15+ integrations](/docs/integrations) for various popular programming languages and tools that you can use to send data to PostHog. 
+We provide [15+ libraries](/docs/integrate/overview) for various popular programming languages and tools that you can use to send data to PostHog. 
 
 **API**
 
@@ -66,37 +57,30 @@ You can use our [API](/docs/api/overview) to get data in and out of PostHog, mak
 
 Our [tutorials](/docs/tutorials) can help you learn how to use PostHog's many features with in-depth walkthroughs. 
 
-**Doing Analytics with PostHog**
+**Doing analytics with PostHog**
 
-- [How to Safely Roll Out New Features](/docs/tutorials/feature-flags)
-- [Visualizing User Behavior with the PostHog Toolbar](/docs/tutorials/toolbar)
-- [Analyzing Your Conversion with Funnels](/docs/tutorials/funnels)
-- [Analyzing User Behavior with Cohorts](/docs/tutorials/cohorts)
-- [Measuring Retention and Tracking Churn](/docs/tutorials/retention)
-- [Tracking Single Page Apps](/docs/tutorials/spa)
-- [Complete Guide to Event Tracking](/docs/tutorials/actions)
-- [Tracking Key B2B Product Metrics](/docs/tutorials/b2b)
-- [Sales and Revenue Tracking](/docs/tutorials/revenue)
-- [Running Surveys with No Backend ⏱️](/docs/tutorials/1-minute/survey)
+- [How to safely roll out new features](/docs/tutorials/feature-flags)
+- [Visualizing user behavior with the PostHog toolbar](/docs/tutorials/toolbar)
+- [Analyzing your conversion with funnels](/docs/tutorials/funnels)
+- [Analyzing user behavior with cohorts](/docs/tutorials/cohorts)
+- [Measuring retention and tracking churn](/docs/tutorials/retention)
+- [Tracking single page apps](/docs/tutorials/spa)
+- [Complete guide to event tracking](/docs/tutorials/actions)
+- [Tracking key B2B product metrics](/docs/tutorials/b2b)
+- [Sales and revenue tracking](/docs/tutorials/revenue)
+- [Running surveys with no backend](/docs/tutorials/survey)
 
-**Integrating PostHog with Other Tools**
+**Integrating PostHog with other tools**
 
-- [Integrate PostHog with Shopify ⏱️](/docs/tutorials/1-minute/integrate-with-shopify) 
-- [Integrate PostHog with Metabase ⏱️](/docs/tutorials/1-minute/integrate-with-metabase) 
-- [Integrate PostHog with Google Tag Manager ⏱️](/docs/tutorials/1-minute/integrate-with-gtm) 
-
-> The ⏱️ emoji denotes tutorials in our '1 Minute Tutorials' section
-
-
-### Configuring PostHog
-
-[Configuring PostHog](/docs/configuring-posthog) has all the information you need about configuring your PostHog instance, including info on [scalability](/docs/configuring-posthog/scaling-posthog), [security](/docs/configuring-posthog/securing-posthog), and [upgrade methods](/docs/configuring-posthog/upgrading-posthog).
+- [Integrate PostHog with Shopify](/docs/integrate/third-party/shopify) 
+- [Integrate PostHog with Metabase](/docs/integrate/third-party/metabase) 
+- [Integrate PostHog with Google Tag Manager](/docs/integrate/third-party/google-tag-manager) 
 
 ### Integrations
 
-[Integrations](/docs/integrations) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
+[Integrations](/docs/integrate/overview) holds the Docs for all available PostHog libraries, including those maintained by our core team and the community.
 
-We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrations/segment-integration), [Slack](/docs/integrations/slack), and [Sentry](/docs/integrations/sentry-integration).
+We have PostHog libraries written in all major programming languages, as well as integrations available with services like [Segment](/docs/integrate/third-party/segment), [Slack](/docs/integrate/webhooks/slack), and [Sentry](/docs/integrate/third-party/sentry).
 
 ### Plugins
 
@@ -108,8 +92,8 @@ If there's something you need in PostHog that we haven't built yet, you can [req
 
 We love all contributions to PostHog, big or small.
 
-Check out our [Contributing Docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/developing-locally), what our [stack](/docs/stack) is, and how the [project is structured](/docs/project-structure).
+Check out our [contributing docs](/docs/contributing) for information on how to contribute, as well as info about how to [run a local environment](/docs/contribute/developing-locally), what our [stack](/docs/contribute/stack) is, and how the [project is structured](/docs/contribute/project-structure).
 
-### Platform Structure
+### Platform structure
 
-[Platform Structure](/docs/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.
+[Platform structure](/docs/user-guides/application-settings) hosts information on configuration valid for both cloud and self-hosted instances.

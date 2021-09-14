@@ -5,6 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 
@@ -14,11 +17,11 @@ Quality was the name of the game over the last two weeks.
 
 We have a few user facing tweaks and a mountain of bug fixes and refactoring this week. We're not sure what the collective noun for a bunch of bug fixes and refactoring pull requests is - a "virtue"?
 
-If you're self-hosting and want to upgrade for a better experience with nicer features - [update your PostHog](/docs/configuring-posthog/upgrading-posthog).
+If you're self-hosting and want to upgrade for a better experience with nicer features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
 
 ## Release Notes
 
-### [PostHog is Now Available on Segment!](/blog/posthog-segment-integration)
+### [PostHog is now available on Segment!](/blog/posthog-segment-integration)
 
 ![](../images/posthog-segment.png)
 
@@ -45,7 +48,7 @@ The integration used to be very basic - but now you can edit the message format 
 
 ### [Toolbars for all!](https://github.com/PostHog/posthog/pull/1326)
 
-![](https://posthog.com/images/3ce1232ef29d0d59b4ac2779d8e97cf8/inspect.gif)
+![](../images/casts/inspect.gif)
 
 PostHog provides an irrefutably awesome toolbar. This lets you interact with your site or app and understand who is doing what. We've been in Beta for a few weeks, and spent a lot of time interviewing early users - thank you to everyone that took part!
 

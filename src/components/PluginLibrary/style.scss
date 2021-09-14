@@ -1,0 +1,48 @@
+.plugin-modal-content {
+    position: relative;
+    background: #ffffff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem calc(1rem + 14vw);
+    z-index: 9001;
+    box-shadow: 0px 12px 12px rgba(0, 40, 66, 0.25);
+    border-radius: 24px;
+    width: 80vw;
+    height: 80vh;
+
+    h1 {
+        font-size: 28px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    h4 {
+        font-size: 16px;
+    }
+    h5 {
+        font-size: 14px;
+    }
+    h6 {
+        font-size: 12px;
+    }
+
+    .logo {
+        max-width: 100px;
+    }
+
+    pre {
+        max-width: 120ch;
+        background: #222;
+    }
+
+    pre > code {
+        color: #fff;
+    }
+
+    @media screen and (max-width: 1080px) {
+        padding: 1rem;
+    }
+}

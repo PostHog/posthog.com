@@ -1,0 +1,489 @@
+---
+title: Events
+sidebar: Docs
+showTitle: true
+---
+
+> For instructions on how to authenticate to use this endpoint, see [API overview](/docs/api/overview).
+
+The `/api/event/` endpoints allow you to fetch events from PostHog.
+
+## Pagination
+
+This endpoint has pagination. See [Pagination](/docs/api/overview#pagination) for more info.
+
+## Endpoints
+
+### Event
+
+<Endpoint endpoint='/api/event' allowedMethods={['get']} />
+
+Get a list of events from PostHog.
+
+<HiddenSection headingType='h4' title='Query parameters'>
+
+| Parameter | Type / Valid Values | Description | Required |
+| --- | --- | --- | --- |
+| `event` | `string` | Types of events to fetch. For example, `$pageview`.  | ❌ |
+| `after` | ISO formatted string | The datetime from which to fetch the events. The value should be in an iso format, for example: `2020-05-25T14:06:33.584171Z`. | ❌ |
+| `before` | ISO formatted string| The datetime up until which to fetch the events. The value hould be in an iso format, for example: `2020-05-25T14:06:33.584171Z`. | ❌ |
+| `person_id` | `int` (FOSS) or `string` as UUID (EE)  | Unique ID for a person row in the database.  | ❌ |
+| `action_id` | `int` | Unique ID of the action the event should map to. | ❌ |
+| `distinct_id` | `string` | Filters events based on a distinct id of a person, for example: `179138786b071-030d78511284978-48183301-1aeaa0-179138786b1d8a`  | ❌ |
+| `properties` | Array of filters (see next column) | The key/values that you want to filter. For example: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` | ❌ |
+
+
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Example'>
+
+##### Request
+
+```
+GET /api/event/?properties=[{"key": "$current_url", "value": "https://localhost:1313/"}]&event=$pageleave
+```
+
+##### Response
+
+```json
+HTTP 200 OK
+Content-Type: application/json
+
+{
+    "next": null,
+    "results": [
+        {
+            "id": "01791c2e-6f8d-0000-4182-6fc9bb92046e",
+            "distinct_id": "179138786b071-030d78511284978-48183301-1aeaa0-179138786b1d8a",
+            "properties": {
+                "$os": "Mac OS X",
+                "$browser": "Safari",
+                "$device_type": "Desktop",
+                "$current_url": "https://localhost:1313/",
+                "$host": "localhost:1313",
+                "$pathname": "/",
+                "$browser_version": 14,
+                "$screen_height": 1050,
+                "$screen_width": 1680,
+                "$lib": "web",
+                "$lib_version": "1.9.7",
+                "$insert_id": "06u1d26dsgpa4bgf",
+                "$time": 1619675475.409,
+                "distinct_id": "179138786b071-030d78511284978-48183301-1aeaa0-179138786b1d8a",
+                "$device_id": "179138786b071-030d78511284978-48183301-1aeaa0-179138786b1d8a",
+                "$initial_referrer": "$direct",
+                "$initial_referring_domain": "$direct",
+                "$referrer": "$direct",
+                "$referring_domain": "$direct",
+                "$active_feature_flags": [],
+                "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
+                "$ip": "49.207.204.210"
+            },
+            "event": "$pageleave",
+            "timestamp": "2021-04-29T05:51:15.844000+00:00",
+            "person": {
+                "is_identified": false,
+                "distinct_ids": [
+                    "179138786b071-030d78511284978-48183301-1aeaa0-179138786b1d8a"
+                ],
+                "properties": {}
+            },
+            "elements": [],
+            "elements_chain": ""
+        }
+    ]
+}
+```
+
+</HiddenSection>
+
+### Sessions
+
+<Endpoint endpoint='/api/event/sessions' allowedMethods={['get']} />
+
+Get a list of sessions and the events they contain.
+
+<HiddenSection headingType='h4' title='Query parameters'>
+
+| Parameter | Type / Valid Values | Description | Required |
+| --- | --- | --- | --- |
+| `pagination` | `dict` | Object containing information about pagination (e.g. offset, last page info). | ❌ |
+| `distinct_id` | `string` | Filters for session based on the `distinct_id`. | ❌ |
+| `duration` | `int` | Duration of the session in seconds, for example: `224`. | ❌ |
+| `duration_operator` | `lt` or `gt` | Used together with `duration` to specify if the duration to fetch for should be greater than (`gt`) or lower than (`lt`) the specified one. | ❌ |
+
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Example'>
+
+##### Request
+
+### Sessions
+
+```
+GET /api/event/sessions/?distinct_id=1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a
+```
+
+##### Response
+
+```json
+HTTP 200 OK
+Content-Type: application/json
+
+{
+    "result": [
+        {
+            "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+            "global_session_id": 1,
+            "length": 224,
+            "start_time": "2021-04-30T08:56:02.013000Z",
+            "end_time": "2021-04-30T08:59:46.875000Z",
+            "event_count": 8,
+            "events": [
+                {
+                    "id": "017921fe-00b0-0000-1b68-914250e61c6c",
+                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                    "properties": {
+                        "$os": "Mac OS X",
+                        "$browser": "Safari",
+                        "$device_type": "Desktop",
+                        "$current_url": "http://localhost:1313/",
+                        "$host": "localhost:1313",
+                        "$pathname": "/",
+                        "$browser_version": 14,
+                        "$screen_height": 1050,
+                        "$screen_width": 1680,
+                        "$lib": "web",
+                        "$lib_version": "1.9.7",
+                        "$insert_id": "i8sx5oxrftqclvg2",
+                        "$time": 1619772961.641,
+                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                        "$initial_referrer": "http://localhost:1313/",
+                        "$initial_referring_domain": "localhost:1313",
+                        "$referrer": "http://localhost:1313/portfolio/",
+                        "$referring_domain": "localhost:1313",
+                        "$active_feature_flags": [],
+                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
+                        "$ip": "49.207.221.188"
+                    },
+                    "event": "$pageview",
+                    "timestamp": "2021-04-30T08:56:02.013000+00:00",
+                    "person": null,
+                    "elements": [],
+                    "elements_chain": ""
+                },
+                {
+                    "id": "017921fe-d548-0000-7b5d-a07dbf3c716d",
+                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                    "properties": {
+                        "$os": "Mac OS X",
+                        "$browser": "Safari",
+                        "$device_type": "Desktop",
+                        "$current_url": "http://localhost:1313/",
+                        "$host": "localhost:1313",
+                        "$pathname": "/",
+                        "$browser_version": 14,
+                        "$screen_height": 1050,
+                        "$screen_width": 1680,
+                        "$lib": "web",
+                        "$lib_version": "1.9.7",
+                        "$insert_id": "rdczufm7dlek0a8d",
+                        "$time": 1619773018.93,
+                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                        "$initial_referrer": "http://localhost:1313/",
+                        "$initial_referring_domain": "localhost:1313",
+                        "$referrer": "http://localhost:1313/portfolio/",
+                        "$referring_domain": "localhost:1313",
+                        "$active_feature_flags": [],
+                        "$event_type": "click",
+                        "$ce_version": 1,
+                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
+                        "$ip": "49.207.221.188"
+                    },
+                    "event": "$autocapture",
+                    "timestamp": "2021-04-30T08:56:59.444000+00:00",
+                    "person": null,
+                    "elements": [
+                        {
+                            "event": null,
+                            "text": "Home",
+                            "tag_name": "a",
+                            "attr_class": null,
+                            "href": "http://localhost:1313/",
+                            "attr_id": null,
+                            "nth_child": 1,
+                            "nth_of_type": 1,
+                            "attributes": {
+                                "attr__href": "http://localhost:1313/",
+                                "attr__style": "font-size: 18px; text-transform: none"
+                            },
+                            "order": 0
+                        },
+                        {
+                            "event": null,
+                            "text": null,
+                            "tag_name": "li",
+                            "attr_class": [
+                                "uk-active"
+                            ],
+                            "href": null,
+                            "attr_id": null,
+                            "nth_child": 1,
+                            "nth_of_type": 1,
+                            "attributes": {
+                                "attr__class": "uk-active "
+                            },
+                            "order": 1
+                        },
+                        {
+                            "event": null,
+                            "text": null,
+                            "tag_name": "ul",
+                            "attr_class": [
+                                "uk-navbar-nav",
+                                "uk-visible@s"
+                            ],
+                            "href": null,
+                            "attr_id": null,
+                            "nth_child": 1,
+                            "nth_of_type": 1,
+                            "attributes": {
+                                "attr__class": "uk-navbar-nav uk-visible@s"
+                            },
+                            "order": 2
+                        },
+                        {
+                            "event": null,
+                            "text": null,
+                            "tag_name": "div",
+                            "attr_class": [
+                                "uk-navbar-right"
+                            ],
+                            "href": null,
+                            "attr_id": null,
+                            "nth_child": 1,
+                            "nth_of_type": 1,
+                            "attributes": {
+                                "attr__class": "uk-navbar-right"
+                            },
+                            "order": 3
+                        },
+                        {
+                            "event": null,
+                            "text": null,
+                            "tag_name": "nav",
+                            "attr_class": [
+                                "uk-margin",
+                                "uk-navbar",
+                                "uk-navbar-container"
+                            ],
+                            "href": null,
+                            "attr_id": null,
+                            "nth_child": 1,
+                            "nth_of_type": 1,
+                            "attributes": {
+                                "attr__class": "uk-navbar-container uk-margin uk-navbar",
+                                "attr__style": "padding-right: 3rem",
+                                "attr__uk-navbar": "mode: click;"
+                            },
+                            "order": 4
+                        },
+                        {
+                            "event": null,
+                            "text": null,
+                            "tag_name": "div",
+                            "attr_class": [
+                                "uk-sticky",
+                                "uk-sticky-fixed"
+                            ],
+                            "href": null,
+                            "attr_id": null,
+                            "nth_child": 1,
+                            "nth_of_type": 1,
+                            "attributes": {
+                                "attr__class": "uk-sticky uk-sticky-fixed",
+                                "attr__style": "position: fixed; top: 0px; width: 1381px;",
+                                "attr__uk-sticky": "sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar"
+                            },
+                            "order": 5
+                        },
+                        {
+                            "event": null,
+                            "text": null,
+                            "tag_name": "div",
+                            "attr_class": [
+                                "wrapper"
+                            ],
+                            "href": null,
+                            "attr_id": null,
+                            "nth_child": 1,
+                            "nth_of_type": 1,
+                            "attributes": {
+                                "attr__class": "wrapper"
+                            },
+                            "order": 6
+                        },
+                        {
+                            "event": null,
+                            "text": null,
+                            "tag_name": "body",
+                            "attr_class": [],
+                            "href": null,
+                            "attr_id": null,
+                            "nth_child": null,
+                            "nth_of_type": null,
+                            "attributes": {
+                                "attr__class": "\"nth-child=",
+                                "2\"nth-of-type": "1"
+                            },
+                            "order": 7
+                        }
+                    ],
+                    "elements_chain": "a:attr__href=\"http://localhost:1313/\"attr__style=\"font-size: 18px; text-transform: none\"href=\"http://localhost:1313/\"nth-child=\"1\"nth-of-type=\"1\"text=\"Home\";li..uk-active:attr__class=\"uk-active \"nth-child=\"1\"nth-of-type=\"1\";ul.uk-navbar-nav.uk-visible@s:attr__class=\"uk-navbar-nav uk-visible@s\"nth-child=\"1\"nth-of-type=\"1\";div.uk-navbar-right:attr__class=\"uk-navbar-right\"nth-child=\"1\"nth-of-type=\"1\";nav.uk-margin.uk-navbar.uk-navbar-container:attr__class=\"uk-navbar-container uk-margin uk-navbar\"attr__style=\"padding-right: 3rem\"attr__uk-navbar=\"mode: click;\"nth-child=\"1\"nth-of-type=\"1\";div.uk-sticky.uk-sticky-fixed:attr__class=\"uk-sticky uk-sticky-fixed\"attr__style=\"position: fixed; top: 0px; width: 1381px;\"attr__uk-sticky=\"sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar\"nth-child=\"1\"nth-of-type=\"1\";div.wrapper:attr__class=\"wrapper\"nth-child=\"1\"nth-of-type=\"1\";body.:attr__class=\"\"nth-child=\"2\"nth-of-type=\"1\""
+                },
+                {
+                    "id": "017921fe-d54c-0000-e833-e45c36c63372",
+                    "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                    "properties": {
+                        "$os": "Mac OS X",
+                        "$browser": "Safari",
+                        "$device_type": "Desktop",
+                        "$current_url": "http://localhost:1313/",
+                        "$host": "localhost:1313",
+                        "$pathname": "/",
+                        "$browser_version": 14,
+                        "$screen_height": 1050,
+                        "$screen_width": 1680,
+                        "$lib": "web",
+                        "$lib_version": "1.9.7",
+                        "$insert_id": "esc00tyybcvdp7d4",
+                        "$time": 1619773018.936,
+                        "distinct_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                        "$device_id": "1791c3860c9fb1-01d1c764f567fc8-48183301-1aeaa0-1791c3860ca116a",
+                        "$initial_referrer": "http://localhost:1313/",
+                        "$initial_referring_domain": "localhost:1313",
+                        "$referrer": "http://localhost:1313/portfolio/",
+                        "$referring_domain": "localhost:1313",
+                        "$active_feature_flags": [],
+                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
+                        "$ip": "49.207.221.188"
+                    },
+                    "event": "$pageleave",
+                    "timestamp": "2021-04-30T08:56:59.450000+00:00",
+                    "person": null,
+                    "elements": [],
+                    "elements_chain": ""
+                },
+            ],
+            "properties": {},
+            "matching_events": [],
+            "email": null,
+            "session_recordings": [
+                {
+                    "id": "17921fdada3f5-02688ca8f7c53b8-48183301-1aeaa0-17921fdadb72a2",
+                    "viewed": false
+                }
+            ]
+        }
+    ],
+    "pagination": null
+}
+```
+
+</HiddenSection>
+
+
+### Session recording
+
+<Endpoint endpoint='/api/event/session_recording' allowedMethods={['get']} />
+
+Get a list session recordings for the events from PostHog.
+
+<HiddenSection headingType='h4' title='Query parameters'>
+
+| Parameter | Type / Valid Values | Description | Required |
+| --- | --- | --- | --- |
+| `session_recording_id` | `string` | ID of the session recording for which to request the events on. | ✅ |
+| `save_view` | `boolean` | Wheether to mark this session recording as "viewed". | ❌ |
+
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Example'>
+
+### Sessions
+
+##### Request
+
+```
+GET /api/event/sessions/?session_recording_id=179221e51743cd-081d4a8b3f0596-103c6054-1aeaa0-179221e51758ab
+```
+
+##### Response
+
+```json
+HTTP 200 OK
+Content-Type: application/json
+{
+    "result": [
+        {
+            "distinct_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+            "global_session_id": 3,
+            "length": 92,
+            "start_time": "2021-04-30T09:31:21.753000Z",
+            "end_time": "2021-04-30T09:32:53.836000Z",
+            "event_count": 33,
+            "events": [
+                {
+                    "id": "0179221e-5d3c-0000-561f-850d00218ea1",
+                    "distinct_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+                    "properties": {
+                        "$os": "Mac OS X",
+                        "$browser": "Chrome",
+                        "$device_type": "Desktop",
+                        "$current_url": "http://localhost:1313/blog/",
+                        "$host": "localhost:1313",
+                        "$pathname": "/blog/",
+                        "$browser_version": 90,
+                        "$screen_height": 1050,
+                        "$screen_width": 1680,
+                        "$lib": "web",
+                        "$lib_version": "1.9.7",
+                        "$insert_id": "6xs981kee5ym7sak",
+                        "$time": 1619775080.831,
+                        "distinct_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+                        "$device_id": "179221e4978614-0a18461c2e34a4-103c6054-1aeaa0-179221e497998d",
+                        "$initial_referrer": "$direct",
+                        "$initial_referring_domain": "$direct",
+                        "$referrer": "$direct",
+                        "$referring_domain": "$direct",
+                        "token": "xF2IWfyNR7gX6NeBi-kXBjaYUQw_gcZkQ64PB3RZdlY",
+                        "$active_feature_flags": [],
+                        "$ip": "49.207.221.188"
+                    },
+                    "event": "$pageview",
+                    "timestamp": "2021-04-30T09:31:21.753000+00:00",
+                    "person": null,
+                    "elements": [],
+                    "elements_chain": ""
+                },
+            ],
+            "properties": {},
+            "matching_events": [],
+            "email": null,
+            "session_recordings": [
+                {
+                    "id": "17921fdada3f5-02688ca8f7c53b8-48183301-1aeaa0-17921fdadb72a2",
+                    "viewed": false
+                }
+            ]
+        }
+    ],
+    "pagination": null
+}
+
+```
+
+</HiddenSection>
+

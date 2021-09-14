@@ -5,21 +5,24 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Major update time (hence the change to 1.*1*.0) - push-based integrations have been introduced!
 
-Like what you see and self-hosting? [Update](/docs/configuring-posthog/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
 
 First our updates and new features.
 
 ## Release notes
 
-### [PostHog integrates with Slack](/docs/integrations/slack)
+### [PostHog integrates with Slack](/docs/integrate/webhooks/slack)
 
 ![](../images/04/Slack_____slackupdates___PostHog.png)
 
-This update allows you to send push notifications to Slack when an Action is triggered. Our docs show you how you can [integrate Slack](/docs/integrations/slack) with your own PostHog instance.
+This update allows you to send push notifications to Slack when an Action is triggered. Our docs show you how you can [integrate Slack](/docs/integrate/webhooks/slack) with your own PostHog instance.
 
 It’s exciting because PostHog can now update you in real time when key actions are triggered – so if people were for instance having an issue installing your app you can reach out to them immediately. 
 
@@ -134,5 +137,5 @@ We’re very excited to be growing the group and this is the first of what we ho
 
 ## PostHog news
 
-* It’s been a big week at PostHog towers, this was another really big release and now our [future updates](https://github.com/PostHog/posthog/projects/5) will be focusing on [our roadmap](/handbook/roadmap). James has put a lot of work in ensuring PostHog abides by its [values](/handbook/values) and remains transparent  – if you have thoughts write an issue or create a pr.
+* It’s been a big week at PostHog towers, this was another really big release and now our [future updates](https://github.com/PostHog/posthog/projects/5) will be focusing on [our roadmap](/handbook/strategy/roadmap). James has put a lot of work in ensuring PostHog abides by its [values](/handbook/company/values) and remains transparent  – if you have thoughts write an issue or create a pr.
 * PostHog is now Aaron, Eric, James, and Tim. A big welcome to the team – watch this space for more new joiners

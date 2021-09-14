@@ -1,4 +1,5 @@
 .page-header-container {
+    background: linear-gradient(180deg, #220f3f 0%, #2c1e60 100%);
     .head {
         width: 100vw;
         height: 414px;
@@ -26,12 +27,12 @@
     }
 
     .tagline h1 {
-        font-weight: bold;
+        font-variation-settings: 'wght' 800;
     }
 
     .tagline > p {
         font-size: 20px !important;
-        line-height: 40px !important;
+        line-height: 30px !important;
     }
 
     @media screen and (max-width: 1080px) {

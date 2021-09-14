@@ -1,11 +1,13 @@
 ---
 date: 2021-01-21
-
 title: A story about pivots
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: general,company-and-culture,ceo-diaries
+featuredImage: ../images/blog/story-about-pivots.png
+featuredImageType: full
 ---
 
 PostHog has pivoted _a lot_.
@@ -45,7 +47,7 @@ Despite this, the _majority_ of your time in sales is spent getting nowhere. All
 
 Sidenote: this is why [product led growth](../handbook/growth/strategy) is so much better.
 
-If you're not getting anywhere with a potential customer after a few weeks or months of trying, your time is better spent elsewhere. Yet systems that are the core products of [\$17.1Bn revenue companies](https://en.wikipedia.org/wiki/Salesforce) come with a manually selected arbitrary number for the percentage probability that doesn't vary with time.
+If you're not getting anywhere with a potential customer after a few weeks or months of trying, your time is better spent elsewhere. Yet systems that are the core products of [$17.1Bn revenue companies](https://en.wikipedia.org/wiki/Salesforce) come with a manually selected arbitrary number for the percentage probability that doesn't vary with time.
 
 We pulled pipeline data from Hubspot or Salesforce, then used predictive analytics to work out how this curve looked based on historic data, then applied it to the current pipeline. Once a deal dropped below a certain threshold, we'd recommend you swap out that target company and pull a new one into the pipeline.
 
@@ -63,7 +65,7 @@ The only people interested in smaller teams were enthusiasts, but there wasn't a
 
 ### 2. CRM with Predictive Analytics
 
-One of our friends who ran a small sales team was a clear outliter. He had been using our first product a lot. We asked ourselves - why?
+One of our friends who ran a small sales team was a clear outlier. He had been using our first product a lot. We asked ourselves - why?
 
 He had used it to _replace_ his CRM. 
 
@@ -85,11 +87,11 @@ After hundreds of messages to potential users, we eventually got a single custom
 
 Back to basics - what was the actual problem we were solving?
 
-It was the prioritization of where to focus your sales efforts. If 90% of your deals deals won't close, you need to get good at not spending time on those that aren't going to close.
+It was the prioritization of where to focus your sales efforts. If 90% of your sales deals won't close, you need to get good at not spending time on those that aren't going to close.
 
 [Andrew Grove](https://en.wikipedia.org/wiki/Andrew_Grove) has an excellent book, [High Output Management](https://www.amazon.com/High-Output-Management-Andrew-Grove/dp/0679762884/ref=sr_1_1?dchild=1&keywords=high+output+management&qid=1610712757&s=books&sr=1-1). The premise is that your 1:1 meetings with your direct reports are your most leveraged time.
 
-Yet, many managers in practise don't prepare, at all.
+Yet, many managers in practice don't prepare, at all.
 
 ![A team that look a little bit like their happiness is staged](../images/blog/pivoting/amazing-team.jpg)
 
@@ -104,7 +106,9 @@ We were flumoxed. This tool was simple, people were excited, but no one used it.
 For those that haven't read it, [The Mom Test](http://momtestbook.com/), which I wish I'd read sooner, explains our downfall here perfectly:
 
 ```
-If they haven't solved the problem, ask why not. Have they tried searching for solutions and found them wanting? Or do they not even care enough to have Googled for it?
+If they haven't solved the problem, ask why not.
+Have they tried searching for solutions and found them wanting?
+Or do they not even care enough to have Googled for it?
 
 Rule of thumb: Anything involving the future is an over-optimistic lie.
 ```
@@ -203,7 +207,7 @@ I'm now glad we were so decisive.
 
 ##Experts are just that
 
-A meeting with the right person when you're at a literally pivotal moment can help you avoid a mistake that could cost you weeks, months or years of you and your team's lives.
+A meeting with the right person when you're at a literally pivotal moment can help you avoid a mistake that could cost you weeks, months or years of your life and your team's lives.
 
 For the pivot to open source product analytics, there were a few things that speaking to experts helped us clear up:
 
@@ -220,9 +224,9 @@ You learn more by doing than getting advice, but sprinkling an intensive period 
 
 ## Don't be scared to build
 
-We continuously built products and recruited users onto something real. What people did and what we though they'd do often diverged. [Jason Fried](https://twitter.com/jasonfried) goes so far as to say [you can't validate something that doesn't exist](https://twitter.com/jasonfried/status/1337095209620946944). The key is not to get scared about just building the thing you're talking about - Tim often only spent a week building things out, and during this time I was busy booking lots of meetings and finding potential users.
+We continuously built products and recruited users onto something real. What people did and what we thought they'd do often diverged. [Jason Fried](https://twitter.com/jasonfried) goes so far as to say [you can't validate something that doesn't exist](https://twitter.com/jasonfried/status/1337095209620946944). The key is to not get scared about just building the thing you're talking about - Tim often only spent a week building things out, and during this time I was busy booking lots of meetings and finding potential users.
 
-You _must_ be quick to do this. Others we heard of during the batch intended on spending months building their new idea out. That idea is a lot more frightening than starting with some throwaway code. Getting some production use, even if [embarassingly early](/we-ship-whenever#why), is important to know if your _concept_ is a compelling enough one that early users are willing to put up with some pain to try to solve the problem you're tackling.
+You _must_ be quick to do this. Others we heard of during the batch intended on spending months building their new idea out. That idea is a lot more frightening than starting with some throwaway code. Getting some production use, even if [embarassingly early](/blog/we-ship-whenever#why), is important to know if your _concept_ is a compelling enough one that early users are willing to put up with some pain to try to solve the problem you're tackling.
 
 ## Have a user in mind
 

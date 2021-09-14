@@ -1,0 +1,156 @@
+---
+title: Android library
+sidebarTitle: Android
+sidebar: Docs
+showTitle: true
+---
+
+<VisitLibrary name="Android" to="https://github.com/PostHog/posthog-android" official />
+
+It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
+
+import AndroidInstall from './snippets/install.mdx'
+import AndroidConfigure from './snippets/configure.mdx'
+import AndroidIdentify from './snippets/identify.mdx'
+import AndroidCapture from './snippets/capture.mdx'
+
+## Installation
+
+<AndroidInstall />
+
+## Configuration
+
+<AndroidConfigure />
+
+## Making calls
+
+### Identify
+
+<AndroidIdentify />
+
+### Capture
+
+<AndroidCapture />
+
+#### Setting user properties via an event
+
+To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+
+##### $set
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set", userProps));
+```
+
+**Usage**
+
+When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+
+##### $set_once
+
+**Example**
+
+```c
+// import java.util.HashMap;
+HashMap<String, Object> userProps = new HashMap<String, Object>();
+userProps.put("string", "value1");
+userProps.put("integer", 2);
+
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("$set_once", userProps));
+```
+
+**Usage**
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+
+### Flush
+
+You can set the number of events in the configuration that should queue before flushing. 
+Setting this to `1` will send events immediately and will use more battery. The default value for this is `20`.
+
+You can also configure the flush interval. By default we flush all events after `30` seconds,
+no matter how many events have been gathered.
+
+```js
+PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
+  .flushQueueSize(20)
+  .flushInterval(30, TimeUnit.SECONDS)
+  .build();
+
+```
+
+You can also manually flush the queue:
+
+```js
+PostHog.with(this)
+       .flush();
+```
+
+### Reset
+
+To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
+
+```js
+PostHog.with(this)
+       .reset();
+```
+
+### Sending screen views
+
+With `recordScreenViews()`, PostHog will try to record all screen changes automatically.
+
+If you want to manually send a new screen capture event, use the `screen` function.
+
+This function requires a `name`. You may also pass in an optional `properties` object.
+
+```js
+PostHog.with(this)
+       .screen("Dashboard", new Properties()
+                                  .putValue("background", "blue")
+                                  .putValue("hero", "superhog"));
+
+```
+
+## All configuration options
+
+When creating the PostHog client, there are many options you can set:
+
+```js
+PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
+    // Record certain application events automatically! (off/false by default)
+    .captureApplicationLifecycleEvents()
+
+     // Record screen views automatically! (off/false by default)
+    .recordScreenViews()
+
+    // Capture deep links as part of the screen call. (off by default)
+    .captureDeepLinks()
+
+     // Maximum number of events to keep in queue before flushing (20)
+    .flushQueueSize(int flushQueueSize)
+ 
+    // Max delay before flushing the queue (30 seconds)
+    .flushInterval(long flushInterval, TimeUnit timeUnit)
+ 
+    // Enable or disable collection of ANDROID_ID (true)
+    .collectDeviceId(boolean collect) 
+
+    .build();
+```
+
+## Thank you
+
+This library is largely based on the `analytics-android` package.

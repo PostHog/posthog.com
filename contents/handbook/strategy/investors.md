@@ -5,15 +5,19 @@ showTitle: true
 ---
 PostHog are proud to have many world-class investors.
 
-## Series A
+## Series B - March 2021
 
-We raised a \$9M Series A round, led by Alphabet’s VC firm GV, with participation from YCombinator's Continuity Fund and Tapas Capital.
+We raised a $15m Series B insider round, led by Y Combinator's Continuity Fund, with participation from GV, 1984 Ventures and Tapas Capital. 
+
+## Series A - July 2020
+
+We raised a $9M Series A round, led by Alphabet’s VC firm GV, with participation from Y Combinator's Continuity Fund and Tapas Capital.
 
 We brought on board Jason Warner (CTO GitHub) as an investor.
 
-## Seed
+## Seed - March 2020
 
-We raised a \$3M seed round, led by YCombinator and 1984 VC.
+We raised a $3M seed round, led by YCombinator and 1984 VC.
 
 We are also grateful to work with the support of the following:
 

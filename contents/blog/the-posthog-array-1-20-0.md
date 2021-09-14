@@ -5,6 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 We're back! 2020 was a hectic year for us and our team put in a whole lot of effort to get PostHog to where it is now. As such, we shut down PostHog for 2 weeks to give everyone a chance to recharge (with a rotation in place to make sure nothing burned down). 
@@ -13,7 +16,7 @@ We're back! 2020 was a hectic year for us and our team put in a whole lot of eff
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [Plugins, Plugins, and more Plugins](/plugins)
 
@@ -65,7 +68,7 @@ Since joining us, Karl has been submitting performance improvement after perform
 
 This time, as session recordings are being used more and more by our users, it was time to speed up the loading of the sessions list, which now loads 10x faster!
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 
@@ -177,7 +180,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Instrument toolbar [\#2859](https://github.com/PostHog/posthog/pull/2859) ([paolodamico](https://github.com/paolodamico))
 - Add missing paths viz condition [\#2858](https://github.com/PostHog/posthog/pull/2858) ([EDsCODE](https://github.com/EDsCODE))
 - Fix bug from query-selector-shadow-dom update [\#2856](https://github.com/PostHog/posthog/pull/2856) ([mariusandra](https://github.com/mariusandra))
-- Clickhouse caching [\#2855](https://github.com/PostHog/posthog/pull/2855) ([EDsCODE](https://github.com/EDsCODE))
+- ClickHouse caching [\#2855](https://github.com/PostHog/posthog/pull/2855) ([EDsCODE](https://github.com/EDsCODE))
 - Custom NPM packages under @posthog [\#2854](https://github.com/PostHog/posthog/pull/2854) ([mariusandra](https://github.com/mariusandra))
 - Index session recording events by team\_id, timestamp [\#2853](https://github.com/PostHog/posthog/pull/2853) ([macobo](https://github.com/macobo))
 - Plugin storage model [\#2852](https://github.com/PostHog/posthog/pull/2852) ([mariusandra](https://github.com/mariusandra))

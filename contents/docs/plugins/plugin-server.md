@@ -3,7 +3,6 @@ title: Plugin Server
 sidebar: Docs
 showTitle: true
 ---
-<br>
 
 The [PostHog Plugin Sever](https://github.com/PostHog/posthog-plugin-serve) is a standalone project that PostHog uses to support plugins. Despite being developed separately, the plugin server is packaged with the main PostHog project, allowing you to run it by simply installing PostHog.
 

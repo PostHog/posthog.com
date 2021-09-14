@@ -5,6 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Following our largest release to date, we are now back on a more regular release schedule. And, given that scalability was the focus of the previous release, we thought it was time for some fresh new features. 
@@ -14,7 +17,7 @@ So, without further ado, here they are:
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [Session Recording (Beta)](https://github.com/PostHog/posthog/issues/1846)
 
@@ -94,7 +97,7 @@ We have been working hard to improve our product documentation and had a few big
 
 If you have any suggestions for new tutorials or improvements to our documentation, [do not hesitate to let us know!](https://github.com/PostHog/posthog.com/issues)
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 
@@ -111,25 +114,25 @@ In addition to the main features mentioned above, we also merged multiple PRs im
 - Prune person materialized [\#2166](https://github.com/PostHog/posthog/pull/2166) ([EDsCODE](https://github.com/EDsCODE))
 - Switch to the official Heroku Python buildpack [\#2151](https://github.com/PostHog/posthog/pull/2151) ([edmorley](https://github.com/edmorley))
 - Slim down dev docker image [\#2147](https://github.com/PostHog/posthog/pull/2147) ([timgl](https://github.com/timgl))
-- Clickhouse binary capture [\#2146](https://github.com/PostHog/posthog/pull/2146) ([timgl](https://github.com/timgl))
+- ClickHouse binary capture [\#2146](https://github.com/PostHog/posthog/pull/2146) ([timgl](https://github.com/timgl))
 - Fix funnel loading and other UX issues [\#2134](https://github.com/PostHog/posthog/pull/2134) ([timgl](https://github.com/timgl))
 - Fix elements chain with bad classes [\#2133](https://github.com/PostHog/posthog/pull/2133) ([timgl](https://github.com/timgl))
 - Fix social auth account creation [\#2123](https://github.com/PostHog/posthog/pull/2123) ([Twixes](https://github.com/Twixes))
 - Flatten array and check length for actions [\#2120](https://github.com/PostHog/posthog/pull/2120) ([EDsCODE](https://github.com/EDsCODE))
-- \[Clickhouse\] speed up sessions list [\#2118](https://github.com/PostHog/posthog/pull/2118) ([timgl](https://github.com/timgl))
+- \[ClickHouse\] speed up sessions list [\#2118](https://github.com/PostHog/posthog/pull/2118) ([timgl](https://github.com/timgl))
 - Fix for action/event dropdown [\#2117](https://github.com/PostHog/posthog/pull/2117) ([EDsCODE](https://github.com/EDsCODE))
 - Make DELETE synchronous in clickhouse tests / make tests less flaky [\#2116](https://github.com/PostHog/posthog/pull/2116) ([macobo](https://github.com/macobo))
 - Capture social\_create\_user exception with Sentry [\#2115](https://github.com/PostHog/posthog/pull/2115) ([Twixes](https://github.com/Twixes))
 - Clarify invite creation [\#2113](https://github.com/PostHog/posthog/pull/2113) ([Twixes](https://github.com/Twixes))
-- \[Clickhouse\] More speed optimizations for funnels [\#2109](https://github.com/PostHog/posthog/pull/2109) ([timgl](https://github.com/timgl))
+- \[ClickHouse\] More speed optimizations for funnels [\#2109](https://github.com/PostHog/posthog/pull/2109) ([timgl](https://github.com/timgl))
 - Fix changelog images [\#2105](https://github.com/PostHog/posthog/pull/2105) ([yakkomajuri](https://github.com/yakkomajuri))
 - Debug redis leak [\#2102](https://github.com/PostHog/posthog/pull/2102) ([mariusandra](https://github.com/mariusandra))
-- Clickhouse improve funnel speed [\#2100](https://github.com/PostHog/posthog/pull/2100) ([timgl](https://github.com/timgl))
+- ClickHouse improve funnel speed [\#2100](https://github.com/PostHog/posthog/pull/2100) ([timgl](https://github.com/timgl))
 - Reduce Heroku worker thread count [\#2092](https://github.com/PostHog/posthog/pull/2092) ([mariusandra](https://github.com/mariusandra))
 - Wire up the length to the proto message [\#2089](https://github.com/PostHog/posthog/pull/2089) ([fuziontech](https://github.com/fuziontech))
 - Start with a new topic [\#2088](https://github.com/PostHog/posthog/pull/2088) ([fuziontech](https://github.com/fuziontech))
 - Provide required proto message length for our clickhouse overlords [\#2087](https://github.com/PostHog/posthog/pull/2087) ([fuziontech](https://github.com/fuziontech))
-- Clickhouse window funnel [\#2086](https://github.com/PostHog/posthog/pull/2086) ([timgl](https://github.com/timgl))
+- ClickHouse window funnel [\#2086](https://github.com/PostHog/posthog/pull/2086) ([timgl](https://github.com/timgl))
 - Protobufize events to protect from malformed JSON [\#2085](https://github.com/PostHog/posthog/pull/2085) ([fuziontech](https://github.com/fuziontech))
 - \#2083 Ignore result [\#2084](https://github.com/PostHog/posthog/pull/2084) ([timgl](https://github.com/timgl))
 - Add CH Person Sessions By Day [\#2082](https://github.com/PostHog/posthog/pull/2082) ([yakkomajuri](https://github.com/yakkomajuri))
@@ -145,15 +148,15 @@ In addition to the main features mentioned above, we also merged multiple PRs im
 - Fixes bad timerange for retentino [\#2064](https://github.com/PostHog/posthog/pull/2064) ([EDsCODE](https://github.com/EDsCODE))
 - Autoimport celery tasks [\#2062](https://github.com/PostHog/posthog/pull/2062) ([macobo](https://github.com/macobo))
 - Limit ingestion for teams [\#2060](https://github.com/PostHog/posthog/pull/2060) ([fuziontech](https://github.com/fuziontech))
-- Clickhouse never calculate action [\#2059](https://github.com/PostHog/posthog/pull/2059) ([timgl](https://github.com/timgl))
+- ClickHouse never calculate action [\#2059](https://github.com/PostHog/posthog/pull/2059) ([timgl](https://github.com/timgl))
 - Bump cryptography from 2.9 to 3.2 [\#2058](https://github.com/PostHog/posthog/pull/2058) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Clickhouse move to JSON extract for all filters [\#2056](https://github.com/PostHog/posthog/pull/2056) ([timgl](https://github.com/timgl))
+- ClickHouse move to JSON extract for all filters [\#2056](https://github.com/PostHog/posthog/pull/2056) ([timgl](https://github.com/timgl))
 - Fix cohorts clickhouse [\#2052](https://github.com/PostHog/posthog/pull/2052) ([timgl](https://github.com/timgl))
 - Fix flaky test [\#2048](https://github.com/PostHog/posthog/pull/2048) ([EDsCODE](https://github.com/EDsCODE))
 - Upgrade kea-router and typegen [\#2044](https://github.com/PostHog/posthog/pull/2044) ([mariusandra](https://github.com/mariusandra))
 - Use jsonextract for steps in funnel query [\#2040](https://github.com/PostHog/posthog/pull/2040) ([EDsCODE](https://github.com/EDsCODE))
 - Use uuids in funnels for consistency [\#2036](https://github.com/PostHog/posthog/pull/2036) ([timgl](https://github.com/timgl))
-- \[Clickhouse\] fix events for action with no steps [\#2035](https://github.com/PostHog/posthog/pull/2035) ([timgl](https://github.com/timgl))
+- \[ClickHouse\] fix events for action with no steps [\#2035](https://github.com/PostHog/posthog/pull/2035) ([timgl](https://github.com/timgl))
 - Fix funnels with multiple property filters [\#2034](https://github.com/PostHog/posthog/pull/2034) ([timgl](https://github.com/timgl))
 - Restore original retention query [\#2029](https://github.com/PostHog/posthog/pull/2029) ([EDsCODE](https://github.com/EDsCODE))
 - Filter person\_distinct\_id table further before joining [\#2028](https://github.com/PostHog/posthog/pull/2028) ([EDsCODE](https://github.com/EDsCODE))
@@ -163,7 +166,7 @@ In addition to the main features mentioned above, we also merged multiple PRs im
 - Update person property filtering [\#2024](https://github.com/PostHog/posthog/pull/2024) ([EDsCODE](https://github.com/EDsCODE))
 - Add eslint rule for empty JSX elements [\#2023](https://github.com/PostHog/posthog/pull/2023) ([mariusandra](https://github.com/mariusandra))
 - Fix click outside spam & public paths [\#2022](https://github.com/PostHog/posthog/pull/2022) ([mariusandra](https://github.com/mariusandra))
-- \[Clickhouse\] Fix action filtering on events [\#2013](https://github.com/PostHog/posthog/pull/2013) ([timgl](https://github.com/timgl))
+- \[ClickHouse\] Fix action filtering on events [\#2013](https://github.com/PostHog/posthog/pull/2013) ([timgl](https://github.com/timgl))
 - Add types to window.posthog [\#2012](https://github.com/PostHog/posthog/pull/2012) ([macobo](https://github.com/macobo))
 - Rename existing projects to "Default Project" [\#2009](https://github.com/PostHog/posthog/pull/2009) ([Twixes](https://github.com/Twixes))
 - Enable compatibility with old Team signup links [\#2007](https://github.com/PostHog/posthog/pull/2007) ([Twixes](https://github.com/Twixes))
@@ -176,7 +179,7 @@ In addition to the main features mentioned above, we also merged multiple PRs im
 - Break down feature\_flag\_response and add to propertykeyinfo [\#1991](https://github.com/PostHog/posthog/pull/1991) ([timgl](https://github.com/timgl))
 - Make PostHog compatible with Python 3.9 [\#1987](https://github.com/PostHog/posthog/pull/1987) ([Twixes](https://github.com/Twixes))
 - Use posthog.js correctly in userLogic [\#1975](https://github.com/PostHog/posthog/pull/1975) ([macobo](https://github.com/macobo))
-- \[Clickhouse\] Fix grabbing by person [\#1960](https://github.com/PostHog/posthog/pull/1960) ([timgl](https://github.com/timgl))
+- \[ClickHouse\] Fix grabbing by person [\#1960](https://github.com/PostHog/posthog/pull/1960) ([timgl](https://github.com/timgl))
 - Add new person materialized [\#1944](https://github.com/PostHog/posthog/pull/1944) ([EDsCODE](https://github.com/EDsCODE))
 
 ## Favorite Issue

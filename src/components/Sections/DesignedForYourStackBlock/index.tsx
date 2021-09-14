@@ -22,27 +22,27 @@ export const DesignedForYourStackBlock = () => {
             <div className="yourStackWrapper">
                 <div className="yourStackLogosRow row">
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/python-integration">
+                        <Link to="docs/integrate/server/python">
                             <img alt="Python" className="imageShow" loading="lazy" src={stackPython} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/php-integration">
+                        <Link to="docs/integrate/server/php">
                             <img alt="PHP" className="imageShow" loading="lazy" src={stackPhp} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/android-integration">
+                        <Link to="/docs/integrate/client/android">
                             <img alt="Android" className="imageShow" loading="lazy" src={stackAndroid} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/ios-integration">
+                        <Link to="/docs/integrate/client/ios">
                             <img alt="iOS" className="imageShow" loading="lazy" src={stackIos} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/node-integration">
+                        <Link to="docs/integrate/server/node">
                             <img alt="Node" className="imageShow" loading="lazy" src={stackNode} />
                         </Link>
                     </div>
@@ -54,27 +54,27 @@ export const DesignedForYourStackBlock = () => {
                 </div>
                 <div className="yourStackLogosRow row">
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/ruby-integration">
+                        <Link to="docs/integrate/server/ruby">
                             <img alt="Ruby" className="imageShow" loading="lazy" src={stackRuby} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/gatsby-integration">
+                        <Link to="/docs/integrate/third-party/gatsby">
                             <img alt="Gatsby" className="imageShow" loading="lazy" src={stackGatsby} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/js-integration">
+                        <Link to="/docs/integrate/client/js">
                             <img alt="Javascript" className="imageShow" loading="lazy" src={stackJavascript} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/go-integration">
+                        <Link to="docs/integrate/server/go">
                             <img alt="Go" className="imageShow" loading="lazy" src={stackGo} />
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrations/api">
+                        <Link to="/docs/api/overview">
                             <img alt="API" className="imageShow" loading="lazy" src={stackApi} />
                         </Link>
                     </div>

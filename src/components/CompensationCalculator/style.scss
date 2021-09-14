@@ -1,0 +1,31 @@
+.compensation-calculator {
+    p {
+        padding: 0 !important;
+        margin-bottom: 0.25rem !important;
+        font-weight: 500 !important;
+        color: #000;
+    }
+    .ant-tag {
+        margin-right: 0;
+    }
+}
+
+body.dark {
+    .compensation-calculator {
+        span {
+            color: rgb(58, 58, 58);
+        }
+        span.ant-statistic-content-value {
+            color: #d4d4d4;
+        }
+        .ant-radio-button-wrapper-checked {
+            background: #d7beff !important;
+            border-color: #d7beff !important;
+            box-shadow: none;
+            color: white;
+        }
+        p {
+            color: #fff;
+        }
+    }
+}

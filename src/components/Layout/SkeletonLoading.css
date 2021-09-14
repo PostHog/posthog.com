@@ -1,0 +1,20 @@
+.skeleton-loading {
+    min-height: 0;
+    transition: 1s ease min-height;
+}
+
+.skeleton-loading--250 {
+    min-height: 250px;
+}
+
+.skeleton-loading--500 {
+    min-height: 500px;
+}
+
+.skeleton-loading--750 {
+    min-height: 750px;
+}
+
+.skeleton-loadong--1000 {
+    min-height: 1000px;
+}

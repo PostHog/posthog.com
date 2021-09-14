@@ -18,7 +18,7 @@ The easiest option is to use ngrok.
 
 1. Make sure you [have ngrok installed](https://ngrok.com/download).
 
-2. Sign up for an ngrok account (or sign in with Github) and run `ngrok authtoken <TOKEN>`
+2. Sign up for an ngrok account (or sign in with GitHub) and run `ngrok authtoken <TOKEN>`
 
 3. Edit `$HOME/.ngrok2/ngrok.yml` and add the following after the line with `authtoken: <TOKEN>`:
 
@@ -72,8 +72,8 @@ Also, watch out, network requests can be slow through ngrok:
 
 0. Update openssl if "openssl version" tells you "LibreSSL" or something like that.
 
-In case "brew install openssl" and "brew link openssl" don't work well, just use 
-"/usr/local/opt/openssl/bin/openssl" at the command in the next step.
+In case `brew install openssl` and `brew link openssl` don't work well, use 
+`/usr/local/opt/openssl/bin/openssl` instead of `openssl` in the next step.
 
 1. Create key
 ```

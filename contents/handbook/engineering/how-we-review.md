@@ -1,10 +1,10 @@
 ---
-title: How We Review PRs
+title: How we review PRs
 sidebar: Handbook
 showTitle: true
 ---
 
-Almost all PRs made to repositories on PostHog will need a review from another engineer. We do this because, almost every time we review a PR, we find a bug, a performance issue, unnecessary code or UX that could have been confusing.
+Almost all PRs made to PostHog repositories will need a review from another engineer. We do this because, almost every time we review a PR, we find a bug, a performance issue, unnecessary code or UX that could have been confusing.
 
 ## How to review
 
@@ -34,7 +34,7 @@ Almost all PRs made to repositories on PostHog will need a review from another e
 
 The emphasis should be on getting something out quickly. Endless review cycles sap energy and enthusiasm.
 
-## Setting up Heroku Test Environment 
+## Setting up Heroku test environment 
 
 1. Go to the pull request you want to QA on. 
 2. Go to the Heroku test environment.

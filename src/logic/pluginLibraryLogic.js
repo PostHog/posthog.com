@@ -2,7 +2,7 @@ import { kea } from 'kea'
 import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import { getPluginImageSrc } from '../lib/utils'
 
-const toPathName = (pluginName) => pluginName.toLowerCase().replaceAll(' ', '-')
+export const toPathName = (pluginName) => pluginName.toLowerCase().replaceAll(' ', '-')
 
 export const pluginLibraryLogic = kea({
     actions: {
@@ -101,7 +101,11 @@ export const pluginLibraryLogic = kea({
             if (!markdown.includes('Installation')) {
                 markdown += pluginInstallationMd
             }
-            plugin['markdown'] = markdown.split(/!\[.*\]\(.*\)/).join('')
+            plugin['markdown'] = markdown
+                .split(/!\[.*\]\(.*\)/)
+                .join('')
+                .split(/<img\s+[^>]*>/)
+                .join('')
             plugin['imageSrc'] = getPluginImageSrc(plugin)
             setActivePlugin(plugin)
         },

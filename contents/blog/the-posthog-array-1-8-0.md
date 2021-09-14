@@ -5,11 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 What's box-fresh in PostHog? Cumulative graphs, better paths, and an upgrade to our actions.
 
-If you're self hosting and want these features - [update your PostHog](/docs/configuring-posthog/upgrading-posthog).
+If you're self hosting and want these features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
 
 ## Release notes
 

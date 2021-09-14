@@ -1,0 +1,152 @@
+---
+title: People
+sidebar: Docs
+showTitle: true
+---
+
+> For instructions on how to authenticate to use this endpoint, see [API overview](/docs/api/overview).
+
+In PostHog, there is an API endpoint available to see all people (users) in your PostHog instance.
+
+## Pagination
+
+This endpoint has pagination. See [Pagination](/docs/api/overview#pagination) for more info.
+
+## List people
+
+```shell
+GET /person
+GET /person/?properties=[{"key":"email","operator":"icontains","value":"@gmail.com","type":"person"}]
+GET /person/?id=214882,492810,18240
+GET /person/?distinct_id=hwNR3DqYWeKQrnCsv5TE
+GET /person/?email=test@posthog.com
+```
+
+| Attribute        | Type                | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------- | ------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `properties`     | Array of Properties | no       | The key/values that you want to filter on. Basic usage is: `[{"key": "$browser", "value": "Chrome"}]`<br /><br />For each property, you can specify:<br />- `key` Key of the property<br />- `value` Value you want to filter on<br />- `type` Either `person` or `event`<br />- `operator`, any of: <br />-- `exact`/empty<br />--`is_not`<br />--`icontains`<br />--`not_icontains`<br />--`gt`<br />--`lt`<br />--`is_set` |
+| `id`             | Comma separated IDs | no       | Get multiple people by id.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `distinct_id`    | String              | no       | Get person by a Distinct ID (this is the ID you set). Will still return a list of results.                                                                                                                                                                                                                                                                                                                                    |
+| `email`          | String              | no       | Get person(s) by a certain email address. This will look for a person property named `email`.                                                                                                                                                                                                                                                                                                                                 |
+| `key_identifier` | String              | no       | Shorthand to look for people either with a specific Distinct ID or email.                                                                                                                                                                                                                                                                                                                                                     |
+
+Example request:
+
+```bash
+curl https://posthog.example.com/api/person/
+```
+
+Example response:
+
+```json
+{
+    "next": "https://posthog.example.com/api/person/?cursor=cD0yMjgxOTA2",
+    "previous": null,
+    "results": [
+        {
+            "id": 2296750,
+            "name": "tim@posthog.com",
+            "distinct_ids": [
+                "h76pUrwsXarWvHjexBr8rHU6_b-yszcWBjJZiTC87C8",
+                "171842424bf55-06b1843bc657b5-396d7507-7e9000-171842424c07d2"
+            ],
+            "properties": {
+                "$os": "Mac OS X",
+                "name": "Tim",
+                "email": "tim@posthog.com",
+                "$browser": "Chrome",
+                "company_name": "test",
+                "$browser_version": 81,
+                "$initial_referrer": "http://127.0.0.1:8081/demo.html",
+                "$initial_referring_domain": "127.0.0.1:8081"
+            },
+            "created_at": "2020-05-19T14:28:58.397533Z"
+        },
+        {
+            "id": 2296684,
+            "name": "1720df7f0d91e-031be0d49f91cb-d373666-2a3000-1720df7f0da30b",
+            "distinct_ids": ["1720df7f0d91e-031be0d49f91cb-d373666-2a3000-1720df7f0da30b"],
+            "properties": {},
+            "created_at": "2020-05-13T12:17:36.340682Z"
+        }
+    ]
+}
+```
+
+## Get a single person
+
+```shell
+GET /person/:id
+```
+
+| Attribute |  Type   | Required |  Description   |
+| :-------: | :-----: | :------: | :------------: |
+|   `id`    | Integer |   yes    | ID of the user |
+
+Example request:
+
+```bash
+curl https://posthog.example.com/api/person/2296750/
+```
+
+Example response:
+
+```json
+{
+    "id": 2296750,
+    "name": "tim@posthog.com",
+    "distinct_ids": [
+        "h76pUrwsXarWvHjexBr8rHU6_b-yszcWBjJZiTC87C8",
+        "171842424bf55-06b1843bc657b5-396d7507-7e9000-171842424c07d2"
+    ],
+    "properties": {
+        "$os": "Mac OS X",
+        "name": "Tim",
+        "email": "tim@posthog.com",
+        "$browser": "Chrome",
+        "company_name": "test",
+        "$browser_version": 81,
+        "$initial_referrer": "http://127.0.0.1:8081/demo.html",
+        "$initial_referring_domain": "127.0.0.1:8081"
+    },
+    "created_at": "2020-05-19T14:28:58.397533Z"
+}
+```
+
+## Update person
+
+```shell
+PATCH /person/:id
+```
+
+| Attribute |  Type   | Required |  Description   |
+| :-------: | :-----: | :------: | :------------: |
+|   `id`    | Integer |   yes    | ID of the user |
+
+Example request:
+
+```bash
+curl https://posthog.example.com/api/person/2296750/
+{
+    "properties": {
+        "magic_property": "hello"
+    }
+}
+```
+
+Example response:
+
+```json
+{
+    "id": 2296750,
+    "name": "tim@posthog.com",
+    "distinct_ids": [
+        "h76pUrwsXarWvHjexBr8rHU6_b-yszcWBjJZiTC87C8",
+        "171842424bf55-06b1843bc657b5-396d7507-7e9000-171842424c07d2"
+    ],
+    "properties": {
+        "magic_property": "hello"
+    },
+    "created_at": "2020-05-19T14:28:58.397533Z"
+}
+```

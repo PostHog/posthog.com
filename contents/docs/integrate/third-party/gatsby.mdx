@@ -1,0 +1,53 @@
+---
+title: Gatsby integration
+sidebarTitle: Gatsby
+sidebar: Docs
+showTitle: true
+---
+
+Thanks to [Ritesh Kadmawala](https://github.com/kgritesh) for building this! 
+
+GitHub: [posthog/gatsby-plugin-posthog](https://github.com/posthog/gatsby-plugin-posthog)
+
+Gatsby behaves like a single-page app which means to track `$pageview` events special care is needed. This plugin takes care of that.
+
+## Install
+
+```bash
+yarn add gatsby-plugin-posthog
+```
+
+or
+
+```bash
+npm install --save gatsby-plugin-posthog
+```
+
+## How to use
+
+```js
+// In your gatsby-config.js
+module.exports = {
+  plugins: [
+    {
+      resolve: `gatsby-plugin-posthog`,
+      options: {
+        // Specify the API key for your PostHog Project (required)
+        apiKey: "<ph_project_api_key>",
+        // Specify the app host if self-hosting (optional, default: https://app.posthog.com)
+        apiHost: "<ph_instance_address>",
+        // Puts tracking script in the head instead of the body (optional, default: true)
+        head: true,
+        // Enable posthog analytics tracking during development (optional, default: false)
+        isEnabledDevMode: true
+      },
+    },
+  ],
+}
+```
+
+This will automatically start tracking pageviews, clicks and more.
+
+In your code you can access posthog via `window.posthog`.
+
+For instructions on the JS library itself, see [JS library](/docs/integrate/client/js).

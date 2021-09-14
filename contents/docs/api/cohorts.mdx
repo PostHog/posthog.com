@@ -1,0 +1,130 @@
+---
+title: Cohorts
+sidebar: Docs
+showTitle: true
+---
+
+> For instructions on how to authenticate to use this endpoint, see [API overview](/docs/api/overview).
+
+Our cohorts endpoints allows you to create, update, and fetch cohorts from PostHog.
+
+## Endpoints
+
+<Endpoint endpoint='/api/cohort' allowedMethods={['get', 'post']} />
+
+<Endpoint endpoint='/api/cohort/<cohort_id:int>' allowedMethods={['get', 'put', 'patch', 'delete']} />
+
+## Examples
+
+### Get all cohorts
+
+#### Request
+
+```
+GET /api/cohort
+```
+
+#### Response
+
+```
+HTTP 200 OK
+Content-Type: application/json
+
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 58,
+            "name": "gmail cohort",
+            "groups": [
+                {
+                    "days": null,
+                    "action_id": null,
+                    "properties": [
+                        {
+                            "key": "email",
+                            "type": "person",
+                            "value": "@gmail.com",
+                            "operator": "icontains"
+                        }
+                    ]
+                }
+            ],
+            "deleted": false,
+            "is_calculating": false,
+            "created_by": {
+                "id": 3,
+                "uuid": "0178acc4-8ceb-0000-e30e-a1be7df7380e",
+                "distinct_id": "NL56NSh6ipsw3cEBdLaGC6O1kYr9x9fSuvWYIhh7nAk",
+                "first_name": "Demo User",
+                "email": "demo@posthog.com"
+            },
+            "created_at": "2021-03-15T17:11:25.807680Z",
+            "last_calculation": "2021-04-08T15:12:02.891113Z",
+            "errors_calculating": 0,
+            "count": 24,
+            "is_static": false
+        }
+    ]
+}
+```
+
+### Create a dynamic cohort
+
+#### Request
+
+```
+POST /api/cohort
+```
+
+##### Example request body
+
+| Field | Value | 
+| --- | --- | --- | 
+| `name` | "My Newest Cohort"  | 
+| `groups` | `[{"properties":[{"key":"is_demo","value":["true"],"operator":"exact","type":"person"}]}]` | 
+| `is_static` | `false`| 
+
+#### Example response
+
+```
+HTTP 201 Created
+Content-Type: application/json
+
+{
+    "id": 67,
+    "name": "My Newest Cohort",
+    "groups": [
+        {
+            "properties": [
+                {
+                    "key": "is_demo",
+                    "value": [
+                        "true"
+                    ],
+                    "operator": "exact",
+                    "type": "person"
+                }
+            ],
+            "action_id": null,
+            "days": null
+        }
+    ],
+    "deleted": false,
+    "is_calculating": true,
+    "created_by": {
+        "id": 1,
+        "uuid": "0178acc4-8e77-0000-fd90-2ae06832ca61",
+        "distinct_id": "QD0Q97cv0dPHSlQlVGVHNeAZEr6tETA0Eqtbrl_pYXc",
+        "first_name": "Demo User",
+        "email": "yakko+demo@posthog.com"
+    },
+    "created_at": "2021-04-08T15:25:34.205458Z",
+    "last_calculation": null,
+    "errors_calculating": 0,
+    "count": null,
+    "is_static": false
+}
+```

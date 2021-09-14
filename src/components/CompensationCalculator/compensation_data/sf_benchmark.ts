@@ -1,0 +1,17 @@
+export const sfBenchmark: Record<string, number> = {
+    'Content Marketer': 165000,
+    Designer: 174000,
+    'Full Stack Engineer': 216000,
+    'Front End Developer': 199000,
+    'Graphic Designer': 128400,
+    'Growth Engineer': 192000,
+    'Mobile Engineer': 200000,
+    'Product Designer': 186000,
+    'Product Manager': 213600,
+    'Product Marketer': 195000,
+    Recruiter: 173000,
+    'Site Reliability Engineer': 216000,
+    'Technical Writer': 150000,
+    // 'Sales Engineer': 190000,
+    // 'Recruitment & Operations Coordinator': 99000,
+}

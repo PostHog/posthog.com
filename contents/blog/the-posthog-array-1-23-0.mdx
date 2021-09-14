@@ -1,0 +1,198 @@
+---
+date: 2021-03-18
+title: Array 1.23.0
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
+---
+
+In this edition of the PostHog Array: Release 1.23 is out, and our 🔥 new [PostHog.com homepage](/) is live - amazing work from PostHoggers Cory, Lottie, and Mike!
+
+### Community MVP
+
+The PostHog 1.23.0 community MVP is Sandeep ([samcaspus](https://github.com/samcaspus)) - a frequent contributor to PostHog. If you open a new issue, there's a high change Sandeep will jump on it!
+
+Anyone can contribute to PostHog and open source, whether it's code, copy, design or discussion. We're delighted that our community are so passionate that they even [share PostHog with their family](https://github.com/PostHog/posthog.com/issues/1036#issuecomment-788732593) ;)
+
+Thank you Sandeep, we look forward to collaborating with you more!
+
+**In this release:**
+
+-   **New:** Date filter for heatmaps
+-   **New:** Automatic filtering of test accounts
+-   **New:** Gravatar support
+-   **New:** Plugin for tracking first time events
+-   **Improvement:** Webhooks on FOSS are back and better
+
+<ArrayCTA />
+
+## Important Announcement for Self-Hosted Users
+
+If you're self hosting PostHog, make sure you have your plugin server up and running by looking at the color of the middle circle on the top left of the PostHog UI.
+
+If it is running, you'll see a green checkmark, and hovering over it will give the message "All systems operational", like so:
+
+![Plugin server](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/plugin-server.png)
+
+From this release (1.23.0) onwards, you **will not be able to ingest events** if your plugin server isn't running.
+
+### Special Note for CloudFormation Deployments
+
+If you've deployed PostHog via CloudFormation, make sure to check your memory limits, as they may be set too low by default (512MB).
+
+To run the plugin server, we recommend having _at least_ 1024MB of memory, or you might run the risk of running out of it.
+
+## PostHog 1.23.0 Release Notes
+
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+
+### [Date Filter for Heatmaps](https://github.com/PostHog/posthog/pull/3586)
+
+![Toolbar Date Filter](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/toolbar-date.png)
+
+Following a fierce battle with Webpack, Marius developed our new Heatmap date filters allowing you to now select any date range rather than been fixed to only the last week.
+
+### [Automatic Filtering of Test Accounts](https://github.com/PostHog/posthog/pull/3492)
+
+![Filter test accounts](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/filter-test-accounts.png)
+
+Have you ever wondered what effect your team's usage is having on your analytics data? Well your wondering days are over. You can can now toggle events from internal accounts to be automatic filtered out when viewing Insights. We've provided some convenient filtering defaults, which can customized further in 'Settings'.
+
+### [Webhooks Are Back - And They're Better](https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Aclosed+webhook)
+
+![Webhooks](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/webhooks.png)
+
+We made a big improvement to webhooks, you can now access all event properties in your webhook messages. This change opens up a whole new world of possibilities for creating useful alerts and notifications.
+
+A big thank you to diligent members of our community who reported and helped us debug and fix issues with webhooks on certain self-hosted FOSS setups.
+
+### [Organization Settings & Gravatar Support](https://github.com/PostHog/posthog/pull/3584)
+
+![Gravatars](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/gravatar.png)
+
+We've added an 'Organization Settings' page that lets you rename and delete your organization, as well as manage invites.
+
+If you have a Gravatar associated with your email, PostHog will now display it on your profile and the 'Organization Settings' page.
+
+### [First Time Event Tracker Plugin](/plugins/first-time-event-tracker)
+
+![](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/first-time-plugin.png)
+
+Based on user requests, we have now built a plugin that adds two boolean properties to your events:
+
+-   `is_event_first_ever`: tells you if the event if the first event of its kind
+-   `is_event_first_for_user`: tells you if the event is the first event of its kind for the user
+
+By enabling the plugin, you can filter for those properties on all your analytics, to determine things like conversion rates from first touch.
+
+> **Important:** This plugin will only work on events ingested after the plugin was enabled. This means it will register events as being the first if there were events that occurred before it was enabled.
+
+### [User Interviews](https://calendly.com/posthog-feedback)
+
+We’re working hard to improve PostHog and would love to talk to you about your experience with the product.
+
+If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback).
+
+Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
+
+## Favorite ~~Issue~~ Banter
+
+Are PR reviews putting you to sleep? Not at PostHog, it's all excitement! Here's a snippet of a PR review from our M² team (Michael & Marius):
+
+![M2 PR Review](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/pr-review.png)
+
+## Community Shoutouts
+
+Big thanks to the following members of our community who have contributed to PostHog over this release cycle:
+
+-   [samcaspus](https://github.com/samcaspus)
+-   [RedFrez](https://github.com/RedFrez)
+-   [Skchoudhary](https://github.com/Skchoudhary)
+
+## Open Roles
+
+Are you a Fullstack Engineer, Senior Engineer, Site Reliability Engineer, Sales Engineer, Product Marketer, or Content Marketer?
+
+Or perhaps you're not either but think you'd still be a good fit for PostHog?
+
+[We want you!](https://posthog.com/careers)
+
+## Bug Fixes and Performance Improvements
+
+In addition to the highlights listed above, we also merged a bunch of PRs improving PostHog's performance and fixing bugs:
+
+-   Default event property usage to false [\#3655](https://github.com/PostHog/posthog/pull/3655) ([timgl](https://github.com/timgl))
+-   fixed y axis color issue [\#3653](https://github.com/PostHog/posthog/pull/3653) ([samcaspus](https://github.com/samcaspus))
+-   Add support for SOCIAL_AUTH_REDIRECT_IS_HTTPS [\#3652](https://github.com/PostHog/posthog/pull/3652) ([Twixes](https://github.com/Twixes))
+-   Update plugin server to 0.11.9 [\#3651](https://github.com/PostHog/posthog/pull/3651) ([posthog-bot](https://github.com/posthog-bot))
+-   Update docker compose dev port [\#3650](https://github.com/PostHog/posthog/pull/3650) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Update plugin server to 0.11.8 [\#3649](https://github.com/PostHog/posthog/pull/3649) ([posthog-bot](https://github.com/posthog-bot))
+-   Revert "Disable PLUGIN_SERVER_INGESTION" [\#3648](https://github.com/PostHog/posthog/pull/3648) ([macobo](https://github.com/macobo))
+-   Disable PLUGIN_SERVER_INGESTION [\#3645](https://github.com/PostHog/posthog/pull/3645) ([Twixes](https://github.com/Twixes))
+-   Fix organization settings [\#3643](https://github.com/PostHog/posthog/pull/3643) ([timgl](https://github.com/timgl))
+-   Fix Funnel rendering on dashboards [\#3641](https://github.com/PostHog/posthog/pull/3641) ([kpthatsme](https://github.com/kpthatsme))
+-   Update posthog-js to 1.9.5 [\#3640](https://github.com/PostHog/posthog/pull/3640) ([posthog-bot](https://github.com/posthog-bot))
+-   Notice in toolbar if could not get a unique selector for the element [\#3635](https://github.com/PostHog/posthog/pull/3635) ([mariusandra](https://github.com/mariusandra))
+-   Update plugin server to 0.11.7 [\#3634](https://github.com/PostHog/posthog/pull/3634) ([posthog-bot](https://github.com/posthog-bot))
+-   Support all event properties in webhook message [\#3629](https://github.com/PostHog/posthog/pull/3629) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Update plugin server to 0.11.6 [\#3625](https://github.com/PostHog/posthog/pull/3625) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.11.5 [\#3624](https://github.com/PostHog/posthog/pull/3624) ([posthog-bot](https://github.com/posthog-bot))
+-   Dashboard hotkeys [\#3623](https://github.com/PostHog/posthog/pull/3623) ([paolodamico](https://github.com/paolodamico))
+-   Fix 500 on enabling plugins [\#3617](https://github.com/PostHog/posthog/pull/3617) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Improve Plugins page UX [\#3614](https://github.com/PostHog/posthog/pull/3614) ([Twixes](https://github.com/Twixes))
+-   Automatically enable debug mode for posthog-js on SELF_CAPTURE [\#3613](https://github.com/PostHog/posthog/pull/3613) ([paolodamico](https://github.com/paolodamico))
+-   Add action titles to CodeSnippet [\#3612](https://github.com/PostHog/posthog/pull/3612) ([Twixes](https://github.com/Twixes))
+-   Dashboard Improvements I [\#3608](https://github.com/PostHog/posthog/pull/3608) ([paolodamico](https://github.com/paolodamico))
+-   Add updated_at to plugins/plugin configs [\#3607](https://github.com/PostHog/posthog/pull/3607) ([macobo](https://github.com/macobo))
+-   Handle webhooks better [\#3605](https://github.com/PostHog/posthog/pull/3605) ([Twixes](https://github.com/Twixes))
+-   Remove of needless space in properties table [\#3603](https://github.com/PostHog/posthog/pull/3603) ([mariusandra](https://github.com/mariusandra))
+-   Fix funnels loading message [\#3598](https://github.com/PostHog/posthog/pull/3598) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Add ph-no-capture to relevant sections pt. 2 [\#3596](https://github.com/PostHog/posthog/pull/3596) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Update posthog-js to 1.9.1 [\#3594](https://github.com/PostHog/posthog/pull/3594) ([posthog-bot](https://github.com/posthog-bot))
+-   Fix funnels with only events [\#3593](https://github.com/PostHog/posthog/pull/3593) ([timgl](https://github.com/timgl))
+-   Filter disappearing bug + more [\#3590](https://github.com/PostHog/posthog/pull/3590) ([EDsCODE](https://github.com/EDsCODE))
+-   Build and push dev image in docker-image-publish.yml [\#3588](https://github.com/PostHog/posthog/pull/3588) ([Twixes](https://github.com/Twixes))
+-   Add missing param to retention payload [\#3585](https://github.com/PostHog/posthog/pull/3585) ([EDsCODE](https://github.com/EDsCODE))
+-   Clean up command palette style [\#3583](https://github.com/PostHog/posthog/pull/3583) ([Twixes](https://github.com/Twixes))
+-   Fix session tests [\#3580](https://github.com/PostHog/posthog/pull/3580) ([timgl](https://github.com/timgl))
+-   Event property calculation bugfix [\#3579](https://github.com/PostHog/posthog/pull/3579) ([mariusandra](https://github.com/mariusandra))
+-   Add `\<wbr /\>` to allow very long strings to split nicely [\#3578](https://github.com/PostHog/posthog/pull/3578) ([mariusandra](https://github.com/mariusandra))
+-   Calculate properties hourly [\#3577](https://github.com/PostHog/posthog/pull/3577) ([mariusandra](https://github.com/mariusandra))
+-   Fix edge condition in PR description check [\#3575](https://github.com/PostHog/posthog/pull/3575) ([Twixes](https://github.com/Twixes))
+-   bump version [\#3571](https://github.com/PostHog/posthog/pull/3571) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Fix long person properties UI [\#3570](https://github.com/PostHog/posthog/pull/3570) ([paolodamico](https://github.com/paolodamico))
+-   Update plugin server to 0.11.4 [\#3569](https://github.com/PostHog/posthog/pull/3569) ([posthog-bot](https://github.com/posthog-bot))
+-   Remove ioredis debug [\#3568](https://github.com/PostHog/posthog/pull/3568) ([mariusandra](https://github.com/mariusandra))
+-   Update posthog-js to 1.9.0 and @posthog/plugin-server to 0.11.3 [\#3565](https://github.com/PostHog/posthog/pull/3565) ([posthog-bot](https://github.com/posthog-bot))
+-   Add $device_type tooltip text [\#3564](https://github.com/PostHog/posthog/pull/3564) ([mariusandra](https://github.com/mariusandra))
+-   Update tracking for Retention & Paths [\#3563](https://github.com/PostHog/posthog/pull/3563) ([kpthatsme](https://github.com/kpthatsme))
+-   Remove unnecessary groupbys in session queries [\#3562](https://github.com/PostHog/posthog/pull/3562) ([EDsCODE](https://github.com/EDsCODE))
+-   Add JSON view for events [\#3560](https://github.com/PostHog/posthog/pull/3560) ([mariusandra](https://github.com/mariusandra))
+-   Fix cloud tests on main repo [\#3559](https://github.com/PostHog/posthog/pull/3559) ([paolodamico](https://github.com/paolodamico))
+-   Update posthog-js to 1.8.10 [\#3558](https://github.com/PostHog/posthog/pull/3558) ([posthog-bot](https://github.com/posthog-bot))
+-   Add calculate funnel event [\#3556](https://github.com/PostHog/posthog/pull/3556) ([kpthatsme](https://github.com/kpthatsme))
+-   Update posthog-js to 1.8.9 [\#3555](https://github.com/PostHog/posthog/pull/3555) ([posthog-bot](https://github.com/posthog-bot))
+-   Clean up copyToClipboard [\#3553](https://github.com/PostHog/posthog/pull/3553) ([Twixes](https://github.com/Twixes))
+-   docker-compose.ch\(.test\).yml files for plugin server [\#3552](https://github.com/PostHog/posthog/pull/3552) ([Twixes](https://github.com/Twixes))
+-   Clean up PR bot workflow [\#3546](https://github.com/PostHog/posthog/pull/3546) ([Twixes](https://github.com/Twixes))
+-   Bump pytz from 2019.3 to 2021.1 [\#3545](https://github.com/PostHog/posthog/pull/3545) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Bump celery-redbeat from 0.13.0 to 2.0.0 [\#3544](https://github.com/PostHog/posthog/pull/3544) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Bump psycopg2-binary from 2.8.4 to 2.8.6 [\#3543](https://github.com/PostHog/posthog/pull/3543) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Bump parso from 0.6.1 to 0.8.1 [\#3542](https://github.com/PostHog/posthog/pull/3542) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Soften shame message [\#3541](https://github.com/PostHog/posthog/pull/3541) ([timgl](https://github.com/timgl))
+-   Fix bin/tests [\#3540](https://github.com/PostHog/posthog/pull/3540) ([timgl](https://github.com/timgl))
+-   Bump fakeredis from 1.4.4 to 1.4.5 [\#3539](https://github.com/PostHog/posthog/pull/3539) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Bump whitenoise from 5.0.1 to 5.2.0 [\#3538](https://github.com/PostHog/posthog/pull/3538) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Bump django-deprecate-fields from 0.1.0 to 0.1.1 [\#3536](https://github.com/PostHog/posthog/pull/3536) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Bump asgiref from 3.2.7 to 3.3.1 [\#3535](https://github.com/PostHog/posthog/pull/3535) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+-   Closes \#3520 fix custom date filter dashboards [\#3533](https://github.com/PostHog/posthog/pull/3533) ([timgl](https://github.com/timgl))
+-   Post-release 1694-dashboards [\#3513](https://github.com/PostHog/posthog/pull/3513) ([paolodamico](https://github.com/paolodamico))
+-   Plugins access control [\#3486](https://github.com/PostHog/posthog/pull/3486) ([Twixes](https://github.com/Twixes))
+-   Release Persons V2 \(persons-2353\) [\#3461](https://github.com/PostHog/posthog/pull/3461) ([paolodamico](https://github.com/paolodamico))
+-   Plugins secret config fields [\#3341](https://github.com/PostHog/posthog/pull/3341) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Add organization settings [\#3324](https://github.com/PostHog/posthog/pull/3324) ([Twixes](https://github.com/Twixes))
+-   Add docker hub build & push task to github actions [\#3277](https://github.com/PostHog/posthog/pull/3277) ([fuziontech](https://github.com/fuziontech))

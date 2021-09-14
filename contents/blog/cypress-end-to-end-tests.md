@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: general,engineering
 ---
 
 ## Moving fast is easy. Moving fast with confidence is hard.
@@ -15,7 +16,7 @@ What we have found that works really well is nothing terribly novel by itself: a
 
 ### Unit & Integration tests
 
-In our Django codebase you'll find good number of [Django tests](https://github.com/PostHog/posthog/tree/master/posthog/test) that help keep us honest as we hack away at the backend of Posthog that keeps track of all the 1's and 0's that our customers depend on for making product decisions. These are our frontline defenders that let us know that something might be up before we even get to the point of creating a PR.
+In our Django codebase you'll find good number of [Django tests](https://github.com/PostHog/posthog/tree/master/posthog/test) that help keep us honest as we hack away at the backend of PostHog that keeps track of all the 1's and 0's that our customers depend on for making product decisions. These are our frontline defenders that let us know that something might be up before we even get to the point of creating a PR.
 
 For this we do lean heavily on the standard Django test runner.
 
@@ -25,7 +26,7 @@ These tests only get you so far though. You know that the backend is going to be
 
 ### Enter Cypress
 
-According to Cypress's Github [repo](https://github.com/cypress-io/cypress) it is a **fast, easy and reliable testing for anything that runs in a browser**. What does that mean exactly though?
+According to Cypress's GitHub [repo](https://github.com/cypress-io/cypress) it is a **fast, easy and reliable testing for anything that runs in a browser**. What does that mean exactly though?
 
 It lets you programmatically interact with your application by querying the DOM and running actions against any selected elements. You can see that in a few of our [Cypress test definitions](https://github.com/PostHog/posthog/tree/master/cypress/integration)
 
@@ -90,13 +91,13 @@ describe('Funnels', () => {
 I personally love this syntax. It feels super readable to me and reminds me a bit of the best parts of jQuery.
 
 
-### Github Actions
+### GitHub Actions
 
 So that's all well and cool, but what about making sure that in a fit of intense focus and momentum we don't inadvertently push a breaking change to master? We need someone or something to act as a gatekeeper to keep us from from shooting ourselves in the foot. We need CI.
 
-We could use Travis, or Jekins, or CircleCI… but as you may have noticed we keep almost everything about PostHog in Github, from our product roadmap, issues, this blog, everything is in Github. So it made sense to us to keep our CI in Github if we could. We decided to give Github Actions a test. So far, we have loved it.
+We could use Travis, or Jekins, or CircleCI… but as you may have noticed we keep almost everything about PostHog in GitHub, from our product roadmap, issues, this blog, everything is in GitHub. So it made sense to us to keep our CI in GitHub if we could. We decided to give GitHub Actions a test. So far, we have loved it.
 
-[Github actions](https://github.com/features/actions) are basically a workflow you can trigger from events that occure on your Github repo. We trigger ours on the creation of a pull request. We also require that our actions all return 👍&nbsp;&nbsp;before you can merge your PR into master. Thus, we keep master clean.
+[GitHub actions](https://github.com/features/actions) are basically a workflow you can trigger from events that occure on your GitHub repo. We trigger ours on the creation of a pull request. We also require that our actions all return 👍&nbsp;&nbsp;before you can merge your PR into master. Thus, we keep master clean.
 
 To make sure that things are only improving with our modifications, we first re-run our Django unit and integration tests just to make sure that in our customers final environment things are still going to behave as expected. We need to be sure that there was nothing unique about your dev environment that could have fooled the tests into a false sense of awesome. You can check out how we set this up here [Django github actions](https://github.com/PostHog/posthog/blob/master/.github/workflows/pythonapp.yml)
 
@@ -104,7 +105,7 @@ The second round of poking we do with our app is we hit it with Cypress tests th
 
 ### Caching
 
-We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser… this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? That's where we ended up using one of the best features of Github Actions: the [cache step](https://github.com/actions/cache).
+We ran up upon an issue though. Installing python dependencies, javascript dependencies, building our frontend app, booting up a chromium browser… this all takes a lot of time. We are impatient. We want instant gratifiction, at least when it comes to our code. Most of this stuff doesn't even change between commits on a PR anyways. Why are we spending valuable time and resources towards having things be repulled and rebuilt? That's where we ended up using one of the best features of GitHub Actions: the [cache step](https://github.com/actions/cache).
 
 Using the cache step we can cache the results of pulling python dependencies or javascript dependencies. This saves a chunk of time if you have ever messed around with watching yarn sort out the deps for a large frontend project. Check it out:
 
@@ -175,7 +176,7 @@ Now you are catching `if` the cache exists so we can skip building the frontend 
 
 ### Throw more computers at it!
 
-One of the best thing about Cypress is that you can grow with it. It would be a real pain if you invested all of this time into building out tests just to have your test suite take 60 minutes to run. Luckily both Github actions and Cypress have a solution to that!
+One of the best thing about Cypress is that you can grow with it. It would be a real pain if you invested all of this time into building out tests just to have your test suite take 60 minutes to run. Luckily both GitHub actions and Cypress have a solution to that!
 
 #### Run it in parallel!
 
@@ -205,7 +206,7 @@ matrix:
 
 Depending on the count of tests and the frequency you are running your suite this might cost you some money having to upgrade your account on [Cypress.io](https://cypress.io) but their free tier is pretty generous and they do have OSS plans that are free.
 
-This all has cut the time it takes for Github to stamp our pull requests from >10 minutes to \~5 minutes and that's with our relatively small set of tests.
+This all has cut the time it takes for GitHub to stamp our pull requests from >10 minutes to \~5 minutes and that's with our relatively small set of tests.
 
 As we grow functionality within PostHog all of this will only become more important so that we don't end up with a 30 minute end to end test blocking you from landing that really killer new feature. Sweet.
 
@@ -213,7 +214,7 @@ As we grow functionality within PostHog all of this will only become more import
 
 The final bit here is what happens if the tests are failing?
 
-If this is all happening in a browser up in the cloud how do we capture what went wrong? We need that to figure out how to fix it. Luckily, again, Cypress and Github actions has a solution: [artifacts](https://github.com/actions/upload-artifact).
+If this is all happening in a browser up in the cloud how do we capture what went wrong? We need that to figure out how to fix it. Luckily, again, Cypress and GitHub actions has a solution: [artifacts](https://github.com/actions/upload-artifact).
 
 Artifacts allow us to take the screenshots that Cypress takes when things go wrong, zip them up, and make them available on the dashboard for the actions that are being run.
 

@@ -1,52 +1,51 @@
 ---
-title: Strategy
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
 
-Regularly publishing useful content helps us:
+The Marketing team's objective is to _increase the number of relevant visitors to posthog.com._ Once a visitor lands on our website, the Growth team are then responsible for maximising conversion and activation. 
 
-* Build awareness of PostHog in the developer community
-* Convert people who are aware of us into users
-* Convert users into power users
+As we aspire to product-led growth, we believe that it is important to treat our Website & Docs as their own product as well, rather than having them be owned by Marketing. 
 
-## Content Personas
+## Positioning
 
-We tailor our content to specific audiences.
+We use a positioning statement based on [a template by Geoffrey Moore](https://gist.github.com/JoshSmith/2041454), which enables us to establish a position relative to the rest of the market. Our positioning statement helps us think about how we can continue to improve and evolve PostHog ahead of alternative tools:
 
-### Raising awareness
+_For product managers who need to understand their users, PostHog is the only open-source, all-in-one analytics platform that offers everything from funnel analysis and cohort tracking, to feature flags and session recording._ 
 
-Many developers have no idea who we are, and do not have a current need for PostHog at this time. However, they may develop a need in future. These people are interested in broader content:
+_Unlike traditional tools, PostHog offers self-hosted deployments so that data doesn't need to be shared with anyone -- not even PostHog._ 
 
-* Syndicating content about how to make your product successful - being a pundit.
-  * New and useful open source libraries to build / understand user behavior
-  * Syndicating content about talking to users and how to help engineers become better at product-thinking
-  * Running an engineering team that ships
-  * Big new releases in popular libraries that people use to ship with
-  * Useful new products that are released
-* 1st hand content about building an open source company
-  * Building in the open
+See [our messaging framework for more information](/handbook/growth/marketing/messaging_framework) about positioning and how we bring it to life. 
 
-There are also developers that have no idea who we are, but with a specific need that we could solve.
+## Value propositions
 
-**Suitable Content**
+We have used our messaging framework to then articulate a series of [value propositions](https://docs.google.com/spreadsheets/d/1VVLqk8xiKPj_rzDDhVA2eMFx7ENlhg9WnYDj2rkd_E4/edit?usp=sharing) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels. This is particular important for paid ads. 
 
-* Tutorials explaining the use cases of our product
+## Products
 
-### Converting awareness into usage
+An **open source product analytics platform**, PostHog addresses the lack of choice and control amongst disconnected analytics solutions by offering a **unified platform** with **control** over hosting, pricing, source, data, privacy and security.
 
-There are thousands of developers who are aware of us, but who are not using us (yet)! This could be people who have starred our repo, people who have made a demo or startup scheme enquiry, people that our own team knows  (e.g. other founders), and potentially even users that have churned.
+- **PostHog Open Source** is positioned to service 1-3 users in teams of any size, from hobbyists to enterprise deployments.
+- **PostHog Scale** is positioned to service collaborative teams or enterprises who need to retain control of their data. 
+- **PostHog Cloud** is positioned to service collaborative teams or enterprises who value simplicity or don't need to retain control of their data.
 
-With this group, we need content that demonstrates the product's use cases, highlighting what is changing as the product's capabilities expand.
+## Target audience
 
-**Suitable Content**
+*Innovative technical teams* building growth products, who care about:
 
-* Monthly wrap ups that contain the headline new features and any new tutorials
+- a unified product analytics platform
+- open source
+- control: hosting, pricing, source, data, privacy and security
 
-### Converting users into ambassadors
+We are in the process of building more specific user personas. 
 
-Once people start using PostHog, we've seen we get word of mouth growth when we really impress people, which has so far come from shipping fast. Our content can reinforce this, and to make these users clear how to get the most use out of the product. 
+## Acquisition channels
 
-**Suitable Content**
+We have identified a number of acquisition channels that we are prioritising based on our target user. These are split into scalable and non-scalable channels. Some of these are not owned by Marketing, but are closely linked:
 
-* [Array](posthog-array) (release notes + new tutorials)
+<img width="1140" alt="Screenshot 2021-08-17 at 15 43 45" src="https://user-images.githubusercontent.com/70321811/129747467-549d0547-4cb6-43da-a83e-0411dc1c6001.png" />
+
+### Team
+
+The Marketing Small Team page is maintained [here](/handbook/people/team-structure/marketing). 

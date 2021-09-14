@@ -5,6 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Our primary goals for this release were to iron out bugs and improve the user experience of our Beta features.
@@ -15,7 +18,7 @@ Finally, thank you to everyone who helped us out with feedback and contributions
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [New Event Selection Box](https://github.com/PostHog/posthog/pull/2394)
 
@@ -57,7 +60,7 @@ As described by Michael, one of our engineers:
 
 _"They don't do anything, yet we thank them for their existence."_
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

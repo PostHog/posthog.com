@@ -5,6 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 This is the first of (what we hope are many) PostHog weekly roundup posts. We want to let the community know what we have been up to, a few of our favorite comments, issues, and pull requests as well as some key repos and projects we have noticed over the course of the week.
@@ -49,7 +52,7 @@ We’ll try to ensure we don’t make such oversights again. In the meantime, at
 
 We’ve wanted to increase the number of integrations. This is why we’re highlighting this issue – having people request something helps us prioritize better.
 
-[Integrations-wise](/docs/integrations), we already have JS, Node, Python, Ruby, PHP and Go – let us know if we’re missing something that you would like.
+[Integrations-wise](/docs/integrate/overview), we already have JS, Node, Python, Ruby, PHP and Go – let us know if we’re missing something that you would like.
 
 Thank you [victorbordo](https://github.com/victorbordo) for raising it.
 

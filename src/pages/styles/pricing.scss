@@ -6,7 +6,7 @@
     .p-title {
         font-size: 50px;
         font-weight: 500;
-        font-family: lato;
+        font-family: 'Good Sans', sans-serif;
     }
 
     .p-text-primary {
@@ -163,16 +163,10 @@
         text-align: left;
     }
 
-    .p-comparison-list {
-        margin-left: 0;
-        margin-top: 16px;
-        padding-bottom: 16px;
-    }
-
     .p-comparison-list li {
         list-style: none;
         line-height: 1.5;
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
 
     .p-comparison-list li:before {
@@ -187,8 +181,6 @@
     }
 
     .p-comparison-btn {
-        position: absolute;
-        bottom: 0;
         width: 100%;
         text-align: center;
     }
@@ -265,7 +257,6 @@
 
     .pricing-cloud {
         width: 100%;
-        text-align: left;
 
         .feature-card {
             max-width: 400px;
@@ -298,8 +289,6 @@
         }
 
         ul {
-            text-align: center;
-
             li {
                 font-size: 14px;
                 position: relative;
@@ -311,6 +300,13 @@
                     padding-left: 2px;
                 }
             }
+        }
+    }
+
+    .redemption-instructions {
+        margin-top: 16px;
+        li {
+            font-size: 14px;
         }
     }
 }

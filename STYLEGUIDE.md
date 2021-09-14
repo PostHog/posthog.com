@@ -1,4 +1,4 @@
-# Documentation Style Guide
+# Documentation style guide
 
 ## Purpose
 
@@ -10,7 +10,7 @@ Hence, this guide aims to provide some basic guidelines for those wishing to con
 
 ## Guidelines
 
-### Golden Rule: Assume Nothing (Almost)
+### Golden rule: assume (almost) nothing
 
 Assume as little as possible about your reader regarding the topic at hand. Whenever possible, you should provide links to other Docs and pages which describe how to download, update, and debug certain tools, so that your reader can easily solve an issue without having to go out searching on their own.
 
@@ -18,7 +18,7 @@ Regarding this point, there is a tradeoff. You do not want your text to get too 
 
 It is dangerous to assume that because something is obvious to you, it will also be obvious to your reader - just keep that in mind.
 
-### Additional Suggestions
+### Additional suggestions
 
 **Use American English**
 
@@ -38,11 +38,9 @@ Example: Write "URLs", not "urls".
 
 On another note, try to avoid acronyms unless they're so common that it's weird not to. For example, Hyper Text Transfer Protocol is a weird way to say HTTP.
 
-**Capitalize every word in a title (except for prepositions)**
+**Use sentence case for titles**
 
-Example: Write "Documentation Style Guide" instead of "Documentation style guide". 
-
-"Style Guide **for** Documentation" is fine, however.
+Example: Write "Documentation style guide" instead of "Documentation Style Guide". 
 
 **Adhere to the style standards of each programming language**
 
@@ -50,7 +48,13 @@ In code snippets, you should follow the conventions of the language the code is 
 
 Example: Use `camelCase` for JavaScript, and `snake_case` for Python variables names.
 
-**Where there is a Call to Action, always provide a link**
+**Third-party, 3rd party or third party cookies?**
+
+We often talk about third-party cookies. And that's how it's spelled, with the number spelled out and a hyphen in the middle. The hyphen indicates that this is a modifying adjective to the noun (cookies). That means if you're actually talking about the third party you went to you would spell it 'third party' instead. Same goes for first-party. 
+
+Example: 'PostHog doesn't require third-party cookies.'
+
+**Where there is a call to action, always provide a link**
 
 When you write: "You can contact us to learn more", make sure to provide the reader with the means to do so immediately. This could be a link to another page or an email address, for example. 
 

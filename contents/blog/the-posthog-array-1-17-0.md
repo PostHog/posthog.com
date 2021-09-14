@@ -5,15 +5,18 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
-Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/features/session-recording) and [Plugins](/docs/features/plugins), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
+Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/user-guides/session-recording) and [Plugins](/docs/user-guides/plugins), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
 
 You'll notice PostHog feels much nicer to use and that's largely in part to all the feedback we've received from our users, so thank you and keep the suggestions coming!
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/configuring-posthog/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
 ### [Sentry Integration](https://github.com/PostHog/posthog/pull/1833)
 
@@ -27,7 +30,7 @@ With our new [Sentry](https://sentry.io/) integration, you can leverage PostHog 
 
 If you're unfamiliar with Sentry, we highly recommend you to check it out - it is an awesome application monitoring platform of which we're avid users at PostHog.
 
-To set up the integration you can read the step-by-step instructions on the dedicated [Sentry Integration page](/docs/integrations/sentry-integration).
+To set up the integration you can read the step-by-step instructions on the dedicated [Sentry Integration page](/docs/integrate/third-party/sentry).
 
 ### [RudderStack Integration](https://docs.rudderstack.com/destinations/posthog)
 
@@ -45,9 +48,9 @@ Over the past two weeks, our [Plugins](/docs/plugins/overview) feature was exten
 
 One of the main changes was the addition of plugin attachments, which allow you to upload files that are used in the configuration of the plugin, vastly expanding the realm of possibilities of what plugins can do. 
 
-As a result of this, we built the [PostHog MaxMind Plugin](/docs/plugins/maxmind), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
+As a result of this, we built the [PostHog MaxMind Plugin](https://github.com/PostHog/maxmind-plugin), leveraging attachments to allow GeoIP data to be used for enriching your events. Once configured, the plugin adds IP-based location information as properties on your events, such as what country and city your users are located in, making it possible to create charts and tables filtered based on the location of your users.
 
-> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](/docs/plugins/maxmind). If you want to build your own plugin, check out our [fresh new guide](/docs/plugins/build) on how to do so.
+> **Note:** Plugins are currently only available on self-hosted instances. If you're self-hosting and want to use the PostHog MaxMind Plugin, please follow [these instructions](https://github.com/PostHog/maxmind-plugin). If you want to build your own plugin, check out our [fresh new guide](/docs/plugins/build) on how to do so.
 
 ### [Retentions & Paths Dashboard Panels](https://github.com/PostHog/posthog/pull/2201)
 
@@ -75,11 +78,11 @@ On this page, you'll be able to manage everything related to your events, from i
 
 ### [Improved AWS CloudFormation Deployment](https://github.com/PostHog/deployment/pulls?q=is%3Apr+is%3Aclosed)
 
-Following a lot of great user feedback, we have now significantly improved our [AWS CloudFormation Deployment](/docs/deployment/deploy-aws).
+Following a lot of great user feedback, we have now significantly improved our [AWS CloudFormation Deployment](/docs/self-host/deploy/aws).
 
 We have now added configuration for relevant alerts and RDS disk size, as well as improved the setup flow and added automatic `SECRET_KEY` generation. If you're happy with the standard config, deploying with AWS is now just a matter of "click, click, click", as described by Karl, one of our engineers.
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 
@@ -150,7 +153,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Closes \#2286 remove restrict signups [\#2304](https://github.com/PostHog/posthog/pull/2304) ([timgl](https://github.com/timgl))
 - Remove Live Actions Altogether [\#2303](https://github.com/PostHog/posthog/pull/2303) ([yakkomajuri](https://github.com/yakkomajuri))
 - Add option to print clickhouse SQL to terminal [\#2302](https://github.com/PostHog/posthog/pull/2302) ([macobo](https://github.com/macobo))
-- Basic caching for Clickhouse to redis [\#2300](https://github.com/PostHog/posthog/pull/2300) ([fuziontech](https://github.com/fuziontech))
+- Basic caching for ClickHouse to redis [\#2300](https://github.com/PostHog/posthog/pull/2300) ([fuziontech](https://github.com/fuziontech))
 - Fix cohort query missing filters [\#2299](https://github.com/PostHog/posthog/pull/2299) ([EDsCODE](https://github.com/EDsCODE))
 - Fix person created at [\#2288](https://github.com/PostHog/posthog/pull/2288) ([timgl](https://github.com/timgl))
 - Updated rrweb block class [\#2279](https://github.com/PostHog/posthog/pull/2279) ([yakkomajuri](https://github.com/yakkomajuri))
@@ -191,7 +194,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - Fix: improve the accessibility [\#2206](https://github.com/PostHog/posthog/pull/2206) ([weyert](https://github.com/weyert))
 - Optionally log to Kafka for WAL [\#2205](https://github.com/PostHog/posthog/pull/2205) ([fuziontech](https://github.com/fuziontech))
 - Plugins via NPM [\#2204](https://github.com/PostHog/posthog/pull/2204) ([mariusandra](https://github.com/mariusandra))
-- Clickhouse dont run caching/cohort [\#2200](https://github.com/PostHog/posthog/pull/2200) ([timgl](https://github.com/timgl))
+- ClickHouse dont run caching/cohort [\#2200](https://github.com/PostHog/posthog/pull/2200) ([timgl](https://github.com/timgl))
 - Possibly fix org signup by fixing analytics [\#2199](https://github.com/PostHog/posthog/pull/2199) ([Twixes](https://github.com/Twixes))
 - Optimize commandPaletteLogic [\#2193](https://github.com/PostHog/posthog/pull/2193) ([Twixes](https://github.com/Twixes))
 - Remove some seemingly unused requirements and use pip-compile [\#2192](https://github.com/PostHog/posthog/pull/2192) ([Twixes](https://github.com/Twixes))

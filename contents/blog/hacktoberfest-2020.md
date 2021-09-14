@@ -5,12 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: ../images/blog/hacktoberfest/hacktoberfest.png
+categories: engineering
 ---
-
-![Hacktoberfest Banner](../images/blog/hacktoberfest/hacktoberfest.png)
-
-<br />
-
 ### Let the pull requests come in!
 
 We're happy to announce that PostHog has joined [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/).
@@ -24,11 +21,7 @@ As a company that's extensively dedicated to the open source ecosystem as a whol
 
 As a result, we have now [tagged some good first issues](https://github.com/PostHog/posthog/labels/Hacktoberfest) on our [main repo](https://github.com/PostHog/posthog/) with the <code class="hacktoberfest">Hacktoberfest</code> tag, as these should be suitable issues for first-time contributors. We have also made an effort to document those issues better, so that their scope is clearly defined. 
 
-<br />
-
 ![Hacktoberfest Banner](../images/blog/hacktoberfest/tagged-issues.png)
-
-<br />
 
 From the perspective of the Hacktoberfest rules, you are able to contribute to any issue, be it tagged or not. We welcome all contributions and would be happy to help you with your pull request. We nevertheless recommend you try to find an issue tagged with <code class="hacktoberfest">Hacktoberfest</code> or <code class="good-first-issue">good first issue</code> if this is your first time contributing to PostHog. 
 
@@ -37,7 +30,3 @@ Additionally, we also welcome contributions to our Docs, especially to our [new 
 Finally, we don't want to miss out on the fun. Thus, while you need 4 valid PRs to get an official shirt from Digital Ocean, we are happy to send you some [PostHog merch](https://merch.posthog.com/) if you make _one_ relevant contribution. 
 
 Happy Hacktoberfest from our entire team at PostHog. Let's get hacking!
-
-<br />
-
-

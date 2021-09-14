@@ -4,31 +4,38 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog encourages its team to take time off to recharge.
+At PostHog, we encourage everyone to take time off to recharge, spend time with loved ones, or explore new things.  
 
-We have a flexible time off policy. Sometimes you need an extra day or two.
+We offer our team unlimited time off, but with an expectation that you take _at least 25 days off a year_, including national holidays. This is to make sure that people can take time off flexibly while not feeling guilty about being on vacation.
 
-We believe people need 20 days off a year plus a sprinkling of national holidays to have meaningful time with their families, to explore or just to relax.
+> We have added some national holidays to our team calendar, but these won't cover everyone. Please decide yourself if you want to take those specific days off. If you do, please remember to book the day off in CharlieHR and hand over any work, especially if you are doing anything customer-facing.  
 
-PostHog therefore offer unlimited time off, but with an expectation that you take _at least 25 days off a year_, inclusive of national holidays.
+The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People team will look holiday usage occasionally but _only_ to encourage people who haven't taken enough time off to do so. The 25 days is a minimum, not a guide. 
 
-This is to make sure that people can take time off flexibly, whilst not feeling guilty about taking time off.
 
-The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done.
-
-## Permissionless Time Off
+## Permissionless time off
 
 You do not need to "clear" time off with your manager.
 
-We care about your results, not how long you work. Whilst no approval is needed, it shouldn't be at the expense of business getting done. For example, having the entire technical team off means we can't be responsive to community issues. Please coordinate with your team.
+We care about your results, not how long you work. Whilst no approval is needed, it shouldn't be completely at the expense of business getting done. For example, having the entire engineering team off means we can't be responsive to community issues. Please coordinate with your team.
 
 When you pick a date(s) to have off, please enter it into [CharlieHR](https://posthog.charliehr.com/) and it will be automatically approved and added to the team time off calendar. Remember to set an out of office message on your email.
 
 The same rules as above apply regardless of the vacation length.
 
-You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately. 
+You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately.
 
-## When You Should Have Time Off
+## Flexible working
+
+We operate on a trust basis and we don't count hours or days worked. We trust everyone to manage their own time. 
+
+Whether you have an appointment with your doctor, school run with your kids or you want to finish an hour early to meet friends or family - we don't mind and you don't need to tell us. Please just add it to your calendar and if you are customer-facing, please make sure you have cover. 
+
+### Sabbaticals
+
+As we have unlimited, permissionless time off, PostHog doesn’t offer ‘sabbaticals’ in the way that some companies do. Instead, we strongly encourage team members to use our existing policy to take a full month off every 3-4 years. We only ask that you organise this thoughtfully with your team by giving them enough notice to plan.
+
+## When you should have time off
 
 ### You are sick
 
@@ -38,11 +45,17 @@ Please let your manager know if you need to take off due to illness as soon as y
 
 For extended periods of illness, please speak to us so we can work out a plan. In some countries, we may be required to request a doctor's note from you. 
 
-### Jury Duty / Bereavements / Voting / Child Admin Disasters
+### Jury duty / voting / childcare disasters
 
 There are lots of situations where life needs to come first. Please let it - just be communicative with us and fit your work around it as you need.
 
-## Parental Leave
+### Bereavements / Child loss 
+
+We do not define “closeness” and we won't ask about your relationship to the person or what they meant to you. Take as much time as you need, just give us a quick update every now and then. 
+
+We extended our bereavement policy to also cover pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. In case you need additional time for physical or mental health reasons, we will treat it as extended sick leave.
+
+## Parental leave
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of the way you've become a parent - childbirth, adoption or foster care. 
 

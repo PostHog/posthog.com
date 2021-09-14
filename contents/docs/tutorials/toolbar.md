@@ -1,21 +1,12 @@
 ---
-title: Visualizing User Behavior - Toolbar
+title: Visualizing user behavior - Toolbar
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
-<small class="note-block centered">_Estimated Reading Time: 6 minutes ☕☕_</small>
-
-<br />
-
-<span class="larger-image">
+_Estimated reading time: 6 minutes_ ☕☕
 
 ![Toolbar banner image](../../images/tutorials/banners/toolbar.png)
-
-</span>
-
-<br />
 
 An underlying purpose of analytics is to answer questions by utilizing data.
 
@@ -44,20 +35,20 @@ This tutorial will walk you through using the PostHog Toolbar to answer some of 
 
 _Prefer to watch a video? Check out the [Toolbar sections of our demo video](https://youtu.be/aUILrrrlu50?t=48) for a shorter overview of this functionality._
 
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. 
+1. Have added the [PostHog snippet](/docs/integrate/client/js) to your website. 
 
-> **Note:** Our Toolbar only works with our [JavaScript Integration](/docs/integrations/js-integration), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
+> **Note:** Our Toolbar only works with our [JavaScript library](/docs/integrate/client/js), so you will not have access to it without the PostHog snippet. Additionally, a Segment snippet is unable to load the toolbar.
 
-## Why Use the Toolbar
+## Why use the toolbar
 
 Before we go right into how to use the PostHog Toolbar, it's useful to understand why you'd want to do so.
 
-Our toolbar is still in Beta, and there are exciting new features for it on our roadmap. However, in it's current form, it can:
+Our toolbar is still in Beta, and there are exciting new features for it on our roadmap. However, in its current form, it can:
 
 
 1. Display user clicks on your website/web app in a visual way
@@ -79,9 +70,9 @@ To launch the toolbar, you can just access your website and it should appear for
 
 This will prompt you to select the URL you'd like to launch it on (in case you are tracking multiple websites). Once you've clicked the desired URL, you will then be taken to a new tab where your website will load with the toolbar enabled.
 
-<div class='note-block'><b>Note:</b> The toolbar is now enabled for all new PostHog users by default, even though it is still in Beta. However, if you are an user from before our 1.13.0 release, you might need to enable the toolbar in 'Settings' -> 'Setup'.</div><br />
+<div class='note-block'><b>Note:</b> The toolbar is now enabled for all new PostHog users by default, even though it is still in Beta. However, if you are a user from before our 1.13.0 release, you might need to enable the toolbar in 'Settings' -> 'Setup'.</div><br />
 
-## Using the Heatmap
+## Using the heatmap
 
 ### Step 1: Enabling the heatmap
 
@@ -107,9 +98,9 @@ With the heatmap enabled, if you then click on an element, you will also be able
 
 ![Heatmap Selected Element](../../images/tutorials/toolbar/selected-element.png)
 
-## Creating Actions
+## Creating actions
 
-Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/features/actions). 
+Actions are PostHog's way of allowing you to sort through your events. If you have not used them, you can find more information in the [dedicated Actions page](/docs/user-guides/actions). 
 
 ### Step 1: Using 'Inspect'
 
@@ -121,7 +112,7 @@ To create an action from an element, toggle on 'Inspect' after hovering over the
 
 Example from our website:
 
-![Toolbar Inspect Element](../../images/tutorials/toolbar/inspect-toolbar.png)
+![Toolbar inspect element](../../images/tutorials/toolbar/inspect-toolbar.png)
 
 Just like the heatmap, this will also add an overlay to the elements, albeit a blue one.
 
@@ -129,7 +120,7 @@ Then, if you click on an element, you will be given the option to create an acti
 
 This will open up an action creation modal, like this:
 
-![Toolbar Create Action](../../images/tutorials/toolbar/toolbar-create-action.png)
+![Toolbar create action](../../images/tutorials/toolbar/toolbar-create-action.png)
 
 You should then fill in the name of the action under 'What did your user do?', scroll down, and click 'Create Action'.
 
@@ -165,7 +156,7 @@ This is an `OR` operation, meaning that the action will be recorded if Element A
 
 This is useful if you have various buttons that take you to the same page, for instance, and just care that the user clicks one of them.
 
-A good use case for this is leveraging the action as a [funnel step](/docs/features/funnels). 
+A good use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
 
 ### Step 2: Seeing your existing actions
 

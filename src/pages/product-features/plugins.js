@@ -50,7 +50,7 @@ function PluginsPage() {
                     headerText="Build your own plugins with ease"
                     listItem="03"
                     descriptionText={`
-                        Our plugins are JavaScript-based, making it easily accessible for anyoner to build their own plugin.
+                        Our plugins are JavaScript-based, making it easily accessible for anyone to build their own plugin.
                         If you have a use-case that isn't met by the existing plugins, why not build your own? 
                     `}
                     image={pluginsImg3}

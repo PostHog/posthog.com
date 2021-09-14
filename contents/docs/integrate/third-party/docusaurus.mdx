@@ -1,0 +1,42 @@
+---
+title: Docusaurus v2 integration
+sidebarTitle: Docusaurus v2
+sidebar: Docs
+showTitle: true
+tags:
+  - community
+---
+
+> This is a community integration that is not maintained by the PostHog core team.
+
+## Install
+
+```bash
+yarn add posthog-docusaurus
+```
+
+or
+
+```bash
+npm install --save posthog-docusaurus
+```
+
+## How to use
+
+```js
+// in docusaurus.config.js
+module.exports = {
+  plugins: ["posthog-docusaurus"],
+  themeConfig: {
+    posthog: {
+      apiKey: "<ph_project_api_key>",
+      appUrl: "<ph_instance_address>",  // optional
+      enableInDevelopment: false  // optional
+    }
+  }
+};
+```
+
+This will automatically start tracking pageviews, clicks and more.
+
+For instructions on the JS library itself, see [JS library](/docs/integrate/client/js).

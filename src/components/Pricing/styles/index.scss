@@ -1,0 +1,179 @@
+#gatsby-focus-wrapper .pricing-hero {
+    .platform-columns {
+        //grid-template-columns: repeat(3, 1fr);
+
+        @media (min-width: 840px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        position: relative;
+        z-index: 11;
+
+        .insights-column {
+            position: relative;
+
+            @media (min-width: 1092px) {
+                &:before,
+                &:after {
+                    content: '';
+                    height: 1px;
+                    opacity: 0.5;
+                    position: absolute;
+                    top: 148px;
+                }
+
+                &:before {
+                    background: linear-gradient(90deg, #3954c2 0%, #f1764f 100%);
+                    left: -14%;
+                    right: calc(100% - 14%);
+                }
+
+                &:after {
+                    background: linear-gradient(90deg, #d7684b 0%, #ff9900 100%);
+                    right: -14%;
+                    left: calc(100% - 14%);
+                }
+            }
+        }
+
+        li {
+            backdrop-filter: blur(5px);
+            border: solid 1px rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            color: #8fbcff;
+            display: flex;
+            font-size: 1em;
+            margin: 0 auto 0.75rem;
+            max-width: 250px;
+            padding: 0.5rem;
+
+            -ms-transform: skewX(-20deg);
+            -webkit-transform: skewX(-20deg);
+            transform: skewX(-20deg);
+
+            > * {
+                -ms-transform: skewX(20deg);
+                -webkit-transform: skewX(20deg);
+                transform: skewX(20deg);
+            }
+
+            figure {
+                display: none;
+
+                flex: 0 0 auto;
+                margin: 0 0.5em 0 0;
+            }
+
+            span {
+                flex: 1;
+                // padding-right: 24px;
+            }
+        }
+    }
+
+    // plan table where there's no <th> value
+    table th:empty {
+        display: none;
+    }
+}
+
+.pricing-table-collapsed {
+    &:after {
+        background: linear-gradient(rgb(255 255 255 / 0%) 0%, #eeefe982 50%);
+        border-radius: 1rem;
+        bottom: 0;
+        content: '';
+        height: 100%;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+}
+
+// slider overrides
+.rc-slider {
+    // entire bar
+    .rc-slider-rail {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        height: 8px;
+    }
+
+    // filled in portion of bar
+    .rc-slider-track {
+        height: 8px;
+    }
+
+    // legend plots
+    .rc-slider-dot {
+        display: none;
+    }
+}
+
+.plans-comparison-table {
+    table th,
+    table td {
+        border: dashed 2px #e5e7e0;
+    }
+
+    tbody > tr,
+    thead > tr {
+        > td:last-of-type,
+        > th:last-of-type,
+        > th:first-of-type {
+            border-left: 0px;
+            border-right: 0px;
+        }
+    }
+
+    thead > tr:last-of-type > th {
+        border-bottom: 0px;
+    }
+
+    thead > tr:first-of-type {
+        > th {
+            border-top: 0px;
+        }
+        > th:nth-of-type(2) {
+            border-left: 0px;
+        }
+    }
+}
+
+.pricing-hero {
+    .ant-collapse-borderless {
+        background: none;
+        border: none;
+        .ant-collapse-header {
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+
+            i {
+                margin-right: 1rem;
+            }
+        }
+        > .ant-collapse-item {
+            border-bottom: none;
+            text-align: left;
+        }
+
+        .ant-collapse-header {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.25em;
+            color: #fff;
+            font-size: 16px;
+            font-variation-settings: 'wght' 800;
+            margin-bottom: 0.5em;
+        }
+
+        .ant-collapse-content {
+            color: #fff;
+        }
+
+        .ant-collapse-content-box {
+            font-size: 1.2em;
+            opacity: 0.75;
+            padding: 0.5em 3em 1em;
+        }
+    }
+}

@@ -1,22 +1,12 @@
 ---
-title: Analyzing User Behavior with Cohorts
+title: Analyzing user behavior with cohorts
 sidebar: Docs
 showTitle: true
 ---
 
-<br />
-
-<small class="note-block centered">_Estimated Reading Time: 8 minutes ☕☕_</small>
-
-<br />
-
-<span class="larger-image">
+_Estimated reading time: 8 minutes_ ☕☕
 
 ![Cohorts banner image](../../images/tutorials/banners/cohorts.png)
-
-</span>
-
-<br />
 
 Each user uses your product slightly differently from the next, and some user groups might use your app in a completely distinct way from others.
 
@@ -24,7 +14,7 @@ This happens for a variety of reasons, including software, user profiles, access
 
 As such, an established technique for performing analytics is cohort analysis. When doing cohort analysis, users are split into different groups according to certain characteristics, and you can then derive metrics for each specific group (cohort), rather than only performing your analytics on the entire collection of users.
 
-This is extremely useful for comparing metrics across cohorts in order to determine areas for improvement, and maybe even product-market fit.
+This is extremely useful for comparing metrics across cohorts in order to determine areas for improvement, and maybe even product/market fit.
 
 Here are some examples:
 
@@ -52,7 +42,7 @@ PostHog grabs [UTM tags](https://en.wikipedia.org/wiki/UTM_parameters) from URLs
 
 Allows you to determine if your UX is particularly poor on certain browsers. This can be indicated by a lower retention, bad conversion on your funnels, or a lack of certain events being captured. 
 
-### Defining a Group of Users: Setting up a Cohort in PostHog
+### Defining a group of users: Setting up a cohort in PostHog
 
 User group segmentation for cohort analysis is built into PostHog via our cohorts feature.
 
@@ -80,7 +70,7 @@ Here, you have a few options:
 
 **Action**
 
-You can group users by an [action](/docs/features/actions) they have in common, as well as the timeframe they performed that action in. This means that users who have performed that action at least once in the specified time period will be added to the cohort.
+You can group users by an [action](/docs/user-guides/actions) they have in common, as well as the timeframe they performed that action in. This means that users who have performed that action at least once in the specified time period will be added to the cohort.
 
 **Property**
 
@@ -94,13 +84,13 @@ New group let's you add another match condition for the cohort, allowing you to 
 
 > **Note:** This is an `OR` operation. Users who match _any_ of the specified conditions will be added to the cohort.
 
-### Using Cohorts to Determine Important Metrics
+### Using cohorts to determine important metrics
 
 Cohorts can be used in most of PostHog's features, so let's go over some of the key places where they might be useful:
 
-**Feature Flags**
+#### Feature flags
 
-![Feature Flags By Cohort](../../images/tutorials/cohorts/feature-flags.png)
+![Feature flags by cohort](../../images/tutorials/cohorts/feature-flags.png)
 
 You can create [feature flags](/docs/tutorials/feature-flags) that target specific cohorts in order to roll out features to specific user groups first, or simply to see how features perform with different cohorts. 
 
@@ -112,15 +102,9 @@ Examples:
 
 Not only are you able to roll out features by cohort, but you are also able to concretely measure the impact of each flag by cohort using Insights, which we'll go through next.
 
-<br />
+#### Insights
 
-<span class="small-line-height">
-
-**Insights** 
-
-</span>
-
-Cohorts can be used on filters on all PostHog Insights, and they can also be used for breakdowns in [Trends](/docs/features/trends).
+Cohorts can be used on filters on all PostHog Insights, and they can also be used for breakdowns in [Trends](/docs/user-guides/trends).
 
 Regarding business metrics, cohorts are especially useful to determine retention and conversion of different groups. They can help answer questions like:
 
@@ -129,33 +113,25 @@ Regarding business metrics, cohorts are especially useful to determine retention
 
 To answer questions like these, just filter your queries by cohort when using Insights (by clicking 'Add filter'), like so:
 
-![Cohort Filter](../../images/tutorials/cohorts/filter.png)
+![Cohort filter](../../images/tutorials/cohorts/filter.png)
 
 This will give you the same query as before but only including events from users in that specific cohort.
 
-Additionally, if you want to see comparisons across cohorts side-by-side, you can add the designated panels to a dashboard, creating a view like the picture below, which works for charts, tables, and [funnels](/docs/features/funnels).
+Additionally, if you want to see comparisons across cohorts side-by-side, you can add the designated panels to a dashboard, creating a view like the picture below, which works for charts, tables, and [funnels](/docs/user-guides/funnels).
 
-![Cohort Dashboard Funnels](../../images/tutorials/cohorts/dashboard.png)
-<small class='center'>[_Access a full dashboards tutorial here_](/docs/features/dashboards/)  </small>
+![Cohort dashboard funnels](../../images/tutorials/cohorts/dashboard.png)
+[_Access a full dashboards tutorial here_](/docs/user-guides/dashboards/)
 
 Finally, you are also able to see how different cohorts perform on the same chart/table when in 'Trends'.
 
 To do so, rather than filtering, you should add a breakdown by cohort, selecting the relevant cohorts to include in the chart:
 
-![Cohort Break Down](../../images/tutorials/cohorts/trends-breakdown.png)
+![Cohort breakdown](../../images/tutorials/cohorts/trends-breakdown.png)
 
 This is a useful way of seeing metrics for different cohorts in one single chart, helping you determine what user groups perform better with respect to your KPIs, for example.
 
-<div class='small-inner-text'>
-
-> ##### **Recap**
->
-> - Cohorts are a way of segmenting users by shared characteristics.
-> - Users can be grouped by shared actions or properties
-> - Cohort matching conditions operate on an `OR` basis
-> - Cohorts can be used in all of PostHog's insights, as well as Feature Flags 
-
-</div>
-
-
-
+### **Recap**
+- Cohorts are a way of segmenting users by shared characteristics.
+- Users can be grouped by shared actions or properties
+- Cohort matching conditions operate on an `OR` basis
+- Cohorts can be used in all of PostHog's insights, as well as Feature Flags 

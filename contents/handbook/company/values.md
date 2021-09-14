@@ -32,7 +32,7 @@ Our platform is built for developers, and we use GitHub to build a large communi
 
 Whether you're a designer or you're in operations, we will encourage and help you to be able to make basic changes to our website and docs on GitHub.
 
-## Tread on toes
+## Step on toes
 
 PostHog is driven by context-based leadership. We'll explain what we need to achieve, but the reason we hire the best people is that they know what to do.
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import { Row, Col, Button, Icon } from 'antd'
-import SEO from '../components/seo'
+import { SEO } from '../components/seo'
 import './styles/trial.scss'
 
 const TrialPage = () => (
@@ -43,7 +43,7 @@ const TrialPage = () => (
                             infrastructure.
                         </p>
                         <p>
-                            <Link to="/docs/deployment">
+                            <Link to="/docs/self-host">
                                 <Button type="primary" size="large">
                                     Self Deploy
                                 </Button>

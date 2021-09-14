@@ -1,0 +1,124 @@
+---
+title: Ingest live data
+sidebar: Docs
+showTitle: true
+---
+
+import { Tabs } from 'antd'
+export const TabPane = Tabs.TabPane
+
+Live data ingestion, opposed to [historical data ingestions](/docs/integrate/ingest-historic-data), is the process of sending events from your applications to PostHog in real-time; as they happen.
+
+Live (real-time) events can be integrated using [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), and [third-party platform integrations](/docs/integrate/overview#integrations).
+
+The purpose of this guide is to help you understand some key concepts with a goal of ingesting live data into PostHog. For the purposes of the guide we'll focus on the client libraries as a means for data ingestion.
+
+The guide covers the following:
+
+-   [Installing and initializing a PostHog library](#install-a-library)
+-   [How autocapture works with the JavaScript library](#autocapture)
+-   [How to capture user events with PostHog](#capture-user-events)
+-   [How to identify and associate users with events](#identify-users)
+
+If you prefer to learn by doing, you can get started on the web with the [JavaScript snippet](/docs/integrate/client/snippet-installation).
+
+# Install a library
+
+Install the library for the platform you are building your application for.
+
+import JSInstall from './client/js/snippets/install.mdx'
+import AndroidInstall from './client/android/snippets/install.mdx'
+import AndroidConfigure from './client/android/snippets/configure.mdx'
+import IOSInstall from './client/ios/snippets/install.mdx'
+import IOSConfigure from './client/ios/snippets/configure.mdx'
+import FlutterPackage from './client/flutter/snippets/package.mdx'
+import FlutterInstall from './client/flutter/snippets/install.mdx'
+import ReactNativeInstall from './client/react-native/snippets/install.mdx'
+import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
+
+<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
+  <TabPane tab="JavaScript" key="1">
+    <JSInstall />
+  </TabPane>
+  <TabPane tab="Android" key="2">
+    <AndroidInstall />
+    <AndroidConfigure />
+  </TabPane>
+  <TabPane tab="iOS" key="3">
+    <IOSInstall />
+    <IOSConfigure />
+  </TabPane>
+  <TabPane tab="Flutter" key="4">
+    <FlutterPackage />
+    <FlutterInstall />
+  </TabPane>
+  <TabPane tab="React Native" key="5">
+    <ReactNativeInstall />
+    <ReactNativeConfigure />
+  </TabPane>
+</Tabs>
+
+# Autocapture
+
+import JSAutoCapture from './client/js/snippets/autocapture.mdx'
+import JSCaptureIgnoreElements from './client/js/snippets/capture-ignore-elements.mdx'
+
+> Autocapture is presently only available in the web browser using the JavaScript library. For non-browser platforms and for situations where you wish to manually capture events, see the [capture user events](#capture-user-events) section.
+
+<JSAutoCapture />
+<JSCaptureIgnoreElements />
+
+# Capture user events
+
+import JSCapture from './client/js/snippets/capture.mdx'
+import AndroidCapture from './client/android/snippets/capture.mdx'
+import IOSCapture from './client/ios/snippets/capture.mdx'
+import ReactNativeCapture from './client/react-native/snippets/capture.mdx'
+
+<Tabs defaultActiveKey="1" type="card" size="large" style={{marginBottom: "20px"}}>
+  <TabPane tab="JavaScript" key="1">
+    <JSCapture />
+  </TabPane>
+  <TabPane tab="Android" key="2">
+    <AndroidCapture />
+    <p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p>
+  </TabPane>
+  <TabPane tab="iOS" key="3">
+    <IOSCapture />
+    <p>For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.</p>
+  </TabPane>
+  <TabPane tab="Flutter" key="4">
+    <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
+  </TabPane>
+  <TabPane tab="React Native" key="5">
+    <ReactNativeCapture />
+    <p>For more information see the <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.</p>
+  </TabPane>
+</Tabs>
+
+# Identify users
+
+import JSIdentify from './client/js/snippets/identify.mdx'
+import AndroidIdentify from './client/android/snippets/identify.mdx'
+import IOSIdentify from './client/ios/snippets/identify.mdx'
+import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
+
+<Tabs defaultActiveKey="1" type="card" size="large" style={{ marginBottom: '20px' }}>
+  <TabPane tab="JavaScript" key="1">
+    <JSIdentify />
+  </TabPane>
+  <TabPane tab="Android" key="2">
+    <AndroidIdentify />
+  </TabPane>
+  <TabPane tab="iOS" key="3">
+    <IOSIdentify />
+  </TabPane>
+  <TabPane tab="Flutter" key="4">
+    <p>
+      See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.
+    </p>
+  </TabPane>
+  <TabPane tab="React Native" key="5">
+    <ReactNativeIdentify />
+  </TabPane>
+</Tabs>

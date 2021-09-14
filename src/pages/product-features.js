@@ -4,10 +4,12 @@ import Layout from '../components/Layout'
 import { PageHeader } from '../components/PageHeader'
 import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
 import { FeaturesNav } from '../components/FeaturesNav'
+import { SEO } from '../components/seo'
 
 function ProductFeatures() {
     return (
         <Layout>
+            <SEO title="Product Features • PostHog" />
             <PageHeader
                 title="Features"
                 tagline="We know you’re wondering how PostHog compares to other analytics tools, so we have made it easy

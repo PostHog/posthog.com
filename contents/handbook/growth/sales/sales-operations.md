@@ -1,125 +1,115 @@
 ---
-title: Sales Operations
+title: Sales operations
 sidebar: Handbook
 showTitle: true
 ---
 
-## The Basics
+## Overview
 
-We use [HubSpot](https://www.hubspot.com/) as our customer relationship management ('CRM') platform. If you need access, you can ask Charles or James H and they will send you an invite to create an account. 
+This page outlines how we generally manage customers, specifically those who are interested in our Scale plans. Our Cloud plan is self-serve, and may be covered by its own section in the future, but doesn't require a specific guide at this stage.
 
-As a first step, it is _really important_ that you [connect your personal PostHog Gmail account](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails), so that if you start a conversation in HubSpot but continue it in Gmail, we'll have a complete record. This will also make it generally easier for you to sync contacts with HubSpot. 
+If you are looking for guidance on how to manage customers in HubSpot specifically, visit our [CRM page](/handbook/growth/sales/overview).
 
-You might also find it useful to install HubSpot's [Chrome extension](https://chrome.google.com/webstore/detail/hubspot-sales/oiiaigjnkhngdbnoookogelabohpglmd?hl=en), as it means you can manage most things directly in Gmail. 
+## Process
 
-As a general principle, we try to ensure as much customer communication as possible is captured in HubSpot, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!) You should use the channel that suits the user, not us. Just make sure you keep Hubspot up to date with your interactions. We've seen much higher response rates on Slack than email. You can copy paste from there into Hubspot until we have a way to integrate the two.
+1. Customer emails us, usually hey@ or sales@, asking about one of our Scale plans (Free or Paid). 
+2. We respond quickly and to-the-point. We give specific and clear answers to questions, and do not hide information behind a call or demo. You should find out:
+    1. Their company's name if not obvious
+    2. Their approximate monthly events and/or MAUs
+    3. Who their cloud provider is - AWS, GCP etc.
+    4. (Scale Free only) If they have Helm Chart/Kubernetes (k8s) experience
+3. We'll usually do an intro call with Yakko (demo and technical questions) and Charles (setup process and pricing) next. The objective of this call is to help figure out with the customer what the best solution is for them, not to push a sale onto them. We have [demo guidelines here](/handbook/growth/sales/demos). For pricing, the most important things to emphasize are a) month-to-month billing only, no minimum contract and b) cost per event is _massively_ discounted at higher volumes. If multiple technical people are joining on the customer's side and they are a large company, you may want an infra engineer to join - only do this _very_ occasionally. 
+4. If it looks like the customer wants to go for Scale Paid, create [a Deal](/handbook/growth/sales/crm) in HubSpot to keep track of everything. Record your notes and tag the appropriate member of the [Infrastructure & Deployments Team](/handbook/people/team-structure/infrastructure) depending on the customer's timezone. 
+5. You should also set up a shared Slack channel to discuss implementation, as it's the easiest way to resolve any follow up questions. Add as many relevant people on PostHog's side as seems relevant - customers will have a better experience at this stage talking directly to engineers about implementation, not funnelling questions through a single point of contact. 
+6. We track implementation in a [GitHub project](https://github.com/orgs/PostHog/projects/10). The first 1-2 months are spent scaling the instance properly so we don't go too big and waste customers' money. Manage expectations - the first few weeks _should_ be a bit laggy/buggy, as this ensures we're not setting them up with a needlessly large server. 
+7. Once the customer is ready to begin event ingestion, this is the point at which we will ask for payment details, so we can start tracking usage. Paolo will generate a payment link in Stripe. 
+8. Schedule a call to help them set up their first dashboards and ensure they are getting the most out of PostHog. We should ask for at least one Product Manager on the customer's side to join this call, as they are likely to be the key stakeholder at this point. 
+9. As part of this dashboard setup, you should get the relevant member(s) of our team added to their account as a guest so we can proactively support with ensuring they have the right dashboards, config etc. (but don't push if they would rather we didn't do this). 
+10. Ongoing support is provided in the shared Slack channel. 
 
-Hubspot is a comprehensive tool with a lot of functionality, so we are currently focused on using a few core features well. You are most likely to use the following regularly:
+After the initial call, if a customer is keen to proceed, you should share steps 5 through 9 with them to ensure that everyone is on the same page and expectations are managed appropriately. 
 
-- _Contacts_ - pretty straightforward, under 'Contacts'. You can create contacts manually, or sync with your Gmail. 
-- _Companies_ - also under 'Contacts'. You will also want to create a company record to associate with any contact (and you can associate multiple contacts with a single company). If you enter the company's domain name, HubSpot is pretty good at pulling in additional data to fill out the record. 
-- _Inbox_ - this is under 'Conversations' and is where we deal with messages that come into our public-facing email addresses. New messages will come in as 'Unassigned' and then get assigned to someone.
-- _Deals_ - under 'Sales'. This is where we manage our customers who are interested in an Enterprise or Startup plan and is the core of our sales ops process. 
-- _Tasks_ - also under 'Sales'. This is a useful place to see a summary of all the tasks that you have created or that have been assigned to you. 
+### Figuring out the best solution for a customer
 
-If you'd like to dig deeper, HubSpot have a ton of [documentation](https://knowledge.hubspot.com/) and resources that you can refer to as well.
+Assuming PostHog is the best solution for a customer, you should look at their level of scale and if they have any specific privacy or security needs to determine the most appropriate plan for them.  
 
-## Managing our CRM
+- _Low volume, less technical_ - start with Cloud, which is free up to 1m monthly events and very fast to get going with. 
+- _Low volume, more technical_ - Cloud still probably makes sense, unless they have privacy needs in which case Open Source will be fine up to 10k MAUs. Beyond 10k, Open Source will still work but Postgres limitations at scale means performance will be degraded. 
+- _High volume, less technical_ - Cloud will be the best bet - pricing does increase at scale as we take on hosting costs, but the setup process and ongoing maintenance is very straightforward. 
+- _High volume, more technical_ - Scale, as the price per event is greatly discounted at higher volumes vs. Cloud because we don't pay hosting costs. The only time Cloud makes sense here is if the customers wants absolutely zero hassle, doesn't have privacy needs and aren't budget-focused.
 
-People currently come into HubSpot through one of 3 ways:
-- They email hey@posthog.com, sales@posthog.com or another email address if we have created a custom one for a specific group
-- They sign up to the PostHog app
-- They are manually added to HubSpot by a member of the team, e.g. if you met someone interested in PostHog at an event
+### What about Scale Free?
 
-### Email
+We have recently started rolling out Scale Free. Our plan is to make it widely available as a config option in Open Source, but we're keeping them separate for now. Scale Free will be appealing to customers who need ClickHouse due to volume rather than Postgres, but are happy with 3 logins only and community-based support. 
 
-New conversations come into 'Unassigned', whereas ongoing conversations will go straight to your inbox.
+By contrast, Scale Paid is for an entire team to adopt - customers will have engineering and product management all on the platform, and perhaps marketing/execs. Paid has premium features around collaboration - such as user permissions so people can't delete everything, multiple projects to keep data tidy, basically functionality to keep things running smoothly when you have lots of logins.
 
-We do not have super defined roles here, but generally:
-- James H deals with Enterprise queries
-- Yakko takes care of Startup queries
-- Paolo focuses on existing customers
-- Charles oversees sales ops and HubSpot admin
 
-However, anyone can and should jump in if they can help or they see someone hasn't been responded to, especially when folks are on holiday!
+We have a short waiting list of customers waiting for deployment, so are currently prioritizing those with 10k-1m MAUs, are on GCP and are familiar with Helm Charts/k8s. 
 
-We have lots of handy templates you can use as well - just select _Templates_ in the email window in Hubspot. If you find yourself sending the same type of email repeatedly, you may want to create your own template - go to 'Conversations' -> 'Templates'.
+### Okay, they're using PostHog. Now what?
 
-If an inbound email is about one of our Startup or Enterprise plans, you should create a Deal - more on this below. 
+Congratulations, this is the best part! Now we focus on making customers successful at unlocking insights into their product. 
 
-In addition to hey@posthog.com and sales@posthog.com, we sometimes create special one-off email addresses to use for specific groups, such as for an event or promotion. If you create a Google group and you want messages to flow into HubSpot to be managed, make sure you add our [HubSpot inbox email address](hello-1@posthoginc.hs-inbox.com) to your group as a member.
+Read about how we do this in the dedicated handbook section, [Ensuring Customer Delight at PostHog](/handbook/growth/customer-support). 
 
-### New PostHog signups
+## FAQs
 
-All new users are automatically added via our Zapier app to the 'New PostHog User' stage of our Sales pipeline. Sorting these ensures that we can keep communication clear with a customer when they have multiple users on the account - it's really annoying for a customer if we are having parallel conversations with different people on their team!
+_Can I give a Scale customer a free trial?_
 
-More on how we manage these users in the Deals section below. 
+No, because we don't need to - they can get up and running with our Scale Free or Cloud plans first if they want to try out PostHog for free. You'll find a lot of inbound customers will do this anyway before talking to us about Scale. 
 
-### Manually adding new users
+_Can I give a Scale customer a discount?_
 
-You can also just manually add a user to HubSpot under 'Contacts'. When creating a new contact, try to add as much useful information as possible, especially about the type of company they work for and what their needs are. This enables us to provide them with the best possible experience. 
+Again, no need - we already have usage-based pricing which is _heavily_ discounted at higher volumes, and we only bill month-to-month, so customers don't need to feel locked in to a longer term contract. 
 
-Once you have created a contact, you may want to add them to a Deal, depending on the context. 
+_How do I work with a customer who wants to sign an MSA?_
 
-Make sure you also assign someone as the Contact owner, so it's clear who is responsible for managing that relationship.
+This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes or to have the security of a locked-in contract from a pricing perspective. We have a contract version of our standard terms and conditions that we can use for this - ask Charles. 
 
-## Deals
+We'd only really look to do this with people spending $10k+ per month - we don't do it below this value because of the legal effort required.
 
-We manage two pipelines for our deals - _Enterprise_ and _Startup_. This helps us stay organised, given the process is different for each.
+_How do I find out a customer's usage?_
 
-Creating a contact should be the first thing you do when you are setting up a deal in HubSpot, if one does not exist already.
+[Go to this link](https://app.posthog.com/events?properties=%5B%7B%22key%22%3A%22users_who_logged_in__0__email%22%2C%22value%22%3A%22xyz%22%2C%22operator%22%3A%22icontains%22%2C%22type%22%3A%22event%22%7D%5D) and replace 'xyz' with the customer's company name. 
 
-Creating a new deal is quite intuitive, but here are a few tips:
-- Generally, try to fill out as much information as possible - this is useful for you, but also gives context to other people working with a customer
-- Make sure you assign your deal to the right pipeline 
-- Every deal needs an owner - this is the customer's main point of contact at PostHog
-- Tag every deal by 'Deal Type' - use your judgement to determine which category makes sense
-- Put the deal in the right _Deal Stage_ - again, use your judgement! Usually this will be 'First Contact' or 'In Discussion'. 
+_Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
 
-You can also easily add a customer to a deal directly from the Inbox as well - just select 'Create a Deal' in the right hand pane when you have their message selected. 
+Unfortunately we don't have a way to do this easily right now. If they have been on a Scale Paid plan, we can do this manually. If they are coming from the Open Source version, we suggest that they just restart on Cloud. 
 
-### Managing the pipeline
+_Can a customer transfer from Cloud to Scale Paid?_
 
-We don't have a super detailed process on this yet. That being said, here are a few things to bear in mind:
-- Use private notes to tag relevant people for their attention, ask questions etc. Do this in HubSpot (not Slack) so everyone can stay on the same page. If you need to tag someone who doesn't have a HubSpot account, as Charles to add them. 
-- Be clear, direct and open - see other deals for examples on tone. We are very opposed to the use of any kind of corporate language.  
-- Be responsive! 
+Yes - we offer 3 months free of Scale Paid so they can run both systems in parallel, tracking events in both places. That means when they switch off Cloud, they'll have 3 months of data to start with in Scale.
 
-Within a deal, you can also set Tasks such as a follow up reminder for yourself. We are working on automating these, but in the meantime you can manually create tasks really easily, e.g. 'Follow up in 3 days'. HubSpot will automatically notify you of your tasks due each day by email.
+_A Scale customer has experienced downtime while we're getting set up - have they lost their data?_
 
-As a conversation progresses (or not) with a customer, you should move them into the relevant stage as appropriate. 
+Downtime means that queries won't load, but event ingestion will still continue to work fine. 
 
-### Quotes
+_What's the difference between Postgres and ClickHouse?_
 
-Any Enterprise customers or Cloud customers wanting to capture over 500k events per month require a custom quote. 
+Postgres you can write huge volumes to, but for analytics queries it's very slow once a team has thousands of users or more. The advantage is that it's super easy to deploy - so a good way to ie get a small project in a huge enterprise up and running. However, you you can't migrate from Postgres to ClickHouse (since the data format is different later). ClickHouse is massively more scalable, but requires a lot more work to deploy, so we provide extra support from our infra team to get everything set up and refined over the first few weeks. 
 
-Our Enterprise pricing starts at $2,000 per month, but you will need to determine the appropriate pricing based on factors including:
-- What level of support they require, such as monitoring and/or updating their instance
-- Approximate user/event volume anticipated
-- Hosting requirements
-- Number of projects
-- Whether they have existing data to migrate
-- Any relevant deadlines
+_What if the customer knows their user volumes but has no idea about number of events?_
 
-We provide a discount for annual upfront invoicing, typically 10%. We may also offer some sort of free trial if appropriate - 30 days is our standard. 
+A good approach is to point them to our [downsampling plugin](https://posthog.com/plugins/downsampling) and set it to say only captiure 1% of users. If they then go to their [billing page](https://app.posthog.com/organization/billing), they can see the events count. Multiplying this by 100 will indicate their actual likely volume, without creating a ton of risk that they spend too much money.
 
-We generate quotes directly within HubSpot - go to 'Sales' -> 'Quotes'. 
+_Can we air gap an installation for customers with especially stringent compliance requirements, for example?_
 
-The process is fairly straightforward for creating a quote. A couple of points to note:
+We _can_ do this, but it is really important to stress that this drastically limits our ability to provide proactive support, and expectations need to be really carefully managed. In addition, we then need to rely on customers to self-report usage back to us monthly, as we won't be able to monitor usage ourselves. 
 
-- It is really important that you add our standard payment terms to the quote, so it is clear when the customer should expect to pay.
-- You can use 'Snippets' when building a quote to insert frequently used text (like payment terms). 
-- Do not use the Stripe billing integration as it is very basic and does not enable you to have different types of line item (e.g. 1 month free trial and then an ongoing monthly subscription). 
+_Do we provide customers with estimated hosting costs if they are self-hosting?_
 
-### Billing
+We are able to provide rough estimates if they give us their anticipated event volumes, but again this needs to be carefully managed. This can vary a lot - depends on things like how complex their queries are - and we'd expect some instability to start with as we get the scaling to be appropriate.
 
-Once a quote has been agreed with a customer, you should proceed to billing and generating a license key for them. See instructions on how to do this on the [Billing](/handbook/growth/billing) page.
+_What privacy features does PostHog offer?_
 
-## All done - now what?
+- Self-hosting so no data needs to go to a 3rd party
+- You can block Auto Capture on certain elements
+- You can use PostHog without cookies
+- You can mask IPs
+- We make it trivial to delete a user's data if requested to do so
 
-This is just the beginning of what will hopefully be an awesome relationship with a new customer!
+_What plugins are available?_
 
-We are just getting started here, but a few things that you should do:
-- Make sure you invite the customer to our PostHog Users Slack!
-- If they are an Enterprise customer, they should also have a private Slack channel in there with us.
-- Set a couple of tasks in HubSpot to check in with them - depending on who they are you may want to check in after 1 week/month/quarter.
+We have the [full list here](https://posthog.com/plugins/). We also accept plugins built by the community, which we audit first before adding to the list. 
+

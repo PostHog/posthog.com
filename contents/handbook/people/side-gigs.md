@@ -10,7 +10,7 @@ These side gigs may sometimes earn you money. Sometimes, you may one day want yo
 
 We have deliberately called them "side gigs", as we are ok with you earning money on the side. We are not ok with this being your main focus and PostHog being just a paycheck. Quite simply, we are too small for PostHog not to be your main motivation.
 
-## Managing Time
+## Managing time
 
 The key distinction to something being a side gig, and thus it being appropriate, is its impact on your work and the amount of time involved.
 

@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.free-allotment-callout:before {
+    @apply border-white border-opacity-30 absolute;
+    border-style: solid;
+    border-width: 8px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: '';
+    height: 0;
+    left: 10px;
+    top: -16px;
+    width: 0;
+}
+
+.pricing-quote {
+    backdrop-filter: blur(5px);
+
+    &:after {
+        @apply border-white border-opacity-10 absolute;
+        border-style: solid;
+        border-width: 20px;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        bottom: -40px;
+        content: '';
+        height: 0;
+        left: calc(50% - 20px);
+        width: 0;
+    }
+}
+
+.button-primary,
+.button-secondary,
+.button {
+    @apply text-white font-bold hover:text-white select-none px-4 py-2 rounded-full;
+    &.outline {
+        @apply border-3 border-gray-accent-light;
+        &.active {
+            @apply bg-almost-black border-almost-black text-white;
+        }
+    }
+    transition: 0.25s ease all;
+
+    span {
+        display: inline-block;
+
+        @apply relative inline-block;
+    }
+}
+
+.button-primary {
+    @apply bg-almost-black dark:bg-white dark:text-almost-black;
+}
+
+.button-secondary {
+    @apply bg-white text-almost-black hover:text-almost-black;
+}

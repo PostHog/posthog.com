@@ -5,6 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Hey there! It's been a while...
@@ -21,7 +24,7 @@ So let's get into it: what does super scalable mean and what else did we do sinc
 
 ### [ClickHouse 👆🏠](https://github.com/PostHog/posthog/pulls?page=1&q=is%3Apr+clickhouse+is%3Aclosed)
 
-![Clickhouse Screenshot](../images/blog/array/clickhouse.png)
+![ClickHouse Screenshot](../images/blog/array/clickhouse.png)
 <small class="centered">_A ClickHouse query completing in a fifth of a second (Click image to expand)_</small>
 
 
@@ -35,7 +38,7 @@ As you may know, we have been using the well-established and reliable PostgreSQL
 
 On our cloud version we handle event numbers in the nine figures, and implementing ClickHouse has drastically reduced the execution time for all of our queries. 
 
-If you're interested in using PostHog with ClickHouse, send us an email at _[sales@posthog.com](mailto:sales@posthog.com)_.
+If you're interested in using PostHog with ClickHouse, send us an email at [contact us](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) to find out more.
 
 ### [Command Palette](https://github.com/PostHog/posthog/pull/1819)
 
@@ -61,9 +64,9 @@ Stay tuned for more exciting features that were built during the hackathon.
 
 Based on community feedback, we made it easier for feature flags to be integrated with your backend, in addition to our frontend JavaScript implementation.
 
-We've added feature flag support to our [Python Integration](https://github.com/PostHog/posthog-python/pull/9), as well as [improved the `/decide` endpoint](https://github.com/PostHog/posthog/pull/1592) used by feature flags to make the API experience better.
+We've added feature flag support to our [Python Library](https://github.com/PostHog/posthog-python/pull/9), as well as [improved the `/decide` endpoint](https://github.com/PostHog/posthog/pull/1592) used by feature flags to make the API experience better.
 
-We have ourselves been using feature flags with the Python integration to slowly roll out some exciting new features. 
+We have ourselves been using feature flags with the Python Library to slowly roll out some exciting new features. 
 
 ### [Weekly Report Email](https://github.com/PostHog/posthog/pull/1700)
 
@@ -88,7 +91,7 @@ As a result, we have now [tagged some good first issues](https://github.com/Post
 
 By submitting a pull request that gets merged for one of these issues (or any other issues on our [main repo](https://github.com/PostHog/posthog)), we will send you some [PostHog merch](https://merch.posthog.com) and you'll be able to count that contribution towards the 4 PRs you need to get the Hacktoberfest shirt.
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
 

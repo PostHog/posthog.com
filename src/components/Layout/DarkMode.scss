@@ -1,7 +1,39 @@
-body.dark .post-page-wrapper {
-    @media screen and (min-width: 1080px) {
+body.dark {
+    .site-footer {
+        background-color: #220f3f;
+        a {
+            color: rgba(255, 255, 255, 0.6) !important;
+
+            &:hover {
+                color: rgba(255, 255, 255, 1) !important;
+            }
+        }
+    }
+
+    .header-wrapper {
+        background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
+    }
+
+    .ant-tabs-tab-arrow-show,
+    .ant-tabs-content {
+        color: white;
+    }
+
+    .post-page-wrapper {
+        .site-footer {
+            background-color: #220f3f;
+        }
+
+        .header-wrapper {
+            background: #220f3f;
+        }
+
+        .mobileSidebarWrapper {
+            background-color: #19082f !important;
+        }
+
         #docs-sidebar {
-            background-color: #0e0e0e !important;
+            background-color: #19082f !important;
         }
 
         #menu-header,
@@ -11,16 +43,12 @@ body.dark .post-page-wrapper {
         #docs-content-wrapper,
         #docs-content-wrapper,
         #ant-layout-content-wrapper {
-            background-color: #18191a !important;
+            background-color: #220f3f !important;
         }
 
         .footer-universal {
             color: white !important;
             background-color: #111213 !important;
-        }
-
-        .footer-universal a {
-            color: #6e6d72 !important;
         }
 
         .footer-universal a:hover {
@@ -43,11 +71,12 @@ body.dark .post-page-wrapper {
 
         li,
         p,
-        .blog-quote {
+        .blog-quote,
+        label {
             color: #d4d4d4 !important;
         }
 
-        a {
+        .docs-footer a {
             color: #ba8fff;
         }
 
@@ -99,7 +128,7 @@ body.dark .post-page-wrapper {
         .note-block,
         blockquote,
         code {
-            background: #28292b;
+            background: #19082f;
             color: #ffffff;
         }
 
@@ -116,7 +145,7 @@ body.dark .post-page-wrapper {
         }
 
         .ant-anchor-link a {
-            color: #4e4c4c;
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .ant-anchor-link a:hover {
@@ -129,7 +158,7 @@ body.dark .post-page-wrapper {
 
         .ant-anchor-ink-ball {
             border-color: #ba8fff !important;
-            background: #18191a !important;
+            background: #220f3f !important;
         }
 
         .zambezi {
@@ -146,29 +175,6 @@ body.dark .post-page-wrapper {
             th {
                 color: #ffffff !important;
             }
-        }
-    }
-}
-
-@media screen and (min-width: 1080px) {
-    .post-page-wrapper {
-        #docs-sidebar,
-        #menu-header,
-        #right-navbar,
-        .right-bar-inner,
-        #docs-search-container,
-        #docs-content-wrapper,
-        #ant-layout-content-wrapper,
-        p,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        li,
-        a {
-            transition: 1s;
         }
     }
 }

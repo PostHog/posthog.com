@@ -1,4 +1,8 @@
 declare module '*.svg' {
-    const content: any
+    const content: React.HTMLImageElement
+    export default content
+}
+declare module '*.png' {
+    const content: React.HTMLImageElement
     export default content
 }

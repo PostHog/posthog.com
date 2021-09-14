@@ -1,21 +1,12 @@
 ---
-title: How to Safely Roll Out New Features
+title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
 ---
-<br />
 
-<small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
-
-<br />
-
-<span class="larger-image">
+_Estimated reading time: 7 minutes_ ☕☕
 
 ![](../../images/tutorials/banners/feature-flags.png)
-
-</span>
-
-<br />
 
 Rolling out new features in your product can really be a pain.
 
@@ -33,20 +24,20 @@ This tutorial will walk you through creating and using a feature flag with PostH
 
 _Prefer to watch a video? Check out the [Feature Flags section of our demo video](https://youtu.be/aUILrrrlu50?t=950) for a shorter overview of this functionality._
 
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment)
-1. Have added the [PostHog snippet](/docs/integrations/js-integration) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python integration](/docs/integrations/python-integration), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
+1. Have added the [PostHog snippet](/docs/integrate/client/js) to your website. Alternatively, you can also be using our [API](/docs/api/overview) or [Python Library](/docs/integrate/server/python), which have support for feature flags. However, please note that the examples in this tutorial will be written in JavaScript.
 
-## Determining a Use Case
+## Determining a use case
 
 Before you create a feature flag, you should have an idea in mind of a feature that you want to only roll out to a subset of your users. If you'd like some inspiration to determine a good use case, you can refer to the ['Putting Your Flag to Use'](#putting-your-flag-to-use) section of this tutorial for ideas.
 
 It can also be useful to create your feature flags before working on the functionality, so that you can build the feature with the flag in mind, saving you the time and effort to make sure the feature built is completely encapsulated by the flag.
 
-## Creating Feature Flags
+## Creating feature flags
 
 ### Step 1: Navigate to 'Experiments'
 
@@ -54,13 +45,13 @@ To find the feature flags page, click on 'Experiments' on the left sidebar in Po
 
 ![Feature Flags Page](../../images/tutorials/feature-flags/feature-flags-page.png)
 
-### Step 2: Creating a New Flag
+### Step 2: Creating a new flag
 
 While on the 'Experiments' page, click on the blue '+ New Feature Flag' button. This will open up a menu on the right side of the page, like so:
 
 ![Create Feature Flag](../../images/tutorials/feature-flags/create-flag.png)
 
-### Step 3: Configuring Your Flag
+### Step 3: Configuring your flag
 
 With the menu open, you will see there are a few options you can configure for your flag. Here's the purpose of each one:
 
@@ -70,7 +61,7 @@ A memorable name for you and your team to refer to the flag.
 
 **Key**
 
-Used to refer to your flag in your codebase. While the flag name does not affect the implementation, the key does. When adding the feature flag to your code, you will always use the key, never the name. In addition, changing a flag key may [affect the persistence of your flag](/docs/features/feature-flags#feature-flag-persistence).
+Used to refer to your flag in your codebase. While the flag name does not affect the implementation, the key does. When adding the feature flag to your code, you will always use the key, never the name. In addition, changing a flag key may [affect the persistence of your flag](/docs/user-guides/feature-flags#feature-flag-persistence).
 
 <div class='note-block'><b>Pro tip:</b> Make sure you choose a key for your flag that is descriptive and styled consistently with your codebase. Changing a flag key will require you to update your codebase and may harm persistence, so it's best to avoid doing so.</div><br />
 
@@ -109,11 +100,11 @@ When used in conjunction with property filters, PostHog will first check if the 
 <div class='note-block'><b>Technical Note:</b> Our rollout percentage mechanism works by hashing the distinct ID of a user with the flag key, casting it to an integer, and dividing it by 100. That gives us a number between 0 and 1 which we compare to the rollout percentage value (also between 0 and 1) to determine if a user should have the flag on or off. This ensures an acceptable degree of randomness and accuracy while allowing flags to persist.</div>
 
 
-### Step 4: Saving Your Flag
+### Step 4: Saving your flag
 
 Just click 'Save feature flag' and that's it! Your flag will now be active. Clicking on it will also allow you to edit it as you wish.
 
-## Implementing the Feature Flag
+## Implementing the feature flag
 
 When you create a feature flag, PostHog displays an example snippet that you can plug into your codebase. It looks something like this:
 
@@ -123,7 +114,7 @@ if (posthog.isFeatureEnabled('new-beta-feature')) {
 }
 ```
 
-This snippet refers to our [JavaScript Integration](/docs/integrations/js-integration), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Integration](/docs/integrations/python-integration) (we're working to add this functionality to as many of our libraries as possible). 
+This snippet refers to our [JavaScript Library](/docs/integrate/client/js), which is also what we will be using for this tutorial. However, you can also use feature flags via our [API](/docs/api/overview) as well as other libraries, such as our [Python Library](/docs/integrate/server/python) (we're working to add this functionality to as many of our libraries as possible). 
 
 With that snippet, you can then do whatever you wish inside of it. You might change the CSS of a button, hide an entire section, or move things around. A simple example implementation would be:
 
@@ -137,7 +128,7 @@ if (posthog.isFeatureEnabled('red-header-text')) {
 
 While this is a trivial example, you can have as much logic as you want being powered by the feature flag. You can also combine flags with `OR` & `AND` operations to create more complex logic.
 
-## Advanced Controls
+## Advanced controls
 
 ### Ensuring flags are loaded before usage
 
@@ -158,7 +149,7 @@ posthog.onFeatureFlags(function() {
 
 ### Forcing feature flags to update 
 
-In our JS Integration, the reason we store flags as a cookie is to reduce the load on the server and improve the performance of your app, as it doesn't need to always make an HTTP request, it can simply refer to data stored locally in the browser. 
+In our JS library, the reason we store flags as a cookie is to reduce the load on the server and improve the performance of your app, as it doesn't need to always make an HTTP request, it can simply refer to data stored locally in the browser. 
 
 While this makes your app faster, it means that if your user does something mid-session which causes the flag to turn on for them, this will not be immediately updated. As such, if you expect your app to have scenarios like this _and_ you want flags to update mid-session, you can reload them yourself, by using the `reloadFeatureFlags` function.
 
@@ -168,7 +159,7 @@ posthog.reloadFeatureFlags()
 
 Calling this function will force PostHog to hit the endpoint for the updated information, and allows you ensure changes are reflected mid-session.
 
-## Putting Your Flag to Use
+## Putting your flag to use
 
 Feature flags are a very powerful piece of functionality that can be used in a wide variety of ways. How you use them will depend on your particular painpoints and internal best practices. 
 
@@ -186,7 +177,7 @@ In simple terms, A/B testing is a method for determining how to provide the best
 
 This could be used to answer questions such as "Do users click a button more often if it is blue or red?" or more complex questions like "How does our conversion rate for free trial users becoming paid users change if we double the number of CTAs on the page?".
 
-A great way to do this is by using [Cohorts](/docs/features/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different user groups. 
+A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you filter your flags by cohort, you can then easily see the differences in behavior across different user groups. 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 

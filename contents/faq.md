@@ -30,19 +30,19 @@ We track user behavior across your website and applications.
 * Event capture for both frontend and backend events.
 * Event tracking at an identifiable user level (if you choose to identify your users).
 * A full product analytics UX, including:
-	* [Trends](/docs/features/trends)
-	* [Funnels](/docs/features/funnels)
-	* [Cohorts](/docs/features/cohorts)
-	* [Retention](/docs/features/retention)
-	* [Paths]((/docs/features/paths))
-	* [User histories](/docs/features/users)
+	* [Trends](/docs/user-guides/trends)
+	* [Funnels](/docs/user-guides/funnels)
+	* [Cohorts](/docs/user-guides/cohorts)
+	* [Retention](/docs/user-guides/retention)
+	* [Paths](/docs/user-guides/paths)
+	* [User histories](/docs/user-guides/users)
 * Data visualization and product experimentation tools, such as:
-	* [Heatmaps](/docs/features/toolbar)
-	* [Feature Flags](/docs/features/feature-flags)
-	* [Session Recording](/docs/features/session-recording)
-	* [Plugins](/docs/features/plugins)
+	* [Heatmaps](/docs/user-guides/toolbar)
+	* [Feature Flags](/docs/user-guides/feature-flags)
+	* [Session Recording](/docs/user-guides/session-recording)
+	* [Plugins](/docs/user-guides/plugins)
 
-You can read more about our available features on the dedicated [Product Features page](/product-features).
+You can read more about our available features on the dedicated [Product page](/product).
 
 ### Does it work for mobile and web?
 
@@ -53,7 +53,7 @@ Yes. We support any kind of application.
 Yes. PostHog can be used via:
 
 - An HTML snippet that goes inside your ```<head></head>``` tags.
-- One of our [15+ integrations](/docs/integrations) covering the main programming languages and tools
+- One of our [15+ libraries](/docs/tutorials/overview) covering the main programming languages and tools
 - Our [API](/docs/api/overview)
 
 This means that it doesn't matter what your stack is - you can use PostHog with it.
@@ -62,17 +62,17 @@ This means that it doesn't matter what your stack is - you can use PostHog with 
 
 Yes. We are in very [active development](https://github.com/PostHog/posthog/graphs/commit-activity). 
 
-PostHog is a [well-funded](/handbook/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/handbook/company/team) and our active community.
+PostHog is a [well-funded](/handbook/strategy/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/handbook/company/team) and our active community.
 
 ## About the Software
 
 ### How popular is the software?
 
-Very. We have thousands of users, over [3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/investors).
+Very. We have thousands of users, over [3k stars](https://github.com/PostHog/posthog/stargazers) on GitHub (even though the project only started in January 2020), and [supportive investors](/handbook/strategy/investors).
 
 ### Is the software updated regularly?
 
-Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](docs/upgrading-posthog), and the software will alert you to new updates within the application.
+Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/self-host/configure/upgrading-posthog), and the software will alert you to new updates within the application.
 
 Pro-tip: follow us on [Twitter](https://twitter.com/PostHogHQ) or join our [Slack](/slack) to keep up with our latest features.
 
@@ -94,7 +94,7 @@ If you have any [issues or feature requests](https://github.com/PostHog/posthog/
 
 No. If you want to get started quickly you can use our [cloud version](https://app.posthog.com/signup), but we also have various [1-click deployment](/docs/deployment) options if you decide to self-host. 
 
-Additionally, if your company has a very large userbase and you need help with scalability and managing your setup, we can offer [paid help](mailto:sales@posthog.com) here.
+Additionally, if your company has a very large userbase and you need help with scalability and managing your setup, we can offer [paid help](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) here.
  
 ## Deployment
 
@@ -108,7 +108,7 @@ There are three options:
 
 1. [PostHog Cloud](https://app.posthog.com/signup).
 2. [Self Deployment](/docs/deployment).
-3. [Managed Deployment](mailto:sales@posthog.com).
+3. [Managed Deployment](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u).
 
 ### Can I get it live with my favorite hosting method?
 
@@ -118,7 +118,7 @@ Want to set it up differently? [Raise an issue](https://github.com/PostHog/posth
 
 ### Will this scale?
 
-Yes. Check out [Scaling PostHog](docs/configuring-posthog/scaling-posthog) for more information on this.
+Yes. Check out [Scaling PostHog](/docs/self-host/deploy/configuration#scaling-up) for more information on this.
 
 ### Is there an enterprise offering?
 
@@ -172,7 +172,7 @@ Our Docs are a top priority to us and are updated **daily**. [Check them out](/d
 
 Absolutely!
 
-You can suggest new features by adding them as issues in our [Github repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
+You can suggest new features by adding them as issues in our [GitHub repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
 
 ### I'm having trouble setting up PostHog. What should I do?
 
