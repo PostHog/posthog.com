@@ -18,13 +18,13 @@ Given that the offsites are such international events, a common concern is about
 
 However, we do want to limit our environmental impact and minimize our carbon footprint. That’s why we work with [Wren](https://www.wren.co/) to offset the carbon our teams generate — not just for the offsite, but across all the work and travel they do. 
 
-The principle behind carbon offsetting is a simple one: if you emit a ton of CO2 then you can balance out those emissions by also removing a ton of CO2 from the atmosphere, or preventing another ton. Wren enables us to do this by analyzing our usage and redirecting some money from us towards causes with proven real-world impact. 
+The principle behind carbon offsetting is simple: if you emit a ton of CO2, you can balance out those emissions by also removing a ton of CO2 from the atmosphere - or preventing another ton. Wren lets us do this by analyzing our usage and redirecting some money from us towards causes with proven real-world impact. 
 
 This way, we offset the carbon footprint of our international travel through projects such as regenerative forestry and rainforest protection.
 
 Unfortunately, Wren doesn’t have any projects specifically focused on supporting hedgehog wildlife, but that’s OK — it’s why we [sponsor a hedgehog](https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637) for every team member that joins the company. 
 
-Carbon offsetting won't fix the climate change crisis on it’s own - and we don’t view it as a reason to rest on our laurels. We take additional steps to minimize our carbon footprint such as limiting the use of single-use plastics at our events and in [our merchandise](https://merch.posthog.com/collections/all).
+Carbon offsetting won't fix the climate change crisis on its own - and we don’t view it as a reason to rest on our laurels. We take additional steps to minimize our carbon footprint such as limiting the use of single-use plastics at our events and in [our merchandise](https://merch.posthog.com/collections/all).
 
 However, while carbon offsetting isn’t a cure-all, it remains an effective tool in limiting our environmental impact. We’re excited to offer it as a benefit for all team members. You can check out [other benefits we offer](https://posthog.com/careers) or even [submit an issue in GitHub](https://github.com/PostHog) if you have ideas for how we can be even more climate friendly.
 
