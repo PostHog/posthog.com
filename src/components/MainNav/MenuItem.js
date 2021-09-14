@@ -17,9 +17,9 @@ export default function MenuItem({ menuItem }) {
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="group lg:flex lg:justify-center"
+            className="lg:flex lg:justify-center menu-item"
         >
-            <span ref={referenceElement} className="flex justify-between items-center">
+            <span ref={referenceElement} className="flex justify-between items-center pr-4 lg:pr-0">
                 <Link
                     onClick={breakpoints.md && sub && handleSubClick}
                     to={url}
@@ -32,17 +32,12 @@ export default function MenuItem({ menuItem }) {
                 </Link>
                 {sub &&
                     (breakpoints.md ? (
-                        <Plus
-                            render={(icon) => (
-                                <button
-                                    className="text-primary dark:text-primary-dark flex-grow flex justify-end"
-                                    onClick={handleSubClick}
-                                >
-                                    {hovered ? <Minus /> : icon}
-                                </button>
-                            )}
-                            open={hovered}
-                        />
+                        <button
+                            className="text-primary dark:text-primary-dark flex-grow flex justify-end"
+                            onClick={handleSubClick}
+                        >
+                            {hovered ? <Minus /> : <Plus />}
+                        </button>
                     ) : (
                         <Chevron className="text-gray mt-1 -ml-3" />
                     ))}

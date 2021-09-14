@@ -1,8 +1,9 @@
 import React from 'react'
-import Link from '../Link'
-import { RightArrow } from '../Icons/Icons'
-import SubmenuItemFooter from './SubmenuItemFooter'
+import Link from '../../Link'
+import { RightArrow } from '../../Icons/Icons'
+import SubmenuItemFooter from '../SubmenuItemFooter'
 import { motion } from 'framer-motion'
+import { submenu } from '../classes'
 
 export default function SubmenuItem({ item }) {
     const { sections, title, link, footerLinks } = item
@@ -14,7 +15,7 @@ export default function SubmenuItem({ item }) {
     return (
         <motion.li variants={variants} className="lg:mt-12 mt-6 font-bold">
             <div className="flex items-center justify-between">
-                <h2 className="text-lg lg:text-xl font-bold">{title}</h2>
+                <h2 className={submenu.section.title}>{title}</h2>
                 {link && (
                     <Link
                         disablePrefetch
@@ -40,11 +41,7 @@ export default function SubmenuItem({ item }) {
                             <div className="flex justify-between items-center">
                                 <h3 className="text-[14px] m-0 font-bold opacity-50">{title}</h3>
                                 {link && (
-                                    <Link
-                                        disablePrefetch
-                                        className="text-light-yellow hover:text-light-yellow"
-                                        to={link.url}
-                                    >
+                                    <Link disablePrefetch className={submenu.section.link()} to={link.url}>
                                         {link.title}
                                     </Link>
                                 )}
