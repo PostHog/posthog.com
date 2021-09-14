@@ -62,7 +62,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `SOCIAL_AUTH_GITLAB_API_URL`| Endpoint to be used for [GitLab authentication](/docs/user-guides/sso#gitlab). Changing this is only relevant for self-host GitLab users.  | `https://gitlab.com`
 | `SOCIAL_AUTH_GOOGLE_OAUTH2_KEY`   | Google client ID for allowing [SSO with Google](/docs/user-guides/sso#google).                                                      | _Empty_
 | `SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET`| Google client secret for allowing [SSO with Google](/docs/user-guides/sso#google).| _Empty_
-| `SAML_AVAILABLE`| Whether SAML dependencies should be installed. See [SAML authentication](/docs/user-guides/sso#saml).| `True` if running with Docker, `False` otherwise
+| `SAML_DISABLED`| Whether SAML should be completely disabled. If set at build time, this will also prevent SAML dependencies from being installed. See [SAML authentication](/docs/user-guides/sso#saml).| `False`
 | `SAML_ENTITY_ID`| Entity ID from your SAML IdP. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
 | `SAML_ACS_URL`| Assertion Consumer Service URL from your SAML IdP. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
 | `SAML_X509_CERT`| Public X509 certificate from your SAML IdP to validate SAML assertions. See [SAML authentication](/docs/user-guides/sso#saml).| _Empty_
