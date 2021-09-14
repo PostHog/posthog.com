@@ -33,9 +33,9 @@ export const scrollspyCaptureLogic = kea({
             const secondsElapsed = (now - lastUpdatedAt) / 1000
             if (values.lastElementViewed) {
                 // Send an event upon completion of viewing the last element.
-                values.posthog?.capture('viewed section heading', {
-                    elementId,
-                    secondsElapsed,
+                values.posthog?.capture('section heading viewed', {
+                    element_id: elementId,
+                    seconds_elapsed: secondsElapsed,
                 })
             }
             actions.setLastUpdatedAt(now)
