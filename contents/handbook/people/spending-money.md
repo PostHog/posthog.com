@@ -68,9 +68,7 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-* If you are in an engineering role, we recommend a Macbook Pro with an Intel processor with 32GB of RAM. The processor selection here is important as we want to ensure that you're able to run all the technologies in our stack and several of them have yet to be adapted on the new Apple architecture. Base processor and storage.
-* If you are in a design role, we recommend a Macbook Pro with an Apple Silicon processor and 16GB of RAM. Base processor and storage.
-* If you are in a non-technical role, we recommend a Macbook Air with an Apple Silicon processor and 8GB of RAM. Base processor and storage.
+* No matter your role, we currently recommend a Macbook Air with an Apple Silicon (M1) processor and 16GB of RAM. Feel free to upgrade to a Macbook Pro if you will be running sustained high workloads, though in practice the Air performs really well in most scenarios, including long-running compilations (e.g. Clickhouse).
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
 
@@ -134,6 +132,14 @@ Individual software is down to your personal preference, and we encourage you to
 
 * IDEs range widely in cost. Best in class IDE suites can cost up to $700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
 * Before then, if you wish to spend up to $200 on an IDE, that is fine. Visual Studio, VIM and PyCharm are the most popular within our team.
+
+### Open-source contributions
+
+The PostHog platform wouldn't be possible without open-source software. We are standing on the shoulders of giants. As such, we feel it's important to support the software we benefit from through monetary contributions.
+
+To enable our team to do this we use [Open Collective](https://opencollective.com/) and have a budget of $100/month that can be contributed per team member.
+
+To get setup with Open Collective get in touch with [Phil](phil-leggetter-developer-relations) who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make contributions as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
 
 ## Work space
 

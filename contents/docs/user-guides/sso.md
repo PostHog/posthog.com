@@ -175,7 +175,7 @@ If your IdP does not send these attributes based on the default name on PostHog 
 
 5. For security reasons, we don't output errors directly in your browser when something goes wrong. If you get an error in the process and you need to debug on PostHog's side you have two options:
     - **Recommended**. Check your app logs (this varies depending on your deployment). Any errors will be logged there.
-    - If everything else fails, **temporarily** set environment variable `DEBUG = 1`, errors will be fully displayed now in the browser. **Please be sure to remove this once you're done, ugly things can happen if you don't.**
+    - If everything else fails, **temporarily** set environment variable `DEBUG=1`, errors will be fully displayed now in the browser. **Please be sure to remove this once you're done, ugly things can happen if you don't.**
 
 ### Enforcing SAML
 
@@ -183,10 +183,15 @@ If your IdP does not send these attributes based on the default name on PostHog 
 Do not enforce SAML until you have tested everything works correctly or you'll be locked out. Disable enforcing and visit <code>/login</code> if you get locked out.
 </blockquote>
 
-To remove the burden of having to manage users in multiple places or if your company has certain internal policies or IT compliance requirements, you may want to make sure access to PostHog is limited only through SAML authentication. This is quite easy to accomplish, just set the [environment variable][env-vars]: `SAML_ENFORCED = True`. Only do this after you've made sure SAML works as expected.
+To remove the burden of having to manage users in multiple places or if your company has certain internal policies or IT compliance requirements, you may want to make sure access to PostHog is limited only through SAML authentication. This is quite easy to accomplish, just set the [environment variable][env-vars]: `SAML_ENFORCED=1`. Only do this after you've made sure SAML works as expected.
 
 Finally, please do consider [warning #2](#warnings) above. Enforcing SAML will **not prevent Personal API Key** usage. It will only disable password-based login.
 
+
+### SAML user provisioning
+When a user (team member) logs in using SAML, we'll use their email address (and IdP's `nameID`, if different from email address) to match with their PostHog account. If the user has no account in your PostHog instance, we'll create one for them. Different from other SSO providers that PostHog supports, users who log in with SAML will **always get an account created.**
+
+By default, users will be signed up to the default organization in the instance. If you want users to be added to a specific organization instead, you can either set a domain whitelist for the relevant org or send an invite to the specific user.
 
 ### Example: OneLogin
 We're working with the OneLogin team to add PostHog to their Catalog and simplify your set up experience. In the meantime, you'll find some pointers on how to connect OneLogin to PostHog below.

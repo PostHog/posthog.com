@@ -33,7 +33,7 @@ When watching sessions, you can change the speed as well as select the option 's
 
 ## Ignoring sensitive elements
 
-If recording your application may clead to capturing sensitive information on your users, you need to update your codebase to prevent PostHog from capturing this during session recordings.
+If recording your application may capture sensitive user information, you need to update your codebase to prevent PostHog from capturing this during session recordings.
 
 To do so, you should add the class name `ph-no-capture` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches session recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
 

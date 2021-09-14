@@ -56,4 +56,20 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/marcus-hyett/
     }
+  - {
+      handle: marius-andra,
+      name: Marius Andra,
+      role: Software Engineer,
+      image: https://avatars.githubusercontent.com/u/53387?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/mariusandra/
+    }
+  - {
+      handle: cory-watilo,
+      name: Cory Watilo,
+      role: Lead Designer,
+      image: https://avatars.githubusercontent.com/u/154479?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/corywatilo/
+    }
 ---

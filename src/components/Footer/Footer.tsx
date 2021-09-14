@@ -149,6 +149,10 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Contributors" url="/contributors" />
                                     <FooterMenuItem title="Code of conduct" url="/docs/contribute/code-of-conduct" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
+                                    <FooterMenuItem
+                                        title="PostHog FM"
+                                        url="https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b"
+                                    />
                                 </ul>
                             </div>
                         </div>
