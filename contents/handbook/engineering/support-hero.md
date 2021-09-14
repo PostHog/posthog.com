@@ -34,7 +34,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
-  - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single messsage, not multiple
+  - If it's an email (if the source in #_customer_support is email), make sure you format your message as an email and only send a single message, not multiple
 - Follow up! 
     - [Papercups](https://app.papercups.io/) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
 
