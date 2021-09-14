@@ -392,6 +392,10 @@
                             "url": "/docs/self-host/deploy/aws"
                         },
                         {
+                            "name": "Azure",
+                            "url": "/docs/self-host/deploy/azure"
+                        },
+                        {
                             "name": "Other",
                             "url": "/docs/self-host/deploy/other"
                         },

@@ -1,0 +1,13 @@
+## Uninstalling the chart
+
+To uninstall the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, run the following:
+```console
+$ helm uninstall posthog --namespace posthog
+```
+
+> See [the Helm docs](https://helm.sh/docs/helm/helm_uninstall/) for documentation on the `helm uninstall` command.
+
+The command above removes all the Kubernetes components associated with the chart and deletes the release. Sometimes everything doesn't get properly removed. If that happens try deleting the namespace:
+```console
+kubectl delete namespace posthog
+```

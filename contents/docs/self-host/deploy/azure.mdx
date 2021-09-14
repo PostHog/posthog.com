@@ -1,21 +1,19 @@
 ---
-title: Deploying to AWS
-sidebarTitle: AWS
+title: Deploying to Azure
+sidebarTitle: Azure
 sidebar: Docs
 showTitle: true
-tags:
-    - aws
 ---
 
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 
-First, we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). Follow the "Managed nodes - Linux" guide. The default nodes (2x m5.large) work well for running PostHog.
+First we need to set up a Kubernetes Cluster, see [Create an AKS cluster with Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster). Make sure your cluster has enough resources to run PostHog (total minimum 4 vcpu & 8GiB RAM).
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 ```yaml
-cloud: "aws"
+cloud: "azure"
 ingress:
   hostname: <your-hostname>
   nginx:
@@ -35,7 +33,7 @@ kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
 ### Setting up DNS
 
-Create a `CNAME` record from your desired hostname to the hostname associated with the AWS LB.
+Create a record from your desired hostname to the external IP.
 
 ## Troubleshooting
 <TryUnsecureSnippet />
