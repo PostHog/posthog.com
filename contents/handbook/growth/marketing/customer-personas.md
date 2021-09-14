@@ -15,7 +15,7 @@ Each of the two personas below include a short persona story for flavour, as wel
 
 ## Persona: Sam Software
 
-![](..contents/images/handbook/sam-persona.png)
+![](../../../images/handbook/sam-persona.png)
 
 | **Job titles**                                                                                                                                         | **Role**                                    |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
@@ -58,7 +58,7 @@ Sam understands that PostHog isn’t a mature tool and so tolerates more frictio
 
 ## Persona: Pam Product
 
-![](..contents/images/handbook/pat-persona.png)
+![](../../../images/handbook/pat-persona.png)
 
 | **Job titles**                                                                                                                                         | **Role**                                    |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
