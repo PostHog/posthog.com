@@ -50,9 +50,9 @@
                                         "url": "/docs/self-host/deploy/digital-ocean"
                                     },
                                     {
-                                        "icon": "github",
-                                        "title": "Source",
-                                        "url": "https://github.com/PostHog/posthog"
+                                        "icon": "azure",
+                                        "title": "Azure",
+                                        "url": "/docs/self-host/deploy/azure"
                                     }
                                 ]
                             },
