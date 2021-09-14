@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from './InternalSidebarLink'
 
-export default function StickySidebar({ tableOfContents, className = '', top = 0 }) {
+export default function StickySidebar({
+    tableOfContents,
+    className = '',
+    top = 0,
+    hideChildren = false,
+    reportScrollUpdated,
+}) {
     const [navBallLocation, setNavBallLocation] = useState(null)
     const [navStyle, setNavStyle] = useState(null)
     const [activeId, setActiveId] = useState(null)
@@ -10,9 +16,10 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
     const contentRef = useRef(null)
     const handleInternalNavUpdate = (el) => {
         if (el) {
-            const activeEl = document.querySelector('.active-link')
             setActiveId(el.id)
-            setNavBallLocation(activeEl.offsetTop + 7)
+            reportScrollUpdated?.(el.id)
+            const activeEl = document.querySelector('.active-link')
+            activeEl && setNavBallLocation(activeEl.offsetTop + 7)
         }
     }
     useEffect(() => {
@@ -56,18 +63,18 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                         items={tableOfContents?.map((navItem) => navItem.url)}
                         currentClassName="active-link"
                     >
-                        {tableOfContents?.map((navItem, index) => {
-                            return (
-                                <li key={index}>
-                                    <InternalSidebarLink
-                                        url={navItem.url}
-                                        name={navItem.name}
-                                        style={activeId === navItem.url ? { opacity: '1' } : {}}
-                                        className="hover:opacity-100 opacity-60 text-[15px]"
-                                    />
-                                </li>
-                            )
-                        })}
+                        {hideChildren
+                            ? null
+                            : tableOfContents?.map((navItem, index) => (
+                                  <li key={index}>
+                                      <InternalSidebarLink
+                                          url={navItem.url}
+                                          name={navItem.name}
+                                          style={activeId === navItem.url ? { opacity: '1' } : {}}
+                                          className="hover:opacity-100 opacity-60 text-[15px]"
+                                      />
+                                  </li>
+                              ))}
                     </Scrollspy>
                 </div>
             </aside>
