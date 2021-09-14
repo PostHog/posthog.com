@@ -24,8 +24,8 @@ Our value propositions also call on our messaging pillars, which map to specific
 
 PostHog offers a suite of product analysis tools, including funnels, heat maps, session recording and more, all in one easy-to-use platform. This enables data and engineering teams to get information faster, without writing any SQL, while less technical teams are also able to self-serve and get answers without needing support.
 
-- **Proposition:** Get all the analysis you need in one place, without writing any SQL.
-- **Challenge:** You have to go between many different tools, often writing cumbersome SQL or making requests of other teams to get information.
+- **Proposition:** Get all the analysis you need in one place.
+- **Challenge:** You have to go between many different tools, often making requests of other teams to get information.
 - **Experience:** You aren't able to progress quickly and even simple requests can take a lot of time.
 - **Solution:** PostHog is the only product analytics solution that combines tools such as funnels, session recording and feature flags into a single self-serve platform.
 - **Result:** Now you can get answers faster and focus on improving your product, rather than writing SQL.
