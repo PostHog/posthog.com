@@ -1,5 +1,5 @@
 ---
-date: 2021-09-14
+date: 2021-09-15
 title: Array 1.28.0
 rootPage: /blog
 sidebar: Blog
@@ -16,9 +16,9 @@ Summary here
 
 ### Community MVP 🏆
 
-Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to... [tbd](https://github.com/posthog)!
+Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to... [manish001in](https://github.com/manish001in)!
 
-Description here
+Manish helped us pushed a PR that ensures tab titles are properly set when navigating between dashboards (PR [#5822](https://github.com/PostHog/posthog/pull/5822)) and is also pushing a PR to make it easy to copy properties from the person page (PR [#5884](https://github.com/PostHog/posthog/pull/5884)).
 
 ### Help us improve PostHog
 
@@ -38,15 +38,32 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 ### Significantly revamped performance
 
-Description here.
+When running on OSS Clickhouse, we now automatically create during weekends columns for event and person properties to speed up queries. This can speed up your slower queries 2-25x.
+
+### Advanced engagement cohorts
+
+Description here (Create automatic user cohorts based on actions performed by users in the last N days (e.g. to identify power users).
 
 ### SAML support
-Description here.
+Description here (Users with an Enterprise license can now enable SAML authentication and user provisioning)
 
+
+### Advanced funnel building
+Description here (More features to build more detailed funnel views, such as custom step ordering, event exclusions, among others)
 
 ### Improvements & fixes
 
-- List here
+- Significant improvements to plugins development experience
+- Improved session recording list, particularly when there's multiple recordings for a session.
+- Fixed broken links when sharing dashboards publicly
+- Multiple fixes on tooltips
+- Fixed bugs around cohort calculation
+- Fixed issues around loading and refreshing dashboards
+- Multiple UI improvements following our new website brand launch
+- Improvements to plugins UI
+- Preference to disable automatic emails when a new member joins
+- Fixes to pie chart that caused some numbers to display confusingly
+- Plus more than 300+ improvements/fixes
 
 In addition to the highlights listed above, we also merged a bunch of PRs to improve PostHog's experience, performance and reliability. Plus we fixed a ton of bugs. Check out all our main repos for details:
 
@@ -61,6 +78,8 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 
 ⚠️ The previously deprecated `/api/user` endpoint has been removed since this version (1.28.0). Head over to the [User API](https://posthog.com/docs/api/user) docs for details on how to upgrade.
 
+
+⚠️ We've dropped support for Python 3.7. You'll now need to use Python 3.8, but we **recommend you use Python 3.9**
 ## PostHog News
 
 Welcome all new team members who will help us take PostHog to the next level!
@@ -77,13 +96,25 @@ Welcome all new team members who will help us take PostHog to the next level!
 
 We want to thank each and every community member that contributed to this release of PostHog!
 
-- [clarkus](https://github.com/clarkus) 🏆
-- [timgl](https://github.com/timgl)
+- [manish001in](https://github.com/manish001in) 🏆
+- [edhgoose](https://github.com/edhgoose)
+- [mjashanks](https://github.com/mjashanks)
+- [jmellicker](https://github.com/jmellicker)
+- [xahhy](https://github.com/xahhy)
+- [julianharty](https://github.com/julianharty)
+- [benbz](https://github.com/benbz)
+- [bryanyi](https://github.com/bryanyi)
+- [juanvasquezreyes](https://github.com/juanvasquezreyes)
+- [7MIMIRA](https://github.com/7MIMIRA)
+- [purcell3a](https://github.com/purcell3a)
+- [Patil2099](https://github.com/Patil2099)
+- [jredl-va](https://github.com/jredl-va)
 
 ## Open roles
 
 Join us in helping make more products successful! We're currently hiring for the following roles:
 
+- Technical Content Marketer
 - Developer Educator
 - Senior Software Engineer
 - Staff Software Engineer
