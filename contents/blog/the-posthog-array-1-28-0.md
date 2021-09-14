@@ -1,5 +1,5 @@
 ---
-date: 2021-09-14
+date: 2021-09-15
 title: Array 1.28.0
 rootPage: /blog
 sidebar: Blog
@@ -22,7 +22,7 @@ Description here
 
 ### Help us improve PostHog
 
-We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members in a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
+We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
 
 As a small thank you for your time, we're giving away some awesome [PostHog merch](https://merch.posthog.com)!
 
@@ -43,7 +43,6 @@ Description here.
 ### SAML support
 Description here.
 
-
 ### Improvements & fixes
 
 - List here
@@ -55,7 +54,6 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 - [`PostHog/posthog-python`](https://github.com/PostHog/posthog-python/commits/master)
 - [`PostHog/posthog-js`](https://github.com/PostHog/posthog-js/commits/master)
 - [`PostHog/plugin-repository`](https://github.com/PostHog/plugin-repository/commits/master)
-
 
 ### Breaking changes
 
@@ -71,7 +69,6 @@ Welcome all new team members who will help us take PostHog to the next level!
 | Rick Marron | Full Stack Engineer |  👎  |   _"I'm part of the ~1% who can lick their elbow. (Although the ability is slowly going away with age)"_
 | Paul D'Ambra | Full Stack Engineer |   Tasty but forbidden (like drinking in church)  |   _"I was nearly arrested at a pagan wedding"_
 | Guido Laquinti | Site Reliability Engineer |   Can't say it's acceptable without having my passport revoked 🇮🇹  |   _"When I was a kid, my parents asked me to find a name for our new kitten. We called him “Password” 🔐🐕‍🦺"_
-
 
 ## Community shoutouts
 
