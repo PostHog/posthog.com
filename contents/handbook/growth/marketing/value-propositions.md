@@ -1,3 +1,9 @@
+---
+title: Value propositions
+sidebar: Handbook
+showTitle: true
+---
+
 # Value propositions
 
 Value propositions are the promises we make to our prospective customers about what PostHog does and the value it offers to them.

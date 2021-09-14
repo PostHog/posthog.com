@@ -1,5 +1,10 @@
-# Customer personas
+---
+title: Customer personas
+sidebar: Handbook
+showTitle: true
+---
 
+# Customer personas
 PostHog is used by a very wide variety of companies, teams and individuals - everyone from Fortune 500 companies to individual hobbyists. This document lays out general trends for two personas we typically focus on for our paid product. 
 
 PostHog is a developer-focused company. We aim to support developers or technically capable individuals as our core users and buyers, from indie game developers to Product Engineers in enterprise businesses. 
@@ -10,7 +15,7 @@ Each of the two personas below include a short persona story for flavour, as wel
 
 ## Persona: Sam Software
 
-MAP GOES HERE
+![](../handbook/sam-persona.png)
 
 | **Job titles**                                                                                                                                         | **Role**                                    |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
@@ -53,7 +58,7 @@ Sam understands that PostHog isn’t a mature tool and so tolerates more frictio
 
 ## Persona: Pam Product
 
-MAP GOES HERE
+![](../handbook/pat-persona.png)
 
 | **Job titles**                                                                                                                                         | **Role**                                    |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
