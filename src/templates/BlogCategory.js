@@ -1,12 +1,12 @@
-import Blog from '../components/Blog'
+import Blog from 'components/Blog'
 
 export default Blog
 
 export const pageQuery = graphql`
-    query {
+    query($category: String) {
         allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
+            filter: { frontmatter: { categories: { in: [$category] } } }
         ) {
             edges {
                 node {

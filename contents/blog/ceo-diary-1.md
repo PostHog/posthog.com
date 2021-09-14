@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ceo-diaries
+categories: ["CEO diaries"]
 author: james-hawkins
 featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full

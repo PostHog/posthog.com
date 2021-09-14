@@ -1,6 +1,7 @@
 import twitterIcon from '../../../images/icons/twitter-white.svg'
 import linkedInIcon from '../../../images/icons/linkedin-white.svg'
 import githubIcon from '../../../images/icons/github-white.svg'
+import { graphql } from 'gatsby'
 
 export interface CategoryInterface {
     title: string
@@ -55,3 +56,19 @@ export const socialLinks: SocialLinksInterface = {
     linkedin: { icon: linkedInIcon, label: 'LinkedIn' },
     github: { icon: githubIcon, label: 'GitHub' },
 }
+
+export const AuthorsFragment = graphql`
+    fragment AuthorsFragment on MarkdownRemark {
+        frontmatter {
+            authors {
+                handle
+                name
+                role
+                image
+                link_type
+                link_url
+            }
+        }
+        id
+    }
+`
