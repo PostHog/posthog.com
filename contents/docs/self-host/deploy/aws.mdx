@@ -10,7 +10,7 @@ tags:
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
-import TryUnsecure from './snippets/tryunsecure'
+import TryUnsecureSnippet from './snippets/tryunsecure'
 
 First, we need to set up a Kubernetes Cluster, see [Setup EKS - eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html). Follow the "Managed nodes - Linux" guide. The default nodes (2x m5.large) work well for running PostHog.
 
@@ -24,6 +24,7 @@ ingress:
 certManager:
   enabled: true
 ```
+
 
 ### Installing the chart
 
@@ -39,7 +40,11 @@ kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 Create a `CNAME` record from your desired hostname to the hostname associated with the AWS LB.
 
 ## Troubleshooting
+### I cannot connect to my PostHog instance after creation
 <TryUnsecureSnippet />
 
+## Upgrading the chart
 <UpgradingSnippet />
+
+## Uninstalling the chart
 <UninstallingSnippet />
