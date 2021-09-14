@@ -188,6 +188,8 @@ docker-compose -f docker-compose.dev.yml up
 
 > **It may take several minutes to build the system for the first time**. If you see an error message once your app has launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
 
+> By default, Docker images include all dependencies for full SAML support. If you want to run your Docker image without these dependencies, please set either `SAML_DISABLED=1` environment variable or `saml_disabled=1` build argument at build time.
+
 </HiddenSection>
 
 <br />

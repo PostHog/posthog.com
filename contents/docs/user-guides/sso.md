@@ -124,8 +124,8 @@ When using SAML to authenticate your users in PostHog there are a few considerat
 
 ### Setting up SAML
 
-<blockquote class="warning-note">
-<b>If you are not running on Docker</b>, the first step to enable SAML in your installation is set the environment variable <code>SAML_AVAILABLE=1</code> and <b>rebuild & deploy</b>. SAML requires certain C dependencies that are installed at the OS-level, these dependencies must be installed before SAML will be available. 
+<blockquote>
+SAML requires certain C dependencies that are installed at the OS-level. These dependencies come bundled by default in the main Docker image. If you wish to exclude these dependencies please set environment variable `SAML_DISABLED=1` or build argument `saml_disabled=1`.
 </blockquote>
 
 
