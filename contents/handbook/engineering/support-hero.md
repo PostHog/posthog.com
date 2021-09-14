@@ -14,11 +14,11 @@ You should work your 'normal' hours during this week. Right now people in other 
 
 If you are planning on taking a day off or you won't be available, please find someone to swap with. 
 
-## Rota
+## Rota
 
 You can view the Support Hero rota [in PagerDuty here](https://posthog.pagerduty.com/schedules#PPLGE4G). 
 
-## Channels
+## Channels
 
 There are a couple of channels that customer requests come in so make sure you keep an eye on all of them:
 
