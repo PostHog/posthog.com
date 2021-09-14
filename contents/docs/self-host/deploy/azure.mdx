@@ -8,6 +8,7 @@ showTitle: true
 import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
+import TryUnsecure from './snippets/tryunsecure'
 
 First we need to set up a Kubernetes Cluster, see [Create an AKS cluster with Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster). Make sure your cluster has enough resources to run PostHog (total minimum 4 vcpu & 8GiB RAM).
 
@@ -25,6 +26,7 @@ certManager:
 ### Installing the chart
 
 <InstallingSnippet />
+
     
 ### Lookup external IP
 
