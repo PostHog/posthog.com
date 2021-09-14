@@ -1,20 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from './InternalSidebarLink'
 
-export default function StickySidebar({ tableOfContents, className = '', top = 0 }) {
+export default function StickySidebar({ tableOfContents, className = '', top = 0, activeId = null }) {
     const [navBallLocation, setNavBallLocation] = useState(null)
     const [navStyle, setNavStyle] = useState(null)
-    const [activeId, setActiveId] = useState(null)
     const navRef = useRef(null)
     const contentRef = useRef(null)
-    const handleInternalNavUpdate = (el) => {
-        if (el) {
+    useEffect(() => {
+        if (activeId) {
             const activeEl = document.querySelector('.active-link')
-            setActiveId(el.id)
-            setNavBallLocation(activeEl.offsetTop + 7)
+            activeEl && setNavBallLocation(activeEl.offsetTop + 7)
         }
-    }
+    }, [activeId])
     useEffect(() => {
         const isBrowser = typeof window !== 'undefined'
         if (navRef && contentRef && isBrowser) {
@@ -49,13 +46,7 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                         className="bg-almost-black dark:bg-white rounded-full w-2 h-2 z-10 absolute transition-all"
                     />
                     <p className="text-gray opacity-100 dark:text-white text-base mt-0 mb-4 font-bold">On this page</p>
-                    <Scrollspy
-                        offset={-50}
-                        onUpdate={handleInternalNavUpdate}
-                        className="list-none m-0 p-0 flex flex-col space-y-2"
-                        items={tableOfContents?.map((navItem) => navItem.url)}
-                        currentClassName="active-link"
-                    >
+                    <ul className="list-none m-0 p-0 flex flex-col space-y-2">
                         {tableOfContents?.map((navItem, index) => {
                             return (
                                 <li key={index}>
@@ -63,12 +54,14 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                                         url={navItem.url}
                                         name={navItem.name}
                                         style={activeId === navItem.url ? { opacity: '1' } : {}}
-                                        className="hover:opacity-100 opacity-60 text-[15px]"
+                                        className={`hover:opacity-100 opacity-60 text-[15px] ${
+                                            activeId === navItem.url ? 'active-link' : ''
+                                        }`}
                                     />
                                 </li>
                             )
                         })}
-                    </Scrollspy>
+                    </ul>
                 </div>
             </aside>
         </div>

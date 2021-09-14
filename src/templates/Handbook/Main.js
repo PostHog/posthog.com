@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import MainSidebar from './MainSidebar'
 import SectionLinks from './SectionLinks'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -6,6 +6,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { shortcodes } from '../../mdxGlobalComponents'
 import { CodeBlock } from 'components/CodeBlock'
+import Scrollspy from 'react-scrollspy'
 import StickySidebar from './StickySidebar'
 import MobileSidebar from './MobileSidebar'
 
@@ -68,6 +69,12 @@ export default function Main({
     const breakpoints = useBreakpoint()
     const showToc = !hideAnchor && tableOfContents?.length
     const mainEl = useRef()
+    const [activeId, setActiveId] = useState(null)
+    const handleInternalNavUpdate = (el) => {
+        if (el) {
+            setActiveId(el.id)
+        }
+    }
     return (
         <div className="relative">
             <SectionLinksTop next={next} previous={previous} />
@@ -100,8 +107,15 @@ export default function Main({
                         </MDXProvider>
                     </section>
                 </article>
-
-                {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}
+                <Scrollspy
+                    offset={-50}
+                    onUpdate={handleInternalNavUpdate}
+                    items={tableOfContents?.map((navItem) => navItem.url)}
+                >
+                    {!breakpoints.lg && showToc && (
+                        <StickySidebar top={90} tableOfContents={tableOfContents} activeId={activeId} />
+                    )}
+                </Scrollspy>
             </div>
             {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>
