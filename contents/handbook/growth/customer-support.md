@@ -30,7 +30,7 @@ We've created a [Product Metrics Worksheet](https://docs.google.com/document/d/1
 
 This worksheet is available for everyone to use and is designed to help all teams (even ones that aren't using PostHog! *yet*).
 
-For [Scale](/pricing#scale) customers, we include a complementary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog.
+For [Scale](/pricing#scale) customers, we include a complimentary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog.
 
 ### No dedicated support people
 
@@ -40,9 +40,7 @@ Providing support is a responsibility shared across our team - we expect everyon
 
 This does mean sometimes that, especially when we are particularly busy, customer success can take a bit of a back seat. 
 
-This is why, in addition, one person takes on the **Support Hero** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
-
-You can view the Support Hero rota [in PagerDuty here](https://posthog.pagerduty.com/schedules#PPLGE4G). 
+This is why, in addition, one person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Papercups, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
 
 ### Simple, lightweight tools
 
@@ -63,40 +61,3 @@ A quick overview of Papercups' main features:
 - _Analytics_: 'Reporting' in the left hand panel shows some interesting analytics, such as how many queries we're receiving, average response time etc. We don't report on these yet as we're still figuring out the best way for us to do support. 
 
 Papercups are an open source company, so if there are any additional features you'd like to see then you can check out their [repo on GitHub](https://github.com/papercups-io/papercups/issues). They are building new features quickly, so it's worth checking in to see what new functionality is available from time to time.  
-
-## Some useful questions to ask
-
-The below questions are evolving so please add more as they come up!
-
-### Set up
-
-- Has the customer logged in?
-- Has the customer added their team?
-- Are events coming into the platform on a recurring basis?
-- Are identify calls being made so user profiles are being created?
-- Are additional relevant user properties being sent?
-- Has the customer set up actions?
-- Has the customer set up funnels?
-- Has the customer created or modified a dashboard?
-- Has the customer used the toolbar?
-- Has the customer gotten PostHog into production?
-- If applicable, has the customer removed any test data?
-- If applicable, is the customer using feature flags?
-
-### Training and support
-
-- Does their team have enough general product analytics experience?
-- Has their team received a demo of the product?
-- Has everyone on the team used the product at least once?
-- Does the customer's team know where to find our use case guides?
-- Have we told the customer where to get support?
-- Have we set up a joint Slack channel with the customer?
-
-### Providing more value over time
-
-- Have we added their whole team to our email newsletter?
-- Are we monitoring the customer's usage on a dashboard at a team level?
-    - Is the customer generally above 80% usage for their current plan?
-- Have we set up a quarterly catchup with the customer to talk about roadmap/issues/expansion?
-    - Has their team had a good experience asking for help or reporting issues to us?
-- Is the customer using PostHog on a weekly / monthly basis?
