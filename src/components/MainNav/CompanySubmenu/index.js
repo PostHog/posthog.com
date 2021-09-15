@@ -44,10 +44,10 @@ export default function Company({ menu, parentURL }) {
 
     return (
         <>
-            <div className={submenu.container('max-w-screen-2xl')}>
+            <div className={submenu.container('max-w-screen-2xl lg:pb-0')}>
                 <div className="flex justify-between items-center">
                     <Link className="text-primary hover:text-primary" to={parentURL}>
-                        <h1 className="hidden lg:inline-block text-4xl m-0 font-bold mb-3">{title}</h1>
+                        <h1 className="hidden lg:inline-block text-4xl m-0 font-bold">{title}</h1>
                     </Link>
                     {!breakpoints.md && <Social />}
                 </div>
@@ -59,14 +59,19 @@ export default function Company({ menu, parentURL }) {
                         const name = component?.name
                         return (
                             <li className="flex space-x-4 flex-col-reverse md:flex-row" key={index}>
-                                <div className="overflow-hidden">
-                                    <h2 className={submenu.section.title}>{title}</h2>
-                                    <div
-                                        className={submenu.section.description()}
-                                        dangerouslySetInnerHTML={{ __html: description }}
-                                    />
-                                    {position === 'bottom' && components[name]()}
-                                    <Link className={submenu.section.link('flex space-x-1 items-center')} to={link.url}>
+                                <div className="overflow-hidden flex flex-col">
+                                    <div>
+                                        <h2 className={submenu.section.title()}>{title}</h2>
+                                        <div
+                                            className={submenu.section.description()}
+                                            dangerouslySetInnerHTML={{ __html: description }}
+                                        />
+                                        {position === 'bottom' && components[name]()}
+                                    </div>
+                                    <Link
+                                        className={submenu.section.link('flex space-x-1 items-center mt-auto')}
+                                        to={link.url}
+                                    >
                                         <span>{link.title}</span>
                                         <span className="text-gray-accent-light">
                                             <RightArrow className="w-5 h-5" />

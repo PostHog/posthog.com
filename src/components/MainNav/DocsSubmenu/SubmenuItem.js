@@ -15,7 +15,7 @@ export default function SubmenuItem({ item }) {
     return (
         <motion.li variants={variants} className="lg:mt-12 mt-6 font-bold">
             <div className="flex items-center justify-between">
-                <h2 className={submenu.section.title}>{title}</h2>
+                <h2 className={submenu.section.title('mb-0')}>{title}</h2>
                 {link && (
                     <Link
                         disablePrefetch

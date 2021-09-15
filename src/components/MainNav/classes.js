@@ -12,10 +12,12 @@ export const submenu = {
         ${className}
     `,
     section: {
-        title: cntl`
+        title: (className) => cntl`
             text-lg
             lg:text-xl
-            font-bold`,
+            font-bold
+            ${className}
+            `,
         description: (className = '') => cntl`
             my-3
             text-almost-black
