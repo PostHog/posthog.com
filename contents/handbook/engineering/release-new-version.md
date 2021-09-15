@@ -57,7 +57,7 @@ Three days before we release, on Thursday, we institute a code freeze. We branch
     git tag -a posthog-1.Y.YY -m "Version 1.Y.YY"
     git push && git push origin head --tags
     ```
-- [ ] Tag the version in GitHub. **This will immediately mark that a new version is available for users. Do this when you're sure the new release is ready.** This will also build and push the `latest-release` Docker image.
+- [ ] Tag the version in GitHub. **This will immediately mark that a new version is available for users. Do this when you're sure the new release is ready.** This will also build and push the `latest-release` Docker image to DockerHub.
   ```bash
   git tag -a [version] -m "Version [version]"
   git push origin head --tags
