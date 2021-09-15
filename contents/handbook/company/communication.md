@@ -122,6 +122,20 @@ To keep on top of this, we suggest going through issues where you've been mentio
 - [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and using filters to file them away.
 - [Using the GitHub notifier extension.](https://chrome.google.com/webstore/detail/notifier-for-github/lmjdlojahmbbcodnpecnjnmlddbkjhnn?hl=en)
 
+#### Tip for easy searching through everything
+
+To search all code, PRs and issues every written at PostHog you can search everything in the PostHog organization on Github. To do that can go to [github.com/posthog](https://github.com/posthog) and search in the top left corner.
+
+For extra convenience, you can also add this search as a 'search engine' in Chrome. That way you can type in `ph <tab>` and instantly find anything. To do that, follow these steps:
+
+1. Hit `command` + `,` in your browser
+1. Type `search`, find "manage search engines"
+1. Click "add" next to "other search engines"
+1. For "Search engine" type in `github posthog organization`
+1. For "keyword" type in `ph`
+1. For "url" copy in `https://github.com/search?q=org%3Aposthog+%s&type=issues`
+
+You can now type `ph` + `tab` into your browser and search issues directly
 
 ### Slack
 
