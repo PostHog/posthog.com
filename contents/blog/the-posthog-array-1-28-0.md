@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: release-notes
 featuredImage: ../images/blog/array/1-28-0.png
-excerpt: PostHog 1.28.0 has launched! New: Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
+excerpt: PostHog 1.28.0 has launched! Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
 ---
 
 PostHog 1.28.0 has launched! 
