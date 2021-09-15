@@ -4,6 +4,7 @@ import React from 'react'
 export default function Founders() {
     return (
         <StaticImage
+            placeholder="none"
             alt="Tim and James"
             quality={100}
             width={250}
