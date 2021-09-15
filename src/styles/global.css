@@ -384,7 +384,7 @@ ul {
 }
 
 .company-submenu-item-container > li {
-    @apply border-dashed border-gray-accent-light dark:border-gray-accent-dark border-b last:border-b-0 pb-12;
+    @apply border-dashed border-opacity-100 dark:border-opacity-30 border-gray-accent-light border-b last:border-b-0 pb-12;
 }
 
 @media (min-width: 1024px) {
