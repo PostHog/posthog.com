@@ -3,14 +3,15 @@ import React from 'react'
 
 export default function Founders() {
     return (
-        <StaticImage
-            placeholder="none"
-            alt="Tim and James"
-            quality={100}
-            width={150}
-            layout="fixed"
-            className="mb-4 md:mb-0 pointer-events-none"
-            src="./images/founders.png"
-        />
+        <div className="self-center flex-shrink-0">
+            <StaticImage
+                placeholder="none"
+                alt="Tim and James"
+                quality={100}
+                width={150}
+                className="mb-4 md:mb-0 pointer-events-none"
+                src="./images/founders.png"
+            />
+        </div>
     )
 }

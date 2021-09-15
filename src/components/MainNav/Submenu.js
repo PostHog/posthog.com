@@ -13,7 +13,7 @@ export default function Submenu({ referenceElement, menu, open, parentURL }) {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
-            <div className="z-10 top-[50px] lg:pt-[40px] lg:absolute left-0 w-full lg:block text-almost-black">
+            <div className="z-10 top-[50px] lg:pt-[40px] lg:absolute left-0 w-full lg:block text-almost-black mb-6">
                 <div className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark lg:max-h-[calc(100vh-120px)] lg:overflow-auto posthog-scrollbars">
                     {submenus[component]({ menu, parentURL })}
                 </div>

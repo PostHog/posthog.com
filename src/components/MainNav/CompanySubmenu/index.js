@@ -59,7 +59,7 @@ export default function Company({ menu, parentURL }) {
                         const position = component?.position
                         const name = component?.name
                         return (
-                            <li className="flex space-x-4 flex-col-reverse md:flex-row" key={index}>
+                            <li className="flex space-x-4" key={index}>
                                 <div className="overflow-hidden flex flex-col">
                                     <div>
                                         <h2 className={submenu.section.title()}>{title}</h2>
@@ -79,7 +79,7 @@ export default function Company({ menu, parentURL }) {
                                         </span>
                                     </Link>
                                 </div>
-                                {position === 'right' && <div className="self-center">{components[name]()}</div>}
+                                {position === 'right' && components[name]()}
                             </li>
                         )
                     })}
