@@ -7,16 +7,16 @@ showTitle: true
 hideAnchor: true
 categories: release-notes
 featuredImage: ../images/blog/array/1-28-0.png
-excerpt: PostHog 1.28.0 has launched! Excerpt here
+excerpt: PostHog 1.28.0 has launched! Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
 ---
 
 PostHog 1.28.0 has launched! 
 
-Summary here
+Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
 
 ### Community MVP 🏆
 
-Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to... [manish001in](https://github.com/manish001in)!
+Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to [manish001in](https://github.com/manish001in)!
 
 Manish helped us pushed a PR that ensures tab titles are properly set when navigating between dashboards (PR [#5822](https://github.com/PostHog/posthog/pull/5822)) and is also pushing a PR to make it easy to copy properties from the person page (PR [#5884](https://github.com/PostHog/posthog/pull/5884)).
 
@@ -25,8 +25,6 @@ Manish helped us pushed a PR that ensures tab titles are properly set when navig
 We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
 
 As a small thank you for your time, we're giving away some awesome [PostHog merch](https://merch.posthog.com)!
-
-<ArrayCTA />
 
 ## PostHog 1.28.0 Release Notes
 
@@ -38,18 +36,22 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 ### Significantly revamped performance
 
-When running on OSS Clickhouse, we now automatically create during weekends columns for event and person properties to speed up queries. This can speed up your slower queries 2-25x.
+When running on OSS Clickhouse, we now automatically create (during the weekends) columns for event and person properties which preprocess some of the heaviest operations when running queries. This can speed up your slower queries 2-25x.
 
 ### Advanced engagement cohorts
 
-Description here (Create automatic user cohorts based on actions performed by users in the last N days (e.g. to identify power users).
+You can now better analyze engagement among your users, by understanding casual and power users in more detail. Create automatic user cohorts based on actions performed by users in the last N days. You can select users who have performed more than, exactly or less than any given number of actions/events, and customize the time range you care about.
+
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_28_0-engagement-chorts.png" alt="" />
 
 ### SAML support
-Description here (Users with an Enterprise license can now enable SAML authentication and user provisioning)
+Users with a PostHog Scale license can now enable SAML authentication and automatic user provisioning in their instance. If your company uses a centralized identity provider (IdP), this is a great way to reduce IT overhead and improve compliance. Head over to our [SAML docs](/docs/user-guides/sso#saml) for details on how to enable this.
 
 
 ### Advanced funnel building
-Description here (More features to build more detailed funnel views, such as custom step ordering, event exclusions, among others)
+Last release we shipped a significant improvements to our funnels experience. We are still on our mission to enable anyone to get a deep understanding of their users conversion. In this release, we're including even more features to build advanced funnel visualizations to enable deeper diving. Such features include things as custom step ordering, event exclusions, conversion time range window, among others.
+
+<img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_28_0-advanced-funnels.png" alt="" />
 
 ### Improvements & fixes
 
@@ -65,30 +67,23 @@ Description here (More features to build more detailed funnel views, such as cus
 - Fixes to pie chart that caused some numbers to display confusingly
 - Plus more than 300+ improvements/fixes
 
-In addition to the highlights listed above, we also merged a bunch of PRs to improve PostHog's experience, performance and reliability. Plus we fixed a ton of bugs. Check out all our main repos for details:
-
-- [`PostHog/posthog`](https://github.com/PostHog/posthog/commits/master)
-- [`PostHog/plugin-server`](https://github.com/PostHog/plugin-server/commits/master)
-- [`PostHog/posthog-python`](https://github.com/PostHog/posthog-python/commits/master)
-- [`PostHog/posthog-js`](https://github.com/PostHog/posthog-js/commits/master)
-- [`PostHog/plugin-repository`](https://github.com/PostHog/plugin-repository/commits/master)
 
 ### Breaking changes
 
-⚠️ The previously deprecated `/api/user` endpoint has been removed since this version (1.28.0). Head over to the [User API](https://posthog.com/docs/api/user) docs for details on how to upgrade.
+⚠️ The previously deprecated `/api/user` endpoint has been removed since this version (1.28.0). Head over to the [User API](https://posthog.com/docs/api/user) docs if you still need to update this endpoint.
 
 
-⚠️ We've dropped support for Python 3.7. You'll now need to use Python 3.8, but we **recommend you use Python 3.9**
+⚠️ We've dropped support for Python 3.7. You'll now need to use Python 3.8 or 3.9, we **recommend you use Python 3.9**
 ## PostHog News
 
 Welcome all new team members who will help us take PostHog to the next level!
 
 | Name  |        Role         | 🍍 on 🍕 |   Interesting Fact           |
 | :---: | :-----------------: | :-------: | :-------------------------: |
-| [Eli Kinsey](/handbook/company/team#eli-kinsey-front-end-developer) | Frontend Developer |  Pineapple gang represent  |   _"I.... have never had a bloody nose?"_
+| [Eli Kinsey](/handbook/company/team#eli-kinsey-front-end-developer) | Frontend Developer |  👍 Pineapple gang represent  |   _"I.... have never had a bloody nose"_
 | Rick Marron | Full Stack Engineer |  👎  |   _"I'm part of the ~1% who can lick their elbow. (Although the ability is slowly going away with age)"_
-| Paul D'Ambra | Full Stack Engineer |   Tasty but forbidden (like drinking in church)  |   _"I was nearly arrested at a pagan wedding"_
-| Guido Laquinti | Site Reliability Engineer |   Can't say it's acceptable without having my passport revoked 🇮🇹  |   _"When I was a kid, my parents asked me to find a name for our new kitten. We called him “Password” 🔐🐕‍🦺"_
+| Paul D'Ambra | Full Stack Engineer |  👎 Tasty but forbidden (like drinking in church)  |   _"I was nearly arrested at a pagan wedding"_
+| Guido Laquinti | Site Reliability Engineer |   👎 Can't say it's acceptable without having my passport revoked 🇮🇹  |   _"When I was a kid, my parents asked me to find a name for our new kitten. We called him 'Password' 🔐🐕‍🦺"_
 
 ## Community shoutouts
 
@@ -123,3 +118,5 @@ Don't see a role for you? We're always looking for exceptional people, reach out
 <hr/>
 
 _Follow us on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+
+<ArrayCTA />
