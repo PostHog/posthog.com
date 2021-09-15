@@ -124,13 +124,11 @@ When using SAML to authenticate your users in PostHog there are a few considerat
 
 ### Setting up SAML
 
-<blockquote>
-SAML requires certain C dependencies that are installed at the OS-level. These dependencies come bundled by default in the main Docker image. If you wish to exclude these dependencies please set environment variable `SAML_DISABLED=1` or build argument `saml_disabled=1`.
-</blockquote>
+> SAML requires certain C dependencies that are installed at the OS-level. These dependencies come bundled by default in the main Docker image. If you wish to exclude these dependencies please set environment variable `SAML_DISABLED=1` or build argument `saml_disabled=1`.
 
 
 <blockquote class="warning-note">
-⚠️ SAML is currently **not supported on Heroku** deployments. We recommend using DigitalOcean, AWS or GCP for enteprise-grade deployments (see [deployment docs](/docs/self-host)).
+⚠️ SAML is currently <b>not supported on Heroku</b> deployments. We recommend using DigitalOcean, AWS or GCP for enteprise-grade deployments (see <a href="/docs/self-host" target="_blank">deployment docs</a>).
 </blockquote>
 
 For SAML to work your IdP and PostHog (SP) need to exchange information. To do this, you need to configure some settings in your IdP and on PostHog. Depending on your IdP you might need to pass PostHog information first, or the other way around. See details below.
