@@ -18,9 +18,9 @@ posthog.identify('my_user_12345')
 
 PostHog will then pull their anonymous ID (e.g. `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55`) and associate it with the ID you passed in (`my_user_12345`).
 
-From now on, all events PostHog sees with ID `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55` will be attributed to the person with ID `my_user_12345`. This person now has 2 distinct IDs, and either of them can be used to reference the person in hand. 
+From now on, all events PostHog sees with ID `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55` will be attributed to the person with ID `my_user_12345`. This person now has 2 distinct IDs, and either of them can be used to reference the same person.
 
-In addition, this person will now be marked as "identified" in the PostHog UI.
+In addition, this person will now be marked as identified in the PostHog UI.
 
 # Considerations
 
@@ -33,7 +33,7 @@ An important mistake to avoid is using non-unique distinct IDs to identify users
 
 Both of the above scenarios are highly problematic, as they will cause distinct users to be merged together in PostHog.
 
-Making sure users are identified correctly is the responsibility of those who implement the library, so do ensure your implementation is correct!
+While implementing analytics with PostHog, make sure you avoid above pitfalls to maintain data integrity.
 
 PostHog also has a few built-in protections stopping the most common threats to data integrity:
 
