@@ -7,12 +7,12 @@ showTitle: true
 hideAnchor: true
 categories: release-notes
 featuredImage: ../images/blog/array/1-28-0.png
-excerpt: PostHog 1.28.0 has launched! Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
+excerpt: PostHog 1.28.0 has launched! New: Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
 ---
 
 PostHog 1.28.0 has launched! 
 
-Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
+Enjoy significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels, and many more improvements and fixes.
 
 ## PostHog 1.28.0 Release Notes
 
@@ -27,27 +27,27 @@ Significantly revamped performance for slower queries, advanced engagement cohor
 
 ### Significantly revamped performance
 
-When running on OSS Clickhouse, we now automatically create (during the weekends) columns for event and person properties which preprocess some of the heaviest operations when running queries. This can speed up your slower queries 2-25x.
+When running on OSS ClickHouse, we now automatically create (during the weekends) columns for event and person properties which pre-process some of the heaviest operations when running queries. This can speed up your slower queries 2-25x.
 
 ### Advanced engagement cohorts
 
-You can now better analyze engagement among your users, by understanding casual and power users in more detail. Create automatic user cohorts based on actions performed by users in the last N days. You can select users who have performed more than, exactly or less than any given number of actions/events, and customize the time range you care about.
+You can now better analyze engagement among your users by understanding casual and power users in more detail. Create automatic user cohorts based on actions performed by users in the last N days. You can select users who have performed more than, exactly, or less than any given number of actions/events, and customize the time range you care about.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_28_0-engagement-chorts.png" alt="" />
 
 ### SAML support
+
 Users with a PostHog Scale license can now enable SAML authentication and automatic user provisioning in their instance. If your company uses a centralized identity provider (IdP), this is a great way to reduce IT overhead and improve compliance. Head over to our [SAML docs](/docs/user-guides/sso#saml) for details on how to enable this.
 
-
 ### Advanced funnel building
-Last release we shipped a significant improvements to our funnels experience. We are still on our mission to enable anyone to get a deep understanding of their users conversion. In this release, we're including even more features to build advanced funnel visualizations to enable deeper diving. Such features include things as custom step ordering, event exclusions, conversion time range window, among others.
+
+In our [last release](https://posthog.com/blog/the-posthog-array-1-27-0) we shipped significant improvements to our funnels experience. We are still on a mission to enable anyone to get a deep understanding of their user conversion rates. In this release, we're including even more features to build advanced funnel visualizations to enable deeper diving. Such features include custom step ordering, event exclusions, conversion time range window, and more.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_28_0-advanced-funnels.png" alt="" />
 
 ### Improvements & fixes
-
 - Significant improvements to plugins development experience
-- Improved session recording list, particularly when there's multiple recordings for a session.
+- Improved session recording list, particularly when there's multiple recordings for a session
 - Fixed broken links when sharing dashboards publicly
 - Multiple fixes on tooltips
 - Fixed bugs around cohort calculation
@@ -56,25 +56,23 @@ Last release we shipped a significant improvements to our funnels experience. We
 - Improvements to plugins UI
 - Preference to disable automatic emails when a new member joins
 - Fixes to pie chart that caused some numbers to display confusingly
-- Plus more than 300+ improvements/fixes
-
+- 300+ other improvements/fixes
 
 ### Breaking changes
 
 ⚠️ The previously deprecated `/api/user` endpoint has been removed since this version (1.28.0). Head over to the [User API](https://posthog.com/docs/api/user) docs if you still need to update this endpoint.
 
-
-⚠️ We've dropped support for Python 3.7. You'll now need to use Python 3.8 or 3.9, we **recommend you use Python 3.9**
+⚠️ We've dropped support for Python 3.7. You'll now need to use Python 3.8 or 3.9. **We recommend using Python 3.9.**
 
 ### Help us improve PostHog
 
-We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
+We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
 
-As a small thank you for your time, we're giving away some awesome [PostHog merch](https://merch.posthog.com)!
+As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## PostHog News
 
-Welcome all new team members who will help us take PostHog to the next level!
+Welcome all our new team members!
 
 | Name  |        Role         | 🍍 on 🍕 |   Interesting Fact           |
 | :---: | :-----------------: | :-------: | :-------------------------: |
@@ -117,7 +115,7 @@ Join us in helping make more products successful! We're currently hiring for the
 - Staff Software Engineer
 - Senior C++/Clickhouse Engineer
 
-Don't see a role for you? We're always looking for exceptional people, reach out! Check out our [Careers page](https://posthog.com/careers) for more info.
+Don't see a role for you? We're always looking for exceptional people, so reach out to us via our [Careers page](https://posthog.com/careers) for more info.
 
 <hr/>
 
