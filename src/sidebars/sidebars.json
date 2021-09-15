@@ -472,6 +472,10 @@
                     "url": "/docs/integrate/ingest-historic-data"
                 },
                 {
+                    "name": "Identifying Users",
+                    "url": "/docs/integrate/identifying-users"
+                },
+                {
                     "name": "Client libraries",
                     "url": "",
                     "children": [
