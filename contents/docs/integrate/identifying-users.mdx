@@ -35,7 +35,7 @@ Both of the above scenarios are highly problematic, as they will cause distinct 
 
 Making sure users are identified correctly is the responsibility of those who implement the library, so do ensure your implementation is correct!
 
-However, we have added a few guards to help prevent irreversible damage stemming from bugs in the implementation. These are:
+PostHog also has a few built-in protections stopping the most common threats to data integrity:
 
 - We do not allow identified users to be re-identified with another ID
 - We do not allow identifying users with the following IDs (case insensitive):
