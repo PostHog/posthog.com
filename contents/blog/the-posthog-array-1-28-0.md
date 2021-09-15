@@ -14,18 +14,6 @@ PostHog 1.28.0 has launched!
 
 Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
 
-### Community MVP 🏆
-
-Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to [manish001in](https://github.com/manish001in)!
-
-Manish helped us pushed a PR that ensures tab titles are properly set when navigating between dashboards (PR [#5822](https://github.com/PostHog/posthog/pull/5822)) and is also pushing a PR to make it easy to copy properties from the person page (PR [#5884](https://github.com/PostHog/posthog/pull/5884)).
-
-### Help us improve PostHog
-
-We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
-
-As a small thank you for your time, we're giving away some awesome [PostHog merch](https://merch.posthog.com)!
-
 ## PostHog 1.28.0 Release Notes
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
@@ -77,6 +65,13 @@ Last release we shipped a significant improvements to our funnels experience. We
 
 
 ⚠️ We've dropped support for Python 3.7. You'll now need to use Python 3.8 or 3.9, we **recommend you use Python 3.9**
+
+### Help us improve PostHog
+
+We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
+
+As a small thank you for your time, we're giving away some awesome [PostHog merch](https://merch.posthog.com)!
+
 ## PostHog News
 
 Welcome all new team members who will help us take PostHog to the next level!
@@ -88,8 +83,14 @@ Welcome all new team members who will help us take PostHog to the next level!
 | Paul D'Ambra | Full Stack Engineer |  👎 Tasty but forbidden (like drinking in church)  |   _"I was nearly arrested at a pagan wedding"_
 | Guido Laquinti | Site Reliability Engineer |   👎 Can't say it's acceptable without having my passport revoked 🇮🇹  |   _"When I was a kid, my parents asked me to find a name for our new kitten. We called him 'Password' 🔐🐕‍🦺"_
 
-## Community shoutouts
+## Community
+### Community MVP 🏆
 
+Thanks to all our community members for helping move PostHog forward! This release cycle's Community MVP goes to [manish001in](https://github.com/manish001in)!
+
+Manish helped us pushed a PR that ensures tab titles are properly set when navigating between dashboards (PR [#5822](https://github.com/PostHog/posthog/pull/5822)) and is also pushing a PR to make it easy to copy properties from the person page (PR [#5884](https://github.com/PostHog/posthog/pull/5884)).
+
+### Community shoutouts
 We want to thank each and every community member that contributed to this release of PostHog!
 
 - [manish001in](https://github.com/manish001in) 🏆
