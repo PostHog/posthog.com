@@ -26,7 +26,7 @@ In addition, this person will now be marked as "identified" in the PostHog UI.
 
 Identifying users is a powerful feature, but it also has the potential to create problems if misused. 
 
-The main issue that we consistently see from our clients is using non-unique distinct IDs to identify their users. This usually happens because of one of 2 key reasons:
+An important mistake to avoid is using non-unique distinct IDs to identify users. Two common ways in which this can happen are:
 
 - Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID
 - There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`
