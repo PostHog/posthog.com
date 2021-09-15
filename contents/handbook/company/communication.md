@@ -116,7 +116,7 @@ To keep on top of this, we suggest going through issues where you've been mentio
 
 To search all code, PRs and issues every written at PostHog you can search everything in the PostHog organization on Github. To do that can go to [github.com/posthog](https://github.com/posthog) and search in the top left corner.
 
-For extra convenience, you can also add this search as a 'search engine' in Chrome. That way you can type in `gh <tab>` and instantly find anything. To do that, follow these steps:
+For extra convenience, you can also add this search as a 'search engine' in Chrome. That way you can type in `ph <tab>` and instantly find anything. To do that, follow these steps:
 
 1. Hit `command` + `,` in your browser
 1. Type `search`, find "manage search engines"
