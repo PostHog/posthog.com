@@ -63,6 +63,6 @@ Three days before we release, on Thursday, we institute a code freeze. We branch
   git tag -a [version] -m "Version [version]"
   git push origin head --tags
   ```
-- [ ] Cherrypick the commits for the changelog and `version.py` into a new PR and merge to make sure `master` is up to date.
+- [ ] Cherrypick the commits for the changelog and `version.py` into a new PR (branch `[version]-sync`) and merge to make sure `master` is up to date.
 - [ ] Post a message on the PostHog Users Slack (community) in [#general](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
 - [ ] Send the newsletter with the PostHog Array. We do this through Mailchimp. You can use the template for the previously sent newsletter. You may need to ask someone with access to help with this last part.
