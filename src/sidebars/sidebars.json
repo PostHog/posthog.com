@@ -222,6 +222,10 @@
                     "url": "/handbook/engineering/release-new-version"
                 },
                 {
+                    "name": "Support hero",
+                    "url": "/handbook/engineering/support-hero"
+                },
+                {
                     "name": "Bug prioritization",
                     "url": "/handbook/engineering/bug-prioritization"
                 },
@@ -286,6 +290,14 @@
                 {
                     "name": "Paid & SEO",
                     "url": "/handbook/growth/marketing/paid"
+                },
+                {
+                    "name": "Customer personas",
+                    "url": "/handbook/growth/marketing/customer-personas"
+                },
+                {
+                    "name": "Value propositions",
+                    "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
                     "name": "Press",

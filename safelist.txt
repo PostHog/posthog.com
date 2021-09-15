@@ -64,3 +64,5 @@ border-red
 lg:my-0
 flex-row-reverse
 space-x-reverse
+text-primary
+text-primary-dark

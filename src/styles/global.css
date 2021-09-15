@@ -17,6 +17,46 @@ p {
     font-variant-numeric: proportional-nums;
 }
 
+/* Content pages (Handbook + Docs) */
+
+.handbook-container {
+    .article-content {
+        p,
+        li {
+            line-height: 1.75;
+        }
+
+        details {
+            @apply p-2 cursor-pointer text-base text-orange border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
+
+            > summary {
+                @apply list-none pl-4 relative before:absolute before:left-[3px] before:top-[8px] before:w-[10px] before:h-[7px];
+
+                &:before {
+                    background: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath d='M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z' fill='%23EF7632' /%3E%3C/svg%3E");
+                    transform: rotate(-90deg);
+                    transition: all 0.25s ease-out;
+                }
+            }
+
+            &[open] {
+                > summary:before {
+                    transform: rotate(0deg);
+                    transition: all 0.25s ease-out;
+                }
+            }
+
+            > div {
+                @apply ml-4 mt-2 rounded;
+            }
+        }
+
+        details + details {
+            @apply border-t-0;
+        }
+    }
+}
+
 /* Footer */
 
 .handbook-container main article a,

@@ -48,6 +48,12 @@ In code snippets, you should follow the conventions of the language the code is 
 
 Example: Use `camelCase` for JavaScript, and `snake_case` for Python variables names.
 
+**Third-party, 3rd party or third party cookies?**
+
+We often talk about third-party cookies. And that's how it's spelled, with the number spelled out and a hyphen in the middle. The hyphen indicates that this is a modifying adjective to the noun (cookies). That means if you're actually talking about the third party you went to you would spell it 'third party' instead. Same goes for first-party. 
+
+Example: 'PostHog doesn't require third-party cookies.'
+
 **Where there is a call to action, always provide a link**
 
 When you write: "You can contact us to learn more", make sure to provide the reader with the means to do so immediately. This could be a link to another page or an email address, for example. 

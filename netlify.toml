@@ -736,3 +736,14 @@
 [[redirects]]
     from = "/handbook/engineering/enterprise-prioritization"
     to = "/handbook/engineering/scale-features-prioritization"
+
+# Added: 2021-9-13
+[[redirects]]
+    from = "/blog/titles"
+    to = "/blog/startup-job-titles"
+
+
+# Added: 2021-9-14
+[[redirects]]
+    from = "/handbook/growth/marketing/Customer-personas"
+    to = "/handbook/growth/marketing/customer-personas"

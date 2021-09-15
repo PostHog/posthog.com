@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 import scrollTo from 'gatsby-plugin-smoothscroll'
-
 import { mergeClassList } from '../../lib/utils'
 import downIcon from '../../images/icons/down-caret.svg'
+import Chip from 'components/Chip'
 
 const ButtonLink = ({
     section,
@@ -14,25 +13,16 @@ const ButtonLink = ({
     currentSection: string
     children: React.ReactNode
 }) => {
-    const baseClasses =
-        'leading-loose border-2 dark:border-white rounded-lg px-2 mx-1 my-1 text-sm transition-colors select-none'
-    const classList =
-        section == currentSection
-            ? baseClasses.concat(' bg-black text-white border-black hover:text-white dark:bg-white dark:text-black')
-            : baseClasses.concat(
-                  ' bg-tan text-black text-opacity-50 hover:text-black hover:text-opacity-100 border-gray border-opacity-75 hover:border-opacity-100 dark:text-white'
-              )
     const sectionSelector = `#${section}`
-
     const clickHandler = (e: { preventDefault: () => void }) => {
         e.preventDefault()
         scrollTo(sectionSelector)
     }
 
     return (
-        <Link to={sectionSelector} className={classList} onClick={clickHandler}>
+        <Chip active={section == currentSection} onClick={clickHandler}>
             {children}
-        </Link>
+        </Chip>
     )
 }
 
@@ -60,7 +50,7 @@ interface AnchorScrollNavbarProps {
 }
 
 export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses = 'w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex'
+    const baseClasses = 'space-x-2 w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex'
     const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
