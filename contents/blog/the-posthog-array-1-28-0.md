@@ -33,6 +33,9 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 **In this release:**
 
 - [Significantly revamped performance](#significantly-revamped-performance).
+- [Advanced engagement cohorts](#advanced-engagement-cohorts).
+- [SAML support](#saml-support).
+- [Advanced funnel building](#advanced-funnel-building).
 
 ### Significantly revamped performance
 
