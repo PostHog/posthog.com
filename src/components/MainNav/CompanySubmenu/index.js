@@ -9,6 +9,7 @@ import { YouTube, LinkedIn, Twitter, Slack, Lifeguard, Chat, RightArrow } from '
 
 const footerLink = cntl`
     text-primary
+    dark:text-white
     hover:text-primary
     font-bold
     flex
@@ -84,8 +85,8 @@ export default function Company({ menu, parentURL }) {
                     })}
                 </ul>
             </div>
-            <div className="grid lg:grid-cols-2 gap-6 p-4 lg:px-9 bg-tan dark:bg-gray-accent font-bold">
-                <div className="flex space-x-6 w-full lg:w-auto justify-between lg:justify-start">
+            <div className="grid lg:grid-cols-2 gap-5 p-4 lg:px-9 bg-tan dark:bg-primary font-bold dark:text-white">
+                <div className="flex lg:space-x-6 space-y-5 lg:space-y-0 w-full lg:w-auto flex-col lg:flex-row">
                     <Link className={footerLink} to="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
                         <Chat />
                         <span>Contact sales</span>
@@ -95,21 +96,23 @@ export default function Company({ menu, parentURL }) {
                         <span>Support</span>
                     </Link>
                 </div>
-                <div className="text-center lg:text-right">
+                <div className="text-left lg:text-right">
                     <p className="m-0">
                         Get yourself some PostHog swag in our{' '}
                         <Link
                             iconPosition="right"
                             external
                             className={submenu.section.link()}
-                            iconClasses="text-primary"
+                            iconClasses="text-primary dark:text-white"
                             to="https://merch.posthog.com/collections/all"
                         >
                             Merch Store
                         </Link>
                     </p>
                 </div>
-                {breakpoints.md && <Social className="justify-self-center" />}
+                {breakpoints.md && (
+                    <Social className="justify-self-center justify-between lg:justify-start w-full lg:w-auto pt-5 border-t border-dashed border-gray-accent-light dark:border-opacity-30" />
+                )}
             </div>
         </>
     )
