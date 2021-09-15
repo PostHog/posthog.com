@@ -79,7 +79,7 @@ export default function Company({ menu, parentURL }) {
                     })}
                 </ul>
             </div>
-            <div className="grid lg:grid-cols-2 gap-6 p-4 bg-tan dark:bg-gray-accent font-bold">
+            <div className="grid lg:grid-cols-2 gap-6 p-4 lg:px-9 bg-tan dark:bg-gray-accent font-bold">
                 <div className="flex space-x-6 w-full lg:w-auto justify-between lg:justify-start">
                     <Link className={footerLink} to="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
                         <Chat />
