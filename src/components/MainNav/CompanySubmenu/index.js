@@ -52,13 +52,13 @@ export default function Company({ menu, parentURL }) {
                     {!breakpoints.md && <Social />}
                 </div>
 
-                <div className="company-submenu-item-container">
+                <ul className="company-submenu-item-container">
                     {items.map((item, index) => {
                         const { title, description, link, component } = item
                         const position = component?.position
                         const name = component?.name
                         return (
-                            <div
+                            <li
                                 className="flex space-x-4 items-start md:items-end flex-col-reverse md:flex-row"
                                 key={index}
                             >
@@ -77,10 +77,10 @@ export default function Company({ menu, parentURL }) {
                                     </Link>
                                 </div>
                                 {position === 'right' && <div>{components[name]()}</div>}
-                            </div>
+                            </li>
                         )
                     })}
-                </div>
+                </ul>
             </div>
             <div className="grid lg:grid-cols-2 gap-6 p-4 bg-tan dark:bg-gray-accent font-bold">
                 <div className="flex space-x-6 w-full lg:w-auto justify-between lg:justify-start">
