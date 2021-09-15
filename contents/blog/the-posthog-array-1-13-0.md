@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 
@@ -19,7 +21,7 @@ If you're self-hosting and want to upgrade for a better experience with nicer fe
 
 ## Release Notes
 
-### [PostHog is Now Available on Segment!](/blog/posthog-segment)
+### [PostHog is now available on Segment!](/blog/posthog-segment-integration)
 
 ![](../images/posthog-segment.png)
 
@@ -46,7 +48,7 @@ The integration used to be very basic - but now you can edit the message format 
 
 ### [Toolbars for all!](https://github.com/PostHog/posthog/pull/1326)
 
-![](https://posthog.com/images/3ce1232ef29d0d59b4ac2779d8e97cf8/inspect.gif)
+![](../images/casts/inspect.gif)
 
 PostHog provides an irrefutably awesome toolbar. This lets you interact with your site or app and understand who is doing what. We've been in Beta for a few weeks, and spent a lot of time interviewing early users - thank you to everyone that took part!
 

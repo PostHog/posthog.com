@@ -55,7 +55,7 @@ export interface Contributor {
 export interface AuthorsData {
     handle: string
     image: string
-    link_type: 'twitter' | 'linkedin'
+    link_type: 'twitter' | 'linkedin' | 'github'
     link_url: string
     name: string
     role: string

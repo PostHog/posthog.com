@@ -5,6 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ceo-diaries
 ---
 
 I'm [James](https://twitter.com/james406), and I work with [Tim](https://twitter.com/timgl). We are the co-founders of PostHog - a current batch YC company.
@@ -13,7 +14,7 @@ This is us (I'm on the right), just after we got now-redundant, pre-pivot swag:
 
 ![James and Tim](../images/02/IMG_4294-scaled.jpg)
 
-We quit our jobs around August 2019, and put the last \$8K of salary into a business bank account. We had both saved enough money to live on for at least 12 months without any income.
+We quit our jobs around August 2019, and put the last $8K of salary into a business bank account. We had both saved enough money to live on for at least 12 months without any income.
 
 I went travelling with my wife for 3 weeks around Europe whilst we worked on our first idea.
 
@@ -23,7 +24,7 @@ Tim built the product and I started doing customer calls from the cheapest Airbn
 
 ![Olive groves in Tuscany](../images/02/IMG_3338-scaled.jpg)
 
-Not only did I have slow wifi, but the idea was complicated and people didn't get it. We had just two customers start using it, and that's only because they were already our friends. One of those two was happy paying \$200 MRR for it, but then his company pivoted. We ended up bringing Aaron on board as our first employee the following January.
+Not only did I have slow wifi, but the idea was complicated and people didn't get it. We had just two customers start using it, and that's only because they were already our friends. One of those two was happy paying $200 MRR for it, but then his company pivoted. We ended up bringing Aaron on board as our first employee the following January.
 
 If we explained the complex modelling, we'd watch people's eyes glaze over. If we didn't, they wouldn't believe it worked.
 
@@ -31,7 +32,7 @@ We decided to simplify it. We turned our 1-liner into "a sales 1:1 tool that use
 
 I drove back to the UK from Tuscany. Sidenote: my ac broke and it was the hottest day of the year. It was a 30 hour drive.
 
-Tim and I managed to get cheap WeWork access. We spent \$100/month each. If you're in the US, I would get a platinum AMEX card instead, it's an even better deal. It wasn't perfect, but working together and not in cafés helped our focus immeasurably.
+Tim and I managed to get cheap WeWork access. We spent $100/month each. If you're in the US, I would get a platinum AMEX card instead, it's an even better deal. It wasn't perfect, but working together and not in cafés helped our focus immeasurably.
 
 Although I can code, I am too slow, but I have done a lot of sales and marketing before. We split our roles out clearly. Tim was to build the product, I was to book 2 meetings with heads of sales every day.
 

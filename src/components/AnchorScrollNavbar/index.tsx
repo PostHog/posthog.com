@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 import scrollTo from 'gatsby-plugin-smoothscroll'
-
 import { mergeClassList } from '../../lib/utils'
 import downIcon from '../../images/icons/down-caret.svg'
+import Chip from 'components/Chip'
 
 const ButtonLink = ({
     section,
@@ -12,32 +11,22 @@ const ButtonLink = ({
 }: {
     section: string
     currentSection: string
-    children: any
+    children: React.ReactNode
 }) => {
-    const baseClasses = 'px-3 py-2 rounded'
-    const classList =
-        section == currentSection
-            ? baseClasses.concat(' bg-primary text-white font-bold hover:text-white')
-            : baseClasses.concat(' text-white text-opacity-80 hover:bg-gray-100 hover:bg-opacity-10 hover:text-white')
     const sectionSelector = `#${section}`
-
     const clickHandler = (e: { preventDefault: () => void }) => {
         e.preventDefault()
         scrollTo(sectionSelector)
     }
 
     return (
-        <Link to={sectionSelector} className={classList} onClick={clickHandler}>
+        <Chip active={section == currentSection} onClick={clickHandler}>
             {children}
-        </Link>
+        </Chip>
     )
 }
 
 const inPageLinks = [
-    {
-        label: "Why we're here",
-        section: 'why-were-here',
-    },
     {
         label: 'Transparency',
         section: 'transparency',
@@ -51,10 +40,6 @@ const inPageLinks = [
         section: 'benefits',
     },
     {
-        label: 'Working at PostHog',
-        section: 'working-at-posthog',
-    },
-    {
         label: 'Open roles',
         section: 'open-roles',
     },
@@ -65,8 +50,7 @@ interface AnchorScrollNavbarProps {
 }
 
 export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses =
-        'rounded w-11/12 max-w-3xl mx-auto justify-between items-stetch p-3 sticky top-3 z-10 hidden lg:flex'
+    const baseClasses = 'space-x-2 w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex'
     const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
@@ -122,14 +106,11 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
 
     return (
         <>
-            <div className={classList} style={{ backgroundColor: '#202038' }}>
-                {navbarLinks}
-            </div>
+            <div className={classList}>{navbarLinks}</div>
 
-            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl lg:hidden">
+            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl md:hidden border border-1 border-tan rounded border-opacity-25">
                 <select
-                    className="appearance-none text-white block p-3 w-full rounded"
-                    style={{ backgroundColor: '#202038' }}
+                    className="appearance-none text-white bg-primary block p-3 w-full rounded font-bold"
                     value={currentSection}
                     onChange={(e) => scrollTo(`#${e.target.value}`)}
                 >

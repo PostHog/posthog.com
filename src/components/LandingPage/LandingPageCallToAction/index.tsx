@@ -3,12 +3,12 @@ import { CallToAction } from 'components/CallToAction'
 
 export const LandingPageCallToAction = (): JSX.Element => {
     return (
-        <div className="ctas flex flex-col items-center justify-center w-full max-w-xl sm:mx-auto sm:flex-row">
-            <CallToAction icon="rocket" type="primary" to="/sign-up?src=home-hero">
-                Get Started
+        <div className="flex flex-col justify-center items-center space-y-2 md:space-y-3">
+            <CallToAction type="primary" width="56" to="/docs/self-host/">
+                Get started
             </CallToAction>
-            <CallToAction icon="calendar" type="secondary" className="mt-3 sm:mt-0 sm:ml-4" to="/schedule-demo">
-                Book a demo
+            <CallToAction type="outline" width="56" to="/schedule-demo">
+                Schedule a demo
             </CallToAction>
         </div>
     )

@@ -1,17 +1,17 @@
 ---
 date: 2021-08-09
-title: Automating a Software Company with GitHub Actions
+title: Automating a software company with GitHub Actions
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: engineering
 author: michael-matloka
-featuredImage: ../images/blog/robot-hedgehogs.png
+featuredImage: ../images/blog/automating-software-company-github-actions.png
 featuredImageType: full
 ---
 
-**This post shows how a good CI solution can automate your engineering workflow and help you focus on actual challenges instead of chores. PostHog does the same for your product workflow: we're a product analytics platform that helps you discover how users use your product, and what could make their journey better. [Try PostHog today for free.](https://posthog.com/product?utm_medium=blog&utm_campaign=github-actions-post)**
+**This post shows how a good CI solution can automate your engineering workflow and help you focus on actual challenges instead of chores. PostHog does the same for your product workflow: we're a self-hostable product analytics platform that helps you discover how users use your product, and what could make their journey better. [Try PostHog today for free.](https://posthog.com/?utm_medium=blog&utm_campaign=github-actions-post)**
 
 When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure, launching new systems, phasing deprecated solutions out, ensuring security, keeping track of dependencies… Whew. And that's before we get to product, people, or ops considerations.
 
@@ -157,7 +157,7 @@ jobs:
 > One thing we've not covered yet is what running jobs on every PR gives us in practice.
 > It's two things:
 > 1. Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.
->   <img alt="Bump labels" src="../images/blog/github-actions/pr.png" width="839" height="196"/>
+>   ![Bump labels](../images/blog/github-actions/pr.png)
 > 2. Select PR checks can be made required, in which case merging is prevented until all required checks turn green.
 
 ### Keeping stale PRs in check
@@ -337,7 +337,7 @@ Something particularly tedious we eliminated is incrementing package versions. A
 
 What gives? Well, these days the only thing an engineer has to do is give their PR the right label:
 
-<img alt="Bump labels" src="../images/blog/github-actions/bump-labels.png" width="297" height="249"/>
+![Bump labels](../images/blog/github-actions/bump-labels.png)
 
 Right after that PR gets merged, the package version gets incremented in `master`:
 
@@ -408,7 +408,7 @@ jobs:
 
 Here's what this looks like in GitHub's workflow visualization feature:
 
-<img alt="Visualization 1. Autobump" src="../images/blog/github-actions/1-autobump.png" width="287" height="167"/>
+![Visualization 1. Autobump](../images/blog/github-actions/1-autobump.png)
 
 But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all of the aforementioned release tasks run automatically.
 
@@ -416,7 +416,7 @@ In fact, there are so many tasks that run automatically that the workflow would 
 
 That workflow has a fascinating visualization – which, remember, is actually an extension of the previous autobump workflow.
 
-<img alt="Visualization 2. Autorelease" src="../images/blog/github-actions/2-autorelease.png" width="922" height="273"/>
+![Visualization 2. Autorelease](../images/blog/github-actions/2-autorelease.png)
 
 ### Fixing typos
 

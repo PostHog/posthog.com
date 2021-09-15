@@ -1,14 +1,12 @@
 ---
-title: Updating Documentation
+title: Updating documentation
 sidebar: Docs
 showTitle: true
 ---
 
 This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Netlify](https://www.netlify.com/).
-<br />
 
-
-## Finding the Content to Edit
+## Finding the content to edit
 
 Once you have cloned the repo, the `contents/` directory contains a few key areas:
 
@@ -20,11 +18,11 @@ Inside each of these are a series of markdown files for you to edit.
 
 ## Deployment
 
-New changes should be created as a Pull Request.
+New changes should be created as a pull request.
 
 To get changes into production, the website deploys automatically from `master`. The build takes 5-10 minutes.
 
-## Markdown Details
+## Markdown details
 
 #### Frontmatter
 
@@ -44,7 +42,7 @@ showTitle: true
 - `sidebarTitle`: the title shown in the sidebar. If this value isn't provided the `title` property is used.
 - `showTitle` should always be set to `true`.
 
-#### Images / GIFs
+#### Images/GIFs
 
 For our Markdown, we use [gatsby-remark-copy-linked-files](https://www.gatsbyjs.org/packages/gatsby-remark-copy-linked-files/).
 

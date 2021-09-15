@@ -4,8 +4,8 @@ on:
     - pull_request
 
 jobs:
-    spell-check:
-        name: Standard Checks
+    standard_checks:
+        name: Spelling
         runs-on: ubuntu-latest
         if: github.event.pull_request.head.repo.full_name == github.repository
 
@@ -24,9 +24,10 @@ jobs:
                   python -m pip install -U pip
                   python -m pip install git+https://github.com/yakkomajuri/codespell.git
 
-            - name: Install requests with pip
-              run: |
-                  python -m pip install requests
+            # Replaced by JS checks (remove when sure JS checks are working)
+            # - name: Install requests with pip
+            #   run: |
+            #       python -m pip install requests
 
             - name: Configure Git
               run: |
@@ -34,14 +35,15 @@ jobs:
                   git config user.name PostHog Bot
                   git config user.email hey@posthog.com
 
-            - name: Add safe redirects
-              if: ${{ github.base_ref == 'master' }}
-              run: |
-                  git diff ${{ github.base_ref }} ${{ github.head_ref }} > pr_diff
-                  python3 ./scripts/safe_rename.py
-                  rm pr_diff
-                  git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
+            # Replaced by JS checks (remove when sure JS checks are working)
+            # - name: Add safe redirects
+            #   if: ${{ github.base_ref == 'master' }}
+            #   run: |
+            #       git diff ${{ github.base_ref }} ${{ github.head_ref }} > pr_diff
+            #       python3 ./scripts/safe_rename.py
+            #       rm pr_diff
+            #       git add .
+            #       [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects"
 
             - name: Fix typos
               run: |
@@ -49,6 +51,38 @@ jobs:
                   git add .
                   [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos"
 
+            - name: Push changes
+              run: |
+                  git push
+
+    js_checks:
+        name: Safe Redirects
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '16'
+            - name: Install dependencies
+              run: yarn
+            - name: Run tests
+              run: yarn test-generate-redirects
+            - name: Configure Git
+              run: |
+                  git fetch origin master:master
+                  git config user.name PostHog Bot
+                  git config user.email hey@posthog.com
+            - name: Add safe redirects
+              if: ${{ github.base_ref == 'master' }}
+              run: yarn generate-redirects-js
+            - name: Cleanup and commit
+              if: ${{ github.base_ref == 'master' }}
+              run: |
+                  rm pr_diff
+                  git add netlify.toml
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Add safe redirects (JS)"
             - name: Push changes
               run: |
                   git push

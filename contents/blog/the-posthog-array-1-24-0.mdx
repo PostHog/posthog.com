@@ -6,6 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: release-notes
+featuredImage: ../images/blog/array/default.png
+featuredImageType: standard
 ---
 
 Welcome to The PostHog Array 1.24.0! Quite a lot has changed since we last talked...
@@ -24,22 +26,21 @@ As of writing, Adrien is by far the top contributor to PostHog in April, with 11
 
 Thank you so much Adrien! Hope you've been enjoying the PostHog merch you accumulated.
 
-> If you haven't seen it yet, we have a [new page dedicated to our contributors](/contributors). Every contributor gets their own digital card, and we provide a leaderboard with stats on the contributions made by each contributor. We also have a bot that sends a gift card for PostHog merch to contributors for every PR merged, and we welcome all types of contributions! 
+> If you haven't seen it yet, we have a [new page dedicated to our contributors](/contributors). Every contributor gets their own digital card, and we provide a leaderboard with stats on the contributions made by each contributor. We also have a bot that sends a gift card for PostHog merch to contributors for every PR merged, and we welcome all types of contributions!
 
 **In this release:**
 
-- **New:** IP location data available to all PostHog users
-- **New:** Display a list of cohorts a given user is in on their person page
-- **New:** Custom data attributes support for the toolbar 
-- **New:** Advanced dashboard collaboration features
-- **New:** S3 export plugin
-- **New:** Snowflake export plugin
-- **Improvement:** Session recording support for heavy websites
-- **Improvement:** Multiple new configuration options for `posthog-js`
-- **Improvement:** First Time Event Tracker plugin now tracks session starts
+-   **New:** IP location data available to all PostHog users
+-   **New:** Display a list of cohorts a given user is in on their person page
+-   **New:** Custom data attributes support for the toolbar
+-   **New:** Advanced dashboard collaboration features
+-   **New:** S3 export plugin
+-   **New:** Snowflake export plugin
+-   **Improvement:** Session recording support for heavy websites
+-   **Improvement:** Multiple new configuration options for `posthog-js`
+-   **Improvement:** First Time Event Tracker plugin now tracks session starts
 
 <ArrayCTA />
-
 
 ## PostHog 1.24.0 Release Notes
 
@@ -63,7 +64,7 @@ When viewing a person's page in PostHog, you can now toggle between a view of th
 
 ![Data attr](https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/data-attr.png)
 
-To make the experience of using the PostHog toolbar better, we have recommended that you set `data-attr` on your elements, so that the toolbar can leverage it for finding elements. However, since a lot of our users already used their own data attributes, we now support adding a list of your own data attributes for the toolbar to look for. 
+To make the experience of using the PostHog toolbar better, we have recommended that you set `data-attr` on your elements, so that the toolbar can leverage it for finding elements. However, since a lot of our users already used their own data attributes, we now support adding a list of your own data attributes for the toolbar to look for.
 
 You can configure this in 'Project Settings'.
 
@@ -101,25 +102,25 @@ Following user requests, there are now 10 new config options for `posthog-js`, a
 
 The new options are:
 
-- `mask_all_text`: Specifies if PostHog should capture the `textContent` of autocaptured elements
-- `mask_all_attributes`: Specifies if PostHog should capture the attributes of autocaptured elements
-- `session_recording`: Accepts an object that lets you configure the following `rrweb` options:
-    - `blockClass`
-    - `blockSelector`
-    - `ignoreClass`
-    - `maskAllInputs`
-    - `maskInputOptions`
-    - `maskInputFn`
-    - `slimDOMOptions`
-    - `collectFonts`
+-   `mask_all_text`: Specifies if PostHog should capture the `textContent` of autocaptured elements
+-   `mask_all_attributes`: Specifies if PostHog should capture the attributes of autocaptured elements
+-   `session_recording`: Accepts an object that lets you configure the following `rrweb` options:
+    -   `blockClass`
+    -   `blockSelector`
+    -   `ignoreClass`
+    -   `maskAllInputs`
+    -   `maskInputOptions`
+    -   `maskInputFn`
+    -   `slimDOMOptions`
+    -   `collectFonts`
 
-See our [JS Library page](/docs/integrate/client/js) for more details.
+See our [JS library page](/docs/integrate/client/js) for more details.
 
 ### [Track session starts](/plugins/first-time-event-tracker)
 
 Our First Time Event Tracker plugin now also tracks session starts. By enabling it you will get `session_started` events in PostHog, as well as events that started a session will be tagged with property `is_first_event_in_session` set to `true`.
 
-### [User Interviews](calendly.com/posthog-feedback)
+### [User Interviews](https://calendly.com/posthog-feedback)
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product.
 
@@ -131,22 +132,21 @@ Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com
 
 Big thanks to the following members of our community who have contributed to PostHog over this release cycle:
 
-- [adrienbrault](https://github.com/adrienbrault)
-- [jeduden](https://github.com/jeduden)
-- [leggetter](https://github.com/leggetter)
-- [rethab](https://github.com/rethab)
-- [lharress](https://github.com/lharress)
-- [jeduden](https://github.com/jeduden)
-- [bard](https://github.com/bard)
-- [jonathanclarke](https://github.com/jonathanclarke)
-- [shogunpurple](https://github.com/shogunpurple)
-- [samcaspus](https://github.com/samcaspus)
-- [well-balanced](https://github.com/well-balanced)
-- [gempain](https://github.com/gempain)
-- [bronsonavila](https://github.com/bronsonavila)
-- [joesaunderson](https://github.com/joesaunderson)
-- [wushaobo](https://github.com/wushaobo)
-
+-   [adrienbrault](https://github.com/adrienbrault)
+-   [jeduden](https://github.com/jeduden)
+-   [leggetter](https://github.com/leggetter)
+-   [rethab](https://github.com/rethab)
+-   [lharress](https://github.com/lharress)
+-   [jeduden](https://github.com/jeduden)
+-   [bard](https://github.com/bard)
+-   [jonathanclarke](https://github.com/jonathanclarke)
+-   [shogunpurple](https://github.com/shogunpurple)
+-   [samcaspus](https://github.com/samcaspus)
+-   [well-balanced](https://github.com/well-balanced)
+-   [gempain](https://github.com/gempain)
+-   [bronsonavila](https://github.com/bronsonavila)
+-   [joesaunderson](https://github.com/joesaunderson)
+-   [wushaobo](https://github.com/wushaobo)
 
 ## Open Roles
 
@@ -154,214 +154,212 @@ If you'd love to help us build PostHog, we have a lot of openings available!
 
 We're looking for:
 
-- Full Stack Engineers
-- Senior Full Stack Engineers
-- Sales Engineer
-- Senior Mobile Engineer
-- Senior Product Designer
-- Product Marketer
-- Any role you think you'd be a great fit for
+-   Full Stack Engineers
+-   Senior Full Stack Engineers
+-   Sales Engineer
+-   Senior Mobile Engineer
+-   Senior Product Designer
+-   Product Marketer
+-   Any role you think you'd be a great fit for
 
 Check out our [Careers page](https://posthog.com/careers) for more info.
-
 
 ## Bug Fixes and Performance Improvements
 
 In addition to the highlights listed above, we also merged a bunch of PRs improving PostHog's performance and fixing bugs:
 
-- Update plugin server to 0.16.10 [\#3976](https://github.com/PostHog/posthog/pull/3976) ([posthog-bot](https://github.com/posthog-bot))
-- Rename redefined variables [\#3975](https://github.com/PostHog/posthog/pull/3975) ([mariusandra](https://github.com/mariusandra))
-- Three small UX fixes [\#3972](https://github.com/PostHog/posthog/pull/3972) ([Twixes](https://github.com/Twixes))
-- Fix persons search [\#3971](https://github.com/PostHog/posthog/pull/3971) ([yakkomajuri](https://github.com/yakkomajuri))
-- Update plugin server to 0.16.9 [\#3970](https://github.com/PostHog/posthog/pull/3970) ([posthog-bot](https://github.com/posthog-bot))
-- Fix display of plugin error seconds [\#3965](https://github.com/PostHog/posthog/pull/3965) ([mariusandra](https://github.com/mariusandra))
-- Update plugin server to 0.16.8 [\#3959](https://github.com/PostHog/posthog/pull/3959) ([posthog-bot](https://github.com/posthog-bot))
-- Update plugin server to 0.16.7 [\#3958](https://github.com/PostHog/posthog/pull/3958) ([posthog-bot](https://github.com/posthog-bot))
-- Remove fixed typescript errors [\#3956](https://github.com/PostHog/posthog/pull/3956) ([paolodamico](https://github.com/paolodamico))
-- Update plugin server to 0.16.6 [\#3955](https://github.com/PostHog/posthog/pull/3955) ([posthog-bot](https://github.com/posthog-bot))
-- Update plugin server to 0.16.5 [\#3954](https://github.com/PostHog/posthog/pull/3954) ([posthog-bot](https://github.com/posthog-bot))
-- Fixes project settings not loading [\#3950](https://github.com/PostHog/posthog/pull/3950) ([paolodamico](https://github.com/paolodamico))
-- Update plugin server to 0.16.4 [\#3945](https://github.com/PostHog/posthog/pull/3945) ([posthog-bot](https://github.com/posthog-bot))
-- Update plugin server to 0.16.3 [\#3944](https://github.com/PostHog/posthog/pull/3944) ([posthog-bot](https://github.com/posthog-bot))
-- Remove 'string, parsable as datetime' [\#3942](https://github.com/PostHog/posthog/pull/3942) ([Twixes](https://github.com/Twixes))
-- Use default axes on line graphs [\#3940](https://github.com/PostHog/posthog/pull/3940) ([kpthatsme](https://github.com/kpthatsme))
-- Bump cryptography to 3.4.7 and add macosx\_arm64 install script [\#3935](https://github.com/PostHog/posthog/pull/3935) ([samwinslow](https://github.com/samwinslow))
-- Update posthog-js to 1.9.7 [\#3933](https://github.com/PostHog/posthog/pull/3933) ([posthog-bot](https://github.com/posthog-bot))
-- Update plugin server to 0.16.2 [\#3932](https://github.com/PostHog/posthog/pull/3932) ([posthog-bot](https://github.com/posthog-bot))
-- Renames Active users to Unique users [\#3930](https://github.com/PostHog/posthog/pull/3930) ([paolodamico](https://github.com/paolodamico))
-- Fix navigation to insights from dashboards [\#3928](https://github.com/PostHog/posthog/pull/3928) ([paolodamico](https://github.com/paolodamico))
-- Resizable table columns in Sessions [\#3927](https://github.com/PostHog/posthog/pull/3927) ([samwinslow](https://github.com/samwinslow))
-- Update autocapture label to be more descriptive [\#3925](https://github.com/PostHog/posthog/pull/3925) ([kpthatsme](https://github.com/kpthatsme))
-- Log to sentry when migrations are out of date [\#3924](https://github.com/PostHog/posthog/pull/3924) ([fuziontech](https://github.com/fuziontech))
-- Update plugin server to 0.16.1 [\#3920](https://github.com/PostHog/posthog/pull/3920) ([posthog-bot](https://github.com/posthog-bot))
-- Run Automerge as posthog-bot [\#3919](https://github.com/PostHog/posthog/pull/3919) ([Twixes](https://github.com/Twixes))
-- Are migrations safe to run on cloud?  [\#3917](https://github.com/PostHog/posthog/pull/3917) ([mariusandra](https://github.com/mariusandra))
-- Minimum PostHog version in plugins [\#3916](https://github.com/PostHog/posthog/pull/3916) ([mariusandra](https://github.com/mariusandra))
-- Add cypress dependency installation [\#3914](https://github.com/PostHog/posthog/pull/3914) ([EDsCODE](https://github.com/EDsCODE))
-- Increase Element model varchar limits [\#3912](https://github.com/PostHog/posthog/pull/3912) ([Twixes](https://github.com/Twixes))
-- Fix commandpallet test [\#3911](https://github.com/PostHog/posthog/pull/3911) ([timgl](https://github.com/timgl))
-- Fix action with same name [\#3909](https://github.com/PostHog/posthog/pull/3909) ([timgl](https://github.com/timgl))
-- Always show event stats and add warnings [\#3908](https://github.com/PostHog/posthog/pull/3908) ([timgl](https://github.com/timgl))
-- Update plugin server to 0.16.0 \(AKA plugins no longer opt-in\) [\#3903](https://github.com/PostHog/posthog/pull/3903) ([posthog-bot](https://github.com/posthog-bot))
-- Fix events with spaces and only add URL for pageviews [\#3902](https://github.com/PostHog/posthog/pull/3902) ([timgl](https://github.com/timgl))
-- Fix Continent Name property description [\#3900](https://github.com/PostHog/posthog/pull/3900) ([Twixes](https://github.com/Twixes))
-- Support GeoLite2 City event properties in UI \(AKA GeoIP out of the box with our new plugin\) [\#3894](https://github.com/PostHog/posthog/pull/3894) ([Twixes](https://github.com/Twixes))
-- Fix property popover arrow placement on cohorts page [\#3893](https://github.com/PostHog/posthog/pull/3893) ([adrienbrault](https://github.com/adrienbrault))
-- Fix Cypress tests on forks [\#3892](https://github.com/PostHog/posthog/pull/3892) ([Twixes](https://github.com/Twixes))
-- Make docker apt version pinning less strict [\#3889](https://github.com/PostHog/posthog/pull/3889) ([adrienbrault](https://github.com/adrienbrault))
-- Fix shared dashboard rendering with multiline descriptions [\#3885](https://github.com/PostHog/posthog/pull/3885) ([paolodamico](https://github.com/paolodamico))
-- Update plugin server to 0.15.5 [\#3884](https://github.com/PostHog/posthog/pull/3884) ([posthog-bot](https://github.com/posthog-bot))
-- Round table rows in system status [\#3883](https://github.com/PostHog/posthog/pull/3883) ([mariusandra](https://github.com/mariusandra))
-- Fix cypress dependencies [\#3881](https://github.com/PostHog/posthog/pull/3881) ([paolodamico](https://github.com/paolodamico))
-- Reduce visual weight for dashboard placeholders [\#3880](https://github.com/PostHog/posthog/pull/3880) ([kpthatsme](https://github.com/kpthatsme))
-- Fix 0143 migration unique index [\#3876](https://github.com/PostHog/posthog/pull/3876) ([paolodamico](https://github.com/paolodamico))
-- set platform when footer chosen [\#3875](https://github.com/PostHog/posthog/pull/3875) ([kpthatsme](https://github.com/kpthatsme))
-- Don't render Signup component if logged in [\#3874](https://github.com/PostHog/posthog/pull/3874) ([Twixes](https://github.com/Twixes))
-- Get rid of DATABASE\_URL and REDIS\_URL construction in bin/plugin-server [\#3873](https://github.com/PostHog/posthog/pull/3873) ([Twixes](https://github.com/Twixes))
-- Add filters to lifecycle [\#3870](https://github.com/PostHog/posthog/pull/3870) ([timgl](https://github.com/timgl))
-- User V2 Part II - Frontend changes [\#3866](https://github.com/PostHog/posthog/pull/3866) ([paolodamico](https://github.com/paolodamico))
-- Fix feature flags insight link [\#3865](https://github.com/PostHog/posthog/pull/3865) ([timgl](https://github.com/timgl))
-- Format label property key [\#3864](https://github.com/PostHog/posthog/pull/3864) ([Twixes](https://github.com/Twixes))
-- Update plugin server in ee/docker-compose.\* to 0.15.4 [\#3863](https://github.com/PostHog/posthog/pull/3863) ([Twixes](https://github.com/Twixes))
-- Fix charts in dashboards [\#3862](https://github.com/PostHog/posthog/pull/3862) ([paolodamico](https://github.com/paolodamico))
-- Fix docker dev environment [\#3861](https://github.com/PostHog/posthog/pull/3861) ([adrienbrault](https://github.com/adrienbrault))
-- Ingestion - framework grid [\#3860](https://github.com/PostHog/posthog/pull/3860) ([kpthatsme](https://github.com/kpthatsme))
-- Fix cached trends on dashboards not loading [\#3856](https://github.com/PostHog/posthog/pull/3856) ([paolodamico](https://github.com/paolodamico))
-- User V2 API endpoint [\#3855](https://github.com/PostHog/posthog/pull/3855) ([paolodamico](https://github.com/paolodamico))
-- Resolves \#3801 - Test users filters [\#3854](https://github.com/PostHog/posthog/pull/3854) ([samwinslow](https://github.com/samwinslow))
-- New env: UPDATE\_CACHED\_DASHBOARD\_ITEMS\_INTERVAL\_SECONDS [\#3853](https://github.com/PostHog/posthog/pull/3853) ([mariusandra](https://github.com/mariusandra))
-- Release remove-shownas [\#3851](https://github.com/PostHog/posthog/pull/3851) ([EDsCODE](https://github.com/EDsCODE))
-- Release trend-legend [\#3850](https://github.com/PostHog/posthog/pull/3850) ([EDsCODE](https://github.com/EDsCODE))
-- Improve clarity of main nav hotkeys [\#3849](https://github.com/PostHog/posthog/pull/3849) ([Twixes](https://github.com/Twixes))
-- Clarify "Filter Out ..." settings copy [\#3847](https://github.com/PostHog/posthog/pull/3847) ([Twixes](https://github.com/Twixes))
-- Fix Team.data\_attributes default [\#3846](https://github.com/PostHog/posthog/pull/3846) ([Twixes](https://github.com/Twixes))
-- Make `.text-muted` half opacity black instead of solid light gray [\#3845](https://github.com/PostHog/posthog/pull/3845) ([Twixes](https://github.com/Twixes))
-- Remove IS\_DOCKER env var [\#3843](https://github.com/PostHog/posthog/pull/3843) ([Twixes](https://github.com/Twixes))
-- Delete docker-preview script [\#3842](https://github.com/PostHog/posthog/pull/3842) ([Twixes](https://github.com/Twixes))
-- Clarify project settings filter wording [\#3839](https://github.com/PostHog/posthog/pull/3839) ([leggetter](https://github.com/leggetter))
-- Update plugin server to 0.15.4 [\#3838](https://github.com/PostHog/posthog/pull/3838) ([posthog-bot](https://github.com/posthog-bot))
-- Add PostHog version to system status [\#3837](https://github.com/PostHog/posthog/pull/3837) ([mariusandra](https://github.com/mariusandra))
-- Minor improvements to persons [\#3834](https://github.com/PostHog/posthog/pull/3834) ([paolodamico](https://github.com/paolodamico))
-- Fix apt-get install error when building docker images [\#3833](https://github.com/PostHog/posthog/pull/3833) ([adrienbrault](https://github.com/adrienbrault))
-- Fix API/HTTP instructions json syntax [\#3832](https://github.com/PostHog/posthog/pull/3832) ([adrienbrault](https://github.com/adrienbrault))
-- Swap out person\_distinct\_id in queries with subquery [\#3828](https://github.com/PostHog/posthog/pull/3828) ([EDsCODE](https://github.com/EDsCODE))
-- Bump y18n from 4.0.0 to 4.0.1 [\#3827](https://github.com/PostHog/posthog/pull/3827) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Less dancing in dashboards [\#3824](https://github.com/PostHog/posthog/pull/3824) ([paolodamico](https://github.com/paolodamico))
-- Fix 2K0 [\#3823](https://github.com/PostHog/posthog/pull/3823) ([paolodamico](https://github.com/paolodamico))
-- Allow math filter on $time property [\#3821](https://github.com/PostHog/posthog/pull/3821) ([paolodamico](https://github.com/paolodamico))
-- change created\_at to \_timestamp [\#3820](https://github.com/PostHog/posthog/pull/3820) ([EDsCODE](https://github.com/EDsCODE))
-- add test account filter to people endpoints [\#3815](https://github.com/PostHog/posthog/pull/3815) ([EDsCODE](https://github.com/EDsCODE))
-- Add descriptions of insights in menu [\#3814](https://github.com/PostHog/posthog/pull/3814) ([timgl](https://github.com/timgl))
-- added redirection to posthogs website [\#3812](https://github.com/PostHog/posthog/pull/3812) ([samcaspus](https://github.com/samcaspus))
-- Update plugin server to 0.15.3 [\#3810](https://github.com/PostHog/posthog/pull/3810) ([posthog-bot](https://github.com/posthog-bot))
-- Env for async event property usage calculation interval [\#3809](https://github.com/PostHog/posthog/pull/3809) ([mariusandra](https://github.com/mariusandra))
-- Bumped cffi so that pip will install deps for M1 chip [\#3808](https://github.com/PostHog/posthog/pull/3808) ([buwilliams](https://github.com/buwilliams))
-- Default set debug=1 to bin/start [\#3807](https://github.com/PostHog/posthog/pull/3807) ([timgl](https://github.com/timgl))
-- Fix skip ci for bot [\#3806](https://github.com/PostHog/posthog/pull/3806) ([yakkomajuri](https://github.com/yakkomajuri))
-- Update posthog-js to 1.9.6 [\#3804](https://github.com/PostHog/posthog/pull/3804) ([posthog-bot](https://github.com/posthog-bot))
-- Add localhost:3000 into excluded urls [\#3803](https://github.com/PostHog/posthog/pull/3803) ([well-balanced](https://github.com/well-balanced))
-- Display when actions were last calculated [\#3796](https://github.com/PostHog/posthog/pull/3796) ([paolodamico](https://github.com/paolodamico))
-- Fix POSTHOG-DW [\#3794](https://github.com/PostHog/posthog/pull/3794) ([paolodamico](https://github.com/paolodamico))
-- Reply to inviting user on invite emails [\#3792](https://github.com/PostHog/posthog/pull/3792) ([paolodamico](https://github.com/paolodamico))
-- Skip CI for posthog-contributions-bot [\#3789](https://github.com/PostHog/posthog/pull/3789) ([yakkomajuri](https://github.com/yakkomajuri))
-- Fix .all-contributorsrc [\#3788](https://github.com/PostHog/posthog/pull/3788) ([yakkomajuri](https://github.com/yakkomajuri))
-- 3589 breakdown [\#3782](https://github.com/PostHog/posthog/pull/3782) ([EDsCODE](https://github.com/EDsCODE))
-- Hide login link from signup if instance is not initiated [\#3781](https://github.com/PostHog/posthog/pull/3781) ([paolodamico](https://github.com/paolodamico))
-- Add warning to breakdown that we only show top 20 values [\#3779](https://github.com/PostHog/posthog/pull/3779) ([timgl](https://github.com/timgl))
-- Update app favicon [\#3778](https://github.com/PostHog/posthog/pull/3778) ([paolodamico](https://github.com/paolodamico))
-- removed app.posthog.com for the url [\#3777](https://github.com/PostHog/posthog/pull/3777) ([samcaspus](https://github.com/samcaspus))
-- Update plugin server to 0.15.2 [\#3776](https://github.com/PostHog/posthog/pull/3776) ([posthog-bot](https://github.com/posthog-bot))
-- Backend tests refactor [\#3774](https://github.com/PostHog/posthog/pull/3774) ([paolodamico](https://github.com/paolodamico))
-- Update plugin server to 0.15.1 [\#3772](https://github.com/PostHog/posthog/pull/3772) ([posthog-bot](https://github.com/posthog-bot))
-- Make sure the proper math is applied when calculating top elements for breakdown [\#3771](https://github.com/PostHog/posthog/pull/3771) ([EDsCODE](https://github.com/EDsCODE))
-- Misc instrumentation & tiny tweaks [\#3769](https://github.com/PostHog/posthog/pull/3769) ([paolodamico](https://github.com/paolodamico))
-- Fix multiple people same distinct id [\#3768](https://github.com/PostHog/posthog/pull/3768) ([timgl](https://github.com/timgl))
-- Add index to events.created\_at [\#3767](https://github.com/PostHog/posthog/pull/3767) ([mariusandra](https://github.com/mariusandra))
-- Support multiple entries for selector and tag\_name filter for EE [\#3766](https://github.com/PostHog/posthog/pull/3766) ([mariusandra](https://github.com/mariusandra))
-- Don't show legend if nothing to show [\#3763](https://github.com/PostHog/posthog/pull/3763) ([macobo](https://github.com/macobo))
-- Custom Data Attributes in the toolbar [\#3761](https://github.com/PostHog/posthog/pull/3761) ([mariusandra](https://github.com/mariusandra))
-- Fix get\_available\_timezones\_with\_offsets DST change edge case [\#3760](https://github.com/PostHog/posthog/pull/3760) ([Twixes](https://github.com/Twixes))
-- Update plugin server to 0.15.0 [\#3758](https://github.com/PostHog/posthog/pull/3758) ([posthog-bot](https://github.com/posthog-bot))
-- Hotkeys UI Improvement [\#3757](https://github.com/PostHog/posthog/pull/3757) ([paolodamico](https://github.com/paolodamico))
-- Description & tagging on dashboards [\#3756](https://github.com/PostHog/posthog/pull/3756) ([paolodamico](https://github.com/paolodamico))
-- Handle event capture edge cases [\#3755](https://github.com/PostHog/posthog/pull/3755) ([Twixes](https://github.com/Twixes))
-- Fix TestAccountFiltersConfig description [\#3754](https://github.com/PostHog/posthog/pull/3754) ([Twixes](https://github.com/Twixes))
-- Fix boolean breakdown on postgres [\#3752](https://github.com/PostHog/posthog/pull/3752) ([EDsCODE](https://github.com/EDsCODE))
-- Another null check for persons [\#3750](https://github.com/PostHog/posthog/pull/3750) ([EDsCODE](https://github.com/EDsCODE))
-- Fix \#3747 [\#3748](https://github.com/PostHog/posthog/pull/3748) ([paolodamico](https://github.com/paolodamico))
-- Fix feature flags default rollout [\#3745](https://github.com/PostHog/posthog/pull/3745) ([paolodamico](https://github.com/paolodamico))
-- Add 'cohorts' tab to Person page [\#3744](https://github.com/PostHog/posthog/pull/3744) ([macobo](https://github.com/macobo))
-- Add some data-attr for plugins [\#3742](https://github.com/PostHog/posthog/pull/3742) ([macobo](https://github.com/macobo))
-- Update plugin server to 0.14.8 [\#3741](https://github.com/PostHog/posthog/pull/3741) ([posthog-bot](https://github.com/posthog-bot))
-- Global hotkey navigation [\#3740](https://github.com/PostHog/posthog/pull/3740) ([paolodamico](https://github.com/paolodamico))
-- Add element matching for multiple values on text/href [\#3739](https://github.com/PostHog/posthog/pull/3739) ([EDsCODE](https://github.com/EDsCODE))
-- Add setup for contributions bot [\#3738](https://github.com/PostHog/posthog/pull/3738) ([yakkomajuri](https://github.com/yakkomajuri))
-- Update plugin server to 0.14.7 [\#3737](https://github.com/PostHog/posthog/pull/3737) ([posthog-bot](https://github.com/posthog-bot))
-- Update plugin server to 0.14.6 [\#3736](https://github.com/PostHog/posthog/pull/3736) ([posthog-bot](https://github.com/posthog-bot))
-- Dockerfile non-root user in production [\#3735](https://github.com/PostHog/posthog/pull/3735) ([paolodamico](https://github.com/paolodamico))
-- reduce width so button isn't covered [\#3734](https://github.com/PostHog/posthog/pull/3734) ([kpthatsme](https://github.com/kpthatsme))
-- Clarify test accounts → internal users [\#3733](https://github.com/PostHog/posthog/pull/3733) ([Twixes](https://github.com/Twixes))
-- Allow for non-plugin config-keyed plugin attachments [\#3732](https://github.com/PostHog/posthog/pull/3732) ([Twixes](https://github.com/Twixes))
-- \[retention table\] Use utc on dates without hours for consistency [\#3731](https://github.com/PostHog/posthog/pull/3731) ([EDsCODE](https://github.com/EDsCODE))
-- Add "test account filters" filter to trends [\#3729](https://github.com/PostHog/posthog/pull/3729) ([macobo](https://github.com/macobo))
-- Fix filtering breakdown queries [\#3727](https://github.com/PostHog/posthog/pull/3727) ([timgl](https://github.com/timgl))
-- Bump lxml from 4.6.2 to 4.6.3 [\#3725](https://github.com/PostHog/posthog/pull/3725) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Update plugin server to 0.14.5 [\#3724](https://github.com/PostHog/posthog/pull/3724) ([posthog-bot](https://github.com/posthog-bot))
-- Increment version [\#3721](https://github.com/PostHog/posthog/pull/3721) ([jaredsilver](https://github.com/jaredsilver))
-- Update changelog for 1.23.1 [\#3719](https://github.com/PostHog/posthog/pull/3719) ([mariusandra](https://github.com/mariusandra))
-- Fix linting-breaking import [\#3718](https://github.com/PostHog/posthog/pull/3718) ([Twixes](https://github.com/Twixes))
-- Async event action mapping to 5 min, add warning [\#3717](https://github.com/PostHog/posthog/pull/3717) ([mariusandra](https://github.com/mariusandra))
-- Update plugin server to 0.14.3 [\#3716](https://github.com/PostHog/posthog/pull/3716) ([posthog-bot](https://github.com/posthog-bot))
-- Update plugin server to 0.14.2 [\#3715](https://github.com/PostHog/posthog/pull/3715) ([posthog-bot](https://github.com/posthog-bot))
-- Update react-rrweb-player [\#3714](https://github.com/PostHog/posthog/pull/3714) ([paolodamico](https://github.com/paolodamico))
-- Fix hotkeys in textarea [\#3713](https://github.com/PostHog/posthog/pull/3713) ([paolodamico](https://github.com/paolodamico))
-- Fix unmounted logic bug on shared dashboards [\#3712](https://github.com/PostHog/posthog/pull/3712) ([paolodamico](https://github.com/paolodamico))
-- Temporarily bring back individual refresh in dashboard items [\#3708](https://github.com/PostHog/posthog/pull/3708) ([paolodamico](https://github.com/paolodamico))
-- Speed up filtering by events in sessions [\#3707](https://github.com/PostHog/posthog/pull/3707) ([macobo](https://github.com/macobo))
-- Solidify plugins on Cloud rollout [\#3706](https://github.com/PostHog/posthog/pull/3706) ([Twixes](https://github.com/Twixes))
-- Chunk session recording events [\#3705](https://github.com/PostHog/posthog/pull/3705) ([macobo](https://github.com/macobo))
-- add beta tag to trends, center title [\#3704](https://github.com/PostHog/posthog/pull/3704) ([kpthatsme](https://github.com/kpthatsme))
-- Better plugin globalization UX [\#3702](https://github.com/PostHog/posthog/pull/3702) ([Twixes](https://github.com/Twixes))
-- New login & signup \(React\) [\#3701](https://github.com/PostHog/posthog/pull/3701) ([paolodamico](https://github.com/paolodamico))
-- Lower the bar to report bugs in plugins [\#3699](https://github.com/PostHog/posthog/pull/3699) ([yakkomajuri](https://github.com/yakkomajuri))
-- Timezone handling UX [\#3698](https://github.com/PostHog/posthog/pull/3698) ([paolodamico](https://github.com/paolodamico))
-- bump version, update changelog [\#3697](https://github.com/PostHog/posthog/pull/3697) ([yakkomajuri](https://github.com/yakkomajuri))
-- Plugins page tiny fixes [\#3694](https://github.com/PostHog/posthog/pull/3694) ([Twixes](https://github.com/Twixes))
-- Update plugin server to 0.14.1 [\#3693](https://github.com/PostHog/posthog/pull/3693) ([posthog-bot](https://github.com/posthog-bot))
-- 3682 Various annotation fixes [\#3689](https://github.com/PostHog/posthog/pull/3689) ([EDsCODE](https://github.com/EDsCODE))
-- Update plugin server to 0.14.0 [\#3687](https://github.com/PostHog/posthog/pull/3687) ([posthog-bot](https://github.com/posthog-bot))
-- funnel trend fix white screen and remove description [\#3686](https://github.com/PostHog/posthog/pull/3686) ([EDsCODE](https://github.com/EDsCODE))
-- Enable PLUGIN\_SERVER\_INGESTION [\#3684](https://github.com/PostHog/posthog/pull/3684) ([Twixes](https://github.com/Twixes))
-- Update plugin server to 0.13.1 [\#3683](https://github.com/PostHog/posthog/pull/3683) ([posthog-bot](https://github.com/posthog-bot))
-- Update plugin server to 0.13.0 [\#3681](https://github.com/PostHog/posthog/pull/3681) ([posthog-bot](https://github.com/posthog-bot))
-- Different async action mapping approach [\#3678](https://github.com/PostHog/posthog/pull/3678) ([Twixes](https://github.com/Twixes))
-- Feature Flags Revamp \(UX & Code\) [\#3675](https://github.com/PostHog/posthog/pull/3675) ([paolodamico](https://github.com/paolodamico))
-- Use the correct boolean on cohort update [\#3673](https://github.com/PostHog/posthog/pull/3673) ([EDsCODE](https://github.com/EDsCODE))
-- Shared dashboards fix [\#3672](https://github.com/PostHog/posthog/pull/3672) ([paolodamico](https://github.com/paolodamico))
-- Update plugin server to 0.12.0 [\#3669](https://github.com/PostHog/posthog/pull/3669) ([posthog-bot](https://github.com/posthog-bot))
-- Dashboard empty & error states + mobile support [\#3666](https://github.com/PostHog/posthog/pull/3666) ([paolodamico](https://github.com/paolodamico))
-- Fix rounding for weekly and monthly intervals [\#3665](https://github.com/PostHog/posthog/pull/3665) ([timgl](https://github.com/timgl))
-- Enable event property usage env vars [\#3664](https://github.com/PostHog/posthog/pull/3664) ([timgl](https://github.com/timgl))
-- Lint Dockerfiles [\#3663](https://github.com/PostHog/posthog/pull/3663) ([Twixes](https://github.com/Twixes))
-- Expire Celery tasks after 4 days instead of 1 [\#3662](https://github.com/PostHog/posthog/pull/3662) ([Twixes](https://github.com/Twixes))
-- Fix system status page plugin metrics [\#3658](https://github.com/PostHog/posthog/pull/3658) ([paolodamico](https://github.com/paolodamico))
-- Default event property usage to false [\#3655](https://github.com/PostHog/posthog/pull/3655) ([timgl](https://github.com/timgl))
-- Fix proxy config [\#3654](https://github.com/PostHog/posthog/pull/3654) ([paolodamico](https://github.com/paolodamico))
-- fixed y axis color issue [\#3653](https://github.com/PostHog/posthog/pull/3653) ([samcaspus](https://github.com/samcaspus))
-- Add support for SOCIAL\_AUTH\_REDIRECT\_IS\_HTTPS [\#3652](https://github.com/PostHog/posthog/pull/3652) ([Twixes](https://github.com/Twixes))
-- Update plugin server to 0.11.9 [\#3651](https://github.com/PostHog/posthog/pull/3651) ([posthog-bot](https://github.com/posthog-bot))
-- Update docker compose dev port [\#3650](https://github.com/PostHog/posthog/pull/3650) ([yakkomajuri](https://github.com/yakkomajuri))
-- Notice in toolbar if could not get a unique selector for the element [\#3635](https://github.com/PostHog/posthog/pull/3635) ([mariusandra](https://github.com/mariusandra))
-- Dashboard hotkeys [\#3623](https://github.com/PostHog/posthog/pull/3623) ([paolodamico](https://github.com/paolodamico))
-- Improve formulas UI/input [\#3620](https://github.com/PostHog/posthog/pull/3620) ([timgl](https://github.com/timgl))
-- Explain premium feature in upgrade modal [\#3619](https://github.com/PostHog/posthog/pull/3619) ([Twixes](https://github.com/Twixes))
-- Automatically enable debug mode for posthog-js on SELF\_CAPTURE [\#3613](https://github.com/PostHog/posthog/pull/3613) ([paolodamico](https://github.com/paolodamico))
-- Dashboard Improvements I [\#3608](https://github.com/PostHog/posthog/pull/3608) ([paolodamico](https://github.com/paolodamico))
-- Make events search more prominent [\#3587](https://github.com/PostHog/posthog/pull/3587) ([yakkomajuri](https://github.com/yakkomajuri))
-- Insight session entities [\#3582](https://github.com/PostHog/posthog/pull/3582) ([EDsCODE](https://github.com/EDsCODE))
-- Support custom identifier for person name [\#3581](https://github.com/PostHog/posthog/pull/3581) ([paolodamico](https://github.com/paolodamico))
-- Show toast on API errors [\#3561](https://github.com/PostHog/posthog/pull/3561) ([mariusandra](https://github.com/mariusandra))
-- Enable plugins for everyone [\#3557](https://github.com/PostHog/posthog/pull/3557) ([Twixes](https://github.com/Twixes))
-- Introduce Dayjs [\#3490](https://github.com/PostHog/posthog/pull/3490) ([timgl](https://github.com/timgl))
-- Plugins access control [\#3486](https://github.com/PostHog/posthog/pull/3486) ([Twixes](https://github.com/Twixes))
-
+-   Update plugin server to 0.16.10 [\#3976](https://github.com/PostHog/posthog/pull/3976) ([posthog-bot](https://github.com/posthog-bot))
+-   Rename redefined variables [\#3975](https://github.com/PostHog/posthog/pull/3975) ([mariusandra](https://github.com/mariusandra))
+-   Three small UX fixes [\#3972](https://github.com/PostHog/posthog/pull/3972) ([Twixes](https://github.com/Twixes))
+-   Fix persons search [\#3971](https://github.com/PostHog/posthog/pull/3971) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Update plugin server to 0.16.9 [\#3970](https://github.com/PostHog/posthog/pull/3970) ([posthog-bot](https://github.com/posthog-bot))
+-   Fix display of plugin error seconds [\#3965](https://github.com/PostHog/posthog/pull/3965) ([mariusandra](https://github.com/mariusandra))
+-   Update plugin server to 0.16.8 [\#3959](https://github.com/PostHog/posthog/pull/3959) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.16.7 [\#3958](https://github.com/PostHog/posthog/pull/3958) ([posthog-bot](https://github.com/posthog-bot))
+-   Remove fixed typescript errors [\#3956](https://github.com/PostHog/posthog/pull/3956) ([paolodamico](https://github.com/paolodamico))
+-   Update plugin server to 0.16.6 [\#3955](https://github.com/PostHog/posthog/pull/3955) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.16.5 [\#3954](https://github.com/PostHog/posthog/pull/3954) ([posthog-bot](https://github.com/posthog-bot))
+-   Fixes project settings not loading [\#3950](https://github.com/PostHog/posthog/pull/3950) ([paolodamico](https://github.com/paolodamico))
+-   Update plugin server to 0.16.4 [\#3945](https://github.com/PostHog/posthog/pull/3945) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.16.3 [\#3944](https://github.com/PostHog/posthog/pull/3944) ([posthog-bot](https://github.com/posthog-bot))
+-   Remove 'string, parsable as datetime' [\#3942](https://github.com/PostHog/posthog/pull/3942) ([Twixes](https://github.com/Twixes))
+-   Use default axes on line graphs [\#3940](https://github.com/PostHog/posthog/pull/3940) ([kpthatsme](https://github.com/kpthatsme))
+-   Bump cryptography to 3.4.7 and add macosx_arm64 install script [\#3935](https://github.com/PostHog/posthog/pull/3935) ([samwinslow](https://github.com/samwinslow))
+-   Update posthog-js to 1.9.7 [\#3933](https://github.com/PostHog/posthog/pull/3933) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.16.2 [\#3932](https://github.com/PostHog/posthog/pull/3932) ([posthog-bot](https://github.com/posthog-bot))
+-   Renames Active users to Unique users [\#3930](https://github.com/PostHog/posthog/pull/3930) ([paolodamico](https://github.com/paolodamico))
+-   Fix navigation to insights from dashboards [\#3928](https://github.com/PostHog/posthog/pull/3928) ([paolodamico](https://github.com/paolodamico))
+-   Resizable table columns in Sessions [\#3927](https://github.com/PostHog/posthog/pull/3927) ([samwinslow](https://github.com/samwinslow))
+-   Update autocapture label to be more descriptive [\#3925](https://github.com/PostHog/posthog/pull/3925) ([kpthatsme](https://github.com/kpthatsme))
+-   Log to sentry when migrations are out of date [\#3924](https://github.com/PostHog/posthog/pull/3924) ([fuziontech](https://github.com/fuziontech))
+-   Update plugin server to 0.16.1 [\#3920](https://github.com/PostHog/posthog/pull/3920) ([posthog-bot](https://github.com/posthog-bot))
+-   Run Automerge as posthog-bot [\#3919](https://github.com/PostHog/posthog/pull/3919) ([Twixes](https://github.com/Twixes))
+-   Are migrations safe to run on cloud? [\#3917](https://github.com/PostHog/posthog/pull/3917) ([mariusandra](https://github.com/mariusandra))
+-   Minimum PostHog version in plugins [\#3916](https://github.com/PostHog/posthog/pull/3916) ([mariusandra](https://github.com/mariusandra))
+-   Add cypress dependency installation [\#3914](https://github.com/PostHog/posthog/pull/3914) ([EDsCODE](https://github.com/EDsCODE))
+-   Increase Element model varchar limits [\#3912](https://github.com/PostHog/posthog/pull/3912) ([Twixes](https://github.com/Twixes))
+-   Fix commandpallet test [\#3911](https://github.com/PostHog/posthog/pull/3911) ([timgl](https://github.com/timgl))
+-   Fix action with same name [\#3909](https://github.com/PostHog/posthog/pull/3909) ([timgl](https://github.com/timgl))
+-   Always show event stats and add warnings [\#3908](https://github.com/PostHog/posthog/pull/3908) ([timgl](https://github.com/timgl))
+-   Update plugin server to 0.16.0 \(AKA plugins no longer opt-in\) [\#3903](https://github.com/PostHog/posthog/pull/3903) ([posthog-bot](https://github.com/posthog-bot))
+-   Fix events with spaces and only add URL for pageviews [\#3902](https://github.com/PostHog/posthog/pull/3902) ([timgl](https://github.com/timgl))
+-   Fix Continent Name property description [\#3900](https://github.com/PostHog/posthog/pull/3900) ([Twixes](https://github.com/Twixes))
+-   Support GeoLite2 City event properties in UI \(AKA GeoIP out of the box with our new plugin\) [\#3894](https://github.com/PostHog/posthog/pull/3894) ([Twixes](https://github.com/Twixes))
+-   Fix property popover arrow placement on cohorts page [\#3893](https://github.com/PostHog/posthog/pull/3893) ([adrienbrault](https://github.com/adrienbrault))
+-   Fix Cypress tests on forks [\#3892](https://github.com/PostHog/posthog/pull/3892) ([Twixes](https://github.com/Twixes))
+-   Make docker apt version pinning less strict [\#3889](https://github.com/PostHog/posthog/pull/3889) ([adrienbrault](https://github.com/adrienbrault))
+-   Fix shared dashboard rendering with multiline descriptions [\#3885](https://github.com/PostHog/posthog/pull/3885) ([paolodamico](https://github.com/paolodamico))
+-   Update plugin server to 0.15.5 [\#3884](https://github.com/PostHog/posthog/pull/3884) ([posthog-bot](https://github.com/posthog-bot))
+-   Round table rows in system status [\#3883](https://github.com/PostHog/posthog/pull/3883) ([mariusandra](https://github.com/mariusandra))
+-   Fix cypress dependencies [\#3881](https://github.com/PostHog/posthog/pull/3881) ([paolodamico](https://github.com/paolodamico))
+-   Reduce visual weight for dashboard placeholders [\#3880](https://github.com/PostHog/posthog/pull/3880) ([kpthatsme](https://github.com/kpthatsme))
+-   Fix 0143 migration unique index [\#3876](https://github.com/PostHog/posthog/pull/3876) ([paolodamico](https://github.com/paolodamico))
+-   set platform when footer chosen [\#3875](https://github.com/PostHog/posthog/pull/3875) ([kpthatsme](https://github.com/kpthatsme))
+-   Don't render Signup component if logged in [\#3874](https://github.com/PostHog/posthog/pull/3874) ([Twixes](https://github.com/Twixes))
+-   Get rid of DATABASE_URL and REDIS_URL construction in bin/plugin-server [\#3873](https://github.com/PostHog/posthog/pull/3873) ([Twixes](https://github.com/Twixes))
+-   Add filters to lifecycle [\#3870](https://github.com/PostHog/posthog/pull/3870) ([timgl](https://github.com/timgl))
+-   User V2 Part II - Frontend changes [\#3866](https://github.com/PostHog/posthog/pull/3866) ([paolodamico](https://github.com/paolodamico))
+-   Fix feature flags insight link [\#3865](https://github.com/PostHog/posthog/pull/3865) ([timgl](https://github.com/timgl))
+-   Format label property key [\#3864](https://github.com/PostHog/posthog/pull/3864) ([Twixes](https://github.com/Twixes))
+-   Update plugin server in ee/docker-compose.\* to 0.15.4 [\#3863](https://github.com/PostHog/posthog/pull/3863) ([Twixes](https://github.com/Twixes))
+-   Fix charts in dashboards [\#3862](https://github.com/PostHog/posthog/pull/3862) ([paolodamico](https://github.com/paolodamico))
+-   Fix docker dev environment [\#3861](https://github.com/PostHog/posthog/pull/3861) ([adrienbrault](https://github.com/adrienbrault))
+-   Ingestion - framework grid [\#3860](https://github.com/PostHog/posthog/pull/3860) ([kpthatsme](https://github.com/kpthatsme))
+-   Fix cached trends on dashboards not loading [\#3856](https://github.com/PostHog/posthog/pull/3856) ([paolodamico](https://github.com/paolodamico))
+-   User V2 API endpoint [\#3855](https://github.com/PostHog/posthog/pull/3855) ([paolodamico](https://github.com/paolodamico))
+-   Resolves \#3801 - Test users filters [\#3854](https://github.com/PostHog/posthog/pull/3854) ([samwinslow](https://github.com/samwinslow))
+-   New env: UPDATE_CACHED_DASHBOARD_ITEMS_INTERVAL_SECONDS [\#3853](https://github.com/PostHog/posthog/pull/3853) ([mariusandra](https://github.com/mariusandra))
+-   Release remove-shownas [\#3851](https://github.com/PostHog/posthog/pull/3851) ([EDsCODE](https://github.com/EDsCODE))
+-   Release trend-legend [\#3850](https://github.com/PostHog/posthog/pull/3850) ([EDsCODE](https://github.com/EDsCODE))
+-   Improve clarity of main nav hotkeys [\#3849](https://github.com/PostHog/posthog/pull/3849) ([Twixes](https://github.com/Twixes))
+-   Clarify "Filter Out ..." settings copy [\#3847](https://github.com/PostHog/posthog/pull/3847) ([Twixes](https://github.com/Twixes))
+-   Fix Team.data_attributes default [\#3846](https://github.com/PostHog/posthog/pull/3846) ([Twixes](https://github.com/Twixes))
+-   Make `.text-muted` half opacity black instead of solid light gray [\#3845](https://github.com/PostHog/posthog/pull/3845) ([Twixes](https://github.com/Twixes))
+-   Remove IS_DOCKER env var [\#3843](https://github.com/PostHog/posthog/pull/3843) ([Twixes](https://github.com/Twixes))
+-   Delete docker-preview script [\#3842](https://github.com/PostHog/posthog/pull/3842) ([Twixes](https://github.com/Twixes))
+-   Clarify project settings filter wording [\#3839](https://github.com/PostHog/posthog/pull/3839) ([leggetter](https://github.com/leggetter))
+-   Update plugin server to 0.15.4 [\#3838](https://github.com/PostHog/posthog/pull/3838) ([posthog-bot](https://github.com/posthog-bot))
+-   Add PostHog version to system status [\#3837](https://github.com/PostHog/posthog/pull/3837) ([mariusandra](https://github.com/mariusandra))
+-   Minor improvements to persons [\#3834](https://github.com/PostHog/posthog/pull/3834) ([paolodamico](https://github.com/paolodamico))
+-   Fix apt-get install error when building docker images [\#3833](https://github.com/PostHog/posthog/pull/3833) ([adrienbrault](https://github.com/adrienbrault))
+-   Fix API/HTTP instructions json syntax [\#3832](https://github.com/PostHog/posthog/pull/3832) ([adrienbrault](https://github.com/adrienbrault))
+-   Swap out person_distinct_id in queries with subquery [\#3828](https://github.com/PostHog/posthog/pull/3828) ([EDsCODE](https://github.com/EDsCODE))
+-   Bump y18n from 4.0.0 to 4.0.1 [\#3827](https://github.com/PostHog/posthog/pull/3827) ([dependabot[bot]](https://github.com/apps/dependabot))
+-   Less dancing in dashboards [\#3824](https://github.com/PostHog/posthog/pull/3824) ([paolodamico](https://github.com/paolodamico))
+-   Fix 2K0 [\#3823](https://github.com/PostHog/posthog/pull/3823) ([paolodamico](https://github.com/paolodamico))
+-   Allow math filter on $time property [\#3821](https://github.com/PostHog/posthog/pull/3821) ([paolodamico](https://github.com/paolodamico))
+-   change created_at to \_timestamp [\#3820](https://github.com/PostHog/posthog/pull/3820) ([EDsCODE](https://github.com/EDsCODE))
+-   add test account filter to people endpoints [\#3815](https://github.com/PostHog/posthog/pull/3815) ([EDsCODE](https://github.com/EDsCODE))
+-   Add descriptions of insights in menu [\#3814](https://github.com/PostHog/posthog/pull/3814) ([timgl](https://github.com/timgl))
+-   added redirection to posthogs website [\#3812](https://github.com/PostHog/posthog/pull/3812) ([samcaspus](https://github.com/samcaspus))
+-   Update plugin server to 0.15.3 [\#3810](https://github.com/PostHog/posthog/pull/3810) ([posthog-bot](https://github.com/posthog-bot))
+-   Env for async event property usage calculation interval [\#3809](https://github.com/PostHog/posthog/pull/3809) ([mariusandra](https://github.com/mariusandra))
+-   Bumped cffi so that pip will install deps for M1 chip [\#3808](https://github.com/PostHog/posthog/pull/3808) ([buwilliams](https://github.com/buwilliams))
+-   Default set debug=1 to bin/start [\#3807](https://github.com/PostHog/posthog/pull/3807) ([timgl](https://github.com/timgl))
+-   Fix skip ci for bot [\#3806](https://github.com/PostHog/posthog/pull/3806) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Update posthog-js to 1.9.6 [\#3804](https://github.com/PostHog/posthog/pull/3804) ([posthog-bot](https://github.com/posthog-bot))
+-   Add localhost:3000 into excluded urls [\#3803](https://github.com/PostHog/posthog/pull/3803) ([well-balanced](https://github.com/well-balanced))
+-   Display when actions were last calculated [\#3796](https://github.com/PostHog/posthog/pull/3796) ([paolodamico](https://github.com/paolodamico))
+-   Fix POSTHOG-DW [\#3794](https://github.com/PostHog/posthog/pull/3794) ([paolodamico](https://github.com/paolodamico))
+-   Reply to inviting user on invite emails [\#3792](https://github.com/PostHog/posthog/pull/3792) ([paolodamico](https://github.com/paolodamico))
+-   Skip CI for posthog-contributions-bot [\#3789](https://github.com/PostHog/posthog/pull/3789) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Fix .all-contributorsrc [\#3788](https://github.com/PostHog/posthog/pull/3788) ([yakkomajuri](https://github.com/yakkomajuri))
+-   3589 breakdown [\#3782](https://github.com/PostHog/posthog/pull/3782) ([EDsCODE](https://github.com/EDsCODE))
+-   Hide login link from signup if instance is not initiated [\#3781](https://github.com/PostHog/posthog/pull/3781) ([paolodamico](https://github.com/paolodamico))
+-   Add warning to breakdown that we only show top 20 values [\#3779](https://github.com/PostHog/posthog/pull/3779) ([timgl](https://github.com/timgl))
+-   Update app favicon [\#3778](https://github.com/PostHog/posthog/pull/3778) ([paolodamico](https://github.com/paolodamico))
+-   removed app.posthog.com for the url [\#3777](https://github.com/PostHog/posthog/pull/3777) ([samcaspus](https://github.com/samcaspus))
+-   Update plugin server to 0.15.2 [\#3776](https://github.com/PostHog/posthog/pull/3776) ([posthog-bot](https://github.com/posthog-bot))
+-   Backend tests refactor [\#3774](https://github.com/PostHog/posthog/pull/3774) ([paolodamico](https://github.com/paolodamico))
+-   Update plugin server to 0.15.1 [\#3772](https://github.com/PostHog/posthog/pull/3772) ([posthog-bot](https://github.com/posthog-bot))
+-   Make sure the proper math is applied when calculating top elements for breakdown [\#3771](https://github.com/PostHog/posthog/pull/3771) ([EDsCODE](https://github.com/EDsCODE))
+-   Misc instrumentation & tiny tweaks [\#3769](https://github.com/PostHog/posthog/pull/3769) ([paolodamico](https://github.com/paolodamico))
+-   Fix multiple people same distinct id [\#3768](https://github.com/PostHog/posthog/pull/3768) ([timgl](https://github.com/timgl))
+-   Add index to events.created_at [\#3767](https://github.com/PostHog/posthog/pull/3767) ([mariusandra](https://github.com/mariusandra))
+-   Support multiple entries for selector and tag_name filter for EE [\#3766](https://github.com/PostHog/posthog/pull/3766) ([mariusandra](https://github.com/mariusandra))
+-   Don't show legend if nothing to show [\#3763](https://github.com/PostHog/posthog/pull/3763) ([macobo](https://github.com/macobo))
+-   Custom Data Attributes in the toolbar [\#3761](https://github.com/PostHog/posthog/pull/3761) ([mariusandra](https://github.com/mariusandra))
+-   Fix get_available_timezones_with_offsets DST change edge case [\#3760](https://github.com/PostHog/posthog/pull/3760) ([Twixes](https://github.com/Twixes))
+-   Update plugin server to 0.15.0 [\#3758](https://github.com/PostHog/posthog/pull/3758) ([posthog-bot](https://github.com/posthog-bot))
+-   Hotkeys UI Improvement [\#3757](https://github.com/PostHog/posthog/pull/3757) ([paolodamico](https://github.com/paolodamico))
+-   Description & tagging on dashboards [\#3756](https://github.com/PostHog/posthog/pull/3756) ([paolodamico](https://github.com/paolodamico))
+-   Handle event capture edge cases [\#3755](https://github.com/PostHog/posthog/pull/3755) ([Twixes](https://github.com/Twixes))
+-   Fix TestAccountFiltersConfig description [\#3754](https://github.com/PostHog/posthog/pull/3754) ([Twixes](https://github.com/Twixes))
+-   Fix boolean breakdown on postgres [\#3752](https://github.com/PostHog/posthog/pull/3752) ([EDsCODE](https://github.com/EDsCODE))
+-   Another null check for persons [\#3750](https://github.com/PostHog/posthog/pull/3750) ([EDsCODE](https://github.com/EDsCODE))
+-   Fix \#3747 [\#3748](https://github.com/PostHog/posthog/pull/3748) ([paolodamico](https://github.com/paolodamico))
+-   Fix feature flags default rollout [\#3745](https://github.com/PostHog/posthog/pull/3745) ([paolodamico](https://github.com/paolodamico))
+-   Add 'cohorts' tab to Person page [\#3744](https://github.com/PostHog/posthog/pull/3744) ([macobo](https://github.com/macobo))
+-   Add some data-attr for plugins [\#3742](https://github.com/PostHog/posthog/pull/3742) ([macobo](https://github.com/macobo))
+-   Update plugin server to 0.14.8 [\#3741](https://github.com/PostHog/posthog/pull/3741) ([posthog-bot](https://github.com/posthog-bot))
+-   Global hotkey navigation [\#3740](https://github.com/PostHog/posthog/pull/3740) ([paolodamico](https://github.com/paolodamico))
+-   Add element matching for multiple values on text/href [\#3739](https://github.com/PostHog/posthog/pull/3739) ([EDsCODE](https://github.com/EDsCODE))
+-   Add setup for contributions bot [\#3738](https://github.com/PostHog/posthog/pull/3738) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Update plugin server to 0.14.7 [\#3737](https://github.com/PostHog/posthog/pull/3737) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.14.6 [\#3736](https://github.com/PostHog/posthog/pull/3736) ([posthog-bot](https://github.com/posthog-bot))
+-   Dockerfile non-root user in production [\#3735](https://github.com/PostHog/posthog/pull/3735) ([paolodamico](https://github.com/paolodamico))
+-   reduce width so button isn't covered [\#3734](https://github.com/PostHog/posthog/pull/3734) ([kpthatsme](https://github.com/kpthatsme))
+-   Clarify test accounts → internal users [\#3733](https://github.com/PostHog/posthog/pull/3733) ([Twixes](https://github.com/Twixes))
+-   Allow for non-plugin config-keyed plugin attachments [\#3732](https://github.com/PostHog/posthog/pull/3732) ([Twixes](https://github.com/Twixes))
+-   \[retention table\] Use utc on dates without hours for consistency [\#3731](https://github.com/PostHog/posthog/pull/3731) ([EDsCODE](https://github.com/EDsCODE))
+-   Add "test account filters" filter to trends [\#3729](https://github.com/PostHog/posthog/pull/3729) ([macobo](https://github.com/macobo))
+-   Fix filtering breakdown queries [\#3727](https://github.com/PostHog/posthog/pull/3727) ([timgl](https://github.com/timgl))
+-   Bump lxml from 4.6.2 to 4.6.3 [\#3725](https://github.com/PostHog/posthog/pull/3725) ([dependabot[bot]](https://github.com/apps/dependabot))
+-   Update plugin server to 0.14.5 [\#3724](https://github.com/PostHog/posthog/pull/3724) ([posthog-bot](https://github.com/posthog-bot))
+-   Increment version [\#3721](https://github.com/PostHog/posthog/pull/3721) ([jaredsilver](https://github.com/jaredsilver))
+-   Update changelog for 1.23.1 [\#3719](https://github.com/PostHog/posthog/pull/3719) ([mariusandra](https://github.com/mariusandra))
+-   Fix linting-breaking import [\#3718](https://github.com/PostHog/posthog/pull/3718) ([Twixes](https://github.com/Twixes))
+-   Async event action mapping to 5 min, add warning [\#3717](https://github.com/PostHog/posthog/pull/3717) ([mariusandra](https://github.com/mariusandra))
+-   Update plugin server to 0.14.3 [\#3716](https://github.com/PostHog/posthog/pull/3716) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.14.2 [\#3715](https://github.com/PostHog/posthog/pull/3715) ([posthog-bot](https://github.com/posthog-bot))
+-   Update react-rrweb-player [\#3714](https://github.com/PostHog/posthog/pull/3714) ([paolodamico](https://github.com/paolodamico))
+-   Fix hotkeys in textarea [\#3713](https://github.com/PostHog/posthog/pull/3713) ([paolodamico](https://github.com/paolodamico))
+-   Fix unmounted logic bug on shared dashboards [\#3712](https://github.com/PostHog/posthog/pull/3712) ([paolodamico](https://github.com/paolodamico))
+-   Temporarily bring back individual refresh in dashboard items [\#3708](https://github.com/PostHog/posthog/pull/3708) ([paolodamico](https://github.com/paolodamico))
+-   Speed up filtering by events in sessions [\#3707](https://github.com/PostHog/posthog/pull/3707) ([macobo](https://github.com/macobo))
+-   Solidify plugins on Cloud rollout [\#3706](https://github.com/PostHog/posthog/pull/3706) ([Twixes](https://github.com/Twixes))
+-   Chunk session recording events [\#3705](https://github.com/PostHog/posthog/pull/3705) ([macobo](https://github.com/macobo))
+-   add beta tag to trends, center title [\#3704](https://github.com/PostHog/posthog/pull/3704) ([kpthatsme](https://github.com/kpthatsme))
+-   Better plugin globalization UX [\#3702](https://github.com/PostHog/posthog/pull/3702) ([Twixes](https://github.com/Twixes))
+-   New login & signup \(React\) [\#3701](https://github.com/PostHog/posthog/pull/3701) ([paolodamico](https://github.com/paolodamico))
+-   Lower the bar to report bugs in plugins [\#3699](https://github.com/PostHog/posthog/pull/3699) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Timezone handling UX [\#3698](https://github.com/PostHog/posthog/pull/3698) ([paolodamico](https://github.com/paolodamico))
+-   bump version, update changelog [\#3697](https://github.com/PostHog/posthog/pull/3697) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Plugins page tiny fixes [\#3694](https://github.com/PostHog/posthog/pull/3694) ([Twixes](https://github.com/Twixes))
+-   Update plugin server to 0.14.1 [\#3693](https://github.com/PostHog/posthog/pull/3693) ([posthog-bot](https://github.com/posthog-bot))
+-   3682 Various annotation fixes [\#3689](https://github.com/PostHog/posthog/pull/3689) ([EDsCODE](https://github.com/EDsCODE))
+-   Update plugin server to 0.14.0 [\#3687](https://github.com/PostHog/posthog/pull/3687) ([posthog-bot](https://github.com/posthog-bot))
+-   funnel trend fix white screen and remove description [\#3686](https://github.com/PostHog/posthog/pull/3686) ([EDsCODE](https://github.com/EDsCODE))
+-   Enable PLUGIN_SERVER_INGESTION [\#3684](https://github.com/PostHog/posthog/pull/3684) ([Twixes](https://github.com/Twixes))
+-   Update plugin server to 0.13.1 [\#3683](https://github.com/PostHog/posthog/pull/3683) ([posthog-bot](https://github.com/posthog-bot))
+-   Update plugin server to 0.13.0 [\#3681](https://github.com/PostHog/posthog/pull/3681) ([posthog-bot](https://github.com/posthog-bot))
+-   Different async action mapping approach [\#3678](https://github.com/PostHog/posthog/pull/3678) ([Twixes](https://github.com/Twixes))
+-   Feature Flags Revamp \(UX & Code\) [\#3675](https://github.com/PostHog/posthog/pull/3675) ([paolodamico](https://github.com/paolodamico))
+-   Use the correct boolean on cohort update [\#3673](https://github.com/PostHog/posthog/pull/3673) ([EDsCODE](https://github.com/EDsCODE))
+-   Shared dashboards fix [\#3672](https://github.com/PostHog/posthog/pull/3672) ([paolodamico](https://github.com/paolodamico))
+-   Update plugin server to 0.12.0 [\#3669](https://github.com/PostHog/posthog/pull/3669) ([posthog-bot](https://github.com/posthog-bot))
+-   Dashboard empty & error states + mobile support [\#3666](https://github.com/PostHog/posthog/pull/3666) ([paolodamico](https://github.com/paolodamico))
+-   Fix rounding for weekly and monthly intervals [\#3665](https://github.com/PostHog/posthog/pull/3665) ([timgl](https://github.com/timgl))
+-   Enable event property usage env vars [\#3664](https://github.com/PostHog/posthog/pull/3664) ([timgl](https://github.com/timgl))
+-   Lint Dockerfiles [\#3663](https://github.com/PostHog/posthog/pull/3663) ([Twixes](https://github.com/Twixes))
+-   Expire Celery tasks after 4 days instead of 1 [\#3662](https://github.com/PostHog/posthog/pull/3662) ([Twixes](https://github.com/Twixes))
+-   Fix system status page plugin metrics [\#3658](https://github.com/PostHog/posthog/pull/3658) ([paolodamico](https://github.com/paolodamico))
+-   Default event property usage to false [\#3655](https://github.com/PostHog/posthog/pull/3655) ([timgl](https://github.com/timgl))
+-   Fix proxy config [\#3654](https://github.com/PostHog/posthog/pull/3654) ([paolodamico](https://github.com/paolodamico))
+-   fixed y axis color issue [\#3653](https://github.com/PostHog/posthog/pull/3653) ([samcaspus](https://github.com/samcaspus))
+-   Add support for SOCIAL_AUTH_REDIRECT_IS_HTTPS [\#3652](https://github.com/PostHog/posthog/pull/3652) ([Twixes](https://github.com/Twixes))
+-   Update plugin server to 0.11.9 [\#3651](https://github.com/PostHog/posthog/pull/3651) ([posthog-bot](https://github.com/posthog-bot))
+-   Update docker compose dev port [\#3650](https://github.com/PostHog/posthog/pull/3650) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Notice in toolbar if could not get a unique selector for the element [\#3635](https://github.com/PostHog/posthog/pull/3635) ([mariusandra](https://github.com/mariusandra))
+-   Dashboard hotkeys [\#3623](https://github.com/PostHog/posthog/pull/3623) ([paolodamico](https://github.com/paolodamico))
+-   Improve formulas UI/input [\#3620](https://github.com/PostHog/posthog/pull/3620) ([timgl](https://github.com/timgl))
+-   Explain premium feature in upgrade modal [\#3619](https://github.com/PostHog/posthog/pull/3619) ([Twixes](https://github.com/Twixes))
+-   Automatically enable debug mode for posthog-js on SELF_CAPTURE [\#3613](https://github.com/PostHog/posthog/pull/3613) ([paolodamico](https://github.com/paolodamico))
+-   Dashboard Improvements I [\#3608](https://github.com/PostHog/posthog/pull/3608) ([paolodamico](https://github.com/paolodamico))
+-   Make events search more prominent [\#3587](https://github.com/PostHog/posthog/pull/3587) ([yakkomajuri](https://github.com/yakkomajuri))
+-   Insight session entities [\#3582](https://github.com/PostHog/posthog/pull/3582) ([EDsCODE](https://github.com/EDsCODE))
+-   Support custom identifier for person name [\#3581](https://github.com/PostHog/posthog/pull/3581) ([paolodamico](https://github.com/paolodamico))
+-   Show toast on API errors [\#3561](https://github.com/PostHog/posthog/pull/3561) ([mariusandra](https://github.com/mariusandra))
+-   Enable plugins for everyone [\#3557](https://github.com/PostHog/posthog/pull/3557) ([Twixes](https://github.com/Twixes))
+-   Introduce Dayjs [\#3490](https://github.com/PostHog/posthog/pull/3490) ([timgl](https://github.com/timgl))
+-   Plugins access control [\#3486](https://github.com/PostHog/posthog/pull/3486) ([Twixes](https://github.com/Twixes))

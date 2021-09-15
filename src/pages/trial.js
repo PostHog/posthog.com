@@ -43,7 +43,7 @@ const TrialPage = () => (
                             infrastructure.
                         </p>
                         <p>
-                            <Link to="/docs/deployment">
+                            <Link to="/docs/self-host">
                                 <Button type="primary" size="large">
                                     Self Deploy
                                 </Button>

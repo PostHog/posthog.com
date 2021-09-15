@@ -2,14 +2,6 @@
     display: inline-block;
 }
 
-.flex-row-reverse {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: right;
-    align-items: center;
-    height: 60px;
-}
-
 .docSearchWrapper {
     height: 32px;
     max-width: 270px;
@@ -83,7 +75,7 @@ override external docsearch css file*/
 
     /* Title (eg. Bootstrap CDN) */
     .algolia-autocomplete .algolia-docsearch-suggestion--title {
-        font-weight: bold;
+        font-variation-settings: 'wght' 800;
         color: black;
     }
 
@@ -115,7 +107,7 @@ override external docsearch css file*/
 
     /* Title (eg. Bootstrap CDN) */
     .algolia-autocomplete .algolia-docsearch-suggestion--title {
-        font-weight: bold;
+        font-variation-settings: 'wght' 800;
         color: black;
     }
 

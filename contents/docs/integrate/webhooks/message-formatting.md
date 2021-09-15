@@ -1,10 +1,10 @@
 ---
-title: Message Formatting
+title: Message formatting
 sidebar: Docs
 showTitle: true
 ---
 
-Message formatting works the same way whether you are using Slack or Microsoft Teams.
+Message formatting works the same way whether you are using Slack, Microsoft Teams, or Discord.
 
 Tokens are in the format `[type.property]`.
 
@@ -18,12 +18,12 @@ By default, the message format is
 
 ## Types
 ### Action
-#### Allowed Properties 
+#### Allowed properties 
 
 - `name`: name of triggered action with link.
 
 ### Event
-#### Allowed Properties
+#### Allowed properties
 
 - `name`: name of the event which triggered the Action with link.
 
@@ -48,7 +48,7 @@ John Doe triggered Pageview from undefined
 ```
 
 ### User
-#### Allowed Properties
+#### Allowed properties
 
 - `name`: user's username, email, or distinct ID depending on availability.
 - `ip`: IP address used by user when the action was triggered.

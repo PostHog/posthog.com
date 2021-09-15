@@ -6,7 +6,10 @@ const Crumb = ({ crumb: { name, url } }) => {
     return (
         <li className="flex items-center text-xs md:text-base">
             {url ? (
-                <Link className={`${classes} text-[#765494] hover:text-[#765494]`} to={url}>
+                <Link
+                    className={`${classes} dark:text-[#765494] text-gray-accent-dark hover:text-almost-black `}
+                    to={url}
+                >
                     {name}
                 </Link>
             ) : (
@@ -18,7 +21,7 @@ const Crumb = ({ crumb: { name, url } }) => {
 
 export default function Breadcrumbs({ crumbs, base }) {
     return (
-        <ul className="text-[#765494] list-none p-0 m-0 flex font-semibold space-x-2 mb-2 md:absolute -top-7 breadcrumbs-container">
+        <ul className="dark:text-[#765494] text-gray-2 list-none p-0 m-0 flex font-semibold space-x-2 mb-2 md:absolute -top-7 breadcrumbs-container">
             {base && <Crumb crumb={base} />}
             {crumbs.map((crumb, index) => {
                 return <Crumb key={index} crumb={crumb} />

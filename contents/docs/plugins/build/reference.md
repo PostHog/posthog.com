@@ -1,10 +1,10 @@
 ---
-title: Plugins Developer Reference
+title: Plugins developer reference
 sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** It's worth reading the [Building Plugins Overview](./overview) for a quick introduction to how to build your own plugin.
+> **Note:** It's worth reading the [Building plugins overview](./overview) for a quick introduction to how to build your own plugin.
 
 ## plugin.json file
 
@@ -39,7 +39,7 @@ A `plugin.json` file is structured as follows:
 }
 ```
 
-Here's an example `plugin.json` file from our ['Hello World Plugin'](https://github.com/PostHog/helloworldplugin):
+Here's an example `plugin.json` file from our ['Hello world plugin'](https://github.com/PostHog/helloworldplugin):
 
 ```json
 {
@@ -280,7 +280,7 @@ async function onEvent(event) {
 
 `onSnapshot` works exactly like `onEvent`. The only difference between the two is that `onSnapshot` receives session recording events, while `onEvent` receives all other events.
 
-## Scheduled Tasks
+## Scheduled tasks
 
 Plugins can also run scheduled tasks through the functions:
 
@@ -586,4 +586,3 @@ If your plugin uses `exportEvents`, some metrics will be automatically provided 
 - `retry_errors`: The number of explicit errors of type `RetryError` thrown by the `exportEvents` function. These errors trigger retries to ensure the payload gets delivered.
 - `other_errors`: Unexpected errors thrown by the `exportEvents` function. Any error beyond a `RetryError` is considered unexpected
 - `undelivered_events`: The total number of events that could not be delivered at all. Events will count towards this total if `exportEvents` throws an unexpected error or the plugin exhausts all the retries triggered by a `RetryError`
-

@@ -7,9 +7,8 @@ hideAnchor: true
 
 ## People
 
-- [Charles Cook](/handbook/people/team#charles-cook-business-operations), VP Ops
-- [Mo Shehu](/handbook/people/team#mo-shehu-content-marketer), Content Marketer
-- [Lottie Coxon](/handbook/people/team#lottie-coxon-graphic-designer), Product Marketer
+
+[See team structure page](/handbook/people/team-structure/team-structure)
 
 ## Mission
 

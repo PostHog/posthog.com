@@ -2,7 +2,7 @@
 title: Why small teams
 sidebar: Handbook
 showTitle: true
-hideAnchor: true
+hideAnchor: false
 ---
 
 PostHog is structured for speed, autonomy and innovation.
@@ -29,17 +29,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
  
 # Small Teams list
 
-* [Core Experience](/handbook/people/team-structure/core-experience) (trends, retention, funnels)
-* [Core Analytics](/handbook/people/team-structure/core-analytics) (queries)
-* [Extensibility](/handbook/people/team-structure/extensibility) (plugins/APIs)
-* [Deployments and Infrastructure](/handbook/people/team-structure/infrastructure) (AMI/VPC/PostHog Cloud)
-
-# Functional teams
-
-* [People & Culture](/handbook/people/team-structure/people)
-* [Marketing](/handbook/people/team-structure/marketing) (includes website)
-* [Growth Engineering](/handbook/people/team-structure/growth-engineering) (proactive experiments / activation flow / revenue flow)
-* [Design](/handbook/people/team-structure/design)
+See [team structure](team-structure).
 
 # FAQ
 

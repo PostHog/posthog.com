@@ -1,13 +1,13 @@
 import React, { useRef } from 'react'
 import MainSidebar from './MainSidebar'
-import InternalSidebar from './InternalSidebar'
-import Breadcrumbs from './Breadcrumbs'
-import NextArticle from './NextArticle'
+import SectionLinks from './SectionLinks'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import planets from '../../images/planets.svg'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { shortcodes } from '../../mdxGlobalComponents'
+import { CodeBlock } from 'components/CodeBlock'
+import StickySidebar from './StickySidebar'
+import MobileSidebar from './MobileSidebar'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -15,6 +15,32 @@ const Iframe = (props) => (
         <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
     </div>
 )
+const InlineCode = (props) => (
+    <code
+        {...props}
+        className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded"
+    />
+)
+const Blockquote = (props) => (
+    <blockquote {...props} className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark" />
+)
+
+const SectionLinksBottom = ({ previous, next }) => {
+    return (
+        <>
+            <hr className="w-[calc(100vw-2rem)] m-0 bg-transparent border-t border-r-0 border-l-0 border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark" />
+            <SectionLinks
+                className="mb-16 2xl:max-w-[800px] xl:max-w-[650px] max-w-full mx-auto mt-9"
+                previous={previous}
+                next={next}
+            />
+        </>
+    )
+}
+
+const SectionLinksTop = ({ previous, next }) => {
+    return <SectionLinks className="mt-9" previous={previous} next={next} />
+}
 
 export default function Main({
     handleMobileMenuClick,
@@ -29,61 +55,55 @@ export default function Main({
     tableOfContents,
     body,
     next,
+    previous,
+    hideLastUpdated,
 }) {
     const components = {
-        a: A,
         iframe: Iframe,
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        pre: CodeBlock,
         ...shortcodes,
     }
     const breakpoints = useBreakpoint()
     const showToc = !hideAnchor && tableOfContents?.length
     const mainEl = useRef()
     return (
-        <div className="relative px-4">
-            <div className="dark:text-white pt-8 md:pt-20 flex max-w-screen-2xl mx-auto items-start relative z-10">
+        <div className="relative">
+            <SectionLinksTop next={next} previous={previous} />
+            <div className="dark:text-white flex max-w-screen-3xl mx-auto items-start relative z-10 mt-8">
                 <MainSidebar
+                    sticky
+                    top={90}
                     mainEl={mainEl}
                     menu={menu}
                     slug={slug}
-                    className="hidden md:block flex-1 sticky top-4 mb-14 w-full transition-opacity md:opacity-40 hover:opacity-100"
+                    className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14 flex-1"
                 />
-                <main ref={mainEl} className={`relative md:pl-16 xl:px-16 2xl:px-32 ${showToc ? '' : 'flex-grow'}`}>
-                    <article className="2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14">
-                        <section className="mb-8 xl:mb-14 relative">
-                            {breadcrumb && <Breadcrumbs crumbs={breadcrumb} base={breadcrumbBase} />}
-                            <h1 className="dark:text-white text-5xl mt-0 mb-2">{title}</h1>
-                            <p className="dark:text-light-purple mt-1 mb-0">
+                <article
+                    ref={mainEl}
+                    style={!showToc ? { maxWidth: '100%', paddingRight: 0 } : {}}
+                    className="w-full 2xl:max-w-[800px] xl:max-w-[650px] max-w-full pb-14 relative md:pl-16 xl:px-16 2xl:px-32 box-content overflow-auto"
+                >
+                    <section className="mb-8 xl:mb-14 relative">
+                        <h1 className="dark:text-white text-3xl sm:text-5xl mt-0 mb-2">{title}</h1>
+                        {!hideLastUpdated && (
+                            <p className="mt-1 mb-0 opacity-50">
                                 Last updated: <time>{lastUpdated}</time>
                             </p>
-                        </section>
-                        {breakpoints.lg && showToc && (
-                            <InternalSidebar
-                                className="bg-[#e4e0e9] dark:bg-white p-4 rounded dark:bg-opacity-10 mb-10"
-                                tableOfContents={tableOfContents}
-                            />
                         )}
-                        <section className="article-content">
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </section>
-                        {showToc && (
-                            <div
-                                style={{ height: 'calc(100% - 35vh)' }}
-                                className="w-[1px] absolute bottom-0  right-0 bg-[#765494] hidden xl:flex justify-center"
-                            />
-                        )}
-                        {next && <NextArticle next={next} hideAnchor={!showToc} breakpoints={breakpoints} />}
-                    </article>
-                </main>
-                {!breakpoints.lg && showToc && (
-                    <InternalSidebar
-                        className="flex-1 sticky top-4 mt-[35vh] mb-14 hidden xl:block"
-                        tableOfContents={tableOfContents}
-                    />
-                )}
+                    </section>
+                    {breakpoints.lg && showToc && <MobileSidebar tableOfContents={tableOfContents} />}
+                    <section className="article-content">
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </section>
+                </article>
+
+                {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}
             </div>
-            <img className="absolute top-0 right-0 w-[35vw] hidden lg:block" src={planets} />
+            {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>
     )
 }

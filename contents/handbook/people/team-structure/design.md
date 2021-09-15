@@ -2,10 +2,10 @@
 title: Team Design
 sidebar: Handbook
 showTitle: true
-hideAnchor: true
+hideAnchor: false
 ---
 
-# Team Design
+> Looking for our brand style guide? [Look no further.](/handbook/company/branding)
 
 Design is a quasi-team, with our members spread between other Small Teams. Like sovereign states have ambassadors, our designers live on the ground in the places where we can tangibly offer support.
 
@@ -16,9 +16,9 @@ While most of our time is spend embedded in other Small Teams, we come together 
 
 | Name         | Role             | Primary team(s) |
 |--------------|------------------|-----------------|
-| [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) | Graphic Designer | Website & Docs  |
-| [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Team lead)  | Design Lead      | Website & Docs  |
-| Chris Clark  | Product Designer | Core Experience |
+| [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) | Graphic Designer | Marketing  |
+| [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Team lead)  | Design Lead      | Growth  |
+| [Chris Clark](/handbook/company/team#chris-clark-product-designer)  | Product Designer | Core Experience |
 
 
 ## Mission
@@ -69,10 +69,11 @@ On our [Design board](https://github.com/orgs/PostHog/projects/3), tasks general
 3. **In progress** - Tasks we’ve started on, but haven’t yet completed
 5. **Done** - Shipped! We like adding things to this column.
 
+If you peek at our Figma files, we usually wrap up final mockups in a page called Deliverables. Any mocks in pages that appear to be faded out are considered _old_ and _out of date_ and can be ignored, as there is a better replacement nearby. (We sometimes want to keep them around for easy reference, but they're easily identifiable because their artboards are set to 50% opacity.)
 
 ## Sharing work in progress
 
-We often share designs in early, unfinished phases on Slack in #design-feedback. This is typically when we’re looking for time-sensitive feedback. If your specific feedback is requested, we'll tag you.
+We often share designs in early, unfinished phases on Slack in [#design-feedback](https://posthog.slack.com/messages/design-feedback). This is typically when we’re looking for time-sensitive feedback. If your specific feedback is requested, we'll tag you.
 
 Since our audience is developer-friendly, we have a built-in audience to gut check our designs!
 
@@ -104,13 +105,11 @@ Important to note: We prioritize feedback based on alignment with business goals
 
 Note: The [#design-feedback](https://posthog.slack.com/messages/design-feedback) channel isn’t just limited to the design team! If you're looking for a second opinion on the UX of something you're building, we encourage anyone to share screenshots and a link to Figma or wherever the mockup was produced so we can provide useful feedback or assist in iterating on a design.
 
-If the design requires further collaboration, create an Issue using the process under “*Have a design request?”*.
+If the design requires further collaboration, create an Issue using our [design request process](/handbook/company/working-with-design).
 
 
 ## Slack channels
 
-[#team-design](https://posthog.slack.com/messages/team-design)
-
-[#team-website](https://posthog.slack.com/messages/team-website)
-
-[#design-feedback](https://posthog.slack.com/messages/design-feedback)
+- [#team-design](https://posthog.slack.com/messages/team-design)
+- [#team-website](https://posthog.slack.com/messages/team-website)
+- [#design-feedback](https://posthog.slack.com/messages/design-feedback)

@@ -1,6 +1,4 @@
 body.dark {
-    background-color: #220f3f;
-
     .site-footer {
         background-color: #220f3f;
         a {
@@ -16,11 +14,9 @@ body.dark {
         background: linear-gradient(180deg, #200c39 0%, #220f3f 100%);
     }
 
-    .docsPagesContent {
-        .ant-tabs-tab-arrow-show,
-        .ant-tabs-content {
-            color: white;
-        }
+    .ant-tabs-tab-arrow-show,
+    .ant-tabs-content {
+        color: white;
     }
 
     .post-page-wrapper {
@@ -80,12 +76,8 @@ body.dark {
             color: #d4d4d4 !important;
         }
 
-        a {
+        .docs-footer a {
             color: #ba8fff;
-        }
-
-        .primary-navbar a {
-            color: #fff;
         }
 
         .ant-menu-submenu-selected > .ant-menu-submenu-title span {
@@ -183,27 +175,6 @@ body.dark {
             th {
                 color: #ffffff !important;
             }
-        }
-    }
-
-    .post-page-wrapper {
-        #docs-sidebar,
-        #menu-header,
-        #right-navbar,
-        .right-bar-inner,
-        #docs-search-container,
-        #docs-content-wrapper,
-        #ant-layout-content-wrapper,
-        p,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        li,
-        a {
-            transition: 1s;
         }
     }
 }

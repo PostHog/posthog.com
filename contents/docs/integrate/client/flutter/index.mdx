@@ -1,16 +1,13 @@
 ---
-title: Flutter Library
+title: Flutter library
 sidebarTitle: Flutter
 sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-flutter) for the `posthog-flutter` library. This is an optional library you can install if you're working with Flutter. 
+<VisitLibrary name="Flutter" to="https://github.com/PostHog/posthog-flutter" />
 
-This page of the Docs refers specifically to the Official PostHog Flutter Library to capture and send events to any PostHog instance (including posthog.com).
-
-This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously,
-making it perfect to use in any part of your mobile app.
+This is an optional library you can install if you're working with Flutter.  It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
 ## Package
 
@@ -58,7 +55,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Posthog example app'),
+          title: Text('PostHog example app'),
         ),
         body: Center(
           child: FlatButton(

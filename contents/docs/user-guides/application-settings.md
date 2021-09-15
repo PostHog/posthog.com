@@ -1,9 +1,9 @@
 ---
-title: Application Settings
+title: Application settings
 sidebar: Docs
 showTitle: true
 ---
-This page documents all the application settings and configuration available on PostHog. These settings are generally available for both PostHog Cloud and PostHog Enterprise versions and should not be confused with instance settings (see [Configuring PostHog](/docs/self-host/configure/overview)) for more details. Each subsection is represented as a tab in the user interface.
+This page documents all the application settings and configuration available on PostHog. These settings are generally available for both PostHog Cloud and PostHog Enterprise versions and should not be confused with instance settings (see [Configuring PostHog](/docs/self-host/)) for more details. Each subsection is represented as a tab in the user interface.
 
 ## Organization settings
 Settings pertaining to the entire organization and/or instance. These settings can be accessed by opening the account dropdown on the right corner of the top navigation bar and then clicking on "Organization settings & billing". Contains the following settings:
@@ -15,10 +15,9 @@ Settings pertaining to the entire organization and/or instance. These settings c
 #### Team members
 - Team member management. Invite new members, cancel invitations, change role for team members or remove team members.
 
-#### Billing / Licenses
-- **[Self-hosted only]**. License management. Add new license keys and review existing license keys.
-- **[Cloud only]**. Billing management. View current billing plan and usage, switch billing plans, cancel billing subscription, update payment information.
-
+#### Billing/licenses
+- **License management** **[Self-hosted only]** - Add new license keys and review existing license keys.
+- **Billing management** **[Cloud only]** - View current billing plan and usage, switch billing plans, cancel billing subscription, update payment information.
 
 ## Project settings
 Settings scoped to the current project. These settings can be accessed by clicking on the project selector at the center of the top navigation bar and then clicking on the settings icon. Contains the following settings:
@@ -35,7 +34,6 @@ Settings scoped to the current project. These settings can be accessed by clicki
 #### Integrations
 - Toolbar settings. Enables or disables the Toolbar for the specific project.
 - Slack / Teams integration. Configure a webhook to receive notifications on Slack or Teams when certain action is received on PostHog (see [Slack integration](/docs/integrate/webhooks/slack) or [Teams integration](/docs/integrate/webhooks/microsoft-teams) for more details).
-
 
 ## Personal settings
 Settings scoped to the logged in user, any changes here **will only affect the currently logged in user**. These settings can be accessed by opening the account dropdown on the right corner of the top navigation bar and then clicking on "My account". Contains the following settings:

@@ -1,6 +1,6 @@
 ---
-title: Posthog Clickhouse Chart Configuration
-sidebarTitle: Chart Configuration
+title: PostHog ClickHouse chart configuration
+sidebarTitle: Chart configuration
 sidebar: Docs
 showTitle: true
 ---
@@ -27,7 +27,7 @@ See the [Chart configuration](#chart-configuration) section for how to enable an
 
 Dependent charts can also have values overwritten. Preface values with `postgresql.*`, see options for each chart in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or under each charts repos in [Dependencies](#dependencies).
 
-All configuration options can be found in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or in [values.yaml](values.yaml) file.
+All configuration options can be found in [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) or in values.yaml file.
 
 ### Setting up email
 Outgoing email is used for password reset. For PostHog to be able to send emails we need a login and password. Add these settings to your `values.yaml`:
@@ -43,8 +43,6 @@ The default configuration is geared towards minimizing costs. Here are example e
   <summary>
     <b> Additional values to `values.yaml` for {`<`} 1M events/month</b>
   </summary>
-
-<br />
 
 ```yaml
 # Note that this is experimental, please let us know how this worked for you.
@@ -79,8 +77,6 @@ plugins:
   <summary>
     <b> Additional values to `values.yaml` for > 1M events/month</b>
   </summary>
-
-<br />
 
 ```yaml
 # Note that this is experimental, please let us know how this worked for you.

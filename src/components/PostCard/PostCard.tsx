@@ -3,7 +3,6 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import { GatsbyImage, GatsbyImageProps, IGatsbyImageData } from 'gatsby-plugin-image'
 import { CallToAction } from '../CallToAction'
 import 'antd/lib/card/style/css'
-import './style.scss'
 import { AuthorsData } from 'types'
 import Byline from 'components/Blog/BlogAuthor/Byline'
 
@@ -35,7 +34,7 @@ type PostTypeWithImage = PostType & {
 
 const ReadPostHome = ({ to }: { to: string }) => {
     return (
-        <CallToAction type="button" icon="book" iconBg="bg-white relative" to={to} width="full" className="">
+        <CallToAction type="primary" icon="book" iconBg="bg-white relative" to={to} width="full" className="">
             Read Post
         </CallToAction>
     )
@@ -51,20 +50,23 @@ const FeaturedPost = ({ post, authorDetails }: { post: PostTypeWithImage; author
                 textDecoration: 'inherit',
             }}
         >
-            <h2 className="text-2xl text-gray-100 font-sans normal-case my-1" style={{ textDecoration: 'inherit' }}>
+            <h2
+                className="text-white text-2xl text-gray-100 font-sans normal-case my-1"
+                style={{ textDecoration: 'inherit' }}
+            >
                 {post.frontmatter.title}
             </h2>
-            <Byline date={post.frontmatter.date} authorDetails={authorDetails} />
+            <Byline date={post.frontmatter.date} authorDetails={authorDetails} classes="text-white" />
         </div>
     )
     return (
         <div className="w-full my-8">
             <Link
                 to={post.fields.slug}
-                className="featured-post-img text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
+                className="text-gray-100 hover:text-gray-100 dark:text-gray-100 dark:hover:text-gray-100"
             >
                 <div
-                    className="w-full py-4 mx-auto rounded-t md:rounded-b shadow-lg overflow-hidden relative"
+                    className="w-full py-4 mx-auto rounded-t md:rounded-lg overflow-hidden relative"
                     style={{
                         backgroundImage: `url(${post.frontmatter.featuredImage.publicURL})`,
                         backgroundSize: 'cover',
@@ -172,20 +174,17 @@ const PostCard = ({
             ) : (
                 <div className="flex flex-col mb-6">
                     <h5 className="mb-0 font-bold font-sans normal-case leading-tight">
-                        <Link
-                            to={post.fields.slug}
-                            className="text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100 hover:underline"
-                        >
+                        <Link to={post.fields.slug} className="dark:text-primary-dark text-primary">
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
                                 <Link to={post.fields.slug} className="featured-post-img overflow-hidden">
                                     {gatsbyImageData ? (
                                         <GatsbyImage
-                                            className="w-full rounded shadow-lg mb-1"
+                                            className="w-full rounded-md"
                                             image={gatsbyImageData}
                                             alt={post.excerpt}
                                         />
                                     ) : (
-                                        <img className="w-full rounded shadow-lg mb-1" src={staticImageSrc} />
+                                        <img className="w-full rounded-md" src={staticImageSrc} />
                                     )}
                                 </Link>
                             </div>

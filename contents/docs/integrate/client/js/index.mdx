@@ -1,5 +1,5 @@
 ---
-title: JavaScript Library
+title: JavaScript library
 sidebarTitle: JavaScript
 sidebar: Docs
 showTitle: true
@@ -10,7 +10,7 @@ showTitle: true
 
 This page of the Docs refers to our [posthog-js](https://github.com/PostHog/posthog-js) library.
 
-## Why Does This Exist?
+## Why does this exist?
 
 The reason this exists is that whilst the default snippet captures every click on certain elements (like `a`, `button`, `input` etc.) and page views, it's often worth sending more context whenever a user does something. This might also be useful if you have a one page app.
 
@@ -30,8 +30,6 @@ import JSCaptureIgnoreElements from './snippets/capture-ignore-elements.mdx'
 
 <JSCaptureIgnoreElements />
 
-<br />
-
 #### Important notes on autocapture
 
 While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
@@ -40,11 +38,11 @@ Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` a
 
 As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
 
-If you need to collect more data from inputs, you should look into [Custom Events and Actions](/docs/user-guides/actions).
+If you need to collect more data from inputs, you should look into [Custom events and Actions](/docs/user-guides/actions).
 
 Another important thing to note is that disabling autocapture **will not disable session recording**. You can disable session recording too using `disable_session_recording` or by turning it off in your project's settings.
 
-### Website vs App
+### Website vs app
 
 We recommend putting PostHog both on your homepage and your application if applicable. That means you'll be able to follow a user from the moment they come onto your website, all the way through signup and actually using your product.
 
@@ -90,7 +88,7 @@ posthog.capture('some event', { $set_once: { userProperty: 'value' } });
 
 This works the same way as `posthog.people.set_once`.
 
-### Identifying Users
+### Identifying users
 
 import JSIdentify from './snippets/identify.mdx'
 
@@ -106,7 +104,7 @@ posthog.alias('[new ID]', '[original ID]')
 
 The original ID will be kept as the default, but any events sent to either will be received under the same person.
 
-### Reset After Logout
+### Reset after logout
 
 If a user is logged out, you most likely want to call `reset` to unset any `distinct_ids`.
 
@@ -128,7 +126,7 @@ If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
 posthog.reset(true);
 ```
 
-### Sending User Information
+### Sending user information
 An ID alone might not be enough to work out which user is who within PostHog. That's why it's useful to send over more metadata of the user. At minimum, we recommend sending the `email` property, which is also what we use to display in PostHog.
 
 You can make this call on every page view to make sure this information is up-to-date. Alternatively, you can also do this whenever a user first appears (after signup) or when they change their information.
@@ -137,7 +135,7 @@ You can make this call on every page view to make sure this information is up-to
 posthog.people.set({email: 'john@gmail.com'});
 ```
 
-### One-Page Apps and Page Views
+### One-page apps and page views
 This JS snippet automatically sends `pageview` events whenever it gets loaded. If you have a one-page app, that means it'll only send a pageview once, when your app loads.
 
 To make sure any navigating a user does within your app gets captured, you can make a pageview call manually.
@@ -163,7 +161,7 @@ posthog.register({
 })
 ```
 
-The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified super property.
+The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
 
 However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.people.set`. More information on this can be found on the [Sending User Information section](#sending-user-information).
 
@@ -177,17 +175,17 @@ posthog.register_once({
 
 Using `register_once` will ensure that if a property is already set, it will not be set again. For example, if the user already has property `"icecream pref": "vanilla"`, calling `posthog.register_once({"icecream pref": "chocolate"})` will **not** update the property.
 
-#### Removing stored super properties
+#### Removing stored Super Properties
 
-Setting super properties creates a cookie on the client with the respective properties and their values. In order to stop sending a super property with events and remove the cookie, you can use `posthog.unregister`, like so:
+Setting Super Properties creates a cookie on the client with the respective properties and their values. In order to stop sending a Super Property with events and remove the cookie, you can use `posthog.unregister`, like so:
 
 ```js
 posthog.unregister("icecream pref")
 ```
 
-This will remove the super property and subsequent events will not include it.
+This will remove the Super Property and subsequent events will not include it.
 
-### Opt Users Out
+### Opt users out
 
 PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner).
 
@@ -249,7 +247,7 @@ posthog.reloadFeatureFlags()
 posthog.isFeatureEnabled('keyword', { send_event: false })
 ```
 
-### Complete Signup Pseudocode
+### Complete signup pseudocode
 
 As an example, here is how to put some of the above concepts together:
 
@@ -310,7 +308,7 @@ In this section we describe some additional details on advanced configuration av
     These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are unsure about something, just <a href="/slack" target="_blank">reach out</a>.
 </blockquote>
 
-### Disable /decide endpoint
+### Disable `/decide` endpoint
 
 <blockquote>
     This feature was introduced in posthog-js 1.10.0. Previously, disabling autocapture would inherently disable the /decide endpoint altogether. This meant that disabling autocapture would inadvertenly turn off session recording, feature flags, compression and the toolbar too.
@@ -321,7 +319,7 @@ One of the very first things the PostHog library does when `init()` is called is
 
 The `/decide` endpoint can be disabled by setting `advanced_decide_disabled = true` in PostHog config.
 
-**Resources dependent on /decide**
+**Resources dependent on `/decide`**
 
 <blockquote class="warning-note">
     These are features/resources that will be fully disabled when the /decide endpoint is disabled.

@@ -1,6 +1,6 @@
 ---
 date: 2021-07-02
-title: YC Adds PostHog To Top Valued Companies For July 2021
+title: YC adds PostHog to top valued companies for July 2021
 rootPage: /blog
 sidebar: Blog
 showTitle: true

@@ -43,7 +43,7 @@ const BlogPage = ({
                 <SEO title="PostHog Blog" description="What we are up to, every week." />
 
                 <div className="bg-offwhite-purple text-gray-900 bg-gradient-to-b dark:from-darkmode-purple dark:to-footer dark:text-white">
-                    <div className="w-11/12 mx-auto text-right">
+                    <div className="flex justify-end items-center w-full px-4 mb-4 mt-6 lg:mt-4">
                         <DarkModeToggle />
                     </div>
 
@@ -58,7 +58,7 @@ const BlogPage = ({
                             className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
                         />
                         <header className="text-xs text-gray-400 text-center uppercase mb-8">Recent Posts</header>
-                        <section className="grid md:grid-cols-3 gap-4">{nonLatestPosts}</section>
+                        <section className="grid md:grid-cols-3 md:gap-4 lg:gap-8">{nonLatestPosts}</section>
                     </Structure.Section>
                 </div>
             </Layout>

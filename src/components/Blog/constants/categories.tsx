@@ -1,5 +1,6 @@
-import twitterIcon from '../../../images/icons/twitter.svg'
-import linkedInIcon from '../../../images/icons/linkedin.svg'
+import React from 'react'
+import { Twitter, GitHub, LinkedIn } from 'components/Icons/Icons'
+
 export interface CategoryInterface {
     title: string
     slug: string
@@ -33,10 +34,15 @@ export const BlogCategories: CategoryInterface[] = [
         slug: 'release-notes',
         link: '/blog/categories/release-notes',
     },
+    {
+        title: 'CEO diary',
+        slug: 'ceo-diaries',
+        link: '/blog/categories/ceo-diaries',
+    },
 ]
 
 interface LinksInterface {
-    icon: string
+    icon: JSX.Element
     label: string
 }
 interface SocialLinksInterface {
@@ -44,6 +50,7 @@ interface SocialLinksInterface {
 }
 
 export const socialLinks: SocialLinksInterface = {
-    twitter: { icon: twitterIcon, label: 'Twitter' },
-    linkedin: { icon: linkedInIcon, label: 'LinkedIn' },
+    twitter: { icon: <Twitter />, label: 'Twitter' },
+    linkedin: { icon: <LinkedIn />, label: 'LinkedIn' },
+    github: { icon: <GitHub />, label: 'GitHub' },
 }

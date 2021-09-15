@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { LinkedIn, Twitter } from 'components/Icons/Icons'
+import cntl from 'cntl'
 
-import twitterIcon from '../../../images/icons/twitter.svg'
-import linkedInIcon from '../../../images/icons/linkedin.svg'
+const icons = cntl`
+    text-primary
+    dark:text-primary-dark
+`
 
-export const BlogShareButtons = () => {
+export const BlogShareButtons = (): JSX.Element => {
     const [currentUrl, setCurrentUrl] = useState('')
 
     useEffect(() => {
@@ -21,7 +25,7 @@ export const BlogShareButtons = () => {
                     className="mb-4 opacity-75 hover:opacity-100"
                     rel="noreferrer"
                 >
-                    <img src={linkedInIcon} alt="share on LinkedIn" />
+                    <LinkedIn className={icons} />
                 </a>
                 <a
                     href={`https://twitter.com/intent/tweet?url=${currentUrl}`}
@@ -29,7 +33,7 @@ export const BlogShareButtons = () => {
                     className="opacity-75 hover:opacity-100"
                     rel="noreferrer"
                 >
-                    <img src={twitterIcon} alt="share on Twitter" />
+                    <Twitter className={icons} />
                 </a>
             </div>
         </>

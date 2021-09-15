@@ -21,7 +21,7 @@ export const NewsletterForm = ({
 
     return compact ? (
         <div className="w-full mx-auto my-12 text-center">
-            <div className="bg-neon inline-flex mx-auto h-full p-1 rounded">
+            <div className="bg-blue text-white inline-flex mx-auto h-full p-1 rounded-xl">
                 <div className={classList}>
                     <img src={checkDark} alt="sign up for mailing list" className="block lg:mr-3 h-8 mb-0" />
                     <span className="mt-2 lg:mt-0 font-bold flex-grow text-lg md:text-sm lg:text-left">
@@ -66,7 +66,7 @@ export const NewsletterForm = ({
         </div>
     ) : (
         <div className="w-11/12 max-w-4xl mx-auto mb-48">
-            <div className="bg-neon w-full h-full p-1 rounded">
+            <div className="bg-blue text-white w-full h-full p-1 rounded-xl">
                 <div
                     className="rounded-lg flex justify-between flex-col lg:flex-row p-8 relative z-10"
                     style={{ backgroundColor: bgColor }}
@@ -119,7 +119,7 @@ export const NewsletterForm = ({
                                 </div>
                                 <div className="clear">
                                     <CallToAction
-                                        type="custom"
+                                        type="primary"
                                         icon="check"
                                         width="full"
                                         className="text-white border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"

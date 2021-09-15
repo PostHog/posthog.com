@@ -12,7 +12,7 @@ Diversity refers to the traits and characteristics that make people unique. Whil
 
 Inclusion refers to the behaviours and social norms that make people feel welcome. This includes everyone being treated fairly and with respect, and ensuring that everyone has equal access to opportunities and being able to contribute fully to the company’s success.  
 
-We are aware that Diversity & Inclusion  efforts are a lifelong work and that we will never have it all figured out and ‘done’. This means we will have to constantly learn and develop. This also means we will make mistakes - the important thing is that we learn from them. At PostHog, everyone is committed to building a culture of diversity, inclusivity and belonging.
+We are aware that diversity & inclusion  efforts are a lifelong work and that we will never have it all figured out and ‘done’. This means we will have to constantly learn and develop. This also means we will make mistakes - the important thing is that we learn from them. At PostHog, everyone is committed to building a culture of diversity, inclusivity and belonging.
 
 
 ## How diversity helps us
@@ -46,8 +46,8 @@ We don't just state that we care - these are some of the things we've implemente
 * [All remote](/handbook/company/team) - so we can hire people from any country in the world. We have people in ~10 countries, with no office. We also provide everyone  with $200/month to use on a [coworking space](/handbook/people/spending-money/#work-space) of their choice, and $250/month to [meet up with other team members](/handbook/people/spending-money/#meetups). 
 * [Asynchronous and transparent communication](/handbook/company/communication) - so people can get the context they need to work effectively across multiple time zones and on schedules that suit them.
 * [Unlimited vacation policy](/handbook/people/time-off/#permissionless-time-off) with mandatory minimum time off - so you can fit work around your life.
-* [Flexible hours](https://posthog.com/handbook/people/flexible-working) - so you can do the daily school run, or schedule a Denist appointment. 
-* Very [generous parental leave](/handbook/people/time-off/#parental-leave) - so those raising families can do so while still working for us. We also extended our bereavement leave to cover [pragnancy loss](/handbook/people/time-off/bereavements), as sometimes live doesn't work as we plan it.  
+* [Flexible hours](/handbook/people/time-off#flexible-working) - so you can do the daily school run, or schedule a Denist appointment. 
+* Very [generous parental leave](/handbook/people/time-off/#parental-leave) - so those raising families can do so while still working for us. We also extended our bereavement leave to cover [pragnancy loss](/handbook/people/time-off#bereavements--child-loss), as sometimes live doesn't work as we plan it.  
 * Very generous and [transparent pay](/handbook/people/compensation) - to reduce the financial stress that often comes with working for startups, or prevents many from even applying.
 * Proactive recruitment to encourage underrepresented groups of people to apply - so we are meeting with a balanced group of applicants for every role.
 * Anyone can contribute to [our handbook](/handbook/) - so if we miss something, others can ask for a change in our policy!

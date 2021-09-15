@@ -5,7 +5,7 @@ import { Structure } from '../../Structure'
 
 export const PricingHero = () => {
     return (
-        <div className="pricing-hero text-white text-center relative">
+        <div className="pricing-hero text-center relative">
             <Header
                 onPostPage={false}
                 isBlogArticlePage={false}

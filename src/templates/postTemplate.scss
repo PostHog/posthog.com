@@ -18,24 +18,9 @@
 .dark {
     .post-page {
         blockquote {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            border: solid 2px #fff;
         }
 
         .docsPagesContent {
-            a:not(.button) {
-                color: #ffb877;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            h3,
-            h3 a {
-                color: #fff !important;
-            }
-
             .blogPageContent p,
             .blogPageContent blockquote,
             .blogPageContent li {
@@ -45,20 +30,11 @@
             }
         }
     }
-
-    .ant-layout {
-        background: #220f3f !important;
-        color: #f0f2f5;
-    }
 }
 
 /* Styling for Post Pages ONLY */
 
 div.post-page {
-    .small-line-height * {
-        line-height: 0 !important;
-    }
-
     blockquote {
         margin-top: 0;
         padding: 20px;

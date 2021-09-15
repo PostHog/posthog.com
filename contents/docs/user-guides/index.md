@@ -1,5 +1,5 @@
 ---
-title: User Guides
+title: User guides
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
@@ -30,7 +30,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | Feature                                                      | Status                                                 | Cloud | Self-managed |
 | ------------------------------------------------------------ | ------------------------------------------------------ | ----- | ------------ |
 | [Feature flags](/docs/user-guides/feature-flags)                | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
-| [Conversion rate optimisation](/docs/user-guides/funnels)       | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
+| [Conversion rate optimization](/docs/user-guides/funnels)       | <span style="color: #71AA55">**Live**</span>           | ✔     | ✔            |
 | [A/B Testing](https://github.com/PostHog/posthog/issues/182) | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
 
 ### Tracking features
@@ -52,11 +52,11 @@ Below you will find a comprehensive list of all the features that comprise the P
 | [iOS client](/docs/integrate/client/ios)                   | <span style="color: #71AA55">**Live**</span> | ✔      |        |
 | [React Native client](/docs/integrate/client/react-native) | <span style="color: #71AA55">**Live**</span> | ✔      |        |
 | [Flutter client](/docs/integrate/client/flutter)           | <span style="color: #71AA55">**Live**</span> | ✔      |        |
-| [Python Library](docs/integrate/server/python)        | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Ruby integration](docs/integrate/server/ruby)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Node integration](docs/integrate/server/node)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [Go integration](docs/integrate/server/go)                | <span style="color: #71AA55">**Live**</span> |        | ✔      |
-| [PHP integration](docs/integrate/server/php)              | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Python Library](/docs/integrate/server/python)        | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Ruby integration](/docs/integrate/server/ruby)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Node integration](/docs/integrate/server/node)            | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [Go integration](/docs/integrate/server/go)                | <span style="color: #71AA55">**Live**</span> |        | ✔      |
+| [PHP integration](/docs/integrate/server/php)              | <span style="color: #71AA55">**Live**</span> |        | ✔      |
 | [Full REST API](/docs/api/overview)                            | <span style="color: #71AA55">**Live**</span> | ✔      | ✔      |
 
 ### Additional features
@@ -71,7 +71,7 @@ Below you will find a comprehensive list of all the features that comprise the P
 | Custom databases (e.g. Snowflake / ClickHouse)                   | <span style="color: #F54E00">**On the roadmap**</span> | ✔     | ✔            |
 
 
-### Features Demo Video
+### Features demo video
 
 <span class="centered">
 

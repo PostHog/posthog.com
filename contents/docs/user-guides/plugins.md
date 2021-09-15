@@ -18,9 +18,10 @@ Plugins serve three key purposes:
 - **Exporting:** Getting data out of PostHog
 - **Cleaning:** Data parsing and filtering at the ingestion step
 
-![Plugins Diagram](../images/../../images/plugins-diagram.svg)
+![Plugins diagram](../images/../../images/plugins-diagram.svg)
 
 > **Note:** We now have a [dedicated Plugins section](/docs/plugins/overview) in our Docs with a lot more information about the functionality.
+
 ## Architecture
 
 When an event is sent to PostHog, it is added to a task queue, after which it is picked up by a worker that processes and ingests the event, storing it into the database. 
@@ -31,7 +32,7 @@ This makes it so that our Celery workers continue to handle `process_event` task
 
 Essentially, before an event is added to the database, plugins have access to the event, being able to modify it, prevent ingestion, or send the data somewhere else.
 
-### Example Plugin
+### Example plugin
 
 Configuration aside, a simple plugin might look like this:
 
@@ -53,9 +54,9 @@ This plugin has 3 key parts:
 - Logic that uses the event, in this case to add a property `hello` with value `world` to it. This logic can add properties to the event that are either hard-coded, configuration-based, or dynamically-loaded, as well as use that event for something else, like triggering an API call or sending the data somewhere else.
 - A return statement, which will most often return a modified event, but could also not return anything (`void`), to prevent the event from being ingested.
 
-## Example Use-Cases
+## Example use cases
 
-Plugins can be used for a wide variety of use-cases, such as:
+Plugins can be used for a wide variety of use cases, such as:
 
 **Sending the event data to a data warehouse**
 
@@ -119,9 +120,10 @@ This order determines the sequence in which your plugins will run. For example, 
 5. Events returned from Plugin 3 are ingested (inserted into the database)
 
 Plugin ordering is important if you have a plugin that depends on another. For example, Plugin A might add the company name based on the email of the user, while Plugin B adds company data to the event based on the company name.
-### Updating Plugins
 
-![Plugins Update Screenshot](../../images/plugin-update.png)
+### Updating plugins
+
+![Plugins update screenshot](../../images/plugin-update.png)
 
 Plugins can be updated to the latest version directly on the PostHog UI.
 

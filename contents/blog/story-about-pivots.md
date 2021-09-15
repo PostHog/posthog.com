@@ -5,7 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: general,company-and-culture
+categories: general,company-and-culture,ceo-diaries
+featuredImage: ../images/blog/story-about-pivots.png
+featuredImageType: full
 ---
 
 PostHog has pivoted _a lot_.
@@ -45,7 +47,7 @@ Despite this, the _majority_ of your time in sales is spent getting nowhere. All
 
 Sidenote: this is why [product led growth](../handbook/growth/strategy) is so much better.
 
-If you're not getting anywhere with a potential customer after a few weeks or months of trying, your time is better spent elsewhere. Yet systems that are the core products of [\$17.1Bn revenue companies](https://en.wikipedia.org/wiki/Salesforce) come with a manually selected arbitrary number for the percentage probability that doesn't vary with time.
+If you're not getting anywhere with a potential customer after a few weeks or months of trying, your time is better spent elsewhere. Yet systems that are the core products of [$17.1Bn revenue companies](https://en.wikipedia.org/wiki/Salesforce) come with a manually selected arbitrary number for the percentage probability that doesn't vary with time.
 
 We pulled pipeline data from Hubspot or Salesforce, then used predictive analytics to work out how this curve looked based on historic data, then applied it to the current pipeline. Once a deal dropped below a certain threshold, we'd recommend you swap out that target company and pull a new one into the pipeline.
 

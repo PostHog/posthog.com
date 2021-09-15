@@ -13,16 +13,16 @@ Integrating PostHog with Retool.
 
 [Retool](https://retool.com/) is a platform you can use to quickly build internal tools that leverage your data from different sources with little to no-code.
 
-## Pre-Requisites
+## Prerequisites
 
 To follow this tutorial along, you should:
 
 1. Have [deployed PostHog](/docs/deployment). 
 2. Have a [Retool account](https://login.retool.com/auth/signup)
 
-## Step-By-Step Instructions
+## Step-by-step instructions
 
-### Retool App Setup
+### Retool app setup
 
 First, create a new app from the Retool dashboard:
 
@@ -54,20 +54,24 @@ Integrating Retool with PostgreSQL directly is rather simple.
 2. This will prompt you to enter your database details, which are the same authentication parameters you use to connect the database to PostHog. 
 3. With the connection complete, you are now able to run SQL queries on your PostHog database and use the result on Retool tables, charts, and any other component available. Retool also makes the database tables and their respective schemas available to you, making the process of writing queries easier. 
 
-> **Note:** Where your Database credentials will be available to you is dependent on the deployment method you used. If you deployed PostHog on Heroku, you can find them on the settings for the 'Heroku Postgres' add-on. In the case of AWS CloudFormation, these are available on the RDS settings. And, most importantly, if you **deployed PostHog using Docker**, some additional setup is required to allow Retool to connect to the database. We have [instructions available here](/docs/docs/integrate/third-party/metabase#for-posthog-docker-deployments) on what to do in this case.
+> **Note:** Where your Database credentials will be available to you is dependent on the deployment method you used. If you deployed PostHog on Heroku, you can find them on the settings for the 'Heroku Postgres' add-on. In the case of AWS CloudFormation, these are available on the RDS settings. And, most importantly, if you **deployed PostHog using Docker**, some additional setup is required to allow Retool to connect to the database. We have [instructions available here](/docs/integrate/third-party/metabase) on what to do in this case.
 
 ### Integrating via API
 
 1. When creating a new resource, select "REST API". 
 2. This will open a configuration page for the API resource:
 
-    <br />![Retool REST](../../../images/tutorials/retool/rest.png)<br />
+    <br />
+    
+    ![Retool REST](../../../images/tutorials/retool/rest.png)
+    
+    <br />
 
 3. On the configuration page, use `https://app.posthog.com/api/` for the 'Base URL' if you're using PostHog Cloud. Otherwise use the address of your PostHog instance, followed by `/api/`. Then, on the 'Headers' section, configure a header called `Authorization` with value `Bearer <YOUR_PERSONAL_API_KEY>`. For more information on API authentication, see our [dedicated page for this](/docs/api/overview#authentication). 
 4. Click 'Create Resource' and you should now be able to connect to PostHog endpoints through Retool queries. For information on our endpoints, see our [API Documentation](/docs/api/overview).
 5. For some of our endpoints, this configuration is enough. However, endpoints like `/event` and `/person` have pagination, which Retool does not support out of the box. As such, follow the next steps for instructions on how to handle PostHog's pagination with Retool.
 
-### Handling Pagination with Retool
+### Handling pagination with Retool
 
 To handle pagination in Retool and show results beyond the first "page", we need to do some Retool magic.
 
@@ -76,7 +80,11 @@ To handle pagination in Retool and show results beyond the first "page", we need
 1. First, create a new query that uses the PostHog API resource and input the endpoint you want to use. 
 2. Then, add a 'URL parameter' called `cursor` and set its value to `{{cursor}}`. Here's what the config will look like:
 
-    <br />![Retool Magic](../../../images/tutorials/retool/magic.png)<br />
+    <br />
+    
+    ![Retool Magic](../../../images/tutorials/retool/magic.png)
+    
+    <br />
 
 3. Retool will complain about `cursor` not being defined, but that's OK. This is the [recommended way to handle paginated API endpoints](https://community.retool.com/t/returning-all-results-for-a-cursor-based-paginated-api/3387) while that isn't supported natively. "Save and run" your query. It will fail as expected.
 4. Now, create a new query, using the 'Run JS Code (javascript)' resource. On the text editor, paste the following:

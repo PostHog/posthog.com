@@ -1,182 +1,41 @@
-.toggle-wrapper {
-    display: inline-block;
-    text-align: center;
-}
+$borderRadius: 25px; // also width of toggle switch
+$trackHeight: 8px;
 
-.dark {
-    .toggle-switch {
-        &-inner:before {
-            background: #4b325a;
-        }
-    }
+.toggle-switch-label {
+    height: $trackHeight;
 }
 
 .toggle-switch {
-    position: relative;
-    width: 75px;
-    margin-top: 10px;
     display: inline-block;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    position: relative;
     text-align: left;
+    user-select: none;
+    width: $borderRadius;
     &-checkbox {
         display: none;
     }
     &-label {
+        border-radius: $borderRadius;
+        cursor: pointer;
         display: block;
         overflow: hidden;
-        cursor: pointer;
-        border: 0 solid #bbb;
-        border-radius: 20px;
-        margin: 0;
-    }
-    &-inner {
-        display: block;
-        width: 200%;
-        margin-left: -100%;
-        transition: margin 0.3s ease-in 0s;
-        &:before,
-        &:after {
-            display: block;
-            float: left;
-            width: 50%;
-            height: 25px;
-            padding: 0;
-            line-height: 25px;
-            font-size: 14px;
-            color: white;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
-        &:before {
-            content: '🌙';
-            text-transform: uppercase;
-            padding-left: 10px;
-            background-color: #4b325a;
-            color: #fff;
-        }
-        .toggle-switch {
-            position: relative;
-            width: 75px;
-            display: inline-block;
-            vertical-align: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            text-align: left;
-            &-checkbox {
-                display: none;
-            }
-            &-label {
-                display: block;
-                overflow: hidden;
-                cursor: pointer;
-                border: 0 solid #bbb;
-                border-radius: 20px;
-                margin: 0;
-            }
-            &-inner {
-                display: block;
-                width: 200%;
-                margin-left: -100%;
-                transition: margin 0.3s ease-in 0s;
-                &:before,
-                &:after {
-                    display: block;
-                    float: left;
-                    width: 50%;
-                    height: 25px;
-                    padding: 0;
-                    line-height: 25px;
-                    font-size: 14px;
-                    color: white;
-                    font-weight: bold;
-                    box-sizing: border-box;
-                }
-                &:before {
-                    content: '🌙';
-                    text-transform: uppercase;
-                    padding-left: 10px;
-                    background-color: #200133;
-                    color: #fff;
-                }
-            }
-            &-disabled {
-                background-color: #ddd;
-                cursor: not-allowed;
-                &:before {
-                    background-color: #ddd;
-                    cursor: not-allowed;
-                }
-            }
-            &-inner:after {
-                content: '☀️';
-                text-transform: uppercase;
-                padding-right: 10px;
-                background-color: #222d5b;
-                color: #fff;
-                text-align: right;
-            }
-            &-switch {
-                display: block;
-                width: 24px;
-                margin: 5px;
-                background: #fff;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                right: 40px;
-                border: 0 solid #bbb;
-                border-radius: 20px;
-                transition: all 0.3s ease-in 0s;
-            }
-            &-checkbox:checked + &-label {
-                .toggle-switch-inner {
-                    margin-left: 0;
-                }
-                .toggle-switch-switch {
-                    right: 0px;
-                }
-            }
-        }
-    }
-    &-disabled {
-        background-color: #ddd;
-        cursor: not-allowed;
-        &:before {
-            background-color: #ddd;
-            cursor: not-allowed;
-        }
-    }
-    &-inner:after {
-        content: '☀️';
-        text-transform: uppercase;
-        padding-right: 10px;
-        background-color: #222d5b;
-        color: #fff;
-        text-align: right;
     }
     &-switch {
+        border-radius: $borderRadius;
         display: block;
-        width: 24px;
-        margin: 5px;
-        background: #fff;
+        height: 16px;
         position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 40px;
-        border: 0 solid #bbb;
-        border-radius: 20px;
-        transition: all 0.3s ease-in 0s;
+        right: 15px;
+        top: -50%;
+        transition: all 0.3s ease-out 0s;
+        width: 16px;
     }
     &-checkbox:checked + &-label {
         .toggle-switch-inner {
             margin-left: 0;
         }
         .toggle-switch-switch {
-            right: 0px;
+            right: -5px;
         }
     }
 }

@@ -2,8 +2,10 @@
 
 import { Endpoint } from './components/APIDocs/Endpoint'
 import { MethodTags } from './components/APIDocs/MethodTags'
-import { AllTheFeaturesCloud } from './components/AllTheFeaturesCloud'
+import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
+import { AnimateIntoView } from './components/AnimateIntoView'
+import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlogAuthor } from './components/Blog/BlogAuthor'
@@ -22,6 +24,7 @@ import { OpenRoles } from './components/Careers/OpenRoles'
 import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
+import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
@@ -33,11 +36,6 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
-import { Doodle } from './components/Doodle'
-import { DoodleCircle } from './components/DoodleCircle'
-import { DoodleRectangle } from './components/DoodleRectangle'
-import { DoodleTriangle } from './components/DoodleTriangle'
-import { DoodleZigzag } from './components/DoodleZigzag'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
@@ -45,18 +43,13 @@ import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
+import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
-import { Blockquote } from './components/LandingPage/Blockquote'
-import { Features } from './components/LandingPage/Features'
-import { Hero } from './components/LandingPage/Hero'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
-import { PrivateCloud } from './components/LandingPage/PrivateCloud'
-import { ProductFeatureIcons } from './components/LandingPage/ProductFeatureIcons'
-import { RecentBlogPosts } from './components/LandingPage/RecentBlogPosts'
-import { Roadmap } from './components/LandingPage/Roadmap'
-import { SocialProof } from './components/LandingPage/SocialProof'
-import { Tutorials } from './components/LandingPage/Tutorials'
 import { LibraryStats } from './components/LibraryStats'
+import { Link } from './components/Link'
+import { Logo } from './components/Logo'
+import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
@@ -77,29 +70,31 @@ import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
-import { ProductHero } from './components/ProductHero'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { ResponsiveAnchor } from './components/ResponsiveAnchor'
-import { ResponsiveSidebar } from './components/ResponsiveSidebar'
-import { ResponsiveTopBar } from './components/ResponsiveTopBar'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
 import { SignupModal } from './components/SignupModal'
+import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
+import { TeamQuote } from './components/TeamQuote'
+import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
 export const shortcodes = {
     Endpoint,
     MethodTags,
-    AllTheFeaturesCloud,
+    Accordion,
     AnchorScrollNavbar,
+    AnimateIntoView,
+    AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
     BlogAuthor,
@@ -118,6 +113,7 @@ export const shortcodes = {
     Transparency,
     WhyWereHere,
     WorkingAtPostHog,
+    Chip,
     CodeBlock,
     CompensationCalculator,
     Container,
@@ -129,11 +125,6 @@ export const shortcodes = {
     DemoScheduler,
     DocsPageSurvey,
     DocsSearch,
-    Doodle,
-    DoodleCircle,
-    DoodleRectangle,
-    DoodleTriangle,
-    DoodleZigzag,
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
@@ -141,18 +132,13 @@ export const shortcodes = {
     GetStartedModal,
     GithubIcon,
     HiddenSection,
+    Home,
     HostingOption,
-    Blockquote,
-    Features,
-    Hero,
     LandingPageCallToAction,
-    PrivateCloud,
-    ProductFeatureIcons,
-    RecentBlogPosts,
-    Roadmap,
-    SocialProof,
-    Tutorials,
     LibraryStats,
+    Link,
+    Logo,
+    MainNav,
     MdxAnchorHeaders,
     NewsletterForm,
     NotFoundPage,
@@ -173,21 +159,21 @@ export const shortcodes = {
     ProductFeature,
     ProductFeaturePlugin,
     ProductFooter,
-    ProductHero,
     ProductSectionHeader,
     ResponsiveAnchor,
-    ResponsiveSidebar,
-    ResponsiveTopBar,
     RocketHorizontalRule,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
     SignupModal,
+    SliderNav,
     Spacer,
     StarRepoButton,
     StartNowButton,
     Structure,
     TableOfContents,
+    TeamQuote,
+    VisitLibrary,
     WorkableSnippet,
 }

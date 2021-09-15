@@ -13,7 +13,7 @@ Integrating PostHog with your WordPress site.
 
 Tracking how users use your [WordPress](https://www.wordpress.org/) website can help you improve the user experience, increase conversion rates, gain new insights, and identify what your users find most valuable.
 
-## TLDR, the short version
+## TL;DR: (the short version)
 
 1. [Deploy PostHog](/docs/deployment) or [signup for PostHog Cloud](https://app.posthog.com/signup).
 
@@ -25,7 +25,7 @@ Tracking how users use your [WordPress](https://www.wordpress.org/) website can 
 
 Read on for additional information.
 
-## Pre-requisites
+## Prerequisites
 
 To follow this tutorial, you should:
 
@@ -42,7 +42,11 @@ The instructions below detail how to use the WordPress built-in functionality fo
 3. Go to 'Appearance' -> 'Theme Editor'.
 4. Select your theme in the editor drop-down menu to the right and click the `header.php` file in the file column to the right (see image below).
 
-    <br />![Wordpress Theme Editor](../../../images/tutorials/wordpress/wordpress-header-edit.png)<br />
+    <br />
+    
+    ![Wordpress Theme Editor](../../../images/tutorials/wordpress/wordpress-header-edit.png)
+    
+    <br />
 5. You should now see the contents of the `header.php` template file in the code editing view. It is recommended that you copy all the text/code and save it somewhere as a back-up.
 6. Find the closing `</head>` in the code editor and paste the PostHog snippet before it (see above image).
 7. Click the 'Update File' button at the bottom. You're good to go - PostHog should now be working on your WordPress website!

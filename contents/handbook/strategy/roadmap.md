@@ -18,11 +18,11 @@ Our roadmap for the second half of 2021 will do three things:
 3. Easy to deploy, maintain, and extend
 4. Experimentation
 
-# 1. Diagnosing Causes
+# 1. Diagnosing causes
 
 We've already shipped an incredibly powerful funnels product this year. However, as soon as you can see people dropping off in your funnel all you want to know is "why?". 
 
-We aim to build a suite of tools that enable you two answer ths question of why through multiple methods:
+We aim to build a suite of tools that enable you two answer this question of why through multiple methods:
 * Individual Qualitative: Observing session recordings and surveying users
 * Aggregated Qualitiative: Combining together hundreds of sessions to review behaviors of successful and unsuccessful users at scale
 * Quantitative: Analyzing patterns of successful and unsuccessful users to highlight clear opportunities to improve your product
@@ -40,8 +40,6 @@ We now offer ClickHouse to everyone as a way to super-scale your PostHog deploym
 We are continually investing in performance an reliability to ensure that PostHog can scale further and further without diminishing performance for our users.
 
 We see a ton of usecases, like integrating PostHog into an existing data warehouse, pulling in stats from other APIs, and pushing data into other services.
-
-We see a ton of usecases, like integrating PostHog into an existing data warehouse, pulling in stats from other APIs and pushing data into other services.
 
 There will be work on three main fronts:
 - Building plugins ourselves
