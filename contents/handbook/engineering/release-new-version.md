@@ -57,8 +57,7 @@ Three days before we release, on Thursday, we institute a code freeze. We branch
     git tag -a posthog-1.Y.YY -m "Version 1.Y.YY"
     git push && git push origin head --tags
     ```
-- [ ] Next step is to bump the `latest-release` Docker image. Log in to [hub.docker.com](https://hub.docker.com/repository/docker/posthog/posthog/builds) and configure a new automatic build by going to https://hub.docker.com/repository/docker/posthog/posthog/builds/edit. Delete any older tag with the same name if present. Add a new Build rule, set the source to the tag `1.XX.YY` and the Docker tag to `latest-release`. Finally, click "Save and Build".
-- [ ] Tag the version in GitHub. **This will immediately mark that a new version is available for users. Do this when you're sure the new release is ready.**
+- [ ] Tag the version in GitHub. **This will immediately mark that a new version is available for users. Do this when you're sure the new release is ready.** This will also build and push the `latest-release` Docker image.
   ```bash
   git tag -a [version] -m "Version [version]"
   git push origin head --tags
