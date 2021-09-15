@@ -53,6 +53,8 @@ TL;DR: If your team doesn't have a dedicated designer, create an Issue and add i
 1. What do you need designed and why?
 2. What is the deadline?
 
+If your design request is for a blog post post a card with the same information within the [Art Requests](https://github.com/orgs/PostHog/projects/14) board, as well as adding it to the [Content Calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit#gid=482712771) - this helps the Design board and Lotties brain to stay uncluttered. 
+
 If there isn’t a clear deadline for your design request, we’ll prioritize according to our availability.
 
 
