@@ -9,7 +9,7 @@ export default function Founders() {
             quality={100}
             width={150}
             layout="fixed"
-            className="mb-4 md:mb-0"
+            className="mb-4 md:mb-0 pointer-events-none"
             src="./images/founders.png"
         />
     )
