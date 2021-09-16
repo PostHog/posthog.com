@@ -92,7 +92,7 @@ Pat is willing to tolerate a few rough edges, so long as the results are accurat
 
 ### Deal-breakers
 - It’s a deal-breaker if I start making decisions based on inaccurate data.
-- It’s a deal-breaker if I the price is too high for the benefit I believe I'll get. 
+- It’s a deal-breaker if the price is too high for the benefit I believe I'll get. 
 
 ### Deal-makers
 - It’s a deal-maker if the results I get are consistent or integrate well with other tools.
