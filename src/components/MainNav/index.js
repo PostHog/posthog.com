@@ -15,6 +15,7 @@ export default function MainNav() {
                     title
                     url
                     classes
+                    hideBorder
                     sub {
                         title
                         description

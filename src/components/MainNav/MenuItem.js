@@ -3,37 +3,30 @@ import { Minus, Plus, Chevron } from '../Icons/Icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import Link from '../Link'
 import Submenu from './Submenu'
+import { menuItem as menuItemClass, link } from './classes'
 
 export default function MenuItem({ menuItem }) {
     const [hovered, setHovered] = useState(false)
-    const { title, url, sub, classes = '' } = menuItem
+    const { title, url, sub, classes = '', hideBorder } = menuItem
     const breakpoints = useBreakpoint()
     const handleSubClick = () => {
         setHovered(!hovered)
     }
     const referenceElement = useRef(null)
-
     return (
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="lg:flex lg:justify-center menu-item"
+            className={menuItemClass(hideBorder)}
         >
-            <span ref={referenceElement} className="flex justify-between items-center pr-4 lg:pr-0">
-                <Link
-                    onClick={breakpoints.md && sub && handleSubClick}
-                    to={url}
-                    className={
-                        classes ||
-                        'relative font-semibold px-4 py-3 lg:py-2 text-[15px] dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
-                    }
-                >
+            <span ref={referenceElement} className="flex justify-between items-center">
+                <Link onClick={breakpoints.md && sub && handleSubClick} to={url} className={link(classes)}>
                     {title}
                 </Link>
                 {sub &&
                     (breakpoints.md ? (
                         <button
-                            className="text-primary dark:text-primary-dark flex-grow flex justify-end"
+                            className="text-primary dark:text-primary-dark flex-grow flex justify-end mr-4"
                             onClick={handleSubClick}
                         >
                             {hovered ? <Minus /> : <Plus />}

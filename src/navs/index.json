@@ -286,6 +286,7 @@
         },
         {
             "title": "Company",
+            "hideBorder": true,
             "url": "/handbook/company/story",
             "sub": {
                 "title": "Company",
@@ -336,12 +337,15 @@
         },
         {
             "title": "Get started",
-            "classes": "text-white font-bold hover:text-white select-none ml-4 px-4 py-2 my-3 lg:my-0 rounded-full bg-almost-black dark:bg-white dark:text-almost-black dark:hover:text-almost-black",
-            "url": "/docs/self-host"
+            "classes": "text-white font-bold hover:text-white select-none lg:ml-4 px-4 py-2 mt-4 lg:mt-0 rounded-full bg-almost-black dark:bg-white dark:text-almost-black dark:hover:text-almost-black max-w-[200px] mx-auto w-full text-center",
+            "url": "/docs/self-host",
+            "hideBorder": true
         },
         {
             "title": "Login",
-            "url": "https://app.posthog.com/login"
+            "classes": "text-center w-full",
+            "url": "https://app.posthog.com/login",
+            "hideBorder": true
         }
     ]
 }
