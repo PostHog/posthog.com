@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If your team doesn't have a dedicated designer, create an [issue](https://github.com/PostHog/posthog/issues) and add it to the relevant team's project board. There's no need for a separate issue for the design request - just assign the relevant board. (This gives us full context of the problem.)
+If your team doesn't have a dedicated designer, create an [issue](https://github.com/PostHog/posthog/issues), add the label `design`, and add it to the relevant team's project board. There's no need for a separate issue for the design request - just assign the relevant board. (This gives us full context of the problem.)
 
 In the issue should be details about what you need from a product designer:
 
