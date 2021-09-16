@@ -11,6 +11,9 @@ export default function InternalSidebarLink({ url, name, className = '', style =
             to={url}
             hashSpy
             className={`text-almost-black hover:text-orange dark:text-white dark:hover:text-orange ${className}`}
+            onSetActive={() => {
+                console.log('setActive') // BUG: Not called.
+            }}
         >
             {name}
         </Link>
