@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Netlify](https://www.netlify.com/).
-
 ## Finding the content to edit
 
 Once you have cloned the repo, the `contents/` directory contains a few key areas:
@@ -71,3 +69,7 @@ For most images, this plugin will automatically generate a range of sizes to opt
 Once you've made a new markdown file, you should link to it from the sidebar where appropriate.
 
 The sidebar is generated from `/src/sidebars/sidebars.json`.
+
+#### Acknowledgements
+
+This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Netlify](https://www.netlify.com/).
