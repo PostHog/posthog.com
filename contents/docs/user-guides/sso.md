@@ -205,7 +205,7 @@ By default, users will be signed up to the default organization in the instance.
 ### Example: OneLogin
 <div id="onelogin"></div>
 
-#### OneLogin 1-click setup
+#### OneLogin quick setup
 You can quickly connect OneLogin and PostHog by using the prebuilt integration.
 1. In OneLogin admin, go to Applications and click on "Add App". Search for "PostHog" and create your app.
 1. Go to the "Configuration" tab and where it says "PostHog domain name" enter your PostHog's instance domain (as it's also specified in the `SITE_URL` [environment variable][env-vars]), **but don't include any protocol or trailing slashes.** Examples: `playground.posthog.com`, `myposthog.mydomain.com`, `myposthogdomain.com`.
