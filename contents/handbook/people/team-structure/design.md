@@ -61,7 +61,7 @@ Designs for website & docs typically start in Balsamiq wireframes, then progress
 
 Because of the volume of content we publish, blog artwork has its own dedicated [Artwork](https://github.com/orgs/PostHog/projects/14) project board managed by Lottie.
 
-When [authoring a blog post](/handbook/growth/marketing/blog#publishing), add the `Artwork` project board so we can create visuals. [Learn more about our process.](/handbook/growth/marketing/exporting-blog-post-image)
+When [authoring a blog post](/handbook/growth/marketing/blog#publishing), add the `Artwork` project board so we can create visuals and make sure the post is listed on our [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) with a publish date. [Learn more about our process.](/handbook/growth/marketing/exporting-blog-post-image)
 
 **Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on HackerNews, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
 
