@@ -2,13 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from './InternalSidebarLink'
 
-export default function StickySidebar({
-    tableOfContents,
-    className = '',
-    top = 0,
-    hideChildren = false,
-    reportScrollUpdated,
-}) {
+export default function StickySidebar({ tableOfContents, className = '', top = 0 }) {
     const [navBallLocation, setNavBallLocation] = useState(null)
     const [navStyle, setNavStyle] = useState(null)
     const [activeId, setActiveId] = useState(null)
@@ -16,10 +10,9 @@ export default function StickySidebar({
     const contentRef = useRef(null)
     const handleInternalNavUpdate = (el) => {
         if (el) {
-            setActiveId(el.id)
-            reportScrollUpdated?.(el.id)
             const activeEl = document.querySelector('.active-link')
-            activeEl && setNavBallLocation(activeEl.offsetTop + 7)
+            setActiveId(el.id)
+            setNavBallLocation(activeEl.offsetTop + 7)
         }
     }
     useEffect(() => {
@@ -63,18 +56,18 @@ export default function StickySidebar({
                         items={tableOfContents?.map((navItem) => navItem.url)}
                         currentClassName="active-link"
                     >
-                        {hideChildren
-                            ? null
-                            : tableOfContents?.map((navItem, index) => (
-                                  <li key={index}>
-                                      <InternalSidebarLink
-                                          url={navItem.url}
-                                          name={navItem.name}
-                                          style={activeId === navItem.url ? { opacity: '1' } : {}}
-                                          className="hover:opacity-100 opacity-60 text-[15px]"
-                                      />
-                                  </li>
-                              ))}
+                        {tableOfContents?.map((navItem, index) => {
+                            return (
+                                <li key={index}>
+                                    <InternalSidebarLink
+                                        url={navItem.url}
+                                        name={navItem.name}
+                                        style={activeId === navItem.url ? { opacity: '1' } : {}}
+                                        className="hover:opacity-100 opacity-60 text-[15px]"
+                                    />
+                                </li>
+                            )
+                        })}
                     </Scrollspy>
                 </div>
             </aside>
