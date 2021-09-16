@@ -1,6 +1,6 @@
 ---
 date: 2021-09-09
-title: "Plugging in plugins, pt. 1: The World Map"
+title: "Plugging in plugins, Pt. 1: The World Map"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
