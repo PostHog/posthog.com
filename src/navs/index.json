@@ -317,7 +317,7 @@
                         "description": "<p>We have people in Belgium, the East and West coast of the US, England, Estonia, South Africa, the Democratic Republic of Congo, among other places. Several of our team members travel full-time.</p>",
                         "link": {
                             "title": "Meet the team",
-                            "url": "/handbook/company/story"
+                            "url": "/handbook/company/team"
                         },
                         "component": {
                             "position": "bottom",
@@ -337,7 +337,7 @@
         },
         {
             "title": "Get started",
-            "classes": "text-white font-bold hover:text-white select-none lg:ml-4 px-4 py-2 mt-4 lg:mt-0 rounded-full bg-almost-black dark:bg-white dark:text-almost-black dark:hover:text-almost-black max-w-[200px] mx-auto w-full text-center",
+            "cta": true,
             "url": "/docs/self-host",
             "hideBorder": true
         },

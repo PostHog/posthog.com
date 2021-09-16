@@ -380,7 +380,7 @@ ul {
 }
 
 .company-submenu-item-container {
-    @apply grid grid-cols-1 gap-4 lg:gap-0 lg:grid-cols-5 lg:mt-12 mt-6 m-0 p-0 list-none;
+    @apply grid grid-cols-1 gap-4 lg:gap-0 lg:grid-cols-5 m-0 p-0 list-none;
 }
 
 .company-submenu-item-container > li {

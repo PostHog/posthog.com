@@ -3,9 +3,9 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 export default function Team() {
     return (
-        <div className="relative my-4 w-[calc(100vw-2rem)] lg:w-full">
+        <div className="relative my-4 max-w-max w-full after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-gradient-to-l after:from-white dark:after:from-gray-accent-dark">
             <StaticImage
-                className="after:absolute after:top-0 after:right-0 after:w-3/5 after:h-full after:bg-gradient-to-l after:from-white dark:after:from-gray-accent-dark pointer-events-none"
+                className="pointer-events-none"
                 placeholder="none"
                 alt="PostHog Team"
                 layout="fixed"

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import Docs from './DocsSubmenu'
 import Company from './CompanySubmenu'
@@ -10,14 +10,20 @@ const submenus = {
 
 export default function Submenu({ referenceElement, menu, open, parentURL }) {
     const { component } = menu
-
+    const variants = {
+        hidden: { height: 0 },
+        shown: { height: 'auto' },
+    }
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
-            <div className="z-10 top-[50px] lg:pt-[40px] lg:absolute left-0 w-full lg:block text-almost-black mb-6">
-                <div className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark lg:max-h-[calc(100vh-120px)] lg:overflow-auto posthog-scrollbars">
-                    {submenus[component]({ menu, parentURL })}
-                </div>
-            </div>
-        </motion.div>
+        <div className="z-10 top-[calc(40px+1.25rem)] lg:pt-5 lg:absolute left-0 w-full lg:block text-almost-black">
+            <motion.div
+                className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark overflow-hidden lg:my-0 my-6"
+                variants={variants}
+                initial="hidden"
+                animate="shown"
+            >
+                {submenus[component]({ menu, parentURL })}
+            </motion.div>
+        </div>
     )
 }

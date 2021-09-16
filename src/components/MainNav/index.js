@@ -14,6 +14,7 @@ export default function MainNav() {
                 main {
                     title
                     url
+                    cta
                     classes
                     hideBorder
                     sub {

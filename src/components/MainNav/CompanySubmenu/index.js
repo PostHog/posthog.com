@@ -4,6 +4,7 @@ import { submenu } from '../classes'
 import Team from '../components/Team'
 import Founders from '../components/Founders'
 import cntl from 'cntl'
+import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { YouTube, LinkedIn, Twitter, Slack, Lifeguard, Chat, RightArrow } from 'components/Icons/Icons'
 
@@ -45,10 +46,10 @@ export default function Company({ menu, parentURL }) {
 
     return (
         <>
-            <div className={submenu.container('max-w-screen-2xl lg:pb-0')}>
-                <div className="flex justify-between items-center">
+            <div className={submenu.container('max-w-screen-2xl lg:pb-[60px]')}>
+                <div className="hidden lg:flex justify-between items-center mb-6 lg:mb-12">
                     <Link className="text-primary hover:text-primary" to={parentURL}>
-                        <h1 className="hidden lg:inline-block text-4xl m-0 font-bold">{title}</h1>
+                        <h1 className="text-4xl m-0 font-bold">{title}</h1>
                     </Link>
                     {!breakpoints.md && <Social />}
                 </div>
@@ -85,7 +86,11 @@ export default function Company({ menu, parentURL }) {
                     })}
                 </ul>
             </div>
-            <div className="grid lg:grid-cols-2 gap-5 p-4 lg:px-9 bg-tan dark:bg-primary font-bold dark:text-white">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="grid lg:grid-cols-2 gap-5 p-4 lg:px-9 bg-tan dark:bg-primary font-bold dark:text-white lg:absolute bottom-0 w-full"
+            >
                 <div className="flex lg:space-x-6 space-y-5 lg:space-y-0 w-full lg:w-auto flex-col lg:flex-row">
                     <Link className={footerLink} to="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
                         <Chat />
@@ -113,7 +118,7 @@ export default function Company({ menu, parentURL }) {
                 {breakpoints.md && (
                     <Social className="justify-self-center justify-between lg:justify-start w-full lg:w-auto pt-5 border-t border-dashed border-gray-accent-light dark:border-opacity-30" />
                 )}
-            </div>
+            </motion.div>
         </>
     )
 }

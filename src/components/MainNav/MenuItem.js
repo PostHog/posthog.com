@@ -4,10 +4,11 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import Link from '../Link'
 import Submenu from './Submenu'
 import { menuItem as menuItemClass, link } from './classes'
+import { CallToAction } from 'components/CallToAction'
 
 export default function MenuItem({ menuItem }) {
     const [hovered, setHovered] = useState(false)
-    const { title, url, sub, classes = '', hideBorder } = menuItem
+    const { title, url, sub, hideBorder, cta, classes = '' } = menuItem
     const breakpoints = useBreakpoint()
     const handleSubClick = () => {
         setHovered(!hovered)
@@ -20,9 +21,19 @@ export default function MenuItem({ menuItem }) {
             className={menuItemClass(hideBorder)}
         >
             <span ref={referenceElement} className="flex justify-between items-center">
-                <Link onClick={breakpoints.md && sub && handleSubClick} to={url} className={link(classes)}>
-                    {title}
-                </Link>
+                {cta ? (
+                    <CallToAction
+                        onClick={breakpoints.md && sub && handleSubClick}
+                        to={url}
+                        className={`mx-auto lg:mx-0 lg:ml-4 ${classes}`}
+                    >
+                        {title}
+                    </CallToAction>
+                ) : (
+                    <Link onClick={breakpoints.md && sub && handleSubClick} to={url} className={link(classes)}>
+                        {title}
+                    </Link>
+                )}
                 {sub &&
                     (breakpoints.md ? (
                         <button

@@ -2,18 +2,13 @@ import React from 'react'
 import Link from '../../Link'
 import { RightArrow } from '../../Icons/Icons'
 import SubmenuItemFooter from '../SubmenuItemFooter'
-import { motion } from 'framer-motion'
 import { submenu } from '../classes'
 
 export default function SubmenuItem({ item }) {
     const { sections, title, link, footerLinks } = item
     const cols = sections.length
-    const variants = {
-        hidden: { y: -40, opacity: 0 },
-        shown: { y: 0, opacity: 1, transition: { duration: 0.5, type: 'spring' } },
-    }
     return (
-        <motion.li variants={variants} className="lg:mt-12 mt-6 font-bold">
+        <li className="lg:mt-12 mt-6 font-bold first:mt-0 lg:first:mt-12">
             <div className="flex items-center justify-between">
                 <h2 className={submenu.section.title('mb-0')}>{title}</h2>
                 {link && (
@@ -79,6 +74,6 @@ export default function SubmenuItem({ item }) {
                 })}
                 {footerLinks && <SubmenuItemFooter links={footerLinks} />}
             </div>
-        </motion.li>
+        </li>
     )
 }
