@@ -8,6 +8,8 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import { CodeBlock } from 'components/CodeBlock'
 import StickySidebar from './StickySidebar'
 import MobileSidebar from './MobileSidebar'
+import { useActions } from 'kea'
+import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -58,6 +60,7 @@ export default function Main({
     previous,
     hideLastUpdated,
 }) {
+    const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key: filePath }))
     const components = {
         iframe: Iframe,
         inlineCode: InlineCode,
@@ -101,7 +104,12 @@ export default function Main({
                     </section>
                 </article>
 
-                {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}
+                <StickySidebar
+                    top={90}
+                    tableOfContents={tableOfContents}
+                    hideChildren={breakpoints.lg || !showToc}
+                    reportScrollUpdated={reportScrollUpdated}
+                />
             </div>
             {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>
