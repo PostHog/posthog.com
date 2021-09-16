@@ -17,6 +17,7 @@ The following page outline how we hire here at PostHog.
 
 > This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring), and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
 
+All of our recruiting is done in-house, so we do not work with external agencies for any of our roles currently. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
 
 ### Deciding to hire
 
@@ -88,7 +89,7 @@ Someone you have a personal or professional relationship with to confidently say
 *   Otherwise, Send Eltje their CV and contact details. If you don't have their resume, please include a link to their LinkedIn profile.
 *   If they have applied themselves already, let Eltje know within 48 hours of them applying.
 
-**Referral payout process:** 
+**Referral payouts** 
 
 The bonus date is 3 months from the new team member's start date and will be processed as part of payroll (you might be liable for income tax on the bonus). 
 
