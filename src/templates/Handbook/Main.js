@@ -104,12 +104,13 @@ export default function Main({
                     </section>
                 </article>
 
-                <StickySidebar
-                    top={90}
-                    tableOfContents={tableOfContents}
-                    hideChildren={breakpoints.lg || !showToc}
-                    reportScrollUpdated={reportScrollUpdated}
-                />
+                {!breakpoints.lg && showToc && (
+                    <StickySidebar
+                        top={90}
+                        tableOfContents={tableOfContents}
+                        reportScrollUpdated={reportScrollUpdated}
+                    />
+                )}
             </div>
             {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>
