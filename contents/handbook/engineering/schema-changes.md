@@ -20,6 +20,14 @@ To avoid this pain, in most cases **we don't delete fields that aren't used anym
 
 Note that this is not the case for `ManyToManyField`s – they are only fetched when explicitly used, as they are in fact tables of their own (called associative tables). There may still be a problem if going from from "M2M field existing and in use" to "M2M field deleted" in one deployment, but if you have an "M2M field existing but unused" stage in the middle, there should be no place for Django to trip up.
 
+## Design for PostHog Cloud scale
+
+With any migration, make sure that it can run smoothly not only in local development, but also on self-hosted instances, and on PostHog Cloud.
+
+Generally this means avoiding migrations that need to process each row individually on large tables.
+
+For a quick overview of Cloud scale, see [Vanity Metrics in Metabase](https://metabase.posthog.net/dashboard/1).
+
 ## ClickHouse?
 
 - What are important considerations for designing a ClickHouse schema or migration?
