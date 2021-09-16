@@ -68,6 +68,7 @@ function ProductPage() {
                     <div className="feature-data-in-out">
                         <div className="md:grid grid-cols-2 gap-3 pt-6 px-4 md:pt-12 md:px-8 relative border-gray-accent-light border-dashed border-t">
                             <ProductFeature
+                                id="data-pipelines"
                                 layout="standard"
                                 featureIcon="data-pipelines"
                                 featureName="Data pipelines"

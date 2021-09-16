@@ -5,13 +5,14 @@ import Link from '../Link'
 import { heading, section } from './classes'
 import { StaticImage } from 'gatsby-plugin-image'
 
-const Feature = ({ title, icon }) => {
-    return (
-        <li className="flex px-6 md:px-6 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-start md:justify-center">
+const Feature = ({ title, icon, linkTo }) => {
+    const innerContent = (
+        <div className="flex px-6 md:px-6 py-4 md:py-6 space-x-1 md:space-x-4 font-bold items-center justify-start md:justify-center text-black">
             <Icon className="w-6 h-6 mr-4 md:mr-0" name={icon} />
             <span className="lg:text-[16px] leading-tight">{title}</span>
-        </li>
+        </div>
     )
+    return <li>{linkTo ? <Link to={linkTo}>{innerContent}</Link> : innerContent}</li>
 }
 
 export default function Hero() {
@@ -57,11 +58,11 @@ export default function Hero() {
             </div>
 
             <ul className="bg-[#DFE0DA] bg-opacity-70 w-full list-none m-0 p-0 grid md:grid-cols-5 md:divide-x divide-y-1 md:divide-y-0 divide-gray-accent-light divide-dashed border-gray-accent-light border-dashed border-t border-b">
-                <Feature icon="event-pipelines" title="Event pipelines" />
-                <Feature icon="analytics" title="Analytics" />
-                <Feature icon="session-recordings" title="Session recordings" />
-                <Feature icon="feature-flags" title="Feature flags" />
-                <Feature icon="data-warehouse" title="Export to data warehouse" />
+                <Feature icon="event-pipelines" title="Event pipelines" linkTo="/product#data-pipelines" />
+                <Feature icon="analytics" title="Analytics" linkTo="/product#analytics" />
+                <Feature icon="session-recordings" title="Session recordings" linkTo="/product#insights" />
+                <Feature icon="feature-flags" title="Feature flags" linkTo="/product#insights" />
+                <Feature icon="data-warehouse" title="Export to data warehouse" linkTo="/product#plugins" />
             </ul>
         </section>
     )
