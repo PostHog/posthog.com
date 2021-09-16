@@ -59,9 +59,9 @@ Designs for website & docs typically start in Balsamiq wireframes, then progress
 
 ### Blog artwork and marketing assets
 
-Because of the volume of content we publish, blog artwork has its own dedicated [Art project board](https://github.com/orgs/PostHog/projects/14) managed by Lottie.
+Because of the volume of content we publish, blog artwork has its own dedicated [Artwork](https://github.com/orgs/PostHog/projects/14) project board managed by Lottie.
 
-When authoring a blog post, add the Art project board so we can create artwork.
+When [authoring a blog post](/handbook/growth/marketing/blog#publishing), add the `Artwork` project board so we can create visuals. [Learn more about our process.](/handbook/growth/marketing/exporting-blog-post-image)
 
 **Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on HackerNews, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
 
@@ -83,7 +83,7 @@ Tag issue or PR with relevant project board.
 |--------------|------------------|-----------------|
 | Product design | Mention [@clarkus](https://github.com/clarkus) and assign to relevant board | [Core Experience](https://github.com/orgs/PostHog/projects/9), [Core Analytics](https://github.com/orgs/PostHog/projects/12) |
 | Website & Docs  | Assign to project board        | [Website & Docs](https://github.com/orgs/PostHog/projects/9)  |
-| Blog artwork  | Assign to project board | [Art project board](https://github.com/orgs/PostHog/projects/14) |
+| Blog artwork  | Assign to project board | [Artwork](https://github.com/orgs/PostHog/projects/14) |
 
 ## Slack channels
 
