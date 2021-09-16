@@ -64,7 +64,7 @@ Notice the extra ```../```.
 
 For most images, this plugin will automatically generate a range of sizes to optimize for the device and they'll even have a blurry low filesize loading image created to hold the place. Pretty cool.
 
-#### Links to/from the navigation
+#### Links to/from the navigation
 
 Once you've made a new markdown file, you should link to it from the sidebar where appropriate.
 
