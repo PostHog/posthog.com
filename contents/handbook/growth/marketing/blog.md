@@ -23,13 +23,10 @@ Our content production workflow is as follows:
   * The engineering team sometimes creates tutorials that we use to explain certain PostHog features. These can be turned into blog posts in their own right. Here’s [an example](https://www.youtube.com/watch?v=3_yH24Bh0HE). 
 * **Get the transcript:** We use [Rev.com](https://rev.com) to pull the transcript from the video. Rev also lets you get a quick draft in just a few minutes, though we recommend waiting for the proper version, which can take anywhere from a few hours if ‘rushed’ - which costs extra - to a day or two.
 * **Write the blog post:** Using the transcript, we write up a concise blog post about the discussion or tutorial. This is where we add more context to the topic and include links to other content for further reading. The length of a blog post can vary wildly depending on how long the video is (which is a function of how thoughtful and in-depth the questions are), but a 60-minute interview usually yields a ~1,500-word blog post. This is also the part where we publish it to GitHub for feedback and request artwork from our design team.
-* **Design requests:** If the content requires a visual element, create a [design request](https://posthog.com/handbook/company/working-with-design) (at least 2 days in advance) to have a graphic produced. For example, if the content is a YouTube video, we'll make a thumbnail image. If it's a blog post, we'll create a post image that is featured at the top of the post.
+* **Artwork:** If the content requires a visual element, assign to the [Art project board] (at least 2 days in advance) to have a graphic produced. For example, if the content is a YouTube video, we'll make a thumbnail image. If it's a blog post, we'll create a post image that is featured at the top of the post.
 
 * **Extract the audio from the edited video:** This goes into the podcast.
 * **Post to social media:** After the blog post is complete, we pull snippets from it and schedule them for publishing across your platforms. Post a link to the article/video on our `#editorial` channel in the PostHog Users Slack group. This group should always the first to hear about new content.
-
-
-
 
 ## Publishing
 
@@ -37,7 +34,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 
 - With a new Markdown file (md, mdx) in `/contents/blog/`
 - Any assets [optimized](/docs/contribute/updating-documentation) and added to a new folder under `contents/images/blog/`
-- Each post should have a `featuredImage`. Request one using our [Design Request](/handbook/company/working-with-design) process. (Team Design will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
+- Each post should have a `featuredImage`. Request one by tagging the [Art project board] process. (Lottie or Cory will [create, optimize and add the image to your issue](/handbook/growth/marketing/exporting-blog-post-image).) Once that's done, be sure to save the post image to the relevant directory.
 - You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to relevant sidebar in `src/sidebars/sidebars.json`
 - Add the author of the post ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)

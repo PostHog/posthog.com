@@ -1,5 +1,5 @@
 ---
-title: Team Design
+title: Marketing and product design
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
@@ -7,19 +7,15 @@ hideAnchor: false
 
 > Looking for our brand style guide? [Look no further.](/handbook/company/branding)
 
-Design is a quasi-team, with our members spread between other Small Teams. Like sovereign states have ambassadors, our designers live on the ground in the places where we can tangibly offer support.
-
-While most of our time is spend embedded in other Small Teams, we come together weekly to discuss goals, prioritize tasks, maintain brand cohesion between products, and ponder the future visual language across the company.
-
+Designers are spread between Small Teams. Like sovereign states have ambassadors, our designers live on the ground in the places where we can tangibly offer support.
 
 ## People
 
-| Name         | Role             | Primary team(s) |
+| Name         | Role             | Team(s) |
 |--------------|------------------|-----------------|
-| [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) | Graphic Designer | Marketing  |
+| [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) | Graphic Designer | Marketing, Growth  |
 | [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Team lead)  | Design Lead      | Growth  |
-| [Chris Clark](/handbook/company/team#chris-clark-product-designer)  | Product Designer | Core Experience |
-
+| [Chris Clark](/handbook/company/team#chris-clark-product-designer)  | Product Designer | Core Experience, Core Analytics |
 
 ## Mission
 
@@ -29,87 +25,70 @@ We’re here to:
 - Enable customers to build better products (using PostHog)
 - Communicate to prospective customers the value we provide
 
-
 ## Responsibilities
 
 - Initiate new projects to support the missions above
 - Support Small Teams in completing their sprint tasks
 - Iterate based on feedback from customers, in collaboration with other Small Teams
 
+## How we work
 
-## Output metrics
+Design tasks are managed on GitHub project boards. See below:
 
-- Acquisition
-- Retention
-- Delight… and happy tweets!
+### Product Design
 
+Product design tasks are managed in boards where product designers primarily work (like [Core Experience](https://github.com/orgs/PostHog/projects/9), [Core Analytics](https://github.com/orgs/PostHog/projects/12)).
 
-## Have a design request?
-
-[Learn how to request assistance from Team Design](/handbook/company/working-with-design)
-
-TL;DR: If your team doesn't have a dedicated designer, create an Issue and add it to the Design project. Your issue doesn’t have to be isolated to the design request, but you should include the following details in the Issue so we can prioritize accordingly:
-
-1. What do you need designed and why?
-2. What is the deadline?
-
-If there isn’t a clear deadline for your design request, we’ll prioritize according to our availability.
+**Need product design help?** [Learn how to request assistance from a product designer.](/handbook/company/working-with-product-design)
 
 
-## Our process
+### Website & Docs (posthog.com)
 
-Design tasks are managed on our org-wide *Design board*. This aggregates tasks across our GitHub repos, and makes it easy to request Team Design’s involvement in your project.
+The [Website & Docs board](https://github.com/orgs/PostHog/projects/13) is used for enhancements to posthog.com marketing pages, our Docs, and Handbook. (Artwork for blog is handled separately, and is explained below.)
 
-At the very least, we review new issues awaiting triage every Monday. If you have a request that’s more urgent, ping a team member in the relevant Slack channel for your project (eg: #team-website or #team-core-experience) with a link to the Issue.
+Because design and website development are closely related, we share a project board.
 
-On our [Design board](https://github.com/orgs/PostHog/projects/3), tasks generally move left to right after being triaged:
+1. **[Design] Backlog** _- a mostly stack ranked list of tasks_
+1. **[Design] In progress**
+1. **Ready for development** _- completed designs that are awaiting implementation_
+1. **[Development] Backlog** _- mostly stack ranked_
+1. **[Development] In progress**
+1. **Done**
 
-1. **Backlog** - Tasks end up here unless they’re urgent and require immediate attention
-2. **This week** - Hopefully this is self-explanatory
-3. **In progress** - Tasks we’ve started on, but haven’t yet completed
-5. **Done** - Shipped! We like adding things to this column.
+Designs for website & docs typically start in Balsamiq wireframes, then progress into hi-fi designs in Figma. [Read more about this process.](/handbook/company/website-design-process)
 
-If you peek at our Figma files, we usually wrap up final mockups in a page called Deliverables. Any mocks in pages that appear to be faded out are considered _old_ and _out of date_ and can be ignored, as there is a better replacement nearby. (We sometimes want to keep them around for easy reference, but they're easily identifiable because their artboards are set to 50% opacity.)
+### Blog artwork and marketing assets
 
-## Sharing work in progress
+Because of the volume of content we publish, blog artwork has its own dedicated [Art project board](https://github.com/orgs/PostHog/projects/14) managed by Lottie.
 
-We often share designs in early, unfinished phases on Slack in [#design-feedback](https://posthog.slack.com/messages/design-feedback). This is typically when we’re looking for time-sensitive feedback. If your specific feedback is requested, we'll tag you.
+When authoring a blog post, add the Art project board so we can create artwork.
 
-Since our audience is developer-friendly, we have a built-in audience to gut check our designs!
-
-We post here for visibility, but will always link to the relevant place for discussion. (It’s best to share direct feedback outside of Slack so our contributors have context into design decisions.)
-
-
-### **Wireframes**
-
-If an early draft is being shared, we'll likely build a low fidelity wireframe in something like Balsamiq. At this stage, we're mostly focused on laying out content, crafting messaging, and loosely tying in a visual hierarchy and layout. (Don't look too closely at fonts, specific colors, or visualizations - those come later.)
-
-*Note: Balsamiq uses its own Comic Sans-style font. Don't get hung up on this!*
-
-![image](https://user-images.githubusercontent.com/154479/114972248-2b887b80-9e4c-11eb-92fe-bce7bf14c808.png)
-
-Once a design is laid out, we'll move into hi-fidelity mockups built in Figma. This process usually takes a few rounds to perfect, and we often iterate up until the moment the design is passed off for development.
-
+**Note:** Not all posts get custom artwork. We prioritize creating custom art for posts that are anticipated to receive high traffic, will likely end up on HackerNews, or will be promoted on social media or in promoted posts. However we do have a library of hedgehog-themed art and topic-based artwork that may be used or repurposed for posts that don't receive custom artwork.
 
 ## **Providing feedback**
 
 When we share a design, we do our best to explain the type of feedback we're looking for. (Ex: Overall visual aesthetic, flow, if a design communicates to our developer-focused audience, etc.)
 
-If a screenshot is posted directly to a Github issue, that's a great place for feedback.
+If a screenshot is posted directly to a Github issue, that's a great place for feedback. (If a comment already covers your feedback, we encourage the use of an emoji response over additional comments like "+1".)
 
-Some of the design tools we use, like Balsamiq and Figma, both have built-in commenting. If we provide a link to a prototype in one of these tools, and if your feedback is specific to an element on a mockup, please leave a comment using the app's comment system. This helps us review and take action on comments later, and creates a single place for discussion around a particular topic.
+Some of the design tools we use, like Balsamiq and Figma, both have built-in commenting, which is useful for prototypes with multiple pages. If we provide a link to a prototype in one of these tools, please leave a comment using the app's comment system. This helps us review and take action on comments later, and creates a single place for discussion around a particular topic.
 
-If your feedback is higher level, summarize your feedback in the GitHub Issue itself for a higher-level discussion.
+**Important:** We prioritize feedback based on alignment with business goals. _Everyone has feedback about design._ (If feedback is more of a personal opinion than a business-related perspective, we’ll note it, but don't be offended if your feedback isn't specifically addressed!)
 
-Important to note: We prioritize feedback based on alignment with business goals. (If feedback is more of a personal opinion than a business-related perspective, we’ll note it but will consider it within that context.)
+## Working on something and need help from design?
 
-Note: The [#design-feedback](https://posthog.slack.com/messages/design-feedback) channel isn’t just limited to the design team! If you're looking for a second opinion on the UX of something you're building, we encourage anyone to share screenshots and a link to Figma or wherever the mockup was produced so we can provide useful feedback or assist in iterating on a design.
+Tag issue or PR with relevant project board.
 
-If the design requires further collaboration, create an Issue using our [design request process](/handbook/company/working-with-design).
-
+| Type         | Process             | Board(s) |
+|--------------|------------------|-----------------|
+| Product design | Mention [@clarkus](https://github.com/clarkus) and assign to relevant board | [Core Experience](https://github.com/orgs/PostHog/projects/9), [Core Analytics](https://github.com/orgs/PostHog/projects/12) |
+| Website & Docs  | Assign to project board        | [Website & Docs](https://github.com/orgs/PostHog/projects/9)  |
+| Blog artwork  | Assign to project board | [Art project board](https://github.com/orgs/PostHog/projects/14) |
 
 ## Slack channels
 
-- [#team-design](https://posthog.slack.com/messages/team-design)
-- [#team-website](https://posthog.slack.com/messages/team-website)
-- [#design-feedback](https://posthog.slack.com/messages/design-feedback)
+- [#team-website](https://posthog.slack.com/messages/team-website) _- general website betterment_
+- [#team-growth](https://posthog.slack.com/messages/team-growth) _- growth-related website projects_
+- [#team-design](https://posthog.slack.com/messages/team-design) _- more internal discussion about topics interesting to designers_
+- Product design uses [#team-core-experience](https://posthog.slack.com/messages/team-core-experience) and [#team-core-analytics](https://posthog.slack.com/messages/team-core-analytics)
+
