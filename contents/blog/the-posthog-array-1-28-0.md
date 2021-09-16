@@ -7,18 +7,16 @@ showTitle: true
 hideAnchor: true
 categories: release-notes
 featuredImage: ../images/blog/array/1-28-0.png
-excerpt: PostHog 1.28.0 has launched! Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels and many more improvements and fixes.
+excerpt: Understand your conversion rates better, PostHog 1.28.0 has launched! Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, and many more improvements and fixes.
 ---
 
-PostHog 1.28.0 has launched! 
+PostHog 1.28.0 has launched to help you understand your conversion rates better! Enjoy significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, and many more improvements and fixes.
 
-Enjoy significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, advanced funnels, and many more improvements and fixes.
-
-## PostHog 1.28.0 Release Notes
+## PostHog 1.28.0 release notes
 
 > If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
 
-**In this release:**
+**Release highlights:**
 
 - [Significantly revamped performance](#significantly-revamped-performance).
 - [Advanced engagement cohorts](#advanced-engagement-cohorts).
@@ -45,7 +43,7 @@ In our [last release](https://posthog.com/blog/the-posthog-array-1-27-0) we ship
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_28_0-advanced-funnels.png" alt="" />
 
-### Improvements & fixes
+### Other improvements & fixes
 - Significant improvements to plugins development experience
 - Improved session recording list, particularly when there's multiple recordings for a session
 - Fixed broken links when sharing dashboards publicly
