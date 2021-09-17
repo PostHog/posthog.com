@@ -20,7 +20,8 @@
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "generate-redirects": "rm pr_diff && git fetch && git diff origin/master $(git branch --show-current) > pr_diff && python3 ./scripts/safe_rename.py",
         "generate-redirects-js": "git diff origin/master $(git branch --show-current) > pr_diff && DEBUG=true RUN_AS_SCRIPT=true node ./scripts/safe_rename.js",
-        "test-generate-redirects": "jest"
+        "test-generate-redirects": "jest",
+        "repair": "rm -rf node_modules && rm -f package-lock.json && rm -f yarn.lock && yarn && gatsby clean && yarn start"
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
