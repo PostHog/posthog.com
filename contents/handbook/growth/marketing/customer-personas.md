@@ -15,7 +15,7 @@ Each of the two personas below include a short persona story for flavour, as wel
 
 ## Persona: Sam Software
 
-![](..contents/images/handbook/sam-persona.png)
+![](../../../images/handbook/sam-persona.png)
 
 | **Job titles**                                                                                                                                         | **Role**                                    |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
@@ -47,18 +47,19 @@ Sam understands that PostHog isn’t a mature tool and so tolerates more frictio
 - I’m concerned about introducing tools which enable other teams to use up more of Engineering’s time.
 
 ### Deal-breakers
-- It’s a deal-breaker if I have to put up with limited-time trials or enter credit card info.
+- It’s a deal-breaker if I have to put up with limited-time trials.
 - It’s a deal-breaker if I have to go through a long, complicated sales process.
-- It’s a deal-breaker if I have to spend ages setting it up and getting it working.
+- It’s a deal-breaker if I have to spend ages setting it up and getting it working. Or if it needs constant maintenance.
 
 ### Deal-makers
 - The faster I’m able to deploy and get started with a tool, the more I’ll like it.
 - I’d love it if I can find out everything I need without speaking to a salesperson.
-- I’d love it if I’m able to find answers to questions by myself and can get things working without needing to ask for help. 
+- I’d love it if I’m able to find answers to questions by myself and can get things working without needing to ask for help.
+- I'd love it if I can test the product out or see it demonstrated at a scale similar to my needs.
 
 ## Persona: Pam Product
 
-![](..contents/images/handbook/pat-persona.png)
+![](../../../images/handbook/pat-persona.png)
 
 | **Job titles**                                                                                                                                         | **Role**                                    |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
@@ -67,7 +68,7 @@ Sam understands that PostHog isn’t a mature tool and so tolerates more frictio
 ### Persona story
 Pat is a Senior Product Manager at an early-stage SaaS company making productivity software. Pat is reasonably technical — he can get by with SQL, for example — but not a developer by any means. Pat just knows enough to work well with them!
 
-28 years old, Pat is career-minded and active on LinkedIn, as well as Twitter and other platforms for knowledge sharing. Pat also likes to discover new products through ProductHunt or Kickstarter, among others. 
+28 years old, Pat is career-minded and active on LinkedIn, as well as Twitter and other platforms or private communities for knowledge sharing. Pat also likes to discover new products through ProductHunt or Kickstarter, among others. 
 
 Pat started looking for a new analytics tool after becoming frustrated at using Google Analytics for product decisions and started by asking for recommendations from colleagues before widening the search to Google and review sites such as G2. In addition to PostHog, Pat also looked at Amplitude and Heap.io, trying their free trial options. Some other tools Pat required queries in SQL, which Pat ruled out in favour of no-code options.
 
@@ -91,7 +92,8 @@ Pat is willing to tolerate a few rough edges, so long as the results are accurat
 
 ### Deal-breakers
 - It’s a deal-breaker if I start making decisions based on inaccurate data.
-- It’s a deal-breaker if I the price is too high for our current scale of usage
+- It’s a deal-breaker if the price is too high for the benefit I believe I'll get. 
 
 ### Deal-makers
-- It’s a deal-maker if the results I get are consistent or integrate well with other tools
+- It’s a deal-maker if the results I get are consistent or integrate well with other tools.
+- It's a deal-maker if I have confidence I'll be able to get insights which improve my product.

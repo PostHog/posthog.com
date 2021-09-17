@@ -4,6 +4,19 @@ sidebar: Handbook
 showTitle: true
 ---
 
+## Feedback actions
+Based on feedback from the company feedback sessions during our most recent offsite, these are the main areas I'm going to focus on improving
+* Feedback: Be more concise & keep going into a lot of detail
+    * Action: Provide TL;DRs when I write something long so most people can get the detail at a glance and those who want to know all the nitty gritty details can read on
+* Feedback: Increase transparency (e.g. don't create a doc you share with a few people first)
+    * Action: Create request for comments PRs in appropriate repo over using docs - always bias for public / open repos when possible
+* Feedback: Get clearer about what we're not doing
+    * Action: Create an anti-strategy (e.g. what we're not doing and why, along with a deprecation strategy - for what we are doing and should stop) and align the company om this
+* Feedback: Give more feedback and structure to help others grow 
+    * Action: Work with Ops to create a clear progression framework, invest in preparing feedback for growth to share in 1:1s
+* Feedback: Help others understand how they can help me (be less unpredictable / freeform when you need help) (e.g. what motivates me)
+    * Action: I will set clearer expectations ahead of time when I'm likely to need help and I will update this readme with my goals for Q4 and my overall motivations in the next two weeks
+
 ## Goals (6 weeks until 6 Aug 2021)
 
 *   **Strategy**

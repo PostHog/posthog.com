@@ -472,6 +472,10 @@
                     "url": "/docs/integrate/ingest-historic-data"
                 },
                 {
+                    "name": "Identifying users",
+                    "url": "/docs/integrate/identifying-users"
+                },
+                {
                     "name": "Client libraries",
                     "url": "",
                     "children": [
@@ -650,10 +654,6 @@
                     "url": "/docs/user-guides/funnels"
                 },
                 {
-                    "name": "Single sign-on authentication",
-                    "url": "/docs/user-guides/sso"
-                },
-                {
                     "name": "Organizations",
                     "url": "/docs/user-guides/organizations"
                 },
@@ -680,6 +680,10 @@
                 {
                     "name": "Session Recording",
                     "url": "/docs/user-guides/session-recording"
+                },
+                {
+                    "name": "SSO (Single sign-on authentication)",
+                    "url": "/docs/user-guides/sso"
                 },
                 {
                     "name": "Toolbar",

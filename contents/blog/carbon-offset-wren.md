@@ -1,5 +1,5 @@
 ---
-date: 2021-09-15
+date: 2021-09-14
 title: How PostHog uses Wren to offset carbon emissions during offsites
 rootPage: /blog
 sidebar: Blog
