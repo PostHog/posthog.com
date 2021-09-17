@@ -6,7 +6,7 @@ showTitle: true
 
 ## Feedback actions
 Based on feedback from the company feedback sessions during our most recent offsite, these are the main areas I'm going to focus on improving
-* Feedback: Be more consice & keep going into a lot of detail
+* Feedback: Be more concise & keep going into a lot of detail
     * Action: Provide TL;DRs when I write something long so most people can get the detail at a glance and those who want to know all the nitty gritty details can read on
 * Feedback: Increase transparency (e.g. don't create a doc you share with a few people first)
     * Action: Create request for comments PRs in appropriate repo over using docs - always bias for public / open repos when possible
