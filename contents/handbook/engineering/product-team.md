@@ -37,5 +37,3 @@ Chris ([bio](/handbook/company/team#chris-clark)) is a Product Designer part of 
 Current focus/goals:
 - Nailing Diagnosing Causes
 - Improving the overall user experience
-
-Detailed list of goals can be found in [his README](/handbook/company/team/paolo-damico).
