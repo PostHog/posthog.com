@@ -1,7 +1,11 @@
+import { useActions } from 'kea'
+import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 import React from 'react'
 import { Link } from 'react-scroll'
 
 export default function InternalSidebarLink({ url, name, className = '', style = {} }) {
+    const key = typeof window !== 'undefined' ? window.location.pathname : 'gatsby-ssr-context'
+    const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key }))
     return (
         <Link
             style={style}
@@ -13,7 +17,7 @@ export default function InternalSidebarLink({ url, name, className = '', style =
             className={`text-almost-black hover:text-orange dark:text-white dark:hover:text-orange ${className}`}
             spy
             onSetActive={() => {
-                console.log('setActive', name) // BUG: setActive triggers at different times/positions than the parent component
+                reportScrollUpdated(url)
             }}
         >
             {name}
