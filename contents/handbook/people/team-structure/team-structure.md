@@ -16,17 +16,17 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
-- [Chris Clark](/handbook/company/team#chris-clark-product-designer) (Product Designer)
-- [Paolo D'Amico](/handbook/company/team#paolo-damico-product-team) (Product Manager)
+- [Chris Clark](/handbook/company/team#chris-clark) (Product Designer)
+- [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
 
 <br />
 
 ### [Core Experience](core-experience)**
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
-- [Paolo D'Amico](/handbook/company/team#paolo-damico-product-team) (Product Manager)
+- [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
-- [Chris Clark](/handbook/company/team#chris-clark-product-designer) (Product Designer)
+- [Chris Clark](/handbook/company/team#chris-clark) (Product Designer)
 - [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
 
 <br />
@@ -35,6 +35,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
+- [Marcus Hyett](/handbook/company/team#marcus-hyett) (Product Manager)
 
 <br />
 
@@ -52,7 +53,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 ## [Marketing](marketing)
 
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
-- [Mo Shehu](/handbook/company/team#mo-shehu-content-marketer) (Content Marketer)
 - [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) (Graphic Designer)
 
 ## [People & culture](people)
