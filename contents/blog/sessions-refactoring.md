@@ -1,6 +1,6 @@
 ---
 date: 2021-09-21
-title: [TBD] - Sessions refactoring
+title: (TBD) Sessions refactoring
 rootPage: /blog
 sidebar: Blog
 showTitle: true
