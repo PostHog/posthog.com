@@ -19,7 +19,7 @@ export default function Link({
     disablePrefetch,
     external,
     ...other
-}: LinkProps): JSX.Element {
+}: LinkProps & Record<string, unknown>): JSX.Element {
     const internal = to && !disablePrefetch && /^\/(?!\/)/.test(to)
     return onClick ? (
         <button onClick={onClick} className={className}>
