@@ -38,7 +38,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Follow up! 
     - [Papercups](https://app.papercups.io/) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
 
-## Prioritising requests
+## Prioritizing requests
 
 1. Responding to and debugging issues for paying customers
 1. Responding to and debugging issues for community users
