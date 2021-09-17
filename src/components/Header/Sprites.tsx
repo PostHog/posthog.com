@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Sprites() {
+export default function Sprites(): JSX.Element {
     return (
         <svg width="0" height="0">
             <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 14" id="android">

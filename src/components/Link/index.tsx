@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import { ExternalLink } from 'components/Icons/Icons'
 
-export default function Link({ to, children, className = '', onClick, disablePrefetch, external, ...other }) {
-    const internal = !disablePrefetch && /^\/(?!\/)/.test(to)
+interface LinkProps {
+    to?: string
+    children: React.ReactNode
+    className?: string
+    onClick?: MouseEventHandler<HTMLElement>
+    disablePrefetch?: boolean
+    external?: boolean
+}
+
+export default function Link({
+    to,
+    children,
+    className = '',
+    onClick,
+    disablePrefetch,
+    external,
+    ...other
+}: LinkProps): JSX.Element {
+    const internal = to && !disablePrefetch && /^\/(?!\/)/.test(to)
     return onClick ? (
         <button onClick={onClick} className={className}>
             {children}

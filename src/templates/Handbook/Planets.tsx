@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Planets({ className }) {
+export default function Planets({ className }: { className?: string }): JSX.Element {
     return (
         <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 566 480">
             <g filter="url(#filter0_d)">
