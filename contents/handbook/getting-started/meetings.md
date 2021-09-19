@@ -22,7 +22,7 @@ You should have been invited to any relevant meetings as part of your [onboardin
 
 ### No recurring meeting days (Tuesdays/Thursdays)
 
-We try to keep these days focussed on deep work. Therefore, we run no regularly scheduled meetings on these days.
+We try to keep these days focused on deep work. Therefore, we run no regularly scheduled meetings on these days.
 
 However, speaking ad-hoc to your teammates on this day is fine - especially:
 
