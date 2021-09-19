@@ -10,7 +10,7 @@ We think of the company as a product, not just the software we're building. This
 
 Building a huge community around a free-for-life product is key to [PostHog's strategy](/handbook/strategy/strategy).
 
-We default to transparency with everything we work on. That means we make public our handbook, our roadmap, how we pay (or even let go of) people, what our strategy is, and who we have raised money from.
+We default to transparency with everything we work on. That means we make public our handbook, our roadmap, how we pay (or even let go of) people, what our strategy is, and who we have raised money from. Internally, we go even further - providing financial information, live updates on fundraising and board slide access.
 
 This enables the strongest community growth possible. It causes the core team to raise the bar on their work, it provides the context needed for people to work across multiple timezones, and it enables a deep work-heavy and meeting-light culture. It creates trust.
 
@@ -42,6 +42,16 @@ Likewise, [we don't expect you to watch your colleagues fail](/handbook/company/
 
 ## Talent compounds
 
-Getting into PostHog is a huge challenge. Once you're here, it stays that way. We are *extremely* demanding of performance. What is most important to us is the quality of your output - not the number of hours that you put in. 
+Getting into PostHog is a huge challenge. Once you're here, it stays that way. We are *extremely* demanding of performance.
 
-In return, you get to work with others producing the best work of their careers. We are a team, not a family - we pay top of market, offer exceptional benefits, provide an environment for you to do your best work, and give generous severance.
+In return, you get to work with others producing the best work of their careers.
+
+We are a team, not a family. This means we have very ambitious goals, pay top of market, offer exceptional benefits, and do everything we can to provide an environment for you to do your best work. Often this means getting out of your way.
+
+We expect you to help your team mates to provide their best work too through direct feedback - it is not ok for you to let them fail either. We pay generous severance if things aren't working out.
+
+## Bias for Impact
+
+Think a change should be made? Then make it.
+
+Most decisions are reversible, so a (slow) consensus-building culture is suboptimal. We'll perform better by taking 2 rapid steps forward, and 1 back, then not progressing at all.
