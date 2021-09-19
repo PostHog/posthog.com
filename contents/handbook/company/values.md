@@ -22,7 +22,7 @@ You learn faster, and thus help PostHog perform better by getting what you're wo
 
 ## Everyone codes
 
-...although this doesn't mean everyone has to be a software developer, and not everyone needs experience in this before they join. Our platform's adoption starts with developers using our open source project, thus we use GitHub to share most of our work publically, and to build a large community of technical users.
+...although this doesn't mean everyone has to be a software developer, and not everyone needs experience in this before they join. Our platform's adoption starts with developers using our open source project, thus we use GitHub to share most of our work publicly, and to build a large community of technical users.
 
 No matter your role, being able to use the basics of GitHub helps you understand our audience. Beyond that, we'll encourage you to build your technical skill, rather than delegating more challenging tasks to others, so you become a more effective contributor.
 
