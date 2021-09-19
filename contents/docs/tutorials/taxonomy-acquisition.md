@@ -1,5 +1,5 @@
 ---
-title: Set up Deep Dive Acquisition Dashboards
+title: Set up deep dive acquisition dashboards
 sidebar: Docs
 showTitle: true
 ---
