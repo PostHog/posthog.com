@@ -23,7 +23,7 @@ To follow this tutorial along, you need to:
 This tutorial recommends three levels of dashboard:
 
 - Acquisition (amongst other key metrics - Activation, Retention, Revenue and Referral)
-  - Deep dive: acquisition. This details Where acqusition is coming from (ie a change to conversion/traffic/untracked conversions)
+  - Deep dive: acquisition. This details Where acquisition is coming from (i.e. a change to conversion/traffic/untracked conversions)
     - Deep dive: traffic. This details where traffic is coming from.
 
 Note - we only break down traffic further, we don't do the same for conversion or untracked conversions.
