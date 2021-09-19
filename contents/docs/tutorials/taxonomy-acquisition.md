@@ -30,7 +30,7 @@ Note - we only break down traffic further, we don't do the same for conversion o
 
 # Event taxonomy required
 
-Now you've a sense of how to breakdown acquisition, it's time to figure out which dashboard _items_ (ie the range of graphs that appear within a dashboard) should look.
+Now you have a sense of how to breakdown acquisition, it's time to figure out which dashboard _items_ (i.e. the range of graphs that appear within a dashboard) should look.
 
 !> All of the following should be plotted as a time series. That means you can understand which metric moved, causing another metric to move.
 
