@@ -75,7 +75,7 @@ Same as [Users - traffic](#users--traffic), but broken down by utm_source.
 
 If users land on your website with [utm parameters](https://blog.hootsuite.com/how-to-use-utm-parameters/) passed to the url (ie example.com/?utm_source=google), PostHog will automatically capture their values (if you're using our javascript snippet).
 
-utm_source is typically used to track the traffic source - ie Bing/Google/Facebook/Instagram.
+`utm_source` is typically used to track the traffic source - e.g. Bing/Google/Facebook/Instagram.
 
 ### Users - traffic - by utm_medium
 
