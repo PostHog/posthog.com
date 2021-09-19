@@ -7,7 +7,7 @@ showTitle: true
 This tutorial will help you:
 
 1. send the _right_ events into PostHog, and:
-1. set up dasbhoards
+1. set up dashboards
 
 so your product and growth teams can answer the most important questions about user acquisition.
 
