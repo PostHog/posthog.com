@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> Would you rather go through a tutorial about actions instead of this feature reference? Check out our [Complete Guide to Event Tracking](/docs/tutorials/event-tracking-guide#sorting-through-your-events-with-actions).
+> Would you rather go through a tutorial about actions instead of this feature reference? Check out our [Complete guide to event tracking](/docs/tutorials/event-tracking-guide#sorting-through-your-events-with-actions).
 
 Actions are PostHog’s way of easily cleaning up a large amount of event data.
 
@@ -52,7 +52,7 @@ There are three ways to match your elements:
 You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">standard basic CSS selectors</a> to uniquely identify the elements you care about. The following types of selectors are supported:
 <ul>
     <li>
-        <b>Recommended.</b> Attribute selectors. Example:
+        <strong>Recommended:</strong> Attribute selectors. Example:
         <code>[data-attr="value"]</code> will match elements that have the
         given attribute and value.
         <blockquote>
@@ -74,13 +74,14 @@ You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Select
     </li>
     <li>
         Combinators are also supported (e.g. descendant or child combinators).
+        {' '}
         <a
             href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#combinators"
             target="_blank"
             rel="noopener"
         >
             Learn more
-        </a>
+        </a>{' '}
         about combinators. Examples: <code>form > [data-attr="submit"]</code> or <code>button span</code>.
     </li>
 </ul>
@@ -88,7 +89,7 @@ You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Select
 ### Custom events & page views
 Page views can match urls containing a string or match exactly.
 
-Custom Events can be sent to your PostHog instance via our API or one of our [libraries](/docs/integrate/overview).
+Custom events can be sent to your PostHog instance via our API or one of our [libraries](/docs/integrate/overview).
 
 
 <blockquote class='warning-note'>

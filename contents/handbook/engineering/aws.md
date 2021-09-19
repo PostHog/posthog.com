@@ -10,6 +10,10 @@ Ask in the `#team-platform` Slack channel for someone to add you. Anyone who has
 
 To give someone access: navigate to [IAM](https://console.aws.amazon.com/iamv2/home#/users) and use the `Add Users` button at the top right to add their PostHog email as username, pick `AWS Management Console access` and add them to the `Team` group, then Slack them the sign-in URL, username, and password.
 
+#### IMPORTANT: You must log out and then log back in!
+
+This is because of MFA. Just adding MFA isn't quite enough for AWS console so if you are seeing a bunch of really weird permissions errors. Log out, then log back in using your MFA token. This should resolve everything!
+
 ### Permissions errors using aws cli
 
 If you see something like:
@@ -33,3 +37,7 @@ export AWS_SESSION_TOKEN=example-session-token-as-in-previous-output
 ```
 unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKEN
 ```
+
+### Deploying Posthog
+
+See docs [here](https://posthog.com/docs/self-host/deploy/aws).

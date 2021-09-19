@@ -10,7 +10,7 @@ This guide might be helpful in working with me.
 
 Born and raised in the United Arab Emirates, I'm half British, half Lebanese, and lived in a variety of places growing up across the Middle East, Africa and Europe. Now based in London, I live with my wife Steph and son Remy, who was serendipitously born right at the beginning of lockdown here in the UK. 
 
-I take care of all things business ops-related at Posthog, across finance, people, legal and basically anything else that doesn't involve actually building the product! Posthog is now my 3rd startup - I was previously COO at [Vitl](https://vitl.com), (personalised nutrition), and before that I was Director of Product at [ROLI](https://roli.com) (electronic music products). 
+I take care of all things business ops-related at PostHog, across finance, people, legal and basically anything else that doesn't involve actually building the product! PostHog is now my 3rd startup - I was previously COO at [Vitl](https://vitl.com), (personalised nutrition), and before that I was Director of Product at [ROLI](https://roli.com) (electronic music products). 
 
 I'm a big fan of terrible jokes, beautifully crafted sandwiches and looking at [designer houses](https://www.themodernhouse.com/) I will never live in. I like to occasionally torment my son with my piano playing and spend more time than is probably reasonable making lists of things, à la [High Fidelity](https://en.wikipedia.org/wiki/High_Fidelity_(film)).
 

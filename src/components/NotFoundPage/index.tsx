@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { CallToAction } from '../CallToAction'
 import { Link } from 'gatsby'
 import { useValues } from 'kea'
 
@@ -20,21 +21,37 @@ export default function NotFoundPage(): JSX.Element {
 
     return (
         <Layout className="not-found-page-container">
-            <span className="centered">
+            <div className="centered py-12">
                 <h2>Oops, there's nothing here</h2>
 
                 <p>
                     Think this a mistake? Email <a href="mailto:hey@posthog.com">hey@posthog.com</a> and we'll fix it!
                 </p>
 
-                <div className="hedgehog">
+                <div className="bg-gray h-[1px] leading-[0px] max-w-xs mx-auto mt-6 mb-8"></div>
+
+                <p>
+                    <strong>But while you're here,</strong> we have an important question...
+                </p>
+
+                <h4>Does pineapple belong on pizza?</h4>
+
+                <p>
+                    We look forward to hearing your response on{' '}
+                    <a href="//twitter.com/posthog" target="_blank" rel="noreferrer">
+                        Twitter
+                    </a>
+                    .
+                </p>
+
+                <div className="hedgehog mb-8">
                     <BasicHedgehogImage />
                 </div>
 
-                <p className="home-link">
-                    <Link to="/">Take me back to the homepage</Link>
-                </p>
-            </span>
+                <CallToAction type="primary" width="84" to="/">
+                    Take me back to the homepage
+                </CallToAction>
+            </div>
         </Layout>
     )
 }

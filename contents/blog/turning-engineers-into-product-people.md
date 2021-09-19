@@ -43,7 +43,7 @@ As of writing, we’ve got 12 engineers and are looking to double that number wi
 
 ## Do you need a VP of Product?
 
-When you’re turning all your engineers into product people, it can be hard to justify hiring a VP of Product. But we’ve got a good reason for that. At the moment, our product is built for (and loved by) engineers, but we’ve only got shallow product-market fit - and that's actually pretty great for our current age.
+When you’re turning all your engineers into product people, it can be hard to justify hiring a VP of Product. But we’ve got a good reason for that. At the moment, our product is built for (and loved by) engineers, but we’ve only got shallow product/market fit - and that's actually pretty great for our current age.
 
 We're young, aren't struggling for finance and we've the team needed to deepen our fit. The challenge we have today is that those less technical than an engineer (e.g., a product manager) often struggle to use our product fully. This hampers wider adoption within our client companies. Our new VP of Product will bring a sense of direction and long-term vision to the product in line with our current short term goal to delight five core customers (yes, even though we have thousands of users - we're focussing on just five key companies at a time, more on that in another post...). The VP Product will dig into what makes those Big Five tick, their [Jobs To Be Done](https://thefmp.io/articles/jobs-to-be-done), and what new features they’d like to see added or nixed. They’ll also continue to turn our engineers into product people, providing training and coaching where needed.
 

@@ -10,7 +10,7 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 Please spend money in a way that you think is in the best interests of the company. 
 
-If it's a trivial expense, just buy it. We provide you with a company card with a \$1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with a Revolut card. 
+If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with a Revolut card. 
 
 If you live in the UK, you should use your Revolut card for UK-specific spending (i.e. ordering from UK sites), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary. 
 
@@ -20,7 +20,7 @@ For larger expenses which don't fit into the items here, please **raise a policy
 
 Just do it.
 
-This means expenses that are under \$75 one off or under \$20/month recurring that we can cancel easily.
+This means expenses that are under $75 one off or under $20/month recurring that we can cancel easily.
 
 ## Saving receipts
 
@@ -34,7 +34,7 @@ PostHog uses Brex and Revolut's built-in expenses tracking feature. You'll find 
 
 - Buy something on your Brex card.
 - If it's a digital invoice, just forward it to receipts@brex.com. If it's a physical receipt, respond to the Brex or SMS notification with a picture of your receipt.
-- You _only_ need to submit receipts for purchases of \$75 or more.
+- You _only_ need to submit receipts for purchases of $75 or more.
 - That's it!
 
 Make sure you forward digital invoices to Brex from your PostHog email address - it won't work if you send from another email address.
@@ -68,9 +68,7 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-* If you are in an engineering role, we recommend a Macbook Pro with an Intel processor with 32GB of RAM. The processor selection here is important as we want to ensure that you're able to run all the technologies in our stack and several of them have yet to be adapted on the new Apple architecture. Base processor and storage.
-* If you are in a design role, we recommend a Macbook Pro with an Apple Silicon processor and 16GB of RAM. Base processor and storage.
-* If you are in a non-technical role, we recommend a Macbook Air with an Apple Silicon processor and 8GB of RAM. Base processor and storage.
+* No matter your role, we currently recommend a Macbook Air with an Apple Silicon (M1) processor and 16GB of RAM. Feel free to upgrade to a Macbook Pro if you will be running sustained high workloads, though in practice the Air performs really well in most scenarios, including long-running compilations (e.g. Clickhouse).
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
 
@@ -80,13 +78,13 @@ When buying something at Apple we can get 3% cashback on purchases through Brex.
 
 You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-We would expect to spend \$1200 to \$2000 on a laptop, depending on what you need to run. We find the easiest solution is to just purchase directly from Apple's website in your territory. 
+We would expect to spend $1200 to $2000 on a laptop, depending on what you need to run. We find the easiest solution is to just purchase directly from Apple's website in your territory. 
 
 ### Monitor
 
 For monitors, we suggest you pick one that supports 4K. This means you'll get a higher resolution than a standard HD monitor, and thus can fit more content onto the screen.
 
-We would expect to spend \$250 to \$350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
+We would expect to spend $250 to $350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
 
 ### Keyboard, mouse, and laptop stand
 
@@ -104,13 +102,13 @@ If you do not, please suggest something to us. We aren't yet at the stage where 
 
 For example, if you would like a standing desk, buy one you consider to be good value.
 
-We would expect to spend \$250 on a desk, and around the same for a chair.
+We would expect to spend $250 on a desk, and around the same for a chair.
 
 ### Headphones
 
 If you need to work in a noisy environment and don't already have noise cancelling headphones with a microphone, feel free to buy a pair.
 
-We would expect to spend \$250 on noise cancelling headphones.
+We would expect to spend $250 on noise cancelling headphones.
 
 ## Software
 
@@ -132,8 +130,16 @@ Individual software is down to your personal preference, and we encourage you to
 
 ### IDEs
 
-* IDEs range widely in cost. Best in class IDE suites can cost up to \$700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
-* Before then, if you wish to spend up to \$200 on an IDE, that is fine. Visual Studio, VIM and PyCharm are the most popular within our team.
+* IDEs range widely in cost. Best in class IDE suites can cost up to $700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
+* Before then, if you wish to spend up to $200 on an IDE, that is fine. Visual Studio, VIM and PyCharm are the most popular within our team.
+
+### Open-source contributions
+
+The PostHog platform wouldn't be possible without open-source software. We are standing on the shoulders of giants. As such, we feel it's important to support the software we benefit from through monetary contributions.
+
+To enable our team to do this we use [Open Collective](https://opencollective.com/) and have a budget of $100/month that can be contributed per team member.
+
+To get setup with Open Collective get in touch with [Phil](phil-leggetter-developer-relations) who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make contributions as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
 
 ## Work space
 
@@ -141,7 +147,7 @@ We care about you being healthy, happy and productive.
 
 While PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
-You can spend up to \$200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
+You can spend up to $200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
 
 ## Meetups
 

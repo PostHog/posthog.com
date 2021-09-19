@@ -15,7 +15,7 @@ You might see one of these errors from `helm install`:
 Error: failed post-install: timed out waiting for the condition
 Error: failed pre-install: timed out waiting for the condition
 ```
-One of the potential causes is that we couldn't find enough resources to schedule all the services Posthog needs to run. To know if resources are a problem we can check pod status and errors while the `helm install` command is still running:
+One of the potential causes is that we couldn't find enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm install` command is still running:
 1. check the output for `kubectl get pods -n posthog` and if you see any pending pods for a long time then that could be the problem
 2. check if the pending pod has scheduling errors using `kubectl describe pod <podname> -n posthog`. For example, at the end of the events section we could see that we didn't have enough memory to schedule the pod.
 ```
@@ -44,7 +44,7 @@ Error while writing to checkpoint file /bitnami/kafka/data/...
 java.io.IOException: No space left on device
 ```
 
-This tells us that the disk is full. The fastest fix here is to increase the Kafka volume size (this can be done by changing `kafka.persistence.size` in your `values.yaml` and running a [`helm upgrade`](docs/self-host/configure/upgrading-posthog#upgrade-instructions). Note: you might want to avoid applying other changes if you haven't upgraded recently).
+This tells us that the disk is full. The fastest fix here is to increase the Kafka volume size (this can be done by changing `kafka.persistence.size` in your `values.yaml` and running a [`helm upgrade`](/docs/self-host/configure/upgrading-posthog#upgrade-instructions). Note: you might want to avoid applying other changes if you haven't upgraded recently).
 
 #### Why did we run into this problem and how to avoid it in the future?
 
@@ -61,3 +61,24 @@ See more in these stack overflow questions ([1](https://stackoverflow.com/questi
 ### How can I increase storage size?
   
 Change the value (e.g. `clickhouseOperator.storage`) and run a `helm upgrade`, which works seamlessly on AWS, GCP and DigitalOcean.
+
+### Are the errors I'm seeing important?
+
+Here are some examples of log spam that currently exists in our app and is safe to ignore:
+
+The following messages in the ClickHouse pod happen when ClickHouse reshuffles how it consumes from the topics. So, anytime ClickHouse or Kafka restarts we'll get a bit of noise and the following log entries are safe to ignore:
+```
+<Error> TCPHandler: Code: 60, e.displayText() = DB::Exception: Table posthog.sharded_events doesn't exist.
+...
+<Warning> StorageKafka (kafka_session_recording_events): Can't get assignment. It can be caused by some issue with consumer group (not enough partitions?). Will keep trying.
+```
+
+
+The following error is produced by some low-priority celery tasks and we haven't seen any actual impact so can safely be ignored. It shows up in Sentry as well.
+```
+TooManyConnections: too many connections
+  File "posthog/celery.py",
+  ...
+  File "clickhouse_pool/pool.py", line 102, in pull
+    raise TooManyConnections("too many connections")
+```

@@ -1,5 +1,5 @@
 ---
-title: Posthog ClickHouse chart configuration
+title: PostHog ClickHouse chart configuration
 sidebarTitle: Chart configuration
 sidebar: Docs
 showTitle: true
@@ -44,8 +44,6 @@ The default configuration is geared towards minimizing costs. Here are example e
     <b> Additional values to `values.yaml` for {`<`} 1M events/month</b>
   </summary>
 
-<br />
-
 ```yaml
 # Note that this is experimental, please let us know how this worked for you.
 
@@ -79,8 +77,6 @@ plugins:
   <summary>
     <b> Additional values to `values.yaml` for > 1M events/month</b>
   </summary>
-
-<br />
 
 ```yaml
 # Note that this is experimental, please let us know how this worked for you.

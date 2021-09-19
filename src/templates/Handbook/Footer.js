@@ -2,67 +2,56 @@ import React from 'react'
 import { Link } from 'gatsby'
 import footerLogo from '../../images/posthog-logo-footer.svg'
 import Contributors from './Contributors'
+import { Edit, Issue } from 'components/Icons/Icons'
+
+const Divider = () => {
+    return (
+        <hr className="border-t-2 border-b-0 border-l-0 border-r-0 border-opacity-30 border-gray-accent-light  border-dashed my-10 md:w-screen w-[calc(100%+4rem)] -ml-8" />
+    )
+}
 
 export default function Footer({ contributors, filePath, title }) {
     return (
         <footer className="text-white">
-            <div className="bg-[#371A51] px-4">
-                <div className="py-14 max-w-[650px] 2xl:max-w-[800px] mx-auto relative">
-                    <img className="absolute -top-6" src={footerLogo} />
-                    <h2>Reach out</h2>
+            <div className="bg-almost-black dark:bg-gray-accent-dark max-w-screen-2xl mx-auto rounded-lg relative overflow-hidden">
+                <div className="py-14 2xl:max-w-[800px] max-w-full md:max-w-[calc(100%-224px-6rem)] xl:max-w-[650px] w-full xl:mx-auto ml-auto md:border-l border-opacity-30 border-gray-accent-light border-dashed px-8 md:box-content">
+                    <h2 className="text-white">Reach out</h2>
                     <p>
-                        If you need help on any of the above, feel free to create an issue on our repo, or join our
-                        Slack where a member of our team can assist you! Chances are that if you have a problem or
-                        question, someone else does too - so please don't hesitate to create a new issue or ask us a
-                        question.
+                        If you need help on any of the above, feel free to create an issue on{' '}
+                        <a href="https://github.com/PostHog/posthog">our repo</a>, or{' '}
+                        <a href="/slack">join our Slack</a> where a member of our team can assist you! Chances are that
+                        if you have a problem or question, someone else does too - so please don't hesitate to create a
+                        new issue or ask us a question.
                     </p>
-                    {
-                        // In order to show contributors, a valid GitHub API key
-                        // must be added as an environment variable GITHUB_API_KEY.
-                        // If no contributors are found, this section shows nothing.
-                        contributors && (
-                            <div className="my-10">
-                                <h3 className="text-base">Contributors</h3>
-                                <Contributors
-                                    className="list-none m-0 p-0 flex space-x-2 mt-2 flex-wrap"
-                                    contributors={contributors}
-                                />
-                            </div>
-                        )
-                    }
+                    <div className="relative">
+                        <Divider />
+                        {
+                            // In order to show contributors, a valid GitHub API key
+                            // must be added as an environment variable GITHUB_API_KEY.
+                            // If no contributors are found, this section shows nothing.
+                            contributors && (
+                                <div className="my-10">
+                                    <h3 className="text-base text-white">Contributors</h3>
+                                    <Contributors
+                                        className="list-none m-0 p-0 flex space-x-2 mt-2 flex-wrap"
+                                        contributors={contributors}
+                                    />
+                                </div>
+                            )
+                        }
+                        <Divider />
+                    </div>
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <h3 className="text-base">Docs</h3>
+                            <h3 className="text-base text-white">Docs</h3>
                             <ul className="m-0 p-0 list-none flex flex-col space-y-2">
                                 <li>
                                     <a
                                         className="text-white hover:text-white flex items-center space-x-1"
                                         href={`https://github.com/PostHog/posthog.com/tree/master/contents${filePath}`}
                                     >
-                                        <svg
-                                            width="18"
-                                            height="18"
-                                            viewBox="0 0 18 18"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M11.086 4.06683L13.8881 6.8689L14.5567 6.20022L11.7547 3.39816L11.086 4.06683Z"
-                                                fill="white"
-                                            />
-                                            <path
-                                                d="M3.62558 11.5357L6.42725 14.3381L13.4016 7.3658L10.5999 4.56334L3.62558 11.5357Z"
-                                                fill="white"
-                                            />
-                                            <path
-                                                d="M15.6623 5.12968C16.1126 4.67936 16.1126 3.95886 15.6623 3.50855L14.4914 2.33773C14.0411 1.88742 13.2756 1.88742 12.8703 2.33773L12.2849 2.92314L15.1219 5.76012L15.6623 5.12968Z"
-                                                fill="white"
-                                            />
-                                            <path
-                                                d="M2.01767 15.487C1.97263 15.6221 2.01767 15.7572 2.10773 15.8472C2.15276 15.8923 2.24282 15.9373 2.33289 15.9373C2.37792 15.9373 2.42295 15.9373 2.46798 15.9373L5.84533 14.7214L3.23351 12.1096L2.01767 15.487Z"
-                                                fill="white"
-                                            />
-                                        </svg>
+                                        <Edit />
                                         <span>Edit this page</span>
                                     </a>
                                 </li>
@@ -71,30 +60,14 @@ export default function Footer({ contributors, filePath, title }) {
                                         className="text-white hover:text-white flex items-center space-x-1"
                                         href={`https://github.com/PostHog/posthog.com/issues/new?title=Docs feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
                                     >
-                                        <svg
-                                            width="18"
-                                            height="18"
-                                            viewBox="0 0 18 18"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M9.34524 13.071C8.53769 13.071 7.88086 13.7281 7.88086 14.5356C7.88086 15.3432 8.53769 16 9.34524 16C10.1528 16 10.8098 15.3432 10.8098 14.5356C10.8098 13.7281 10.1528 13.071 9.34524 13.071Z"
-                                                fill="white"
-                                            />
-                                            <path
-                                                d="M8.60145 12.5085H10.0893C10.1872 12.5085 10.272 12.4405 10.2929 12.3447L12.1858 3.75563C12.2001 3.69087 12.1828 3.62324 12.139 3.57335L10.8206 2.0711C10.7809 2.02588 10.7239 2 10.6638 2H8.0269C7.96681 2 7.90979 2.02588 7.87007 2.0711L6.55174 3.57335C6.50794 3.62324 6.49063 3.69087 6.50489 3.75563L8.39778 12.3447C8.41876 12.4405 8.50349 12.5085 8.60145 12.5085Z"
-                                                fill="white"
-                                            />
-                                        </svg>
-
+                                        <Issue />
                                         <span>Raise an issue</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-base">Community & support</h3>
+                            <h3 className="text-base text-white">Community & support</h3>
                             <ul className="m-0 p-0 list-none">
                                 <li>
                                     Join our{' '}

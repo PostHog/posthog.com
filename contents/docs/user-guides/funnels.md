@@ -14,9 +14,9 @@ There are many valuable use cases for this data:
  
 A funnel is a series of actions and/or events.
 
-## Learning Resources
+## Learning resources
 
-### Demo Video
+### Demo video
 
 If you'd like to watch a video about our Funnels feature, check out our demo video below. It is set to start on the Funnels section:
 
@@ -28,9 +28,7 @@ For a comprehensive tutorial on how funnels work, what you can use them for, and
 
 ![Tutorial Banner](../../images/tutorials/banners/funnels.png)
 
-<br />
-
-## Creating a Funnel
+## Creating a funnel
 
 ### Step 1: Navigate to 'Funnels'
 
@@ -38,7 +36,7 @@ Our 'Funnels' feature is located in 'Insights'. After navigating to 'Insights' o
 
 ![Funnels Page](../../images/tutorials/funnels/funnels-page.png)
 
-### Step 2: Adding Steps to Your Funnel
+### Step 2: Adding steps to your funnel
 
 Once you're on the 'Funnels' page, you can then start to create your funnel.
 
@@ -50,18 +48,17 @@ It's also worth noting how the PostHog funnels work in terms of what counts as a
 
 Then, based on that time range, PostHog will determine conversion based on if the user performed one action after the other _at any point during the time period_. That means that if my time range is set to 2 weeks, a user may perform step 1 on day 2 and step 2 on day 13 and it will still count as a conversion. 
 
-### Step 3: Calculating Funnel
+### Step 3: Calculating funnel
 
 Once you're satisfied with all the steps you've added, you can then click 'Calculate' to generate the funnel.
 
-### Filter Funnels by Time
+### Filter funnels by time
 
 You can also filter funnels by time intervals. By default, funnels will show actions completed over the last 7 days, but this can be changed by selecting the time interval next to 'Add to dashboard'
 
 ![funnels by time](../../images/04/funnels-by-time.gif)
-<br />
 
-## Funnel Drop-off User Breakdown
+## Funnel drop-off user breakdown
 
 We can go even further with PostHog – to see which users were in this funnel, and how each of them behaved:
 
@@ -69,7 +66,7 @@ We can go even further with PostHog – to see which users were in this funnel, 
 
 From here, it’s easy to click an individual user, to see their entire Events history – all you have to do is click the provided link.
 
-## Important Note on Funnels
+## Important note on funnels
 
 It is important to note that funnels calculate the drop off percentage between steps based on unique users *only*.
 
@@ -78,4 +75,3 @@ This means "action chains" are not calculated individually, but rather compiled 
 For example, if User X did Step 1 of a certain funnel 5 times, but then only did Step 2 a single time, this will still be shown as 100% conversion between the steps, instead of 20%. 
 
 This happens because the conversion on that step for the user was 100%, even if the *individual conversion per action* was not.
-

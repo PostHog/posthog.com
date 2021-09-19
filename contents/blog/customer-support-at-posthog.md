@@ -1,6 +1,6 @@
 ---
 date: 2021-06-15
-title: How We Do Customer Support At Our Open-Source DevTool Company
+title: How we do customer support at our open source devtool company
 rootPage: /blog
 sidebar: Blog
 showTitle: true

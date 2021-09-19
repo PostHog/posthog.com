@@ -22,7 +22,7 @@ export const SectionHeader = ({
     return (
         <>
             <Header className={titleClassName}>{title}</Header>
-            {leadText ? <p className={leadTextClassList}>{leadText}</p> : null}
+            {leadText ? <h5 className={leadTextClassList}>{leadText}</h5> : null}
         </>
     )
 }

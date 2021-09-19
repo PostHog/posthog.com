@@ -6,9 +6,8 @@ import Submenu from './Submenu'
 
 export default function MenuItem({ menuItem }) {
     const [hovered, setHovered] = useState(false)
-    const { title, url, sub } = menuItem
+    const { title, url, sub, classes = '' } = menuItem
     const breakpoints = useBreakpoint()
-
     const handleSubClick = () => {
         setHovered(!hovered)
     }
@@ -18,32 +17,33 @@ export default function MenuItem({ menuItem }) {
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="group w-full"
+            className="group lg:flex lg:justify-center"
         >
-            <span ref={referenceElement} className="flex justify-between items-center space-x-2">
+            <span ref={referenceElement} className="flex justify-between items-center">
                 <Link
                     onClick={breakpoints.md && sub && handleSubClick}
                     to={url}
-                    className="lg:opacity-50 opacity-100 group-hover:opacity-100 text-[15px] text-white hover:text-white lg:dark:text-white lg:dark:hover:text-white lg:text-almost-black lg:hover:text-almost-black transition-opacity"
+                    className={
+                        classes ||
+                        'relative font-semibold px-4 py-3 lg:py-2 text-[15px] dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
+                    }
                 >
                     {title}
                 </Link>
                 {sub &&
                     (breakpoints.md ? (
-                        <Plus
-                            render={(icon) => (
-                                <button className="flex-grow flex justify-end" onClick={handleSubClick}>
-                                    {hovered ? <Minus /> : icon}
-                                </button>
-                            )}
-                            open={hovered}
-                        />
+                        <button
+                            className="text-primary dark:text-primary-dark flex-grow flex justify-end"
+                            onClick={handleSubClick}
+                        >
+                            {hovered ? <Minus /> : <Plus />}
+                        </button>
                     ) : (
-                        <Chevron className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                        <Chevron className="text-gray mt-1 -ml-3" />
                     ))}
             </span>
 
-            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} />}
+            {sub && hovered && <Submenu referenceElement={referenceElement} menu={sub} parentURL={url} />}
         </li>
     )
 }

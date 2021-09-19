@@ -1,5 +1,5 @@
 ---
-title: Setting up PostHog EE
+title: Setting up Clickhouse for development
 sidebar: Handbook
 showTitle: true
 ---
@@ -22,6 +22,13 @@ If you're running into problems, such as Kafka connection errors, frontend not b
 yarn clear-ch-dev
 ```
 ### Option B. Running Python + Webpack locally
+
+Our SAML integration depends on the `xmlsec` package which requires a bunch of OS-level dependencies. These dependencies ship by default in the Docker integration, but if you're running the Python code on a `virtualenv`, you'll need to install them manually. Check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec). Here's the command you can run on macOS,
+
+```
+brew install libxml2 libxmlsec1 pkg-config
+```
+
 - Run all the services
   - Stop local postgres, kafka, clickhouse and zookeeper instances if you have them
   - Same for redis, though it doesn't really matter much

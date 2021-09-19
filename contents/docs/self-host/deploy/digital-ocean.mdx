@@ -45,9 +45,7 @@ doctl kubernetes cluster create posthog-cluster --count=2 --size="s-2vcpu-4gb" -
 
 After deploying PostHog to your Kubernetes cluster you can get the IP to connect to one of two ways:
 
-1. Navigate to the IP address of the load balancer created by Kubernetes using your web browser. You can grab this by using the DigitalOcean web console ([networking tab](https://cloud.digitalocean.com/networking/load_balancers)).
-2. If you have `kubectl` installed and configured for the cluster that PostHog is deployed to then run these commands to get your installation location:
-    <DOIPAddressSnippet />
+<DOIPAddressSnippet />
 
 Congrats, you have a working PostHog instance =)
 
@@ -67,9 +65,7 @@ It's [not yet possible to provide parameters to DigitalOcean](https://github.com
 
 As above, you can get the IP to connect to one of two ways:
 
-1. Navigate to the IP address of the load balancer created by Kubernetes using your web browser. You can grab this by using the DigitalOcean web console ([networking tab](https://cloud.digitalocean.com/networking/load_balancers)).
-2. If you have `kubectl` installed and configured for the cluster that PostHog is deployed to then run these commands to get your installation location:
-    <DOIPAddressSnippet />
+<DOIPAddressSnippet />
 
 #### 2. Set up DNS
 
@@ -157,7 +153,7 @@ After upgrading you can run the following to get the IP to access PostHog.
 
 <UpgradingSnippet />
 
-## Uninstalling the Chart
+## Uninstalling the chart
 
 To uninstall the chart using [Helm >= v3](https://helm.sh/) with the release name `posthog` in `posthog` namespace, run the following:
 ```console

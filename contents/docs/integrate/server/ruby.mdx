@@ -5,11 +5,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-This is an optional library you can install if you're working with Ruby.
+<VisitLibrary name="Ruby" to="https://github.com/PostHog/posthog-ruby" official />
 
-This page of the Docs refers specifically to the Official PostHog Ruby Library to capture and send events to any PostHog instance (including posthog.com).
-
-This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
+This is an optional library you can install if you're working with Ruby. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation 
 
@@ -31,7 +29,7 @@ posthog = PostHog::Client.new({
 
 You can find your key in the 'Project Settings' page in PostHog.
 
-## Making Calls
+## Making calls
 
 ### Capture
 
@@ -100,6 +98,8 @@ posthog.capture({
 
 ### Identify
 
+> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+
 Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
 like segment users by these properties.
 
@@ -142,7 +142,7 @@ posthog.alias({
 })
 ```
 
-### Sending Page Views
+### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
@@ -156,7 +156,7 @@ posthog.capture({
 })
 ```
 
-### Feature Flags
+### Feature flags
 
 > Note that to use feature flags you must specify `personal_api_key` when initializing PostHog.
 
@@ -186,6 +186,6 @@ posthog.reload_feature_flags()
 // Do something with feature flags here
 ```
 
-## Thank You
+## Thank you
 
 This library is largely based on the `analytics-ruby` package.

@@ -1,10 +1,10 @@
 ---
-title: Feature Flags
+title: Feature flags
 sidebar: Docs
 showTitle: true
 ---
 
-> For instructions on how to authenticate to use this endpoint, see [API Overview](/docs/api/overview).
+> For instructions on how to authenticate to use this endpoint, see [API overview](/docs/api/overview).
 
 PostHog provides you with an API endpoint to create and update your [feature flags](/docs/user-guides/feature-flags). This section refers to that endpoint specifically. 
 
@@ -21,14 +21,13 @@ If you're looking to use feature flags on your application, you can either use o
 
 ## Examples
 
-### Create Feature Flags
+### Create Feature flags
 
 ```shell
 POST /feature_flag/
 ```
 
 #### Data
-
 
 | Attribute | Type | Required | Default | Description |
 | --- | --- | --- | ------------------------- | ------------------------------------------------------- |
@@ -40,7 +39,7 @@ POST /feature_flag/
 | `personal_api_key` | String | Yes | | Your Personal API Key from the Project Settings page. |
 
 
-#### Example Request
+#### Example request
 
 ```bash
 curl -i -X POST \
@@ -53,7 +52,7 @@ curl -i -X POST \
 -L -v 'https://[your-instance].com/api/feature_flag/'
 ```
 
-#### Example Response
+#### Example response
 
 ```bash
 {
@@ -82,7 +81,7 @@ curl -i -X POST \
 }
 ```
 
-### Get the Details of a Flag
+### Get the details of a flag
 
 ```shell
 GET /feature_flag/123/
@@ -92,7 +91,7 @@ GET /feature_flag/123/
 
 To get the details of a given feature flag, pass its ID directly on the path. You can pass your Personal API Key as an HTTP header, and no additional data is required.
 
-#### Example Request
+#### Example request
 
 ```bash
 curl -i \
@@ -100,7 +99,7 @@ curl -i \
 -L -v "https://[your-instance].com/api/feature_flag/123/"
 ```
 
-#### Example Response
+#### Example response
 
 ```bash
 {
@@ -129,7 +128,7 @@ curl -i \
 }
 ```
 
-### Update the Details of a Flag
+### Update the details of a flag
 
 ```shell
 PATCH /feature_flag/123/
@@ -139,7 +138,7 @@ PATCH /feature_flag/123/
 
 Passing the ID of the flag directly in the path, include any values from the table shown under 'Create Feature Flags' that you wish to update. The `personal_api_key` is the only required field.
 
-#### Example Request
+#### Example request
 
 ```bash
 curl -i -X PATCH \
@@ -149,7 +148,7 @@ curl -i -X PATCH \
 -L -v 'https://[your-instance].com/api/feature_flag/123/'
 ```
 
-#### Example Response
+#### Example response
 
 ```bash
 {

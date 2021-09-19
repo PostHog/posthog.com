@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/nightOwl'
+import darkTheme from 'prism-react-renderer/themes/nightOwl'
+import lightTheme from 'prism-react-renderer/themes/nightOwlLight'
 import { getCookie, generateRandomHtmlId } from '../../lib/utils'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
 import { CopyOutlined } from '@ant-design/icons'
 import { Tooltip } from 'antd'
+import { layoutLogic } from 'logic/layoutLogic'
 
 interface CodeBlockProps {
     children: {
@@ -31,10 +33,9 @@ export const CodeBlock = (props: CodeBlockProps) => {
     const [hasBeenCopied, setHasBeenCopied] = useState(false)
     const [tooltipVisible, setTooltipVisible] = useState(false)
     const [copyToClipboardAvailable, setCopyToClipboardAvailable] = useState(false)
-
     const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
-
     const codeBlockId = generateRandomHtmlId()
+    const { websiteTheme } = useValues(layoutLogic)
 
     useEffect(() => {
         // Browser check - no cookies on the server
@@ -89,36 +90,37 @@ export const CodeBlock = (props: CodeBlockProps) => {
     }
 
     return (
-        <Highlight
-            {...defaultProps}
-            code={code || props.children.props.children.trim()}
-            language={language as Language}
-            theme={theme}
-        >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={{ ...style, padding: '20px' }} id={codeBlockId}>
-                    <Tooltip title="Copied!" visible={tooltipVisible}>
-                        {copyToClipboardAvailable ? (
-                            <CopyOutlined
-                                style={{
-                                    position: 'absolute',
-                                    right: 15,
-                                    color: hasBeenCopied ? '#9c9a9a' : '#fff',
-                                    transitionDuration: '1s',
-                                }}
-                                onClick={copyToClipboard}
-                            />
-                        ) : null}
-                    </Tooltip>
-                    {tokens.map((line, i) => (
-                        <div key={i} {...getLineProps({ line, key: i })}>
-                            {line.map((token, key) => (
-                                <span key={key} {...getTokenProps({ token, key })} />
-                            ))}
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
+        <div className="relative">
+            <Tooltip title="Copied!" visible={tooltipVisible}>
+                {copyToClipboardAvailable ? (
+                    <span className="text-primary dark:text-primary-dark absolute right-2 top-1">
+                        <CopyOutlined onClick={copyToClipboard} />
+                    </span>
+                ) : null}
+            </Tooltip>
+            <Highlight
+                {...defaultProps}
+                code={code || props.children.props.children.trim()}
+                language={language as Language}
+                theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
+            >
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre
+                        className={`${className} !bg-gray-accent-light dark:!bg-gray-accent-dark`}
+                        style={{ ...style, padding: '20px' }}
+                        id={codeBlockId}
+                    >
+                        {tokens.map((line, i) => (
+                            <div key={i} {...getLineProps({ line, key: i })}>
+                                {line.map((token, key) => {
+                                    const { className, ...other } = getTokenProps({ token, key })
+                                    return <span key={key} className={`${className} text-shadow-none`} {...other} />
+                                })}
+                            </div>
+                        ))}
+                    </pre>
+                )}
+            </Highlight>
+        </div>
     )
 }

@@ -12,9 +12,9 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 
 ## Our communication values
 
-1. **Assume Positive Intent.** Always coming from a position of positivity and grace.
-1. **Form An Opinion.** We live in different locations and often have very different perspectives. We want to know your thoughts, opinions, and feelings on things.
-1. **Feedback is Essential.** Help everyone up their game in a direct but constructive way.
+1. **Assume positive intent.** Always coming from a position of positivity and grace.
+1. **Form an opinion.** We live in different locations and often have very different perspectives. We want to know your thoughts, opinions, and feelings on things.
+1. **Feedback is essential.** Help everyone up their game in a direct but constructive way.
 
 ## Golden rules
 
@@ -104,6 +104,16 @@ GitHub Issues are useful when there isn't a specific code change that is being p
 
 However, it is still important to maintain focus when opening issues by defining a single specific topic of discussion as well as defining the desired outcome that would result in the resolution of the issue. The point is to not keep issues open-ended and to prevent issues from going stale due to lack of resolution. For example, a team member may open an issue to track the progress of a blog post with associated to-do items that need to be completed by a certain date (e.g. first draft, peer review, publish). Once the specific items are completed, the issue can successfully be closed.
 
+### Product definitions & decisions
+
+It's best practice to get feedback from other members of the team when making a product decision or defining a complex problem that needs to be solved. This may start with an Issue, but it's essential that these do not spiral out of control - as soon as an issue has more than 5 comments, it becomes difficult for someone to "catch up". To avoid this problem, when we're documenting a decision or a definition for a project or project, we should start with a Pull Request.
+
+You should start by adding a "request for change" markdown file into to a public repo (e.g. posthog/meta), here's a template (https://github.com/PostHog/meta/pull/19) and adding people you need feedback from as a reviewer. On the rare occasion that this cannot be public, create the PR in the product-internal repo.
+
+If you see an Issue which is spiraling out of control with comments, you are empowered to call this out and direct the owner of the Issue to move this to a PR.
+
+When a decision is fully aligned on, the PR should be merged.
+
 #### Keeping on top of reviews, issues and notifications
 
 Keeping track of everything that's happening in GitHub can be daunting, but it's important to make sure your team receives reviews and feedback on a timely manner.
@@ -112,6 +122,20 @@ To keep on top of this, we suggest going through issues where you've been mentio
 - [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and using filters to file them away.
 - [Using the GitHub notifier extension.](https://chrome.google.com/webstore/detail/notifier-for-github/lmjdlojahmbbcodnpecnjnmlddbkjhnn?hl=en)
 
+#### Tip for easy searching through everything
+
+To search all code, PRs and issues every written at PostHog you can search everything in the PostHog organization on Github. To do that can go to [github.com/posthog](https://github.com/posthog) and search in the top left corner.
+
+For extra convenience, you can also add this search as a 'search engine' in Chrome. That way you can type in `ph <tab>` and instantly find anything. To do that, follow these steps:
+
+1. Hit `command` + `,` in your browser
+1. Type `search`, find "manage search engines"
+1. Click "add" next to "other search engines"
+1. For "Search engine" type in `github posthog organization`
+1. For "keyword" type in `ph`
+1. For "url" copy in `https://github.com/search?q=org%3Aposthog+%s&type=issues`
+
+You can now type `ph` + `tab` into your browser and search issues directly
 
 ### Slack
 
@@ -146,11 +170,14 @@ Please avoid using presentations for internal use. They are a poor substitute fo
 
 ### Writing style
 
-1. We use American English as the standard written language in our public-facing comms, including this handbook.
+1. We use American English as the standard written language in our public-facing comms, including this handbook. This extends to date formats (September 4, 2021) and defaulting pricing to the US Dollar ($42).
 1. Do not use acronyms when you can avoid them. Acronyms have the effect of excluding people from the conversation if they are not familiar with a particular term.
+1. Common terms can be abbreviated without periods unless absolutely necessary, as it's more friendly to read on a screen. (Ex: _USA_ instead of _U.S.A._, or _vs_ over _vs._)
 1. We use the [Oxford comma](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
 1. Do not create links like "here" or "click here". All links should have relevant anchor text that describes what they link to. Using meaningful links is important to both search engine crawlers (SEO) and people with accessibility issues.
 1. We use sentence case for titles.
+1. When writing numbers in the thousands to the billions, it's acceptable to abbreviate them (like 10M or 100B - capital letter, no space). If you write out the full number, use commas (like 15,000,000).
+
 
 ## Internal meetings
 

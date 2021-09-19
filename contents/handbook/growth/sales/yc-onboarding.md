@@ -12,7 +12,7 @@ Our YC deal provides the following:
 
 One free year of PostHog Cloud with up to 10 million events per month *or* a one-year enterprise license if they want to self-host PostHog.
 
-Companies also get a \$50 gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
+Companies also get a $50 gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
 
 For YC W21 companies, we also offer:
 
@@ -26,7 +26,7 @@ For YC W21 companies, we also offer:
 
 ### Inbound request sources
 
-YC companies can reach out to us in many ways. Ideally we will steer them towards the [dedicated YC Onboarding page](/yc-onboarding), but they may also reach out to us on _yc@posthog.com_ or _ycdeal@posthog.com_ (as well as individual emails and _hey@posthog.com_).
+YC companies can reach out to us in many ways. Ideally we will steer them towards the [dedicated YC Onboarding page](/yc-onboarding), but they may also reach out to us on _[yc@posthog.com](mailto:yc@posthog.com)_ or _[ycdeal@posthog.com](mailto:ycdeal@posthog.com)_ (as well as individual emails and _[hey@posthog.com](mailto:hey@posthog.com)_).
 
 Having received a demo request through one of these sources, schedule an appropriate 1h slot and make sure at least one person is certainly able to attend it.
 
@@ -91,10 +91,13 @@ We provide the standard [AirPods](https://www.apple.com/shop/product/MV7N2AM/A/a
 This is where we buy from, in descending order of preference:
 
 1. Buy directly from that country's Apple or Allbirds site. This usually applies to the USA, UK and EU. For Apple, use your Brex card via [this referral link](https://apple.sjv.io/c/2279798/524650/7613?subId1=VXNlcjpjdXVzZXJfY2tlY28zN29zMDAyMTAxcmF5OWY4c201OA==&sharedId=RewardsMarketplace) as it gets us cashback. 
-2. Send an Amazon gift card for $100 equivalent from their local store.
-3. If Amazon is not available in their country, ask the user to buy and send us a receipt, and we will reimburse to their bank account.
+2. If you can't place an order to that country for credit card reasons (India and Mexico are common ones), email the customer to offer a $100 voucher for the PostHog merch store instead. Alternatively, you can ask if they have a US address we can ship to instead. 
+
+We don't offer alternatives like Amazon vouchers or VISA gift cards - we have tried these in the past but they add a bunch of extra complexity to us. 
 
 When ordering from Apple, put in your email address as the main one for the order, and then add the user's email address under 'Share delivery updates' so they can easily track their order. For Allbirds, you will need to put in your email address and then just forward the receipt to the user for them to track. You should not just put in their email address for the order, as you won't then get a copy of the receipt for expenses. 
+
+Finally, don't forget to forward your receipts to receipts@brex.com in the usual way. 
 
 ## Current responsibilities
 

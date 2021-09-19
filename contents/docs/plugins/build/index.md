@@ -48,7 +48,7 @@ export function processEvent(event, meta) {
 }
 ```
 
-Note how you need to return the event to ensure the chain continues. If you return `null` or `undefined`, you're telling us to discard this event. For example, the [Schema Enforcer Plugin](https://github.com/PostHog/posthog-schema-enforcer-plugin) does precisely this for events that don't adhere to a schema.
+Note how you need to return the event to ensure the chain continues. If you return `null` or `undefined`, you're telling us to discard this event. For example, the [Schema enforcer plugin](https://github.com/PostHog/posthog-schema-enforcer-plugin) does precisely this for events that don't adhere to a schema.
 
 `onEvent` is what you'd use to do something else, like exporting to S3. For example, the below plugin logs the current URL on $pageview type events:
 
@@ -69,7 +69,7 @@ As you can imagine, this plugin is pretty useless, since PostHog can already sho
 
 That's all for the crash course. There's a lot you can do with plugins, like running specific jobs every hour, sending events elsewhere via HTTP endpoints, modifying events coming in before they're stored, etc. 
 
-## Next Steps
+## Next steps
 
 1. For in-depth information on all the special functions which allow you to do this, check out [the developer reference](/docs/plugins/build/reference)
 2. For building your own plugin from start to finish, check out [the tutorial](/docs/plugins/build/tutorial)

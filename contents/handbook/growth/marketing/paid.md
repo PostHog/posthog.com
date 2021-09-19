@@ -22,7 +22,8 @@ Bear in mind a lot of our users will use ad-blocking of some kind - this is why 
 
 ## Brand guidelines
 
-- Always follow our [messaging framework](/handbook/growth/marketing/messaging_framework) to ensure consistency across channels.
+- Always follow our [messaging framework](/handbook/growth/marketing/messaging_framework) to ensure consistency across channels as a general guide. 
+- For specific messaging to use in copy, we have put together [a sheet of our value propositions](https://docs.google.com/spreadsheets/d/1VVLqk8xiKPj_rzDDhVA2eMFx7ENlhg9WnYDj2rkd_E4/edit#gid=1752905631) and benefits. 
 - We have [a handy set of assets](https://www.figma.com/file/MRmFaOSXV1zYTGnOODGyCc/Social-Media?node-id=1307%3A13884) that you can use, together with guidelines for each platform. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
 
 ## Channels

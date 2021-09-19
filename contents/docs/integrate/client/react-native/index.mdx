@@ -1,15 +1,13 @@
 ---
-title: React Native Library
+title: React Native library
 sidebarTitle: React Native
 sidebar: Docs
 showTitle: true
 ---
 
-[Click here](https://github.com/PostHog/posthog-react-native) for the PostHog React Native library. This is an optional library you can install if you're working with React Native. 
+<VisitLibrary name="React Native" to="https://github.com/PostHog/posthog-react-native" />
 
-This page of the Docs refers specifically to the Official PostHog React Native Library to capture and send events to any PostHog instance (including posthog.com).
-
-This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, 
+This is an optional library you can install if you're working with React Native. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, 
 making it perfect to use in any part of your mobile app.
 
 ## Installation
@@ -27,6 +25,8 @@ import ReactNativeConfigure from './snippets/configure.mdx'
 ## Making calls
 
 ### Identify
+
+> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 import ReactNativeIdentify from './snippets/identify.mdx'
 
@@ -93,9 +93,9 @@ import PostHog from 'posthog-react-native'
 PostHog.reset()
 ```
 
-### Opt In/Out
+### Opt in/out
 
-To Opt In/Out of tracking, use the following calls:
+To Opt in/out of tracking, use the following calls:
 
 ```javascript
 import PostHog from 'posthog-react-native'
@@ -125,6 +125,6 @@ PostHog.screen("Dashboard", {
 })
 ```
 
-## Thank You
+## Thank you
 
 This library is largely based on the `analytics-react-native` package.

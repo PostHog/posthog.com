@@ -12,7 +12,7 @@ categories: ceo-diaries
 
 We said we’d be happy with 500 stars, pleased with 700 and delighted with 1,000. Five days later, we’re over 800 (1 week after publishing the repo). More importantly, we had generally very positive feedback, well over 200 sign ups, and several businesses that are heavily integrating us into how they work every day.
 
-We spent \$1K on marketing the repo early on, which got the first few stars and helped to populate it. Later on, Hacker News going well meant we got onto the GitHub trending main page, which got us more users. Pro-tip for next time, make sure you have tagged your repo appropriately – we had niche tags, and it was only once we changed them that we got discovered. We think the main list is manually curated.
+We spent $1K on marketing the repo early on, which got the first few stars and helped to populate it. Later on, Hacker News going well meant we got onto the GitHub trending main page, which got us more users. Pro-tip for next time, make sure you have tagged your repo appropriately – we had niche tags, and it was only once we changed them that we got discovered. We think the main list is manually curated.
 
 Our current focus is to make sure that we retain these users. Any publicity leads to an initial rise in traction, but the key factor is if people stick around once they’ve signed up. That way, every piece of marketing we do adds permanent value.
 

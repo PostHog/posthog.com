@@ -1,8 +1,13 @@
 ---
-title: Developing Locally
+title: Developing locally
 sidebar: Docs
 showTitle: true
 ---
+
+<blockquote class="warning-note">
+    ⚠️ Do not use <code>release-*</code> patterns in your branches unless pushing a release as these branches have
+    special handling related to releases.
+</blockquote>
 
 <HiddenSection headingType='h2' title='Using virtualenv' defaultIsOpen>
 
@@ -34,7 +39,7 @@ docker-compose -f docker-compose.dev.yml up -d redis db
 > **Friendly tip:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:` likely Docker Engine isn't running.
 
 > **Friendly tip:** You might need `sudo`, see more [manage docker as non-root](https://docs.docker.com/engine/install/linux-postinstall).
-    
+
 </HiddenSection>
 
 <HiddenSection headingType='h4' title='Without Docker' id='dbs-without-docker'>
@@ -114,13 +119,20 @@ python3 -m pip install --upgrade pip
 
 then retry the requirements.txt install.
 
-5. Install dev requirements:
+5. If you want to fully test all our features, you'll need to install a few dependencies for SAML to run properly. If you're on macOS run the command below, otherwise check out the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
+
+```
+brew install libxml2 libxmlsec1 pkg-config
+pip install python3-saml==1.12.0
+```
+
+6. Install dev requirements:
 
 ```bash
 pip install -r requirements-dev.txt
 ```
 
-6. Run migrations:
+7. Run migrations:
 
 ```bash
 DEBUG=1 python3 manage.py migrate
@@ -128,14 +140,14 @@ DEBUG=1 python3 manage.py migrate
 
 > **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
-7. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
+8. Make sure you have [Yarn installed](https://classic.yarnpkg.com/en/docs/install/):
 
 ```bash
 # macOS (Homebrew)
 brew install yarn
 ```
 
-8. Make sure you have [NodeJS installed](https://nodejs.org/en/download/):
+9. Make sure you have [NodeJS installed](https://nodejs.org/en/download/):
 
 ```bash
 # macOS (Homebrew)
@@ -144,7 +156,7 @@ brew install node
 
 > **Note:** For Apple Silicon support, please use NodeJS >= v15.0
 
-9. Start the backend, worker, and frontend simultaneously with:
+10. Start the backend, worker, and frontend simultaneously with:
     ```bash
     ./bin/start
     ```
@@ -180,6 +192,8 @@ docker-compose -f docker-compose.dev.yml up
 ```
 
 > **It may take several minutes to build the system for the first time**. If you see an error message once your app has launched saying the front-end is not built, please wait for the Yarn dependencies to be installed (the logs will output a `✔ Webpack: Compiled successfully` message once the frontend is ready).
+
+> By default, Docker images include all dependencies for full SAML support. If you want to run your Docker image without these dependencies, please set either `SAML_DISABLED=1` environment variable or `saml_disabled=1` build argument at build time.
 
 </HiddenSection>
 
@@ -238,13 +252,11 @@ DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
 2. Run `./bin/start-worker`
 3. Set some breakpoints
 4. In the top toolbar, select the config you just created and click the green bug icon.
-    - This runs `python manage.py runserver` with extra parameters that enable debugging.
 
-<br />
-<hr />
+-   This runs `python manage.py runserver` with extra parameters that enable debugging.
 
 ## Testing ingestion and feature flags
 
 > **Note:** When developing locally and setting environment variable `DEBUG=1`, the local server is treated as what would be "PostHog Cloud". This means that all analytics that are captured from the usage of PostHog are sent to this same local instance (can be quite useful to generate test data too). In addition, feature flags are considered based on the local instance.
 
-Add feature flags to your [local instance](http://localhost:8000/feature_flags/new) to use them while developing locally. For example, let's say you want to test the using the `my-feature-flag` flag locally - you would create a new flag with the name `my-feature-flag` and release that flag to the user account used for testing. Learn more about using feature flags in the [Feature Flags User Guide](https://posthog.com/docs/user-guides/feature-flags).
+Add feature flags to your [local instance](http://localhost:8000/feature_flags/new) to use them while developing locally. For example, let's say you want to test the using the `my-feature-flag` flag locally - you would create a new flag with the name `my-feature-flag` and release that flag to the user account used for testing. Learn more about using feature flags in the [Feature Flags user guide](//posthog.com/docs/user-guides/feature-flags).

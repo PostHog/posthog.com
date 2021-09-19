@@ -6,14 +6,14 @@ showTitle: true
 
 This tutorial explains the development workflow and best practices, using an example 'Hello World' plugin. We go from zero to publishing your plugin in the official PostHog repository.
 
-## Pre-Requisites
+## Prerequisites
 
 1. A self-hosted PostHog instance (or a local development environment)
 1. Some knowledge of JavaScript (or TypeScript)
 
-## The Plugin
+## The plugin
 
-Every plugin begins with either the PostHog Plugin [Source Editor](#using-the-plugin-source-editor), or a new GitHub repository. In both cases, our plugin source code will look like this:
+Every plugin begins with either the PostHog plugin [source editor](#using-the-plugin-source-editor), or a new GitHub repository. In both cases, our plugin source code will look like this:
 
 ```js
 /* Runs on every event */
@@ -43,17 +43,18 @@ And our config would look like:
 ```
 
 For information on what code to write and what special functions to use, check out [the overview](/docs/plugins/build/overview) and [the developer reference](/docs/plugins/build/reference).
-### Using the Plugin Source Editor
 
-Go to Plugins -> Advanced Tab -> Plugin Editor -> Start Coding.
+### Using the plugin source editor
 
-![Plugin Editor Location](../../../images/plugins/plugin-editor-location.png)
+Go to Plugins -> Advanced tab -> Plugin editor -> Start coding.
+
+![Plugin editor location](../../../images/plugins/plugin-editor-location.png)
 
 Then, click on "Edit Source", and you're good to go. Copy your code and config into the editor, and you're ready to [test the plugin.](#testing)
 
-### Using a GitHub Repository
+### Using a GitHub repository
 
-We have a [GitHub Template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) which helps you create a new repository with all the right files. There are only two files which make up the entire plugin: the `index.js` and `plugin.json`. Your code goes into `index.js`, and your configuration goes into `plugin.json`.
+We have a [GitHub template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) which helps you create a new repository with all the right files. There are only two files which make up the entire plugin: the `index.js` and `plugin.json`. Your code goes into `index.js`, and your configuration goes into `plugin.json`.
 
 Other than this, there's the `index.test.js` file for tests, and `package.json` for package dependencies and metadata.
 
@@ -61,11 +62,11 @@ Remember to update `package.json` with the appropriate metadata, like name, desc
 
 Once you've written the code in this new repository, you can run it by installing it locally in PostHog. [See testing for more information.](#testing)
 
-#### Plugin Naming Conventions
+#### Plugin naming conventions
 
 When creating your repository, follow the naming convention of `posthog-<plugin-name>-plugin`. For example, the hello world plugin repository would be called `posthog-hello-world-plugin`.
 
-### Converting a Source Plugin to a GitHub Repository
+### Converting a source plugin to a GitHub repository
 
 If you wish to submit your plugin to the official repository, you need to convert it into a GitHub repository. The easiest way to do this is to start with [the plugin template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
 
@@ -75,10 +76,10 @@ If you wish to submit your plugin to the official repository, you need to conver
 
 For now, the best way to test plugins is to install them locally. 
 
-- If you're writing a plugin in the Plugin Source Editor, this is as easy as clicking "Save".
+- If you're writing a plugin in the Plugin source editor, this is as easy as clicking "Save".
 - If you're writing a plugin in a GitHub repository, install it locally using the "Install Local Plugin" option in the Advanced Tab.
 
-![Install Plugin Location](../../../images/plugins/install-plugin-location.png)
+![Install plugin location](../../../images/plugins/install-plugin-location.png)
 
 This allows you to tweak your plugin and see that everything works fine.
 
@@ -88,7 +89,7 @@ Plugins can make use of the JavaScript `console` for logging and debugging.
 
 These logs can be seen on the 'Logs' page of each plugin, which can be accessed on the 'Plugins' page of the PostHog UI.
 
-## Publishing Your Plugin
+## Publishing your plugin
 
 There are 4 ways to use plugins you build:
 
@@ -99,7 +100,7 @@ There are 4 ways to use plugins you build:
     This can be configured in 'Settings' -> 'Project Plugins'.
 1. Submit it to the official repository. [See below](#submitting-your-plugin) 
 
-## Submitting Your Plugin
+## Submitting your plugin
 
 If you wish to, you can contribute back to the PostHog community by submitting your plugin to the [official Plugin Repository](/plugins). This means everyone else can use your plugin, too!
 

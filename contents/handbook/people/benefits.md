@@ -60,6 +60,12 @@ Ideally, we would like to meet up in person at twice a year. The team was able t
 
 For any work-related travel, we use [Project Wren](https://www.wren.co/) for carbon offsetting. 
 
+### Support open-source projects
+
+The PostHog platform wouldn't be possible without open-source software. We are standing on the shoulders of giants. As such, we feel it's important to support the software we benefit from through giving each team member a $100/month budget to provide support to open-source projects.
+
+For more information see [open-source contributions](/handbook/people/spending-money#open-source-contributions).
+
 ### Team socials
 
 As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our offsites.

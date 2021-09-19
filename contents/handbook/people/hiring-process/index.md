@@ -15,8 +15,9 @@ Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity)
 
 The following page outline how we hire here at PostHog. 
 
-> This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [operations](/handbook/people/hiring-process/operations-hiring) and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
+> This page outlines the hiring process we use internally. We have detailed pages about our [design](/handbook/people/hiring-process/design-hiring), [engineering](/handbook/people/hiring-process/engineering-hiring), [marketing](handbook/people/hiring-process/marketing-hiring) [operations](/handbook/people/hiring-process/operations-hiring), [developer relations](/handbook/people/hiring-process/devrel-hiring), and [executive hiring](/handbook/people/hiring-process/exec-hiring) in the sidebar. 
 
+All of our recruiting is done in-house, so we do not work with external agencies for any of our roles currently. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
 
 ### Deciding to hire
 
@@ -88,7 +89,7 @@ Someone you have a personal or professional relationship with to confidently say
 *   Otherwise, Send Eltje their CV and contact details. If you don't have their resume, please include a link to their LinkedIn profile.
 *   If they have applied themselves already, let Eltje know within 48 hours of them applying.
 
-**Referral payout process:** 
+**Referral payouts** 
 
 The bonus date is 3 months from the new team member's start date and will be processed as part of payroll (you might be liable for income tax on the bonus). 
 
@@ -119,8 +120,6 @@ If we receive an application via email or if someone contacts us through a non-W
 *   Forward their email onto our dedicated Workable email address - this is the most effective option.
 *   If you think they are a strong candidate but they didn't email, introduce them directly to us via our careers email address.
 *   As a last resort, ask them to apply via the relevant link on our [Careers page](https://posthog.com/careers) - this is the least preferred option as it has the highest likelihood of a candidate dropping out. Only use this option for high volume roles. You should say something like "Thank you for your interest in PostHog! Can I please ask you to apply via our Careers page? We receive hundreds of applications every week, and this will ensure that we have all your details on our system."
-
-
 
 ## Sourcing
 
@@ -201,6 +200,8 @@ We will pay the candidate their 'normal day rate.' If they have done contracting
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. The task is generally designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize. 
 
 There will also be someone having a casual chat with the candidate. This person is the bar-raiser. The bar-raiser is here to qualify that everyone is truly excited about the candidate and that they're an example of us believing in talent compounds. Everyone should still think this way - or they should be clear in why they don't feel like this as part of their feedback.
+
+Overall, the candidate should aim to spend at least 80% of their time and energy on the task and less than 20% on meeting people, as we will base our decision on the output of the day. 
 
 In advance of the SuperDay, we will need to do some additional prep to ensure that the candidate has a great experience:
 

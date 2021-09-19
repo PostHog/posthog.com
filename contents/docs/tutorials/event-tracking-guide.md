@@ -1,20 +1,12 @@
 ---
-title: Complete Guide to Event Tracking 
+title: Complete guide to event tracking 
 sidebar: Docs
 showTitle: true
 ---
 
-<small class="note-block centered">_Estimated Reading Time: 7 minutes ☕☕_</small>
-
-<br />
-
-<span class="larger-image">
+_Estimated reading time: 7 minutes_ ☕☕
 
 ![Actions banner image](../../images/tutorials/banners/actions.png)
-
-</span>
-
-<br />
 
 One of the features we're very proud of at PostHog is event autocapture.
 
@@ -28,13 +20,13 @@ Second, autocapture is a general solution that provides value for most users, bu
 
 This tutorial will address these two points, walking you through how to create actions and send relevant custom events step-by-step, so you can make the most out of PostHog.
 
-### Pre-Requisites
+### Prerequisites
 
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
 
-### Sorting Through Your Events with Actions
+### Sorting through your events with Actions
 
 With the goal of making it easier to sort through your events, PostHog introduced the concept of [actions](/docs/user-guides/actions), which are a way to tag and combine events you care about. They are an important part of other features in PostHog, such as Cohorts. <!-- Link to Cohorts Tutorial Here -->
 
@@ -44,11 +36,11 @@ Not only that, you can also create actions based on the URL where an event happe
 
 There are two main reasons for creating actions:
 
-**1. Tagging events that you especially care about**
+#### 1. Tagging events that you especially care about**
 
 Filter out the noise from all your events to make it easier for you to execute your analytics processes.
 
-**2. Combining multiple events into one action**
+#### 2. Combining multiple events into one action**
 
 Let's say you have multiple sign up buttons spread across your website. For some types of analysis it could be useful to know which specific button was clicked, however, it might also be the case that you just care that the user signed up, irrespective of what they clicked to do so.
 
@@ -80,18 +72,17 @@ Lastly, you can of course create actions from the 'Actions' page under 'Events':
 
 ![Actions page image](../../images/features/actions/actions-page.png)
 
-
-**Action Options**
+#### Action options
 
 Visit our [dedicated actions page](/docs/user-guides/actions/) for a comprehensive explanation of all the options available when creating an action.
 
-### Using Custom Events to Track Advanced Behaviors 
+### Using custom events to track advanced behaviors 
 
 Now that we've learned how to sort through events, let's go through how to create events that PostHog doesn't automatically capture for you.
 
 Custom events can be created from any of our [libraries](/docs/integrate/overview), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. We recommend looking through our libraries and only using our API if there isn't a suitable library for you, since using our libraries ensure you are always up-to-date.
 
-**Using JavaScript Event Listeners to Track User Focus and Exceptions**
+#### Using JavaScript event listeners to track user focus and exceptions
 
 Frontend JS is heavily event-based by nature, a paradigm that pairs up well with PostHog events.
 
@@ -124,7 +115,7 @@ These exceptions can then be correlated with [feature flags](/docs/user-guides/f
 
 Essentially, it's entirely up to you what events you capture and what properties you pass to them. You can also add more complex logic to determine when to trigger an event, as well as what properties to pass to it.
 
-**Using Backend Libraries to Track Function Calls and HTTP Status Codes**
+#### Using backend libraries to track function calls and HTTP status codes
 
 Custom events are not limited to your frontend, however! You can also send events from your backend, which is very useful for going deeper into how your app is being used. 
 
@@ -169,7 +160,7 @@ m.NotFound(func(req *http.Request) string) {
 
 Once again, you can track anything that you like, and you can do so with any of our 10+ [integrations](/docs/integrate/overview), as well as our [API](/docs/api).
 
-**Using custom events in PostHog**
+#### Using custom events in PostHog
 
 Custom events in PostHog are treated just like any other event. 
 
@@ -177,21 +168,14 @@ You will be able to see them in the events table as well as select them for your
 
 No extra setup is required, just start sending events and watch them flow in!
 
-<br />
+## **Recap**
 
-<div class='small-inner-text'>
+To make the most out of PostHog, you should:
 
-> ##### **Recap**
->
-> To make the most out of PostHog, you should:
->
-> - Create actions from your events
->   - Actions work retroactively and can tag one or more events
->   - You can easily create actions with our toolbar
->
-> - Send custom events
->   - Custom events let you track exactly what you care about in your product
->   - They can be captured from any of our 10+ integrations
->   - You can use them in PostHog just like autocaptured events
-
-</div>
+- Create actions from your events
+  - Actions work retroactively and can tag one or more events
+  - You can easily create actions with our toolbar
+- Send custom events
+  - Custom events let you track exactly what you care about in your product
+  - They can be captured from any of our 10+ integrations
+  - You can use them in PostHog just like autocaptured events

@@ -9,7 +9,7 @@ Our mission is to “Increase the number of successful products in the world”.
 
 We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recordings, feature flags and many more features. Within a year we had thousands of customers using us and we started generating revenue.
 
-Our next step on our journey is to prove a deeper level of product-market fit with 5 reference customers. Today we're closest to product market fit with products which need to self-host and are in the growth phase of their lifecycle; they need us to absolutely "Nail Funnels" in order to make their products successful.
+Our next step on our journey is to prove a deeper level of product/market fit with 5 reference customers. Today we're closest to product market fit with products which need to self-host and are in the growth phase of their lifecycle; they need us to absolutely "Nail Funnels" in order to make their products successful.
 
 ### Context
 
@@ -27,7 +27,7 @@ The proposed strategy below focuses on a long term direction and a shorter term 
 **_“Increase the number of successful products in the world”_**
 
 
-### Long Term Vision (for 2023)
+### Long-term vision (for 2023)
 
 **_“Everyone building a product has a clear path to making it successful without losing control of their data”_**
 
@@ -38,21 +38,17 @@ PostHog will surface this data at the right time to anyone involved in building 
 It will be a “no brainer” for anyone to use PostHog with any product they are building.
 
 
-### Target Audience (for 2021)
+### Target audience (for 2021)
 
 Our customers are a combination of users, businesses and the products themselves. In order to understand where we should focus our efforts, below is a proposed breakdown of our target audience based on attributes of a product. 
 
-**Product Data Protection Level**
-
-
+**Product data protection level**
 
 *   **Bespoke:** Product data needs to be stored on bespoke infrastructure (e.g. not AWS, GCP) controlled by the owner, they may also have other bespoke requirements around dedicated support, SLAs and limitations on services communicating outside their network
 *   **Controlled:** Product data must be stored on infrastructure controlled by the owner on standard infrastructure (e.g. AWS, GCP, etc)
 *   **Cloud:** Product data must be secure but can be stored on infrastructure owned by PostHog
 
-**Product Lifecycle Stage**
-
-
+**Product lifecycle stage**
 
 *   **Introduction:** A new product with a small number of early adopters using it, yet to achieve product market fit
 *   **Growth:** A product which has found initial product market fit with a limited audience and focused on expanding their reach
@@ -62,7 +58,7 @@ Our customers are a combination of users, businesses and the products themselves
 <table>
   <tr>
    <td rowspan="4" >
-<strong>Data Protection Level</strong>
+<strong>Data protection level</strong>
    </td>
    <td><strong>Bespoke</strong>
    </td>
@@ -114,26 +110,22 @@ Our customers are a combination of users, businesses and the products themselves
   <tr>
    <td>
    </td>
-   <td colspan="5" ><strong>Product Lifecycle Stage</strong>
+   <td colspan="5" ><strong>Product lifecycle stage</strong>
    </td>
   </tr>
 </table>
 
 
-**Why focus on Controlled Data / Growth Products?**
+**Why focus on controlled data / growth products?**
 
 There are a number of reasons to focus on these types of products:
-
-
 
 1. We have early validation that we have a unique advantage over competitors for businesses requiring controlled data because of our open source approach
 2. We’re seeing early traction in this segment: “Driving activation through funnel optimization” is the primary activity for most growth products, today our “funnels” feature has the strongest engagement (49% more discovered learnings than trends, with a similar number of unique users)
 3. If successful at getting to PMF with this focus segment; PostHog will move into this segment ourselves, this puts us a step ahead when it comes to growth since we will be able to validate our product, move extremely fast and leverage the benefits directly
 4. Products in this phase **need** great analytics to be successful, products in the introduction phase rely more on qualitative data from early adopters (which we’re not well-positioned to solve today)
 
-**What are the core needs for Controlled Data / Growth Products?**
-
-
+**What are the core needs for controlled data / growth products?**
 
 1. We need to keep our data on our own infrastructure to protect our customers
 2. We need to optimize our onboarding funnel to grow our product
@@ -142,7 +134,7 @@ There are a number of reasons to focus on these types of products:
 5. We need analysis to be fast to keep pace with our growing business
 
 
-### First Milestone (Now until Early August)
+### First milestone (now until early August)
 
 In order to achieve product market fit with this segment we need to start by solving a limited number of problems exceptionally well for a small number of customers (5) and then expand.
 
@@ -151,8 +143,6 @@ The proposed timeline for the first milestone coincides with the next board meet
 These goals and key results are suggestions for now, teams across the company should be empowered to jointly identify, set and achieve their own goals to optimize for overall progress  towards our mission.
 
 **Goals**
-
-
 
 *   **We have 5 reference customers in our focus segment**
     *   **Setting up and maintaining PostHog continuously on customer controlled infrastructure is fast and easy**
@@ -171,20 +161,19 @@ To get 5 reference customers in the controlled data / growth product segment we 
 
 “Nail Funnels”
 
-### Milestone 2 (Early August Onwards)
+### Milestone 2 (Early August onwards)
 
 After nailing funnels, our primary focus should transition to _Diagnosing Causes_, since our customers will now be able to understand when problems are happening with their nailed funnels but to address these issues they must go one step deeper and understand why they are occurring.
 
 In parallel we should spin-up evergreen investments around growth and our core platform (Performance, Reliability and Extensibility) to ensure we are reaching as many organizations as possible (increasing the number of successful products in the world) and so we don’t lose trust with existing users due to issues underpinning our platform.
 
-**One Sentence Version**
+**One sentence version**
 Nailing funnels means people will find problems with their products, next we need to enable them to _Diagnose Causes_ so they can fix these problems and make their product successful.
 
-**Two Word Version**
+**Two word version**
 Nail Diagnosis
 
-## Why should we focus on Diagnosing Causes?
-
+## Why should we focus on diagnosing causes?
 
 * Our current focus on funnels is generating significant demand from users for going deeper, to understand why people are and are not successful (we’re seeing a number of customer requests in this direction)
 * We currently have a number of tools in our suite (e.g. sessions, trends, paths) that can be evolved and tightly integrated to enable our users to go deeper and understand why issues are occurring
@@ -194,7 +183,6 @@ Nail Diagnosis
 ## What are the needs of our target audience?
 
 At a very high level these are the core needs to solve for and some examples of what that might look like in practice.
-
 
 <table>
   <tr>
