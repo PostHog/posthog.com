@@ -22,17 +22,17 @@ You learn faster, and thus help PostHog perform better by getting what you're wo
 
 ## Everyone codes
 
-...although this doesn't mean everyone has to be a software developer, and not everyone needs experience in this before they join.
+...although this doesn't mean everyone has to be a software developer, and not everyone needs experience in this before they join. Our platform's adoption starts with developers using our open source project, thus we use GitHub to share most of our work publically, and to build a large community of technical users.
 
-Our platform is built for developers, and we use GitHub to build a large community of technical users. Being able to do the basics of shipping, no matter your role, helps understand the people who we're building for and it helps empower teams outside of engineering with greater context.
-
-Whether you're a designer or you're in operations, we will encourage and help you to be able to make basic changes to our website and docs on GitHub.
+No matter your role, being able to use the basics of GitHub helps you understand our audience. Beyond that, we'll encourage you to build your technical skill, rather than delegating more challenging tasks to others, so you become a more effective contributor.
 
 ## Step on toes
 
-PostHog is driven by context-based leadership. We'll explain what we need to achieve, but the reason we hire the best people is that they know how to get us there.
+We have ambitious goals. This means people need to pick up what they know is most important at any time, not what they feel their job title means they are allowed to do.
 
-We expect you to pick out the very most important thing you can think of, and work on that. It is *not* ok to follow instructions blindly - not that you're likely to receive instructions in any case. We judge your performance based on the results you deliver overall. You'll make a lot of mistakes along the way - and that's ok! What matters is that you're making mistakes quickly, iterating, and getting better over time.
+We expect you to pick out the very most important thing you can think of, and work on that. Discard plans as you see fit.
+
+We judge your performance based on the impact you deliver overall, no matter what your role.
 
 ## Talent compounds
 
@@ -42,8 +42,8 @@ In return, you get to work with others producing the best work of their careers.
 
 We are a team, not a family. This means we have very ambitious goals, [pay top of market](/handbook/people/compensation), offer [exceptional benefits](/handbook/people/benefits), and do everything we can to provide an environment for you to do your best work. Often this means everyone, [especially managers](/handbook/company/management), getting out of your way. It's also [not ok to let your teammates fail](/handbook/company/culture/#dont-let-others-fail). We expect everyone to provide direct feedback, to help everyone perform at their best. We pay [generous severance](/handbook/people/compensation#severance) if things aren't working out.
 
-## Bias for impact
+## Bias for action
 
 Think a change should be made? Then make it.
 
-Most decisions are reversible, so a (slow) consensus-building culture is suboptimal. We'll perform better by taking 2 rapid steps forward, and 1 back, then not progressing at all.
+Most decisions are reversible, so a culture that defaults to (slow) consensus-building is suboptimal. We'll perform better by taking 2 rapid steps forward, and 1 back, than by not progressing at all.
