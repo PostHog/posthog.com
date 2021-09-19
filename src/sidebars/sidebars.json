@@ -764,6 +764,10 @@
                     "url": "/docs/tutorials/retention"
                 },
                 {
+                    "name": "Setting up deep dive acquisition dashboards",
+                    "url": "/docs/tutorials/taxonomy-acquisition"
+                },
+                {
                     "name": "Tracking single page apps",
                     "url": "/docs/tutorials/spa"
                 },
