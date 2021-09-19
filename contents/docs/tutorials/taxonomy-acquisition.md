@@ -16,7 +16,7 @@ so your product and growth teams can answer the most important questions about u
 To follow this tutorial along, you need to:
 
 1. Have [deployed PostHog](/docs/deployment).
-1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate/overview), via pushing from a data warehouse, or our [API](/docs/api/overview).
+1. Have started receiving events via our [snippet](/docs/integrate/client/js), one of our [integrations](/docs/integrate), via pushing from a data warehouse, or our [API](/docs/api).
 
 # Dashboard setup
 
