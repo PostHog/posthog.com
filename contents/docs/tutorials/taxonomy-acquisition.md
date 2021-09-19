@@ -100,4 +100,4 @@ Seeing traffic by initial referring domain helps you understand how these link s
 You may be signing up users outside of your funnel. Typical examples of when this happens:
 
 * Your own team creates these manually. This happens with many companies who don't have a self serve signup process.
-* For B2B, the second, third, fourth, etc users added into an existing team may come through the rest of their team using your platform already. We'll write future tutorials about how to track referrals like this.
+* For B2B, the second, third, fourth, etc. users added into an existing team may come through the rest of their team using your platform already. We'll write future tutorials about how to track referrals like this.
