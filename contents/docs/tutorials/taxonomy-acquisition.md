@@ -34,7 +34,7 @@ Now you've a sense of how to breakdown acquisition, it's time to figure out whic
 
 !> All of the following should be plotted as a time series. That means you can understand which metric moved, causing another metric to move.
 
-You need to define these events within your product, and to push them to PostHog. For example, "traffic" may mean people visiting your website, visiting an individual landing page and so on. Or show both if either could be relevant.
+You need to define these events within your product, and push them to PostHog. For example, "traffic" may mean people visiting your website, visiting an individual landing page, and so on. Or show both if either could be relevant.
 
 - _Acquisition dashboard:_ [User acqusition](#user-acquisition) over time (this should be placed alongside Activation, Retention, Referral and Revenue - tutorials for those to come another time).
   - _Deep dive: Acquisition dashboard:_ [Users - traffic](#users--traffic)
