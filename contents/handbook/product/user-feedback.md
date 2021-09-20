@@ -47,7 +47,7 @@ The Feedback Hero rotation can be found [in this doc](https://docs.google.com/sp
 
 
 ### Rewards 
-We strongly value our user's time. We particularly acknowledge the value it provides us in building a better product. As such, we usually send a small gift of appreciation. We have the following general _guidelines_, but just use your best judgement.
+We strongly value our users' time. We particularly acknowledge the value it provides us in building a better product. As such, we usually send a small gift of appreciation. We have the following general _guidelines_, but just use your best judgement.
 - Generally we send users a gift card to the merch store with around $50 of value.
 - When the above is not an option (e.g. shipping restrictions, user has received merch already) we default to Amazon gift cards. Use your Brex card to purchase these (and remember to follow our [spending guidelines](/handbook/people/spending-money)). Contact Paolo to join our Amazon Business account.
     > To avoid operationally complexity, we try to send only Amazon US cards, but generally sending cards on Amazon UK, IT, DE, MX or BR has worked in the past. Due to card restrictions, **we can't support Amazon IN**.
