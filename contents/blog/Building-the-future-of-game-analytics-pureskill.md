@@ -29,4 +29,4 @@ This potential to have an impact on such a rapidly growing sport is exciting for
 
 Right now, Evan is focused on using data from tools such as PostHog to improve the experience for users and to develop new features. Some, such as an integration with advanced matchmaking provider FaceIt, are already available to try in beta. 
 
-_Loved this? Subscribe to [our newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
