@@ -46,4 +46,4 @@ We are a team, not a family. This means we have very ambitious goals, [pay top o
 
 Think a change should be made? Then make it.
 
-Most decisions are reversible, so a culture that defaults to (slow) consensus-building is suboptimal. We'll perform better by taking 2 rapid steps forward, and 1 back, than by not progressing at all.
+Most decisions are reversible, so a culture that defaults to (slow) consensus-building is suboptimal. We'll perform better by taking two rapid steps forward, and one back, than by not progressing at all.
