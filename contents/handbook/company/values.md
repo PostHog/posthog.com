@@ -34,6 +34,12 @@ We expect you to pick out the very most important thing you can think of, and wo
 
 We judge your performance based on the impact you deliver overall, no matter what your role.
 
+## Bias for action
+
+Think a change should be made? Then make it.
+
+Most decisions are reversible, so a culture that defaults to (slow) consensus-building is suboptimal. We'll perform better by taking two rapid steps forward, and one back, than by not progressing at all.
+
 ## Talent compounds
 
 Getting into PostHog is a huge challenge. Once you're here, it stays that way. We are *extremely* demanding of performance.
@@ -41,9 +47,3 @@ Getting into PostHog is a huge challenge. Once you're here, it stays that way. W
 In return, you get to work with others producing the best work of their careers.
 
 We are a team, not a family. This means we have very ambitious goals, [pay top of market](/handbook/people/compensation), offer [exceptional benefits](/handbook/people/benefits), and do everything we can to provide an environment for you to do your best work. Often this means everyone, [especially managers](/handbook/company/management), getting out of your way. It's also [not ok to let your teammates fail](/handbook/company/culture/#dont-let-others-fail). We expect everyone to provide direct feedback to help everyone perform at their best. We pay [generous severance](/handbook/people/compensation#severance) if things aren't working out.
-
-## Bias for action
-
-Think a change should be made? Then make it.
-
-Most decisions are reversible, so a culture that defaults to (slow) consensus-building is suboptimal. We'll perform better by taking two rapid steps forward, and one back, than by not progressing at all.
