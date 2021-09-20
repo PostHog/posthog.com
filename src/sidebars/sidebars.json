@@ -210,6 +210,10 @@
             "url": "",
             "children": [
                 {
+                    "name": "Product team",
+                    "url": "/handbook/engineering/product-team"
+                },
+                {
                     "name": "Development process",
                     "url": "/handbook/engineering/development-process"
                 },
