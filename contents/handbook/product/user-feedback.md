@@ -64,7 +64,7 @@ We keep a log (notes) of user feedback to continuously aid in the product develo
 ### Additional notes
 Any PostHog team member may receive feedback at any time, whether doing sales, customer support, on forums outside of PostHog or even friends & family. If you receive feedback for PostHog, it's important to **share it with the rest of the team.** To do so, just add it to our [feedback doc][feedback-doc].
 
-Some feedback is particularly worth highlighting to the rest of the team. To do so, just share the snippet on the  [#posthogfeedback](https://posthog.slack.com/archives/C011L071P8U) channel and link to the [doc][feedback-doc] if applicable.
+Some feedback is particularly worth highlighting to the rest of the team. To do so, just share the snippet on the [#posthogfeedback](https://posthog.slack.com/archives/C011L071P8U) channel and link to the [doc][feedback-doc] if applicable.
 
 <blockquote class='warning-note'>
 To ensure feedback durability and visibility, the #posthogfeedback channel should not be used as the primary source of <i>storage</i>. Please mainly add the feedback to the main Google doc.
