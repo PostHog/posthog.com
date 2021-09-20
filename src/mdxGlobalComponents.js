@@ -16,6 +16,7 @@ import { BlogPostLayout } from './components/Blog/BlogPostLayout'
 import { BlogPosts } from './components/Blog/BlogPosts'
 import { BlogShareButtons } from './components/Blog/BlogShareButtons'
 import { BlogFooter } from './components/BlogFooter'
+import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -105,6 +106,7 @@ export const shortcodes = {
     BlogPosts,
     BlogShareButtons,
     BlogFooter,
+    Breadcrumbs,
     CallToAction,
     Benefits,
     CareersHero,
