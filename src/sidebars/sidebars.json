@@ -210,10 +210,6 @@
             "url": "",
             "children": [
                 {
-                    "name": "Product team",
-                    "url": "/handbook/engineering/product-team"
-                },
-                {
                     "name": "Development process",
                     "url": "/handbook/engineering/development-process"
                 },
@@ -234,10 +230,6 @@
                     "url": "/handbook/engineering/bug-prioritization"
                 },
                 {
-                    "name": "Scale features prioritization",
-                    "url": "/handbook/engineering/scale-features-prioritization"
-                },
-                {
                     "name": "Onboarding customers",
                     "url": "/handbook/engineering/onboarding-customer"
                 },
@@ -254,10 +246,6 @@
                     "url": "/handbook/engineering/common-issues"
                 },
                 {
-                    "name": "Feature Parity",
-                    "url": "/handbook/engineering/feature-parity"
-                },
-                {
                     "name": "Website MDX setup",
                     "url": "/handbook/engineering/mdx"
                 },
@@ -272,6 +260,19 @@
                 {
                     "name": "DigitalOcean tips and FAQ",
                     "url": "/handbook/engineering/digitalocean"
+                }
+            ]
+        },
+        {
+            "name": "Product",
+            "children": [
+                {
+                    "name": "Product team overview",
+                    "url": "/handbook/engineering/product-team"
+                },
+                {
+                    "name": "Scale features prioritization",
+                    "url": "/handbook/engineering/scale-features-prioritization"
                 }
             ]
         },

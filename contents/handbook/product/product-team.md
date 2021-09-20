@@ -1,5 +1,5 @@
 ---
-title: Product Team
+title: Product team overview
 sidebar: Handbook
 showTitle: true
 ---
