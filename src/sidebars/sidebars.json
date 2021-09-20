@@ -268,11 +268,15 @@
             "children": [
                 {
                     "name": "Product team overview",
-                    "url": "/handbook/engineering/product-team"
+                    "url": "/handbook/product/product-team"
+                },
+                {
+                    "name": "User feedback",
+                    "url": "/handbook/product/user-feedback"
                 },
                 {
                     "name": "Scale features prioritization",
-                    "url": "/handbook/engineering/scale-features-prioritization"
+                    "url": "/handbook/product/scale-features-prioritization"
                 }
             ]
         },
