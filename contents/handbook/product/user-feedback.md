@@ -6,7 +6,7 @@ showTitle: true
 
 Gathering user feedback is critical for the development of our product. It's not about casually listening to users, or just paying attention to bug reports, we actively seek (outbound) input in everything we work on. In addition to having multiple channels to continuously receive inbound feedback, we generally do active outbound feedback requests for:
 - General product and experience feedback. Continuous effort to gather general feedback on the product and their holistic experience with PostHog. Usually run by the [Feedback Hero](#feedback-hero).
-- Usability tests. We generally run this for new big features the Engineering team is working on. Usually run by the Product Team.
+- Usability tests. We generally run these for new big features the Engineering team is working on. Usually run by the Product Team.
 
 > 😍 Want to share feedback? Simply send us an email to [hey@posthog.com](mailto:hey@posthog.com) or reach out on [Slack](/slack). **We're always happy to hear from you!**
 
