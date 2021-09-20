@@ -15,18 +15,19 @@ However, if we have no checks in place, we will release quickly but everything w
 
 ## 1. How to decide what to build
 
-There are 3 places that work comes from.
+Deciding what we work on happens in our sprint planning session, where the high level themes for the next sprint get decided. Each team then takes those high level priorities and breaks them down, plus adds their own smaller items like bugfixes, smaller features or other improvements.
 
-- Issues/bugs (raised by the community or us)
-- [Roadmap](/handbook/strategy/roadmap)
-- "This should be better"
+As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
 
+## 2. Sizing a task (or 1-day tasks)
 
-## 2. Sizing a task
+When picking up a task, it should be doable in one day, including code review and QA. If it's not, you need to break it down into smaller chunks until it fits into a day. Tasks of this size are easy to test, easy to deploy, less likely to cause merge conflicts, and should still deliver a slice of value.
 
-When picking up a task, it should be doable in a day, including code review and QA. If it's not, you need to break it down into smaller chunks until it is. Tasks of this size are easy to test, easy to deploy, less likely to cause merge conflicts, and should still deliver some kind of value.
-
-Even if you're contributing, this is helpful as it means you'll be able to contribute to PostHog faster.
+| The wrong way to do this | The right way to do this |
+| --- | --- |
+| Do backend code in one PR, then frontend in the next | Create the smallest version of the feature/bug fix that adds value |
+| The design and usability has to be perfect in one PR | Release it behind a feature flag, iterate on the design in the next PR |
+| Lots of back and forth on whether the code will perform | Release it behind a feature flag, test it and watch the metrics |
 
 ## 3. Writing code
 
