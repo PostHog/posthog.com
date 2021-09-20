@@ -10,11 +10,26 @@ import MainSidebar from './MainSidebar'
 import Layout from 'components/Layout'
 import Navigation from './Navigation'
 import '../../styles/handbook.scss'
+import { MenuItemType } from './Menu'
+
+interface HandbookProps {
+    data: {
+        post: any
+    }
+    pageContext: {
+        menu: MenuItemType[]
+        next: any
+        previous: any
+        breadcrumb: any[]
+        breadcrumbBase: any
+        tableOfContents: any
+    }
+}
 
 export default function Handbook({
     data: { post },
     pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
-}) {
+}: HandbookProps): JSX.Element {
     const { hash } = useLocation()
     const [menuOpen, setMenuOpen] = useState(false)
     const {
@@ -66,7 +81,7 @@ export default function Handbook({
                             overlayClassName="backdrop-blur"
                             isOpen={menuOpen}
                         >
-                            <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32 md:hidden" />
+                            <MainSidebar height="auto" menu={menu} slug={slug} className="p-5 pb-32 md:hidden" />
                         </Menu>
                         <Navigation
                             next={next}

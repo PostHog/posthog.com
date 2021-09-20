@@ -10,6 +10,7 @@ import StickySidebar from './StickySidebar'
 import MobileSidebar from './MobileSidebar'
 import { useActions } from 'kea'
 import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
+import { MenuItemType } from './Menu'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (
@@ -44,22 +45,33 @@ const SectionLinksTop = ({ previous, next }) => {
     return <SectionLinks className="mt-9" previous={previous} next={next} />
 }
 
+interface MainComponentProps {
+    filePath: string
+    title: string
+    lastUpdated: string
+    menu: MenuItemType[]
+    slug: string
+    hideAnchor?: boolean
+    tableOfContents: any
+    body: any
+    next: any
+    previous: any
+    hideLastUpdated?: boolean
+}
+
 export default function Main({
-    handleMobileMenuClick,
     filePath,
     title,
     lastUpdated,
     menu,
     slug,
-    breadcrumb,
-    breadcrumbBase,
     hideAnchor,
     tableOfContents,
     body,
     next,
     previous,
     hideLastUpdated,
-}) {
+}: MainComponentProps): JSX.Element {
     const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key: filePath }))
     const components = {
         iframe: Iframe,

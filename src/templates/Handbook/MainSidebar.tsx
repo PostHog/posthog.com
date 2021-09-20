@@ -1,9 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Menu from './Menu'
+import Menu, { MenuItemType } from './Menu'
 
-export default function MainSidebar({ slug, menu, className, mainEl, height, sticky, top = 0 }) {
+interface MainSidebarProps {
+    slug: string
+    menu: MenuItemType[]
+    className?: string
+    mainEl?: React.MutableRefObject<HTMLElement>
+    height: string | number
+    sticky?: boolean
+    top?: number
+}
+
+export default function MainSidebar({
+    slug,
+    menu,
+    className,
+    mainEl,
+    height,
+    sticky,
+    top = 0,
+}: MainSidebarProps): JSX.Element {
     const [navHeight, setNavHeight] = useState(height)
-    const navEl = useRef()
+    const navEl = useRef<HTMLElement | null>(null)
     useEffect(() => {
         const isBrowser = typeof window !== 'undefined'
         if (!height && mainEl && isBrowser) {

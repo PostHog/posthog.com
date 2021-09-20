@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import footerLogo from '../../images/posthog-logo-footer.svg'
-import Contributors from './Contributors'
+import Contributors, { Contributor } from './Contributors'
 import { Edit, Issue } from 'components/Icons/Icons'
 
 const Divider = () => {
@@ -10,7 +9,13 @@ const Divider = () => {
     )
 }
 
-export default function Footer({ contributors, filePath, title }) {
+interface FooterProps {
+    contributors: Contributor[]
+    filePath: string
+    title: string
+}
+
+export default function Footer({ contributors, filePath, title }: FooterProps): JSX.Element {
     return (
         <footer className="text-white">
             <div className="bg-almost-black dark:bg-gray-accent-dark max-w-screen-2xl mx-auto rounded-lg relative overflow-hidden">

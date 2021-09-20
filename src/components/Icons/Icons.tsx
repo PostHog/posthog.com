@@ -141,7 +141,7 @@ export const CircleArrow = ({ className }: { className: string }): JSX.Element =
     )
 }
 
-export const Edit = ({ className }: { className: string }): JSX.Element => {
+export const Edit = ({ className }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -171,7 +171,7 @@ export const Edit = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const Issue = ({ className }: { className: string }): JSX.Element => {
+export const Issue = ({ className }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}

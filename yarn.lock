@@ -2507,6 +2507,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-burger-menu@^2.8.1":
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/@types/react-burger-menu/-/react-burger-menu-2.8.1.tgz#05bfebea7cca55897298083527d5572fb41eba48"
+  integrity sha512-MLS6jRQi6H2At2en3KQhIhl7rBhBLcwGMviOT+BBthXv4c+HTg5gNziMUIxKzCzSWf5VyaXcyMWNvh+b+A+heA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-helmet@^6.1.0":
   version "6.1.0"
   resolved "https://registry.npmjs.org/@types/react-helmet/-/react-helmet-6.1.0.tgz"
@@ -2518,6 +2525,13 @@
   version "3.12.0"
   resolved "https://registry.npmjs.org/@types/react-modal/-/react-modal-3.12.0.tgz"
   integrity sha512-UnHu/YO73NZLwqFpju/c0tqiswR0UHIfeO16rkfLVJUIMfQsl7X0CBm99H5XXgBMe/PgtQ/Rkud72iuRBr1TeA==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-scroll@^1.8.3":
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@types/react-scroll/-/react-scroll-1.8.3.tgz#80951ed1934ab49d4926aad95c26607b8b1a9713"
+  integrity sha512-Xt0+Y58pwrIv+vRFxcyKDoo0gBWBR2eNMJ4XRMhQpZdGUtmjnszPi/wFEJSAY+5r83ypJsSA+hOpSc3hRpYlWw==
   dependencies:
     "@types/react" "*"
 

@@ -2,15 +2,26 @@ import React, { useState } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { Link } from 'gatsby'
 
-function MenuItem({ item, slug, topLevel }) {
-    const isActive = (children) => {
-        return (
+export type MenuItemType = {
+    name: string
+    url: string
+    children?: MenuItemType[]
+}
+
+interface MenuItemProps {
+    item: MenuItemType
+    slug: string
+    topLevel?: boolean
+}
+
+function MenuItem({ item, slug, topLevel }: MenuItemProps) {
+    const isActive = (children?: MenuItemType[]): boolean =>
+        !!(
             children &&
             children.some((child) => {
                 return child.url === slug || isActive(child.children)
             })
         )
-    }
     const { name, url, children } = item
     const currentPage = url === slug
     const opacity = currentPage || isActive(children) ? '1' : '60'
@@ -58,7 +69,15 @@ function MenuItem({ item, slug, topLevel }) {
     )
 }
 
-export default function Menu({ menu, sub, className = '', slug, topLevel }) {
+interface MenuProps {
+    menu?: MenuItemType[]
+    sub?: boolean
+    className?: string
+    slug: string
+    topLevel?: boolean
+}
+
+export default function Menu({ menu, sub, className = '', slug, topLevel }: MenuProps): JSX.Element {
     return (
         <ul className={`${className} flex flex-col space-y-2 list-none p-0 my-0 ${sub ? 'ml-2' : ''}`}>
             {menu &&
