@@ -21,7 +21,7 @@ Sometimes that qualitative feedback can lead to surprising results. In our conve
 
 To people who play a lot of games, the idea of automated games coaching will probably sound a little strange, however Evan is quick to point out how rapidly the eSports and competitive gaming industry is growing.  
 
-“_My favourite example is Dota because I’m a Dota fan,_” said Evan. “_They (game developer Valve Software) host [a tournament every year with the top Dota players](https://www.dota2.com/international/overview). Originally it was just in Seattle, but now it’s truly international. It started with a $1 million dollar prize pool ten years ago, but now it’s almost a $40 million dollar prize pool. So, I feel like we’re really just getting started._”
+“_My favourite example is Data because I’m a Data fan,_” said Evan. “_They (game developer Valve Software) host [a tournament every year with the top Data players](https://www.dota2.com/international/overview). Originally it was just in Seattle, but now it’s truly international. It started with a $1 million dollar prize pool ten years ago, but now it’s almost a $40 million dollar prize pool. So, I feel like we’re really just getting started._”
 
 This potential to have an impact on such a rapidly growing sport is exciting for Evan, who hopes that tools such as PureSkill.gg will both help competitive players improve and also make games more accessible for new audiences.
 
@@ -30,7 +30,3 @@ This potential to have an impact on such a rapidly growing sport is exciting for
 Right now, Evan is focused on using data from tools such as PostHog to improve the experience for users and to develop new features. Some, such as an integration with advanced matchmaking provider FaceIt, are already available to try in beta. 
 
 _Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
-
-
-
- 
