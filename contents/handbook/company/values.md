@@ -18,7 +18,7 @@ This enables the strongest community growth possible. It causes the core team to
 
 We will never stop iterating.
 
-You learn faster, and thus help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
+You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
 
 ## Everyone codes
 
