@@ -36,7 +36,7 @@ The Feedback Hero rotation can be found [in this doc](https://docs.google.com/sp
 
 
 **After the call**
-1. Upload the recording to the [recordings folder](https://drive.google.com/drive/folders/1kmhj0GMAZTjVauN8JJKs_U7BgaD7XnUJ?usp=sharing), be sure to follow naming conventions.
+1. Upload the recording to the [recordings folder][recordings], be sure to follow naming conventions.
 2. Add the notes to the [Google Doc][feedback-doc], linking the recording. Try to keep them as clean as possible.
 3. If the user reported specific bug reports or specific feature requests, open the relevant issues in GitHub. Be sure to link to their Orbit and/or Hubspot record in case Engineering needs more context when scoping/building.
 4. Generate the reward for the user (see below).
@@ -55,8 +55,11 @@ We strongly value our user's time. We particularly acknowledge the value it prov
 
 ### Repositories of information 
 We keep a log (notes) of user feedback to continously aid in the product development process. Recordings are kept at most 3 months to respect our user's privacy. User feedback is registed in the following places:
-- 
-
+- **Feedback notes.** Feedback notes are mainly kept in this [Google doc][feedback-doc].
+- **Feedback records.** Our source of truth for records of users who we have interviewed is [Orbit](https://app.orbit.love/posthog/activities?activity_type=custom%3AFeedback+call&affiliation=member). 
+- **Feedback records for Scale/Sales customers.** For Scale customers or sales-focused customers, we also register any records on **Hubspot** (and link the relevant notes/Orbit record). This is not intended as a source of truth for the scope of feedback calls, but rather for the benefits of team members doing sales efforts.
+- **Recordings.** All recordings are kept in [this folder][recordings] in the Product shared drive. Recordings are kept for up to 3 months.
+- **Usability tests.** As usability tests are done with a specific focus, we create issues for each feature in the product-internal repo ([example](https://github.com/PostHog/product-internal/issues/157)). Notes related to this issue  only are kept in their respective issue. Recordings are still kept in the same folder, as well as the appropriate Orbit record. 
 
 ### Additional notes
 Any PostHog team member may receive feedback at any time, whether doing sales, customer support, on forums outside of PostHog or even friends & family. If you receive feedback for PostHog, it's important to **share it with the rest of the team.** To do so, just add it to our [feedback doc][feedback-doc].
@@ -70,3 +73,4 @@ To ensure feedback durability and visibility, the #posthogfeedback channel shoul
 If you're not part of the [Feedback Hero](#feedback-hero) rotation, **we strongly recommend you to join at least one feedback call per month.** Regardless of your role, you will always benefit from staying in the loop with our users.
 
 [feedback-doc]: https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit
+[recordings]: https://drive.google.com/drive/folders/1kmhj0GMAZTjVauN8JJKs_U7BgaD7XnUJ?usp=sharing
