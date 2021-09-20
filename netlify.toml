@@ -747,3 +747,9 @@
 [[redirects]]
     from = "/handbook/growth/marketing/Customer-personas"
     to = "/handbook/growth/marketing/customer-personas"
+
+
+# Added: 2021-9-20
+[[redirects]]
+    from = "/handbook/product/scale-features-prioritization"
+    to = "/handbook/engineering/scale-features-prioritization"
