@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from './InternalSidebarLink'
 
-export default function StickySidebar({ tableOfContents, className = '', top = 0, reportScrollUpdated }) {
+export default function StickySidebar({ tableOfContents, className = '', top = 0 }) {
     const [navBallLocation, setNavBallLocation] = useState(null)
     const [navStyle, setNavStyle] = useState(null)
     const [activeId, setActiveId] = useState(null)
@@ -11,7 +11,6 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
     const handleInternalNavUpdate = (el) => {
         if (el) {
             setActiveId(el.id)
-            reportScrollUpdated?.(el.id)
             const activeEl = document.querySelector('.active-link')
             activeEl && setNavBallLocation(activeEl.offsetTop + 7)
         }
