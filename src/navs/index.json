@@ -337,6 +337,7 @@
         },
         {
             "title": "Get started",
+            "classes": "lg:ml-6",
             "cta": true,
             "url": "/docs/self-host",
             "hideBorder": true

@@ -25,7 +25,7 @@ export default function MenuItem({ menuItem }) {
                     <CallToAction
                         onClick={breakpoints.md && sub && handleSubClick}
                         to={url}
-                        className={`mx-auto lg:mx-0 lg:ml-4 ${classes}`}
+                        className={`mx-auto lg:mx-0 ${classes}`}
                     >
                         {title}
                     </CallToAction>
