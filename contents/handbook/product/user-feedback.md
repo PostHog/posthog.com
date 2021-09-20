@@ -54,7 +54,7 @@ We strongly value our user's time. We particularly acknowledge the value it prov
 
 
 ### Repositories of information 
-We keep a log (notes) of user feedback to continously aid in the product development process. Recordings are kept at most 3 months to respect our user's privacy. User feedback is registed in the following places:
+We keep a log (notes) of user feedback to continuously aid in the product development process. Recordings are kept at most 3 months to respect our user's privacy. User feedback is registered in the following places:
 - **Feedback notes.** Feedback notes are mainly kept in this [Google doc][feedback-doc].
 - **Feedback records.** Our source of truth for records of users who we have interviewed is [Orbit](https://app.orbit.love/posthog/activities?activity_type=custom%3AFeedback+call&affiliation=member). 
 - **Feedback records for Scale/Sales customers.** For Scale customers or sales-focused customers, we also register any records on **Hubspot** (and link the relevant notes/Orbit record). This is not intended as a source of truth for the scope of feedback calls, but rather for the benefits of team members doing sales efforts.
