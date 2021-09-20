@@ -440,6 +440,10 @@
                         {
                             "name": "Upgrading PostHog",
                             "url": "/docs/self-host/configure/upgrading-posthog"
+                        },
+                        {
+                            "name": "Migrate from Postgres to ClickHouse",
+                            "url": "/docs/self-host/configure/migrate-postgres-clickhouse"
                         }
                     ]
                 }

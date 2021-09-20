@@ -1,0 +1,61 @@
+---
+title: Migrate from Postgres to ClickHouse
+sidebar: Docs
+showTitle: true
+---
+
+> This documentation is in **Beta**. Please provide feedback via the [PostHog Communty Slack workspace](/slack) or [via a GitHub issue](https://github.com/PostHog/posthog.com/issues).
+
+**PostHog backed by Postgres is now deprecated**. We will continue to provide support to Postgres backed installs but we strongly encourage you to migrate to PostHog backed by ClickHouse for improved performance, to recieve new features, and continued support in the future.
+
+## Before you begin
+
+In order to migrate you must have the following in place:
+
+1. The PostHog + Postgres installation
+2. A new PostHog + ClickHouse installation
+
+## Export
+
+The first step in the migration process is to create a Postgres database dump. With a PostHog + Postgres instance up and running, run the `pg_dump` command with the following format:
+
+```
+$ pg_dump -d [database] -h [host] -U [user] -T posthog_event -T posthog_person -T posthog_sessionrecordingevent -f [output-file]
+```
+
+For example:
+
+```
+$ pg_dump -d posthog -h localhost -U posthog -T posthog_event -T posthog_person -T posthog_sessionrecordingevent -f posthog-migration.sql
+```
+
+The example command above creates a `posthog-migration.sql` that contains SQL statements to create the schema and insert the data data, excluding event data, from the existing Postgres database.
+
+## Import
+
+The next step is to get the data into the new PostHog + ClickHouse installation. This installation still utilizes Postgres, but only for non-event data. Event data is now stored in ClickHouse.
+
+The import process has two steps:
+
+1. Run the exported SQL agains the Postgres database for the new installation
+2. Use the PostHog replicator plugin to migrate event data from the old PostHog instance to the new one
+
+### Postgres import
+
+Import the old Postgres data into the new PostHog Postgres database (TODO: with additional connection parameters). The command should take the following format:
+
+```
+pg_restore -d [database] -h [host] -U [user] [input-file]
+```
+
+For example:
+
+```
+pg_restore -d posthog -h localhost -U posthog posthog-migration.sql
+```
+
+This ensures the required schema is in place (TODO: this feels unnecessary and may not work. Should the Export process use `--data-only`?) and imports the data from the previous instance.
+
+### Migrate event data to ClickHouse (for event data)
+
+TODO: _this is where the replicator plugin comes in..._
