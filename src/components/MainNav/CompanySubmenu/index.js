@@ -6,7 +6,8 @@ import Founders from '../components/Founders'
 import cntl from 'cntl'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { YouTube, LinkedIn, Twitter, Slack, Lifeguard, Chat, RightArrow } from 'components/Icons/Icons'
+import { YouTube, LinkedIn, Twitter, Slack } from './Icons'
+import { Chat, Lifeguard, RightArrow } from 'components/Icons/Icons'
 
 const footerLink = cntl`
     text-primary

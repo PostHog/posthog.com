@@ -66,3 +66,5 @@ lg:my-0
 flex-row-reverse
 space-x-reverse
 lg:ml-6
+text-primary
+text-primary-dark

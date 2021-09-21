@@ -17,14 +17,11 @@ export const FAQs = ({ className = '' }) => {
                         <Disclosure>
                             {({ open }) => (
                                 <>
-                                    <Plus
-                                        render={(icon) => (
-                                            <Disclosure.Button className="flex items-start space-x-2 text-left w-full text-base md:text-lg font-semibold py-4 border-dashed border-gray-accent-light border-b">
-                                                {open ? <Minus /> : icon}
-                                                <span className="-my-1">{faq.q}</span>
-                                            </Disclosure.Button>
-                                        )}
-                                    />
+                                    <Disclosure.Button className="flex items-start space-x-2 text-left w-full text-base md:text-lg font-semibold py-4 border-dashed border-gray-accent-light border-b">
+                                        {open ? <Minus /> : <Plus />}
+                                        <span className="-my-1">{faq.q}</span>
+                                    </Disclosure.Button>
+
                                     {open && (
                                         <motion.div initial="hidden" animate="shown" variants={variants}>
                                             <Disclosure.Panel className="py-4 text-base pl-8">{faq.a}</Disclosure.Panel>

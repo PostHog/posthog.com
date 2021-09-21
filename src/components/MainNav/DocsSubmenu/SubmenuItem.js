@@ -59,7 +59,7 @@ export default function SubmenuItem({ item }) {
                                                 to={url}
                                             >
                                                 {icon && (
-                                                    <svg className="w-5 h-5">
+                                                    <svg className="w-5 h-5 text-black dark:text-white">
                                                         <use xlinkHref={`#${icon}`}></use>
                                                     </svg>
                                                 )}

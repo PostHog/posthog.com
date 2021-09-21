@@ -2,6 +2,7 @@
 title: PostHog Handbook
 sidebar: Handbook
 showTitle: true
+hideLastUpdated: true
 ---
 
 Welcome to the PostHog Company Handbook. This explains how we operate as a company. If this is your first time here, we suggest starting with our [handy guide](/handbook/getting-started). 

@@ -21,7 +21,7 @@ module.exports = {
             options: {
                 queries: {
                     xs: '(max-width: 390px)',
-                    sm: '(max-width: 720px)',
+                    sm: '(max-width: 767px)',
                     md: '(max-width: 1023px)',
                     lg: '(max-width: 1279px)',
                     xl: '(max-width: 1535px)',
