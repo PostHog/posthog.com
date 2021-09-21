@@ -15,7 +15,7 @@ _Welcome to another episode of PostHog's Community Conversations, where we chat 
 
 [PureSkill.gg](https://pureskill.gg/) is an automated coach for Counter-Strike: Global Offensive (CS:GO), one of the most popular multiplayer games in the world. Rather than merely showing you statistics about how you play, PureSkill.gg identifies mistakes you make and teaches you how to overcome them.
 
-As a Co-founder and CTO, Evan Sosenko is responsible for all technical aspects of PureSkill.gg’s automated coaching system and spends most of his time using product insights to build features which improve the experience for users. In addition to collecting quantitative insights from PostHog, Evan also engages the community directly to get qualitative feedback. 
+As a Co-founder and CTO, [Evan Sosenko](https://www.linkedin.com/in/evan-sosenko-599b0483/) is responsible for all technical aspects of PureSkill.gg’s automated coaching system and spends most of his time using product insights to build features which improve the experience for users. In addition to collecting quantitative insights from PostHog, Evan also engages the community directly to get qualitative feedback. 
 
 Sometimes that qualitative feedback can lead to surprising results. In our conversation with Evan he told us about his favourite experience at PureSkill.gg and how one user on the community Discord went from reporting bugs to becoming an angel investor in the company.
 
@@ -27,6 +27,6 @@ This potential to have an impact on such a rapidly growing sport is exciting for
 
 “When we look at a match we’re literally looking at every single action that every player in the match is doing with perfect accuracy” said Evan. “So we should be able to do a much better job [of coaching] than any other sport...we have access to much, much more data.”
 
-Right now, Evan is focused on using data from tools such as PostHog to improve the experience for users and to develop new features. Some, such as an integration with advanced matchmaking provider FaceIt, are already available to try in beta. 
+Right now, Evan is focused on using data from tools such as PostHog to improve the experience for users and to develop new features. Some, such as an integration with advanced matchmaking provider [FaceIt](https://www.faceit.com/), are already available to try in beta. 
 
 _Loved this? Let us know on [Twitter](https://twitter.com/posthoghq) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
