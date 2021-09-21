@@ -748,14 +748,12 @@
     from = "/handbook/growth/marketing/Customer-personas"
     to = "/handbook/growth/marketing/customer-personas"
 
+# Added: 2021-9-20
+[[redirects]]
+    from = "/handbook/engineering/product-team"
+    to = "/handbook/product/product-team"
 
 # Added: 2021-9-20
 [[redirects]]
-    from = "/handbook/product/product-team"
-    to = "/handbook/engineering/product-team"
-
-
-# Added: 2021-9-20
-[[redirects]]
-    from = "/handbook/product/scale-features-prioritization"
-    to = "/handbook/engineering/scale-features-prioritization"
+    from = "/handbook/engineering/scale-features-prioritization"
+    to = "/handbook/product/scale-features-prioritization"
