@@ -57,47 +57,40 @@ There are several practical ways of using projects:
 
 Which way is the best fit for you depends on the characteristics of your product and business.
 
-## Permissioning
+## Permissions
 
 By default all organization members have access to all its projects, at their organization-wide access level.
-This makes for the smoothest collaboration. However, if you require access to data to be more granular, see section [Per-project access](#per-project-access) below.
+This makes for the smoothest collaboration. However, if you require access to data to be more granular, see [Project-based permissioning](#project-based-permissioning) below.
 
 ### Access levels
 
-There are three access levels in PostHog, each with more privileges than the one below it. There can be any number of members at each level, except Owner, of which there can only be one in the organization.
+There are three access levels in PostHog, each with more privileges than the one below it. There can be any number of members at each level, except Owner, of which there is always one in the organization.
 
-Levels from the bottom up:
+See permissions at each level below:
 
-1. **Member** – default level:
-  - has full access to analytics features
-  - can create projects (if per-project access not enabled), but not delete them 
-  - can leave the organization
-  - can invite new members to the organization, but not remove them
-  - has access to billing management
+| | Member (base level) | Administrator (elevated level) | Owner (unique top level) |
+| --- | --- | --- | --- |
+| Viewing and querying project data | ✅ | ✅ | ✅ |
+| Leaving the organization | ✅ | ✅ | ✅ |
+| Inviting new members | ✅ | ✅ | ✅ |
+| Billing management | ✅ | ✅ | ✅ |
+| Project creation and deletion | ❌ | ✅ | ✅ |
+| Project settings management (incl. [project-specific membership](#project-based-permissioning)) | ❌ | ✅ | ✅ |
+| Organization settings management (incl. membership) | ❌ | ✅ | ✅ |
+| Organization deletion | ❌ | ❌ | ✅ |
 
-2. **Administrator** – elevated level, like Member plus:
-  - can always create and delete projects
-  - can change project and organization settings
-  - can manage access levels of other members (except the Owner)
-  - can add and remove lower-level members from projects (if per-project access mode enabled)
-  - can remove other members from the organization (except the Owner)
+Access levels can be viewed and changed in the Members section of organization settings.
 
-3. **Owner** – unique top level, like Administrator plus:
-  - can delete the organization
-  - cannot leave the organization
-  - can pass ownership to someone else (downgrading themselves to Administrator in the process)
+In projects with [project-based permissioning](#project-based-permissioning), there's also a Members section in project settings, which pertains to project-specific memberships.
 
-Access levels can be viewed and changed in Members section of organization settings (and project settings if [Per-project access](#per-project-access) is enabled).
+### Project-based permissioning
 
-### Per-project access
+If you'd like to restrict access to data within the organization to only those who need it, you can use PostHog's project-based permissioning.
 
-If you'd like to restrict access to data within the organization to only those who need it, we've got you covered.
+**Enable project-based permissioning** is a switch in project settings that can be turned on (or off) at any time by organization-wide Administrators and the Owner.
 
-**Per-project access** is a switch in organization settings that can be enabled (or disabled) at any time by organization-wide Administrators and the Owner.
+With project-based permissioning only organization-wide Administrators and the Owner have implicit access to projects.
+Lower-level Members need to be added explicitly in project settings. Those that haven't been added cannot access the project at all, in any way.
+At the same time project-based permissioning allows you to grant members project-specific access _higher_ than their organization-wide level.
 
-With **Per-project access** enabled, organization-wide Administrators and the Owner still have the same access, but those below – ordinary Members – _lose_ default access to projects.
-Access to each project must then be granted individually (e.g. only for members who need it) in project settings. This way project settings have a list of members too.
-
-In this mode you can also grant members project-specific access level that is _above_ their organization-wide one. In such case they will have privileges of the higher level, but only for that specific project.
-
-> **Note:** Per-project access belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](/pricing).
+> **Note:** Project-based permissioning belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](/pricing).
