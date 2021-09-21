@@ -84,6 +84,7 @@ import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
+import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
@@ -172,6 +173,7 @@ export const shortcodes = {
     Structure,
     TableOfContents,
     TeamQuote,
+    Tooltip,
     VisitLibrary,
     WorkableSnippet,
 }
