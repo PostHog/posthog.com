@@ -753,7 +753,6 @@
     from = "/handbook/engineering/product-team"
     to = "/handbook/product/product-team"
 
-
 # Added: 2021-9-20
 [[redirects]]
     from = "/handbook/engineering/scale-features-prioritization"
