@@ -757,3 +757,9 @@
 [[redirects]]
     from = "/handbook/engineering/scale-features-prioritization"
     to = "/handbook/product/scale-features-prioritization"
+
+
+# Added: 2021-9-21
+[[redirects]]
+    from = "/blog/Building-the-future-of-game-analytics-pureskill"
+    to = "/blog/building-the-future-of-game-analytics-pureskill"
