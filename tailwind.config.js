@@ -55,6 +55,9 @@ module.exports = {
             yellow: '#F7A501',
             red: '#F54E00',
             primary: '#151515',
+            'gray-accent': '#D0D1C9',
+            'gray-accent-dark': '#2C2C2C',
+            'gray-accent-light': '#E5E7E0',
         },
         rotate: {
             '-31': '-31deg',
