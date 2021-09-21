@@ -115,17 +115,17 @@ However, for flags using a rollout percentage mechanism (either by itself or in 
 
 As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way. 
 
-## A/B testing with feature flags (beta)
+## Multivariate feature flags (alpha)
 
-PostHog 1.28 introduces support for A/B feature flags which can return string values according to a specified distribution. (Some examples for a 3-variant case would be 33/33/34%, 50/25/25%, 70/20/10%, and so on.) This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
+PostHog 1.28 introduces support for multivariate feature flags which can return string values according to a specified distribution. (Some examples for a 3-variant case would be 33/33/34%, 50/25/25%, 70/20/10%, and so on.) This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
 
-### Creating an A/B feature flag with multiple variants
+### Creating a feature flag with multiple variants
 
-Create an A/B feature flag just like you would a standard flag, and then change the "Served value" option to "a string variant". You will then be prompted to enter a few keys with optional descriptions and set the distribution percentages for each.
+Create a multivariate feature flag just like you would a standard flag, and then change the "Served value" option to "a string value". You will then be prompted to enter a few keys with optional descriptions and set the distribution percentages for each.
 
-Note that the rollout percentage of feature flag variants must add up to 100%. If you wish to exclude some users from your A/B test, configure the **release condition groups**. While the release condition groups determine how many users will be bucketed into **any** of the given variants, the rollout percentage of each variant determines the portion of the overall release group that will be assigned to that particular variant.
+Note that the rollout percentage of feature flag variants must add up to 100%. If you wish to exclude some users from your test, i.e. have some users receive no value at all, configure the **release condition groups**. While the release condition groups determine how many users will be bucketed into **any** of the given variants, the rollout percentage of each variant determines the portion of the overall release group that will be assigned to that particular variant.
 
-### Using A/B feature flags in your code
+### Using multivariate feature flags in your code
 
 With the latest version of our JS library, you can call:
 
@@ -171,13 +171,13 @@ posthog.onFeatureFlags(function(flags, flagVariants) {
 })
 ```
 
-Note that `getFlags()` and the callback argument `flags` will include the key names of all truthy feature flags, including active A/B feature flags.
+Note that `getFlags()` and the callback argument `flags` will include the key names of all truthy feature flags, including active multivariate feature flags.
 
-### Querying data by A/B feature flag values
+### Querying data by multivariate feature flag values
 
-With the latest version of our JS library, we send each feature flag's value as a separate property on every event. This means it can be used in filters and breakdowns in Insights queries or wherever else you may choose to filter incoming events.
+With the latest version of our JS library, we send each feature flag's value as a separate property on every event. This means the values can be used in filters and breakdowns in Insights queries or wherever else you may choose to filter incoming events.
 
-We send the event properties as `$feature/your-feature-name`, for example `$feature/checkout-button-color`.
+We send the event properties as `$feature/your-feature-name`, for example `$feature/checkout-button-color`. Standard (Boolean) flags are captured in this format as well.
 
 For example, if you have a Trends graph of button click events and you'd like to narrow it down to clicks only when the checkout button is blue, apply a filter to your graph series such that `$feature/checkout-button-color = blue`.
 
