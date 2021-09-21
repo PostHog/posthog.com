@@ -115,7 +115,7 @@ However, for flags using a rollout percentage mechanism (either by itself or in 
 
 As a result, keep in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way. 
 
-## Multivariate feature flags (beta)
+## Multivariate feature flags (alpha)
 
 PostHog 1.28 introduces support for multivariate feature flags which can return string values according to a specified distribution. (Some examples for a 3-variant case would be 33/33/34%, 50/25/25%, 70/20/10%, and so on.) This is ideal for when you want to test multiple variants of the same interchangeable content, such as marketing taglines, colors, or page layouts. Currently, this is a beta feature for paying customers. Contact us through one of our [support options](https://posthog.com/support) to try this out!
 
