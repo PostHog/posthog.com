@@ -1,5 +1,5 @@
 ---
-date: 2021-21-09
+date: 2021-09-21
 title: Building the future of game analytics - An interview with PureSkill.gg CTO, Evan Sosenko
 rootPage: /blog
 sidebar: Blog
