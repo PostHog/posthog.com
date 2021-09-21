@@ -37,21 +37,21 @@ The next step is to get the data into the new PostHog + ClickHouse installation.
 
 The import process has two steps:
 
-1. Run the exported SQL agains the Postgres database for the new installation
+1. Run the exported SQL against the Postgres database for the new installation
 2. Use the PostHog replicator plugin to migrate event data from the old PostHog instance to the new one
 
 ### Postgres import
 
-Import the old Postgres data into the new PostHog Postgres database (TODO: with additional connection parameters). The command should take the following format:
+Import the old Postgres data into the new PostHog Postgres database. The command should take the following format:
 
 ```
-pg_restore -d [database] -h [host] -U [user] [input-file]
+pg_restore -d [database] -h [host] -p [port] -U [user] [input-file]
 ```
 
 For example:
 
 ```
-pg_restore -d posthog -h localhost -U posthog posthog-migration.sql
+pg_restore -d posthog -h remote.example.com -p 5432 -U posthog posthog-migration.sql
 ```
 
 This ensures the required schema is in place (TODO: this feels unnecessary and may not work. Should the Export process use `--data-only`?) and imports the data from the previous instance.
