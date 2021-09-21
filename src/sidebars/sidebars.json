@@ -222,12 +222,12 @@
                     "url": "/handbook/engineering/release-new-version"
                 },
                 {
-                    "name": "Bug prioritization",
-                    "url": "/handbook/engineering/bug-prioritization"
+                    "name": "Support hero",
+                    "url": "/handbook/engineering/support-hero"
                 },
                 {
-                    "name": "Scale features prioritization",
-                    "url": "/handbook/engineering/scale-features-prioritization"
+                    "name": "Bug prioritization",
+                    "url": "/handbook/engineering/bug-prioritization"
                 },
                 {
                     "name": "Onboarding customers",
@@ -246,10 +246,6 @@
                     "url": "/handbook/engineering/common-issues"
                 },
                 {
-                    "name": "Feature Parity",
-                    "url": "/handbook/engineering/feature-parity"
-                },
-                {
                     "name": "Website MDX setup",
                     "url": "/handbook/engineering/mdx"
                 },
@@ -264,6 +260,23 @@
                 {
                     "name": "DigitalOcean tips and FAQ",
                     "url": "/handbook/engineering/digitalocean"
+                }
+            ]
+        },
+        {
+            "name": "Product",
+            "children": [
+                {
+                    "name": "Product team overview",
+                    "url": "/handbook/product/product-team"
+                },
+                {
+                    "name": "User feedback",
+                    "url": "/handbook/product/user-feedback"
+                },
+                {
+                    "name": "Scale features prioritization",
+                    "url": "/handbook/product/scale-features-prioritization"
                 }
             ]
         },
@@ -286,6 +299,14 @@
                 {
                     "name": "Paid & SEO",
                     "url": "/handbook/growth/marketing/paid"
+                },
+                {
+                    "name": "Customer personas",
+                    "url": "/handbook/growth/marketing/customer-personas"
+                },
+                {
+                    "name": "Value propositions",
+                    "url": "/handbook/growth/marketing/value-propositions"
                 },
                 {
                     "name": "Press",
@@ -458,6 +479,10 @@
                 {
                     "name": "Ingest historical data",
                     "url": "/docs/integrate/ingest-historic-data"
+                },
+                {
+                    "name": "Identifying users",
+                    "url": "/docs/integrate/identifying-users"
                 },
                 {
                     "name": "Client libraries",
@@ -638,10 +663,6 @@
                     "url": "/docs/user-guides/funnels"
                 },
                 {
-                    "name": "Single sign-on authentication",
-                    "url": "/docs/user-guides/sso"
-                },
-                {
                     "name": "Organizations and projects",
                     "url": "/docs/user-guides/organizations-and-projects"
                 },
@@ -664,6 +685,10 @@
                 {
                     "name": "Session Recording",
                     "url": "/docs/user-guides/session-recording"
+                },
+                {
+                    "name": "SSO (Single sign-on authentication)",
+                    "url": "/docs/user-guides/sso"
                 },
                 {
                     "name": "Toolbar",
@@ -742,6 +767,10 @@
                 {
                     "name": "Measuring retention and tracking c…",
                     "url": "/docs/tutorials/retention"
+                },
+                {
+                    "name": "Setting up deep dive acquisition dashboards",
+                    "url": "/docs/tutorials/taxonomy-acquisition"
                 },
                 {
                     "name": "Tracking single page apps",

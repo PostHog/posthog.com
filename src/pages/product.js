@@ -4,14 +4,10 @@ import { ProductFooter } from '../components/ProductFooter'
 import { ProductFeature } from '../components/ProductFeature'
 import ProductImage from '../components/ProductFeature/ProductImage'
 import { ProductFeaturePlugin } from '../components/ProductFeaturePlugin'
-import { HostingOption } from '../components/HostingOption'
 import { ProductAnchorNavbar } from '../components/ProductAnchorNavbar'
 import { ProductSectionHeader } from '../components/ProductSectionHeader'
-
-import { FeaturesComparisonTable } from '../components/FeaturesComparisonTable'
-import { FeaturesNav } from '../components/FeaturesNav'
+import Chip from 'components/Chip'
 import { SEO } from '../components/seo'
-import { useStaticQuery, graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import Layout from '../components/Layout'
 
@@ -125,12 +121,32 @@ function ProductPage() {
                                     </p>
                                 </div>
                                 <ul className="flex flex-wrap p-0 list-none text-center">
-                                    <HostingOption name="Heroku" handle="heroku" url="/docs/self-host/deploy/heroku" />
-                                    <HostingOption name="AWS" handle="aws" url="/docs/self-host/deploy/aws" />
-                                    <HostingOption name="Google Cloud" handle="gcs" url="/docs/self-host/deploy/gcs" />
-                                    <HostingOption name="Azure" handle="azure" url="/docs/self-host/deploy/azure" />
-                                    <HostingOption name="Source" handle="github" url="/docs/self-host/deploy/source" />
-                                    <HostingOption name="More" handle="more" url="/docs/deployment" />
+                                    <Chip
+                                        className="m-1"
+                                        text="Heroku"
+                                        icon="heroku"
+                                        href="/docs/self-host/deploy/heroku"
+                                    />
+                                    <Chip className="m-1" text="AWS" icon="aws" href="/docs/self-host/deploy/aws" />
+                                    <Chip
+                                        className="m-1"
+                                        text="Google Cloud"
+                                        icon="gcs"
+                                        href="/docs/self-host/deploy/gcs"
+                                    />
+                                    <Chip
+                                        className="m-1"
+                                        text="Azure"
+                                        icon="azure"
+                                        href="/docs/self-host/deploy/azure"
+                                    />
+                                    <Chip
+                                        className="m-1"
+                                        text="Source"
+                                        icon="github"
+                                        href="/docs/self-host/deploy/source"
+                                    />
+                                    <Chip className="m-1" text="More" icon="more" href="/docs/deployment" />
                                 </ul>
                             </div>
 
