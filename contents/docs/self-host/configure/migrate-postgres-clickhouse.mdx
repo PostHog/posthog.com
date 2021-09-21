@@ -10,12 +10,19 @@ showTitle: true
 
 ## Before you begin
 
+TODOs:
+- Is there a minimum version for PostHog + Postgres and a minimum version for PostHog + ClickHouse? For example, does the Replicator plugin have a minimum PostHog version to work within?
+
 In order to migrate you must have the following in place:
 
 1. The PostHog + Postgres installation
 2. A new PostHog + ClickHouse installation
 
 ## Export
+
+TODOs:
+- Are these the correct tables to dump?
+- Should we be using `--data-only` to only dump the data and not the schema creation?
 
 The first step in the migration process is to create a Postgres database dump. With a PostHog + Postgres instance up and running, run the `pg_dump` command with the following format:
 
@@ -40,7 +47,7 @@ The import process has two steps:
 1. Run the exported SQL against the Postgres database for the new installation
 2. Use the PostHog replicator plugin to migrate event data from the old PostHog instance to the new one
 
-### Postgres import
+### Postgres import of non-event data
 
 Import the old Postgres data into the new PostHog Postgres database. The command should take the following format:
 
@@ -54,8 +61,22 @@ For example:
 pg_restore -d posthog -h remote.example.com -p 5432 -U posthog posthog-migration.sql
 ```
 
-This ensures the required schema is in place (TODO: this feels unnecessary and may not work. Should the Export process use `--data-only`?) and imports the data from the previous instance.
+### ClickHouse import of event data
 
-### Migrate event data to ClickHouse (for event data)
+TODOs:
+- Does this need to be done for each project or does it handle multiple projects?
+- What should the user do after clicking **Save**?
 
-TODO: _this is where the replicator plugin comes in..._
+With the non-event data now migrated to the new PostHog installation, we can now migrate the event data using the [Replicator plugin](https://posthog.com/plugins/replicator).
+
+Within the older deployment of PostHog, go to the PostHog dashboard, then to the **Plugins** section, and select the **Repository** tab. Find the **Replicator** plugin listed on that page and click the **Install* button. Once installed you will be prompted to provide configuration for the plugin.
+
+- **Host**: enter the hostname for your new PostHog instance
+- **Project API Key**: go to `{host}/project/settings` and use the value under **Project API Key**
+- **Replication**: keep the value of `1`
+
+Then click **Save**.
+
+TODOs:
+- Provide some sort validation that the data has been migrated
+- Conclusion and where to go next
