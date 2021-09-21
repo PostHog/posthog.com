@@ -11,7 +11,7 @@ featuredImageType: full
 ---
 _Welcome to another episode of PostHog's Community Conversations, where we chat to our contributors and users. This time, we speak to Evan Sosenko, Co-founder and CTO of PureSkill.gg._
 
-<iframe width="560" height="315" src="https://youtu.be/x1jxCJb9zII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x1jxCJb9zII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 [PureSkill.gg](https://pureskill.gg/) is an automated coach for Counter-Strike: Global Offensive (CS:GO), one of the most popular multiplayer games in the world. Rather than merely showing you statistics about how you play, PureSkill.gg identifies mistakes you make and teaches you how to overcome them.
 
