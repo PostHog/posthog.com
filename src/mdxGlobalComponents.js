@@ -29,7 +29,6 @@ import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
-import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
@@ -119,7 +118,6 @@ export const shortcodes = {
     CodeBlock,
     CompensationCalculator,
     Container,
-    ContributorAvatars,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,

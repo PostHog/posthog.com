@@ -13,6 +13,31 @@ import { useLocation } from '@reach/router'
 import '../components/Pricing/styles/index.scss'
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
+import { Funnels, Cohorts, PathAnalysis, FeatureFlags, SessionRecordings } from 'components/Icons/Icons'
+import cntl from 'cntl'
+
+const features = cntl`
+    list-none
+    flex
+    space-x-12
+    justify-center
+    m-0
+    border
+    border-dashed
+    border-gray-accent-light
+    px-8
+    py-6
+    rounded-[2px]
+`
+
+const Feature = ({ icon, text }) => {
+    return (
+        <li className="flex space-x-2 items-center">
+            <span>{icon}</span>
+            <span>{text}</span>
+        </li>
+    )
+}
 
 const PricingNew = (): JSX.Element => {
     const { hash } = useLocation()
@@ -21,9 +46,22 @@ const PricingNew = (): JSX.Element => {
         <Layout>
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section className="mt-12 md:mt-24 px-5">
-                <h1 className="text-center mt-0 mb-4">Pricing</h1>
-                <h2 className="text-center text-lg m-0 mb-7 opacity-75">
-                    Pay per event after a free allocation every month.
+                <h1 className="text-center mt-0 mb-16 text-6xl">Pricing</h1>
+                <div className="flex justify-center relative">
+                    <p className="absolute bg-[#DFE0D9] px-2 py-1 text-xs transform -translate-y-1/2">
+                        <span className="opacity-50">ALL EDITIONS COME WITH FULL PRODUCT SUITE</span>
+                    </p>
+                    <ul className={features}>
+                        <Feature icon={<Funnels />} text={'Funnels & trends'} />
+                        <Feature icon={<Cohorts />} text={'Cohorts & retention'} />
+                        <Feature icon={<PathAnalysis />} text={'Path analysis'} />
+                        <Feature icon={<FeatureFlags />} text={'Feature flags'} />
+                        <Feature icon={<SessionRecordings />} text={'Session recordings'} />
+                    </ul>
+                </div>
+                <h2 className="my-11 text-lg text-center">
+                    <span className="opacity-50">All plans include</span> unlimited events, tracked users,
+                    <span className="opacity-50">and</span> teammates.
                 </h2>
 
                 <PricingTable showScaleByDefault={hash === SHOW_SCALE_HASH} />
