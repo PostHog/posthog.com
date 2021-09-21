@@ -1,10 +1,7 @@
 import React from 'react'
 import Logo from 'components/Logo'
-import { Structure } from '../../Structure'
 
-import checkIcon from '../../../images/check.svg'
-
-export const CloudVsSelfHost = ({ className = '' }) => {
+export const CloudVsSelfHost = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <section
             className={`${className} px-4 box-content grid md:grid-cols-2 grid-cols-1 md:border-t border-dashed border-gray-accent-light max-w-screen-lg mx-auto relative md:gap-20 text-center font-bold text-almost-black`}

@@ -8,8 +8,7 @@ interface PageHeaderProps {
     bgColor?: string
 }
 
-export const PageHeader = ({ title, tagline, styleKey, bgColor = 'navy' }: PageHeaderProps) => {
-    const backgroundColorClass = `bg-${bgColor}`
+export const PageHeader = ({ title, tagline, styleKey }: PageHeaderProps): JSX.Element => {
     return (
         <div className="page-header-container">
             <div className={`head ${styleKey}`}>

@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { Link } from 'react-scroll'
 
-export default function InternalSidebarLink({ url, name, className = '', style = {} }) {
+interface InternalSidebarLinkProps {
+    url: string
+    name: string
+    className?: string
+    style?: CSSProperties
+}
+
+export default function InternalSidebarLink({
+    url,
+    name,
+    className = '',
+    style = {},
+}: InternalSidebarLinkProps): JSX.Element {
     return (
         <Link
             style={style}

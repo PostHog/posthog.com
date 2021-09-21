@@ -19,8 +19,8 @@ export function BlogFooter({ blogArticleSlug }: BlogFooterProps): JSX.Element {
             />
 
             <BlogPosts
-                render={(posts) => {
-                    const postCards = (posts as { node: PostType }[])
+                render={(posts: { node: PostType }[]) => {
+                    const postCards = posts
                         .filter((post) => post.node.fields.slug !== blogArticleSlug)
                         .slice(0, 2)
                         .map((post) => <PostCard key={post.node.id} post={post.node} featured={false} />)

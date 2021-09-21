@@ -11,7 +11,14 @@ import SliderNav from '../../SliderNav'
 
 import './index.css'
 
-const SliderItem = ({ image, title, subtitle, description }) => {
+interface SliderItemProps {
+    image: string
+    title: string | React.ReactNode
+    subtitle: string | React.ReactNode
+    description: string | React.ReactNode
+}
+
+const SliderItem = ({ image, title, subtitle, description }: SliderItemProps) => {
     return (
         <div className="flex sm:max-w-[calc(100vw/2+50px)] md:max-w-[calc(100vw/3+50px)] xl:max-w-[calc(100vw/4+50px)] 2xl:max-w-[calc(100vw/5+50px)] flex-col py-5 px-10 items-start border-r border-dashed border-gray-accent-light">
             <img className="mb-9" src={image} />
@@ -22,8 +29,8 @@ const SliderItem = ({ image, title, subtitle, description }) => {
     )
 }
 
-export const InterviewProcess = () => {
-    const sliderRef = useRef(null)
+export const InterviewProcess = (): JSX.Element => {
+    const sliderRef = useRef<Slider>(null)
     const [currentSlide, setCurrentSlide] = useState(0)
     const sliderSettings = {
         dots: false,
@@ -44,7 +51,7 @@ export const InterviewProcess = () => {
     }
     const breakpoints = useBreakpoint()
     const slidesToShow = breakpoints.md ? 1 : breakpoints.lg ? 2 : breakpoints.xl ? 3 : 4
-    const handleChange = (_oldIndex, newIndex) => {
+    const handleChange = (_oldIndex: number, newIndex: number) => {
         setCurrentSlide(newIndex)
     }
     return (
@@ -58,8 +65,8 @@ export const InterviewProcess = () => {
                 />
             </Structure.Section>
             <SliderNav
-                handlePrevious={() => sliderRef.current.slickPrev()}
-                handleNext={() => sliderRef.current.slickNext()}
+                handlePrevious={() => sliderRef?.current?.slickPrev()}
+                handleNext={() => sliderRef?.current?.slickNext()}
                 currentIndex={currentSlide}
                 length={5 - slidesToShow}
             />

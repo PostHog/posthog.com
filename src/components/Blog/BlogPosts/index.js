@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-export const BlogPosts = ({ render }: { render: (posts: Array<any>) => JSX.Element }) => {
+export const BlogPosts = ({ render }) => {
     const postData = useStaticQuery(query)
     const posts = postData.allMdx.edges
         .filter((edge) => !!edge.node.frontmatter.date)

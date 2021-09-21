@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import Link from 'components/Link'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import SearchBar from './SearchBar'
 import { Edit, Issue, MobileMenu } from 'components/Icons/Icons'
 import cntl from 'cntl'
+import { MenuItemType } from './Menu'
 
 const crumbText = (classes = '') => cntl`
     font-bold
@@ -14,7 +15,7 @@ const crumbText = (classes = '') => cntl`
     ${classes}
 `
 
-const CommunityLink = ({ icon, text, url }) => {
+const CommunityLink = ({ icon, text, url }: { icon: React.ReactNode; text: string | React.ReactNode; url: string }) => {
     return (
         <li className="py-2 px-3">
             <a
@@ -28,7 +29,7 @@ const CommunityLink = ({ icon, text, url }) => {
     )
 }
 
-const Crumb = ({ url, text, className }) => {
+const Crumb = ({ url, text, className }: { url?: string; text: string | React.ReactNode; className?: string }) => {
     // If crumbs get more complex, create a conditional wrapper component to keep code DRY
     return (
         <li
@@ -45,6 +46,15 @@ const Crumb = ({ url, text, className }) => {
     )
 }
 
+interface NavigationProps {
+    breadcrumb: MenuItemType[]
+    breadcrumbBase: MenuItemType
+    filePath: string
+    title: string
+    menuOpen?: boolean
+    handleMobileMenuClick: MouseEventHandler
+}
+
 export default function Navigation({
     breadcrumb,
     breadcrumbBase,
@@ -52,9 +62,7 @@ export default function Navigation({
     title,
     menuOpen,
     handleMobileMenuClick,
-    next,
-    previous,
-}) {
+}: NavigationProps): JSX.Element {
     return (
         <div
             style={{
@@ -93,7 +101,7 @@ export default function Navigation({
                         url={`https://github.com/PostHog/posthog.com/issues/new?title=${breadcrumbBase.name} feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
                     />
                 </ul>
-                <DarkModeToggle className="m-0" />
+                <DarkModeToggle />
             </div>
         </div>
     )

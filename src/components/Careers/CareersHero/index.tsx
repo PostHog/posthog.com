@@ -1,10 +1,9 @@
 import React from 'react'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 
-import { Header } from '../../Header'
 import { CallToAction } from '../../CallToAction'
 
-export const CareersHero = () => {
+export const CareersHero = (): JSX.Element => {
     return (
         <div className="careers-hero">
             <div className="w-11/12 pt-12 sm:pt-24 mx-auto text-center relative z-10 rounded">

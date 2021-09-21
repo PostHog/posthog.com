@@ -1,24 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, CSSProperties } from 'react'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from './InternalSidebarLink'
+import { MenuItemType } from './Menu'
 
-export default function StickySidebar({ tableOfContents, className = '', top = 0, reportScrollUpdated }) {
-    const [navBallLocation, setNavBallLocation] = useState(null)
-    const [navStyle, setNavStyle] = useState(null)
-    const [activeId, setActiveId] = useState(null)
-    const navRef = useRef(null)
-    const contentRef = useRef(null)
-    const handleInternalNavUpdate = (el) => {
+interface StickySidebarProps {
+    tableOfContents: MenuItemType[]
+    top?: number
+    reportScrollUpdated: (id: string) => void
+}
+
+export default function StickySidebar({
+    tableOfContents,
+    top = 0,
+    reportScrollUpdated,
+}: StickySidebarProps): JSX.Element {
+    const [navBallLocation, setNavBallLocation] = useState<number | null>(null)
+    const [navStyle, setNavStyle] = useState<Partial<CSSProperties> | null>(null)
+    const [activeId, setActiveId] = useState<string | null>(null)
+    const navRef = useRef<HTMLDivElement>(null)
+    const contentRef = useRef<HTMLDivElement>(null)
+    const handleInternalNavUpdate = (el: HTMLElement) => {
         if (el) {
             setActiveId(el.id)
             reportScrollUpdated?.(el.id)
-            const activeEl = document.querySelector('.active-link')
+            const activeEl = document.querySelector<HTMLElement>('.active-link')
             activeEl && setNavBallLocation(activeEl.offsetTop + 7)
         }
     }
     useEffect(() => {
         const isBrowser = typeof window !== 'undefined'
-        if (navRef && contentRef && isBrowser) {
+        if (navRef?.current && contentRef?.current && isBrowser) {
             const offset = top * 2
             const contentHeight = contentRef.current.offsetHeight
             const windowHeight = window.innerHeight
@@ -39,7 +50,7 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
             ref={navRef}
             className="self-stretch flex-1 relative border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark hidden xl:block"
         >
-            <aside style={navStyle} className="sticky flex flex-col pb-14 overflow-y-auto ml-[-5px] pl-[5px]">
+            <aside style={navStyle || {}} className="sticky flex flex-col pb-14 overflow-y-auto ml-[-5px] pl-[5px]">
                 <div ref={contentRef} className="pl-7 mt-auto">
                     <div
                         style={{

@@ -1,7 +1,6 @@
 import React from 'react'
-import { CallToAction } from '../CallToAction'
 
-export const FeaturesSelfHost = () => {
+export const FeaturesSelfHost = (): JSX.Element => {
     return (
         <div className="w-11/12 max-w-6xl mx-auto text-left relative">
             <ul className="flex flex-col md:flex-row">

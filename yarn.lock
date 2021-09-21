@@ -2334,6 +2334,11 @@
   resolved "https://registry.npmjs.org/@types/events/-/events-3.0.0.tgz"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
 
+"@types/gatsby-plugin-breakpoints@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@types/gatsby-plugin-breakpoints/-/gatsby-plugin-breakpoints-1.3.2.tgz#ba7fb33cf43274ab143d9d06cfb38a2cf3f0bf27"
+  integrity sha512-hP3ey2iZFaVibTEQmdUjVM3eWsCh7xp/FVaxkJZmsiPdT3qknaqa8ztuMHMGAGRG6yBbZYnW4/nKTqXz8fD+lA==
+
 "@types/get-port@^3.2.0":
   version "3.2.0"
   resolved "https://registry.npmjs.org/@types/get-port/-/get-port-3.2.0.tgz"
@@ -2532,6 +2537,13 @@
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/@types/react-scroll/-/react-scroll-1.8.3.tgz#80951ed1934ab49d4926aad95c26607b8b1a9713"
   integrity sha512-Xt0+Y58pwrIv+vRFxcyKDoo0gBWBR2eNMJ4XRMhQpZdGUtmjnszPi/wFEJSAY+5r83ypJsSA+hOpSc3hRpYlWw==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-scrollspy@^3.3.4":
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/@types/react-scrollspy/-/react-scrollspy-3.3.4.tgz#60fd2a48e899b5911c8c044844a3fc2d379b7fa2"
+  integrity sha512-nm7JqM1kWmx2wU0YTr4KwyoKedeoHyKpel9dTlQaTaolicFGOAVx5uCWVjf0bXt1zXU1Tk4aKdBWtxrB5Ccnxg==
   dependencies:
     "@types/react" "*"
 

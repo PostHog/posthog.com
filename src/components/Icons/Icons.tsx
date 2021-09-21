@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import './style.scss'
 
 const Icon = ({ children }: { children: React.ReactNode }): JSX.Element => (
@@ -78,7 +78,7 @@ export const UpAndToTheRightIcon = (): JSX.Element => (
     </Icon>
 )
 
-export const RightArrow = ({ className }: { className: string }): JSX.Element => (
+export const RightArrow = ({ className }: { className?: string }): JSX.Element => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
     </svg>
@@ -104,7 +104,7 @@ export const Minus = (): JSX.Element => {
     )
 }
 
-export const Chevron = ({ className }: { className: string }): JSX.Element => {
+export const Chevron = ({ className }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -122,7 +122,7 @@ export const Chevron = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const CircleArrow = ({ className }: { className: string }): JSX.Element => {
+export const CircleArrow = ({ className }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -193,7 +193,7 @@ export const Issue = ({ className }: { className?: string }): JSX.Element => {
     )
 }
 
-export const MobileMenu = ({ className, style }: { className: string; style: any }): JSX.Element => {
+export const MobileMenu = ({ className, style }: { className?: string; style?: CSSProperties }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -231,7 +231,7 @@ export const SliderNavArrow = ({
     bgColor: string
     arrowColor: string
     className: string
-    style: any
+    style: CSSProperties
 }): JSX.Element => {
     return (
         <svg
@@ -252,7 +252,7 @@ export const SliderNavArrow = ({
     )
 }
 
-export const LinkedIn = ({ className }: { className: string }): JSX.Element => {
+export const LinkedIn = ({ className }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -277,7 +277,7 @@ export const LinkedIn = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const Twitter = ({ className }: { className: string }): JSX.Element => {
+export const Twitter = ({ className }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -302,7 +302,7 @@ export const Twitter = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const GitHub = ({ className }: { className: string }): JSX.Element => {
+export const GitHub = ({ className }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}

@@ -1,8 +1,7 @@
 import React from 'react'
 import { Structure } from '../../Structure'
-import { mergeClassList } from '../../../lib/utils'
 
-export const WorkingAtPostHog = () => {
+export const WorkingAtPostHog = (): JSX.Element => {
     return (
         <div id="working-at-posthog">
             <Structure.Section
@@ -20,7 +19,7 @@ export const WorkingAtPostHog = () => {
                             src="https://www.youtube.com/embed/xlODCLrZyvM"
                             className="absolute top-0 left-0 w-full h-full rounded-lg"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen=""
+                            allowFullScreen
                             frameBorder="0"
                         ></iframe>
                     </div>

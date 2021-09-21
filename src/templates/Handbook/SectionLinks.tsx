@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'components/Link'
 import { CircleArrow } from 'components/Icons/Icons'
 
-type LinkType = { url: string; name: string }
+export type LinkType = { url: string; name: string }
 
 interface SectionLinkProps {
     link?: LinkType

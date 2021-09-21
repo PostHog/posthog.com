@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Logo({ noText, allWhite, className }) {
+export default function Logo({ noText, allWhite }: { noText?: boolean; allWhite?: boolean }): JSX.Element {
     return (
         <svg
             width={noText ? '48' : '157'}

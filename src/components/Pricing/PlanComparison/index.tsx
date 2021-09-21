@@ -1,10 +1,5 @@
 import React, { useState } from 'react'
 import { Fragment } from 'react'
-//import { CheckIcon, MinusIcon } from '@heroicons/react/solid'
-
-import { Structure } from '../../Structure'
-
-import checkIcon from '../../../images/check.svg'
 import CheckIcon from '../../../images/check.svg'
 import MinusIcon from '../../../images/x.svg'
 import { CallToAction } from 'components/CallToAction'
@@ -220,11 +215,11 @@ const sections = [
     },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const PlanComparison = ({ className = '' }) => {
+export const PlanComparison = ({ className = '' }: { className?: string }): JSX.Element => {
     const [expanded, setExpanded] = useState(false)
 
     const displaySections = expanded ? sections : sections.slice(0, 1)
@@ -249,7 +244,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 <p className="mt-4 text-sm text-gray-500 hidden">{tier.description}</p>
                                 <a
                                     href={tier.href}
-                                    className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900 hidden"
+                                    className="mt-6 border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-almost-black text-center hover:bg-gray-900 hidden"
                                 >
                                     Buy {tier.name}
                                 </a>
@@ -259,7 +254,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 <table key={section.name} className="w-full mb-0">
                                     <caption
                                         style={{ captionSide: 'top' }}
-                                        className="p-3 mt-4 text-sm font-medium text-almost-black font-bold"
+                                        className="p-3 mt-4 text-sm text-almost-black font-bold"
                                     >
                                         {section.name}
                                     </caption>
@@ -352,7 +347,7 @@ export const PlanComparison = ({ className = '' }) => {
                                     &nbsp;
                                 </th>
                                 <th
-                                    colSpan="2"
+                                    colSpan={2}
                                     className="text-almost-black text-center border-white border-opacity-10"
                                 >
                                     Self-hosted options
@@ -510,7 +505,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 type="primary"
                                 width="56"
                                 to="/docs/self-host/"
-                                onClick={(_) => setExpanded(true)}
+                                onClick={() => setExpanded(true)}
                             >
                                 See full comparison
                             </CallToAction>

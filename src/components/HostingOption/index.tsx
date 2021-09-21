@@ -1,5 +1,4 @@
 import React from 'react'
-import hostingSprite from './images/sprite-hosting.svg'
 import { Link } from 'gatsby'
 
 interface HostingOptionProps {
@@ -8,7 +7,7 @@ interface HostingOptionProps {
     url: string
 }
 
-export const HostingOption = ({ handle, name, url }: HostingOptionProps) => {
+export const HostingOption = ({ handle, name, url }: HostingOptionProps): JSX.Element => {
     return (
         <li className="mr-1 mb-2">
             <Link

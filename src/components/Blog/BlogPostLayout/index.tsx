@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import Layout from 'components/Layout'
 import { PosthogAnnouncement } from '../../PosthogAnnouncement/PosthogAnnouncement'
 import { GetStartedModal } from '../../GetStartedModal'
 import { BlogFooter } from '../../BlogFooter'

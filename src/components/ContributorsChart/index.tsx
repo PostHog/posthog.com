@@ -3,9 +3,8 @@ import Chart from 'chart.js'
 import { useValues } from 'kea'
 import { contributorStatsLogic } from './contributorStatsLogic'
 import { Spacer } from 'components/Spacer'
-import { Link } from 'gatsby'
 
-export const ContributorsChart = () => {
+export const ContributorsChart = (): JSX.Element => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const { datasets, datasetsLoading } = useValues(contributorStatsLogic)
 

@@ -14,7 +14,6 @@ import { CodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import { AuthorsData } from 'types'
-import { findAuthor } from 'lib/utils'
 
 interface MdxQueryData {
     postData: {
@@ -62,13 +61,8 @@ const components = {
     ...shortcodes,
 }
 
-function addIndex(url: string) {
-    const indexUrls = ['/docs', '/handbook']
-    return `${url}${indexUrls.includes(url) ? '/index' : ''}`
-}
-
-function TemplateMdx({ data }: { data: MdxQueryData }) {
-    const { postData: mdx, authorsData } = data
+function TemplateMdx({ data }: { data: MdxQueryData }): JSX.Element {
+    const { postData: mdx } = data
     const { sidebarSelectedKey: selectedKey, sidebarEntry } = useValues(layoutLogic)
     const { setSidebarHide, setAnchorHide, onSidebarContentSelected, setSidebarContentEntry } = useActions(layoutLogic)
 
@@ -77,8 +71,6 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
     const { slug } = fields
 
     const filePath = `/${parent?.relativePath}`
-
-    const author = findAuthor(authorsData.frontmatter.authors)(frontmatter.author)
 
     const hideAnchor = frontmatter.hideAnchor === null ? false : frontmatter.hideAnchor
     const hideSidebar = frontmatter.sidebar === null ? true : false
@@ -96,18 +88,7 @@ function TemplateMdx({ data }: { data: MdxQueryData }) {
 
     return (
         <div className={'post-page ' + (!blogArticleSlug ? 'post-page-wrapper' : '')}>
-            <Layout
-                blogDate={frontmatter.date}
-                onPostPage={true}
-                blogArticleSlug={blogArticleSlug}
-                pageTitle={frontmatter.title}
-                featuredImageType={frontmatter.featuredImageType}
-                featuredImage={frontmatter.featuredImage?.publicURL}
-                isHomePage={false}
-                isDocsPage={isDocsPage}
-                menuActiveKey={isDocsPage ? 'docs' : ''}
-                authorDetails={author}
-            >
+            <Layout>
                 <SEO
                     title={
                         frontmatter.title + ' - PostHog' + (isDocsPage ? ' Docs' : isHandbookPage ? ' Handbook' : '')

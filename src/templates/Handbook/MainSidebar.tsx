@@ -5,8 +5,8 @@ interface MainSidebarProps {
     slug: string
     menu: MenuItemType[]
     className?: string
-    mainEl?: React.MutableRefObject<HTMLElement>
-    height: string | number
+    mainEl?: React.MutableRefObject<HTMLElement | null>
+    height?: string | number
     sticky?: boolean
     top?: number
 }
@@ -24,7 +24,7 @@ export default function MainSidebar({
     const navEl = useRef<HTMLElement | null>(null)
     useEffect(() => {
         const isBrowser = typeof window !== 'undefined'
-        if (!height && mainEl && isBrowser) {
+        if (!height && mainEl?.current && isBrowser) {
             const offset = top * 2
             const navHeight = Math.min(window.innerHeight - offset, mainEl.current.getBoundingClientRect().height)
             setNavHeight(navHeight)

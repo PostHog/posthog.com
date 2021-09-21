@@ -20,17 +20,16 @@ interface CodeBlockProps {
             mdxType: string
             children: string
         }
-        [extraProps: string]: any // 'children' has other props that we don't use here
+        [extraProps: string]: unknown // 'children' has other props that we don't use here
     }
 }
 
-export const CodeBlock = (props: CodeBlockProps) => {
+export const CodeBlock = (props: CodeBlockProps): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const className = props.children.props.className || ''
     const matches = className.match(/language-(?<lang>.*)/)
     const [code, setCode] = useState('')
     const [projectName, setProjectName] = useState('')
-    const [hasBeenCopied, setHasBeenCopied] = useState(false)
     const [tooltipVisible, setTooltipVisible] = useState(false)
     const [copyToClipboardAvailable, setCopyToClipboardAvailable] = useState(false)
     const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
@@ -82,7 +81,6 @@ export const CodeBlock = (props: CodeBlockProps) => {
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(code || props.children.props.children.trim())
-        setHasBeenCopied(true)
         setTooltipVisible(true)
         setTimeout(() => {
             setTooltipVisible(false)

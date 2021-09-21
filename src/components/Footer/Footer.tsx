@@ -37,7 +37,7 @@ const link = (marginBottom = '1') => cntl`
     inline-block
 `
 
-const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
+const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }: Record<string, string>) => {
     return (
         <li className={className}>
             <Link className={link(marginBottom)} to={url}>

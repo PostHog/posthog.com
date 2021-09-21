@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import MainSidebar from './MainSidebar'
-import SectionLinks from './SectionLinks'
+import SectionLinks, { LinkType } from './SectionLinks'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -12,23 +12,22 @@ import { useActions } from 'kea'
 import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 import { MenuItemType } from './Menu'
 
-const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
-const Iframe = (props) => (
+const Iframe = (props: Record<string, unknown>) => (
     <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
         <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
     </div>
 )
-const InlineCode = (props) => (
+const InlineCode = (props: Record<string, unknown>) => (
     <code
         {...props}
         className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded"
     />
 )
-const Blockquote = (props) => (
+const Blockquote = (props: Record<string, unknown>) => (
     <blockquote {...props} className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark" />
 )
 
-const SectionLinksBottom = ({ previous, next }) => {
+const SectionLinksBottom = ({ previous, next }: { previous: LinkType; next: LinkType }) => {
     return (
         <>
             <hr className="w-[calc(100vw-2rem)] m-0 bg-transparent border-t border-r-0 border-l-0 border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark" />
@@ -41,7 +40,7 @@ const SectionLinksBottom = ({ previous, next }) => {
     )
 }
 
-const SectionLinksTop = ({ previous, next }) => {
+const SectionLinksTop = ({ previous, next }: { previous: LinkType; next: LinkType }) => {
     return <SectionLinks className="mt-9" previous={previous} next={next} />
 }
 
@@ -54,8 +53,8 @@ interface MainComponentProps {
     hideAnchor?: boolean
     tableOfContents: any
     body: any
-    next: any
-    previous: any
+    next: LinkType
+    previous: LinkType
     hideLastUpdated?: boolean
 }
 
@@ -82,7 +81,7 @@ export default function Main({
     }
     const breakpoints = useBreakpoint()
     const showToc = !hideAnchor && tableOfContents?.length
-    const mainEl = useRef()
+    const mainEl = useRef(null)
     return (
         <div className="relative">
             <SectionLinksTop next={next} previous={previous} />

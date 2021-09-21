@@ -1,6 +1,6 @@
 // @todo - add/use to, href, and onClick props
 
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { Link } from 'gatsby'
 
 import { mergeClassList } from '../../lib/utils'
@@ -14,18 +14,6 @@ import checkImg from './images/check.svg'
 import bookImg from './images/book.svg'
 import downArrow from './images/down-arrow.svg'
 import readDarkImg from './images/read-dark.svg'
-
-interface CallToActionProps {
-    onClick?: () => void
-    className?: string
-    type?: string
-    icon?: string
-    iconBg?: string
-    children: React.ReactNode
-    width?: string
-    href?: string
-    to?: string
-}
 
 const icons = {
     rocket: rocketImg,
@@ -45,6 +33,20 @@ const buttonTypeClasses = {
     secondary: 'button-secondary rounded text-white hover:text-white',
     button: 'button rounded text-white hover:text-white',
     custom: '',
+    outline:
+        'text-center select-none rounded-full bg-tan bg-opacity-75 dark:bg-primary text-primary text-opacity-80 hover:text-opacity-100 dark:text-primary-dark hover:text-primary border-opacity-10 hover:border-opacity-25 active:border-opacity-50 border-primary dark:border-primary-dark font-bold px-5 py-2 border-3',
+}
+
+interface CallToActionProps {
+    onClick?: MouseEventHandler
+    className?: string
+    icon?: keyof typeof icons
+    type?: keyof typeof buttonTypeClasses
+    iconBg?: string
+    children: React.ReactNode
+    width?: string
+    href?: string
+    to?: string
 }
 
 export const CallToAction = ({
@@ -57,9 +59,9 @@ export const CallToAction = ({
     href,
     to,
     onClick,
-}: CallToActionProps) => {
+}: CallToActionProps): JSX.Element => {
     const iconNode = icons[icon] ? (
-        <span className={`${iconBg} icon inline-block mr-3 bg-opacity-10 rounded rounded-sm px-3 py-2`}>
+        <span className={`${iconBg} icon inline-block mr-3 bg-opacity-10 rounded-sm px-3 py-2`}>
             <img src={icons[icon]} className="h-4 w-4 mb-0" alt="Get started with PostHog" />
         </span>
     ) : null

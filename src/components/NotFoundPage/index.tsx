@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { CallToAction } from '../CallToAction'
-import { Link } from 'gatsby'
 import { useValues } from 'kea'
 
 import Layout from '../Layout'
@@ -20,8 +19,8 @@ export default function NotFoundPage(): JSX.Element {
     }, [])
 
     return (
-        <Layout className="not-found-page-container">
-            <div className="centered py-12">
+        <Layout>
+            <div className="centered py-12 not-found-page-container">
                 <h2>Oops, there's nothing here</h2>
 
                 <p>

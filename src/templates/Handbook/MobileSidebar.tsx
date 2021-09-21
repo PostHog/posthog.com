@@ -1,7 +1,8 @@
 import React from 'react'
 import InternalSidebarLink from './InternalSidebarLink'
+import { MenuItemType } from './Menu'
 
-export default function InternalSidebar({ tableOfContents }) {
+export default function InternalSidebar({ tableOfContents }: { tableOfContents: MenuItemType[] }): JSX.Element {
     return (
         <aside className="py-4 mb-10 border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b">
             <p className="text-gray opacity-100 dark:text-white text-base mt-0 mb-4 font-bold">On this page</p>
