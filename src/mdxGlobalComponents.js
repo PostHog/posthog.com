@@ -8,13 +8,7 @@ import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
-import { BlogAuthor } from './components/Blog/BlogAuthor'
-import { BlogCategoriesList } from './components/Blog/BlogCategoriesList'
-import { BlogFeaturedImage } from './components/Blog/BlogFeaturedImage'
-import { BlogIntro } from './components/Blog/BlogIntro'
-import { BlogPostLayout } from './components/Blog/BlogPostLayout'
-import { BlogPosts } from './components/Blog/BlogPosts'
-import { BlogShareButtons } from './components/Blog/BlogShareButtons'
+import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
@@ -97,13 +91,7 @@ export const shortcodes = {
     AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
-    BlogAuthor,
-    BlogCategoriesList,
-    BlogFeaturedImage,
-    BlogIntro,
-    BlogPostLayout,
-    BlogPosts,
-    BlogShareButtons,
+    Blog,
     BlogFooter,
     CallToAction,
     Benefits,
