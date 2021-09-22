@@ -33,12 +33,7 @@ That does 2 GraphQL queries - one for Markdown files, and the other for MDX file
 
 The response is almost the same, with a few differences. 
 
-Here, for the MDX part, we pass the page (node) `id` as part of the context for the template to process each page. More on this later.
-
-### MDX Template
-
-`TemplateMdx.tsx` is almost the same as our traditional post template, however, it queries MDX pages based on their ID 
-which we passed via the `createPages` context.
+Here, for the MDX part, we pass the page (node) `id` as part of the context for the template to process each page.
 
 The GraphQL query will return everything we need, from content to frontmatter, and we use the component 
 `MDXRenderer` to render the body, and `MDXProvider` to pass some context that is available to all MDX pages.

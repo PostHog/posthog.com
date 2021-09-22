@@ -7,8 +7,8 @@ import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import './style.scss'
 import { CopyOutlined } from '@ant-design/icons'
-import { Tooltip } from 'antd'
 import { layoutLogic } from 'logic/layoutLogic'
+import Tooltip from '../Tooltip'
 
 interface CodeBlockProps {
     children: {
@@ -89,7 +89,7 @@ export const CodeBlock = (props: CodeBlockProps): JSX.Element => {
 
     return (
         <div className="relative">
-            <Tooltip title="Copied!" visible={tooltipVisible}>
+            <Tooltip className="right-0" title="Copied!" visible={tooltipVisible}>
                 {copyToClipboardAvailable ? (
                     <span className="text-primary dark:text-primary-dark absolute right-2 top-1">
                         <CopyOutlined onClick={copyToClipboard} />

@@ -9,6 +9,7 @@ interface LinkProps {
     onClick?: MouseEventHandler<HTMLElement>
     disablePrefetch?: boolean
     external?: boolean
+    iconClasses?: string
 }
 
 export default function Link({
@@ -18,6 +19,7 @@ export default function Link({
     onClick,
     disablePrefetch,
     external,
+    iconClasses = '',
     ...other
 }: LinkProps & Record<string, unknown>): JSX.Element {
     const internal = to && !disablePrefetch && /^\/(?!\/)/.test(to)
@@ -32,9 +34,9 @@ export default function Link({
     ) : (
         <a target={external ? '_blank' : ''} rel="noopener noreferrer" {...other} href={to} className={className}>
             {external ? (
-                <span className="flex justify-center items-center space-x-2">
-                    <ExternalLink />
+                <span className="inline-flex justify-center items-center space-x-1">
                     <span>{children}</span>
+                    <ExternalLink className={iconClasses} />
                 </span>
             ) : (
                 children

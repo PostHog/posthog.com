@@ -1,11 +1,13 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
+import { useActions } from 'kea'
+import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 import { Link } from 'react-scroll'
 
 interface InternalSidebarLinkProps {
     url: string
     name: string
     className?: string
-    style?: CSSProperties
+    style?: React.CSSProperties
 }
 
 export default function InternalSidebarLink({
@@ -14,6 +16,8 @@ export default function InternalSidebarLink({
     className = '',
     style = {},
 }: InternalSidebarLinkProps): JSX.Element {
+    const key = typeof window !== 'undefined' ? window.location.pathname : 'gatsby-ssr-context'
+    const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key }))
     return (
         <Link
             style={style}
@@ -23,6 +27,10 @@ export default function InternalSidebarLink({
             to={url}
             hashSpy
             className={`text-almost-black hover:text-orange dark:text-white dark:hover:text-orange ${className}`}
+            spy
+            onSetActive={() => {
+                reportScrollUpdated(url)
+            }}
         >
             {name}
         </Link>
