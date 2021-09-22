@@ -42,6 +42,19 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 - You can also choose how the `featuredImage` will be displayed. If your `featuredImage` has text on it (or has a white background), add `featuredImageType: standard` to have the [image sit above the title](https://posthog.com/blog/yc-top-companies). If the `featuredImage` has no text on it, use `featuredImageType: full` to [overlay the title and author name](https://posthog.com/blog/intro-phil-leggetter) on the image.
 - The post added to the sidebar in `src/sidebars/sidebars.json`
 - Add the author of the post ([like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md)). (If this is your first time posting to the blog, add yourself to [Authors.md](https://github.com/PostHog/posthog.com/blob/master/contents/authors.md).)
+- Assign the post a category using `categories` in the frontmatter section. The available categories are **General**, **Company & culture**, **Engineering**, **Release notes**, **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
+
+  ```
+  categories:
+    - CEO diaries
+    - General
+  ```
+ 
+  ```
+  categories: ["CEO diaries", "General"]
+  ```
+  
+- Add a meta description using `description` in the frontmatter section (optional)
 - Set the date of the blog post to the intended publishing date. (This gives Team Design a heads up on how much time we have to produce a post image.)
 - Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
 
