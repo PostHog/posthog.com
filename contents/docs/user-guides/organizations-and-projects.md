@@ -8,18 +8,14 @@ PostHog gives you tools for data access control and logical separation of data: 
 
 ## Organizations
 
-An organization is the largest building block of PostHog's structure: it's made up of projects and has PostHog users as members. 
-Each organization member has an organization-wide [access level](#access-levels) dictating their ability to perform certain actions.
+An organization is the highest abstraction level within a PostHog instance. An organization commonly represents a real-world company or other type of grouping that is completely isolated. An organization can have multiple projects, which can be used to logically separate data (e.g. mobile/web apps, teams within a company, etc.). Team members belong to an organization.
+Permissions can be handled both at the organization or project level (see below), and a user's ability to take an action is determined based on both.
 
-Most commonly a PostHog organization represents a real-world company, but this isn't a requirement and you are free to gather people any way you see fit.
 
-As a brand new PostHog user you'll always find yourself in a single organization upon account creation.
-If you've joined from an invite, that will be the organization you've been invited to.
-Otherwise, you'll become the Owner of a new organization created just for you, based on the company name you provided when creating the account.
 
-To switch between organizations, navigate to the current organization's settings, or to create new projects, use the account dropdown on the right of the top bar.
+You can **have access to multiple organizations with a single account** (note that all data is still segmented between organizations). To switch between organizations click on the account dropdown on the top right corner.
 
-> **Note:** As a PostHog Cloud user, you can create, manage, and join organizations without limits forever. For self-hosted PostHog, however, multiple organizations belong to our premium team-oriented offering. To use this feature, [contact us for a self-hosted license](/pricing).
+> **Note:** As a PostHog Cloud user, you can create, manage, and join multiple organizations without limits. For self-hosted PostHog, however, multiple organizations belong to our [premium](/pricing) offering.
 
 ### Notifications
 
@@ -59,16 +55,16 @@ Which way is the best fit for you depends on the characteristics of your product
 
 ## Permissions
 
-By default all organization members have access to all its projects, at their organization-wide access level.
+By default all organization members have access to all its projects.
 This makes for the smoothest collaboration. However, if you require access to data to be more granular, see [Project-based permissioning](#project-based-permissioning) below.
 
 ### Access levels
 
-There are three access levels in PostHog, each with more privileges than the one below it. There can be any number of members at each level, except Owner, of which there is always one in the organization.
+There are three access levels in PostHog (Owner, Admin & Member). Please note that there can only be one Onwer per organization.
 
 See permissions at each level below:
 
-| | Member (base level) | Administrator (elevated level) | Owner (unique top level) |
+| | Member (base level) | Administrator | Owner |
 | --- | --- | --- | --- |
 | Viewing and querying project data | ✅ | ✅ | ✅ |
 | Leaving the organization | ✅ | ✅ | ✅ |
@@ -81,16 +77,14 @@ See permissions at each level below:
 
 Access levels can be viewed and changed in the Members section of organization settings.
 
-In projects with [project-based permissioning](#project-based-permissioning), there's also a Members section in project settings, which pertains to project-specific memberships.
 
-### Project-based permissioning
+### Private projects (project-based permissioning)
 
-If you'd like to restrict access to data within the organization to only those who need it, you can use PostHog's project-based permissioning.
+If you'd like to restrict access to data within the organization to only those who need it, you can use PostHog's project-based permissioning. Projects with this option enabled will become **secret by default and invite-only** (except for Administrators and the Owner).
 
-**Enable project-based permissioning** is a switch in project settings that can be turned on (or off) at any time by organization-wide Administrators and the Owner.
+Any Administrator or Owner can make a project private or open at any time.
 
-With project-based permissioning only organization-wide Administrators and the Owner have implicit access to projects.
-Lower-level Members need to be added explicitly in project settings. Those that haven't been added cannot access the project at all, in any way.
-At the same time project-based permissioning allows you to grant members project-specific access _higher_ than their organization-wide level.
+Private projects can **only be accessed by Administrators and Owners by default**. Regular members can be added to projects from the project settings page to gain access.
+Regular organization members can also be made administrators of specific projects, and they will be able to manage users who have access to that specific project.
 
 > **Note:** Project-based permissioning belongs to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](/pricing).
