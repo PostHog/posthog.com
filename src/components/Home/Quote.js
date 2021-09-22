@@ -14,6 +14,7 @@ export default function HomeQuote() {
                     width={100}
                     height={100}
                     alt="Ben White - @benjackwhite"
+                    outputPixelDensities={[1, 2]}
                     src="../../images/ben-white.png"
                 />
             }

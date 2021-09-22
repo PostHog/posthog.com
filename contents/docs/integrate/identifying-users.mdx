@@ -1,0 +1,68 @@
+---
+title: Identifying users
+sidebarTitle: Overview
+sidebar: Docs
+showTitle: true
+---
+
+PostHog allows you to identify your users with an ID of your choice so you can track users across platforms, connect events from before and after users log in, and leverage your preferred type of ID for filtering through your users. 
+
+Identifying users is usually done via our libraries, by calling the `identify` method. This method will associate an **anonymous ID** with a distinct ID of your choice. In client libraries, the anonymous ID is stored locally and inferred for you, but in server-side libraries you need to tell PostHog what that anonymous ID is too.
+
+For example, if you identify an user in your website as follows:
+
+```js
+// posthog-js
+posthog.identify('my_user_12345')
+```
+
+PostHog will then pull their anonymous ID (e.g. `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55`) and associate it with the ID you passed in (`my_user_12345`).
+
+From now on, all events PostHog sees with ID `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55` will be attributed to the person with ID `my_user_12345`. This person now has 2 distinct IDs, and either of them can be used to reference the same person.
+
+In addition, this person will now be marked as identified in the PostHog UI.
+
+# Considerations
+
+Identifying users is a powerful feature, but it also has the potential to create problems if misused. 
+
+An important mistake to avoid is using non-unique distinct IDs to identify users. Two common ways in which this can happen are:
+
+- Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID
+- There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`
+
+Both of the above scenarios are highly problematic, as they will cause distinct users to be merged together in PostHog.
+
+While implementing analytics with PostHog, make sure you avoid above pitfalls to maintain data integrity.
+
+PostHog also has a few built-in protections stopping the most common threats to data integrity:
+
+- We do not allow identified users to be re-identified with another ID
+- We do not allow identifying users with the following IDs (case insensitive):
+    - `anonymous`
+    - `guest`
+    - `distinctid`
+    - `distinct_id`
+    - `id`
+    - `not_authenticated`
+    - `email`
+    - `undefined`
+    - `true`
+    - `false`
+- We do not allow identifying users with the following IDs (case sensitive):
+  - `[object Object]` 
+  - `NaN`
+  - `None`
+  - `none`
+  - `null`
+  - `0`
+- We do not allow identifying users with empty space strings of any length (`' '`, `'       '`, etc.)
+
+
+
+
+
+
+
+
+

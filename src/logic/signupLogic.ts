@@ -1,5 +1,4 @@
 import { kea } from 'kea'
-import { EMAIL_GATED_SIGNUP_PREFIX, FEATURE_FLAGS } from 'lib/constants'
 import { isValidEmailAddress } from 'lib/utils'
 import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
@@ -59,9 +58,6 @@ export const signupLogic = kea({
             deploymentType,
             nextHref,
         }),
-        setVariants: (newVariants: string[]) => ({ newVariants }),
-        setActiveVariant: (activeVariant: string) => ({ activeVariant }),
-        updateAvailableVariants: true,
     },
     reducers: {
         modalView: [
@@ -76,33 +72,6 @@ export const signupLogic = kea({
                 setEmail: (_, { email }: { email: string }) => email,
             },
         ],
-        experimentVariants: [
-            {} as Record<string, boolean>,
-            { persist: true },
-            {
-                setVariants: (state: Record<string, boolean>, { newVariants }: { newVariants: string[] }) => {
-                    const nextState = {} as Record<string, boolean>
-                    const existingVariants = Object.keys(state)
-                    newVariants.forEach((variant) => {
-                        if (existingVariants.includes(variant)) {
-                            // Don't overwrite an existing value
-                            nextState[variant] = state[variant]
-                        } else {
-                            nextState[variant] = false
-                        }
-                    })
-                    return nextState
-                },
-                setActiveVariant: (state: Record<string, boolean>, { activeVariant }: { activeVariant: string }) => {
-                    const nextState = {} as Record<string, boolean>
-                    const existingVariants = Object.keys(state)
-                    existingVariants.forEach((variant) => {
-                        nextState[variant] = variant === activeVariant
-                    })
-                    return nextState
-                },
-            },
-        ],
     },
     connect: {
         values: [posthogAnalyticsLogic, ['posthog', 'activeFeatureFlags', 'isLoggedIn']],
@@ -110,22 +79,15 @@ export const signupLogic = kea({
     },
     listeners: ({ actions, values }) => ({
         submitForm: async () => {
-            const { posthog, email, activeVariant } = values
-            const skipDeploymentOptions = activeVariant === FEATURE_FLAGS.EMAIL_GATED_SIGNUP_OLD_FLOW
+            const { posthog, email } = values
             if (email && isValidEmailAddress(email)) {
                 try {
                     posthog.identify(email, { email: email.toLowerCase() }) // use email as distinct ID; also set it as property
                     posthog.capture('signup: submit email')
-                    if (!skipDeploymentOptions) {
-                        actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
-                    }
+                    actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
                     await createContact(email)
                 } catch (err) {
                     posthog.capture('signup: failed to create contact', { message: err })
-                } finally {
-                    if (skipDeploymentOptions) {
-                        window.location.replace(`https://app.posthog.com/signup?email=${encodeURIComponent(email)}`)
-                    }
                 }
             }
         },
@@ -174,59 +136,5 @@ export const signupLogic = kea({
                 }
             }
         },
-        setVariants: () => {
-            const { experimentVariants, posthog } = values
-            const variantEntries: [string, boolean][] = Object.entries(experimentVariants)
-            if (variantEntries.length && !variantEntries.some(([, status]) => status === true)) {
-                // If all available variants are inactive, we need to randomly pick one to activate.
-                const randomIndex = Math.floor(Math.random() * variantEntries.length)
-                const [name] = variantEntries[randomIndex]
-                actions.setActiveVariant(name)
-                posthog.capture('set email experiment variant', {
-                    variant: name,
-                    $set_once: {
-                        email_experiment_variant: name,
-                    },
-                })
-            }
-        },
-        updateAvailableVariants: () => {
-            const { activeFeatureFlags } = values
-            const variantFlags: string[] = activeFeatureFlags.filter((flag: string) =>
-                flag.includes(EMAIL_GATED_SIGNUP_PREFIX)
-            )
-            actions.setVariants(variantFlags)
-        },
-        [actions.setFeatureFlags]: () => {
-            actions.updateAvailableVariants()
-        },
     }),
-    events: ({ actions, values }) => ({
-        afterMount: () => {
-            if (typeof window !== undefined && !!values.posthog) {
-                actions.updateAvailableVariants()
-            }
-        },
-    }),
-    selectors: {
-        hasEmailGatedSignup: [
-            (s) => [s.activeVariant],
-            (activeVariant: string | null) =>
-                activeVariant && activeVariant !== FEATURE_FLAGS.EMAIL_GATED_SIGNUP_CONTROL,
-        ],
-        shouldAutoRedirect: [
-            (s) => [s.hasEmailGatedSignup, s.isLoggedIn],
-            (hasEmailGatedSignup: boolean, isLoggedIn: boolean) => {
-                return !hasEmailGatedSignup || isLoggedIn
-            },
-        ],
-        activeVariant: [
-            (s) => [s.experimentVariants],
-            (experimentVariants: Record<string, boolean>) => {
-                const variantEntries: [string, boolean][] = Object.entries(experimentVariants)
-                const [name] = variantEntries.find(([, value]) => value) || []
-                return name || null
-            },
-        ],
-    },
 })

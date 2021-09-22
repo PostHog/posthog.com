@@ -28,7 +28,6 @@ import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
-import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
@@ -85,6 +84,7 @@ import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
+import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
@@ -117,7 +117,6 @@ export const shortcodes = {
     CodeBlock,
     CompensationCalculator,
     Container,
-    ContributorAvatars,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
@@ -174,6 +173,7 @@ export const shortcodes = {
     Structure,
     TableOfContents,
     TeamQuote,
+    Tooltip,
     VisitLibrary,
     WorkableSnippet,
 }

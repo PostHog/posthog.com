@@ -9,7 +9,7 @@ hideAnchor: true
 
 Operations at PostHog covers legal, finance, people and culture. 
 
-Operations is our smallest department and we don’t hire very often. That means that each new hire has a disproportionately high impact compared with other, larger teams. 
+Operations is our smallest department and we don’t hire very often. That means that each new hire has a disproportionately high impact compared with other, larger teams. Please check our [careers page](/careers) for our open roles. 
 
 
 ### What we are looking for in Operations hires

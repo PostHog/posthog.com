@@ -10,9 +10,9 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
     const contentRef = useRef(null)
     const handleInternalNavUpdate = (el) => {
         if (el) {
-            const activeEl = document.querySelector('.active-link')
             setActiveId(el.id)
-            setNavBallLocation(activeEl.offsetTop + 7)
+            const activeEl = document.querySelector('.active-link')
+            activeEl && setNavBallLocation(activeEl.offsetTop + 7)
         }
     }
     useEffect(() => {
@@ -56,18 +56,16 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                         items={tableOfContents?.map((navItem) => navItem.url)}
                         currentClassName="active-link"
                     >
-                        {tableOfContents?.map((navItem, index) => {
-                            return (
-                                <li key={index}>
-                                    <InternalSidebarLink
-                                        url={navItem.url}
-                                        name={navItem.name}
-                                        style={activeId === navItem.url ? { opacity: '1' } : {}}
-                                        className="hover:opacity-100 opacity-60 text-[15px]"
-                                    />
-                                </li>
-                            )
-                        })}
+                        {tableOfContents?.map((navItem, index) => (
+                            <li key={index}>
+                                <InternalSidebarLink
+                                    url={navItem.url}
+                                    name={navItem.name}
+                                    style={activeId === navItem.url ? { opacity: '1' } : {}}
+                                    className="hover:opacity-100 opacity-60 text-[15px]"
+                                />
+                            </li>
+                        ))}
                     </Scrollspy>
                 </div>
             </aside>
