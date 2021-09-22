@@ -71,7 +71,7 @@ See permissions at each level below:
 | Inviting new members | ✅ | ✅ | ✅ |
 | Billing management | ✅ | ✅ | ✅ |
 | Project creation and deletion | ❌ | ✅ | ✅ |
-| Project settings management (incl. [project-specific memberships](#project-based-permissioning)) | ❌ | ✅ | ✅ |
+| Project settings management (incl. [project-specific memberships](#private-projects)) | ❌ | ✅ | ✅ |
 | Organization settings management (incl. memberships) | ❌ | ✅ | ✅ |
 | Leaving the organization | ✅ | ✅ | ❌ |
 | Transferring ownership | ❌ | ❌ | ✅ |
