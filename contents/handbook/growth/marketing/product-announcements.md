@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Marketing takes responsibility for coordinating and publicising PostHog news, including product announcements. 
+Marketing takes responsibility for coordinating and publicizing news about PostHog, including product announcements. 
 
 However, not all announcements require the same level of marketing support. We therefore group them into tiers which help us decide what level of investment is required from the Marketing team. Which tier applies is agreed upon by the Marketing and Product teams and agreement should be sought as early as possible if Marketing support is expected.
 
