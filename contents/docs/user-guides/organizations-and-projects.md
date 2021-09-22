@@ -81,7 +81,7 @@ Access levels can be viewed and changed in the Members section of organization s
 
 ### Private projects
 
-If you'd like to restrict access to data within the organization to only those who need it, you can make a project _private_. Projects with this setting enabled become **secret by default and invite-only** (except for Administrators and the Owner, who get access implicitly).
+If you'd like to restrict access to data within the organization to only those who need it, you can make a project _private_. Projects with this setting enabled become **private by default and invite-only** (except for Administrators and the Owner, who get access implicitly).
 
 Any Administrator or Owner can make a project private or open at any time in the Access Control section of project settings.
 
