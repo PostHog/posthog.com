@@ -3,46 +3,45 @@ import { Minus, Plus, Chevron } from '../Icons/Icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import Link from '../Link'
 import Submenu from './Submenu'
+import { menuItem as menuItemClass, link } from './classes'
+import { CallToAction } from 'components/CallToAction'
 
 export default function MenuItem({ menuItem }) {
     const [hovered, setHovered] = useState(false)
-    const { title, url, sub, classes = '' } = menuItem
+    const { title, url, sub, hideBorder, cta, classes = '' } = menuItem
     const breakpoints = useBreakpoint()
     const handleSubClick = () => {
         setHovered(!hovered)
     }
     const referenceElement = useRef(null)
-
     return (
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
             onMouseLeave={() => !breakpoints.md && setHovered(false)}
-            className="group lg:flex lg:justify-center"
+            className={menuItemClass(hideBorder)}
         >
             <span ref={referenceElement} className="flex justify-between items-center">
-                <Link
-                    onClick={breakpoints.md && sub && handleSubClick}
-                    to={url}
-                    className={
-                        classes ||
-                        'relative font-semibold px-4 py-3 lg:py-2 text-[15px] dark:text-white dark:hover:text-white text-almost-black hover:text-almost-black'
-                    }
-                >
-                    {title}
-                </Link>
+                {cta ? (
+                    <CallToAction
+                        onClick={breakpoints.md && sub && handleSubClick}
+                        to={url}
+                        className={`mx-auto lg:mx-0 ${classes}`}
+                    >
+                        {title}
+                    </CallToAction>
+                ) : (
+                    <Link onClick={breakpoints.md && sub && handleSubClick} to={url} className={link(classes)}>
+                        {title}
+                    </Link>
+                )}
                 {sub &&
                     (breakpoints.md ? (
-                        <Plus
-                            render={(icon) => (
-                                <button
-                                    className="text-primary dark:text-primary-dark flex-grow flex justify-end"
-                                    onClick={handleSubClick}
-                                >
-                                    {hovered ? <Minus /> : icon}
-                                </button>
-                            )}
-                            open={hovered}
-                        />
+                        <button
+                            className="text-primary dark:text-primary-dark flex-grow flex justify-end mr-4"
+                            onClick={handleSubClick}
+                        >
+                            {hovered ? <Minus /> : <Plus />}
+                        </button>
                     ) : (
                         <Chevron className="text-gray mt-1 -ml-3" />
                     ))}

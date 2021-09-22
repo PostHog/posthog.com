@@ -5,10 +5,9 @@ import './SignupModal.scss'
 import { Button, Input } from 'antd'
 import { ButtonBlock } from 'components/ButtonBlock/ButtonBlock'
 import { signupLogic } from 'logic/signupLogic'
-import { FEATURE_FLAGS } from 'lib/constants'
 
 export const SignupModal = (): JSX.Element => {
-    const { email, activeVariant } = useValues(signupLogic)
+    const { email } = useValues(signupLogic)
     const { setEmail, submitForm, skipEmailEntry } = useActions(signupLogic)
 
     return (
@@ -43,11 +42,9 @@ export const SignupModal = (): JSX.Element => {
                     <Button htmlType="submit" type="link">
                         <strong>Next: </strong> Choose your edition
                     </Button>
-                    {activeVariant !== FEATURE_FLAGS.EMAIL_GATED_SIGNUP_NOT_SKIPPABLE && (
-                        <Button type="link" onClick={() => skipEmailEntry()}>
-                            Skip
-                        </Button>
-                    )}
+                    <Button type="link" onClick={() => skipEmailEntry()}>
+                        Skip
+                    </Button>
                 </div>
             </form>
         </Modal>

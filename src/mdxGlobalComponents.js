@@ -18,10 +18,10 @@ import { OpenRoles } from './components/Careers/OpenRoles'
 import { Transparency } from './components/Careers/Transparency'
 import { WhyWereHere } from './components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
+import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Container } from './components/Container'
-import { ContributorAvatars } from './components/ContributorAvatars'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
@@ -100,10 +100,10 @@ export const shortcodes = {
     Transparency,
     WhyWereHere,
     WorkingAtPostHog,
+    Chip,
     CodeBlock,
     CompensationCalculator,
     Container,
-    ContributorAvatars,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,

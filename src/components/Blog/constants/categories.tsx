@@ -1,8 +1,6 @@
-import twitterIcon from '../../../images/icons/twitter-white.svg'
-import linkedInIcon from '../../../images/icons/linkedin-white.svg'
-import githubIcon from '../../../images/icons/github-white.svg'
+import React from 'react'
+import { Twitter, GitHub, LinkedIn } from 'components/Icons/Icons'
 import { graphql } from 'gatsby'
-
 export interface CategoryInterface {
     title: string
     slug: string
@@ -44,7 +42,7 @@ export const BlogCategories: CategoryInterface[] = [
 ]
 
 interface LinksInterface {
-    icon: string
+    icon: JSX.Element
     label: string
 }
 interface SocialLinksInterface {
@@ -52,9 +50,9 @@ interface SocialLinksInterface {
 }
 
 export const socialLinks: SocialLinksInterface = {
-    twitter: { icon: twitterIcon, label: 'Twitter' },
-    linkedin: { icon: linkedInIcon, label: 'LinkedIn' },
-    github: { icon: githubIcon, label: 'GitHub' },
+    twitter: { icon: <Twitter />, label: 'Twitter' },
+    linkedin: { icon: <LinkedIn />, label: 'LinkedIn' },
+    github: { icon: <GitHub />, label: 'GitHub' },
 }
 
 export const AuthorsFragment = graphql`
