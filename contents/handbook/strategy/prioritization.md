@@ -29,57 +29,11 @@ We’re always looking to make the right decisions for the long term. However, w
 
 After we’ve made significant progress towards our current milestone we will build a clear understanding of what we need to focus on next and why, at the end of each sprint we’ll ask ourselves if we’re likely to achieve the goal of our current milestone in the coming sprint. If so, we’ll also start preparing the context we need to move on to our next focus in the following sprint. 
 
-
-## How is our product/market fit?
-
-Below is a table of how we see our product/market fit for various sizes of companies and various job roles.
-
-<span class="table-borders">
-<table>
-    <tr>
-        <td></td>
-        <td>Enthusiast</td>
-        <td>Startup</td>
-        <td>Scaleup</td>
-        <td>Enterprise</td>
-    </tr>
-    <tr>
-        <td>Engineers / PMs with technical expertise</td>
-        <td style="background:var(--success)"></td>
-        <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
-        <td style="background:var(--warning)">Scalability<br />Advanced analytics</td>
-    </tr>
-    <tr>
-        <td>Non-technical PMs, marketing, sales, business</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-        <td style="background:var(--warning)">Too technical</td>
-    </tr>
-    <tr>
-        <td>Analysts</td>
-        <td style="background:var(--success)"></td>
-        <td style="background:var(--success)"></td>
-        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
-        <td style="background:var(--warning)">Direct SQL access<br />Plugins for data lakes</td>
-    </tr>
-    <tr>
-        <td>Enterprise procurement</td>
-        <td style="background:var(--muted)"></td>
-        <td style="background:var(--muted)"></td>
-        <td style="background:var(--warning)">Compliance features<br />Collaboration features</td>
-        <td style="background:var(--warning)">SOC 2<br />Compliance features<br />Collaboration features</td>
-    </tr>
-</table>
-</span>
-
 ## Prioritization framework
 
-
-- 🚀 Rocket Discoveries: e.g. Will this increase the total number of Discoveries?
+- 🚀 Grow Discoveries: e.g. Will this increase the total number of Discoveries in the short or long term (our metric for people discovering a valuabe insight within our product)?
 - 🚧 Unblock Focus Customers: e.g. Is this crucial for our focus customers to be successful? (see [Scale features prioritization][scale] for more details).
-- 🛡Shield Trust: e.g. Will this increase or retain trust with our users?
+- 🛡 Protect Trust: e.g. Will this increase or retain trust with our users, can we prevent users from seeing inconsistent or incorrect data?
 
 ## Additional prioritization frameworks
 
