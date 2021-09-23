@@ -55,7 +55,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
   ```
   
 - Add a meta description using `description` in the frontmatter section (optional)
-- Set the date of the blog post to the intended publishing date. (This gives Team Design a heads up on how much time we have to produce a post image.)
+- Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. (This gives Team Design a heads up on how much time we have to produce a post image.)
 - Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
 
 ## Distribution
