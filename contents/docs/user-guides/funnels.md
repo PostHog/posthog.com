@@ -100,7 +100,7 @@ Click on the number next to the drop-off to see the people who did not successfu
 
 [Screenshot of people modal from step drop-off]
 
-From here you can explore the individual people further including viewing session recordings to see exactly what they were doing when they dropped-off. You can also use this feature to watch a successful user go through your funnel. Understanding what successful users do can also help you identify improvement points for those who aren’t successful.
+From here you can explore the individual people further by viewing session recordings to see exactly what they were doing when they dropped-off. You can also use this feature to watch a successful user go through your funnel. Understanding what successful users do can also help you identify improvement points for those who aren’t successful.
 
 
 ### Identify the steps which have highest friction and time to convert
