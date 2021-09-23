@@ -12,7 +12,7 @@ For every flow throughout your product, more people will start it than complete 
 > 
 > -- [Hasura](https://hasura.io/)
 
-## Use cases
+## What can you learn from funnels?
 
 * Understand where people are getting stuck during your flow
 * Find out who is successful and who is not
