@@ -19,7 +19,7 @@ export const PricingSlider = ({
     const { setSliderValue } = useActions(pricingSliderLogic)
 
     return (
-        <div className="mt-8 mb-12">
+        <div className="mt-5 mb-6">
             <LogSlider
                 min={min}
                 max={max}
