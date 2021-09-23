@@ -70,7 +70,7 @@ Select a dashboard where you would like to save the funnel and give it a name
 
 You can find your funnel any time by navigating to the dashboard you’ve saved it in.
 
-Recently saved funnels are also available within the funnel configuration screen
+Recently saved funnels are also available within the funnel configuration screen.
 
 ### Modifying a funnel
 
