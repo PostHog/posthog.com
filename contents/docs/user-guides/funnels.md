@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-# Funnels
-
 ## Why do funnels matter?
 
 For every flow throughout your product, more people will start it than complete it successfully. The primary value of funnels comes from the ability to inspect the journey of everyone going through that flow simultaneously and understanding where the bottlenecks and friction points are in that flow. Once you can isolate these bottlenecks and understand what's causing them, you'll be able to significantly improve the success of your users. 
@@ -40,7 +38,7 @@ Select the steps you wish to include in your funnel, ideally starting with the f
 
 You may wish to refine your steps further, filtering out certain types of users or event properties (e.g. country of a user). Click the "filter" icon next to the step you wish to refine further and select the filter you would like to add or set a global filter under the filters section on the right.
 
-<img width="442" alt="image" src="https://user-images.githubusercontent.com/85295485/134478622-df444540-7962-436e-bb86-98481b8563ab.png">
+<img width="442" alt="image" src="https://user-images.githubusercontent.com/85295485/134478622-df444540-7962-436e-bb86-98481b8563ab.png" />
 
 **Step 3: Set your time range**
 
