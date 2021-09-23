@@ -8,7 +8,7 @@ showTitle: true
 
 ## Why do funnels matter?
 
-For every flow throughout your product, more people will start it than complete it successfully, the primary value of funnels comes from the ability to inspect the journey of everyone going through that flow simultaneously, and understanding where the bottlenecks and friction points are in that flow. Once you can isolate these bottlenecks and understand what’s causing them you’ll be able to significantly improve the success of your users. 
+For every flow throughout your product, more people will start it than complete it successfully. The primary value of funnels comes from the ability to inspect the journey of everyone going through that flow simultaneously, and understanding where the bottlenecks and friction points are in that flow. Once you can isolate these bottlenecks and understand what’s causing them you’ll be able to significantly improve the success of your users. 
 
 One example from Hasura: “Using PostHog, we observed drop-offs at very particular stages of our onboarding flows, as a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.”
 
