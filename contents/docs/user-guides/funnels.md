@@ -88,9 +88,11 @@ You can use this to see where the biggest opportunity for improvement is, usuall
 
 Once you have a funnel drop-off you'd like to explore further, the first step is to identify whether it's a specific client or users that are having the problem and find out why they were struggling. There are many ways to get this information, from reaching out to them directly to [replaying their session](/docs/user-guides/sessions).
 
-Click on the number next to the drop-off to see the people who did not successfully complete this step of your funnel.
+![Links to open persons modal in table](../../images/docs/user-guides/average-time-to-convert.png)
 
-[Screenshot of people modal from step drop-off]
+Click on the linked numbers in the column values of table below the funnel to see the people who **COMPLETED** or **DROPPED** this step of your funnel.
+
+![Persons modal](../../images/docs/user-guides/persons-modal.png)
 
 From here, you can explore the individual people further by viewing session recordings to see exactly what they were doing when they dropped off. You can also use this feature to watch a successful user go through your funnel. Understanding what successful users do can also help you identify improvement points for those who aren't successful.
 
