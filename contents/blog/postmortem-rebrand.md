@@ -1,6 +1,6 @@
 ---
-date: 2021-09-23
-title: Postmortem: How we completely rebranded PostHog in four weeks
+date: 2021-09-28
+title: Postmortem - How we rebranded PostHog in four weeks
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,6 +8,7 @@ hideAnchor: true
 author: cory-watilo
 featuredImage: ../images/blog/blog-generic-1.png
 featuredImageType: full
+categories: ["General", "Company & culture"]
 ---
 We recently completed an entire rebrand of our website, from inception to completion, in less than a month. This sounds like an incredible feat of discipline - and in a way, it was. But the path to success wasn’t linear - it took us more than six months to get to this point, with lots of diversions along the way.
 
