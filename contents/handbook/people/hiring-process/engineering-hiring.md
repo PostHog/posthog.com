@@ -7,13 +7,7 @@ hideAnchor: true
 
 ## Engineering hiring at PostHog
 
-Engineers make up around 60% of our team, and we are almost always hiring for Engineering roles. 
-
-Currently, we are hiring for the following Engineering roles:
-
-*   [Staff Engineer - Full Stack](https://apply.workable.com/posthog/j/4942F8C181)
-*   [Senior Full Stack Developer](https://apply.workable.com/posthog/j/E3CAF059AB/)
-*   [Senior C++/Clickhouse Engineer](https://apply.workable.com/posthog/j/3DB8E12601/)
+Engineers make up around 60% of our team, and we are almost always hiring for Engineering roles. Please check our [careers page](/careers) for our open roles. 
 
 ### What we are looking for in Engineering hires
 

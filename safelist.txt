@@ -13,6 +13,7 @@ gap-y-4
 -mb-4
 -ml-4
 -mb-12
+ml-4
 mt-16
 mb-4
 pr-32
@@ -64,5 +65,6 @@ border-red
 lg:my-0
 flex-row-reverse
 space-x-reverse
+lg:ml-6
 text-primary
 text-primary-dark

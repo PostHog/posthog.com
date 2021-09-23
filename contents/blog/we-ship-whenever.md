@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: engineering
+categories: ["Engineering"]
 ---
 
 PostHog ship every two weeks, unless it makes more sense not to.

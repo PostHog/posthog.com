@@ -230,10 +230,6 @@
                     "url": "/handbook/engineering/bug-prioritization"
                 },
                 {
-                    "name": "Scale features prioritization",
-                    "url": "/handbook/engineering/scale-features-prioritization"
-                },
-                {
                     "name": "Onboarding customers",
                     "url": "/handbook/engineering/onboarding-customer"
                 },
@@ -250,10 +246,6 @@
                     "url": "/handbook/engineering/common-issues"
                 },
                 {
-                    "name": "Feature Parity",
-                    "url": "/handbook/engineering/feature-parity"
-                },
-                {
                     "name": "Website MDX setup",
                     "url": "/handbook/engineering/mdx"
                 },
@@ -268,6 +260,23 @@
                 {
                     "name": "DigitalOcean tips and FAQ",
                     "url": "/handbook/engineering/digitalocean"
+                }
+            ]
+        },
+        {
+            "name": "Product",
+            "children": [
+                {
+                    "name": "Product team overview",
+                    "url": "/handbook/product/product-team"
+                },
+                {
+                    "name": "User feedback",
+                    "url": "/handbook/product/user-feedback"
+                },
+                {
+                    "name": "Scale features prioritization",
+                    "url": "/handbook/product/scale-features-prioritization"
                 }
             ]
         },
@@ -762,6 +771,10 @@
                 {
                     "name": "Measuring retention and tracking c…",
                     "url": "/docs/tutorials/retention"
+                },
+                {
+                    "name": "Setting up deep dive acquisition dashboards",
+                    "url": "/docs/tutorials/taxonomy-acquisition"
                 },
                 {
                     "name": "Tracking single page apps",
