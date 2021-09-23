@@ -85,7 +85,7 @@ The most common use case for funnels is to understand where people are getting s
 
 ![image](https://user-images.githubusercontent.com/85295485/134479685-35702219-96e2-497e-a837-04f999fead00.png)
 
-Quickly looking at this funnel we can see there are a number of drop-offs between steps, absolute drop-off is a great way to understand where you’re losing the most people, but if you want to identify the areas which are having the greatest negative impact on your overall conversion rate - you’ll want to understand the relative drop-off. Switch to relative drop-off by clicking “% Overall conversion” and switching to “% Relative to previous step”
+Quickly looking at this funnel we can see there are a number of drop-offs between steps. Absolute drop-off is a great way to understand where you’re losing the most people, but if you want to identify the areas which are having the greatest negative impact on your overall conversion rate - you’ll want to understand the relative drop-off. Switch to relative drop-off by clicking “% Overall conversion” and switching to “% Relative to previous step”
 
 ![image](https://user-images.githubusercontent.com/85295485/134480083-6cf799ba-8720-43e5-a88a-bc1fcaa338f3.png)
 
