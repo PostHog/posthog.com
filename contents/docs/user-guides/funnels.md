@@ -53,7 +53,7 @@ You now have a basic funnel showing in the main analysis pane and can modify the
 
 ![image](https://user-images.githubusercontent.com/85295485/134479552-fa5a3eeb-762e-4a01-b5ab-01c43877f120.png)
 
-You should now be able to see where people are struggling in your flow.
+You should now be able to see where people are struggling in your flow by seeing where the drop-offs are. In the example above, we can see that the biggest drop off is between the 'Add to cart' and 'Checkout' stages of the funnel.
 
 
 ### Saving a funnel
