@@ -39,7 +39,7 @@ Using the side menu - navigate to insights and then funnels - this will present 
 
 **Step 2: Add and refine steps in your funnel**
 
-Select the steps you wish to include in your funnel, ideally starting with the first event/action a user will trigger in the flow you wish to measure and then add intermediate events you believe they would need to go through to be successful and finish with the event which you consider to be the success for this flow, start with the simplest flow and avoid using optional steps to ensure you don’t filter out or skew valuable results.
+Select the steps you wish to include in your funnel, ideally starting with the first event/action a user will trigger in the flow you wish to measure. Next, add intermediate events you believe users need to go through to be successful and finish with the event which you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don’t filter out or skew valuable results.
 
 ![image](https://user-images.githubusercontent.com/85295485/134485100-23d02b5b-c3ad-4704-90d9-fc3d4db93c39.png)
 
