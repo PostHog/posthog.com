@@ -6,6 +6,7 @@ import './styles/yc-onboarding.scss'
 import { SEO } from '../components/seo'
 import { Link } from 'gatsby'
 import Chip from 'components/Chip'
+import { ContactForm } from 'components/ContactForm'
 
 type PaneOption = 'demo' | 'contact'
 
@@ -52,7 +53,7 @@ export const ScheduleDemo = () => {
                         <DemoScheduler iframeSrc="https://calendly.com/jamesefhawkins/posthog-demo" />
                     </>
                 )}
-                {activePane === 'demo' && <>{/* TODO <form> */}</>}
+                {activePane === 'contact' && <ContactForm />}
             </div>
         </Layout>
     )

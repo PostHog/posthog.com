@@ -21,6 +21,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
+import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
@@ -104,6 +105,7 @@ export const shortcodes = {
     Chip,
     CodeBlock,
     CompensationCalculator,
+    ContactForm,
     Container,
     ContributorCard,
     ContributorSearch,
