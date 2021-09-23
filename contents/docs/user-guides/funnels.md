@@ -81,7 +81,7 @@ Once you have your funnel setup, you may like to tweak the step ordering or filt
 
 ### Understand where people are getting stuck during your flow
 
-The most common use case when it comes to Analyzing a funnel is to understand where people are getting stuck or dropping off in your flow.
+The most common use case for funnels is to understand where people are getting stuck or dropping off in your flow.
 
 ![image](https://user-images.githubusercontent.com/85295485/134479685-35702219-96e2-497e-a837-04f999fead00.png)
 
