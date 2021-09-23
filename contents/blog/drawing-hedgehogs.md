@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: lottie-coxon
-featuredImage: ../images/blog/posthog-hedgehog-mascot.png
+featuredImage: ../images/blog/blog-hedgehog-design.png
 featuredImageType: full
 ---
 
