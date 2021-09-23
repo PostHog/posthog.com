@@ -35,7 +35,7 @@ One example from Hasura: “Using PostHog, we observed drop-offs at very particu
 
 Using the side menu - navigate to insights and then funnels - this will present you with a blank funnel screen.
 
-<img width="1360" alt="image" src="https://user-images.githubusercontent.com/85295485/134478357-d99d48ae-0d59-4f40-829b-b6f19c53ed0e.png">
+<img width="1360" alt="funnels screenshot" src="https://user-images.githubusercontent.com/85295485/134478357-d99d48ae-0d59-4f40-829b-b6f19c53ed0e.png" />
 
 **Step 2: Add and refine steps in your funnel**
 
