@@ -94,7 +94,7 @@ You can use this to see where the biggest opportunity for improvement is, usuall
 
 ### Find out who is successful and who is not
 
-Once you have a funnel drop off you’d like to explore further, the first step is to take a look at who was affected, this will enable you to quickly identify whether it’s a specific client or users that are having the problem and do a number of things to find out why they were struggling (from reaching out to them to replaying their session).
+Once you have a funnel drop-off you’d like to explore further, the first step is to identify whether it’s a specific client or users that are having the problem and find out why they were struggling. There are many ways to get this information, from reaching out to them directly to [replaying their session](/docs/user-guides/sessions).
 
 Click on the number next to the drop-off to see the people who did not successfully complete this step of your funnel.
 
@@ -105,9 +105,9 @@ From here you can explore the individual people further by viewing session recor
 
 ### Identify the steps which have highest friction and time to convert
 
-Some steps are really easy to complete, others can take a lot of time and effort, one of the causes of people dropping off can be the raw effort required to complete the step. Perhaps it includes a complex form or requires them to go to their emails or another tool to get the information they require to complete the step.
+One reason users may drop-off can be the raw effort required to complete the step. Perhaps it includes a complex form or requires them to go to their emails or another tool to get the information they require to complete the step.
 
-A fast way to get a feel for whether or not a step has high friction is to look at the average time to convert, steps with a long time to convert are likely much harder than steps with a short time to convert.
+A fast way to get a feel for whether or not a step has high friction is to look at the average time to convert. Steps with a long time to convert are likely much harder than steps with a short time to convert.
 
 ![image](https://user-images.githubusercontent.com/85295485/134480340-22b8db02-c542-4643-867a-c126993b472f.png)
 
@@ -119,7 +119,7 @@ If all the data is grouped in one bar (known as a bin - in histogram speak), you
 
 ![image](https://user-images.githubusercontent.com/85295485/134484797-d30a5aeb-c2fe-4b6b-96bb-ef21689699e1.png)
 
-This graph illustrates how common it is to go through these steps at different paces, if you graph is skewed towards the left, this means most people are going through this step very fast, if the graph is skewed towards the right this means that people are going through this step slowly.
+This graph illustrates how common it is to go through these steps at different paces. If your graph is skewed towards the left, this means most people are going through this step very fast, if the graph is skewed towards the right this means that people are going through this step slowly.
 
 You may see other patterns in the graph, including a double hump where you have two peaks in your graph, this indicates that there are two distinct types of experience or user, where some are going through fast and others slower. The group which are taking more time are likely experiencing significantly more friction than the group who are going through fast.
 
@@ -136,31 +136,31 @@ You can instantly see that the conversion rate is lower on Linux, this gives us 
 
 You can break down by a number of user and event properties (e.g. browser, country, …) to help quickly validate the initial hypothesis you may have.
 
-Automating the solution to highlight potential problems and hypotheses for you is something we’re actively working on so, take a look on our roadmap if you’re interested to learn more about what we’re building here.
+Automating the solution to highlight potential problems and hypotheses for you is something we’re actively working on so, take a look at [our roadmap](/handbook/strategy/roadmap) to learn more about what we’re building here.
 
 
 ### Understand how your changes are improving your flow
 
 There are multiple ways to understand how your changes, fixes and new features are affecting your funnel success rate - the simplest and most common is to look at how the conversion rate changes over time.
 
-In the configuration pane, switch to historical trends, this will show you how your conversion rate has changed over time. If you have launched a new feature a few weeks ago and expect it to improve your conversion rate - you should be able to see it through a change in the trend on the graph. You may wish to change the granularity and time range to focus on what happened after specific changes.
+In the configuration pane, switch to historical trends, this will show you how your conversion rate has changed over time. If you launched a new feature a few weeks ago and expect it to improve your conversion rate then you should be able to see this through a change in the trend on the graph. You may wish to change the granularity and time range to focus on what happened after specific changes.
 
 ![image](https://user-images.githubusercontent.com/85295485/134481517-ef493268-2f47-4020-a9ce-9928bf0959d8.png)
 
-A slightly more advanced approach is to use feature flags to run a simple A/B test, you can create a feature flag and assign 50% of people to the test group and 50% to the control group.
+A more advanced approach is to use [feature flags](/docs/user-guides/feature-flags) to run a simple A/B test. You can create a feature flag and assign 50% of people to the test group and 50% to the control group.
 
-You can then break down your funnel by this feature flag, you can then compare the conversion rate for the people in the test (feature flag on) and control (feature flag off) to see if there is a significant difference.
+You can then break down your funnel by this feature flag and compare the conversion rate for the people in the test (feature flag on) and control (feature flag off) to see if there is a significant difference.
 
-N.B. When it comes to A/B testing - it’s important to recognize that there can be a lot of noise in experiments and if you have a very small improvement in your conversion rate is more likely to be due to some bias or noise than your feature being worse or better. Over time we will build out more advanced A/B testing capabilities with built-in statistical analysis to help you understand the confidence level in the results, check out our roadmap to learn more.
+N.B. When it comes to A/B testing - it’s important to recognize that there can be a lot of noise in experiments and if you have a very small improvement in your conversion rate is more likely to be due to some bias or noise than your feature being worse or better. Over time we will build out more advanced A/B testing capabilities with built-in statistical analysis to help you understand the confidence level in the results, check out [our roadmap](/handbook/strategy/roadmap) to learn more.
 
 
 ### Understand seasonality in your conversion rates
 
-It’s unlikely that your conversion rate will remain stable every day or every week, throughout the year there will be external factors that cause your conversion rates to fluctuate - this is natural but it’s important to get a feel for them so you don’t jump to conclusions too quickly when analyzing a big change or drop-off.
+It’s unlikely that your conversion rate will remain stable every day or every week. This is normal, but it's important to get a feel for the external factors which can cause these fluctuations so you don’t jump to conclusions too quickly when analyzing a big change or drop-off.
 
 To look at the seasonality of your conversion rates click through to the historical trends view over the time period you might expect seasonal variations.
 
-A common seasonality to watch out for is weekends, particularly if your product is aimed at businesses it’s much more likely that they will use the product during the week than on the weekends. Perhaps you have a yearly sale such as “Black Friday” which increases the number of people coming to your site, but also increases the expectation of discounts.
+A common seasonality to watch out for is weekends, particularly if your product is aimed at businesses. Perhaps you have a yearly sale such as “Black Friday” which increases the number of people coming to your site, but also increases the expectation of discounts.
 
 In this view you can adjust the date ranges to observe key seasonal trends and ensure when you look at your funnel you can tell whether it’s just a seasonal trend affecting it or whether something has materially changed in your product making the experience better or worse.
 
@@ -171,7 +171,7 @@ When you’ve dialed in your funnel and you’re comfortable getting results and
 
 The most common configurations you might consider tweaking are:
 
-* **Conversion window limit:** This sets how long we should wait to consider someone a failure if they don’t achieve the success event - reducing this conversion window will ensure we see people you went through the funnel in a short space of time, increasing it will capture people who went part way through the funnel went a away and came back at a later time to complete it. Setting up an appropriate conversion window limit will also ensure your conversion rate is not changing over time as you’re measuring it (because of users who complete it much after).
+* **Conversion window limit:** This sets how long to wait before you consider someone a failure if they don’t achieve the success event. Reducing the conversion window will ensure you see who went through the funnel in a short space of time; increasing it will capture people who went part way through the funnel, went away and came back at a later time to complete it. Setting up an appropriate conversion window limit will also ensure your conversion rate is not changing over time as you’re measuring it.
 * **Step order:**
     * **Sequential:** When you want to measure people who’ve gone through the steps in your funnel in the order set and they have triggered any other number of events in between (e.g. when measuring the effect of an ad on conversion, if someone sees the ad before coming to your product or after they come to your product you’d expect there to be a different conversion rate)
     * **Strict Order:** When you only want to measure people who’ve gone through the steps in your funnel in order and not triggered any other events in between (e.g. if you want to exclude users who have searched for another product after initially finding a product in a checkout funnel)
