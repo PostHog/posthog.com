@@ -4,6 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
+### Getting started
+#### Pull Request and Branching Workflow
+New changes should be created as a pull request.
+#### Deployment
+The updated documentation website will deploy automatically once a pull request has been merged into the `master` 
+branch. The build takes 5-10 minutes.
+
 ## Finding the content to edit
 
 Once you have cloned the repo, the `contents/` directory contains a few key areas:
@@ -13,12 +20,6 @@ Once you have cloned the repo, the `contents/` directory contains a few key area
 * `blog/` = our blog posts
 
 Inside each of these are a series of markdown files for you to edit.
-
-## Deployment
-
-New changes should be created as a pull request.
-
-To get changes into production, the website deploys automatically from `master`. The build takes 5-10 minutes.
 
 ## Markdown details
 
