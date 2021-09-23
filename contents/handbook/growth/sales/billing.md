@@ -9,7 +9,8 @@ showTitle: true
 This handbook section is sort of the operation manual for the billing engine. If you're looking for the technical details or need to troubleshoot something check out the relevant [tech docs](https://github.com/PostHog/posthog-cloud#additional-docs)
 
 ### Self-hosted
-For customers with special pricing (i.e. very large volumes or Enterprise & Supported plans), we need to manually set up the billing information on the system. This page contains instructions for setting up billing. Please note this page covers the process after an official PostHog quote has been approved by the customer. For information before this stage, please refer to the [Sales](/handbook/growth/sales/sales-operations) section of the handbook. Contrary to cloud plans, **all self-hosted _paid_ plans must be manually prepared today** (i.e. there's no self-serve option yet). To set up billing for self-hosted, please follow these instructions:
+
+For information before this stage, please refer to the [Sales](/handbook/growth/sales/sales-operations) section of the handbook.
 
 #### Setting up a subscription
 
@@ -18,14 +19,17 @@ You can send customers to https://license.posthog.com and they can self-serve a 
 You can create bespoke pricing with the following steps:
 
 1. Go to https://dashboard.stripe.com/products and click 'Add product'
-1. Give it a name (likely the name of the customer) and description
-1. Pricing model select "Graduated model"
+  2. Alternatively you can add a new price to an existing product
+3. Give it a name (likely the name of the customer) and description. The customer will see this name!
+4. Pricing model select "Graduated model"
    1. The first tier is likely a flat fee, all the other tiers are likely unit based prices
-1. Select "Usage is metered"
-1. Save product, and copy the API ID under "Pricing" (starts with `price_`)
-1. Send customer to `https://license.posthog.com/?price_id=price_...`
+5. Select "Usage is metered"
+6. "Charge for metered usage by" should be set to `Sum of usage values during period`
+7. Save product, and copy the API ID under "Pricing" (starts with `price_`)
+8. Send customer to `https://license.posthog.com/?price_id=price_...`
 
-#### Activate subscription
+
+#### Activate subscription
 
 As a customer, to redeem a license key:
 1. Go to the license page in your PostHog instance. `<your url>/instance/licenses`.
