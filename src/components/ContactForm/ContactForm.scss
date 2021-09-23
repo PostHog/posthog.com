@@ -1,0 +1,29 @@
+.form-wrapper {
+    background: #fff;
+    box-shadow: 0px 16px 16px -16px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    padding: 2rem;
+    margin: 0 auto;
+
+    .ant-row.ant-form-item {
+        margin-bottom: 0.75em;
+    }
+
+    .ant-col.ant-form-item-label {
+        font-size: 16px;
+        font-weight: 600;
+        font-variation-settings: 'wght' 600;
+
+        label[for='contact_email'] {
+            display: block;
+        }
+
+        .required-text {
+            font-size: 75%;
+            font-weight: 400;
+            font-variation-settings: 'wght' 400;
+            text-transform: uppercase;
+            color: rgba(45, 45, 45, 0.25);
+        }
+    }
+}

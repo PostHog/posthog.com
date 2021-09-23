@@ -10,14 +10,22 @@ import { ContactForm } from 'components/ContactForm'
 
 type PaneOption = 'demo' | 'contact'
 
+const pageTitles = {
+    demo: 'Schedule Demo',
+    contact: 'Contact',
+}
+
 const isPaneOption = (hash: string): hash is PaneOption => ['demo', 'contact'].includes(hash)
 
 export const ScheduleDemo = () => {
-    const [activePane, setActivePane] = useState('demo' as PaneOption)
-    const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : ''
+    const [activePane, setActivePane] = useState(null as PaneOption | null)
+    const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : 'demo'
     useEffect(() => {
         if (isPaneOption(hash)) {
             setActivePane(hash)
+            document.title = pageTitles[hash] + ' • PostHog'
+        } else {
+            setActivePane('demo')
         }
     }, [hash])
 
