@@ -96,7 +96,7 @@ You can use this to see where the biggest opportunity for improvement is, usuall
 
 Once you have a funnel drop off you’d like to explore further, the first step is to take a look at who was affected, this will enable you to quickly identify whether it’s a specific client or users that are having the problem and do a number of things to find out why they were struggling (from reaching out to them to replaying their session).
 
-Click on the number next to the drop off, this will open a modal window with the list of people who did not successfully complete this step.
+Click on the number next to the drop-off to see the people who did not successfully complete this step of your funnel.
 
 [Screenshot of people modal from step drop-off]
 
