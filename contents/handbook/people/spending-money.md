@@ -149,7 +149,7 @@ While PostHog will use the money saved from not having office space for real lif
 
 You can spend up to $200/month to work in cafés or coworking spaces if working from home is impractical. As always, you must provide receipts for all costs, and in this case, they must only be for yourself.
 
-## Meetups
+## Meeting each other
 
 As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of our bi-annual offsites.
 
