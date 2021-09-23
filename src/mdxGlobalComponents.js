@@ -51,6 +51,7 @@ import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
+import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
@@ -140,6 +141,7 @@ export const shortcodes = {
     Logo,
     MainNav,
     MdxAnchorHeaders,
+    Modal,
     NewsletterForm,
     NotFoundPage,
     OtherFeaturesBlock,
