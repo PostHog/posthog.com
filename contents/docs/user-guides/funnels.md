@@ -49,7 +49,7 @@ You may wish to refine your steps further, filtering out certain types of users 
 
 **Step 3: Set your time range**
 
-You should now have a basic funnel showing in the main analysis pane, you can now modify the time range for which you would like to look at the funnel. A good place to start is to look at a time range of 30 days to ensure the effects of any day to day variations will be reduced.
+You now have a basic funnel showing in the main analysis pane and can modify the time range which you would like to look at. A good place to start is to look at a time range of 30 days to ensure the effects of any day to day variations will be reduced.
 
 ![image](https://user-images.githubusercontent.com/85295485/134479552-fa5a3eeb-762e-4a01-b5ab-01c43877f120.png)
 
