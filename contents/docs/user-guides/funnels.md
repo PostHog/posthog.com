@@ -66,7 +66,7 @@ If you’re measuring something recurrently  or you’d like to share it with ot
 
 Select a dashboard where you would like to save the funnel and give it a name
 
-**Step 3: Finding saved funnel**
+**Step 3: Finding a saved funnel**
 
 You can find your funnel any time by navigating to the dashboard you’ve saved it in.
 
