@@ -133,15 +133,17 @@ Individual software is down to your personal preference, and we encourage you to
 * IDEs range widely in cost. Best in class IDE suites can cost up to $700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
 * Before then, if you wish to spend up to $200 on an IDE, that is fine. Visual Studio, VIM and PyCharm are the most popular within our team.
 
-### Open-source sponsorship
+### Open-source sponsorship for individuals
 
 The PostHog platform wouldn't be possible without open-source software. We are standing on the shoulders of giants. As such, we feel it's important to support the software we benefit from through open-source sponsorship.
 
-To enable our team to do this we use [Open Collective](https://opencollective.com/) and have a budget of $100/month that can be contributed per team member.
+If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/growth/marketing/open-source-sponsorship).
+
+To enable individuals to support projects on an ad-hoc basis, we use [Open Collective](https://opencollective.com/) and have a $100/month budget per team member.
 
 To get setup with Open Collective get in touch with [Phil](/handbook/company/team#phil-leggetter-developer-relations) who will add you to the [PostHog Open Collective team](https://opencollective.com/posthog). From there, you'll be able to make "contributions" (sponsor a project) as the PostHog organization via Open Collective. For more information see the [Open Collective payments documentation](https://docs.opencollective.com/help/financial-contributors/payments).
 
-_If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask [Phil](/handbook/company/team#phil-leggetter-developer-relations) to setup the sponsorship._ 
+_If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask [Phil](/handbook/company/team#phil-leggetter-developer-relations) to set up the sponsorship._ 
 
 ## Work space
 
