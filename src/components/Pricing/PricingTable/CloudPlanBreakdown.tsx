@@ -5,7 +5,8 @@ import { PricingSlider } from '../../PricingSlider'
 import { CallToAction } from '../../CallToAction'
 import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
 import checkIcon from '../../../images/check.svg'
-import { Plan, Section, Features, Price, features } from './Plan'
+import { Plan, Section, Features, Price } from './Plan'
+import { features } from './Plans'
 
 export const CloudPlanBreakdown = () => {
     const { finalCost, eventNumber } = useValues(pricingSliderLogic)
