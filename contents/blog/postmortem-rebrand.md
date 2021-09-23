@@ -28,7 +28,7 @@ This led into my first major project: redesigning our homepage. This was the nat
 
 We kept the 8-bit style but evolved it to incorporate the idea of PostHog as “the future of analytics” - which naturally meant we needed rockets, planets, and a space theme! It also retained a blocky font that CEO James Hawkins had personally negotiated with [Font Foundry](http://www.fontfoundry.com/) to use in our open source product. I didn’t dare touch that so early on.
 
-At the time, our new homepage felt lightyears ahead of the previous homepage, while still retaining the essence of the brand: fun, quirky, and unashamed to be the antithesis of other companies in our space. It felt like a win.
+At the time, our new homepage felt light years ahead of the previous homepage, while still retaining the essence of the brand: fun, quirky, and unashamed to be the antithesis of other companies in our space. It felt like a win.
 We soon built out other internal pages, such as our product, pricing, and careers pages, even as we were still finding our stride with an updated brand aesthetic. 
 
 ## Iteration over perfection
