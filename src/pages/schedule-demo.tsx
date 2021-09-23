@@ -5,6 +5,7 @@ import { Spacer } from '../components/Spacer'
 import './styles/yc-onboarding.scss'
 import { SEO } from '../components/seo'
 import { Link } from 'gatsby'
+import Chip from 'components/Chip'
 
 type PaneOption = 'demo' | 'contact'
 
@@ -25,6 +26,14 @@ export const ScheduleDemo = () => {
             <div className="get-in-touch-wrapper">
                 <Spacer />
                 <h1 className="centered">Get in touch</h1>
+                <div className="flex flex-nowrap justify-center space-x-2 overflow-x-auto pb-6 px-2 default-scrollbar">
+                    <Chip href="#demo" active={activePane === 'demo'}>
+                        Book a demo
+                    </Chip>
+                    <Chip href="#contact" active={activePane === 'contact'}>
+                        Contact sales
+                    </Chip>
+                </div>
                 {activePane === 'demo' && (
                     <>
                         <p>
@@ -40,7 +49,6 @@ export const ScheduleDemo = () => {
                             </a>
                             .
                         </p>
-                        <br />
                         <DemoScheduler iframeSrc="https://calendly.com/jamesefhawkins/posthog-demo" />
                     </>
                 )}

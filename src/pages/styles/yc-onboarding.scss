@@ -2,12 +2,12 @@
     p {
         margin: 0 auto 1em auto;
         font-size: 15px !important;
-        max-width: 60%;
+        max-width: 36rem;
         display: block;
         text-align: center;
     }
 
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 767px) {
         p {
             max-width: 90%;
         }
