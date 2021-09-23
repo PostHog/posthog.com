@@ -43,7 +43,7 @@ Select the steps you wish to include in your funnel, ideally starting with the f
 
 ![image](https://user-images.githubusercontent.com/85295485/134485100-23d02b5b-c3ad-4704-90d9-fc3d4db93c39.png)
 
-You may wish to refine your steps further, filtering out certain types of users or event properties (e.g. by country of a user), click the “filter” icon next to the step you wish to refine further and select the filter you would like to add or set a global filter under the filters section on the right.
+You may wish to refine your steps further, filtering out certain types of users or event properties (e.g. country of a user). Click the “filter” icon next to the step you wish to refine further and select the filter you would like to add or set a global filter under the filters section on the right.
 
 <img width="442" alt="image" src="https://user-images.githubusercontent.com/85295485/134478622-df444540-7962-436e-bb86-98481b8563ab.png">
 
