@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/How-to-build-a-pirate-funnel/Pirate-funnels.png
+featuredImage: ../images/blog/how-to-build-a-pirate-funnel/pirate-funnels.png
 featuredImageType: full
 author: hanna-crombie
 ---
