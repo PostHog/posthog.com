@@ -73,7 +73,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 - [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
 - [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)
-- [Phil Legetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
+- [Phil Leggetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 - [Sam Winslow](/handbook/company/team#sam-winslow-full-stack-engineer) (Full Stack Engineer)
 - [Eli Kinsey](/handbook/company/team#eli-kinsey-frontend-engineer) (Frontend Engineer)
