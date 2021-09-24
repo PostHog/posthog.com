@@ -33,7 +33,7 @@ hideAnchor: true
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
-  - [Phil Legetter, Developer Relations](/handbook/company/team#phil-leggetter-developer-relations)
+  - [Phil Leggetter, Developer Relations](/handbook/company/team#phil-leggetter-developer-relations)
 
 # Small teams
 
