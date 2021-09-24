@@ -17,7 +17,7 @@ Since we’re an open source company and our [communication is public](https://p
 ## Joining PostHog during a pivot
 When I joined PostHog in early 2021, we were focused on companies who needed to self-host their analytics. Soon afterwards we shifted focus to PostHog Cloud. Lately we’ve shifted back to self-hosted deployments and since the start of the year we’ve also grown into a platform that extends beyond just analytics.
 
-As a designer, my task was the effectively communicate all of this. However I also felt it wasn’t in my best interests to propose massive changes on day one. PostHog already had a [Graphic Designer](https://posthog.com/handbook/company/team#lottie-coxon-graphic-designer) and it was important to take the time to understand who I would be working with, especially because PostHog already had a defined visual style at that point. 
+As a designer, my task was to effectively communicate all of this. However, I also felt it wasn’t in my best interests to propose massive changes on day one. PostHog already had a [Graphic Designer](https://posthog.com/handbook/company/team#lottie-coxon-graphic-designer) and it was important to take the time to understand who I would be working with, especially because PostHog already had a defined visual style at that point. 
 
 ## The pixel art and space era
 When I joined, PostHog’s visual style involved pixel art that was reminiscent of 8-bit videogames. I opted to adopt this visual language, and focused on communicating our new value propositions while _slowly_ evolving the brand.
