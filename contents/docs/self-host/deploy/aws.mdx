@@ -26,25 +26,31 @@ certManager:
 ```
 
 
-### Installing the chart
+## Installing the chart
 
 <InstallingSnippet />
-    
-### Lookup external IP
+
+
+### Lookup external IP address
 
 ```console
 kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
+
 ### Setting up DNS
 
 Create a `CNAME` record from your desired hostname to the hostname associated with the AWS LB.
 
-## Troubleshooting
-### I cannot connect to my PostHog instance after creation
-<TryUnsecureSnippet />
-
 ## Upgrading the chart
+
 <UpgradingSnippet />
 
 ## Uninstalling the chart
+
 <UninstallingSnippet />
+
+## Troubleshooting
+
+### I cannot connect to my PostHog instance after creation
+
+<TryUnsecureSnippet />
