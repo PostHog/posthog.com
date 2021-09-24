@@ -37,7 +37,8 @@ const styledNumbers = (className = '') => cntl`
 export default function SelfHost({ location }) {
     const [open, setOpen] = useState(false)
     const { state } = location
-    const scale = state?.scale
+    const plan = state?.plan
+    const scale = plan === 'scale'
     return (
         <Layout
             crumbs={[

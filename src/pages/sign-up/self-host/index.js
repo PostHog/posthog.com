@@ -25,7 +25,7 @@ export default function SelfHost() {
                     <Logo className="mx-auto" />
                     <h1 className={heading('md', 'primary', 'mt-16')}>Select your edition</h1>
                 </div>
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     <OpenSource />
                     <Scale setOpen={setOpen} />
                     <Enterprise />

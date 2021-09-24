@@ -35,7 +35,9 @@ export const CloudPlanBreakdown = () => {
                                 </span>
                             </Price>
                         </Section>
-                        <CallToAction className="my-7">Deploy now</CallToAction>
+                        <CallToAction href="https://app.posthog.com/" className="my-7">
+                            Deploy now
+                        </CallToAction>
                         <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>
                     </Plan>
                     <Plan title="Calculate your price" subtitle="Pay based on the events you capture each month.">

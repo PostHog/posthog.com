@@ -104,7 +104,7 @@ export const Scale = ({
                             )}
                         </div>
                     </Section>
-                    <CallToAction state={{ scale: true }} to="/sign-up/self-host/deploy" className="mt-7 mb-3">
+                    <CallToAction state={{ plan: 'scale' }} to="/sign-up/self-host/deploy" className="mt-7 mb-3">
                         Get started
                     </CallToAction>
                     <CallToAction type="outline">Book a demo</CallToAction>

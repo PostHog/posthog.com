@@ -25,7 +25,7 @@ export default function SignUp() {
                     <h1 className={heading('md', 'primary', 'mt-16')}>Choose your hosting option</h1>
                 </div>
                 <div className="border-t border-b border-dashed border-gray-accent-light">
-                    <div className="grid grid-cols-2 max-w-screen-lg mx-auto divide-x-1 divide-dashed divide-gray-accent-light">
+                    <div className="grid md:grid-cols-2 max-w-screen-lg mx-auto md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
                         <Plan title="Self-host" subtitle="Customer data never leaves your infrastructure">
                             <ul className="p-0 list-none grid gap-5 my-9">
                                 <Feature>
