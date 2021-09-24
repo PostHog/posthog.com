@@ -10,6 +10,7 @@ export default function Link({
     disablePrefetch,
     external,
     iconClasses = '',
+    state = {},
     ...other
 }) {
     const internal = !disablePrefetch && /^\/(?!\/)/.test(to)
@@ -18,7 +19,7 @@ export default function Link({
             {children}
         </button>
     ) : internal ? (
-        <GatsbyLink {...other} to={to} className={className}>
+        <GatsbyLink {...other} to={to} className={className} state={state}>
             {children}
         </GatsbyLink>
     ) : (

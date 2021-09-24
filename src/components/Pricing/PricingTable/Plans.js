@@ -60,7 +60,9 @@ export const OpenSource = () => {
             <Section title="Pricing" className="mt-auto">
                 <Price>Free</Price>
             </Section>
-            <CallToAction className="mt-7 mb-3">Deploy now</CallToAction>
+            <CallToAction to="/sign-up/self-host/deploy" className="mt-7 mb-3">
+                Deploy now
+            </CallToAction>
             <span className="h-[49.5px] flex justify-center items-center text-black opacity-50">
                 Includes community support on Slack
             </span>
@@ -102,7 +104,7 @@ export const Scale = ({
                             )}
                         </div>
                     </Section>
-                    <CallToAction to="/sign-up/self-host/deploy" className="mt-7 mb-3">
+                    <CallToAction state={{ scale: true }} to="/sign-up/self-host/deploy" className="mt-7 mb-3">
                         Get started
                     </CallToAction>
                     <CallToAction type="outline">Book a demo</CallToAction>

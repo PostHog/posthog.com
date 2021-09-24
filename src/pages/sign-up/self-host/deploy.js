@@ -37,7 +37,7 @@ const styledNumbers = (className = '') => cntl`
 export default function SelfHost({ location }) {
     const [open, setOpen] = useState(false)
     const { state } = location
-    console.log(state)
+    const scale = state?.scale
     return (
         <Layout
             crumbs={[
@@ -62,9 +62,20 @@ export default function SelfHost({ location }) {
                 </div>
                 <div className="grid md:grid-cols-2 max-w-screen-xl mx-auto md:divide-x-1 divide-dashed divide-gray-accent-light border-b border-dashed border-gray-accent-light">
                     <Plan
+                        style={
+                            !scale
+                                ? {
+                                      gridColumn: '1 / -1',
+                                      maxWidth: 600,
+                                      width: '100%',
+                                      margin: '0 auto',
+                                      paddingTop: 0,
+                                  }
+                                : {}
+                        }
                         title="Deploy to your infrastructure"
                         subtitle="Host your own instance of PostHog anywhere in the world."
-                        className={styledNumbers(`before:!content-['1']`)}
+                        className={scale && styledNumbers(`before:!content-['1']`)}
                     >
                         <ul className="list-none p-0 grid grid-cols-2 gap-1 my-7">
                             <DeployOption title="Amazon AWS" icon="aws" url="/docs/self-host/deploy/aws" />
@@ -90,22 +101,24 @@ export default function SelfHost({ location }) {
                             </CallToAction>
                         </div>
                     </Plan>
-                    <div>
-                        <Plan
-                            title="Get a license key"
-                            subtitle="After installation, you’ll be guided to acquire a license key."
-                            className={styledNumbers(`before:!content-['2'] md:ml-14`)}
-                        >
-                            <CallToAction
-                                href="https://license.posthog.com/"
-                                size="sm"
-                                type="outline"
-                                className="text-dark-yellow hover:!text-dark-yellow self-start !text-opacity-100 mt-7"
+                    {scale && (
+                        <div>
+                            <Plan
+                                title="Get a license key"
+                                subtitle="After installation, you’ll be guided to acquire a license key."
+                                className={styledNumbers(`before:!content-['2'] md:ml-14`)}
                             >
-                                Get a license key now
-                            </CallToAction>
-                        </Plan>
-                    </div>
+                                <CallToAction
+                                    href="https://license.posthog.com/"
+                                    size="sm"
+                                    type="outline"
+                                    className="text-dark-yellow hover:!text-dark-yellow self-start !text-opacity-100 mt-7"
+                                >
+                                    Get a license key now
+                                </CallToAction>
+                            </Plan>
+                        </div>
+                    )}
                 </div>
             </section>
             <section className={section('px-4 md:px-10')}>
