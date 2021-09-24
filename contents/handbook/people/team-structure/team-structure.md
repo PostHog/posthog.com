@@ -16,7 +16,7 @@ hideAnchor: true
       - [Michael Matloka, Full Stack Engineer](/handbook/company/team#michael-matloka-software-engineer)
       - [Rick Marron, Full Stack Engineer](/handbook/company/team#rick-marron-full-stack-engineer)
     - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
-      - Guido Laquinti
+      - Guido Laquinti, Site Reliability Engineer
     - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
     - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
     - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
@@ -33,7 +33,7 @@ hideAnchor: true
     - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
     - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
-  - [Phil Legetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
+  - [Phil Legetter, Developer Relations](/handbook/company/team#phil-leggetter-developer-relations)
 
 # Small teams
 
