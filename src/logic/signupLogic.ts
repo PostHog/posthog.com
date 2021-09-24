@@ -16,6 +16,31 @@ export type HubSpotContactResponse = {
     success: boolean
 }
 
+const validators = {
+    email: (email: string) =>
+        !email
+            ? 'Please enter an email'
+            : !isValidEmailAddress(email)
+            ? 'Please enter a valid email'
+            : (false as const),
+    firstname: (firstname: string) => !firstname && 'Please enter your first name',
+    company: (company: string) => !company && 'Please enter your company name',
+}
+
+export interface ContactFormType {
+    email: string
+    firstname: string
+    lastname: string
+    company: string
+    maus: number
+    monthly_events: number
+    data_warehouse_: string
+    hosting_provider: string
+    helm_charts: string
+    which_product_are_you_interested_in_: string
+    reason_for_self_host: string
+}
+
 async function createContact(email: string) {
     const url = process.env.GATSBY_POSTHOG_API_HOST + '/create_web_contact'
     const body = new FormData()
@@ -58,6 +83,7 @@ export const signupLogic = kea({
             deploymentType,
             nextHref,
         }),
+        setFormField: (field: string, value: any) => ({ field, value }),
     },
     reducers: {
         modalView: [
@@ -70,6 +96,27 @@ export const signupLogic = kea({
             '',
             {
                 setEmail: (_, { email }: { email: string }) => email,
+            },
+        ],
+        contactForm: [
+            {
+                email: '',
+                firstname: '',
+                lastname: '',
+                company: '',
+                maus: 0,
+                monthly_events: 0,
+                data_warehouse_: '',
+                hosting_provider: '',
+                helm_charts: '',
+                which_product_are_you_interested_in_: '',
+                reason_for_self_host: '',
+            } as ContactFormType,
+            {
+                setFormField: (state, { field, value }: { field: string; value: any }) => ({
+                    ...state,
+                    [field]: value,
+                }),
             },
         ],
     },
@@ -137,4 +184,14 @@ export const signupLogic = kea({
             }
         },
     }),
+    selectors: {
+        contactFormValidation: [
+            (s) => [s.contactForm],
+            (contactForm: ContactFormType) => ({
+                email: validators['email'](contactForm.email),
+                firstname: validators['firstname'](contactForm.firstname),
+                company: validators['company'](contactForm.company),
+            }),
+        ],
+    },
 })

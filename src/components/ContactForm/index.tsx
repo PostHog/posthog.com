@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import './ContactForm.scss'
-import { isValidEmailAddress } from 'lib/utils'
+import { useActions, useValues } from 'kea'
+import { signupLogic } from 'logic/signupLogic'
 
 interface ContactFormType {
     email: string
@@ -73,32 +74,14 @@ function isValidKey(key: string): key is keyof ContactFormType {
 }
 
 export const ContactForm = ({ action }: { action?: string }): JSX.Element => {
-    const [formValues, setFormValues] = useState(defaultFormState)
-
-    // Validations data structure inspired by kea-forms
-    const validations = {
-        email: !formValues.email
-            ? 'Please enter an email'
-            : !isValidEmailAddress(formValues.email)
-            ? 'Please enter a valid email'
-            : (false as const),
-        firstname: !formValues.firstname && 'Please enter your first name',
-        lastname: !formValues.lastname && 'Please enter your last name',
-        company: !formValues.company && 'Please enter your company name',
-    }
-
-    function setField<T extends keyof ContactFormType>(field: T, value: ContactFormType[T]): void {
-        setFormValues((state) => ({
-            ...state,
-            [field]: value,
-        }))
-    }
+    const { contactForm: formValues, contactFormValidation: validations } = useValues(signupLogic)
+    const { setFormField } = useActions(signupLogic)
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
         const {
             target: { value, name },
         } = event
-        if (isValidKey(name)) setField(name, value)
+        if (isValidKey(name)) setFormField(name, value)
     }
 
     return (
@@ -110,7 +93,7 @@ export const ContactForm = ({ action }: { action?: string }): JSX.Element => {
                 <Field name="firstname" label="First name" validation={validations.firstname}>
                     <input value={formValues.firstname} onChange={handleChange} />
                 </Field>
-                <Field name="lastname" label="Last name" validation={validations.lastname}>
+                <Field name="lastname" label="Last name">
                     <input value={formValues.lastname} onChange={handleChange} />
                 </Field>
                 <Field name="company" label="Company" validation={validations.company}>
