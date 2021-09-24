@@ -1,23 +1,13 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { ServerLocked, WebCode, Prohibited } from 'components/Icons/Icons'
-import { CallToAction } from 'components/CallToAction'
-import { Plan, Section, Price, Features } from './Plan'
-import { features, OpenSource, Scale, Enterprise } from './Plans'
-import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
-import { PricingSlider } from '../../PricingSlider'
-import { Dialog, Transition } from '@headlessui/react'
-import Link from 'components/Link'
-import { Close } from 'components/Icons/Icons'
-import { Modal } from 'components/Modal'
-import { ScaleModal } from './ScaleModal'
+import { OpenSource, Scale, Enterprise } from './Plans'
+import ScaleModal from './ScaleModal'
 
 export const SelfHostedPlanBreakdown = () => {
     const [open, setOpen] = useState(false)
     return (
         <>
-            <Modal open={open} setOpen={setOpen}>
-                <ScaleModal setOpen={setOpen} />
-            </Modal>
+            <ScaleModal setOpen={setOpen} open={open} />
             <section className="grid grid-cols-3">
                 <OpenSource />
                 <Scale setOpen={setOpen} />

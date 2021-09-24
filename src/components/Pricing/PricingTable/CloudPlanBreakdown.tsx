@@ -16,69 +16,6 @@ export const CloudPlanBreakdown = () => {
         <>
             <div className="flex justify-center mb-20">
                 <div className="grid grid-cols-2 text-primary">
-                    {/* <div className="flex-0 w-full border border-white border-opacity-10 rounded-xl p-8 bg-almost-black text-white min-w-[320px]">
-                        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 24" width="42" height="24">
-                            <path
-                                d="M0 17.143L6.867 24H0v-6.857zm0-1.714L8.583 24h6.867L0 8.572v6.857zm0-8.571L17.166 24h6.866L0 0v6.858zm8.583 0L25.75 24v-6.857L8.583.001v6.857zM17.166 0v6.857l8.583 8.57V8.573L17.166 0z"
-                                fill="#fff"
-                            />
-                            <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M36.51 19.318a6.635 6.635 0 004.689 1.939V24H26.964V9.784l9.547 9.534zm-4.053.567a1.372 1.372 0 11-2.744-.001 1.372 1.372 0 012.744.002z"
-                                fill="#fff"
-                            />
-                            <path
-                                d="M0 24h6.866L0 17.143V24zM8.584 8.572L0 0v6.857l8.583 8.57V8.573zM0 8.571v6.857L8.583 24v-6.857L0 8.57zM17.166 8.571L8.583 0v6.857l8.583 8.571V8.571z"
-                                fill="#fff"
-                            />
-                            <path
-                                d="M8.582 24h6.866l-6.866-6.857V24zM8.582 8.571v6.857L17.165 24v-6.858l-8.583-8.57z"
-                                fill="#fff"
-                            />
-                        </svg>
-                        <h3 className="text-lg my-2 text-white">PostHog Cloud</h3>
-                        <p className="opacity-50">Turnkey, hosted solution</p>
-                        <ul className="list-none text-white text-opacity-70 text-sm pl-0 mb-6">
-                            <li className="flex items-center mb-2 space-x-2">
-                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
-                                <span className="">Hosted by PostHog</span>
-                            </li>
-                            <li className="flex items-center mb-2 space-x-2">
-                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
-                                <span className="">Automatic upgrades</span>
-                            </li>
-                            <li className="flex items-center space-x-2">
-                                <img src={checkIcon} alt="checkmark" width="20" height="20" className="mt-0" />
-                                <span className="">Start using immediately</span>
-                            </li>
-                        </ul>
-
-                        <div className="opacity-50">Monthly estimate</div>
-                        <div className="flex items-baseline">
-                            <div className="text-lg font-bold">${finalCost}</div>
-                            <div className="opacity-50">/mo for&nbsp;</div>
-                            <div className="opacity-50">{eventNumberWithDelimiter} events</div>
-                        </div>
-
-                        <div className="free-allotment-callout relative text-white bg-white bg-opacity-30 rounded py-1 px-2 text-xs mt-2 mb-4 inline-flex">
-                            First 1 million events free - every month!
-                        </div>
-
-                        <div>
-                            <CallToAction
-                                type="secondary"
-                                href="https://app.posthog.com/signup?src=pricing-page"
-                                className="my-4 !w-full"
-                            >
-                                Get started
-                            </CallToAction>
-                        </div>
-
-                        <div className="text-center text-xs text-opacity-50 text-white mt-2">
-                            {eventNumber === 10000 ? 'Self-serve. No credit card required.' : 'Completely self-serve'}
-                        </div>
-                    </div> */}
                     <Plan
                         title="PostHog Cloud"
                         subtitle="Turnkey, hosted solution"

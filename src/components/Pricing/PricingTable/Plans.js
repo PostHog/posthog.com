@@ -90,7 +90,9 @@ export const Scale = ({ setOpen }) => {
                     </Link>
                 </div>
             </Section>
-            <CallToAction className="mt-7 mb-3">Get started</CallToAction>
+            <CallToAction to="/sign-up/self-host/deploy" className="mt-7 mb-3">
+                Get started
+            </CallToAction>
             <CallToAction type="outline">Book a demo</CallToAction>
         </Plan>
     )
