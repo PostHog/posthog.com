@@ -1,3 +1,5 @@
+@import '~/vars.scss';
+
 .form-wrapper {
     background: #fff;
     box-shadow: 0px 16px 16px -16px rgba(0, 0, 0, 0.25);
@@ -5,25 +7,46 @@
     padding: 2rem;
     margin: 0 auto;
 
-    .ant-row.ant-form-item {
+    .form-input-container {
         margin-bottom: 0.75em;
-    }
 
-    .ant-col.ant-form-item-label {
-        font-size: 16px;
-        font-weight: 600;
-        font-variation-settings: 'wght' 600;
-
-        label[for='contact_email'] {
+        input,
+        textarea,
+        select {
             display: block;
-        }
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid rgba(0, 0, 0, 0.25);
+            border-radius: 0.5rem;
 
-        .required-text {
-            font-size: 75%;
-            font-weight: 400;
-            font-variation-settings: 'wght' 400;
-            text-transform: uppercase;
-            color: rgba(45, 45, 45, 0.25);
+            &:focus {
+                outline: none;
+                border-color: $primary;
+            }
+        }
+        label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            font-variation-settings: 'wght' 600;
+
+            &.primary-label {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            &.validation-error {
+                color: $danger;
+            }
+
+            .required-text {
+                font-size: 75%;
+                font-weight: 400;
+                font-variation-settings: 'wght' 400;
+                text-transform: uppercase;
+                color: rgba(45, 45, 45, 0.25);
+            }
         }
     }
 }
