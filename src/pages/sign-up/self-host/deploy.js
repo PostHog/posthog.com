@@ -6,17 +6,8 @@ import { Plan } from 'components/Pricing/PricingTable/Plan'
 import Sprites from 'components/Header/Sprites'
 import { CallToAction } from 'components/CallToAction'
 import { Slack } from 'components/Icons/Icons'
-
-const DeployOption = ({ title, icon }) => {
-    return (
-        <li className="flex space-x-2 items-center text-sm font-bold">
-            <svg className="w-5 h-5 text-black dark:text-white">
-                <use xlinkHref={`#${icon}`}></use>
-            </svg>
-            <span>{title}</span>
-        </li>
-    )
-}
+import Link from 'components/Link'
+import DeployOption from 'components/DeployOption'
 
 export default function SelfHost() {
     const [open, setOpen] = useState(false)
@@ -48,14 +39,16 @@ export default function SelfHost() {
                         subtitle="Host your own instance of PostHog anywhere in the world."
                         className="before:!content-['1'] before:text-xl before:font-bold before:absolute before:top-9 before:left-0 before:h-10 before:w-10 before:bg-gray-accent-light before:rounded-full before:flex before:items-center before:justify-center relative"
                     >
-                        <ul className="list-none p-0 grid grid-cols-2 gap-6 my-7">
-                            <DeployOption title="Amazon AWS" icon="aws" />
-                            <DeployOption title="Heroku" icon="heroku" />
-                            <DeployOption title="Google Cloud" icon="gcs" />
-                            <DeployOption title="Docker" icon="docker" />
-                            <DeployOption title="Microsoft Azure" icon="azure" />
-                            <DeployOption title="Helm Chart" icon="helm chart" />
-                            <DeployOption title="Digital Ocean" icon="digital ocean" />
+                        <ul className="list-none p-0 grid grid-cols-2 gap-1 my-7">
+                            <DeployOption title="Amazon AWS" icon="aws" url="/docs/self-host/deploy/aws" />
+                            <DeployOption title="Google Cloud" icon="gcs" url="/docs/self-host/deploy/gcp" />
+                            <DeployOption title="Helm Chart" icon="helm chart" url="/docs/self-host/deploy/other" />
+                            <DeployOption
+                                title="Digital Ocean"
+                                icon="digital ocean"
+                                url="/docs/self-host/deploy/digital-ocean"
+                            />
+                            <DeployOption title="Source" icon="github" url="https://github.com/PostHog/posthog" />
                         </ul>
                         <div className="flex justify-between items-center bg-gray-accent-light px-5 py-4 rounded-md">
                             <p className="m-0 font-bold">Deployment questions?</p>
