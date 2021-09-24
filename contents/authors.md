@@ -120,4 +120,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/andyvandervell/
     }
+  - {
+      handle: charles-cook,
+      name: Charles Cook,
+      role: VP of Operations,
+      image: https://avatars.githubusercontent.com/u/70321811?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/charlescook1/
+    }
 ---
