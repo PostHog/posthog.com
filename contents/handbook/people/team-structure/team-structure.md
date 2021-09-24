@@ -10,7 +10,7 @@ hideAnchor: true
 - [James Hawkins, CEO & Co-founder](/handbook/company/team#james-hawkins-co-founder--ceo)
   - [Tim Glaser, CTO & Co-founder](/handbook/company/team#tim-glaser-co-founder--cto)
     - [Marcus Hyett, VP of Product](/handbook/company/team#marcus-hyett-vp-of-product)
-      - [Paolo D'amico, Product](/handbook/company/team#paolo-damico-product)
+      - [Paolo D'Amico, Product](/handbook/company/team#paolo-damico-product)
     - [Marius Andra, Full Stack Engineer](/handbook/company/team#marius-andra-software-engineer)
       - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
       - [Michael Matloka, Full Stack Engineer](/handbook/company/team#michael-matloka-software-engineer)
