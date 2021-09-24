@@ -11876,11 +11876,6 @@ katex@^0.12.0:
   dependencies:
     commander "^2.19.0"
 
-kea-forms@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/kea-forms/-/kea-forms-0.2.0.tgz#e3c48755454cccedca831113b0dd49e91319680b"
-  integrity sha512-9gDeOtpMonAzP/CFCEiyy3DIQ4N1ok9hRDT35HfPWeVRl3vYYf1fM2ngwjRISLx8CMv49YWKlThx4U0VOGxZRg==
-
 kea-loaders@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/kea-loaders/-/kea-loaders-0.3.0.tgz"

@@ -67,7 +67,6 @@
         "gatsby-transformer-sharp": "^2.2.14",
         "katex": "^0.12.0",
         "kea": "^2.2.2",
-        "kea-forms": "^0.2.0",
         "kea-loaders": "^0.3.0",
         "kea-localstorage": "^1.1.1",
         "kea-router": "^0.5.1",
