@@ -15,6 +15,7 @@ hideAnchor: true
       - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
       - [Michael Matloka, Full Stack Engineer](/handbook/company/team#michael-matloka-software-engineer)
       - [Rick Marron, Full Stack Engineer](/handbook/company/team#rick-marron-full-stack-engineer)
+      - Paul D'Ambra, Full Stack Engineer
     - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
       - Guido Laquinti, Site Reliability Engineer
     - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
