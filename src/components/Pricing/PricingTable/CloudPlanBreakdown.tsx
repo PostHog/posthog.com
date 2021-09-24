@@ -15,14 +15,14 @@ export const CloudPlanBreakdown = () => {
     return (
         <>
             <div className="flex justify-center mb-20">
-                <div className="grid grid-cols-2 text-primary">
+                <div className="grid grid-cols-1 md:grid-cols-2 text-primary">
                     <Plan
                         title="PostHog Cloud"
                         subtitle="Turnkey, hosted solution"
                         className="border border-dashed border-gray-accent-light rounded-sm bg-white bg-opacity-20"
                     >
                         <Section title="Platform">
-                            <Features features={features['Platform']} className="grid-cols-2" />
+                            <Features features={features['Platform']} className="grid-cols-1 md:grid-cols-2" />
                         </Section>
                         <Section title="Benefits" className="mt-auto">
                             <Features features={features['Benefits']} />

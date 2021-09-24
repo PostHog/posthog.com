@@ -1,6 +1,6 @@
 import React from 'react'
 import { useValues } from 'kea'
-import { features } from './Plans'
+import { features, Scale } from './Plans'
 import { Plan, Features, Section, Price } from './Plan'
 import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
 import { PricingSlider } from '../../PricingSlider'
@@ -13,39 +13,14 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
     const eventNumberWithDelimiter = eventNumber.toLocaleString()
     return (
         <Modal open={open} setOpen={setOpen}>
-            <div className="absolute w-full max-w-[1045px] top-0 p-8 left-1/2 transform -translate-x-1/2 box-content">
-                <div className="relative bg-white p-14 rounded-md shadow-lg">
-                    <div className=" flex space-x-14 items-start">
-                        <Plan
-                            title="Scale"
-                            subtitle="For large userbases or event volumes"
-                            badge={!hideBadge && 'INCLUDES OPEN SOURCE FEATURES'}
-                            className="pt-0 pb-0 pl-0 pr-0 flex-grow"
-                        >
-                            <Section title="Advanced features">
-                                <Features features={features['Advanced features']} />
-                            </Section>
-                            <Section title="Collaboration">
-                                <Features features={features['Collaboration']} />
-                            </Section>
-                            {!hideActions && (
-                                <>
-                                    <Section title="Pricing starts at" className="mt-auto">
-                                        <Price>
-                                            $2,000<span className="text-base opacity-50">/mo</span>
-                                        </Price>
-                                    </Section>
-                                    <CallToAction className="mt-7 mb-3">Get started</CallToAction>
-                                    <CallToAction type="outline" className="bg-white">
-                                        Book a demo
-                                    </CallToAction>
-                                </>
-                            )}
-                        </Plan>
+            <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 transform -translate-x-1/2">
+                <div className="relative bg-white p-6 sm:p-9 lg:p-14 rounded-md shadow-lg">
+                    <div className="flex flex-col md:flex-row md:space-x-14 space-y-6 md:space-y-0 items-start">
+                        <Scale hideCalculator className="!pt-0 !pb-0 !pl-0 !pr-0 flex-grow w-full md:w-auto" />
                         <Plan
                             title="Calculate your price"
                             subtitle="Pay based on the events you capture each month."
-                            className="border border-dashed border-gray-accent-light rounded-sm flex-shrink-0"
+                            className="border border-dashed border-gray-accent-light rounded-sm lg:flex-shrink-0 w-full md:w-auto"
                         >
                             <div className="mb-4">
                                 <div className="flex justify-between items-center mt-7">
@@ -106,8 +81,11 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
                             </div>
                         </Plan>
                     </div>
-                    <button onClick={() => setOpen(false)}>
-                        <Close className="absolute top-6 right-6" />
+                    <button
+                        className="absolute top-2 right-2 sm:top-3 sm:right-3 lg:top-6 lg:right-6"
+                        onClick={() => setOpen(false)}
+                    >
+                        <Close className="w-3 h-3 sm:w-auto sm:h-auto" />
                     </button>
                 </div>
             </div>

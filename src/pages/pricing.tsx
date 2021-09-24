@@ -13,6 +13,7 @@ import { useLocation } from '@reach/router'
 import '../components/Pricing/styles/index.scss'
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
+import { heading } from 'components/Home/classes'
 
 const PricingNew = (): JSX.Element => {
     const { hash } = useLocation()
@@ -21,7 +22,7 @@ const PricingNew = (): JSX.Element => {
         <Layout>
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section className="mt-12 md:mt-24 px-5">
-                <h1 className="text-center m-0 text-6xl">Pricing</h1>
+                <h1 className={heading()}>Pricing</h1>
                 <h2 className="my-12 text-lg text-center">
                     <span className="opacity-50">All plans include</span> <span className="text-yellow">unlimited</span>{' '}
                     events, tracked users, <span className="opacity-50">and</span> teammates.

@@ -2,20 +2,21 @@ import React, { useState } from 'react'
 import { ServerLocked, WebCode, Prohibited } from 'components/Icons/Icons'
 import { OpenSource, Scale, Enterprise } from './Plans'
 import ScaleModal from './ScaleModal'
+import { section } from 'components/Home/classes'
 
 export const SelfHostedPlanBreakdown = () => {
     const [open, setOpen] = useState(false)
     return (
         <>
             <ScaleModal setOpen={setOpen} open={open} />
-            <section className="grid grid-cols-3">
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <OpenSource />
                 <Scale setOpen={setOpen} />
                 <Enterprise />
             </section>
-            <section className="mt-36">
+            <section className={section()}>
                 <h2 className="text-center text-lg opacity-50 mb-14">With all self-hosted plans:</h2>
-                <ul className="grid grid-cols-3 gap-12">
+                <ul className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <li className="flex space-x-4">
                         <ServerLocked className="flex-shrink-0" />
                         <div className="opacity-75">

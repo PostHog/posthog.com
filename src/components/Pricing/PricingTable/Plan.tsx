@@ -18,7 +18,7 @@ export const Features = ({ features, className = '' }) => {
 
 export const Plan = ({ title, subtitle, badge, children, className = '' }) => {
     return (
-        <div className={`flex flex-col py-9 px-14 ${className}`}>
+        <div className={`flex flex-col py-6 md:py-9 px-6 md:px-14 ${className}`}>
             <h3 className="my-0">{title}</h3>
             <p className="text-[15px] mt-1 mb-2">{subtitle}</p>
             {badge && (
