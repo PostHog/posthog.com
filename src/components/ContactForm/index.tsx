@@ -75,7 +75,7 @@ function isValidKey(key: string): key is keyof ContactFormType {
 
 export const ContactForm = ({ action }: { action?: string }): JSX.Element => {
     const { contactForm: formValues, contactFormValidation: validations } = useValues(signupLogic)
-    const { setFormField } = useActions(signupLogic)
+    const { setFormField, submitContactForm } = useActions(signupLogic)
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
         const {
@@ -86,7 +86,13 @@ export const ContactForm = ({ action }: { action?: string }): JSX.Element => {
 
     return (
         <div className="form-wrapper max-w-xl">
-            <form name="contactForm">
+            <form
+                name="contactForm"
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    submitContactForm()
+                }}
+            >
                 <Field name="email" label="Email" validation={validations.email}>
                     <input type="email" value={formValues.email} onChange={handleChange} />
                 </Field>
@@ -146,6 +152,7 @@ export const ContactForm = ({ action }: { action?: string }): JSX.Element => {
                 <Field name="reason_for_self_host" label="What is your main reason for wanting to self-host?">
                     <textarea value={formValues.reason_for_self_host} onChange={handleChange} />
                 </Field>
+                <input type="submit" className="block button button-primary mx-auto cursor-pointer" />
             </form>
         </div>
     )

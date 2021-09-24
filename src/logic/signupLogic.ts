@@ -194,4 +194,33 @@ export const signupLogic = kea({
             }),
         ],
     },
+    loaders: ({ values }) => ({
+        contactFormResponse: [
+            {},
+            {
+                submitContactForm: async () => {
+                    const fields: { name: string; value: string | number }[] = []
+                    Object.entries(values.contactForm).forEach(([name, value]) => {
+                        fields.push({
+                            name,
+                            value: value as string | number,
+                        })
+                    })
+                    const data = { fields }
+                    const response = await fetch(
+                        'https://api.hsforms.com/submissions/v3/integration/submit/6958578/f8854263-d80d-46f6-9905-a8ccb7f50f22',
+                        {
+                            method: 'POST',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                        }
+                    )
+                    return response.json()
+                },
+            },
+        ],
+    }),
 })
