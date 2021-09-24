@@ -6,7 +6,13 @@ showTitle: true
 
 As we grow, we'll increase the number of managers at PostHog. Here's what a manager at PostHog looks like.
 
-## Defining the role of manager
+## Team leads vs managers
+
+You'll sometimes hear the word "Team Lead" used. A team lead is the leader of a small team. Sometimes they also manage the individuals that are within their team, sometimes they don't.
+
+Team leads are also responsible for setting context and direction within the team. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback).
+
+## Defining the role of a manager
 
 A manager at PostHog has two tasks:
 1. Making sure their direct reports are happy and productive
@@ -15,12 +21,16 @@ A manager at PostHog has two tasks:
 That's it.
 
 A manager at PostHog is _not_ responsible for:
-1. Setting compensation (we have transparent compensation)
+1. Setting compensation (we have a [compensation calculator](/handbook/people/compensation) and increases are done occasionally by the people team).
 1. Setting tasks for their direct reports
 1. Creating a career path (career paths should be transparent and documented, and for now centrally managed)
 1. "Approving," whether that's projects, expenses, days off or accounts (people should have admin access by default to most things)
 1. Giving feedback (managers give feedback in their capacity as individual contributor, but so does everyone else)
 
+## How do I make sure my direct reports are happy and productive?
+
+1. Do [regular 1:1s](/handbook/company/1-1s) every week or every other week
+1. Do a [performance review](/handbook/people/feedback#performance-reviews) every six months
 
 ## What does setting context mean?
 
