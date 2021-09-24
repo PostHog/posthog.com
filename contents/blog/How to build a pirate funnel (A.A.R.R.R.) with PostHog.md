@@ -1,11 +1,12 @@
 ---
-date: 2021-09-29
+date: 2021-09-23
 title: How to build a pirate funnel (AARRR) with PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: [Pirate funnels]
+featuredImage: ../images/blog/How-to-build-a-pirate-funnel/Pirate-funnels.png
+featuredImageType: full
 author: hanna-crombie
 ---
 
@@ -15,7 +16,7 @@ Applying pirate metrics to your business is a really efficient way to determine 
 
 The pirate funnel is a framework created by Dave McClure – lauded entrepreneur and co-founder of over 500 startups. His theory was that founders and CEOs should start by focusing on just 5 key metrics in order to be successful: _Acquisition_, _Activation_, _Retention_, _Referral_ and _Revenue_. Also known well by their acronym A.A.R.R.R (me hearties – get it?).
 
-![HCImg01 AARRR funnel]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg01-AARRR-funnel.png)
 
 Growth hackers use the pirate funnel to identify the weakest point in a customer acquisition cycle and see where they need to focus more effort. Simply put, if you aren’t sure where you’re going wrong, this is a great place to start.
 
@@ -45,7 +46,7 @@ Before getting started with the funnel, it’s important to make sure all of the
 
 On your PostHog app you’ll find the ‘Funnels’ feature tab located inside ‘Insights’.
 
-![HCImg02 Creating a funnel]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg02-Creating-a-funnel.png)
 
 ## Step 3: Adding steps to your funnel
 
@@ -59,7 +60,7 @@ Click on the ‘Add funnel step’ button and use the ‘Select action’ box on
 
 Because a funnel relies on at least two steps to calculate conversion success, you won’t see a conversion comparison until you add your second step.
 
-![HCImg03 Acquisition]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg03-Acquisition.png)
 
 ### Activation: the first move
 
@@ -73,7 +74,7 @@ Our Autocapture functionality will capture a lot of frontend elements by default
 
 Now that we have a couple of steps in our funnel, it is beginning to take shape and tell a story.
 
-![HCImg04 Activation]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg04-Activation.png)
 
 Already we can see the conversion percentage, and that there seem to be no issues in getting users to move through to the activation stage.
 
@@ -89,7 +90,7 @@ There are a number of actions you may want to track to tell you about user reten
 
 We want to track the number of users who watch a movie during their free trial. We might count users watching at least one movie during their free trial as a success metric for retention, so the ‘played_movie’ event will be used as the next step in our funnel.
 
-![HCImg05 Retention]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg05-Retention.png)
 
 ### Revenue: time to level up
 
@@ -97,7 +98,7 @@ Monetization is the root of the financial health of your business, meaning at so
 
 In the case of HogFlix, users who proceed through the payment process following their free trial are counted as a successful metric for the revenue stage. The ‘Made purchase’ action defines the fourth stage of the A.A.R.R.R. funnel.
 
-![HCImg06 Revenue]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg06-Revenue.png)
 
 ### Referral: sharing is caring
 
@@ -107,7 +108,7 @@ There’s a big difference between a happy customer and a brand evangelist. Taki
 
 Referral is the final step of the funnel to add here, and has been defined as a sharing event by users who have completed the rest of the journey.
 
-![HCImg07 Shared content]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg07-Shared-content.png)
 
 ## Step 4: Refining your metrics
 
@@ -123,7 +124,7 @@ It can take some time to figure out how best to define the requirements for all 
 
 Now that your basic funnel is created you can save it to your dashboard by clicking on the ‘Add to dashboard’ button in the top left hand corner.
 
-![HCImg08 Add funnel to dashboard]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg08-Add-funnel-to-dashboard.png)
 
 ## Step 6: Find your bottleneck
 
@@ -135,7 +136,7 @@ Do look at them relatively of course. Some steps may be unfair to compare to oth
 
 At HogFlix there is a significant drop off at the referral stage. Despite the great success from acquisition to revenue, there’s something keeping customers from really falling in love with the platform enough to promote the service to others.
 
-![HCImg 09 Find your bottleneck]
+![image](../images/blog/How-to-build-a-pirate-funnel/HCImg09-Find-your-bottleneck.png)
 
 ## Step 7: investigation
 

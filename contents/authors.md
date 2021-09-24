@@ -72,4 +72,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/corywatilo/
     }
+  - {
+      handle: hanna-crombie,
+      name: Hanna Crombie,
+      role: Contributor,
+      image: https://avatars.githubusercontent.com/u/59732236?v=4,
+      link_type: linkedin,
+      link_url: https://www.linkedin.com/in/hannacrombie/
+    }
 ---
