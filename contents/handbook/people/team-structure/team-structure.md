@@ -5,6 +5,36 @@ showTitle: true
 hideAnchor: true
 ---
 
+# Reporting structure
+
+- [James Hawkins, CEO & Co-founder](/handbook/company/team#james-hawkins-co-founder--ceo)
+  - [Tim Glaser, CTO & Co-founder](/handbook/company/team#tim-glaser-co-founder--cto)
+    - [Marcus Hyett, VP of Product](/handbook/company/team#marcus-hyett-vp-of-product)
+      - [Paolo D'amico, Product](/handbook/company/team#paolo-damico-product)
+    - [Marius Andra, Full Stack Engineer](/handbook/company/team#marius-andra-software-engineer)
+      - [Alex Kim, Full Stack Engineer](/handbook/company/team#alex-kim-full-stack-engineer)
+      - [Michael Matloka, Full Stack Engineer](/handbook/company/team#michael-matloka-software-engineer)
+      - [Rick Marron, Full Stack Engineer](/handbook/company/team#rick-marron-full-stack-engineer)
+    - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
+      - Guido Laquinti
+    - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
+    - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
+    - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
+    - [Karl-Aksel Puulmann, Full Stack Engineer](/handbook/company/team#karlaksel-puulmann-software-engineer)
+    - [Tiina Turban, Full Stack Engineer](/handbook/company/team#tiina-turban-software-engineer)
+    - [Yakko Majuri, Full Stack Engineer](/handbook/company/team#yakko-majuri-software-engineer)
+    - [Sam Winslow, Full Stack Engineer](/handbook/company/team#sam-winslow-full-stack-engineer)
+    - Harry Waye, Full Stack Engineer
+  - [Charles Cook, VP of Operations](/handbook/company/team#charles-cook-business-operations)
+    - [Eltje Lange, People and Talent](/handbook/company/team#eltje-lange-people-and-talent)
+    - [Joe Martin, Product Marketer](/handbook/company/team#joe-martin-product-marketer)
+  - [Cory Watilo, Lead Designer](/handbook/company/team#cory-watilo-lead-designer)
+    - [Lottie Coxon, Graphic Designer](/handbook/company/team#lottie-coxon-graphic-designer)
+    - [Eli Kinsey, Frontend Engineer](/handbook/company/team#eli-kinsey-frontend-engineer)
+    - [Chris Clark, Product Designer](/handbook/company/team#chris-clark)
+  - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
+  - [Phil Legetter](/handbook/company/team#phil-leggetter-developer-relations) (Developer Relations)
+
 # Small teams
 
 We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/people/team-structure/why-small-teams).
@@ -51,7 +81,6 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 <br />
 
 ## [Marketing](marketing)
-
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
 - [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) (Graphic Designer)
 
