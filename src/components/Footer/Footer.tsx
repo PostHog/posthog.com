@@ -166,10 +166,7 @@ export function Footer(): JSX.Element {
                                 <ul className="list-none p-0 m-0">
                                     <FooterMenuItem title="PostHog Cloud" url="https://app.posthog.com/signup" />
                                     <FooterMenuItem title="Self hosting" url="/docs/self-host" />
-                                    <FooterMenuItem
-                                        title="Compare options"
-                                        url="/docs/user-guides/organizations#cloud-vs-selfhosted"
-                                    />
+                                    <FooterMenuItem title="Compare options" url="/pricing" />
                                 </ul>
                             </div>
                             <div>

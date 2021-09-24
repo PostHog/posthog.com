@@ -8,6 +8,8 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import { CodeBlock } from 'components/CodeBlock'
 import StickySidebar from './StickySidebar'
 import MobileSidebar from './MobileSidebar'
+import { useActions } from 'kea'
+import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 
 const A = (props) => <a {...props} className="text-yellow hover:text-yellow font-bold" />
 const Iframe = (props) => (

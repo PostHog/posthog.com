@@ -493,7 +493,7 @@ function ProductPage() {
                     componentKey="productFooter"
                     disclaimer={
                         <span>
-                            (Demos are provided by actual PostHog engineers!) You can also{' '}
+                            Demos are provided by actual PostHog engineers! You can also{' '}
                             <a href="mailto:sales@posthog.com?subject=Scale%20deployment" className="text-orange">
                                 request a sales call
                             </a>
