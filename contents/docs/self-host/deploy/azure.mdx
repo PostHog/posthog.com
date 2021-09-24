@@ -1,6 +1,6 @@
 ---
-title: Deploying with helm directly
-sidebarTitle: Other
+title: Deploying to Azure
+sidebarTitle: Azure
 sidebar: Docs
 showTitle: true
 ---
@@ -10,18 +10,11 @@ import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import TryUnsecureSnippet from './snippets/tryunsecure'
 
-For all other platforms, we suggest setting up Kubernetes first and using the helm chart directly to deploy a PostHog instance with Nginx ingress controller.
+First, we need to set up a Kubernetes Cluster, see [Creation with Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster). Make sure your cluster has enough resources to run PostHog (total minimum 4 vcpu & 8GiB RAM).
 
-## Prerequisites
-- [Kubernetes](http://kubernetes.io) 1.4+ with Beta APIs enabled
-- [Helm](https://helm.sh) >= v3
-
-
-## Installing the chart
-
-Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
+Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 ```yaml
-cloud: <your-deployment-platform>
+cloud: "azure"
 ingress:
   hostname: <your-hostname>
   nginx:
@@ -30,15 +23,17 @@ certManager:
   enabled: true
 ```
 
+### Installing the chart
+
 <InstallingSnippet />
 
-## Lookup external IP
+    
+### Lookup external IP
 
 ```console
 kubectl get svc --namespace posthog posthog-ingress-nginx-controller
 ```
-
-## Setting up DNS
+### Setting up DNS
 
 Create a record from your desired hostname to the external IP.
 
