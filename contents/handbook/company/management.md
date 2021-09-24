@@ -8,7 +8,7 @@ As we grow, we'll increase the number of managers at PostHog. Here's what a mana
 
 ## Team leads vs managers
 
-You'll sometimes hear the word "Team Lead" used. A team lead is the leader of a small team. Sometimes they also manage the individuals that are within their team, sometimes they don't.
+You'll sometimes hear us use the term "Team Lead". A team lead is the leader of a small team. Sometimes they also manage the individuals that are part of their team, sometimes they don't.
 
 Team leads are also responsible for setting context and direction within the team. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback).
 
@@ -29,7 +29,7 @@ A manager at PostHog is _not_ responsible for:
 
 ## How do I make sure my direct reports are happy and productive?
 
-1. Do [regular 1:1s](/handbook/company/1-1s) every week or every other week
+1. Schedule [regular 1:1s](/handbook/company/1-1s) every week or every other week
 1. Do a [performance review](/handbook/people/feedback#performance-reviews) every six months
 
 ## What does setting context mean?
