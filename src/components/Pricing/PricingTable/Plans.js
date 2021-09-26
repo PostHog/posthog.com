@@ -1,8 +1,8 @@
-import React from 'react'
-import { Funnels, Cohorts, PathAnalysis, FeatureFlags, SessionRecordings } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
+import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import { Plan, Section, Price, Features } from './Plan'
+import React from 'react'
+import { Features, Plan, Price, Section } from './Plan'
 
 export const features = {
     Platform: [
@@ -104,7 +104,7 @@ export const Scale = ({
                             )}
                         </div>
                     </Section>
-                    <CallToAction state={{ plan: 'scale' }} to="/sign-up/self-host/deploy" className="mt-7 mb-3">
+                    <CallToAction to="/sign-up/self-host/deploy/scale" className="mt-7 mb-3">
                         Get started
                     </CallToAction>
                     <CallToAction type="outline">Book a demo</CallToAction>

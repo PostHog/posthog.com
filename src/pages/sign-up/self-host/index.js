@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import Layout from 'components/SignUp/Layout'
-import { section, heading } from 'components/Home/classes'
+import { heading, section } from 'components/Home/classes'
 import Logo from 'components/Logo'
-import { OpenSource, Scale, Enterprise } from 'components/Pricing/PricingTable/Plans'
+import { Enterprise, OpenSource, Scale } from 'components/Pricing/PricingTable/Plans'
 import ScaleModal from 'components/Pricing/PricingTable/ScaleModal'
+import { SEO } from 'components/seo'
+import Layout from 'components/SignUp/Layout'
+import React, { useState } from 'react'
 
 export default function SelfHost() {
     const [open, setOpen] = useState(false)
@@ -19,8 +20,9 @@ export default function SelfHost() {
                 },
             ]}
         >
+            <SEO title="Self-host - PostHog" />
             <ScaleModal hideBadge hideActions setOpen={setOpen} open={open} />
-            <section className="px-10">
+            <section className="px-4">
                 <div className={section()}>
                     <Logo className="mx-auto" />
                     <h1 className={heading('md', 'primary', 'mt-16')}>Select your edition</h1>

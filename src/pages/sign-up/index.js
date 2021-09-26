@@ -1,10 +1,11 @@
-import React from 'react'
-import { Plan } from 'components/Pricing/PricingTable/Plan'
-import { ServerLocked, WebCode, Prohibited, Lightning, Browser, Cloud } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
-import { section, heading } from 'components/Home/classes'
-import Layout from 'components/SignUp/Layout'
+import { heading, section } from 'components/Home/classes'
+import { Browser, Cloud, Lightning, Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
 import Logo from 'components/Logo'
+import { Plan } from 'components/Pricing/PricingTable/Plan'
+import { SEO } from 'components/seo'
+import Layout from 'components/SignUp/Layout'
+import React from 'react'
 
 const Feature = ({ children }) => {
     return <li className="flex space-x-2 items-center font-semibold text-opacity-75">{children}</li>
@@ -19,6 +20,7 @@ export default function SignUp() {
                 },
             ]}
         >
+            <SEO title="Get started - PostHog" />
             <section>
                 <div className={section()}>
                     <Logo className="mx-auto" />
@@ -58,7 +60,7 @@ export default function SignUp() {
                                     <span>Automatic upgrades</span>
                                 </Feature>
                             </ul>
-                            <CallToAction>Continue</CallToAction>
+                            <CallToAction href="https://app.posthog.com">Continue</CallToAction>
                         </Plan>
                     </div>
                 </div>

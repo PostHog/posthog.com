@@ -339,7 +339,7 @@
             "title": "Get started",
             "classes": "lg:ml-6",
             "cta": true,
-            "url": "/docs/self-host",
+            "url": "/sign-up",
             "hideBorder": true
         },
         {

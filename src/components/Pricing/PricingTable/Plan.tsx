@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Features = ({ features, className = '' }) => {
     return (
-        <ul className={`p-0 list-none m-0 grid gap-4 ${className}`}>
+        <ul className={`p-0 list-none m-0 grid gap-2 ${className}`}>
             {features.map((feature, index) => {
                 const { title, icon } = feature
                 return (
@@ -16,10 +16,10 @@ export const Features = ({ features, className = '' }) => {
     )
 }
 
-export const Plan = ({ title, subtitle, badge, children, className = '', style = {} }) => {
+export const Plan = ({ title, subtitle, badge, children, className = '', titleClassName = '', style = {} }) => {
     return (
         <div style={style} className={`flex flex-col py-6 md:py-9 px-6 md:px-14 ${className}`}>
-            <h3 className="my-0">{title}</h3>
+            <h3 className={`my-0 text-xl md:text-2xl ${titleClassName}`}>{title}</h3>
             <p className="text-[15px] mt-1 mb-2">{subtitle}</p>
             {badge && (
                 <span className="text-[11px] py-1 px-2 rounded-sm border border-primary border-opacity-50 self-start opacity-50">

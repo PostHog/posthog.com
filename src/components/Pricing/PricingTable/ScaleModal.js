@@ -1,12 +1,11 @@
-import React from 'react'
-import { useValues } from 'kea'
-import { features, Scale } from './Plans'
-import { Plan, Features, Section, Price } from './Plan'
-import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
-import { PricingSlider } from '../../PricingSlider'
 import { Close } from 'components/Icons/Icons'
-import { CallToAction } from 'components/CallToAction'
-import { Modal } from 'components/Modal'
+import Modal from 'components/Modal'
+import { useValues } from 'kea'
+import React from 'react'
+import { PricingSlider } from '../../PricingSlider'
+import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
+import { Plan } from './Plan'
+import { Scale } from './Plans'
 
 export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
     const { finalCost, eventNumber } = useValues(pricingSliderLogic)
@@ -15,8 +14,13 @@ export default function ScaleModal({ setOpen, open, hideActions, hideBadge }) {
         <Modal open={open} setOpen={setOpen}>
             <div className="absolute w-full max-w-[1045px] top-0 p-0 sm:p-8 left-1/2 transform -translate-x-1/2">
                 <div className="relative bg-white p-6 sm:p-9 lg:p-14 rounded-md shadow-lg">
-                    <div className="flex flex-col md:flex-row md:space-x-14 space-y-6 md:space-y-0 items-start">
-                        <Scale hideCalculator className="!pt-0 !pb-0 !pl-0 !pr-0 flex-grow w-full md:w-auto" />
+                    <div className="flex flex-col md:flex-row md:space-x-14 sm:space-y-6 md:space-y-0 items-start">
+                        <Scale
+                            hideCalculator
+                            hideActions={hideActions}
+                            hideBadge={hideBadge}
+                            className="!pt-0 !pb-0 !pl-0 !pr-0 flex-grow w-full md:w-auto hidden sm:block"
+                        />
                         <Plan
                             title="Calculate your price"
                             subtitle="Pay based on the events you capture each month."
