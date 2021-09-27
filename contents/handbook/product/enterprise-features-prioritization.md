@@ -1,10 +1,12 @@
 ---
-title: Scale features prioritization
+title: Enterprise features prioritization
 sidebar: Handbook
 showTitle: true
 ---
 
-> We use the following [GitHub Board](https://github.com/orgs/PostHog/projects/16) to track features built for Scale customers (previously Enterprise features).
+> We use the following [GitHub Board](https://github.com/orgs/PostHog/projects/16) to track features built for Scale or Enterprise customers.
+
+Enterprise features are intended for paying large scale customers (i.e. scale-ups & large enterprises), and generally include features around advanced collaboration and compliance. Enterprise features are used both on Cloud and Self-hosted and could be included in both Scale and/or Enterprise licenses.
 
 PostHog is becoming increasingly used by large corporations who, in general, have different product requirements from hobbyists and startups - particularly around compliance and collaboration. Our milestones for the foreseeable future target improvements around the product rather than these supporting activities. However, we want to make sure these customers can use PostHog unemcumbered, as they're becoming increasingly critical for us. These requirements can usually be seen as important but not urgent (until they are). To make sure we keep delivering on these requirements, we've developed the framework below.
 
