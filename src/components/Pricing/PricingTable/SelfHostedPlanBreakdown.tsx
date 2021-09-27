@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { ServerLocked, WebCode, Prohibited } from 'components/Icons/Icons'
-import { OpenSource, Scale, Enterprise } from './Plans'
-import ScaleModal from './ScaleModal'
 import { section } from 'components/Home/classes'
+import { Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
+import React, { useState } from 'react'
+import { Enterprise, OpenSource, Scale } from './Plans'
+import ScaleModal from './ScaleModal'
 
 export const SelfHostedPlanBreakdown = () => {
     const [open, setOpen] = useState(false)

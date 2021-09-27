@@ -93,7 +93,7 @@ export default function Company({ menu, parentURL }) {
                 className="grid lg:grid-cols-2 gap-5 p-4 lg:px-9 bg-tan dark:bg-primary font-bold dark:text-white lg:absolute bottom-0 w-full"
             >
                 <div className="flex lg:space-x-6 space-y-5 lg:space-y-0 w-full lg:w-auto flex-col lg:flex-row">
-                    <Link className={footerLink} to="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
+                    <Link className={footerLink} to="/schedule-demo#contact">
                         <Chat />
                         <span>Contact sales</span>
                     </Link>

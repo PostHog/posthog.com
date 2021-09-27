@@ -38,7 +38,7 @@ export const YCOnboarding = () => {
     const [showInfo, setShowInfo] = useState(false)
     return (
         <Layout>
-            <div className="yc-onboarding-wrapper">
+            <div className="get-in-touch-wrapper">
                 <Spacer />
                 <h1 className="centered">PostHog YC Onboarding</h1>
                 <Button
