@@ -732,10 +732,10 @@
     to = "/handbook/people/team-structure/platform"
 
 
-# Added: 2021-09-08; Updated: 2021-09-23
+# Added: 2021-09-08; Updated: 2021-09-27
 [[redirects]]
     from = "/handbook/engineering/enterprise-prioritization"
-    to = "/handbook/product/premium-features-prioritization"
+    to = "/handbook/product/enterprise-features-prioritization"
 
 # Added: 2021-09-13
 [[redirects]]
@@ -753,10 +753,10 @@
     from = "/handbook/engineering/product-team"
     to = "/handbook/product/product-team"
 
-# Added: 2021-09-20; Updated: 2021-09-23
+# Added: 2021-09-20; Updated: 2021-09-27
 [[redirects]]
     from = "/handbook/engineering/scale-features-prioritization"
-    to = "/handbook/product/premium-features-prioritization"
+    to = "/handbook/product/enterprise-features-prioritization"
 
 
 # Added: 2021-09-21
@@ -765,7 +765,7 @@
     to = "/blog/building-the-future-of-game-analytics-pureskill"
 
 
-# Added: 2021-09-23
+# Added: 2021-09-27
 [[redirects]]
     from = "/handbook/product/scale-features-prioritization"
-    to = "/handbook/product/premium-features-prioritization"
+    to = "/handbook/product/enterprise-features-prioritization"
