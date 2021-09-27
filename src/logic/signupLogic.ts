@@ -192,7 +192,7 @@ export const signupLogic = kea({
                             }
                         )
                     ).json()
-                    if (response.inlineMessage?.match(/Thanks for submitting/)) {
+                    if (response.inlineMessage?.match(/Thanks/)) {
                         return {
                             status: 'success',
                             message: response.inlineMessage,
