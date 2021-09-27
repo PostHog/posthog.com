@@ -184,19 +184,12 @@ export const signupLogic = kea({
             }
         },
     }),
-    selectors: {
-        contactFormValidation: [
-            (s) => [s.contactForm],
-            (contactForm: ContactFormType) => ({
-                email: validators['email'](contactForm.email),
-                firstname: validators['firstname'](contactForm.firstname),
-                company: validators['company'](contactForm.company),
-            }),
-        ],
-    },
     loaders: ({ values }) => ({
         contactFormResponse: [
-            {},
+            {
+                status: null,
+                message: null,
+            },
             {
                 submitContactForm: async () => {
                     const fields: { name: string; value: string | number }[] = []
@@ -207,20 +200,41 @@ export const signupLogic = kea({
                         })
                     })
                     const data = { fields }
-                    const response = await fetch(
-                        'https://api.hsforms.com/submissions/v3/integration/submit/6958578/f8854263-d80d-46f6-9905-a8ccb7f50f22',
-                        {
-                            method: 'POST',
-                            headers: {
-                                Accept: 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data),
+                    const response = await (
+                        await fetch(
+                            'https://api.hsforms.com/submissions/v3/integration/submit/6958578/f8854263-d80d-46f6-9905-a8ccb7f50f22',
+                            {
+                                method: 'POST',
+                                headers: {
+                                    Accept: 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data),
+                            }
+                        )
+                    ).json()
+                    if (response.inlineMessage?.match(/Thanks for submitting/)) {
+                        return {
+                            status: 'success',
+                            message: response.inlineMessage,
                         }
-                    )
-                    return response.json()
+                    }
+                    return {
+                        status: response.status || 'error',
+                        message: response.message,
+                    }
                 },
             },
         ],
     }),
+    selectors: {
+        contactFormValidation: [
+            (s) => [s.contactForm],
+            (contactForm: ContactFormType) => ({
+                email: validators['email'](contactForm.email),
+                firstname: validators['firstname'](contactForm.firstname),
+                company: validators['company'](contactForm.company),
+            }),
+        ],
+    },
 })

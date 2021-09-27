@@ -112,7 +112,7 @@ export const SelfHostedPlanBreakdown = () => {
                             <div>
                                 <CallToAction
                                     icon="none"
-                                    href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                                    href="/schedule-demo#contact"
                                     className="my-4 !w-full"
                                     type="secondary"
                                 >

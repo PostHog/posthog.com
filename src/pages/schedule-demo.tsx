@@ -47,8 +47,7 @@ export const ScheduleDemo = () => {
                     <>
                         <p>
                             Use the widget below to schedule a demo call with one of our engineers. Please note that
-                            this is not a Sales call. For sales enquiries, please{' '}
-                            <a href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">contact us</a>.
+                            this is not a Sales call. For sales enquiries, please <a href="#contact">contact us</a>.
                         </p>
                         <p>
                             PostHog demos are done in group sessions and are an introduction to the platform. You can
