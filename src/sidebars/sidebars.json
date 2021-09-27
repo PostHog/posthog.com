@@ -255,15 +255,7 @@
                 },
                 {
                     "name": "Breaking glass to debug production",
-                    "url": "/handbook/engineering/debugging"
-                },
-                {
-                    "name": "Website MDX setup",
-                    "url": "/handbook/engineering/mdx"
-                },
-                {
-                    "name": "Breaking glass to debug production",
-                    "url": "/handbook/engineering/debugging"
+                    "url": "/handbook/engineering/production-access"
                 },
                 {
                     "name": "AWS tips and FAQ",
@@ -280,6 +272,10 @@
                 {
                     "name": "Feature flags spec",
                     "url": "/handbook/engineering/feature-flags-spec"
+                },
+                {
+                    "name": "Website MDX setup",
+                    "url": "/handbook/engineering/mdx"
                 }
             ]
         },
