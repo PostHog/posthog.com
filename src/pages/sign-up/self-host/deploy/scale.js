@@ -1,5 +1,6 @@
 import cntl from 'cntl'
 import { CallToAction } from 'components/CallToAction'
+import Contact from 'components/Contact'
 import DeployOption from 'components/DeployOption'
 import { section } from 'components/Home/classes'
 import { Slack } from 'components/Icons/Icons'
@@ -108,7 +109,9 @@ export default function SelfHost({ location }) {
                     title="Questions?"
                     subtitle="Schedule a time to learn if Scale is right for you."
                     className="text-center pt-0 px-0"
-                ></Plan>
+                >
+                    <Contact demoType={'personal'} />
+                </Plan>
             </section>
         </Layout>
     )

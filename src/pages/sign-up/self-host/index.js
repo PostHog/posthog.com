@@ -32,6 +32,9 @@ export default function SelfHost() {
                     <Scale setOpen={setOpen} />
                     <Enterprise />
                 </div>
+                <p className="text-center mt-16 font-semibold text-black text-opacity-50">
+                    You can change your plan later.
+                </p>
             </section>
         </Layout>
     )

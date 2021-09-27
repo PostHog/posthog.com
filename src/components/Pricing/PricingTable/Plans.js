@@ -107,7 +107,7 @@ export const Scale = ({
                     <CallToAction to="/sign-up/self-host/deploy/scale" className="mt-7 mb-3">
                         Get started
                     </CallToAction>
-                    <CallToAction type="outline" to="/sign-up/self-host/get-in-touch#demo?plan=scale&demo=personal">
+                    <CallToAction type="outline" to="/sign-up/self-host/get-in-touch?plan=scale&demo=personal#demo">
                         Book a demo
                     </CallToAction>
                 </>
@@ -132,10 +132,10 @@ export const Enterprise = () => {
             <Section title="Pricing">
                 <Price>Custom</Price>
             </Section>
-            <CallToAction className="mt-7 mb-3" to="/sign-up/self-host/get-in-touch#contact?plan=enterprise">
+            <CallToAction className="mt-7 mb-3" to="/sign-up/self-host/get-in-touch?plan=enterprise#contact">
                 Get in touch
             </CallToAction>
-            <CallToAction type="outline" to="/sign-up/self-host/get-in-touch#demo?plan=enterprise&demo=personal">
+            <CallToAction type="outline" to="/sign-up/self-host/get-in-touch?plan=enterprise&demo=personal#demo">
                 Book a demo
             </CallToAction>
         </Plan>

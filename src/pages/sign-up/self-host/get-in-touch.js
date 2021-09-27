@@ -1,3 +1,4 @@
+import Contact from 'components/Contact'
 import { heading, section } from 'components/Home/classes'
 import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
@@ -27,6 +28,7 @@ export default function SelfHost() {
                 <div className={section()}>
                     <Logo className="mx-auto" />
                     <h1 className={heading('md', 'primary', 'mt-16')}>Get in touch</h1>
+                    <Contact />
                 </div>
             </section>
         </Layout>
