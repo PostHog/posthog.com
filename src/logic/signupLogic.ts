@@ -150,6 +150,18 @@ export const signupLogic = kea({
                 window.location.replace(nextHref)
             }
         },
+        submitContactForm: async () => {
+            const { posthog, contactForm } = values
+            posthog.capture('contact: contact form submitted', contactForm)
+        },
+        submitContactFormSuccess: async () => {
+            const { posthog, contactFormResponse } = values
+            posthog.capture('contact: contact form submitted successfully', contactFormResponse)
+        },
+        submitContactFormFailure: async () => {
+            const { posthog, contactFormResponse } = values
+            posthog.capture('contact: failure submitting contact form', contactFormResponse)
+        },
     }),
     loaders: ({ values }) => ({
         contactFormResponse: [

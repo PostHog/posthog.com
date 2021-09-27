@@ -7,6 +7,8 @@ import { SEO } from '../components/seo'
 import { Link } from 'gatsby'
 import Chip from 'components/Chip'
 import { ContactForm } from 'components/ContactForm'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 
 type PaneOption = 'demo' | 'contact'
 
@@ -18,6 +20,7 @@ const pageTitles = {
 const isPaneOption = (hash: string): hash is PaneOption => ['demo', 'contact'].includes(hash)
 
 export const ScheduleDemo = () => {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const [activePane, setActivePane] = useState(null as PaneOption | null)
     const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : 'demo'
     useEffect(() => {
@@ -36,10 +39,18 @@ export const ScheduleDemo = () => {
                 <Spacer />
                 <h1 className="centered">Get in touch</h1>
                 <div className="flex flex-nowrap justify-center space-x-2 overflow-x-auto pb-6 px-2 default-scrollbar">
-                    <Chip href="#demo" active={activePane === 'demo'}>
+                    <Chip
+                        href="#demo"
+                        active={activePane === 'demo'}
+                        onClick={() => posthog?.capture('contact: clicked book a demo button')}
+                    >
                         Book a demo
                     </Chip>
-                    <Chip href="#contact" active={activePane === 'contact'}>
+                    <Chip
+                        href="#contact"
+                        active={activePane === 'contact'}
+                        onClick={() => posthog?.capture('contact: clicked contact button')}
+                    >
                         Contact sales
                     </Chip>
                 </div>
