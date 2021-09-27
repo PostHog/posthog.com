@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: general
+categories: ["General"]
 ---
 
 <!-- ![PLG Banner](../images/plg-header.png) -->

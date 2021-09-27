@@ -1,0 +1,16 @@
+As a troubleshooting tool, you can allow HTTP access by setting these values in your `values.yaml`, but we recommend always accessing PostHog via https.
+```yaml
+ingress:
+  nginx:
+    redirectToTLS: false
+  letsencrypt: false
+web:
+  secureCookies: false
+```
+
+After upgrading you can run the following to get the IP to access PostHog:
+```console
+export INGRESS_IP=$(kubectl get --namespace posthog ingress posthog -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+echo "Visit http://$INGRESS_IP to use PostHog\!"
+```
+

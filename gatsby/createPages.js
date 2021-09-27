@@ -1,11 +1,13 @@
 const replacePath = require('./utils')
 const path = require('path')
+const slugify = require('slugify')
 
 module.exports = exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
     const HandbookTemplate = path.resolve(`src/templates/Handbook/index.js`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
+    const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const result = await graphql(`
         {
             allMdx(limit: 1000) {
@@ -66,6 +68,11 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
                         name
                         url
                     }
+                }
+            }
+            categories: allMdx(limit: 1000) {
+                group(field: frontmatter___categories) {
+                    category: fieldValue
                 }
             }
         }
@@ -186,6 +193,20 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
             component: BlogPostTemplate,
             context: {
                 id: node.id,
+            },
+        })
+    })
+
+    result.data.categories.group.forEach(({ category: category }) => {
+        const slug = slugify(category, { lower: true })
+        const path = `/blog/categories/${slug}`
+        createPage({
+            path,
+            component: BlogCategoryTemplate,
+            context: {
+                title: `Blog: ${category}`,
+                category,
+                slug,
             },
         })
     })

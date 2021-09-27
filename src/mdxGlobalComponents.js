@@ -8,13 +8,7 @@ import { AnimateIntoView } from './components/AnimateIntoView'
 import { AnimatedBurger } from './components/AnimatedBurger'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
-import { BlogAuthor } from './components/Blog/BlogAuthor'
-import { BlogCategoriesList } from './components/Blog/BlogCategoriesList'
-import { BlogFeaturedImage } from './components/Blog/BlogFeaturedImage'
-import { BlogIntro } from './components/Blog/BlogIntro'
-import { BlogPostLayout } from './components/Blog/BlogPostLayout'
-import { BlogPosts } from './components/Blog/BlogPosts'
-import { BlogShareButtons } from './components/Blog/BlogShareButtons'
+import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
@@ -87,6 +81,7 @@ import { StartNowButton } from './components/StartNowButton'
 import { Structure } from './components/Structure'
 import { TableOfContents } from './components/TableOfContents'
 import { TeamQuote } from './components/TeamQuote'
+import { Tooltip } from './components/Tooltip'
 import { VisitLibrary } from './components/VisitLibrary'
 import { WorkableSnippet } from './components/WorkableSnippet'
 
@@ -99,13 +94,7 @@ export const shortcodes = {
     AnimatedBurger,
     ArrayCTA,
     BasicHedgehogImage,
-    BlogAuthor,
-    BlogCategoriesList,
-    BlogFeaturedImage,
-    BlogIntro,
-    BlogPostLayout,
-    BlogPosts,
-    BlogShareButtons,
+    Blog,
     BlogFooter,
     Breadcrumbs,
     CallToAction,
@@ -178,6 +167,7 @@ export const shortcodes = {
     Structure,
     TableOfContents,
     TeamQuote,
+    Tooltip,
     VisitLibrary,
     WorkableSnippet,
 }
