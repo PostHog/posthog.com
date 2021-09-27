@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: cory-watilo
-featuredImage: ../images/blog/blog-generic-1.png
+featuredImage: ../images/blog/rebrand-postmortem.png
 featuredImageType: full
 categories: ["General", "Company & culture"]
 ---
@@ -80,7 +80,7 @@ After designing a few pages and defining some basic styles for our new brand (li
 
 Our outgoing space-age theme had a dark purple background, but the new style called for a light background. So we split the project into two segments: some pages we redesigned, and with others simply modified the color scheme. This way, we could reduce the amount of time the redesign would take. For the pages where we were simply changing the color scheme, it just took updating the colors of those graphics in Figma and re-exporting.
 
-Here's a before/after:
+## Before/after (product page)
 
 ![Before and after](../images/blog/brand-postmortem/before-after.png)
 
@@ -93,6 +93,8 @@ Some of the design decisions landed outside of what might be considered best pra
 What we did over the month was not sustainable. Eli worked literally every day, despite many instructions to take weekends off. But what we accomplished over the course of four weeks was nothing short of incredible. It set a new benchmark for what we can do - when we need to.
 
 A huge shout-out goes to Eli and Lottie for their work on what we shipped.
+
+## The (nearly) final result
 
 ![PostHog rebrand - Homepage](../images/blog/brand-postmortem/final-new-brand.png)
 
