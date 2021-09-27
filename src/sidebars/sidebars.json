@@ -230,6 +230,10 @@
                     "url": "/handbook/engineering/support-hero"
                 },
                 {
+                    "name": "Tech talks",
+                    "url": "/handbook/engineering/tech-talks"
+                },
+                {
                     "name": "Bug prioritization",
                     "url": "/handbook/engineering/bug-prioritization"
                 },
@@ -250,8 +254,16 @@
                     "url": "/handbook/engineering/common-issues"
                 },
                 {
+                    "name": "Breaking glass to debug production",
+                    "url": "/handbook/engineering/debugging"
+                },
+                {
                     "name": "Website MDX setup",
                     "url": "/handbook/engineering/mdx"
+                },
+                {
+                    "name": "Breaking glass to debug production",
+                    "url": "/handbook/engineering/debugging"
                 },
                 {
                     "name": "AWS tips and FAQ",
@@ -264,6 +276,10 @@
                 {
                     "name": "DigitalOcean tips and FAQ",
                     "url": "/handbook/engineering/digitalocean"
+                },
+                {
+                    "name": "Feature flags spec",
+                    "url": "/handbook/engineering/feature-flags-spec"
                 }
             ]
         },
