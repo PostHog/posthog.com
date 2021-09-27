@@ -765,12 +765,13 @@
     to = "/blog/building-the-future-of-game-analytics-pureskill"
 
 
-# Added: 2021-09-27
+# Added: 2021-9-27
 [[redirects]]
-    from = "/handbook/product/scale-features-prioritization"
-    to = "/handbook/product/enterprise-features-prioritization"
+    from = "/handbook/engineering/production-access"
+    to = "/handbook/engineering/debugging"
+
 
 # Added: 2021-9-27
 [[redirects]]
-    from = "/handbook/engineering/debugging"
-    to = "/handbook/engineering/production-access"
+    from = "/handbook/product/enterprise-features-prioritization"
+    to = "/handbook/product/scale-features-prioritization"
