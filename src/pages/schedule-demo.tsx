@@ -40,16 +40,21 @@ export const ScheduleDemo = () => {
                 <h1 className="centered">Get in touch</h1>
                 <div className="flex flex-nowrap justify-center space-x-2 overflow-x-auto pb-6 px-2 default-scrollbar">
                     <Chip
-                        href="#demo"
                         active={activePane === 'demo'}
-                        onClick={() => posthog?.capture('contact: clicked book a demo button')}
+                        onClick={() => {
+                            window.location.hash = '#demo'
+                            posthog?.capture('contact: clicked book a demo button')
+                        }}
                     >
                         Book a demo
                     </Chip>
                     <Chip
-                        href="#contact"
                         active={activePane === 'contact'}
-                        onClick={() => posthog?.capture('contact: clicked contact button')}
+                        onClick={() => {
+                            window.location.hash = '#contact'
+                            console.log('called')
+                            posthog?.capture('contact: clicked contact button')
+                        }}
                     >
                         Contact sales
                     </Chip>
