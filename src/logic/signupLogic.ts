@@ -2,11 +2,6 @@ import { kea } from 'kea'
 import { isValidEmailAddress } from 'lib/utils'
 import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
-export enum SignupModalView {
-    EMAIL_PROMPT = 'EMAIL_PROMPT',
-    DEPLOYMENT_OPTIONS = 'DEPLOYMENT_OPTIONS',
-}
-
 export enum Realm {
     hosted = 'hosted',
     cloud = 'cloud',
@@ -72,13 +67,11 @@ async function updateContact(email: string, properties: Record<string, string>) 
 export const signupLogic = kea({
     path: typeof window === undefined ? undefined : () => ['signup'],
     actions: {
-        setModalView: (view: SignupModalView) => ({ view }),
         setEmail: (email: string) => ({ email }),
         submitForm: true,
         skipEmailEntry: true,
         reportModalShown: true,
         reportDeploymentOptionsShown: true,
-        onRenderSignupPage: true,
         reportDeploymentTypeSelected: (deploymentType: Realm, nextHref?: string) => ({
             deploymentType,
             nextHref,
@@ -86,12 +79,6 @@ export const signupLogic = kea({
         setFormField: (field: string, value: any) => ({ field, value }),
     },
     reducers: {
-        modalView: [
-            SignupModalView.EMAIL_PROMPT as SignupModalView,
-            {
-                setModalView: (_, { view }: { view: SignupModalView }) => view,
-            },
-        ],
         email: [
             '',
             {
@@ -131,7 +118,6 @@ export const signupLogic = kea({
                 try {
                     posthog.identify(email, { email: email.toLowerCase() }) // use email as distinct ID; also set it as property
                     posthog.capture('signup: submit email')
-                    actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
                     await createContact(email)
                 } catch (err) {
                     posthog.capture('signup: failed to create contact', { message: err })
@@ -141,7 +127,6 @@ export const signupLogic = kea({
         skipEmailEntry: async () => {
             const { posthog } = values
             posthog.capture('signup: email modal skipped')
-            actions.setModalView(SignupModalView.DEPLOYMENT_OPTIONS)
         },
         reportModalShown: async () => {
             const { posthog } = values
@@ -150,15 +135,6 @@ export const signupLogic = kea({
         reportDeploymentOptionsShown: async () => {
             const { posthog } = values
             posthog.capture('signup: deployment options shown')
-        },
-        setModalView: async ({ view }) => {
-            switch (view) {
-                case SignupModalView.EMAIL_PROMPT:
-                    return actions.reportModalShown()
-                case SignupModalView.DEPLOYMENT_OPTIONS:
-                default:
-                    return actions.reportDeploymentOptionsShown()
-            }
         },
         reportDeploymentTypeSelected: async ({ deploymentType, nextHref }) => {
             const { posthog, email } = values
@@ -172,15 +148,6 @@ export const signupLogic = kea({
             }
             if (nextHref) {
                 window.location.replace(nextHref)
-            }
-        },
-        onRenderSignupPage: () => {
-            if (typeof window !== 'undefined') {
-                if (values.shouldAutoRedirect) {
-                    window.location.replace(`https://app.posthog.com/signup${window.location.search || ''}`)
-                } else {
-                    actions.reportModalShown()
-                }
             }
         },
     }),
