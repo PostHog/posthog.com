@@ -2,7 +2,7 @@ import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { useEffect } from 'react'
 import { Spacer } from '../Spacer'
-import './style.scss'
+import { InlineWidget } from 'react-calendly'
 
 export const DemoScheduler = ({
     iframeSrc = 'https://calendly.com/yakko/yc-onboarding-group',
@@ -25,7 +25,7 @@ export const DemoScheduler = ({
     return (
         <>
             <div>
-                <iframe src={iframeSrc} className="centered calendly-frame" style={{ margin: 'auto' }} />
+                <InlineWidget url={iframeSrc} styles={{ height: '1000px', margin: '0 auto' }} />
             </div>
             <Spacer height={100} />
         </>
