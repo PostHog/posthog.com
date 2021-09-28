@@ -115,7 +115,7 @@ For example:
 git checkout -b posthog-website-contribution
 ```
 
-### Via GitHub Desktop
+#### Via GitHub Desktop
 
 You can also create a new branch in GitHub Desktop by selecting the dropdown next to the **Current Branch** name and clicking **New Branch**.
 
@@ -126,6 +126,42 @@ Then, in the dialog that follows, entering the new branch name.
 ![GitHub Desktop - new branch dialog](../../images/docs/contribute/visual-studio-code-new-branch-dialog.png)
 
 Once you have a new branch, you can make changes.
+
+</HiddenSection>
+
+## Committing changes
+
+Create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and different commit for updates to the documenatation.
+
+<HiddenSection headingType='h3' title='Creating a new Git branch'>
+
+#### Via the terminal
+
+First, stage your changes:
+
+```bash
+git add [path-to-file]
+```
+
+For example:
+
+```bash
+git add contents/docs/contribute/updating-documentation.md
+```
+
+Once all the files that have been changed are staged, you can perform the commit:
+
+```bash
+git commit -m '[short commit message]'
+```
+
+For example:
+
+```bash
+git commit -m 'Adding details on how to commit'
+```
+
+#### Via GitHub Desktop
 
 </HiddenSection>
 
