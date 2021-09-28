@@ -14,6 +14,7 @@
             "sub": {
                 "title": "Docs",
                 "description": "Learn how to deploy, use, and contribute to PostHog. Here are some handy links to help you get started, or visit the <a class='text-yellow hover:text-yellow font-bold' href='/docs'>Docs overview</a>.",
+                "component": "Docs",
                 "items": [
                     {
                         "title": "1. Self hosting",
@@ -48,6 +49,11 @@
                                         "icon": "digital ocean",
                                         "title": "Digital Ocean",
                                         "url": "/docs/self-host/deploy/digital-ocean"
+                                    },
+                                    {
+                                        "icon": "azure",
+                                        "title": "Azure",
+                                        "url": "/docs/self-host/deploy/azure"
                                     },
                                     {
                                         "icon": "github",
@@ -285,16 +291,67 @@
         },
         {
             "title": "Company",
-            "url": "/handbook/company/story"
+            "hideBorder": true,
+            "url": "/handbook/company/story",
+            "sub": {
+                "title": "Company",
+                "component": "Company",
+                "items": [
+                    {
+                        "title": "Our story",
+                        "description": "<p>PostHog was founded in 2020. We have <strong>5,500 customers</strong>, and our team of 26 is fully distributed around the world.</p>",
+                        "link": {
+                            "title": "Read our story",
+                            "url": "/handbook/company/story"
+                        },
+                        "component": {
+                            "position": "right",
+                            "name": "Founders"
+                        }
+                    },
+                    {
+                        "title": "Handbook",
+                        "description": "<p>Our handbook is public, and anyone can submit a pull request to submit updates or enhancements.</p>",
+                        "link": {
+                            "title": "Visit Handbook",
+                            "url": "/handbook"
+                        }
+                    },
+                    {
+                        "title": "Our team",
+                        "description": "<p>We have people in Belgium, the East and West coast of the US, England, Estonia, and the Democratic Republic of Congo, among other places. Several of our team members travel full-time.</p>",
+                        "link": {
+                            "title": "Meet the team",
+                            "url": "/handbook/company/team"
+                        },
+                        "component": {
+                            "position": "bottom",
+                            "name": "Team"
+                        }
+                    },
+                    {
+                        "title": "Careers",
+                        "description": "<p>We're currently hiring for <strong>3 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for",
+                        "link": {
+                            "title": "Visit Careers page",
+                            "url": "/careers"
+                        }
+                    }
+                ]
+            }
         },
         {
             "title": "Get started",
-            "classes": "text-white font-bold hover:text-white select-none px-4 py-2 my-3 lg:my-0 rounded-full bg-almost-black dark:bg-white dark:text-almost-black dark:hover:text-almost-black",
-            "url": "/docs/self-host"
+            "classes": "lg:ml-6",
+            "cta": true,
+            "url": "/docs/self-host",
+            "hideBorder": true
         },
         {
             "title": "Login",
-            "url": "https://app.posthog.com/login"
+            "classes": "text-center w-full",
+            "url": "https://app.posthog.com/login",
+            "hideBorder": true
         }
     ]
 }

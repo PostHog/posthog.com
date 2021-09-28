@@ -4,7 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Customer personas
 PostHog is used by a very wide variety of companies, teams and individuals - everyone from Fortune 500 companies to individual hobbyists. This document lays out general trends for two personas we typically focus on for our paid product. 
 
 PostHog is a developer-focused company. We aim to support developers or technically capable individuals as our core users and buyers, from indie game developers to Product Engineers in enterprise businesses. 

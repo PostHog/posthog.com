@@ -60,7 +60,6 @@ export default function Main({
     previous,
     hideLastUpdated,
 }) {
-    const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key: filePath }))
     const components = {
         iframe: Iframe,
         inlineCode: InlineCode,
@@ -104,12 +103,7 @@ export default function Main({
                     </section>
                 </article>
 
-                <StickySidebar
-                    top={90}
-                    tableOfContents={tableOfContents}
-                    hideChildren={breakpoints.lg || !showToc}
-                    reportScrollUpdated={reportScrollUpdated}
-                />
+                {!breakpoints.lg && showToc && <StickySidebar top={90} tableOfContents={tableOfContents} />}
             </div>
             {next && <SectionLinksBottom next={next} previous={previous} />}
         </div>

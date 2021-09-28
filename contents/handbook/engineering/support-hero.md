@@ -38,7 +38,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Follow up! 
     - [Papercups](https://app.papercups.io/) has an overview of Slack conversations that haven't been closed or answered yet. Occasionally have a look to see if you've missed anything
 
-## Prioritising requests
+## Prioritizing requests
 
 1. Responding to and debugging issues for paying customers
 1. Responding to and debugging issues for community users
@@ -47,7 +47,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 ## How to help customers
 
-- The reason it's so great have engineers do support is that you can actually help customers solve their issues, rather than just escalating it. Hence you should aim to **go deep** and **actually solve people's issues**, whether that involves going deep on our functionality or spending half a day writing a PR to fix someone's issue
+- The reason it's so great to have engineers do support is that you can actually help customers solve their issues, rather than just escalating it. Hence you should aim to **go deep** and **actually solve people's issues**, whether that involves going deep on our functionality or spending half a day writing a PR to fix someone's issue
 - On app.posthog.com, you can log in as a user to help debug their issues.
     - Do this by going to https://app.posthog.com/admin/posthog/user/, finding the relevant user and clicking 'log in as them'
     - To go back to your old user, just log out
