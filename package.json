@@ -19,7 +19,7 @@
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "generate-redirects": "git diff origin/master $(git branch --show-current) > pr_diff && DEBUG=true RUN_AS_SCRIPT=true node ./scripts/safe_rename.js",
-        "test-redirects": "jest"
+        "test-redirects": "jest scripts"
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
