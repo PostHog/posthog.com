@@ -61,7 +61,7 @@ export const OpenSource = () => {
                 <Price>Free</Price>
             </Section>
             <TrackedCTA
-                to="/sign-up/self-host/deploy"
+                to="/signup/self-host/deploy"
                 className="mt-7 mb-3"
                 event={{ name: 'select edition: clicked get started', type: 'open_source' }}
             >
@@ -109,7 +109,7 @@ export const Scale = ({
                         </div>
                     </Section>
                     <TrackedCTA
-                        to="/sign-up/self-host/deploy/scale"
+                        to="/signup/self-host/deploy/scale"
                         className="mt-7 mb-3"
                         event={{ name: 'select edition: clicked get started', type: 'scale' }}
                     >
@@ -117,7 +117,7 @@ export const Scale = ({
                     </TrackedCTA>
                     <TrackedCTA
                         type="outline"
-                        to="/sign-up/self-host/get-in-touch?plan=scale&demo=personal#demo"
+                        to="/signup/self-host/get-in-touch?plan=scale&demo=personal#demo"
                         event={{ name: 'select edition: clicked book demo', type: 'scale' }}
                     >
                         Book a demo
@@ -146,14 +146,14 @@ export const Enterprise = () => {
             </Section>
             <TrackedCTA
                 className="mt-7 mb-3"
-                to="/sign-up/self-host/get-in-touch?plan=enterprise#contact"
+                to="/signup/self-host/get-in-touch?plan=enterprise#contact"
                 event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
             >
                 Get in touch
             </TrackedCTA>
             <TrackedCTA
                 type="outline"
-                to="/sign-up/self-host/get-in-touch?plan=enterprise&demo=personal#demo"
+                to="/signup/self-host/get-in-touch?plan=enterprise&demo=personal#demo"
                 event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
             >
                 Book a demo

@@ -6,7 +6,7 @@ export const Features = ({ features, className = '' }) => {
             {features.map((feature, index) => {
                 const { title, icon } = feature
                 return (
-                    <li key={index} className="flex space-x-2 items-center">
+                    <li key={index} className="flex space-x-2 items-start">
                         {icon && <span>{icon}</span>}
                         <span>{title}</span>
                     </li>

@@ -22,7 +22,7 @@ export default function SelfHost() {
             crumbs={[
                 {
                     title: 'Get started',
-                    url: '/sign-up',
+                    url: '/signup',
                 },
                 {
                     title: 'Self-host',
@@ -32,7 +32,7 @@ export default function SelfHost() {
             <SEO title="Self-host - PostHog" />
             <ScaleModal hideBadge hideActions setOpen={setModalOpen} open={open} />
             <section className="px-4">
-                <div className={section()}>
+                <div className={section('md:my-[87px]')}>
                     <Logo className="mx-auto" />
                     <h1 className={heading('md', 'primary', 'mt-16')}>Select your edition</h1>
                 </div>

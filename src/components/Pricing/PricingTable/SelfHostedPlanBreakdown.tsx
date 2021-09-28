@@ -8,7 +8,7 @@ export const SelfHostedPlanBreakdown = () => {
     const [open, setOpen] = useState(false)
     return (
         <>
-            <ScaleModal setOpen={setOpen} open={open} />
+            <ScaleModal setOpen={setOpen} open={open} hideActions />
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <OpenSource />
                 <Scale setOpen={setOpen} />

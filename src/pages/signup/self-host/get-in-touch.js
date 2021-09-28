@@ -14,11 +14,11 @@ export default function SelfHost() {
             crumbs={[
                 {
                     title: 'Get started',
-                    url: '/sign-up',
+                    url: '/signup',
                 },
                 {
                     title: 'Self-host',
-                    url: '/sign-up/self-host',
+                    url: '/signup/self-host',
                 },
                 {
                     title: 'Get in touch',
@@ -27,7 +27,7 @@ export default function SelfHost() {
         >
             <SEO title="Get in touch - PostHog" />
             <section className="px-4">
-                <div className={section()}>
+                <div className={section('md:my-[87px]')}>
                     <Logo className="mx-auto" />
                     <h1 className={heading('md', 'primary', 'mt-16')}>Get in touch</h1>
                     <Contact />
