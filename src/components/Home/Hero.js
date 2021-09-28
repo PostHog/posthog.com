@@ -1,9 +1,9 @@
+import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { CallToAction } from '../CallToAction'
-import Icon from './Icon'
 import Link from '../Link'
 import { heading, section } from './classes'
-import { StaticImage } from 'gatsby-plugin-image'
+import Icon from './Icon'
 
 const Feature = ({ title, icon }) => {
     return (
@@ -27,7 +27,7 @@ export default function Hero() {
                         With our open source platform, customer data never has to leave your infrastructure
                     </h2>
                     <div className="flex flex-col justify-center items-center space-y-2 md:space-y-3">
-                        <CallToAction type="primary" width="56" to="/docs/self-host/">
+                        <CallToAction type="primary" width="56" to="/signup">
                             Get started
                         </CallToAction>
                         <CallToAction type="outline" width="56" to="/schedule-demo">
