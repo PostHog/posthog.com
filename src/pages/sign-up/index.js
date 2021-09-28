@@ -22,7 +22,7 @@ export default function SignUp() {
         >
             <SEO title="Get started - PostHog" />
             <section>
-                <div className={section()}>
+                <div className={section('md:my-[87px]')}>
                     <Logo className="mx-auto" />
                     <h1 className={heading('md', 'primary', 'mt-16')}>Choose your hosting option</h1>
                 </div>

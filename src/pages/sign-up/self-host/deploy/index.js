@@ -59,11 +59,11 @@ export default function SelfHost({ location }) {
                     </div>
                 </Plan>
             </Deploy>
-            <section className={section()}>
+            <section className={section('md:my-0 my-0')}>
                 <Plan
                     title="Questions?"
                     subtitle="Schedule a time to learn if PostHog is right for you."
-                    className="text-center pt-0 px-0"
+                    className="text-center !py-0 !px-0"
                 >
                     <Contact />
                 </Plan>

@@ -7,8 +7,8 @@ export default function Deploy({ children, title = '' }) {
     return (
         <>
             <Sprites />
-            <section className={section('px-4')}>
-                <div className={section()}>
+            <section className={section('px-4 md:my-[87px]')}>
+                <div className={section('md:my-[87px]')}>
                     <Logo className="mx-auto" />
                     <h1 className={heading('md', 'primary', 'mt-16')}>{title}</h1>
                 </div>
