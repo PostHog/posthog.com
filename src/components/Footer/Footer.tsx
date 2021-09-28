@@ -73,7 +73,7 @@ export function Footer(): JSX.Element {
                         marginBottom="0"
                         className="md:text-base"
                         title="Contact sales"
-                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                        url="/schedule-demo#contact"
                     />
                 </ul>
             </div>
@@ -136,10 +136,7 @@ export function Footer(): JSX.Element {
                                         url="https://github.com/PostHog/posthog.com/issues"
                                     />
                                     <FooterMenuItem title="Support" url="/support" />
-                                    <FooterMenuItem
-                                        title="Contact sales"
-                                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
-                                    />
+                                    <FooterMenuItem title="Contact sales" url="/schedule-demo#contact" />
                                 </ul>
                             </div>
                             <div>
