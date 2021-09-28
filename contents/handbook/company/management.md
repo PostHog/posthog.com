@@ -33,6 +33,7 @@ A manager at PostHog is _not_ responsible for:
 
 1. Schedule [regular 1:1s](/handbook/company/1-1s) every week or every other week
 1. Do a [performance review](/handbook/people/feedback#performance-reviews) every six months
+1. Talk about the long-term career plans every now and again. If you can help people achieve long term plans (whilst hitting PostHog's short term needs) - whether at PostHog or not, you'll get people's best work!
 
 ## What does setting context mean?
 
