@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction, TrackedCTA } from 'components/CallToAction/index.js'
 import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
@@ -104,12 +104,20 @@ export const Scale = ({
                             )}
                         </div>
                     </Section>
-                    <CallToAction to="/sign-up/self-host/deploy/scale" className="mt-7 mb-3">
+                    <TrackedCTA
+                        to="/sign-up/self-host/deploy/scale"
+                        className="mt-7 mb-3"
+                        event={{ name: 'select edition: clicked get started', type: 'scale' }}
+                    >
                         Get started
-                    </CallToAction>
-                    <CallToAction type="outline" to="/sign-up/self-host/get-in-touch?plan=scale&demo=personal#demo">
+                    </TrackedCTA>
+                    <TrackedCTA
+                        type="outline"
+                        to="/sign-up/self-host/get-in-touch?plan=scale&demo=personal#demo"
+                        event={{ name: 'select edition: clicked book demo', type: 'scale' }}
+                    >
                         Book a demo
-                    </CallToAction>
+                    </TrackedCTA>
                 </>
             )}
         </Plan>
@@ -132,12 +140,20 @@ export const Enterprise = () => {
             <Section title="Pricing">
                 <Price>Custom</Price>
             </Section>
-            <CallToAction className="mt-7 mb-3" to="/sign-up/self-host/get-in-touch?plan=enterprise#contact">
+            <TrackedCTA
+                className="mt-7 mb-3"
+                to="/sign-up/self-host/get-in-touch?plan=enterprise#contact"
+                event={{ name: 'select edition: clicked get started', type: 'enterprise' }}
+            >
                 Get in touch
-            </CallToAction>
-            <CallToAction type="outline" to="/sign-up/self-host/get-in-touch?plan=enterprise&demo=personal#demo">
+            </TrackedCTA>
+            <TrackedCTA
+                type="outline"
+                to="/sign-up/self-host/get-in-touch?plan=enterprise&demo=personal#demo"
+                event={{ name: 'select edition: clicked book demo', type: 'enterprise' }}
+            >
                 Book a demo
-            </CallToAction>
+            </TrackedCTA>
         </Plan>
     )
 }
@@ -163,7 +179,9 @@ export const Cloud = ({ finalCost, eventNumberWithDelimiter }) => {
                     </span>
                 </Price>
             </Section>
-            <CallToAction className="my-7">Deploy now</CallToAction>
+            <TrackedCTA className="my-7" event={{ name: 'select edition: clicked get started', type: 'cloud' }}>
+                Deploy now
+            </TrackedCTA>
             <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>
         </Plan>
     )

@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction'
+import { TrackedCTA } from 'components/CallToAction/index.js' // TEMP
 import { heading, section } from 'components/Home/classes'
 import { Browser, Cloud, Lightning, Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
 import Logo from 'components/Logo'
@@ -40,10 +40,15 @@ export default function SignUp() {
                                 </Feature>
                                 <Feature>
                                     <Prohibited className="w-7 h-7" />
-                                    <span>Bypass ad blockers & browser privacy features</span>
+                                    <span>Bypass ad blockers &amp; browser privacy features</span>
                                 </Feature>
                             </ul>
-                            <CallToAction to="/sign-up/self-host">Continue</CallToAction>
+                            <TrackedCTA
+                                to="/sign-up/self-host"
+                                event={{ name: 'get started: clicked Continue', type: 'self_host' }}
+                            >
+                                Continue
+                            </TrackedCTA>
                         </Plan>
                         <Plan title="PostHog Cloud" subtitle="SaaS solution managed by the PostHog core team">
                             <ul className="p-0 list-none grid gap-5 my-9">
@@ -60,7 +65,12 @@ export default function SignUp() {
                                     <span>Automatic upgrades</span>
                                 </Feature>
                             </ul>
-                            <CallToAction href="https://app.posthog.com">Continue</CallToAction>
+                            <TrackedCTA
+                                href="https://app.posthog.com"
+                                event={{ name: 'get started: clicked Continue', type: 'cloud' }}
+                            >
+                                Continue
+                            </TrackedCTA>
                         </Plan>
                     </div>
                 </div>

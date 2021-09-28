@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction'
+import { TrackedCTA } from 'components/CallToAction/index.js'
 import Contact from 'components/Contact'
 import DeployOption from 'components/DeployOption'
 import { section } from 'components/Home/classes'
@@ -7,13 +7,10 @@ import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
 import Deploy from 'components/SignUp/Deploy'
 import Layout from 'components/SignUp/Layout'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { useState } from 'react'
 
 export default function SelfHost({ location }) {
     const [open, setOpen] = useState(false)
-    const { posthog } = useValues(posthogAnalyticsLogic)
 
     return (
         <Layout
@@ -51,16 +48,16 @@ export default function SelfHost({ location }) {
                     </ul>
                     <div className="flex justify-between items-center bg-gray-accent-light px-5 py-4 rounded-md flex-col xl:flex-row space-y-2 sm:space-y-0 ">
                         <p className="m-0 font-bold">Deployment questions?</p>
-                        <CallToAction
+                        <TrackedCTA
                             size="sm"
                             type="outline"
                             className="bg-white flex space-x-2 items-center font-bold"
                             to="/slack"
-                            onClick={() => posthog?.capture('deploy: clicked Join Slack')}
+                            event={{ name: 'deploy: clicked Join Slack' }}
                         >
                             <Slack className="w-4 h-4" />
                             <span>Join our Slack</span>
-                        </CallToAction>
+                        </TrackedCTA>
                     </div>
                 </Plan>
             </Deploy>
