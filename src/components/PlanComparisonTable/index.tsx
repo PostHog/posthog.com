@@ -286,11 +286,7 @@ export const PlanComparisonTable = () => {
                         <li>You want to export data to your data lake.</li>
                     </ul>
                     <div className="p-comparison-btn">
-                        <Button
-                            type="primary"
-                            size="large"
-                            href="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
-                        >
+                        <Button type="primary" size="large" href="/schedule-demo#contact">
                             Contact sales
                         </Button>
                     </div>

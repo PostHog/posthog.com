@@ -1,9 +1,11 @@
 import React from 'react'
 import Link from 'components/Link'
 import cntl from 'cntl'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 
 const sizes = {
-    sm: 'text-small font-semibold px-2 py-1 border-2',
+    sm: 'text-small font-semibold px-5 py-2 border-2',
     md: 'text-[17px] font-bold px-5 py-2 border-3',
 }
 
@@ -58,6 +60,12 @@ const button = (type = 'primary', width = 'auto', className = '', size = 'md') =
     ${className}
 `
 
+export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
+    const { posthog } = useValues(posthogAnalyticsLogic)
+
+    return <CallToAction {...props} onClick={() => posthog?.capture(eventName, event)} />
+}
+
 export const CallToAction = ({
     type = 'primary',
     width = 'auto',
@@ -68,10 +76,17 @@ export const CallToAction = ({
     children,
     className,
     external,
+    state = {},
 }) => {
     const url = to || href
     return (
-        <Link external={external} className={button(type, width, className, size)} onClick={onClick} to={url}>
+        <Link
+            state={state}
+            external={external}
+            className={button(type, width, className, size)}
+            onClick={onClick}
+            to={url}
+        >
             {children}
         </Link>
     )

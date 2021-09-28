@@ -1,6 +1,6 @@
 import React from 'react'
 import cntl from 'cntl'
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from 'components/CallToAction/index.js' // TEMP fix because of duplicate files
 
 const chip = (className = '') => cntl`
     select-none
