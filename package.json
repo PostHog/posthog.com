@@ -81,6 +81,7 @@
         "react": "^16.13.1",
         "react-animate-height": "^2.0.23",
         "react-burger-menu": "^3.0.6",
+        "react-calendly": "^2.2.2",
         "react-compare-slider": "^2.1.0",
         "react-dom": "^16.13.1",
         "react-github-btn": "^1.2.0",

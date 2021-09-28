@@ -16123,6 +16123,11 @@ react-burger-menu@^3.0.6:
     prop-types "^15.7.2"
     snapsvg-cjs "0.0.6"
 
+react-calendly@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-calendly/-/react-calendly-2.2.2.tgz#5c5b00dc38fdfd1f963b18c11b3e92430772b17a"
+  integrity sha512-sDXoLLd7aWm+MBnzLZ6xmRb17pSTVlID3G3kjqtqJByGIoWylfx2nXe9IkN644ZDFcLmCVlLvSdL/GmX1owTGw==
+
 react-compare-slider@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/react-compare-slider/-/react-compare-slider-2.1.0.tgz"

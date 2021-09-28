@@ -3,9 +3,12 @@ import { heading, section } from 'components/Home/classes'
 import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
 import Layout from 'components/SignUp/Layout'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function SelfHost() {
+    useEffect(() => {
+        typeof window !== 'undefined' && window.scrollTo(0, 0)
+    })
     return (
         <Layout
             crumbs={[
