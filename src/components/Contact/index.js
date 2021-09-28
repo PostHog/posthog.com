@@ -47,31 +47,14 @@ export default function Contact(props) {
                     {
                         contact: <ContactForm />,
                         demo: (
-                            <>
-                                <p>
-                                    Use the widget below to schedule a demo call with one of our engineers. Please note
-                                    that this is not a Sales call. For sales enquiries, please{' '}
-                                    <a href="/schedule-demo#contact">contact us</a>.
-                                </p>
-                                <p>
-                                    PostHog demos are done in group sessions and are an introduction to the platform.
-                                    You can also find a lot of information about the product in our{' '}
-                                    <Link to="/docs">Docs</Link> and{' '}
-                                    <a href="https://www.youtube.com/channel/UCoP6ql8QkyOoVpBU4P8LM6w">
-                                        secondary YouTube channel
-                                    </a>
-                                    .
-                                </p>
-                                <DemoScheduler
-                                    iframeSrc={
-                                        {
-                                            personal:
-                                                'https://calendly.com/jamesefhawkins/posthog-scale-enterprise-demo',
-                                            group: 'https://calendly.com/jamesefhawkins/posthog-demo',
-                                        }[demoType]
-                                    }
-                                />
-                            </>
+                            <DemoScheduler
+                                iframeSrc={
+                                    {
+                                        personal: 'https://calendly.com/jamesefhawkins/posthog-scale-enterprise-demo',
+                                        group: 'https://calendly.com/jamesefhawkins/posthog-demo',
+                                    }[demoType]
+                                }
+                            />
                         ),
                     }[activeTab]
                 }
