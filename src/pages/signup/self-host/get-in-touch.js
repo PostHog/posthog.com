@@ -11,11 +11,11 @@ export default function SelfHost() {
             crumbs={[
                 {
                     title: 'Get started',
-                    url: '/sign-up',
+                    url: '/signup',
                 },
                 {
                     title: 'Self-host',
-                    url: '/sign-up/self-host',
+                    url: '/signup/self-host',
                 },
                 {
                     title: 'Get in touch',

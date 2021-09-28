@@ -22,7 +22,7 @@ export default function SelfHost() {
             crumbs={[
                 {
                     title: 'Get started',
-                    url: '/sign-up',
+                    url: '/signup',
                 },
                 {
                     title: 'Self-host',

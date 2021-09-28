@@ -44,7 +44,7 @@ export default function SignUp() {
                                 </Feature>
                             </ul>
                             <TrackedCTA
-                                to="/sign-up/self-host"
+                                to="/signup/self-host"
                                 event={{ name: 'get started: clicked Continue', type: 'self_host' }}
                             >
                                 Continue
