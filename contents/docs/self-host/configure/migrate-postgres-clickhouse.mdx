@@ -4,9 +4,27 @@ sidebar: Docs
 showTitle: true
 ---
 
-> This documentation is in **Beta**. Please provide feedback via the [PostHog Communty Slack workspace](/slack) or [via a GitHub issue](https://github.com/PostHog/posthog.com/issues).
+> This documentation is in **Alpha**. Please provide feedback via the [PostHog Communty Slack workspace](/slack) or [via a GitHub issue](https://github.com/PostHog/posthog.com/issues).
 
 **PostHog backed by Postgres is now deprecated**. We will continue to provide support to Postgres backed installs but we strongly encourage you to migrate to PostHog backed by ClickHouse for improved performance, to receive new features, and continued support in the future.
+
+TODOs:
+- Confirm what will and will not be migrated
+
+## What will be migrated
+
+The following will be migrated:
+
+- Insights
+- Dashboards
+- Sessions
+- Annotations
+- Feature flags
+- Projects
+
+## What will not be migrated
+
+- Cohorts
 
 ## Before you begin
 
@@ -27,13 +45,13 @@ TODOs:
 The first step in the migration process is to create a Postgres database dump. With a PostHog + Postgres instance up and running, run the `pg_dump` command with the following format:
 
 ```
-$ pg_dump -d [database] -h [host] -U [user] -T posthog_event -T posthog_person -T posthog_sessionrecordingevent -f [output-file]
+$ pg_dump -d [database] -h [host] -U [user] -T posthog_person -T posthog_persondistinctid -T posthog_event -T posthog_pluginlogentry -T posthog_sessionrecordingevent --data-only -f [output-file]
 ```
 
 For example:
 
 ```
-$ pg_dump -d posthog -h localhost -U posthog -T posthog_event -T posthog_person -T posthog_sessionrecordingevent -f posthog-migration.sql
+$ pg_dump -d posthog -h localhost -U posthog -T posthog_person -T posthog_persondistinctid -T posthog_event -T posthog_pluginlogentry -T posthog_sessionrecordingevent --data-only -f posthog-migration.sql
 ```
 
 The example command above creates a `posthog-migration.sql` that contains SQL statements to create the schema and insert the data data, excluding event data, from the existing Postgres database.
