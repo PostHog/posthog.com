@@ -11,6 +11,14 @@ We love contributions to PostHog, big or small.
 
 We have an awesome, diverse, and inclusive community. In order to maintain and grow this, all community members must adhere to our [Code of conduct](/docs/contribute/code-of-conduct).
 
+## Security vulnerability disclosure
+
+Please report any suspected security vulnerabilities privately to hey@posthog.com. 
+
+We do not operate a bug bounty program at the moment, but we will generously reward you with merch for any actionable security vulnerabilities found.
+
+> ⚠️ **Important**: Please do not create a public issue for suspected vulnerabilities. 
+
 ## Reporting bugs or issues
 
 Bug reports help us make PostHog better for everyone. When you create a bug, the description will automatically be filled with a template that makes is very clear what we'd like you to add.
