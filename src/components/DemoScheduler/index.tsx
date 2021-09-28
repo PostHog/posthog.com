@@ -10,18 +10,22 @@ export const DemoScheduler = ({
     iframeSrc?: string
 }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
-    useEffect(() => {
-        typeof window !== 'undefined' &&
-            window.addEventListener('message', function (e) {
-                const { event, payload = null } = e.data
-                if (event === 'calendly.event_scheduled') {
-                    posthog?.capture(event, {
-                        calendly_event_uri: payload?.event.uri,
-                        calendly_invitee_uri: payload?.invitee.uri,
-                    })
-                }
+    const calendlyEvent = (e) => {
+        const { event, payload = null } = e.data
+        if (event === 'calendly.event_scheduled') {
+            posthog?.capture(event, {
+                calendly_event_uri: payload?.event.uri,
+                calendly_invitee_uri: payload?.invitee.uri,
             })
-    })
+        }
+    }
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.addEventListener('message', calendlyEvent)
+            return () => window.removeEventListener('message', calendlyEvent)
+        }
+    }, [])
+
     return (
         <>
             <div>
