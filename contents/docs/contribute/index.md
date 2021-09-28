@@ -21,15 +21,16 @@ We do not operate a bug bounty program at the moment, but we will generously rew
 
 ## Reporting bugs or issues
 
-Bug reports help us make PostHog better for everyone. When you create a bug, the description will automatically be filled with a template that makes is very clear what we'd like you to add.
+Bug reports are an important part of improving PostHog. If you encounter a bug, please:
 
-Please search within our issues before raising a new one to make sure you're not raising a duplicate.
+* Search existing issues before creating a new one. 
+* Report a bug by creating a new issue and completing the provided template. 
+* Reference our [Security vulnerability disclosure](contribute#security-vulnerability-disclosure) section to report a suspected vulnerability.
+  
+We want you to be heard. If you have encountered a bug that already has an issue, please add a comment to it with:
 
-<blockquote class='warning-note'>
-
-**Note:** If you find a security issue, please email us directly at [hey@posthog.com](mailto:hey@posthog.com) instead of raising an issue.
-
-</blockquote>
+* How the bug impacted you.
+* What additional details you have that could help resolve the issue.
 
 ## Writing code 
 
