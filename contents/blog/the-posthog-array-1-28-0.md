@@ -5,12 +5,26 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: release-notes
+categories:
+    - Release notes
 featuredImage: ../images/blog/array/1-28-0.png
 excerpt: Understand your conversion rates better, PostHog 1.28.0 has launched! Significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, and many more improvements and fixes.
 ---
 
+> 💡 This version contains a patch release (1.28.1), [read about it](#posthog-1281-patch) below.
+
+
 PostHog 1.28.0 has launched to help you understand your conversion rates better! Enjoy significantly revamped performance for slower queries, advanced engagement cohorts, SAML support, and many more improvements and fixes.
+
+## PostHog 1.28.1 patch
+
+This version includes a subsequent patch release (1.28.1) launched on **September 22, 2021**. This patch addresses the following fixes and improvements:
+
+-   Bug fix. Fixes a bug where refreshing dashboards could cause a server overload (#5865).
+-   Bug fix. Fixes a bug where SAML wouldn't work correctly on Dockerized installations (#5965).
+-   Bug fix. Adds more safeguards to prevent incorrect person merges, leading to incorrect user counts (#6023). In addition, we now report an aggregate number to signal if any incorrect data is detected (#6024).
+-   Improvement. Updates event reporting to enable usaged-based billing for Scale customers.
+
 
 ## PostHog 1.28.0 release notes
 

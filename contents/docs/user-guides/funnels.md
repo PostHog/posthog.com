@@ -4,74 +4,168 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you need your users to carry out a series of actions in a row, funnels are a way of working out where users are dropping off.
+## Why do funnels matter?
 
-There are many valuable use cases for this data:
+For every flow throughout your product, more people will start it than complete it successfully. The primary value of funnels comes from the ability to inspect the journey of everyone going through that flow and understanding where the bottlenecks and friction points are in it. Once you can isolate these bottlenecks and understand what's causing them, you'll be able to significantly improve the success of your users. 
 
-* If you need users to sign up and then perform a key action, you can easily analyze the percentage that are dropping out.
-* If you need users to come back repeatedly to perform an action, you can see how many “first time” users return.
-* If you are trying to understand where in your marketing funnel that you are getting drop off, funnel analytics will make clear what you need to focus on to grow.
- 
-A funnel is a series of actions and/or events.
+> Using PostHog, we observed drop-offs at very particular stages of our onboarding flows, as a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate.
+> 
+> -- [Hasura](https://hasura.io/)
 
-## Learning resources
+## What can you learn from funnels?
 
-### Demo video
+* Understand where people are getting stuck during your flow
+* Find out who is successful and who is not
+* Identify the steps which have the highest friction and time to convert
+* Identify possible causes of failure or success
+* Understand how your changes are improving your activation flow
+* Understand seasonality in your conversion rates
+* Refining your funnel to filter out noise
 
-If you'd like to watch a video about our Funnels feature, check out our demo video below. It is set to start on the Funnels section:
+## Getting Started
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aUILrrrlu50?start=515" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+### Setting up a funnel
 
-### Tutorial
+**Step 1: Open up the funnels insight**
 
-For a comprehensive tutorial on how funnels work, what you can use them for, and how to create your own, we highly recommend reading our [Step-By-Step Funnels Tutorial](/docs/tutorials/funnels).
+Using the side menu - navigate to **Explore** and then **Funnels** - this will present you with a blank funnel screen.
 
-![Tutorial Banner](../../images/tutorials/banners/funnels.png)
+![Blank funnel screen](../../images/docs/user-guides/blank-funnel-screen.png)
 
-## Creating a funnel
+**Step 2: Add and refine steps in your funnel**
 
-### Step 1: Navigate to 'Funnels'
+Select the steps you wish to include in your funnel, ideally starting with the first event/action a user will trigger in the flow you wish to measure. Next, add intermediate events you believe users need to go through to be successful and finish with the event you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew valuable results.
 
-Our 'Funnels' feature is located in 'Insights'. After navigating to 'Insights' on the sidebar, click on the 'Funnels' tab to get to this page:
+![Funnel steps](../../images/docs/user-guides/funnel-steps.png)
 
-![Funnels Page](../../images/tutorials/funnels/funnels-page.png)
+You may wish to refine your steps further, filtering out certain types of users or event properties (e.g. country of a user). Click the "filter" icon next to the step you wish to refine further and select the filter you would like to add or set a global filter under the filters section on the right.
 
-### Step 2: Adding steps to your funnel
+![Global filters](../../images/docs/user-guides/global-filters.png)
 
-Once you're on the 'Funnels' page, you can then start to create your funnel.
+**Step 3: Set your time range**
 
-Click on the blue 'Add action/event' button and select the action or event you want to use as the starting point for your funnel.
+You now have a basic funnel showing in the main analysis pane and can modify the time range you would like to look at. A good place to start is to look at a time range of 30 days to ensure the effects of any day to day variations will be reduced.
 
-You can then add a filter to that specific action now or a general filter to the entire funnel later on ('Filters' -> 'Add filter'). 
+![Set funnel time range](../../images/docs/user-guides/set-funnel-time-range.png)
 
-It's also worth noting how the PostHog funnels work in terms of what counts as a conversion to the next step. When your funnel is ready, you will have the ability to specify a time range for your funnel, such as "Last 7 days", "Last 48 hours", or a custom range. 
+You should now see where people are struggling in your flow by seeing where the drop-offs are. In the example above, we can see that the biggest drop-off is between the 'Add to cart' and 'Checkout' stages of the funnel.
 
-Then, based on that time range, PostHog will determine conversion based on if the user performed one action after the other _at any point during the time period_. That means that if my time range is set to 2 weeks, a user may perform step 1 on day 2 and step 2 on day 13 and it will still count as a conversion. 
+### Saving a funnel
 
-### Step 3: Calculating funnel
+**Step 1: Click save**
 
-Once you're satisfied with all the steps you've added, you can then click 'Calculate' to generate the funnel.
+If you're measuring something recurrently, you'd like to share it with others, or easily return to it again in the future, hit the "disk" icon in the top left of the configuration pane.
 
-### Filter funnels by time
+**Step 2: Naming funnel and selecting dashboard**
 
-You can also filter funnels by time intervals. By default, funnels will show actions completed over the last 7 days, but this can be changed by selecting the time interval next to 'Add to dashboard'
+Select a dashboard where you would like to save the funnel and give it a name.
 
-![funnels by time](../../images/04/funnels-by-time.gif)
+**Step 3: Finding a saved funnel**
 
-## Funnel drop-off user breakdown
+You can find your funnel any time by navigating to the dashboard you've saved it in.
 
-We can go even further with PostHog – to see which users were in this funnel, and how each of them behaved:
+Recently saved funnels are also available within the funnel configuration screen.
 
-![Funnel dropoff user breakdown](../../images/02/Screenshot-2020-02-09-at-21.00.26.png)
+### Modifying a funnel
 
-From here, it’s easy to click an individual user, to see their entire Events history – all you have to do is click the provided link.
+Once you have your funnel setup, you may like to tweak the step ordering or filters; this is easy. Steps can be dragged around by clicking and holding down the icon to the left of the step number in the configuration area of the screen.
 
-## Important note on funnels
+## Analyzing Funnels
 
-It is important to note that funnels calculate the drop off percentage between steps based on unique users *only*.
+### Understand where people are getting stuck during your flow
 
-This means "action chains" are not calculated individually, but rather compiled based on a user's entire set of actions.
+The most common use case for funnels is understanding where people are getting stuck or dropping off in your flow.
 
-For example, if User X did Step 1 of a certain funnel 5 times, but then only did Step 2 a single time, this will still be shown as 100% conversion between the steps, instead of 20%. 
+![Identifying drop-offs in a funnel](../../images/docs/user-guides/identifying-drop-offs.png)
 
-This happens because the conversion on that step for the user was 100%, even if the *individual conversion per action* was not.
+Quickly looking at this funnel, we can see there are several drop-offs between steps. Absolute drop-off is a great way to understand where you're losing the most people. If you want to identify the areas that have the greatest negative impact on your overall conversion rate, you'll want to understand the relative drop-off. Switch to relative drop-off by clicking "% Overall conversion" and switching to "% Relative to previous step"
+
+![Switching to relative to previous step drop-off in funnel](../../images/docs/user-guides/switch-to-relative-drop-off.png)
+
+You can use this to see where the biggest opportunity for improvement is, usually on the step with the lowest relative conversion rate.
+
+### Find out who is successful and who is not
+
+Once you have a funnel drop-off you'd like to explore further, the first step is to identify whether it's a specific client or users that are having the problem and find out why they were struggling. There are many ways to get this information, from reaching out to them directly to [replaying their session](/docs/user-guides/sessions).
+
+![Links to open persons modal in table](../../images/docs/user-guides/average-time-to-convert.png)
+
+Click on the linked numbers in the column values of table below the funnel to see the people who **COMPLETED** or **DROPPED** this step of your funnel.
+
+![Persons modal](../../images/docs/user-guides/persons-modal.png)
+
+From here, you can explore the individual people further by viewing session recordings to see exactly what they were doing when they dropped off. You can also use this feature to watch a successful user go through your funnel. Understanding what successful users do can also help you identify improvement points for those who aren't successful.
+
+### Identify the steps which have the highest friction and time to convert
+
+One reason users may drop-off can be the raw effort required to complete the step. Perhaps it includes a complex form or requires them to go to their emails or another tool to get the information required to complete the step.
+
+A fast way to get a feel for whether or not a step has high friction is to look at the average time to convert. Steps with a long time to convert are likely much harder than steps with a short time to convert.
+
+![Average time to convert in a funnel](../../images/docs/user-guides/average-time-to-convert.png)
+
+However, it might not be so simple as just looking at the average conversion time between steps. To dig deeper, click on the conversion time, and you will be presented with a distribution histogram of time to convert.
+
+![Distributed histogram of time to convert](../../images/docs/user-guides/distribution-histogram-time-to-convert.png)
+
+If all the data is grouped in one bar (known as a bin - in histogram speak), you can increase the number of bins to get a more granular view of the conversion time distribution.
+
+![Granular converstion time distribution](../../images/docs/user-guides/granular-conversion-time-distribution.png)
+
+This graph illustrates how common it is to go through these steps at different paces. If your graph is skewed towards the left, this means most people are going through this step very fast. If the graph is skewed towards the right, people are going through this step slowly.
+
+You may see other patterns in the graph, including a double hump where you have two peaks; this indicates that there are two distinct types of experience or user, where some are going through fast and others slower. The group that is taking more time is likely experiencing significantly more friction than the group that is going through fast.
+
+### Identify possible causes of failure and success
+
+Now you have a funnel and can see people are struggling on certain steps, you should work out why. We have a tool designed specifically for this use case - to start, you'll want to think of a hypothesis of what might be causing the issue. A common one is people often struggle to use a web-based product on a mobile device since it's not optimized fully.
+
+Click on the breakdown in the configuration pane and select OS (Operating System).
+
+![Breakdown funnel steps by Operating System](../../images/docs/user-guides/breakdown-by-operating-system.png)
+
+This will break down the funnel by OS.
+
+![Funnel steps broken down by property](../../images/docs/user-guides/funnel-steps-breakdown.png)
+
+You can instantly see that the conversion rate is lower on Linux; this indicates that it could be a cause of drop-off in this funnel. To validate it, click through to the persons modal to watch a session recording (if enabled on your instance) or try the flow yourself on the mobile device.
+
+You can break down by a number of user and event properties (e.g. browser, country, etc.) to help quickly validate the initial hypothesis you may have.
+
+Automating the solution to highlight potential problems and hypotheses for you is something we're actively working on so, take a look at [our roadmap](/handbook/strategy/roadmap) to learn more about what we're building here.
+
+### Understand how your changes are improving your flow
+
+There are multiple ways to understand how your changes, fixes, and new features affect your funnel success rate - the simplest and most common is to look at how the conversion rate changes over time.
+
+In the configuration pane, switch to the **Trends** tab to show you how your conversion rate has changed over time. For example, if you launched a new feature a few weeks ago and expect it to have improved your conversion rate, you should see this through a change in the trend on the graph. You may wish to change the granularity and time range to focus on what happened after specific changes.
+
+![Conversion over time using Trends](../../images/docs/user-guides/conversion-over-time-using-trends.png)
+
+A more advanced approach is to use [feature flags](/docs/user-guides/feature-flags) to run a simple A/B test. You can create a feature flag and assign 50% of people to the test group and 50% to the control group.
+
+You can then break down your funnel by this feature flag and compare the conversion rate for the people in the test (feature flag on) and control (feature flag off) to see if there is a significant difference.
+
+N.B. When it comes to A/B testing - it's important to recognize that there can be a lot of noise in experiments and if you have a minimal improvement in your conversion rate is more likely to be due to some bias or noise than your feature being worse or better. Over time, we will build out more advanced A/B testing capabilities with built-in statistical analysis to help you understand the confidence level in the results. Check out [our roadmap](/handbook/strategy/roadmap) to learn more.
+
+### Understand seasonality in your conversion rates
+
+It's unlikely that your conversion rate will remain stable every day or every week. This is normal, but it's important to understand the external factors that can cause these fluctuations so you don't jump to conclusions too quickly when analyzing a big change or drop-off.
+
+To look at the seasonality of your conversion rates, click through to the historical trends view over the time period you might expect seasonal variations.
+
+A common seasonality to watch out for is weekends, particularly if your product is aimed at businesses. Perhaps you have a yearly sale such as "Black Friday", which increases the number of people coming to your site and increases the expectation of discounts.
+
+In this view, you can adjust the date ranges to observe key seasonal trends. You can then look at your funnel to determine if it's just a seasonal trend affecting it or whether something has materially changed in your product, making the experience better or worse.
+
+### Refining your funnel to filter out noise
+
+When you've dialled in your funnel, and you're comfortable getting results and identifying the biggest drop-offs, you can take further steps to improve the signal to noise ratio.
+
+The most common configurations you might consider tweaking are:
+
+* **Conversion window limit:** This sets how long to wait before you consider someone a failure if they don't achieve the success event. Reducing the conversion window will ensure you see who went through the funnel in a short space of time; increasing it will capture people who went partway through the funnel, went away and came back later to complete it. Setting up an appropriate conversion window limit will also ensure your conversion rate is not changing over time as you measure it.
+* **Step order:**
+    * **Sequential:** When measuring people who've gone through the steps in your funnel in the order set, and they have triggered several other events in between. For example, when measuring an advert's effect on conversion, whether someone has seen the ad before or after coming to your product would likely result in a different conversion rate.
+    * **Strict Order:** When you only want to measure people who've gone through the steps in your funnel in order and not triggered any other events in between. For example, if you want to exclude users who have searched for another product after initially finding a product in a checkout funnel)
+    * **Any Order:** When measuring people who've gone through all of the steps in a funnel, but they could have completed them in any order. For example, when there are many paths to the final stage of the funnel, such as subscribing to a podcast where people may subscribe immediately, listen to an episode first, follow the author first, etc.

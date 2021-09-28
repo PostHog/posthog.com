@@ -51,6 +51,11 @@
                                         "url": "/docs/self-host/deploy/digital-ocean"
                                     },
                                     {
+                                        "icon": "azure",
+                                        "title": "Azure",
+                                        "url": "/docs/self-host/deploy/azure"
+                                    },
+                                    {
                                         "icon": "github",
                                         "title": "Source",
                                         "url": "https://github.com/PostHog/posthog"
@@ -339,7 +344,7 @@
             "title": "Get started",
             "classes": "lg:ml-6",
             "cta": true,
-            "url": "/docs/self-host",
+            "url": "/signup",
             "hideBorder": true
         },
         {

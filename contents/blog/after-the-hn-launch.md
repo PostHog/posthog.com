@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ceo-diaries
+categories: ["CEO diaries"]
 ---
 
 [PostHog launched on Hacker News](https://news.ycombinator.com/item?id=22376732). We were pleased with the reception. The reason we launched wasn’t trying to get the world’s attention – we wanted to find a group of people who loved it, as quickly as possible.
