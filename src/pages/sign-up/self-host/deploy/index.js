@@ -33,7 +33,7 @@ export default function SelfHost({ location }) {
                     subtitle="Host your own instance of PostHog anywhere in the world."
                     className="col-span-full max-w-xl w-full mx-auto border border-dashed border-gray-accent-light rounded-md"
                 >
-                    <ul className="list-none p-0 grid grid-cols-2 gap-1 my-7">
+                    <ul className="list-none p-0 grid grid-cols-2 gap-1 mb-6 mt-3">
                         <DeployOption title="Amazon AWS" icon="aws" url="/docs/self-host/deploy/aws" />
                         <DeployOption title="Google Cloud" icon="gcs" url="/docs/self-host/deploy/gcp" />
                         <DeployOption title="Helm Chart" icon="helm chart" url="/docs/self-host/deploy/other" />
@@ -44,7 +44,7 @@ export default function SelfHost({ location }) {
                         />
                         <DeployOption title="Source" icon="github" url="https://github.com/PostHog/posthog" />
                     </ul>
-                    <div className="flex justify-between items-center bg-gray-accent-light px-5 py-4 rounded-md flex-col xl:flex-row space-y-2 sm:space-y-0 ">
+                    <div className="flex justify-between items-center bg-gray-accent-light px-[18px] py-[16px] rounded-md flex-col xl:flex-row space-y-2 sm:space-y-0 ">
                         <p className="m-0 font-bold">Deployment questions?</p>
                         <TrackedCTA
                             size="sm"
