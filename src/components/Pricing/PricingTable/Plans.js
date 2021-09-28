@@ -1,4 +1,4 @@
-import { CallToAction, TrackedCTA } from 'components/CallToAction/index.js'
+import { TrackedCTA } from 'components/CallToAction/index.js'
 import { Cohorts, FeatureFlags, Funnels, PathAnalysis, SessionRecordings } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
@@ -60,9 +60,13 @@ export const OpenSource = () => {
             <Section title="Pricing" className="mt-auto">
                 <Price>Free</Price>
             </Section>
-            <CallToAction to="/sign-up/self-host/deploy" className="mt-7 mb-3">
+            <TrackedCTA
+                to="/sign-up/self-host/deploy"
+                className="mt-7 mb-3"
+                event={{ name: 'select edition: clicked get started', type: 'open_source' }}
+            >
                 Deploy now
-            </CallToAction>
+            </TrackedCTA>
             <span className="h-[49.5px] flex justify-center items-center text-black opacity-50">
                 Includes community support on Slack
             </span>
@@ -180,7 +184,7 @@ export const Cloud = ({ finalCost, eventNumberWithDelimiter }) => {
                 </Price>
             </Section>
             <TrackedCTA className="my-7" event={{ name: 'select edition: clicked get started', type: 'cloud' }}>
-                Deploy now
+                Get started
             </TrackedCTA>
             <span className="text-[15px] opacity-50 text-center">Includes community support on Slack</span>
         </Plan>

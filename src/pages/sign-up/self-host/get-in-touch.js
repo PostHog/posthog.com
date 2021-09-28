@@ -3,10 +3,9 @@ import { heading, section } from 'components/Home/classes'
 import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
 import Layout from 'components/SignUp/Layout'
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function SelfHost() {
-    const [open, setOpen] = useState(false)
     return (
         <Layout
             crumbs={[

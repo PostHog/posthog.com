@@ -7,11 +7,9 @@ import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
 import Deploy from 'components/SignUp/Deploy'
 import Layout from 'components/SignUp/Layout'
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function SelfHost({ location }) {
-    const [open, setOpen] = useState(false)
-
     return (
         <Layout
             crumbs={[
