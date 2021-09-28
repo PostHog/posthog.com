@@ -23,7 +23,7 @@ A manager at PostHog has two tasks:
 That's it.
 
 A manager at PostHog is _not_ responsible for:
-1. Setting compensation (we have a [compensation calculator](/handbook/people/compensation) and increases are done occasionally by the people team).
+1. Setting compensation (we have a [compensation calculator](/handbook/people/compensation) and increases are done occasionally/proactively by the people team).
 1. Setting tasks for their direct reports
 1. Creating a career path (career paths should be transparent and documented, and for now centrally managed)
 1. "Approving," whether that's projects, expenses, days off or accounts (people should have admin access by default to most things)
