@@ -129,48 +129,6 @@ Once you have a new branch, you can make changes.
 
 </HiddenSection>
 
-## Committing changes
-
-Create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and different commit for updates to the documenatation.
-
-<HiddenSection headingType='h3' title='Creating a new Git branch'>
-
-#### Via the terminal
-
-First, stage your changes:
-
-```bash
-git add [path-to-file]
-```
-
-For example:
-
-```bash
-git add contents/docs/contribute/updating-documentation.md
-```
-
-Once all the files that have been changed are staged, you can perform the commit:
-
-```bash
-git commit -m '[short commit message]'
-```
-
-For example:
-
-```bash
-git commit -m 'Adding details on how to commit'
-```
-
-#### Via GitHub Desktop
-
-The files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
-
-![Viewing changes in GitHub Desktop](../../images/docs/contribute/viewing-changes-in-github-desktop.png)
-
-Select the files that you want to be part of the commit by ensuring the checkbox to the left of the file is checked within GitHub Desktop. Then, write a short descriptive commit message and click the **Commit to...** button.
-
-</HiddenSection>
-
 ### Markdown details
 
 #### Frontmatter
@@ -220,6 +178,50 @@ For most images, this plugin will automatically generate a range of sizes to opt
 Once you've made a new markdown file, you should link to it from the sidebar where appropriate.
 
 The sidebar is generated from `/src/sidebars/sidebars.json`.
+
+## Committing changes
+
+Create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and different commit for updates to the documenatation.
+
+<HiddenSection headingType='h3' title='Creating a new Git branch'>
+
+#### Via the terminal
+
+First, stage your changes:
+
+```bash
+git add [path-to-file]
+```
+
+For example:
+
+```bash
+git add contents/docs/contribute/updating-documentation.md
+```
+
+Once all the files that have been changed are staged, you can perform the commit:
+
+```bash
+git commit -m '[short commit message]'
+```
+
+For example:
+
+```bash
+git commit -m 'Adding details on how to commit'
+```
+
+#### Via GitHub Desktop
+
+The files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
+
+![Viewing changes in GitHub Desktop](../../images/docs/contribute/viewing-changes-in-github-desktop.png)
+
+Select the files that you want to be part of the commit by ensuring the checkbox to the left of the file is checked within GitHub Desktop. Then, write a short descriptive commit message and click the **Commit to...** button.
+
+![Making a commit in GitHub Desktop](../../images/docs/contribute/commit-in-github-desktop.gif)
+
+</HiddenSection>
 
 ## Deployment
 
