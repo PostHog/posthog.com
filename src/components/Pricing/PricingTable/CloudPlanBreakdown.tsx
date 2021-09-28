@@ -75,7 +75,7 @@ export const CloudPlanBreakdown = () => {
                         </div>
 
                         <div className="text-center text-xs text-opacity-50 text-white mt-2">
-                            {eventNumber === 10000 ? 'Self-serve. No credit card required.' : 'Completely self-serve'}
+                            10k free events without credit card. Credit card required to unlock 1m free events.
                         </div>
                     </div>
                     <div className="flex-0 mt-8 md:mt-0 md:ml-8 max-w-lg px-4 md:px-0 min-w-[320px]">
