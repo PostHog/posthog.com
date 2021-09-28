@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 
-You can contribute to the PostHog documenation in two ways:
+You can contribute to the PostHog documentation in two ways:
 
 1. A pull request can be raised in GitHub for pages that have an **Edit this page** link on them. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation such as renaming.
 2. By running the posthog.com website locally and making changes there. This is the recommended method as it allows you to quickly preview the changes you are making as well as performing complex changes.
@@ -20,7 +20,7 @@ In order to run the PostHog website locally, you require the following to be ins
 - [Node.js](https://nodejs.org/en/download/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
-Optionally, if you are unfamiliar with using Git from the commmand line, you should also have the following installed:
+Optionally, if you are unfamiliar with using Git from the command line, you should also have the following installed:
 
 - [GitHub Desktop](https://desktop.github.com/)
 - [Visual Studio Code](https://code.visualstudio.com/download)
@@ -41,7 +41,7 @@ You can also clone the repository with [GitHub desktop](https://desktop.github.c
 
 ![Open in GitHub Desktop](../../images/docs/contribute/open-in-github-desktop.png)
 
-You will then be prompted by the browser to confirm if you want to open an the GitHub Deskop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
+You will then be prompted by the browser to confirm if you want to open an the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
 
 Once GitHub Desktop has opened you will be prompted to confirm the responsitory that is being cloned and the location on disk where you wish the code to be stored.
 
@@ -81,7 +81,7 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the website. It takes a bit of time for some file processessing and compilation to take place. Once that's completed you will be able to access the a locally running version of posthog.com via `http://localhost:8080`.
+The runs the website. It takes a bit of time for some file processing and compilation to take place. Once that's completed you will be able to access the a locally running version of posthog.com via `http://localhost:8080`.
 
 > If you have something else running on port `8080` you'll be asked if you are okay in running on port `8081` in which case the website will be accessible on `http://localhost:8081`.
 
