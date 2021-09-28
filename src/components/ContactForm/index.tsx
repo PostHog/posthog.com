@@ -21,11 +21,12 @@ interface ContactFormType {
 interface FieldProps {
     name: string
     label: React.ReactNode
+    placeholder?: string
     children: JSX.Element
     validation?: string | false
 }
 
-const Field = ({ name, label, children, validation }: FieldProps) => {
+const Field = ({ name, label, placeholder, children, validation }: FieldProps) => {
     const [hasBlurred, setHasBlurred] = useState(false)
     const isRequired = validation !== undefined
     const showValidationError = validation && hasBlurred
@@ -45,6 +46,7 @@ const Field = ({ name, label, children, validation }: FieldProps) => {
                 id: name,
                 onBlur: () => setHasBlurred(true),
                 required: isRequired || undefined,
+                placeholder: placeholder || label?.toString(),
                 style: showValidationError
                     ? {
                           borderColor: 'var(--danger)',
@@ -157,7 +159,11 @@ export const ContactForm = (): JSX.Element => {
                             <option value="No">No</option>
                         </select>
                     </Field>
-                    <Field name="hosting_provider" label="Who is your current hosting provider?">
+                    <Field
+                        name="hosting_provider"
+                        label="Who is your current hosting provider?"
+                        placeholder="e.g. AWS, GCP, Azure"
+                    >
                         <input value={formValues.hosting_provider} onChange={handleChange} />
                     </Field>
                     <Field name="helm_charts" label="Do you/your team have helm chart/k8s experience?">
@@ -186,10 +192,14 @@ export const ContactForm = (): JSX.Element => {
                             </option>
                         </select>
                     </Field>
-                    <Field name="reason_for_self_host" label="What is your main reason for wanting to self-host?">
+                    <Field
+                        name="reason_for_self_host"
+                        label="What is your main reason for wanting to self-host?"
+                        placeholder="Start typing..."
+                    >
                         <textarea value={formValues.reason_for_self_host} onChange={handleChange} />
                     </Field>
-                    <input type="submit" className="block button button-primary mx-auto cursor-pointer" />
+                    <input type="submit" className="block w-full mt-4 button button-primary mx-auto cursor-pointer" />
                 </form>
             )}
         </div>
