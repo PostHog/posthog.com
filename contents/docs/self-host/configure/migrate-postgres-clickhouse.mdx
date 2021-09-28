@@ -54,7 +54,7 @@ For example:
 $ pg_dump -d posthog -h localhost -U posthog -T posthog_person -T posthog_persondistinctid -T posthog_event -T posthog_pluginlogentry -T posthog_sessionrecordingevent --data-only -f posthog-migration.sql
 ```
 
-The example command above creates a `posthog-migration.sql` that contains SQL statements to create the schema and insert the data data, excluding event data, from the existing Postgres database.
+The example command above creates a `posthog-migration.sql` that contains SQL statements to insert the data only, excluding event data, from the existing Postgres database.
 
 ## Import
 
@@ -70,13 +70,13 @@ The import process has two steps:
 Import the old Postgres data into the new PostHog Postgres database. The command should take the following format:
 
 ```
-pg_restore -d [database] -h [host] -p [port] -U [user] [input-file]
+psql --dbname="postgres://[user]:[password]@[host]:[port]/[database]" < [input-file]
 ```
 
 For example:
 
 ```
-pg_restore -d posthog -h remote.example.com -p 5432 -U posthog posthog-migration.sql
+psql --dbname="postgres://postgres:postgres@localhost:5432/posthog" < posthog-migration.sql
 ```
 
 ### ClickHouse import of event data
@@ -94,6 +94,8 @@ Within the older deployment of PostHog, go to the PostHog dashboard, then to the
 - **Replication**: keep the value of `1`
 
 Then click **Save**.
+
+### Verify the migration
 
 TODOs:
 - Provide some sort validation that the data has been migrated
