@@ -163,6 +163,12 @@ git commit -m 'Adding details on how to commit'
 
 #### Via GitHub Desktop
 
+The files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
+
+![Viewing changes in GitHub Desktop](../../images/docs/contribute/viewing-changes-in-github-desktop.png)
+
+Select the files that you want to be part of the commit by ensuring the checkbox to the left of the file is checked within GitHub Desktop. Then, write a short descriptive commit message and click the **Commit to...** button.
+
 </HiddenSection>
 
 ### Markdown details
