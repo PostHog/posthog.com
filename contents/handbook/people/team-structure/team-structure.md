@@ -17,7 +17,7 @@ hideAnchor: true
       - [Rick Marron, Full Stack Engineer](/handbook/company/team#rick-marron-full-stack-engineer)
       - Paul D'Ambra, Full Stack Engineer
     - [James Greenhill, Data/Infra engineer](/handbook/company/team#james-greenhill-software-engineer)
-      - Guido Laquinti, Site Reliability Engineer
+      - Guido Iaquinti, Site Reliability Engineer
     - [Eric Duong, Full Stack Engineer](/handbook/company/team#eric-duong-software-engineer)
     - [Neil Kakkar, Full Stack Engineer](/handbook/company/team#neil-kakkar-software-engineer)
     - [Li Yi Yu, Full Stack Engineer](/handbook/company/team#li-yi-yu-full-stack-engineer)
