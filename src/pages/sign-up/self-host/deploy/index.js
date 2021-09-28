@@ -7,10 +7,13 @@ import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
 import Deploy from 'components/SignUp/Deploy'
 import Layout from 'components/SignUp/Layout'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { useState } from 'react'
 
 export default function SelfHost({ location }) {
     const [open, setOpen] = useState(false)
+    const { posthog } = useValues(posthogAnalyticsLogic)
 
     return (
         <Layout
@@ -53,6 +56,7 @@ export default function SelfHost({ location }) {
                             type="outline"
                             className="bg-white flex space-x-2 items-center font-bold"
                             to="/slack"
+                            onClick={() => posthog?.capture('deploy: clicked Join Slack')}
                         >
                             <Slack className="w-4 h-4" />
                             <span>Join our Slack</span>

@@ -14,12 +14,12 @@ export default function Link({
     ...other
 }) {
     const internal = !disablePrefetch && /^\/(?!\/)/.test(to)
-    return onClick ? (
+    return onClick && !to ? (
         <button onClick={onClick} className={className}>
             {children}
         </button>
     ) : internal ? (
-        <GatsbyLink {...other} to={to} className={className} state={state}>
+        <GatsbyLink {...other} to={to} className={className} state={state} onClick={onClick}>
             {children}
         </GatsbyLink>
     ) : (

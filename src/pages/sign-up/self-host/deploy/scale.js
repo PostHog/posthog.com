@@ -1,5 +1,5 @@
 import cntl from 'cntl'
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from 'components/CallToAction/index.js' // TEMP
 import Contact from 'components/Contact'
 import DeployOption from 'components/DeployOption'
 import { section } from 'components/Home/classes'
@@ -8,6 +8,8 @@ import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
 import Deploy from 'components/SignUp/Deploy'
 import Layout from 'components/SignUp/Layout'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { useState } from 'react'
 
 const styledNumbers = (className = '') => cntl`
@@ -37,6 +39,7 @@ const styledNumbers = (className = '') => cntl`
 
 export default function SelfHost({ location }) {
     const [open, setOpen] = useState(false)
+    const { posthog } = useValues(posthogAnalyticsLogic)
 
     return (
         <Layout
@@ -80,6 +83,7 @@ export default function SelfHost({ location }) {
                             type="outline"
                             className="bg-white flex space-x-2 items-center font-bold"
                             to="/slack"
+                            onClick={() => posthog?.capture('deploy: clicked Join Slack')}
                         >
                             <Slack className="w-4 h-4" />
                             <span>Join our Slack</span>
@@ -98,6 +102,7 @@ export default function SelfHost({ location }) {
                             size="sm"
                             type="outline"
                             className="text-dark-yellow hover:!text-dark-yellow self-start !text-opacity-100 mt-7"
+                            onClick={() => posthog?.capture('deploy: clicked Get license key')}
                         >
                             Get a license key now
                         </CallToAction>
