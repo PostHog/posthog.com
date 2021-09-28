@@ -13,7 +13,7 @@ We have an awesome, diverse, and inclusive community. In order to maintain and g
 
 ## Security vulnerability disclosure
 
-Please report any suspected security vulnerabilities privately to hey@posthog.com. 
+Please report any suspected security vulnerabilities privately to [hey@posthog.com](mailto:hey@posthog.com). 
 
 We do not operate a bug bounty program at the moment, but we will generously reward you with merch for any actionable security vulnerabilities found.
 
