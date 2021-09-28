@@ -1,8 +1,8 @@
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Spacer } from '../Spacer'
-import { InlineWidget } from 'react-calendly'
+import { CalendlyEventListener, InlineWidget } from 'react-calendly'
 
 export const DemoScheduler = ({
     iframeSrc = 'https://calendly.com/yakko/yc-onboarding-group',
@@ -10,26 +10,20 @@ export const DemoScheduler = ({
     iframeSrc?: string
 }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
-    const calendlyEvent = (e) => {
+    const calendlyEventScheduled = (e) => {
         const { event, payload = null } = e.data
-        if (event === 'calendly.event_scheduled') {
-            posthog?.capture(event, {
-                calendly_event_uri: payload?.event.uri,
-                calendly_invitee_uri: payload?.invitee.uri,
-            })
-        }
+        posthog?.capture(event, {
+            calendly_event_uri: payload?.event.uri,
+            calendly_invitee_uri: payload?.invitee.uri,
+        })
     }
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            window.addEventListener('message', calendlyEvent)
-            return () => window.removeEventListener('message', calendlyEvent)
-        }
-    }, [])
 
     return (
         <>
             <div>
-                <InlineWidget url={iframeSrc} styles={{ height: '1000px', margin: '0 auto' }} />
+                <CalendlyEventListener onEventScheduled={calendlyEventScheduled}>
+                    <InlineWidget url={iframeSrc} styles={{ height: '1000px', margin: '0 auto' }} />
+                </CalendlyEventListener>
             </div>
             <Spacer height={100} />
         </>
