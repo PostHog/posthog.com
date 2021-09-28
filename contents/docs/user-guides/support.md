@@ -22,7 +22,7 @@ Broadly, our Enterprise support is bespoke, whereas Open Source, Cloud and Scale
 |[Configuration assistance](#configuration-assistance)|x|x|x|✔️|
 |[Standard Terms and Conditions](#standard-terms-and-conditions)|MIT Licence|✔️|✔️|✔️|
 |[Master Services Agreement](#master-services-agreement-msa)|x|x|x|✔️|
-|[Security assessment](#security-assessment)|Partial|Partial|Partial|✔️|
+|[Security assessment](#security-assessment)|Standard assessment provided|Standard assessment provided|Standard assessment provided|✔️|
 |[Bespoke pricing](#bespoke-pricing)|x|x|x|✔️|
 |[Payment via invoicing](#payment-via-invoicing)|x|x|Minimum $2k/month spend|✔️|
 |[Downtime developer pairing](#downtime-developer-pairing)|x|x|x|✔️|
@@ -69,14 +69,9 @@ For Enterprise customers that can't use Slack easily, we can offer priority emai
 
 ## Training sessions
 
-We run a set number of group training sessions with your end users. We will walk them through:
+We run a set number of group training sessions with your end users. We will walk them through how to make your product more successful.
 
-* Understanding product analytics performance
-* Diagnosing why your analytics are performing well or badly
-* Rolling out changes safely
-* Optional: getting event data into PostHog / out of PostHog
-
-These are useful at first for the initial adoption of the product. As you organically add more people to the platform, we can make sure everyone understands how to drive the most value.
+These are useful at first for the initial adoption of PostHog. As you organically add more people to the platform, we can make sure everyone understands how to drive the most value.
 
 ## Deployment developer pairing
 
