@@ -1,6 +1,7 @@
 import { TrackedCTA } from 'components/CallToAction/index.js' // TEMP
 import { heading, section } from 'components/Home/classes'
 import { Browser, Cloud, Lightning, Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
+import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
@@ -23,7 +24,9 @@ export default function SignUp() {
             <SEO title="Get started - PostHog" />
             <section>
                 <div className={section('md:my-[87px]')}>
-                    <Logo className="mx-auto" />
+                    <Link to="/">
+                        <Logo className="mx-auto" />
+                    </Link>
                     <h1 className={heading('md', 'primary', 'mt-16')}>Choose your hosting option</h1>
                 </div>
                 <div className="border-t border-b border-dashed border-gray-accent-light">
