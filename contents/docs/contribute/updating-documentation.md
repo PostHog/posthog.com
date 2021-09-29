@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-
-You can contribute to the PostHog documentation in two ways:
+You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
 1. A pull request can be raised in GitHub for pages that have an **Edit this page** link on them. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation such as renaming.
 2. By running the posthog.com website locally and making changes there. This is the recommended method as it allows you to quickly preview the changes you are making as well as performing complex changes.
@@ -22,12 +21,19 @@ In order to run the PostHog website locally, you require the following to be ins
 
 Optionally, if you are unfamiliar with using Git from the command line, you should also have the following installed:
 
-- [GitHub Desktop](https://desktop.github.com/)
+- [GitHub Desktop](https://desktop.github.com/).
 - [Visual Studio Code](https://code.visualstudio.com/download)
+
+And make use of the following resources:
+
+- [GitHub Desktop docs](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop)]
+- [Visual Studio docs](https://code.visualstudio.com/docs)
 
 ### Cloning the posthog.com repository
 
 The [codebase for posthog.com](https://github.com/PostHog/posthog.com) is on GitHub.
+
+<HiddenSection headingType='h3' title='Via the terminal'>
 
 You can clone the codebase from the terminal via:
 
@@ -35,7 +41,9 @@ You can clone the codebase from the terminal via:
 git clone git@github.com:PostHog/posthog.com.git
 ```
 
-<HiddenSection headingType='h3' title='Cloning using GitHub Desktop'>
+</HiddenSection>
+
+<HiddenSection headingType='h3' title='Via GitHub Desktop'>
 
 You can also clone the repository with [GitHub desktop](https://desktop.github.com/) installed, from the [posthog.com repository page](https://github.com/PostHog/posthog.com), click the **Code** button and select **Open with GitHub Desktop** from the dropdown that appears.
 
@@ -97,11 +105,11 @@ Inside each of these are a series of markdown files for you to edit.
 
 ## Making edits
 
+### Creating a new Git branch
+
 When editing locally, changes should be made on a new Git branch. Branches should be given an "at a glance" informative name. For example, `posthog-website-contribution`.
 
-<HiddenSection headingType='h3' title='Creating a new Git branch'>
-
-#### Via the terminal
+<HiddenSection headingType='h4' title='Via the terminal'>
 
 You can create a new Git branch from the terminal by running:
 
@@ -115,7 +123,9 @@ For example:
 git checkout -b posthog-website-contribution
 ```
 
-#### Via GitHub Desktop
+</HiddenSection>
+
+<HiddenSection headingType='h4' title='Via GitHub Desktop'>
 
 You can also create a new branch in GitHub Desktop by selecting the dropdown next to the **Current Branch** name and clicking **New Branch**.
 
@@ -183,9 +193,7 @@ The sidebar is generated from `/src/sidebars/sidebars.json`.
 
 Create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and different commit for updates to the documenatation.
 
-<HiddenSection headingType='h3' title='Creating a new Git branch'>
-
-#### Via the terminal
+<HiddenSection headingType='h3' title='Via the terminal'>
 
 First, stage your changes:
 
@@ -211,7 +219,9 @@ For example:
 git commit -m 'Adding details on how to commit'
 ```
 
-#### Via GitHub Desktop
+</HiddenSection>
+
+<HiddenSection headingType='h3' title='Via the GitHub Desktop'>
 
 The files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
 
@@ -223,9 +233,89 @@ Select the files that you want to be part of the commit by ensuring the checkbox
 
 </HiddenSection>
 
-## Deployment
+## Push the changes to GitHub
 
-New changes should be created as a pull request.
+In order to request that the changes you have made are merged into the main website branch you must first push them to GitHub.
+
+<HiddenSection headingType='h3' title='Via the terminal'>
+
+```bash
+git push origin [branch-name]
+```
+
+For example:
+
+```bash
+git push origin posthog-website-contribution
+```
+
+When this is done, the terminal will show output similar to the following:
+
+```bash
+posthog-website-contribution $ git push origin posthog-website-contribution
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'posthog-website-contribution' on GitHub by visiting:
+remote:      https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution
+remote: 
+To github.com:PostHog/posthog.com.git
+ * [new branch]        posthog-website-contribution -> posthog-website-contribution
+```
+
+This output instructions you that you can create a pull request by visiting a link. In the case above, the link is `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution`.
+
+</HiddenSection>
+
+<HiddenSection headingType='h3' title='Via GitHub Desktop'>
+
+With all the changes you want to push to GitHub committed, click the **Push origin** button.
+
+![Push to origin from GitHub Desktop](../../images/docs/contribute/push-to-origin-github-desktop.gif)
+
+</HiddenSection>
+
+## Create a Pull Request
+
+Create a Pull Request to request that your changes be merged into the main branch of the repository.
+
+<HiddenSection headingType='h3' title='Via the terminal'>
+
+Navigate to the link shown when you push your branch to GitHub. For example, `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution` shown below:
+
+```bash
+posthog-website-contribution $ git push origin posthog-website-contribution
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'posthog-website-contribution' on GitHub by visiting:
+remote:      https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution
+remote: 
+To github.com:PostHog/posthog.com.git
+ * [new branch]        posthog-website-contribution -> posthog-website-contribution
+```
+
+</HiddenSection>
+
+<HiddenSection headingType='h3' title='Via GitHub Desktop'>
+
+With the branch published, click the **Create Pull Request** button.
+
+![Pull Request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
+
+This will open up a page on github.com in your default browser.
+
+</HiddenSection>
+
+If you are pushing to an existing branch, navigate to the [posthog.com repo](https://github.com/posthog/posthog.com) and switch to the new branch using the dropdown:
+
+![GitHub branch switcher](../../images/docs/contribute/github-branch-switcher.png)
+
+Then, open the **Contribute** dropdown and click the **Open pull request** button.
+
+Make the Pull Request title descriptive name and complete the detail requested in the body.
+
+If you know who you would like to review the Pull Request, select them in the **Reviewers** dropdown.
+
+## Deployment
 
 To get changes into production, the website deploys automatically from `master`. The build takes 5-10 minutes.
 
