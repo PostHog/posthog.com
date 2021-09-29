@@ -4,12 +4,15 @@ sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
+## Welcome
 
-We love contributions to PostHog, big or small.
+We love contributions, big or small. Our [workflow guidelines](/docs/contribute/development-workflow) are intended to get your changes deployed quickly, and we will happily [recognize your effort](/docs/contribute/recognizing-contributions).
+
+This overview covers important topics for getting started. If you'd like to jump right into code, visit [Developing locally](/docs/contribute/developing-locally).
 
 ## Code of conduct
 
-We have an awesome, diverse, and inclusive community. In order to maintain and grow this, all community members must adhere to our [Code of conduct](/docs/contribute/code-of-conduct).
+We have an awesome, diverse, and inclusive community. All community members must adhere to our [Code of conduct](/docs/contribute/code-of-conduct) to ensure we continue to flourish together.
 
 ## Security vulnerability disclosure
 

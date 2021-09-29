@@ -893,10 +893,6 @@
                     "url": "/docs/contribute/code-of-conduct"
                 },
                 {
-                    "name": "Recognizing contributions",
-                    "url": "/docs/contribute/recognizing-contributions"
-                },
-                {
                     "name": "Development workflow",
                     "url": "/docs/contribute/development-workflow"
                 },
@@ -915,6 +911,10 @@
                 {
                     "name": "Updating documentation",
                     "url": "/docs/contribute/updating-documentation"
+                },
+                {
+                    "name": "Recognizing contributions",
+                    "url": "/docs/contribute/recognizing-contributions"
                 }
             ]
         }
