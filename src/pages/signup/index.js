@@ -66,7 +66,7 @@ export default function SignUp() {
                                 </Feature>
                             </ul>
                             <TrackedCTA
-                                href="https://app.posthog.com"
+                                href="https://app.posthog.com/signup"
                                 event={{ name: 'get started: clicked Continue', type: 'cloud' }}
                             >
                                 Continue
