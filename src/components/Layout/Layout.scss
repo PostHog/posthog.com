@@ -668,7 +668,7 @@ header {
     li {
         margin-bottom: calc(1.45rem / 2);
     }
-    img.large {
+    img.blog-post-img-large {
         max-width: 150%;
         margin-left: -25%;
     }
@@ -676,7 +676,7 @@ header {
 
 @media screen and (max-width: 800px) {
     .blog-post-content {
-        img.large {
+        img.blog-post-img-large {
             max-width: 100%;
             margin-left: 0;
         }
