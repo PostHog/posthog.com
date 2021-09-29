@@ -12,7 +12,7 @@ showTitle: true
 - **Product execution (goals for each milestone).**
   - Clearly define what success is for each milestone.
   - Successful (*see above*) delivery of all milestones from product strategy.
-  - Ensure ownership and accountability on every feature by a single engineer. Help owners improve on workflow, prioritization, solution scoping & post-delivery.
+  - Ensure ownership and accountability on every feature by a single engineer. Help owners improve on workflow, prioritization, solution scoping (particularly around overscoping) & post-delivery.
 - **User experience.**
   - Measurably increase the user experience.
   - Reduce my number of **code** reviews and PRs (*to increase the depth of UX reviews*).
