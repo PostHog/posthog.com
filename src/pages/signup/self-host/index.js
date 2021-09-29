@@ -1,4 +1,5 @@
 import { heading, section } from 'components/Home/classes'
+import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { Enterprise, OpenSource, Scale } from 'components/Pricing/PricingTable/Plans'
 import ScaleModal from 'components/Pricing/PricingTable/ScaleModal'
@@ -33,7 +34,9 @@ export default function SelfHost() {
             <ScaleModal hideBadge hideActions setOpen={setModalOpen} open={open} />
             <section className="px-4">
                 <div className={section('md:my-[87px]')}>
-                    <Logo className="mx-auto" />
+                    <Link to="/">
+                        <Logo className="mx-auto" />
+                    </Link>
                     <h1 className={heading('md', 'primary', 'mt-16')}>Select your edition</h1>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

@@ -1,5 +1,6 @@
 import Contact from 'components/Contact'
 import { heading, section } from 'components/Home/classes'
+import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
 import Layout from 'components/SignUp/Layout'
@@ -28,7 +29,9 @@ export default function SelfHost() {
             <SEO title="Get in touch - PostHog" />
             <section className="px-4">
                 <div className={section('md:my-[87px]')}>
-                    <Logo className="mx-auto" />
+                    <Link to="/">
+                        <Logo className="mx-auto" />
+                    </Link>
                     <h1 className={heading('md', 'primary', 'mt-16')}>Get in touch</h1>
                     <Contact />
                 </div>
