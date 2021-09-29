@@ -23,6 +23,14 @@ Please search within our issues before raising a new one to make sure you're not
 
 </blockquote>
 
+## Deciding what to work on
+
+We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to the PostHog open-source product analytics platform. You can also pick up any other open tickets, though they may be more complicated to work with. If in doubt, just leave a comment for the author of the issue! Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to raise a PR directly.
+
+You can also [update PostHog's documentation, handbook, or write a blog post](/docs/contribute/contribute-to-website). We maintain [a list of good first issues](https://github.com/PostHog/posthog.com/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) here too. Take a look at our [styleguide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
+
+If you're planning to work on a bigger feature that is not on the list of issues, please raise an issue first so we can check whether that feature makes sense for PostHog as a whole.
+
 ## Writing code 
 
 ### How to get started if you're new to Kea, Python, Django, or a new employee
@@ -30,17 +38,7 @@ Please search within our issues before raising a new one to make sure you're not
 Working in a new codebase can be overwhelming, especially if you're rusty/new to the tech stack. 
 You may find additional help, advice, and exercises by using our [Beginner's Guide](/handbook/engineering/beginners-guide/introduction).
 
-### Deciding what to work on
-
-We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to PostHog. You can also pick up any other open tickets, though they may be more complicated to work with. If in doubt, just leave a comment for the author of the issue!
-
-Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to raise a PR directly.
-
-Alternatively, you can also [update PostHog's documentation](/docs/contribute/updating-documentation). To do so, take a look at our [Styleguide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
-
-If you're planning to work on a bigger feature that is not on the list of issues, please raise an issue first so we can check whether that feature makes sense for PostHog as a whole.
-
-### Setting up your local environment
+### Setting up your local PostHog environment
 
 [See this page for information](/docs/contribute/developing-locally).
 
