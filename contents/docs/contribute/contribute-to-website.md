@@ -1,5 +1,5 @@
 ---
-title: Updating documentation
+title: "Contribute to the website: documentation, handbook, and blog"
 sidebar: Docs
 showTitle: true
 ---
