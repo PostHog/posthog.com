@@ -28,7 +28,7 @@ dependencies {
 ### Maven
 All you need to do is add the `posthog` module to your `pom.xml`:
 
-```
+```xml
 <dependency>
   <groupId>com.posthog.java</groupId>
   <artifactId>posthog</artifactId>
@@ -42,7 +42,7 @@ See the [com.posthog.java](https://search.maven.org/artifact/com.posthog.java/po
 
 ## Usage
 
-```java
+```js
 import com.posthog.java.PostHog;
 
 class Sample {
@@ -74,7 +74,7 @@ Optionally you can submit:
 - `properties`, which is a dictionary with any information you'd like to add
 
 For example:
-```java
+```js
 posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
   {
     put("movie_id", 123);
@@ -95,7 +95,7 @@ An `identify` call requires:
 - `properties` with a dict with any key:value pairs 
 
 For example:
-```java
+```js
 posthog.identify("distinct id", new HashMap<String, Object>() {
   {
     put("email", "john@doe.com);
@@ -121,7 +121,7 @@ An `alias` call requires:
 - `distinct id` the current unique id
 
 For example:
-```java
+```js
 posthog.alias("anonymous session id", "distinct id");
 ```
 
@@ -131,9 +131,9 @@ Note: `set_once` works just like `set`, except that it will **only set the prope
 
 There are three options:
 
-#### With the `capture` call
+##### With the `capture` call
 
-```java
+```js
 posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
   {
     put("eventProperty", "value1");                    // event properties
@@ -152,9 +152,9 @@ posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
 });
 ```
 
-#### With the `identify` call
+##### With the `identify` call
 
-```java
+```js
 posthog.identify("distinct id", new HashMap<String, Object>() {  // set
     {
       put("email", "john@doe.com);
@@ -167,9 +167,9 @@ posthog.identify("distinct id", new HashMap<String, Object>() {  // set
 });
 ```
 
-#### With `set` or `set_once` calls
+##### With `set` or `set_once` calls
 
-```java
+```js
 posthog.set("distinct id", new HashMap<String, Object>() {
   {
     put("email", "john@doe.com);
@@ -178,7 +178,7 @@ posthog.set("distinct id", new HashMap<String, Object>() {
 });
 ```
 
-```java
+```js
 posthog.setOnce("distinct id", new HashMap<String, Object>() {
   {
     put("user_first_location", "colorado");
