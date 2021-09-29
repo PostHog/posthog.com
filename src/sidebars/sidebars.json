@@ -897,6 +897,10 @@
                     "url": "/docs/contribute/recognizing-contributions"
                 },
                 {
+                    "name": "Development workflow",
+                    "url": "/docs/contribute/development-workflow"
+                },
+                {
                     "name": "Developing locally",
                     "url": "/docs/contribute/developing-locally"
                 },
