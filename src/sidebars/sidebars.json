@@ -719,6 +719,10 @@
                     "url": "/docs/user-guides/sso"
                 },
                 {
+                    "name": "Support",
+                    "url": "/docs/user-guides/support"
+                },
+                {
                     "name": "Toolbar",
                     "url": "/docs/user-guides/toolbar"
                 },
