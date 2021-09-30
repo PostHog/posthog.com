@@ -135,10 +135,10 @@ You're done! Your code will be included in the next release of PostHog.
 
 ## Licensing
 
-We mainly license PostHog's code under the MIT Expat license, as outlined in the [PostHog repo](https://github.com/PostHog/posthog/blob/master/LICENSE) on GitHub. 
+We mainly license PostHog's code under the MIT License, (alternatively known as the Expat License), as outlined in the [PostHog repo](https://github.com/PostHog/posthog/blob/master/LICENSE) on GitHub. 
 
 There are a couple of exceptions:
 - Enterprise users are covered by an additional [license agreement](https://github.com/PostHog/posthog/blob/master/ee/LICENSE)
 - Any third party components incorporated into our code are licensed under the original license provided by the owner of the applicable component
 
-It is worth specifically mentioning any components that use LGPL, such as _flake8-import-order@0.18.1_ and _psycopg2-binary@2.8.4_. The terms of the LGPL license mean that any changes we make to these libraries need to be shared under LGPL as well.
+Any components that use the GNU Lesser General Public License (LGPL), such as `flake8-import-order@0.18.1` and `psycopg2-binary@2.8.4`. The terms of the LGPL license mean that any changes we make to these libraries need to be shared under LGPL as well.
