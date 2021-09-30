@@ -11,3 +11,11 @@ trunk-based development</a> using Git.
 
 Our model requires collaboration on a single branch named either `master` or `main`. We aim for short-lived feature branches to allow more frequent code-review and build checking via continuous integration.
 
+### Contribution flow
+
+The general flow for contributing to PostHog is:
+
+1. Clone the repository you want to work on. 
+2. Create a branch off the `master` or `main` trunk for the changes you're planning.
+3. Make commits in your branch.
+4. When you're ready, create a new pull request.
