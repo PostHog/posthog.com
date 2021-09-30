@@ -41,14 +41,6 @@ We want you to be heard. If you have encountered a bug that already has an issue
 
 > **Note:** Reference our [Security vulnerability disclosure](contribute#security-vulnerability-disclosure) section for special instructions on reporting a suspected vulnerability.
 
-## Writing code 
-
-### How to get started if you're new to Kea, Python, Django, or a new employee
-
-Working in a new codebase can be overwhelming, especially if you're rusty/new to the tech stack. 
-You may find additional help, advice, and exercises by using our [Beginner's Guide](/handbook/engineering/beginners-guide/introduction).
-
-
 ## Deciding what to work on
 
 <h3>Existing issues</h3>
@@ -91,6 +83,10 @@ Our [Developing locally](/docs/contribute/developing-locally) docs include setup
 - [Develop using Docker](http://localhost:8001/docs/contribute/developing-locally#using-docker)
 
 > **Note:** In some cases, you may choose to run some services using Docker and others using a local environment.
+
+### Want some extra help?
+
+Check out our [Beginner's Guide](/handbook/engineering/beginners-guide/introduction) written by a new employee for some useful advice and exercises.
 
 ## Licensing
 
