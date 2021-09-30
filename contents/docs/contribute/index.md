@@ -23,22 +23,23 @@ Please review our [Code of conduct](/docs/contribute/code-of-conduct) which incl
 
 Please report any suspected security vulnerabilities privately to [hey@posthog.com](mailto:hey@posthog.com). 
 
-We do not operate a bug bounty program at the moment, but we will generously reward you with merch for any actionable security vulnerabilities found.
+> ⚠️ **Important**: Do not create a public issue for suspected vulnerabilities.
 
-> ⚠️ **Important**: Please do not create a public issue for suspected vulnerabilities. 
+We do not operate a bug bounty program at the moment, but we will generously reward you with merch for any actionable security vulnerabilities found.
 
 ## Reporting bugs or issues
 
 Bug reports are an important part of improving PostHog. If you encounter a bug, please:
 
-* Search existing issues before creating a new one. 
-* Report a bug by creating a new issue and completing the provided template. 
-* Reference our [Security vulnerability disclosure](contribute#security-vulnerability-disclosure) section to report a suspected vulnerability.
-  
-We want you to be heard. If you have encountered a bug that already has an issue, please add a comment to it with:
+- Search existing issues on GitHub before creating a new one. 
+- Report a new bug by creating a new issue and completing the provided template. 
 
-* How the bug impacted you.
-* What additional details you have that could help resolve the issue.
+We want you to be heard. If you have encountered a bug that already has an issue, please add a comment with:
+
+- How the bug impacted you.
+- What additional details you have that could help resolve the issue.
+
+> **Note:** Reference our [Security vulnerability disclosure](contribute#security-vulnerability-disclosure) section for special instructions on reporting a suspected vulnerability.
 
 ## Writing code 
 
