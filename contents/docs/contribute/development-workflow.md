@@ -31,7 +31,7 @@ If you choose this method, you should still branch off the trunk and when ready 
 We are relatively flexible with branch names, but do have a few specific requests:
 
 - If your pull request is related to an issue, please mention that issue when naming your branch: `git checkout -b 263-logout-button`.
-- Do not use `release-*` patterns in your branches unless pushing a release. These branches have get special handling by our CI.
+- Do not use `release-*` patterns in your branches unless pushing a release. These branches have get special handling by our CI for releases.
 
 ## Commit message style
 
