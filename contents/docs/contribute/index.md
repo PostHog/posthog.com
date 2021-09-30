@@ -71,7 +71,16 @@ Alternatively, you can [update PostHog's documentation](/docs/contribute/updatin
 
 Be sure you read through our [Styleguide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
 
-### Setting up your local development
+## Development workflow
+
+Our [Development workflow](/docs/contribute/development-workflow) docs are intended to get your changes deployed quickly. They include:
+
+- A description of our use of trunk-based development
+- The steps to a successful pull request
+- Useful tips on branch and PR naming
+- An overview of our PR Review process
+
+## Setting up your local development
 
 Our [Developing locally](/docs/contribute/developing-locally) docs include setup instructions for two primary local dev environments:
 
