@@ -5,8 +5,8 @@ showTitle: true
 ---
 
 ### Getting started
-#### Pull Request and Branching Workflow
-New changes should be created as a pull request.
+If you have not, be sure to review [Development workflow](/docs/contribute/development-workflow) which covers details of pull requests, branching and more.
+
 #### Deployment
 The updated documentation website will deploy automatically once a pull request has been merged into the `master` 
 branch. The build takes 5-10 minutes.
