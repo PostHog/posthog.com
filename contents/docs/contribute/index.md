@@ -70,9 +70,18 @@ Alternatively, you can [update PostHog's documentation](/docs/contribute/updatin
 
 Be sure you read through our [Styleguide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
 
-### Setting up your local environment
+### Setting up your local development
 
-[See this page for information](/docs/contribute/developing-locally).
+Our [Developing locally](/docs/contribute/developing-locally) docs include setup instructions for two primary local dev environments:
+
+- [Develop using `virtualenv`](http://localhost:8001/docs/contribute/developing-locally#using-virtualenv)
+   - Required for development using an Apple Silicon (M1) computer. 
+   - Runs fast compared with Docker option
+   
+- [Develop using Docker](http://localhost:8001/docs/contribute/developing-locally#using-docker)
+
+> **Note:** In some cases, you may choose to run some services using Docker and others using a local environment.
+
 
 ### Testing
 
