@@ -29,9 +29,9 @@ export const Badge = ({ title, className = '' }) => {
 export const Title = ({ className = '', title, subtitle, badge }) => {
     return (
         <span className={className}>
-            <h3 className="my-0 text-xl md:text-2xl flex items-center">
+            <h3 className="my-0 text-xl md:text-2xl">
                 <span>{title}</span>
-                {badge && <Badge className="ml-2" title={badge} />}
+                {badge && <Badge className="ml-2 align-middle" title={badge} />}
             </h3>
             <p className="text-[15px] mt-1 mb-2">{subtitle}</p>
         </span>
