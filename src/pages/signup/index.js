@@ -1,10 +1,8 @@
 import { TrackedCTA } from 'components/CallToAction/index.js' // TEMP
-import { heading, section } from 'components/Home/classes'
 import { Browser, Cloud, Lightning, Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
-import Link from 'components/Link'
-import Logo from 'components/Logo'
 import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
+import Intro from 'components/SignUp/Intro'
 import Layout from 'components/SignUp/Layout'
 import React from 'react'
 
@@ -23,12 +21,7 @@ export default function SignUp() {
         >
             <SEO title="Get started - PostHog" />
             <section>
-                <div className={section('md:my-[87px]')}>
-                    <Link to="/">
-                        <Logo className="mx-auto" />
-                    </Link>
-                    <h1 className={heading('md', 'primary', 'mt-16')}>Choose your hosting option</h1>
-                </div>
+                <Intro title="Choose your hosting option" />
                 <div className="border-t border-b border-dashed border-gray-accent-light">
                     <div className="grid md:grid-cols-2 max-w-screen-lg mx-auto md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
                         <Plan title="Self-host" subtitle="Customer data never leaves your infrastructure">

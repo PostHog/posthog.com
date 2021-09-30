@@ -1,8 +1,6 @@
 import Contact from 'components/Contact'
-import { heading, section } from 'components/Home/classes'
-import Link from 'components/Link'
-import Logo from 'components/Logo'
 import { SEO } from 'components/seo'
+import Intro from 'components/SignUp/Intro'
 import Layout from 'components/SignUp/Layout'
 import React, { useEffect } from 'react'
 
@@ -28,13 +26,9 @@ export default function SelfHost() {
         >
             <SEO title="Get in touch - PostHog" />
             <section className="px-4">
-                <div className={section('md:my-[87px]')}>
-                    <Link to="/">
-                        <Logo className="mx-auto" />
-                    </Link>
-                    <h1 className={heading('md', 'primary', 'mt-16')}>Get in touch</h1>
+                <Intro title="Get in touch">
                     <Contact />
-                </div>
+                </Intro>
             </section>
         </Layout>
     )
