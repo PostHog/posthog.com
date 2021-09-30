@@ -15,7 +15,9 @@ This overview covers important topics for getting started as a contributor. Howe
 
 ## Code of conduct
 
-We have an awesome, diverse, and inclusive community. All community members must adhere to our [Code of conduct](/docs/contribute/code-of-conduct) to ensure we continue to flourish together.
+We treasure our diverse, inclusive, and growing community. 
+
+Please review our [Code of conduct](/docs/contribute/code-of-conduct) which includes our shared pledge to maintain a welcoming atmophere for all.
 
 ## Security vulnerability disclosure
 
