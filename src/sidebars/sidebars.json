@@ -82,6 +82,10 @@
                     "url": "/handbook/company/management"
                 },
                 {
+                    "name": "1-1s",
+                    "url": "/handbook/company/1-1s"
+                },
+                {
                     "name": "Security",
                     "url": "/handbook/company/security"
                 },
@@ -226,6 +230,10 @@
                     "url": "/handbook/engineering/support-hero"
                 },
                 {
+                    "name": "Tech talks",
+                    "url": "/handbook/engineering/tech-talks"
+                },
+                {
                     "name": "Bug prioritization",
                     "url": "/handbook/engineering/bug-prioritization"
                 },
@@ -246,8 +254,8 @@
                     "url": "/handbook/engineering/common-issues"
                 },
                 {
-                    "name": "Website MDX setup",
-                    "url": "/handbook/engineering/mdx"
+                    "name": "Breaking glass to debug production",
+                    "url": "/handbook/engineering/production-access"
                 },
                 {
                     "name": "AWS tips and FAQ",
@@ -260,6 +268,14 @@
                 {
                     "name": "DigitalOcean tips and FAQ",
                     "url": "/handbook/engineering/digitalocean"
+                },
+                {
+                    "name": "Feature flags spec",
+                    "url": "/handbook/engineering/feature-flags-spec"
+                },
+                {
+                    "name": "Website MDX setup",
+                    "url": "/handbook/engineering/mdx"
                 }
             ]
         },
@@ -311,6 +327,10 @@
                 {
                     "name": "Press",
                     "url": "/handbook/growth/marketing/press"
+                },
+                {
+                    "name": "Open-source sponsorship",
+                    "url": "/handbook/growth/marketing/open-source-sponsorship"
                 }
             ]
         },
@@ -399,6 +419,10 @@
                         {
                             "name": "AWS",
                             "url": "/docs/self-host/deploy/aws"
+                        },
+                        {
+                            "name": "Azure",
+                            "url": "/docs/self-host/deploy/azure"
                         },
                         {
                             "name": "Other",
@@ -663,12 +687,8 @@
                     "url": "/docs/user-guides/funnels"
                 },
                 {
-                    "name": "Organizations",
-                    "url": "/docs/user-guides/organizations"
-                },
-                {
-                    "name": "Projects",
-                    "url": "/docs/user-guides/projects"
+                    "name": "Organizations and projects",
+                    "url": "/docs/user-guides/organizations-and-projects"
                 },
                 {
                     "name": "Paths",
@@ -693,6 +713,10 @@
                 {
                     "name": "SSO (Single sign-on authentication)",
                     "url": "/docs/user-guides/sso"
+                },
+                {
+                    "name": "Support",
+                    "url": "/docs/user-guides/support"
                 },
                 {
                     "name": "Toolbar",

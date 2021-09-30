@@ -11,13 +11,14 @@ export const WorkingAtPostHog = () => {
             >
                 <div className="flex-0 text-center mb-12 md:mb-0 md:text-left md:max-w-xs md:mr-4">
                     <h3 className="text-4xl">
-                        Watch a day in the life of our graphic designer, <span className="text-orange">Lottie!</span>
+                        Find out what it's like working at PostHog according to{' '}
+                        <span className="text-orange">our team!</span>
                     </h3>
                 </div>
                 <div className="flex-1">
                     <div className="h-0 pb-fluid-video relative">
                         <iframe
-                            src="https://www.youtube.com/embed/xlODCLrZyvM"
+                            src="https://www.youtube.com/embed/WOBH1Qy0xhA"
                             className="absolute top-0 left-0 w-full h-full rounded-lg"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen=""

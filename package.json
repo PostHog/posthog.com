@@ -18,9 +18,8 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
-        "generate-redirects": "rm pr_diff && git fetch && git diff origin/master $(git branch --show-current) > pr_diff && python3 ./scripts/safe_rename.py",
-        "generate-redirects-js": "git diff origin/master $(git branch --show-current) > pr_diff && DEBUG=true RUN_AS_SCRIPT=true node ./scripts/safe_rename.js",
-        "test-generate-redirects": "jest"
+        "generate-redirects": "git diff origin/master $(git branch --show-current) > pr_diff && DEBUG=true RUN_AS_SCRIPT=true node ./scripts/safe_rename.js",
+        "test-redirects": "jest scripts"
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
@@ -82,6 +81,7 @@
         "react": "^16.13.1",
         "react-animate-height": "^2.0.23",
         "react-burger-menu": "^3.0.6",
+        "react-calendly": "^2.2.2",
         "react-compare-slider": "^2.1.0",
         "react-dom": "^16.13.1",
         "react-github-btn": "^1.2.0",
@@ -99,6 +99,7 @@
         "reselect": "^4.0.0",
         "sass": "^1.32.8",
         "sharp": "^0.27.2",
+        "slugify": "^1.6.0",
         "svg-sprite": "^1.5.0",
         "typescript": "^4.0.2"
     },

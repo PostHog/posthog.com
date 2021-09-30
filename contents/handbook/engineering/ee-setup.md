@@ -9,7 +9,7 @@ Rough instructions on how to "get the EE version running in all its glory". **Cu
 
 There are multiple ways to run your EE setup depending on your preferences and needs.
 
-### Option A (Recommended). Backend docker-based & frontend locally.
+### Option A. Backend docker-based & frontend locally.
 Use our handy command prebuilt command to run. Everything will run on Docker. Frontend will be built and KEA typegen will be run on the background so you can work on the frontend too.
 
 ```
