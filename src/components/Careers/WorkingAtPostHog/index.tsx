@@ -18,7 +18,7 @@ export const WorkingAtPostHog = () => {
                 <div className="flex-1">
                     <div className="h-0 pb-fluid-video relative">
                         <iframe
-                            src="https://www.youtube.com/embed/xlODCLrZyvM"
+                            src="https://www.youtube.com/embed/WOBH1Qy0xhA"
                             className="absolute top-0 left-0 w-full h-full rounded-lg"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen=""
