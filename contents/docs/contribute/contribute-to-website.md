@@ -58,7 +58,7 @@ You can also clone the repository with [GitHub desktop](https://desktop.github.c
 
 You will then be prompted by the browser to confirm if you want to open the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
 
-Once GitHub Desktop has opened you will be prompted to confirm the respository that is being cloned and the location on disk where you wish the code to be stored.
+Once GitHub Desktop has opened you will be prompted to confirm the repository that is being cloned and the location on disk where you wish the code to be stored.
 
 ![GitHub Desktop clone to dialog](../../images/docs/contribute/github-desktop-clone-repo.png)
 
