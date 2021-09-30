@@ -48,23 +48,24 @@ We want you to be heard. If you have encountered a bug that already has an issue
 Working in a new codebase can be overwhelming, especially if you're rusty/new to the tech stack. 
 You may find additional help, advice, and exercises by using our [Beginner's Guide](/handbook/engineering/beginners-guide/introduction).
 
-### Deciding what to work on
 
-#### Existing issues
+## Deciding what to work on
+
+<h3>Existing issues</h3>
 
 If you're just getting started, we maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
-You can pick up any other open ticket, though it may be more challenging to complete. Don't let that discourage you! 
+You can pick up any other open ticket, though it may be more challenging to complete. 
 
 When in doubt, just leave a comment for the author of the issue.
 
-#### New issues
+<h3>New issues</h3>
 
 If you see opportunity for a small improvement to the product such as in layout, text, or functionality, feel free to raise a pull request.
 
-If you're planning to work on a bigger feature that is not on the list of issues, please create an issue first. This way, we can first discuss and help shape the idea before you invest your time. 
+If you're planning to work on a bigger feature that is not on the list of issues, please create an issue first. This way, we can discuss your idea and provide feedback before you invest your time. 
 
-#### Updating documentation
+<h3>Updating documentation</h3>
 
 Alternatively, you can [update PostHog's documentation](/docs/contribute/updating-documentation). We value clear documentation and consider writing [part of our culture](/handbook/company/culture).
 
