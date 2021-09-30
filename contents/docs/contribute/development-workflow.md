@@ -11,7 +11,7 @@ trunk-based development</a> using Git.
 
 Our model requires collaboration on a single branch named either `master` or `main`. We aim for short-lived feature branches to allow more frequent code-review and build checking via continuous integration.
 
-### Contribution flow
+## Contribution flow
 
 The general flow for contributing to PostHog is:
 
@@ -24,7 +24,7 @@ The general flow for contributing to PostHog is:
 
 If you prefer, you may contribute using the traditional fork-based PR workflow. That is, instead of cloning the project directly, first create a personal fork of a repo. 
 
-If you choose this method, you should still branch off the trunk and when ready create a PR as described above.   
+If you choose this method, you should still branch off the trunk and when ready create a PR as described above. 
 
 ## Branch and pull request naming
 
