@@ -897,6 +897,10 @@
                     "url": "/docs/contribute/development-workflow"
                 },
                 {
+                    "name": "Testing",
+                    "url": "/docs/contribute/testing"
+                },
+                {
                     "name": "Developing locally",
                     "url": "/docs/contribute/developing-locally"
                 },
