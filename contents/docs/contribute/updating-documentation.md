@@ -11,6 +11,14 @@ If you have not, be sure to review [Development workflow](/docs/contribute/devel
 The updated documentation website will deploy automatically once a pull request has been merged into the `master` 
 branch. The build takes 5-10 minutes.
 
+### Clone PostHog.com
+
+Clone the repository:
+
+```bash
+git clone https://github.com/PostHog/posthog.com
+```
+
 ## Finding the content to edit
 
 Once you have cloned the repo, the `contents/` directory contains a few key areas:
