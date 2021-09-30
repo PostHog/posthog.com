@@ -82,31 +82,6 @@ Our [Developing locally](/docs/contribute/developing-locally) docs include setup
 - [Develop using Docker](http://localhost:8001/docs/contribute/developing-locally#using-docker)
 
 > **Note:** In some cases, you may choose to run some services using Docker and others using a local environment.
- 
-
-## Branch and commit message
-
-If your pull request is related to an issue, please mention that issue in the pull request: `git checkout -b 263-logout-button`.
-
-In your initial commit message, mention the issue number again: `git commit -m "Closes #263 adds logout button"`. This way the corresponding ticket will automatically be closed once your pull request gets merged.
-
-## Review process
-
-When we review a PR, we'll look at the following things:
-- Does the PR actually solve the issue?
-- Does the solution make sense?
-- Will the code perform with millions of events/users/actions?
-- Are there tests and do they test the right things?
-- Are there any security flaws?
-
-Things we do not care about during review:
-- Syntax. If we're arguing about syntax, that means we should install a code formatter
-
-Once that's done, we'll also QA your pull request.
-
-## 🎉
-
-You're done! Your code will be included in the next release of PostHog.
 
 ## Licensing
 
