@@ -16,10 +16,23 @@ export const Features = ({ features, className = '' }) => {
     )
 }
 
-export const Title = ({ className = '', title, subtitle }) => {
+export const Badge = ({ title, className = '' }) => {
+    return (
+        <span
+            className={`text-[11px] py-1 px-2 rounded-sm border border-primary border-opacity-50 opacity-50 font-normal leading-none ${className}`}
+        >
+            {title}
+        </span>
+    )
+}
+
+export const Title = ({ className = '', title, subtitle, badge }) => {
     return (
         <span className={className}>
-            <h3 className={'my-0 text-xl md:text-2xl'}>{title}</h3>
+            <h3 className="my-0 text-xl md:text-2xl flex items-center">
+                <span>{title}</span>
+                {badge && <Badge className="ml-2" title={badge} />}
+            </h3>
             <p className="text-[15px] mt-1 mb-2">{subtitle}</p>
         </span>
     )
@@ -29,11 +42,7 @@ export const Plan = ({ title, subtitle, badge, children, className = '', titleCl
     return (
         <div style={style} className={`flex flex-col py-6 md:py-9 px-6 md:px-14 ${className}`}>
             <Title title={title} subtitle={subtitle} />
-            {badge && (
-                <span className="text-[11px] py-1 px-2 rounded-sm border border-primary border-opacity-50 self-start opacity-50">
-                    {badge}
-                </span>
-            )}
+            {badge && <Badge className="self-start" title={badge} />}
             {children}
         </div>
     )

@@ -1,8 +1,8 @@
-import React from 'react'
 import cntl from 'cntl'
+import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
-import Accordion from 'components/Accordion'
+import React from 'react'
 
 const linksHeadingSm = cntl`
     text-sm
@@ -73,7 +73,7 @@ export function Footer(): JSX.Element {
                         marginBottom="0"
                         className="md:text-base"
                         title="Contact sales"
-                        url="/schedule-demo#contact"
+                        url="/signup/self-host/get-in-touch#contact"
                     />
                 </ul>
             </div>
@@ -136,7 +136,10 @@ export function Footer(): JSX.Element {
                                         url="https://github.com/PostHog/posthog.com/issues"
                                     />
                                     <FooterMenuItem title="Support" url="/support" />
-                                    <FooterMenuItem title="Contact sales" url="/schedule-demo#contact" />
+                                    <FooterMenuItem
+                                        title="Contact sales"
+                                        url="/signup/self-host/get-in-touch#contact"
+                                    />
                                 </ul>
                             </div>
                             <div>
