@@ -687,12 +687,8 @@
                     "url": "/docs/user-guides/funnels"
                 },
                 {
-                    "name": "Organizations",
-                    "url": "/docs/user-guides/organizations"
-                },
-                {
-                    "name": "Projects",
-                    "url": "/docs/user-guides/projects"
+                    "name": "Organizations and projects",
+                    "url": "/docs/user-guides/organizations-and-projects"
                 },
                 {
                     "name": "Paths",
