@@ -1,12 +1,18 @@
 ---
-title: 4. Developer Workflow
+title: 4. Developer setup 
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
 ---
 
-If you haven't already, it's worth your time to read [Contributing to PostHog](https://posthog.com/docs/contributing).
+# Development Workflow
+Learn all developing for PostHog in the [Development Workflow](/docs/contribute/development-workflow) section of the Contributing to PostHog docs.  
 
+The [Contributing to PostHog](https://posthog.com/docs/contributing) docs also include important sections like our Code of Conduct.
+
+If you're a PostHog As an employee, you will also want to review the [engineering development process guide](/docs/engineering/development-process). This provides additional structure to how you approach development such as deciding what to build, how to size a task and more. 
+
+# Choose and configure your IDE
 Most developers use either [vscode](https://code.visualstudio.com/) or [pycharm](https://www.jetbrains.com/pycharm/) but 
 you are free to use whatever IDE makes the most sense to you.
 
