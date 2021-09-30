@@ -6,27 +6,32 @@ showTitle: true
 
 You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
-1. A pull request can be raised in GitHub for pages that have an **Edit this page** link on them. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation such as renaming.
-2. By running the posthog.com website locally and making changes there. This is the recommended method as it allows you to quickly preview the changes you are making as well as performing complex changes.
+1. You can create a Pull Request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
+2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a Pull Request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
+
+Below, we'll explain how to set up option two. Most PostHog employees use Mac laptops in their day-to-day work, so this guide focuses on making changes via a Mac, rather than a Windows computer.
+
+> **Should I use the terminal or GitHub desktop?**<br/>
+This guide explains how to make changes either in the terminal, or via Github Desktop. If you're unfamiliar with the terminal or GitHub, we recommend using GitHub Desktop to make changes. You may also find [GitHub's glossary of terms](https://docs.github.com/en/get-started/quickstart/github-glossary) to be a helpful reference if you're entirely new to GitHub.
 
 ## Editing posthog.com locally
 
 ### Before you begin
 
-In order to run the PostHog website locally, you require the following to be installed:
+In order to run the PostHog website locally, you need to install the following, via the links below:
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Node.js](https://nodejs.org/en/download/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
-Optionally, if you are unfamiliar with using Git from the command line, you should also have the following installed:
+Optionally, if you are unfamiliar with using Git from the command line, you should also install the following:
 
 - [GitHub Desktop](https://desktop.github.com/).
 - [Visual Studio Code](https://code.visualstudio.com/download)
 
-And make use of the following resources:
+You may also want to familiarise yourself with these resources:
 
-- [GitHub Desktop docs](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop)]
+- [GitHub Desktop docs](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop)
 - [Visual Studio docs](https://code.visualstudio.com/docs)
 
 ### Cloning the posthog.com repository
@@ -35,7 +40,9 @@ The [codebase for posthog.com](https://github.com/PostHog/posthog.com) is on Git
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
-You can clone the codebase from the terminal via:
+You can clone the codebase from the terminal. You can open the terminal by pressing `Command + Space` to open Spotlight and searching for `terminal`. 
+
+Once the terminal is open, run the following command:
 
 ```bash
 git clone git@github.com:PostHog/posthog.com.git
@@ -49,9 +56,9 @@ You can also clone the repository with [GitHub desktop](https://desktop.github.c
 
 ![Open in GitHub Desktop](../../images/docs/contribute/open-in-github-desktop.png)
 
-You will then be prompted by the browser to confirm if you want to open an the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
+You will then be prompted by the browser to confirm if you want to open the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
 
-Once GitHub Desktop has opened you will be prompted to confirm the responsitory that is being cloned and the location on disk where you wish the code to be stored.
+Once GitHub Desktop has opened you will be prompted to confirm the respository that is being cloned and the location on disk where you wish the code to be stored.
 
 ![GitHub Desktop clone to dialog](../../images/docs/contribute/github-desktop-clone-repo.png)
 
@@ -59,17 +66,17 @@ Click **Clone** to clone the posthog.com repostory to your local disk.
 
 ![GitHub Desktop cloning to disk](../../images/docs/contribute/github-desktop-cloning-to-disk.png)
 
-Once clone the GitHub Desktop interface will change to the following:
+Once the clone has completed the GitHub Desktop interface will change to the following:
 
 ![GitHub Desktop cloned successfully](../../images/docs/contribute/github-desktop-cloned.png)
 
-To view the code for the website click the **Open in Visual Studio Code** button. Dialogs may appear around permissions and trust as you open Visual Studio Code.
+To view the code for the website click **Open in Visual Studio Code**. Dialogs may appear around permissions and trust as you open Visual Studio Code.
 
 Once you have Visual Studio Code open, select the **Terminal** menu option. Within the dropdown select **New Terminal**. This will open a new terminal window within Visual Studio Code:
 
 ![Visual Studio Code terminal](../../images/docs/contribute/visual-studio-code-terminal.png)
 
-Don't worry! We only need to run a few commands in the terminal.
+Don't worry! We only need to run a few more commands in the terminal.
 
 </HiddenSection>
 
@@ -81,7 +88,7 @@ Type the following into the terminal and press return:
 yarn
 ```
 
-This runs the Yarn tool that was installed. Run standlone like this, it installs the dependency packages used by posthog.com.
+This runs the Yarn tool that you installed previously. Run standlone like this, it installs the dependency packages used by posthog.com. This may take a few minutes.
 
 Once this command has finished executing, run the following:
 
@@ -89,9 +96,11 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the website. It takes a bit of time for some file processing and compilation to take place. Once that's completed you will be able to access the a locally running version of posthog.com via `http://localhost:8080`.
+The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8080` in your internet browser.
 
-> If you have something else running on port `8080` you'll be asked if you are okay in running on port `8081` in which case the website will be accessible on `http://localhost:8081`.
+Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8080` in your internet browser.
+
+> If you have something else running on port `8080` you'll be asked if you are okay in running on port `8081`, in which case the website will be accessible on `http://localhost:8081`.
 
 ### Finding the content to edit
 
@@ -143,7 +152,7 @@ Once you have a new branch, you can make changes.
 
 #### Frontmatter
 
-At the top of the file, it is necessary to have the following for the page to appear:
+At the top of most PostHog.com docs and handbook pages, it is necessary to have the following for the page to appear:
 
 ```markdown
 ---
@@ -159,19 +168,23 @@ showTitle: true
 - `sidebarTitle`: the title shown in the sidebar. If this value isn't provided the `title` property is used.
 - `showTitle` should always be set to `true`.
 
+Some pages, such as blogposts, may have additional fields. You can often use Visual Studio Code to refer to existing pages for examples, but if in doubt you can always ask for help our Slack group. 
+
 #### Images/GIFs
 
 For our Markdown, we use [gatsby-remark-copy-linked-files](https://www.gatsbyjs.org/packages/gatsby-remark-copy-linked-files/).
 
 This copies local files linked to/from Markdown files to the root directory.
 
-Place images in `contents/images/`.
+If you need to upload images, you can place them in `contents/images/`. We recommend creating or using existing subfolders to keep images organized.
 
 To include an image in a markdown file, you can use nice local references, like so:
 
 ```markdown
 ![Twin Peaks](../images/02/IMG_4294-scaled.jpg)
 ```
+
+In this case, `Twin Peaks` is the alt-text applied to the image.
 
 Note that it may be necessary to change the folder depending on your file structure. For example, if you needed to go up two directories, this *could* be:
 
@@ -191,7 +204,7 @@ The sidebar is generated from `/src/sidebars/sidebars.json`.
 
 ## Committing changes
 
-Create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and different commit for updates to the documenatation.
+It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps keep things neat and makes it easier to roll-back changes if needed.
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
@@ -223,7 +236,7 @@ git commit -m 'Adding details on how to commit'
 
 <HiddenSection headingType='h3' title='Via the GitHub Desktop'>
 
-The files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
+Files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
 
 ![Viewing changes in GitHub Desktop](../../images/docs/contribute/viewing-changes-in-github-desktop.png)
 
@@ -233,7 +246,7 @@ Select the files that you want to be part of the commit by ensuring the checkbox
 
 </HiddenSection>
 
-## Push the changes to GitHub
+## Push changes to GitHub
 
 In order to request that the changes you have made are merged into the main website branch you must first push them to GitHub.
 
@@ -262,13 +275,13 @@ To github.com:PostHog/posthog.com.git
  * [new branch]        posthog-website-contribution -> posthog-website-contribution
 ```
 
-This output instructions you that you can create a pull request by visiting a link. In the case above, the link is `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution`.
+This output tells you that you can create a pull request by visiting a link. In the case above, the link is `https://github.com/PostHog/posthog.com/pull/new/posthog-website-contribution`. Follow the link to complete your pull request.
 
 </HiddenSection>
 
 <HiddenSection headingType='h3' title='Via GitHub Desktop'>
 
-With all the changes you want to push to GitHub committed, click the **Push origin** button.
+Once you have committed the changes you want to push to GitHub, click the **Push origin** button.
 
 ![Push to origin from GitHub Desktop](../../images/docs/contribute/push-to-origin-github-desktop.gif)
 
@@ -292,7 +305,6 @@ remote:
 To github.com:PostHog/posthog.com.git
  * [new branch]        posthog-website-contribution -> posthog-website-contribution
 ```
-
 </HiddenSection>
 
 <HiddenSection headingType='h3' title='Via GitHub Desktop'>
