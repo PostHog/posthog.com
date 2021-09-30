@@ -4,11 +4,14 @@ sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
-## Welcome
 
-We love contributions, big or small. Our [workflow guidelines](/docs/contribute/development-workflow) are intended to get your changes deployed quickly, and we will happily [recognize your effort](/docs/contribute/recognizing-contributions).
+👋 Welcome! We love contributions, big or small. 
 
-This overview covers important topics for getting started. If you'd like to jump right into code, visit [Developing locally](/docs/contribute/developing-locally).
+This overview covers important topics for getting started as a contributor. However, if you'd like to jump right in:
+
+- Review our [Development workflow](/docs/contribute/development-workflow) guidelines
+- Setup your [Local development](/docs/contribute/developing-locally) environment
+- Browse ideas for [Deciding what to work on](#deciding-what-to-work-on)
 
 ## Code of conduct
 
