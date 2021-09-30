@@ -19,3 +19,9 @@ The general flow for contributing to PostHog is:
 2. Create a branch off the `master` or `main` trunk for the changes you're planning.
 3. Make commits in your branch.
 4. When you're ready, create a new pull request.
+
+#### Developing against a fork
+
+If you prefer, you may contribute using the traditional fork-based PR workflow. That is, instead of cloning the project directly, first create a personal fork of a repo. 
+
+If you choose this method, you should still branch off the trunk and when ready create a PR as described above.   
