@@ -38,6 +38,7 @@ certManager:
 
 Create a record from your desired hostname to the external IP.
 
+
 ## Troubleshooting
 ### I cannot connect to my PostHog instance after creation
 
@@ -58,3 +59,62 @@ As a troubleshooting tool, you can allow HTTP access by setting `ingress.gcp.for
 
 ## Uninstalling the chart
 <UninstallingSnippet />
+
+## Clickhouse Configuration
+
+By default clickhouse is provisioned with standard gcp persistent disk. If you want to specify your own persistent volume claim or switch to a different type of disk
+you can specify the volume claim within `values.yaml`.
+
+### To manually provision a disk
+
+Using the gcloud cli tool for provisioning a disk:
+
+```
+gcloud compute disks create pvc-clickhouse --type=pd-ssd --size=2048GB --zone=us-central1-c
+```
+
+### Create the claim
+
+In order to provide the disk to the clickhouse deployment you must first create a persistent volume and claim within the posthog namespace.
+
+```
+# This creates a volume claim using the same name specified within the clickhouse values file
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: clickhouse-volume
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  capacity:
+    storage: 2048Gi
+  accessModes:
+    - ReadWriteOnce
+  gcePersistentDisk:
+    pdName: pvc-clickhouse
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: clickhouse-pvc
+spec:
+  # It's necessary to specify "" as the storageClassName
+  # so that the default storage class won't be used, see
+  # https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class-1
+  storageClassName: ""
+  volumeName: clickhouse-volume
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2048Gi
+```
+
+### Provide the claim to the helm chart
+
+```
+clickhouse:
+  # -- Optional: Used to manually specify a persistent volume claim. When specified the cloud specific storage class will not be provisioned
+  persistentVolumeClaim: "clickhouse-pvc"
+```
