@@ -276,6 +276,10 @@
                 {
                     "name": "Website MDX setup",
                     "url": "/handbook/engineering/mdx"
+                },
+                {
+                    "name": "ClickHouse query performance optimization",
+                    "url": "/handbook/engineering/query-performance-optimization"
                 }
             ]
         },
