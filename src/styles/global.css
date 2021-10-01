@@ -420,3 +420,19 @@ ul {
 .customer-content h3 {
     @apply text-2xl;
 }
+
+.group:hover .bounce {
+    animation: bounce 1s;
+}
+
+@keyframes bounce {
+    20% {
+        transform: translateX(20%);
+    }
+    33% {
+        transform: translateX(0%);
+    }
+    34% {
+        transform: translateX(10%);
+    }
+}

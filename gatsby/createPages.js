@@ -223,7 +223,7 @@ module.exports = exports.createPages = async ({ actions, graphql }) => {
     result.data.customers.nodes.forEach((node) => {
         const { slug } = node.fields
         createPage({
-            path: replacePath(slug),
+            path: slug,
             component: CustomerTemplate,
             context: {
                 id: node.id,

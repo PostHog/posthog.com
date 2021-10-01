@@ -71,6 +71,9 @@ const base = {
         text-primary
         font-bold
     `,
+    image: cntl`
+        rounded-full
+    `,
 }
 
 const classes = (type, size = 'lg', className = '') => cntl`
@@ -79,9 +82,10 @@ const classes = (type, size = 'lg', className = '') => cntl`
     ${className}
 `
 
-export const Quote = ({ quote, name, title, image, className = '', imageSource, size = 'lg' }) => {
+export const Quote = ({ quote, name, title, image, className = '', imageSource, size = 'lg', logo }) => {
     return (
         <section className={classes('section', size, className)}>
+            {logo && <img src={logo} className="mb-9" />}
             <blockquote className={classes('quote', size)}>
                 {quote}
                 <footer className={classes('footer', size)}>

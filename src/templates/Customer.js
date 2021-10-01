@@ -58,7 +58,7 @@ export default function Customer({ data }) {
             </div>
             <div className="max-w-screen-lg mx-auto px-4 flex items-start mt-20">
                 <aside className="mr-9 sticky top-20 pr-9 border-r border-dashed border-gray-accent-light">
-                    {logo && <img className="w-full" src={logo.publicURL} />}
+                    {logo && <img className="w-full max-w-[150px]" src={logo.publicURL} />}
                     <ul className="list-none flex-col flex space-y-8 p-0 mt-10 min-w-[250px]">
                         <Tags title="Industry" tags={industries} />
                         <Tags title="Users" tags={users} />
