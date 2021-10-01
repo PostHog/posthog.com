@@ -34,7 +34,9 @@ Body:
 }
 ```
 
-### Example request & response
+### Example request & response: /decide v2
+
+`/decide` version 2 introduces support for [multivariate feature flags](/docs/user-guides/feature-flags#multivariate-feature-flags-alpha) and has a slightly different schema for the response. `posthog-js` version 1.13 and up will use version 2 of the decide endpoint by default.
 
 #### Request
 
@@ -42,7 +44,41 @@ Body:
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "1234"
-}' https://app.posthog.com/decide/
+}' https://app.posthog.com/decide?v=2
+```
+
+#### Response
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": {
+    "my-awesome-flag": true,
+    "my-awesome-flag-2": true,
+    "my-multivariate-flag": "some-string-value"
+  }
+}
+```
+
+### Example request & response: /decide v1 (legacy)
+
+`/decide` version 1 is still the default if the query parameter `v` is not specified, although the latest `posthog-js` library no longer uses version 1 of the decide endpoint, and we recommend using version 2 as described above.
+
+#### Request
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "1234"
+}' https://app.posthog.com/decide?v=1
 ```
 
 #### Response
@@ -60,12 +96,15 @@ curl -v -L --header "Content-Type: application/json" -d '  {
   ],
   "featureFlags": [
     "my-awesome-flag-1",
-    "my-awesome-flag-2"
+    "my-awesome-flag-2",
+    "my-multivariate-flag"
   ]
 }
 ```
 
-From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `"featureFlags"` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
+From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `featureFlags` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
+
+Note that if a multivariate feature flag is enabled for a given user, it will still show up in `featureFlags` under decide version 1, but its value will only be accessible when using decide version 2.
 
 ## Sending events
 
