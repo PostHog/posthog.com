@@ -49,6 +49,8 @@ const sizes = {
 const base = {
     quote: cntl`
         text-xl
+        text-primary
+        dark:text-primary-dark
     `,
     name: cntl`
         not-italic

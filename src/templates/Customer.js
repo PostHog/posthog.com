@@ -1,5 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { BorderWrapper } from 'components/BorderWrapper'
+import Breadcrumbs from 'components/Breadcrumbs'
 import { FloatedImage } from 'components/FloatedImage'
 import { ImageBlock } from 'components/ImageBlock'
 import Layout from 'components/Layout'
@@ -41,8 +42,22 @@ export default function Customer({ data }) {
     } = data
     return (
         <Layout>
+            <div className="px-4 sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                <Breadcrumbs
+                    darkModeToggle
+                    crumbs={[
+                        {
+                            title: 'Customers',
+                            url: '/customers',
+                        },
+                        {
+                            title: customer,
+                        },
+                    ]}
+                />
+            </div>
             <div className="max-w-screen-lg mx-auto px-4 flex items-start mt-20">
-                <aside className="mr-9 sticky top-5 pr-9 border-r border-dashed border-gray-accent-light">
+                <aside className="mr-9 sticky top-20 pr-9 border-r border-dashed border-gray-accent-light">
                     {logo && <img className="w-full" src={logo.publicURL} />}
                     <ul className="list-none flex-col flex space-y-8 p-0 mt-10 min-w-[250px]">
                         <Tags title="Industry" tags={industries} />
