@@ -9,7 +9,7 @@ You can contribute to the PostHog documentation, handbook, and blog in two ways:
 1. You can create a Pull Request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
 2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a Pull Request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
 
-Below, we'll explain how to set up option two. Most PostHog employees use Mac laptops in their day-to-day work, so this guide focuses on making changes via a Mac, rather than a Windows computer.
+Below, we'll explain how to set up option two.
 
 > **Should I use the terminal or GitHub desktop?**<br/>
 This guide explains how to make changes either in the terminal, or via Github Desktop. If you're unfamiliar with the terminal or GitHub, we recommend using GitHub Desktop to make changes. You may also find [GitHub's glossary of terms](https://docs.github.com/en/get-started/quickstart/github-glossary) to be a helpful reference if you're entirely new to GitHub.
@@ -18,18 +18,18 @@ This guide explains how to make changes either in the terminal, or via Github De
 
 ### Before you begin
 
-In order to run the PostHog website locally, you need to install the following, via the links below:
+In order to run the PostHog website locally, you need the following installed:
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Node.js](https://nodejs.org/en/download/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
-Optionally, if you are unfamiliar with using Git from the command line, you should also install the following:
+Optionally, if you are unfamiliar with using Git from the command line, you will need the following installed:
 
 - [GitHub Desktop](https://desktop.github.com/).
 - [Visual Studio Code](https://code.visualstudio.com/download)
 
-You may also want to familiarise yourself with these resources:
+You may also want to familiarize yourself with these resources:
 
 - [GitHub Desktop docs](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop)
 - [Visual Studio docs](https://code.visualstudio.com/docs)
@@ -40,9 +40,7 @@ The [codebase for posthog.com](https://github.com/PostHog/posthog.com) is on Git
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
-You can clone the codebase from the terminal. You can open the terminal by pressing `Command + Space` to open Spotlight and searching for `terminal`. 
-
-Once the terminal is open, run the following command:
+You can clone the codebase from the terminal using the following command:
 
 ```bash
 git clone git@github.com:PostHog/posthog.com.git
@@ -76,7 +74,7 @@ Once you have Visual Studio Code open, select the **Terminal** menu option. With
 
 ![Visual Studio Code terminal](../../images/docs/contribute/visual-studio-code-terminal.png)
 
-Don't worry! We only need to run a few more commands in the terminal.
+Don't worry! We only need to run a few commands in the terminal.
 
 </HiddenSection>
 
@@ -88,7 +86,7 @@ Type the following into the terminal and press return:
 yarn
 ```
 
-This runs the Yarn tool that you installed previously. Run standlone like this, it installs the dependency packages used by posthog.com. This may take a few minutes.
+This runs the Yarn tool. Run standlone like this, it installs the dependency packages used by posthog.com. This may take a few minutes.
 
 Once this command has finished executing, run the following:
 
@@ -96,9 +94,9 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8080` in your internet browser.
+The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8080` in your web browser.
 
-Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8080` in your internet browser.
+Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8080` in your web browser.
 
 > If you have something else running on port `8080` you'll be asked if you are okay in running on port `8081`, in which case the website will be accessible on `http://localhost:8081`.
 
@@ -152,7 +150,7 @@ Once you have a new branch, you can make changes.
 
 #### Frontmatter
 
-At the top of most PostHog.com docs and handbook pages, it is necessary to have the following for the page to appear:
+At the top of most posthog.com docs and handbook pages, it is necessary to have the following for the page to appear:
 
 ```markdown
 ---
@@ -168,7 +166,7 @@ showTitle: true
 - `sidebarTitle`: the title shown in the sidebar. If this value isn't provided the `title` property is used.
 - `showTitle` should always be set to `true`.
 
-Some pages, such as blogposts, may have additional fields. You can often use Visual Studio Code to refer to existing pages for examples, but if in doubt you can always ask for help our Slack group. 
+Some pages, such as blogposts, may have additional fields. You can often refer to the source of existing pages for examples, but if in doubt you can always ask for help in the [PostHog Community Slack](/slack). 
 
 #### Images/GIFs
 
@@ -204,7 +202,7 @@ The sidebar is generated from `/src/sidebars/sidebars.json`.
 
 ## Committing changes
 
-It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps keep things neat and makes it easier to roll-back changes if needed.
+It's best to create commits that are focused on one specific area. For example, create one commit for textual changes and another for functional ones. Another example is creating a commit for changes to a section of the handbook and a different commit for updates to the documenatation. This helps the Pull Request review process and also means specific commits can be [cherry picked](https://git-scm.com/docs/git-cherry-pick).
 
 <HiddenSection headingType='h3' title='Via the terminal'>
 
@@ -313,7 +311,7 @@ With the branch published, click the **Create Pull Request** button.
 
 ![Pull Request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
 
-This will open up a page on github.com in your default browser.
+This will open up a page on github.com in your default web browser.
 
 </HiddenSection>
 
