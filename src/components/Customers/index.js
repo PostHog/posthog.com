@@ -11,7 +11,7 @@ const Card = ({ children, url, className = '' }) => {
     return (
         <Link
             to={url}
-            className={`group bg-white rounded-[10px] hover:shadow-xl hover:translate-y-[-2px] !transition-all ${className}`}
+            className={`group bg-white rounded-[10px] overflow-hidden hover:shadow-xl hover:translate-y-[-2px] ${className}`}
         >
             {children}
         </Link>
@@ -80,7 +80,7 @@ export default function Customers() {
                 </div>
             </section>
             <section className="max-w-[1140px] mx-auto -mt-6 md:-mt-12 px-4">
-                <ul className="list-none p-0 m-0 grid md:grid-cols-2 gap-x-10">
+                <ul className="list-none p-0 m-0 grid md:grid-cols-2 gap-y-5 md:gap-y-10 gap-x-10">
                     {customers.map((customer, index) => {
                         const {
                             slug,
@@ -88,18 +88,18 @@ export default function Customers() {
                         } = customer
                         return (
                             <li key={index}>
-                                <Card className="inline-block px-9 py-9 relative overflow-hidden" url={slug}>
+                                <Card className="inline-block relative h-full" url={slug}>
                                     <span className="absolute inset-0 w-full h-full z-0 before:absolute before:inset-0 before:w-full before:h-full before:bg-white before:bg-opacity-80">
                                         <img src={featuredImage?.publicURL} className="w-full h-full object-cover" />
                                     </span>
-                                    <span className="relative">
+                                    <div className="relative px-9 py-9 flex flex-col h-full items-start">
                                         <img src={logo?.publicURL} />
                                         <h3 className="text-2xl mb-24 mt-4">{title}</h3>
-                                        <span className="text-yellow hover:text-yellow font-bold flex space-x-1 items-center text-[17px]">
+                                        <div className="text-yellow hover:text-yellow font-bold flex space-x-1 items-center text-[17px] mt-auto">
                                             <span>Read case study</span>
                                             <RightArrow className="w-5 h-5 bounce" />
-                                        </span>
-                                    </span>
+                                        </div>
+                                    </div>
                                 </Card>
                             </li>
                         )
