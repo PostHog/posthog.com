@@ -10,6 +10,7 @@ import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
+import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -32,12 +33,14 @@ import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
 import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
+import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { GetStartedModal } from './components/GetStartedModal'
 import { GithubIcon } from './components/GithubIcon'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { ImageBlock } from './components/ImageBlock'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryStats } from './components/LibraryStats'
 import { Link } from './components/Link'
@@ -93,6 +96,7 @@ export const shortcodes = {
     BasicHedgehogImage,
     Blog,
     BlogFooter,
+    BorderWrapper,
     CallToAction,
     Benefits,
     CareersHero,
@@ -115,12 +119,14 @@ export const shortcodes = {
     FeaturesComparisonTable,
     FeaturesNav,
     FeaturesSelfHost,
+    FloatedImage,
     Footer,
     GetStartedModal,
     GithubIcon,
     HiddenSection,
     Home,
     HostingOption,
+    ImageBlock,
     LandingPageCallToAction,
     LibraryStats,
     Link,

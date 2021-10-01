@@ -411,3 +411,11 @@ ul {
         @apply pl-12 pt-12 border-b-0;
     }
 }
+
+.customer-content h1,
+.customer-content h2 {
+    @apply text-3xl;
+}
+.customer-content h3 {
+    @apply text-2xl;
+}

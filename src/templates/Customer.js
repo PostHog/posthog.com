@@ -1,9 +1,19 @@
 import { MDXProvider } from '@mdx-js/react'
+import { BorderWrapper } from 'components/BorderWrapper'
+import { FloatedImage } from 'components/FloatedImage'
+import { ImageBlock } from 'components/ImageBlock'
 import Layout from 'components/Layout'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
+
+const components = {
+    ...shortcodes,
+    BorderWrapper,
+    ImageBlock,
+    FloatedImage,
+}
 
 const Tags = ({ title, tags }) => {
     return (
@@ -31,8 +41,8 @@ export default function Customer({ data }) {
     } = data
     return (
         <Layout>
-            <div className="max-w-screen-2xl mx-auto px-4 flex items-start">
-                <aside className="mr-9 sticky top-0">
+            <div className="max-w-screen-lg mx-auto px-4 flex items-start mt-20">
+                <aside className="mr-9 sticky top-5 pr-9 border-r border-dashed border-gray-accent-light">
                     {logo && <img className="w-full" src={logo.publicURL} />}
                     <ul className="list-none flex-col flex space-y-8 p-0 mt-10 min-w-[250px]">
                         <Tags title="Industry" tags={industries} />
@@ -41,8 +51,8 @@ export default function Customer({ data }) {
                     </ul>
                 </aside>
                 <section className="customer-content">
-                    <h1>{title}</h1>
-                    <MDXProvider components={shortcodes}>
+                    <h1 className="text-3xl">{title}</h1>
+                    <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                 </section>
