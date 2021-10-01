@@ -1,13 +1,13 @@
-import React from 'react'
-import Link from 'components/Link'
-import { submenu } from '../classes'
-import Team from '../components/Team'
-import Founders from '../components/Founders'
 import cntl from 'cntl'
+import { Chat, Lifeguard, RightArrow } from 'components/Icons/Icons'
+import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { YouTube, LinkedIn, Twitter, Slack } from './Icons'
-import { Chat, Lifeguard, RightArrow } from 'components/Icons/Icons'
+import React from 'react'
+import { submenu } from '../classes'
+import Founders from '../components/Founders'
+import Team from '../components/Team'
+import { LinkedIn, Slack, Twitter, YouTube } from './Icons'
 
 const footerLink = cntl`
     text-primary

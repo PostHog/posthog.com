@@ -731,6 +731,15 @@
     from = "/handbook/people/team-structure/infrastructure"
     to = "/handbook/people/team-structure/platform"
 
+# Added: 2021-09-09
+[[redirects]]
+    from = "/docs/user-guides/projects"
+    to = "/docs/user-guides/organizations-and-projects"
+
+# Added: 2021-09-09
+[[redirects]]
+    from = "/docs/user-guides/organizations"
+    to = "/docs/user-guides/organizations-and-projects"
 
 # Added: 2021-09-08; Updated: 2021-09-27
 [[redirects]]

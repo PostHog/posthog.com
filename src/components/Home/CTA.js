@@ -21,7 +21,7 @@ export default function CTA() {
                         type="custom"
                         width="56"
                         className="bg-blue text-white border-2 rounded-full border-white"
-                        to="/schedule-demo"
+                        to="/book-a-demo"
                     >
                         Schedule a demo
                     </CallToAction>

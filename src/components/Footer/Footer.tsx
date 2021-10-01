@@ -1,8 +1,8 @@
-import React from 'react'
 import cntl from 'cntl'
+import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
-import Accordion from 'components/Accordion'
+import React from 'react'
 
 const linksHeadingSm = cntl`
     text-sm
