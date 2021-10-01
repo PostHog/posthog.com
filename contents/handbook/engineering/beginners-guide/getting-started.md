@@ -14,6 +14,8 @@ hideAnchor: true
    and have it be approved. If you work for PostHog someone (Tim or small team lead) will suggest the 
    first assignment.
 
+If you work for PostHog, check this [Git Setup advice](/handbook/engineering/notes/git-setup)
+
 ## Suggested learning roadmap
 
 1. [Setup your local dev environment](/docs/contribute/developing-locally)
