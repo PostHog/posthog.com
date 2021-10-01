@@ -23,5 +23,5 @@ hideAnchor: true
 5. Take a brief overview of [Python](https://learnxinyminutes.com/docs/python/).
 6. Complete [Django Tutorial 1-5 of 7 parts, skip 6+](https://docs.djangoproject.com/en/3.1/intro/tutorial01/). If you're interested in learning more about Django, pick a copy of [Django book](https://www.feldroy.com/products/two-scoops-of-django-3-x). The company will happily pay for this since they [believe in training us to do our jobs with excellent](https://posthog.com/handbook/people/training). Great place to work, right?
    
-**[Next: Developer setup](developer-workflow)**
+**[Next: Developer setup](developer-setup)**
 

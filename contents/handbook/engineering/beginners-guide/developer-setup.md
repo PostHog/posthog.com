@@ -6,7 +6,7 @@ hideAnchor: true
 ---
 
 # Development Workflow
-Learn all developing for PostHog in the [Development Workflow](/docs/contribute/development-workflow) section of the Contributing to PostHog docs.  
+Learn all about developing for PostHog in the [Development Workflow](/docs/contribute/development-workflow) section of the Contributing to PostHog docs.  
 
 The [Contributing to PostHog](https://posthog.com/docs/contributing) docs also include important sections like our Code of Conduct.
 
