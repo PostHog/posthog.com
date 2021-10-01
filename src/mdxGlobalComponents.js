@@ -11,6 +11,7 @@ import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { Blog } from './components/Blog'
 import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
+import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -22,12 +23,15 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
 import { CompensationCalculator } from './components/CompensationCalculator'
+import { Contact } from './components/Contact'
+import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
+import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { DocsSearch } from './components/DocsSearch'
 import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
@@ -47,6 +51,7 @@ import { Link } from './components/Link'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
+import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
@@ -97,6 +102,7 @@ export const shortcodes = {
     Blog,
     BlogFooter,
     BorderWrapper,
+    Breadcrumbs,
     CallToAction,
     Benefits,
     CareersHero,
@@ -108,12 +114,15 @@ export const shortcodes = {
     Chip,
     CodeBlock,
     CompensationCalculator,
+    Contact,
+    ContactForm,
     Container,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
     DarkModeToggle,
     DemoScheduler,
+    DeployOption,
     DocsPageSurvey,
     DocsSearch,
     FeaturesComparisonTable,
@@ -133,6 +142,7 @@ export const shortcodes = {
     Logo,
     MainNav,
     MdxAnchorHeaders,
+    Modal,
     NewsletterForm,
     NotFoundPage,
     OtherFeaturesBlock,

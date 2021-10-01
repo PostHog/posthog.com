@@ -191,6 +191,7 @@ body {
     font-smooth: 1.5px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: auto;
+    height: auto !important;
 }
 
 body.light {

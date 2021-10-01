@@ -1,8 +1,8 @@
-import React from 'react'
 import cntl from 'cntl'
+import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
-import Accordion from 'components/Accordion'
+import React from 'react'
 
 const linksHeadingSm = cntl`
     text-sm
@@ -73,7 +73,7 @@ export function Footer(): JSX.Element {
                         marginBottom="0"
                         className="md:text-base"
                         title="Contact sales"
-                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                        url="/signup/self-host/get-in-touch#contact"
                     />
                 </ul>
             </div>
@@ -138,7 +138,7 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Support" url="/support" />
                                     <FooterMenuItem
                                         title="Contact sales"
-                                        url="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u"
+                                        url="/signup/self-host/get-in-touch#contact"
                                     />
                                 </ul>
                             </div>

@@ -242,16 +242,12 @@
                                         "url": "/docs/user-guides/dashboards"
                                     },
                                     {
-                                        "title": "Organizations",
-                                        "url": "/docs/user-guides/organizations"
+                                        "title": "Organizations and projects",
+                                        "url": "/docs/user-guides/organizations-and-projects"
                                     },
                                     {
                                         "title": "Plugins",
                                         "url": "/docs/user-guides/plugins"
-                                    },
-                                    {
-                                        "title": "Projects",
-                                        "url": "/docs/user-guides/projects"
                                     },
                                     {
                                         "title": "SSO",
@@ -344,7 +340,7 @@
             "title": "Get started",
             "classes": "lg:ml-6",
             "cta": true,
-            "url": "/docs/self-host",
+            "url": "/signup",
             "hideBorder": true
         },
         {

@@ -3,6 +3,7 @@ import Link from '../../Link'
 import { RightArrow } from '../../Icons/Icons'
 import SubmenuItemFooter from '../SubmenuItemFooter'
 import { submenu } from '../classes'
+import DeployOption from 'components/DeployOption'
 
 export default function SubmenuItem({ item }) {
     const { sections, title, link, footerLinks } = item
@@ -53,18 +54,7 @@ export default function SubmenuItem({ item }) {
 
                                     return (
                                         <li key={index}>
-                                            <Link
-                                                disablePrefetch
-                                                className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent-light dark:hover:bg-opacity-10 rounded flex items-center space-x-2 text-[14px]"
-                                                to={url}
-                                            >
-                                                {icon && (
-                                                    <svg className="w-5 h-5 text-black dark:text-white">
-                                                        <use xlinkHref={`#${icon}`}></use>
-                                                    </svg>
-                                                )}
-                                                <span>{title}</span>
-                                            </Link>
+                                            <DeployOption url={url} title={title} icon={icon} disablePrefetch />
                                         </li>
                                     )
                                 })}
