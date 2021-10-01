@@ -2,7 +2,9 @@ As a troubleshooting tool, you can allow HTTP access by setting these values in 
 ```yaml
 ingress:
   nginx:
+    enabled: true
     redirectToTLS: false
+    allowIPAccess: true
   letsencrypt: false
 web:
   secureCookies: false
