@@ -9,20 +9,20 @@ showTitle: true
 Posthog uses <a href="https://cloud.google.com/architecture/devops/devops-tech-trunk-based-development" target="_blank">
 trunk-based development</a> using Git.
 
-Our model requires collaboration on a single branch named either `master` or `main`. We aim for short-lived feature branches to allow more frequent code-review and build checking via continuous integration.
+Our model requires collaboration on a single branch named either `master` or `main`. We aim for short-lived feature branches.
 
 ## Contribution flow
 
 The general flow for contributing to PostHog is:
 
-1. Clone the repository you want to work on. 
+1. Clone the repository you want to work on. (See [Clone PostHog](/docs/contribute/developing-locally#clone-posthog) for an example command) 
 2. Create a branch off the `master` or `main` trunk for the changes you're planning.
 3. Make commits in your branch.
 4. When you're ready, create a new pull request.
 
 #### Developing against a fork
 
-If you prefer, you may contribute using the traditional fork-based PR workflow. That is, instead of cloning the project directly, first create a personal fork of a repo. 
+If you prefer, you may contribute using the traditional fork-based PR workflow. That is, instead of cloning the project directly, you first create a personal fork of a repo. 
 
 If you choose this method, you should still branch off the trunk and when ready create a PR as described above. 
 
@@ -31,15 +31,15 @@ If you choose this method, you should still branch off the trunk and when ready 
 We are relatively flexible with branch names, but do have a few specific requests:
 
 - If your pull request is related to an issue, please mention that issue when naming your branch: `git checkout -b 263-logout-button`.
-- Do not use `release-*` patterns in your branches unless pushing a release. These branches have get special handling by our CI for releases.
+- Do not use `release-*` patterns in your branches unless pushing a release. These branches get special handling by our CI for releases.
 
 ## Commit message style
 
-We recommend using imperative style commit messages. 
+We do not require a particular commit message format, but request the initial commit message of your Pull Request mention the issue number: `git commit -m "Closes #263 adds logout button"`. This will ensure the corresponding ticket will be closed automatically once your pull request is merged.
+
+Otherwise, we generally recommend imperative-style commit messages. 
 
 In this style, commit message subject lines complete the following sentence: "If applied, this commit will _**your commit message subject here**_.
-
-The exception to this is in your initial commit message, where you should mention the issue number: `git commit -m "Closes #263 adds logout button"`. This will ensure the corresponding ticket will be closed automatically once your pull request is merged.
 
 ## Review process
 
