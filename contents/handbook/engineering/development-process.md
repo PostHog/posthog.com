@@ -19,7 +19,26 @@ Deciding what we work on happens in our sprint planning session, where the high 
 
 As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
 
-## 2. Sizing a task (or 1-day PRs)
+## 2. Sizing a task (or reducing WIP)
+
+As explained in [The Phoenix Project](https://www.amazon.com/Phoenix-Project-DevOps-Helping-Business/dp/0988262592) book, software development is a lot like work in a factory, where items move between different workstations until ready. A productive factory is one where every workstation finishes its task right before getting the next one, and no station is ever idle.
+
+Github issues and PRs moving between people is a lot like widgets moving between stations in a factory. You never want any developer to be idle, nor to have a pile of PRs waiting for review. 
+
+
+
+
+Normally every next station  If a workstation receives more tasks than it can handle,    
+
+
+In a badly run factory, tasks may pile up in front of one workstation, while others wait idly by. These unfinished tasks are known as Work In Progress, or WIP for short.
+
+In a badly run software company, WIP (aka pull requests) can pile up in front of a developer or a reviewer, slowing down the entire pipeline. This means you should prioritise reviewing PRs over building new features, and that your PRs should be broken down into easily reviewable chunks.
+
+### What makes for a good and easily reviewable PR?
+
+As a software engineer in PostHog, you have already written and reviewed multiple PRs. This means you should intuitively know what makes for a great PR. 
+
 
 Your PRs should be sized to be doable in one day, including code review and QA. If it's not, you need to break it down into smaller chunks until it fits into a day. Tasks of this size are easy to test, easy to deploy, easy to review and less likely to cause merge conflicts. 
 
