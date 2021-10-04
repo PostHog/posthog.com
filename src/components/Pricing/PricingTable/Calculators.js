@@ -1,8 +1,8 @@
 import React from 'react'
 import { Plan } from './Plan'
 import { useValues } from 'kea'
-import { PricingSlider } from '../../PricingSlider'
-import { pricingSliderLogic } from '../../PricingSlider/pricingSliderLogic'
+import { PricingSlider } from '../PricingSlider'
+import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 
 export const CloudCalculator = () => {
     const { finalCost, eventNumber } = useValues(pricingSliderLogic)
