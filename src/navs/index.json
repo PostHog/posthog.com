@@ -9,6 +9,10 @@
             "url": "/pricing"
         },
         {
+            "title": "Customers",
+            "url": "/customers"
+        },
+        {
             "title": "Docs",
             "url": "/docs",
             "sub": {
@@ -327,7 +331,7 @@
                     },
                     {
                         "title": "Careers",
-                        "description": "<p>We're currently hiring for <strong>3 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for",
+                        "description": "<p>We're currently hiring for <strong>4 roles</strong>.</p><p>Being open source, we're incredibly asynchronous and unlike any company you've ever worked for",
                         "link": {
                             "title": "Visit Careers page",
                             "url": "/careers"

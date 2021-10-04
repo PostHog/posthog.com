@@ -12,15 +12,17 @@ If you have any ideas for how we can improve our benefits offering, then please 
 
 ### Pension and 401k contributions
 
-We are currently in the process of setting up a 401k for our US team members, and are aiming to roll this out in Q3 2021. 
+To prepare everyone for later stages in their lives, we have set up a pension system.  
+
+In the US, our 401k plan is managed by [Pentegra](https://www.pentegra.com/) and we're matching up to 4%. 
 
 In the UK, we use [Royal London](https://www.royallondon.com/) as our pension provider. Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you like, in case you would rather manage your own private pension. 
 
-[Deel](https://app.letsdeel.com/), our international payroll provider, is currently building a pension product for contractors as well, due for release in Q2 2021. We will aim to provide the same percentages as in the UK.
+> Unfortunately, we are currently legally unable to provide pensions to contractors. 
 
 ### Private health insurance
 
-We currently provide private health insurance in the US and UK. 
+It's important to us that everyone is as happy and healthy as they can be. To ensure this, we offer private health insurance in countries where the health system struggles with long wait times for appointsment. Currently, we  provide private health insurance in the US and UK. 
 
 In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). The plan includes medical, dental and vision insurance. 
 

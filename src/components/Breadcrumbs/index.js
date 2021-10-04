@@ -1,6 +1,7 @@
-import React from 'react'
-import { Link } from 'gatsby'
 import cntl from 'cntl'
+import { DarkModeToggle } from 'components/DarkModeToggle'
+import { Link } from 'gatsby'
+import React from 'react'
 
 const crumbText = (classes = '') => cntl`
     font-bold
@@ -28,13 +29,18 @@ function Crumb({ url, title, className }) {
     )
 }
 
-export default function Breadcrumbs({ crumbs }) {
+export default function Breadcrumbs({ crumbs, darkModeToggle }) {
     return (
         <ul className="list-none p-0 m-0 flex border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b">
             {crumbs &&
                 crumbs.map((crumb, index) => {
                     return <Crumb key={index} {...crumb} />
                 })}
+            {darkModeToggle && (
+                <li className="flex ml-auto border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                    <DarkModeToggle />
+                </li>
+            )}
         </ul>
     )
 }
