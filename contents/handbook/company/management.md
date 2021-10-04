@@ -45,6 +45,8 @@ People will come to you often with questions (because they don't have the contex
 
 What managers should aim for at PostHog is to make themselves obsolete. Share as much context as possible, preferably in written form in a public channel. That way everyone will be able to do their best work.
 
+Managers also use 1-1s as a useful tool for helping to set context - we've written [some FAQs](/handbook/company/1-1s) on how to make sure you get the most out of these. 
+
 ## Part-time managers
 
 Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job.

@@ -4,9 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-## PostHog Toolbar (Beta)
-
-The PostHog Toolbar is a feature that we are especially excited about. We learned a ton about our product and website within minutes of trying it out for the first time.
+## PostHog Toolbar
 
 In simple terms, the Toolbar is like 'Inspect Element' on Dev Tools, but for user data.
 
@@ -70,11 +68,3 @@ This little buddy will appear over your website, only if you are logged into Pos
 Once authenticated, hover over him to get started!
 
 ![toolbar dance](../../images/casts/dance.gif)
-
-## Fair warning: It's BETA! Really!
-
-The toolbar is now in public Beta! No, not "Gmail Beta", **real** BETA! There's still a lot of work to be done ([follow along here!](https://github.com/PostHog/posthog/projects/7)). It **will** feel like a bumpy ride on an unpolished road, *especially* when you click the mysterious "dock" icon! 👀
-
-However, as we already found so much value in using this toolbar ourselves, we felt it was ready to share with you all! 
-
-When you're trying it out, please raise all issues that you find [here](https://github.com/PostHog/posthog/issues/1129)!

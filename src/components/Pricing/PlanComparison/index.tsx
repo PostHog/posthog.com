@@ -1,14 +1,7 @@
-import React, { useState } from 'react'
-import { Fragment } from 'react'
-//import { CheckIcon, MinusIcon } from '@heroicons/react/solid'
-
-import { Structure } from '../../Structure'
-
-import checkIcon from '../../../images/check.svg'
+import { CallToAction } from 'components/CallToAction'
+import React, { Fragment, useState } from 'react'
 import CheckIcon from '../../../images/check.svg'
 import MinusIcon from '../../../images/x.svg'
-import { CallToAction } from 'components/CallToAction'
-
 import './styles/index.scss'
 
 const tiers = [
@@ -506,12 +499,7 @@ export const PlanComparison = ({ className = '' }) => {
                     </table>
                     {!expanded ? (
                         <div className="absolute bottom-4 left-0 w-full text-center">
-                            <CallToAction
-                                type="primary"
-                                width="56"
-                                to="/docs/self-host/"
-                                onClick={(_) => setExpanded(true)}
-                            >
+                            <CallToAction type="primary" width="56" onClick={(_) => setExpanded(true)}>
                                 See full comparison
                             </CallToAction>
                         </div>

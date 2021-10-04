@@ -80,4 +80,12 @@ authors:
       link_type: linkedin,
       link_url: https://www.linkedin.com/in/hannacrombie/
     }
+  - {
+      handle: leggetter,
+      name: Phil Leggetter,
+      role: Head of Developer Relations,
+      image: https://www.gravatar.com/avatar/ecc56977271e781991b6172c16248459?w=90,
+      link_type: twitter,
+      link_url: https://twitter.com/leggetter
+    }
 ---

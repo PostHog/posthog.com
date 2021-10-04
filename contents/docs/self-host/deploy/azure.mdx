@@ -1,0 +1,48 @@
+---
+title: Deploying to Azure
+sidebarTitle: Azure
+sidebar: Docs
+showTitle: true
+---
+
+import InstallingSnippet from './snippets/installing'
+import UpgradingSnippet from './snippets/upgrading'
+import UninstallingSnippet from './snippets/uninstalling'
+import TryUnsecureSnippet from './snippets/tryunsecure'
+
+First, we need to set up a Kubernetes Cluster, see [Creation with Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#create-an-aks-cluster). Make sure your cluster has enough resources to run PostHog (total minimum 4 vcpu & 8GiB RAM).
+
+Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
+```yaml
+cloud: "azure"
+ingress:
+  hostname: <your-hostname>
+  nginx:
+    enabled: true
+certManager:
+  enabled: true
+```
+
+### Installing the chart
+
+<InstallingSnippet />
+
+    
+### Lookup external IP
+
+```console
+kubectl get svc --namespace posthog posthog-ingress-nginx-controller
+```
+### Setting up DNS
+
+Create a record from your desired hostname to the external IP.
+
+## Troubleshooting
+### I cannot connect to my PostHog instance after creation
+<TryUnsecureSnippet />
+
+## Upgrading the chart
+<UpgradingSnippet />
+
+## Uninstalling the chart
+<UninstallingSnippet />

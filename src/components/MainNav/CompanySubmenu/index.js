@@ -1,13 +1,13 @@
-import React from 'react'
-import Link from 'components/Link'
-import { submenu } from '../classes'
-import Team from '../components/Team'
-import Founders from '../components/Founders'
 import cntl from 'cntl'
+import { Chat, Lifeguard, RightArrow } from 'components/Icons/Icons'
+import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { YouTube, LinkedIn, Twitter, Slack } from './Icons'
-import { Chat, Lifeguard, RightArrow } from 'components/Icons/Icons'
+import React from 'react'
+import { submenu } from '../classes'
+import Founders from '../components/Founders'
+import Team from '../components/Team'
+import { LinkedIn, Slack, Twitter, YouTube } from './Icons'
 
 const footerLink = cntl`
     text-primary
@@ -93,7 +93,7 @@ export default function Company({ menu, parentURL }) {
                 className="grid lg:grid-cols-2 gap-5 p-4 lg:px-9 bg-tan dark:bg-primary font-bold dark:text-white lg:absolute bottom-0 w-full"
             >
                 <div className="flex lg:space-x-6 space-y-5 lg:space-y-0 w-full lg:w-auto flex-col lg:flex-row">
-                    <Link className={footerLink} to="https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u">
+                    <Link className={footerLink} to="/signup/self-host/get-in-touch#contact">
                         <Chat />
                         <span>Contact sales</span>
                     </Link>

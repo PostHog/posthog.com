@@ -670,9 +670,25 @@ header {
         font-size: 1.25em;
         line-height: 1.75em;
         opacity: 0.9;
+        li {
+            font-size: 1em;
+        }
     }
     li {
         margin-bottom: calc(1.45rem / 2);
+    }
+    img.blog-post-img-large {
+        max-width: 150%;
+        margin-left: -25%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .blog-post-content {
+        img.blog-post-img-large {
+            max-width: 100%;
+            margin-left: 0;
+        }
     }
 }
 
