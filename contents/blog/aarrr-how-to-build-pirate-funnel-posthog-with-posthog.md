@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/How-to-build-a-pirate-funnel/Pirate-funnels.png
+featuredImage: ../images/blog/pirate-funnel/pirate-funnels.png
 featuredImageType: full
 author: hanna-crombie
 ---
@@ -16,7 +16,7 @@ Applying pirate metrics to your business is a really efficient way to determine 
 
 The pirate funnel is a framework created by Dave McClure – lauded entrepreneur and co-founder of over 500 startups. His theory was that founders and CEOs should start by focusing on just 5 key metrics in order to be successful: _Acquisition_, _Activation_, _Retention_, _Referral_ and _Revenue_. Also known well by their acronym A.A.R.R.R (me hearties – get it?).
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg01-AARRR-funnel.png)
+![image](../images/blog/pirate-funnel/AARRR-funnel.png)
 
 Growth hackers use the pirate funnel to identify the weakest point in a customer acquisition cycle and see where they need to focus more effort. Simply put, if you aren’t sure where you’re going wrong, this is a great place to start.
 
@@ -40,13 +40,13 @@ A successful customer acquisition journey for a HogFlix looks like:
 
 These are the steps we’ll track in each stage of our funnel in order to determine where the successful (and not so successful) parts of our pipeline are.
 
-Before getting started with the funnel, it’s important to make sure all of these events are properly defined and working in your event pipeline. PostHog has the capability to capture all front end events automatically, so you won’t need to add track(‘event’) to individual buttons or parts of your product, but if you need to generate more refined event or action metrics for your funnel, you can [read about how to do so in our docs](https://posthog.com/docs/user-guides/events).
+Before getting started with the funnel, it’s important to make sure all of these events are properly defined and working in your event pipeline. PostHog has the capability to capture all front end events automatically, so you won’t need to add track(‘event’) to individual buttons or parts of your product, but if you need to generate more refined event or action metrics for your funnel, you can [read about how to do so in our docs](/docs/user-guides/events).
 
 ## Step 2: Navigate to 'Funnels'
 
 On your PostHog app you’ll find the ‘Funnels’ feature tab located inside ‘Insights’.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg02-Creating-a-funnel.png)
+![New funnel in PostHog](../images/blog/pirate-funnel/creating-a-funnel.png)
 
 ## Step 3: Adding steps to your funnel
 
@@ -60,7 +60,7 @@ Click on the ‘Add funnel step’ button and use the ‘Select action’ box on
 
 Because a funnel relies on at least two steps to calculate conversion success, you won’t see a conversion comparison until you add your second step.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg03-Acquisition.png)
+![Creating a funnel in PostHog](../images/blog/pirate-funnel/acquisition.png)
 
 ### Activation: the first move
 
@@ -70,11 +70,11 @@ For HogFlix, we count entering a free trial as the activation metric for users a
 
 Use the ‘Add funnel step’ button once again. This time the metric will be based on the ‘Signed Up from Form’ action which shows how many users have completed the sign up process for a free trial on the HogFlix website.
 
-Our Autocapture functionality will capture a lot of frontend elements by default, but if you need more nuance in your activation metrics, you can also [set up or group actions manually](https://posthog.com/docs/user-guides/actions).
+Our Autocapture functionality will capture a lot of frontend elements by default, but if you need more nuance in your activation metrics, you can also [set up or group actions manually](/docs/user-guides/actions).
 
 Now that we have a couple of steps in our funnel, it is beginning to take shape and tell a story.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg04-Activation.png)
+![Selecting actions to build a funnel](../images/blog/pirate-funnel/activation.png)
 
 Already we can see the conversion percentage, and that there seem to be no issues in getting users to move through to the activation stage.
 
@@ -90,7 +90,7 @@ There are a number of actions you may want to track to tell you about user reten
 
 We want to track the number of users who watch a movie during their free trial. We might count users watching at least one movie during their free trial as a success metric for retention, so the ‘played_movie’ event will be used as the next step in our funnel.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg05-Retention.png)
+![Adding a funnel step](../images/blog/pirate-funnel/retention.png)
 
 ### Revenue: time to level up
 
@@ -98,7 +98,7 @@ Monetization is the root of the financial health of your business, meaning at so
 
 In the case of HogFlix, users who proceed through the payment process following their free trial are counted as a successful metric for the revenue stage. The ‘Made purchase’ action defines the fourth stage of the A.A.R.R.R. funnel.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg06-Revenue.png)
+![Defining a revenue-related funnel step](../images/blog/pirate-funnel/revenue.png)
 
 ### Referral: sharing is caring
 
@@ -108,11 +108,11 @@ There’s a big difference between a happy customer and a brand evangelist. Taki
 
 Referral is the final step of the funnel to add here, and has been defined as a sharing event by users who have completed the rest of the journey.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg07-Shared-content.png)
+![4-step funnel in PostHog](../images/blog/pirate-funnel/shared-content.png)
 
 ## Step 4: Refining your metrics
 
-You can now add a filter to specific actions or a general filter to the entire funnel ('Filters' -> 'Add filter'). You can filter events by [properties](https://posthog.com/docs/integrate/client/js#sending-user-information) and [cohorts](https://posthog.com/docs/user-guides/cohorts).
+You can now add a filter to specific actions or a general filter to the entire funnel ('Filters' -> 'Add filter'). You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts).
 
 It's also worth noting how the funnels work in terms of what counts as a conversion. When your funnel is ready, you will be able to specify a time range, such as "Last 7 days", "Last 30 days", or a custom range.
 
@@ -124,7 +124,7 @@ It can take some time to figure out how best to define the requirements for all 
 
 Now that your basic funnel is created you can save it to your dashboard by clicking on the ‘Add to dashboard’ button in the top left hand corner.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg08-Add-funnel-to-dashboard.png)
+![Saving a funnel to a dashboard in PostHog](../images/blog/pirate-funnel/add-funnel-to-dashboard.png)
 
 ## Step 6: Find your bottleneck
 
@@ -136,7 +136,7 @@ Do look at them relatively of course. Some steps may be unfair to compare to oth
 
 At HogFlix there is a significant drop off at the referral stage. Despite the great success from acquisition to revenue, there’s something keeping customers from really falling in love with the platform enough to promote the service to others.
 
-![image](../images/blog/How-to-build-a-pirate-funnel/HCImg09-Find-your-bottleneck.png)
+![Dashboard funnel graph](../images/blog/pirate-funnel/find-your-bottleneck.png)
 
 ## Step 7: investigation
 
@@ -144,9 +144,9 @@ This is where you want to turn from hard data to soft data. The broad metrics us
 
 Now it’s time to do a deep dive into the user journey in our bottleneck and figure out where the dropoff comes from. This can be via direct outreach and further data analysis. Perhaps you need to get a survey out to your customers to find out about how they are experiencing this part of the customer journey, or maybe there are already new features which you have in mind to solve the problem.
 
-There are a host of other features you can use on the PostHog platform to explore the area. The [toolbar](https://posthog.com/docs/tutorials/toolbar) offers a heatmap feature, providing valuable context about how users navigate your website or app, so you can determine how to display information and structure your product in a way that steers users towards that next stage of the funnel.
+There are a host of other features you can use on the PostHog platform to explore the area. The [toolbar](/docs/tutorials/toolbar) offers a heatmap feature, providing valuable context about how users navigate your website or app, so you can determine how to display information and structure your product in a way that steers users towards that next stage of the funnel.
 
-[Feature flags](https://posthog.com/docs/user-guides/feature-flags) are a fantastic tool for safely experimenting with deploying and rolling back new features which you have identified as possible solutions to your bottleneck. For example, here we might want to add a strong CTA which encourages users to share content with friends or provides a discount code based on referral. By rolling out to a percentage of your users you can build new funnels which test the impact based on specific cohorts so you can see the impact.
+[Feature flags](/docs/user-guides/feature-flags) are a fantastic tool for safely experimenting with deploying and rolling back new features which you have identified as possible solutions to your bottleneck. For example, here we might want to add a strong CTA which encourages users to share content with friends or provides a discount code based on referral. By rolling out to a percentage of your users you can build new funnels which test the impact based on specific cohorts so you can see the impact.
 
 ## Step 8: Getting meta with it
 
