@@ -61,6 +61,7 @@ p {
 
 .handbook-container main article a,
 .blog-post-content a,
+.customer-content a,
 footer a {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
         linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
@@ -410,5 +411,29 @@ ul {
 
     .company-submenu-item-container > li:nth-of-type(4) {
         @apply pl-12 pt-12 border-b-0;
+    }
+}
+
+.customer-content h1,
+.customer-content h2 {
+    @apply text-3xl;
+}
+.customer-content h3 {
+    @apply text-2xl;
+}
+
+.group:hover .bounce {
+    animation: bounce 1s;
+}
+
+@keyframes bounce {
+    20% {
+        transform: translateX(20%);
+    }
+    33% {
+        transform: translateX(0%);
+    }
+    34% {
+        transform: translateX(10%);
     }
 }

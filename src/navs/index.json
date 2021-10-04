@@ -9,6 +9,10 @@
             "url": "/pricing"
         },
         {
+            "title": "Customers",
+            "url": "/customers"
+        },
+        {
             "title": "Docs",
             "url": "/docs",
             "sub": {
