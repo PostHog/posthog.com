@@ -38,8 +38,8 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 ### Everyone
 
 *   [ ] Confirm which team this person will be in - _Eltje_
-*   [ ] See if in-person onboarding is an option and book it. (People should book their own travel but Eltje to ask them for availability) - _Eltje_ 
-*   [ ] Introduce new joiner to onboarding buddy. 
+*   [ ] See if in-person onboarding is an option and book it (people should book their own travel but Eltje to ask them for availability) - _Eltje_ 
+*   [ ] Introduce new joiner to onboarding buddy - _Eltje_
 
 ## Two weeks before they join
 
