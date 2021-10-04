@@ -61,6 +61,7 @@ p {
 
 .handbook-container main article a,
 .blog-post-content a,
+.customer-content a,
 footer a {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
         linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
