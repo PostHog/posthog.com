@@ -34,7 +34,7 @@ export function BlogAuthor({
                             href={link_url}
                             target="_blank"
                             rel="noreferrer"
-                            className={`inline-block opacity-75 hover:opacity-100 text-${color} dark:text-${colorDark}`}
+                            className={`inline-block opacity-75 hover:opacity-100 text-${color} hover:text-white dark:text-${colorDark}`}
                         >
                             {socialLinks[link_type]?.['icon']}
                         </a>
