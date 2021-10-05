@@ -2,70 +2,74 @@
 
 ## Purpose
 
-The purpose of this document is to define unified standards and guidelines for contributors to the PostHog Docs. 
+This style guide explains our standards and guidelines for contributors to the PostHog documentation.
 
-As a developer-focused product, PostHog depends on its documentation to provide a good experience to users who wish to use our product. Thus, it is important that our Documentation is complete, concise, and well-written.
-
-Hence, this guide aims to provide some basic guidelines for those wishing to contribute to the Documentation.
+PostHog is a product for developers, so our documentation is key to a good developer experience. We want it to be complete and concise, well-written, and easy to understand.
 
 ## Guidelines
 
-### Golden rule: assume (almost) nothing
+### Golden rule: assume almost nothing
 
-Assume as little as possible about your reader regarding the topic at hand. Whenever possible, you should provide links to other Docs and pages which describe how to download, update, and debug certain tools, so that your reader can easily solve an issue without having to go out searching on their own.
+You likely know more than your reader in the area you're writing about. That is why you're documenting it!
 
-Regarding this point, there is a tradeoff. You do not want your text to get too long by teaching your reader how to turn on their laptop (they hopefully have that down), but you do want to instruct them on anything that is **essential** for completing a certain action. 
+As you gain mastery of a product or feature, some things become second nature. You know them without thinking about it. But they weren't so obvious at first. Call these out, and provide links to relevant docs or websites.
 
-It is dangerous to assume that because something is obvious to you, it will also be obvious to your reader - just keep that in mind.
+Make it easy for your reader to implement their feature or solve their issue, whether they are an expert or just starting out with PostHog.
+
+Of course our audience is developers, so you can assume _some_ baseline knowledge.
 
 ### Additional suggestions
 
 **Use American English**
 
-PostHog is a a global company, with a team distributed across the world. As a result, to keep our communication consistent, we use American spelling for our Documentation.
+PostHog is a global company. Our team and our customers are distributed around the world. For consistency, we use American English spelling and grammar.
 
-**Use the Oxford comma for lists** 
+**Use the Oxford comma** 
 
-Example: Write "bananas, apples, and oranges", not "bananas, apples and oranges".
+Write "bananas, apples, and oranges", not "bananas, apples and oranges".
 
-**Capitalize the names of tools, protocols, and technologies**
+Why does this matter? Consider the old joke:
 
-Example: Write "Redis server", not "redis server".
+"There are two hard problems in computer science: naming things, cache invalidation, and off by one errors."
 
-**Capitalize acronyms**
+That doesn't work without the Oxford. Of course we are not so fussy in real life, but we are persnickity with our documentation.
 
-Example: Write "URLs", not "urls". 
+**Capitalize proper names as appropriate**
 
-On another note, try to avoid acronyms unless they're so common that it's weird not to. For example, Hyper Text Transfer Protocol is a weird way to say HTTP.
+Write "Redis server", not "redis server".
+
+**Capitalize acronyms, and link the first use to a definition if they are unfamiliar**
+
+Write "URLs", not "urls".
+
+Many acronyms, like that one, will be familiar to developers. But when in doubt, link the first use of an acronym to its definition.
 
 **Use sentence case for titles**
 
-Example: Write "Documentation style guide" instead of "Documentation Style Guide". 
+Write "Documentation style guide", not "Documentation Style Guide". 
 
-**Adhere to the style standards of each programming language**
+**Follow the style standards of each programming language**
 
-In code snippets, you should follow the conventions of the language the code is written in.
+In code samples, use the conventions of the language the code is written in.
 
-Example: Use `camelCase` for JavaScript, and `snake_case` for Python variables names.
+For example, JavaScript uses `PascalCase` for class/constructor names, and `camelCase` for most other names. Python uses `PascalCase` for classes, and `snake_case` for most other names. And so on.
 
-**Third-party, 3rd party or third party cookies?**
+**Third-party cookies**
 
-We often talk about third-party cookies. And that's how it's spelled, with the number spelled out and a hyphen in the middle. The hyphen indicates that this is a modifying adjective to the noun (cookies). That means if you're actually talking about the third party you went to you would spell it 'third party' instead. Same goes for first-party. 
+We talk a lot about "third-party cookies". And that's how we spell them. Same for "first-party cookies". 
 
-Example: 'PostHog doesn't require third-party cookies.'
+"PostHog doesn't require third-party cookies."
 
-**Where there is a call to action, always provide a link**
+**Always provide a link**
 
-When you write: "You can contact us to learn more", make sure to provide the reader with the means to do so immediately. This could be a link to another page or an email address, for example. 
+Don't just write "You can contact us to learn more" and not link it to anything.
 
-Making sure readers always have immediate access to the next suggested step significantly enhances the reading experience. This way, a reader doesn't have to scour the website to find where the hell the link to the Slack group is.
+Write "To learn more, [join our Slack community](https://posthog.com/slack) or email us at [hey@posthog.com](mailto:hey@posthog.com)."
 
-**Use in-line code for everything that is found somewhere on the code**
+**The backtick is your friend**
 
-Rule of thumb: If it has an underscore, put a backtick around it. 
+Remember to use backticks around inline code snippets, and triple backticks around multiline code samples.
 
-Examples: `API_KEY`, `distinct_id`, `reset()`.
+**Do not fear the copyeditor**
 
-**Avoid repetition of terms**
-
-Example: "We believe this because we believe …"
+Whatever documentation improvement you submit, we are grateful for it. Don't worry if you think it may fall short of any of these recommendations. We are happy to have your assistance in improving our docs, and we will work with you to copyedit your contributions.
