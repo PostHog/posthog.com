@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-# Reporting structure
+## Reporting structure
 
 - [James Hawkins, CEO & Co-founder](/handbook/company/team#james-hawkins-co-founder--ceo)
   - [Tim Glaser, CTO & Co-founder](/handbook/company/team#tim-glaser-co-founder--cto)
@@ -36,13 +36,13 @@ hideAnchor: true
   - [Kunal Pathak, Growth Engineer](/handbook/company/team#kunal-pathak-growth-engineer)
   - [Phil Leggetter, Developer Relations](/handbook/company/team#phil-leggetter-developer-relations)
 
-# Small teams
+## Small teams
 
 We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/people/team-structure/why-small-teams).
 
-## Engineering
+### Engineering
 
-### [Core Analytics](core-analytics)
+#### [Core Analytics](core-analytics)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
@@ -52,7 +52,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-### [Core Experience](core-experience)
+#### [Core Experience](core-experience)
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Paolo D'Amico](/handbook/company/team#paolo-damico) (Product Manager)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
@@ -63,7 +63,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-### [Platform](platform)
+#### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
@@ -71,7 +71,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-## [Growth](growth)
+### [Growth](growth)
 
 - [Kunal Pathak](/handbook/company/team#kunal-pathak-growth-engineer) (Team lead, Growth Engineer)
 - [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)
@@ -82,15 +82,15 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 <br />
 
-## [Marketing](marketing)
+### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, Business Operations)
 - [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) (Graphic Designer)
 
-## [People & culture](people)
+### [People & culture](people)
 - [Eltje Lange](/handbook/company/team#eltje-lange-people-and-talent) (People and Talent)
 
 
-# Organization changes
+## Organization changes
 
 We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see [core values](/handbook/company/values)) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the [small teams](/handbook/people/team-structure/why-small-teams) plane. To make the changes smoother for everyone, here’s the checklist we use:
 

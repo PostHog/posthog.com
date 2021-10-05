@@ -38,10 +38,7 @@ const FeaturedCustomer = ({ customer }) => {
             <div className="px-8 pb-9 relative z-20">
                 <img src={logo?.publicURL} />
                 <h2 className="text-2xl my-7">{title}</h2>
-                <span
-                    to={slug}
-                    className="text-yellow hover:text-yellow font-bold flex space-x-1 items-center text-[17px]"
-                >
+                <span to={slug} className="text-red hover:text-red font-bold flex space-x-1 items-center text-[17px]">
                     <span>Read case study</span>
                     <RightArrow className="w-5 h-5 bounce" />
                 </span>
@@ -101,7 +98,7 @@ export default function Customers() {
                                         <div className="relative px-9 py-9 flex flex-col h-full items-start">
                                             <img src={logo?.publicURL} />
                                             <h3 className="text-2xl mb-24 mt-4">{title}</h3>
-                                            <div className="text-yellow hover:text-yellow font-bold flex space-x-1 items-center text-[17px] mt-auto">
+                                            <div className="text-red hover:text-red font-bold flex space-x-1 items-center text-[17px] mt-auto">
                                                 <span>Read case study</span>
                                                 <RightArrow className="w-5 h-5 bounce" />
                                             </div>

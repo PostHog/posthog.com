@@ -233,11 +233,11 @@ export function Footer(): JSX.Element {
             </div>
             <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 items-center text-base max-w-6xl mx-auto">
                 <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
-                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4 text-base">
+                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4">
                     <li>
                         <Link
                             to="/docs/contribute/code-of-conduct"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Code of conduct
                         </Link>
@@ -245,7 +245,7 @@ export function Footer(): JSX.Element {
                     <li>
                         <Link
                             to="/privacy"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Privacy
                         </Link>
@@ -253,7 +253,7 @@ export function Footer(): JSX.Element {
                     <li>
                         <Link
                             to="/terms"
-                            className="font-bold text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
                         >
                             Terms
                         </Link>
