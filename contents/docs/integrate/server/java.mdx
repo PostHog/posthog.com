@@ -50,7 +50,7 @@ class Sample {
   private static final String POSTHOG_HOST = "<ph_instance_address>";
 
   public static void main(String args[]) {
-    PostHog posthog = PostHog.builder(POSTHOG_API_KEY).host(POSTHOG_HOST).build();
+    PostHog posthog = new PostHog.Builder(POSTHOG_API_KEY).host(POSTHOG_HOST).build();
 
     // run commands
 
@@ -98,7 +98,7 @@ For example:
 ```js
 posthog.identify("distinct id", new HashMap<String, Object>() {
   {
-    put("email", "john@doe.com);
+    put("email", "john@doe.com");
     put("proUser", false);
   }
 });
@@ -139,7 +139,7 @@ posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
     put("eventProperty", "value1");                    // event properties
     put("$set",  new HashMap<String, Object>() {       // user properties
       {
-        put("email", "john@doe.com);
+        put("email", "john@doe.com");
         put("proUser", false);
       }
     });
@@ -157,7 +157,7 @@ posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
 ```js
 posthog.identify("distinct id", new HashMap<String, Object>() {  // set
     {
-      put("email", "john@doe.com);
+      put("email", "john@doe.com");
       put("proUser", false);
     }
   }, new HashMap<String, Object>() {                             // set_once
@@ -172,7 +172,7 @@ posthog.identify("distinct id", new HashMap<String, Object>() {  // set
 ```js
 posthog.set("distinct id", new HashMap<String, Object>() {
   {
-    put("email", "john@doe.com);
+    put("email", "john@doe.com");
     put("proUser", false);
   }
 });
