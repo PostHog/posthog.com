@@ -24,7 +24,7 @@ To give our customers the information they need to work around any disruption an
 * An approx time the event is expected to end (If unknown, provide the time a further update can be expected)
 * The nature of the issue
 * The impact the issue is likely to have on any user
-* A link to a public github issue with more details [Feature TBD]
+* A link to a public github issue with more details in the format `ph-1234`
 
 ## How to set up a disruption message?
 
@@ -33,6 +33,7 @@ Its simple:
 * Go to feature flags - open the "cloud-announcement" feature flag
 * Use a multi-variate feature flag and set the **Variant Key** to be your message in the following format
     * Replace spaces with _ (underscores). E.g. This_is_a_disruption
+    * Add a link to the relevant issue using the format `ph-1234` where the number is the id of an issue in the posthog/posthog GitHub repo
     * (N.B. This is quite a hacky feature - since it relies on feature flag keys to render the message)
 * Double check the message for PostHog team users first
 * If it looks good - set the feature flag matching to go to relevant users (usually all of cloud - but sometimes the disruption may only affect a subset of users so the scope of the message can be reduced)
