@@ -96,7 +96,7 @@ export default function Main({
                         )}
                     </section>
                     {breakpoints.lg && showToc && <MobileSidebar tableOfContents={tableOfContents} />}
-                    <section className="article-content">
+                    <section className="article-content handbook-docs-content">
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>

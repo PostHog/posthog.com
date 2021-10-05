@@ -44,6 +44,13 @@ p {
         }
     }
 
+    &.handbook-docs-content {
+        p,
+        li {
+            font-size: 16px;
+        }
+    }
+
     p {
         margin-bottom: 1rem;
     }
