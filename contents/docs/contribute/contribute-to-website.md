@@ -20,13 +20,13 @@ This guide explains how to make changes either in the terminal, or via Github De
 
 In order to run the PostHog website locally, you need the following installed:
 
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (installed with GitHub Desktop)
 - [Node.js](https://nodejs.org/en/download/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
 Optionally, if you are unfamiliar with using Git from the command line, you will need the following installed:
 
-- [GitHub Desktop](https://desktop.github.com/).
+- [GitHub Desktop](https://desktop.github.com/)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 
 You may also want to familiarize yourself with these resources:
