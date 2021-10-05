@@ -291,6 +291,10 @@
                     "url": "/handbook/product/product-team"
                 },
                 {
+                    "name": "Product Metrics",
+                    "url": "/handbook/product/metrics"
+                },
+                {
                     "name": "User feedback",
                     "url": "/handbook/product/user-feedback"
                 },
