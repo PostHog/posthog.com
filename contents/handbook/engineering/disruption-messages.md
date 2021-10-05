@@ -35,4 +35,4 @@ Its simple:
     * Replace spaces with _ (underscores). E.g. This_is_a_disruption
     * (N.B. This is quite a hacky feature - since it relies on feature flag keys to render the message)
 * Double check the message for PostHog team users first
-* If it looks good - set the feature flag matching to go to relavent users (usually all of cloud - but sometimes the disruption may only affect a subset of users so the scope of the message can be reduced)
+* If it looks good - set the feature flag matching to go to relevant users (usually all of cloud - but sometimes the disruption may only affect a subset of users so the scope of the message can be reduced)
