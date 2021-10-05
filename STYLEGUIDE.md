@@ -32,7 +32,7 @@ Why does this matter? Consider the old joke:
 
 "There are two hard problems in computer science: naming things, cache invalidation, and off by one errors."
 
-That doesn't work without the Oxford. Of course we are not so fussy in real life, but we are persnickity with our documentation.
+That doesn't work without the Oxford. Of course we are not so fussy in real life, but we are persnickety with our documentation.
 
 **Capitalize proper names as appropriate**
 
