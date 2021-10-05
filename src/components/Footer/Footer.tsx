@@ -196,7 +196,6 @@ export function Footer(): JSX.Element {
                                     <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
                                     <FooterMenuItem title="Plugins" url="/docs/user-guides/plugins" />
                                     <FooterMenuItem title="Events" url="/docs/user-guides/events" />
-                                    <FooterMenuItem title="FAQ" url="/faq" />
                                 </ul>
                             </div>
                         </div>
@@ -218,6 +217,7 @@ export function Footer(): JSX.Element {
                             <div>
                                 <h5 className={linksHeadingSm}>Resources</h5>
                                 <ul className="list-none p-0 m-0">
+                                    <FooterMenuItem title="FAQ" url="/faq" />
                                     <FooterMenuItem title="Blog" url="/blog" />
                                     <FooterMenuItem title="Media" url="/media" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
