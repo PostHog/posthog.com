@@ -124,6 +124,9 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Heroku <br />
 <input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list) <br />
 
+###### Team Platform
+<input type="checkbox"/>  Add team member to the `Team Platform` vault in 1password <br />
+
 #### Ops
 
 <input type="checkbox"/>  Workable if they are involved in recruitment <br />
