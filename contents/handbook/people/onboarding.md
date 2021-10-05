@@ -125,6 +125,8 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list) <br />
 
 ###### Team Platform
+<input type="checkbox"/>  Add team member to the [DigitalOcean](https://cloud.digitalocean.com) `PostHog` project <br />
+<input type="checkbox"/>  Add team member to the [Google Cloud Platform](https://console.cloud.google.com/) `posthog` project <br />
 <input type="checkbox"/>  Add team member to the `Team Platform` vault in 1password <br />
 
 #### Ops
