@@ -563,6 +563,11 @@
                             "url": "/docs/integrate/server/go"
                         },
                         {
+                            "name": "Java",
+                            "url": "/docs/integrate/server/java"
+                        },
+
+                        {
                             "name": "Node.js",
                             "url": "/docs/integrate/server/node"
                         },
