@@ -189,6 +189,7 @@ module.exports = {
                 isEnabledDevMode: true,
                 initOptions: {
                     _capture_metrics: true,
+                    request_batching: false,
                 },
             },
         },

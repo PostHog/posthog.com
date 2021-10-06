@@ -41,7 +41,7 @@ We currently run performance reviews every 6 months, based on your start date. W
 3. In advance, the team member writes up a self-assessment in [this document](https://docs.google.com/document/d/1UbS9YkGDZsAhPsZmxRRI2g83ZuQzPwoQNQeJ7IGBm9I/edit?usp=sharing), and their manager will fill out a similar assessment in [this document](https://docs.google.com/document/d/1fxP0w_gNno7Y-2Uxw4uSYCaJTpvZpDXiFZ7lFPXsDpw/edit?usp=sharing). You will likely want to include and reflect on feedback you've previously received in a full team 360 degree feedback session. 
 4. Afterwards, the team member communicates back to the People team that the review is complete and what next steps are needed (if any). We store the docs on [Google Drive](https://drive.google.com/drive/folders/1ElPt_fB79qgB-6tQTI8BTKStUHhy_NcS). You should then share your doc publicly with the team, for transparency and so they have the opportunity to share any additional feedback. 
 
-While the 360 degree team meeetings are purely feedback-focused, you should aim to spend the bulk of the performance review looking ahead to the next 6 months (and beyond). 
+While the 360 degree team meetings are purely feedback-focused, you should aim to spend the bulk of the performance review looking ahead to the next 6 months (and beyond). 
 
 Performance reviews _do not_ address your compensation - we run [a separate process](/handbook/people/compensation) on this every 3 months instead. We do this so that we can share performance reviews internally, and so we can be more repsonsive to changes in the market and people's roles. 
 

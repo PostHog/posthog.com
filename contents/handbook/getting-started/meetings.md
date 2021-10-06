@@ -15,10 +15,21 @@ You should have been invited to any relevant meetings as part of your [onboardin
 ## Weekly schedule
 
 - **Monday** - PostHog News all-hands meeting. Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the doc is shared in the #general channel in Slack. We then go around and people are free to demo anything they've been working on recently. _The content of these meetings is always confidential._
-- **Tuesday** - Meeting-free - no internal meetings allowed. 
+- **Tuesday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - HogTalks, roughly once per month. We also sometimes schedule technical deep dives.
-- **Thursday** - Meeting-free - no internal meetings allowed.
+- **Thursday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Friday** - These alternate between Sprint Planning and Life Stories.
+
+### No recurring meeting days (Tuesdays/Thursdays)
+
+We try to keep these days focused on deep work. Therefore, we run no regularly scheduled meetings on these days.
+
+However, speaking ad-hoc to your teammates on this day is fine - especially:
+
+* new people shouldn't worry about following this rule for the first couple of weeks - it's more important you get up-to-speed quickly
+* if it's obvious you need a meeting
+
+If ad-hoc meetings are regularly happening, consider improving the agenda of another regular meeting so there isn't as much context switching in people's days.
 
 ### Sprint planning
 

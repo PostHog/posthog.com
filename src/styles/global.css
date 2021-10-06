@@ -9,58 +9,116 @@
 }
 
 main a,
-.blog-post-content a {
-    @apply text-orange hover:text-orange font-semibold;
+.article-content a {
+    @apply text-red hover:text-red font-semibold;
 }
 
 p {
     font-variant-numeric: proportional-nums;
 }
 
-/* Content pages (Handbook + Docs) */
+/* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
+.article-content {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        letter-spacing: -0.015em;
+        margin-top: 2rem;
+    }
 
-.handbook-container {
-    .article-content {
+    p,
+    li {
+        font-size: 17px;
+        line-height: 1.75;
+        opacity: 0.9;
+
+        li {
+            font-size: 1em;
+        }
+
+        img.blog-post-img-large {
+            max-width: 150%;
+            margin-left: -25%;
+        }
+    }
+
+    &.handbook-docs-content {
         p,
         li {
-            line-height: 1.75;
+            font-size: 16px;
+        }
+    }
+
+    p {
+        margin-bottom: 1rem;
+    }
+
+    li li {
+        font-size: 1rem;
+    }
+
+    li {
+        margin-bottom: 0.125rem;
+    }
+
+    blockquote {
+        @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark;
+    }
+
+    &.customer-content {
+        blockquote {
+            @apply bg-transparent p-0;
+        }
+    }
+
+    iframe {
+        @apply rounded w-full;
+    }
+
+    /* expandable/collapsible sections */
+    details {
+        @apply p-2 cursor-pointer text-base text-orange border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
+
+        > summary {
+            @apply list-none pl-4 relative before:absolute before:left-[3px] before:top-[8px] before:w-[10px] before:h-[7px];
+
+            &:before {
+                background: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath d='M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z' fill='%23EF7632' /%3E%3C/svg%3E");
+                transform: rotate(-90deg);
+                transition: all 0.25s ease-out;
+            }
         }
 
-        details {
-            @apply p-2 cursor-pointer text-base text-orange border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
-
-            > summary {
-                @apply list-none pl-4 relative before:absolute before:left-[3px] before:top-[8px] before:w-[10px] before:h-[7px];
-
-                &:before {
-                    background: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath d='M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z' fill='%23EF7632' /%3E%3C/svg%3E");
-                    transform: rotate(-90deg);
-                    transition: all 0.25s ease-out;
-                }
-            }
-
-            &[open] {
-                > summary:before {
-                    transform: rotate(0deg);
-                    transition: all 0.25s ease-out;
-                }
-            }
-
-            > div {
-                @apply ml-4 mt-2 rounded;
+        &[open] {
+            > summary:before {
+                transform: rotate(0deg);
+                transition: all 0.25s ease-out;
             }
         }
 
-        details + details {
-            @apply border-t-0;
+        > div {
+            @apply ml-4 mt-2 rounded;
+        }
+    }
+
+    details + details {
+        @apply border-t-0;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .article-content {
+        img.blog-post-img-large {
+            max-width: 100%;
+            margin-left: 0;
         }
     }
 }
 
-/* Footer */
-
-.handbook-container main article a,
-.blog-post-content a,
+/* animated underlined links */
+.article-content a,
 footer a {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
         linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
@@ -74,6 +132,11 @@ footer a {
     &:focus {
         background-size: 0 0.1em, 100% 0.1em;
     }
+}
+
+.share-links a {
+    background: none;
+    transition: none;
 }
 
 /* Product page */
@@ -191,6 +254,7 @@ body {
     font-smooth: 1.5px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: auto;
+    height: auto !important;
 }
 
 body.light {
@@ -377,4 +441,53 @@ ul {
 }
 .slick-arrow.slick-hidden {
     display: none;
+}
+
+.company-submenu-item-container {
+    @apply grid grid-cols-1 gap-4 lg:gap-0 lg:grid-cols-5 m-0 p-0 list-none;
+}
+
+.company-submenu-item-container > li {
+    @apply border-dashed border-opacity-100 dark:border-opacity-30 border-gray-accent-light border-b last:border-b-0 pb-5 lg:pb-12;
+}
+
+@media (min-width: 1024px) {
+    .company-submenu-item-container > li {
+        @apply odd:col-span-3;
+    }
+    .company-submenu-item-container > li {
+        @apply even:col-span-2;
+    }
+
+    .company-submenu-item-container > li:nth-of-type(1) {
+        @apply border-b border-r pr-12;
+    }
+
+    .company-submenu-item-container > li:nth-of-type(2) {
+        @apply border-b pl-12;
+    }
+
+    .company-submenu-item-container > li:nth-of-type(3) {
+        @apply border-r pr-12 pt-12 border-b-0;
+    }
+
+    .company-submenu-item-container > li:nth-of-type(4) {
+        @apply pl-12 pt-12 border-b-0;
+    }
+}
+
+.group:hover .bounce {
+    animation: bounce 1s;
+}
+
+@keyframes bounce {
+    20% {
+        transform: translateX(20%);
+    }
+    33% {
+        transform: translateX(0%);
+    }
+    34% {
+        transform: translateX(10%);
+    }
 }

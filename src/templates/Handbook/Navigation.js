@@ -35,7 +35,7 @@ const Crumb = ({ url, text, className }) => {
             className={`border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed text-primary dark:text-primary-dark ${className}`}
         >
             {url ? (
-                <Link className={crumbText(`text-yellow hover:text-yellow`)} to={url}>
+                <Link className={crumbText(`text-red hover:text-red`)} to={url}>
                     {text}
                 </Link>
             ) : (

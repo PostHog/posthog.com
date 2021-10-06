@@ -20,7 +20,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 
 ### US team member checklist
 - [ ] Create a contract using the Google Docs templates for [CIIA](https://docs.google.com/document/d/1r7Xc1ALf-JKUrL3g_oyzaQ8H3SOuVchBpJrGp7TINdc/edit?usp=sharing) and [Offer Letter](https://docs.google.com/document/d/1ZzF5hbVmTmKIYKxW7JkXzrBFFNrztkcNvcdO643r6sY/edit?usp=sharing) in the Legal Docs shared drive 
-- [ ] If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto as soon as possible, as there can be a long lead time. We use [Middesk Agent] to help with the registration, log in details are in the People Ops vault on 1Password. 
+- [ ] If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto as soon as possible, as there can be a long lead time. We use [Middesk Agent](https://www.middesk.com/agent) to help with the registration, log in details are in the People Ops vault on 1Password. 
 
 ### UK team member checklist
 - [ ] Create a contract using the [Google Docs template](https://docs.google.com/document/d/15cdfWfGj5OWBpVST6VcMwb5TP5qLVPQd9SGWKSnB9bc/edit?usp=sharing) in the Legal Docs shared drive
@@ -38,7 +38,8 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 ### Everyone
 
 *   [ ] Confirm which team this person will be in - _Eltje_
-*   [ ] See if in-person onboarding is an option and book it. (People should book their own travel but Eltje to ask them for availability) - _Eltje_ 
+*   [ ] See if in-person onboarding is an option and book it (people should book their own travel but Eltje to ask them for availability) - _Eltje_ 
+*   [ ] Introduce new joiner to onboarding buddy - _Eltje_
 
 ## Two weeks before they join
 
@@ -60,6 +61,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 *   [ ] Add them to all relevant [Slack channels](https://github.com/PostHog/company-internal/issues/234) - _Eltje_ 
 *   [ ] Add team member to PostHog Users Slack - _Charles_
 *   [ ] Add team member to PostHog organization in GitHub - _Charles_
+*   [ ] Add team member and onboarding buddy to their onboarding issue on Github - _Eltje_
 *   [ ] _(UK only)_ Send a copy of their HMRC new starter form on CharlieHR to DRG, and include their salary and if they are full or part time - _Eltje_
 *   [ ] _(UK only)_ Ask if they want to be part of our [private healthcare](https://posthog.com/handbook/people/benefits#private-health-insurance) and if they want to contribute our [pensions](https://posthog.com/handbook/people/benefits#pension-and-401k-contributions) - _Eltje_
 *   [ ] _(UK only)_ Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll - _Eltje_ 
@@ -84,7 +86,7 @@ Eltje or Charles will create the contract needed, depending on who is joining. O
 
 The below checklist is for the new team member to complete _themselves_ - make sure this is shared with them on their first day. 
 
-*   [ ] Meet in person with your onboarding buddy
+*   [ ] Meet your onboarding buddy (either in person or virtually)
 *   [ ] Read the ‘[Getting started](https://posthog.com/handbook/getting-started/start-here)’ and ‘[How we work section](https://posthog.com/handbook/company/culture)’ of the Handbook carefully
 *   [ ] [Book time](https://posthog.com/handbook/getting-started/meetings) with relevant team members - we encourage you to do as many of these intros as possible to get to know everyone!
 *   [ ] Join CharlieHR and fill in your profile (including payroll details, contact details, emergency contacts and upload a picture of your passport)
@@ -95,7 +97,7 @@ The below checklist is for the new team member to complete _themselves_ - make s
 *   [ ] Join any other [tools / software](https://posthog.com/handbook/people/onboarding#tools-we-use) you've been invited to, and flag any you think are missing
 *   [ ] Go through all of the security onboarding and background checks on [Drata](https://app.drata.com/) - you need to complete _all_ of the Drata onboarding steps
 *   [ ] Send Lottie a picture of you. Once you get a pixelated version back, add yourself to the [team page](https://posthog.com/handbook/company/team)
-*   [ ] New joiner announement: interview with Mo
+*   [ ] New joiner announcement: interview with Mo
 *   [ ] We also highly recommend that you join a feedback call and/or product demo in your first weeks. It provides great context on our users - ask Paolo. 
 
 ## Onboarding buddy
@@ -107,7 +109,7 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 - Once we have decided which team a new joiner will join, Eltje will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
 - Eltje will intro the new joiner and the onboarding buddy via email, please say Hi and decide together where and when the in person onboarding will happen. 
  > In case any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let the people/ops team know, just use your Brex/Revolut card._
-- Please make sure you spend at least 3 days together, work through the first week onboarding list and spend time working on any role specific tasks that are outlined in the new joiners personal onboarding issue. 
+- Please make sure you spend at least 3 days together, work through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spend time working on any role specific tasks that are outlined in the new joiners personal onboarding issue. 
 - You will remain the new joiners main point of contact for the first few weeks, please continue to check in with them at least once a week for the first month. 
 
 ### Additional access
@@ -121,6 +123,9 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Papercups. This includes both <a href="https://app.papercups.io" target="_blank">app access</a> and the <a href="https://posthogusers.slack.com/archives/G01JXEDAL22" target="_blank">#customer_support</a> channel on Users Slack<br />
 <input type="checkbox"/>  Heroku <br />
 <input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list) <br />
+
+###### Team Platform
+<input type="checkbox"/>  Add team member to the `Team Platform` vault in 1password <br />
 
 #### Ops
 

@@ -25,7 +25,7 @@ There are several benefits to using ClickHouse over PostgreSQL, such as:
 * Documentation - [ClickHouse’s documentation](https://clickhouse.tech/docs/en/) has come a long way in the last few years, and Altinity, a company that supports the ecosystem, has excellent [documentation](https://docs.altinity.com/) available as well.
 * Fault tolerance - ClickHouse supports native replication, which we use heavily. You can basically have N number of replicas for any given table - all you have to do is name the replica and point it to the metadata location in ZooKeeper.
 
-# Why we’ll continue using PostgreSQL alongside ClickHouse
+## Why we'll continue using PostgreSQL alongside ClickHouse
 
 PostgreSQL is great for managing frequently updated data like users, but for telemetry and event data we’ll default to ClickHouse. And while our app updates ClickHouse with data changes, the source of truth remains PostgreSQL. At the same time, we’ll work hard with existing users and early enthusiasts to migrate over to ClickHouse.
 

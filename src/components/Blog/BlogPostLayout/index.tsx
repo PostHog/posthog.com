@@ -52,7 +52,7 @@ export function BlogPostLayout({
                 pageTitle={pageTitle}
                 blogDate={blogDate}
             />
-            <div className="max-w-xl mx-auto relative pt-12 blog-post-content">
+            <div className="max-w-xl mx-auto relative pt-12 article-content blog-content">
                 <BlogShareButtons />
                 <Structure.Section>{children}</Structure.Section>
             </div>

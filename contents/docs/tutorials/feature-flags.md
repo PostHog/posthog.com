@@ -2,6 +2,8 @@
 title: How to safely roll out new features
 sidebar: Docs
 showTitle: true
+featuredImage: ../../images/tutorials/banners/feature-flags.png
+featuredTutorial: true
 ---
 
 _Estimated reading time: 7 minutes_ ☕☕
@@ -39,15 +41,15 @@ It can also be useful to create your feature flags before working on the functio
 
 ## Creating feature flags
 
-### Step 1: Navigate to 'Experiments'
+### Step 1: Navigate to 'Feature Flags'
 
-To find the feature flags page, click on 'Experiments' on the left sidebar in PostHog.
+Click on 'Feature Flags' on the left sidebar in PostHog.
 
 ![Feature Flags Page](../../images/tutorials/feature-flags/feature-flags-page.png)
 
 ### Step 2: Creating a new flag
 
-While on the 'Experiments' page, click on the blue '+ New Feature Flag' button. This will open up a menu on the right side of the page, like so:
+While on the 'Feature Flags' page, click on the blue '+ New Feature Flag' button. This will open up a menu on the right side of the page, like so:
 
 ![Create Feature Flag](../../images/tutorials/feature-flags/create-flag.png)
 
