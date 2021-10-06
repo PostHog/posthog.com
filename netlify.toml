@@ -755,11 +755,6 @@
 
 # Added: 2021-10-6
 [[redirects]]
-    from = "/docs/user-guides/sessions"
-    to = "/blog/sessions-refactoring"
-
-# Added: 2021-10-6
-[[redirects]]
     from = "/docs/user-guides/session-recording"
     to = "/docs/user-guides/recordings"
 
