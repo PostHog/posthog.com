@@ -12,7 +12,7 @@ Recordings allows you to record users navigating through your website and play b
 
 ## Using recordings
 
-Recordings can only be used with our [JavaScript library](/docs/integrate/client/js) and requires the feature to be enabled in PostHog's Project Settings (`project/settings`). Once enabled, the JS library will start recording sessions by default. 
+Recordings can only be used with our [JavaScript library](/docs/integrate/client/js) and requires the feature to be enabled in PostHog's Project Settings (`/project/settings`). Once enabled, the JS library will start recording sessions by default. 
 
 <blockquote class="warning-note">
 Please note recordings does not work if you send data using Segment's SDK as this data is not collected. If you use Segment, you may want to add the PostHog library too (make sure to only send regular event data from one source).
