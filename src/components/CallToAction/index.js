@@ -1,12 +1,13 @@
-import React from 'react'
-import Link from 'components/Link'
 import cntl from 'cntl'
+import Link from 'components/Link'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import React from 'react'
 
 const sizes = {
     sm: 'text-small font-semibold px-3 py-1 border-2',
-    md: 'text-[17px] font-bold px-5 py-2 border-3',
+    md: 'text-small font-semibold px-5 py-2 border-2',
+    lg: 'text-[17px] font-bold px-5 py-2 border-3 ',
 }
 
 const primary = cntl`
@@ -49,7 +50,7 @@ const buttonTypes = {
     outline,
 }
 
-const button = (type = 'primary', width = 'auto', className = '', size = 'md') => cntl`
+const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
     text-center
     select-none
     rounded-full
@@ -69,7 +70,7 @@ export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) =
 export const CallToAction = ({
     type = 'primary',
     width = 'auto',
-    size = 'md',
+    size = 'lg',
     href,
     to,
     onClick,
